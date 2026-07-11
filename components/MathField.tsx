@@ -36,6 +36,7 @@ export function MathField({ value, onChange, placeholder, style, ariaLabel, form
   useEffect(() => {
     let alive = true;
     let handler: (() => void) | null = null;
+    let focusHandler: (() => void) | null = null;
     import("mathlive").then((ml) => {
       if (!alive) return;
       const MFE: any = ml.MathfieldElement;
@@ -59,11 +60,21 @@ export function MathField({ value, onChange, placeholder, style, ariaLabel, form
         onChangeRef.current(out);
       };
       el.addEventListener("input", handler);
+      // On phones the on-screen math keyboard overlays the lower half of the
+      // screen; when a field is tapped, scroll it up so it stays visible above
+      // the keyboard while typing.
+      focusHandler = () => {
+        window.setTimeout(() => {
+          try { el.scrollIntoView({ block: "center", behavior: "smooth" }); } catch {}
+        }, 350);
+      };
+      el.addEventListener("focus", focusHandler);
     });
     return () => {
       alive = false;
       const el = ref.current;
       if (el && handler) el.removeEventListener("input", handler);
+      if (el && focusHandler) el.removeEventListener("focus", focusHandler);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
