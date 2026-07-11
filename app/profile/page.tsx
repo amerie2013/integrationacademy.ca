@@ -10,6 +10,8 @@ export default function ProfilePage() {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [saved, setSaved] = useState(false);
+  const [billingBusy, setBillingBusy] = useState(false);
+  const [billingMsg, setBillingMsg] = useState("");
   const [form, setForm] = useState({
     full_name: "",
     role: "student",
@@ -61,6 +63,26 @@ export default function ProfilePage() {
       .eq("id", session.user.id);
     setSaved(true);
     setTimeout(() => setSaved(false), 2000);
+  }
+
+  // Open Stripe's secure billing portal: update card, see invoices, cancel auto-renew.
+  async function manageBilling() {
+    setBillingBusy(true); setBillingMsg("");
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session) return router.push("/login");
+    try {
+      const res = await fetch("/api/stripe/portal", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userId: session.user.id }),
+      });
+      const j = await res.json().catch(() => ({}));
+      if (j.url) { window.location.href = j.url; return; }
+      setBillingMsg(res.status === 404 ? "You don't have a paid plan yet — nothing to manage here." : (j.error || "Could not open billing."));
+    } catch (e: any) {
+      setBillingMsg(e.message || "Could not open billing.");
+    }
+    setBillingBusy(false);
   }
 
   const input: React.CSSProperties = {
@@ -130,6 +152,22 @@ export default function ProfilePage() {
           >
             {saved ? "Saved ✓" : "Save changes"}
           </button>
+        </div>
+
+        {/* Billing */}
+        <div style={{ background: "#fff", border: "1px solid #e2e8f0", borderRadius: 16, padding: 28, marginTop: 20 }}>
+          <h2 style={{ fontSize: 18, fontWeight: 700, margin: "0 0 6px" }}>Billing &amp; subscription</h2>
+          <p style={{ color: "#64748b", fontSize: 14, margin: "0 0 14px" }}>
+            View your invoices, update your payment card, or <strong>cancel auto‑renewal</strong> on a monthly plan. Opens Stripe's secure billing page.
+          </p>
+          <button
+            onClick={manageBilling}
+            disabled={billingBusy}
+            style={{ background: "#fff", color: "#0f172a", border: "1px solid #cbd5e1", borderRadius: 10, padding: "12px 20px", fontWeight: 700, fontSize: 15, cursor: billingBusy ? "default" : "pointer" }}
+          >
+            {billingBusy ? "Opening…" : "Manage subscription →"}
+          </button>
+          {billingMsg && <p style={{ color: "#dc2626", fontSize: 13, marginTop: 10 }}>{billingMsg}</p>}
         </div>
       </div>
     </main>

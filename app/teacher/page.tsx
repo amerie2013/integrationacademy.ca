@@ -108,6 +108,9 @@ export default function TeacherPage() {
             <Link href="/teacher/members" style={{ background: "#fff", color: "#0f172a", border: "1px solid #cbd5e1", borderRadius: 10, padding: "11px 18px", fontWeight: 700, fontSize: 15, textDecoration: "none" }}>
               Members &amp; plans
             </Link>
+            <Link href="/teacher/promo" style={{ background: "#fff", color: "#0f172a", border: "1px solid #cbd5e1", borderRadius: 10, padding: "11px 18px", fontWeight: 700, fontSize: 15, textDecoration: "none" }}>
+              Promo codes
+            </Link>
             <button
               onClick={() => setShowNew((s) => !s)}
               style={{ background: "#1b7a44", color: "#fff", border: "none", borderRadius: 10, padding: "11px 20px", fontWeight: 700, fontSize: 15, cursor: "pointer" }}

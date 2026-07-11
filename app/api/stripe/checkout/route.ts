@@ -77,6 +77,7 @@ export async function POST(req: NextRequest) {
       cancel_url: `${appUrl}/courses/${courseId}?cancelled=true`,
       metadata,
       mode: isSubscription ? "subscription" : "payment",
+      allow_promotion_codes: true, // shows an "Add promotion code" box on Stripe's checkout
       line_items: [{ price: PRICE_IDS[plan]!, quantity: 1 }],
     });
 
