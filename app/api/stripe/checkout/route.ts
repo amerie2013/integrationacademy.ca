@@ -63,18 +63,20 @@ export async function POST(req: NextRequest) {
 
     const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
 
+    // Monthly = auto-renewing subscription; Annual = one-time term pass (expires
+    // Jun 30 / Aug 31). Access for a subscription is managed by its status (no
+    // fixed expiry); the one-time pass carries a term-based expiry.
+    const isSubscription = plan.endsWith("_monthly");
+    const metadata: Record<string, string> = { supabase_user_id: userId, plan, course_id: courseId };
+    if (!isSubscription) metadata.expires_at = planExpiry(plan).toISOString();
+
     const session = await stripe.checkout.sessions.create({
       customer: customerId,
       payment_method_types: ["card"],
       success_url: `${appUrl}/courses/${courseId}?purchased=true`,
       cancel_url: `${appUrl}/courses/${courseId}?cancelled=true`,
-      metadata: {
-        supabase_user_id: userId,
-        plan,
-        course_id: courseId,
-        expires_at: planExpiry(plan).toISOString(),
-      },
-      mode: "payment", // all plans are one-time with a fixed, term-based expiry
+      metadata,
+      mode: isSubscription ? "subscription" : "payment",
       line_items: [{ price: PRICE_IDS[plan]!, quantity: 1 }],
     });
 
