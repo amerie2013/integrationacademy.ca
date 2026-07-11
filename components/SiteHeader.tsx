@@ -56,6 +56,7 @@ export function SiteHeader() {
         {email ? (
           <>
             <Link href={dashHref} className="ia-nav-link">Dashboard</Link>
+            <Link href="/profile" className="ia-nav-link">Profile</Link>
             <button onClick={signOut} className="ia-signout">Sign out</button>
           </>
         ) : (
@@ -77,6 +78,7 @@ export function SiteHeader() {
           {email ? (
             <>
               <Link href={dashHref} className="ia-mlink" onClick={() => setOpen(false)}>Dashboard</Link>
+              <Link href="/profile" className="ia-mlink" onClick={() => setOpen(false)}>Profile</Link>
               <button onClick={signOut} className="ia-mlink ia-mlink-btn">Sign out</button>
             </>
           ) : (
