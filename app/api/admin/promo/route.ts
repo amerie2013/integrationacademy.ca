@@ -30,9 +30,9 @@ export async function GET(req: NextRequest) {
   if (!gate.ok) return gate.res;
   try {
     const stripe = getStripe();
-    const list = await stripe.promotionCodes.list({ limit: 100, expand: ["data.coupon"] });
+    const list = await stripe.promotionCodes.list({ limit: 100, expand: ["data.promotion.coupon"] });
     const codes = list.data.map((p) => {
-      const c = (p as any).coupon as Stripe.Coupon | undefined;
+      const c = (p as any).promotion?.coupon as Stripe.Coupon | undefined;
       return {
         id: p.id, code: p.code, active: p.active,
         percent_off: c?.percent_off ?? null,
@@ -81,7 +81,7 @@ export async function POST(req: NextRequest) {
     const couponParams: Stripe.CouponCreateParams = { percent_off: percentOff, duration: duration as Stripe.CouponCreateParams.Duration };
     if (duration === "repeating") couponParams.duration_in_months = months > 0 ? months : 1;
     const coupon = await stripe.coupons.create(couponParams);
-    const promo = await stripe.promotionCodes.create({ coupon: coupon.id, code } as any);
+    const promo = await stripe.promotionCodes.create({ code, promotion: { type: "coupon", coupon: coupon.id } });
     return NextResponse.json({ ok: true, code: promo.code });
   } catch (err: any) {
     return NextResponse.json({ error: err.message?.includes("already") ? `Code "${code}" is already in use — pick another.` : (err.message || "Could not create code.") }, { status: 400 });
