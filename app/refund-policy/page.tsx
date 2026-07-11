@@ -10,11 +10,11 @@ export default function RefundPolicyPage() {
     <LegalLayout
       badge="Legal"
       title="Refund &amp; Cancellation Policy"
-      updated="June 27, 2026"
+      updated="July 11, 2026"
       intro="We want you to be happy with Integration Academy. This policy explains how cancellations and refunds work for our subscriptions."
     >
       <h2>Cancelling your subscription</h2>
-      <p>You can cancel any time from your billing portal (Account → Manage billing) or by emailing us. When you cancel, your subscription stops renewing and you keep full access until the end of the period you've already paid for. We don't charge a cancellation fee.</p>
+      <p>You can cancel any time from your billing portal (Profile → Manage subscription) or by emailing us. When you cancel, your subscription simply stops renewing — you won't be charged again — and you keep full access until the end of the month (or annual term) you've already paid for. <strong>The current billing period is non-refundable:</strong> cancelling prevents future charges only; it does not refund the month you're currently in. We don't charge a cancellation fee.</p>
 
       <h2>Refunds</h2>
       <ul>
