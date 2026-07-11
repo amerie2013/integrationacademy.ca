@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MDM4U \textperiodcentered{} 3.5}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 3.5 --- The Geometric Distribution}\\[2pt]
+{\small Grade 12 Mathematics of Data Management (MDM4U) \textperiodcentered{} Unit 3: Discrete Probability Distributions}
+\end{center}
+
+\begin{ideabox}
+The geometric distribution counts trials until the first success: $P(X=k)=q^{\,k-1}p$. Its mean is $E(X)=\tfrac1p$, and $P(X>k)=q^{k}$.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item $P(X=k)=q^{\,k-1}p$ (first success on trial $k$).
+  \item $E(X)=\tfrac1p$; rarer successes mean longer waits.
+  \item $P(X>k)=q^{k}$ (no success in the first $k$ trials).
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Waiting for a first success}The \textbf{geometric} distribution models the number of independent trials \emph{until} the first success, each with probability $p$.
+\lh{The formula}$P(X=k)=(1-p)^{k-1}p$ — you need $k-1$ failures and then one success. Unlike the binomial, the number of trials is not fixed in advance.
+\lh{Its mean}On average you wait $E(X)=\dfrac1p$ trials; if $p=\tfrac15$, expect about $5$ trials to the first success.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- First success on trial $k$}
+Roll a die until a 6. Find $P(\text{first 6 on the 3rd roll})$.\soln $\left(\tfrac56\right)^2\left(\tfrac16\right)=\tfrac{25}{216}$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Expected wait}
+Find the expected number of rolls to get a 6.\soln $E=\tfrac{1}{1/6}=6$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- No success yet}
+Find $P(\text{no 6 in the first 4 rolls})$.\soln $\left(\tfrac56\right)^4=\tfrac{625}{1296}$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Within the first $k$}
+Find $P(\text{first 6 within 3 rolls})$.\soln $1-\left(\tfrac56\right)^3=\tfrac{91}{216}$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- A different success event}
+A player makes 80\% of shots. Find $P(\text{first miss on the 4th shot})$.\soln Missing has $p=0.2$: $(0.8)^3(0.2)=0.1024$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Expected wait, high $p$}
+With $p=0.8$, find the expected number of shots to the first make.\soln $E=\tfrac{1}{0.8}=1.25$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- First head on an even toss}
+Toss a fair coin. Find $P(\text{first head on an even-numbered toss})$.\soln $\tfrac12\cdot\tfrac12+\left(\tfrac12\right)^3\cdot\tfrac12+\cdots=\dfrac{qp}{1-q^2}=\dfrac{1/4}{3/4}=\tfrac13$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Long wait}
+With $p=0.3$, find $P(\text{more than 5 attempts needed})$.\soln $P(X>5)=(0.7)^5\approx0.168$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Three parts}
+A game is won with $p=0.25$ each try. Find \\ \textbf{(a)} $E(\text{tries})$; \\ \textbf{(b)} $P(\text{win on the 3rd try})$; \\ \textbf{(c)} $P(\text{win within 2 tries})$.\soln (a) $4$. (b) $(0.75)^2(0.25)\approx0.141$. (c) $1-(0.75)^2=0.4375$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Roll a die until a 6. Find $P(\text{first 6 on the 2nd roll})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Find the expected number of rolls to the first 6.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Find $P(\text{no 6 in the first 3 rolls})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+With $p=0.4$, find $P(\text{first success on the 4th trial})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+With $p=0.4$, find $E(\text{trials})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+A player makes 90\% of shots. Find $P(\text{first miss on the 3rd shot})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Toss a coin. Find $P(\text{first head on the 3rd toss})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+With $p=0.2$, find $P(\text{more than 4 trials needed})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Roll a die until a 6. Find $P(\text{success within 4 rolls})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+With $p=0.5$, find $E(\text{trials to first success})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+With $p=0.3$, find $P(\text{first success on the 5th trial})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Toss a coin. Find $P(\text{first head on an even-numbered toss})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+A prize is won with $p=0.25$ each try. Find \\ \textbf{(a)} $E(\text{tries})$; \\ \textbf{(b)} $P(\text{win on 3rd try})$; \\ \textbf{(c)} $P(\text{win within 2 tries})$.\workspace{3.2cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Roll a die until a 6. Find $P(\text{first 6 on the 2nd roll})$.
+  \item Find the expected number of rolls to the first 6.
+  \item Find $P(\text{no 6 in the first 3 rolls})$.
+  \item With $p=0.4$, find $P(\text{first success on the 4th trial})$.
+  \item With $p=0.4$, find $E(\text{trials})$.
+  \item A player makes 90\% of shots. Find $P(\text{first miss on the 3rd shot})$.
+  \item Toss a coin. Find $P(\text{first head on the 3rd toss})$.
+  \item With $p=0.2$, find $P(\text{more than 4 trials needed})$.
+  \item Roll a die until a 6. Find $P(\text{success within 4 rolls})$.
+  \item With $p=0.5$, find $E(\text{trials to first success})$.
+  \item With $p=0.3$, find $P(\text{first success on the 5th trial})$.
+  \item Toss a coin. Find $P(\text{first head on an even-numbered toss})$.
+  \item A prize is won with $p=0.25$ each try. Find \\ \textbf{(a)} $E(\text{tries})$; \\ \textbf{(b)} $P(\text{win on 3rd try})$; \\ \textbf{(c)} $P(\text{win within 2 tries})$.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $\tfrac56\cdot\tfrac16=\tfrac{5}{36}$
+  \item $6$
+  \item $\left(\tfrac56\right)^3=\tfrac{125}{216}$
+  \item $(0.6)^3(0.4)=0.0864$
+  \item $2.5$
+  \item $(0.9)^2(0.1)=0.081$
+  \item $\left(\tfrac12\right)^3=\tfrac18$
+  \item $(0.8)^4=0.4096$
+  \item $1-\left(\tfrac56\right)^4=\tfrac{671}{1296}$
+  \item $2$
+  \item $(0.7)^4(0.3)=0.072$
+  \item $\tfrac13$
+  \item (a) $4$; (b) $\approx0.141$; (c) $0.4375$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

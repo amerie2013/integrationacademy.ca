@@ -1,0 +1,176 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MPM2D \textperiodcentered{} 3.4}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 3.4 --- Factoring Complex Trinomials ($ax^2+bx+c$)}\\[2pt]
+{\small Grade 10 Academic (MPM2D) \textperiodcentered{} Unit 3: Algebraic Expressions}
+\end{center}
+
+\begin{ideabox}
+For $ax^2+bx+c$ ($a\neq1$), use \textbf{decomposition}: split the middle term, then group.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Find two numbers that multiply to $a\cdot c$ and add to $b$.
+  \item Rewrite $bx$ as the sum of those two terms.
+  \item \textbf{Group} into pairs and factor; a common bracket appears.
+  \item Remove a GCF first if there is one.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{The extra challenge}When the leading coefficient is not $1$ (as in $ax^2+bx+c$), factoring is harder because $a$ also splits across the two factors.
+\lh{Decomposition}Find two numbers that multiply to $a\cdot c$ and add to $b$, split the middle term into those two, then factor by grouping.
+\lh{Guess and check}With practice you can test factor pairs of $a$ and $c$ directly, expanding mentally until the middle term matches.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Positive throughout}
+Factor $2x^2+7x+3$.
+\soln $a\cdot c=6$; $6+1=7$: $2x^2+6x+x+3=2x(x+3)+1(x+3)=(2x+1)(x+3).$
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Another positive}
+Factor $3x^2+10x+3$.
+\soln $a\cdot c=9$; $9+1$: $(3x+1)(x+3).$
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Negative constant}
+Factor $2x^2+5x-3$.
+\soln $a\cdot c=-6$; $6,-1$: $2x^2+6x-x-3=2x(x+3)-1(x+3)=(2x-1)(x+3).$ Zeros $x=\tfrac12,-3$.
+\plot{-4}{2}{-7}{6}{\addplot[exblue,very thick,domain=-3.6:1.1,samples=60]{2*x^2+5*x-3};\addplot[mark=*,only marks,black]coordinates{(0.5,0)(-3,0)};}
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Larger leading coefficient}
+Factor $6x^2+x-2$.
+\soln $a\cdot c=-12$; $4,-3$: $6x^2+4x-3x-2=2x(3x+2)-1(3x+2)=(3x+2)(2x-1).$
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Negative middle}
+Factor $4x^2-4x-3$.
+\soln $a\cdot c=-12$; $-6,2$: $4x^2-6x+2x-3=2x(2x-3)+1(2x-3)=(2x-3)(2x+1).$
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Remove GCF first}
+Factor $6x^2+15x+6$.
+\soln $3(2x^2+5x+2)=3(2x+1)(x+2).$
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Two negatives}
+Factor $3x^2-11x+6$.
+\soln $a\cdot c=18$; $-9,-2$: $3x^2-9x-2x+6=3x(x-3)-2(x-3)=(3x-2)(x-3).$
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Mixed}
+Factor $5x^2+13x-6$.
+\soln $a\cdot c=-30$; $15,-2$: $5x^2+15x-2x-6=5x(x+3)-2(x+3)=(5x-2)(x+3).$
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Big numbers (harder)}
+Factor $8x^2+2x-15$.
+\soln $a\cdot c=-120$; $12,-10$: $8x^2+12x-10x-15=4x(2x+3)-5(2x+3)=(2x+3)(4x-5).$
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Factor $2x^2+5x+2$.\workspace{2.0cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Factor $3x^2+7x+2$.\workspace{2.0cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Factor $2x^2+7x+6$.\workspace{2.0cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Factor $2x^2-x-6$.\workspace{2.0cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Factor $3x^2-2x-8$.\workspace{2.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Factor $6x^2+11x+3$.\workspace{2.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Factor $4x^2+8x+3$.\workspace{2.0cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Factor $5x^2-2x-3$.\workspace{2.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Factor $6x^2-7x-3$.\workspace{2.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Factor $4x^2-12x+9$.\workspace{2.0cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Factor $8x^2+2x-3$.\workspace{2.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Factor $2x^2+11x+12$.\workspace{2.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Factor $12x^2+x-6$.\workspace{2.6cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Factor $2x^2+5x+2$.
+  \item Factor $3x^2+7x+2$.
+  \item Factor $2x^2+7x+6$.
+  \item Factor $2x^2-x-6$.
+  \item Factor $3x^2-2x-8$.
+  \item Factor $6x^2+11x+3$.
+  \item Factor $4x^2+8x+3$.
+  \item Factor $5x^2-2x-3$.
+  \item Factor $6x^2-7x-3$.
+  \item Factor $4x^2-12x+9$.
+  \item Factor $8x^2+2x-3$.
+  \item Factor $2x^2+11x+12$.
+  \item Factor $12x^2+x-6$.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $(2x+1)(x+2)$.
+  \item $(3x+1)(x+2)$.
+  \item $(2x+3)(x+2)$.
+  \item $(2x+3)(x-2)$.
+  \item $(3x+4)(x-2)$.
+  \item $(2x+3)(3x+1)$.
+  \item $(2x+1)(2x+3)$.
+  \item $(5x+3)(x-1)$.
+  \item $(2x-3)(3x+1)$.
+  \item $(2x-3)^2$.
+  \item $(4x+3)(2x-1)$.
+  \item $(x+4)(2x+3)$.
+  \item $(4x+3)(3x-2)$.
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

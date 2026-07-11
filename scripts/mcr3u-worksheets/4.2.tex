@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MCR3U \textperiodcentered{} 4.2}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 4.2 --- Angles 0°–360° \& the CAST Rule}\\[2pt]
+{\small Grade 11 Functions, University (MCR3U) \textperiodcentered{} Unit 4: Trigonometric Functions}
+\end{center}
+
+\begin{ideabox}
+Trig ratios take signs by quadrant (CAST), and most equations have two solutions in [0°, 360°].
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item CAST (from Q4 counter-clockwise): Q1 all $+$, Q2 sin $+$, Q3 tan $+$, Q4 cos $+$.
+  \item Reference angle: Q2 $180-\theta$, Q3 $\theta-180$, Q4 $360-\theta$.
+  \item Find the ratio of the reference angle, then attach the CAST sign.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Beyond the first quadrant}Angles up to $360^\circ$ use a \textbf{reference angle} — the acute angle to the $x$-axis — together with a sign from the quadrant.
+\lh{The CAST rule}\textbf{CAST} records where each ratio is positive: all in QI, sine in QII, tangent in QIII, cosine in QIV.
+\lh{Solving equations}To solve $\sin\theta=\tfrac12$ on $[0^\circ,360^\circ)$, find the reference angle, then place a solution in each quadrant where the sign fits.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Sign}
+Is $\sin150^\circ$ positive or negative?\soln $150^\circ$ is in Q2, where sine is positive.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Sign}
+Is $\cos210^\circ$ positive or negative?\soln $210^\circ$ is in Q3, where only tangent is positive — so cosine is negative.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Sign}
+Is $\tan300^\circ$ positive or negative?\soln $300^\circ$ is in Q4, where only cosine is positive — tangent is negative.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Reference angle}
+Reference angle of $210^\circ$.\soln Q3: $\theta-180=210-180=30^\circ$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Reference angle}
+Reference angle of $300^\circ$.\soln Q4: $360-\theta=360-300=60^\circ$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Exact value}
+Evaluate $\cos120^\circ$.\soln Q2 (cos negative), reference $60^\circ$: $-\cos60^\circ=-\tfrac12$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Exact value}
+Evaluate $\sin240^\circ$.\soln Q3 (sin negative), reference $60^\circ$: $-\sin60^\circ=-\tfrac{\sqrt3}{2}$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Two solutions}
+Solve $\sin\theta=\tfrac12$ in $[0^\circ,360^\circ]$.\soln Sine is positive in Q1 and Q2; reference $30^\circ$. \\ $\theta=30^\circ$ and $180-30=150^\circ$:\splot{-1.5}{1.5}{\addplot[exblue,very thick,domain=0:360]{sin(x)};\addplot[qorange,dashed,domain=0:360]{0.5};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(30,0.5) (150,0.5)};}
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Two solutions}
+Solve $\cos\theta=-\tfrac{\sqrt3}{2}$.\soln Cosine is negative in Q2, Q3; reference $30^\circ$. \\ $\theta=150^\circ$ and $210^\circ$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Sign of $\sin300^\circ$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Sign of $\cos150^\circ$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Sign of $\tan120^\circ$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Reference angle of $135^\circ$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Reference angle of $225^\circ$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Evaluate $\cos240^\circ$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Evaluate $\sin150^\circ$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Evaluate $\tan225^\circ$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Solve $\cos\theta=\tfrac12$ in $[0^\circ,360^\circ]$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Solve $\sin\theta=-\tfrac12$ in $[0^\circ,360^\circ]$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Solve $\tan\theta=1$ in $[0^\circ,360^\circ]$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Evaluate $\sin270^\circ$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Solve $\cos\theta=-\tfrac12$ in $[0^\circ,360^\circ]$.\workspace{3cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Sign of $\sin300^\circ$?
+  \item Sign of $\cos150^\circ$?
+  \item Sign of $\tan120^\circ$?
+  \item Reference angle of $135^\circ$?
+  \item Reference angle of $225^\circ$?
+  \item Evaluate $\cos240^\circ$.
+  \item Evaluate $\sin150^\circ$.
+  \item Evaluate $\tan225^\circ$.
+  \item Solve $\cos\theta=\tfrac12$ in $[0^\circ,360^\circ]$.
+  \item Solve $\sin\theta=-\tfrac12$ in $[0^\circ,360^\circ]$.
+  \item Solve $\tan\theta=1$ in $[0^\circ,360^\circ]$.
+  \item Evaluate $\sin270^\circ$.
+  \item Solve $\cos\theta=-\tfrac12$ in $[0^\circ,360^\circ]$.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item negative
+  \item negative
+  \item negative
+  \item $45^\circ$
+  \item $45^\circ$
+  \item $-\tfrac12$
+  \item $\tfrac12$
+  \item $1$
+  \item $60^\circ,300^\circ$
+  \item $210^\circ,330^\circ$
+  \item $45^\circ,225^\circ$
+  \item $-1$
+  \item $120^\circ,240^\circ$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

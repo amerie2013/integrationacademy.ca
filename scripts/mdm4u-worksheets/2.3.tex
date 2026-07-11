@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MDM4U \textperiodcentered{} 2.3}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 2.3 --- Odds \& the Complement}\\[2pt]
+{\small Grade 12 Mathematics of Data Management (MDM4U) \textperiodcentered{} Unit 2: Probability}
+\end{center}
+
+\begin{ideabox}
+Odds in favour $a:b$ correspond to $P=\dfrac{a}{a+b}$. The complement $P(A')=1-P(A)$ turns hard \emph{at least} events into easy \emph{none} events.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Odds in favour $a:b\Leftrightarrow P=\dfrac{a}{a+b}$; odds against $=b:a$.
+  \item $P(A')=1-P(A)$.
+  \item $P(\text{at least one})=1-P(\text{none})$.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Odds versus probability}\textbf{Odds in favour} compare favourable to unfavourable outcomes, written $a:b$, while probability compares favourable to total. From odds $a:b$ you get $P=\dfrac{a}{a+b}$.
+\lh{The complement}$P(A')=1-P(A)$. The complement — \emph{not} $A$ — is often far easier to count, especially for \emph{at least one} events.
+\lh{Same information, two forms}If $P=0.25=\tfrac14$, the odds in favour are $1:3$ and the odds against are $3:1$; each conveys the same fact.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Odds to probability}
+The odds in favour of an event are $3:2$. Find $P$.\soln $P=\dfrac{3}{3+2}=\dfrac35$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Probability to odds}
+If $P(A)=\dfrac14$, state the odds in favour and against.\soln In favour $1:3$; against $3:1$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- At least one (complement)}
+Three coins are tossed. Find $P(\text{at least one head})$.\soln $1-P(\text{no heads})=1-\dfrac18=\dfrac78$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Odds against from a deck}
+State the odds against drawing a heart.\soln $P(\text{not heart}):P(\text{heart})=\dfrac34:\dfrac14=3:1$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- At least one 6}
+Two dice are rolled. Find $P(\text{at least one 6})$.\soln $1-\left(\dfrac56\right)^2=1-\dfrac{25}{36}=\dfrac{11}{36}$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Implied probability from payout odds}
+A horse has odds against of $5:1$. What is the implied probability of winning?\soln $P=\dfrac{1}{5+1}=\dfrac16$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Complement with combinations}
+4 items are drawn from 20, of which 3 are defective. Find $P(\text{at least one defective})$.\soln $1-\dfrac{\dbinom{17}{4}}{\dbinom{20}{4}}=1-\dfrac{2380}{4845}\approx0.509$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Compare two chances}
+Which is more likely: odds $4:3$ in favour, or $P=0.55$?\soln $4:3\Rightarrow\dfrac47\approx0.571>0.55$, so the odds are more likely.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Two-part spinner}
+A spinner has $P(\text{win})=0.3$. \\ \textbf{(a)} odds in favour of winning; \\ \textbf{(b)} $P(\text{win at least once in 2 spins})$.\soln (a) $3:7$. (b) $1-0.7^2=0.51$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+The odds in favour are $5:3$. Find $P$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+If $P=\dfrac29$, state the odds in favour and against.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Four coins are tossed. Find $P(\text{at least one tail})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+State the odds against rolling a prime on one die.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Two dice are rolled. Find $P(\text{at least one 5})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+A team's odds against winning are $7:2$. Find the implied $P(\text{win})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+From 20 items with 3 defective, draw 4. Find $P(\text{at least one defective})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Which is more likely: odds $3:2$ in favour, or $P=0.65$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Three dice are rolled. Find $P(\text{no 6})$, then $P(\text{at least one 6})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+The odds in favour are $9:11$. Find $P$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+If $P(\text{red})=0.4$, state the odds against red.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Two cards are drawn without replacement. Find $P(\text{at least one ace})$ using the complement.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Each round, the odds against winning are $7:3$ (rounds independent). Find $P(\text{win at least once in 3 rounds})$.\workspace{3cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item The odds in favour are $5:3$. Find $P$.
+  \item If $P=\dfrac29$, state the odds in favour and against.
+  \item Four coins are tossed. Find $P(\text{at least one tail})$.
+  \item State the odds against rolling a prime on one die.
+  \item Two dice are rolled. Find $P(\text{at least one 5})$.
+  \item A team's odds against winning are $7:2$. Find the implied $P(\text{win})$.
+  \item From 20 items with 3 defective, draw 4. Find $P(\text{at least one defective})$.
+  \item Which is more likely: odds $3:2$ in favour, or $P=0.65$?
+  \item Three dice are rolled. Find $P(\text{no 6})$, then $P(\text{at least one 6})$.
+  \item The odds in favour are $9:11$. Find $P$.
+  \item If $P(\text{red})=0.4$, state the odds against red.
+  \item Two cards are drawn without replacement. Find $P(\text{at least one ace})$ using the complement.
+  \item Each round, the odds against winning are $7:3$ (rounds independent). Find $P(\text{win at least once in 3 rounds})$.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $\tfrac58$
+  \item $2:7$ and $7:2$
+  \item $1-\tfrac{1}{16}=\tfrac{15}{16}$
+  \item $1:1$ (since $P(\text{prime})=\tfrac12$)
+  \item $1-\left(\tfrac56\right)^2=\tfrac{11}{36}$
+  \item $\tfrac29$
+  \item $1-\dfrac{\binom{17}{4}}{\binom{20}{4}}\approx0.509$
+  \item $3:2=0.6<0.65$, so $P=0.65$
+  \item $\left(\tfrac56\right)^3=\tfrac{125}{216}$; then $\tfrac{91}{216}$
+  \item $\tfrac{9}{20}$
+  \item $6:4=3:2$
+  \item $1-\tfrac{48}{52}\cdot\tfrac{47}{51}$
+  \item $1-\left(\tfrac{7}{10}\right)^3=\tfrac{657}{1000}$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

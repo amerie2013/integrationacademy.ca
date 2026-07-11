@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MCT4C \textperiodcentered{} 3.2}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 3.2 --- The Sine Law \& the Ambiguous Case}\\[2pt]
+{\small Grade 12 Mathematics for College Technology (MCT4C) \textperiodcentered{} Unit 3: Trigonometric Functions}
+\end{center}
+
+\begin{ideabox}
+$\dfrac{a}{\sin A}=\dfrac{b}{\sin B}=\dfrac{c}{\sin C}$ works with any side–opposite-angle pair. Given two sides and a non-included angle (SSA), there may be \emph{two}, one, or no triangles.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Use a matched side/opposite-angle pair.
+  \item SSA: check for a second angle ($180^\circ-B$).
+  \item If $\sin B>1$, no triangle exists.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{A law for any triangle}The \textbf{sine law} $\dfrac{a}{\sin A}=\dfrac{b}{\sin B}=\dfrac{c}{\sin C}$ links each side to the sine of its opposite angle.
+\lh{When to use it}It applies when you know a side and its opposite angle, plus one more piece of information.
+\lh{The ambiguous case}With two sides and a non-included angle, there can be zero, one, or two triangles — always test for a second angle.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Find a side}
+$A=40^\circ,B=60^\circ,a=10$. Find $b$.\soln $b=\dfrac{10\sin60^\circ}{\sin40^\circ}\approx13.5$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Find the third side}
+Continue: $C=80^\circ$, find $c$.\soln $c=\dfrac{10\sin80^\circ}{\sin40^\circ}\approx15.3$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Find an angle}
+$a=8,b=6,A=50^\circ$. Find $B$.\soln $\sin B=\dfrac{6\sin50^\circ}{8}\Rightarrow B\approx35.1^\circ$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Ambiguous — two triangles}
+$a=7,b=10,A=40^\circ$. Find $B$.\soln $\sin B=\dfrac{10\sin40^\circ}{7}\approx0.92\Rightarrow B\approx66.7^\circ$ or $113.3^\circ$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- No triangle}
+$a=5,b=10,A=70^\circ$. Find $B$.\soln $\sin B=\dfrac{10\sin70^\circ}{5}\approx1.88>1$: no triangle.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- One triangle ($a>b$)}
+$a=12,b=8,A=55^\circ$. Find $B$.\soln $\sin B=\dfrac{8\sin55^\circ}{12}\Rightarrow B\approx33.1^\circ$ (only, since $a>b$).
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Third angle}
+From Example 3, find $C$.\soln $C=180^\circ-50^\circ-35.1^\circ=94.9^\circ$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Area follow-up}
+For Example 1's triangle, find its area ($\tfrac12ab\sin C$).\soln $\tfrac12(10)(13.5)\sin80^\circ\approx66.5$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Set up a pair}
+$A=25^\circ,C=100^\circ,c=15$. Find $a$.\soln $a=\dfrac{15\sin25^\circ}{\sin100^\circ}\approx6.4$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+$A=35^\circ,B=85^\circ,a=12$. Find $b$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+$a=9,b=7,A=50^\circ$. Find $B$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+$A=25^\circ,C=100^\circ,c=15$. Find $a$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+$a=6,b=8,A=40^\circ$. Find both possible values of $B$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+$a=5,b=12,A=60^\circ$. How many triangles?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+$A=40^\circ,B=60^\circ,a=10$. Find $C$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+$A=48^\circ,a=20,b=15$. Find $B$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+$B=70^\circ,C=50^\circ,b=18$. Find $c$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+$a=10,b=6,A=30^\circ$. Find $B$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+In $\triangle ABC$, $A=45^\circ,a=14,b=10$. One or two triangles?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+$A=55^\circ,B=65^\circ,c=20$. Find $a$ (find $C$ first).\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+$a=7,b=9,A=38^\circ$. Find both possible $B$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+$a=8,b=11,A=44^\circ$: find $B$, then $C$, then $c$.\workspace{3.4cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $A=35^\circ,B=85^\circ,a=12$. Find $b$.
+  \item $a=9,b=7,A=50^\circ$. Find $B$.
+  \item $A=25^\circ,C=100^\circ,c=15$. Find $a$.
+  \item $a=6,b=8,A=40^\circ$. Find both possible values of $B$.
+  \item $a=5,b=12,A=60^\circ$. How many triangles?
+  \item $A=40^\circ,B=60^\circ,a=10$. Find $C$.
+  \item $A=48^\circ,a=20,b=15$. Find $B$.
+  \item $B=70^\circ,C=50^\circ,b=18$. Find $c$.
+  \item $a=10,b=6,A=30^\circ$. Find $B$.
+  \item In $\triangle ABC$, $A=45^\circ,a=14,b=10$. One or two triangles?
+  \item $A=55^\circ,B=65^\circ,c=20$. Find $a$ (find $C$ first).
+  \item $a=7,b=9,A=38^\circ$. Find both possible $B$.
+  \item $a=8,b=11,A=44^\circ$: find $B$, then $C$, then $c$.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $\dfrac{12\sin85^\circ}{\sin35^\circ}\approx20.8$
+  \item $B\approx36.6^\circ$
+  \item $\approx6.4$
+  \item $\sin B\approx0.86\Rightarrow B\approx59.0^\circ$ or $121.0^\circ$
+  \item $\sin B\approx2.08>1$: none
+  \item $80^\circ$
+  \item $\sin B=\tfrac{15\sin48^\circ}{20}\Rightarrow B\approx33.8^\circ$
+  \item $c=\tfrac{18\sin50^\circ}{\sin70^\circ}\approx14.7$
+  \item $\sin B=\tfrac{6\sin30^\circ}{10}\Rightarrow B\approx17.5^\circ$
+  \item one ($a>b$)
+  \item $C=60^\circ$; $a=\tfrac{20\sin55^\circ}{\sin60^\circ}\approx18.9$
+  \item $\sin B\approx0.79\Rightarrow B\approx52.3^\circ$ or $127.7^\circ$
+  \item $B\approx72.8^\circ$, $C\approx63.2^\circ$, $c=\tfrac{8\sin63.2^\circ}{\sin44^\circ}\approx10.3$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

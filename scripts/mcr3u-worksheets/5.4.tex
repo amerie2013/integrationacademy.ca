@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MCR3U \textperiodcentered{} 5.4}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 5.4 --- Sinusoidal Applications}\\[2pt]
+{\small Grade 11 Functions, University (MCR3U) \textperiodcentered{} Unit 5: Sinusoidal Functions}
+\end{center}
+
+\begin{ideabox}
+Model Ferris wheels, tides, and temperature with h = a sin(k(t − d)) + c.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Amplitude $=\dfrac{\text{max}-\text{min}}{2}$; midline $=\dfrac{\text{max}+\text{min}}{2}$.
+  \item $k=\dfrac{360^\circ}{\text{period}}$.
+  \item Max $=$ midline $+$ amplitude; min $=$ midline $-$ amplitude.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Modelling real cycles}Turn repeating data (tides, temperatures, wheels) into $y=a\sin\!\left(k(x-d)\right)+c$ using $c=\dfrac{\max+\min}{2}$ and $a=\dfrac{\max-\min}{2}$.
+\lh{Setting the period}Find $k$ from the real cycle length: $k=\dfrac{360^\circ}{\text{period}}$, with time in the units given.
+\lh{Sine or cosine}Use $-\cos$ to start at a minimum and $+\cos$ to start at a maximum; either models the same motion with a suitable shift.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Amplitude}
+A wheel ranges $2$ m to $12$ m. Amplitude?\soln $\dfrac{12-2}{2}=5$ m.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Midline}
+Same wheel. Midline?\soln $\dfrac{12+2}{2}=7$ m.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Period to k}
+A tide cycle is $12$ h. Find $k$.\soln $k=\dfrac{360^\circ}{12}=30^\circ$/h.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Build a model}
+Temperature ranges $10^\circ$ to $24^\circ$. Amplitude and midline?\soln amplitude $\dfrac{24-10}{2}=7$; midline $\dfrac{24+10}{2}=17$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Height at a time}
+For $h=5\sin(30t)+7$, find $h$ at $t=3$ (so $30t=90^\circ$).\soln $5\sin90^\circ+7=5(1)+7=12$ m. The model oscillates between $2$ and $12$ about the midline $7$:\splot{0}{14}{\addplot[qorange,dashed,domain=0:360]{7};\addplot[exblue,very thick,domain=0:360]{5*sin(x)+7};}
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Maximum}
+Max of $h=5\sin(30t)+7$?\soln midline $+$ amplitude $=7+5=12$ m.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Minimum}
+Min of $h=5\sin(30t)+7$?\soln midline $-$ amplitude $=7-5=2$ m.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Amplitude}
+A wheel ranges $1$ m to $15$ m. Amplitude?\soln $\dfrac{15-1}{2}=7$ m.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Cycle to k}
+A cycle lasts $10$ s. Find $k$.\soln $k=\dfrac{360^\circ}{10}=36^\circ$/s.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+A wheel ranges $2$ m to $18$ m. Find the amplitude.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Same wheel. Find the midline.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+A cycle lasts $8$ s. Find $k$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+For $h=6\sin(30t)+8$, find the maximum height.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+For $h=6\sin(30t)+8$, find the minimum height.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Temperature ranges $8^\circ$ to $22^\circ$. Find the amplitude.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Same temperature. Find the midline.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+A tide has period $12$ h. Find $k$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+For $h=5\sin(30t)+7$, find $h$ at $t=3$.\workspace{2.6cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+A wheel ranges $1$ m to $15$ m. Find the amplitude.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+State the range of $h=4\sin(30t)+10$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+If $k=30^\circ$/h, what is the period?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+A Ferris wheel turns once in $40$ s; height ranges $1$ m to $21$ m. Find the amplitude, midline, and $k$.\workspace{4cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item A wheel ranges $2$ m to $18$ m. Find the amplitude.
+  \item Same wheel. Find the midline.
+  \item A cycle lasts $8$ s. Find $k$.
+  \item For $h=6\sin(30t)+8$, find the maximum height.
+  \item For $h=6\sin(30t)+8$, find the minimum height.
+  \item Temperature ranges $8^\circ$ to $22^\circ$. Find the amplitude.
+  \item Same temperature. Find the midline.
+  \item A tide has period $12$ h. Find $k$.
+  \item For $h=5\sin(30t)+7$, find $h$ at $t=3$.
+  \item A wheel ranges $1$ m to $15$ m. Find the amplitude.
+  \item State the range of $h=4\sin(30t)+10$.
+  \item If $k=30^\circ$/h, what is the period?
+  \item A Ferris wheel turns once in $40$ s; height ranges $1$ m to $21$ m. Find the amplitude, midline, and $k$.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $8$
+  \item $10$
+  \item $45^\circ$/s
+  \item $14$ m
+  \item $2$ m
+  \item $7$
+  \item $15$
+  \item $30^\circ$/h
+  \item $12$ m
+  \item $7$
+  \item $6$ to $14$
+  \item $12$ h
+  \item amplitude $10$, midline $11$, $k=9^\circ$/s
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

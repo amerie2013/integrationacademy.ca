@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MCT4C \textperiodcentered{} 1.7}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 1.7 --- Solving Exponential Equations Using Logarithms}\\[2pt]
+{\small Grade 12 Mathematics for College Technology (MCT4C) \textperiodcentered{} Unit 1: Exponential Functions}
+\end{center}
+
+\begin{ideabox}
+When no common base works, take $\log$ of both sides and use $\log b^{x}=x\log b$: so $x=\dfrac{\log k}{\log b}$. Isolate the power first.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Take $\log$ (or $\ln$) of both sides.
+  \item Bring the exponent down with the power law.
+  \item Isolate coefficients before taking logs.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{When bases will not match}With no common base available, take the logarithm of both sides; the power law then brings the exponent down as a multiplier.
+\lh{The key step}From $b^x=k$ you get $x\log b=\log k$, so $x=\dfrac{\log k}{\log b}$. Isolate the power before taking logs.
+\lh{Applied equations}Interest and growth equations such as $P(1+r)^t=A$ are solved this way once the exponential term stands alone.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Basic solve}
+Solve $3^{x}=20$ (3 decimals).\soln $x=\dfrac{\log 20}{\log 3}\approx2.727$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Shifted exponent}
+Solve $2^{\,x+1}=7$.\soln $x+1=\dfrac{\log 7}{\log 2}\approx2.807\Rightarrow x\approx1.807$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Isolate first}
+Solve $4\cdot3^{x}=100$.\soln $3^x=25$; $x=\dfrac{\log 25}{\log 3}\approx2.930$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Base $e$}
+Solve $e^{\,2x}=15$.\soln $2x=\ln 15\approx2.708\Rightarrow x\approx1.354$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Applied}
+When does $1000(1.05)^{t}=2000$?\soln $1.05^t=2$; $t=\dfrac{\log 2}{\log 1.05}\approx14.2$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Base 5}
+Solve $5^{x}=200$.\soln $x=\dfrac{\log 200}{\log 5}\approx3.292$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Shift both sides}
+Solve $3^{\,x-2}=50$.\soln $x-2=\dfrac{\log 50}{\log 3}\approx3.561\Rightarrow x\approx5.561$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Natural log}
+Solve $e^{x}=8$.\soln $x=\ln 8\approx2.079$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Growth to target}
+When does $200(1.08)^{t}=1000$?\soln $1.08^t=5$; $t=\dfrac{\log 5}{\log 1.08}\approx20.9$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Solve $2^{x}=13$ (3 decimals).\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Solve $5^{x}=100$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Solve $3^{x}=45$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Solve $e^{x}=20$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Solve $2\cdot3^{x}=54$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Solve $4^{x}=30$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Solve $2^{\,x-1}=15$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Solve $e^{\,3x}=10$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+When does $500(1.04)^{t}=800$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Solve $10^{x}=250$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Solve $6^{x}=1000$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Solve $3\cdot2^{x}=96$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+When does $2000(1.06)^{t}=5000$?\workspace{3cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Solve $2^{x}=13$ (3 decimals).
+  \item Solve $5^{x}=100$.
+  \item Solve $3^{x}=45$.
+  \item Solve $e^{x}=20$.
+  \item Solve $2\cdot3^{x}=54$.
+  \item Solve $4^{x}=30$.
+  \item Solve $2^{\,x-1}=15$.
+  \item Solve $e^{\,3x}=10$.
+  \item When does $500(1.04)^{t}=800$?
+  \item Solve $10^{x}=250$.
+  \item Solve $6^{x}=1000$.
+  \item Solve $3\cdot2^{x}=96$.
+  \item When does $2000(1.06)^{t}=5000$?
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $\tfrac{\log 13}{\log 2}\approx3.700$
+  \item $\tfrac{\log 100}{\log 5}\approx2.861$
+  \item $\tfrac{\log 45}{\log 3}\approx3.465$
+  \item $\ln 20\approx2.996$
+  \item $3^x=27\Rightarrow x=3$
+  \item $\tfrac{\log 30}{\log 4}\approx2.453$
+  \item $x-1=\tfrac{\log 15}{\log 2}\Rightarrow x\approx4.907$
+  \item $3x=\ln 10\Rightarrow x\approx0.768$
+  \item $\tfrac{\log 1.6}{\log 1.04}\approx11.98$
+  \item $\log 250\approx2.398$
+  \item $\tfrac{\log 1000}{\log 6}\approx3.856$
+  \item $2^x=32\Rightarrow x=5$
+  \item $\tfrac{\log 2.5}{\log 1.06}\approx15.73$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MHF4U \textperiodcentered{} 7.3}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 7.3 --- Composition of Functions}\\[2pt]
+{\small Grade 12 Advanced Functions (MHF4U) \textperiodcentered{} Unit 7: Rates of Change and Combining Functions}
+\end{center}
+
+\begin{ideabox}
+A composition feeds one function into another: $(f\circ g)(x)=f(g(x))$ — inner first, then outer. Order matters, and you can also decompose.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item $(f\circ g)(x)=f(g(x))$: apply $g$ first, then $f$.
+  \item Domain: $x$ in $g$'s domain and $g(x)$ in $f$'s domain.
+  \item Decompose: split into an outer and inner function.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{One function inside another}\textbf{Composition} $(f\circ g)(x)=f(g(x))$ feeds the output of $g$ into $f$; order matters, since $f\circ g\ne g\circ f$ in general.
+\lh{The chain of domains}An input must be valid for $g$, and $g(x)$ must in turn be valid for $f$, so the composite's domain can be restricted.
+\lh{Building and undoing}Composition builds complex functions from simple ones, and inverse functions are precisely those that compose to give $x$.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Compose}
+$f=x^2,\ g=x+1$. Find $f(g(x))$.\soln Replace $f$'s input with $g(x)$: $(x+1)^2$. This is the parabola shifted left 1:\eplot{-4}{2}{-1}{9}{\addplot[exblue,very thick,domain=-4:1.9]{(x+1)^2};}
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Reverse order}
+Find $g(f(x))$.\soln $g(x^2)=x^2+1$ (different from $f(g(x))$).
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Evaluate}
+Find $f(g(2))$.\soln $g(2)=3$, then $f(3)=9$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Decompose}
+Write $h(x)=(x+1)^2$ as $f(g(x))$.\soln Inner $g(x)=x+1$, outer $f(x)=x^2$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Domain of a composite}
+$f=\sqrt x,\ g=x-3$. Find $f(g(x))$ and its domain.\soln $\sqrt{x-3}$; need $x-3\ge0$, so $x\ge3$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Compose}
+$f=x^2,\ g=x-2$. Find $f(g(x))$.\soln $(x-2)^2$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Reverse order}
+Same $f,g$: find $g(f(x))$.\soln $x^2-2$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Evaluate}
+$f=2x,\ g=x+3$. Find $f(g(1))$.\soln $g(1)=4,\ f(4)=8$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Decompose}
+Decompose $h(x)=\sqrt{x+5}$.\soln $f(x)=\sqrt x,\ g(x)=x+5$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+$f=x^2,\ g=x-2$. Find $f(g(x))$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Same $f,g$: find $g(f(x))$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+$f=2x,\ g=x+3$. Find $f(g(1))$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Decompose $h(x)=\sqrt{x+5}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+$f=\sqrt x,\ g=x-1$. Domain of $f(g(x))$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+$f=x+1,\ g=x^2$. Find $f(g(x))$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Same $f,g$: find $g(f(x))$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+$f=3x,\ g=x-1$. Find $f(g(2))$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Decompose $h(x)=(2x-1)^2$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+$f=x^2,\ g=x+4$. Find $f(g(0))$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Is $f(g(x))$ usually equal to $g(f(x))$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+$f=\tfrac1x,\ g=x-2$. Find $f(g(x))$ and the restriction.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+$f=x^2,\ g=\sqrt x$. Find $f(g(x))$ and state its domain.\workspace{3cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $f=x^2,\ g=x-2$. Find $f(g(x))$.
+  \item Same $f,g$: find $g(f(x))$.
+  \item $f=2x,\ g=x+3$. Find $f(g(1))$.
+  \item Decompose $h(x)=\sqrt{x+5}$.
+  \item $f=\sqrt x,\ g=x-1$. Domain of $f(g(x))$?
+  \item $f=x+1,\ g=x^2$. Find $f(g(x))$.
+  \item Same $f,g$: find $g(f(x))$.
+  \item $f=3x,\ g=x-1$. Find $f(g(2))$.
+  \item Decompose $h(x)=(2x-1)^2$.
+  \item $f=x^2,\ g=x+4$. Find $f(g(0))$.
+  \item Is $f(g(x))$ usually equal to $g(f(x))$?
+  \item $f=\tfrac1x,\ g=x-2$. Find $f(g(x))$ and the restriction.
+  \item $f=x^2,\ g=\sqrt x$. Find $f(g(x))$ and state its domain.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $(x-2)^2$
+  \item $x^2-2$
+  \item $8$
+  \item $f=\sqrt x,\ g=x+5$
+  \item $x\ge1$
+  \item $x^2+1$
+  \item $(x+1)^2$
+  \item $3$
+  \item $f=x^2,\ g=2x-1$
+  \item $16$
+  \item no
+  \item $\dfrac{1}{x-2}$, $x\ne2$
+  \item $x$, domain $x\ge0$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

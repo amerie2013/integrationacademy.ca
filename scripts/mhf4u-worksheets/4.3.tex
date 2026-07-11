@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MHF4U \textperiodcentered{} 4.3}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 4.3 --- Solving Exponential \& Logarithmic Equations}\\[2pt]
+{\small Grade 12 Advanced Functions (MHF4U) \textperiodcentered{} Unit 4: Exponential and Logarithmic Functions}
+\end{center}
+
+\begin{ideabox}
+Match bases and set exponents equal, or take logs of both sides; for log equations rewrite in exponential form and check the argument is positive.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Same base: $b^{f}=b^{g}\Rightarrow f=g$.
+  \item Different bases: $b^x=c\Rightarrow x=\dfrac{\log c}{\log b}$.
+  \item $\log_b x=k\Rightarrow x=b^k$; reject non-positive arguments.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Exponential equations}Take a logarithm of both sides to bring the variable exponent down, then solve the resulting linear equation.
+\lh{Logarithmic equations}Condense to a single log, rewrite in exponential form, and solve — then confirm each argument stays positive.
+\lh{Watch for extraneous roots}Because logs need positive arguments, discard any solution that makes an argument zero or negative.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Same base}
+Solve $2^x=8$.\soln $2^x=2^3\Rightarrow x=3$. Read across $y=2^x$ at height 8:\eplot{-3}{3}{-1}{9}{\addplot[exblue,very thick,domain=-3:3.1,samples=80]{2^x};}
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Same base}
+Solve $3^x=81$.\soln $3^x=3^4\Rightarrow x=4$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Take logs}
+Solve $2^x=10$.\soln $x=\dfrac{\log10}{\log2}\approx3.32$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Log equation}
+Solve $\log_2 x=5$.\soln $x=2^5=32$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Log equation}
+Solve $\log(x-1)=1$.\soln $x-1=10^1\Rightarrow x=11$ (valid).
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Same base}
+Solve $5^x=125$.\soln $5^x=5^3\Rightarrow x=3$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Log equation}
+Solve $\log_3 x=4$.\soln $x=3^4=81$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Rewrite first}
+Solve $2^{x+1}=16$.\soln $2^{x+1}=2^4\Rightarrow x+1=4\Rightarrow x=3$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Take logs}
+Solve $3^x=20$.\soln $x=\dfrac{\log20}{\log3}\approx2.73$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Solve $2^x=16$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Solve $5^x=125$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Solve $3^x=20$ (2 d.p.).\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Solve $\log_3 x=4$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Solve $\log(x+2)=1$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Solve $4^x=64$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Solve $2^{x-1}=32$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Solve $\log_2 x=6$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Solve $10^x=500$ (2 d.p.).\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Solve $\log(x-4)=2$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Solve $3^{2x}=81$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Solve $\log_5 x=2$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Solve $2^{x}=50$ to two decimal places, showing the log step.\workspace{3cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Solve $2^x=16$.
+  \item Solve $5^x=125$.
+  \item Solve $3^x=20$ (2 d.p.).
+  \item Solve $\log_3 x=4$.
+  \item Solve $\log(x+2)=1$.
+  \item Solve $4^x=64$.
+  \item Solve $2^{x-1}=32$.
+  \item Solve $\log_2 x=6$.
+  \item Solve $10^x=500$ (2 d.p.).
+  \item Solve $\log(x-4)=2$.
+  \item Solve $3^{2x}=81$.
+  \item Solve $\log_5 x=2$.
+  \item Solve $2^{x}=50$ to two decimal places, showing the log step.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $x=4$
+  \item $x=3$
+  \item $x\approx2.73$
+  \item $x=81$
+  \item $x=8$
+  \item $x=3$
+  \item $x=6$
+  \item $x=64$
+  \item $x\approx2.70$
+  \item $x=104$
+  \item $x=2$
+  \item $x=25$
+  \item $x=\tfrac{\log50}{\log2}\approx5.64$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

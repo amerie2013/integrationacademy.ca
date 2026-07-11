@@ -1,0 +1,187 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MPM2D \textperiodcentered{} 4.4}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 4.4 --- Graphing from Vertex Form}\\[2pt]
+{\small Grade 10 Academic (MPM2D) \textperiodcentered{} Unit 4: Quadratic Relations}
+\end{center}
+
+\begin{ideabox}
+From $y=a(x-h)^2+k$ you can graph quickly: plot the vertex, then use the step pattern and symmetry.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Plot the vertex $(h,k)$ and draw the AOS $x=h$.
+  \item Step pattern from the vertex: over $1$/up $a$, over $2$/up $4a$ (mirror on both sides).
+  \item Set $y=0$ and solve to find any $x$-intercepts.
+  \item The range is $y\ge k$ (opens up) or $y\le k$ (opens down).
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Start at the vertex}Plot $(h,k)$ first and draw the axis of symmetry; everything else is measured out from there.
+\lh{Use the step pattern}From the vertex, the curve rises by $a\cdot1,\ a\cdot4,\ a\cdot9$ as you step out $1,2,3$ units — then mirror those points on the other side.
+\lh{Sketch smoothly}Join the points in a smooth curve, not straight segments, and label the vertex and intercepts.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Basic vertex-form graph}
+Graph $y=(x-2)^2-1$.
+\soln Vertex $(2,-1)$, opens up.
+\plot{-2}{6}{-2}{8}{\addplot[exblue,very thick,domain=-0.8:4.8,samples=60]{(x-2)^2-1};\addplot[mark=*,only marks,black]coordinates{(2,-1)(1,0)(3,0)};}
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Opens down}
+Graph $y=-(x+1)^2+4$.
+\soln Vertex $(-1,4)$, opens down; zeros at $x=1,-3$.
+\plot{-5}{4}{-6}{5}{\addplot[exblue,very thick,domain=-4:2,samples=60]{-(x+1)^2+4};\addplot[mark=*,only marks,black]coordinates{(-1,4)(1,0)(-3,0)};}
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- With a stretch}
+Graph $y=2(x-1)^2-3$.
+\soln Vertex $(1,-3)$, narrow (step $2,8,\dots$).
+\plot{-3}{5}{-4}{9}{\addplot[exblue,very thick,domain=-1.2:3.2,samples=60]{2*(x-1)^2-3};\addplot[mark=*,only marks,black]coordinates{(1,-3)}; }
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- With a compression}
+Graph $y=\tfrac12(x+2)^2$.
+\soln Vertex $(-2,0)$, wide.
+\plot{-7}{3}{-1}{9}{\addplot[exblue,very thick,domain=-6:2,samples=60]{0.5*(x+2)^2};\addplot[mark=*,only marks,black]coordinates{(-2,0)}; }
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Another opens-down}
+Graph $y=-(x-3)^2+5$.
+\soln Vertex $(3,5)$, opens down.
+\plot{-1}{7}{-4}{6}{\addplot[exblue,very thick,domain=0.4:5.6,samples=60]{-(x-3)^2+5};\addplot[mark=*,only marks,black]coordinates{(3,5)}; }
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Finding x-intercepts}
+Find the $x$-intercepts of $y=(x-2)^2-9$.
+\soln $(x-2)^2=9\Rightarrow x-2=\pm3\Rightarrow x=5$ or $x=-1.$
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Zeros from vertex form}
+Graph $y=(x+1)^2-4$ and state its zeros.
+\soln Vertex $(-1,-4)$; $(x+1)^2=4\Rightarrow x=1,-3.$
+\plot{-5}{4}{-5}{6}{\addplot[exblue,very thick,domain=-3.4:1.4,samples=60]{(x+1)^2-4};\addplot[mark=*,only marks,black]coordinates{(-1,-4)(1,0)(-3,0)};}
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Range}
+State the range of $y=2(x-1)^2+3$.
+\soln Minimum $3$, opens up: range $y\ge3.$
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Full graph (harder)}
+Graph $y=-2(x+2)^2+8$; give the zeros and range.
+\soln Vertex $(-2,8)$, opens down. $-2(x+2)^2+8=0\Rightarrow (x+2)^2=4\Rightarrow x=0,-4$; range $y\le8.$
+\plot{-6}{2}{-4}{9}{\addplot[exblue,very thick,domain=-4.5:0.5,samples=60]{-2*(x+2)^2+8};\addplot[mark=*,only marks,black]coordinates{(-2,8)(0,0)(-4,0)};}
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Graph $y=(x-1)^2-4$ and label the vertex.
+\begin{center}\begin{tikzpicture}\begin{axis}[width=8cm,height=6cm,axis lines=middle,grid=both,grid style={gray!16},xmin=-6,xmax=6,ymin=-6,ymax=6,xtick distance=2,ytick distance=2,tick label style={font=\tiny}]\end{axis}\end{tikzpicture}\end{center}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Graph $y=-(x-2)^2+3$.
+\begin{center}\begin{tikzpicture}\begin{axis}[width=8cm,height=6cm,axis lines=middle,grid=both,grid style={gray!16},xmin=-6,xmax=6,ymin=-6,ymax=6,xtick distance=2,ytick distance=2,tick label style={font=\tiny}]\end{axis}\end{tikzpicture}\end{center}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+State the vertex and range of $y=3(x+1)^2-2$.\workspace{2.0cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Find the $x$-intercepts of $y=(x-1)^2-16$.\workspace{2.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Find the $x$-intercepts of $y=(x+3)^2-1$.\workspace{2.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+State the range of $y=-(x-4)^2+6$.\workspace{1.8cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Graph $y=\tfrac12(x-2)^2$.
+\begin{center}\begin{tikzpicture}\begin{axis}[width=8cm,height=6cm,axis lines=middle,grid=both,grid style={gray!16},xmin=-6,xmax=6,ymin=-6,ymax=6,xtick distance=2,ytick distance=2,tick label style={font=\tiny}]\end{axis}\end{tikzpicture}\end{center}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Find the $y$-intercept of $y=(x-3)^2+1$.\workspace{2.0cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+State the vertex, direction, and zeros of $y=(x+2)^2-9$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Graph $y=-2(x-1)^2+2$.
+\begin{center}\begin{tikzpicture}\begin{axis}[width=8cm,height=6cm,axis lines=middle,grid=both,grid style={gray!16},xmin=-6,xmax=6,ymin=-6,ymax=6,xtick distance=2,ytick distance=2,tick label style={font=\tiny}]\end{axis}\end{tikzpicture}\end{center}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Does $y=2(x+1)^2+5$ have any $x$-intercepts? Explain.\workspace{2.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+State the vertex and range of $y=-\tfrac13(x-3)^2+4$.\workspace{2.0cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Graph $y=(x-2)^2-9$, giving the vertex, both zeros, and the $y$-intercept.
+\begin{center}\begin{tikzpicture}\begin{axis}[width=8cm,height=6cm,axis lines=middle,grid=both,grid style={gray!16},xmin=-6,xmax=6,ymin=-6,ymax=6,xtick distance=2,ytick distance=2,tick label style={font=\tiny}]\end{axis}\end{tikzpicture}\end{center}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Graph $y=(x-1)^2-4$ and label the vertex.
+  \item Graph $y=-(x-2)^2+3$.
+  \item State the vertex and range of $y=3(x+1)^2-2$.
+  \item Find the $x$-intercepts of $y=(x-1)^2-16$.
+  \item Find the $x$-intercepts of $y=(x+3)^2-1$.
+  \item State the range of $y=-(x-4)^2+6$.
+  \item Graph $y=\tfrac12(x-2)^2$.
+  \item Find the $y$-intercept of $y=(x-3)^2+1$.
+  \item State the vertex, direction, and zeros of $y=(x+2)^2-9$.
+  \item Graph $y=-2(x-1)^2+2$.
+  \item Does $y=2(x+1)^2+5$ have any $x$-intercepts? Explain.
+  \item State the vertex and range of $y=-\tfrac13(x-3)^2+4$.
+  \item Graph $y=(x-2)^2-9$, giving the vertex, both zeros, and the $y$-intercept.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Vertex $(1,-4)$; zeros $-1,3$.
+  \item Vertex $(2,3)$, opens down; zeros $2\pm\sqrt3$.
+  \item Vertex $(-1,-2)$, range $y\ge-2$.
+  \item $x=5,-3$.
+  \item $x=-2,-4$.
+  \item $y\le6$.
+  \item Vertex $(2,0)$, wide, opens up.
+  \item $y=(0-3)^2+1=10$.
+  \item Vertex $(-2,-9)$, opens up, zeros $1,-5$.
+  \item Vertex $(1,2)$, opens down; zeros $0,2$.
+  \item No --- minimum $5>0$, parabola stays above the $x$-axis.
+  \item Vertex $(3,4)$, range $y\le4$.
+  \item Vertex $(2,-9)$, zeros $-1,5$, $y$-intercept $-5$.
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

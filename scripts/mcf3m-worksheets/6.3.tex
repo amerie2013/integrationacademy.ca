@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MCF3M \textperiodcentered{} 6.3}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 6.3 --- Transformations of Sine Functions}\\[2pt]
+{\small Grade 11 Functions \& Applications (MCF3M) \textperiodcentered{} Unit 6: Sine Functions}
+\end{center}
+
+\begin{ideabox}
+$y=a\sin\!\big(k(x-d)\big)+c$: $a$ amplitude, period $=\dfrac{360^\circ}{k}$, $d$ phase shift, $c$ midline.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item $a$: amplitude $|a|$ (reflect if $a<0$).
+  \item Period $=\dfrac{360^\circ}{k}$; $(x-d)$ shifts right by $d$.
+  \item Max $=c+|a|$, min $=c-|a|$.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{The transformed form}$y=a\sin\!\left(k(x-d)\right)+c$ gives amplitude $|a|$, period $\dfrac{360^\circ}{|k|}$, phase shift $d$, and midline $c$.
+\lh{Factor first}Factor out $k$ so the inside reads $k(x-d)$ before reading the horizontal shift $d$.
+\lh{Max and min}The maximum is $c+|a|$ and the minimum $c-|a|$, so the range lies between them.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Amplitude}
+Amplitude of $y=3\sin x$.\soln $|a|=3$ — the curve reaches $\pm3$ (compared with $\pm1$):\splot{-3.5}{3.5}{\addplot[qorange,very thick,domain=0:360]{sin(x)};\addplot[exblue,very thick,domain=0:360]{3*sin(x)};}
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Period}
+Period of $y=\sin(2x)$.\soln Period $=\dfrac{360^\circ}{2}=180^\circ$ — two cycles fit in $360^\circ$:\splot{-1.5}{1.5}{\addplot[exblue,very thick,domain=0:360]{sin(2*x)};}
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Midline}
+Midline of $y=\sin x+2$.\soln The $+2$ lifts the whole wave; midline $y=2$:\splot{-1}{4}{\addplot[red,dashed,domain=0:360]{2};\addplot[exblue,very thick,domain=0:360]{sin(x)+2};}
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Max \& min}
+Max and min of $y=2\sin x+1$.\soln Midline $1$, amplitude $2$: max $=1+2=3$, min $=1-2=-1$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Full description}
+Describe $y=3\sin\!\big(2(x-30^\circ)\big)+1$.\soln $a=3$ (amplitude 3), $k=2$ (period $180^\circ$), $d=30^\circ$ (right $30^\circ$), $c=1$ (midline $y=1$).
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Amplitude}
+Amplitude of $y=5\sin x$.\soln $|a|=5$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Period}
+Period of $y=\sin(3x)$.\soln $\dfrac{360^\circ}{3}=120^\circ$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Midline}
+Midline of $y=\sin x-4$.\soln $c=-4$, so $y=-4$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Period}
+Period of $y=\sin\!\big(\tfrac12 x\big)$.\soln $\dfrac{360^\circ}{1/2}=720^\circ$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Amplitude of $y=4\sin x$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Period of $y=\sin(2x)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Midline of $y=\sin x+3$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Maximum of $y=2\sin x+1$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Minimum of $y=2\sin x+1$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Period of $y=\sin(4x)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Amplitude of $y=-2\sin x$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Period of $y=\sin(\tfrac12 x)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Phase shift of $y=\sin(x-45^\circ)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Maximum of $y=3\sin x+2$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Midline of $y=5\sin x-1$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Phase shift of $y=\sin(x+60^\circ)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Write a sine function with amplitude $4$, period $180^\circ$, midline $y=2$.\workspace{3cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Amplitude of $y=4\sin x$.
+  \item Period of $y=\sin(2x)$.
+  \item Midline of $y=\sin x+3$.
+  \item Maximum of $y=2\sin x+1$.
+  \item Minimum of $y=2\sin x+1$.
+  \item Period of $y=\sin(4x)$.
+  \item Amplitude of $y=-2\sin x$.
+  \item Period of $y=\sin(\tfrac12 x)$.
+  \item Phase shift of $y=\sin(x-45^\circ)$.
+  \item Maximum of $y=3\sin x+2$.
+  \item Midline of $y=5\sin x-1$.
+  \item Phase shift of $y=\sin(x+60^\circ)$.
+  \item Write a sine function with amplitude $4$, period $180^\circ$, midline $y=2$.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $4$
+  \item $180^\circ$
+  \item $y=3$
+  \item $3$
+  \item $-1$
+  \item $90^\circ$
+  \item $2$
+  \item $720^\circ$
+  \item right $45^\circ$
+  \item $5$
+  \item $y=-1$
+  \item left $60^\circ$
+  \item $y=4\sin(2x)+2$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

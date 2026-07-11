@@ -1,0 +1,177 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MPM2D \textperiodcentered{} 2.1}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 2.1 --- Midpoint of a Line Segment}\\[2pt]
+{\small Grade 10 Academic (MPM2D) \textperiodcentered{} Unit 2: Analytic Geometry}
+\end{center}
+
+\begin{ideabox}
+The \textbf{midpoint} of a segment is the average of the endpoints' coordinates: $M=\left(\dfrac{x_1+x_2}{2},\dfrac{y_1+y_2}{2}\right)$.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Average the $x$'s and average the $y$'s.
+  \item The midpoint is the centre of a segment (and of a diameter).
+  \item To find a missing endpoint, use $x_2=2M_x-x_1$ and $y_2=2M_y-y_1$.
+  \item Negatives matter --- keep signs when averaging.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{The idea}The \textbf{midpoint} is the exact centre of a segment — simply the average of the two endpoints' coordinates.
+\lh{The formula}For endpoints $(x_1,y_1)$ and $(x_2,y_2)$, the midpoint is $\left(\dfrac{x_1+x_2}{2},\ \dfrac{y_1+y_2}{2}\right)$.
+\lh{Working backwards}Given a midpoint and one endpoint, find the other by treating each coordinate as an average and solving for the missing value.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Basic midpoint}
+Find the midpoint of $(2,4)$ and $(6,10)$.
+\soln $M=\left(\tfrac{2+6}{2},\tfrac{4+10}{2}\right)=(4,7).$
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- With negatives}
+Find the midpoint of $(-3,5)$ and $(7,-1)$.
+\soln $M=\left(\tfrac{-3+7}{2},\tfrac{5-1}{2}\right)=(2,2).$
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Through the origin}
+Find the midpoint of $(0,0)$ and $(8,-6)$.
+\soln $M=(4,-3).$
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Fractional result}
+Find the midpoint of $(1,2)$ and $(4,5)$.
+\soln $M=\left(\tfrac{5}{2},\tfrac{7}{2}\right)=(2.5,3.5).$
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Finding an endpoint}
+$M=(3,4)$ is the midpoint and one endpoint is $(1,2)$. Find the other.
+\soln $x_2=2(3)-1=5$, $y_2=2(4)-2=6$. The other endpoint is $(5,6)$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Larger spread}
+Find the midpoint of $(-5,-2)$ and $(3,8)$.
+\soln $M=\left(\tfrac{-2}{2},\tfrac{6}{2}\right)=(-1,3).$
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Centre of a diameter}
+A circle has a diameter from $(2,3)$ to $(8,11)$. Find its centre.
+\soln The centre is the midpoint: $M=(5,7).$
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Midpoint on a graph}
+Find the midpoint of $(-4,-2)$ and $(2,6)$.
+\soln $M=(-1,2).$
+\plot{-6}{4}{-4}{8}{\addplot[exblue,very thick,domain=-4:2,samples=2]{(4/3)*x+10/3};\addplot[mark=*,only marks,black]coordinates{(-4,-2)(2,6)};\addplot[mark=square*,only marks,qorange]coordinates{(-1,2)};}
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Midpoints of midpoints (harder)}
+For $\triangle ABC$ with $A(-2,1)$, $B(4,3)$, $C(0,-5)$, find the midpoint of the segment joining the midpoints of $AB$ and $AC$.
+\soln Midpoint of $AB=(1,2)$; midpoint of $AC=(-1,-2)$. Their midpoint is $\left(\tfrac{1-1}{2},\tfrac{2-2}{2}\right)=(0,0).$
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Find the midpoint of $(2,6)$ and $(8,2)$.\workspace{2.0cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Find the midpoint of $(-4,3)$ and $(6,-7)$.\workspace{2.0cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Find the midpoint of $(0,5)$ and $(10,5)$.\workspace{2.0cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Find the midpoint of $(1,1)$ and $(4,8)$.\workspace{2.0cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Plot $(-3,-1)$ and $(5,3)$ and mark their midpoint.
+\begin{center}\begin{tikzpicture}\begin{axis}[width=8cm,height=6cm,axis lines=middle,grid=both,grid style={gray!16},xmin=-6,xmax=6,ymin=-6,ymax=6,xtick distance=2,ytick distance=2,tick label style={font=\tiny}]\end{axis}\end{tikzpicture}\end{center}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+$M=(2,5)$ is a midpoint and one endpoint is $(-1,3)$. Find the other endpoint.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+A diameter runs from $(-6,2)$ to $(4,8)$. Find the circle's centre.\workspace{2.0cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Find the midpoint of $(-7,-3)$ and $(-1,5)$.\workspace{2.0cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+$M=(0,0)$ is the midpoint and one endpoint is $(3,-4)$. Find the other.\workspace{2.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Find the midpoint of $\left(\tfrac12,2\right)$ and $\left(\tfrac72,6\right)$.\workspace{2.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+For $\triangle ABC$ with $A(0,0)$, $B(6,0)$, $C(0,8)$, find the midpoint of each side.\workspace{2.8cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Find the midpoint of $(2.5,-1.5)$ and $(3.5,4.5)$.\workspace{2.0cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+The midpoint of $PQ$ is $(4,1)$ and $P=(1,-2)$. Find $Q$, then the length of $PQ$.\workspace{3.0cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Find the midpoint of $(2,6)$ and $(8,2)$.
+  \item Find the midpoint of $(-4,3)$ and $(6,-7)$.
+  \item Find the midpoint of $(0,5)$ and $(10,5)$.
+  \item Find the midpoint of $(1,1)$ and $(4,8)$.
+  \item Plot $(-3,-1)$ and $(5,3)$ and mark their midpoint.
+  \item $M=(2,5)$ is a midpoint and one endpoint is $(-1,3)$. Find the other endpoint.
+  \item A diameter runs from $(-6,2)$ to $(4,8)$. Find the circle's centre.
+  \item Find the midpoint of $(-7,-3)$ and $(-1,5)$.
+  \item $M=(0,0)$ is the midpoint and one endpoint is $(3,-4)$. Find the other.
+  \item Find the midpoint of $\left(\tfrac12,2\right)$ and $\left(\tfrac72,6\right)$.
+  \item For $\triangle ABC$ with $A(0,0)$, $B(6,0)$, $C(0,8)$, find the midpoint of each side.
+  \item Find the midpoint of $(2.5,-1.5)$ and $(3.5,4.5)$.
+  \item The midpoint of $PQ$ is $(4,1)$ and $P=(1,-2)$. Find $Q$, then the length of $PQ$.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $(5,4)$.
+  \item $(1,-2)$.
+  \item $(5,5)$.
+  \item $(2.5,4.5)$.
+  \item Midpoint $(1,1)$.
+  \item $(2(2)-(-1),\,2(5)-3)=(5,7)$.
+  \item $(-1,5)$.
+  \item $(-4,1)$.
+  \item $(2(0)-3,\,2(0)-(-4))=(-3,4)$.
+  \item $\left(2,4\right)$.
+  \item $AB:(3,0)$, $AC:(0,4)$, $BC:(3,4)$.
+  \item $(3,1.5)$.
+  \item $Q=(7,4)$; $PQ=\sqrt{6^2+6^2}=\sqrt{72}=6\sqrt2$.
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

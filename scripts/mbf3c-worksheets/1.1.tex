@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MBF3C \textperiodcentered{} 1.1}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 1.1 --- Expanding \& Factoring Quadratics}\\[2pt]
+{\small Grade 11 Foundations for College Mathematics (MBF3C) \textperiodcentered{} Unit 1: Quadratic Relations}
+\end{center}
+
+\begin{ideabox}
+Expanding removes brackets; factoring reverses it. Move between the two forms of a quadratic.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Distribute and FOIL: $(x+p)(x+q)=x^2+(p+q)x+pq$.
+  \item Special products: $(a\pm b)^2$ and $(a-b)(a+b)=a^2-b^2$.
+  \item Factor: common factor first, then two numbers with product $c$, sum $b$.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Expanding}To \textbf{expand}, multiply every term of one bracket by every term of the other, then collect like terms; FOIL handles two binomials.
+\lh{Factoring}\textbf{Factoring} reverses expanding: pull out any common factor, then for $x^2+bx+c$ find two numbers multiplying to $c$ and adding to $b$.
+\lh{Check both ways}Expanding and factoring undo each other, so multiply your factors back to confirm the result.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Distribute}
+Expand $3(x+4)$.\soln Multiply each term by 3: $3x+12$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- FOIL}
+Expand $(x+2)(x+3)$.\soln First, Outer, Inner, Last: $x^2+3x+2x+6=x^2+5x+6$ — the factored and expanded forms are the same parabola (x-intercepts $-2,-3$):\eplot{-7}{2}{-3}{8}{\addplot[exblue,very thick,domain=-6.2:0.8]{x^2+5*x+6};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(-2,0) (-3,0)};}
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Perfect square}
+Expand $(x+5)^2$.\soln $x^2+2(5)x+25=x^2+10x+25$ (not $x^2+25$).
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Difference of squares}
+Expand $(x-4)(x+4)$.\soln Middle terms cancel: $x^2-16$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Factor a trinomial}
+Factor $x^2+7x+12$.\soln Product $12$, sum $7$: $3$ and $4$. $(x+3)(x+4)$:\eplot{-7}{1}{-3}{8}{\addplot[exblue,very thick,domain=-6.2:0.2]{x^2+7*x+12};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(-3,0) (-4,0)};}
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Common factor}
+Factor $2x^2+8x$.\soln GCF $2x$: $2x(x+4)$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Mixed signs}
+Factor $x^2-x-6$.\soln Product $-6$, sum $-1$: $-3,2$. $(x-3)(x+2)$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Binomial product}
+Expand $(2x+1)(x+3)$.\soln $2x^2+6x+x+3=2x^2+7x+3$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Difference of squares}
+Factor $x^2-9$.\soln $(x-3)(x+3)$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Expand $5(x-2)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Expand $x(3x+4)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Expand $(x+4)(x+5)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Expand $(x-3)^2$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Expand $(x-6)(x+6)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Factor $x^2+8x+15$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Factor $x^2-2x-15$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Factor $4x^2+8x$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Factor $x^2-7x+10$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Factor $x^2-25$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Expand $(2x+3)(x-1)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Factor $x^2+6x+9$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Expand $(x+2)(x^2-3x+1)$.\workspace{3cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Expand $5(x-2)$.
+  \item Expand $x(3x+4)$.
+  \item Expand $(x+4)(x+5)$.
+  \item Expand $(x-3)^2$.
+  \item Expand $(x-6)(x+6)$.
+  \item Factor $x^2+8x+15$.
+  \item Factor $x^2-2x-15$.
+  \item Factor $4x^2+8x$.
+  \item Factor $x^2-7x+10$.
+  \item Factor $x^2-25$.
+  \item Expand $(2x+3)(x-1)$.
+  \item Factor $x^2+6x+9$.
+  \item Expand $(x+2)(x^2-3x+1)$.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $5x-10$
+  \item $3x^2+4x$
+  \item $x^2+9x+20$
+  \item $x^2-6x+9$
+  \item $x^2-36$
+  \item $(x+3)(x+5)$
+  \item $(x-5)(x+3)$
+  \item $4x(x+2)$
+  \item $(x-2)(x-5)$
+  \item $(x-5)(x+5)$
+  \item $2x^2+x-3$
+  \item $(x+3)^2$
+  \item $x^3-x^2-5x+2$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

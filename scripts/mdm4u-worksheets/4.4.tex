@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MDM4U \textperiodcentered{} 4.4}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 4.4 --- The Normal Approximation to the Binomial}\\[2pt]
+{\small Grade 12 Mathematics of Data Management (MDM4U) \textperiodcentered{} Unit 4: Continuous \& Normal Distributions}
+\end{center}
+
+\begin{ideabox}
+When $n$ is large with $np\ge5$ and $nq\ge5$, a binomial is close to a normal with $\mu=np$ and $\sigma=\sqrt{npq}$. Apply a continuity correction of $\pm0.5$ when switching from a count to a continuous range.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Check $np\ge5$ and $nq\ge5$ before approximating.
+  \item $\mu=np$, $\sigma=\sqrt{npq}$.
+  \item Continuity correction: widen the interval by $0.5$ to include the boundary count.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Why approximate}When $n$ is large, adding binomial terms one by one is tedious. If $np\ge5$ and $n(1-p)\ge5$, the binomial is close to \textbf{normal}.
+\lh{Match the parameters}Use $\mu=np$ and $\sigma=\sqrt{np(1-p)}$, then treat the count as a normal variable and work with z-scores.
+\lh{Continuity correction}Since a discrete count is modelled by a continuous curve, adjust by $\pm0.5$ — for example $P(X\ge10)$ becomes $P(X>9.5)$ — for a sharper estimate.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Check conditions; find mu, sigma}
+$n=50,\ p=0.4$. Can we approximate? Find $\mu$ and $\sigma$.\soln $np=20,\ nq=30$ (both $\ge5$): yes. $\mu=20$, $\sigma=\sqrt{12}\approx3.46$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- At least (continuity)}
+With $n=50,\ p=0.4$, find $P(X\ge25)$.\soln $P(X>24.5)$: $z=\tfrac{24.5-20}{3.46}=1.30$; $1-\Phi(1.30)=0.0968$.\ncurve{1.3}{3.8}{}
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- At most (continuity)}
+With $n=50,\ p=0.4$, find $P(X\le15)$.\soln $P(X<15.5)$: $z=\tfrac{15.5-20}{3.46}=-1.30$; $\Phi(-1.30)=0.0968$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Exactly $k$ (two half-steps)}
+With $n=50,\ p=0.4$, estimate $P(X=20)$.\soln $P(19.5<X<20.5)$: $z=\pm0.14$; $\Phi(0.14)-\Phi(-0.14)\approx0.111$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Coin tosses}
+$n=100,\ p=0.5$. Find $P(X\ge60)$.\soln $\mu=50,\ \sigma=5$; $P(X>59.5)$: $z=1.9$; $1-\Phi(1.9)=0.0287$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Between two counts}
+$n=100,\ p=0.5$. Find $P(45\le X\le55)$.\soln $P(44.5<X<55.5)$: $z=\pm1.1$; $\Phi(1.1)-\Phi(-1.1)=0.7286$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Direction of the correction}
+For $n=80,\ p=0.5$, which boundary do you use for $P(X<40)$ vs. $P(X\le40)$?\soln $P(X<40)\to39.5$; $P(X\le40)\to40.5$ (widen to include the boundary count).
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- When you cannot approximate}
+$n=20,\ p=0.1$. Is the normal approximation valid?\soln $np=2<5$: no --- use the exact binomial.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Baseball (three parts)}
+$n=64,\ p=0.5$. Find \\ \textbf{(a)} $\mu$ and $\sigma$; \\ \textbf{(b)} $P(X\ge40)$; \\ \textbf{(c)} which correction to use.\soln (a) $\mu=32,\ \sigma=4$. (b) $P(X>39.5)$: $z=1.88$; $1-\Phi(1.88)=0.0301$. (c) use $39.5$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+$n=50,\ p=0.4$. Find $\mu$ and $\sigma$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+$n=40,\ p=0.2$. Is the normal approximation valid? Justify.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+$n=100,\ p=0.5$. Find $P(X\ge60)$ with continuity correction.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+$n=100,\ p=0.5$. Find $P(X\le40)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+$n=200,\ p=0.1$. Find $\mu$ and $\sigma$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+$n=64,\ p=0.5$. Find $P(X>40)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+$n=50,\ p=0.5$. Estimate $P(X=25)$ with continuity correction.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+For $P(X<30)$, which continuity boundary do you use?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+$n=15,\ p=0.1$. Can you use the normal approximation?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+$n=400,\ p=0.5$. Find $\mu$ and $\sigma$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+$n=100,\ p=0.3$. Find $P(X\le25)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+$n=100,\ p=0.5$. Find $P(45\le X\le55)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+$n=64,\ p=0.5$. Find \\ \textbf{(a)} $\mu,\sigma$; \\ \textbf{(b)} $P(X\ge40)$; \\ \textbf{(c)} the continuity boundary for $X\ge40$.\workspace{3.4cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $n=50,\ p=0.4$. Find $\mu$ and $\sigma$.
+  \item $n=40,\ p=0.2$. Is the normal approximation valid? Justify.
+  \item $n=100,\ p=0.5$. Find $P(X\ge60)$ with continuity correction.
+  \item $n=100,\ p=0.5$. Find $P(X\le40)$.
+  \item $n=200,\ p=0.1$. Find $\mu$ and $\sigma$.
+  \item $n=64,\ p=0.5$. Find $P(X>40)$.
+  \item $n=50,\ p=0.5$. Estimate $P(X=25)$ with continuity correction.
+  \item For $P(X<30)$, which continuity boundary do you use?
+  \item $n=15,\ p=0.1$. Can you use the normal approximation?
+  \item $n=400,\ p=0.5$. Find $\mu$ and $\sigma$.
+  \item $n=100,\ p=0.3$. Find $P(X\le25)$.
+  \item $n=100,\ p=0.5$. Find $P(45\le X\le55)$.
+  \item $n=64,\ p=0.5$. Find \\ \textbf{(a)} $\mu,\sigma$; \\ \textbf{(b)} $P(X\ge40)$; \\ \textbf{(c)} the continuity boundary for $X\ge40$.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $\mu=20,\ \sigma=\sqrt{12}\approx3.46$
+  \item $np=8,\ nq=32\ge5$: yes
+  \item $P(X>59.5),\ z=1.9,\ 0.0287$
+  \item $P(X<40.5),\ z=-1.9,\ 0.0287$
+  \item $\mu=20,\ \sigma=\sqrt{18}\approx4.24$
+  \item $P(X>40.5),\ z=2.13,\ 0.0166$
+  \item $P(24.5<X<25.5)\approx0.113$
+  \item $29.5$
+  \item $np=1.5<5$: no
+  \item $\mu=200,\ \sigma=10$
+  \item $P(X<25.5),\ z=-0.98,\ 0.1635$
+  \item $0.7286$
+  \item (a) $32,\ 4$; (b) $z=1.88,\ 0.0301$; (c) $39.5$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

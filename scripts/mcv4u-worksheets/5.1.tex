@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MCV4U \textperiodcentered{} 5.1}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 5.1 --- Optimization}\\[2pt]
+{\small Grade 12 Calculus and Vectors (MCV4U) \textperiodcentered{} Unit 5: Applications of Derivatives}
+\end{center}
+
+\begin{ideabox}
+Write the quantity to optimize, reduce it to one variable using the constraint, solve $Q'=0$, and verify.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Define a variable; write $Q$.
+  \item Use the constraint to make $Q$ one-variable; state the domain.
+  \item Solve $Q'=0$; verify with the 1st/2nd derivative test.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Best possible value}\textbf{Optimization} finds a maximum or minimum in a real situation — largest area, least cost, shortest time.
+\lh{The strategy}Write the quantity to optimize as a function of one variable (using any constraint), then find its critical points on the valid domain.
+\lh{Confirm the extreme}Use the first or second derivative test, and check the endpoints, to confirm you found the true maximum or minimum.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Max area, fixed perimeter}
+A pen uses 40 m of fence. Maximize the area.\soln $A=x(20-x)$; $A'=20-2x=0\Rightarrow x=10$; $A''=-2<0$. Square $10\times10$, area $100$ m²:\eplot{0}{20}{0}{120}{\addplot[exblue,very thick,domain=0:20]{x*(20-x)};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(10,100)};}
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Wall on one side}
+Only 3 sides fenced with 20 m. Maximize the area.\soln $A=x(20-2x)$; $A'=20-4x=0\Rightarrow x=5$, length $10$; area $50$ m².
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Minimize a sum}
+For $x>0$, minimize $f(x)=x+\dfrac{16}{x}$.\soln $f'=1-\dfrac{16}{x^2}=0\Rightarrow x=4$; $f''>0$; min value $8$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Max-volume open box}
+Cut side-$x$ squares from a $12\times12$ sheet; fold into an open box. Maximize the volume.\soln $V=x(12-2x)^2$; $V'=(12-2x)(12-6x)=0\Rightarrow x=2$; $V=128$ cm³.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Maximum profit}
+Maximize $P(x)=-2x^2+40x-100$.\soln $P'=-4x+40=0\Rightarrow x=10$; $P(10)=100$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Max product}
+Two positive numbers sum to 12. Maximize the product.\soln $P=x(12-x)$; $P'=12-2x=0\Rightarrow x=6$; product $36$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Max area}
+Maximize the area of a rectangle with 60 m of fence.\soln $15\times15$, area $225$ m².
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Minimize a sum}
+For $x>0$, minimize $f(x)=x+\dfrac{9}{x}$.\soln $1-\dfrac9{x^2}=0\Rightarrow x=3$; min value $6$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Maximum value}
+Maximize $P(x)=-x^2+10x$.\soln $P'=-2x+10=0\Rightarrow x=5$; $P(5)=25$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Two positive numbers sum to 20. Maximize the product.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Maximize the area of a rectangle with 80 m of fence.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+For $x>0$, minimize $f(x)=x+\dfrac{25}{x}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Maximize $P(x)=-x^2+8x$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+A 3-sided pen uses 40 m of fence. Maximize the area.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Two positive numbers sum to 30. Maximize the product.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+For $x>0$, minimize $f(x)=x+\dfrac{4}{x}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Maximize $P(x)=-3x^2+30x$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Cut side-$x$ squares from a $6\times6$ sheet for an open box. Find $x$ that maximizes the volume.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Maximize the area of a rectangle with 100 m of fence.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+For $x>0$, minimize $f(x)=x+\dfrac1{x}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Maximize $P(x)=-2x^2+12x-5$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+A farmer has 240 m of fence to make two identical adjacent rectangular pens (so three lengths of fence run one way). Maximize the total area.\workspace{4cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Two positive numbers sum to 20. Maximize the product.
+  \item Maximize the area of a rectangle with 80 m of fence.
+  \item For $x>0$, minimize $f(x)=x+\dfrac{25}{x}$.
+  \item Maximize $P(x)=-x^2+8x$.
+  \item A 3-sided pen uses 40 m of fence. Maximize the area.
+  \item Two positive numbers sum to 30. Maximize the product.
+  \item For $x>0$, minimize $f(x)=x+\dfrac{4}{x}$.
+  \item Maximize $P(x)=-3x^2+30x$.
+  \item Cut side-$x$ squares from a $6\times6$ sheet for an open box. Find $x$ that maximizes the volume.
+  \item Maximize the area of a rectangle with 100 m of fence.
+  \item For $x>0$, minimize $f(x)=x+\dfrac1{x}$.
+  \item Maximize $P(x)=-2x^2+12x-5$.
+  \item A farmer has 240 m of fence to make two identical adjacent rectangular pens (so three lengths of fence run one way). Maximize the total area.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $10,10$; product $100$
+  \item $20\times20$, $400$ m²
+  \item $x=5$; min $10$
+  \item $x=4$; $P=16$
+  \item $10\times20$, $200$ m²
+  \item $15,15$; product $225$
+  \item $x=2$; min $4$
+  \item $x=5$; $P=75$
+  \item $x=1$; $V=16$
+  \item $25\times25$, $625$ m²
+  \item $x=1$; min $2$
+  \item $x=3$; $P=13$
+  \item width $x$, $3x+2L=240$; $A=x\cdot\tfrac{240-3x}{2}$, $x=40$, $A=2400$ m²
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

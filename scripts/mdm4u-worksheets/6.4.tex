@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MDM4U \textperiodcentered{} 6.4}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 6.4 --- Non-Linear Regression \& Modelling}\\[2pt]
+{\small Grade 12 Mathematics of Data Management (MDM4U) \textperiodcentered{} Unit 6: Two-Variable Statistics}
+\end{center}
+
+\begin{ideabox}
+When a scatter curves, a line is the wrong tool. Read the pattern: constant \emph{first differences} $\Rightarrow$ linear; constant \emph{second differences} $\Rightarrow$ quadratic; constant \emph{ratios} $\Rightarrow$ exponential. Compare candidate models by $r^{2}$.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Constant first differences $\Rightarrow$ linear; constant second differences $\Rightarrow$ quadratic.
+  \item Constant ratios $\Rightarrow$ exponential.
+  \item Pick the model from the scatter's shape; confirm with $r^{2}$ and a residual check.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{When a line will not do}Many relationships curve. If a scatter plot bends, a \textbf{non-linear} model — quadratic, exponential, or power — can fit far better than a straight line.
+\lh{Choosing a model}Match the model to the shape and the context: multiplying growth suggests exponential, a symmetric arch suggests quadratic. Compare candidates with $r^2$.
+\lh{Using the model}Once fitted with technology, the equation predicts values — and again, interpolation deserves more trust than extrapolation.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Constant differences}
+A table has first differences $3,3,3$. Which model?\soln Linear --- a constant rate of change.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Constant ratios}
+Successive values have ratios $2,2,2$. Which model?\soln Exponential --- multiplied by a constant factor.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Second differences}
+First differences change but second differences are constant. Which model?\soln Quadratic.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Identify from a table}
+For $y=1,4,9,16$, which model?\soln Perfect squares --- quadratic ($y=x^{2}$).
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Exponential growth}
+A colony doubles each hour. Which model, and what is special about it?\soln Exponential; it has a constant ratio ($2$) rather than a constant difference.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Shape to model}
+A projectile's height rises then falls in one arch. Which model?\soln Quadratic --- a single symmetric arch.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Compare by r squared}
+Curved data: a line gives $r^{2}=0.7$, a quadratic gives $r^{2}=0.99$. Which model?\soln The quadratic --- it explains far more of the variation.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Extrapolation caution}
+An exponential model of growth is extended 50 years out. What is the risk?\soln Unbounded growth is unrealistic long-term; extrapolation of an exponential is especially unreliable.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Doubling data (multi-part)}
+For $y=3,6,12,24$ at $x=1,2,3,4$, find \\ \textbf{(a)} the model type; \\ \textbf{(b)} an equation; \\ \textbf{(c)} the value at $x=5$.\soln (a) exponential (ratio $2$). (b) $y=3\cdot2^{\,x-1}$. (c) $48$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+First differences $3,3,3$. Which model?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Ratios $2,2,2$. Which model?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Second differences are constant. Which model?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+A single-arch scatter (rise then fall). Which model?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+A population that doubles each year. Which model?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+For $y=2,4,8,16$, what is the next value?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+For $y=1,4,9,16$, which model?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Curved data: which fits better, $r^{2}=0.99$ (quadratic) or $0.7$ (linear)?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Constant first differences of $5$. What is the slope of the linear model?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+For $y=5,10,15,20$, state the model and the next value.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Bacteria triple every hour. Which model?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Is fitting a line to clearly curved data a good idea?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+For $y=3,6,12,24$ at $x=1,2,3,4$, find \\ \textbf{(a)} the model; \\ \textbf{(b)} an equation; \\ \textbf{(c)} the value at $x=5$.\workspace{3cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item First differences $3,3,3$. Which model?
+  \item Ratios $2,2,2$. Which model?
+  \item Second differences are constant. Which model?
+  \item A single-arch scatter (rise then fall). Which model?
+  \item A population that doubles each year. Which model?
+  \item For $y=2,4,8,16$, what is the next value?
+  \item For $y=1,4,9,16$, which model?
+  \item Curved data: which fits better, $r^{2}=0.99$ (quadratic) or $0.7$ (linear)?
+  \item Constant first differences of $5$. What is the slope of the linear model?
+  \item For $y=5,10,15,20$, state the model and the next value.
+  \item Bacteria triple every hour. Which model?
+  \item Is fitting a line to clearly curved data a good idea?
+  \item For $y=3,6,12,24$ at $x=1,2,3,4$, find \\ \textbf{(a)} the model; \\ \textbf{(b)} an equation; \\ \textbf{(c)} the value at $x=5$.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item linear
+  \item exponential
+  \item quadratic
+  \item quadratic
+  \item exponential
+  \item $32$
+  \item quadratic ($y=x^{2}$)
+  \item the quadratic
+  \item $5$
+  \item linear; next $=25$
+  \item exponential
+  \item no
+  \item (a) exponential; (b) $y=3\cdot2^{\,x-1}$; (c) $48$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

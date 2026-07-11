@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MDM4U \textperiodcentered{} 4.2}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 4.2 --- The Normal Distribution \& z-Scores}\\[2pt]
+{\small Grade 12 Mathematics of Data Management (MDM4U) \textperiodcentered{} Unit 4: Continuous \& Normal Distributions}
+\end{center}
+
+\begin{ideabox}
+A normal curve is symmetric about its mean $\mu$ with spread $\sigma$. The $z$-score $z=\dfrac{x-\mu}{\sigma}$ measures how many standard deviations $x$ sits from the mean. The empirical rule gives $68\%$--$95\%$--$99.7\%$ within $1,2,3\,\sigma$.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item $z=\dfrac{x-\mu}{\sigma}$; invert with $x=\mu+z\sigma$.
+  \item Empirical rule: $\approx68\%,95\%,99.7\%$ within $\pm1,\pm2,\pm3\,\sigma$.
+  \item Standardizing lets you compare values from different distributions.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{The bell curve}The \textbf{normal} distribution is a symmetric bell shape set by its mean $\mu$ and standard deviation $\sigma$. Data clusters near the mean and thins out in the tails.
+\lh{The z-score}A \textbf{z-score} $z=\dfrac{x-\mu}{\sigma}$ says how many standard deviations a value sits from the mean, turning any normal variable into the \emph{standard} normal ($\mu=0,\sigma=1$).
+\lh{The 68-95-99.7 rule}About $68\%$ of data lies within $1\sigma$ of the mean, $95\%$ within $2\sigma$, and $99.7\%$ within $3\sigma$ — a quick way to estimate probabilities.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Compute a z-score}
+$X\sim N(100,15)$. Find the $z$-score of $x=130$.\soln $z=\dfrac{130-100}{15}=2$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Empirical rule (one sigma)}
+$X\sim N(50,5)$. What percent lies between $45$ and $55$?\soln Within $\pm1\sigma$: about $68\%$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Empirical rule (two sigma)}
+$X\sim N(50,5)$. What percent lies between $40$ and $60$?\soln Within $\pm2\sigma$: about $95\%$.\ncurve{-2}{2}{}
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Invert a z-score}
+$X\sim N(200,10)$. Find $x$ when $z=-1.5$.\soln $x=\mu+z\sigma=200-15=185$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Compare with z-scores}
+Test A: $80$ on $N(70,5)$. Test B: $90$ on $N(80,8)$. Which is relatively better?\soln $z_A=2$, $z_B=1.25$; Test A is stronger.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Empirical rule tail}
+$X\sim N(500,100)$. Estimate $P(X>700)$.\soln $700$ is $+2\sigma$; the upper tail beyond $+2\sigma$ is about $2.5\%$.\ncurve{2}{3.8}{}
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Asymmetric empirical region}
+Estimate $P(\mu-\sigma<X<\mu+2\sigma)$.\soln $\tfrac{68}{2}+\tfrac{95}{2}=34\%+47.5\%=81.5\%$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Find sigma from a z-score}
+$x=90$ has $z=1.5$ and $\mu=75$. Find $\sigma$.\soln $1.5\sigma=90-75=15\Rightarrow\sigma=10$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Heights (three parts)}
+Heights are $N(170,8)$ cm. Find \\ \textbf{(a)} $z$ for $186$; \\ \textbf{(b)} percent taller than $178$; \\ \textbf{(c)} the middle-$95\%$ range.\soln (a) $z=2$. (b) $178$ is $+1\sigma$; about $16\%$ are above. (c) $170\pm16=$ $154$ to $186$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+$X\sim N(60,4)$. Find the $z$-score of $x=68$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+$X\sim N(100,15)$. Find the $z$-score of $x=85$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+$X\sim N(50,10)$. What percent lies between $40$ and $60$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+$X\sim N(200,20)$. Find $x$ when $z=1.5$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+$X\sim N(500,50)$. What percent lies between $400$ and $600$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Which is better: $85$ on $N(75,5)$ or $92$ on $N(80,10)$? Use $z$-scores.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+For a standard normal, what percent lies above $z=1$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+$x=48$ has $z=-2$ and $\mu=60$. Find $\sigma$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+$X\sim N(100,10)$. Estimate $P(90<X<120)$ with the empirical rule.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+$X\sim N(170,8)$. Find the $z$-score of $154$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+$X\sim N(25,3)$. Find $x$ when $z=-1$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+What percent of a normal distribution lies beyond $\pm3\sigma$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+IQ scores are $N(100,15)$. Find \\ \textbf{(a)} $z$ for $130$; \\ \textbf{(b)} percent above $130$; \\ \textbf{(c)} the middle-$68\%$ range.\workspace{3cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $X\sim N(60,4)$. Find the $z$-score of $x=68$.
+  \item $X\sim N(100,15)$. Find the $z$-score of $x=85$.
+  \item $X\sim N(50,10)$. What percent lies between $40$ and $60$?
+  \item $X\sim N(200,20)$. Find $x$ when $z=1.5$.
+  \item $X\sim N(500,50)$. What percent lies between $400$ and $600$?
+  \item Which is better: $85$ on $N(75,5)$ or $92$ on $N(80,10)$? Use $z$-scores.
+  \item For a standard normal, what percent lies above $z=1$?
+  \item $x=48$ has $z=-2$ and $\mu=60$. Find $\sigma$.
+  \item $X\sim N(100,10)$. Estimate $P(90<X<120)$ with the empirical rule.
+  \item $X\sim N(170,8)$. Find the $z$-score of $154$.
+  \item $X\sim N(25,3)$. Find $x$ when $z=-1$.
+  \item What percent of a normal distribution lies beyond $\pm3\sigma$?
+  \item IQ scores are $N(100,15)$. Find \\ \textbf{(a)} $z$ for $130$; \\ \textbf{(b)} percent above $130$; \\ \textbf{(c)} the middle-$68\%$ range.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $2$
+  \item $-1$
+  \item $68\%$
+  \item $230$
+  \item $95\%$
+  \item $z=2$ vs $1.2$; the $85$ is better
+  \item $\approx16\%$
+  \item $\sigma=6$
+  \item $34\%+47.5\%=81.5\%$
+  \item $-2$
+  \item $22$
+  \item $\approx0.3\%$
+  \item (a) $2$; (b) $\approx2.5\%$; (c) $85$ to $115$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

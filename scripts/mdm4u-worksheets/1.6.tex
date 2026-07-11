@@ -1,0 +1,166 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MDM4U \textperiodcentered{} 1.6}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 1.6 --- Combinations with Cases \& the Complement}\\[2pt]
+{\small Grade 12 Mathematics of Data Management (MDM4U) \textperiodcentered{} Unit 1: Counting, Permutations \& Combinations}
+\end{center}
+
+\begin{ideabox}
+Rich selection problems combine moves: split into disjoint \emph{cases} and add, or subtract the unwanted (the \emph{complement}); \emph{choose then arrange} when order matters after selecting; and fix required or forbidden members before counting.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Direct: break \emph{at least}/\emph{at most} into disjoint cases and add (rule of sum).
+  \item Indirect: when the cases pile up, count $\text{total}-\text{unwanted}$ (the complement).
+  \item Choose \emph{then} arrange: $\dbinom{n}{r}\cdot r!={}_nP_r$ pairs a selection with its orderings.
+  \item Lock in required members and delete forbidden ones \emph{before} you count.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Break it into cases}When a selection must meet a condition like \emph{at least 2 women}, split it into clean cases (exactly 2, exactly 3, \dots), count each with combinations, and \textbf{add} them.
+\lh{The complement shortcut}For \emph{at least one} problems it is usually faster to count the opposite — \emph{none} — and subtract: $P(\text{at least one})=\text{total}-\text{none}$.
+\lh{Do not double-count}When cases could overlap, make sure every outcome is counted exactly once. Splitting on whether a specific person is in or out gives non-overlapping cases.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Direct method: cases and the rule of sum}
+A 4-person fundraising committee is chosen from 5 seniors and 4 juniors and must include \emph{at least 2 seniors}. How many committees are possible?\soln Split into disjoint cases on the number of seniors, then add. \emph{2 seniors:} $\dbinom{5}{2}\dbinom{4}{2}=10\cdot6=60$. \emph{3 seniors:} $\dbinom{5}{3}\dbinom{4}{1}=10\cdot4=40$. \emph{4 seniors:} $\dbinom{5}{4}\dbinom{4}{0}=5$. By the rule of sum, $60+40+5=105$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Indirect method: the complement}
+The same committee (4 from 5 seniors, 4 juniors) must now include \emph{at least 1 senior}. Find a faster route than cases.\soln A direct count needs four cases; instead subtract the one unwanted outcome (\emph{all juniors}) from the total: $\dbinom{9}{4}-\dbinom{4}{4}=126-1=125$. \emph{When the cases pile up, the complement wins.}
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Choose, then arrange}
+A DJ builds a set from 3 of 7 pop tracks and 2 of 5 rock tracks, then plays all 5 tracks in some order. How many different sets are possible?\soln First \emph{choose} the tracks, then \emph{arrange} them: $\dbinom{7}{3}\dbinom{5}{2}\times5!=35\cdot10\cdot120=42\,000$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Combination vs. permutation}
+Twenty runners enter a race. In how many ways can (a) 3 be picked for a random drug test, (b) the gold, silver, and bronze medals be awarded?\soln (a) Order is irrelevant: $\dbinom{20}{3}=1140$. (b) Order matters: $_{20}P_3=6840=3!\cdot\dbinom{20}{3}$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Selecting from two groups (exactly)}
+A 5-person club is chosen from 8 boys and 4 girls with \emph{exactly} 3 boys. How many clubs?\soln $\dbinom{8}{3}\dbinom{4}{2}=56\cdot6=336$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Required and forbidden members}
+A relay squad of 4 is picked from 12 athletes, but the captain \emph{must} be included and 2 injured athletes \emph{cannot} be. How many squads?\soln Place the captain, remove the 2 injured, then choose 3 from the other 9: $\dbinom{9}{3}=84$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- At least one (complement, cards)}
+How many 5-card hands from a standard deck contain at least one ace?\soln Total $-$ no aces: $\dbinom{52}{5}-\dbinom{48}{5}=886\,656$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Counting subsets (how many totals)}
+A wallet holds a \$5, a \$10, a \$20, and a \$50 bill. How many different non-zero amounts can be made by choosing some of the bills?\soln Each bill is in or out, and every subset gives a different total: $2^4-1=15$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- A layered hand: exactly one pair}
+How many 5-card hands are exactly one pair?\soln Pair's rank $13$ and its two suits $\dbinom{4}{2}$; three other ranks $\dbinom{12}{3}$, one suit each $4^3$: $13\dbinom{4}{2}\dbinom{12}{3}4^3=1\,098\,240$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+From 8 people, how many 3-person committees \emph{exclude} one particular person?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+From 7 women and 5 men, how many ways to choose 3 women and 2 men for a panel?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+A pizzeria offers 9 toppings. How many pizzas have exactly 3 toppings?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+A reading club of 5 is formed from 7 women and 4 men with at least 3 women. How many clubs?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+A coach chooses 4 of 9 sprinters and assigns them to legs 1--4 of a relay. How many line-ups? (Choose, then arrange.)\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Twenty raffle tickets are drawn for 3 prizes. How many results if the prizes are \\ \textbf{(a)} identical, \\ \textbf{(b)} a 1st, 2nd, and 3rd prize?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+A test has 12 questions; you answer exactly 8, and question 1 is compulsory. How many ways to pick your questions?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+A teacher splits 10 distinct books, giving 3 to Alia and 4 to Ben (keeping the rest). In how many ways?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+An ice-cream sundae takes at least one of 8 available toppings. How many sundaes?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+From 20 books (12 fiction, 8 non-fiction), how many ways to choose 5 with at least one non-fiction?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+12 points lie on a circle. How many \\ \textbf{(a)} chords (segments joining two points), \\ \textbf{(b)} triangles with vertices among the points can be drawn?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+How many positive divisors does $1200$ have? (Hint: $1200=2^4\cdot3\cdot5^2$.)\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+From a standard 52-card deck, how many 5-card hands are exactly \emph{two pair}?\workspace{3.4cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item From 8 people, how many 3-person committees \emph{exclude} one particular person?
+  \item From 7 women and 5 men, how many ways to choose 3 women and 2 men for a panel?
+  \item A pizzeria offers 9 toppings. How many pizzas have exactly 3 toppings?
+  \item A reading club of 5 is formed from 7 women and 4 men with at least 3 women. How many clubs?
+  \item A coach chooses 4 of 9 sprinters and assigns them to legs 1--4 of a relay. How many line-ups? (Choose, then arrange.)
+  \item Twenty raffle tickets are drawn for 3 prizes. How many results if the prizes are \\ \textbf{(a)} identical, \\ \textbf{(b)} a 1st, 2nd, and 3rd prize?
+  \item A test has 12 questions; you answer exactly 8, and question 1 is compulsory. How many ways to pick your questions?
+  \item A teacher splits 10 distinct books, giving 3 to Alia and 4 to Ben (keeping the rest). In how many ways?
+  \item An ice-cream sundae takes at least one of 8 available toppings. How many sundaes?
+  \item From 20 books (12 fiction, 8 non-fiction), how many ways to choose 5 with at least one non-fiction?
+  \item 12 points lie on a circle. How many \\ \textbf{(a)} chords (segments joining two points), \\ \textbf{(b)} triangles with vertices among the points can be drawn?
+  \item How many positive divisors does $1200$ have? (Hint: $1200=2^4\cdot3\cdot5^2$.)
+  \item From a standard 52-card deck, how many 5-card hands are exactly \emph{two pair}?
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $\dbinom{7}{3}=35$
+  \item $\dbinom{7}{3}\dbinom{5}{2}=35\cdot10=350$
+  \item $\dbinom{9}{3}=84$
+  \item $\dbinom{7}{3}\dbinom{4}{2}+\dbinom{7}{4}\dbinom{4}{1}+\dbinom{7}{5}=210+140+21=371$
+  \item $\dbinom{9}{4}\cdot4!=126\cdot24=3024$
+  \item (a) $\dbinom{20}{3}=1140$; (b) $_{20}P_3=6840$
+  \item $\dbinom{11}{7}=330$
+  \item $\dbinom{10}{3}\dbinom{7}{4}=120\cdot35=4200$
+  \item $2^8-1=255$
+  \item $\dbinom{20}{5}-\dbinom{12}{5}=14\,712$
+  \item (a) $\dbinom{12}{2}=66$; (b) $\dbinom{12}{3}=220$
+  \item $(4{+}1)(1{+}1)(2{+}1)=30$
+  \item $\dbinom{13}{2}\dbinom{4}{2}^2\cdot44=123\,552$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

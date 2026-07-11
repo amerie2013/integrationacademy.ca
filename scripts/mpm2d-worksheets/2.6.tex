@@ -1,0 +1,175 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MPM2D \textperiodcentered{} 2.6}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 2.6 --- Problems Involving Lines \& Line Segments}\\[2pt]
+{\small Grade 10 Academic (MPM2D) \textperiodcentered{} Unit 2: Analytic Geometry}
+\end{center}
+
+\begin{ideabox}
+Combine midpoint, length, and slope tools to solve multi-step geometry problems.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item The \textbf{centroid} (intersection of medians) is the average of all three vertices.
+  \item A point on a \textbf{right bisector} is equidistant from the segment's two endpoints.
+  \item Break each problem into known steps: midpoint, slope, equation, intersection.
+  \item Sketch the situation first --- it reveals which tool you need.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Combining the tools}Richer problems mix midpoint, length, slope, and intersection. Sketch the situation first, then choose the tool each part needs.
+\lh{Typical tasks}Finding where a median meets a side, the centre of a circle through given points, or the shortest distance from a point to a line all reduce to these basics.
+\lh{Plan before computing}Decide the order of steps up front — often a midpoint or slope, then an equation, then an intersection — to keep the algebra under control.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Centroid}
+Find the centroid of $\triangle ABC$ with $A(0,0)$, $B(6,0)$, $C(3,9)$.
+\soln Average the vertices: $\left(\tfrac{0+6+3}{3},\tfrac{0+0+9}{3}\right)=(3,3).$
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Parallel line}
+Find the line through $(1,2)$ parallel to $2x+y=5$.
+\soln $2x+y=5\Rightarrow y=-2x+5$ (slope $-2$). Through $(1,2)$: $y-2=-2(x-1)\Rightarrow y=-2x+4.$
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Perpendicular bisector + intercept}
+Find the perpendicular bisector of $A(2,3)$, $B(8,7)$ and its $y$-intercept.
+\soln Midpoint $(5,5)$; slope $AB=\tfrac{4}{6}=\tfrac23$, perpendicular $-\tfrac32$: $y-5=-\tfrac32(x-5)\Rightarrow y=-\tfrac32x+\tfrac{25}{2}$. The $y$-intercept is $\tfrac{25}{2}=12.5.$
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Equidistant point on an axis}
+Find the point on the $x$-axis equidistant from $A(1,2)$ and $B(5,4)$.
+\soln Let the point be $(x,0)$: $(x-1)^2+4=(x-5)^2+16\Rightarrow -2x+5=-10x+41\Rightarrow 8x=36\Rightarrow x=4.5$. The point is $(4.5,0).$
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Length of a median}
+In $\triangle ABC$ with $A(-2,0)$, $B(4,0)$, $C(1,6)$, find the length of the median from $C$.
+\soln Midpoint $AB=(1,0)$; length from $C(1,6)$ is $\sqrt{0^2+6^2}=6.$
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Altitude through the origin}
+Find the altitude from $A(0,0)$ to $BC$, where $B(2,4)$, $C(6,0)$.
+\soln Slope $BC=\tfrac{0-4}{6-2}=-1$, so altitude slope $=1$ through the origin: $y=x.$
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Right-bisector check}
+Verify that $(3,2)$ lies on the right bisector of $A(1,0)$, $B(5,4)$.
+\soln Distance to $A=\sqrt{4+4}=\sqrt8$; distance to $B=\sqrt{4+4}=\sqrt8$. Equal, so $(3,2)$ is on the right bisector.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Circle through a midpoint}
+Find the equation of the circle (centre origin) through the midpoint of $(6,0)$ and $(0,8)$.
+\soln Midpoint $(3,4)$; $r^2=9+16=25$, so $x^2+y^2=25.$
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Full triangle analysis (harder)}
+For $\triangle ABC$ with $A(0,0)$, $B(6,0)$, $C(0,8)$, find (a) the perimeter, (b) the median from $C$, (c) the centroid.
+\soln (a) $AB=6$, $AC=8$, $BC=\sqrt{36+64}=10$; perimeter $=24$. (b) Midpoint $AB=(3,0)$; slope from $C(0,8)$ is $\tfrac{0-8}{3-0}=-\tfrac83$: $y=-\tfrac83x+8$. (c) Centroid $=\left(\tfrac{0+6+0}{3},\tfrac{0+0+8}{3}\right)=\left(2,\tfrac83\right).$
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Find the centroid of $\triangle ABC$ with $A(0,0)$, $B(9,0)$, $C(3,6)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Find the line through $(2,-1)$ parallel to $y=3x+4$.\workspace{2.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Find the line through $(0,4)$ perpendicular to $y=\tfrac12x-2$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Find the perpendicular bisector of $A(0,0)$, $B(4,6)$.\workspace{2.6cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Find the point on the $x$-axis equidistant from $(0,3)$ and $(6,1)$.\workspace{2.8cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+In $\triangle ABC$ with $A(0,0)$, $B(8,0)$, $C(4,6)$, find the length of the median from $C$.\workspace{2.6cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Find the altitude from $A(0,0)$ to $BC$, where $B(1,3)$, $C(5,1)$.\workspace{2.6cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Verify that $(2,2)$ lies on the right bisector of $A(0,0)$, $B(4,4)$.\workspace{2.6cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Find the equation of the circle (centre origin) through the midpoint of $(8,0)$ and $(0,6)$.\workspace{2.6cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Find where the line $y=2x-1$ meets the line $y=-x+5$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+A triangle has vertices $A(0,0)$, $B(4,0)$, $C(4,3)$. Find its perimeter and centroid.\workspace{2.8cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Find the point on the $y$-axis equidistant from $(3,0)$ and $(-1,4)$.\workspace{2.8cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+For $\triangle ABC$ with $A(-3,0)$, $B(3,0)$, $C(0,9)$, find the perimeter, the median from $C$, and the centroid.\workspace{3.4cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Find the centroid of $\triangle ABC$ with $A(0,0)$, $B(9,0)$, $C(3,6)$.
+  \item Find the line through $(2,-1)$ parallel to $y=3x+4$.
+  \item Find the line through $(0,4)$ perpendicular to $y=\tfrac12x-2$.
+  \item Find the perpendicular bisector of $A(0,0)$, $B(4,6)$.
+  \item Find the point on the $x$-axis equidistant from $(0,3)$ and $(6,1)$.
+  \item In $\triangle ABC$ with $A(0,0)$, $B(8,0)$, $C(4,6)$, find the length of the median from $C$.
+  \item Find the altitude from $A(0,0)$ to $BC$, where $B(1,3)$, $C(5,1)$.
+  \item Verify that $(2,2)$ lies on the right bisector of $A(0,0)$, $B(4,4)$.
+  \item Find the equation of the circle (centre origin) through the midpoint of $(8,0)$ and $(0,6)$.
+  \item Find where the line $y=2x-1$ meets the line $y=-x+5$.
+  \item A triangle has vertices $A(0,0)$, $B(4,0)$, $C(4,3)$. Find its perimeter and centroid.
+  \item Find the point on the $y$-axis equidistant from $(3,0)$ and $(-1,4)$.
+  \item For $\triangle ABC$ with $A(-3,0)$, $B(3,0)$, $C(0,9)$, find the perimeter, the median from $C$, and the centroid.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $\left(\tfrac{0+9+3}{3},\tfrac{0+0+6}{3}\right)=(4,2)$.
+  \item $y=3x-7$.
+  \item Slope $-2$: $y=-2x+4$.
+  \item Mid $(2,3)$, slope $AB=\tfrac32$, perp $-\tfrac23$: $y=-\tfrac23x+\tfrac{13}{3}$.
+  \item $(x-0)^2+9=(x-6)^2+1\Rightarrow x=\tfrac{28}{12}=\tfrac73$: $\left(\tfrac73,0\right)$.
+  \item Mid $AB=(4,0)$; length $=6$.
+  \item Slope $BC=-\tfrac12$, perp $2$: $y=2x$.
+  \item Distance to each $=\sqrt8$ --- yes, equidistant.
+  \item Mid $(4,3)$; $r^2=25$: $x^2+y^2=25$.
+  \item $2x-1=-x+5\Rightarrow x=2$, $y=3$: $(2,3)$.
+  \item Perimeter $3+4+5=12$; centroid $\left(\tfrac83,1\right)$.
+  \item $(0,y)$: $9+y^2=1+(y-4)^2\Rightarrow 9=17-8y\Rightarrow y=1$: $(0,1)$.
+  \item $AC=BC=\sqrt{9+81}=\sqrt{90}=3\sqrt{10}$, $AB=6$; perimeter $6+6\sqrt{10}$; median from $C$: $x=0$; centroid $(0,3)$.
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

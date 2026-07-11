@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MBF3C \textperiodcentered{} 3.3}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 3.3 --- Owning \& Operating a Vehicle}\\[2pt]
+{\small Grade 11 Foundations for College Mathematics (MBF3C) \textperiodcentered{} Unit 3: Personal Finance}
+\end{center}
+
+\begin{ideabox}
+The total cost of ownership adds financing, insurance, fuel, and maintenance — and the car depreciates each year.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Fuel $=\dfrac{\text{km}}{100}\times(\text{L/100 km})\times(\text{price/L})$.
+  \item Depreciation: value $=\text{price}\times(1-r)^{t}$ (exponential decay).
+  \item Cost per km $=\dfrac{\text{total annual cost}}{\text{km/yr}}$.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Fixed and variable costs}Owning a vehicle has \textbf{fixed} costs (insurance, licensing) and \textbf{variable} costs (fuel, maintenance) that depend on use.
+\lh{Depreciation}A vehicle loses value over time, each year worth a percentage of the year before.
+\lh{Budgeting for it}Add up all the costs to see the true expense of owning and operating a vehicle.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Fuel cost}
+12 000 km/yr at 8 L/100 km, fuel \$1.50/L.\soln $\dfrac{12000}{100}\times8\times1.50=120\times8\times1.50=\$1440$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Insurance per month}
+Insurance \$1800/year.\soln $\dfrac{1800}{12}=\$150$/month.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Depreciation}
+A \$30 000 car loses $15\%$/year. Value after 1 year?\soln $30000(0.85)^1=\$25\,500$. Value decays like $0.85^t$:\eplot{-0.5}{6}{-0.5}{2}{\addplot[exblue,very thick,domain=0:6]{0.85^x};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(0,1) (1,0.85)};}
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Total annual cost}
+Financing \$4000, insurance \$1800, fuel \$1440, maintenance \$600.\soln $4000+1800+1440+600=\$7840$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Cost per km}
+Cost per km for \$7840/yr over 12 000 km.\soln $\dfrac{7840}{12000}\approx\$0.65$/km.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Fuel cost}
+10 000 km at 9 L/100 km, \$1.40/L.\soln $100\times9\times1.40=\$1260$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Depreciation}
+A \$25 000 car loses $20\%$/year. Value after 1 year?\soln $25000(0.80)=\$20\,000$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Insurance per month}
+Insurance \$2400/year.\soln $\dfrac{2400}{12}=\$200$/month.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Depreciation (2 years)}
+A \$30 000 car loses $15\%$/year. Value after 2 years?\soln $30000(0.85)^2=30000(0.7225)=\$21\,675$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Yearly fuel: 10 000 km at 9 L/100 km, \$1.40/L.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Insurance \$2400/yr. Monthly cost?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+A \$25 000 car depreciates $20\%$/yr. Value after 1 year?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Total annual cost: financing \$3600, insurance \$2000, fuel \$1500, maintenance \$500.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Cost per km for \$7600/yr over 10 000 km.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Yearly fuel: 15 000 km at 7 L/100 km, \$1.60/L.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+A \$20 000 car depreciates $10\%$/yr. Value after 1 year?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Insurance \$1500/yr. Monthly cost?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+A \$30 000 car depreciates $15\%$/yr. Value after 2 years?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Total annual cost: financing \$5000, insurance \$1800, fuel \$1440, maintenance \$760.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Cost per km for \$9000/yr over 15 000 km.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Yearly fuel: 12 000 km at 10 L/100 km, \$1.50/L.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+A \$28 000 car depreciates $15\%$/yr. Find its value after 3 years.\workspace{3cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Yearly fuel: 10 000 km at 9 L/100 km, \$1.40/L.
+  \item Insurance \$2400/yr. Monthly cost?
+  \item A \$25 000 car depreciates $20\%$/yr. Value after 1 year?
+  \item Total annual cost: financing \$3600, insurance \$2000, fuel \$1500, maintenance \$500.
+  \item Cost per km for \$7600/yr over 10 000 km.
+  \item Yearly fuel: 15 000 km at 7 L/100 km, \$1.60/L.
+  \item A \$20 000 car depreciates $10\%$/yr. Value after 1 year?
+  \item Insurance \$1500/yr. Monthly cost?
+  \item A \$30 000 car depreciates $15\%$/yr. Value after 2 years?
+  \item Total annual cost: financing \$5000, insurance \$1800, fuel \$1440, maintenance \$760.
+  \item Cost per km for \$9000/yr over 15 000 km.
+  \item Yearly fuel: 12 000 km at 10 L/100 km, \$1.50/L.
+  \item A \$28 000 car depreciates $15\%$/yr. Find its value after 3 years.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $\$1260$
+  \item $\$200$
+  \item $\$20\,000$
+  \item $\$7600$
+  \item $\$0.76$/km
+  \item $\$1680$
+  \item $\$18\,000$
+  \item $\$125$
+  \item $\$21\,675$
+  \item $\$9000$
+  \item $\$0.60$/km
+  \item $\$1800$
+  \item $\approx\$17\,195.50$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

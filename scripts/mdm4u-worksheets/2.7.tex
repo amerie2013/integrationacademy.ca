@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MDM4U \textperiodcentered{} 2.7}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 2.7 --- Tree Diagrams \& Probability Tables}\\[2pt]
+{\small Grade 12 Mathematics of Data Management (MDM4U) \textperiodcentered{} Unit 2: Probability}
+\end{center}
+
+\begin{ideabox}
+Multiply probabilities \emph{along} the branches of a tree and add \emph{across} disjoint paths. Trees handle multi-stage experiments; two-way tables organize joint outcomes.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Multiply along a branch (successive stages).
+  \item Add the probabilities of disjoint paths to one outcome.
+  \item Total probability: $P(E)=\sum P(\text{path to }E)$; reverse with a tree for $P(\text{cause}\mid E)$.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Trees show sequences}A \textbf{tree diagram} maps a multi-stage experiment: every branch is an outcome, and the branch probabilities leaving any point add to $1$.
+\lh{Multiply along, add across}Multiply the probabilities \emph{along} a path to get that outcome, then add the probabilities of the \emph{different} paths that satisfy your event.
+\lh{Tables organize outcomes}A probability table lays every combined outcome in a grid, so totals and conditional probabilities can be read straight off.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Two-stage tree}
+Flip a coin; if heads, roll a die. Find $P(\text{heads and a 6})$.\soln Along the branch: $\dfrac12\cdot\dfrac16=\dfrac{1}{12}$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Without replacement}
+Draw 2 from 4 red and 3 blue. Find $P(\text{RR})$ and $P(\text{one of each})$.\soln $P(RR)=\dfrac47\cdot\dfrac36=\dfrac27$; one of each $=\dfrac47\cdot\dfrac36+\dfrac37\cdot\dfrac46=\dfrac{24}{42}=\dfrac47$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Total probability}
+60\% of parts come from factory A (2\% defective), 40\% from B (5\% defective). Find $P(\text{defective})$.\soln $0.6(0.02)+0.4(0.05)=0.012+0.020=0.032$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Reverse the tree (Bayes)}
+From the factories above, find $P(\text{from A}\mid\text{defective})$.\soln $\dfrac{0.012}{0.032}=\dfrac38$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Multi-stage independent}
+Three traffic lights are each green with $P=0.4$. Find $P(\text{all green})$ and $P(\text{exactly one green})$.\soln All: $0.4^3=0.064$. Exactly one: $\dbinom{3}{1}(0.4)(0.6)^2=3(0.4)(0.36)=0.432$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Weighted paths}
+70\% of students study (90\% pass); 30\% don't (40\% pass). Find $P(\text{pass})$.\soln $0.7(0.9)+0.3(0.4)=0.63+0.12=0.75$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Reverse the condition}
+From that quiz model, find $P(\text{studied}\mid\text{passed})$.\soln $\dfrac{0.63}{0.75}=0.84$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Table to joint probability}
+Of 100 people, 40 exercise and diet, 20 exercise only, 25 diet only, 15 neither. Find $P(\text{exercise or diet})$.\soln $\dfrac{40+20+25}{100}=0.85$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Three-draw urn}
+An urn has 5 white and 3 black; draw 3 without replacement. Find \\ \textbf{(a)} $P(\text{WWW})$; \\ \textbf{(b)} $P(\text{exactly 2 white})$.\soln (a) $\dfrac58\cdot\dfrac47\cdot\dfrac36=\dfrac{5}{28}$. (b) $\dfrac{\dbinom{5}{2}\dbinom{3}{1}}{\dbinom{8}{3}}=\dfrac{30}{56}=\dfrac{15}{28}$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Flip a coin, then roll a die. Find $P(\text{tails and an even number})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Draw 2 without replacement from 3 red and 2 green. Find $P(\text{both red})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+For that draw, find $P(\text{one red and one green})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+70\% of parts are from A (3\% defective), 30\% from B (6\% defective). Find $P(\text{defective})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+For those parts, find $P(\text{from B}\mid\text{defective})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Three lights are each green with $P=0.5$. Find $P(\text{all green})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+For those lights, find $P(\text{exactly two green})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+60\% of students are prepared (pass 0.9); 40\% are not (pass 0.3). Find $P(\text{pass})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+For that model, find $P(\text{prepared}\mid\text{passed})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Draw 2 without replacement from 4 white and 2 red. Find $P(\text{exactly one white})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Guess 2 true/false questions. Find $P(\text{both correct})$ from a tree.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+80\% take a vaccine (5\% get sick); 20\% don't (30\% get sick). Find $P(\text{sick})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+An urn has 5 white and 3 black; draw 3 without replacement. Find \\ \textbf{(a)} $P(\text{all white})$; \\ \textbf{(b)} $P(\text{exactly 2 white})$; \\ \textbf{(c)} $P(\text{at least one black})$.\workspace{3.4cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Flip a coin, then roll a die. Find $P(\text{tails and an even number})$.
+  \item Draw 2 without replacement from 3 red and 2 green. Find $P(\text{both red})$.
+  \item For that draw, find $P(\text{one red and one green})$.
+  \item 70\% of parts are from A (3\% defective), 30\% from B (6\% defective). Find $P(\text{defective})$.
+  \item For those parts, find $P(\text{from B}\mid\text{defective})$.
+  \item Three lights are each green with $P=0.5$. Find $P(\text{all green})$.
+  \item For those lights, find $P(\text{exactly two green})$.
+  \item 60\% of students are prepared (pass 0.9); 40\% are not (pass 0.3). Find $P(\text{pass})$.
+  \item For that model, find $P(\text{prepared}\mid\text{passed})$.
+  \item Draw 2 without replacement from 4 white and 2 red. Find $P(\text{exactly one white})$.
+  \item Guess 2 true/false questions. Find $P(\text{both correct})$ from a tree.
+  \item 80\% take a vaccine (5\% get sick); 20\% don't (30\% get sick). Find $P(\text{sick})$.
+  \item An urn has 5 white and 3 black; draw 3 without replacement. Find \\ \textbf{(a)} $P(\text{all white})$; \\ \textbf{(b)} $P(\text{exactly 2 white})$; \\ \textbf{(c)} $P(\text{at least one black})$.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $\tfrac12\cdot\tfrac12=\tfrac14$
+  \item $\tfrac35\cdot\tfrac24=\tfrac{6}{20}=\tfrac{3}{10}$
+  \item $\tfrac35\cdot\tfrac24+\tfrac25\cdot\tfrac34=\tfrac{12}{20}=\tfrac35$
+  \item $0.7(0.03)+0.3(0.06)=0.039$
+  \item $\tfrac{0.018}{0.039}=\tfrac{6}{13}$
+  \item $0.5^3=\tfrac18$
+  \item $\dbinom{3}{2}(0.5)^3=\tfrac38$
+  \item $0.6(0.9)+0.4(0.3)=0.66$
+  \item $\tfrac{0.54}{0.66}=\tfrac{9}{11}$
+  \item $\dfrac{\binom{4}{1}\binom{2}{1}}{\binom{6}{2}}=\tfrac{8}{15}$
+  \item $\tfrac14$
+  \item $0.8(0.05)+0.2(0.30)=0.10$
+  \item (a) $\tfrac{5}{28}$; (b) $\tfrac{15}{28}$; (c) $\tfrac{23}{28}$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

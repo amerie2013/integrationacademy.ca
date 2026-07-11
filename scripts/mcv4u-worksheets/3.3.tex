@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MCV4U \textperiodcentered{} 3.3}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 3.3 --- Derivatives of Logarithmic Functions}\\[2pt]
+{\small Grade 12 Calculus and Vectors (MCV4U) \textperiodcentered{} Unit 3: Derivatives of Transcendental Functions}
+\end{center}
+
+\begin{ideabox}
+$\dfrac{d}{dx}\ln x=\dfrac1x$; $\dfrac{d}{dx}\ln(g)=\dfrac{g'}{g}$; $\dfrac{d}{dx}\log_b x=\dfrac1{x\ln b}$; logarithmic differentiation for $x^x$ etc.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item $\dfrac{d}{dx}\ln x=\dfrac1x$.
+  \item $\dfrac{d}{dx}\ln(g(x))=\dfrac{g'(x)}{g(x)}$.
+  \item Logarithmic differentiation: take $\ln$, differentiate implicitly, solve.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{The natural log}$\dfrac{d}{dx}\ln x=\dfrac{1}{x}$ — the derivative that fills the gap the power rule leaves at $x^{-1}$.
+\lh{General logs}$\dfrac{d}{dx}\log_b x=\dfrac{1}{x\ln b}$, with the factor $\ln b$ coming from the change of base.
+\lh{With the chain rule}$\dfrac{d}{dx}\ln(g(x))=\dfrac{g'(x)}{g(x)}$, dividing by the inside function.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Natural log}
+Differentiate $f(x)=\ln x$.\soln $f'(x)=\dfrac1x$ — the derivative of $\ln x$ is the curve $\tfrac1x$:\eplot{0}{8}{-3}{3}{\addplot[exblue,very thick,domain=0.08:8,samples=140]{ln(x)};\addplot[qorange,very thick,domain=0.34:8,samples=140]{1/x};}
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Chain rule}
+Differentiate $f(x)=\ln(x^2+1)$.\soln $\dfrac{2x}{x^2+1}$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Product rule}
+Differentiate $f(x)=x\ln x$.\soln $\ln x+x\cdot\dfrac1x=\ln x+1$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Other base}
+Differentiate $f(x)=\log_2 x$.\soln $\dfrac1{x\ln 2}$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Logarithmic differentiation}
+Differentiate $y=x^x$.\soln $\ln y=x\ln x\Rightarrow\dfrac{y'}{y}=\ln x+1\Rightarrow y'=x^x(\ln x+1)$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Chain rule}
+Differentiate $f(x)=\ln(3x)$.\soln $\dfrac{3}{3x}=\dfrac1x$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Chain / log law}
+Differentiate $f(x)=\ln(x^3)$.\soln $\dfrac{3x^2}{x^3}=\dfrac3x$ (or $3\ln x\Rightarrow\tfrac3x$).
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Product rule}
+Differentiate $f(x)=x^2\ln x$.\soln $2x\ln x+x$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Chain rule}
+Differentiate $f(x)=\ln(\cos x)$.\soln $\dfrac{-\sin x}{\cos x}=-\tan x$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Differentiate $f(x)=\ln(3x)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Differentiate $f(x)=\ln(x^3)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Differentiate $f(x)=x^2\ln x$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Differentiate $f(x)=\ln(\cos x)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Slope of $y=\ln x$ at $x=2$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Differentiate $f(x)=\ln(x^2+4)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Differentiate $f(x)=\log_3 x$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Differentiate $f(x)=\ln(5x-1)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Differentiate $f(x)=\dfrac{\ln x}{x}$ (quotient rule).\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Differentiate $f(x)=x^3\ln x$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Differentiate $f(x)=\ln(e^x)$ (simplify first).\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Slope of $y=\ln x$ at $x=1$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Differentiate $y=x^{\,2x}$ by logarithmic differentiation.\workspace{3.5cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Differentiate $f(x)=\ln(3x)$.
+  \item Differentiate $f(x)=\ln(x^3)$.
+  \item Differentiate $f(x)=x^2\ln x$.
+  \item Differentiate $f(x)=\ln(\cos x)$.
+  \item Slope of $y=\ln x$ at $x=2$?
+  \item Differentiate $f(x)=\ln(x^2+4)$.
+  \item Differentiate $f(x)=\log_3 x$.
+  \item Differentiate $f(x)=\ln(5x-1)$.
+  \item Differentiate $f(x)=\dfrac{\ln x}{x}$ (quotient rule).
+  \item Differentiate $f(x)=x^3\ln x$.
+  \item Differentiate $f(x)=\ln(e^x)$ (simplify first).
+  \item Slope of $y=\ln x$ at $x=1$?
+  \item Differentiate $y=x^{\,2x}$ by logarithmic differentiation.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $\dfrac1x$
+  \item $\dfrac3x$
+  \item $2x\ln x+x$
+  \item $-\tan x$
+  \item $\dfrac12$
+  \item $\dfrac{2x}{x^2+4}$
+  \item $\dfrac1{x\ln 3}$
+  \item $\dfrac5{5x-1}$
+  \item $\dfrac{1-\ln x}{x^2}$
+  \item $3x^2\ln x+x^2$
+  \item $1$ (since $\ln(e^x)=x$)
+  \item $1$
+  \item $x^{2x}(2\ln x+2)$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MHF4U \textperiodcentered{} 6.4}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 6.4 --- Solving Trigonometric Equations}\\[2pt]
+{\small Grade 12 Advanced Functions (MHF4U) \textperiodcentered{} Unit 6: Trigonometric Identities and Equations}
+\end{center}
+
+\begin{ideabox}
+Find all solutions on $[0,2\pi)$: isolate the ratio, find the related angle, then use CAST for each quadrant.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Isolate the ratio; find the related angle from a special value.
+  \item Use CAST to place every solution.
+  \item Quadratics: factor first; mixed: use an identity.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Finding the angles}Solving a trig equation means finding every angle in the given interval that satisfies it, using reference angles and the unit circle.
+\lh{Use identities first}Reduce the equation to a single trig function — often with a double angle or Pythagorean identity — before solving.
+\lh{All solutions}Because trig functions repeat, list every solution in the interval, and add the period for the general solution when asked.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Basic sine}
+Solve $\sin\theta=\tfrac12$ on $[0,2\pi)$.\soln Related angle $\tfrac{\pi}{6}$; sine $+$ in QI, QII: $\theta=\tfrac{\pi}{6},\tfrac{5\pi}{6}$. The wave reaches $\tfrac12$ twice:\begin{center}\begin{tikzpicture}\begin{axis}[width=9.2cm,height=4.6cm,axis lines=middle,xlabel={\small$x$},ylabel={\small$y$},xmin=-0.4,xmax=6.9,ymin=-1.6,ymax=1.6,samples=220,xtick={1.5708,3.1416,4.7124,6.2832},xticklabels={$\frac{\pi}{2}$,$\pi$,$\frac{3\pi}{2}$,$2\pi$}]\addplot[exblue,very thick,domain=0:6.4]{sin(deg(x))};\addplot[qorange,dashed,thick,domain=0:6.4]{0.5};\end{axis}\end{tikzpicture}\end{center}
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Cosine zero}
+Solve $\cos\theta=0$ on $[0,2\pi)$.\soln $\theta=\tfrac{\pi}{2},\tfrac{3\pi}{2}$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Isolate first}
+Solve $2\cos\theta-1=0$ on $[0,2\pi)$.\soln $\cos\theta=\tfrac12$; related $\tfrac{\pi}{3}$, $+$ in QI, QIV: $\theta=\tfrac{\pi}{3},\tfrac{5\pi}{3}$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Tangent}
+Solve $\tan\theta=1$ on $[0,2\pi)$.\soln Related $\tfrac{\pi}{4}$, $+$ in QI, QIII: $\theta=\tfrac{\pi}{4},\tfrac{5\pi}{4}$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Quadratic type}
+Solve $2\sin^2\theta-1=0$ on $[0,2\pi)$.\soln $\sin\theta=\pm\tfrac{\sqrt2}{2}$; all four quadrants: $\theta=\tfrac{\pi}{4},\tfrac{3\pi}{4},\tfrac{5\pi}{4},\tfrac{7\pi}{4}$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Basic cosine}
+Solve $\cos\theta=\tfrac12$ on $[0,2\pi)$.\soln $\theta=\tfrac{\pi}{3},\tfrac{5\pi}{3}$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Basic sine}
+Solve $\sin\theta=0$ on $[0,2\pi)$.\soln $\theta=0,\pi$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Negative value}
+Solve $2\sin\theta+1=0$ on $[0,2\pi)$.\soln $\sin\theta=-\tfrac12$; QIII, QIV: $\theta=\tfrac{7\pi}{6},\tfrac{11\pi}{6}$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Factor}
+Solve $\sin\theta(\sin\theta-1)=0$ on $[0,2\pi)$.\soln $\sin\theta=0\Rightarrow0,\pi$; $\sin\theta=1\Rightarrow\tfrac{\pi}{2}$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Solve $\cos\theta=\tfrac12$ on $[0,2\pi)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Solve $\sin\theta=0$ on $[0,2\pi)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Solve $2\sin\theta+1=0$ on $[0,2\pi)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Solve $\tan\theta=-1$ on $[0,2\pi)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Solve $\sin\theta(\sin\theta-1)=0$ on $[0,2\pi)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Solve $\sin\theta=\tfrac12$ on $[0,2\pi)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Solve $\cos\theta=0$ on $[0,2\pi)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Solve $2\cos\theta-1=0$ on $[0,2\pi)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Solve $\tan\theta=1$ on $[0,2\pi)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Solve $\cos\theta=-1$ on $[0,2\pi)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Solve $2\sin^2\theta-1=0$ on $[0,2\pi)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Solve $\sin\theta=1$ on $[0,2\pi)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Solve $2\cos^2\theta-\cos\theta=0$ on $[0,2\pi)$ by factoring.\workspace{3.5cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Solve $\cos\theta=\tfrac12$ on $[0,2\pi)$.
+  \item Solve $\sin\theta=0$ on $[0,2\pi)$.
+  \item Solve $2\sin\theta+1=0$ on $[0,2\pi)$.
+  \item Solve $\tan\theta=-1$ on $[0,2\pi)$.
+  \item Solve $\sin\theta(\sin\theta-1)=0$ on $[0,2\pi)$.
+  \item Solve $\sin\theta=\tfrac12$ on $[0,2\pi)$.
+  \item Solve $\cos\theta=0$ on $[0,2\pi)$.
+  \item Solve $2\cos\theta-1=0$ on $[0,2\pi)$.
+  \item Solve $\tan\theta=1$ on $[0,2\pi)$.
+  \item Solve $\cos\theta=-1$ on $[0,2\pi)$.
+  \item Solve $2\sin^2\theta-1=0$ on $[0,2\pi)$.
+  \item Solve $\sin\theta=1$ on $[0,2\pi)$.
+  \item Solve $2\cos^2\theta-\cos\theta=0$ on $[0,2\pi)$ by factoring.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $\tfrac{\pi}{3},\tfrac{5\pi}{3}$
+  \item $0,\pi$
+  \item $\tfrac{7\pi}{6},\tfrac{11\pi}{6}$
+  \item $\tfrac{3\pi}{4},\tfrac{7\pi}{4}$
+  \item $0,\pi,\tfrac{\pi}{2}$
+  \item $\tfrac{\pi}{6},\tfrac{5\pi}{6}$
+  \item $\tfrac{\pi}{2},\tfrac{3\pi}{2}$
+  \item $\tfrac{\pi}{3},\tfrac{5\pi}{3}$
+  \item $\tfrac{\pi}{4},\tfrac{5\pi}{4}$
+  \item $\pi$
+  \item $\tfrac{\pi}{4},\tfrac{3\pi}{4},\tfrac{5\pi}{4},\tfrac{7\pi}{4}$
+  \item $\tfrac{\pi}{2}$
+  \item $\cos\theta(2\cos\theta-1)=0\Rightarrow\tfrac{\pi}{2},\tfrac{3\pi}{2},\tfrac{\pi}{3},\tfrac{5\pi}{3}$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

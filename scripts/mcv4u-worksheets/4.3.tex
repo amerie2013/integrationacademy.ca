@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MCV4U \textperiodcentered{} 4.3}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 4.3 --- Critical, Inflection \& End Behaviour}\\[2pt]
+{\small Grade 12 Calculus and Vectors (MCV4U) \textperiodcentered{} Unit 4: Curve Sketching}
+\end{center}
+
+\begin{ideabox}
+Gather all features before sketching: domain, intercepts, asymptotes, extrema (from $f'$), inflection/concavity (from $f''$), and end behaviour.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item From $f'$: increase/decrease and extrema.
+  \item From $f''$: concavity and inflection.
+  \item From $f$: domain, intercepts, asymptotes, end behaviour.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Gathering the features}A full analysis collects critical numbers, inflection points, intercepts, and the behaviour as $x\to\pm\infty$.
+\lh{Asymptotes and limits}Limits at infinity reveal horizontal asymptotes, while limits at breaks reveal vertical ones.
+\lh{A complete picture}Together these features describe every important part of the graph before you draw it.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- List features}
+Key features of $f(x)=x^3-3x^2$.\soln Max $(0,0)$, min $(2,-4)$, inflection $(1,-2)$, ends down–up:\eplot{-1.5}{4}{-6}{4}{\addplot[exblue,very thick,domain=-1:3.3]{x^3-3*x^2};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(0,0) (2,-4) (1,-2)};}
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Read f from f'}
+$f'>0$ on $(-\infty,1)$, $f'<0$ on $(1,\infty)$. Describe $f$ near $x=1$.\soln $+\to-$ ⇒ local max at $x=1$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Classify from f''}
+$f'(2)=0$ and $f''(2)=-3$. Classify $x=2$.\soln $f''<0$ ⇒ local maximum.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Rational asymptotes}
+Asymptotes of $f(x)=\dfrac{x}{x-2}$.\soln VA $x=2$; equal degrees ⇒ HA $y=1$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Inflection, not extremum}
+Inflection of $f(x)=x^3+1$; why no extremum?\soln $f''=6x=0\Rightarrow(0,1)$ inflection; $f'=3x^2\ge0$ ⇒ no max/min.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Critical numbers}
+Critical numbers of $f(x)=x^3-3x^2$.\soln $3x^2-6x=0\Rightarrow x=0,2$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Classify from f''}
+$f'(3)=0,\ f''(3)>0$. Classify $x=3$.\soln Local minimum.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Inflection}
+Inflection of $f(x)=x^3-3x^2$.\soln $(1,-2)$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- End behaviour}
+End behaviour of $f(x)=-x^3+2x$.\soln Odd, $a<0$: up–down.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Critical numbers of $f(x)=x^3-3x^2$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+If $f'(3)=0$ and $f''(3)>0$, classify $x=3$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Inflection point of $f(x)=x^3-3x^2$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Asymptotes of $f(x)=\dfrac1{x-3}$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+End behaviour of $f(x)=-x^3+2x$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Local extrema of $f(x)=x^3-3x$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Asymptotes of $f(x)=\dfrac{x}{x-2}$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+If $f'(1)=0$ and $f''(1)<0$, classify $x=1$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Inflection point of $f(x)=x^3$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+End behaviour of $f(x)=x^4-1$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Where is $f(x)=x^3-3x^2$ increasing?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Does $f(x)=x^3+1$ have a local extremum?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+List every key feature of $f(x)=x^3-3x$ (intercepts, extrema, inflection, ends).\workspace{4cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Critical numbers of $f(x)=x^3-3x^2$?
+  \item If $f'(3)=0$ and $f''(3)>0$, classify $x=3$.
+  \item Inflection point of $f(x)=x^3-3x^2$?
+  \item Asymptotes of $f(x)=\dfrac1{x-3}$?
+  \item End behaviour of $f(x)=-x^3+2x$?
+  \item Local extrema of $f(x)=x^3-3x$?
+  \item Asymptotes of $f(x)=\dfrac{x}{x-2}$?
+  \item If $f'(1)=0$ and $f''(1)<0$, classify $x=1$.
+  \item Inflection point of $f(x)=x^3$?
+  \item End behaviour of $f(x)=x^4-1$?
+  \item Where is $f(x)=x^3-3x^2$ increasing?
+  \item Does $f(x)=x^3+1$ have a local extremum?
+  \item List every key feature of $f(x)=x^3-3x$ (intercepts, extrema, inflection, ends).
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $x=0,2$
+  \item local min
+  \item $(1,-2)$
+  \item VA $x=3$, HA $y=0$
+  \item up–down
+  \item max $(-1,2)$, min $(1,-2)$
+  \item VA $x=2$, HA $y=1$
+  \item local max
+  \item $(0,0)$
+  \item up–up
+  \item $x<0$ or $x>2$
+  \item no (inflection at $(0,1)$)
+  \item x-int $0,\pm\sqrt3$; max $(-1,2)$; min $(1,-2)$; inflection $(0,0)$; ends down–up
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

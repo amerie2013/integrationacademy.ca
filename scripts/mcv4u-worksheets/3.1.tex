@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MCV4U \textperiodcentered{} 3.1}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 3.1 --- Derivatives of Sinusoidal Functions}\\[2pt]
+{\small Grade 12 Calculus and Vectors (MCV4U) \textperiodcentered{} Unit 3: Derivatives of Transcendental Functions}
+\end{center}
+
+\begin{ideabox}
+In radians, $\dfrac{d}{dx}\sin x=\cos x$ and $\dfrac{d}{dx}\cos x=-\sin x$; combine with the chain, product and quotient rules.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item $\dfrac{d}{dx}\sin x=\cos x$, $\dfrac{d}{dx}\cos x=-\sin x$.
+  \item Chain: $\dfrac{d}{dx}\sin(g)=\cos(g)\,g'$.
+  \item Angles must be in radians.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{The trig derivatives}$\dfrac{d}{dx}\sin x=\cos x$ and $\dfrac{d}{dx}\cos x=-\sin x$ — note the sign that appears with cosine.
+\lh{Radians required}These formulas hold only when $x$ is measured in \textbf{radians}, which is why calculus works in radian mode.
+\lh{With the chain rule}For a composition, $\dfrac{d}{dx}\sin(g(x))=\cos(g(x))\,g'(x)$.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Sine}
+Differentiate $f(x)=\sin x$.\soln $f'(x)=\cos x$ — the slope of $\sin$ is the height of $\cos$:\begin{center}\begin{tikzpicture}\begin{axis}[width=9.2cm,height=4.6cm,axis lines=middle,xlabel={\small$x$},ylabel={\small$y$},xmin=-0.4,xmax=6.9,ymin=-1.6,ymax=1.6,samples=220,xtick={1.5708,3.1416,4.7124,6.2832},xticklabels={$\frac{\pi}{2}$,$\pi$,$\frac{3\pi}{2}$,$2\pi$}]\addplot[exblue,very thick,domain=0:6.4]{sin(deg(x))};\addplot[qorange,very thick,domain=0:6.4]{cos(deg(x))};\end{axis}\end{tikzpicture}\end{center}
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Cosine}
+Differentiate $f(x)=\cos x$.\soln $f'(x)=-\sin x$ (note the minus).
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Chain rule}
+Differentiate $f(x)=\sin(3x)$.\soln $\cos(3x)\cdot3=3\cos(3x)$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Product rule}
+Differentiate $f(x)=x\sin x$.\soln $\sin x+x\cos x$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Power of sine}
+Differentiate $f(x)=\sin^2 x$.\soln $(\sin x)^2\Rightarrow 2\sin x\cos x=\sin 2x$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Chain rule}
+Differentiate $f(x)=\cos(2x)$.\soln $-2\sin(2x)$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Chain rule}
+Differentiate $f(x)=\sin(5x)$.\soln $5\cos(5x)$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Product rule}
+Differentiate $f(x)=x^2\cos x$.\soln $2x\cos x-x^2\sin x$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Chain (square inside)}
+Differentiate $f(x)=\sin(x^2)$.\soln $2x\cos(x^2)$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Differentiate $f(x)=\cos(2x)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Differentiate $f(x)=\sin(5x)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Differentiate $f(x)=x^2\cos x$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Differentiate $f(x)=\sin(x^2)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Slope of $y=\sin x$ at $x=0$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Differentiate $f(x)=3\sin x$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Differentiate $f(x)=\cos(4x)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Differentiate $f(x)=x\cos x$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Differentiate $f(x)=\cos^2 x$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Differentiate $f(x)=\sin(2x+1)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Slope of $y=\cos x$ at $x=\tfrac{\pi}{2}$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Differentiate $f(x)=\sin x+\cos x$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Differentiate $f(x)=\dfrac{\sin x}{x}$ (quotient rule).\workspace{3cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Differentiate $f(x)=\cos(2x)$.
+  \item Differentiate $f(x)=\sin(5x)$.
+  \item Differentiate $f(x)=x^2\cos x$.
+  \item Differentiate $f(x)=\sin(x^2)$.
+  \item Slope of $y=\sin x$ at $x=0$?
+  \item Differentiate $f(x)=3\sin x$.
+  \item Differentiate $f(x)=\cos(4x)$.
+  \item Differentiate $f(x)=x\cos x$.
+  \item Differentiate $f(x)=\cos^2 x$.
+  \item Differentiate $f(x)=\sin(2x+1)$.
+  \item Slope of $y=\cos x$ at $x=\tfrac{\pi}{2}$?
+  \item Differentiate $f(x)=\sin x+\cos x$.
+  \item Differentiate $f(x)=\dfrac{\sin x}{x}$ (quotient rule).
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $-2\sin(2x)$
+  \item $5\cos(5x)$
+  \item $2x\cos x-x^2\sin x$
+  \item $2x\cos(x^2)$
+  \item $1$
+  \item $3\cos x$
+  \item $-4\sin(4x)$
+  \item $\cos x-x\sin x$
+  \item $-2\cos x\sin x=-\sin 2x$
+  \item $2\cos(2x+1)$
+  \item $-1$
+  \item $\cos x-\sin x$
+  \item $\dfrac{x\cos x-\sin x}{x^2}$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

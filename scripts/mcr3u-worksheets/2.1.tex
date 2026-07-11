@@ -1,0 +1,166 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MCR3U \textperiodcentered{} 2.1}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 2.1 --- Adding \& Multiplying Polynomials}\\[2pt]
+{\small Grade 11 Functions, University (MCR3U) \textperiodcentered{} Unit 2: Equivalent Algebraic Expressions}
+\end{center}
+
+\begin{ideabox}
+Polynomials are built from terms. Simplifying means collecting like terms and expanding products.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Only \textbf{like terms} (same variable and exponent) can be combined.
+  \item Distributive property: $a(b+c)=ab+ac$.
+  \item FOIL for binomials: $(a+b)(c+d)=ac+ad+bc+bd$.
+  \item Special products: $(a\pm b)^2=a^2\pm2ab+b^2$ and $(a+b)(a-b)=a^2-b^2$.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Combining polynomials}Add or subtract by collecting \textbf{like terms} — same variable and exponent. Distribute a leading minus sign across every term.
+\lh{Multiplying}Multiply each term of one factor by each term of the other, then simplify. FOIL is the shortcut for two binomials.
+\lh{Degree check}The product's degree equals the sum of the factors' degrees — a quick check that no term was lost.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Collect like terms}
+Simplify $5x-3+2x-8$.\soln Group like terms: $(5x+2x)+(-3-8)$. \\ $=7x-11$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Distribute}
+Expand $4(2x-3)$.\soln Multiply each term by 4: $4\cdot2x-4\cdot3=8x-12$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Distribute then collect}
+Simplify $2(x+3)+3(x-1)$.\soln Expand: $2x+6+3x-3$. \\ Collect: $5x+3$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Monomial times polynomial}
+Expand $3x(x^2-2x+4)$.\soln Distribute $3x$: $3x^3-6x^2+12x$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- FOIL}
+Expand $(x+2)(x+5)$.\soln First, Outer, Inner, Last: $x^2+5x+2x+10$. \\ Collect: $x^2+7x+10$ — a parabola with x-intercepts $-2,-5$:\eplot{-7}{2}{-3}{8}{\addplot[exblue,very thick,domain=-6.2:0.8]{x^2+7*x+10};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(-2,0) (-5,0)};}
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- FOIL with a negative}
+Expand $(x-4)(x+3)$.\soln $x^2+3x-4x-12$. \\ Collect: $x^2-x-12$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Perfect square}
+Expand $(x+5)^2$.\soln $(x+5)(x+5)=x^2+2(5)x+25=x^2+10x+25$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Difference of squares}
+Expand $(x-6)(x+6)$.\soln The middle terms cancel: $x^2-36$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Combine products}
+Expand and simplify $(2x-1)(x+3)-(x^2-2)$.\soln Expand: $(2x^2+5x-3)-(x^2-2)$. \\ Distribute the minus: $2x^2+5x-3-x^2+2=x^2+5x-1$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Simplify $5x-3+2x-8$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Expand $-2(3x-4)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Simplify $3(x+2)-4(x-1)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Expand $2x(4x^2-x+3)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Expand $(x+7)(x+2)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Expand $(x-5)(x+4)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Expand $(3x+2)(x-1)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Expand $(x-3)^2$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Expand $(2x+5)^2$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Expand $(x-8)(x+8)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Expand and simplify $(x+4)(x-2)+(x+1)^2$.\workspace{3cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+A rectangle has length $(2x+1)$ and width $(x+5)$. Write its area as a polynomial.\workspace{3cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Expand $(x+2)(x^2-3x+1)$.\workspace{3cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Simplify $5x-3+2x-8$.
+  \item Expand $-2(3x-4)$.
+  \item Simplify $3(x+2)-4(x-1)$.
+  \item Expand $2x(4x^2-x+3)$.
+  \item Expand $(x+7)(x+2)$.
+  \item Expand $(x-5)(x+4)$.
+  \item Expand $(3x+2)(x-1)$.
+  \item Expand $(x-3)^2$.
+  \item Expand $(2x+5)^2$.
+  \item Expand $(x-8)(x+8)$.
+  \item Expand and simplify $(x+4)(x-2)+(x+1)^2$.
+  \item A rectangle has length $(2x+1)$ and width $(x+5)$. Write its area as a polynomial.
+  \item Expand $(x+2)(x^2-3x+1)$.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $7x-11$
+  \item $-6x+8$
+  \item $-x+10$
+  \item $8x^3-2x^2+6x$
+  \item $x^2+9x+14$
+  \item $x^2-x-20$
+  \item $3x^2-x-2$
+  \item $x^2-6x+9$
+  \item $4x^2+20x+25$
+  \item $x^2-64$
+  \item $2x^2+4x-7$
+  \item $2x^2+11x+5$
+  \item $x^3-x^2-5x+2$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

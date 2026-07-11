@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MDM4U \textperiodcentered{} 3.2}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 3.2 --- Expected Value}\\[2pt]
+{\small Grade 12 Mathematics of Data Management (MDM4U) \textperiodcentered{} Unit 3: Discrete Probability Distributions}
+\end{center}
+
+\begin{ideabox}
+The expected value $E(X)=\sum x\,P(x)$ is the long-run average. A game is \emph{fair} when the expected net gain is $0$; expected value drives rational decisions.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item $E(X)=\sum x\,P(x)$.
+  \item Fair game: expected net $=0$; a fair price equals the expected winnings.
+  \item Compare options by their expected values.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{The long-run average}The \textbf{expected value} $E(X)=\sum x\,P(x)$ is the average outcome over many repetitions — a weighted average of the values by their probabilities.
+\lh{Fair games}A game is \textbf{fair} when its expected value equals the cost to play (or $0$ for net gain). Comparing $E(X)$ to the cost decides whether a bet is worth taking.
+\lh{Interpret carefully}$E(X)$ need not be an achievable value — an expected $2.5$ is a long-run average, not any single result.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Expected value of a die}
+Find $E(X)$ for one die.\soln $\dfrac{1+2+3+4+5+6}{6}=3.5$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Weighted average}
+For $P(0)=0.2,\ P(1)=0.5,\ P(2)=0.3$, find $E(X)$.\soln $0(0.2)+1(0.5)+2(0.3)=1.1$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Is the game fair?}
+Pay \$2 to play; win \$5 with probability $0.3$, else nothing. Find the expected net gain.\soln $E=0.3(5)-2=1.5-2=-0.50$. Not fair --- it favours the house.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Lottery expected value}
+A \$2 ticket wins \$1000 with probability $\tfrac{1}{1000}$. Find the expected net.\soln $E=\dfrac{1000}{1000}-2=1-2=-1$ dollar.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Expected count by linearity}
+Find the expected number of aces when 5 cards are drawn.\soln Each card is an ace with probability $\tfrac{4}{52}$; by linearity $E=5\cdot\tfrac{4}{52}=\tfrac{5}{13}\approx0.385$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Set a fair price}
+A game pays \$0 or \$10 with probabilities $0.9$ and $0.1$. What entry fee makes it fair?\soln $E=0.1(10)=1$, so a fair fee is \$1.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Choose the better bet}
+Game A: win \$4 with $P=0.5$. Game B: win \$10 with $P=0.25$. Which has the higher expected payout?\soln $E_A=2.00$, $E_B=2.50$; choose B.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Expected number of successes}
+Find the expected number of sixes in 12 rolls of a die.\soln $12\cdot\tfrac16=2$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Multi-payout spinner}
+A spinner pays \$1, \$4, \$10 with probabilities $\tfrac12,\tfrac13,\tfrac16$. Find \\ \textbf{(a)} $E(\text{payout})$; \\ \textbf{(b)} a fair fee.\soln (a) $\tfrac12(1)+\tfrac13(4)+\tfrac16(10)=0.5+1.333+1.667=3.50$. (b) \$3.50.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+A payout equals the face value of one die roll. Find $E$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+For $P(0)=0.2,\ P(1)=0.5,\ P(2)=0.3$, find $E(X)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Pay \$3 to play; win \$10 with $P=0.25$, else nothing. Find the expected net.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+A raffle sells 500 tickets at \$1; one prize is \$100. Find the expected net per ticket.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Find the expected number of hearts when 4 cards are drawn.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Win \$6 with $P=\tfrac13$, lose \$3 with $P=\tfrac23$. Find $E$ and state whether it is fair.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+For $x=1,2,3,4$ with $P=0.4,0.3,0.2,0.1$, find $E(X)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Two dice are rolled. Find $E(\text{sum})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+A spinner pays \$2, \$5, \$8 with $P=0.5,0.3,0.2$. Find $E(\text{payout})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+A game pays \$0 or \$10 with $P=0.9,0.1$. What is a fair entry fee?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Find the expected number of sixes in 12 rolls of a die.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+A \$5 ticket wins \$1000 with $P=\tfrac{1}{400}$ or \$50 with $P=\tfrac{1}{40}$. Find the expected net.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Roll two dice: win \$10 on a sum of 7, \$5 on a sum of 11, else nothing. Find the fair price to play.\workspace{3.2cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item A payout equals the face value of one die roll. Find $E$.
+  \item For $P(0)=0.2,\ P(1)=0.5,\ P(2)=0.3$, find $E(X)$.
+  \item Pay \$3 to play; win \$10 with $P=0.25$, else nothing. Find the expected net.
+  \item A raffle sells 500 tickets at \$1; one prize is \$100. Find the expected net per ticket.
+  \item Find the expected number of hearts when 4 cards are drawn.
+  \item Win \$6 with $P=\tfrac13$, lose \$3 with $P=\tfrac23$. Find $E$ and state whether it is fair.
+  \item For $x=1,2,3,4$ with $P=0.4,0.3,0.2,0.1$, find $E(X)$.
+  \item Two dice are rolled. Find $E(\text{sum})$.
+  \item A spinner pays \$2, \$5, \$8 with $P=0.5,0.3,0.2$. Find $E(\text{payout})$.
+  \item A game pays \$0 or \$10 with $P=0.9,0.1$. What is a fair entry fee?
+  \item Find the expected number of sixes in 12 rolls of a die.
+  \item A \$5 ticket wins \$1000 with $P=\tfrac{1}{400}$ or \$50 with $P=\tfrac{1}{40}$. Find the expected net.
+  \item Roll two dice: win \$10 on a sum of 7, \$5 on a sum of 11, else nothing. Find the fair price to play.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $3.5$
+  \item $1.1$
+  \item $0.25(10)-3=-0.50$
+  \item $\tfrac{100}{500}-1=-0.80$
+  \item $4\cdot\tfrac{13}{52}=1$
+  \item $2-2=0$ (fair)
+  \item $0.4+0.6+0.6+0.4=2.0$
+  \item $7$
+  \item $1+1.5+1.6=4.1$
+  \item $E=1$, so \$1
+  \item $12\cdot\tfrac16=2$
+  \item $\tfrac{1000}{400}+\tfrac{50}{40}-5=2.5+1.25-5=-1.25$
+  \item $E=10\cdot\tfrac{6}{36}+5\cdot\tfrac{2}{36}=\tfrac{70}{36}\approx1.94$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MCV4U \textperiodcentered{} 6.2}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 6.2 --- Vector Operations (Geometric)}\\[2pt]
+{\small Grade 12 Calculus and Vectors (MCV4U) \textperiodcentered{} Unit 6: Geometry and Algebra of Vectors}
+\end{center}
+
+\begin{ideabox}
+Add tip-to-tail (triangle law); subtract via $\vec a-\vec b=\vec a+(-\vec b)$; scale by $k$ to change length (and flip if $k<0$).
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Addition: tip-to-tail; resultant from first tail to last tip.
+  \item Subtraction: $\vec a-\vec b=\vec a+(-\vec b)$.
+  \item $k\vec v$ has length $|k||\vec v|$; reversed if $k<0$.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Adding vectors}Add vectors \textbf{tip-to-tail}: the resultant runs from the first tail to the last tip. The parallelogram rule gives the same result.
+\lh{Scalar multiples}Multiplying by a scalar scales the length and, if negative, reverses the direction while keeping the line of action.
+\lh{Subtraction}Subtracting a vector means adding its opposite, which the triangle of vectors makes easy to picture.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Perpendicular resultant}
+Add 3 east and 4 north; find the resultant.\soln $\sqrt{3^2+4^2}=5$, direction $\tan^{-1}\tfrac43\approx53^\circ$ N of E:\begin{center}\begin{tikzpicture}[scale=0.7]\draw[->,thick,exblue](0,0)--(3,0)node[midway,below]{$3$ E};\draw[->,thick,qorange](3,0)--(3,4)node[midway,right]{$4$ N};\draw[->,very thick,red](0,0)--(3,4)node[midway,above left]{$R=5$};\end{tikzpicture}\end{center}
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Triangle law}
+How do you draw $\vec a+\vec b$?\soln Tail of $\vec b$ at the tip of $\vec a$; resultant from $\vec a$'s tail to $\vec b$'s tip.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Scalar multiple}
+Describe $3\vec v$ and $-2\vec v$.\soln $3\vec v$: three times as long, same direction; $-2\vec v$: twice as long, opposite.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Subtraction}
+How do you draw $\vec a-\vec b$?\soln Add $\vec a$ and $-\vec b$ tip-to-tail.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Resultant force}
+Forces 6 N east and 8 N north. Find the resultant.\soln $\sqrt{36+64}=10$ N at $\tan^{-1}\tfrac86\approx53^\circ$ N of E.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Perpendicular resultant}
+Resultant magnitude of 5 east and 12 north?\soln $\sqrt{25+144}=13$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Scalar multiple}
+Describe $-\tfrac12\vec v$.\soln Half the length, opposite direction.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Perpendicular resultant}
+Resultant magnitude of 9 east and 12 north?\soln $\sqrt{81+144}=15$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Direction}
+Direction of the resultant of 3 east, 4 north?\soln $\tan^{-1}\tfrac43\approx53^\circ$ north of east.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Resultant magnitude of 5 east and 12 north?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Describe $4\vec v$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Describe $-\tfrac13\vec v$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Resultant magnitude of 8 east and 15 north?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+What law adds vectors tip-to-tail?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Resultant magnitude of 6 east and 8 north?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Describe $-3\vec v$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Resultant magnitude of 7 east and 24 north?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+How do you express $\vec a-\vec b$ as an addition?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Direction (N of E) of the resultant of 5 east, 5 north?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Resultant magnitude of 9 east and 40 north?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Length of $5\vec v$ if $|\vec v|=3$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Two forces, 10 N east and 24 N north, act on an object. Find the magnitude and direction of the resultant.\workspace{3cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Resultant magnitude of 5 east and 12 north?
+  \item Describe $4\vec v$.
+  \item Describe $-\tfrac13\vec v$.
+  \item Resultant magnitude of 8 east and 15 north?
+  \item What law adds vectors tip-to-tail?
+  \item Resultant magnitude of 6 east and 8 north?
+  \item Describe $-3\vec v$.
+  \item Resultant magnitude of 7 east and 24 north?
+  \item How do you express $\vec a-\vec b$ as an addition?
+  \item Direction (N of E) of the resultant of 5 east, 5 north?
+  \item Resultant magnitude of 9 east and 40 north?
+  \item Length of $5\vec v$ if $|\vec v|=3$?
+  \item Two forces, 10 N east and 24 N north, act on an object. Find the magnitude and direction of the resultant.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $13$
+  \item 4× length, same direction
+  \item $\tfrac13$ length, opposite
+  \item $17$
+  \item triangle law
+  \item $10$
+  \item 3× length, opposite direction
+  \item $25$
+  \item $\vec a+(-\vec b)$
+  \item $45^\circ$
+  \item $41$
+  \item $15$
+  \item $\sqrt{100+576}=26$ N at $\tan^{-1}\tfrac{24}{10}\approx67^\circ$ N of E
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

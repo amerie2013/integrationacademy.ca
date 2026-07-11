@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MCF3M \textperiodcentered{} 1.3}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 1.3 --- Solving Quadratic Equations by Factoring}\\[2pt]
+{\small Grade 11 Functions \& Applications (MCF3M) \textperiodcentered{} Unit 1: Quadratic Expressions and Equations}
+\end{center}
+
+\begin{ideabox}
+Solve $ax^2+bx+c=0$ by factoring and the zero product property; the roots are the x-intercepts.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Rearrange so one side is $0$.
+  \item Factor, then set each factor to $0$.
+  \item Solutions are where the parabola meets the x-axis.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Set to zero}A quadratic must equal zero before you factor: rearrange it to $ax^2+bx+c=0$ first.
+\lh{Zero-product property}Once factored, a product is zero only when a factor is zero, so each factor yields a solution.
+\lh{The roots}The solutions are the equation's \textbf{roots}; a quadratic can have two, one, or no real roots.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Simple trinomial}
+Solve $x^2-5x+6=0$.\soln Factor: $(x-2)(x-3)=0$. \\ Zero product property: $x-2=0$ or $x-3=0$. \\ $x=2$ or $x=3$ — the x-intercepts of the parabola:\eplot{-1}{6}{-2}{8}{\addplot[exblue,very thick,domain=0:5]{x^2-5*x+6};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(2,0) (3,0)};}
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Difference of squares}
+Solve $x^2-9=0$.\soln $(x-3)(x+3)=0$. \\ $x=3$ or $x=-3$, i.e. $x=\pm3$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Negative constant}
+Solve $x^2+2x-8=0$.\soln Factor $(x+4)(x-2)=0$. \\ $x=-4$ or $x=2$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Leading coefficient}
+Solve $2x^2-7x+3=0$.\soln Factor $(2x-1)(x-3)=0$. \\ $2x-1=0\Rightarrow x=\tfrac12$; $\ x-3=0\Rightarrow x=3$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Common factor}
+Solve $x^2-6x=0$.\soln Common factor $x$: $x(x-6)=0$. \\ $x=0$ or $x=6$. The parabola passes through the origin and $(6,0)$:\eplot{-2}{8}{-12}{8}{\addplot[exblue,very thick,domain=-1:7]{x^2-6*x};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(0,0) (6,0)};}
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Both negative}
+Solve $x^2+7x+10=0$.\soln $(x+2)(x+5)=0$. \\ $x=-2$ or $x=-5$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Mixed signs}
+Solve $x^2-x-12=0$.\soln Product $-12$, sum $-1$: $-4$ and $3$. $(x-4)(x+3)=0$. \\ $x=4$ or $x=-3$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Decomposition}
+Solve $3x^2-5x-2=0$.\soln $a\cdot c=-6$: $-6,1$. $3x^2-6x+x-2=(3x+1)(x-2)=0$. \\ $x=-\tfrac13$ or $x=2$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Larger squares}
+Solve $x^2-49=0$.\soln $(x-7)(x+7)=0$. \\ $x=\pm7$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Solve $x^2-7x+10=0$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Solve $x^2-16=0$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Solve $x^2+5x+6=0$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Solve $x^2-3x-10=0$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Solve $2x^2-3x-2=0$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Solve $x^2-8x=0$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Solve $x^2+x-20=0$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Solve $x^2-25=0$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Solve $3x^2+5x-2=0$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Solve $x^2-10x+24=0$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Solve $4x^2-9=0$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Solve $x^2+2x-15=0$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Solve $2x^2-x-6=0$.\workspace{3cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Solve $x^2-7x+10=0$.
+  \item Solve $x^2-16=0$.
+  \item Solve $x^2+5x+6=0$.
+  \item Solve $x^2-3x-10=0$.
+  \item Solve $2x^2-3x-2=0$.
+  \item Solve $x^2-8x=0$.
+  \item Solve $x^2+x-20=0$.
+  \item Solve $x^2-25=0$.
+  \item Solve $3x^2+5x-2=0$.
+  \item Solve $x^2-10x+24=0$.
+  \item Solve $4x^2-9=0$.
+  \item Solve $x^2+2x-15=0$.
+  \item Solve $2x^2-x-6=0$.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $x=2,5$
+  \item $x=\pm4$
+  \item $x=-2,-3$
+  \item $x=5,-2$
+  \item $x=2,-\tfrac12$
+  \item $x=0,8$
+  \item $x=4,-5$
+  \item $x=\pm5$
+  \item $x=\tfrac13,-2$
+  \item $x=4,6$
+  \item $x=\pm\tfrac32$
+  \item $x=3,-5$
+  \item $x=2,-\tfrac32$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

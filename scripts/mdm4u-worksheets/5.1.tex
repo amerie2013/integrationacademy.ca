@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MDM4U \textperiodcentered{} 5.1}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 5.1 --- Sampling Techniques \& Bias}\\[2pt]
+{\small Grade 12 Mathematics of Data Management (MDM4U) \textperiodcentered{} Unit 5: One-Variable Statistics}
+\end{center}
+
+\begin{ideabox}
+Conclusions about a \emph{population} rest on a representative \emph{sample}. Distinguish a \emph{parameter} (a true population value) from a \emph{statistic} (its sample estimate), and choose a method that avoids bias.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Population vs. sample; parameter vs. statistic.
+  \item Methods: simple random, stratified (by proportional groups), systematic (every $k$th), cluster (whole groups).
+  \item Biases: sampling/coverage, non-response, response (wording), measurement.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Population versus sample}A \textbf{population} is everyone of interest; a \textbf{sample} is the part actually studied. Sound conclusions need a sample that represents the population.
+\lh{Sampling methods}\textbf{Random}, \textbf{systematic}, \textbf{stratified}, and \textbf{cluster} sampling each pursue representativeness differently; a convenience sample usually fails at it.
+\lh{Watch for bias}\textbf{Bias} — from a poor sampling frame, leading questions, or non-response — makes a sample systematically misrepresent the population.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Population vs. sample}
+A factory makes 10\,000 bulbs; 200 are tested. Identify the population and the sample.\soln Population $=$ all 10\,000 bulbs; sample $=$ the 200 tested.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Parameter vs. statistic}
+Is the mean lifetime of \emph{all} bulbs a parameter or a statistic?\soln A parameter --- it describes the whole population (the sample mean would be the statistic).
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Stratified sample}
+A school has 600 grade-9 and 400 grade-10 students. Take a stratified sample of 50.\soln Proportional: $\tfrac{600}{1000}(50)=30$ grade-9 and $\tfrac{400}{1000}(50)=20$ grade-10.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Systematic sample}
+Choose 50 people systematically from 1000. Find the interval $k$.\soln $k=\tfrac{1000}{50}=20$: pick a random start, then every $20$th person.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Cluster sample}
+Describe a cluster sample of a school's students.\soln Split into clusters (classes), randomly select a few whole classes, and survey everyone in them.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Sampling (coverage) bias}
+An online poll surveys only website visitors. What is the flaw?\soln Sampling/coverage bias --- non-internet users are excluded, so the sample is unrepresentative.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Response (wording) bias}
+Critique the question: \emph{Don't you agree our excellent mayor deserves re-election?}\soln The leading wording pushes a \emph{yes}, creating response bias.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Non-response bias}
+A mailed survey gets a 10\% reply rate. Why is this a concern?\soln The 90\% who did not reply may differ systematically --- non-response bias.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Diagnose and fix (three parts)}
+A firm phones customers only during work hours. \\ \textbf{(a)} name the bias; \\ \textbf{(b)} suggest a fix; \\ \textbf{(c)} is the result a parameter or a statistic?\soln (a) non-response/coverage bias. (b) call at varied times and add other contact methods. (c) a statistic.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+A city has 40\,000 voters; 500 are polled. Identify the population and sample.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Is \emph{52\% of all voters support the plan} a parameter or a statistic?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+From 800 women and 200 men, take a stratified sample of 50. How many of each?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Choose 40 items systematically from 2000. Find $k$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Name the method: three whole classes are chosen at random and all their students surveyed.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Name the bias: a mailed survey has only a 12\% response rate.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Name the bias in the question: \emph{Should wasteful government spending be cut?}\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Name the bias: a survey about favourite sport is taken at a hockey game.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+From grades of 300, 200, 100 students, take a proportional sample of 60. How many from each?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Parameter or statistic: the mean age of 500 surveyed shoppers is 34.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Name the method: every 25th shopper entering a mall is surveyed.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Name the method: 5 neighbourhoods are chosen at random and all residents surveyed.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+A TV show asks viewers to phone in opinions. \\ \textbf{(a)} name two biases; \\ \textbf{(b)} is it reliable; \\ \textbf{(c)} suggest a better design.\workspace{3cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item A city has 40\,000 voters; 500 are polled. Identify the population and sample.
+  \item Is \emph{52\% of all voters support the plan} a parameter or a statistic?
+  \item From 800 women and 200 men, take a stratified sample of 50. How many of each?
+  \item Choose 40 items systematically from 2000. Find $k$.
+  \item Name the method: three whole classes are chosen at random and all their students surveyed.
+  \item Name the bias: a mailed survey has only a 12\% response rate.
+  \item Name the bias in the question: \emph{Should wasteful government spending be cut?}
+  \item Name the bias: a survey about favourite sport is taken at a hockey game.
+  \item From grades of 300, 200, 100 students, take a proportional sample of 60. How many from each?
+  \item Parameter or statistic: the mean age of 500 surveyed shoppers is 34.
+  \item Name the method: every 25th shopper entering a mall is surveyed.
+  \item Name the method: 5 neighbourhoods are chosen at random and all residents surveyed.
+  \item A TV show asks viewers to phone in opinions. \\ \textbf{(a)} name two biases; \\ \textbf{(b)} is it reliable; \\ \textbf{(c)} suggest a better design.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item population $=$ 40\,000 voters; sample $=$ 500 polled
+  \item statistic
+  \item 40 women, 10 men
+  \item $k=50$
+  \item cluster
+  \item non-response bias
+  \item response (leading/wording) bias
+  \item sampling/coverage bias
+  \item 30, 20, 10
+  \item statistic
+  \item systematic
+  \item cluster
+  \item (a) self-selection + coverage; (b) not reliable; (c) random sample of the population
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

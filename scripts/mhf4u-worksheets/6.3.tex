@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MHF4U \textperiodcentered{} 6.3}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 6.3 --- Proving Trigonometric Identities}\\[2pt]
+{\small Grade 12 Advanced Functions (MHF4U) \textperiodcentered{} Unit 6: Trigonometric Identities and Equations}
+\end{center}
+
+\begin{ideabox}
+Transform one side using the Pythagorean, quotient, and reciprocal identities until it matches the other.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item $\sin^2\theta+\cos^2\theta=1$; $1+\tan^2\theta=\sec^2\theta$; $1+\cot^2\theta=\csc^2\theta$.
+  \item $\tan\theta=\tfrac{\sin\theta}{\cos\theta}$, $\cot\theta=\tfrac{\cos\theta}{\sin\theta}$.
+  \item Start with the harder side; rewrite in sines and cosines.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{What a proof shows}An \textbf{identity} holds for all valid angles; a proof transforms one side into the other using known identities and algebra.
+\lh{A steady strategy}Start from the more complex side, rewrite everything in sines and cosines, and lean on the Pythagorean and compound identities.
+\lh{Not an equation}You never move terms across the equals sign — each step simply rewrites one side until the two match.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Pythagorean}
+Prove $1-\cos^2 x=\sin^2 x$.\soln From $\sin^2 x+\cos^2 x=1$, subtract $\cos^2 x$. The sum is always $1$:\begin{center}\begin{tikzpicture}\begin{axis}[width=9.2cm,height=4.6cm,axis lines=middle,xlabel={\small$x$},ylabel={\small$y$},xmin=-0.4,xmax=6.9,ymin=-0.4,ymax=2,samples=220,xtick={1.5708,3.1416,4.7124,6.2832},xticklabels={$\frac{\pi}{2}$,$\pi$,$\frac{3\pi}{2}$,$2\pi$}]\addplot[exblue,very thick,domain=0:6.4]{(sin(deg(x)))^2+(cos(deg(x)))^2};\end{axis}\end{tikzpicture}\end{center}
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Quotient}
+Prove $\tan x\cos x=\sin x$.\soln $\dfrac{\sin x}{\cos x}\cdot\cos x=\sin x$. $\checkmark$
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Reciprocal ratios}
+Prove $\dfrac{\sec x}{\csc x}=\tan x$.\soln $\dfrac{1/\cos x}{1/\sin x}=\dfrac{\sin x}{\cos x}=\tan x$. $\checkmark$
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Build to a known one}
+Prove $\csc x\tan x=\sec x$.\soln $\dfrac1{\sin x}\cdot\dfrac{\sin x}{\cos x}=\dfrac1{\cos x}=\sec x$. $\checkmark$
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Pythagorean form}
+Prove $1+\tan^2 x=\sec^2 x$.\soln Divide $\sin^2 x+\cos^2 x=1$ by $\cos^2 x$. $\checkmark$
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Pythagorean}
+Prove $1-\sin^2 x=\cos^2 x$.\soln From $\sin^2 x+\cos^2 x=1$. $\checkmark$
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Quotient}
+Prove $\cot x\sin x=\cos x$.\soln $\dfrac{\cos x}{\sin x}\cdot\sin x=\cos x$. $\checkmark$
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Reciprocal ratios}
+Prove $\dfrac{\csc x}{\sec x}=\cot x$.\soln $\dfrac{1/\sin x}{1/\cos x}=\dfrac{\cos x}{\sin x}=\cot x$. $\checkmark$
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Build}
+Prove $\sec x\cot x=\csc x$.\soln $\dfrac1{\cos x}\cdot\dfrac{\cos x}{\sin x}=\dfrac1{\sin x}=\csc x$. $\checkmark$
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Prove $1-\sin^2 x=\cos^2 x$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Prove $\cot x\sin x=\cos x$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Prove $\dfrac{\csc x}{\sec x}=\cot x$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Prove $\sec x\cot x=\csc x$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Prove $1+\cot^2 x=\csc^2 x$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Prove $\tan x\cos x=\sin x$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Prove $\dfrac{\sec x}{\csc x}=\tan x$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Prove $\sin x\sec x=\tan x$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Prove $\cos x\csc x=\cot x$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Prove $1+\tan^2 x=\sec^2 x$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Prove $\dfrac{1-\cos^2 x}{\sin x}=\sin x$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Prove $\csc x\tan x=\sec x$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Prove $\dfrac{\sin x}{1+\cos x}+\dfrac{1+\cos x}{\sin x}=\dfrac{2}{\sin x}$.\workspace{4cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Prove $1-\sin^2 x=\cos^2 x$.
+  \item Prove $\cot x\sin x=\cos x$.
+  \item Prove $\dfrac{\csc x}{\sec x}=\cot x$.
+  \item Prove $\sec x\cot x=\csc x$.
+  \item Prove $1+\cot^2 x=\csc^2 x$.
+  \item Prove $\tan x\cos x=\sin x$.
+  \item Prove $\dfrac{\sec x}{\csc x}=\tan x$.
+  \item Prove $\sin x\sec x=\tan x$.
+  \item Prove $\cos x\csc x=\cot x$.
+  \item Prove $1+\tan^2 x=\sec^2 x$.
+  \item Prove $\dfrac{1-\cos^2 x}{\sin x}=\sin x$.
+  \item Prove $\csc x\tan x=\sec x$.
+  \item Prove $\dfrac{\sin x}{1+\cos x}+\dfrac{1+\cos x}{\sin x}=\dfrac{2}{\sin x}$.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item from $\sin^2+\cos^2=1$
+  \item $\tfrac{\cos x}{\sin x}\sin x=\cos x$
+  \item $\tfrac{1/\sin x}{1/\cos x}=\cot x$
+  \item $\tfrac1{\cos x}\tfrac{\cos x}{\sin x}=\csc x$
+  \item divide identity by $\sin^2 x$
+  \item $\tfrac{\sin x}{\cos x}\cos x=\sin x$
+  \item $\tfrac{1/\cos x}{1/\sin x}=\tan x$
+  \item $\sin x\cdot\tfrac1{\cos x}=\tan x$
+  \item $\cos x\cdot\tfrac1{\sin x}=\cot x$
+  \item divide identity by $\cos^2 x$
+  \item $\tfrac{\sin^2 x}{\sin x}=\sin x$
+  \item $\tfrac1{\sin x}\tfrac{\sin x}{\cos x}=\sec x$
+  \item common denom $\to\tfrac{\sin^2 x+(1+\cos x)^2}{\sin x(1+\cos x)}=\tfrac{2}{\sin x}$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

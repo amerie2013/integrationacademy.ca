@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MDM4U \textperiodcentered{} 5.6}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 5.6 --- The z-Score \& Comparing Data}\\[2pt]
+{\small Grade 12 Mathematics of Data Management (MDM4U) \textperiodcentered{} Unit 5: One-Variable Statistics}
+\end{center}
+
+\begin{ideabox}
+A $z$-score, $z=\dfrac{x-\bar x}{\sigma}$, gives a value's standardized position: how many standard deviations it sits from the mean. It lets you compare values from different data sets and, for normal data, convert to a percentile.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item $z=\dfrac{x-\bar x}{\sigma}$; invert with $x=\bar x+z\sigma$.
+  \item Higher $z$ $=$ relatively higher standing; a negative $z$ is below the mean.
+  \item For normal data, a $z$-score maps to a percentile.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Standardizing values}A \textbf{z-score} $z=\dfrac{x-\mu}{\sigma}$ reports how many standard deviations a value is from its mean, so values from different data sets can be compared fairly.
+\lh{Comparing across sets}A score of $80$ may be excellent in one class and ordinary in another; the z-score, not the raw mark, reveals which is relatively better.
+\lh{Sign and size}A positive z lies above the mean, a negative z below, and the larger the magnitude the more unusual the value.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Compute a z-score}
+A score is $85$ where $\bar x=70,\ \sigma=10$. Find $z$.\soln $z=\dfrac{85-70}{10}=1.5$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Compare two data sets}
+Ann scores $82$ on a test with $\bar x=75,\sigma=5$; Ben scores $88$ with $\bar x=80,\sigma=8$. Who did relatively better?\soln $z_{\text{Ann}}=1.4$, $z_{\text{Ben}}=1.0$; Ann.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- z to percentile}
+For normal data, what percentile is $z=1$?\soln $\Phi(1)=0.8413$: the $84$th percentile.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Value from a z-score}
+With $\bar x=60,\ \sigma=8$, find the value at $z=-1.25$.\soln $x=60+(-1.25)(8)=50$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Which is more extreme}
+Compare $z=-2.1$ and $z=1.8$.\soln $|-2.1|>|1.8|$, so $z=-2.1$ is more extreme (further from the mean).
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Negative z-score}
+A value has $z=-0.5$. Where does it lie?\soln Half a standard deviation \emph{below} the mean.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Standardize a value}
+In a set with $\bar x=100,\ \sigma=12$, standardize $x=118$.\soln $z=\dfrac{118-100}{12}=1.5$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Percentile to value}
+Normal data with $\bar x=500,\ \sigma=100$: find the $90$th percentile.\soln $z=1.28$; $x=500+128=628$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Heights (multi-part)}
+Heights are $\bar x=165,\ \sigma=7$ (normal). Find \\ \textbf{(a)} $z$ for $179$; \\ \textbf{(b)} the percentile; \\ \textbf{(c)} the height at the $16$th percentile.\soln (a) $z=2$. (b) $\Phi(2)=0.9772$, the $\approx98$th percentile. (c) $z=-1$: $165-7=158$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+A score is $92$ with $\bar x=80,\ \sigma=6$. Find $z$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+With $\bar x=50,\ \sigma=4$, find $z$ for $x=42$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Who did better: $z=1.2$ or $z=0.9$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+With $\bar x=70,\ \sigma=10$, find the value at $z=2$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Which is more extreme: $z=-1.9$ or $z=1.5$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+A value has $z=-1$. Describe its position.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+For normal data, what percentile is $z=2$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+With $\bar x=100,\ \sigma=12$, standardize $x=76$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Ann: $82$ on $N(75,5)$. Ben: $88$ on $N(80,8)$. Who is relatively higher?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Normal data $\bar x=500,\ \sigma=100$: find the $84$th percentile.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+With $\bar x=25,\ \sigma=3$, find the value at $z=-1$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+For normal data, what percentile is $z=0$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Heights are $N(165,7)$. Find \\ \textbf{(a)} $z$ for $179$; \\ \textbf{(b)} the percentile; \\ \textbf{(c)} the height at the $16$th percentile.\workspace{3cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item A score is $92$ with $\bar x=80,\ \sigma=6$. Find $z$.
+  \item With $\bar x=50,\ \sigma=4$, find $z$ for $x=42$.
+  \item Who did better: $z=1.2$ or $z=0.9$?
+  \item With $\bar x=70,\ \sigma=10$, find the value at $z=2$.
+  \item Which is more extreme: $z=-1.9$ or $z=1.5$?
+  \item A value has $z=-1$. Describe its position.
+  \item For normal data, what percentile is $z=2$?
+  \item With $\bar x=100,\ \sigma=12$, standardize $x=76$.
+  \item Ann: $82$ on $N(75,5)$. Ben: $88$ on $N(80,8)$. Who is relatively higher?
+  \item Normal data $\bar x=500,\ \sigma=100$: find the $84$th percentile.
+  \item With $\bar x=25,\ \sigma=3$, find the value at $z=-1$.
+  \item For normal data, what percentile is $z=0$?
+  \item Heights are $N(165,7)$. Find \\ \textbf{(a)} $z$ for $179$; \\ \textbf{(b)} the percentile; \\ \textbf{(c)} the height at the $16$th percentile.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $2$
+  \item $-2$
+  \item $z=1.2$
+  \item $90$
+  \item $z=-1.9$
+  \item one $\sigma$ below the mean
+  \item $\approx98$th ($\Phi(2)=0.9772$)
+  \item $-2$
+  \item Ann ($z=1.4$ vs $1.0$)
+  \item $z=1\Rightarrow600$
+  \item $22$
+  \item $50$th
+  \item (a) $2$; (b) $\approx98$th; (c) $158$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

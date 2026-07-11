@@ -1,0 +1,175 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MPM2D \textperiodcentered{} 1.3}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 1.3 --- Solving by Substitution}\\[2pt]
+{\small Grade 10 Academic (MPM2D) \textperiodcentered{} Unit 1: Linear Systems}
+\end{center}
+
+\begin{ideabox}
+\textbf{Substitution} solves a system algebraically: isolate one variable, then replace it in the other equation.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item \textbf{Isolate} one variable (easiest when a coefficient is $1$).
+  \item \textbf{Substitute} that expression into the \emph{other} equation and solve for one variable.
+  \item \textbf{Back-substitute} to find the other variable; write the answer as $(x,y)$.
+  \item A true statement like $2=2$ means \textbf{infinitely many} solutions; a false one like $0=3$ means \textbf{none}.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{The idea}\textbf{Substitution} turns two equations into one: solve one equation for a variable, then replace that variable in the other equation, leaving a single equation in one unknown.
+\lh{The steps}Isolate $x$ or $y$ (whichever is easiest), substitute the expression into the second equation, solve it, then back-substitute to find the other variable.
+\lh{When to use it}Substitution shines when one variable already has a coefficient of $1$, so isolating it introduces no fractions.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- A variable already isolated}
+Solve: $y=2x$ and $x+y=9$.
+\soln Substitute $y=2x$: $x+2x=9\Rightarrow 3x=9\Rightarrow x=3$, so $y=6$. Solution $(3,6)$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Substitute and simplify}
+Solve: $y=x+1$ and $2x+y=7$.
+\soln $2x+(x+1)=7\Rightarrow 3x+1=7\Rightarrow x=2$, $y=3$. Solution $(2,3)$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Isolating from $x=$}
+Solve: $x=y-2$ and $3x+y=10$.
+\soln $3(y-2)+y=10\Rightarrow 4y-6=10\Rightarrow y=4$, $x=2$. Solution $(2,4)$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Isolate first}
+Solve: $x+y=5$ and $2x-y=4$.
+\soln From the first, $y=5-x$. Then $2x-(5-x)=4\Rightarrow 3x-5=4\Rightarrow x=3$, $y=2$. Solution $(3,2)$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Larger coefficients}
+Solve: $2x+y=7$ and $3x-2y=0$.
+\soln $y=7-2x$. Then $3x-2(7-2x)=0\Rightarrow 3x-14+4x=0\Rightarrow 7x=14\Rightarrow x=2$, $y=3$. Solution $(2,3)$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Infinitely many}
+Solve: $y=2x-1$ and $4x-2y=2$.
+\soln $4x-2(2x-1)=2\Rightarrow 4x-4x+2=2\Rightarrow 2=2$. Always true $\Rightarrow$ \textbf{infinitely many solutions}.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- No solution}
+Solve: $y=3x+2$ and $6x-2y=1$.
+\soln $6x-2(3x+2)=1\Rightarrow 6x-6x-4=1\Rightarrow -4=1$. False $\Rightarrow$ \textbf{no solution}.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Word problem}
+Two numbers have a sum of $20$ and a difference of $4$. Find them.
+\soln $x+y=20$, $x-y=4$. From the second, $x=y+4$; then $(y+4)+y=20\Rightarrow 2y=16\Rightarrow y=8$, $x=12$. The numbers are $12$ and $8$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Multi-step with check (harder)}
+Solve: $x-3y=1$ and $2x+y=9$.
+\soln $x=1+3y$. Then $2(1+3y)+y=9\Rightarrow 2+7y=9\Rightarrow y=1$, $x=4$. Check: $4-3(1)=1\ \checkmark$, $2(4)+1=9\ \checkmark$. Solution $(4,1)$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Solve by substitution: $y=3x$ and $x+y=8$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Solve by substitution: $y=x-3$ and $x+y=7$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Solve by substitution: $x=2y$ and $3x-y=10$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Solve by substitution: $x+y=10$ and $y=x+2$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Solve by substitution: $2x+y=5$ and $y=x-1$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Solve by substitution: $x-y=3$ and $2x+y=9$.\workspace{2.6cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Solve by substitution: $y=2x+1$ and $3x+y=11$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Solve: $y=4-x$ and $2x+2y=8$. How many solutions?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Solve: $y=2x$ and $4x-2y=3$. How many solutions?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Two numbers have a sum of $30$, and one is twice the other. Find them.\workspace{2.6cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Solve by substitution: $3x-y=7$ and $y=x+1$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Solve by substitution: $x+2y=8$ and $x=y+2$.\workspace{2.6cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+A jar of $12$ coins (dimes and quarters) is worth \$2.10. How many of each?\workspace{3.2cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Solve by substitution: $y=3x$ and $x+y=8$.
+  \item Solve by substitution: $y=x-3$ and $x+y=7$.
+  \item Solve by substitution: $x=2y$ and $3x-y=10$.
+  \item Solve by substitution: $x+y=10$ and $y=x+2$.
+  \item Solve by substitution: $2x+y=5$ and $y=x-1$.
+  \item Solve by substitution: $x-y=3$ and $2x+y=9$.
+  \item Solve by substitution: $y=2x+1$ and $3x+y=11$.
+  \item Solve: $y=4-x$ and $2x+2y=8$. How many solutions?
+  \item Solve: $y=2x$ and $4x-2y=3$. How many solutions?
+  \item Two numbers have a sum of $30$, and one is twice the other. Find them.
+  \item Solve by substitution: $3x-y=7$ and $y=x+1$.
+  \item Solve by substitution: $x+2y=8$ and $x=y+2$.
+  \item A jar of $12$ coins (dimes and quarters) is worth \$2.10. How many of each?
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $x+3x=8\Rightarrow x=2$, $y=6$: $(2,6)$.
+  \item $2x-3=7\Rightarrow x=5$, $y=2$: $(5,2)$.
+  \item $6y-y=10\Rightarrow y=2$, $x=4$: $(4,2)$.
+  \item $2x+2=10\Rightarrow x=4$, $y=6$: $(4,6)$.
+  \item $2x+x-1=5\Rightarrow x=2$, $y=1$: $(2,1)$.
+  \item $x=y+3$; $2(y+3)+y=9\Rightarrow y=1$, $x=4$: $(4,1)$.
+  \item $5x+1=11\Rightarrow x=2$, $y=5$: $(2,5)$.
+  \item $2x+2(4-x)=8\Rightarrow 8=8$: infinitely many.
+  \item $4x-4x=3\Rightarrow 0=3$: no solution.
+  \item $x=2y$, $x+y=30\Rightarrow 3y=30\Rightarrow y=10$, $x=20$.
+  \item $3x-(x+1)=7\Rightarrow x=4$, $y=5$: $(4,5)$.
+  \item $(y+2)+2y=8\Rightarrow y=2$, $x=4$: $(4,2)$.
+  \item $d+q=12$, $0.10d+0.25q=2.10\Rightarrow 0.15q=0.90\Rightarrow q=6$, $d=6$.
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

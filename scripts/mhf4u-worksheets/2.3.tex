@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MHF4U \textperiodcentered{} 2.3}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 2.3 --- Solving Polynomial Equations}\\[2pt]
+{\small Grade 12 Advanced Functions (MHF4U) \textperiodcentered{} Unit 2: Polynomial Equations and Inequalities}
+\end{center}
+
+\begin{ideabox}
+Factor fully — common factor, grouping, or the factor theorem — then set each factor to zero.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Take out the common factor first.
+  \item Try grouping, or the factor theorem + division.
+  \item A degree-$n$ polynomial has $n$ roots (with multiplicity).
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Factor to solve}Set the polynomial to zero, factor completely using the factor theorem, then apply the zero-product property.
+\lh{Counting real roots}A degree-$n$ equation has at most $n$ real roots; irreducible quadratic factors contribute non-real roots instead.
+\lh{Repeated roots}A repeated factor produces a repeated root, seen on the graph as a touch or a flattening at the axis.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Common factor}
+Solve $x^3-4x=0$.\soln $x(x-2)(x+2)=0\Rightarrow x=0,2,-2$. The graph crosses at all three:\eplot{-3}{3}{-4}{4}{\addplot[exblue,very thick,domain=-2.4:2.4]{x^3-4*x};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(-2,0) (0,0) (2,0)};}
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Factor a trinomial}
+Solve $x^3-2x^2-3x=0$.\soln $x(x-3)(x+1)=0\Rightarrow x=0,3,-1$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Grouping}
+Solve $x^3+2x^2-x-2=0$.\soln $x^2(x+2)-(x+2)=(x+2)(x-1)(x+1)=0\Rightarrow x=-2,1,-1$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Factor theorem}
+Solve $x^3-7x-6=0$.\soln $P(-1)=0$; divide → $(x+1)(x-3)(x+2)=0\Rightarrow x=-1,3,-2$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Quadratic in $x^2$}
+Solve $x^4-5x^2+4=0$.\soln $(x^2-1)(x^2-4)=0\Rightarrow x=\pm1,\pm2$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Common factor}
+Solve $x^3-9x=0$.\soln $x(x-3)(x+3)=0\Rightarrow x=0,3,-3$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Trinomial}
+Solve $x^3-x^2-2x=0$.\soln $x(x-2)(x+1)=0\Rightarrow x=0,2,-1$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Grouping}
+Solve $x^3+3x^2-x-3=0$.\soln $(x+3)(x-1)(x+1)=0\Rightarrow x=-3,1,-1$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Factor theorem}
+Solve $x^3-4x^2+x+6=0$ (hint $x=-1$).\soln $(x+1)(x-2)(x-3)=0\Rightarrow x=-1,2,3$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Solve $x^3-9x=0$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Solve $x^3-x^2-2x=0$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Solve $x^3+3x^2-x-3=0$ by grouping.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Solve $x^3-4x^2+x+6=0$ (hint $x=-1$).\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Solve $x^4-5x^2+4=0$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Solve $x^3-16x=0$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Solve $x^3-3x^2-4x=0$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Solve $x^3-x=0$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Solve $x^4-13x^2+36=0$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Solve $x^3+x^2-9x-9=0$ by grouping.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Solve $x^3-2x^2-5x+6=0$ (hint $x=1$).\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Solve $2x^3-8x=0$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Solve $x^3-6x^2+11x-6=0$ (hint: try $x=1$).\workspace{3.5cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Solve $x^3-9x=0$.
+  \item Solve $x^3-x^2-2x=0$.
+  \item Solve $x^3+3x^2-x-3=0$ by grouping.
+  \item Solve $x^3-4x^2+x+6=0$ (hint $x=-1$).
+  \item Solve $x^4-5x^2+4=0$.
+  \item Solve $x^3-16x=0$.
+  \item Solve $x^3-3x^2-4x=0$.
+  \item Solve $x^3-x=0$.
+  \item Solve $x^4-13x^2+36=0$.
+  \item Solve $x^3+x^2-9x-9=0$ by grouping.
+  \item Solve $x^3-2x^2-5x+6=0$ (hint $x=1$).
+  \item Solve $2x^3-8x=0$.
+  \item Solve $x^3-6x^2+11x-6=0$ (hint: try $x=1$).
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $0,3,-3$
+  \item $0,2,-1$
+  \item $-3,1,-1$
+  \item $-1,2,3$
+  \item $\pm1,\pm2$
+  \item $0,4,-4$
+  \item $0,4,-1$
+  \item $0,1,-1$
+  \item $\pm2,\pm3$
+  \item $-1,3,-3$
+  \item $1,3,-2$
+  \item $0,2,-2$
+  \item $1,2,3$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

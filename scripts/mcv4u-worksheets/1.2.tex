@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MCV4U \textperiodcentered{} 1.2}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 1.2 --- The Limit of a Function}\\[2pt]
+{\small Grade 12 Calculus and Vectors (MCV4U) \textperiodcentered{} Unit 1: Rates of Change and Limits}
+\end{center}
+
+\begin{ideabox}
+$\displaystyle\lim_{x\to a}f(x)=L$ is the value $f$ approaches near $a$. Substitute when continuous; for $\tfrac00$ factor or rationalize first.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Direct substitution when continuous.
+  \item $\tfrac00$ indeterminate $\Rightarrow$ factor / rationalize, then substitute.
+  \item One-sided limits must agree; at infinity, divide by the highest power.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{What a limit is}$\displaystyle\lim_{x\to a}f(x)=L$ means $f(x)$ gets arbitrarily close to $L$ as $x$ approaches $a$ — regardless of the value (or gap) at $a$ itself.
+\lh{One-sided limits}The limit exists only when the left-hand and right-hand limits agree; a jump between them means the limit does not exist.
+\lh{Indeterminate forms}A form like $\tfrac00$ signals more work — factor, rationalize, or simplify first, then substitute.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Direct substitution}
+$\displaystyle\lim_{x\to3}(2x+1)$.\soln Continuous; substitute: $2(3)+1=7$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Factor out 0/0}
+$\displaystyle\lim_{x\to2}\dfrac{x^2-4}{x-2}$.\soln $\tfrac00$; factor $\dfrac{(x-2)(x+2)}{x-2}=x+2\to4$. The graph is $y=x+2$ with a hole at $(2,4)$:\eplot{-1}{5}{-1}{7}{\addplot[exblue,very thick,domain=-1:1.9]{x+2};\addplot[exblue,very thick,domain=2.1:5]{x+2};\addplot[red,only marks,mark=o,mark size=2.4pt] coordinates {(2,4)};}
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Rationalize 0/0}
+$\displaystyle\lim_{x\to0}\dfrac{\sqrt{x+9}-3}{x}$.\soln Multiply by the conjugate: $\dfrac{x}{x(\sqrt{x+9}+3)}=\dfrac1{\sqrt{x+9}+3}\to\dfrac16$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- One-sided (DNE)}
+$\displaystyle\lim_{x\to0}\dfrac{|x|}{x}$.\soln Right limit $=1$, left limit $=-1$; they differ, so the limit does not exist.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Limit at infinity}
+$\displaystyle\lim_{x\to\infty}\dfrac{3x^2-x}{x^2+5}$.\soln Divide by $x^2$: $\dfrac{3-1/x}{1+5/x^2}\to3$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Direct substitution}
+$\displaystyle\lim_{x\to4}(x^2-1)$.\soln $16-1=15$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Factor}
+$\displaystyle\lim_{x\to3}\dfrac{x^2-9}{x-3}$.\soln $x+3\to6$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- At infinity}
+$\displaystyle\lim_{x\to\infty}\dfrac{5x-2}{x+1}$.\soln Ratio of leading coefficients $\to5$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Factor}
+$\displaystyle\lim_{x\to1}\dfrac{x^2+x-2}{x-1}$.\soln $\dfrac{(x+2)(x-1)}{x-1}=x+2\to3$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+$\displaystyle\lim_{x\to5}(3x-2)$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+$\displaystyle\lim_{x\to2}\dfrac{x^2-4}{x-2}$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+$\displaystyle\lim_{x\to\infty}\dfrac{4x-1}{2x+3}$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+$\displaystyle\lim_{x\to1}\dfrac{x^2-1}{x-1}$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Does $\displaystyle\lim_{x\to0}\dfrac1x$ exist?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+$\displaystyle\lim_{x\to-2}\dfrac{x^2-4}{x+2}$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+$\displaystyle\lim_{x\to\infty}\dfrac{2x^2+1}{x^2-3}$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+$\displaystyle\lim_{x\to0}\dfrac{\sqrt{x+4}-2}{x}$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+$\displaystyle\lim_{x\to3}(x^2-2x)$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+$\displaystyle\lim_{x\to4}\dfrac{x^2-16}{x-4}$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+$\displaystyle\lim_{x\to\infty}\dfrac{x+5}{x^2+1}$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+$\displaystyle\lim_{x\to2}\dfrac{x^2+x-6}{x-2}$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+$\displaystyle\lim_{x\to0}\dfrac{\sqrt{x+1}-1}{x}$ (rationalize).\workspace{3cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $\displaystyle\lim_{x\to5}(3x-2)$?
+  \item $\displaystyle\lim_{x\to2}\dfrac{x^2-4}{x-2}$?
+  \item $\displaystyle\lim_{x\to\infty}\dfrac{4x-1}{2x+3}$?
+  \item $\displaystyle\lim_{x\to1}\dfrac{x^2-1}{x-1}$?
+  \item Does $\displaystyle\lim_{x\to0}\dfrac1x$ exist?
+  \item $\displaystyle\lim_{x\to-2}\dfrac{x^2-4}{x+2}$?
+  \item $\displaystyle\lim_{x\to\infty}\dfrac{2x^2+1}{x^2-3}$?
+  \item $\displaystyle\lim_{x\to0}\dfrac{\sqrt{x+4}-2}{x}$?
+  \item $\displaystyle\lim_{x\to3}(x^2-2x)$?
+  \item $\displaystyle\lim_{x\to4}\dfrac{x^2-16}{x-4}$?
+  \item $\displaystyle\lim_{x\to\infty}\dfrac{x+5}{x^2+1}$?
+  \item $\displaystyle\lim_{x\to2}\dfrac{x^2+x-6}{x-2}$?
+  \item $\displaystyle\lim_{x\to0}\dfrac{\sqrt{x+1}-1}{x}$ (rationalize).
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $13$
+  \item $4$
+  \item $2$
+  \item $2$
+  \item no ($\pm\infty$)
+  \item $-4$
+  \item $2$
+  \item $\tfrac14$
+  \item $3$
+  \item $8$
+  \item $0$
+  \item $5$
+  \item $\tfrac12$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

@@ -1,0 +1,177 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MPM2D \textperiodcentered{} 2.2}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 2.2 --- Length of a Line Segment}\\[2pt]
+{\small Grade 10 Academic (MPM2D) \textperiodcentered{} Unit 2: Analytic Geometry}
+\end{center}
+
+\begin{ideabox}
+The \textbf{distance} between two points comes from the Pythagorean theorem: $d=\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}$.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Subtract the $x$'s and the $y$'s, square, add, then take the square root.
+  \item Order of subtraction doesn't matter --- the squares remove the sign.
+  \item Leave answers as exact radicals (e.g. $\sqrt{20}=2\sqrt5$) unless a decimal is asked.
+  \item Horizontal/vertical segments: just count the change in one coordinate.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{The idea}The \textbf{length} between two points comes straight from the Pythagorean theorem applied to the horizontal and vertical gaps.
+\lh{The formula}$d=\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}$: the coordinate differences are the legs of a right triangle, and the segment is its hypotenuse.
+\lh{Uses}Distances let you classify triangles as isosceles or equilateral, and test whether points sit on a circle of a given radius.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- A 3-4-5 triangle}
+Find the distance between $(0,0)$ and $(3,4)$.
+\soln $d=\sqrt{3^2+4^2}=\sqrt{25}=5.$
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Shifted 3-4-5}
+Find the distance between $(1,2)$ and $(4,6)$.
+\soln $d=\sqrt{3^2+4^2}=\sqrt{25}=5.$
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- With negatives}
+Find the distance between $(-2,1)$ and $(2,4)$.
+\soln $d=\sqrt{4^2+3^2}=\sqrt{25}=5.$
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Another}
+Find the distance between $(-1,-1)$ and $(2,3)$.
+\soln $d=\sqrt{3^2+4^2}=5.$
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Vertical segment}
+Find the length of the segment from $(2,5)$ to $(2,-3)$.
+\soln Same $x$, so $d=|5-(-3)|=8.$
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Exact radical}
+Find the distance between $(1,1)$ and $(4,3)$.
+\soln $d=\sqrt{3^2+2^2}=\sqrt{13}.$
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Simplifying a radical}
+Find the distance between $(-3,2)$ and $(1,-2)$.
+\soln $d=\sqrt{4^2+(-4)^2}=\sqrt{32}=4\sqrt2.$
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Perimeter of a triangle}
+Find the perimeter of the triangle with vertices $(0,0)$, $(4,0)$, $(4,3)$.
+\soln Sides: $4$, $3$, and $\sqrt{4^2+3^2}=5$. Perimeter $=4+3+5=12.$
+\plot{-1}{6}{-1}{5}{\addplot[exblue,very thick]coordinates{(0,0)(4,0)(4,3)(0,0)};\addplot[mark=*,only marks,black]coordinates{(0,0)(4,0)(4,3)};}
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Proving isosceles (harder)}
+Show that $\triangle ABC$ with $A(1,1)$, $B(5,1)$, $C(3,5)$ is isosceles.
+\soln $AB=\sqrt{4^2+0^2}=4$; $AC=\sqrt{2^2+4^2}=\sqrt{20}$; $BC=\sqrt{(-2)^2+4^2}=\sqrt{20}$. Since $AC=BC$, the triangle is isosceles.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Find the distance between $(0,0)$ and $(6,8)$.\workspace{2.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Find the distance between $(2,3)$ and $(5,7)$.\workspace{2.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Find the distance between $(-1,2)$ and $(3,-1)$.\workspace{2.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Find the length of the segment from $(-4,1)$ to $(2,1)$.\workspace{2.0cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Find the distance between $(0,-3)$ and $(0,4)$.\workspace{2.0cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Find the exact distance between $(2,1)$ and $(5,3)$.\workspace{2.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Find and simplify the distance between $(-2,-2)$ and $(2,2)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Find the distance between $(-5,4)$ and $(7,-1)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Plot $(1,1)$ and $(4,5)$, then find the segment's length.
+\begin{center}\begin{tikzpicture}\begin{axis}[width=8cm,height=6cm,axis lines=middle,grid=both,grid style={gray!16},xmin=-6,xmax=6,ymin=-6,ymax=6,xtick distance=2,ytick distance=2,tick label style={font=\tiny}]\end{axis}\end{tikzpicture}\end{center}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Find the perimeter of the triangle with vertices $(0,0)$, $(6,0)$, $(0,8)$.\workspace{2.6cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Is the triangle $(2,1)$, $(5,1)$, $(2,5)$ a right triangle? Use side lengths.\workspace{2.8cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Which point is closer to the origin: $(3,4)$ or $(-5,1)$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Show that $A(0,0)$, $B(4,2)$, $C(2,6)$, $D(-2,4)$ has all four sides equal (a rhombus).\workspace{3.2cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Find the distance between $(0,0)$ and $(6,8)$.
+  \item Find the distance between $(2,3)$ and $(5,7)$.
+  \item Find the distance between $(-1,2)$ and $(3,-1)$.
+  \item Find the length of the segment from $(-4,1)$ to $(2,1)$.
+  \item Find the distance between $(0,-3)$ and $(0,4)$.
+  \item Find the exact distance between $(2,1)$ and $(5,3)$.
+  \item Find and simplify the distance between $(-2,-2)$ and $(2,2)$.
+  \item Find the distance between $(-5,4)$ and $(7,-1)$.
+  \item Plot $(1,1)$ and $(4,5)$, then find the segment's length.
+  \item Find the perimeter of the triangle with vertices $(0,0)$, $(6,0)$, $(0,8)$.
+  \item Is the triangle $(2,1)$, $(5,1)$, $(2,5)$ a right triangle? Use side lengths.
+  \item Which point is closer to the origin: $(3,4)$ or $(-5,1)$?
+  \item Show that $A(0,0)$, $B(4,2)$, $C(2,6)$, $D(-2,4)$ has all four sides equal (a rhombus).
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $\sqrt{36+64}=\sqrt{100}=10$.
+  \item $\sqrt{9+16}=5$.
+  \item $\sqrt{16+9}=5$.
+  \item $|2-(-4)|=6$.
+  \item $|4-(-3)|=7$.
+  \item $\sqrt{9+4}=\sqrt{13}$.
+  \item $\sqrt{16+16}=\sqrt{32}=4\sqrt2$.
+  \item $\sqrt{12^2+(-5)^2}=\sqrt{169}=13$.
+  \item $\sqrt{3^2+4^2}=5$.
+  \item $6+8+10=24$.
+  \item Sides $3,4,5$; $3^2+4^2=5^2$, so yes (right triangle).
+  \item $(3,4)$: $\sqrt{25}=5$ vs $\sqrt{26}$ --- $(3,4)$ is closer.
+  \item $AB=BC=CD=DA=\sqrt{16+4}=\sqrt{20}$ --- all sides equal.
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

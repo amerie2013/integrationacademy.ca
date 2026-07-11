@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MCT4C \textperiodcentered{} 3.4}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 3.4 --- Solving Oblique-Triangle Problems}\\[2pt]
+{\small Grade 12 Mathematics for College Technology (MCT4C) \textperiodcentered{} Unit 3: Trigonometric Functions}
+\end{center}
+
+\begin{ideabox}
+Real problems (surveying, navigation, structures) reduce to a triangle: sketch it, label the given parts, choose the sine or cosine law, then answer the question. Bearings are measured clockwise from north.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Sketch and label before computing.
+  \item SAS/SSS $\to$ cosine law; matched pair $\to$ sine law.
+  \item Convert bearings/elevations into interior angles.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{From words to a triangle}Surveying and navigation problems become oblique triangles: sketch, label the known parts, then choose the sine or cosine law.
+\lh{Bearings and elevations}Convert a bearing (clockwise from north) or an angle of elevation into an interior angle of the triangle.
+\lh{Area from two sides}The area of any triangle from two sides and their included angle is $\tfrac12ab\sin C$.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Two ships}
+Two ships leave port with a $60^\circ$ angle between courses, sailing $20$ km and $30$ km. How far apart?\soln $d=\sqrt{400+900-1200\cos60^\circ}=\sqrt{700}\approx26.5$ km.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Survey a distance}
+From two points $100$ m apart, a rock is seen at $40^\circ$ and $75^\circ$. Find its distance from the first point.\soln Third angle $65^\circ$; $d=\dfrac{100\sin75^\circ}{\sin65^\circ}\approx106.6$ m.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Leaning pole}
+A $12$ m pole leans; a $15$ m wire from its top meets the ground $9$ m from the base. Find the angle the pole makes with the ground.\soln $\cos\theta=\dfrac{12^2+9^2-15^2}{2(12)(9)}=0\Rightarrow\theta=90^\circ$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Triangular lot}
+A lot has sides $40$ m, $55$ m with a $80^\circ$ angle between. Find the third side.\soln $\sqrt{1600+3025-4400\cos80^\circ}\approx62.1$ m.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Height by angles}
+Two points $50$ m apart on level ground sight a tower top at $30^\circ$ and $50^\circ$. Find the tower's slant distance from the nearer point.\soln Angle at tower $=20^\circ$; $d=\dfrac{50\sin30^\circ}{\sin20^\circ}\approx73.1$ m.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Bearing problem}
+A plane flies $200$ km, turns through an interior angle of $110^\circ$, flies $150$ km. Distance from start?\soln $\sqrt{200^2+150^2-2(200)(150)\cos110^\circ}\approx288$ km.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Area of a lot}
+Find the area of a triangular lot with sides $40,55$ and included $80^\circ$.\soln $\tfrac12(40)(55)\sin80^\circ\approx1083$ m$^2$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Guy wires}
+Two guy wires reach a tower top from points $30$ m apart, at $58^\circ$ and $49^\circ$. Find the longer wire.\soln Angle at top $=73^\circ$; longer wire opposite the larger ground angle: $\dfrac{30\sin58^\circ}{\sin73^\circ}\approx26.6$ m.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Distance across a lake}
+From one point, two landmarks are $500$ m and $650$ m away with a $72^\circ$ angle between. Find the distance between landmarks.\soln $\sqrt{500^2+650^2-2(500)(650)\cos72^\circ}\approx686.8$ m.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Two roads leave a town at $55^\circ$; cars go $80$ km and $110$ km. How far apart?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+A triangular field has sides $60$ m, $80$ m, included $65^\circ$ — find the third side.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+From two points $200$ m apart, a tower is seen at $35^\circ$ and $48^\circ$. Distance from the nearer point?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Find the area of a lot with sides $30$ m, $45$ m and a $70^\circ$ angle between.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Two ships leave port at a $48^\circ$ angle, sailing $15$ km and $22$ km. Distance apart?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+A $10$ m ladder and an $8$ m ladder reach the same point from $6$ m apart. Find the angle between them at the top given the base triangle has sides $10,8,6$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+A plane flies $300$ km, turns to an interior $120^\circ$, flies $200$ km. Distance from start?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+A triangle has sides $12,15,20$ — find its largest angle.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Two observers $400$ m apart sight a balloon at $40^\circ$ and $65^\circ$ (same side). Find the balloon's distance from the first observer.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Find the area of a triangle with sides $9,12$ and included $50^\circ$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+A parallelogram has sides $8,14$ with a $60^\circ$ angle — find the longer diagonal.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Two trails diverge at $75^\circ$; hikers go $5$ km and $7$ km. How far apart?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+A surveyor at $A$ sees $B$ (250 m) and $C$ (310 m) with $\angle BAC=68^\circ$. Find $BC$, then $\angle ABC$.\workspace{3.4cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Two roads leave a town at $55^\circ$; cars go $80$ km and $110$ km. How far apart?
+  \item A triangular field has sides $60$ m, $80$ m, included $65^\circ$ — find the third side.
+  \item From two points $200$ m apart, a tower is seen at $35^\circ$ and $48^\circ$. Distance from the nearer point?
+  \item Find the area of a lot with sides $30$ m, $45$ m and a $70^\circ$ angle between.
+  \item Two ships leave port at a $48^\circ$ angle, sailing $15$ km and $22$ km. Distance apart?
+  \item A $10$ m ladder and an $8$ m ladder reach the same point from $6$ m apart. Find the angle between them at the top given the base triangle has sides $10,8,6$.
+  \item A plane flies $300$ km, turns to an interior $120^\circ$, flies $200$ km. Distance from start?
+  \item A triangle has sides $12,15,20$ — find its largest angle.
+  \item Two observers $400$ m apart sight a balloon at $40^\circ$ and $65^\circ$ (same side). Find the balloon's distance from the first observer.
+  \item Find the area of a triangle with sides $9,12$ and included $50^\circ$.
+  \item A parallelogram has sides $8,14$ with a $60^\circ$ angle — find the longer diagonal.
+  \item Two trails diverge at $75^\circ$; hikers go $5$ km and $7$ km. How far apart?
+  \item A surveyor at $A$ sees $B$ (250 m) and $C$ (310 m) with $\angle BAC=68^\circ$. Find $BC$, then $\angle ABC$.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $\sqrt{80^2+110^2-2(80)(110)\cos55^\circ}\approx91.7$ km
+  \item $\sqrt{3600+6400-9600\cos65^\circ}\approx77.1$ m
+  \item angle $97^\circ$: $\tfrac{200\sin35^\circ}{\sin97^\circ}\approx115.6$ m
+  \item $\tfrac12(30)(45)\sin70^\circ\approx634$ m$^2$
+  \item $\sqrt{225+484-660\cos48^\circ}\approx16.4$ km
+  \item $\cos\theta=\tfrac{100+64-36}{160}=0.8\Rightarrow36.9^\circ$
+  \item $\sqrt{300^2+200^2-2(300)(200)\cos120^\circ}\approx436$ km
+  \item opp $20$: $\cos=\tfrac{144+225-400}{360}=-0.086\Rightarrow94.9^\circ$
+  \item angle $75^\circ$: $\tfrac{400\sin40^\circ}{\sin75^\circ}\approx266.2$ m
+  \item $\tfrac12(9)(12)\sin50^\circ\approx41.4$ units$^2$
+  \item $\sqrt{64+196-224\cos120^\circ}\approx19.3$
+  \item $\sqrt{25+49-70\cos75^\circ}\approx7.5$ km
+  \item $BC=\sqrt{250^2+310^2-2(250)(310)\cos68^\circ}\approx317$ m; $\sin B=\tfrac{310\sin68^\circ}{317}\Rightarrow B\approx65.0^\circ$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

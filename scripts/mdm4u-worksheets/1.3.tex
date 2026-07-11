@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MDM4U \textperiodcentered{} 1.3}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 1.3 --- Permutations with Identical Objects}\\[2pt]
+{\small Grade 12 Mathematics of Data Management (MDM4U) \textperiodcentered{} Unit 1: Counting, Permutations \& Combinations}
+\end{center}
+
+\begin{ideabox}
+Indistinguishable objects overcount. Divide by the factorials of each repeat: $\dfrac{n!}{a!\,b!\cdots}$. Lattice paths and bit strings are the same idea in disguise.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Arrangements of $n$ items with repeats $a,b,\dots$: $\dfrac{n!}{a!\,b!\cdots}$.
+  \item Grid path (all shortest routes): $\dfrac{(R+U)!}{R!\,U!}$.
+  \item An $n$-bit string with $k$ ones: $\dfrac{n!}{k!\,(n-k)!}=\dbinom{n}{k}$.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{The trouble with duplicates}When some objects are identical, swapping them does not create a new arrangement, so a plain $n!$ overcounts. You must divide the repeats back out.
+\lh{The formula}For $n$ objects with one kind repeated $a$ times, another $b$ times, and so on, the number of distinct arrangements is $\dfrac{n!}{a!\,b!\cdots}$. The letters of \textbf{BANANA} give $\dfrac{6!}{3!\,2!}=60$.
+\lh{Grid paths are the same idea}A shortest route that goes $a$ blocks east and $b$ blocks north is just an arrangement of $a$ E's and $b$ N's, so there are $\dfrac{(a+b)!}{a!\,b!}$ of them.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Word with repeats}
+How many arrangements of BANANA?\soln B$1$, A$3$, N$2$: $\dfrac{6!}{3!\,2!}=60$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Many repeats}
+Arrangements of MISSISSIPPI?\soln M$1$, I$4$, S$4$, P$2$: $\dfrac{11!}{4!\,4!\,2!}=34\,650$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- A multiset of digits}
+How many arrangements of the digits $1,1,2,3,3,3$?\soln $\dfrac{6!}{2!\,3!}=60$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Lattice path}
+Shortest routes across a $4\times3$ grid (4 rights, 3 ups)? Interpret the count.\soln $\dfrac{7!}{4!\,3!}=35$ --- choosing which 4 of the 7 steps are \emph{right}.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Bit string = combination}
+How many 8-bit binary strings contain exactly three $1$s?\soln $\dfrac{8!}{3!\,5!}=56=\dbinom{8}{3}$ --- choose the positions of the ones.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Longer word}
+Arrangements of SUCCESS?\soln S$3$, U$1$, C$2$, E$1$: $\dfrac{7!}{3!\,2!}=420$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Path through a checkpoint}
+On a $4\times4$ grid, how many shortest routes pass through the centre corner $(2,2)$?\soln Multiply the two legs: $\dbinom{4}{2}\cdot\dbinom{4}{2}=6\cdot6=36$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Word with a triple}
+How many arrangements of CANADA?\soln 3 A's: $\dfrac{6!}{3!}=120$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Constrained arrangement}
+How many arrangements of TORONTO \\ \textbf{(a)} in total; \\ \textbf{(b)} beginning with T?\soln T$2$, O$3$, R$1$, N$1$. (a) $\dfrac{7!}{2!\,3!}=420$. (b) fix a T; arrange T,O,O,O,R,N: $\dfrac{6!}{3!}=120$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+How many arrangements of the letters of APPLE?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+A ship signals with a vertical line of 3 red and 4 blue identical flags. How many signals?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Shortest routes across a $3\times2$ city grid (3 east, 2 north)?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+A baker lines up 4 identical croissants and 3 identical muffins in a display row. How many arrangements?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+A student's 6 report grades are A, A, B, B, B, C. In how many orders could they have appeared?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+How many arrangements of the letters of ONTARIO?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+How many 8-bit binary strings contain exactly three $1$s?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+How many arrangements of the letters of COMMITTEE?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+On a $4\times4$ grid, how many shortest routes pass through the centre point $(2,2)$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+A staircase is climbed using 2 single steps and 3 double steps in some order. How many step-sequences?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Arrange 2 A's, 2 B's, and 2 C's in a row.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+How many arrangements of the letters of TENNESSEE?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+How many arrangements of MISSISSIPPI have all four S's together?\workspace{3cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item How many arrangements of the letters of APPLE?
+  \item A ship signals with a vertical line of 3 red and 4 blue identical flags. How many signals?
+  \item Shortest routes across a $3\times2$ city grid (3 east, 2 north)?
+  \item A baker lines up 4 identical croissants and 3 identical muffins in a display row. How many arrangements?
+  \item A student's 6 report grades are A, A, B, B, B, C. In how many orders could they have appeared?
+  \item How many arrangements of the letters of ONTARIO?
+  \item How many 8-bit binary strings contain exactly three $1$s?
+  \item How many arrangements of the letters of COMMITTEE?
+  \item On a $4\times4$ grid, how many shortest routes pass through the centre point $(2,2)$?
+  \item A staircase is climbed using 2 single steps and 3 double steps in some order. How many step-sequences?
+  \item Arrange 2 A's, 2 B's, and 2 C's in a row.
+  \item How many arrangements of the letters of TENNESSEE?
+  \item How many arrangements of MISSISSIPPI have all four S's together?
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $\dfrac{5!}{2!}=60$
+  \item $\dfrac{7!}{3!\,4!}=35$
+  \item $\dfrac{5!}{3!\,2!}=10$
+  \item $\dfrac{7!}{4!\,3!}=35$
+  \item $\dfrac{6!}{2!\,3!}=60$
+  \item $\dfrac{7!}{2!}=2520$
+  \item $\dbinom{8}{3}=56$
+  \item $\dfrac{9!}{2!\,2!\,2!}=45\,360$
+  \item $\dbinom{4}{2}^2=36$
+  \item $\dfrac{5!}{2!\,3!}=10$
+  \item $\dfrac{6!}{2!\,2!\,2!}=90$
+  \item $\dfrac{9!}{4!\,2!\,2!}=3780$
+  \item block SSSS $+$ M,I,I,I,I,P,P: $\dfrac{8!}{4!\,2!}=840$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

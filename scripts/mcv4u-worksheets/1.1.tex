@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MCV4U \textperiodcentered{} 1.1}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 1.1 --- Average \& Instantaneous Rate of Change}\\[2pt]
+{\small Grade 12 Calculus and Vectors (MCV4U) \textperiodcentered{} Unit 1: Rates of Change and Limits}
+\end{center}
+
+\begin{ideabox}
+Average rate $=\dfrac{f(b)-f(a)}{b-a}$ (secant slope); instantaneous rate $=\displaystyle\lim_{h\to0}\dfrac{f(a+h)-f(a)}{h}$ (tangent slope).
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Average rate over $[a,b]$: $\dfrac{f(b)-f(a)}{b-a}$.
+  \item Difference quotient: $\dfrac{f(x+h)-f(x)}{h}$ — the secant slope for spacing $h$.
+  \item Let $h\to0$ to get the instantaneous (tangent) rate.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Two kinds of rate}The \textbf{average rate of change} of $f$ over $[a,b]$ is the secant slope $\dfrac{f(b)-f(a)}{b-a}$; the \textbf{instantaneous rate} is the slope at a single point.
+\lh{Secant to tangent}As the interval shrinks toward a point, the secant line approaches the \textbf{tangent} line — the geometric idea behind the derivative.
+\lh{Estimating}Compute average rates over ever-smaller intervals to close in on the instantaneous rate at a point.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Average rate (secant)}
+Average rate of change of $f(x)=x^2+1$ on $[1,3]$.\soln $\dfrac{f(3)-f(1)}{3-1}=\dfrac{10-2}{2}=4$. The secant through $(1,1)$ and $(3,9)$ has slope $4$:\eplot{-1}{4}{-2}{12}{\addplot[exblue,very thick,domain=-1.4:3.4]{x^2};\addplot[qorange,thick,domain=0:4]{4*x-3};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(1,1) (3,9)};}
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Average rate}
+Average rate of change of $f(x)=x^2$ on $[2,4]$.\soln $\dfrac{16-4}{2}=6$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Difference quotient}
+Simplify the difference quotient of $f(x)=x^2$ at a general $x$.\soln $\dfrac{(x+h)^2-x^2}{h}=\dfrac{2xh+h^2}{h}=2x+h$ (limit $2x$).
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Instantaneous via a limit}
+Instantaneous rate of $f(x)=x^2$ at $x=2$.\soln $\displaystyle\lim_{h\to0}\dfrac{(2+h)^2-4}{h}=\lim_{h\to0}(4+h)=4$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Instantaneous}
+Instantaneous rate of $f(x)=3x^2$ at $x=2$.\soln Slope function $6x\Rightarrow 6(2)=12$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Velocity}
+For $s(t)=t^2$, find the instantaneous velocity at $t=4$.\soln $v=2t\Rightarrow 2(4)=8$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Average rate (cubic)}
+Average rate of change of $f(x)=x^3$ on $[1,2]$.\soln $\dfrac{8-1}{1}=7$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Velocity from a model}
+A ball's height is $h(t)=20t-5t^2$. Find its instantaneous velocity at $t=1$.\soln $\displaystyle\lim_{h\to0}\dfrac{20(1+h)-5(1+h)^2-15}{h}=\lim_{h\to0}(10-5h)=10$ m/s.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Difference quotient}
+Simplify the difference quotient of $f(x)=2x^2$ at $x=1$.\soln $\dfrac{2(1+h)^2-2}{h}=4+2h$ (limit $4$).
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Average rate of change of $f(x)=x^2-3$ on $[2,5]$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Average rate of change of $f(x)=x^2$ on $[0,4]$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Simplify the difference quotient of $f(x)=x^2$ at $x=3$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Instantaneous rate of $f(x)=x^2$ at $x=5$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Instantaneous rate of $f(x)=4x^2$ at $x=1$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+For $s(t)=t^2$, the instantaneous velocity at $t=6$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Average rate of change of $f(x)=x^3$ on $[0,2]$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Simplify $\dfrac{3(2+h)^2-12}{h}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+A ball's height is $h(t)=30t-5t^2$; instantaneous velocity at $t=2$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Average rate of change of $f(x)=2x+1$ on $[1,4]$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Instantaneous rate of $f(x)=x^2$ at $x=-3$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+For $s(t)=t^2+t$, instantaneous velocity at $t=1$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+A population is $P(t)=100+t^2$; find its instantaneous rate of growth at $t=5$ using the limit.\workspace{3cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Average rate of change of $f(x)=x^2-3$ on $[2,5]$?
+  \item Average rate of change of $f(x)=x^2$ on $[0,4]$?
+  \item Simplify the difference quotient of $f(x)=x^2$ at $x=3$.
+  \item Instantaneous rate of $f(x)=x^2$ at $x=5$?
+  \item Instantaneous rate of $f(x)=4x^2$ at $x=1$?
+  \item For $s(t)=t^2$, the instantaneous velocity at $t=6$?
+  \item Average rate of change of $f(x)=x^3$ on $[0,2]$?
+  \item Simplify $\dfrac{3(2+h)^2-12}{h}$.
+  \item A ball's height is $h(t)=30t-5t^2$; instantaneous velocity at $t=2$?
+  \item Average rate of change of $f(x)=2x+1$ on $[1,4]$?
+  \item Instantaneous rate of $f(x)=x^2$ at $x=-3$?
+  \item For $s(t)=t^2+t$, instantaneous velocity at $t=1$?
+  \item A population is $P(t)=100+t^2$; find its instantaneous rate of growth at $t=5$ using the limit.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $\tfrac{22-1}{3}=7$
+  \item $4$
+  \item $6+h$ (limit $6$)
+  \item $10$
+  \item $8$
+  \item $12$
+  \item $\tfrac{8-0}{2}=4$
+  \item $12+3h$ (limit $12$)
+  \item $10$ m/s
+  \item $2$
+  \item $-6$
+  \item $3$
+  \item $\lim_{h\to0}(10+h)=10$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MCR3U \textperiodcentered{} 6.5}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 6.5 --- Pascal's Triangle \& the Binomial Theorem}\\[2pt]
+{\small Grade 11 Functions, University (MCR3U) \textperiodcentered{} Unit 6: Sequences and Series}
+\end{center}
+
+\begin{ideabox}
+Pascal's triangle gives the coefficients for expanding $(a+b)^n$.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Each entry is the sum of the two above it.
+  \item Row $n$ gives the coefficients of $(a+b)^n$.
+  \item Power of $a$ falls; power of $b$ rises.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{The triangle}Each entry of \textbf{Pascal's triangle} is the sum of the two above it, and row $n$ holds the coefficients of $(a+b)^n$.
+\lh{The binomial theorem}$(a+b)^n=\displaystyle\sum_{r=0}^{n}\dbinom{n}{r}a^{n-r}b^{r}$, where $\dbinom{n}{r}$ is a triangle entry and the exponents sum to $n$.
+\lh{Single terms}The general term $\dbinom{n}{r}a^{n-r}b^{r}$ lets you find one coefficient — say of $x^3$ — without the full expansion.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- A row}
+Write row $4$.\soln Add adjacent entries of row 3 ($1,3,3,1$): $1,\ 1{+}3,\ 3{+}3,\ 3{+}1,\ 1$. \\ Row 4 is $1,4,6,4,1$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Cube}
+Expand $(a+b)^3$.\soln Coefficients $1,3,3,1$ with falling/rising powers: $a^3+3a^2b+3ab^2+b^3$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- With numbers}
+Expand $(x+2)^3$.\soln Use $1,3,3,1$ with $b=2$: $x^3+3x^2(2)+3x(4)+8=x^3+6x^2+12x+8$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Fourth power}
+Expand $(x+1)^4$.\soln Row 4 ($1,4,6,4,1$): $x^4+4x^3+6x^2+4x+1$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- A coefficient}
+Coefficient of $a^2b^2$ in $(a+b)^4$?\soln The middle entry of row 4: $6$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- A row}
+Write row $3$.\soln From row 2 ($1,2,1$): $1,3,3,1$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Square}
+Expand $(a+b)^2$.\soln Coefficients $1,2,1$: $a^2+2ab+b^2$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- With numbers}
+Expand $(x+1)^3$.\soln $1,3,3,1$ with $b=1$: $x^3+3x^2+3x+1$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Square}
+Expand $(x+3)^2$.\soln $x^2+2(3)x+9=x^2+6x+9$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Write row $3$ of Pascal's triangle.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Expand $(a+b)^2$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Expand $(x+1)^3$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Expand $(x+3)^2$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Coefficient of $x^3$ in $(x+1)^4$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Write row $5$ of Pascal's triangle.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Expand $(a+b)^4$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Expand $(x+2)^3$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Expand $(x-1)^3$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Coefficient of $x^2$ in $(x+1)^4$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+What do the entries in row $4$ sum to?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Expand $(x+1)^2$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Expand $(2x+1)^3$.\workspace{3cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Write row $3$ of Pascal's triangle.
+  \item Expand $(a+b)^2$.
+  \item Expand $(x+1)^3$.
+  \item Expand $(x+3)^2$.
+  \item Coefficient of $x^3$ in $(x+1)^4$?
+  \item Write row $5$ of Pascal's triangle.
+  \item Expand $(a+b)^4$.
+  \item Expand $(x+2)^3$.
+  \item Expand $(x-1)^3$.
+  \item Coefficient of $x^2$ in $(x+1)^4$?
+  \item What do the entries in row $4$ sum to?
+  \item Expand $(x+1)^2$.
+  \item Expand $(2x+1)^3$.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $1,3,3,1$
+  \item $a^2+2ab+b^2$
+  \item $x^3+3x^2+3x+1$
+  \item $x^2+6x+9$
+  \item $4$
+  \item $1,5,10,10,5,1$
+  \item $a^4+4a^3b+6a^2b^2+4ab^3+b^4$
+  \item $x^3+6x^2+12x+8$
+  \item $x^3-3x^2+3x-1$
+  \item $6$
+  \item $16$
+  \item $x^2+2x+1$
+  \item $8x^3+12x^2+6x+1$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

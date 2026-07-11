@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MCR3U \textperiodcentered{} 1.2}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 1.2 --- Domain and Range}\\[2pt]
+{\small Grade 11 Functions, University (MCR3U) \textperiodcentered{} Unit 1: Characteristics of Functions}
+\end{center}
+
+\begin{ideabox}
+The domain is all allowed inputs $x$; the range is all outputs $y$.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Denominators cannot be zero.
+  \item Square roots need a non-negative radicand.
+  \item A parabola's range starts at its vertex.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{What they mean}The \textbf{domain} is the set of allowed inputs ($x$-values); the \textbf{range} is the set of resulting outputs ($y$-values).
+\lh{Finding restrictions}Exclude inputs that break the rule: values making a denominator $0$, or a negative under a square root, are not in the domain.
+\lh{Reading from a graph}Scan left-to-right for the domain and bottom-to-top for the range, watching for arrows (continuing) versus open or closed endpoints.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Square-root domain}
+Domain of $\sqrt{x-2}$?\soln The radicand must be $\ge0$: $x-2\ge0\Rightarrow x\ge2$. The curve starts at $(2,0)$:\eplot{-1}{8}{-1}{4}{\addplot[exblue,very thick,domain=2:8]{sqrt(x-2)};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(2,0)};}
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Square-root range}
+Range of $\sqrt{x-2}$?\soln A square root is never negative, so outputs are $y\ge0$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Quadratic range}
+Range of $x^2+1$?\soln The vertex $(0,1)$ is the lowest point, so $y\ge1$:\eplot{-3}{3}{-1}{8}{\addplot[exblue,very thick,domain=-2.6:2.6]{x^2+1};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(0,1)};}
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Rational domain}
+Domain of $\dfrac{1}{x-3}$?\soln The denominator cannot be zero: $x-3\ne0\Rightarrow x\ne3$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Polynomial domain}
+Domain of $x^2-5$?\soln A polynomial is defined everywhere: all real numbers.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Reflected range}
+Range of $-x^2$?\soln It opens down with vertex $(0,0)$ as the highest point: $y\le0$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Domain}
+Domain of $\sqrt{x+5}$?\soln $x+5\ge0\Rightarrow x\ge-5$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Rational domain}
+Domain of $\dfrac{1}{x+2}$?\soln $x+2\ne0\Rightarrow x\ne-2$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Range}
+Range of $x^2-3$?\soln Vertex $(0,-3)$ is the minimum, so $y\ge-3$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Domain of $\sqrt{x+5}$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Domain of $\dfrac{1}{x+2}$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Range of $x^2-3$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Range of $-x^2$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Domain of $\sqrt{2x-6}$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Domain of $x^2+1$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Range of $x^2+4$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Domain of $\dfrac{1}{x-1}$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Domain of $\sqrt{x-7}$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Range of $-x^2+2$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Domain of $3x-1$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Range of $\sqrt{x}$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+State the domain and range of $\sqrt{x-1}+2$.\workspace{2.6cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Domain of $\sqrt{x+5}$?
+  \item Domain of $\dfrac{1}{x+2}$?
+  \item Range of $x^2-3$?
+  \item Range of $-x^2$?
+  \item Domain of $\sqrt{2x-6}$?
+  \item Domain of $x^2+1$?
+  \item Range of $x^2+4$?
+  \item Domain of $\dfrac{1}{x-1}$?
+  \item Domain of $\sqrt{x-7}$?
+  \item Range of $-x^2+2$?
+  \item Domain of $3x-1$?
+  \item Range of $\sqrt{x}$?
+  \item State the domain and range of $\sqrt{x-1}+2$.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $x\ge-5$
+  \item $x\ne-2$
+  \item $y\ge-3$
+  \item $y\le0$
+  \item $x\ge3$
+  \item all reals
+  \item $y\ge4$
+  \item $x\ne1$
+  \item $x\ge7$
+  \item $y\le2$
+  \item all reals
+  \item $y\ge0$
+  \item domain $x\ge1$, range $y\ge2$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

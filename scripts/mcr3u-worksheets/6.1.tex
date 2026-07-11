@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MCR3U \textperiodcentered{} 6.1}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 6.1 --- Arithmetic Sequences}\\[2pt]
+{\small Grade 11 Functions, University (MCR3U) \textperiodcentered{} Unit 6: Sequences and Series}
+\end{center}
+
+\begin{ideabox}
+Arithmetic sequences add a common difference $d$ each step: $t_n=a+(n-1)d$.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Common difference $d=t_{n}-t_{n-1}$.
+  \item General term: $t_n=a+(n-1)d$.
+  \item Arithmetic sequences are linear.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Adding a constant}An \textbf{arithmetic sequence} rises by a fixed \textbf{common difference} $d$ each term: $3, 7, 11, 15,\dots$ has $d=4$.
+\lh{The general term}The $n$th term is $t_n=a+(n-1)d$, where $a$ is the first term — letting you jump straight to any term.
+\lh{Recognizing one}Equal consecutive differences mean the sequence is arithmetic; a plot of its terms is a straight line.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Common difference}
+Find $d$ for $3,7,11,15,\dots$\soln Subtract consecutive terms: $7-3=4$ (and $11-7=4$). The terms lie on a straight line — arithmetic sequences are linear:\eplot{0}{6}{0}{18}{\addplot[exblue,thick,domain=1:4]{4*x-1};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(1,3) (2,7) (3,11) (4,15)};}
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- General term}
+Write $t_n$ for $a=3,\ d=4$.\soln $t_n=a+(n-1)d=3+(n-1)4=4n-1$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- A term}
+Find $t_{10}$ for $a=3,\ d=4$.\soln $t_{10}=4(10)-1=39$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- A term}
+Find $t_{20}$ of $5,8,11,\dots$\soln $a=5,d=3$: $t_{20}=5+19(3)=62$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Which term?}
+Which term of $2,5,8,\dots$ equals $50$?\soln $50=2+(n-1)3\Rightarrow 48=3(n-1)\Rightarrow n=17$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Find a}
+If $d=4$ and $t_5=20$, find $a$.\soln $t_5=a+4d$: $20=a+16\Rightarrow a=4$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Negative d}
+Find $d$ for $10,7,4,\dots$\soln $7-10=-3$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- A term}
+Find $t_8$ for $a=2,\ d=5$.\soln $t_8=2+7(5)=37$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- A term}
+Find $t_{15}$ of $4,9,14,\dots$\soln $a=4,d=5$: $t_{15}=4+14(5)=74$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Find $d$ for $6,10,14,\dots$\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Find $t_6$ for $a=2,\ d=5$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Find $t_{12}$ of $3,7,11,\dots$\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Write $t_n$ for $a=4,\ d=3$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Which term of $2,5,8,\dots$ equals $59$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+If $d=4$ and $t_6=29$, find $a$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Find $d$ for $20,15,10,\dots$\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Find $t_{10}$ of $1,4,7,\dots$\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Which term of $3,7,11,\dots$ equals $43$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+If $d=6$ and $t_4=25$, find $a$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Find $t_9$ for $a=5,\ d=2$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Find $d$ for $100,90,80,\dots$\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+If $t_3=11$ and $t_7=27$, find $a$ and $d$.\workspace{3cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Find $d$ for $6,10,14,\dots$
+  \item Find $t_6$ for $a=2,\ d=5$.
+  \item Find $t_{12}$ of $3,7,11,\dots$
+  \item Write $t_n$ for $a=4,\ d=3$.
+  \item Which term of $2,5,8,\dots$ equals $59$?
+  \item If $d=4$ and $t_6=29$, find $a$.
+  \item Find $d$ for $20,15,10,\dots$
+  \item Find $t_{10}$ of $1,4,7,\dots$
+  \item Which term of $3,7,11,\dots$ equals $43$?
+  \item If $d=6$ and $t_4=25$, find $a$.
+  \item Find $t_9$ for $a=5,\ d=2$.
+  \item Find $d$ for $100,90,80,\dots$
+  \item If $t_3=11$ and $t_7=27$, find $a$ and $d$.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $4$
+  \item $27$
+  \item $47$
+  \item $3n+1$
+  \item $20$
+  \item $9$
+  \item $-5$
+  \item $28$
+  \item $11$
+  \item $7$
+  \item $21$
+  \item $-10$
+  \item $d=4,\ a=3$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

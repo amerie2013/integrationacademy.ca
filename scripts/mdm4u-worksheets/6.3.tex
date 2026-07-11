@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MDM4U \textperiodcentered{} 6.3}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 6.3 --- The Coefficient of Determination \& Prediction}\\[2pt]
+{\small Grade 12 Mathematics of Data Management (MDM4U) \textperiodcentered{} Unit 6: Two-Variable Statistics}
+\end{center}
+
+\begin{ideabox}
+The coefficient of determination $r^{2}$ is the fraction of the variation in $y$ explained by the linear model. Trust \emph{interpolation} (inside the data) but be wary of \emph{extrapolation} (outside it). A residual is observed $-$ predicted.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item $r^{2}$ $=$ proportion of variation in $y$ explained by the model.
+  \item Interpolation (inside the range) is reliable; extrapolation (outside) is risky.
+  \item Residual $=$ observed $-$ predicted; $0$ means the point is on the line.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{What $r^2$ tells you}The \textbf{coefficient of determination} $r^2$ is the fraction of the variation in $y$ explained by the line; $r^2=0.85$ means $85\%$ of it is accounted for by $x$.
+\lh{Making predictions}Substitute an $x$-value into the regression equation to predict $y$. \textbf{Interpolation} within the data is reliable; \textbf{extrapolation} beyond it is risky.
+\lh{Judging the fit}The closer $r^2$ is to $1$, the better the line fits and the more trustworthy its predictions.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Compute r squared}
+If $r=0.8$, find $r^{2}$ and interpret it.\soln $r^{2}=0.64$: $64\%$ of the variation in $y$ is explained by the model.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Interpret r squared}
+A model has $r^{2}=0.9$. What does that mean?\soln $90\%$ of the variation in $y$ is explained; $10\%$ is not.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Recover r from r squared}
+A positive scatter has $r^{2}=0.49$. Find $r$.\soln $r=+\sqrt{0.49}=0.7$ (positive, matching the scatter).
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Interpolate vs. extrapolate}
+Data run over $x=0$ to $50$. Is a prediction at $x=20$ interpolation or extrapolation?\soln Interpolation --- $x=20$ is inside the range, so it is reliable.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Find a residual}
+Observed $y=30$, predicted $\hat y=27$. Find the residual.\soln $30-27=+3$ --- the point sits above the line.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Why extrapolation is risky}
+Why distrust a prediction far outside the data?\soln The pattern may not continue beyond the observed range; the model is unverified there.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Weak model}
+A model has $r^{2}=0.25$. Comment.\soln Only $25\%$ of the variation is explained --- a weak fit; $75\%$ is unexplained.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Compare two models}
+Model A: $r^{2}=0.92$; Model B: $r^{2}=0.55$. Which explains more?\soln Model A --- it accounts for far more of the variation.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Full interpretation (multi-part)}
+A model has $r=0.85$. Find \\ \textbf{(a)} $r^{2}$; \\ \textbf{(b)} the percent explained; \\ \textbf{(c)} whether a prediction far outside the data is wise.\soln (a) $0.7225$. (b) about $72\%$. (c) no --- that is extrapolation.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+If $r=0.6$, find $r^{2}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+If $r^{2}=0.81$, what percent of the variation is explained?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+A positive scatter has $r^{2}=0.64$. Find $r$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Predicting inside the data range is called what?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Observed $y=30$, predicted $27$. Find the residual.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Which model is better: $r^{2}=0.9$ or $r^{2}=0.5$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+If $r=-0.7$, find $r^{2}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Is a prediction far beyond the data reliable?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+If $r^{2}=0.36$, what percent is unexplained?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+What does $r^{2}=1$ indicate?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+What does a residual of $0$ mean?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+If $r=0.5$, what percent of the variation is explained?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+A model has $r=0.85$. Find \\ \textbf{(a)} $r^{2}$; \\ \textbf{(b)} the percent explained; \\ \textbf{(c)} the reliability of a prediction far outside the data.\workspace{3cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item If $r=0.6$, find $r^{2}$.
+  \item If $r^{2}=0.81$, what percent of the variation is explained?
+  \item A positive scatter has $r^{2}=0.64$. Find $r$.
+  \item Predicting inside the data range is called what?
+  \item Observed $y=30$, predicted $27$. Find the residual.
+  \item Which model is better: $r^{2}=0.9$ or $r^{2}=0.5$?
+  \item If $r=-0.7$, find $r^{2}$.
+  \item Is a prediction far beyond the data reliable?
+  \item If $r^{2}=0.36$, what percent is unexplained?
+  \item What does $r^{2}=1$ indicate?
+  \item What does a residual of $0$ mean?
+  \item If $r=0.5$, what percent of the variation is explained?
+  \item A model has $r=0.85$. Find \\ \textbf{(a)} $r^{2}$; \\ \textbf{(b)} the percent explained; \\ \textbf{(c)} the reliability of a prediction far outside the data.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $0.36$
+  \item $81\%$
+  \item $0.8$
+  \item interpolation
+  \item $+3$
+  \item $r^{2}=0.9$
+  \item $0.49$
+  \item no --- it is extrapolation
+  \item $64\%$
+  \item a perfect linear fit
+  \item the point lies exactly on the line
+  \item $25\%$
+  \item (a) $0.7225$; (b) $\approx72\%$; (c) unreliable (extrapolation)
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

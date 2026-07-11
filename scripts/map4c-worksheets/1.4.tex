@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MAP4C \textperiodcentered{} 1.4}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 1.4 --- Exponential Growth \& Decay Applications}\\[2pt]
+{\small Grade 12 Foundations for College Mathematics (MAP4C) \textperiodcentered{} Unit 1: Mathematical Models}
+\end{center}
+
+\begin{ideabox}
+Model constant-percentage change with $A=A_0\,b^{t}$: growth $b=1+r$, decay $b=1-r$. Half-life uses $\left(\tfrac12\right)^{t/h}$; compound interest is $A=P(1+i)^n$.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Growth/decay factor $b=1\pm r$.
+  \item Half-life / doubling models.
+  \item Compound interest $A=P(1+i)^n$.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Percentage-change model}Constant-percentage change is $A=A_0\,b^{t}$: growth uses $b=1+r$, decay uses $b=1-r$.
+\lh{Half-life and doubling}Halving uses base $\tfrac12$ with exponent $\tfrac{t}{h}$; doubling uses base $2$ with exponent $\tfrac{t}{d}$.
+\lh{Find the time}Solve for the time with a table or graph (MAP4C is log-free).
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Population growth}
+A town of $5000$ grows $3\%$/yr. Find the population after $10$ years.\soln $5000(1.03)^{10}\approx6720$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Half-life}
+An $80$ mg sample has a $6$-hour half-life. Find the amount after $18$ h.\soln $80\left(\tfrac12\right)^{18/6}=80\left(\tfrac12\right)^{3}=10$ mg.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Depreciation}
+A $\$30\,000$ car loses $12\%$/yr. Value after $4$ years?\soln $30\,000(0.88)^{4}\approx\$17\,990$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Compound interest}
+$\$2000$ at $4\%$/yr compounded annually, $5$ years.\soln $2000(1.04)^{5}\approx\$2433.31$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Doubling time (table)}
+At $6\%$/yr, when does an investment double?\soln $1.06^{11}\approx1.90$, $1.06^{12}\approx2.01$; about $11.9$ years.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Growth value}
+$800(1.02)^{t}$; find the amount after $15$ years.\soln $\approx1077$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Half-life count}
+$60$ mg, half-life $4$ h; amount after $12$ h.\soln $60\left(\tfrac12\right)^{3}=7.5$ mg.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Decay to a fraction}
+$A=A_0(0.85)^{t}$; when is $25\%$ left?\soln $0.85^{8}\approx0.272$, $0.85^{9}\approx0.232$; about $8.5$ years.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Interest amount}
+$\$1500$ at $5\%$/yr, $4$ years.\soln $1500(1.05)^{4}\approx\$1823.26$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+$\$1000$ at $5\%$/yr compounded annually for $3$ years — find the amount.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+A $40$ mg sample, half-life $5$ h — amount after $15$ h?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+A population $600(1.03)^{t}$ — find it after $10$ years.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+A bacteria count of $200$ doubles every $3$ h — count after $9$ h?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+\$5000 at $6\%$/yr for $2$ years — amount?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+A $100$ mg sample, half-life $3$ h — amount after $9$ h?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+A \$20\,000 machine depreciates $10\%$/yr — value after $3$ years?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+A colony $50(1.1)^{t}$ — value after $5$ h?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+A $200$ mg dose, half-life $8$ h — amount after $24$ h?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+\$3000 at $7\%$/yr for $5$ years — amount?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+At $8\%$/yr, estimate the doubling time (table).\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+A substance decays $15\%$/yr — estimate when $50\%$ is left.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Write the model for a $\$2000$ investment at $6\%$/yr compounded monthly, and find its value after $2$ years.\workspace{3.2cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $\$1000$ at $5\%$/yr compounded annually for $3$ years — find the amount.
+  \item A $40$ mg sample, half-life $5$ h — amount after $15$ h?
+  \item A population $600(1.03)^{t}$ — find it after $10$ years.
+  \item A bacteria count of $200$ doubles every $3$ h — count after $9$ h?
+  \item \$5000 at $6\%$/yr for $2$ years — amount?
+  \item A $100$ mg sample, half-life $3$ h — amount after $9$ h?
+  \item A \$20\,000 machine depreciates $10\%$/yr — value after $3$ years?
+  \item A colony $50(1.1)^{t}$ — value after $5$ h?
+  \item A $200$ mg dose, half-life $8$ h — amount after $24$ h?
+  \item \$3000 at $7\%$/yr for $5$ years — amount?
+  \item At $8\%$/yr, estimate the doubling time (table).
+  \item A substance decays $15\%$/yr — estimate when $50\%$ is left.
+  \item Write the model for a $\$2000$ investment at $6\%$/yr compounded monthly, and find its value after $2$ years.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $1000(1.05)^3\approx\$1157.63$
+  \item $40\left(\tfrac12\right)^3=5$ mg
+  \item $600(1.03)^{10}\approx807$
+  \item $200\cdot2^{3}=1600$
+  \item $5000(1.06)^2\approx\$5618$
+  \item $100\left(\tfrac12\right)^3=12.5$ mg
+  \item $20000(0.9)^3\approx\$14\,580$
+  \item $50(1.1)^5\approx80.5$
+  \item $200\left(\tfrac12\right)^3=25$ mg
+  \item $3000(1.07)^5\approx\$4207.66$
+  \item about $9.0$ years
+  \item about $4.3$ years ($0.85^{4.3}\approx0.50$)
+  \item $A=2000(1.005)^{n}$; at $n=24$: $\approx\$2254.32$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MCR3U \textperiodcentered{} 6.2}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 6.2 --- Geometric Sequences}\\[2pt]
+{\small Grade 11 Functions, University (MCR3U) \textperiodcentered{} Unit 6: Sequences and Series}
+\end{center}
+
+\begin{ideabox}
+Geometric sequences multiply by a common ratio $r$ each step: $t_n=a\,r^{\,n-1}$.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Common ratio $r=\dfrac{t_n}{t_{n-1}}$.
+  \item General term: $t_n=a\,r^{\,n-1}$.
+  \item Geometric sequences are exponential.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Multiplying by a ratio}A \textbf{geometric sequence} multiplies by a fixed \textbf{common ratio} $r$ each term: $2, 6, 18, 54,\dots$ has $r=3$.
+\lh{The general term}The $n$th term is $t_n=a\,r^{\,n-1}$. A ratio between $0$ and $1$ shrinks the terms; a ratio above $1$ grows them.
+\lh{Recognizing one}A constant \emph{ratio} between consecutive terms marks a geometric sequence; its terms grow or decay exponentially.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Common ratio}
+Find $r$ for $2,6,18,\dots$\soln Divide consecutive terms: $6\div2=3$ (and $18\div6=3$). The terms grow exponentially:\eplot{0}{5}{0}{20}{\addplot[exblue,thick,domain=1:3.2]{2*3^(x-1)};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(1,2) (2,6) (3,18)};}
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- A term}
+Find $t_5$ for $a=2,\ r=3$.\soln $t_5=a r^{4}=2\cdot3^{4}=2\cdot81=162$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- A term}
+Find $t_6$ of $3,6,12,\dots$\soln $a=3,r=2$: $t_6=3\cdot2^{5}=96$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Which term?}
+Which term of $3,6,12,\dots$ equals $192$?\soln $3\cdot2^{\,n-1}=192\Rightarrow 2^{\,n-1}=64\Rightarrow n-1=6\Rightarrow n=7$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Find r}
+If $t_1=5,\ t_3=45$, find $r$.\soln $t_3=t_1 r^2$: $45=5r^2\Rightarrow r^2=9\Rightarrow r=3$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Common ratio}
+Find $r$ for $4,12,36,\dots$\soln $12\div4=3$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- A term}
+Find $t_4$ for $a=5,\ r=2$.\soln $t_4=5\cdot2^{3}=40$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- A term}
+Find $t_5$ of $1,3,9,\dots$\soln $a=1,r=3$: $t_5=3^{4}=81$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Which term?}
+Which term of $2,4,8,\dots$ equals $128$?\soln $2\cdot2^{\,n-1}=128\Rightarrow 2^{n}=128\Rightarrow n=7$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Find $r$ for $2,8,32,\dots$\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Find $t_5$ for $a=3,\ r=2$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Find $t_6$ of $1,3,9,\dots$\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Write $t_n$ for $a=5,\ r=2$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Which term of $2,6,18,\dots$ equals $486$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+If $t_1=2,\ t_4=54$, find $r$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Find $r$ for $4,12,36,\dots$\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Find $t_4$ for $a=5,\ r=2$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Which term of $2,4,8,\dots$ equals $128$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Find $t_5$ of $2,6,18,\dots$\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+If $t_1=3,\ t_3=12$, find $r$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Find $t_3$ for $a=7,\ r=2$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+A population triples from $100$. Write $t_n$ and find $t_5$.\workspace{3cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Find $r$ for $2,8,32,\dots$
+  \item Find $t_5$ for $a=3,\ r=2$.
+  \item Find $t_6$ of $1,3,9,\dots$
+  \item Write $t_n$ for $a=5,\ r=2$.
+  \item Which term of $2,6,18,\dots$ equals $486$?
+  \item If $t_1=2,\ t_4=54$, find $r$.
+  \item Find $r$ for $4,12,36,\dots$
+  \item Find $t_4$ for $a=5,\ r=2$.
+  \item Which term of $2,4,8,\dots$ equals $128$?
+  \item Find $t_5$ of $2,6,18,\dots$
+  \item If $t_1=3,\ t_3=12$, find $r$.
+  \item Find $t_3$ for $a=7,\ r=2$.
+  \item A population triples from $100$. Write $t_n$ and find $t_5$.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $4$
+  \item $48$
+  \item $243$
+  \item $5\cdot2^{\,n-1}$
+  \item $6$
+  \item $3$
+  \item $3$
+  \item $40$
+  \item $7$
+  \item $162$
+  \item $2$
+  \item $28$
+  \item $t_n=100\cdot3^{\,n-1}$, $t_5=8100$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

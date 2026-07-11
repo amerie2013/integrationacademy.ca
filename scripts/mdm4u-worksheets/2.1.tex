@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MDM4U \textperiodcentered{} 2.1}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 2.1 --- Introduction to Probability}\\[2pt]
+{\small Grade 12 Mathematics of Data Management (MDM4U) \textperiodcentered{} Unit 2: Probability}
+\end{center}
+
+\begin{ideabox}
+For equally likely outcomes, $P(A)=\dfrac{n(A)}{n(S)}$, a number in $[0,1]$. \emph{Theoretical} probability is counted, \emph{experimental} is measured from trials, and \emph{subjective} is judged.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Sample space $S$ lists all outcomes; an event $A$ is a subset.
+  \item $P(A)=\dfrac{n(A)}{n(S)}$ (equally likely); complement $P(A')=1-P(A)$.
+  \item Theoretical vs. experimental vs. subjective probability; $0\le P\le1$.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Defining probability}For equally likely outcomes, $P(A)=\dfrac{\text{favourable}}{\text{total}}$, a number between $0$ (impossible) and $1$ (certain). Always list the \textbf{sample space} of outcomes first.
+\lh{Three kinds}\textbf{Theoretical} probability comes from counting, \textbf{experimental} from repeated trials, and \textbf{subjective} from informed judgement. Experimental results drift toward the theoretical value as trials pile up.
+\lh{A worked idea}Two dice have $36$ equally likely outcomes; six of them sum to $7$, so $P(\text{sum}=7)=\dfrac{6}{36}=\dfrac16$.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Sample space of two dice}
+Two dice are rolled. Find $P(\text{sum}=7)$.\soln $n(S)=36$. Sums of 7: $(1,6),(2,5),(3,4),(4,3),(5,2),(6,1)$, so $n(A)=6$. $P=\dfrac{6}{36}=\dfrac16$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- An event on one die}
+A die is rolled. Find $P(\text{prime})$.\soln Primes are $\{2,3,5\}$: $P=\dfrac36=\dfrac12$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- A card event}
+One card is drawn from a standard deck. Find $P(\text{face card})$.\soln $12$ face cards: $P=\dfrac{12}{52}=\dfrac{3}{13}$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Experimental vs. theoretical}
+A die is rolled 200 times and shows a 3 on 44 rolls. Compare the experimental and theoretical probabilities.\soln Experimental $=\dfrac{44}{200}=0.22$; theoretical $=\dfrac16\approx0.167$. Close, as expected for many trials.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Complement}
+Find $P(\text{not a heart})$ for one card.\soln $1-\dfrac{13}{52}=\dfrac{39}{52}=\dfrac34$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Two coins}
+Two coins are tossed. Find $P(\text{exactly one head})$.\soln $S=\{HH,HT,TH,TT\}$; favourable $\{HT,TH\}$: $P=\dfrac24=\dfrac12$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Unequal spinner}
+A spinner has 8 equal wedges: 4 red, 3 blue, 1 green. Find $P(\text{blue})$.\soln $P=\dfrac38$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Classify the probability}
+Classify each as theoretical, experimental, or subjective: \\ \textbf{(a)} $P(\text{ace})=\tfrac{1}{13}$; \\ \textbf{(b)} 63 of 150 tacks land point-up; \\ \textbf{(c)} a forecaster's 70\% chance of rain.\soln (a) theoretical; (b) experimental; (c) subjective.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Valid probabilities}
+Which are valid probabilities: $-0.2,\ 0.5,\ 1.3,\ \tfrac34$?\soln Only $0.5$ and $\tfrac34$: a probability must lie in $[0,1]$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Two dice are rolled. Find $P(\text{sum}=8)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+A die is rolled. Find $P(\text{number}>4)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+One card is drawn. Find $P(\text{red king})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+A bag has 5 red, 3 blue, and 2 green marbles. Find $P(\text{green})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Find $P(\text{not rolling a 6})$ on one die.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Two coins are tossed. Find $P(\text{at least one tail})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+A spinner has 8 equal wedges, 3 marked \emph{win}. Find $P(\text{win})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+A thumbtack lands point-up on 63 of 150 tosses. State the experimental probability.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Classify this statement: \emph{There is a 40\% chance our team wins tomorrow.}\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Which are valid probabilities: $-0.1,\ 0,\ 0.75,\ 1,\ 1.5$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+One card is drawn. Find $P(\text{a heart or the ace of spades})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Two dice are rolled. Find $P(\text{a double})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Three coins are tossed. \\ \textbf{(a)} How many outcomes? \\ \textbf{(b)} $P(\text{exactly two heads})$; \\ \textbf{(c)} $P(\text{at least one head})$.\workspace{3cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Two dice are rolled. Find $P(\text{sum}=8)$.
+  \item A die is rolled. Find $P(\text{number}>4)$.
+  \item One card is drawn. Find $P(\text{red king})$.
+  \item A bag has 5 red, 3 blue, and 2 green marbles. Find $P(\text{green})$.
+  \item Find $P(\text{not rolling a 6})$ on one die.
+  \item Two coins are tossed. Find $P(\text{at least one tail})$.
+  \item A spinner has 8 equal wedges, 3 marked \emph{win}. Find $P(\text{win})$.
+  \item A thumbtack lands point-up on 63 of 150 tosses. State the experimental probability.
+  \item Classify this statement: \emph{There is a 40\% chance our team wins tomorrow.}
+  \item Which are valid probabilities: $-0.1,\ 0,\ 0.75,\ 1,\ 1.5$?
+  \item One card is drawn. Find $P(\text{a heart or the ace of spades})$.
+  \item Two dice are rolled. Find $P(\text{a double})$.
+  \item Three coins are tossed. \\ \textbf{(a)} How many outcomes? \\ \textbf{(b)} $P(\text{exactly two heads})$; \\ \textbf{(c)} $P(\text{at least one head})$.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $\tfrac{5}{36}$
+  \item $\tfrac26=\tfrac13$
+  \item $\tfrac{2}{52}=\tfrac{1}{26}$
+  \item $\tfrac{2}{10}=\tfrac15$
+  \item $\tfrac56$
+  \item $\tfrac34$
+  \item $\tfrac38$
+  \item $\tfrac{63}{150}=0.42$
+  \item subjective
+  \item $0,\ 0.75,\ 1$
+  \item $\tfrac{14}{52}=\tfrac{7}{26}$
+  \item $\tfrac{6}{36}=\tfrac16$
+  \item (a) $8$; (b) $\tfrac38$; (c) $\tfrac78$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

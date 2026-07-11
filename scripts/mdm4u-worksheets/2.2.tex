@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MDM4U \textperiodcentered{} 2.2}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 2.2 --- Counting \& Probability}\\[2pt]
+{\small Grade 12 Mathematics of Data Management (MDM4U) \textperiodcentered{} Unit 2: Probability}
+\end{center}
+
+\begin{ideabox}
+For equally likely outcomes, $P(A)=\dfrac{n(A)}{n(S)}$ where \emph{both} counts come from permutations or combinations. Use the complement for \emph{at least}.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Unordered draws: count with $\dbinom{n}{r}$; ordered: with $_nP_r$.
+  \item $P=\dfrac{\text{favourable count}}{\text{total count}}$.
+  \item $P(\text{at least one})=1-P(\text{none})$.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Counting the space}For richer experiments, use permutations or combinations to count both the favourable outcomes and the total, then divide.
+\lh{Match the method}Count the top and bottom the \emph{same way} — both ordered or both unordered. Committees and card hands use combinations; ordered arrangements use permutations.
+\lh{A card example}The chance a 5-card hand is all hearts is $\dfrac{\binom{13}{5}}{\binom{52}{5}}$ — combinations above and below keep the comparison fair.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Choosing a committee}
+A committee of 3 is chosen from 5 men and 4 women. Find $P(\text{all women})$.\soln $\dfrac{\dbinom{4}{3}}{\dbinom{9}{3}}=\dfrac{4}{84}=\dfrac{1}{21}$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- A card hand}
+Find $P(\text{a 5-card hand is all hearts})$.\soln $\dfrac{\dbinom{13}{5}}{\dbinom{52}{5}}=\dfrac{1287}{2\,598\,960}\approx0.000495$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Arrangement probability}
+5 people sit in a row at random. Find $P(\text{two specific people are adjacent})$.\soln $\dfrac{4!\cdot2!}{5!}=\dfrac{48}{120}=\dfrac25$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- At least one (complement)}
+Find $P(\text{a 5-card hand has at least one ace})$.\soln $1-\dfrac{\dbinom{48}{5}}{\dbinom{52}{5}}\approx1-0.659=0.341$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Exactly $k$ of a type}
+Draw 4 from 8 boys and 4 girls. Find $P(\text{exactly 2 girls})$.\soln $\dfrac{\dbinom{4}{2}\dbinom{8}{2}}{\dbinom{12}{4}}=\dfrac{6\cdot28}{495}=\dfrac{168}{495}=\dfrac{56}{165}$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- All distinct}
+Three people each pick a digit $0$--$9$ at random. Find $P(\text{all different})$.\soln $\dfrac{10\cdot9\cdot8}{10^3}=\dfrac{720}{1000}=0.72$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Lottery}
+In a 6/49 lottery, find $P(\text{match all 6})$ and $P(\text{match exactly 5})$.\soln $P(6)=\dfrac{1}{\dbinom{49}{6}}$; $P(5)=\dfrac{\dbinom{6}{5}\dbinom{43}{1}}{\dbinom{49}{6}}=\dfrac{258}{13\,983\,816}$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Word arrangement}
+The letters of BANANA are arranged at random. Find $P(\text{it starts with B})$.\soln Total $\dfrac{6!}{3!2!}=60$; starting with B: $\dfrac{5!}{3!2!}=10$; $P=\dfrac{10}{60}=\dfrac16$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Two-part committee}
+Choose 4 from 6 seniors and 4 juniors. \\ \textbf{(a)} $P(\text{all seniors})$; \\ \textbf{(b)} $P(\text{at least one junior})$.\soln (a) $\dfrac{\dbinom{6}{4}}{\dbinom{10}{4}}=\dfrac{15}{210}=\dfrac{1}{14}$. (b) $1-\dfrac{1}{14}=\dfrac{13}{14}$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+A committee of 3 is chosen from 4 men and 5 women. Find $P(\text{all men})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Find $P(\text{a 5-card hand is all spades})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+4 people sit in a row at random. Find $P(\text{two specific are together})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Draw 3 from 7 red and 3 green marbles. Find $P(\text{exactly 1 green})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Find $P(\text{a 5-card hand has at least one king})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Three digits $0$--$9$ are chosen with repetition. Find $P(\text{all the same})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+6 finalists are randomly awarded gold, silver, bronze. Find $P(\text{a specific person wins gold})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+The letters of LEVEL are arranged at random. Find $P(\text{it starts with V})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+In a 6/49 lottery, find $P(\text{match exactly 4})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Choose 4 from 5 seniors and 4 juniors. Find $P(\text{exactly 2 of each})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Three people each pick a day of the week at random. Find $P(\text{all different})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Find $P(\text{a 5-card hand is 3 aces and 2 kings})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+8 people are seated at random around a round table. Find $P(\text{two specific people sit together})$.\workspace{3cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item A committee of 3 is chosen from 4 men and 5 women. Find $P(\text{all men})$.
+  \item Find $P(\text{a 5-card hand is all spades})$.
+  \item 4 people sit in a row at random. Find $P(\text{two specific are together})$.
+  \item Draw 3 from 7 red and 3 green marbles. Find $P(\text{exactly 1 green})$.
+  \item Find $P(\text{a 5-card hand has at least one king})$.
+  \item Three digits $0$--$9$ are chosen with repetition. Find $P(\text{all the same})$.
+  \item 6 finalists are randomly awarded gold, silver, bronze. Find $P(\text{a specific person wins gold})$.
+  \item The letters of LEVEL are arranged at random. Find $P(\text{it starts with V})$.
+  \item In a 6/49 lottery, find $P(\text{match exactly 4})$.
+  \item Choose 4 from 5 seniors and 4 juniors. Find $P(\text{exactly 2 of each})$.
+  \item Three people each pick a day of the week at random. Find $P(\text{all different})$.
+  \item Find $P(\text{a 5-card hand is 3 aces and 2 kings})$.
+  \item 8 people are seated at random around a round table. Find $P(\text{two specific people sit together})$.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $\dfrac{\binom{4}{3}}{\binom{9}{3}}=\tfrac{4}{84}=\tfrac{1}{21}$
+  \item $\dfrac{\binom{13}{5}}{\binom{52}{5}}=\tfrac{1287}{2\,598\,960}$
+  \item $\tfrac{3!\,2!}{4!}=\tfrac{12}{24}=\tfrac12$
+  \item $\dfrac{\binom{3}{1}\binom{7}{2}}{\binom{10}{3}}=\tfrac{63}{120}=\tfrac{21}{40}$
+  \item $1-\dfrac{\binom{48}{5}}{\binom{52}{5}}\approx0.341$
+  \item $\tfrac{10}{1000}=\tfrac{1}{100}$
+  \item $\tfrac16$
+  \item $\dfrac{4!/(2!2!)}{5!/(2!2!)}=\tfrac{6}{30}=\tfrac15$
+  \item $\dfrac{\binom{6}{4}\binom{43}{2}}{\binom{49}{6}}$
+  \item $\dfrac{\binom{5}{2}\binom{4}{2}}{\binom{9}{4}}=\tfrac{60}{126}=\tfrac{10}{21}$
+  \item $\tfrac{7\cdot6\cdot5}{7^3}=\tfrac{210}{343}=\tfrac{30}{49}$
+  \item $\dfrac{\binom{4}{3}\binom{4}{2}}{\binom{52}{5}}=\tfrac{24}{2\,598\,960}$
+  \item $\dfrac{6!\cdot2!}{7!}=\tfrac{1440}{5040}=\tfrac27$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

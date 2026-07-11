@@ -1,0 +1,169 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MFM2P \textperiodcentered{} 7.5}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 7.5 --- Interpreting Quadratic Graphs in Context}\\[2pt]
+{\small Grade 10 Applied (MFM2P) \textperiodcentered{} Unit 7: Quadratic Relations}
+\end{center}
+
+\begin{ideabox}
+Parabolas model thrown objects, profit, and arches: the vertex is a max/min, the zeros are where the quantity is $0$, the $y$-intercept is the starting value.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Vertex: the maximum or minimum (e.g. greatest height, greatest profit).
+  \item Zeros: where the quantity is $0$ (landing time, break-even).
+  \item $y$-intercept: the value at the start ($x=0$).
+  \item Reject impossible answers (e.g. a negative time).
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Reading the graph}In a real quadratic, the vertex is a maximum or minimum and the zeros mark where the quantity is zero.
+\lh{Match the feature}A greatest height or best value points to the vertex; a start or landing points to a zero.
+\lh{State it plainly}Translate the vertex or zero back into the situation — the height reached, the time to land, the break-even point.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Projectile}
+$h=-5t^2+20t$. Find the maximum height and the landing time.\soln Vertex $t=2$: $h=20$. Zeros: $t=0,4$. Max $20$ m at $2$ s; lands at $4$ s.
+\plot{0}{5}{-2}{22}{\addplot[exblue,very thick,domain=0:4,samples=40]{-5*x^2+20*x};\addplot[mark=*,only marks,black]coordinates{(2,20)(4,0)};}
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Profit (break-even)}
+$P=-x^2+10x-16$. Find the break-even points and the maximum profit.\soln Zeros $x=2,8$; vertex $x=5$, $P=9$.
+\plot{0}{9}{-3}{10}{\addplot[exblue,very thick,domain=1.5:8.5,samples=40]{-x^2+10*x-16};\addplot[mark=*,only marks,black]coordinates{(5,9)(2,0)(8,0)};}
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Read the vertex}
+A ball's path is $y=-(x-3)^2+9$. Greatest height and where?\soln Vertex $(3,9)$: max $9$ at $x=3$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Starting value}
+$h=-5t^2+10t+15$. From what height was it released?\soln At $t=0$, $h=15$ m.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Landing time}
+$h=-5t^2+10t+15$. Find the landing time.\soln $t^2-2t-3=0\Rightarrow(t-3)(t+1)=0\Rightarrow t=3$ s.
+\plot{0}{4}{-2}{22}{\addplot[exblue,very thick,domain=0:3,samples=40]{-5*x^2+10*x+15};\addplot[mark=*,only marks,black]coordinates{(0,15)(3,0)};}
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Landing time}
+$h=-5t^2+30t$. When does it land?\soln $-5t(t-6)=0\Rightarrow t=6$ s.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Maximum height}
+$h=-5t^2+30t$. Find the maximum height.\soln Vertex $t=3$: $h=45$ m.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Zeros from vertex form}
+$y=(x-4)^2-9$. Find the zeros.\soln $(x-4)^2=9\Rightarrow x=1,7$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Full projectile (harder)}
+$h=-5t^2+20t+25$. Find the max height and the landing time.\soln Vertex $t=2$: $h=45$. Land: $t^2-4t-5=0\Rightarrow t=5$ s.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+$h=-5t^2+30t$. When does it land?\workspace{2.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+$h=-5t^2+30t$. Find the maximum height.\workspace{2.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+$y=(x-4)^2-9$. Find the zeros.\workspace{2.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+$P=-(x-5)^2+12$. Find the maximum profit and where.\workspace{2.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+$h=-5t^2+20t$. Find the landing time.\workspace{2.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+$h=-5t^2+20t$. Find the maximum height.\workspace{2.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+$y=-(x-2)^2+16$. State the vertex and the maximum.\workspace{2.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+$h=-5t^2+10t+15$. From what height was it released?\workspace{2.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+$h=-5t^2+10t+15$. Find the landing time.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+$P=-x^2+8x-12$. Find the break-even points.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+$P=-x^2+8x-12$. Find the maximum profit.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+$y=(x-3)^2-4$. Find the zeros.\workspace{2.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+$h=-5t^2+20t+25$. Find the max height and the landing time.\workspace{2.6cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $h=-5t^2+30t$. When does it land?
+  \item $h=-5t^2+30t$. Find the maximum height.
+  \item $y=(x-4)^2-9$. Find the zeros.
+  \item $P=-(x-5)^2+12$. Find the maximum profit and where.
+  \item $h=-5t^2+20t$. Find the landing time.
+  \item $h=-5t^2+20t$. Find the maximum height.
+  \item $y=-(x-2)^2+16$. State the vertex and the maximum.
+  \item $h=-5t^2+10t+15$. From what height was it released?
+  \item $h=-5t^2+10t+15$. Find the landing time.
+  \item $P=-x^2+8x-12$. Find the break-even points.
+  \item $P=-x^2+8x-12$. Find the maximum profit.
+  \item $y=(x-3)^2-4$. Find the zeros.
+  \item $h=-5t^2+20t+25$. Find the max height and the landing time.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $-5t(t-6)=0\Rightarrow t=6$ s.
+  \item Vertex $t=3$: $45$ m.
+  \item $x=1,7$.
+  \item Vertex $(5,12)$: $12$ at $x=5$.
+  \item $t=0,4\Rightarrow$ lands at $4$ s.
+  \item Vertex $t=2$: $20$ m.
+  \item Vertex $(2,16)$: max $16$.
+  \item $15$ m.
+  \item $t^2-2t-3=0\Rightarrow t=3$ s.
+  \item $(x-2)(x-6)=0\Rightarrow x=2,6$.
+  \item Vertex $x=4$: $P=4$.
+  \item $x=1,5$.
+  \item Vertex $t=2$: $45$ m; lands at $t=5$ s.
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

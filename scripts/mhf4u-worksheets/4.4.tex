@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MHF4U \textperiodcentered{} 4.4}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 4.4 --- Applications of Exponential \& Log Models}\\[2pt]
+{\small Grade 12 Advanced Functions (MHF4U) \textperiodcentered{} Unit 4: Exponential and Logarithmic Functions}
+\end{center}
+
+\begin{ideabox}
+Model with $A=A_0\,b^{t/p}$ (growth $b>1$, decay $0<b<1$); use logs for doubling time and half-life; log scales (pH, dB, Richter) step by factors of ten.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item $A=A_0\,b^{t/p}$, where $p$ is the doubling time or half-life.
+  \item Doubling time $=\dfrac{\log2}{\log(\text{growth factor})}$.
+  \item $\text{pH}=-\log[\text{H}^+]$; each Richter step is $\times10$.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Growth and decay}Exponential models $A=A_0 b^{\,t}$ describe populations, radioactive decay, and cooling; logarithms solve them for the time.
+\lh{Compound interest}Investments grow by $A=P(1+i)^n$, and finding the number of periods $n$ requires a logarithm.
+\lh{Logarithmic scales}Quantities spanning huge ranges — sound in decibels, earthquakes on the Richter scale, acidity as pH — use \textbf{logarithmic} scales.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Growth}
+$P=100\cdot2^{t/5}$. Find $P$ at $t=10$.\soln $P=100\cdot2^{2}=400$. Growth $2^x$ vs decay $0.5^x$:\eplot{-3}{3}{-1}{9}{\addplot[exblue,very thick,domain=-3:3.1,samples=80]{2^x};\addplot[qorange,very thick,domain=-3.1:3,samples=80]{0.5^x};}
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Half-life}
+$A=80(\tfrac12)^{t/3}$. Find $A$ at $t=6$.\soln $A=80\cdot(\tfrac12)^2=80\cdot\tfrac14=20$ mg.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Doubling time}
+How long to double at 5\% /yr?\soln $2=1.05^t\Rightarrow t=\dfrac{\log2}{\log1.05}\approx14.2$ yr.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- pH scale}
+Find the pH if $[\text{H}^+]=10^{-4}$.\soln $\text{pH}=-\log(10^{-4})=4$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Richter scale}
+How much stronger is magnitude 7 than magnitude 5?\soln Difference $2\Rightarrow10^2=100\times$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Growth}
+$P=200\cdot2^{t/4}$. Find $P$ at $t=8$.\soln $200\cdot2^2=800$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Half-life}
+$A=160(\tfrac12)^{t/5}$. Find $A$ at $t=10$.\soln $160\cdot\tfrac14=40$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Doubling time}
+How long to double at 10\% /yr?\soln $\dfrac{\log2}{\log1.1}\approx7.3$ yr.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- pH scale}
+Find the pH if $[\text{H}^+]=10^{-7}$.\soln pH $=7$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+$P=300\cdot2^{t/6}$. Find $P$ at $t=12$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+$A=240(\tfrac12)^{t/4}$. Find $A$ at $t=8$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+How long to double at 8\% /yr (2 d.p.)?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+pH if $[\text{H}^+]=10^{-3}$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+How much stronger is magnitude 6 than magnitude 3?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+$P=100\cdot2^{t/10}$. Find $P$ at $t=20$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+$A=64(\tfrac12)^{t/2}$. Find $A$ at $t=6$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+How long to triple at 5\% /yr (2 d.p.)?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+pH if $[\text{H}^+]=10^{-9}$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+A quake is $10^4$ times stronger than another. What is the magnitude difference?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+$P=50\cdot3^{t/5}$. Find $P$ at $t=5$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+How long for 5\% /yr growth to reach 1.5 times the start (2 d.p.)?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Bacteria double every 3 h from 500. Write the model and find the count at $t=9$ h.\workspace{3.5cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $P=300\cdot2^{t/6}$. Find $P$ at $t=12$.
+  \item $A=240(\tfrac12)^{t/4}$. Find $A$ at $t=8$.
+  \item How long to double at 8\% /yr (2 d.p.)?
+  \item pH if $[\text{H}^+]=10^{-3}$?
+  \item How much stronger is magnitude 6 than magnitude 3?
+  \item $P=100\cdot2^{t/10}$. Find $P$ at $t=20$.
+  \item $A=64(\tfrac12)^{t/2}$. Find $A$ at $t=6$.
+  \item How long to triple at 5\% /yr (2 d.p.)?
+  \item pH if $[\text{H}^+]=10^{-9}$?
+  \item A quake is $10^4$ times stronger than another. What is the magnitude difference?
+  \item $P=50\cdot3^{t/5}$. Find $P$ at $t=5$.
+  \item How long for 5\% /yr growth to reach 1.5 times the start (2 d.p.)?
+  \item Bacteria double every 3 h from 500. Write the model and find the count at $t=9$ h.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $1200$
+  \item $60$
+  \item $\tfrac{\log2}{\log1.08}\approx9.01$ yr
+  \item $3$
+  \item $1000\times$
+  \item $400$
+  \item $8$
+  \item $\tfrac{\log3}{\log1.05}\approx22.52$ yr
+  \item $9$
+  \item $4$
+  \item $150$
+  \item $\tfrac{\log1.5}{\log1.05}\approx8.31$ yr
+  \item $P=500\cdot2^{t/3}$, $P(9)=4000$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

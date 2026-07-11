@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MCV4U \textperiodcentered{} 6.5}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 6.5 --- The Cross Product}\\[2pt]
+{\small Grade 12 Calculus and Vectors (MCV4U) \textperiodcentered{} Unit 6: Geometry and Algebra of Vectors}
+\end{center}
+
+\begin{ideabox}
+$\vec a\times\vec b=(a_2b_3-a_3b_2,\,a_3b_1-a_1b_3,\,a_1b_2-a_2b_1)$ is perpendicular to both; $|\vec a\times\vec b|$ is the parallelogram area.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item $\vec a\times\vec b=(a_2b_3-a_3b_2,\,a_3b_1-a_1b_3,\,a_1b_2-a_2b_1)$.
+  \item $\vec a\times\vec b\perp\vec a$ and $\perp\vec b$.
+  \item $|\vec a\times\vec b|=$ parallelogram area; triangle $=\tfrac12|\vec a\times\vec b|$.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Multiplying to a vector}The \textbf{cross product} $\vec u\times\vec v$ produces a \emph{vector} perpendicular to both $\vec u$ and $\vec v$ in 3-D.
+\lh{Magnitude and area}Its magnitude $|\vec u|\,|\vec v|\sin\theta$ equals the area of the parallelogram the two vectors span.
+\lh{Direction}The right-hand rule fixes the direction, and $\vec u\times\vec v=-\,\vec v\times\vec u$ — order matters.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Standard basis}
+Compute $(1,0,0)\times(0,1,0)$.\soln $(0,0,1)$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- General}
+Compute $(1,2,3)\times(4,5,6)$.\soln $(2\cdot6-3\cdot5,\,3\cdot4-1\cdot6,\,1\cdot5-2\cdot4)=(-3,6,-3)$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Perpendicular check}
+Verify $(-3,6,-3)\perp(1,2,3)$.\soln $-3+12-9=0$: perpendicular.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Parallelogram area}
+Area from $(1,0,0)$ and $(0,2,0)$.\soln Cross $=(0,0,2)$, magnitude $2$: area $2$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Triangle area}
+Triangle area from $(1,0,0)$ and $(0,2,0)$.\soln $\tfrac12(2)=1$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Standard basis}
+Compute $(0,1,0)\times(0,0,1)$.\soln $(1,0,0)$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- General}
+Compute $(2,0,0)\times(0,3,0)$.\soln $(0,0,6)$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- General}
+Compute $(1,1,0)\times(0,1,1)$.\soln $(1,-1,1)$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Parallelogram area}
+Area from $(3,0,0)$ and $(0,4,0)$.\soln $(0,0,12)$, area $12$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Compute $(0,1,0)\times(0,0,1)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Compute $(2,0,0)\times(0,3,0)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+What direction is $\vec a\times\vec b$ relative to $\vec a,\vec b$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Area of the parallelogram from $(3,0,0)$ and $(0,4,0)$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Compute $(1,1,0)\times(0,1,1)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Compute $(1,0,0)\times(0,0,1)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Compute $(1,2,3)\times(4,5,6)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Triangle area from $(2,0,0)$ and $(0,2,0)$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Is $(1,2,3)\times(2,4,6)$ the zero vector? Why?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Compute $(0,0,1)\times(1,0,0)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Magnitude of $(1,0,0)\times(0,5,0)$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Verify $(1,2,3)\times(4,5,6)=(-3,6,-3)$ is perpendicular to $(4,5,6)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Find the area of the triangle with vertices $A(0,0,0)$, $B(1,0,0)$, $C(0,2,3)$.\workspace{3.5cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Compute $(0,1,0)\times(0,0,1)$.
+  \item Compute $(2,0,0)\times(0,3,0)$.
+  \item What direction is $\vec a\times\vec b$ relative to $\vec a,\vec b$?
+  \item Area of the parallelogram from $(3,0,0)$ and $(0,4,0)$?
+  \item Compute $(1,1,0)\times(0,1,1)$.
+  \item Compute $(1,0,0)\times(0,0,1)$.
+  \item Compute $(1,2,3)\times(4,5,6)$.
+  \item Triangle area from $(2,0,0)$ and $(0,2,0)$?
+  \item Is $(1,2,3)\times(2,4,6)$ the zero vector? Why?
+  \item Compute $(0,0,1)\times(1,0,0)$.
+  \item Magnitude of $(1,0,0)\times(0,5,0)$?
+  \item Verify $(1,2,3)\times(4,5,6)=(-3,6,-3)$ is perpendicular to $(4,5,6)$.
+  \item Find the area of the triangle with vertices $A(0,0,0)$, $B(1,0,0)$, $C(0,2,3)$.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $(1,0,0)$
+  \item $(0,0,6)$
+  \item perpendicular to both
+  \item $12$
+  \item $(1,-1,1)$
+  \item $(0,-1,0)$
+  \item $(-3,6,-3)$
+  \item $\tfrac12(4)=2$
+  \item yes — they are parallel ($\sin\theta=0$)
+  \item $(0,1,0)$
+  \item $5$
+  \item $-12+30-18=0$ ✓
+  \item $\vec{AB}\times\vec{AC}=(1,0,0)\times(0,2,3)=(0,-3,2)$; area $=\tfrac12\sqrt{13}$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

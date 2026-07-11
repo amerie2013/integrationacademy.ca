@@ -1,0 +1,176 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MPM2D \textperiodcentered{} 5.1}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 5.1 --- Solving Quadratic Equations by Factoring}\\[2pt]
+{\small Grade 10 Academic (MPM2D) \textperiodcentered{} Unit 5: Quadratic Equations}
+\end{center}
+
+\begin{ideabox}
+If a product is zero, one of its factors is zero. So set the equation to $0$, factor, and solve each factor.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Rearrange to $ax^2+bx+c=0$ first.
+  \item Factor fully, then apply the \textbf{zero product property}: if $PQ=0$ then $P=0$ or $Q=0$.
+  \item A repeated factor gives a \textbf{double root}.
+  \item The solutions are the $x$-intercepts of the parabola.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Set it to zero}To solve, first arrange the equation as $ax^2+bx+c=0$. A quadratic equation can have $0$, $1$, or $2$ real solutions.
+\lh{Zero-product property}Factor, then use the fact that a product is $0$ only when a factor is $0$: from $(x-2)(x+5)=0$ you get $x=2$ or $x=-5$.
+\lh{When factoring fails}Not every quadratic factors neatly — if it resists, switch to completing the square or the quadratic formula.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Simple trinomial}
+Solve $x^2-5x+6=0$.
+\soln $(x-2)(x-3)=0\Rightarrow x=2$ or $x=3.$
+\plot{-1}{6}{-1}{6}{\addplot[exblue,very thick,domain=0.3:5.2,samples=60]{x^2-5*x+6};\addplot[mark=*,only marks,black]coordinates{(2,0)(3,0)};}
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Negative constant}
+Solve $x^2+x-12=0$.
+\soln $(x+4)(x-3)=0\Rightarrow x=-4$ or $x=3.$
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Difference of squares}
+Solve $x^2-9=0$.
+\soln $(x-3)(x+3)=0\Rightarrow x=\pm3.$
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Common factor}
+Solve $x^2-4x=0$.
+\soln $x(x-4)=0\Rightarrow x=0$ or $x=4.$
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Leading coefficient}
+Solve $2x^2+5x-3=0$.
+\soln $(2x-1)(x+3)=0\Rightarrow x=\tfrac12$ or $x=-3.$
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Rearrange first}
+Solve $x^2=2x+8$.
+\soln $x^2-2x-8=0\Rightarrow (x-4)(x+2)=0\Rightarrow x=4$ or $x=-2.$
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Factor out first}
+Solve $3x^2=12x$.
+\soln $3x^2-12x=0\Rightarrow 3x(x-4)=0\Rightarrow x=0$ or $x=4.$
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Double root}
+Solve $x^2-6x+9=0$.
+\soln $(x-3)^2=0\Rightarrow x=3$ (double root).
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Expand then solve (harder)}
+Solve $(x-1)(x+2)=4$.
+\soln $x^2+x-2=4\Rightarrow x^2+x-6=0\Rightarrow (x+3)(x-2)=0\Rightarrow x=-3$ or $x=2.$
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Solve $x^2-7x+10=0$.\workspace{2.0cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Solve $x^2+2x-8=0$.\workspace{2.0cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Solve $x^2-16=0$.\workspace{1.8cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Solve $x^2-5x=0$.\workspace{1.8cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Solve $x^2+6x+9=0$.\workspace{1.8cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Solve $2x^2-5x-3=0$.\workspace{2.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Solve $3x^2+x-2=0$.\workspace{2.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Solve $x^2=3x+4$.\workspace{2.0cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Solve $5x^2=20x$.\workspace{1.8cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Solve $x^2-2x-15=0$.\workspace{2.0cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Solve $(x+1)(x-2)=4$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Solve $4x^2-9=0$.\workspace{2.0cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Solve $2x^2+x-15=0$.\workspace{2.4cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Solve $x^2-7x+10=0$.
+  \item Solve $x^2+2x-8=0$.
+  \item Solve $x^2-16=0$.
+  \item Solve $x^2-5x=0$.
+  \item Solve $x^2+6x+9=0$.
+  \item Solve $2x^2-5x-3=0$.
+  \item Solve $3x^2+x-2=0$.
+  \item Solve $x^2=3x+4$.
+  \item Solve $5x^2=20x$.
+  \item Solve $x^2-2x-15=0$.
+  \item Solve $(x+1)(x-2)=4$.
+  \item Solve $4x^2-9=0$.
+  \item Solve $2x^2+x-15=0$.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $x=2,5$.
+  \item $x=-4,2$.
+  \item $x=\pm4$.
+  \item $x=0,5$.
+  \item $x=-3$ (double).
+  \item $x=\tfrac12,-3$.
+  \item $x=\tfrac23,-1$.
+  \item $x=4,-1$.
+  \item $x=0,4$.
+  \item $x=5,-3$.
+  \item $x^2-x-6=0\Rightarrow x=3,-2$.
+  \item $x=\pm\tfrac32$.
+  \item $(2x-5)(x+3)=0\Rightarrow x=\tfrac52,-3$.
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

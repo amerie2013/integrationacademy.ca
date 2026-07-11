@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MCR3U \textperiodcentered{} 3.3}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 3.3 --- Transformations of Exponential Functions}\\[2pt]
+{\small Grade 11 Functions, University (MCR3U) \textperiodcentered{} Unit 3: Exponential Functions}
+\end{center}
+
+\begin{ideabox}
+Transform the parent $b^{x}$ with $y=a\,b^{\,k(x-d)}+c$; the shift $c$ moves the asymptote to $y=c$.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item $c$ shifts vertically and moves the asymptote to $y=c$.
+  \item $d$ shifts horizontally; $a<0$ reflects in the $x$-axis.
+  \item Domain stays all reals; range is $y>c$ (or $y<c$ if reflected).
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Shifting the curve}In $y=a\,b^{\,k(x-d)}+c$, the constant $c$ moves the horizontal asymptote to $y=c$ and slides the whole curve up or down.
+\lh{Reflections and stretches}$a$ stretches the curve and, if negative, flips it; $d$ shifts it horizontally. The $y$-intercept comes from substituting $x=0$.
+\lh{Reading the range}With asymptote $y=c$, the range is $y>c$ when $a>0$ and $y<c$ when $a<0$.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Vertical shift}
+Describe $y=2^{x}+3$.\soln The $+3$ lifts the graph up 3, so the asymptote moves to $y=3$ and the range is $y>3$:\eplot{-4}{3}{-1}{11}{\addplot[red,dashed,domain=-4:3]{3};\addplot[exblue,very thick,domain=-4:3]{2^x+3};}
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Horizontal shift}
+Describe $y=2^{x-2}$.\soln $(x-2)$ shifts the graph right 2.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Reflection}
+Describe $y=-2^{x}$.\soln The leading $-$ reflects it in the $x$-axis, so the range becomes $y<0$:\eplot{-3}{3}{-9}{1}{\addplot[exblue,very thick,domain=-3:3]{-(2^x)};}
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Stretch}
+Describe $y=3\cdot2^{x}$.\soln A vertical stretch by 3; the $y$-intercept is $3$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Range from a shift}
+State the range of $y=2^{x}-5$.\soln Asymptote $y=-5$, so the range is $y>-5$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Left shift}
+Describe $y=2^{x+1}$.\soln $(x+1)$ shifts the graph left 1.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Reflect in y-axis}
+Describe $y=2^{-x}$.\soln The $-x$ reflects it in the $y$-axis, turning growth into decay.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Asymptote}
+State the asymptote of $y=5^{x}+2$.\soln The vertical shift $+2$ gives $y=2$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Range with reflection}
+State the range of $y=-3^{x}$.\soln Reflected below the axis: $y<0$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+State the asymptote of $y=2^{x}+6$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Describe the shift in $y=3^{x-4}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+State the range of $y=2^{x}+2$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+What does the negative do in $y=-4^{x}$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+State the asymptote of $y=2^{x}-3$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Describe the shift in $y=2^{x+5}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+State the range of $y=2^{x}-1$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+State the domain of $y=3^{x}+7$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Describe all transformations of $y=2^{x-1}+4$.\workspace{3cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+State the range of $y=-2^{x}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Write $y=3^{x}$ shifted up $5$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Write $y=2^{x}$ shifted left $3$ and down $2$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+State the asymptote, domain, and range of $y=-2^{x}+6$.\workspace{3cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item State the asymptote of $y=2^{x}+6$.
+  \item Describe the shift in $y=3^{x-4}$.
+  \item State the range of $y=2^{x}+2$.
+  \item What does the negative do in $y=-4^{x}$?
+  \item State the asymptote of $y=2^{x}-3$.
+  \item Describe the shift in $y=2^{x+5}$.
+  \item State the range of $y=2^{x}-1$.
+  \item State the domain of $y=3^{x}+7$.
+  \item Describe all transformations of $y=2^{x-1}+4$.
+  \item State the range of $y=-2^{x}$.
+  \item Write $y=3^{x}$ shifted up $5$.
+  \item Write $y=2^{x}$ shifted left $3$ and down $2$.
+  \item State the asymptote, domain, and range of $y=-2^{x}+6$.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $y=6$
+  \item right $4$
+  \item $y>2$
+  \item reflects over the $x$-axis; range $y<0$
+  \item $y=-3$
+  \item left $5$
+  \item $y>-1$
+  \item all real numbers
+  \item right $1$, up $4$ (asymptote $y=4$)
+  \item $y<0$
+  \item $y=3^{x}+5$
+  \item $y=2^{x+3}-2$
+  \item asymptote $y=6$, domain all reals, range $y<6$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

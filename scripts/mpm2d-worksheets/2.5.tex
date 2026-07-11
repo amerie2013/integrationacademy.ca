@@ -1,0 +1,175 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MPM2D \textperiodcentered{} 2.5}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 2.5 --- Verifying Geometric Properties}\\[2pt]
+{\small Grade 10 Academic (MPM2D) \textperiodcentered{} Unit 2: Analytic Geometry}
+\end{center}
+
+\begin{ideabox}
+Use \textbf{slope}, \textbf{length}, and \textbf{midpoint} to prove facts about figures on the coordinate plane.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item \textbf{Parallel} sides $\Rightarrow$ equal slopes; \textbf{perpendicular} $\Rightarrow$ slopes multiply to $-1$.
+  \item \textbf{Equal lengths} prove isosceles/equilateral/rhombus; \textbf{$90^\circ$} proves right angles/rectangles.
+  \item A \textbf{parallelogram} has both pairs of opposite sides parallel \emph{or} diagonals that bisect each other.
+  \item State the property, do the calculation, then write a concluding sentence.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Proof with coordinates}\textbf{Analytic geometry} proves geometric claims using algebra: place the figure on a grid, then compute lengths, midpoints, and slopes.
+\lh{The toolkit}Equal \textbf{lengths} reveal an isosceles shape or a rhombus; equal \textbf{slopes} show parallel sides; \emph{negative-reciprocal} slopes show a right angle.
+\lh{A tidy argument}State what you will show, compute the quantities you need, then conclude — a coordinate proof is simply organized calculation.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Right triangle by slopes}
+Show $\triangle ABC$ with $A(1,1)$, $B(4,1)$, $C(4,5)$ is right-angled.
+\soln Slope $AB=0$ (horizontal); slope $BC$ is undefined (vertical). Horizontal $\perp$ vertical, so the angle at $B$ is $90^\circ$ --- a right triangle.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Isosceles by lengths}
+Show $\triangle ABC$ with $A(0,0)$, $B(6,0)$, $C(3,4)$ is isosceles.
+\soln $AB=6$; $AC=\sqrt{9+16}=5$; $BC=\sqrt{9+16}=5$. Since $AC=BC$, it is isosceles.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Parallelogram by slopes}
+Show $ABCD$ with $A(0,0)$, $B(4,0)$, $C(5,3)$, $D(1,3)$ is a parallelogram.
+\soln Slope $AB=0=$ slope $DC$; slope $AD=3=$ slope $BC$. Both pairs of opposite sides are parallel.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Diagonals bisect each other}
+Show the diagonals of $ABCD$ with $A(0,0)$, $B(4,1)$, $C(6,5)$, $D(2,4)$ bisect each other.
+\soln Midpoint of $AC=(3,2.5)$; midpoint of $BD=(3,2.5)$. They share a midpoint, so the diagonals bisect each other (a parallelogram).
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Right angle test}
+Show $\triangle ABC$ with $A(0,0)$, $B(2,4)$, $C(6,2)$ has a right angle at $B$.
+\soln Slope $AB=2$; slope $BC=\tfrac{2-4}{6-2}=-\tfrac12$. Product $=2\cdot(-\tfrac12)=-1$, so $AB\perp BC$: right angle at $B$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Classify a triangle}
+Classify $\triangle ABC$ with $A(2,1)$, $B(5,1)$, $C(2,5)$.
+\soln $AB=3$, $AC=4$, $BC=5$. Different lengths (scalene) and $3^2+4^2=5^2$, so it is a right scalene triangle.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Midsegment property}
+In $\triangle ABC$ with $A(0,0)$, $B(8,0)$, $C(2,6)$, show the segment joining the midpoints of $AC$ and $BC$ is parallel to $AB$ and half its length.
+\soln Midpoints: $AC\to(1,3)$, $BC\to(5,3)$. The midsegment has slope $0=$ slope $AB$ (parallel) and length $4=\tfrac12(8)$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Square check}
+Show $ABCD$ with $A(0,0)$, $B(3,0)$, $C(3,3)$, $D(0,3)$ is a square.
+\soln All sides $=3$; slope $AB=0\perp$ slope $BC$ (undefined). Four equal sides and a right angle $\Rightarrow$ square.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Rectangle proof (harder)}
+Show $ABCD$ with $A(1,2)$, $B(5,4)$, $C(3,8)$, $D(-1,6)$ is a rectangle.
+\soln Slope $AB=\tfrac12=$ slope $DC$; slope $AD=-2=$ slope $BC$ (parallelogram). Also $AB\cdot AD=\tfrac12\cdot(-2)=-1$, a right angle. A parallelogram with a right angle is a rectangle.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Show $\triangle ABC$ with $A(0,0)$, $B(5,0)$, $C(0,5)$ is a right isosceles triangle.\workspace{2.8cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Show $\triangle ABC$ with $A(-3,0)$, $B(3,0)$, $C(0,4)$ is isosceles.\workspace{2.6cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Determine whether $A(1,1)$, $B(4,2)$, $C(3,5)$, $D(0,4)$ is a parallelogram (use slopes).\workspace{2.8cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Show the diagonals of $A(0,0)$, $B(6,2)$, $C(8,6)$, $D(2,4)$ bisect each other.\workspace{2.8cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Is $\triangle ABC$ with $A(0,0)$, $B(4,2)$, $C(2,-4)$ right-angled at $A$? Use slopes.\workspace{2.8cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Classify $\triangle ABC$ with $A(1,1)$, $B(4,1)$, $C(4,5)$ by side lengths.\workspace{2.6cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Show $A(0,0)$, $B(4,0)$, $C(4,4)$, $D(0,4)$ is a square.\workspace{2.6cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Show $A(-1,-1)$, $B(2,0)$, $C(1,3)$, $D(-2,2)$ has four equal sides (rhombus).\workspace{2.8cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+In $\triangle ABC$, $A(0,0)$, $B(6,0)$, $C(0,6)$, show the midsegment joining midpoints of $AC$ and $BC$ is parallel to $AB$.\workspace{3.0cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Verify $(3,4)$ is equidistant from $(0,0)$ and $(6,0)$ (i.e. on the right bisector of that segment).\workspace{2.6cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Determine whether $A(0,0)$, $B(3,1)$, $C(4,4)$, $D(1,3)$ is a parallelogram.\workspace{2.6cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Is $\triangle ABC$ with $A(1,2)$, $B(4,2)$, $C(1,6)$ scalene, isosceles, or equilateral?\workspace{2.6cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Show $A(0,0)$, $B(4,2)$, $C(6,6)$, $D(2,4)$ is a rectangle (parallelogram with a right angle).\workspace{3.2cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Show $\triangle ABC$ with $A(0,0)$, $B(5,0)$, $C(0,5)$ is a right isosceles triangle.
+  \item Show $\triangle ABC$ with $A(-3,0)$, $B(3,0)$, $C(0,4)$ is isosceles.
+  \item Determine whether $A(1,1)$, $B(4,2)$, $C(3,5)$, $D(0,4)$ is a parallelogram (use slopes).
+  \item Show the diagonals of $A(0,0)$, $B(6,2)$, $C(8,6)$, $D(2,4)$ bisect each other.
+  \item Is $\triangle ABC$ with $A(0,0)$, $B(4,2)$, $C(2,-4)$ right-angled at $A$? Use slopes.
+  \item Classify $\triangle ABC$ with $A(1,1)$, $B(4,1)$, $C(4,5)$ by side lengths.
+  \item Show $A(0,0)$, $B(4,0)$, $C(4,4)$, $D(0,4)$ is a square.
+  \item Show $A(-1,-1)$, $B(2,0)$, $C(1,3)$, $D(-2,2)$ has four equal sides (rhombus).
+  \item In $\triangle ABC$, $A(0,0)$, $B(6,0)$, $C(0,6)$, show the midsegment joining midpoints of $AC$ and $BC$ is parallel to $AB$.
+  \item Verify $(3,4)$ is equidistant from $(0,0)$ and $(6,0)$ (i.e. on the right bisector of that segment).
+  \item Determine whether $A(0,0)$, $B(3,1)$, $C(4,4)$, $D(1,3)$ is a parallelogram.
+  \item Is $\triangle ABC$ with $A(1,2)$, $B(4,2)$, $C(1,6)$ scalene, isosceles, or equilateral?
+  \item Show $A(0,0)$, $B(4,2)$, $C(6,6)$, $D(2,4)$ is a rectangle (parallelogram with a right angle).
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $AB=AC=5$ (equal), and $AB\perp AC$ (slopes $0$ and undefined): right isosceles.
+  \item $AC=\sqrt{9+16}=5=BC$ --- isosceles.
+  \item Slope $AB=\tfrac13=$ slope $DC$; slope $AD=3=$ slope $BC$: yes, parallelogram.
+  \item Mid $AC=(4,3)=$ mid $BD$ --- diagonals bisect each other.
+  \item Slope $AB=\tfrac12$, slope $AC=-2$; product $-1$: yes, right angle at $A$.
+  \item $3,4,5$ --- right scalene.
+  \item All sides $4$; $AB\perp BC$: square.
+  \item Each side $=\sqrt{9+1}=\sqrt{10}$: rhombus.
+  \item Midpoints $(0,3),(3,3)$; slope $0=$ slope $AB$: parallel.
+  \item Distance to each $=\sqrt{9+16}=5$ --- equidistant.
+  \item Slope $AB=\tfrac13=$ slope $DC$; slope $AD=3=$ slope $BC$: parallelogram.
+  \item $AB=3$, $AC=4$, $BC=5$: scalene (also right).
+  \item Slopes give parallelogram; $AB\cdot AD=\tfrac12\cdot(-2)=-1$: rectangle.
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

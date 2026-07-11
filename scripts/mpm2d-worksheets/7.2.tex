@@ -1,0 +1,176 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MPM2D \textperiodcentered{} 7.2}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 7.2 --- The Cosine Law}\\[2pt]
+{\small Grade 10 Academic (MPM2D) \textperiodcentered{} Unit 7: Sine \& Cosine Laws}
+\end{center}
+
+\begin{ideabox}
+The \textbf{cosine law} generalises the Pythagorean theorem: $c^2=a^2+b^2-2ab\cos C$.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Use it for \textbf{SAS} (two sides and the included angle) to find the third side.
+  \item Use the rearranged form $\cos C=\dfrac{a^2+b^2-c^2}{2ab}$ for \textbf{SSS} (find an angle).
+  \item The angle and the side it helps find are always \emph{opposite} each other.
+  \item A negative cosine means an obtuse angle.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{A generalized Pythagoras}The \textbf{cosine law} $a^2=b^2+c^2-2bc\cos A$ handles triangles where the sine law cannot even start.
+\lh{When to use it}Reach for it with two sides and the angle between them (\textbf{SAS}), or with all three sides (\textbf{SSS}) to find an angle.
+\lh{Right-angle check}When $A=90^\circ$, $\cos A=0$ and the law collapses to $a^2=b^2+c^2$ — ordinary Pythagoras.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- SAS find a side}
+In $\triangle ABC$, $a=5$, $b=7$, $C=60^\circ$. Find $c$.
+\gtri{$A$}{$B$}{$C$}{$a$}{$b$}{$c$}
+\soln $c^2=25+49-2(5)(7)\cos60^\circ=74-35=39\Rightarrow c\approx6.2.$
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Obtuse not yet}
+$a=8$, $b=6$, $C=40^\circ$. Find $c$.
+\soln $c^2=64+36-96\cos40^\circ\approx26.5\Rightarrow c\approx5.1.$
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- SSS find an angle}
+Find $C$ in a triangle with $a=5$, $b=6$, $c=7$.
+\soln $\cos C=\dfrac{25+36-49}{2(5)(6)}=\dfrac{12}{60}=0.2\Rightarrow C\approx78.5^\circ.$
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Largest angle}
+Find the largest angle of a $4$-$5$-$6$ triangle.
+\soln Largest is opposite $6$: $\cos\theta=\dfrac{16+25-36}{40}=0.125\Rightarrow\theta\approx82.8^\circ.$
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Obtuse included angle}
+$a=10$, $b=12$, $C=100^\circ$. Find $c$.
+\soln $c^2=100+144-240\cos100^\circ\approx285.7\Rightarrow c\approx16.9.$
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Find an angle}
+Find $A$ in a triangle with $a=7$, $b=8$, $c=9$.
+\soln $\cos A=\dfrac{64+81-49}{2(8)(9)}=\dfrac{96}{144}=0.667\Rightarrow A\approx48.2^\circ.$
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- SAS again}
+$a=11$, $b=13$, $C=72^\circ$. Find $c$.
+\soln $c^2=121+169-286\cos72^\circ\approx201.6\Rightarrow c\approx14.2.$
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Smallest angle}
+Find the smallest angle of a $6$-$8$-$9$ triangle.
+\soln Smallest is opposite $6$: $\cos\theta=\dfrac{64+81-36}{144}\approx0.757\Rightarrow\theta\approx40.8^\circ.$
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Recognising a right angle (harder)}
+Use the cosine law to find $C$ in a $9$-$12$-$15$ triangle ($c=15$).
+\soln $\cos C=\dfrac{81+144-225}{2(9)(12)}=\dfrac{0}{216}=0\Rightarrow C=90^\circ$ --- it's a right triangle.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+$a=6$, $b=9$, $C=50^\circ$. Find $c$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+$a=7$, $b=10$, $C=120^\circ$. Find $c$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Find $C$ in a triangle with $a=4$, $b=5$, $c=6$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Find the largest angle of a $5$-$7$-$9$ triangle.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+$a=9$, $b=12$, $C=35^\circ$. Find $c$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Find $A$ in a triangle with $a=6$, $b=8$, $c=10$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+$a=11$, $b=13$, $C=72^\circ$. Find $c$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Find the smallest angle of a $6$-$8$-$9$ triangle.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+$a=5$, $b=12$, $C=90^\circ$. Find $c$.\workspace{2.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Find $B$ in a triangle with $a=7$, $b=9$, $c=8$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+$a=10$, $b=10$, $C=80^\circ$. Find $c$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Find the largest angle of a $3$-$5$-$7$ triangle.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Find the largest angle of an $8$-$11$-$15$ triangle.\workspace{2.8cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $a=6$, $b=9$, $C=50^\circ$. Find $c$.
+  \item $a=7$, $b=10$, $C=120^\circ$. Find $c$.
+  \item Find $C$ in a triangle with $a=4$, $b=5$, $c=6$.
+  \item Find the largest angle of a $5$-$7$-$9$ triangle.
+  \item $a=9$, $b=12$, $C=35^\circ$. Find $c$.
+  \item Find $A$ in a triangle with $a=6$, $b=8$, $c=10$.
+  \item $a=11$, $b=13$, $C=72^\circ$. Find $c$.
+  \item Find the smallest angle of a $6$-$8$-$9$ triangle.
+  \item $a=5$, $b=12$, $C=90^\circ$. Find $c$.
+  \item Find $B$ in a triangle with $a=7$, $b=9$, $c=8$.
+  \item $a=10$, $b=10$, $C=80^\circ$. Find $c$.
+  \item Find the largest angle of a $3$-$5$-$7$ triangle.
+  \item Find the largest angle of an $8$-$11$-$15$ triangle.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $c^2=117-108\cos50^\circ\approx47.6\Rightarrow c\approx6.9$.
+  \item $c^2=149-140\cos120^\circ=219\Rightarrow c\approx14.8$.
+  \item $\cos C=\tfrac{5}{40}=0.125\Rightarrow C\approx82.8^\circ$.
+  \item Opp $9$: $\cos\theta=\tfrac{-7}{70}=-0.1\Rightarrow\theta\approx95.7^\circ$.
+  \item $c^2=225-216\cos35^\circ\approx48\Rightarrow c\approx6.9$.
+  \item $\cos A=\tfrac{128}{160}=0.8\Rightarrow A\approx36.9^\circ$.
+  \item $c^2\approx201.6\Rightarrow c\approx14.2$.
+  \item Opp $6$: $\cos\theta\approx0.757\Rightarrow\theta\approx40.8^\circ$.
+  \item $c^2=169\Rightarrow c=13$.
+  \item $\cos B=\tfrac{32}{112}\approx0.286\Rightarrow B\approx73.4^\circ$.
+  \item $c^2=200-200\cos80^\circ\approx165.3\Rightarrow c\approx12.9$.
+  \item Opp $7$: $\cos\theta=-0.5\Rightarrow\theta=120^\circ$.
+  \item Opp $15$: $\cos\theta=\tfrac{-40}{176}\approx-0.227\Rightarrow\theta\approx103.1^\circ$.
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

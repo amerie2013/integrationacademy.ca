@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MCT4C \textperiodcentered{} 1.8}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 1.8 --- Growth, Decay \& Compound Interest}\\[2pt]
+{\small Grade 12 Mathematics for College Technology (MCT4C) \textperiodcentered{} Unit 1: Exponential Functions}
+\end{center}
+
+\begin{ideabox}
+Model constant-percentage change with $A=A_0\,b^{t}$: growth $b=1+r$, decay $b=1-r$. Half-life uses $\left(\tfrac12\right)^{t/h}$; compound interest is $A=P(1+i)^{n}$.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Growth/decay factor $b=1\pm r$.
+  \item Half-life / doubling models.
+  \item Compound interest $A=P(1+i)^{n}$.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Percentage change over time}Repeated percentage change follows $A=A_0 b^{\,t}$: use $b=1+r$ for growth and $b=1-r$ for decay.
+\lh{Half-life and doubling}A half-life model uses $\left(\tfrac12\right)^{t/h}$ and a doubling model uses $2^{\,t/d}$ — each tracking change over a fixed interval.
+\lh{Compound interest}Interest that compounds grows by $A=P(1+i)^n$; solving for the number of periods $n$ calls for logarithms.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Population growth}
+$P=500(1.03)^{t}$; find $P$ after 10 years.\soln $500(1.03)^{10}\approx672$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Half-life}
+$80$ mg, half-life $6$ h. Model it; find the amount after $18$ h.\soln $A=80\left(\tfrac12\right)^{t/6}$; at $18$: $80\cdot\tfrac18=10$ mg.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Compound interest}
+\$2000 at $4\%$/yr, compounded annually, $5$ years.\soln $2000(1.04)^{5}\approx\$2433.31$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Doubling time}
+At $6\%$/yr, how long to double?\soln $1.06^t=2\Rightarrow t=\dfrac{\log 2}{\log 1.06}\approx11.9$ yr.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Decay to half}
+$A=A_0(0.95)^{t}$; when is $50\%$ left?\soln $0.95^t=0.5\Rightarrow t\approx13.5$ yr.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Growth value}
+$800(1.02)^{t}$; find after $15$ years.\soln $\approx1077$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Half-life count}
+$60$ mg, half-life $4$ h; amount after $12$ h.\soln $60\left(\tfrac12\right)^{3}=7.5$ mg.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Depreciation}
+A \$30\,000 car depreciates $12\%$/yr. When worth \$15\,000?\soln $(0.88)^t=0.5\Rightarrow t\approx5.4$ yr.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Interest amount}
+\$1500 at $5\%$/yr, $4$ years.\soln $1500(1.05)^{4}\approx\$1823.26$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+\$1000 at $5\%$/yr compounded annually for $3$ years — find the amount.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+A $40$ mg sample, half-life $5$ h — amount after $15$ h?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+A population $600(1.03)^{t}$ — find it after $10$ years.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Money at $8\%$/yr — how long to double?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+$A=A_0(0.9)^{t}$ — when is $50\%$ left?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+\$5000 at $6\%$/yr for $2$ years — amount?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+A $100$ mg sample, half-life $3$ h — amount after $9$ h?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+A \$20\,000 car depreciates $10\%$/yr — value after $3$ years?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+A colony $50(1.1)^{t}$ — reaches what after $5$ h?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Money at $4\%$/yr — how long to reach $1.5\times$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+A $200$ mg dose, half-life $8$ h — amount after $24$ h?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+\$3000 at $7\%$/yr for $5$ years — amount?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+A substance decays $15\%$/yr. When is $25\%$ left?\workspace{3.2cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item \$1000 at $5\%$/yr compounded annually for $3$ years — find the amount.
+  \item A $40$ mg sample, half-life $5$ h — amount after $15$ h?
+  \item A population $600(1.03)^{t}$ — find it after $10$ years.
+  \item Money at $8\%$/yr — how long to double?
+  \item $A=A_0(0.9)^{t}$ — when is $50\%$ left?
+  \item \$5000 at $6\%$/yr for $2$ years — amount?
+  \item A $100$ mg sample, half-life $3$ h — amount after $9$ h?
+  \item A \$20\,000 car depreciates $10\%$/yr — value after $3$ years?
+  \item A colony $50(1.1)^{t}$ — reaches what after $5$ h?
+  \item Money at $4\%$/yr — how long to reach $1.5\times$?
+  \item A $200$ mg dose, half-life $8$ h — amount after $24$ h?
+  \item \$3000 at $7\%$/yr for $5$ years — amount?
+  \item A substance decays $15\%$/yr. When is $25\%$ left?
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $1000(1.05)^3\approx\$1157.63$
+  \item $40\left(\tfrac12\right)^3=5$ mg
+  \item $600(1.03)^{10}\approx807$
+  \item $\tfrac{\log 2}{\log 1.08}\approx9.0$ yr
+  \item $\tfrac{\log 0.5}{\log 0.9}\approx6.6$ yr
+  \item $5000(1.06)^2\approx\$5618$
+  \item $100\left(\tfrac12\right)^3=12.5$ mg
+  \item $20000(0.9)^3\approx\$14\,580$
+  \item $50(1.1)^5\approx80.5$
+  \item $\tfrac{\log 1.5}{\log 1.04}\approx10.3$ yr
+  \item $200\left(\tfrac12\right)^3=25$ mg
+  \item $3000(1.07)^5\approx\$4207.66$
+  \item $(0.85)^t=0.25\Rightarrow t=\tfrac{\log 0.25}{\log 0.85}\approx8.5$ yr
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

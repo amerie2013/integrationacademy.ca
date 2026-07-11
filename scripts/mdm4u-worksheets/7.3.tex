@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MDM4U \textperiodcentered{} 7.3}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 7.3 --- Analyzing the Data}\\[2pt]
+{\small Grade 12 Mathematics of Data Management (MDM4U) \textperiodcentered{} Unit 7: The Culminating Investigation}
+\end{center}
+
+\begin{ideabox}
+Analysis puts the whole course to work: choose the right one-variable summary (centre, spread, shape) and two-variable tool ($r$, regression), while staying alert to bias and variability.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Pick the centre/spread that suit the shape (median \& IQR for skewed data).
+  \item Two-variable: use $r$ for strength and a regression line to predict.
+  \item Interpret results with an eye on sampling bias and variability.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Summarize first}Begin with \textbf{descriptive} tools — measures of centre and spread, plus graphs — to see the overall picture before digging deeper.
+\lh{Look for relationships}Use scatter plots, correlation, and regression to test whether variables are linked, and probability where chance plays a role.
+\lh{Interpret in context}Statistics only matter when tied back to the original question — always translate the numbers into a plain-language finding.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Choose the centre}
+Incomes are strongly right-skewed. Which centre?\soln The median --- it resists the high outliers.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Choose the spread}
+For skewed data with outliers, which spread?\soln The IQR --- it is resistant, unlike the range or $\sigma$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Summarize one variable}
+Find the median of $\{2,3,3,4,50\}$.\soln $3$ --- and note the $50$ is an outlier inflating the mean.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Two-variable strength}
+Technology reports $r=0.9$ for study time vs. score. Interpret.\soln A strong positive linear relationship.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Predict with regression}
+Using $\hat y=2x+5$, predict the score at $x=10$ hours.\soln $\hat y=25$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Compare two groups}
+How can you compare two classes' test results?\soln Compare centres and spreads --- e.g. side-by-side box plots or means with $\sigma$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Interpret r squared}
+A model has $r^{2}=0.81$. What does it say?\soln $81\%$ of the variation in the response is explained by the model.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Bias check}
+Your data came from a volunteer web poll. How does that affect analysis?\soln Self-selection bias --- results may not generalize to the whole population.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Full analysis (multi-part)}
+For $\{4,6,6,8,11\}$, find \\ \textbf{(a)} the mean; \\ \textbf{(b)} the median; \\ \textbf{(c)} which better describes the centre.\soln (a) $7$. (b) $6$. (c) both are close --- the mean is fine (little skew).
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+For strongly skewed data, which centre is best?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+For data with outliers, which spread is most resistant?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Find the median of $\{2,3,3,4,50\}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Technology gives $r=-0.8$. Describe the relationship.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Using $\hat y=3x+2$, predict $y$ at $x=5$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+A model has $r^{2}=0.64$. What percent of variation is explained?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Name a graph for comparing two groups' distributions.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Data came from a volunteer online poll. Name the bias.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Find the mean of $\{4,6,6,8,11\}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Would a scatter plot or a histogram show a relationship between two variables?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+$r=0.2$: is the linear relationship strong or weak?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+For symmetric data with no outliers, which centre is fine to use?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+For $\{4,6,6,8,11\}$, find \\ \textbf{(a)} the mean; \\ \textbf{(b)} the median; \\ \textbf{(c)} which better describes the centre.\workspace{3cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item For strongly skewed data, which centre is best?
+  \item For data with outliers, which spread is most resistant?
+  \item Find the median of $\{2,3,3,4,50\}$.
+  \item Technology gives $r=-0.8$. Describe the relationship.
+  \item Using $\hat y=3x+2$, predict $y$ at $x=5$.
+  \item A model has $r^{2}=0.64$. What percent of variation is explained?
+  \item Name a graph for comparing two groups' distributions.
+  \item Data came from a volunteer online poll. Name the bias.
+  \item Find the mean of $\{4,6,6,8,11\}$.
+  \item Would a scatter plot or a histogram show a relationship between two variables?
+  \item $r=0.2$: is the linear relationship strong or weak?
+  \item For symmetric data with no outliers, which centre is fine to use?
+  \item For $\{4,6,6,8,11\}$, find \\ \textbf{(a)} the mean; \\ \textbf{(b)} the median; \\ \textbf{(c)} which better describes the centre.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item the median
+  \item the IQR
+  \item $3$
+  \item strong negative linear
+  \item $17$
+  \item $64\%$
+  \item side-by-side box plots
+  \item self-selection (voluntary-response) bias
+  \item $\tfrac{35}{5}=7$
+  \item a scatter plot
+  \item weak
+  \item the mean
+  \item (a) $7$; (b) $6$; (c) either --- little skew
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

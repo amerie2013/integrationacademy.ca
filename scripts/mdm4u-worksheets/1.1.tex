@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MDM4U \textperiodcentered{} 1.1}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 1.1 --- The Fundamental Counting Principle}\\[2pt]
+{\small Grade 12 Mathematics of Data Management (MDM4U) \textperiodcentered{} Unit 1: Counting, Permutations \& Combinations}
+\end{center}
+
+\begin{ideabox}
+Sequential (\emph{and}) choices \emph{multiply}; disjoint (\emph{or}) cases \emph{add}. Fill the most-restricted stage first, and count \emph{at least} with the complement (total $-$ unwanted).
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Multiplicative principle: independent stages multiply.
+  \item Additive principle: mutually exclusive cases add --- watch for AND nested inside OR.
+  \item Restrictions first; \emph{at least one} $=$ total $-$ none.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Why we multiply}When a task is built from several independent stages, the number of ways to finish it is the \textbf{product} of the choices at each stage. Choosing 1 of 3 shirts \emph{and} 1 of 4 pants gives $3\times4=12$ outfits, because every shirt pairs with every pair of pants.
+\lh{AND multiplies, OR adds}Use the \textbf{multiplicative} principle when stages happen together (this \emph{and} then that). Use the \textbf{additive} principle for separate cases that cannot both occur (a book \emph{or} a movie), where you add the counts instead.
+\lh{Repetition changes everything}Always ask whether choices may repeat. A 4-digit PIN allowing repeats has $10^4$ possibilities; if no digit may repeat, the choices shrink each stage: $10\times9\times8\times7$.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Product rule, with a follow-up}
+A diner special is 1 of 3 egg styles, 1 of 4 breads, and 1 of 5 drinks. \\ \textbf{(a)} How many specials? \\ \textbf{(b)} How many if the drink must be coffee or tea (2 of the 5)?\soln (a) $3\cdot4\cdot5=60$. (b) restrict the last stage: $3\cdot4\cdot2=24$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Repeats vs. distinct (and the ratio)}
+A 3-character wristband code uses letters A--Z. \\ \textbf{(a)} repeats allowed; \\ \textbf{(b)} all different; \\ \textbf{(c)} what fraction are all different?\soln (a) $26^3=17\,576$. (b) $26\cdot25\cdot24=15\,600$. (c) $\dfrac{15\,600}{17\,576}\approx0.89$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Product nested in cases (AND in OR)}
+A café combo is either a hot drink with a pastry ($6\times4$) or a cold drink with a cookie ($5\times3$). How many combos?\soln Multiply within each case, then add the disjoint cases: $6\cdot4+5\cdot3=24+15=39$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Most-restricted stage first}
+A 4-digit ID has first digit $1$--$9$, a distinct set of digits, and an even last digit. How many?\soln Split on the units. \emph{Units $=0$:} $9\cdot8\cdot7=504$. \emph{Units $\in\{2,4,6,8\}$:} first digit avoids $0$ and the units ($8$), then $8,7$: $4\cdot8\cdot8\cdot7=1792$. Total $504+1792=2296$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Complement (at least one)}
+A 6-question true/false quiz. How many answer keys have at least one \emph{False}?\soln Total $-$ all-True: $2^6-1=63$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Adjacency restriction}
+A 4-note ringtone uses 7 distinct notes; no two consecutive notes are equal. How many ringtones?\soln First note $7$; each later note only avoids the one before it ($6$): $7\cdot6\cdot6\cdot6=1512$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Ordered selection}
+10 sprinters race. How many gold--silver--bronze podiums are possible?\soln Ordered, no repeats: $10\cdot9\cdot8=720$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Subsets via yes/no}
+A frozen-yogurt bar has 8 toppings; take any subset. How many topping combinations, including none?\soln Each topping in or out: $2^8=256$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Complement in an ordered choice}
+A 4-leg relay order is chosen from 6 runners. In how many orders does the fastest runner, Maya, run a leg?\soln Total $-$ none: $6\cdot5\cdot4\cdot3-5\cdot4\cdot3\cdot2=360-120=240$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+A build-your-own burrito offers 2 tortillas, 3 proteins, 4 salsas, and 2 cheeses. \\ \textbf{(a)} How many burritos? \\ \textbf{(b)} How many if cheese is optional (a \emph{no cheese} choice is added)?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+A 5-character Wi-Fi password uses digits $0$--$9$. \\ \textbf{(a)} How many if repeats are allowed? \\ \textbf{(b)} How many with no repeated digit?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+A 4-letter mascot name starts with a consonant (21 choices); the other 3 letters are any letters, repeats allowed. How many names?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+A lunch deal is either a wrap with a drink ($5\times4$) or a salad with a soup ($3\times3$). How many deals?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+A 5-question true/false test. How many answer keys have at least one \emph{True}?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+An ice-cream sundae takes any subset of 6 toppings. How many sundaes have at least one topping?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+9 gymnasts compete. How many gold--silver--bronze outcomes are possible?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+A 4-bead strip (in a row) is made from 5 colours; no two adjacent beads share a colour. How many strips?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+A 3-digit locker number uses digits $0$--$9$ but can't start with $0$. How many lockers?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+A 4-symbol code uses letters A--Z but can't be four identical letters. How many codes?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+From 10 photos, how many ways to arrange 3 in a row on a wall?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+A jersey shows 2 different initials (letters) then a single digit $1$--$9$. How many jerseys?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+A 4-character password has exactly 2 letters and 2 digits in some order; both may repeat. How many passwords?\workspace{3.4cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item A build-your-own burrito offers 2 tortillas, 3 proteins, 4 salsas, and 2 cheeses. \\ \textbf{(a)} How many burritos? \\ \textbf{(b)} How many if cheese is optional (a \emph{no cheese} choice is added)?
+  \item A 5-character Wi-Fi password uses digits $0$--$9$. \\ \textbf{(a)} How many if repeats are allowed? \\ \textbf{(b)} How many with no repeated digit?
+  \item A 4-letter mascot name starts with a consonant (21 choices); the other 3 letters are any letters, repeats allowed. How many names?
+  \item A lunch deal is either a wrap with a drink ($5\times4$) or a salad with a soup ($3\times3$). How many deals?
+  \item A 5-question true/false test. How many answer keys have at least one \emph{True}?
+  \item An ice-cream sundae takes any subset of 6 toppings. How many sundaes have at least one topping?
+  \item 9 gymnasts compete. How many gold--silver--bronze outcomes are possible?
+  \item A 4-bead strip (in a row) is made from 5 colours; no two adjacent beads share a colour. How many strips?
+  \item A 3-digit locker number uses digits $0$--$9$ but can't start with $0$. How many lockers?
+  \item A 4-symbol code uses letters A--Z but can't be four identical letters. How many codes?
+  \item From 10 photos, how many ways to arrange 3 in a row on a wall?
+  \item A jersey shows 2 different initials (letters) then a single digit $1$--$9$. How many jerseys?
+  \item A 4-character password has exactly 2 letters and 2 digits in some order; both may repeat. How many passwords?
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item (a) $48$; (b) $2\cdot3\cdot4\cdot3=72$
+  \item (a) $10^5=100\,000$; (b) $10\cdot9\cdot8\cdot7\cdot6=30\,240$
+  \item $21\cdot26^3=369\,096$
+  \item $20+9=29$
+  \item $2^5-1=31$
+  \item $2^6-1=63$
+  \item $9\cdot8\cdot7=504$
+  \item $5\cdot4\cdot4\cdot4=320$
+  \item $9\cdot10\cdot10=900$
+  \item $26^4-26=456\,950$
+  \item $10\cdot9\cdot8=720$
+  \item $26\cdot25\cdot9=5850$
+  \item $\dbinom{4}{2}26^2\,10^2=405\,600$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

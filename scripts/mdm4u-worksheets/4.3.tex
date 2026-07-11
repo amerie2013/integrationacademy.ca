@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MDM4U \textperiodcentered{} 4.3}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 4.3 --- Normal Probabilities \& Percentiles}\\[2pt]
+{\small Grade 12 Mathematics of Data Management (MDM4U) \textperiodcentered{} Unit 4: Continuous \& Normal Distributions}
+\end{center}
+
+\begin{ideabox}
+Standardize, then read the table value $\Phi(z)=P(Z<z)$. Then $P(a<X<b)=\Phi(z_b)-\Phi(z_a)$, and percentiles invert the table: $x=\mu+z\sigma$.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item $P(X<x)=\Phi(z)$ after standardizing.
+  \item $P(a<X<b)=\Phi(z_b)-\Phi(z_a)$; upper tail $=1-\Phi(z)$.
+  \item Percentile $\to$ $z$ $\to$ $x=\mu+z\sigma$.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Finding a probability}Convert the value to a z-score, then use a z-table or technology to read the area to its left, which is $P(X<x)$.
+\lh{Between and above}For $P(X>x)$ subtract the left area from $1$; for $P(a<X<b)$ subtract the two left areas. A quick sketch of the shaded region prevents errors.
+\lh{Percentiles run backwards}For a percentile, start from the area, look up the matching z-score, then reverse the formula: $x=\mu+z\sigma$.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Left area}
+$X\sim N(100,15)$. Find $P(X<120)$.\soln $z=\tfrac{120-100}{15}=1.33$; $\Phi(1.33)=0.9082$.\ncurve{-3.8}{1.33}{}
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Upper tail}
+$X\sim N(100,15)$. Find $P(X>85)$.\soln $z=-1$; $P=1-\Phi(-1)=\Phi(1)=0.8413$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Between two values}
+$X\sim N(50,5)$. Find $P(45<X<55)$.\soln $\Phi(1)-\Phi(-1)=0.8413-0.1587=0.6826$.\ncurve{-1}{1}{}
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Percentile to value}
+Find the $90$th percentile of $N(500,100)$.\soln $z=1.28$; $x=500+128=628$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Target probability to value}
+$X\sim N(70,10)$. Find $x$ with $P(X>x)=0.05$.\soln $z=1.645$; $x=70+16.45=86.45$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Middle 95\% interval}
+Find the central $95\%$ interval of $N(100,15)$.\soln $z=\pm1.96$: $100\pm29.4$, i.e. $70.6$ to $129.4$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Two-tailed area}
+Find $P(|Z|>2)$.\soln $2\bigl(1-\Phi(2)\bigr)=2(0.0228)=0.0456$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Find sigma from a probability}
+$X\sim N(200,\sigma)$ with $P(X<230)=0.84$. Find $\sigma$.\soln $\Phi(1)=0.84$, so $230$ is $+1\sigma$: $\sigma=30$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Exam scores (three parts)}
+Scores are $N(72,12)$. Find \\ \textbf{(a)} $P(X>90)$; \\ \textbf{(b)} $P(60<X<84)$; \\ \textbf{(c)} the $95$th percentile.\soln (a) $z=1.5$, $1-\Phi(1.5)=0.0668$. (b) $\Phi(1)-\Phi(-1)=0.6826$. (c) $z=1.645$, $72+19.74=91.74$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+$X\sim N(100,15)$. Find $P(X<115)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+$X\sim N(50,4)$. Find $P(X>58)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+$X\sim N(200,20)$. Find $P(180<X<220)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Find the $84$th percentile of $N(60,5)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+$X\sim N(500,100)$. Find $x$ with $P(X>x)=0.10$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Find $P(-1.5<Z<1.5)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+$X\sim N(72,12)$. Find $P(X>96)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Find the central $90\%$ interval of $N(100,10)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+$X\sim N(25,4)$. Find $P(X<17)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Find the $99$th percentile of $N(500,100)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+For any normal, find $P(X<\mu)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+$X\sim N(160,10)$. Find $P(150<X<180)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Scores are $N(72,12)$. Find \\ \textbf{(a)} $P(X>90)$; \\ \textbf{(b)} $P(60<X<84)$; \\ \textbf{(c)} the $95$th percentile.\workspace{3.4cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $X\sim N(100,15)$. Find $P(X<115)$.
+  \item $X\sim N(50,4)$. Find $P(X>58)$.
+  \item $X\sim N(200,20)$. Find $P(180<X<220)$.
+  \item Find the $84$th percentile of $N(60,5)$.
+  \item $X\sim N(500,100)$. Find $x$ with $P(X>x)=0.10$.
+  \item Find $P(-1.5<Z<1.5)$.
+  \item $X\sim N(72,12)$. Find $P(X>96)$.
+  \item Find the central $90\%$ interval of $N(100,10)$.
+  \item $X\sim N(25,4)$. Find $P(X<17)$.
+  \item Find the $99$th percentile of $N(500,100)$.
+  \item For any normal, find $P(X<\mu)$.
+  \item $X\sim N(160,10)$. Find $P(150<X<180)$.
+  \item Scores are $N(72,12)$. Find \\ \textbf{(a)} $P(X>90)$; \\ \textbf{(b)} $P(60<X<84)$; \\ \textbf{(c)} the $95$th percentile.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $\Phi(1)=0.8413$
+  \item $1-\Phi(2)=0.0228$
+  \item $\Phi(1)-\Phi(-1)=0.6826$
+  \item $z\approx1\Rightarrow65$
+  \item $z=1.28\Rightarrow628$
+  \item $\Phi(1.5)-\Phi(-1.5)=0.8664$
+  \item $z=2\Rightarrow0.0228$
+  \item $100\pm16.45=83.55$ to $116.45$
+  \item $z=-2\Rightarrow0.0228$
+  \item $z=2.33\Rightarrow733$
+  \item $0.5$
+  \item $\Phi(2)-\Phi(-1)=0.8185$
+  \item (a) $0.0668$; (b) $0.6826$; (c) $\approx91.7$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

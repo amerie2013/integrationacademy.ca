@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MDM4U \textperiodcentered{} 2.6}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 2.6 --- Conditional Probability}\\[2pt]
+{\small Grade 12 Mathematics of Data Management (MDM4U) \textperiodcentered{} Unit 2: Probability}
+\end{center}
+
+\begin{ideabox}
+$P(A\mid B)=\dfrac{P(A\cap B)}{P(B)}$ restricts to the outcomes where $B$ happened. The product rule $P(A\cap B)=P(B)\,P(A\mid B)$ and two-way tables make it concrete.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item $P(A\mid B)=\dfrac{P(A\cap B)}{P(B)}$ --- a reduced sample space.
+  \item Product rule: $P(A\cap B)=P(B)P(A\mid B)$.
+  \item Read conditions directly off a two-way table.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Probability given information}$P(A\mid B)$ is the probability of $A$ \emph{given} that $B$ has already happened. Knowing $B$ shrinks the sample space to the outcomes inside $B$.
+\lh{The formula}$P(A\mid B)=\dfrac{P(A\cap B)}{P(B)}$. Rearranged, this is the \textbf{product rule} $P(A\cap B)=P(B)\,P(A\mid B)$.
+\lh{Reading a two-way table}In a two-way table a conditional probability uses just one row or column as the new total — the condition tells you which one.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Reduced sample space (cards)}
+Find $P(\text{king}\mid\text{face card})$.\soln $\dfrac{4/52}{12/52}=\dfrac{4}{12}=\dfrac13$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Two-way table}
+Of 100 people, 60 are female and 36 of them own a pet. Find $P(\text{owns pet}\mid\text{female})$.\soln $\dfrac{36}{60}=0.6$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Dependent second draw}
+Drawing without replacement, find $P(\text{2nd is an ace}\mid\text{1st was an ace})$.\soln $\dfrac{3}{51}=\dfrac{1}{17}$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Product rule}
+Find $P(\text{two kings in a row})$ without replacement.\soln $P(K_1)P(K_2\mid K_1)=\dfrac{4}{52}\cdot\dfrac{3}{51}=\dfrac{1}{221}$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Condition on one die}
+Two dice. Find $P(\text{sum}=8\mid\text{first die}=5)$.\soln Given first $=5$, need second $=3$: $\dfrac16$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Reduced space with counting}
+Two dice. Find $P(\text{sum}\ge10\mid\text{at least one 6})$.\soln The event \emph{at least one 6} has 11 outcomes; those with sum $\ge10$ are $(6,4),(4,6),(6,5),(5,6),(6,6)$: $\dfrac{5}{11}$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Natural frequencies (Bayes-lite)}
+1\% of people have a condition. A test is 90\% sensitive with a 5\% false-positive rate. Estimate $P(\text{condition}\mid\text{positive})$.\soln Per 1000: $10$ sick $\to9$ positive; $990$ healthy $\to\approx50$ positive. $P\approx\dfrac{9}{9+50}\approx0.15$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Reverse the condition}
+In a survey, 60 people own a pet and 36 of them are female. Find $P(\text{female}\mid\text{owns pet})$.\soln $\dfrac{36}{60}=0.6$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- The two-child subtlety}
+A family has two children (each B/G equally likely). Find \\ \textbf{(a)} $P(\text{both girls}\mid\text{at least one girl})$; \\ \textbf{(b)} $P(\text{both girls}\mid\text{elder is a girl})$.\soln (a) $\{BG,GB,GG\}$: $\dfrac13$. (b) $\{GB,GG\}$: $\dfrac12$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Find $P(\text{queen}\mid\text{red card})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Find $P(\text{heart}\mid\text{red card})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Two dice. Find $P(\text{sum}=6\mid\text{first die}=2)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Draw 2 without replacement. Find $P(\text{2nd is a spade}\mid\text{1st was a spade})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+50 students take French; 30 take French and 12 of those also take Spanish. Find $P(\text{Spanish}\mid\text{French})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+A jar of 4 red and 6 blue; draw 2 without replacement. Find $P(\text{2nd red}\mid\text{1st red})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Two dice. Find $P(\text{a double}\mid\text{sum is even})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+From 5 red and 4 green, draw 2 without replacement. Find $P(\text{both red})$ via the product rule.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+A two-child family. Find $P(\text{both boys}\mid\text{at least one boy})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Of 200 people, 120 own a phone and 90 of them own a laptop. Find $P(\text{laptop}\mid\text{phone})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+In that group, 100 own a laptop in total; find $P(\text{phone}\mid\text{laptop})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Two dice. Find $P(\text{sum}\ge10\mid\text{at least one 6})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+A disease affects 2\% of people. A test is 95\% sensitive with a 10\% false-positive rate. Using 1000 people, estimate $P(\text{sick}\mid\text{positive})$.\workspace{3.4cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Find $P(\text{queen}\mid\text{red card})$.
+  \item Find $P(\text{heart}\mid\text{red card})$.
+  \item Two dice. Find $P(\text{sum}=6\mid\text{first die}=2)$.
+  \item Draw 2 without replacement. Find $P(\text{2nd is a spade}\mid\text{1st was a spade})$.
+  \item 50 students take French; 30 take French and 12 of those also take Spanish. Find $P(\text{Spanish}\mid\text{French})$.
+  \item A jar of 4 red and 6 blue; draw 2 without replacement. Find $P(\text{2nd red}\mid\text{1st red})$.
+  \item Two dice. Find $P(\text{a double}\mid\text{sum is even})$.
+  \item From 5 red and 4 green, draw 2 without replacement. Find $P(\text{both red})$ via the product rule.
+  \item A two-child family. Find $P(\text{both boys}\mid\text{at least one boy})$.
+  \item Of 200 people, 120 own a phone and 90 of them own a laptop. Find $P(\text{laptop}\mid\text{phone})$.
+  \item In that group, 100 own a laptop in total; find $P(\text{phone}\mid\text{laptop})$.
+  \item Two dice. Find $P(\text{sum}\ge10\mid\text{at least one 6})$.
+  \item A disease affects 2\% of people. A test is 95\% sensitive with a 10\% false-positive rate. Using 1000 people, estimate $P(\text{sick}\mid\text{positive})$.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $\tfrac{2}{26}=\tfrac{1}{13}$
+  \item $\tfrac{13}{26}=\tfrac12$
+  \item $\tfrac16$
+  \item $\tfrac{12}{51}=\tfrac{4}{17}$
+  \item $\tfrac{12}{30}=\tfrac25$
+  \item $\tfrac39=\tfrac13$
+  \item $\tfrac{6}{18}=\tfrac13$
+  \item $\tfrac59\cdot\tfrac48=\tfrac{20}{72}=\tfrac{5}{18}$
+  \item $\tfrac13$
+  \item $\tfrac{90}{120}=\tfrac34$
+  \item $\tfrac{90}{100}=\tfrac{9}{10}$
+  \item $\tfrac{5}{11}$
+  \item $\approx\tfrac{19}{19+98}=\tfrac{19}{117}\approx0.16$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

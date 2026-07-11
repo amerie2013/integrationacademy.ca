@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MCV4U \textperiodcentered{} 7.1}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 7.1 --- Equations of Lines}\\[2pt]
+{\small Grade 12 Calculus and Vectors (MCV4U) \textperiodcentered{} Unit 7: Lines and Planes}
+\end{center}
+
+\begin{ideabox}
+A line needs a point and a direction vector $\vec d$. Vector: $\vec r=\vec r_0+t\vec d$; parametric: $x=x_0+ta,\dots$; symmetric: $\tfrac{x-x_0}{a}=\tfrac{y-y_0}{b}$.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Vector: $\vec r=\vec r_0+t\vec d$.
+  \item Parametric: $x=x_0+ta,\ y=y_0+tb\ (,z=z_0+tc)$.
+  \item Direction through two points: $\vec d=B-A$.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Point and direction}A line is fixed by a point on it and a \textbf{direction vector}; the \textbf{vector equation} is $\vec r=\vec r_0+t\,\vec d$.
+\lh{Parametric form}Splitting into components gives the \textbf{parametric equations}, each coordinate written in terms of the parameter $t$.
+\lh{2-D vs 3-D}In 2-D a line also has scalar and symmetric forms; in 3-D the vector and parametric forms are the natural description.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Vector equation}
+Line through $(1,2)$ with direction $(3,4)$.\soln $\vec r=(1,2)+t(3,4)$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Parametric}
+Parametric form of that line.\soln $x=1+3t,\ y=2+4t$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Through two points}
+Vector equation through $A(1,0,2),B(4,6,8)$.\soln $\vec d=B-A=(3,6,6)$; $\vec r=(1,0,2)+t(3,6,6)$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Symmetric}
+Symmetric equation through $(1,2)$ with direction $(3,4)$.\soln $\dfrac{x-1}{3}=\dfrac{y-2}{4}$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Point on the line?}
+Is $(4,6)$ on $\vec r=(1,2)+t(3,4)$?\soln $4=1+3t\Rightarrow t=1$; $2+4(1)=6$ ✓: yes.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Vector equation}
+Line through $(0,1)$ with direction $(2,5)$.\soln $\vec r=(0,1)+t(2,5)$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Parametric}
+Parametric form of $\vec r=(3,-1)+t(1,2)$.\soln $x=3+t,\ y=-1+2t$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Direction vector}
+Direction through $A(2,1,0),B(5,7,6)$.\soln $(3,6,6)$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Point on the line?}
+Is $(7,11)$ on $\vec r=(1,2)+t(3,3)$?\soln $7=1+3t\Rightarrow t=2$; $2+3(2)=8\ne11$: no.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Vector equation through $(0,1)$ with direction $(2,5)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Parametric form of $\vec r=(3,-1)+t(1,2)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Direction vector through $A(2,1,0),B(5,7,6)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Symmetric equation through $(0,0)$ with direction $(1,3)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Is $(7,11)$ on $\vec r=(1,2)+t(3,3)$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Vector equation through $(2,3)$ with direction $(1,-1)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Parametric form through $(1,1,1)$ with direction $(2,0,3)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Direction vector through $A(0,0,0),B(3,4,12)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Is $(5,8)$ on $\vec r=(1,2)+t(2,3)$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Symmetric equation through $(2,1)$ with direction $(4,2)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Vector equation of the $x$-axis.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Is $(2,4,6)$ on $\vec r=(0,0,0)+t(1,2,3)$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Write the line through $A(1,2,3)$ and $B(4,8,9)$ in vector and parametric form.\workspace{3.5cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Vector equation through $(0,1)$ with direction $(2,5)$.
+  \item Parametric form of $\vec r=(3,-1)+t(1,2)$.
+  \item Direction vector through $A(2,1,0),B(5,7,6)$.
+  \item Symmetric equation through $(0,0)$ with direction $(1,3)$.
+  \item Is $(7,11)$ on $\vec r=(1,2)+t(3,3)$?
+  \item Vector equation through $(2,3)$ with direction $(1,-1)$.
+  \item Parametric form through $(1,1,1)$ with direction $(2,0,3)$.
+  \item Direction vector through $A(0,0,0),B(3,4,12)$.
+  \item Is $(5,8)$ on $\vec r=(1,2)+t(2,3)$?
+  \item Symmetric equation through $(2,1)$ with direction $(4,2)$.
+  \item Vector equation of the $x$-axis.
+  \item Is $(2,4,6)$ on $\vec r=(0,0,0)+t(1,2,3)$?
+  \item Write the line through $A(1,2,3)$ and $B(4,8,9)$ in vector and parametric form.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $\vec r=(0,1)+t(2,5)$
+  \item $x=3+t,\ y=-1+2t$
+  \item $(3,6,6)$
+  \item $\dfrac{x}{1}=\dfrac{y}{3}$
+  \item no
+  \item $\vec r=(2,3)+t(1,-1)$
+  \item $x=1+2t,\ y=1,\ z=1+3t$
+  \item $(3,4,12)$
+  \item $5=1+2t\Rightarrow t=2$; $2+6=8=8$ ✓ yes
+  \item $\dfrac{x-2}{4}=\dfrac{y-1}{2}$
+  \item $\vec r=(0,0,0)+t(1,0,0)$
+  \item $t=2$ throughout ✓ yes
+  \item $\vec d=(3,6,6)$; $\vec r=(1,2,3)+t(3,6,6)$; $x=1+3t,y=2+6t,z=3+6t$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

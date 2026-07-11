@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MDM4U \textperiodcentered{} 5.3}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 5.3 --- Measures of Spread}\\[2pt]
+{\small Grade 12 Mathematics of Data Management (MDM4U) \textperiodcentered{} Unit 5: One-Variable Statistics}
+\end{center}
+
+\begin{ideabox}
+Two data sets can share a mean yet differ wildly. The \emph{range} ($\max-\min$), \emph{IQR} ($Q_3-Q_1$), and \emph{standard deviation} $\sigma=\sqrt{\dfrac{\sum(x-\bar x)^2}{n}}$ measure how spread out the data are.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Range $=\max-\min$; IQR $=Q_3-Q_1$.
+  \item Variance $=$ mean of squared deviations; $\sigma=\sqrt{\text{variance}}$.
+  \item Adding a constant leaves $\sigma$ unchanged; scaling by $k$ multiplies $\sigma$ by $|k|$.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Why spread matters}Two data sets can share a mean yet differ wildly in consistency. \textbf{Spread} measures how far the values fall from the centre.
+\lh{Range and IQR}The \textbf{range} is max minus min; the \textbf{interquartile range} $\mathrm{IQR}=Q_3-Q_1$ describes the middle $50\%$ and shrugs off outliers.
+\lh{Standard deviation}The \textbf{standard deviation} $\sigma$ is the typical distance of a value from the mean; a larger $\sigma$ means more spread-out, less consistent data.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Range}
+Find the range of $\{5,8,12,20\}$.\soln $20-5=15$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Standard deviation}
+Find the (population) standard deviation of $\{2,4,6,8,10\}$.\soln $\bar x=6$; squared deviations $16,4,0,4,16$ sum to $40$; variance $=\tfrac{40}{5}=8$; $\sigma=\sqrt{8}\approx2.83$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Same mean, different spread}
+Sets A and B both average $50$, with $\sigma_A=2$ and $\sigma_B=10$. Which is more consistent?\soln A --- its smaller $\sigma$ means values cluster tightly.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- IQR}
+Find the IQR of $\{3,5,7,9,11,13,15\}$.\soln Median $9$; $Q_1=5$, $Q_3=13$; IQR $=8$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Add a constant}
+Every value gains $5$. How does $\sigma$ change?\soln Unchanged --- shifting all data does not change the spread.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Scale the data}
+Every value is tripled. How does $\sigma$ change?\soln It triples ($\sigma\to3\sigma$).
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Zero spread}
+Find $\sigma$ for $\{10,10,10,10\}$.\soln $0$ --- all values equal the mean.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Variance}
+Find the (population) variance of $\{1,3,5,7,9\}$.\soln $\bar x=5$; squared deviations $16,4,0,4,16$ sum to $40$; variance $=8$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Full spread (multi-part)}
+For $\{2,4,4,4,5,5,7,9\}$ find \\ \textbf{(a)} mean; \\ \textbf{(b)} population $\sigma$; \\ \textbf{(c)} range.\soln (a) $\tfrac{40}{8}=5$. (b) squared deviations sum to $32$, variance $4$, $\sigma=2$. (c) $9-2=7$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Find the range of $\{5,8,12,20\}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Find the population $\sigma$ of $\{2,4,6,8,10\}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Find the IQR of $\{3,5,7,9,11,13,15\}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Two sets average $50$ with $\sigma=2$ and $\sigma=10$. Which is more consistent?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Every value in a set gains $5$. How does $\sigma$ change?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Every value is multiplied by $3$. How does $\sigma$ change?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Find $\sigma$ for $\{10,10,10,10\}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Test scores run from $45$ to $98$. Find the range.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Find the population variance of $\{1,3,5,7,9\}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Find the IQR of $\{2,4,6,8,10,12,14,16\}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+A data set has $\sigma=0$. What does that mean?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Set A has range $20$; set B has range $5$. Which is more spread out?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+For $\{2,4,4,4,5,5,7,9\}$ find \\ \textbf{(a)} mean; \\ \textbf{(b)} population $\sigma$; \\ \textbf{(c)} range.\workspace{3cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Find the range of $\{5,8,12,20\}$.
+  \item Find the population $\sigma$ of $\{2,4,6,8,10\}$.
+  \item Find the IQR of $\{3,5,7,9,11,13,15\}$.
+  \item Two sets average $50$ with $\sigma=2$ and $\sigma=10$. Which is more consistent?
+  \item Every value in a set gains $5$. How does $\sigma$ change?
+  \item Every value is multiplied by $3$. How does $\sigma$ change?
+  \item Find $\sigma$ for $\{10,10,10,10\}$.
+  \item Test scores run from $45$ to $98$. Find the range.
+  \item Find the population variance of $\{1,3,5,7,9\}$.
+  \item Find the IQR of $\{2,4,6,8,10,12,14,16\}$.
+  \item A data set has $\sigma=0$. What does that mean?
+  \item Set A has range $20$; set B has range $5$. Which is more spread out?
+  \item For $\{2,4,4,4,5,5,7,9\}$ find \\ \textbf{(a)} mean; \\ \textbf{(b)} population $\sigma$; \\ \textbf{(c)} range.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $15$
+  \item $\sqrt{8}\approx2.83$
+  \item $13-5=8$
+  \item $\sigma=2$
+  \item unchanged
+  \item multiplied by $3$
+  \item $0$
+  \item $53$
+  \item $8$
+  \item $Q_1=5,\ Q_3=13$, IQR $=8$
+  \item all values are identical
+  \item set A
+  \item (a) $5$; (b) $2$; (c) $7$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

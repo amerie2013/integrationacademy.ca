@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MCF3M \textperiodcentered{} 1.5}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 1.5 --- Roots and x-Intercepts}\\[2pt]
+{\small Grade 11 Functions \& Applications (MCF3M) \textperiodcentered{} Unit 1: Quadratic Expressions and Equations}
+\end{center}
+
+\begin{ideabox}
+The real roots of $ax^2+bx+c=0$ are the x-intercepts of $y=ax^2+bx+c$.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item $D>0$ two x-intercepts, $D=0$ one, $D<0$ none.
+  \item A double root means the vertex sits on the x-axis.
+  \item Factoring and graphing agree because both find where $y=0$.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Roots are x-intercepts}The \textbf{roots} of $0=ax^2+bx+c$ are exactly the \textbf{$x$-intercepts} of $y=ax^2+bx+c$ — where the parabola meets the axis.
+\lh{How many}The discriminant also counts intercepts: two, one (a touch), or none, matching the number of roots.
+\lh{Axis of symmetry}The axis of symmetry lies midway between the intercepts, at $x=-\dfrac{b}{2a}$, which locates the vertex.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Two intercepts}
+Find the x-intercepts of $y=x^2-4x+3$.\soln Set $y=0$ and factor: $(x-1)(x-3)=0$. \\ $x=1$ and $x=3$:\eplot{-1}{6}{-2}{8}{\addplot[exblue,very thick,domain=0:5]{x^2-4*x+3};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(1,0) (3,0)};}
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- One intercept}
+How many x-intercepts has $y=x^2-6x+9$?\soln $(x-3)^2$ — a double root; discriminant $=0$. \\ One x-intercept, at $x=3$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- No intercepts}
+How many x-intercepts has $y=x^2+1$?\soln Discriminant $=0-4=-4<0$. \\ None — the parabola sits entirely above the x-axis:\eplot{-4}{4}{-1}{10}{\addplot[exblue,very thick,domain=-3:3]{x^2+1};}
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Count from D}
+How many x-intercepts has $y=2x^2-3x-5$?\soln Discriminant $=9+40=49>0$. \\ Two x-intercepts.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Application — profit}
+Profit (in $\$1000$s) is $P=-5x^2+550x-5000$, where $x$ is advertising (in $\$1000$s). Where is $P=0$?\soln Factor out $-5$: $-5(x^2-110x+1000)$. \\ Factor: $-5(x-10)(x-100)=0$. \\ $x=10$ or $x=100$ (thousand dollars).
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Factor to intercepts}
+Find the x-intercepts of $y=x^2-x-6$.\soln $(x-3)(x+2)=0$. \\ $x=3$ and $x=-2$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Difference of squares}
+Find the x-intercepts of $y=x^2-9$.\soln $(x-3)(x+3)=0$. \\ $x=\pm3$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- No intercepts}
+How many x-intercepts has $y=x^2-2x+5$?\soln Discriminant $=4-20=-16<0$. \\ None.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Double root}
+How many x-intercepts has $y=4x^2-12x+9$?\soln $(2x-3)^2$, discriminant $=0$. \\ One, at $x=\tfrac32$:\eplot{-1}{4}{-1}{10}{\addplot[exblue,very thick,domain=0:3]{4*x^2-12*x+9};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(1.5,0)};}
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Find the x-intercepts of $y=x^2-5x+6$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+How many x-intercepts has $y=x^2+4$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+How many x-intercepts has $y=x^2-6x+9$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Find the x-intercepts of $y=x^2-16$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+How many x-intercepts has $y=x^2+x-12$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Find the x-intercepts of $y=x^2+2x-8$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+How many x-intercepts has $y=3x^2+2x+1$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Find the x-intercepts of $y=2x^2-5x-3$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+How many x-intercepts has $y=x^2-10x+25$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Find the x-intercepts of $y=x^2-2x-3$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+How many x-intercepts has $y=x^2-4x+5$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+A profit model is $P=-2x^2+12x-10$. Where is $P=0$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+A parabola's vertex sits on the x-axis. What is its discriminant?\workspace{2.6cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Find the x-intercepts of $y=x^2-5x+6$.
+  \item How many x-intercepts has $y=x^2+4$?
+  \item How many x-intercepts has $y=x^2-6x+9$?
+  \item Find the x-intercepts of $y=x^2-16$.
+  \item How many x-intercepts has $y=x^2+x-12$?
+  \item Find the x-intercepts of $y=x^2+2x-8$.
+  \item How many x-intercepts has $y=3x^2+2x+1$?
+  \item Find the x-intercepts of $y=2x^2-5x-3$.
+  \item How many x-intercepts has $y=x^2-10x+25$?
+  \item Find the x-intercepts of $y=x^2-2x-3$.
+  \item How many x-intercepts has $y=x^2-4x+5$?
+  \item A profit model is $P=-2x^2+12x-10$. Where is $P=0$?
+  \item A parabola's vertex sits on the x-axis. What is its discriminant?
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $x=2,3$
+  \item none
+  \item one ($x=3$)
+  \item $x=\pm4$
+  \item two
+  \item $x=-4,2$
+  \item none
+  \item $x=3,-\tfrac12$
+  \item one ($x=5$)
+  \item $x=3,-1$
+  \item none
+  \item $x=1,5$
+  \item $0$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

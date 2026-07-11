@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MDM4U \textperiodcentered{} 6.1}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 6.1 --- Scatter Plots \& Correlation}\\[2pt]
+{\small Grade 12 Mathematics of Data Management (MDM4U) \textperiodcentered{} Unit 6: Two-Variable Statistics}
+\end{center}
+
+\begin{ideabox}
+A scatter plot of paired data shows \emph{direction} (positive/negative), \emph{form} (linear/non-linear), and \emph{strength}. The correlation coefficient $r$ measures \emph{linear} strength, from $-1$ to $1$.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Explanatory ($x$) vs. response ($y$) variable.
+  \item Describe a scatter by direction, form, and strength.
+  \item $r\in[-1,1]$: the sign gives direction, $|r|$ gives strength; $r$ only measures \emph{linear} association.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Two variables at once}A \textbf{scatter plot} graphs paired data as points to expose a relationship between two variables.
+\lh{Reading correlation}An upward trend is \textbf{positive} correlation, downward is \textbf{negative}, and a shapeless cloud is none. A tight, line-like cloud is \textbf{strong}; a loose one is \textbf{weak}.
+\lh{The correlation coefficient}The value $r$, from $-1$ to $1$, measures the strength and direction of a \emph{linear} relationship; values near $\pm1$ signal a strong linear fit.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Explanatory vs. response}
+In the pair hours studied vs. test score, which is which?\soln Hours studied is explanatory ($x$); test score is the response ($y$).
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Describe a scatter}
+Points climb steadily along a straight band. Describe the association.\soln Positive, linear, and strong.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Estimate r by eye}
+A tight, upward-sloping band of points. Estimate $r$.\soln Close to $+1$ (say $r\approx0.9$).
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Negative correlation}
+As outdoor temperature rises, heating cost falls. Describe $r$.\soln Negative --- $r$ is between $-1$ and $0$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- No correlation}
+Shoe size vs. test score shows a shapeless cloud. Estimate $r$.\soln About $0$ --- no linear association.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Non-linear form}
+Points follow a clear U-shape. Is $r$ a good summary?\soln No --- $r$ only measures \emph{linear} strength and will understate a curved relationship.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Interpret a value}
+Interpret $r=-0.85$.\soln A strong \emph{negative} linear relationship.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Read a scatter}
+Describe the plotted data.\soln A strong positive linear trend.\scatter{0}{7}{0}{10}{\addplot[only marks,mark=*,exblue] coordinates {(1,2)(2,3)(3,5)(4,6)(5,8)(6,9)};}
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Compare r values (multi-part)}
+Given $r=-0.2,\ 0.95,\ -0.99,\ 0.5$, find \\ \textbf{(a)} the strongest; \\ \textbf{(b)} the weakest; \\ \textbf{(c)} the negative ones.\soln (a) $-0.99$ (largest $|r|$). (b) $-0.2$. (c) $-0.2$ and $-0.99$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Which is the explanatory variable: hours of sunlight vs. plant growth?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Describe the association when $r=0.9$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Describe the association when $r=-0.4$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Which is stronger: $r=0.8$ or $r=-0.9$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+What does $r=0$ indicate?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+A scatter curves sharply upward. Is $r$ a good summary? Why?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Estimate $r$ for a tight, downward-sloping line of points.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+What is the likely sign of $r$ for ice-cream sales vs. temperature?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Rank by strength: $r=0.3,\ -0.7,\ 0.95$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Which is explanatory: age vs. vocabulary size?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Interpret $r=-0.99$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Two unrelated variables --- what value of $r$ do you expect?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Given $r=0.1,\ -0.6,\ 0.99,\ -0.95$, find \\ \textbf{(a)} the strongest; \\ \textbf{(b)} the weakest; \\ \textbf{(c)} the negative ones.\workspace{3cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Which is the explanatory variable: hours of sunlight vs. plant growth?
+  \item Describe the association when $r=0.9$.
+  \item Describe the association when $r=-0.4$.
+  \item Which is stronger: $r=0.8$ or $r=-0.9$?
+  \item What does $r=0$ indicate?
+  \item A scatter curves sharply upward. Is $r$ a good summary? Why?
+  \item Estimate $r$ for a tight, downward-sloping line of points.
+  \item What is the likely sign of $r$ for ice-cream sales vs. temperature?
+  \item Rank by strength: $r=0.3,\ -0.7,\ 0.95$.
+  \item Which is explanatory: age vs. vocabulary size?
+  \item Interpret $r=-0.99$.
+  \item Two unrelated variables --- what value of $r$ do you expect?
+  \item Given $r=0.1,\ -0.6,\ 0.99,\ -0.95$, find \\ \textbf{(a)} the strongest; \\ \textbf{(b)} the weakest; \\ \textbf{(c)} the negative ones.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item hours of sunlight
+  \item strong positive linear
+  \item weak-to-moderate negative
+  \item $r=-0.9$
+  \item no linear correlation
+  \item no --- the relationship is non-linear
+  \item near $-1$
+  \item positive
+  \item $0.95>0.7>0.3$
+  \item age
+  \item very strong negative linear
+  \item $\approx0$
+  \item (a) $0.99$; (b) $0.1$; (c) $-0.6,\ -0.95$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

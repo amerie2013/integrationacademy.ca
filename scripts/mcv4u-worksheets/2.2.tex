@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MCV4U \textperiodcentered{} 2.2}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 2.2 --- Product \& Quotient Rules}\\[2pt]
+{\small Grade 12 Calculus and Vectors (MCV4U) \textperiodcentered{} Unit 2: Derivative Rules}
+\end{center}
+
+\begin{ideabox}
+Product: $(fg)'=f'g+fg'$. Quotient: $\left(\dfrac fg\right)'=\dfrac{f'g-fg'}{g^2}$ — top derivative first.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item $(fg)'=f'g+fg'$ (not $f'g'$).
+  \item $\left(\dfrac fg\right)'=\dfrac{f'g-fg'}{g^2}$.
+  \item If expanding is easy, expand and use the power rule.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Products}The derivative of a product is \emph{not} the product of derivatives: $\dfrac{d}{dx}[fg]=f'g+fg'$.
+\lh{Quotients}For a quotient, $\dfrac{d}{dx}\!\left[\dfrac{f}{g}\right]=\dfrac{f'g-fg'}{g^2}$ — mind the order in the numerator.
+\lh{Choosing a rule}Identify the structure first: a product calls for the product rule, a fraction for the quotient rule.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Product rule}
+Differentiate $f(x)=x^2(x+1)$.\soln $2x(x+1)+x^2(1)=3x^2+2x$ (check: $x^3+x^2\to3x^2+2x$).
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Two factors}
+Differentiate $f(x)=(2x+1)(x^2-3)$.\soln $2(x^2-3)+(2x+1)(2x)=6x^2+2x-6$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Quotient rule}
+Differentiate $f(x)=\dfrac{x+1}{x-1}$.\soln $\dfrac{(x-1)-(x+1)}{(x-1)^2}=\dfrac{-2}{(x-1)^2}$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Polynomial over linear}
+Differentiate $f(x)=\dfrac{x^2}{x+1}$.\soln $\dfrac{2x(x+1)-x^2}{(x+1)^2}=\dfrac{x^2+2x}{(x+1)^2}$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- From a table}
+Given $f(2)=3,f'(2)=1,g(2)=4,g'(2)=-2$, find $(fg)'(2)$.\soln $(1)(4)+(3)(-2)=-2$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Product rule}
+Differentiate $f(x)=x^3(x-2)$.\soln $3x^2(x-2)+x^3=4x^3-6x^2$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Two factors}
+Differentiate $f(x)=(x+2)(x^2+1)$.\soln $(x^2+1)+(x+2)(2x)=3x^2+4x+1$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Quotient rule}
+Differentiate $f(x)=\dfrac{x}{x+2}$.\soln $\dfrac{(x+2)-x}{(x+2)^2}=\dfrac{2}{(x+2)^2}$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Quotient rule}
+Differentiate $f(x)=\dfrac{x-1}{x+1}$.\soln $\dfrac{(x+1)-(x-1)}{(x+1)^2}=\dfrac{2}{(x+1)^2}$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Differentiate $f(x)=x^2(x-3)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Differentiate $f(x)=(3x-1)(x+2)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Differentiate $f(x)=\dfrac{x+2}{x-2}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Differentiate $f(x)=\dfrac{x^2}{x-1}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+With $f(1)=2,f'(1)=3,g(1)=5,g'(1)=-1$, find $(fg)'(1)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Differentiate $f(x)=x^4(2x+1)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Differentiate $f(x)=(x^2+1)(x-4)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Differentiate $f(x)=\dfrac{2x}{x+3}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Differentiate $f(x)=\dfrac{1}{x^2+1}$ (quotient rule).\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Differentiate $f(x)=x(x^2-5)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+With $f(0)=1,f'(0)=2,g(0)=3,g'(0)=4$, find $\left(\tfrac fg\right)'(0)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Differentiate $f(x)=(x-1)(x+1)$ two ways (rule and expansion).\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Find the tangent to $f(x)=\dfrac{x}{x+1}$ at $x=1$.\workspace{3cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Differentiate $f(x)=x^2(x-3)$.
+  \item Differentiate $f(x)=(3x-1)(x+2)$.
+  \item Differentiate $f(x)=\dfrac{x+2}{x-2}$.
+  \item Differentiate $f(x)=\dfrac{x^2}{x-1}$.
+  \item With $f(1)=2,f'(1)=3,g(1)=5,g'(1)=-1$, find $(fg)'(1)$.
+  \item Differentiate $f(x)=x^4(2x+1)$.
+  \item Differentiate $f(x)=(x^2+1)(x-4)$.
+  \item Differentiate $f(x)=\dfrac{2x}{x+3}$.
+  \item Differentiate $f(x)=\dfrac{1}{x^2+1}$ (quotient rule).
+  \item Differentiate $f(x)=x(x^2-5)$.
+  \item With $f(0)=1,f'(0)=2,g(0)=3,g'(0)=4$, find $\left(\tfrac fg\right)'(0)$.
+  \item Differentiate $f(x)=(x-1)(x+1)$ two ways (rule and expansion).
+  \item Find the tangent to $f(x)=\dfrac{x}{x+1}$ at $x=1$.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $3x^2-6x$
+  \item $6x+5$
+  \item $\dfrac{-4}{(x-2)^2}$
+  \item $\dfrac{x^2-2x}{(x-1)^2}$
+  \item $(3)(5)+(2)(-1)=13$
+  \item $10x^4+4x^3$
+  \item $3x^2-8x+1$
+  \item $\dfrac{6}{(x+3)^2}$
+  \item $\dfrac{-2x}{(x^2+1)^2}$
+  \item $3x^2-5$
+  \item $\dfrac{(2)(3)-(1)(4)}{9}=\tfrac29$
+  \item both give $2x$
+  \item $f'(1)=\tfrac14$, point $(1,\tfrac12)$: $y=\tfrac14x+\tfrac14$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

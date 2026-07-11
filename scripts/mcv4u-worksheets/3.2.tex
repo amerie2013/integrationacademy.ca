@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MCV4U \textperiodcentered{} 3.2}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 3.2 --- Derivatives of Exponential Functions}\\[2pt]
+{\small Grade 12 Calculus and Vectors (MCV4U) \textperiodcentered{} Unit 3: Derivatives of Transcendental Functions}
+\end{center}
+
+\begin{ideabox}
+$\dfrac{d}{dx}e^x=e^x$ (its own derivative); $\dfrac{d}{dx}b^x=b^x\ln b$; with the chain rule $\dfrac{d}{dx}e^{g}=e^{g}g'$.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item $\dfrac{d}{dx}e^x=e^x$.
+  \item $\dfrac{d}{dx}b^x=b^x\ln b$.
+  \item $\dfrac{d}{dx}e^{g(x)}=e^{g(x)}g'(x)$.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{The special base $e$}The exponential $e^x$ is its own derivative: $\dfrac{d}{dx}e^x=e^x$, which is why $e$ is calculus's natural base.
+\lh{Other bases}For a general base, $\dfrac{d}{dx}b^x=b^x\ln b$ — the extra factor $\ln b$ appears.
+\lh{With the chain rule}$\dfrac{d}{dx}e^{g(x)}=e^{g(x)}\,g'(x)$, multiplying by the derivative of the exponent.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Base e}
+Differentiate $f(x)=e^x$.\soln $f'(x)=e^x$ — the slope equals the height at every point:\eplot{-2}{2}{-1}{8}{\addplot[exblue,very thick,domain=-2:2,samples=80]{exp(x)};}
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Chain rule}
+Differentiate $f(x)=e^{3x}$.\soln $e^{3x}\cdot3=3e^{3x}$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Other base}
+Differentiate $f(x)=2^x$.\soln $2^x\ln 2$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Product rule}
+Differentiate $f(x)=x e^x$.\soln $e^x+x e^x=e^x(1+x)$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Chain (square inside)}
+Differentiate $f(x)=e^{x^2}$.\soln $2x e^{x^2}$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Chain rule}
+Differentiate $f(x)=e^{5x}$.\soln $5e^{5x}$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Other base}
+Differentiate $f(x)=3^x$.\soln $3^x\ln 3$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Negative exponent}
+Differentiate $f(x)=e^{-x}$.\soln $-e^{-x}$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Product rule}
+Differentiate $f(x)=x^2 e^x$.\soln $2x e^x+x^2 e^x=e^x(x^2+2x)$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Differentiate $f(x)=e^{5x}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Differentiate $f(x)=3^x$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Differentiate $f(x)=x^2 e^x$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Differentiate $f(x)=e^{-x}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Differentiate $f(x)=e^{x^3+1}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Differentiate $f(x)=4e^x$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Differentiate $f(x)=e^{2x}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Differentiate $f(x)=5^x$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Differentiate $f(x)=x e^{2x}$ (product + chain).\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Differentiate $f(x)=e^{-3x}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Slope of $y=e^x$ at $x=0$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Differentiate $f(x)=e^x+x^2$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Differentiate $f(x)=\dfrac{e^x}{x}$ (quotient rule).\workspace{3cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Differentiate $f(x)=e^{5x}$.
+  \item Differentiate $f(x)=3^x$.
+  \item Differentiate $f(x)=x^2 e^x$.
+  \item Differentiate $f(x)=e^{-x}$.
+  \item Differentiate $f(x)=e^{x^3+1}$.
+  \item Differentiate $f(x)=4e^x$.
+  \item Differentiate $f(x)=e^{2x}$.
+  \item Differentiate $f(x)=5^x$.
+  \item Differentiate $f(x)=x e^{2x}$ (product + chain).
+  \item Differentiate $f(x)=e^{-3x}$.
+  \item Slope of $y=e^x$ at $x=0$?
+  \item Differentiate $f(x)=e^x+x^2$.
+  \item Differentiate $f(x)=\dfrac{e^x}{x}$ (quotient rule).
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $5e^{5x}$
+  \item $3^x\ln 3$
+  \item $e^x(x^2+2x)$
+  \item $-e^{-x}$
+  \item $3x^2 e^{x^3+1}$
+  \item $4e^x$
+  \item $2e^{2x}$
+  \item $5^x\ln 5$
+  \item $e^{2x}(1+2x)$
+  \item $-3e^{-3x}$
+  \item $1$
+  \item $e^x+2x$
+  \item $\dfrac{e^x(x-1)}{x^2}$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

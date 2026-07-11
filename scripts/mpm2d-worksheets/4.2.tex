@@ -1,0 +1,179 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MPM2D \textperiodcentered{} 4.2}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 4.2 --- Key Features of a Parabola}\\[2pt]
+{\small Grade 10 Academic (MPM2D) \textperiodcentered{} Unit 4: Quadratic Relations}
+\end{center}
+
+\begin{ideabox}
+Every parabola has a \textbf{vertex}, an \textbf{axis of symmetry}, a \textbf{max or min}, possibly \textbf{zeros}, and a \textbf{$y$-intercept}.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item \textbf{Vertex:} the turning point; the \textbf{axis of symmetry (AOS)} is $x=h$ through it.
+  \item \textbf{Zeros} ($x$-intercepts): where $y=0$; the \textbf{$y$-intercept} is where $x=0$.
+  \item The AOS is the midpoint of the two zeros.
+  \item $a>0$ gives a minimum at the vertex; $a<0$ gives a maximum.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{The landmarks}Every parabola has a \textbf{vertex} (its highest or lowest point), an \textbf{axis of symmetry} through the vertex, a \textbf{$y$-intercept}, and often \textbf{$x$-intercepts} — the zeros.
+\lh{Opening and width}The sign of the leading coefficient decides whether the parabola opens up or down, and its size controls how narrow or wide the curve is.
+\lh{Symmetry}A parabola mirrors itself across its axis, so points equally far left and right of the vertex have the same height.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Reading a simple parabola}
+State the features of $y=x^2-4$.
+\soln Vertex $(0,-4)$, AOS $x=0$, minimum $-4$, zeros $\pm2$, $y$-intercept $-4$, opens up.
+\plot{-4}{4}{-5}{5}{\addplot[exblue,very thick,domain=-3:3,samples=60]{x^2-4};\addplot[mark=*,only marks,black]coordinates{(-2,0)(2,0)(0,-4)};}
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- From vertex form}
+State the features of $y=-(x-2)^2+9$.
+\soln Vertex $(2,9)$, AOS $x=2$, maximum $9$, opens down.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Finding zeros}
+Find the zeros of $y=x^2-9$.
+\soln $x^2-9=0\Rightarrow x=\pm3.$
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- y-intercept}
+Find the $y$-intercept of $y=x^2-2x-3$.
+\soln Set $x=0$: $y=-3.$
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- AOS from zeros}
+A parabola has zeros at $1$ and $5$. Find its axis of symmetry.
+\soln AOS is the midpoint: $x=\tfrac{1+5}{2}=3.$
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Vertex from the AOS}
+Find the vertex of $y=x^2-6x+5$.
+\soln AOS $x=\tfrac{6}{2}=3$; $y=9-18+5=-4$. Vertex $(3,-4)$.
+\plot{-1}{7}{-5}{6}{\addplot[exblue,very thick,domain=0.2:5.8,samples=60]{x^2-6*x+5};\addplot[mark=*,only marks,black]coordinates{(1,0)(5,0)(3,-4)};}
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Maximum value}
+Find the maximum value of $y=-2(x-1)^2+8$.
+\soln Maximum $8$ at $x=1$ (since $a<0$).
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- All features (vertex form)}
+Describe $y=(x-3)^2-4$.
+\soln Vertex $(3,-4)$, AOS $x=3$, opens up, minimum $-4$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Full analysis (harder)}
+For $y=x^2-4x-5$, find the vertex, zeros, and $y$-intercept.
+\soln AOS $x=2$, $y=4-8-5=-9$: vertex $(2,-9)$. Factor: $(x-5)(x+1)$, zeros $5,-1$. $y$-intercept $-5$.
+\plot{-3}{6}{-10}{6}{\addplot[exblue,very thick,domain=-1.5:5.5,samples=60]{x^2-4*x-5};\addplot[mark=*,only marks,black]coordinates{(-1,0)(5,0)(2,-9)};}
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+State the vertex, AOS, and direction of $y=(x-1)^2+2$.\workspace{2.0cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+State the vertex and maximum of $y=-(x+3)^2+5$.\workspace{2.0cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Find the zeros of $y=x^2-16$.\workspace{1.8cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Find the $y$-intercept of $y=2x^2+5x-7$.\workspace{1.8cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+A parabola has zeros $-2$ and $6$. Find its axis of symmetry.\workspace{2.0cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Find the vertex of $y=x^2-8x+12$.\workspace{2.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Find the minimum value of $y=3(x-2)^2-4$.\workspace{1.8cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Describe all features of $y=-(x+1)^2+9$.\workspace{2.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Find the vertex and zeros of $y=x^2-2x-8$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+A parabola has AOS $x=4$ and one zero at $x=1$. Find the other zero.\workspace{2.0cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Does $y=-x^2+6x-5$ have a max or min? Find it.\workspace{2.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Find the $y$-intercept and zeros of $y=(x-3)(x+1)$.\workspace{2.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+For $y=x^2-6x+8$, find the vertex, zeros, $y$-intercept, and sketch it.
+\begin{center}\begin{tikzpicture}\begin{axis}[width=8cm,height=6cm,axis lines=middle,grid=both,grid style={gray!16},xmin=-6,xmax=6,ymin=-6,ymax=6,xtick distance=2,ytick distance=2,tick label style={font=\tiny}]\end{axis}\end{tikzpicture}\end{center}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item State the vertex, AOS, and direction of $y=(x-1)^2+2$.
+  \item State the vertex and maximum of $y=-(x+3)^2+5$.
+  \item Find the zeros of $y=x^2-16$.
+  \item Find the $y$-intercept of $y=2x^2+5x-7$.
+  \item A parabola has zeros $-2$ and $6$. Find its axis of symmetry.
+  \item Find the vertex of $y=x^2-8x+12$.
+  \item Find the minimum value of $y=3(x-2)^2-4$.
+  \item Describe all features of $y=-(x+1)^2+9$.
+  \item Find the vertex and zeros of $y=x^2-2x-8$.
+  \item A parabola has AOS $x=4$ and one zero at $x=1$. Find the other zero.
+  \item Does $y=-x^2+6x-5$ have a max or min? Find it.
+  \item Find the $y$-intercept and zeros of $y=(x-3)(x+1)$.
+  \item For $y=x^2-6x+8$, find the vertex, zeros, $y$-intercept, and sketch it.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Vertex $(1,2)$, AOS $x=1$, opens up.
+  \item Vertex $(-3,5)$, maximum $5$.
+  \item $x=\pm4$.
+  \item $y=-7$.
+  \item $x=\tfrac{-2+6}{2}=2$.
+  \item AOS $x=4$, $y=16-32+12=-4$: $(4,-4)$.
+  \item Minimum $-4$ at $x=2$.
+  \item Vertex $(-1,9)$, AOS $x=-1$, max $9$, opens down.
+  \item Vertex $(1,-9)$; zeros $4,-2$.
+  \item AOS midpoint $\Rightarrow$ other zero $x=7$.
+  \item Max; AOS $x=3$, $y=4$: maximum $4$.
+  \item $y$-intercept $-3$; zeros $3,-1$.
+  \item Vertex $(3,-1)$, zeros $2,4$, $y$-intercept $8$.
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

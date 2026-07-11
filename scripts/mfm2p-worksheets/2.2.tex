@@ -1,0 +1,168 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MFM2P \textperiodcentered{} 2.2}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 2.2 --- Direct \& Partial Variation}\\[2pt]
+{\small Grade 10 Applied (MFM2P) \textperiodcentered{} Unit 2: Linear Relations}
+\end{center}
+
+\begin{ideabox}
+Direct variation $y=kx$ passes through the origin; partial variation $y=mx+b$ has a starting value.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Direct: $y=kx$, constant of variation $k=\dfrac{y}{x}$, graph through $(0,0)$.
+  \item Partial: $y=mx+b$, initial value $b$ plus rate $m$.
+  \item A fixed fee plus a per-unit rate is partial variation.
+  \item Find $k$ from one point; find a partial model from the fixed value and rate.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Direct variation}In \textbf{direct variation} $y=mx$, the line passes through the origin, so doubling $x$ doubles $y$.
+\lh{Partial variation}In \textbf{partial variation} $y=mx+b$, there is a fixed starting value $b$ plus a rate $m$.
+\lh{Spotting them}A base fee plus a per-unit charge is partial variation; a pure per-unit rate with no fee is direct.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Identify (direct)}
+Is $y=4x$ direct or partial?\soln No constant term $\Rightarrow$ direct, $k=4$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Identify (partial)}
+Is $y=3x+5$ direct or partial?\soln Starting value $5\neq0\Rightarrow$ partial.
+\plot{-3}{3}{-2}{12}{\addplot[exblue,very thick,domain=-3:2.3,samples=2]{3*x+5};\addplot[mark=*,only marks,black]coordinates{(0,5)};}
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Find k}
+$y$ varies directly with $x$; $y=12$ when $x=3$. Find $k$ and the equation.\soln $k=\dfrac{12}{3}=4$, so $y=4x$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Write a partial model}
+A gym charges $20$ dollars to join plus $5$ dollars/visit. Write the equation.\soln $C=5v+20$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Direct vs partial graph}
+Compare $y=2x$ and $y=x+10$ at $x=5$.\soln $2(5)=10$ vs $5+10=15$ — direct is cheaper here.
+\plot{-1}{12}{-1}{22}{\addplot[exblue,very thick,domain=0:11,samples=2]{2*x};\addplot[qorange,very thick,domain=0:11,samples=2]{x+10};\addplot[mark=*,only marks,black]coordinates{(10,20)};}
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Cost as direct variation}
+Cost varies directly with litres: $25$ dollars for $10$ L. Find the cost of $16$ L.\soln $k=2.5$; $C=2.5(16)=40$ dollars.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Read a partial model}
+For $C=4n+8$, state the fixed cost and the rate.\soln Fixed $8$, rate $4$ per unit.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Through the origin?}
+Does $y=2x-1$ pass through the origin?\soln At $x=0$, $y=-1\neq0$ — no (partial).
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Build and use (harder)}
+A printer costs $60$ dollars plus $0.10$ dollars/page. Find the cost of $300$ pages.\soln $C=0.10(300)+60=90$ dollars.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Is $y=7x$ direct or partial?\workspace{1.8cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Is $y=2x-1$ direct or partial?\workspace{1.8cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+$y$ varies directly with $x$; $y=20$ at $x=4$. Find $k$.\workspace{2.0cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+A printer costs $60$ dollars plus $0.10$ dollars/page. Write the equation.\workspace{2.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+For $C=4n+8$, find $C$ at $n=6$.\workspace{2.0cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Write the equation: direct variation with $k=3$.\workspace{1.8cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+A gym: $15$ dollars join plus $4$ dollars/visit. Write the model.\workspace{2.0cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+$y$ varies directly with $x$; $y=18$ at $x=6$. Write the equation.\workspace{2.0cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+State the fixed cost and rate for $C=2.5x+12$.\workspace{2.0cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Cost varies directly with mass: $9$ dollars for $3$ kg. Find the cost of $7$ kg.\workspace{2.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Is the graph of $y=5x$ through the origin? Explain.\workspace{2.0cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+A taxi: $3$ dollars plus $2$ dollars/km. Find the cost of $8$ km.\workspace{2.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Compare $C=3x$ and $C=2x+6$: find where they cost the same.\workspace{2.4cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Is $y=7x$ direct or partial?
+  \item Is $y=2x-1$ direct or partial?
+  \item $y$ varies directly with $x$; $y=20$ at $x=4$. Find $k$.
+  \item A printer costs $60$ dollars plus $0.10$ dollars/page. Write the equation.
+  \item For $C=4n+8$, find $C$ at $n=6$.
+  \item Write the equation: direct variation with $k=3$.
+  \item A gym: $15$ dollars join plus $4$ dollars/visit. Write the model.
+  \item $y$ varies directly with $x$; $y=18$ at $x=6$. Write the equation.
+  \item State the fixed cost and rate for $C=2.5x+12$.
+  \item Cost varies directly with mass: $9$ dollars for $3$ kg. Find the cost of $7$ kg.
+  \item Is the graph of $y=5x$ through the origin? Explain.
+  \item A taxi: $3$ dollars plus $2$ dollars/km. Find the cost of $8$ km.
+  \item Compare $C=3x$ and $C=2x+6$: find where they cost the same.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item direct ($k=7$).
+  \item partial (initial $-1$).
+  \item $k=5$.
+  \item $C=0.10p+60$.
+  \item $C=32$ dollars.
+  \item $y=3x$.
+  \item $C=4v+15$.
+  \item $y=3x$.
+  \item fixed $12$, rate $2.5$.
+  \item $k=3$; $C=21$ dollars.
+  \item Yes — no constant term, so it passes through $(0,0)$.
+  \item $C=19$ dollars.
+  \item $3x=2x+6\Rightarrow x=6$.
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

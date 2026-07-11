@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MCT4C \textperiodcentered{} 3.3}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 3.3 --- The Cosine Law}\\[2pt]
+{\small Grade 12 Mathematics for College Technology (MCT4C) \textperiodcentered{} Unit 3: Trigonometric Functions}
+\end{center}
+
+\begin{ideabox}
+$a^2=b^2+c^2-2bc\cos A$ finds the third side from SAS, and rearranged, $\cos A=\dfrac{b^2+c^2-a^2}{2bc}$ finds an angle from SSS. Use it whenever the sine law's matched pair is unavailable.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item SAS $\Rightarrow$ find the opposite side.
+  \item SSS $\Rightarrow$ find any angle.
+  \item Find the largest angle (opposite the longest side) first.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Pythagoras generalized}The \textbf{cosine law} $a^2=b^2+c^2-2bc\cos A$ handles triangles the sine law cannot start, and collapses to Pythagoras at $90^\circ$.
+\lh{Two situations}Use it with two sides and the included angle (SAS) to find the third side, or with all three sides (SSS) to find an angle.
+\lh{Largest angle first}When solving SSS, find the largest angle (opposite the longest side) first to keep the remaining work clean.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- SAS side}
+$b=7,c=9,A=60^\circ$. Find $a$.\soln $a^2=49+81-2(63)\cos60^\circ=67\Rightarrow a\approx8.2$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Another SAS}
+$b=5,c=8,A=40^\circ$. Find $a$.\soln $a^2=25+64-80\cos40^\circ\approx27.7\Rightarrow a\approx5.3$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- SSS right check}
+$a=6,b=8,c=10$. Find $A$.\soln $\cos A=\dfrac{64+100-36}{160}=0.8\Rightarrow A\approx36.9^\circ$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- SSS angle}
+$a=8,b=5,c=7$. Find $A$.\soln $\cos A=\dfrac{25+49-64}{70}=\tfrac17\Rightarrow A\approx81.8^\circ$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Largest angle}
+$a=5,b=6,c=7$. Find the largest angle.\soln Opposite $c$: $\cos C=\dfrac{25+36-49}{60}=0.2\Rightarrow C\approx78.5^\circ$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- SAS with obtuse angle}
+$b=8,c=11,A=95^\circ$. Find $a$.\soln $a^2=64+121-176\cos95^\circ\approx200.3\Rightarrow a\approx14.2$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Right triangle from SSS}
+$a=9,b=12,c=15$. Find $C$.\soln $\cos C=\dfrac{81+144-225}{216}=0\Rightarrow C=90^\circ$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Choose the law}
+Which law for $b=12,c=15,A=50^\circ$?\soln Cosine law (SAS): $a=\sqrt{144+225-360\cos50^\circ}\approx11.7$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Diagonal of a parallelogram}
+Sides $6,10$ with a $70^\circ$ angle between. Find the shorter diagonal.\soln $d^2=36+100-120\cos70^\circ\approx95\Rightarrow d\approx9.7$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+$b=12,c=15,A=50^\circ$. Find $a$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+$a=5,b=6,c=7$. Find the largest angle.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+$b=10,c=14,A=35^\circ$. Find $a$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+$a=9,b=12,c=15$. Find $C$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+$b=8,c=11,A=95^\circ$. Find $a$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+$a=6,b=8,c=10$. Find $A$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+$a=7,b=9,C=48^\circ$. Find $c$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+$a=4,b=5,c=6$. Find the smallest angle.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+$b=13,c=20,A=110^\circ$. Find $a$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Which law for SSS?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+$a=10,b=10,c=12$. Find $C$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Sides $6,10$, included angle $70^\circ$ — shorter diagonal?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+$a=8,b=11,c=6$: find the largest angle, then a second angle by the sine law.\workspace{3.4cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $b=12,c=15,A=50^\circ$. Find $a$.
+  \item $a=5,b=6,c=7$. Find the largest angle.
+  \item $b=10,c=14,A=35^\circ$. Find $a$.
+  \item $a=9,b=12,c=15$. Find $C$.
+  \item $b=8,c=11,A=95^\circ$. Find $a$.
+  \item $a=6,b=8,c=10$. Find $A$.
+  \item $a=7,b=9,C=48^\circ$. Find $c$.
+  \item $a=4,b=5,c=6$. Find the smallest angle.
+  \item $b=13,c=20,A=110^\circ$. Find $a$.
+  \item Which law for SSS?
+  \item $a=10,b=10,c=12$. Find $C$.
+  \item Sides $6,10$, included angle $70^\circ$ — shorter diagonal?
+  \item $a=8,b=11,c=6$: find the largest angle, then a second angle by the sine law.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $\approx11.7$
+  \item $C\approx78.5^\circ$
+  \item $\approx8.2$
+  \item $90^\circ$
+  \item $\approx14.2$
+  \item $\approx36.9^\circ$
+  \item $c=\sqrt{49+81-126\cos48^\circ}\approx6.7$
+  \item opp $a$: $\cos A=\tfrac{25+36-16}{60}=0.75\Rightarrow41.4^\circ$
+  \item $a=\sqrt{169+400-520\cos110^\circ}\approx27.3$
+  \item cosine law
+  \item $\cos C=\tfrac{100+100-144}{200}=0.28\Rightarrow73.7^\circ$
+  \item $\approx9.7$
+  \item opp $b$: $\cos B=\tfrac{64+36-121}{96}=-0.219\Rightarrow102.6^\circ$; then $\sin A=\tfrac{8\sin102.6^\circ}{11}\Rightarrow A\approx45.2^\circ$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

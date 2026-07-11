@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MDM4U \textperiodcentered{} 2.4}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 2.4 --- Mutually Exclusive Events \& the Additive Rule}\\[2pt]
+{\small Grade 12 Mathematics of Data Management (MDM4U) \textperiodcentered{} Unit 2: Probability}
+\end{center}
+
+\begin{ideabox}
+In general $P(A\cup B)=P(A)+P(B)-P(A\cap B)$. When $A$ and $B$ are \emph{mutually exclusive} ($A\cap B=\varnothing$) the overlap term is $0$.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Mutually exclusive: $P(A\cup B)=P(A)+P(B)$.
+  \item General additive rule: subtract the overlap $P(A\cap B)$.
+  \item Venn diagrams organize overlapping counts.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{The additive rule}$P(A\cup B)=P(A)+P(B)-P(A\cap B)$. You subtract the overlap so that outcomes belonging to both events are not counted twice.
+\lh{Mutually exclusive}Events are \textbf{mutually exclusive} when they cannot occur together, so $P(A\cap B)=0$ and the rule collapses to $P(A)+P(B)$.
+\lh{Draw the Venn}A Venn diagram makes the overlap obvious: king \emph{or} heart overlaps at the king of hearts, giving $\tfrac{4}{52}+\tfrac{13}{52}-\tfrac{1}{52}$.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Mutually exclusive}
+One die. Find $P(2\text{ or }5)$.\soln Disjoint: $\dfrac16+\dfrac16=\dfrac13$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Not mutually exclusive}
+One card. Find $P(\text{king or heart})$.\soln $\dfrac{4}{52}+\dfrac{13}{52}-\dfrac{1}{52}=\dfrac{16}{52}=\dfrac{4}{13}$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Venn counts}
+In a class of 30, 18 like math, 12 like art, 6 like both. Find $P(\text{math or art})$.\soln $\dfrac{18+12-6}{30}=\dfrac{24}{30}=\dfrac45$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Complement of a union}
+For the class above, find $P(\text{neither})$.\soln $1-\dfrac45=\dfrac15$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Disjoint dice sums}
+Two dice. Find $P(\text{sum }7\text{ or }11)$.\soln Disjoint: $\dfrac{6}{36}+\dfrac{2}{36}=\dfrac{8}{36}=\dfrac29$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Card overlap}
+One card. Find $P(\text{face card or spade})$.\soln $\dfrac{12}{52}+\dfrac{13}{52}-\dfrac{3}{52}=\dfrac{22}{52}=\dfrac{11}{26}$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Find the overlap}
+Given $P(A)=0.5,\ P(B)=0.4,\ P(A\cup B)=0.7$, find $P(A\cap B)$.\soln $0.7=0.5+0.4-P(A\cap B)\Rightarrow P(A\cap B)=0.2$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Check for mutual exclusivity}
+Are \emph{even} and \emph{prime} mutually exclusive on a die? Find $P(\text{even or prime})$.\soln They share $2$, so \emph{not} exclusive: $\dfrac36+\dfrac36-\dfrac16=\dfrac56$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Three-part survey}
+Of 100 people, 55 drink coffee, 40 tea, 15 both. Find \\ \textbf{(a)} $P(\text{coffee or tea})$; \\ \textbf{(b)} $P(\text{coffee only})$; \\ \textbf{(c)} $P(\text{neither})$.\soln (a) $\dfrac{55+40-15}{100}=0.8$. (b) $\dfrac{55-15}{100}=0.4$. (c) $0.2$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+One die. Find $P(1\text{ or }4)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+One card. Find $P(\text{queen or diamond})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Two dice. Find $P(\text{sum }5\text{ or }9)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+In a class of 25, 14 play soccer, 10 basketball, 5 both. Find $P(\text{soccer or basketball})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+For that class, find $P(\text{neither})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+One card. Find $P(\text{red or face card})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+$P(A)=0.6,\ P(B)=0.3$, mutually exclusive. Find $P(A\cup B)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+$P(A)=0.5,\ P(B)=0.5,\ P(A\cup B)=0.8$. Find $P(A\cap B)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+One die. Find $P(\text{odd or greater than }4)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Two dice. Find $P(\text{a double or sum }6)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Of 200 people, 120 own a car, 90 a bike, 40 both. Find $P(\text{car or bike})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+For those 200 people, find $P(\text{car only})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+One card. Find $P(\text{a spade, a king, or a queen})$ using inclusion--exclusion.\workspace{3cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item One die. Find $P(1\text{ or }4)$.
+  \item One card. Find $P(\text{queen or diamond})$.
+  \item Two dice. Find $P(\text{sum }5\text{ or }9)$.
+  \item In a class of 25, 14 play soccer, 10 basketball, 5 both. Find $P(\text{soccer or basketball})$.
+  \item For that class, find $P(\text{neither})$.
+  \item One card. Find $P(\text{red or face card})$.
+  \item $P(A)=0.6,\ P(B)=0.3$, mutually exclusive. Find $P(A\cup B)$.
+  \item $P(A)=0.5,\ P(B)=0.5,\ P(A\cup B)=0.8$. Find $P(A\cap B)$.
+  \item One die. Find $P(\text{odd or greater than }4)$.
+  \item Two dice. Find $P(\text{a double or sum }6)$.
+  \item Of 200 people, 120 own a car, 90 a bike, 40 both. Find $P(\text{car or bike})$.
+  \item For those 200 people, find $P(\text{car only})$.
+  \item One card. Find $P(\text{a spade, a king, or a queen})$ using inclusion--exclusion.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $\tfrac13$
+  \item $\tfrac{4+13-1}{52}=\tfrac{16}{52}=\tfrac{4}{13}$
+  \item $\tfrac{4+4}{36}=\tfrac29$
+  \item $\tfrac{19}{25}$
+  \item $\tfrac{6}{25}$
+  \item $\tfrac{26+12-6}{52}=\tfrac{32}{52}=\tfrac{8}{13}$
+  \item $0.9$
+  \item $0.2$
+  \item $\tfrac{3+2-1}{6}=\tfrac46=\tfrac23$
+  \item $\tfrac{6+5-1}{36}=\tfrac{10}{36}=\tfrac{5}{18}$
+  \item $\tfrac{170}{200}=\tfrac{17}{20}$
+  \item $\tfrac{80}{200}=\tfrac25$
+  \item $\tfrac{13+4+4-1-1-0}{52}=\tfrac{19}{52}$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

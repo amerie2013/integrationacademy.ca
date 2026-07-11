@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MDM4U \textperiodcentered{} 5.4}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 5.4 --- Quartiles, Percentiles \& Box Plots}\\[2pt]
+{\small Grade 12 Mathematics of Data Management (MDM4U) \textperiodcentered{} Unit 5: One-Variable Statistics}
+\end{center}
+
+\begin{ideabox}
+Quartiles slice ordered data into quarters. The \emph{five-number summary} (min, $Q_1$, median, $Q_3$, max) drives the box plot, and the $1.5\times\text{IQR}$ test flags outliers.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Five-number summary: min, $Q_1$, median, $Q_3$, max.
+  \item Outlier fences: below $Q_1-1.5\,\text{IQR}$ or above $Q_3+1.5\,\text{IQR}$.
+  \item A box plot pictures the summary; the median's position shows skew.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Cutting data into parts}\textbf{Quartiles} split ordered data into four equal parts — $Q_1$, the median $Q_2$, and $Q_3$ — while \textbf{percentiles} split it into a hundred.
+\lh{The five-number summary}Minimum, $Q_1$, median, $Q_3$, and maximum summarize a distribution and are exactly what a \textbf{box plot} draws.
+\lh{Spotting outliers}A value is commonly flagged as an outlier when it lies more than $1.5\times\mathrm{IQR}$ beyond $Q_1$ or $Q_3$.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Five-number summary}
+Summarize $\{3,6,7,9,12,15,18\}$.\soln Min $3$, $Q_1=6$, median $9$, $Q_3=15$, max $18$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- IQR}
+Find the IQR above.\soln $Q_3-Q_1=15-6=9$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Outlier test}
+With $Q_1=20$, $Q_3=40$, is $75$ an outlier?\soln IQR $=20$; upper fence $=40+1.5(20)=70$; $75>70$, so yes.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Percentile meaning}
+Interpret the $80$th percentile.\soln $80\%$ of the data lie at or below that value.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Box plot}
+Draw the box plot for min $1$, $Q_1=3$, median $6.5$, $Q_3=10$, max $12$.\soln The box spans $Q_1$ to $Q_3$ with the median inside; whiskers reach the extremes.\boxplot{1}{3}{6.5}{10}{12}{0}{13}
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Compare two box plots}
+Box A has a higher median and a shorter box than box B. Compare.\soln A is centred higher and is more consistent (less spread) than B.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Percentile rank}
+Out of 20 values, 15 are below a score. Find its percentile rank.\soln $\tfrac{15}{20}=75$th percentile.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Skew from a box plot}
+The median sits near the left of the box. What skew is indicated?\soln Right (positive) skew --- the upper quarter is stretched.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Full analysis (multi-part)}
+For $\{4,7,8,10,12,14,15,18,21,50\}$ find \\ \textbf{(a)} the five-number summary; \\ \textbf{(b)} the IQR; \\ \textbf{(c)} whether $50$ is an outlier.\soln (a) min $4$, $Q_1=8$, median $13$, $Q_3=18$, max $50$. (b) $10$. (c) fence $=18+15=33$; $50>33$, so yes.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Give the five-number summary of $\{3,6,7,9,12,15,18\}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Find the IQR when $Q_1=6$ and $Q_3=15$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+With $Q_1=20$, $Q_3=40$, is $75$ an outlier?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+What does the $90$th percentile mean?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Find the median of $\{5,10,15,20,25,30,35,40\}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Find $Q_1$ and $Q_3$ for that data.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Find the IQR of $\{5,10,15,20,25,30,35,40\}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+With $Q_1=10$, $Q_3=18$, is $2$ an outlier?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+A box plot's median is near the left of the box. What skew?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Out of 20 values, 15 are below a score. Find its percentile rank.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Give the five-number summary of $\{2,4,4,6,8,10,12\}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Which resists outliers: the range or the IQR?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+For $\{4,7,8,10,12,14,15,18,21,50\}$ find \\ \textbf{(a)} the five-number summary; \\ \textbf{(b)} the IQR; \\ \textbf{(c)} is $50$ an outlier?\workspace{3.2cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Give the five-number summary of $\{3,6,7,9,12,15,18\}$.
+  \item Find the IQR when $Q_1=6$ and $Q_3=15$.
+  \item With $Q_1=20$, $Q_3=40$, is $75$ an outlier?
+  \item What does the $90$th percentile mean?
+  \item Find the median of $\{5,10,15,20,25,30,35,40\}$.
+  \item Find $Q_1$ and $Q_3$ for that data.
+  \item Find the IQR of $\{5,10,15,20,25,30,35,40\}$.
+  \item With $Q_1=10$, $Q_3=18$, is $2$ an outlier?
+  \item A box plot's median is near the left of the box. What skew?
+  \item Out of 20 values, 15 are below a score. Find its percentile rank.
+  \item Give the five-number summary of $\{2,4,4,6,8,10,12\}$.
+  \item Which resists outliers: the range or the IQR?
+  \item For $\{4,7,8,10,12,14,15,18,21,50\}$ find \\ \textbf{(a)} the five-number summary; \\ \textbf{(b)} the IQR; \\ \textbf{(c)} is $50$ an outlier?
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item min $3,\ Q_1=6,\ \text{med}=9,\ Q_3=15,\ \max=18$
+  \item $9$
+  \item fence $=70$; $75>70$, yes
+  \item $90\%$ of the data lie at or below it
+  \item $22.5$
+  \item $Q_1=12.5,\ Q_3=32.5$
+  \item $20$
+  \item fence $=-2$; $2>-2$, no
+  \item right (positive) skew
+  \item $75$th
+  \item min $2,\ Q_1=4,\ \text{med}=6,\ Q_3=10,\ \max=12$
+  \item the IQR
+  \item (a) $4,8,13,18,50$; (b) $10$; (c) yes ($>33$)
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

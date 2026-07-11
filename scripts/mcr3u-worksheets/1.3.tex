@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MCR3U \textperiodcentered{} 1.3}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 1.3 --- Inverse Functions}\\[2pt]
+{\small Grade 11 Functions, University (MCR3U) \textperiodcentered{} Unit 1: Characteristics of Functions}
+\end{center}
+
+\begin{ideabox}
+The inverse $f^{-1}$ undoes $f$: swap $x$ and $y$, then solve. Its graph reflects over $y=x$.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Swap $x$ and $y$, solve for $y$.
+  \item Domain and range swap.
+  \item The inverse is a function only if $f$ is one-to-one.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Undoing a function}The \textbf{inverse} $f^{-1}$ reverses $f$ by swapping inputs and outputs: if $f(2)=5$ then $f^{-1}(5)=2$.
+\lh{Finding it}Swap $x$ and $y$ in the equation, then solve for $y$. The domain and range swap between a function and its inverse.
+\lh{The graph}The graph of $f^{-1}$ is the reflection of $f$ in the line $y=x$. The inverse is a function only if $f$ passes the horizontal line test.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Linear inverse}
+Inverse of $f(x)=2x+3$?\soln Write $y=2x+3$, swap: $x=2y+3$, solve: $y=\dfrac{x-3}{2}$. \\ Each graph is the mirror image of the other across $y=x$:\eplot{-6}{6}{-6}{6}{\addplot[exblue,very thick,domain=-4:1.5]{2*x+3};\addplot[qorange,very thick,domain=-6:6]{(x-3)/2};\addplot[gray,dashed,domain=-6:6]{x};}
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Linear inverse}
+Inverse of $f(x)=3x-6$?\soln Swap and solve: $x=3y-6\Rightarrow y=\dfrac{x+6}{3}$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Not a function}
+Is the inverse of $f(x)=x^2$ a function?\soln Swapping gives $y=\pm\sqrt{x}$, which fails the vertical-line test. \\ No, unless the domain of $f$ is restricted.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Check}
+Verify $f^{-1}$ for $f(x)=2x$.\soln $f^{-1}(x)=\tfrac{x}{2}$, so $f(f^{-1}(x))=2\cdot\tfrac{x}{2}=x$. \checkmark
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Swap domain/range}
+If $f$ has domain $x\ge0$, range $y\ge2$, what is the domain of $f^{-1}$?\soln Domain and range swap, so $f^{-1}$ has domain $x\ge2$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Linear inverse}
+Inverse of $f(x)=4x-8$?\soln $x=4y-8\Rightarrow y=\dfrac{x+8}{4}$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Linear inverse}
+Inverse of $f(x)=\dfrac{x}{2}+1$?\soln $x=\dfrac{y}{2}+1\Rightarrow y=2(x-1)=2x-2$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Linear inverse}
+Inverse of $f(x)=5x$?\soln $x=5y\Rightarrow y=\dfrac{x}{5}$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Reflection line}
+An inverse reflects in which line?\soln The line $y=x$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Find the inverse of $f(x)=4x-8$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Find the inverse of $f(x)=\dfrac{x}{2}+1$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Is the inverse of $f(x)=x^2$ (all reals) a function?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+An inverse is a reflection in which line?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Find the inverse of $f(x)=5x$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Find the inverse of $f(x)=2x+3$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Find the inverse of $f(x)=3x-6$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Compute $f(f^{-1}(x))$ for $f(x)=2x$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Find the inverse of $f(x)=x-7$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Find the inverse of $f(x)=-x+4$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Find the inverse of $f(x)=\dfrac{x}{4}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+If $f$ has domain $x\ge0$, range $y\ge1$, state the domain of $f^{-1}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Find the inverse of $f(x)=\dfrac{x+2}{3}$.\workspace{2.6cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Find the inverse of $f(x)=4x-8$.
+  \item Find the inverse of $f(x)=\dfrac{x}{2}+1$.
+  \item Is the inverse of $f(x)=x^2$ (all reals) a function?
+  \item An inverse is a reflection in which line?
+  \item Find the inverse of $f(x)=5x$.
+  \item Find the inverse of $f(x)=2x+3$.
+  \item Find the inverse of $f(x)=3x-6$.
+  \item Compute $f(f^{-1}(x))$ for $f(x)=2x$.
+  \item Find the inverse of $f(x)=x-7$.
+  \item Find the inverse of $f(x)=-x+4$.
+  \item Find the inverse of $f(x)=\dfrac{x}{4}$.
+  \item If $f$ has domain $x\ge0$, range $y\ge1$, state the domain of $f^{-1}$.
+  \item Find the inverse of $f(x)=\dfrac{x+2}{3}$.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $\dfrac{x+8}{4}$
+  \item $2x-2$
+  \item no
+  \item $y=x$
+  \item $\dfrac{x}{5}$
+  \item $\dfrac{x-3}{2}$
+  \item $\dfrac{x+6}{3}$
+  \item $x$
+  \item $x+7$
+  \item $4-x$
+  \item $4x$
+  \item $x\ge1$
+  \item $3x-2$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

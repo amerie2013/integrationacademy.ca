@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MCV4U \textperiodcentered{} 7.3}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 7.3 --- Intersections of Lines \& Planes}\\[2pt]
+{\small Grade 12 Calculus and Vectors (MCV4U) \textperiodcentered{} Unit 7: Lines and Planes}
+\end{center}
+
+\begin{ideabox}
+Line–plane: substitute the line into the plane and solve for $t$. Compare directions/normals to detect parallel, skew, or coincident.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Line–plane: substitute $x,y,z$; solve for $t$; back-substitute.
+  \item Line $\parallel$ plane when $\vec d\cdot\vec n=0$.
+  \item Planes $\parallel$ when normals are parallel.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{What can happen}Two lines, a line and a plane, or two planes can \textbf{intersect} in a point or line, be \textbf{parallel}, or (lines only) be \textbf{skew}.
+\lh{Solving}Substitute the line's parametric form into the plane's equation, or solve the system of equations, to find any intersection.
+\lh{Interpreting the outcome}No solution means parallel or skew; a unique solution gives a point; infinitely many means the objects coincide or a line lies in a plane.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Line meets a plane}
+Where does $\vec r=(1,0,0)+t(0,0,1)$ meet $z=5$?\soln $z=t=5$; $(1,0,5)$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Substitute into the plane}
+Where does $x=t,y=t,z=t$ meet $x+y+z=6$?\soln $3t=6\Rightarrow t=2$; $(2,2,2)$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Line parallel to a plane}
+Is $\vec r=(0,0,1)+t(1,1,0)$ parallel to $z=5$?\soln $\vec d\cdot\vec n=(1,1,0)\cdot(0,0,1)=0$ and $(0,0,1)$ not on $z=5$: parallel.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Parallel lines}
+Are $\vec r=(0,0)+t(2,4)$ and $\vec r=(1,1)+s(1,2)$ parallel?\soln $(2,4)=2(1,2)$: yes.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Parallel planes}
+Are $2x+y-z=1$ and $4x+2y-2z=9$ parallel?\soln Normals $(2,1,-1)$ and $2(2,1,-1)$; equations not multiples ⇒ parallel \& distinct.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Line meets a plane}
+Where does $x=t,y=2t,z=0$ meet $z=0$?\soln Every point — the line lies in the plane.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Substitute}
+Where does $x=t,y=t,z=t$ meet $x+y+z=9$?\soln $3t=9\Rightarrow t=3$; $(3,3,3)$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Line crosses a plane}
+Is direction $(1,1,1)$ parallel to $x+y+z=4$?\soln $\vec d\cdot\vec n=3\ne0$: no, it crosses.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Simple plane}
+Where does $\vec r=(0,0,0)+t(1,0,0)$ meet $x=4$?\soln $t=4$; $(4,0,0)$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Where does $x=t,y=t,z=t$ meet $x+y+z=9$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Are the planes $x+y+z=1$ and $2x+2y+2z=5$ parallel?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Is the line with direction $(1,1,1)$ parallel to $x+y+z=4$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Where does $\vec r=(0,0,0)+t(1,0,0)$ meet $x=4$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Are $\vec r=(0,0)+t(2,4)$ and $\vec r=(1,1)+s(1,2)$ parallel?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Where does $x=t,y=0,z=0$ meet $x=7$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Are the planes $x-y+z=0$ and $2x-2y+2z=3$ parallel?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Is direction $(1,0,0)$ parallel to the plane $y=5$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Where does $x=2t,y=t,z=t$ meet $x+y+z=8$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Are $\vec r=(0,0)+t(1,2)$ and $\vec r=(0,0)+s(2,1)$ parallel?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Where does $\vec r=(0,0,1)+t(0,0,1)$ meet $z=10$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Two planes have normals $(1,2,3)$ and $(2,4,6)$. Parallel?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Find where the line $x=1+t,\ y=2+t,\ z=3+t$ meets the plane $x+y+z=12$.\workspace{3.5cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Where does $x=t,y=t,z=t$ meet $x+y+z=9$?
+  \item Are the planes $x+y+z=1$ and $2x+2y+2z=5$ parallel?
+  \item Is the line with direction $(1,1,1)$ parallel to $x+y+z=4$?
+  \item Where does $\vec r=(0,0,0)+t(1,0,0)$ meet $x=4$?
+  \item Are $\vec r=(0,0)+t(2,4)$ and $\vec r=(1,1)+s(1,2)$ parallel?
+  \item Where does $x=t,y=0,z=0$ meet $x=7$?
+  \item Are the planes $x-y+z=0$ and $2x-2y+2z=3$ parallel?
+  \item Is direction $(1,0,0)$ parallel to the plane $y=5$?
+  \item Where does $x=2t,y=t,z=t$ meet $x+y+z=8$?
+  \item Are $\vec r=(0,0)+t(1,2)$ and $\vec r=(0,0)+s(2,1)$ parallel?
+  \item Where does $\vec r=(0,0,1)+t(0,0,1)$ meet $z=10$?
+  \item Two planes have normals $(1,2,3)$ and $(2,4,6)$. Parallel?
+  \item Find where the line $x=1+t,\ y=2+t,\ z=3+t$ meets the plane $x+y+z=12$.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $(3,3,3)$
+  \item parallel and distinct
+  \item no ($\vec d\cdot\vec n=3$)
+  \item $(4,0,0)$
+  \item yes
+  \item $(7,0,0)$
+  \item parallel and distinct
+  \item yes ($\vec d\cdot\vec n=0$, $(1,0,0)$)
+  \item $4t=8\Rightarrow t=2$: $(4,2,2)$
+  \item no (not scalar multiples)
+  \item $(0,0,10)$
+  \item yes (normals are multiples)
+  \item $(1+t)+(2+t)+(3+t)=12\Rightarrow 6+3t=12\Rightarrow t=2$: $(3,4,5)$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

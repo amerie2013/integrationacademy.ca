@@ -1,0 +1,175 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MPM2D \textperiodcentered{} 1.6}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 1.6 --- Number of Solutions}\\[2pt]
+{\small Grade 10 Academic (MPM2D) \textperiodcentered{} Unit 1: Linear Systems}
+\end{center}
+
+\begin{ideabox}
+A linear system has \textbf{one}, \textbf{no}, or \textbf{infinitely many} solutions --- you can tell which by comparing slopes and intercepts.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item \textbf{Different slopes} $\Rightarrow$ exactly \textbf{one} solution (lines cross once).
+  \item \textbf{Same slope, different intercept} $\Rightarrow$ \textbf{no} solution (parallel).
+  \item \textbf{Same slope and same intercept} $\Rightarrow$ \textbf{infinitely many} (one line).
+  \item For $Ax+By=C$ form, compare the ratios $\tfrac{A_1}{A_2}$, $\tfrac{B_1}{B_2}$, $\tfrac{C_1}{C_2}$.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Three possibilities}Two lines can meet once (\textbf{one solution}), never (\textbf{no solution} — parallel), or lie exactly on top of each other (\textbf{infinitely many} — the same line).
+\lh{Reading from slopes}Different slopes give one solution. Same slope but different intercept means parallel, no solution. Same slope \emph{and} intercept means infinitely many.
+\lh{From the algebra}If solving leads to a true statement like $3=3$, there are infinitely many solutions; a false one like $3=5$ means none.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Different slopes}
+How many solutions: $y=2x+1$ and $y=3x-2$?
+\soln Slopes $2$ and $3$ differ, so the lines cross once --- \textbf{one solution}.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Parallel}
+How many solutions: $y=2x+1$ and $y=2x-4$?
+\soln Equal slope ($2$), different intercepts $\Rightarrow$ parallel $\Rightarrow$ \textbf{no solution}.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Coincident}
+How many solutions: $y=2x+1$ and $4x-2y=-2$?
+\soln Rearrange the second: $4x-2y=-2\Rightarrow y=2x+1$ --- the same line $\Rightarrow$ \textbf{infinitely many}.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Comparing ratios}
+How many solutions: $2x+3y=6$ and $4x+6y=12$?
+\soln $\tfrac{2}{4}=\tfrac{3}{6}=\tfrac{6}{12}=\tfrac12$: all ratios match $\Rightarrow$ same line $\Rightarrow$ \textbf{infinitely many}.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Equal A,B ratios but not C}
+How many solutions: $2x+3y=6$ and $4x+6y=7$?
+\soln $\tfrac{2}{4}=\tfrac{3}{6}=\tfrac12$ but $\tfrac{6}{7}\neq\tfrac12$ $\Rightarrow$ parallel $\Rightarrow$ \textbf{no solution}.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- One solution (standard form)}
+How many solutions: $x-y=1$ and $x+y=5$? Solve it.
+\soln Slopes $1$ and $-1$ differ $\Rightarrow$ one solution. Add: $2x=6\Rightarrow x=3$, $y=2$: $(3,2)$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Find $k$ for no solution}
+For what $k$ does $y=kx+2$ and $y=3x-1$ have no solution?
+\soln Parallel (no solution) needs equal slopes and different intercepts: $k=3$ (intercepts $2\neq-1$).
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Condition for one solution}
+For what $k$ does $2x+ky=4$ and $x+2y=3$ have exactly one solution?
+\soln Slopes are $-\tfrac{2}{k}$ and $-\tfrac12$. They differ unless $-\tfrac{2}{k}=-\tfrac12\Rightarrow k=4$. So \textbf{one solution for every $k\neq4$}.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Full analysis (harder)}
+For what value of $k$ does $kx+3y=6$ and $2x+y=4$ have no solution?
+\soln Line 2 has slope $-2$; line 1 has slope $-\tfrac{k}{3}$. Parallel when $-\tfrac{k}{3}=-2\Rightarrow k=6$. Check $k=6$: $6x+3y=6\Rightarrow 2x+y=2$, different from $2x+y=4$, so truly parallel. \textbf{No solution when $k=6$}; one solution otherwise.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+How many solutions: $y=4x-1$ and $y=2x+3$? Explain.\workspace{2.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+How many solutions: $y=-x+5$ and $y=-x+1$? Explain.\workspace{2.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+How many solutions: $y=3x-2$ and $6x-2y=4$? Explain.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+How many solutions: $x+2y=4$ and $2x+4y=8$? Explain.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+How many solutions: $x+2y=4$ and $2x+4y=10$? Explain.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+How many solutions: $3x-y=2$ and $x+y=6$? Solve if possible.\workspace{2.6cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+For what value of $k$ is $y=kx-3$ parallel to $y=5x+1$ (no solution)?\workspace{2.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+For what value of $k$ does $y=kx+4$ and $y=2x+4$ have infinitely many solutions?\workspace{2.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Classify (one/none/infinite): $2x+y=3$ and $4x+2y=6$.\workspace{2.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Classify: $5x+2y=10$ and $5x+2y=4$.\workspace{2.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+A system of two lines has slopes $-3$ and $-3$ and the same $y$-intercept. How many solutions?\workspace{2.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Write a system that has exactly one solution at $(1,2)$.\workspace{2.6cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+For what value of $k$ does $kx+2y=8$ and $3x+y=5$ have no solution?\workspace{3.0cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item How many solutions: $y=4x-1$ and $y=2x+3$? Explain.
+  \item How many solutions: $y=-x+5$ and $y=-x+1$? Explain.
+  \item How many solutions: $y=3x-2$ and $6x-2y=4$? Explain.
+  \item How many solutions: $x+2y=4$ and $2x+4y=8$? Explain.
+  \item How many solutions: $x+2y=4$ and $2x+4y=10$? Explain.
+  \item How many solutions: $3x-y=2$ and $x+y=6$? Solve if possible.
+  \item For what value of $k$ is $y=kx-3$ parallel to $y=5x+1$ (no solution)?
+  \item For what value of $k$ does $y=kx+4$ and $y=2x+4$ have infinitely many solutions?
+  \item Classify (one/none/infinite): $2x+y=3$ and $4x+2y=6$.
+  \item Classify: $5x+2y=10$ and $5x+2y=4$.
+  \item A system of two lines has slopes $-3$ and $-3$ and the same $y$-intercept. How many solutions?
+  \item Write a system that has exactly one solution at $(1,2)$.
+  \item For what value of $k$ does $kx+2y=8$ and $3x+y=5$ have no solution?
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item One --- slopes $4$ and $2$ differ.
+  \item None --- same slope $-1$, different intercepts (parallel).
+  \item Infinitely many --- $6x-2y=4$ simplifies to $y=3x-2$.
+  \item Infinitely many --- second is $2\times$ first (same line).
+  \item None --- same slope but $8\times2=16\neq10$ (parallel).
+  \item One; add to get $4x=8\Rightarrow x=2$, $y=4$: $(2,4)$.
+  \item $k=5$.
+  \item $k=2$.
+  \item Infinitely many (second $=2\times$ first).
+  \item None (parallel, different constants).
+  \item Infinitely many (identical line).
+  \item e.g. $x+y=3$ and $x-y=-1$ (any two lines crossing at $(1,2)$).
+  \item Slope of line 2 is $-3$; parallel needs $-\tfrac{k}{2}=-3\Rightarrow k=6$ (then lines differ): no solution when $k=6$.
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

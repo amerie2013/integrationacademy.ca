@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MCR3U \textperiodcentered{} 1.4}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 1.4 --- Transformations of Functions}\\[2pt]
+{\small Grade 11 Functions, University (MCR3U) \textperiodcentered{} Unit 1: Characteristics of Functions}
+\end{center}
+
+\begin{ideabox}
+Every transformed function has the form $g(x)=a\,f\big(k(x-d)\big)+c$.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item $a$: vertical stretch/reflection. $c$: vertical shift.
+  \item $d$: horizontal shift (opposite to the sign inside).
+  \item Apply stretches/reflections first, then translations.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{The general form}In $y=af\!\left(k(x-d)\right)+c$, each parameter moves the base graph: $a$ stretches vertically, $k$ stretches horizontally, $d$ shifts right, $c$ shifts up.
+\lh{Order and signs}Mind the minus: $(x-d)$ shifts \emph{right} by $d$. A negative $a$ reflects in the $x$-axis; a negative $k$ reflects in the $y$-axis.
+\lh{Mapping points}Apply the changes to key points of the base function: $(x,y)\to\left(\dfrac{x}{k}+d,\ ay+c\right)$ places each on the new graph.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Full description}
+Describe $y=-2(x-3)^2+1$ from $y=x^2$.\soln $a=-2$: reflect and stretch by 2. $d=3$: right 3. $c=1$: up 1. Vertex $(3,1)$, opens down:\eplot{-1}{7}{-8}{3}{\addplot[exblue,very thick,domain=0.7:5.3]{-2*(x-3)^2+1};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(3,1)};}
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Radical}
+Describe $y=\sqrt{x+4}-2$.\soln $d=-4$: left 4. $c=-2$: down 2.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Reflection}
+Describe $y=-x^2$.\soln $a=-1$: a reflection in the $x$-axis (opens down).
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Stretch}
+Describe $y=3x^2$.\soln $a=3$: a vertical stretch by 3.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Vertex from form}
+Vertex of $y=(x+1)^2-5$?\soln $h=-1$, $k=-5$: vertex $(-1,-5)$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Description}
+Describe $y=(x-2)^2+3$.\soln Right 2, up 3.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Radical}
+Describe $y=\sqrt{x}-4$.\soln Down 4.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Vertex}
+Vertex of $y=-(x-4)^2+2$?\soln $(4,2)$; $a<0$ so it opens down.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Stretch + shift}
+Describe $y=2(x+1)^2$.\soln Stretch by 2, left 1.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Describe $y=(x-2)^2+3$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Describe $y=\sqrt{x}-4$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+State the vertex of $y=-(x-4)^2+2$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+What does $a=-1$ do?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Describe $y=2(x+1)^2$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+State the vertex of $y=(x+1)^2-5$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Describe $y=-2(x-3)^2+1$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Write $y=x^2$ shifted right $4$ and down $2$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Describe $y=\sqrt{x+4}-2$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Does $y=-3(x+2)^2+4$ open up or down?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+State the vertex of $y=(x-5)^2+2$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+What does $(x-3)$ inside do?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Describe $y=-(x+1)^2+5$ fully.\workspace{3cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Describe $y=(x-2)^2+3$.
+  \item Describe $y=\sqrt{x}-4$.
+  \item State the vertex of $y=-(x-4)^2+2$.
+  \item What does $a=-1$ do?
+  \item Describe $y=2(x+1)^2$.
+  \item State the vertex of $y=(x+1)^2-5$.
+  \item Describe $y=-2(x-3)^2+1$.
+  \item Write $y=x^2$ shifted right $4$ and down $2$.
+  \item Describe $y=\sqrt{x+4}-2$.
+  \item Does $y=-3(x+2)^2+4$ open up or down?
+  \item State the vertex of $y=(x-5)^2+2$.
+  \item What does $(x-3)$ inside do?
+  \item Describe $y=-(x+1)^2+5$ fully.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item right $2$, up $3$
+  \item down $4$
+  \item $(4,2)$
+  \item reflects in the $x$-axis
+  \item stretch $2$, left $1$
+  \item $(-1,-5)$
+  \item stretch $2$, reflect, right $3$, up $1$
+  \item $y=(x-4)^2-2$
+  \item left $4$, down $2$
+  \item down
+  \item $(5,2)$
+  \item shifts right $3$
+  \item reflect in $x$-axis, left $1$, up $5$; vertex $(-1,5)$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

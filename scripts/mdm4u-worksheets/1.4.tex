@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MDM4U \textperiodcentered{} 1.4}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 1.4 --- Permutations with Constraints}\\[2pt]
+{\small Grade 12 Mathematics of Data Management (MDM4U) \textperiodcentered{} Unit 1: Counting, Permutations \& Combinations}
+\end{center}
+
+\begin{ideabox}
+\emph{Together}: glue the block, arrange it, then arrange inside. \emph{Apart}: seat the rest, then slot into the gaps (or use the complement). \emph{Circular}: $(n-1)!$.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item \emph{Together} --- one block: (block \& others)! $\times$ (inside)!.
+  \item \emph{Apart} --- gap method, or total $-$ together.
+  \item Circular arrangements of $n$: $(n-1)!$.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Objects that must stay together}If certain objects must be adjacent, \textbf{glue} them into one block, arrange the blocks, then multiply by the arrangements \emph{inside} the block. Two people together among 5 seats: $4!\times2!$.
+\lh{Objects that must stay apart}If objects must \emph{not} touch, first arrange the others, then drop the restricted objects into the \textbf{gaps} between them so they cannot be neighbours.
+\lh{Around a circle}At a round table there is no fixed starting seat, so $n$ people arrange in $(n-1)!$ ways — fixing one person removes the rotations that would otherwise be counted repeatedly.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Two together (glue)}
+5 people in a row; two specific people sit together.\soln Glue them: $4!\cdot2!=48$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Two apart (complement)}
+5 people in a row; two specific people do \emph{not} sit together.\soln Total $-$ together: $5!-48=72$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Block of three}
+6 people in a row; a group of 3 must stay together.\soln $4!\cdot3!=144$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Circular}
+Seat 6 people around a round table.\soln $(6-1)!=120$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Circular with a pair}
+Seat 6 around a round table with two specific people together.\soln Block $\Rightarrow5$ units: $(5-1)!\cdot2!=48$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- None adjacent (gap method)}
+4 boys and 3 girls in a row with no two girls adjacent.\soln Seat boys $4!$; gaps $=5$; place 3 girls ordered $_5P_3=60$: $4!\cdot60=1440$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Fixed ends}
+Arrange PENCIL with P and L at the two ends.\soln Ends $2!$, middle $4!$: $2!\cdot4!=48$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Alternating}
+4 boys and 4 girls in a row, seated alternately by gender.\soln Two gender patterns, each side arranged: $2\cdot4!\cdot4!=1152$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Two conditions}
+8 books: 3 distinct math, 5 distinct novels. \\ \textbf{(a)} all math together? \\ \textbf{(b)} math together at the far left?\soln (a) $6!\cdot3!=4320$. (b) block fixed at left, arrange 5 novels and the 3 math inside: $5!\cdot3!=720$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+6 friends pose in a row for a photo; twins Amy and Ben stand together. How many photos?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Same 6 friends, but Amy and Ben refuse to stand together. How many photos?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Seat 5 diplomats around a round table.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+8 books on a shelf include a 3-volume trilogy that must stay together, in order or reversed. How many arrangements?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+A playlist of 5 pop and 2 jazz songs must play the 5 pop songs consecutively. How many playlists?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+4 adults and 3 children in a row; no two children are adjacent.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Arrange the letters of NUMBER with N and R at the two ends.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+7 guests at a round table; two specific guests sit together.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Arrange the letters of FLOWER so the word begins with a vowel.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+7 volumes on a shelf; two specific volumes must not be adjacent.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+3 couples around a round table; each couple sits together.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+6 charms arranged around a circular bracelet (use $(n-1)!$).\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+4 men and 4 women stand in a row, alternating by gender.\workspace{3.2cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item 6 friends pose in a row for a photo; twins Amy and Ben stand together. How many photos?
+  \item Same 6 friends, but Amy and Ben refuse to stand together. How many photos?
+  \item Seat 5 diplomats around a round table.
+  \item 8 books on a shelf include a 3-volume trilogy that must stay together, in order or reversed. How many arrangements?
+  \item A playlist of 5 pop and 2 jazz songs must play the 5 pop songs consecutively. How many playlists?
+  \item 4 adults and 3 children in a row; no two children are adjacent.
+  \item Arrange the letters of NUMBER with N and R at the two ends.
+  \item 7 guests at a round table; two specific guests sit together.
+  \item Arrange the letters of FLOWER so the word begins with a vowel.
+  \item 7 volumes on a shelf; two specific volumes must not be adjacent.
+  \item 3 couples around a round table; each couple sits together.
+  \item 6 charms arranged around a circular bracelet (use $(n-1)!$).
+  \item 4 men and 4 women stand in a row, alternating by gender.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $5!\cdot2!=240$
+  \item $720-240=480$
+  \item $4!=24$
+  \item $6!\cdot2!=1440$
+  \item $3!\cdot5!=720$
+  \item $4!\cdot{}_5P_3=1440$
+  \item $2!\cdot4!=48$
+  \item $5!\cdot2!=240$
+  \item $2\cdot5!=240$
+  \item $7!-6!\cdot2!=3600$
+  \item $(3-1)!\cdot2!^3=16$
+  \item $(6-1)!=120$
+  \item $2\cdot4!\cdot4!=1152$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

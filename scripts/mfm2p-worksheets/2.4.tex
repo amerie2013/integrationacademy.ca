@@ -1,0 +1,177 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MFM2P \textperiodcentered{} 2.4}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 2.4 --- Graphing Lines}\\[2pt]
+{\small Grade 10 Applied (MFM2P) \textperiodcentered{} Unit 2: Linear Relations}
+\end{center}
+
+\begin{ideabox}
+Graph from $y=mx+b$ (plot $b$, step the slope) or from intercepts.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item From $y=mx+b$: plot $(0,b)$, then step $\dfrac{\text{rise}}{\text{run}}$.
+  \item From $Ax+By=C$: find both intercepts and join them.
+  \item Horizontal $y=k$; vertical $x=a$.
+  \item Two points are enough to draw a line.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Start at the intercept}Plot the $y$-intercept $b$ first, then use the slope as rise over run to step to a second point.
+\lh{Draw the line}Join the two points with a straight line and extend it across the grid.
+\lh{Check a point}Pick another $x$-value, compute $y$, and confirm the point lands on your line.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- From slope-intercept}
+Graph $y=2x-3$.\soln Start at $(0,-3)$, up $2$/right $1$.
+\plot{-2}{5}{-5}{6}{\addplot[exblue,very thick,domain=-0.5:4,samples=2]{2*x-3};\addplot[mark=*,only marks,black]coordinates{(0,-3)(1,-1)};}
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Negative slope}
+Graph $y=-x+4$.\soln Start at $(0,4)$, down $1$/right $1$.
+\plot{-2}{6}{-2}{6}{\addplot[exblue,very thick,domain=-1:5,samples=2]{-x+4};\addplot[mark=*,only marks,black]coordinates{(0,4)(4,0)};}
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Using intercepts}
+Graph $2x+3y=6$.\soln $x=0\Rightarrow y=2$; $y=0\Rightarrow x=3$.
+\plot{-2}{5}{-2}{4}{\addplot[exblue,very thick,domain=-0.5:4,samples=2]{-2/3*x+2};\addplot[mark=*,only marks,black]coordinates{(0,2)(3,0)};}
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Horizontal \& vertical}
+Describe $y=3$ and $x=-2$.\soln $y=3$ is horizontal; $x=-2$ is vertical.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Fractional slope}
+Graph $y=\tfrac23x-1$.\soln Start at $(0,-1)$, up $2$/right $3$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- From a table}
+Graph the line through $(0,1)$ and $(2,5)$.\soln Slope $2$, $b=1$: $y=2x+1$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Intercepts of standard form}
+Find the intercepts of $3x-4y=12$.\soln $(4,0)$ and $(0,-3)$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Negative intercept}
+Graph $y=-2x+1$.\soln Start at $(0,1)$, down $2$/right $1$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Both intercepts (harder)}
+Graph $x-2y=4$ using intercepts.\soln $(4,0)$ and $(0,-2)$.
+\plot{-2}{6}{-4}{3}{\addplot[exblue,very thick,domain=-1:6,samples=2]{0.5*x-2};\addplot[mark=*,only marks,black]coordinates{(4,0)(0,-2)};}
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Graph $y=x+2$.
+\begin{center}\begin{tikzpicture}\begin{axis}[width=8cm,height=6cm,axis lines=middle,grid=both,grid style={gray!16},xmin=-6,xmax=6,ymin=-6,ymax=6,xtick distance=2,ytick distance=2,tick label style={font=\tiny}]\end{axis}\end{tikzpicture}\end{center}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Graph $y=-2x+1$.
+\begin{center}\begin{tikzpicture}\begin{axis}[width=8cm,height=6cm,axis lines=middle,grid=both,grid style={gray!16},xmin=-6,xmax=6,ymin=-6,ymax=6,xtick distance=2,ytick distance=2,tick label style={font=\tiny}]\end{axis}\end{tikzpicture}\end{center}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Find the intercepts of $x+2y=4$.\workspace{2.0cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Graph $y=\tfrac12x-1$.
+\begin{center}\begin{tikzpicture}\begin{axis}[width=8cm,height=6cm,axis lines=middle,grid=both,grid style={gray!16},xmin=-6,xmax=6,ymin=-6,ymax=6,xtick distance=2,ytick distance=2,tick label style={font=\tiny}]\end{axis}\end{tikzpicture}\end{center}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+What kind of line is $y=-1$?\workspace{1.8cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Graph $2x+y=4$.
+\begin{center}\begin{tikzpicture}\begin{axis}[width=8cm,height=6cm,axis lines=middle,grid=both,grid style={gray!16},xmin=-6,xmax=6,ymin=-6,ymax=6,xtick distance=2,ytick distance=2,tick label style={font=\tiny}]\end{axis}\end{tikzpicture}\end{center}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Find the intercepts of $3x-4y=12$.\workspace{2.0cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Graph $y=-x+3$.
+\begin{center}\begin{tikzpicture}\begin{axis}[width=8cm,height=6cm,axis lines=middle,grid=both,grid style={gray!16},xmin=-6,xmax=6,ymin=-6,ymax=6,xtick distance=2,ytick distance=2,tick label style={font=\tiny}]\end{axis}\end{tikzpicture}\end{center}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Name two points on $y=3x-2$.\workspace{2.0cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+What kind of line is $x=4$?\workspace{1.8cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Graph the line through $(0,-2)$ and $(3,1)$.
+\begin{center}\begin{tikzpicture}\begin{axis}[width=8cm,height=6cm,axis lines=middle,grid=both,grid style={gray!16},xmin=-6,xmax=6,ymin=-6,ymax=6,xtick distance=2,ytick distance=2,tick label style={font=\tiny}]\end{axis}\end{tikzpicture}\end{center}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Find the intercepts of $2x+5y=10$.\workspace{2.0cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Graph $3x-2y=6$ using intercepts.
+\begin{center}\begin{tikzpicture}\begin{axis}[width=8cm,height=6cm,axis lines=middle,grid=both,grid style={gray!16},xmin=-6,xmax=6,ymin=-6,ymax=6,xtick distance=2,ytick distance=2,tick label style={font=\tiny}]\end{axis}\end{tikzpicture}\end{center}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Graph $y=x+2$.
+  \item Graph $y=-2x+1$.
+  \item Find the intercepts of $x+2y=4$.
+  \item Graph $y=\tfrac12x-1$.
+  \item What kind of line is $y=-1$?
+  \item Graph $2x+y=4$.
+  \item Find the intercepts of $3x-4y=12$.
+  \item Graph $y=-x+3$.
+  \item Name two points on $y=3x-2$.
+  \item What kind of line is $x=4$?
+  \item Graph the line through $(0,-2)$ and $(3,1)$.
+  \item Find the intercepts of $2x+5y=10$.
+  \item Graph $3x-2y=6$ using intercepts.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $(0,2),(1,3)$.
+  \item $(0,1),(1,-1)$.
+  \item $(0,2),(4,0)$.
+  \item $(0,-1),(2,0)$.
+  \item horizontal.
+  \item $(0,4),(2,0)$.
+  \item $(4,0),(0,-3)$.
+  \item $(0,3),(3,0)$.
+  \item $(0,-2),(1,1)$.
+  \item vertical.
+  \item slope $1$: $y=x-2$.
+  \item $(5,0),(0,2)$.
+  \item $(2,0),(0,-3)$.
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

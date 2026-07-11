@@ -1,0 +1,212 @@
+@import "tailwindcss";
+@import "katex/dist/katex.min.css";
+
+@theme inline {
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-serif: "Fraunces", Georgia, serif;
+}
+
+:root {
+  --bg: #f6f8fc;
+  --surface: #ffffff;
+  --border: #e2e8f0;
+  --text: #0f172a;
+  --text-muted: #475569;
+  --primary: #1b7a44;
+  --primary-hover: #0d5c30;
+  --accent: #0d9488;
+  /* Brand (logo) green — used by the landing page & logo mark */
+  --brand: #1f8a4c;
+  --brand-dark: #0d5c30;
+  --brand-light: #34d27f;
+  --ink: #07150d;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  color: inherit;
+}
+
+h1,
+h2,
+h3 {
+  letter-spacing: -0.02em;
+}
+
+/* ── HTML lecture template (colored boxes + view-answer) ── */
+.lecture-box {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 24px 28px;
+  line-height: 1.7;
+  color: #1e293b;
+}
+.lecture-box h1 {
+  font-family: "Fraunces", serif;
+  font-size: 34px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 22px;
+  padding: 24px 26px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #0d5c30 0%, #1f8a4c 50%, #0d9488 100%);
+  box-shadow: 0 14px 34px rgba(31, 138, 76, 0.35);
+  letter-spacing: -0.01em;
+}
+.lecture-box h2 {
+  color: #0d5c30;
+  font-size: 23px;
+  font-weight: 800;
+  margin: 30px 0 12px;
+  padding-bottom: 8px;
+  border-bottom: 3px solid;
+  border-image: linear-gradient(90deg, #1b7a44, #0d9488) 1;
+}
+.lecture-box h3 {
+  color: #0d5c30;
+  font-size: 17px;
+  font-weight: 800;
+  margin: 0 0 8px;
+}
+/* coloured boxes — themed even when the content omits inline styles
+   (Grade 9/10 lessons set these inline, which still take precedence). */
+.lecture-box .example-box { background-color: #e6f3ff; border-left: 5px solid #4a90e2; padding: 10px 14px; margin: 12px 0; border-radius: 6px; }
+.lecture-box .practice-box { background-color: #fff7cc; border-left: 5px solid #e69138; padding: 10px 14px; margin: 12px 0; border-radius: 6px; }
+.lecture-box .mistake-box { background-color: #fdecea; border-left: 5px solid #d9534f; padding: 10px 14px; margin: 12px 0; border-radius: 6px; }
+.lecture-box .qa-box { background-color: #f0f0f0; border-left: 5px solid #e69138; padding: 10px 14px; margin: 12px 0; border-radius: 6px; }
+
+/* bold titles inside the coloured boxes */
+.lecture-box .example-box h3,
+.lecture-box .practice-box h3,
+.lecture-box .qa-box h3 {
+  font-weight: 800;
+}
+/* steps sit in a white card inside the blue / yellow box */
+.lecture-box .example-box .solution,
+.lecture-box .practice-box .solution {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-top: 10px;
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.08);
+}
+.lecture-box p {
+  margin: 0 0 12px;
+}
+.lecture-box ol.math,
+.lecture-box ul,
+.lecture-box ol {
+  margin: 0 0 14px;
+  padding-left: 26px;
+}
+.lecture-box ol.math li {
+  margin: 7px 0;
+}
+.lecture-box .solution {
+  margin-top: 8px;
+}
+.lecture-box .step {
+  margin: 5px 0;
+}
+.lecture-box details {
+  margin-top: 8px;
+}
+.lecture-box summary {
+  cursor: pointer;
+  font-weight: 800;
+  color: #b45309;
+  user-select: none;
+}
+.lecture-box details[open] summary {
+  margin-bottom: 8px;
+}
+
+/* ── 3D depth + motion ── */
+.lecture-html {
+  perspective: 1200px;
+}
+.lecture-box {
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08), 0 2px 6px rgba(15, 23, 42, 0.05);
+}
+.lecture-box h1 {
+  text-shadow: 0 2px 12px rgba(31, 138, 76, 0.14);
+}
+.lecture-box .example-box,
+.lecture-box .practice-box,
+.lecture-box .qa-box {
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.07);
+  transform-style: preserve-3d;
+  transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.3s ease,
+    opacity 0.55s ease;
+  will-change: transform;
+}
+.lecture-box .example-box:hover,
+.lecture-box .practice-box:hover,
+.lecture-box .qa-box:hover {
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.16);
+}
+/* reveal-on-scroll (classes toggled by HtmlBlock) */
+.lecture-box .ia-reveal {
+  opacity: 0;
+  transform: translateY(20px) scale(0.98);
+}
+.lecture-box .ia-reveal.ia-in {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+/* animated View answer toggle */
+.lecture-box summary {
+  list-style: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.lecture-box summary::-webkit-details-marker {
+  display: none;
+}
+.lecture-box summary::before {
+  content: "▸";
+  display: inline-block;
+  transition: transform 0.25s ease;
+  color: #e69138;
+}
+.lecture-box details[open] summary::before {
+  transform: rotate(90deg);
+}
+.lecture-box details[open] .solution {
+  animation: ia-slide-down 0.32s ease;
+}
+@keyframes ia-slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lecture-box .ia-reveal {
+    opacity: 1;
+    transform: none;
+  }
+}

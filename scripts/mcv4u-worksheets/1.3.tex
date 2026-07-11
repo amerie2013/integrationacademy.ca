@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MCV4U \textperiodcentered{} 1.3}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 1.3 --- Continuity \& Limit Laws}\\[2pt]
+{\small Grade 12 Calculus and Vectors (MCV4U) \textperiodcentered{} Unit 1: Rates of Change and Limits}
+\end{center}
+
+\begin{ideabox}
+Continuous at $a$: $f(a)$ defined, the limit exists, and they are equal. Discontinuities are removable, jump, or infinite.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Three conditions: $f(a)$ defined, limit exists, $\lim=f(a)$.
+  \item Removable (hole), jump (one-sided differ), infinite (asymptote).
+  \item Limit laws split sums, products and quotients.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Continuity}A function is \textbf{continuous} at $a$ when $\lim_{x\to a}f(x)=f(a)$ — no holes, jumps, or breaks in the graph there.
+\lh{Limit laws}Limits distribute over sums, products, and quotients, so a complicated limit can be broken into simpler pieces.
+\lh{Evaluating}For continuous functions a limit is found by direct substitution; only breaks require closer analysis.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Verify continuity}
+Is $f(x)=x^2+1$ continuous at $x=2$?\soln $f(2)=5$ and $\lim_{x\to2}(x^2+1)=5$; equal, so yes.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Removable}
+Classify the discontinuity of $\dfrac{x^2-4}{x-2}$ at $x=2$.\soln $f(2)$ undefined but the limit is $4$: removable (a hole).
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Infinite}
+Classify the discontinuity of $\dfrac1{x-3}$ at $x=3$.\soln One-sided limits are $\pm\infty$: infinite (vertical asymptote):\eplot{-1}{7}{-6}{6}{\addplot[exblue,very thick,domain=-1:2.82,samples=120]{1/(x-3)};\addplot[exblue,very thick,domain=3.18:7,samples=120]{1/(x-3)};\draw[dashed,gray] (axis cs:3,-6)--(axis cs:3,6);}
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Jump}
+For $f(x)=\begin{cases}x,&x<1\\x+2,&x\ge1\end{cases}$, what happens at $x=1$?\soln Left limit $1$, right limit $3$: a jump discontinuity.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Make it continuous}
+Find $k$ so $f(x)=\begin{cases}x^2,&x\le2\\kx,&x>2\end{cases}$ is continuous at $2$.\soln $2^2=2k\Rightarrow k=2$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Where discontinuous}
+Where is $\dfrac1{x^2-9}$ discontinuous?\soln $x^2-9=0\Rightarrow x=3,-3$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Removable}
+Classify $\dfrac{x^2-1}{x-1}$ at $x=1$.\soln Removable (hole at $(1,2)$).
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Limit laws}
+$\displaystyle\lim_{x\to2}(3x^2-x)$.\soln $3(4)-2=10$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Domain \& continuity}
+Where is $\sqrt{x}$ continuous?\soln On its domain $x\ge0$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Is $\dfrac{x+1}{x-2}$ continuous at $x=2$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Classify the discontinuity of $\dfrac{x^2-1}{x-1}$ at $x=1$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+$\displaystyle\lim_{x\to3}(2x^2-x)$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Find $k$: $\begin{cases}3x,&x<1\\x+k,&x\ge1\end{cases}$ continuous at $1$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Where is $\dfrac1{x^2-4}$ discontinuous?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Classify the discontinuity of $\dfrac1{x+5}$ at $x=-5$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Is $f(x)=x^3-2x$ continuous at $x=0$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+$\displaystyle\lim_{x\to1}(4x^2+2x)$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Find $k$: $\begin{cases}x^2,&x\le3\\kx,&x>3\end{cases}$ continuous at $3$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Where is $\dfrac{x}{x^2-x}$ discontinuous?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Classify the discontinuity of $\dfrac{x^2-9}{x-3}$ at $x=3$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+State the three conditions for continuity at $a$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+For $\begin{cases}x^2+1,&x<2\\ax+1,&x\ge2\end{cases}$, find $a$ making it continuous at $2$.\workspace{3cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Is $\dfrac{x+1}{x-2}$ continuous at $x=2$?
+  \item Classify the discontinuity of $\dfrac{x^2-1}{x-1}$ at $x=1$.
+  \item $\displaystyle\lim_{x\to3}(2x^2-x)$?
+  \item Find $k$: $\begin{cases}3x,&x<1\\x+k,&x\ge1\end{cases}$ continuous at $1$.
+  \item Where is $\dfrac1{x^2-4}$ discontinuous?
+  \item Classify the discontinuity of $\dfrac1{x+5}$ at $x=-5$.
+  \item Is $f(x)=x^3-2x$ continuous at $x=0$?
+  \item $\displaystyle\lim_{x\to1}(4x^2+2x)$?
+  \item Find $k$: $\begin{cases}x^2,&x\le3\\kx,&x>3\end{cases}$ continuous at $3$.
+  \item Where is $\dfrac{x}{x^2-x}$ discontinuous?
+  \item Classify the discontinuity of $\dfrac{x^2-9}{x-3}$ at $x=3$.
+  \item State the three conditions for continuity at $a$.
+  \item For $\begin{cases}x^2+1,&x<2\\ax+1,&x\ge2\end{cases}$, find $a$ making it continuous at $2$.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item no (infinite)
+  \item removable
+  \item $15$
+  \item $k=2$
+  \item $x=\pm2$
+  \item infinite
+  \item yes
+  \item $6$
+  \item $k=3$
+  \item $x=0,1$
+  \item removable
+  \item $f(a)$ defined, limit exists, equal
+  \item $5=2a+1\Rightarrow a=2$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

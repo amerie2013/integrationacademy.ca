@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MCF3M \textperiodcentered{} 6.4}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 6.4 --- Sinusoidal Applications}\\[2pt]
+{\small Grade 11 Functions \& Applications (MCF3M) \textperiodcentered{} Unit 6: Sine Functions}
+\end{center}
+
+\begin{ideabox}
+Model with $h=a\sin(kt)+c$: amplitude $a$, midline $c$, period $=$ one cycle; max $=c+a$, min $=c-a$.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Amplitude $=$ radius or half the range.
+  \item Midline $=$ the centre value.
+  \item Period $=$ time for one full cycle.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Modelling cycles}Turn repeating data — tides, wheels, temperatures — into $y=a\sin\!\left(k(x-d)\right)+c$ using $c=\tfrac{\max+\min}{2}$ and $a=\tfrac{\max-\min}{2}$.
+\lh{Finding the period}Read $k$ from the real cycle: $k=\dfrac{360^\circ}{\text{period}}$, with time in the units given.
+\lh{Choosing the start}Use $-\cos$ to begin at a minimum and $+\cos$ to begin at a maximum, matching the model to the situation.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Max height}
+Wheel: radius 10 m, centre 12 m. Max height?\soln Max $=$ midline $+$ amplitude $=12+10=22$ m. A wheel's height is sinusoidal:\splot{-1}{3}{\addplot[exblue,very thick,domain=0:360]{sin(x)+1};\addplot[red,dashed,domain=0:360]{1};}
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Min height}
+Same wheel: min height?\soln Min $=12-10=2$ m.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Tide}
+Tide rises to 6 m, falls to 2 m.\soln Amplitude $=\dfrac{6-2}{2}=2$ m; midline $=\dfrac{6+2}{2}=4$ m.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Period}
+One rotation takes 60 s. Period?\soln One full cycle $=$ one rotation $=60$ s.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Daylight}
+Daylight 16 h (max) to 8 h (min).\soln Amplitude $=\dfrac{16-8}{2}=4$ h; midline $=\dfrac{16+8}{2}=12$ h.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Max height}
+Wheel: radius 8 m, centre 10 m. Max height?\soln $10+8=18$ m.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Tide amplitude}
+Tide rises to 5 m, falls to 1 m. Amplitude?\soln $\dfrac{5-1}{2}=2$ m.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Tide midline}
+Same tide: midline?\soln $\dfrac{5+1}{2}=3$ m.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Period}
+One rotation takes 40 s. Period?\soln $40$ s.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Wheel: radius 10 m, centre 12 m. Max height?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Wheel: radius 10 m, centre 12 m. Min height?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Tide rises to 6 m, falls to 2 m. Amplitude?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Same tide: midline?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+One rotation takes 30 s. Period?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Wheel: radius 8 m, centre 10 m. Max height?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Daylight ranges 16 h to 8 h. Amplitude?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Daylight ranges 16 h to 8 h. Midline?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+A wheel has radius 15 m. Amplitude?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Wheel: radius 8 m, centre 10 m. Min height?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+A model $h=5\sin(kt)+20$. Maximum?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Tide rises to 7 m, falls to 1 m. Amplitude?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+A wheel: radius 9 m, centre 11 m, rotation 50 s. State $a$, $c$, and the period.\workspace{3cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Wheel: radius 10 m, centre 12 m. Max height?
+  \item Wheel: radius 10 m, centre 12 m. Min height?
+  \item Tide rises to 6 m, falls to 2 m. Amplitude?
+  \item Same tide: midline?
+  \item One rotation takes 30 s. Period?
+  \item Wheel: radius 8 m, centre 10 m. Max height?
+  \item Daylight ranges 16 h to 8 h. Amplitude?
+  \item Daylight ranges 16 h to 8 h. Midline?
+  \item A wheel has radius 15 m. Amplitude?
+  \item Wheel: radius 8 m, centre 10 m. Min height?
+  \item A model $h=5\sin(kt)+20$. Maximum?
+  \item Tide rises to 7 m, falls to 1 m. Amplitude?
+  \item A wheel: radius 9 m, centre 11 m, rotation 50 s. State $a$, $c$, and the period.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $22$ m
+  \item $2$ m
+  \item $2$ m
+  \item $4$ m
+  \item $30$ s
+  \item $18$ m
+  \item $4$ h
+  \item $12$ h
+  \item $15$ m
+  \item $2$ m
+  \item $25$
+  \item $3$ m
+  \item $a=9$, $c=11$, period $50$ s
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

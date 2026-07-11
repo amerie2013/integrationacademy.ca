@@ -1,0 +1,190 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MPM2D \textperiodcentered{} 1.2}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 1.2 --- Solving Linear Systems by Graphing}\\[2pt]
+{\small Grade 10 Academic (MPM2D) \textperiodcentered{} Unit 1: Linear Systems}
+\end{center}
+
+\begin{ideabox}
+A \textbf{linear system} is two lines considered together; its \textbf{solution} is the point $(x,y)$ that lies on \emph{both} lines --- the point of intersection (POI).
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Put each line in $y=mx+b$, graph both, and read off the intersection point.
+  \item The POI must satisfy \emph{both} equations --- always \textbf{check} by substituting back.
+  \item \textbf{One solution:} the lines cross once (different slopes).
+  \item \textbf{No solution:} parallel lines (equal slopes, different $y$-intercepts).
+  \item \textbf{Infinitely many:} the same line (equal slopes \emph{and} intercepts).
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{What a system is}A \textbf{linear system} is two lines considered together. Its \textbf{solution} is the point $(x,y)$ that lies on \emph{both} lines — the coordinates that satisfy both equations at once.
+\lh{Reading the intersection}Graph both lines on the same grid; where they cross is the solution. Always check by substituting that point back into both equations.
+\lh{Its limits}Graphing shows the idea clearly, but it is only as accurate as your reading of the grid — fractional or large solutions call for an algebraic method.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Checking a solution}
+Verify that $(2,1)$ solves the system $y=x-1$ and $y=-x+3$.
+\soln Substitute: $2-1=1\ \checkmark$ and $-2+3=1\ \checkmark$. It satisfies both, so $(2,1)$ is the solution.
+\plot{-2}{6}{-2}{6}{\addplot[exblue,very thick,domain=-2:6,samples=2]{x-1};\addplot[qorange,very thick,domain=-2:6,samples=2]{-x+3};\addplot[mark=*,only marks,black]coordinates{(2,1)};}
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Graphing a simple system}
+Solve by graphing: $y=x+1$ and $y=-x+5$.
+\soln Graph both lines; they cross at $(2,3)$. Check: $2+1=3$ and $-2+5=3$. Solution $(2,3)$.
+\plot{-2}{7}{-2}{7}{\addplot[exblue,very thick,domain=-2:6,samples=2]{x+1};\addplot[qorange,very thick,domain=-2:6,samples=2]{-x+5};\addplot[mark=*,only marks,black]coordinates{(2,3)};}
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Steeper lines}
+Solve by graphing: $y=2x-3$ and $y=-x+3$.
+\soln Set equal: $2x-3=-x+3\Rightarrow 3x=6\Rightarrow x=2$, so $y=1$. Solution $(2,1)$.
+\plot{-2}{6}{-4}{6}{\addplot[exblue,very thick,domain=-1:4,samples=2]{2*x-3};\addplot[qorange,very thick,domain=-2:5,samples=2]{-x+3};\addplot[mark=*,only marks,black]coordinates{(2,1)};}
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- One equation in standard form}
+Solve by graphing: $x+y=4$ and $y=2x-2$.
+\soln Rewrite $x+y=4$ as $y=-x+4$. Then $-x+4=2x-2\Rightarrow 6=3x\Rightarrow x=2$, $y=2$. Solution $(2,2)$.
+\plot{-2}{6}{-3}{6}{\addplot[exblue,very thick,domain=-1:4,samples=2]{-x+4};\addplot[qorange,very thick,domain=-1:4,samples=2]{2*x-2};\addplot[mark=*,only marks,black]coordinates{(2,2)};}
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Both in standard form}
+Solve by graphing: $2x+y=5$ and $x-y=1$.
+\soln Rewrite as $y=-2x+5$ and $y=x-1$. Then $-2x+5=x-1\Rightarrow 6=3x\Rightarrow x=2$, $y=1$. Solution $(2,1)$.
+\plot{-2}{6}{-4}{6}{\addplot[exblue,very thick,domain=-1:4,samples=2]{-2*x+5};\addplot[qorange,very thick,domain=-2:5,samples=2]{x-1};\addplot[mark=*,only marks,black]coordinates{(2,1)};}
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Parallel lines (no solution)}
+Solve by graphing: $y=2x+1$ and $y=2x-3$.
+\soln Both have slope $2$ but different $y$-intercepts, so the lines are parallel and never meet --- \textbf{no solution}.
+\plot{-4}{4}{-6}{6}{\addplot[exblue,very thick,domain=-4:2,samples=2]{2*x+1};\addplot[qorange,very thick,domain=-2:4,samples=2]{2*x-3};}
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Same line (infinitely many)}
+Solve: $y=x+2$ and $2x-2y=-4$.
+\soln Rearrange $2x-2y=-4\Rightarrow -2y=-2x-4\Rightarrow y=x+2$. This is the \emph{same} line, so there are \textbf{infinitely many solutions}.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- An application}
+Gym A charges \$5 per visit: $C=5v$. Gym B charges \$4 plus \$3 per visit: $C=3v+4$. When is the cost equal?
+\soln $5v=3v+4\Rightarrow 2v=4\Rightarrow v=2$ visits, and $C=\$10$.
+\plot{0}{6}{0}{26}{\addplot[exblue,very thick,domain=0:5,samples=2]{5*x};\addplot[qorange,very thick,domain=0:5,samples=2]{3*x+4};\addplot[mark=*,only marks,black]coordinates{(2,10)};}
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Solve and classify (harder)}
+Solve and classify: $3x-2y=6$ and $y=\tfrac32x-3$.
+\soln Rearrange the first: $3x-2y=6\Rightarrow -2y=-3x+6\Rightarrow y=\tfrac32x-3$. It is identical to the second equation, so the system has \textbf{infinitely many solutions} (coincident lines).
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Verify whether $(1,4)$ is the solution of $y=2x+2$ and $y=-x+5$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Solve by graphing: $y=x-2$ and $y=-x+4$.
+\begin{center}\begin{tikzpicture}\begin{axis}[width=8cm,height=6cm,axis lines=middle,grid=both,grid style={gray!16},xmin=-6,xmax=6,ymin=-6,ymax=6,xtick distance=2,ytick distance=2,tick label style={font=\tiny}]\end{axis}\end{tikzpicture}\end{center}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Solve by graphing: $y=2x+1$ and $y=-x-2$.
+\begin{center}\begin{tikzpicture}\begin{axis}[width=8cm,height=6cm,axis lines=middle,grid=both,grid style={gray!16},xmin=-6,xmax=6,ymin=-6,ymax=6,xtick distance=2,ytick distance=2,tick label style={font=\tiny}]\end{axis}\end{tikzpicture}\end{center}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Solve by graphing: $y=\tfrac12x+1$ and $y=-x+4$.
+\begin{center}\begin{tikzpicture}\begin{axis}[width=8cm,height=6cm,axis lines=middle,grid=both,grid style={gray!16},xmin=-6,xmax=6,ymin=-6,ymax=6,xtick distance=2,ytick distance=2,tick label style={font=\tiny}]\end{axis}\end{tikzpicture}\end{center}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Rewrite $x+y=6$ and $y=2x$ in $y=mx+b$ form, then solve by graphing.
+\begin{center}\begin{tikzpicture}\begin{axis}[width=8cm,height=6cm,axis lines=middle,grid=both,grid style={gray!16},xmin=-6,xmax=6,ymin=-6,ymax=6,xtick distance=2,ytick distance=2,tick label style={font=\tiny}]\end{axis}\end{tikzpicture}\end{center}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Solve by graphing: $2x+y=3$ and $x-y=3$.
+\begin{center}\begin{tikzpicture}\begin{axis}[width=8cm,height=6cm,axis lines=middle,grid=both,grid style={gray!16},xmin=-6,xmax=6,ymin=-6,ymax=6,xtick distance=2,ytick distance=2,tick label style={font=\tiny}]\end{axis}\end{tikzpicture}\end{center}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+How many solutions does the system $y=3x-1$, $y=3x+4$ have? Explain.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+How many solutions does $y=-x+2$, $3x+3y=6$ have? Explain.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Solve by graphing: $y=-2x+5$ and $y=x-1$.
+\begin{center}\begin{tikzpicture}\begin{axis}[width=8cm,height=6cm,axis lines=middle,grid=both,grid style={gray!16},xmin=-6,xmax=6,ymin=-6,ymax=6,xtick distance=2,ytick distance=2,tick label style={font=\tiny}]\end{axis}\end{tikzpicture}\end{center}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+A taxi charges \$3 plus \$2/km: $C=2d+3$. Another charges \$5/km: $C=5d$. When is the cost equal?\workspace{2.6cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Without graphing, decide whether $(4,1)$ is the solution of $x+y=5$ and $2x-y=7$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Solve by graphing: $y=4$ and $y=2x-2$.
+\begin{center}\begin{tikzpicture}\begin{axis}[width=8cm,height=6cm,axis lines=middle,grid=both,grid style={gray!16},xmin=-6,xmax=6,ymin=-6,ymax=6,xtick distance=2,ytick distance=2,tick label style={font=\tiny}]\end{axis}\end{tikzpicture}\end{center}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Two lines both have slope $2$. One passes through $(0,1)$; describe the number of solutions if the other passes through (a)~$(0,1)$ and (b)~$(0,5)$.\workspace{2.8cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Verify whether $(1,4)$ is the solution of $y=2x+2$ and $y=-x+5$.
+  \item Solve by graphing: $y=x-2$ and $y=-x+4$.
+  \item Solve by graphing: $y=2x+1$ and $y=-x-2$.
+  \item Solve by graphing: $y=\tfrac12x+1$ and $y=-x+4$.
+  \item Rewrite $x+y=6$ and $y=2x$ in $y=mx+b$ form, then solve by graphing.
+  \item Solve by graphing: $2x+y=3$ and $x-y=3$.
+  \item How many solutions does the system $y=3x-1$, $y=3x+4$ have? Explain.
+  \item How many solutions does $y=-x+2$, $3x+3y=6$ have? Explain.
+  \item Solve by graphing: $y=-2x+5$ and $y=x-1$.
+  \item A taxi charges \$3 plus \$2/km: $C=2d+3$. Another charges \$5/km: $C=5d$. When is the cost equal?
+  \item Without graphing, decide whether $(4,1)$ is the solution of $x+y=5$ and $2x-y=7$.
+  \item Solve by graphing: $y=4$ and $y=2x-2$.
+  \item Two lines both have slope $2$. One passes through $(0,1)$; describe the number of solutions if the other passes through (a)~$(0,1)$ and (b)~$(0,5)$.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $2(1)+2=4\ \checkmark$, $-1+5=4\ \checkmark$ --- yes, $(1,4)$ is the solution.
+  \item $(3,1)$.
+  \item $(-1,-1)$.
+  \item $\tfrac12x+1=-x+4\Rightarrow \tfrac32x=3\Rightarrow x=2$, $y=2$: $(2,2)$.
+  \item $y=-x+6$, $y=2x$; $2x=-x+6\Rightarrow x=2$, $y=4$: $(2,4)$.
+  \item $y=-2x+3$, $y=x-3$; $x=2$, $y=-1$: $(2,-1)$.
+  \item None --- equal slopes, different intercepts (parallel).
+  \item Infinitely many --- $3x+3y=6$ simplifies to $y=-x+2$ (same line).
+  \item $-2x+5=x-1\Rightarrow x=2$, $y=1$: $(2,1)$.
+  \item $2d+3=5d\Rightarrow d=1$ km, cost $\$5$.
+  \item $4+1=5\ \checkmark$, $2(4)-1=7\ \checkmark$ --- yes.
+  \item $2x-2=4\Rightarrow x=3$: $(3,4)$.
+  \item (a)~same line $\Rightarrow$ infinitely many; (b)~parallel $\Rightarrow$ no solution.
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

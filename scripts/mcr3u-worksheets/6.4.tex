@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MCR3U \textperiodcentered{} 6.4}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 6.4 --- Geometric Series}\\[2pt]
+{\small Grade 11 Functions, University (MCR3U) \textperiodcentered{} Unit 6: Sequences and Series}
+\end{center}
+
+\begin{ideabox}
+The sum of a geometric sequence: $S_n=\dfrac{a(r^{n}-1)}{r-1}$ (for $r\ne1$).
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item $S_n=\dfrac{a(r^{n}-1)}{r-1}$.
+  \item Use $r^{n}$ (not $r^{n-1}$).
+  \item Connects to compound interest and annuities.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Summing a geometric sequence}A \textbf{geometric series} adds terms that share a common ratio $r$.
+\lh{The sum formula}$S_n=\dfrac{a(r^n-1)}{r-1}$ for $r\ne1$ gives the sum of the first $n$ terms directly.
+\lh{A useful special case}When $|r|<1$ the terms shrink and the infinite sum converges to $\dfrac{a}{1-r}$ — the basis of many financial formulas.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Five terms}
+Find $2+6+18+54+162$.\soln $a=2,r=3,n=5$: $S_5=\dfrac{2(3^{5}-1)}{3-1}=\dfrac{2(242)}{2}=242$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Powers of 2}
+Sum the first $6$ of $1,2,4,\dots$\soln $\dfrac{1(2^{6}-1)}{2-1}=63$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- First 4}
+Sum the first $4$ of $5,10,20,\dots$\soln $\dfrac{5(2^{4}-1)}{1}=5(15)=75$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Ratio 4}
+Sum the first $3$ of $2,8,32,\dots$\soln $\dfrac{2(4^{3}-1)}{4-1}=\dfrac{2(63)}{3}=42$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- A model}
+A salary starts at $\$1000$ and triples each year. Total over $4$ years?\soln $\dfrac{1000(3^{4}-1)}{3-1}=\dfrac{1000(80)}{2}=\$40000$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Ratio 2}
+Find $3+6+12+24+48$.\soln $\dfrac{3(2^{5}-1)}{1}=3(31)=93$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- First 5}
+Sum the first $5$ of $1,3,9,\dots$\soln $\dfrac{1(3^{5}-1)}{2}=\dfrac{242}{2}=121$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- First 4}
+Sum the first $4$ of $2,6,18,\dots$\soln $\dfrac{2(3^{4}-1)}{2}=80$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- First 3}
+Sum the first $3$ of $2,8,32,\dots$\soln $42$ (as above).
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Find $2+6+18+54$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Sum the first $5$ of $1,2,4,\dots$\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Sum the first $4$ of $3,6,12,\dots$\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Sum the first $6$ of $1,2,4,\dots$\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Sum the first $3$ of $4,12,36,\dots$\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Find $3+6+12+24+48$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Sum the first $5$ of $1,3,9,\dots$\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Sum the first $4$ of $2,6,18,\dots$\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Sum the first $6$ of $2,6,18,\dots$\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Sum the first $5$ of $5,10,20,\dots$\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+A salary starts at $\$2000$ and doubles each year. Total over $5$ years?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Find $1+3+9+27$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Find $1+2+4+\dots+512$.\workspace{3cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Find $2+6+18+54$.
+  \item Sum the first $5$ of $1,2,4,\dots$
+  \item Sum the first $4$ of $3,6,12,\dots$
+  \item Sum the first $6$ of $1,2,4,\dots$
+  \item Sum the first $3$ of $4,12,36,\dots$
+  \item Find $3+6+12+24+48$.
+  \item Sum the first $5$ of $1,3,9,\dots$
+  \item Sum the first $4$ of $2,6,18,\dots$
+  \item Sum the first $6$ of $2,6,18,\dots$
+  \item Sum the first $5$ of $5,10,20,\dots$
+  \item A salary starts at $\$2000$ and doubles each year. Total over $5$ years?
+  \item Find $1+3+9+27$.
+  \item Find $1+2+4+\dots+512$.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $80$
+  \item $31$
+  \item $45$
+  \item $63$
+  \item $52$
+  \item $93$
+  \item $121$
+  \item $80$
+  \item $728$
+  \item $155$
+  \item $\$62000$
+  \item $40$
+  \item $1023$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

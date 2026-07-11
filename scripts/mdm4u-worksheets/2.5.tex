@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MDM4U \textperiodcentered{} 2.5}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 2.5 --- Independent \& Dependent Events}\\[2pt]
+{\small Grade 12 Mathematics of Data Management (MDM4U) \textperiodcentered{} Unit 2: Probability}
+\end{center}
+
+\begin{ideabox}
+\emph{Independent} events multiply: $P(A\cap B)=P(A)P(B)$. \emph{Dependent} events (drawing without replacement) update the counts. Independence is \emph{not} the same as mutual exclusivity.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Independent \emph{and}: $P(A\cap B)=P(A)P(B)$.
+  \item Dependent (no replacement): adjust the pool for the next draw.
+  \item $P(\text{at least one})=1-P(\text{none})$ (independent trials).
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Independent events}Two events are \textbf{independent} when one has no effect on the other, like separate coin flips. Then $P(A\cap B)=P(A)\cdot P(B)$.
+\lh{Dependent events}Drawing \emph{without replacement} makes events \textbf{dependent}: the first draw changes the second's odds. Two kings in a row: $\dfrac{4}{52}\times\dfrac{3}{51}$.
+\lh{Not the same as exclusive}Independent is not mutually exclusive — independent events can both happen, whereas mutually exclusive events never can.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Independent coin and die}
+Find $P(\text{head and a 6})$.\soln $\dfrac12\cdot\dfrac16=\dfrac{1}{12}$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Dependent draw (no replacement)}
+Draw 2 cards without replacement. Find $P(\text{two aces})$.\soln $\dfrac{4}{52}\cdot\dfrac{3}{51}=\dfrac{12}{2652}=\dfrac{1}{221}$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- With vs. without replacement}
+From 5 red and 3 blue, draw 2. Find $P(\text{both red})$ \\ \textbf{(a)} with replacement; \\ \textbf{(b)} without.\soln (a) $\left(\dfrac58\right)^2=\dfrac{25}{64}$. (b) $\dfrac58\cdot\dfrac47=\dfrac{20}{56}=\dfrac{5}{14}$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Independent chain}
+Find $P(\text{3 heads in a row})$.\soln $\left(\dfrac12\right)^3=\dfrac18$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- One of each (no replacement)}
+A bag has 4 red and 6 blue. Draw 2 without replacement. Find $P(\text{one of each colour})$.\soln $\dfrac{4}{10}\cdot\dfrac69+\dfrac{6}{10}\cdot\dfrac49=\dfrac{24}{90}+\dfrac{24}{90}=\dfrac{48}{90}=\dfrac{8}{15}$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Test for independence}
+On one die, are \emph{even} and \emph{greater than 3} independent?\soln $P(\text{even}\cap{>}3)=P(\{4,6\})=\dfrac26=\dfrac13$, but $P(\text{even})P({>}3)=\dfrac12\cdot\dfrac12=\dfrac14\ne\dfrac13$. \emph{Not} independent.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- At least one via complement}
+Find $P(\text{at least one 6 in 3 rolls})$.\soln $1-\left(\dfrac56\right)^3=1-\dfrac{125}{216}=\dfrac{91}{216}$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- System reliability}
+Two independent components each work with $P=0.9$. Find $P(\text{both work})$ and $P(\text{at least one works})$.\soln Both: $0.81$. At least one: $1-0.1^2=0.99$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Three-part jar}
+A jar has 3 green and 7 yellow; draw 2 without replacement. Find \\ \textbf{(a)} $P(\text{both green})$; \\ \textbf{(b)} $P(\text{no green})$; \\ \textbf{(c)} $P(\text{at least one green})$.\soln (a) $\dfrac{3}{10}\cdot\dfrac29=\dfrac{1}{15}$. (b) $\dfrac{7}{10}\cdot\dfrac69=\dfrac{7}{15}$. (c) $1-\dfrac{7}{15}=\dfrac{8}{15}$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Find $P(\text{three heads})$ when 3 coins are tossed.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Two dice. Find $P(\text{both show 6})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Draw 2 cards without replacement. Find $P(\text{both hearts})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Bag of 5 red and 5 blue; draw 2 without replacement. Find $P(\text{both red})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Same bag, but with replacement. Find $P(\text{both red})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Find $P(\text{a 4 then an odd number})$ on two rolls.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+A spinner has $P(\text{win})=0.2$. Find $P(\text{win twice in a row})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Two independent components each fail with $P=0.1$. Find $P(\text{both work})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Draw 3 cards without replacement. Find $P(\text{all aces})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+On one die, are \emph{prime} and \emph{odd} independent? Justify.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+A jar of 2 green and 8 red; draw 2 without replacement. Find $P(\text{at least one green})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Two dice. Find $P(\text{at least one 6})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+A test has 3 four-option questions answered by guessing. Find \\ \textbf{(a)} $P(\text{all correct})$; \\ \textbf{(b)} $P(\text{none correct})$; \\ \textbf{(c)} $P(\text{at least one correct})$.\workspace{3cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Find $P(\text{three heads})$ when 3 coins are tossed.
+  \item Two dice. Find $P(\text{both show 6})$.
+  \item Draw 2 cards without replacement. Find $P(\text{both hearts})$.
+  \item Bag of 5 red and 5 blue; draw 2 without replacement. Find $P(\text{both red})$.
+  \item Same bag, but with replacement. Find $P(\text{both red})$.
+  \item Find $P(\text{a 4 then an odd number})$ on two rolls.
+  \item A spinner has $P(\text{win})=0.2$. Find $P(\text{win twice in a row})$.
+  \item Two independent components each fail with $P=0.1$. Find $P(\text{both work})$.
+  \item Draw 3 cards without replacement. Find $P(\text{all aces})$.
+  \item On one die, are \emph{prime} and \emph{odd} independent? Justify.
+  \item A jar of 2 green and 8 red; draw 2 without replacement. Find $P(\text{at least one green})$.
+  \item Two dice. Find $P(\text{at least one 6})$.
+  \item A test has 3 four-option questions answered by guessing. Find \\ \textbf{(a)} $P(\text{all correct})$; \\ \textbf{(b)} $P(\text{none correct})$; \\ \textbf{(c)} $P(\text{at least one correct})$.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $\tfrac18$
+  \item $\tfrac{1}{36}$
+  \item $\tfrac{13}{52}\cdot\tfrac{12}{51}=\tfrac{1}{17}$
+  \item $\tfrac{5}{10}\cdot\tfrac49=\tfrac29$
+  \item $\left(\tfrac12\right)^2=\tfrac14$
+  \item $\tfrac16\cdot\tfrac12=\tfrac{1}{12}$
+  \item $0.04$
+  \item $0.9^2=0.81$
+  \item $\tfrac{4}{52}\cdot\tfrac{3}{51}\cdot\tfrac{2}{50}=\tfrac{1}{5525}$
+  \item No: $P(\{3,5\})=\tfrac13\ne\tfrac12\cdot\tfrac12=\tfrac14$
+  \item $1-\tfrac{8}{10}\cdot\tfrac79=\tfrac{34}{90}=\tfrac{17}{45}$
+  \item $1-\left(\tfrac56\right)^2=\tfrac{11}{36}$
+  \item (a) $\tfrac{1}{64}$; (b) $\tfrac{27}{64}$; (c) $\tfrac{37}{64}$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

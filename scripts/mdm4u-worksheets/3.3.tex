@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MDM4U \textperiodcentered{} 3.3}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 3.3 --- The Uniform Distribution}\\[2pt]
+{\small Grade 12 Mathematics of Data Management (MDM4U) \textperiodcentered{} Unit 3: Discrete Probability Distributions}
+\end{center}
+
+\begin{ideabox}
+In a discrete \emph{uniform} distribution every outcome is equally likely: $P=\tfrac1n$. For consecutive integers the mean is the middle value, $\tfrac{\text{min}+\text{max}}{2}$.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Uniform: $P(x)=\tfrac1n$ for each of $n$ outcomes.
+  \item Mean of a uniform on consecutive integers $=\tfrac{\text{min}+\text{max}}{2}$.
+  \item Equal likelihood must be a valid assumption --- e.g. a dice \emph{sum} is not uniform.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Equally likely values}In a \textbf{uniform} distribution every value of $X$ is equally likely. With $n$ values, each has probability $\dfrac1n$, like a fair die at $\tfrac16$ per face.
+\lh{Its expected value}For the values $1$ through $n$, symmetry gives $E(X)=\dfrac{n+1}{2}$, the midpoint of the range.
+\lh{When to reach for it}Model with a uniform distribution only when outcomes are genuinely equally likely and no value is favoured.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- A die is uniform}
+State $P$ and $E(X)$ for a fair die.\soln $P=\tfrac16$ each; $E=3.5$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Uniform on 1--10}
+For a random integer $1$--$10$, find $E(X)$ and $P(X>7)$.\soln $E=\tfrac{1+10}{2}=5.5$; $P(X>7)=\tfrac{3}{10}$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Divisibility}
+A random integer $1$--$20$. Find $P(\text{divisible by }3)$.\soln Multiples of 3 up to 20: $6$ of them: $\tfrac{6}{20}=\tfrac{3}{10}$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Uniform over card ranks}
+Find $P(\text{a specific rank, e.g. a 7})$ for one card.\soln $\tfrac{4}{52}=\tfrac{1}{13}$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Not everything is uniform}
+Explain why the sum of two dice is not uniform.\soln Sums near 7 arise from more outcomes (six ways) than sums near 2 (one way), so the probabilities differ.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Spinner mean}
+A spinner is labelled $1$--$8$ equally. Find $E(X)$.\soln $\tfrac{1+8}{2}=4.5$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Selecting a person}
+Students are numbered $1$--$30$; one is chosen at random. Find $P(\text{number ends in }0)$.\soln $\{10,20,30\}$: $\tfrac{3}{30}=\tfrac{1}{10}$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Complement on a uniform}
+A random integer $1$--$50$. Find $P(\text{not a multiple of }5)$.\soln Multiples of 5: $10$; $1-\tfrac{10}{50}=\tfrac45$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Three parts}
+A random integer $1$--$12$. Find \\ \textbf{(a)} $P(\text{prime})$; \\ \textbf{(b)} $E(X)$; \\ \textbf{(c)} $P(X\ge9)$.\soln (a) primes $\{2,3,5,7,11\}$: $\tfrac{5}{12}$. (b) $6.5$. (c) $\{9,10,11,12\}$: $\tfrac{4}{12}=\tfrac13$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Find $E(X)$ for a fair die.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Random integer $1$--$10$. Find $P(X\le3)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Random integer $1$--$20$. Find $P(\text{even})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Random integer $1$--$100$. Find $P(\text{multiple of }10)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Find $E(X)$ for a uniform on $\{1,\dots,9\}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Random integer $1$--$15$. Find $P(\text{multiple of }3)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Is the sum of two dice uniform? Explain briefly.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+A spinner $1$--$8$ (equal). Find $P(X>5)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+One card. Find $P(\text{a specific rank})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Random integer $1$--$50$. Find $P(\text{not a multiple of }5)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Random integer $1$--$30$. Find $P(\text{ends in }0)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+A spinner labelled $0$--$9$ (equal). Find $E(X)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Random integer $1$--$12$. Find \\ \textbf{(a)} $P(\text{prime})$; \\ \textbf{(b)} $E(X)$; \\ \textbf{(c)} $P(X\ge9)$.\workspace{3cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Find $E(X)$ for a fair die.
+  \item Random integer $1$--$10$. Find $P(X\le3)$.
+  \item Random integer $1$--$20$. Find $P(\text{even})$.
+  \item Random integer $1$--$100$. Find $P(\text{multiple of }10)$.
+  \item Find $E(X)$ for a uniform on $\{1,\dots,9\}$.
+  \item Random integer $1$--$15$. Find $P(\text{multiple of }3)$.
+  \item Is the sum of two dice uniform? Explain briefly.
+  \item A spinner $1$--$8$ (equal). Find $P(X>5)$.
+  \item One card. Find $P(\text{a specific rank})$.
+  \item Random integer $1$--$50$. Find $P(\text{not a multiple of }5)$.
+  \item Random integer $1$--$30$. Find $P(\text{ends in }0)$.
+  \item A spinner labelled $0$--$9$ (equal). Find $E(X)$.
+  \item Random integer $1$--$12$. Find \\ \textbf{(a)} $P(\text{prime})$; \\ \textbf{(b)} $E(X)$; \\ \textbf{(c)} $P(X\ge9)$.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $3.5$
+  \item $\tfrac{3}{10}$
+  \item $\tfrac12$
+  \item $\tfrac{10}{100}=\tfrac{1}{10}$
+  \item $5$
+  \item $\tfrac{5}{15}=\tfrac13$
+  \item No --- middle sums have more outcomes
+  \item $\tfrac38$
+  \item $\tfrac{4}{52}=\tfrac{1}{13}$
+  \item $\tfrac45$
+  \item $\tfrac{3}{30}=\tfrac{1}{10}$
+  \item $4.5$
+  \item (a) $\tfrac{5}{12}$; (b) $6.5$; (c) $\tfrac13$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

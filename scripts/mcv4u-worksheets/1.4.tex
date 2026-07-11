@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MCV4U \textperiodcentered{} 1.4}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 1.4 --- The Derivative from First Principles}\\[2pt]
+{\small Grade 12 Calculus and Vectors (MCV4U) \textperiodcentered{} Unit 1: Rates of Change and Limits}
+\end{center}
+
+\begin{ideabox}
+$f'(x)=\displaystyle\lim_{h\to0}\dfrac{f(x+h)-f(x)}{h}$. Expand, simplify to cancel $h$, then let $h\to0$.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item $f'(x)=\displaystyle\lim_{h\to0}\dfrac{f(x+h)-f(x)}{h}$.
+  \item Combine fractions / rationalize so $h$ cancels.
+  \item Tangent line at $a$: $y-f(a)=f'(a)(x-a)$.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{The definition}The \textbf{derivative} is $f'(x)=\displaystyle\lim_{h\to0}\dfrac{f(x+h)-f(x)}{h}$ — the limit of the secant slope as the interval collapses to zero.
+\lh{What it measures}$f'(x)$ gives the instantaneous rate of change, equivalently the slope of the tangent line at $x$.
+\lh{First principles}Computing this limit directly is differentiating from \emph{first principles}, and it justifies the shortcut rules that follow.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Polynomial}
+Differentiate $f(x)=x^2$ from first principles.\soln $\dfrac{(x+h)^2-x^2}{h}=2x+h\to f'(x)=2x$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Polynomial}
+Differentiate $f(x)=3x^2-x$ from first principles.\soln Numerator $=6xh+3h^2-h$; divide by $h$ and let $h\to0$: $f'(x)=6x-1$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Reciprocal}
+Differentiate $f(x)=\dfrac1x$ from first principles.\soln $\dfrac{\frac1{x+h}-\frac1x}{h}=\dfrac{-1}{x(x+h)}\to f'(x)=-\dfrac1{x^2}$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Tangent line}
+Find the tangent to $y=x^2$ at $x=3$.\soln $f'(3)=6$, point $(3,9)$: $y=6x-9$:\eplot{-1}{5}{-2}{12}{\addplot[exblue,very thick,domain=-1.4:3.4]{x^2};\addplot[qorange,thick,domain=1.2:5]{6*x-9};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(3,9)};}
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Radical}
+Differentiate $f(x)=\sqrt{x}$ from first principles.\soln Rationalize: $\dfrac{1}{\sqrt{x+h}+\sqrt{x}}\to f'(x)=\dfrac1{2\sqrt{x}}$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Polynomial}
+Differentiate $f(x)=x^2+5x$ from first principles.\soln $\dfrac{(x+h)^2+5(x+h)-(x^2+5x)}{h}=2x+5+h\to 2x+5$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Polynomial}
+Differentiate $f(x)=2x^2$ from first principles.\soln $\dfrac{2(x+h)^2-2x^2}{h}=4x+2h\to4x$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Tangent line}
+Find the tangent to $y=x^2$ at $x=1$.\soln $f'(1)=2$, point $(1,1)$: $y=2x-1$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Linear}
+Differentiate $f(x)=5x-3$ from first principles.\soln $\dfrac{5(x+h)-3-(5x-3)}{h}=5\to f'(x)=5$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Differentiate $f(x)=x^2$ from first principles.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Differentiate $f(x)=x^2+5x$ from first principles.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Differentiate $f(x)=2x^2$ from first principles.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Find the tangent to $y=x^2$ at $x=1$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Differentiate $f(x)=5x-3$ from first principles.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Differentiate $f(x)=4x^2-x$ from first principles.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Differentiate $f(x)=\dfrac1x$ from first principles.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Find the tangent to $y=x^2$ at $x=2$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Differentiate $f(x)=x^2-3x$ from first principles.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Differentiate $f(x)=7$ from first principles.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Find the tangent to $y=x^2$ at $x=-1$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Differentiate $f(x)=3x^2$ from first principles.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Differentiate $f(x)=\sqrt{x}$ from first principles (rationalize).\workspace{3.5cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Differentiate $f(x)=x^2$ from first principles.
+  \item Differentiate $f(x)=x^2+5x$ from first principles.
+  \item Differentiate $f(x)=2x^2$ from first principles.
+  \item Find the tangent to $y=x^2$ at $x=1$.
+  \item Differentiate $f(x)=5x-3$ from first principles.
+  \item Differentiate $f(x)=4x^2-x$ from first principles.
+  \item Differentiate $f(x)=\dfrac1x$ from first principles.
+  \item Find the tangent to $y=x^2$ at $x=2$.
+  \item Differentiate $f(x)=x^2-3x$ from first principles.
+  \item Differentiate $f(x)=7$ from first principles.
+  \item Find the tangent to $y=x^2$ at $x=-1$.
+  \item Differentiate $f(x)=3x^2$ from first principles.
+  \item Differentiate $f(x)=\sqrt{x}$ from first principles (rationalize).
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $2x$
+  \item $2x+5$
+  \item $4x$
+  \item $y=2x-1$
+  \item $5$
+  \item $8x-1$
+  \item $-\tfrac1{x^2}$
+  \item $y=4x-4$
+  \item $2x-3$
+  \item $0$
+  \item $y=-2x-1$
+  \item $6x$
+  \item $\tfrac1{2\sqrt{x}}$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

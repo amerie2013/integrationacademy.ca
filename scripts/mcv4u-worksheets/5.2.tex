@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MCV4U \textperiodcentered{} 5.2}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 5.2 --- Related Rates}\\[2pt]
+{\small Grade 12 Calculus and Vectors (MCV4U) \textperiodcentered{} Unit 5: Applications of Derivatives}
+\end{center}
+
+\begin{ideabox}
+Write an equation relating the quantities, differentiate both sides with respect to $t$, then substitute the instant and solve for the unknown rate.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Identify known/unknown rates.
+  \item Relate the quantities; differentiate w.r.t. $t$ (chain rule).
+  \item Substitute the instant's values; solve.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Rates linked in time}In a \textbf{related rates} problem several quantities change together over time, and their rates are connected by an equation.
+\lh{Differentiate implicitly}Differentiate the relating equation with respect to time $t$, so each variable's rate appears through the chain rule.
+\lh{Substitute last}Plug in the known values only \emph{after} differentiating, then solve for the unknown rate.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Expanding circle}
+$\dfrac{dr}{dt}=2$ cm/s. Find $\dfrac{dA}{dt}$ at $r=5$.\soln $A=\pi r^2\Rightarrow\dfrac{dA}{dt}=2\pi r\dfrac{dr}{dt}=2\pi(5)(2)=20\pi\approx62.8$ cm²/s.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Sliding ladder}
+A 13 m ladder's base slides out at 2 m/s. Find the top's rate when the base is 5 m out.\soln $x^2+y^2=169$, $y=12$; $2xx'+2yy'=0\Rightarrow y'=-\dfrac{5(2)}{12}=-\dfrac56$ m/s.\rtri{5}{12}{$y$}{$x$}{$13$}
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Inflating balloon}
+$\dfrac{dV}{dt}=100$ cm³/s. Find $\dfrac{dr}{dt}$ at $r=5$.\soln $V=\tfrac43\pi r^3\Rightarrow\dfrac{dV}{dt}=4\pi r^2\dfrac{dr}{dt}$; $100=4\pi(25)\dfrac{dr}{dt}\Rightarrow\dfrac{dr}{dt}=\dfrac1\pi$ cm/s.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Growing square}
+A square's side grows at 3 cm/s. Find $\dfrac{dA}{dt}$ at $s=10$.\soln $A=s^2\Rightarrow 2s\dfrac{ds}{dt}=2(10)(3)=60$ cm²/s.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Two cars}
+Car A north at 60, car B east at 80 km/h from a point. Find the rate the distance grows after 1 h.\soln $D=100$; $2DD'=2aa'+2bb'\Rightarrow D'=\dfrac{60(60)+80(80)}{100}=100$ km/h.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Expanding circle}
+$\dfrac{dr}{dt}=3$ cm/s. Find $\dfrac{dA}{dt}$ at $r=4$.\soln $2\pi(4)(3)=24\pi$ cm²/s.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Growing square}
+Side grows at 2 cm/s. Find $\dfrac{dA}{dt}$ at $s=6$.\soln $2(6)(2)=24$ cm²/s.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Inflating balloon}
+$\dfrac{dV}{dt}=36\pi$ cm³/s. Find $\dfrac{dr}{dt}$ at $r=3$.\soln $36\pi=4\pi(9)\dfrac{dr}{dt}\Rightarrow\dfrac{dr}{dt}=1$ cm/s.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Sliding ladder}
+A 10 m ladder's base slides out at 1 m/s. Find the top's rate at base $=6$ m.\soln $y=8$; $y'=-\dfrac{6(1)}{8}=-\dfrac34$ m/s.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+A circle's radius grows at 5 cm/s. Find $\dfrac{dA}{dt}$ at $r=2$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+A square's side grows at 4 cm/s. Find $\dfrac{dA}{dt}$ at $s=5$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+A balloon fills at $\dfrac{dV}{dt}=48\pi$ cm³/s. Find $\dfrac{dr}{dt}$ at $r=2$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+A 25 m ladder's base slides out at 3 m/s. Find the top's rate at base $=7$ m.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+A circle's radius grows at 1 cm/s. Find $\dfrac{dA}{dt}$ at $r=10$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+What's the first step after writing the relating equation?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+A square's area grows; side grows at 2 cm/s. Find $\dfrac{dA}{dt}$ at $s=8$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+A balloon fills at $\dfrac{dV}{dt}=4\pi$ cm³/s. Find $\dfrac{dr}{dt}$ at $r=1$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Two cars: N at 30, E at 40 km/h. Rate the distance grows after 1 h?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+A 5 m ladder's base slides out at 1 m/s. Find the top's rate at base $=3$ m.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+What does a negative rate of change indicate?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+A circle's area grows at $20\pi$ cm²/s. Find $\dfrac{dr}{dt}$ at $r=5$ (use $\tfrac{dA}{dt}=2\pi r\tfrac{dr}{dt}$).\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Water fills a cylinder (radius 3) so the volume grows at $18\pi$ cm³/s. How fast is the height rising? ($V=\pi r^2 h$)\workspace{3cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item A circle's radius grows at 5 cm/s. Find $\dfrac{dA}{dt}$ at $r=2$.
+  \item A square's side grows at 4 cm/s. Find $\dfrac{dA}{dt}$ at $s=5$.
+  \item A balloon fills at $\dfrac{dV}{dt}=48\pi$ cm³/s. Find $\dfrac{dr}{dt}$ at $r=2$.
+  \item A 25 m ladder's base slides out at 3 m/s. Find the top's rate at base $=7$ m.
+  \item A circle's radius grows at 1 cm/s. Find $\dfrac{dA}{dt}$ at $r=10$.
+  \item What's the first step after writing the relating equation?
+  \item A square's area grows; side grows at 2 cm/s. Find $\dfrac{dA}{dt}$ at $s=8$.
+  \item A balloon fills at $\dfrac{dV}{dt}=4\pi$ cm³/s. Find $\dfrac{dr}{dt}$ at $r=1$.
+  \item Two cars: N at 30, E at 40 km/h. Rate the distance grows after 1 h?
+  \item A 5 m ladder's base slides out at 1 m/s. Find the top's rate at base $=3$ m.
+  \item What does a negative rate of change indicate?
+  \item A circle's area grows at $20\pi$ cm²/s. Find $\dfrac{dr}{dt}$ at $r=5$ (use $\tfrac{dA}{dt}=2\pi r\tfrac{dr}{dt}$).
+  \item Water fills a cylinder (radius 3) so the volume grows at $18\pi$ cm³/s. How fast is the height rising? ($V=\pi r^2 h$)
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $20\pi$ cm²/s
+  \item $40$ cm²/s
+  \item $48\pi=4\pi(4)\tfrac{dr}{dt}\Rightarrow3$ cm/s
+  \item $y=24$; $-\tfrac{7(3)}{24}=-\tfrac78$ m/s
+  \item $20\pi$ cm²/s
+  \item differentiate w.r.t. $t$
+  \item $32$ cm²/s
+  \item $4\pi=4\pi\tfrac{dr}{dt}\Rightarrow1$ cm/s
+  \item $D=50$; $\tfrac{30^2+40^2}{50}=50$ km/h
+  \item $y=4$; $-\tfrac{3(1)}{4}=-\tfrac34$ m/s
+  \item the quantity is decreasing
+  \item $20\pi=2\pi(5)\tfrac{dr}{dt}\Rightarrow2$ cm/s
+  \item $18\pi=9\pi\tfrac{dh}{dt}\Rightarrow\tfrac{dh}{dt}=2$ cm/s
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

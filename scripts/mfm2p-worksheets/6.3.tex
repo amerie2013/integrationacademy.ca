@@ -1,0 +1,176 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MFM2P \textperiodcentered{} 6.3}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 6.3 --- Factoring Simple Trinomials ($x^2+bx+c$)}\\[2pt]
+{\small Grade 10 Applied (MFM2P) \textperiodcentered{} Unit 6: Quadratic Expressions}
+\end{center}
+
+\begin{ideabox}
+To factor $x^2+bx+c$, find two numbers that \textbf{multiply to $c$} and \textbf{add to $b$}.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item List factor pairs of $c$; pick the pair that sums to $b$.
+  \item $c>0$: both numbers share $b$'s sign. $c<0$: the numbers have opposite signs.
+  \item Result: $x^2+bx+c=(x+m)(x+n)$ where $mn=c$, $m+n=b$.
+  \item Always remove a common factor first.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{The pattern}To factor $x^2+bx+c$, find two numbers that multiply to $c$ and add to $b$.
+\lh{Signs guide you}If $c>0$ the numbers share $b$'s sign; if $c<0$ they have opposite signs.
+\lh{Verify}Expand your answer to make sure the middle term returns.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Both positive}
+Factor $x^2+5x+6$.
+\soln $2$ and $3$ multiply to $6$, add to $5$: $(x+2)(x+3)$. The zeros are $x=-2,-3$.
+\plot{-5}{2}{-1}{7}{\addplot[exblue,very thick,domain=-4.2:0.7,samples=60]{x^2+5*x+6};\addplot[mark=*,only marks,black]coordinates{(-2,0)(-3,0)};}
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Larger product}
+Factor $x^2+7x+12$.
+\soln $3,4$: $(x+3)(x+4).$
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Both negative}
+Factor $x^2-5x+6$.
+\soln $-2,-3$: $(x-2)(x-3).$
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Opposite signs I}
+Factor $x^2+x-12$.
+\soln $4,-3$: $(x+4)(x-3).$
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Opposite signs II}
+Factor $x^2-2x-15$.
+\soln $-5,3$: $(x-5)(x+3).$
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Both negative again}
+Factor $x^2-9x+20$.
+\soln $-4,-5$: $(x-4)(x-5).$
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Negative constant}
+Factor $x^2+2x-8$.
+\soln $4,-2$: $(x+4)(x-2).$
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Remove a common factor first}
+Factor $2x^2+10x+12$.
+\soln $2(x^2+5x+6)=2(x+2)(x+3).$
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Bigger numbers (harder)}
+Factor $x^2-13x+36$.
+\soln $-4,-9$: $(x-4)(x-9).$
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Factor $x^2+6x+8$.\workspace{1.8cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Factor $x^2+8x+15$.\workspace{1.8cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Factor $x^2-7x+10$.\workspace{1.8cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Factor $x^2+2x-15$.\workspace{1.8cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Factor $x^2-x-6$.\workspace{1.8cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Factor $x^2-10x+24$.\workspace{1.8cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Factor $x^2+4x-21$.\workspace{1.8cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Factor $x^2-3x-18$.\workspace{1.8cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Factor $x^2+9x+20$.\workspace{1.8cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Factor $3x^2+12x+9$.\workspace{2.0cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Factor $x^2-11x+28$.\workspace{1.8cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Factor $x^2+5x-24$.\workspace{1.8cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Factor $x^2-14x+45$.\workspace{2.0cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Factor $x^2+6x+8$.
+  \item Factor $x^2+8x+15$.
+  \item Factor $x^2-7x+10$.
+  \item Factor $x^2+2x-15$.
+  \item Factor $x^2-x-6$.
+  \item Factor $x^2-10x+24$.
+  \item Factor $x^2+4x-21$.
+  \item Factor $x^2-3x-18$.
+  \item Factor $x^2+9x+20$.
+  \item Factor $3x^2+12x+9$.
+  \item Factor $x^2-11x+28$.
+  \item Factor $x^2+5x-24$.
+  \item Factor $x^2-14x+45$.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $(x+2)(x+4)$.
+  \item $(x+3)(x+5)$.
+  \item $(x-2)(x-5)$.
+  \item $(x+5)(x-3)$.
+  \item $(x-3)(x+2)$.
+  \item $(x-4)(x-6)$.
+  \item $(x+7)(x-3)$.
+  \item $(x-6)(x+3)$.
+  \item $(x+4)(x+5)$.
+  \item $3(x+1)(x+3)$.
+  \item $(x-4)(x-7)$.
+  \item $(x+8)(x-3)$.
+  \item $(x-5)(x-9)$.
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

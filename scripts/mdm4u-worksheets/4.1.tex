@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MDM4U \textperiodcentered{} 4.1}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 4.1 --- Continuous Random Variables}\\[2pt]
+{\small Grade 12 Mathematics of Data Management (MDM4U) \textperiodcentered{} Unit 4: Continuous \& Normal Distributions}
+\end{center}
+
+\begin{ideabox}
+A continuous random variable takes any value in an interval, so probability becomes \emph{area} under a density curve $f(x)$. The total area is $1$, and $P(X=a)=0$ for any single value.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Probability $=$ area under the density $f(x)$; total area $=1$.
+  \item $P(X=a)=0$; only intervals carry probability.
+  \item For a continuous uniform on $[a,b]$: $f=\tfrac{1}{b-a}$ and mean $\tfrac{a+b}{2}$.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{From discrete to continuous}A \textbf{continuous} random variable can take any value in an interval (height, time). A single exact value has probability $0$; probability is measured over \emph{ranges}.
+\lh{Area is probability}For a continuous variable, probability is the \textbf{area under} its density curve across an interval, and the total area under the curve is $1$.
+\lh{Why only ranges}With infinitely many possible values we ask for $P(a<X<b)$ rather than $P(X=a)$.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Uniform density (a rectangle)}
+$X$ is uniform on $[0,10]$. Find $P(X<3)$.\soln $f=\tfrac{1}{10}$; area of the rectangle: $3\cdot\tfrac{1}{10}=0.3$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Uniform interval}
+$X$ is uniform on $[2,6]$. Find $P(3<X<5)$.\soln $\dfrac{5-3}{6-2}=\dfrac24=0.5$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- A single value has probability 0}
+For a continuous $X$, explain $P(X=5)$.\soln A single point has zero width, so zero area: $P(X=5)=0$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- A ramp density}
+$f(x)=\tfrac{x}{2}$ on $[0,2]$ (area $=1$). Find $P(X<1)$.\soln Triangle with base $1$, height $f(1)=0.5$: $\tfrac12(1)(0.5)=0.25$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- A decreasing density}
+$f(x)=\tfrac{4-x}{8}$ on $[0,4]$. Find $P(X<2)$.\soln Trapezoid from $0$ to $2$: heights $0.5$ and $0.25$, so $\tfrac{0.5+0.25}{2}\cdot2=0.75$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Complement}
+$X$ is uniform on $[0,10]$. Find $P(X>7)$ and $P(X<7)$.\soln $P(X>7)=0.3$; $P(X<7)=0.7$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Median splits the area}
+Find the median of a uniform distribution on $[0,10]$.\soln The value with half the area on each side: $5$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Mean of a uniform}
+Find $E(X)$ for a uniform on $[2,6]$.\soln $\dfrac{2+6}{2}=4$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Waiting time (three parts)}
+A wait is uniform on $[0,20]$ minutes. Find \\ \textbf{(a)} $P(\text{wait}<5)$; \\ \textbf{(b)} $P(\text{wait}>15)$; \\ \textbf{(c)} $P(5<\text{wait}<15)$.\soln (a) $\tfrac{5}{20}=0.25$. (b) $\tfrac{5}{20}=0.25$. (c) $\tfrac{10}{20}=0.5$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+$X$ uniform on $[0,10]$. Find $P(X<4)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+$X$ uniform on $[0,10]$. Find $P(X>6)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+$X$ uniform on $[1,5]$. Find $P(2<X<4)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+For a continuous $X$, find $P(X=3)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+$X$ uniform on $[0,20]$. Find $P(X<5)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+$f(x)=\tfrac{x}{2}$ on $[0,2]$. Find $P(X<1)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Find $E(X)$ for a uniform on $[4,10]$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Find the median of a uniform on $[0,8]$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+$f(x)=\tfrac{4-x}{8}$ on $[0,4]$. Find $P(X<2)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+A bus wait is uniform on $[0,30]$ min. Find $P(\text{wait}>25)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+$X$ uniform on $[0,1]$. Find $P(0.2<X<0.5)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+What is the total area under any density curve $f(x)$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+A wait is uniform on $[0,20]$ min. Find \\ \textbf{(a)} $P(X<5)$; \\ \textbf{(b)} $P(X>15)$; \\ \textbf{(c)} $P(5<X<15)$.\workspace{3cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $X$ uniform on $[0,10]$. Find $P(X<4)$.
+  \item $X$ uniform on $[0,10]$. Find $P(X>6)$.
+  \item $X$ uniform on $[1,5]$. Find $P(2<X<4)$.
+  \item For a continuous $X$, find $P(X=3)$.
+  \item $X$ uniform on $[0,20]$. Find $P(X<5)$.
+  \item $f(x)=\tfrac{x}{2}$ on $[0,2]$. Find $P(X<1)$.
+  \item Find $E(X)$ for a uniform on $[4,10]$.
+  \item Find the median of a uniform on $[0,8]$.
+  \item $f(x)=\tfrac{4-x}{8}$ on $[0,4]$. Find $P(X<2)$.
+  \item A bus wait is uniform on $[0,30]$ min. Find $P(\text{wait}>25)$.
+  \item $X$ uniform on $[0,1]$. Find $P(0.2<X<0.5)$.
+  \item What is the total area under any density curve $f(x)$?
+  \item A wait is uniform on $[0,20]$ min. Find \\ \textbf{(a)} $P(X<5)$; \\ \textbf{(b)} $P(X>15)$; \\ \textbf{(c)} $P(5<X<15)$.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $0.4$
+  \item $0.4$
+  \item $\tfrac24=0.5$
+  \item $0$
+  \item $\tfrac{5}{20}=0.25$
+  \item $\tfrac12(1)(0.5)=0.25$
+  \item $7$
+  \item $4$
+  \item $0.75$
+  \item $\tfrac{5}{30}=\tfrac16$
+  \item $0.3$
+  \item $1$
+  \item (a) $0.25$; (b) $0.25$; (c) $0.5$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

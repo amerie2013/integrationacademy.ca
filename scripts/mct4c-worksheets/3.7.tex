@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MCT4C \textperiodcentered{} 3.7}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 3.7 --- Modelling with Sinusoidal Functions}\\[2pt]
+{\small Grade 12 Mathematics for College Technology (MCT4C) \textperiodcentered{} Unit 3: Trigonometric Functions}
+\end{center}
+
+\begin{ideabox}
+Turn repeating real data (tides, Ferris wheels, temperatures, daylight) into $y=a\sin\!\big(k(x-d)\big)+c$ or a cosine model: midline $c=\tfrac{\max+\min}{2}$, amplitude $a=\tfrac{\max-\min}{2}$, and $k=\tfrac{360^\circ}{\text{period}}$.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item $c=\tfrac{\max+\min}{2}$, $a=\tfrac{\max-\min}{2}$.
+  \item $k=\tfrac{360^\circ}{\text{period}}$ (time in the unit given).
+  \item Use $-\cos$ to start at a minimum, $+\cos$ to start at a maximum.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Turning cycles into equations}Repeating data — tides, wheels, temperatures — fits $y=a\sin\!\left(k(x-d)\right)+c$ with $c=\tfrac{\max+\min}{2}$ and $a=\tfrac{\max-\min}{2}$.
+\lh{Setting the period}Read $k$ from the cycle length: $k=\dfrac{360^\circ}{\text{period}}$, keeping time in the stated units.
+\lh{Choosing the start}Use $-\cos$ to begin at a minimum and $+\cos$ to begin at a maximum, matching the model to the situation.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Ferris wheel model}
+A wheel of radius $10$ m has its centre $12$ m up and one turn every $60$ s, starting at the bottom. Write $h(t)$.\soln $k=\tfrac{360}{60}=6$; starts at min: $h=12-10\cos(6t)$ ($t$ in s).
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Value from the model}
+Using the model, find the height at $t=15$ s.\soln $12-10\cos(90^\circ)=12$ m.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Max and min heights}
+Give the max and min heights of that wheel.\soln $22$ m and $2$ m.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Tide amplitude/midline}
+High tide $8$ m, low tide $2$ m. Find the amplitude and midline.\soln Amplitude $3$; midline $5$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Tide period}
+A tide cycle takes $12$ h. Find $k$ (degrees per hour).\soln $k=\tfrac{360}{12}=30$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Temperature model}
+Daily high $25^\circ$, low $5^\circ$. Amplitude and midline?\soln Amplitude $10$; midline $15$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Write a tide model}
+Tide: max $8$ m, min $2$ m, period $12$ h, starting at high tide. Write $h(t)$.\soln $h=5+3\cos(30t)$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Start-at-minimum model}
+A quantity ranges $2$ to $8$, period $4$ s, starting at the minimum. Write it.\soln Midline $5$, amp $3$, $k=90$: $y=5-3\cos(90t)$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Interpret}
+For $h=5+3\cos(30t)$, when is the first low tide?\soln $\cos(30t)=-1\Rightarrow 30t=180^\circ\Rightarrow t=6$ h.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+High tide $10$ m, low $4$ m — amplitude and midline?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+A wheel turns once every $40$ s — find $k$ (degrees/s).\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Ferris wheel radius $8$ m, centre $9$ m up — max and min heights?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Daily high $28^\circ$, low $12^\circ$ — amplitude and midline?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+A tide cycle is $10$ h — find $k$ (degrees/h).\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Write a Ferris-wheel model: radius $6$, centre $8$, period $30$ s, starting at bottom.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+For $h=12-10\cos(6t)$, find $h$ at $t=30$ s.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+A quantity ranges $1$ to $9$ — amplitude and midline?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Write a tide model: max $6$, min $2$, period $12$ h, starting at high tide.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+For $h=5+3\cos(30t)$, find $h$ at $t=0$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+A temperature model has midline $18$, amplitude $7$ — max and min?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+A wheel of radius $15$, centre $17$, starts at the bottom — lowest height?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+A tide has high $9$ m at $t=0$ and low $3$ m, period $12$ h. Write $h(t)$ and find the height at $t=3$ h.\workspace{3.4cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item High tide $10$ m, low $4$ m — amplitude and midline?
+  \item A wheel turns once every $40$ s — find $k$ (degrees/s).
+  \item Ferris wheel radius $8$ m, centre $9$ m up — max and min heights?
+  \item Daily high $28^\circ$, low $12^\circ$ — amplitude and midline?
+  \item A tide cycle is $10$ h — find $k$ (degrees/h).
+  \item Write a Ferris-wheel model: radius $6$, centre $8$, period $30$ s, starting at bottom.
+  \item For $h=12-10\cos(6t)$, find $h$ at $t=30$ s.
+  \item A quantity ranges $1$ to $9$ — amplitude and midline?
+  \item Write a tide model: max $6$, min $2$, period $12$ h, starting at high tide.
+  \item For $h=5+3\cos(30t)$, find $h$ at $t=0$.
+  \item A temperature model has midline $18$, amplitude $7$ — max and min?
+  \item A wheel of radius $15$, centre $17$, starts at the bottom — lowest height?
+  \item A tide has high $9$ m at $t=0$ and low $3$ m, period $12$ h. Write $h(t)$ and find the height at $t=3$ h.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item amp $3$, midline $7$
+  \item $9$
+  \item max $17$, min $1$
+  \item amp $8$, midline $20$
+  \item $36$
+  \item $h=8-6\cos(12t)$
+  \item $12-10\cos(180^\circ)=22$ m
+  \item amp $4$, midline $5$
+  \item $h=4+2\cos(30t)$
+  \item $5+3=8$ m
+  \item max $25$, min $11$
+  \item $2$ m
+  \item $h=6+3\cos(30t)$; at $t=3$: $6+3\cos(90^\circ)=6$ m
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

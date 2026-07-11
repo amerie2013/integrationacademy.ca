@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MDM4U \textperiodcentered{} 5.2}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 5.2 --- Measures of Central Tendency}\\[2pt]
+{\small Grade 12 Mathematics of Data Management (MDM4U) \textperiodcentered{} Unit 5: One-Variable Statistics}
+\end{center}
+
+\begin{ideabox}
+The \emph{mean} (sum$/n$), \emph{median} (middle value), and \emph{mode} (most frequent) each summarize the centre. Outliers and skew pull the mean away from the median.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Mean $=\dfrac{\sum x}{n}$; weighted mean $=\dfrac{\sum w x}{\sum w}$.
+  \item Median $=$ middle (average the two middle values if $n$ is even).
+  \item Outliers/skew move the mean more than the median; report the median for skewed data.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Three centres}The \textbf{mean} is the average, the \textbf{median} is the middle value in order, and the \textbf{mode} is the most frequent value. Each captures a different sense of \emph{typical}.
+\lh{Mean versus median}The mean uses every value but is pulled by \textbf{outliers}; the median resists them. For skewed data such as incomes, the median is often the fairer summary.
+\lh{Grouped data}For data given in intervals, estimate the mean using the midpoint of each interval weighted by its frequency.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Mean, median, mode}
+Find all three for $\{3,7,7,9,14\}$.\soln Mean $=\tfrac{40}{5}=8$; median $=7$; mode $=7$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Median of an even set}
+Find the median of $\{2,5,8,11\}$.\soln Average the two middle: $\tfrac{5+8}{2}=6.5$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Weighted mean}
+A mark is $70,80,90$ weighted $20\%,30\%,50\%$. Find the weighted mean.\soln $0.2(70)+0.3(80)+0.5(90)=14+24+45=83$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Effect of an outlier}
+Compare mean and median of $\{5,6,7,8,100\}$.\soln Mean $=\tfrac{126}{5}=25.2$; median $=7$. The outlier inflates the mean --- report the median.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Grouped-data mean}
+For $x=1,2,3$ with frequencies $4,6,10$, find the mean.\soln $\dfrac{4(1)+6(2)+10(3)}{20}=\dfrac{46}{20}=2.3$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Find a missing value}
+Four numbers have mean $12$; three are $8,10,15$. Find the fourth.\soln Sum $=48$; fourth $=48-33=15$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Choosing the right measure}
+Incomes are strongly right-skewed. Which measure best describes a typical income?\soln The median --- it resists the few very high incomes.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Mode for categories}
+Shoe sizes sold: $7,8,8,9,8,10$. Which measure applies?\soln The mode ($8$) --- the most frequently sold size.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- All three (multi-part)}
+For $\{4,8,8,10,15,15,15,20\}$ find \\ \textbf{(a)} mean; \\ \textbf{(b)} median; \\ \textbf{(c)} mode.\soln (a) $\tfrac{95}{8}=11.875$. (b) $\tfrac{10+15}{2}=12.5$. (c) $15$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Find the mean of $\{3,7,7,9,14\}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Find the median of $\{3,7,7,9,14\}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Find the mode of $\{3,7,7,9,14\}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Find the median of $\{2,5,8,11\}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Marks $70,80,90$ have weights $20\%,30\%,50\%$. Find the weighted mean.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+For $\{5,6,7,8,100\}$, find the mean and median; which is more representative?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+For $x=1,2,3$ with frequencies $4,6,10$, find the mean.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Four numbers have mean $12$; three are $8,10,15$. Find the fourth.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Which measure describes the most common shoe size sold?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Find the median of $\{12,15,18,20,22,25\}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Add the outlier $200$ to $\{2,4,6\}$. Find the new mean.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Find the mean of $\{10,20,30,40,50\}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+For $\{4,8,8,10,15,15,15,20\}$ find \\ \textbf{(a)} mean; \\ \textbf{(b)} median; \\ \textbf{(c)} mode; \\ \textbf{(d)} which best describes the centre?\workspace{3cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Find the mean of $\{3,7,7,9,14\}$.
+  \item Find the median of $\{3,7,7,9,14\}$.
+  \item Find the mode of $\{3,7,7,9,14\}$.
+  \item Find the median of $\{2,5,8,11\}$.
+  \item Marks $70,80,90$ have weights $20\%,30\%,50\%$. Find the weighted mean.
+  \item For $\{5,6,7,8,100\}$, find the mean and median; which is more representative?
+  \item For $x=1,2,3$ with frequencies $4,6,10$, find the mean.
+  \item Four numbers have mean $12$; three are $8,10,15$. Find the fourth.
+  \item Which measure describes the most common shoe size sold?
+  \item Find the median of $\{12,15,18,20,22,25\}$.
+  \item Add the outlier $200$ to $\{2,4,6\}$. Find the new mean.
+  \item Find the mean of $\{10,20,30,40,50\}$.
+  \item For $\{4,8,8,10,15,15,15,20\}$ find \\ \textbf{(a)} mean; \\ \textbf{(b)} median; \\ \textbf{(c)} mode; \\ \textbf{(d)} which best describes the centre?
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $\tfrac{40}{5}=8$
+  \item $7$
+  \item $7$
+  \item $6.5$
+  \item $83$
+  \item mean $=25.2$, median $=7$; median
+  \item $\tfrac{46}{20}=2.3$
+  \item $15$
+  \item mode
+  \item $19$
+  \item $\tfrac{212}{4}=53$
+  \item $30$
+  \item (a) $11.875$; (b) $12.5$; (c) $15$; (d) median
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

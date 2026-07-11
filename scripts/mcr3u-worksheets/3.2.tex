@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MCR3U \textperiodcentered{} 3.2}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 3.2 --- Exponential Functions \& Their Graphs}\\[2pt]
+{\small Grade 11 Functions, University (MCR3U) \textperiodcentered{} Unit 3: Exponential Functions}
+\end{center}
+
+\begin{ideabox}
+Exponential functions $y=a\,b^{x}$ grow or decay depending on the base.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Growth if $b>1$; decay if $0<b<1$.
+  \item $y$-intercept is $a$; horizontal asymptote $y=0$.
+  \item Domain: all real numbers; range: $y>0$ (for $a>0$).
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{The shape}An \textbf{exponential function} $y=a\,b^x$ multiplies by $b$ each unit step; it has $y$-intercept $(0,a)$ and a horizontal asymptote at $y=0$.
+\lh{Growth vs decay}If $b>1$ the function grows; if $0<b<1$ it decays. The base controls how fast the curve rises or falls.
+\lh{Key behaviour}The graph never touches the $x$-axis, and for $a>0$ its range is $y>0$ — a hallmark of exponential behaviour.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Growth or decay}
+Classify $y=2\cdot3^{x}$.\soln The base $b=3>1$, so it is growth — the curve rises steeply (shape of $3^x$):\eplot{-3}{3}{-1}{9}{\addplot[exblue,very thick,domain=-3:2]{3^x};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(0,1)};}
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Decay}
+Classify $y=(0.5)^{x}$.\soln The base is between 0 and 1, so it is decay — the curve falls toward $y=0$:\eplot{-3}{3}{-1}{9}{\addplot[exblue,very thick,domain=-3:3]{0.5^x};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(0,1)};}
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- y-intercept}
+Find the $y$-intercept of $y=5\cdot2^{x}$.\soln At $x=0$, $2^0=1$, so $y=5$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Evaluate}
+Evaluate $y=2^{x}$ at $x=4$.\soln $2^4=16$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Negative input}
+Evaluate $y=3^{x}$ at $x=-2$.\soln $3^{-2}=\dfrac{1}{9}$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Domain}
+State the domain of $y=2^{x}$.\soln Any $x$ works: all real numbers.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Range}
+State the range of $y=2^{x}$.\soln Outputs stay positive: $y>0$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Compare}
+Which decays: $y=0.7^{x}$ or $y=4^{x}$?\soln $y=0.7^{x}$, because its base is $<1$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Write an equation}
+Write the exponential through $(0,3)$ with base $2$.\soln The $y$-intercept is $a=3$: $y=3\cdot2^{x}$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Growth or decay: $y=7^{x}$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Growth or decay: $y=(2/5)^{x}$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Find the $y$-intercept of $y=8\cdot3^{x}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Evaluate $2^{x}$ at $x=7$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Evaluate $5^{x}$ at $x=-1$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+State the asymptote of $y=2^{x}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+State the range of $y=4\cdot2^{x}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+State the domain of $y=10^{x}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Write an exponential through $(0,6)$ with base $3$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Which is larger at $x=3$: $2^{x}$ or $3^{x}$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Evaluate $(1/2)^{x}$ at $x=3$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Find the $y$-intercept of $y=2\cdot5^{x}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+For $y=a\cdot2^{x}$ through $(0,5)$, find $a$ and then $y$ at $x=1$.\workspace{3cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Growth or decay: $y=7^{x}$?
+  \item Growth or decay: $y=(2/5)^{x}$?
+  \item Find the $y$-intercept of $y=8\cdot3^{x}$.
+  \item Evaluate $2^{x}$ at $x=7$.
+  \item Evaluate $5^{x}$ at $x=-1$.
+  \item State the asymptote of $y=2^{x}$.
+  \item State the range of $y=4\cdot2^{x}$.
+  \item State the domain of $y=10^{x}$.
+  \item Write an exponential through $(0,6)$ with base $3$.
+  \item Which is larger at $x=3$: $2^{x}$ or $3^{x}$?
+  \item Evaluate $(1/2)^{x}$ at $x=3$.
+  \item Find the $y$-intercept of $y=2\cdot5^{x}$.
+  \item For $y=a\cdot2^{x}$ through $(0,5)$, find $a$ and then $y$ at $x=1$.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item growth
+  \item decay
+  \item $8$
+  \item $128$
+  \item $\dfrac{1}{5}$
+  \item $y=0$
+  \item $y>0$
+  \item all real numbers
+  \item $y=6\cdot3^{x}$
+  \item $3^{x}$ (27 vs 8)
+  \item $\dfrac{1}{8}$
+  \item $2$
+  \item $a=5$, $y=10$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

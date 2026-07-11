@@ -1,0 +1,168 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MFM2P \textperiodcentered{} 2.5}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 2.5 --- Writing Equations of Lines}\\[2pt]
+{\small Grade 10 Applied (MFM2P) \textperiodcentered{} Unit 2: Linear Relations}
+\end{center}
+
+\begin{ideabox}
+From a slope and a point, two points, or a graph, write $y=mx+b$.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item From slope + point: substitute into $y=mx+b$ to find $b$.
+  \item From two points: find the slope first, then $b$.
+  \item If the point is on the $y$-axis, its $y$ is $b$.
+  \item Check: both given points should satisfy your equation.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{From a graph or table}Read the $y$-intercept where the line crosses the axis and the slope between two clear points, then write $y=mx+b$.
+\lh{From slope and a point}Substitute the slope and a known point into $y=mx+b$ and solve for $b$.
+\lh{From two points}Find the slope with rise over run first, then use either point to find $b$.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Slope + intercept point}
+Slope $4$ through $(0,-2)$.\soln $b=-2$: $y=4x-2$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Slope + point}
+Slope $-2$ through $(3,1)$.\soln $1=-2(3)+b\Rightarrow b=7$: $y=-2x+7$.
+\plot{-1}{6}{-3}{8}{\addplot[exblue,very thick,domain=-0.5:5.5,samples=2]{-2*x+7};\addplot[mark=*,only marks,black]coordinates{(3,1)};}
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Two points}
+Through $(1,2)$ and $(3,8)$.\soln $m=3$; $2=3+b\Rightarrow b=-1$: $y=3x-1$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- From a graph}
+A line crosses $(0,4)$ and falls $1$ per $2$ across.\soln $m=-\tfrac12$, $b=4$: $y=-\tfrac12x+4$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Context model}
+A candle is $20$ cm and burns $3$ cm/h. Write $h$ vs $t$.\soln $h=-3t+20$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Two points (negative slope)}
+Through $(-1,2)$ and $(2,-7)$.\soln $m=\dfrac{-7-2}{2-(-1)}=-3$; $2=-3(-1)+b\Rightarrow b=-1$: $y=-3x-1$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Horizontal}
+Through $(1,4)$ and $(3,4)$.\soln Slope $0$: $y=4$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Slope + point (fraction)}
+Slope $\tfrac23$ through $(3,0)$.\soln $0=\tfrac23(3)+b\Rightarrow b=-2$: $y=\tfrac23x-2$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Two points (harder)}
+Through $(2,5)$ and $(6,13)$.\soln $m=2$; $5=2(2)+b\Rightarrow b=1$: $y=2x+1$.
+\plot{-1}{7}{-1}{14}{\addplot[exblue,very thick,domain=-0.5:6.3,samples=2]{2*x+1};\addplot[mark=*,only marks,black]coordinates{(2,5)(6,13)};}
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Slope $3$ through $(0,5)$.\workspace{1.8cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Slope $-1$ through $(2,3)$.\workspace{2.0cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Through $(0,1)$ and $(2,7)$.\workspace{2.0cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Through $(1,4)$ and $(3,4)$.\workspace{2.0cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Slope $\tfrac12$ through $(4,1)$.\workspace{2.0cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Through $(-2,1)$ and $(2,9)$.\workspace{2.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Slope $-3$ through $(0,-2)$.\workspace{1.8cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Through $(1,-1)$ and $(4,8)$.\workspace{2.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+A tank starts at $50$ L and drains $5$ L/min. Write $V$ vs $t$.\workspace{2.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Slope $2$ through $(-1,-3)$.\workspace{2.0cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Through $(0,-2)$ and $(5,8)$.\workspace{2.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+A candle is $24$ cm, burns $4$ cm/h. Write $h$ vs $t$.\workspace{2.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Through $(-1,2)$ and $(2,-7)$.\workspace{2.4cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Slope $3$ through $(0,5)$.
+  \item Slope $-1$ through $(2,3)$.
+  \item Through $(0,1)$ and $(2,7)$.
+  \item Through $(1,4)$ and $(3,4)$.
+  \item Slope $\tfrac12$ through $(4,1)$.
+  \item Through $(-2,1)$ and $(2,9)$.
+  \item Slope $-3$ through $(0,-2)$.
+  \item Through $(1,-1)$ and $(4,8)$.
+  \item A tank starts at $50$ L and drains $5$ L/min. Write $V$ vs $t$.
+  \item Slope $2$ through $(-1,-3)$.
+  \item Through $(0,-2)$ and $(5,8)$.
+  \item A candle is $24$ cm, burns $4$ cm/h. Write $h$ vs $t$.
+  \item Through $(-1,2)$ and $(2,-7)$.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $y=3x+5$.
+  \item $y=-x+5$.
+  \item $y=3x+1$.
+  \item $y=4$.
+  \item $y=\tfrac12x-1$.
+  \item $m=2$: $y=2x+5$.
+  \item $y=-3x-2$.
+  \item $m=3$: $y=3x-4$.
+  \item $V=-5t+50$.
+  \item $y=2x-1$.
+  \item $m=2$: $y=2x-2$.
+  \item $h=-4t+24$.
+  \item $y=-3x-1$.
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

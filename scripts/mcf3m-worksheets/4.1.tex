@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MCF3M \textperiodcentered{} 4.1}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 4.1 --- Simple \& Compound Interest}\\[2pt]
+{\small Grade 11 Functions \& Applications (MCF3M) \textperiodcentered{} Unit 4: Financial Mathematics}
+\end{center}
+
+\begin{ideabox}
+Simple interest $I=Prt$ grows linearly; compound interest $A=P(1+i)^n$ grows exponentially.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Simple: $I=Prt$, $A=P(1+rt)$.
+  \item Compound: $A=P(1+i)^n$.
+  \item $i=\dfrac{r}{\text{periods/yr}}$ and $n=(\text{periods/yr})\times\text{years}$.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Simple interest}\textbf{Simple interest} is earned only on the principal: $I=Prt$, growing the balance in a straight line.
+\lh{Compound interest}\textbf{Compound interest} earns interest on previous interest too, following $A=P(1+i)^n$ and curving upward.
+\lh{Comparing}Over time compound interest overtakes simple interest, because its base keeps growing.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Simple interest}
+Interest on \$500 at $4\%$ for 3 years.\soln $I=Prt=500(0.04)(3)=\$60$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Compound (annual)}
+\$1000 at $5\%$ compounded annually for 3 years.\soln $A=1000(1.05)^3=1000(1.157625)\approx\$1157.63$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Quarterly}
+\$1000 at $6\%$ compounded quarterly for 1 year.\soln $i=\dfrac{0.06}{4}=0.015$, $n=4$. \\ $A=1000(1.015)^4\approx\$1061.36$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Simple vs compound}
+Compare \$1000 at $5\%$ for 5 years, simple vs compound.\soln Simple: $1000(1+0.25)=\$1250$. \\ Compound: $1000(1.05)^5\approx\$1276.28$ — compound earns more. The growth factor of \$1 (line = simple, curve = compound):\eplot{0}{20}{0}{4}{\addplot[qorange,very thick,domain=0:20]{1+0.05*x};\addplot[exblue,very thick,domain=0:20]{1.05^x};}
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Periodic rate}
+Find $i$ for $6\%$ compounded monthly.\soln $i=\dfrac{0.06}{12}=0.005$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Simple amount}
+Amount: \$1000 at $5\%$ simple for 4 years.\soln $A=P(1+rt)=1000(1+0.20)=\$1200$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Compound (annual)}
+\$1000 at $5\%$ compounded annually for 4 years.\soln $1000(1.05)^4\approx\$1215.51$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Semi-annual}
+\$2000 at $4\%$ compounded semi-annually for 1 year.\soln $i=0.02$, $n=2$: $2000(1.02)^2\approx\$2080.80$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Number of periods}
+Find $n$ for $6\%$ compounded monthly over 2 years.\soln $n=12\times2=24$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Simple interest on \$1000 at $5\%$ for 4 years?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+\$1000 at $5\%$ compounded annually for 4 years?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Simple interest on \$600 at $3\%$ for 2 years?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Find $i$ for $8\%$ compounded quarterly.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Find $n$ for $4\%$ compounded semi-annually over 3 years.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+\$500 at $4\%$ compounded annually for 3 years?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Simple amount: \$800 at $5\%$ for 2 years?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Find $i$ for $12\%$ compounded monthly.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+\$2000 at $5\%$ compounded annually for 2 years?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Simple interest on \$1500 at $6\%$ for 2 years?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+How many compounding periods per year is "monthly"?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+\$1000 at $10\%$ compounded annually for 2 years?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Compare \$5000 at $5\%$ simple vs compound (annual) over 8 years.\workspace{3.5cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Simple interest on \$1000 at $5\%$ for 4 years?
+  \item \$1000 at $5\%$ compounded annually for 4 years?
+  \item Simple interest on \$600 at $3\%$ for 2 years?
+  \item Find $i$ for $8\%$ compounded quarterly.
+  \item Find $n$ for $4\%$ compounded semi-annually over 3 years.
+  \item \$500 at $4\%$ compounded annually for 3 years?
+  \item Simple amount: \$800 at $5\%$ for 2 years?
+  \item Find $i$ for $12\%$ compounded monthly.
+  \item \$2000 at $5\%$ compounded annually for 2 years?
+  \item Simple interest on \$1500 at $6\%$ for 2 years?
+  \item How many compounding periods per year is "monthly"?
+  \item \$1000 at $10\%$ compounded annually for 2 years?
+  \item Compare \$5000 at $5\%$ simple vs compound (annual) over 8 years.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $\$200$
+  \item $\approx\$1215.51$
+  \item $\$36$
+  \item $0.02$
+  \item $6$
+  \item $\approx\$562.43$
+  \item $\$880$
+  \item $0.01$
+  \item $\$2205$
+  \item $\$180$
+  \item $12$
+  \item $\$1210$
+  \item simple $\$7000$; compound $\approx\$7387.28$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

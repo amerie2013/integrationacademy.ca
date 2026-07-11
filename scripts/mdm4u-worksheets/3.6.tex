@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MDM4U \textperiodcentered{} 3.6}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 3.6 --- The Hypergeometric Distribution}\\[2pt]
+{\small Grade 12 Mathematics of Data Management (MDM4U) \textperiodcentered{} Unit 3: Discrete Probability Distributions}
+\end{center}
+
+\begin{ideabox}
+When sampling \emph{without} replacement, $P(X=k)=\dfrac{\dbinom{a}{k}\dbinom{n-a}{r-k}}{\dbinom{n}{r}}$, with mean $E(X)=r\cdot\tfrac{a}{n}$. Replacement is the only difference from the binomial.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item $P(X=k)=\dfrac{\binom{a}{k}\binom{n-a}{r-k}}{\binom{n}{r}}$ (choose successes $\times$ non-successes).
+  \item Mean $E(X)=r\cdot\tfrac{a}{n}$.
+  \item Binomial (with replacement / large population) vs. hypergeometric (small population, without replacement).
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Drawing without replacement}The \textbf{hypergeometric} distribution counts successes in a sample drawn \emph{without replacement} from a finite group, so the trials are \textbf{not} independent.
+\lh{The formula}With $a$ successes among $n$ items and a sample of $r$: $P(X=k)=\dfrac{\binom{a}{k}\binom{n-a}{r-k}}{\binom{n}{r}}$ — choose the successes and the non-successes, over all possible samples.
+\lh{Binomial or hypergeometric?}Use the binomial for \emph{with replacement} (independent) trials and the hypergeometric for \emph{without replacement} draws from a small population.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Exactly $k$ of a type}
+10 items, 4 defective; draw 3. Find $P(\text{exactly 1 defective})$.\soln $\dfrac{\dbinom{4}{1}\dbinom{6}{2}}{\dbinom{10}{3}}=\dfrac{4\cdot15}{120}=\dfrac12$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Expected number}
+For that draw, find the expected number of defectives.\soln $E=3\cdot\tfrac{4}{10}=1.2$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Card hand}
+Find $P(\text{exactly 2 aces in a 5-card hand})$.\soln $\dfrac{\dbinom{4}{2}\dbinom{48}{3}}{\dbinom{52}{5}}$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Lottery match}
+In 6/49, find $P(\text{match exactly 4})$.\soln $\dfrac{\dbinom{6}{4}\dbinom{43}{2}}{\dbinom{49}{6}}$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- All of one type}
+Draw 3 from 5 red and 5 blue. Find $P(\text{all red})$.\soln $\dfrac{\dbinom{5}{3}}{\dbinom{10}{3}}=\dfrac{10}{120}=\dfrac{1}{12}$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- At least one (complement)}
+Draw 4 from 20 items with 3 defective. Find $P(\text{at least one defective})$.\soln $1-\dfrac{\dbinom{17}{4}}{\dbinom{20}{4}}\approx0.509$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Committee}
+12 people, 5 women; choose 4. Find $P(\text{exactly 2 women})$.\soln $\dfrac{\dbinom{5}{2}\dbinom{7}{2}}{\dbinom{12}{4}}=\dfrac{10\cdot21}{495}=\dfrac{14}{33}$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Binomial vs. hypergeometric}
+Why is drawing 5 cards hypergeometric, but 5 die-rolls binomial?\soln Cards are drawn \emph{without} replacement (the pool shrinks); die rolls are independent with a constant $p$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Three parts}
+A box has 6 good and 4 bad bulbs; draw 3. Find \\ \textbf{(a)} $P(\text{all good})$; \\ \textbf{(b)} $P(\text{exactly 1 bad})$; \\ \textbf{(c)} $E(\text{bad})$.\soln (a) $\dfrac{\dbinom{6}{3}}{\dbinom{10}{3}}=\dfrac{20}{120}=\dfrac16$. (b) $\dfrac{\dbinom{4}{1}\dbinom{6}{2}}{120}=\dfrac{60}{120}=\dfrac12$. (c) $3\cdot\tfrac{4}{10}=1.2$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+8 items, 3 defective; draw 2. Find $P(\text{exactly 1 defective})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+For that draw, find the expected number of defectives.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Find $P(\text{exactly 2 kings in a 5-card hand})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Draw 3 from 6 red and 4 green. Find $P(\text{all red})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+In 6/49, find $P(\text{match exactly 5})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+12 people, 5 women; choose 4. Find $P(\text{exactly 2 women})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+A box has 7 good and 3 bad; draw 3. Find $P(\text{no bad})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+For that box, find $P(\text{at least one bad})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+20 items, 4 defective; draw 5. Find $E(\text{defective})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Draw 4 from 5 red and 5 blue. Find $P(\text{2 red and 2 blue})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Find $P(\text{exactly 3 hearts in a 5-card hand})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Find $P(\text{a 5-card hand has all four aces})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+A box has 6 good and 4 bad bulbs; draw 3. Find \\ \textbf{(a)} $P(\text{all good})$; \\ \textbf{(b)} $P(\text{exactly 1 bad})$; \\ \textbf{(c)} $E(\text{bad})$.\workspace{3.4cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item 8 items, 3 defective; draw 2. Find $P(\text{exactly 1 defective})$.
+  \item For that draw, find the expected number of defectives.
+  \item Find $P(\text{exactly 2 kings in a 5-card hand})$.
+  \item Draw 3 from 6 red and 4 green. Find $P(\text{all red})$.
+  \item In 6/49, find $P(\text{match exactly 5})$.
+  \item 12 people, 5 women; choose 4. Find $P(\text{exactly 2 women})$.
+  \item A box has 7 good and 3 bad; draw 3. Find $P(\text{no bad})$.
+  \item For that box, find $P(\text{at least one bad})$.
+  \item 20 items, 4 defective; draw 5. Find $E(\text{defective})$.
+  \item Draw 4 from 5 red and 5 blue. Find $P(\text{2 red and 2 blue})$.
+  \item Find $P(\text{exactly 3 hearts in a 5-card hand})$.
+  \item Find $P(\text{a 5-card hand has all four aces})$.
+  \item A box has 6 good and 4 bad bulbs; draw 3. Find \\ \textbf{(a)} $P(\text{all good})$; \\ \textbf{(b)} $P(\text{exactly 1 bad})$; \\ \textbf{(c)} $E(\text{bad})$.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $\dfrac{\binom{3}{1}\binom{5}{1}}{\binom{8}{2}}=\tfrac{15}{28}$
+  \item $2\cdot\tfrac{3}{8}=0.75$
+  \item $\dfrac{\binom{4}{2}\binom{48}{3}}{\binom{52}{5}}$
+  \item $\dfrac{\binom{6}{3}}{\binom{10}{3}}=\tfrac{20}{120}=\tfrac16$
+  \item $\dfrac{\binom{6}{5}\binom{43}{1}}{\binom{49}{6}}$
+  \item $\dfrac{\binom{5}{2}\binom{7}{2}}{\binom{12}{4}}=\tfrac{14}{33}$
+  \item $\dfrac{\binom{7}{3}}{\binom{10}{3}}=\tfrac{35}{120}=\tfrac{7}{24}$
+  \item $1-\tfrac{7}{24}=\tfrac{17}{24}$
+  \item $5\cdot\tfrac{4}{20}=1$
+  \item $\dfrac{\binom{5}{2}\binom{5}{2}}{\binom{10}{4}}=\tfrac{100}{210}=\tfrac{10}{21}$
+  \item $\dfrac{\binom{13}{3}\binom{39}{2}}{\binom{52}{5}}$
+  \item $\dfrac{\binom{4}{4}\binom{48}{1}}{\binom{52}{5}}=\tfrac{48}{2\,598\,960}$
+  \item (a) $\tfrac16$; (b) $\tfrac12$; (c) $1.2$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MCR3U \textperiodcentered{} 7.3}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 7.3 --- Present Value}\\[2pt]
+{\small Grade 11 Functions, University (MCR3U) \textperiodcentered{} Unit 7: Financial Applications}
+\end{center}
+
+\begin{ideabox}
+Present value discounts a future amount to today: $PV=\dfrac{A}{(1+i)^{n}}$.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item $PV=\dfrac{A}{(1+i)^{n}}$ — compound interest solved for the principal.
+  \item A higher rate gives a smaller present value.
+  \item Compare options in today's dollars.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Value today}\textbf{Present value} answers how much must be invested now to reach a target amount later — it reverses compound interest.
+\lh{The formula}$PV=\dfrac{A}{(1+i)^n}$ discounts a future amount back to today using the rate per period.
+\lh{Why it matters}Present value puts money available at different times on equal footing — essential for comparing loans and investments.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Discount}
+Present value of $\$1000$ in $5$ years at $6\%$.\soln $PV=\dfrac{1000}{(1.06)^{5}}=\dfrac{1000}{1.338226}\approx\$747.26$. The discount factor $(1.06)^{-n}$ shrinks over time:\eplot{0}{20}{0}{2}{\addplot[exblue,very thick,domain=0:20]{1.06^(-x)};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(0,1)};}
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Lower rate}
+Present value of $\$5000$ in $3$ years at $4\%$.\soln $\dfrac{5000}{(1.04)^{3}}\approx\$4445.00$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Invest now}
+How much now to have $\$2000$ in $4$ years at $5\%$?\soln $\dfrac{2000}{(1.05)^{4}}\approx\$1645.40$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Goal saving}
+To have $\$10000$ in $6$ years at $5\%$.\soln $\dfrac{10000}{(1.05)^{6}}\approx\$7462.15$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Compare}
+$\$1000$ now or $\$1100$ in $2$ years at $6\%$?\soln $PV=\dfrac{1100}{(1.06)^{2}}\approx\$978.99<\$1000$, so $\$1000$ now is worth more.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Present value}
+Present value of $\$2000$ in $3$ years at $5\%$.\soln $\dfrac{2000}{(1.05)^{3}}\approx\$1727.68$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Present value}
+Present value of $\$5000$ in $5$ years at $6\%$.\soln $\dfrac{5000}{(1.06)^{5}}\approx\$3736.29$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Invest now}
+How much now for $\$3000$ in $4$ years at $4\%$?\soln $\dfrac{3000}{(1.04)^{4}}\approx\$2564.39$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Long term}
+Present value of $\$1000$ in $10$ years at $7\%$.\soln $\dfrac{1000}{(1.07)^{10}}\approx\$508.35$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Present value of $\$2000$ in $3$ years at $5\%$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Present value of $\$5000$ in $5$ years at $6\%$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+How much now to have $\$3000$ in $4$ years at $4\%$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Present value of $\$1000$ in $10$ years at $7\%$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+$\$500$ now or $\$600$ in $3$ years at $5\%$ — which is worth more today?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Present value of $\$1000$ in $5$ years at $6\%$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Present value of $\$4000$ in $2$ years at $5\%$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+How much now to have $\$10000$ in $6$ years at $5\%$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Present value of $\$1500$ in $3$ years at $4\%$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Present value of $\$2000$ in $8$ years at $6\%$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+How much now to have $\$5000$ in $5$ years at $4\%$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Present value of $\$800$ in $4$ years at $5\%$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Which is worth more today: $\$2000$ in $5$ years or $\$2500$ in $8$ years, both at $5\%$?\workspace{3.5cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Present value of $\$2000$ in $3$ years at $5\%$?
+  \item Present value of $\$5000$ in $5$ years at $6\%$?
+  \item How much now to have $\$3000$ in $4$ years at $4\%$?
+  \item Present value of $\$1000$ in $10$ years at $7\%$?
+  \item $\$500$ now or $\$600$ in $3$ years at $5\%$ — which is worth more today?
+  \item Present value of $\$1000$ in $5$ years at $6\%$?
+  \item Present value of $\$4000$ in $2$ years at $5\%$?
+  \item How much now to have $\$10000$ in $6$ years at $5\%$?
+  \item Present value of $\$1500$ in $3$ years at $4\%$?
+  \item Present value of $\$2000$ in $8$ years at $6\%$?
+  \item How much now to have $\$5000$ in $5$ years at $4\%$?
+  \item Present value of $\$800$ in $4$ years at $5\%$?
+  \item Which is worth more today: $\$2000$ in $5$ years or $\$2500$ in $8$ years, both at $5\%$?
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $\approx\$1727.68$
+  \item $\approx\$3736.29$
+  \item $\approx\$2564.39$
+  \item $\approx\$508.35$
+  \item the $\$600$ ($\approx\$518.30$)
+  \item $\approx\$747.26$
+  \item $\approx\$3628.12$
+  \item $\approx\$7462.15$
+  \item $\approx\$1333.49$
+  \item $\approx\$1254.82$
+  \item $\approx\$4109.64$
+  \item $\approx\$658.16$
+  \item the $\$2500$ ($\approx\$1692$ vs $\approx\$1567$)
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

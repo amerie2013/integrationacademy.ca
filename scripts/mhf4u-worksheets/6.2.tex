@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MHF4U \textperiodcentered{} 6.2}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 6.2 --- Double Angle Formulas}\\[2pt]
+{\small Grade 12 Advanced Functions (MHF4U) \textperiodcentered{} Unit 6: Trigonometric Identities and Equations}
+\end{center}
+
+\begin{ideabox}
+Setting $B=A$: $\sin2\theta=2\sin\theta\cos\theta$ and $\cos2\theta=\cos^2\theta-\sin^2\theta=1-2\sin^2\theta=2\cos^2\theta-1$.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item $\sin2\theta=2\sin\theta\cos\theta$.
+  \item $\cos2\theta=1-2\sin^2\theta=2\cos^2\theta-1$.
+  \item $\tan2\theta=\tfrac{2\tan\theta}{1-\tan^2\theta}$.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Doubling an angle}Setting $B=A$ in the compound formulas yields the \textbf{double angle} identities, such as $\sin2A=2\sin A\cos A$.
+\lh{Cosine's three forms}$\cos2A=\cos^2A-\sin^2A=2\cos^2A-1=1-2\sin^2A$ — pick the version that fits your information.
+\lh{Simplifying}Double angle formulas condense expressions and are essential for proving identities and solving equations.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Sine double angle}
+$\sin\theta=\tfrac35,\cos\theta=\tfrac45$. Find $\sin2\theta$.\soln $2\cdot\tfrac35\cdot\tfrac45=\dfrac{24}{25}$. The graph $y=\sin2x$ completes two cycles in $2\pi$:\begin{center}\begin{tikzpicture}\begin{axis}[width=9.2cm,height=4.6cm,axis lines=middle,xlabel={\small$x$},ylabel={\small$y$},xmin=-0.4,xmax=6.9,ymin=-1.6,ymax=1.6,samples=220,xtick={1.5708,3.1416,4.7124,6.2832},xticklabels={$\frac{\pi}{2}$,$\pi$,$\frac{3\pi}{2}$,$2\pi$}]\addplot[exblue,very thick,domain=0:6.4]{sin(deg(2*x))};\end{axis}\end{tikzpicture}\end{center}
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Cosine double angle}
+With $\sin\theta=\tfrac35$, find $\cos2\theta$.\soln $1-2\sin^2\theta=1-\tfrac{18}{25}=\dfrac7{25}$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Recognize}
+Simplify $2\sin x\cos x$.\soln $\sin2x$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Cosine form}
+Write $\cos2\theta$ using only $\cos\theta$.\soln $2\cos^2\theta-1$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Recognize}
+Simplify $1-2\sin^2 x$.\soln $\cos2x$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Sine double angle}
+$\sin\theta=\tfrac5{13},\cos\theta=\tfrac{12}{13}$. Find $\sin2\theta$.\soln $2\cdot\tfrac5{13}\cdot\tfrac{12}{13}=\dfrac{120}{169}$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Recognize}
+Simplify $2\cos^2 x-1$.\soln $\cos2x$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Cosine double angle}
+With $\cos\theta=\tfrac35$, find $\cos2\theta$.\soln $2\cdot\tfrac9{25}-1=-\dfrac7{25}$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Simplify}
+Simplify $\dfrac{\sin2x}{2\cos x}$.\soln $\dfrac{2\sin x\cos x}{2\cos x}=\sin x$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+$\sin\theta=\tfrac5{13},\cos\theta=\tfrac{12}{13}$. Find $\sin2\theta$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Simplify $2\cos^2 x-1$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+With $\cos\theta=\tfrac35$, find $\cos2\theta$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Simplify $\dfrac{\sin2x}{2\cos x}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Simplify $\cos^2 x-\sin^2 x$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+State $\sin2\theta$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Simplify $2\sin x\cos x$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+With $\sin\theta=\tfrac45$, find $\cos2\theta$ (use $1-2\sin^2\theta$).\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Simplify $1-2\sin^2 x$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+State the three forms of $\cos2\theta$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+With $\sin\theta=\tfrac35,\cos\theta=\tfrac45$, find $\sin2\theta$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Simplify $\dfrac{2\tan x}{1-\tan^2 x}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Given $\sin\theta=\tfrac35$ ($\theta$ in QI), find both $\sin2\theta$ and $\cos2\theta$.\workspace{3cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $\sin\theta=\tfrac5{13},\cos\theta=\tfrac{12}{13}$. Find $\sin2\theta$.
+  \item Simplify $2\cos^2 x-1$.
+  \item With $\cos\theta=\tfrac35$, find $\cos2\theta$.
+  \item Simplify $\dfrac{\sin2x}{2\cos x}$.
+  \item Simplify $\cos^2 x-\sin^2 x$.
+  \item State $\sin2\theta$.
+  \item Simplify $2\sin x\cos x$.
+  \item With $\sin\theta=\tfrac45$, find $\cos2\theta$ (use $1-2\sin^2\theta$).
+  \item Simplify $1-2\sin^2 x$.
+  \item State the three forms of $\cos2\theta$.
+  \item With $\sin\theta=\tfrac35,\cos\theta=\tfrac45$, find $\sin2\theta$.
+  \item Simplify $\dfrac{2\tan x}{1-\tan^2 x}$.
+  \item Given $\sin\theta=\tfrac35$ ($\theta$ in QI), find both $\sin2\theta$ and $\cos2\theta$.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $\tfrac{120}{169}$
+  \item $\cos2x$
+  \item $-\tfrac7{25}$
+  \item $\sin x$
+  \item $\cos2x$
+  \item $2\sin\theta\cos\theta$
+  \item $\sin2x$
+  \item $-\tfrac7{25}$
+  \item $\cos2x$
+  \item $\cos^2\theta-\sin^2\theta=1-2\sin^2\theta=2\cos^2\theta-1$
+  \item $\tfrac{24}{25}$
+  \item $\tan2x$
+  \item $\sin2\theta=\tfrac{24}{25},\ \cos2\theta=\tfrac7{25}$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

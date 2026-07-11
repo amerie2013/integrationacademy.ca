@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MDM4U \textperiodcentered{} 3.1}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 3.1 --- Random Variables \& Discrete Distributions}\\[2pt]
+{\small Grade 12 Mathematics of Data Management (MDM4U) \textperiodcentered{} Unit 3: Discrete Probability Distributions}
+\end{center}
+
+\begin{ideabox}
+A random variable assigns a number to each outcome. Its \emph{distribution} lists every value with its probability, and those probabilities must sum to $1$.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Discrete random variable $X$ takes separate values.
+  \item A distribution is valid when every $P(x)\ge0$ and $\sum P(x)=1$.
+  \item Cumulative events: $P(X\le k)$, $P(X\ge k)$ add the relevant rows.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{What a random variable is}A \textbf{random variable} $X$ attaches a number to each outcome (like the number of heads in three flips). \emph{Discrete} means it takes separate, countable values.
+\lh{Its distribution}A probability distribution pairs each value of $X$ with its probability. Because some outcome must occur, those probabilities must \textbf{sum to 1}.
+\lh{Building one}Count the outcomes for each value of $X$ and divide by the total. If your probabilities do not add to $1$, an outcome is missing.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Build a distribution}
+Two coins are tossed; $X=$ number of heads. Give the distribution.\soln $X\in\{0,1,2\}$ with $P=\tfrac14,\tfrac12,\tfrac14$; sum $=1$. \checkmark
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Distribution of a dice sum}
+Two dice; $X=$ the sum. Find $P(X=5)$ and describe the shape.\soln $P(5)=\dfrac{4}{36}=\dfrac19$; the distribution rises to a peak at $7$, then falls (triangular).
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Find a missing probability}
+A table gives $P(0)=0.1,\ P(1)=0.3,\ P(3)=0.2$. Find $P(2)$.\soln $\sum=1\Rightarrow P(2)=1-(0.1+0.3+0.2)=0.4$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Cumulative probabilities}
+For $P(0)=0.1,\ P(1)=0.4,\ P(2)=0.3,\ P(3)=0.2$, find $P(X\ge2)$.\soln $0.3+0.2=0.5$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Solve for a constant}
+$P(x)=kx$ for $x=1,2,3,4$. Find $k$.\soln $k(1+2+3+4)=1\Rightarrow 10k=1\Rightarrow k=\tfrac{1}{10}$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- An indicator variable}
+$X=1$ if a drawn card is a heart, else $0$. Give the distribution.\soln $P(1)=\tfrac14,\ P(0)=\tfrac34$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Distribution from a draw}
+From 3 red and 2 blue, draw 2 without replacement; $X=$ number of red. Give the distribution.\soln $P(0)=\dfrac{\binom{2}{2}}{\binom{5}{2}}=\tfrac{1}{10}$, $P(1)=\dfrac{\binom{3}{1}\binom{2}{1}}{10}=\tfrac{6}{10}$, $P(2)=\dfrac{\binom{3}{2}}{10}=\tfrac{3}{10}$; sum $=1$. \checkmark
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Read a histogram}
+A probability histogram has bars $P(1)=0.2,\ P(2)=0.5,\ P(3)=0.3$. Find $P(X\le2)$.\soln $0.2+0.5=0.7$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Full distribution, three parts}
+Roll one die; $X=$ the value. Find \\ \textbf{(a)} the distribution; \\ \textbf{(b)} $P(X>4)$; \\ \textbf{(c)} $P(X\text{ even})$.\soln (a) uniform, $\tfrac16$ each. (b) $\tfrac26=\tfrac13$. (c) $\tfrac12$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Two coins are tossed; $X=$ number of heads. Give the distribution.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+A table gives $P(0)=0.2,\ P(1)=0.5$. If these are the only other values besides $P(2)$, find $P(2)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+$P(x)=kx^2$ for $x=1,2,3$. Find $k$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+For $P(0)=0.1,\ P(1)=0.4,\ P(2)=0.3,\ P(3)=0.2$, find $P(X\ge2)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Two dice; $X=$ sum. Find $P(X=7)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Two dice; $X=$ sum. Find $P(X\le4)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+From 4 red and 3 green, draw 2 without replacement; $X=$ green. Find $P(X=1)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+A spinner $1$--$5$ (equally likely); $X=$ value. Find $P(X\text{ prime})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+$X=$ number of heads in 3 coins. Find $P(X=2)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+$P(x)=c$ for $x=1,\dots,6$. Find $c$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+$P(0)=0.3,\ P(1)=a,\ P(2)=2a,\ P(3)=0.1$. Find $a$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Two dice; $X=$ sum. Find $P(X\text{ is a multiple of }3)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+A bag has 2 red, 2 blue, 1 green; draw 2 without replacement, $X=$ red. Give the full distribution and verify $\sum P=1$.\workspace{3.4cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Two coins are tossed; $X=$ number of heads. Give the distribution.
+  \item A table gives $P(0)=0.2,\ P(1)=0.5$. If these are the only other values besides $P(2)$, find $P(2)$.
+  \item $P(x)=kx^2$ for $x=1,2,3$. Find $k$.
+  \item For $P(0)=0.1,\ P(1)=0.4,\ P(2)=0.3,\ P(3)=0.2$, find $P(X\ge2)$.
+  \item Two dice; $X=$ sum. Find $P(X=7)$.
+  \item Two dice; $X=$ sum. Find $P(X\le4)$.
+  \item From 4 red and 3 green, draw 2 without replacement; $X=$ green. Find $P(X=1)$.
+  \item A spinner $1$--$5$ (equally likely); $X=$ value. Find $P(X\text{ prime})$.
+  \item $X=$ number of heads in 3 coins. Find $P(X=2)$.
+  \item $P(x)=c$ for $x=1,\dots,6$. Find $c$.
+  \item $P(0)=0.3,\ P(1)=a,\ P(2)=2a,\ P(3)=0.1$. Find $a$.
+  \item Two dice; $X=$ sum. Find $P(X\text{ is a multiple of }3)$.
+  \item A bag has 2 red, 2 blue, 1 green; draw 2 without replacement, $X=$ red. Give the full distribution and verify $\sum P=1$.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $P(0)=\tfrac14,\ P(1)=\tfrac12,\ P(2)=\tfrac14$
+  \item $P(2)=0.3$
+  \item $k(1+4+9)=1\Rightarrow k=\tfrac{1}{14}$
+  \item $0.5$
+  \item $\tfrac{6}{36}=\tfrac16$
+  \item $\tfrac{1+2+3}{36}=\tfrac16$
+  \item $\dfrac{\binom{3}{1}\binom{4}{1}}{\binom{7}{2}}=\tfrac{12}{21}=\tfrac47$
+  \item $\tfrac35$
+  \item $\tfrac38$
+  \item $c=\tfrac16$
+  \item $3a=0.6\Rightarrow a=0.2$
+  \item $\tfrac{12}{36}=\tfrac13$
+  \item $P(0)=\tfrac{3}{10},\ P(1)=\tfrac{6}{10},\ P(2)=\tfrac{1}{10}$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

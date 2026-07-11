@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MHF4U \textperiodcentered{} 3.1}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 3.1 --- Reciprocal \& Rational Functions}\\[2pt]
+{\small Grade 12 Advanced Functions (MHF4U) \textperiodcentered{} Unit 3: Rational Functions}
+\end{center}
+
+\begin{ideabox}
+A rational function $f(x)=\dfrac{p(x)}{q(x)}$ has vertical asymptotes at zeros of $q$, a horizontal asymptote from the degrees, and a hole wherever a factor cancels.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Vertical asymptote: $q(x)=0$ (no cancel). Domain excludes those $x$.
+  \item Horizontal asymptote: lower top $\Rightarrow y=0$; equal degrees $\Rightarrow$ ratio of leading coefficients.
+  \item Hole: a common factor of $p$ and $q$.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Reciprocal functions}The reciprocal $y=\dfrac{1}{f(x)}$ blows up where $f(x)=0$, creating a \textbf{vertical asymptote}, and flattens where $f$ grows large.
+\lh{Rational functions}A \textbf{rational function} is a ratio of polynomials; its behaviour is governed by its own zeros and those of its denominator.
+\lh{Asymptotes}Vertical asymptotes sit where the denominator is zero (but the numerator is not); horizontal or oblique asymptotes come from comparing degrees.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Vertical asymptote}
+Vertical asymptote of $y=\dfrac{1}{x-3}$?\soln Denominator zero at $x=3$, so the VA is $x=3$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Horizontal asymptote}
+Horizontal asymptote of $y=\dfrac{1}{x-3}$?\soln Degree of top $(0)<$ degree of bottom $(1)$, so $y=0$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- The reciprocal graph}
+Describe $y=\dfrac1x$.\soln VA $x=0$, HA $y=0$, branches in opposite quadrants:\begin{center}\begin{tikzpicture}\begin{axis}[width=7.6cm,height=5cm,axis lines=middle,xlabel={\small$x$},ylabel={\small$y$},xmin=-5,xmax=5,ymin=-5,ymax=5,samples=160,restrict y to domain=-6:6]\addplot[exblue,very thick,domain=-5:-0.18]{1/x};\addplot[exblue,very thick,domain=0.18:5]{1/x};\draw[dashed,gray] (axis cs:0,-5)--(axis cs:0,5);\end{axis}\end{tikzpicture}\end{center}
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Domain}
+Domain of $y=\dfrac{1}{x+2}$?\soln Exclude $x=-2$: domain $x\ne-2$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Equal degrees}
+Horizontal asymptote of $y=\dfrac{2x}{x-1}$?\soln Equal degrees → ratio $\tfrac21$, so $y=2$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- A hole}
+Describe $y=\dfrac{x^2-1}{x-1}$.\soln $\dfrac{(x-1)(x+1)}{x-1}=x+1$ with $x\ne1$: a line with a hole at $x=1$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Shifted asymptote}
+Vertical asymptote of $y=\dfrac{1}{x-3}$, graphed:\soln VA at $x=3$ (dashed), HA $y=0$:\begin{center}\begin{tikzpicture}\begin{axis}[width=7.6cm,height=5cm,axis lines=middle,xlabel={\small$x$},ylabel={\small$y$},xmin=-2,xmax=8,ymin=-5,ymax=5,samples=160,restrict y to domain=-6:6]\addplot[exblue,very thick,domain=-2:2.82]{1/(x-3)};\addplot[exblue,very thick,domain=3.18:8]{1/(x-3)};\draw[dashed,gray] (axis cs:3,-5)--(axis cs:3,5);\draw[dashed,gray] (axis cs:-2,0)--(axis cs:8,0);\end{axis}\end{tikzpicture}\end{center}
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Equal degrees}
+Horizontal asymptote of $y=\dfrac{5x}{x+2}$?\soln $y=5$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Domain}
+Domain of $y=\dfrac{x}{x-4}$?\soln $x\ne4$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Vertical asymptote of $y=\dfrac{1}{x-5}$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Horizontal asymptote of $y=\dfrac{3}{x+1}$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Domain of $y=\dfrac{x}{x-4}$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Horizontal asymptote of $y=\dfrac{5x}{x+2}$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Where is the hole in $y=\dfrac{x^2-4}{x-2}$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Vertical asymptote of $y=\dfrac{2}{x+3}$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Horizontal asymptote of $y=\dfrac{4x}{x-7}$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Domain of $y=\dfrac{1}{x-1}$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Horizontal asymptote of $y=\dfrac{1}{x^2+1}$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Vertical asymptote of $y=\dfrac{x+1}{x-6}$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Simplify $y=\dfrac{x^2-9}{x+3}$ and state any hole.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Horizontal asymptote of $y=\dfrac{3x}{2x-1}$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+State the VA, HA and domain of $y=\dfrac{2x}{x-4}$.\workspace{3cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Vertical asymptote of $y=\dfrac{1}{x-5}$?
+  \item Horizontal asymptote of $y=\dfrac{3}{x+1}$?
+  \item Domain of $y=\dfrac{x}{x-4}$?
+  \item Horizontal asymptote of $y=\dfrac{5x}{x+2}$?
+  \item Where is the hole in $y=\dfrac{x^2-4}{x-2}$?
+  \item Vertical asymptote of $y=\dfrac{2}{x+3}$?
+  \item Horizontal asymptote of $y=\dfrac{4x}{x-7}$?
+  \item Domain of $y=\dfrac{1}{x-1}$?
+  \item Horizontal asymptote of $y=\dfrac{1}{x^2+1}$?
+  \item Vertical asymptote of $y=\dfrac{x+1}{x-6}$?
+  \item Simplify $y=\dfrac{x^2-9}{x+3}$ and state any hole.
+  \item Horizontal asymptote of $y=\dfrac{3x}{2x-1}$?
+  \item State the VA, HA and domain of $y=\dfrac{2x}{x-4}$.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $x=5$
+  \item $y=0$
+  \item $x\ne4$
+  \item $y=5$
+  \item $x=2$
+  \item $x=-3$
+  \item $y=4$
+  \item $x\ne1$
+  \item $y=0$
+  \item $x=6$
+  \item $x-3$, hole at $x=-3$
+  \item $y=\tfrac32$
+  \item VA $x=4$, HA $y=2$, $x\ne4$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

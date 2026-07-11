@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MDM4U \textperiodcentered{} 3.4}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 3.4 --- The Binomial Distribution}\\[2pt]
+{\small Grade 12 Mathematics of Data Management (MDM4U) \textperiodcentered{} Unit 3: Discrete Probability Distributions}
+\end{center}
+
+\begin{ideabox}
+For $n$ independent trials (BINS: Binary, Independent, fixed Number, Same $p$), $P(X=k)=\dbinom{n}{k}p^{k}q^{\,n-k}$, with mean $np$ and standard deviation $\sqrt{npq}$.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item $P(X=k)=\dbinom{n}{k}p^{k}q^{\,n-k}$, $q=1-p$.
+  \item Mean $\mu=np$; standard deviation $\sigma=\sqrt{npq}$.
+  \item At least/at most: sum terms, or use the complement.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{The binomial setting}Use the binomial distribution for a \emph{fixed} number $n$ of independent trials, each with the same success probability $p$ and only two outcomes. $X$ counts the successes.
+\lh{The formula}$P(X=k)=\dbinom{n}{k}p^{k}(1-p)^{n-k}$: the combination chooses which trials succeed, and the powers give the probability of that pattern.
+\lh{Its mean}The expected number of successes is simply $E(X)=np$ — for $20$ shots at $p=0.7$, expect $14$.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Exactly $k$ (fair)}
+Find $P(\text{exactly 3 heads in 5 flips})$.\soln $\dbinom{5}{3}\left(\tfrac12\right)^5=\tfrac{10}{32}=\tfrac{5}{16}$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Exactly $k$ (unfair)}
+A player makes 80\% of free throws. Find $P(\text{exactly 5 of 6})$.\soln $\dbinom{6}{5}(0.8)^5(0.2)=6(0.32768)(0.2)\approx0.393$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- At least one (complement)}
+Roll 4 dice. Find $P(\text{at least one 6})$.\soln $1-\left(\tfrac56\right)^4=1-\tfrac{625}{1296}=\tfrac{671}{1296}$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- At most one}
+$n=10,\ p=0.3$. Find $P(X\le1)$.\soln $(0.7)^{10}+10(0.3)(0.7)^9\approx0.028+0.121=0.149$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Mean and standard deviation}
+$n=200,\ p=0.1$. Find $\mu$ and $\sigma$.\soln $\mu=20$; $\sigma=\sqrt{200(0.1)(0.9)}=\sqrt{18}\approx4.24$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Symmetric case}
+Find $P(\text{exactly 4 boys in 8 births})$, $p=0.5$.\soln $\dbinom{8}{4}\left(\tfrac12\right)^8=\tfrac{70}{256}\approx0.273$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- At least one defective}
+20 items, each defective with $p=0.05$. Find $P(\text{at least one defective})$.\soln $1-(0.95)^{20}\approx1-0.358=0.642$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Solve for $n$}
+With $p=0.2$ per trial, how many trials give $P(\text{at least one success})\ge0.9$?\soln $1-(0.8)^n\ge0.9\Rightarrow(0.8)^n\le0.1\Rightarrow n\ge\tfrac{\log0.1}{\log0.8}\approx10.3$, so $n=11$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Guessing a test (three parts)}
+10 questions, 4 options each, all guessed ($p=0.25$). Find \\ \textbf{(a)} $E(\text{correct})$; \\ \textbf{(b)} $P(\text{exactly 3})$; \\ \textbf{(c)} $P(\text{at least 1})$.\soln (a) $2.5$. (b) $\dbinom{10}{3}(0.25)^3(0.75)^7\approx0.250$. (c) $1-(0.75)^{10}\approx0.944$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Find $P(\text{exactly 4 heads in 6 flips})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+A player makes 90\% of free throws. Find $P(\text{all 5 of 5})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Roll 3 dice. Find $P(\text{at least one 6})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+$n=10,\ p=0.2$. Find $P(\text{exactly 2})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+$n=50,\ p=0.4$. Find $\mu$ and $\sigma$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+7 true/false guesses ($p=0.5$). Find $P(\text{exactly 4 correct})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+20 seeds each germinate with $p=0.85$. Find $P(\text{all germinate})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+$n=12,\ p=\tfrac16$ (rolling a 6). Find $P(\text{exactly two 6s})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+15 items, each defective with $p=0.1$. Find $P(\text{at least one defective})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+8 multiple-choice questions guessed ($p=0.25$). Find $E(\text{correct})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+$n=100,\ p=0.5$. Find $\mu$ and $\sigma$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+4 shots, each a hit with $p=0.7$. Find $P(\text{exactly 3 hits})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+A 10-question test with 5 options each, all guessed ($p=0.2$). Find \\ \textbf{(a)} $E(\text{correct})$; \\ \textbf{(b)} $P(\text{exactly 2})$; \\ \textbf{(c)} $P(\text{at least 1})$.\workspace{3.4cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Find $P(\text{exactly 4 heads in 6 flips})$.
+  \item A player makes 90\% of free throws. Find $P(\text{all 5 of 5})$.
+  \item Roll 3 dice. Find $P(\text{at least one 6})$.
+  \item $n=10,\ p=0.2$. Find $P(\text{exactly 2})$.
+  \item $n=50,\ p=0.4$. Find $\mu$ and $\sigma$.
+  \item 7 true/false guesses ($p=0.5$). Find $P(\text{exactly 4 correct})$.
+  \item 20 seeds each germinate with $p=0.85$. Find $P(\text{all germinate})$.
+  \item $n=12,\ p=\tfrac16$ (rolling a 6). Find $P(\text{exactly two 6s})$.
+  \item 15 items, each defective with $p=0.1$. Find $P(\text{at least one defective})$.
+  \item 8 multiple-choice questions guessed ($p=0.25$). Find $E(\text{correct})$.
+  \item $n=100,\ p=0.5$. Find $\mu$ and $\sigma$.
+  \item 4 shots, each a hit with $p=0.7$. Find $P(\text{exactly 3 hits})$.
+  \item A 10-question test with 5 options each, all guessed ($p=0.2$). Find \\ \textbf{(a)} $E(\text{correct})$; \\ \textbf{(b)} $P(\text{exactly 2})$; \\ \textbf{(c)} $P(\text{at least 1})$.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $\dbinom{6}{4}\left(\tfrac12\right)^6=\tfrac{15}{64}$
+  \item $0.9^5\approx0.590$
+  \item $1-\left(\tfrac56\right)^3=\tfrac{91}{216}$
+  \item $\dbinom{10}{2}(0.2)^2(0.8)^8\approx0.302$
+  \item $\mu=20,\ \sigma=\sqrt{12}\approx3.46$
+  \item $\dbinom{7}{4}\left(\tfrac12\right)^7=\tfrac{35}{128}$
+  \item $0.85^{20}\approx0.039$
+  \item $\dbinom{12}{2}\left(\tfrac16\right)^2\left(\tfrac56\right)^{10}\approx0.296$
+  \item $1-0.9^{15}\approx0.794$
+  \item $\mu=2$
+  \item $\mu=50,\ \sigma=5$
+  \item $\dbinom{4}{3}(0.7)^3(0.3)\approx0.412$
+  \item (a) $2$; (b) $\approx0.302$; (c) $1-0.8^{10}\approx0.893$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

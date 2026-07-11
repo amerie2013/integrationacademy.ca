@@ -1,0 +1,175 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MPM2D \textperiodcentered{} 2.4}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 2.4 --- Medians, Right Bisectors \& Altitudes}\\[2pt]
+{\small Grade 10 Academic (MPM2D) \textperiodcentered{} Unit 2: Analytic Geometry}
+\end{center}
+
+\begin{ideabox}
+Three special lines in a triangle: a \textbf{median} joins a vertex to the midpoint of the opposite side; a \textbf{right (perpendicular) bisector} passes through a side's midpoint at $90^\circ$; an \textbf{altitude} runs from a vertex perpendicular to the opposite side.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item \textbf{Median:} find the opposite side's midpoint, then the line through it and the vertex.
+  \item \textbf{Right bisector:} find the side's midpoint and the \emph{negative reciprocal} of the side's slope.
+  \item \textbf{Altitude:} use the \emph{negative reciprocal} of the opposite side's slope, through the vertex.
+  \item Horizontal side $\Rightarrow$ vertical perpendicular ($x=$const), and vice-versa.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Three special lines}In a triangle, a \textbf{median} joins a vertex to the midpoint of the opposite side, a \textbf{right bisector} crosses a side at $90^\circ$ through its midpoint, and an \textbf{altitude} runs from a vertex perpendicular to the opposite side.
+\lh{Building each}Use the midpoint formula for medians and bisectors, and slopes for perpendicularity: an altitude or bisector takes the \emph{negative reciprocal} of the side's slope.
+\lh{Then the equation}With a point and a slope in hand, write each line as $y=mx+b$ — the tools are just midpoint, slope, and the equation of a line.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Median through the origin}
+Find the median from $A(0,0)$ in $\triangle ABC$ with $B(4,2)$, $C(2,6)$.
+\soln Midpoint of $BC=(3,4)$. Slope $=\tfrac{4}{3}$, through the origin: $y=\tfrac43x.$
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Median (general)}
+Find the median from $A(2,1)$, where $B(6,3)$, $C(0,5)$.
+\soln Midpoint $BC=(3,4)$. Slope $=\tfrac{4-1}{3-2}=3$: $y-1=3(x-2)\Rightarrow y=3x-5.$
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Right bisector}
+Find the right bisector of $AB$ with $A(1,2)$, $B(5,6)$.
+\soln Midpoint $(3,4)$; slope $AB=1$, so perpendicular slope $=-1$: $y-4=-1(x-3)\Rightarrow y=-x+7.$
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Right bisector (fractions)}
+Find the right bisector of $AB$ with $A(-2,1)$, $B(4,3)$.
+\soln Midpoint $(1,2)$; slope $AB=\tfrac{2}{6}=\tfrac13$, perpendicular $=-3$: $y-2=-3(x-1)\Rightarrow y=-3x+5.$
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Altitude to a horizontal side}
+Find the altitude from $A(0,5)$ to $BC$, where $B(-2,1)$, $C(4,1)$.
+\soln $BC$ is horizontal ($y=1$), so the altitude is vertical through $A$: $x=0.$
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Altitude (general)}
+Find the altitude from $A(1,6)$ to $BC$, where $B(0,0)$, $C(4,2)$.
+\soln Slope $BC=\tfrac12$, so altitude slope $=-2$: $y-6=-2(x-1)\Rightarrow y=-2x+8.$
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Length of a median}
+Find the length of the median from $A(1,1)$ in $\triangle ABC$, $B(5,1)$, $C(3,7)$.
+\soln Midpoint $BC=(4,4)$; length $=\sqrt{3^2+3^2}=\sqrt{18}=3\sqrt2.$
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Right bisector of a vertical side}
+Find the right bisector of the segment from $(2,-1)$ to $(2,5)$.
+\soln The segment is vertical; midpoint $(2,2)$. The perpendicular is horizontal: $y=2.$
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Two cevians at once (harder)}
+For $\triangle PQR$ with $P(-2,2)$, $Q(4,2)$, $R(1,7)$, find the median from $R$ and the altitude from $R$.
+\soln Midpoint $PQ=(1,2)$, so the median from $R(1,7)$ is the vertical line $x=1$. Since $PQ$ is horizontal, the altitude from $R$ is also vertical: $x=1$ (the triangle is isosceles).
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Find the median from $A(0,0)$, where $B(2,6)$, $C(6,2)$.\workspace{2.6cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Find the median from $A(1,1)$, where $B(7,3)$, $C(3,5)$.\workspace{2.6cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Find the right bisector of $AB$ with $A(0,0)$, $B(6,4)$.\workspace{2.6cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Find the right bisector of $AB$ with $A(-1,2)$, $B(3,4)$.\workspace{2.6cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Find the altitude from $A(2,6)$ to $BC$, where $B(-1,1)$, $C(5,1)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Find the altitude from $A(0,4)$ to $BC$, where $B(1,1)$, $C(5,3)$.\workspace{2.6cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Find the length of the median from $A(2,2)$, where $B(8,2)$, $C(4,8)$.\workspace{2.6cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Find the right bisector of the segment from $(3,2)$ to $(3,-4)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Find the median from $C(0,6)$, where $A(-4,0)$, $B(4,0)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Find the equation of the altitude from $B(4,5)$ to $AC$, where $A(0,0)$, $C(6,0)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Find the right bisector of $AB$ with $A(2,1)$, $B(6,9)$.\workspace{2.6cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+A median from $A(1,2)$ goes to the midpoint of $BC$. If $B(3,6)$ and $C(7,0)$, find the median's equation.\workspace{2.6cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+For $\triangle ABC$ with $A(0,0)$, $B(6,0)$, $C(2,4)$, find the right bisector of $AB$ and show it passes through $(3,2)$.\workspace{3.0cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Find the median from $A(0,0)$, where $B(2,6)$, $C(6,2)$.
+  \item Find the median from $A(1,1)$, where $B(7,3)$, $C(3,5)$.
+  \item Find the right bisector of $AB$ with $A(0,0)$, $B(6,4)$.
+  \item Find the right bisector of $AB$ with $A(-1,2)$, $B(3,4)$.
+  \item Find the altitude from $A(2,6)$ to $BC$, where $B(-1,1)$, $C(5,1)$.
+  \item Find the altitude from $A(0,4)$ to $BC$, where $B(1,1)$, $C(5,3)$.
+  \item Find the length of the median from $A(2,2)$, where $B(8,2)$, $C(4,8)$.
+  \item Find the right bisector of the segment from $(3,2)$ to $(3,-4)$.
+  \item Find the median from $C(0,6)$, where $A(-4,0)$, $B(4,0)$.
+  \item Find the equation of the altitude from $B(4,5)$ to $AC$, where $A(0,0)$, $C(6,0)$.
+  \item Find the right bisector of $AB$ with $A(2,1)$, $B(6,9)$.
+  \item A median from $A(1,2)$ goes to the midpoint of $BC$. If $B(3,6)$ and $C(7,0)$, find the median's equation.
+  \item For $\triangle ABC$ with $A(0,0)$, $B(6,0)$, $C(2,4)$, find the right bisector of $AB$ and show it passes through $(3,2)$.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Mid $BC=(4,4)$; $y=x$.
+  \item Mid $BC=(5,4)$; slope $\tfrac34$: $y=\tfrac34x+\tfrac14$.
+  \item Mid $(3,2)$, slope $AB=\tfrac23$, perp $-\tfrac32$: $y=-\tfrac32x+\tfrac{13}{2}$.
+  \item Mid $(1,3)$, slope $\tfrac12$, perp $-2$: $y=-2x+5$.
+  \item $BC$ horizontal; altitude $x=2$.
+  \item Slope $BC=\tfrac12$, perp $-2$: $y=-2x+4$.
+  \item Mid $BC=(6,5)$; $\sqrt{4^2+3^2}=5$.
+  \item Mid $(3,-1)$, segment vertical; $y=-1$.
+  \item Mid $AB=(0,0)$; $x=0$ (vertical).
+  \item $AC$ horizontal; altitude $x=4$.
+  \item Mid $(4,5)$, slope $2$, perp $-\tfrac12$: $y=-\tfrac12x+7$.
+  \item Mid $BC=(5,3)$; slope $\tfrac14$: $y=\tfrac14x+\tfrac74$.
+  \item Mid $AB=(3,0)$, $AB$ horizontal, perp $x=3$; $(3,2)$ has $x=3\ \checkmark$.
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

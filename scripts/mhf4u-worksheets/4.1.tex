@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MHF4U \textperiodcentered{} 4.1}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 4.1 --- Logarithms \& the Laws of Logarithms}\\[2pt]
+{\small Grade 12 Advanced Functions (MHF4U) \textperiodcentered{} Unit 4: Exponential and Logarithmic Functions}
+\end{center}
+
+\begin{ideabox}
+A logarithm answers "what exponent?": $\log_b x=y\iff b^y=x$. The laws turn products, quotients and powers into sums, differences and multiples.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item $\log_b x=y\iff b^y=x$.
+  \item Product $\log_b(xy)=\log_b x+\log_b y$; Quotient subtracts; Power $\log_b(x^n)=n\log_b x$.
+  \item Change of base: $\log_b x=\dfrac{\log x}{\log b}$.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{A logarithm is an exponent}$\log_b x$ is the power to which $b$ must be raised to give $x$ — the inverse operation of exponentiation.
+\lh{The laws}Logs turn products, quotients, and powers into sums, differences, and multiples: $\log_b(MN)=\log_b M+\log_b N$ and $\log_b M^p=p\log_b M$.
+\lh{Change of base}Evaluate any logarithm on a calculator with $\log_b x=\dfrac{\log x}{\log b}$.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Evaluate}
+Find $\log_2 8$.\soln $2^3=8$, so $\log_2 8=3$. The exponential $y=2^x$ is the inverse:\eplot{-3}{3}{-1}{9}{\addplot[exblue,very thick,domain=-3:3.1,samples=80]{2^x};}
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Convert to log form}
+Write $10^3=1000$ in logarithmic form.\soln Base 10, exponent 3: $\log 1000=3$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Evaluate}
+Find $\log_5 25$.\soln $5^2=25$, so $2$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Product law}
+Simplify $\log_2(4\cdot8)$.\soln $\log_2 4+\log_2 8=2+3=5$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Power law}
+Simplify $\log_2(8^2)$.\soln $2\log_2 8=2\cdot3=6$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Evaluate}
+Find $\log_3 27$.\soln $3^3=27$, so $3$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Base 10}
+Find $\log 100$.\soln $10^2=100$, so $2$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Quotient law}
+Simplify $\log_2\dfrac{32}{4}$.\soln $\log_2 32-\log_2 4=5-2=3$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Change of base}
+Express $\log_2 10$ with base-10 logs.\soln $\log_2 10=\dfrac{\log 10}{\log 2}\approx3.32$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Evaluate $\log_2 16$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Write $2^5=32$ in log form.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Evaluate $\log 1000$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Simplify $\log_3(9\cdot27)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Simplify $\log_5(25^3)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Evaluate $\log_4 64$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Simplify $\log_2\dfrac{64}{8}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Evaluate $\log_2 1$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Express $\log_3 20$ with base-10 logs.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Simplify $\log_b b^7$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Evaluate $\log_{10} 0.01$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Simplify $\log 2+\log 5$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Write $\log_2 40$ as a sum/difference of $\log_2 2,\log_2 5$ (note $40=2^3\cdot5$).\workspace{3cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Evaluate $\log_2 16$.
+  \item Write $2^5=32$ in log form.
+  \item Evaluate $\log 1000$.
+  \item Simplify $\log_3(9\cdot27)$.
+  \item Simplify $\log_5(25^3)$.
+  \item Evaluate $\log_4 64$.
+  \item Simplify $\log_2\dfrac{64}{8}$.
+  \item Evaluate $\log_2 1$.
+  \item Express $\log_3 20$ with base-10 logs.
+  \item Simplify $\log_b b^7$.
+  \item Evaluate $\log_{10} 0.01$.
+  \item Simplify $\log 2+\log 5$.
+  \item Write $\log_2 40$ as a sum/difference of $\log_2 2,\log_2 5$ (note $40=2^3\cdot5$).
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $4$
+  \item $\log_2 32=5$
+  \item $3$
+  \item $2+3=5$
+  \item $3\cdot2=6$
+  \item $3$
+  \item $6-3=3$
+  \item $0$
+  \item $\dfrac{\log20}{\log3}$
+  \item $7$
+  \item $-2$
+  \item $\log10=1$
+  \item $3+\log_2 5$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

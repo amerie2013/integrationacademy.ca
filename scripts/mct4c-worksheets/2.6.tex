@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MCT4C \textperiodcentered{} 2.6}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 2.6 --- The Factor Theorem}\\[2pt]
+{\small Grade 12 Mathematics for College Technology (MCT4C) \textperiodcentered{} Unit 2: Polynomial Functions}
+\end{center}
+
+\begin{ideabox}
+$x-a$ is a factor of $P(x)$ exactly when $P(a)=0$. Test the factors of the constant term to find a first zero, divide it out, then factor the leftover quadratic.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item $x-a$ a factor $\Leftrightarrow P(a)=0$.
+  \item Candidate zeros are factors of the constant term.
+  \item Divide, then factor completely.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Zero remainder means a factor}$x-a$ is a factor of $P(x)$ exactly when $P(a)=0$ — the factor theorem is the remainder theorem with remainder zero.
+\lh{Finding a first factor}Test the factors of the constant term as candidate zeros; a value giving $P(a)=0$ hands you a factor to divide out.
+\lh{Factoring completely}After dividing out one factor, factor the leftover quotient — often a quadratic — to finish the job.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Test a factor}
+Is $x-2$ a factor of $x^3-3x^2+4$?\soln $P(2)=8-12+4=0$: yes.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Factor completely}
+Factor $x^3-3x^2+4$.\soln Divide by $x-2$: $x^2-x-2=(x-2)(x+1)$; so $(x-2)^2(x+1)$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Find a zero, factor}
+Factor $x^3+2x^2-5x-6$.\soln $P(-1)=0$; $(x+1)(x^2+x-6)=(x+1)(x+3)(x-2)$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Candidates}
+Factor $x^3-4x^2+x+6$.\soln $P(-1)=0$; $(x+1)(x^2-5x+6)=(x+1)(x-2)(x-3)$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Quartic}
+Factor $x^4-1$.\soln $(x^2-1)(x^2+1)=(x-1)(x+1)(x^2+1)$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Common factor first}
+Factor $x^3-x$.\soln $x(x-1)(x+1)$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Another cubic}
+Factor $x^3-2x^2-x+2$.\soln $P(1)=0$; $(x-1)(x^2-x-2)=(x-1)(x-2)(x+1)$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Repeated factor}
+Factor $x^3+3x^2-4$.\soln $P(1)=0$; $(x-1)(x^2+4x+4)=(x-1)(x+2)^2$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Non-monic}
+Factor $2x^3-3x^2-11x+6$ given $x=3$ is a zero.\soln $(x-3)(2x^2+3x-2)=(x-3)(2x-1)(x+2)$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Is $x-1$ a factor of $x^3-1$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Factor $x^3-x$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Factor $x^3-2x^2-x+2$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Factor $x^3+3x^2-4$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Factor $2x^3-3x^2-11x+6$ (given $x=3$ is a zero).\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Is $x+2$ a factor of $x^3+8$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Factor $x^3-7x+6$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Factor $x^3+2x^2-5x-6$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Factor $x^4-16$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Is $x-3$ a factor of $x^3-4x^2+x+6$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Factor $x^3-6x^2+11x-6$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Factor $x^3+x^2-4x-4$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Factor $x^4-5x^2+4$.\workspace{3.2cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Is $x-1$ a factor of $x^3-1$?
+  \item Factor $x^3-x$.
+  \item Factor $x^3-2x^2-x+2$.
+  \item Factor $x^3+3x^2-4$.
+  \item Factor $2x^3-3x^2-11x+6$ (given $x=3$ is a zero).
+  \item Is $x+2$ a factor of $x^3+8$?
+  \item Factor $x^3-7x+6$.
+  \item Factor $x^3+2x^2-5x-6$.
+  \item Factor $x^4-16$.
+  \item Is $x-3$ a factor of $x^3-4x^2+x+6$?
+  \item Factor $x^3-6x^2+11x-6$.
+  \item Factor $x^3+x^2-4x-4$.
+  \item Factor $x^4-5x^2+4$.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item yes
+  \item $x(x-1)(x+1)$
+  \item $(x-1)(x-2)(x+1)$
+  \item $(x-1)(x+2)^2$
+  \item $(x-3)(2x-1)(x+2)$
+  \item yes
+  \item $(x-1)(x-2)(x+3)$
+  \item $(x+1)(x+3)(x-2)$
+  \item $(x-2)(x+2)(x^2+4)$
+  \item yes
+  \item $(x-1)(x-2)(x-3)$
+  \item $(x+1)(x-2)(x+2)$
+  \item $(x-1)(x+1)(x-2)(x+2)$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MHF4U \textperiodcentered{} 5.1}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 5.1 --- Radian Measure}\\[2pt]
+{\small Grade 12 Advanced Functions (MHF4U) \textperiodcentered{} Unit 5: Trigonometric Functions}
+\end{center}
+
+\begin{ideabox}
+A radian measures an angle by arc length; a full turn is $2\pi$ radians $=360^\circ$. Convert with $\tfrac{\pi}{180}$ or $\tfrac{180}{\pi}$, and use $s=r\theta$ for arc length.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Degrees$\to$radians: $\times\tfrac{\pi}{180}$. Radians$\to$degrees: $\times\tfrac{180}{\pi}$.
+  \item $30^\circ=\tfrac{\pi}{6},\ 45^\circ=\tfrac{\pi}{4},\ 60^\circ=\tfrac{\pi}{3},\ 90^\circ=\tfrac{\pi}{2}$.
+  \item Arc length $s=r\theta$ ($\theta$ in radians).
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{A natural angle unit}A \textbf{radian} measures an angle by arc length: one radian subtends an arc equal to the radius, and a full circle is $2\pi$ radians.
+\lh{Converting}Since $180^\circ=\pi$ radians, convert by multiplying by $\dfrac{\pi}{180^\circ}$ or $\dfrac{180^\circ}{\pi}$ as needed.
+\lh{Arc and sector}In radians the formulas simplify: arc length is $r\theta$ and sector area is $\tfrac12 r^2\theta$.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Degrees to radians}
+Convert $180^\circ$ to radians.\soln $180\cdot\tfrac{\pi}{180}=\pi$. Radians are the natural axis for trig graphs:\begin{center}\begin{tikzpicture}\begin{axis}[width=9.2cm,height=4.6cm,axis lines=middle,xlabel={\small$x$},ylabel={\small$y$},xmin=-0.4,xmax=6.9,ymin=-1.6,ymax=1.6,samples=220,xtick={1.5708,3.1416,4.7124,6.2832},xticklabels={$\frac{\pi}{2}$,$\pi$,$\frac{3\pi}{2}$,$2\pi$}]\addplot[exblue,very thick,domain=0:6.4]{sin(deg(x))};\end{axis}\end{tikzpicture}\end{center}
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Degrees to radians}
+Convert $90^\circ$ to radians.\soln $90\cdot\tfrac{\pi}{180}=\tfrac{\pi}{2}$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Radians to degrees}
+Convert $\tfrac{\pi}{3}$ to degrees.\soln $\tfrac{\pi}{3}\cdot\tfrac{180}{\pi}=60^\circ$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Degrees to radians}
+Convert $45^\circ$ to radians.\soln $45\cdot\tfrac{\pi}{180}=\tfrac{\pi}{4}$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Arc length}
+Arc length for $r=6,\ \theta=\tfrac{\pi}{2}$.\soln $s=r\theta=6\cdot\tfrac{\pi}{2}=3\pi$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Degrees to radians}
+Convert $60^\circ$ to radians.\soln $\tfrac{\pi}{3}$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Radians to degrees}
+Convert $\tfrac{\pi}{6}$ to degrees.\soln $30^\circ$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Degrees to radians}
+Convert $270^\circ$ to radians.\soln $270\cdot\tfrac{\pi}{180}=\tfrac{3\pi}{2}$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Arc length}
+Arc length for $r=4,\ \theta=\tfrac{\pi}{3}$.\soln $s=4\cdot\tfrac{\pi}{3}=\tfrac{4\pi}{3}$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Convert $60^\circ$ to radians.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Convert $\tfrac{\pi}{6}$ to degrees.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Convert $270^\circ$ to radians.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Convert $2\pi$ to degrees.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Arc length for $r=4,\ \theta=\tfrac{\pi}{3}$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Convert $120^\circ$ to radians.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Convert $\tfrac{3\pi}{4}$ to degrees.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Convert $360^\circ$ to radians.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Arc length for $r=10,\ \theta=\tfrac{\pi}{5}$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Convert $30^\circ$ to radians.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Convert $\pi$ to degrees.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Convert $225^\circ$ to radians.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+A wheel of radius 0.5 m turns through $4\pi$ radians. How far does a point on the rim travel?\workspace{3cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Convert $60^\circ$ to radians.
+  \item Convert $\tfrac{\pi}{6}$ to degrees.
+  \item Convert $270^\circ$ to radians.
+  \item Convert $2\pi$ to degrees.
+  \item Arc length for $r=4,\ \theta=\tfrac{\pi}{3}$?
+  \item Convert $120^\circ$ to radians.
+  \item Convert $\tfrac{3\pi}{4}$ to degrees.
+  \item Convert $360^\circ$ to radians.
+  \item Arc length for $r=10,\ \theta=\tfrac{\pi}{5}$?
+  \item Convert $30^\circ$ to radians.
+  \item Convert $\pi$ to degrees.
+  \item Convert $225^\circ$ to radians.
+  \item A wheel of radius 0.5 m turns through $4\pi$ radians. How far does a point on the rim travel?
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $\tfrac{\pi}{3}$
+  \item $30^\circ$
+  \item $\tfrac{3\pi}{2}$
+  \item $360^\circ$
+  \item $\tfrac{4\pi}{3}$
+  \item $\tfrac{2\pi}{3}$
+  \item $135^\circ$
+  \item $2\pi$
+  \item $2\pi$
+  \item $\tfrac{\pi}{6}$
+  \item $180^\circ$
+  \item $\tfrac{5\pi}{4}$
+  \item $s=0.5\cdot4\pi=2\pi\approx6.28$ m
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

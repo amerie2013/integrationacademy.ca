@@ -1,0 +1,167 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MFM2P \textperiodcentered{} 2.6}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 2.6 --- Interpreting Linear Models}\\[2pt]
+{\small Grade 10 Applied (MFM2P) \textperiodcentered{} Unit 2: Linear Relations}
+\end{center}
+
+\begin{ideabox}
+A line models cost, distance, or volume. Read slope and intercept in context, then predict.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Slope = the rate of change (per-unit amount).
+  \item Intercept = the starting/fixed value at $x=0$.
+  \item Predict an output: substitute the input.
+  \item Predict an input: set the model equal to the output and solve.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Meaning of slope and intercept}In a real model the slope is a rate (cost per item, speed) and the intercept a starting amount (a base fee).
+\lh{Making predictions}Substitute a value into the equation to predict the other quantity.
+\lh{Know the limits}Predictions are trustworthy within the data's range; far beyond it, a linear model may no longer apply.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Read the model}
+A pool drains by $V=-20t+500$. What do $-20$ and $500$ mean?\soln Drains $20$ L/min; starts at $500$ L.
+\plot{-2}{28}{-50}{550}{\addplot[exblue,very thick,domain=0:25,samples=2]{-20*x+500};\addplot[mark=*,only marks,black]coordinates{(0,500)(25,0)};}
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Predict an output}
+For $C=2d+3$, find the cost of a $10$ km trip.\soln $C=2(10)+3=23$ dollars.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Predict an input}
+For $C=2d+3$, how far for $15$ dollars?\soln $2d+3=15\Rightarrow d=6$ km.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Interpret the intercept}
+For $C=0.05t+20$, what is the cost at $0$ minutes?\soln $C=20$ dollars — the fixed fee.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Compare two models}
+Plan A: $C=0.10t+10$; Plan B: $C=0.05t+20$. Cheaper at $100$ min?\soln A: $20$; B: $25$ — Plan A.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- When is it empty?}
+For $V=-5t+60$, when is $V=0$?\soln $5t=60\Rightarrow t=12$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Rate with units}
+A candle: $h=-3t+20$. What does $-3$ mean?\soln It burns $3$ cm per hour.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Starting value}
+For $h=-5t+25$, what is the starting height?\soln At $t=0$, $h=25$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Break-even (harder)}
+Plan A: $C=0.10t+10$; Plan B: $C=0.05t+20$. When equal?\soln $0.10t+10=0.05t+20\Rightarrow t=200$ min.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+For $C=3h+25$, state the fixed fee and the rate.\workspace{2.0cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+For $C=3h+25$, find $C$ at $h=4$.\workspace{2.0cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+For $C=3h+25$, find $h$ when $C=49$.\workspace{2.0cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+For $V=-5t+60$, what does $-5$ mean?\workspace{2.0cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+For $V=-5t+60$, when is $V=0$?\workspace{2.0cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+A taxi $C=2d+5$: find the cost of $12$ km.\workspace{2.0cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+A taxi $C=2d+5$: how far for $25$ dollars?\workspace{2.0cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+For $h=-4t+32$, find the starting height.\workspace{2.0cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+For $h=-4t+32$, when does it reach $0$?\workspace{2.0cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Plan A: $0.20t+5$; Plan B: $0.10t+15$. Cheaper at $50$ units?\workspace{2.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+A pool drains $V=-25t+400$: when is it empty?\workspace{2.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+For $C=1.5x+8$, interpret $1.5$ and $8$.\workspace{2.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Plan A: $0.20t+5$; Plan B: $0.10t+15$. When equal?\workspace{2.4cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item For $C=3h+25$, state the fixed fee and the rate.
+  \item For $C=3h+25$, find $C$ at $h=4$.
+  \item For $C=3h+25$, find $h$ when $C=49$.
+  \item For $V=-5t+60$, what does $-5$ mean?
+  \item For $V=-5t+60$, when is $V=0$?
+  \item A taxi $C=2d+5$: find the cost of $12$ km.
+  \item A taxi $C=2d+5$: how far for $25$ dollars?
+  \item For $h=-4t+32$, find the starting height.
+  \item For $h=-4t+32$, when does it reach $0$?
+  \item Plan A: $0.20t+5$; Plan B: $0.10t+15$. Cheaper at $50$ units?
+  \item A pool drains $V=-25t+400$: when is it empty?
+  \item For $C=1.5x+8$, interpret $1.5$ and $8$.
+  \item Plan A: $0.20t+5$; Plan B: $0.10t+15$. When equal?
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item fixed $25$, rate $3$.
+  \item $C=37$ dollars.
+  \item $3h=24\Rightarrow h=8$.
+  \item decreasing $5$ per unit time.
+  \item $t=12$.
+  \item $C=29$ dollars.
+  \item $2d+5=25\Rightarrow d=10$ km.
+  \item $32$.
+  \item $4t=32\Rightarrow t=8$.
+  \item A: $15$, B: $20$ — Plan A.
+  \item $25t=400\Rightarrow t=16$.
+  \item rate $1.5$/unit, fixed fee $8$.
+  \item $0.20t+5=0.10t+15\Rightarrow t=100$.
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

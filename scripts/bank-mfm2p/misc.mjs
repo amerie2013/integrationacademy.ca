@@ -1,0 +1,207 @@
+// MFM2P — remaining authored topics: 5.1 Ratio/Proportion/Scale, 5.4 Pythagorean,
+// 7.5 Interpreting Quadratic Graphs. 60 questions each.
+import { mc, ms, tf, num, fill, order, match } from "../bank-mpm2d/helpers.mjs";
+
+// ── 5.1 Ratio, Proportion & Scale ────────────────────────────
+function g51() {
+  const q = [];
+  q.push(mc("easy", "Simplify the ratio $8:12$.", ["$2:3$", "$4:6$", "$3:2$", "$8:12$"], 0));
+  q.push(mc("easy", "Solve $\\dfrac{x}{4}=\\dfrac{6}{8}$.", ["$3$", "$2$", "$12$", "$48$"], 0));
+  q.push(mc("easy", "A map scale $1:1000$ means $1$ cm represents:", ["$1000$ cm", "$1$ cm", "$100$ m", "$10$ cm"], 0));
+  q.push(mc("easy", "Simplify the ratio $15:25$.", ["$3:5$", "$5:3$", "$15:25$", "$1:2$"], 0));
+  q.push(mc("easy", "If $3$ pens cost $6$ dollars, one pen costs:", ["$2$ dollars", "$3$ dollars", "$18$ dollars", "$0.50$ dollars"], 0));
+  q.push(mc("easy", "A proportion is:", ["two equal ratios", "a sum", "a product", "a difference"], 0));
+  q.push(ms("easy", "Which are equal to $2:3$?", ["$4:6$", "$6:9$", "$8:12$", "$2:5$"], [0, 1, 2]));
+  q.push(ms("easy", "To solve a proportion:", ["cross-multiply", "keep the ratios equal", "check by substitution", "add the terms"], [0, 1, 2]));
+  q.push(ms("easy", "Which simplify to $1:2$?", ["$3:6$", "$5:10$", "$8:16$", "$2:3$"], [0, 1, 2]));
+  q.push(ms("easy", "Scale facts:", ["$1:1000$ means $1$ unit $:1000$ units", "used on maps and models", "it is a unit ratio", "always $1:1$"], [0, 1, 2]));
+  q.push(tf("easy", "$8:12$ simplifies to $2:3$.", true));
+  q.push(tf("easy", "A proportion sets two ratios equal.", true));
+  q.push(tf("easy", "$15:25$ simplifies to $5:3$.", false));
+  q.push(fill("easy", "Simplify $8:12$ (write as $a:b$).", ["2:3"]));
+  q.push(fill("easy", "Solve $\\dfrac{x}{4}=\\dfrac{6}{8}$.", ["3"]));
+  q.push(fill("easy", "Solve $\\dfrac{5}{x}=\\dfrac{10}{6}$.", ["3"]));
+  q.push(num("easy", "Solve $\\dfrac{x}{4}=\\dfrac{6}{8}$.", 3, 0));
+  q.push(num("easy", "If $3$ pens cost $6$ dollars, $7$ pens cost ___ dollars.", 14, 0));
+  q.push(num("easy", "On a $1:50$ model, a real $200$ cm wall is ___ cm.", 4, 0));
+  q.push(match("easy", "Match each ratio to its simplest form.", ["$8:12$", "$15:25$", "$6:9$"], ["$2:3$", "$3:5$", "$2:3$"], [0, 1, 2]));
+  q.push(mc("medium", "Solve $\\dfrac{x}{15}=\\dfrac{4}{5}$.", ["$12$", "$3$", "$75$", "$20$"], 0));
+  q.push(mc("medium", "A recipe is $2:3$ flour:sugar. With $6$ cups of flour, sugar $=$", ["$9$", "$4$", "$12$", "$6$"], 0));
+  q.push(mc("medium", "A map $1:25000$: $4$ cm represents how far?", ["$1000$ m", "$100$ m", "$25000$ m", "$250$ m"], 0));
+  q.push(mc("medium", "A $4:6$ photo is scaled to width $8$. Its height is:", ["$12$", "$10$", "$6$", "$16$"], 0));
+  q.push(mc("medium", "Two similar rectangles have ratio $2:5$. If the small side is $4$, the large is:", ["$10$", "$8$", "$20$", "$2.5$"], 0));
+  q.push(mc("medium", "If $5$ kg costs $12$ dollars, $8$ kg costs (1 dp):", ["$19.20$", "$15.00$", "$7.50$", "$96.00$"], 0));
+  q.push(ms("medium", "To solve $\\dfrac{x}{15}=\\dfrac{4}{5}$:", ["cross-multiply $5x=60$", "$x=12$", "check $12/15=4/5$", "$x=3$"], [0, 1, 2]));
+  q.push(ms("medium", "Proportions use:", ["cross-multiplication", "unit rates", "scale factors", "random guessing"], [0, 1, 2]));
+  q.push(ms("medium", "A $1:25000$ map:", ["$1$ cm $=25000$ cm", "$=250$ m", "scale factor $25000$", "$1$ cm $=1$ km"], [0, 1, 2]));
+  q.push(ms("medium", "Which are equal ratios?", ["$2:3$ and $8:12$", "$1:4$ and $3:12$", "$5:2$ and $10:4$", "$2:3$ and $3:2$"], [0, 1, 2]));
+  q.push(tf("medium", "$\\dfrac{x}{15}=\\dfrac{4}{5}$ gives $x=12$.", true));
+  q.push(tf("medium", "A $2:3$ recipe with $6$ cups of flour needs $9$ cups of sugar.", true));
+  q.push(tf("medium", "A $1:25000$ map has $1$ cm representing $250$ km.", false));
+  q.push(fill("medium", "Solve $\\dfrac{x}{15}=\\dfrac{4}{5}$.", ["12"]));
+  q.push(fill("medium", "Recipe $2:3$ flour:sugar, $6$ cups flour $\\to$ sugar ___ cups.", ["9"]));
+  q.push(fill("medium", "If $5$ kg costs $12$ dollars, the unit cost is ___ dollars/kg.", ["2.4", "2.40"]));
+  q.push(num("medium", "Solve $\\dfrac{x}{15}=\\dfrac{4}{5}$.", 12, 0));
+  q.push(num("medium", "If $5$ kg costs $12$ dollars, $8$ kg costs ___ dollars.", 19.2, 0.05));
+  q.push(num("medium", "On a $1:50$ model, a real $600$ cm wall is ___ cm.", 12, 0));
+  q.push(match("medium", "Match each proportion to its solution.", ["$\\dfrac{x}{15}=\\dfrac{4}{5}$", "$\\dfrac{x}{4}=\\dfrac{6}{8}$", "$\\dfrac{5}{x}=\\dfrac{10}{6}$"], ["$12$", "$3$", "$3$"], [0, 1, 2]));
+  q.push(mc("hard", "Solve $\\dfrac{x+1}{6}=\\dfrac{2}{3}$.", ["$3$", "$2$", "$5$", "$1$"], 0));
+  q.push(mc("hard", "A $1:200$ model car is $22$ cm. The real car is ___ m.", ["$44$", "$4.4$", "$440$", "$22$"], 0));
+  q.push(mc("hard", "Two similar triangles have ratio $3:7$. The small one's perimeter is $12$; the large's is:", ["$28$", "$16$", "$36$", "$84$"], 0));
+  q.push(mc("hard", "A juice mix is $3:2$ concentrate:water. To make $25$ L, the concentrate is:", ["$15$ L", "$10$ L", "$12.5$ L", "$5$ L"], 0));
+  q.push(mc("hard", "If $4$ workers take $6$ days, $3$ workers take (inverse proportion):", ["$8$ days", "$4.5$ days", "$18$ days", "$2$ days"], 0));
+  q.push(ms("hard", "To solve $\\dfrac{x+1}{6}=\\dfrac{2}{3}$:", ["cross-multiply $3(x+1)=12$", "$x+1=4$", "$x=3$", "$x=4$"], [0, 1, 2]));
+  q.push(ms("hard", "Direct-proportion examples:", ["cost vs quantity", "distance vs time at a fixed speed", "ingredients in a recipe", "workers vs time for a job"], [0, 1, 2]));
+  q.push(ms("hard", "Scale models:", ["$1:200$ means real is $200\\times$ the model", "multiply the model by the scale for the real size", "divide the real by the scale for the model", "the model is bigger than the real object"], [0, 1, 2]));
+  q.push(ms("hard", "A mixture $3:2$ (total $5$ parts):", ["$3/5$ is concentrate", "$2/5$ is water", "the parts sum to the whole", "the ratio is $3:5$"], [0, 1, 2]));
+  q.push(tf("hard", "$\\dfrac{x+1}{6}=\\dfrac{2}{3}$ gives $x=3$.", true));
+  q.push(tf("hard", "A $1:200$ model $22$ cm represents a real $44$ m.", true));
+  q.push(tf("hard", "In a $3:2$ mix making $25$ L, there are $10$ L of concentrate.", false));
+  q.push(fill("hard", "Solve $\\dfrac{x+1}{6}=\\dfrac{2}{3}$.", ["3"]));
+  q.push(fill("hard", "A $1:200$ model car $22$ cm $\\to$ real ___ m.", ["44"]));
+  q.push(fill("hard", "A $3:2$ mix making $25$ L: concentrate ___ L.", ["15"]));
+  q.push(num("hard", "Solve $\\dfrac{x+1}{6}=\\dfrac{2}{3}$.", 3, 0));
+  q.push(num("hard", "Similar triangles $3:7$, small perimeter $12$ $\\to$ large perimeter.", 28, 0));
+  q.push(num("hard", "A $3:2$ mix making $25$ L: water ___ L.", 10, 0));
+  q.push(order("hard", "Order the steps to solve a proportion.", ["Write the two equal ratios", "Cross-multiply", "Solve the resulting equation", "Check the answer"]));
+  q.push(match("hard", "Match each scenario to its answer.", ["model $1:200$, $22$ cm", "$3:2$ mix, $25$ L concentrate", "similar $3:7$, small perim $12$"], ["$44$ m", "$15$ L", "$28$"], [0, 1, 2]));
+  return q;
+}
+
+// ── 5.4 The Pythagorean Theorem ──────────────────────────────
+function g54() {
+  const q = [];
+  q.push(mc("easy", "The Pythagorean theorem is:", ["$a^2+b^2=c^2$", "$a+b=c$", "$a^2-b^2=c^2$", "$ab=c$"], 0));
+  q.push(mc("easy", "Hypotenuse with legs $3$ and $4$:", ["$5$", "$7$", "$12$", "$25$"], 0));
+  q.push(mc("easy", "Hypotenuse with legs $6$ and $8$:", ["$10$", "$14$", "$48$", "$100$"], 0));
+  q.push(mc("easy", "The hypotenuse is:", ["opposite the right angle", "a leg", "the shortest side", "always vertical"], 0));
+  q.push(mc("easy", "Legs $5$ and $12$; the hypotenuse is:", ["$13$", "$17$", "$60$", "$169$"], 0));
+  q.push(mc("easy", "To find a leg, you:", ["subtract then square-root", "add then square", "multiply", "just add"], 0));
+  q.push(ms("easy", "Which are right triangles?", ["$3,4,5$", "$6,8,10$", "$5,12,13$", "$2,3,4$"], [0, 1, 2]));
+  q.push(ms("easy", "For legs $3,4$:", ["$3^2+4^2=25$", "$c=\\sqrt{25}$", "$c=5$", "$c=7$"], [0, 1, 2]));
+  q.push(ms("easy", "Pythagorean facts:", ["only for right triangles", "$c$ is the hypotenuse", "$a^2+b^2=c^2$", "works for all triangles"], [0, 1, 2]));
+  q.push(ms("easy", "Common Pythagorean triples:", ["$3,4,5$", "$5,12,13$", "$8,15,17$", "$1,2,3$"], [0, 1, 2]));
+  q.push(tf("easy", "With legs $3$ and $4$, the hypotenuse is $5$.", true));
+  q.push(tf("easy", "The hypotenuse is opposite the right angle.", true));
+  q.push(tf("easy", "The theorem works for all triangles.", false));
+  q.push(fill("easy", "Hypotenuse with legs $3,4$:", ["5"]));
+  q.push(fill("easy", "Hypotenuse with legs $6,8$:", ["10"]));
+  q.push(fill("easy", "Hypotenuse with legs $5,12$:", ["13"]));
+  q.push(num("easy", "Hypotenuse with legs $9,12$.", 15, 0));
+  q.push(num("easy", "Hypotenuse with legs $8,15$.", 17, 0));
+  q.push(num("easy", "A leg, given hypotenuse $13$ and the other leg $5$.", 12, 0));
+  q.push(match("easy", "Match each leg pair to its hypotenuse.", ["$3,4$", "$6,8$", "$5,12$"], ["$5$", "$10$", "$13$"], [0, 1, 2]));
+  q.push(mc("medium", "A leg, given hypotenuse $13$ and leg $5$:", ["$12$", "$8$", "$18$", "$144$"], 0));
+  q.push(mc("medium", "Hypotenuse with legs $9,12$:", ["$15$", "$21$", "$225$", "$11$"], 0));
+  q.push(mc("medium", "A $10$ m ladder reaches $8$ m up a wall. The base distance is:", ["$6$ m", "$2$ m", "$12.8$ m", "$18$ m"], 0));
+  q.push(mc("medium", "The diagonal of a $6\\times8$ rectangle:", ["$10$", "$14$", "$48$", "$28$"], 0));
+  q.push(mc("medium", "A leg, given hypotenuse $17$ and leg $8$:", ["$15$", "$9$", "$25$", "$23$"], 0));
+  q.push(mc("medium", "Hypotenuse with legs $7,24$:", ["$25$", "$31$", "$17$", "$49$"], 0));
+  q.push(ms("medium", "To find a leg:", ["$a^2=c^2-b^2$", "subtract the squares", "then square-root", "add the squares"], [0, 1, 2]));
+  q.push(ms("medium", "For a $10$ m ladder, $8$ m up:", ["$10^2-8^2=36$", "base $=6$", "it is a right triangle", "base $=2$"], [0, 1, 2]));
+  q.push(ms("medium", "Which give a hypotenuse of $25$?", ["$7,24$", "$15,20$", "$20,15$", "$3,4$"], [0, 1, 2]));
+  q.push(ms("medium", "The diagonal of a rectangle:", ["use the two sides as legs", "Pythagorean theorem", "$6,8\\to10$", "equals a side"], [0, 1, 2]));
+  q.push(tf("medium", "A leg with hypotenuse $13$ and other leg $5$ is $12$.", true));
+  q.push(tf("medium", "A $6\\times8$ rectangle has diagonal $10$.", true));
+  q.push(tf("medium", "Legs $7,24$ give a hypotenuse of $17$.", false));
+  q.push(fill("medium", "A leg, given hypotenuse $13$ and leg $5$:", ["12"]));
+  q.push(fill("medium", "The diagonal of a $6\\times8$ rectangle:", ["10"]));
+  q.push(fill("medium", "Hypotenuse with legs $7,24$:", ["25"]));
+  q.push(num("medium", "A leg, given hypotenuse $17$ and leg $8$.", 15, 0));
+  q.push(num("medium", "Hypotenuse with legs $9,12$.", 15, 0));
+  q.push(num("medium", "A $10$ m ladder, $8$ m up: the base distance (m).", 6, 0));
+  q.push(match("medium", "Match each to its missing side.", ["legs $7,24\\to$ hyp", "hyp $13$, leg $5\\to$ leg", "$6\\times8$ rectangle diagonal"], ["$25$", "$12$", "$10$"], [0, 1, 2]));
+  q.push(mc("hard", "Hypotenuse with legs $5,5$ (1 dp):", ["$7.1$", "$10$", "$25$", "$5$"], 0));
+  q.push(mc("hard", "A leg, given hypotenuse $10$ and leg $7$ (2 dp):", ["$7.14$", "$7.00$", "$12.21$", "$3.00$"], 0));
+  q.push(mc("hard", "Is $5,6,8$ a right triangle?", ["no, $25+36\\ne64$", "yes", "cannot tell", "yes, $5+6>8$"], 0));
+  q.push(mc("hard", "The face diagonal of a cube with side $2$ (1 dp):", ["$2.8$", "$4$", "$2$", "$8$"], 0));
+  q.push(mc("hard", "A $12$-ft ladder, base $5$ ft from a wall; height reached (1 dp):", ["$10.9$", "$13$", "$11.0$", "$7.0$"], 0));
+  q.push(ms("hard", "To check if a triangle is right:", ["test $a^2+b^2=c^2$", "use the longest side as $c$", "$5,6,8: 61\\ne64\\to$ not right", "any triangle works"], [0, 1, 2]));
+  q.push(ms("hard", "For legs $5,5$:", ["$25+25=50$", "$c=\\sqrt{50}$", "$\\approx7.1$", "$c=10$"], [0, 1, 2]));
+  q.push(ms("hard", "To find a leg given the hypotenuse:", ["$a^2=c^2-b^2$", "subtract first", "then square-root", "add first"], [0, 1, 2]));
+  q.push(ms("hard", "Pythagorean applications:", ["ladder problems", "rectangle diagonals", "distance between points", "perimeter of a circle"], [0, 1, 2]));
+  q.push(tf("hard", "$5,6,8$ is NOT a right triangle.", true));
+  q.push(tf("hard", "Legs $5,5$ give a hypotenuse of about $7.1$.", true));
+  q.push(tf("hard", "The diagonal of a $6\\times8$ rectangle is $14$.", false));
+  q.push(fill("hard", "Hypotenuse with legs $5,5$ (1 dp):", ["7.1"]));
+  q.push(fill("hard", "A leg, given hypotenuse $10$ and leg $7$ (2 dp):", ["7.14"]));
+  q.push(fill("hard", "Is $5,6,8$ a right triangle? (yes/no)", ["no"]));
+  q.push(num("hard", "Hypotenuse with legs $5,5$ (2 dp).", 7.07, 0.02));
+  q.push(num("hard", "A leg, given hypotenuse $10$ and leg $7$ (2 dp).", 7.14, 0.02));
+  q.push(num("hard", "Hypotenuse with legs $8,15$.", 17, 0));
+  q.push(order("hard", "Order the steps to find a hypotenuse.", ["Square each leg", "Add the squares", "Take the square root", "State $c$"]));
+  q.push(match("hard", "Match each to its value.", ["legs $5,5\\to$ hyp (1 dp)", "legs $8,15\\to$ hyp", "hyp $13$, leg $5\\to$ leg"], ["$7.1$", "$17$", "$12$"], [0, 1, 2]));
+  return q;
+}
+
+// ── 7.5 Interpreting Quadratic Graphs ────────────────────────
+function g75() {
+  const q = [];
+  q.push(mc("easy", "The graph of a quadratic is a:", ["parabola", "line", "circle", "point"], 0));
+  q.push(mc("easy", "If $a>0$, the parabola:", ["opens up", "opens down", "is a line", "is flat"], 0));
+  q.push(mc("easy", "The vertex is the:", ["maximum or minimum point", "$y$-intercept", "$x$-intercept", "slope"], 0));
+  q.push(mc("easy", "The zeros are where:", ["the graph meets the $x$-axis", "$y$ is a maximum", "$x=0$", "the vertex is"], 0));
+  q.push(mc("easy", "If $a<0$, the vertex is a:", ["maximum", "minimum", "zero", "intercept"], 0));
+  q.push(mc("easy", "The axis of symmetry passes through the:", ["vertex", "$y$-intercept", "origin", "zeros only"], 0));
+  q.push(ms("easy", "Features of a parabola:", ["a vertex", "an axis of symmetry", "zeros (maybe)", "a constant slope"], [0, 1, 2]));
+  q.push(ms("easy", "If $a>0$:", ["it opens up", "it has a minimum", "it is U-shaped", "it opens down"], [0, 1, 2]));
+  q.push(ms("easy", "The zeros are:", ["the $x$-intercepts", "where $y=0$", "the roots", "the vertex"], [0, 1, 2]));
+  q.push(ms("easy", "The vertex:", ["is the max or min", "lies on the axis of symmetry", "is the turning point", "is the $y$-intercept"], [0, 1, 2]));
+  q.push(tf("easy", "A quadratic graph is a parabola.", true));
+  q.push(tf("easy", "If $a<0$, the parabola opens down.", true));
+  q.push(tf("easy", "The zeros are where the graph crosses the $y$-axis.", false));
+  q.push(fill("easy", "The turning point of a parabola is the ___.", ["vertex"]));
+  q.push(fill("easy", "If $a>0$, the vertex is a ___ (max/min).", ["minimum", "min"]));
+  q.push(fill("easy", "The $x$-intercepts of a parabola are its ___.", ["zeros", "roots"]));
+  q.push(num("easy", "$y=x^2-4$: the number of $x$-intercepts.", 2, 0));
+  q.push(num("easy", "$y=x^2$: the $x$-coordinate of the vertex.", 0, 0));
+  q.push(num("easy", "$y=(x-3)^2$: the $x$-coordinate of the vertex.", 3, 0));
+  q.push(match("easy", "Match each feature to its meaning.", ["vertex", "zeros", "axis of symmetry"], ["max/min point", "$x$-intercepts", "line through the vertex"], [0, 1, 2]));
+  q.push(mc("medium", "$y=(x-2)^2-5$: the vertex is:", ["$(2,-5)$", "$(-2,-5)$", "$(2,5)$", "$(-2,5)$"], 0));
+  q.push(mc("medium", "$y=x^2-6x+5$: the zeros are:", ["$1$ and $5$", "$-1$ and $-5$", "$2$ and $3$", "$0$ and $5$"], 0));
+  q.push(mc("medium", "$y=(x+3)^2+1$: it opens ___ with vertex ___.", ["up, $(-3,1)$", "down, $(3,1)$", "up, $(3,-1)$", "down, $(-3,-1)$"], 0));
+  q.push(mc("medium", "$y=-2x^2+8$: the maximum value is:", ["$8$", "$0$", "$-2$", "$4$"], 0));
+  q.push(mc("medium", "The axis of symmetry of $y=x^2-6x+5$:", ["$x=3$", "$x=6$", "$x=5$", "$x=-3$"], 0));
+  q.push(mc("medium", "$y=x^2-9$: the zeros are:", ["$\\pm3$", "$\\pm9$", "$3$ only", "$0$"], 0));
+  q.push(ms("medium", "For $y=(x-2)^2-5$:", ["vertex $(2,-5)$", "opens up", "minimum $-5$", "vertex $(-2,5)$"], [0, 1, 2]));
+  q.push(ms("medium", "For $y=x^2-6x+5$:", ["zeros $1$ and $5$", "axis $x=3$", "opens up", "zeros $-1,-5$"], [0, 1, 2]));
+  q.push(ms("medium", "Reading vertex form $y=a(x-h)^2+k$:", ["vertex $(h,k)$", "$a>0$ opens up", "$k$ is the max/min value", "vertex $(-h,k)$"], [0, 1, 2]));
+  q.push(ms("medium", "Zeros from a graph:", ["where it crosses the $x$-axis", "there can be $0$, $1$, or $2$", "also called roots", "always $2$"], [0, 1, 2]));
+  q.push(tf("medium", "$y=(x-2)^2-5$ has vertex $(2,-5)$.", true));
+  q.push(tf("medium", "$y=-2x^2+8$ has a maximum value of $8$.", true));
+  q.push(tf("medium", "$y=x^2-6x+5$ has axis of symmetry $x=6$.", false));
+  q.push(fill("medium", "The vertex of $y=(x-2)^2-5$:", ["(2,-5)", "2,-5"]));
+  q.push(fill("medium", "The zeros of $y=x^2-9$:", ["±3", "-3,3", "3,-3"]));
+  q.push(fill("medium", "The axis of symmetry of $y=x^2-6x+5$:", ["x=3", "3"]));
+  q.push(num("medium", "The maximum value of $y=-2x^2+8$.", 8, 0));
+  q.push(num("medium", "$y=x^2-6x+5$: the larger zero.", 5, 0));
+  q.push(num("medium", "$y=(x-4)^2-1$: the $x$-coordinate of the vertex.", 4, 0));
+  q.push(match("medium", "Match each parabola to its vertex.", ["$y=(x-2)^2-5$", "$y=(x+3)^2+1$", "$y=x^2-4$"], ["$(2,-5)$", "$(-3,1)$", "$(0,-4)$"], [0, 1, 2]));
+  q.push(mc("hard", "A ball $h=-5t^2+20t$: the maximum height occurs at:", ["$t=2$", "$t=4$", "$t=20$", "$t=10$"], 0));
+  q.push(mc("hard", "For $h=-5t^2+20t$, the maximum height is:", ["$20$ m", "$40$ m", "$0$ m", "$25$ m"], 0));
+  q.push(mc("hard", "$y=x^2-4x+3$: the zeros are:", ["$1$ and $3$", "$-1$ and $-3$", "$2$ and $3$", "$0$ and $4$"], 0));
+  q.push(mc("hard", "$h=-5t^2+20t$: when does it hit the ground ($t>0$)?", ["$t=4$", "$t=2$", "$t=20$", "$t=5$"], 0));
+  q.push(mc("hard", "The vertex of $y=2x^2-8x+3$ has $x=$", ["$2$", "$4$", "$-2$", "$8$"], 0));
+  q.push(ms("hard", "For $h=-5t^2+20t$:", ["opens down", "max at $t=2$", "max height $20$", "min at $t=2$"], [0, 1, 2]));
+  q.push(ms("hard", "For $y=x^2-4x+3$:", ["zeros $1,3$", "axis $x=2$", "vertex below the $x$-axis", "opens up"], [0, 1, 2, 3]));
+  q.push(ms("hard", "To find a max/min from a graph:", ["find the vertex", "read its $y$-value", "$x=-b/(2a)$", "read the $y$-intercept"], [0, 1, 2]));
+  q.push(ms("hard", "Projectile-motion graphs:", ["height vs time", "a parabola opening down", "the vertex is the peak", "a straight line"], [0, 1, 2]));
+  q.push(tf("hard", "For $h=-5t^2+20t$, the maximum height is $20$ m.", true));
+  q.push(tf("hard", "$y=x^2-4x+3$ has zeros at $1$ and $3$.", true));
+  q.push(tf("hard", "The vertex of $y=2x^2-8x+3$ has $x=4$.", false));
+  q.push(fill("hard", "$h=-5t^2+20t$: the time of maximum height.", ["2", "t=2"]));
+  q.push(fill("hard", "$y=x^2-4x+3$: the two zeros.", ["1,3", "1 and 3"]));
+  q.push(fill("hard", "The vertex $x$ of $y=2x^2-8x+3$:", ["2"]));
+  q.push(num("hard", "$h=-5t^2+20t$: the maximum height (m).", 20, 0));
+  q.push(num("hard", "$h=-5t^2+20t$: the time it hits the ground ($t>0$).", 4, 0));
+  q.push(num("hard", "$y=x^2-4x+3$: the larger zero.", 3, 0));
+  q.push(order("hard", "Order the steps to find a parabola's maximum from $y=ax^2+bx+c$.", ["Find $x=-b/(2a)$", "Substitute to get the $y$-value", "That point is the vertex", "Read the maximum"]));
+  q.push(match("hard", "Match each parabola to its vertex $x$-value.", ["$h=-5t^2+20t$", "$y=2x^2-8x+3$", "$y=x^2-4x+3$"], ["$2$", "$2$", "$2$"], [0, 1, 2]));
+  return q;
+}
+
+export default [
+  { code: "5.1", gen: g51 },
+  { code: "5.4", gen: g54 },
+  { code: "7.5", gen: g75 },
+];

@@ -1,0 +1,180 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MFM2P \textperiodcentered{} 7.1}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 7.1 --- Introducing Quadratic Relations}\\[2pt]
+{\small Grade 10 Applied (MFM2P) \textperiodcentered{} Unit 7: Quadratic Relations}
+\end{center}
+
+\begin{ideabox}
+A \textbf{quadratic relation} has degree $2$ and graphs as a \textbf{parabola}. Its second differences are constant.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Standard form $y=ax^2+bx+c$ with $a\neq0$; the base parabola is $y=x^2$.
+  \item \textbf{First differences} change; \textbf{second differences} are constant for a quadratic.
+  \item The constant second difference equals $2a$.
+  \item $a>0$ opens up (minimum); $a<0$ opens down (maximum).
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{What is quadratic}A \textbf{quadratic relation} has a squared variable, and its graph is a curved \textbf{parabola}, not a line.
+\lh{Second differences}In a table, quadratics show equal \emph{second} differences, where linear relations show equal first differences.
+\lh{Where they appear}Thrown objects and areas follow quadratic relations.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Identifying quadratics}
+Which are quadratic: $y=x^2-3$, $\ y=2x+1$, $\ y=-4x^2$?
+\soln $y=x^2-3$ and $y=-4x^2$ are quadratic (degree $2$); $y=2x+1$ is linear.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Second differences}
+Show the relation $x:0,1,2,3$, $\ y:1,3,7,13$ is quadratic.
+\soln First differences $2,4,6$; second differences $2,2$ --- constant, so it is quadratic.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Evaluating}
+If $f(x)=x^2-2x-3$, find $f(4)$.
+\soln $f(4)=16-8-3=5.$
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- The base parabola}
+Graph $y=x^2$.
+\soln A parabola with vertex $(0,0)$ opening up.
+\plot{-4}{4}{-1}{9}{\addplot[exblue,very thick,domain=-3:3,samples=60]{x^2};\addplot[mark=*,only marks,black]coordinates{(0,0)}; }
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Effect of $a$}
+Compare $y=x^2$ and $y=2x^2$.
+\soln $y=2x^2$ is narrower (vertical stretch by $2$); both share vertex $(0,0)$.
+\plot{-4}{4}{-1}{9}{\addplot[exblue,very thick,domain=-3:3,samples=60]{x^2};\addplot[qorange,very thick,domain=-2.1:2.1,samples=60]{2*x^2};}
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Opening down}
+Graph $y=-x^2$.
+\soln Reflection of the base parabola; vertex $(0,0)$, opens down.
+\plot{-4}{4}{-9}{1}{\addplot[exblue,very thick,domain=-3:3,samples=60]{-x^2};}
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Evaluating with negatives}
+If $f(x)=2x^2-x+1$, find $f(-2)$.
+\soln $f(-2)=2(4)-(-2)+1=8+2+1=11.$
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- A height model}
+A ball's height is $h=-5t^2+20t$ (m). Find its height at $t=1$ and $t=2$.
+\soln $h(1)=-5+20=15$ m; $h(2)=-20+40=20$ m.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Using $2a$ (harder)}
+A relation $y=ax^2$ has a constant second difference of $6$. Find $a$ and the value at $x=3$.
+\soln $2a=6\Rightarrow a=3$, so $y=3x^2$ and $y(3)=3(9)=27.$
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Which are quadratic: $y=x^2-7$, $\ y=4x+1$, $\ y=-3x^2$, $\ y=x^3+2$?\workspace{2.0cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Use second differences to decide if $x:0,1,2,3$, $\ y:2,5,10,17$ is quadratic.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+If $f(x)=x^2-3x+2$, find $f(5)$.\workspace{1.8cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+If $f(x)=-2x^2+4x$, find $f(-1)$.\workspace{1.8cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Graph $y=x^2-1$.
+\begin{center}\begin{tikzpicture}\begin{axis}[width=8cm,height=6cm,axis lines=middle,grid=both,grid style={gray!16},xmin=-6,xmax=6,ymin=-6,ymax=6,xtick distance=2,ytick distance=2,tick label style={font=\tiny}]\end{axis}\end{tikzpicture}\end{center}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+A relation $y=ax^2$ has a constant second difference of $8$. Find $a$.\workspace{2.0cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+A ball's height is $h=-5t^2+30t$. Find its height at $t=2$.\workspace{2.0cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Graph $y=-x^2+4$.
+\begin{center}\begin{tikzpicture}\begin{axis}[width=8cm,height=6cm,axis lines=middle,grid=both,grid style={gray!16},xmin=-6,xmax=6,ymin=-6,ymax=6,xtick distance=2,ytick distance=2,tick label style={font=\tiny}]\end{axis}\end{tikzpicture}\end{center}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+If $f(x)=2x^2-5$, find $f(0)$ and $f(3)$.\workspace{2.0cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Are the second differences of a \emph{linear} relation constant? What is their value?\workspace{2.0cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+The points $x:1,2,3,4$, $\ y:1,4,9,16$ follow which quadratic relation?\workspace{2.0cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Does $y=5-2x^2$ open up or down? Give its maximum or minimum value.\workspace{2.0cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+A relation $y=ax^2$ has a constant second difference of $10$. Find $a$ and the value at $x=4$.\workspace{2.6cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Which are quadratic: $y=x^2-7$, $\ y=4x+1$, $\ y=-3x^2$, $\ y=x^3+2$?
+  \item Use second differences to decide if $x:0,1,2,3$, $\ y:2,5,10,17$ is quadratic.
+  \item If $f(x)=x^2-3x+2$, find $f(5)$.
+  \item If $f(x)=-2x^2+4x$, find $f(-1)$.
+  \item Graph $y=x^2-1$.
+  \item A relation $y=ax^2$ has a constant second difference of $8$. Find $a$.
+  \item A ball's height is $h=-5t^2+30t$. Find its height at $t=2$.
+  \item Graph $y=-x^2+4$.
+  \item If $f(x)=2x^2-5$, find $f(0)$ and $f(3)$.
+  \item Are the second differences of a \emph{linear} relation constant? What is their value?
+  \item The points $x:1,2,3,4$, $\ y:1,4,9,16$ follow which quadratic relation?
+  \item Does $y=5-2x^2$ open up or down? Give its maximum or minimum value.
+  \item A relation $y=ax^2$ has a constant second difference of $10$. Find $a$ and the value at $x=4$.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $y=x^2-7$ and $y=-3x^2$ are quadratic.
+  \item First diffs $3,5,7$; second diffs $2,2$ --- yes, quadratic.
+  \item $25-15+2=12$.
+  \item $-2-4=-6$.
+  \item Parabola, vertex $(0,-1)$, opens up.
+  \item $2a=8\Rightarrow a=4$.
+  \item $-20+60=40$.
+  \item Parabola, vertex $(0,4)$, opens down.
+  \item $f(0)=-5$, $f(3)=13$.
+  \item Yes, second differences are $0$.
+  \item $y=x^2$.
+  \item Opens down; maximum value $5$.
+  \item $2a=10\Rightarrow a=5$; $y(4)=5(16)=80$.
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

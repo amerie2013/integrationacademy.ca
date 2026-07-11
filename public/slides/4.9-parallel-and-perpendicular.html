@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>4.9 Parallel &amp; Perpendicular Lines — MTH1W</title>
+<style>
+  :root{
+    --indigo:#4f46e5; --indigo-deep:#3730a3; --slate:#1e293b; --slate-2:#334155;
+    --ink:#0f172a; --muted:#64748b; --bg:#eef2ff; --card:#ffffff;
+    --blue:#2563eb; --red:#dc2626; --amber:#d97706; --green:#16a34a;
+    --line:#e2e8f0;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;height:100%;}
+  body{
+    font-family:"Inter","Segoe UI",system-ui,-apple-system,sans-serif;
+    color:var(--ink);
+    background:linear-gradient(135deg,#312e81 0%,#1e293b 55%,#0f172a 100%);
+    overflow:hidden;
+  }
+  /* progress bar */
+  #bar{position:fixed;top:0;left:0;height:4px;width:0;background:linear-gradient(90deg,#818cf8,#4f46e5);z-index:50;transition:width .25s ease;}
+  /* deck */
+  #deck{position:relative;height:100vh;width:100vw;}
+  .slide{
+    position:absolute;inset:0;display:none;
+    padding:4.5vh 6vw 7vh;
+    flex-direction:column;
+  }
+  .slide.active{display:flex;animation:fade .35s ease;}
+  @keyframes fade{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
+  .card{
+    background:var(--card);border-radius:20px;flex:1;
+    padding:5vh 5vw;box-shadow:0 30px 70px rgba(0,0,0,.45);
+    display:flex;flex-direction:column;overflow:auto;
+  }
+  .eyebrow{font-size:clamp(.95rem,1.7vw,1.25rem);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--indigo);}
+  h1{font-family:"Fraunces",Georgia,serif;font-size:clamp(2.4rem,6vw,4.8rem);line-height:1.05;margin:.15em 0 .1em;color:var(--ink);}
+  h2{font-family:"Fraunces",Georgia,serif;font-size:clamp(1.8rem,4.2vw,3rem);margin:0 0 .5em;color:var(--slate);}
+  p,li{font-size:clamp(1.3rem,2.6vw,1.9rem);line-height:1.5;color:var(--slate-2);}
+  ul{margin:.2em 0;padding-left:1.2em;}
+  li{margin:.45em 0;}
+  .sub{color:var(--muted);font-size:clamp(.95rem,1.7vw,1.2rem);}
+  .grow{flex:1;}
+  .center{align-items:center;justify-content:center;text-align:center;}
+  .row{display:flex;gap:3vw;align-items:center;flex-wrap:wrap;}
+  .col{flex:1;min-width:280px;}
+  .pill{display:inline-block;background:var(--bg);color:var(--indigo-deep);font-weight:700;border-radius:999px;padding:.25em .9em;font-size:.9em;}
+  /* math */
+  .eq{font-family:"Cambria Math","Times New Roman",Georgia,serif;font-size:1.08em;white-space:nowrap;}
+  .frac{display:inline-flex;flex-direction:column;text-align:center;vertical-align:-0.55em;margin:0 .12em;}
+  .frac>span:first-child{border-bottom:.08em solid currentColor;padding:0 .3em;line-height:1.05;}
+  .frac>span:last-child{padding:0 .3em;line-height:1.05;}
+  sup{font-size:.7em;}
+  /* boxes */
+  .box{border-radius:14px;padding:1em 1.3em;margin:.5em 0;}
+  .blue{background:#eff6ff;border-left:6px solid var(--blue);}
+  .amber{background:#fffbeb;border-left:6px solid var(--amber);}
+  .green{background:#f0fdf4;border-left:6px solid var(--green);}
+  .red{background:#fef2f2;border-left:6px solid var(--red);}
+  .step{margin:.35em 0;}
+  .ans{color:var(--green);font-weight:700;}
+  .key{font-weight:700;color:var(--indigo-deep);}
+  /* reveal button */
+  .reveal{margin-top:.4em;}
+  .reveal button{cursor:pointer;border:none;background:var(--indigo);color:#fff;font-weight:700;border-radius:10px;padding:.5em 1em;font-size:.95rem;}
+  .reveal button:hover{background:var(--indigo-deep);}
+  .reveal .sol{display:none;margin-top:.5em;}
+  .reveal.open .sol{display:block;}
+  .reveal.open button{display:none;}
+  /* graph */
+  svg{max-width:100%;height:auto;}
+  .legend{font-size:clamp(.85rem,1.5vw,1.05rem);}
+  .legend span{display:inline-flex;align-items:center;gap:.4em;margin-right:1.2em;}
+  .swatch{width:1.6em;height:0;border-top-width:4px;border-top-style:solid;display:inline-block;}
+  /* footer nav */
+  #hud{position:fixed;bottom:14px;right:20px;color:#cbd5e1;font-size:.85rem;z-index:50;display:flex;gap:14px;align-items:center;}
+  #hud kbd{background:rgba(255,255,255,.12);border-radius:5px;padding:1px 6px;font-family:inherit;}
+  #count{font-variant-numeric:tabular-nums;}
+  .navzone{position:fixed;top:0;height:100vh;width:12vw;z-index:30;cursor:pointer;}
+  #prev{left:0;} #next{right:0;}
+  .brand{position:fixed;bottom:14px;left:20px;color:#a5b4fc;font-weight:700;font-size:.85rem;z-index:50;letter-spacing:.03em;}
+  @media print{
+    body{background:#fff;overflow:visible;}
+    .slide{display:flex!important;position:relative;page-break-after:always;height:100vh;}
+    #hud,.navzone,#bar,.brand,.reveal button{display:none!important;}
+    .reveal .sol{display:block!important;}
+    .card{box-shadow:none;border:1px solid var(--line);}
+  }
+</style>
+</head>
+<body>
+<div id="bar"></div>
+<div id="deck">
+
+  <!-- 1 TITLE -->
+  <section class="slide active">
+    <div class="card center">
+      <div class="eyebrow">MTH1W · Grade 9 · Unit 4: Linear Relations</div>
+      <h1>Parallel &amp; Perpendicular Lines</h1>
+      <p class="sub">Lesson 4.9 — how the <em>slopes</em> of two lines reveal how they meet</p>
+      <p style="margin-top:2em;"><span class="pill">Integration Academy</span></p>
+    </div>
+  </section>
+
+  <!-- 2 GOALS -->
+  <section class="slide">
+    <div class="card">
+      <div class="eyebrow">Learning goals</div>
+      <h1>What you'll be able to do</h1>
+      <ul class="grow" style="display:flex;flex-direction:column;justify-content:center;">
+        <li>✅ Decide whether two lines are <span class="key">parallel</span> from their slopes.</li>
+        <li>✅ Decide whether two lines are <span class="key">perpendicular</span> from their slopes.</li>
+        <li>✅ Write the equation of a line that is parallel or perpendicular to a given line <em>through a chosen point</em>.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 3 RECAP -->
+  <section class="slide">
+    <div class="card">
+      <div class="eyebrow">Quick recap</div>
+      <h1>Everything hinges on the slope</h1>
+      <div class="row grow">
+        <div class="col">
+          <p>A line in slope-intercept form:</p>
+          <div class="box blue"><p class="eq" style="font-size:1.6em;">y = m·x + b</p></div>
+          <ul>
+            <li><span class="key">m</span> = slope = <span class="eq"><span class="frac"><span>rise</span><span>run</span></span></span></li>
+            <li><span class="key">b</span> = y-intercept (where it crosses the y-axis)</li>
+          </ul>
+        </div>
+        <div class="col">
+          <div class="box amber">
+            <p style="margin:0;">💡 To compare <em>two</em> lines, compare their <span class="key">slopes</span>. That single number tells you if they are parallel, perpendicular, or neither.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 PARALLEL CONCEPT -->
+  <section class="slide">
+    <div class="card">
+      <div class="eyebrow">Concept 1</div>
+      <h1>Parallel lines</h1>
+      <div class="row grow">
+        <div class="col">
+          <div class="box blue">
+            <p style="margin:0;">Parallel lines <span class="key">never meet</span>. They have</p>
+            <p class="eq" style="font-size:1.5em;margin:.3em 0;">m<sub>1</sub> = m<sub>2</sub></p>
+            <p style="margin:0;">— the <span class="key">same slope</span>, but different y-intercepts.</p>
+          </div>
+          <p>Same steepness ⇒ they run side-by-side forever.</p>
+        </div>
+        <div class="col center">
+          <svg viewBox="0 0 220 180" role="img" aria-label="Two parallel lines">
+            <line x1="20" y1="150" x2="170" y2="30" stroke="#2563eb" stroke-width="5" stroke-linecap="round"/>
+            <line x1="55" y1="160" x2="205" y2="40" stroke="#2563eb" stroke-width="5" stroke-linecap="round" opacity=".55"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 PARALLEL EXAMPLE -->
+  <section class="slide">
+    <div class="card">
+      <div class="eyebrow">Concept 1 · example</div>
+      <h1>Are these parallel?</h1>
+      <div class="grow" style="display:flex;flex-direction:column;justify-content:center;">
+        <div class="box blue">
+          <p class="eq" style="font-size:1.5em;margin:.1em 0;">y = 2x + 1</p>
+          <p class="eq" style="font-size:1.5em;margin:.1em 0;">y = 2x − 5</p>
+        </div>
+        <p>Both have slope <span class="key">2</span>; the y-intercepts (1 and −5) differ.</p>
+        <p class="ans" style="font-size:1.3em;">✔ Yes — parallel (and distinct).</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 PERPENDICULAR CONCEPT -->
+  <section class="slide">
+    <div class="card">
+      <div class="eyebrow">Concept 2</div>
+      <h1>Perpendicular lines</h1>
+      <div class="row grow">
+        <div class="col">
+          <div class="box red">
+            <p style="margin:0;">Perpendicular lines meet at <span class="key">90°</span>. Their slopes are <span class="key">negative reciprocals</span>:</p>
+            <p class="eq" style="font-size:1.5em;margin:.3em 0;">m<sub>1</sub> · m<sub>2</sub> = −1&nbsp;&nbsp;⇒&nbsp;&nbsp;m<sub>2</sub> = −<span class="frac"><span>1</span><span>m<sub>1</sub></span></span></p>
+          </div>
+          <p>Flip the fraction, change the sign.</p>
+        </div>
+        <div class="col center">
+          <p class="eq" style="font-size:1.4em;">slope 3&nbsp;&nbsp;⟂&nbsp;&nbsp;slope −<span class="frac"><span>1</span><span>3</span></span></p>
+          <p class="sub">because 3 × (−<span class="frac"><span>1</span><span>3</span></span>) = −1</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 GRAPH -->
+  <section class="slide">
+    <div class="card">
+      <div class="eyebrow">See it together</div>
+      <h2>Equal slopes ⇒ parallel · negative-reciprocal slopes ⇒ perpendicular</h2>
+      <div class="row grow" style="align-items:center;">
+        <div class="col center"><svg id="plot" viewBox="0 0 400 400" role="img" aria-label="Graph of three lines"></svg></div>
+        <div class="col legend">
+          <p><span style="display:flex;align-items:center;gap:.5em;"><span class="swatch" style="border-top-color:#2563eb;"></span> y = 2x + 1</span></p>
+          <p><span style="display:flex;align-items:center;gap:.5em;"><span class="swatch" style="border-top-color:#2563eb;border-top-style:dashed;"></span> y = 2x − 3 &nbsp;<em>(parallel)</em></span></p>
+          <p><span style="display:flex;align-items:center;gap:.5em;"><span class="swatch" style="border-top-color:#dc2626;"></span> y = −½x + 1 &nbsp;<em>(perpendicular)</em></span></p>
+          <div class="box amber"><p style="margin:0;">The two blue lines share slope 2. The red line's slope −½ is the negative reciprocal of 2, so it crosses them at right angles.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 SPECIAL CASE -->
+  <section class="slide">
+    <div class="card">
+      <div class="eyebrow">Special case</div>
+      <h1>Horizontal ⟂ vertical</h1>
+      <div class="row grow">
+        <div class="col">
+          <ul>
+            <li>A <span class="key">horizontal</span> line <span class="eq">y = c</span> has slope <span class="eq">0</span>.</li>
+            <li>A <span class="key">vertical</span> line <span class="eq">x = c</span> has <span class="key">undefined</span> slope.</li>
+          </ul>
+          <div class="box amber"><p style="margin:0;">We can't use <span class="eq">m<sub>1</sub>·m<sub>2</sub> = −1</span> here (one slope is undefined) — but they still meet at a perfect right angle. ⟂</p></div>
+        </div>
+        <div class="col center">
+          <svg viewBox="0 0 180 180" role="img" aria-label="Horizontal and vertical lines">
+            <line x1="20" y1="90" x2="160" y2="90" stroke="#16a34a" stroke-width="5" stroke-linecap="round"/>
+            <line x1="90" y1="20" x2="90" y2="160" stroke="#4f46e5" stroke-width="5" stroke-linecap="round"/>
+            <rect x="90" y="76" width="14" height="14" fill="none" stroke="#94a3b8" stroke-width="2"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 EXAMPLE 1 -->
+  <section class="slide">
+    <div class="card">
+      <div class="eyebrow">Worked example 1 · parallel through a point</div>
+      <h1>Line through (0, 1) parallel to y = 2x − 3</h1>
+      <div class="grow" style="display:flex;flex-direction:column;justify-content:center;">
+        <div class="box blue">
+          <p class="step"><span class="key">Step 1.</span> Parallel ⇒ <em>same slope</em> = <span class="eq">2</span>.</p>
+          <p class="step"><span class="key">Step 2.</span> It passes through (0, 1), so the y-intercept is <span class="eq">1</span>.</p>
+        </div>
+        <p class="ans eq" style="font-size:1.6em;">y = 2x + 1</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 EXAMPLE 2 -->
+  <section class="slide">
+    <div class="card">
+      <div class="eyebrow">Worked example 2 · perpendicular through a point</div>
+      <h1>Line through (0, −2) perpendicular to y = ½x + 4</h1>
+      <div class="grow" style="display:flex;flex-direction:column;justify-content:center;">
+        <div class="box red">
+          <p class="step"><span class="key">Step 1.</span> Given slope <span class="eq"><span class="frac"><span>1</span><span>2</span></span></span> ⇒ perpendicular slope = negative reciprocal = <span class="eq">−2</span>.</p>
+          <p class="step"><span class="key">Step 2.</span> Through (0, −2) ⇒ y-intercept <span class="eq">−2</span>.</p>
+        </div>
+        <p class="ans eq" style="font-size:1.6em;">y = −2x − 2</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 EXAMPLE 3 -->
+  <section class="slide">
+    <div class="card">
+      <div class="eyebrow">⭐ Advanced example</div>
+      <h1>Is the line through (1, 2) and (3, 8) perpendicular to y = −⅓x?</h1>
+      <div class="grow" style="display:flex;flex-direction:column;justify-content:center;">
+        <div class="box blue">
+          <p class="step"><span class="key">Step 1.</span> Slope through the points: <span class="eq"><span class="frac"><span>8 − 2</span><span>3 − 1</span></span> = <span class="frac"><span>6</span><span>2</span></span> = 3</span>.</p>
+          <p class="step"><span class="key">Step 2.</span> Multiply the slopes: <span class="eq">3 × (−<span class="frac"><span>1</span><span>3</span></span>) = −1</span>.</p>
+        </div>
+        <p class="ans" style="font-size:1.3em;">✔ Product is −1 ⇒ yes, perpendicular.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 PRACTICE -->
+  <section class="slide">
+    <div class="card">
+      <div class="eyebrow">Your turn</div>
+      <h1>Quick check</h1>
+      <div class="grow" style="display:flex;flex-direction:column;justify-content:center;gap:.5em;">
+        <div class="box amber">
+          <p style="margin:.1em 0;"><span class="key">Q1.</span> Slope of any line <em>parallel</em> to <span class="eq">y = −5x + 1</span>?</p>
+          <div class="reveal"><button onclick="this.parentNode.classList.add('open')">Reveal answer</button><div class="sol ans eq">−5</div></div>
+        </div>
+        <div class="box amber">
+          <p style="margin:.1em 0;"><span class="key">Q2.</span> Slope of any line <em>perpendicular</em> to <span class="eq">y = <span class="frac"><span>2</span><span>3</span></span>x</span>?</p>
+          <div class="reveal"><button onclick="this.parentNode.classList.add('open')">Reveal answer</button><div class="sol ans eq">−<span class="frac"><span>3</span><span>2</span></span></div></div>
+        </div>
+        <div class="box amber">
+          <p style="margin:.1em 0;"><span class="key">Q3.</span> Line through (0, 3) <em>parallel</em> to <span class="eq">y = −x + 5</span>?</p>
+          <div class="reveal"><button onclick="this.parentNode.classList.add('open')">Reveal answer</button><div class="sol ans eq">y = −x + 3</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13 SUMMARY -->
+  <section class="slide">
+    <div class="card">
+      <div class="eyebrow">Key takeaways</div>
+      <h1>Remember this</h1>
+      <div class="grow" style="display:flex;flex-direction:column;justify-content:center;">
+        <div class="box blue"><p style="margin:0;"><span class="key">Parallel</span> ⇒ slopes are <span class="key">equal</span> &nbsp;(<span class="eq">m<sub>1</sub> = m<sub>2</sub></span>)</p></div>
+        <div class="box red"><p style="margin:0;"><span class="key">Perpendicular</span> ⇒ slopes are <span class="key">negative reciprocals</span> &nbsp;(<span class="eq">m<sub>1</sub> · m<sub>2</sub> = −1</span>)</p></div>
+        <div class="box green"><p style="margin:0;"><span class="key">Horizontal &amp; vertical</span> lines are perpendicular (special case).</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 14 END -->
+  <section class="slide">
+    <div class="card center">
+      <h1>Now practice 💪</h1>
+      <p class="sub">60 questions on this topic are waiting in the question bank — easy → medium → hard.</p>
+      <p style="margin-top:1.5em;"><span class="pill">Integration Academy · MTH1W 4.9</span></p>
+    </div>
+  </section>
+
+</div>
+
+<div class="navzone" id="prev" title="Previous"></div>
+<div class="navzone" id="next" title="Next"></div>
+<div class="brand">Integration Academy</div>
+<div id="hud">
+  <span><kbd>←</kbd> <kbd>→</kbd> navigate · <kbd>F</kbd> fullscreen</span>
+  <span id="count">1 / 14</span>
+</div>
+
+<script>
+(function(){
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var i = 0;
+  var bar = document.getElementById('bar');
+  var count = document.getElementById('count');
+
+  function show(n){
+    i = Math.max(0, Math.min(slides.length-1, n));
+    slides.forEach(function(s,k){ s.classList.toggle('active', k===i); });
+    bar.style.width = ((i)/(slides.length-1)*100) + '%';
+    count.textContent = (i+1) + ' / ' + slides.length;
+    if (location.hash !== '#'+(i+1)) history.replaceState(null,'','#'+(i+1));
+  }
+  function next(){ show(i+1); }
+  function prev(){ show(i-1); }
+
+  document.addEventListener('keydown', function(e){
+    if (e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '){ e.preventDefault(); next(); }
+    else if (e.key==='ArrowLeft'||e.key==='PageUp'){ e.preventDefault(); prev(); }
+    else if (e.key==='Home'){ show(0); }
+    else if (e.key==='End'){ show(slides.length-1); }
+    else if (e.key==='f'||e.key==='F'){
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen && document.documentElement.requestFullscreen();
+      else document.exitFullscreen && document.exitFullscreen();
+    }
+  });
+  document.getElementById('next').addEventListener('click', next);
+  document.getElementById('prev').addEventListener('click', prev);
+
+  var start = parseInt((location.hash||'').replace('#',''),10);
+  show(isNaN(start)?0:start-1);
+
+  // ── draw the parallel/perpendicular graph ──
+  var svg = document.getElementById('plot');
+  var NS='http://www.w3.org/2000/svg';
+  var cx=200, cy=200, sc=34, lo=-5, hi=5;             // math (-5..5) -> pixels
+  function X(x){return cx + x*sc;} function Y(y){return cy - y*sc;}
+  function el(tag,attrs){var e=document.createElementNS(NS,tag);for(var k in attrs)e.setAttribute(k,attrs[k]);return e;}
+  // grid
+  for(var g=lo; g<=hi; g++){
+    svg.appendChild(el('line',{x1:X(g),y1:Y(lo),x2:X(g),y2:Y(hi),stroke:'#eef2f7','stroke-width':1}));
+    svg.appendChild(el('line',{x1:X(lo),y1:Y(g),x2:X(hi),y2:Y(g),stroke:'#eef2f7','stroke-width':1}));
+  }
+  // axes
+  svg.appendChild(el('line',{x1:X(lo),y1:Y(0),x2:X(hi),y2:Y(0),stroke:'#94a3b8','stroke-width':2}));
+  svg.appendChild(el('line',{x1:X(0),y1:Y(lo),x2:X(0),y2:Y(hi),stroke:'#94a3b8','stroke-width':2}));
+  // line helper: clip y=mx+b to the box
+  function plot(m,b,color,dash){
+    var pts=[];
+    [[lo,m*lo+b],[hi,m*hi+b]].forEach(function(p){pts.push(p);});
+    // clip to y in [lo,hi]
+    var x1=lo,y1=m*lo+b,x2=hi,y2=m*hi+b;
+    function clip(){
+      if(y1< lo){x1=(lo-b)/m;y1=lo;} if(y1>hi){x1=(hi-b)/m;y1=hi;}
+      if(y2< lo){x2=(lo-b)/m;y2=lo;} if(y2>hi){x2=(hi-b)/m;y2=hi;}
+    }
+    clip();
+    var a={x1:X(x1),y1:Y(y1),x2:X(x2),y2:Y(y2),stroke:color,'stroke-width':4,'stroke-linecap':'round'};
+    if(dash)a['stroke-dasharray']='8 7';
+    svg.appendChild(el('line',a));
+  }
+  plot(2,1,'#2563eb',false);     // y = 2x + 1
+  plot(2,-3,'#2563eb',true);     // y = 2x - 3 (parallel)
+  plot(-0.5,1,'#dc2626',false);  // y = -1/2 x + 1 (perpendicular)
+})();
+</script>
+</body>
+</html>

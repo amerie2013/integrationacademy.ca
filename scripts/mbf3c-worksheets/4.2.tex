@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MBF3C \textperiodcentered{} 4.2}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 4.2 --- 2-D Design \& Optimization}\\[2pt]
+{\small Grade 11 Foundations for College Mathematics (MBF3C) \textperiodcentered{} Unit 4: Geometry and Trigonometry}
+\end{center}
+
+\begin{ideabox}
+Designers trade off perimeter and area. The most area for a fixed perimeter (and the least perimeter for a fixed area) is a square.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Rectangle: $A=lw$, $P=2l+2w$.
+  \item Max area for fixed perimeter $\Rightarrow$ a square.
+  \item Composite figures: add the pieces, subtract any holes. Net $\to$ surface area: total all faces.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Composite areas}Break a design into rectangles, triangles, and circles, then add the pieces (or subtract a cut-out).
+\lh{Perimeter and area}\textbf{Perimeter} is the distance around; \textbf{area} is the surface covered — do not mix them up.
+\lh{Optimizing}Design problems often ask for the least material or the largest area for a fixed amount — compare the options.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Area and perimeter}
+A rectangle is $8$ m by $5$ m.\soln $A=8\times5=40$ m²; $P=2(8)+2(5)=26$ m.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Maximum area}
+$40$ m of fencing for a rectangle. Maximize the area.\soln One side $x$, the other $20-x$, so $A=x(20-x)$; the parabola peaks at $x=10$, giving $10\times10=100$ m².\eplot{0}{20}{0}{120}{\addplot[exblue,very thick,domain=0:20]{x*(20-x)};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(10,100)};}
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Least perimeter}
+A garden of area $36$ m²: least fencing (whole numbers)?\soln $1{\times}36\,(P{=}74)$, $4{\times}9\,(P{=}26)$, $6{\times}6\,(P{=}24)$: the $6\times6$ square wins, $P=24$ m.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Composite (subtract a hole)}
+A $10\times6$ m yard has a circular pond, $r=2$ m. Find the grass area.\soln $60-\pi(2)^2=60-4\pi\approx47.4$ m².
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Surface area from a net}
+A closed $4\times3\times2$ cm box.\soln $SA=2(lw+lh+wh)=2(12+8+6)=52$ cm².
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Maximum area}
+$60$ m of fencing. Maximize the rectangular area.\soln $A=x(30-x)$, peak at $x=15$: $15\times15=225$ m².
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Least perimeter}
+Area $16$ m², whole-number rectangle, least fencing?\soln $4\times4$, $P=16$ m.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Composite (add pieces)}
+An L-shape: a $6\times4$ rectangle plus a $3\times2$ rectangle. Total area?\soln $24+6=30$ units².
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Net surface area}
+Surface area of a closed $5\times4\times3$ box.\soln $2(20+15+12)=94$ cm².
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Area and perimeter of a $12\times5$ rectangle?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+With $60$ m of fencing, what rectangle gives the most area?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Whole-number rectangle of area $16$ m² with the least perimeter?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+An $8\times8$ m patio loses a $2\times3$ m planter. Paved area?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Surface area of a closed $5\times4\times3$ box?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+With $24$ m of fencing, find the maximum rectangular area.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+A $9\times9$ m yard has a circular flowerbed, $r=3$ m. Grass area?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Area of an L-shape: a $5\times3$ plus a $2\times2$ rectangle?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Whole-number rectangle of area $24$ m² with the least perimeter?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Surface area of a cube with side $4$ cm?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+A $10\times8$ rectangle has a $4\times3$ rectangle cut out. Remaining area?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Maximum area with $100$ m of fencing?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+You have $20$ m of fencing for a pen against a wall (only 3 sides fenced). What dimensions maximize the area?\workspace{3.5cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Area and perimeter of a $12\times5$ rectangle?
+  \item With $60$ m of fencing, what rectangle gives the most area?
+  \item Whole-number rectangle of area $16$ m² with the least perimeter?
+  \item An $8\times8$ m patio loses a $2\times3$ m planter. Paved area?
+  \item Surface area of a closed $5\times4\times3$ box?
+  \item With $24$ m of fencing, find the maximum rectangular area.
+  \item A $9\times9$ m yard has a circular flowerbed, $r=3$ m. Grass area?
+  \item Area of an L-shape: a $5\times3$ plus a $2\times2$ rectangle?
+  \item Whole-number rectangle of area $24$ m² with the least perimeter?
+  \item Surface area of a cube with side $4$ cm?
+  \item A $10\times8$ rectangle has a $4\times3$ rectangle cut out. Remaining area?
+  \item Maximum area with $100$ m of fencing?
+  \item You have $20$ m of fencing for a pen against a wall (only 3 sides fenced). What dimensions maximize the area?
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $A=60$, $P=34$
+  \item $15\times15$, $225$ m²
+  \item $4\times4$, $P=16$
+  \item $64-6=58$ m²
+  \item $94$ cm²
+  \item $6\times6=36$ m²
+  \item $81-9\pi\approx52.7$ m²
+  \item $15+4=19$ units²
+  \item $4\times6$, $P=20$
+  \item $6(16)=96$ cm²
+  \item $80-12=68$
+  \item $25\times25=625$ m²
+  \item width $5$, length $10$ ($A=x(20-2x)$, max at $x=5$): $50$ m²
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

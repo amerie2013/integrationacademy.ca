@@ -1,0 +1,177 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MPM2D \textperiodcentered{} 4.5}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 4.5 --- Factored Form \& the Zeros}\\[2pt]
+{\small Grade 10 Academic (MPM2D) \textperiodcentered{} Unit 4: Quadratic Relations}
+\end{center}
+
+\begin{ideabox}
+Factored form $y=a(x-r)(x-s)$ shows the \textbf{zeros} $r$ and $s$ directly.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item The zeros are $x=r$ and $x=s$ (set each factor to $0$).
+  \item The AOS is the midpoint $x=\tfrac{r+s}{2}$; substitute to get the vertex.
+  \item $a$ controls width/direction; find it from a known point such as the $y$-intercept.
+  \item If the quadratic isn't factored yet, factor it first.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Factored form}$y=a(x-r)(x-s)$ shows the \textbf{zeros} $r$ and $s$ directly — the $x$-values that make $y=0$.
+\lh{Finding the vertex}The axis of symmetry sits halfway between the zeros, at $x=\dfrac{r+s}{2}$; substitute it to get the vertex's height.
+\lh{Why zeros matter}Zeros answer real questions — when a ball lands, when profit is zero — so factored form is ideal for them.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Read the zeros}
+State the zeros of $y=(x-2)(x+3)$.
+\soln $x=2$ and $x=-3.$
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Zeros and AOS}
+State the zeros and AOS of $y=(x-5)(x-1)$.
+\soln Zeros $5,1$; AOS $x=\tfrac{5+1}{2}=3.$
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Find the vertex}
+Find the vertex of $y=2(x+1)(x-3)$.
+\soln Zeros $-1,3$, AOS $x=1$; $y=2(2)(-2)=-8$. Vertex $(1,-8)$.
+\plot{-3}{5}{-9}{6}{\addplot[exblue,very thick,domain=-2:4,samples=60]{2*(x+1)*(x-3)};\addplot[mark=*,only marks,black]coordinates{(-1,0)(3,0)(1,-8)};}
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Build from zeros}
+Write a quadratic with zeros $-2$ and $4$ and $a=1$.
+\soln $y=(x+2)(x-4).$
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Factor then read zeros}
+Find the zeros of $y=x^2-x-6$.
+\soln $x^2-x-6=(x-3)(x+2)$, so zeros $3,-2.$
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Vertex via factoring}
+Find the vertex of $y=x^2-6x+8$.
+\soln $(x-2)(x-4)$, zeros $2,4$, AOS $x=3$, $y=9-18+8=-1$: vertex $(3,-1)$.
+\plot{-1}{7}{-2}{6}{\addplot[exblue,very thick,domain=0.3:5.7,samples=60]{x^2-6*x+8};\addplot[mark=*,only marks,black]coordinates{(2,0)(4,0)(3,-1)};}
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Find $a$ from a point}
+A parabola has zeros $1$ and $5$ and passes through $(3,-4)$. Find its equation.
+\soln $-4=a(3-1)(3-5)=a(2)(-2)=-4a\Rightarrow a=1$, so $y=(x-1)(x-5).$
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Opens down}
+Find the vertex of $y=-(x+2)(x-4)$.
+\soln Zeros $-2,4$, AOS $x=1$; $y=-(3)(-3)=9$. Vertex $(1,9)$, opens down.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- From intercepts (harder)}
+A parabola has $x$-intercepts $-3$ and $5$ and $y$-intercept $-30$. Find its equation.
+\soln $y=a(x+3)(x-5)$; at $x=0$: $a(3)(-5)=-15a=-30\Rightarrow a=2$, so $y=2(x+3)(x-5).$
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+State the zeros of $y=(x-4)(x+1)$.\workspace{1.8cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+State the zeros and AOS of $y=(x-6)(x-2)$.\workspace{2.0cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Find the vertex of $y=(x+2)(x-4)$.\workspace{2.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Write a quadratic with zeros $3$ and $-5$ ($a=1$).\workspace{1.8cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Find the zeros of $y=x^2+2x-15$.\workspace{2.0cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Find the vertex of $y=x^2-4x-5$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+State the zeros and direction of $y=-2(x-1)(x+3)$.\workspace{2.0cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+A parabola has zeros $0$ and $6$ and passes through $(1,-10)$. Find $a$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Find the $y$-intercept of $y=(x-2)(x-5)$.\workspace{1.8cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Find the vertex of $y=2(x-1)(x-5)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Write a quadratic with zeros $-4$ and $4$ and $a=3$, then expand it.\workspace{2.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+A parabola has zeros $2$ and $-2$ and $y$-intercept $-8$. Find its equation.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+A parabola has $x$-intercepts $1$ and $7$ and passes through $(4,-9)$. Find its equation and vertex.\workspace{3.2cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item State the zeros of $y=(x-4)(x+1)$.
+  \item State the zeros and AOS of $y=(x-6)(x-2)$.
+  \item Find the vertex of $y=(x+2)(x-4)$.
+  \item Write a quadratic with zeros $3$ and $-5$ ($a=1$).
+  \item Find the zeros of $y=x^2+2x-15$.
+  \item Find the vertex of $y=x^2-4x-5$.
+  \item State the zeros and direction of $y=-2(x-1)(x+3)$.
+  \item A parabola has zeros $0$ and $6$ and passes through $(1,-10)$. Find $a$.
+  \item Find the $y$-intercept of $y=(x-2)(x-5)$.
+  \item Find the vertex of $y=2(x-1)(x-5)$.
+  \item Write a quadratic with zeros $-4$ and $4$ and $a=3$, then expand it.
+  \item A parabola has zeros $2$ and $-2$ and $y$-intercept $-8$. Find its equation.
+  \item A parabola has $x$-intercepts $1$ and $7$ and passes through $(4,-9)$. Find its equation and vertex.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $x=4,-1$.
+  \item Zeros $6,2$; AOS $x=4$.
+  \item Zeros $-2,4$, AOS $x=1$, $y=(3)(-3)=-9$: $(1,-9)$.
+  \item $y=(x-3)(x+5)$.
+  \item $(x+5)(x-3)$, zeros $-5,3$.
+  \item $(x-5)(x+1)$, AOS $x=2$, $y=-9$: $(2,-9)$.
+  \item Zeros $1,-3$; opens down.
+  \item $-10=a(1)(1-6)=-5a\Rightarrow a=2$.
+  \item $y=(0-2)(0-5)=10$.
+  \item AOS $x=3$, $y=2(2)(-2)=-8$: $(3,-8)$.
+  \item $y=3(x+4)(x-4)=3x^2-48$.
+  \item $y=a(x-2)(x+2)$; $-8=a(-4)\Rightarrow a=2$: $y=2(x^2-4)$.
+  \item $-9=a(3)(-3)=-9a\Rightarrow a=1$: $y=(x-1)(x-7)$; vertex $(4,-9)$.
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

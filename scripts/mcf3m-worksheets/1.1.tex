@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MCF3M \textperiodcentered{} 1.1}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 1.1 --- Expanding \& Simplifying Quadratic Expressions}\\[2pt]
+{\small Grade 11 Functions \& Applications (MCF3M) \textperiodcentered{} Unit 1: Quadratic Expressions and Equations}
+\end{center}
+
+\begin{ideabox}
+Expanding removes brackets; collect like terms into standard form $ax^2+bx+c$.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Distribute and FOIL: $(x+p)(x+q)=x^2+(p+q)x+pq$.
+  \item Special products: $(a\pm b)^2=a^2\pm2ab+b^2$ and $(a-b)(a+b)=a^2-b^2$.
+  \item Write the result in standard form.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Expanding brackets}To expand, multiply every term of one bracket by every term of the other, then collect like terms; for two binomials, FOIL keeps you organized.
+\lh{Simplifying}After expanding, combine like terms so the result is written cleanly as $ax^2+bx+c$.
+\lh{Watch the signs}A negative in front of a bracket flips every sign inside — a frequent source of errors.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Distribute}
+Expand $3(x+4)$.\soln Multiply each term inside the bracket by $3$: \\ $3\cdot x+3\cdot4=3x+12$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Monomial times binomial}
+Expand $2x(x-5)$.\soln Distribute $2x$ to each term: \\ $2x\cdot x-2x\cdot5=2x^2-10x$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- FOIL}
+Expand $(x+2)(x+3)$.\soln FOIL — First, Outer, Inner, Last: \\ $x^2+3x+2x+6$. \\ Collect like terms: $x^2+5x+6$. \\ The factored and expanded forms are the same parabola, with x-intercepts $-2$ and $-3$:\eplot{-5}{1}{-3}{8}{\addplot[exblue,very thick,domain=-4.7:0.7]{x^2+5*x+6};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(-2,0) (-3,0)};}
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Perfect square}
+Expand $(x+5)^2$.\soln Write it out and FOIL: \\ $(x+5)(x+5)=x^2+5x+5x+25$. \\ Collect: $x^2+10x+25$. \\ The middle term is $2\cdot5\cdot x=10x$ — so it is not $x^2+25$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Difference of squares}
+Expand $(x-4)(x+4)$.\soln The outer and inner terms cancel: \\ $x^2+4x-4x-16=x^2-16$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- General binomials}
+Expand $(2x-3)(x+5)$.\soln FOIL, watching the coefficient: \\ $2x^2+10x-3x-15$. \\ Collect: $2x^2+7x-15$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Square a binomial}
+Expand $(3x+2)^2$.\soln Square the binomial: \\ $(3x)^2+2(3x)(2)+(2)^2$ \\ $=9x^2+12x+4$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Collect like terms}
+Simplify $2x(x+1)+x(x-3)$.\soln Distribute each product: \\ $2x^2+2x+x^2-3x$. \\ Collect like terms: $3x^2-x$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Negative constant}
+Expand $(x-6)(x+2)$.\soln FOIL: \\ $x^2+2x-6x-12=x^2-4x-12$. \\ This parabola has x-intercepts $6$ and $-2$ and vertex $(2,-16)$:\eplot{-4}{8}{-18}{10}{\addplot[exblue,very thick,domain=-3:7]{x^2-4*x-12};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(6,0) (-2,0)};}
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Expand $5(x-2)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Expand $x(3x+4)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Expand $(x+4)(x+5)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Expand $(x-7)^2$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Expand $(x-3)(x+3)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Expand $(2x+1)(x+3)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Expand $(3x-2)^2$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Expand $-2(x^2-3x+1)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Expand $(x+5)(x-2)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Expand $x(x+2)+3(x+2)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Expand $(4x-1)(4x+1)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Expand $2(x+3)^2$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Expand and simplify $(x+2)(x+3)-(x+1)(x-1)$.\workspace{3cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Expand $5(x-2)$.
+  \item Expand $x(3x+4)$.
+  \item Expand $(x+4)(x+5)$.
+  \item Expand $(x-7)^2$.
+  \item Expand $(x-3)(x+3)$.
+  \item Expand $(2x+1)(x+3)$.
+  \item Expand $(3x-2)^2$.
+  \item Expand $-2(x^2-3x+1)$.
+  \item Expand $(x+5)(x-2)$.
+  \item Expand $x(x+2)+3(x+2)$.
+  \item Expand $(4x-1)(4x+1)$.
+  \item Expand $2(x+3)^2$.
+  \item Expand and simplify $(x+2)(x+3)-(x+1)(x-1)$.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $5x-10$
+  \item $3x^2+4x$
+  \item $x^2+9x+20$
+  \item $x^2-14x+49$
+  \item $x^2-9$
+  \item $2x^2+7x+3$
+  \item $9x^2-12x+4$
+  \item $-2x^2+6x-2$
+  \item $x^2+3x-10$
+  \item $x^2+5x+6$
+  \item $16x^2-1$
+  \item $2x^2+12x+18$
+  \item $5x+7$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

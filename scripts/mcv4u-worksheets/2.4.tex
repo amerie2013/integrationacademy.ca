@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MCV4U \textperiodcentered{} 2.4}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 2.4 --- Rational, Radical \& Higher-Order Derivatives}\\[2pt]
+{\small Grade 12 Calculus and Vectors (MCV4U) \textperiodcentered{} Unit 2: Derivative Rules}
+\end{center}
+
+\begin{ideabox}
+Rewrite as powers; differentiate again for $f''$; use implicit differentiation when $y$ is tangled with $x$.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Rewrite: $\dfrac1{x^k}=x^{-k}$, $\sqrt[n]{x^m}=x^{m/n}$.
+  \item Second derivative $f''=(f')'$.
+  \item Implicit: differentiate both sides, attach $\tfrac{dy}{dx}$ to every $y$.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Rewrite then differentiate}Rational and radical functions are easiest as powers: write $\dfrac{1}{x}=x^{-1}$ and $\sqrt{x}=x^{1/2}$, then apply the power rule.
+\lh{Combine rules}These often need the chain, product, or quotient rule together — identify the structure before differentiating.
+\lh{Higher-order derivatives}Differentiating again gives $f''(x)$, the rate of change of the slope, and so on for further derivatives.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Rational via powers}
+Differentiate $f(x)=\dfrac1{x^2}$.\soln $x^{-2}\to-2x^{-3}=-\dfrac2{x^3}$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Radical via powers}
+Differentiate $f(x)=\sqrt[3]{x^2}$.\soln $x^{2/3}\to\tfrac23x^{-1/3}=\dfrac2{3\sqrt[3]{x}}$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Second derivative}
+Find $f''(x)$ for $f(x)=x^4$.\soln $f'=4x^3,\ f''=12x^2$. For $x^3$: $f,f',f''$ are $x^3,3x^2,6x$ — each the slope of the previous:\eplot{-2.5}{2.5}{-8}{8}{\addplot[exblue,very thick,domain=-2:2]{x^3};\addplot[qorange,very thick,domain=-1.6:1.6]{3*x^2};\addplot[red,very thick,domain=-1.3:1.3]{6*x};}
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Second derivative}
+Find $f''(x)$ for $f(x)=x^3-3x$ and $f''(1)$.\soln $f'=3x^2-3,\ f''=6x,\ f''(1)=6$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Implicit differentiation}
+Find $\dfrac{dy}{dx}$ for $x^2+y^2=25$.\soln $2x+2yy'=0\Rightarrow y'=-\dfrac xy$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Rational via powers}
+Differentiate $f(x)=\dfrac1{x^4}$.\soln $x^{-4}\to-4x^{-5}=-\dfrac4{x^5}$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Radical via powers}
+Differentiate $f(x)=x^{3/2}$.\soln $\tfrac32x^{1/2}$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Second derivative}
+Find $f''(x)$ for $f(x)=2x^3-x^2$.\soln $f'=6x^2-2x,\ f''=12x-2$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Implicit differentiation}
+Find $\dfrac{dy}{dx}$ for $xy=4$.\soln Product rule: $y+xy'=0\Rightarrow y'=-\dfrac yx$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Differentiate $f(x)=\dfrac1{x^5}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Differentiate $f(x)=\sqrt[3]{x}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Find $f''(x)$ for $f(x)=x^5$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Find $f''(x)$ for $f(x)=x^4-2x^2$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Find $\dfrac{dy}{dx}$ for $x^2+y^2=9$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Differentiate $f(x)=x^{5/2}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Find $f''(1)$ for $f(x)=x^3$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Find $f''(x)$ for $f(x)=3x^4$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Find $\dfrac{dy}{dx}$ for $x^2-y^2=1$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Differentiate $f(x)=\dfrac2{x^3}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Find $f''(x)$ for $f(x)=x^3-6x^2+2x$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Find $\dfrac{dy}{dx}$ for $xy=10$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Find $\dfrac{dy}{dx}$ for $x^2+xy+y^2=7$ (product rule on $xy$).\workspace{3cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Differentiate $f(x)=\dfrac1{x^5}$.
+  \item Differentiate $f(x)=\sqrt[3]{x}$.
+  \item Find $f''(x)$ for $f(x)=x^5$.
+  \item Find $f''(x)$ for $f(x)=x^4-2x^2$.
+  \item Find $\dfrac{dy}{dx}$ for $x^2+y^2=9$.
+  \item Differentiate $f(x)=x^{5/2}$.
+  \item Find $f''(1)$ for $f(x)=x^3$.
+  \item Find $f''(x)$ for $f(x)=3x^4$.
+  \item Find $\dfrac{dy}{dx}$ for $x^2-y^2=1$.
+  \item Differentiate $f(x)=\dfrac2{x^3}$.
+  \item Find $f''(x)$ for $f(x)=x^3-6x^2+2x$.
+  \item Find $\dfrac{dy}{dx}$ for $xy=10$.
+  \item Find $\dfrac{dy}{dx}$ for $x^2+xy+y^2=7$ (product rule on $xy$).
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $-\tfrac5{x^6}$
+  \item $\tfrac13x^{-2/3}$
+  \item $f''=20x^3$
+  \item $f''=12x^2-4$
+  \item $-\tfrac xy$
+  \item $\tfrac52x^{3/2}$
+  \item $f''=6x\Rightarrow6$
+  \item $f''=36x^2$
+  \item $\tfrac xy$
+  \item $-\tfrac6{x^4}$
+  \item $f''=6x-12$
+  \item $-\tfrac yx$
+  \item $2x+y+xy'+2yy'=0\Rightarrow y'=-\dfrac{2x+y}{x+2y}$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

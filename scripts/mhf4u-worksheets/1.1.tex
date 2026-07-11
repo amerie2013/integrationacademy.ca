@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MHF4U \textperiodcentered{} 1.1}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 1.1 --- Power Functions \& End Behaviour}\\[2pt]
+{\small Grade 12 Advanced Functions (MHF4U) \textperiodcentered{} Unit 1: Polynomial Functions}
+\end{center}
+
+\begin{ideabox}
+Every polynomial behaves like its leading term at the ends. Degree parity and the sign of $a$ decide the end behaviour.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Even degree: both ends the same (up–up if $a>0$, down–down if $a<0$).
+  \item Odd degree: ends opposite (down–up if $a>0$, up–down if $a<0$).
+  \item Write it with limits, e.g. as $x\to+\infty,\ y\to+\infty$.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Power functions}A \textbf{power function} has the form $y=ax^n$ with $n$ a whole number; its degree and the sign of $a$ dictate the overall shape.
+\lh{End behaviour}As $x\to\pm\infty$, the ends are set by the degree's parity and the sign of $a$: even degrees send both ends the same way, odd degrees send them opposite ways.
+\lh{Even vs odd symmetry}Even-degree power functions are symmetric about the $y$-axis; odd-degree ones have rotational symmetry about the origin.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Odd, positive}
+End behaviour of $f(x)=x^3$?\soln Odd degree, $a>0$: as $x\to-\infty,\ y\to-\infty$; as $x\to+\infty,\ y\to+\infty$ (down–up):\eplot{-3}{3}{-9}{9}{\addplot[exblue,very thick,domain=-2.1:2.1]{x^3};}
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Even, positive}
+End behaviour of $f(x)=x^4$?\soln Even degree, $a>0$: both ends $y\to+\infty$ (up–up):\eplot{-2}{2}{-1}{9}{\addplot[exblue,very thick,domain=-1.7:1.7]{x^4};}
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Odd, negative}
+End behaviour of $f(x)=-2x^3$?\soln Odd, $a<0$ flips it: as $x\to-\infty,\ y\to+\infty$; as $x\to+\infty,\ y\to-\infty$ (up–down).
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Even, negative}
+End behaviour of $f(x)=-x^4$?\soln Even, $a<0$: both ends $y\to-\infty$ (down–down).
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Read a graph}
+A graph falls on the left and rises on the right.\soln Opposite ends ⇒ odd degree; rising on the right ⇒ $a>0$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Odd, positive}
+End behaviour of $f(x)=x^5$?\soln Down–up (odd, $a>0$).
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Even, negative}
+End behaviour of $f(x)=-x^2$?\soln Down–down (even, $a<0$).
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Even, positive}
+End behaviour of $f(x)=3x^6$?\soln Up–up (even, $a>0$).
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Compare shapes}
+How do $y=x^2$ and $y=x^4$ compare?\soln Both up–up; $x^4$ is flatter near 0 and steeper outside $[-1,1]$:\eplot{-2}{2}{-1}{9}{\addplot[exblue,very thick,domain=-2.9:2.9]{x^2};\addplot[qorange,very thick,domain=-1.7:1.7]{x^4};}
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+End behaviour of $f(x)=x^7$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+End behaviour of $f(x)=-x^6$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+End behaviour of $f(x)=2x^4$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+End behaviour of $f(x)=-5x^3$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+A graph rises on both ends. Even or odd degree?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+End behaviour of $f(x)=x^3$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+End behaviour of $f(x)=-x^5$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+End behaviour of $f(x)=4x^2$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+A graph falls on both ends. Sign of $a$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+End behaviour of $f(x)=-2x^6$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Does $f(x)=x^4$ open up or down?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+A cubic with $a<0$: describe its ends.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+A polynomial has ends up–down. State the degree parity and sign of $a$.\workspace{2.6cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item End behaviour of $f(x)=x^7$?
+  \item End behaviour of $f(x)=-x^6$?
+  \item End behaviour of $f(x)=2x^4$?
+  \item End behaviour of $f(x)=-5x^3$?
+  \item A graph rises on both ends. Even or odd degree?
+  \item End behaviour of $f(x)=x^3$?
+  \item End behaviour of $f(x)=-x^5$?
+  \item End behaviour of $f(x)=4x^2$?
+  \item A graph falls on both ends. Sign of $a$?
+  \item End behaviour of $f(x)=-2x^6$?
+  \item Does $f(x)=x^4$ open up or down?
+  \item A cubic with $a<0$: describe its ends.
+  \item A polynomial has ends up–down. State the degree parity and sign of $a$.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item down–up
+  \item down–down
+  \item up–up
+  \item up–down
+  \item even
+  \item down–up
+  \item up–down
+  \item up–up
+  \item $a<0$
+  \item down–down
+  \item up
+  \item up–down
+  \item odd, $a<0$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

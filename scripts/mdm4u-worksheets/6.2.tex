@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MDM4U \textperiodcentered{} 6.2}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 6.2 --- Correlation \& Linear Regression}\\[2pt]
+{\small Grade 12 Mathematics of Data Management (MDM4U) \textperiodcentered{} Unit 6: Two-Variable Statistics}
+\end{center}
+
+\begin{ideabox}
+Technology fits a \emph{line of best fit} $\hat y=ax+b$ to linear data. Its slope $a$ is the rate of change, its intercept $b$ the baseline; substitute an $x$ to \emph{predict} a $y$. The value $r$ reports how well the line fits.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Line of best fit $\hat y=ax+b$ (from technology).
+  \item Slope $=$ rate of change; intercept $=$ value when $x=0$.
+  \item Predict by substitution; $r$ measures the fit (not the steepness).
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{The line of best fit}\textbf{Linear regression} finds the straight line $y=ax+b$ that best captures the trend in a scatter plot, computed with technology.
+\lh{Slope and intercept}The slope $a$ predicts the change in $y$ per unit of $x$, and the intercept $b$ predicts $y$ when $x=0$. Interpret both in the situation's context.
+\lh{Correlation first}A regression line is only meaningful when the correlation is reasonably strong and the pattern is genuinely linear.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Predict from a line}
+For $\hat y=2x+5$, predict $y$ at $x=10$.\soln $\hat y=2(10)+5=25$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Interpret slope and intercept}
+A cost model is $\hat y=0.5x+20$. Interpret its parts.\soln Each extra unit adds \$0.50 (slope); the fixed cost is \$20 (intercept).
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Interpolate}
+Data run over $x=1$ to $10$ with $\hat y=1.2x+3$. Predict at $x=6$.\soln $\hat y=1.2(6)+3=10.2$ --- an interpolation, so reliable.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Read a technology result}
+Software reports $\hat y=1.2x+3$ with $r=0.95$. Interpret.\soln A strong positive linear fit; each unit of $x$ raises $\hat y$ by $1.2$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Predicted vs. actual (residual)}
+With $\hat y=2x+1$, the actual $y$ at $x=5$ is $13$. Find the residual.\soln Predicted $11$; residual $=13-11=+2$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- r vs. slope}
+Two lines both have slope $2$, but $r=0.99$ and $r=0.6$. What differs?\soln The steepness is the same; $r$ shows the first data hug the line far more tightly.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Sign agreement}
+If $r=-0.9$, what is the sign of the best-fit slope?\soln Negative --- $r$ and the slope always share a sign.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Scatter with a fitted line}
+The line $\hat y=2x+1$ is fitted to the data. Predict at $x=4$.\soln $\hat y=9$.\scatter{0}{7}{0}{14}{\addplot[only marks,mark=*,exblue] coordinates {(1,3)(2,5)(3,6)(4,9)(5,11)}; \addplot[qorange,thick,domain=0:6]{2*x+1};}
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Full use (multi-part)}
+Sales follow $\hat y=3x+10$. Find \\ \textbf{(a)} the prediction at $x=8$; \\ \textbf{(b)} the meaning of the slope; \\ \textbf{(c)} the residual if the actual value at $x=8$ is $40$.\soln (a) $34$. (b) each unit of $x$ adds $3$ in sales. (c) $40-34=+6$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+For $\hat y=2x+1$, predict $y$ at $x=6$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+For $\hat y=-0.5x+20$, predict $y$ at $x=10$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Interpret the slope of the cost model $\hat y=4x+50$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Which line fits better: one with $r=0.98$ or one with $r=0.6$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Predicted $y=20$, actual $y=22$. Find the residual.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+For $\hat y=1.5x+2$, predict $y$ at $x=4$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Interpret the intercept of $\hat y=3x+12$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+For $\hat y=0.1x+5$, predict at $x=100$. What caution applies?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Which describes the strength of a linear relationship: $r$ or the slope?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+For $\hat y=-2x+30$, at what $x$ does $\hat y=10$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Predicted $y=18$, actual $y=15$. Find the residual.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+If $r=-0.9$, is the best-fit slope positive or negative?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Sales follow $\hat y=3x+10$. Find \\ \textbf{(a)} the prediction at $x=8$; \\ \textbf{(b)} the slope's meaning; \\ \textbf{(c)} the residual if the actual is $40$.\workspace{3cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item For $\hat y=2x+1$, predict $y$ at $x=6$.
+  \item For $\hat y=-0.5x+20$, predict $y$ at $x=10$.
+  \item Interpret the slope of the cost model $\hat y=4x+50$.
+  \item Which line fits better: one with $r=0.98$ or one with $r=0.6$?
+  \item Predicted $y=20$, actual $y=22$. Find the residual.
+  \item For $\hat y=1.5x+2$, predict $y$ at $x=4$.
+  \item Interpret the intercept of $\hat y=3x+12$.
+  \item For $\hat y=0.1x+5$, predict at $x=100$. What caution applies?
+  \item Which describes the strength of a linear relationship: $r$ or the slope?
+  \item For $\hat y=-2x+30$, at what $x$ does $\hat y=10$?
+  \item Predicted $y=18$, actual $y=15$. Find the residual.
+  \item If $r=-0.9$, is the best-fit slope positive or negative?
+  \item Sales follow $\hat y=3x+10$. Find \\ \textbf{(a)} the prediction at $x=8$; \\ \textbf{(b)} the slope's meaning; \\ \textbf{(c)} the residual if the actual is $40$.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $13$
+  \item $15$
+  \item each unit adds $4$
+  \item $r=0.98$
+  \item $+2$
+  \item $8$
+  \item value when $x=0$ is $12$
+  \item $15$ --- but this is extrapolation
+  \item $r$
+  \item $x=10$
+  \item $-3$
+  \item negative
+  \item (a) $34$; (b) $+3$ per unit; (c) $+6$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

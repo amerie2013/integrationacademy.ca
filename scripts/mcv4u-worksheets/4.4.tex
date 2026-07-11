@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MCV4U \textperiodcentered{} 4.4}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 4.4 --- Full Curve Sketching}\\[2pt]
+{\small Grade 12 Calculus and Vectors (MCV4U) \textperiodcentered{} Unit 4: Curve Sketching}
+\end{center}
+
+\begin{ideabox}
+Run the checklist: domain/symmetry, intercepts, asymptotes, $f'$ (extrema), $f''$ (concavity/inflection), end behaviour — then sketch.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Domain, symmetry, intercepts first.
+  \item $f'$ → extrema; $f''$ → inflection/concavity.
+  \item Finish with end behaviour and a consistent sketch.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{A systematic method}Curve sketching combines the whole toolkit: domain, intercepts, asymptotes, $f'$ for increase/decrease, and $f''$ for concavity.
+\lh{Assemble the evidence}Mark critical points, inflection points, and asymptotes, then record the sign of $f'$ and $f''$ on each interval.
+\lh{Then draw}Only after gathering every feature do you sketch — the graph is the summary, not the starting point.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Cubic}
+Sketch $f(x)=x^3-3x$.\soln x-ints $0,\pm\sqrt3$; max $(-1,2)$, min $(1,-2)$; inflection $(0,0)$; ends down–up:\eplot{-3}{3}{-4}{4}{\addplot[exblue,very thick,domain=-2.1:2.1]{x^3-3*x};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(-1,2) (1,-2) (0,0)};}
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Quartic (even)}
+Sketch $f(x)=x^4-2x^2$.\soln Even; x-ints $0,\pm\sqrt2$; max $(0,0)$, mins $(\pm1,-1)$; inflections at $x=\pm\tfrac1{\sqrt3}$; ends up–up (a "W").
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Cubic}
+Sketch $f(x)=x^3-3x^2$.\soln x-ints $0,3$; max $(0,0)$, min $(2,-4)$; inflection $(1,-2)$; ends down–up.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- From clues}
+$f'>0$ on $(-\infty,0)\cup(2,\infty)$, $f'<0$ on $(0,2)$, $f''>0$ on $(1,\infty)$.\soln Max at $0$, min at $2$, inflection at $1$ — a cubic shape.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Match f to f'}
+$f$ has a max at $-1$, min at $1$. What is $f'$?\soln $f'=0$ at $\pm1$, $+$ outside, $-$ inside: an upward parabola (e.g. $3x^2-3$).
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Intercepts}
+x-intercepts of $f(x)=x^3-3x$.\soln $x(x^2-3)=0\Rightarrow 0,\pm\sqrt3$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Symmetry}
+Is $f(x)=x^4-2x^2$ even or odd?\soln Even (only even powers).
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Extrema}
+Local extrema of $f(x)=x^3-3x^2$.\soln Max $(0,0)$, min $(2,-4)$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Always increasing}
+If $f'>0$ everywhere, what does the curve do?\soln Always increasing — no extrema.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+x-intercepts of $f(x)=x^3-3x$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Local extrema of $f(x)=x^3-3x^2$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Inflection point of $f(x)=x^3-3x$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Is $f(x)=x^4-2x^2$ even or odd?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+If $f'>0$ everywhere, what does the graph do?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+y-intercept of $f(x)=x^3-3x+2$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Local extrema of $f(x)=x^3-3x$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+End behaviour of $f(x)=x^4-2x^2$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Inflection point of $f(x)=x^3-3x^2$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+If $f$ has a min at $2$, what does $f'$ do at $2$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+x-intercepts of $f(x)=x^4-2x^2$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Is $f(x)=x^3-3x$ even, odd, or neither?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Do a full sketch analysis of $f(x)=x^3-3x^2$ (intercepts, extrema, inflection, ends).\workspace{4cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item x-intercepts of $f(x)=x^3-3x$?
+  \item Local extrema of $f(x)=x^3-3x^2$?
+  \item Inflection point of $f(x)=x^3-3x$?
+  \item Is $f(x)=x^4-2x^2$ even or odd?
+  \item If $f'>0$ everywhere, what does the graph do?
+  \item y-intercept of $f(x)=x^3-3x+2$?
+  \item Local extrema of $f(x)=x^3-3x$?
+  \item End behaviour of $f(x)=x^4-2x^2$?
+  \item Inflection point of $f(x)=x^3-3x^2$?
+  \item If $f$ has a min at $2$, what does $f'$ do at $2$?
+  \item x-intercepts of $f(x)=x^4-2x^2$?
+  \item Is $f(x)=x^3-3x$ even, odd, or neither?
+  \item Do a full sketch analysis of $f(x)=x^3-3x^2$ (intercepts, extrema, inflection, ends).
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $0,\pm\sqrt3$
+  \item max $(0,0)$, min $(2,-4)$
+  \item $(0,0)$
+  \item even
+  \item always increasing
+  \item $(0,2)$
+  \item max $(-1,2)$, min $(1,-2)$
+  \item up–up
+  \item $(1,-2)$
+  \item $f'=0$, changing $-\to+$
+  \item $0,\pm\sqrt2$
+  \item odd
+  \item x-ints $0,3$; max $(0,0)$, min $(2,-4)$; inflection $(1,-2)$; ends down–up
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

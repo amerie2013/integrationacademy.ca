@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MCF3M \textperiodcentered{} 2.1}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 2.1 --- Functions, Function Notation, Domain \& Range}\\[2pt]
+{\small Grade 11 Functions \& Applications (MCF3M) \textperiodcentered{} Unit 2: Quadratic Functions}
+\end{center}
+
+\begin{ideabox}
+A function gives one output per input; $f(x)$ is the output at $x$. State the domain and range.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Vertical-line test: a function meets any vertical line at most once.
+  \item Evaluate by substituting for every $x$.
+  \item A quadratic has domain all reals; its range starts (or ends) at the vertex.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{What a function is}A \textbf{function} assigns exactly one output to each input; the notation $f(x)$ names that output for input $x$.
+\lh{Domain and range}The \textbf{domain} is the set of allowed inputs and the \textbf{range} is the set of resulting outputs.
+\lh{The vertical line test}A graph represents a function when no vertical line meets it more than once.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Function or not}
+Is $\{(1,2),(2,4),(3,6)\}$ a function?\soln Check each input: $1\to2$, $2\to4$, $3\to6$. \\ Every input has exactly one output, so \textbf{yes}.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Evaluate}
+For $f(x)=2x^2+3x-1$, find $f(2)$.\soln Substitute $x=2$: \\ $2(2)^2+3(2)-1=8+6-1=13$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Negative input}
+Find $f(-1)$ for the same $f$.\soln Substitute $x=-1$: \\ $2(-1)^2+3(-1)-1=2-3-1=-2$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Domain \& range}
+State the domain and range of $f(x)=x^2+1$.\soln Any $x$ is allowed, so the domain is all real numbers. \\ The vertex $(0,1)$ is the lowest point, so the range is $y\ge1$:\eplot{-3}{3}{-1}{8}{\addplot[exblue,very thick,domain=-2.6:2.6]{x^2+1};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(0,1)};}
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Application}
+Revenue is $r(s)=-10s^2+1500s$. Find $r(60)$.\soln Substitute $s=60$: \\ $-10(60)^2+1500(60)=-36000+90000=\$54\,000$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Evaluate}
+For $f(x)=x^2-4$, find $f(3)$.\soln $f(3)=(3)^2-4=9-4=5$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Solve}
+For $f(x)=5-2x$, solve $f(x)=1$.\soln Set $5-2x=1$: \\ $-2x=-4\Rightarrow x=2$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Range}
+State the range of $y=-x^2+5$.\soln The graph opens down with vertex $(0,5)$ as the highest point. \\ Range: $y\le5$:\eplot{-4}{4}{-4}{7}{\addplot[exblue,very thick,domain=-3:3]{-x^2+5};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(0,5)};}
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Not a function}
+Is $x=y^2$ a function?\soln Solve for $y$: $y=\pm\sqrt{x}$, so $x=4$ gives $y=2$ \emph{and} $y=-2$. \\ One input, two outputs — \textbf{not} a function.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+For $f(x)=3x-2$, find $f(5)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+For $f(x)=x^2+1$, find $f(4)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Is $\{(2,1),(3,1),(4,1)\}$ a function?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+State the range of $y=x^2-3$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+For $f(x)=x^2-2x$, find $f(5)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+State the domain of $y=2x+1$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+For $f(x)=4-x^2$, find $f(2)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+For $f(x)=2x-6$, solve $f(x)=0$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+State the range of $y=-x^2+2$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Is $x=y^2$ a function?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+For $f(x)=x^2-5x$, find $f(-2)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+State the range of $y=(x-1)^2+2$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Revenue $r(s)=-10s^2+1500s$. Find $r(75)$.\workspace{3cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item For $f(x)=3x-2$, find $f(5)$.
+  \item For $f(x)=x^2+1$, find $f(4)$.
+  \item Is $\{(2,1),(3,1),(4,1)\}$ a function?
+  \item State the range of $y=x^2-3$.
+  \item For $f(x)=x^2-2x$, find $f(5)$.
+  \item State the domain of $y=2x+1$.
+  \item For $f(x)=4-x^2$, find $f(2)$.
+  \item For $f(x)=2x-6$, solve $f(x)=0$.
+  \item State the range of $y=-x^2+2$.
+  \item Is $x=y^2$ a function?
+  \item For $f(x)=x^2-5x$, find $f(-2)$.
+  \item State the range of $y=(x-1)^2+2$.
+  \item Revenue $r(s)=-10s^2+1500s$. Find $r(75)$.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $13$
+  \item $17$
+  \item yes
+  \item $y\ge-3$
+  \item $15$
+  \item all reals
+  \item $0$
+  \item $x=3$
+  \item $y\le2$
+  \item no
+  \item $14$
+  \item $y\ge2$
+  \item $\$56\,250$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

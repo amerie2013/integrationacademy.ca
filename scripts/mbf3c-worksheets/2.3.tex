@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MBF3C \textperiodcentered{} 2.3}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 2.3 --- Exponential Growth \& Decay Applications}\\[2pt]
+{\small Grade 11 Foundations for College Mathematics (MBF3C) \textperiodcentered{} Unit 2: Exponential Relations}
+\end{center}
+
+\begin{ideabox}
+Model with $y=a\cdot b^t$: $a$ is the initial amount, $b=1+r$ for growth or $1-r$ for decay; half-life uses $\left(\tfrac12\right)^{t/h}$.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Growth factor $1+r$; decay factor $1-r$.
+  \item Doubling: $b=2$. Half-life $h$: $b=\tfrac12$ over each period.
+  \item Compound interest $A=P(1+i)^n$ is exponential.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Percentage change}Repeated percentage change follows $A=A_0 b^{\,t}$, with $b=1+r$ for growth and $b=1-r$ for decay.
+\lh{Half-life and doubling}Halving uses base $\tfrac12$ and doubling uses base $2$, scaled by the time interval.
+\lh{Using the model}Substitute a time to predict an amount; the base shows how fast the quantity changes.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Doubling}
+$P=200(2)^t$. Find $P$ after 3 years.\soln $200(2)^3=200(8)=1600$. Doubling has the shape of $y=2^x$:\eplot{-1}{4}{-1}{9}{\addplot[exblue,very thick,domain=-1:3.2]{2^x};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(0,1) (1,2) (2,4) (3,8)};}
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Half-life}
+80 g halves every 5 years. How much after 10 years?\soln $10\div5=2$ half-lives: $80\left(\tfrac12\right)^2=20$ g.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Growth factor}
+A town grows $8\%$ per year. State the growth factor.\soln $b=1+0.08=1.08$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Decay factor}
+A car loses $15\%$ each year. State the decay factor.\soln $b=1-0.15=0.85$.
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Bouncing ball}
+Height after $n$ bounces: $h=100(0.6)^n$ cm. Find $h$ after 3 bounces.\soln $100(0.6)^3=100(0.216)=21.6$ cm.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Compound interest}
+\$1000 grows at $5\%$/year for 2 years.\soln $1000(1.05)^2\approx\$1102.50$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Doubling}
+$P=200(2)^t$ after 4 years.\soln $200(16)=3200$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Half-life}
+100 g halves every 3 h. After 9 h?\soln $9\div3=3$: $100\left(\tfrac12\right)^3=12.5$ g.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Growth factor}
+Growth of $5\%$ per year.\soln $b=1.05$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+State the growth factor for $+10\%$ per year.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+State the decay factor for $-20\%$ per year.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+For $P=200(2)^t$, find $P$ after 2 years.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+80 g halves every 5 years. How much after 15 years?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+\$1000 at $5\%$/year for 3 years. Find the value.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+State the doubling factor.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+State the decay factor for $-5\%$ per year.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+100 g halves every 4 h. How much after 8 h?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+For $h=100(0.6)^n$, find the height after 2 bounces.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+For $P=50(3)^t$, find $P$ after 2 years.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+State the growth factor for $+12\%$ per year.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+How much of 64 g remains after one half-life?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+A population triples every 4 h. Write the model with $t$ in hours.\workspace{3cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item State the growth factor for $+10\%$ per year.
+  \item State the decay factor for $-20\%$ per year.
+  \item For $P=200(2)^t$, find $P$ after 2 years.
+  \item 80 g halves every 5 years. How much after 15 years?
+  \item \$1000 at $5\%$/year for 3 years. Find the value.
+  \item State the doubling factor.
+  \item State the decay factor for $-5\%$ per year.
+  \item 100 g halves every 4 h. How much after 8 h?
+  \item For $h=100(0.6)^n$, find the height after 2 bounces.
+  \item For $P=50(3)^t$, find $P$ after 2 years.
+  \item State the growth factor for $+12\%$ per year.
+  \item How much of 64 g remains after one half-life?
+  \item A population triples every 4 h. Write the model with $t$ in hours.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $1.10$
+  \item $0.80$
+  \item $800$
+  \item $10$ g
+  \item $\approx\$1157.63$
+  \item $2$
+  \item $0.95$
+  \item $25$ g
+  \item $36$ cm
+  \item $450$
+  \item $1.12$
+  \item $32$ g
+  \item $y=a\cdot3^{t/4}$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

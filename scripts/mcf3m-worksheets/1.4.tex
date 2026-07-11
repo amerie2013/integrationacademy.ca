@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MCF3M \textperiodcentered{} 1.4}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 1.4 --- The Quadratic Formula \& the Discriminant}\\[2pt]
+{\small Grade 11 Functions \& Applications (MCF3M) \textperiodcentered{} Unit 1: Quadratic Expressions and Equations}
+\end{center}
+
+\begin{ideabox}
+Use $x=\dfrac{-b\pm\sqrt{b^2-4ac}}{2a}$; the discriminant $b^2-4ac$ gives the number of real roots.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item The formula solves any quadratic.
+  \item Discriminant: $>0$ two roots, $=0$ one, $<0$ none.
+  \item Use the formula when the quadratic will not factor over the integers.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{A formula for every quadratic}$x=\dfrac{-b\pm\sqrt{b^2-4ac}}{2a}$ solves any quadratic, whether or not it factors.
+\lh{The discriminant}The value $b^2-4ac$ under the root reveals the number of real roots: positive gives two, zero gives one, negative gives none.
+\lh{Substitute carefully}Identify $a$, $b$, $c$ with their signs before substituting, and simplify the surd fully.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Apply the formula}
+Solve $x^2-4x+1=0$.\soln Here $a=1,\ b=-4,\ c=1$. \\ $x=\dfrac{4\pm\sqrt{16-4}}{2}=\dfrac{4\pm\sqrt{12}}{2}$. \\ Since $\sqrt{12}=2\sqrt3$: $\ x=2\pm\sqrt3$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Leading coefficient}
+Solve $2x^2+3x-2=0$.\soln $a=2,\ b=3,\ c=-2$; discriminant $=9+16=25$. \\ $x=\dfrac{-3\pm5}{4}=\tfrac12$ or $-2$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- No real roots}
+How many real roots has $x^2+2x+5=0$?\soln Discriminant $=4-20=-16<0$. \\ No real roots — the parabola never reaches the x-axis:\eplot{-6}{4}{-1}{12}{\addplot[exblue,very thick,domain=-5:3]{x^2+2*x+5};}
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- One (double) root}
+How many real roots has $x^2-6x+9=0$?\soln Discriminant $=36-36=0$ — one (double) root. \\ $(x-3)^2=0\Rightarrow x=3$, where the vertex touches the axis:\eplot{-1}{7}{-1}{10}{\addplot[exblue,very thick,domain=0:6]{x^2-6*x+9};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(3,0)};}
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Irrational roots}
+Solve $x^2+x-1=0$.\soln $a=1,\ b=1,\ c=-1$. \\ $x=\dfrac{-1\pm\sqrt{1+4}}{2}=\dfrac{-1\pm\sqrt5}{2}$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Irrational roots}
+Solve $x^2-2x-1=0$.\soln $x=\dfrac{2\pm\sqrt{4+4}}{2}=\dfrac{2\pm2\sqrt2}{2}=1\pm\sqrt2$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Irrational roots}
+Solve $x^2-6x+7=0$.\soln $x=\dfrac{6\pm\sqrt{36-28}}{2}=\dfrac{6\pm2\sqrt2}{2}=3\pm\sqrt2$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Discriminant}
+Find the discriminant of $3x^2-5x+1$.\soln $b^2-4ac=25-12=13$. \\ Since $13>0$, there are two real roots.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Simplify the root}
+Solve $2x^2-4x+1=0$.\soln $x=\dfrac{4\pm\sqrt{16-8}}{4}=\dfrac{4\pm2\sqrt2}{4}=\dfrac{2\pm\sqrt2}{2}$. \\ Two x-intercepts near $0.29$ and $1.71$:\eplot{-1}{4}{-2}{6}{\addplot[exblue,very thick,domain=-0.3:2.3]{2*x^2-4*x+1};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(0.29,0) (1.71,0)};}
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Solve $x^2-2x-1=0$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Find the discriminant of $x^2-4x+4$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Solve $3x^2-5x-2=0$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+How many real roots has $2x^2+x+3=0$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Solve $x^2-6x+7=0$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Find the discriminant of $x^2+x+1$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Solve $x^2+4x+2=0$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+How many real roots has $x^2-10x+25=0$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Solve $2x^2-3x-1=0$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Find the discriminant of $5x^2-2x-1$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Solve $x^2-8x+13=0$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+How many real roots has $4x^2-12x+9=0$?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+For what value of $k$ does $x^2-6x+k=0$ have exactly one root?\workspace{3cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Solve $x^2-2x-1=0$.
+  \item Find the discriminant of $x^2-4x+4$.
+  \item Solve $3x^2-5x-2=0$.
+  \item How many real roots has $2x^2+x+3=0$?
+  \item Solve $x^2-6x+7=0$.
+  \item Find the discriminant of $x^2+x+1$.
+  \item Solve $x^2+4x+2=0$.
+  \item How many real roots has $x^2-10x+25=0$?
+  \item Solve $2x^2-3x-1=0$.
+  \item Find the discriminant of $5x^2-2x-1$.
+  \item Solve $x^2-8x+13=0$.
+  \item How many real roots has $4x^2-12x+9=0$?
+  \item For what value of $k$ does $x^2-6x+k=0$ have exactly one root?
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $x=1\pm\sqrt2$
+  \item $0$
+  \item $x=2,-\tfrac13$
+  \item none ($D<0$)
+  \item $x=3\pm\sqrt2$
+  \item $-3$
+  \item $x=-2\pm\sqrt2$
+  \item one ($D=0$)
+  \item $x=\dfrac{3\pm\sqrt{17}}{4}$
+  \item $24$
+  \item $x=4\pm\sqrt3$
+  \item one ($D=0$)
+  \item $k=9$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}
