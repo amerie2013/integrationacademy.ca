@@ -20,7 +20,7 @@ type Row = {
   created_at: string | null;
 };
 
-type AuthMeta = { email_confirmed: boolean; last_sign_in_at: string | null };
+type AuthMeta = { email_confirmed: boolean; last_sign_in_at: string | null; banned?: boolean };
 
 const ROLES = ["student", "teacher", "admin"] as const;
 const STATUSES = ["active", "trialing", "inactive", "cancelled", "past_due"] as const;
@@ -200,6 +200,21 @@ export default function MembersAdminPage() {
     setSavingId(null);
   }
 
+  async function suspend(r: Row) {
+    if (!window.confirm(`Suspend ${r.full_name || r.email || "this member"}? They won't be able to sign in until you unsuspend them. No data is deleted.`)) return;
+    setSavingId(r.id);
+    try { await callApi("suspend", r.id); setMeta((m) => ({ ...m, [r.id]: { ...(m[r.id] ?? { email_confirmed: true, last_sign_in_at: null }), banned: true } })); flash(`✓ ${r.full_name || "Member"} suspended`); }
+    catch (e: any) { fail(e.message); }
+    setSavingId(null);
+  }
+
+  async function unsuspend(r: Row) {
+    setSavingId(r.id);
+    try { await callApi("unsuspend", r.id); setMeta((m) => ({ ...m, [r.id]: { ...(m[r.id] ?? { email_confirmed: true, last_sign_in_at: null }), banned: false } })); flash(`✓ ${r.full_name || "Member"} reinstated`); }
+    catch (e: any) { fail(e.message); }
+    setSavingId(null);
+  }
+
   const filtered = useMemo(() => {
     const s = q.trim().toLowerCase();
     return rows.filter((r) => {
@@ -273,6 +288,7 @@ export default function MembersAdminPage() {
                     <div style={{ fontWeight: 600, display: "flex", alignItems: "center", gap: 8 }}>
                       <span style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{r.full_name || "(no name)"}</span>
                       {verified === false && <span title="Email not verified" style={{ fontSize: 11, fontWeight: 700, color: "#b45309", background: "#fef3c7", padding: "1px 7px", borderRadius: 999 }}>unverified</span>}
+                      {meta[r.id]?.banned && <span title="Suspended — cannot sign in" style={{ fontSize: 11, fontWeight: 700, color: "#b91c1c", background: "#fee2e2", padding: "1px 7px", borderRadius: 999 }}>suspended</span>}
                     </div>
                     <div style={{ fontSize: 12, color: "#94a3b8", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{r.email || "no email"}{r.level ? ` · ${r.level}` : ""}</div>
                   </div>
@@ -356,6 +372,9 @@ export default function MembersAdminPage() {
                       {verified === false && <button onClick={() => verify(r)} disabled={busy} style={actBtn}>✓ Verify email</button>}
                       <button onClick={() => resetPassword(r)} disabled={busy} style={actBtn}>Send reset email</button>
                       <button onClick={() => setPassword(r)} disabled={busy} style={actBtn}>Set password…</button>
+                      {meta[r.id]?.banned
+                        ? <button onClick={() => unsuspend(r)} disabled={busy} style={actBtn}>Unsuspend</button>
+                        : <button onClick={() => suspend(r)} disabled={busy} style={warnBtn}>Suspend</button>}
                       <button onClick={() => remove(r)} disabled={busy} style={dangerBtn}>Delete member</button>
                     </div>
                   </div>
@@ -374,6 +393,7 @@ const seatBtn: React.CSSProperties = { width: 26, height: 26, borderRadius: 7, b
 const manageBtn: React.CSSProperties = { background: "#fff", color: "#0f172a", border: "1px solid #cbd5e1", borderRadius: 9, padding: "7px 14px", fontWeight: 700, fontSize: 13, cursor: "pointer" };
 const actBtn: React.CSSProperties = { background: "#f8fafc", color: "#0f172a", border: "1px solid #cbd5e1", borderRadius: 9, padding: "8px 14px", fontWeight: 700, fontSize: 13, cursor: "pointer" };
 const dangerBtn: React.CSSProperties = { background: "#fef2f2", color: "#dc2626", border: "1px solid #fecaca", borderRadius: 9, padding: "8px 14px", fontWeight: 700, fontSize: 13, cursor: "pointer", marginLeft: "auto" };
+const warnBtn: React.CSSProperties = { background: "#fff7ed", color: "#c2410c", border: "1px solid #fed7aa", borderRadius: 9, padding: "8px 14px", fontWeight: 700, fontSize: 13, cursor: "pointer" };
 const sel: React.CSSProperties = { padding: "8px 10px", borderRadius: 9, border: "1px solid #cbd5e1", fontSize: 14, background: "#fff", minWidth: 130 };
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {

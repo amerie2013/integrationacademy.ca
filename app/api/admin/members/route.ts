@@ -45,15 +45,17 @@ export async function GET(req: NextRequest) {
   if (!gate.ok) return gate.res;
 
   const admin = getAdmin();
-  const meta: Record<string, { email_confirmed: boolean; last_sign_in_at: string | null }> = {};
+  const meta: Record<string, { email_confirmed: boolean; last_sign_in_at: string | null; banned: boolean }> = {};
   // listUsers is paginated (max 1000/page); walk pages until exhausted.
   for (let page = 1; page <= 20; page++) {
     const { data, error } = await admin.auth.admin.listUsers({ page, perPage: 1000 });
     if (error) return NextResponse.json({ error: error.message }, { status: 500 });
     for (const u of data.users) {
+      const bannedUntil = (u as any).banned_until;
       meta[u.id] = {
         email_confirmed: Boolean((u as any).email_confirmed_at ?? (u as any).confirmed_at),
         last_sign_in_at: (u as any).last_sign_in_at ?? null,
+        banned: Boolean(bannedUntil && new Date(bannedUntil).getTime() > Date.now()),
       };
     }
     if (data.users.length < 1000) break;
@@ -98,6 +100,22 @@ export async function POST(req: NextRequest) {
     }
     // Deleting the auth user cascades to profiles (FK: on delete cascade).
     const { error } = await admin.auth.admin.deleteUser(memberId);
+    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json({ ok: true });
+  }
+
+  // Suspend = ban the account so they can't sign in (reversible, no data loss).
+  if (action === "suspend") {
+    if (memberId === gate.adminId) {
+      return NextResponse.json({ error: "You can't suspend your own account." }, { status: 400 });
+    }
+    const { error } = await admin.auth.admin.updateUserById(memberId, { ban_duration: "876000h" });
+    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json({ ok: true });
+  }
+
+  if (action === "unsuspend") {
+    const { error } = await admin.auth.admin.updateUserById(memberId, { ban_duration: "none" });
     if (error) return NextResponse.json({ error: error.message }, { status: 500 });
     return NextResponse.json({ ok: true });
   }
