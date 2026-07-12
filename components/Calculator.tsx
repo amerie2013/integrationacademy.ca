@@ -590,8 +590,9 @@ export function Calculator({ initialData, initialState, embed = false }: { initi
           </ul>
         </details>
 
-        {/* toggles MathLive's on-screen math keyboard for the focused field */}
-        <div style={{ position: "sticky", bottom: 0, marginTop: 12, marginLeft: -14, marginRight: -14, marginBottom: -14, padding: "8px 12px", background: "#f1f5fb", borderTop: "1px solid #d8e0ec" }}>
+        {/* toggles MathLive's on-screen math keyboard for the focused field;
+            hidden on touch devices, which use a plain text input instead */}
+        <div className="ia-mathkbd-bar" style={{ position: "sticky", bottom: 0, marginTop: 12, marginLeft: -14, marginRight: -14, marginBottom: -14, padding: "8px 12px", background: "#f1f5fb", borderTop: "1px solid #d8e0ec" }}>
           <button onClick={toggleMathKeyboard} style={{ width: "100%", border: "none", background: "#1b7a44", color: "#fff", cursor: "pointer", fontSize: 13, fontWeight: 800, padding: "8px", borderRadius: 8 }}>
             ⌨ Math keyboard
           </button>

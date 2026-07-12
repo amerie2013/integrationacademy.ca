@@ -256,3 +256,9 @@ h3 {
     --keycap-gap: 1px;
   }
 }
+
+/* On touch-first devices the calculator uses a plain text input (native
+   keyboard) instead of MathLive, so the "Math keyboard" toggle is not needed. */
+@media (hover: none) and (pointer: coarse) {
+  .ia-mathkbd-bar { display: none !important; }
+}

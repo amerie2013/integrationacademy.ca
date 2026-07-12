@@ -1,6 +1,6 @@
 "use client";
 
-import { createElement, useEffect, useRef } from "react";
+import { createElement, useEffect, useRef, useState } from "react";
 import { asciiToExpr } from "../lib/mathInput";
 
 /**
@@ -9,8 +9,11 @@ import { asciiToExpr } from "../lib/mathInput";
  * fraction, etc. We store/expose plain expression strings in our own parser
  * syntax (see lib/mathInput), so the rest of the calculator is unchanged.
  *
- * MathLive is imported lazily on the client only (it defines a custom element
- * and touches the DOM, so it must not run during SSR).
+ * On touch-first devices (phones/tablets) MathLive's *floating* virtual keyboard
+ * is hard to use — it covers the field and its keys don't fit small screens — so
+ * we fall back to a plain text box driven by the phone's own keyboard. Users type
+ * ordinary notation (x^2, sin(x), (x+1)/2) and we run it through asciiToExpr so
+ * implicit multiplication like "2x" still works.
  */
 type Props = {
   value: string;
@@ -23,7 +26,60 @@ type Props = {
   format?: "expr" | "latex";
 };
 
-export function MathField({ value, onChange, placeholder, style, ariaLabel, format = "expr" }: Props) {
+export function MathField(props: Props) {
+  // Detect a touch-first device (phone/tablet) after mount. We start false so
+  // SSR and the first client render agree, then swap in the plain input if
+  // needed. The plain input only replaces the graph-expression field; LaTeX
+  // fields (assignment answers) keep MathLive.
+  const [touch, setTouch] = useState(false);
+  useEffect(() => {
+    try {
+      setTouch(window.matchMedia?.("(hover: none) and (pointer: coarse)").matches ?? false);
+    } catch {}
+  }, []);
+
+  if (touch && props.format !== "latex") return <PlainExprInput {...props} />;
+  return <MathLiveField {...props} />;
+}
+
+/** Plain text input using the device's native keyboard; forgiving of implicit
+ *  multiplication via asciiToExpr. Used on phones/tablets. */
+function PlainExprInput({ value, onChange, placeholder, style, ariaLabel }: Props) {
+  const [text, setText] = useState(value ?? "");
+  // The last expr we emitted, so an external value change (load a saved graph,
+  // apply a shared figure) resyncs the box but our own edits don't fight it.
+  const lastEmit = useRef(value ?? "");
+  useEffect(() => {
+    if (value !== lastEmit.current) {
+      setText(value ?? "");
+      lastEmit.current = value ?? "";
+    }
+  }, [value]);
+
+  return (
+    <input
+      type="text"
+      value={text}
+      onChange={(e) => {
+        const raw = e.target.value;
+        setText(raw);
+        const expr = asciiToExpr(raw);
+        lastEmit.current = expr;
+        onChange(expr);
+      }}
+      placeholder={placeholder}
+      aria-label={ariaLabel}
+      inputMode="text"
+      autoCapitalize="off"
+      autoCorrect="off"
+      spellCheck={false}
+      style={{ display: "block", ...style }}
+    />
+  );
+}
+
+/** MathLive-backed WYSIWYG field (desktop, and LaTeX fields everywhere). */
+function MathLiveField({ value, onChange, placeholder, style, ariaLabel, format = "expr" }: Props) {
   const ioFormat = format === "latex" ? "latex" : "ascii-math";
   const fromField = (raw: string) => (format === "latex" ? raw : asciiToExpr(raw));
   const ref = useRef<any>(null);
@@ -36,7 +92,6 @@ export function MathField({ value, onChange, placeholder, style, ariaLabel, form
   useEffect(() => {
     let alive = true;
     let handler: (() => void) | null = null;
-    let focusHandler: (() => void) | null = null;
     import("mathlive").then((ml) => {
       if (!alive) return;
       const MFE: any = ml.MathfieldElement;
@@ -60,21 +115,11 @@ export function MathField({ value, onChange, placeholder, style, ariaLabel, form
         onChangeRef.current(out);
       };
       el.addEventListener("input", handler);
-      // On phones the on-screen math keyboard overlays the lower half of the
-      // screen; when a field is tapped, scroll it up so it stays visible above
-      // the keyboard while typing.
-      focusHandler = () => {
-        window.setTimeout(() => {
-          try { el.scrollIntoView({ block: "center", behavior: "smooth" }); } catch {}
-        }, 350);
-      };
-      el.addEventListener("focus", focusHandler);
     });
     return () => {
       alive = false;
       const el = ref.current;
       if (el && handler) el.removeEventListener("input", handler);
-      if (el && focusHandler) el.removeEventListener("focus", focusHandler);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
