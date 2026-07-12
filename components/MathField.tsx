@@ -1,7 +1,8 @@
 "use client";
 
-import { createElement, useEffect, useRef, useState } from "react";
+import { createElement, useEffect, useMemo, useRef, useState } from "react";
 import { asciiToExpr } from "../lib/mathInput";
+import { kbStore, type FieldApi } from "./MathKeyboard";
 
 /**
  * A WYSIWYG math input built on MathLive's <math-field> web component. Typing
@@ -34,7 +35,10 @@ export function MathField(props: Props) {
   const [touch, setTouch] = useState(false);
   useEffect(() => {
     try {
-      setTouch(window.matchMedia?.("(hover: none) and (pointer: coarse)").matches ?? false);
+      const coarse = window.matchMedia?.("(hover: none) and (pointer: coarse)").matches ?? false;
+      // ?kbd=touch forces the on-screen keyboard on any device (QA / support).
+      const forced = new URLSearchParams(window.location.search).get("kbd") === "touch";
+      setTouch(forced || coarse);
     } catch {}
   }, []);
 
@@ -42,13 +46,23 @@ export function MathField(props: Props) {
   return <MathLiveField {...props} />;
 }
 
-/** Plain text input using the device's native keyboard; forgiving of implicit
- *  multiplication via asciiToExpr. Used on phones/tablets. */
+/** Plain text input used on phones/tablets. It's driven by the docked
+ *  Desmos-style MathKeyboard (native keyboard suppressed via inputMode="none"),
+ *  and is forgiving of implicit multiplication via asciiToExpr. A "⌨" key on the
+ *  keyboard flips `nativeKb` to fall back to the phone's own keyboard. */
 function PlainExprInput({ value, onChange, placeholder, style, ariaLabel }: Props) {
   const [text, setText] = useState(value ?? "");
+  const [nativeKb, setNativeKb] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
   // The last expr we emitted, so an external value change (load a saved graph,
   // apply a shared figure) resyncs the box but our own edits don't fight it.
   const lastEmit = useRef(value ?? "");
+  const onChangeRef = useRef(onChange);
+  onChangeRef.current = onChange;
+  // Caret position to restore after a programmatic insert (React would otherwise
+  // drop the caret to the end on the controlled re-render).
+  const caretRef = useRef<number | null>(null);
+
   useEffect(() => {
     if (value !== lastEmit.current) {
       setText(value ?? "");
@@ -56,20 +70,72 @@ function PlainExprInput({ value, onChange, placeholder, style, ariaLabel }: Prop
     }
   }, [value]);
 
+  useEffect(() => {
+    if (caretRef.current != null && inputRef.current) {
+      const p = caretRef.current;
+      caretRef.current = null;
+      try { inputRef.current.setSelectionRange(p, p); } catch {}
+    }
+  }, [text]);
+
+  const emit = (nv: string) => {
+    setText(nv);
+    const expr = asciiToExpr(nv);
+    lastEmit.current = expr;
+    onChangeRef.current(expr);
+  };
+
+  // Stable API the docked keyboard calls to edit this field. Reads live values
+  // off the DOM element (not the `text` closure) so it never goes stale.
+  const api = useMemo<FieldApi>(() => ({
+    getEl: () => inputRef.current,
+    insert: (t, back = 0) => {
+      const el = inputRef.current;
+      if (!el) return;
+      const cur = el.value;
+      const s = el.selectionStart ?? cur.length;
+      const e = el.selectionEnd ?? cur.length;
+      caretRef.current = s + t.length - back;
+      emit(cur.slice(0, s) + t + cur.slice(e));
+    },
+    backspace: () => {
+      const el = inputRef.current;
+      if (!el) return;
+      const cur = el.value;
+      let s = el.selectionStart ?? cur.length;
+      const e = el.selectionEnd ?? cur.length;
+      if (s === e) {
+        if (s === 0) return;
+        s -= 1;
+      }
+      caretRef.current = s;
+      emit(cur.slice(0, s) + cur.slice(e));
+    },
+    move: (dir) => {
+      const el = inputRef.current;
+      if (!el) return;
+      const p = Math.max(0, Math.min(el.value.length, (el.selectionStart ?? 0) + dir));
+      try { el.setSelectionRange(p, p); } catch {}
+    },
+    done: () => inputRef.current?.blur(),
+    useNative: () => {
+      kbStore.set(null);
+      setNativeKb(true);
+      window.setTimeout(() => inputRef.current?.focus(), 0);
+    },
+  }), []);
+
   return (
     <input
+      ref={inputRef}
       type="text"
       value={text}
-      onChange={(e) => {
-        const raw = e.target.value;
-        setText(raw);
-        const expr = asciiToExpr(raw);
-        lastEmit.current = expr;
-        onChange(expr);
-      }}
+      onChange={(e) => emit(e.target.value)}
+      onFocus={() => { if (!nativeKb) kbStore.set(api); }}
+      onBlur={() => { window.setTimeout(() => { if (kbStore.get() === api) kbStore.set(null); }, 0); }}
       placeholder={placeholder}
       aria-label={ariaLabel}
-      inputMode="text"
+      inputMode={nativeKb ? "text" : "none"}
       autoCapitalize="off"
       autoCorrect="off"
       spellCheck={false}

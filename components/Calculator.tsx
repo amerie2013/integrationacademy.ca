@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { safeCompile } from "../lib/mathExpr";
 import { supabase } from "../lib/supabase";
 import { MathField, toggleMathKeyboard } from "./MathField";
+import { MathKeyboard } from "./MathKeyboard";
 
 /**
  * Our own interactive math lab (no third-party dependency, works offline).
@@ -435,6 +436,7 @@ export function Calculator({ initialData, initialState, embed = false }: { initi
 
   return (
     <div style={{ display: "flex", height: "100%", minHeight: 460 }}>
+      <MathKeyboard />
       {panelOpen && (
       <div style={{ width: 320, flexShrink: 0, borderRight: "1px solid #e2e8f0", background: "#f8faff", padding: 14, overflowY: "auto", boxSizing: "border-box" }}>
         <input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Graph title (optional)" style={{ width: "100%", padding: "8px 10px", borderRadius: 8, border: "1px solid #cbd5e1", fontWeight: 700, fontSize: 14, marginBottom: 12, boxSizing: "border-box" }} />
