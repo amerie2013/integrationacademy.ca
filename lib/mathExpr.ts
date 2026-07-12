@@ -12,24 +12,47 @@ type Token =
   | { t: "rparen" };
 
 const FUNCS: Record<string, (x: number) => number> = {
+  // trigonometric (radians)
   sin: Math.sin,
   cos: Math.cos,
   tan: Math.tan,
+  sec: (x) => 1 / Math.cos(x),
+  csc: (x) => 1 / Math.sin(x),
+  cot: (x) => 1 / Math.tan(x),
+  // inverse trigonometric
   asin: Math.asin,
   acos: Math.acos,
   atan: Math.atan,
+  asec: (x) => Math.acos(1 / x),
+  acsc: (x) => Math.asin(1 / x),
+  acot: (x) => Math.atan(1 / x),
+  // hyperbolic
   sinh: Math.sinh,
   cosh: Math.cosh,
   tanh: Math.tanh,
+  sech: (x) => 1 / Math.cosh(x),
+  csch: (x) => 1 / Math.sinh(x),
+  coth: (x) => 1 / Math.tanh(x),
+  // inverse hyperbolic
+  asinh: Math.asinh,
+  acosh: Math.acosh,
+  atanh: Math.atanh,
+  asech: (x) => Math.acosh(1 / x),
+  acsch: (x) => Math.asinh(1 / x),
+  acoth: (x) => Math.atanh(1 / x),
+  // exponential & logarithmic
   exp: Math.exp,
   ln: Math.log,
-  log: (x) => Math.log10(x),
+  log: (x) => Math.log10(x), // base-10; use ln for natural log
+  // roots, powers, rounding
   sqrt: Math.sqrt,
+  cbrt: Math.cbrt,
   abs: Math.abs,
   sign: Math.sign,
   floor: Math.floor,
   ceil: Math.ceil,
   round: Math.round,
+  trunc: Math.trunc,
 };
 
 const CONSTS: Record<string, number> = { pi: Math.PI, e: Math.E };

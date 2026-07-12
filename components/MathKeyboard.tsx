@@ -6,9 +6,13 @@ import { createPortal } from "react-dom";
 /**
  * A Desmos-style on-screen math keyboard for touch devices. It is docked to the
  * bottom of the screen (full width, keys sized to fit), has tabbed pages
- * (numbers/basic, functions, letters), and inserts into whichever expression
- * field is focused. The phone's native keyboard is suppressed on those fields
- * (inputMode="none"), with a "⌨" key here as an escape hatch back to it.
+ * (numbers/basic, trig, functions, letters), and inserts into whichever
+ * expression field is focused. The phone's native keyboard is suppressed on
+ * those fields (inputMode="none"), with a "⌨" key here as an escape hatch.
+ *
+ * The trig page uses inv / hyp modifier toggles (like a scientific calculator)
+ * so all 24 trig, inverse-trig, hyperbolic and inverse-hyperbolic functions are
+ * reachable from six keys. Every function here exists in lib/mathExpr.
  *
  * PlainExprInput (in MathField.tsx) registers a FieldApi with `kbStore` on focus
  * and clears it on blur; this component renders only while a field is active.
@@ -40,33 +44,39 @@ export const kbStore = {
   },
 };
 
-type Key = { t: string; ins?: string; back?: number; act?: "bs" | "left" | "right"; wide?: boolean };
-const ins = (t: string, back = 0): Key => ({ t: t, ins: t, back });
+type Key = { t: React.ReactNode; ins: string; back?: number };
+const ins = (t: string, s = t, back = 0): Key => ({ t, ins: s, back });
+const fn = (label: React.ReactNode, name: string): Key => ({ t: label, ins: name + "()", back: 1 });
 
 // Page 1 — numbers & basic operators (5 columns).
 const NUM: Key[] = [
   ins("x"), ins("y"), ins("="), ins("("), ins(")"),
-  ins("7"), ins("8"), ins("9"), { t: "÷", ins: "/" }, ins("^"),
-  ins("4"), ins("5"), ins("6"), { t: "×", ins: "*" }, { t: "√", ins: "sqrt()", back: 1 },
-  ins("1"), ins("2"), ins("3"), { t: "−", ins: "-" }, ins("+"),
-  ins("0"), ins("."), { t: "π", ins: "pi" }, ins("e"), ins(","),
+  ins("7"), ins("8"), ins("9"), ins("÷", "/"), ins("^"),
+  ins("4"), ins("5"), ins("6"), ins("×", "*"), fn("√", "sqrt"),
+  ins("1"), ins("2"), ins("3"), ins("−", "-"), ins("+"),
+  ins("0"), ins("."), ins("π", "pi"), ins("e"), ins(","),
 ];
 
-// Page 2 — functions (3 columns).
+// Page 3 — functions / algebra (3 columns).
 const FN: Key[] = [
-  { t: "sin", ins: "sin()", back: 1 }, { t: "cos", ins: "cos()", back: 1 }, { t: "tan", ins: "tan()", back: 1 },
-  { t: "sin⁻¹", ins: "asin()", back: 1 }, { t: "cos⁻¹", ins: "acos()", back: 1 }, { t: "tan⁻¹", ins: "atan()", back: 1 },
-  { t: "ln", ins: "ln()", back: 1 }, { t: "log", ins: "log()", back: 1 }, { t: "eˣ", ins: "exp()", back: 1 },
-  { t: "√", ins: "sqrt()", back: 1 }, { t: "|x|", ins: "abs()", back: 1 }, { t: "( )", ins: "()", back: 1 },
-  { t: "x²", ins: "^2" }, { t: "xⁿ", ins: "^" }, { t: "1/x", ins: "^-1" },
+  fn("√", "sqrt"), fn("∛", "cbrt"), ins("xⁿ", "^"),
+  ins("x²", "^2"), ins("x³", "^3"), ins("x⁻¹", "^-1"),
+  fn("ln", "ln"), fn("log", "log"), fn("eˣ", "exp"),
+  fn("|x|", "abs"), ins("( )", "()", 1), ins("π", "pi"),
+  fn("⌊x⌋", "floor"), fn("⌈x⌉", "ceil"), fn("round", "round"),
 ];
 
-// Page 3 — letters for variable / parameter names (7 columns).
+// Page 4 — letters for variable / parameter names (7 columns).
 const ABC: Key[] = "abcdefghijklmnopqrstuvwxyz".split("").map((c) => ins(c));
+
+// Page 2 — trig, built from these six with the inv / hyp modifiers applied.
+const TRIG_BASE = ["sin", "cos", "tan", "sec", "csc", "cot"];
 
 export function MathKeyboard() {
   const active = useSyncExternalStore(kbStore.subscribe, kbStore.get, () => null);
-  const [tab, setTab] = useState<"num" | "fn" | "abc">("num");
+  const [tab, setTab] = useState<"num" | "trig" | "fn" | "abc">("num");
+  const [inv, setInv] = useState(false);
+  const [hyp, setHyp] = useState(false);
 
   // Reflow: make room below the page and scroll the focused field into view so
   // it stays visible above the keyboard.
@@ -89,30 +99,45 @@ export function MathKeyboard() {
   if (!active) return null;
   if (typeof document === "undefined") return null;
 
-  const cols = tab === "num" ? 5 : tab === "fn" ? 3 : 7;
-  const keys = tab === "num" ? NUM : tab === "fn" ? FN : ABC;
-
   // onPointerDown + preventDefault keeps the input focused (no blur → keyboard
   // stays open) and fires the action immediately.
-  const tap = (fn: () => void) => (e: React.PointerEvent) => {
+  const tap = (fnc: () => void) => (e: React.PointerEvent) => {
     e.preventDefault();
-    fn();
+    fnc();
   };
-  const doKey = (k: Key) => {
-    if (k.act === "bs") active.backspace();
-    else if (k.act === "left") active.move(-1);
-    else if (k.act === "right") active.move(1);
-    else if (k.ins != null) active.insert(k.ins, k.back ?? 0);
+  const put = (k: Key) => active.insert(k.ins, k.back ?? 0);
+
+  const trigKey = (base: string): Key => {
+    const name = (inv ? "a" : "") + base + (hyp ? "h" : "");
+    const label = (
+      <>
+        {hyp ? base + "h" : base}
+        {inv ? <sup>-1</sup> : null}
+      </>
+    );
+    return fn(label, name);
   };
+
+  const grid = (keys: Key[], cols: number, small = false) => (
+    <div style={{ display: "grid", gridTemplateColumns: `repeat(${cols}, 1fr)`, gap: 5 }}>
+      {keys.map((k, i) => (
+        <button key={i} style={S.key(small)} onPointerDown={tap(() => put(k))} onContextMenu={(e) => e.preventDefault()}>
+          {k.t}
+        </button>
+      ))}
+    </div>
+  );
 
   const panel = (
     <div style={S.panel} onPointerDown={(e) => e.preventDefault()}>
       {/* top bar: page tabs + native / done */}
       <div style={S.topbar}>
         <div style={{ display: "flex", gap: 6 }}>
-          <button style={S.tab(tab === "num")} onPointerDown={tap(() => setTab("num"))}>123</button>
-          <button style={S.tab(tab === "fn")} onPointerDown={tap(() => setTab("fn"))}>f(x)</button>
-          <button style={S.tab(tab === "abc")} onPointerDown={tap(() => setTab("abc"))}>abc</button>
+          {(["num", "trig", "fn", "abc"] as const).map((id) => (
+            <button key={id} style={S.tab(tab === id)} onPointerDown={tap(() => setTab(id))}>
+              {id === "num" ? "123" : id === "trig" ? "trig" : id === "fn" ? "f(x)" : "abc"}
+            </button>
+          ))}
         </div>
         <div style={{ display: "flex", gap: 6 }}>
           <button style={S.util} onPointerDown={tap(() => active.useNative())} title="Use my phone keyboard">⌨</button>
@@ -120,13 +145,21 @@ export function MathKeyboard() {
         </div>
       </div>
 
-      {/* key grid */}
-      <div style={{ display: "grid", gridTemplateColumns: `repeat(${cols}, 1fr)`, gap: 5, marginTop: 6 }}>
-        {keys.map((k, i) => (
-          <button key={i} style={S.key(tab === "fn")} onPointerDown={tap(() => doKey(k))} onContextMenu={(e) => e.preventDefault()}>
-            {k.t}
-          </button>
-        ))}
+      {/* body */}
+      <div style={{ marginTop: 6 }}>
+        {tab === "num" && grid(NUM, 5)}
+        {tab === "fn" && grid(FN, 3, true)}
+        {tab === "abc" && grid(ABC, 7)}
+        {tab === "trig" && (
+          <>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 5, marginBottom: 5 }}>
+              <button style={S.mod(inv)} onPointerDown={tap(() => setInv((v) => !v))}>inv</button>
+              <button style={S.mod(hyp)} onPointerDown={tap(() => setHyp((v) => !v))}>hyp</button>
+              <button style={S.key(true)} onPointerDown={tap(() => active.insert("pi"))}>π</button>
+            </div>
+            {grid(TRIG_BASE.map(trigKey), 3, true)}
+          </>
+        )}
       </div>
 
       {/* action row: caret + backspace */}
@@ -151,13 +184,17 @@ const S = {
   topbar: { display: "flex", justifyContent: "space-between", alignItems: "center", gap: 6 } as React.CSSProperties,
   tab: (on: boolean): React.CSSProperties => ({
     border: "1px solid " + (on ? "#1b7a44" : "#cbd5e1"), background: on ? "#1b7a44" : "#fff",
-    color: on ? "#fff" : "#334155", borderRadius: 8, padding: "7px 14px", fontSize: 14, fontWeight: 800, cursor: "pointer",
+    color: on ? "#fff" : "#334155", borderRadius: 8, padding: "7px 12px", fontSize: 14, fontWeight: 800, cursor: "pointer",
+  }),
+  mod: (on: boolean): React.CSSProperties => ({
+    border: "1px solid " + (on ? "#c2410c" : "#cbd5e1"), background: on ? "#f97316" : "#fff",
+    color: on ? "#fff" : "#334155", borderRadius: 8, padding: "12px 0", fontSize: 15, fontWeight: 800, cursor: "pointer", minHeight: 42,
   }),
   util: { border: "1px solid #cbd5e1", background: "#fff", color: "#334155", borderRadius: 8, padding: "7px 12px", fontSize: 16, fontWeight: 700, cursor: "pointer" } as React.CSSProperties,
   done: { border: "none", background: "#2563eb", color: "#fff", borderRadius: 8, padding: "7px 16px", fontSize: 14, fontWeight: 800, cursor: "pointer" } as React.CSSProperties,
-  key: (fn: boolean): React.CSSProperties => ({
-    border: "1px solid #dfe6ef", background: fn ? "#f8fbff" : "#fff", color: "#1f2a37",
-    borderRadius: 8, padding: "12px 0", fontSize: fn ? 15 : 18, fontWeight: 600, cursor: "pointer",
+  key: (small: boolean): React.CSSProperties => ({
+    border: "1px solid #dfe6ef", background: small ? "#f8fbff" : "#fff", color: "#1f2a37",
+    borderRadius: 8, padding: "12px 0", fontSize: small ? 15 : 18, fontWeight: 600, cursor: "pointer",
     boxShadow: "0 1px 2px rgba(15,23,42,0.06)", display: "grid", placeItems: "center", minHeight: 42,
   }),
   action: { border: "1px solid #dfe6ef", background: "#fff", color: "#1f2a37", borderRadius: 8, padding: "12px 0", fontSize: 18, fontWeight: 700, cursor: "pointer", minHeight: 42 } as React.CSSProperties,

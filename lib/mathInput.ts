@@ -5,9 +5,15 @@
 // the parser expects: "2*x", "a*x", "abs(x)".
 
 // Functions our parser understands (kept in sync with lib/mathExpr FUNCS).
+// Kept in sync with lib/mathExpr FUNCS. All names are letters only and ≤5 chars
+// so the greedy splitter below (which scans up to 5-letter runs) finds them.
 const FUNCS = new Set([
-  "sin", "cos", "tan", "asin", "acos", "atan", "sinh", "cosh", "tanh",
-  "exp", "ln", "log", "sqrt", "abs", "sign", "floor", "ceil", "round",
+  "sin", "cos", "tan", "sec", "csc", "cot",
+  "asin", "acos", "atan", "asec", "acsc", "acot",
+  "sinh", "cosh", "tanh", "sech", "csch", "coth",
+  "asinh", "acosh", "atanh", "asech", "acsch", "acoth",
+  "exp", "ln", "log", "sqrt", "cbrt",
+  "abs", "sign", "floor", "ceil", "round", "trunc",
 ]);
 const CONSTS = new Set(["pi"]); // "e" is a single letter, handled as a variable
 
