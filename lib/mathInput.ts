@@ -5,11 +5,12 @@
 // the parser expects: "2*x", "a*x", "abs(x)".
 
 // Functions our parser understands (kept in sync with lib/mathExpr FUNCS).
-// Kept in sync with lib/mathExpr FUNCS. All names are letters only and ≤5 chars
-// so the greedy splitter below (which scans up to 5-letter runs) finds them.
+// Kept in sync with lib/mathExpr FUNCS. All names are letters only and ≤6 chars
+// so the greedy splitter below (which scans up to 6-letter runs) finds them.
 const FUNCS = new Set([
   "sin", "cos", "tan", "sec", "csc", "cot",
   "asin", "acos", "atan", "asec", "acsc", "acot",
+  "arcsin", "arccos", "arctan", "arcsec", "arccsc", "arccot",
   "sinh", "cosh", "tanh", "sech", "csch", "coth",
   "asinh", "acosh", "atanh", "asech", "acsch", "acoth",
   "exp", "ln", "log", "sqrt", "cbrt",
@@ -28,7 +29,7 @@ function splitLetters(run: string): Tk[] {
   let i = 0;
   while (i < run.length) {
     let matched = "";
-    for (let len = Math.min(5, run.length - i); len >= 2; len--) {
+    for (let len = Math.min(6, run.length - i); len >= 2; len--) {
       const w = run.slice(i, i + len);
       if (FUNCS.has(w) || CONSTS.has(w)) { matched = w; break; }
     }

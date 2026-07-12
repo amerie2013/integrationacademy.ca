@@ -144,6 +144,35 @@ function PlainExprInput({ value, onChange, placeholder, style, ariaLabel }: Prop
   );
 }
 
+// A custom "trig" page for MathLive's on-screen keyboard (desktop). MathLive's
+// default keyboard has sin/cos/tan but not the reciprocal or hyperbolic
+// functions. Every keycap inserts a LaTeX command that round-trips cleanly
+// through ascii-math to a name our parser understands (verified: \operatorname
+// and \arccot/\sech letter-space or drop out, so we avoid them — cot⁻¹, sec⁻¹,
+// csc⁻¹ use the arccos/arcsin/arctan-of-reciprocal identities instead).
+const call = (name: string) => ({ latex: `\\${name}`, insert: `\\${name}\\left(#0\\right)` });
+const inv = (label: string, cmd: string) => ({ label: `${label}<sup>-1</sup>`, class: "small", insert: `${cmd}\\left(#0\\right)` });
+const MATH_KB_LAYOUT = {
+  label: "trig",
+  tooltip: "trig & functions",
+  rows: [
+    [call("sin"), call("cos"), call("tan"), call("sec"), call("csc"), call("cot")],
+    [
+      inv("sin", "\\arcsin"), inv("cos", "\\arccos"), inv("tan", "\\arctan"),
+      inv("sec", "\\arcsec"), inv("csc", "\\arccsc"),
+      { label: "cot<sup>-1</sup>", class: "small", insert: "\\arctan\\left(1/#0\\right)" },
+    ],
+    [call("sinh"), call("cosh"), call("tanh"), call("coth"),
+      { latex: "\\ln", insert: "\\ln\\left(#0\\right)" }, { latex: "\\log", insert: "\\log\\left(#0\\right)" }],
+    [
+      { class: "action", label: "&#x25c0;", command: "moveToPreviousChar" },
+      { class: "action", label: "&#x25b6;", command: "moveToNextChar" },
+      { class: "action", label: "&#x232b;", command: ["performWithFeedback", "deleteBackward"] },
+      { latex: "\\sqrt{#0}" }, { latex: "\\pi" }, { latex: "\\left(#0\\right)", label: "( )" },
+    ],
+  ],
+};
+
 /** MathLive-backed WYSIWYG field (desktop, and LaTeX fields everywhere). */
 function MathLiveField({ value, onChange, placeholder, style, ariaLabel, format = "expr" }: Props) {
   const ioFormat = format === "latex" ? "latex" : "ascii-math";
@@ -165,6 +194,9 @@ function MathLiveField({ value, onChange, placeholder, style, ariaLabel, format 
         try {
           MFE.fontsDirectory = "/mathlive/fonts"; // bundled in public/, works offline
           MFE.soundsDirectory = null; // no keypress sounds
+          // Add a "trig" page to the virtual keyboard alongside the defaults.
+          const vk = (window as any).mathVirtualKeyboard;
+          if (vk) vk.layouts = ["numeric", MATH_KB_LAYOUT, "symbols", "alphabetic", "greek"];
         } catch {}
         (window as any).__mathliveConfigured = true;
       }

@@ -40,6 +40,13 @@ const FUNCS: Record<string, (x: number) => number> = {
   asech: (x) => Math.acosh(1 / x),
   acsch: (x) => Math.asinh(1 / x),
   acoth: (x) => Math.atanh(1 / x),
+  // "arc"-prefixed aliases (MathLive's virtual keyboard emits these)
+  arcsin: Math.asin,
+  arccos: Math.acos,
+  arctan: Math.atan,
+  arcsec: (x) => Math.acos(1 / x),
+  arccsc: (x) => Math.asin(1 / x),
+  arccot: (x) => Math.atan(1 / x),
   // exponential & logarithmic
   exp: Math.exp,
   ln: Math.log,
