@@ -153,6 +153,10 @@ function PlainExprInput({ value, onChange, placeholder, style, ariaLabel }: Prop
 const call = (name: string) => ({ latex: `\\${name}`, insert: `\\${name}\\left(#0\\right)` });
 const op = (label: string, name: string) => ({ label, class: "small", insert: `\\operatorname{${name}}\\left(#0\\right)` });
 const inv = (label: string, name: string) => ({ label: `${label}<sup>-1</sup>`, class: "small", insert: `\\operatorname{${name}}\\left(#0\\right)` });
+// 4 rows × 6 columns, matching the height of MathLive's default pages so the
+// keyboard doesn't resize when switching tabs. ln/log/exp/abs live on the "∞≠∈"
+// page and √/π/x²/xⁿ on the "123" page, and ◀▶⌫ are in the always-present edit
+// toolbar, so this page is just the 24 trig/hyperbolic functions.
 const MATH_KB_LAYOUT = {
   label: "trig",
   tooltip: "trig & functions",
@@ -161,17 +165,6 @@ const MATH_KB_LAYOUT = {
     [inv("sin", "asin"), inv("cos", "acos"), inv("tan", "atan"), inv("sec", "asec"), inv("csc", "acsc"), inv("cot", "acot")],
     [call("sinh"), call("cosh"), call("tanh"), op("sech", "sech"), op("csch", "csch"), call("coth")],
     [inv("sinh", "asinh"), inv("cosh", "acosh"), inv("tanh", "atanh"), inv("sech", "asech"), inv("csch", "acsch"), inv("coth", "acoth")],
-    [
-      { latex: "\\ln", insert: "\\ln\\left(#0\\right)" }, { latex: "\\log", insert: "\\log\\left(#0\\right)" },
-      { latex: "\\exp", insert: "\\exp\\left(#0\\right)" }, { latex: "\\sqrt{#0}" }, { latex: "\\pi" },
-      { latex: "\\left(#0\\right)", label: "( )" },
-    ],
-    [
-      { class: "action", label: "&#x25c0;", command: "moveToPreviousChar" },
-      { class: "action", label: "&#x25b6;", command: "moveToNextChar" },
-      { class: "action", label: "&#x232b;", command: ["performWithFeedback", "deleteBackward"] },
-      { latex: "x^2", insert: "^2" }, { latex: "x^{\\square}", insert: "^{#?}" }, { latex: "\\left|#0\\right|", label: "|x|" },
-    ],
   ],
 };
 

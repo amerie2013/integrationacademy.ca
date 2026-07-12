@@ -145,8 +145,9 @@ export function MathKeyboard() {
         </div>
       </div>
 
-      {/* body */}
-      <div style={{ marginTop: 6 }}>
+      {/* body — fixed min-height (fits the tallest page, the 5-row "123") so the
+          panel is exactly the same size on every tab */}
+      <div style={{ marginTop: 6, minHeight: 288 }}>
         {tab === "num" && grid(NUM, 5)}
         {tab === "fn" && grid(FN, 3, true)}
         {tab === "abc" && grid(ABC, 7)}
@@ -177,8 +178,11 @@ export function MathKeyboard() {
 const S = {
   panel: {
     position: "fixed", left: 0, right: 0, bottom: 0, zIndex: 1000,
-    background: "#eef2f7", borderTop: "1px solid #cbd5e1", boxShadow: "0 -6px 20px rgba(15,23,42,0.12)",
-    padding: "8px 8px calc(8px + env(safe-area-inset-bottom))", boxSizing: "border-box", maxWidth: "100vw",
+    // Cap the width and centre it so keys don't stretch huge on a tablet.
+    maxWidth: 720, margin: "0 auto",
+    background: "#eef2f7", border: "1px solid #cbd5e1", borderRadius: "14px 14px 0 0",
+    boxShadow: "0 -6px 20px rgba(15,23,42,0.12)",
+    padding: "8px 8px calc(8px + env(safe-area-inset-bottom))", boxSizing: "border-box",
     userSelect: "none", WebkitUserSelect: "none", touchAction: "manipulation",
   } as React.CSSProperties,
   topbar: { display: "flex", justifyContent: "space-between", alignItems: "center", gap: 6 } as React.CSSProperties,
