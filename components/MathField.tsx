@@ -145,30 +145,32 @@ function PlainExprInput({ value, onChange, placeholder, style, ariaLabel }: Prop
 }
 
 // A custom "trig" page for MathLive's on-screen keyboard (desktop). MathLive's
-// default keyboard has sin/cos/tan but not the reciprocal or hyperbolic
-// functions. Every keycap inserts a LaTeX command that round-trips cleanly
-// through ascii-math to a name our parser understands (verified: \operatorname
-// and \arccot/\sech letter-space or drop out, so we avoid them — cot⁻¹, sec⁻¹,
-// csc⁻¹ use the arccos/arcsin/arctan-of-reciprocal identities instead).
+// default keyboard has sin/cos/tan but not the reciprocal, inverse or hyperbolic
+// functions. Built-in LaTeX commands (\sec, \sinh, …) round-trip cleanly through
+// ascii-math; the rest have no command and are inserted as \operatorname{…},
+// which MathLive exports letter-spaced ("a s i n h") — the input normaliser
+// (lib/mathInput) rejoins those so they resolve to our parser's function names.
 const call = (name: string) => ({ latex: `\\${name}`, insert: `\\${name}\\left(#0\\right)` });
-const inv = (label: string, cmd: string) => ({ label: `${label}<sup>-1</sup>`, class: "small", insert: `${cmd}\\left(#0\\right)` });
+const op = (label: string, name: string) => ({ label, class: "small", insert: `\\operatorname{${name}}\\left(#0\\right)` });
+const inv = (label: string, name: string) => ({ label: `${label}<sup>-1</sup>`, class: "small", insert: `\\operatorname{${name}}\\left(#0\\right)` });
 const MATH_KB_LAYOUT = {
   label: "trig",
   tooltip: "trig & functions",
   rows: [
     [call("sin"), call("cos"), call("tan"), call("sec"), call("csc"), call("cot")],
+    [inv("sin", "asin"), inv("cos", "acos"), inv("tan", "atan"), inv("sec", "asec"), inv("csc", "acsc"), inv("cot", "acot")],
+    [call("sinh"), call("cosh"), call("tanh"), op("sech", "sech"), op("csch", "csch"), call("coth")],
+    [inv("sinh", "asinh"), inv("cosh", "acosh"), inv("tanh", "atanh"), inv("sech", "asech"), inv("csch", "acsch"), inv("coth", "acoth")],
     [
-      inv("sin", "\\arcsin"), inv("cos", "\\arccos"), inv("tan", "\\arctan"),
-      inv("sec", "\\arcsec"), inv("csc", "\\arccsc"),
-      { label: "cot<sup>-1</sup>", class: "small", insert: "\\arctan\\left(1/#0\\right)" },
+      { latex: "\\ln", insert: "\\ln\\left(#0\\right)" }, { latex: "\\log", insert: "\\log\\left(#0\\right)" },
+      { latex: "\\exp", insert: "\\exp\\left(#0\\right)" }, { latex: "\\sqrt{#0}" }, { latex: "\\pi" },
+      { latex: "\\left(#0\\right)", label: "( )" },
     ],
-    [call("sinh"), call("cosh"), call("tanh"), call("coth"),
-      { latex: "\\ln", insert: "\\ln\\left(#0\\right)" }, { latex: "\\log", insert: "\\log\\left(#0\\right)" }],
     [
       { class: "action", label: "&#x25c0;", command: "moveToPreviousChar" },
       { class: "action", label: "&#x25b6;", command: "moveToNextChar" },
       { class: "action", label: "&#x232b;", command: ["performWithFeedback", "deleteBackward"] },
-      { latex: "\\sqrt{#0}" }, { latex: "\\pi" }, { latex: "\\left(#0\\right)", label: "( )" },
+      { latex: "x^2", insert: "^2" }, { latex: "x^{\\square}", insert: "^{#?}" }, { latex: "\\left|#0\\right|", label: "|x|" },
     ],
   ],
 };

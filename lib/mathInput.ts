@@ -80,6 +80,11 @@ export function asciiToExpr(input: string): string {
   let s = input;
   // Normalise unicode operators MathLive may emit.
   s = s.replace(/[·⋅×∗*]/g, "*").replace(/÷/g, "/").replace(/[−–—]/g, "-");
+  // MathLive exports \operatorname{...} function names letter-spaced (e.g.
+  // "\operatorname{asinh}" → "a s i n h"). Rejoin runs of space-separated single
+  // letters so the name re-forms; genuine variable products (e.g. "x y") rejoin
+  // to "xy" and are resplit correctly by splitLetters() below.
+  s = s.replace(/[a-zA-Z](\s+[a-zA-Z])+/g, (m) => m.replace(/\s+/g, ""));
   // Absolute-value bars |...| -> abs(...). Repeat for multiple pairs.
   let prev: string;
   do { prev = s; s = s.replace(/\|([^|]*)\|/, "abs($1)"); } while (s !== prev);
