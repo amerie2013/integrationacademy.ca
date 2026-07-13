@@ -7,6 +7,7 @@ import { supabase } from "../../../../lib/supabase";
 import { SiteHeader } from "../../../../components/SiteHeader";
 import { fetchWorksheet, uploadWorksheetFile, type Worksheet } from "../../../../lib/worksheets";
 import { signedUrl, signedPathUrl } from "../../../../lib/storage";
+import { WorksheetContentEditor } from "../../../../components/WorksheetContentEditor";
 
 export default function WorksheetEditorPage() {
   const router = useRouter();
@@ -52,6 +53,7 @@ export default function WorksheetEditorPage() {
       code: w.code, title: w.title, position: w.position, published: w.published,
       worksheet_url: w.worksheet_url, worksheet_name: w.worksheet_name,
       answers_url: w.answers_url, answers_name: w.answers_name,
+      content: w.content,
     }).eq("id", w.id);
     if (error) { setErr(error.message.includes("policy") ? "Blocked by RLS — run the 2026-06-17_worksheets.sql migration." : error.message); return; }
     setSaved(true); setTimeout(() => setSaved(false), 1800);
@@ -107,6 +109,16 @@ export default function WorksheetEditorPage() {
           busy={busy === "worksheet"} onUpload={(f) => upload(f, "worksheet")} onClear={() => setW({ ...w, worksheet_url: null, worksheet_name: null })} />
         <FileRow label="Answer key / compact PDF (download)" url={w.answers_url ? (links.ans ?? w.answers_url) : null} name={w.answers_name}
           busy={busy === "answers"} onUpload={(f) => upload(f, "answers")} onClear={() => setW({ ...w, answers_url: null, answers_name: null })} />
+
+        {w.content && (
+          <div style={{ background: "#f0fdf4", border: "1px solid #bbf7d0", borderRadius: 12, padding: 16, marginBottom: 12 }}>
+            <div style={{ fontSize: 13, fontWeight: 800, color: "#0d5c30", marginBottom: 2 }}>Edit worksheet content</div>
+            <div style={{ fontSize: 12.5, color: "#475569", marginBottom: 12, lineHeight: 1.5 }}>
+              Edit the text below and click <b>Save</b>. The changes are stored now; the printable PDF is rebuilt when you press <b>Regenerate PDF</b> (coming next).
+            </div>
+            <WorksheetContentEditor content={w.content} onChange={(content) => setW({ ...w, content })} />
+          </div>
+        )}
 
         <div style={{ background: "#f5f3ff", border: "1px solid #ddd6fe", borderRadius: 12, padding: 14, marginBottom: 12 }}>
           <div style={{ fontSize: 12, fontWeight: 700, color: "#6d28a3", marginBottom: 6 }}>LaTeX source (edit &amp; recompile)</div>

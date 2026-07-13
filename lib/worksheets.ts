@@ -1,5 +1,15 @@
 import { supabase } from "./supabase";
 
+/** Structured, editable worksheet source (rendered to PDF by the regenerate route). */
+export type WsContent = {
+  grade?: string;
+  title?: string;
+  intro?: string;
+  lesson?: [string, string][];
+  examples?: [string, string, string][];
+  questions?: [string, string, string][];
+};
+
 export type Worksheet = {
   id: string;
   course_id: string;
@@ -11,6 +21,7 @@ export type Worksheet = {
   answers_url: string | null;
   answers_name: string | null;
   published: boolean;
+  content: WsContent | null;
 };
 
 /** List a course's worksheets. `supported` is false if the table is missing. */
