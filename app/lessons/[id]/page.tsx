@@ -141,7 +141,11 @@ export default function LessonViewPage() {
         )}
       </article>
       {!loading && !notFound && (
-        <TutorChat lessonId={lessonId} lessonTitle={title} />
+        <TutorChat
+          lessonId={lessonId}
+          lessonTitle={title}
+          sections={blocks.flatMap((b) => (b.type === "heading" ? [b.text] : []))}
+        />
       )}
     </main>
   );

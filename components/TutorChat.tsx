@@ -15,9 +15,12 @@ type Msg = {
 export function TutorChat({
   lessonId,
   lessonTitle,
+  sections = [],
 }: {
   lessonId: string;
   lessonTitle: string;
+  /** Lesson section headings, turned into clickable starter questions. */
+  sections?: string[];
 }) {
   const [open, setOpen] = useState(false);
   const [signedIn, setSignedIn] = useState<boolean | null>(null);
@@ -58,12 +61,19 @@ export function TutorChat({
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, open, busy]);
 
-  async function send() {
-    const text = input.trim();
+  // Starter questions built from the lesson's section headings.
+  const suggestions = sections
+    .map((s) => s.trim())
+    .filter(Boolean)
+    .slice(0, 10)
+    .map((s) => (/^(example|question|problem|exercise)\b/i.test(s) ? `Help with ${s}` : `Explain ${s}`));
+
+  async function send(preset?: string) {
+    const text = (preset ?? input).trim();
     if (!text || busy) return;
     setError("");
     setBusy(true);
-    setInput("");
+    if (!preset) setInput("");
 
     const {
       data: { session },
@@ -192,9 +202,36 @@ export function TutorChat({
               </p>
             )}
             {signedIn && messages.length === 0 && !busy && (
-              <p style={{ color: theme.color.textMuted, fontSize: 14, margin: 0 }}>
-                Ask about a concept or example from this lesson. I will guide you step by step — not personal chat.
-              </p>
+              <>
+                <p style={{ color: theme.color.textMuted, fontSize: 14, margin: 0 }}>
+                  Ask about a concept or example from this lesson. I will guide you step by step — not personal chat.
+                </p>
+                {suggestions.length > 0 && (
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: 7, marginTop: 4 }}>
+                    {suggestions.map((s, i) => (
+                      <button
+                        key={i}
+                        type="button"
+                        onClick={() => void send(s)}
+                        style={{
+                          background: theme.color.primarySoft,
+                          color: theme.color.primary,
+                          border: `1px solid ${theme.color.border}`,
+                          borderRadius: 999,
+                          padding: "6px 12px",
+                          fontSize: 12.5,
+                          fontWeight: 600,
+                          cursor: "pointer",
+                          fontFamily: theme.font.sans,
+                          textAlign: "left",
+                        }}
+                      >
+                        {s}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </>
             )}
             {messages.map((m) => (
               <div
@@ -292,11 +329,29 @@ function TutorMarkdown({ text }: { text: string }) {
         ) : p.type === "inline" ? (
           <Tex key={i} expr={p.value} />
         ) : (
-          <span key={i}>{p.value}</span>
+          <span key={i}>{renderInline(p.value)}</span>
         ),
       )}
     </div>
   );
+}
+
+/** Render **bold**, *italic* and `code` inside a non-math text run. */
+function renderInline(str: string): React.ReactNode[] {
+  const nodes: React.ReactNode[] = [];
+  const re = /\*\*([^*]+)\*\*|__([^_]+)__|`([^`]+)`|\*([^*\n]+)\*/g;
+  let last = 0;
+  let m: RegExpExecArray | null;
+  let k = 0;
+  while ((m = re.exec(str))) {
+    if (m.index > last) nodes.push(str.slice(last, m.index));
+    if (m[1] != null || m[2] != null) nodes.push(<strong key={k++}>{m[1] ?? m[2]}</strong>);
+    else if (m[3] != null) nodes.push(<code key={k++} style={{ background: "rgba(15,23,42,0.06)", borderRadius: 4, padding: "1px 4px", fontSize: "0.92em" }}>{m[3]}</code>);
+    else if (m[4] != null) nodes.push(<em key={k++}>{m[4]}</em>);
+    last = m.index + m[0].length;
+  }
+  if (last < str.length) nodes.push(str.slice(last));
+  return nodes;
 }
 
 function splitMath(text: string): { type: "text" | "inline" | "block"; value: string }[] {
