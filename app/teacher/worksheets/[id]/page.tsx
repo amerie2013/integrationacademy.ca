@@ -18,6 +18,7 @@ export default function WorksheetEditorPage() {
   const [saved, setSaved] = useState(false);
   const [busy, setBusy] = useState("");
   const [err, setErr] = useState("");
+  const [regen, setRegen] = useState<"" | "working" | "done">("");
   const [links, setLinks] = useState<{ tex: string | null; texC: string | null; ws: string | null; ans: string | null }>({ tex: null, texC: null, ws: null, ans: null });
 
   useEffect(() => {
@@ -77,6 +78,26 @@ export default function WorksheetEditorPage() {
     router.push(`/teacher/courses/${w.course_id}`);
   }
 
+  // Save the edited content, then rebuild the PDFs server-side and republish.
+  async function regenerate() {
+    if (!w) return;
+    setErr(""); setRegen("working");
+    try {
+      await save(); // persist content + metadata first
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) { setRegen(""); return router.push("/login"); }
+      const res = await fetch(`/api/worksheets/${w.id}/regenerate`, {
+        method: "POST", headers: { Authorization: `Bearer ${session.access_token}` },
+      });
+      const j = await res.json().catch(() => ({}));
+      if (!res.ok) { setErr(j.error || "Regeneration failed."); setRegen(""); return; }
+      setW({ ...w, worksheet_url: j.worksheet_url, answers_url: j.answers_url });
+      setRegen("done"); setTimeout(() => setRegen(""), 3000);
+    } catch (e: any) {
+      setErr(e?.message || "Regeneration failed."); setRegen("");
+    }
+  }
+
   if (loading) return (<main><SiteHeader /><div style={{ padding: 48, color: "#64748b" }}>Loading…</div></main>);
   if (denied) return (<main><SiteHeader /><div style={{ padding: 48, color: "#64748b" }}>Only admins can edit worksheets.</div></main>);
   if (!w) return (<main><SiteHeader /><div style={{ padding: 48, color: "#64748b" }}>Worksheet not found.</div></main>);
@@ -112,9 +133,17 @@ export default function WorksheetEditorPage() {
 
         {w.content && (
           <div style={{ background: "#f0fdf4", border: "1px solid #bbf7d0", borderRadius: 12, padding: 16, marginBottom: 12 }}>
-            <div style={{ fontSize: 13, fontWeight: 800, color: "#0d5c30", marginBottom: 2 }}>Edit worksheet content</div>
-            <div style={{ fontSize: 12.5, color: "#475569", marginBottom: 12, lineHeight: 1.5 }}>
-              Edit the text below and click <b>Save</b>. The changes are stored now; the printable PDF is rebuilt when you press <b>Regenerate PDF</b> (coming next).
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 12, marginBottom: 12 }}>
+              <div>
+                <div style={{ fontSize: 13, fontWeight: 800, color: "#0d5c30", marginBottom: 2 }}>Edit worksheet content</div>
+                <div style={{ fontSize: 12.5, color: "#475569", lineHeight: 1.5 }}>
+                  Edit the text below. <b>Save</b> stores your changes; <b>Save &amp; Regenerate PDF</b> also rebuilds the printable PDF and republishes it (takes ~10–20&nbsp;s).
+                </div>
+              </div>
+              <button onClick={regenerate} disabled={regen === "working"}
+                style={{ flexShrink: 0, background: regen === "done" ? "#16a34a" : "#0d5c30", color: "#fff", border: "none", borderRadius: 9, padding: "10px 16px", fontWeight: 800, fontSize: 13.5, cursor: regen === "working" ? "default" : "pointer", whiteSpace: "nowrap" }}>
+                {regen === "working" ? "Rebuilding…" : regen === "done" ? "Rebuilt ✓" : "Save & Regenerate PDF"}
+              </button>
             </div>
             <WorksheetContentEditor content={w.content} onChange={(content) => setW({ ...w, content })} />
           </div>

@@ -18,6 +18,13 @@ const nextConfig: NextConfig = {
     // tsc is currently clean; kept on as a safety net for dynamic/seed code.
     ignoreBuildErrors: true,
   },
+  // Headless-Chrome deps must stay external (bundling breaks their runtime file
+  // resolution), and the worksheet regenerate route reads the KaTeX stylesheet
+  // from disk, so trace it into that function.
+  serverExternalPackages: ["@sparticuz/chromium", "puppeteer-core"],
+  outputFileTracingIncludes: {
+    "/api/worksheets/[id]/regenerate": ["./node_modules/katex/dist/katex.min.css"],
+  },
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
   },
