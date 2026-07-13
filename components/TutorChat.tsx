@@ -356,13 +356,17 @@ function renderInline(str: string): React.ReactNode[] {
 
 function splitMath(text: string): { type: "text" | "inline" | "block"; value: string }[] {
   const out: { type: "text" | "inline" | "block"; value: string }[] = [];
-  const re = /\$\$([\s\S]+?)\$\$|\$([^$\n]+?)\$/g;
+  // Accept every delimiter the model might emit: $$…$$ and \[…\] for display,
+  // $…$ and \(…\) for inline. Groups: 1=$$ block, 2=\[ block, 3=$ inline, 4=\( inline.
+  const re = /\$\$([\s\S]+?)\$\$|\\\[([\s\S]+?)\\\]|\$([^$\n]+?)\$|\\\(([\s\S]+?)\\\)/g;
   let last = 0;
   let m: RegExpExecArray | null;
   while ((m = re.exec(text))) {
     if (m.index > last) out.push({ type: "text", value: text.slice(last, m.index) });
-    if (m[1] != null) out.push({ type: "block", value: m[1].trim() });
-    else out.push({ type: "inline", value: (m[2] ?? "").trim() });
+    const block = m[1] ?? m[2];
+    const inline = m[3] ?? m[4];
+    if (block != null) out.push({ type: "block", value: block.trim() });
+    else out.push({ type: "inline", value: (inline ?? "").trim() });
     last = m.index + m[0].length;
   }
   if (last < text.length) out.push({ type: "text", value: text.slice(last) });
