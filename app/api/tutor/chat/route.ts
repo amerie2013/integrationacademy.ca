@@ -4,6 +4,7 @@ import { rateLimit, clientKey } from "../../../../lib/rateLimit";
 import {
   blocksToTutorContext,
   buildTutorSystemPrompt,
+  buildAssignmentTutorPrompt,
   looksOffTopic,
   OFF_TOPIC_REPLY,
 } from "../../../../lib/tutor";
@@ -33,6 +34,7 @@ const getAdmin = () => (_admin ??= makeAdmin());
 
 type Body = {
   lessonId?: string;
+  assignmentId?: string;
   message?: string;
 };
 
@@ -69,9 +71,11 @@ export async function POST(req: NextRequest) {
 
     const body = (await req.json()) as Body;
     const lessonId = body.lessonId?.trim() ?? "";
+    const assignmentId = body.assignmentId?.trim() ?? "";
     const message = (body.message ?? "").trim();
-    if (!lessonId) {
-      return NextResponse.json({ error: "Missing lesson." }, { status: 400 });
+    const isAssignment = !!assignmentId;
+    if (!lessonId && !assignmentId) {
+      return NextResponse.json({ error: "Missing lesson or assignment." }, { status: 400 });
     }
     if (!message) {
       return NextResponse.json({ error: "Type a question first." }, { status: 400 });
@@ -83,24 +87,47 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // RLS: if they can read the lesson, they have course access.
+    // Build the tutoring context. RLS: reading the row means course access.
     const userSb = makeUserClient(token);
-    const { data: lesson, error: lessonErr } = await userSb
-      .from("lessons")
-      .select("id, title, blocks, course_id")
-      .eq("id", lessonId)
-      .single();
-
-    if (lessonErr || !lesson) {
-      return NextResponse.json(
-        { error: "You don't have access to this lesson, or it isn't available." },
-        { status: 403 },
-      );
+    let ctxTitle = "";
+    let ctxCourseId: string | null = null;
+    let ctxBody = "";
+    if (isAssignment) {
+      const { data: asg, error: aErr } = await userSb
+        .from("assignments")
+        .select("id, title, description, course_id, tutor_enabled")
+        .eq("id", assignmentId)
+        .single();
+      if (aErr || !asg) {
+        return NextResponse.json({ error: "You don't have access to this assignment." }, { status: 403 });
+      }
+      if (!asg.tutor_enabled) {
+        return NextResponse.json({ error: "The tutor is turned off for this assignment." }, { status: 403 });
+      }
+      ctxTitle = asg.title ?? "Assignment";
+      ctxCourseId = asg.course_id ?? null;
+      ctxBody = (asg.description ?? "").slice(0, 6000);
+    } else {
+      const { data: lesson, error: lessonErr } = await userSb
+        .from("lessons")
+        .select("id, title, blocks, course_id")
+        .eq("id", lessonId)
+        .single();
+      if (lessonErr || !lesson) {
+        return NextResponse.json(
+          { error: "You don't have access to this lesson, or it isn't available." },
+          { status: 403 },
+        );
+      }
+      ctxTitle = lesson.title ?? "Lesson";
+      ctxCourseId = lesson.course_id ?? null;
+      const blocks = Array.isArray(lesson.blocks) ? (lesson.blocks as Block[]) : [];
+      ctxBody = blocksToTutorContext(blocks);
     }
 
     let courseTitle = "";
-    if (lesson.course_id) {
-      const { data: course } = await admin.from("courses").select("title").eq("id", lesson.course_id).single();
+    if (ctxCourseId) {
+      const { data: course } = await admin.from("courses").select("title").eq("id", ctxCourseId).single();
       courseTitle = course?.title ?? "";
     }
 
@@ -122,47 +149,49 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const lessonTitle = lesson.title ?? "Lesson";
-    const blocks = Array.isArray(lesson.blocks) ? (lesson.blocks as Block[]) : [];
-    const lessonBody = blocksToTutorContext(blocks);
-
-    // Upsert thread
-    const { data: thread, error: threadErr } = await admin
-      .from("tutor_threads")
-      .upsert(
-        {
+    // Thread: one per student per lesson/assignment (find-or-create).
+    const threadQ = admin.from("tutor_threads").select("id").eq("user_id", userId);
+    const { data: existingThread } = await (
+      isAssignment ? threadQ.eq("assignment_id", assignmentId) : threadQ.eq("lesson_id", lessonId)
+    ).maybeSingle();
+    let threadId = existingThread?.id ?? null;
+    if (!threadId) {
+      const { data: created, error: threadErr } = await admin
+        .from("tutor_threads")
+        .insert({
           user_id: userId,
-          lesson_id: lessonId,
-          course_id: lesson.course_id,
+          course_id: ctxCourseId,
+          lesson_id: isAssignment ? null : lessonId,
+          assignment_id: isAssignment ? assignmentId : null,
           updated_at: new Date().toISOString(),
-        },
-        { onConflict: "user_id,lesson_id" },
-      )
-      .select("id")
-      .single();
-
-    if (threadErr || !thread) {
-      console.error("tutor thread upsert", threadErr);
-      return NextResponse.json({ error: "Could not start chat. Is the tutor SQL migration applied?" }, { status: 500 });
+        })
+        .select("id")
+        .single();
+      if (threadErr || !created) {
+        console.error("tutor thread create", threadErr);
+        return NextResponse.json({ error: "Could not start chat. Is the tutor SQL migration applied?" }, { status: 500 });
+      }
+      threadId = created.id;
     }
 
     const { data: prior } = await admin
       .from("tutor_messages")
       .select("role, content")
-      .eq("thread_id", thread.id)
+      .eq("thread_id", threadId)
       .order("created_at", { ascending: true })
       .limit(HISTORY_LIMIT);
+
+    const msgKeys = {
+      thread_id: threadId,
+      user_id: userId,
+      lesson_id: isAssignment ? null : lessonId,
+      assignment_id: isAssignment ? assignmentId : null,
+    };
 
     // Save user message first
     const { data: userMsg, error: userMsgErr } = await admin
       .from("tutor_messages")
-      .insert({
-        thread_id: thread.id,
-        user_id: userId,
-        lesson_id: lessonId,
-        role: "user",
-        content: message,
-      })
+      .insert({ ...msgKeys, role: "user", content: message })
       .select("id, role, content, created_at")
       .single();
 
@@ -175,11 +204,9 @@ export async function POST(req: NextRequest) {
     if (looksOffTopic(message)) {
       assistantText = OFF_TOPIC_REPLY;
     } else {
-      const system = buildTutorSystemPrompt({
-        lessonTitle,
-        courseTitle,
-        lessonBody,
-      });
+      const system = isAssignment
+        ? buildAssignmentTutorPrompt({ assignmentTitle: ctxTitle, courseTitle, assignmentBody: ctxBody })
+        : buildTutorSystemPrompt({ lessonTitle: ctxTitle, courseTitle, lessonBody: ctxBody });
       const history = (prior ?? []).map((m) => ({
         role: m.role as "user" | "assistant",
         content: m.content,
@@ -229,13 +256,7 @@ export async function POST(req: NextRequest) {
 
     const { data: asstMsg, error: asstErr } = await admin
       .from("tutor_messages")
-      .insert({
-        thread_id: thread.id,
-        user_id: userId,
-        lesson_id: lessonId,
-        role: "assistant",
-        content: assistantText,
-      })
+      .insert({ ...msgKeys, role: "assistant", content: assistantText })
       .select("id, role, content, created_at")
       .single();
 
@@ -250,7 +271,7 @@ export async function POST(req: NextRequest) {
     await admin
       .from("tutor_threads")
       .update({ updated_at: new Date().toISOString() })
-      .eq("id", thread.id);
+      .eq("id", threadId);
 
     return NextResponse.json({
       userMessage: userMsg,

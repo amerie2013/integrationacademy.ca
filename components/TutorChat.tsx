@@ -16,12 +16,21 @@ export function TutorChat({
   lessonId,
   lessonTitle,
   sections = [],
+  assignmentId,
+  assignmentTitle,
 }: {
-  lessonId: string;
-  lessonTitle: string;
+  lessonId?: string;
+  lessonTitle?: string;
   /** Lesson section headings, turned into clickable starter questions. */
   sections?: string[];
+  /** When set, the chat runs in hint-only "assignment" mode instead of lesson mode. */
+  assignmentId?: string;
+  assignmentTitle?: string;
 }) {
+  const isAssignment = !!assignmentId;
+  const targetId = (assignmentId ?? lessonId) ?? "";
+  const targetCol = isAssignment ? "assignment_id" : "lesson_id";
+  const headerTitle = (isAssignment ? assignmentTitle : lessonTitle) || (isAssignment ? "This assignment" : "This lesson");
   const [open, setOpen] = useState(false);
   const [signedIn, setSignedIn] = useState<boolean | null>(null);
   const [messages, setMessages] = useState<Msg[]>([]);
@@ -41,7 +50,7 @@ export function TutorChat({
   useEffect(() => {
     loaded.current = false;
     setMessages([]);
-  }, [lessonId]);
+  }, [targetId]);
 
   useEffect(() => {
     if (!open || !signedIn || loaded.current) return;
@@ -50,23 +59,25 @@ export function TutorChat({
       const { data } = await supabase
         .from("tutor_messages")
         .select("id, role, content, created_at")
-        .eq("lesson_id", lessonId)
+        .eq(targetCol, targetId)
         .order("created_at", { ascending: true })
         .limit(100);
       if (data) setMessages(data as Msg[]);
     })();
-  }, [open, signedIn, lessonId]);
+  }, [open, signedIn, targetId]);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, open, busy]);
 
-  // Starter questions built from the lesson's section headings.
-  const suggestions = sections
-    .map((s) => s.trim())
-    .filter(Boolean)
-    .slice(0, 10)
-    .map((s) => (/^(example|question|problem|exercise)\b/i.test(s) ? `Help with ${s}` : `Explain ${s}`));
+  // Starter questions: generic hint prompts for assignments, section-based for lessons.
+  const suggestions = isAssignment
+    ? ["I'm stuck — give me a hint", "Explain the concept I need for this", "How do I check my own answer?"]
+    : sections
+        .map((s) => s.trim())
+        .filter(Boolean)
+        .slice(0, 10)
+        .map((s) => (/^(example|question|problem|exercise)\b/i.test(s) ? `Help with ${s}` : `Explain ${s}`));
 
   async function send(preset?: string) {
     const text = (preset ?? input).trim();
@@ -100,7 +111,7 @@ export function TutorChat({
           "Content-Type": "application/json",
           Authorization: `Bearer ${session.access_token}`,
         },
-        body: JSON.stringify({ lessonId, message: text }),
+        body: JSON.stringify(isAssignment ? { assignmentId, message: text } : { lessonId, message: text }),
       });
       const data = await res.json();
       if (!res.ok) {
@@ -186,9 +197,9 @@ export function TutorChat({
               background: theme.color.surfaceMuted,
             }}
           >
-            <div style={{ fontWeight: 800, fontSize: 15, color: theme.color.text }}>Math tutor</div>
+            <div style={{ fontWeight: 800, fontSize: 15, color: theme.color.text }}>{isAssignment ? "Assignment hints" : "Math tutor"}</div>
             <div style={{ fontSize: 12.5, color: theme.color.textMuted, marginTop: 2 }}>
-              {lessonTitle || "This lesson"} · math only
+              {headerTitle} · {isAssignment ? "hints only — no full answers" : "math only"}
             </div>
           </header>
 
@@ -204,7 +215,9 @@ export function TutorChat({
             {signedIn && messages.length === 0 && !busy && (
               <>
                 <p style={{ color: theme.color.textMuted, fontSize: 14, margin: 0 }}>
-                  Ask about a concept or example from this lesson. I will guide you step by step — not personal chat.
+                  {isAssignment
+                    ? "I'll give hints and explain the concepts — but not the final answers. Tell me which part you're stuck on."
+                    : "Ask about a concept or example from this lesson. I will guide you step by step — not personal chat."}
                 </p>
                 {suggestions.length > 0 && (
                   <div style={{ display: "flex", flexWrap: "wrap", gap: 7, marginTop: 4 }}>

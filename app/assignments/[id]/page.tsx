@@ -8,8 +8,9 @@ import { CourseNav } from "../../../components/CourseNav";
 import { AssignmentBody } from "../../../components/AssignmentBody";
 import { MathInput } from "../../../components/MathInput";
 import { MaterialsPanel } from "../../../components/MaterialsPanel";
+import { TutorChat } from "../../../components/TutorChat";
 
-type Assignment = { id: string; title: string; description: string | null; due_date: string | null; course_id: string };
+type Assignment = { id: string; title: string; description: string | null; due_date: string | null; course_id: string; tutor_enabled: boolean | null };
 
 export default function AssignmentPage() {
   const id = useParams().id as string;
@@ -30,7 +31,7 @@ export default function AssignmentPage() {
 
   useEffect(() => {
     (async () => {
-      const { data } = await supabase.from("assignments").select("id, title, description, due_date, course_id").eq("id", id).single();
+      const { data } = await supabase.from("assignments").select("id, title, description, due_date, course_id, tutor_enabled").eq("id", id).single();
       if (!data) { setNotFound(true); setLoading(false); return; }
       setA(data as Assignment);
       const { data: { session } } = await supabase.auth.getSession();
@@ -163,6 +164,9 @@ export default function AssignmentPage() {
 
         <CourseNav courseId={a.course_id} type="assignment" id={a.id} />
       </article>
+      {a.tutor_enabled && uid && (
+        <TutorChat assignmentId={a.id} assignmentTitle={a.title} />
+      )}
     </main>
   );
 }

@@ -17,6 +17,7 @@ export default function AdminAssignmentEditor() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [due, setDue] = useState("");
+  const [tutorEnabled, setTutorEnabled] = useState(false);
   const [saved, setSaved] = useState(false);
 
   useEffect(() => {
@@ -25,19 +26,20 @@ export default function AdminAssignmentEditor() {
       if (!session) return router.push("/login");
       const { data: me } = await supabase.from("profiles").select("role").eq("id", session.user.id).single();
       if (me?.role !== "admin") return router.push("/classes");
-      const { data } = await supabase.from("assignments").select("title, description, due_date, course_id").eq("id", id).single();
+      const { data } = await supabase.from("assignments").select("title, description, due_date, course_id, tutor_enabled").eq("id", id).single();
       if (!data) return router.push("/teacher");
       setTitle(data.title ?? "");
       setDescription(data.description ?? "");
       setDue(data.due_date ? new Date(data.due_date).toISOString().slice(0, 10) : "");
       setCourseId(data.course_id);
+      setTutorEnabled(!!data.tutor_enabled);
       setLoading(false);
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   async function save() {
-    await supabase.from("assignments").update({ title, description, due_date: due ? new Date(due).toISOString() : null }).eq("id", id);
+    await supabase.from("assignments").update({ title, description, due_date: due ? new Date(due).toISOString() : null, tutor_enabled: tutorEnabled }).eq("id", id);
     setSaved(true);
     setTimeout(() => setSaved(false), 1800);
   }
@@ -73,6 +75,12 @@ export default function AdminAssignmentEditor() {
             <input value={title} onChange={(e) => setTitle(e.target.value)} style={{ ...field, marginBottom: 12 }} />
             <label style={lbl}>Due date (optional)</label>
             <input type="date" value={due} onChange={(e) => setDue(e.target.value)} style={{ ...field, marginBottom: 12 }} />
+            <label style={{ display: "flex", gap: 10, alignItems: "flex-start", background: "#f0fdf4", border: "1px solid #bbf7d0", borderRadius: 10, padding: "11px 13px", marginBottom: 12, cursor: "pointer" }}>
+              <input type="checkbox" checked={tutorEnabled} onChange={(e) => setTutorEnabled(e.target.checked)} style={{ marginTop: 3 }} />
+              <span style={{ fontSize: 13, color: "#334155", lineHeight: 1.5 }}>
+                <b style={{ color: "#0d5c30" }}>AI hint tutor</b> — let students open a hint‑only helper on this assignment. It explains concepts and gives hints but <b>never the final answers</b>. Leave off for tests/exams.
+              </span>
+            </label>
             <label style={lbl}>Questions</label>
             <p style={{ fontSize: 12, color: "#94a3b8", margin: "0 0 6px" }}>
               Use category headers on their own line (Knowledge &amp; Understanding / Thinking / Communication / Application) and numbered questions (1. … 2. …). Math: write <code>\( … \)</code>.
