@@ -164,7 +164,7 @@ export default function AssignmentPage() {
 
         <CourseNav courseId={a.course_id} type="assignment" id={a.id} />
       </article>
-      {a.tutor_enabled && uid && (
+      {a.tutor_enabled && (
         <TutorChat assignmentId={a.id} assignmentTitle={a.title} />
       )}
     </main>
