@@ -37,3 +37,4 @@ next-env.d.ts
 /scripts/_pdf/
 /scripts/_tex/
 /scripts/_texpdf/
+build-output.txt

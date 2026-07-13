@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { createRequire } from "module";
-import chromium from "@sparticuz/chromium";
-import puppeteer from "puppeteer-core";
 import { renderWorksheetHtml, renderCompactHtml } from "../../../../../lib/worksheetRender";
 import type { WsContent } from "../../../../../lib/worksheets";
 
@@ -11,8 +9,12 @@ import type { WsContent } from "../../../../../lib/worksheets";
 export const runtime = "nodejs";
 export const maxDuration = 60;
 
-const require = createRequire(import.meta.url);
-const KATEX_CSS = require("fs").readFileSync(require.resolve("katex/dist/katex.min.css"), "utf8");
+// Lazy — do NOT read KaTeX / launch Chromium at module load (breaks `next build`
+// page-data collection when resolve paths are unavailable in the bundler).
+function loadKatexCss(): string {
+  const require = createRequire(import.meta.url);
+  return require("fs").readFileSync(require.resolve("katex/dist/katex.min.css"), "utf8");
+}
 
 const makeAdmin = () =>
   createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!, { auth: { persistSession: false } });
@@ -31,8 +33,10 @@ async function requireAdmin(req: NextRequest): Promise<{ ok: true } | { ok: fals
 }
 
 async function launchBrowser() {
+  const puppeteer = (await import("puppeteer-core")).default;
   const onVercel = !!process.env.VERCEL;
   if (onVercel) {
+    const chromium = (await import("@sparticuz/chromium")).default;
     return puppeteer.launch({
       args: chromium.args,
       executablePath: await chromium.executablePath(),
@@ -69,8 +73,9 @@ export async function POST(req: NextRequest, ctx: { params: Promise<{ id: string
   let browser: Awaited<ReturnType<typeof launchBrowser>> | null = null;
   try {
     browser = await launchBrowser();
-    const wsPdf = await htmlToPdf(browser, renderWorksheetHtml(content, w.code, KATEX_CSS));
-    const cmPdf = await htmlToPdf(browser, renderCompactHtml(content, w.code, KATEX_CSS));
+    const katexCss = loadKatexCss();
+    const wsPdf = await htmlToPdf(browser, renderWorksheetHtml(content, w.code, katexCss));
+    const cmPdf = await htmlToPdf(browser, renderCompactHtml(content, w.code, katexCss));
 
     const up = async (buf: Buffer, kind: "worksheet" | "compact") => {
       const path = `${w.course_id}/${w.code}_${kind === "worksheet" ? "worksheet" : "answers"}.pdf`;

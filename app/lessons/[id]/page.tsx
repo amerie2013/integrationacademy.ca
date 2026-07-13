@@ -10,6 +10,7 @@ import { CourseNav } from "../../../components/CourseNav";
 import { MaterialsPanel } from "../../../components/MaterialsPanel";
 import { fetchMaterials } from "../../../lib/materials";
 import { Block } from "../../../lib/blocks";
+import { TutorChat } from "../../../components/TutorChat";
 
 export default function LessonViewPage() {
   const params = useParams();
@@ -139,6 +140,9 @@ export default function LessonViewPage() {
           </>
         )}
       </article>
+      {!loading && !notFound && (
+        <TutorChat lessonId={lessonId} lessonTitle={title} />
+      )}
     </main>
   );
 }
