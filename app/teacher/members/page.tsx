@@ -34,6 +34,7 @@ export default function MembersAdminPage() {
   const [token, setToken] = useState<string>("");
   const [q, setQ] = useState("");
   const [roleFilter, setRoleFilter] = useState<"all" | "student" | "teacher" | "admin">("all");
+  const [unverifiedOnly, setUnverifiedOnly] = useState(false);
   const [savingId, setSavingId] = useState<string | null>(null);
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [msg, setMsg] = useState("");
@@ -219,10 +220,13 @@ export default function MembersAdminPage() {
     const s = q.trim().toLowerCase();
     return rows.filter((r) => {
       if (roleFilter !== "all" && (r.role ?? "student") !== roleFilter) return false;
+      if (unverifiedOnly && meta[r.id]?.email_confirmed !== false) return false;
       if (!s) return true;
       return (r.full_name ?? "").toLowerCase().includes(s) || (r.email ?? "").toLowerCase().includes(s);
     });
-  }, [rows, q, roleFilter]);
+  }, [rows, q, roleFilter, unverifiedOnly, meta]);
+
+  const unverifiedCount = useMemo(() => rows.filter((r) => meta[r.id]?.email_confirmed === false).length, [rows, meta]);
 
   const counts = useMemo(() => {
     const c = { total: rows.length, student: 0, teacher: 0, admin: 0, active: 0 };
@@ -267,6 +271,9 @@ export default function MembersAdminPage() {
             <option value="teacher">Teachers</option>
             <option value="admin">Admins</option>
           </select>
+          <label style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 14, color: unverifiedCount ? "#b45309" : "#475569", fontWeight: 600, cursor: "pointer", whiteSpace: "nowrap" }}>
+            <input type="checkbox" checked={unverifiedOnly} onChange={(e) => setUnverifiedOnly(e.target.checked)} /> Unverified only{unverifiedCount ? ` (${unverifiedCount})` : ""}
+          </label>
           <span style={{ color: "#64748b", fontSize: 14 }}>{filtered.length}</span>
         </div>
 
@@ -294,6 +301,7 @@ export default function MembersAdminPage() {
                   </div>
                   <RoleBadge role={role} />
                   <TierBadge tier={tier} />
+                  {verified === false && <button onClick={() => verify(r)} disabled={busy} title="Confirm this account so they can sign in" style={{ background: "#fef3c7", color: "#b45309", border: "1px solid #fde68a", borderRadius: 9, padding: "7px 12px", fontWeight: 700, fontSize: 13, cursor: "pointer", whiteSpace: "nowrap" }}>✓ Verify</button>}
                   <button onClick={() => toggleExpand(r)} style={manageBtn}>{open ? "Close" : "Manage"}</button>
                 </div>
 
