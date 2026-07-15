@@ -38,6 +38,8 @@ export function TutorChat({
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [remaining, setRemaining] = useState<number | null>(null);
+  const [speakingId, setSpeakingId] = useState<string | null>(null);
+  const [ttsOk, setTtsOk] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
   const loaded = useRef(false);
 
@@ -69,6 +71,31 @@ export function TutorChat({
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, open, busy]);
+
+  // Read-aloud uses the browser's built-in voice (free, on-device — no API).
+  useEffect(() => {
+    setTtsOk(typeof window !== "undefined" && "speechSynthesis" in window);
+    return () => { try { window.speechSynthesis?.cancel(); } catch {} };
+  }, []);
+  useEffect(() => {
+    if (!open) { try { window.speechSynthesis?.cancel(); } catch {} setSpeakingId(null); }
+  }, [open]);
+
+  function speak(m: Msg) {
+    try {
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(toSpeech(m.content));
+      u.rate = 1;
+      u.onend = () => setSpeakingId(null);
+      u.onerror = () => setSpeakingId(null);
+      setSpeakingId(m.id);
+      window.speechSynthesis.speak(u);
+    } catch { setSpeakingId(null); }
+  }
+  function stopSpeak() {
+    try { window.speechSynthesis.cancel(); } catch {}
+    setSpeakingId(null);
+  }
 
   // Starter questions: generic hint prompts for assignments, section-based for lessons.
   const suggestions = isAssignment
@@ -262,6 +289,15 @@ export function TutorChat({
                 }}
               >
                 <TutorMarkdown text={m.content} />
+                {m.role === "assistant" && ttsOk && (
+                  <button
+                    type="button"
+                    onClick={() => (speakingId === m.id ? stopSpeak() : speak(m))}
+                    style={{ marginTop: 6, background: "none", border: "none", color: theme.color.primary, fontSize: 12, fontWeight: 700, cursor: "pointer", padding: 0 }}
+                  >
+                    {speakingId === m.id ? "⏹ Stop" : "🔊 Listen"}
+                  </button>
+                )}
               </div>
             ))}
             {busy && (
@@ -347,6 +383,38 @@ function TutorMarkdown({ text }: { text: string }) {
       )}
     </div>
   );
+}
+
+/** Turn a tutor reply (markdown + LaTeX) into readable text for speech. */
+function toSpeech(md: string): string {
+  let s = md;
+  // unwrap math delimiters, keep the inner expression
+  s = s
+    .replace(/\$\$([\s\S]+?)\$\$/g, " $1 ")
+    .replace(/\\\[([\s\S]+?)\\\]/g, " $1 ")
+    .replace(/\$([^$\n]+?)\$/g, " $1 ")
+    .replace(/\\\(([\s\S]+?)\\\)/g, " $1 ");
+  // common LaTeX → spoken words
+  s = s
+    .replace(/\\frac\s*\{([^{}]+)\}\s*\{([^{}]+)\}/g, " $1 over $2 ")
+    .replace(/\\sqrt\s*\{([^{}]+)\}/g, " square root of $1 ")
+    .replace(/\\(times|cdot)\b/g, " times ")
+    .replace(/\\div\b/g, " divided by ")
+    .replace(/\\pm\b/g, " plus or minus ")
+    .replace(/\\pi\b/g, " pi ")
+    .replace(/\\(le|leq)\b/g, " less than or equal to ")
+    .replace(/\\(ge|geq)\b/g, " greater than or equal to ")
+    .replace(/\\neq?\b/g, " not equal to ")
+    .replace(/\^\s*\{?\s*2\s*\}?/g, " squared ")
+    .replace(/\^\s*\{?\s*3\s*\}?/g, " cubed ")
+    .replace(/\^\s*\{?([^{}\s]+)\}?/g, " to the power $1 ")
+    .replace(/_\s*\{?([^{}\s]+)\}?/g, " sub $1 ")
+    .replace(/\s*=\s*/g, " equals ");
+  // drop any remaining LaTeX commands / braces
+  s = s.replace(/\\[a-zA-Z]+\b/g, " ").replace(/[{}\\]/g, " ");
+  // markdown
+  s = s.replace(/\*\*([^*]+)\*\*/g, "$1").replace(/\*([^*]+)\*/g, "$1").replace(/`([^`]+)`/g, "$1").replace(/[#>*_`]/g, " ");
+  return s.replace(/\s+/g, " ").trim();
 }
 
 /** Render **bold**, *italic* and `code` inside a non-math text run. */
