@@ -1,6 +1,9 @@
 import { supabase } from "./supabase";
 
-/** Structured, editable worksheet source (rendered to PDF by the regenerate route). */
+/** Editable worksheet source. Two shapes:
+ *  - structured (MTH1W): intro / lesson / examples / questions, rendered to PDF
+ *    server-side by the regenerate route (Chrome).
+ *  - latex (all other courses): raw `.tex` source, rebuilt locally with Tectonic. */
 export type WsContent = {
   grade?: string;
   title?: string;
@@ -8,6 +11,7 @@ export type WsContent = {
   lesson?: [string, string][];
   examples?: [string, string, string][];
   questions?: [string, string, string][];
+  tex?: string;
 };
 
 export type Worksheet = {

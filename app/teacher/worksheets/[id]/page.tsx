@@ -131,7 +131,25 @@ export default function WorksheetEditorPage() {
         <FileRow label="Answer key / compact PDF (download)" url={w.answers_url ? (links.ans ?? w.answers_url) : null} name={w.answers_name}
           busy={busy === "answers"} onUpload={(f) => upload(f, "answers")} onClear={() => setW({ ...w, answers_url: null, answers_name: null })} />
 
-        {w.content && (
+        {/* LaTeX-source courses: edit the .tex in-browser; rebuild locally with Tectonic. */}
+        {w.content?.tex != null && (
+          <div style={{ background: "#f5f3ff", border: "1px solid #ddd6fe", borderRadius: 12, padding: 16, marginBottom: 12 }}>
+            <div style={{ fontSize: 13, fontWeight: 800, color: "#6d28a3", marginBottom: 2 }}>Edit LaTeX source</div>
+            <div style={{ fontSize: 12.5, color: "#475569", lineHeight: 1.5, marginBottom: 10 }}>
+              Edit the <code>.tex</code> below and click <b>Save</b> (top of page). Then rebuild &amp; republish the PDF locally with:{" "}
+              <code style={{ background: "#ede9fe", padding: "1px 6px", borderRadius: 4 }}>node scripts/rebuild-tex.mjs {w.id}</code>
+            </div>
+            <textarea
+              value={w.content.tex}
+              onChange={(e) => setW({ ...w, content: { ...w.content, tex: e.target.value } })}
+              spellCheck={false}
+              style={{ width: "100%", minHeight: 460, boxSizing: "border-box", fontFamily: "JetBrains Mono, ui-monospace, monospace", fontSize: 12.5, lineHeight: 1.5, padding: 12, borderRadius: 8, border: "1px solid #c4b5fd", outline: "none", resize: "vertical", whiteSpace: "pre", overflowWrap: "normal", overflowX: "auto" }}
+            />
+          </div>
+        )}
+
+        {/* Structured courses (MTH1W): form editor + one-click server-side regenerate. */}
+        {w.content?.tex == null && w.content && (
           <div style={{ background: "#f0fdf4", border: "1px solid #bbf7d0", borderRadius: 12, padding: 16, marginBottom: 12 }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 12, marginBottom: 12 }}>
               <div>
