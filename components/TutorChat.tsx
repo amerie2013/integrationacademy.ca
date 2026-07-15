@@ -362,24 +362,76 @@ export function TutorChat({
   );
 }
 
-/** Lightweight markdown: paragraphs + $ / $$ KaTeX. */
+// Render a tutor reply: block + inline math, headings, bullet/numbered lists,
+// and bold / italic / code.
 function TutorMarkdown({ text }: { text: string }) {
-  const parts = splitMath(text);
-  return (
-    <div style={{ whiteSpace: "pre-wrap", wordBreak: "break-word" }}>
-      {parts.map((p, i) =>
-        p.type === "block" ? (
-          <div key={i} style={{ margin: "8px 0" }}>
-            <Tex expr={p.value} block />
-          </div>
-        ) : p.type === "inline" ? (
-          <Tex key={i} expr={p.value} />
-        ) : (
-          <span key={i}>{renderInline(p.value)}</span>
-        ),
-      )}
-    </div>
-  );
+  return <div style={{ wordBreak: "break-word", lineHeight: 1.5 }}>{renderBlocks(text)}</div>;
+}
+
+function renderBlocks(text: string): React.ReactNode[] {
+  const out: React.ReactNode[] = [];
+  const re = /\$\$([\s\S]+?)\$\$|\\\[([\s\S]+?)\\\]/g;
+  let last = 0;
+  let m: RegExpExecArray | null;
+  let k = 0;
+  while ((m = re.exec(text))) {
+    if (m.index > last) out.push(...renderTextLines(text.slice(last, m.index), `t${k++}`));
+    out.push(<div key={`b${k++}`} style={{ margin: "8px 0" }}><Tex expr={(m[1] ?? m[2] ?? "").trim()} block /></div>);
+    last = m.index + m[0].length;
+  }
+  if (last < text.length) out.push(...renderTextLines(text.slice(last), `t${k++}`));
+  return out;
+}
+
+function renderTextLines(text: string, kp: string): React.ReactNode[] {
+  const lines = text.split("\n");
+  const out: React.ReactNode[] = [];
+  let i = 0, k = 0;
+  const liStyle: React.CSSProperties = { margin: "2px 0" };
+  while (i < lines.length) {
+    const head = lines[i].match(/^#{1,4}\s+(.*)$/);
+    if (head) { out.push(<div key={`${kp}h${k++}`} style={{ fontWeight: 800, margin: "6px 0 2px" }}>{renderInlineLine(head[1])}</div>); i++; continue; }
+    const bullet = lines[i].match(/^\s*[-*]\s+(.*)$/);
+    const num = lines[i].match(/^\s*\d+\.\s+(.*)$/);
+    if (bullet || num) {
+      const ordered = !bullet;
+      const items: string[] = [];
+      while (i < lines.length) {
+        const b = lines[i].match(/^\s*[-*]\s+(.*)$/);
+        const n = lines[i].match(/^\s*\d+\.\s+(.*)$/);
+        if (!ordered && b) items.push(b[1]);
+        else if (ordered && n) items.push(n[1]);
+        else break;
+        i++;
+      }
+      const kids = items.map((it, j) => <li key={j} style={liStyle}>{renderInlineLine(it)}</li>);
+      out.push(ordered
+        ? <ol key={`${kp}o${k++}`} style={{ margin: "4px 0", paddingLeft: 22 }}>{kids}</ol>
+        : <ul key={`${kp}u${k++}`} style={{ margin: "4px 0", paddingLeft: 22 }}>{kids}</ul>);
+    } else {
+      const line = lines[i];
+      if (line.trim() === "") out.push(<div key={`${kp}s${k++}`} style={{ height: 5 }} />);
+      else out.push(<div key={`${kp}p${k++}`} style={{ margin: "1px 0" }}>{renderInlineLine(line)}</div>);
+      i++;
+    }
+  }
+  return out;
+}
+
+// One line: inline math plus bold / italic / code.
+function renderInlineLine(line: string): React.ReactNode[] {
+  const out: React.ReactNode[] = [];
+  const re = /\$([^$\n]+?)\$|\\\(([\s\S]+?)\\\)/g;
+  let last = 0;
+  let m: RegExpExecArray | null;
+  let k = 0;
+  while ((m = re.exec(line))) {
+    if (m.index > last) out.push(<span key={k++}>{renderInline(line.slice(last, m.index))}</span>);
+    out.push(<Tex key={k++} expr={(m[1] ?? m[2] ?? "").trim()} />);
+    last = m.index + m[0].length;
+  }
+  if (last < line.length) out.push(<span key={k++}>{renderInline(line.slice(last))}</span>);
+  return out.length ? out : [<span key={0}>{renderInline(line)}</span>];
 }
 
 /** Turn a tutor reply (markdown + LaTeX) into readable text for speech. */
@@ -430,23 +482,4 @@ function renderInline(str: string): React.ReactNode[] {
   }
   if (last < str.length) nodes.push(str.slice(last));
   return nodes;
-}
-
-function splitMath(text: string): { type: "text" | "inline" | "block"; value: string }[] {
-  const out: { type: "text" | "inline" | "block"; value: string }[] = [];
-  // Accept every delimiter the model might emit: $$…$$ and \[…\] for display,
-  // $…$ and \(…\) for inline. Groups: 1=$$ block, 2=\[ block, 3=$ inline, 4=\( inline.
-  const re = /\$\$([\s\S]+?)\$\$|\\\[([\s\S]+?)\\\]|\$([^$\n]+?)\$|\\\(([\s\S]+?)\\\)/g;
-  let last = 0;
-  let m: RegExpExecArray | null;
-  while ((m = re.exec(text))) {
-    if (m.index > last) out.push({ type: "text", value: text.slice(last, m.index) });
-    const block = m[1] ?? m[2];
-    const inline = m[3] ?? m[4];
-    if (block != null) out.push({ type: "block", value: block.trim() });
-    else out.push({ type: "inline", value: (inline ?? "").trim() });
-    last = m.index + m[0].length;
-  }
-  if (last < text.length) out.push({ type: "text", value: text.slice(last) });
-  return out.length ? out : [{ type: "text", value: text }];
 }
