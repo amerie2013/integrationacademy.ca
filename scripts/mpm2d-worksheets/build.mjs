@@ -13,7 +13,7 @@ const GRID = `\\begin{center}\\begin{tikzpicture}\\begin{axis}[width=8cm,height=
 
 function render(w) {
   const ex = w.examples.map((e, i) => `\\begin{example}{ex${i % 9}}{Example ${i + 1} --- ${e.t}}\n${e.body}\n\\end{example}`).join("\n\n");
-  const learn = LEARN[w.code];
+  const learn = w.learn || LEARN[w.code];
   const learnTex = learn ? `\\begin{learnbox}\n${learn.map(([h, b]) => `\\lh{${h}}${b}`).join("\n")}\n\\end{learnbox}\n\n` : "";
   const q = w.questions.map((qq, i) => {
     const head = `Question ${i + 1}${qq.challenge ? " --- Challenge" : ""}`;

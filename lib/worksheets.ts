@@ -14,6 +14,20 @@ export type WsContent = {
   tex?: string;
 };
 
+/** Structured LaTeX-course worksheet content (edited with the form, rebuilt with
+ *  Tectonic via scripts/rebuild-tex.mjs). Field values are LaTeX. */
+export type TexWsContent = {
+  format: "tex";
+  title?: string;
+  unit?: string;
+  intro?: string;
+  ideas?: string[];
+  learn?: [string, string][];
+  examples?: { t: string; body: string }[];
+  questions?: { ask: string; grid?: boolean; ws?: string; challenge?: boolean }[];
+  answers?: string[];
+};
+
 export type Worksheet = {
   id: string;
   course_id: string;
