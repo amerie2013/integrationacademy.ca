@@ -24,6 +24,9 @@ export default function AiUsagePage() {
   const [rows, setRows] = useState<Row[]>([]);
   const [allTime, setAllTime] = useState(0);
   const [names, setNames] = useState<Record<string, string>>({});
+  const [lessonCourse, setLessonCourse] = useState<Record<string, string>>({});
+  const [assignCourse, setAssignCourse] = useState<Record<string, string>>({});
+  const [courseLabel, setCourseLabel] = useState<Record<string, string>>({});
 
   useEffect(() => {
     (async () => {
@@ -52,6 +55,16 @@ export default function AiUsagePage() {
         (profs ?? []).forEach((p: any) => (map[p.id] = p.full_name || ""));
         setNames(map);
       }
+
+      // map lessons/assignments → course for the per-course breakdown
+      const lIds = [...new Set(list.filter((r) => r.lesson_id).map((r) => r.lesson_id as string))].slice(0, 800);
+      const aIds = [...new Set(list.filter((r) => r.assignment_id).map((r) => r.assignment_id as string))].slice(0, 800);
+      const lc: Record<string, string> = {}, ac: Record<string, string> = {}; const cids = new Set<string>();
+      if (lIds.length) { const { data: ls } = await supabase.from("lessons").select("id, course_id").in("id", lIds); (ls ?? []).forEach((l: any) => { if (l.course_id) { lc[l.id] = l.course_id; cids.add(l.course_id); } }); }
+      if (aIds.length) { const { data: as } = await supabase.from("assignments").select("id, course_id").in("id", aIds); (as ?? []).forEach((a: any) => { if (a.course_id) { ac[a.id] = a.course_id; cids.add(a.course_id); } }); }
+      setLessonCourse(lc); setAssignCourse(ac);
+      if (cids.size) { const { data: cs } = await supabase.from("courses").select("id, code, title").in("id", [...cids]); const cl: Record<string, string> = {}; (cs ?? []).forEach((c: any) => (cl[c.id] = c.code || c.title || c.id)); setCourseLabel(cl); }
+
       setLoading(false);
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -142,6 +155,32 @@ export default function AiUsagePage() {
             </div>
           ))}
         </div>
+
+        {/* questions by course */}
+        {(() => {
+          const byCourse: Record<string, number> = {};
+          for (const m of users) {
+            const cid = m.lesson_id ? lessonCourse[m.lesson_id] : m.assignment_id ? assignCourse[m.assignment_id] : undefined;
+            if (cid) byCourse[cid] = (byCourse[cid] ?? 0) + 1;
+          }
+          const topC = Object.entries(byCourse).sort((a, b) => b[1] - a[1]).slice(0, 14);
+          const maxC = Math.max(1, ...topC.map((t) => t[1]));
+          return (
+            <div style={{ background: "#fff", border: "1px solid #e2e8f0", borderRadius: 14, padding: 18, marginTop: 20 }}>
+              <div style={{ fontSize: 14, fontWeight: 800, marginBottom: 12 }}>Questions by course (30 days)</div>
+              {topC.length === 0 && <div style={{ color: "#94a3b8", fontSize: 14 }}>No questions yet.</div>}
+              {topC.map(([cid, n]) => (
+                <div key={cid} style={{ display: "flex", alignItems: "center", gap: 10, padding: "5px 0" }}>
+                  <span style={{ width: 92, fontSize: 13, fontWeight: 700, color: "#334155", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{courseLabel[cid] ?? cid.slice(0, 6)}</span>
+                  <div style={{ flex: 1, background: "#f1f5f9", borderRadius: 6, height: 14, overflow: "hidden" }}>
+                    <div style={{ width: `${(n / maxC) * 100}%`, height: "100%", background: "#1b7a44" }} />
+                  </div>
+                  <span style={{ width: 36, textAlign: "right", fontSize: 13, fontWeight: 700, color: "#0f172a" }}>{n}</span>
+                </div>
+              ))}
+            </div>
+          );
+        })()}
       </div>
     </main>
   );
