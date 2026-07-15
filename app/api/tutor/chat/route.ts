@@ -200,84 +200,96 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Could not save your message." }, { status: 500 });
     }
 
-    let assistantText: string;
+    void userMsg; // saved above; the reply streams back as plain text below
+    const remaining = Math.max(0, DAILY_USER_MSG_LIMIT - (usedToday ?? 0) - 1);
+    const encoder = new TextEncoder();
+    const streamHeaders = {
+      "Content-Type": "text/plain; charset=utf-8",
+      "Cache-Control": "no-cache, no-transform",
+      "X-Tutor-Remaining": String(remaining),
+    };
+    // Persist the assistant reply (and bump the thread) once the text is final.
+    const persist = async (text: string) => {
+      const content = text.trim() || "I couldn't generate a reply. Please rephrase your math question.";
+      await admin.from("tutor_messages").insert({ ...msgKeys, role: "assistant", content });
+      await admin.from("tutor_threads").update({ updated_at: new Date().toISOString() }).eq("id", threadId);
+    };
+
+    // Off-topic: stream the fixed reply so the client path is uniform.
     if (looksOffTopic(message)) {
-      assistantText = OFF_TOPIC_REPLY;
-    } else {
-      const system = isAssignment
-        ? buildAssignmentTutorPrompt({ assignmentTitle: ctxTitle, courseTitle, assignmentBody: ctxBody })
-        : buildTutorSystemPrompt({ lessonTitle: ctxTitle, courseTitle, lessonBody: ctxBody });
-      const history = (prior ?? []).map((m) => ({
-        role: m.role as "user" | "assistant",
-        content: m.content,
-      }));
-      history.push({ role: "user", content: message });
-
-      const model = process.env.DEEPSEEK_MODEL || "deepseek-v4-flash";
-      const dsRes = await fetch("https://api.deepseek.com/chat/completions", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${apiKey}`,
+      const stream = new ReadableStream({
+        async start(controller) {
+          controller.enqueue(encoder.encode(OFF_TOPIC_REPLY));
+          await persist(OFF_TOPIC_REPLY);
+          controller.close();
         },
-        body: JSON.stringify({
-          model,
-          messages: [{ role: "system", content: system }, ...history],
-          temperature: 0.4,
-          max_tokens: 1200,
-          thinking: { type: "disabled" },
-          stream: false,
-        }),
       });
-
-      if (!dsRes.ok) {
-        const errText = await dsRes.text().catch(() => "");
-        console.error("DeepSeek error", dsRes.status, errText);
-        // Soft-delete? Keep user message; return error without assistant row
-        return NextResponse.json(
-          {
-            error:
-              dsRes.status === 402
-                ? "AI tutor balance is empty. Please top up DeepSeek billing."
-                : "The tutor is temporarily unavailable. Try again in a moment.",
-            userMessage: userMsg,
-          },
-          { status: 502 },
-        );
-      }
-
-      const dsJson = (await dsRes.json()) as {
-        choices?: { message?: { content?: string } }[];
-      };
-      assistantText =
-        dsJson.choices?.[0]?.message?.content?.trim() ||
-        "I couldn't generate a reply. Please rephrase your math question.";
+      return new Response(stream, { headers: streamHeaders });
     }
 
-    const { data: asstMsg, error: asstErr } = await admin
-      .from("tutor_messages")
-      .insert({ ...msgKeys, role: "assistant", content: assistantText })
-      .select("id, role, content, created_at")
-      .single();
+    const system = isAssignment
+      ? buildAssignmentTutorPrompt({ assignmentTitle: ctxTitle, courseTitle, assignmentBody: ctxBody })
+      : buildTutorSystemPrompt({ lessonTitle: ctxTitle, courseTitle, lessonBody: ctxBody });
+    const history = (prior ?? []).map((m) => ({ role: m.role as "user" | "assistant", content: m.content }));
+    history.push({ role: "user", content: message });
 
-    if (asstErr || !asstMsg) {
-      console.error("tutor assistant msg", asstErr);
+    const model = process.env.DEEPSEEK_MODEL || "deepseek-v4-flash";
+    const dsRes = await fetch("https://api.deepseek.com/chat/completions", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${apiKey}` },
+      body: JSON.stringify({
+        model,
+        messages: [{ role: "system", content: system }, ...history],
+        temperature: 0.4,
+        max_tokens: 1200,
+        thinking: { type: "disabled" },
+        stream: true,
+      }),
+    });
+
+    if (!dsRes.ok || !dsRes.body) {
+      const errText = await dsRes.text().catch(() => "");
+      console.error("DeepSeek error", dsRes.status, errText);
       return NextResponse.json(
-        { error: "Reply generated but not saved.", reply: assistantText, userMessage: userMsg },
-        { status: 500 },
+        { error: dsRes.status === 402 ? "AI tutor balance is empty. Please top up DeepSeek billing." : "The tutor is temporarily unavailable. Try again in a moment." },
+        { status: 502 },
       );
     }
 
-    await admin
-      .from("tutor_threads")
-      .update({ updated_at: new Date().toISOString() })
-      .eq("id", threadId);
-
-    return NextResponse.json({
-      userMessage: userMsg,
-      assistantMessage: asstMsg,
-      remainingToday: Math.max(0, DAILY_USER_MSG_LIMIT - (usedToday ?? 0) - 1),
+    const upstream = dsRes.body;
+    const stream = new ReadableStream({
+      async start(controller) {
+        let full = "";
+        try {
+          const reader = upstream.getReader();
+          const decoder = new TextDecoder();
+          let buf = "";
+          while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+            buf += decoder.decode(value, { stream: true });
+            const lines = buf.split("\n");
+            buf = lines.pop() ?? ""; // keep the trailing partial line
+            for (const line of lines) {
+              const t = line.trim();
+              if (!t.startsWith("data:")) continue;
+              const payload = t.slice(5).trim();
+              if (payload === "[DONE]") continue;
+              try {
+                const j = JSON.parse(payload);
+                const delta = j?.choices?.[0]?.delta?.content;
+                if (delta) { full += delta; controller.enqueue(encoder.encode(delta)); }
+              } catch { /* ignore keep-alives / partial JSON */ }
+            }
+          }
+        } catch (e) {
+          console.error("tutor stream", e);
+        }
+        try { await persist(full); } catch (e) { console.error("tutor persist", e); }
+        controller.close();
+      },
     });
+    return new Response(stream, { headers: streamHeaders });
   } catch (e) {
     console.error("tutor chat", e);
     return NextResponse.json({ error: "Unexpected tutor error." }, { status: 500 });

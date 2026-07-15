@@ -140,32 +140,29 @@ export function TutorChat({
         },
         body: JSON.stringify(isAssignment ? { assignmentId, message: text } : { lessonId, message: text }),
       });
-      const data = await res.json();
-      if (!res.ok) {
+      if (!res.ok || !res.body) {
+        const data = await res.json().catch(() => ({}));
         setMessages((m) => m.filter((x) => x.id !== optimistic.id));
         setError(data.error ?? "Something went wrong.");
         setBusy(false);
         return;
       }
-      setMessages((m) => {
-        const withoutTmp = m.filter((x) => x.id !== optimistic.id);
-        const next = [...withoutTmp];
-        if (data.userMessage) next.push(data.userMessage as Msg);
-        if (data.assistantMessage) next.push(data.assistantMessage as Msg);
-        else if (data.reply) {
-          next.push({
-            id: `local-${Date.now()}`,
-            role: "assistant",
-            content: data.reply as string,
-            created_at: new Date().toISOString(),
-          });
-        }
-        return next;
-      });
-      if (typeof data.remainingToday === "number") setRemaining(data.remainingToday);
+      const rem = res.headers.get("X-Tutor-Remaining");
+      if (rem != null) setRemaining(Number(rem));
+      // Append the reply token-by-token as it streams in.
+      const asstId = `a-${Date.now()}`;
+      setMessages((m) => [...m, { id: asstId, role: "assistant" as const, content: "", created_at: new Date().toISOString() }]);
+      const reader = res.body.getReader();
+      const dec = new TextDecoder();
+      let full = "";
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        full += dec.decode(value, { stream: true });
+        setMessages((m) => m.map((x) => (x.id === asstId ? { ...x, content: full } : x)));
+      }
     } catch {
-      setMessages((m) => m.filter((x) => x.id !== optimistic.id));
-      setError("Network error. Try again.");
+      setError("Connection interrupted. Try again.");
     }
     setBusy(false);
   }
@@ -300,7 +297,7 @@ export function TutorChat({
                 )}
               </div>
             ))}
-            {busy && (
+            {busy && messages[messages.length - 1]?.role !== "assistant" && (
               <div style={{ fontSize: 13, color: theme.color.textFaint }}>Thinking…</div>
             )}
             {error && (
