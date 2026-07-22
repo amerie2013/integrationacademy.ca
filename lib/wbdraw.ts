@@ -4,6 +4,7 @@
 export type Pt = { x: number; y: number };
 export type Shape =
   | { t: "pen"; pts: Pt[]; c: string; w: number }
+  | { t: "hl"; pts: Pt[]; c: string; w: number } // highlighter: thick + translucent
   | { t: "line" | "arrow" | "rect" | "ellipse"; a: Pt; b: Pt; c: string; w: number }
   | { t: "text"; x: number; y: number; s: string; c: string; size: number }
   | { t: "math"; x: number; y: number; latex: string; c: string; size: number }
@@ -59,6 +60,19 @@ export function drawShape(ctx: CanvasRenderingContext2D, s: Shape) {
   }
   if (s.t === "math") return; // math is rendered as a KaTeX overlay, not on the canvas
   if (s.t === "erase") return; // erasing is handled by renderAll's compositing layer
+  if (s.t === "hl") {
+    // Translucent so ink/text underneath stays readable. Plain alpha (not
+    // "multiply") so it looks identical on the canvas and on the erase layer.
+    ctx.save();
+    ctx.globalAlpha = 0.35;
+    ctx.lineCap = "round"; ctx.lineJoin = "round";
+    ctx.strokeStyle = s.c; ctx.lineWidth = s.w;
+    ctx.beginPath();
+    s.pts.forEach((p, i) => (i ? ctx.lineTo(p.x, p.y) : ctx.moveTo(p.x, p.y)));
+    ctx.stroke();
+    ctx.restore();
+    return;
+  }
   ctx.strokeStyle = s.c; ctx.lineWidth = s.w;
   if (s.t === "pen") {
     ctx.beginPath();

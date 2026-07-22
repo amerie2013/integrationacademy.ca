@@ -7,11 +7,14 @@ import { MathField } from "./MathField";
 import { renderAll, type Pt, type Shape, type Bg, type BoardData } from "../lib/wbdraw";
 import { listMine, getBoard, createBoard, saveBoard, type WB } from "../lib/whiteboards";
 
-type Tool = "move" | "pen" | "line" | "arrow" | "rect" | "ellipse" | "text" | "math" | "eraseObj" | "eraseArea";
+type Tool = "move" | "pen" | "highlight" | "line" | "arrow" | "rect" | "ellipse" | "text" | "math" | "eraseObj" | "eraseArea";
 
 const COLORS = ["#111827", "#dc2626", "#1d4ed8", "#1b7a44", "#ea580c", "#7c3aed", "#0d9488", "#db2777"];
+// Bright, low-saturation-on-paper colours that read well at 35% opacity.
+const HL_COLORS = ["#fde047", "#86efac", "#7dd3fc", "#f9a8d4", "#fdba74", "#c4b5fd"];
 const WIDTHS = [2, 4, 7];
-const SYMBOLS = ["×", "÷", "π", "√", "²", "³", "≤", "≥", "≠", "±", "∞", "θ", "Δ", "°", "∫", "Σ", "→", "½"];
+const SYMBOLS = ["×", "÷", "π", "√", "²", "³", "≤", "≥", "≠", "±", "∞", "θ", "Δ", "°", "∫", "Σ", "→", "½",
+  "α", "β", "γ", "δ", "λ", "μ", "σ", "φ", "ω", "Ω", "≈", "∈"];
 
 export function Whiteboard({ initialBoardId }: { initialBoardId?: string }) {
   const rootRef = useRef<HTMLDivElement>(null);
@@ -22,6 +25,7 @@ export function Whiteboard({ initialBoardId }: { initialBoardId?: string }) {
 
   const [tool, setTool] = useState<Tool>("pen");
   const [color, setColor] = useState(COLORS[0]);
+  const [hlColor, setHlColor] = useState(HL_COLORS[0]);
   const [width, setWidth] = useState(WIDTHS[1]);
   const [bg, setBg] = useState<Bg>("grid");
   const bgRef = useRef<Bg>("grid");
@@ -206,7 +210,7 @@ export function Whiteboard({ initialBoardId }: { initialBoardId?: string }) {
   }
   function hitShape(p: Pt, s: Shape): boolean {
     const th = 10;
-    if (s.t === "pen" || s.t === "erase") return s.pts.some((q) => Math.hypot(q.x - p.x, q.y - p.y) < th + s.w);
+    if (s.t === "pen" || s.t === "hl" || s.t === "erase") return s.pts.some((q) => Math.hypot(q.x - p.x, q.y - p.y) < th + s.w);
     if (s.t === "line" || s.t === "arrow") return distSeg(p, s.a, s.b) < th + s.w;
     if (s.t === "rect" || s.t === "ellipse") { const x0 = Math.min(s.a.x, s.b.x) - th, x1 = Math.max(s.a.x, s.b.x) + th, y0 = Math.min(s.a.y, s.b.y) - th, y1 = Math.max(s.a.y, s.b.y) + th; return p.x >= x0 && p.x <= x1 && p.y >= y0 && p.y <= y1; }
     if (s.t === "text") { const w = (s.s.length * s.size) * 0.5; return p.x >= s.x - th && p.x <= s.x + w + th && p.y >= s.y - th && p.y <= s.y + s.size + th; }
@@ -215,14 +219,14 @@ export function Whiteboard({ initialBoardId }: { initialBoardId?: string }) {
     return false;
   }
   function bbox(s: Shape): { x: number; y: number; w: number; h: number } {
-    if (s.t === "pen" || s.t === "erase") { const xs = s.pts.map((q) => q.x), ys = s.pts.map((q) => q.y); const x = Math.min(...xs), y = Math.min(...ys); return { x, y, w: Math.max(...xs) - x, h: Math.max(...ys) - y }; }
+    if (s.t === "pen" || s.t === "hl" || s.t === "erase") { const xs = s.pts.map((q) => q.x), ys = s.pts.map((q) => q.y); const x = Math.min(...xs), y = Math.min(...ys); return { x, y, w: Math.max(...xs) - x, h: Math.max(...ys) - y }; }
     if (s.t === "text") return { x: s.x, y: s.y, w: (s.s.length * s.size) * 0.5, h: s.size * 1.2 };
     if (s.t === "math") return { x: s.x, y: s.y, w: (s.latex.length * s.size) * 0.45, h: s.size * 1.4 };
     if (s.t === "image") return { x: s.x, y: s.y, w: s.w, h: s.h };
     const x = Math.min(s.a.x, s.b.x), y = Math.min(s.a.y, s.b.y); return { x, y, w: Math.abs(s.b.x - s.a.x), h: Math.abs(s.b.y - s.a.y) };
   }
   function translate(s: Shape, dx: number, dy: number): Shape {
-    if (s.t === "pen" || s.t === "erase") return { ...s, pts: s.pts.map((q) => ({ x: q.x + dx, y: q.y + dy })) };
+    if (s.t === "pen" || s.t === "hl" || s.t === "erase") return { ...s, pts: s.pts.map((q) => ({ x: q.x + dx, y: q.y + dy })) };
     if (s.t === "text" || s.t === "math" || s.t === "image") return { ...s, x: s.x + dx, y: s.y + dy };
     return { ...s, a: { x: s.a.x + dx, y: s.a.y + dy }, b: { x: s.b.x + dx, y: s.b.y + dy } };
   }
@@ -253,6 +257,7 @@ export function Whiteboard({ initialBoardId }: { initialBoardId?: string }) {
     if (tool === "eraseObj") { eraseAt(p); return; }
     if (tool === "eraseArea") { eraseOverlaysAt(p); curRef.current = { t: "erase", pts: [p], w: Math.max(14, width * 5) }; return; }
     if (tool === "pen") curRef.current = { t: "pen", pts: [p], c: color, w: width };
+    else if (tool === "highlight") curRef.current = { t: "hl", pts: [p], c: hlColor, w: Math.max(14, width * 6) };
     else curRef.current = { t: tool, a: p, b: p, c: color, w: width };
   }
   function onMove(e: React.PointerEvent) {
@@ -262,7 +267,7 @@ export function Whiteboard({ initialBoardId }: { initialBoardId?: string }) {
     if (tool === "eraseObj") { eraseAt(p); return; }
     if (tool === "eraseArea") eraseOverlaysAt(p);
     const cur = curRef.current; if (!cur) return;
-    if (cur.t === "pen" || cur.t === "erase") cur.pts.push(p); else if ("b" in cur) cur.b = p;
+    if (cur.t === "pen" || cur.t === "erase" || cur.t === "hl") cur.pts.push(p); else if ("b" in cur) cur.b = p;
     redraw();
   }
   function onUp() {
@@ -270,7 +275,7 @@ export function Whiteboard({ initialBoardId }: { initialBoardId?: string }) {
     if (tool === "move") { const moved = movedRef.current; moveRef.current = null; movedRef.current = false; if (moved) commit([...shapes()]); return; }
     if (tool === "eraseObj") { commit([...shapes()]); return; }
     const cur = curRef.current; curRef.current = null; if (!cur) return;
-    if (cur.t === "pen" && cur.pts.length < 2) cur.pts.push({ x: cur.pts[0].x + 0.1, y: cur.pts[0].y });
+    if ((cur.t === "pen" || cur.t === "hl") && cur.pts.length < 2) cur.pts.push({ x: cur.pts[0].x + 0.1, y: cur.pts[0].y });
     commit([...shapes(), cur]);
   }
   function commitText() {
@@ -368,7 +373,7 @@ export function Whiteboard({ initialBoardId }: { initialBoardId?: string }) {
       if (editing) return;
       if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "z") { e.preventDefault(); e.shiftKey ? redo() : undo(); }
       else if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "y") { e.preventDefault(); redo(); }
-      else if (!e.ctrlKey && !e.metaKey) { const m: Record<string, Tool> = { v: "move", p: "pen", l: "line", a: "arrow", r: "rect", o: "ellipse", t: "text", m: "math", e: "eraseObj", x: "eraseArea" }; const tl = m[e.key.toLowerCase()]; if (tl) setTool(tl); }
+      else if (!e.ctrlKey && !e.metaKey) { const m: Record<string, Tool> = { v: "move", p: "pen", h: "highlight", l: "line", a: "arrow", r: "rect", o: "ellipse", t: "text", m: "math", e: "eraseObj", x: "eraseArea" }; const tl = m[e.key.toLowerCase()]; if (tl) setTool(tl); }
     };
     window.addEventListener("keydown", onKey); return () => window.removeEventListener("keydown", onKey);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -383,11 +388,15 @@ export function Whiteboard({ initialBoardId }: { initialBoardId?: string }) {
       <style>{WB_CSS}</style>
       <div style={bar} className="wb-bar">
         <Group>
-          {([["move", "✋"], ["pen", "✏️"], ["line", "／"], ["arrow", "↗"], ["rect", "▭"], ["ellipse", "◯"], ["text", "T"], ["math", "∑"]] as [Tool, string][]).map(([tl, ic]) => (
-            <button key={tl} onClick={() => setTool(tl)} title={tl === "math" ? "Math equation" : tl === "move" ? "Move / drag items" : tl} style={tBtn(tool === tl)}>{ic}</button>
+          {([["move", "✋"], ["pen", "✏️"], ["highlight", "🖍"], ["line", "／"], ["arrow", "↗"], ["rect", "▭"], ["ellipse", "◯"], ["text", "T"], ["math", "∑"]] as [Tool, string][]).map(([tl, ic]) => (
+            <button key={tl} onClick={() => setTool(tl)} title={tl === "math" ? "Math equation" : tl === "move" ? "Move / drag items" : tl === "highlight" ? "Highlighter" : tl} style={tBtn(tool === tl)}>{ic}</button>
           ))}
         </Group>
-        <Group>{COLORS.map((c) => (<button key={c} onClick={() => setColor(c)} title={c} style={{ width: 24, height: 24, borderRadius: "50%", background: c, border: color === c ? "3px solid #fff" : "2px solid #334155", cursor: "pointer", boxShadow: color === c ? "0 0 0 2px #34d27f" : "none" }} />))}</Group>
+        {/* highlighter has its own (translucent) colours; everything else uses the pen colours */}
+        <Group>{(tool === "highlight" ? HL_COLORS : COLORS).map((c) => {
+          const on = tool === "highlight" ? hlColor === c : color === c;
+          return <button key={c} onClick={() => (tool === "highlight" ? setHlColor(c) : setColor(c))} title={c} style={{ width: 24, height: 24, borderRadius: "50%", background: c, border: on ? "3px solid #fff" : "2px solid #334155", cursor: "pointer", boxShadow: on ? "0 0 0 2px #34d27f" : "none" }} />;
+        })}</Group>
         <Group>{WIDTHS.map((w) => (<button key={w} onClick={() => setWidth(w)} title={`width ${w}`} style={tBtn(width === w)}><span style={{ display: "inline-block", width: 18, height: w, background: width === w ? "#04130a" : "#cbd5e1", borderRadius: 4 }} /></button>))}</Group>
         <Group>
           <select value={bg} onChange={(e) => setBg(e.target.value as Bg)} style={sel} title="Background">
