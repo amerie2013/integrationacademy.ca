@@ -230,7 +230,7 @@ function PracticePage() {
         {stats && stats.answered > 0 && (
           <div style={card}>
             <div style={{ display: "flex", gap: 22, flexWrap: "wrap" }}>
-              <Stat label="Day streak" value={stats.streak ? `${stats.streak}🔥` : "0"} />
+              <Stat label="Day streak" value={String(stats.streak)} />
               <Stat label="Questions answered" value={String(stats.answered)} />
               <Stat label="Overall accuracy" value={`${Math.round((stats.correct / stats.answered) * 100)}%`} />
               <Stat label="Sets completed" value={String(stats.sets)} />

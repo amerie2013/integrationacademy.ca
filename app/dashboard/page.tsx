@@ -26,6 +26,7 @@ export default function DashboardPage() {
   const [joinCode, setJoinCode] = useState("");
   const [joinMsg, setJoinMsg] = useState("");
   const [gradedCount, setGradedCount] = useState(0);
+  const [practice, setPractice] = useState<{ answered: number; streak: number; today: number } | null>(null);
 
   async function joinClass() {
     if (!joinCode.trim()) return;
@@ -101,6 +102,36 @@ export default function DashboardPage() {
         .not("grade", "is", null);
       setGradedCount(count ?? 0);
 
+      // Practice streak. The recent slice is only for counting distinct days,
+      // so 1000 rows is far more history than any streak needs; the true total
+      // comes from a head count. Errors mean the table isn't migrated yet.
+      const { count: pTotal, error: pErr } = await supabase
+        .from("practice_answers")
+        .select("id", { count: "exact", head: true })
+        .eq("student_id", session.user.id);
+      if (!pErr) {
+        const { data: recent } = await supabase
+          .from("practice_answers")
+          .select("answered_at")
+          .eq("student_id", session.user.id)
+          .order("answered_at", { ascending: false })
+          .limit(1000);
+        const tz = new Date().getTimezoneOffset();
+        const dayOf = (t: string) => new Date(new Date(t).getTime() - tz * 60000).toISOString().slice(0, 10);
+        const days = new Set((recent ?? []).map((r: any) => dayOf(r.answered_at)));
+        const stamp = (d: Date) => d.toISOString().slice(0, 10);
+        const cursor = new Date(Date.now() - tz * 60000);
+        const todayKey = stamp(cursor);
+        if (!days.has(todayKey)) cursor.setUTCDate(cursor.getUTCDate() - 1);
+        let streak = 0;
+        while (days.has(stamp(cursor))) { streak++; cursor.setUTCDate(cursor.getUTCDate() - 1); }
+        setPractice({
+          answered: pTotal ?? 0,
+          streak,
+          today: (recent ?? []).filter((r: any) => dayOf(r.answered_at) === todayKey).length,
+        });
+      }
+
       setLoading(false);
     })();
   }, [router]);
@@ -154,6 +185,42 @@ export default function DashboardPage() {
             <span style={{ color: "#0d5c30", fontWeight: 700 }}>✓ {gradedCount} of your submission{gradedCount !== 1 ? "s have" : " has"} been graded</span>
             <span style={{ color: "#1b7a44", fontWeight: 700, fontSize: 14 }}>View feedback →</span>
           </Link>
+        )}
+
+        {/* Practice is the one thing an individual student can do every day
+            without waiting on a teacher, so it gets a first-class slot here. */}
+        {courses.length > 0 && (
+          <section style={{ marginBottom: 28 }}>
+            <div style={{ background: "#fff", border: "1px solid #e2e8f0", borderRadius: 14, padding: 18, display: "flex", justifyContent: "space-between", alignItems: "center", gap: 16, flexWrap: "wrap" }}>
+              <div style={{ display: "flex", gap: 26, alignItems: "center", flexWrap: "wrap" }}>
+                {practice && practice.answered > 0 ? (
+                  <>
+                    <div>
+                      <div style={{ fontSize: 26, fontWeight: 800, color: "#0f172a", lineHeight: 1.1 }}>{practice.streak}</div>
+                      <div style={{ fontSize: 12, color: "#64748b", fontWeight: 600 }}>day streak</div>
+                    </div>
+                    <div>
+                      <div style={{ fontSize: 26, fontWeight: 800, color: "#0f172a", lineHeight: 1.1 }}>{practice.answered}</div>
+                      <div style={{ fontSize: 12, color: "#64748b", fontWeight: 600 }}>questions practised</div>
+                    </div>
+                    <div style={{ color: "#475569", fontSize: 14, maxWidth: 340 }}>
+                      {practice.today > 0
+                        ? `${practice.today} answered today — nice. Keep the streak going.`
+                        : "You haven't practised today yet."}
+                    </div>
+                  </>
+                ) : (
+                  <div>
+                    <strong style={{ color: "#0f172a" }}>Practise anytime</strong>
+                    <div style={{ color: "#475569", fontSize: 14 }}>Questions straight from your course, marked instantly — or sit a timed mock exam.</div>
+                  </div>
+                )}
+              </div>
+              <Link href="/practice" style={{ background: "#1b7a44", color: "#fff", padding: "10px 20px", borderRadius: 10, textDecoration: "none", fontWeight: 700, whiteSpace: "nowrap" }}>
+                {practice && practice.answered > 0 ? "Practise now" : "Start practising"}
+              </Link>
+            </div>
+          </section>
         )}
 
         <section style={{ marginBottom: 28 }}>

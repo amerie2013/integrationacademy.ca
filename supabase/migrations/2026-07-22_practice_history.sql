@@ -32,6 +32,11 @@ create index if not exists practice_answers_wrong_idx
 
 alter table practice_answers enable row level security;
 
+-- Postgres has no "create policy if not exists", so drop first — this whole
+-- file is then safe to paste a second time without erroring.
+drop policy if exists "student reads own practice" on practice_answers;
+drop policy if exists "staff reads student practice" on practice_answers;
+
 -- Students read their own history. Writes go through the service role in
 -- /api/practice (grading is server-side), so no insert policy is needed here.
 create policy "student reads own practice" on practice_answers
