@@ -8,6 +8,8 @@ import { SiteHeader } from "../../components/SiteHeader";
 
 type QuizRow = { id: string; title: string; best: number | null; attempts: number; passed: boolean; comment: string | null; lastAt: string | null };
 type AsgRow = { id: string; title: string; submitted: boolean; grade: string | number | null; feedback: string | null; at: string | null };
+type TopicStat = { topic: string; total: number; correct: number; percent: number };
+type PracticeRow = { answered: number; correct: number; weakest: TopicStat[] };
 type CourseProgress = {
   id: string;
   code: string | null;
@@ -15,7 +17,11 @@ type CourseProgress = {
   lessons: number;
   quizzes: QuizRow[];
   assignments: AsgRow[];
+  practice: PracticeRow | null;
 };
+
+// A topic needs a few answers behind it before it's called weak.
+const MIN_FOR_WEAK = 3;
 
 export default function ProgressPage() {
   const router = useRouter();
@@ -102,7 +108,40 @@ export default function ProgressPage() {
         (sb ?? []).forEach((s: any) => { subs[s.assignment_id] = { grade: s.grade, feedback: s.feedback, at: s.submitted_at }; });
       }
 
+      // Self-serve practice history. Paged: Supabase caps a request at 1000 rows
+      // and a keen student passes that quickly.
+      const practiceRows: any[] = [];
+      for (let from = 0; from < 20000; from += 1000) {
+        const { data, error } = await supabase
+          .from("practice_answers")
+          .select("course_id, topic, correct")
+          .eq("student_id", uid)
+          .in("course_id", courseIds)
+          .range(from, from + 999);
+        if (error) break; // table not migrated yet — practice simply doesn't show
+        practiceRows.push(...(data ?? []));
+        if (data.length < 1000) break;
+      }
+      const practiceByCourse: Record<string, PracticeRow> = {};
+      const topicAgg: Record<string, Map<string, { total: number; correct: number }>> = {};
+      for (const r of practiceRows) {
+        const p = (practiceByCourse[r.course_id] ||= { answered: 0, correct: 0, weakest: [] });
+        p.answered++; if (r.correct) p.correct++;
+        const m = (topicAgg[r.course_id] ||= new Map());
+        const e = m.get(r.topic || "Other") ?? { total: 0, correct: 0 };
+        e.total++; if (r.correct) e.correct++;
+        m.set(r.topic || "Other", e);
+      }
+      for (const [cid, m] of Object.entries(topicAgg)) {
+        practiceByCourse[cid].weakest = [...m.entries()]
+          .map(([topic, v]) => ({ topic, ...v, percent: Math.round((v.correct / v.total) * 100) }))
+          .filter((t) => t.total >= MIN_FOR_WEAK)
+          .sort((a, b) => a.percent - b.percent)
+          .slice(0, 3);
+      }
+
       const out: CourseProgress[] = myCourses.map((c) => ({
+        practice: practiceByCourse[c.id] ?? null,
         id: c.id,
         code: c.code,
         title: c.title,
@@ -162,7 +201,30 @@ export default function ProgressPage() {
                 <Stat label="Quizzes passed" value={`${quizzesPassed}/${c.quizzes.length}`} tone="green" />
                 <Stat label="Assignments submitted" value={`${asgSubmitted}/${c.assignments.length}`} />
                 <Stat label="Assignments graded" value={`${asgGraded}/${c.assignments.length}`} tone="green" />
+                {c.practice && <Stat label="Practice questions" value={`${c.practice.answered}`} />}
+                {c.practice && <Stat label="Practice accuracy" value={`${Math.round((c.practice.correct / c.practice.answered) * 100)}%`} tone="green" />}
               </div>
+
+              {/* Self-serve practice — the only progress an individual student
+                  (no class, no assigned quizzes) would otherwise ever see. */}
+              {c.practice && c.practice.weakest.length > 0 && (
+                <div style={{ marginTop: 14 }}>
+                  <h3 style={subHead}>Practice — where you&rsquo;re losing marks</h3>
+                  {c.practice.weakest.map((t) => (
+                    <div key={t.topic} style={rowBox}>
+                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12 }}>
+                        <span style={{ fontWeight: 700, color: "#0f172a", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{t.topic}</span>
+                        <span style={{ display: "flex", gap: 8, alignItems: "center", flexShrink: 0 }}>
+                          <span style={pill(t.percent >= 80 ? "#065f46" : t.percent >= 60 ? "#854d0e" : "#b91c1c", t.percent >= 80 ? "#ecfdf5" : t.percent >= 60 ? "#fefce8" : "#fef2f2")}>
+                            {t.correct}/{t.total} · {t.percent}%
+                          </span>
+                          <Link href={`/practice?course=${c.id}&topic=${encodeURIComponent(t.topic)}`} style={{ color: "#1b7a44", fontWeight: 700, fontSize: 13, textDecoration: "none" }}>Practise →</Link>
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
 
               {c.quizzes.length > 0 && (
                 <div style={{ marginTop: 14 }}>

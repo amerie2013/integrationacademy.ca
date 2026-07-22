@@ -112,7 +112,7 @@ export default function LessonViewPage() {
                 <h1 style={{ fontFamily: "Fraunces, serif", fontSize: 38, fontWeight: 700, margin: "0 0 16px" }}>{title}</h1>
                 <BlockRenderer blocks={blocks} />
                 {role === "student" && (
-                  <div style={{ display: "flex", justifyContent: "center", margin: "32px 0 4px" }}>
+                  <div style={{ display: "flex", justifyContent: "center", gap: 12, flexWrap: "wrap", margin: "32px 0 4px" }}>
                     <button
                       onClick={toggleComplete}
                       disabled={progBusy}
@@ -126,6 +126,20 @@ export default function LessonViewPage() {
                     >
                       {completed ? "✓ Completed" : "Mark as complete"}
                     </button>
+                    {/* Bank questions carry the lesson title as their topic, so this
+                        lands on a set drawn from exactly this lesson. */}
+                    {courseId && (
+                      <Link
+                        href={`/practice?course=${courseId}&topic=${encodeURIComponent(title)}`}
+                        style={{
+                          display: "inline-flex", alignItems: "center", gap: 8, textDecoration: "none",
+                          padding: "11px 22px", borderRadius: 999, fontWeight: 700, fontSize: 15,
+                          border: "1px solid #cbd5e1", background: "#fff", color: "#334155",
+                        }}
+                      >
+                        Practise this topic →
+                      </Link>
+                    )}
                   </div>
                 )}
                 {courseId && <CourseNav courseId={courseId} type="lesson" id={lessonId} />}

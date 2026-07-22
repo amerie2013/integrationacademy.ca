@@ -11,6 +11,27 @@ import { gradeAttempt, shuffle, type Question } from "../../../lib/quiz";
 export const runtime = "nodejs";
 
 const MAX_COUNT = 25;
+const EXAM_MAX = 40;
+
+/**
+ * Round-robin across topics so a mock exam covers the whole course instead of
+ * clustering wherever the bank happens to be densest.
+ */
+function stratify(rows: { id: string; topic: string | null }[], n: number) {
+  const byTopic = new Map<string, string[]>();
+  for (const r of rows) {
+    const key = r.topic || "Other";
+    if (!byTopic.has(key)) byTopic.set(key, []);
+    byTopic.get(key)!.push(r.id);
+  }
+  const buckets = shuffle([...byTopic.values()]).map((v) => shuffle(v));
+  const out: string[] = [];
+  for (let i = 0; out.length < n && buckets.some((b) => b.length); i++) {
+    const b = buckets[i % buckets.length];
+    if (b.length) out.push(b.pop()!);
+  }
+  return shuffle(out);
+}
 
 const makeAdmin = () =>
   createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!, { auth: { persistSession: false } });
@@ -34,7 +55,7 @@ async function gate(req: NextRequest, courseId: string) {
   if (!courseId) return { ok: false as const, res: NextResponse.json({ error: "Pick a course." }, { status: 400 }) };
   const { data: lesson } = await userClient(token).from("lessons").select("id").eq("course_id", courseId).limit(1).maybeSingle();
   if (!lesson) return { ok: false as const, res: NextResponse.json({ error: "You don't have access to this course yet." }, { status: 403 }) };
-  return { ok: true as const };
+  return { ok: true as const, uid: u.user.id };
 }
 
 /** Strip everything that would give the answer away. */
@@ -60,6 +81,57 @@ async function allBank(select: string, courseId: string, topic?: string) {
   return out;
 }
 
+/** A student's practice history for one course. Paged for the same 1000-row reason. */
+async function allHistory(uid: string, courseId: string) {
+  const admin = getAdmin();
+  const PAGE = 1000;
+  const out: any[] = [];
+  for (let from = 0; from < 20000; from += PAGE) {
+    const { data, error } = await admin
+      .from("practice_answers")
+      .select("set_id, question_id, topic, correct, points, max_points, answered_at")
+      .eq("student_id", uid)
+      .eq("course_id", courseId)
+      .order("answered_at", { ascending: false })
+      .range(from, from + PAGE - 1);
+    if (error) throw new Error(error.message);
+    out.push(...(data ?? []));
+    if (!data || data.length < PAGE) break;
+  }
+  return out;
+}
+
+/**
+ * Consecutive days practised, counting back from today. tzOffset is the
+ * browser's getTimezoneOffset() so a 9pm session in Ontario counts as today
+ * rather than tomorrow (the server runs in UTC).
+ */
+function streakOf(rows: any[], tzOffset: number) {
+  const dayOf = (t: string) => new Date(new Date(t).getTime() - tzOffset * 60000).toISOString().slice(0, 10);
+  const days = new Set(rows.map((r) => dayOf(r.answered_at)));
+  if (!days.size) return 0;
+  const today = new Date(Date.now() - tzOffset * 60000);
+  const stamp = (d: Date) => d.toISOString().slice(0, 10);
+  // A streak stays alive until the end of tomorrow — practising yesterday but
+  // not yet today shouldn't read as "0".
+  const cursor = new Date(today);
+  if (!days.has(stamp(cursor))) cursor.setUTCDate(cursor.getUTCDate() - 1);
+  let n = 0;
+  while (days.has(stamp(cursor))) { n++; cursor.setUTCDate(cursor.getUTCDate() - 1); }
+  return n;
+}
+
+/**
+ * Question ids the student got wrong and hasn't since answered correctly.
+ * History arrives newest-first, so the first row seen per question is the
+ * latest verdict — that's the one that decides.
+ */
+function outstandingMistakes(rows: any[]) {
+  const latest = new Map<string, boolean>();
+  for (const r of rows) if (!latest.has(r.question_id)) latest.set(r.question_id, r.correct);
+  return [...latest.entries()].filter(([, ok]) => !ok).map(([id]) => id);
+}
+
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json().catch(() => ({} as any));
@@ -76,12 +148,50 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ topics, total: rows.length });
     }
 
+    // Practice history for this course: totals, streak, and per-topic accuracy.
+    if (action === "stats") {
+      const tz = Number(body?.tzOffset) || 0;
+      const hist = await allHistory(g.uid, courseId);
+      const byTopic = new Map<string, { total: number; correct: number }>();
+      for (const r of hist) {
+        const key = r.topic || "Other";
+        const e = byTopic.get(key) ?? { total: 0, correct: 0 };
+        e.total++; if (r.correct) e.correct++;
+        byTopic.set(key, e);
+      }
+      const topics = [...byTopic.entries()]
+        .map(([topic, v]) => ({ topic, ...v, percent: Math.round((v.correct / v.total) * 100) }))
+        .sort((a, b) => a.percent - b.percent || b.total - a.total);
+      return NextResponse.json({
+        answered: hist.length,
+        correct: hist.filter((r) => r.correct).length,
+        sets: new Set(hist.map((r) => r.set_id)).size,
+        streak: streakOf(hist, tz),
+        mistakes: outstandingMistakes(hist).length,
+        topics,
+      });
+    }
+
     // Build an attempt: sample N ids, then fetch those rows (answers stripped).
     if (action === "start") {
-      const count = Math.min(MAX_COUNT, Math.max(1, Number(body?.count) || 10));
+      const mode = String(body?.mode ?? "");
+      const count = Math.min(mode === "exam" ? EXAM_MAX : MAX_COUNT, Math.max(1, Number(body?.count) || 10));
       const topic = body?.topic ? String(body.topic) : "";
-      const ids = await allBank("id", courseId, topic || undefined);
-      const picked = shuffle(ids.map((r: any) => r.id)).slice(0, count);
+      let picked: string[];
+      if (mode === "exam") {
+        // Cumulative: every topic in the course is eligible, evenly sampled.
+        const rows = await allBank("id, topic", courseId);
+        picked = stratify(rows as any[], count);
+      } else if (mode === "mistakes") {
+        // Only questions whose most recent verdict was wrong — get one right
+        // and it drops out of the pool for good.
+        const hist = await allHistory(g.uid, courseId);
+        picked = shuffle(outstandingMistakes(topic ? hist.filter((r) => r.topic === topic) : hist)).slice(0, count);
+        if (!picked.length) return NextResponse.json({ error: "No mistakes to review — you've answered everything correctly. Try a fresh set!" }, { status: 404 });
+      } else {
+        const ids = await allBank("id", courseId, topic || undefined);
+        picked = shuffle(ids.map((r: any) => r.id)).slice(0, count);
+      }
       if (!picked.length) return NextResponse.json({ error: "No questions available for that selection." }, { status: 404 });
       const { data: rows, error } = await admin
         .from("bank_questions")
@@ -110,7 +220,34 @@ export async function POST(req: NextRequest) {
         answer: r.answer, tolerance: r.tolerance, points: Number(r.points) || 1, feedback: r.feedback, position: i,
       }));
       const result = gradeAttempt(questions, answers);
-      return NextResponse.json({ result, questions });
+
+      // Remember the attempt so /practice and /progress can show growth. A
+      // write failure must not cost the student their marks, so it only logs.
+      try {
+        const setId = crypto.randomUUID();
+        const history = (rows ?? [])
+          .filter((r: any) => answers[r.id] !== undefined && answers[r.id] !== "")
+          .map((r: any) => ({
+            set_id: setId,
+            student_id: g.uid,
+            course_id: courseId,
+            question_id: r.id,
+            topic: r.topic ?? null,
+            correct: !!result.perQuestion[r.id]?.correct,
+            points: Number(result.perQuestion[r.id]?.points) || 0,
+            max_points: Number(r.points) || 1,
+          }));
+        if (history.length) {
+          const { error: hErr } = await admin.from("practice_answers").insert(history);
+          if (hErr) console.error("practice history", hErr.message);
+        }
+      } catch (e) {
+        console.error("practice history", e);
+      }
+
+      // topic per question id, so the client can show an exam breakdown
+      const topics = Object.fromEntries((rows ?? []).map((r: any) => [r.id, r.topic ?? "Other"]));
+      return NextResponse.json({ result, questions, topics });
     }
 
     return NextResponse.json({ error: `Unknown action: ${action}` }, { status: 400 });
