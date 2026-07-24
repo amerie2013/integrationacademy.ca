@@ -10,6 +10,7 @@ import { MathInput } from "../../../components/MathInput";
 import { MaterialsPanel } from "../../../components/MaterialsPanel";
 import { TutorChat } from "../../../components/TutorChat";
 import { SubmissionLink } from "../../../components/SubmissionLink";
+import { prepareUpload, MAX_UPLOAD_MB } from "../../../lib/uploadFile";
 
 type Assignment = { id: string; title: string; description: string | null; due_date: string | null; course_id: string; tutor_enabled: boolean | null };
 
@@ -26,6 +27,7 @@ export default function AssignmentPage() {
   const [fileUrl, setFileUrl] = useState("");
   const [fileName, setFileName] = useState("");
   const [uploading, setUploading] = useState(false);
+  const [uploadNote, setUploadNote] = useState("");
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
   const [showCalc, setShowCalc] = useState(false);
@@ -59,12 +61,21 @@ export default function AssignmentPage() {
 
   async function uploadFile(file: File) {
     setUploading(true);
-    const path = `${id}/${uid}-${Date.now()}-${file.name.replace(/[^\w.\-]/g, "_")}`;
-    const { error } = await supabase.storage.from("submissions").upload(path, file, { upsert: true });
-    if (!error) {
-      const { data } = supabase.storage.from("submissions").getPublicUrl(path);
-      setFileUrl(data.publicUrl); setFileName(file.name);
-    } else alert("Upload failed: " + error.message);
+    setUploadNote("");
+    try {
+      // Shrink photos + enforce the size cap before anything touches storage.
+      const { file: ready, note } = await prepareUpload(file);
+      const path = `${id}/${uid}-${Date.now()}-${ready.name.replace(/[^\w.\-]/g, "_")}`;
+      const { error } = await supabase.storage.from("submissions").upload(path, ready, { upsert: true });
+      if (error) { alert("Upload failed: " + error.message); }
+      else {
+        const { data } = supabase.storage.from("submissions").getPublicUrl(path);
+        setFileUrl(data.publicUrl); setFileName(ready.name);
+        if (note) setUploadNote(note);
+      }
+    } catch (e: any) {
+      alert(e.message || "Couldn't prepare that file for upload.");
+    }
     setUploading(false);
   }
 
@@ -140,18 +151,26 @@ export default function AssignmentPage() {
                 fileUrl ? (
                   <>
                     <SubmissionLink url={fileUrl} name={fileName} style={{ color: "#1b7a44", fontWeight: 700, fontSize: 14, cursor: "pointer" }} />
-                    <button onClick={() => { setFileUrl(""); setFileName(""); }} style={{ background: "none", border: "1px solid #e2e8f0", borderRadius: 7, padding: "5px 10px", fontSize: 12, fontWeight: 700, color: "#dc2626", cursor: "pointer" }}>Remove</button>
+                    <button onClick={() => { setFileUrl(""); setFileName(""); setUploadNote(""); }} style={{ background: "none", border: "1px solid #e2e8f0", borderRadius: 7, padding: "5px 10px", fontSize: 12, fontWeight: 700, color: "#dc2626", cursor: "pointer" }}>Remove</button>
                   </>
                 ) : (
-                  <label style={{ background: "#e7f6ec", color: "#1b7a44", borderRadius: 8, padding: "8px 14px", fontWeight: 700, fontSize: 14, cursor: "pointer" }}>
-                    {uploading ? "Uploading…" : "📎 Attach a file"}
-                    <input type="file" style={{ display: "none" }} onChange={(e) => e.target.files?.[0] && uploadFile(e.target.files[0])} />
+                  <label style={{ background: "#e7f6ec", color: "#1b7a44", borderRadius: 8, padding: "8px 14px", fontWeight: 700, fontSize: 14, cursor: uploading ? "default" : "pointer" }}>
+                    {uploading ? "Preparing…" : "📎 Attach a file"}
+                    <input type="file" accept="image/*,application/pdf" disabled={uploading} style={{ display: "none" }} onChange={(e) => { const f = e.target.files?.[0]; e.target.value = ""; if (f) uploadFile(f); }} />
                   </label>
                 )
               ) : (
                 <span style={{ color: "#94a3b8", fontSize: 13 }}>Run the submissions-file migration to enable attachments.</span>
               )}
             </div>
+            {fileSupported && !fileUrl && (
+              <div style={{ color: "#94a3b8", fontSize: 12, marginTop: 6 }}>
+                Photos are optimised automatically. Max {MAX_UPLOAD_MB} MB — a PDF or a single clear photo works best.
+              </div>
+            )}
+            {uploadNote && (
+              <div style={{ color: "#059669", fontSize: 12, fontWeight: 600, marginTop: 6 }}>✓ {uploadNote}</div>
+            )}
 
             <div style={{ display: "flex", alignItems: "center", gap: 12, marginTop: 14 }}>
               <button onClick={submit} disabled={saving || (!content.trim() && !fileUrl)} style={{ background: "#1b7a44", color: "#fff", border: "none", borderRadius: 10, padding: "11px 22px", fontWeight: 700, fontSize: 15, cursor: "pointer" }}>
