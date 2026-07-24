@@ -9,6 +9,7 @@ import { AssignmentBody } from "../../../components/AssignmentBody";
 import { MathInput } from "../../../components/MathInput";
 import { MaterialsPanel } from "../../../components/MaterialsPanel";
 import { TutorChat } from "../../../components/TutorChat";
+import { SubmissionLink } from "../../../components/SubmissionLink";
 
 type Assignment = { id: string; title: string; description: string | null; due_date: string | null; course_id: string; tutor_enabled: boolean | null };
 
@@ -138,7 +139,7 @@ export default function AssignmentPage() {
               {fileSupported ? (
                 fileUrl ? (
                   <>
-                    <a href={fileUrl} target="_blank" rel="noreferrer" style={{ color: "#1b7a44", fontWeight: 700, fontSize: 14 }}>📎 {fileName || "attached file"}</a>
+                    <SubmissionLink url={fileUrl} name={fileName} style={{ color: "#1b7a44", fontWeight: 700, fontSize: 14, cursor: "pointer" }} />
                     <button onClick={() => { setFileUrl(""); setFileName(""); }} style={{ background: "none", border: "1px solid #e2e8f0", borderRadius: 7, padding: "5px 10px", fontSize: 12, fontWeight: 700, color: "#dc2626", cursor: "pointer" }}>Remove</button>
                   </>
                 ) : (

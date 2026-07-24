@@ -6,6 +6,7 @@ import Link from "next/link";
 import katex from "katex";
 import { supabase } from "@/lib/supabase";
 import { SiteHeader } from "@/components/SiteHeader";
+import { SubmissionLink } from "@/components/SubmissionLink";
 
 type Sub = {
   student_id: string;
@@ -136,7 +137,7 @@ function SubCard({ sub, assignmentId, fileCols, onSaved }: { sub: Sub; assignmen
       <div style={{ background: "#f8fafc", border: "1px solid #e2e8f0", borderRadius: 10, padding: "12px 14px", margin: "12px 0", fontSize: 15, lineHeight: 1.6 }} dangerouslySetInnerHTML={{ __html: body || "<em style='color:#94a3b8'>No written answer.</em>" }} />
 
       {fileCols && sub.file_url && (
-        <a href={sub.file_url} target="_blank" rel="noreferrer" style={{ color: "#1b7a44", fontWeight: 700, fontSize: 14 }}>📎 {sub.file_name || "attached file"}</a>
+        <SubmissionLink url={sub.file_url} name={sub.file_name} style={{ color: "#1b7a44", fontWeight: 700, fontSize: 14, cursor: "pointer" }} />
       )}
 
       <div style={{ display: "flex", gap: 12, alignItems: "flex-end", flexWrap: "wrap", marginTop: 14 }}>
