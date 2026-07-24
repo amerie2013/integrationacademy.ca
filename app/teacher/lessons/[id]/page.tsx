@@ -9,6 +9,7 @@ import { BlockRenderer } from "../../../../components/BlockRenderer";
 import { RichEditor } from "../../../../components/RichEditor";
 import { MaterialsEditor } from "../../../../components/MaterialsEditor";
 import { Block, BlockType, BLOCK_LABELS, newBlock } from "../../../../lib/blocks";
+import { prepareUpload } from "../../../../lib/uploadFile";
 
 const ALL_TYPES: BlockType[] = ["html", "heading", "text", "math", "image", "graph", "multigraph", "animation", "video", "callout", "pointset"];
 
@@ -91,14 +92,19 @@ export default function LessonEditorPage() {
 
   async function uploadPdf(file: File) {
     setUploading(true);
-    const path = `${lessonId}/${Date.now()}-${file.name.replace(/[^\w.\-]/g, "_")}`;
-    const { error } = await supabase.storage.from("lesson-pdfs").upload(path, file, { upsert: true });
-    if (!error) {
-      const { data } = supabase.storage.from("lesson-pdfs").getPublicUrl(path);
-      setPdfUrl(data.publicUrl);
-      setPdfName(file.name);
-    } else {
-      alert("Upload failed: " + error.message);
+    try {
+      const { file: ready } = await prepareUpload(file, { maxMB: 25 });
+      const path = `${lessonId}/${Date.now()}-${ready.name.replace(/[^\w.\-]/g, "_")}`;
+      const { error } = await supabase.storage.from("lesson-pdfs").upload(path, ready, { upsert: true });
+      if (!error) {
+        const { data } = supabase.storage.from("lesson-pdfs").getPublicUrl(path);
+        setPdfUrl(data.publicUrl);
+        setPdfName(ready.name);
+      } else {
+        alert("Upload failed: " + error.message);
+      }
+    } catch (e: any) {
+      alert(e.message || "Couldn't prepare that file for upload.");
     }
     setUploading(false);
   }
@@ -228,13 +234,20 @@ function BlockEditor({
   const [imgUploading, setImgUploading] = useState(false);
   async function uploadImage(file: File) {
     setImgUploading(true);
-    const path = `lesson-images/${block.id}/${Date.now()}-${file.name.replace(/[^\w.\-]/g, "_")}`;
-    const { error } = await supabase.storage.from("materials").upload(path, file, { upsert: true });
-    if (!error) {
-      const { data } = supabase.storage.from("materials").getPublicUrl(path);
-      patch(block.id, { url: data.publicUrl });
-    } else {
-      alert("Image upload failed: " + error.message);
+    try {
+      // In-lesson images are served to every student who opens the lesson, so
+      // compressing them cuts stored size and egress on every view.
+      const { file: ready } = await prepareUpload(file, { maxMB: 25 });
+      const path = `lesson-images/${block.id}/${Date.now()}-${ready.name.replace(/[^\w.\-]/g, "_")}`;
+      const { error } = await supabase.storage.from("materials").upload(path, ready, { upsert: true });
+      if (!error) {
+        const { data } = supabase.storage.from("materials").getPublicUrl(path);
+        patch(block.id, { url: data.publicUrl });
+      } else {
+        alert("Image upload failed: " + error.message);
+      }
+    } catch (e: any) {
+      alert(e.message || "Couldn't prepare that image for upload.");
     }
     setImgUploading(false);
   }

@@ -70,10 +70,14 @@ async function compressImage(file: File): Promise<File> {
 }
 
 /**
- * Prepare a picked file for upload: compress images, then enforce MAX_UPLOAD_MB
- * on whatever remains. Throws a friendly Error if the file is still too big.
+ * Prepare a picked file for upload: compress images, then enforce a size cap on
+ * whatever remains. Throws a friendly Error if the file is still too big.
+ *
+ * `maxMB` defaults to the student limit; admin/staff uploads (scanned course
+ * materials, etc.) can pass a higher ceiling.
  */
-export async function prepareUpload(file: File): Promise<PreparedFile> {
+export async function prepareUpload(file: File, opts: { maxMB?: number } = {}): Promise<PreparedFile> {
+  const maxMB = opts.maxMB ?? MAX_UPLOAD_MB;
   let out = file;
   let note: string | undefined;
 
@@ -82,11 +86,11 @@ export async function prepareUpload(file: File): Promise<PreparedFile> {
     if (out.size < file.size * 0.9) note = `Optimised ${fmtSize(file.size)} → ${fmtSize(out.size)}`;
   }
 
-  if (out.size > MAX_UPLOAD_MB * 1_000_000) {
+  if (out.size > maxMB * 1_000_000) {
     throw new Error(
       isImage(file)
-        ? `This image is ${fmtSize(out.size)} even after optimising — the limit is ${MAX_UPLOAD_MB} MB. Try taking the photo at a lower resolution.`
-        : `That file is ${fmtSize(out.size)} — the limit is ${MAX_UPLOAD_MB} MB. Please upload something smaller (a PDF is usually far smaller than a photo).`,
+        ? `This image is ${fmtSize(out.size)} even after optimising — the limit is ${maxMB} MB. Try taking the photo at a lower resolution.`
+        : `That file is ${fmtSize(out.size)} — the limit is ${maxMB} MB. Please upload something smaller.`,
     );
   }
   return { file: out, note };

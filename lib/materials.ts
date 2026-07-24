@@ -1,4 +1,9 @@
 import { supabase } from "./supabase";
+import { prepareUpload } from "./uploadFile";
+
+// Admin materials can be large scanned handouts, so allow more headroom than a
+// student submission — images are still compressed either way.
+const MATERIAL_MAX_MB = 25;
 
 export type OwnerType = "lesson" | "assignment" | "quiz";
 
@@ -28,12 +33,13 @@ export async function fetchMaterials(ownerType: OwnerType, ownerId: string): Pro
 
 /** Upload a file to the `materials` storage bucket and return its public URL. */
 export async function uploadMaterialFile(file: File, ownerType: OwnerType, ownerId: string): Promise<{ url: string; name: string; size: number }> {
-  const safe = file.name.replace(/[^\w.\-]/g, "_");
+  const { file: ready } = await prepareUpload(file, { maxMB: MATERIAL_MAX_MB });
+  const safe = ready.name.replace(/[^\w.\-]/g, "_");
   const path = `${ownerType}/${ownerId}/${Date.now()}-${safe}`;
-  const { error } = await supabase.storage.from("materials").upload(path, file, { upsert: true });
+  const { error } = await supabase.storage.from("materials").upload(path, ready, { upsert: true });
   if (error) throw error;
   const { data } = supabase.storage.from("materials").getPublicUrl(path);
-  return { url: data.publicUrl, name: file.name, size: file.size };
+  return { url: data.publicUrl, name: ready.name, size: ready.size };
 }
 
 export function prettySize(bytes: number | null | undefined): string {
