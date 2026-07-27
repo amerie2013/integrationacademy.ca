@@ -63,12 +63,23 @@ export default function AssignmentPage() {
     setUploading(true);
     setUploadNote("");
     try {
+      // A signed-in session is required to write to the (RLS-protected) bucket.
+      // getSession refreshes an expired token, so a page left open still works;
+      // if there's genuinely no session, say so instead of a cryptic RLS error.
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) { alert("Please sign in again to attach a file — your session has expired."); setUploading(false); return; }
+
       // Shrink photos + enforce the size cap before anything touches storage.
       const { file: ready, note } = await prepareUpload(file);
-      const path = `${id}/${uid}-${Date.now()}-${ready.name.replace(/[^\w.\-]/g, "_")}`;
+      const path = `${id}/${session.user.id}-${Date.now()}-${ready.name.replace(/[^\w.\-]/g, "_")}`;
       const { error } = await supabase.storage.from("submissions").upload(path, ready, { upsert: true });
-      if (error) { alert("Upload failed: " + error.message); }
-      else {
+      if (error) {
+        alert(
+          /row-level security|policy/i.test(error.message)
+            ? "Upload was blocked by a permissions rule. If this keeps happening, the submissions storage policy needs the fix migration applied."
+            : "Upload failed: " + error.message,
+        );
+      } else {
         const { data } = supabase.storage.from("submissions").getPublicUrl(path);
         setFileUrl(data.publicUrl); setFileName(ready.name);
         if (note) setUploadNote(note);
