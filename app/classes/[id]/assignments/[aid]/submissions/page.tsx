@@ -7,8 +7,10 @@ import katex from "katex";
 import { supabase } from "@/lib/supabase";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SubmissionLink } from "@/components/SubmissionLink";
+import { AiGradeButton } from "@/components/AiGradeButton";
 
 type Sub = {
+  id?: string;
   student_id: string;
   content: string | null;
   grade: number | null;
@@ -54,10 +56,10 @@ export default function ClassAssignmentSubmissionsPage() {
     if (rosterIds.length === 0) { setSubs([]); return; }
 
     let rows: any[] = [];
-    const cols = "student_id, content, grade, feedback, submitted_at, file_url, file_name";
+    const cols = "id, student_id, content, grade, feedback, submitted_at, file_url, file_name";
     const withFiles = await supabase.from("submissions").select(cols).eq("assignment_id", aid).in("student_id", rosterIds).order("submitted_at", { ascending: false });
     if (!withFiles.error) rows = withFiles.data ?? [];
-    else { setFileCols(false); rows = (await supabase.from("submissions").select("student_id, content, grade, feedback, submitted_at").eq("assignment_id", aid).in("student_id", rosterIds).order("submitted_at", { ascending: false })).data ?? []; }
+    else { setFileCols(false); rows = (await supabase.from("submissions").select("id, student_id, content, grade, feedback, submitted_at").eq("assignment_id", aid).in("student_id", rosterIds).order("submitted_at", { ascending: false })).data ?? []; }
 
     const ids = rows.map((r) => r.student_id);
     const names: Record<string, { name: string; email: string | null }> = {};
@@ -155,6 +157,7 @@ function SubCard({ sub, assignmentId, fileCols, onSaved }: { sub: Sub; assignmen
           {saving ? "Saving…" : saved ? "Saved ✓" : "Save grade"}
         </button>
       </div>
+      {sub.id && <AiGradeButton submissionId={sub.id} onUse={(g, f) => { setGrade(g); setFeedback(f); }} />}
       {err && <div style={{ color: "#dc2626", fontSize: 13, marginTop: 8 }}>{err}</div>}
     </div>
   );
