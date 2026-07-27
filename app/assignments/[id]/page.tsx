@@ -74,19 +74,11 @@ export default function AssignmentPage() {
       const path = `${id}/${session.user.id}-${Date.now()}-${ready.name.replace(/[^\w.\-]/g, "_")}`;
       const { error } = await supabase.storage.from("submissions").upload(path, ready, { upsert: true });
       if (error) {
-        // TEMP DIAGNOSTIC: surface the raw error + the JWT role claim, so we can
-        // see whether the storage request is actually reaching Supabase as an
-        // authenticated user. Remove once the upload issue is resolved.
-        let jwtRole = "n/a";
-        try {
-          const { data: { session: s } } = await supabase.auth.getSession();
-          if (s?.access_token) {
-            const p = s.access_token.split(".")[1].replace(/-/g, "+").replace(/_/g, "/");
-            jwtRole = JSON.parse(atob(p)).role ?? "(no role claim)";
-          } else jwtRole = "NO SESSION";
-        } catch { jwtRole = "decode-failed"; }
-        const st = (error as any).statusCode ?? (error as any).status ?? "?";
-        alert(`Upload diagnostic\n\nstatus: ${st}\nmsg: ${error.message}\njwt role: ${jwtRole}\nuid: ${uid ?? "none"}\npath: ${path}`);
+        alert(
+          /row-level security|policy/i.test(error.message)
+            ? "Upload was blocked by a permissions rule. Please make sure the latest submissions-storage migration has been applied."
+            : "Upload failed: " + error.message,
+        );
       } else {
         const { data } = supabase.storage.from("submissions").getPublicUrl(path);
         setFileUrl(data.publicUrl); setFileName(ready.name);
