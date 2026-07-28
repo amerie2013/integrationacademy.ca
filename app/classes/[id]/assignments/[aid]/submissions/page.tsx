@@ -18,9 +18,14 @@ type Sub = {
   submitted_at: string | null;
   file_url?: string | null;
   file_name?: string | null;
+  files?: { url: string; name?: string | null }[] | null;
   name: string;
   email: string | null;
 };
+
+/** All attachments for a submission: the `files` array, or the legacy single file. */
+const attList = (s: Sub): { url: string; name?: string | null }[] =>
+  Array.isArray(s.files) && s.files.length ? s.files : s.file_url ? [{ url: s.file_url, name: s.file_name }] : [];
 
 function renderMath(text: string): string {
   const esc = text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
@@ -56,10 +61,13 @@ export default function ClassAssignmentSubmissionsPage() {
     if (rosterIds.length === 0) { setSubs([]); return; }
 
     let rows: any[] = [];
-    const cols = "id, student_id, content, grade, feedback, submitted_at, file_url, file_name";
-    const withFiles = await supabase.from("submissions").select(cols).eq("assignment_id", aid).in("student_id", rosterIds).order("submitted_at", { ascending: false });
-    if (!withFiles.error) rows = withFiles.data ?? [];
-    else { setFileCols(false); rows = (await supabase.from("submissions").select("id, student_id, content, grade, feedback, submitted_at").eq("assignment_id", aid).in("student_id", rosterIds).order("submitted_at", { ascending: false })).data ?? []; }
+    const base = "id, student_id, content, grade, feedback, submitted_at";
+    const q = (cols: string) => supabase.from("submissions").select(cols).eq("assignment_id", aid).in("student_id", rosterIds).order("submitted_at", { ascending: false });
+    // Graduated fallback: files array → legacy single file → no file columns.
+    let r = await q(`${base}, file_url, file_name, files`);
+    if (r.error) r = await q(`${base}, file_url, file_name`);
+    if (!r.error) rows = r.data ?? [];
+    else { setFileCols(false); rows = (await q(base)).data ?? []; }
 
     const ids = rows.map((r) => r.student_id);
     const names: Record<string, { name: string; email: string | null }> = {};
@@ -138,8 +146,12 @@ function SubCard({ sub, assignmentId, fileCols, onSaved }: { sub: Sub; assignmen
 
       <div style={{ background: "#f8fafc", border: "1px solid #e2e8f0", borderRadius: 10, padding: "12px 14px", margin: "12px 0", fontSize: 15, lineHeight: 1.6 }} dangerouslySetInnerHTML={{ __html: body || "<em style='color:#94a3b8'>No written answer.</em>" }} />
 
-      {fileCols && sub.file_url && (
-        <SubmissionLink url={sub.file_url} name={sub.file_name} style={{ color: "#1b7a44", fontWeight: 700, fontSize: 14, cursor: "pointer" }} />
+      {fileCols && attList(sub).length > 0 && (
+        <div style={{ display: "flex", flexDirection: "column", gap: 4, margin: "4px 0" }}>
+          {attList(sub).map((f, i) => (
+            <SubmissionLink key={f.url + i} url={f.url} name={f.name} style={{ color: "#1b7a44", fontWeight: 700, fontSize: 14, cursor: "pointer" }} />
+          ))}
+        </div>
       )}
 
       <div style={{ display: "flex", gap: 12, alignItems: "flex-end", flexWrap: "wrap", marginTop: 14 }}>

@@ -13,6 +13,10 @@ import { SubmissionLink } from "../../../components/SubmissionLink";
 import { prepareUpload, MAX_UPLOAD_MB } from "../../../lib/uploadFile";
 
 type Assignment = { id: string; title: string; description: string | null; due_date: string | null; course_id: string; tutor_enabled: boolean | null };
+type Att = { url: string; name: string; size: number };
+
+const MAX_FILES = 5;
+const MAX_TOTAL_MB = 20; // combined size cap across all attachments
 
 export default function AssignmentPage() {
   const id = useParams().id as string;
@@ -24,8 +28,8 @@ export default function AssignmentPage() {
   const [content, setContent] = useState("");
   const [submission, setSubmission] = useState<any | null>(null);
   const [fileSupported, setFileSupported] = useState(false);
-  const [fileUrl, setFileUrl] = useState("");
-  const [fileName, setFileName] = useState("");
+  const [filesColumn, setFilesColumn] = useState(false); // is the jsonb `files` column present?
+  const [files, setFiles] = useState<Att[]>([]);
   const [uploading, setUploading] = useState(false);
   const [uploadNote, setUploadNote] = useState("");
   const [saving, setSaving] = useState(false);
@@ -42,16 +46,26 @@ export default function AssignmentPage() {
         setUid(session.user.id);
         const { data: me } = await supabase.from("profiles").select("role").eq("id", session.user.id).single();
         setRole(me?.role ?? null);
-        // try with file columns; fall back if the migration isn't applied
+        // Graduated fallback so nothing breaks between deploy and each migration:
+        // multi-file (files column) → legacy single file → no attachments.
         let sub: any = null;
-        const withFiles = await supabase.from("submissions").select("content, grade, feedback, submitted_at, file_url, file_name").eq("assignment_id", id).eq("student_id", session.user.id).maybeSingle();
-        if (!withFiles.error) {
-          setFileSupported(true);
-          sub = withFiles.data;
-          if (sub?.file_url) { setFileUrl(sub.file_url); setFileName(sub.file_name ?? ""); }
+        const q = (cols: string) => supabase.from("submissions").select(cols).eq("assignment_id", id).eq("student_id", session.user.id).maybeSingle();
+        const withArr = await q("content, grade, feedback, submitted_at, file_url, file_name, files");
+        if (!withArr.error) {
+          setFileSupported(true); setFilesColumn(true);
+          sub = withArr.data as any;
+          const arr = Array.isArray(sub?.files) ? sub.files : [];
+          if (arr.length) setFiles(arr.map((f: any) => ({ url: f.url, name: f.name ?? "file", size: Number(f.size) || 0 })));
+          else if (sub?.file_url) setFiles([{ url: sub.file_url, name: sub.file_name ?? "file", size: 0 }]);
         } else {
-          const basic = await supabase.from("submissions").select("content, grade, feedback, submitted_at").eq("assignment_id", id).eq("student_id", session.user.id).maybeSingle();
-          sub = basic.data;
+          const withOne = await q("content, grade, feedback, submitted_at, file_url, file_name");
+          if (!withOne.error) {
+            setFileSupported(true);
+            sub = withOne.data as any;
+            if (sub?.file_url) setFiles([{ url: sub.file_url, name: sub.file_name ?? "file", size: 0 }]);
+          } else {
+            sub = (await q("content, grade, feedback, submitted_at")).data as any;
+          }
         }
         if (sub) { setSubmission(sub); setContent(sub.content ?? ""); }
       }
@@ -59,7 +73,11 @@ export default function AssignmentPage() {
     })();
   }, [id]);
 
-  async function uploadFile(file: File) {
+  const maxFiles = filesColumn ? MAX_FILES : 1; // pre-migration: single file only
+  const totalBytes = files.reduce((s, f) => s + (f.size || 0), 0);
+
+  async function addFile(file: File) {
+    if (files.length >= maxFiles) { alert(maxFiles === 1 ? "Only one file can be attached." : `You can attach up to ${maxFiles} files.`); return; }
     setUploading(true);
     setUploadNote("");
     try {
@@ -69,8 +87,12 @@ export default function AssignmentPage() {
       const { data: { session } } = await supabase.auth.getSession();
       if (!session) { alert("Please sign in again to attach a file — your session has expired."); setUploading(false); return; }
 
-      // Shrink photos + enforce the size cap before anything touches storage.
+      // Shrink photos + enforce the per-file size cap before anything touches storage.
       const { file: ready, note } = await prepareUpload(file);
+      if (totalBytes + ready.size > MAX_TOTAL_MB * 1_000_000) {
+        alert(`Your attachments would total more than ${MAX_TOTAL_MB} MB. Remove a file or upload a smaller one.`);
+        setUploading(false); return;
+      }
       const path = `${id}/${session.user.id}-${Date.now()}-${ready.name.replace(/[^\w.\-]/g, "_")}`;
       const { error } = await supabase.storage.from("submissions").upload(path, ready, { upsert: true });
       if (error) {
@@ -81,7 +103,7 @@ export default function AssignmentPage() {
         );
       } else {
         const { data } = supabase.storage.from("submissions").getPublicUrl(path);
-        setFileUrl(data.publicUrl); setFileName(ready.name);
+        setFiles((fs) => [...fs, { url: data.publicUrl, name: ready.name, size: ready.size }]);
         if (note) setUploadNote(note);
       }
     } catch (e: any) {
@@ -90,11 +112,21 @@ export default function AssignmentPage() {
     setUploading(false);
   }
 
+  function removeFile(idx: number) {
+    setFiles((fs) => fs.filter((_, i) => i !== idx));
+    setUploadNote("");
+  }
+
   async function submit() {
-    if (!uid || (!content.trim() && !fileUrl)) return;
+    if (!uid || (!content.trim() && files.length === 0)) return;
     setSaving(true);
     const payload: any = { assignment_id: id, student_id: uid, content };
-    if (fileSupported) { payload.file_url = fileUrl || null; payload.file_name = fileName || null; }
+    if (fileSupported) {
+      // First file mirrors the legacy columns so old readers keep working.
+      payload.file_url = files[0]?.url ?? null;
+      payload.file_name = files[0]?.name ?? null;
+      if (filesColumn) payload.files = files.map((f) => ({ url: f.url, name: f.name, size: f.size }));
+    }
     await supabase.from("submissions").upsert(payload, { onConflict: "assignment_id,student_id" });
     setSaving(false); setSaved(true); setTimeout(() => setSaved(false), 2000);
   }
@@ -156,35 +188,37 @@ export default function AssignmentPage() {
               </div>
             )}
 
-            {/* file attachment */}
-            <div style={{ display: "flex", alignItems: "center", gap: 12, marginTop: 12, flexWrap: "wrap" }}>
-              {fileSupported ? (
-                fileUrl ? (
-                  <>
-                    <SubmissionLink url={fileUrl} name={fileName} style={{ color: "#1b7a44", fontWeight: 700, fontSize: 14, cursor: "pointer" }} />
-                    <button onClick={() => { setFileUrl(""); setFileName(""); setUploadNote(""); }} style={{ background: "none", border: "1px solid #e2e8f0", borderRadius: 7, padding: "5px 10px", fontSize: 12, fontWeight: 700, color: "#dc2626", cursor: "pointer" }}>Remove</button>
-                  </>
-                ) : (
-                  <label style={{ background: "#e7f6ec", color: "#1b7a44", borderRadius: 8, padding: "8px 14px", fontWeight: 700, fontSize: 14, cursor: uploading ? "default" : "pointer" }}>
-                    {uploading ? "Preparing…" : "📎 Attach a file"}
-                    <input type="file" accept="image/*,application/pdf" disabled={uploading} style={{ display: "none" }} onChange={(e) => { const f = e.target.files?.[0]; e.target.value = ""; if (f) uploadFile(f); }} />
+            {/* file attachments */}
+            {fileSupported ? (
+              <div style={{ marginTop: 12 }}>
+                {files.length > 0 && (
+                  <div style={{ display: "flex", flexDirection: "column", gap: 6, marginBottom: 10 }}>
+                    {files.map((f, i) => (
+                      <div key={f.url} style={{ display: "flex", alignItems: "center", gap: 10, background: "#f8fafc", border: "1px solid #e2e8f0", borderRadius: 9, padding: "7px 12px" }}>
+                        <SubmissionLink url={f.url} name={f.name} style={{ color: "#1b7a44", fontWeight: 700, fontSize: 14, cursor: "pointer", flex: 1, minWidth: 0, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }} />
+                        <button onClick={() => removeFile(i)} style={{ background: "none", border: "1px solid #e2e8f0", borderRadius: 7, padding: "5px 10px", fontSize: 12, fontWeight: 700, color: "#dc2626", cursor: "pointer", flexShrink: 0 }}>Remove</button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+                {files.length < maxFiles && (
+                  <label style={{ display: "inline-block", background: "#e7f6ec", color: "#1b7a44", borderRadius: 8, padding: "8px 14px", fontWeight: 700, fontSize: 14, cursor: uploading ? "default" : "pointer" }}>
+                    {uploading ? "Preparing…" : files.length ? "📎 Add another file" : "📎 Attach a file"}
+                    <input type="file" accept="image/*,application/pdf" disabled={uploading} style={{ display: "none" }} onChange={(e) => { const f = e.target.files?.[0]; e.target.value = ""; if (f) addFile(f); }} />
                   </label>
-                )
-              ) : (
-                <span style={{ color: "#94a3b8", fontSize: 13 }}>Run the submissions-file migration to enable attachments.</span>
-              )}
-            </div>
-            {fileSupported && !fileUrl && (
-              <div style={{ color: "#94a3b8", fontSize: 12, marginTop: 6 }}>
-                Photos are optimised automatically. Max {MAX_UPLOAD_MB} MB — a PDF or a single clear photo works best.
+                )}
+                <div style={{ color: "#94a3b8", fontSize: 12, marginTop: 6 }}>
+                  {maxFiles > 1 ? `Up to ${maxFiles} files, ${MAX_TOTAL_MB} MB total` : `One file, up to ${MAX_UPLOAD_MB} MB`} · photos are optimised automatically
+                  {files.length > 0 && ` · ${files.length}/${maxFiles} attached`}
+                </div>
+                {uploadNote && <div style={{ color: "#059669", fontSize: 12, fontWeight: 600, marginTop: 6 }}>✓ {uploadNote}</div>}
               </div>
-            )}
-            {uploadNote && (
-              <div style={{ color: "#059669", fontSize: 12, fontWeight: 600, marginTop: 6 }}>✓ {uploadNote}</div>
+            ) : (
+              <div style={{ marginTop: 12 }}><span style={{ color: "#94a3b8", fontSize: 13 }}>Run the submissions-file migration to enable attachments.</span></div>
             )}
 
             <div style={{ display: "flex", alignItems: "center", gap: 12, marginTop: 14 }}>
-              <button onClick={submit} disabled={saving || (!content.trim() && !fileUrl)} style={{ background: "#1b7a44", color: "#fff", border: "none", borderRadius: 10, padding: "11px 22px", fontWeight: 700, fontSize: 15, cursor: "pointer" }}>
+              <button onClick={submit} disabled={saving || (!content.trim() && files.length === 0)} style={{ background: "#1b7a44", color: "#fff", border: "none", borderRadius: 10, padding: "11px 22px", fontWeight: 700, fontSize: 15, cursor: "pointer" }}>
                 {saving ? "Saving…" : submission ? "Update submission" : "Submit"}
               </button>
               {saved && <span style={{ color: "#059669", fontWeight: 600, fontSize: 14 }}>Saved ✓</span>}

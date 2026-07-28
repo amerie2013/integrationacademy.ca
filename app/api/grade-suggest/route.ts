@@ -56,12 +56,11 @@ export async function POST(req: NextRequest) {
     // Authorise + fetch by reading the submission through the CALLER's session:
     // the submissions RLS already encodes "who may see this submission" (admin,
     // course teacher, class teacher). If they can read it, they may grade it.
-    const { data: sub, error: subErr } = await userClient(token)
-      .from("submissions")
-      .select("id, content, file_url, file_name, assignment_id, student_id")
-      .eq("id", submissionId)
-      .maybeSingle();
-    if (subErr || !sub) return NextResponse.json({ error: "You don't have access to this submission." }, { status: 403 });
+    const uc = userClient(token);
+    let subRes = await uc.from("submissions").select("id, content, file_url, file_name, files, assignment_id, student_id").eq("id", submissionId).maybeSingle();
+    if (subRes.error) subRes = await uc.from("submissions").select("id, content, file_url, file_name, assignment_id, student_id").eq("id", submissionId).maybeSingle();
+    const sub: any = subRes.data;
+    if (subRes.error || !sub) return NextResponse.json({ error: "You don't have access to this submission." }, { status: 403 });
 
     const admin = getAdmin();
 
@@ -81,27 +80,29 @@ export async function POST(req: NextRequest) {
 
     const typed = (sub.content ?? "").trim();
 
-    // Try to attach the uploaded photo as an image the model can read.
-    let imageDataUrl: string | null = null;
-    let fileNote: string | undefined;
-    if (sub.file_url) {
-      const isImage = IMAGE_EXT.test(sub.file_name || sub.file_url);
-      if (isImage) {
-        const path = submissionPath(sub.file_url);
-        if (path) {
-          const { data: blob, error: dlErr } = await admin.storage.from("submissions").download(path);
-          if (!dlErr && blob) {
-            const buf = Buffer.from(await blob.arrayBuffer());
-            const mime = blob.type && blob.type.startsWith("image/") ? blob.type : "image/jpeg";
-            imageDataUrl = `data:${mime};base64,${buf.toString("base64")}`;
-          }
-        }
-      } else {
-        fileNote = "The attached file isn't an image (e.g. a PDF), so the AI couldn't read it — it graded the typed answer only.";
-      }
-    }
+    // All attachments: the `files` array, or the legacy single file.
+    const atts: { url: string; name?: string | null }[] =
+      Array.isArray(sub.files) && sub.files.length ? sub.files : sub.file_url ? [{ url: sub.file_url, name: sub.file_name }] : [];
 
-    if (!typed && !imageDataUrl) {
+    // Download every image attachment (cap at 5) so the AI can read multi-page
+    // handwritten work. Non-image files (PDFs) are noted but not read.
+    const imageDataUrls: string[] = [];
+    let skippedNonImage = 0;
+    for (const a of atts.slice(0, 5)) {
+      if (!IMAGE_EXT.test(a.name || a.url)) { skippedNonImage++; continue; }
+      const path = submissionPath(a.url);
+      if (!path) continue;
+      const { data: blob, error: dlErr } = await admin.storage.from("submissions").download(path);
+      if (dlErr || !blob) continue;
+      const buf = Buffer.from(await blob.arrayBuffer());
+      const mime = blob.type && blob.type.startsWith("image/") ? blob.type : "image/jpeg";
+      imageDataUrls.push(`data:${mime};base64,${buf.toString("base64")}`);
+    }
+    const fileNote = skippedNonImage > 0
+      ? `${skippedNonImage} attached file(s) aren't images (e.g. PDFs), so the AI couldn't read them — it graded the typed answer${imageDataUrls.length ? " and photos" : ""} only.`
+      : undefined;
+
+    if (!typed && imageDataUrls.length === 0) {
       return NextResponse.json({ error: "Nothing for the AI to read — this submission has no typed answer and no readable image." }, { status: 422 });
     }
 
@@ -112,9 +113,9 @@ export async function POST(req: NextRequest) {
       `Respond with ONLY a JSON object: {"mark": <number 0..${outOf}>, "feedback": "<2-4 sentences: what is correct, what is missing or wrong, and why this mark. Address the student.>"}.`;
 
     const userContent: any[] = [
-      { type: "text", text: `Assignment: ${asg?.title ?? "(untitled)"}\n\n${asg?.description ?? ""}\n\nStudent's typed answer:\n${typed || "(none — see the attached image)"}` },
+      { type: "text", text: `Assignment: ${asg?.title ?? "(untitled)"}\n\n${asg?.description ?? ""}\n\nStudent's typed answer:\n${typed || "(none — see the attached image(s))"}` },
     ];
-    if (imageDataUrl) userContent.push({ type: "image_url", image_url: { url: imageDataUrl } });
+    for (const url of imageDataUrls) userContent.push({ type: "image_url", image_url: { url } });
 
     const aiRes = await fetch(GEMINI_URL, {
       method: "POST",
@@ -147,11 +148,11 @@ export async function POST(req: NextRequest) {
 
     // Cache (staff-only table; never exposed to the student).
     await admin.from("submission_ai_grades").upsert(
-      { submission_id: submissionId, mark, max_points: outOf, feedback, used_image: !!imageDataUrl, model, created_at: new Date().toISOString() },
+      { submission_id: submissionId, mark, max_points: outOf, feedback, used_image: imageDataUrls.length > 0, model, created_at: new Date().toISOString() },
       { onConflict: "submission_id" },
     );
 
-    return NextResponse.json({ mark, outOf, feedback, usedImage: !!imageDataUrl });
+    return NextResponse.json({ mark, outOf, feedback, usedImage: imageDataUrls.length > 0 });
   } catch (e: any) {
     console.error("grade-suggest", e);
     return NextResponse.json({ error: "Unexpected error." }, { status: 500 });
