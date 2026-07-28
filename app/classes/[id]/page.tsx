@@ -6,7 +6,14 @@ import Link from "next/link";
 import { supabase } from "../../../lib/supabase";
 import { SiteHeader } from "../../../components/SiteHeader";
 
-type SeqItem = { type: "lesson" | "assignment" | "quiz" | "worksheet"; id: string; title: string };
+type SeqItem = {
+  type: "lesson" | "assignment" | "quiz" | "worksheet";
+  id: string;
+  title: string;
+  due_date?: string | null;   // assignments only
+  created_by?: string | null; // assignments only
+  class_id?: string | null;   // assignments only
+};
 
 export default function ClassManagePage() {
   const router = useRouter();
@@ -22,9 +29,9 @@ export default function ClassManagePage() {
   const [ann, setAnn] = useState<{ id: string; body: string; created_at: string }[]>([]);
   const [annBody, setAnnBody] = useState("");
   const [annBusy, setAnnBusy] = useState(false);
-  const [hw, setHw] = useState({ title: "", body: "", due: "" });
-  const [hwBusy, setHwBusy] = useState(false);
-  const [hwMsg, setHwMsg] = useState("");
+  const [uid, setUid] = useState<string | null>(null);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [busyAsg, setBusyAsg] = useState<string | null>(null);
 
   async function loadAll(courseId: string) {
     const [{ data: ls }, { data: qs }, { data: ws }, { data: ord }, { data: lk }] = await Promise.all([
@@ -36,14 +43,14 @@ export default function ClassManagePage() {
     ]);
     // Course-wide (class_id null) + this class's assignments. Falls back if the
     // class_id column isn't there yet (migration unrun).
-    let asRes = await supabase.from("assignments").select("id, title").eq("course_id", courseId).or(`class_id.is.null,class_id.eq.${classId}`).order("created_at");
-    if (asRes.error) asRes = await supabase.from("assignments").select("id, title").eq("course_id", courseId).order("created_at");
+    let asRes: { data: any[] | null; error: any } = await supabase.from("assignments").select("id, title, due_date, created_by, class_id").eq("course_id", courseId).or(`class_id.is.null,class_id.eq.${classId}`).order("created_at");
+    if (asRes.error) asRes = await supabase.from("assignments").select("id, title, due_date").eq("course_id", courseId).order("created_at");
     const as = asRes.data;
     setLocked(new Set((lk ?? []).map((r: any) => `${r.item_type}:${r.item_id}`)));
     const def: SeqItem[] = [
       ...(ls ?? []).map((l: any) => ({ type: "lesson" as const, id: l.id, title: l.title })),
       ...(qs ?? []).map((q: any) => ({ type: "quiz" as const, id: q.id, title: q.title })),
-      ...(as ?? []).map((a: any) => ({ type: "assignment" as const, id: a.id, title: a.title })),
+      ...(as ?? []).map((a: any) => ({ type: "assignment" as const, id: a.id, title: a.title, due_date: a.due_date ?? null, created_by: a.created_by ?? null, class_id: a.class_id ?? null })),
       ...(ws ?? []).map((w: any) => ({ type: "worksheet" as const, id: w.id, title: w.code ? `${w.code} ${w.title}` : w.title })),
     ];
     // Default order: group by subject code (1.1, 1.2, …); within a subject lesson → worksheet → assignment → quiz.
@@ -67,6 +74,8 @@ export default function ClassManagePage() {
       if (!c) return router.push("/classes");
       const { data: me } = await supabase.from("profiles").select("role").eq("id", session.user.id).single();
       if (c.teacher_id !== session.user.id && me?.role !== "admin") return router.push("/classes");
+      setUid(session.user.id);
+      setIsAdmin(me?.role === "admin");
       setCls({ name: c.name, join_code: c.join_code, course_id: c.course_id });
       const { data: course } = await supabase.from("courses").select("title, code").eq("id", c.course_id).single();
       setCourseTitle(course ? (course.code ? `${course.code} — ${course.title}` : course.title) : "");
@@ -97,19 +106,35 @@ export default function ClassManagePage() {
     await loadAnnouncements();
   }
 
-  async function createHomework() {
-    if (!hw.title.trim() || !cls) return;
-    setHwBusy(true); setHwMsg("");
+  // Teachers may set an assignment's due date or delete their own class homework
+  // (enforced server-side in /api/class-assignment); they can't create or edit
+  // assignment content — that's admin curriculum.
+  async function callAsg(action: "set-due" | "delete", assignmentId: string, due?: string) {
     const { data: { session } } = await supabase.auth.getSession();
-    const { error } = await supabase.from("assignments").insert({
-      course_id: cls.course_id, class_id: classId, created_by: session?.user.id,
-      title: hw.title.trim(), description: hw.body.trim() || null,
-      due_date: hw.due ? new Date(hw.due).toISOString() : null, published: true,
+    if (!session) { alert("Please sign in again."); return false; }
+    setBusyAsg(assignmentId);
+    const res = await fetch("/api/class-assignment", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${session.access_token}` },
+      body: JSON.stringify({ action, classId, assignmentId, due }),
     });
-    setHwBusy(false);
-    if (error) { setHwMsg(/class_id|exist|column/i.test(error.message) ? "Homework needs the 2026-07-06_class_announcements_and_homework.sql migration." : error.message); return; }
-    setHw({ title: "", body: "", due: "" }); setHwMsg("Homework posted ✓");
-    await loadAll(cls.course_id);
+    const j = await res.json().catch(() => ({}));
+    setBusyAsg(null);
+    if (!res.ok) { alert(j.error || "Something went wrong."); return false; }
+    return true;
+  }
+
+  async function setDue(assignmentId: string, due: string) {
+    if (await callAsg("set-due", assignmentId, due)) {
+      setItems((its) => its.map((it) => (it.type === "assignment" && it.id === assignmentId ? { ...it, due_date: due ? new Date(due).toISOString() : null } : it)));
+    }
+  }
+
+  async function deleteAssignment(assignmentId: string, title: string) {
+    if (!confirm(`Delete "${title}"? This removes the assignment and its submissions. This can't be undone.`)) return;
+    if (await callAsg("delete", assignmentId)) {
+      setItems((its) => its.filter((it) => !(it.type === "assignment" && it.id === assignmentId)));
+    }
   }
 
   async function persistOrder(list: SeqItem[]) {
@@ -205,26 +230,6 @@ export default function ClassManagePage() {
           )}
         </div>
 
-        {/* Assign homework */}
-        <div style={panel}>
-          <h2 style={panelH}>📝 Assign homework</h2>
-          <p style={{ color: "#64748b", fontSize: 13, margin: "0 0 10px" }}>Create an assignment for this class with an optional due date. Students submit it and you grade it from <strong>Submissions</strong>.</p>
-          <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
-            <input value={hw.title} onChange={(e) => setHw({ ...hw, title: e.target.value })} placeholder="Title (e.g. Homework — Section 1.3)"
-              style={{ flex: "2 1 260px", padding: "10px 12px", borderRadius: 9, border: "1px solid #cbd5e1", fontSize: 14, boxSizing: "border-box" }} />
-            <input type="date" value={hw.due} onChange={(e) => setHw({ ...hw, due: e.target.value })}
-              style={{ flex: "1 1 150px", padding: "10px 12px", borderRadius: 9, border: "1px solid #cbd5e1", fontSize: 14, boxSizing: "border-box" }} />
-          </div>
-          <textarea value={hw.body} onChange={(e) => setHw({ ...hw, body: e.target.value })} rows={3} placeholder="Instructions for students… (supports \\( LaTeX \\))"
-            style={{ width: "100%", padding: "10px 12px", borderRadius: 9, border: "1px solid #cbd5e1", fontSize: 14, fontFamily: "inherit", boxSizing: "border-box", resize: "vertical", marginTop: 10 }} />
-          <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "center", gap: 12, marginTop: 8 }}>
-            {hwMsg && <span style={{ fontSize: 13, color: hwMsg.includes("✓") ? "#059669" : "#dc2626" }}>{hwMsg}</span>}
-            <button onClick={createHomework} disabled={hwBusy || !hw.title.trim()} style={{ background: "#c2410c", color: "#fff", border: "none", borderRadius: 9, padding: "9px 18px", fontWeight: 700, fontSize: 14, cursor: hwBusy || !hw.title.trim() ? "default" : "pointer", opacity: hwBusy || !hw.title.trim() ? 0.55 : 1 }}>
-              {hwBusy ? "Posting…" : "Post homework"}
-            </button>
-          </div>
-        </div>
-
         <div style={{ background: "#fff", border: "1px solid #e2e8f0", borderRadius: 14, overflow: "hidden" }}>
           {items.length === 0 ? <div style={{ padding: 18, color: "#94a3b8" }}>No content yet.</div> : items.map((it, i) => {
             const t = TYPE[it.type];
@@ -254,10 +259,25 @@ export default function ClassManagePage() {
                   <Link href={`/classes/${classId}/quizzes/${it.id}/results`} style={gradeLink}>Results →</Link>
                 ) : it.type === "assignment" ? (
                   <>
+                    <label title="Set the due date for this class" style={{ display: "flex", alignItems: "center", gap: 5, fontSize: 12, color: "#64748b", fontWeight: 600 }}>
+                      Due
+                      <input
+                        type="date"
+                        value={it.due_date ? new Date(it.due_date).toISOString().slice(0, 10) : ""}
+                        disabled={busyAsg === it.id}
+                        onChange={(e) => setDue(it.id, e.target.value)}
+                        style={{ padding: "5px 8px", borderRadius: 8, border: "1px solid #cbd5e1", fontSize: 12, color: "#334155" }}
+                      />
+                    </label>
                     <Link href={`/classes/${classId}/assignments/${it.id}/submissions`} style={gradeLink}>Submissions →</Link>
                     <button onClick={() => toggleLock(it)} style={{ border: "1px solid", borderColor: isLocked ? "#fecaca" : "#a7f3d0", background: isLocked ? "#fef2f2" : "#ecfdf5", color: isLocked ? "#b91c1c" : "#065f46", borderRadius: 999, padding: "6px 14px", fontWeight: 700, fontSize: 13, cursor: "pointer", minWidth: 104 }}>
                       {isLocked ? "🔒 Hidden" : "✓ Visible"}
                     </button>
+                    {(isAdmin || it.created_by === uid || (it.class_id && it.class_id === classId)) && (
+                      <button onClick={() => deleteAssignment(it.id, it.title)} disabled={busyAsg === it.id} title="Delete this assignment" style={{ border: "1px solid #fecaca", background: "#fff", color: "#dc2626", borderRadius: 999, padding: "6px 12px", fontWeight: 700, fontSize: 13, cursor: "pointer" }}>
+                        Delete
+                      </button>
+                    )}
                   </>
                 ) : (
                   <button onClick={() => toggleLock(it)} style={{ border: "1px solid", borderColor: isLocked ? "#fecaca" : "#a7f3d0", background: isLocked ? "#fef2f2" : "#ecfdf5", color: isLocked ? "#b91c1c" : "#065f46", borderRadius: 999, padding: "6px 14px", fontWeight: 700, fontSize: 13, cursor: "pointer", minWidth: 104 }}>
