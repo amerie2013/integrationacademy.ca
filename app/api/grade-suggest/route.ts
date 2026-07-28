@@ -126,8 +126,10 @@ export async function POST(req: NextRequest) {
     const system =
       `You are a fair, experienced Ontario secondary-school math teacher. You are ADVISING a human teacher who makes the final grading decision — you only suggest. ` +
       `The QUESTIONS are in the "Assignment" section below. The student's WORK is in the attached image(s)/PDF(s) and/or the typed answer — a scan may show only their answers and working WITHOUT restating the questions, so match each piece of their work to the corresponding assignment question. ` +
-      `Identify EVERY question in the assignment, in order. Grade EACH question out of 10. If a question is unanswered, give it 0 and say it was skipped. Read handwriting and scans carefully, including the mathematics; reward correct reasoning and note errors or missing steps. ` +
-      `Be encouraging but honest. Respond with ONLY a JSON object of this exact shape: ` +
+      `Identify EVERY question in the assignment, in order. Grade EACH question out of 10. ` +
+      `Grade GENEROUSLY and give the student the benefit of the doubt — the goal is to encourage. Award full or near-full marks (8-10) when the core answer is correct, even if the explanation is brief, informal, or a step is left implicit. Give solid partial credit (5-7) when the main idea is right but something is incomplete. Only give low marks (0-2) when a question is skipped or the answer is fundamentally wrong. When unsure between two marks, choose the higher one. Do not deduct heavily for missing wording, minor omissions, or not "showing all work" if the answer itself is right. ` +
+      `Read handwriting and scans carefully, including the mathematics. If a question is truly unanswered, give it 0 and gently note it was skipped. ` +
+      `Be warm and encouraging in every comment. Respond with ONLY a JSON object of this exact shape: ` +
       `{"questions":[{"label":"<short question label e.g. Q1>","mark":<0-10>,"comment":"<one short sentence on this question>"}, ...],"feedback":"<2-3 sentence overall summary addressed to the student>"}. ` +
       `Include one entry per assignment question, in order.`;
 
