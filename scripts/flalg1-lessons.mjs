@@ -447,3 +447,111 @@ authored["3.4"] = L("3.4", "Graphing Two-Variable Linear Inequalities & Systems"
   <div class="qa-box" ${QA}><h3>Q2: How do I pick which side to shade?</h3><p><em>Test one point off the line — the origin if it's not on the boundary. True ⇒ shade that side; false ⇒ shade the other.</em></p></div>
   <div class="qa-box" ${QA}><h3>Q3: What's the solution of a system of inequalities?</h3><p><em>The region where <strong>all</strong> the individual shadings overlap.</em></p></div>
 </div>`)]);
+
+authored["4.1"] = L("4.1", "Laws of Exponents & Rational Exponents", [html(String.raw`<div class="lecture-box">
+  <h1>⚡ Laws of Exponents &amp; Rational Exponents</h1>
+  <p><strong>Overview.</strong> Exponents are repeated multiplication, and a handful of <strong>laws</strong> let you simplify powers without expanding them. Extending the laws to <strong>zero, negative, and rational</strong> exponents unlocks roots and prepares you for exponential functions.</p>
+  <h2>📌 The laws</h2>
+  <ul>
+    <li><strong>Product:</strong> \(a^m \cdot a^n = a^{m+n}\). <strong>Quotient:</strong> \(\dfrac{a^m}{a^n} = a^{m-n}\). <strong>Power:</strong> \((a^m)^n = a^{mn}\).</li>
+    <li><strong>Zero:</strong> \(a^0 = 1\). <strong>Negative:</strong> \(a^{-n} = \dfrac{1}{a^n}\).</li>
+    <li><strong>Rational:</strong> \(a^{m/n} = \sqrt[n]{a^m} = \left(\sqrt[n]{a}\right)^m\).</li>
+  </ul>
+  <h2>🔵 Examples</h2>
+  <div class="example-box" ${EX}><h3>Example 1: Product &amp; power laws</h3><p>Simplify \((2x^2)^3 \cdot x\).</p><div class="solution"><div class="step"><strong>Power law:</strong> \((2x^2)^3 = 8x^6\).</div><div class="step"><strong>Product law:</strong> \(8x^6 \cdot x = 8x^7\).</div><em>Conclusion: \(8x^7\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 2: Quotient law</h3><p>Simplify \(\dfrac{x^7}{x^3}\).</p><div class="solution"><div class="step"><strong>Subtract exponents:</strong> \(x^{7-3}\).</div><em>Conclusion: \(x^4\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 3: Zero &amp; negative exponents</h3><p>Evaluate \(3^{-2}\) and \(5^0\).</p><div class="solution"><div class="step"><strong>Negative:</strong> \(3^{-2} = \dfrac{1}{3^2} = \dfrac{1}{9}\).</div><div class="step"><strong>Zero:</strong> \(5^0 = 1\).</div><em>Conclusion: \(\tfrac{1}{9}\) and \(1\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 4: Rational exponent</h3><p>Evaluate \(27^{2/3}\).</p><div class="solution"><div class="step"><strong>Root then power:</strong> \(\sqrt[3]{27} = 3\), then \(3^2 = 9\).</div><em>Conclusion: \(9\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 5: Combine several laws</h3><p>Simplify \(\dfrac{x^4 \cdot x^{-1}}{x^2}\).</p><div class="solution"><div class="step"><strong>Top (product):</strong> \(x^{4+(-1)} = x^3\).</div><div class="step"><strong>Quotient:</strong> \(x^{3-2} = x^1\).</div><em>Conclusion: \(x\). ✓</em></div></div>
+  <h2>🟡 Practice Questions</h2>
+  <div class="practice-box" ${PR}><h3>Question 1</h3><p>Simplify \(a^5 \cdot a^2\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(a^7\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 2</h3><p>Simplify \((3x^3)^2\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(9x^6\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 3</h3><p>Evaluate \(2^{-3}\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(\dfrac{1}{8}\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 4</h3><p>Evaluate \(16^{3/4}\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(\left(\sqrt[4]{16}\right)^3 = 2^3 = 8\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 5</h3><p>Simplify \(\dfrac{y^6}{y^2 \cdot y}\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(\dfrac{y^6}{y^3} = y^3\).</em></div></div></details></div>
+  <h2>❓ Q&amp;A Summary</h2>
+  <div class="qa-box" ${QA}><h3>Q1: Why does \(a^0 = 1\)?</h3><p><em>Because \(\dfrac{a^n}{a^n} = a^{n-n} = a^0\), and any number over itself is 1.</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q2: What does a negative exponent mean?</h3><p><em>“Reciprocal”: \(a^{-n} = \dfrac{1}{a^n}\). It does <strong>not</strong> make the number negative.</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q3: How do I read \(a^{m/n}\)?</h3><p><em>The bottom \(n\) is the root, the top \(m\) is the power: \(a^{m/n} = \sqrt[n]{a^m}\).</em></p></div>
+</div>`)]);
+
+authored["4.2"] = L("4.2", "Operations with Radical Expressions", [html(String.raw`<div class="lecture-box">
+  <h1>√ Operations with Radical Expressions</h1>
+  <p><strong>Overview.</strong> A <strong>radical</strong> is a root, like \(\sqrt{50}\). We <strong>simplify</strong> radicals by pulling out perfect-square factors, <strong>add or subtract</strong> only <em>like</em> radicals, and <strong>multiply</strong> using \(\sqrt{a}\cdot\sqrt{b}=\sqrt{ab}\).</p>
+  <h2>📌 The toolkit</h2>
+  <ul>
+    <li><strong>Simplify:</strong> \(\sqrt{ab} = \sqrt{a}\,\sqrt{b}\); factor out the largest perfect square.</li>
+    <li><strong>Add/subtract:</strong> combine only <strong>like radicals</strong> (same number under the root), like adding like terms.</li>
+    <li><strong>Multiply:</strong> \(\sqrt{a}\cdot\sqrt{b} = \sqrt{ab}\), then simplify. <strong>Rationalize</strong> to clear a root from a denominator.</li>
+  </ul>
+  <h2>🔵 Examples</h2>
+  <div class="example-box" ${EX}><h3>Example 1: Simplify a radical</h3><p>Simplify \(\sqrt{50}\).</p><div class="solution"><div class="step"><strong>Factor out a perfect square:</strong> \(\sqrt{25 \cdot 2} = \sqrt{25}\,\sqrt{2}\).</div><em>Conclusion: \(5\sqrt{2}\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 2: Add like radicals</h3><p>Simplify \(3\sqrt{2} + 4\sqrt{2}\).</p><div class="solution"><div class="step"><strong>Same radical — add coefficients:</strong> \((3+4)\sqrt{2}\).</div><em>Conclusion: \(7\sqrt{2}\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 3: Simplify, then combine</h3><p>Simplify \(\sqrt{12} + \sqrt{27}\).</p><div class="solution"><div class="step"><strong>Simplify each:</strong> \(\sqrt{12}=2\sqrt{3}\), \(\sqrt{27}=3\sqrt{3}\).</div><div class="step"><strong>Add like radicals:</strong> \(2\sqrt{3}+3\sqrt{3}\).</div><em>Conclusion: \(5\sqrt{3}\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 4: Multiply radicals</h3><p>Simplify \(\sqrt{3}\cdot\sqrt{6}\).</p><div class="solution"><div class="step"><strong>Multiply under one root:</strong> \(\sqrt{18}\).</div><div class="step"><strong>Simplify:</strong> \(\sqrt{9\cdot 2}=3\sqrt{2}\).</div><em>Conclusion: \(3\sqrt{2}\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 5: Rationalize a denominator</h3><p>Simplify \(\dfrac{1}{\sqrt{2}}\).</p><div class="solution"><div class="step"><strong>Multiply top and bottom by \(\sqrt{2}\):</strong> \(\dfrac{\sqrt{2}}{\sqrt{2}\,\sqrt{2}} = \dfrac{\sqrt{2}}{2}\).</div><em>Conclusion: \(\dfrac{\sqrt{2}}{2}\). ✓</em></div></div>
+  <h2>🟡 Practice Questions</h2>
+  <div class="practice-box" ${PR}><h3>Question 1</h3><p>Simplify \(\sqrt{72}\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(\sqrt{36\cdot2}=6\sqrt{2}\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 2</h3><p>Simplify \(5\sqrt{3} - 2\sqrt{3}\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(3\sqrt{3}\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 3</h3><p>Simplify \(\sqrt{8} + \sqrt{18}\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(2\sqrt{2}+3\sqrt{2}=5\sqrt{2}\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 4</h3><p>Simplify \(\sqrt{5}\cdot\sqrt{10}\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(\sqrt{50}=5\sqrt{2}\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 5</h3><p>Rationalize \(\dfrac{3}{\sqrt{5}}\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(\dfrac{3\sqrt{5}}{5}\).</em></div></div></details></div>
+  <h2>❓ Q&amp;A Summary</h2>
+  <div class="qa-box" ${QA}><h3>Q1: When can I add two radicals?</h3><p><em>Only when the expression under the root is the same after simplifying — like terms, e.g. \(2\sqrt3+3\sqrt3\).</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q2: Is \(\sqrt{a}+\sqrt{b}=\sqrt{a+b}\)?</h3><p><em>No! That's a common trap. \(\sqrt{9}+\sqrt{16}=3+4=7\), not \(\sqrt{25}=5\).</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q3: Why rationalize the denominator?</h3><p><em>It's the standard tidy form — no roots left downstairs — and makes further computation easier.</em></p></div>
+</div>`)]);
+
+authored["4.3"] = L("4.3", "Addition, Subtraction, and Multiplication of Polynomials", [html(String.raw`<div class="lecture-box">
+  <h1>➗ Adding, Subtracting &amp; Multiplying Polynomials</h1>
+  <p><strong>Overview.</strong> A <strong>polynomial</strong> is a sum of terms like \(3x^2 - 5x + 4\). Adding and subtracting is just <strong>combining like terms</strong>; multiplying is the <strong>distributive property</strong> applied carefully (FOIL is the two-binomial case).</p>
+  <h2>📌 The toolkit</h2>
+  <ul>
+    <li><strong>Like terms</strong> share the same variable and exponent (\(3x^2\) and \(-5x^2\)); only like terms combine.</li>
+    <li><strong>Subtracting</strong> means adding the opposite — distribute the minus sign to <em>every</em> term.</li>
+    <li><strong>Multiplying:</strong> distribute each term of one factor across the other; <strong>FOIL</strong> (First-Outer-Inner-Last) for two binomials.</li>
+  </ul>
+  <h2>🔵 Examples</h2>
+  <div class="example-box" ${EX}><h3>Example 1: Add polynomials</h3><p>Add \((3x^2 + 2x - 1) + (x^2 - 5x + 4)\).</p><div class="solution"><div class="step"><strong>Combine like terms:</strong> \((3+1)x^2 + (2-5)x + (-1+4)\).</div><em>Conclusion: \(4x^2 - 3x + 3\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 2: Subtract polynomials</h3><p>Subtract \((5x^2 - 3x) - (2x^2 + x - 4)\).</p><div class="solution"><div class="step"><strong>Distribute the minus:</strong> \(5x^2 - 3x - 2x^2 - x + 4\).</div><div class="step"><strong>Combine:</strong> \(3x^2 - 4x + 4\).</div><em>Conclusion: \(3x^2 - 4x + 4\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 3: Monomial × polynomial</h3><p>Expand \(3x(2x^2 - x + 5)\).</p><div class="solution"><div class="step"><strong>Distribute \(3x\):</strong> \(6x^3 - 3x^2 + 15x\).</div><em>Conclusion: \(6x^3 - 3x^2 + 15x\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 4: FOIL two binomials</h3><p>Expand \((x + 3)(x - 5)\).</p><div class="solution"><div class="step"><strong>FOIL:</strong> \(x^2 - 5x + 3x - 15\).</div><div class="step"><strong>Combine:</strong> \(x^2 - 2x - 15\).</div><em>Conclusion: \(x^2 - 2x - 15\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 5: Binomial × trinomial</h3><p>Expand \((x + 2)(x^2 + 3x + 1)\).</p><div class="solution"><div class="step"><strong>Distribute each term:</strong> \(x^3 + 3x^2 + x + 2x^2 + 6x + 2\).</div><div class="step"><strong>Combine:</strong> \(x^3 + 5x^2 + 7x + 2\).</div><em>Conclusion: \(x^3 + 5x^2 + 7x + 2\). ✓</em></div></div>
+  <h2>🟡 Practice Questions</h2>
+  <div class="practice-box" ${PR}><h3>Question 1</h3><p>Add \((2x^2 + x) + (3x^2 - 4x + 2)\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(5x^2 - 3x + 2\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 2</h3><p>Subtract \((4x^2 - 2x + 1) - (x^2 - 3x)\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(3x^2 + x + 1\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 3</h3><p>Expand \(2x^2(3x - 4)\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(6x^3 - 8x^2\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 4</h3><p>Expand \((x - 2)(x + 7)\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(x^2 + 5x - 14\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 5</h3><p>Expand \((2x + 1)(x^2 - x + 3)\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(2x^3 - x^2 + 5x + 3\).</em></div></div></details></div>
+  <h2>❓ Q&amp;A Summary</h2>
+  <div class="qa-box" ${QA}><h3>Q1: What exactly are “like terms”?</h3><p><em>Terms with the same variable to the same power. \(3x^2\) and \(7x^2\) combine; \(3x^2\) and \(3x\) do not.</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q2: What's the #1 subtraction mistake?</h3><p><em>Only flipping the sign of the first term. Distribute the minus to <strong>every</strong> term in the second polynomial.</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q3: What's the degree of a product?</h3><p><em>Add the degrees: a degree-1 times a degree-2 gives a degree-3 polynomial.</em></p></div>
+</div>`)]);
+
+authored["4.4"] = L("4.4", "Special Polynomial Products (Difference of Squares, Perfect Square Trinomials)", [html(String.raw`<div class="lecture-box">
+  <h1>✨ Special Polynomial Products</h1>
+  <p><strong>Overview.</strong> A few products appear so often they're worth memorizing as <strong>patterns</strong>. Recognizing them lets you expand (and later factor) in one step — no full FOIL needed.</p>
+  <h2>📌 The patterns</h2>
+  <ul>
+    <li><strong>Difference of squares:</strong> \((a + b)(a - b) = a^2 - b^2\) — the middle terms cancel.</li>
+    <li><strong>Perfect square (sum):</strong> \((a + b)^2 = a^2 + 2ab + b^2\).</li>
+    <li><strong>Perfect square (difference):</strong> \((a - b)^2 = a^2 - 2ab + b^2\).</li>
+  </ul>
+  <h2>🔵 Examples</h2>
+  <div class="example-box" ${EX}><h3>Example 1: Difference of squares</h3><p>Expand \((x + 4)(x - 4)\).</p><div class="solution"><div class="step"><strong>Pattern with \(a=x,\ b=4\):</strong> \(x^2 - 16\).</div><em>Conclusion: \(x^2 - 16\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 2: Perfect square (sum)</h3><p>Expand \((x + 5)^2\).</p><div class="solution"><div class="step"><strong>\(a^2 + 2ab + b^2\):</strong> \(x^2 + 2(5)x + 25\).</div><em>Conclusion: \(x^2 + 10x + 25\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 3: Perfect square (difference)</h3><p>Expand \((x - 3)^2\).</p><div class="solution"><div class="step"><strong>\(a^2 - 2ab + b^2\):</strong> \(x^2 - 2(3)x + 9\).</div><em>Conclusion: \(x^2 - 6x + 9\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 4: Coefficient in a difference of squares</h3><p>Expand \((2x + 3)(2x - 3)\).</p><div class="solution"><div class="step"><strong>\(a=2x,\ b=3\):</strong> \((2x)^2 - 3^2\).</div><em>Conclusion: \(4x^2 - 9\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 5: Coefficient in a perfect square</h3><p>Expand \((3x - 1)^2\).</p><div class="solution"><div class="step"><strong>\(a=3x,\ b=1\):</strong> \((3x)^2 - 2(3x)(1) + 1^2\).</div><em>Conclusion: \(9x^2 - 6x + 1\). ✓</em></div></div>
+  <h2>🟡 Practice Questions</h2>
+  <div class="practice-box" ${PR}><h3>Question 1</h3><p>Expand \((x + 7)(x - 7)\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(x^2 - 49\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 2</h3><p>Expand \((x + 2)^2\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(x^2 + 4x + 4\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 3</h3><p>Expand \((x - 6)^2\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(x^2 - 12x + 36\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 4</h3><p>Expand \((5x + 4)(5x - 4)\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(25x^2 - 16\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 5</h3><p>Expand \((2x - 5)^2\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(4x^2 - 20x + 25\).</em></div></div></details></div>
+  <h2>❓ Q&amp;A Summary</h2>
+  <div class="qa-box" ${QA}><h3>Q1: Is \((x + 5)^2 = x^2 + 25\)?</h3><p><em>No — you must include the middle term \(2ab\): it's \(x^2 + 10x + 25\).</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q2: Why do the middle terms cancel in a difference of squares?</h3><p><em>The outer and inner products are \(+ab\) and \(-ab\), which add to zero.</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q3: How do I recognize these patterns quickly?</h3><p><em>Same two terms with opposite signs ⇒ difference of squares; a binomial squared ⇒ perfect square trinomial.</em></p></div>
+</div>`)]);
