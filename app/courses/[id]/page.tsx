@@ -214,6 +214,9 @@ export default function StudentCoursePage() {
     ...quizzes.map((q) => ({ id: q.id, kind: "quiz" as const, code: codeOf(q.title), title: q.title, href: `/quizzes/${q.id}`, due: (q.due_date ?? null) as string | null })),
   ].sort((x, y) => x.code[0] - y.code[0] || x.code[1] - y.code[1] || KIND[x.kind] - KIND[y.kind]);
 
+  // Per-course accent — keyed by course code (e.g. ALG1 = Florida orange 🍊).
+  const t = ACCENTS[CODE_ACCENT[course.code ?? ""] ?? "default"];
+
   return (
     <main style={{ minHeight: "100vh" }}>
       <SiteHeader />
@@ -222,13 +225,13 @@ export default function StudentCoursePage() {
 
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", margin: "12px 0 28px", gap: 20 }}>
           <div>
-            {course.code && <div style={{ fontFamily: "JetBrains Mono, monospace", color: "#1b7a44", fontWeight: 700, fontSize: 14 }}>{course.code}</div>}
+            {course.code && <div style={{ fontFamily: "JetBrains Mono, monospace", color: t.primary, fontWeight: 700, fontSize: 14 }}>{course.code}</div>}
             <h1 style={{ fontFamily: "Fraunces, serif", fontSize: 32, fontWeight: 700, margin: "4px 0 8px" }}>{course.title}</h1>
-            <span style={{ fontSize: 13, fontWeight: 700, color: "#0d9488", background: "#ecfdf5", padding: "3px 10px", borderRadius: 999 }}>{levelLabel(course.level)}</span>
+            <span style={{ fontSize: 13, fontWeight: 700, color: t.badge, background: t.badgeBg, padding: "3px 10px", borderRadius: 999 }}>{levelLabel(course.level)}</span>
             {course.description && <p style={{ color: "#475569", fontSize: 16, lineHeight: 1.6, marginTop: 16, maxWidth: 560 }}>{course.description}</p>}
           </div>
           {access && !enrolled && (
-            <button onClick={enroll} disabled={busy} style={{ background: "#0d9488", color: "#fff", border: "none", borderRadius: 10, padding: "12px 24px", fontWeight: 700, fontSize: 15, cursor: "pointer", whiteSpace: "nowrap" }}>
+            <button onClick={enroll} disabled={busy} style={{ background: t.badge, color: "#fff", border: "none", borderRadius: 10, padding: "12px 24px", fontWeight: 700, fontSize: 15, cursor: "pointer", whiteSpace: "nowrap" }}>
               {busy ? "Adding…" : "Add to my courses"}
             </button>
           )}
@@ -262,14 +265,14 @@ export default function StudentCoursePage() {
           </div>
         ) : (
           <>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 16, flexWrap: "wrap", background: "#e7f6ec", border: "1px solid #bfe3cd", borderRadius: 14, padding: "14px 18px", marginBottom: 24 }}>
-              <div style={{ color: "#0d5c30", fontWeight: 600, fontSize: 14 }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 16, flexWrap: "wrap", background: t.soft, border: `1px solid ${t.softBorder}`, borderRadius: 14, padding: "14px 18px", marginBottom: 24 }}>
+              <div style={{ color: t.dark, fontWeight: 600, fontSize: 14 }}>
                 {lessons.length} lesson{lessons.length !== 1 ? "s" : ""} · {quizzes.length} quiz{quizzes.length !== 1 ? "zes" : ""} · {assignments.length} assignment{assignments.length !== 1 ? "s" : ""}
                 {Object.keys(bestScores).length > 0 && <> · {Object.keys(bestScores).length}/{quizzes.length} quizzes attempted</>}
               </div>
               <div style={{ display: "flex", gap: 14, alignItems: "center" }}>
-                {lessons.length > 0 && <Link href={`/lessons/${lessons[0].id}`} style={{ background: "#1b7a44", color: "#fff", padding: "8px 16px", borderRadius: 9, textDecoration: "none", fontWeight: 700, fontSize: 14 }}>Start learning →</Link>}
-                <Link href="/progress" style={{ color: "#1b7a44", fontWeight: 700, fontSize: 14, textDecoration: "none" }}>My progress ↗</Link>
+                {lessons.length > 0 && <Link href={`/lessons/${lessons[0].id}`} style={{ background: t.primary, color: "#fff", padding: "8px 16px", borderRadius: 9, textDecoration: "none", fontWeight: 700, fontSize: 14 }}>Start learning →</Link>}
+                <Link href="/progress" style={{ color: t.primary, fontWeight: 700, fontSize: 14, textDecoration: "none" }}>My progress ↗</Link>
               </div>
             </div>
 
@@ -332,6 +335,14 @@ function BuyBtn({ children, onClick, busy, primary }: { children: React.ReactNod
     }}>{busy ? "Starting…" : children}</button>
   );
 }
+// Per-course accent palettes. Default is the site green/teal; extend CODE_ACCENT
+// to give a course its own colour (ALG1 → Florida orange 🍊).
+const ACCENTS = {
+  default: { primary: "#1b7a44", dark: "#0d5c30", soft: "#e7f6ec", softBorder: "#bfe3cd", badge: "#0d9488", badgeBg: "#ecfdf5" },
+  orange: { primary: "#ea580c", dark: "#9a3412", soft: "#fff7ed", softBorder: "#fed7aa", badge: "#ea580c", badgeBg: "#fff7ed" },
+} as const;
+const CODE_ACCENT: Record<string, keyof typeof ACCENTS> = { ALG1: "orange" };
+
 const buyCard: React.CSSProperties = { background: "#fff", border: "1px solid #fed7aa", borderRadius: 12, padding: "14px 16px" };
 const buyLabel: React.CSSProperties = { fontSize: 12, fontWeight: 800, color: "#9a3412", textTransform: "uppercase", letterSpacing: "0.04em", marginBottom: 10 };
 const badgeBase = (bg: string, fg: string): React.CSSProperties => ({ fontSize: 10.5, fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.04em", color: fg, background: bg, padding: "3px 8px", borderRadius: 999, whiteSpace: "nowrap", minWidth: 78, textAlign: "center" });
