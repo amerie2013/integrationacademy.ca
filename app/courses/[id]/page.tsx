@@ -51,13 +51,14 @@ export default function StudentCoursePage() {
     const ra = await supabase.from("assignments").select("id, title, due_date, published").eq("course_id", courseId).order("created_at");
     if (!ra.error) as = (ra.data ?? []).filter((a: any) => a.published !== false);
     else as = (await supabase.from("assignments").select("id, title, due_date").eq("course_id", courseId).order("created_at")).data ?? [];
-    // Override with this student's class due dates (independent per class), so
-    // the course page matches the assignment page.
+    // Class students see their class's own due date (blank until the teacher
+    // sets one) — classes never inherit the course default. Individual students
+    // (no class here) keep the course default. Matches the assignment page.
     if (classIds.length && as.length) {
       const { data: caRows } = await supabase.from("class_assignments").select("assignment_id, due_date").in("class_id", classIds);
       const dueByAsg: Record<string, string | null> = {};
       (caRows ?? []).forEach((r: any) => { if (r.due_date) dueByAsg[r.assignment_id] = r.due_date; });
-      as = as.map((a: any) => (a.id in dueByAsg ? { ...a, due_date: dueByAsg[a.id] } : a));
+      as = as.map((a: any) => ({ ...a, due_date: dueByAsg[a.id] ?? null }));
     }
     let qs: any[] = [];
     if (classIds.length) {

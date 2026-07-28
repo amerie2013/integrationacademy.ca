@@ -42,19 +42,25 @@ export default function AssignmentPage() {
       const { data } = await supabase.from("assignments").select("id, title, description, due_date, course_id, tutor_enabled").eq("id", id).single();
       if (!data) { setNotFound(true); setLoading(false); return; }
       setA(data as Assignment);
-      let due: string | null = (data.due_date as string | null) ?? null; // course default
+      // Default is the admin's course-level due date — used only for INDIVIDUAL
+      // students (no class). Class students get their class's own date instead,
+      // which starts blank; classes never inherit the course default.
+      let due: string | null = (data.due_date as string | null) ?? null;
       const { data: { session } } = await supabase.auth.getSession();
       if (session) {
         setUid(session.user.id);
         const { data: me } = await supabase.from("profiles").select("role").eq("id", session.user.id).single();
         setRole(me?.role ?? null);
-        // Show the due date for THIS student's class, if their class has set one.
         const { data: mem } = await supabase.from("class_students").select("class_id").eq("student_id", session.user.id);
-        const classIds = (mem ?? []).map((m: any) => m.class_id);
-        if (classIds.length) {
-          const { data: cas } = await supabase.from("class_assignments").select("due_date").eq("assignment_id", id).in("class_id", classIds);
-          const withDue = (cas ?? []).find((r: any) => r.due_date);
-          if (withDue) due = withDue.due_date;
+        const memIds = (mem ?? []).map((m: any) => m.class_id);
+        if (memIds.length) {
+          const { data: cls } = await supabase.from("classes").select("id").eq("course_id", data.course_id).in("id", memIds);
+          const classIdsForCourse = (cls ?? []).map((c: any) => c.id);
+          if (classIdsForCourse.length) {
+            const { data: cas } = await supabase.from("class_assignments").select("due_date").eq("assignment_id", id).in("class_id", classIdsForCourse);
+            const withDue = (cas ?? []).find((r: any) => r.due_date);
+            due = withDue ? withDue.due_date : null; // class student: no course-default fallback
+          }
         }
         // Graduated fallback so nothing breaks between deploy and each migration:
         // multi-file (files column) → legacy single file → no attachments.
