@@ -555,3 +555,139 @@ authored["4.4"] = L("4.4", "Special Polynomial Products (Difference of Squares, 
   <div class="qa-box" ${QA}><h3>Q2: Why do the middle terms cancel in a difference of squares?</h3><p><em>The outer and inner products are \(+ab\) and \(-ab\), which add to zero.</em></p></div>
   <div class="qa-box" ${QA}><h3>Q3: How do I recognize these patterns quickly?</h3><p><em>Same two terms with opposite signs ⇒ difference of squares; a binomial squared ⇒ perfect square trinomial.</em></p></div>
 </div>`)]);
+
+authored["5.1"] = L("5.1", "GCF and Factoring by Grouping", [html(String.raw`<div class="lecture-box">
+  <h1>🧲 GCF and Factoring by Grouping</h1>
+  <p><strong>Overview.</strong> <strong>Factoring</strong> reverses multiplication — it rewrites a sum as a product. The first move is <em>always</em> to pull out the <strong>greatest common factor</strong> (GCF). For four-term expressions, <strong>grouping</strong> then finishes the job.</p>
+  <h2>📌 The toolkit</h2>
+  <ul>
+    <li><strong>GCF:</strong> the largest factor (number and variables) common to every term — factor it out first.</li>
+    <li><strong>Grouping (4 terms):</strong> group into two pairs, factor each pair, then factor out the shared binomial.</li>
+    <li><strong>Check</strong> by expanding your factors back out.</li>
+  </ul>
+  <h2>🔵 Examples</h2>
+  <div class="example-box" ${EX}><h3>Example 1: GCF of a binomial</h3><p>Factor \(6x^2 + 9x\).</p><div class="solution"><div class="step"><strong>GCF is \(3x\):</strong> \(3x(2x + 3)\).</div><em>Conclusion: \(3x(2x + 3)\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 2: A larger GCF</h3><p>Factor \(12x^3 - 8x^2\).</p><div class="solution"><div class="step"><strong>GCF is \(4x^2\):</strong> \(4x^2(3x - 2)\).</div><em>Conclusion: \(4x^2(3x - 2)\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 3: Factor by grouping</h3><p>Factor \(x^3 + 2x^2 + 3x + 6\).</p><div class="solution"><div class="step"><strong>Group in pairs:</strong> \(x^2(x + 2) + 3(x + 2)\).</div><div class="step"><strong>Common binomial \((x+2)\):</strong> \((x + 2)(x^2 + 3)\).</div><em>Conclusion: \((x + 2)(x^2 + 3)\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 4: Grouping with coefficients</h3><p>Factor \(2x^3 + 6x^2 + x + 3\).</p><div class="solution"><div class="step"><strong>Group:</strong> \(2x^2(x + 3) + 1(x + 3)\).</div><div class="step"><strong>Factor out \((x+3)\):</strong> \((x + 3)(2x^2 + 1)\).</div><em>Conclusion: \((x + 3)(2x^2 + 1)\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 5: GCF first, then more</h3><p>Factor \(2x^3 - 8x\).</p><div class="solution"><div class="step"><strong>GCF \(2x\):</strong> \(2x(x^2 - 4)\).</div><div class="step"><strong>Difference of squares:</strong> \(2x(x - 2)(x + 2)\).</div><em>Conclusion: \(2x(x - 2)(x + 2)\). ✓</em></div></div>
+  <h2>🟡 Practice Questions</h2>
+  <div class="practice-box" ${PR}><h3>Question 1</h3><p>Factor \(10x^2 + 15x\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(5x(2x + 3)\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 2</h3><p>Factor \(6x^4 - 9x^2\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(3x^2(2x^2 - 3)\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 3</h3><p>Factor \(x^3 + 4x^2 + 2x + 8\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\((x + 4)(x^2 + 2)\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 4</h3><p>Factor \(3x^3 - 3x^2 + x - 1\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\((x - 1)(3x^2 + 1)\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 5</h3><p>Factor \(5x^3 - 20x\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(5x(x - 2)(x + 2)\).</em></div></div></details></div>
+  <h2>❓ Q&amp;A Summary</h2>
+  <div class="qa-box" ${QA}><h3>Q1: What should I always try first?</h3><p><em>The GCF. Pulling it out simplifies everything that follows.</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q2: How do I know grouping will work?</h3><p><em>After factoring each pair, the leftover binomials must <strong>match</strong>. If they don't, try reordering the terms.</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q3: How do I check a factorization?</h3><p><em>Multiply the factors back out — you should recover the original expression.</em></p></div>
+</div>`)]);
+
+authored["5.2"] = L("5.2", "Factoring Trinomials (ax² + bx + c)", [html(String.raw`<div class="lecture-box">
+  <h1>🧩 Factoring Trinomials \(ax^2 + bx + c\)</h1>
+  <p><strong>Overview.</strong> Factoring a trinomial reverses FOIL. When \(a = 1\), find two numbers that multiply to \(c\) and add to \(b\). When \(a \neq 1\), use the <strong>\(ac\) method</strong>: split the middle term, then group.</p>
+  <h2>📌 The toolkit</h2>
+  <ul>
+    <li><strong>\(x^2 + bx + c\):</strong> find \(p, q\) with \(p+q = b\) and \(pq = c\); then \((x + p)(x + q)\).</li>
+    <li><strong>\(ax^2 + bx + c\) (ac method):</strong> find two numbers multiplying to \(ac\) and adding to \(b\); split \(bx\) and factor by grouping.</li>
+    <li>Watch the <strong>signs</strong>: product/sum of \(p\) and \(q\) must match \(c\) and \(b\).</li>
+  </ul>
+  <h2>🔵 Examples</h2>
+  <div class="example-box" ${EX}><h3>Example 1: \(a = 1\), all positive</h3><p>Factor \(x^2 + 7x + 12\).</p><div class="solution"><div class="step"><strong>Sum 7, product 12:</strong> \(3\) and \(4\).</div><em>Conclusion: \((x + 3)(x + 4)\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 2: \(a = 1\), negative middle</h3><p>Factor \(x^2 - 5x + 6\).</p><div class="solution"><div class="step"><strong>Sum \(-5\), product 6:</strong> \(-2\) and \(-3\).</div><em>Conclusion: \((x - 2)(x - 3)\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 3: \(a = 1\), mixed signs</h3><p>Factor \(x^2 + 2x - 15\).</p><div class="solution"><div class="step"><strong>Sum 2, product \(-15\):</strong> \(5\) and \(-3\).</div><em>Conclusion: \((x + 5)(x - 3)\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 4: \(a \neq 1\) (ac method)</h3><p>Factor \(2x^2 + 7x + 3\).</p><div class="solution"><div class="step"><strong>\(ac = 6\); need sum 7:</strong> \(6\) and \(1\).</div><div class="step"><strong>Split &amp; group:</strong> \(2x^2 + 6x + x + 3 = 2x(x+3) + 1(x+3)\).</div><em>Conclusion: \((2x + 1)(x + 3)\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 5: \(a \neq 1\) with negatives</h3><p>Factor \(3x^2 - 10x + 8\).</p><div class="solution"><div class="step"><strong>\(ac = 24\); need sum \(-10\):</strong> \(-6\) and \(-4\).</div><div class="step"><strong>Split &amp; group:</strong> \(3x^2 - 6x - 4x + 8 = 3x(x-2) - 4(x-2)\).</div><em>Conclusion: \((3x - 4)(x - 2)\). ✓</em></div></div>
+  <h2>🟡 Practice Questions</h2>
+  <div class="practice-box" ${PR}><h3>Question 1</h3><p>Factor \(x^2 + 8x + 15\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\((x + 3)(x + 5)\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 2</h3><p>Factor \(x^2 - 7x + 10\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\((x - 2)(x - 5)\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 3</h3><p>Factor \(x^2 - x - 12\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\((x - 4)(x + 3)\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 4</h3><p>Factor \(2x^2 + 5x + 2\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\((2x + 1)(x + 2)\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 5</h3><p>Factor \(3x^2 + 7x - 6\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\((3x - 2)(x + 3)\).</em></div></div></details></div>
+  <h2>❓ Q&amp;A Summary</h2>
+  <div class="qa-box" ${QA}><h3>Q1: What's the quick rule for \(a=1\)?</h3><p><em>Two numbers that <strong>multiply to \(c\)</strong> and <strong>add to \(b\)</strong>.</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q2: What's the \(ac\) method for?</h3><p><em>When \(a\neq 1\): find two numbers multiplying to \(ac\) and adding to \(b\), split the middle term, then group.</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q3: What if no such numbers exist?</h3><p><em>The trinomial is <strong>prime</strong> — it doesn't factor over the integers (you'd need the quadratic formula to find its roots).</em></p></div>
+</div>`)]);
+
+authored["5.3"] = L("5.3", "Features of Parabolas (Vertex, Axis of Symmetry, Intercepts)", [html(String.raw`<div class="lecture-box">
+  <h1>🅿️ Features of Parabolas</h1>
+  <p><strong>Overview.</strong> The graph of a quadratic \(y = ax^2 + bx + c\) is a <strong>parabola</strong>. Four features describe it completely: which way it opens, its <strong>axis of symmetry</strong>, its <strong>vertex</strong> (turning point), and its <strong>intercepts</strong>.</p>
+  <h2>📌 The toolkit</h2>
+  <ul>
+    <li><strong>Opens up</strong> if \(a &gt; 0\) (minimum), <strong>down</strong> if \(a &lt; 0\) (maximum).</li>
+    <li><strong>Axis of symmetry:</strong> the vertical line \(x = -\dfrac{b}{2a}\); the <strong>vertex</strong> sits on it.</li>
+    <li><strong>\(y\)-intercept:</strong> \((0, c)\). <strong>\(x\)-intercepts (roots):</strong> where \(y = 0\) (factor or use the formula).</li>
+  </ul>
+  ${gframe(["y = x^2 - 4*x + 3"], { title: "y = x² − 4x + 3: opens up, axis x = 2, vertex (2, −1), roots 1 and 3", xMin: -2, xMax: 6, yMin: -3, yMax: 9 })}
+  <h2>🔵 Examples</h2>
+  <div class="example-box" ${EX}><h3>Example 1: Direction &amp; \(y\)-intercept</h3><p>For \(y = x^2 - 4x + 3\), state the direction and \(y\)-intercept.</p><div class="solution"><div class="step"><strong>\(a = 1 &gt; 0\):</strong> opens up (minimum). <strong>\(c = 3\):</strong> \(y\)-intercept \((0,3)\).</div><em>Conclusion: opens up, \((0,3)\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 2: Axis of symmetry</h3><p>Find the axis of \(y = x^2 - 4x + 3\).</p><div class="solution"><div class="step"><strong>\(x = -\dfrac{b}{2a} = -\dfrac{-4}{2(1)}\):</strong> \(x = 2\).</div><em>Conclusion: axis \(x = 2\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 3: Vertex</h3><p>Find the vertex of \(y = x^2 - 4x + 3\).</p><div class="solution"><div class="step"><strong>Use \(x = 2\):</strong> \(y = 2^2 - 4(2) + 3 = -1\).</div><em>Conclusion: vertex \((2, -1)\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 4: \(x\)-intercepts (roots)</h3><p>Find where \(y = x^2 - 4x + 3\) crosses the \(x\)-axis.</p><div class="solution"><div class="step"><strong>Set \(y=0\) and factor:</strong> \((x - 1)(x - 3) = 0\).</div><em>Conclusion: \(x = 1\) and \(x = 3\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 5: Read a vertex form</h3><p>Give the vertex of \(y = (x - 2)^2 - 1\).</p><div class="solution"><div class="step"><strong>Vertex form \(y=(x-h)^2+k\):</strong> \(h = 2,\ k = -1\).</div><em>Conclusion: vertex \((2, -1)\). ✓</em></div></div>
+  <h2>🟡 Practice Questions</h2>
+  <div class="practice-box" ${PR}><h3>Question 1</h3><p>Does \(y = -2x^2 + x + 1\) open up or down?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Down (\(a = -2 &lt; 0\)).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 2</h3><p>Axis of symmetry of \(y = x^2 - 6x + 5\)?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(x = 3\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 3</h3><p>Vertex of \(y = x^2 - 6x + 5\)?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\((3, -4)\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 4</h3><p>\(x\)-intercepts of \(y = x^2 - 6x + 5\)?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\((x-1)(x-5)\Rightarrow x = 1, 5\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 5</h3><p>Vertex of \(y = (x + 3)^2 + 2\)?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\((-3, 2)\).</em></div></div></details></div>
+  <h2>❓ Q&amp;A Summary</h2>
+  <div class="qa-box" ${QA}><h3>Q1: How do I know which way it opens?</h3><p><em>The sign of \(a\): positive opens up (has a minimum), negative opens down (has a maximum).</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q2: How are the axis and vertex related?</h3><p><em>The vertex lies on the axis of symmetry, so find \(x = -\tfrac{b}{2a}\) first, then substitute for the vertex's \(y\).</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q3: Why is vertex form handy?</h3><p><em>\(y = (x-h)^2 + k\) shows the vertex \((h, k)\) directly — no calculation needed.</em></p></div>
+</div>`)]);
+
+authored["5.4"] = L("5.4", "Solving Quadratics by Factoring and Square Roots", [html(String.raw`<div class="lecture-box">
+  <h1>🎯 Solving Quadratics by Factoring &amp; Square Roots</h1>
+  <p><strong>Overview.</strong> A quadratic can have up to <strong>two</strong> solutions (its roots). Two quick methods: the <strong>zero-product property</strong> after factoring, and taking <strong>square roots</strong> when there's no middle term.</p>
+  <h2>📌 The toolkit</h2>
+  <ul>
+    <li><strong>Zero-product property:</strong> if \(AB = 0\) then \(A = 0\) or \(B = 0\). Factor, set the equation to \(0\), solve each factor.</li>
+    <li><strong>Square roots:</strong> \(x^2 = k\) gives \(x = \pm\sqrt{k}\) — remember <strong>both</strong> signs.</li>
+    <li>Always move everything to one side first, so it equals \(0\).</li>
+  </ul>
+  <h2>🔵 Examples</h2>
+  <div class="example-box" ${EX}><h3>Example 1: Already factored</h3><p>Solve \((x - 2)(x + 5) = 0\).</p><div class="solution"><div class="step"><strong>Each factor \(= 0\):</strong> \(x - 2 = 0\) or \(x + 5 = 0\).</div><em>Conclusion: \(x = 2\) or \(x = -5\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 2: Factor, then solve</h3><p>Solve \(x^2 + 3x - 10 = 0\).</p><div class="solution"><div class="step"><strong>Factor:</strong> \((x + 5)(x - 2) = 0\).</div><em>Conclusion: \(x = -5\) or \(x = 2\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 3: GCF first</h3><p>Solve \(x^2 - 6x = 0\).</p><div class="solution"><div class="step"><strong>Factor out \(x\):</strong> \(x(x - 6) = 0\).</div><em>Conclusion: \(x = 0\) or \(x = 6\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 4: Square roots</h3><p>Solve \(x^2 = 49\).</p><div class="solution"><div class="step"><strong>Take \(\pm\sqrt{\ }\):</strong> \(x = \pm 7\).</div><em>Conclusion: \(x = 7\) or \(x = -7\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 5: Square roots with a shift</h3><p>Solve \((x - 3)^2 = 16\).</p><div class="solution"><div class="step"><strong>Take \(\pm\sqrt{\ }\):</strong> \(x - 3 = \pm 4\).</div><div class="step"><strong>Solve both:</strong> \(x = 7\) or \(x = -1\).</div><em>Conclusion: \(x = 7\) or \(x = -1\). ✓</em></div></div>
+  <h2>🟡 Practice Questions</h2>
+  <div class="practice-box" ${PR}><h3>Question 1</h3><p>Solve \((x + 1)(x - 4) = 0\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(x = -1\) or \(x = 4\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 2</h3><p>Solve \(x^2 - 7x + 12 = 0\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\((x-3)(x-4)=0\Rightarrow x = 3, 4\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 3</h3><p>Solve \(x^2 + 5x = 0\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(x(x+5)=0\Rightarrow x = 0, -5\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 4</h3><p>Solve \(x^2 = 81\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(x = \pm 9\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 5</h3><p>Solve \((x + 2)^2 = 25\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(x + 2 = \pm 5\Rightarrow x = 3\) or \(x = -7\).</em></div></div></details></div>
+  <h2>❓ Q&amp;A Summary</h2>
+  <div class="qa-box" ${QA}><h3>Q1: Why does the zero-product property work?</h3><p><em>The only way a product is \(0\) is if one of the factors is \(0\) — so solve each factor separately.</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q2: Why \(\pm\) when taking a square root?</h3><p><em>Both \(7^2\) and \((-7)^2\) equal 49, so \(x^2 = 49\) has two solutions.</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q3: What if \(x^2 = -9\)?</h3><p><em>No real solution — a real square can't be negative.</em></p></div>
+</div>`)]);
+
+authored["5.5"] = L("5.5", "Completing the Square & The Quadratic Formula", [html(String.raw`<div class="lecture-box">
+  <h1>🔑 Completing the Square &amp; The Quadratic Formula</h1>
+  <p><strong>Overview.</strong> Not every quadratic factors nicely. Two methods solve <em>any</em> quadratic: <strong>completing the square</strong> and the <strong>quadratic formula</strong>. The <strong>discriminant</strong> then tells you how many real roots to expect — before you even finish.</p>
+  <h2>📌 The toolkit</h2>
+  <ul>
+    <li><strong>Complete the square:</strong> add \(\left(\dfrac{b}{2}\right)^2\) to build a perfect square, then take \(\pm\sqrt{\ }\).</li>
+    <li><strong>Quadratic formula:</strong> \(x = \dfrac{-b \pm \sqrt{b^2 - 4ac}}{2a}\) for \(ax^2 + bx + c = 0\).</li>
+    <li><strong>Discriminant \(D = b^2 - 4ac\):</strong> \(D &gt; 0\) two roots, \(D = 0\) one root, \(D &lt; 0\) no real roots.</li>
+  </ul>
+  <h2>🔵 Examples</h2>
+  <div class="example-box" ${EX}><h3>Example 1: Complete the square</h3><p>Solve \(x^2 + 6x + 5 = 0\).</p><div class="solution"><div class="step"><strong>Move \(5\):</strong> \(x^2 + 6x = -5\).</div><div class="step"><strong>Add \((\tfrac{6}{2})^2 = 9\):</strong> \((x + 3)^2 = 4\).</div><div class="step"><strong>Square roots:</strong> \(x + 3 = \pm 2\Rightarrow x = -1\) or \(-5\).</div><em>Conclusion: \(x = -1\) or \(x = -5\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 2: Quadratic formula (factorable check)</h3><p>Solve \(x^2 - 5x + 6 = 0\).</p><div class="solution"><div class="step"><strong>Formula with \(a=1,b=-5,c=6\):</strong> \(x = \dfrac{5 \pm \sqrt{25 - 24}}{2} = \dfrac{5 \pm 1}{2}\).</div><em>Conclusion: \(x = 3\) or \(x = 2\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 3: Formula, non-factorable</h3><p>Solve \(x^2 + 4x + 1 = 0\).</p><div class="solution"><div class="step"><strong>Formula:</strong> \(x = \dfrac{-4 \pm \sqrt{16 - 4}}{2} = \dfrac{-4 \pm \sqrt{12}}{2}\).</div><div class="step"><strong>Simplify:</strong> \(\dfrac{-4 \pm 2\sqrt{3}}{2} = -2 \pm \sqrt{3}\).</div><em>Conclusion: \(x = -2 \pm \sqrt{3}\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 4: Discriminant — no real roots</h3><p>How many real roots has \(2x^2 - 3x + 5 = 0\)?</p><div class="solution"><div class="step"><strong>\(D = (-3)^2 - 4(2)(5) = 9 - 40 = -31\).</strong></div><em>Conclusion: \(D &lt; 0\) ⇒ no real roots. ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 5: Discriminant — one root</h3><p>How many real roots has \(x^2 - 4x + 4 = 0\)?</p><div class="solution"><div class="step"><strong>\(D = (-4)^2 - 4(1)(4) = 0\).</strong></div><div class="step"><strong>One repeated root:</strong> \(x = \dfrac{4}{2} = 2\).</div><em>Conclusion: exactly one root, \(x = 2\). ✓</em></div></div>
+  <h2>🟡 Practice Questions</h2>
+  <div class="practice-box" ${PR}><h3>Question 1</h3><p>Complete the square: \(x^2 + 8x + 7 = 0\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\((x+4)^2 = 9\Rightarrow x = -1\) or \(-7\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 2</h3><p>Use the formula: \(x^2 - 2x - 8 = 0\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(x = \dfrac{2 \pm 6}{2} = 4\) or \(-2\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 3</h3><p>Use the formula: \(x^2 + 6x + 4 = 0\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(x = -3 \pm \sqrt{5}\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 4</h3><p>How many real roots has \(x^2 + x + 1 = 0\)?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(D = 1 - 4 = -3 &lt; 0\): none.</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 5</h3><p>How many real roots has \(9x^2 - 6x + 1 = 0\)?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(D = 36 - 36 = 0\): exactly one (\(x = \tfrac{1}{3}\)).</em></div></div></details></div>
+  <h2>❓ Q&amp;A Summary</h2>
+  <div class="qa-box" ${QA}><h3>Q1: When should I use the quadratic formula?</h3><p><em>Always works — reach for it when factoring isn't obvious. Factoring is just faster when it's easy.</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q2: What does the discriminant tell me?</h3><p><em>\(b^2 - 4ac\): positive ⇒ two roots, zero ⇒ one, negative ⇒ no real roots — the number under the square root.</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q3: What number do I add to complete the square?</h3><p><em>Half the middle coefficient, squared: \(\left(\tfrac{b}{2}\right)^2\) (when \(a = 1\)).</em></p></div>
+</div>`)]);
