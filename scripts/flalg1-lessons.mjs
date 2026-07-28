@@ -197,3 +197,143 @@ authored["1.5"] = L("1.5", "Modeling Real-World Contexts with Linear Constraints
   <div class="qa-box" ${QA}><h3>Q2: My answer came out as a decimal — is that wrong?</h3><p><em>Not wrong, but interpret it. For countable things (tickets, months) round toward what the context allows — usually <strong>down</strong> for a budget, <strong>up</strong> for a goal.</em></p></div>
   <div class="qa-box" ${QA}><h3>Q3: What's the single most common mistake?</h3><p><em>Forgetting the <strong>fixed</strong> starting amount. Model as <em>fixed + rate × quantity</em>, not just rate × quantity.</em></p></div>
 </div>`)]);
+
+authored["2.1"] = L("2.1", "Function Notation, Domain, and Range", [html(String.raw`<div class="lecture-box">
+  <h1>🔤 Function Notation, Domain, and Range</h1>
+  <p><strong>Overview.</strong> A <strong>function</strong> is a rule that gives exactly one output for each input. We write it as \(f(x)\) — read “\(f\) of \(x\)” — where \(x\) is the input and \(f(x)\) is the output. The set of allowed inputs is the <strong>domain</strong>; the set of outputs is the <strong>range</strong>.</p>
+  <h2>📌 The toolkit</h2>
+  <ul>
+    <li><strong>Evaluate</strong> \(f(a)\) by substituting \(a\) for every \(x\).</li>
+    <li>\(f(x)\) is <strong>not</strong> \(f\) times \(x\) — it names the output.</li>
+    <li><strong>Domain</strong> = allowed \(x\)-values; <strong>range</strong> = resulting \(y\)-values. A context can restrict them (e.g. time \(\ge 0\)).</li>
+  </ul>
+  ${gframe(["y = 3*x - 2"], { title: "f(x) = 3x − 2: input x on the horizontal axis, output f(x) on the vertical", xMin: -5, xMax: 5, yMin: -12, yMax: 12 })}
+  <h2>🔵 Examples</h2>
+  <div class="example-box" ${EX}><h3>Example 1: Evaluate a linear function</h3><p>If \(f(x) = 3x - 2\), find \(f(4)\).</p><div class="solution"><div class="step"><strong>Substitute \(x=4\):</strong> \(3(4)-2 = 10\).</div><em>Conclusion: \(f(4)=10\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 2: Evaluate at a negative input</h3><p>If \(f(x) = x^2 + 1\), find \(f(-3)\).</p><div class="solution"><div class="step"><strong>Substitute \(x=-3\):</strong> \((-3)^2 + 1 = 9+1 = 10\).</div><em>Conclusion: \(f(-3)=10\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 3: Work backwards — solve \(f(x)=k\)</h3><p>If \(f(x) = 2x + 1\), for what \(x\) is \(f(x) = 9\)?</p><div class="solution"><div class="step"><strong>Set equal:</strong> \(2x + 1 = 9\).</div><div class="step"><strong>Solve:</strong> \(2x=8\Rightarrow x=4\).</div><em>Conclusion: \(x=4\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 4: Domain and range of a line</h3><p>State the domain and range of \(f(x) = 3x - 2\).</p><div class="solution"><div class="step"><strong>Reasoning:</strong> any real \(x\) works, and the outputs sweep all reals.</div><em>Conclusion: domain \(\{x \mid x\in\mathbb{R}\}\), range \(\{y \mid y\in\mathbb{R}\}\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 5: Domain restricted by context</h3><p>A tank drains by \(V(t) = 50 - 5t\) litres after \(t\) minutes. Find the sensible domain.</p><div class="solution"><div class="step"><strong>Reasoning:</strong> time can't be negative, and the tank empties when \(V=0\): \(50-5t=0\Rightarrow t=10\).</div><em>Conclusion: domain \(0 \le t \le 10\). ✓</em></div></div>
+  <h2>🟡 Practice Questions</h2>
+  <div class="practice-box" ${PR}><h3>Question 1</h3><p>If \(f(x) = 5x - 4\), find \(f(3)\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(f(3)=11\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 2</h3><p>If \(g(x) = x^2 - 2x\), find \(g(-2)\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(4+4=8\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 3</h3><p>If \(f(x) = 4x - 1\), for what \(x\) is \(f(x) = 15\)?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(4x=16\Rightarrow x=4\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 4</h3><p>If \(f(x) = 7\) for every \(x\) (a constant function), what is its range?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Just \(\{7\}\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 5</h3><p>A rental is \(C(h) = 20 + 15h\) for \(h\) hours, up to 8 hours. State the domain.</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(0 \le h \le 8\).</em></div></div></details></div>
+  <h2>❓ Q&amp;A Summary</h2>
+  <div class="qa-box" ${QA}><h3>Q1: Does \(f(x)\) mean \(f\) times \(x\)?</h3><p><em>No. It names the output of the function \(f\) for the input \(x\).</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q2: Which is domain, which is range?</h3><p><em>Domain = inputs (\(x\)); range = outputs (\(y\)). Alphabetical order matches: <strong>d</strong>omain before <strong>r</strong>ange, \(x\) before \(y\).</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q3: How do I know a graph is a function?</h3><p><em>The <strong>vertical line test</strong>: any vertical line crosses the graph at most once.</em></p></div>
+</div>`)]);
+
+authored["2.2"] = L("2.2", "Intercepts, Slope, and Rate of Change", [html(String.raw`<div class="lecture-box">
+  <h1>📈 Intercepts, Slope, and Rate of Change</h1>
+  <p><strong>Overview.</strong> A line is captured by two ideas: <strong>where it crosses the axes</strong> (its intercepts) and <strong>how steeply it climbs</strong> (its slope). Slope is the same thing as a <strong>rate of change</strong> — how much \(y\) changes for each 1-unit change in \(x\).</p>
+  <h2>📌 The toolkit</h2>
+  <ul>
+    <li><strong>\(y\)-intercept:</strong> set \(x=0\). <strong>\(x\)-intercept:</strong> set \(y=0\).</li>
+    <li><strong>Slope:</strong> \(m = \dfrac{\text{rise}}{\text{run}} = \dfrac{y_2 - y_1}{x_2 - x_1}\).</li>
+    <li>Horizontal line: \(m=0\). Vertical line: slope is <strong>undefined</strong>.</li>
+  </ul>
+  ${gframe(["y = 2*x + 1"], { title: "y = 2x + 1: y-intercept (0, 1), slope 2 (up 2 for every 1 across)", xMin: -5, xMax: 5, yMin: -9, yMax: 11 })}
+  <h2>🔵 Examples</h2>
+  <div class="example-box" ${EX}><h3>Example 1: Intercepts from an equation</h3><p>Find the intercepts of \(2x + 3y = 12\).</p><div class="solution"><div class="step"><strong>\(y\)-intercept (\(x=0\)):</strong> \(3y=12\Rightarrow (0,4)\).</div><div class="step"><strong>\(x\)-intercept (\(y=0\)):</strong> \(2x=12\Rightarrow (6,0)\).</div><em>Conclusion: \((0,4)\) and \((6,0)\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 2: Slope from two points</h3><p>Find the slope through \((1,2)\) and \((4,11)\).</p><div class="solution"><div class="step"><strong>Apply the formula:</strong> \(m=\dfrac{11-2}{4-1}=\dfrac{9}{3}=3\).</div><em>Conclusion: \(m=3\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 3: Slope from slope-intercept form</h3><p>State the slope and \(y\)-intercept of \(y = -\tfrac{2}{3}x + 5\).</p><div class="solution"><div class="step"><strong>Read \(m\) and \(b\):</strong> \(m=-\tfrac{2}{3}\), \(b=5\).</div><em>Conclusion: slope \(-\tfrac{2}{3}\), \(y\)-intercept \((0,5)\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 4: Slope as a rate of change</h3><p>A taxi's cost is \(C = 3 + 2m\). What does the slope mean?</p><div class="solution"><div class="step"><strong>Interpret:</strong> the slope 2 is the rate — cost rises <strong>$2 per mile</strong>; the 3 is the fixed start.</div><em>Conclusion: $2/mile. ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 5: Zero and undefined slope</h3><p>Give the slope of \(y = 4\) and of \(x = -1\).</p><div class="solution"><div class="step"><strong>Horizontal \(y=4\):</strong> no rise, \(m=0\).</div><div class="step"><strong>Vertical \(x=-1\):</strong> no run, slope <strong>undefined</strong>.</div><em>Conclusion: \(0\) and undefined. ✓</em></div></div>
+  <h2>🟡 Practice Questions</h2>
+  <div class="practice-box" ${PR}><h3>Question 1</h3><p>Find the intercepts of \(x - 2y = 8\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\((8,0)\) and \((0,-4)\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 2</h3><p>Slope through \((-2,3)\) and \((2,11)\)?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(m=\dfrac{11-3}{2-(-2)}=2\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 3</h3><p>Slope and \(y\)-intercept of \(y = 4x - 7\)?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(m=4\), \((0,-7)\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 4</h3><p>A pool fills by \(V = 100 + 20t\) litres. What's the fill rate?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>20 litres per minute.</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 5</h3><p>What is the slope of the horizontal line \(y = -6\)?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(0\).</em></div></div></details></div>
+  <h2>❓ Q&amp;A Summary</h2>
+  <div class="qa-box" ${QA}><h3>Q1: Which intercept do I set to zero?</h3><p><em>For the \(y\)-intercept set \(x=0\); for the \(x\)-intercept set \(y=0\). Set the <strong>other</strong> variable to zero.</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q2: What does a negative slope mean?</h3><p><em>The line falls left-to-right: \(y\) decreases as \(x\) increases.</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q3: Zero slope vs. undefined slope?</h3><p><em>Horizontal ⇒ slope \(0\); vertical ⇒ slope undefined (you'd divide by a zero run).</em></p></div>
+</div>`)]);
+
+authored["2.3"] = L("2.3", "Writing Linear Equations (Slope-Intercept, Point-Slope, Standard Form)", [html(String.raw`<div class="lecture-box">
+  <h1>✍️ Writing Linear Equations</h1>
+  <p><strong>Overview.</strong> The same line can be written three ways. Choose the form that fits the information you're given, then convert as needed.</p>
+  <h2>📌 The three forms</h2>
+  <ul>
+    <li><strong>Slope-intercept:</strong> \(y = mx + b\) — best when you know the slope and \(y\)-intercept.</li>
+    <li><strong>Point-slope:</strong> \(y - y_1 = m(x - x_1)\) — best from a point and a slope.</li>
+    <li><strong>Standard:</strong> \(Ax + By = C\) — tidy for intercepts and integer coefficients.</li>
+  </ul>
+  ${gframe(["y = 3*x + 1"], { title: "y = 3x + 1 — the same line in every form", xMin: -5, xMax: 5, yMin: -14, yMax: 16 })}
+  <h2>🔵 Examples</h2>
+  <div class="example-box" ${EX}><h3>Example 1: From slope and \(y\)-intercept</h3><p>Slope 2, \(y\)-intercept \(-3\).</p><div class="solution"><div class="step"><strong>Plug into \(y=mx+b\):</strong> \(m=2,\ b=-3\).</div><em>Conclusion: \(y = 2x - 3\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 2: From a point and a slope</h3><p>Slope 3 through \((2,5)\).</p><div class="solution"><div class="step"><strong>Point-slope:</strong> \(y - 5 = 3(x - 2)\).</div><div class="step"><strong>Simplify:</strong> \(y = 3x - 6 + 5 = 3x - 1\).</div><em>Conclusion: \(y = 3x - 1\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 3: From two points</h3><p>Through \((1,4)\) and \((3,10)\).</p><div class="solution"><div class="step"><strong>Slope:</strong> \(m=\dfrac{10-4}{3-1}=3\).</div><div class="step"><strong>Use \((1,4)\):</strong> \(y - 4 = 3(x-1)\Rightarrow y = 3x + 1\).</div><em>Conclusion: \(y = 3x + 1\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 4: Convert to standard form</h3><p>Write \(y = \tfrac{2}{3}x + 4\) in standard form with integer coefficients.</p><div class="solution"><div class="step"><strong>Multiply by 3:</strong> \(3y = 2x + 12\).</div><div class="step"><strong>Rearrange:</strong> \(-2x + 3y = 12\Rightarrow 2x - 3y = -12\).</div><em>Conclusion: \(2x - 3y = -12\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 5: Horizontal and vertical lines</h3><p>Write the line through \((4,-1)\) that is (a) horizontal, (b) vertical.</p><div class="solution"><div class="step"><strong>(a) Horizontal:</strong> \(y=-1\). <strong>(b) Vertical:</strong> \(x=4\).</div><em>Conclusion: \(y=-1\) and \(x=4\). ✓</em></div></div>
+  <h2>🟡 Practice Questions</h2>
+  <div class="practice-box" ${PR}><h3>Question 1</h3><p>Slope \(-4\), \(y\)-intercept 2. Write the equation.</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(y = -4x + 2\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 2</h3><p>Slope 5 through \((1,3)\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(y - 3 = 5(x-1)\Rightarrow y = 5x - 2\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 3</h3><p>Through \((2,3)\) and \((6,11)\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(m=2\Rightarrow y = 2x - 1\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 4</h3><p>Convert \(y = -\tfrac{1}{2}x + 3\) to standard form.</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(x + 2y = 6\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 5</h3><p>Write the vertical line through \((-3, 7)\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(x = -3\).</em></div></div></details></div>
+  <h2>❓ Q&amp;A Summary</h2>
+  <div class="qa-box" ${QA}><h3>Q1: Which form should I start from?</h3><p><em>Point + slope ⇒ point-slope. Slope + \(y\)-intercept ⇒ slope-intercept. Two points ⇒ find the slope first, then either form.</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q2: What makes standard form “standard”?</h3><p><em>Integer \(A,B,C\) with \(A\ge 0\), and \(x,y\) on the same side.</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q3: Why is point-slope so handy?</h3><p><em>You can write the line instantly from a single point and the slope — no need to solve for \(b\) first.</em></p></div>
+</div>`)]);
+
+authored["2.4"] = L("2.4", "Parallel and Perpendicular Lines on the Coordinate Plane", [html(String.raw`<div class="lecture-box">
+  <h1>∥⟂ Parallel and Perpendicular Lines</h1>
+  <p><strong>Overview.</strong> Slope alone tells you how two lines relate. <strong>Parallel</strong> lines never meet — they have <strong>equal slopes</strong>. <strong>Perpendicular</strong> lines cross at a right angle — their slopes are <strong>negative reciprocals</strong>.</p>
+  <h2>📌 The toolkit</h2>
+  <ul>
+    <li><strong>Parallel:</strong> \(m_1 = m_2\).</li>
+    <li><strong>Perpendicular:</strong> \(m_1 \cdot m_2 = -1\), i.e. \(m_2 = -\dfrac{1}{m_1}\) (flip and negate).</li>
+    <li>A horizontal line (\(m=0\)) is perpendicular to a vertical line (undefined slope).</li>
+  </ul>
+  ${gframe(["y = 2*x + 1", "y = 2*x - 3"], { title: "Two parallel lines — same slope 2, different intercepts", xMin: -5, xMax: 5, yMin: -13, yMax: 11 })}
+  <h2>🔵 Examples</h2>
+  <div class="example-box" ${EX}><h3>Example 1: Are they parallel?</h3><p>Do \(y = 2x + 1\) and \(y = 2x - 4\) run parallel?</p><div class="solution"><div class="step"><strong>Compare slopes:</strong> both are 2.</div><em>Conclusion: yes — parallel. ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 2: Perpendicular slope</h3><p>What slope is perpendicular to \(m = 3\)?</p><div class="solution"><div class="step"><strong>Flip and negate:</strong> \(-\dfrac{1}{3}\).</div><em>Conclusion: \(-\tfrac{1}{3}\) (check: \(3\cdot-\tfrac13=-1\)). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 3: Line parallel through a point</h3><p>Write the line parallel to \(y = 2x + 1\) through \((0, 5)\).</p><div class="solution"><div class="step"><strong>Same slope 2, \(y\)-intercept 5:</strong> \(y = 2x + 5\).</div><em>Conclusion: \(y = 2x + 5\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 4: Line perpendicular through a point</h3><p>Write the line perpendicular to \(y = \tfrac{1}{2}x\) through \((2, 3)\).</p><div class="solution"><div class="step"><strong>Perpendicular slope:</strong> \(-2\).</div><div class="step"><strong>Point-slope:</strong> \(y - 3 = -2(x - 2)\Rightarrow y = -2x + 7\).</div><em>Conclusion: \(y = -2x + 7\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 5: Decide from the equations</h3><p>Are \(y = -3x + 2\) and \(y = \tfrac{1}{3}x - 4\) parallel, perpendicular, or neither?</p><div class="solution"><div class="step"><strong>Slopes:</strong> \(-3\) and \(\tfrac13\); product \(-3\cdot\tfrac13 = -1\).</div><em>Conclusion: perpendicular. ✓</em></div></div>
+  <h2>🟡 Practice Questions</h2>
+  <div class="practice-box" ${PR}><h3>Question 1</h3><p>What slope is parallel to \(m = -5\)?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(-5\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 2</h3><p>What slope is perpendicular to \(m = -\tfrac{2}{3}\)?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(\tfrac{3}{2}\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 3</h3><p>Line parallel to \(y = 4x - 1\) through \((0, -2)\)?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(y = 4x - 2\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 4</h3><p>Line perpendicular to \(y = \tfrac{1}{4}x + 5\) through \((0, 1)\)?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Slope \(-4\): \(y = -4x + 1\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 5</h3><p>Are \(y = 2x + 3\) and \(y = 2x - 9\) parallel, perpendicular, or neither?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Parallel (equal slopes).</em></div></div></details></div>
+  <h2>❓ Q&amp;A Summary</h2>
+  <div class="qa-box" ${QA}><h3>Q1: What's a “negative reciprocal”?</h3><p><em>Flip the fraction and change its sign: the negative reciprocal of \(\tfrac{2}{3}\) is \(-\tfrac{3}{2}\).</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q2: Do parallel lines ever share a point?</h3><p><em>No — same slope, different intercept means they never meet. (Same slope <em>and</em> same intercept is the identical line.)</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q3: What's perpendicular to a horizontal line?</h3><p><em>A vertical line — \(y=k\) is perpendicular to \(x=c\).</em></p></div>
+</div>`)]);
+
+authored["2.5"] = L("2.5", "Function Transformations: f(x)+k, kf(x), f(x+k)", [html(String.raw`<div class="lecture-box">
+  <h1>🔀 Function Transformations</h1>
+  <p><strong>Overview.</strong> Small changes to a function's rule move its graph in predictable ways. Learn three building blocks and you can shift, stretch, and slide any graph.</p>
+  <h2>📌 The toolkit</h2>
+  <ul>
+    <li><strong>\(f(x) + k\):</strong> vertical shift — <strong>up</strong> by \(k\) (down if \(k&lt;0\)).</li>
+    <li><strong>\(k\,f(x)\):</strong> vertical stretch by factor \(k\) (\(|k|&gt;1\) taller, \(0&lt;|k|&lt;1\) shorter; \(k&lt;0\) flips over the \(x\)-axis).</li>
+    <li><strong>\(f(x + k)\):</strong> horizontal shift — <strong>left</strong> by \(k\) (right if \(k&lt;0\)). Note it moves the <em>opposite</em> way to the sign.</li>
+  </ul>
+  ${gframe(["y = x^2", "y = x^2 + 3"], { title: "y = x² and y = x² + 3 — the same parabola shifted up 3", xMin: -5, xMax: 5, yMin: -2, yMax: 20 })}
+  <h2>🔵 Examples</h2>
+  <div class="example-box" ${EX}><h3>Example 1: Vertical shift up</h3><p>Describe \(g(x) = x^2 + 3\) relative to \(f(x) = x^2\).</p><div class="solution"><div class="step"><strong>Form \(f(x)+k\) with \(k=3\):</strong> shift up.</div><em>Conclusion: the parabola moves up 3 units. ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 2: Vertical shift down</h3><p>Describe \(g(x) = x^2 - 2\) relative to \(f(x)=x^2\).</p><div class="solution"><div class="step"><strong>\(k=-2\):</strong> shift down.</div><em>Conclusion: down 2 units. ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 3: Vertical stretch</h3><p>Describe \(g(x) = 2f(x)\) where \(f(x)=x^2\).</p><div class="solution"><div class="step"><strong>\(k=2\):</strong> every output doubles.</div><em>Conclusion: a vertical stretch by factor 2 (the parabola gets narrower). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 4: Horizontal shift (the tricky sign)</h3><p>How does \(g(x) = f(x + 3)\) move \(f\)?</p><div class="solution"><div class="step"><strong>Inside \(+3\):</strong> the graph shifts the <em>opposite</em> way.</div><em>Conclusion: shift <strong>left</strong> 3 units. ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 5: Combine transformations</h3><p>Describe \(g(x) = (x - 1)^2 + 2\) from \(f(x) = x^2\).</p><div class="solution"><div class="step"><strong>\((x-1)\):</strong> right 1. <strong>\(+2\):</strong> up 2.</div><em>Conclusion: vertex moves from \((0,0)\) to \((1,2)\). ✓</em></div></div>
+  <h2>🟡 Practice Questions</h2>
+  <div class="practice-box" ${PR}><h3>Question 1</h3><p>Describe \(g(x) = x^2 + 5\) from \(f(x)=x^2\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Up 5.</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 2</h3><p>Describe \(g(x) = x^2 - 4\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Down 4.</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 3</h3><p>Describe \(g(x) = 3f(x)\), \(f(x)=x^2\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Vertical stretch by 3 (narrower).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 4</h3><p>Which way does \(g(x) = f(x - 2)\) shift the graph?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Right 2.</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 5</h3><p>Where is the vertex of \(g(x) = (x + 3)^2 - 1\)?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\((-3, -1)\).</em></div></div></details></div>
+  <h2>❓ Q&amp;A Summary</h2>
+  <div class="qa-box" ${QA}><h3>Q1: Why does \(f(x+3)\) go <em>left</em>?</h3><p><em>The input reaches its value 3 units sooner, so the whole graph slides left — inside changes act opposite to their sign.</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q2: Stretch or compression?</h3><p><em>\(|k|&gt;1\) stretches (taller/narrower); \(0&lt;|k|&lt;1\) compresses (shorter/wider).</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q3: What does a negative \(k\) in \(kf(x)\) do?</h3><p><em>It reflects the graph over the \(x\)-axis (flips it upside down).</em></p></div>
+</div>`)]);
