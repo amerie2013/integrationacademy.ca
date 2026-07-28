@@ -78,6 +78,7 @@ export default function LessonViewPage() {
     <main style={{ minHeight: "100vh" }}>
       <SiteHeader />
       <article style={{ maxWidth: 760, margin: "0 auto", padding: "44px 28px" }}>
+        {courseId && <Link href={`/courses/${courseId}`} style={{ color: "#64748b", fontWeight: 600, fontSize: 14, textDecoration: "none", display: "inline-block", marginBottom: 16 }}>← Back to course</Link>}
         {loading ? (
           <p style={{ color: "#64748b" }}>Loading…</p>
         ) : notFound ? (

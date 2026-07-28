@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
+import Link from "next/link";
 import { supabase } from "../../../lib/supabase";
 import { SiteHeader } from "../../../components/SiteHeader";
 import { CourseNav } from "../../../components/CourseNav";
@@ -157,6 +158,7 @@ export default function AssignmentPage() {
     <main style={{ minHeight: "100vh" }}>
       <SiteHeader />
       <article style={{ maxWidth: 760, margin: "0 auto", padding: "44px 28px" }}>
+        {a.course_id && <Link href={`/courses/${a.course_id}`} style={{ color: "#64748b", fontWeight: 600, fontSize: 14, textDecoration: "none", display: "inline-block", marginBottom: 16 }}>← Back to course</Link>}
         <div style={{ fontSize: 13, fontWeight: 800, color: "#e69138", textTransform: "uppercase", letterSpacing: "0.05em" }}>Assignment</div>
         <h1 style={{ fontFamily: "Fraunces, serif", fontSize: 34, fontWeight: 700, margin: "6px 0 8px" }}>{a.title}</h1>
         {effectiveDue && <div style={{ color: "#64748b", fontSize: 14, marginBottom: 18 }}>Due {new Date(effectiveDue).toLocaleDateString()}</div>}

@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
+import Link from "next/link";
 import { supabase } from "../../../lib/supabase";
 import { SiteHeader } from "../../../components/SiteHeader";
 import { CourseNav } from "../../../components/CourseNav";
@@ -164,14 +165,14 @@ export default function QuizPlayerPage() {
   // ── RENDER ────────────────────────────────────────────────
   if (phase === "loading")
     return (
-      <Shell>
+      <Shell courseId={(quiz as any)?.course_id}>
         <p style={{ color: "#64748b" }}>Loading…</p>
       </Shell>
     );
 
   if (phase === "blocked")
     return (
-      <Shell>
+      <Shell courseId={(quiz as any)?.course_id}>
         <Card>
           <h1 style={h1}>{quiz?.title ?? "Quiz"}</h1>
           <p style={{ color: "#64748b", fontSize: 16 }}>{blockMsg}</p>
@@ -182,7 +183,7 @@ export default function QuizPlayerPage() {
 
   if (phase === "start" && quiz)
     return (
-      <Shell>
+      <Shell courseId={(quiz as any)?.course_id}>
         <Card>
           <h1 style={h1}>{quiz.title}</h1>
           {quiz.description && <p style={{ color: "#475569", fontSize: 16, lineHeight: 1.6 }}>{quiz.description}</p>}
@@ -210,7 +211,7 @@ export default function QuizPlayerPage() {
     const onePer = quiz.one_question_per_page;
     const shown = onePer ? [playQuestions[pageIdx]] : playQuestions;
     return (
-      <Shell>
+      <Shell courseId={(quiz as any)?.course_id}>
         {secondsLeft != null && (
           <div style={{ position: "sticky", top: 70, zIndex: 20, textAlign: "right", marginBottom: 8 }}>
             <span style={{ background: secondsLeft < 60 ? "#fef2f2" : "#0f172a", color: secondsLeft < 60 ? "#dc2626" : "#fff", fontWeight: 800, padding: "8px 16px", borderRadius: 999, fontSize: 15 }}>
@@ -241,7 +242,7 @@ export default function QuizPlayerPage() {
   if (phase === "results" && quiz && result) {
     const canSeeAnswers = quiz.show_answers === "after_submit";
     return (
-      <Shell>
+      <Shell courseId={(quiz as any)?.course_id}>
         <Card>
           <h1 style={h1}>Results</h1>
           {result.needsGrading && (
@@ -296,17 +297,20 @@ export default function QuizPlayerPage() {
     );
   }
 
-  return <Shell><p /></Shell>;
+  return <Shell courseId={(quiz as any)?.course_id}><p /></Shell>;
 }
 
 // ── Question input ───────────────────────────────────────────
 
 // ── layout helpers ───────────────────────────────────────────
-function Shell({ children }: { children: React.ReactNode }) {
+function Shell({ children, courseId }: { children: React.ReactNode; courseId?: string | null }) {
   return (
     <main style={{ minHeight: "100vh" }}>
       <SiteHeader />
-      <div style={{ maxWidth: 720, margin: "0 auto", padding: "32px 24px", display: "flex", flexDirection: "column", gap: 16 }}>{children}</div>
+      <div style={{ maxWidth: 720, margin: "0 auto", padding: "32px 24px", display: "flex", flexDirection: "column", gap: 16 }}>
+        {courseId && <Link href={`/courses/${courseId}`} style={{ color: "#64748b", fontWeight: 600, fontSize: 14, textDecoration: "none" }}>← Back to course</Link>}
+        {children}
+      </div>
     </main>
   );
 }
