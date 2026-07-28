@@ -337,3 +337,113 @@ authored["2.5"] = L("2.5", "Function Transformations: f(x)+k, kf(x), f(x+k)", [h
   <div class="qa-box" ${QA}><h3>Q2: Stretch or compression?</h3><p><em>\(|k|&gt;1\) stretches (taller/narrower); \(0&lt;|k|&lt;1\) compresses (shorter/wider).</em></p></div>
   <div class="qa-box" ${QA}><h3>Q3: What does a negative \(k\) in \(kf(x)\) do?</h3><p><em>It reflects the graph over the \(x\)-axis (flips it upside down).</em></p></div>
 </div>`)]);
+
+authored["3.1"] = L("3.1", "Solving Systems by Graphing & Substitution", [html(String.raw`<div class="lecture-box">
+  <h1>🤝 Solving Systems by Graphing &amp; Substitution</h1>
+  <p><strong>Overview.</strong> A <strong>system</strong> is two (or more) equations that must hold at once. Its <strong>solution</strong> is the \((x,y)\) that satisfies <em>both</em> — graphically, the point where the lines cross. Graphing shows the idea; <strong>substitution</strong> gives an exact answer.</p>
+  <h2>📌 The toolkit</h2>
+  <ul>
+    <li><strong>Graphing:</strong> draw both lines; the intersection is the solution.</li>
+    <li><strong>Substitution:</strong> solve one equation for a variable, substitute into the other, solve, then back-substitute.</li>
+    <li>Always <strong>check</strong> the point in both equations.</li>
+  </ul>
+  ${gframe(["y = x + 1", "y = -x + 5"], { title: "The lines y = x + 1 and y = −x + 5 cross at (2, 3)", xMin: -3, xMax: 7, yMin: -3, yMax: 9 })}
+  <h2>🔵 Examples</h2>
+  <div class="example-box" ${EX}><h3>Example 1: By graphing</h3><p>Solve \(\begin{cases} y = x + 1\\ y = -x + 5\end{cases}\)</p><div class="solution"><div class="step"><strong>Both graphed:</strong> they cross where \(x+1=-x+5\Rightarrow x=2,\ y=3\).</div><em>Conclusion: \((2, 3)\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 2: Substitution (one already isolated)</h3><p>Solve \(\begin{cases} y = 2x\\ x + y = 6\end{cases}\)</p><div class="solution"><div class="step"><strong>Substitute \(y=2x\):</strong> \(x + 2x = 6\Rightarrow x = 2\).</div><div class="step"><strong>Back-substitute:</strong> \(y = 2(2) = 4\).</div><em>Conclusion: \((2, 4)\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 3: Isolate first, then substitute</h3><p>Solve \(\begin{cases} x + y = 7\\ 2x - y = 2\end{cases}\)</p><div class="solution"><div class="step"><strong>Solve the first for \(x\):</strong> \(x = 7 - y\).</div><div class="step"><strong>Substitute:</strong> \(2(7-y) - y = 2\Rightarrow 14 - 3y = 2\Rightarrow y = 4\).</div><div class="step"><strong>Back-substitute:</strong> \(x = 3\).</div><em>Conclusion: \((3, 4)\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 4: A coefficient to handle</h3><p>Solve \(\begin{cases} y = 3x - 4\\ 2x + y = 6\end{cases}\)</p><div class="solution"><div class="step"><strong>Substitute:</strong> \(2x + (3x - 4) = 6\Rightarrow 5x = 10\Rightarrow x = 2\).</div><div class="step"><strong>Back-substitute:</strong> \(y = 3(2) - 4 = 2\).</div><em>Conclusion: \((2, 2)\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 5: Verify a claimed solution</h3><p>Is \((1, 5)\) a solution of \(\begin{cases} y = 4x + 1\\ x + y = 6\end{cases}\)?</p><div class="solution"><div class="step"><strong>Check both:</strong> \(4(1)+1 = 5\) ✓ and \(1 + 5 = 6\) ✓.</div><em>Conclusion: yes — it satisfies both. ✓</em></div></div>
+  <h2>🟡 Practice Questions</h2>
+  <div class="practice-box" ${PR}><h3>Question 1</h3><p>Solve \(\begin{cases} y = x - 2\\ y = -2x + 7\end{cases}\)</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(x - 2 = -2x + 7\Rightarrow x = 3,\ y = 1\): \((3,1)\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 2</h3><p>Solve \(\begin{cases} y = 3x\\ x + y = 8\end{cases}\)</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(4x = 8\Rightarrow x = 2,\ y = 6\): \((2,6)\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 3</h3><p>Solve \(\begin{cases} x + y = 10\\ y = x + 2\end{cases}\)</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(x + x + 2 = 10\Rightarrow x = 4,\ y = 6\): \((4,6)\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 4</h3><p>Solve \(\begin{cases} 2x + y = 5\\ y = x - 1\end{cases}\)</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(2x + x - 1 = 5\Rightarrow x = 2,\ y = 1\): \((2,1)\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 5</h3><p>Is \((4, 1)\) a solution of \(\begin{cases} x - y = 3\\ x + 2y = 6\end{cases}\)?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(4-1=3\) ✓ and \(4+2=6\) ✓ — yes.</em></div></div></details></div>
+  <h2>❓ Q&amp;A Summary</h2>
+  <div class="qa-box" ${QA}><h3>Q1: What does the solution represent?</h3><p><em>The single \((x,y)\) that makes both equations true — the point where the lines cross.</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q2: When is graphing a bad choice?</h3><p><em>When the intersection isn't at nice whole numbers — reading it off a graph is only approximate, so substitution is safer.</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q3: Which equation should I solve first for substitution?</h3><p><em>The one where a variable already has coefficient 1 (no fractions) — usually the easiest to isolate.</em></p></div>
+</div>`)]);
+
+authored["3.2"] = L("3.2", "Solving Systems by Elimination", [html(String.raw`<div class="lecture-box">
+  <h1>➕ Solving Systems by Elimination</h1>
+  <p><strong>Overview.</strong> <strong>Elimination</strong> adds or subtracts the two equations so that one variable cancels, leaving a single equation in one variable. It's the fastest method when the equations are in standard form.</p>
+  <h2>📌 The toolkit</h2>
+  <ul>
+    <li>Line up like terms; if a variable already has <strong>opposite</strong> coefficients, <strong>add</strong>. If they're <strong>equal</strong>, <strong>subtract</strong>.</li>
+    <li>Otherwise <strong>scale</strong> one (or both) equations first to create matching/opposite coefficients.</li>
+    <li>Solve for the surviving variable, then <strong>back-substitute</strong>.</li>
+  </ul>
+  <h2>🔵 Examples</h2>
+  <div class="example-box" ${EX}><h3>Example 1: Add to eliminate</h3><p>Solve \(\begin{cases} x + y = 10\\ x - y = 4\end{cases}\)</p><div class="solution"><div class="step"><strong>Add:</strong> the \(y\)'s cancel — \(2x = 14\Rightarrow x = 7\).</div><div class="step"><strong>Back-substitute:</strong> \(7 + y = 10\Rightarrow y = 3\).</div><em>Conclusion: \((7, 3)\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 2: Subtract to eliminate</h3><p>Solve \(\begin{cases} 2x + 3y = 13\\ 2x + y = 7\end{cases}\)</p><div class="solution"><div class="step"><strong>Subtract:</strong> the \(2x\)'s cancel — \(2y = 6\Rightarrow y = 3\).</div><div class="step"><strong>Back-substitute:</strong> \(2x + 3 = 7\Rightarrow x = 2\).</div><em>Conclusion: \((2, 3)\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 3: Scale one equation</h3><p>Solve \(\begin{cases} x + 2y = 11\\ 3x - y = 5\end{cases}\)</p><div class="solution"><div class="step"><strong>Multiply the first by \(-3\):</strong> \(-3x - 6y = -33\).</div><div class="step"><strong>Add to the second:</strong> \(-7y = -28\Rightarrow y = 4\).</div><div class="step"><strong>Back-substitute:</strong> \(x + 8 = 11\Rightarrow x = 3\).</div><em>Conclusion: \((3, 4)\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 4: Scale both equations</h3><p>Solve \(\begin{cases} 2x + 3y = 7\\ 3x + 2y = 8\end{cases}\)</p><div class="solution"><div class="step"><strong>To clear \(x\):</strong> ×3 and ×2 give \(6x + 9y = 21\) and \(6x + 4y = 16\).</div><div class="step"><strong>Subtract:</strong> \(5y = 5\Rightarrow y = 1\).</div><div class="step"><strong>Back-substitute:</strong> \(2x + 3 = 7\Rightarrow x = 2\).</div><em>Conclusion: \((2, 1)\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 5: With negatives</h3><p>Solve \(\begin{cases} 4x - 3y = 5\\ 2x + 3y = 13\end{cases}\)</p><div class="solution"><div class="step"><strong>Add (the \(\pm 3y\) cancel):</strong> \(6x = 18\Rightarrow x = 3\).</div><div class="step"><strong>Back-substitute:</strong> \(2(3) + 3y = 13\Rightarrow y = \tfrac{7}{3}\).</div><em>Conclusion: \(\left(3, \tfrac{7}{3}\right)\). ✓</em></div></div>
+  <h2>🟡 Practice Questions</h2>
+  <div class="practice-box" ${PR}><h3>Question 1</h3><p>Solve \(\begin{cases} x + y = 9\\ x - y = 1\end{cases}\)</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Add: \(2x=10\Rightarrow x=5,\ y=4\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 2</h3><p>Solve \(\begin{cases} 3x + 2y = 16\\ 3x - y = 4\end{cases}\)</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Subtract: \(3y=12\Rightarrow y=4,\ x=\tfrac{8}{3}\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 3</h3><p>Solve \(\begin{cases} x + 3y = 14\\ 2x - y = 7\end{cases}\)</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>×2 the first, subtract: \(7y=21\Rightarrow y=3,\ x=5\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 4</h3><p>Solve \(\begin{cases} 5x + 2y = 1\\ 2x + 3y = 7\end{cases}\)</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Eliminate \(y\): \(11x=-11\Rightarrow x=-1,\ y=3\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 5</h3><p>Solve \(\begin{cases} 2x - y = 3\\ 4x + y = 9\end{cases}\)</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Add: \(6x=12\Rightarrow x=2,\ y=1\).</em></div></div></details></div>
+  <h2>❓ Q&amp;A Summary</h2>
+  <div class="qa-box" ${QA}><h3>Q1: Add or subtract?</h3><p><em>Add when the matching coefficients are <strong>opposite</strong> (\(+3y\) and \(-3y\)); subtract when they're <strong>equal</strong> (\(2x\) and \(2x\)).</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q2: When do I need to scale?</h3><p><em>When no variable's coefficients already match — multiply an equation so they do.</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q3: Elimination or substitution — which is better?</h3><p><em>Elimination shines when equations are in \(Ax+By=C\) form; substitution is easier when a variable is already isolated.</em></p></div>
+</div>`)]);
+
+authored["3.3"] = L("3.3", "Real-World Systems Applications & Special Cases (No/Infinite Solutions)", [html(String.raw`<div class="lecture-box">
+  <h1>🌐 Systems in Context &amp; Special Cases</h1>
+  <p><strong>Overview.</strong> Many real problems hide <em>two</em> unknowns linked by <em>two</em> conditions — a perfect fit for a system. We'll also meet the two special outcomes: <strong>no solution</strong> (parallel lines) and <strong>infinitely many</strong> (the same line).</p>
+  <h2>📌 The toolkit</h2>
+  <ul>
+    <li><strong>Model:</strong> define two variables, write two equations, solve by elimination or substitution.</li>
+    <li><strong>No solution:</strong> the variables all cancel and leave a <strong>false</strong> statement (e.g. \(0 = 5\)) — parallel lines.</li>
+    <li><strong>Infinitely many:</strong> they cancel and leave a <strong>true</strong> statement (e.g. \(0 = 0\)) — one line drawn twice.</li>
+  </ul>
+  <h2>🔵 Examples</h2>
+  <div class="example-box" ${EX}><h3>Example 1: Ticket sales</h3><p>20 tickets sold for $130. Adult tickets are $8, child $5. How many of each?</p><div class="solution"><div class="step"><strong>Model:</strong> \(a + c = 20\) and \(8a + 5c = 130\).</div><div class="step"><strong>Substitute \(c = 20 - a\):</strong> \(8a + 5(20-a) = 130\Rightarrow 3a = 30\Rightarrow a = 10\).</div><em>Conclusion: 10 adult, 10 child. ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 2: Sum and difference</h3><p>Two numbers add to 24; their difference is 6. Find them.</p><div class="solution"><div class="step"><strong>Model:</strong> \(x + y = 24\), \(x - y = 6\).</div><div class="step"><strong>Add:</strong> \(2x = 30\Rightarrow x = 15,\ y = 9\).</div><em>Conclusion: 15 and 9. ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 3: A “per unit” model</h3><p>3 coffees and 2 muffins cost $13; 1 coffee and 2 muffins cost $7. Find each price.</p><div class="solution"><div class="step"><strong>Model:</strong> \(3c + 2m = 13\), \(c + 2m = 7\).</div><div class="step"><strong>Subtract:</strong> \(2c = 6\Rightarrow c = 3\), then \(m = 2\).</div><em>Conclusion: coffee $3, muffin $2. ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 4: No solution</h3><p>Solve \(\begin{cases} y = 2x + 1\\ y = 2x - 3\end{cases}\)</p><div class="solution"><div class="step"><strong>Set equal:</strong> \(2x + 1 = 2x - 3\Rightarrow 1 = -3\), which is false.</div><em>Conclusion: no solution — the lines are parallel. ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 5: Infinitely many solutions</h3><p>Solve \(\begin{cases} 2x + y = 4\\ 4x + 2y = 8\end{cases}\)</p><div class="solution"><div class="step"><strong>The second is just \(2\times\) the first,</strong> so elimination gives \(0 = 0\) (true).</div><em>Conclusion: infinitely many solutions — the same line. ✓</em></div></div>
+  <h2>🟡 Practice Questions</h2>
+  <div class="practice-box" ${PR}><h3>Question 1</h3><p>15 coins (dimes &amp; quarters) worth $2.55. How many of each? (\(d + q = 15,\ 10d + 25q = 255\))</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(q = 7,\ d = 8\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 2</h3><p>Two numbers add to 30; one is 4 more than the other. Find them.</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>17 and 13.</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 3</h3><p>2 shirts and 1 hat cost $35; 1 shirt and 1 hat cost $23. Find each price.</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Shirt $12, hat $11.</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 4</h3><p>How many solutions has \(\begin{cases} y = 3x + 2\\ y = 3x - 5\end{cases}\)?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>None (parallel; \(2 = -5\) is false).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 5</h3><p>How many solutions has \(\begin{cases} x - y = 2\\ 2x - 2y = 4\end{cases}\)?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Infinitely many (same line).</em></div></div></details></div>
+  <h2>❓ Q&amp;A Summary</h2>
+  <div class="qa-box" ${QA}><h3>Q1: How do I set up a word problem?</h3><p><em>Name two variables, then write one equation per condition (a “count” equation and a “value” equation, for instance).</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q2: The variables all cancelled — what does that mean?</h3><p><em>A <strong>false</strong> leftover (\(0=5\)) ⇒ no solution; a <strong>true</strong> one (\(0=0\)) ⇒ infinitely many.</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q3: How can I spot these before solving?</h3><p><em>Same slope, different intercept ⇒ none; same slope <em>and</em> intercept ⇒ infinitely many.</em></p></div>
+</div>`)]);
+
+authored["3.4"] = L("3.4", "Graphing Two-Variable Linear Inequalities & Systems", [html(String.raw`<div class="lecture-box">
+  <h1>🟦 Graphing Linear Inequalities &amp; Systems</h1>
+  <p><strong>Overview.</strong> A two-variable inequality like \(y &lt; 2x + 1\) is satisfied by a whole <strong>region</strong> of the plane, not a single line. We draw its <strong>boundary</strong> line, then <strong>shade</strong> the side that works. A <strong>system</strong> of inequalities is the <em>overlap</em> of the regions.</p>
+  <h2>📌 The toolkit</h2>
+  <ul>
+    <li><strong>Boundary line:</strong> <strong>solid</strong> for \(\le\) or \(\ge\) (included), <strong>dashed</strong> for \(&lt;\) or \(&gt;\) (excluded).</li>
+    <li><strong>Which side?</strong> Test a point not on the line (the origin \((0,0)\) is easiest). If it makes the inequality true, shade that side.</li>
+    <li><strong>System:</strong> shade each inequality; the solution is where all shadings <strong>overlap</strong>.</li>
+  </ul>
+  ${gframe(["y = 2*x + 1"], { title: "Boundary y = 2x + 1 (dashed for <): shade below, where (0,0) satisfies y < 2x+1", xMin: -5, xMax: 5, yMin: -9, yMax: 11 })}
+  <h2>🔵 Examples</h2>
+  <div class="example-box" ${EX}><h3>Example 1: A “less than” region</h3><p>Graph \(y &lt; 2x + 1\).</p><div class="solution"><div class="step"><strong>Boundary:</strong> \(y = 2x + 1\), <strong>dashed</strong> (strict).</div><div class="step"><strong>Test \((0,0)\):</strong> \(0 &lt; 1\) true ⇒ shade the side containing the origin (below).</div><em>Conclusion: dashed line, shade below. ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 2: A “greater than or equal” region</h3><p>Graph \(y \ge -x + 3\).</p><div class="solution"><div class="step"><strong>Boundary:</strong> \(y = -x + 3\), <strong>solid</strong> (\(\ge\)).</div><div class="step"><strong>Test \((0,0)\):</strong> \(0 \ge 3\) false ⇒ shade the <em>other</em> side (above).</div><em>Conclusion: solid line, shade above. ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 3: A vertical boundary</h3><p>Graph \(x \ge 2\).</p><div class="solution"><div class="step"><strong>Boundary:</strong> the vertical line \(x = 2\), solid.</div><div class="step"><strong>Shade:</strong> all points with \(x\) at least 2 — to the right.</div><em>Conclusion: solid vertical line, shade right. ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 4: Choosing a clear test point</h3><p>Graph \(2x - y &gt; 4\).</p><div class="solution"><div class="step"><strong>Boundary:</strong> \(2x - y = 4\), dashed.</div><div class="step"><strong>Test \((0,0)\):</strong> \(0 &gt; 4\) false ⇒ shade the side <em>not</em> containing the origin.</div><em>Conclusion: dashed line, shade below-right. ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 5: A system of two inequalities</h3><p>Graph \(\begin{cases} y \le x + 2\\ y &gt; -1\end{cases}\)</p><div class="solution"><div class="step"><strong>First:</strong> solid \(y = x+2\), shade below.</div><div class="step"><strong>Second:</strong> dashed \(y = -1\), shade above.</div><em>Conclusion: the solution is the band where both shadings overlap. ✓</em></div></div>
+  <h2>🟡 Practice Questions</h2>
+  <div class="practice-box" ${PR}><h3>Question 1</h3><p>Is the boundary of \(y \le 3x - 2\) solid or dashed?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Solid (\(\le\) includes the line).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 2</h3><p>For \(y &gt; x + 4\), does \((0,0)\) satisfy it?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(0 &gt; 4\) is false — shade the other side.</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 3</h3><p>Which side of \(x &lt; -1\) do you shade?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Left of the (dashed) vertical line \(x=-1\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 4</h3><p>Is \((1, 1)\) a solution of \(y \ge 2x - 3\)?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(1 \ge 2(1)-3 = -1\) — yes.</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 5</h3><p>Is \((0,0)\) in the solution of \(\begin{cases} y &lt; x + 1\\ y &gt; -2\end{cases}\)?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(0 &lt; 1\) ✓ and \(0 &gt; -2\) ✓ — yes.</em></div></div></details></div>
+  <h2>❓ Q&amp;A Summary</h2>
+  <div class="qa-box" ${QA}><h3>Q1: Solid or dashed?</h3><p><em>Solid for \(\le,\ge\) (the boundary counts); dashed for \(&lt;,&gt;\) (it doesn't).</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q2: How do I pick which side to shade?</h3><p><em>Test one point off the line — the origin if it's not on the boundary. True ⇒ shade that side; false ⇒ shade the other.</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q3: What's the solution of a system of inequalities?</h3><p><em>The region where <strong>all</strong> the individual shadings overlap.</em></p></div>
+</div>`)]);
