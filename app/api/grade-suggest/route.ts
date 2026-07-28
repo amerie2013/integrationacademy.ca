@@ -113,7 +113,7 @@ export async function POST(req: NextRequest) {
       if (inlineBytes + buf.length > MAX_INLINE_BYTES) { skippedSize++; continue; }
       inlineBytes += buf.length;
       const realMime = mimeFor(a.name || a.url, blob.type) || mime;
-      inlineParts.push({ inline_data: { mime_type: realMime, data: buf.toString("base64") } });
+      inlineParts.push({ inlineData: { mimeType: realMime, data: buf.toString("base64") } });
     }
     const notes: string[] = [];
     if (skippedType > 0) notes.push(`${skippedType} attached file(s) are an unsupported type and weren't read.`);
@@ -147,8 +147,12 @@ export async function POST(req: NextRequest) {
     if (!aiRes.ok) {
       const errText = await aiRes.text().catch(() => "");
       console.error("grade-suggest model error", aiRes.status, errText);
+      // TEMP DIAGNOSTIC: surface the upstream reason so we can pin the model /
+      // key / format issue instead of a generic message. Revert once resolved.
+      let why = errText.slice(0, 400);
+      try { why = JSON.parse(errText)?.error?.message ?? why; } catch {}
       return NextResponse.json(
-        { error: aiRes.status === 429 ? "AI grading hit its rate limit — try again in a minute." : "The AI grader is temporarily unavailable." },
+        { error: aiRes.status === 429 ? "AI grading hit its rate limit — try again in a minute." : `AI grader error ${aiRes.status} (model "${model}"): ${why}` },
         { status: 502 },
       );
     }
