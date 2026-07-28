@@ -46,11 +46,15 @@ export default function ClassManagePage() {
     let asRes: { data: any[] | null; error: any } = await supabase.from("assignments").select("id, title, due_date, created_by, class_id").eq("course_id", courseId).or(`class_id.is.null,class_id.eq.${classId}`).order("created_at");
     if (asRes.error) asRes = await supabase.from("assignments").select("id, title, due_date").eq("course_id", courseId).order("created_at");
     const as = asRes.data;
+    // Per-class due dates (this class's own schedule; independent of the course).
+    const { data: caRows } = await supabase.from("class_assignments").select("assignment_id, due_date").eq("class_id", classId);
+    const dueByAsg: Record<string, string | null> = {};
+    (caRows ?? []).forEach((r: any) => (dueByAsg[r.assignment_id] = r.due_date));
     setLocked(new Set((lk ?? []).map((r: any) => `${r.item_type}:${r.item_id}`)));
     const def: SeqItem[] = [
       ...(ls ?? []).map((l: any) => ({ type: "lesson" as const, id: l.id, title: l.title })),
       ...(qs ?? []).map((q: any) => ({ type: "quiz" as const, id: q.id, title: q.title })),
-      ...(as ?? []).map((a: any) => ({ type: "assignment" as const, id: a.id, title: a.title, due_date: a.due_date ?? null, created_by: a.created_by ?? null, class_id: a.class_id ?? null })),
+      ...(as ?? []).map((a: any) => ({ type: "assignment" as const, id: a.id, title: a.title, due_date: dueByAsg[a.id] ?? null, created_by: a.created_by ?? null, class_id: a.class_id ?? null })),
       ...(ws ?? []).map((w: any) => ({ type: "worksheet" as const, id: w.id, title: w.code ? `${w.code} ${w.title}` : w.title })),
     ];
     // Default order: group by subject code (1.1, 1.2, …); within a subject lesson → worksheet → assignment → quiz.

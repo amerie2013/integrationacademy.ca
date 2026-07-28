@@ -43,9 +43,14 @@ export async function POST(req: NextRequest) {
     if (asg.course_id !== cls.course_id) return NextResponse.json({ error: "That assignment isn't part of this class." }, { status: 400 });
 
     if (action === "set-due") {
+      // Write to THIS class's schedule only — never the shared course assignment,
+      // which would change the due date for every class and the admin.
       const raw = body?.due;
       const due = raw ? new Date(String(raw)).toISOString() : null;
-      const { error } = await admin.from("assignments").update({ due_date: due }).eq("id", assignmentId);
+      const { error } = await admin.from("class_assignments").upsert(
+        { class_id: classId, assignment_id: assignmentId, due_date: due, updated_at: new Date().toISOString() },
+        { onConflict: "class_id,assignment_id" },
+      );
       if (error) return NextResponse.json({ error: error.message }, { status: 500 });
       return NextResponse.json({ ok: true, due_date: due });
     }

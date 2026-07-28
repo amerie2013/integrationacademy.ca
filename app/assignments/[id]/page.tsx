@@ -35,17 +35,27 @@ export default function AssignmentPage() {
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
   const [showCalc, setShowCalc] = useState(false);
+  const [effectiveDue, setEffectiveDue] = useState<string | null>(null);
 
   useEffect(() => {
     (async () => {
       const { data } = await supabase.from("assignments").select("id, title, description, due_date, course_id, tutor_enabled").eq("id", id).single();
       if (!data) { setNotFound(true); setLoading(false); return; }
       setA(data as Assignment);
+      let due: string | null = (data.due_date as string | null) ?? null; // course default
       const { data: { session } } = await supabase.auth.getSession();
       if (session) {
         setUid(session.user.id);
         const { data: me } = await supabase.from("profiles").select("role").eq("id", session.user.id).single();
         setRole(me?.role ?? null);
+        // Show the due date for THIS student's class, if their class has set one.
+        const { data: mem } = await supabase.from("class_students").select("class_id").eq("student_id", session.user.id);
+        const classIds = (mem ?? []).map((m: any) => m.class_id);
+        if (classIds.length) {
+          const { data: cas } = await supabase.from("class_assignments").select("due_date").eq("assignment_id", id).in("class_id", classIds);
+          const withDue = (cas ?? []).find((r: any) => r.due_date);
+          if (withDue) due = withDue.due_date;
+        }
         // Graduated fallback so nothing breaks between deploy and each migration:
         // multi-file (files column) → legacy single file → no attachments.
         let sub: any = null;
@@ -69,6 +79,7 @@ export default function AssignmentPage() {
         }
         if (sub) { setSubmission(sub); setContent(sub.content ?? ""); }
       }
+      setEffectiveDue(due);
       setLoading(false);
     })();
   }, [id]);
@@ -142,7 +153,7 @@ export default function AssignmentPage() {
       <article style={{ maxWidth: 760, margin: "0 auto", padding: "44px 28px" }}>
         <div style={{ fontSize: 13, fontWeight: 800, color: "#e69138", textTransform: "uppercase", letterSpacing: "0.05em" }}>Assignment</div>
         <h1 style={{ fontFamily: "Fraunces, serif", fontSize: 34, fontWeight: 700, margin: "6px 0 8px" }}>{a.title}</h1>
-        {a.due_date && <div style={{ color: "#64748b", fontSize: 14, marginBottom: 18 }}>Due {new Date(a.due_date).toLocaleDateString()}</div>}
+        {effectiveDue && <div style={{ color: "#64748b", fontSize: 14, marginBottom: 18 }}>Due {new Date(effectiveDue).toLocaleDateString()}</div>}
 
         <div style={{ background: "#fff", border: "1px solid #e2e8f0", borderRadius: 14, padding: 22 }}>
           <AssignmentBody text={a.description ?? ""} />
