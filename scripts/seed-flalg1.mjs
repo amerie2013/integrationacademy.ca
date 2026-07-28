@@ -8,6 +8,7 @@ import { readFileSync } from "fs";
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
 import { sk } from "./seed-mpm2d.mjs";
+import { authored } from "./flalg1-lessons.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const env = {};
@@ -79,6 +80,12 @@ const subjects = [
   sk("6.3", "Scatter Plots, Lines of Best Fit, and Residuals Analysis", "Plot paired data, fit a line of best fit, and use residuals to judge how well the line fits.", ["Building and describing a scatter plot", "Fitting a line of best fit", "Residuals and what they reveal about the fit"]),
   sk("6.4", "Two-Way Frequency Tables & Categorical Data", "Organize categorical data in a two-way table and read joint, marginal, and relative frequencies to look for association.", ["Building a two-way frequency table", "Joint and marginal frequencies", "Relative frequencies and association between categories"]),
 ];
+
+// Splice fully-authored lessons over their scaffolds.
+for (let i = 0; i < subjects.length; i++) {
+  const a = authored[subjects[i].code];
+  if (a) subjects[i] = a;
+}
 
 async function run() {
   const teacherId = await getTeacherId();
