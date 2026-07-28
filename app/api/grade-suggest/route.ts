@@ -61,7 +61,6 @@ export async function POST(req: NextRequest) {
 
     const body = await req.json().catch(() => ({} as any));
     const submissionId = String(body?.submissionId ?? "");
-    const outOf = Math.max(1, Math.min(1000, Number(body?.outOf) || 10));
     const force = !!body?.force;
     if (!submissionId) return NextResponse.json({ error: "Missing submission." }, { status: 400 });
 
@@ -76,11 +75,11 @@ export async function POST(req: NextRequest) {
 
     const admin = getAdmin();
 
-    // Cached result — unless the teacher forces a refresh or changes the scale.
+    // Cached result — a stored per-question breakdown means we can skip the model.
     if (!force) {
       const { data: cached } = await admin.from("submission_ai_grades").select("*").eq("submission_id", submissionId).maybeSingle();
-      if (cached && Number(cached.max_points) === outOf) {
-        return NextResponse.json({ mark: Number(cached.mark), outOf, feedback: cached.feedback, usedImage: cached.used_image, cached: true });
+      if (cached && Array.isArray(cached.breakdown)) {
+        return NextResponse.json({ total: Number(cached.mark), max: Number(cached.max_points), feedback: cached.feedback, breakdown: cached.breakdown, usedImage: cached.used_image, cached: true });
       }
     }
 
@@ -127,8 +126,10 @@ export async function POST(req: NextRequest) {
     const system =
       `You are a fair, experienced Ontario secondary-school math teacher. You are ADVISING a human teacher who makes the final grading decision — you only suggest. ` +
       `The QUESTIONS are in the "Assignment" section below. The student's WORK is in the attached image(s)/PDF(s) and/or the typed answer — a scan may show only their answers and working WITHOUT restating the questions, so match each piece of their work to the corresponding assignment question. ` +
-      `Grade out of ${outOf}. Read handwriting and scans carefully, including the mathematics. Reward correct reasoning; note errors, missing steps, or unanswered questions. ` +
-      `Be encouraging but honest. Respond with ONLY a JSON object: {"mark": <number 0..${outOf}>, "feedback": "<2-4 sentences: what is correct, what is missing or wrong, and why this mark. Address the student.>"}.`;
+      `Identify EVERY question in the assignment, in order. Grade EACH question out of 10. If a question is unanswered, give it 0 and say it was skipped. Read handwriting and scans carefully, including the mathematics; reward correct reasoning and note errors or missing steps. ` +
+      `Be encouraging but honest. Respond with ONLY a JSON object of this exact shape: ` +
+      `{"questions":[{"label":"<short question label e.g. Q1>","mark":<0-10>,"comment":"<one short sentence on this question>"}, ...],"feedback":"<2-3 sentence overall summary addressed to the student>"}. ` +
+      `Include one entry per assignment question, in order.`;
 
     const parts: any[] = [
       { text: `Assignment (the questions):\n${asg?.title ?? "(untitled)"}\n${asg?.description ?? "(no description provided)"}\n\nStudent's typed answer:\n${typed || "(none — see the attached file(s) for their work)"}` },
@@ -139,8 +140,9 @@ export async function POST(req: NextRequest) {
       systemInstruction: { parts: [{ text: system }] },
       contents: [{ role: "user", parts }],
       // 2.5-flash is a thinking model — it spends output tokens reasoning before
-      // the answer, so leave generous headroom or the JSON gets truncated.
-      generationConfig: { temperature: 0.2, maxOutputTokens: 2048, responseMimeType: "application/json" },
+      // the answer, so leave generous headroom (a per-question breakdown is long)
+      // or the JSON gets truncated.
+      generationConfig: { temperature: 0.2, maxOutputTokens: 4096, responseMimeType: "application/json" },
     });
 
     // Try the configured model, then fall back through known Flash models. Falls
@@ -184,7 +186,8 @@ export async function POST(req: NextRequest) {
     const cand = data?.candidates?.[0];
     const content = cand?.content?.parts?.map((p: any) => p.text).filter(Boolean).join("") ?? "";
     const parsed = parseJson(content);
-    if (!parsed || typeof parsed.mark === "undefined") {
+    const rawQs = Array.isArray(parsed?.questions) ? parsed.questions : null;
+    if (!parsed || !rawQs || !rawQs.length) {
       const finish = cand?.finishReason ?? "?";
       console.error("grade-suggest parse fail", usedModel, finish, content.slice(0, 300));
       return NextResponse.json(
@@ -199,16 +202,23 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const mark = Math.max(0, Math.min(outOf, Number(parsed.mark)));
+    // Each question is graded out of 10; the total is the sum, out of 10 × count.
+    const breakdown = rawQs.slice(0, 50).map((q: any, i: number) => ({
+      label: String(q?.label ?? `Q${i + 1}`).slice(0, 40),
+      mark: Math.max(0, Math.min(10, Math.round(Number(q?.mark) || 0))),
+      comment: String(q?.comment ?? "").slice(0, 300),
+    }));
+    const total = breakdown.reduce((s: number, q: any) => s + q.mark, 0);
+    const max = breakdown.length * 10;
     const feedback = [String(parsed.feedback ?? "").trim(), fileNote].filter(Boolean).join("\n\n");
 
     // Cache (staff-only table; never exposed to the student).
     await admin.from("submission_ai_grades").upsert(
-      { submission_id: submissionId, mark, max_points: outOf, feedback, used_image: inlineParts.length > 0, model: model_, created_at: new Date().toISOString() },
+      { submission_id: submissionId, mark: total, max_points: max, feedback, breakdown, used_image: inlineParts.length > 0, model: model_, created_at: new Date().toISOString() },
       { onConflict: "submission_id" },
     );
 
-    return NextResponse.json({ mark, outOf, feedback, usedImage: inlineParts.length > 0 });
+    return NextResponse.json({ total, max, feedback, breakdown, usedImage: inlineParts.length > 0 });
   } catch (e: any) {
     console.error("grade-suggest", e);
     return NextResponse.json({ error: "Unexpected error." }, { status: 500 });
