@@ -13,6 +13,14 @@ const COLORS = ["#111827", "#dc2626", "#1d4ed8", "#1b7a44", "#ea580c", "#7c3aed"
 // Bright, low-saturation-on-paper colours that read well at 35% opacity.
 const HL_COLORS = ["#fde047", "#86efac", "#7dd3fc", "#f9a8d4", "#fdba74", "#c4b5fd"];
 const WIDTHS = [2, 4, 7];
+const FONTS = [
+  { label: "Sans", css: "system-ui, -apple-system, 'Segoe UI', sans-serif" },
+  { label: "Serif", css: "Georgia, 'Times New Roman', serif" },
+  { label: "Mono", css: "'Courier New', monospace" },
+  { label: "Marker", css: "'Comic Sans MS', 'Comic Sans', cursive" },
+];
+const TEXT_SIZES = [16, 20, 24, 32, 48, 64];
+const DEFAULT_FONT = FONTS[1].css; // Serif, matching the previous look
 const SYMBOLS = ["×", "÷", "π", "√", "²", "³", "≤", "≥", "≠", "±", "∞", "θ", "Δ", "°", "∫", "Σ", "→", "½",
   "α", "β", "γ", "δ", "λ", "μ", "σ", "φ", "ω", "Ω", "≈", "∈"];
 
@@ -72,6 +80,8 @@ export function Whiteboard({ initialBoardId }: { initialBoardId?: string }) {
   const movedRef = useRef(false);
   const editTargetRef = useRef<number | null>(null); // index of the text/math shape being re-edited
   const [editing, setEditing] = useState<Pt | null>(null);
+  const [textFont, setTextFont] = useState(DEFAULT_FONT);
+  const [textSize, setTextSize] = useState(24);
   const [textVal, setTextVal] = useState("");
   const textInputRef = useRef<HTMLInputElement>(null);
   const [mathEdit, setMathEdit] = useState<Pt | null>(null);
@@ -180,7 +190,7 @@ export function Whiteboard({ initialBoardId }: { initialBoardId?: string }) {
     for (let i = arr.length - 1; i >= 0; i--) {
       const s = arr[i];
       if (s.t === "math" && hitShape(p, s)) { editTargetRef.current = i; setColor(s.c); setMathEdit({ x: s.x, y: s.y }); setMathLatex(s.latex); return; }
-      if (s.t === "text" && hitShape(p, s)) { editTargetRef.current = i; setColor(s.c); setEditing({ x: s.x, y: s.y }); setTextVal(s.s); setTimeout(() => textInputRef.current?.focus(), 0); return; }
+      if (s.t === "text" && hitShape(p, s)) { editTargetRef.current = i; setColor(s.c); setTextSize(s.size); setTextFont((s as any).font ?? DEFAULT_FONT); setEditing({ x: s.x, y: s.y }); setTextVal(s.s); setTimeout(() => textInputRef.current?.focus(), 0); return; }
     }
   }
   function distSeg(p: Pt, a: Pt, b: Pt) { const dx = b.x - a.x, dy = b.y - a.y, len = dx * dx + dy * dy || 1; let t = ((p.x - a.x) * dx + (p.y - a.y) * dy) / len; t = Math.max(0, Math.min(1, t)); return Math.hypot(p.x - (a.x + t * dx), p.y - (a.y + t * dy)); }
@@ -240,7 +250,7 @@ export function Whiteboard({ initialBoardId }: { initialBoardId?: string }) {
       for (let i = arr.length - 1; i >= 0; i--) {
         const s = arr[i];
         if (s.t === "math" && hitShape(p, s)) { editTargetRef.current = i; setColor(s.c); setMathEdit({ x: s.x, y: s.y }); setMathLatex(s.latex); return; }
-        if (s.t === "text" && hitShape(p, s)) { editTargetRef.current = i; setColor(s.c); setEditing({ x: s.x, y: s.y }); setTextVal(s.s); setTimeout(() => textInputRef.current?.focus(), 0); return; }
+        if (s.t === "text" && hitShape(p, s)) { editTargetRef.current = i; setColor(s.c); setTextSize(s.size); setTextFont((s as any).font ?? DEFAULT_FONT); setEditing({ x: s.x, y: s.y }); setTextVal(s.s); setTimeout(() => textInputRef.current?.focus(), 0); return; }
       }
     }
     if (tool === "text") { editTargetRef.current = null; setEditing(p); setTextVal(""); setTimeout(() => textInputRef.current?.focus(), 0); return; }
@@ -283,8 +293,8 @@ export function Whiteboard({ initialBoardId }: { initialBoardId?: string }) {
     if (editing && textVal.trim()) {
       if (idx != null && shapes()[idx]?.t === "text") {
         const o = shapes()[idx] as Extract<Shape, { t: "text" }>;
-        const arr = shapes().slice(); arr[idx] = { t: "text", x: o.x, y: o.y, s: textVal, c: color, size: o.size }; commit(arr);
-      } else { commit([...shapes(), { t: "text", x: editing.x, y: editing.y, s: textVal, c: color, size: Math.max(16, width * 7) }]); setTool("move"); }
+        const arr = shapes().slice(); arr[idx] = { t: "text", x: o.x, y: o.y, s: textVal, c: color, size: textSize, font: textFont }; commit(arr);
+      } else { commit([...shapes(), { t: "text", x: editing.x, y: editing.y, s: textVal, c: color, size: textSize, font: textFont }]); setTool("move"); }
     }
     setEditing(null); setTextVal(""); editTargetRef.current = null;
   }
@@ -447,7 +457,17 @@ export function Whiteboard({ initialBoardId }: { initialBoardId?: string }) {
 
       {editing && (
         <div style={{ ...bar, background: "#1e293b", flexWrap: "wrap" }}>
-          <span style={{ color: "#94a3b8", fontSize: 12, fontWeight: 700, marginRight: 4 }}>Insert:</span>
+          <span style={{ color: "#94a3b8", fontSize: 12, fontWeight: 700, marginRight: 4 }}>Font:</span>
+          {FONTS.map((f) => (
+            <button key={f.label} onMouseDown={(e) => { e.preventDefault(); setTextFont(f.css); }}
+              style={{ ...symBtn, fontFamily: f.css, fontSize: 14, padding: "0 10px", ...(textFont === f.css ? { background: "#2563eb", borderColor: "#2563eb", color: "#fff" } : {}) }}>{f.label}</button>
+          ))}
+          <span style={{ color: "#94a3b8", fontSize: 12, fontWeight: 700, margin: "0 4px 0 8px" }}>Size:</span>
+          {TEXT_SIZES.map((n) => (
+            <button key={n} onMouseDown={(e) => { e.preventDefault(); setTextSize(n); }}
+              style={{ ...symBtn, fontSize: 13, ...(textSize === n ? { background: "#2563eb", borderColor: "#2563eb", color: "#fff" } : {}) }}>{n}</button>
+          ))}
+          <span style={{ color: "#94a3b8", fontSize: 12, fontWeight: 700, margin: "0 4px 0 8px" }}>Insert:</span>
           {SYMBOLS.map((s) => <button key={s} onMouseDown={(e) => { e.preventDefault(); insertSymbol(s); }} style={symBtn}>{s}</button>)}
         </div>
       )}
@@ -457,7 +477,7 @@ export function Whiteboard({ initialBoardId }: { initialBoardId?: string }) {
         {editing && (
           <input ref={textInputRef} value={textVal} onChange={(e) => setTextVal(e.target.value)}
             onKeyDown={(e) => { if (e.key === "Enter") commitText(); if (e.key === "Escape") { setEditing(null); setTextVal(""); editTargetRef.current = null; } }} onBlur={commitText}
-            placeholder="Type… (Enter to place)" style={{ position: "absolute", left: editing.x, top: editing.y, font: `${Math.max(16, width * 7)}px Georgia, serif`, color, border: "1px dashed #94a3b8", background: "rgba(255,255,255,.9)", outline: "none", padding: "0 2px", minWidth: 120 }} />
+            placeholder="Type… (Enter to place)" style={{ position: "absolute", left: editing.x, top: editing.y, font: `${textSize}px ${textFont}`, color, border: "1px dashed #94a3b8", background: "rgba(255,255,255,.9)", outline: "none", padding: "0 2px", minWidth: 120 }} />
         )}
         {/* placed math equations (KaTeX overlays) */}
         {shapes().map((s, i) => s.t === "math" ? (

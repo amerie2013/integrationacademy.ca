@@ -6,7 +6,7 @@ export type Shape =
   | { t: "pen"; pts: Pt[]; c: string; w: number }
   | { t: "hl"; pts: Pt[]; c: string; w: number } // highlighter: thick + translucent
   | { t: "line" | "arrow" | "rect" | "ellipse"; a: Pt; b: Pt; c: string; w: number }
-  | { t: "text"; x: number; y: number; s: string; c: string; size: number }
+  | { t: "text"; x: number; y: number; s: string; c: string; size: number; font?: string }
   | { t: "math"; x: number; y: number; latex: string; c: string; size: number }
   | { t: "image"; x: number; y: number; w: number; h: number; src: string }
   | { t: "erase"; pts: Pt[]; w: number };
@@ -53,7 +53,7 @@ export function drawShape(ctx: CanvasRenderingContext2D, s: Shape) {
   }
   if (s.t === "text") {
     ctx.fillStyle = s.c;
-    ctx.font = `${s.size}px Georgia, 'Times New Roman', serif`;
+    ctx.font = `${s.size}px ${s.font || "Georgia, 'Times New Roman', serif"}`;
     ctx.textBaseline = "top";
     s.s.split("\n").forEach((ln, i) => ctx.fillText(ln, s.x, s.y + i * s.size * 1.25));
     return;
