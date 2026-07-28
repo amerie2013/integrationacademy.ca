@@ -261,13 +261,7 @@ export default function ClassManagePage() {
                   <>
                     <label title="Set the due date for this class" style={{ display: "flex", alignItems: "center", gap: 5, fontSize: 12, color: "#64748b", fontWeight: 600 }}>
                       Due
-                      <input
-                        type="date"
-                        value={it.due_date ? new Date(it.due_date).toISOString().slice(0, 10) : ""}
-                        disabled={busyAsg === it.id}
-                        onChange={(e) => setDue(it.id, e.target.value)}
-                        style={{ padding: "5px 8px", borderRadius: 8, border: "1px solid #cbd5e1", fontSize: 12, color: "#334155" }}
-                      />
+                      <DueDate value={it.due_date} disabled={busyAsg === it.id} onSave={(v) => setDue(it.id, v)} />
                     </label>
                     <Link href={`/classes/${classId}/assignments/${it.id}/submissions`} style={gradeLink}>Submissions →</Link>
                     <button onClick={() => toggleLock(it)} style={{ border: "1px solid", borderColor: isLocked ? "#fecaca" : "#a7f3d0", background: isLocked ? "#fef2f2" : "#ecfdf5", color: isLocked ? "#b91c1c" : "#065f46", borderRadius: 999, padding: "6px 14px", fontWeight: 700, fontSize: 13, cursor: "pointer", minWidth: 104 }}>
@@ -290,6 +284,35 @@ export default function ClassManagePage() {
         </div>
       </div>
     </main>
+  );
+}
+
+// Native date inputs fire onChange on every segment edit, so saving there would
+// persist a half-typed year (e.g. "0002" before you finish typing "2026"). This
+// only commits on blur/Enter, bounds the year with min/max, and ignores an
+// out-of-range year so a mistyped value never saves.
+function DueDate({ value, disabled, onSave }: { value?: string | null; disabled?: boolean; onSave: (v: string) => void }) {
+  const toInput = (v?: string | null) => (v ? new Date(v).toISOString().slice(0, 10) : "");
+  const [val, setVal] = useState(toInput(value));
+  useEffect(() => { setVal(toInput(value)); }, [value]);
+  const nowY = new Date().getFullYear();
+  const min = `${nowY - 1}-01-01`;
+  const max = `${nowY + 5}-12-31`;
+  function commit() {
+    if (val === toInput(value)) return;              // unchanged
+    if (val === "") { onSave(""); return; }          // cleared
+    const y = Number(val.slice(0, 4));
+    if (!(y >= nowY - 1 && y <= nowY + 5)) return;    // ignore a nonsense year; keep editing
+    onSave(val);
+  }
+  return (
+    <input
+      type="date" value={val} min={min} max={max} disabled={disabled}
+      onChange={(e) => setVal(e.target.value)}
+      onBlur={commit}
+      onKeyDown={(e) => { if (e.key === "Enter") e.currentTarget.blur(); }}
+      style={{ padding: "5px 8px", borderRadius: 8, border: "1px solid #cbd5e1", fontSize: 12, color: "#334155" }}
+    />
   );
 }
 
