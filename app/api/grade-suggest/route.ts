@@ -135,27 +135,42 @@ export async function POST(req: NextRequest) {
       ...inlineParts,
     ];
 
-    const aiRes = await fetch(`${geminiUrl(model)}?key=${apiKey}`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        systemInstruction: { parts: [{ text: system }] },
-        contents: [{ role: "user", parts }],
-        generationConfig: { temperature: 0.2, maxOutputTokens: 700, responseMimeType: "application/json" },
-      }),
+    const reqBody = JSON.stringify({
+      systemInstruction: { parts: [{ text: system }] },
+      contents: [{ role: "user", parts }],
+      generationConfig: { temperature: 0.2, maxOutputTokens: 700, responseMimeType: "application/json" },
     });
-    if (!aiRes.ok) {
-      const errText = await aiRes.text().catch(() => "");
-      console.error("grade-suggest model error", aiRes.status, errText);
-      // TEMP DIAGNOSTIC: surface the upstream reason so we can pin the model /
-      // key / format issue instead of a generic message. Revert once resolved.
-      let why = errText.slice(0, 400);
-      try { why = JSON.parse(errText)?.error?.message ?? why; } catch {}
+
+    // Try the configured model, then fall back through known Flash models if it
+    // reports "model not found" (404) — so a stale/unavailable model name doesn't
+    // break grading. Any other error (bad key, API not enabled, rate limit) stops
+    // and is surfaced.
+    const candidates = [model, "gemini-2.5-flash", "gemini-2.0-flash", "gemini-flash-latest", "gemini-1.5-flash"].filter((m, i, a) => a.indexOf(m) === i);
+    let aiRes: Response | null = null;
+    let usedModel = model;
+    let lastStatus = 0;
+    let lastErr = "";
+    for (const m of candidates) {
+      const r = await fetch(`${geminiUrl(m)}?key=${apiKey}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: reqBody,
+      });
+      if (r.ok) { aiRes = r; usedModel = m; break; }
+      lastStatus = r.status;
+      lastErr = await r.text().catch(() => "");
+      console.error("grade-suggest model error", m, r.status, lastErr);
+      if (r.status !== 404) break; // only a missing model is worth trying the next one
+    }
+    if (!aiRes) {
+      let why = lastErr.slice(0, 400);
+      try { why = JSON.parse(lastErr)?.error?.message ?? why; } catch {}
       return NextResponse.json(
-        { error: aiRes.status === 429 ? "AI grading hit its rate limit — try again in a minute." : `AI grader error ${aiRes.status} (model "${model}"): ${why}` },
+        { error: lastStatus === 429 ? "AI grading hit its rate limit — try again in a minute." : `AI grader error ${lastStatus}: ${why}` },
         { status: 502 },
       );
     }
+    const model_ = usedModel; // the model that actually answered (for the cache row)
 
     const data = await aiRes.json();
     const content = data?.candidates?.[0]?.content?.parts?.map((p: any) => p.text).filter(Boolean).join("") ?? "";
@@ -169,7 +184,7 @@ export async function POST(req: NextRequest) {
 
     // Cache (staff-only table; never exposed to the student).
     await admin.from("submission_ai_grades").upsert(
-      { submission_id: submissionId, mark, max_points: outOf, feedback, used_image: inlineParts.length > 0, model, created_at: new Date().toISOString() },
+      { submission_id: submissionId, mark, max_points: outOf, feedback, used_image: inlineParts.length > 0, model: model_, created_at: new Date().toISOString() },
       { onConflict: "submission_id" },
     );
 
