@@ -50,7 +50,7 @@ export function AiGradeButton({ submissionId, onUse }: { submissionId: string; o
         <div style={{ marginTop: 10, background: "#f5f3ff", border: "1px solid #ddd6fe", borderRadius: 10, padding: "12px 14px" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
             <span style={{ fontWeight: 800, color: "#4338ca", fontSize: 15 }}>AI suggests {draft.mark} / {draft.outOf}</span>
-            {draft.usedImage && <span style={{ fontSize: 11, fontWeight: 700, color: "#5b21b6", background: "#ede9fe", borderRadius: 6, padding: "2px 7px" }}>read the photo</span>}
+            {draft.usedImage && <span style={{ fontSize: 11, fontWeight: 700, color: "#5b21b6", background: "#ede9fe", borderRadius: 6, padding: "2px 7px" }}>read the attachment</span>}
             <span style={{ fontSize: 11, color: "#8b5cf6" }}>· a draft — you decide</span>
           </div>
           <p style={{ margin: "8px 0 0", fontSize: 13, color: "#334155", lineHeight: 1.5, whiteSpace: "pre-wrap" }}>{draft.feedback}</p>

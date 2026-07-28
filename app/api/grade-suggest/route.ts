@@ -20,10 +20,22 @@ const userClient = (token: string) =>
     auth: { persistSession: false, autoRefreshToken: false },
   });
 
-// Gemini exposes an OpenAI-compatible endpoint, so this mirrors the tutor's
-// DeepSeek call. Both key and model are env-configurable.
-const GEMINI_URL = "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions";
-const IMAGE_EXT = /\.(jpe?g|png|webp|gif|heic|heif)$/i;
+// Gemini's NATIVE endpoint (not the OpenAI-compatible one) so it can read PDFs
+// as well as images — students often submit CamScanner-style PDF scans. Model is
+// env-configurable.
+const geminiUrl = (model: string) => `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
+
+// What Gemini can read inline. Keep well under the ~20 MB request cap after
+// base64 (which inflates ~33%); our upload caps already bound this.
+const MAX_INLINE_BYTES = 14_000_000;
+function mimeFor(name: string, blobType?: string): string | null {
+  if (blobType && (blobType.startsWith("image/") || blobType === "application/pdf")) return blobType;
+  const ext = (name.match(/\.([a-z0-9]+)$/i)?.[1] || "").toLowerCase();
+  if (ext === "pdf") return "application/pdf";
+  if (["jpg", "jpeg"].includes(ext)) return "image/jpeg";
+  if (["png", "webp", "gif", "heic", "heif"].includes(ext)) return `image/${ext === "jpg" ? "jpeg" : ext}`;
+  return null; // unreadable type
+}
 
 /** Pull the storage path (after the bucket) out of a stored submissions URL. */
 function submissionPath(fileUrl: string): string | null {
@@ -84,47 +96,52 @@ export async function POST(req: NextRequest) {
     const atts: { url: string; name?: string | null }[] =
       Array.isArray(sub.files) && sub.files.length ? sub.files : sub.file_url ? [{ url: sub.file_url, name: sub.file_name }] : [];
 
-    // Download every image attachment (cap at 5) so the AI can read multi-page
-    // handwritten work. Non-image files (PDFs) are noted but not read.
-    const imageDataUrls: string[] = [];
-    let skippedNonImage = 0;
+    // Download every readable attachment (images AND PDFs, cap at 5) so the AI
+    // can read multi-page handwritten work and scanned CamScanner-style PDFs.
+    const inlineParts: any[] = [];
+    let inlineBytes = 0;
+    let skippedType = 0;
+    let skippedSize = 0;
     for (const a of atts.slice(0, 5)) {
-      if (!IMAGE_EXT.test(a.name || a.url)) { skippedNonImage++; continue; }
+      const mime = mimeFor(a.name || a.url, undefined);
+      if (!mime) { skippedType++; continue; }
       const path = submissionPath(a.url);
       if (!path) continue;
       const { data: blob, error: dlErr } = await admin.storage.from("submissions").download(path);
       if (dlErr || !blob) continue;
       const buf = Buffer.from(await blob.arrayBuffer());
-      const mime = blob.type && blob.type.startsWith("image/") ? blob.type : "image/jpeg";
-      imageDataUrls.push(`data:${mime};base64,${buf.toString("base64")}`);
+      if (inlineBytes + buf.length > MAX_INLINE_BYTES) { skippedSize++; continue; }
+      inlineBytes += buf.length;
+      const realMime = mimeFor(a.name || a.url, blob.type) || mime;
+      inlineParts.push({ inline_data: { mime_type: realMime, data: buf.toString("base64") } });
     }
-    const fileNote = skippedNonImage > 0
-      ? `${skippedNonImage} attached file(s) aren't images (e.g. PDFs), so the AI couldn't read them — it graded the typed answer${imageDataUrls.length ? " and photos" : ""} only.`
-      : undefined;
+    const notes: string[] = [];
+    if (skippedType > 0) notes.push(`${skippedType} attached file(s) are an unsupported type and weren't read.`);
+    if (skippedSize > 0) notes.push(`${skippedSize} attached file(s) were too large to read.`);
+    const fileNote = notes.length ? notes.join(" ") : undefined;
 
-    if (!typed && imageDataUrls.length === 0) {
-      return NextResponse.json({ error: "Nothing for the AI to read — this submission has no typed answer and no readable image." }, { status: 422 });
+    if (!typed && inlineParts.length === 0) {
+      return NextResponse.json({ error: "Nothing for the AI to read — this submission has no typed answer and no readable attachment." }, { status: 422 });
     }
 
     const system =
       `You are a fair, experienced Ontario secondary-school math teacher. You are ADVISING a human teacher who makes the final grading decision — you only suggest. ` +
-      `Grade the student's submission out of ${outOf}. Read any attached image of handwritten work carefully, including the mathematics. ` +
+      `Grade the student's submission out of ${outOf}. Read any attached images or PDF scans of handwritten work carefully, including the mathematics. ` +
       `Be encouraging but honest; reward correct reasoning and note errors or missing steps. ` +
       `Respond with ONLY a JSON object: {"mark": <number 0..${outOf}>, "feedback": "<2-4 sentences: what is correct, what is missing or wrong, and why this mark. Address the student.>"}.`;
 
-    const userContent: any[] = [
-      { type: "text", text: `Assignment: ${asg?.title ?? "(untitled)"}\n\n${asg?.description ?? ""}\n\nStudent's typed answer:\n${typed || "(none — see the attached image(s))"}` },
+    const parts: any[] = [
+      { text: `Assignment: ${asg?.title ?? "(untitled)"}\n\n${asg?.description ?? ""}\n\nStudent's typed answer:\n${typed || "(none — see the attached file(s))"}` },
+      ...inlineParts,
     ];
-    for (const url of imageDataUrls) userContent.push({ type: "image_url", image_url: { url } });
 
-    const aiRes = await fetch(GEMINI_URL, {
+    const aiRes = await fetch(`${geminiUrl(model)}?key=${apiKey}`, {
       method: "POST",
-      headers: { "Content-Type": "application/json", Authorization: `Bearer ${apiKey}` },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        model,
-        messages: [{ role: "system", content: system }, { role: "user", content: userContent }],
-        temperature: 0.2,
-        max_tokens: 700,
+        systemInstruction: { parts: [{ text: system }] },
+        contents: [{ role: "user", parts }],
+        generationConfig: { temperature: 0.2, maxOutputTokens: 700, responseMimeType: "application/json" },
       }),
     });
     if (!aiRes.ok) {
@@ -137,8 +154,8 @@ export async function POST(req: NextRequest) {
     }
 
     const data = await aiRes.json();
-    const content = data?.choices?.[0]?.message?.content ?? "";
-    const parsed = parseJson(typeof content === "string" ? content : JSON.stringify(content));
+    const content = data?.candidates?.[0]?.content?.parts?.map((p: any) => p.text).filter(Boolean).join("") ?? "";
+    const parsed = parseJson(content);
     if (!parsed || typeof parsed.mark === "undefined") {
       return NextResponse.json({ error: "The AI reply couldn't be read. Try again." }, { status: 502 });
     }
@@ -148,11 +165,11 @@ export async function POST(req: NextRequest) {
 
     // Cache (staff-only table; never exposed to the student).
     await admin.from("submission_ai_grades").upsert(
-      { submission_id: submissionId, mark, max_points: outOf, feedback, used_image: imageDataUrls.length > 0, model, created_at: new Date().toISOString() },
+      { submission_id: submissionId, mark, max_points: outOf, feedback, used_image: inlineParts.length > 0, model, created_at: new Date().toISOString() },
       { onConflict: "submission_id" },
     );
 
-    return NextResponse.json({ mark, outOf, feedback, usedImage: imageDataUrls.length > 0 });
+    return NextResponse.json({ mark, outOf, feedback, usedImage: inlineParts.length > 0 });
   } catch (e: any) {
     console.error("grade-suggest", e);
     return NextResponse.json({ error: "Unexpected error." }, { status: 500 });
