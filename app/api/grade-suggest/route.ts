@@ -138,7 +138,9 @@ export async function POST(req: NextRequest) {
     const reqBody = JSON.stringify({
       systemInstruction: { parts: [{ text: system }] },
       contents: [{ role: "user", parts }],
-      generationConfig: { temperature: 0.2, maxOutputTokens: 700, responseMimeType: "application/json" },
+      // 2.5-flash is a thinking model — it spends output tokens reasoning before
+      // the answer, so leave generous headroom or the JSON gets truncated.
+      generationConfig: { temperature: 0.2, maxOutputTokens: 2048, responseMimeType: "application/json" },
     });
 
     // Try the configured model, then fall back through known Flash models. Falls
@@ -179,10 +181,22 @@ export async function POST(req: NextRequest) {
     const model_ = usedModel; // the model that actually answered (for the cache row)
 
     const data = await aiRes.json();
-    const content = data?.candidates?.[0]?.content?.parts?.map((p: any) => p.text).filter(Boolean).join("") ?? "";
+    const cand = data?.candidates?.[0];
+    const content = cand?.content?.parts?.map((p: any) => p.text).filter(Boolean).join("") ?? "";
     const parsed = parseJson(content);
     if (!parsed || typeof parsed.mark === "undefined") {
-      return NextResponse.json({ error: "The AI reply couldn't be read. Try again." }, { status: 502 });
+      const finish = cand?.finishReason ?? "?";
+      console.error("grade-suggest parse fail", usedModel, finish, content.slice(0, 300));
+      return NextResponse.json(
+        {
+          error: finish === "MAX_TOKENS"
+            ? "The AI ran out of room before finishing — try again."
+            : finish === "SAFETY" || finish === "PROHIBITED_CONTENT"
+              ? "The AI declined to grade this submission."
+              : `The AI reply couldn't be read (model ${usedModel}, finish ${finish}).${content ? ` Got: ${content.slice(0, 120)}` : " Empty response."}`,
+        },
+        { status: 502 },
+      );
     }
 
     const mark = Math.max(0, Math.min(outOf, Number(parsed.mark)));
