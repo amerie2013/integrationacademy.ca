@@ -126,12 +126,12 @@ export async function POST(req: NextRequest) {
 
     const system =
       `You are a fair, experienced Ontario secondary-school math teacher. You are ADVISING a human teacher who makes the final grading decision — you only suggest. ` +
-      `Grade the student's submission out of ${outOf}. Read any attached images or PDF scans of handwritten work carefully, including the mathematics. ` +
-      `Be encouraging but honest; reward correct reasoning and note errors or missing steps. ` +
-      `Respond with ONLY a JSON object: {"mark": <number 0..${outOf}>, "feedback": "<2-4 sentences: what is correct, what is missing or wrong, and why this mark. Address the student.>"}.`;
+      `The QUESTIONS are in the "Assignment" section below. The student's WORK is in the attached image(s)/PDF(s) and/or the typed answer — a scan may show only their answers and working WITHOUT restating the questions, so match each piece of their work to the corresponding assignment question. ` +
+      `Grade out of ${outOf}. Read handwriting and scans carefully, including the mathematics. Reward correct reasoning; note errors, missing steps, or unanswered questions. ` +
+      `Be encouraging but honest. Respond with ONLY a JSON object: {"mark": <number 0..${outOf}>, "feedback": "<2-4 sentences: what is correct, what is missing or wrong, and why this mark. Address the student.>"}.`;
 
     const parts: any[] = [
-      { text: `Assignment: ${asg?.title ?? "(untitled)"}\n\n${asg?.description ?? ""}\n\nStudent's typed answer:\n${typed || "(none — see the attached file(s))"}` },
+      { text: `Assignment (the questions):\n${asg?.title ?? "(untitled)"}\n${asg?.description ?? "(no description provided)"}\n\nStudent's typed answer:\n${typed || "(none — see the attached file(s) for their work)"}` },
       ...inlineParts,
     ];
 
@@ -141,10 +141,12 @@ export async function POST(req: NextRequest) {
       generationConfig: { temperature: 0.2, maxOutputTokens: 700, responseMimeType: "application/json" },
     });
 
-    // Try the configured model, then fall back through known Flash models if it
-    // reports "model not found" (404) — so a stale/unavailable model name doesn't
-    // break grading. Any other error (bad key, API not enabled, rate limit) stops
-    // and is surfaced.
+    // Try the configured model, then fall back through known Flash models. Falls
+    // through on 404 (model not found / not available) AND 429 (that model's
+    // free-tier quota is exhausted) — free-tier quotas are PER-MODEL, so another
+    // model may still have room. A first-call 429 usually means the daily quota
+    // for that model is spent, not a real burst limit. Other errors (bad key,
+    // API not enabled) stop and are surfaced.
     const candidates = [model, "gemini-2.5-flash", "gemini-2.0-flash", "gemini-flash-latest", "gemini-1.5-flash"].filter((m, i, a) => a.indexOf(m) === i);
     let aiRes: Response | null = null;
     let usedModel = model;
@@ -160,13 +162,17 @@ export async function POST(req: NextRequest) {
       lastStatus = r.status;
       lastErr = await r.text().catch(() => "");
       console.error("grade-suggest model error", m, r.status, lastErr);
-      if (r.status !== 404) break; // only a missing model is worth trying the next one
+      if (r.status !== 404 && r.status !== 429) break; // stop on real errors (key/API); try next model on missing/quota
     }
     if (!aiRes) {
       let why = lastErr.slice(0, 400);
       try { why = JSON.parse(lastErr)?.error?.message ?? why; } catch {}
       return NextResponse.json(
-        { error: lastStatus === 429 ? "AI grading hit its rate limit — try again in a minute." : `AI grader error ${lastStatus}: ${why}` },
+        {
+          error: lastStatus === 429
+            ? "All the free AI models are out of quota for today. This resets daily — or enable billing on your Google AI Studio project to lift the limit."
+            : `AI grader error ${lastStatus}: ${why}`,
+        },
         { status: 502 },
       );
     }
