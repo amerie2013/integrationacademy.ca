@@ -53,7 +53,6 @@ const subjects = [
   sk("2.2", "Intercepts, Slope, and Rate of Change", "Find where a line crosses the axes, measure its slope as a rate of change, and interpret both in real situations.", ["Finding $x$- and $y$-intercepts", "Slope as rise over run and as a rate of change", "Interpreting slope and intercepts in context"]),
   sk("2.3", "Writing Linear Equations (Slope-Intercept, Point-Slope, Standard Form)", "Write the equation of a line in all three standard forms and convert fluently between them, given a slope and a point or two points.", ["Slope-intercept $y=mx+b$, point-slope, and standard form", "Writing a line from a point and slope, or from two points", "Converting between the three forms"]),
   sk("2.4", "Parallel and Perpendicular Lines on the Coordinate Plane", "Use slope to decide whether lines are parallel or perpendicular, and write equations of lines meeting those conditions.", ["Parallel lines have equal slopes", "Perpendicular lines have negative-reciprocal slopes", "Writing equations of parallel and perpendicular lines"]),
-  sk("2.5", "Function Transformations: $f(x)+k$, $kf(x)$, $f(x+k)$", "See how simple changes to a function's rule shift, stretch, or slide its graph.", ["Vertical shifts: $f(x)+k$", "Vertical stretches and compressions: $kf(x)$", "Horizontal shifts: $f(x+k)$"]),
 
   // CHAPTER 3 — Systems of Linear Equations & Inequalities
   sk("3.1", "Solving Systems by Graphing & Substitution", "Understand a system's solution as the point where lines meet, and find it by graphing or by substitution.", ["The solution as the intersection of two lines", "Solving a system by graphing", "Solving a system by substitution"]),
@@ -73,6 +72,7 @@ const subjects = [
   sk("5.3", "Features of Parabolas (Vertex, Axis of Symmetry, Intercepts)", "Read the key features of a parabola from its graph and equation.", ["Vertex and axis of symmetry", "$x$-intercepts (roots) and the $y$-intercept", "Direction of opening and width"]),
   sk("5.4", "Solving Quadratics by Factoring and Square Roots", "Solve quadratic equations using the zero-product property or by taking square roots.", ["The zero-product property", "Solving by factoring", "Solving $x^{2}=k$ by square roots"]),
   sk("5.5", "Completing the Square & The Quadratic Formula", "Solve any quadratic by completing the square or with the quadratic formula, and use the discriminant to predict the number of solutions.", ["Completing the square", "The quadratic formula $x=\\dfrac{-b\\pm\\sqrt{b^{2}-4ac}}{2a}$", "The discriminant $b^{2}-4ac$ and the number of roots"]),
+  sk("5.6", "Function Transformations: $f(x)+k$, $kf(x)$, $f(x+k)$", "See how simple changes to a function's rule shift, stretch, or slide the graph of a quadratic.", ["Vertical shifts: $f(x)+k$", "Vertical stretches and compressions: $kf(x)$", "Horizontal shifts: $f(x+k)$"]),
 
   // CHAPTER 6 — Exponential Functions & Bivariate Data
   sk("6.1", "Exponential Growth and Decay Models", "Build and use exponential models of the form $y=a\\,b^{x}$ for growth and decay.", ["Exponential form $y=a\\,b^{x}$", "Growth ($b>1$) vs. decay ($0<b<1$)", "Applied growth and decay problems"]),

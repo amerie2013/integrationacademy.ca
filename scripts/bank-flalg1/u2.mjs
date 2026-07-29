@@ -192,5 +192,5 @@ export default [
   { code: "2.2", gen: g22 },
   { code: "2.3", gen: g23 },
   { code: "2.4", gen: g24 },
-  { code: "2.5", gen: g25 },
+  { code: "5.6", gen: g25 }, // moved to Chapter 5
 ];

@@ -358,7 +358,7 @@ authored["2.4"] = L("2.4", "Parallel and Perpendicular Lines on the Coordinate P
   <div class="qa-box" ${QA}><h3>Q3: What's perpendicular to a horizontal line?</h3><p><em>A vertical line — \(y=k\) is perpendicular to \(x=c\).</em></p></div>
 </div>`)]);
 
-authored["2.5"] = L("2.5", "Function Transformations: f(x)+k, kf(x), f(x+k)", [
+authored["5.6"] = L("5.6", "Function Transformations: f(x)+k, kf(x), f(x+k)", [
   html(String.raw`<div class="lecture-box">
   <h1>🔀 Function Transformations</h1>
   <p><strong>Overview.</strong> Small changes to a function's rule move its graph in predictable ways. Learn three building blocks — <strong>shift</strong>, <strong>stretch</strong>, and <strong>slide</strong> — and you can transform <em>any</em> graph without plotting a single point.</p>
@@ -400,14 +400,14 @@ authored["2.5"] = L("2.5", "Function Transformations: f(x)+k, kf(x), f(x+k)", [
 </div>`),
 ]);
 
-authored["3.1"] = L("3.1", "Solving Systems by Graphing & Substitution", [html(String.raw`<div class="lecture-box">
-  <h1>🤝 Solving Systems by Graphing &amp; Substitution</h1>
-  <p><strong>Overview.</strong> A <strong>system</strong> is two (or more) equations that must hold at once. Its <strong>solution</strong> is the \((x,y)\) that satisfies <em>both</em> — graphically, the point where the lines cross. Graphing shows the idea; <strong>substitution</strong> gives an exact answer.</p>
+authored["3.1"] = L("3.1", "Solving Systems by Graphing", [html(String.raw`<div class="lecture-box">
+  <h1>📉 Solving Systems by Graphing</h1>
+  <p><strong>Overview.</strong> A <strong>system</strong> is two equations that must hold at once. Its <strong>solution</strong> is the \((x,y)\) that satisfies <em>both</em> — and on a graph, that's the single point where the two lines <strong>cross</strong>. To solve by graphing: draw both lines and read off the intersection.</p>
   <h2>📌 The toolkit</h2>
   <ul>
-    <li><strong>Graphing:</strong> draw both lines; the intersection is the solution.</li>
-    <li><strong>Substitution:</strong> solve one equation for a variable, substitute into the other, solve, then back-substitute.</li>
-    <li>Always <strong>check</strong> the point in both equations.</li>
+    <li><strong>Graph each line</strong> (slope-intercept form makes this quick: plot the \(y\)-intercept, then use the slope).</li>
+    <li>The <strong>intersection point</strong> is the solution. <strong>Check</strong> it in both equations.</li>
+    <li><strong>Special cases:</strong> <em>parallel</em> lines never meet → <strong>no solution</strong>; the <em>same</em> line drawn twice → <strong>infinitely many</strong> solutions.</li>
   </ul>
   <h2>🎬 The solution is where they cross</h2>
   <p>The green line is fixed at \(y = -x + 5\). Slide the slope <strong>m</strong> of the second line — the marked crossing point is the system's solution, and it moves as the line tilts.</p>
@@ -415,21 +415,21 @@ authored["3.1"] = L("3.1", "Solving Systems by Graphing & Substitution", [html(S
   mg([{ expr: "-x + 5", label: "y = -x + 5" }, { expr: "m*x + 1", label: "y = m·x + 1" }], { param: "m", paramMin: -3, paramMax: 4, paramInit: 1, markIntersection: true, xMin: -4, xMax: 8, yMin: -4, yMax: 10, caption: "Two lines and their intersection — the point where they meet is the one (x, y) that solves both equations." }),
   html(String.raw`<div class="lecture-box">
   <h2>🔵 Examples</h2>
-  <div class="example-box" ${EX}><h3>Example 1: By graphing</h3><p>Solve \(\begin{cases} y = x + 1\\ y = -x + 5\end{cases}\)</p><div class="solution"><div class="step"><strong>Both graphed:</strong> they cross where \(x+1=-x+5\Rightarrow x=2,\ y=3\).</div><em>Conclusion: \((2, 3)\). ✓</em></div></div>
-  <div class="example-box" ${EX}><h3>Example 2: Substitution (one already isolated)</h3><p>Solve \(\begin{cases} y = 2x\\ x + y = 6\end{cases}\)</p><div class="solution"><div class="step"><strong>Substitute \(y=2x\):</strong> \(x + 2x = 6\Rightarrow x = 2\).</div><div class="step"><strong>Back-substitute:</strong> \(y = 2(2) = 4\).</div><em>Conclusion: \((2, 4)\). ✓</em></div></div>
-  <div class="example-box" ${EX}><h3>Example 3: Isolate first, then substitute</h3><p>Solve \(\begin{cases} x + y = 7\\ 2x - y = 2\end{cases}\)</p><div class="solution"><div class="step"><strong>Solve the first for \(x\):</strong> \(x = 7 - y\).</div><div class="step"><strong>Substitute:</strong> \(2(7-y) - y = 2\Rightarrow 14 - 3y = 2\Rightarrow y = 4\).</div><div class="step"><strong>Back-substitute:</strong> \(x = 3\).</div><em>Conclusion: \((3, 4)\). ✓</em></div></div>
-  <div class="example-box" ${EX}><h3>Example 4: A coefficient to handle</h3><p>Solve \(\begin{cases} y = 3x - 4\\ 2x + y = 6\end{cases}\)</p><div class="solution"><div class="step"><strong>Substitute:</strong> \(2x + (3x - 4) = 6\Rightarrow 5x = 10\Rightarrow x = 2\).</div><div class="step"><strong>Back-substitute:</strong> \(y = 3(2) - 4 = 2\).</div><em>Conclusion: \((2, 2)\). ✓</em></div></div>
-  <div class="example-box" ${EX}><h3>Example 5: Verify a claimed solution</h3><p>Is \((1, 5)\) a solution of \(\begin{cases} y = 4x + 1\\ x + y = 6\end{cases}\)?</p><div class="solution"><div class="step"><strong>Check both:</strong> \(4(1)+1 = 5\) ✓ and \(1 + 5 = 6\) ✓.</div><em>Conclusion: yes — it satisfies both. ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 1: Read the intersection</h3><p>Solve by graphing \(\begin{cases} y = x + 1\\ y = -x + 5\end{cases}\)</p>${gframe(["y = x + 1", "y = -x + 5"], { title: "y = x + 1 and y = −x + 5", xMin: -3, xMax: 7, yMin: -3, yMax: 9 })}<div class="solution"><div class="step"><strong>Graph both lines</strong> and find where they meet.</div><em>Conclusion: they cross at \((2, 3)\). ✓ (Check: \(3 = 2+1\) and \(3 = -2+5\).)</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 2: Both through the region</h3><p>Solve by graphing \(\begin{cases} y = 2x\\ y = x + 3\end{cases}\)</p>${gframe(["y = 2*x", "y = x + 3"], { title: "y = 2x and y = x + 3", xMin: -2, xMax: 8, yMin: -2, yMax: 12 })}<div class="solution"><div class="step"><strong>Plot both</strong> and read the crossing point.</div><em>Conclusion: \((3, 6)\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 3: A crossing below the axis</h3><p>Solve by graphing \(\begin{cases} y = x - 2\\ y = -x + 4\end{cases}\)</p>${gframe(["y = x - 2", "y = -x + 4"], { title: "y = x − 2 and y = −x + 4", xMin: -3, xMax: 7, yMin: -5, yMax: 7 })}<div class="solution"><div class="step"><strong>Where do they meet?</strong> Read it off the grid.</div><em>Conclusion: \((3, 1)\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 4: Parallel — no solution</h3><p>Solve by graphing \(\begin{cases} y = x + 1\\ y = x - 2\end{cases}\)</p>${gframe(["y = x + 1", "y = x - 2"], { title: "Same slope 1 — parallel lines", xMin: -4, xMax: 6, yMin: -6, yMax: 8 })}<div class="solution"><div class="step"><strong>Same slope, different intercept:</strong> the lines are parallel and never cross.</div><em>Conclusion: <strong>no solution</strong>. ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 5: Same line — infinitely many</h3><p>Solve by graphing \(\begin{cases} y = 2x + 1\\ 2y = 4x + 2\end{cases}\)</p>${gframe(["y = 2*x + 1"], { title: "Both equations are the same line", xMin: -4, xMax: 4, yMin: -6, yMax: 10 })}<div class="solution"><div class="step"><strong>Divide the second by 2:</strong> \(y = 2x + 1\) — identical to the first, so both lines coincide.</div><em>Conclusion: <strong>infinitely many</strong> solutions (every point on the line). ✓</em></div></div>
   <h2>🟡 Practice Questions</h2>
-  <div class="practice-box" ${PR}><h3>Question 1</h3><p>Solve \(\begin{cases} y = x - 2\\ y = -2x + 7\end{cases}\)</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(x - 2 = -2x + 7\Rightarrow x = 3,\ y = 1\): \((3,1)\).</em></div></div></details></div>
-  <div class="practice-box" ${PR}><h3>Question 2</h3><p>Solve \(\begin{cases} y = 3x\\ x + y = 8\end{cases}\)</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(4x = 8\Rightarrow x = 2,\ y = 6\): \((2,6)\).</em></div></div></details></div>
-  <div class="practice-box" ${PR}><h3>Question 3</h3><p>Solve \(\begin{cases} x + y = 10\\ y = x + 2\end{cases}\)</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(x + x + 2 = 10\Rightarrow x = 4,\ y = 6\): \((4,6)\).</em></div></div></details></div>
-  <div class="practice-box" ${PR}><h3>Question 4</h3><p>Solve \(\begin{cases} 2x + y = 5\\ y = x - 1\end{cases}\)</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(2x + x - 1 = 5\Rightarrow x = 2,\ y = 1\): \((2,1)\).</em></div></div></details></div>
-  <div class="practice-box" ${PR}><h3>Question 5</h3><p>Is \((4, 1)\) a solution of \(\begin{cases} x - y = 3\\ x + 2y = 6\end{cases}\)?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(4-1=3\) ✓ and \(4+2=6\) ✓ — yes.</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 1</h3><p>Solve by graphing \(\begin{cases} y = x - 2\\ y = -2x + 7\end{cases}\)</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Lines cross at \((3, 1)\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 2</h3><p>Solve by graphing \(\begin{cases} y = 3x\\ y = x + 4\end{cases}\)</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\((2, 6)\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 3</h3><p>Solve by graphing \(\begin{cases} y = -x + 6\\ y = x + 2\end{cases}\)</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\((2, 4)\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 4</h3><p>How many solutions has \(\begin{cases} y = 2x + 3\\ y = 2x - 1\end{cases}\)? (graph them)</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>None — parallel (same slope 2).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 5</h3><p>Solve by graphing \(\begin{cases} y = \tfrac12 x + 1\\ y = -x + 4\end{cases}\)</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\((2, 2)\).</em></div></div></details></div>
   <h2>❓ Q&amp;A Summary</h2>
-  <div class="qa-box" ${QA}><h3>Q1: What does the solution represent?</h3><p><em>The single \((x,y)\) that makes both equations true — the point where the lines cross.</em></p></div>
-  <div class="qa-box" ${QA}><h3>Q2: When is graphing a bad choice?</h3><p><em>When the intersection isn't at nice whole numbers — reading it off a graph is only approximate, so substitution is safer.</em></p></div>
-  <div class="qa-box" ${QA}><h3>Q3: Which equation should I solve first for substitution?</h3><p><em>The one where a variable already has coefficient 1 (no fractions) — usually the easiest to isolate.</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q1: What does the intersection represent?</h3><p><em>The single \((x,y)\) that makes both equations true — the solution of the system.</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q2: What if the lines are parallel?</h3><p><em>They never meet, so there is <strong>no solution</strong>. If they're the <em>same</em> line, there are <strong>infinitely many</strong>.</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q3: When is graphing less reliable?</h3><p><em>When the intersection isn't at nice whole numbers — reading it off a graph is only an estimate. Plot carefully and always check your point in both equations.</em></p></div>
 </div>`)]);
 
 authored["3.2"] = L("3.2", "Solving Systems by Elimination", [html(String.raw`<div class="lecture-box">
