@@ -451,6 +451,11 @@ authored["3.3"] = L("3.3", "Real-World Systems Applications & Special Cases (No/
     <li><strong>No solution:</strong> the variables all cancel and leave a <strong>false</strong> statement (e.g. \(0 = 5\)) — parallel lines.</li>
     <li><strong>Infinitely many:</strong> they cancel and leave a <strong>true</strong> statement (e.g. \(0 = 0\)) — one line drawn twice.</li>
   </ul>
+  <h2>🎬 The break-even point</h2>
+  <p>Two pricing plans as two lines — Plan A is a flat \($30\), Plan B is \($6\) per class. Slide Plan B's rate <strong>m</strong>; where the lines cross is the <strong>break-even</strong> point where the plans cost the same.</p>
+</div>`),
+  mg([{ expr: "30", label: "Plan A: $30 flat" }, { expr: "m*x", label: "Plan B: $m per class" }], { param: "m", paramMin: 2, paramMax: 10, paramInit: 6, markIntersection: true, xMin: 0, xMax: 12, yMin: 0, yMax: 70, caption: "Two cost plans — their intersection is the break-even point (with $6/class, that's 5 classes)." }),
+  html(String.raw`<div class="lecture-box">
   <h2>🔵 Examples</h2>
   <div class="example-box" ${EX}><h3>Example 1: Ticket sales</h3><p>20 tickets sold for $130. Adult tickets are $8, child $5. How many of each?</p><div class="solution"><div class="step"><strong>Model:</strong> \(a + c = 20\) and \(8a + 5c = 130\).</div><div class="step"><strong>Substitute \(c = 20 - a\):</strong> \(8a + 5(20-a) = 130\Rightarrow 3a = 30\Rightarrow a = 10\).</div><em>Conclusion: 10 adult, 10 child. ✓</em></div></div>
   <div class="example-box" ${EX}><h3>Example 2: Sum and difference</h3><p>Two numbers add to 24; their difference is 6. Find them.</p><div class="solution"><div class="step"><strong>Model:</strong> \(x + y = 24\), \(x - y = 6\).</div><div class="step"><strong>Add:</strong> \(2x = 30\Rightarrow x = 15,\ y = 9\).</div><em>Conclusion: 15 and 9. ✓</em></div></div>
@@ -533,6 +538,11 @@ authored["4.2"] = L("4.2", "Operations with Radical Expressions", [html(String.r
     <li><strong>Add/subtract:</strong> combine only <strong>like radicals</strong> (same number under the root), like adding like terms.</li>
     <li><strong>Multiply:</strong> \(\sqrt{a}\cdot\sqrt{b} = \sqrt{ab}\), then simplify. <strong>Rationalize</strong> to clear a root from a denominator.</li>
   </ul>
+  <h2>🎬 The square-root curve</h2>
+  <p>\(y = \sqrt{x - h}\) starts at \(x = h\) (you can't take the root of a negative) and rises slowly. Slide <strong>h</strong> to move where it begins.</p>
+</div>`),
+  graph("sqrt(x - h)", "h", { xMin: -2, xMax: 12, yMin: -1, yMax: 5, paramMin: -1, paramMax: 6, paramInit: 0, caption: "y = √(x − h) : defined only for x ≥ h, starting at the point (h, 0) and increasing." }),
+  html(String.raw`<div class="lecture-box">
   <h2>🔵 Examples</h2>
   <div class="example-box" ${EX}><h3>Example 1: Simplify a radical</h3><p>Simplify \(\sqrt{50}\).</p><div class="solution"><div class="step"><strong>Factor out a perfect square:</strong> \(\sqrt{25 \cdot 2} = \sqrt{25}\,\sqrt{2}\).</div><em>Conclusion: \(5\sqrt{2}\). ✓</em></div></div>
   <div class="example-box" ${EX}><h3>Example 2: Add like radicals</h3><p>Simplify \(3\sqrt{2} + 4\sqrt{2}\).</p><div class="solution"><div class="step"><strong>Same radical — add coefficients:</strong> \((3+4)\sqrt{2}\).</div><em>Conclusion: \(7\sqrt{2}\). ✓</em></div></div>
