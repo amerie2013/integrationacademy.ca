@@ -1,5 +1,7 @@
 // ALG1 Chapter 4 — Exponents, Radicals & Polynomial Operations. ~50 per topic.
 import { mc, mcv, ms, tf, num, fill, ri, rnz, pick } from "./helpers.mjs";
+const sign = (n) => (n < 0 ? `- ${-n}` : `+ ${n}`);
+const tri = (b, c) => { let s = "x^{2}"; if (b !== 0) s += ` ${sign(b)}x`; if (c !== 0) s += ` ${sign(c)}`; return `$${s}$`; };
 
 // ── 4.1 Laws of Exponents & Rational Exponents ───────────────
 function g41() {
@@ -40,7 +42,7 @@ function g41() {
 // ── 4.2 Operations with Radical Expressions ──────────────────
 function g42() {
   const q = [];
-  for (let i = 0; i < 10; i++) { const r = ri(2, 12); q.push(num("easy", `Evaluate $\\sqrt{${r * r}}$.`, r, 0)); }
+  for (let i = 0; i < 18; i++) { const r = ri(2, 15); q.push(num(i < 12 ? "easy" : "medium", `Evaluate $\\sqrt{${r * r}}$.`, r, 0)); }
   q.push(mcv("easy", "Simplify $\\sqrt{50}$.", "$5\\sqrt{2}$", ["$25\\sqrt{2}$", "$5\\sqrt{5}$", "$2\\sqrt{5}$"]));
   q.push(mcv("easy", "Simplify $3\\sqrt{2} + 4\\sqrt{2}$.", "$7\\sqrt{2}$", ["$7\\sqrt{4}$", "$12\\sqrt{2}$", "$7$"]));
   q.push(tf("easy", "$\\sqrt{a}\\cdot\\sqrt{b} = \\sqrt{ab}$.", true));
@@ -91,19 +93,24 @@ function g43() {
   q.push(tf("hard", "Subtracting a polynomial means adding the opposite of every term.", true));
   q.push(num("hard", "The degree of $(x^2+1)(x^3-2)$ is ___.", 5, 0));
   q.push(mcv("hard", "Simplify $3(x^2 - 2x) - 2(x^2 + x)$.", "$x^{2} - 8x$", ["$x^{2} - 4x$", "$5x^{2} - 8x$", "$x^{2} - 8$"]));
+  // randomized FOIL expansions (answers built by construction)
+  for (let i = 0; i < 20; i++) {
+    const p = rnz(-6, 6), r = rnz(-6, 6), b = p + r, c = p * r;
+    q.push(mcv(i < 8 ? "easy" : i < 14 ? "medium" : "hard", `Expand $(x ${sign(p)})(x ${sign(r)})$.`, tri(b, c), [tri(b, -c), tri(-b, c), tri(b + 2, c)]));
+  }
   return q;
 }
 
 // ── 4.4 Special Polynomial Products ──────────────────────────
 function g44() {
   const q = [];
-  for (let i = 0; i < 8; i++) { const a = ri(2, 9); q.push(mcv("easy", `Expand $(x + ${a})(x - ${a})$.`, `$x^{2} - ${a * a}$`, [`$x^{2} + ${a * a}$`, `$x^{2} - ${2 * a}x - ${a * a}$`, `$x^{2} - ${a}$`])); }
+  for (let i = 0; i < 16; i++) { const a = ri(2, 9); q.push(mcv(i < 8 ? "easy" : i < 12 ? "medium" : "hard", `Expand $(x + ${a})(x - ${a})$.`, `$x^{2} - ${a * a}$`, [`$x^{2} + ${a * a}$`, `$x^{2} - ${2 * a}x - ${a * a}$`, `$x^{2} - ${a}$`])); }
   q.push(mc("easy", "$(a+b)(a-b) = $", ["$a^2 - b^2$", "$a^2 + b^2$", "$a^2 - 2ab + b^2$", "$a^2 + 2ab + b^2$"], 0));
   q.push(mc("easy", "$(a+b)^2 = $", ["$a^2 + 2ab + b^2$", "$a^2 + b^2$", "$a^2 - 2ab + b^2$", "$a^2 - b^2$"], 0));
   q.push(tf("easy", "$(x+5)^2 = x^2 + 25$.", false, "Missing the middle term $10x$."));
   q.push(fill("easy", "$(x-3)(x+3) = x^2 - \\text{___}$.", ["9"]));
-  for (let i = 0; i < 6; i++) { const a = ri(2, 8); q.push(mcv("medium", `Expand $(x + ${a})^2$.`, `$x^{2} + ${2 * a}x + ${a * a}$`, [`$x^{2} + ${a * a}$`, `$x^{2} + ${a}x + ${a * a}$`, `$x^{2} + ${2 * a}x + ${a}$`])); }
-  for (let i = 0; i < 6; i++) { const a = ri(2, 8); q.push(mcv("medium", `Expand $(x - ${a})^2$.`, `$x^{2} - ${2 * a}x + ${a * a}$`, [`$x^{2} + ${a * a}$`, `$x^{2} - ${a}x + ${a * a}$`, `$x^{2} - ${2 * a}x - ${a * a}$`])); }
+  for (let i = 0; i < 12; i++) { const a = ri(2, 8); q.push(mcv(i < 6 ? "medium" : "hard", `Expand $(x + ${a})^2$.`, `$x^{2} + ${2 * a}x + ${a * a}$`, [`$x^{2} + ${a * a}$`, `$x^{2} + ${a}x + ${a * a}$`, `$x^{2} + ${2 * a}x + ${a}$`])); }
+  for (let i = 0; i < 12; i++) { const a = ri(2, 8); q.push(mcv(i < 6 ? "medium" : "hard", `Expand $(x - ${a})^2$.`, `$x^{2} - ${2 * a}x + ${a * a}$`, [`$x^{2} + ${a * a}$`, `$x^{2} - ${a}x + ${a * a}$`, `$x^{2} - ${2 * a}x - ${a * a}$`])); }
   q.push(mcv("medium", "Expand $(2x + 3)(2x - 3)$.", "$4x^{2} - 9$", ["$4x^{2} + 9$", "$2x^{2} - 9$", "$4x^{2} - 6x - 9$"]));
   q.push(mcv("hard", "Expand $(3x - 1)^2$.", "$9x^{2} - 6x + 1$", ["$9x^{2} + 1$", "$3x^{2} - 6x + 1$", "$9x^{2} - 3x + 1$"]));
   q.push(mcv("hard", "Expand $(5x + 4)(5x - 4)$.", "$25x^{2} - 16$", ["$25x^{2} + 16$", "$5x^{2} - 16$", "$25x^{2} - 40x - 16$"]));

@@ -5,7 +5,7 @@ const sign = (n) => (n < 0 ? `- ${-n}` : `+ ${n}`);
 // ── 5.1 GCF and Factoring by Grouping ────────────────────────
 function g51() {
   const q = [];
-  for (let i = 0; i < 8; i++) { const g = ri(2, 6), a = ri(2, 5), b = rnz(1, 6); q.push(mcv("easy", `Factor $${g * a}x^2 ${sign(g * b)}x$.`, `$${g}x(${a}x ${sign(b)})$`, [`$${g}x(${a}x ${sign(-b)})$`, `$x(${g * a}x ${sign(g * b)})$`, `$${g}(${a}x^2 ${sign(b)}x)$`])); }
+  for (let i = 0; i < 24; i++) { const g = ri(2, 6), a = ri(2, 5), b = rnz(1, 6); q.push(mcv(i < 8 ? "easy" : i < 16 ? "medium" : "hard", `Factor $${g * a}x^2 ${sign(g * b)}x$.`, `$${g}x(${a}x ${sign(b)})$`, [`$${g}x(${a}x ${sign(-b)})$`, `$x(${g * a}x ${sign(g * b)})$`, `$${g}(${a}x^2 ${sign(b)}x)$`])); }
   q.push(mc("easy", "The first step in factoring is always to look for the…", ["GCF", "quadratic formula", "vertex", "discriminant"], 0));
   q.push(tf("easy", "Factoring reverses multiplication.", true));
   q.push(fill("easy", "The GCF of $6x^2$ and $9x$ is $3\\text{___}$.", ["x"]));
@@ -26,8 +26,8 @@ function g51() {
 // ── 5.2 Factoring Trinomials ─────────────────────────────────
 function g52() {
   const q = [];
-  for (let i = 0; i < 10; i++) { const p = ri(1, 7), r = ri(1, 7); const b = p + r, c = p * r; q.push(mcv(i < 4 ? "easy" : "medium", `Factor $x^2 + ${b}x + ${c}$.`, `$(x + ${p})(x + ${r})$`, [`$(x - ${p})(x - ${r})$`, `$(x + ${c})(x + 1)$`, `$(x + ${p})(x - ${r})$`])); }
-  for (let i = 0; i < 6; i++) { const p = ri(1, 6), r = ri(1, 6); const b = -(p + r), c = p * r; q.push(mcv("medium", `Factor $x^2 ${sign(b)}x + ${c}$.`, `$(x - ${p})(x - ${r})$`, [`$(x + ${p})(x + ${r})$`, `$(x - ${p})(x + ${r})$`, `$(x - ${c})(x - 1)$`])); }
+  for (let i = 0; i < 22; i++) { const p = ri(1, 7), r = ri(1, 7); const b = p + r, c = p * r; q.push(mcv(i < 8 ? "easy" : i < 16 ? "medium" : "hard", `Factor $x^2 + ${b}x + ${c}$.`, `$(x + ${p})(x + ${r})$`, [`$(x - ${p})(x - ${r})$`, `$(x + ${c})(x + 1)$`, `$(x + ${p})(x - ${r})$`])); }
+  for (let i = 0; i < 14; i++) { const p = ri(1, 6), r = ri(1, 6); const b = -(p + r), c = p * r; q.push(mcv(i < 7 ? "medium" : "hard", `Factor $x^2 ${sign(b)}x + ${c}$.`, `$(x - ${p})(x - ${r})$`, [`$(x + ${p})(x + ${r})$`, `$(x - ${p})(x + ${r})$`, `$(x - ${c})(x - 1)$`])); }
   q.push(mc("easy", "To factor $x^2 + bx + c$, find two numbers that…", ["multiply to c and add to b", "multiply to b and add to c", "are both b", "subtract to c"], 0));
   q.push(mcv("easy", "Factor $x^2 + 7x + 12$.", "$(x + 3)(x + 4)$", ["$(x + 2)(x + 6)$", "$(x + 12)(x + 1)$", "$(x - 3)(x - 4)$"]));
   q.push(mcv("easy", "Factor $x^2 - 5x + 6$.", "$(x - 2)(x - 3)$", ["$(x + 2)(x + 3)$", "$(x - 1)(x - 6)$", "$(x - 2)(x + 3)$"]));
@@ -45,7 +45,7 @@ function g52() {
 // ── 5.3 Features of Parabolas ────────────────────────────────
 function g53() {
   const q = [];
-  for (let i = 0; i < 10; i++) { const a = pick([1, 1, 2]), h = ri(-4, 4); const b = -2 * a * h; q.push(num(i < 5 ? "easy" : "medium", `Find the axis of symmetry $x = -\\dfrac{b}{2a}$ for $y = ${a === 1 ? "" : a}x^2 ${sign(b)}x ${sign(ri(-5, 5))}$.`, h, 0)); }
+  for (let i = 0; i < 24; i++) { const a = pick([1, 1, 2]), h = ri(-4, 4); const b = -2 * a * h; q.push(num(i < 9 ? "easy" : i < 17 ? "medium" : "hard", `Find the axis of symmetry $x = -\\dfrac{b}{2a}$ for $y = ${a === 1 ? "" : a}x^2 ${sign(b)}x ${sign(ri(-5, 5))}$.`, h, 0)); }
   q.push(mc("easy", "$y = ax^2 + bx + c$ opens up when…", ["$a > 0$", "$a < 0$", "$a = 0$", "$c > 0$"], 0));
   q.push(mc("easy", "$y = ax^2 + bx + c$ opens down when…", ["$a < 0$", "$a > 0$", "$b < 0$", "$c < 0$"], 0));
   q.push(mc("easy", "The $y$-intercept of $y = x^2 - 4x + 3$ is…", ["$(0, 3)$", "$(3, 0)$", "$(0, -4)$", "$(0, 1)$"], 0));
@@ -68,8 +68,8 @@ function g53() {
 // ── 5.4 Solving Quadratics by Factoring & Square Roots ───────
 function g54() {
   const q = [];
-  for (let i = 0; i < 10; i++) { const r1 = ri(-6, 6), r2 = ri(-6, 6); const b = -(r1 + r2), c = r1 * r2; q.push(num(i < 5 ? "easy" : "medium", `Solve $x^2 ${sign(b)}x ${sign(c)} = 0$. Enter the LARGER root.`, Math.max(r1, r2), 0)); }
-  for (let i = 0; i < 6; i++) { const k = ri(2, 12); q.push(num("easy", `Solve $x^2 = ${k * k}$. Enter the positive solution.`, k, 0)); }
+  for (let i = 0; i < 20; i++) { const r1 = ri(-6, 6), r2 = ri(-6, 6); const b = -(r1 + r2), c = r1 * r2; q.push(num(i < 8 ? "easy" : i < 15 ? "medium" : "hard", `Solve $x^2 ${sign(b)}x ${sign(c)} = 0$. Enter the LARGER root.`, Math.max(r1, r2), 0)); }
+  for (let i = 0; i < 12; i++) { const k = ri(2, 12); q.push(num(i < 6 ? "easy" : "medium", `Solve $x^2 = ${k * k}$. Enter the positive solution.`, k, 0)); }
   q.push(mc("easy", "The zero-product property says if $AB = 0$ then…", ["$A = 0$ or $B = 0$", "$A = B$", "$A + B = 0$", "$AB = 1$"], 0));
   q.push(mc("easy", "Solve $(x - 2)(x + 5) = 0$.", ["$x = 2, -5$", "$x = -2, 5$", "$x = 2, 5$", "$x = 10$"], 0));
   q.push(tf("easy", "$x^2 = 49$ has two solutions, $7$ and $-7$.", true));
@@ -88,7 +88,7 @@ function g54() {
 // ── 5.5 Completing the Square & The Quadratic Formula ────────
 function g55() {
   const q = [];
-  for (let i = 0; i < 10; i++) { const a = ri(1, 3), b = rnz(-8, 8), c = rnz(-8, 8); q.push(num(i < 5 ? "easy" : "medium", `Find the discriminant $b^2 - 4ac$ for $${a === 1 ? "" : a}x^2 ${sign(b)}x ${sign(c)} = 0$.`, b * b - 4 * a * c, 0)); }
+  for (let i = 0; i < 26; i++) { const a = ri(1, 3), b = rnz(-8, 8), c = rnz(-8, 8); q.push(num(i < 10 ? "easy" : i < 18 ? "medium" : "hard", `Find the discriminant $b^2 - 4ac$ for $${a === 1 ? "" : a}x^2 ${sign(b)}x ${sign(c)} = 0$.`, b * b - 4 * a * c, 0)); }
   q.push(mc("easy", "The quadratic formula is $x = $", ["$\\dfrac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$", "$\\dfrac{b \\pm \\sqrt{b^2 - 4ac}}{2a}$", "$\\dfrac{-b \\pm \\sqrt{b^2 + 4ac}}{2a}$", "$-b \\pm \\sqrt{b^2 - 4ac}$"], 0));
   q.push(mc("easy", "The discriminant is…", ["$b^2 - 4ac$", "$b^2 + 4ac$", "$-b/2a$", "$4ac - b^2$"], 0));
   q.push(mc("easy", "If the discriminant is negative, the number of real roots is…", ["0", "1", "2", "infinite"], 0));

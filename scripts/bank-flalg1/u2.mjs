@@ -118,7 +118,7 @@ function g23() {
 // ── 2.4 Parallel and Perpendicular Lines ─────────────────────
 function g24() {
   const q = [];
-  for (let i = 0; i < 10; i++) { const m = rnz(-6, 6); q.push(num("easy", `A line has slope $${m}$. What slope is parallel to it?`, m, 0)); }
+  for (let i = 0; i < 20; i++) { const m = rnz(-6, 6); q.push(num(i < 10 ? "easy" : "medium", `A line has slope $${m}$. What slope is parallel to it?`, m, 0)); }
   q.push(mc("easy", "Parallel lines have…", ["equal slopes", "opposite slopes", "reciprocal slopes", "zero slope"], 0));
   q.push(mc("easy", "Perpendicular slopes are…", ["negative reciprocals", "equal", "the same sign", "always 1"], 0));
   q.push(tf("easy", "$y = 2x + 1$ and $y = 2x - 4$ are parallel.", true));
@@ -154,7 +154,7 @@ function g24() {
 // ── 2.5 Function Transformations ─────────────────────────────
 function g25() {
   const q = [];
-  for (let i = 0; i < 8; i++) { const k = rnz(-6, 6); q.push(mc("easy", `From $f(x)=x^2$, describe $g(x) = x^2 ${sign(k)}$.`, [k > 0 ? `up ${k}` : `down ${-k}`, k > 0 ? `down ${k}` : `up ${-k}`, `left ${Math.abs(k)}`, `right ${Math.abs(k)}`], 0)); }
+  for (let i = 0; i < 18; i++) { const k = rnz(-6, 6); q.push(mc(i < 9 ? "easy" : "medium", `From $f(x)=x^2$, describe $g(x) = x^2 ${sign(k)}$.`, [k > 0 ? `up ${k}` : `down ${-k}`, k > 0 ? `down ${k}` : `up ${-k}`, `left ${Math.abs(k)}`, `right ${Math.abs(k)}`], 0)); }
   q.push(mc("easy", "$f(x) + k$ shifts the graph…", ["vertically", "horizontally", "diagonally", "not at all"], 0));
   q.push(mc("easy", "$f(x) + 3$ shifts the graph…", ["up 3", "down 3", "left 3", "right 3"], 0));
   q.push(mc("easy", "$f(x) - 5$ shifts the graph…", ["down 5", "up 5", "left 5", "right 5"], 0));

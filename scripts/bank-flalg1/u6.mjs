@@ -5,7 +5,7 @@ const sign = (n) => (n < 0 ? `- ${-n}` : `+ ${n}`);
 // ── 6.1 Exponential Growth and Decay Models ──────────────────
 function g61() {
   const q = [];
-  for (let i = 0; i < 10; i++) { const a = ri(2, 10) * 10, b = pick([2, 3]), x = ri(1, 3); q.push(num(i < 5 ? "easy" : "medium", `For $y = ${a} \\cdot ${b}^x$, find $y$ when $x = ${x}$.`, a * b ** x, 0)); }
+  for (let i = 0; i < 24; i++) { const a = ri(2, 10) * 10, b = pick([2, 3, 5]), x = ri(1, 3); q.push(num(i < 9 ? "easy" : i < 17 ? "medium" : "hard", `For $y = ${a} \\cdot ${b}^x$, find $y$ when $x = ${x}$.`, a * b ** x, 0)); }
   q.push(mc("easy", "In $y = a\\,b^x$, the value $a$ is the…", ["starting amount", "growth rate", "exponent", "x-value"], 0));
   q.push(mc("easy", "$y = a\\,b^x$ shows GROWTH when…", ["$b > 1$", "$b < 1$", "$b = 0$", "$a < 0$"], 0));
   q.push(mc("easy", "$y = a\\,b^x$ shows DECAY when…", ["$0 < b < 1$", "$b > 1$", "$b = 1$", "$a > 1$"], 0));
@@ -48,14 +48,24 @@ function g62() {
   q.push(mc("hard", "$y$: $1, 3, 9, 27, 81$ — the ratio is…", ["3", "2", "changing", "1"], 0));
   q.push(tf("hard", "A pattern with neither constant difference nor constant ratio could be quadratic.", true));
   q.push(mc("hard", "Which table is exponential? $y$ = …", ["$4, 12, 36, 108$", "$4, 8, 12, 16$", "$4, 9, 16, 25$", "$4, 6, 8, 10$"], 0));
+  // extra curated model-identification variety
+  const MODELS = ["Linear", "Quadratic", "Exponential", "Constant"];
+  const pats = [
+    ["6, 10, 14, 18", 0], ["3, 9, 27, 81", 2], ["2, 8, 18, 32", 1], ["100, 80, 60, 40", 0],
+    ["5, 10, 20, 40", 2], ["1, 3, 6, 10", 1], ["4, 4, 4, 4", 3], ["-2, 1, 4, 7", 0],
+    ["2, 6, 18, 54", 2], ["0, 1, 4, 9", 1], ["50, 25, 12.5, 6.25", 2], ["8, 11, 14, 17", 0],
+    ["1, 2, 4, 8, 16", 2], ["10, 13, 16, 19", 0], ["1, 4, 9, 16, 25", 1], ["7, 7, 7, 7", 3],
+    ["3, 6, 12, 24, 48", 2], ["-5, -1, 3, 7", 0], ["2, 3, 5, 8, 12", 1], ["81, 27, 9, 3", 2],
+  ];
+  for (const [seq, idx] of pats) q.push(mcv(idx === 3 || idx === 1 ? "hard" : "medium", `Which model fits $y$: ${seq}?`, MODELS[idx], MODELS.filter((_, i) => i !== idx)));
   return q;
 }
 
 // ── 6.3 Scatter Plots, Line of Best Fit, Residuals ───────────
 function g63() {
   const q = [];
-  for (let i = 0; i < 10; i++) { const m = ri(2, 6), c = ri(1, 10) * 5, x = ri(2, 12); q.push(num(i < 5 ? "easy" : "medium", `A best-fit line is $y = ${m}x + ${c}$. Predict $y$ when $x = ${x}$.`, m * x + c, 0)); }
-  for (let i = 0; i < 6; i++) { const pred = ri(10, 90), act = pred + rnz(-8, 8); q.push(num("medium", `The line predicts ${pred} but the actual value is ${act}. Find the residual (actual − predicted).`, act - pred, 0)); }
+  for (let i = 0; i < 20; i++) { const m = ri(2, 6), c = ri(1, 10) * 5, x = ri(2, 12); q.push(num(i < 8 ? "easy" : i < 15 ? "medium" : "hard", `A best-fit line is $y = ${m}x + ${c}$. Predict $y$ when $x = ${x}$.`, m * x + c, 0)); }
+  for (let i = 0; i < 14; i++) { const pred = ri(10, 90), act = pred + rnz(-8, 8); q.push(num(i < 7 ? "medium" : "hard", `The line predicts ${pred} but the actual value is ${act}. Find the residual (actual − predicted).`, act - pred, 0)); }
   q.push(mc("easy", "As study hours rise, test scores rise. This is…", ["positive correlation", "negative correlation", "no correlation", "causation proven"], 0));
   q.push(mc("easy", "As temperature rises, hot-chocolate sales fall. This is…", ["negative correlation", "positive correlation", "no correlation", "a residual"], 0));
   q.push(mc("easy", "Residual $=$", ["actual − predicted", "predicted − actual", "actual + predicted", "actual × predicted"], 0));
@@ -95,6 +105,22 @@ function g64() {
   q.push(mc("hard", "A conditional relative frequency divides a cell by its…", ["row or column total", "grand total", "opposite cell", "mean"], 0));
   q.push(tf("hard", "Marginal frequencies are found in the margins (totals) of the table.", true));
   q.push(num("hard", "What percent (whole number) of the whole survey is Grade 9 non-athletes? (12/60)", 20, 0));
+  const T2 = "In another survey of 100 people: Adults — 35 prefer coffee, 15 prefer tea (50 total); Teens — 20 prefer coffee, 30 prefer tea (50 total); column totals 55 coffee, 45 tea, 100 overall. ";
+  q.push(num("easy", T2 + "How many adults prefer coffee?", 35, 0));
+  q.push(num("easy", T2 + "How many teens prefer tea?", 30, 0));
+  q.push(num("easy", T2 + "How many people prefer coffee in total?", 55, 0));
+  q.push(num("easy", T2 + "How many adults are there?", 50, 0));
+  q.push(num("easy", T2 + "How many people were surveyed in all?", 100, 0));
+  q.push(num("easy", T2 + "How many people prefer tea in total?", 45, 0));
+  q.push(mc("medium", T2 + "What fraction of ALL prefer coffee? (55/100)", ["0.55", "0.35", "0.20", "0.50"], 0));
+  q.push(mc("medium", T2 + "Among adults, what fraction prefer coffee? (35/50)", ["0.70", "0.35", "0.55", "0.50"], 0));
+  q.push(mc("medium", T2 + "Among teens, what fraction prefer tea? (30/50)", ["0.60", "0.30", "0.45", "0.50"], 0));
+  q.push(num("medium", T2 + "What percent of all are teen coffee-drinkers? (20/100)", 20, 0));
+  q.push(tf("medium", T2 + "The 35 (adults who prefer coffee) is a joint frequency.", true));
+  q.push(mc("hard", T2 + "Coffee rate is 70% (adults) vs 40% (teens). This suggests…", ["an association between age and preference", "no association", "causation", "a marginal total"], 0));
+  q.push(num("hard", T2 + "Among teens, what fraction (2 dp) prefer coffee? (20/50)", 0.4, 0.02));
+  q.push(tf("hard", T2 + "The 55 coffee total is a marginal frequency.", true));
+  q.push(num("hard", T2 + "What percent (whole number) of all are adult tea-drinkers? (15/100)", 15, 0));
   return q;
 }
 

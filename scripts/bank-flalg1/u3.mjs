@@ -108,6 +108,16 @@ function g34() {
   q.push(mc("hard", "A solid line and 'shade below' represents…", ["$y \\le mx + b$", "$y < mx + b$", "$y \\ge mx + b$", "$y > mx + b$"], 0));
   q.push(tf("hard", "The origin is a convenient test point unless the boundary passes through it.", true));
   q.push(fill("hard", "For $y > 3x$, the boundary line is drawn ___ (solid/dashed).", ["dashed"]));
+  // extra: point-in-region checks (correct by construction)
+  const pts = [
+    ["y < x + 2", 0, 0, true], ["y > 2x", 1, 1, false], ["y \\ge x - 1", 0, 0, true],
+    ["y \\le -x + 5", 0, 0, true], ["y > x + 3", 0, 0, false], ["y < 3x - 1", 2, 0, true],
+    ["y \\ge 2x + 1", 0, 5, true], ["y < -x", 1, 1, false], ["y > x - 4", 0, 0, true],
+    ["y \\le 4x", 0, 0, true],
+  ];
+  for (const [ineq, px, py, sol] of pts) q.push(tf("medium", `Is $(${px}, ${py})$ a solution of $${ineq}$?`, sol));
+  const bd = [["y \\le 2x", "solid"], ["y > x - 1", "dashed"], ["y \\ge -3x", "solid"], ["y < 5x + 2", "dashed"], ["y \\le -x + 4", "solid"], ["y > 2x - 3", "dashed"]];
+  for (const [ineq, kind] of bd) q.push(mcv("easy", `Is the boundary of $${ineq}$ solid or dashed?`, kind, [kind === "solid" ? "dashed" : "solid"]));
   return q;
 }
 
