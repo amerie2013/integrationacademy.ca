@@ -1,7 +1,7 @@
 // Algebra 1 (FL B.E.S.T.) authored lessons. Keyed by lesson code; seed-flalg1.mjs
 // splices these over the scaffolds. Same single-card design as the other courses
 // (🔵 Examples ×5 / 🟡 Practice ×5 / ❓ Q&A Summary).
-import { html, gframe } from "./seed-mpm2d.mjs";
+import { html, gframe, graph, mg, anim } from "./seed-mpm2d.mjs";
 
 const L = (code, title, blocks) => ({ code, title, blocks });
 const EX = `style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"`;
@@ -310,16 +310,29 @@ authored["2.4"] = L("2.4", "Parallel and Perpendicular Lines on the Coordinate P
   <div class="qa-box" ${QA}><h3>Q3: What's perpendicular to a horizontal line?</h3><p><em>A vertical line — \(y=k\) is perpendicular to \(x=c\).</em></p></div>
 </div>`)]);
 
-authored["2.5"] = L("2.5", "Function Transformations: f(x)+k, kf(x), f(x+k)", [html(String.raw`<div class="lecture-box">
+authored["2.5"] = L("2.5", "Function Transformations: f(x)+k, kf(x), f(x+k)", [
+  html(String.raw`<div class="lecture-box">
   <h1>🔀 Function Transformations</h1>
-  <p><strong>Overview.</strong> Small changes to a function's rule move its graph in predictable ways. Learn three building blocks and you can shift, stretch, and slide any graph.</p>
+  <p><strong>Overview.</strong> Small changes to a function's rule move its graph in predictable ways. Learn three building blocks — <strong>shift</strong>, <strong>stretch</strong>, and <strong>slide</strong> — and you can transform <em>any</em> graph without plotting a single point.</p>
   <h2>📌 The toolkit</h2>
   <ul>
-    <li><strong>\(f(x) + k\):</strong> vertical shift — <strong>up</strong> by \(k\) (down if \(k&lt;0\)).</li>
-    <li><strong>\(k\,f(x)\):</strong> vertical stretch by factor \(k\) (\(|k|&gt;1\) taller, \(0&lt;|k|&lt;1\) shorter; \(k&lt;0\) flips over the \(x\)-axis).</li>
-    <li><strong>\(f(x + k)\):</strong> horizontal shift — <strong>left</strong> by \(k\) (right if \(k&lt;0\)). Note it moves the <em>opposite</em> way to the sign.</li>
+    <li><strong>\(f(x) + k\) — vertical shift:</strong> <strong>up</strong> by \(k\) (down if \(k&lt;0\)). The change is <em>outside</em> the function, so it moves the graph the same way as its sign.</li>
+    <li><strong>\(k\,f(x)\) — vertical stretch:</strong> by factor \(k\). \(|k|&gt;1\) makes it taller/narrower, \(0&lt;|k|&lt;1\) shorter/wider, and \(k&lt;0\) flips it over the \(x\)-axis.</li>
+    <li><strong>\(f(x + k)\) — horizontal shift:</strong> <strong>left</strong> by \(k\) (right if \(k&lt;0\)). The change is <em>inside</em>, so it moves the graph the <em>opposite</em> way to its sign — the classic surprise.</li>
   </ul>
-  ${gframe(["y = x^2", "y = x^2 + 3"], { title: "y = x² and y = x² + 3 — the same parabola shifted up 3", xMin: -5, xMax: 5, yMin: -2, yMax: 20 })}
+  <table style="border-collapse:collapse;margin:10px 0;font-size:15px;"><thead><tr><th style="border:1px solid #cbd5e1;padding:6px 12px;background:#f1f5f9;">Change</th><th style="border:1px solid #cbd5e1;padding:6px 12px;background:#f1f5f9;">Effect</th><th style="border:1px solid #cbd5e1;padding:6px 12px;background:#f1f5f9;">Moves the vertex of \(x^2\) to</th></tr></thead><tbody>
+  <tr><td style="border:1px solid #cbd5e1;padding:6px 12px;">\(x^2 + k\)</td><td style="border:1px solid #cbd5e1;padding:6px 12px;">up/down</td><td style="border:1px solid #cbd5e1;padding:6px 12px;">\((0,\,k)\)</td></tr>
+  <tr><td style="border:1px solid #cbd5e1;padding:6px 12px;">\((x-h)^2\)</td><td style="border:1px solid #cbd5e1;padding:6px 12px;">left/right</td><td style="border:1px solid #cbd5e1;padding:6px 12px;">\((h,\,0)\)</td></tr>
+  <tr><td style="border:1px solid #cbd5e1;padding:6px 12px;">\(a\,x^2\)</td><td style="border:1px solid #cbd5e1;padding:6px 12px;">stretch/flip</td><td style="border:1px solid #cbd5e1;padding:6px 12px;">\((0,\,0)\) (shape changes)</td></tr>
+  </tbody></table>
+  <h2>🎬 See each one move</h2>
+  <p>Slide the parameter on each graph below (or press play) and watch a single number reshape the whole parabola.</p>
+</div>`),
+  graph("x^2+k", "k", { xMin: -5, xMax: 5, yMin: -3, yMax: 12, paramMin: -4, paramMax: 6, paramInit: 0, caption: "Vertical shift  y = x² + k : slide k to move the parabola up (k>0) or down (k<0). The vertex sits at (0, k)." }),
+  graph("(x-h)^2", "h", { xMin: -6, xMax: 6, yMin: -1, yMax: 10, paramMin: -3, paramMax: 3, paramInit: 0, caption: "Horizontal shift  y = (x − h)² : slide h to move the vertex to (h, 0). Written as (x − h), a positive h moves it RIGHT." }),
+  graph("a*x^2", "a", { xMin: -4, xMax: 4, yMin: -8, yMax: 8, paramMin: -2, paramMax: 3, paramInit: 1, caption: "Vertical stretch  y = a·x² : |a|>1 narrows it, 0<|a|<1 widens it, and a<0 flips it to open downward." }),
+  anim("(x-a)^2 + a", "a", { from: -3, to: 3, durationMs: 5000, xMin: -6, xMax: 6, yMin: -4, yMax: 10, caption: "Animation: combine a right shift and an up shift — the vertex of (x − a)² + a travels straight along the line y = x." }),
+  html(String.raw`<div class="lecture-box">
   <h2>🔵 Examples</h2>
   <div class="example-box" ${EX}><h3>Example 1: Vertical shift up</h3><p>Describe \(g(x) = x^2 + 3\) relative to \(f(x) = x^2\).</p><div class="solution"><div class="step"><strong>Form \(f(x)+k\) with \(k=3\):</strong> shift up.</div><em>Conclusion: the parabola moves up 3 units. ✓</em></div></div>
   <div class="example-box" ${EX}><h3>Example 2: Vertical shift down</h3><p>Describe \(g(x) = x^2 - 2\) relative to \(f(x)=x^2\).</p><div class="solution"><div class="step"><strong>\(k=-2\):</strong> shift down.</div><em>Conclusion: down 2 units. ✓</em></div></div>
@@ -336,7 +349,8 @@ authored["2.5"] = L("2.5", "Function Transformations: f(x)+k, kf(x), f(x+k)", [h
   <div class="qa-box" ${QA}><h3>Q1: Why does \(f(x+3)\) go <em>left</em>?</h3><p><em>The input reaches its value 3 units sooner, so the whole graph slides left — inside changes act opposite to their sign.</em></p></div>
   <div class="qa-box" ${QA}><h3>Q2: Stretch or compression?</h3><p><em>\(|k|&gt;1\) stretches (taller/narrower); \(0&lt;|k|&lt;1\) compresses (shorter/wider).</em></p></div>
   <div class="qa-box" ${QA}><h3>Q3: What does a negative \(k\) in \(kf(x)\) do?</h3><p><em>It reflects the graph over the \(x\)-axis (flips it upside down).</em></p></div>
-</div>`)]);
+</div>`),
+]);
 
 authored["3.1"] = L("3.1", "Solving Systems by Graphing & Substitution", [html(String.raw`<div class="lecture-box">
   <h1>🤝 Solving Systems by Graphing &amp; Substitution</h1>
