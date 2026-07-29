@@ -245,7 +245,11 @@ authored["2.2"] = L("2.2", "Intercepts, Slope, and Rate of Change", [html(String
     <li><strong>Slope:</strong> \(m = \dfrac{\text{rise}}{\text{run}} = \dfrac{y_2 - y_1}{x_2 - x_1}\).</li>
     <li>Horizontal line: \(m=0\). Vertical line: slope is <strong>undefined</strong>.</li>
   </ul>
-  ${gframe(["y = 2*x + 1"], { title: "y = 2x + 1: y-intercept (0, 1), slope 2 (up 2 for every 1 across)", xMin: -5, xMax: 5, yMin: -9, yMax: 11 })}
+  <h2>🎬 Slope and intercept, live</h2>
+  <p>Slide <strong>m</strong> to change the steepness and <strong>b</strong> to slide the whole line up or down — the equation updates as you go.</p>
+</div>`),
+  graph2("m*x + b", "m", "b", { xMin: -6, xMax: 6, yMin: -12, yMax: 12, paramMin: -5, paramMax: 5, paramInit: 2, param2Min: -6, param2Max: 6, param2Init: 1, caption: "Slope-intercept form  y = m·x + b : m sets the slope (rise over run); b sets the y-intercept (0, b)." }),
+  html(String.raw`<div class="lecture-box">
   <h2>🔵 Examples</h2>
   <div class="example-box" ${EX}><h3>Example 1: Intercepts from an equation</h3><p>Find the intercepts of \(2x + 3y = 12\).</p><div class="solution"><div class="step"><strong>\(y\)-intercept (\(x=0\)):</strong> \(3y=12\Rightarrow (0,4)\).</div><div class="step"><strong>\(x\)-intercept (\(y=0\)):</strong> \(2x=12\Rightarrow (6,0)\).</div><em>Conclusion: \((0,4)\) and \((6,0)\). ✓</em></div></div>
   <div class="example-box" ${EX}><h3>Example 2: Slope from two points</h3><p>Find the slope through \((1,2)\) and \((4,11)\).</p><div class="solution"><div class="step"><strong>Apply the formula:</strong> \(m=\dfrac{11-2}{4-1}=\dfrac{9}{3}=3\).</div><em>Conclusion: \(m=3\). ✓</em></div></div>
@@ -643,7 +647,11 @@ authored["5.3"] = L("5.3", "Features of Parabolas (Vertex, Axis of Symmetry, Int
     <li><strong>Axis of symmetry:</strong> the vertical line \(x = -\dfrac{b}{2a}\); the <strong>vertex</strong> sits on it.</li>
     <li><strong>\(y\)-intercept:</strong> \((0, c)\). <strong>\(x\)-intercepts (roots):</strong> where \(y = 0\) (factor or use the formula).</li>
   </ul>
-  ${gframe(["y = x^2 - 4*x + 3"], { title: "y = x² − 4x + 3: opens up, axis x = 2, vertex (2, −1), roots 1 and 3", xMin: -2, xMax: 6, yMin: -3, yMax: 9 })}
+  <h2>🎬 Move the vertex</h2>
+  <p>In vertex form, the vertex sits exactly at \((h, k)\) and the axis of symmetry is \(x = h\). Slide both to see it.</p>
+</div>`),
+  graph2("(x-h)^2 + k", "h", "k", { xMin: -6, xMax: 6, yMin: -3, yMax: 10, paramMin: -4, paramMax: 4, paramInit: 2, param2Min: -3, param2Max: 7, param2Init: -1, caption: "Vertex form  y = (x − h)² + k : the vertex is (h, k) and the axis of symmetry is the line x = h." }),
+  html(String.raw`<div class="lecture-box">
   <h2>🔵 Examples</h2>
   <div class="example-box" ${EX}><h3>Example 1: Direction &amp; \(y\)-intercept</h3><p>For \(y = x^2 - 4x + 3\), state the direction and \(y\)-intercept.</p><div class="solution"><div class="step"><strong>\(a = 1 &gt; 0\):</strong> opens up (minimum). <strong>\(c = 3\):</strong> \(y\)-intercept \((0,3)\).</div><em>Conclusion: opens up, \((0,3)\). ✓</em></div></div>
   <div class="example-box" ${EX}><h3>Example 2: Axis of symmetry</h3><p>Find the axis of \(y = x^2 - 4x + 3\).</p><div class="solution"><div class="step"><strong>\(x = -\dfrac{b}{2a} = -\dfrac{-4}{2(1)}\):</strong> \(x = 2\).</div><em>Conclusion: axis \(x = 2\). ✓</em></div></div>
@@ -725,7 +733,11 @@ authored["6.1"] = L("6.1", "Exponential Growth and Decay Models", [html(String.r
     <li><strong>Growth</strong> of \(r\%\): \(b = 1 + r\). <strong>Decay</strong> of \(r\%\): \(b = 1 - r\).</li>
     <li>Evaluate by substituting \(x\); interpret the answer in context.</li>
   </ul>
-  ${gframe(["y = 2^x"], { title: "y = 2ˣ — exponential growth: each step doubles the output", xMin: -3, xMax: 6, yMin: -2, yMax: 20 })}
+  <h2>🎬 Growth vs decay</h2>
+  <p>Slide the base <strong>b</strong>: above 1 the curve grows, between 0 and 1 it decays toward zero, and every curve passes through \((0, 100)\).</p>
+</div>`),
+  graph("100*b^x", "b", { xMin: -4, xMax: 5, yMin: -20, yMax: 400, paramMin: 0.3, paramMax: 2, paramInit: 1.5, caption: "y = 100·bˣ : b > 1 grows, 0 < b < 1 decays, b = 1 is the flat line y = 100." }),
+  html(String.raw`<div class="lecture-box">
   <h2>🔵 Examples</h2>
   <div class="example-box" ${EX}><h3>Example 1: Identify \(a\) and \(b\)</h3><p>For \(y = 100 \cdot 2^x\), state the starting amount and behaviour.</p><div class="solution"><div class="step"><strong>Read off:</strong> \(a = 100\), \(b = 2 &gt; 1\).</div><em>Conclusion: starts at 100 and doubles each step (growth). ✓</em></div></div>
   <div class="example-box" ${EX}><h3>Example 2: Growth or decay?</h3><p>Describe \(y = 50 \cdot (0.8)^x\).</p><div class="solution"><div class="step"><strong>\(b = 0.8\) is between 0 and 1:</strong> decay.</div><em>Conclusion: starts at 50, shrinks 20% each step. ✓</em></div></div>
