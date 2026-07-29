@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { safeCompile } from "../lib/mathExpr";
+import { safeCompile, liveEquation } from "../lib/mathExpr";
 
 /**
  * Animates an authored expression by sweeping `param` from `from` to `to`
@@ -91,7 +91,12 @@ export function AnimatedGraph({
         {grid}
         <path d={path} fill="none" stroke="#0d9488" strokeWidth={2.5} strokeLinecap="round" />
       </svg>
-      <div style={{ marginTop: 14, display: "flex", alignItems: "center", gap: 14 }}>
+      {param && (
+        <div style={{ marginTop: 14, fontWeight: 800, fontSize: 17, color: "#0d9488", fontVariantNumeric: "tabular-nums" }}>
+          {liveEquation(expr, param, value)}
+        </div>
+      )}
+      <div style={{ marginTop: 10, display: "flex", alignItems: "center", gap: 14 }}>
         <button
           onClick={() => setPlaying((p) => !p)}
           style={{ background: "#1b7a44", color: "#fff", border: "none", borderRadius: 8, padding: "8px 16px", fontWeight: 700, fontSize: 14, cursor: "pointer" }}

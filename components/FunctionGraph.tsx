@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { liveEquation } from "../lib/mathExpr";
 
 /**
  * A dependency-free interactive function plotter.
@@ -22,9 +23,11 @@ export function FunctionGraph({
   width = 520,
   height = 360,
   hideSlider = false,
+  equationExpr,
 }: {
   fn: (x: number, a: number) => number;
   label?: string;
+  equationExpr?: string;
   xMin?: number;
   xMax?: number;
   yMin?: number;
@@ -107,8 +110,13 @@ export function FunctionGraph({
         <path d={path} fill="none" stroke="#1b7a44" strokeWidth={2.5} strokeLinecap="round" />
       </svg>
 
+      {!hideSlider && equationExpr && (
+        <div style={{ marginTop: 14, fontWeight: 800, fontSize: 17, color: "#1b7a44", fontVariantNumeric: "tabular-nums" }}>
+          {liveEquation(equationExpr, paramName, a)}
+        </div>
+      )}
       {!hideSlider && (
-        <div style={{ marginTop: 16, display: "flex", alignItems: "center", gap: 14 }}>
+        <div style={{ marginTop: 10, display: "flex", alignItems: "center", gap: 14 }}>
           <label style={{ fontWeight: 700, fontSize: 14, color: "#0f172a", minWidth: 70 }}>
             {paramName} = {a.toFixed(1)}
           </label>

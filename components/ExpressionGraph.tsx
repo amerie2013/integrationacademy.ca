@@ -35,6 +35,7 @@ export function ExpressionGraph({
     <FunctionGraph
       fn={(x, a) => fn(hasParam ? { x, [param]: a } : { x })}
       label={caption || `y = ${expr}`}
+      equationExpr={hasParam ? expr : undefined}
       xMin={xMin}
       xMax={xMax}
       yMin={yMin}

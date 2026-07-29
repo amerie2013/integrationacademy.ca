@@ -173,3 +173,27 @@ export function safeCompile(src: string): CompiledExpr {
     return () => NaN;
   }
 }
+
+/**
+ * Build a readable equation with the current parameter value substituted in,
+ * e.g. liveEquation("x^2+k", "k", 2) → "y = x² + 2". Used by the interactive and
+ * animated graph components so students can read the equation change live.
+ */
+export function liveEquation(expr: string, param: string, value: number): string {
+  const v = Math.round(value * 10) / 10;
+  const vs = Number.isInteger(v) ? String(v) : v.toFixed(1);
+  let s = expr;
+  if (param) s = s.replace(new RegExp("\b" + param + "\b", "g"), v < 0 ? "(" + vs + ")" : vs);
+  // prettify multiplication and small powers
+  s = s.replace(/\*\*/g, "^").replace(/\*/g, "·").replace(/\^2\b/g, "²").replace(/\^3\b/g, "³");
+  // resolve the signs created by substituting negatives, then tidy
+  s = s
+    .replace(/\+\s*\((-?[\d.]+)\)/g, (_m, n: string) => (n.startsWith("-") ? " − " + n.slice(1) : " + " + n))
+    .replace(/-\s*\((-?[\d.]+)\)/g, (_m, n: string) => (n.startsWith("-") ? " + " + n.slice(1) : " − " + n))
+    .replace(/\(\s*(-?[\d.]+)\s*\)/g, "$1")
+    .replace(/(^|[^\d.])1·/g, "$1")   // 1·x → x
+    .replace(/(^|[^\d.])-1·/g, "$1−") // -1·x → −x
+    .replace(/\+/g, " + ").replace(/(?<![eE^])-(?=\S)/g, " − ")
+    .replace(/\s+/g, " ").trim();
+  return "y = " + s;
+}
