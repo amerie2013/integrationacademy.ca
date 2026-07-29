@@ -194,7 +194,11 @@ authored["1.5"] = L("1.5", "Modeling Real-World Contexts with Linear Constraints
     <li><strong>Keywords:</strong> “per / each” → a rate (multiply); “total / in all” → sum; “at most / no more than” → \(\le\); “at least / minimum” → \(\ge\).</li>
     <li>Build <strong>fixed + variable·(quantity)</strong>, solve, then <strong>interpret</strong> — and round sensibly for the context (you can't buy \(3.7\) tickets).</li>
   </ul>
-  ${gframe(["y = 2*x + 3", "y = 15"], { title: "Taxi cost 3 + 2·(miles) reaches $15 at 6 miles", xMin: -1, xMax: 10, yMin: -1, yMax: 20 })}
+  <h2>🎬 The fixed fee is the intercept</h2>
+  <p>A cost model is \(y = (\text{rate})x + (\text{fixed fee})\). Slide <strong>b</strong> to change the fixed starting fee — the whole line shifts up, but the steepness (the per‑unit rate) stays the same.</p>
+</div>`),
+  graph("2*x + b", "b", { xMin: -1, xMax: 10, yMin: -2, yMax: 22, paramMin: 0, paramMax: 10, paramInit: 3, caption: "Cost  y = 2·x + b : the rate ($2 each) is the slope; the fixed fee b is the starting cost at x = 0." }),
+  html(String.raw`<div class="lecture-box">
   <h2>🔵 Examples</h2>
   <div class="example-box" ${EX}><h3>Example 1: Cost equation</h3><p>A taxi charges $3 plus $2 per mile. How far can you go for exactly $15?</p><div class="solution"><div class="step"><strong>Model:</strong> let \(m\) = miles; \(3 + 2m = 15\).</div><div class="step"><strong>Solve:</strong> \(2m = 12\Rightarrow m = 6\).</div><em>Conclusion: 6 miles. ✓</em></div></div>
   <div class="example-box" ${EX}><h3>Example 2: “At most” (a budget)</h3><p>Notebooks cost $8 each and you have $50. How many can you buy?</p><div class="solution"><div class="step"><strong>Model:</strong> let \(n\) = notebooks; \(8n \le 50\).</div><div class="step"><strong>Solve:</strong> \(n \le 6.25\).</div><em>Conclusion: at most <strong>6</strong> notebooks (round down — you can't buy a fraction). ✓</em></div></div>
@@ -222,7 +226,11 @@ authored["2.1"] = L("2.1", "Function Notation, Domain, and Range", [html(String.
     <li>\(f(x)\) is <strong>not</strong> \(f\) times \(x\) — it names the output.</li>
     <li><strong>Domain</strong> = allowed \(x\)-values; <strong>range</strong> = resulting \(y\)-values. A context can restrict them (e.g. time \(\ge 0\)).</li>
   </ul>
-  ${gframe(["y = 3*x - 2"], { title: "f(x) = 3x − 2: input x on the horizontal axis, output f(x) on the vertical", xMin: -5, xMax: 5, yMin: -12, yMax: 12 })}
+  <h2>🎬 Every input has one output</h2>
+  <p>For \(f(x) = m\,x - 2\), each \(x\) on the horizontal axis maps to one height \(f(x)\). Slide <strong>m</strong> to change the rule and watch the outputs change.</p>
+</div>`),
+  graph("m*x - 2", "m", { xMin: -5, xMax: 5, yMin: -12, yMax: 12, paramMin: -4, paramMax: 4, paramInit: 3, caption: "f(x) = m·x − 2 : read an output by going up from an x-value to the line, then across to the axis." }),
+  html(String.raw`<div class="lecture-box">
   <h2>🔵 Examples</h2>
   <div class="example-box" ${EX}><h3>Example 1: Evaluate a linear function</h3><p>If \(f(x) = 3x - 2\), find \(f(4)\).</p><div class="solution"><div class="step"><strong>Substitute \(x=4\):</strong> \(3(4)-2 = 10\).</div><em>Conclusion: \(f(4)=10\). ✓</em></div></div>
   <div class="example-box" ${EX}><h3>Example 2: Evaluate at a negative input</h3><p>If \(f(x) = x^2 + 1\), find \(f(-3)\).</p><div class="solution"><div class="step"><strong>Substitute \(x=-3\):</strong> \((-3)^2 + 1 = 9+1 = 10\).</div><em>Conclusion: \(f(-3)=10\). ✓</em></div></div>
@@ -633,6 +641,11 @@ authored["5.2"] = L("5.2", "Factoring Trinomials (ax² + bx + c)", [html(String.
     <li><strong>\(ax^2 + bx + c\) (ac method):</strong> find two numbers multiplying to \(ac\) and adding to \(b\); split \(bx\) and factor by grouping.</li>
     <li>Watch the <strong>signs</strong>: product/sum of \(p\) and \(q\) must match \(c\) and \(b\).</li>
   </ul>
+  <h2>🎬 Factors become x-intercepts</h2>
+  <p>A factored trinomial \((x - p)(x - q)\) graphs as a parabola whose \(x\)-intercepts are exactly \(p\) and \(q\). Slide them to see.</p>
+</div>`),
+  graph2("(x-p)*(x-q)", "p", "q", { xMin: -6, xMax: 6, yMin: -6, yMax: 10, paramMin: -4, paramMax: 4, paramInit: -1, param2Min: -4, param2Max: 4, param2Init: 2, caption: "y = (x − p)(x − q) : the parabola crosses the x-axis exactly at x = p and x = q — the factors reveal the roots." }),
+  html(String.raw`<div class="lecture-box">
   <h2>🔵 Examples</h2>
   <div class="example-box" ${EX}><h3>Example 1: \(a = 1\), all positive</h3><p>Factor \(x^2 + 7x + 12\).</p><div class="solution"><div class="step"><strong>Sum 7, product 12:</strong> \(3\) and \(4\).</div><em>Conclusion: \((x + 3)(x + 4)\). ✓</em></div></div>
   <div class="example-box" ${EX}><h3>Example 2: \(a = 1\), negative middle</h3><p>Factor \(x^2 - 5x + 6\).</p><div class="solution"><div class="step"><strong>Sum \(-5\), product 6:</strong> \(-2\) and \(-3\).</div><em>Conclusion: \((x - 2)(x - 3)\). ✓</em></div></div>
@@ -692,6 +705,11 @@ authored["5.4"] = L("5.4", "Solving Quadratics by Factoring and Square Roots", [
     <li><strong>Square roots:</strong> \(x^2 = k\) gives \(x = \pm\sqrt{k}\) — remember <strong>both</strong> signs.</li>
     <li>Always move everything to one side first, so it equals \(0\).</li>
   </ul>
+  <h2>🎬 Solutions are where it hits zero</h2>
+  <p>Solving \(x^2 = k\) means finding where \(y = x^2 - k\) crosses the \(x\)-axis. Slide <strong>k</strong>: \(k &gt; 0\) gives two solutions \(\pm\sqrt{k}\), \(k = 0\) gives one, \(k &lt; 0\) gives none.</p>
+</div>`),
+  graph("x^2 - k", "k", { xMin: -5, xMax: 5, yMin: -6, yMax: 12, paramMin: -4, paramMax: 9, paramInit: 4, caption: "y = x² − k : the x-intercepts are the solutions of x² = k — two when k > 0, none when k < 0." }),
+  html(String.raw`<div class="lecture-box">
   <h2>🔵 Examples</h2>
   <div class="example-box" ${EX}><h3>Example 1: Already factored</h3><p>Solve \((x - 2)(x + 5) = 0\).</p><div class="solution"><div class="step"><strong>Each factor \(= 0\):</strong> \(x - 2 = 0\) or \(x + 5 = 0\).</div><em>Conclusion: \(x = 2\) or \(x = -5\). ✓</em></div></div>
   <div class="example-box" ${EX}><h3>Example 2: Factor, then solve</h3><p>Solve \(x^2 + 3x - 10 = 0\).</p><div class="solution"><div class="step"><strong>Factor:</strong> \((x + 5)(x - 2) = 0\).</div><em>Conclusion: \(x = -5\) or \(x = 2\). ✓</em></div></div>
@@ -719,6 +737,11 @@ authored["5.5"] = L("5.5", "Completing the Square & The Quadratic Formula", [htm
     <li><strong>Quadratic formula:</strong> \(x = \dfrac{-b \pm \sqrt{b^2 - 4ac}}{2a}\) for \(ax^2 + bx + c = 0\).</li>
     <li><strong>Discriminant \(D = b^2 - 4ac\):</strong> \(D &gt; 0\) two roots, \(D = 0\) one root, \(D &lt; 0\) no real roots.</li>
   </ul>
+  <h2>🎬 Watch the roots disappear</h2>
+  <p>For \(y = x^2 - 4x + c\), the discriminant is \(16 - 4c\). Slide <strong>c</strong> up: the parabola rises, its two \(x\)-intercepts slide together, merge at \(c = 4\) (one root), then lift off the axis (no real roots).</p>
+</div>`),
+  graph("x^2 - 4*x + c", "c", { xMin: -2, xMax: 6, yMin: -5, yMax: 10, paramMin: 0, paramMax: 8, paramInit: 3, caption: "y = x² − 4x + c : two roots while D = 16 − 4c > 0, exactly one at c = 4, and none once c > 4." }),
+  html(String.raw`<div class="lecture-box">
   <h2>🔵 Examples</h2>
   <div class="example-box" ${EX}><h3>Example 1: Complete the square</h3><p>Solve \(x^2 + 6x + 5 = 0\).</p><div class="solution"><div class="step"><strong>Move \(5\):</strong> \(x^2 + 6x = -5\).</div><div class="step"><strong>Add \((\tfrac{6}{2})^2 = 9\):</strong> \((x + 3)^2 = 4\).</div><div class="step"><strong>Square roots:</strong> \(x + 3 = \pm 2\Rightarrow x = -1\) or \(-5\).</div><em>Conclusion: \(x = -1\) or \(x = -5\). ✓</em></div></div>
   <div class="example-box" ${EX}><h3>Example 2: Quadratic formula (factorable check)</h3><p>Solve \(x^2 - 5x + 6 = 0\).</p><div class="solution"><div class="step"><strong>Formula with \(a=1,b=-5,c=6\):</strong> \(x = \dfrac{5 \pm \sqrt{25 - 24}}{2} = \dfrac{5 \pm 1}{2}\).</div><em>Conclusion: \(x = 3\) or \(x = 2\). ✓</em></div></div>
@@ -778,6 +801,11 @@ authored["6.2"] = L("6.2", "Comparing Linear, Quadratic, and Exponential Models"
     <li><strong>Quadratic:</strong> the <strong>second differences</strong> are constant.</li>
     <li><strong>Exponential:</strong> outputs change by a <strong>constant ratio</strong> (multiply by the same each step).</li>
   </ul>
+  <h2>🎬 Which one wins?</h2>
+  <p>Linear, quadratic, and exponential graphed together. They start close, but watch how the exponential eventually shoots past the others.</p>
+</div>`),
+  mg([{ expr: "3*x", label: "linear  3x" }, { expr: "x^2", label: "quadratic  x²" }, { expr: "1.7^x", label: "exponential  1.7ˣ" }], { param: "", xMin: 0, xMax: 9, yMin: 0, yMax: 60, markIntersection: false, caption: "Linear vs. quadratic vs. exponential — for large x the exponential overtakes them all." }),
+  html(String.raw`<div class="lecture-box">
   <h2>🔵 Examples</h2>
   <div class="example-box" ${EX}><h3>Example 1: Spot a linear table</h3><p>\(y\)-values \(3, 7, 11, 15\) at \(x = 0,1,2,3\).</p><div class="solution"><div class="step"><strong>Differences:</strong> \(+4, +4, +4\) — constant.</div><em>Conclusion: linear (\(y = 4x + 3\)). ✓</em></div></div>
   <div class="example-box" ${EX}><h3>Example 2: Spot an exponential table</h3><p>\(y\)-values \(2, 6, 18, 54\).</p><div class="solution"><div class="step"><strong>Ratios:</strong> \(\times 3, \times 3, \times 3\) — constant.</div><em>Conclusion: exponential (\(y = 2 \cdot 3^x\)). ✓</em></div></div>
@@ -805,6 +833,11 @@ authored["6.3"] = L("6.3", "Scatter Plots, Lines of Best Fit, and Residuals Anal
     <li><strong>Line of best fit:</strong> the line that most closely follows the trend; use it to <strong>predict</strong>.</li>
     <li><strong>Residual</strong> \(= \text{actual} - \text{predicted}\). Small, balanced residuals mean a good fit.</li>
   </ul>
+  <h2>🎬 Fit a line to the trend</h2>
+  <p>A line of best fit is \(y = m\,x + b\). Slide the slope <strong>m</strong> to tilt the line — a good fit follows the middle of the data with small, balanced residuals.</p>
+</div>`),
+  graph("m*x + 20", "m", { xMin: 0, xMax: 12, yMin: 0, yMax: 90, paramMin: 0, paramMax: 8, paramInit: 5, caption: "Line of best fit  y = m·x + b : adjust the slope to follow the trend; predictions come from reading the line." }),
+  html(String.raw`<div class="lecture-box">
   <h2>🔵 Examples</h2>
   <div class="example-box" ${EX}><h3>Example 1: Describe correlation</h3><p>As study hours rise, test scores rise. What correlation is that?</p><div class="solution"><div class="step"><strong>Both increase together:</strong> positive correlation.</div><em>Conclusion: positive (and likely strong). ✓</em></div></div>
   <div class="example-box" ${EX}><h3>Example 2: Predict with a best-fit line</h3><p>A best-fit line is \(y = 5x + 50\) (score vs. hours). Predict the score for 6 hours.</p><div class="solution"><div class="step"><strong>Substitute \(x = 6\):</strong> \(5(6) + 50 = 80\).</div><em>Conclusion: about 80. ✓</em></div></div>
