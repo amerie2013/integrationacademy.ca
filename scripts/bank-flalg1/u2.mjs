@@ -187,10 +187,76 @@ function g25() {
   return q;
 }
 
+// ── 2.3 Point-Slope Form ─────────────────────────────────────
+function g23ps() {
+  const q = [];
+  const ps = (m, x1, y1) => {
+    const left = y1 === 0 ? "y" : y1 > 0 ? `y - ${y1}` : `y + ${-y1}`;
+    const inner = x1 === 0 ? "x" : x1 > 0 ? `x - ${x1}` : `x + ${-x1}`;
+    const coef = m === 1 ? "" : m === -1 ? "-" : `${m}`;
+    return `${left} = ${coef}(${inner})`;
+  };
+  for (let i = 0; i < 16; i++) {
+    const m = rnz(-4, 5), x1 = rnz(-4, 4), y1 = rnz(-6, 6);
+    q.push(mcv(i < 8 ? "easy" : "medium", `Write point-slope form for the line with slope $${m}$ through $(${x1}, ${y1})$.`,
+      `$${ps(m, x1, y1)}$`, [`$${ps(m, -x1, y1)}$`, `$${ps(m, x1, -y1)}$`, `$${ps(m + 1, x1, y1)}$`]));
+  }
+  for (let i = 0; i < 10; i++) {
+    const m = rnz(-4, 5), x1 = rnz(-4, 4), y1 = rnz(-6, 6); const b = y1 - m * x1;
+    q.push(num(i < 5 ? "medium" : "hard", `Simplify $${ps(m, x1, y1)}$ to $y = mx + b$; enter $b$.`, b, 0));
+  }
+  q.push(mc("easy", "Point-slope form is…", ["$y - y_1 = m(x - x_1)$", "$y = mx + b$", "$Ax + By = C$", "$y = a$"], 0));
+  q.push(tf("easy", "Point-slope form needs one point and the slope.", true));
+  q.push(mc("easy", "For a point $(-2, 5)$, the $(x - x_1)$ part becomes…", ["$(x + 2)$", "$(x - 2)$", "$(x - 5)$", "$(x + 5)$"], 0));
+  q.push(fill("easy", "Slope 4 through $(1, 2)$: $y - 2 = 4(x - \\text{___})$.", ["1"]));
+  q.push(mc("easy", "Which point does $y - 3 = 2(x - 5)$ pass through?", ["$(5, 3)$", "$(3, 5)$", "$(-5, -3)$", "$(2, 3)$"], 0));
+  q.push(mc("medium", "Simplify $y - 2 = 4(x - 1)$.", ["$y = 4x - 2$", "$y = 4x + 2$", "$y = 4x - 1$", "$y = 4x + 6$"], 0));
+  q.push(mc("medium", "Line through $(-2, 5)$ with slope $-3$, in point-slope form?", ["$y - 5 = -3(x + 2)$", "$y + 5 = -3(x - 2)$", "$y - 5 = -3(x - 2)$", "$y + 5 = -3(x + 2)$"], 0));
+  q.push(tf("medium", "You can use either given point when writing a line through two points.", true));
+  for (let i = 0; i < 6; i++) { const x1 = ri(-3, 3), dx = ri(1, 4), m = rnz(-4, 5); const x2 = x1 + dx, y1 = rnz(-5, 5), y2 = y1 + m * dx; q.push(num("hard", `Line through $(${x1}, ${y1})$ and $(${x2}, ${y2})$: find the slope $m$ (for point-slope).`, m, 0)); }
+  q.push(mcv("hard", "Through $(1, 4)$ and $(3, 10)$, point-slope using $(1,4)$?", "$y - 4 = 3(x - 1)$", ["$y - 1 = 3(x - 4)$", "$y - 4 = 2(x - 1)$", "$y + 4 = 3(x + 1)$"]));
+  q.push(mc("hard", "Slope $\\tfrac12$ through $(4, 1)$ simplifies to…", ["$y = \\tfrac12 x - 1$", "$y = \\tfrac12 x + 1$", "$y = \\tfrac12 x - 3$", "$y = 2x - 7$"], 0));
+  return q;
+}
+
+// ── 2.4 General (Standard) Form ──────────────────────────────
+function g24gf() {
+  const q = [];
+  // Ax + By = C built from integer intercepts (p, 0) and (0, q): A=q, B=p, C=p·q
+  for (let i = 0; i < 18; i++) {
+    const p = rnz(-6, 6), qq = rnz(-6, 6); const A = qq, B = p, C = p * qq;
+    const askX = i % 2 === 0;
+    const lhs = `${A === 1 ? "" : A === -1 ? "-" : A}x ${B < 0 ? `- ${-B}` : `+ ${B}`}y = ${C}`;
+    q.push(num(i < 8 ? "easy" : i < 14 ? "medium" : "hard",
+      `For $${lhs}$, find the ${askX ? "$x$" : "$y$"}-intercept; enter the ${askX ? "$x$" : "$y$"}-value.`, askX ? p : qq, 0));
+  }
+  q.push(mc("easy", "Standard (general) form is…", ["$Ax + By = C$", "$y = mx + b$", "$y - y_1 = m(x - x_1)$", "$y = a$"], 0));
+  q.push(mc("easy", "To find the $x$-intercept of $Ax + By = C$, set…", ["$y = 0$", "$x = 0$", "$C = 0$", "$A = 0$"], 0));
+  q.push(mc("easy", "To find the $y$-intercept of $Ax + By = C$, set…", ["$x = 0$", "$y = 0$", "$B = 0$", "$C = 1$"], 0));
+  q.push(tf("easy", "In standard form we prefer integer coefficients with $A \\ge 0$.", true));
+  q.push(fill("easy", "For $2x + 3y = 12$, the $x$-intercept is $(\\text{___}, 0)$.", ["6"]));
+  q.push(mc("medium", "Intercepts of $3x + 2y = 12$?", ["$(4,0)$ and $(0,6)$", "$(6,0)$ and $(0,4)$", "$(3,0)$ and $(0,2)$", "$(12,0)$ and $(0,12)$"], 0));
+  q.push(mcv("medium", "Write $y = 2x - 3$ in standard form ($A \\ge 0$).", "$2x - y = 3$", ["$2x + y = 3$", "$-2x + y = 3$", "$2x - y = -3$"]));
+  q.push(mcv("medium", "Write $y = -3x + 5$ in standard form.", "$3x + y = 5$", ["$3x - y = 5$", "$-3x + y = 5$", "$3x + y = -5$"]));
+  q.push(mcv("medium", "Clear fractions: $y = \\tfrac23 x + 4$ in standard form.", "$2x - 3y = -12$", ["$2x + 3y = 12$", "$2x - 3y = 12$", "$3x - 2y = 12$"]));
+  q.push(tf("medium", "The $x$-intercept of $Ax + By = C$ is $\\tfrac{C}{A}$.", true));
+  q.push(num("medium", "For $5x - 2y = 20$, find the $x$-intercept ($x$-value).", 4, 0));
+  q.push(num("medium", "For $5x - 2y = 20$, find the $y$-intercept ($y$-value).", -10, 0));
+  q.push(mc("hard", "Slope of $6x + 3y = 9$? (use $m = -A/B$)", ["$-2$", "$2$", "$-\\tfrac12$", "$6$"], 0));
+  q.push(num("hard", "For $Ax + By = C$ with $A=4, B=-2$, the slope $m = -A/B$ is… (decimal)", 2, 0.001));
+  q.push(mcv("hard", "Write $y = -\\tfrac12 x + 3$ in standard form (integers).", "$x + 2y = 6$", ["$x - 2y = 6$", "$x + 2y = -6$", "$2x + y = 6$"]));
+  q.push(mc("hard", "Which is a vertical line in 'standard' style?", ["$x + 0y = 4$", "$0x + y = 4$", "$x + y = 4$", "$y = 4$"], 0));
+  q.push(fill("hard", "In $2x - 3y = -12$, the constant $C$ is ___.", ["-12"]));
+  q.push(tf("hard", "Graphing $Ax+By=C$ is quick because both intercepts come from one-step equations.", true));
+  return q;
+}
+
 export default [
   { code: "2.1", gen: g21 },
   { code: "2.2", gen: g22 },
-  { code: "2.3", gen: g23 },
-  { code: "2.4", gen: g24 },
-  { code: "5.6", gen: g25 }, // moved to Chapter 5
+  { code: "2.3", gen: g23ps }, // Point-Slope Form
+  { code: "2.4", gen: g24gf }, // General (Standard) Form
+  { code: "2.5", gen: g23 },   // Converting Between Forms (was "Writing Linear Equations")
+  { code: "2.6", gen: g24 },   // Parallel & Perpendicular (was 2.4)
+  { code: "5.6", gen: g25 },   // Function Transformations (moved to Chapter 5)
 ];

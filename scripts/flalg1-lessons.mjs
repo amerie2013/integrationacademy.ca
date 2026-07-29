@@ -294,39 +294,107 @@ authored["2.2"] = L("2.2", "Intercepts, Slope, and Rate of Change", [html(String
   <div class="qa-box" ${QA}><h3>Q3: Zero slope vs. undefined slope?</h3><p><em>Horizontal ⇒ slope \(0\); vertical ⇒ slope undefined (you'd divide by a zero run).</em></p></div>
 </div>`)]);
 
-authored["2.3"] = L("2.3", "Writing Linear Equations (Slope-Intercept, Point-Slope, Standard Form)", [html(String.raw`<div class="lecture-box">
-  <h1>✍️ Writing Linear Equations</h1>
-  <p><strong>Overview.</strong> The same line can be written three ways. Choose the form that fits the information you're given, then convert as needed.</p>
-  <h2>📌 The three forms</h2>
+authored["2.3"] = L("2.3", "Point-Slope Form", [html(String.raw`<div class="lecture-box">
+  <h1>📍 Point-Slope Form</h1>
+  <p><strong>Overview.</strong> If you know <strong>one point</strong> a line passes through and its <strong>slope</strong>, you can write the line instantly — no solving for \(b\) first. That's the whole appeal of <strong>point-slope form</strong>: \(y - y_1 = m(x - x_1)\). Drop in the slope \(m\) and the point \((x_1, y_1)\), and you're done. Simplify later if you want slope-intercept form.</p>
+  <h2>📌 The toolkit</h2>
   <ul>
-    <li><strong>Slope-intercept:</strong> \(y = mx + b\) — best when you know the slope and \(y\)-intercept.</li>
-    <li><strong>Point-slope:</strong> \(y - y_1 = m(x - x_1)\) — best from a point and a slope.</li>
-    <li><strong>Standard:</strong> \(Ax + By = C\) — tidy for intercepts and integer coefficients.</li>
+    <li><strong>The template:</strong> \(y - y_1 = m(x - x_1)\), where \((x_1, y_1)\) is any point on the line and \(m\) is the slope.</li>
+    <li><strong>Mind the signs:</strong> subtracting a negative flips it — a point \((-2, 5)\) gives \(y - 5 = m(x + 2)\).</li>
+    <li><strong>Two points?</strong> Find the slope \(m = \dfrac{y_2 - y_1}{x_2 - x_1}\) first, then use either point.</li>
+    <li><strong>Simplify</strong> by distributing and moving the constant to reach \(y = mx + b\).</li>
   </ul>
-  <h2>🎬 Build any line</h2>
-  <p>Writing a line means choosing a slope and an intercept. Slide <strong>m</strong> and <strong>b</strong> to build \(y = m\,x + b\) — every form (slope‑intercept, point‑slope, standard) describes this same line.</p>
+  <h2>🎬 Same point, any slope</h2>
+  <p>Every point-slope line here is pinned to the point \((2, 3)\). Slide the slope <strong>m</strong>: the line tilts but always passes through that one fixed point — exactly what \(y - 3 = m(x - 2)\) means.</p>
 </div>`),
-  graph2("m*x + b", "m", "b", { xMin: -6, xMax: 6, yMin: -12, yMax: 12, paramMin: -5, paramMax: 5, paramInit: 3, param2Min: -6, param2Max: 6, param2Init: 1, caption: "y = m·x + b : m is the slope you write into any form, b is the y-intercept." }),
+  graph("m*(x - 2) + 3", "m", { xMin: -4, xMax: 8, yMin: -6, yMax: 12, paramMin: -4, paramMax: 5, paramInit: 2, caption: "y = m·(x − 2) + 3 : the point-slope line through (2, 3). Change m and the line pivots around that fixed point." }),
   html(String.raw`<div class="lecture-box">
   <h2>🔵 Examples</h2>
-  <div class="example-box" ${EX}><h3>Example 1: From slope and \(y\)-intercept</h3><p>Slope 2, \(y\)-intercept \(-3\).</p><div class="solution"><div class="step"><strong>Plug into \(y=mx+b\):</strong> \(m=2,\ b=-3\).</div><em>Conclusion: \(y = 2x - 3\). ✓</em></div></div>
-  <div class="example-box" ${EX}><h3>Example 2: From a point and a slope</h3><p>Slope 3 through \((2,5)\).</p><div class="solution"><div class="step"><strong>Point-slope:</strong> \(y - 5 = 3(x - 2)\).</div><div class="step"><strong>Simplify:</strong> \(y = 3x - 6 + 5 = 3x - 1\).</div><em>Conclusion: \(y = 3x - 1\). ✓</em></div></div>
-  <div class="example-box" ${EX}><h3>Example 3: From two points</h3><p>Through \((1,4)\) and \((3,10)\).</p><div class="solution"><div class="step"><strong>Slope:</strong> \(m=\dfrac{10-4}{3-1}=3\).</div><div class="step"><strong>Use \((1,4)\):</strong> \(y - 4 = 3(x-1)\Rightarrow y = 3x + 1\).</div><em>Conclusion: \(y = 3x + 1\). ✓</em></div></div>
-  <div class="example-box" ${EX}><h3>Example 4: Convert to standard form</h3><p>Write \(y = \tfrac{2}{3}x + 4\) in standard form with integer coefficients.</p><div class="solution"><div class="step"><strong>Multiply by 3:</strong> \(3y = 2x + 12\).</div><div class="step"><strong>Rearrange:</strong> \(-2x + 3y = 12\Rightarrow 2x - 3y = -12\).</div><em>Conclusion: \(2x - 3y = -12\). ✓</em></div></div>
-  <div class="example-box" ${EX}><h3>Example 5: Horizontal and vertical lines</h3><p>Write the line through \((4,-1)\) that is (a) horizontal, (b) vertical.</p><div class="solution"><div class="step"><strong>(a) Horizontal:</strong> \(y=-1\). <strong>(b) Vertical:</strong> \(x=4\).</div><em>Conclusion: \(y=-1\) and \(x=4\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 1: Straight from a point and a slope</h3><p>Write the line with slope 4 through \((1, 2)\).</p><div class="solution"><div class="step"><strong>Fill in the template:</strong> \(y - 2 = 4(x - 1)\).</div><em>Conclusion: \(y - 2 = 4(x - 1)\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 2: A negative coordinate</h3><p>Write the line with slope \(-3\) through \((-2, 5)\).</p><div class="solution"><div class="step"><strong>Subtracting \(-2\) becomes \(+2\):</strong> \(y - 5 = -3(x + 2)\).</div><em>Conclusion: \(y - 5 = -3(x + 2)\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 3: Simplify to slope-intercept</h3><p>Simplify \(y - 2 = 4(x - 1)\).</p><div class="solution"><div class="step"><strong>Distribute:</strong> \(y - 2 = 4x - 4\).</div><div class="step"><strong>Add 2:</strong> \(y = 4x - 2\).</div><em>Conclusion: \(y = 4x - 2\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 4: From two points</h3><p>Write the line through \((1, 4)\) and \((3, 10)\).</p><div class="solution"><div class="step"><strong>Slope:</strong> \(m = \dfrac{10 - 4}{3 - 1} = 3\).</div><div class="step"><strong>Use \((1, 4)\):</strong> \(y - 4 = 3(x - 1)\).</div><em>Conclusion: \(y - 4 = 3(x - 1)\), i.e. \(y = 3x + 1\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 5: Read a graph, write the line</h3><p>A line has slope \(\tfrac12\) and passes through \((4, 1)\). Write it, then simplify.</p><div class="solution"><div class="step"><strong>Point-slope:</strong> \(y - 1 = \tfrac12(x - 4)\).</div><div class="step"><strong>Simplify:</strong> \(y = \tfrac12 x - 2 + 1 = \tfrac12 x - 1\).</div><em>Conclusion: \(y = \tfrac12 x - 1\). ✓</em></div></div>
   <h2>🟡 Practice Questions</h2>
-  <div class="practice-box" ${PR}><h3>Question 1</h3><p>Slope \(-4\), \(y\)-intercept 2. Write the equation.</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(y = -4x + 2\).</em></div></div></details></div>
-  <div class="practice-box" ${PR}><h3>Question 2</h3><p>Slope 5 through \((1,3)\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(y - 3 = 5(x-1)\Rightarrow y = 5x - 2\).</em></div></div></details></div>
-  <div class="practice-box" ${PR}><h3>Question 3</h3><p>Through \((2,3)\) and \((6,11)\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(m=2\Rightarrow y = 2x - 1\).</em></div></div></details></div>
-  <div class="practice-box" ${PR}><h3>Question 4</h3><p>Convert \(y = -\tfrac{1}{2}x + 3\) to standard form.</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(x + 2y = 6\).</em></div></div></details></div>
-  <div class="practice-box" ${PR}><h3>Question 5</h3><p>Write the vertical line through \((-3, 7)\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(x = -3\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 1</h3><p>Write point-slope: slope 5 through \((1, 3)\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(y - 3 = 5(x - 1)\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 2</h3><p>Write point-slope: slope \(-2\) through \((3, -4)\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(y + 4 = -2(x - 3)\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 3</h3><p>Simplify \(y - 3 = 5(x - 1)\) to slope-intercept form.</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(y = 5x - 2\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 4</h3><p>Through \((2, 3)\) and \((6, 11)\): write point-slope using \((2,3)\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(m = 2\Rightarrow y - 3 = 2(x - 2)\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 5</h3><p>Slope \(\tfrac13\) through \((3, 2)\): write it and simplify.</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(y - 2 = \tfrac13(x - 3)\Rightarrow y = \tfrac13 x + 1\).</em></div></div></details></div>
   <h2>❓ Q&amp;A Summary</h2>
-  <div class="qa-box" ${QA}><h3>Q1: Which form should I start from?</h3><p><em>Point + slope ⇒ point-slope. Slope + \(y\)-intercept ⇒ slope-intercept. Two points ⇒ find the slope first, then either form.</em></p></div>
-  <div class="qa-box" ${QA}><h3>Q2: What makes standard form “standard”?</h3><p><em>Integer \(A,B,C\) with \(A\ge 0\), and \(x,y\) on the same side.</em></p></div>
-  <div class="qa-box" ${QA}><h3>Q3: Why is point-slope so handy?</h3><p><em>You can write the line instantly from a single point and the slope — no need to solve for \(b\) first.</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q1: Why use point-slope at all?</h3><p><em>It writes the line instantly from a point and a slope — no need to solve for the \(y\)-intercept first.</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q2: Which point do I use with two given points?</h3><p><em>Either one — both give the same line after simplifying. Find the slope first.</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q3: What trips people up?</h3><p><em>Signs. Through \((-2, 5)\) the form is \(y - 5 = m(x - (-2)) = m(x + 2)\) — double-negatives become plus.</em></p></div>
 </div>`)]);
 
-authored["2.4"] = L("2.4", "Parallel and Perpendicular Lines on the Coordinate Plane", [html(String.raw`<div class="lecture-box">
+authored["2.4"] = L("2.4", "General (Standard) Form", [html(String.raw`<div class="lecture-box">
+  <h1>📐 General (Standard) Form</h1>
+  <p><strong>Overview.</strong> Written as \(Ax + By = C\), a line's <strong>standard (general) form</strong> keeps \(x\) and \(y\) together on one side with tidy integer coefficients. It's the go-to form for reading off <strong>both intercepts</strong> quickly and for lines that are awkward in \(y = mx + b\).</p>
+  <h2>📌 The toolkit</h2>
+  <ul>
+    <li><strong>The form:</strong> \(Ax + By = C\) with integer \(A, B, C\) (and, by convention, \(A \ge 0\)).</li>
+    <li><strong>\(x\)-intercept:</strong> set \(y = 0\) and solve — the line crosses at \(\left(\tfrac{C}{A}, 0\right)\).</li>
+    <li><strong>\(y\)-intercept:</strong> set \(x = 0\) and solve — it crosses at \(\left(0, \tfrac{C}{B}\right)\).</li>
+    <li><strong>Graph it fast:</strong> plot the two intercepts and draw the line through them.</li>
+    <li><strong>Clear fractions</strong> by multiplying through, so \(A, B, C\) come out as whole numbers.</li>
+  </ul>
+  <h2>🎬 Intercepts slide with \(C\)</h2>
+  <p>Here is the family \(3x + 2y = C\). Slide <strong>C</strong> and watch the line move: its \(x\)-intercept sits at \(\tfrac{C}{3}\) and its \(y\)-intercept at \(\tfrac{C}{2}\) — every line in the family stays parallel.</p>
+</div>`),
+  graph("(C - 3*x)/2", "C", { xMin: -6, xMax: 8, yMin: -6, yMax: 10, paramMin: -6, paramMax: 12, paramInit: 12, caption: "3x + 2y = C, i.e. y = (C − 3x)/2 : the x-intercept is C/3 and the y-intercept is C/2. Changing C slides the line without tilting it." }),
+  html(String.raw`<div class="lecture-box">
+  <h2>🔵 Examples</h2>
+  <div class="example-box" ${EX}><h3>Example 1: Find both intercepts</h3><p>Find the intercepts of \(3x + 2y = 12\).</p><div class="solution"><div class="step"><strong>\(y = 0\):</strong> \(3x = 12\Rightarrow x = 4\) → \((4, 0)\).</div><div class="step"><strong>\(x = 0\):</strong> \(2y = 12\Rightarrow y = 6\) → \((0, 6)\).</div><em>Conclusion: intercepts \((4, 0)\) and \((0, 6)\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 2: Graph from intercepts</h3><p>Graph \(2x - y = 4\) using its intercepts.</p><div class="solution"><div class="step"><strong>\(y = 0\):</strong> \(x = 2\) → \((2, 0)\). <strong>\(x = 0\):</strong> \(-y = 4\Rightarrow y = -4\) → \((0, -4)\).</div><div class="step"><strong>Plot both</strong> and draw the line.</div><em>Conclusion: line through \((2, 0)\) and \((0, -4)\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 3: Slope-intercept → standard</h3><p>Write \(y = 2x - 3\) in standard form.</p><div class="solution"><div class="step"><strong>Move \(2x\) over:</strong> \(-2x + y = -3\).</div><div class="step"><strong>Make \(A \ge 0\)</strong> (multiply by \(-1\)): \(2x - y = 3\).</div><em>Conclusion: \(2x - y = 3\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 4: Clear fractions</h3><p>Write \(y = \tfrac{2}{3}x + 4\) in standard form with integer coefficients.</p><div class="solution"><div class="step"><strong>Multiply by 3:</strong> \(3y = 2x + 12\).</div><div class="step"><strong>Rearrange:</strong> \(-2x + 3y = 12\Rightarrow 2x - 3y = -12\).</div><em>Conclusion: \(2x - 3y = -12\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 5: Horizontal and vertical lines</h3><p>Write, in standard form, the line through \((4, -1)\) that is (a) horizontal, (b) vertical.</p><div class="solution"><div class="step"><strong>(a) Horizontal:</strong> \(y = -1\), i.e. \(0x + y = -1\). <strong>(b) Vertical:</strong> \(x = 4\), i.e. \(x + 0y = 4\).</div><em>Conclusion: \(y = -1\) and \(x = 4\). ✓</em></div></div>
+  <h2>🟡 Practice Questions</h2>
+  <div class="practice-box" ${PR}><h3>Question 1</h3><p>Find the intercepts of \(4x + 3y = 24\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\((6, 0)\) and \((0, 8)\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 2</h3><p>Find the \(x\)-intercept of \(5x - 2y = 20\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Set \(y=0\): \(x = 4\), so \((4, 0)\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 3</h3><p>Write \(y = -3x + 5\) in standard form (\(A \ge 0\)).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(3x + y = 5\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 4</h3><p>Write \(y = -\tfrac12 x + 3\) in standard form with integers.</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(x + 2y = 6\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 5</h3><p>Write the vertical line through \((-3, 7)\) in standard form.</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(x = -3\).</em></div></div></details></div>
+  <h2>❓ Q&amp;A Summary</h2>
+  <div class="qa-box" ${QA}><h3>Q1: What makes standard form “standard”?</h3><p><em>Integer \(A, B, C\) with \(A \ge 0\), and \(x, y\) together on the left side.</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q2: Why is standard form good for intercepts?</h3><p><em>Setting \(x=0\) or \(y=0\) leaves a one-step equation, so both intercepts pop out immediately — perfect for a quick graph.</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q3: How do I get rid of fractions?</h3><p><em>Multiply every term by the common denominator, then rearrange so \(A, B, C\) are whole numbers.</em></p></div>
+</div>`)]);
+
+authored["2.5"] = L("2.5", "Converting Between Forms", [html(String.raw`<div class="lecture-box">
+  <h1>🔄 Converting Between Forms</h1>
+  <p><strong>Overview.</strong> Slope-intercept \(y = mx + b\), point-slope \(y - y_1 = m(x - x_1)\), and standard \(Ax + By = C\) are three costumes for the <em>same</em> line. Being able to switch between them lets you start from whatever you're given and finish in whatever form you need.</p>
+  <h2>📌 The toolkit</h2>
+  <ul>
+    <li><strong>Point-slope → slope-intercept:</strong> distribute and solve for \(y\).</li>
+    <li><strong>Slope-intercept → standard:</strong> move the \(x\)-term across, clear fractions, make \(A \ge 0\).</li>
+    <li><strong>Standard → slope-intercept:</strong> solve for \(y\) — the coefficient of \(x\) is the slope, the constant is \(b\).</li>
+    <li><strong>Any form reveals the slope</strong>: in standard form, \(m = -\tfrac{A}{B}\).</li>
+  </ul>
+  <h2>🎬 One line, three costumes</h2>
+  <p>Slide <strong>m</strong> and <strong>b</strong> to build \(y = m\,x + b\). Whatever line you make, the <em>same</em> line can be rewritten in point-slope or standard form — converting never changes the graph, only how it's written.</p>
+</div>`),
+  graph2("m*x + b", "m", "b", { xMin: -6, xMax: 6, yMin: -12, yMax: 12, paramMin: -5, paramMax: 5, paramInit: 2, param2Min: -6, param2Max: 6, param2Init: 1, caption: "y = m·x + b : m is the slope every form shares, b is the y-intercept. Point-slope and standard form describe this identical line." }),
+  html(String.raw`<div class="lecture-box">
+  <h2>🔵 Examples</h2>
+  <div class="example-box" ${EX}><h3>Example 1: Point-slope → slope-intercept</h3><p>Rewrite \(y - 5 = 3(x - 2)\) as \(y = mx + b\).</p><div class="solution"><div class="step"><strong>Distribute:</strong> \(y - 5 = 3x - 6\).</div><div class="step"><strong>Add 5:</strong> \(y = 3x - 1\).</div><em>Conclusion: \(y = 3x - 1\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 2: Slope-intercept → standard</h3><p>Rewrite \(y = \tfrac34 x - 2\) in standard form with integers.</p><div class="solution"><div class="step"><strong>Multiply by 4:</strong> \(4y = 3x - 8\).</div><div class="step"><strong>Rearrange, \(A \ge 0\):</strong> \(3x - 4y = 8\).</div><em>Conclusion: \(3x - 4y = 8\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 3: Standard → slope-intercept</h3><p>Rewrite \(2x + 5y = 10\) as \(y = mx + b\), and state the slope.</p><div class="solution"><div class="step"><strong>Solve for \(y\):</strong> \(5y = -2x + 10\Rightarrow y = -\tfrac25 x + 2\).</div><em>Conclusion: \(y = -\tfrac25 x + 2\); slope \(-\tfrac25\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 4: The full chain from two points</h3><p>Through \((1, 2)\) and \((3, 8)\): write it in all three forms.</p><div class="solution"><div class="step"><strong>Slope:</strong> \(m = \dfrac{8 - 2}{3 - 1} = 3\).</div><div class="step"><strong>Point-slope:</strong> \(y - 2 = 3(x - 1)\).</div><div class="step"><strong>Slope-intercept:</strong> \(y = 3x - 1\). <strong>Standard:</strong> \(3x - y = 1\).</div><em>Conclusion: three forms of one line. ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 5: Slope straight from standard form</h3><p>Find the slope of \(6x + 3y = 9\) without fully converting.</p><div class="solution"><div class="step"><strong>Use \(m = -\tfrac{A}{B}\):</strong> \(m = -\tfrac{6}{3} = -2\).</div><div class="step"><strong>Check:</strong> \(3y = -6x + 9\Rightarrow y = -2x + 3\). ✓</div><em>Conclusion: slope \(-2\). ✓</em></div></div>
+  <h2>🟡 Practice Questions</h2>
+  <div class="practice-box" ${PR}><h3>Question 1</h3><p>Rewrite \(y - 4 = 2(x - 1)\) as \(y = mx + b\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(y = 2x + 2\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 2</h3><p>Write \(y = 2x - 5\) in standard form (\(A \ge 0\)).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(2x - y = 5\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 3</h3><p>Rewrite \(3x + 4y = 12\) as \(y = mx + b\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(y = -\tfrac34 x + 3\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 4</h3><p>State the slope of \(5x - 2y = 8\) directly.</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(m = -\tfrac{A}{B} = -\tfrac{5}{-2} = \tfrac52\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 5</h3><p>Through \((0, 1)\) and \((2, 5)\): give the standard form.</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(m = 2,\ y = 2x + 1\Rightarrow 2x - y = -1\).</em></div></div></details></div>
+  <h2>❓ Q&amp;A Summary</h2>
+  <div class="qa-box" ${QA}><h3>Q1: Does converting change the line?</h3><p><em>Never — all three forms graph the exact same line. Only the way it's written changes.</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q2: How do I read the slope from standard form?</h3><p><em>Solve for \(y\), or use the shortcut \(m = -\tfrac{A}{B}\) for \(Ax + By = C\).</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q3: Which form should my final answer be in?</h3><p><em>Whatever the question asks. If it doesn't say, slope-intercept form is usually the clearest.</em></p></div>
+</div>`)]);
+
+authored["2.6"] = L("2.6", "Parallel and Perpendicular Lines on the Coordinate Plane", [html(String.raw`<div class="lecture-box">
   <h1>∥⟂ Parallel and Perpendicular Lines</h1>
   <p><strong>Overview.</strong> Slope alone tells you how two lines relate. <strong>Parallel</strong> lines never meet — they have <strong>equal slopes</strong>. <strong>Perpendicular</strong> lines cross at a right angle — their slopes are <strong>negative reciprocals</strong>.</p>
   <h2>📌 The toolkit</h2>
@@ -432,7 +500,40 @@ authored["3.1"] = L("3.1", "Solving Systems by Graphing", [html(String.raw`<div 
   <div class="qa-box" ${QA}><h3>Q3: When is graphing less reliable?</h3><p><em>When the intersection isn't at nice whole numbers — reading it off a graph is only an estimate. Plot carefully and always check your point in both equations.</em></p></div>
 </div>`)]);
 
-authored["3.2"] = L("3.2", "Solving Systems by Elimination", [html(String.raw`<div class="lecture-box">
+authored["3.2"] = L("3.2", "Solving Systems by Substitution", [html(String.raw`<div class="lecture-box">
+  <h1>🔁 Solving Systems by Substitution</h1>
+  <p><strong>Overview.</strong> Graphing shows you <em>where</em> two lines cross, but reading the point off a grid is only an estimate. <strong>Substitution</strong> finds that same crossing point <strong>exactly</strong>, using algebra. The idea: get one variable by itself in one equation, then <strong>substitute</strong> that expression into the other so a single variable is left to solve.</p>
+  <h2>📌 The toolkit</h2>
+  <ul>
+    <li><strong>Isolate</strong> one variable (pick the one that's easiest — often a \(y\) that's already alone).</li>
+    <li><strong>Substitute</strong> that expression into the <em>other</em> equation — now it has just one variable.</li>
+    <li><strong>Solve</strong> for that variable, then <strong>back-substitute</strong> to get the other.</li>
+    <li><strong>Check</strong> the pair \((x,y)\) in both equations. A false statement like \(0=5\) means <strong>no solution</strong>; an always-true one like \(0=0\) means <strong>infinitely many</strong>.</li>
+  </ul>
+  <h2>🎬 The point substitution finds</h2>
+  <p>Substitution lands on the exact crossing point of the two lines. Slide the slope <strong>m</strong> of the blue line and watch the marked solution — the pair substitution would compute — move along the fixed green line \(y = x + 3\).</p>
+</div>`),
+  mg([{ expr: "x + 3", label: "y = x + 3" }, { expr: "m*x", label: "y = m·x" }], { param: "m", paramMin: 2, paramMax: 5, paramInit: 2, markIntersection: true, xMin: -6, xMax: 8, yMin: -4, yMax: 12, caption: "Substituting y = m·x into y = x + 3 gives m·x = x + 3 — the x it solves for is exactly the marked intersection." }),
+  html(String.raw`<div class="lecture-box">
+  <h2>🔵 Examples</h2>
+  <div class="example-box" ${EX}><h3>Example 1: One variable already isolated</h3><p>Solve \(\begin{cases} y = 2x\\ x + y = 6\end{cases}\)</p><div class="solution"><div class="step"><strong>Substitute \(y=2x\) into the second:</strong> \(x + 2x = 6\).</div><div class="step"><strong>Solve:</strong> \(3x = 6\Rightarrow x = 2\).</div><div class="step"><strong>Back-substitute:</strong> \(y = 2(2) = 4\).</div><em>Conclusion: \((2, 4)\). ✓ (Check: \(2+4=6\).)</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 2: Set the two \(y\)'s equal</h3><p>Solve \(\begin{cases} y = x + 1\\ y = -x + 5\end{cases}\)</p><div class="solution"><div class="step"><strong>Both equal \(y\):</strong> \(x + 1 = -x + 5\).</div><div class="step"><strong>Solve:</strong> \(2x = 4\Rightarrow x = 2\), then \(y = 2 + 1 = 3\).</div><em>Conclusion: \((2, 3)\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 3: Isolate first</h3><p>Solve \(\begin{cases} x + y = 7\\ 2x - y = 2\end{cases}\)</p><div class="solution"><div class="step"><strong>Isolate \(y\) in the first:</strong> \(y = 7 - x\).</div><div class="step"><strong>Substitute:</strong> \(2x - (7 - x) = 2\Rightarrow 3x - 7 = 2\Rightarrow x = 3\).</div><div class="step"><strong>Back-substitute:</strong> \(y = 7 - 3 = 4\).</div><em>Conclusion: \((3, 4)\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 4: Substitute into standard form</h3><p>Solve \(\begin{cases} y = 3x - 4\\ 2x + y = 6\end{cases}\)</p><div class="solution"><div class="step"><strong>Substitute \(y=3x-4\):</strong> \(2x + (3x - 4) = 6\).</div><div class="step"><strong>Solve:</strong> \(5x - 4 = 6\Rightarrow x = 2\), then \(y = 3(2) - 4 = 2\).</div><em>Conclusion: \((2, 2)\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 5: A special case falls out</h3><p>Solve \(\begin{cases} y = 2x + 1\\ y = 2x - 3\end{cases}\)</p><div class="solution"><div class="step"><strong>Set equal:</strong> \(2x + 1 = 2x - 3\Rightarrow 1 = -3\).</div><div class="step"><strong>A false statement</strong> means the lines never meet (they're parallel).</div><em>Conclusion: <strong>no solution</strong>. ✓</em></div></div>
+  <h2>🟡 Practice Questions</h2>
+  <div class="practice-box" ${PR}><h3>Question 1</h3><p>Solve \(\begin{cases} y = 3x\\ x + y = 8\end{cases}\)</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(x + 3x = 8\Rightarrow x = 2,\ y = 6\): \((2, 6)\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 2</h3><p>Solve \(\begin{cases} y = x - 1\\ y = -2x + 8\end{cases}\)</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(x - 1 = -2x + 8\Rightarrow x = 3,\ y = 2\): \((3, 2)\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 3</h3><p>Solve \(\begin{cases} x + y = 10\\ y = x + 2\end{cases}\)</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(x + (x+2) = 10\Rightarrow x = 4,\ y = 6\): \((4, 6)\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 4</h3><p>Solve \(\begin{cases} y = 2x - 3\\ 3x - y = 5\end{cases}\)</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(3x - (2x-3) = 5\Rightarrow x = 2,\ y = 1\): \((2, 1)\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 5</h3><p>How many solutions has \(\begin{cases} y = x + 4\\ y = x + 4\end{cases}\)? (substitute)</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(x+4 = x+4\Rightarrow 0=0\): true always → <strong>infinitely many</strong>.</em></div></div></details></div>
+  <h2>❓ Q&amp;A Summary</h2>
+  <div class="qa-box" ${QA}><h3>Q1: Which variable should I isolate?</h3><p><em>Whichever is easiest — a variable with coefficient \(1\), or one already written as \(y = \ldots\). Less algebra, fewer mistakes.</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q2: When is substitution better than graphing?</h3><p><em>Always for an <em>exact</em> answer — especially when the intersection isn't at nice whole numbers, where a graph can only be estimated.</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q3: What do \(0=5\) or \(0=0\) mean?</h3><p><em>If the variable vanishes and you're left with a false statement (\(0=5\)) there's <strong>no solution</strong>; a true one (\(0=0\)) means <strong>infinitely many</strong>.</em></p></div>
+</div>`)]);
+
+authored["3.3"] = L("3.3", "Solving Systems by Elimination", [html(String.raw`<div class="lecture-box">
   <h1>➕ Solving Systems by Elimination</h1>
   <p><strong>Overview.</strong> <strong>Elimination</strong> adds or subtracts the two equations so that one variable cancels, leaving a single equation in one variable. It's the fastest method when the equations are in standard form.</p>
   <h2>📌 The toolkit</h2>
@@ -464,7 +565,7 @@ authored["3.2"] = L("3.2", "Solving Systems by Elimination", [html(String.raw`<d
   <div class="qa-box" ${QA}><h3>Q3: Elimination or substitution — which is better?</h3><p><em>Elimination shines when equations are in \(Ax+By=C\) form; substitution is easier when a variable is already isolated.</em></p></div>
 </div>`)]);
 
-authored["3.3"] = L("3.3", "Real-World Systems Applications & Special Cases (No/Infinite Solutions)", [html(String.raw`<div class="lecture-box">
+authored["3.4"] = L("3.4", "Real-World Systems Applications & Special Cases (No/Infinite Solutions)", [html(String.raw`<div class="lecture-box">
   <h1>🌐 Systems in Context &amp; Special Cases</h1>
   <p><strong>Overview.</strong> Many real problems hide <em>two</em> unknowns linked by <em>two</em> conditions — a perfect fit for a system. We'll also meet the two special outcomes: <strong>no solution</strong> (parallel lines) and <strong>infinitely many</strong> (the same line).</p>
   <h2>📌 The toolkit</h2>
@@ -496,7 +597,7 @@ authored["3.3"] = L("3.3", "Real-World Systems Applications & Special Cases (No/
   <div class="qa-box" ${QA}><h3>Q3: How can I spot these before solving?</h3><p><em>Same slope, different intercept ⇒ none; same slope <em>and</em> intercept ⇒ infinitely many.</em></p></div>
 </div>`)]);
 
-authored["3.4"] = L("3.4", "Graphing Two-Variable Linear Inequalities & Systems", [html(String.raw`<div class="lecture-box">
+authored["3.5"] = L("3.5", "Graphing Two-Variable Linear Inequalities & Systems", [html(String.raw`<div class="lecture-box">
   <h1>🟦 Graphing Linear Inequalities &amp; Systems</h1>
   <p><strong>Overview.</strong> A two-variable inequality like \(y &lt; 2x + 1\) is satisfied by a whole <strong>region</strong> of the plane, not a single line. We draw its <strong>boundary</strong> line, then <strong>shade</strong> the side that works. A <strong>system</strong> of inequalities is the <em>overlap</em> of the regions.</p>
   <h2>📌 The toolkit</h2>

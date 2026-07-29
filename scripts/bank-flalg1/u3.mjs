@@ -4,7 +4,7 @@ const sign = (n) => (n < 0 ? `- ${-n}` : `+ ${n}`);
 const cases = (e1, e2) => `$\\begin{cases} ${e1} \\\\ ${e2} \\end{cases}$`;
 const lin2 = (a, b, c) => `${a === 1 ? "" : a === -1 ? "-" : a}x ${sign(b)}y = ${c}`;
 
-// ── 3.1 Solving Systems by Graphing & Substitution ───────────
+// ── 3.1 Solving Systems by Graphing ──────────────────────────
 function g31() {
   const q = [];
   // y = m1 x + b1 ; y = m2 x + b2, solution x0 (enter x)
@@ -15,24 +15,55 @@ function g31() {
     q.push(num(i < 10 ? "easy" : i < 22 ? "medium" : "hard", `Solve the system; enter the $x$-value.  ${cases(`y = ${m1}x ${sign(b1)}`, `y = ${m2}x ${sign(b2)}`)}`, x0, 0));
   }
   q.push(mc("easy", "The solution of a system is…", ["the point where the lines cross", "the y-intercept", "the slope", "always the origin"], 0));
-  q.push(mc("easy", "Substitution works best when…", ["a variable is already isolated", "both are in standard form", "there is no solution", "the lines are parallel"], 0));
+  q.push(mc("easy", "To solve by graphing you draw both lines and read off…", ["their intersection point", "their y-intercepts", "their slopes", "the origin"], 0));
   q.push(tf("easy", "A solution must satisfy BOTH equations.", true));
-  q.push(mc("easy", "Solve $y = 2x$, $x + y = 6$. Find $x$.", ["2", "3", "6", "4"], 0));
+  q.push(mc("easy", "Graph $y = 2x$ and $y = x + 3$. Where do they cross? Find $x$.", ["3", "2", "6", "4"], 0));
   q.push(tf("easy", "Graphing gives an exact answer even when the intersection isn't at whole numbers.", false));
-  q.push(fill("easy", "In $y=3x$, $x+y=8$: substituting gives $x + 3x = 8$, so $x=$ ___.", ["2"]));
+  q.push(mc("easy", "Two lines with the same slope but different intercepts, graphed, will…", ["never cross (no solution)", "cross once", "cross twice", "overlap"], 0));
   q.push(num("medium", "Solve $y = x + 1$, $y = -x + 5$. Enter $x$.", 2, 0));
   q.push(num("medium", "Solve $x + y = 7$, $2x - y = 2$. Enter $x$.", 3, 0));
   q.push(num("medium", "Solve $y = 3x - 4$, $2x + y = 6$. Enter $x$.", 2, 0));
   q.push(mc("medium", "Is $(1, 5)$ a solution of $y = 4x + 1$ and $x + y = 6$?", ["Yes", "No — only the first", "No — only the second", "No — neither"], 0));
   q.push(num("hard", "Solve $y = 2x - 3$, $y = -x + 6$. Enter $x$.", 3, 0));
   q.push(num("hard", "Solve $3x + y = 10$, $y = x - 2$. Enter $x$.", 3, 0));
-  q.push(mc("hard", "Solve $x - y = 1$, $2x + y = 8$. Find $x$.", ["3", "2", "1", "4"], 0));
-  q.push(tf("hard", "When one equation is $y = \\ldots$, substitution is usually the fastest method.", true));
-  q.push(num("hard", "Solve $y = -2x + 7$, $y = x - 5$. Enter $x$.", 4, 0));
+  q.push(mc("hard", "Graph $x - y = 1$ and $2x + y = 8$. Where do they cross? Find $x$.", ["3", "2", "1", "4"], 0));
+  q.push(tf("hard", "Reading an intersection off a graph is only an estimate when it isn't at whole numbers.", true));
+  q.push(num("hard", "Graph $y = -2x + 7$ and $y = x - 5$. Enter the $x$ where they cross.", 4, 0));
   return q;
 }
 
-// ── 3.2 Solving Systems by Elimination ───────────────────────
+// ── 3.2 Solving Systems by Substitution ──────────────────────
+function g32sub() {
+  const q = [];
+  // y = m·x + b1 ; x + y = s  → substitute → (1+m)x = s − b1
+  for (let i = 0; i < 16; i++) {
+    const x0 = ri(-4, 6), m = rnz(-3, 4), b1 = rnz(-6, 6);
+    const y0 = m * x0 + b1; const s = x0 + y0;
+    q.push(num(i < 6 ? "easy" : i < 12 ? "medium" : "hard", `Solve by substitution; enter the $x$-value.  ${cases(`y = ${m}x ${sign(b1)}`, `x + y = ${s}`)}`, x0, 0));
+  }
+  // set two "y =" expressions equal
+  for (let i = 0; i < 8; i++) {
+    const x0 = ri(-3, 5); let m1 = rnz(-3, 4), m2 = rnz(-3, 4); while (m2 === m1) m2 = rnz(-3, 4);
+    const b1 = rnz(-5, 5); const y0 = m1 * x0 + b1; const b2 = y0 - m2 * x0;
+    q.push(num(i < 4 ? "medium" : "hard", `Set the expressions equal and solve; enter $x$.  ${cases(`y = ${m1}x ${sign(b1)}`, `y = ${m2}x ${sign(b2)}`)}`, x0, 0));
+  }
+  q.push(mc("easy", "Substitution works best when…", ["a variable is already isolated", "both are in standard form", "there is no solution", "the lines are parallel"], 0));
+  q.push(mc("easy", "The first step of substitution is to…", ["isolate one variable", "add the equations", "graph both lines", "square both sides"], 0));
+  q.push(tf("easy", "After finding one variable, you back-substitute to get the other.", true));
+  q.push(fill("easy", "In $y = 3x$, $x + y = 8$: substituting gives $x + 3x = 8$, so $x =$ ___.", ["2"]));
+  q.push(mc("easy", "Solve $y = 2x$, $x + y = 6$. Find $x$.", ["2", "3", "6", "4"], 0));
+  q.push(mc("medium", "To substitute into $2x + y = 6$ using $y = 3x - 4$, you get…", ["$2x + (3x - 4) = 6$", "$2x + 3x = 6$", "$2x - 4 = 6$", "$3x - 4 = 6$"], 0));
+  q.push(num("medium", "Solve $y = x + 1$, $y = -x + 5$ by substitution. Enter $x$.", 2, 0));
+  q.push(num("medium", "Solve $x + y = 7$, $2x - y = 2$ by substitution. Enter $x$.", 3, 0));
+  q.push(tf("medium", "When one equation already says $y = \\ldots$, substitution is usually the fastest method.", true));
+  q.push(mc("hard", "Substituting gives $2x + 1 = 2x - 3$, i.e. $1 = -3$. The system has…", ["no solution", "one solution", "infinitely many", "two solutions"], 0));
+  q.push(mc("hard", "Substituting gives $x + 4 = x + 4$, i.e. $0 = 0$. The system has…", ["infinitely many solutions", "no solution", "one solution", "zero"], 0));
+  q.push(num("hard", "Solve $y = 3x - 4$, $2x + y = 6$ by substitution. Enter $x$.", 2, 0));
+  q.push(num("hard", "Solve $y = -2x + 7$, $y = x - 5$ by substitution. Enter $x$.", 4, 0));
+  return q;
+}
+
+// ── 3.3 Solving Systems by Elimination ───────────────────────
 function g32() {
   const q = [];
   for (let i = 0; i < 34; i++) {
@@ -122,8 +153,9 @@ function g34() {
 }
 
 export default [
-  { code: "3.1", gen: g31 },
-  { code: "3.2", gen: g32 },
-  { code: "3.3", gen: g33 },
-  { code: "3.4", gen: g34 },
+  { code: "3.1", gen: g31 },     // Solving Systems by Graphing
+  { code: "3.2", gen: g32sub },  // Solving Systems by Substitution (new)
+  { code: "3.3", gen: g32 },     // Solving Systems by Elimination (was 3.2)
+  { code: "3.4", gen: g33 },     // Applications & Special Cases (was 3.3)
+  { code: "3.5", gen: g34 },     // Graphing Inequalities & Systems (was 3.4)
 ];
