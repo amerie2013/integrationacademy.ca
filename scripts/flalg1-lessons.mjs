@@ -31,8 +31,11 @@ authored["1.1"] = L("1.1", "Multi-Step Equations in One Variable", [html(String.
     <li><strong>Collect the variable on one side</strong> by adding/subtracting the same term from both sides.</li>
     <li><strong>Undo</strong> with inverse operations (add ↔ subtract, multiply ↔ divide), then <strong>check</strong> by substituting back.</li>
   </ul>
-  ${gframe(["y = 3*x + 3", "y = 18"], { title: "Solving 3x + 3 = 18: the lines meet at x = 5", xMin: -2, xMax: 10, yMin: -2, yMax: 24 })}
-
+  <h2>🎬 A solution is where the line hits zero</h2>
+  <p>Solving \(m\,x - 6 = 0\) means finding where \(y = m\,x - 6\) crosses the \(x\)-axis. Slide the coefficient <strong>m</strong> and watch the solution move.</p>
+</div>`),
+  graph("m*x - 6", "m", { xMin: -2, xMax: 8, yMin: -8, yMax: 8, paramMin: 1, paramMax: 6, paramInit: 2, caption: "y = m·x − 6 : the solution of m·x = 6 is the x-intercept (x = 6/m), which shifts as the coefficient changes." }),
+  html(String.raw`<div class="lecture-box">
   <h2>🔵 Examples</h2>
   <div class="example-box" ${EX}><h3>Example 1: Combine like terms, then two steps</h3>
     <p>Solve \(4x + 3 - x = 18\).</p>
@@ -107,6 +110,11 @@ authored["1.2"] = L("1.2", "Rearranging Formulas & Solving Literal Equations", [
     <li><strong>Treat other variables as constants</strong> — they just come along for the ride.</li>
     <li>If the target variable appears in <strong>two terms</strong>, <strong>factor it out</strong> first, then divide.</li>
   </ul>
+  <h2>🎬 A formula is a relationship</h2>
+  <p>Take \(d = rt\) (distance = rate × time). For a fixed rate, distance grows steadily with time. Slide the rate <strong>r</strong> to make the line steeper or shallower.</p>
+</div>`),
+  graph("r*x", "r", { xMin: 0, xMax: 10, yMin: 0, yMax: 60, paramMin: 1, paramMax: 8, paramInit: 3, caption: "d = r·t : a faster rate r gives a steeper line — the same formula, seen as a graph." }),
+  html(String.raw`<div class="lecture-box">
   <h2>🔵 Examples</h2>
   <div class="example-box" ${EX}><h3>Example 1: Solve \(d = rt\) for \(t\)</h3><p>The distance formula, rearranged for time.</p><div class="solution"><div class="step"><strong>Step 1 — divide both sides by \(r\):</strong> \(\dfrac{d}{r}=t\).</div><em>Conclusion: \(t=\dfrac{d}{r}\). ✓</em></div></div>
   <div class="example-box" ${EX}><h3>Example 2: Solve \(P = 2\ell + 2w\) for \(w\)</h3><p>Perimeter of a rectangle, solved for the width.</p><div class="solution"><div class="step"><strong>Step 1 — subtract \(2\ell\):</strong> \(P-2\ell = 2w\).</div><div class="step"><strong>Step 2 — divide by 2:</strong> \(w=\dfrac{P-2\ell}{2}\).</div><em>Conclusion: \(w=\dfrac{P-2\ell}{2}\). ✓</em></div></div>
@@ -134,6 +142,11 @@ authored["1.3"] = L("1.3", "Compound Inequalities & Set Notation", [html(String.
     <li><strong>“And”</strong> = overlap (intersection); <strong>“or”</strong> = everything in either (union).</li>
     <li>Notation: \(\{x \mid -1 &lt; x \le 2\}\) (set-builder) is the interval \((-1,\,2]\). A round bracket excludes the endpoint; a square bracket includes it.</li>
   </ul>
+  <h2>🎬 Solutions live below the axis</h2>
+  <p>The solution of \(2x + b &lt; 0\) is exactly where the line \(y = 2x + b\) sits <strong>below</strong> the \(x\)-axis. Slide <strong>b</strong> and watch that set of \(x\)-values slide too.</p>
+</div>`),
+  graph("2*x + b", "b", { xMin: -6, xMax: 6, yMin: -8, yMax: 8, paramMin: -6, paramMax: 6, paramInit: 2, caption: "y = 2·x + b : the inequality 2x + b < 0 holds wherever the line is below the x-axis (left of its x-intercept)." }),
+  html(String.raw`<div class="lecture-box">
   <h2>🔵 Examples</h2>
   <div class="example-box" ${EX}><h3>Example 1: One-variable inequality</h3><p>Solve \(2x - 3 &lt; 7\) and write the interval.</p><div class="solution"><div class="step"><strong>Step 1 — add 3:</strong> \(2x &lt; 10\).</div><div class="step"><strong>Step 2 — divide by 2:</strong> \(x &lt; 5\).</div><em>Conclusion: \(\{x \mid x&lt;5\}\), interval \((-\infty,\,5)\). ✓</em></div></div>
   <div class="example-box" ${EX}><h3>Example 2: Flip the sign</h3><p>Solve \(-3x \ge 12\).</p><div class="solution"><div class="step"><strong>Step 1 — divide by \(-3\) and flip:</strong> \(x \le -4\).</div><em>Conclusion: \(\{x \mid x \le -4\}\), interval \((-\infty,\,-4]\). ✓</em></div></div>
@@ -290,7 +303,11 @@ authored["2.3"] = L("2.3", "Writing Linear Equations (Slope-Intercept, Point-Slo
     <li><strong>Point-slope:</strong> \(y - y_1 = m(x - x_1)\) — best from a point and a slope.</li>
     <li><strong>Standard:</strong> \(Ax + By = C\) — tidy for intercepts and integer coefficients.</li>
   </ul>
-  ${gframe(["y = 3*x + 1"], { title: "y = 3x + 1 — the same line in every form", xMin: -5, xMax: 5, yMin: -14, yMax: 16 })}
+  <h2>🎬 Build any line</h2>
+  <p>Writing a line means choosing a slope and an intercept. Slide <strong>m</strong> and <strong>b</strong> to build \(y = m\,x + b\) — every form (slope‑intercept, point‑slope, standard) describes this same line.</p>
+</div>`),
+  graph2("m*x + b", "m", "b", { xMin: -6, xMax: 6, yMin: -12, yMax: 12, paramMin: -5, paramMax: 5, paramInit: 3, param2Min: -6, param2Max: 6, param2Init: 1, caption: "y = m·x + b : m is the slope you write into any form, b is the y-intercept." }),
+  html(String.raw`<div class="lecture-box">
   <h2>🔵 Examples</h2>
   <div class="example-box" ${EX}><h3>Example 1: From slope and \(y\)-intercept</h3><p>Slope 2, \(y\)-intercept \(-3\).</p><div class="solution"><div class="step"><strong>Plug into \(y=mx+b\):</strong> \(m=2,\ b=-3\).</div><em>Conclusion: \(y = 2x - 3\). ✓</em></div></div>
   <div class="example-box" ${EX}><h3>Example 2: From a point and a slope</h3><p>Slope 3 through \((2,5)\).</p><div class="solution"><div class="step"><strong>Point-slope:</strong> \(y - 5 = 3(x - 2)\).</div><div class="step"><strong>Simplify:</strong> \(y = 3x - 6 + 5 = 3x - 1\).</div><em>Conclusion: \(y = 3x - 1\). ✓</em></div></div>
@@ -424,6 +441,11 @@ authored["3.2"] = L("3.2", "Solving Systems by Elimination", [html(String.raw`<d
     <li>Otherwise <strong>scale</strong> one (or both) equations first to create matching/opposite coefficients.</li>
     <li>Solve for the surviving variable, then <strong>back-substitute</strong>.</li>
   </ul>
+  <h2>🎬 Same solution, seen on the grid</h2>
+  <p>Elimination is an algebra shortcut to the same point graphing would find. Here are \(x + y = 10\) and \(x - y = 4\) as two lines — their marked crossing point \((7, 3)\) is the solution elimination gives.</p>
+</div>`),
+  mg([{ expr: "10 - x", label: "x + y = 10" }, { expr: "x - 4", label: "x − y = 4" }], { param: "", xMin: 0, xMax: 12, yMin: -2, yMax: 12, markIntersection: true, caption: "The two equations as lines — their intersection (7, 3) is the (x, y) that elimination solves for." }),
+  html(String.raw`<div class="lecture-box">
   <h2>🔵 Examples</h2>
   <div class="example-box" ${EX}><h3>Example 1: Add to eliminate</h3><p>Solve \(\begin{cases} x + y = 10\\ x - y = 4\end{cases}\)</p><div class="solution"><div class="step"><strong>Add:</strong> the \(y\)'s cancel — \(2x = 14\Rightarrow x = 7\).</div><div class="step"><strong>Back-substitute:</strong> \(7 + y = 10\Rightarrow y = 3\).</div><em>Conclusion: \((7, 3)\). ✓</em></div></div>
   <div class="example-box" ${EX}><h3>Example 2: Subtract to eliminate</h3><p>Solve \(\begin{cases} 2x + 3y = 13\\ 2x + y = 7\end{cases}\)</p><div class="solution"><div class="step"><strong>Subtract:</strong> the \(2x\)'s cancel — \(2y = 6\Rightarrow y = 3\).</div><div class="step"><strong>Back-substitute:</strong> \(2x + 3 = 7\Rightarrow x = 2\).</div><em>Conclusion: \((2, 3)\). ✓</em></div></div>
@@ -483,7 +505,11 @@ authored["3.4"] = L("3.4", "Graphing Two-Variable Linear Inequalities & Systems"
     <li><strong>Which side?</strong> Test a point not on the line (the origin \((0,0)\) is easiest). If it makes the inequality true, shade that side.</li>
     <li><strong>System:</strong> shade each inequality; the solution is where all shadings <strong>overlap</strong>.</li>
   </ul>
-  ${gframe(["y = 2*x + 1"], { title: "Boundary y = 2x + 1 (dashed for <): shade below, where (0,0) satisfies y < 2x+1", xMin: -5, xMax: 5, yMin: -9, yMax: 11 })}
+  <h2>🎬 The boundary line</h2>
+  <p>An inequality like \(y &lt; m\,x + 1\) has this line as its <strong>boundary</strong> — solid for \(\le/\ge\), dashed for \(&lt;/&gt;\) — and you shade one side. Slide <strong>m</strong> to tilt the boundary.</p>
+</div>`),
+  graph("m*x + 1", "m", { xMin: -5, xMax: 5, yMin: -10, yMax: 10, paramMin: -4, paramMax: 4, paramInit: 2, caption: "Boundary  y = m·x + 1 : for y < m·x + 1 you draw this dashed and shade below (test the origin to be sure)." }),
+  html(String.raw`<div class="lecture-box">
   <h2>🔵 Examples</h2>
   <div class="example-box" ${EX}><h3>Example 1: A “less than” region</h3><p>Graph \(y &lt; 2x + 1\).</p><div class="solution"><div class="step"><strong>Boundary:</strong> \(y = 2x + 1\), <strong>dashed</strong> (strict).</div><div class="step"><strong>Test \((0,0)\):</strong> \(0 &lt; 1\) true ⇒ shade the side containing the origin (below).</div><em>Conclusion: dashed line, shade below. ✓</em></div></div>
   <div class="example-box" ${EX}><h3>Example 2: A “greater than or equal” region</h3><p>Graph \(y \ge -x + 3\).</p><div class="solution"><div class="step"><strong>Boundary:</strong> \(y = -x + 3\), <strong>solid</strong> (\(\ge\)).</div><div class="step"><strong>Test \((0,0)\):</strong> \(0 \ge 3\) false ⇒ shade the <em>other</em> side (above).</div><em>Conclusion: solid line, shade above. ✓</em></div></div>
@@ -511,6 +537,11 @@ authored["4.1"] = L("4.1", "Laws of Exponents & Rational Exponents", [html(Strin
     <li><strong>Zero:</strong> \(a^0 = 1\). <strong>Negative:</strong> \(a^{-n} = \dfrac{1}{a^n}\).</li>
     <li><strong>Rational:</strong> \(a^{m/n} = \sqrt[n]{a^m} = \left(\sqrt[n]{a}\right)^m\).</li>
   </ul>
+  <h2>🎬 The power controls the curve</h2>
+  <p>Slide the exponent <strong>a</strong> in \(y = x^{a}\) (for \(x \ge 0\)): \(a = 1\) is a straight line, \(a = 2\) squares, and \(a = 0.5\) is the square root — a rational exponent.</p>
+</div>`),
+  graph("x^a", "a", { xMin: 0, xMax: 6, yMin: 0, yMax: 12, paramMin: 0.3, paramMax: 3, paramInit: 2, caption: "y = xᵃ (x ≥ 0) : a = 2 squares, a = 0.5 is √x, a = 1 is the line y = x — the exponent shapes the curve." }),
+  html(String.raw`<div class="lecture-box">
   <h2>🔵 Examples</h2>
   <div class="example-box" ${EX}><h3>Example 1: Product &amp; power laws</h3><p>Simplify \((2x^2)^3 \cdot x\).</p><div class="solution"><div class="step"><strong>Power law:</strong> \((2x^2)^3 = 8x^6\).</div><div class="step"><strong>Product law:</strong> \(8x^6 \cdot x = 8x^7\).</div><em>Conclusion: \(8x^7\). ✓</em></div></div>
   <div class="example-box" ${EX}><h3>Example 2: Quotient law</h3><p>Simplify \(\dfrac{x^7}{x^3}\).</p><div class="solution"><div class="step"><strong>Subtract exponents:</strong> \(x^{7-3}\).</div><em>Conclusion: \(x^4\). ✓</em></div></div>
@@ -570,6 +601,11 @@ authored["4.3"] = L("4.3", "Addition, Subtraction, and Multiplication of Polynom
     <li><strong>Subtracting</strong> means adding the opposite — distribute the minus sign to <em>every</em> term.</li>
     <li><strong>Multiplying:</strong> distribute each term of one factor across the other; <strong>FOIL</strong> (First-Outer-Inner-Last) for two binomials.</li>
   </ul>
+  <h2>🎬 A product of binomials is a parabola</h2>
+  <p>Multiplying \((x - 2)(x - a)\) gives a quadratic — a parabola that crosses the \(x\)-axis at \(2\) and \(a\). Slide <strong>a</strong> to see the product change.</p>
+</div>`),
+  graph("(x - 2)*(x - a)", "a", { xMin: -5, xMax: 6, yMin: -8, yMax: 10, paramMin: -4, paramMax: 5, paramInit: -1, caption: "y = (x − 2)(x − a) : the expanded product is a parabola, crossing the x-axis at 2 and a." }),
+  html(String.raw`<div class="lecture-box">
   <h2>🔵 Examples</h2>
   <div class="example-box" ${EX}><h3>Example 1: Add polynomials</h3><p>Add \((3x^2 + 2x - 1) + (x^2 - 5x + 4)\).</p><div class="solution"><div class="step"><strong>Combine like terms:</strong> \((3+1)x^2 + (2-5)x + (-1+4)\).</div><em>Conclusion: \(4x^2 - 3x + 3\). ✓</em></div></div>
   <div class="example-box" ${EX}><h3>Example 2: Subtract polynomials</h3><p>Subtract \((5x^2 - 3x) - (2x^2 + x - 4)\).</p><div class="solution"><div class="step"><strong>Distribute the minus:</strong> \(5x^2 - 3x - 2x^2 - x + 4\).</div><div class="step"><strong>Combine:</strong> \(3x^2 - 4x + 4\).</div><em>Conclusion: \(3x^2 - 4x + 4\). ✓</em></div></div>
@@ -597,6 +633,11 @@ authored["4.4"] = L("4.4", "Special Polynomial Products (Difference of Squares, 
     <li><strong>Perfect square (sum):</strong> \((a + b)^2 = a^2 + 2ab + b^2\).</li>
     <li><strong>Perfect square (difference):</strong> \((a - b)^2 = a^2 - 2ab + b^2\).</li>
   </ul>
+  <h2>🎬 Difference of squares</h2>
+  <p>\((x - a)(x + a) = x^2 - a^2\). Slide <strong>a</strong>: the parabola always has the same shape, just dropped by \(a^2\), and it crosses the \(x\)-axis at \(\pm a\).</p>
+</div>`),
+  graph("(x - a)*(x + a)", "a", { xMin: -6, xMax: 6, yMin: -10, yMax: 8, paramMin: 0, paramMax: 4, paramInit: 2, caption: "y = (x − a)(x + a) = x² − a² : the roots sit symmetrically at −a and +a, and the vertex drops to (0, −a²)." }),
+  html(String.raw`<div class="lecture-box">
   <h2>🔵 Examples</h2>
   <div class="example-box" ${EX}><h3>Example 1: Difference of squares</h3><p>Expand \((x + 4)(x - 4)\).</p><div class="solution"><div class="step"><strong>Pattern with \(a=x,\ b=4\):</strong> \(x^2 - 16\).</div><em>Conclusion: \(x^2 - 16\). ✓</em></div></div>
   <div class="example-box" ${EX}><h3>Example 2: Perfect square (sum)</h3><p>Expand \((x + 5)^2\).</p><div class="solution"><div class="step"><strong>\(a^2 + 2ab + b^2\):</strong> \(x^2 + 2(5)x + 25\).</div><em>Conclusion: \(x^2 + 10x + 25\). ✓</em></div></div>
@@ -624,6 +665,11 @@ authored["5.1"] = L("5.1", "GCF and Factoring by Grouping", [html(String.raw`<di
     <li><strong>Grouping (4 terms):</strong> group into two pairs, factor each pair, then factor out the shared binomial.</li>
     <li><strong>Check</strong> by expanding your factors back out.</li>
   </ul>
+  <h2>🎬 A common factor of x gives a root at 0</h2>
+  <p>Factoring \(x^2 - ax\) as \(x(x - a)\) shows its roots directly: \(x = 0\) (from the common factor) and \(x = a\). Slide <strong>a</strong> to move the second root.</p>
+</div>`),
+  graph("x*(x - a)", "a", { xMin: -5, xMax: 6, yMin: -8, yMax: 10, paramMin: -4, paramMax: 5, paramInit: 3, caption: "y = x(x − a) : pulling out the GCF x puts one root at x = 0 and the other at x = a." }),
+  html(String.raw`<div class="lecture-box">
   <h2>🔵 Examples</h2>
   <div class="example-box" ${EX}><h3>Example 1: GCF of a binomial</h3><p>Factor \(6x^2 + 9x\).</p><div class="solution"><div class="step"><strong>GCF is \(3x\):</strong> \(3x(2x + 3)\).</div><em>Conclusion: \(3x(2x + 3)\). ✓</em></div></div>
   <div class="example-box" ${EX}><h3>Example 2: A larger GCF</h3><p>Factor \(12x^3 - 8x^2\).</p><div class="solution"><div class="step"><strong>GCF is \(4x^2\):</strong> \(4x^2(3x - 2)\).</div><em>Conclusion: \(4x^2(3x - 2)\). ✓</em></div></div>
@@ -876,6 +922,11 @@ authored["6.4"] = L("6.4", "Two-Way Frequency Tables & Categorical Data", [html(
     <li><strong>Relative frequency:</strong> a count \(\div\) a total (grand total, or a row/column total for a <em>conditional</em> rate).</li>
   </ul>
   <table style="border-collapse:collapse;margin:12px 0;font-size:15px;"><thead><tr><th style="border:1px solid #cbd5e1;padding:6px 12px;background:#f1f5f9;"></th><th style="border:1px solid #cbd5e1;padding:6px 12px;background:#f1f5f9;">Plays a sport</th><th style="border:1px solid #cbd5e1;padding:6px 12px;background:#f1f5f9;">No sport</th><th style="border:1px solid #cbd5e1;padding:6px 12px;background:#f1f5f9;">Total</th></tr></thead><tbody><tr><td style="border:1px solid #cbd5e1;padding:6px 12px;font-weight:700;">Grade 9</td><td style="border:1px solid #cbd5e1;padding:6px 12px;text-align:center;">18</td><td style="border:1px solid #cbd5e1;padding:6px 12px;text-align:center;">12</td><td style="border:1px solid #cbd5e1;padding:6px 12px;text-align:center;font-weight:700;">30</td></tr><tr><td style="border:1px solid #cbd5e1;padding:6px 12px;font-weight:700;">Grade 10</td><td style="border:1px solid #cbd5e1;padding:6px 12px;text-align:center;">22</td><td style="border:1px solid #cbd5e1;padding:6px 12px;text-align:center;">8</td><td style="border:1px solid #cbd5e1;padding:6px 12px;text-align:center;font-weight:700;">30</td></tr><tr><td style="border:1px solid #cbd5e1;padding:6px 12px;font-weight:700;">Total</td><td style="border:1px solid #cbd5e1;padding:6px 12px;text-align:center;font-weight:700;">40</td><td style="border:1px solid #cbd5e1;padding:6px 12px;text-align:center;font-weight:700;">20</td><td style="border:1px solid #cbd5e1;padding:6px 12px;text-align:center;font-weight:700;">60</td></tr></tbody></table>
+  <h2>🎬 Association shows up as a gap</h2>
+  <p>The two “plays a sport” rates — \(60\%\) for Grade 9 vs \(73\%\) for Grade 10 — drawn as levels. The bigger the gap between the lines, the stronger the <strong>association</strong> between grade and playing a sport.</p>
+</div>`),
+  mg([{ expr: "0.6", label: "Grade 9: 60%" }, { expr: "0.7333", label: "Grade 10: 73%" }], { param: "", xMin: 0, xMax: 1, yMin: 0, yMax: 1, markIntersection: false, caption: "The two conditional rates as levels — a visible gap between the groups signals an association (equal levels would mean none)." }),
+  html(String.raw`<div class="lecture-box">
   <h2>🔵 Examples</h2>
   <div class="example-box" ${EX}><h3>Example 1: Joint frequency</h3><p>How many Grade 9 students play a sport?</p><div class="solution"><div class="step"><strong>Read the Grade 9 / Plays cell:</strong> 18.</div><em>Conclusion: 18. ✓</em></div></div>
   <div class="example-box" ${EX}><h3>Example 2: Marginal frequency</h3><p>How many students are in Grade 10 altogether?</p><div class="solution"><div class="step"><strong>Read the Grade 10 row total:</strong> 30.</div><em>Conclusion: 30. ✓</em></div></div>
