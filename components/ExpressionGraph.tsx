@@ -16,6 +16,10 @@ export function ExpressionGraph({
   paramMax = 3,
   paramInit = 1,
   caption,
+  param2,
+  param2Min = -5,
+  param2Max = 5,
+  param2Init = 0,
 }: {
   expr: string;
   param: string;
@@ -27,13 +31,23 @@ export function ExpressionGraph({
   paramMax?: number;
   paramInit?: number;
   caption?: string;
+  param2?: string;
+  param2Min?: number;
+  param2Max?: number;
+  param2Init?: number;
 }) {
   const fn = useMemo(() => safeCompile(expr), [expr]);
   const hasParam = param.trim().length > 0;
+  const has2 = !!(param2 && param2.trim().length > 0);
 
   return (
     <FunctionGraph
-      fn={(x, a) => fn(hasParam ? { x, [param]: a } : { x })}
+      fn={(x, a, b) => {
+        const scope: Record<string, number> = { x };
+        if (hasParam) scope[param] = a;
+        if (has2) scope[param2!] = b;
+        return fn(scope);
+      }}
       label={caption || `y = ${expr}`}
       equationExpr={hasParam ? expr : undefined}
       xMin={xMin}
@@ -45,6 +59,10 @@ export function ExpressionGraph({
       paramMax={paramMax}
       paramInit={paramInit}
       hideSlider={!hasParam}
+      param2Name={has2 ? param2 : undefined}
+      param2Min={param2Min}
+      param2Max={param2Max}
+      param2Init={param2Init}
     />
   );
 }

@@ -8,6 +8,16 @@ const EX = `style="background-color:#e6f3ff;border-left:5px solid #4a90e2;paddin
 const PR = `style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"`;
 const QA = `style="background-color:#f0f0f0;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"`;
 
+// A graph block with TWO independent sliders (e.g. vertex form y = (x−h)² + k).
+let _g2 = 0;
+const graph2 = (expr, p1, p2, o = {}) => ({
+  id: `alg1g2_${_g2++}`, type: "graph", expr,
+  xMin: o.xMin ?? -6, xMax: o.xMax ?? 6, yMin: o.yMin ?? -6, yMax: o.yMax ?? 6,
+  param: p1, paramMin: o.paramMin ?? -5, paramMax: o.paramMax ?? 5, paramInit: o.paramInit ?? 0,
+  param2: p2, param2Min: o.param2Min ?? -5, param2Max: o.param2Max ?? 5, param2Init: o.param2Init ?? 0,
+  caption: o.caption ?? "",
+});
+
 export const authored = {};
 
 authored["1.1"] = L("1.1", "Multi-Step Equations in One Variable", [html(String.raw`<div class="lecture-box">
@@ -331,7 +341,7 @@ authored["2.5"] = L("2.5", "Function Transformations: f(x)+k, kf(x), f(x+k)", [
   graph("x^2+k", "k", { xMin: -5, xMax: 5, yMin: -3, yMax: 12, paramMin: -4, paramMax: 6, paramInit: 0, caption: "Vertical shift  y = x² + k : slide k to move the parabola up (k>0) or down (k<0). The vertex sits at (0, k)." }),
   graph("(x-h)^2", "h", { xMin: -6, xMax: 6, yMin: -1, yMax: 10, paramMin: -3, paramMax: 3, paramInit: 0, caption: "Horizontal shift  y = (x − h)² : slide h to move the vertex to (h, 0). Written as (x − h), a positive h moves it RIGHT." }),
   graph("a*x^2", "a", { xMin: -4, xMax: 4, yMin: -8, yMax: 8, paramMin: -2, paramMax: 3, paramInit: 1, caption: "Vertical stretch  y = a·x² : |a|>1 narrows it, 0<|a|<1 widens it, and a<0 flips it to open downward." }),
-  anim("(x-a)^2 + a", "a", { from: -3, to: 3, durationMs: 5000, xMin: -6, xMax: 6, yMin: -4, yMax: 10, caption: "Animation: combine a right shift and an up shift — the vertex of (x − a)² + a travels straight along the line y = x." }),
+  graph2("(x-h)^2 + k", "h", "k", { xMin: -6, xMax: 6, yMin: -3, yMax: 10, paramMin: -4, paramMax: 4, paramInit: 0, param2Min: -3, param2Max: 7, param2Init: 0, caption: "Vertex form  y = (x − h)² + k : slide h to move the vertex left/right and k to move it up/down. The vertex sits exactly at (h, k)." }),
   html(String.raw`<div class="lecture-box">
   <h2>🔵 Examples</h2>
   <div class="example-box" ${EX}><h3>Example 1: Vertical shift up</h3><p>Describe \(g(x) = x^2 + 3\) relative to \(f(x) = x^2\).</p><div class="solution"><div class="step"><strong>Form \(f(x)+k\) with \(k=3\):</strong> shift up.</div><em>Conclusion: the parabola moves up 3 units. ✓</em></div></div>

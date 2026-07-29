@@ -175,25 +175,35 @@ export function safeCompile(src: string): CompiledExpr {
 }
 
 /**
- * Build a readable equation with the current parameter value substituted in,
- * e.g. liveEquation("x^2+k", "k", 2) → "y = x² + 2". Used by the interactive and
+ * Build a readable equation with the current parameter value(s) substituted in,
+ * e.g. liveEquation("x^2+k", "k", 2) → "y = x² + 2". Handles negatives (sign
+ * resolution), powers (²/³), and multiplication (·). Used by the interactive and
  * animated graph components so students can read the equation change live.
  */
-export function liveEquation(expr: string, param: string, value: number): string {
-  const v = Math.round(value * 10) / 10;
-  const vs = Number.isInteger(v) ? String(v) : v.toFixed(1);
+function prettyEquation(expr: string, subs: Array<[string, number]>): string {
   let s = expr;
-  if (param) s = s.replace(new RegExp("\b" + param + "\b", "g"), v < 0 ? "(" + vs + ")" : vs);
-  // prettify multiplication and small powers
+  for (const [param, value] of subs) {
+    if (!param) continue;
+    const v = Math.round(value * 10) / 10;
+    const vs = Number.isInteger(v) ? String(v) : v.toFixed(1);
+    s = s.replace(new RegExp("\\b" + param + "\\b", "g"), v < 0 ? "(" + vs + ")" : vs);
+  }
   s = s.replace(/\*\*/g, "^").replace(/\*/g, "·").replace(/\^2\b/g, "²").replace(/\^3\b/g, "³");
-  // resolve the signs created by substituting negatives, then tidy
   s = s
     .replace(/\+\s*\((-?[\d.]+)\)/g, (_m, n: string) => (n.startsWith("-") ? " − " + n.slice(1) : " + " + n))
     .replace(/-\s*\((-?[\d.]+)\)/g, (_m, n: string) => (n.startsWith("-") ? " + " + n.slice(1) : " − " + n))
     .replace(/\(\s*(-?[\d.]+)\s*\)/g, "$1")
-    .replace(/(^|[^\d.])1·/g, "$1")   // 1·x → x
-    .replace(/(^|[^\d.])-1·/g, "$1−") // -1·x → −x
+    .replace(/(^|[^\d.])1·/g, "$1")
+    .replace(/(^|[^\d.])-1·/g, "$1−")
     .replace(/\+/g, " + ").replace(/(?<![eE^])-(?=\S)/g, " − ")
+    .replace(/\(\s*x\s*[+−-]\s*0(?:\.0)?\s*\)/g, "x") // (x − 0) → x
+    .replace(/\s*[+−-]\s*0(?:\.0)?(?![\d.])/g, "")    // drop "+ 0" / "− 0" terms
     .replace(/\s+/g, " ").trim();
   return "y = " + s;
+}
+export function liveEquation(expr: string, param: string, value: number): string {
+  return prettyEquation(expr, [[param, value]]);
+}
+export function liveEquationMulti(expr: string, subs: Array<[string, number]>): string {
+  return prettyEquation(expr, subs);
 }

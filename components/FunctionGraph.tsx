@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { liveEquation } from "../lib/mathExpr";
+import { liveEquation, liveEquationMulti } from "../lib/mathExpr";
 
 /**
  * A dependency-free interactive function plotter.
@@ -24,8 +24,12 @@ export function FunctionGraph({
   height = 360,
   hideSlider = false,
   equationExpr,
+  param2Name,
+  param2Min = -5,
+  param2Max = 5,
+  param2Init = 0,
 }: {
-  fn: (x: number, a: number) => number;
+  fn: (x: number, a: number, b: number) => number;
   label?: string;
   equationExpr?: string;
   xMin?: number;
@@ -39,8 +43,14 @@ export function FunctionGraph({
   width?: number;
   height?: number;
   hideSlider?: boolean;
+  param2Name?: string;
+  param2Min?: number;
+  param2Max?: number;
+  param2Init?: number;
 }) {
   const [a, setA] = useState(paramInit);
+  const [b, setB] = useState(param2Init);
+  const has2 = !!param2Name;
 
   const sx = (x: number) => ((x - xMin) / (xMax - xMin)) * width;
   const sy = (y: number) => height - ((y - yMin) / (yMax - yMin)) * height;
@@ -51,7 +61,7 @@ export function FunctionGraph({
     let pen = false;
     for (let i = 0; i <= steps; i++) {
       const x = xMin + ((xMax - xMin) * i) / steps;
-      const y = fn(x, a);
+      const y = fn(x, a, b);
       if (!isFinite(y) || y < yMin - 50 || y > yMax + 50) {
         pen = false;
         continue;
@@ -62,7 +72,7 @@ export function FunctionGraph({
       pen = true;
     }
     return d;
-  }, [a, fn, xMin, xMax, yMin, yMax, width, height]);
+  }, [a, b, fn, xMin, xMax, yMin, yMax, width, height]);
 
   const gridLines = [];
   for (let gx = Math.ceil(xMin); gx <= xMax; gx++) {
@@ -112,7 +122,9 @@ export function FunctionGraph({
 
       {!hideSlider && equationExpr && (
         <div style={{ marginTop: 14, fontWeight: 800, fontSize: 17, color: "#1b7a44", fontVariantNumeric: "tabular-nums" }}>
-          {liveEquation(equationExpr, paramName, a)}
+          {has2
+            ? liveEquationMulti(equationExpr, [[paramName, a], [param2Name!, b]])
+            : liveEquation(equationExpr, paramName, a)}
         </div>
       )}
       {!hideSlider && (
@@ -128,6 +140,22 @@ export function FunctionGraph({
             value={a}
             onChange={(e) => setA(parseFloat(e.target.value))}
             style={{ flex: 1, accentColor: "#1b7a44" }}
+          />
+        </div>
+      )}
+      {!hideSlider && has2 && (
+        <div style={{ marginTop: 8, display: "flex", alignItems: "center", gap: 14 }}>
+          <label style={{ fontWeight: 700, fontSize: 14, color: "#0f172a", minWidth: 70 }}>
+            {param2Name} = {b.toFixed(1)}
+          </label>
+          <input
+            type="range"
+            min={param2Min}
+            max={param2Max}
+            step={0.1}
+            value={b}
+            onChange={(e) => setB(parseFloat(e.target.value))}
+            style={{ flex: 1, accentColor: "#0d9488" }}
           />
         </div>
       )}

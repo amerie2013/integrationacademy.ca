@@ -70,6 +70,10 @@ function renderBlock(b: Block) {
           paramMax={b.paramMax}
           paramInit={b.paramInit}
           caption={b.caption}
+          param2={b.param2}
+          param2Min={b.param2Min}
+          param2Max={b.param2Max}
+          param2Init={b.param2Init}
         />
       );
     case "multigraph":

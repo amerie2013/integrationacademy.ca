@@ -33,6 +33,10 @@ export type Block =
       paramMax: number;
       paramInit: number;
       caption?: string;
+      param2?: string; // optional second slider (e.g. "k" for vertex form)
+      param2Min?: number;
+      param2Max?: number;
+      param2Init?: number;
     }
   | {
       id: string;
