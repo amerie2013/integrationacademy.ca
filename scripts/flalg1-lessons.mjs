@@ -691,3 +691,113 @@ authored["5.5"] = L("5.5", "Completing the Square & The Quadratic Formula", [htm
   <div class="qa-box" ${QA}><h3>Q2: What does the discriminant tell me?</h3><p><em>\(b^2 - 4ac\): positive ⇒ two roots, zero ⇒ one, negative ⇒ no real roots — the number under the square root.</em></p></div>
   <div class="qa-box" ${QA}><h3>Q3: What number do I add to complete the square?</h3><p><em>Half the middle coefficient, squared: \(\left(\tfrac{b}{2}\right)^2\) (when \(a = 1\)).</em></p></div>
 </div>`)]);
+
+authored["6.1"] = L("6.1", "Exponential Growth and Decay Models", [html(String.raw`<div class="lecture-box">
+  <h1>📈 Exponential Growth and Decay Models</h1>
+  <p><strong>Overview.</strong> Exponential functions \(y = a\,b^x\) model anything that <strong>multiplies</strong> by the same factor each step — populations, savings, medicine in the bloodstream. If \(b &gt; 1\) the quantity <strong>grows</strong>; if \(0 &lt; b &lt; 1\) it <strong>decays</strong>.</p>
+  <h2>📌 The toolkit</h2>
+  <ul>
+    <li><strong>\(y = a\,b^x\):</strong> \(a\) is the <strong>starting amount</strong> (at \(x=0\)); \(b\) is the <strong>growth/decay factor</strong>.</li>
+    <li><strong>Growth</strong> of \(r\%\): \(b = 1 + r\). <strong>Decay</strong> of \(r\%\): \(b = 1 - r\).</li>
+    <li>Evaluate by substituting \(x\); interpret the answer in context.</li>
+  </ul>
+  ${gframe(["y = 2^x"], { title: "y = 2ˣ — exponential growth: each step doubles the output", xMin: -3, xMax: 6, yMin: -2, yMax: 20 })}
+  <h2>🔵 Examples</h2>
+  <div class="example-box" ${EX}><h3>Example 1: Identify \(a\) and \(b\)</h3><p>For \(y = 100 \cdot 2^x\), state the starting amount and behaviour.</p><div class="solution"><div class="step"><strong>Read off:</strong> \(a = 100\), \(b = 2 &gt; 1\).</div><em>Conclusion: starts at 100 and doubles each step (growth). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 2: Growth or decay?</h3><p>Describe \(y = 50 \cdot (0.8)^x\).</p><div class="solution"><div class="step"><strong>\(b = 0.8\) is between 0 and 1:</strong> decay.</div><em>Conclusion: starts at 50, shrinks 20% each step. ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 3: Evaluate a model</h3><p>For \(y = 200 \cdot (1.05)^x\), find \(y\) when \(x = 3\).</p><div class="solution"><div class="step"><strong>Substitute:</strong> \(200 \cdot (1.05)^3 = 200 \cdot 1.157625\).</div><em>Conclusion: \(y \approx 231.53\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 4: Build a growth model</h3><p>A town of 500 grows 10% per year. Write the model.</p><div class="solution"><div class="step"><strong>\(a = 500\), \(b = 1 + 0.10 = 1.1\):</strong> \(y = 500 \cdot (1.1)^x\).</div><em>Conclusion: \(y = 500(1.1)^x\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 5: Build a decay model</h3><p>A $2000 car loses 15% of its value each year. What's it worth after 2 years?</p><div class="solution"><div class="step"><strong>Model:</strong> \(b = 1 - 0.15 = 0.85\), so \(y = 2000(0.85)^x\).</div><div class="step"><strong>At \(x = 2\):</strong> \(2000 \cdot 0.7225 = 1445\).</div><em>Conclusion: about $1445. ✓</em></div></div>
+  <h2>🟡 Practice Questions</h2>
+  <div class="practice-box" ${PR}><h3>Question 1</h3><p>For \(y = 30 \cdot 3^x\), what is the starting amount?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(30\) (the value at \(x=0\)).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 2</h3><p>Is \(y = 80 \cdot (0.5)^x\) growth or decay?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Decay (\(b = 0.5 &lt; 1\)).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 3</h3><p>Find \(y = 100 \cdot 2^x\) at \(x = 4\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(100 \cdot 16 = 1600\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 4</h3><p>Write a model: 400 bacteria doubling each hour.</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(y = 400 \cdot 2^x\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 5</h3><p>A $5000 investment grows 8% per year. Write the model.</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(y = 5000 \cdot (1.08)^x\).</em></div></div></details></div>
+  <h2>❓ Q&amp;A Summary</h2>
+  <div class="qa-box" ${QA}><h3>Q1: What do \(a\) and \(b\) mean?</h3><p><em>\(a\) is the starting value (at \(x=0\)); \(b\) is what you multiply by each step.</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q2: Growth or decay — how do I tell?</h3><p><em>\(b &gt; 1\) grows; \(0 &lt; b &lt; 1\) decays.</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q3: How do I turn a percent into \(b\)?</h3><p><em>Growth: \(b = 1 + r\). Decay: \(b = 1 - r\). So 12% growth ⇒ \(b = 1.12\); 12% decay ⇒ \(b = 0.88\).</em></p></div>
+</div>`)]);
+
+authored["6.2"] = L("6.2", "Comparing Linear, Quadratic, and Exponential Models", [html(String.raw`<div class="lecture-box">
+  <h1>🔍 Comparing Linear, Quadratic &amp; Exponential Models</h1>
+  <p><strong>Overview.</strong> Given a table or a situation, which model fits — a line, a parabola, or an exponential curve? Each leaves a <strong>fingerprint</strong> in how its outputs change.</p>
+  <h2>📌 The fingerprints</h2>
+  <ul>
+    <li><strong>Linear:</strong> outputs change by a <strong>constant difference</strong> (add the same each step).</li>
+    <li><strong>Quadratic:</strong> the <strong>second differences</strong> are constant.</li>
+    <li><strong>Exponential:</strong> outputs change by a <strong>constant ratio</strong> (multiply by the same each step).</li>
+  </ul>
+  <h2>🔵 Examples</h2>
+  <div class="example-box" ${EX}><h3>Example 1: Spot a linear table</h3><p>\(y\)-values \(3, 7, 11, 15\) at \(x = 0,1,2,3\).</p><div class="solution"><div class="step"><strong>Differences:</strong> \(+4, +4, +4\) — constant.</div><em>Conclusion: linear (\(y = 4x + 3\)). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 2: Spot an exponential table</h3><p>\(y\)-values \(2, 6, 18, 54\).</p><div class="solution"><div class="step"><strong>Ratios:</strong> \(\times 3, \times 3, \times 3\) — constant.</div><em>Conclusion: exponential (\(y = 2 \cdot 3^x\)). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 3: Spot a quadratic table</h3><p>\(y\)-values \(1, 4, 9, 16\).</p><div class="solution"><div class="step"><strong>First differences:</strong> \(3, 5, 7\); <strong>second differences:</strong> \(2, 2\) — constant.</div><em>Conclusion: quadratic (\(y = x^2\), shifted). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 4: Choose a model from a description</h3><p>“A balance earns 5% interest each year.” Which model?</p><div class="solution"><div class="step"><strong>“Each year × the same factor”:</strong> constant ratio.</div><em>Conclusion: exponential. ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 5: Which wins in the long run?</h3><p>Compare \(y = 10x\) (linear) and \(y = 2^x\) (exponential) for large \(x\).</p><div class="solution"><div class="step"><strong>At \(x = 10\):</strong> \(100\) vs \(1024\).</div><em>Conclusion: exponential growth eventually overtakes any linear (or quadratic) model. ✓</em></div></div>
+  <h2>🟡 Practice Questions</h2>
+  <div class="practice-box" ${PR}><h3>Question 1</h3><p>\(y\): \(5, 8, 11, 14\). Which model?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Linear (constant difference \(+3\)).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 2</h3><p>\(y\): \(3, 6, 12, 24\). Which model?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Exponential (constant ratio \(\times 2\)).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 3</h3><p>\(y\): \(2, 5, 10, 17\). Which model?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Quadratic (second differences constant at \(2\)).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 4</h3><p>A car depreciates 12% per year. Which model?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Exponential (decay).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 5</h3><p>You save $20 every week. Which model?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Linear (constant difference).</em></div></div></details></div>
+  <h2>❓ Q&amp;A Summary</h2>
+  <div class="qa-box" ${QA}><h3>Q1: How do I test a table quickly?</h3><p><em>Check the differences (linear) and ratios (exponential); if neither is constant, check second differences (quadratic).</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q2: “Constant difference” vs “constant ratio”?</h3><p><em>Adding the same amount ⇒ linear; multiplying by the same amount ⇒ exponential.</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q3: Which model grows fastest?</h3><p><em>Exponential — for large inputs it outpaces both linear and quadratic growth.</em></p></div>
+</div>`)]);
+
+authored["6.3"] = L("6.3", "Scatter Plots, Lines of Best Fit, and Residuals Analysis", [html(String.raw`<div class="lecture-box">
+  <h1>🔵 Scatter Plots, Lines of Best Fit &amp; Residuals</h1>
+  <p><strong>Overview.</strong> A <strong>scatter plot</strong> shows paired data \((x, y)\) as points. If a trend appears, a <strong>line of best fit</strong> models it, and <strong>residuals</strong> measure how far each real point sits from that line.</p>
+  <h2>📌 The toolkit</h2>
+  <ul>
+    <li><strong>Correlation:</strong> <em>positive</em> (up together), <em>negative</em> (one up, one down), or <em>none</em>; and <em>strong</em> vs <em>weak</em>.</li>
+    <li><strong>Line of best fit:</strong> the line that most closely follows the trend; use it to <strong>predict</strong>.</li>
+    <li><strong>Residual</strong> \(= \text{actual} - \text{predicted}\). Small, balanced residuals mean a good fit.</li>
+  </ul>
+  <h2>🔵 Examples</h2>
+  <div class="example-box" ${EX}><h3>Example 1: Describe correlation</h3><p>As study hours rise, test scores rise. What correlation is that?</p><div class="solution"><div class="step"><strong>Both increase together:</strong> positive correlation.</div><em>Conclusion: positive (and likely strong). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 2: Predict with a best-fit line</h3><p>A best-fit line is \(y = 5x + 50\) (score vs. hours). Predict the score for 6 hours.</p><div class="solution"><div class="step"><strong>Substitute \(x = 6\):</strong> \(5(6) + 50 = 80\).</div><em>Conclusion: about 80. ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 3: Compute a residual</h3><p>The line predicts 80 but the student actually scored 85. Find the residual.</p><div class="solution"><div class="step"><strong>actual − predicted:</strong> \(85 - 80\).</div><em>Conclusion: residual \(= +5\) (the point sits above the line). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 4: Interpolate vs. extrapolate</h3><p>The data covers 1–8 hours. Is predicting at 5 hours interpolation or extrapolation?</p><div class="solution"><div class="step"><strong>5 is inside the data range:</strong> interpolation (more reliable). Predicting at 20 hours would be extrapolation.</div><em>Conclusion: interpolation. ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 5: Interpret the slope</h3><p>In \(y = 5x + 50\), what does the slope mean?</p><div class="solution"><div class="step"><strong>Rate of change:</strong> each extra hour of study is linked to about <strong>5 more points</strong>.</div><em>Conclusion: +5 points per hour. ✓</em></div></div>
+  <h2>🟡 Practice Questions</h2>
+  <div class="practice-box" ${PR}><h3>Question 1</h3><p>As temperature rises, hot-chocolate sales fall. Correlation?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Negative.</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 2</h3><p>Best-fit \(y = 2x + 3\). Predict \(y\) at \(x = 10\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(23\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 3</h3><p>Predicted 23, actual 20. Residual?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(20 - 23 = -3\) (point below the line).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 4</h3><p>Data span \(x = 0\) to \(50\). Predicting at \(x = 100\) is…?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Extrapolation (outside the range — less reliable).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 5</h3><p>In \(y = -4x + 60\), interpret the slope.</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(y\) drops by 4 for each 1-unit increase in \(x\).</em></div></div></details></div>
+  <h2>❓ Q&amp;A Summary</h2>
+  <div class="qa-box" ${QA}><h3>Q1: Does correlation prove causation?</h3><p><em>No. A strong relationship doesn't prove one variable <em>causes</em> the other — there may be a hidden factor.</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q2: What does a residual tell me?</h3><p><em>How far a real point is from the line: positive is above, negative is below. Smaller residuals ⇒ better fit.</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q3: Interpolation vs. extrapolation?</h3><p><em>Interpolation predicts <strong>inside</strong> the data range (safer); extrapolation predicts <strong>outside</strong> it (riskier).</em></p></div>
+</div>`)]);
+
+authored["6.4"] = L("6.4", "Two-Way Frequency Tables & Categorical Data", [html(String.raw`<div class="lecture-box">
+  <h1>🗂️ Two-Way Frequency Tables &amp; Categorical Data</h1>
+  <p><strong>Overview.</strong> <strong>Categorical data</strong> sorts people or things into groups (grade, sport, yes/no). A <strong>two-way table</strong> cross-classifies two categories at once, letting us read <strong>joint</strong>, <strong>marginal</strong>, and <strong>relative</strong> frequencies — and look for <strong>association</strong>.</p>
+  <h2>📌 The toolkit</h2>
+  <ul>
+    <li><strong>Joint frequency:</strong> the count in a single inner cell.</li>
+    <li><strong>Marginal frequency:</strong> a row or column <strong>total</strong>.</li>
+    <li><strong>Relative frequency:</strong> a count \(\div\) a total (grand total, or a row/column total for a <em>conditional</em> rate).</li>
+  </ul>
+  <table style="border-collapse:collapse;margin:12px 0;font-size:15px;"><thead><tr><th style="border:1px solid #cbd5e1;padding:6px 12px;background:#f1f5f9;"></th><th style="border:1px solid #cbd5e1;padding:6px 12px;background:#f1f5f9;">Plays a sport</th><th style="border:1px solid #cbd5e1;padding:6px 12px;background:#f1f5f9;">No sport</th><th style="border:1px solid #cbd5e1;padding:6px 12px;background:#f1f5f9;">Total</th></tr></thead><tbody><tr><td style="border:1px solid #cbd5e1;padding:6px 12px;font-weight:700;">Grade 9</td><td style="border:1px solid #cbd5e1;padding:6px 12px;text-align:center;">18</td><td style="border:1px solid #cbd5e1;padding:6px 12px;text-align:center;">12</td><td style="border:1px solid #cbd5e1;padding:6px 12px;text-align:center;font-weight:700;">30</td></tr><tr><td style="border:1px solid #cbd5e1;padding:6px 12px;font-weight:700;">Grade 10</td><td style="border:1px solid #cbd5e1;padding:6px 12px;text-align:center;">22</td><td style="border:1px solid #cbd5e1;padding:6px 12px;text-align:center;">8</td><td style="border:1px solid #cbd5e1;padding:6px 12px;text-align:center;font-weight:700;">30</td></tr><tr><td style="border:1px solid #cbd5e1;padding:6px 12px;font-weight:700;">Total</td><td style="border:1px solid #cbd5e1;padding:6px 12px;text-align:center;font-weight:700;">40</td><td style="border:1px solid #cbd5e1;padding:6px 12px;text-align:center;font-weight:700;">20</td><td style="border:1px solid #cbd5e1;padding:6px 12px;text-align:center;font-weight:700;">60</td></tr></tbody></table>
+  <h2>🔵 Examples</h2>
+  <div class="example-box" ${EX}><h3>Example 1: Joint frequency</h3><p>How many Grade 9 students play a sport?</p><div class="solution"><div class="step"><strong>Read the Grade 9 / Plays cell:</strong> 18.</div><em>Conclusion: 18. ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 2: Marginal frequency</h3><p>How many students are in Grade 10 altogether?</p><div class="solution"><div class="step"><strong>Read the Grade 10 row total:</strong> 30.</div><em>Conclusion: 30. ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 3: Relative frequency</h3><p>What fraction of all students are Grade 9 athletes?</p><div class="solution"><div class="step"><strong>Cell \(\div\) grand total:</strong> \(\dfrac{18}{60} = 0.30\).</div><em>Conclusion: 30%. ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 4: Conditional relative frequency</h3><p>Among Grade 9 students, what fraction play a sport?</p><div class="solution"><div class="step"><strong>Cell \(\div\) row total:</strong> \(\dfrac{18}{30} = 0.60\).</div><em>Conclusion: 60% of Grade 9 play. ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 5: Is there an association?</h3><p>Compare the “plays a sport” rate by grade.</p><div class="solution"><div class="step"><strong>Grade 9:</strong> \(\tfrac{18}{30} = 60\%\). <strong>Grade 10:</strong> \(\tfrac{22}{30} \approx 73\%\).</div><em>Conclusion: the rates differ, so grade and playing a sport appear <strong>associated</strong>. ✓</em></div></div>
+  <h2>🟡 Practice Questions</h2>
+  <div class="practice-box" ${PR}><h3>Question 1</h3><p>How many students play no sport in total?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>20 (the “No sport” column total).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 2</h3><p>How many Grade 10 students play no sport?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>8 (a joint frequency).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 3</h3><p>What fraction of all students play a sport?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(\dfrac{40}{60} \approx 0.67\) (67%).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 4</h3><p>Among Grade 10 students, what fraction play no sport?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(\dfrac{8}{30} \approx 0.27\) (27%).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 5</h3><p>Is a marginal total a joint or a marginal frequency?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Marginal (a row or column total).</em></div></div></details></div>
+  <h2>❓ Q&amp;A Summary</h2>
+  <div class="qa-box" ${QA}><h3>Q1: Joint vs. marginal frequency?</h3><p><em>Joint = a single inner cell; marginal = a row or column <strong>total</strong> (found in the margins).</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q2: How do I find a relative frequency?</h3><p><em>Divide a count by a total — the grand total for an overall rate, or a row/column total for a conditional rate.</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q3: What signals an association?</h3><p><em>When the conditional rates differ noticeably across groups (e.g. 60% vs. 73%), the two categories appear related.</em></p></div>
+</div>`)]);
