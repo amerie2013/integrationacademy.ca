@@ -162,6 +162,11 @@ authored["1.4"] = L("1.4", "Absolute Value Equations & Inequalities", [html(Stri
     <li><strong>“Greater than”:</strong> \(|x|&gt;c\) means \(x&lt;-c\) <strong>or</strong> \(x&gt;c\) (two outer pieces).</li>
     <li>If \(c&lt;0\): \(|x|=c\) has <strong>no solution</strong>; \(|x|&gt;c\) is <strong>always true</strong>.</li>
   </ul>
+  <h2>🎬 The V-shape slides</h2>
+  <p>\(y = |x - h|\) is a V with its corner at \(x = h\). Slide <strong>h</strong> and watch the corner move — solving \(|x - h| = c\) is asking where the V reaches height \(c\).</p>
+</div>`),
+  graph("abs(x - h)", "h", { xMin: -8, xMax: 8, yMin: -1, yMax: 8, paramMin: -5, paramMax: 5, paramInit: 0, caption: "y = |x − h| : a V-shape with its corner (minimum) at x = h. It never dips below the x-axis." }),
+  html(String.raw`<div class="lecture-box">
   <h2>🔵 Examples</h2>
   <div class="example-box" ${EX}><h3>Example 1: Basic equation</h3><p>Solve \(|x| = 7\).</p><div class="solution"><div class="step"><strong>Two cases:</strong> \(x = 7\) or \(x = -7\).</div><em>Conclusion: \(x = \pm 7\). ✓</em></div></div>
   <div class="example-box" ${EX}><h3>Example 2: Shift inside</h3><p>Solve \(|x - 3| = 5\).</p><div class="solution"><div class="step"><strong>Case 1:</strong> \(x-3=5\Rightarrow x=8\).</div><div class="step"><strong>Case 2:</strong> \(x-3=-5\Rightarrow x=-2\).</div><em>Conclusion: \(x = 8\) or \(x = -2\). ✓</em></div></div>
@@ -305,7 +310,11 @@ authored["2.4"] = L("2.4", "Parallel and Perpendicular Lines on the Coordinate P
     <li><strong>Perpendicular:</strong> \(m_1 \cdot m_2 = -1\), i.e. \(m_2 = -\dfrac{1}{m_1}\) (flip and negate).</li>
     <li>A horizontal line (\(m=0\)) is perpendicular to a vertical line (undefined slope).</li>
   </ul>
-  ${gframe(["y = 2*x + 1", "y = 2*x - 3"], { title: "Two parallel lines — same slope 2, different intercepts", xMin: -5, xMax: 5, yMin: -13, yMax: 11 })}
+  <h2>🎬 Same slope, different intercept</h2>
+  <p>Slide <strong>b</strong>: every line here has slope 2, so they're all <strong>parallel</strong> — only the intercept changes.</p>
+</div>`),
+  graph("2*x + b", "b", { xMin: -6, xMax: 6, yMin: -12, yMax: 12, paramMin: -8, paramMax: 8, paramInit: 1, caption: "y = 2·x + b : sliding b never changes the slope, so these lines stay parallel — parallel means equal slopes." }),
+  html(String.raw`<div class="lecture-box">
   <h2>🔵 Examples</h2>
   <div class="example-box" ${EX}><h3>Example 1: Are they parallel?</h3><p>Do \(y = 2x + 1\) and \(y = 2x - 4\) run parallel?</p><div class="solution"><div class="step"><strong>Compare slopes:</strong> both are 2.</div><em>Conclusion: yes — parallel. ✓</em></div></div>
   <div class="example-box" ${EX}><h3>Example 2: Perpendicular slope</h3><p>What slope is perpendicular to \(m = 3\)?</p><div class="solution"><div class="step"><strong>Flip and negate:</strong> \(-\dfrac{1}{3}\).</div><em>Conclusion: \(-\tfrac{1}{3}\) (check: \(3\cdot-\tfrac13=-1\)). ✓</em></div></div>
@@ -375,7 +384,11 @@ authored["3.1"] = L("3.1", "Solving Systems by Graphing & Substitution", [html(S
     <li><strong>Substitution:</strong> solve one equation for a variable, substitute into the other, solve, then back-substitute.</li>
     <li>Always <strong>check</strong> the point in both equations.</li>
   </ul>
-  ${gframe(["y = x + 1", "y = -x + 5"], { title: "The lines y = x + 1 and y = −x + 5 cross at (2, 3)", xMin: -3, xMax: 7, yMin: -3, yMax: 9 })}
+  <h2>🎬 The solution is where they cross</h2>
+  <p>The green line is fixed at \(y = -x + 5\). Slide the slope <strong>m</strong> of the second line — the marked crossing point is the system's solution, and it moves as the line tilts.</p>
+</div>`),
+  mg([{ expr: "-x + 5", label: "y = -x + 5" }, { expr: "m*x + 1", label: "y = m·x + 1" }], { param: "m", paramMin: -3, paramMax: 4, paramInit: 1, markIntersection: true, xMin: -4, xMax: 8, yMin: -4, yMax: 10, caption: "Two lines and their intersection — the point where they meet is the one (x, y) that solves both equations." }),
+  html(String.raw`<div class="lecture-box">
   <h2>🔵 Examples</h2>
   <div class="example-box" ${EX}><h3>Example 1: By graphing</h3><p>Solve \(\begin{cases} y = x + 1\\ y = -x + 5\end{cases}\)</p><div class="solution"><div class="step"><strong>Both graphed:</strong> they cross where \(x+1=-x+5\Rightarrow x=2,\ y=3\).</div><em>Conclusion: \((2, 3)\). ✓</em></div></div>
   <div class="example-box" ${EX}><h3>Example 2: Substitution (one already isolated)</h3><p>Solve \(\begin{cases} y = 2x\\ x + y = 6\end{cases}\)</p><div class="solution"><div class="step"><strong>Substitute \(y=2x\):</strong> \(x + 2x = 6\Rightarrow x = 2\).</div><div class="step"><strong>Back-substitute:</strong> \(y = 2(2) = 4\).</div><em>Conclusion: \((2, 4)\). ✓</em></div></div>
