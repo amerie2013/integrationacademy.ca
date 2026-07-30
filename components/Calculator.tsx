@@ -439,7 +439,7 @@ export function Calculator({ initialData, initialState, initialId, embed = false
       src = `${origin}/tools/graph?embed=1&data=${btoa(encodeURIComponent(JSON.stringify(fig)))}`;
     }
     try {
-      const code = `<iframe src="${src}" width="700" height="500" style="border:0;border-radius:12px;" allow="autoplay"></iframe>`;
+      const code = `<iframe src="${src}" style="width:100%;max-width:700px;height:460px;border:0;border-radius:12px;display:block;margin:12px auto;" allow="autoplay"></iframe>`;
       await navigator.clipboard.writeText(code);
       flash(src.includes("id=") ? "Embed code copied (short link) — paste it into a lesson" : "Embed code copied (sign in to get a short link)");
     } catch { flash("Copy failed"); }
