@@ -468,7 +468,7 @@ authored["2.6"] = L("2.6", "Parallel and Perpendicular Lines on the Coordinate P
   <div class="qa-box" ${QA}><h3>Q3: What's perpendicular to a horizontal line?</h3><p><em>A vertical line — \(y=k\) is perpendicular to \(x=c\).</em></p></div>
 </div>`)]);
 
-authored["5.6"] = L("5.6", "Function Transformations: f(x)+k, kf(x), f(x+k)", [
+authored["5.7"] = L("5.7", "Function Transformations: f(x)+k, kf(x), f(x+k)", [
   html(String.raw`<div class="lecture-box">
   <h1>🔀 Function Transformations</h1>
   <p><strong>Overview.</strong> Small changes to a function's rule move its graph in predictable ways. Learn three building blocks — <strong>shift</strong>, <strong>stretch</strong>, and <strong>slide</strong> — and you can transform <em>any</em> graph without plotting a single point.</p>
@@ -905,39 +905,73 @@ authored["5.1"] = L("5.1", "GCF and Factoring by Grouping", [html(String.raw`<di
   <div class="qa-box" ${QA}><h3>Q3: How do I check a factorization?</h3><p><em>Multiply the factors back out — you should recover the original expression.</em></p></div>
 </div>`)]);
 
-authored["5.2"] = L("5.2", "Factoring Trinomials (ax² + bx + c)", [html(String.raw`<div class="lecture-box">
-  <h1>🧩 Factoring Trinomials \(ax^2 + bx + c\)</h1>
-  <p><strong>Overview.</strong> Factoring a trinomial reverses FOIL. When \(a = 1\), find two numbers that multiply to \(c\) and add to \(b\). When \(a \neq 1\), use the <strong>\(ac\) method</strong>: split the middle term, then group.</p>
+authored["5.2"] = L("5.2", "Factoring Trinomials when a = 1 (x² + bx + c)", [html(String.raw`<div class="lecture-box">
+  <h1>🧩 Factoring Trinomials when \(a = 1\)</h1>
+  <p><strong>Overview.</strong> Factoring \(x^2 + bx + c\) reverses FOIL. Because the leading coefficient is \(1\), there is one clean rule: find <strong>two numbers that multiply to \(c\) and add to \(b\)</strong>. Those numbers become the constants in \((x + p)(x + q)\).</p>
   <h2>📌 The toolkit</h2>
   <ul>
-    <li><strong>\(x^2 + bx + c\):</strong> find \(p, q\) with \(p+q = b\) and \(pq = c\); then \((x + p)(x + q)\).</li>
-    <li><strong>\(ax^2 + bx + c\) (ac method):</strong> find two numbers multiplying to \(ac\) and adding to \(b\); split \(bx\) and factor by grouping.</li>
-    <li>Watch the <strong>signs</strong>: product/sum of \(p\) and \(q\) must match \(c\) and \(b\).</li>
+    <li><strong>The rule:</strong> find \(p, q\) with \(p \cdot q = c\) and \(p + q = b\); then \(x^2 + bx + c = (x + p)(x + q)\).</li>
+    <li><strong>Signs:</strong> if \(c > 0\), \(p\) and \(q\) share \(b\)'s sign; if \(c < 0\), they have opposite signs and the bigger one takes \(b\)'s sign.</li>
+    <li><strong>Perfect square:</strong> \(x^2 + 2kx + k^2 = (x + k)^2\).</li>
+    <li><strong>Check</strong> by expanding, and remember: not every trinomial factors (some are <strong>prime</strong>).</li>
   </ul>
   <h2>🎬 Factors become x-intercepts</h2>
-  <p>A factored trinomial \((x - p)(x - q)\) graphs as a parabola whose \(x\)-intercepts are exactly \(p\) and \(q\). Slide them to see.</p>
+  <p>A factored trinomial \((x - p)(x - q)\) graphs as a parabola whose \(x\)-intercepts are exactly \(p\) and \(q\). Slide \(p\) and \(q\) to see the roots move.</p>
 </div>`),
   graph2("(x-p)*(x-q)", "p", "q", { xMin: -6, xMax: 6, yMin: -6, yMax: 10, paramMin: -4, paramMax: 4, paramInit: -1, param2Min: -4, param2Max: 4, param2Init: 2, caption: "y = (x − p)(x − q) : the parabola crosses the x-axis exactly at x = p and x = q — the factors reveal the roots." }),
   html(String.raw`<div class="lecture-box">
   <h2>🔵 Examples</h2>
-  <div class="example-box" ${EX}><h3>Example 1: \(a = 1\), all positive</h3><p>Factor \(x^2 + 7x + 12\).</p><div class="solution"><div class="step"><strong>Sum 7, product 12:</strong> \(3\) and \(4\).</div><em>Conclusion: \((x + 3)(x + 4)\). ✓</em></div></div>
-  <div class="example-box" ${EX}><h3>Example 2: \(a = 1\), negative middle</h3><p>Factor \(x^2 - 5x + 6\).</p><div class="solution"><div class="step"><strong>Sum \(-5\), product 6:</strong> \(-2\) and \(-3\).</div><em>Conclusion: \((x - 2)(x - 3)\). ✓</em></div></div>
-  <div class="example-box" ${EX}><h3>Example 3: \(a = 1\), mixed signs</h3><p>Factor \(x^2 + 2x - 15\).</p><div class="solution"><div class="step"><strong>Sum 2, product \(-15\):</strong> \(5\) and \(-3\).</div><em>Conclusion: \((x + 5)(x - 3)\). ✓</em></div></div>
-  <div class="example-box" ${EX}><h3>Example 4: \(a \neq 1\) (ac method)</h3><p>Factor \(2x^2 + 7x + 3\).</p><div class="solution"><div class="step"><strong>\(ac = 6\); need sum 7:</strong> \(6\) and \(1\).</div><div class="step"><strong>Split &amp; group:</strong> \(2x^2 + 6x + x + 3 = 2x(x+3) + 1(x+3)\).</div><em>Conclusion: \((2x + 1)(x + 3)\). ✓</em></div></div>
-  <div class="example-box" ${EX}><h3>Example 5: \(a \neq 1\) with negatives</h3><p>Factor \(3x^2 - 10x + 8\).</p><div class="solution"><div class="step"><strong>\(ac = 24\); need sum \(-10\):</strong> \(-6\) and \(-4\).</div><div class="step"><strong>Split &amp; group:</strong> \(3x^2 - 6x - 4x + 8 = 3x(x-2) - 4(x-2)\).</div><em>Conclusion: \((3x - 4)(x - 2)\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 1: all positive</h3><p>Factor \(x^2 + 7x + 12\).</p><div class="solution"><div class="step"><strong>Two numbers, product 12 and sum 7:</strong> \(3\) and \(4\) (since \(3\cdot4=12\), \(3+4=7\)).</div><em>Conclusion: \((x + 3)(x + 4)\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 2: negative middle, positive constant</h3><p>Factor \(x^2 - 5x + 6\).</p><div class="solution"><div class="step"><strong>Product 6 (positive), sum \(-5\):</strong> both negative — \(-2\) and \(-3\).</div><em>Conclusion: \((x - 2)(x - 3)\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 3: mixed signs</h3><p>Factor \(x^2 + 2x - 15\).</p><div class="solution"><div class="step"><strong>Product \(-15\) (negative), sum 2:</strong> opposite signs — \(5\) and \(-3\).</div><em>Conclusion: \((x + 5)(x - 3)\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 4: negative constant, negative middle</h3><p>Factor \(x^2 - 3x - 10\).</p><div class="solution"><div class="step"><strong>Product \(-10\), sum \(-3\):</strong> \(-5\) and \(2\).</div><em>Conclusion: \((x - 5)(x + 2)\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 5: a perfect-square trinomial</h3><p>Factor \(x^2 + 6x + 9\).</p><div class="solution"><div class="step"><strong>Product 9, sum 6:</strong> \(3\) and \(3\) — repeated.</div><em>Conclusion: \((x + 3)(x + 3) = (x + 3)^2\). ✓</em></div></div>
   <h2>🟡 Practice Questions</h2>
   <div class="practice-box" ${PR}><h3>Question 1</h3><p>Factor \(x^2 + 8x + 15\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\((x + 3)(x + 5)\).</em></div></div></details></div>
   <div class="practice-box" ${PR}><h3>Question 2</h3><p>Factor \(x^2 - 7x + 10\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\((x - 2)(x - 5)\).</em></div></div></details></div>
   <div class="practice-box" ${PR}><h3>Question 3</h3><p>Factor \(x^2 - x - 12\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\((x - 4)(x + 3)\).</em></div></div></details></div>
-  <div class="practice-box" ${PR}><h3>Question 4</h3><p>Factor \(2x^2 + 5x + 2\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\((2x + 1)(x + 2)\).</em></div></div></details></div>
-  <div class="practice-box" ${PR}><h3>Question 5</h3><p>Factor \(3x^2 + 7x - 6\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\((3x - 2)(x + 3)\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 4</h3><p>Factor \(x^2 + 4x - 21\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\((x + 7)(x - 3)\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 5</h3><p>Factor \(x^2 - 10x + 25\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\((x - 5)^2\).</em></div></div></details></div>
   <h2>❓ Q&amp;A Summary</h2>
-  <div class="qa-box" ${QA}><h3>Q1: What's the quick rule for \(a=1\)?</h3><p><em>Two numbers that <strong>multiply to \(c\)</strong> and <strong>add to \(b\)</strong>.</em></p></div>
-  <div class="qa-box" ${QA}><h3>Q2: What's the \(ac\) method for?</h3><p><em>When \(a\neq 1\): find two numbers multiplying to \(ac\) and adding to \(b\), split the middle term, then group.</em></p></div>
-  <div class="qa-box" ${QA}><h3>Q3: What if no such numbers exist?</h3><p><em>The trinomial is <strong>prime</strong> — it doesn't factor over the integers (you'd need the quadratic formula to find its roots).</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q1: What's the one rule when \(a=1\)?</h3><p><em>Two numbers that <strong>multiply to \(c\)</strong> and <strong>add to \(b\)</strong> — they're the constants in \((x+p)(x+q)\).</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q2: How do the signs work?</h3><p><em>Product positive ⇒ same sign (matching \(b\)); product negative ⇒ opposite signs, larger number takes \(b\)'s sign.</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q3: What if no pair works?</h3><p><em>The trinomial is <strong>prime</strong> over the integers — it won't factor this way (use the quadratic formula for its roots).</em></p></div>
 </div>`)]);
 
-authored["5.3"] = L("5.3", "Features of Parabolas (Vertex, Axis of Symmetry, Intercepts)", [html(String.raw`<div class="lecture-box">
+authored["5.3"] = L("5.3", "Factoring Trinomials when a ≠ 1 (ax² + bx + c)", [html(String.raw`<div class="lecture-box">
+  <h1>🧩 Factoring Trinomials when \(a \neq 1\)</h1>
+  <p><strong>Overview.</strong> When the leading coefficient isn't \(1\), the two constants no longer just multiply to \(c\) — the \(a\) gets in the way. The fix is the <strong>\(ac\) method</strong>: find two numbers that multiply to \(a\cdot c\) and add to \(b\), <strong>split the middle term</strong>, then factor by grouping.</p>
+  <h2>📌 The toolkit</h2>
+  <ul>
+    <li><strong>Step 1 — GCF first.</strong> Always pull out any common factor before anything else.</li>
+    <li><strong>Step 2 — the \(ac\) product.</strong> Find two numbers with product \(a\cdot c\) and sum \(b\).</li>
+    <li><strong>Step 3 — split the middle.</strong> Rewrite \(bx\) as those two terms.</li>
+    <li><strong>Step 4 — group &amp; factor.</strong> Factor each pair; the leftover binomials must match.</li>
+  </ul>
+  <h2>🎬 The leading coefficient stretches the parabola</h2>
+  <p>\((2x - 1)(x - a)\) always crosses the \(x\)-axis at \(x = \tfrac12\) and \(x = a\) — the leading \(2\) makes it steeper than an \(a=1\) parabola. Slide \(a\) to move the second root.</p>
+</div>`),
+  graph("(2*x - 1)*(x - a)", "a", { xMin: -4, xMax: 6, yMin: -6, yMax: 12, paramMin: -3, paramMax: 5, paramInit: 3, caption: "y = (2x − 1)(x − a) : roots at x = ½ and x = a. The leading coefficient 2 makes the parabola steeper." }),
+  html(String.raw`<div class="lecture-box">
+  <h2>🔵 Examples</h2>
+  <div class="example-box" ${EX}><h3>Example 1: the basic ac method</h3><p>Factor \(2x^2 + 7x + 3\).</p><div class="solution"><div class="step"><strong>\(ac = 2\cdot3 = 6\); need sum 7:</strong> \(6\) and \(1\).</div><div class="step"><strong>Split the middle:</strong> \(2x^2 + 6x + x + 3\).</div><div class="step"><strong>Group:</strong> \(2x(x + 3) + 1(x + 3)\).</div><em>Conclusion: \((2x + 1)(x + 3)\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 2: negatives</h3><p>Factor \(3x^2 - 10x + 8\).</p><div class="solution"><div class="step"><strong>\(ac = 24\); need sum \(-10\):</strong> \(-6\) and \(-4\).</div><div class="step"><strong>Split &amp; group:</strong> \(3x^2 - 6x - 4x + 8 = 3x(x - 2) - 4(x - 2)\).</div><em>Conclusion: \((3x - 4)(x - 2)\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 3: both factors have coefficients</h3><p>Factor \(6x^2 + 11x + 3\).</p><div class="solution"><div class="step"><strong>\(ac = 18\); need sum 11:</strong> \(9\) and \(2\).</div><div class="step"><strong>Split &amp; group:</strong> \(6x^2 + 9x + 2x + 3 = 3x(2x + 3) + 1(2x + 3)\).</div><em>Conclusion: \((3x + 1)(2x + 3)\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 4: negative constant</h3><p>Factor \(4x^2 - 4x - 3\).</p><div class="solution"><div class="step"><strong>\(ac = -12\); need sum \(-4\):</strong> \(-6\) and \(2\).</div><div class="step"><strong>Split &amp; group:</strong> \(4x^2 - 6x + 2x - 3 = 2x(2x - 3) + 1(2x - 3)\).</div><em>Conclusion: \((2x + 1)(2x - 3)\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 5: GCF first, then ac</h3><p>Factor \(6x^2 + 15x + 6\).</p><div class="solution"><div class="step"><strong>GCF 3:</strong> \(3(2x^2 + 5x + 2)\).</div><div class="step"><strong>ac method on \(2x^2 + 5x + 2\):</strong> \(ac = 4\), sum 5 → \(4, 1\); \(2x^2 + 4x + x + 2 = 2x(x+2) + 1(x+2)\).</div><em>Conclusion: \(3(2x + 1)(x + 2)\). ✓</em></div></div>
+  <h2>🟡 Practice Questions</h2>
+  <div class="practice-box" ${PR}><h3>Question 1</h3><p>Factor \(2x^2 + 5x + 2\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\((2x + 1)(x + 2)\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 2</h3><p>Factor \(3x^2 + 7x - 6\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\((3x - 2)(x + 3)\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 3</h3><p>Factor \(5x^2 - 13x + 6\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\((5x - 3)(x - 2)\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 4</h3><p>Factor \(4x^2 + 8x + 3\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\((2x + 1)(2x + 3)\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 5</h3><p>Factor \(8x^2 + 2x - 3\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\((4x + 3)(2x - 1)\).</em></div></div></details></div>
+  <h2>❓ Q&amp;A Summary</h2>
+  <div class="qa-box" ${QA}><h3>Q1: Why can't I just guess like when \(a=1\)?</h3><p><em>The leading \(a\) multiplies into the middle term, so the two constants alone won't add to \(b\). The \(ac\) product accounts for it.</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q2: What if I forget the GCF?</h3><p><em>You'll get messier numbers, and the answer won't be fully factored. Always pull the GCF out first.</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q3: The grouped binomials don't match — now what?</h3><p><em>Recheck the split (the two numbers) or the signs. If they still won't match, the trinomial may be prime.</em></p></div>
+</div>`)]);
+
+authored["5.4"] = L("5.4", "Features of Parabolas (Vertex, Axis of Symmetry, Intercepts)", [html(String.raw`<div class="lecture-box">
   <h1>🅿️ Features of Parabolas</h1>
   <p><strong>Overview.</strong> The graph of a quadratic \(y = ax^2 + bx + c\) is a <strong>parabola</strong>. Four features describe it completely: which way it opens, its <strong>axis of symmetry</strong>, its <strong>vertex</strong> (turning point), and its <strong>intercepts</strong>.</p>
   <h2>📌 The toolkit</h2>
@@ -969,7 +1003,7 @@ authored["5.3"] = L("5.3", "Features of Parabolas (Vertex, Axis of Symmetry, Int
   <div class="qa-box" ${QA}><h3>Q3: Why is vertex form handy?</h3><p><em>\(y = (x-h)^2 + k\) shows the vertex \((h, k)\) directly — no calculation needed.</em></p></div>
 </div>`)]);
 
-authored["5.4"] = L("5.4", "Solving Quadratics by Factoring and Square Roots", [html(String.raw`<div class="lecture-box">
+authored["5.5"] = L("5.5", "Solving Quadratics by Factoring and Square Roots", [html(String.raw`<div class="lecture-box">
   <h1>🎯 Solving Quadratics by Factoring &amp; Square Roots</h1>
   <p><strong>Overview.</strong> A quadratic can have up to <strong>two</strong> solutions (its roots). Two quick methods: the <strong>zero-product property</strong> after factoring, and taking <strong>square roots</strong> when there's no middle term.</p>
   <h2>📌 The toolkit</h2>
@@ -1001,7 +1035,7 @@ authored["5.4"] = L("5.4", "Solving Quadratics by Factoring and Square Roots", [
   <div class="qa-box" ${QA}><h3>Q3: What if \(x^2 = -9\)?</h3><p><em>No real solution — a real square can't be negative.</em></p></div>
 </div>`)]);
 
-authored["5.5"] = L("5.5", "Completing the Square & The Quadratic Formula", [html(String.raw`<div class="lecture-box">
+authored["5.6"] = L("5.6", "Completing the Square & The Quadratic Formula", [html(String.raw`<div class="lecture-box">
   <h1>🔑 Completing the Square &amp; The Quadratic Formula</h1>
   <p><strong>Overview.</strong> Not every quadratic factors nicely. Two methods solve <em>any</em> quadratic: <strong>completing the square</strong> and the <strong>quadratic formula</strong>. The <strong>discriminant</strong> then tells you how many real roots to expect — before you even finish.</p>
   <h2>📌 The toolkit</h2>

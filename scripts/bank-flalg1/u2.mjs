@@ -258,5 +258,5 @@ export default [
   { code: "2.4", gen: g24gf }, // General (Standard) Form
   { code: "2.5", gen: g23 },   // Converting Between Forms (was "Writing Linear Equations")
   { code: "2.6", gen: g24 },   // Parallel & Perpendicular (was 2.4)
-  { code: "5.6", gen: g25 },   // Function Transformations (moved to Chapter 5)
+  { code: "5.7", gen: g25 },   // Function Transformations (Chapter 5, shifted 5.6→5.7)
 ];

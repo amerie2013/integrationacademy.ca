@@ -23,22 +23,57 @@ function g51() {
   return q;
 }
 
-// ── 5.2 Factoring Trinomials ─────────────────────────────────
-function g52() {
+// ── 5.2 Factoring Trinomials when a = 1 ──────────────────────
+function g52a1() {
   const q = [];
-  for (let i = 0; i < 22; i++) { const p = ri(1, 7), r = ri(1, 7); const b = p + r, c = p * r; q.push(mcv(i < 8 ? "easy" : i < 16 ? "medium" : "hard", `Factor $x^2 + ${b}x + ${c}$.`, `$(x + ${p})(x + ${r})$`, [`$(x - ${p})(x - ${r})$`, `$(x + ${c})(x + 1)$`, `$(x + ${p})(x - ${r})$`])); }
-  for (let i = 0; i < 14; i++) { const p = ri(1, 6), r = ri(1, 6); const b = -(p + r), c = p * r; q.push(mcv(i < 7 ? "medium" : "hard", `Factor $x^2 ${sign(b)}x + ${c}$.`, `$(x - ${p})(x - ${r})$`, [`$(x + ${p})(x + ${r})$`, `$(x - ${p})(x + ${r})$`, `$(x - ${c})(x - 1)$`])); }
+  // positive roots
+  for (let i = 0; i < 18; i++) { const p = ri(1, 7), r = ri(1, 7); const b = p + r, c = p * r; q.push(mcv(i < 8 ? "easy" : i < 13 ? "medium" : "hard", `Factor $x^2 + ${b}x + ${c}$.`, `$(x + ${p})(x + ${r})$`, [`$(x - ${p})(x - ${r})$`, `$(x + ${c})(x + 1)$`, `$(x + ${p})(x - ${r})$`])); }
+  // negative middle, positive constant (both roots negative)
+  for (let i = 0; i < 10; i++) { const p = ri(1, 6), r = ri(1, 6); const b = -(p + r), c = p * r; q.push(mcv(i < 5 ? "medium" : "hard", `Factor $x^2 ${sign(b)}x + ${c}$.`, `$(x - ${p})(x - ${r})$`, [`$(x + ${p})(x + ${r})$`, `$(x - ${p})(x + ${r})$`, `$(x - ${c})(x - 1)$`])); }
+  // mixed signs (negative constant)
+  for (let i = 0; i < 10; i++) { let p = ri(1, 7), r = ri(1, 6); if (p === r) r++; const big = Math.max(p, r), small = Math.min(p, r); const b = big - small, c = big * small; q.push(mcv(i < 5 ? "medium" : "hard", `Factor $x^2 ${sign(b)}x - ${c}$.`, `$(x + ${big})(x - ${small})$`, [`$(x - ${big})(x + ${small})$`, `$(x + ${big})(x + ${small})$`, `$(x - ${big})(x - ${small})$`])); }
   q.push(mc("easy", "To factor $x^2 + bx + c$, find two numbers that…", ["multiply to c and add to b", "multiply to b and add to c", "are both b", "subtract to c"], 0));
   q.push(mcv("easy", "Factor $x^2 + 7x + 12$.", "$(x + 3)(x + 4)$", ["$(x + 2)(x + 6)$", "$(x + 12)(x + 1)$", "$(x - 3)(x - 4)$"]));
   q.push(mcv("easy", "Factor $x^2 - 5x + 6$.", "$(x - 2)(x - 3)$", ["$(x + 2)(x + 3)$", "$(x - 1)(x - 6)$", "$(x - 2)(x + 3)$"]));
   q.push(mcv("medium", "Factor $x^2 + 2x - 15$.", "$(x + 5)(x - 3)$", ["$(x - 5)(x + 3)$", "$(x + 15)(x - 1)$", "$(x + 5)(x + 3)$"]));
   q.push(mcv("medium", "Factor $x^2 - x - 12$.", "$(x - 4)(x + 3)$", ["$(x + 4)(x - 3)$", "$(x - 6)(x + 2)$", "$(x - 4)(x - 3)$"]));
-  q.push(mcv("hard", "Factor $2x^2 + 7x + 3$.", "$(2x + 1)(x + 3)$", ["$(2x + 3)(x + 1)$", "$(2x + 1)(x - 3)$", "$(x + 1)(x + 3)$"]));
-  q.push(mcv("hard", "Factor $3x^2 - 10x + 8$.", "$(3x - 4)(x - 2)$", ["$(3x - 2)(x - 4)$", "$(3x + 4)(x + 2)$", "$(3x - 4)(x + 2)$"]));
-  q.push(mcv("hard", "Factor $2x^2 + 5x + 2$.", "$(2x + 1)(x + 2)$", ["$(2x + 2)(x + 1)$", "$(2x + 1)(x - 2)$", "$(x + 1)(x + 2)$"]));
+  q.push(mcv("medium", "Factor the perfect square $x^2 + 6x + 9$.", "$(x + 3)^2$", ["$(x + 9)(x + 1)$", "$(x + 6)(x + 3)$", "$(x - 3)^2$"]));
+  q.push(mcv("hard", "Factor $x^2 - 10x + 25$.", "$(x - 5)^2$", ["$(x + 5)^2$", "$(x - 25)(x - 1)$", "$(x - 5)(x + 5)$"]));
+  q.push(tf("easy", "If $c > 0$ and $b > 0$, both numbers are positive.", true));
+  q.push(tf("medium", "If $c < 0$, the two numbers have opposite signs.", true));
+  q.push(tf("hard", "If no integer pair works, the trinomial is prime over the integers.", true));
+  q.push(fill("easy", "$x^2 + 5x + 6 = (x + 2)(x + \\text{___})$.", ["3"]));
+  return q;
+}
+
+// ── 5.3 Factoring Trinomials when a ≠ 1 (ac method) ──────────
+function g52an() {
+  const q = [];
+  const fbin = (m, p) => `${m === 1 ? "" : m}x ${p < 0 ? `- ${-p}` : `+ ${p}`}`;
+  const gcd = (x, y) => (y ? gcd(y, x % y) : Math.abs(x));
+  for (let i = 0; i < 24; i++) {
+    let m = ri(1, 3), n = ri(1, 3); if (m * n === 1) m = 2;   // ensure a ≠ 1
+    const p = rnz(1, 4), r = rnz(1, 4);
+    const a = m * n, b = m * r + n * p, c = p * r;
+    // each binomial must be primitive (no common factor) so the answer is fully factored
+    if (b === 0 || gcd(m, p) !== 1 || gcd(n, r) !== 1) { i--; continue; }
+    const prompt = `Factor $${a}x^2 ${sign(b)}x ${sign(c)}$.`;
+    const correct = `$(${fbin(m, p)})(${fbin(n, r)})$`;
+    q.push(mcv(i < 8 ? "easy" : i < 16 ? "medium" : "hard", prompt, correct,
+      [`$(${fbin(m, p)})(${fbin(n, -r)})$`, `$(${fbin(m, -p)})(${fbin(n, r)})$`, `$(${fbin(m, -p)})(${fbin(n, -r)})$`]));
+  }
+  q.push(mc("easy", "For $ax^2 + bx + c$ with $a \\neq 1$, the $ac$ method splits the middle using two numbers that multiply to…", ["ac", "a + c", "bc", "a/c"], 0));
+  q.push(mc("easy", "Before factoring $6x^2 + 15x + 6$, you should first…", ["factor out the GCF 3", "use the quadratic formula", "complete the square", "divide by x"], 0));
+  q.push(mcv("easy", "Factor $2x^2 + 7x + 3$.", "$(2x + 1)(x + 3)$", ["$(2x + 3)(x + 1)$", "$(2x + 1)(x - 3)$", "$(x + 1)(x + 3)$"]));
+  q.push(mcv("medium", "Factor $3x^2 - 10x + 8$.", "$(3x - 4)(x - 2)$", ["$(3x - 2)(x - 4)$", "$(3x + 4)(x + 2)$", "$(3x - 4)(x + 2)$"]));
+  q.push(mcv("medium", "Factor $2x^2 + 5x + 2$.", "$(2x + 1)(x + 2)$", ["$(2x + 2)(x + 1)$", "$(2x + 1)(x - 2)$", "$(x + 1)(x + 2)$"]));
+  q.push(mcv("medium", "Factor $6x^2 + 11x + 3$.", "$(3x + 1)(2x + 3)$", ["$(6x + 1)(x + 3)$", "$(3x + 3)(2x + 1)$", "$(3x + 1)(2x - 3)$"]));
   q.push(mcv("hard", "Factor $3x^2 + 7x - 6$.", "$(3x - 2)(x + 3)$", ["$(3x + 2)(x - 3)$", "$(3x - 3)(x + 2)$", "$(3x - 2)(x - 3)$"]));
-  q.push(tf("hard", "If no integer pair works, the trinomial is prime (over the integers).", true));
-  q.push(mc("hard", "For $ac$-method on $ax^2+bx+c$, you split the middle using two numbers that multiply to…", ["ac", "a+c", "bc", "a/c"], 0));
+  q.push(mcv("hard", "Factor $4x^2 - 4x - 3$.", "$(2x + 1)(2x - 3)$", ["$(2x - 1)(2x + 3)$", "$(4x + 1)(x - 3)$", "$(2x + 3)(2x - 1)$"]));
+  q.push(mcv("hard", "Factor completely $6x^2 + 15x + 6$.", "$3(2x + 1)(x + 2)$", ["$(6x + 3)(x + 2)$", "$3(2x + 2)(x + 1)$", "$(3x + 3)(2x + 2)$"]));
+  q.push(tf("medium", "When $ac < 0$, the two split numbers have opposite signs.", true));
+  q.push(tf("hard", "After grouping, the two leftover binomials must be identical.", true));
+  q.push(fill("hard", "For $2x^2 + 7x + 3$: $ac = $ ___.", ["6"]));
   return q;
 }
 
@@ -110,8 +145,9 @@ function g55() {
 
 export default [
   { code: "5.1", gen: g51 },
-  { code: "5.2", gen: g52 },
-  { code: "5.3", gen: g53 },
-  { code: "5.4", gen: g54 },
-  { code: "5.5", gen: g55 },
+  { code: "5.2", gen: g52a1 }, // Factoring Trinomials when a = 1
+  { code: "5.3", gen: g52an }, // Factoring Trinomials when a ≠ 1
+  { code: "5.4", gen: g53 },   // Features of Parabolas (was 5.3)
+  { code: "5.5", gen: g54 },   // Solving Quadratics (was 5.4)
+  { code: "5.6", gen: g55 },   // Completing the Square (was 5.5)
 ];
