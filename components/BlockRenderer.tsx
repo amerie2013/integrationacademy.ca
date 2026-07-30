@@ -8,6 +8,7 @@ import { ExpressionGraph } from "./ExpressionGraph";
 import { MultiGraph } from "./MultiGraph";
 import { AnimatedGraph } from "./AnimatedGraph";
 import { PointPlot } from "./PointPlot";
+import { EquationGame } from "./EquationGame";
 
 const CALLOUT_STYLES: Record<string, { bg: string; border: string; label: string }> = {
   note: { bg: "#eff6ff", border: "#bfdbfe", label: "Note" },
@@ -130,6 +131,21 @@ function renderBlock(b: Block) {
           showTable={b.showTable}
           showPlot={b.showPlot}
           bestFit={b.bestFit}
+          xMin={b.xMin}
+          xMax={b.xMax}
+          yMin={b.yMin}
+          yMax={b.yMax}
+          caption={b.caption}
+        />
+      );
+    case "equationgame":
+      return (
+        <EquationGame
+          solutionX={b.solutionX}
+          solutionLabel={b.solutionLabel}
+          states={b.states}
+          steps={b.steps}
+          check={b.check}
           xMin={b.xMin}
           xMax={b.xMax}
           yMin={b.yMin}

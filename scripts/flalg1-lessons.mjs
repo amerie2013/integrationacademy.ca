@@ -18,6 +18,11 @@ const graph2 = (expr, p1, p2, o = {}) => ({
   caption: o.caption ?? "",
 });
 
+// Interactive equation-solver game block (pick-the-move + stacking worked
+// solution + graph check). Rendered by components/EquationGame.tsx.
+let _eg = 0;
+const eqGame = (spec) => ({ id: `alg1eg_${_eg++}`, type: "equationgame", xMin: -1, xMax: 8, yMin: -3, yMax: 21, caption: "", ...spec });
+
 export const authored = {};
 
 authored["1.1"] = L("1.1", "Multi-Step Equations in One Variable", [html(String.raw`<div class="lecture-box">
@@ -35,6 +40,39 @@ authored["1.1"] = L("1.1", "Multi-Step Equations in One Variable", [html(String.
   <p>Solving \(m\,x - 6 = 0\) means finding where \(y = m\,x - 6\) crosses the \(x\)-axis. Slide the coefficient <strong>m</strong> and watch the solution move.</p>
 </div>`),
   graph("m*x - 6", "m", { xMin: -2, xMax: 8, yMin: -8, yMax: 8, paramMin: 1, paramMax: 6, paramInit: 2, caption: "y = m·x − 6 : the solution of m·x = 6 is the x-intercept (x = 6/m), which shifts as the coefficient changes." }),
+  html(String.raw`<div class="lecture-box">
+  <h2>🎮 Try it — solve Example 1 yourself</h2>
+  <p>Pick the smartest next move to build the solution to <strong>4x + 3 − x = 18</strong>, one line at a time. The graph underneath checks every step: the two sides shift, but their crossing point never leaves the answer — proof each move is legal.</p>
+</div>`),
+  eqGame({
+    solutionX: 5,
+    solutionLabel: "x = 5",
+    states: [
+      { eq: "4x + 3 − x = 18", L: { m: 3, b: 3 }, R: { m: 0, b: 18 } },
+      { eq: "3x + 3 = 18", L: { m: 3, b: 3 }, R: { m: 0, b: 18 } },
+      { eq: "3x = 15", L: { m: 3, b: 0 }, R: { m: 0, b: 15 } },
+      { eq: "x = 5", L: { m: 1, b: 0 }, R: { m: 0, b: 5 } },
+    ],
+    steps: [
+      { prompt: "What's the best first move?", opts: [
+        { t: "Combine like terms", log: "combine like terms", ok: true },
+        { t: "Subtract 3 from both sides", ok: false, why: "Tidy up the like terms (4x − x) first." },
+        { t: "Divide both sides by 4", ok: false, why: "There isn't a single 4x term yet — combine 4x − x first." },
+      ] },
+      { prompt: "Now isolate the x-term:", opts: [
+        { t: "Subtract 3 from both sides", log: "subtract 3 from both sides", ok: true },
+        { t: "Divide both sides by 3", ok: false, why: "Clear the + 3 first, or you'd have to divide it too." },
+        { t: "Add 3 to both sides", ok: false, why: "Wrong direction — that gives 3x + 6 = 21." },
+      ] },
+      { prompt: "Last step — undo the ×3:", opts: [
+        { t: "Divide both sides by 3", log: "divide both sides by 3", ok: true },
+        { t: "Subtract 3 from both sides", ok: false, why: "The 3 is multiplying x, so undo it by dividing, not subtracting." },
+        { t: "Multiply both sides by 3", ok: false, why: "That makes it bigger: 9x = 45." },
+      ] },
+    ],
+    check: "4(5) + 3 − 5 = 18",
+    xMin: -1, xMax: 8, yMin: -3, yMax: 21,
+  }),
   html(String.raw`<div class="lecture-box">
   <h2>🔵 Examples</h2>
   <div class="example-box" ${EX}><h3>Example 1: Combine like terms, then two steps</h3>

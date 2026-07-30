@@ -12,7 +12,8 @@ export type BlockType =
   | "animation"
   | "video"
   | "callout"
-  | "pointset";
+  | "pointset"
+  | "equationgame";
 
 export type Block =
   | { id: string; type: "html"; html: string }
@@ -88,6 +89,20 @@ export type Block =
       yMin: number;
       yMax: number;
       caption?: string;
+    }
+  | {
+      id: string;
+      type: "equationgame";
+      solutionX: number;
+      solutionLabel: string; // e.g. "x = 5"
+      states: { eq: string; L: { m: number; b: number }; R: { m: number; b: number } }[];
+      steps: { prompt: string; opts: { t: string; log?: string; ok: boolean; why?: string }[] }[];
+      check: string; // substitution check, e.g. "4(5) + 3 − 5 = 18"
+      xMin: number;
+      xMax: number;
+      yMin: number;
+      yMax: number;
+      caption?: string;
     };
 
 export const BLOCK_LABELS: Record<BlockType, string> = {
@@ -102,6 +117,7 @@ export const BLOCK_LABELS: Record<BlockType, string> = {
   video: "Video embed",
   callout: "Callout box",
   pointset: "Data table + points plot",
+  equationgame: "Equation solver game (+ graph check)",
 };
 
 let counter = 0;
@@ -227,6 +243,42 @@ export function newBlock(type: BlockType): Block {
         xMax: 6,
         yMin: 0,
         yMax: 10,
+        caption: "",
+      };
+    case "equationgame":
+      return {
+        id: uid(),
+        type,
+        solutionX: 5,
+        solutionLabel: "x = 5",
+        states: [
+          { eq: "4x + 3 − x = 18", L: { m: 3, b: 3 }, R: { m: 0, b: 18 } },
+          { eq: "3x + 3 = 18", L: { m: 3, b: 3 }, R: { m: 0, b: 18 } },
+          { eq: "3x = 15", L: { m: 3, b: 0 }, R: { m: 0, b: 15 } },
+          { eq: "x = 5", L: { m: 1, b: 0 }, R: { m: 0, b: 5 } },
+        ],
+        steps: [
+          { prompt: "What's the best first move?", opts: [
+            { t: "Combine like terms", log: "combine like terms", ok: true },
+            { t: "Subtract 3 from both sides", ok: false, why: "Tidy up the like terms (4x − x) first." },
+            { t: "Divide both sides by 4", ok: false, why: "There isn't a single 4x term yet — combine 4x − x first." },
+          ] },
+          { prompt: "Now isolate the x-term:", opts: [
+            { t: "Subtract 3 from both sides", log: "subtract 3 from both sides", ok: true },
+            { t: "Divide both sides by 3", ok: false, why: "Clear the + 3 first for clean numbers." },
+            { t: "Add 3 to both sides", ok: false, why: "Wrong direction — that gives 3x + 6 = 21." },
+          ] },
+          { prompt: "Last step — undo the ×3:", opts: [
+            { t: "Divide both sides by 3", log: "divide both sides by 3", ok: true },
+            { t: "Subtract 3 from both sides", ok: false, why: "The 3 is multiplying x, so undo it by dividing." },
+            { t: "Multiply both sides by 3", ok: false, why: "That makes it bigger: 9x = 45." },
+          ] },
+        ],
+        check: "4(5) + 3 − 5 = 18",
+        xMin: -1,
+        xMax: 8,
+        yMin: -3,
+        yMax: 21,
         caption: "",
       };
   }
