@@ -77,7 +77,7 @@ const subjects = [
   sk("5.4", "Features of Parabolas (Vertex, Axis of Symmetry, Intercepts)", "Read the key features of a parabola from its graph and equation.", ["Vertex and axis of symmetry", "$x$-intercepts (roots) and the $y$-intercept", "Direction of opening and width"]),
   sk("5.5", "Solving Quadratics by Factoring and Square Roots", "Solve quadratic equations using the zero-product property or by taking square roots.", ["The zero-product property", "Solving by factoring", "Solving $x^{2}=k$ by square roots"]),
   sk("5.6", "Completing the Square & The Quadratic Formula", "Solve any quadratic by completing the square or with the quadratic formula, and use the discriminant to predict the number of solutions.", ["Completing the square", "The quadratic formula $x=\\dfrac{-b\\pm\\sqrt{b^{2}-4ac}}{2a}$", "The discriminant $b^{2}-4ac$ and the number of roots"]),
-  sk("5.7", "Function Transformations: $f(x)+k$, $kf(x)$, $f(x+k)$", "See how simple changes to a function's rule shift, stretch, or slide the graph of a quadratic.", ["Vertical shifts: $f(x)+k$", "Vertical stretches and compressions: $kf(x)$", "Horizontal shifts: $f(x+k)$"]),
+  sk("5.7", "Function Transformations: $f(x)+k$, $kf(x)$, $f(x-h)$", "See how simple changes to a function's rule shift, stretch, or slide the graph of a quadratic.", ["Vertical shifts: $f(x)+k$", "Vertical stretches and compressions: $kf(x)$", "Horizontal shifts: $f(x-h)$"]),
 
   // CHAPTER 6 — Exponential Functions & Bivariate Data
   sk("6.1", "Exponential Growth and Decay Models", "Build and use exponential models of the form $y=a\\,b^{x}$ for growth and decay.", ["Exponential form $y=a\\,b^{x}$", "Growth ($b>1$) vs. decay ($0<b<1$)", "Applied growth and decay problems"]),

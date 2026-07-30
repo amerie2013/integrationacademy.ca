@@ -160,7 +160,7 @@ function g25() {
   q.push(mc("easy", "$f(x) - 5$ shifts the graph…", ["down 5", "up 5", "left 5", "right 5"], 0));
   q.push(tf("easy", "$kf(x)$ is a vertical stretch or compression.", true));
   q.push(mc("easy", "$2f(x)$ makes the graph…", ["taller (stretch)", "shorter", "shifted left", "shifted up"], 0));
-  q.push(mc("easy", "$f(x + k)$ shifts the graph…", ["horizontally", "vertically", "not at all", "diagonally"], 0));
+  q.push(mc("easy", "$f(x - h)$ shifts the graph…", ["horizontally", "vertically", "not at all", "diagonally"], 0));
   q.push(tf("easy", "$f(x - 2)$ shifts the graph right 2.", true));
   q.push(mc("easy", "$-f(x)$ reflects the graph over the…", ["$x$-axis", "$y$-axis", "line $y = x$", "origin only"], 0));
   q.push(mc("medium", "$f(x + 3)$ shifts the graph…", ["left 3", "right 3", "up 3", "down 3"], 0, "Inside changes act opposite to their sign."));

@@ -468,7 +468,7 @@ authored["2.6"] = L("2.6", "Parallel and Perpendicular Lines on the Coordinate P
   <div class="qa-box" ${QA}><h3>Q3: What's perpendicular to a horizontal line?</h3><p><em>A vertical line — \(y=k\) is perpendicular to \(x=c\).</em></p></div>
 </div>`)]);
 
-authored["5.7"] = L("5.7", "Function Transformations: f(x)+k, kf(x), f(x+k)", [
+authored["5.7"] = L("5.7", "Function Transformations: f(x)+k, kf(x), f(x-h)", [
   html(String.raw`<div class="lecture-box">
   <h1>🔀 Function Transformations</h1>
   <p><strong>Overview.</strong> Small changes to a function's rule move its graph in predictable ways. Learn three building blocks — <strong>shift</strong>, <strong>stretch</strong>, and <strong>slide</strong> — and you can transform <em>any</em> graph without plotting a single point.</p>
@@ -476,7 +476,7 @@ authored["5.7"] = L("5.7", "Function Transformations: f(x)+k, kf(x), f(x+k)", [
   <ul>
     <li><strong>\(f(x) + k\) — vertical shift:</strong> <strong>up</strong> by \(k\) (down if \(k&lt;0\)). The change is <em>outside</em> the function, so it moves the graph the same way as its sign.</li>
     <li><strong>\(k\,f(x)\) — vertical stretch:</strong> by factor \(k\). \(|k|&gt;1\) makes it taller/narrower, \(0&lt;|k|&lt;1\) shorter/wider, and \(k&lt;0\) flips it over the \(x\)-axis.</li>
-    <li><strong>\(f(x + k)\) — horizontal shift:</strong> <strong>left</strong> by \(k\) (right if \(k&lt;0\)). The change is <em>inside</em>, so it moves the graph the <em>opposite</em> way to its sign — the classic surprise.</li>
+    <li><strong>\(f(x - h)\) — horizontal shift:</strong> <strong>right</strong> by \(h\) (left if \(h&lt;0\)). The change is <em>inside</em>, so it moves the graph the <em>opposite</em> way to the sign you see — writing it as \(x - h\) lines the shift up with the vertex at \(x = h\).</li>
   </ul>
   <table style="border-collapse:collapse;margin:10px 0;font-size:15px;"><thead><tr><th style="border:1px solid #cbd5e1;padding:6px 12px;background:#f1f5f9;">Change</th><th style="border:1px solid #cbd5e1;padding:6px 12px;background:#f1f5f9;">Effect</th><th style="border:1px solid #cbd5e1;padding:6px 12px;background:#f1f5f9;">Moves the vertex of \(x^2\) to</th></tr></thead><tbody>
   <tr><td style="border:1px solid #cbd5e1;padding:6px 12px;">\(x^2 + k\)</td><td style="border:1px solid #cbd5e1;padding:6px 12px;">up/down</td><td style="border:1px solid #cbd5e1;padding:6px 12px;">\((0,\,k)\)</td></tr>
@@ -495,7 +495,7 @@ authored["5.7"] = L("5.7", "Function Transformations: f(x)+k, kf(x), f(x+k)", [
   <div class="example-box" ${EX}><h3>Example 1: Vertical shift up</h3><p>Describe \(g(x) = x^2 + 3\) relative to \(f(x) = x^2\).</p><div class="solution"><div class="step"><strong>Form \(f(x)+k\) with \(k=3\):</strong> shift up.</div><em>Conclusion: the parabola moves up 3 units. ✓</em></div></div>
   <div class="example-box" ${EX}><h3>Example 2: Vertical shift down</h3><p>Describe \(g(x) = x^2 - 2\) relative to \(f(x)=x^2\).</p><div class="solution"><div class="step"><strong>\(k=-2\):</strong> shift down.</div><em>Conclusion: down 2 units. ✓</em></div></div>
   <div class="example-box" ${EX}><h3>Example 3: Vertical stretch</h3><p>Describe \(g(x) = 2f(x)\) where \(f(x)=x^2\).</p><div class="solution"><div class="step"><strong>\(k=2\):</strong> every output doubles.</div><em>Conclusion: a vertical stretch by factor 2 (the parabola gets narrower). ✓</em></div></div>
-  <div class="example-box" ${EX}><h3>Example 4: Horizontal shift (the tricky sign)</h3><p>How does \(g(x) = f(x + 3)\) move \(f\)?</p><div class="solution"><div class="step"><strong>Inside \(+3\):</strong> the graph shifts the <em>opposite</em> way.</div><em>Conclusion: shift <strong>left</strong> 3 units. ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 4: Horizontal shift \(f(x - h)\)</h3><p>How does \(g(x) = f(x - 3)\) move \(f\)?</p><div class="solution"><div class="step"><strong>Match \(f(x - h)\) with \(h = 3\):</strong> shift right by \(h\).</div><em>Conclusion: shift <strong>right</strong> 3 units. ✓ (Careful: \(f(x + 3)\) would go the other way — left 3.)</em></div></div>
   <div class="example-box" ${EX}><h3>Example 5: Combine transformations</h3><p>Describe \(g(x) = (x - 1)^2 + 2\) from \(f(x) = x^2\).</p><div class="solution"><div class="step"><strong>\((x-1)\):</strong> right 1. <strong>\(+2\):</strong> up 2.</div><em>Conclusion: vertex moves from \((0,0)\) to \((1,2)\). ✓</em></div></div>
   <h2>🟡 Practice Questions</h2>
   <div class="practice-box" ${PR}><h3>Question 1</h3><p>Describe \(g(x) = x^2 + 5\) from \(f(x)=x^2\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Up 5.</em></div></div></details></div>
@@ -504,7 +504,7 @@ authored["5.7"] = L("5.7", "Function Transformations: f(x)+k, kf(x), f(x+k)", [
   <div class="practice-box" ${PR}><h3>Question 4</h3><p>Which way does \(g(x) = f(x - 2)\) shift the graph?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Right 2.</em></div></div></details></div>
   <div class="practice-box" ${PR}><h3>Question 5</h3><p>Where is the vertex of \(g(x) = (x + 3)^2 - 1\)?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\((-3, -1)\).</em></div></div></details></div>
   <h2>❓ Q&amp;A Summary</h2>
-  <div class="qa-box" ${QA}><h3>Q1: Why does \(f(x+3)\) go <em>left</em>?</h3><p><em>The input reaches its value 3 units sooner, so the whole graph slides left — inside changes act opposite to their sign.</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q1: Which way does \(f(x - h)\) shift?</h3><p><em>Right by \(h\) — writing it as \(x - h\) matches the vertex at \(x = h\). (So \(f(x + 3) = f(x - (-3))\) has \(h = -3\) and slides <strong>left</strong> 3 — inside changes act opposite to the sign you see.)</em></p></div>
   <div class="qa-box" ${QA}><h3>Q2: Stretch or compression?</h3><p><em>\(|k|&gt;1\) stretches (taller/narrower); \(0&lt;|k|&lt;1\) compresses (shorter/wider).</em></p></div>
   <div class="qa-box" ${QA}><h3>Q3: What does a negative \(k\) in \(kf(x)\) do?</h3><p><em>It reflects the graph over the \(x\)-axis (flips it upside down).</em></p></div>
 </div>`),
