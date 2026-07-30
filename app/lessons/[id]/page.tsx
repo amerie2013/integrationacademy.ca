@@ -11,6 +11,7 @@ import { MaterialsPanel } from "../../../components/MaterialsPanel";
 import { fetchMaterials } from "../../../lib/materials";
 import { Block } from "../../../lib/blocks";
 import { TutorChat } from "../../../components/TutorChat";
+import { accentFor, accentClass } from "../../../lib/courseAccent";
 
 export default function LessonViewPage() {
   const params = useParams();
@@ -21,6 +22,7 @@ export default function LessonViewPage() {
   const [pdfUrl, setPdfUrl] = useState("");
   const [pdfName, setPdfName] = useState("");
   const [courseId, setCourseId] = useState("");
+  const [courseCode, setCourseCode] = useState<string | null>(null);
   const [notFound, setNotFound] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [hasMaterials, setHasMaterials] = useState(false);
@@ -42,6 +44,10 @@ export default function LessonViewPage() {
         setTitle(data.title ?? "");
         setBlocks(Array.isArray(data.blocks) ? (data.blocks as Block[]) : []);
         setCourseId(data.course_id ?? "");
+        if (data.course_id) {
+          const { data: c } = await supabase.from("courses").select("code").eq("id", data.course_id).single();
+          setCourseCode(c?.code ?? null);
+        }
       }
       // best-effort: pdf_url column may not exist yet (migration optional)
       const { data: pdf } = await supabase.from("lessons").select("pdf_url, pdf_name").eq("id", lessonId).single();
@@ -74,10 +80,12 @@ export default function LessonViewPage() {
     setProgBusy(false);
   }
 
+  const t = accentFor(courseCode);
+
   return (
     <main style={{ minHeight: "100vh" }}>
       <SiteHeader />
-      <article style={{ maxWidth: 760, margin: "0 auto", padding: "44px 28px" }}>
+      <article className={accentClass(courseCode)} style={{ maxWidth: 760, margin: "0 auto", padding: "44px 28px" }}>
         {courseId && <Link href={`/courses/${courseId}`} style={{ color: "#64748b", fontWeight: 600, fontSize: 14, textDecoration: "none", display: "inline-block", marginBottom: 16 }}>← Back to course</Link>}
         {loading ? (
           <p style={{ color: "#64748b" }}>Loading…</p>
@@ -88,14 +96,14 @@ export default function LessonViewPage() {
             <div style={{ display: "flex", justifyContent: "flex-end", gap: 10, marginBottom: 12 }}>
               <Link
                 href={`/lessons/${lessonId}/slides`}
-                style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "#0d9488", color: "#fff", padding: "9px 18px", borderRadius: 9, textDecoration: "none", fontWeight: 700, fontSize: 14 }}
+                style={{ display: "inline-flex", alignItems: "center", gap: 6, background: t.badge, color: "#fff", padding: "9px 18px", borderRadius: 9, textDecoration: "none", fontWeight: 700, fontSize: 14 }}
               >
                 ▶ Present (slides)
               </Link>
               {isAdmin && (
                 <Link
                   href={`/teacher/lessons/${lessonId}`}
-                  style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "#1b7a44", color: "#fff", padding: "9px 18px", borderRadius: 9, textDecoration: "none", fontWeight: 700, fontSize: 14 }}
+                  style={{ display: "inline-flex", alignItems: "center", gap: 6, background: t.primary, color: "#fff", padding: "9px 18px", borderRadius: 9, textDecoration: "none", fontWeight: 700, fontSize: 14 }}
                 >
                   ✏️ Edit lesson
                 </Link>
@@ -120,8 +128,8 @@ export default function LessonViewPage() {
                       style={{
                         display: "inline-flex", alignItems: "center", gap: 8, cursor: progBusy ? "default" : "pointer",
                         padding: "11px 22px", borderRadius: 999, fontWeight: 700, fontSize: 15,
-                        border: completed ? "1px solid #1b7a44" : "1px solid #cbd5e1",
-                        background: completed ? "#1b7a44" : "#fff",
+                        border: completed ? `1px solid ${t.primary}` : "1px solid #cbd5e1",
+                        background: completed ? t.primary : "#fff",
                         color: completed ? "#fff" : "#334155",
                       }}
                     >

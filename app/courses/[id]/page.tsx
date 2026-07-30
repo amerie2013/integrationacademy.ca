@@ -7,6 +7,7 @@ import { supabase } from "../../../lib/supabase";
 import { SiteHeader } from "../../../components/SiteHeader";
 import { levelLabel } from "../../../lib/theme";
 import { getSubscriptionInfo } from "../../../lib/subscription";
+import { accentFor } from "../../../lib/courseAccent";
 
 type Course = { id: string; code: string | null; title: string; description: string | null; level: string | null };
 type Lesson = { id: string; title: string; position: number };
@@ -215,7 +216,7 @@ export default function StudentCoursePage() {
   ].sort((x, y) => x.code[0] - y.code[0] || x.code[1] - y.code[1] || KIND[x.kind] - KIND[y.kind]);
 
   // Per-course accent — keyed by course code (e.g. ALG1 = Florida orange 🍊).
-  const t = ACCENTS[CODE_ACCENT[course.code ?? ""] ?? "default"];
+  const t = accentFor(course.code);
 
   return (
     <main style={{ minHeight: "100vh" }}>
@@ -292,7 +293,7 @@ export default function StudentCoursePage() {
               {content.length === 0 ? <Empty>No content published yet.</Empty> : content.map((it) => (
                 <Link key={it.kind + it.id} href={it.href} style={rowLink}>
                   <span style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                    <span style={badgeStyle[it.kind]}>{badgeLabel[it.kind]}</span>
+                    <span style={it.kind === "lesson" ? badgeBase(t.soft, t.dark) : badgeStyle[it.kind]}>{badgeLabel[it.kind]}</span>
                     <span>{it.title}</span>
                   </span>
                   <span style={{ display: "flex", gap: 12, alignItems: "center" }}>
@@ -301,7 +302,7 @@ export default function StudentCoursePage() {
                     {it.kind === "quiz" && bestScores[it.id] != null && (
                       <span style={{ fontSize: 13, fontWeight: 700, color: "#059669", background: "#ecfdf5", padding: "3px 9px", borderRadius: 999 }}>Best {bestScores[it.id]}%</span>
                     )}
-                    <span style={{ color: "#1b7a44", fontWeight: 700, fontSize: 14 }}>
+                    <span style={{ color: t.primary, fontWeight: 700, fontSize: 14 }}>
                       {it.kind === "worksheet" ? "📄 Open →" : it.kind === "assignment" ? "Open →" : it.kind === "quiz" ? (bestScores[it.id] != null ? "Review →" : "Start →") : "Read →"}
                     </span>
                   </span>
@@ -335,14 +336,6 @@ function BuyBtn({ children, onClick, busy, primary }: { children: React.ReactNod
     }}>{busy ? "Starting…" : children}</button>
   );
 }
-// Per-course accent palettes. Default is the site green/teal; extend CODE_ACCENT
-// to give a course its own colour (ALG1 → Florida orange 🍊).
-const ACCENTS = {
-  default: { primary: "#1b7a44", dark: "#0d5c30", soft: "#e7f6ec", softBorder: "#bfe3cd", badge: "#0d9488", badgeBg: "#ecfdf5" },
-  orange: { primary: "#ea580c", dark: "#9a3412", soft: "#fff7ed", softBorder: "#fed7aa", badge: "#ea580c", badgeBg: "#fff7ed" },
-} as const;
-const CODE_ACCENT: Record<string, keyof typeof ACCENTS> = { ALG1: "orange" };
-
 const buyCard: React.CSSProperties = { background: "#fff", border: "1px solid #fed7aa", borderRadius: 12, padding: "14px 16px" };
 const buyLabel: React.CSSProperties = { fontSize: 12, fontWeight: 800, color: "#9a3412", textTransform: "uppercase", letterSpacing: "0.04em", marginBottom: 10 };
 const badgeBase = (bg: string, fg: string): React.CSSProperties => ({ fontSize: 10.5, fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.04em", color: fg, background: bg, padding: "3px 8px", borderRadius: 999, whiteSpace: "nowrap", minWidth: 78, textAlign: "center" });

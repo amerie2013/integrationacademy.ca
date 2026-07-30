@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { supabase } from "../../lib/supabase";
 import { SiteHeader } from "../../components/SiteHeader";
 import { levelLabel } from "../../lib/theme";
+import { accentFor } from "../../lib/courseAccent";
 
 type Course = {
   id: string;
@@ -73,13 +74,14 @@ export default function CourseCatalogPage() {
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: 18 }}>
             {courses.map((c) => {
               const isEnrolled = enrolledIds.has(c.id);
+              const t = accentFor(c.code);
               return (
                 <div key={c.id} style={{ background: "#fff", border: "1px solid #e2e8f0", borderRadius: 16, padding: 22, display: "flex", flexDirection: "column" }}>
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
                     {c.code ? (
-                      <span style={{ fontFamily: "JetBrains Mono, monospace", color: "#1b7a44", fontWeight: 700, fontSize: 13 }}>{c.code}</span>
+                      <span style={{ fontFamily: "JetBrains Mono, monospace", color: t.primary, fontWeight: 700, fontSize: 13 }}>{c.code}</span>
                     ) : <span />}
-                    <span style={{ fontSize: 12, fontWeight: 700, color: "#0d9488", background: "#ecfdf5", padding: "3px 9px", borderRadius: 999 }}>
+                    <span style={{ fontSize: 12, fontWeight: 700, color: t.badge, background: t.badgeBg, padding: "3px 9px", borderRadius: 999 }}>
                       {levelLabel(c.level)}
                     </span>
                   </div>
@@ -87,7 +89,7 @@ export default function CourseCatalogPage() {
                   {c.description && <p style={{ color: "#64748b", fontSize: 14, lineHeight: 1.5, margin: "0 0 16px", flex: 1 }}>{c.description}</p>}
                   <div style={{ display: "flex", gap: 10, marginTop: "auto" }}>
                     {isEnrolled ? (
-                      <Link href={`/courses/${c.id}`} style={{ flex: 1, textAlign: "center", background: "#1b7a44", color: "#fff", padding: "10px", borderRadius: 9, textDecoration: "none", fontWeight: 700, fontSize: 14 }}>
+                      <Link href={`/courses/${c.id}`} style={{ flex: 1, textAlign: "center", background: t.primary, color: "#fff", padding: "10px", borderRadius: 9, textDecoration: "none", fontWeight: 700, fontSize: 14 }}>
                         Open course →
                       </Link>
                     ) : (
@@ -95,7 +97,7 @@ export default function CourseCatalogPage() {
                         <Link href={`/courses/${c.id}`} style={{ background: "#fff", color: "#0f172a", padding: "10px 14px", borderRadius: 9, textDecoration: "none", fontWeight: 700, fontSize: 14, border: "1px solid #cbd5e1" }}>
                           Details
                         </Link>
-                        <button onClick={() => enroll(c.id)} disabled={busy === c.id} style={{ flex: 1, background: "#0d9488", color: "#fff", border: "none", padding: "10px", borderRadius: 9, fontWeight: 700, fontSize: 14, cursor: "pointer" }}>
+                        <button onClick={() => enroll(c.id)} disabled={busy === c.id} style={{ flex: 1, background: t.badge, color: "#fff", border: "none", padding: "10px", borderRadius: 9, fontWeight: 700, fontSize: 14, cursor: "pointer" }}>
                           {busy === c.id ? "Enrolling…" : "Enroll"}
                         </button>
                       </>

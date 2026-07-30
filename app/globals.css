@@ -86,6 +86,19 @@ h3 {
   font-weight: 800;
   margin: 0 0 8px;
 }
+
+/* Per-course accent overrides (see lib/courseAccent). An `accent-orange`
+   ancestor (set by the lesson/slides page) recolours the lecture banner and
+   headings; the default green is used everywhere else. */
+.accent-orange .lecture-box h1 {
+  background: linear-gradient(135deg, #9a3412 0%, #ea580c 50%, #f59e0b 100%);
+  box-shadow: 0 14px 34px rgba(234, 88, 12, 0.32);
+}
+.accent-orange .lecture-box h2 {
+  color: #9a3412;
+  border-image: linear-gradient(90deg, #ea580c, #f59e0b) 1;
+}
+.accent-orange .lecture-box h3 { color: #9a3412; }
 /* coloured boxes — themed even when the content omits inline styles
    (Grade 9/10 lessons set these inline, which still take precedence). */
 .lecture-box .example-box { background-color: #e6f3ff; border-left: 5px solid #4a90e2; padding: 10px 14px; margin: 12px 0; border-radius: 6px; }

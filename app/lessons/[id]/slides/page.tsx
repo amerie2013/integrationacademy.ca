@@ -5,6 +5,7 @@ import { useParams } from "next/navigation";
 import { supabase } from "../../../../lib/supabase";
 import { SlideDeck } from "../../../../components/SlideDeck";
 import { Block } from "../../../../lib/blocks";
+import { accentClass } from "../../../../lib/courseAccent";
 
 export default function LessonSlidesPage() {
   const params = useParams();
@@ -12,19 +13,24 @@ export default function LessonSlidesPage() {
   const [loading, setLoading] = useState(true);
   const [title, setTitle] = useState("");
   const [blocks, setBlocks] = useState<Block[]>([]);
+  const [courseCode, setCourseCode] = useState<string | null>(null);
   const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
     (async () => {
       const { data } = await supabase
         .from("lessons")
-        .select("title, blocks")
+        .select("title, blocks, course_id")
         .eq("id", lessonId)
         .single();
       if (!data) setNotFound(true);
       else {
         setTitle(data.title ?? "");
         setBlocks(Array.isArray(data.blocks) ? (data.blocks as Block[]) : []);
+        if (data.course_id) {
+          const { data: c } = await supabase.from("courses").select("code").eq("id", data.course_id).single();
+          setCourseCode(c?.code ?? null);
+        }
       }
       setLoading(false);
     })();
@@ -43,5 +49,5 @@ export default function LessonSlidesPage() {
       </main>
     );
 
-  return <SlideDeck title={title} blocks={blocks} />;
+  return <div className={accentClass(courseCode)}><SlideDeck title={title} blocks={blocks} /></div>;
 }
