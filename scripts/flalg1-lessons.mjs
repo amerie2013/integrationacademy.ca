@@ -693,14 +693,48 @@ authored["4.2"] = L("4.2", "Operations with Radical Expressions", [html(String.r
   <div class="qa-box" ${QA}><h3>Q3: Why rationalize the denominator?</h3><p><em>It's the standard tidy form — no roots left downstairs — and makes further computation easier.</em></p></div>
 </div>`)]);
 
-authored["4.3"] = L("4.3", "Addition, Subtraction, and Multiplication of Polynomials", [html(String.raw`<div class="lecture-box">
-  <h1>➗ Adding, Subtracting &amp; Multiplying Polynomials</h1>
-  <p><strong>Overview.</strong> A <strong>polynomial</strong> is a sum of terms like \(3x^2 - 5x + 4\). Adding and subtracting is just <strong>combining like terms</strong>; multiplying is the <strong>distributive property</strong> applied carefully (FOIL is the two-binomial case).</p>
+authored["4.3"] = L("4.3", "Adding and Subtracting Polynomials", [html(String.raw`<div class="lecture-box">
+  <h1>➕➖ Adding and Subtracting Polynomials</h1>
+  <p><strong>Overview.</strong> A <strong>polynomial</strong> is a sum of terms like \(3x^2 - 5x + 4\). Adding or subtracting them is nothing new — it's just <strong>combining like terms</strong>. The one place students slip is subtraction: the minus sign must be distributed to <em>every</em> term it touches.</p>
   <h2>📌 The toolkit</h2>
   <ul>
     <li><strong>Like terms</strong> share the same variable and exponent (\(3x^2\) and \(-5x^2\)); only like terms combine.</li>
-    <li><strong>Subtracting</strong> means adding the opposite — distribute the minus sign to <em>every</em> term.</li>
-    <li><strong>Multiplying:</strong> distribute each term of one factor across the other; <strong>FOIL</strong> (First-Outer-Inner-Last) for two binomials.</li>
+    <li><strong>Adding:</strong> drop the brackets and add the coefficients of matching terms.</li>
+    <li><strong>Subtracting</strong> means adding the opposite — distribute the minus sign to <em>every</em> term of the second polynomial, then combine.</li>
+    <li><strong>Line up by degree</strong> (\(x^2\), then \(x\), then the constant) to avoid missing a term.</li>
+  </ul>
+  <h2>🎬 A sum of polynomials is another polynomial</h2>
+  <p>Adding \((x^2 - 3) + (x + a)\) gives \(x^2 + x + (a - 3)\). Slide <strong>a</strong>: the whole parabola slides up or down as the constant term changes, but its shape never does.</p>
+</div>`),
+  graph("(x^2 - 3) + (x + a)", "a", { xMin: -5, xMax: 5, yMin: -8, yMax: 12, paramMin: -3, paramMax: 6, paramInit: 0, caption: "y = (x² − 3) + (x + a) = x² + x + (a − 3) : combining like terms just changes the constant, sliding the sum vertically." }),
+  html(String.raw`<div class="lecture-box">
+  <h2>🔵 Examples</h2>
+  <div class="example-box" ${EX}><h3>Example 1: Add two trinomials</h3><p>Add \((3x^2 + 2x - 1) + (x^2 - 5x + 4)\).</p><div class="solution"><div class="step"><strong>Combine like terms:</strong> \((3+1)x^2 + (2-5)x + (-1+4)\).</div><em>Conclusion: \(4x^2 - 3x + 3\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 2: Add with a missing term</h3><p>Add \((2x^2 + x) + (3x^2 - 4x + 2)\).</p><div class="solution"><div class="step"><strong>The first has no constant</strong> — treat it as \(+0\): \((2+3)x^2 + (1-4)x + 2\).</div><em>Conclusion: \(5x^2 - 3x + 2\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 3: Subtract polynomials</h3><p>Subtract \((5x^2 - 3x) - (2x^2 + x - 4)\).</p><div class="solution"><div class="step"><strong>Distribute the minus:</strong> \(5x^2 - 3x - 2x^2 - x + 4\).</div><div class="step"><strong>Combine:</strong> \(3x^2 - 4x + 4\).</div><em>Conclusion: \(3x^2 - 4x + 4\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 4: The sign trap</h3><p>Subtract \((4x^2 - 2x + 1) - (x^2 - 3x)\).</p><div class="solution"><div class="step"><strong>Flip every sign in the second:</strong> \(4x^2 - 2x + 1 - x^2 + 3x\).</div><div class="step"><strong>Combine:</strong> \(3x^2 + x + 1\).</div><em>Conclusion: \(3x^2 + x + 1\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 5: Combine with coefficients out front</h3><p>Simplify \(3(x^2 - 2x) - 2(x^2 + x)\).</p><div class="solution"><div class="step"><strong>Distribute:</strong> \(3x^2 - 6x - 2x^2 - 2x\).</div><div class="step"><strong>Combine:</strong> \(x^2 - 8x\).</div><em>Conclusion: \(x^2 - 8x\). ✓</em></div></div>
+  <h2>🟡 Practice Questions</h2>
+  <div class="practice-box" ${PR}><h3>Question 1</h3><p>Add \((2x^2 + x) + (3x^2 - 4x + 2)\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(5x^2 - 3x + 2\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 2</h3><p>Subtract \((4x^2 - 2x + 1) - (x^2 - 3x)\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(3x^2 + x + 1\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 3</h3><p>Add \((x^3 + 2x - 5) + (3x^3 - x + 1)\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(4x^3 + x - 4\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 4</h3><p>Subtract \((3x^2 - x + 2) - (x^2 - 4x - 1)\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(2x^2 + 3x + 3\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 5</h3><p>Simplify \(2(x^2 + 3x) - (x^2 - x)\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(x^2 + 7x\).</em></div></div></details></div>
+  <h2>❓ Q&amp;A Summary</h2>
+  <div class="qa-box" ${QA}><h3>Q1: What exactly are “like terms”?</h3><p><em>Terms with the same variable to the same power. \(3x^2\) and \(7x^2\) combine; \(3x^2\) and \(3x\) do not.</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q2: What's the #1 subtraction mistake?</h3><p><em>Only flipping the sign of the first term. Distribute the minus to <strong>every</strong> term in the second polynomial.</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q3: Does adding change the degree?</h3><p><em>Never higher — the sum's degree is at most the larger of the two. Leading terms can even cancel, lowering it.</em></p></div>
+</div>`)]);
+
+authored["4.4"] = L("4.4", "Multiplying and Dividing Polynomials", [html(String.raw`<div class="lecture-box">
+  <h1>✖️➗ Multiplying and Dividing Polynomials</h1>
+  <p><strong>Overview.</strong> Multiplying polynomials is the <strong>distributive property</strong> applied carefully — every term of one factor times every term of the other (<strong>FOIL</strong> is just the two-binomial case). Dividing by a <strong>monomial</strong> runs the same idea in reverse: split the fraction term by term and simplify each piece with the exponent laws.</p>
+  <h2>📌 The toolkit</h2>
+  <ul>
+    <li><strong>Monomial × polynomial:</strong> distribute the single term across every term inside.</li>
+    <li><strong>FOIL</strong> two binomials: <strong>F</strong>irst, <strong>O</strong>uter, <strong>I</strong>nner, <strong>L</strong>ast, then combine like terms.</li>
+    <li><strong>Bigger products:</strong> multiply each term of one factor by each term of the other, then collect like terms.</li>
+    <li><strong>Divide by a monomial:</strong> \(\dfrac{a + b}{c} = \dfrac{a}{c} + \dfrac{b}{c}\) — split the sum, then subtract exponents (\(x^m \div x^n = x^{m-n}\)).</li>
   </ul>
   <h2>🎬 A product of binomials is a parabola</h2>
   <p>Multiplying \((x - 2)(x - a)\) gives a quadratic — a parabola that crosses the \(x\)-axis at \(2\) and \(a\). Slide <strong>a</strong> to see the product change.</p>
@@ -708,24 +742,24 @@ authored["4.3"] = L("4.3", "Addition, Subtraction, and Multiplication of Polynom
   graph("(x - 2)*(x - a)", "a", { xMin: -5, xMax: 6, yMin: -8, yMax: 10, paramMin: -4, paramMax: 5, paramInit: -1, caption: "y = (x − 2)(x − a) : the expanded product is a parabola, crossing the x-axis at 2 and a." }),
   html(String.raw`<div class="lecture-box">
   <h2>🔵 Examples</h2>
-  <div class="example-box" ${EX}><h3>Example 1: Add polynomials</h3><p>Add \((3x^2 + 2x - 1) + (x^2 - 5x + 4)\).</p><div class="solution"><div class="step"><strong>Combine like terms:</strong> \((3+1)x^2 + (2-5)x + (-1+4)\).</div><em>Conclusion: \(4x^2 - 3x + 3\). ✓</em></div></div>
-  <div class="example-box" ${EX}><h3>Example 2: Subtract polynomials</h3><p>Subtract \((5x^2 - 3x) - (2x^2 + x - 4)\).</p><div class="solution"><div class="step"><strong>Distribute the minus:</strong> \(5x^2 - 3x - 2x^2 - x + 4\).</div><div class="step"><strong>Combine:</strong> \(3x^2 - 4x + 4\).</div><em>Conclusion: \(3x^2 - 4x + 4\). ✓</em></div></div>
-  <div class="example-box" ${EX}><h3>Example 3: Monomial × polynomial</h3><p>Expand \(3x(2x^2 - x + 5)\).</p><div class="solution"><div class="step"><strong>Distribute \(3x\):</strong> \(6x^3 - 3x^2 + 15x\).</div><em>Conclusion: \(6x^3 - 3x^2 + 15x\). ✓</em></div></div>
-  <div class="example-box" ${EX}><h3>Example 4: FOIL two binomials</h3><p>Expand \((x + 3)(x - 5)\).</p><div class="solution"><div class="step"><strong>FOIL:</strong> \(x^2 - 5x + 3x - 15\).</div><div class="step"><strong>Combine:</strong> \(x^2 - 2x - 15\).</div><em>Conclusion: \(x^2 - 2x - 15\). ✓</em></div></div>
-  <div class="example-box" ${EX}><h3>Example 5: Binomial × trinomial</h3><p>Expand \((x + 2)(x^2 + 3x + 1)\).</p><div class="solution"><div class="step"><strong>Distribute each term:</strong> \(x^3 + 3x^2 + x + 2x^2 + 6x + 2\).</div><div class="step"><strong>Combine:</strong> \(x^3 + 5x^2 + 7x + 2\).</div><em>Conclusion: \(x^3 + 5x^2 + 7x + 2\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 1: Monomial × polynomial</h3><p>Expand \(3x(2x^2 - x + 5)\).</p><div class="solution"><div class="step"><strong>Distribute \(3x\):</strong> \(6x^3 - 3x^2 + 15x\).</div><em>Conclusion: \(6x^3 - 3x^2 + 15x\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 2: FOIL two binomials</h3><p>Expand \((x + 3)(x - 5)\).</p><div class="solution"><div class="step"><strong>FOIL:</strong> \(x^2 - 5x + 3x - 15\).</div><div class="step"><strong>Combine:</strong> \(x^2 - 2x - 15\).</div><em>Conclusion: \(x^2 - 2x - 15\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 3: Binomial × trinomial</h3><p>Expand \((x + 2)(x^2 + 3x + 1)\).</p><div class="solution"><div class="step"><strong>Distribute each term:</strong> \(x^3 + 3x^2 + x + 2x^2 + 6x + 2\).</div><div class="step"><strong>Combine:</strong> \(x^3 + 5x^2 + 7x + 2\).</div><em>Conclusion: \(x^3 + 5x^2 + 7x + 2\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 4: Divide by a monomial</h3><p>Simplify \(\dfrac{6x^3 - 9x^2 + 3x}{3x}\).</p><div class="solution"><div class="step"><strong>Split the fraction:</strong> \(\dfrac{6x^3}{3x} - \dfrac{9x^2}{3x} + \dfrac{3x}{3x}\).</div><div class="step"><strong>Subtract exponents:</strong> \(2x^2 - 3x + 1\).</div><em>Conclusion: \(2x^2 - 3x + 1\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 5: Divide by a single power</h3><p>Simplify \(\dfrac{8x^4 + 4x^2}{2x^2}\).</p><div class="solution"><div class="step"><strong>Split:</strong> \(\dfrac{8x^4}{2x^2} + \dfrac{4x^2}{2x^2}\).</div><div class="step"><strong>Simplify each:</strong> \(4x^2 + 2\).</div><em>Conclusion: \(4x^2 + 2\). ✓</em></div></div>
   <h2>🟡 Practice Questions</h2>
-  <div class="practice-box" ${PR}><h3>Question 1</h3><p>Add \((2x^2 + x) + (3x^2 - 4x + 2)\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(5x^2 - 3x + 2\).</em></div></div></details></div>
-  <div class="practice-box" ${PR}><h3>Question 2</h3><p>Subtract \((4x^2 - 2x + 1) - (x^2 - 3x)\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(3x^2 + x + 1\).</em></div></div></details></div>
-  <div class="practice-box" ${PR}><h3>Question 3</h3><p>Expand \(2x^2(3x - 4)\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(6x^3 - 8x^2\).</em></div></div></details></div>
-  <div class="practice-box" ${PR}><h3>Question 4</h3><p>Expand \((x - 2)(x + 7)\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(x^2 + 5x - 14\).</em></div></div></details></div>
-  <div class="practice-box" ${PR}><h3>Question 5</h3><p>Expand \((2x + 1)(x^2 - x + 3)\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(2x^3 - x^2 + 5x + 3\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 1</h3><p>Expand \(2x^2(3x - 4)\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(6x^3 - 8x^2\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 2</h3><p>Expand \((x - 2)(x + 7)\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(x^2 + 5x - 14\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 3</h3><p>Expand \((2x + 1)(x^2 - x + 3)\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(2x^3 - x^2 + 5x + 3\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 4</h3><p>Simplify \(\dfrac{10x^3 - 5x^2}{5x^2}\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(2x - 1\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 5</h3><p>Simplify \(\dfrac{12x^4 + 8x^3 - 4x^2}{4x^2}\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(3x^2 + 2x - 1\).</em></div></div></details></div>
   <h2>❓ Q&amp;A Summary</h2>
-  <div class="qa-box" ${QA}><h3>Q1: What exactly are “like terms”?</h3><p><em>Terms with the same variable to the same power. \(3x^2\) and \(7x^2\) combine; \(3x^2\) and \(3x\) do not.</em></p></div>
-  <div class="qa-box" ${QA}><h3>Q2: What's the #1 subtraction mistake?</h3><p><em>Only flipping the sign of the first term. Distribute the minus to <strong>every</strong> term in the second polynomial.</em></p></div>
-  <div class="qa-box" ${QA}><h3>Q3: What's the degree of a product?</h3><p><em>Add the degrees: a degree-1 times a degree-2 gives a degree-3 polynomial.</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q1: What does FOIL actually stand for?</h3><p><em>First, Outer, Inner, Last — the four products when multiplying two binomials. It's just organized distribution.</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q2: What's the degree of a product?</h3><p><em>Add the degrees: a degree-1 times a degree-2 gives a degree-3 polynomial.</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q3: How do I divide by a monomial?</h3><p><em>Split into one fraction per term over the monomial, then subtract exponents on each. \(\dfrac{a+b}{c}=\dfrac{a}{c}+\dfrac{b}{c}\).</em></p></div>
 </div>`)]);
 
-authored["4.4"] = L("4.4", "Special Polynomial Products (Difference of Squares, Perfect Square Trinomials)", [html(String.raw`<div class="lecture-box">
+authored["4.5"] = L("4.5", "Special Polynomial Products (Difference of Squares, Perfect Square Trinomials)", [html(String.raw`<div class="lecture-box">
   <h1>✨ Special Polynomial Products</h1>
   <p><strong>Overview.</strong> A few products appear so often they're worth memorizing as <strong>patterns</strong>. Recognizing them lets you expand (and later factor) in one step — no full FOIL needed.</p>
   <h2>📌 The patterns</h2>

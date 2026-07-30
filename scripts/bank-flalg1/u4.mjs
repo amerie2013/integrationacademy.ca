@@ -2,6 +2,20 @@
 import { mc, mcv, ms, tf, num, fill, ri, rnz, pick } from "./helpers.mjs";
 const sign = (n) => (n < 0 ? `- ${-n}` : `+ ${n}`);
 const tri = (b, c) => { let s = "x^{2}"; if (b !== 0) s += ` ${sign(b)}x`; if (c !== 0) s += ` ${sign(c)}`; return `$${s}$`; };
+// Format a single term coef·x^pow, and a whole polynomial from [coef, pow] pairs (high→low).
+const term = (coef, pow) => {
+  const c = pow === 0 ? `${coef}` : coef === 1 ? "" : coef === -1 ? "-" : `${coef}`;
+  const x = pow === 0 ? "" : pow === 1 ? "x" : `x^{${pow}}`;
+  return `${c}${x}`;
+};
+const pform = (terms) => {
+  let s = "";
+  for (const [coef, pow] of terms) {
+    if (coef === 0) continue;
+    s += s ? ` ${coef < 0 ? "-" : "+"} ${term(Math.abs(coef), pow)}` : term(coef, pow);
+  }
+  return s || "0";
+};
 
 // ── 4.1 Laws of Exponents & Rational Exponents ───────────────
 function g41() {
@@ -68,40 +82,79 @@ function g42() {
   return q;
 }
 
-// ── 4.3 Add/Subtract/Multiply Polynomials ────────────────────
-function g43() {
+// ── 4.3 Adding and Subtracting Polynomials ───────────────────
+function g43as() {
   const q = [];
   q.push(mcv("easy", "Add $(3x^2 + 2x - 1) + (x^2 - 5x + 4)$.", "$4x^{2} - 3x + 3$", ["$4x^{2} + 7x + 3$", "$2x^{2} - 3x + 3$", "$4x^{2} - 3x - 5$"]));
   q.push(mcv("easy", "Add $(2x^2 + x) + (3x^2 - 4x + 2)$.", "$5x^{2} - 3x + 2$", ["$5x^{2} + 5x + 2$", "$6x^{2} - 3x + 2$", "$5x^{2} - 3x$"]));
-  q.push(mcv("easy", "Expand $3x(2x^2 - x + 5)$.", "$6x^{3} - 3x^{2} + 15x$", ["$6x^{3} - x + 5$", "$6x^{2} - 3x + 15$", "$5x^{3} - 3x^{2} + 15x$"]));
   q.push(mc("easy", "Like terms have the same…", ["variable and exponent", "coefficient", "sign", "degree only"], 0));
   q.push(tf("easy", "$3x^2$ and $5x^2$ are like terms.", true));
   q.push(tf("easy", "$3x^2$ and $3x$ are like terms.", false));
   q.push(fill("easy", "$(2x + 3) + (x - 1) = 3x + \\text{___}$.", ["2"]));
-  q.push(mc("easy", "FOIL is used to multiply two…", ["binomials", "monomials", "fractions", "radicals"], 0));
+  q.push(tf("easy", "Subtracting a polynomial means adding the opposite of every term.", true));
   q.push(mcv("medium", "Subtract $(5x^2 - 3x) - (2x^2 + x - 4)$.", "$3x^{2} - 4x + 4$", ["$3x^{2} - 2x - 4$", "$7x^{2} - 4x + 4$", "$3x^{2} - 4x - 4$"]));
   q.push(mcv("medium", "Subtract $(4x^2 - 2x + 1) - (x^2 - 3x)$.", "$3x^{2} + x + 1$", ["$3x^{2} - 5x + 1$", "$5x^{2} + x + 1$", "$3x^{2} + x - 1$"]));
-  q.push(mcv("medium", "Expand $(x + 3)(x - 5)$.", "$x^{2} - 2x - 15$", ["$x^{2} + 2x - 15$", "$x^{2} - 15$", "$x^{2} - 8x - 15$"]));
-  q.push(mcv("medium", "Expand $(x - 2)(x + 7)$.", "$x^{2} + 5x - 14$", ["$x^{2} - 5x - 14$", "$x^{2} + 5x + 14$", "$x^{2} - 14$"]));
-  q.push(mcv("medium", "Expand $2x^2(3x - 4)$.", "$6x^{3} - 8x^{2}$", ["$6x^{3} - 8x$", "$5x^{3} - 8x^{2}$", "$6x^{2} - 8x^{2}$"]));
-  q.push(mcv("medium", "Expand $(2x + 1)(x + 3)$.", "$2x^{2} + 7x + 3$", ["$2x^{2} + 5x + 3$", "$2x^{2} + 4x + 3$", "$2x^{2} + 7x + 4$"]));
-  q.push(fill("medium", "The degree of $(x+2)(x^2+1)$ is ___.", ["3"]));
-  q.push(mcv("hard", "Expand $(x + 2)(x^2 + 3x + 1)$.", "$x^{3} + 5x^{2} + 7x + 2$", ["$x^{3} + 3x^{2} + 7x + 2$", "$x^{3} + 5x^{2} + 5x + 2$", "$x^{3} + 6x^{2} + 7x + 2$"]));
-  q.push(mcv("hard", "Expand $(2x + 1)(x^2 - x + 3)$.", "$2x^{3} - x^{2} + 5x + 3$", ["$2x^{3} + x^{2} + 5x + 3$", "$2x^{3} - x^{2} + 6x + 3$", "$2x^{3} - 2x^{2} + 5x + 3$"]));
-  q.push(mcv("hard", "Simplify $(3x^2 - x + 2) - (x^2 - 4x - 1)$.", "$2x^{2} + 3x + 3$", ["$2x^{2} - 5x + 1$", "$2x^{2} + 3x + 1$", "$4x^{2} + 3x + 3$"]));
-  q.push(mcv("hard", "Expand $(x - 4)(2x^2 + x - 3)$.", "$2x^{3} - 7x^{2} - 7x + 12$", ["$2x^{3} + 7x^{2} - 7x + 12$", "$2x^{3} - 7x^{2} + 7x + 12$", "$2x^{3} - 9x^{2} - 7x + 12$"]));
-  q.push(tf("hard", "Subtracting a polynomial means adding the opposite of every term.", true));
-  q.push(num("hard", "The degree of $(x^2+1)(x^3-2)$ is ___.", 5, 0));
-  q.push(mcv("hard", "Simplify $3(x^2 - 2x) - 2(x^2 + x)$.", "$x^{2} - 8x$", ["$x^{2} - 4x$", "$5x^{2} - 8x$", "$x^{2} - 8$"]));
-  // randomized FOIL expansions (answers built by construction)
-  for (let i = 0; i < 20; i++) {
-    const p = rnz(-6, 6), r = rnz(-6, 6), b = p + r, c = p * r;
-    q.push(mcv(i < 8 ? "easy" : i < 14 ? "medium" : "hard", `Expand $(x ${sign(p)})(x ${sign(r)})$.`, tri(b, c), [tri(b, -c), tri(-b, c), tri(b + 2, c)]));
+  q.push(mcv("medium", "Simplify $(3x^2 - x + 2) - (x^2 - 4x - 1)$.", "$2x^{2} + 3x + 3$", ["$2x^{2} - 5x + 1$", "$2x^{2} + 3x + 1$", "$4x^{2} + 3x + 3$"]));
+  q.push(mcv("medium", "Simplify $3(x^2 - 2x) - 2(x^2 + x)$.", "$x^{2} - 8x$", ["$x^{2} - 4x$", "$5x^{2} - 8x$", "$x^{2} - 8$"]));
+  q.push(fill("medium", "The $x$-coefficient of $(4x^2 - 2x) - (x^2 - 3x)$ is ___.", ["1"]));
+  q.push(mcv("hard", "Add $(x^3 + 2x - 5) + (3x^3 - x + 1)$.", "$4x^{3} + x - 4$", ["$4x^{3} - x - 4$", "$4x^{3} + x + 4$", "$3x^{3} + x - 4$"]));
+  q.push(mc("hard", "The degree of $(2x^2 + 1) + (-2x^2 + x)$ is…", ["1", "2", "3", "0"], 0, "The $x^2$ terms cancel, leaving degree 1."));
+  q.push(tf("hard", "Adding two degree-2 polynomials always gives a degree-2 result.", false, "Leading terms can cancel and lower the degree."));
+  // randomized add & subtract (answers built by construction)
+  for (let i = 0; i < 24; i++) {
+    const a1 = rnz(-5, 6), b1 = rnz(-6, 6), c1 = rnz(-6, 6), a2 = rnz(-5, 6), b2 = rnz(-6, 6), c2 = rnz(-6, 6);
+    const op = i % 2; // 0 = add, 1 = subtract
+    const A = op ? a1 - a2 : a1 + a2, B = op ? b1 - b2 : b1 + b2, C = op ? c1 - c2 : c1 + c2;
+    if (A === 0 || B === 0 || C === 0) { i--; continue; }
+    const p1 = pform([[a1, 2], [b1, 1], [c1, 0]]), p2 = pform([[a2, 2], [b2, 1], [c2, 0]]);
+    const correct = `$${pform([[A, 2], [B, 1], [C, 0]])}$`;
+    const d1 = `$${pform([[A, 2], [-B, 1], [C, 0]])}$`;
+    const d2 = `$${pform([[A, 2], [B, 1], [-C, 0]])}$`;
+    const d3 = `$${pform([[A + 1, 2], [B, 1], [C, 0]])}$`;
+    q.push(mcv(i < 8 ? "easy" : i < 16 ? "medium" : "hard", `${op ? "Subtract" : "Add"} $(${p1}) ${op ? "-" : "+"} (${p2})$.`, correct, [d1, d2, d3]));
   }
   return q;
 }
 
-// ── 4.4 Special Polynomial Products ──────────────────────────
+// ── 4.4 Multiplying and Dividing Polynomials ─────────────────
+function g44md() {
+  const q = [];
+  q.push(mcv("easy", "Expand $3x(2x^2 - x + 5)$.", "$6x^{3} - 3x^{2} + 15x$", ["$6x^{3} - x + 5$", "$6x^{2} - 3x + 15$", "$5x^{3} - 3x^{2} + 15x$"]));
+  q.push(mcv("easy", "Expand $2x^2(3x - 4)$.", "$6x^{3} - 8x^{2}$", ["$6x^{3} - 8x$", "$5x^{3} - 8x^{2}$", "$6x^{2} - 8x^{2}$"]));
+  q.push(mc("easy", "FOIL is used to multiply two…", ["binomials", "monomials", "fractions", "radicals"], 0));
+  q.push(mc("easy", "To divide $\\dfrac{a+b}{c}$ you may…", ["split into $\\tfrac{a}{c}+\\tfrac{b}{c}$", "cancel the $c$ once", "add $a+b+c$", "ignore $c$"], 0));
+  q.push(tf("easy", "$x^5 \\div x^2 = x^3$.", true));
+  q.push(mcv("medium", "Expand $(x + 3)(x - 5)$.", "$x^{2} - 2x - 15$", ["$x^{2} + 2x - 15$", "$x^{2} - 15$", "$x^{2} - 8x - 15$"]));
+  q.push(mcv("medium", "Expand $(2x + 1)(x + 3)$.", "$2x^{2} + 7x + 3$", ["$2x^{2} + 5x + 3$", "$2x^{2} + 4x + 3$", "$2x^{2} + 7x + 4$"]));
+  q.push(mcv("medium", "Simplify $\\dfrac{6x^3 - 9x^2 + 3x}{3x}$.", "$2x^{2} - 3x + 1$", ["$2x^{2} - 3x$", "$2x^{3} - 3x^{2} + 1$", "$2x^{2} - 6x + 1$"]));
+  q.push(mcv("medium", "Simplify $\\dfrac{8x^4 + 4x^2}{2x^2}$.", "$4x^{2} + 2$", ["$4x^{2}$", "$4x^{2} + 2x$", "$4x^{6} + 2$"]));
+  q.push(fill("medium", "The degree of $(x+2)(x^2+1)$ is ___.", ["3"]));
+  q.push(mcv("hard", "Expand $(x + 2)(x^2 + 3x + 1)$.", "$x^{3} + 5x^{2} + 7x + 2$", ["$x^{3} + 3x^{2} + 7x + 2$", "$x^{3} + 5x^{2} + 5x + 2$", "$x^{3} + 6x^{2} + 7x + 2$"]));
+  q.push(mcv("hard", "Expand $(2x + 1)(x^2 - x + 3)$.", "$2x^{3} - x^{2} + 5x + 3$", ["$2x^{3} + x^{2} + 5x + 3$", "$2x^{3} - x^{2} + 6x + 3$", "$2x^{3} - 2x^{2} + 5x + 3$"]));
+  q.push(mcv("hard", "Expand $(x - 4)(2x^2 + x - 3)$.", "$2x^{3} - 7x^{2} - 7x + 12$", ["$2x^{3} + 7x^{2} - 7x + 12$", "$2x^{3} - 7x^{2} + 7x + 12$", "$2x^{3} - 9x^{2} - 7x + 12$"]));
+  q.push(num("hard", "The degree of $(x^2+1)(x^3-2)$ is ___.", 5, 0));
+  q.push(mcv("hard", "Simplify $\\dfrac{15x^5 - 10x^3}{5x^2}$.", "$3x^{3} - 2x$", ["$3x^{3} - 2x^{2}$", "$3x^{7} - 2x$", "$3x^{3} - 2$"]));
+  // randomized FOIL expansions (answers built by construction)
+  for (let i = 0; i < 16; i++) {
+    const p = rnz(-6, 6), r = rnz(-6, 6), b = p + r, c = p * r;
+    q.push(mcv(i < 6 ? "easy" : i < 11 ? "medium" : "hard", `Expand $(x ${sign(p)})(x ${sign(r)})$.`, tri(b, c), [tri(b, -c), tri(-b, c), tri(b + 2, c)]));
+  }
+  // randomized division by a monomial (clean by construction: numerator = quotient × divisor)
+  for (let i = 0; i < 12; i++) {
+    const m = ri(2, 4), e = ri(1, 2), a = rnz(2, 6), b = rnz(-6, 6), c = rnz(-6, 6);
+    if (b === 0 || c === 0) { i--; continue; }
+    const numer = pform([[a * m, e + 2], [b * m, e + 1], [c * m, e]]);
+    const den = e === 1 ? `${m}x` : `${m}x^{${e}}`;
+    const correct = `$${pform([[a, 2], [b, 1], [c, 0]])}$`;
+    const d1 = `$${pform([[a, 2], [-b, 1], [c, 0]])}$`;
+    const d2 = `$${pform([[a, 2], [b, 1], [c * m, 0]])}$`;
+    const d3 = `$${pform([[a * m, 2], [b, 1], [c, 0]])}$`;
+    q.push(mcv(i < 5 ? "medium" : "hard", `Simplify $\\dfrac{${numer}}{${den}}$.`, correct, [d1, d2, d3]));
+  }
+  return q;
+}
+
+// ── 4.5 Special Polynomial Products ──────────────────────────
 function g44() {
   const q = [];
   for (let i = 0; i < 16; i++) { const a = ri(2, 9); q.push(mcv(i < 8 ? "easy" : i < 12 ? "medium" : "hard", `Expand $(x + ${a})(x - ${a})$.`, `$x^{2} - ${a * a}$`, [`$x^{2} + ${a * a}$`, `$x^{2} - ${2 * a}x - ${a * a}$`, `$x^{2} - ${a}$`])); }
@@ -125,6 +178,7 @@ function g44() {
 export default [
   { code: "4.1", gen: g41 },
   { code: "4.2", gen: g42 },
-  { code: "4.3", gen: g43 },
-  { code: "4.4", gen: g44 },
+  { code: "4.3", gen: g43as }, // Adding and Subtracting Polynomials
+  { code: "4.4", gen: g44md }, // Multiplying and Dividing Polynomials
+  { code: "4.5", gen: g44 },   // Special Polynomial Products (was 4.4)
 ];
