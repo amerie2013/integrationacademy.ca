@@ -13,7 +13,8 @@ export type BlockType =
   | "video"
   | "callout"
   | "pointset"
-  | "equationgame";
+  | "equationgame"
+  | "factorsteps";
 
 export type Block =
   | { id: string; type: "html"; html: string }
@@ -103,6 +104,14 @@ export type Block =
       yMin: number;
       yMax: number;
       caption?: string;
+    }
+  | {
+      id: string;
+      type: "factorsteps";
+      title: string;
+      prompt: string;
+      frames: { latex: string; caption: string; kind?: "start" | "highlight" | "pull" | "group" | "done" }[];
+      check?: string;
     };
 
 export const BLOCK_LABELS: Record<BlockType, string> = {
@@ -118,6 +127,7 @@ export const BLOCK_LABELS: Record<BlockType, string> = {
   callout: "Callout box",
   pointset: "Data table + points plot",
   equationgame: "Equation solver game (+ graph check)",
+  factorsteps: "Animated factoring steps (GCF / grouping)",
 };
 
 let counter = 0;
@@ -280,6 +290,18 @@ export function newBlock(type: BlockType): Block {
         yMin: -3,
         yMax: 21,
         caption: "",
+      };
+    case "factorsteps":
+      return {
+        id: uid(),
+        type,
+        title: "Example: GCF",
+        prompt: "Factor 6x² + 9x.",
+        frames: [
+          { latex: "6x^2 + 9x", caption: "Start with the expression.", kind: "start" },
+          { latex: "3x\\,(2x + 3)", caption: "Pull out the GCF.", kind: "done" },
+        ],
+        check: "3x\\cdot 2x + 3x\\cdot 3 = 6x^2 + 9x",
       };
   }
 }

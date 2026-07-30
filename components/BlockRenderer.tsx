@@ -9,6 +9,7 @@ import { MultiGraph } from "./MultiGraph";
 import { AnimatedGraph } from "./AnimatedGraph";
 import { PointPlot } from "./PointPlot";
 import { EquationGame } from "./EquationGame";
+import { FactoringSteps } from "./FactoringSteps";
 
 const CALLOUT_STYLES: Record<string, { bg: string; border: string; label: string }> = {
   note: { bg: "#eff6ff", border: "#bfdbfe", label: "Note" },
@@ -151,6 +152,15 @@ function renderBlock(b: Block) {
           yMin={b.yMin}
           yMax={b.yMax}
           caption={b.caption}
+        />
+      );
+    case "factorsteps":
+      return (
+        <FactoringSteps
+          title={b.title}
+          prompt={b.prompt}
+          frames={b.frames}
+          check={b.check}
         />
       );
     case "callout": {

@@ -23,6 +23,10 @@ const graph2 = (expr, p1, p2, o = {}) => ({
 let _eg = 0;
 const eqGame = (spec) => ({ id: `alg1eg_${_eg++}`, type: "equationgame", xMin: -1, xMax: 8, yMin: -3, yMax: 21, caption: "", ...spec });
 
+// Animated factoring steps (GCF / grouping). Rendered by FactoringSteps.tsx.
+let _fs = 0;
+const factorSteps = (spec) => ({ id: `alg1fs_${_fs++}`, type: "factorsteps", ...spec });
+
 export const authored = {};
 
 authored["1.1"] = L("1.1", "Multi-Step Equations in One Variable", [html(String.raw`<div class="lecture-box">
@@ -844,11 +848,51 @@ authored["5.1"] = L("5.1", "GCF and Factoring by Grouping", [html(String.raw`<di
   graph("x*(x - a)", "a", { xMin: -5, xMax: 6, yMin: -8, yMax: 10, paramMin: -4, paramMax: 5, paramInit: 3, caption: "y = x(x − a) : pulling out the GCF x puts one root at x = 0 and the other at x = a." }),
   html(String.raw`<div class="lecture-box">
   <h2>🔵 Examples</h2>
-  <div class="example-box" ${EX}><h3>Example 1: GCF of a binomial</h3><p>Factor \(6x^2 + 9x\).</p><div class="solution"><div class="step"><strong>GCF is \(3x\):</strong> \(3x(2x + 3)\).</div><em>Conclusion: \(3x(2x + 3)\). ✓</em></div></div>
-  <div class="example-box" ${EX}><h3>Example 2: A larger GCF</h3><p>Factor \(12x^3 - 8x^2\).</p><div class="solution"><div class="step"><strong>GCF is \(4x^2\):</strong> \(4x^2(3x - 2)\).</div><em>Conclusion: \(4x^2(3x - 2)\). ✓</em></div></div>
-  <div class="example-box" ${EX}><h3>Example 3: Factor by grouping</h3><p>Factor \(x^3 + 2x^2 + 3x + 6\).</p><div class="solution"><div class="step"><strong>Group in pairs:</strong> \(x^2(x + 2) + 3(x + 2)\).</div><div class="step"><strong>Common binomial \((x+2)\):</strong> \((x + 2)(x^2 + 3)\).</div><em>Conclusion: \((x + 2)(x^2 + 3)\). ✓</em></div></div>
-  <div class="example-box" ${EX}><h3>Example 4: Grouping with coefficients</h3><p>Factor \(2x^3 + 6x^2 + x + 3\).</p><div class="solution"><div class="step"><strong>Group:</strong> \(2x^2(x + 3) + 1(x + 3)\).</div><div class="step"><strong>Factor out \((x+3)\):</strong> \((x + 3)(2x^2 + 1)\).</div><em>Conclusion: \((x + 3)(2x^2 + 1)\). ✓</em></div></div>
-  <div class="example-box" ${EX}><h3>Example 5: GCF first, then more</h3><p>Factor \(2x^3 - 8x\).</p><div class="solution"><div class="step"><strong>GCF \(2x\):</strong> \(2x(x^2 - 4)\).</div><div class="step"><strong>Difference of squares:</strong> \(2x(x - 2)(x + 2)\).</div><em>Conclusion: \(2x(x - 2)(x + 2)\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 1: GCF of a binomial</h3><p>Factor \(6x^2 + 9x\).</p><div class="solution"><div class="step"><strong>GCF is \(3x\):</strong> \(3x(2x + 3)\).</div><em>Conclusion: \(3x(2x + 3)\). ✓</em></div>
+  <div style="margin:14px 0 4px">
+    <div style="font-size:12px;font-weight:800;letter-spacing:0.04em;text-transform:uppercase;color:#64748b;margin-bottom:8px">Graph check</div>
+    <video controls playsinline preload="metadata" style="width:100%;max-width:720px;border-radius:10px;border:1px solid #e2e8f0;background:#0f172a;display:block" src="/videos/gcf-example1.mp4">
+      Your browser does not support video.
+    </video>
+    <p style="font-size:13px;color:#64748b;margin:8px 0 0">The blue curve is \(y=6x^2+9x\). The green curve is \(y=3x(2x+3)\) — same graph. Roots at \(x=0\) (from \(3x\)) and \(x=-\tfrac{3}{2}\) (from \(2x+3\)).</p>
+  </div>
+  </div>
+  <div class="example-box" ${EX}><h3>Example 2: A larger GCF</h3><p>Factor \(12x^3 - 8x^2\).</p><div class="solution"><div class="step"><strong>GCF is \(4x^2\):</strong> \(4x^2(3x - 2)\).</div><em>Conclusion: \(4x^2(3x - 2)\). ✓</em></div>
+  <div style="margin:14px 0 4px">
+    <div style="font-size:12px;font-weight:800;letter-spacing:0.04em;text-transform:uppercase;color:#64748b;margin-bottom:8px">Graph check</div>
+    <video controls playsinline preload="metadata" style="width:100%;max-width:720px;border-radius:10px;border:1px solid #e2e8f0;background:#0f172a;display:block" src="/videos/gcf-example2.mp4">
+      Your browser does not support video.
+    </video>
+    <p style="font-size:13px;color:#64748b;margin:8px 0 0">The blue curve is \(y=12x^3-8x^2\). The green curve is \(y=4x^2(3x-2)\) — same graph. Roots at \(x=0\) (a double root from \(4x^2\)) and \(x=\tfrac{2}{3}\) (from \(3x-2\)).</p>
+  </div>
+  </div>
+  <div class="example-box" ${EX}><h3>Example 3: Factor by grouping</h3><p>Factor \(x^3 + 2x^2 + 3x + 6\).</p><div class="solution"><div class="step"><strong>Group in pairs:</strong> \(x^2(x + 2) + 3(x + 2)\).</div><div class="step"><strong>Common binomial \((x+2)\):</strong> \((x + 2)(x^2 + 3)\).</div><em>Conclusion: \((x + 2)(x^2 + 3)\). ✓</em></div>
+  <div style="margin:14px 0 4px">
+    <div style="font-size:12px;font-weight:800;letter-spacing:0.04em;text-transform:uppercase;color:#64748b;margin-bottom:8px">Graph check</div>
+    <video controls playsinline preload="metadata" style="width:100%;max-width:720px;border-radius:10px;border:1px solid #e2e8f0;background:#0f172a;display:block" src="/videos/gcf-example3.mp4">
+      Your browser does not support video.
+    </video>
+    <p style="font-size:13px;color:#64748b;margin:8px 0 0">The blue curve is \(y=x^3+2x^2+3x+6\). The green curve is \(y=(x+2)(x^2+3)\) — same graph. The only real root is \(x=-2\) (from \(x+2\)); \(x^2+3\) is never zero.</p>
+  </div>
+  </div>
+  <div class="example-box" ${EX}><h3>Example 4: Grouping with coefficients</h3><p>Factor \(2x^3 + 6x^2 + x + 3\).</p><div class="solution"><div class="step"><strong>Group:</strong> \(2x^2(x + 3) + 1(x + 3)\).</div><div class="step"><strong>Factor out \((x+3)\):</strong> \((x + 3)(2x^2 + 1)\).</div><em>Conclusion: \((x + 3)(2x^2 + 1)\). ✓</em></div>
+  <div style="margin:14px 0 4px">
+    <div style="font-size:12px;font-weight:800;letter-spacing:0.04em;text-transform:uppercase;color:#64748b;margin-bottom:8px">Graph check</div>
+    <video controls playsinline preload="metadata" style="width:100%;max-width:720px;border-radius:10px;border:1px solid #e2e8f0;background:#0f172a;display:block" src="/videos/gcf-example4.mp4">
+      Your browser does not support video.
+    </video>
+    <p style="font-size:13px;color:#64748b;margin:8px 0 0">The blue curve is \(y=2x^3+6x^2+x+3\). The green curve is \(y=(x+3)(2x^2+1)\) — same graph. The only real root is \(x=-3\) (from \(x+3\)); \(2x^2+1\) is never zero.</p>
+  </div>
+  </div>
+  <div class="example-box" ${EX}><h3>Example 5: GCF first, then more</h3><p>Factor \(2x^3 - 8x\).</p><div class="solution"><div class="step"><strong>GCF \(2x\):</strong> \(2x(x^2 - 4)\).</div><div class="step"><strong>Difference of squares:</strong> \(2x(x - 2)(x + 2)\).</div><em>Conclusion: \(2x(x - 2)(x + 2)\). ✓</em></div>
+  <div style="margin:14px 0 4px">
+    <div style="font-size:12px;font-weight:800;letter-spacing:0.04em;text-transform:uppercase;color:#64748b;margin-bottom:8px">Graph check</div>
+    <video controls playsinline preload="metadata" style="width:100%;max-width:720px;border-radius:10px;border:1px solid #e2e8f0;background:#0f172a;display:block" src="/videos/gcf-example5.mp4">
+      Your browser does not support video.
+    </video>
+    <p style="font-size:13px;color:#64748b;margin:8px 0 0">The blue curve is \(y=2x^3-8x\). The green curve is \(y=2x(x-2)(x+2)\) — same graph. Roots at \(x=0\), \(x=2\), and \(x=-2\).</p>
+  </div>
+  </div>
   <h2>🟡 Practice Questions</h2>
   <div class="practice-box" ${PR}><h3>Question 1</h3><p>Factor \(10x^2 + 15x\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(5x(2x + 3)\).</em></div></div></details></div>
   <div class="practice-box" ${PR}><h3>Question 2</h3><p>Factor \(6x^4 - 9x^2\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(3x^2(2x^2 - 3)\).</em></div></div></details></div>
