@@ -23,6 +23,13 @@ import { MathKeyboard } from "./MathKeyboard";
 const COLORS = ["#ef4444", "#1b7a44", "#0d9488", "#e69138", "#c2185b", "#2e9e6e", "#7c3aed", "#0ea5e9"];
 let _uid = 0;
 const uid = (p: string) => `${p}${_uid++}_${Math.random().toString(36).slice(2, 6)}`;
+// Translucent version of a hex colour, for shading inequality regions.
+function rgba(hex: string, a: number) {
+  const h = hex.replace("#", "");
+  const f = h.length === 3 ? h.split("").map((c) => c + c).join("") : h;
+  const n = parseInt(f, 16);
+  return `rgba(${(n >> 16) & 255}, ${(n >> 8) & 255}, ${n & 255}, ${a})`;
+}
 
 type Kind = "cartesian" | "parametric" | "polar";
 type Fn = { id: string; kind: Kind; expr: string; exprY: string; tMin: number; tMax: number; color: string; thickness: number; visible: boolean; dMin: string; dMax: string; rMin: string; rMax: string };
@@ -214,8 +221,21 @@ export function Calculator({ initialData, initialState, embed = false }: { initi
         ctx.stroke();
       } else {
         if (!f.expr.trim()) continue;
-        let e = f.expr.trim();
-        if (e.includes("=")) { const [l, r] = e.split("="); e = `(${l})-(${r})`; } else e = `(${e})-y`;
+        // Normalise the inequality symbols the math-field / keyboard may emit.
+        let e = f.expr.trim().replace(/≤/g, "<=").replace(/≥/g, ">=").replace(/=</g, "<=").replace(/=>/g, ">=");
+        // An inequality (y > x, y ≤ 2x+1, x ≥ 3, …) shades its solution region
+        // and draws the boundary dashed (strict < >) or solid (≤ ≥). Anything
+        // else is drawn as the zero contour of the equation/function, as before.
+        const im = e.match(/(<=|>=|<|>)/);
+        let shade = 0; // 0 = none, 1 = keep g>0 side, -1 = keep g<0 side
+        let strict = false;
+        if (im) {
+          const op = im[1], at = e.indexOf(op);
+          const lhs = e.slice(0, at).trim() || "0", rhs = e.slice(at + op.length).trim() || "0";
+          e = `(${lhs})-(${rhs})`; shade = op[0] === ">" ? 1 : -1; strict = op.length === 1;
+        } else if (e.includes("=")) {
+          const [l, r] = e.split("="); e = `(${l})-(${r})`;
+        } else e = `(${e})-y`;
         const fn = safeCompile(e);
         const dMin = lim(f.dMin, -Infinity), dMax = lim(f.dMax, Infinity);
         const rMin = lim(f.rMin, -Infinity), rMax = lim(f.rMax, Infinity);
@@ -226,7 +246,19 @@ export function Calculator({ initialData, initialState, embed = false }: { initi
           if (m.x < dMin || m.x > dMax || m.y < rMin || m.y > rMax) { val[j * (cols + 1) + i] = NaN; continue; }
           const v = fn({ x: m.x, y: m.y, ...vars }); val[j * (cols + 1) + i] = Number.isFinite(v) ? v : NaN;
         }
+        // Shade the side that satisfies the inequality. Translucent, so the grid
+        // shows through and overlapping inequalities darken to reveal a system's
+        // common region.
+        if (shade !== 0) {
+          ctx.fillStyle = rgba(f.color, 0.16);
+          for (let j = 0; j < rows; j++) for (let i = 0; i < cols; i++) {
+            const v = val[j * (cols + 1) + i];
+            if (isNaN(v)) continue;
+            if (shade === 1 ? v > 0 : v < 0) ctx.fillRect(i * res, j * res, res + 1, res + 1);
+          }
+        }
         ctx.beginPath();
+        if (strict) ctx.setLineDash([6, 5]);
         const edge = (va: number, vb: number, ax: number, ay: number, bx: number, by: number) => {
           if (va * vb > 0 || va === vb) return null;
           const t = Math.abs(va) / (Math.abs(va) + Math.abs(vb));
@@ -240,6 +272,7 @@ export function Calculator({ initialData, initialState, embed = false }: { initi
           if (es.length >= 2) { ctx.moveTo(es[0].x, es[0].y); ctx.lineTo(es[1].x, es[1].y); if (es.length === 4) { ctx.moveTo(es[2].x, es[2].y); ctx.lineTo(es[3].x, es[3].y); } }
         }
         ctx.stroke();
+        ctx.setLineDash([]);
       }
     }
 
@@ -488,7 +521,7 @@ export function Calculator({ initialData, initialState, embed = false }: { initi
                   <MathField value={f.exprY} onChange={(v) => patch(setFns, f.id, { exprY: v })} placeholder="y(t)" style={exprIn} ariaLabel="y of t" />
                 </div>
               ) : (
-                <MathField value={f.expr} onChange={(v) => patch(setFns, f.id, { expr: v })} placeholder={f.kind === "polar" ? "r in terms of t (e.g. 1+cos(t))" : "y = a*x^2  or  x^2+y^2=25"} style={exprIn} ariaLabel="function expression" />
+                <MathField value={f.expr} onChange={(v) => patch(setFns, f.id, { expr: v })} placeholder={f.kind === "polar" ? "r in terms of t (e.g. 1+cos(t))" : "y = a*x^2 · x^2+y^2=25 · y > x"} style={exprIn} ariaLabel="function expression" />
               )}
               <button onClick={() => patch(setFns, f.id, { visible: !f.visible })} title="Show/Hide" style={eyeBtn(f.visible)}>{f.visible ? "●" : "○"}</button>
               <X onClick={() => drop(setFns, f.id)} />
@@ -586,6 +619,7 @@ export function Calculator({ initialData, initialState, embed = false }: { initi
           <ul style={{ margin: "6px 0 0 16px", lineHeight: 1.7 }}>
             <li>Type <code>^</code> to jump into an exponent, <code>/</code> for a fraction, or use the <strong>⌨ Math keyboard</strong> button below.</li>
             <li>Explicit: <code>y = a x²</code>; implicit: <code>x² + y² = 25</code></li>
+            <li>Inequalities shade a region: <code>y &gt; x</code>, <code>y ≤ 2x+1</code>, <code>x ≥ 3</code> (dashed = strict, solid = ≤/≥)</li>
             <li>Parametric uses <code>t</code>: x(t) = <code>cos(t)</code>, y(t) = <code>sin(t)</code></li>
             <li>Polar uses <code>t</code> as θ: <code>1 + cos(t)</code></li>
             <li><code>sin cos tan sqrt abs ln log exp</code>, <code>pi</code>, <code>e</code></li>
