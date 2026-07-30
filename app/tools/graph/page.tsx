@@ -23,10 +23,11 @@ function GraphTool() {
   const embed = params.get("embed") === "1";
   const panel = params.get("panel") === "1"; // keep the function-input panel in embed (e.g. EQAO graphing tool)
   const data = params.get("data") ?? undefined;
+  const id = params.get("id") ?? undefined; // short-link embed: load the saved figure from the graphs table
   if (embed) {
     return (
       <main style={{ height: "100vh" }}>
-        <Calculator embed={!panel} initialData={data} />
+        <Calculator embed={!panel} initialData={data} initialId={id} />
       </main>
     );
   }
@@ -37,7 +38,7 @@ function GraphTool() {
         <span style={{ fontSize: 13, color: "#94a3b8" }}>Functions, parametric, polar · sliders &amp; animation · save / embed</span>
       </div>
       <div style={{ flex: 1, minHeight: 0 }}>
-        <Calculator initialData={data} />
+        <Calculator initialData={data} initialId={id} />
       </div>
     </main>
   );

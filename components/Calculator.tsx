@@ -54,7 +54,7 @@ function fmt(n: number) {
 }
 const newFn = (i: number): Fn => ({ id: uid("f"), kind: "cartesian", expr: "y = x", exprY: "sin(t)", tMin: 0, tMax: 6.2832, color: COLORS[i % COLORS.length], thickness: 2.5, visible: true, dMin: "", dMax: "", rMin: "", rMax: "" });
 
-export function Calculator({ initialData, initialState, embed = false }: { initialData?: string; initialState?: any; embed?: boolean }) {
+export function Calculator({ initialData, initialState, initialId, embed = false }: { initialData?: string; initialState?: any; initialId?: string; embed?: boolean }) {
   const [fns, setFns] = useState<Fn[]>([{ ...newFn(0), expr: "y = a*x^2", color: COLORS[0] }]);
   const [sliders, setSliders] = useState<Slider[]>([{ id: uid("s"), name: "a", value: 1, min: -10, max: 10, step: 0.1, anim: false, speed: 1 }]);
   const [labels, setLabels] = useState<Label[]>([]);
@@ -81,9 +81,15 @@ export function Calculator({ initialData, initialState, embed = false }: { initi
   // ── load shared/saved data ─────────────────────────────────
   useEffect(() => {
     if (initialState) { applyState(initialState); return; }
-    if (initialData) { try { applyState(JSON.parse(decodeURIComponent(atob(initialData)))); } catch {} }
+    if (initialData) { try { applyState(JSON.parse(decodeURIComponent(atob(initialData)))); } catch {} return; }
+    // Short-link embed (?id=…): load the saved figure from the graphs table.
+    if (initialId) {
+      supabase.from("graphs").select("data").eq("id", initialId).single().then(({ data }) => {
+        if (data?.data) applyState(data.data);
+      });
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [initialData, initialState]);
+  }, [initialData, initialState, initialId]);
 
   function applyState(d: any) {
     if (Array.isArray(d.fns)) setFns(d.fns.map((f: any, i: number) => ({ ...newFn(i), ...f })));
