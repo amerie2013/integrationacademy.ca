@@ -23,6 +23,60 @@ import { MathKeyboard } from "./MathKeyboard";
 const COLORS = ["#ef4444", "#1b7a44", "#0d9488", "#e69138", "#c2185b", "#2e9e6e", "#7c3aed", "#0ea5e9"];
 let _uid = 0;
 const uid = (p: string) => `${p}${_uid++}_${Math.random().toString(36).slice(2, 6)}`;
+
+// Label text is drawn as base/superscript runs so exponents typeset properly
+// (whole decimals like 2.6 stay raised, not just the leading digit).
+
+type TextRun = { t: string; sup: boolean };
+
+/** Split "x = 1.5^2.6" into base/superscript runs. Supports ^{...} too. */
+function splitExponents(s: string): TextRun[] {
+  const runs: TextRun[] = [];
+  const re = /\^\{([^}]*)\}|\^(-?\d+(?:\.\d+)?|[A-Za-z]\w*)/g;
+  let last = 0;
+  let m: RegExpExecArray | null;
+  while ((m = re.exec(s))) {
+    if (m.index > last) runs.push({ t: s.slice(last, m.index), sup: false });
+    runs.push({ t: m[1] ?? m[2] ?? "", sup: true });
+    last = m.index + m[0].length;
+  }
+  if (last < s.length) runs.push({ t: s.slice(last), sup: false });
+  return runs.length ? runs : [{ t: s, sup: false }];
+}
+
+type LabelPos = "above" | "below" | "left" | "right";
+const LABEL_GAP = 8; // px between the point and the text (at default 14px size)
+const DEFAULT_LABEL_SIZE = 14;
+
+/** Draw runs next to (cx, cy) — above/below/left/right of the point. */
+function drawRuns(ctx: CanvasRenderingContext2D, runs: TextRun[], cx: number, cy: number, pos: LabelPos = "above", size = DEFAULT_LABEL_SIZE) {
+  const base = `bold ${size}px Inter, system-ui, sans-serif`;
+  const sup = `bold ${Math.max(8, Math.round(size * 0.72))}px Inter, system-ui, sans-serif`;
+  const gap = Math.max(4, Math.round(LABEL_GAP * size / DEFAULT_LABEL_SIZE));
+  let total = 0;
+  for (const r of runs) { ctx.font = r.sup ? sup : base; total += ctx.measureText(r.t).width; }
+  const align = ctx.textAlign;
+  const baseline = ctx.textBaseline;
+  ctx.textAlign = "left";
+  ctx.textBaseline = "alphabetic";
+  const h = size;
+  const lift = Math.max(4, Math.round(size * 0.43));
+  let x = cx;
+  let y = cy;
+  if (pos === "above") { x = cx - total / 2; y = cy - gap; }
+  else if (pos === "below") { x = cx - total / 2; y = cy + gap + h; }
+  else if (pos === "left") { x = cx - gap - total; y = cy + h / 2 - 2; }
+  else { x = cx + gap; y = cy + h / 2 - 2; } // right
+  for (const r of runs) {
+    ctx.font = r.sup ? sup : base;
+    ctx.fillText(r.t, x, r.sup ? y - lift : y);
+    x += ctx.measureText(r.t).width;
+  }
+  ctx.textAlign = align;
+  ctx.textBaseline = baseline;
+  ctx.font = base;
+}
+
 // Translucent version of a hex colour, for shading inequality regions.
 function rgba(hex: string, a: number) {
   const h = hex.replace("#", "");
@@ -34,7 +88,7 @@ function rgba(hex: string, a: number) {
 type Kind = "cartesian" | "parametric" | "polar";
 type Fn = { id: string; kind: Kind; expr: string; exprY: string; tMin: number; tMax: number; color: string; thickness: number; visible: boolean; dMin: string; dMax: string; rMin: string; rMax: string };
 type Slider = { id: string; name: string; value: number; min: number; max: number; step: number; anim: boolean; speed: number };
-type Label = { id: string; text: string; x: number | string; y: number | string; color: string; visible: boolean; showPoint: boolean; angle?: number | string };
+type Label = { id: string; text: string; x: number | string; y: number | string; color: string; visible: boolean; showPoint: boolean; angle?: number | string; pos?: LabelPos; fontSize?: number };
 type Pt = { x: string; y: string };
 type Shape = "circle" | "square" | "triangle";
 type Tbl = { id: string; name: string; color: string; shape: Shape; visible: boolean; points: Pt[] };
@@ -294,24 +348,46 @@ export function Calculator({ initialData, initialState, initialId, embed = false
       const lx = cx(l.x), ly = cx(l.y);
       const p = toPx(lx, ly); ctx.fillStyle = l.color;
       if (l.showPoint) { ctx.beginPath(); ctx.arc(p.px, p.py, 4, 0, Math.PI * 2); ctx.fill(); }
-      ctx.font = "bold 14px Inter, system-ui, sans-serif"; ctx.textAlign = "center"; ctx.textBaseline = "bottom";
-      // Dynamic text: any {expression} is evaluated live with the slider values
-      // (and the point's current x/y in scope), e.g. "y = {a}" or "({x}, {y})".
-      const shown = (l.text || "").replace(/\{([^}]+)\}/g, (_, e) => {
+      // Dynamic text (GeoGebra-style):
+      //  1) {expression} is evaluated live (e.g. "y = {a}" or "{x^2+1}").
+      //  2) Bare slider names become their live values, except a leading
+      //     "name =" keeps the name on the left — so typing "a = a" shows "a = 1.5".
+      //  3) Anything after ^ (including decimals and ^{…}) is drawn raised.
+      let shown = (l.text || "").replace(/\{([^}]+)\}/g, (_, e) => {
         const v = safeCompile(e)({ ...vars, x: lx, y: ly });
         return Number.isFinite(v) ? String(Math.round(v * 1000) / 1000) : "?";
       });
+      {
+        const names = Object.keys(vars).sort((a, b) => b.length - a.length);
+        let prefix = "";
+        let rest = shown;
+        for (const name of names) {
+          const m = rest.match(new RegExp(`^(\\s*)(${name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})(\\s*=\\s*)`));
+          if (m) { prefix = m[0]; rest = rest.slice(m[0].length); break; }
+        }
+        for (const name of names) {
+          const re = new RegExp(`(?<![A-Za-z0-9_])${name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}(?![A-Za-z0-9_])`, "g");
+          rest = rest.replace(re, () => {
+            const v = vars[name];
+            return Number.isFinite(v) ? String(Math.round(v * 1000) / 1000) : "?";
+          });
+        }
+        shown = prefix + rest;
+      }
       if (shown) {
+        const runs = splitExponents(shown);
+        const pos: LabelPos = l.pos === "below" || l.pos === "left" || l.pos === "right" ? l.pos : "above";
+        const size = typeof l.fontSize === "number" && l.fontSize > 0 ? l.fontSize : DEFAULT_LABEL_SIZE;
         // angle (degrees) may be a number or a slider expression; positive tilts up to the right
         const ang = l.angle == null || l.angle === "" ? 0 : cx(l.angle);
         if (ang) {
           ctx.save();
-          ctx.translate(p.px, p.py - 8);
+          ctx.translate(p.px, p.py);
           ctx.rotate(-ang * Math.PI / 180);
-          ctx.fillText(shown, 0, 0);
+          drawRuns(ctx, runs, 0, 0, pos, size);
           ctx.restore();
         } else {
-          ctx.fillText(shown, p.px, p.py - 8);
+          drawRuns(ctx, runs, p.px, p.py, pos, size);
         }
       }
     }
@@ -486,7 +562,7 @@ export function Calculator({ initialData, initialState, initialId, embed = false
           <AddBtn color="#7c3aed" onClick={() => setFns((l) => [...l, { ...newFn(l.length), kind: "polar", expr: "1 + cos(t)" }])}>+ Polar</AddBtn>
           <AddBtn color="#1b7a44" onClick={() => setSliders((l) => [...l, { id: uid("s"), name: nextName(l), value: 1, min: -10, max: 10, step: 0.1, anim: false, speed: 1 }])}>+ Slider</AddBtn>
           <AddBtn color="#e69138" onClick={() => setTables((l) => [...l, { id: uid("t"), name: "Table", color: "#e69138", shape: "circle", visible: true, points: [{ x: "1", y: "1" }, { x: "2", y: "4" }] }])}>+ Table</AddBtn>
-          <AddBtn color="#0d9488" onClick={() => setLabels((l) => [...l, { id: uid("l"), text: "Point", x: 1, y: 1, color: "#0d9488", visible: true, showPoint: true, angle: 0 }])}>+ Text/Point</AddBtn>
+          <AddBtn color="#0d9488" onClick={() => setLabels((l) => [...l, { id: uid("l"), text: "Point", x: 1, y: 1, color: "#0d9488", visible: true, showPoint: true, angle: 0, pos: "above", fontSize: DEFAULT_LABEL_SIZE }])}>+ Text/Point</AddBtn>
           <label style={{ gridColumn: "1 / -1", background: "#c2185b", color: "#fff", padding: "7px", borderRadius: 8, fontWeight: 700, fontSize: 12, textAlign: "center", cursor: "pointer" }}>+ Image<input type="file" accept="image/*" style={{ display: "none" }} onChange={onUpload} /></label>
         </div>
 
@@ -590,7 +666,25 @@ export function Calculator({ initialData, initialState, initialId, embed = false
               <button onClick={() => patch(setLabels, l.id, { showPoint: !l.showPoint })} title="Toggle dot" style={eyeBtn(l.showPoint)}>•</button>
               <X onClick={() => drop(setLabels, l.id)} />
             </Row>
-            <div style={{ display: "flex", gap: 6, marginTop: 6 }}><NumStr label="x (or expr)" v={String(l.x)} on={(v) => patch(setLabels, l.id, { x: v })} /><NumStr label="y (or expr)" v={String(l.y)} on={(v) => patch(setLabels, l.id, { y: v })} /><NumStr label="angle°" v={String(l.angle ?? 0)} on={(v) => patch(setLabels, l.id, { angle: v })} /></div>
+            <div style={{ display: "flex", gap: 6, marginTop: 6 }}>
+              <NumStr label="x (or expr)" v={String(l.x)} on={(v) => patch(setLabels, l.id, { x: v })} />
+              <NumStr label="y (or expr)" v={String(l.y)} on={(v) => patch(setLabels, l.id, { y: v })} />
+              <NumStr label="angle°" v={String(l.angle ?? 0)} on={(v) => patch(setLabels, l.id, { angle: v })} />
+              <label style={{ flex: 1, display: "flex", flexDirection: "column", gap: 2, fontSize: 11, color: "#64748b" }}>
+                place
+                <select
+                  value={l.pos ?? "above"}
+                  onChange={(e) => patch(setLabels, l.id, { pos: e.target.value as LabelPos })}
+                  style={{ width: "100%", padding: "3px 5px", border: "1px solid #cbd5e1", borderRadius: 6, fontSize: 12, boxSizing: "border-box" }}
+                >
+                  <option value="above">Above</option>
+                  <option value="below">Below</option>
+                  <option value="left">Left</option>
+                  <option value="right">Right</option>
+                </select>
+              </label>
+              <NumIn label="size" v={l.fontSize ?? DEFAULT_LABEL_SIZE} on={(v) => patch(setLabels, l.id, { fontSize: Math.max(8, Math.min(72, v || DEFAULT_LABEL_SIZE)) })} />
+            </div>
           </Card>
         ))}
 
