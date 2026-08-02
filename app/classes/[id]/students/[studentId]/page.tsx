@@ -33,6 +33,9 @@ export default function StudentActivityPage() {
   const [lessons, setLessons] = useState<{ id: string; title: string }[]>([]);
   const [progress, setProgress] = useState<Record<string, { view_count: number; last_viewed_at: string | null; completed: boolean }>>({});
   const [progressAvailable, setProgressAvailable] = useState(true);
+  const [worksheets, setWorksheets] = useState<{ id: string }[]>([]);
+  const [worksheetsRead, setWorksheetsRead] = useState<Set<string>>(new Set());
+  const [wsProgressAvailable, setWsProgressAvailable] = useState(true);
 
   useEffect(() => {
     (async () => {
@@ -87,6 +90,14 @@ export default function StudentActivityPage() {
         (prog.data ?? []).forEach((r: any) => { pm[r.lesson_id] = { view_count: r.view_count, last_viewed_at: r.last_viewed_at, completed: r.completed }; });
         setProgress(pm);
       }
+
+      // Worksheet activity (best-effort — needs the worksheet_progress migration).
+      const { data: wz } = await supabase.from("worksheets").select("id").eq("course_id", cls.course_id).eq("published", true);
+      setWorksheets((wz ?? []).map((w: any) => ({ id: w.id })));
+      const wprog = await supabase.from("worksheet_progress").select("worksheet_id").eq("student_id", studentId).eq("course_id", cls.course_id);
+      if (wprog.error) setWsProgressAvailable(false);
+      else setWorksheetsRead(new Set((wprog.data ?? []).map((r: any) => r.worksheet_id)));
+
       setLoading(false);
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -96,8 +107,6 @@ export default function StudentActivityPage() {
   if (denied) return (<main><SiteHeader /><div style={{ padding: 48, color: "#64748b" }}>You don’t have access to this student’s activity.</div></main>);
 
   // ── summary stats ──
-  const gradedAttempts = attempts.filter((a) => a.percent != null);
-  const avg = gradedAttempts.length ? Math.round((gradedAttempts.reduce((s, a) => s + (a.percent ?? 0), 0) / gradedAttempts.length) * 10) / 10 : null;
   const distinctQuizzes = new Set(attempts.map((a) => a.quiz_id)).size;
   const passedCount = attempts.filter((a) => a.passed).length;
   const totalMins = Math.round(attempts.reduce((s, a) => s + (a.time_spent_seconds ?? 0), 0) / 60);
@@ -109,6 +118,34 @@ export default function StudentActivityPage() {
     ...attempts.map((a) => a.submitted_at),
     ...Object.values(subs).map((s) => s.submitted_at),
   ].filter(Boolean).sort().slice(-1)[0] as string | undefined;
+
+  // ── overall grade (weighted composite: quizzes 35 · assignments 35 · lessons read 15 · worksheets read 15) ──
+  // Quizzes: best attempt per quiz, then averaged across quizzes.
+  const bestByQuiz = new Map<string, number>();
+  for (const a of attempts) {
+    if (a.percent == null) continue;
+    const cur = bestByQuiz.get(a.quiz_id);
+    if (cur == null || a.percent > cur) bestByQuiz.set(a.quiz_id, a.percent);
+  }
+  const quizPct = bestByQuiz.size ? [...bestByQuiz.values()].reduce((s, v) => s + v, 0) / bestByQuiz.size : null;
+  // Assignments: average of graded submissions (grade is out of 100).
+  const gradedSubs = asgOrder.map((id) => subs[id]).filter((s) => s && s.grade != null) as SubRow[];
+  const asgPct = gradedSubs.length ? gradedSubs.reduce((s, r) => s + (r.grade ?? 0), 0) / gradedSubs.length : null;
+  // Lessons / worksheets read: fraction opened.
+  const worksheetReadCount = worksheets.filter((w) => worksheetsRead.has(w.id)).length;
+  const lessonPct = progressAvailable && lessons.length ? (lessonsViewed / lessons.length) * 100 : null;
+  const worksheetPct = wsProgressAvailable && worksheets.length ? (worksheetReadCount / worksheets.length) * 100 : null;
+
+  const components = [
+    { key: "Quizzes", pct: quizPct, weight: 35, note: distinctQuizzes ? `best of ${distinctQuizzes} quiz${distinctQuizzes !== 1 ? "zes" : ""}` : "none attempted" },
+    { key: "Assignments", pct: asgPct, weight: 35, note: `${gradedSubs.length} graded` },
+    { key: "Lessons read", pct: lessonPct, weight: 15, note: progressAvailable ? `${lessonsViewed}/${lessons.length} opened` : "tracking off" },
+    { key: "Worksheets read", pct: worksheetPct, weight: 15, note: wsProgressAvailable ? `${worksheetReadCount}/${worksheets.length} opened` : "tracking off" },
+  ];
+  const present = components.filter((c) => c.pct != null);
+  const weightSum = present.reduce((s, c) => s + c.weight, 0);
+  const overall = weightSum ? Math.round(present.reduce((s, c) => s + (c.pct as number) * c.weight, 0) / weightSum) : null;
+  const avg = quizPct != null ? Math.round(quizPct * 10) / 10 : null;
 
   return (
     <main style={{ minHeight: "100vh" }}>
@@ -124,10 +161,40 @@ export default function StudentActivityPage() {
         </div>
         {lastActive && <p style={{ color: "#94a3b8", fontSize: 13, margin: "6px 0 0" }}>Last active {new Date(lastActive).toLocaleString()}</p>}
 
+        {/* Overall grade */}
+        <div style={{ background: "#fff", border: "1px solid #e2e8f0", borderRadius: 16, padding: "22px 24px", margin: "22px 0 26px", display: "flex", gap: 28, flexWrap: "wrap", alignItems: "center" }}>
+          <div style={{ textAlign: "center", minWidth: 150 }}>
+            <div style={{ fontSize: 12, fontWeight: 800, color: "#64748b", textTransform: "uppercase", letterSpacing: "0.05em" }}>Overall grade</div>
+            <div style={{ fontFamily: "Fraunces, serif", fontSize: 54, fontWeight: 800, color: gradeColor(overall), lineHeight: 1.05, margin: "4px 0 0" }}>{overall != null ? `${overall}%` : "—"}</div>
+            <div style={{ fontSize: 13, color: "#94a3b8" }}>{bandFor(overall)}</div>
+          </div>
+          <div style={{ flex: 1, minWidth: 280, display: "flex", flexDirection: "column", gap: 9 }}>
+            {components.map((c) => {
+              const included = c.pct != null;
+              const eff = included && weightSum ? Math.round((c.weight / weightSum) * 100) : c.weight;
+              return (
+                <div key={c.key} style={{ display: "grid", gridTemplateColumns: "1.5fr 2.2fr 1fr", alignItems: "center", gap: 10, opacity: included ? 1 : 0.4 }}>
+                  <div style={{ fontSize: 14, fontWeight: 600 }}>{c.key} <span style={{ color: "#94a3b8", fontWeight: 500, fontSize: 12 }}>· {c.note}</span></div>
+                  <div style={{ height: 8, background: "#f1f5f9", borderRadius: 999, overflow: "hidden" }}>
+                    <div style={{ width: `${included ? Math.min(100, c.pct as number) : 0}%`, height: "100%", background: gradeColor(c.pct) }} />
+                  </div>
+                  <div style={{ textAlign: "right", fontSize: 13, whiteSpace: "nowrap" }}>
+                    <span style={{ fontWeight: 700 }}>{included ? `${Math.round(c.pct as number)}%` : "—"}</span>
+                    <span style={{ color: "#94a3b8", fontSize: 12 }}> · {included ? `${eff}%` : "excl."} wt</span>
+                  </div>
+                </div>
+              );
+            })}
+            <div style={{ fontSize: 12, color: "#94a3b8", marginTop: 3 }}>
+              Base weights: quizzes 35% · assignments 35% · lessons read 15% · worksheets read 15%. Parts with no data are excluded and the rest renormalize.
+            </div>
+          </div>
+        </div>
+
         {/* Summary tiles */}
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))", gap: 12, margin: "20px 0 30px" }}>
           <Tile label="Quizzes attempted" value={`${distinctQuizzes}`} sub={`${attempts.length} attempt${attempts.length !== 1 ? "s" : ""}`} />
-          <Tile label="Average quiz score" value={avg != null ? `${avg}%` : "—"} sub={`${passedCount} passed`} />
+          <Tile label="Quiz average (best)" value={avg != null ? `${avg}%` : "—"} sub={`${passedCount} attempt${passedCount !== 1 ? "s" : ""} passed`} />
           <Tile label="Time on quizzes" value={`${totalMins}`} sub="minutes" />
           <Tile label="Assignments" value={`${submittedCount}`} sub={`submitted · ${gradedCount} graded`} />
           <Tile label="Lessons" value={progressAvailable ? `${lessonsCompleted}/${lessons.length}` : "—"} sub={progressAvailable ? `completed · ${lessonsViewed} opened` : "tracking off"} />
@@ -233,6 +300,20 @@ function Tile({ label, value, sub }: { label: string; value: string; sub: string
 }
 function Pill({ children, color, bg }: { children: React.ReactNode; color: string; bg: string }) {
   return <span style={{ fontSize: 12, fontWeight: 700, color, background: bg, padding: "3px 9px", borderRadius: 999 }}>{children}</span>;
+}
+function gradeColor(pct: number | null): string {
+  if (pct == null) return "#94a3b8";
+  if (pct >= 80) return "#059669";
+  if (pct >= 65) return "#0d9488";
+  if (pct >= 50) return "#d97706";
+  return "#dc2626";
+}
+function bandFor(pct: number | null): string {
+  if (pct == null) return "no data yet";
+  if (pct >= 80) return "Excellent";
+  if (pct >= 65) return "Good standing";
+  if (pct >= 50) return "Passing";
+  return "At risk";
 }
 function Empty({ children }: { children: React.ReactNode }) {
   return <div style={{ background: "#fff", border: "1px solid #e2e8f0", borderRadius: 14, padding: 22, color: "#94a3b8" }}>{children}</div>;

@@ -29,6 +29,10 @@ export default function WorksheetViewPage() {
       if (session) {
         const { data: me } = await supabase.from("profiles").select("role").eq("id", session.user.id).single();
         setIsAdmin(me?.role === "admin");
+        if (me?.role === "student") {
+          // best-effort — no-op until the worksheet_progress migration is run
+          supabase.rpc("record_worksheet_view", { p_worksheet: id }).then(() => {}, () => {});
+        }
       }
       setLoading(false);
     })();
