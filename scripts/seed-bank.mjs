@@ -570,6 +570,15 @@ export function genFracOps() {
     fill("hard", "$-\\frac{1}{2}+\\frac{3}{4}-\\frac{5}{6} = $ ___ (simplest form).", ["-7/12", "-\\frac{7}{12}"]),
     num("hard", "$\\left(\\frac{1}{2}+\\frac{1}{3}\\right)\\times\\left(-\\frac{6}{5}\\right) = $ ___.", -1, 0, "$\\frac{5}{6}\\times-\\frac{6}{5}=-1$."),
     num("hard", "$-\\frac{3}{4}\\div\\frac{3}{8}-\\frac{1}{2} = $ ___ (decimal).", -2.5, 0, "$-2-\\frac{1}{2}=-\\frac{5}{2}$."),
+    // proper / improper fractions
+    mc("medium", "Which of these is an improper fraction?", ["$\\frac{3}{5}$", "$\\frac{7}{4}$", "$\\frac{2}{9}$", "$\\frac{1}{2}$"], 1, "An improper fraction has numerator $\\ge$ denominator."),
+    fill("medium", "A fraction whose numerator is smaller than its denominator is called ___.", ["proper"]),
+    fill("medium", "Write $\\frac{11}{4}$ as a mixed number: ___.", ["2 3/4", "2\\frac{3}{4}"]),
+    // complex fractions
+    num("medium", "Simplify the complex fraction $\\dfrac{\\frac{1}{2}}{\\frac{1}{4}} = $ ___.", 2, 0, "$\\frac{1}{2}\\times 4 = 2$."),
+    mc("hard", "Simplify $\\dfrac{\\frac{3}{4}}{\\frac{1}{2}}$:", ["$\\frac{3}{2}$", "$\\frac{3}{8}$", "$\\frac{2}{3}$", "$\\frac{8}{3}$"], 0, "$\\frac{3}{4}\\times\\frac{2}{1}=\\frac{3}{2}$."),
+    mc("hard", "Simplify $\\dfrac{\\frac{5}{6}}{\\frac{2}{3}}$:", ["$\\frac{5}{4}$", "$\\frac{4}{5}$", "$\\frac{5}{9}$", "$\\frac{9}{5}$"], 0, "$\\frac{5}{6}\\times\\frac{3}{2}=\\frac{15}{12}=\\frac{5}{4}$."),
+    fill("hard", "Simplify $\\dfrac{\\frac{2}{3}+\\frac{1}{6}}{\\frac{5}{6}} = $ ___.", ["1"]),
   ];
   return [...trimmed, ...extra];
 }

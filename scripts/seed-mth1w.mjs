@@ -155,7 +155,7 @@ Application
 10. An account has \$250; \$75 is withdrawn each week for 4 weeks. What is the balance?` },
 
   "1.6": { title: "Assignment 1.6 — Fractions & Operations with Positive/Negative Fractions", description: String.raw`Knowledge & Understanding
-1. Simplify \( \frac{24}{36} \) and \( \frac{45}{60} \).
+1. Classify \( \frac{5}{8},\ \frac{11}{4},\ \frac{7}{7} \) as proper or improper, then simplify \( \frac{24}{36} \) and \( \frac{45}{60} \).
 2. Order \( \frac{5}{8},\ \frac{2}{3},\ \frac{7}{12} \) from least to greatest.
 3. Evaluate \( \frac{5}{6} + \frac{3}{8} \) and write the answer as a mixed number.
 Thinking
@@ -166,7 +166,7 @@ Communication
 7. Show step-by-step how to compute \( -\frac{8}{9} \times \frac{3}{4} \), explaining both the cancelling and the sign.
 Application
 8. A tank is \( \frac{2}{3} \) full. After adding \( 10 \) L it is \( \frac{5}{6} \) full. Find the tank's capacity.
-9. Evaluate \( -\frac{5}{6} \div \left(-\frac{5}{12}\right) \) and \( \frac{3}{4} - \frac{1}{2} \times \frac{1}{3} \).
+9. Evaluate \( -\frac{5}{6} \div \left(-\frac{5}{12}\right) \), \( \frac{3}{4} - \frac{1}{2} \times \frac{1}{3} \), and the complex fraction \( \dfrac{\frac{3}{4}}{\frac{1}{2}} \).
 10. A recipe needs \( 2\frac{1}{2} \) cups of flour and you make \( 1\frac{1}{2} \) times it. How much flour in total? Give a mixed number.` },
 
   "1.7": { title: "Assignment 1.7 — Ratios, Rates, Percentages & Proportions", description: String.raw`Knowledge & Understanding
@@ -1479,8 +1479,8 @@ const subjects = [
     <div style="font-size:13px;color:#64748b;margin-top:2px;">Same-width bars: \( \frac{3}{4} \) reaches past the dashed line, so \( \frac{3}{4} > \frac{2}{3} \).</div>
   </div>
 
-  <h2>📌 Mixed &amp; Improper Forms</h2>
-  <p>Convert an improper fraction by dividing: \( \frac{23}{6}=3\,\text{r}\,5=3\frac{5}{6} \). Go back with "whole × denominator + numerator": \( 3\frac{3}{4}=\frac{3\times4+3}{4}=\frac{15}{4} \).</p>
+  <h2>📌 Proper, Improper &amp; Mixed Numbers</h2>
+  <p>A <strong>proper</strong> fraction has a numerator smaller than its denominator, so its value is below \( 1 \) (like \( \frac{3}{4} \)). An <strong>improper</strong> fraction has numerator \( \ge \) denominator, so its value is \( 1 \) or more (like \( \frac{7}{4} \)). Convert an improper fraction to a <strong>mixed number</strong> by dividing: \( \frac{23}{6}=3\frac{5}{6} \); go back with "whole × denominator + numerator": \( 3\frac{3}{4}=\frac{3\times4+3}{4}=\frac{15}{4} \).</p>
 
   <h2>📌 Adding &amp; Subtracting (with signs)</h2>
   <p>Find a <strong>common denominator</strong>, then add or subtract the numerators — tracking signs exactly as with integers: \( \frac{1}{2}+\frac{1}{3}=\frac{3}{6}+\frac{2}{6}=\frac{5}{6} \), and \( -\frac{3}{4}-\frac{1}{6}=-\frac{9}{12}-\frac{2}{12}=-\frac{11}{12} \).</p>
@@ -1490,6 +1490,9 @@ const subjects = [
 
   <h2>📌 Order of Operations</h2>
   <p>Brackets, then multiply/divide, then add/subtract — even when everything is a fraction: \( \frac{1}{2}+\frac{2}{3}\times\left(-\frac{3}{4}\right)=\frac{1}{2}+\left(-\frac{1}{2}\right)=0 \).</p>
+
+  <h2>📌 Complex Fractions</h2>
+  <p>A <strong>complex fraction</strong> has a fraction in its top, its bottom, or both. The long middle bar means "divide", so simplify by multiplying by the <strong>reciprocal of the bottom</strong>: \( \dfrac{\frac{1}{2}}{\frac{3}{4}}=\frac{1}{2}\times\frac{4}{3}=\frac{2}{3} \). If the top or bottom is a sum, combine it into a single fraction first.</p>
 
   <h2>🔵 Examples</h2>
 
@@ -1569,6 +1572,25 @@ const subjects = [
     </div>
   </div>
 
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;">
+    <h3>Example 9: Complex fraction</h3><p>Simplify \( \dfrac{\frac{1}{2}}{\frac{3}{4}} \).</p>
+    <div class="solution">
+      <div class="step"><strong>Step 1:</strong> The main bar means divide: \( \frac{1}{2}\div\frac{3}{4} \).</div>
+      <div class="step"><strong>Step 2:</strong> Multiply by the reciprocal of the bottom: \( \frac{1}{2}\times\frac{4}{3}=\frac{4}{6} \).</div>
+      <div class="step"><strong>Step 3:</strong> Simplify: \( \frac{4}{6}=\frac{2}{3} \).</div>
+      <em>Conclusion: \( \frac{2}{3} \). ✓</em>
+    </div>
+  </div>
+
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;">
+    <h3>Example 10: Complex fraction with a sum on top</h3><p>Simplify \( \dfrac{\frac{2}{3}+\frac{1}{6}}{\frac{5}{6}} \).</p>
+    <div class="solution">
+      <div class="step"><strong>Step 1:</strong> Combine the top over a common denominator: \( \frac{2}{3}+\frac{1}{6}=\frac{4}{6}+\frac{1}{6}=\frac{5}{6} \).</div>
+      <div class="step"><strong>Step 2:</strong> Now divide: \( \frac{5}{6}\div\frac{5}{6}=\frac{5}{6}\times\frac{6}{5}=1 \).</div>
+      <em>Conclusion: \( 1 \). ✓</em>
+    </div>
+  </div>
+
   <h2>🟡 Practice Questions</h2>
 
   <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;">
@@ -1606,11 +1628,22 @@ const subjects = [
     <details><summary>View answer</summary><div class="solution"><div class="step">\( \frac{5}{6}-\frac{2}{3}=\frac{1}{6} \) of the tank \( =10 \) L. <em>Answer: \( 60 \) L.</em></div></div></details>
   </div>
 
+  <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;">
+    <h3>Question 8</h3><p>Classify each as proper or improper, and write \( \frac{11}{4} \) as a mixed number: \( \frac{5}{8},\ \frac{11}{4},\ \frac{7}{7} \).</p>
+    <details><summary>View answer</summary><div class="solution"><div class="step">\( \frac{5}{8} \) proper; \( \frac{11}{4} \) and \( \frac{7}{7} \) improper. <em>Answer: \( \frac{11}{4}=2\frac{3}{4} \).</em></div></div></details>
+  </div>
+
+  <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;">
+    <h3>Question 9</h3><p>Simplify the complex fraction \( \dfrac{\frac{3}{4}}{\frac{1}{2}} \).</p>
+    <details><summary>View answer</summary><div class="solution"><div class="step">\( \frac{3}{4}\times\frac{2}{1}=\frac{6}{4} \). <em>Answer: \( \frac{3}{2} \).</em></div></div></details>
+  </div>
+
   <h2>❓ Q&amp;A Summary</h2>
   <div class="qa-box" style="background-color:#f0f0f0;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Q1: When do I need a common denominator?</h3><p><em>For adding and subtracting — not for multiplying or dividing.</em></p></div>
   <div class="qa-box" style="background-color:#f0f0f0;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Q2: How do I divide by a fraction?</h3><p><em>Multiply by its reciprocal (flip the second fraction).</em></p></div>
   <div class="qa-box" style="background-color:#f0f0f0;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Q3: What about the signs?</h3><p><em>Same integer rules: \( (-)(-) = + \), \( (-)(+) = - \), and negatives add just like integers.</em></p></div>
   <div class="qa-box" style="background-color:#f0f0f0;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Q4: What order do I compute in?</h3><p><em>Brackets, then multiply/divide, then add/subtract — even with fractions.</em></p></div>
+  <div class="qa-box" style="background-color:#f0f0f0;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Q5: How do I simplify a complex fraction?</h3><p><em>The middle bar means divide — multiply by the reciprocal of the bottom fraction.</em></p></div>
 </div>` },
     ],
     assignment: {
