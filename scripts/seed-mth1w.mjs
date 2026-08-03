@@ -154,37 +154,22 @@ Application
 9. A diver at \( -12 \) m descends 8 m, then rises 5 m. What is the final depth?
 10. An account has \$250; \$75 is withdrawn each week for 4 weeks. What is the balance?` },
 
-  "1.6": { title: "Assignment 1.6 — Fractions & Unit Fractions", description: String.raw`Knowledge & Understanding
-1. Simplify \( \frac{6}{8} \) and \( \frac{12}{18} \).
-2. Which is larger: \( \frac{2}{3} \) or \( \frac{3}{4} \)?
-3. Write \( \frac{5}{8} \) as a decimal.
+  "1.6": { title: "Assignment 1.6 — Fractions & Operations with Positive/Negative Fractions", description: String.raw`Knowledge & Understanding
+1. Simplify \( \frac{24}{36} \) and \( \frac{45}{60} \).
+2. Order \( \frac{5}{8},\ \frac{2}{3},\ \frac{7}{12} \) from least to greatest.
+3. Evaluate \( \frac{5}{6} + \frac{3}{8} \) and write the answer as a mixed number.
 Thinking
-4. Find a fraction between \( \frac{1}{2} \) and \( \frac{2}{3} \).
-5. Order \( \frac{1}{2}, \frac{2}{3}, \frac{3}{5} \) from least to greatest and explain your method.
+4. Find a fraction strictly between \( \frac{3}{5} \) and \( \frac{2}{3} \), and explain your method.
+5. Show that \( \frac{1}{2} + \frac{2}{3} \times \left(-\frac{3}{4}\right) = 0 \), and explain why the multiplication must be done first.
 Communication
-6. Explain what a unit fraction is and give an example.
-7. Explain why \( -\frac{1}{2} = \frac{1}{-2} = -\left(\frac{1}{2}\right) \).
+6. Explain, with a number-line picture, why \( -\frac{3}{4} - \frac{1}{6} \) is more negative than \( -\frac{3}{4} \).
+7. Show step-by-step how to compute \( -\frac{8}{9} \times \frac{3}{4} \), explaining both the cancelling and the sign.
 Application
-8. A recipe needs \( \frac{3}{4} \) cup but you only have a \( \frac{1}{4} \)-cup scoop. How many scoops?
-9. Plot \( \frac{3}{4}, -\frac{1}{4}, -\frac{3}{4} \) on a number line.
-10. Write \( \frac{7}{2} \) as a mixed number and describe a situation it could represent.` },
+8. A tank is \( \frac{2}{3} \) full. After adding \( 10 \) L it is \( \frac{5}{6} \) full. Find the tank's capacity.
+9. Evaluate \( -\frac{5}{6} \div \left(-\frac{5}{12}\right) \) and \( \frac{3}{4} - \frac{1}{2} \times \frac{1}{3} \).
+10. A recipe needs \( 2\frac{1}{2} \) cups of flour and you make \( 1\frac{1}{2} \) times it. How much flour in total? Give a mixed number.` },
 
-  "1.7": { title: "Assignment 1.7 — Operations with Fractions", description: String.raw`Knowledge & Understanding
-1. Evaluate \( \frac{1}{2} + \frac{1}{4} \).
-2. Evaluate \( \frac{2}{3} \times \frac{3}{4} \).
-3. Evaluate \( \frac{3}{4} \div \frac{1}{2} \).
-Thinking
-4. Explain why dividing by a fraction is the same as multiplying by its reciprocal.
-5. Find two different pairs of fractions whose product is \( \frac{1}{2} \).
-Communication
-6. Show step-by-step how to compute \( \frac{1}{2} + \frac{1}{3} \), explaining each step.
-7. Describe a common error students make when adding fractions.
-Application
-8. A recipe needs \( 2\frac{1}{2} \) cups of flour. You triple it — how much flour total?
-9. A 70 L barrel loses \( \frac{3}{4} \) L per minute. How many litres are lost in 8 minutes?
-10. Evaluate \( \left(\frac{2}{3}\right)^2 \) and describe what squaring a fraction does to its size.` },
-
-  "1.8": { title: "Assignment 1.8 — Ratios, Rates, Percentages & Proportions", description: String.raw`Knowledge & Understanding
+  "1.7": { title: "Assignment 1.7 — Ratios, Rates, Percentages & Proportions", description: String.raw`Knowledge & Understanding
 1. Find \( 25\% \) of 80.
 2. Simplify the ratio \( 6:4 \).
 3. Solve the proportion \( \frac{3}{4} = \frac{x}{12} \).
@@ -1462,17 +1447,17 @@ const subjects = [
   },
 
   {
-    code: "1.6", title: "Fractions & Unit Fractions",
+    code: "1.6", title: "Fractions & Operations with Positive/Negative Fractions",
     blocks: [
       { id: bid(), type: "html", html: String.raw`<div class="lecture-box">
-  <h1>🍕 Fractions &amp; Unit Fractions</h1>
-  <p><strong>Overview.</strong> A <strong>unit fraction</strong> has a numerator of \( 1 \), like \( \frac{1}{4} \). Every fraction is built from unit fractions: \( \frac{3}{4} = \frac{1}{4} + \frac{1}{4} + \frac{1}{4} \).</p>
+  <h1>🍕 Fractions &amp; Operations with Positive/Negative Fractions</h1>
+  <p><strong>Overview.</strong> This topic runs the full arc of fraction fluency in one place — building and comparing fractions, then computing with them (add, subtract, multiply, divide) while the integer sign rules stay in force. The examples and practice here are deliberately <strong>above the usual Grade&nbsp;9 level</strong>: expect multi-step problems, negatives, order of operations, and word problems.</p>
 
-  <h2>📌 Equivalent Fractions &amp; Simplifying</h2>
-  <p>Multiply or divide top and bottom by the same number: \( \frac{1}{2} = \frac{2}{4} = \frac{3}{6} \). To <strong>simplify</strong>, divide both by their greatest common factor.</p>
+  <h2>📌 Unit Fractions, Equivalence &amp; Simplifying</h2>
+  <p>A <strong>unit fraction</strong> has numerator \( 1 \), and every fraction is a sum of them: \( \frac{3}{4} = \frac{1}{4}+\frac{1}{4}+\frac{1}{4} \). Multiply or divide top and bottom by the <strong>same</strong> number to get an equivalent fraction: \( \frac{1}{2}=\frac{2}{4}=\frac{3}{6} \). To <strong>simplify</strong>, divide both by their greatest common factor (GCF): \( \frac{24}{36}=\frac{24\div12}{36\div12}=\frac{2}{3} \).</p>
 
-  <h2>📌 Comparing Fractions</h2>
-  <p>Rewrite with a common denominator. Compare \( \frac{2}{3} \) and \( \frac{3}{4} \): \( \frac{8}{12} \) vs \( \frac{9}{12} \), so \( \frac{3}{4} \) is larger.</p>
+  <h2>📌 Comparing &amp; Ordering</h2>
+  <p>Rewrite with a <strong>common denominator</strong>, then compare numerators. For \( \frac{2}{3} \) and \( \frac{3}{4} \): \( \frac{8}{12} \) vs \( \frac{9}{12} \), so \( \frac{3}{4} \) is larger. With unit fractions the rule reverses: the <strong>bigger the denominator, the smaller the piece</strong> (\( \frac{1}{5}<\frac{1}{3} \)).</p>
 
   <div style="text-align:center;margin:16px 0;">
     <svg viewBox="0 0 380 140" style="max-width:100%;height:auto;" role="img" aria-label="Bars comparing two thirds and three quarters">
@@ -1491,253 +1476,151 @@ const subjects = [
       </g>
       <line x1="240" y1="18" x2="240" y2="126" stroke="#94a3b8" stroke-dasharray="3 3"/>
     </svg>
-    <div style="font-size:13px;color:#64748b;margin-top:2px;">Same-width bars: \( \frac{3}{4} \) (shaded to the dashed line and past it) reaches further than \( \frac{2}{3} \), so \( \frac{3}{4} > \frac{2}{3} \).</div>
+    <div style="font-size:13px;color:#64748b;margin-top:2px;">Same-width bars: \( \frac{3}{4} \) reaches past the dashed line, so \( \frac{3}{4} > \frac{2}{3} \).</div>
   </div>
 
-  <h2>📌 Positive &amp; Negative Fractions</h2>
-  <p>The negative sign can sit on top, on the bottom, or in front — all the same value: \( -\frac{1}{2} = \frac{-1}{2} = \frac{1}{-2} \).</p>
+  <h2>📌 Mixed &amp; Improper Forms</h2>
+  <p>Convert an improper fraction by dividing: \( \frac{23}{6}=3\,\text{r}\,5=3\frac{5}{6} \). Go back with "whole × denominator + numerator": \( 3\frac{3}{4}=\frac{3\times4+3}{4}=\frac{15}{4} \).</p>
+
+  <h2>📌 Adding &amp; Subtracting (with signs)</h2>
+  <p>Find a <strong>common denominator</strong>, then add or subtract the numerators — tracking signs exactly as with integers: \( \frac{1}{2}+\frac{1}{3}=\frac{3}{6}+\frac{2}{6}=\frac{5}{6} \), and \( -\frac{3}{4}-\frac{1}{6}=-\frac{9}{12}-\frac{2}{12}=-\frac{11}{12} \).</p>
+
+  <h2>📌 Multiplying &amp; Dividing (with signs)</h2>
+  <p>Multiply straight across (cancel common factors first to keep numbers small): \( \frac{a}{b}\times\frac{c}{d}=\frac{ac}{bd} \). Divide by multiplying by the <strong>reciprocal</strong>: \( \frac{a}{b}\div\frac{c}{d}=\frac{a}{b}\times\frac{d}{c} \). Signs follow the integer rules: <strong>same signs → positive, different signs → negative</strong>.</p>
+
+  <h2>📌 Order of Operations</h2>
+  <p>Brackets, then multiply/divide, then add/subtract — even when everything is a fraction: \( \frac{1}{2}+\frac{2}{3}\times\left(-\frac{3}{4}\right)=\frac{1}{2}+\left(-\frac{1}{2}\right)=0 \).</p>
 
   <h2>🔵 Examples</h2>
 
   <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;">
-    <h3>Example 1: Simplify a fraction</h3><p>Simplify \( \frac{6}{8} \).</p>
+    <h3>Example 1: Simplify with a large GCF</h3><p>Simplify \( \frac{24}{36} \).</p>
     <div class="solution">
-      <div class="step"><strong>Step 1:</strong> Find the greatest common factor of \( 6 \) and \( 8 \): it is \( 2 \).</div>
-      <div class="step"><strong>Step 2:</strong> Divide top and bottom by \( 2 \): \( \frac{6 \div 2}{8 \div 2} = \frac{3}{4} \).</div>
-      <div class="step"><strong>Step 3 (check):</strong> \( 3 \) and \( 4 \) share no common factor, so it is fully simplified.</div>
-      <em>Conclusion: \( \frac{3}{4} \). ✓</em>
+      <div class="step"><strong>Step 1:</strong> The GCF of \( 24 \) and \( 36 \) is \( 12 \).</div>
+      <div class="step"><strong>Step 2:</strong> \( \frac{24\div12}{36\div12}=\frac{2}{3} \).</div>
+      <div class="step"><strong>Step 3 (check):</strong> \( 2 \) and \( 3 \) share no factor — fully simplified.</div>
+      <em>Conclusion: \( \frac{2}{3} \). ✓</em>
     </div>
   </div>
 
   <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;">
-    <h3>Example 2: Equivalent fraction</h3><p>Write \( \frac{1}{2} \) with denominator \( 4 \).</p>
+    <h3>Example 2: Order three fractions</h3><p>Order \( \frac{5}{8},\ \frac{2}{3},\ \frac{7}{12} \) from least to greatest.</p>
     <div class="solution">
-      <div class="step"><strong>Step 1:</strong> To turn the denominator \( 2 \) into \( 4 \), multiply by \( 2 \) — and do the same to the top.</div>
-      <div class="step"><strong>Step 2:</strong> \( \frac{1 \times 2}{2 \times 2} = \frac{2}{4} \).</div>
-      <em>Conclusion: \( \frac{2}{4} \) (which equals \( \frac{1}{2} \)). ✓</em>
+      <div class="step"><strong>Step 1:</strong> The LCM of \( 8, 3, 12 \) is \( 24 \).</div>
+      <div class="step"><strong>Step 2:</strong> \( \frac{5}{8}=\frac{15}{24},\ \frac{2}{3}=\frac{16}{24},\ \frac{7}{12}=\frac{14}{24} \).</div>
+      <div class="step"><strong>Step 3:</strong> Compare numerators \( 14<15<16 \).</div>
+      <em>Conclusion: \( \frac{7}{12},\ \frac{5}{8},\ \frac{2}{3} \). ✓</em>
     </div>
   </div>
 
   <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;">
-    <h3>Example 3: Compare two fractions</h3><p>Which is larger, \( \frac{2}{3} \) or \( \frac{3}{4} \)?</p>
+    <h3>Example 3: Mixed ↔ improper</h3><p>Write \( \frac{23}{6} \) as a mixed number, and \( 3\frac{3}{4} \) as an improper fraction.</p>
     <div class="solution">
-      <div class="step"><strong>Step 1:</strong> Common denominator is \( 12 \) (the LCM of \( 3 \) and \( 4 \)).</div>
-      <div class="step"><strong>Step 2:</strong> \( \frac{2}{3} = \frac{8}{12} \) and \( \frac{3}{4} = \frac{9}{12} \).</div>
-      <div class="step"><strong>Step 3:</strong> Compare numerators: \( 9 > 8 \).</div>
-      <em>Conclusion: \( \frac{3}{4} \) is larger (see the bars above). ✓</em>
+      <div class="step"><strong>Step 1:</strong> \( 23\div6 = 3 \) remainder \( 5 \), so \( \frac{23}{6}=3\frac{5}{6} \).</div>
+      <div class="step"><strong>Step 2:</strong> \( 3\frac{3}{4}=\frac{3\times4+3}{4}=\frac{15}{4} \).</div>
+      <em>Conclusion: \( 3\frac{5}{6} \) and \( \frac{15}{4} \). ✓</em>
     </div>
   </div>
 
   <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;">
-    <h3>Example 4: Improper to mixed</h3><p>Write \( \frac{7}{2} \) as a mixed number.</p>
+    <h3>Example 4: Add, then simplify to a mixed number</h3><p>Evaluate \( \frac{5}{6}+\frac{3}{8} \).</p>
     <div class="solution">
-      <div class="step"><strong>Step 1:</strong> Divide: \( 7 \div 2 = 3 \) remainder \( 1 \).</div>
-      <div class="step"><strong>Step 2:</strong> Whole part is \( 3 \); the remainder over the divisor is \( \frac{1}{2} \).</div>
-      <div class="step"><strong>Step 3 (check):</strong> \( 3 \times 2 + 1 = 7 \). ✓</div>
-      <em>Conclusion: \( 3\frac{1}{2} \).</em>
+      <div class="step"><strong>Step 1:</strong> LCD of \( 6 \) and \( 8 \) is \( 24 \): \( \frac{20}{24}+\frac{9}{24} \).</div>
+      <div class="step"><strong>Step 2:</strong> Add: \( \frac{29}{24} \).</div>
+      <div class="step"><strong>Step 3:</strong> Improper, so write as a mixed number: \( \frac{29}{24}=1\frac{5}{24} \).</div>
+      <em>Conclusion: \( 1\frac{5}{24} \). ✓</em>
     </div>
   </div>
 
   <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;">
-    <h3>Example 5: Fraction to decimal</h3><p>Write \( \frac{5}{8} \) as a decimal.</p>
+    <h3>Example 5: Subtract with negatives</h3><p>Evaluate \( -\frac{3}{4}-\frac{1}{6} \).</p>
     <div class="solution">
-      <div class="step"><strong>Step 1:</strong> A fraction means "divide": compute \( 5 \div 8 \).</div>
-      <div class="step"><strong>Step 2:</strong> \( 5.000 \div 8 = 0.625 \).</div>
-      <div class="step"><strong>Step 3 (check):</strong> \( 0.625 \times 8 = 5 \). ✓</div>
-      <em>Conclusion: \( 0.625 \).</em>
+      <div class="step"><strong>Step 1:</strong> LCD is \( 12 \): \( -\frac{9}{12}-\frac{2}{12} \).</div>
+      <div class="step"><strong>Step 2:</strong> Both terms are negative, so they combine: \( -\frac{11}{12} \).</div>
+      <em>Conclusion: \( -\frac{11}{12} \). ✓</em>
+    </div>
+  </div>
+
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;">
+    <h3>Example 6: Multiply — cancel first, then sign</h3><p>Evaluate \( -\frac{8}{9}\times\frac{3}{4} \).</p>
+    <div class="solution">
+      <div class="step"><strong>Step 1:</strong> Cancel: \( \frac{8}{4}=2 \) and \( \frac{3}{9}=\frac{1}{3} \), leaving \( \frac{2}{1}\times\frac{1}{3}=\frac{2}{3} \).</div>
+      <div class="step"><strong>Step 2:</strong> Different signs → negative.</div>
+      <em>Conclusion: \( -\frac{2}{3} \). ✓</em>
+    </div>
+  </div>
+
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;">
+    <h3>Example 7: Divide two negatives</h3><p>Evaluate \( -\frac{5}{6}\div\left(-\frac{5}{12}\right) \).</p>
+    <div class="solution">
+      <div class="step"><strong>Step 1:</strong> Multiply by the reciprocal: \( -\frac{5}{6}\times\left(-\frac{12}{5}\right) \).</div>
+      <div class="step"><strong>Step 2:</strong> Across: \( \frac{60}{30}=2 \).</div>
+      <div class="step"><strong>Step 3:</strong> Same signs → positive.</div>
+      <em>Conclusion: \( 2 \). ✓</em>
+    </div>
+  </div>
+
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;">
+    <h3>Example 8: Order of operations</h3><p>Evaluate \( \frac{1}{2}+\frac{2}{3}\times\left(-\frac{3}{4}\right) \).</p>
+    <div class="solution">
+      <div class="step"><strong>Step 1:</strong> Multiply first: \( \frac{2}{3}\times\left(-\frac{3}{4}\right)=-\frac{6}{12}=-\frac{1}{2} \).</div>
+      <div class="step"><strong>Step 2:</strong> Then add: \( \frac{1}{2}+\left(-\frac{1}{2}\right)=0 \).</div>
+      <em>Conclusion: \( 0 \). ✓</em>
     </div>
   </div>
 
   <h2>🟡 Practice Questions</h2>
 
   <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;">
-    <h3>Question 1</h3><p>Simplify \( \frac{12}{18} \).</p>
-    <details><summary>View answer</summary><div class="solution"><div class="step">Divide both by 6. <em>Answer: \( \frac{2}{3} \).</em></div></div></details>
+    <h3>Question 1</h3><p>Simplify \( \frac{45}{60} \).</p>
+    <details><summary>View answer</summary><div class="solution"><div class="step">Divide both by the GCF \( 15 \). <em>Answer: \( \frac{3}{4} \).</em></div></div></details>
   </div>
 
   <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;">
-    <h3>Question 2</h3><p>Write \( \frac{2}{3} \) with denominator 9.</p>
-    <details><summary>View answer</summary><div class="solution"><div class="step">Multiply top and bottom by 3. <em>Answer: \( \frac{6}{9} \).</em></div></div></details>
+    <h3>Question 2</h3><p>Order \( \frac{3}{4},\ \frac{5}{8},\ \frac{2}{3} \) from least to greatest.</p>
+    <details><summary>View answer</summary><div class="solution"><div class="step">Over \( 24 \): \( \frac{18}{24},\frac{15}{24},\frac{16}{24} \). <em>Answer: \( \frac{5}{8},\ \frac{2}{3},\ \frac{3}{4} \).</em></div></div></details>
   </div>
 
   <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;">
-    <h3>Question 3</h3><p>Which is larger, \( \frac{2}{3} \) or \( \frac{3}{4} \)?</p>
-    <details><summary>View answer</summary><div class="solution"><div class="step">\( \frac{8}{12} \) vs \( \frac{9}{12} \). <em>Answer: \( \frac{3}{4} \).</em></div></div></details>
+    <h3>Question 3</h3><p>Evaluate \( \frac{5}{6}-\frac{3}{4} \).</p>
+    <details><summary>View answer</summary><div class="solution"><div class="step">\( \frac{10}{12}-\frac{9}{12} \). <em>Answer: \( \frac{1}{12} \).</em></div></div></details>
   </div>
 
   <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;">
-    <h3>Question 4</h3><p>How many \( \frac{1}{4} \) cups make \( \frac{3}{4} \) cup?</p>
-    <details><summary>View answer</summary><div class="solution"><div class="step">\( \frac{3}{4} = \frac{1}{4}+\frac{1}{4}+\frac{1}{4} \). <em>Answer: 3.</em></div></div></details>
+    <h3>Question 4</h3><p>Evaluate \( -\frac{2}{3}\times\frac{9}{10} \).</p>
+    <details><summary>View answer</summary><div class="solution"><div class="step">Cancel then apply the sign: \( -\frac{18}{30} \). <em>Answer: \( -\frac{3}{5} \).</em></div></div></details>
   </div>
 
   <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;">
-    <h3>Question 5</h3><p>Order least to greatest: \( \frac{1}{2}, \frac{2}{3}, \frac{3}{5} \).</p>
-    <details><summary>View answer</summary><div class="solution"><div class="step">Common denominator 30: \( \frac{15}{30}, \frac{20}{30}, \frac{18}{30} \). <em>Answer: \( \frac{1}{2}, \frac{3}{5}, \frac{2}{3} \).</em></div></div></details>
-  </div>
-
-  <h2>❓ Q&amp;A Summary</h2>
-  <div class="qa-box" style="background-color:#f0f0f0;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Q1: How do I simplify a fraction?</h3><p><em>Divide the top and bottom by their greatest common factor.</em></p></div>
-  <div class="qa-box" style="background-color:#f0f0f0;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Q2: How do I compare two fractions?</h3><p><em>Rewrite them with a common denominator, then compare numerators.</em></p></div>
-  <div class="qa-box" style="background-color:#f0f0f0;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Q3: Where does the negative sign go?</h3><p><em>Top, bottom, or in front — \( -\frac{1}{2} = \frac{-1}{2} = \frac{1}{-2} \), all equal.</em></p></div>
-</div>` },
-    ],
-    assignment: {
-      title: "Assignment 1.6 — Working with Fractions",
-      description: "Part A: Simplify 6/8, 12/18, 10/25. Part B: Write two fractions equivalent to 2/3. Part C: Order from least to greatest: 1/2, 2/3, 3/5. Part D: On a number line from -1 to 1, plot 3/4, -1/4, and -3/4.",
-    },
-    quizzes: [
-      quiz("Easy", [
-        mc("Which is a unit fraction?", ["$\\frac{2}{3}$", "$\\frac{1}{5}$", "$\\frac{3}{4}$"], 1),
-        sa("Write $\\frac{1}{2}$ as an equivalent fraction with denominator 4.", ["2/4"]),
-        mc("Which is larger, $\\frac{2}{3}$ or $\\frac{3}{4}$?", ["$\\frac{2}{3}$", "$\\frac{3}{4}$", "they are equal"], 1),
-        tf("$\\frac{3}{4} = \\frac{1}{4} + \\frac{1}{4} + \\frac{1}{4}$.", true),
-      ], EASY),
-      quiz("Medium", [
-        sa("Simplify $\\frac{6}{8}$.", ["3/4"]),
-        mc("Which equals $-\\frac{2}{5}$?", ["$\\frac{-2}{5}$", "$\\frac{2}{-5}$", "both of these"], 2),
-        num("How many $\\frac{1}{4}$ cups make $\\frac{3}{4}$ cup?", 3, 0),
-        sa("Write a fraction equivalent to $\\frac{2}{3}$ with denominator 9.", ["6/9"]),
-      ], MED),
-      quiz("Hard", [
-        mc("Which list is ordered least to greatest?", ["$\\frac{1}{2}, \\frac{3}{5}, \\frac{2}{3}$", "$\\frac{2}{3}, \\frac{1}{2}, \\frac{3}{5}$", "$\\frac{3}{5}, \\frac{1}{2}, \\frac{2}{3}$"], 0),
-        num("What is $\\frac{5}{8}$ as a decimal?", 0.625, 0),
-        mc("On a number line, where is $-\\frac{3}{4}$?", ["between 0 and 1", "between -1 and 0", "between -2 and -1"], 1),
-        sa("Simplify $\\frac{12}{18}$.", ["2/3"]),
-        mc("$\\frac{7}{2}$ as a mixed number is", ["$3\\frac{1}{2}$", "$2\\frac{1}{7}$", "$3\\frac{1}{3}$"], 0),
-      ], HARD),
-    ],
-  },
-
-  {
-    code: "1.7", title: "Operations with Positive & Negative Fractions",
-    blocks: [
-      { id: bid(), type: "html", html: String.raw`<div class="lecture-box">
-  <h1>🧮 Operations with Positive &amp; Negative Fractions</h1>
-  <p><strong>Overview.</strong> Add, subtract, multiply, and divide fractions — with the integer sign rules still in force.</p>
-
-  <h2>📌 Adding &amp; Subtracting</h2>
-  <p>Find a <strong>common denominator</strong>, then add or subtract the numerators: \( \frac{1}{2} + \frac{1}{3} = \frac{3}{6} + \frac{2}{6} = \frac{5}{6} \).</p>
-
-  <h2>📌 Multiplying</h2>
-  <p>Multiply straight across — no common denominator needed: \( \frac{a}{b} \times \frac{c}{d} = \frac{ac}{bd} \). Example: \( \frac{2}{3} \times \frac{3}{4} = \frac{6}{12} = \frac{1}{2} \).</p>
-
-  <h2>📌 Dividing</h2>
-  <p>Multiply by the <strong>reciprocal</strong> (flip the second fraction): \( \frac{a}{b} \div \frac{c}{d} = \frac{a}{b} \times \frac{d}{c} \). And remember: a negative times a positive is negative; two negatives give a positive.</p>
-
-  <h2>🔵 Examples</h2>
-
-  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;">
-    <h3>Example 1: Add with unlike denominators</h3><p>Evaluate \( \frac{1}{2} + \frac{1}{3} \).</p>
-    <div class="solution">
-      <div class="step"><strong>Step 1:</strong> Lowest common denominator of \( 2 \) and \( 3 \) is \( 6 \).</div>
-      <div class="step"><strong>Step 2:</strong> Rewrite each: \( \frac{1}{2} = \frac{3}{6} \), \( \frac{1}{3} = \frac{2}{6} \).</div>
-      <div class="step"><strong>Step 3:</strong> Add the numerators: \( \frac{3}{6} + \frac{2}{6} = \frac{5}{6} \).</div>
-      <em>Conclusion: \( \frac{5}{6} \). ✓</em>
-    </div>
-  </div>
-
-  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;">
-    <h3>Example 2: Subtract</h3><p>Evaluate \( \frac{5}{6} - \frac{1}{4} \).</p>
-    <div class="solution">
-      <div class="step"><strong>Step 1:</strong> Lowest common denominator of \( 6 \) and \( 4 \) is \( 12 \).</div>
-      <div class="step"><strong>Step 2:</strong> Rewrite: \( \frac{5}{6} = \frac{10}{12} \), \( \frac{1}{4} = \frac{3}{12} \).</div>
-      <div class="step"><strong>Step 3:</strong> Subtract: \( \frac{10}{12} - \frac{3}{12} = \frac{7}{12} \) (already simplified).</div>
-      <em>Conclusion: \( \frac{7}{12} \). ✓</em>
-    </div>
-  </div>
-
-  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;">
-    <h3>Example 3: Multiply</h3><p>Evaluate \( \frac{2}{3} \times \frac{3}{4} \).</p>
-    <div class="solution">
-      <div class="step"><strong>Step 1:</strong> Multiply straight across: \( \frac{2 \times 3}{3 \times 4} = \frac{6}{12} \).</div>
-      <div class="step"><strong>Step 2:</strong> Simplify by the GCF \( 6 \): \( \frac{6}{12} = \frac{1}{2} \).</div>
-      <div class="step"><strong>Tip:</strong> you could cancel the \( 3 \)'s first: \( \frac{2}{\cancel{3}} \times \frac{\cancel{3}}{4} = \frac{2}{4} = \frac{1}{2} \).</div>
-      <em>Conclusion: \( \frac{1}{2} \). ✓</em>
-    </div>
-  </div>
-
-  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;">
-    <h3>Example 4: Divide</h3><p>Evaluate \( \frac{3}{4} \div \frac{1}{2} \).</p>
-    <div class="solution">
-      <div class="step"><strong>Step 1:</strong> Dividing means multiply by the reciprocal: \( \frac{3}{4} \times \frac{2}{1} \).</div>
-      <div class="step"><strong>Step 2:</strong> Across: \( \frac{3 \times 2}{4 \times 1} = \frac{6}{4} \).</div>
-      <div class="step"><strong>Step 3:</strong> Simplify: \( \frac{6}{4} = \frac{3}{2} = 1\frac{1}{2} \).</div>
-      <em>Conclusion: \( \frac{3}{2} \). ✓</em>
-    </div>
-  </div>
-
-  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;">
-    <h3>Example 5: A negative product</h3><p>Evaluate \( -\frac{2}{3} \times \frac{3}{8} \).</p>
-    <div class="solution">
-      <div class="step"><strong>Step 1:</strong> Multiply the sizes across: \( \frac{2 \times 3}{3 \times 8} = \frac{6}{24} \).</div>
-      <div class="step"><strong>Step 2:</strong> Simplify: \( \frac{6}{24} = \frac{1}{4} \).</div>
-      <div class="step"><strong>Step 3:</strong> Different signs → the result is negative: \( -\frac{1}{4} \).</div>
-      <em>Conclusion: \( -\frac{1}{4} \). ✓</em>
-    </div>
-  </div>
-
-  <h2>🟡 Practice Questions</h2>
-
-  <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;">
-    <h3>Question 1</h3><p>Evaluate \( \frac{1}{2} + \frac{1}{4} \).</p>
-    <details><summary>View answer</summary><div class="solution"><div class="step">\( \frac{2}{4}+\frac{1}{4} \). <em>Answer: \( \frac{3}{4} \).</em></div></div></details>
+    <h3>Question 5</h3><p>Evaluate \( -\frac{7}{8}\div\left(-\frac{7}{16}\right) \).</p>
+    <details><summary>View answer</summary><div class="solution"><div class="step">\( -\frac{7}{8}\times\left(-\frac{16}{7}\right)=\frac{112}{56} \). <em>Answer: \( 2 \).</em></div></div></details>
   </div>
 
   <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;">
-    <h3>Question 2</h3><p>Evaluate \( \frac{2}{3} \times \frac{1}{2} \).</p>
-    <details><summary>View answer</summary><div class="solution"><div class="step">Across: \( \frac{2}{6} \). <em>Answer: \( \frac{1}{3} \).</em></div></div></details>
+    <h3>Question 6</h3><p>Evaluate \( \frac{3}{4}-\frac{1}{2}\times\frac{1}{3} \) (mind the order).</p>
+    <details><summary>View answer</summary><div class="solution"><div class="step">Multiply first: \( \frac{1}{6} \), then \( \frac{9}{12}-\frac{2}{12} \). <em>Answer: \( \frac{7}{12} \).</em></div></div></details>
   </div>
 
   <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;">
-    <h3>Question 3</h3><p>Evaluate \( \frac{1}{2} \div \frac{3}{4} \).</p>
-    <details><summary>View answer</summary><div class="solution"><div class="step">Flip: \( \frac{1}{2} \times \frac{4}{3} = \frac{4}{6} \). <em>Answer: \( \frac{2}{3} \).</em></div></div></details>
-  </div>
-
-  <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;">
-    <h3>Question 4</h3><p>Evaluate \( -\frac{1}{2} + \frac{1}{4} \).</p>
-    <details><summary>View answer</summary><div class="solution"><div class="step">\( -\frac{2}{4} + \frac{1}{4} \). <em>Answer: \( -\frac{1}{4} \).</em></div></div></details>
-  </div>
-
-  <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;">
-    <h3>Question 5</h3><p>Evaluate \( \left(\frac{2}{3}\right)^2 \).</p>
-    <details><summary>View answer</summary><div class="solution"><div class="step">Square top and bottom: \( \frac{4}{9} \). <em>Answer: \( \frac{4}{9} \).</em></div></div></details>
+    <h3>Question 7</h3><p>A tank is \( \frac{2}{3} \) full. After adding \( 10 \) L it is \( \frac{5}{6} \) full. What is the tank's capacity?</p>
+    <details><summary>View answer</summary><div class="solution"><div class="step">\( \frac{5}{6}-\frac{2}{3}=\frac{1}{6} \) of the tank \( =10 \) L. <em>Answer: \( 60 \) L.</em></div></div></details>
   </div>
 
   <h2>❓ Q&amp;A Summary</h2>
   <div class="qa-box" style="background-color:#f0f0f0;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Q1: When do I need a common denominator?</h3><p><em>For adding and subtracting — not for multiplying or dividing.</em></p></div>
   <div class="qa-box" style="background-color:#f0f0f0;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Q2: How do I divide by a fraction?</h3><p><em>Multiply by its reciprocal (flip the second fraction).</em></p></div>
-  <div class="qa-box" style="background-color:#f0f0f0;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Q3: What about the signs?</h3><p><em>Same integer rules: \( (-)(-) = + \), \( (-)(+) = - \).</em></p></div>
+  <div class="qa-box" style="background-color:#f0f0f0;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Q3: What about the signs?</h3><p><em>Same integer rules: \( (-)(-) = + \), \( (-)(+) = - \), and negatives add just like integers.</em></p></div>
+  <div class="qa-box" style="background-color:#f0f0f0;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Q4: What order do I compute in?</h3><p><em>Brackets, then multiply/divide, then add/subtract — even with fractions.</em></p></div>
 </div>` },
     ],
     assignment: {
-      title: "Assignment 1.7 — Fraction Operations",
-      description: "Evaluate and simplify: (a) 1/2 + 1/3  (b) 5/6 - 1/4  (c) 2/3 × 3/8  (d) 3/4 ÷ 1/2  (e) -1/2 + 1/4. Then: a recipe needs 2 1/2 cups of flour but you triple it — how much flour total?",
+      title: "Assignment 1.6 — Fractions & Operations with Positive/Negative Fractions",
+      description: "Part A (build & compare): simplify 24/36 and 45/60; order 5/8, 2/3, 7/12 least to greatest; write 23/6 as a mixed number and 3 3/4 as improper. Part B (operate, watch signs): (a) 5/6 + 3/8  (b) -3/4 - 1/6  (c) -8/9 × 3/4  (d) -5/6 ÷ (-5/12)  (e) 1/2 + 2/3 × (-3/4). Part C (apply): a tank is 2/3 full; after adding 10 L it is 5/6 full — find its capacity. A recipe needs 2 1/2 cups of flour and you make 1 1/2 times it — how much flour?",
     },
-    quizzes: [
-      quiz("Easy", [
-        sa("Evaluate $\\frac{1}{2} + \\frac{1}{4}$.", ["3/4"]),
-        sa("Evaluate $\\frac{2}{3} \\times \\frac{1}{2}$.", ["1/3", "2/6"]),
-        sa("Evaluate $\\frac{3}{4} - \\frac{1}{4}$.", ["1/2", "2/4"]),
-        tf("To divide by a fraction, multiply by its reciprocal.", true),
-      ], EASY),
-      quiz("Medium", [
-        sa("Evaluate $\\frac{1}{2} + \\frac{1}{3}$.", ["5/6"]),
-        sa("Evaluate $\\frac{3}{4} \\div \\frac{1}{2}$.", ["3/2", "6/4"]),
-        sa("Evaluate $-\\frac{1}{2} + \\frac{1}{4}$.", ["-1/4"]),
-        num("Evaluate $\\frac{2}{5} \\times 10$.", 4, 0),
-      ], MED),
-      quiz("Hard", [
-        sa("Evaluate $\\frac{5}{6} - \\frac{1}{4}$.", ["7/12"]),
-        sa("Evaluate $-\\frac{2}{3} \\times \\frac{3}{8}$.", ["-1/4"]),
-        sa("Evaluate $\\frac{1}{2} \\div \\frac{3}{4}$.", ["2/3", "4/6"]),
-        num("A barrel loses $\\frac{3}{4}$ L per minute. How many litres are lost in 8 minutes?", 6, 0),
-        sa("Evaluate $\\left(\\frac{2}{3}\\right)^2$.", ["4/9"]),
-      ], HARD),
-    ],
   },
 
   {
-    code: "1.8", title: "Ratios, Rates, Percentages & Proportions",
+    code: "1.7", title: "Ratios, Rates, Percentages & Proportions",
     blocks: [
       { id: bid(), type: "html", html: String.raw`<div class="lecture-box">
   <h1>📊 Ratios, Rates, Percentages &amp; Proportions</h1>

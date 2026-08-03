@@ -19,7 +19,7 @@ const db = createClient(env.NEXT_PUBLIC_SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_
 });
 
 const TOPIC = "5.5 Changing Dimensions: Perimeter";
-const LESSON_POS = 28; // 5.5 is position 28 (after 4.7-4.9 inserted)
+const LESSON_POS = 27; // 5.5 is position 28 (after 4.7-4.9 inserted)
 
 async function run() {
   const { data: course } = await db.from("courses").select("id").eq("code", "MTH1W").single();

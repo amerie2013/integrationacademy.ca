@@ -19,7 +19,7 @@ const db = createClient(env.NEXT_PUBLIC_SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_
 });
 
 const TOPIC = "4.1 Linear vs Non-Linear Relations";
-const LESSON_POS = 15; // 4.1 is position 15
+const LESSON_POS = 14; // 4.1 is position 15
 
 async function run() {
   const { data: course } = await db.from("courses").select("id").eq("code", "MTH1W").single();

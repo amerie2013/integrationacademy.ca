@@ -47,33 +47,23 @@ export const LESSONS = {
   ],
   "1.5": [
     [
-      "What a fraction is",
-      "A fraction $\\dfrac{a}{b}$ means $a$ equal parts out of $b$. The bottom number (<b>denominator</b>) says how many pieces the whole is cut into; the top number (<b>numerator</b>) says how many you take. A <b>unit fraction</b> has numerator $1$, like $\\dfrac12,\\ \\dfrac13,\\ \\dfrac14$ — a single piece of the whole."
+      "Building &amp; simplifying fractions",
+      "A fraction $\\dfrac{a}{b}$ means $a$ equal parts out of $b$; a <b>unit fraction</b> has numerator $1$. Multiplying or dividing top and bottom by the <b>same</b> number gives an equal fraction ($\\dfrac12=\\dfrac24=\\dfrac36$); dividing by the greatest common factor puts it in <b>lowest terms</b>: $\\dfrac{24}{36}=\\dfrac23$."
     ],
     [
-      "Equivalent fractions",
-      "Multiplying or dividing top and bottom by the <b>same</b> number gives an equal fraction: $\\dfrac12=\\dfrac24=\\dfrac36$. Dividing until no common factor remains puts a fraction in <b>lowest terms</b>: $\\dfrac68=\\dfrac34$."
+      "Comparing, ordering &amp; mixed numbers",
+      "To compare or order, rewrite over a <b>common denominator</b> and compare numerators — e.g. $\\dfrac23=\\dfrac{8}{12}$ vs $\\dfrac34=\\dfrac{9}{12}$, so $\\dfrac34$ is larger. Convert an improper fraction by dividing ($\\dfrac{23}{6}=3\\dfrac56$) and reverse with whole&times;denominator&plus;numerator ($3\\dfrac34=\\dfrac{15}{4}$)."
     ],
     [
-      "Comparing fractions",
-      "Fractions are easiest to compare with a <b>common denominator</b>. To compare $\\dfrac23$ and $\\dfrac34$, rewrite them as $\\dfrac{8}{12}$ and $\\dfrac{9}{12}$ — so $\\dfrac34$ is larger. With unit fractions, the <b>bigger the denominator, the smaller the piece</b>: $\\dfrac15<\\dfrac13$."
+      "Adding &amp; subtracting (with signs)",
+      "Only add or subtract once the fractions share a <b>common denominator</b>; then combine numerators, tracking signs like integers: $\\dfrac13+\\dfrac14=\\dfrac{7}{12}$, and $-\\dfrac34-\\dfrac16=-\\dfrac{9}{12}-\\dfrac{2}{12}=-\\dfrac{11}{12}$."
+    ],
+    [
+      "Multiplying, dividing &amp; order of operations",
+      "<b>Multiply</b> straight across (cancel first): $\\dfrac23\\times\\dfrac45=\\dfrac{8}{15}$. <b>Divide</b> by the reciprocal: $\\dfrac23\\div\\dfrac45=\\dfrac23\\times\\dfrac54=\\dfrac56$. Same signs give a positive, different signs a negative. Follow order of operations — multiply/divide before add/subtract: $\\dfrac12+\\dfrac23\\times\\left(-\\dfrac34\\right)=0$."
     ]
   ],
   "1.6": [
-    [
-      "Adding and subtracting fractions",
-      "You can only add or subtract fractions once they share a <b>common denominator</b>. Rewrite each over that denominator, then combine the numerators: $\\dfrac13+\\dfrac14=\\dfrac{4}{12}+\\dfrac{3}{12}=\\dfrac{7}{12}$. Watch the signs just as you would with integers."
-    ],
-    [
-      "Multiplying and dividing fractions",
-      "<b>Multiply</b> straight across: $\\dfrac23\\times\\dfrac45=\\dfrac{8}{15}$. <b>Divide</b> by multiplying by the reciprocal (flip the second fraction): $\\dfrac23\\div\\dfrac45=\\dfrac23\\times\\dfrac54=\\dfrac{10}{12}=\\dfrac56$."
-    ],
-    [
-      "Handling the signs",
-      "The integer sign rules still apply: same signs make a positive, different signs make a negative. So $\\left(-\\dfrac23\\right)\\times\\dfrac45=-\\dfrac{8}{15}$, and $-\\dfrac13-\\dfrac14=-\\dfrac{7}{12}$. Always reduce your final answer to lowest terms."
-    ]
-  ],
-  "1.7": [
     [
       "Ratios and rates",
       "A <b>ratio</b> compares two quantities of the same kind, like $3:2$. A <b>rate</b> compares two <b>different</b> kinds of quantity, like 60 km per 1 hour. A <b>unit rate</b> has a denominator of 1 (60 km/h, \\$2.50 per litre) and makes comparing easy."

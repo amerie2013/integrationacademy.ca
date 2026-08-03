@@ -1,12 +1,13 @@
-// Replace ONLY the "1.7 Operations with Positive & Negative Fractions" questions
+// Replace ONLY the "1.7 Ratios, Rates, Percentages & Proportions" questions
 // in the MTH1W bank, leaving every other topic untouched.
+// (After the 1.5/1.6 fraction merge, Ratios moved from 1.8 to 1.7.)
 // Re-runnable. Usage: node scripts/replace-bank-1_7.mjs
 
 import { createClient } from "@supabase/supabase-js";
 import { readFileSync } from "fs";
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
-import { gen17 } from "./seed-bank.mjs";
+import { gen18 } from "./seed-bank.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const env = {};
@@ -18,8 +19,8 @@ const db = createClient(env.NEXT_PUBLIC_SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_
   auth: { persistSession: false },
 });
 
-const TOPIC = "1.7 Operations with Positive & Negative Fractions";
-const LESSON_POS = 6; // 1.7 is the seventh lesson
+const TOPIC = "1.7 Ratios, Rates, Percentages & Proportions";
+const LESSON_POS = 6; // 1.7 is the seventh lesson (Ratios, after the fraction merge)
 
 async function run() {
   const { data: course } = await db.from("courses").select("id").eq("code", "MTH1W").single();
@@ -31,7 +32,7 @@ async function run() {
   const del = await db.from("bank_questions").delete().eq("course_id", course.id).eq("topic", TOPIC);
   if (del.error) throw del.error;
 
-  const rows = gen17().map((q) => ({
+  const rows = gen18().map((q) => ({
     course_id: course.id, lesson_id: lessonId, topic: TOPIC,
     difficulty: q.difficulty, kind: q.kind, prompt: q.prompt,
     choices: q.choices ?? null, answer: q.answer ?? null, tolerance: q.tolerance ?? null,

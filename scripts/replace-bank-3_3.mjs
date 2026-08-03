@@ -19,7 +19,7 @@ const db = createClient(env.NEXT_PUBLIC_SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_
 });
 
 const TOPIC = "3.3 Reading, Predicting & Altering Code";
-const LESSON_POS = 14; // 3.3 is position 14
+const LESSON_POS = 13; // 3.3 is position 14
 
 async function run() {
   const { data: course } = await db.from("courses").select("id").eq("code", "MTH1W").single();

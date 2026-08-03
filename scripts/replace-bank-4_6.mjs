@@ -19,7 +19,7 @@ const db = createClient(env.NEXT_PUBLIC_SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_
 });
 
 const TOPIC = "4.6 Finding the Equation of a Line";
-const LESSON_POS = 20; // 4.6 is position 20
+const LESSON_POS = 19; // 4.6 is position 20
 
 async function run() {
   const { data: course } = await db.from("courses").select("id").eq("code", "MTH1W").single();

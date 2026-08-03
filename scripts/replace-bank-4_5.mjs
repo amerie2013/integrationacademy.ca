@@ -19,7 +19,7 @@ const db = createClient(env.NEXT_PUBLIC_SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_
 });
 
 const TOPIC = "4.5 Transformations of Lines";
-const LESSON_POS = 19; // 4.5 is position 19
+const LESSON_POS = 18; // 4.5 is position 19
 
 async function run() {
   const { data: course } = await db.from("courses").select("id").eq("code", "MTH1W").single();

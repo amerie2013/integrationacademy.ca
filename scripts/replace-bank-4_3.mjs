@@ -19,7 +19,7 @@ const db = createClient(env.NEXT_PUBLIC_SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_
 });
 
 const TOPIC = "4.3 Comparing Lines";
-const LESSON_POS = 17; // 4.3 is position 17
+const LESSON_POS = 16; // 4.3 is position 17
 
 async function run() {
   const { data: course } = await db.from("courses").select("id").eq("code", "MTH1W").single();

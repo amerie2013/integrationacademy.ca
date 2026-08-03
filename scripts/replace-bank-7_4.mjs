@@ -19,7 +19,7 @@ const db = createClient(env.NEXT_PUBLIC_SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_
 });
 
 const TOPIC = "7.4 Budgets";
-const LESSON_POS = 39; // 7.4 is position 39 (after 4.7-4.9 inserted)
+const LESSON_POS = 38; // 7.4 is position 39 (after 4.7-4.9 inserted)
 
 async function run() {
   const { data: course } = await db.from("courses").select("id").eq("code", "MTH1W").single();

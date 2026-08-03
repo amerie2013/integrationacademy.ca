@@ -19,7 +19,7 @@ const db = createClient(env.NEXT_PUBLIC_SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_
 });
 
 const TOPIC = "4.7 General Form of a Line";
-const LESSON_POS = 21; // 4.7 is position 21
+const LESSON_POS = 20; // 4.7 is position 21
 
 async function run() {
   const { data: course } = await db.from("courses").select("id").eq("code", "MTH1W").single();
