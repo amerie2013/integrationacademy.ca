@@ -6,7 +6,7 @@ import { createClient } from "@supabase/supabase-js";
 import { readFileSync } from "fs";
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
-import { genFracOps } from "./seed-bank.mjs";
+import { gen18 } from "./seed-bank.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const env = {};
@@ -18,8 +18,8 @@ const db = createClient(env.NEXT_PUBLIC_SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_
   auth: { persistSession: false },
 });
 
-const TOPIC = "1.6 Fractions & Operations with Positive/Negative Fractions";
-const LESSON_POS = 5; // 1.6 is the sixth lesson (merged fractions + operations)
+const TOPIC = "1.6 Ratios, Rates, Percentages & Proportions";
+const LESSON_POS = 5; // 1.6 Ratios
 
 async function run() {
   const { data: course } = await db.from("courses").select("id").eq("code", "MTH1W").single();
@@ -31,7 +31,7 @@ async function run() {
   const del = await db.from("bank_questions").delete().eq("course_id", course.id).eq("topic", TOPIC);
   if (del.error) throw del.error;
 
-  const rows = genFracOps().map((q) => ({
+  const rows = gen18().map((q) => ({
     course_id: course.id, lesson_id: lessonId, topic: TOPIC,
     difficulty: q.difficulty, kind: q.kind, prompt: q.prompt,
     choices: q.choices ?? null, answer: q.answer ?? null, tolerance: q.tolerance ?? null,

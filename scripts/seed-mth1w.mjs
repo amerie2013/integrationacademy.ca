@@ -109,7 +109,7 @@ Application
 9. Between 0 and 20, which is denser — the even numbers or the multiples of 5? Justify with a count.
 10. Describe one real-life situation that approaches a limit.` },
 
-  "1.3": { title: "Assignment 1.3 — Powers & Scientific Notation", description: String.raw`Knowledge & Understanding
+  "1.3": { title: "Assignment 1.3 — Powers, Scientific Notation & Exponent Laws", description: String.raw`Knowledge & Understanding
 1. Evaluate \( 2^5,\ 3^3,\ 10^0 \).
 2. Write \( 3^{-2} \) as a fraction.
 3. Write \( 4\,500\,000 \) in scientific notation.
@@ -122,24 +122,13 @@ Communication
 Application
 8. The Sun is about \( 1.5 \times 10^{8} \) km away. Write that in standard form.
 9. A cell is about \( 2 \times 10^{-5} \) m wide. Is that bigger or smaller than 1 mm? Explain.
-10. Find a real measurement (a distance, mass, or population) and write it in scientific notation, citing your source.` },
+10. Find a real measurement (a distance, mass, or population) and write it in scientific notation, citing your source.
+Exponent Laws
+11. Simplify \( a^3 \cdot a^4 \) and \( (a^2)^3 \).
+12. Simplify \( (2x^2)^3 \).
+13. Simplify \( \dfrac{a^6 \cdot a^2}{a^3} \).` },
 
-  "1.4": { title: "Assignment 1.4 — Exponent Laws", description: String.raw`Knowledge & Understanding
-1. Simplify \( a^3 \cdot a^4 \).
-2. Simplify \( \frac{a^8}{a^3} \).
-3. Simplify \( (a^2)^3 \).
-Thinking
-4. Give three different pairs of powers that multiply to \( a^{10} \).
-5. Is \( a^m \cdot a^n = a^{mn} \) ever true? Explain.
-Communication
-6. Explain, in words, the difference between the product law and the power-of-a-power law.
-7. Describe the most common mistake students make with exponent laws.
-Application
-8. Simplify \( (2x^2)^3 \).
-9. Simplify \( \frac{a^6 \cdot a^2}{a^3} \).
-10. Simplify \( \dfrac{(2x^2 y^3)^2 \cdot x\,y}{x^2 y} \) and state the result.` },
-
-  "1.5": { title: "Assignment 1.5 — Integers in Context", description: String.raw`Knowledge & Understanding
+  "1.4": { title: "Assignment 1.4 — Integers in Context", description: String.raw`Knowledge & Understanding
 1. Evaluate \( (-8)+5,\ 12-(-4),\ (-3)\times(-6) \).
 2. Evaluate \( -20 \div 4 \).
 3. Write an integer for: 7°C below zero; a \$150 deposit.
@@ -154,7 +143,7 @@ Application
 9. A diver at \( -12 \) m descends 8 m, then rises 5 m. What is the final depth?
 10. An account has \$250; \$75 is withdrawn each week for 4 weeks. What is the balance?` },
 
-  "1.6": { title: "Assignment 1.6 — Fractions & Operations with Positive/Negative Fractions", description: String.raw`Knowledge & Understanding
+  "1.5": { title: "Assignment 1.5 — Fractions & Operations with Positive/Negative Fractions", description: String.raw`Knowledge & Understanding
 1. Classify \( \frac{5}{8},\ \frac{11}{4},\ \frac{7}{7} \) as proper or improper, then simplify \( \frac{24}{36} \) and \( \frac{45}{60} \).
 2. Order \( \frac{5}{8},\ \frac{2}{3},\ \frac{7}{12} \) from least to greatest.
 3. Evaluate \( \frac{5}{6} + \frac{3}{8} \) and write the answer as a mixed number.
@@ -169,7 +158,7 @@ Application
 9. Evaluate \( -\frac{5}{6} \div \left(-\frac{5}{12}\right) \), \( \frac{3}{4} - \frac{1}{2} \times \frac{1}{3} \), and the complex fraction \( \dfrac{\frac{3}{4}}{\frac{1}{2}} \).
 10. A recipe needs \( 2\frac{1}{2} \) cups of flour and you make \( 1\frac{1}{2} \) times it. How much flour in total? Give a mixed number.` },
 
-  "1.7": { title: "Assignment 1.7 — Ratios, Rates, Percentages & Proportions", description: String.raw`Knowledge & Understanding
+  "1.6": { title: "Assignment 1.6 — Ratios, Rates, Percentages & Proportions", description: String.raw`Knowledge & Understanding
 1. Find \( 25\% \) of 80.
 2. Simplify the ratio \( 6:4 \).
 3. Solve the proportion \( \frac{3}{4} = \frac{x}{12} \).
@@ -1005,7 +994,7 @@ const subjects = [
   },
 
   {
-    code: "1.3", title: "Powers & Scientific Notation",
+    code: "1.3", title: "Powers, Scientific Notation & Exponent Laws",
     blocks: [
       { id: bid(), type: "html", html: String.raw`<div class="lecture-box">
   <h1>🔢 Powers &amp; Scientific Notation</h1>
@@ -1116,45 +1105,6 @@ const subjects = [
   <div class="qa-box" style="background-color:#f0f0f0;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Q3: When should I use scientific notation?</h3><p><em>For very large or very small numbers, to keep them compact and readable.</em></p></div>
 </div>` },
       graph("a^x", "a", { xMin: -3, xMax: 4, yMin: -1, yMax: 16, paramMin: 1, paramMax: 3, paramInit: 2, caption: "y = aˣ — slide the base a and watch how fast it grows" }),
-    ],
-    assignment: {
-      title: "Assignment 1.3 — Powers in the Real World",
-      description: "Part A (Evaluate): 2^6, 3^4, (-2)^5, -3^2, 10^-3, (1/2)^3.\nPart B (Scientific notation): Write in scientific notation: 4,500,000; 0.00067; 93,000,000. Then convert back to standard form: 7.2×10^5 and 1.5×10^-3.\nPart C (Brackets): Explain in one sentence why (-2)^4 and -2^4 are different, and give both values.\nPart D (Real world): Find one real measurement (a distance, size, mass, or population) and write it in scientific notation, citing your source.",
-    },
-    quizzes: [
-      quiz("Easy", [
-        num("Evaluate $2^4$.", 16, 0),
-        mc("In $7^3$, which number is the exponent?", ["7", "3", "21", "10"], 1),
-        num("What is $10^0$?", 1, 0),
-        mc("Which is $5\\times10^{3}$ in standard form?", ["50", "500", "5000", "53"], 2),
-        num("Evaluate $3^2$.", 9, 0),
-        num("Evaluate $5^3$.", 125, 0),
-        mc("In $4^6$, which number is the base?", ["4", "6", "24"], 0),
-      ], EASY),
-      quiz("Medium", [
-        sa("Evaluate $3^{-2}$ as a fraction.", ["1/9"]),
-        num("Write $0.0042$ as $a\\times10^{n}$. What is $n$?", -3, 0),
-        num("Evaluate $(-2)^3$.", -8, 0),
-        mc("$(-4)^2$ equals", ["-16", "-8", "8", "16"], 3),
-        num("Evaluate $2^5$.", 32, 0),
-        sa("Write $0.00067$ in scientific notation.", ["6.7 x 10^-4", "6.7*10^-4", "6.7×10^-4", "6.7e-4"]),
-        num("Write $10^{-2}$ as a decimal.", 0.01, 0),
-      ], MED),
-      quiz("Hard", [
-        num("Evaluate $2^{-3}$ as a decimal.", 0.125, 0),
-        sa("Write $93\\,000\\,000$ in scientific notation.", ["9.3 x 10^7", "9.3*10^7", "9.3×10^7", "9.3e7"]),
-        num("If $a\\times10^{n} = 6.02\\times10^{23}$, what is $n$?", 23, 0),
-        mc("Which is larger?", ["$-4\\times10^{3}$", "$4\\times10^{-3}$"], 1),
-        num("Evaluate $\\left(\\frac{1}{2}\\right)^{4}$ as a decimal.", 0.0625, 0),
-        num("Evaluate $-2^4$ (note: no brackets).", -16, 0, 1, "$-2^4 = -(2^4) = -16$."),
-        num("Evaluate $(-3)^3$.", -27, 0),
-      ], HARD),
-    ],
-  },
-
-  {
-    code: "1.4", title: "Exponent Laws",
-    blocks: [
       { id: bid(), type: "html", html: String.raw`<div class="lecture-box">
   <h1>⚡ Exponent Laws</h1>
   <p><strong>Overview.</strong> When you multiply, divide, or raise powers to powers, there are shortcuts — the <strong>exponent laws</strong>. They only work when the <strong>bases are the same</strong>.</p>
@@ -1260,34 +1210,42 @@ const subjects = [
 </div>` },
     ],
     assignment: {
-      title: "Assignment 1.4 — Simplifying with Exponent Laws",
-      description: "Simplify and where possible evaluate: (a) x^4·x^3  (b) a^9/a^5  (c) (m^2)^5  (d) (2x^3)^2  (e) (a^6·a^2)/a^3. Show each exponent law you used.",
+      title: "Assignment 1.3 — Powers in the Real World",
+      description: "Part A (Evaluate): 2^6, 3^4, (-2)^5, -3^2, 10^-3, (1/2)^3.\nPart B (Scientific notation): Write in scientific notation: 4,500,000; 0.00067; 93,000,000. Then convert back to standard form: 7.2×10^5 and 1.5×10^-3.\nPart C (Brackets): Explain in one sentence why (-2)^4 and -2^4 are different, and give both values.\nPart D (Real world): Find one real measurement (a distance, size, mass, or population) and write it in scientific notation, citing your source.",
     },
     quizzes: [
       quiz("Easy", [
-        mc("$a^3 \\cdot a^4 = $", ["$a^{7}$", "$a^{12}$", "$a^{1}$", "$a^{34}$"], 0),
-        mc("$\\frac{a^8}{a^3} = $", ["$a^{5}$", "$a^{11}$", "$a^{24}$"], 0),
-        mc("$(a^2)^3 = $", ["$a^{5}$", "$a^{6}$", "$a^{8}$"], 1),
-        tf("$a^m \\cdot a^n = a^{m+n}$ only when the bases are equal.", true),
+        num("Evaluate $2^4$.", 16, 0),
+        mc("In $7^3$, which number is the exponent?", ["7", "3", "21", "10"], 1),
+        num("What is $10^0$?", 1, 0),
+        mc("Which is $5\\times10^{3}$ in standard form?", ["50", "500", "5000", "53"], 2),
+        num("Evaluate $3^2$.", 9, 0),
+        num("Evaluate $5^3$.", 125, 0),
+        mc("In $4^6$, which number is the base?", ["4", "6", "24"], 0),
       ], EASY),
       quiz("Medium", [
-        num("Simplify $2^3 \\cdot 2^4$ and evaluate.", 128, 0),
-        sa("Simplify $x^5 \\cdot x^{-2}$.", ["x^3"]),
-        num("Evaluate $\\frac{5^7}{5^5}$.", 25, 0),
-        mc("$(x^3)^4 =$", ["$x^{7}$", "$x^{12}$", "$x^{81}$"], 1),
+        sa("Evaluate $3^{-2}$ as a fraction.", ["1/9"]),
+        num("Write $0.0042$ as $a\\times10^{n}$. What is $n$?", -3, 0),
+        num("Evaluate $(-2)^3$.", -8, 0),
+        mc("$(-4)^2$ equals", ["-16", "-8", "8", "16"], 3),
+        num("Evaluate $2^5$.", 32, 0),
+        sa("Write $0.00067$ in scientific notation.", ["6.7 x 10^-4", "6.7*10^-4", "6.7×10^-4", "6.7e-4"]),
+        num("Write $10^{-2}$ as a decimal.", 0.01, 0),
       ], MED),
       quiz("Hard", [
-        sa("Simplify $\\frac{(a^6)(a^3)}{a^2}$.", ["a^7"]),
-        num("Evaluate $\\frac{2^{10}}{2^{7}}$.", 8, 0),
-        sa("Simplify $(2x^2)^3$.", ["8x^6"]),
-        num("Evaluate $(3^2)^2$.", 81, 0),
-        ms("Which expressions equal $a^6$?", ["$a^2\\cdot a^3$", "$(a^2)^3$", "$a^8/a^2$", "$a^3\\cdot a^3$"], [1, 2, 3]),
+        num("Evaluate $2^{-3}$ as a decimal.", 0.125, 0),
+        sa("Write $93\\,000\\,000$ in scientific notation.", ["9.3 x 10^7", "9.3*10^7", "9.3×10^7", "9.3e7"]),
+        num("If $a\\times10^{n} = 6.02\\times10^{23}$, what is $n$?", 23, 0),
+        mc("Which is larger?", ["$-4\\times10^{3}$", "$4\\times10^{-3}$"], 1),
+        num("Evaluate $\\left(\\frac{1}{2}\\right)^{4}$ as a decimal.", 0.0625, 0),
+        num("Evaluate $-2^4$ (note: no brackets).", -16, 0, 1, "$-2^4 = -(2^4) = -16$."),
+        num("Evaluate $(-3)^3$.", -27, 0),
       ], HARD),
     ],
   },
 
   {
-    code: "1.5", title: "Integers in Context",
+    code: "1.4", title: "Integers in Context",
     blocks: [
       { id: bid(), type: "html", html: String.raw`<div class="lecture-box">
   <h1>➖ Integers in Context</h1>
@@ -1447,7 +1405,7 @@ const subjects = [
   },
 
   {
-    code: "1.6", title: "Fractions & Operations with Positive/Negative Fractions",
+    code: "1.5", title: "Fractions & Operations with Positive/Negative Fractions",
     blocks: [
       { id: bid(), type: "html", html: String.raw`<div class="lecture-box">
   <h1>🍕 Fractions &amp; Operations with Positive/Negative Fractions</h1>
@@ -1653,7 +1611,7 @@ const subjects = [
   },
 
   {
-    code: "1.7", title: "Ratios, Rates, Percentages & Proportions",
+    code: "1.6", title: "Ratios, Rates, Percentages & Proportions",
     blocks: [
       { id: bid(), type: "html", html: String.raw`<div class="lecture-box">
   <h1>📊 Ratios, Rates, Percentages &amp; Proportions</h1>

@@ -19,7 +19,7 @@ const db = createClient(env.NEXT_PUBLIC_SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_
 });
 
 const TOPIC = "4.9 Parallel and Perpendicular Lines";
-const LESSON_POS = 22; // 4.9 is position 23
+const LESSON_POS = 21; // 4.9 is position 23
 
 async function run() {
   const { data: course } = await db.from("courses").select("id").eq("code", "MTH1W").single();

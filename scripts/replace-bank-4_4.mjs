@@ -19,7 +19,7 @@ const db = createClient(env.NEXT_PUBLIC_SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_
 });
 
 const TOPIC = "4.4 Graphing Special Lines";
-const LESSON_POS = 17; // 4.4 is position 18
+const LESSON_POS = 16; // 4.4 is position 18
 
 async function run() {
   const { data: course } = await db.from("courses").select("id").eq("code", "MTH1W").single();

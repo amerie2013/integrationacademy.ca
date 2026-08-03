@@ -6,7 +6,7 @@ import { createClient } from "@supabase/supabase-js";
 import { readFileSync } from "fs";
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
-import { gen13 } from "./seed-bank.mjs";
+import { genPowersExp } from "./seed-bank.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const env = {};
@@ -18,7 +18,7 @@ const db = createClient(env.NEXT_PUBLIC_SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_
   auth: { persistSession: false },
 });
 
-const TOPIC = "1.3 Powers & Scientific Notation";
+const TOPIC = "1.3 Powers, Scientific Notation & Exponent Laws";
 const LESSON_POS = 2; // 1.3 is the third lesson
 
 async function run() {
@@ -31,7 +31,7 @@ async function run() {
   const del = await db.from("bank_questions").delete().eq("course_id", course.id).eq("topic", TOPIC);
   if (del.error) throw del.error;
 
-  const rows = gen13().map((q) => ({
+  const rows = genPowersExp().map((q) => ({
     course_id: course.id, lesson_id: lessonId, topic: TOPIC,
     difficulty: q.difficulty, kind: q.kind, prompt: q.prompt,
     choices: q.choices ?? null, answer: q.answer ?? null, tolerance: q.tolerance ?? null,

@@ -19,7 +19,7 @@ const db = createClient(env.NEXT_PUBLIC_SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_
 });
 
 const TOPIC = "2.4 Creating & Solving Equations";
-const LESSON_POS = 10; // 2.4 is position 11
+const LESSON_POS = 9; // 2.4 is position 11
 
 async function run() {
   const { data: course } = await db.from("courses").select("id").eq("code", "MTH1W").single();

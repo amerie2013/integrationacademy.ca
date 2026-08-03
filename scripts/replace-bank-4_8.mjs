@@ -19,7 +19,7 @@ const db = createClient(env.NEXT_PUBLIC_SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_
 });
 
 const TOPIC = "4.8 General Form vs Slope-Intercept Form";
-const LESSON_POS = 21; // 4.8 is position 22
+const LESSON_POS = 20; // 4.8 is position 22
 
 async function run() {
   const { data: course } = await db.from("courses").select("id").eq("code", "MTH1W").single();

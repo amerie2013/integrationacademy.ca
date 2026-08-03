@@ -311,6 +311,13 @@ export function gen14() {
   return q;
 }
 
+// ── 1.3 (merged) Powers, Scientific Notation & Exponent Laws ──
+// Combines the former "Powers & Scientific Notation" (gen13) and standalone
+// "Exponent Laws" (gen14) pools into one topic.
+export function genPowersExp() {
+  return [...gen13(), ...gen14()];
+}
+
 // ── 1.5 Integers in Context ──────────────────────────────────
 // Money is written with \textdollar (not $) so it never collides with the
 // $...$ math delimiters the question renderer splits on.
@@ -3248,43 +3255,42 @@ export function gen74() {
 const POOLS = [
   { pos: 0, title: "1.1 Number Sets & Their Subsets", gen: gen11 },
   { pos: 1, title: "1.2 Density, Infinity & Limit", gen: gen12 },
-  { pos: 2, title: "1.3 Powers & Scientific Notation", gen: gen13 },
-  { pos: 3, title: "1.4 Exponent Laws", gen: gen14 },
-  { pos: 4, title: "1.5 Integers in Context", gen: gen15 },
-  { pos: 5, title: "1.6 Fractions & Operations with Positive/Negative Fractions", gen: genFracOps },
-  { pos: 6, title: "1.7 Ratios, Rates, Percentages & Proportions", gen: gen18 },
-  { pos: 7, title: "2.1 From Words to Algebraic Expressions", gen: gen21 },
-  { pos: 8, title: "2.2 Equivalent Expressions", gen: gen22 },
-  { pos: 9, title: "2.3 Simplifying Expressions", gen: gen23 },
-  { pos: 10, title: "2.4 Creating & Solving Equations", gen: gen24 },
-  { pos: 11, title: "3.1 Coding Algebraic Concepts", gen: gen31 },
-  { pos: 12, title: "3.2 Building Code from Steps", gen: gen32 },
-  { pos: 13, title: "3.3 Reading, Predicting & Altering Code", gen: gen33 },
-  { pos: 14, title: "4.1 Linear vs Non-Linear Relations", gen: gen41 },
-  { pos: 15, title: "4.2 Representing Linear Relations", gen: gen42 },
-  { pos: 16, title: "4.3 Comparing Lines", gen: gen43 },
-  { pos: 17, title: "4.4 Graphing Special Lines", gen: gen44 },
-  { pos: 18, title: "4.5 Transformations of Lines", gen: gen45 },
-  { pos: 19, title: "4.6 Finding the Equation of a Line", gen: gen46 },
-  { pos: 20, title: "4.7 General Form of a Line", gen: gen47 },
-  { pos: 21, title: "4.8 General Form vs Slope-Intercept Form", gen: gen48 },
-  { pos: 22, title: "4.9 Parallel and Perpendicular Lines", gen: gen49 },
-  { pos: 23, title: "5.1 Geometry & Measurement Through History", gen: gen51 },
-  { pos: 24, title: "5.2 Designs with Circle & Triangle Properties", gen: gen52 },
-  { pos: 25, title: "5.3 Units & Unit Conversion", gen: gen53 },
-  { pos: 26, title: "5.4 The Pythagorean Theorem", gen: gen54 },
-  { pos: 27, title: "5.5 Changing Dimensions: Perimeter", gen: gen55 },
-  { pos: 28, title: "5.6 Changing Dimensions: Area", gen: gen56 },
-  { pos: 29, title: "5.7 Volume", gen: gen57 },
-  { pos: 30, title: "5.8 Surface Area", gen: gen58 },
-  { pos: 31, title: "6.1 Big Data & Its Implications", gen: gen61 },
-  { pos: 32, title: "6.2 One-Variable Data & Statistics", gen: gen62 },
-  { pos: 33, title: "6.3 Scatter Plots & Correlation", gen: gen63 },
-  { pos: 34, title: "6.4 The Mathematical Modelling Process", gen: gen64 },
-  { pos: 35, title: "7.1 Making Financial Decisions", gen: gen71 },
-  { pos: 36, title: "7.2 Appreciation & Depreciation", gen: gen72 },
-  { pos: 37, title: "7.3 Interest & Borrowing", gen: gen73 },
-  { pos: 38, title: "7.4 Budgets", gen: gen74 },
+  { pos: 2, title: "1.3 Powers, Scientific Notation & Exponent Laws", gen: genPowersExp },
+  { pos: 3, title: "1.4 Integers in Context", gen: gen15 },
+  { pos: 4, title: "1.5 Fractions & Operations with Positive/Negative Fractions", gen: genFracOps },
+  { pos: 5, title: "1.6 Ratios, Rates, Percentages & Proportions", gen: gen18 },
+  { pos: 6, title: "2.1 From Words to Algebraic Expressions", gen: gen21 },
+  { pos: 7, title: "2.2 Equivalent Expressions", gen: gen22 },
+  { pos: 8, title: "2.3 Simplifying Expressions", gen: gen23 },
+  { pos: 9, title: "2.4 Creating & Solving Equations", gen: gen24 },
+  { pos: 10, title: "3.1 Coding Algebraic Concepts", gen: gen31 },
+  { pos: 11, title: "3.2 Building Code from Steps", gen: gen32 },
+  { pos: 12, title: "3.3 Reading, Predicting & Altering Code", gen: gen33 },
+  { pos: 13, title: "4.1 Linear vs Non-Linear Relations", gen: gen41 },
+  { pos: 14, title: "4.2 Representing Linear Relations", gen: gen42 },
+  { pos: 15, title: "4.3 Comparing Lines", gen: gen43 },
+  { pos: 16, title: "4.4 Graphing Special Lines", gen: gen44 },
+  { pos: 17, title: "4.5 Transformations of Lines", gen: gen45 },
+  { pos: 18, title: "4.6 Finding the Equation of a Line", gen: gen46 },
+  { pos: 19, title: "4.7 General Form of a Line", gen: gen47 },
+  { pos: 20, title: "4.8 General Form vs Slope-Intercept Form", gen: gen48 },
+  { pos: 21, title: "4.9 Parallel and Perpendicular Lines", gen: gen49 },
+  { pos: 22, title: "5.1 Geometry & Measurement Through History", gen: gen51 },
+  { pos: 23, title: "5.2 Designs with Circle & Triangle Properties", gen: gen52 },
+  { pos: 24, title: "5.3 Units & Unit Conversion", gen: gen53 },
+  { pos: 25, title: "5.4 The Pythagorean Theorem", gen: gen54 },
+  { pos: 26, title: "5.5 Changing Dimensions: Perimeter", gen: gen55 },
+  { pos: 27, title: "5.6 Changing Dimensions: Area", gen: gen56 },
+  { pos: 28, title: "5.7 Volume", gen: gen57 },
+  { pos: 29, title: "5.8 Surface Area", gen: gen58 },
+  { pos: 30, title: "6.1 Big Data & Its Implications", gen: gen61 },
+  { pos: 31, title: "6.2 One-Variable Data & Statistics", gen: gen62 },
+  { pos: 32, title: "6.3 Scatter Plots & Correlation", gen: gen63 },
+  { pos: 33, title: "6.4 The Mathematical Modelling Process", gen: gen64 },
+  { pos: 34, title: "7.1 Making Financial Decisions", gen: gen71 },
+  { pos: 35, title: "7.2 Appreciation & Depreciation", gen: gen72 },
+  { pos: 36, title: "7.3 Interest & Borrowing", gen: gen73 },
+  { pos: 37, title: "7.4 Budgets", gen: gen74 },
 ];
 
 async function run() {

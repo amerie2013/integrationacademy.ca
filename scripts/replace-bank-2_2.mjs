@@ -19,7 +19,7 @@ const db = createClient(env.NEXT_PUBLIC_SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_
 });
 
 const TOPIC = "2.2 Equivalent Expressions";
-const LESSON_POS = 8; // 2.2 is position 9
+const LESSON_POS = 7; // 2.2 is position 9
 
 async function run() {
   const { data: course } = await db.from("courses").select("id").eq("code", "MTH1W").single();

@@ -19,7 +19,7 @@ const db = createClient(env.NEXT_PUBLIC_SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_
 });
 
 const TOPIC = "6.2 One-Variable Data & Statistics";
-const LESSON_POS = 32; // 6.2 is position 33 (after 4.7-4.9 inserted)
+const LESSON_POS = 31; // 6.2 is position 33 (after 4.7-4.9 inserted)
 
 async function run() {
   const { data: course } = await db.from("courses").select("id").eq("code", "MTH1W").single();
