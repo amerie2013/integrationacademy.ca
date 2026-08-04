@@ -147,6 +147,27 @@ export const ASSIGN = {
     ["Evaluate $\\arcsin\\tfrac12$.", "Evaluate $\\arccos 0$.", "Evaluate $\\arctan 1$.", "State the range of $\\arccos$."],
     ["Evaluate $\\arcsin\\left(-\\tfrac{\\sqrt2}{2}\\right)$.", "Evaluate $\\cos\\left(\\arcsin\\tfrac35\\right)$.", "Evaluate $\\tan\\left(\\arctan 4\\right)$."],
     ["Explain why the trig functions must be restricted to have inverses.", "Explain why $\\arcsin(\\sin\\theta)$ does not always return $\\theta$.", "Explain how to evaluate $\\cos(\\arcsin x)$ using a right triangle."]),
+  // ── Unit 5: Statistics ───────────────────────────────────────
+  "5.1": A3("5.1", "Displaying Data",
+    ["Which display shows the relationship between two variables?", "Which plot shows the five-number summary?", "In a stem-and-leaf plot, what does stem $5$, leaf $3$ represent?", "What central angle represents $25\\%$ of a pie chart?"],
+    ["A class of $8$ out of $50$ — find its relative frequency and its pie-chart angle.", "Describe the correlation of a scatterplot of hours studied vs. test score that trends upward.", "A frequency table has classes with counts $4,10,6$; find the relative frequency of the largest class."],
+    ["Explain when a histogram is preferable to a bar chart.", "Explain what information a stem-and-leaf plot preserves that a histogram does not.", "Explain how a scatterplot reveals the direction and strength of a relationship."]),
+  "5.2": A3("5.2", "Measures of Central Tendency",
+    ["Find the mean of $5,10,15$.", "Find the median of $3,8,8,10,20$.", "Find the mode of $4,4,7,9,9,9$.", "Find the median of $2,6,10,14$."],
+    ["Find the mean and median of $70,75,80,85,290$ and state which better represents the data.", "A student has test scores $82,90,78$; what score on a fourth test gives a mean of $85$?", "Estimate the mean of grouped data with midpoints $15,25,35$ and frequencies $4,10,6$."],
+    ["Explain why the median is preferred over the mean for skewed data.", "Explain how an outlier affects the mean but not the median.", "Explain how the mean, median, and mode compare in a right-skewed distribution."]),
+  "5.3": A3("5.3", "Measures of Variability",
+    ["Find the range of $6,2,9,4$.", "State the formula for the IQR.", "Find the standard deviation of $7,7,7$.", "Standard deviation is the square root of ___."],
+    ["Find the population standard deviation of $2,4,6,8$.", "Find the IQR of $2,4,5,7,8,10,12,14$.", "Two data sets have the same mean but SDs $2$ and $8$; describe how they differ."],
+    ["Explain why the IQR is more resistant to outliers than the range.", "Explain the difference between dividing by $n$ and by $n-1$.", "Explain what the empirical ($68$–$95$–$99.7$) rule says about a normal distribution."]),
+  "5.4": A3("5.4", "Percentiles & Position",
+    ["Which percentile is the median?", "Which percentile is $Q_3$?", "Find the z-score of $85$ with mean $75$, SD $5$.", "How many values are in a five-number summary?"],
+    ["Give the five-number summary of $3,5,7,9,11,13$.", "A test has mean $70$, SD $8$; find the z-score of $54$ and interpret it.", "Two scores have z-scores $1.5$ and $-0.5$; which is farther from the mean and by how much (in SDs)?"],
+    ["Explain what a z-score measures and why it allows comparison across different scales.", "Explain how the $1.5\\cdot\\text{IQR}$ rule flags outliers.", "Explain the relationship between percentiles and the cumulative distribution."]),
+  "5.5": A3("5.5", "Regression, Sampling & Experimental Design",
+    ["A best-fit line is $y=4x-2$; predict $y$ at $x=3$.", "What is the range of the correlation coefficient $r$?", "What does $r=0$ indicate?", "What is the control group in an experiment?"],
+    ["A regression line is $y=1.2x+30$; interpret the slope in context (test score vs. hours).", "Explain whether a strong correlation between ice-cream sales and drownings implies causation, and name a likely confounder.", "Describe how you would randomly sample $50$ students from a school of $1000$."],
+    ["Explain why correlation does not imply causation.", "Explain the roles of randomization and a control group in an experiment.", "Explain how a confounding variable can create a misleading correlation."]),
 };
 
 export default ASSIGN;
