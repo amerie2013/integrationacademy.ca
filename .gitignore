@@ -44,3 +44,6 @@ build-output.txt
 scripts/manim/media/
 __pycache__/
 *.pyc
+
+# FTCE OCR dump (large; regenerate from the PDF)
+scripts/_ftce/fulltext.txt
