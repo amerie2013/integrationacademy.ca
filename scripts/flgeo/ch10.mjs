@@ -1,4 +1,16 @@
 import { L, lessonHtml } from "./_helpers.mjs";
+import {
+  fig, translationFig, reflectionFig, rotationFig, compositionFig, symmetryFig,
+  triangleTypes, isoscelesFig, sssMarks, sasMarks, asaMarks, hlFig, overlappingFig,
+  dilationFig, similarTriangles, shadowMeasure, proportionalityFig,
+  pythagoreanFig, special4545, special3060, sohcahtoa, elevationFig,
+  polygonAngles, parallelogramFig, specialQuads, trapezoidFig, kiteFig,
+  distanceMidpoint, weightedAvgFig, areaFig, dilationScale,
+  centralAngleFig, inscribedAngleFig, tangentFig, sectorFig, cyclicQuad,
+  prismNet, cylinderFig, crossSectionFig, solidRevolution, scale3d,
+  copyAngleFig, bisectFig, incenterFig, circumcenterFig,
+  sampleSpaceFig, treeDiagram, twoWayTable, permuteCombine,
+} from "./figures2.mjs";
 
 export const ch = {};
 
@@ -16,10 +28,12 @@ ch["10.1"] = L("10.1", "Surface Area of Prisms, Pyramids, Cylinders, Cones, and 
       `Sphere: \\(SA = 4\\pi r^2\\) — no separate lateral/base pieces, since the whole surface is curved`,
       `Missing slant height? Use the Pythagorean theorem: \\(\\ell^2 = r^2 + h^2\\) (cone) or \\(\\ell^2 = h^2 + \\left(\\tfrac{s}{2}\\right)^2\\) (regular pyramid, \\(s\\) = base edge)`,
     ],
+    figure: fig(prismNet(), "Surface area adds the areas of all faces."),
     examples: [
       {
         h: "Rectangular prism",
         p: "Find the surface area of a rectangular prism with length 8 in, width 5 in, and height 6 in.",
+        fig: prismNet(),
         steps: [
           `A rectangular prism has three pairs of congruent rectangular faces: \\(lw\\), \\(lh\\), and \\(wh\\).`,
           `\\(SA = 2(lw + lh + wh) = 2\\big((8)(5) + (8)(6) + (5)(6)\\big)\\)`,
@@ -98,6 +112,7 @@ ch["10.2"] = L("10.2", "Volume of Prisms, Pyramids, Cylinders, Cones, and Sphere
       `\\(B\\) can be the area of any base shape: rectangle, triangle, circle, or regular polygon`,
       `For pyramids/cones, use the true height \\(h\\) (perpendicular to the base) — not the slant height`,
     ],
+    figure: fig(cylinderFig(), "Volume of a cylinder: V = πr²h."),
     examples: [
       {
         h: "Rectangular prism",
@@ -108,6 +123,7 @@ ch["10.2"] = L("10.2", "Volume of Prisms, Pyramids, Cylinders, Cones, and Sphere
       {
         h: "Cylinder",
         p: "Find the volume of a cylinder with radius 4 cm and height 9 cm.",
+        fig: cylinderFig(),
         steps: [`\\(V = \\pi r^2h = \\pi(16)(9)\\)`, `\\(V = 144\\pi \\approx 452.4\\)`],
         check: "V = 144π ≈ 452.4 cm³.",
       },
@@ -160,6 +176,7 @@ ch["10.3"] = L("10.3", "Solving Density and Population Density Problems (MA.912.
       `Common units: g/cm³, kg/m³ for density; people/mi² or people/km² for population density`,
       `Higher density = more "stuff" packed into the same amount of space`,
     ],
+    figure: fig(prismNet(), "Density = mass / volume."),
     examples: [
       {
         h: "Finding density from mass and volume",
@@ -222,6 +239,7 @@ ch["10.4"] = L("10.4", "Cross-Sections of 3D Figures (MA.912.GR.4.1)", [
       `Sphere: every planar cross-section is a circle; the largest one (through the center) is called a great circle`,
       `Cutting a rectangular prism (box) at an angle across several faces can create triangles, pentagons, or hexagons, depending on how many faces the plane crosses`,
     ],
+    figure: fig(crossSectionFig(), "A plane intersecting a solid produces a 2D cross-section."),
     examples: [
       {
         h: "Prism sliced parallel to its base",
@@ -250,6 +268,7 @@ ch["10.4"] = L("10.4", "Cross-Sections of 3D Figures (MA.912.GR.4.1)", [
       {
         h: "Cube sliced through a corner",
         p: "A cube is sliced by a plane through three vertices that meet at a single corner, cutting that corner off. Describe the cross-section.",
+        fig: crossSectionFig(),
         steps: [`The plane crosses exactly three faces of the cube, each contributing one straight edge to the cross-section.`, `Three edges meeting pairwise form a triangle.`],
         check: "The cross-section is a triangle.",
       },
@@ -284,10 +303,12 @@ ch["10.5"] = L("10.5", "Solids of Revolution (Rotating 2D Shapes to Make 3D Obje
       `Right trapezoid rotated \\(360^\\circ\\) about the leg perpendicular to both bases → a frustum (a cone with its tip sliced off)`,
       `Rectangle rotated \\(360^\\circ\\) about an axis that does not touch it (a gap in between) → a hollow cylinder (tube / cylindrical shell)`,
     ],
+    figure: fig(solidRevolution(), "Rotating a rectangle about an axis produces a cylinder."),
     examples: [
       {
         h: "Rectangle → cylinder",
         p: "A 4 by 9 rectangle is rotated \\(360^\\circ\\) about the side of length 9. Identify the solid and find its volume.",
+        fig: solidRevolution(),
         steps: [`Rotating a rectangle about one of its sides sweeps out a cylinder: the side of rotation (9) becomes the height, and the other side (4) becomes the radius.`, `\\(V = \\pi r^2h = \\pi(16)(9) = 144\\pi\\)`],
         check: "A cylinder with V = 144π ≈ 452.4 cubic units.",
       },
@@ -347,10 +368,12 @@ ch["10.6"] = L("10.6", "How Dilations Affect Surface Area and Volume (MA.912.GR.
       `Given a volume ratio, find the scale factor with \\(k = \\sqrt[3]{\\text{volume ratio}}\\)`,
       `These relationships hold for any pair of similar solids, not just cubes or spheres`,
     ],
+    figure: fig(scale3d(), "Similar solids: SA scales by k², volume by k³."),
     examples: [
       {
         h: "Applying a known scale factor",
         p: "A cube has edge length 4 cm. A similar cube is created using a scale factor of \\(k=3\\). Find the new surface area and volume.",
+        fig: scale3d(),
         steps: [
           `Original: \\(SA = 6(4)^2 = 96\\); \\(V = 4^3 = 64\\)`,
           `New surface area: \\(96 \\times k^2 = 96 \\times 9 = 864\\)`,

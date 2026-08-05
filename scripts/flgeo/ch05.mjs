@@ -1,4 +1,16 @@
 import { L, lessonHtml } from "./_helpers.mjs";
+import {
+  fig, translationFig, reflectionFig, rotationFig, compositionFig, symmetryFig,
+  triangleTypes, isoscelesFig, sssMarks, sasMarks, asaMarks, hlFig, overlappingFig,
+  dilationFig, similarTriangles, shadowMeasure, proportionalityFig,
+  pythagoreanFig, special4545, special3060, sohcahtoa, elevationFig,
+  polygonAngles, parallelogramFig, specialQuads, trapezoidFig, kiteFig,
+  distanceMidpoint, weightedAvgFig, areaFig, dilationScale,
+  centralAngleFig, inscribedAngleFig, tangentFig, sectorFig, cyclicQuad,
+  prismNet, cylinderFig, crossSectionFig, solidRevolution, scale3d,
+  copyAngleFig, bisectFig, incenterFig, circumcenterFig,
+  sampleSpaceFig, treeDiagram, twoWayTable, permuteCombine,
+} from "./figures2.mjs";
 
 export const ch = {};
 
@@ -13,12 +25,14 @@ ch["5.1"] = L("5.1", "Dilations on the Coordinate Plane (MA.912.GR.2.2)", [
       `Dilations preserve angle measure and shape (similarity) but scale every distance by a factor of \\(|k|\\); a dilation is an isometry only when \\(k=\\pm1\\).`,
       `For a dilation centered at a point \\(P(a,b)\\) other than the origin: subtract the center, scale, then add the center back: \\((x,y)\\mapsto(a+k(x-a),\\,b+k(y-b))\\).`,
     ],
+    figure: fig(dilationFig(), "A dilation from a center scales all distances by |k|."),
     examples: [
       { h: "Dilate a point from the origin", p: `Find the image of \\(A(3,-2)\\) under a dilation centered at the origin with scale factor \\(k=2\\).`, steps: [
         `<strong>Step 1 — apply the rule:</strong> \\((x,y)\\mapsto(2x,2y)\\).`,
         `<strong>Step 2 — substitute:</strong> \\(A'(2\\cdot3,\\,2\\cdot(-2))=A'(6,-4)\\).`,
       ] },
-      { h: "Dilate a triangle and classify the image", p: `\\(\\triangle ABC\\) has vertices \\(A(2,4)\\), \\(B(6,4)\\), \\(C(6,-2)\\). Find the image under a dilation centered at the origin with scale factor \\(k=\\dfrac{1}{2}\\), and state whether the image is an enlargement or reduction.`, steps: [
+      { h: "Dilate a triangle and classify the image", p: `\\(\\triangle ABC\\) has vertices \\(A(2,4)\\), \\(B(6,4)\\), \\(C(6,-2)\\). Find the image under a dilation centered at the origin with scale factor \\(k=\\dfrac{1}{2}\\), and state whether the image is an enlargement or reduction.`, fig: dilationFig(),
+        steps: [
         `<strong>Step 1 — apply the rule to each vertex:</strong> \\((x,y)\\mapsto\\left(\\dfrac{1}{2}x,\\dfrac{1}{2}y\\right)\\).`,
         `<strong>Step 2 — compute the images:</strong> \\(A'(1,2)\\), \\(B'(3,2)\\), \\(C'(3,-1)\\).`,
         `<strong>Step 3 — classify:</strong> since \\(0<k<1\\), the image is a <strong>reduction</strong> — smaller than the original.`,
@@ -65,8 +79,10 @@ ch["5.2"] = L("5.2", "Proving Similarity: AA, SAS, and SSS Similarity Theorems (
       `SSS Similarity: if all three pairs of corresponding sides are proportional, the triangles are similar.`,
       `Similarity statement \\(\\triangle ABC\\sim\\triangle DEF\\) means \\(\\angle A\\cong\\angle D\\), \\(\\angle B\\cong\\angle E\\), \\(\\angle C\\cong\\angle F\\), and \\(\\dfrac{AB}{DE}=\\dfrac{BC}{EF}=\\dfrac{CA}{FD}\\).`,
     ],
+    figure: fig(similarTriangles(), "AA Similarity: two pairs of congruent angles."),
     examples: [
-      { h: "Prove similarity with AA", p: `\\(\\angle A=50^\\circ\\), \\(\\angle B=70^\\circ\\) in \\(\\triangle ABC\\); \\(\\angle D=50^\\circ\\), \\(\\angle E=70^\\circ\\) in \\(\\triangle DEF\\). Prove the triangles are similar.`, steps: [
+      { h: "Prove similarity with AA", p: `\\(\\angle A=50^\\circ\\), \\(\\angle B=70^\\circ\\) in \\(\\triangle ABC\\); \\(\\angle D=50^\\circ\\), \\(\\angle E=70^\\circ\\) in \\(\\triangle DEF\\). Prove the triangles are similar.`, fig: similarTriangles(),
+        steps: [
         `<strong>Step 1 — compare the angles:</strong> \\(\\angle A\\cong\\angle D\\) (both \\(50^\\circ\\)) and \\(\\angle B\\cong\\angle E\\) (both \\(70^\\circ\\)).`,
         `<strong>Step 2 — apply AA:</strong> two pairs of congruent angles are enough.`,
         `<strong>Step 3 — conclude:</strong> \\(\\triangle ABC\\sim\\triangle DEF\\).`,
@@ -121,8 +137,10 @@ ch["5.3"] = L("5.3", "Using Similar Triangles to Solve Real-World Problems (Indi
       `Set up the proportion matching corresponding parts: \\(\\dfrac{\\text{height of object}}{\\text{height of known object}}=\\dfrac{\\text{shadow (or distance) of object}}{\\text{shadow (or distance) of known object}}\\).`,
       `Always confirm both measurements were taken under matching conditions (same time of day for shadows, or a shared vertex/angle for sightings).`,
     ],
+    figure: fig(shadowMeasure(), "Shadows create similar right triangles."),
     examples: [
-      { h: "Classic shadow problem", p: `A \\(6\\)-foot person casts a \\(4\\)-foot shadow at the same time a nearby flagpole casts a \\(30\\)-foot shadow. Find the height of the flagpole.`, steps: [
+      { h: "Classic shadow problem", p: `A \\(6\\)-foot person casts a \\(4\\)-foot shadow at the same time a nearby flagpole casts a \\(30\\)-foot shadow. Find the height of the flagpole.`, fig: shadowMeasure(),
+        steps: [
         `<strong>Step 1 — set up similar triangles:</strong> the person and pole are both vertical, and the sun's rays create equal angles, so the two shadow triangles are similar by AA.`,
         `<strong>Step 2 — write the proportion:</strong> \\(\\dfrac{\\text{person height}}{\\text{person shadow}}=\\dfrac{\\text{pole height}}{\\text{pole shadow}}\\), i.e. \\(\\dfrac{6}{4}=\\dfrac{h}{30}\\).`,
         `<strong>Step 3 — cross-multiply and solve:</strong> \\(4h=180\\), so \\(h=45\\) feet.`,
@@ -178,8 +196,10 @@ ch["5.4"] = L("5.4", "Triangle Proportionality Theorem and its Converse (MA.912.
       `Corollary (three parallel lines): if three or more parallel lines cut two transversals, they divide the transversals proportionally.`,
       `Midsegment Theorem (special case): a segment joining the midpoints of two sides of a triangle is parallel to the third side and half its length.`,
     ],
+    figure: fig(proportionalityFig(), "A line parallel to one side divides the other two proportionally."),
     examples: [
-      { h: "Apply the Triangle Proportionality Theorem", p: `In \\(\\triangle ABC\\), \\(\\overline{DE}\\parallel\\overline{BC}\\) with \\(D\\) on \\(\\overline{AB}\\) and \\(E\\) on \\(\\overline{AC}\\). If \\(AD=6\\), \\(DB=9\\), and \\(AE=8\\), find \\(EC\\).`, steps: [
+      { h: "Apply the Triangle Proportionality Theorem", p: `In \\(\\triangle ABC\\), \\(\\overline{DE}\\parallel\\overline{BC}\\) with \\(D\\) on \\(\\overline{AB}\\) and \\(E\\) on \\(\\overline{AC}\\). If \\(AD=6\\), \\(DB=9\\), and \\(AE=8\\), find \\(EC\\).`, fig: proportionalityFig(),
+        steps: [
         `<strong>Step 1 — set up the proportion:</strong> \\(\\dfrac{AD}{DB}=\\dfrac{AE}{EC}\\).`,
         `<strong>Step 2 — substitute:</strong> \\(\\dfrac{6}{9}=\\dfrac{8}{EC}\\).`,
         `<strong>Step 3 — cross-multiply:</strong> \\(6\\cdot EC=72\\).`,
@@ -234,6 +254,7 @@ ch["5.5"] = L("5.5", "Using Transformations to Prove Similarity (MA.912.GR.2.8)"
       `The scale factor of the required dilation equals the ratio of any pair of corresponding side lengths.`,
       `A valid sequence must end with every vertex of the pre-image landing exactly on the corresponding vertex of the image.`,
     ],
+    figure: fig(dilationFig(), "Similarity = rigid motions composed with a dilation."),
     examples: [
       { h: "Find the dilation scale factor between two similar figures", p: `\\(\\triangle ABC\\) has vertices \\(A(0,0)\\), \\(B(2,0)\\), \\(C(0,3)\\). \\(\\triangle DEF\\) has vertices \\(D(0,0)\\), \\(E(6,0)\\), \\(F(0,9)\\). Describe a similarity transformation mapping \\(\\triangle ABC\\) to \\(\\triangle DEF\\).`, steps: [
         `<strong>Step 1 — compare corresponding sides:</strong> \\(AB=2\\), \\(DE=6\\); \\(AC=3\\), \\(DF=9\\); both ratios equal \\(3\\).`,

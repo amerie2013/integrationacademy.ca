@@ -1,4 +1,16 @@
 import { L, lessonHtml } from "./_helpers.mjs";
+import {
+  fig, translationFig, reflectionFig, rotationFig, compositionFig, symmetryFig,
+  triangleTypes, isoscelesFig, sssMarks, sasMarks, asaMarks, hlFig, overlappingFig,
+  dilationFig, similarTriangles, shadowMeasure, proportionalityFig,
+  pythagoreanFig, special4545, special3060, sohcahtoa, elevationFig,
+  polygonAngles, parallelogramFig, specialQuads, trapezoidFig, kiteFig,
+  distanceMidpoint, weightedAvgFig, areaFig, dilationScale,
+  centralAngleFig, inscribedAngleFig, tangentFig, sectorFig, cyclicQuad,
+  prismNet, cylinderFig, crossSectionFig, solidRevolution, scale3d,
+  copyAngleFig, bisectFig, incenterFig, circumcenterFig,
+  sampleSpaceFig, treeDiagram, twoWayTable, permuteCombine,
+} from "./figures2.mjs";
 
 export const ch = {};
 
@@ -15,6 +27,7 @@ ch["11.1"] = L("11.1", "Copying Segments and Angles (MA.912.GR.5.1)", [
       `Copying an angle works no matter how large or small the angle is, because the method never depends on a protractor reading`,
       `The construction is justified by \\(SSS\\) congruence: the two triangles formed by the arcs have three pairs of equal side lengths`,
     ],
+    figure: fig(copyAngleFig(), "Copy an angle by transferring an arc and matching chord."),
     examples: [
       {
         h: "Copying a segment",
@@ -30,6 +43,7 @@ ch["11.1"] = L("11.1", "Copying Segments and Angles (MA.912.GR.5.1)", [
       {
         h: "Copying an angle",
         p: "Copy \\(\\angle ABC\\) so that its vertex is at a new point \\(B'\\).",
+        fig: copyAngleFig(),
         steps: [
           `Draw a ray from \\(B'\\) — this will become one side of the new angle.`,
           `Center the compass at vertex \\(B\\) and draw an arc that crosses both rays of \\(\\angle ABC\\), at points \\(D\\) and \\(E\\).`,
@@ -101,10 +115,12 @@ ch["11.2"] = L("11.2", "Bisecting Segments and Angles (MA.912.GR.5.2)", [
       `Every point on a perpendicular bisector is equidistant from the segment's two endpoints (Perpendicular Bisector Theorem)`,
       `Every point on an angle bisector is equidistant from the angle's two sides (Angle Bisector Theorem)`,
     ],
+    figure: fig(bisectFig(), "The perpendicular bisector of a segment."),
     examples: [
       {
         h: "Constructing a perpendicular bisector",
         p: "Construct the perpendicular bisector of \\(\\overline{AB}\\), where \\(AB = 12\\) cm.",
+        fig: bisectFig(),
         steps: [
           `Open the compass to a width more than half of \\(AB\\) (so the arcs will actually cross).`,
           `Center the compass at \\(A\\) and draw arcs above and below the segment.`,
@@ -176,10 +192,12 @@ ch["11.3"] = L("11.3", "Constructing Inscribed and Circumscribed Circles of a Tr
       `Circumcircle: centered at the circumcenter, passing through all three vertices; the circumradius is the distance from the circumcenter to any vertex`,
       `Circumcenter location depends on triangle type: inside for acute, on the hypotenuse's midpoint for right, outside for obtuse`,
     ],
+    figure: fig(incenterFig(), "The incenter is where the angle bisectors meet."),
     examples: [
       {
         h: "Constructing the incenter and incircle",
         p: "Construct the incircle of \\(\\triangle ABC\\).",
+        fig: incenterFig(),
         steps: [
           `Construct the bisector of \\(\\angle A\\) and the bisector of \\(\\angle B\\) using the method from the previous lesson (a third bisector would meet at the same point, so only two are needed).`,
           `Label the point where the two bisectors intersect as the incenter \\(I\\).`,
@@ -197,6 +215,7 @@ ch["11.3"] = L("11.3", "Constructing Inscribed and Circumscribed Circles of a Tr
       {
         h: "Constructing the circumcenter and circumcircle",
         p: "Construct the circumcircle of \\(\\triangle DEF\\).",
+        fig: circumcenterFig(),
         steps: [
           `Construct the perpendicular bisector of \\(\\overline{DE}\\) and the perpendicular bisector of \\(\\overline{EF}\\) (a third would meet at the same point).`,
           `Label the intersection of the two perpendicular bisectors as the circumcenter \\(O\\).`,

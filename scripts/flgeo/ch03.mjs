@@ -1,4 +1,16 @@
 import { L, lessonHtml } from "./_helpers.mjs";
+import {
+  fig, translationFig, reflectionFig, rotationFig, compositionFig, symmetryFig,
+  triangleTypes, isoscelesFig, sssMarks, sasMarks, asaMarks, hlFig, overlappingFig,
+  dilationFig, similarTriangles, shadowMeasure, proportionalityFig,
+  pythagoreanFig, special4545, special3060, sohcahtoa, elevationFig,
+  polygonAngles, parallelogramFig, specialQuads, trapezoidFig, kiteFig,
+  distanceMidpoint, weightedAvgFig, areaFig, dilationScale,
+  centralAngleFig, inscribedAngleFig, tangentFig, sectorFig, cyclicQuad,
+  prismNet, cylinderFig, crossSectionFig, solidRevolution, scale3d,
+  copyAngleFig, bisectFig, incenterFig, circumcenterFig,
+  sampleSpaceFig, treeDiagram, twoWayTable, permuteCombine,
+} from "./figures2.mjs";
 
 export const ch = {};
 
@@ -14,10 +26,12 @@ ch["3.1"] = L("3.1", "Translations on the Coordinate Plane (MA.912.GR.2.1)", [
       `Translations preserve <strong>orientation</strong> (the figure isn't flipped or reflected) and preserve <strong>parallelism</strong>: if \\(\\overline{AB}\\parallel\\overline{CD}\\) before, then \\(\\overline{A'B'}\\parallel\\overline{C'D'}\\) after.`,
       `To find a translation rule from a preimage/image pair, subtract corresponding coordinates: \\(a=x'-x\\), \\(b=y'-y\\).`,
     ],
+    figure: fig(translationFig(), "A translation slides every point by the same vector."),
     examples: [
       {
         h: "Applying a translation rule",
         p: "Triangle \\(ABC\\) has vertices \\(A(1,2)\\), \\(B(4,2)\\), \\(C(4,5)\\). Find the image under the translation \\((x,y)\\to(x-3,y+4)\\).",
+        fig: translationFig(),
         steps: [
           `<strong>Step 1 — Apply the rule to \\(A\\):</strong> \\(A(1,2)\\to A'(1-3,2+4)=A'(-2,6)\\).`,
           `<strong>Step 2 — Apply the rule to \\(B\\):</strong> \\(B(4,2)\\to B'(4-3,2+4)=B'(1,6)\\).`,
@@ -92,10 +106,12 @@ ch["3.2"] = L("3.2", "Reflections on the Coordinate Plane (MA.912.GR.2.1)", [
       `<strong>Key property:</strong> the line of reflection is the perpendicular bisector of every segment connecting a point to its image — that is, \\(\\overline{PP'}\\perp\\) line of reflection, and the line crosses \\(\\overline{PP'}\\) at its midpoint.`,
       `Reflections preserve distance and angle measure (they're rigid motions) but <strong>reverse orientation</strong>, unlike translations and rotations.`,
     ],
+    figure: fig(reflectionFig(), "Reflection across the y-axis: (x, y) maps to (−x, y)."),
     examples: [
       {
         h: "Reflecting across the x-axis",
         p: "Reflect \\(\\triangle ABC\\) with \\(A(2,3)\\), \\(B(5,1)\\), \\(C(1,-2)\\) across the \\(x\\)-axis.",
+        fig: reflectionFig(),
         steps: [
           `<strong>Step 1 — Apply the rule \\((x,y)\\to(x,-y)\\) to each vertex:</strong> \\(A'(2,-3)\\), \\(B'(5,-1)\\), \\(C'(1,2)\\).`,
         ],
@@ -166,10 +182,12 @@ ch["3.3"] = L("3.3", "Rotations on the Coordinate Plane (MA.912.GR.2.1)", [
       `A rotation preserves the distance from the center: if \\(P\\) is at distance \\(r\\) from the center, its image \\(P'\\) is also at distance \\(r\\) from the center.`,
       `To rotate about a point other than the origin, translate that point to the origin, apply the rotation rule, then translate back — the underlying rule stays the same, just applied relative to the new center.`,
     ],
+    figure: fig(rotationFig(), "A 90° counterclockwise rotation about the origin."),
     examples: [
       {
         h: "Rotating 90° counterclockwise about the origin",
         p: "Rotate \\(\\triangle ABC\\) with \\(A(2,1)\\), \\(B(4,1)\\), \\(C(4,3)\\) by \\(90^\\circ\\) counterclockwise about the origin.",
+        fig: rotationFig(),
         steps: [
           `<strong>Step 1 — Apply \\((x,y)\\to(-y,x)\\) to each vertex:</strong> \\(A(2,1)\\to A'(-1,2)\\); \\(B(4,1)\\to B'(-1,4)\\); \\(C(4,3)\\to C'(-3,4)\\).`,
         ],
@@ -237,10 +255,12 @@ ch["3.4"] = L("3.4", "Compositions of Transformations (MA.912.GR.2.3)", [
       `<strong>Two reflections over intersecting lines</strong> compose into a single <strong>rotation</strong> about the point of intersection, with angle equal to <strong>twice</strong> the angle between the lines.`,
       `A <strong>glide reflection</strong> is a specific composition: a translation followed by a reflection across a line parallel to the translation's direction.`,
     ],
+    figure: fig(compositionFig(), "Do the first transformation, then the second."),
     examples: [
       {
         h: "Performing a composition in order",
         p: "\\(A(2,1)\\) is first reflected across the \\(y\\)-axis, then translated by \\((x,y)\\to(x+3,y-2)\\). Find the final image.",
+        fig: compositionFig(),
         steps: [
           `<strong>Step 1 — Apply the reflection first (it's listed first):</strong> \\((x,y)\\to(-x,y)\\) gives \\(A(2,1)\\to(-2,1)\\).`,
           `<strong>Step 2 — Apply the translation to that result:</strong> \\((-2,1)\\to(-2+3,1-2)=(1,-1)\\).`,
@@ -315,10 +335,12 @@ ch["3.5"] = L("3.5", "Line and Rotational Symmetry (MA.912.GR.2.4)", [
       `A regular \\(n\\)-gon has exactly \\(n\\) lines of symmetry and rotational symmetry of order \\(n\\) (smallest angle \\(\\dfrac{360^\\circ}{n}\\)).`,
       `Some figures have only line symmetry, only rotational symmetry, both, or neither — the two types are independent properties.`,
     ],
+    figure: fig(symmetryFig(), "Line symmetry and rotational symmetry in a regular polygon."),
     examples: [
       {
         h: "Lines of symmetry in a regular polygon",
         p: "How many lines of symmetry does a regular hexagon have?",
+        fig: symmetryFig(),
         steps: [
           `<strong>Step 1 — Apply the regular-\\(n\\)-gon rule:</strong> a regular \\(n\\)-gon has \\(n\\) lines of symmetry.`,
           `<strong>Step 2 — Substitute \\(n=6\\):</strong> a regular hexagon has 6 lines of symmetry.`,
@@ -389,6 +411,7 @@ ch["3.6"] = L("3.6", "Using Transformations to Prove Congruence (MA.912.GR.2.6)"
       `A full solution states each transformation with its explicit rule (or description) in order, followed by a concluding congruence statement.`,
       `This transformation view of congruence is the same idea underlying <strong>CPCTC</strong> (corresponding parts of congruent triangles are congruent) — once a rigid-motion mapping exists, corresponding parts are congruent for free.`,
     ],
+    figure: fig(translationFig(), "Congruence means rigid motions map one figure onto the other."),
     examples: [
       {
         h: "A single translation proves congruence",

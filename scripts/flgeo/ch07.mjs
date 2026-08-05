@@ -1,4 +1,16 @@
 import { L, lessonHtml } from "./_helpers.mjs";
+import {
+  fig, translationFig, reflectionFig, rotationFig, compositionFig, symmetryFig,
+  triangleTypes, isoscelesFig, sssMarks, sasMarks, asaMarks, hlFig, overlappingFig,
+  dilationFig, similarTriangles, shadowMeasure, proportionalityFig,
+  pythagoreanFig, special4545, special3060, sohcahtoa, elevationFig,
+  polygonAngles, parallelogramFig, specialQuads, trapezoidFig, kiteFig,
+  distanceMidpoint, weightedAvgFig, areaFig, dilationScale,
+  centralAngleFig, inscribedAngleFig, tangentFig, sectorFig, cyclicQuad,
+  prismNet, cylinderFig, crossSectionFig, solidRevolution, scale3d,
+  copyAngleFig, bisectFig, incenterFig, circumcenterFig,
+  sampleSpaceFig, treeDiagram, twoWayTable, permuteCombine,
+} from "./figures2.mjs";
 
 export const ch = {};
 
@@ -14,10 +26,12 @@ ch["7.1"] = L("7.1", "Interior and Exterior Angle Sums of Polygons (MA.912.GR.1.
       `<strong>Each exterior angle of a regular \\(n\\)-gon:</strong> \\(\\dfrac{360^\\circ}{n}\\).`,
       `At any single vertex, the interior and exterior angles form a <strong>linear pair</strong>: \\(\\text{interior}+\\text{exterior}=180^\\circ\\).`,
     ],
+    figure: fig(polygonAngles(), "An n-gon divides into n−2 triangles."),
     examples: [
       {
         h: "Interior angle sum of a hexagon",
         p: "Find the sum of the interior angles of a convex hexagon (\\(n=6\\)).",
+        fig: polygonAngles(),
         steps: [
           `<strong>Step 1 — Apply the formula:</strong> \\(S=(n-2)\\cdot180^\\circ=(6-2)\\cdot180^\\circ\\).`,
           `<strong>Step 2 — Simplify:</strong> \\(S=4\\cdot180^\\circ=720^\\circ\\).`,
@@ -91,10 +105,12 @@ ch["7.2"] = L("7.2", "Properties of Parallelograms and Proving Theorems (MA.912.
       `<strong>Diagonals bisect each other</strong> — they cross at a point that is the midpoint of both diagonals.`,
       `Each property above has a valid <strong>converse</strong>: if a quadrilateral satisfies just one of them (opposite sides both congruent, opposite angles both congruent, diagonals bisecting each other, or one pair of sides both parallel <em>and</em> congruent), then it must be a parallelogram.`,
     ],
+    figure: fig(parallelogramFig(), "Opposite sides parallel and congruent; diagonals bisect."),
     examples: [
       {
         h: "Solving for a side using congruent opposite sides",
         p: "In parallelogram \\(ABCD\\), \\(AB=3x+2\\) and \\(CD=17\\). Find \\(x\\).",
+        fig: parallelogramFig(),
         steps: [
           `<strong>Step 1 — Use the property:</strong> opposite sides of a parallelogram are congruent, so \\(AB=CD\\): \\(3x+2=17\\).`,
           `<strong>Step 2 — Solve:</strong> \\(3x=15 \\Rightarrow x=5\\).`,
@@ -173,10 +189,12 @@ ch["7.3"] = L("7.3", "Properties of Rectangles, Rhombi, and Squares (MA.912.GR.1
       `<strong>Hierarchy:</strong> square \\(\\subset\\) rectangle \\(\\subset\\) parallelogram, and square \\(\\subset\\) rhombus \\(\\subset\\) parallelogram.`,
       `Because a rhombus's diagonals are perpendicular and bisect each other, they split it into four congruent right triangles — use the <strong>Pythagorean theorem</strong> with the half-diagonals as legs and a side as the hypotenuse.`,
     ],
+    figure: fig(specialQuads(), "Rectangle, rhombus, and square."),
     examples: [
       {
         h: "Congruent diagonals of a rectangle",
         p: "Rectangle \\(ABCD\\) has diagonals \\(AC=5x-3\\) and \\(BD=2x+9\\). Find \\(x\\) and the diagonal length.",
+        fig: specialQuads(),
         steps: [
           `<strong>Step 1 — Use the property:</strong> a rectangle's diagonals are congruent: \\(5x-3=2x+9\\).`,
           `<strong>Step 2 — Solve:</strong> \\(3x=12 \\Rightarrow x=4\\).`,
@@ -253,10 +271,12 @@ ch["7.4"] = L("7.4", "Properties of Trapezoids and Kites (Including Midsegment T
       `<strong>Kite:</strong> a quadrilateral with two distinct pairs of consecutive congruent sides (not a rhombus, where all four sides match).`,
       `<strong>Kite diagonals</strong> are perpendicular; the diagonal connecting the two vertices between the congruent side-pairs bisects the other diagonal and bisects the pair of angles at its own endpoints.`,
     ],
+    figure: fig(trapezoidFig(), "The midsegment is the average of the two bases."),
     examples: [
       {
         h: "Finding the midsegment length",
         p: "A trapezoid has bases of length 10 and 18. Find the midsegment length.",
+        fig: trapezoidFig(),
         steps: [
           `<strong>Step 1 — Apply the Midsegment Theorem:</strong> \\(m=\\dfrac{b_1+b_2}{2}=\\dfrac{10+18}{2}\\).`,
           `<strong>Step 2 — Simplify:</strong> \\(m=\\dfrac{28}{2}=14\\).`,
@@ -284,6 +304,7 @@ ch["7.4"] = L("7.4", "Properties of Trapezoids and Kites (Including Midsegment T
       {
         h: "Kite side lengths from diagonal segments",
         p: "Kite \\(EFGH\\) has diagonal \\(\\overline{EG}\\) as its axis of symmetry, crossing diagonal \\(\\overline{FH}\\) at point \\(X\\) so that \\(FX=XH=8\\). If \\(EX=6\\) and \\(GX=15\\), find the kite's two distinct side lengths.",
+        fig: kiteFig(),
         steps: [
           `<strong>Step 1 — Use perpendicularity:</strong> the axis diagonal \\(\\overline{EG}\\) is perpendicular to \\(\\overline{FH}\\), so \\(\\triangle EXF\\) and \\(\\triangle GXF\\) are right triangles.`,
           `<strong>Step 2 — Find \\(EF\\) (and \\(EH\\)):</strong> \\(EF=\\sqrt{EX^2+FX^2}=\\sqrt{6^2+8^2}=\\sqrt{100}=10\\).`,
@@ -330,6 +351,7 @@ ch["7.5"] = L("7.5", "Coordinate Geometry Proofs for Quadrilaterals (Using Slope
       `<strong>Midpoint formula</strong> — the quickest parallelogram test: if both diagonals share the same midpoint, they bisect each other.`,
       `<strong>Strategy:</strong> (1) identify which theorem/converse you're trying to match, (2) compute the needed tool (slope, distance, or midpoint) for every relevant side or diagonal, (3) compare the results and state the conclusion.`,
     ],
+    figure: fig(parallelogramFig(), "Use slope, distance, and midpoint on the coordinate plane."),
     examples: [
       {
         h: "Proving a parallelogram with midpoints",

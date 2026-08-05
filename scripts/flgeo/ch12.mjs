@@ -1,4 +1,16 @@
 import { L, lessonHtml } from "./_helpers.mjs";
+import {
+  fig, translationFig, reflectionFig, rotationFig, compositionFig, symmetryFig,
+  triangleTypes, isoscelesFig, sssMarks, sasMarks, asaMarks, hlFig, overlappingFig,
+  dilationFig, similarTriangles, shadowMeasure, proportionalityFig,
+  pythagoreanFig, special4545, special3060, sohcahtoa, elevationFig,
+  polygonAngles, parallelogramFig, specialQuads, trapezoidFig, kiteFig,
+  distanceMidpoint, weightedAvgFig, areaFig, dilationScale,
+  centralAngleFig, inscribedAngleFig, tangentFig, sectorFig, cyclicQuad,
+  prismNet, cylinderFig, crossSectionFig, solidRevolution, scale3d,
+  copyAngleFig, bisectFig, incenterFig, circumcenterFig,
+  sampleSpaceFig, treeDiagram, twoWayTable, permuteCombine,
+} from "./figures2.mjs";
 
 export const ch = {};
 
@@ -15,6 +27,7 @@ ch["12.1"] = L("12.1", "Introduction to Probability and Sample Spaces (MA.912.DP
       `Complement rule: \\(P(E') = 1 - P(E)\\), where \\(E'\\) is "\\(E\\) does not happen"`,
       `The probabilities of all outcomes in a sample space always add up to \\(1\\)`,
     ],
+    figure: fig(sampleSpaceFig(), "List every equally likely outcome in the sample space."),
     examples: [
       {
         h: "Basic probability from a die",
@@ -43,6 +56,7 @@ ch["12.1"] = L("12.1", "Introduction to Probability and Sample Spaces (MA.912.DP
       {
         h: "Sample space with two coins",
         p: "Two fair coins are flipped. Find \\(P(\\text{exactly one head})\\).",
+        fig: sampleSpaceFig(),
         steps: [`Sample space: \\(S = \\{HH, HT, TH, TT\\}\\), so \\(n(S)=4\\)`, `Favorable outcomes (exactly one head): \\(\\{HT, TH\\}\\), so \\(n(E) = 2\\)`, `\\(P(\\text{exactly one head}) = \\dfrac{2}{4} = \\dfrac{1}{2}\\)`],
         check: `\\(P = \\dfrac{1}{2}\\).`,
       },
@@ -76,10 +90,12 @@ ch["12.2"] = L("12.2", "Independent and Dependent Events (MA.912.DP.1.2)", [
       `"With replacement" usually signals independent events; "without replacement" usually signals dependent events`,
       `Tree diagrams are a useful way to organize the branching probabilities of sequential events`,
     ],
+    figure: fig(treeDiagram(), "A tree diagram for compound events."),
     examples: [
       {
         h: "Independent events (coin and die)",
         p: "A coin is flipped and a die is rolled. Find \\(P(\\text{heads and rolling a } 6)\\).",
+        fig: treeDiagram(),
         steps: [`The coin flip has no effect on the die roll, so the events are independent.`, `\\(P(\\text{heads}) = \\dfrac{1}{2}\\), \\(P(6) = \\dfrac{1}{6}\\)`, `\\(P(\\text{heads and } 6) = \\dfrac{1}{2}\\cdot\\dfrac{1}{6} = \\dfrac{1}{12}\\)`],
         check: `\\(P = \\dfrac{1}{12}\\).`,
       },
@@ -149,10 +165,12 @@ ch["12.3"] = L("12.3", "Conditional Probability (MA.912.DP.1.4)", [
       `\\(A\\) and \\(B\\) are independent exactly when \\(P(A\\mid B) = P(A)\\) (knowing \\(B\\) didn't change anything)`,
       `Be careful: \\(P(A\\mid B)\\) and \\(P(B\\mid A)\\) are usually different quantities`,
     ],
+    figure: fig(twoWayTable(), "Conditional probability from a two-way table."),
     examples: [
       {
         h: "Reading a two-way table",
         p: "A survey of 100 students gives: 40 boys like sports, 10 boys dislike sports, 20 girls like sports, 30 girls dislike sports. Find \\(P(\\text{likes sports} \\mid \\text{boy})\\).",
+        fig: twoWayTable(),
         steps: [`Restrict attention to boys only: \\(40+10 = 50\\) boys total.`, `Of those, 40 like sports.`, `\\(P(\\text{likes sports}\\mid\\text{boy}) = \\dfrac{40}{50} = \\dfrac{4}{5}\\)`],
         check: `\\(P = \\dfrac{4}{5}\\).`,
       },
@@ -211,10 +229,12 @@ ch["12.4"] = L("12.4", "Permutations and Combinations (MA.912.DP.1.3)", [
       `Relationship: \\(_{n}P_{r} = {_{n}C_{r}} \\cdot r!\\), since a combination becomes a permutation once you also arrange the chosen \\(r\\) items`,
       `Ask "does swapping two chosen items create a different outcome?" — if yes, use a permutation; if no, use a combination`,
     ],
+    figure: fig(permuteCombine(), "Permutations care about order; combinations do not."),
     examples: [
       {
         h: "Permutation — a race",
         p: "5 runners compete, and we want to know the number of ways 1st, 2nd, and 3rd place can be awarded. How many outcomes are possible?",
+        fig: permuteCombine(),
         steps: [`Order matters here (1st is different from 2nd), so use a permutation.`, `\\(_5P_3 = \\dfrac{5!}{(5-3)!} = \\dfrac{5!}{2!}\\)`, `\\(_5P_3 = \\dfrac{120}{2} = 60\\)`],
         check: `\\(_5P_3 = 60\\).`,
       },
@@ -273,6 +293,7 @@ ch["12.5"] = L("12.5", "Probability Models and Real-World Applications (MA.912.D
       `A game is "fair" when its expected value equals its cost — neither side is expected to gain or lose on average`,
       `With more trials, experimental probability tends to get closer to theoretical probability (the law of large numbers)`,
     ],
+    figure: fig(sampleSpaceFig(), "A probability model assigns probabilities to outcomes."),
     examples: [
       {
         h: "Building a probability model",

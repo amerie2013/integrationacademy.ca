@@ -1,4 +1,16 @@
 import { L, lessonHtml } from "./_helpers.mjs";
+import {
+  fig, translationFig, reflectionFig, rotationFig, compositionFig, symmetryFig,
+  triangleTypes, isoscelesFig, sssMarks, sasMarks, asaMarks, hlFig, overlappingFig,
+  dilationFig, similarTriangles, shadowMeasure, proportionalityFig,
+  pythagoreanFig, special4545, special3060, sohcahtoa, elevationFig,
+  polygonAngles, parallelogramFig, specialQuads, trapezoidFig, kiteFig,
+  distanceMidpoint, weightedAvgFig, areaFig, dilationScale,
+  centralAngleFig, inscribedAngleFig, tangentFig, sectorFig, cyclicQuad,
+  prismNet, cylinderFig, crossSectionFig, solidRevolution, scale3d,
+  copyAngleFig, bisectFig, incenterFig, circumcenterFig,
+  sampleSpaceFig, treeDiagram, twoWayTable, permuteCombine,
+} from "./figures2.mjs";
 
 export const ch = {};
 
@@ -13,8 +25,10 @@ ch["6.1"] = L("6.1", "The Pythagorean Theorem and its Converse", [
       `Classifying with the inequality version: comparing \\(a^2+b^2\\) to \\(c^2\\) (the square of the <em>longest</em> side) — if \\(a^2+b^2>c^2\\) the triangle is <strong>acute</strong>; if \\(a^2+b^2<c^2\\) the triangle is <strong>obtuse</strong>.`,
       `Common Pythagorean triples: \\((3,4,5)\\), \\((5,12,13)\\), \\((8,15,17)\\), and their whole-number multiples.`,
     ],
+    figure: fig(pythagoreanFig(), "In a right triangle, a² + b² = c²."),
     examples: [
-      { h: "Find the hypotenuse", p: `A right triangle has legs of length \\(6\\) and \\(8\\). Find the hypotenuse.`, steps: [
+      { h: "Find the hypotenuse", p: `A right triangle has legs of length \\(6\\) and \\(8\\). Find the hypotenuse.`, fig: pythagoreanFig(),
+        steps: [
         `<strong>Step 1 — apply the theorem:</strong> \\(c^2=6^2+8^2\\).`,
         `<strong>Step 2 — compute:</strong> \\(c^2=36+64=100\\).`,
         `<strong>Step 3 — take the square root:</strong> \\(c=\\sqrt{100}=10\\).`,
@@ -69,8 +83,10 @@ ch["6.2"] = L("6.2", "Special Right Triangles (45-45-90 and 30-60-90)", [
       `A 45-45-90 triangle is an isosceles right triangle; a 30-60-90 triangle is exactly half of an equilateral triangle, split by an altitude.`,
       `Given any one side, use the ratios above to solve for \\(x\\) first, then multiply to find the other two sides.`,
     ],
+    figure: fig(special4545(), "45-45-90: legs x, hypotenuse x√2."),
     examples: [
-      { h: "Find the hypotenuse of a 45-45-90 triangle", p: `A 45-45-90 triangle has legs of length \\(7\\). Find the hypotenuse.`, steps: [
+      { h: "Find the hypotenuse of a 45-45-90 triangle", p: `A 45-45-90 triangle has legs of length \\(7\\). Find the hypotenuse.`, fig: special4545(),
+        steps: [
         `<strong>Step 1 — apply the ratio:</strong> hypotenuse \\(=\\text{leg}\\times\\sqrt2\\).`,
         `<strong>Step 2 — substitute:</strong> hypotenuse \\(=7\\sqrt2\\).`,
       ] },
@@ -79,7 +95,8 @@ ch["6.2"] = L("6.2", "Special Right Triangles (45-45-90 and 30-60-90)", [
         `<strong>Step 2 — solve for x:</strong> divide both sides by \\(\\sqrt2\\): \\(x=12\\).`,
         `<strong>Step 3 — state the answer:</strong> each leg is \\(12\\).`,
       ] },
-      { h: "Find all sides of a 30-60-90 triangle from the short leg", p: `A 30-60-90 triangle has a short leg (opposite the \\(30^\\circ\\) angle) of length \\(5\\). Find the long leg and the hypotenuse.`, steps: [
+      { h: "Find all sides of a 30-60-90 triangle from the short leg", p: `A 30-60-90 triangle has a short leg (opposite the \\(30^\\circ\\) angle) of length \\(5\\). Find the long leg and the hypotenuse.`, fig: special3060(),
+        steps: [
         `<strong>Step 1 — identify x:</strong> \\(x=5\\) (the short leg).`,
         `<strong>Step 2 — find the long leg:</strong> \\(x\\sqrt3=5\\sqrt3\\).`,
         `<strong>Step 3 — find the hypotenuse:</strong> \\(2x=10\\).`,
@@ -123,8 +140,10 @@ ch["6.3"] = L("6.3", "The Sine, Cosine, and Tangent Ratios (MA.912.T.1.2)", [
       `These ratios are constant for a given angle measure because all right triangles containing that angle are similar (AA Similarity).`,
       `Use a calculator in degree mode to evaluate \\(\\sin\\), \\(\\cos\\), \\(\\tan\\) of a given angle, or their inverses (\\(\\sin^{-1}\\), \\(\\cos^{-1}\\), \\(\\tan^{-1}\\)) to find an angle from a ratio.`,
     ],
+    figure: fig(sohcahtoa(), "SOH-CAH-TOA relative to the marked acute angle."),
     examples: [
-      { h: "Identify opposite, adjacent, and hypotenuse", p: `In right \\(\\triangle ABC\\) with the right angle at \\(C\\), find \\(\\sin(A)\\), \\(\\cos(A)\\), and \\(\\tan(A)\\) if \\(a=BC=6\\) (opposite \\(A\\)), \\(b=AC=8\\) (adjacent to \\(A\\)), and \\(c=AB=10\\) (hypotenuse).`, steps: [
+      { h: "Identify opposite, adjacent, and hypotenuse", p: `In right \\(\\triangle ABC\\) with the right angle at \\(C\\), find \\(\\sin(A)\\), \\(\\cos(A)\\), and \\(\\tan(A)\\) if \\(a=BC=6\\) (opposite \\(A\\)), \\(b=AC=8\\) (adjacent to \\(A\\)), and \\(c=AB=10\\) (hypotenuse).`, fig: sohcahtoa(),
+        steps: [
         `<strong>Step 1 — apply SOH:</strong> \\(\\sin(A)=\\dfrac{\\text{opposite}}{\\text{hypotenuse}}=\\dfrac{6}{10}=\\dfrac{3}{5}\\).`,
         `<strong>Step 2 — apply CAH:</strong> \\(\\cos(A)=\\dfrac{\\text{adjacent}}{\\text{hypotenuse}}=\\dfrac{8}{10}=\\dfrac{4}{5}\\).`,
         `<strong>Step 3 — apply TOA:</strong> \\(\\tan(A)=\\dfrac{\\text{opposite}}{\\text{adjacent}}=\\dfrac{6}{8}=\\dfrac{3}{4}\\).`,
@@ -178,6 +197,7 @@ ch["6.4"] = L("6.4", "Solving Right Triangles Using Trigonometry", [
       `Given two sides: use the Pythagorean Theorem to find the third side, then use an inverse trig ratio to find one acute angle, and subtract from \\(90^\\circ\\) for the other.`,
       `Keep extra decimal places through intermediate steps to avoid compounding rounding error; round only the final answers.`,
     ],
+    figure: fig(sohcahtoa(), "Choose sine, cosine, or tangent from the given information."),
     examples: [
       { h: "Solve a right triangle given an angle and the hypotenuse", p: `In right \\(\\triangle ABC\\) (right angle at \\(C\\)), \\(\\angle A=38^\\circ\\) and hypotenuse \\(c=AB=14\\). Solve the triangle (find \\(\\angle B\\), \\(a\\), and \\(b\\)).`, steps: [
         `<strong>Step 1 — find \\(\\angle B\\):</strong> \\(\\angle B=90^\\circ-38^\\circ=52^\\circ\\).`,
@@ -234,8 +254,10 @@ ch["6.5"] = L("6.5", "Real-World Applications: Angles of Elevation and Depressio
       `The angle of elevation from point A to point B equals the angle of depression from point B to point A (alternate interior angles on parallel horizontal lines).`,
       `Draw a diagram first: mark the horizontal line, the angle, and the right triangle formed by the vertical height and horizontal distance — then apply sine, cosine, or tangent.`,
     ],
+    figure: fig(elevationFig(), "An angle of elevation is measured up from the horizontal."),
     examples: [
-      { h: "Find a height using the angle of elevation", p: `From a point \\(40\\) m from the base of a tower, the angle of elevation to the top is \\(52^\\circ\\). Find the height of the tower.`, steps: [
+      { h: "Find a height using the angle of elevation", p: `From a point \\(40\\) m from the base of a tower, the angle of elevation to the top is \\(52^\\circ\\). Find the height of the tower.`, fig: elevationFig(),
+        steps: [
         `<strong>Step 1 — sketch the right triangle:</strong> the horizontal distance (\\(40\\) m) is adjacent to the \\(52^\\circ\\) angle; the tower's height is opposite.`,
         `<strong>Step 2 — choose tangent (opposite/adjacent):</strong> \\(\\tan(52^\\circ)=\\dfrac{h}{40}\\).`,
         `<strong>Step 3 — solve:</strong> \\(h=40\\tan(52^\\circ)\\approx51.2\\) m.`,

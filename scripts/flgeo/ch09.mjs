@@ -1,4 +1,16 @@
 import { L, lessonHtml } from "./_helpers.mjs";
+import {
+  fig, translationFig, reflectionFig, rotationFig, compositionFig, symmetryFig,
+  triangleTypes, isoscelesFig, sssMarks, sasMarks, asaMarks, hlFig, overlappingFig,
+  dilationFig, similarTriangles, shadowMeasure, proportionalityFig,
+  pythagoreanFig, special4545, special3060, sohcahtoa, elevationFig,
+  polygonAngles, parallelogramFig, specialQuads, trapezoidFig, kiteFig,
+  distanceMidpoint, weightedAvgFig, areaFig, dilationScale,
+  centralAngleFig, inscribedAngleFig, tangentFig, sectorFig, cyclicQuad,
+  prismNet, cylinderFig, crossSectionFig, solidRevolution, scale3d,
+  copyAngleFig, bisectFig, incenterFig, circumcenterFig,
+  sampleSpaceFig, treeDiagram, twoWayTable, permuteCombine,
+} from "./figures2.mjs";
 
 export const ch = {};
 
@@ -14,10 +26,12 @@ ch["9.1"] = L("9.1", "Circle Vocabulary and Central Angles (MA.912.GR.6.2)", [
       `<strong>Central angle:</strong> vertex at the center; by definition, \\(m\\angle(\\text{central})=m\\widehat{\\text{arc}}\\) (the arc it intercepts).`,
       `<strong>Arc Addition Postulate:</strong> \\(m\\widehat{AB}+m\\widehat{BC}=m\\widehat{AC}\\) for adjacent arcs.`,
     ],
+    figure: fig(centralAngleFig(), "A central angle equals its intercepted arc."),
     examples: [
       {
         h: "Minor and major arc from a central angle",
         p: "Central angle \\(\\angle AOB=72^\\circ\\). Find the measures of minor arc \\(AB\\) and major arc \\(AB\\).",
+        fig: centralAngleFig(),
         steps: [
           `<strong>Step 1 — Minor arc:</strong> equals the central angle directly, \\(m\\widehat{AB}=72^\\circ\\).`,
           `<strong>Step 2 — Major arc:</strong> the rest of the circle, \\(360^\\circ-72^\\circ=288^\\circ\\).`,
@@ -88,10 +102,12 @@ ch["9.2"] = L("9.2", "Inscribed Angles and Intercepted Arcs (MA.912.GR.6.2)", [
       `<strong>Corollary (Thales' Theorem):</strong> an angle inscribed in a semicircle (subtending a diameter) is a right angle.`,
       `Compared to a central angle on the same arc, an inscribed angle is always exactly <strong>half</strong> the central angle's measure.`,
     ],
+    figure: fig(inscribedAngleFig(), "An inscribed angle is half its intercepted arc."),
     examples: [
       {
         h: "Inscribed angle from an arc",
         p: "An inscribed angle intercepts an arc of \\(84^\\circ\\). Find the inscribed angle's measure.",
+        fig: inscribedAngleFig(),
         steps: [
           `<strong>Step 1 — Apply the Inscribed Angle Theorem:</strong> \\(m\\angle=\\dfrac12(84^\\circ)\\).`,
           `<strong>Step 2 — Simplify:</strong> \\(m\\angle=42^\\circ\\).`,
@@ -164,6 +180,7 @@ ch["9.3"] = L("9.3", "Chords, Tangents, and Secants (Lengths and Angle Measures)
       `<strong>Angle formulas:</strong> two chords intersecting <em>inside</em> the circle \\(\\Rightarrow\\) angle \\(=\\dfrac12(\\text{sum of intercepted arcs})\\); two secants/tangents meeting <em>outside</em> the circle \\(\\Rightarrow\\) angle \\(=\\dfrac12(\\text{difference of intercepted arcs})\\).`,
       `<strong>Length formulas</strong> from an intersection point: chord–chord, \\(a\\cdot b=c\\cdot d\\) (products of the two pieces on each chord are equal); tangent–secant, \\(t^2=(\\text{whole secant})(\\text{external part})\\).`,
     ],
+    figure: fig(tangentFig(), "A tangent is perpendicular to the radius at the contact point."),
     examples: [
       {
         h: "Perpendicular bisecting a chord",
@@ -177,6 +194,7 @@ ch["9.3"] = L("9.3", "Chords, Tangents, and Secants (Lengths and Angle Measures)
       {
         h: "Two tangent segments from an external point",
         p: "From external point \\(P\\), two tangent segments to a circle have lengths \\(3x+2\\) and \\(23\\). Find \\(x\\).",
+        fig: tangentFig(),
         steps: [
           `<strong>Step 1 — Use the property:</strong> tangent segments from the same external point are congruent: \\(3x+2=23\\).`,
           `<strong>Step 2 — Solve:</strong> \\(3x=21 \\Rightarrow x=7\\).`,
@@ -237,6 +255,7 @@ ch["9.4"] = L("9.4", "Circles in the Coordinate Plane: Equation $(x-h)^{2}+(y-k)
       `To graph a circle: plot the center, then move \\(r\\) units up, down, left, and right to sketch four points on the circle.`,
       `To test a point: compute \\((x-h)^2+(y-k)^2\\) and compare to \\(r^2\\) — less than means inside, equal means on the circle, greater than means outside.`,
     ],
+    figure: fig(centralAngleFig(), "Standard form: (x − h)² + (y − k)² = r²."),
     examples: [
       {
         h: "Writing an equation from center and radius",
@@ -311,10 +330,12 @@ ch["9.5"] = L("9.5", "Arc Length and Sector Area (MA.912.GR.6.4)", [
       `Both formulas rely on the same idea — the fraction \\(\\dfrac{\\theta}{360^\\circ}\\) of the whole circle that the central angle "claims."`,
       `To solve for \\(\\theta\\) or \\(r\\) given an arc length or sector area, plug into the matching formula and solve algebraically.`,
     ],
+    figure: fig(sectorFig(), "Arc length and sector area are fractional parts of the full circle."),
     examples: [
       {
         h: "Finding arc length",
         p: "A circle has radius 9. Find the arc length for a central angle of \\(60^\\circ\\).",
+        fig: sectorFig(),
         steps: [
           `<strong>Step 1 — Apply the formula:</strong> \\(\\ell=\\dfrac{60}{360}\\cdot2\\pi(9)\\).`,
           `<strong>Step 2 — Simplify the fraction:</strong> \\(\\dfrac{60}{360}=\\dfrac16\\).`,
@@ -386,10 +407,12 @@ ch["9.6"] = L("9.6", "Triangles and Quadrilaterals Inscribed in Circles (MA.912.
       `Each angle of an inscribed polygon is an inscribed angle equal to half the arc it "sees" — the arc opposite that vertex.`,
       `The arcs cut off by a cyclic quadrilateral's four sides always add to \\(360^\\circ\\), the whole circle.`,
     ],
+    figure: fig(cyclicQuad(), "Opposite angles of a cyclic quadrilateral are supplementary."),
     examples: [
       {
         h: "Opposite angles of a cyclic quadrilateral",
         p: "Cyclic quadrilateral \\(ABCD\\) has \\(m\\angle A=85^\\circ\\). Find \\(m\\angle C\\).",
+        fig: cyclicQuad(),
         steps: [
           `<strong>Step 1 — Use the theorem:</strong> opposite angles are supplementary: \\(m\\angle A+m\\angle C=180^\\circ\\).`,
           `<strong>Step 2 — Solve:</strong> \\(m\\angle C=180^\\circ-85^\\circ=95^\\circ\\).`,

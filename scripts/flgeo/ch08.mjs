@@ -1,4 +1,16 @@
 import { L, lessonHtml } from "./_helpers.mjs";
+import {
+  fig, translationFig, reflectionFig, rotationFig, compositionFig, symmetryFig,
+  triangleTypes, isoscelesFig, sssMarks, sasMarks, asaMarks, hlFig, overlappingFig,
+  dilationFig, similarTriangles, shadowMeasure, proportionalityFig,
+  pythagoreanFig, special4545, special3060, sohcahtoa, elevationFig,
+  polygonAngles, parallelogramFig, specialQuads, trapezoidFig, kiteFig,
+  distanceMidpoint, weightedAvgFig, areaFig, dilationScale,
+  centralAngleFig, inscribedAngleFig, tangentFig, sectorFig, cyclicQuad,
+  prismNet, cylinderFig, crossSectionFig, solidRevolution, scale3d,
+  copyAngleFig, bisectFig, incenterFig, circumcenterFig,
+  sampleSpaceFig, treeDiagram, twoWayTable, permuteCombine,
+} from "./figures2.mjs";
 
 export const ch = {};
 
@@ -14,10 +26,12 @@ ch["8.1"] = L("8.1", "The Distance, Midpoint, and Slope Formulas (Review and App
       `<strong>Parallel lines</strong> have equal slopes; <strong>perpendicular lines</strong> have slopes that are negative reciprocals of each other (their product is \\(-1\\)).`,
       `To find a missing endpoint given a midpoint and one endpoint, solve the midpoint formula for the unknown coordinates instead of the midpoint itself.`,
     ],
+    figure: fig(distanceMidpoint(), "Distance, midpoint, and slope."),
     examples: [
       {
         h: "Finding a distance",
         p: "Find the distance between \\(A(1,2)\\) and \\(B(4,6)\\).",
+        fig: distanceMidpoint(),
         steps: [
           `<strong>Step 1 — Apply the formula:</strong> \\(d=\\sqrt{(4-1)^2+(6-2)^2}\\).`,
           `<strong>Step 2 — Simplify:</strong> \\(d=\\sqrt{3^2+4^2}=\\sqrt{9+16}=\\sqrt{25}=5\\).`,
@@ -92,10 +106,12 @@ ch["8.2"] = L("8.2", "Weighted Average of Points on a Line (MA.912.GR.3.1 — Ne
       `The fraction \\(\\dfrac{m}{m+n}\\) is how far along (from \\(A\\)) \\(P\\) sits; \\(\\dfrac{n}{m+n}\\) is the remaining fraction to \\(B\\). The two fractions always add to \\(1\\).`,
       `The same fraction applies to the \\(x\\)- and \\(y\\)-coordinates separately — find \\(\\Delta x=x_B-x_A\\) and \\(\\Delta y=y_B-y_A\\) once, then scale each by the fraction.`,
     ],
+    figure: fig(weightedAvgFig(), "Point P divides AB in the ratio m:n."),
     examples: [
       {
         h: "Basic partition point",
         p: "Find the point \\(P\\) that divides \\(\\overline{AB}\\) in the ratio \\(AP:PB=2:3\\), where \\(A(0,0)\\) and \\(B(10,0)\\).",
+        fig: weightedAvgFig(),
         steps: [
           `<strong>Step 1 — Find the fraction:</strong> \\(\\dfrac{m}{m+n}=\\dfrac{2}{2+3}=\\dfrac{2}{5}\\).`,
           `<strong>Step 2 — Apply the step form:</strong> \\(P=A+\\dfrac25(B-A)=(0,0)+\\dfrac25(10,0)\\).`,
@@ -173,10 +189,12 @@ ch["8.3"] = L("8.3", "Area of 2D Figures (Triangles, Quadrilaterals, Regular Pol
       `<strong>Rhombus or kite</strong> (from diagonals): \\(A=\\dfrac12 d_1 d_2\\), since the perpendicular diagonals split the figure into right triangles.`,
       `<strong>Regular polygon:</strong> \\(A=\\dfrac12\\,a\\,P\\), where \\(a\\) is the apothem (center to the midpoint of a side) and \\(P\\) is the perimeter.`,
     ],
+    figure: fig(areaFig(), "Choose the area formula that matches the figure."),
     examples: [
       {
         h: "Area of a triangle",
         p: "Find the area of a triangle with base 12 and height 7.",
+        fig: areaFig(),
         steps: [
           `<strong>Step 1 — Apply the formula:</strong> \\(A=\\dfrac12(12)(7)\\).`,
           `<strong>Step 2 — Simplify:</strong> \\(A=42\\).`,
@@ -246,6 +264,7 @@ ch["8.4"] = L("8.4", "Perimeter and Area in the Coordinate Plane (MA.912.GR.3.4)
       `<strong>Shoelace formula</strong> for area, given vertices \\((x_1,y_1),(x_2,y_2),\\dots,(x_n,y_n)\\) listed in order around the polygon: \\(A=\\dfrac12\\left|\\sum(x_iy_{i+1}-x_{i+1}y_i)\\right|\\), wrapping back to \\((x_1,y_1)\\) at the end.`,
       `Always list the vertices in order (clockwise or counterclockwise) around the figure before applying either formula — skipping around describes a different shape entirely.`,
     ],
+    figure: fig(distanceMidpoint(), "Perimeter from distances; area from geometry or shoelace."),
     examples: [
       {
         h: "Perimeter and area of an axis-aligned rectangle",
@@ -325,10 +344,12 @@ ch["8.5"] = L("8.5", "How Dilations Affect Perimeter and Area (MA.912.GR.4.3)", 
       `<strong>Angles are unchanged</strong> by a dilation — dilations preserve shape, only size changes, which is why the original and image are similar figures.`,
       `To compare two similar figures, find the scale factor \\(k\\) from any one pair of corresponding lengths, then apply \\(|k|\\) to other lengths or \\(k^2\\) to areas as needed.`,
     ],
+    figure: fig(dilationScale(), "Perimeter scales by |k|; area scales by k²."),
     examples: [
       {
         h: "Scaling perimeter directly",
         p: "A rectangle has perimeter 20. It's dilated by a scale factor of \\(k=3\\). Find the new perimeter.",
+        fig: dilationScale(),
         steps: [
           `<strong>Step 1 — Apply the perimeter scaling rule:</strong> \\(P'=|k|\\,P=3(20)\\).`,
           `<strong>Step 2 — Simplify:</strong> \\(P'=60\\).`,

@@ -1,4 +1,16 @@
 import { L, lessonHtml } from "./_helpers.mjs";
+import {
+  fig, translationFig, reflectionFig, rotationFig, compositionFig, symmetryFig,
+  triangleTypes, isoscelesFig, sssMarks, sasMarks, asaMarks, hlFig, overlappingFig,
+  dilationFig, similarTriangles, shadowMeasure, proportionalityFig,
+  pythagoreanFig, special4545, special3060, sohcahtoa, elevationFig,
+  polygonAngles, parallelogramFig, specialQuads, trapezoidFig, kiteFig,
+  distanceMidpoint, weightedAvgFig, areaFig, dilationScale,
+  centralAngleFig, inscribedAngleFig, tangentFig, sectorFig, cyclicQuad,
+  prismNet, cylinderFig, crossSectionFig, solidRevolution, scale3d,
+  copyAngleFig, bisectFig, incenterFig, circumcenterFig,
+  sampleSpaceFig, treeDiagram, twoWayTable, permuteCombine,
+} from "./figures2.mjs";
 
 export const ch = {};
 
@@ -13,8 +25,10 @@ ch["4.1"] = L("4.1", "Classifying Triangles and Triangle Angle-Sum Theorem (MA.9
       `Triangle Angle-Sum Theorem: the three interior angles of any triangle sum to \\(180^\\circ\\).`,
       `Exterior Angle Theorem: an exterior angle of a triangle equals the sum of the two remote (non-adjacent) interior angles.`,
     ],
+    figure: fig(triangleTypes(), "Classify by sides and by angles."),
     examples: [
-      { h: "Classify a triangle by its sides", p: `A triangle has sides \\(7\\text{ cm}\\), \\(7\\text{ cm}\\), and \\(7\\text{ cm}\\). Classify it by sides, and state what this implies about its angles.`, steps: [
+      { h: "Classify a triangle by its sides", p: `A triangle has sides \\(7\\text{ cm}\\), \\(7\\text{ cm}\\), and \\(7\\text{ cm}\\). Classify it by sides, and state what this implies about its angles.`, fig: triangleTypes(),
+        steps: [
         `<strong>Step 1 — compare the side lengths:</strong> all three sides are congruent (\\(7=7=7\\)).`,
         `<strong>Step 2 — classify by sides:</strong> a triangle with all sides congruent is <strong>equilateral</strong>.`,
         `<strong>Step 3 — connect to angles:</strong> every equilateral triangle is also <strong>equiangular</strong>, so each angle measures \\(\\dfrac{180^\\circ}{3}=60^\\circ\\).`,
@@ -70,8 +84,10 @@ ch["4.2"] = L("4.2", "Isosceles and Equilateral Triangle Theorems (MA.912.GR.1.3
       `Corollary: a triangle is equilateral if and only if it is equiangular (each angle \\(60^\\circ\\)).`,
       `The bisector of the vertex angle of an isosceles triangle is also the median and the altitude to the base.`,
     ],
+    figure: fig(isoscelesFig(), "Base angles opposite congruent sides are congruent."),
     examples: [
-      { h: "Apply the Base Angles Theorem", p: `In isosceles \\(\\triangle ABC\\), \\(\\overline{AB}\\cong\\overline{AC}\\) and \\(\\angle B=50^\\circ\\). Find \\(\\angle C\\) and \\(\\angle A\\).`, steps: [
+      { h: "Apply the Base Angles Theorem", p: `In isosceles \\(\\triangle ABC\\), \\(\\overline{AB}\\cong\\overline{AC}\\) and \\(\\angle B=50^\\circ\\). Find \\(\\angle C\\) and \\(\\angle A\\).`, fig: isoscelesFig(),
+        steps: [
         `<strong>Step 1 — identify the base angles:</strong> since \\(\\overline{AB}\\cong\\overline{AC}\\), the base is \\(\\overline{BC}\\), so \\(\\angle B\\) and \\(\\angle C\\) are the base angles.`,
         `<strong>Step 2 — apply the Base Angles Theorem:</strong> \\(\\angle C\\cong\\angle B=50^\\circ\\).`,
         `<strong>Step 3 — find the vertex angle:</strong> \\(\\angle A=180^\\circ-50^\\circ-50^\\circ=80^\\circ\\).`,
@@ -128,8 +144,10 @@ ch["4.3"] = L("4.3", "Proving Congruence: SSS and SAS (MA.912.GR.1.2)", [
       `CPCTC: once \\(\\triangle ABC\\cong\\triangle DEF\\) is established, every corresponding pair of sides and angles is also congruent.`,
       `Look for "free" congruent parts: a shared side (Reflexive Property), a shared angle, or vertical angles.`,
     ],
+    figure: fig(sssMarks(), "SSS: three pairs of congruent sides."),
     examples: [
-      { h: "Recognize SSS from given congruences", p: `Given \\(\\overline{AB}\\cong\\overline{DE}\\), \\(\\overline{BC}\\cong\\overline{EF}\\), and \\(\\overline{CA}\\cong\\overline{FD}\\), prove \\(\\triangle ABC\\cong\\triangle DEF\\).`, steps: [
+      { h: "Recognize SSS from given congruences", p: `Given \\(\\overline{AB}\\cong\\overline{DE}\\), \\(\\overline{BC}\\cong\\overline{EF}\\), and \\(\\overline{CA}\\cong\\overline{FD}\\), prove \\(\\triangle ABC\\cong\\triangle DEF\\).`, fig: sssMarks(),
+        steps: [
         `<strong>Step 1 — list the given congruences:</strong> all three pairs of corresponding sides are congruent.`,
         `<strong>Step 2 — match to a postulate:</strong> three sides congruent to three sides is the <strong>SSS</strong> postulate.`,
         `<strong>Step 3 — conclude:</strong> \\(\\triangle ABC\\cong\\triangle DEF\\) by SSS.`,
@@ -139,7 +157,8 @@ ch["4.3"] = L("4.3", "Proving Congruence: SSS and SAS (MA.912.GR.1.2)", [
         `<strong>Step 2 — find the third pair:</strong> \\(\\overline{BD}\\cong\\overline{BD}\\) by the Reflexive Property (shared side).`,
         `<strong>Step 3 — conclude:</strong> \\(\\triangle ABD\\cong\\triangle CBD\\) by SSS.`,
       ] },
-      { h: "Prove congruence with SAS using an angle bisector", p: `\\(\\overline{CD}\\) bisects \\(\\angle ACB\\), and \\(\\overline{AC}\\cong\\overline{BC}\\). Prove \\(\\triangle ACD\\cong\\triangle BCD\\).`, steps: [
+      { h: "Prove congruence with SAS using an angle bisector", p: `\\(\\overline{CD}\\) bisects \\(\\angle ACB\\), and \\(\\overline{AC}\\cong\\overline{BC}\\). Prove \\(\\triangle ACD\\cong\\triangle BCD\\).`, fig: sasMarks(),
+        steps: [
         `<strong>Step 1 — identify the given sides:</strong> \\(\\overline{AC}\\cong\\overline{BC}\\) (given).`,
         `<strong>Step 2 — identify the included angle:</strong> \\(\\overline{CD}\\) bisects \\(\\angle ACB\\), so \\(\\angle ACD\\cong\\angle BCD\\) — and this angle sits between sides \\(\\overline{AC}\\), \\(\\overline{CD}\\) and \\(\\overline{BC}\\), \\(\\overline{CD}\\).`,
         `<strong>Step 3 — supply the shared side:</strong> \\(\\overline{CD}\\cong\\overline{CD}\\) by the Reflexive Property.`,
@@ -185,8 +204,10 @@ ch["4.4"] = L("4.4", "Proving Congruence: ASA and AAS (MA.912.GR.1.2)", [
       `Why AAS works: knowing two angles gives you the third (angles sum to \\(180^\\circ\\)), which turns the given non-included side into an included side for ASA.`,
       `Read the diagram carefully to decide whether the given side sits between the two marked angles (ASA) or outside them (AAS).`,
     ],
+    figure: fig(asaMarks(), "ASA: two angles and the included side."),
     examples: [
-      { h: "Recognize ASA from a diagram", p: `In \\(\\triangle ABC\\) and \\(\\triangle DEF\\), \\(\\angle A\\cong\\angle D\\), \\(\\overline{AB}\\cong\\overline{DE}\\), and \\(\\angle B\\cong\\angle E\\). Prove the triangles congruent.`, steps: [
+      { h: "Recognize ASA from a diagram", p: `In \\(\\triangle ABC\\) and \\(\\triangle DEF\\), \\(\\angle A\\cong\\angle D\\), \\(\\overline{AB}\\cong\\overline{DE}\\), and \\(\\angle B\\cong\\angle E\\). Prove the triangles congruent.`, fig: asaMarks(),
+        steps: [
         `<strong>Step 1 — check where the side falls:</strong> \\(\\overline{AB}\\) lies directly between \\(\\angle A\\) and \\(\\angle B\\), so it is the included side.`,
         `<strong>Step 2 — match to a postulate:</strong> two angles and the included side is <strong>ASA</strong>.`,
         `<strong>Step 3 — conclude:</strong> \\(\\triangle ABC\\cong\\triangle DEF\\) by ASA.`,
@@ -242,8 +263,10 @@ ch["4.5"] = L("4.5", "Proving Congruence: Hypotenuse-Leg (HL) for Right Triangle
       `Why it works: the Pythagorean Theorem shows the third side is completely determined once the hypotenuse and one leg are fixed, so SSA becomes valid in this special right-angle case.`,
       `After identifying the right angle, look for the hypotenuse (opposite the right angle) and a leg pair that are congruent — often a shared leg.`,
     ],
+    figure: fig(hlFig(), "HL: hypotenuse and one leg of a right triangle."),
     examples: [
-      { h: "Recognize when HL applies", p: `\\(\\triangle ABC\\) and \\(\\triangle DEF\\) both have right angles at \\(B\\) and \\(E\\). \\(\\overline{AC}\\cong\\overline{DF}\\) (hypotenuses) and \\(\\overline{AB}\\cong\\overline{DE}\\) (legs). Prove the triangles congruent.`, steps: [
+      { h: "Recognize when HL applies", p: `\\(\\triangle ABC\\) and \\(\\triangle DEF\\) both have right angles at \\(B\\) and \\(E\\). \\(\\overline{AC}\\cong\\overline{DF}\\) (hypotenuses) and \\(\\overline{AB}\\cong\\overline{DE}\\) (legs). Prove the triangles congruent.`, fig: hlFig(),
+        steps: [
         `<strong>Step 1 — confirm right angles:</strong> \\(\\angle B\\) and \\(\\angle E\\) are both right angles, so both triangles are right triangles.`,
         `<strong>Step 2 — identify the hypotenuses:</strong> \\(\\overline{AC}\\) and \\(\\overline{DF}\\), opposite the right angles, are congruent.`,
         `<strong>Step 3 — identify the legs:</strong> \\(\\overline{AB}\\cong\\overline{DE}\\) is one pair of legs.`,
@@ -300,8 +323,10 @@ ch["4.6"] = L("4.6", "Triangle Proofs with Overlapping Triangles and Medians/Alt
       `Angle bisector: a ray that splits an angle into two congruent angles.`,
       `For overlapping triangles, isolate each triangle mentally and use the Reflexive Property, Segment/Angle Addition Postulates, or subtraction of congruent pieces to find shared or hidden congruent parts.`,
     ],
+    figure: fig(overlappingFig(), "Separate overlapping triangles before writing a proof."),
     examples: [
-      { h: "Untangle an overlapping-triangle diagram", p: `\\(\\overline{AD}\\) and \\(\\overline{BC}\\) intersect at \\(E\\), with \\(\\overline{AB}\\cong\\overline{DC}\\) and \\(\\overline{AE}\\cong\\overline{DE}\\). Prove \\(\\triangle ABE\\cong\\triangle DCE\\).`, steps: [
+      { h: "Untangle an overlapping-triangle diagram", p: `\\(\\overline{AD}\\) and \\(\\overline{BC}\\) intersect at \\(E\\), with \\(\\overline{AB}\\cong\\overline{DC}\\) and \\(\\overline{AE}\\cong\\overline{DE}\\). Prove \\(\\triangle ABE\\cong\\triangle DCE\\).`, fig: overlappingFig(),
+        steps: [
         `<strong>Step 1 — separate the two triangles mentally:</strong> \\(\\triangle ABE\\) uses vertices \\(A,B,E\\); \\(\\triangle DCE\\) uses \\(D,C,E\\) — they overlap only at point \\(E\\).`,
         `<strong>Step 2 — list the given congruent sides:</strong> \\(\\overline{AB}\\cong\\overline{DC}\\) and \\(\\overline{AE}\\cong\\overline{DE}\\).`,
         `<strong>Step 3 — find the included angle:</strong> \\(\\angle AEB\\) and \\(\\angle DEC\\) are vertical angles, so they are congruent.`,
