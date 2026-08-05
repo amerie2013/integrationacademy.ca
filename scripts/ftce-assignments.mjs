@@ -168,6 +168,23 @@ export const ASSIGN = {
     ["A best-fit line is $y=4x-2$; predict $y$ at $x=3$.", "What is the range of the correlation coefficient $r$?", "What does $r=0$ indicate?", "What is the control group in an experiment?"],
     ["A regression line is $y=1.2x+30$; interpret the slope in context (test score vs. hours).", "Explain whether a strong correlation between ice-cream sales and drownings implies causation, and name a likely confounder.", "Describe how you would randomly sample $50$ students from a school of $1000$."],
     ["Explain why correlation does not imply causation.", "Explain the roles of randomization and a control group in an experiment.", "Explain how a confounding variable can create a misleading correlation."]),
+  // ── Unit 6: Probability ──────────────────────────────────────
+  "6.1": A3("6.1", "Probability Basics & Properties",
+    ["Find $P(\\text{rolling a }5)$ on a fair die.", "Find $P(\\text{not }5)$ on a die.", "A bag has $5$ red, $3$ blue; find $P(\\text{blue})$.", "State the range of any probability."],
+    ["Find $P(\\text{a face card})$ from a standard deck.", "A spinner has $8$ equal sectors, $3$ shaded; find $P(\\text{shaded})$ and $P(\\text{not shaded})$.", "If $P(A)=0.35$, find $P(\\text{not }A)$."],
+    ["Explain the difference between classical, empirical, and subjective probability.", "Explain why every probability must lie between $0$ and $1$.", "Explain the complement rule and when it simplifies a calculation."]),
+  "6.2": A3("6.2", "Addition & Multiplication Rules",
+    ["State the addition rule $P(A\\text{ or }B)$.", "Two coins: find $P(\\text{two heads})$.", "Mutually exclusive events with $P=0.2,0.5$: find $P(A\\text{ or }B)$.", "State $P(A\\text{ and }B)$ for independent events."],
+    ["Find $P(\\text{king or heart})$ from a deck.", "Draw $2$ cards without replacement; find $P(\\text{both hearts})$.", "$P(A)=0.6$, $P(B)=0.5$, $P(A\\text{ and }B)=0.3$; are $A$ and $B$ independent? Justify."],
+    ["Explain the difference between mutually exclusive and independent events.", "Explain why the addition rule subtracts $P(A\\text{ and }B)$.", "Explain conditional probability and how it detects dependence."]),
+  "6.3": A3("6.3", "Counting: Permutations & Combinations",
+    ["Evaluate $5!$.", "Evaluate $P(6,2)$.", "Evaluate $C(7,2)$.", "Does order matter for a combination?"],
+    ["How many $4$-digit PINs are possible (digits may repeat)?", "How many ways to arrange $3$ of $9$ runners on a podium?", "How many $5$-card hands from a $52$-card deck?"],
+    ["Explain the fundamental counting principle with a two-stage example.", "Explain the difference between $P(n,r)$ and $C(n,r)$.", "Explain why $C(n,r)=C(n,n-r)$."]),
+  "6.4": A3("6.4", "Applying Counting to Probability",
+    ["Evaluate $C(6,2)$.", "How many ways to arrange $4$ books?", "How many committees of $3$ from $8$?", "Ways to pick a president and VP from $10$ (order matters)?"],
+    ["From $3$ men and $4$ women, how many ways to choose a committee of $2$ men and $2$ women?", "Draw $2$ cards (no replacement); find $P(\\text{both kings})$.", "A bag has $5$ red and $3$ blue; draw $2$; find $P(\\text{both red})$."],
+    ["Explain how to translate a 'choose a group' problem into combinations.", "Explain when to multiply counts (AND) versus add them (OR).", "Explain how counting gives the numerator and denominator of a probability."]),
 };
 
 export default ASSIGN;
