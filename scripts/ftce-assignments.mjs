@@ -185,6 +185,19 @@ export const ASSIGN = {
     ["Evaluate $C(6,2)$.", "How many ways to arrange $4$ books?", "How many committees of $3$ from $8$?", "Ways to pick a president and VP from $10$ (order matters)?"],
     ["From $3$ men and $4$ women, how many ways to choose a committee of $2$ men and $2$ women?", "Draw $2$ cards (no replacement); find $P(\\text{both kings})$.", "A bag has $5$ red and $3$ blue; draw $2$; find $P(\\text{both red})$."],
     ["Explain how to translate a 'choose a group' problem into combinations.", "Explain when to multiply counts (AND) versus add them (OR).", "Explain how counting gives the numerator and denominator of a probability."]),
+  // ── Unit 7: Discrete Mathematics ─────────────────────────────
+  "7.1": A3("7.1", "Sequences & Series",
+    ["Find the common difference of $7,10,13,\\ldots$", "Find the common ratio of $2,6,18,\\ldots$", "Find $a_6$ of an arithmetic sequence with $a_1=4$, $d=3$.", "State the sum of a convergent infinite geometric series."],
+    ["Find the sum of the first $20$ terms of $3,7,11,\\ldots$", "Find $a_8$ of a geometric sequence with $a_1=2$, $r=3$.", "Find the infinite sum of $9+3+1+\\tfrac13+\\cdots$"],
+    ["Explain the difference between an arithmetic and a geometric sequence.", "Explain why an infinite geometric series converges only when $|r|<1$.", "Explain how the arithmetic-series sum formula is the average term times the count."]),
+  "7.2": A3("7.2", "Matrix Arithmetic",
+    ["State the dimensions of a matrix with $2$ rows and $4$ columns.", "Add $\\begin{bmatrix}1&2\\\\3&4\\end{bmatrix}+\\begin{bmatrix}0&1\\\\1&0\\end{bmatrix}$.", "Compute $2\\begin{bmatrix}3&-1\\\\0&2\\end{bmatrix}$.", "Can a $3\\times2$ and a $2\\times2$ matrix be added?"],
+    ["Multiply $\\begin{bmatrix}1&2\\\\0&1\\end{bmatrix}\\begin{bmatrix}3\\\\4\\end{bmatrix}$.", "For $(m\\times n)(n\\times p)$, state the product's dimensions and when it is defined.", "Give an example showing $AB\\ne BA$."],
+    ["Explain the rule for when a matrix product is defined.", "Explain why matrix addition requires equal dimensions.", "Explain why matrix multiplication is not commutative."]),
+  "7.3": A3("7.3", "Matrices & Systems of Equations",
+    ["Evaluate $\\det\\begin{bmatrix}3&1\\\\2&4\\end{bmatrix}$.", "Evaluate $\\det\\begin{bmatrix}2&4\\\\1&2\\end{bmatrix}$.", "Write $\\begin{cases}2x+y=7\\\\x-y=1\\end{cases}$ as an augmented matrix.", "When does a $2\\times2$ system have a unique solution?"],
+    ["Solve $\\begin{cases}x+2y=5\\\\3x-y=1\\end{cases}$ by Cramer's rule.", "Use the determinant to decide whether $\\begin{cases}2x+3y=6\\\\4x+6y=5\\end{cases}$ has a unique solution.", "List the three elementary row operations."],
+    ["Explain how an augmented matrix encodes a linear system.", "Explain why $\\det=0$ signals no unique solution.", "Explain the idea behind Gaussian elimination (row reduction)."]),
 };
 
 export default ASSIGN;
