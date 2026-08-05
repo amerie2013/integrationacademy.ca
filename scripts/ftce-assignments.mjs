@@ -231,6 +231,19 @@ export const ASSIGN = {
     ["Find the area under $y=x^2$ from $0$ to $3$.", "Find the area under $y=2x$ from $0$ to $4$.", "State the disk-method volume formula.", "Area between curves integrates top minus ___."],
     ["Find the area between $y=x$ and $y=x^2$ from $0$ to $1$.", "Rotate the region under $y=x$ on $[0,2]$ about the $x$-axis; find the volume.", "Find the area between $y=4$ and $y=x^2$ from $x=-2$ to $x=2$."],
     ["Explain how to find the total (not net) area under a curve that crosses the axis.", "Explain the disk/washer method for a volume of revolution.", "Explain how to set up the area between two curves."]),
+  // ── Unit 9: Number Sense & Mathematical Structure ────────────
+  "9.1": A3("9.1", "Real Numbers & Their Subsets",
+    ["Classify $\\sqrt5$.", "Classify $-8$.", "Is $0$ a natural number?", "Classify $0.\\overline{6}$."],
+    ["List every set to which $\\sqrt{16}$ belongs.", "Give an example of a number that is rational but not an integer.", "Is $\\sqrt{2}+\\sqrt{2}$ rational or irrational? Justify."],
+    ["Explain the nesting $\\mathbb{N}\\subset\\mathbb{W}\\subset\\mathbb{Z}\\subset\\mathbb{Q}\\subset\\mathbb{R}$.", "Explain how a decimal reveals whether a number is rational.", "Explain the one-to-one correspondence between the reals and the number line."]),
+  "9.2": A3("9.2", "Properties of Equality & Operations",
+    ["Name the property: $a+b=b+a$.", "Name the property: $a=a$.", "Name the property: $3(x+2)=3x+6$.", "Why is division by zero undefined?"],
+    ["Name the property used in each step of solving $2(x+3)=10$.", "Give a counterexample showing subtraction is not commutative.", "Name the property: if $x=5$ and $5=y$, then $x=y$."],
+    ["Explain the difference between the identity and inverse properties.", "Explain why the reals are closed under addition but the naturals are not under subtraction.", "Explain how the field properties justify the steps of solving a linear equation."]),
+  "9.3": A3("9.3", "Complex Numbers",
+    ["Simplify $i^2$.", "Add $(2+3i)+(1-i)$.", "Give the conjugate of $4-3i$.", "Solve $x^2+25=0$."],
+    ["Multiply $(3+2i)(1-i)$.", "Simplify $(2-i)^2$.", "Divide $\\dfrac{1}{2+i}$ (rationalize with the conjugate)."],
+    ["Explain why $i^2=-1$ and how the powers of $i$ cycle.", "Explain how multiplying by the conjugate rationalizes a complex denominator.", "Explain why complex roots of a real-coefficient quadratic occur in conjugate pairs."]),
 };
 
 export default ASSIGN;
