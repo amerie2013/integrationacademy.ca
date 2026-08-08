@@ -2,14 +2,46 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useParams } from "next/navigation";
+import dynamic from "next/dynamic";
 import katex from "katex";
 import { renderAll, type BoardData } from "../../../lib/wbdraw";
 import { getBoard, subscribeBoard } from "../../../lib/whiteboards";
+import { supabase } from "../../../lib/supabase";
+
+// Load the full editor only when it's actually needed (the board's owner), so
+// students who are just watching don't download the editor bundle.
+const WhiteboardEditor = dynamic(
+  () => import("../../../components/Whiteboard").then((m) => m.Whiteboard),
+  { ssr: false, loading: () => <FullMsg>Loading editor…</FullMsg> },
+);
 
 function katexHtml(latex: string): string { try { return katex.renderToString(latex, { throwOnError: false }); } catch { return latex; } }
 
-export default function LiveWhiteboardViewer() {
+/**
+ * The share route is owner-aware: the board's owner (the teacher) gets the full
+ * editor — including inserting/annotating images — so opening the live link keeps
+ * them editing; everyone else gets the read-only, real-time live view.
+ */
+export default function LiveWhiteboardPage() {
   const id = useParams().id as string;
+  const [role, setRole] = useState<"unknown" | "owner" | "viewer">("unknown");
+
+  useEffect(() => {
+    let alive = true;
+    (async () => {
+      const [{ data: { session } }, wb] = await Promise.all([supabase.auth.getSession(), getBoard(id)]);
+      if (!alive) return;
+      setRole(wb && session?.user?.id && session.user.id === wb.owner_id ? "owner" : "viewer");
+    })();
+    return () => { alive = false; };
+  }, [id]);
+
+  if (role === "unknown") return <FullMsg>Loading…</FullMsg>;
+  if (role === "owner") return <main style={{ height: "100vh" }}><WhiteboardEditor initialBoardId={id} /></main>;
+  return <ReadOnlyViewer id={id} />;
+}
+
+function ReadOnlyViewer({ id }: { id: string }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const wrapRef = useRef<HTMLDivElement>(null);
   const dpr = useRef(1);
@@ -76,4 +108,7 @@ export default function LiveWhiteboardViewer() {
 
 function Overlay({ children }: { children: React.ReactNode }) {
   return <div style={{ position: "absolute", inset: 0, display: "grid", placeItems: "center", color: "#64748b", fontSize: 16, pointerEvents: "none" }}>{children}</div>;
+}
+function FullMsg({ children }: { children: React.ReactNode }) {
+  return <main style={{ height: "100vh", display: "grid", placeItems: "center", background: "#0f172a", color: "#94a3b8", fontSize: 16 }}>{children}</main>;
 }
