@@ -73,6 +73,7 @@ export function Whiteboard({ initialBoardId }: { initialBoardId?: string }) {
   const rzRef = useRef<{ x: number; y: number; w: number; h: number } | null>(null);
   const graphFrameRef = useRef<HTMLIFrameElement>(null);
   const imgRzRef = useRef<{ idx: number; sx: number; w: number; h: number; ratio: number } | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const drawingRef = useRef(false);
   const curRef = useRef<Shape | null>(null);
@@ -358,6 +359,37 @@ export function Whiteboard({ initialBoardId }: { initialBoardId?: string }) {
     setTool("move"); setShowGraph(false);
     setSaveMsg("✓ Graph added to the board"); setTimeout(() => setSaveMsg(""), 2500);
   }
+  // Insert a user-supplied image (file picker or paste) as an image shape, then
+  // switch to Move so it can be repositioned/resized. Draw/write on it with any
+  // tool afterward — ink and text render on top. Downscaled so the saved board
+  // JSON stays small.
+  async function insertImageFromFile(file: File) {
+    if (!file || !file.type.startsWith("image/")) return;
+    try {
+      const dataUrl: string = await new Promise((res, rej) => {
+        const fr = new FileReader(); fr.onload = () => res(fr.result as string); fr.onerror = rej; fr.readAsDataURL(file);
+      });
+      const img: HTMLImageElement = await new Promise((res, rej) => {
+        const im = new Image(); im.onload = () => res(im); im.onerror = rej; im.src = dataUrl;
+      });
+      const MAX = 1600; // cap the stored pixel size
+      const down = Math.min(1, MAX / Math.max(img.naturalWidth, img.naturalHeight) || 1);
+      const nw = Math.max(1, Math.round(img.naturalWidth * down)), nh = Math.max(1, Math.round(img.naturalHeight * down));
+      const off = document.createElement("canvas"); off.width = nw; off.height = nh;
+      off.getContext("2d")!.drawImage(img, 0, 0, nw, nh);
+      let src = off.toDataURL("image/png");
+      if (src.length > 1_800_000) src = off.toDataURL("image/jpeg", 0.85); // keep large photos from bloating the save
+      const W = dims().w, H = dims().h;
+      const fit = Math.min(1, (W * 0.7) / nw, (H * 0.7) / nh);
+      const w = nw * fit, h = nh * fit;
+      commit([...shapes(), { t: "image", x: (W - w) / 2, y: (H - h) / 2, w, h, src }]);
+      setTool("move");
+      setSaveMsg("✓ Image added — pick a tool to draw or write on it"); setTimeout(() => setSaveMsg(""), 2800);
+    } catch { setSaveMsg("⚠ Couldn't load that image"); setTimeout(() => setSaveMsg(""), 3000); }
+  }
+  function onPickImage(e: React.ChangeEvent<HTMLInputElement>) {
+    const f = e.target.files?.[0]; if (f) insertImageFromFile(f); e.currentTarget.value = "";
+  }
   function startImgResize(e: React.PointerEvent) {
     e.stopPropagation(); (e.currentTarget as Element).setPointerCapture(e.pointerId);
     const s = selIdx != null ? shapes()[selIdx] : null;
@@ -388,6 +420,19 @@ export function Whiteboard({ initialBoardId }: { initialBoardId?: string }) {
     window.addEventListener("keydown", onKey); return () => window.removeEventListener("keydown", onKey);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [editing]);
+
+  // Paste an image from the clipboard (e.g. a screenshot) straight onto the board.
+  useEffect(() => {
+    const onPaste = (e: ClipboardEvent) => {
+      if (editing || mathEdit) return; // let text/math editors handle their own paste
+      const items = e.clipboardData?.items; if (!items) return;
+      for (const it of Array.from(items)) {
+        if (it.type.startsWith("image/")) { const f = it.getAsFile(); if (f) { e.preventDefault(); insertImageFromFile(f); return; } }
+      }
+    };
+    window.addEventListener("paste", onPaste); return () => window.removeEventListener("paste", onPaste);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [editing, mathEdit]);
 
   const hp = histRef.current[pageRef.current];
   const canUndo = hp.i > 0, canRedo = hp.i < hp.h.length - 1;
@@ -440,6 +485,8 @@ export function Whiteboard({ initialBoardId }: { initialBoardId?: string }) {
           {saveMsg && <span style={{ color: "#9fe7bd", fontSize: 12, fontWeight: 700 }}>{saveMsg}</span>}
         </Group>
         <Group>
+          <button onClick={() => fileInputRef.current?.click()} style={tBtn(false)} title="Insert an image to draw or write on (or paste one with Ctrl+V)">🖼 Image</button>
+          <input ref={fileInputRef} type="file" accept="image/*" onChange={onPickImage} style={{ display: "none" }} />
           <button onClick={() => setShowGraph((s) => !s)} style={tBtn(showGraph)} title="Open the graphing calculator on the board">📈 Graph</button>
           <button onClick={exportPdf} style={tBtn(false)} title="Export ALL pages to PDF (includes equations)">⬇ PDF</button>
           <button onClick={exportPng} style={tBtn(false)} title="Save current page as a PNG image">⬇ PNG</button>
