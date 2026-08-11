@@ -8,7 +8,8 @@ export type Shape =
   | { t: "line" | "arrow" | "rect" | "ellipse"; a: Pt; b: Pt; c: string; w: number }
   | { t: "text"; x: number; y: number; s: string; c: string; size: number; font?: string }
   | { t: "math"; x: number; y: number; latex: string; c: string; size: number }
-  | { t: "image"; x: number; y: number; w: number; h: number; src: string }
+  | { t: "image"; x: number; y: number; w: number; h: number; src: string; rot?: number }
+  | { t: "axes"; x: number; y: number; w: number; h: number } // coordinate plane to graph on
   | { t: "erase"; pts: Pt[]; w: number };
 export type Bg = "blank" | "grid" | "graph" | "dots" | "lined";
 
@@ -43,14 +44,61 @@ export function drawBg(ctx: CanvasRenderingContext2D, bg: Bg, w: number, h: numb
 const _imgCache = new Map<string, HTMLImageElement>();
 let _onImg: (() => void) | null = null;
 
+/** A coordinate plane (light grid + centered x/y axes with arrows and ticks) to
+ * graph on by hand. Drawn inside the box [x,y,w,h]; origin at the centre. */
+export function drawAxes(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number) {
+  const cx = Math.round(x + w / 2), cy = Math.round(y + h / 2);
+  const step = 26;
+  ctx.save();
+  // faint grid
+  ctx.strokeStyle = "#dbe4ef"; ctx.lineWidth = 1;
+  ctx.beginPath();
+  for (let gx = cx; gx <= x + w; gx += step) { ctx.moveTo(gx, y); ctx.lineTo(gx, y + h); }
+  for (let gx = cx - step; gx >= x; gx -= step) { ctx.moveTo(gx, y); ctx.lineTo(gx, y + h); }
+  for (let gy = cy; gy <= y + h; gy += step) { ctx.moveTo(x, gy); ctx.lineTo(x + w, gy); }
+  for (let gy = cy - step; gy >= y; gy -= step) { ctx.moveTo(x, gy); ctx.lineTo(x + w, gy); }
+  ctx.stroke();
+  // axes
+  ctx.strokeStyle = "#334155"; ctx.fillStyle = "#334155"; ctx.lineWidth = 1.5;
+  ctx.beginPath(); ctx.moveTo(x, cy); ctx.lineTo(x + w, cy); ctx.moveTo(cx, y + h); ctx.lineTo(cx, y); ctx.stroke();
+  // ticks
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  for (let gx = cx + step; gx <= x + w - 6; gx += step) { ctx.moveTo(gx, cy - 3); ctx.lineTo(gx, cy + 3); }
+  for (let gx = cx - step; gx >= x + 6; gx -= step) { ctx.moveTo(gx, cy - 3); ctx.lineTo(gx, cy + 3); }
+  for (let gy = cy + step; gy <= y + h - 6; gy += step) { ctx.moveTo(cx - 3, gy); ctx.lineTo(cx + 3, gy); }
+  for (let gy = cy - step; gy >= y + 6; gy -= step) { ctx.moveTo(cx - 3, gy); ctx.lineTo(cx + 3, gy); }
+  ctx.stroke();
+  // arrowheads: +x (right), +y (up)
+  const a = 6;
+  ctx.beginPath();
+  ctx.moveTo(x + w, cy); ctx.lineTo(x + w - a, cy - a * 0.7); ctx.moveTo(x + w, cy); ctx.lineTo(x + w - a, cy + a * 0.7);
+  ctx.moveTo(cx, y); ctx.lineTo(cx - a * 0.7, y + a); ctx.moveTo(cx, y); ctx.lineTo(cx + a * 0.7, y + a);
+  ctx.stroke();
+  // labels
+  ctx.font = "italic 13px Georgia, serif"; ctx.fillStyle = "#475569";
+  ctx.fillText("x", x + w - 12, cy + 15);
+  ctx.fillText("y", cx + 8, y + 12);
+  ctx.restore();
+}
+
 export function drawShape(ctx: CanvasRenderingContext2D, s: Shape) {
   ctx.lineCap = "round"; ctx.lineJoin = "round";
   if (s.t === "image") {
     let im = _imgCache.get(s.src);
     if (!im) { im = new Image(); im.onload = () => { if (_onImg) _onImg(); }; im.src = s.src; _imgCache.set(s.src, im); }
-    if (im.complete && im.naturalWidth) ctx.drawImage(im, s.x, s.y, s.w, s.h);
+    if (im.complete && im.naturalWidth) {
+      const rot = s.rot || 0;
+      if (rot) {
+        ctx.save();
+        ctx.translate(s.x + s.w / 2, s.y + s.h / 2); ctx.rotate(rot);
+        ctx.drawImage(im, -s.w / 2, -s.h / 2, s.w, s.h);
+        ctx.restore();
+      } else ctx.drawImage(im, s.x, s.y, s.w, s.h);
+    }
     return;
   }
+  if (s.t === "axes") { drawAxes(ctx, s.x, s.y, s.w, s.h); return; }
   if (s.t === "text") {
     ctx.fillStyle = s.c;
     ctx.font = `${s.size}px ${s.font || "Georgia, 'Times New Roman', serif"}`;

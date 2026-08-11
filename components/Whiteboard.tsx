@@ -72,7 +72,8 @@ export function Whiteboard({ initialBoardId }: { initialBoardId?: string }) {
   const dragRef = useRef<{ dx: number; dy: number } | null>(null);
   const rzRef = useRef<{ x: number; y: number; w: number; h: number } | null>(null);
   const graphFrameRef = useRef<HTMLIFrameElement>(null);
-  const imgRzRef = useRef<{ idx: number; sx: number; w: number; h: number; ratio: number } | null>(null);
+  const imgRzRef = useRef<{ idx: number; sx: number; sy: number; w: number; h: number; ratio: number; rot: number; cx: number; cy: number } | null>(null);
+  const rotRef = useRef<{ idx: number } | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const drawingRef = useRef(false);
@@ -203,7 +204,7 @@ export function Whiteboard({ initialBoardId }: { initialBoardId?: string }) {
       if (s.t === "rect" || s.t === "ellipse") { const x0 = Math.min(s.a.x, s.b.x) - th, x1 = Math.max(s.a.x, s.b.x) + th, y0 = Math.min(s.a.y, s.b.y) - th, y1 = Math.max(s.a.y, s.b.y) + th; return !(p.x >= x0 && p.x <= x1 && p.y >= y0 && p.y <= y1); }
       if (s.t === "text") { const w = (s.s.length * s.size) * 0.5; return !(p.x >= s.x - th && p.x <= s.x + w + th && p.y >= s.y - th && p.y <= s.y + s.size + th); }
       if (s.t === "math") { const w = (s.latex.length * s.size) * 0.45; return !(p.x >= s.x - th && p.x <= s.x + w + th && p.y >= s.y - th && p.y <= s.y + s.size * 1.4 + th); }
-      if (s.t === "image") { return !(p.x >= s.x - th && p.x <= s.x + s.w + th && p.y >= s.y - th && p.y <= s.y + s.h + th); }
+      if (s.t === "image" || s.t === "axes") { return !(p.x >= s.x - th && p.x <= s.x + s.w + th && p.y >= s.y - th && p.y <= s.y + s.h + th); }
       return true;
     });
     if (keep.length !== shapes().length) { pagesRef.current[pageRef.current] = keep; redraw(); rerender(); }
@@ -226,19 +227,25 @@ export function Whiteboard({ initialBoardId }: { initialBoardId?: string }) {
     if (s.t === "rect" || s.t === "ellipse") { const x0 = Math.min(s.a.x, s.b.x) - th, x1 = Math.max(s.a.x, s.b.x) + th, y0 = Math.min(s.a.y, s.b.y) - th, y1 = Math.max(s.a.y, s.b.y) + th; return p.x >= x0 && p.x <= x1 && p.y >= y0 && p.y <= y1; }
     if (s.t === "text") { const w = (s.s.length * s.size) * 0.5; return p.x >= s.x - th && p.x <= s.x + w + th && p.y >= s.y - th && p.y <= s.y + s.size + th; }
     if (s.t === "math") { const w = (s.latex.length * s.size) * 0.45; return p.x >= s.x - th && p.x <= s.x + w + th && p.y >= s.y - th && p.y <= s.y + s.size * 1.4 + th; }
-    if (s.t === "image") return p.x >= s.x - th && p.x <= s.x + s.w + th && p.y >= s.y - th && p.y <= s.y + s.h + th;
+    if (s.t === "image") {
+      let qx = p.x, qy = p.y;
+      const rot = s.rot || 0;
+      if (rot) { const cx = s.x + s.w / 2, cy = s.y + s.h / 2, dx = p.x - cx, dy = p.y - cy; qx = cx + dx * Math.cos(rot) + dy * Math.sin(rot); qy = cy - dx * Math.sin(rot) + dy * Math.cos(rot); }
+      return qx >= s.x - th && qx <= s.x + s.w + th && qy >= s.y - th && qy <= s.y + s.h + th;
+    }
+    if (s.t === "axes") return p.x >= s.x - th && p.x <= s.x + s.w + th && p.y >= s.y - th && p.y <= s.y + s.h + th;
     return false;
   }
   function bbox(s: Shape): { x: number; y: number; w: number; h: number } {
     if (s.t === "pen" || s.t === "hl" || s.t === "erase") { const xs = s.pts.map((q) => q.x), ys = s.pts.map((q) => q.y); const x = Math.min(...xs), y = Math.min(...ys); return { x, y, w: Math.max(...xs) - x, h: Math.max(...ys) - y }; }
     if (s.t === "text") return { x: s.x, y: s.y, w: (s.s.length * s.size) * 0.5, h: s.size * 1.2 };
     if (s.t === "math") return { x: s.x, y: s.y, w: (s.latex.length * s.size) * 0.45, h: s.size * 1.4 };
-    if (s.t === "image") return { x: s.x, y: s.y, w: s.w, h: s.h };
+    if (s.t === "image" || s.t === "axes") return { x: s.x, y: s.y, w: s.w, h: s.h };
     const x = Math.min(s.a.x, s.b.x), y = Math.min(s.a.y, s.b.y); return { x, y, w: Math.abs(s.b.x - s.a.x), h: Math.abs(s.b.y - s.a.y) };
   }
   function translate(s: Shape, dx: number, dy: number): Shape {
     if (s.t === "pen" || s.t === "hl" || s.t === "erase") return { ...s, pts: s.pts.map((q) => ({ x: q.x + dx, y: q.y + dy })) };
-    if (s.t === "text" || s.t === "math" || s.t === "image") return { ...s, x: s.x + dx, y: s.y + dy };
+    if (s.t === "text" || s.t === "math" || s.t === "image" || s.t === "axes") return { ...s, x: s.x + dx, y: s.y + dy };
     return { ...s, a: { x: s.a.x + dx, y: s.a.y + dy }, b: { x: s.b.x + dx, y: s.b.y + dy } };
   }
   function onDown(e: React.PointerEvent) {
@@ -382,27 +389,64 @@ export function Whiteboard({ initialBoardId }: { initialBoardId?: string }) {
       const W = dims().w, H = dims().h;
       const fit = Math.min(1, (W * 0.7) / nw, (H * 0.7) / nh);
       const w = nw * fit, h = nh * fit;
-      commit([...shapes(), { t: "image", x: (W - w) / 2, y: (H - h) / 2, w, h, src }]);
-      setTool("move");
-      setSaveMsg("✓ Image added — pick a tool to draw or write on it"); setTimeout(() => setSaveMsg(""), 2800);
+      commit([...shapes(), { t: "image", x: (W - w) / 2, y: (H - h) / 2, w, h, src, rot: 0 }]);
+      setTool("move"); setSelIdx(shapes().length - 1); // select it so the move/resize/rotate handles show
+      setSaveMsg("✓ Image added — drag to move, corner to resize, ↻ to rotate"); setTimeout(() => setSaveMsg(""), 3000);
     } catch { setSaveMsg("⚠ Couldn't load that image"); setTimeout(() => setSaveMsg(""), 3000); }
   }
   function onPickImage(e: React.ChangeEvent<HTMLInputElement>) {
     const f = e.target.files?.[0]; if (f) insertImageFromFile(f); e.currentTarget.value = "";
   }
-  function startImgResize(e: React.PointerEvent) {
+  // Drop a coordinate plane on the board to graph on by hand (no calculator needed).
+  function insertAxes() {
+    const W = dims().w, H = dims().h;
+    const w = Math.min(360, W * 0.6), h = Math.min(300, H * 0.6);
+    commit([...shapes(), { t: "axes", x: (W - w) / 2, y: (H - h) / 2, w, h }]);
+    setTool("move"); setSelIdx(shapes().length - 1);
+    setSaveMsg("✓ Axes added — draw your graph on it"); setTimeout(() => setSaveMsg(""), 2800);
+  }
+  // Resize a selected image (aspect-locked) or axes (free), keeping the local
+  // top-left corner fixed — works whether or not the image is rotated.
+  function startObjResize(e: React.PointerEvent) {
+    e.stopPropagation(); (e.currentTarget as Element).setPointerCapture(e.pointerId);
+    const s = selIdx != null ? shapes()[selIdx] : null;
+    if (!s || (s.t !== "image" && s.t !== "axes")) return;
+    const rot = s.t === "image" ? (s.rot || 0) : 0;
+    imgRzRef.current = { idx: selIdx!, sx: e.clientX, sy: e.clientY, w: s.w, h: s.h, ratio: s.t === "image" ? (s.w / s.h || 1) : 0, rot, cx: s.x + s.w / 2, cy: s.y + s.h / 2 };
+  }
+  function onObjResize(e: React.PointerEvent) {
+    const r = imgRzRef.current; if (!r) return;
+    const dx = e.clientX - r.sx, dy = e.clientY - r.sy;
+    const ldx = dx * Math.cos(r.rot) + dy * Math.sin(r.rot);      // pointer delta in the object's local frame
+    const ldy = -dx * Math.sin(r.rot) + dy * Math.cos(r.rot);
+    const nw = Math.max(40, r.w + ldx);
+    const nh = r.ratio ? nw / r.ratio : Math.max(40, r.h + ldy);
+    const sx = (nw - r.w) / 2, sy = (nh - r.h) / 2;                 // keep local top-left fixed: shift centre by half the growth
+    const ncx = r.cx + (sx * Math.cos(r.rot) - sy * Math.sin(r.rot));
+    const ncy = r.cy + (sx * Math.sin(r.rot) + sy * Math.cos(r.rot));
+    const arr = shapes().slice(); const o = arr[r.idx] as Extract<Shape, { t: "image" | "axes" }>;
+    arr[r.idx] = { ...o, w: nw, h: nh, x: ncx - nw / 2, y: ncy - nh / 2 };
+    pagesRef.current[pageRef.current] = arr; redraw(); rerender();
+  }
+  function endObjResize() { if (imgRzRef.current) { imgRzRef.current = null; commit([...shapes()]); } }
+  // Rotate a selected image by dragging the handle above it.
+  function startRotate(e: React.PointerEvent) {
     e.stopPropagation(); (e.currentTarget as Element).setPointerCapture(e.pointerId);
     const s = selIdx != null ? shapes()[selIdx] : null;
     if (!s || s.t !== "image") return;
-    imgRzRef.current = { idx: selIdx!, sx: e.clientX, w: s.w, h: s.h, ratio: s.w / s.h || 1 };
+    rotRef.current = { idx: selIdx! };
   }
-  function onImgResize(e: React.PointerEvent) {
-    const r = imgRzRef.current; if (!r) return;
-    const nw = Math.max(40, r.w + (e.clientX - r.sx)), nh = nw / r.ratio;
-    const arr = shapes().slice(); const o = arr[r.idx] as Extract<Shape, { t: "image" }>;
-    arr[r.idx] = { ...o, w: nw, h: nh }; pagesRef.current[pageRef.current] = arr; redraw(); rerender();
+  function onRotate(e: React.PointerEvent) {
+    const r = rotRef.current; if (!r) return;
+    const s = shapes()[r.idx]; if (!s || s.t !== "image") return;
+    const p = ptAt(e.clientX, e.clientY);
+    const cx = s.x + s.w / 2, cy = s.y + s.h / 2;
+    let ang = Math.atan2(p.y - cy, p.x - cx) + Math.PI / 2;         // handle sits above centre => 0 rad
+    if (e.shiftKey) ang = Math.round(ang / (Math.PI / 12)) * (Math.PI / 12); // hold Shift to snap to 15°
+    const arr = shapes().slice(); arr[r.idx] = { ...s, rot: ang };
+    pagesRef.current[pageRef.current] = arr; redraw(); rerender();
   }
-  function endImgResize() { if (imgRzRef.current) { imgRzRef.current = null; commit([...shapes()]); } }
+  function endRotate() { if (rotRef.current) { rotRef.current = null; commit([...shapes()]); } }
   function startDrag(e: React.PointerEvent) { if ((e.target as HTMLElement).closest("button, a")) return; (e.currentTarget as Element).setPointerCapture(e.pointerId); dragRef.current = { dx: e.clientX - graphPos.x, dy: e.clientY - graphPos.y }; setGraphBusy(true); }
   function onDrag(e: React.PointerEvent) { if (dragRef.current) setGraphPos({ x: e.clientX - dragRef.current.dx, y: e.clientY - dragRef.current.dy }); }
   function endDrag() { dragRef.current = null; setGraphBusy(false); }
@@ -448,6 +492,7 @@ export function Whiteboard({ initialBoardId }: { initialBoardId?: string }) {
           ))}
           <button onClick={() => fileInputRef.current?.click()} title="Insert an image to draw or write on (or paste one with Ctrl+V)" style={tBtn(false)}>🖼</button>
           <input ref={fileInputRef} type="file" accept="image/*" onChange={onPickImage} style={{ display: "none" }} />
+          <button onClick={insertAxes} title="Insert coordinate axes to graph on by hand" style={tBtn(false)}>📐</button>
         </Group>
         {/* highlighter has its own (translucent) colours; everything else uses the pen colours */}
         <Group>{(tool === "highlight" ? HL_COLORS : COLORS).map((c) => {
@@ -534,15 +579,29 @@ export function Whiteboard({ initialBoardId }: { initialBoardId?: string }) {
         {saveMsg && (
           <div style={{ position: "absolute", top: 14, left: "50%", transform: "translateX(-50%)", zIndex: 30, background: saveMsg.startsWith("⚠") ? "#b91c1c" : "#0f172a", color: "#fff", padding: "9px 18px", borderRadius: 10, fontSize: 14, fontWeight: 700, boxShadow: "0 8px 24px rgba(0,0,0,.35)", pointerEvents: "none", maxWidth: "90%" }}>{saveMsg}</div>
         )}
-        {/* selection outline (Move tool) */}
-        {tool === "move" && selIdx != null && shapes()[selIdx] && (
-          <div style={{ position: "absolute", left: bbox(shapes()[selIdx]).x - 5, top: bbox(shapes()[selIdx]).y - 5, width: bbox(shapes()[selIdx]).w + 10, height: bbox(shapes()[selIdx]).h + 10, border: "1.5px dashed #1d4ed8", borderRadius: 4, pointerEvents: "none" }} />
-        )}
-        {/* resize handle for a selected image / graph snapshot */}
-        {tool === "move" && selIdx != null && shapes()[selIdx]?.t === "image" && (
-          <div onPointerDown={startImgResize} onPointerMove={onImgResize} onPointerUp={endImgResize} title="Drag to resize"
-            style={{ position: "absolute", left: bbox(shapes()[selIdx]).x + bbox(shapes()[selIdx]).w - 7, top: bbox(shapes()[selIdx]).y + bbox(shapes()[selIdx]).h - 7, width: 16, height: 16, background: "#1d4ed8", border: "2px solid #fff", borderRadius: 3, cursor: "nwse-resize", touchAction: "none", zIndex: 25 }} />
-        )}
+        {/* selection frame (Move tool) — rotates with an image; carries resize + rotate handles */}
+        {tool === "move" && selIdx != null && shapes()[selIdx] && (() => {
+          const s = shapes()[selIdx];
+          const b = bbox(s);
+          if (s.t !== "image" && s.t !== "axes") {
+            return <div style={{ position: "absolute", left: b.x - 5, top: b.y - 5, width: b.w + 10, height: b.h + 10, border: "1.5px dashed #1d4ed8", borderRadius: 4, pointerEvents: "none" }} />;
+          }
+          const rot = s.t === "image" ? (s.rot || 0) : 0;
+          return (
+            <div style={{ position: "absolute", left: b.x, top: b.y, width: b.w, height: b.h, transform: `rotate(${rot}rad)`, transformOrigin: "center", pointerEvents: "none", zIndex: 24 }}>
+              <div style={{ position: "absolute", inset: -4, border: "1.5px dashed #1d4ed8", borderRadius: 4 }} />
+              <div onPointerDown={startObjResize} onPointerMove={onObjResize} onPointerUp={endObjResize} title="Drag to resize"
+                style={{ position: "absolute", right: -8, bottom: -8, width: 16, height: 16, background: "#1d4ed8", border: "2px solid #fff", borderRadius: 3, cursor: "nwse-resize", touchAction: "none", pointerEvents: "auto" }} />
+              {s.t === "image" && (
+                <>
+                  <div style={{ position: "absolute", left: "50%", top: -26, width: 2, height: 22, background: "#1d4ed8", transform: "translateX(-50%)" }} />
+                  <div onPointerDown={startRotate} onPointerMove={onRotate} onPointerUp={endRotate} title="Drag to rotate (hold Shift to snap to 15°)"
+                    style={{ position: "absolute", left: "50%", top: -34, width: 18, height: 18, marginLeft: -9, background: "#fff", border: "2px solid #1d4ed8", borderRadius: "50%", cursor: "grab", touchAction: "none", pointerEvents: "auto", display: "grid", placeItems: "center", fontSize: 11, fontWeight: 800, color: "#1d4ed8" }}>↻</div>
+                </>
+              )}
+            </div>
+          );
+        })()}
         {/* math equation editor */}
         {mathEdit && (
           <div style={{ position: "absolute", left: Math.min(mathEdit.x, (dims().w) - 320), top: mathEdit.y, zIndex: 10, background: "#fff", border: "1px solid #94a3b8", borderRadius: 10, boxShadow: "0 10px 28px rgba(0,0,0,.25)", padding: 10, width: 300 }}>
