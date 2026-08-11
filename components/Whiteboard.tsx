@@ -267,7 +267,12 @@ export function Whiteboard({ initialBoardId }: { initialBoardId?: string }) {
       const arr = shapes();
       movedRef.current = false;
       let found = -1;
-      for (let i = arr.length - 1; i >= 0; i--) { if (hitShape(p, arr[i])) { moveRef.current = { idx: i, last: p }; drawingRef.current = true; found = i; break; } }
+      // Images & axes are independent objects: grab them even if ink/text was drawn
+      // on top, so you can always move the picture/graph you inserted.
+      for (let i = arr.length - 1; i >= 0; i--) { const s = arr[i]; if ((s.t === "image" || s.t === "axes") && hitShape(p, s)) { found = i; break; } }
+      // Otherwise fall back to the topmost shape under the cursor (ink, text, math…).
+      if (found < 0) { for (let i = arr.length - 1; i >= 0; i--) { if (hitShape(p, arr[i])) { found = i; break; } } }
+      if (found >= 0) { moveRef.current = { idx: found, last: p }; drawingRef.current = true; }
       setSelIdx(found >= 0 ? found : null);
       return;
     }

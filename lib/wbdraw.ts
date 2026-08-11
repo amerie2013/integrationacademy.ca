@@ -50,15 +50,7 @@ export function drawAxes(ctx: CanvasRenderingContext2D, x: number, y: number, w:
   const cx = Math.round(x + w / 2), cy = Math.round(y + h / 2);
   const step = 26;
   ctx.save();
-  // faint grid
-  ctx.strokeStyle = "#dbe4ef"; ctx.lineWidth = 1;
-  ctx.beginPath();
-  for (let gx = cx; gx <= x + w; gx += step) { ctx.moveTo(gx, y); ctx.lineTo(gx, y + h); }
-  for (let gx = cx - step; gx >= x; gx -= step) { ctx.moveTo(gx, y); ctx.lineTo(gx, y + h); }
-  for (let gy = cy; gy <= y + h; gy += step) { ctx.moveTo(x, gy); ctx.lineTo(x + w, gy); }
-  for (let gy = cy - step; gy >= y; gy -= step) { ctx.moveTo(x, gy); ctx.lineTo(x + w, gy); }
-  ctx.stroke();
-  // axes
+  // axes (no grid)
   ctx.strokeStyle = "#334155"; ctx.fillStyle = "#334155"; ctx.lineWidth = 1.5;
   ctx.beginPath(); ctx.moveTo(x, cy); ctx.lineTo(x + w, cy); ctx.moveTo(cx, y + h); ctx.lineTo(cx, y); ctx.stroke();
   // ticks
