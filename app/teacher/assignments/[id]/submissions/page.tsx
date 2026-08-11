@@ -117,6 +117,7 @@ function SubCard({ sub, assignmentId, fileCols, onSaved }: { sub: Sub; assignmen
     setSaving(true); setErr("");
     const g = grade.trim() === "" ? null : Number(grade);
     if (g != null && Number.isNaN(g)) { setErr("Grade must be a number."); setSaving(false); return; }
+    if (g != null && (g < 0 || g > 100)) { setErr("Grade must be between 0 and 100."); setSaving(false); return; }
     const { error } = await supabase.from("submissions")
       .update({ grade: g, feedback: feedback.trim() || null })
       .eq("assignment_id", assignmentId).eq("student_id", sub.student_id);
@@ -147,9 +148,12 @@ function SubCard({ sub, assignmentId, fileCols, onSaved }: { sub: Sub; assignmen
 
       <div style={{ display: "flex", gap: 12, alignItems: "flex-end", flexWrap: "wrap", marginTop: 14 }}>
         <div>
-          <label style={lbl}>Grade</label>
-          <input value={grade} onChange={(e) => setGrade(e.target.value)} placeholder="e.g. 8" inputMode="decimal"
-            style={{ width: 90, padding: "9px 12px", borderRadius: 9, border: "1px solid #cbd5e1", fontSize: 15, outline: "none" }} />
+          <label style={lbl}>Grade (out of 100)</label>
+          <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+            <input value={grade} onChange={(e) => setGrade(e.target.value)} placeholder="e.g. 85" inputMode="decimal" type="number" min={0} max={100}
+              style={{ width: 90, padding: "9px 12px", borderRadius: 9, border: "1px solid #cbd5e1", fontSize: 15, outline: "none" }} />
+            <span style={{ color: "#94a3b8", fontWeight: 700, fontSize: 14 }}>/ 100</span>
+          </div>
         </div>
         <div style={{ flex: 1, minWidth: 220 }}>
           <label style={lbl}>Feedback</label>

@@ -53,7 +53,7 @@ export function AiGradeButton({ submissionId, onUse }: { submissionId: string; o
       {draft && (
         <div style={{ marginTop: 10, background: "#f5f3ff", border: "1px solid #ddd6fe", borderRadius: 10, padding: "12px 14px" }}>
           <div style={{ display: "flex", alignItems: "baseline", gap: 8, flexWrap: "wrap", marginBottom: 8 }}>
-            <span style={{ fontWeight: 800, color: "#4338ca", fontSize: 18 }}>Total {draft.total} / {draft.max}</span>
+            <span style={{ fontWeight: 800, color: "#4338ca", fontSize: 18 }}>Total {draft.total} / {draft.max} <span style={{ color: "#6d28d9" }}>({draft.max > 0 ? Math.round((draft.total / draft.max) * 100) : 0}%)</span></span>
             {draft.usedImage && <span style={{ fontSize: 11, fontWeight: 700, color: "#5b21b6", background: "#ede9fe", borderRadius: 6, padding: "2px 7px" }}>read the attachment</span>}
             <span style={{ fontSize: 11, color: "#8b5cf6" }}>· a draft — you decide</span>
           </div>
@@ -70,11 +70,11 @@ export function AiGradeButton({ submissionId, onUse }: { submissionId: string; o
 
           {draft.feedback && <p style={{ margin: "0 0 10px", fontSize: 13, color: "#334155", lineHeight: 1.5, whiteSpace: "pre-wrap", borderTop: "1px solid #ddd6fe", paddingTop: 8 }}>{draft.feedback}</p>}
 
-          <button onClick={() => onUse(String(draft.total), compiledFeedback(draft))}
+          <button onClick={() => onUse(String(draft.max > 0 ? Math.round((draft.total / draft.max) * 100) : 0), compiledFeedback(draft))}
             style={{ background: "#4338ca", color: "#fff", border: "none", borderRadius: 8, padding: "7px 14px", fontWeight: 700, fontSize: 13, cursor: "pointer" }}>
             Use this ↑
           </button>
-          <span style={{ fontSize: 11, color: "#94a3b8", marginLeft: 8 }}>fills grade ({draft.total}) &amp; the full breakdown as feedback — edit before saving</span>
+          <span style={{ fontSize: 11, color: "#94a3b8", marginLeft: 8 }}>fills grade ({draft.max > 0 ? Math.round((draft.total / draft.max) * 100) : 0}/100) &amp; the full breakdown as feedback — edit before saving</span>
         </div>
       )}
     </div>

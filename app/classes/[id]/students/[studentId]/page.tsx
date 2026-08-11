@@ -260,7 +260,7 @@ export default function StudentActivityPage() {
         ) : (
           <div style={card}>
             <div style={{ ...gridAsg, ...headRow }}>
-              <span>Assignment</span><span>Status</span><span>Grade</span><span>Submitted</span>
+              <span>Assignment</span><span>Status</span><span>Grade /100</span><span>Submitted</span>
             </div>
             {asgOrder.map((id) => {
               const s = subs[id];
@@ -274,7 +274,7 @@ export default function StudentActivityPage() {
                       : submitted ? <Pill color="#1e3a8a" bg="#eff6ff">Submitted</Pill>
                       : <Pill color="#64748b" bg="#f1f5f9">Not submitted</Pill>}
                   </span>
-                  <span style={{ fontWeight: 700 }}>{graded ? s!.grade : "—"}</span>
+                  <span style={{ fontWeight: 700 }}>{graded ? `${s!.grade}/100` : "—"}</span>
                   <span style={{ color: "#64748b", fontSize: 13 }}>{s?.submitted_at ? new Date(s.submitted_at).toLocaleDateString() : "—"}</span>
                 </div>
               );

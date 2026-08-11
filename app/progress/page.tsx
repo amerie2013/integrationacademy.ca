@@ -260,7 +260,7 @@ export default function ProgressPage() {
                         <Link href={`/assignments/${a.id}`} style={{ fontWeight: 700, color: "#0f172a", textDecoration: "none" }}>{a.title}</Link>
                         <span style={{ display: "flex", gap: 8, alignItems: "center" }}>
                           {a.grade != null ? (
-                            <span style={pill("#065f46", "#ecfdf5")}>Graded: {String(a.grade)}</span>
+                            <span style={pill("#065f46", "#ecfdf5")}>Graded: {String(a.grade)}/100</span>
                           ) : a.submitted ? (
                             <span style={pill("#9a5b00", "#fff7ed")}>Submitted — awaiting grade</span>
                           ) : (
