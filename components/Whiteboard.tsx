@@ -446,6 +446,8 @@ export function Whiteboard({ initialBoardId }: { initialBoardId?: string }) {
           {([["move", "✋"], ["pen", "✏️"], ["highlight", "🖍"], ["line", "／"], ["arrow", "↗"], ["rect", "▭"], ["ellipse", "◯"], ["text", "T"], ["math", "∑"]] as [Tool, string][]).map(([tl, ic]) => (
             <button key={tl} onClick={() => setTool(tl)} title={tl === "math" ? "Math equation" : tl === "move" ? "Move / drag items" : tl === "highlight" ? "Highlighter" : tl} style={tBtn(tool === tl)}>{ic}</button>
           ))}
+          <button onClick={() => fileInputRef.current?.click()} title="Insert an image to draw or write on (or paste one with Ctrl+V)" style={tBtn(false)}>🖼</button>
+          <input ref={fileInputRef} type="file" accept="image/*" onChange={onPickImage} style={{ display: "none" }} />
         </Group>
         {/* highlighter has its own (translucent) colours; everything else uses the pen colours */}
         <Group>{(tool === "highlight" ? HL_COLORS : COLORS).map((c) => {
@@ -485,8 +487,6 @@ export function Whiteboard({ initialBoardId }: { initialBoardId?: string }) {
           {saveMsg && <span style={{ color: "#9fe7bd", fontSize: 12, fontWeight: 700 }}>{saveMsg}</span>}
         </Group>
         <Group>
-          <button onClick={() => fileInputRef.current?.click()} style={tBtn(false)} title="Insert an image to draw or write on (or paste one with Ctrl+V)">🖼 Image</button>
-          <input ref={fileInputRef} type="file" accept="image/*" onChange={onPickImage} style={{ display: "none" }} />
           <button onClick={() => setShowGraph((s) => !s)} style={tBtn(showGraph)} title="Open the graphing calculator on the board">📈 Graph</button>
           <button onClick={exportPdf} style={tBtn(false)} title="Export ALL pages to PDF (includes equations)">⬇ PDF</button>
           <button onClick={exportPng} style={tBtn(false)} title="Save current page as a PNG image">⬇ PNG</button>
