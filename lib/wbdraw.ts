@@ -44,23 +44,14 @@ export function drawBg(ctx: CanvasRenderingContext2D, bg: Bg, w: number, h: numb
 const _imgCache = new Map<string, HTMLImageElement>();
 let _onImg: (() => void) | null = null;
 
-/** A coordinate plane (light grid + centered x/y axes with arrows and ticks) to
- * graph on by hand. Drawn inside the box [x,y,w,h]; origin at the centre. */
+/** A coordinate plane: plain centered x/y axes with arrows and x/y labels (no
+ * grid, no tick marks) to graph on by hand. Drawn inside the box [x,y,w,h]. */
 export function drawAxes(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number) {
   const cx = Math.round(x + w / 2), cy = Math.round(y + h / 2);
-  const step = 26;
   ctx.save();
-  // axes (no grid)
+  // the two axis lines
   ctx.strokeStyle = "#334155"; ctx.fillStyle = "#334155"; ctx.lineWidth = 1.5;
   ctx.beginPath(); ctx.moveTo(x, cy); ctx.lineTo(x + w, cy); ctx.moveTo(cx, y + h); ctx.lineTo(cx, y); ctx.stroke();
-  // ticks
-  ctx.lineWidth = 1;
-  ctx.beginPath();
-  for (let gx = cx + step; gx <= x + w - 6; gx += step) { ctx.moveTo(gx, cy - 3); ctx.lineTo(gx, cy + 3); }
-  for (let gx = cx - step; gx >= x + 6; gx -= step) { ctx.moveTo(gx, cy - 3); ctx.lineTo(gx, cy + 3); }
-  for (let gy = cy + step; gy <= y + h - 6; gy += step) { ctx.moveTo(cx - 3, gy); ctx.lineTo(cx + 3, gy); }
-  for (let gy = cy - step; gy >= y + 6; gy -= step) { ctx.moveTo(cx - 3, gy); ctx.lineTo(cx + 3, gy); }
-  ctx.stroke();
   // arrowheads: +x (right), +y (up)
   const a = 6;
   ctx.beginPath();

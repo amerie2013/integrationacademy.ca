@@ -335,7 +335,13 @@ export function Whiteboard({ initialBoardId }: { initialBoardId?: string }) {
   // + KaTeX equation overlays, so equations are included. User picks "Save as PDF".
   function exportPdf() {
     const W = dims().w, H = dims().h;
-    const scale = Math.min(1, 900 / W);
+    // Match the PDF page to what's on screen: the page takes the board's exact
+    // aspect ratio (longest side = 280 mm) so the export is a 1:1 capture of the
+    // board — nothing cropped, nothing letter-boxed.
+    const LONG = 280; // mm
+    const pageWmm = W >= H ? LONG : (LONG * W) / H;
+    const pageHmm = W >= H ? (LONG * H) / W : LONG;
+    const scale = ((pageWmm / 25.4) * 96) / W; // board px -> page px so the inner fills the page exactly
     let css = "";
     for (const sh of Array.from(document.styleSheets)) { try { for (const r of Array.from((sh as CSSStyleSheet).cssRules)) css += r.cssText + "\n"; } catch {} }
     const pagesHtml = pagesRef.current.map((pg) => {
@@ -348,8 +354,8 @@ export function Whiteboard({ initialBoardId }: { initialBoardId?: string }) {
       return `<div class="pg"><div class="inner" style="width:${W}px;height:${H}px;transform:scale(${scale});"><img src="${img}" style="width:${W}px;height:${H}px;display:block;"/>${math}</div></div>`;
     }).join("");
     const html = `<!doctype html><html><head><meta charset="utf-8"><base href="${location.origin}/"><title>${title || "Whiteboard"}</title><style>${css}
-      @page{ size: landscape; margin: 8mm; } *{ box-sizing:border-box; } body{ margin:0; background:#fff; }
-      .pg{ width:${W * scale}px; height:${H * scale}px; overflow:hidden; page-break-after:always; margin:0 auto 10px; }
+      @page{ size: ${pageWmm.toFixed(1)}mm ${pageHmm.toFixed(1)}mm; margin: 0; } *{ box-sizing:border-box; } body{ margin:0; background:#fff; }
+      .pg{ width:${pageWmm.toFixed(1)}mm; height:${pageHmm.toFixed(1)}mm; overflow:hidden; page-break-after:always; }
       .inner{ transform-origin:top left; position:relative; }
     </style></head><body>${pagesHtml}<script>window.onload=function(){setTimeout(function(){window.print();},350);};<\/script></body></html>`;
     const w = window.open("", "_blank");
