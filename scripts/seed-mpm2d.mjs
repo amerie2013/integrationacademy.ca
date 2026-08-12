@@ -46,6 +46,17 @@ export const anim = (expr, param, o = {}) => ({
   xMin: o.xMin ?? -6, xMax: o.xMax ?? 6, yMin: o.yMin ?? -6, yMax: o.yMax ?? 6,
   caption: o.caption ?? "",
 });
+// Interactive vector figure (block type "vector", rendered by <VectorFigure>).
+// A block-array element (not an html-string embed). o = { dim:"2d"|"3d",
+// vectors:[{x,y,z?,label?,color?,slider?}], show:{sum,parallelogram,dot,angle,cross}, range, caption }.
+export const vec = (o = {}) => ({
+  id: bid(), type: "vector",
+  dim: o.dim ?? "2d",
+  vectors: o.vectors ?? [],
+  show: o.show ?? {},
+  range: o.range ?? 6,
+  caption: o.caption ?? "",
+});
 // An embedded interactive graph (iframe → the graphing page) for an example.
 // Pass one or more full expressions, e.g. gframe(["y = 2*x - 3"]).
 export const gframe = (items, o = {}) => {

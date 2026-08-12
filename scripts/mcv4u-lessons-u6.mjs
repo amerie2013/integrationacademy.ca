@@ -1,5 +1,5 @@
 // MCV4U Unit 6 — Geometry & Algebra of Vectors. Deep single-card lessons.
-import { html } from "./seed-mpm2d.mjs";
+import { html, vec } from "./seed-mpm2d.mjs";
 const L = (code, title, blocks) => ({ code, title, blocks });
 const EX = `style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"`;
 const PR = `style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"`;
@@ -34,6 +34,7 @@ u6["6.1"] = L("6.1", "Introduction to Vectors", [
   <div class="qa-box" ${QA}><h3>Q3: What is the opposite vector?</h3><p><em>\(-\vec v\): same magnitude, reversed direction.</em></p></div>
   <div class="qa-box" ${QA}><h3>Q4: How are directions stated?</h3><p><em>By bearings or angles (e.g. \(N30^\circ E\), \(030^\circ\)).</em></p></div>
 </div>`),
+  vec({ dim: "2d", vectors: [{ x: 4, y: 3, label: "u", color: "#1d4ed8", slider: true }], caption: "A vector is its components (x, y) — with a magnitude |u| and a direction. Drag the tip or use the sliders." })
 ]);
 
 u6["6.2"] = L("6.2", "Vector Operations (Geometric)", [
@@ -64,6 +65,7 @@ u6["6.2"] = L("6.2", "Vector Operations (Geometric)", [
   <div class="qa-box" ${QA}><h3>Q3: What does \(k\vec v\) do?</h3><p><em>Scales length by \(|k|\); reverses if \(k<0\).</em></p></div>
   <div class="qa-box" ${QA}><h3>Q4: How do you find a perpendicular resultant?</h3><p><em>Pythagoras for magnitude, \(\tan^{-1}\) for direction.</em></p></div>
 </div>`),
+  vec({ dim: "2d", vectors: [{ x: 3, y: 1, label: "u", color: "#1d4ed8", slider: true }, { x: 1, y: 3, label: "v", color: "#dc2626", slider: true }], show: { sum: true, parallelogram: true }, caption: "Vector addition by the parallelogram rule: u + v (green). Drag u and v to see the resultant change." })
 ]);
 
 u6["6.3"] = L("6.3", "Cartesian Vectors in 2-D & 3-D", [
@@ -94,6 +96,7 @@ u6["6.3"] = L("6.3", "Cartesian Vectors in 2-D & 3-D", [
   <div class="qa-box" ${QA}><h3>Q3: What is \(\vec{AB}\)?</h3><p><em>\(B-A\) (head minus tail).</em></p></div>
   <div class="qa-box" ${QA}><h3>Q4: What is a unit vector?</h3><p><em>\(\vec v/|\vec v|\) — a length-\(1\) vector in the same direction.</em></p></div>
 </div>`),
+  vec({ dim: "3d", vectors: [{ x: 3, y: 2, z: 2, label: "u", color: "#1d4ed8", slider: true }], range: 6, caption: "A Cartesian vector in 3-D: u = (x, y, z). Drag the figure to rotate; use the sliders to change each component." })
 ]);
 
 u6["6.4"] = L("6.4", "The Dot Product", [
@@ -124,6 +127,7 @@ u6["6.4"] = L("6.4", "The Dot Product", [
   <div class="qa-box" ${QA}><h3>Q3: What does a dot product of \(0\) mean?</h3><p><em>The vectors are perpendicular.</em></p></div>
   <div class="qa-box" ${QA}><h3>Q4: What's a real use?</h3><p><em>Work \(=\vec F\cdot\vec d\).</em></p></div>
 </div>`),
+  vec({ dim: "2d", vectors: [{ x: 4, y: 1, label: "u", color: "#1d4ed8", slider: true }, { x: -1, y: 3, label: "v", color: "#dc2626", slider: true }], show: { dot: true, angle: true }, caption: "The dot product u·v and the angle between the vectors. Try to make them perpendicular (u·v = 0)." })
 ]);
 
 u6["6.5"] = L("6.5", "The Cross Product", [
@@ -154,4 +158,5 @@ u6["6.5"] = L("6.5", "The Cross Product", [
   <div class="qa-box" ${QA}><h3>Q3: How do you get a triangle's area?</h3><p><em>\(\tfrac12|\vec a\times\vec b|\).</em></p></div>
   <div class="qa-box" ${QA}><h3>Q4: How do you compute it?</h3><p><em>With the determinant/component formula.</em></p></div>
 </div>`),
+  vec({ dim: "3d", vectors: [{ x: 3, y: 1, z: 0, label: "u", color: "#1d4ed8", slider: true }, { x: 1, y: 3, z: 0, label: "v", color: "#dc2626", slider: true }], show: { cross: true }, range: 6, caption: "The cross product u×v (purple) is perpendicular to both u and v. Drag to rotate; change components with the sliders." })
 ]);

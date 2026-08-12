@@ -10,6 +10,7 @@ export type BlockType =
   | "graph"
   | "multigraph"
   | "animation"
+  | "vector"
   | "video"
   | "callout"
   | "pointset"
@@ -69,6 +70,15 @@ export type Block =
       yMax: number;
       caption?: string;
     }
+  | {
+      id: string;
+      type: "vector";
+      dim: "2d" | "3d";
+      vectors: { x: number; y: number; z?: number; label?: string; color?: string; slider?: boolean }[];
+      show?: { sum?: boolean; parallelogram?: boolean; dot?: boolean; angle?: boolean; cross?: boolean };
+      range?: number; // half-extent of the axes (default 6)
+      caption?: string;
+    }
   | { id: string; type: "video"; url: string; caption?: string }
   | {
       id: string;
@@ -123,6 +133,7 @@ export const BLOCK_LABELS: Record<BlockType, string> = {
   graph: "Interactive graph",
   multigraph: "System / multi-line graph",
   animation: "Animated graph",
+  vector: "Interactive vectors (2D/3D)",
   video: "Video embed",
   callout: "Callout box",
   pointset: "Data table + points plot",
@@ -227,6 +238,19 @@ export function newBlock(type: BlockType): Block {
         xMax: 10,
         yMin: -2,
         yMax: 2,
+        caption: "",
+      };
+    case "vector":
+      return {
+        id: uid(),
+        type,
+        dim: "2d",
+        vectors: [
+          { x: 3, y: 2, label: "u", color: "#1d4ed8", slider: true },
+          { x: -1, y: 3, label: "v", color: "#dc2626", slider: true },
+        ],
+        show: { sum: true, parallelogram: true, dot: true, angle: true },
+        range: 6,
         caption: "",
       };
     case "video":

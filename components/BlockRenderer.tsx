@@ -7,6 +7,7 @@ import { HtmlBlock } from "./HtmlBlock";
 import { ExpressionGraph } from "./ExpressionGraph";
 import { MultiGraph } from "./MultiGraph";
 import { AnimatedGraph } from "./AnimatedGraph";
+import { VectorFigure } from "./VectorFigure";
 import { PointPlot } from "./PointPlot";
 import { EquationGame } from "./EquationGame";
 import { FactoringSteps } from "./FactoringSteps";
@@ -109,6 +110,8 @@ function renderBlock(b: Block) {
           caption={b.caption}
         />
       );
+    case "vector":
+      return <VectorFigure dim={b.dim} vectors={b.vectors} show={b.show} range={b.range} caption={b.caption} />;
     case "video": {
       const embed = youtubeEmbed(b.url);
       return embed ? (
