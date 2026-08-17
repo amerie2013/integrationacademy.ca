@@ -12,7 +12,7 @@ const HREF: Record<string, (id: string) => string> = {
   assignment: (id) => `/assignments/${id}`,
   quiz: (id) => `/quizzes/${id}`,
 };
-const RANK: Record<string, number> = { lesson: 0, worksheet: 1, assignment: 2, quiz: 3 };
+const RANK: Record<string, number> = { lesson: 0, worksheet: 1, quiz: 2, assignment: 3 };
 const codeOf = (t: string) => { const m = (t || "").match(/(\d+)\.(\d+)/); return m ? Number(m[1]) * 1000 + Number(m[2]) : 999999; };
 
 /**
@@ -84,7 +84,7 @@ export function CourseNav({ courseId, type, id, classId: forcedClassId }: { cour
         ...(as ?? []).map((a: any) => ({ type: "assignment", id: a.id, title: a.title, href: HREF.assignment(a.id), label: LABEL.assignment })),
       ].filter((it) => !locked.has(`${it.type}:${it.id}`));
 
-      // Default order: by subject code (1.1, 1.2, …); within a subject lesson → worksheet → assignment → quiz.
+      // Default order: by subject code (1.1, 1.2, …); within a subject lesson → worksheet → quiz → assignment.
       def.sort((a, b) => (codeOf(a.title) - codeOf(b.title)) || (RANK[a.type] - RANK[b.type]));
 
       const pos: Record<string, number> = {};
