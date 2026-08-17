@@ -32,15 +32,18 @@ export function CourseNav({ courseId, type, id, classId: forcedClassId }: { cour
       // Prefer an explicit class (e.g. the quiz's own class); otherwise find the
       // viewer's class for this course (teaches or enrolled).
       let classId: string | null = forcedClassId ?? null;
+      // Whether classId is the viewer's OWN class (teaches/enrolled or an explicit
+      // quiz class). A borrowed fallback class must not apply its locks/hidden items.
+      let ownClass = !!forcedClassId;
       if (!classId && uid) {
         const taught = await supabase.from("classes").select("id").eq("course_id", courseId).eq("teacher_id", uid).limit(1);
-        if (taught.data && taught.data.length) classId = taught.data[0].id;
+        if (taught.data && taught.data.length) { classId = taught.data[0].id; ownClass = true; }
         if (!classId) {
           const mem = await supabase.from("class_students").select("class_id").eq("student_id", uid);
           const ids = (mem.data ?? []).map((m: any) => m.class_id);
           if (ids.length) {
             const cls = await supabase.from("classes").select("id").eq("course_id", courseId).in("id", ids).limit(1);
-            if (cls.data && cls.data.length) classId = cls.data[0].id;
+            if (cls.data && cls.data.length) { classId = cls.data[0].id; ownClass = true; }
           }
         }
       }
@@ -74,7 +77,9 @@ export function CourseNav({ courseId, type, id, classId: forcedClassId }: { cour
         ]);
         quizzes = qs ?? [];
         order = ord ?? [];
-        (lk ?? []).forEach((r: any) => locked.add(`${r.item_type}:${r.item_id}`));
+        // Only hide locked items for the viewer's OWN class — never for a borrowed
+        // fallback class (admins/anonymous must see the full published sequence).
+        if (ownClass) (lk ?? []).forEach((r: any) => locked.add(`${r.item_type}:${r.item_id}`));
       }
 
       let def: NavItem[] = [
