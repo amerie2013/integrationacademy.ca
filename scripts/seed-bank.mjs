@@ -1256,8 +1256,88 @@ export function gen33() {
   return q;
 }
 
-// ── 4.1 Linear vs Non-Linear Relations ───────────────────────
+// ── 4.1 Relations ─────────────────────────────────────────────
 export function gen41() {
+  const q = [];
+
+  // ── LEVEL 1 — EASY ──────────────────────────────────────────
+  // single choice
+  q.push(mc("easy", "In a relation, the input variable is called the:", ["Dependent variable", "Independent variable", "Constant", "Coefficient"], 1));
+  q.push(mc("easy", "In a relation, the output variable is called the:", ["Dependent variable", "Independent variable", "Constant", "Slope"], 0));
+  q.push(mc("easy", "On a graph, the independent variable is usually placed on the:", ["Vertical axis", "Horizontal axis", "Origin", "Diagonal"], 1));
+  q.push(mc("easy", "The number of whole tickets sold is an example of a:", ["Continuous relation", "Discrete relation", "Non-linear relation", "Undefined relation"], 1));
+  q.push(mc("easy", "The distance a car travels over time is an example of a:", ["Discrete relation", "Continuous relation", "Undefined relation", "A constant"], 1));
+  // multiple select
+  q.push(ms("easy", "Which are valid ways to represent a relation?", ["Words", "A table of values", "A graph", "An equation"], [0, 1, 2, 3]));
+  q.push(ms("easy", "Which situations are discrete?", ["Number of students in a class", "Height of a growing plant", "Number of cars sold", "Volume of water in a tank"], [0, 2]));
+  q.push(ms("easy", "Which situations are continuous?", ["Time elapsed", "Number of houses", "Distance travelled", "Number of siblings"], [0, 2]));
+  q.push(ms("easy", "In \"cost depends on the number of items bought,\" which is true?", ["Number of items is independent", "Cost is independent", "Cost is dependent", "Number of items is dependent"], [0, 2]));
+  // true / false
+  q.push(tf("easy", "The independent variable is the input you choose.", true));
+  q.push(tf("easy", "The dependent variable is plotted on the horizontal axis.", false, "It is plotted on the vertical axis."));
+  q.push(tf("easy", "A relation can be shown in words, a table, a graph, and an equation.", true));
+  q.push(tf("easy", "The number of people in a room is a continuous quantity.", false, "It is discrete — a whole number."));
+  q.push(tf("easy", "Time is usually treated as a continuous variable.", true));
+  // fill in the blank
+  q.push(fill("easy", "In \"height depends on age,\" the independent variable is ___.", ["age"]));
+  q.push(fill("easy", "In \"height depends on age,\" the dependent variable is ___.", ["height"]));
+  q.push(fill("easy", "A relation with only countable, separate inputs is ___.", ["discrete"]));
+  q.push(fill("easy", "A relation where every in-between value is possible is ___.", ["continuous"]));
+  q.push(fill("easy", "The axis that holds the dependent variable is the ___ axis.", ["vertical", "y", "y-axis"]));
+
+  // ── LEVEL 2 — MEDIUM ────────────────────────────────────────
+  q.push(mc("medium", "A gym charges $20 to join plus $5 per class. The independent variable is:", ["Total cost", "Number of classes", "$20", "$5"], 1));
+  q.push(mc("medium", "A tricycle has 3 wheels. Plotting wheels vs. number of tricycles gives a relation that is:", ["Continuous", "Discrete", "Non-linear", "Undefined"], 1, "You cannot have part of a tricycle."));
+  q.push(mc("medium", "A car starts with 60 L of fuel and uses 0.08 L/km. This relation (fuel vs. distance) is:", ["Discrete", "Continuous", "Undefined", "Constant"], 1, "Distance can take any value."));
+  q.push(mc("medium", "A table shows $x: 0,1,2,3$ and $y: 7,10,13,16$. The starting value (at $x=0$) is:", ["$3$", "$7$", "$10$", "$16$"], 1));
+  q.push(mc("medium", "Using the same table ($x: 0,1,2,3$, $y: 7,10,13,16$), the rate of change is:", ["$3$", "$7$", "$10$", "$1$"], 0, "$y$ rises by $3$ each step."));
+  // multiple select
+  q.push(ms("medium", "A taxi charges $4 plus $2/km. Which are true?", ["$4 is the starting value (y-intercept)", "$2 is the rate of change", "Cost after 3 km is $10", "Distance is the dependent variable"], [0, 1, 2]));
+  q.push(ms("medium", "A pool starts at 50 L and fills at 10 L/min. Which are true?", ["Volume vs. time is a relation", "Time is the independent variable", "The equation is $V = 10t + 50$", "The relation is discrete"], [0, 1, 2]));
+  q.push(ms("medium", "Which are examples of a starting value (y-intercept) in a real context?", ["A flat delivery fee", "The rate charged per hour", "An initial account balance", "The speed of a car"], [0, 2]));
+  q.push(ms("medium", "Does the point $(7,22)$ lie on the relation $y = 3x + 1$? Which are true?", ["$3(7)+1 = 22$", "The point lies on the relation", "$3(7)+1 = 21$", "The point does not lie on the relation"], [0, 1]));
+  // true / false
+  q.push(tf("medium", "In \"cost depends on hours worked,\" hours worked is the dependent variable.", false, "Hours worked is independent; cost depends on it."));
+  q.push(tf("medium", "The mass of sugar poured from a bag is a continuous quantity.", true));
+  q.push(tf("medium", "The number of houses on a street is a continuous quantity.", false, "It is discrete — a whole number."));
+  q.push(tf("medium", "In a table, the rate of change is the constant change in $y$ per step of $x$.", true));
+  q.push(tf("medium", "A relation's starting value is always found by setting the independent variable to $1$.", false, "It is found by setting it to $0$."));
+  // fill in the blank
+  q.push(num("medium", "A candle 30 cm tall burns 2.5 cm/hour. Its height after 4 hours is ___ cm.", 20, 0));
+  q.push(num("medium", "A tank holds 80 L and drains 8 L/min. It is empty after ___ minutes.", 10, 0));
+  q.push(fill("medium", "A relation with a fixed starting amount plus a constant rate is ___.", ["linear"]));
+  q.push(num("medium", "A table has $x: 0,1,2,3$ and $y: 2,7,12,17$. The rate of change is ___.", 5, 0));
+  q.push(fill("medium", "The variable that responds to a change in the input is the ___ variable.", ["dependent"]));
+
+  // ── LEVEL 3 — HARD ──────────────────────────────────────────
+  q.push(mc("hard", "A relation starts at $100$ and subtracts $15$ each step (from $n=0$). The value at $n=3$ is:", ["$55$", "$70$", "$85$", "$45$"], 0, "$100 - 15(3) = 55$."));
+  q.push(mc("hard", "A spring's stretch depends on the mass hung on it. Which is the independent variable?", ["Stretch", "Mass", "The spring", "Time"], 1));
+  q.push(mc("hard", "Which scenario is best modelled as continuous?", ["Number of buses needed for a trip", "Distance a cyclist rides", "Number of tickets sold", "Number of classrooms"], 1));
+  q.push(mc("hard", "A relation gives $(0,20), (1,25), (2,30)$. Which equation matches it?", ["$y = 5x + 20$", "$y = 20x + 5$", "$y = 5x - 20$", "$y = 25x$"], 0));
+  q.push(mc("hard", "For earnings vs. hours worked at $16/h, which is true?", ["Hours is dependent, earnings is independent", "Earnings is dependent, hours is independent", "Both are independent", "Neither is independent"], 1));
+  // multiple select
+  q.push(ms("hard", "A relation is $V = 80 - 8t$ (tank draining). Which are true?", ["Starting value is $80$", "Rate of change is $-8$", "$t$ is the independent variable", "The tank empties at $t = 8$"], [0, 1, 2]));
+  q.push(ms("hard", "Which are true about discrete vs. continuous relations?", ["Discrete relations are plotted as separate points", "Continuous relations are plotted as a solid line", "Time is usually discrete", "Countable items (people, cars) are usually discrete"], [0, 1, 3]));
+  q.push(ms("hard", "A gym membership is $20 to join plus $5/class, giving $C = 5n + 20$. Which are true?", ["$n$ is independent", "$C$ is dependent", "The rate of change is $20$", "The starting value is $20$"], [0, 1, 3]));
+  q.push(ms("hard", "Which statements correctly describe a relation's four representations?", ["Words describe the relation in a sentence", "A table lists paired input/output values", "A graph plots the paired values visually", "An equation is the only valid representation"], [0, 1, 2]));
+  // true / false
+  q.push(tf("hard", "A relation where $y$ changes by $2, 4, 6$ for equal steps in $x$ has a constant rate of change.", false, "The changes are not equal, so the rate of change is not constant."));
+  q.push(tf("hard", "The independent variable can always be identified as the one you control or choose.", true));
+  q.push(tf("hard", "A relation modelling the number of laps completed in a race is continuous.", false, "Laps are countable — discrete."));
+  q.push(tf("hard", "A relation's equation can always be derived once the starting value and rate of change are known.", true));
+  q.push(tf("hard", "Reading a table left to right, the rate of change is the ratio of the change in the dependent variable to the change in the independent variable.", true));
+  // fill in the blank
+  q.push(num("hard", "A phone plan costs $30 plus $0.10/minute. The cost for 45 minutes is $___.", 34.5, 0));
+  q.push(fill("hard", "A relation whose graph must be drawn as separate dots, not a line, is ___.", ["discrete"]));
+  q.push(num("hard", "A plant is 4 cm tall and grows 1.5 cm/week. Its height after 6 weeks is ___ cm.", 13, 0));
+  q.push(fill("hard", "In $y = mx + b$, the value $b$ represents the relation's ___ value.", ["starting", "initial"]));
+  q.push(num("hard", "A relation has starting value $12$ and rate of change $-3$. Its value at $x = 5$ is ___.", -3, 0));
+
+  return q;
+}
+
+// ── 4.2 Linear vs Non-Linear Relations ───────────────────────
+export function gen42() {
   const q = [];
 
   // ── LEVEL 1 — EASY ──────────────────────────────────────────
@@ -1339,8 +1419,8 @@ export function gen41() {
   return q;
 }
 
-// ── 4.2 Representing Linear Relations ─────────────────────────
-export function gen42() {
+// ── 4.3 Representing Linear and Non-Linear Relations ──────────
+export function gen43() {
   const q = [];
 
   // ── LEVEL 1 — EASY ──────────────────────────────────────────
@@ -1368,6 +1448,7 @@ export function gen42() {
   q.push(num("easy", "For the line $y = 2x + 1$, when $x = 3$, $y =$ ___.", 7, 0));
   q.push(num("easy", "The slope between $(1,3)$ and $(4,9)$ is ___.", 2, 0));
   q.push(fill("easy", "A linear relation with slope $-\\frac{1}{2}$ and y-intercept $4$ is $y =$ ___.", ["-1/2x+4", "-\\frac{1}{2}x+4", "-\\frac{1}{2}x + 4", "-0.5x+4"]));
+  q.push(mc("easy", "Which table represents a non-linear relation?", ["$x: 0,1,2;\\ y: 1,3,5$", "$x: 0,1,2;\\ y: 0,1,4$", "$x: 0,1,2;\\ y: -2,0,2$", "$x: 0,1,2;\\ y: 4,7,10$"], 1, "First differences $1,3$ are not constant — non-linear ($y=x^2$)."));
 
   // ── LEVEL 2 — MEDIUM ────────────────────────────────────────
   q.push(mc("medium", "A line has slope $3$ and passes through $(0,-2)$. The equation is:", ["$y = 3x - 2$", "$y = 3x + 2$", "$y = -3x - 2$", "$y = -3x + 2$"], 0));
@@ -1393,6 +1474,7 @@ export function gen42() {
   q.push(num("medium", "The y-intercept of $y = -5x + 2$ is ___.", 2, 0));
   q.push(num("medium", "For $y = \\frac{2}{3}x - 4$, when $x = 9$, $y =$ ___.", 2, 0));
   q.push(num("medium", "The first difference for $y = 0.5x + 7$ is ___.", 0.5, 0));
+  q.push(tf("medium", "A ball's height $h = -5t^2 + 20t$ is a non-linear relation.", true, "$t$ is squared, so it is quadratic (non-linear)."));
 
   // ── LEVEL 3 — HARD ──────────────────────────────────────────
   q.push(mc("hard", "A line passes through $(2,-1)$ and $(-4,11)$. The equation is:", ["$y = -2x + 3$", "$y = 2x - 5$", "$y = -2x - 3$", "$y = 2x + 3$"], 0, "Slope $\\frac{12}{-6} = -2$; $-1 = -2(2)+b \\Rightarrow b = 3$."));
@@ -1422,8 +1504,8 @@ export function gen42() {
   return q;
 }
 
-// ── 4.3 Comparing Lines ──────────────────────────────────────
-export function gen43() {
+// ── 4.4 Comparing Lines ──────────────────────────────────────
+export function gen44() {
   const q = [];
 
   // ── LEVEL 1 — EASY ──────────────────────────────────────────
@@ -1505,8 +1587,8 @@ export function gen43() {
   return q;
 }
 
-// ── 4.4 Graphing Special Lines ───────────────────────────────
-export function gen44() {
+// ── 4.5 Graphing Special Lines ───────────────────────────────
+export function gen45() {
   const q = [];
 
   // ── LEVEL 1 — EASY ──────────────────────────────────────────
@@ -1588,8 +1670,8 @@ export function gen44() {
   return q;
 }
 
-// ── 4.5 Transformations of Lines ─────────────────────────────
-export function gen45() {
+// ── 4.6 Transformations of Lines ─────────────────────────────
+export function gen46() {
   const q = [];
 
   // ── LEVEL 1 — EASY ──────────────────────────────────────────
@@ -1671,8 +1753,8 @@ export function gen45() {
   return q;
 }
 
-// ── 4.6 Finding the Equation of a Line ───────────────────────
-export function gen46() {
+// ── 4.7 Finding the Equation of a Line ───────────────────────
+export function gen47() {
   const q = [];
 
   // ── LEVEL 1 — EASY ──────────────────────────────────────────
@@ -1754,9 +1836,10 @@ export function gen46() {
   return q;
 }
 
-// ── 4.7 General Form of a Line ───────────────────────────────
-// User-authored 60-question set (2026-06-16), answer key verified & corrected.
-export function gen47() {
+// ── 4.8 General Form ──────────────────────────────────────────
+// Merged from the former "General Form of a Line" + "General Form vs
+// Slope-Intercept Form" 60-question sets (2026-06-16), answer key verified.
+export function gen48() {
   const q = [];
 
   // ── LEVEL 1 — EASY ──────────────────────────────────────────
@@ -1765,137 +1848,53 @@ export function gen47() {
   q.push(mc("easy", "The slope of the line $2x + 3y - 6 = 0$ is:", ["$\\frac{2}{3}$", "$-\\frac{2}{3}$", "$-\\frac{3}{2}$", "$2$"], 1, "$3y = -2x + 6 \\Rightarrow y = -\\frac{2}{3}x + 2$."));
   q.push(mc("easy", "The y-intercept of $4x - 2y + 8 = 0$ is:", ["$4$", "$-4$", "$2$", "$8$"], 0, "$-2y = -4x - 8 \\Rightarrow y = 2x + 4$."));
   q.push(mc("easy", "The x-intercept of $3x + 4y - 12 = 0$ is:", ["$3$", "$4$", "$-4$", "$12$"], 1, "Set $y=0$: $3x - 12 = 0 \\Rightarrow x = 4$."));
+  q.push(mc("easy", "Convert $y = 2x + 3$ to general form:", ["$2x - y + 3 = 0$", "$2x + y - 3 = 0$", "$-2x + y - 3 = 0$", "$2x - y - 3 = 0$"], 0));
+  q.push(mc("easy", "Convert $3x - 4y + 12 = 0$ to slope-intercept form:", ["$y = \\frac{3}{4}x + 3$", "$y = -\\frac{3}{4}x + 3$", "$y = \\frac{3}{4}x - 3$", "$y = -\\frac{3}{4}x - 3$"], 0));
   q.push(ms("easy", "Which are in general form?", ["$2x - 5y + 3 = 0$", "$-x + 4y - 7 = 0$", "$y = 2x + 1$", "$3x + 2y - 4 = 0$"], [0, 1, 3]));
+  q.push(ms("easy", "Which equations are in slope-intercept form?", ["$y = 3x - 5$", "$y = -\\frac{2}{3}x + 4$", "$2x + y - 3 = 0$", "$y = 7$"], [0, 1, 3]));
   q.push(ms("easy", "Which lines have slope $-\\frac{1}{2}$?", ["$x + 2y - 4 = 0$", "$2x + 4y - 8 = 0$", "$-x - 2y + 6 = 0$", "$x - 2y + 3 = 0$"], [0, 1, 2], "D gives $y = \\frac{1}{2}x + \\frac{3}{2}$."));
-  q.push(ms("easy", "Which lines have y-intercept $3$?", ["$2x + y - 3 = 0$", "$x - 3y + 9 = 0$", "$4x - y + 3 = 0$", "$y = 3$"], [0, 1, 2, 3], "All four give $y = (\\ldots)x + 3$."));
-  q.push(mc("easy", "The x-intercept of $2x - 3y - 6 = 0$ is:", ["$3$", "$-3$", "$2$", "$6$"], 0, "Set $y=0$: $2x - 6 = 0 \\Rightarrow x = 3$."));
-  q.push(mc("easy", "Converting $y = 3x - 2$ to general form gives:", ["$3x - y - 2 = 0$", "$3x + y - 2 = 0$", "$x - 3y - 2 = 0$", "$3x - y + 2 = 0$"], 0));
   q.push(tf("easy", "The general form of a line is $Ax + By + C = 0$.", true));
-  q.push(tf("easy", "The slope of $3x + 4y - 12 = 0$ is $-\\frac{3}{4}$.", true));
-  q.push(tf("easy", "The y-intercept of $2x - y + 5 = 0$ is $5$.", true, "$-y = -2x - 5 \\Rightarrow y = 2x + 5$."));
+  q.push(tf("easy", "The general form and slope-intercept form represent different lines.", false, "They represent the same line."));
   q.push(tf("easy", "The x-intercept of $5x - 10 = 0$ is $2$.", true, "$5x = 10 \\Rightarrow x = 2$."));
-  q.push(tf("easy", "$y = mx + b$ is the general form.", false, "That is slope-intercept form."));
   q.push(fill("easy", "Convert $y = 2x + 3$ to general form: ___.", ["2x-y+3=0", "2x - y + 3 = 0"]));
+  q.push(fill("easy", "Convert $2x + 5y - 10 = 0$ to slope-intercept form: $y =$ ___.", ["-2/5x+2", "-\\frac{2}{5}x+2", "-0.4x+2", "-\\frac{2}{5}x + 2"]));
   q.push(num("easy", "The slope of $4x - 2y + 6 = 0$ is ___.", 2, 0));
   q.push(num("easy", "The y-intercept of $3x + y - 4 = 0$ is ___.", 4, 0));
-  q.push(num("easy", "The x-intercept of $2x + 5y - 10 = 0$ is ___.", 5, 0));
   q.push(fill("easy", "In general form $Ax + By + C = 0$, the slope is ___.", ["-A/B", "-\\frac{A}{B}", "-a/b"]));
 
   // ── LEVEL 2 — MEDIUM ────────────────────────────────────────
   q.push(mc("medium", "A line has equation $3x - 4y + 12 = 0$. Its slope and y-intercept are:", ["$m = \\frac{3}{4},\\ b = 3$", "$m = \\frac{3}{4},\\ b = -3$", "$m = -\\frac{3}{4},\\ b = 3$", "$m = \\frac{4}{3},\\ b = -3$"], 0, "$-4y = -3x - 12 \\Rightarrow y = \\frac{3}{4}x + 3$."));
-  q.push(mc("medium", "A line has equation $2x - y - 1 = 0$. Does it pass through $(3,4)$?", ["Yes", "No", "Cannot determine", "Only if parallel"], 1, "$2(3) - 4 - 1 = 1 \\neq 0$."));
   q.push(mc("medium", "The equation of a line with slope $-2$ and y-intercept $5$ in general form is:", ["$2x + y - 5 = 0$", "$2x - y + 5 = 0$", "$-2x + y - 5 = 0$", "$x + 2y - 5 = 0$"], 0, "$y = -2x + 5 \\Rightarrow 2x + y - 5 = 0$."));
-  q.push(mc("medium", "Which line is parallel to $3x - 2y + 4 = 0$?", ["$3x - 2y + 8 = 0$", "$6x - 4y + 4 = 0$", "$3x + 2y + 4 = 0$", "Both $3x - 2y + 8 = 0$ and $6x - 4y + 4 = 0$"], 3, "Both have slope $\\frac{3}{2}$."));
+  q.push(mc("medium", "Convert $y = -\\frac{2}{3}x + 5$ to general form:", ["$2x + 3y - 15 = 0$", "$2x - 3y + 15 = 0$", "$-2x + 3y - 15 = 0$", "$2x + 3y + 15 = 0$"], 0, "$3y = -2x + 15 \\Rightarrow 2x + 3y - 15 = 0$."));
+  q.push(mc("medium", "A line has x-intercept $4$ and y-intercept $-2$. Its slope-intercept equation is:", ["$y = \\frac{1}{2}x - 2$", "$y = -\\frac{1}{2}x - 2$", "$y = 2x - 2$", "$y = -2x + 4$"], 0, "Slope $\\frac{-2-0}{0-4} = \\frac{1}{2}$; y-intercept $-2$."));
   q.push(mc("medium", "Which line is perpendicular to $2x + 3y - 6 = 0$?", ["$3x - 2y + 5 = 0$", "$3x + 2y + 4 = 0$", "$-2x + 3y + 1 = 0$", "$4x + 6y - 12 = 0$"], 0, "Given slope $-\\frac{2}{3}$; perpendicular slope $\\frac{3}{2}$, which $3x - 2y + 5 = 0$ has."));
   q.push(ms("medium", "Which equations represent the same line as $2x - 3y + 6 = 0$?", ["$-2x + 3y - 6 = 0$", "$4x - 6y + 12 = 0$", "$y = \\frac{2}{3}x + 2$", "$y = \\frac{2}{3}x - 2$"], [0, 1, 2], "A is $\\times(-1)$, B is $\\times 2$, C is the slope form."));
-  q.push(ms("medium", "Which statements about $4x + 2y - 8 = 0$ are true?", ["Slope $= -2$", "y-intercept $= 4$", "x-intercept $= 2$", "Passes through $(1,2)$"], [0, 1, 2, 3], "$y = -2x + 4$."));
-  q.push(ms("medium", "A line has x-intercept $a$ and y-intercept $b$. Its general form is:", ["$\\frac{x}{a} + \\frac{y}{b} = 1$", "$bx + ay = ab$", "$bx + ay - ab = 0$", "$\\frac{x}{a} + \\frac{y}{b} - 1 = 0$"], [0, 1, 2, 3]));
-  q.push(mc("medium", "A line is perpendicular to $3x + 4y - 12 = 0$ and passes through $(0,5)$. Its equation is:", ["$4x - 3y + 15 = 0$", "$4x - 3y - 15 = 0$", "$3x + 4y - 20 = 0$", "$3x - 4y + 15 = 0$"], 0, "Perp slope $\\frac{4}{3}$; $y = \\frac{4}{3}x + 5 \\Rightarrow 4x - 3y + 15 = 0$."));
-  q.push(mc("medium", "A line is parallel to $2x + 3y - 5 = 0$ and passes through $(1,-2)$. Its equation is:", ["$2x + 3y + 4 = 0$", "$2x + 3y - 4 = 0$", "$3x - 2y + 4 = 0$", "$2x + 3y - 8 = 0$"], 0, "$2(1) + 3(-2) + C = 0 \\Rightarrow C = 4$."));
+  q.push(ms("medium", "Convert $3x - 2y + 6 = 0$ to slope-intercept form. Which are correct?", ["$y = \\frac{3}{2}x + 3$", "$y = 1.5x + 3$", "$y = \\frac{3}{2}x - 3$", "$y = -\\frac{3}{2}x + 3$"], [0, 1], "$-2y = -3x - 6 \\Rightarrow y = \\frac{3}{2}x + 3$."));
+  q.push(ms("medium", "Which are valid general forms of $y = 5$?", ["$y - 5 = 0$", "$0x + y - 5 = 0$", "$x - 5 = 0$", "$y = 5$"], [0, 1], "$x - 5 = 0$ is the vertical line $x=5$; $y = 5$ is not in general form."));
   q.push(tf("medium", "The slope of $Ax + By + C = 0$ is $-\\frac{A}{B}$.", true));
   q.push(tf("medium", "The y-intercept of $Ax + By + C = 0$ is $-\\frac{C}{B}$.", true));
-  q.push(tf("medium", "The x-intercept of $Ax + By + C = 0$ is $-\\frac{C}{A}$.", true));
-  q.push(tf("medium", "Any line can be written in the form $Ax + By + C = 0$.", true));
-  q.push(tf("medium", "Parallel lines in general form have proportional $A$ and $B$ coefficients.", true));
+  q.push(tf("medium", "Lines in general form are always written with integer coefficients.", false, "They can have fractions, though integers are preferred."));
+  q.push(tf("medium", "The general form is the easier form for reading off the slope quickly.", false, "Slope-intercept form shows the slope directly."));
   q.push(fill("medium", "The slope of $5x - 2y + 10 = 0$ is ___.", ["5/2", "\\frac{5}{2}", "2.5"]));
   q.push(num("medium", "The y-intercept of $3x + 4y - 8 = 0$ is ___.", 2, 0));
-  q.push(num("medium", "The x-intercept of $2x - 3y - 12 = 0$ is ___.", 6, 0));
   q.push(fill("medium", "The equation $y = -3x + 7$ in general form is ___.", ["3x+y-7=0", "3x + y - 7 = 0"]));
   q.push(fill("medium", "A line has x-intercept $4$ and y-intercept $-3$. Its general form ($A>0$) is ___.", ["3x-4y-12=0", "3x - 4y - 12 = 0"]));
 
   // ── LEVEL 3 — HARD ──────────────────────────────────────────
   q.push(mc("hard", "A line passes through $(2,-1)$ and is perpendicular to $4x - 2y + 6 = 0$. Its general form is:", ["$x + 2y = 0$", "$x - 2y = 0$", "$2x + y - 3 = 0$", "$x + 2y - 4 = 0$"], 0, "Given slope $2$; perp $-\\frac{1}{2}$; $y + 1 = -\\frac{1}{2}(x - 2) \\Rightarrow x + 2y = 0$."));
   q.push(mc("hard", "The line $3x + 4y - 12 = 0$ is shifted up by $3$ units. The new general form is:", ["$3x + 4y - 24 = 0$", "$3x + 4y - 3 = 0$", "$3x + 4y - 12 = 0$", "$3x + 4y = 0$"], 0, "Replace $y$ with $y - 3$: $3x + 4(y-3) - 12 = 0 \\Rightarrow 3x + 4y - 24 = 0$."));
-  q.push(mc("hard", "The distance from the origin to the line $3x + 4y - 10 = 0$ is:", ["$2$", "$1$", "$10$", "$5$"], 0, "$\\frac{|C|}{\\sqrt{A^2+B^2}} = \\frac{10}{5} = 2$."));
-  q.push(mc("hard", "A line passes through $(1,1)$ and $(2,3)$. A valid ratio $A : B : C$ for its general form is:", ["$2 : -1 : -1$", "$2 : 1 : -1$", "$2 : 1 : -3$", "$1 : -1 : -1$"], 0, "Slope $2$; $y = 2x - 1 \\Rightarrow 2x - y - 1 = 0$."));
-  q.push(mc("hard", "The intersection of $2x + y - 3 = 0$ and $x - 2y + 1 = 0$ is:", ["$(1,1)$", "$(1,0)$", "$(0,3)$", "$(2,-1)$"], 0, "$y = 3 - 2x$; $x - 2(3-2x) + 1 = 0 \\Rightarrow 5x - 5 = 0 \\Rightarrow x = 1, y = 1$."));
-  q.push(ms("hard", "Which lines have the same x-intercept as $3x - 4y + 12 = 0$?", ["$3x - 4y + 24 = 0$", "$6x - 8y + 24 = 0$", "$3x - 4y - 12 = 0$", "$x - \\frac{4}{3}y + 4 = 0$"], [1, 3], "The x-intercept is $-4$; B and D also give $x = -4$."));
-  q.push(ms("hard", "The line $2x - 3y + 6 = 0$ is reflected across the y-axis. The new equation is:", ["$-2x - 3y + 6 = 0$", "$2x + 3y + 6 = 0$", "$-2x + 3y + 6 = 0$", "$2x + 3y - 6 = 0$"], [0], "Replace $x$ with $-x$."));
-  q.push(ms("hard", "Which lines are parallel to $Ax + By + C = 0$?", ["$Ax + By + D = 0$", "$kAx + kBy + D = 0$", "$Ax - By + C = 0$", "$-Ax - By + C = 0$"], [0, 1, 3], "Parallel ⇔ same $A:B$ ratio."));
-  q.push(mc("hard", "The distance between the parallel lines $3x + 4y - 10 = 0$ and $3x + 4y + 20 = 0$ is:", ["$6$", "$10$", "$30$", "$2$"], 0, "$\\frac{|C_1 - C_2|}{\\sqrt{A^2+B^2}} = \\frac{30}{5} = 6$."));
-  q.push(ms("hard", "The line $3x + 4y - 24 = 0$ is shifted left by $2$ and down by $3$. Which represent the new line?", ["$3x + 4y - 30 = 0$", "$3x + 4y - 18 = 0$", "$3(x+2) + 4(y+3) - 24 = 0$", "$3x + 4y - 6 = 0$"], [2, 3], "$x \\to x+2$, $y \\to y+3$ gives $3x + 4y - 6 = 0$; option C is the same, unsimplified."));
-  q.push(tf("hard", "The general form of a line is unique up to multiplication by a non-zero constant.", true));
-  q.push(tf("hard", "Lines $2x + 3y - 5 = 0$ and $4x + 6y - 10 = 0$ represent the same line.", true));
-  q.push(tf("hard", "The distance from $(x_1, y_1)$ to $Ax + By + C = 0$ is $\\frac{|Ax_1 + By_1 + C|}{\\sqrt{A^2+B^2}}$.", true));
-  q.push(tf("hard", "A line $Ax + By + C = 0$ has slope $-\\frac{A}{B}$ and y-intercept $-\\frac{C}{B}$.", true));
-  q.push(tf("hard", "Lines $2x + 3y - 4 = 0$ and $3x - 2y + 5 = 0$ are perpendicular.", true, "Slopes $-\\frac{2}{3}$ and $\\frac{3}{2}$; product $-1$."));
-  q.push(fill("hard", "The line through $(1,-2)$ with slope $-\\frac{2}{3}$ in general form is ___.", ["2x+3y+4=0", "2x + 3y + 4 = 0"]));
-  q.push(num("hard", "The x-intercept of $5x - 3y + 15 = 0$ is ___.", -3, 0));
-  q.push(num("hard", "The distance between the parallel lines $4x - 3y + 10 = 0$ and $4x - 3y - 15 = 0$ is ___.", 5, 0));
-  q.push(fill("hard", "A line has slope $2$ and passes through $(3,-1)$. Its general form is ___.", ["2x-y-7=0", "2x - y - 7 = 0"]));
-  q.push(fill("hard", "The lines $2x + 3y - 6 = 0$ and $3x - 2y - 9 = 0$ intersect at ___.", ["(3,0)", "(3, 0)", "3,0"]));
-
-  return q;
-}
-
-// ── 4.8 General Form vs Slope-Intercept Form ─────────────────
-// User-authored 60-question set (2026-06-16), answer key verified & corrected.
-export function gen48() {
-  const q = [];
-
-  // ── LEVEL 1 — EASY ──────────────────────────────────────────
-  q.push(mc("easy", "The slope-intercept form of a line is:", ["$Ax + By + C = 0$", "$y = mx + b$", "$y - y_1 = m(x - x_1)$", "$\\frac{x}{a} + \\frac{y}{b} = 1$"], 1));
-  q.push(mc("easy", "Convert $y = 2x + 3$ to general form:", ["$2x - y + 3 = 0$", "$2x + y - 3 = 0$", "$-2x + y - 3 = 0$", "$2x - y - 3 = 0$"], 0));
-  q.push(mc("easy", "Convert $3x - 4y + 12 = 0$ to slope-intercept form:", ["$y = \\frac{3}{4}x + 3$", "$y = -\\frac{3}{4}x + 3$", "$y = \\frac{3}{4}x - 3$", "$y = -\\frac{3}{4}x - 3$"], 0));
-  q.push(mc("easy", "The slope of $y = -5x + 2$ is:", ["$-5$", "$2$", "$5$", "$-2$"], 0));
-  q.push(mc("easy", "The y-intercept of $2x + 3y - 6 = 0$ is:", ["$2$", "$-2$", "$3$", "$-3$"], 0, "$3y = -2x + 6 \\Rightarrow y = -\\frac{2}{3}x + 2$."));
-  q.push(ms("easy", "Which equations are in slope-intercept form?", ["$y = 3x - 5$", "$y = -\\frac{2}{3}x + 4$", "$2x + y - 3 = 0$", "$y = 7$"], [0, 1, 3]));
-  q.push(ms("easy", "Which equations are in general form?", ["$3x - 2y + 5 = 0$", "$-x + 4y - 7 = 0$", "$y = 2x + 1$", "$x - 3y = 0$"], [0, 1, 3]));
-  q.push(ms("easy", "Convert $y = -4x + 6$ to general form. Which are correct?", ["$4x + y - 6 = 0$", "$-4x - y + 6 = 0$", "$4x - y - 6 = 0$", "$4x + y + 6 = 0$"], [0, 1], "B is A multiplied by $-1$ (same line)."));
-  q.push(ms("easy", "Convert $5x - 2y + 10 = 0$ to slope-intercept form. Which are correct?", ["$y = \\frac{5}{2}x + 5$", "$y = 2.5x + 5$", "$y = -\\frac{5}{2}x - 5$", "$y = 2.5x - 5$"], [0, 1]));
-  q.push(ms("easy", "Which lines have slope $3$?", ["$y = 3x - 2$", "$3x - y + 5 = 0$", "$-3x + y - 4 = 0$", "$y = -3x + 1$"], [0, 1, 2], "B: $y = 3x + 5$; C: $y = 3x + 4$."));
-  q.push(tf("easy", "$y = mx + b$ is the slope-intercept form.", true));
-  q.push(tf("easy", "$Ax + By + C = 0$ is the general form.", true));
-  q.push(tf("easy", "The slope of $3x + 4y - 12 = 0$ is $-\\frac{3}{4}$.", true));
-  q.push(tf("easy", "The y-intercept of $y = 2x - 5$ is $-5$.", true));
-  q.push(tf("easy", "The general form and slope-intercept form represent different lines.", false, "They represent the same line."));
-  q.push(fill("easy", "Convert $y = 3x - 2$ to general form: ___.", ["3x-y-2=0", "3x - y - 2 = 0"]));
-  q.push(fill("easy", "Convert $2x + 5y - 10 = 0$ to slope-intercept form: $y =$ ___.", ["-2/5x+2", "-\\frac{2}{5}x+2", "-0.4x+2", "-\\frac{2}{5}x + 2"]));
-  q.push(num("easy", "The slope of $y = -7x + 4$ is ___.", -7, 0));
-  q.push(num("easy", "The y-intercept of $4x - y + 3 = 0$ is ___.", 3, 0));
-  q.push(fill("easy", "In general form $Ax + By + C = 0$, the slope is ___.", ["-A/B", "-\\frac{A}{B}", "-a/b"]));
-
-  // ── LEVEL 2 — MEDIUM ────────────────────────────────────────
-  q.push(mc("medium", "A line has equation $2x - 3y + 6 = 0$. Its slope and y-intercept are:", ["$m = \\frac{2}{3},\\ b = 2$", "$m = -\\frac{2}{3},\\ b = -2$", "$m = \\frac{3}{2},\\ b = 6$", "$m = -\\frac{3}{2},\\ b = -6$"], 0, "$-3y = -2x - 6 \\Rightarrow y = \\frac{2}{3}x + 2$."));
-  q.push(mc("medium", "Which line has the same slope as $3x + 4y - 8 = 0$?", ["$3x + 4y + 5 = 0$", "$6x + 8y - 16 = 0$", "$y = -\\frac{3}{4}x + 2$", "All of the above"], 3, "All have slope $-\\frac{3}{4}$."));
-  q.push(mc("medium", "Convert $y = -\\frac{2}{3}x + 5$ to general form:", ["$2x + 3y - 15 = 0$", "$2x - 3y + 15 = 0$", "$-2x + 3y - 15 = 0$", "$2x + 3y + 15 = 0$"], 0, "$3y = -2x + 15 \\Rightarrow 2x + 3y - 15 = 0$."));
-  q.push(mc("medium", "A line has x-intercept $4$ and y-intercept $-2$. Its slope-intercept equation is:", ["$y = \\frac{1}{2}x - 2$", "$y = -\\frac{1}{2}x - 2$", "$y = 2x - 2$", "$y = -2x + 4$"], 0, "Slope $\\frac{-2-0}{0-4} = \\frac{1}{2}$; y-intercept $-2$."));
-  q.push(mc("medium", "The line $2x - y + 3 = 0$ and $y = 2x + 3$ are:", ["The same line", "Parallel but distinct", "Perpendicular", "Intersecting at one point only"], 0, "$2x - y + 3 = 0 \\Rightarrow y = 2x + 3$."));
-  q.push(ms("medium", "Which equations represent the same line as $y = 4x - 2$?", ["$4x - y - 2 = 0$", "$-4x + y + 2 = 0$", "$8x - 2y - 4 = 0$", "$y + 2 = 4x$"], [0, 1, 2, 3]));
-  q.push(ms("medium", "Convert $3x - 2y + 6 = 0$ to slope-intercept form. Which are correct?", ["$y = \\frac{3}{2}x + 3$", "$y = 1.5x + 3$", "$y = \\frac{3}{2}x - 3$", "$y = -\\frac{3}{2}x + 3$"], [0, 1], "$-2y = -3x - 6 \\Rightarrow y = \\frac{3}{2}x + 3$."));
-  q.push(ms("medium", "A line has slope $-\\frac{1}{2}$ and passes through $(0,4)$. Which represent it?", ["$y = -\\frac{1}{2}x + 4$", "$x + 2y - 8 = 0$", "$y = -\\frac{1}{2}x - 4$", "$x + 2y + 8 = 0$"], [0, 1]));
-  q.push(ms("medium", "Which lines are perpendicular to $2x + 3y - 5 = 0$?", ["$y = \\frac{3}{2}x + 1$", "$3x - 2y + 7 = 0$", "$y = -\\frac{2}{3}x + 4$", "$2x - 3y + 6 = 0$"], [0, 1], "Given slope $-\\frac{2}{3}$; perpendicular slope $\\frac{3}{2}$."));
-  q.push(ms("medium", "Which are valid general forms of $y = 5$?", ["$y - 5 = 0$", "$0x + y - 5 = 0$", "$x - 5 = 0$", "$y = 5$"], [0, 1], "$x - 5 = 0$ is the vertical line $x=5$; $y = 5$ is not in general form."));
-  q.push(tf("medium", "$y = mx + b$ can always be rewritten as $mx - y + b = 0$.", true, "$mx - y + b = 0 \\Rightarrow y = mx + b$."));
-  q.push(tf("medium", "The slope of $Ax + By + C = 0$ is $-\\frac{A}{B}$.", true));
-  q.push(tf("medium", "The y-intercept of $Ax + By + C = 0$ is $-\\frac{C}{B}$.", true));
-  q.push(tf("medium", "Lines in general form are always written with integer coefficients.", false, "They can have fractions, though integers are preferred."));
-  q.push(tf("medium", "The general form is the easier form for reading off the slope quickly.", false, "Slope-intercept form shows the slope directly."));
-  q.push(fill("medium", "Convert $4x - 3y + 9 = 0$ to slope-intercept form: $y =$ ___.", ["4/3x+3", "\\frac{4}{3}x+3", "\\frac{4}{3}x + 3"]));
-  q.push(fill("medium", "Convert $y = \\frac{5}{2}x - 3$ to general form (integers): ___.", ["5x-2y-6=0", "5x - 2y - 6 = 0"]));
-  q.push(num("medium", "The slope of $y = -3x + 7$ (equivalently $3x + y - 7 = 0$) is ___.", -3, 0));
-  q.push(num("medium", "The line $y = 2x - 5$ has general form $2x - y - 5 = 0$. Its y-intercept is ___.", -5, 0));
-  q.push(fill("medium", "Convert $x + 2y - 6 = 0$ to slope-intercept form: $y =$ ___.", ["-1/2x+3", "-\\frac{1}{2}x+3", "-0.5x+3", "-\\frac{1}{2}x + 3"]));
-
-  // ── LEVEL 3 — HARD ──────────────────────────────────────────
-  q.push(mc("hard", "The line $3x - 4y + 12 = 0$ is shifted up by $3$ units. The new general form is:", ["$3x - 4y + 24 = 0$", "$3x - 4y + 12 = 0$", "$3x - 4y - 12 = 0$", "$3x - 4y = 0$"], 0, "Replace $y$ with $y - 3$: $3x - 4(y-3) + 12 = 0 \\Rightarrow 3x - 4y + 24 = 0$."));
   q.push(mc("hard", "The line $2x + 3y - 6 = 0$ is reflected across the x-axis. The new slope-intercept equation is:", ["$y = \\frac{2}{3}x - 2$", "$y = -\\frac{2}{3}x - 2$", "$y = \\frac{2}{3}x + 2$", "$y = -\\frac{2}{3}x + 2$"], 0, "Original $y = -\\frac{2}{3}x + 2$; replace $y$ with $-y$: $y = \\frac{2}{3}x - 2$."));
-  q.push(mc("hard", "A line passes through $(2,-1)$ and is perpendicular to $3x - 2y + 4 = 0$. Its general form is:", ["$2x + 3y - 1 = 0$", "$2x + 3y + 1 = 0$", "$2x - 3y - 7 = 0$", "$2x + 3y - 7 = 0$"], 0, "Given slope $\\frac{3}{2}$; perp $-\\frac{2}{3}$; $y+1 = -\\frac{2}{3}(x-2) \\Rightarrow 2x + 3y - 1 = 0$."));
-  q.push(mc("hard", "The lines $3x + 4y - 5 = 0$ and $6x + 8y + 10 = 0$ are:", ["Parallel", "Perpendicular", "The same line", "Intersecting at one point"], 0, "Second $\\div 2$: $3x + 4y + 5 = 0$ — same slope, different intercept."));
   q.push(mc("hard", "The distance between the parallel lines $3x + 4y - 10 = 0$ and $3x + 4y + 20 = 0$ is:", ["$6$", "$10$", "$30$", "$2$"], 0, "$\\frac{|C_1 - C_2|}{\\sqrt{A^2+B^2}} = \\frac{30}{5} = 6$."));
-  q.push(ms("hard", "Which lines are perpendicular to $2x - 3y + 5 = 0$?", ["$3x + 2y - 7 = 0$", "$y = -\\frac{3}{2}x + 4$", "$y = \\frac{3}{2}x + 1$", "$-3x - 2y + 6 = 0$"], [0, 1, 3], "Given slope $\\frac{2}{3}$; perpendicular slope $-\\frac{3}{2}$."));
-  q.push(mc("hard", "A line $y = 2x + 3$ is stretched vertically by factor $2$, then shifted left by $3$ units. Its new equation is:", ["$y = 4x + 18$", "$y = 4x + 6$", "$y = 4x + 12$", "$y = 2x + 9$"], 0, "Stretch: $y = 4x + 6$; shift left $3$: $y = 4(x+3) + 6 = 4x + 18$."));
+  q.push(ms("hard", "Which lines are parallel to $Ax + By + C = 0$?", ["$Ax + By + D = 0$", "$kAx + kBy + D = 0$", "$Ax - By + C = 0$", "$-Ax - By + C = 0$"], [0, 1, 3], "Parallel ⇔ same $A:B$ ratio."));
   q.push(ms("hard", "Which statements comparing general and slope-intercept form are true?", ["Slope-intercept form shows slope and intercept directly", "General form gives a standard $Ax+By+C=0$ way to write any line", "General form can represent vertical lines; slope-intercept cannot", "Both forms can represent any non-vertical line"], [0, 1, 2, 3]));
-  q.push(ms("hard", "A line has slope $m$ and passes through $(x_1, y_1)$. Which are valid general forms?", ["$mx - y + (y_1 - mx_1) = 0$", "$mx - y - mx_1 + y_1 = 0$", "$y - y_1 = m(x - x_1)$", "$-mx + y - (y_1 - mx_1) = 0$"], [0, 1, 3], "C is point-slope form, not general form."));
-  q.push(mc("hard", "The line $3x + 4y - 24 = 0$ is rotated $90^\\circ$ about the origin. Its new slope is:", ["$\\frac{4}{3}$", "$-\\frac{4}{3}$", "$\\frac{3}{4}$", "$-\\frac{3}{4}$"], 0, "Original slope $-\\frac{3}{4}$; a $90^\\circ$ rotation gives the perpendicular slope $\\frac{4}{3}$."));
+  q.push(ms("hard", "Which lines are perpendicular to $2x - 3y + 5 = 0$?", ["$3x + 2y - 7 = 0$", "$y = -\\frac{3}{2}x + 4$", "$y = \\frac{3}{2}x + 1$", "$-3x - 2y + 6 = 0$"], [0, 1, 3], "Given slope $\\frac{2}{3}$; perpendicular slope $-\\frac{3}{2}$."));
+  q.push(tf("hard", "The general form of a line is unique up to multiplication by a non-zero constant.", true));
   q.push(tf("hard", "Every line can be written in both slope-intercept and general form.", false, "Vertical lines cannot be written in slope-intercept form."));
-  q.push(tf("hard", "If $m$ and $b$ are integers, $y = mx + b$ has no fractional coefficients.", true));
   q.push(tf("hard", "The general form $Ax + By + C = 0$ can represent vertical lines.", true, "When $B = 0$."));
-  q.push(tf("hard", "Two lines with the same $A$ and $B$ in general form have the same slope.", true));
-  q.push(tf("hard", "Converting $y = mx + b$ (with integer $m, b$) to general form gives integer coefficients.", true, "$mx - y + b = 0$."));
-  q.push(fill("hard", "The line $y = \\frac{3}{5}x - 2$ in general form (integers, $A>0$) is ___.", ["3x-5y-10=0", "3x - 5y - 10 = 0"]));
+  q.push(tf("hard", "A line $Ax + By + C = 0$ has slope $-\\frac{A}{B}$ and y-intercept $-\\frac{C}{B}$.", true));
+  q.push(fill("hard", "The line through $(1,-2)$ with slope $-\\frac{2}{3}$ in general form is ___.", ["2x+3y+4=0", "2x + 3y + 4 = 0"]));
   q.push(fill("hard", "Convert $4x + 2y - 8 = 0$ to slope-intercept form: $y =$ ___.", ["-2x+4", "-2x + 4"]));
-  q.push(num("hard", "The x-intercept of $2x + 3y - 12 = 0$ is ___.", 6, 0));
+  q.push(num("hard", "The x-intercept of $5x - 3y + 15 = 0$ is ___.", -3, 0));
   q.push(fill("hard", "Write $y = 4x - 7$ in general form ($A>0$): ___.", ["4x-y-7=0", "4x - y - 7 = 0"]));
   q.push(num("hard", "The distance from the point $(1,2)$ to the line $3x + 4y - 10 = 0$ is ___.", 0.2, 0.01));
 
@@ -3266,14 +3265,14 @@ const POOLS = [
   { pos: 10, title: "3.1 Coding Algebraic Concepts", gen: gen31 },
   { pos: 11, title: "3.2 Building Code from Steps", gen: gen32 },
   { pos: 12, title: "3.3 Reading, Predicting & Altering Code", gen: gen33 },
-  { pos: 13, title: "4.1 Linear vs Non-Linear Relations", gen: gen41 },
-  { pos: 14, title: "4.2 Representing Linear Relations", gen: gen42 },
-  { pos: 15, title: "4.3 Comparing Lines", gen: gen43 },
-  { pos: 16, title: "4.4 Graphing Special Lines", gen: gen44 },
-  { pos: 17, title: "4.5 Transformations of Lines", gen: gen45 },
-  { pos: 18, title: "4.6 Finding the Equation of a Line", gen: gen46 },
-  { pos: 19, title: "4.7 General Form of a Line", gen: gen47 },
-  { pos: 20, title: "4.8 General Form vs Slope-Intercept Form", gen: gen48 },
+  { pos: 13, title: "4.1 Relations", gen: gen41 },
+  { pos: 14, title: "4.2 Linear vs Non-Linear Relations", gen: gen42 },
+  { pos: 15, title: "4.3 Representing Linear and Non-Linear Relations", gen: gen43 },
+  { pos: 16, title: "4.4 Comparing Lines", gen: gen44 },
+  { pos: 17, title: "4.5 Graphing Special Lines", gen: gen45 },
+  { pos: 18, title: "4.6 Transformations of Lines", gen: gen46 },
+  { pos: 19, title: "4.7 Finding the Equation of a Line", gen: gen47 },
+  { pos: 20, title: "4.8 General Form", gen: gen48 },
   { pos: 21, title: "4.9 Parallel and Perpendicular Lines", gen: gen49 },
   { pos: 22, title: "5.1 Geometry & Measurement Through History", gen: gen51 },
   { pos: 23, title: "5.2 Designs with Circle & Triangle Properties", gen: gen52 },

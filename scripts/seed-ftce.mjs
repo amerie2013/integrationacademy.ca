@@ -97,13 +97,18 @@ async function run() {
   }
   console.log(`Seeded ${n} FTCE lessons.`);
 
-  // Assignments (delete-then-insert, keyed by code in ftce-assignments.mjs).
-  await db.from("assignments").delete().eq("course_id", course.id);
+  // Assignments, keyed by code in ftce-assignments.mjs. assignments.id is
+  // referenced by submissions.assignment_id ON DELETE CASCADE, so this upserts
+  // by title instead of deleting — a delete-then-insert here would destroy
+  // any student's submitted work.
   const codes = Object.keys(ASSIGN).sort((a, b) => rank(a) - rank(b));
   let a = 0;
   for (const code of codes) {
     const ad = ASSIGN[code];
-    const { error } = await db.from("assignments").insert({ course_id: course.id, title: ad.title, description: ad.description, published: true });
+    const existingA = await db.from("assignments").select("id").eq("course_id", course.id).eq("title", ad.title).maybeSingle();
+    const { error } = existingA.data
+      ? await db.from("assignments").update({ description: ad.description, published: true }).eq("id", existingA.data.id)
+      : await db.from("assignments").insert({ course_id: course.id, title: ad.title, description: ad.description, published: true });
     if (error) throw error;
     a++;
   }

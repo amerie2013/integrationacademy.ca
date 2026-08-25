@@ -113,12 +113,16 @@ async function run() {
   console.log(`\nSeeded ${subjects.length} MCT4C lessons (${full} full, ${subjects.length - full} scaffold).`);
 
   // ── Assignments (K/Application/Thinking, one per topic) ──
-  await db.from("assignments").delete().eq("course_id", course.id);
+  // assignments.id is referenced by submissions.assignment_id ON DELETE CASCADE —
+  // never delete assignment rows (it destroys student submissions). Upsert by title.
   let asg = 0;
   for (const s of subjects) {
     const ad = ASSIGN[s.code];
     if (!ad) continue;
-    const { error: ae } = await db.from("assignments").insert({ course_id: course.id, title: ad.title, description: ad.description, published: true });
+    const existingA = await db.from("assignments").select("id").eq("course_id", course.id).eq("title", ad.title).maybeSingle();
+    const { error: ae } = existingA.data
+      ? await db.from("assignments").update({ description: ad.description, published: true }).eq("id", existingA.data.id)
+      : await db.from("assignments").insert({ course_id: course.id, title: ad.title, description: ad.description, published: true });
     if (ae) throw ae;
     asg++;
   }

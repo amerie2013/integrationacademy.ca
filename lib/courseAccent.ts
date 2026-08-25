@@ -18,7 +18,7 @@ export const ACCENTS = {
   orange: { primary: "#ea580c", dark: "#9a3412", soft: "#fff7ed", softBorder: "#fed7aa", badge: "#ea580c", badgeBg: "#fff7ed" },
 } as const satisfies Record<string, Accent>;
 
-export const CODE_ACCENT: Record<string, keyof typeof ACCENTS> = { ALG1: "orange", GEO1: "orange" };
+export const CODE_ACCENT: Record<string, keyof typeof ACCENTS> = { ALG1: "orange", GEO1: "orange", FTCEMATH612: "orange" };
 
 export function accentFor(code?: string | null): Accent {
   return ACCENTS[CODE_ACCENT[code ?? ""] ?? "default"];

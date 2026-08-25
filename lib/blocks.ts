@@ -49,6 +49,10 @@ export type Block =
       paramMin: number;
       paramMax: number;
       paramInit: number;
+      // Optional: independent sliders (e.g. m1, b1, m2, b2), one each, in
+      // addition to (or instead of) the single shared `param` above. Curve
+      // expressions can reference any of these names directly.
+      params?: { name: string; min: number; max: number; init: number }[];
       xMin: number;
       xMax: number;
       yMin: number;

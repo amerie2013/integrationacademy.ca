@@ -1,4 +1,4 @@
-// Replace ONLY the "4.8 General Form vs Slope-Intercept Form" questions in the
+// Replace ONLY the "4.8 General Form" questions in the
 // MTH1W bank, leaving every other topic untouched.
 // Re-runnable. Usage: node scripts/replace-bank-4_8.mjs
 
@@ -18,7 +18,7 @@ const db = createClient(env.NEXT_PUBLIC_SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_
   auth: { persistSession: false },
 });
 
-const TOPIC = "4.8 General Form vs Slope-Intercept Form";
+const TOPIC = "4.8 General Form";
 const LESSON_POS = 20; // 4.8 is position 22
 
 async function run() {

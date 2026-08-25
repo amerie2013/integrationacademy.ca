@@ -14,12 +14,15 @@ const PALETTE = ["#1b7a44", "#0d9488", "#db2777", "#d97706", "#2563eb"];
  * "coincident / infinite solutions". This is the interactive replacement for a
  * static system-of-equations graph.
  */
+export type SliderParam = { name: string; min: number; max: number; init: number };
+
 export function MultiGraph({
   curves,
   param = "",
   paramMin = -5,
   paramMax = 5,
   paramInit = 1,
+  params,
   xMin = -10,
   xMax = 10,
   yMin = -10,
@@ -34,6 +37,9 @@ export function MultiGraph({
   paramMin?: number;
   paramMax?: number;
   paramInit?: number;
+  // Independent sliders (e.g. m1, b1, m2, b2) — each curve's expr can
+  // reference any of these names directly, in addition to `x`.
+  params?: SliderParam[];
   xMin?: number;
   xMax?: number;
   yMin?: number;
@@ -45,9 +51,14 @@ export function MultiGraph({
 }) {
   const [a, setA] = useState(paramInit);
   const hasParam = param.trim().length > 0;
+  const sliders = params ?? [];
+  const [values, setValues] = useState<Record<string, number>>(
+    () => Object.fromEntries(sliders.map((p) => [p.name, p.init]))
+  );
+  const setValue = (name: string, v: number) => setValues((prev) => ({ ...prev, [name]: v }));
 
   const fns = useMemo(() => curves.map((c) => safeCompile(c.expr)), [curves]);
-  const vars = (x: number) => (hasParam ? { x, [param]: a } : { x });
+  const vars = (x: number) => ({ x, ...(hasParam ? { [param]: a } : {}), ...values });
 
   const sx = (x: number) => ((x - xMin) / (xMax - xMin)) * width;
   const sy = (y: number) => height - ((y - yMin) / (yMax - yMin)) * height;
@@ -66,7 +77,7 @@ export function MultiGraph({
       }
       return d;
     });
-  }, [fns, a, xMin, xMax, yMin, yMax]);
+  }, [fns, a, values, xMin, xMax, yMin, yMax]);
 
   // Intersection of first two curves
   const intersection = useMemo(() => {
@@ -97,7 +108,7 @@ export function MultiGraph({
     if (zeros / sample > 0.9) return { kind: "infinite" as const };
     if (root === null) return { kind: "none" as const };
     return { kind: "point" as const, x: root, y: fns[0](vars(root)) };
-  }, [fns, a, xMin, xMax, markIntersection]);
+  }, [fns, a, values, xMin, xMax, markIntersection]);
 
   const grid: React.ReactElement[] = [];
   for (let gx = Math.ceil(xMin); gx <= xMax; gx++)
@@ -144,6 +155,27 @@ export function MultiGraph({
         <div style={{ marginTop: 12, display: "flex", alignItems: "center", gap: 14 }}>
           <label style={{ fontWeight: 700, fontSize: 14, color: "#0f172a", minWidth: 70 }}>{param} = {a.toFixed(1)}</label>
           <input type="range" min={paramMin} max={paramMax} step={0.1} value={a} onChange={(e) => setA(parseFloat(e.target.value))} style={{ flex: 1, accentColor: "#1b7a44" }} />
+        </div>
+      )}
+
+      {sliders.length > 0 && (
+        <div style={{ marginTop: 12, display: "grid", gap: 10 }}>
+          {sliders.map((p) => (
+            <div key={p.name} style={{ display: "flex", alignItems: "center", gap: 14 }}>
+              <label style={{ fontWeight: 700, fontSize: 14, color: "#0f172a", minWidth: 70 }}>
+                {p.name} = {values[p.name]?.toFixed(1)}
+              </label>
+              <input
+                type="range"
+                min={p.min}
+                max={p.max}
+                step={0.1}
+                value={values[p.name] ?? p.init}
+                onChange={(e) => setValue(p.name, parseFloat(e.target.value))}
+                style={{ flex: 1, accentColor: "#1b7a44" }}
+              />
+            </div>
+          ))}
         </div>
       )}
 

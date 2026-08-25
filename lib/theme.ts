@@ -1,6 +1,7 @@
 // Shared design tokens for the adult (high-school / university) experience.
-// Deliberately restrained: a serious indigo/slate palette, clean sans-serif,
-// no cartoon fonts or decorative emoji in the UI chrome.
+// Deliberately restrained: dark navy/slate ground with a forest-green primary
+// (matches the logo), clean sans-serif, no cartoon fonts or decorative emoji
+// in the UI chrome.
 
 export const theme = {
   font: {
@@ -18,7 +19,7 @@ export const theme = {
     text: "#0f172a",
     textMuted: "#475569",
     textFaint: "#94a3b8",
-    primary: "#1b7a44", // indigo-700
+    primary: "#1b7a44", // forest green — matches the logo
     primaryHover: "#0d5c30",
     primarySoft: "#e7f6ec",
     accent: "#0d9488", // teal-600

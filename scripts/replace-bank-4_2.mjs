@@ -1,4 +1,4 @@
-// Replace ONLY the "4.2 Representing Linear Relations" questions in the MTH1W
+// Replace ONLY the "4.2 Linear vs Non-Linear Relations" questions in the MTH1W
 // bank, leaving every other topic untouched.
 // Re-runnable. Usage: node scripts/replace-bank-4_2.mjs
 
@@ -18,7 +18,7 @@ const db = createClient(env.NEXT_PUBLIC_SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_
   auth: { persistSession: false },
 });
 
-const TOPIC = "4.2 Representing Linear Relations";
+const TOPIC = "4.2 Linear vs Non-Linear Relations";
 const LESSON_POS = 14; // 4.2 is position 16
 
 async function run() {

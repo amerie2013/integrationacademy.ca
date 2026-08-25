@@ -1,4 +1,4 @@
-// Replace ONLY the "4.7 General Form of a Line" questions in the MTH1W bank,
+// Replace ONLY the "4.7 Finding the Equation of a Line" questions in the MTH1W bank,
 // leaving every other topic untouched.
 // Re-runnable. Usage: node scripts/replace-bank-4_7.mjs
 
@@ -18,7 +18,7 @@ const db = createClient(env.NEXT_PUBLIC_SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_
   auth: { persistSession: false },
 });
 
-const TOPIC = "4.7 General Form of a Line";
+const TOPIC = "4.7 Finding the Equation of a Line";
 const LESSON_POS = 19; // 4.7 is position 21
 
 async function run() {

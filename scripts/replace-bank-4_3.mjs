@@ -1,4 +1,4 @@
-// Replace ONLY the "4.3 Comparing Lines" questions in the MTH1W bank,
+// Replace ONLY the "4.3 Representing Linear and Non-Linear Relations" questions in the MTH1W bank,
 // leaving every other topic untouched.
 // Re-runnable. Usage: node scripts/replace-bank-4_3.mjs
 
@@ -18,7 +18,7 @@ const db = createClient(env.NEXT_PUBLIC_SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_
   auth: { persistSession: false },
 });
 
-const TOPIC = "4.3 Comparing Lines";
+const TOPIC = "4.3 Representing Linear and Non-Linear Relations";
 const LESSON_POS = 15; // 4.3 is position 17
 
 async function run() {

@@ -1,4 +1,4 @@
-// Replace ONLY the "4.1 Linear vs Non-Linear Relations" questions in the MTH1W
+// Replace ONLY the "4.1 Relations" questions in the MTH1W
 // bank, leaving every other topic untouched.
 // Re-runnable. Usage: node scripts/replace-bank-4_1.mjs
 
@@ -18,7 +18,7 @@ const db = createClient(env.NEXT_PUBLIC_SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_
   auth: { persistSession: false },
 });
 
-const TOPIC = "4.1 Linear vs Non-Linear Relations";
+const TOPIC = "4.1 Relations";
 const LESSON_POS = 13; // 4.1 is position 15
 
 async function run() {

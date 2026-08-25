@@ -6,11 +6,16 @@ Adult-styled math platform for Grade 9–12, college, and university. **No games
 Separate project + Supabase database from the K-8 sister site
 (`E:\projects\integration-academy`, domain `integrationacademy.org`).
 
+Core curriculum is Ontario. Florida (B.E.S.T. standards) content — Algebra 1 (`ALG1`),
+Geometry (`GEO1`), and FTCE Mathematics 6–12 certification prep — was added afterward as a
+secondary requested market; it is not the platform's primary focus.
+
 ## Conventions
 - Next.js 16 App Router, React 19, TypeScript. Read `node_modules/next/dist/docs/`
   before writing framework code (this Next version has breaking changes).
-- Styling: inline styles + tokens in `lib/theme.ts`. Serious indigo/slate palette,
-  Inter + Fraunces fonts. **No cartoon fonts or decorative emoji in UI chrome.**
+- Styling: inline styles + tokens in `lib/theme.ts`. Dark navy/slate ground with a
+  forest-green primary (matches the logo), Inter + Fraunces fonts. **No cartoon fonts
+  or decorative emoji in UI chrome.**
 - Data model lives in `supabase/schema.sql`. Account model (profiles + role +
   subscription) intentionally mirrors the K-8 site so logic can be shared.
 - Math: use `<Math expr="..." />` (KaTeX) and `<FunctionGraph fn={...} />` for

@@ -41,6 +41,7 @@ const graph = (expr, param, o = {}) => ({
 const mg = (curves, o = {}) => ({
   id: bid(), type: "multigraph", curves,
   param: o.param ?? "", paramMin: o.paramMin ?? -5, paramMax: o.paramMax ?? 5, paramInit: o.paramInit ?? 0,
+  params: o.params, // optional: [{name,min,max,init}, ...] independent sliders (e.g. m1,b1,m2,b2)
   xMin: o.xMin ?? -6, xMax: o.xMax ?? 6, yMin: o.yMin ?? -6, yMax: o.yMax ?? 6,
   markIntersection: o.markIntersection ?? true, caption: o.caption ?? "",
 });
@@ -278,7 +279,22 @@ Application
 9. set p to 5; set t to p * 3; output t. Now change p to 8 — what is the new output?
 10. A loop reads "for i from 1 to 5." What would you change to make it print 10 numbers?` },
 
-  "4.1": { title: "Assignment 4.1 — Linear vs Non-Linear & Rate of Change", description: String.raw`Knowledge & Understanding
+  "4.1": { title: "Assignment 4.1 — Relations", description: String.raw`Knowledge & Understanding
+1. The amount a spring stretches depends on the mass hung on it. Name the independent and dependent variables.
+2. Is the number of houses on a street discrete or continuous? Explain.
+3. Is the height of a growing sunflower over several days discrete or continuous? Explain.
+Thinking
+4. A taxi charges \$4 plus \$2/km. Make a table of cost for \( d = 0,1,2,3 \) km.
+5. A table has \( x: 0,1,2,3 \to y: 2,7,12,17 \). Find the rate of change and the equation.
+Communication
+6. Explain the difference between the independent and dependent variable, using an example.
+7. Explain, in your own words, the difference between a discrete and a continuous relation.
+Application
+8. A candle 30 cm tall burns 2.5 cm per hour. Write an equation for its height \( h \) after \( t \) hours.
+9. Does the point \( (4, 15) \) lie on \( y = 3x + 2 \)? Show your check.
+10. A tank holds 80 L and drains 8 L per minute. Write \( V \) vs. time \( t \) and find when the tank is empty.` },
+
+  "4.2": { title: "Assignment 4.2 — Linear vs Non-Linear & Rate of Change", description: String.raw`Knowledge & Understanding
 1. Is \( y = 2x + 1 \) linear or non-linear?
 2. Is \( y = x^2 \) linear or non-linear?
 3. State the rate of change (slope) of \( y = 3x + 2 \).
@@ -293,22 +309,23 @@ Application
 9. Describe the difference between the graphs of \( y = 2x \) and \( y = x^2 \).
 10. A plant's height (cm) over weeks is \( 2, 5, 8, 11 \). Is the growth linear? Explain.` },
 
-  "4.2": { title: "Assignment 4.2 — Representing Linear Relations", description: String.raw`Knowledge & Understanding
+  "4.3": { title: "Assignment 4.3 — Representing Linear and Non-Linear Relations", description: String.raw`Knowledge & Understanding
 1. For \( y = 2x + 1 \), make a table of values for \( x = 0, 1, 2, 3 \).
 2. State the slope and y-intercept of \( y = 3x - 4 \).
 3. What is the y-intercept of \( y = -2x + 5 \)?
 Thinking
 4. A line passes through \( (0, 2) \) and \( (1, 5) \). Find its equation.
 5. Convert the table \( x: 0,1,2 \), \( y: 1,3,5 \) into an equation.
+6. Make a table for \( y = x^2 \) using \( x = -2,-1,0,1,2 \), then state whether the relation is linear or non-linear.
 Communication
-6. Explain the meaning of the slope and the y-intercept in \( y = mx + b \).
-7. Describe three different ways to represent a linear relation.
+7. Explain the meaning of the slope and the y-intercept in \( y = mx + b \).
+8. Describe three different ways to represent a linear relation.
 Application
-8. A pool fills at 10 L/min starting from 50 L. Write the equation for volume vs. time.
-9. Describe how to graph \( y = \frac{1}{2}x + 2 \) using two points.
-10. Using your pool equation, how much water is in the pool after 8 minutes?` },
+9. A pool fills at 10 L/min starting from 50 L. Write the equation for volume vs. time.
+10. Describe how to graph \( y = \frac{1}{2}x + 2 \) using two points.
+11. Using your pool equation, how much water is in the pool after 8 minutes?` },
 
-  "4.3": { title: "Assignment 4.3 — Comparing Lines", description: String.raw`Knowledge & Understanding
+  "4.4": { title: "Assignment 4.4 — Comparing Lines", description: String.raw`Knowledge & Understanding
 1. Which is steeper: \( y = 2x + 1 \) or \( y = 5x - 3 \)?
 2. Which has the greater y-intercept: \( y = 2x + 1 \) or \( y = 2x + 4 \)?
 3. Are \( y = 2x + 1 \) and \( y = 2x - 3 \) parallel?
@@ -323,7 +340,7 @@ Application
 9. Which plan is cheaper at 3 months?
 10. After how many months do the two plans cost the same?` },
 
-  "4.4": { title: "Assignment 4.4 — Graphing Special Lines", description: String.raw`Knowledge & Understanding
+  "4.5": { title: "Assignment 4.5 — Graphing Special Lines", description: String.raw`Knowledge & Understanding
 1. Describe the graph of \( y = 3 \).
 2. Describe the graph of \( x = -2 \).
 3. Describe the graph of \( y = x \).
@@ -338,7 +355,7 @@ Application
 9. A item costs \$7 no matter how many you buy. What type of line models cost vs. quantity?
 10. Sketch \( y = -x \) and state its slope.` },
 
-  "4.5": { title: "Assignment 4.5 — Transformations of Lines", description: String.raw`Knowledge & Understanding
+  "4.6": { title: "Assignment 4.6 — Transformations of Lines", description: String.raw`Knowledge & Understanding
 1. Start with \( y = 2x \). Write the equation after shifting it up 3.
 2. What is \( y = x \) reflected in the x-axis?
 3. Write \( y = 3x \) translated down 5.
@@ -353,7 +370,7 @@ Application
 9. A line \( y = 2x \) is made less steep, to slope 1. Write the new equation.
 10. Translate \( y = -x + 2 \) down 3 and write the result.` },
 
-  "4.6": { title: "Assignment 4.6 — Finding the Equation of a Line", description: String.raw`Knowledge & Understanding
+  "4.7": { title: "Assignment 4.7 — Finding the Equation of a Line", description: String.raw`Knowledge & Understanding
 1. A line has slope 2 and y-intercept 5. Write its equation.
 2. A line passes through \( (0, -1) \) with slope 3. Write its equation.
 3. A line has slope 0 and passes through \( (0, 4) \). Write its equation.
@@ -368,33 +385,18 @@ Application
 9. From the table \( x: 0,2,4 \), \( y: 3,7,11 \), find the equation.
 10. Using your candle equation, what is the height after 5 hours?` },
 
-  "4.7": { title: "Assignment 4.7 — General Form of a Line", description: String.raw`Knowledge & Understanding
+  "4.8": { title: "Assignment 4.8 — General Form", description: String.raw`Knowledge & Understanding
 1. Write \( y = 3x - 4 \) in general form \( Ax + By + C = 0 \).
-2. Find the x-intercept of \( 2x + 5y = 10 \).
-3. Find the y-intercept of \( 2x + 5y = 10 \).
-Thinking
-4. Write \( y = -\frac{2}{3}x + 4 \) in general form with integer coefficients.
-5. A line is \( 4x - 3y - 12 = 0 \). Find both intercepts.
-Communication
-6. Explain how to find the x- and y-intercepts of a line given in general form.
-7. Explain why we usually clear fractions when writing a line in general form.
-Application
-8. A line has x-intercept \( 8 \) and y-intercept \( -2 \). Write it in general form.
-9. The line \( 5x + 2y = 20 \) models a budget. Find where it crosses each axis and state what each intercept means.
-10. Convert \( 6x + 9y - 18 = 0 \) to its simplest general form (divide out the common factor).` },
-
-  "4.8": { title: "Assignment 4.8 — General Form vs Slope-Intercept Form", description: String.raw`Knowledge & Understanding
-1. Convert \( 3x + y - 7 = 0 \) to slope-intercept form.
-2. Convert \( y = 4x - 1 \) to general form.
+2. Convert \( 3x + y - 7 = 0 \) to slope-intercept form.
 3. State which form shows the slope directly.
 Thinking
-4. Convert \( 2x - 5y = 10 \) to slope-intercept form and state the slope.
-5. Convert \( y = -\frac{3}{4}x + 2 \) to general form with integer coefficients.
+4. Write \( y = -\frac{2}{3}x + 4 \) in general form with integer coefficients.
+5. Convert \( 2x - 5y = 10 \) to slope-intercept form and state the slope.
 Communication
-6. Explain when slope-intercept form is more useful than general form.
+6. Explain how to find the x- and y-intercepts of a line given in general form.
 7. Explain why a vertical line cannot be written in slope-intercept form but can be written in general form.
 Application
-8. A line is given as \( 4x + 2y - 12 = 0 \). Rewrite it in slope-intercept form, then state its slope and y-intercept.
+8. A line has x-intercept \( 8 \) and y-intercept \( -2 \). Write it in general form.
 9. Two lines are \( 2x + 3y = 6 \) and \( y = -\frac{2}{3}x + 5 \). Convert the first and decide whether the lines are parallel.
 10. Write the vertical line through \( (7, -3) \) in general form.` },
 
@@ -2429,7 +2431,73 @@ output c        → 7</pre>
   },
 
   {
-    code: "4.1", title: "Linear vs Non-Linear Relations", quizzes: [],
+    code: "4.1", title: "Relations", quizzes: [],
+    blocks: [
+      { id: bid(), type: "html", html: String.raw`<div class="lecture-box">
+  <h1>🔗 Relations</h1>
+  <p><strong>Overview.</strong> A <strong>relation</strong> describes how two quantities change together. It can be shown four ways — in <strong>words</strong>, a <strong>table of values</strong>, a <strong>graph</strong>, and an <strong>equation</strong>.</p>
+  <h2>📌 Independent vs Dependent</h2>
+  <p>The <strong>independent</strong> variable is the input you choose (left column of a table, horizontal axis). The <strong>dependent</strong> variable is the output that responds to it (right column, vertical axis). Ask: "which one depends on the other?"</p>
+  <h2>📌 Discrete vs Continuous</h2>
+  <p>If only separate, countable inputs make sense (people, tickets, laps), the relation is <strong>discrete</strong> — plot separate points. If every in-between value is possible (time, distance, mass), it is <strong>continuous</strong> — draw a solid line.</p>
+  <h2>🔵 Examples</h2>
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;">
+    <h3>Example 1</h3><p>A phone's battery level drops the longer you stream video. Which is independent, which is dependent?</p>
+    <div class="solution">
+      <div class="step"><strong>Step 1:</strong> You control the streaming time, so <strong>time</strong> is independent.</div>
+      <div class="step"><strong>Step 2:</strong> The battery level responds to it, so it is <strong>dependent</strong>.</div>
+      <em>Conclusion: time is independent; battery level is dependent. ✓</em>
+    </div>
+  </div>
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;">
+    <h3>Example 2</h3><p>A gym charges a $20 membership plus $5 per class. Build a table of total cost for \( n: 0,1,2,3,4 \) classes.</p>
+    <div class="solution">
+      <div class="step"><strong>Step 1:</strong> Cost \( = 5n + 20 \).</div>
+      <div class="step"><strong>Step 2:</strong> \( n=0,1,2,3,4 \Rightarrow \) Cost \( = 20, 25, 30, 35, 40 \).</div>
+      <em>Conclusion: the table shows a steady $5 increase per class. ✓</em>${gframe(["y = 5*x + 20"], { title: "Cost = 5n + 20: $20 to start, $5 per class", labels: [{ x: 0, y: 20, t: "(0, 20)", c: "#a3327a" }, { x: 4, y: 40, t: "(4, 40)", c: "#a3327a" }] })}
+    </div>
+  </div>
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;">
+    <h3>Example 3</h3><p>A tricycle has 3 wheels. Plot the relation for 1, 2, 3, 4 tricycles and decide discrete or continuous.</p>
+    <div class="solution">
+      <div class="step"><strong>Step 1:</strong> Points: \( (1,3), (2,6), (3,9), (4,12) \).</div>
+      <div class="step"><strong>Step 2:</strong> You cannot have part of a tricycle, so this is <strong>discrete</strong> — plot separate points, not a line.</div>
+      <em>Conclusion: discrete. ✓</em>
+    </div>
+  </div>
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;">
+    <h3>Example 4</h3><p>A car starts a trip with 60 L of fuel and uses 0.08 L per km. Write \( V \) vs distance \( d \); is the relation continuous?</p>
+    <div class="solution">
+      <div class="step"><strong>Step 1:</strong> \( V = 60 - 0.08d \).</div>
+      <div class="step"><strong>Step 2:</strong> Distance can take any value, so the relation is <strong>continuous</strong> — a solid line.</div>
+      <em>Conclusion: \( V = 60 - 0.08d \), continuous. ✓</em>${gframe(["y = 60 - 0.08*x"], { title: "V = 60 - 0.08d: fuel drains smoothly as distance increases" })}
+    </div>
+  </div>
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;">
+    <h3>Example 5</h3><p>A table shows \( x: 0,1,2,3 \), \( y: 7,10,13,16 \). Find the starting value, the rate of change, and the equation.</p>
+    <div class="solution">
+      <div class="step"><strong>Step 1:</strong> At \( x=0 \), \( y=7 \) — that's the starting value.</div>
+      <div class="step"><strong>Step 2:</strong> The output rises by \( 3 \) each step — that's the rate of change.</div>
+      <em>Conclusion: \( y = 3x + 7 \). ✓</em>${gframe(["y = 3*x + 7"], { title: "y = 3x + 7 matches the table (0,7),(1,10),(2,13),(3,16)", labels: [{ x: 0, y: 7, t: "(0, 7)", c: "#a3327a" }, { x: 3, y: 16, t: "(3, 16)", c: "#a3327a" }] })}
+    </div>
+  </div>
+  <h2>🟡 Practice Questions</h2>
+  <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Question 1</h3><p>The amount a spring stretches depends on the mass hung on it. Name the independent and dependent variables.</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Answer: independent = mass; dependent = stretch.</em></div></div></details></div>
+  <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Question 2</h3><p>A taxi charges $4 plus $2 per km. Make a table of cost for \( d=0,1,2,3 \) km.</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Answer: \( C = 2d+4 \): $4, $6, $8, $10.</em></div></div></details></div>
+  <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Question 3</h3><p>Is the number of houses on a street discrete or continuous? Explain.</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Answer: discrete — you can only have a whole number of houses.</em></div></div></details></div>
+  <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Question 4</h3><p>A candle 30 cm tall burns 2.5 cm per hour. Write an equation for its height \( h \) after \( t \) hours.</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Answer: \( h = 30 - 2.5t \).</em></div></div></details></div>
+  <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Question 5</h3><p>Does the point \( (4,15) \) lie on \( y=3x+2 \)? Show your check.</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Answer: \( 3(4)+2=14 \ne 15 \), so no.</em></div></div></details></div>
+  <h2>❓ Q&amp;A Summary</h2>
+  <div class="qa-box" style="background-color:#f0f0f0;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Q1: What is a relation?</h3><p><em>How two quantities change together — shown in words, a table, a graph, or an equation.</em></p></div>
+  <div class="qa-box" style="background-color:#f0f0f0;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Q2: Independent vs dependent?</h3><p><em>Independent is the input you choose; dependent is the output that responds.</em></p></div>
+  <div class="qa-box" style="background-color:#f0f0f0;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Q3: Discrete vs continuous?</h3><p><em>Discrete: only separate, countable inputs (plot points). Continuous: every in-between value is possible (draw a line).</em></p></div>
+</div>` },
+      graph("m*x + 20", "m", { xMin: -1, xMax: 10, yMin: 0, yMax: 60, paramMin: 0, paramMax: 10, paramInit: 5, caption: "Cost = m·n + 20 — slide m (the per-class rate); the $20 membership fee stays fixed." }),
+    ],
+  },
+
+  {
+    code: "4.2", title: "Linear vs Non-Linear Relations", quizzes: [],
     blocks: [
       { id: bid(), type: "html", html: String.raw`<div class="lecture-box">
   <h1>📈 Linear vs Non-Linear Relations</h1>
@@ -2495,11 +2563,11 @@ output c        → 7</pre>
   },
 
   {
-    code: "4.2", title: "Representing Linear Relations", quizzes: [],
+    code: "4.3", title: "Representing Linear and Non-Linear Relations", quizzes: [],
     blocks: [
       { id: bid(), type: "html", html: String.raw`<div class="lecture-box">
-  <h1>📊 Representing Linear Relations</h1>
-  <p><strong>Overview.</strong> A linear relation can be shown three ways: a <strong>table</strong>, a <strong>graph</strong>, and an <strong>equation</strong> \( y = mx + b \).</p>
+  <h1>📊 Representing Linear and Non-Linear Relations</h1>
+  <p><strong>Overview.</strong> A linear relation can be shown three ways: a <strong>table</strong>, a <strong>graph</strong>, and an <strong>equation</strong> \( y = mx + b \). A <strong>non-linear</strong> relation (like \( y = x^2 \)) is shown the same three ways, but its table has changing (not constant) differences and its graph is a <strong>curve</strong>, not a straight line.</p>
   <h2>📌 Slope and y-Intercept</h2>
   <p>In \( y = mx + b \): \( m \) is the <strong>slope</strong> (rate of change) and \( b \) is the <strong>y-intercept</strong> (where the line crosses the y-axis). For \( y = 3x - 4 \): slope \( 3 \), y-intercept \( -4 \).</p>
   <h2>📌 Moving Between Representations</h2>
@@ -2510,7 +2578,7 @@ output c        → 7</pre>
     <div class="solution">
       <div class="step"><strong>Step 1:</strong> Compare to the form \( y = mx + b \).</div>
       <div class="step"><strong>Step 2:</strong> \( m = 2 \) (slope) and \( b = 5 \) (y-intercept).</div>
-      <em>Conclusion: slope \( 2 \), y-intercept \( 5 \). ✓</em>${gframe(["y = 2*x + 5"], { title: "y = 2x + 5: slope 2, y-intercept (0, 5)" })}
+      <em>Conclusion: slope \( 2 \), y-intercept \( 5 \). ✓</em>${gframe(["y = 2*x + 5"], { title: "y = 2x + 5: slope 2, y-intercept (0, 5)", labels: [{ x: 0, y: 5, t: "(0, 5)", c: "#a3327a" }] })}
     </div>
   </div>
   <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;">
@@ -2519,7 +2587,7 @@ output c        → 7</pre>
       <div class="step"><strong>Step 1:</strong> y-intercept is the value at \( x = 0 \): \( b = 1 \).</div>
       <div class="step"><strong>Step 2:</strong> Slope is the step in \( y \) per step in \( x \): \( +2 \).</div>
       <div class="step"><strong>Step 3 (check):</strong> at \( x = 2 \), \( 2(2) + 1 = 5 \). ✓</div>
-      <em>Conclusion: \( y = 2x + 1 \).</em>${gframe(["y = 2*x + 1"], { title: "the table points (0,1),(1,3),(2,5) lie on y = 2x + 1" })}
+      <em>Conclusion: \( y = 2x + 1 \).</em>${gframe(["y = 2*x + 1"], { title: "the table points (0,1),(1,3),(2,5) lie on y = 2x + 1", labels: [{ x: 0, y: 1, t: "(0, 1)", c: "#a3327a" }, { x: 1, y: 3, t: "(1, 3)", c: "#a3327a" }, { x: 2, y: 5, t: "(2, 5)", c: "#a3327a" }] })}
     </div>
   </div>
   <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;">
@@ -2527,7 +2595,7 @@ output c        → 7</pre>
     <div class="solution">
       <div class="step"><strong>Step 1:</strong> The point with \( x = 0 \) gives the y-intercept: \( b = 2 \).</div>
       <div class="step"><strong>Step 2:</strong> Slope \( = \frac{5-2}{1-0} = 3 \).</div>
-      <em>Conclusion: \( y = 3x + 2 \). ✓</em>${gframe(["y = 3*x + 2"], { title: "the line through (0,2) and (1,5): y = 3x + 2" })}
+      <em>Conclusion: \( y = 3x + 2 \). ✓</em>${gframe(["y = 3*x + 2"], { title: "the line through (0,2) and (1,5): y = 3x + 2", labels: [{ x: 0, y: 2, t: "(0, 2)", c: "#a3327a" }, { x: 1, y: 5, t: "(1, 5)", c: "#a3327a" }] })}
     </div>
   </div>
   <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;">
@@ -2535,7 +2603,7 @@ output c        → 7</pre>
     <div class="solution">
       <div class="step"><strong>Step 1:</strong> \( x = 0 \Rightarrow y = 2 \), so \( (0,2) \).</div>
       <div class="step"><strong>Step 2:</strong> \( x = 2 \Rightarrow y = \frac{1}{2}(2) + 2 = 3 \), so \( (2,3) \).</div>
-      <em>Conclusion: \( (0,2) \) and \( (2,3) \). ✓</em>${gframe(["y = 0.5*x + 2"], { title: "y = ½x + 2 passes through (0,2) and (2,3)" })}
+      <em>Conclusion: \( (0,2) \) and \( (2,3) \). ✓</em>${gframe(["y = 0.5*x + 2"], { title: "y = ½x + 2 passes through (0,2) and (2,3)", labels: [{ x: 0, y: 2, t: "(0, 2)", c: "#a3327a" }, { x: 2, y: 3, t: "(2, 3)", c: "#a3327a" }] })}
     </div>
   </div>
   <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;">
@@ -2544,7 +2612,16 @@ output c        → 7</pre>
       <div class="step"><strong>Step 1:</strong> The fixed start fee is the y-intercept: \( b = 4 \).</div>
       <div class="step"><strong>Step 2:</strong> The per-km rate is the slope: \( m = 2 \).</div>
       <div class="step"><strong>Step 3 (check):</strong> for \( d = 3 \) km, \( C = 2(3) + 4 = \$10 \).</div>
-      <em>Conclusion: \( C = 2d + 4 \). ✓</em>${gframe(["y = 2*x + 4"], { title: "taxi cost C = 2d + 4: starts at $4 (y-intercept), rises $2 per km" })}
+      <em>Conclusion: \( C = 2d + 4 \). ✓</em>${gframe(["y = 2*x + 4"], { title: "taxi cost C = 2d + 4: starts at $4 (y-intercept), rises $2 per km", labels: [{ x: 0, y: 4, t: "(0, 4)", c: "#a3327a" }, { x: 3, y: 10, t: "(3, 10)", c: "#a3327a" }] })}
+    </div>
+  </div>
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;">
+    <h3>Example 6 (Non-Linear)</h3><p>Table \( x: -2,-1,0,1,2 \), \( y: 4,1,0,1,4 \) — is this relation linear? Give its equation.</p>
+    <div class="solution">
+      <div class="step"><strong>Step 1:</strong> Check the differences in \( y \): \( 1-4=-3 \), \( 0-1=-1 \), \( 1-0=1 \), \( 4-1=3 \) — not constant.</div>
+      <div class="step"><strong>Step 2:</strong> Since the first differences are not constant, the relation is <strong>not linear</strong> — its graph is a curve.</div>
+      <div class="step"><strong>Step 3:</strong> Each \( y \) equals the square of \( x \): \( y = x^2 \).</div>
+      <em>Conclusion: non-linear; \( y = x^2 \). ✓</em>
     </div>
   </div>
   <h2>🟡 Practice Questions</h2>
@@ -2553,17 +2630,19 @@ output c        → 7</pre>
   <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Question 3</h3><p>Line through \( (0,-1) \) with slope 4 — equation?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Answer: \( y = 4x - 1 \).</em></div></div></details></div>
   <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Question 4</h3><p>A pool starts at 50 L and fills 10 L/min. Equation?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Answer: \( V = 10t + 50 \).</em></div></div></details></div>
   <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Question 5</h3><p>A gym costs $30 to join plus $20 per month. Write the equation for total cost \( C \) after \( m \) months.</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Answer: \( C = 20m + 30 \).</em></div></div></details></div>
+  <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Question 6 (Non-Linear)</h3><p>Table \( x: 0,1,2,3 \), \( y: 0,1,4,9 \) — linear or non-linear? Explain.</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Answer: non-linear — the differences \( 1,3,5 \) are not constant; \( y = x^2 \).</em></div></div></details></div>
   <h2>❓ Q&amp;A Summary</h2>
   <div class="qa-box" style="background-color:#f0f0f0;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Q1: What is \( m \) in \( y = mx + b \)?</h3><p><em>The slope (rate of change).</em></p></div>
   <div class="qa-box" style="background-color:#f0f0f0;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Q2: What is \( b \)?</h3><p><em>The y-intercept — where the line crosses the y-axis.</em></p></div>
   <div class="qa-box" style="background-color:#f0f0f0;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Q3: How do I find the slope from a table?</h3><p><em>It's the constant change in y for each step of 1 in x.</em></p></div>
+  <div class="qa-box" style="background-color:#f0f0f0;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Q4: How do I tell if a table is non-linear?</h3><p><em>Its differences in y aren't constant for equal steps in x — its graph is a curve, not a straight line.</em></p></div>
 </div>` },
       graph("a*x + 2", "a", { xMin: -6, xMax: 6, yMin: -6, yMax: 8, paramMin: -3, paramMax: 3, paramInit: 1, caption: "y = ax + 2 — slide a (the slope); the y-intercept stays at 2." }),
     ],
   },
 
   {
-    code: "4.3", title: "Comparing Lines", quizzes: [],
+    code: "4.4", title: "Comparing Lines", quizzes: [],
     blocks: [
       { id: bid(), type: "html", html: String.raw`<div class="lecture-box">
   <h1>📐 Comparing Lines</h1>
@@ -2626,12 +2705,21 @@ output c        → 7</pre>
   <div class="qa-box" style="background-color:#f0f0f0;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Q2: When are two lines parallel?</h3><p><em>When they have equal slopes.</em></p></div>
   <div class="qa-box" style="background-color:#f0f0f0;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Q3: How do I find where two lines cross?</h3><p><em>Set their expressions equal and solve for x, then find y.</em></p></div>
 </div>` },
-      mg([{ expr: "2*x + 1", label: "y = 2x + 1" }, { expr: "a*x + 1", label: "y = ax + 1" }], { param: "a", paramMin: -3, paramMax: 4, paramInit: 1, xMin: -5, xMax: 5, yMin: -6, yMax: 6, caption: "Slide a to compare the second line's slope with y = 2x + 1." }),
+      mg([{ expr: "m1*x + b1", label: "y = m1x + b1" }, { expr: "m2*x + b2", label: "y = m2x + b2" }], {
+        params: [
+          { name: "m1", min: -3, max: 4, init: 2 },
+          { name: "b1", min: -5, max: 5, init: 1 },
+          { name: "m2", min: -3, max: 4, init: 0.9 },
+          { name: "b2", min: -5, max: 5, init: 1 },
+        ],
+        xMin: -5, xMax: 5, yMin: -6, yMax: 6,
+        caption: "Slide m1, b1, m2, b2 to build any two lines and compare their slopes and y-intercepts.",
+      }),
     ],
   },
 
   {
-    code: "4.4", title: "Graphing Special Lines", quizzes: [],
+    code: "4.5", title: "Graphing Special Lines", quizzes: [],
     blocks: [
       { id: bid(), type: "html", html: String.raw`<div class="lecture-box">
   <h1>📏 Graphing Special Lines</h1>
@@ -2710,7 +2798,7 @@ output c        → 7</pre>
   },
 
   {
-    code: "4.5", title: "Transformations of Lines", quizzes: [],
+    code: "4.6", title: "Transformations of Lines", quizzes: [],
     blocks: [
       { id: bid(), type: "html", html: String.raw`<div class="lecture-box">
   <h1>🔄 Transformations of Lines</h1>
@@ -2778,7 +2866,7 @@ output c        → 7</pre>
   },
 
   {
-    code: "4.6", title: "Finding the Equation of a Line", quizzes: [],
+    code: "4.7", title: "Finding the Equation of a Line", quizzes: [],
     blocks: [
       { id: bid(), type: "html", html: String.raw`<div class="lecture-box">
   <h1>🧭 Finding the Equation of a Line</h1>
@@ -2849,64 +2937,33 @@ output c        → 7</pre>
   },
 
   {
-    code: "4.7", title: "General Form of a Line", quizzes: [],
+    code: "4.8", title: "General Form", quizzes: [],
     blocks: [
       { id: bid(), type: "html", html: String.raw`<div class="lecture-box">
-  <h1>📐 General Form of a Line</h1>
-  <p><strong>Overview.</strong> Every straight line can be written in <strong>general form</strong> \( Ax + By + C = 0 \), where \( A, B, C \) are integers and \( A \ge 0 \). (The closely related <strong>standard form</strong> is \( Ax + By = C \).) This is a tidy, universal way to present <em>any</em> line — even vertical ones.</p>
+  <h1>📐 General Form</h1>
+  <p><strong>Overview.</strong> Every straight line can be written in <strong>general form</strong> \( Ax + By + C = 0 \), where \( A, B, C \) are integers and \( A \ge 0 \). <strong>Slope-intercept form</strong> \( y = mx + b \) shows the slope and y-intercept at a glance — ideal for graphing and comparing. General form is a tidy, integer-coefficient standard that also handles <em>vertical</em> lines, which have no slope-intercept form at all.</p>
   <h2>📌 Writing a Line in General Form</h2>
   <p>Start from \( y = mx + b \), move every term to one side, and clear fractions so all coefficients are integers. Example: \( y = \frac{2}{3}x - 1 \Rightarrow 3y = 2x - 3 \Rightarrow 2x - 3y - 3 = 0 \).</p>
-  <h2>📌 Finding the Intercepts</h2>
-  <p><strong>x-intercept:</strong> set \( y = 0 \) and solve for \( x \). <strong>y-intercept:</strong> set \( x = 0 \) and solve for \( y \). The intercepts are the two easiest points to plot a line from its general form.</p>
-  <h2>🔵 Examples</h2>
-  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 1</h3><p>Write \( y = 2x + 5 \) in general form.</p><div class="solution"><div class="step"><strong>Step 1:</strong> move all terms left: \( 2x - y + 5 = 0 \).</div><em>Conclusion: \( 2x - y + 5 = 0 \).</em>${gframe(["y = 2*x + 5"], { title: "y = 2x + 5 is the same line as 2x - y + 5 = 0" })}</div></div>
-  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 2</h3><p>Find the intercepts of \( 3x + 4y = 12 \).</p><div class="solution"><div class="step"><strong>x-intercept:</strong> \( y = 0 \Rightarrow 3x = 12 \Rightarrow x = 4 \), point \( (4,0) \).</div><div class="step"><strong>y-intercept:</strong> \( x = 0 \Rightarrow 4y = 12 \Rightarrow y = 3 \), point \( (0,3) \).</div><em>Conclusion: \( (4,0) \) and \( (0,3) \).</em>${gframe(["y = (12 - 3*x)/4"], { title: "3x + 4y = 12 crosses the axes at (4,0) and (0,3)" })}</div></div>
-  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 3</h3><p>Write \( y = -\frac{3}{4}x + 2 \) in general form with integer coefficients.</p><div class="solution"><div class="step"><strong>Step 1:</strong> \( \times 4 \): \( 4y = -3x + 8 \).</div><div class="step"><strong>Step 2:</strong> \( 3x + 4y - 8 = 0 \).</div><em>Conclusion: \( 3x + 4y - 8 = 0 \).</em>${gframe(["y = -0.75*x + 2"], { title: "y = -¾x + 2 is the same line as 3x + 4y - 8 = 0" })}</div></div>
-  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 4</h3><p>Find the intercepts of \( 2x - 5y - 10 = 0 \).</p><div class="solution"><div class="step"><strong>x-intercept:</strong> \( y = 0 \Rightarrow 2x = 10 \Rightarrow x = 5 \), point \( (5,0) \).</div><div class="step"><strong>y-intercept:</strong> \( x = 0 \Rightarrow -5y = 10 \Rightarrow y = -2 \), point \( (0,-2) \).</div><em>Conclusion: \( (5,0) \) and \( (0,-2) \).</em>${gframe(["y = (2*x - 10)/5"], { title: "2x - 5y - 10 = 0 crosses the axes at (5,0) and (0,-2)" })}</div></div>
-  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>⭐ Advanced Example 5</h3><p>A line has x-intercept \( 6 \) and y-intercept \( -4 \). Write it in general form.</p><div class="solution"><div class="step"><strong>Step 1:</strong> slope \( = \frac{-4 - 0}{0 - 6} = \frac{2}{3} \).</div><div class="step"><strong>Step 2:</strong> \( y = \frac{2}{3}x - 4 \Rightarrow 3y = 2x - 12 \).</div><div class="step"><strong>Step 3:</strong> \( 2x - 3y - 12 = 0 \).</div><em>Conclusion: \( 2x - 3y - 12 = 0 \).</em>${gframe(["y = (2*x - 12)/3"], { title: "the line 2x - 3y - 12 = 0" })}</div></div>
-  <h2>🟡 Practice Questions</h2>
-  <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Question 1</h3><p>Write \( y = x - 7 \) in general form.</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Answer: \( x - y - 7 = 0 \).</em></div></div></details></div>
-  <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Question 2</h3><p>Find the x-intercept of \( 5x + 2y = 20 \).</p><details><summary>View answer</summary><div class="solution"><div class="step">\( y = 0 \Rightarrow 5x = 20 \). <em>Answer: \( (4,0) \).</em></div></div></details></div>
-  <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Question 3</h3><p>Find the y-intercept of \( 5x + 2y = 20 \).</p><details><summary>View answer</summary><div class="solution"><div class="step">\( x = 0 \Rightarrow 2y = 20 \). <em>Answer: \( (0,10) \).</em></div></div></details></div>
-  <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Question 4</h3><p>Write \( y = -2x + 3 \) in general form.</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Answer: \( 2x + y - 3 = 0 \).</em></div></div></details></div>
-  <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>⭐ Challenge Question 5</h3><p>Find both intercepts of \( x - 3y = 6 \).</p><details><summary>View answer</summary><div class="solution"><div class="step">\( y = 0 \Rightarrow x = 6 \); \( x = 0 \Rightarrow -3y = 6 \Rightarrow y = -2 \). <em>Answer: \( (6,0) \) and \( (0,-2) \).</em></div></div></details></div>
-  <h2>❓ Q&amp;A Summary</h2>
-  <div class="qa-box" style="background-color:#f0f0f0;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Q1: What is the general form of a line?</h3><p><em>\( Ax + By + C = 0 \) with integer coefficients.</em></p></div>
-  <div class="qa-box" style="background-color:#f0f0f0;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Q2: How do I find the x-intercept?</h3><p><em>Set \( y = 0 \) and solve for \( x \).</em></p></div>
-  <div class="qa-box" style="background-color:#f0f0f0;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Q3: How do I find the y-intercept?</h3><p><em>Set \( x = 0 \) and solve for \( y \).</em></p></div>
-</div>` },
-      mg([{ expr: "(6 - 2*x)/3", label: "2x + 3y = 6" }], { markIntersection: false, xMin: -2, xMax: 6, yMin: -2, yMax: 5, caption: "The line 2x + 3y = 6: x-intercept (3,0), y-intercept (0,2)." }),
-    ],
-  },
-
-  {
-    code: "4.8", title: "General Form vs Slope-Intercept Form", quizzes: [],
-    blocks: [
-      { id: bid(), type: "html", html: String.raw`<div class="lecture-box">
-  <h1>🔄 General Form vs Slope-Intercept Form</h1>
-  <p><strong>Overview.</strong> The same line can be written two ways. <strong>Slope-intercept form</strong> \( y = mx + b \) shows the slope and y-intercept at a glance — ideal for graphing and comparing. <strong>General form</strong> \( Ax + By + C = 0 \) is a tidy, integer-coefficient standard that also handles <em>vertical</em> lines.</p>
-  <h2>📌 General → Slope-Intercept</h2>
-  <p>Solve for \( y \). Example: \( 3x - 4y = 12 \Rightarrow -4y = -3x + 12 \Rightarrow y = \frac{3}{4}x - 3 \).</p>
-  <h2>📌 Slope-Intercept → General</h2>
-  <p>Move all terms to one side and clear fractions. Example: \( y = -\frac{1}{2}x + 4 \Rightarrow 2y = -x + 8 \Rightarrow x + 2y - 8 = 0 \).</p>
+  <h2>📌 General → Slope-Intercept, and the Intercepts</h2>
+  <p>Solve for \( y \). Example: \( 3x - 4y = 12 \Rightarrow -4y = -3x + 12 \Rightarrow y = \frac{3}{4}x - 3 \). To find intercepts directly from general form: <strong>x-intercept</strong> — set \( y = 0 \) and solve for \( x \); <strong>y-intercept</strong> — set \( x = 0 \) and solve for \( y \).</p>
   <h2>📌 Which Form, When?</h2>
   <p>Use <strong>slope-intercept</strong> to graph quickly or to read/compare slopes. Use <strong>general form</strong> for a standard written answer, for integer coefficients, and for vertical lines like \( x = 3 \) (\( \Rightarrow x - 3 = 0 \)) which have <em>no</em> slope-intercept form.</p>
   <h2>🔵 Examples</h2>
-  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 1</h3><p>Convert \( 2x + y - 6 = 0 \) to slope-intercept form.</p><div class="solution"><div class="step"><strong>Step 1:</strong> \( y = -2x + 6 \).</div><em>Conclusion: slope \( -2 \), y-intercept \( 6 \).</em>${gframe(["y = -2*x + 6"], { title: "2x + y - 6 = 0 is y = -2x + 6: slope -2, y-intercept 6" })}</div></div>
-  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 2</h3><p>Convert \( 3x - 4y = 12 \) to slope-intercept form.</p><div class="solution"><div class="step"><strong>Step 1:</strong> \( -4y = -3x + 12 \).</div><div class="step"><strong>Step 2:</strong> \( y = \frac{3}{4}x - 3 \).</div><em>Conclusion: \( y = \frac{3}{4}x - 3 \).</em>${gframe(["y = 0.75*x - 3"], { title: "3x - 4y = 12 is y = ¾x - 3" })}</div></div>
-  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 3</h3><p>Convert \( y = 5x - 2 \) to general form.</p><div class="solution"><div class="step"><strong>Step 1:</strong> \( 5x - y - 2 = 0 \).</div><em>Conclusion: \( 5x - y - 2 = 0 \).</em>${gframe(["y = 5*x - 2"], { title: "y = 5x - 2 is the same line as 5x - y - 2 = 0" })}</div></div>
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 1</h3><p>Write \( y = 2x + 5 \) in general form.</p><div class="solution"><div class="step"><strong>Step 1:</strong> move all terms left: \( 2x - y + 5 = 0 \).</div><em>Conclusion: \( 2x - y + 5 = 0 \).</em>${gframe(["y = 2*x + 5"], { title: "y = 2x + 5 is the same line as 2x - y + 5 = 0" })}</div></div>
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 2</h3><p>Find the intercepts of \( 3x + 4y = 12 \).</p><div class="solution"><div class="step"><strong>x-intercept:</strong> \( y = 0 \Rightarrow 3x = 12 \Rightarrow x = 4 \), point \( (4,0) \).</div><div class="step"><strong>y-intercept:</strong> \( x = 0 \Rightarrow 4y = 12 \Rightarrow y = 3 \), point \( (0,3) \).</div><em>Conclusion: \( (4,0) \) and \( (0,3) \).</em>${gframe(["y = (12 - 3*x)/4"], { title: "3x + 4y = 12 crosses the axes at (4,0) and (0,3)" })}</div></div>
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 3</h3><p>Convert \( 3x - 4y = 12 \) to slope-intercept form.</p><div class="solution"><div class="step"><strong>Step 1:</strong> \( -4y = -3x + 12 \).</div><div class="step"><strong>Step 2:</strong> \( y = \frac{3}{4}x - 3 \).</div><em>Conclusion: \( y = \frac{3}{4}x - 3 \).</em>${gframe(["y = 0.75*x - 3"], { title: "3x - 4y = 12 is y = ¾x - 3" })}</div></div>
   <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 4</h3><p>Convert \( y = -\frac{1}{2}x + 4 \) to general form (integers).</p><div class="solution"><div class="step"><strong>Step 1:</strong> \( \times 2 \): \( 2y = -x + 8 \).</div><div class="step"><strong>Step 2:</strong> \( x + 2y - 8 = 0 \).</div><em>Conclusion: \( x + 2y - 8 = 0 \).</em>${gframe(["y = -0.5*x + 4"], { title: "y = -½x + 4 is the same line as x + 2y - 8 = 0" })}</div></div>
   <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>⭐ Advanced Example 5</h3><p>Why can't \( x = 3 \) be written as \( y = mx + b \)?</p><div class="solution"><div class="step"><strong>Reason:</strong> a vertical line has <em>undefined</em> slope, so there is no value of \( m \).</div><div class="step">General form handles it: \( x - 3 = 0 \).</div><em>Conclusion: use general form for vertical lines.</em></div></div>
   <h2>🟡 Practice Questions</h2>
-  <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Question 1</h3><p>Convert \( 4x + 2y - 8 = 0 \) to slope-intercept form.</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Answer: \( y = -2x + 4 \).</em></div></div></details></div>
-  <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Question 2</h3><p>Convert \( x - y + 5 = 0 \) to slope-intercept form.</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Answer: \( y = x + 5 \).</em></div></div></details></div>
-  <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Question 3</h3><p>Convert \( y = 3x + 1 \) to general form.</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Answer: \( 3x - y + 1 = 0 \).</em></div></div></details></div>
-  <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Question 4</h3><p>Convert \( y = \frac{2}{3}x - 2 \) to general form (integers).</p><details><summary>View answer</summary><div class="solution"><div class="step">\( \times 3 \): \( 3y = 2x - 6 \). <em>Answer: \( 2x - 3y - 6 = 0 \).</em></div></div></details></div>
+  <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Question 1</h3><p>Write \( y = x - 7 \) in general form.</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Answer: \( x - y - 7 = 0 \).</em></div></div></details></div>
+  <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Question 2</h3><p>Find the x-intercept of \( 5x + 2y = 20 \).</p><details><summary>View answer</summary><div class="solution"><div class="step">\( y = 0 \Rightarrow 5x = 20 \). <em>Answer: \( (4,0) \).</em></div></div></details></div>
+  <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Question 3</h3><p>Convert \( 4x + 2y - 8 = 0 \) to slope-intercept form.</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Answer: \( y = -2x + 4 \).</em></div></div></details></div>
+  <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Question 4</h3><p>Convert \( y = 3x + 1 \) to general form.</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Answer: \( 3x - y + 1 = 0 \).</em></div></div></details></div>
   <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>⭐ Challenge Question 5</h3><p>Which form best shows the slope at a glance, and which can represent a vertical line?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Answer: slope-intercept shows slope directly; general form can represent vertical lines.</em></div></div></details></div>
   <h2>❓ Q&amp;A Summary</h2>
-  <div class="qa-box" style="background-color:#f0f0f0;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Q1: Which form is best for graphing quickly?</h3><p><em>Slope-intercept form, \( y = mx + b \).</em></p></div>
-  <div class="qa-box" style="background-color:#f0f0f0;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Q2: Which form can represent a vertical line?</h3><p><em>General form (e.g. \( x - 3 = 0 \)).</em></p></div>
-  <div class="qa-box" style="background-color:#f0f0f0;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Q3: How do I convert general form to slope form?</h3><p><em>Solve the equation for \( y \).</em></p></div>
+  <div class="qa-box" style="background-color:#f0f0f0;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Q1: What is the general form of a line?</h3><p><em>\( Ax + By + C = 0 \) with integer coefficients.</em></p></div>
+  <div class="qa-box" style="background-color:#f0f0f0;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Q2: Which form is best for graphing quickly?</h3><p><em>Slope-intercept form, \( y = mx + b \).</em></p></div>
+  <div class="qa-box" style="background-color:#f0f0f0;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Q3: Which form can represent a vertical line?</h3><p><em>General form (e.g. \( x - 3 = 0 \)).</em></p></div>
 </div>` },
       mg([{ expr: "-2*x + 6", label: "y = -2x + 6" }], { markIntersection: false, xMin: -2, xMax: 6, yMin: -2, yMax: 8, caption: "One line, two names: 2x + y − 6 = 0 (general) = y = −2x + 6 (slope-intercept)." }),
     ],
@@ -3965,9 +4022,19 @@ async function run() {
 
   // Refresh source content only — keep the course, its classes, enrollments,
   // and any teacher-built CLASS quizzes (class_id not null).
+  //
+  // IMPORTANT: assignments.id is referenced by submissions.assignment_id with
+  // ON DELETE CASCADE — deleting an assignment row silently destroys every
+  // student's submitted work for it, with no recovery on the Free Supabase
+  // plan (no PITR/backups). So assignments are upserted by title (update the
+  // existing row in place, insert only if the title is new) — never deleted.
+  // Lessons are safe to delete/reinsert: quizzes.lesson_id and
+  // bank_questions.lesson_id are both ON DELETE SET NULL, not CASCADE.
+  // The old admin-quiz delete (quizzes where class_id is null) is removed
+  // outright: this script has never (re)created admin quizzes, so that line
+  // only ever destroyed quiz_attempts for zero benefit — quizzes.id cascades
+  // to both quiz_questions and quiz_attempts.
   await db.from("lessons").delete().eq("course_id", course.id);
-  await db.from("assignments").delete().eq("course_id", course.id);
-  await db.from("quizzes").delete().eq("course_id", course.id).is("class_id", null);
 
   let pos = 0;
   let asgCount = 0;
@@ -3980,11 +4047,20 @@ async function run() {
     console.log(`  Lesson ${s.code} ${s.title}`);
 
     const aDef = ASSIGN[s.code] ?? s.assignment;
-    // Insert with published; if the assignments.published column doesn't exist
-    // yet (migration not run), retry without it so assignments still appear.
-    let ar = await db.from("assignments").insert({ course_id: course.id, title: aDef.title, description: aDef.description, published: true });
-    if (ar.error && /published/.test(ar.error.message)) {
-      ar = await db.from("assignments").insert({ course_id: course.id, title: aDef.title, description: aDef.description });
+    const existingA = await db.from("assignments").select("id").eq("course_id", course.id).eq("title", aDef.title).maybeSingle();
+    let ar;
+    if (existingA.data) {
+      ar = await db.from("assignments").update({ description: aDef.description, published: true }).eq("id", existingA.data.id);
+      if (ar.error && /published/.test(ar.error.message)) {
+        ar = await db.from("assignments").update({ description: aDef.description }).eq("id", existingA.data.id);
+      }
+    } else {
+      // Insert with published; if the assignments.published column doesn't exist
+      // yet (migration not run), retry without it so assignments still appear.
+      ar = await db.from("assignments").insert({ course_id: course.id, title: aDef.title, description: aDef.description, published: true });
+      if (ar.error && /published/.test(ar.error.message)) {
+        ar = await db.from("assignments").insert({ course_id: course.id, title: aDef.title, description: aDef.description });
+      }
     }
     if (ar.error) throw ar.error;
     asgCount++;

@@ -87,6 +87,7 @@ function renderBlock(b: Block) {
           paramMin={b.paramMin}
           paramMax={b.paramMax}
           paramInit={b.paramInit}
+          params={b.params}
           xMin={b.xMin}
           xMax={b.xMax}
           yMin={b.yMin}

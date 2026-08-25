@@ -1,4 +1,4 @@
-// Replace ONLY the "4.6 Finding the Equation of a Line" questions in the MTH1W
+// Replace ONLY the "4.6 Transformations of Lines" questions in the MTH1W
 // bank, leaving every other topic untouched.
 // Re-runnable. Usage: node scripts/replace-bank-4_6.mjs
 
@@ -18,7 +18,7 @@ const db = createClient(env.NEXT_PUBLIC_SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_
   auth: { persistSession: false },
 });
 
-const TOPIC = "4.6 Finding the Equation of a Line";
+const TOPIC = "4.6 Transformations of Lines";
 const LESSON_POS = 18; // 4.6 is position 20
 
 async function run() {

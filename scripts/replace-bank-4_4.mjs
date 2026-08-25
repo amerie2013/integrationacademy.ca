@@ -1,4 +1,4 @@
-// Replace ONLY the "4.4 Graphing Special Lines" questions in the MTH1W bank,
+// Replace ONLY the "4.4 Comparing Lines" questions in the MTH1W bank,
 // leaving every other topic untouched.
 // Re-runnable. Usage: node scripts/replace-bank-4_4.mjs
 
@@ -18,7 +18,7 @@ const db = createClient(env.NEXT_PUBLIC_SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_
   auth: { persistSession: false },
 });
 
-const TOPIC = "4.4 Graphing Special Lines";
+const TOPIC = "4.4 Comparing Lines";
 const LESSON_POS = 16; // 4.4 is position 18
 
 async function run() {

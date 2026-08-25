@@ -1,4 +1,4 @@
-// Replace ONLY the "4.5 Transformations of Lines" questions in the MTH1W bank,
+// Replace ONLY the "4.5 Graphing Special Lines" questions in the MTH1W bank,
 // leaving every other topic untouched.
 // Re-runnable. Usage: node scripts/replace-bank-4_5.mjs
 
@@ -18,7 +18,7 @@ const db = createClient(env.NEXT_PUBLIC_SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_
   auth: { persistSession: false },
 });
 
-const TOPIC = "4.5 Transformations of Lines";
+const TOPIC = "4.5 Graphing Special Lines";
 const LESSON_POS = 17; // 4.5 is position 19
 
 async function run() {
