@@ -35,7 +35,10 @@ const DEFAULT_STATS: StatKey[] = ["mean", "median", "mode", "min", "max", "q1", 
 // Fixed per-dataset chart geometry — deliberately NOT derived from the
 // container's available height. Stretching a single row to fill whatever
 // vertical space happens to be free made the bars/box comically oversized.
-const CHART_MARGIN_TOP = 40, CHART_MARGIN_BOTTOM = 36, CHART_ROW_H = 130;
+// Each row gets its own x-axis (own domain, own ticks), since two lists can
+// have wildly different ranges and forcing a shared axis crushes the
+// smaller-range one down to a sliver.
+const CHART_MARGIN_TOP = 40, CHART_MARGIN_BOTTOM = 12, CHART_ROW_H = 180;
 function statValue(s: Summary, key: StatKey): string {
   if (key === "mode") return s.modes.length ? s.modes.map(fmt).join(", ") : "—";
   if (key === "n") return String(s.n);
@@ -77,8 +80,6 @@ export function Stats({ initialData, initialState, initialId, embed = false }: {
   const wrapRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const sizeRef = useRef({ w: 600, h: 460 });
-  const logoRef = useRef<HTMLImageElement | null>(null);
-  const [logoReady, setLogoReady] = useState(false);
 
   function flash(m: string) { setToast(m); setTimeout(() => setToast(""), 2200); }
   function serialize(): StatsState { return { title, datasets, binWidth, showOutliers, showHistogram, showBoxplot, selectedStats }; }
@@ -92,12 +93,6 @@ export function Stats({ initialData, initialState, initialId, embed = false }: {
     setShowHistogram(d.showHistogram ?? true);
     setShowBoxplot(d.showBoxplot ?? true);
   }
-
-  useEffect(() => {
-    const img = new Image();
-    img.onload = () => { logoRef.current = img; setLogoReady(true); };
-    img.src = "/Logo.png";
-  }, []);
 
   // Short-link embed (?id=…): load the saved figure from the graphs table.
   // (The inline-payload case is handled synchronously above, via `initial`.)
@@ -120,14 +115,6 @@ export function Stats({ initialData, initialState, initialId, embed = false }: {
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.clearRect(0, 0, w, h); ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, w, h);
 
-    const logo = logoReady ? logoRef.current : null;
-    if (logo) {
-      const iw = Math.min(w, h) * 0.5, ih = iw * (logo.naturalHeight / logo.naturalWidth);
-      ctx.save(); ctx.globalAlpha = 0.08;
-      ctx.drawImage(logo, w / 2 - iw / 2, h / 2 - ih / 2, iw, ih);
-      ctx.restore();
-    }
-
     if (title) { ctx.fillStyle = "#1e293b"; ctx.font = "bold 18px Fraunces, serif"; ctx.textAlign = "center"; ctx.textBaseline = "top"; ctx.fillText(title, w / 2, 12); }
 
     if (rows.length === 0) {
@@ -138,32 +125,36 @@ export function Stats({ initialData, initialState, initialId, embed = false }: {
 
     const marginL = 60, marginR = 24, marginTop = title ? CHART_MARGIN_TOP + 12 : CHART_MARGIN_TOP;
     const plotW = Math.max(40, w - marginL - marginR);
-    const allValues = rows.flatMap((r) => r.values);
-    let domMin = Math.min(...allValues), domMax = Math.max(...allValues);
-    if (domMin === domMax) { domMin -= 1; domMax += 1; }
-    const pad = (domMax - domMin) * 0.06;
-    domMin -= pad; domMax += pad;
-    const toX = (v: number) => marginL + ((v - domMin) / (domMax - domMin)) * plotW;
-
     const rowH = CHART_ROW_H;
-    const histH = showBoxplot ? rowH * 0.56 : rowH * 0.8;
-    const boxH = rowH * 0.14;
-    const chartBottom = marginTop + rows.length * rowH;
-    const step = niceStep(domMax - domMin, plotW);
+    const histH = showBoxplot ? 74 : 108;
+    const boxH = 16;
 
-    // faint vertical gridlines behind everything, so bars/box plots read on top
-    ctx.strokeStyle = "#f1f5f9"; ctx.lineWidth = 1; ctx.beginPath();
-    for (let v = Math.ceil(domMin / step) * step; v <= domMax; v += step) { const x = toX(v); ctx.moveTo(x, marginTop - 4); ctx.lineTo(x, chartBottom); }
-    ctx.stroke();
-
+    // Each list gets its OWN domain/scale/axis — a shared axis would crush a
+    // small-range list (e.g. 1–8) down to a sliver next to a large-range one
+    // (e.g. 12–35).
     rows.forEach((r, i) => {
       const s = summarize(r.values) as Summary;
       const y0 = marginTop + i * rowH;
+      let domMin = s.min, domMax = s.max;
+      if (domMin === domMax) { domMin -= 1; domMax += 1; }
+      const pad = (domMax - domMin) * 0.08;
+      domMin -= pad; domMax += pad;
+      const toX = (v: number) => marginL + ((v - domMin) / (domMax - domMin)) * plotW;
+      const step = niceStep(domMax - domMin, plotW);
+
       ctx.fillStyle = r.d.color; ctx.font = "bold 14px Inter, system-ui, sans-serif"; ctx.textAlign = "left"; ctx.textBaseline = "top";
       ctx.fillText(`${r.d.name}  (n = ${s.n})`, marginL, y0);
 
+      let yCursor = y0 + 24;
+      const chartTop = yCursor;
+      const axisY = chartTop + (showHistogram ? histH + 8 : 0) + (showBoxplot ? boxH : 0) + 10;
+
+      // faint vertical gridlines behind everything, so bars/box plots read on top
+      ctx.strokeStyle = "#f1f5f9"; ctx.lineWidth = 1; ctx.beginPath();
+      for (let v = Math.ceil(domMin / step) * step; v <= domMax; v += step) { const x = toX(v); ctx.moveTo(x, chartTop - 4); ctx.lineTo(x, axisY); }
+      ctx.stroke();
+
       const bw = binWidth === "auto" ? autoBinWidth(r.values) : Math.max(0.0001, parseFloat(binWidth) || 1);
-      let yCursor = y0 + 22;
       if (showHistogram) {
         const bins = histogramBins(r.values, bw, domMin, domMax);
         const maxCount = Math.max(1, ...bins.map((b) => b.count));
@@ -176,7 +167,7 @@ export function Stats({ initialData, initialState, initialId, embed = false }: {
           ctx.fillRect(x0 + 1, yCursor + (histH - bh), Math.max(1, x1 - x0 - 2), bh);
           ctx.globalAlpha = 1;
         }
-        yCursor += histH + 6;
+        yCursor += histH + 8;
       }
       if (showBoxplot) {
         const midY = yCursor + boxH / 2;
@@ -193,19 +184,17 @@ export function Stats({ initialData, initialState, initialId, embed = false }: {
           for (const o of s.outliers) { ctx.beginPath(); ctx.arc(toX(o), midY, 3, 0, Math.PI * 2); ctx.fill(); }
         }
       }
-    });
 
-    // shared x-axis
-    const axisY = chartBottom + 2;
-    ctx.strokeStyle = "#94a3b8"; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(marginL, axisY); ctx.lineTo(marginL + plotW, axisY); ctx.stroke();
-    ctx.fillStyle = "#334155"; ctx.font = "600 13px Inter, system-ui, sans-serif"; ctx.textAlign = "center"; ctx.textBaseline = "top";
-    for (let v = Math.ceil(domMin / step) * step; v <= domMax; v += step) {
-      const x = toX(v);
-      ctx.strokeStyle = "#cbd5e1"; ctx.beginPath(); ctx.moveTo(x, axisY); ctx.lineTo(x, axisY + 5); ctx.stroke();
-      ctx.fillText(fmt(Math.round(v * 1000) / 1000), x, axisY + 8);
-    }
+      ctx.strokeStyle = "#94a3b8"; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(marginL, axisY); ctx.lineTo(marginL + plotW, axisY); ctx.stroke();
+      ctx.fillStyle = "#334155"; ctx.font = "600 13px Inter, system-ui, sans-serif"; ctx.textAlign = "center"; ctx.textBaseline = "top";
+      for (let v = Math.ceil(domMin / step) * step; v <= domMax; v += step) {
+        const x = toX(v);
+        ctx.strokeStyle = "#cbd5e1"; ctx.beginPath(); ctx.moveTo(x, axisY); ctx.lineTo(x, axisY + 5); ctx.stroke();
+        ctx.fillText(fmt(Math.round(v * 1000) / 1000), x, axisY + 8);
+      }
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [title, datasets, binWidth, showOutliers, showHistogram, showBoxplot, logoReady]);
+  }, [title, datasets, binWidth, showOutliers, showHistogram, showBoxplot]);
 
   useEffect(() => { draw(); }, [draw]);
   useEffect(() => {
