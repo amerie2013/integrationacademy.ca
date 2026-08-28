@@ -5,7 +5,7 @@ import katex from "katex";
 import { supabase } from "../lib/supabase";
 import { MathField } from "./MathField";
 import { renderAll, type Pt, type Shape, type Bg, type BoardData } from "../lib/wbdraw";
-import { listMine, getBoard, createBoard, saveBoard, type WB } from "../lib/whiteboards";
+import { listMine, getBoard, createBoard, saveBoard, subscribeBoard, type WB } from "../lib/whiteboards";
 
 type Tool = "move" | "pen" | "highlight" | "line" | "arrow" | "rect" | "ellipse" | "text" | "math" | "eraseObj" | "eraseArea";
 
@@ -55,6 +55,9 @@ export function Whiteboard({ initialBoardId }: { initialBoardId?: string }) {
   const [live, setLive] = useState(false);
   const liveRef = useRef(false);
   liveRef.current = live;
+  const [drawOpen, setDrawOpen] = useState(false);
+  const drawOpenRef = useRef(false);
+  drawOpenRef.current = drawOpen;
   const [saveMsg, setSaveMsg] = useState("");
   const [showOpen, setShowOpen] = useState(false);
   const [myBoards, setMyBoards] = useState<WB[]>([]);
@@ -157,7 +160,7 @@ export function Whiteboard({ initialBoardId }: { initialBoardId?: string }) {
     pagesRef.current = d.pages?.length ? d.pages : [[]];
     histRef.current = pagesRef.current.map((p) => ({ h: [p], i: 0 }));
     pageRef.current = Math.min(d.active ?? 0, pagesRef.current.length - 1);
-    setBoardId(wb.id); setTitle(wb.title); setLive(wb.is_live);
+    setBoardId(wb.id); setTitle(wb.title); setLive(wb.is_live); setDrawOpen(wb.draw_open);
     setBg(d.bg ?? "grid"); bgRef.current = d.bg ?? "grid";
     redraw(); rerender();
   }
@@ -178,7 +181,35 @@ export function Whiteboard({ initialBoardId }: { initialBoardId?: string }) {
     const next = !liveRef.current;
     await saveBoard(id, { is_live: next, data: snapshot() });
     setLive(next);
+    if (!next && drawOpenRef.current) { setDrawOpen(false); await saveBoard(id, { draw_open: false }); } // ending the session also revokes drawing
   }
+  async function toggleDrawOpen() {
+    const id = boardIdRef.current; if (!id) return;
+    const next = !drawOpenRef.current;
+    const r = await saveBoard(id, { draw_open: next });
+    if (r.error) { setSaveMsg(r.error.includes("relation") ? "Run the whiteboard co-draw migration." : r.error); return; }
+    setDrawOpen(next);
+  }
+  // While live, absorb shapes appended by guests (via the append-only RPC)
+  // into local state — only ever growing a page, never shrinking it, so this
+  // can't clobber a newer local edit with a stale/self-echoed update (see the
+  // 2026-08-28 migration's comment on why guest writes are append-only).
+  useEffect(() => {
+    if (!boardId || !live) return;
+    const cleanup = subscribeBoard(boardId, (data) => {
+      let changed = false;
+      (data.pages ?? []).forEach((remotePage, i) => {
+        const local = pagesRef.current[i] ?? [];
+        if (remotePage.length > local.length) {
+          pagesRef.current[i] = remotePage; changed = true;
+          if (i === pageRef.current) { const hp = histRef.current[i]; hp.h = hp.h.slice(0, hp.i + 1); hp.h.push(remotePage); hp.i = hp.h.length - 1; }
+        }
+      });
+      if (changed) { redraw(); rerender(); }
+    });
+    return cleanup;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [boardId, live]);
   const shareUrl = boardId && typeof window !== "undefined" ? `${window.location.origin}/whiteboard/${boardId}` : "";
 
   // ---- pointer ----
@@ -555,6 +586,7 @@ export function Whiteboard({ initialBoardId }: { initialBoardId?: string }) {
           <span style={{ color: "#a7f3d0", fontWeight: 700, fontSize: 13 }}>🟢 Live — share this link with students:</span>
           <input readOnly value={shareUrl} onFocus={(e) => e.currentTarget.select()} style={{ ...sel, flex: 1, minWidth: 200, background: "#022c22", color: "#d1fae5", cursor: "text" }} />
           <button onClick={() => navigator.clipboard?.writeText(shareUrl)} style={tBtn(false)}>Copy link</button>
+          <button onClick={toggleDrawOpen} style={tBtn(drawOpen)} title="Let anyone with the link draw too (pen + highlighter), not just watch">{drawOpen ? "✏️ Students can draw" : "🔒 View only"}</button>
         </div>
       )}
 

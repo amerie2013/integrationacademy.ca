@@ -1,7 +1,7 @@
 import { supabase } from "./supabase";
-import type { BoardData } from "./wbdraw";
+import type { BoardData, Shape } from "./wbdraw";
 
-export type WB = { id: string; title: string; data: BoardData; is_live: boolean; owner_id: string; updated_at: string };
+export type WB = { id: string; title: string; data: BoardData; is_live: boolean; draw_open: boolean; owner_id: string; updated_at: string };
 
 export async function listMine(): Promise<{ supported: boolean; items: WB[] }> {
   const { data, error } = await supabase.from("whiteboards").select("*").order("updated_at", { ascending: false });
@@ -26,17 +26,28 @@ export async function createBoard(title: string, data: BoardData): Promise<{ id?
   return { id: row!.id };
 }
 
-export async function saveBoard(id: string, patch: Partial<Pick<WB, "title" | "data" | "is_live">>): Promise<{ error?: string }> {
+export async function saveBoard(id: string, patch: Partial<Pick<WB, "title" | "data" | "is_live" | "draw_open">>): Promise<{ error?: string }> {
   const { error } = await supabase.from("whiteboards").update({ ...patch, updated_at: new Date().toISOString() }).eq("id", id);
   return { error: error?.message };
 }
 
+/**
+ * Append one shape to one page of a live board, without needing owner-level
+ * write access. Safe for guests: the append_board_shape() RPC only succeeds
+ * while the owner has draw_open on, and locks the row so concurrent guest
+ * strokes can't race each other (see the 2026-08-28 migration).
+ */
+export async function appendBoardShape(id: string, page: number, shape: Shape): Promise<{ error?: string }> {
+  const { error } = await supabase.rpc("append_board_shape", { p_board_id: id, p_page: page, p_shape: shape });
+  return { error: error?.message };
+}
+
 /** Subscribe to live UPDATEs of a board. Returns a cleanup function. */
-export function subscribeBoard(id: string, onChange: (data: BoardData, isLive: boolean) => void): () => void {
+export function subscribeBoard(id: string, onChange: (data: BoardData, isLive: boolean, drawOpen: boolean) => void): () => void {
   const ch = supabase
     .channel(`wb-${id}`)
     .on("postgres_changes", { event: "UPDATE", schema: "public", table: "whiteboards", filter: `id=eq.${id}` }, (payload: any) => {
-      onChange(payload.new.data as BoardData, payload.new.is_live as boolean);
+      onChange(payload.new.data as BoardData, payload.new.is_live as boolean, payload.new.draw_open as boolean);
     })
     .subscribe();
   return () => { supabase.removeChannel(ch); };
