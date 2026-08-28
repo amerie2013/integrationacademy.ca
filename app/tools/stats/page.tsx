@@ -5,20 +5,22 @@ import { useSearchParams } from "next/navigation";
 import { Stats } from "../../../components/Stats";
 import { Counting } from "../../../components/Counting";
 import { Probability } from "../../../components/Probability";
+import { Distributions } from "../../../components/Distributions";
 
-type Mode = "stats" | "counting" | "probability";
+type Mode = "stats" | "counting" | "probability" | "distributions";
 const MODES: { key: Mode; label: string }[] = [
   { key: "stats", label: "1-Variable Stats" },
   { key: "counting", label: "Counting" },
   { key: "probability", label: "Probability" },
+  { key: "distributions", label: "Distributions" },
 ];
 
 /**
  * Data-management workspace covering the MDM4U topics one at a time.
  * Standalone at /tools/stats and embeddable via <iframe>; pass ?embed=1 to
  * drop the page padding for a clean embed (embeds always show the 1-Variable
- * Stats figure — Counting and Probability have no saved state to embed).
- * Mirrors app/tools/graph/page.tsx.
+ * Stats figure — the other topics have no saved state to embed). Mirrors
+ * app/tools/graph/page.tsx.
  */
 export default function StatsToolPage() {
   return (
@@ -65,7 +67,10 @@ function StatsTool() {
         </div>
       </div>
       <div style={{ flex: 1, minHeight: 0 }}>
-        {mode === "stats" ? <Stats initialData={data} initialId={id} /> : mode === "counting" ? <Counting /> : <Probability />}
+        {mode === "stats" && <Stats initialData={data} initialId={id} />}
+        {mode === "counting" && <Counting />}
+        {mode === "probability" && <Probability />}
+        {mode === "distributions" && <Distributions />}
       </div>
     </main>
   );
