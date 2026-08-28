@@ -132,6 +132,7 @@ export function Calculator({ initialData, initialState, initialId, embed = false
   const sizeRef = useRef({ w: 600, h: 480 });
   const dragRef = useRef<{ x: number; y: number } | null>(null);
   const sliderRawRef = useRef<Map<string, number>>(new Map()); // unsnapped position per slider, so speed stays continuous even though the displayed value snaps to `step`
+  const sliderDirRef = useRef<Map<string, 1 | -1>>(new Map()); // ping-pong direction per slider, kept out of state so the `speed` field the user typed doesn't flip sign live on screen
 
   // ── load shared/saved data ─────────────────────────────────
   useEffect(() => {
@@ -323,6 +324,14 @@ export function Calculator({ initialData, initialState, initialId, embed = false
             const x0 = i * res, x1 = (i + 1) * res, y0 = j * res, y1 = (j + 1) * res;
             const v0 = val[j * (cols + 1) + i], v1 = val[j * (cols + 1) + i + 1], v2 = val[(j + 1) * (cols + 1) + i + 1], v3 = val[(j + 1) * (cols + 1) + i];
             if (isNaN(v0) || isNaN(v1) || isNaN(v2) || isNaN(v3)) continue;
+            const in0 = isIn(v0), in1 = isIn(v1), in2 = isIn(v2), in3 = isIn(v3);
+            // Most cells are entirely inside or entirely outside the shaded
+            // region — only cells the boundary actually crosses need the
+            // per-vertex marching-squares walk below. Without this, a big
+            // shaded region rebuilds a many-thousand-vertex path every single
+            // animation frame and the tab locks up ("page isn't responding").
+            if (in0 && in1 && in2 && in3) { ctx.rect(x0, y0, res, res); continue; }
+            if (!in0 && !in1 && !in2 && !in3) continue;
             const cx = [x0, x1, x1, x0], cy = [y0, y0, y1, y1], cv = [v0, v1, v2, v3];
             let started = false;
             for (let k = 0; k < 4; k++) {
@@ -431,7 +440,7 @@ export function Calculator({ initialData, initialState, initialId, embed = false
   const anySliderAnimating = sliders.some((s) => s.anim);
   useEffect(() => {
     if (!anySliderAnimating) return;
-    for (const s of sliders) sliderRawRef.current.set(s.id, s.value); // resume from wherever each slider currently sits (incl. a manual drag while paused)
+    for (const s of sliders) { sliderRawRef.current.set(s.id, s.value); sliderDirRef.current.set(s.id, s.speed < 0 ? -1 : 1); } // resume from wherever each slider currently sits (incl. a manual drag while paused)
     let raf = 0; let last = performance.now();
     const tick = (now: number) => {
       const dt = Math.min(0.05, (now - last) / 1000); last = now;
@@ -441,12 +450,16 @@ export function Calculator({ initialData, initialState, initialId, embed = false
         // *displayed* value to the nearest step — so the animation actually
         // visits -10, -9.5, -9, … for step=0.5 instead of sweeping smoothly
         // past every value in between, while overall pace stays the same.
-        let raw = (sliderRawRef.current.get(s.id) ?? s.value) + s.speed * dt; let sp = s.speed;
-        if (raw >= s.max) { raw = s.max; sp = -Math.abs(s.speed); }
-        else if (raw <= s.min) { raw = s.min; sp = Math.abs(s.speed); }
-        sliderRawRef.current.set(s.id, raw);
+        // The ping-pong direction lives in a ref, not in `s.speed` — writing
+        // the flipped sign back into slider state made the "speed" field the
+        // user typed flip sign live on screen every bounce.
+        let dir = sliderDirRef.current.get(s.id) ?? (s.speed < 0 ? -1 : 1);
+        let raw = (sliderRawRef.current.get(s.id) ?? s.value) + Math.abs(s.speed) * dir * dt;
+        if (raw >= s.max) { raw = s.max; dir = -1; }
+        else if (raw <= s.min) { raw = s.min; dir = 1; }
+        sliderRawRef.current.set(s.id, raw); sliderDirRef.current.set(s.id, dir);
         const snapped = s.step > 0 ? Math.min(s.max, Math.max(s.min, s.min + Math.round((raw - s.min) / s.step) * s.step)) : raw;
-        return { ...s, value: Math.round(snapped * 1000) / 1000, speed: sp };
+        return { ...s, value: Math.round(snapped * 1000) / 1000 };
       }));
       raf = requestAnimationFrame(tick);
     };
