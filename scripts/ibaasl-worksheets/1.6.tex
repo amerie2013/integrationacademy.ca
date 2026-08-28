@@ -1,0 +1,121 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize IB AA SL \textperiodcentered{} 1.6}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 1.6 --- Logarithms}\\[2pt]
+{\small Mathematics: Analysis \& Approaches SL (IB) \textperiodcentered{} Unit 1: Number and Algebra}
+\end{center}
+
+\begin{ideabox}
+Logarithms are the inverse of exponentials: $\log_b(x)=y\iff b^y=x$.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item $\log_b(mn)=\log_bm+\log_bn$, $\log_b\!\left(\dfrac mn\right)=\log_bm-\log_bn$, $\log_b(m^k)=k\log_bm$.
+  \item Change of base: $\log_ba=\dfrac{\ln a}{\ln b}$.
+  \item Use logarithms to solve exponential equations with unmatched bases.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Evaluate directly}
+Evaluate $\log_3(81)$.\soln
+$3^{?}=81=3^4$.\\[3pt]\textbf{Conclusion:} $4$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Solve via logarithms}
+Solve $6^x=50$ to 3 decimal places.\soln
+Take $\ln$ of both sides: $x\ln6=\ln50\Rightarrow x=\dfrac{\ln50}{\ln6}$.\\[3pt]\textbf{Conclusion:} $x\approx2.184$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Simplify using log laws}
+Simplify $\log_2(20)+\log_2(4)-\log_2(5)$.\soln
+$=\log_2\!\left(\dfrac{20\times4}{5}\right)=\log_2(16)$.\\[3pt]\textbf{Conclusion:} $4$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Solve with a domain check}
+Solve $\log_3(x)+\log_3(x-2)=1$, checking the domain.\soln
+\textbf{Step 1:} $\log_3\big(x(x-2)\big)=1\Rightarrow x(x-2)=3\Rightarrow x^2-2x-3=0\Rightarrow(x-3)(x+1)=0$.\\[3pt]
+\textbf{Step 2:} $x=3$ or $x=-1$; but $\log_3(x)$ requires $x>0$, so $x=-1$ is rejected.\\[3pt]
+\textbf{Conclusion:} $x=3$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Evaluate $\log_5(125)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Solve $4^x=70$ to 3 decimal places.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Simplify $\log_4(48)-\log_4(3)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Solve $\log_2(x)+\log_2(x-6)=4$, checking the domain.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+An investment is $A=800(1.05)^t$. Find, to the nearest year, when it first exceeds \$1500.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Simplify $2\log_5(3)+\log_5(4)$ as a single logarithm, then evaluate it.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+The Richter scale uses $M=\log_{10}(I/I_0)$. Find $M$ if an earthquake is 12{,}000 times as intense as $I_0$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8 --- Challenge}
+Solve $\log_2(x+3)-\log_2(x-1)=3$, checking the domain.\workspace{3.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9 --- Challenge}
+Solve $2\ln(x)=\ln(x+6)+\ln(4)$ for $x>0$.\workspace{3.4cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Evaluate $\log_5(125)$.
+  \item Solve $4^x=70$ to 3 decimal places.
+  \item Simplify $\log_4(48)-\log_4(3)$.
+  \item Solve $\log_2(x)+\log_2(x-6)=4$, checking the domain.
+  \item An investment is $A=800(1.05)^t$. Find, to the nearest year, when it first exceeds \$1500.
+  \item Simplify $2\log_5(3)+\log_5(4)$ as a single logarithm, then evaluate it.
+  \item The Richter scale uses $M=\log_{10}(I/I_0)$. Find $M$ if an earthquake is 12{,}000 times as intense as $I_0$.
+  \item Solve $\log_2(x+3)-\log_2(x-1)=3$, checking the domain.
+  \item Solve $2\ln(x)=\ln(x+6)+\ln(4)$ for $x>0$.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $3$
+  \item $x=\dfrac{\ln70}{\ln4}\approx3.075$
+  \item $\log_4(16)=2$
+  \item $x(x-6)=16\Rightarrow x^2-6x-16=0\Rightarrow(x-8)(x+2)=0\Rightarrow x=8$ (rejecting $x=-2$)
+  \item $1.05^t>1.875\Rightarrow t>\dfrac{\ln1.875}{\ln1.05}\approx12.9$, so $t=13$ years
+  \item $\log_5(36)$; $5^{2.226\ldots}=36$, so value $\approx2.226$
+  \item $M=\log_{10}(12000)\approx4.079$
+  \item $\log_2\!\left(\tfrac{x+3}{x-1}\right)=3\Rightarrow\tfrac{x+3}{x-1}=8\Rightarrow x+3=8x-8\Rightarrow x=\tfrac{11}{7}$ (valid, since $>1$)
+  \item $\ln(x^2)=\ln(4(x+6))\Rightarrow x^2=4x+24\Rightarrow x^2-4x-24=0\Rightarrow x=\dfrac{4\pm\sqrt{112}}{2}=2\pm2\sqrt7$; reject the negative root, so $x=2+2\sqrt7$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

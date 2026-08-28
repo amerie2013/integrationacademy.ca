@@ -1,0 +1,106 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize IB AA SL \textperiodcentered{} 4.6}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 4.6 --- Discrete Random Variables and the Binomial Distribution}\\[2pt]
+{\small Mathematics: Analysis \& Approaches SL (IB) \textperiodcentered{} Unit 4: Statistics and Probability}
+\end{center}
+
+\begin{ideabox}
+The binomial distribution models a fixed number of independent yes/no trials.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item $E(X)=\sum xP(X=x)$.
+  \item $X\sim B(n,p)$: $P(X=k)=\dbinom nk p^k(1-p)^{n-k}$, $E(X)=np$, $\text{Var}(X)=np(1-p)$.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Unknown table entry}
+$P(X=0)=0.1$, $P(X=1)=k$, $P(X=2)=0.5$. Find $k$ and $E(X)$.\soln
+$k=1-0.1-0.5=0.4$. $E(X)=0(0.1)+1(0.4)+2(0.5)$.\\[3pt]\textbf{Conclusion:} $k=0.4$, $E(X)=1.4$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Binomial probability}
+$X\sim B(9,0.35)$. Find $P(X=3)$.\soln
+$\binom93(0.35)^3(0.65)^6\approx84(0.042875)(0.0754)\approx0.272$.\\[3pt]\textbf{Conclusion:} $P(X=3)\approx0.272$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- At least one}
+$X\sim B(6,0.15)$. Find $P(X\geq1)$.\soln
+$P(X=0)=(0.85)^6\approx0.377$.\\[3pt]\textbf{Conclusion:} $P(X\geq1)\approx0.623$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Solve for p}
+$X\sim B(5,p)$ and $P(X=5)=0.00243$. Find $p$.\soln
+$p^5=0.00243\Rightarrow p=0.00243^{1/5}=0.3$ (recognizing $0.3^5=0.00243$).\\[3pt]\textbf{Conclusion:} $p=0.3$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+$P(X=0)=0.2$, $P(X=1)=k$, $P(X=2)=0.35$. Find $k$ and $E(X)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+$X\sim B(7,0.4)$. Find $P(X=2)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+$X\sim B(8,0.1)$. Find $P(X\geq1)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+$X\sim B(40,0.25)$. Find the mean and variance.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5 --- Challenge}
+A basketball player makes 65\% of free throws; for 8 attempts, find $P(\text{makes at least 6})$.\workspace{3.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+$X\sim B(4,p)$ and $P(X=0)=0.0016$. Find $p$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7 --- Challenge}
+A factory tests 10 items with a 4\% individual defect rate; find $P(\text{at most 1 defective})$.\workspace{3.4cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $P(X=0)=0.2$, $P(X=1)=k$, $P(X=2)=0.35$. Find $k$ and $E(X)$.
+  \item $X\sim B(7,0.4)$. Find $P(X=2)$.
+  \item $X\sim B(8,0.1)$. Find $P(X\geq1)$.
+  \item $X\sim B(40,0.25)$. Find the mean and variance.
+  \item A basketball player makes 65\% of free throws; for 8 attempts, find $P(\text{makes at least 6})$.
+  \item $X\sim B(4,p)$ and $P(X=0)=0.0016$. Find $p$.
+  \item A factory tests 10 items with a 4\% individual defect rate; find $P(\text{at most 1 defective})$.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $k=0.45$; $E(X)=0.45+0.7=1.15$
+  \item $\binom72(0.4)^2(0.6)^5\approx21(0.16)(0.07776)\approx0.261$
+  \item $P(X=0)=(0.9)^8\approx0.4305$; $P(X\geq1)\approx0.5695$
+  \item mean $=10$, variance $=40(0.25)(0.75)=7.5$
+  \item $P(6)+P(7)+P(8)=\binom86(0.65)^6(0.35)^2+\binom87(0.65)^7(0.35)+\binom88(0.65)^8\approx0.2587+0.1373+0.0319\approx0.428$
+  \item $(1-p)^4=0.0016\Rightarrow1-p=0.0016^{1/4}=0.2\Rightarrow p=0.8$
+  \item $P(0)=(0.96)^{10}\approx0.6648$; $P(1)=\binom{10}1(0.04)(0.96)^9\approx0.2770$; sum $\approx0.9418$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

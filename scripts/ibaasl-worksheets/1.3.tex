@@ -1,0 +1,115 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize IB AA SL \textperiodcentered{} 1.3}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 1.3 --- Sigma Notation}\\[2pt]
+{\small Mathematics: Analysis \& Approaches SL (IB) \textperiodcentered{} Unit 1: Number and Algebra}
+\end{center}
+
+\begin{ideabox}
+Sigma notation $\displaystyle\sum_{n=1}^{N}f(n)$ compactly writes the sum of $f(n)$ from $n=1$ to $n=N$.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item $\displaystyle\sum_{n=a}^{b}f(n)$: substitute each integer $n$ from $a$ to $b$ into $f(n)$ and add.
+  \item If $f(n)$ is linear in $n$, the sum is an arithmetic series; if $f(n)$ involves $r^n$, it's geometric.
+  \item Splitting or shifting the index (e.g.\ starting at $n=0$ vs $n=1$) can change the formula without changing the sum's value.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Evaluate directly}
+Evaluate $\displaystyle\sum_{n=1}^{5}(3n-2)$.\soln
+Terms: $1,4,7,10,13$.\\[3pt]\textbf{Conclusion:} sum $=35$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Geometric sigma sum}
+Evaluate $\displaystyle\sum_{n=1}^{6}4(2)^{n-1}$.\soln
+This is a geometric series with $u_1=4$, $r=2$, $n=6$ terms: $S_6=\dfrac{4(2^6-1)}{2-1}=4(63)$.\\[3pt]\textbf{Conclusion:} $252$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Write a series in sigma form}
+Write $8+13+18+\cdots+68$ in sigma notation and evaluate it.\soln
+\textbf{Step 1:} Arithmetic, $u_1=8$, $d=5$, general term $u_n=8+5(n-1)=5n+3$.\\[3pt]
+\textbf{Step 2:} Find $n$: $5n+3=68\Rightarrow n=13$. So $\displaystyle\sum_{n=1}^{13}(5n+3)$.\\[3pt]
+\textbf{Step 3:} $S_{13}=\dfrac{13}{2}(8+68)=\dfrac{13}{2}(76)$.\\[3pt]\textbf{Conclusion:} sigma form $\sum_{n=1}^{13}(5n+3)$, value $=494$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Application --- total savings}
+A savings plan deposits $D_n=25+3n$ dollars in month $n$, for $n=1$ to $12$. Find the total deposited over the year.\soln
+$\displaystyle\sum_{n=1}^{12}(25+3n)=12(25)+3\sum_{n=1}^{12}n=300+3\left(\dfrac{12(13)}{2}\right)=300+3(78)$.\\[3pt]\textbf{Conclusion:} total $=\$534$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Evaluate $\displaystyle\sum_{n=1}^{7}(2n+1)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Evaluate $\displaystyle\sum_{n=1}^{5}5(3)^{n-1}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Evaluate $\displaystyle\sum_{k=3}^{6}(k^2-1)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Write $4+9+14+\cdots+64$ in sigma notation and evaluate it.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Write $2+6+18+\cdots+486$ in sigma notation and evaluate it.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Evaluate $\displaystyle\sum_{n=0}^{4}7(0.5)^{n}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+A theatre adds $D_n=40+2n$ extra dollars in ticket sales on day $n$ of a promotion, for $n=1$ to $10$. Find the total extra revenue.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8 --- Challenge}
+Show that $\displaystyle\sum_{n=1}^{5}(2n+3)$ and $\displaystyle\sum_{n=0}^{4}(2n+5)$ give the same total, and explain why.\workspace{3.2cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Evaluate $\displaystyle\sum_{n=1}^{7}(2n+1)$.
+  \item Evaluate $\displaystyle\sum_{n=1}^{5}5(3)^{n-1}$.
+  \item Evaluate $\displaystyle\sum_{k=3}^{6}(k^2-1)$.
+  \item Write $4+9+14+\cdots+64$ in sigma notation and evaluate it.
+  \item Write $2+6+18+\cdots+486$ in sigma notation and evaluate it.
+  \item Evaluate $\displaystyle\sum_{n=0}^{4}7(0.5)^{n}$.
+  \item A theatre adds $D_n=40+2n$ extra dollars in ticket sales on day $n$ of a promotion, for $n=1$ to $10$. Find the total extra revenue.
+  \item Show that $\displaystyle\sum_{n=1}^{5}(2n+3)$ and $\displaystyle\sum_{n=0}^{4}(2n+5)$ give the same total, and explain why.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item terms $3,5,\dots,15$: sum $=63$
+  \item $S_5=\tfrac{5(3^5-1)}{2}=605$
+  \item $8+15+24+35=82$
+  \item $u_n=5n-1$, $n=13$; $\sum_{n=1}^{13}(5n-1)$, $S_{13}=\tfrac{13}{2}(4+64)=442$
+  \item $u_n=2(3)^{n-1}$, $n=6$; $\sum_{n=1}^{6}2(3)^{n-1}$, $S_6=\tfrac{2(3^6-1)}{2}=728$
+  \item $S=\tfrac{7(1-0.5^5)}{1-0.5}=13.5625$
+  \item $\sum_{n=1}^{10}(40+2n)=400+2(55)=510$
+  \item Both give $5+7+9+11+13=45$ --- shifting the index start from 1 to 0 while adjusting the formula's constant leaves every actual term unchanged
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

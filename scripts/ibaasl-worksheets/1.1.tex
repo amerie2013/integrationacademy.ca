@@ -1,0 +1,131 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize IB AA SL \textperiodcentered{} 1.1}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 1.1 --- Arithmetic Sequences \& Series}\\[2pt]
+{\small Mathematics: Analysis \& Approaches SL (IB) \textperiodcentered{} Unit 1: Number and Algebra}
+\end{center}
+
+\begin{ideabox}
+An arithmetic sequence has a constant common difference $d$ between consecutive terms.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item General term: $u_n=u_1+(n-1)d$.
+  \item Sum of the first $n$ terms: $S_n=\dfrac n2\big(2u_1+(n-1)d\big)=\dfrac n2(u_1+u_n)$.
+  \item $d>0$ increasing, $d<0$ decreasing, $d=0$ constant.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{Two equivalent sum formulas}$S_n=\dfrac n2(2u_1+(n-1)d)$ uses only $u_1$ and $d$; $S_n=\dfrac n2(u_1+u_n)$ is faster once you already know the last term $u_n$.
+\lh{Finding $u_1,d$ from two terms}Two given terms give two equations in $u_1$ and $d$ --- subtract them to eliminate $u_1$ and solve for $d$ first.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Find a term}
+Find $u_{20}$ for the sequence $8,13,18,\dots$\soln
+$u_1=8$, $d=5$. $u_{20}=8+(19)(5)=8+95$.\\[3pt]
+\textbf{Conclusion:} $u_{20}=103$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Solve for the first term and common difference}
+An arithmetic sequence has $u_6=23$ and $u_{11}=48$. Find $u_1$ and $d$.\soln
+\textbf{Step 1:} Subtract: $u_{11}-u_6=5d=48-23=25\Rightarrow d=5$.\\[3pt]
+\textbf{Step 2:} $u_6=u_1+5d=23\Rightarrow u_1+25=23\Rightarrow u_1=-2$.\\[3pt]
+\textbf{Conclusion:} $u_1=-2$, $d=5$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Sum of a series}
+Find $S_{25}$ for $7,11,15,\dots$\soln
+$u_1=7$, $d=4$, $n=25$. $S_{25}=\dfrac{25}{2}\big(2(7)+24(4)\big)=\dfrac{25}{2}(14+96)$.\\[3pt]
+\textbf{Conclusion:} $S_{25}=\dfrac{25}{2}(110)=1375$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Application --- stacking}
+Logs are stacked with 22 in the bottom row, each row above having 2 fewer, down to 4 in the top row. Find the total number of logs.\soln
+\textbf{Step 1:} $u_1=22$, $d=-2$, last term $u_n=4$.\\[3pt]
+\textbf{Step 2:} Find $n$: $4=22+(n-1)(-2)\Rightarrow -18=-2(n-1)\Rightarrow n=10$.\\[3pt]
+\textbf{Step 3:} $S_{10}=\dfrac{10}{2}(22+4)=5(26)$.\\[3pt]
+\textbf{Conclusion:} $130$ logs.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Find $u_{15}$ for $6,10,14,\dots$\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Find $u_{30}$ for $50,45,40,\dots$\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+An arithmetic sequence has $u_4=18$ and $u_9=38$. Find $u_1$ and $d$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Find $S_{18}$ for $2,9,16,\dots$\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Find $S_{40}$ for $100,95,90,\dots$\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+A theatre has 18 seats in the first row, increasing by 3 seats per row for 12 rows. Find the total seating capacity.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Find the number of terms in the sequence $5,9,13,\dots,161$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8 --- Challenge}
+How many terms of $3,7,11,\dots$ are needed for the sum to first exceed 200?\workspace{3.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 9 --- Challenge}
+An arithmetic sequence has $u_1=4$ and $S_{10}=205$. Find $d$.\workspace{3.2cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Find $u_{15}$ for $6,10,14,\dots$
+  \item Find $u_{30}$ for $50,45,40,\dots$
+  \item An arithmetic sequence has $u_4=18$ and $u_9=38$. Find $u_1$ and $d$.
+  \item Find $S_{18}$ for $2,9,16,\dots$
+  \item Find $S_{40}$ for $100,95,90,\dots$
+  \item A theatre has 18 seats in the first row, increasing by 3 seats per row for 12 rows. Find the total seating capacity.
+  \item Find the number of terms in the sequence $5,9,13,\dots,161$.
+  \item How many terms of $3,7,11,\dots$ are needed for the sum to first exceed 200?
+  \item An arithmetic sequence has $u_1=4$ and $S_{10}=205$. Find $d$.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $u_{15}=62$
+  \item $u_{30}=-95$
+  \item $d=4$, $u_1=6$
+  \item $S_{18}=1107$
+  \item $S_{40}=-3700$
+  \item $12$ rows: $S_{12}=\tfrac{12}{2}(2(18)+11(3))=6(69)=414$ seats
+  \item $5+(n-1)4=161\Rightarrow n=40$ terms
+  \item $S_n=\tfrac n2(6+4(n-1))>200\Rightarrow 2n^2+4n-200>0\Rightarrow n^2+2n-100>0$; testing, $n=10$ gives $S_{10}=210>200$ (and $n=9$ gives $171<200$), so $n=10$
+  \item $S_{10}=\tfrac{10}{2}(8+9d)=205\Rightarrow 40+45d=205\Rightarrow d=\tfrac{165}{45}=\tfrac{11}{3}$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

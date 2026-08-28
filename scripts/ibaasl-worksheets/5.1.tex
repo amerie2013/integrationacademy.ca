@@ -1,0 +1,100 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize IB AA SL \textperiodcentered{} 5.1}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 5.1 --- Limits and Introducing the Derivative}\\[2pt]
+{\small Mathematics: Analysis \& Approaches SL (IB) \textperiodcentered{} Unit 5: Differential Calculus}
+\end{center}
+
+\begin{ideabox}
+Limits handle indeterminate forms; the derivative is defined as a limit of secant slopes.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item If direct substitution gives $\tfrac00$, factor or rationalize first.
+  \item $f'(x)=\displaystyle\lim_{h\to0}\dfrac{f(x+h)-f(x)}{h}$.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Factoring an indeterminate form}
+Evaluate $\displaystyle\lim_{x\to5}\dfrac{x^2-25}{x-5}$.\soln
+$\dfrac{(x-5)(x+5)}{x-5}=x+5\to10$.\\[3pt]\textbf{Conclusion:} $10$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Rationalizing}
+Evaluate $\displaystyle\lim_{x\to0}\dfrac{\sqrt{x+9}-3}{x}$.\soln
+Multiply by the conjugate: $\dfrac{x}{x(\sqrt{x+9}+3)}=\dfrac{1}{\sqrt{x+9}+3}\to\dfrac16$.\\[3pt]\textbf{Conclusion:} $\dfrac16$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- First principles}
+Use first principles to find the derivative of $f(x)=x^2-3x$.\soln
+$f(x+h)-f(x)=2xh+h^2-3h=h(2x+h-3)$; divide by $h$, let $h\to0$.\\[3pt]\textbf{Conclusion:} $f'(x)=2x-3$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- General quadratic from first principles}
+Use first principles to prove $\dfrac{d}{dx}[ax^2]=2ax$.\soln
+$f(x+h)-f(x)=a(x+h)^2-ax^2=a(2xh+h^2)=h(2ax+ah)$; divide by $h$, let $h\to0$.\\[3pt]\textbf{Conclusion:} $f'(x)=2ax$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Evaluate $\displaystyle\lim_{x\to3}(2x^2-x+1)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Evaluate $\displaystyle\lim_{x\to-4}\dfrac{x^2-16}{x+4}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Evaluate $\displaystyle\lim_{x\to0}\dfrac{\sqrt{x+25}-5}{x}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Use first principles to find the derivative of $f(x)=x^2+7x$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5 --- Challenge}
+Use first principles to find the derivative of $f(x)=4x^2-2x$.\workspace{3.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6 --- Challenge}
+Evaluate $\displaystyle\lim_{x\to2}\dfrac{x^3-8}{x-2}$ by factoring the numerator as a difference of cubes.\workspace{3cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Evaluate $\displaystyle\lim_{x\to3}(2x^2-x+1)$.
+  \item Evaluate $\displaystyle\lim_{x\to-4}\dfrac{x^2-16}{x+4}$.
+  \item Evaluate $\displaystyle\lim_{x\to0}\dfrac{\sqrt{x+25}-5}{x}$.
+  \item Use first principles to find the derivative of $f(x)=x^2+7x$.
+  \item Use first principles to find the derivative of $f(x)=4x^2-2x$.
+  \item Evaluate $\displaystyle\lim_{x\to2}\dfrac{x^3-8}{x-2}$ by factoring the numerator as a difference of cubes.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $16$
+  \item $x-4\to-8$
+  \item $\dfrac{1}{\sqrt{x+25}+5}\to\dfrac1{10}$
+  \item $f'(x)=2x+7$
+  \item $f'(x)=8x-2$
+  \item $(x-2)(x^2+2x+4)/(x-2)=x^2+2x+4\to4+4+4=12$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

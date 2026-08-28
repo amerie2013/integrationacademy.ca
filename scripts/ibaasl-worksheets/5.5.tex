@@ -1,0 +1,99 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize IB AA SL \textperiodcentered{} 5.5}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 5.5 --- Optimization}\\[2pt]
+{\small Mathematics: Analysis \& Approaches SL (IB) \textperiodcentered{} Unit 5: Differential Calculus}
+\end{center}
+
+\begin{ideabox}
+Optimization reduces a two-variable problem to one variable using a constraint, then finds a critical point.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Use the constraint to eliminate a variable, differentiate, set to 0, confirm max/min.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Maximize area with fixed fencing}
+A rectangle is enclosed by 160 m of fencing. Find the dimensions maximizing area.\soln
+$y=80-x$; $A=80x-x^2$; $A'=80-2x=0\Rightarrow x=40$.\\[3pt]\textbf{Conclusion:} $x=y=40$ m (a square).
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Minimize fencing with fixed area}
+A pen must have area 484 m$^2$; find dimensions minimizing perimeter.\soln
+$y=484/x$; $P=2x+968/x$; $P'=2-968/x^2=0\Rightarrow x^2=484\Rightarrow x=22$.\\[3pt]\textbf{Conclusion:} $x=y=22$ m.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Open-top box}
+An open box is cut from a $18\times18$ cm sheet with corner squares of side $x$. Find $x$ maximizing volume.\soln
+$V=x(18-2x)^2$; $V'=(18-2x)^2+x\cdot2(18-2x)(-2)=(18-2x)(18-6x)$; zero at $x=9$ (rejected, collapses box) or $x=3$.\\[3pt]\textbf{Conclusion:} $x=3$ cm.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Minimum surface area cylinder}
+A cylinder must hold volume $432\pi$ cm$^3$; find the radius minimizing surface area.\soln
+$h=432/r^2$; $S=2\pi r^2+864\pi/r$; $S'=4\pi r-864\pi/r^2=0\Rightarrow r^3=216$.\\[3pt]\textbf{Conclusion:} $r=6$ cm.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+A rectangle is enclosed by 200 m of fencing; find dimensions maximizing area.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+A pen must have area 900 m$^2$; find dimensions minimizing perimeter.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3 --- Challenge}
+An open box is cut from a $20\times20$ cm sheet with corner squares of side $x$; find $x$ maximizing volume.\workspace{3.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+A cylinder must hold volume $2000\pi$ cm$^3$; find the radius minimizing surface area.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+For the cylinder above, find the height and confirm $h=2r$ at the optimum.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6 --- Challenge}
+A farmer has 240 m of fencing for a rectangular field using an existing wall as one side (so only 3 sides need fencing); find the dimensions maximizing area.\workspace{3.4cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item A rectangle is enclosed by 200 m of fencing; find dimensions maximizing area.
+  \item A pen must have area 900 m$^2$; find dimensions minimizing perimeter.
+  \item An open box is cut from a $20\times20$ cm sheet with corner squares of side $x$; find $x$ maximizing volume.
+  \item A cylinder must hold volume $2000\pi$ cm$^3$; find the radius minimizing surface area.
+  \item For the cylinder above, find the height and confirm $h=2r$ at the optimum.
+  \item A farmer has 240 m of fencing for a rectangular field using an existing wall as one side (so only 3 sides need fencing); find the dimensions maximizing area.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $y=100-x$, $A'=100-2x=0$: $x=y=50$ m
+  \item $y=900/x$, $x^2=900$: $x=y=30$ m
+  \item $V=x(20-2x)^2$; $V'=(20-2x)(20-6x)$: $x=10$ (rejected) or $x=\tfrac{10}3$ cm
+  \item $S=2\pi r^2+4000\pi/r$; $S'=4\pi r-4000\pi/r^2=0\Rightarrow r^3=1000\Rightarrow r=10$ cm
+  \item $h=2000/100=20$; $2r=20=h$ confirmed
+  \item Let $x$ = side perpendicular to wall, $240-2x$ = side parallel; $A=x(240-2x)=240x-2x^2$; $A'=240-4x=0\Rightarrow x=60$, parallel side $=120$ m
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

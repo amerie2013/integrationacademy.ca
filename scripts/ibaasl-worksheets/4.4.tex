@@ -1,0 +1,106 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize IB AA SL \textperiodcentered{} 4.4}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 4.4 --- Probability Basics and Venn Diagrams}\\[2pt]
+{\small Mathematics: Analysis \& Approaches SL (IB) \textperiodcentered{} Unit 4: Statistics and Probability}
+\end{center}
+
+\begin{ideabox}
+Venn diagrams and the addition rule solve "at least one" and unknown-overlap problems.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item $P(A\cup B)=P(A)+P(B)-P(A\cap B)$.
+  \item Independent: $P(A\cap B)=P(A)P(B)$. Mutually exclusive: $P(A\cap B)=0$.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Addition rule}
+Of 40 students, 24 study French, 18 study Spanish, 9 study both. Find $P(\text{at least one})$.\soln
+$P(F\cup S)=\tfrac{24}{40}+\tfrac{18}{40}-\tfrac{9}{40}=\tfrac{33}{40}$.\\[3pt]\textbf{Conclusion:} $\tfrac{33}{40}$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Unknown overlap}
+Of 60 people, 38 like tea, 30 like coffee, 8 like neither. Find how many like both.\soln
+At least one $=52$. $52=38+30-\text{both}\Rightarrow\text{both}=16$.\\[3pt]\textbf{Conclusion:} $16$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Independence check}
+$P(A)=0.5$, $P(B)=0.4$, $P(A\cap B)=0.2$. Are $A,B$ independent?\soln
+$P(A)P(B)=0.2$, matches $P(A\cap B)$.\\[3pt]\textbf{Conclusion:} yes, independent.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Mutually exclusive check}
+$P(C)=0.35$, $P(D)=0.4$, $P(C\cup D)=0.75$. Are $C,D$ mutually exclusive?\soln
+$P(C\cap D)=0.35+0.4-0.75=0$.\\[3pt]\textbf{Conclusion:} yes, $P(C\cap D)=0$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+$P(A)=0.6$, $P(B)=0.25$, $P(A\cap B)=0.1$. Find $P(A\cup B)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Of 50 people, 30 own a car, 22 own a bike, 10 own neither. Find how many own both.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+$P(A)=0.4$, $P(B)=0.3$, $P(A\cap B)=0.12$. Are $A,B$ independent?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+$P(C)=0.5$, $P(D)=0.3$. If mutually exclusive, find $P(C\cup D)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Of 80 gym members, 50 use weights, 35 use cardio, everyone uses at least one. Find how many use both.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6 --- Challenge}
+A survey of 100 finds 65 like pop music, 45 like rock, and $x$ like both, with 15 liking neither. Find $x$ and $P(\text{pop only})$.\workspace{3.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Explain why two mutually exclusive events with nonzero probability can never be independent.\workspace{2.4cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $P(A)=0.6$, $P(B)=0.25$, $P(A\cap B)=0.1$. Find $P(A\cup B)$.
+  \item Of 50 people, 30 own a car, 22 own a bike, 10 own neither. Find how many own both.
+  \item $P(A)=0.4$, $P(B)=0.3$, $P(A\cap B)=0.12$. Are $A,B$ independent?
+  \item $P(C)=0.5$, $P(D)=0.3$. If mutually exclusive, find $P(C\cup D)$.
+  \item Of 80 gym members, 50 use weights, 35 use cardio, everyone uses at least one. Find how many use both.
+  \item A survey of 100 finds 65 like pop music, 45 like rock, and $x$ like both, with 15 liking neither. Find $x$ and $P(\text{pop only})$.
+  \item Explain why two mutually exclusive events with nonzero probability can never be independent.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $0.6+0.25-0.1=0.75$
+  \item at least one $=40$; both $=30+22-40=12$
+  \item $P(A)P(B)=0.12$, matches: yes independent
+  \item $0.8$
+  \item $50+35-80=5$
+  \item at least one $=85$; $85=65+45-x\Rightarrow x=25$; pop only $=65-25=40\Rightarrow P=0.40$
+  \item if mutually exclusive, one occurring guarantees the other didn't ($P(A\cap B)=0$), which contradicts independence unless one probability is already 0
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

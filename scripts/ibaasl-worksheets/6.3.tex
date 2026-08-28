@@ -1,0 +1,99 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize IB AA SL \textperiodcentered{} 6.3}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 6.3 --- Integration of Trig and Exponential Functions}\\[2pt]
+{\small Mathematics: Analysis \& Approaches SL (IB) \textperiodcentered{} Unit 6: Integral Calculus}
+\end{center}
+
+\begin{ideabox}
+Reverse the trig, exponential, and log derivatives, including the linear-substitution pattern.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item $\displaystyle\int\sin x\,dx=-\cos x+C$, $\int\cos x\,dx=\sin x+C$, $\int e^x\,dx=e^x+C$, $\int\tfrac1x\,dx=\ln|x|+C$.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Basic combination}
+Find $\displaystyle\int(5\cos x+3e^x)\,dx$.\soln
+$5\sin x+3e^x+C$.\\[3pt]\textbf{Conclusion:} $5\sin x+3e^x+C$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Exponential substitution}
+Find $\displaystyle\int e^{2x+7}\,dx$.\soln
+Divide by $2$: $\dfrac{e^{2x+7}}{2}$.\\[3pt]\textbf{Conclusion:} $\dfrac{e^{2x+7}}{2}+C$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Trig substitution}
+Find $\displaystyle\int\cos(3x-1)\,dx$.\soln
+Divide by $3$: $\dfrac{\sin(3x-1)}{3}$.\\[3pt]\textbf{Conclusion:} $\dfrac{\sin(3x-1)}{3}+C$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Definite integral, combined types}
+Evaluate $\displaystyle\int_0^{\pi/2}(3\sin x+\cos x)\,dx$ exactly.\soln
+Antiderivative $-3\cos x+\sin x$; at $\pi/2$: $0+1=1$; at $0$: $-3+0=-3$.\\[3pt]\textbf{Conclusion:} $1-(-3)=4$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Find $\displaystyle\int(4\sin x-e^x)\,dx$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Find $\displaystyle\int e^{5x-3}\,dx$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Find $\displaystyle\int\sin(2x+\pi/3)\,dx$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Find $\displaystyle\int\dfrac{1}{5x+2}\,dx$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5 --- Challenge}
+Evaluate $\displaystyle\int_0^{\pi}(2\cos x-\sin x)\,dx$ exactly.\workspace{3.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Find $\displaystyle\int(e^{3x}-\cos(2x)+5)\,dx$.\workspace{2.4cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Find $\displaystyle\int(4\sin x-e^x)\,dx$.
+  \item Find $\displaystyle\int e^{5x-3}\,dx$.
+  \item Find $\displaystyle\int\sin(2x+\pi/3)\,dx$.
+  \item Find $\displaystyle\int\dfrac{1}{5x+2}\,dx$.
+  \item Evaluate $\displaystyle\int_0^{\pi}(2\cos x-\sin x)\,dx$ exactly.
+  \item Find $\displaystyle\int(e^{3x}-\cos(2x)+5)\,dx$.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $-4\cos x-e^x+C$
+  \item $\dfrac{e^{5x-3}}{5}+C$
+  \item $-\dfrac{\cos(2x+\pi/3)}{2}+C$
+  \item $\dfrac{\ln|5x+2|}{5}+C$
+  \item antideriv $2\sin x+\cos x$; at $\pi$: $0-1=-1$; at $0$: $0+1=1$; result $=-1-1=-2$
+  \item $\dfrac{e^{3x}}{3}-\dfrac{\sin(2x)}{2}+5x+C$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

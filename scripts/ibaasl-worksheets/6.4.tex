@@ -1,0 +1,100 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize IB AA SL \textperiodcentered{} 6.4}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 6.4 --- Applications: Area Between Curves and Kinematics}\\[2pt]
+{\small Mathematics: Analysis \& Approaches SL (IB) \textperiodcentered{} Unit 6: Integral Calculus}
+\end{center}
+
+\begin{ideabox}
+Area between curves and total-distance kinematics both split at crossing points and use absolute values.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Area $=\displaystyle\int_a^b[f(x)-g(x)]\,dx$, with $a,b$ the intersection points.
+  \item Total distance $=\displaystyle\int|v(t)|\,dt$ --- split at every zero of $v(t)$.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Area between curves}
+Find the area enclosed between $f(x)=x+6$ and $g(x)=x^2$.\soln
+Intersect: $x+6=x^2\Rightarrow x^2-x-6=0\Rightarrow(x-3)(x+2)=0$: $x=-2,3$. $f$ on top: $\int_{-2}^3[(x+6)-x^2]dx=\left[\tfrac{x^2}2+6x-\tfrac{x^3}3\right]_{-2}^3=(4.5+18-9)-(2-12+\tfrac83)$.\\[3pt]\textbf{Conclusion:} $13.5-(-7.33)=\dfrac{125}{6}$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Displacement via integration}
+$v(t)=6t-18$ m/s. Find displacement from $t=0$ to $t=5$.\soln
+$[3t^2-18t]_0^5=(75-90)-0$.\\[3pt]\textbf{Conclusion:} $-15$ m.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Total distance via integration}
+Using the same $v(t)=6t-18$, find total distance from $t=0$ to $t=5$.\soln
+$v=0$ at $t=3$. $\int_0^3(6t-18)dt=(27-54)-0=-27$. $\int_3^5(6t-18)dt=(75-90)-(27-54)=-15-(-27)=12$.\\[3pt]\textbf{Conclusion:} total $=27+12=39$ m.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Comparing accumulated rates}
+Two profit rates (\$1000s/month) are $p_1(t)=t+4$, $p_2(t)=0.4t^2$. Find where $p_1>p_2$ and the extra profit over that interval.\soln
+$t+4=0.4t^2\Rightarrow0.4t^2-t-4=0\Rightarrow t^2-2.5t-10=0\Rightarrow t=\dfrac{2.5\pm\sqrt{6.25+40}}2\approx4.55$ (positive root). Extra: $\int_0^{4.55}[(t+4)-0.4t^2]dt\approx\left[\tfrac{t^2}2+4t-\tfrac{0.4t^3}3\right]_0^{4.55}\approx10.35+18.2-12.58$.\\[3pt]\textbf{Conclusion:} Company 1 leads for $\approx4.55$ months, gaining $\approx\$15{,}970$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Find the area enclosed between $f(x)=12-x^2$ and $g(x)=x^2-4$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Find the area enclosed between $f(x)=x+3$ and $g(x)=x^2-3$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+$v(t)=4t-16$ m/s. Find the displacement from $t=0$ to $t=6$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Using the same $v(t)$, find the total distance travelled from $t=0$ to $t=6$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5 --- Challenge}
+A particle's velocity is $v(t)=3t^2-18t+24$ m/s; find the total distance travelled from $t=0$ to $t=5$ (first find when it's at rest).\workspace{3.6cm}
+\end{qbox}
+
+\begin{qbox}{Question 6 --- Challenge}
+Find the area enclosed between $f(x)=x^2-4x$ and $g(x)=-x^2+4x+8$.\workspace{3.4cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Find the area enclosed between $f(x)=12-x^2$ and $g(x)=x^2-4$.
+  \item Find the area enclosed between $f(x)=x+3$ and $g(x)=x^2-3$.
+  \item $v(t)=4t-16$ m/s. Find the displacement from $t=0$ to $t=6$.
+  \item Using the same $v(t)$, find the total distance travelled from $t=0$ to $t=6$.
+  \item A particle's velocity is $v(t)=3t^2-18t+24$ m/s; find the total distance travelled from $t=0$ to $t=5$ (first find when it's at rest).
+  \item Find the area enclosed between $f(x)=x^2-4x$ and $g(x)=-x^2+4x+8$.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $12-x^2=x^2-4\Rightarrow16=2x^2\Rightarrow x=\pm2\sqrt2$; area $=\int_{-2\sqrt2}^{2\sqrt2}(16-2x^2)dx=\left[16x-\tfrac{2x^3}3\right]$, evaluating gives $\dfrac{128\sqrt2}{3}\approx60.34$
+  \item $x+3=x^2-3\Rightarrow x^2-x-6=0\Rightarrow(x-3)(x+2)=0$: $x=-2,3$; area $=\int_{-2}^3[(x+3)-(x^2-3)]dx=\int_{-2}^3(6+x-x^2)dx=\dfrac{125}6$
+  \item $[2t^2-16t]_0^6=72-96=-24$ m
+  \item $v=0$ at $t=4$; $\int_0^4(4t-16)dt=(32-64)-0=-32$; $\int_4^6(4t-16)dt=(72-96)-(32-64)=-24-(-32)=8$; total $=32+8=40$ m
+  \item $v=0$ at $t=2,4$; $\int_0^2(3t^2-18t+24)dt=(8-36+48)-0=20$; $\int_2^4(\cdot)dt=(64-144+96)-20=16-20=-4$; $\int_4^5(\cdot)dt=(125-225+120)-16=20-16=4$; total $=20+4+4=28$ m
+  \item $x^2-4x=-x^2+4x+8\Rightarrow2x^2-8x-8=0\Rightarrow x^2-4x-4=0\Rightarrow x=2\pm2\sqrt2$; area $=\int[(-x^2+4x+8)-(x^2-4x)]dx=\int(-2x^2+8x+8)dx$ over that interval $\approx45.25$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

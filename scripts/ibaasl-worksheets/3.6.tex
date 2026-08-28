@@ -1,0 +1,112 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize IB AA SL \textperiodcentered{} 3.6}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 3.6 --- Trigonometric Functions and Equations}\\[2pt]
+{\small Mathematics: Analysis \& Approaches SL (IB) \textperiodcentered{} Unit 3: Geometry and Trigonometry}
+\end{center}
+
+\begin{ideabox}
+Solving trig equations combines the unit circle's symmetry with ordinary algebra --- including factoring quadratics in $\sin x$ or $\cos x$.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item $y=a\sin(b(x-c))+d$: amplitude $|a|$, period $\dfrac{2\pi}{b}$, midline $y=d$.
+  \item Quadratic-in-trig equations factor exactly like ordinary quadratics after substituting $u=\sin x$ or $u=\cos x$.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- State transformation features}
+State the amplitude, period, and midline of $y=6\cos(3x)-2$.\splot{-9}{5}{\addplot[exblue,thick]{6*cos(deg(3*x))-2};}\soln
+Amplitude 6, period $\dfrac{2\pi}{3}$, midline $y=-2$.\\[3pt]\textbf{Conclusion:} amplitude 6, period $2\pi/3$, midline $y=-2$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Solve a linear trig equation}
+Solve $\cos x=-0.4$ for $0\leq x\leq2\pi$.\soln
+Reference angle $\cos^{-1}(0.4)\approx1.159$. Q2: $x\approx\pi-1.159\approx1.983$. Q3: $x\approx\pi+1.159\approx4.301$.\\[3pt]\textbf{Conclusion:} $x\approx1.983,4.301$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Quadratic in sine}
+Solve $2\sin^2x+\sin x-1=0$ for $0\leq x\leq2\pi$.\soln
+$(2\sin x-1)(\sin x+1)=0$. $\sin x=\tfrac12\Rightarrow x=\tfrac{\pi}6,\tfrac{5\pi}6$. $\sin x=-1\Rightarrow x=\tfrac{3\pi}2$.\\[3pt]\textbf{Conclusion:} $x=\tfrac{\pi}6,\tfrac{5\pi}6,\tfrac{3\pi}2$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Identity substitution first}
+Solve $2\cos^2x-\sin x-1=0$ for $0\leq x\leq2\pi$.\soln
+$2(1-\sin^2x)-\sin x-1=0\Rightarrow-2\sin^2x-\sin x+1=0\Rightarrow2\sin^2x+\sin x-1=0\Rightarrow(2\sin x-1)(\sin x+1)=0$.\\[3pt]\textbf{Conclusion:} $x=\tfrac{\pi}6,\tfrac{5\pi}6,\tfrac{3\pi}2$ (same equation as Example 3, after substitution).
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+State the amplitude, period, and midline of $y=4\sin(2x)+3$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Solve $\sin x=0.65$ for $0\leq x\leq2\pi$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Solve $2\cos^2x-\cos x-1=0$ for $0\leq x\leq2\pi$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4 --- Challenge}
+Solve $2\sin^2x-\cos x-1=0$ for $0\leq x\leq2\pi$ (substitute $\sin^2x=1-\cos^2x$ first).\workspace{3.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+A tide's depth is $D(t)=3\sin\!\left(\dfrac{\pi}{6}t\right)+7$ metres; find the first two times in $0\leq t\leq12$ hours the depth is $8.5$ m.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Solve $\tan x=-1$ for $0\leq x\leq2\pi$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Solve $2\sin^2x+3\sin x+1=0$ for $0\leq x\leq2\pi$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8 --- Challenge}
+A Ferris wheel's height is $h(t)=10\sin\!\left(\dfrac{\pi}{4}t\right)+12$ m; find every time in the first 8 minutes it reaches height 17 m.\workspace{3.4cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item State the amplitude, period, and midline of $y=4\sin(2x)+3$.
+  \item Solve $\sin x=0.65$ for $0\leq x\leq2\pi$.
+  \item Solve $2\cos^2x-\cos x-1=0$ for $0\leq x\leq2\pi$.
+  \item Solve $2\sin^2x-\cos x-1=0$ for $0\leq x\leq2\pi$ (substitute $\sin^2x=1-\cos^2x$ first).
+  \item A tide's depth is $D(t)=3\sin\!\left(\dfrac{\pi}{6}t\right)+7$ metres; find the first two times in $0\leq t\leq12$ hours the depth is $8.5$ m.
+  \item Solve $\tan x=-1$ for $0\leq x\leq2\pi$.
+  \item Solve $2\sin^2x+3\sin x+1=0$ for $0\leq x\leq2\pi$.
+  \item A Ferris wheel's height is $h(t)=10\sin\!\left(\dfrac{\pi}{4}t\right)+12$ m; find every time in the first 8 minutes it reaches height 17 m.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item amplitude 4, period $\pi$, midline $y=3$
+  \item reference $\sin^{-1}(0.65)\approx0.708$; $x\approx0.708,\ \pi-0.708\approx2.434$
+  \item $(2\cos x+1)(\cos x-1)=0$: $\cos x=-\tfrac12\Rightarrow x=\tfrac{2\pi}3,\tfrac{4\pi}3$; $\cos x=1\Rightarrow x=0,2\pi$
+  \item $2(1-\cos^2x)-\cos x-1=0\Rightarrow-2\cos^2x-\cos x+1=0\Rightarrow2\cos^2x+\cos x-1=0\Rightarrow(2\cos x-1)(\cos x+1)=0$: $\cos x=\tfrac12\Rightarrow x=\tfrac{\pi}3,\tfrac{5\pi}3$; $\cos x=-1\Rightarrow x=\pi$
+  \item $\sin(\pi t/6)=0.5\Rightarrow \pi t/6=\pi/6$ or $5\pi/6\Rightarrow t=1$ or $t=5$ hours
+  \item Q2 and Q4: $x=\tfrac{3\pi}4,\tfrac{7\pi}4$
+  \item $(2\sin x+1)(\sin x+1)=0$: $\sin x=-\tfrac12\Rightarrow x=\tfrac{7\pi}6,\tfrac{11\pi}6$; $\sin x=-1\Rightarrow x=\tfrac{3\pi}2$
+  \item $10\sin(\pi t/4)=5\Rightarrow\sin(\pi t/4)=0.5\Rightarrow\pi t/4=\pi/6$ or $5\pi/6\Rightarrow t=\tfrac23$ or $\tfrac{10}3$ min (period 8, so no repeats within 8 min beyond these)
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

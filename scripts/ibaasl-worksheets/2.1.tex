@@ -1,0 +1,113 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize IB AA SL \textperiodcentered{} 2.1}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 2.1 --- Function Basics: Domain, Range and Notation}\\[2pt]
+{\small Mathematics: Analysis \& Approaches SL (IB) \textperiodcentered{} Unit 2: Functions}
+\end{center}
+
+\begin{ideabox}
+A function assigns exactly one output to every input; its domain and range describe what inputs and outputs are possible.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Domain restrictions: avoid division by zero and square roots of negatives.
+  \item Vertical line test: a graph is a function iff no vertical line crosses it more than once.
+  \item Range: think about the smallest and largest outputs the function can actually reach.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Evaluate a function}
+Given $f(x)=3x^2-4x+1$, find $f(-2)$.\soln
+$3(4)-4(-2)+1=12+8+1$.\\[3pt]\textbf{Conclusion:} $f(-2)=21$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Domain with a root}
+Find the domain of $f(x)=\sqrt{2x-8}$.\soln
+$2x-8\geq0\Rightarrow x\geq4$.\\[3pt]\textbf{Conclusion:} domain is $x\geq4$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Domain with a fraction}
+Find the domain of $f(x)=\dfrac{5}{x^2-9}$.\soln
+$x^2-9\neq0\Rightarrow x\neq\pm3$.\\[3pt]\textbf{Conclusion:} all real $x$ except $3$ and $-3$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Range from a transformed root}
+Find the range of $f(x)=-\sqrt{x-2}+5$.\soln
+Domain is $x\geq2$; at $x=2$, $f=5$ (largest value, since $-\sqrt{\phantom x}$ falls as $x$ grows).\\[3pt]\textbf{Conclusion:} range is $f(x)\leq5$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Given $f(x)=2x^2+5x-1$, find $f(3)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Find the domain of $f(x)=\sqrt{5-x}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Find the domain of $f(x)=\dfrac{4}{2x+6}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Find the domain of $f(x)=\dfrac{1}{\sqrt{x-1}}$ (careful: the root cannot be zero either).\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Find the range of $f(x)=\sqrt{x+3}-1$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Determine whether $x^2+y^2=25$ passes the vertical line test, and explain your reasoning.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Find the domain of $f(x)=\dfrac{x+2}{x^2-4}$ (factor the denominator first).\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8 --- Challenge}
+Find the range of $f(x)=-2\sqrt{x}+7$.\workspace{3.2cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Given $f(x)=2x^2+5x-1$, find $f(3)$.
+  \item Find the domain of $f(x)=\sqrt{5-x}$.
+  \item Find the domain of $f(x)=\dfrac{4}{2x+6}$.
+  \item Find the domain of $f(x)=\dfrac{1}{\sqrt{x-1}}$ (careful: the root cannot be zero either).
+  \item Find the range of $f(x)=\sqrt{x+3}-1$.
+  \item Determine whether $x^2+y^2=25$ passes the vertical line test, and explain your reasoning.
+  \item Find the domain of $f(x)=\dfrac{x+2}{x^2-4}$ (factor the denominator first).
+  \item Find the range of $f(x)=-2\sqrt{x}+7$.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $18+15-1=32$
+  \item $x\leq5$
+  \item $x\neq-3$
+  \item $x>1$
+  \item $f(x)\geq-1$
+  \item Fails: a vertical line at $x=0$ meets the circle at both $y=5$ and $y=-5$
+  \item $x^2-4=(x-2)(x+2)$; domain is all real $x$ except $2$ and $-2$
+  \item Domain $x\geq0$; at $x=0$, $f=7$ (max); as $x$ grows, $f\to-\infty$: range $f(x)\leq7$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

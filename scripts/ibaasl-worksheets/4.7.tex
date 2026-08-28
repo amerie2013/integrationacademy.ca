@@ -1,0 +1,106 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize IB AA SL \textperiodcentered{} 4.7}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 4.7 --- The Normal Distribution}\\[2pt]
+{\small Mathematics: Analysis \& Approaches SL (IB) \textperiodcentered{} Unit 4: Statistics and Probability}
+\end{center}
+
+\begin{ideabox}
+Z-scores standardize any normal distribution, letting probabilities and percentiles be found (or reversed).
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item $z=\dfrac{x-\mu}{\sigma}$.
+  \item Inverse normal: given a probability, work backward for $x=\mu+z\sigma$.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Z-score and probability}
+$\mu=80$, $\sigma=6$. Find $P(X<89)$ given $P(Z<1.5)\approx0.9332$.\soln
+$z=\dfrac{89-80}{6}=1.5$.\\[3pt]\textbf{Conclusion:} $P(X<89)\approx0.9332$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Inverse normal}
+$\mu=80$, $\sigma=6$. Find the score at the 90th percentile, given $P(Z<1.2816)\approx0.90$.\soln
+$x=80+1.2816(6)$.\\[3pt]\textbf{Conclusion:} $x\approx87.69$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Between two values}
+$\mu=80$, $\sigma=6$. Find $P(71<X<89)$ given $P(Z<-1.5)\approx0.0668$ and $P(Z<1.5)\approx0.9332$.\soln
+$z_1=-1.5$, $z_2=1.5$.\\[3pt]\textbf{Conclusion:} $P\approx0.9332-0.0668=0.8664$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Solve for mu and sigma}
+It's known $P(X<60)=0.1587$ and $P(X<100)=0.8413$. Find $\mu,\sigma$ (using $P(Z<-1)\approx0.1587$, $P(Z<1)\approx0.8413$).\soln
+$\mu-\sigma=60$, $\mu+\sigma=100$. Add: $2\mu=160\Rightarrow\mu=80$; $\sigma=20$.\\[3pt]\textbf{Conclusion:} $\mu=80$, $\sigma=20$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+$\mu=45$, $\sigma=4$. Find the z-score for $x=53$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+$\mu=120$, $\sigma=10$. Find $P(X<135)$ given $P(Z<1.5)\approx0.9332$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+$\mu=120$, $\sigma=10$. Find the score at the 95th percentile, given $P(Z<1.645)\approx0.95$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+$\mu=120$, $\sigma=10$. Find $P(105<X<135)$ given $P(Z<-1.5)\approx0.0668$ and $P(Z<1.5)\approx0.9332$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5 --- Challenge}
+A machine's fill weights are normal with unknown $\mu,\sigma$; $P(X<480)=0.1587$, $P(X<540)=0.8413$. Find $\mu,\sigma$.\workspace{3.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+$\mu=50$, $\sigma=8$. Find the weight below which the lightest 10\% falls, given $P(Z<-1.2816)\approx0.10$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Explain why $P(X<\mu)=0.5$ for any normal distribution.\workspace{2.4cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $\mu=45$, $\sigma=4$. Find the z-score for $x=53$.
+  \item $\mu=120$, $\sigma=10$. Find $P(X<135)$ given $P(Z<1.5)\approx0.9332$.
+  \item $\mu=120$, $\sigma=10$. Find the score at the 95th percentile, given $P(Z<1.645)\approx0.95$.
+  \item $\mu=120$, $\sigma=10$. Find $P(105<X<135)$ given $P(Z<-1.5)\approx0.0668$ and $P(Z<1.5)\approx0.9332$.
+  \item A machine's fill weights are normal with unknown $\mu,\sigma$; $P(X<480)=0.1587$, $P(X<540)=0.8413$. Find $\mu,\sigma$.
+  \item $\mu=50$, $\sigma=8$. Find the weight below which the lightest 10\% falls, given $P(Z<-1.2816)\approx0.10$.
+  \item Explain why $P(X<\mu)=0.5$ for any normal distribution.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $z=2$
+  \item $P\approx0.9332$
+  \item $x=120+1.645(10)\approx136.45$
+  \item $0.9332-0.0668=0.8664$
+  \item $\mu-\sigma=480$, $\mu+\sigma=540$: $\mu=510$, $\sigma=30$
+  \item $50+(-1.2816)(8)\approx39.75$
+  \item the normal distribution is symmetric about $\mu$, so exactly half the probability lies below the mean
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

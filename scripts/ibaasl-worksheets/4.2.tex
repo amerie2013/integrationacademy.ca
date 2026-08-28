@@ -1,0 +1,113 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize IB AA SL \textperiodcentered{} 4.2}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 4.2 --- Measures of Central Tendency and Spread}\\[2pt]
+{\small Mathematics: Analysis \& Approaches SL (IB) \textperiodcentered{} Unit 4: Statistics and Probability}
+\end{center}
+
+\begin{ideabox}
+Standard deviation, quartiles, and the outlier rule describe how spread out data is.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item $\sigma=\sqrt{\dfrac{\sum(x-\bar x)^2}{n}}$.
+  \item Outlier rule: below $Q_1-1.5\,IQR$ or above $Q_3+1.5\,IQR$.
+  \item Adding a constant shifts the mean, not the SD; multiplying scales both.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Mean and median}
+Find the mean and median of $6,6,11,14,23$.\soln
+Mean $=\dfrac{60}{5}=12$; median (middle value) $=11$.\\[3pt]\textbf{Conclusion:} mean 12, median 11.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Standard deviation}
+Find the SD of $4,6,8,10,12$.\soln
+Mean $=8$; deviations squared: $16,4,0,4,16$; sum $=40$; $\sigma=\sqrt{8}$.\\[3pt]\textbf{Conclusion:} $\sigma\approx2.83$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Outlier check}
+A data set has $Q_1=22$, $Q_3=38$. Is $65$ an outlier?\soln
+$IQR=16$; upper fence $=38+24=62$.\\[3pt]\textbf{Conclusion:} yes, $65>62$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Transformation}
+A data set has mean 55, SD 6. Every value is tripled, then 4 is subtracted. Find the new mean and SD.\soln
+Tripling: mean $165$, SD $18$; subtracting 4 changes only the mean.\\[3pt]\textbf{Conclusion:} new mean $161$, SD $18$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Find the mean and median of $2,5,9,12,27$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Find the SD of $3,7,11,15,19$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+A data set has $Q_1=10$, $Q_3=20$. Is $36$ an outlier?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+A data set has mean 30, SD 4. Every value has 12 added. Find the new mean and SD.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+A data set has mean 20, SD 3. Every value is doubled. Find the new mean and SD.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Class A: median 80, IQR 6. Class B: median 76, IQR 18. Compare performance and consistency.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7 --- Challenge}
+A data set has five-number summary $5,15,20,28,55$. Determine whether $55$ is an outlier.\workspace{3.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 8 --- Challenge}
+A data set has mean 44 and SD 5. Every value is halved and then 10 is added. Find the new mean and SD.\workspace{3.2cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Find the mean and median of $2,5,9,12,27$.
+  \item Find the SD of $3,7,11,15,19$.
+  \item A data set has $Q_1=10$, $Q_3=20$. Is $36$ an outlier?
+  \item A data set has mean 30, SD 4. Every value has 12 added. Find the new mean and SD.
+  \item A data set has mean 20, SD 3. Every value is doubled. Find the new mean and SD.
+  \item Class A: median 80, IQR 6. Class B: median 76, IQR 18. Compare performance and consistency.
+  \item A data set has five-number summary $5,15,20,28,55$. Determine whether $55$ is an outlier.
+  \item A data set has mean 44 and SD 5. Every value is halved and then 10 is added. Find the new mean and SD.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item mean $=11$, median $=9$
+  \item mean $=11$; deviations sq: $64,16,0,16,64=160$; $\sigma=\sqrt{32}\approx5.66$
+  \item $IQR=10$, fence $=20+15=35$; $36>35$: yes, outlier
+  \item mean $42$, SD unchanged $4$
+  \item mean $40$, SD $6$
+  \item A has higher median (better typical score) and smaller IQR (more consistent)
+  \item $IQR=13$, fence $=28+19.5=47.5$; $55>47.5$: yes, outlier
+  \item halving: mean $22$, SD $2.5$; $+10$ changes only mean: mean $32$, SD $2.5$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

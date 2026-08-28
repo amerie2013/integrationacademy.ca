@@ -1,0 +1,100 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize IB AA SL \textperiodcentered{} 5.6}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 5.6 --- Kinematics and Rates of Change}\\[2pt]
+{\small Mathematics: Analysis \& Approaches SL (IB) \textperiodcentered{} Unit 5: Differential Calculus}
+\end{center}
+
+\begin{ideabox}
+Velocity is the derivative of position; acceleration is the derivative of velocity.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item At rest when $v(t)=0$. Speeding up: $v,a$ same sign. Slowing down: opposite signs.
+  \item Total distance $\neq$ displacement when direction reverses --- split at each zero of $v(t)$.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Velocity and acceleration}
+$s(t)=t^3-9t^2+15t$. Find $v(t)$, $a(t)$, and evaluate both at $t=1$.\soln
+$v(t)=3t^2-18t+15$; $v(1)=3-18+15=0$. $a(t)=6t-18$; $a(1)=-12$.\\[3pt]\textbf{Conclusion:} $v(1)=0$, $a(1)=-12$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- At rest}
+Using the same $s(t)$, find every time the particle is at rest.\soln
+$3t^2-18t+15=3(t-1)(t-5)=0$.\\[3pt]\textbf{Conclusion:} $t=1,5$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Total distance}
+Given $s(0)=0$, $s(1)=7$, $s(5)=-25$, $s(6)=-18$ for a particle reversing direction at $t=1,5$, find the total distance travelled over $[0,6]$.\soln
+$|7-0|+|-25-7|+|-18-(-25)|=7+32+7$.\\[3pt]\textbf{Conclusion:} total distance $=46$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Projectile}
+A ball's height is $s(t)=-5t^2+22t+3$. Find its maximum height and the time it lands (2 d.p.).\soln
+$v(t)=-10t+22=0\Rightarrow t=2.2$; $s(2.2)=27.2$. Landing: $-5t^2+22t+3=0\Rightarrow t=\dfrac{-22\pm\sqrt{484+60}}{-10}$.\\[3pt]\textbf{Conclusion:} max height $27.2$ m at $t=2.2$ s; lands at $t\approx4.53$ s.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+$s(t)=t^3-12t^2+36t$. Find $v(t)$ and $a(t)$, then evaluate both at $t=2$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Using the same $s(t)$, find every time the particle is at rest.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Determine whether the particle is speeding up or slowing down at $t=1$ (using $v(t)=3t^2-24t+36$, $a(t)=6t-24$).\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+A ball's height is $s(t)=-5t^2+16t+2$; find its maximum height and when it occurs.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5 --- Challenge}
+For the ball above, find the time it lands (2 d.p.) and its velocity on impact.\workspace{3.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6 --- Challenge}
+Given $s(0)=0$, $s(2)=18$, $s(4)=10$, $s(6)=30$ for a particle reversing direction at $t=2,4$, find the total distance travelled over $[0,6]$.\workspace{3.2cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $s(t)=t^3-12t^2+36t$. Find $v(t)$ and $a(t)$, then evaluate both at $t=2$.
+  \item Using the same $s(t)$, find every time the particle is at rest.
+  \item Determine whether the particle is speeding up or slowing down at $t=1$ (using $v(t)=3t^2-24t+36$, $a(t)=6t-24$).
+  \item A ball's height is $s(t)=-5t^2+16t+2$; find its maximum height and when it occurs.
+  \item For the ball above, find the time it lands (2 d.p.) and its velocity on impact.
+  \item Given $s(0)=0$, $s(2)=18$, $s(4)=10$, $s(6)=30$ for a particle reversing direction at $t=2,4$, find the total distance travelled over $[0,6]$.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $v(t)=3t^2-24t+36$, $a(t)=6t-24$; $v(2)=12-48+36=0$, $a(2)=-12$
+  \item $3(t-2)(t-6)=0$: $t=2,6$
+  \item $v(1)=15>0$, $a(1)=-18<0$: opposite signs, so slowing down
+  \item $v=-10t+16=0\Rightarrow t=1.6$; $s(1.6)=14.8$ m
+  \item $-5t^2+16t+2=0\Rightarrow t=\dfrac{-16\pm\sqrt{256+40}}{-10}\approx4.32$ s; $v(4.32)=-10(4.32)+16\approx-27.2$ m/s
+  \item $|18-0|+|10-18|+|30-10|=18+8+20=46$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

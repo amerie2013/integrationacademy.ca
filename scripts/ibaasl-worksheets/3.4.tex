@@ -1,0 +1,112 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize IB AA SL \textperiodcentered{} 3.4}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 3.4 --- Radian Measure, Arcs and Sectors}\\[2pt]
+{\small Mathematics: Analysis \& Approaches SL (IB) \textperiodcentered{} Unit 3: Geometry and Trigonometry}
+\end{center}
+
+\begin{ideabox}
+Radians make arc length and sector area formulas clean: $s=r\theta$, $A=\tfrac12r^2\theta$.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item $180°=\pi$ rad.
+  \item Segment area $=\tfrac12r^2(\theta-\sin\theta)$.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Convert degrees to radians}
+Convert $315°$ to radians as an exact multiple of $\pi$.\soln
+$315\times\dfrac{\pi}{180}=\dfrac{7\pi}{4}$.\\[3pt]\textbf{Conclusion:} $\dfrac{7\pi}{4}$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Solve for the angle}
+An arc of length 15 cm is cut from a circle of radius 6 cm. Find $\theta$ in radians.\sector{2}{100}{r}\soln
+$15=6\theta\Rightarrow\theta=2.5$.\\[3pt]\textbf{Conclusion:} $\theta=2.5$ rad.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Solve for the radius}
+A sector has area 45 cm$^2$ and angle $\dfrac{3\pi}{4}$. Find $r$.\soln
+$45=\tfrac12r^2\left(\tfrac{3\pi}4\right)\Rightarrow r^2=\dfrac{120}{\pi}$.\\[3pt]\textbf{Conclusion:} $r\approx6.18$ cm.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Segment area}
+Find the segment area for a circle of radius 8 cm with central angle $\dfrac{\pi}{2}$.\soln
+Sector: $\tfrac12(64)(\pi/2)=16\pi$. Triangle: $\tfrac12(64)\sin(\pi/2)=32$.\\[3pt]\textbf{Conclusion:} $16\pi-32\approx18.27\text{ cm}^2$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Convert $250°$ to radians (round to 3 d.p.).\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Convert $\dfrac{5\pi}{9}$ radians to degrees.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Find the arc length for angle $1.4$ rad in a circle of radius 9 cm.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+A sector has area 60 cm$^2$ and radius 10 cm; find its angle in radians.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5 --- Challenge}
+Find the segment area for a circle of radius 12 cm with central angle $\dfrac{2\pi}{3}$.\workspace{3.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 6 --- Challenge}
+A sector's perimeter is 30 cm and its area is 54 cm$^2$; set up and solve for its radius $r$.\workspace{3.6cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+A running track is a rectangle 90 m by 24 m, capped by two semicircular ends of radius 12 m; find the total perimeter.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Find the area of a sector with radius 5 cm and angle $2.2$ rad.\workspace{2.4cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Convert $250°$ to radians (round to 3 d.p.).
+  \item Convert $\dfrac{5\pi}{9}$ radians to degrees.
+  \item Find the arc length for angle $1.4$ rad in a circle of radius 9 cm.
+  \item A sector has area 60 cm$^2$ and radius 10 cm; find its angle in radians.
+  \item Find the segment area for a circle of radius 12 cm with central angle $\dfrac{2\pi}{3}$.
+  \item A sector's perimeter is 30 cm and its area is 54 cm$^2$; set up and solve for its radius $r$.
+  \item A running track is a rectangle 90 m by 24 m, capped by two semicircular ends of radius 12 m; find the total perimeter.
+  \item Find the area of a sector with radius 5 cm and angle $2.2$ rad.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $250\times\pi/180\approx4.363$
+  \item $5\pi/9\times180/\pi=100°$
+  \item $s=9(1.4)=12.6$ cm
+  \item $60=\tfrac12(100)\theta\Rightarrow\theta=1.2$ rad
+  \item sector $=\tfrac12(144)(2\pi/3)=48\pi$; triangle $=\tfrac12(144)\sin(2\pi/3)=72\cdot\tfrac{\sqrt3}2\approx62.35$; segment $\approx150.80-62.35\approx88.45\text{ cm}^2$
+  \item $2r+r\theta=30$, $\tfrac12r^2\theta=54\Rightarrow r\theta=108/r$; $2r+108/r=30\Rightarrow2r^2-30r+108=0\Rightarrow r^2-15r+54=0\Rightarrow(r-6)(r-9)=0$: $r=6$ or $r=9$
+  \item straight sides $2(90)=180$; two semicircles $=2(12\pi)=24\pi$; total $\approx180+75.4=255.4$ m
+  \item $\tfrac12(25)(2.2)=27.5\text{ cm}^2$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

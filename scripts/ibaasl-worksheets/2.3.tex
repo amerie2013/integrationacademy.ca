@@ -1,0 +1,113 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize IB AA SL \textperiodcentered{} 2.3}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 2.3 --- Composite and Inverse Functions}\\[2pt]
+{\small Mathematics: Analysis \& Approaches SL (IB) \textperiodcentered{} Unit 2: Functions}
+\end{center}
+
+\begin{ideabox}
+Composite functions chain two functions; inverse functions undo a function completely.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item $(f\circ g)(x)=f(g(x))$ --- evaluate the inside function first.
+  \item To find $f^{-1}$: swap $x$ and $y$ in $y=f(x)$, then solve for $y$.
+  \item $f$ and $f^{-1}$ are reflections of each other in $y=x$; $f$ needs a restricted domain to have an inverse if it fails the horizontal line test.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Evaluate a composite}
+Given $f(x)=3x-2$, $g(x)=x^2+1$, find $f(g(-1))$.\soln
+$g(-1)=1+1=2$. $f(2)=3(2)-2$.\\[3pt]\textbf{Conclusion:} $f(g(-1))=4$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Find a composite expression}
+Given $f(x)=3x-2$, $g(x)=x^2+1$, find $(f\circ g)(x)$.\soln
+$f(g(x))=3(x^2+1)-2=3x^2+3-2$.\\[3pt]\textbf{Conclusion:} $(f\circ g)(x)=3x^2+1$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Find an inverse}
+Find the inverse of $f(x)=4x+7$.\soln
+$y=4x+7$; swap: $x=4y+7\Rightarrow y=\dfrac{x-7}{4}$.\\[3pt]\textbf{Conclusion:} $f^{-1}(x)=\dfrac{x-7}{4}$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Inverse of a restricted quadratic}
+Find the inverse of $f(x)=x^2-3$, restricted to $x\geq0$.\soln
+$y=x^2-3$; swap: $x=y^2-3\Rightarrow y^2=x+3\Rightarrow y=\sqrt{x+3}$ (positive root, matching the restriction).\\[3pt]\textbf{Conclusion:} $f^{-1}(x)=\sqrt{x+3}$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Given $f(x)=x+6$, $g(x)=2x$, find $g(f(2))$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Given $f(x)=x+6$, $g(x)=2x$, find $(g\circ f)(x)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Find the inverse of $f(x)=5x-3$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Find the inverse of $f(x)=\dfrac{x+4}{3}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Find the inverse of $f(x)=x^2+2$, restricted to $x\leq0$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Verify that $f(x)=2x+6$ and $g(x)=\dfrac{x-6}{2}$ are inverses by computing both compositions.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Given $f(x)=x-1$, $g(x)=x^2$, find $(g\circ f)(3)$ and $(f\circ g)(3)$, and note they differ.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8 --- Challenge}
+Given $f(x)=2x-5$, find $f^{-1}(f(8))$ without computing $f^{-1}$'s formula, and explain why your shortcut works.\workspace{3cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Given $f(x)=x+6$, $g(x)=2x$, find $g(f(2))$.
+  \item Given $f(x)=x+6$, $g(x)=2x$, find $(g\circ f)(x)$.
+  \item Find the inverse of $f(x)=5x-3$.
+  \item Find the inverse of $f(x)=\dfrac{x+4}{3}$.
+  \item Find the inverse of $f(x)=x^2+2$, restricted to $x\leq0$.
+  \item Verify that $f(x)=2x+6$ and $g(x)=\dfrac{x-6}{2}$ are inverses by computing both compositions.
+  \item Given $f(x)=x-1$, $g(x)=x^2$, find $(g\circ f)(3)$ and $(f\circ g)(3)$, and note they differ.
+  \item Given $f(x)=2x-5$, find $f^{-1}(f(8))$ without computing $f^{-1}$'s formula, and explain why your shortcut works.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $f(2)=8$, $g(8)=16$
+  \item $g(x+6)=2x+12$
+  \item $f^{-1}(x)=\dfrac{x+3}{5}$
+  \item $f^{-1}(x)=3x-4$
+  \item $y=-\sqrt{x-2}$ (negative root, matching $x\leq0$)
+  \item $f(g(x))=2\left(\tfrac{x-6}{2}\right)+6=x$; $g(f(x))=\tfrac{(2x+6)-6}{2}=x$: both confirm they're inverses
+  \item $(g\circ f)(3)=g(2)=4$; $(f\circ g)(3)=f(9)=8$ --- different, showing composition order matters
+  \item $f^{-1}(f(8))=8$, since applying a function then its inverse always returns the original input
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

@@ -1,0 +1,100 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize IB AA SL \textperiodcentered{} 6.1}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 6.1 --- Antiderivatives and Indefinite Integrals}\\[2pt]
+{\small Mathematics: Analysis \& Approaches SL (IB) \textperiodcentered{} Unit 6: Integral Calculus}
+\end{center}
+
+\begin{ideabox}
+Integration reverses differentiation; every indefinite integral carries an unknown constant $C$.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item $\displaystyle\int x^n\,dx=\dfrac{x^{n+1}}{n+1}+C$.
+  \item $\displaystyle\int(ax+b)^n\,dx=\dfrac{(ax+b)^{n+1}}{a(n+1)}+C$.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Power rule}
+Find $\displaystyle\int(12x^3-4x+7)\,dx$.\soln
+$3x^4-2x^2+7x+C$.\\[3pt]\textbf{Conclusion:} $3x^4-2x^2+7x+C$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Finding C}
+Given $f'(x)=4x-3$, $f(2)=5$, find $f(x)$.\soln
+$f(x)=2x^2-3x+C$; $5=8-6+C\Rightarrow C=3$.\\[3pt]\textbf{Conclusion:} $f(x)=2x^2-3x+3$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Linear substitution}
+Find $\displaystyle\int(4x-1)^5\,dx$.\soln
+Divide by $a=4$: $\dfrac{(4x-1)^6}{24}$.\\[3pt]\textbf{Conclusion:} $\dfrac{(4x-1)^6}{24}+C$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- From acceleration to position}
+$a(t)=8t-6$, $v(0)=2$, $s(0)=-3$. Find $s(t)$.\soln
+$v(t)=4t^2-6t+2$ (using $v(0)=2$). $s(t)=\tfrac43t^3-3t^2+2t-3$ (using $s(0)=-3$).\\[3pt]\textbf{Conclusion:} $s(t)=\tfrac43t^3-3t^2+2t-3$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Find $\displaystyle\int(15x^4-8x+2)\,dx$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Given $f'(x)=6x^2+1$, $f(1)=4$, find $f(x)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Find $\displaystyle\int(2x+7)^4\,dx$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Find $\displaystyle\int\dfrac{9x^3-6x}{3x}\,dx$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5 --- Challenge}
+A particle has $a(t)=6t-4$, $v(0)=0$, $s(0)=2$; find $s(t)$.\workspace{3.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 6 --- Challenge}
+Find $\displaystyle\int(3x-2)^3\,dx$, and check your answer by differentiating it.\workspace{3.4cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Find $\displaystyle\int(15x^4-8x+2)\,dx$.
+  \item Given $f'(x)=6x^2+1$, $f(1)=4$, find $f(x)$.
+  \item Find $\displaystyle\int(2x+7)^4\,dx$.
+  \item Find $\displaystyle\int\dfrac{9x^3-6x}{3x}\,dx$.
+  \item A particle has $a(t)=6t-4$, $v(0)=0$, $s(0)=2$; find $s(t)$.
+  \item Find $\displaystyle\int(3x-2)^3\,dx$, and check your answer by differentiating it.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $3x^5-4x^2+2x+C$
+  \item $f(x)=2x^3+x+C$; $4=2+1+C\Rightarrow C=1$: $f(x)=2x^3+x+1$
+  \item $\dfrac{(2x+7)^5}{10}+C$
+  \item simplify to $3x^2-2$: $x^3-2x+C$
+  \item $v(t)=3t^2-4t$; $s(t)=t^3-2t^2+2$
+  \item $\dfrac{(3x-2)^4}{12}+C$; differentiating gives $\dfrac{4(3x-2)^3\cdot3}{12}=(3x-2)^3$, matching the original integrand
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

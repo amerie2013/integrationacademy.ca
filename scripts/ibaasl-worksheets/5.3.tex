@@ -1,0 +1,99 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize IB AA SL \textperiodcentered{} 5.3}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 5.3 --- Derivatives of Trig, Exponential and Log Functions}\\[2pt]
+{\small Mathematics: Analysis \& Approaches SL (IB) \textperiodcentered{} Unit 5: Differential Calculus}
+\end{center}
+
+\begin{ideabox}
+Base derivatives for sin, cos, exp, and ln extend with the chain, product, and quotient rules.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item $\dfrac{d}{dx}[\sin x]=\cos x$, $\dfrac{d}{dx}[\cos x]=-\sin x$, $\dfrac{d}{dx}[e^x]=e^x$, $\dfrac{d}{dx}[\ln x]=\dfrac1x$.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Chain rule with exponential}
+Differentiate $f(x)=e^{4x^2-x}$.\soln
+Inner derivative $8x-1$.\\[3pt]\textbf{Conclusion:} $f'(x)=(8x-1)e^{4x^2-x}$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Chain rule with logarithm}
+Differentiate $f(x)=\ln(7x^2+3)$.\soln
+Inner derivative $14x$.\\[3pt]\textbf{Conclusion:} $f'(x)=\dfrac{14x}{7x^2+3}$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Product rule with exponential}
+Differentiate $f(x)=x^2e^{3x}$.\soln
+$2xe^{3x}+x^2(3e^{3x})=xe^{3x}(2+3x)$.\\[3pt]\textbf{Conclusion:} $f'(x)=xe^{3x}(3x+2)$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Deriving sec x}
+Using the quotient rule and $\sec x=\dfrac{1}{\cos x}$, prove $\dfrac{d}{dx}[\sec x]=\sec x\tan x$.\soln
+$\dfrac{0\cdot\cos x-1\cdot(-\sin x)}{\cos^2x}=\dfrac{\sin x}{\cos^2x}=\dfrac1{\cos x}\cdot\dfrac{\sin x}{\cos x}$.\\[3pt]\textbf{Conclusion:} $=\sec x\tan x$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Differentiate $f(x)=7\cos x-e^x+3\ln x$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Differentiate $f(x)=e^{6x-1}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Differentiate $f(x)=\ln(4x^3-x)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Differentiate $f(x)=x^3\sin x$ using the product rule.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5 --- Challenge}
+Differentiate $f(x)=\dfrac{e^x}{x^2}$ using the quotient rule.\workspace{3.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 6 --- Challenge}
+Using the quotient rule and $\csc x=\dfrac1{\sin x}$, derive $\dfrac{d}{dx}[\csc x]=-\csc x\cot x$.\workspace{3.4cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Differentiate $f(x)=7\cos x-e^x+3\ln x$.
+  \item Differentiate $f(x)=e^{6x-1}$.
+  \item Differentiate $f(x)=\ln(4x^3-x)$.
+  \item Differentiate $f(x)=x^3\sin x$ using the product rule.
+  \item Differentiate $f(x)=\dfrac{e^x}{x^2}$ using the quotient rule.
+  \item Using the quotient rule and $\csc x=\dfrac1{\sin x}$, derive $\dfrac{d}{dx}[\csc x]=-\csc x\cot x$.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $-7\sin x-e^x+\dfrac3x$
+  \item $6e^{6x-1}$
+  \item $\dfrac{12x^2-1}{4x^3-x}$
+  \item $3x^2\sin x+x^3\cos x$
+  \item $\dfrac{e^x(x^2)-e^x(2x)}{x^4}=\dfrac{e^x(x-2)}{x^3}$
+  \item $\dfrac{0\cdot\sin x-1\cdot\cos x}{\sin^2x}=-\dfrac{\cos x}{\sin^2x}=-\dfrac1{\sin x}\cdot\dfrac{\cos x}{\sin x}=-\csc x\cot x$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

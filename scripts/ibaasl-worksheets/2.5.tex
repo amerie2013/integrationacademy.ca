@@ -1,0 +1,112 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize IB AA SL \textperiodcentered{} 2.5}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 2.5 --- The Quadratic Formula and Discriminant}\\[2pt]
+{\small Mathematics: Analysis \& Approaches SL (IB) \textperiodcentered{} Unit 2: Functions}
+\end{center}
+
+\begin{ideabox}
+The discriminant predicts how many real solutions a quadratic has before you finish solving it.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item $x=\dfrac{-b\pm\sqrt{b^2-4ac}}{2a}$.
+  \item $\Delta=b^2-4ac$: $\Delta>0$ two real roots, $\Delta=0$ one repeated root, $\Delta<0$ no real roots.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Solve with the formula}
+Solve $3x^2-x-4=0$.\soln
+$a=3,b=-1,c=-4$: $\Delta=1+48=49$. $x=\dfrac{1\pm7}{6}$.\\[3pt]\textbf{Conclusion:} $x=\dfrac43$ or $x=-1$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Nature of the roots}
+Determine the nature of the roots of $2x^2+3x+5=0$.\soln
+$\Delta=9-40=-31<0$.\\[3pt]\textbf{Conclusion:} no real roots.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Repeated root condition}
+Find $k$ so that $x^2-8x+k=0$ has a repeated root.\soln
+$\Delta=0$: $64-4k=0\Rightarrow k=16$.\\[3pt]\textbf{Conclusion:} $k=16$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Application}
+A ball's height is $h(t)=-5t^2+18t+1$. Determine whether it ever reaches 20 m.\soln
+Set $-5t^2+18t+1=20\Rightarrow-5t^2+18t-19=0$. $\Delta=324-380=-56<0$.\\[3pt]\textbf{Conclusion:} no real solution, so it never reaches 20 m.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Solve $x^2-3x-10=0$ using the quadratic formula.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Find the discriminant of $4x^2+4x+1=0$ and describe the roots.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Find the discriminant of $x^2+2x+6=0$ and describe the roots.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Find $k>0$ so that $2x^2+kx+8=0$ has a repeated root.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+For what values of $k$ does $x^2-4x+k=0$ have two distinct real roots?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Solve $5x^2+2x-3=0$ using the quadratic formula.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+A rectangle has perimeter 40 m and area 91 m$^2$; set up and solve a quadratic to find its dimensions.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8 --- Challenge}
+Find the value(s) of $m$ so that the line $y=mx$ is tangent to the parabola $y=x^2+4$ (hint: set them equal and require $\Delta=0$).\workspace{3.4cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Solve $x^2-3x-10=0$ using the quadratic formula.
+  \item Find the discriminant of $4x^2+4x+1=0$ and describe the roots.
+  \item Find the discriminant of $x^2+2x+6=0$ and describe the roots.
+  \item Find $k>0$ so that $2x^2+kx+8=0$ has a repeated root.
+  \item For what values of $k$ does $x^2-4x+k=0$ have two distinct real roots?
+  \item Solve $5x^2+2x-3=0$ using the quadratic formula.
+  \item A rectangle has perimeter 40 m and area 91 m$^2$; set up and solve a quadratic to find its dimensions.
+  \item Find the value(s) of $m$ so that the line $y=mx$ is tangent to the parabola $y=x^2+4$ (hint: set them equal and require $\Delta=0$).
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $x=\dfrac{3\pm7}{2}$: $x=5$ or $x=-2$
+  \item $\Delta=0$: one repeated root ($x=-\tfrac12$)
+  \item $\Delta=4-24=-20<0$: no real roots
+  \item $k^2=64\Rightarrow k=8$
+  \item $16-4k>0\Rightarrow k<4$
+  \item $\Delta=4+60=64$; $x=\dfrac{-2\pm8}{10}$: $x=\tfrac35$ or $x=-1$
+  \item $x+y=20$, $xy=91$; $x^2-20x+91=0\Rightarrow(x-7)(x-13)=0$: dimensions $7$ m by $13$ m
+  \item $x^2+4=mx\Rightarrow x^2-mx+4=0$; $\Delta=m^2-16=0\Rightarrow m=\pm4$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

@@ -1,0 +1,112 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize IB AA SL \textperiodcentered{} 3.2}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 3.2 --- Right-Triangle Trigonometry}\\[2pt]
+{\small Mathematics: Analysis \& Approaches SL (IB) \textperiodcentered{} Unit 3: Geometry and Trigonometry}
+\end{center}
+
+\begin{ideabox}
+Multi-step right-triangle problems often chain two triangles that share a common side.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item $\sin\theta=\dfrac{\text{opp}}{\text{hyp}}$, $\cos\theta=\dfrac{\text{adj}}{\text{hyp}}$, $\tan\theta=\dfrac{\text{opp}}{\text{adj}}$.
+  \item Two given angles of elevation from different positions usually mean two right triangles sharing the unknown height.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Angle of elevation with eye height}
+A person whose eyes are 1.7 m up stands 25 m from a tower and sees its top at an elevation angle of $32°$. Find the tower's height.\rtri{4}{2.4}{opp}{25 m}{}\soln
+$x=25\tan(32°)\approx15.6$ m; add eye height.\\[3pt]\textbf{Conclusion:} height $\approx17.3$ m.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Two-step angle of depression}
+From a 60 m cliff, the angle of depression to a boat is $22°$. It sails away until the angle of depression is $11°$. Find the distance sailed.\soln
+$d_1=\dfrac{60}{\tan22°}\approx148.5$; $d_2=\dfrac{60}{\tan11°}\approx308.6$.\\[3pt]\textbf{Conclusion:} distance $\approx160.1$ m.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Flagpole on a building}
+A 5 m flagpole sits atop a building. From the ground, the angle of elevation to the pole's base is $38°$, and to its top is $44°$. Find the building's height.\soln
+$h\tan(44°)=(h+5)\tan(38°)$ combined via $d$; solving $h=\dfrac{5\tan(38°)}{\tan(44°)-\tan(38°)}$.\\[3pt]\textbf{Conclusion:} $h\approx18.5$ m.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Bearing components}
+A hiker walks 10 km on a bearing of $055°$. Find how far north and east she travels.\soln
+North: $10\cos55°\approx5.74$; East: $10\sin55°\approx8.19$.\\[3pt]\textbf{Conclusion:} $\approx5.74$ km north, $\approx8.19$ km east.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Find the angle of elevation to the top of a 30 m tower from a point 45 m away.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+A person with eyes at 1.6 m stands 20 m from a tree, seeing its top at $28°$ elevation. Find the tree's height.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+From an 80 m cliff, the angle of depression to a boat is $15°$. Find the horizontal distance to the boat.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+A plane flies 250 km on a bearing of $160°$. Find its distance south and east of its start.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5 --- Challenge}
+From two points 50 m apart along a line from a tower's base, elevation angles are $20°$ (far) and $35°$ (near). Find the tower's height.\workspace{3.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6 --- Challenge}
+A 6 m flagpole sits on a building. Ground elevation angles are $35°$ to its base and $41°$ to its top. Find the building's height.\workspace{3.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+A ladder 8 m long leans against a wall, making a $70°$ angle with the ground. Find how high up the wall it reaches.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+A ship sails 40 km on a bearing of $200°$. Find its distance south and west of its start.\workspace{2.4cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Find the angle of elevation to the top of a 30 m tower from a point 45 m away.
+  \item A person with eyes at 1.6 m stands 20 m from a tree, seeing its top at $28°$ elevation. Find the tree's height.
+  \item From an 80 m cliff, the angle of depression to a boat is $15°$. Find the horizontal distance to the boat.
+  \item A plane flies 250 km on a bearing of $160°$. Find its distance south and east of its start.
+  \item From two points 50 m apart along a line from a tower's base, elevation angles are $20°$ (far) and $35°$ (near). Find the tower's height.
+  \item A 6 m flagpole sits on a building. Ground elevation angles are $35°$ to its base and $41°$ to its top. Find the building's height.
+  \item A ladder 8 m long leans against a wall, making a $70°$ angle with the ground. Find how high up the wall it reaches.
+  \item A ship sails 40 km on a bearing of $200°$. Find its distance south and west of its start.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $\tan^{-1}(30/45)\approx33.7°$
+  \item $20\tan28°+1.6\approx12.24$ m
+  \item $80/\tan15°\approx298.6$ m
+  \item south $=250\cos20°\approx234.9$ km, east $=250\sin20°\approx85.5$ km
+  \item $h(1/\tan20°-1/\tan35°)=50\Rightarrow h(2.747-1.428)=50\Rightarrow h\approx37.9$ m
+  \item $h=\dfrac{6\tan35°}{\tan41°-\tan35°}\approx\dfrac{4.202}{0.169}\approx24.9$ m
+  \item $8\sin70°\approx7.52$ m
+  \item angle from south is $20°$; south $=40\cos20°\approx37.6$ km, west $=40\sin20°\approx13.7$ km
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

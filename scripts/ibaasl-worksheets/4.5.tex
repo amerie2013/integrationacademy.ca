@@ -1,0 +1,106 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize IB AA SL \textperiodcentered{} 4.5}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 4.5 --- Conditional Probability and Tree Diagrams}\\[2pt]
+{\small Mathematics: Analysis \& Approaches SL (IB) \textperiodcentered{} Unit 4: Statistics and Probability}
+\end{center}
+
+\begin{ideabox}
+Tree diagrams handle sequences of events, including without-replacement draws and reversed conditionals.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item $P(A\mid B)=\dfrac{P(A\cap B)}{P(B)}$.
+  \item Multiply along a branch; add across matching outcomes.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Basic conditional probability}
+$P(A)=0.6$, $P(A\cap B)=0.18$. Find $P(B\mid A)$.\soln
+$P(B\mid A)=\dfrac{0.18}{0.6}$.\\[3pt]\textbf{Conclusion:} $0.3$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Without replacement}
+A bag has 6 red, 4 blue balls. Two drawn without replacement; find $P(\text{both red})$.\soln
+$\dfrac6{10}\times\dfrac59=\dfrac{30}{90}$.\\[3pt]\textbf{Conclusion:} $\dfrac13$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- At least one}
+Using the same bag, find $P(\text{at least one blue})$.\soln
+$1-P(\text{both red})=1-\tfrac13$.\\[3pt]\textbf{Conclusion:} $\dfrac23$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Reverse conditional (tree reversal)}
+Factory A makes 65\% of items with a 2\% defect rate; Factory B makes 35\% with a 6\% defect rate. Given an item is defective, find $P(\text{from B})$.\soln
+$P(A\cap d)=0.65(0.02)=0.013$; $P(B\cap d)=0.35(0.06)=0.021$; total $=0.034$.\\[3pt]\textbf{Conclusion:} $P(B\mid d)=\dfrac{0.021}{0.034}\approx0.618$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+$P(A)=0.7$, $P(A\cap B)=0.28$. Find $P(B\mid A)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+A bag has 5 green, 5 yellow marbles. Two drawn without replacement; find $P(\text{both green})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Using the same bag, find $P(\text{at least one yellow})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Two independent events each have probability 0.3. Find $P(\text{exactly one occurs})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5 --- Challenge}
+A box has 9 working, 3 faulty phones. Two selected without replacement; find $P(\text{at least one faulty})$.\workspace{3.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Machine X makes 40\% of output with 5\% defects; Machine Y makes 60\% with 2\% defects. Find the overall $P(\text{defective})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7 --- Challenge}
+Using the previous question, given an item is defective, find $P(\text{from Machine X})$.\workspace{3.2cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $P(A)=0.7$, $P(A\cap B)=0.28$. Find $P(B\mid A)$.
+  \item A bag has 5 green, 5 yellow marbles. Two drawn without replacement; find $P(\text{both green})$.
+  \item Using the same bag, find $P(\text{at least one yellow})$.
+  \item Two independent events each have probability 0.3. Find $P(\text{exactly one occurs})$.
+  \item A box has 9 working, 3 faulty phones. Two selected without replacement; find $P(\text{at least one faulty})$.
+  \item Machine X makes 40\% of output with 5\% defects; Machine Y makes 60\% with 2\% defects. Find the overall $P(\text{defective})$.
+  \item Using the previous question, given an item is defective, find $P(\text{from Machine X})$.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $0.28/0.7=0.4$
+  \item $\tfrac5{10}\times\tfrac49=\tfrac{20}{90}=\tfrac29$
+  \item $1-\tfrac29=\tfrac79$
+  \item $2(0.3\times0.7)=0.42$
+  \item $P(\text{no faulty})=\tfrac9{12}\times\tfrac8{11}=\tfrac{72}{132}=\tfrac6{11}$; at least one $=1-\tfrac6{11}=\tfrac5{11}$
+  \item $0.4(0.05)+0.6(0.02)=0.02+0.012=0.032$
+  \item $P(X\mid d)=\dfrac{0.02}{0.032}=0.625$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

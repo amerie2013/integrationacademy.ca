@@ -1,0 +1,106 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize IB AA SL \textperiodcentered{} 4.3}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 4.3 --- Bivariate Data and Correlation}\\[2pt]
+{\small Mathematics: Analysis \& Approaches SL (IB) \textperiodcentered{} Unit 4: Statistics and Probability}
+\end{center}
+
+\begin{ideabox}
+Correlation measures linear association; a regression line predicts, but extrapolation is risky.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item $r$ near $\pm1$: strong linear relationship; near 0: weak/none.
+  \item Interpolation (inside the data range) is more trustworthy than extrapolation (outside it).
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Interpret r}
+A study finds $r=-0.82$ between hours of TV watched and test scores. Interpret this.\soln
+Strong negative correlation --- more TV watched tends to associate with lower scores.\\[3pt]\textbf{Conclusion:} strong negative correlation.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Interpolation}
+A line $y=2.1x+8$ fits data for $x\in[0,20]$. Predict $y$ at $x=12$ and classify.\soln
+$y=2.1(12)+8=25.2+8$; $x=12$ is inside $[0,20]$.\\[3pt]\textbf{Conclusion:} $y=33.2$; interpolation.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Extrapolation risk}
+Using the same line, predict $y$ at $x=80$ and explain the risk.\soln
+$y=2.1(80)+8=176$; far outside $[0,20]$.\\[3pt]\textbf{Conclusion:} $y=176$ mathematically, but unreliable since it's extrapolated well beyond the data.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Slope interpretation}
+A line relating monthly rent $x$ (\$100s) to apartment size $y$ (m$^2$) is $y=3.5x+12$. Interpret the slope.\soln
+Each extra \$100 in monthly rent is associated with about $3.5$ more m$^2$ of space, on average.\\[3pt]\textbf{Conclusion:} slope $3.5$: more rent associates with more space.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Describe the correlation implied by $r=0.25$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Describe the correlation implied by $r=-0.97$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+A line $y=4x+15$ fits data for $x\in[2,18]$; predict $y$ at $x=10$ and classify (interpolation/extrapolation).\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Using the same line, predict $y$ at $x=60$ and explain the risk.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+A line relates study hours $x$ to score $y$: $y=5.2x+48$; interpret the $y$-intercept in context.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Ice cream sales and sunscreen sales are strongly positively correlated. Explain why this doesn't mean one causes the other.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7 --- Challenge}
+A line $y=-2.4x+90$ models a car's value (\$1000s) vs its age $x$ (years), fit on data for $x\in[0,10]$; predict the value at $x=25$ and explain why this prediction is almost certainly wrong.\workspace{3.4cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Describe the correlation implied by $r=0.25$.
+  \item Describe the correlation implied by $r=-0.97$.
+  \item A line $y=4x+15$ fits data for $x\in[2,18]$; predict $y$ at $x=10$ and classify (interpolation/extrapolation).
+  \item Using the same line, predict $y$ at $x=60$ and explain the risk.
+  \item A line relates study hours $x$ to score $y$: $y=5.2x+48$; interpret the $y$-intercept in context.
+  \item Ice cream sales and sunscreen sales are strongly positively correlated. Explain why this doesn't mean one causes the other.
+  \item A line $y=-2.4x+90$ models a car's value (\$1000s) vs its age $x$ (years), fit on data for $x\in[0,10]$; predict the value at $x=25$ and explain why this prediction is almost certainly wrong.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item very weak positive correlation
+  \item very strong negative correlation
+  \item $y=55$; interpolation (10 is inside [2,18])
+  \item $y=255$; extrapolation, far outside the fitted range, so unreliable
+  \item predicted score with 0 study hours is 48 --- a baseline from prior knowledge/other factors
+  \item a confounding variable (hot weather) increases both independently
+  \item $y=-2.4(25)+90=30$; but a car's value can't go negative and doesn't depreciate linearly forever, so extrapolating this far is unrealistic
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

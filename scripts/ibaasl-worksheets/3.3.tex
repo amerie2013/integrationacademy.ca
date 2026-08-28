@@ -1,0 +1,113 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize IB AA SL \textperiodcentered{} 3.3}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 3.3 --- The Sine Rule and Cosine Rule}\\[2pt]
+{\small Mathematics: Analysis \& Approaches SL (IB) \textperiodcentered{} Unit 3: Geometry and Trigonometry}
+\end{center}
+
+\begin{ideabox}
+The sine and cosine rules solve any triangle, including the tricky ambiguous case.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item $\dfrac{a}{\sin A}=\dfrac{b}{\sin B}=\dfrac{c}{\sin C}$; $a^2=b^2+c^2-2bc\cos A$.
+  \item Area $=\tfrac12ab\sin C$.
+  \item Ambiguous case (SSA): check whether both $\theta$ and $180°-\theta$ give valid triangles.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Sine rule for a side}
+In $\triangle ABC$, $A=35°$, $B=70°$, $a=14$. Find $b$.\gtri{A}{B}{C}{a}{b}{c}\soln
+$\dfrac{14}{\sin35°}=\dfrac{b}{\sin70°}\Rightarrow b=\dfrac{14\sin70°}{\sin35°}$.\\[3pt]\textbf{Conclusion:} $b\approx22.9$.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Cosine rule for the largest angle}
+A triangle has sides $6,8,11$. Find the largest angle.\soln
+Opposite $11$: $\cos C=\dfrac{36+64-121}{96}=\dfrac{-21}{96}$.\\[3pt]\textbf{Conclusion:} $C\approx102.6°$.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Ambiguous case}
+In $\triangle ABC$, $A=40°$, $a=9$, $b=13$. Find both possible values of $B$.\soln
+$\sin B=\dfrac{13\sin40°}{9}\approx0.928$. $B_1\approx68.2°$; $B_2=180°-68.2°=111.8°$; check $A+B_2=151.8°<180°$, valid.\\[3pt]\textbf{Conclusion:} $B\approx68.2°$ or $111.8°$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Navigation with the cosine rule}
+A ship sails 30 km on a bearing of $050°$, then 45 km on a bearing of $140°$. Find the direct distance home.\soln
+Included angle $=140-50=90°$. $d^2=900+2025-0=2925$.\\[3pt]\textbf{Conclusion:} $d\approx54.1$ km.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+In $\triangle ABC$, $A=55°$, $C=65°$, $c=18$. Find $a$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+A triangle has sides $7,9,13$. Find the largest angle.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3 --- Challenge}
+In $\triangle ABC$, $A=28°$, $a=8$, $b=15$. Determine whether the ambiguous case applies, and find every valid value of $B$.\workspace{3.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Find the area of a triangle with sides 9 and 12 and included angle $65°$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+A hiker walks 4 km on a bearing of $030°$, then 6 km on a bearing of $120°$. Find the direct distance back to the start.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+In $\triangle ABC$, $a=10$, $b=14$, $C=50°$. Find $c$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+A triangular field has sides 80 m, 95 m, and an included angle of $72°$ between them. Find its area in m$^2$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8 --- Challenge}
+In $\triangle ABC$, $A=48°$, $a=11$, $c=15$. Find angle $C$, and comment on whether the ambiguous case applies.\workspace{3.4cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item In $\triangle ABC$, $A=55°$, $C=65°$, $c=18$. Find $a$.
+  \item A triangle has sides $7,9,13$. Find the largest angle.
+  \item In $\triangle ABC$, $A=28°$, $a=8$, $b=15$. Determine whether the ambiguous case applies, and find every valid value of $B$.
+  \item Find the area of a triangle with sides 9 and 12 and included angle $65°$.
+  \item A hiker walks 4 km on a bearing of $030°$, then 6 km on a bearing of $120°$. Find the direct distance back to the start.
+  \item In $\triangle ABC$, $a=10$, $b=14$, $C=50°$. Find $c$.
+  \item A triangular field has sides 80 m, 95 m, and an included angle of $72°$ between them. Find its area in m$^2$.
+  \item In $\triangle ABC$, $A=48°$, $a=11$, $c=15$. Find angle $C$, and comment on whether the ambiguous case applies.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $a=\dfrac{18\sin55°}{\sin65°}\approx16.3$
+  \item $\cos C=\dfrac{49+81-169}{126}=\dfrac{-39}{126}\Rightarrow C\approx107.9°$
+  \item $\sin B=\dfrac{15\sin28°}{8}\approx0.880$; $B_1\approx61.6°$, $B_2=118.4°$; check $A+B_2=146.4°<180°$: both valid
+  \item $\tfrac12(9)(12)\sin65°\approx48.98$
+  \item included angle $=120-30=90°$: $d^2=16+36=52\Rightarrow d\approx7.21$ km
+  \item $c^2=100+196-280\cos50°\approx296-180.0=116.0\Rightarrow c\approx10.77$
+  \item $\tfrac12(80)(95)\sin72°\approx3616.6\text{ m}^2$
+  \item $\sin C=\dfrac{15\sin48°}{11}\approx1.013$ --- impossible (sin can't exceed 1), so no triangle exists with these values; the ambiguous case doesn't apply because there's no valid triangle at all
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

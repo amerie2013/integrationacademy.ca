@@ -1,0 +1,106 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize IB AA SL \textperiodcentered{} 4.1}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 4.1 --- Sampling and Presenting Data}\\[2pt]
+{\small Mathematics: Analysis \& Approaches SL (IB) \textperiodcentered{} Unit 4: Statistics and Probability}
+\end{center}
+
+\begin{ideabox}
+Good sampling avoids bias; grouped data needs a midpoint estimate for its mean.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Stratified sampling: sample each subgroup proportionally to its size.
+  \item Estimated mean from grouped data: $\bar x\approx\dfrac{\sum fm}{\sum f}$, using class midpoints $m$.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Stratified sample sizes}
+A population of 1000 has 350 in group P, 650 in group Q. Find stratified sample sizes for a total sample of 40.\soln
+Fraction $=40/1000=1/25$. P: $350/25=14$. Q: $650/25=26$.\\[3pt]\textbf{Conclusion:} 14 from P, 26 from Q.
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Bias critique}
+A survey on gym habits only interviews people leaving a gym at 6am. Identify the bias.\soln
+This is convenience sampling of a specific subgroup (early-morning gym-goers), likely the most dedicated exercisers.\\[3pt]\textbf{Conclusion:} over-represents highly motivated exercisers; underestimates how rarely the average person exercises.
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Grouped mean}
+Estimate the mean from: $0$--$10$ (freq 5), $10$--$20$ (freq 8), $20$--$30$ (freq 7).\soln
+Midpoints $5,15,25$. $\sum fm=25+120+175=320$; $\sum f=20$.\\[3pt]\textbf{Conclusion:} $\bar x=16$.
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Modal class}
+State the modal class for the data in the previous example.\soln
+Highest frequency (8) is in the $10$--$20$ class.\\[3pt]\textbf{Conclusion:} modal class $10$--$20$.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+A population of 600 has 220 in group A, 380 in group B; find stratified sample sizes for a sample of 30.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Estimate the mean from: $0$--$4$ (freq 6), $4$--$8$ (freq 9), $8$--$12$ (freq 5).\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+State the modal class for the data in the previous question.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+A researcher only surveys people who respond to an online ad; explain a likely bias.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5 --- Challenge}
+Estimate the mean from: $10$--$20$ (freq 3), $20$--$30$ (freq 8), $30$--$40$ (freq 12), $40$--$50$ (freq 7).\workspace{3cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+A school of 1200 (700 juniors, 500 seniors) wants a stratified sample of 60; find sample sizes for each group.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Explain why a census (surveying an entire population) is not always more useful than a well-designed sample.\workspace{2.4cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item A population of 600 has 220 in group A, 380 in group B; find stratified sample sizes for a sample of 30.
+  \item Estimate the mean from: $0$--$4$ (freq 6), $4$--$8$ (freq 9), $8$--$12$ (freq 5).
+  \item State the modal class for the data in the previous question.
+  \item A researcher only surveys people who respond to an online ad; explain a likely bias.
+  \item Estimate the mean from: $10$--$20$ (freq 3), $20$--$30$ (freq 8), $30$--$40$ (freq 12), $40$--$50$ (freq 7).
+  \item A school of 1200 (700 juniors, 500 seniors) wants a stratified sample of 60; find sample sizes for each group.
+  \item Explain why a census (surveying an entire population) is not always more useful than a well-designed sample.
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item fraction $=1/20$: A: $11$, B: $19$
+  \item midpoints $2,6,10$; $\sum fm=12+54+50=116$, $\sum f=20$: $\bar x=5.8$
+  \item $4$--$8$ (freq 9)
+  \item over-represents people active online / interested enough to respond, under-represents everyone else
+  \item midpoints $15,25,35,45$; $\sum fm=45+200+420+315=980$, $\sum f=30$: $\bar x\approx32.7$
+  \item fraction $=1/20$: juniors $35$, seniors $25$
+  \item a census can be slower, costlier, and harder to keep accurate/consistent across every member than a well-designed representative sample
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}
