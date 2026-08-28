@@ -309,14 +309,34 @@ export function Calculator({ initialData, initialState, initialId, embed = false
         }
         // Shade the side that satisfies the inequality. Translucent, so the grid
         // shows through and overlapping inequalities darken to reveal a system's
-        // common region.
+        // common region. Built as one marching-squares polygon per cell (using
+        // all 4 corners, same interpolation as the boundary stroke below) and
+        // filled as a single path — filling per-cell rects instead double-blends
+        // translucent overlap at every internal grid line into a visible plaid
+        // pattern, and only sampling one corner per cell looks blockier than the
+        // interpolated stroke.
         if (shade !== 0) {
+          const isIn = (v: number) => (shade === 1 ? v > 0 : v < 0);
           ctx.fillStyle = rgba(f.color, 0.16);
+          ctx.beginPath();
           for (let j = 0; j < rows; j++) for (let i = 0; i < cols; i++) {
-            const v = val[j * (cols + 1) + i];
-            if (isNaN(v)) continue;
-            if (shade === 1 ? v > 0 : v < 0) ctx.fillRect(i * res, j * res, res + 1, res + 1);
+            const x0 = i * res, x1 = (i + 1) * res, y0 = j * res, y1 = (j + 1) * res;
+            const v0 = val[j * (cols + 1) + i], v1 = val[j * (cols + 1) + i + 1], v2 = val[(j + 1) * (cols + 1) + i + 1], v3 = val[(j + 1) * (cols + 1) + i];
+            if (isNaN(v0) || isNaN(v1) || isNaN(v2) || isNaN(v3)) continue;
+            const cx = [x0, x1, x1, x0], cy = [y0, y0, y1, y1], cv = [v0, v1, v2, v3];
+            let started = false;
+            for (let k = 0; k < 4; k++) {
+              const k2 = (k + 1) % 4; const av = cv[k], bv = cv[k2];
+              if (isIn(av)) { if (started) ctx.lineTo(cx[k], cy[k]); else { ctx.moveTo(cx[k], cy[k]); started = true; } }
+              if (av !== bv && av * bv <= 0) {
+                const t = Math.abs(av) / (Math.abs(av) + Math.abs(bv));
+                const px = cx[k] + t * (cx[k2] - cx[k]), py = cy[k] + t * (cy[k2] - cy[k]);
+                if (started) ctx.lineTo(px, py); else { ctx.moveTo(px, py); started = true; }
+              }
+            }
+            if (started) ctx.closePath();
           }
+          ctx.fill();
         }
         ctx.beginPath();
         if (strict) ctx.setLineDash([6, 5]);
