@@ -11,6 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/worksheets", priority: 0.7, freq: "weekly" as const },
     { path: "/eqao", priority: 0.7, freq: "monthly" as const },
     { path: "/tools/graph", priority: 0.6, freq: "monthly" as const },
+    { path: "/tools/stats", priority: 0.6, freq: "monthly" as const },
     { path: "/help", priority: 0.5, freq: "monthly" as const },
     { path: "/about", priority: 0.5, freq: "yearly" as const },
     { path: "/contact", priority: 0.5, freq: "yearly" as const },
