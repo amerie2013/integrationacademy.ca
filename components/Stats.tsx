@@ -22,7 +22,27 @@ const newSet = (i: number): DataSet => ({
   values: i === 0 ? "12, 15, 15, 18, 20, 22, 25, 28, 30, 35" : "",
 });
 
-type StatsState = { title: string; datasets: DataSet[]; binWidth: string; showOutliers: boolean; showHistogram: boolean; showBoxplot: boolean };
+type StatKey = "n" | "sum" | "mean" | "median" | "mode" | "min" | "max" | "range" | "q1" | "q3" | "iqr" | "sdPop" | "varPop" | "sdSample" | "varSample";
+const STAT_DEFS: { key: StatKey; label: string }[] = [
+  { key: "n", label: "n (count)" }, { key: "sum", label: "Sum" },
+  { key: "mean", label: "Mean" }, { key: "median", label: "Median" }, { key: "mode", label: "Mode" },
+  { key: "min", label: "Min" }, { key: "max", label: "Max" }, { key: "range", label: "Range" },
+  { key: "q1", label: "Q1" }, { key: "q3", label: "Q3" }, { key: "iqr", label: "IQR" },
+  { key: "sdPop", label: "Std dev (population)" }, { key: "varPop", label: "Variance (population)" },
+  { key: "sdSample", label: "Std dev (sample)" }, { key: "varSample", label: "Variance (sample)" },
+];
+const DEFAULT_STATS: StatKey[] = ["mean", "median", "mode", "min", "max", "q1", "q3", "sdSample"];
+// Fixed per-dataset chart geometry — deliberately NOT derived from the
+// container's available height. Stretching a single row to fill whatever
+// vertical space happens to be free made the bars/box comically oversized.
+const CHART_MARGIN_TOP = 40, CHART_MARGIN_BOTTOM = 36, CHART_ROW_H = 130;
+function statValue(s: Summary, key: StatKey): string {
+  if (key === "mode") return s.modes.length ? s.modes.map(fmt).join(", ") : "—";
+  if (key === "n") return String(s.n);
+  return fmt(s[key]);
+}
+
+type StatsState = { title: string; datasets: DataSet[]; binWidth: string; showOutliers: boolean; showHistogram: boolean; showBoxplot: boolean; selectedStats: StatKey[] };
 
 /** A "nice" (1/2/5×10ⁿ) tick step for a numeric axis, given the pixel budget available. */
 function niceStep(range: number, plotWidthPx: number, targetPxPerTick = 70) {
@@ -50,6 +70,7 @@ export function Stats({ initialData, initialState, initialId, embed = false }: {
   const [showOutliers, setShowOutliers] = useState(initial?.showOutliers ?? true);
   const [showHistogram, setShowHistogram] = useState(initial?.showHistogram ?? true);
   const [showBoxplot, setShowBoxplot] = useState(initial?.showBoxplot ?? true);
+  const [selectedStats, setSelectedStats] = useState<StatKey[]>(initial?.selectedStats?.length ? initial.selectedStats : DEFAULT_STATS);
   const [panelOpen, setPanelOpen] = useState(() => typeof window === "undefined" || window.innerWidth > 760);
   const [toast, setToast] = useState("");
 
@@ -60,11 +81,13 @@ export function Stats({ initialData, initialState, initialId, embed = false }: {
   const [logoReady, setLogoReady] = useState(false);
 
   function flash(m: string) { setToast(m); setTimeout(() => setToast(""), 2200); }
-  function serialize(): StatsState { return { title, datasets, binWidth, showOutliers, showHistogram, showBoxplot }; }
+  function serialize(): StatsState { return { title, datasets, binWidth, showOutliers, showHistogram, showBoxplot, selectedStats }; }
+  function toggleStat(key: StatKey) { setSelectedStats((l) => (l.includes(key) ? l.filter((k) => k !== key) : [...l, key])); }
   function applyState(d: Partial<StatsState>) {
     if (typeof d.title === "string") setTitle(d.title);
     if (Array.isArray(d.datasets)) setDatasets(d.datasets.map((s, i) => ({ ...newSet(i), ...s })));
     if (typeof d.binWidth === "string") setBinWidth(d.binWidth);
+    if (Array.isArray(d.selectedStats) && d.selectedStats.length) setSelectedStats(d.selectedStats);
     setShowOutliers(d.showOutliers ?? true);
     setShowHistogram(d.showHistogram ?? true);
     setShowBoxplot(d.showBoxplot ?? true);
@@ -113,7 +136,7 @@ export function Stats({ initialData, initialState, initialId, embed = false }: {
       return;
     }
 
-    const marginL = 54, marginR = 20, marginTop = title ? 40 : 14, marginBottom = 34;
+    const marginL = 60, marginR = 24, marginTop = title ? CHART_MARGIN_TOP + 12 : CHART_MARGIN_TOP;
     const plotW = Math.max(40, w - marginL - marginR);
     const allValues = rows.flatMap((r) => r.values);
     let domMin = Math.min(...allValues), domMax = Math.max(...allValues);
@@ -122,18 +145,25 @@ export function Stats({ initialData, initialState, initialId, embed = false }: {
     domMin -= pad; domMax += pad;
     const toX = (v: number) => marginL + ((v - domMin) / (domMax - domMin)) * plotW;
 
-    const rowH = Math.max(90, (h - marginTop - marginBottom) / rows.length);
-    const histH = showBoxplot ? rowH * 0.62 : rowH * 0.86;
-    const boxH = rowH * 0.16;
+    const rowH = CHART_ROW_H;
+    const histH = showBoxplot ? rowH * 0.56 : rowH * 0.8;
+    const boxH = rowH * 0.14;
+    const chartBottom = marginTop + rows.length * rowH;
+    const step = niceStep(domMax - domMin, plotW);
+
+    // faint vertical gridlines behind everything, so bars/box plots read on top
+    ctx.strokeStyle = "#f1f5f9"; ctx.lineWidth = 1; ctx.beginPath();
+    for (let v = Math.ceil(domMin / step) * step; v <= domMax; v += step) { const x = toX(v); ctx.moveTo(x, marginTop - 4); ctx.lineTo(x, chartBottom); }
+    ctx.stroke();
 
     rows.forEach((r, i) => {
       const s = summarize(r.values) as Summary;
       const y0 = marginTop + i * rowH;
-      ctx.fillStyle = r.d.color; ctx.font = "bold 12px Inter, system-ui, sans-serif"; ctx.textAlign = "left"; ctx.textBaseline = "top";
+      ctx.fillStyle = r.d.color; ctx.font = "bold 14px Inter, system-ui, sans-serif"; ctx.textAlign = "left"; ctx.textBaseline = "top";
       ctx.fillText(`${r.d.name}  (n = ${s.n})`, marginL, y0);
 
       const bw = binWidth === "auto" ? autoBinWidth(r.values) : Math.max(0.0001, parseFloat(binWidth) || 1);
-      let yCursor = y0 + 16;
+      let yCursor = y0 + 22;
       if (showHistogram) {
         const bins = histogramBins(r.values, bw, domMin, domMax);
         const maxCount = Math.max(1, ...bins.map((b) => b.count));
@@ -166,14 +196,13 @@ export function Stats({ initialData, initialState, initialId, embed = false }: {
     });
 
     // shared x-axis
-    const axisY = marginTop + rows.length * rowH + 2;
-    ctx.strokeStyle = "#cbd5e1"; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(marginL, axisY); ctx.lineTo(marginL + plotW, axisY); ctx.stroke();
-    const step = niceStep(domMax - domMin, plotW);
-    ctx.fillStyle = "#64748b"; ctx.font = "11px Inter, system-ui, sans-serif"; ctx.textAlign = "center"; ctx.textBaseline = "top";
+    const axisY = chartBottom + 2;
+    ctx.strokeStyle = "#94a3b8"; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(marginL, axisY); ctx.lineTo(marginL + plotW, axisY); ctx.stroke();
+    ctx.fillStyle = "#334155"; ctx.font = "600 13px Inter, system-ui, sans-serif"; ctx.textAlign = "center"; ctx.textBaseline = "top";
     for (let v = Math.ceil(domMin / step) * step; v <= domMax; v += step) {
       const x = toX(v);
-      ctx.strokeStyle = "#e2e8f0"; ctx.beginPath(); ctx.moveTo(x, axisY); ctx.lineTo(x, axisY + 4); ctx.stroke();
-      ctx.fillText(fmt(Math.round(v * 1000) / 1000), x, axisY + 6);
+      ctx.strokeStyle = "#cbd5e1"; ctx.beginPath(); ctx.moveTo(x, axisY); ctx.lineTo(x, axisY + 5); ctx.stroke();
+      ctx.fillText(fmt(Math.round(v * 1000) / 1000), x, axisY + 8);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [title, datasets, binWidth, showOutliers, showHistogram, showBoxplot, logoReady]);
@@ -221,44 +250,37 @@ export function Stats({ initialData, initialState, initialId, embed = false }: {
     } catch { flash("Copy failed"); }
   }
 
+  const chartH = rows.length > 0 ? CHART_MARGIN_TOP + (title ? 12 : 0) + rows.length * CHART_ROW_H + CHART_MARGIN_BOTTOM : 260;
   const plot = (
-    <div ref={wrapRef} style={{ flex: 1, minWidth: 280, minHeight: 320, position: "relative", background: "#fff" }}>
+    <div ref={wrapRef} style={{ flexShrink: 0, width: "100%", height: chartH, position: "relative", background: "#fff" }}>
       <canvas ref={canvasRef} style={{ width: "100%", height: "100%", display: "block" }} />
       {toast && <div style={{ position: "absolute", top: 12, left: "50%", transform: "translateX(-50%)", background: "#0f172a", color: "#fff", padding: "8px 14px", borderRadius: 10, fontSize: 13, fontWeight: 600 }}>{toast}</div>}
     </div>
   );
 
-  const table = rows.length > 0 && (
-    <div style={{ overflowX: "auto", borderTop: "1px solid #e2e8f0" }}>
-      <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 12.5, fontFamily: "JetBrains Mono, monospace" }}>
-        <thead>
-          <tr style={{ background: "#f8faff", textAlign: "right" }}>
-            <th style={thStyle("left")}>List</th>
-            <th style={thStyle()}>n</th><th style={thStyle()}>mean</th><th style={thStyle()}>median</th><th style={thStyle()}>mode</th>
-            <th style={thStyle()}>min</th><th style={thStyle()}>Q1</th><th style={thStyle()}>Q3</th><th style={thStyle()}>max</th><th style={thStyle()}>IQR</th>
-            <th style={thStyle()}>σ (pop.)</th><th style={thStyle()}>s (sample)</th>
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((r) => {
-            const s = summarize(r.values) as Summary;
-            return (
-              <tr key={r.d.id} style={{ borderTop: "1px solid #f1f5f9", textAlign: "right" }}>
-                <td style={{ ...tdStyle("left"), color: r.d.color, fontWeight: 700 }}>{r.d.name}</td>
-                <td style={tdStyle()}>{s.n}</td><td style={tdStyle()}>{fmt(s.mean)}</td><td style={tdStyle()}>{fmt(s.median)}</td>
-                <td style={tdStyle()}>{s.modes.length ? s.modes.map(fmt).join(", ") : "—"}</td>
-                <td style={tdStyle()}>{fmt(s.min)}</td><td style={tdStyle()}>{fmt(s.q1)}</td><td style={tdStyle()}>{fmt(s.q3)}</td><td style={tdStyle()}>{fmt(s.max)}</td><td style={tdStyle()}>{fmt(s.iqr)}</td>
-                <td style={tdStyle()}>{fmt(s.sdPop)}</td><td style={tdStyle()}>{fmt(s.sdSample)}</td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-      <div style={{ padding: "6px 10px", fontSize: 11, color: "#94a3b8" }}>Q1/Q3 use the exclusive median-of-halves method (the convention TI-83/84 calculators use for 1-Var Stats). Box-plot whiskers cap at 1.5×IQR; points beyond that are plotted as outliers.</div>
+  const cards = rows.length > 0 && (
+    <div style={{ padding: 16, borderTop: "1px solid #e2e8f0", background: "#f8faff" }}>
+      {rows.map((r) => {
+        const s = summarize(r.values) as Summary;
+        return (
+          <div key={r.d.id} style={{ marginBottom: 18 }}>
+            <div style={{ fontWeight: 800, fontSize: 15, color: r.d.color, marginBottom: 8 }}>{r.d.name}</div>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(120px, 1fr))", gap: 10 }}>
+              {selectedStats.map((key) => (
+                <div key={key} style={{ background: "#fff", border: "1px solid #e2e8f0", borderTop: `3px solid ${r.d.color}`, borderRadius: 10, padding: "10px 12px", boxShadow: "0 1px 2px rgba(0,0,0,0.03)" }}>
+                  <div style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: 0.3, marginBottom: 4 }}>{STAT_DEFS.find((d) => d.key === key)?.label}</div>
+                  <div style={{ fontSize: 22, fontWeight: 800, color: "#0f172a", fontFamily: "JetBrains Mono, monospace" }}>{statValue(s, key)}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+      })}
+      <div style={{ fontSize: 11, color: "#94a3b8" }}>Q1/Q3 use the exclusive median-of-halves method (the convention TI-83/84 calculators use for 1-Var Stats). Box-plot whiskers cap at 1.5×IQR; points beyond that are plotted as outliers.</div>
     </div>
   );
 
-  if (embed) return <div style={{ height: "100%", minHeight: 320, display: "flex", flexDirection: "column" }}>{plot}{table}</div>;
+  if (embed) return <div style={{ height: "100%", minHeight: 320, display: "flex", flexDirection: "column", overflowY: "auto" }}>{plot}{cards}</div>;
 
   return (
     <div style={{ display: "flex", height: "100%", minHeight: 460 }}>
@@ -290,6 +312,15 @@ export function Stats({ initialData, initialState, initialId, embed = false }: {
             <CheckRow label="Show outliers" v={showOutliers} on={setShowOutliers} />
           </div>
 
+          <div style={{ marginTop: 12, background: "#fff", border: "1px solid #e2e8f0", borderRadius: 12, padding: 10 }}>
+            <div style={{ fontSize: 12, fontWeight: 700, color: "#475569", marginBottom: 4 }}>Statistics to show</div>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", columnGap: 10 }}>
+              {STAT_DEFS.map((d) => (
+                <CheckRow key={d.key} label={d.label} v={selectedStats.includes(d.key)} on={() => toggleStat(d.key)} />
+              ))}
+            </div>
+          </div>
+
           <div style={{ marginTop: 12, display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6 }}>
             <button onClick={copyEmbed} style={btnStyle("#0f172a")}>📋 Copy embed</button>
             <button onClick={exportPng} style={btnStyle("#475569")}>📷 PNG</button>
@@ -305,16 +336,14 @@ export function Stats({ initialData, initialState, initialId, embed = false }: {
       >
         {panelOpen ? "‹" : "›"}
       </button>
-      <div style={{ flex: 1, minWidth: 0, display: "flex", flexDirection: "column" }}>
+      <div style={{ flex: 1, minWidth: 0, display: "flex", flexDirection: "column", overflowY: "auto" }}>
         {plot}
-        {table}
+        {cards}
       </div>
     </div>
   );
 }
 
-function thStyle(align: "left" | "right" = "right"): React.CSSProperties { return { padding: "6px 10px", fontWeight: 700, color: "#475569", textAlign: align }; }
-function tdStyle(align: "left" | "right" = "right"): React.CSSProperties { return { padding: "5px 10px", textAlign: align }; }
 function btnStyle(color: string): React.CSSProperties { return { background: color, color: "#fff", border: "none", borderRadius: 8, padding: "7px", fontWeight: 700, fontSize: 12, cursor: "pointer" }; }
 function CheckRow({ label, v, on }: { label: string; v: boolean; on: (v: boolean) => void }) {
   return <label style={{ display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: 13, color: "#475569", padding: "3px 0", cursor: "pointer" }}>{label}<input type="checkbox" checked={v} onChange={(e) => on(e.target.checked)} /></label>;
