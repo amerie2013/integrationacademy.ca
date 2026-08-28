@@ -38,6 +38,31 @@ Factory A makes 65\% of items with a 2\% defect rate; Factory B makes 35\% with 
 $P(A\cap d)=0.65(0.02)=0.013$; $P(B\cap d)=0.35(0.06)=0.021$; total $=0.034$.\\[3pt]\textbf{Conclusion:} $P(B\mid d)=\dfrac{0.021}{0.034}\approx0.618$.
 \end{example}
 
+\begin{example}{ex4}{Example 5 --- Three-stage without-replacement sequence}
+A bag has 5 red, 3 blue balls. Three drawn without replacement; find $P(\text{all three red})$.\soln
+$\dfrac58\times\dfrac47\times\dfrac36=\dfrac{60}{336}$.\\[3pt]\textbf{Conclusion:} $\dfrac{60}{336}=\dfrac{5}{28}$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Conditional probability from a two-way table}
+Of 100 students, 60 play sports; of those, 40 also do music. Of the 40 who don't play sports, 10 do music. Find $P(\text{music}\mid\text{sports})$.\soln
+$P(\text{music}\mid\text{sports})=\dfrac{40}{60}$.\\[3pt]\textbf{Conclusion:} $\dfrac23$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Comparing conditional probabilities both ways}
+Using the same data (100 students; 60 sports, 40 of them music; 40 non-sports, 10 of them music), find $P(\text{sports}\mid\text{music})$ and compare to $P(\text{music}\mid\text{sports})$.\soln
+Total music $=40+10=50$. $P(\text{sports}\mid\text{music})=\dfrac{40}{50}=0.8$.\\[3pt]\textbf{Conclusion:} $P(\text{sports}\mid\text{music})=0.8\neq P(\text{music}\mid\text{sports})=\tfrac23\approx0.667$ --- confirming order matters.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Independence test using a tree diagram's branches}
+A spinner has $P(\text{red})=0.4$ on each of two independent spins. Find $P(\text{exactly one red})$ using a tree diagram.\soln
+Two paths: (red, not red) and (not red, red), each with probability $0.4\times0.6=0.24$.\\[3pt]\textbf{Conclusion:} $P(\text{exactly one red})=0.24+0.24=0.48$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Application --- medical test reliability (reverse conditional)}
+A disease affects 2\% of a population. A test correctly detects it 95\% of the time (true positive) and gives a false positive 3\% of the time. Given a positive result, find $P(\text{has the disease})$.\soln
+$P(\text{disease}\cap+)=0.02(0.95)=0.019$. $P(\text{no disease}\cap+)=0.98(0.03)=0.0294$. Total $P(+)=0.0484$.\\[3pt]\textbf{Conclusion:} $P(\text{disease}\mid+)=\dfrac{0.019}{0.0484}\approx0.393$ --- surprisingly low, since the disease is rare.
+\end{example}
+
 \clearpage
 \sech{Your Turn --- Show Your Work}
 For each question, show all steps clearly in the space provided.
@@ -70,6 +95,30 @@ Machine X makes 40\% of output with 5\% defects; Machine Y makes 60\% with 2\% d
 Using the previous question, given an item is defective, find $P(\text{from Machine X})$.\workspace{3.2cm}
 \end{qbox}
 
+\begin{qbox}{Question 8}
+A bag has 6 red, 4 blue, 2 green balls. Three drawn without replacement; find $P(\text{all three red})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Of 120 students, 70 play an instrument; of those, 30 also play a sport. Of the 50 who don't play an instrument, 20 play a sport. Find $P(\text{sport}\mid\text{instrument})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Using the previous question's data, find $P(\text{instrument}\mid\text{sport})$ and state whether it equals $P(\text{sport}\mid\text{instrument})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11 --- Challenge}
+A spinner has $P(\text{blue})=0.3$ on each of two independent spins; find $P(\text{exactly one blue})$.\workspace{3cm}
+\end{qbox}
+
+\begin{qbox}{Question 12 --- Challenge}
+A disease affects 1\% of a population; a test detects it correctly 90\% of the time and gives a false positive 4\% of the time. Given a positive result, find $P(\text{has the disease})$.\workspace{3.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+A box has 10 working, 2 faulty phones. Two selected without replacement; find $P(\text{exactly one faulty})$.\workspace{3.2cm}
+\end{qbox}
+
 \clearpage
 \sech{Question Recap \& Answer Key}
 
@@ -84,6 +133,12 @@ Using the previous question, given an item is defective, find $P(\text{from Mach
   \item A box has 9 working, 3 faulty phones. Two selected without replacement; find $P(\text{at least one faulty})$.
   \item Machine X makes 40\% of output with 5\% defects; Machine Y makes 60\% with 2\% defects. Find the overall $P(\text{defective})$.
   \item Using the previous question, given an item is defective, find $P(\text{from Machine X})$.
+  \item A bag has 6 red, 4 blue, 2 green balls. Three drawn without replacement; find $P(\text{all three red})$.
+  \item Of 120 students, 70 play an instrument; of those, 30 also play a sport. Of the 50 who don't play an instrument, 20 play a sport. Find $P(\text{sport}\mid\text{instrument})$.
+  \item Using the previous question's data, find $P(\text{instrument}\mid\text{sport})$ and state whether it equals $P(\text{sport}\mid\text{instrument})$.
+  \item A spinner has $P(\text{blue})=0.3$ on each of two independent spins; find $P(\text{exactly one blue})$.
+  \item A disease affects 1\% of a population; a test detects it correctly 90\% of the time and gives a false positive 4\% of the time. Given a positive result, find $P(\text{has the disease})$.
+  \item A box has 10 working, 2 faulty phones. Two selected without replacement; find $P(\text{exactly one faulty})$.
 \end{enumerate}
 \end{multicols}
 \end{recapbox}
@@ -99,6 +154,12 @@ Using the previous question, given an item is defective, find $P(\text{from Mach
   \item $P(\text{no faulty})=\tfrac9{12}\times\tfrac8{11}=\tfrac{72}{132}=\tfrac6{11}$; at least one $=1-\tfrac6{11}=\tfrac5{11}$
   \item $0.4(0.05)+0.6(0.02)=0.02+0.012=0.032$
   \item $P(X\mid d)=\dfrac{0.02}{0.032}=0.625$
+  \item $\tfrac6{12}\times\tfrac5{11}\times\tfrac4{10}=\tfrac{120}{1320}=\tfrac1{11}$
+  \item $P(\text{sport}\mid\text{instrument})=\tfrac{30}{70}=\tfrac37\approx0.429$
+  \item total sport players $=30+20=50$; $P(\text{instrument}\mid\text{sport})=\tfrac{30}{50}=0.6$; not equal to $\tfrac37\approx0.429$, confirming order matters
+  \item $2(0.3\times0.7)=0.42$
+  \item $P(d\cap+)=0.01(0.9)=0.009$; $P(\text{no }d\cap+)=0.99(0.04)=0.0396$; total $=0.0486$; $P(d\mid+)=0.009/0.0486\approx0.185$
+  \item $P(\text{no faulty})=\tfrac{10}{12}\times\tfrac9{11}=\tfrac{90}{132}=\tfrac{15}{22}$; $P(\text{both faulty})=\tfrac2{12}\times\tfrac1{11}=\tfrac2{132}=\tfrac1{66}$; exactly one $=1-\tfrac{15}{22}-\tfrac1{66}=1-\tfrac{45}{66}-\tfrac1{66}=\tfrac{20}{66}=\tfrac{10}{33}$
 \end{enumerate}
 \end{multicols}
 \end{keybox}

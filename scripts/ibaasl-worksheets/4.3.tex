@@ -38,6 +38,31 @@ A line relating monthly rent $x$ (\$100s) to apartment size $y$ (m$^2$) is $y=3.
 Each extra \$100 in monthly rent is associated with about $3.5$ more m$^2$ of space, on average.\\[3pt]\textbf{Conclusion:} slope $3.5$: more rent associates with more space.
 \end{example}
 
+\begin{example}{ex4}{Example 5 --- Comparing correlation strength between two data sets}
+Data set M has $r=0.61$ between exercise hours and mood score; data set N has $r=0.88$ between sleep hours and mood score. Which variable shows a stronger linear relationship with mood?\soln
+Compare $|r|$ values: $0.88>0.61$.\\[3pt]\textbf{Conclusion:} sleep hours shows the stronger linear relationship with mood.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Predicting and reasoning about reliability near the data's edge}
+A line $y=1.8x+22$ fits data for $x\in[5,25]$. Predict $y$ at $x=24$ and comment on reliability.\soln
+$y=1.8(24)+22=43.2+22=65.2$.\\[3pt]\textbf{Conclusion:} $x=24$ is inside $[5,25]$ (interpolation), so this prediction is reasonably reliable, though close to the data's edge.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Using two data points to build a rough line, then interpreting}
+A relationship passes near $(2,10)$ and $(8,34)$. Find the approximate slope and interpret it.\soln
+$m=\dfrac{34-10}{8-2}=\dfrac{24}{6}=4$.\\[3pt]\textbf{Conclusion:} each unit increase in $x$ is associated with about a 4-unit increase in $y$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Application --- identifying a confounding variable}
+A study finds a strong positive correlation between the number of firefighters sent to a fire and the amount of damage caused. Explain why this doesn't mean firefighters cause damage.\soln
+Larger fires require more firefighters AND cause more damage --- fire size is the confounding variable driving both.\\[3pt]\textbf{Conclusion:} the correlation reflects a shared cause (fire size), not firefighters causing damage.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Extrapolation with a physically impossible result}
+A line $y=-5x+120$ models a runner's finishing time (minutes) vs training weeks $x$, fit for $x\in[0,15]$. Predict $y$ at $x=30$ and explain why the result signals extrapolation has failed.\soln
+$y=-5(30)+120=-150+120=-30$.\\[3pt]\textbf{Conclusion:} a negative finishing time is physically impossible --- a clear sign this extrapolation, far outside $[0,15]$, has broken down.
+\end{example}
+
 \clearpage
 \sech{Your Turn --- Show Your Work}
 For each question, show all steps clearly in the space provided.
@@ -70,6 +95,30 @@ Ice cream sales and sunscreen sales are strongly positively correlated. Explain 
 A line $y=-2.4x+90$ models a car's value (\$1000s) vs its age $x$ (years), fit on data for $x\in[0,10]$; predict the value at $x=25$ and explain why this prediction is almost certainly wrong.\workspace{3.4cm}
 \end{qbox}
 
+\begin{qbox}{Question 8}
+Data set P has $r=0.45$ between coffee intake and typing speed; data set Q has $r=-0.79$ between screen brightness and eye strain relief. Which shows the stronger linear relationship?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+A line $y=2.2x+30$ fits data for $x\in[4,20]$; predict $y$ at $x=19$ and comment on reliability.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+A relationship passes near $(3,15)$ and $(9,45)$; find the approximate slope and interpret it.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11 --- Challenge}
+A study finds cities with more ice cream shops also have more reported sunburns. Identify the confounding variable and explain.\workspace{3cm}
+\end{qbox}
+
+\begin{qbox}{Question 12 --- Challenge}
+A line $y=-3x+80$ models a hiker's remaining energy (\%) vs distance walked $x$ (km), fit for $x\in[0,20]$; predict energy at $x=35$ and explain why the result is physically impossible.\workspace{3.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+A line $y=6.5x+40$ relates advertising spend (\$100s) to weekly sales; interpret both the slope and the intercept in context.\workspace{3cm}
+\end{qbox}
+
 \clearpage
 \sech{Question Recap \& Answer Key}
 
@@ -84,6 +133,12 @@ A line $y=-2.4x+90$ models a car's value (\$1000s) vs its age $x$ (years), fit o
   \item A line relates study hours $x$ to score $y$: $y=5.2x+48$; interpret the $y$-intercept in context.
   \item Ice cream sales and sunscreen sales are strongly positively correlated. Explain why this doesn't mean one causes the other.
   \item A line $y=-2.4x+90$ models a car's value (\$1000s) vs its age $x$ (years), fit on data for $x\in[0,10]$; predict the value at $x=25$ and explain why this prediction is almost certainly wrong.
+  \item Data set P has $r=0.45$ between coffee intake and typing speed; data set Q has $r=-0.79$ between screen brightness and eye strain relief. Which shows the stronger linear relationship?
+  \item A line $y=2.2x+30$ fits data for $x\in[4,20]$; predict $y$ at $x=19$ and comment on reliability.
+  \item A relationship passes near $(3,15)$ and $(9,45)$; find the approximate slope and interpret it.
+  \item A study finds cities with more ice cream shops also have more reported sunburns. Identify the confounding variable and explain.
+  \item A line $y=-3x+80$ models a hiker's remaining energy (\%) vs distance walked $x$ (km), fit for $x\in[0,20]$; predict energy at $x=35$ and explain why the result is physically impossible.
+  \item A line $y=6.5x+40$ relates advertising spend (\$100s) to weekly sales; interpret both the slope and the intercept in context.
 \end{enumerate}
 \end{multicols}
 \end{recapbox}
@@ -99,6 +154,12 @@ A line $y=-2.4x+90$ models a car's value (\$1000s) vs its age $x$ (years), fit o
   \item predicted score with 0 study hours is 48 --- a baseline from prior knowledge/other factors
   \item a confounding variable (hot weather) increases both independently
   \item $y=-2.4(25)+90=30$; but a car's value can't go negative and doesn't depreciate linearly forever, so extrapolating this far is unrealistic
+  \item $|-0.79|>|0.45|$: screen brightness/eye strain shows the stronger relationship
+  \item $y=2.2(19)+30=71.8$; $x=19$ is inside $[4,20]$ but near the edge, so reasonably reliable but worth caution
+  \item $m=\tfrac{45-15}{9-3}=5$; each unit increase in $x$ associates with about a 5-unit increase in $y$
+  \item warmer weather (or tourist season) is the confounding variable --- it independently increases both ice cream shop visits and sun exposure/sunburns
+  \item $y=-3(35)+80=-25$; negative remaining energy is impossible, showing the extrapolation (far outside $[0,20]$) has failed
+  \item slope $6.5$: each extra \$100 spent associates with about 6.5 more weekly sales; intercept $40$: baseline sales with no advertising spend
 \end{enumerate}
 \end{multicols}
 \end{keybox}

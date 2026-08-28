@@ -46,6 +46,32 @@ A machine worth \$18{,}000 loses 20\% of its value each year. Find its value aft
 \textbf{Conclusion:} value $\approx\$5898.24$; depreciation $\approx\$12{,}101.76$.
 \end{example}
 
+\begin{example}{ex4}{Example 5 --- Solve for $u\_1$ given $S\_infty$}
+A geometric series has $r=0.4$ and $S_\infty=60$. Find $u_1$.\soln
+$60=\dfrac{u_1}{1-0.4}=\dfrac{u_1}{0.6}$.\\[3pt]\textbf{Conclusion:} $u_1=36$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Application --- population growth}
+A town of 5000 grows by 3\% each year. Find its population after 8 years (nearest whole number).\soln
+$u_9=5000(1.03)^8$ (year 8 growth applied 8 times from the start).\\[3pt]\textbf{Conclusion:} population $\approx6333$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Sum of a finite geometric series with negative $r$}
+Find $S_7$ for $2,-6,18,-54,\dots$\soln
+$u_1=2$, $r=-3$. $S_7=\dfrac{2\big((-3)^7-1\big)}{-3-1}=\dfrac{2(-2187-1)}{-4}$.\\[3pt]\textbf{Conclusion:} $S_7=\dfrac{2(-2188)}{-4}=1094$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Solve for $n$ given a term value}
+A geometric sequence has $u_1=5$, $r=2$. Find $n$ such that $u_n=1280$.\soln
+$5(2)^{n-1}=1280\Rightarrow2^{n-1}=256=2^8$.\\[3pt]\textbf{Conclusion:} $n-1=8\Rightarrow n=9$. ✓
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Application --- doubling investment}
+An investment doubles every 6 years. If it starts at \$2000, express its value after $t$ periods of 6 years as a geometric sequence, and find its value after 4 periods (24 years).\soln
+\textbf{Step 1:} $u_1=2000$, $r=2$ per period. $u_5=2000(2)^4$ (value after 4 periods is the 5th term, counting the start as term 1).\\[3pt]
+\textbf{Conclusion:} $u_5=2000(16)=\$32{,}000$. ✓
+\end{example}
+
 \clearpage
 \sech{Your Turn --- Show Your Work}
 For each question, show all steps clearly in the space provided.
@@ -78,12 +104,28 @@ A ball dropped from 8 m rebounds to 60\% of its previous height each bounce. Fin
 A savings account of \$2000 grows by 4\% each year. Find its value after 10 years.\workspace{2.4cm}
 \end{qbox}
 
-\begin{qbox}{Question 8 --- Challenge}
+\begin{qbox}{Question 8}
+A geometric series has $r=0.25$ and $S_\infty=80$. Find $u_1$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Find $S_6$ for $3,-9,27,-81,\dots$\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+A geometric sequence has $u_1=4$, $r=3$. Find $n$ such that $u_n=972$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11 --- Challenge}
 A geometric sequence has $u_2=12$ and $u_5=324$. Find $u_1$ and $r$.\workspace{3.2cm}
 \end{qbox}
 
-\begin{qbox}{Question 9 --- Challenge}
+\begin{qbox}{Question 12 --- Challenge}
 Find $S_\infty$ in terms of $k$ for the sequence $k,\ \tfrac k3,\ \tfrac{k}{9},\dots$ (assume $k>0$), then find $k$ if $S_\infty=45$.\workspace{3.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+A population of 8000 grows by 2.5\% each year; find its population after 6 years (nearest whole number).\workspace{3.2cm}
 \end{qbox}
 
 \clearpage
@@ -100,8 +142,12 @@ Find $S_\infty$ in terms of $k$ for the sequence $k,\ \tfrac k3,\ \tfrac{k}{9},\
   \item Find $S_\infty$ for $16,-8,4,-2,\dots$
   \item A ball dropped from 8 m rebounds to 60\% of its previous height each bounce. Find the total vertical distance it travels (down and up), assuming it bounces forever.
   \item A savings account of \$2000 grows by 4\% each year. Find its value after 10 years.
+  \item A geometric series has $r=0.25$ and $S_\infty=80$. Find $u_1$.
+  \item Find $S_6$ for $3,-9,27,-81,\dots$
+  \item A geometric sequence has $u_1=4$, $r=3$. Find $n$ such that $u_n=972$.
   \item A geometric sequence has $u_2=12$ and $u_5=324$. Find $u_1$ and $r$.
   \item Find $S_\infty$ in terms of $k$ for the sequence $k,\ \tfrac k3,\ \tfrac{k}{9},\dots$ (assume $k>0$), then find $k$ if $S_\infty=45$.
+  \item A population of 8000 grows by 2.5\% each year; find its population after 6 years (nearest whole number).
 \end{enumerate}
 \end{multicols}
 \end{recapbox}
@@ -117,8 +163,12 @@ Find $S_\infty$ in terms of $k$ for the sequence $k,\ \tfrac k3,\ \tfrac{k}{9},\
   \item $S_\infty=\tfrac{16}{1-(-1/2)}=\tfrac{32}{3}$
   \item down 8, then up+down $2(8)(0.6)+2(8)(0.6)^2+\dots=2(8)\cdot\tfrac{0.6}{1-0.6}=2(8)(1.5)=24$; total $=8+24=32$ m
   \item $u_{10}=2000(1.04)^9\approx2846.30$
+  \item $80=\dfrac{u_1}{0.75}\Rightarrow u_1=60$
+  \item $S_6=\tfrac{3(3^6-1)}{-4}=\tfrac{3(728)}{-4}=-546$
+  \item $4(3)^{n-1}=972\Rightarrow3^{n-1}=243=3^5\Rightarrow n=6$
   \item $r^3=\tfrac{324}{12}=27\Rightarrow r=3$; $u_1=12/3=4$
   \item $S_\infty=\dfrac{k}{1-1/3}=\dfrac{3k}{2}$; set $=45\Rightarrow k=30$
+  \item $u_7=8000(1.025)^6\approx9277$
 \end{enumerate}
 \end{multicols}
 \end{keybox}

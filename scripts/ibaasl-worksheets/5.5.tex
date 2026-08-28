@@ -37,6 +37,31 @@ A cylinder must hold volume $432\pi$ cm$^3$; find the radius minimizing surface 
 $h=432/r^2$; $S=2\pi r^2+864\pi/r$; $S'=4\pi r-864\pi/r^2=0\Rightarrow r^3=216$.\\[3pt]\textbf{Conclusion:} $r=6$ cm.
 \end{example}
 
+\begin{example}{ex4}{Example 5 --- Minimizing distance to a curve}
+Find the point on the parabola $y=x^2$ closest to the point $(0,3)$.\soln
+Minimize $D^2=x^2+(x^2-3)^2$ (using squared distance to avoid the root). $D^2=x^4-5x^2+9$; derivative $4x^3-10x=0\Rightarrow2x(2x^2-5)=0$.\\[3pt]\textbf{Conclusion:} $x=0$ or $x=\pm\sqrt{2.5}$; testing shows $x=\pm\sqrt{2.5}$ gives the minimum (closer than $x=0$).
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Maximizing a triangle's area with a fixed hypotenuse-style constraint}
+A rectangle is inscribed under the line $x+2y=20$ in the first quadrant (one corner at the origin, opposite corner on the line). Find the dimensions maximizing its area.\soln
+$y=\dfrac{20-x}2$; $A=xy=\dfrac{x(20-x)}2=10x-\dfrac{x^2}2$; $A'=10-x=0\Rightarrow x=10$.\\[3pt]\textbf{Conclusion:} $x=10$, $y=5$; max area $=50$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Minimizing material for an open cylinder (no lid)}
+An open-top cylindrical can (no lid) must hold volume $250\pi$ cm$^3$; find the radius minimizing material used.\soln
+$h=250/r^2$; $S=\pi r^2+2\pi rh=\pi r^2+500\pi/r$ (only one circular base, since it's open-top); $S'=2\pi r-500\pi/r^2=0\Rightarrow r^3=250$.\\[3pt]\textbf{Conclusion:} $r=\sqrt[3]{250}\approx6.30$ cm.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Application --- minimizing total travel cost}
+A delivery route's cost is $C(x)=2x+\dfrac{288}x$ (\$100s) for average speed-related parameter $x>0$. Find $x$ minimizing cost.\soln
+$C'(x)=2-\dfrac{288}{x^2}=0\Rightarrow x^2=144$.\\[3pt]\textbf{Conclusion:} $x=12$ minimizes cost (rejecting the negative root).
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Confirming a maximum with the second derivative test}
+For the rectangle-under-a-line problem (Example 6), confirm $x=10$ gives a maximum using $A''$.\soln
+$A(x)=10x-\tfrac{x^2}2\Rightarrow A''(x)=-1<0$ for all $x$.\\[3pt]\textbf{Conclusion:} $A''<0$ confirms $x=10$ is indeed a maximum.
+\end{example}
+
 \clearpage
 \sech{Your Turn --- Show Your Work}
 For each question, show all steps clearly in the space provided.
@@ -65,6 +90,34 @@ For the cylinder above, find the height and confirm $h=2r$ at the optimum.\works
 A farmer has 240 m of fencing for a rectangular field using an existing wall as one side (so only 3 sides need fencing); find the dimensions maximizing area.\workspace{3.4cm}
 \end{qbox}
 
+\begin{qbox}{Question 7 --- Challenge}
+Find the point on the parabola $y=x^2$ closest to $(0,2)$ (minimize squared distance).\workspace{3.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+A rectangle is inscribed under the line $x+3y=30$ in the first quadrant; find the dimensions maximizing its area.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9 --- Challenge}
+An open-top cylindrical can (no lid) must hold volume $128\pi$ cm$^3$; find the radius minimizing material used.\workspace{3.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+A delivery route's cost is $C(x)=3x+\dfrac{432}x$; find $x$ minimizing cost.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+For the inscribed-rectangle problem above ($x+3y=30$), confirm the maximum using the second derivative.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12 --- Challenge}
+A box with a square base and no lid must hold 108 cm$^3$; find the base side minimizing total material used.\workspace{3.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Two positive numbers have a sum of 24; find the two numbers that maximize their product.\workspace{3cm}
+\end{qbox}
+
 \clearpage
 \sech{Question Recap \& Answer Key}
 
@@ -78,6 +131,13 @@ A farmer has 240 m of fencing for a rectangular field using an existing wall as 
   \item A cylinder must hold volume $2000\pi$ cm$^3$; find the radius minimizing surface area.
   \item For the cylinder above, find the height and confirm $h=2r$ at the optimum.
   \item A farmer has 240 m of fencing for a rectangular field using an existing wall as one side (so only 3 sides need fencing); find the dimensions maximizing area.
+  \item Find the point on the parabola $y=x^2$ closest to $(0,2)$ (minimize squared distance).
+  \item A rectangle is inscribed under the line $x+3y=30$ in the first quadrant; find the dimensions maximizing its area.
+  \item An open-top cylindrical can (no lid) must hold volume $128\pi$ cm$^3$; find the radius minimizing material used.
+  \item A delivery route's cost is $C(x)=3x+\dfrac{432}x$; find $x$ minimizing cost.
+  \item For the inscribed-rectangle problem above ($x+3y=30$), confirm the maximum using the second derivative.
+  \item A box with a square base and no lid must hold 108 cm$^3$; find the base side minimizing total material used.
+  \item Two positive numbers have a sum of 24; find the two numbers that maximize their product.
 \end{enumerate}
 \end{multicols}
 \end{recapbox}
@@ -92,6 +152,13 @@ A farmer has 240 m of fencing for a rectangular field using an existing wall as 
   \item $S=2\pi r^2+4000\pi/r$; $S'=4\pi r-4000\pi/r^2=0\Rightarrow r^3=1000\Rightarrow r=10$ cm
   \item $h=2000/100=20$; $2r=20=h$ confirmed
   \item Let $x$ = side perpendicular to wall, $240-2x$ = side parallel; $A=x(240-2x)=240x-2x^2$; $A'=240-4x=0\Rightarrow x=60$, parallel side $=120$ m
+  \item minimize $D^2=x^2+(x^2-2)^2=x^4-3x^2+4$; $4x^3-6x=0\Rightarrow2x(2x^2-3)=0\Rightarrow x=\pm\sqrt{1.5}$; point $(\sqrt{1.5},1.5)$ (or its negative-$x$ mirror)
+  \item $y=\tfrac{30-x}3$; $A=xy=10x-\tfrac{x^2}3$; $A'=10-\tfrac{2x}3=0\Rightarrow x=15$, $y=5$
+  \item $S=\pi r^2+256\pi/r$; $S'=2\pi r-256\pi/r^2=0\Rightarrow r^3=128\Rightarrow r=\sqrt[3]{128}\approx5.04$ cm
+  \item $C'(x)=3-432/x^2=0\Rightarrow x^2=144\Rightarrow x=12$
+  \item $A''(x)=-\tfrac23<0$ for all $x$, confirming a maximum
+  \item $S=x^2+4x(108/x^2)=x^2+432/x$; $S'=2x-432/x^2=0\Rightarrow x^3=216\Rightarrow x=6$ cm
+  \item let numbers be $x,24-x$; $P=x(24-x)=24x-x^2$; $P'=24-2x=0\Rightarrow x=12$: both numbers are $12$
 \end{enumerate}
 \end{multicols}
 \end{keybox}

@@ -38,6 +38,32 @@ State the modal class for the data in the previous example.\soln
 Highest frequency (8) is in the $10$--$20$ class.\\[3pt]\textbf{Conclusion:} modal class $10$--$20$.
 \end{example}
 
+\begin{example}{ex4}{Example 5 --- Systematic sampling}
+A quality inspector checks every 20th item off a production line of 2000 items. State the sampling method and the sample size.\soln
+This is systematic sampling (constant interval $k=20$).\\[3pt]\textbf{Conclusion:} sample size $=2000/20=100$ items.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Estimating the median from grouped data}
+Estimate the median class for the grouped data $0$--$10$(4), $10$--$20$(9), $20$--$30$(7).\soln
+Total frequency $=20$; the median (10th/11th value) falls where the cumulative frequency first reaches $10$: after $4$ (in $0$--$10$) plus $9$ (in $10$--$20$) $=13\geq10$.\\[3pt]\textbf{Conclusion:} median class is $10$--$20$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Comparing two grouped means}
+Two classes' test scores are grouped as: Class A --- $60$--$70$(3), $70$--$80$(9), $80$--$90$(3); Class B --- $60$--$70$(6), $70$--$80$(6), $80$--$90$(3). Compare their estimated means.\soln
+Class A: $\bar x=\dfrac{3(65)+9(75)+3(85)}{15}=\dfrac{195+675+255}{15}=\dfrac{1125}{15}=75$.\\[3pt]
+Class B: $\bar x=\dfrac{6(65)+6(75)+3(85)}{15}=\dfrac{390+450+255}{15}=\dfrac{1095}{15}=73$.\\[3pt]\textbf{Conclusion:} Class A's estimated mean (75) is slightly higher than Class B's (73).
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Application --- stratified sample by three groups}
+A survey of 900 residents (500 downtown, 250 suburban, 150 rural) needs a stratified sample of 90. Find each group's sample size.\soln
+Fraction $=90/900=1/10$.\\[3pt]\textbf{Conclusion:} downtown $50$, suburban $25$, rural $15$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Identifying a sampling frame issue}
+A phone survey uses only listed landline numbers to estimate opinions of all adults. Explain a limitation of this sampling frame.\soln
+Many adults, especially younger ones, don't have listed landlines --- they're mobile-only or unlisted.\\[3pt]\textbf{Conclusion:} the sampling frame excludes a large, systematically different portion of the population, biasing the results.
+\end{example}
+
 \clearpage
 \sech{Your Turn --- Show Your Work}
 For each question, show all steps clearly in the space provided.
@@ -70,6 +96,30 @@ A school of 1200 (700 juniors, 500 seniors) wants a stratified sample of 60; fin
 Explain why a census (surveying an entire population) is not always more useful than a well-designed sample.\workspace{2.4cm}
 \end{qbox}
 
+\begin{qbox}{Question 8}
+An inspector checks every 15th item from a batch of 1500; state the method and sample size.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Estimate the median class for: $0$--$5$(2), $5$--$10$(6), $10$--$15$(8), $15$--$20$(4).\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+A survey of 800 residents (450 urban, 200 suburban, 150 rural) needs a stratified sample of 80; find each group's sample size.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11 --- Challenge}
+A university surveys only students in the library on a Friday night to estimate typical study habits; explain the bias.\workspace{3cm}
+\end{qbox}
+
+\begin{qbox}{Question 12 --- Challenge}
+Two classes' scores are grouped: Class C --- $50$--$60$(4),$60$--$70$(10),$70$--$80$(6); Class D --- $50$--$60$(8),$60$--$70$(6),$70$--$80$(6). Compare their estimated means.\workspace{3.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+A pollster only calls numbers from a decade-old phone directory; explain a limitation of this sampling frame.\workspace{3cm}
+\end{qbox}
+
 \clearpage
 \sech{Question Recap \& Answer Key}
 
@@ -84,6 +134,12 @@ Explain why a census (surveying an entire population) is not always more useful 
   \item Estimate the mean from: $10$--$20$ (freq 3), $20$--$30$ (freq 8), $30$--$40$ (freq 12), $40$--$50$ (freq 7).
   \item A school of 1200 (700 juniors, 500 seniors) wants a stratified sample of 60; find sample sizes for each group.
   \item Explain why a census (surveying an entire population) is not always more useful than a well-designed sample.
+  \item An inspector checks every 15th item from a batch of 1500; state the method and sample size.
+  \item Estimate the median class for: $0$--$5$(2), $5$--$10$(6), $10$--$15$(8), $15$--$20$(4).
+  \item A survey of 800 residents (450 urban, 200 suburban, 150 rural) needs a stratified sample of 80; find each group's sample size.
+  \item A university surveys only students in the library on a Friday night to estimate typical study habits; explain the bias.
+  \item Two classes' scores are grouped: Class C --- $50$--$60$(4),$60$--$70$(10),$70$--$80$(6); Class D --- $50$--$60$(8),$60$--$70$(6),$70$--$80$(6). Compare their estimated means.
+  \item A pollster only calls numbers from a decade-old phone directory; explain a limitation of this sampling frame.
 \end{enumerate}
 \end{multicols}
 \end{recapbox}
@@ -99,6 +155,12 @@ Explain why a census (surveying an entire population) is not always more useful 
   \item midpoints $15,25,35,45$; $\sum fm=45+200+420+315=980$, $\sum f=30$: $\bar x\approx32.7$
   \item fraction $=1/20$: juniors $35$, seniors $25$
   \item a census can be slower, costlier, and harder to keep accurate/consistent across every member than a well-designed representative sample
+  \item systematic sampling; sample size $=1500/15=100$
+  \item cumulative: $2,8,16,20$; the median position (10th value) falls once cumulative reaches $\geq10$, in the $10$--$15$ class
+  \item fraction $=80/800=1/10$: urban $45$, suburban $20$, rural $15$
+  \item over-represents heavy studiers who use the library late on a Friday, under-represents typical/lighter studiers
+  \item Class C: $\bar x=\tfrac{4(55)+10(65)+6(75)}{20}=\tfrac{220+650+450}{20}=\tfrac{1320}{20}=66$; Class D: $\bar x=\tfrac{8(55)+6(65)+6(75)}{20}=\tfrac{440+390+450}{20}=\tfrac{1280}{20}=64$; Class C's mean is slightly higher
+  \item the directory is outdated --- misses newer residents, movers, and increasingly excludes people without landlines, skewing who gets reached
 \end{enumerate}
 \end{multicols}
 \end{keybox}

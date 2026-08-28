@@ -39,6 +39,32 @@ Given $f(x)=x^2$, describe $y=f(3x)$.\soln
 $y=(3x)^2=9x^2$ --- horizontal compression by $\tfrac13$ (equivalently vertical stretch by 9).\\[3pt]\textbf{Conclusion:} compressed horizontally by $\tfrac13$.
 \end{example}
 
+\begin{example}{ex4}{Example 5 --- Combining a stretch, shift, and reflection}
+Describe $y=-2(x-3)^2+5$ as transformations of $y=x^2$, in order.\soln
+Stretch vertically by 2, reflect in the $x$-axis, then shift right 3 and up 5.\\[3pt]\textbf{Conclusion:} reflected, stretched by 2, shifted right 3 up 5; vertex $(3,5)$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Transformation of a root function with compression}
+Given $f(x)=\sqrt x$, describe $y=f(4x)-3$.\soln
+$y=\sqrt{4x}-3=2\sqrt x-3$ --- equivalent to a vertical stretch by 2 combined with a shift down 3.\\[3pt]\textbf{Conclusion:} vertical stretch by 2 (from the horizontal compression), shifted down 3.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Tracking an intercept through transformations}
+A graph $y=f(x)$ has an $x$-intercept at $x=5$. Find the $x$-intercept of $y=f(2x-4)$ (factor the input first: $f(2(x-2))$).\soln
+The transformation is a horizontal compression by $\tfrac12$ then a shift right 2. The original root at $x=5$ maps: first compress ($x=2.5$), then shift right 2.\\[3pt]\textbf{Conclusion:} new root at $x=4.5$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Application --- modelling a shifted signal}
+A sensor's baseline reading is $y=f(t)$. A second, recalibrated sensor reads $3$ units higher and lags behind by $2$ seconds. Write its model in terms of $f$.\soln
+"Lags behind by 2 seconds" means the same reading happens 2 seconds later --- a shift right by 2. "3 units higher" is a vertical shift up 3.\\[3pt]\textbf{Conclusion:} the second sensor's model is $y=f(t-2)+3$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Reversing a transformation to find the original function}
+A graph $y=2f(x+1)-4$ has a maximum at $(3,6)$. Find the coordinates of the corresponding maximum on $y=f(x)$.\soln
+\textbf{Step 1:} Undo the vertical stretch/shift: original $y$-value satisfies $6=2y-4\Rightarrow y=5$.\\[3pt]
+\textbf{Step 2:} Undo the horizontal shift: $x+1=3\Rightarrow x=2$.\\[3pt]\textbf{Conclusion:} the maximum on $y=f(x)$ is at $(2,5)$. ✓
+\end{example}
+
 \clearpage
 \sech{Your Turn --- Show Your Work}
 For each question, show all steps clearly in the space provided.
@@ -72,8 +98,28 @@ A graph $y=f(x)$ has a minimum at $(3,-2)$. State the minimum point of $y=f(x-1)
 A graph $y=f(x)$ has a root at $x=6$. State the corresponding root of $y=f(x+2)$.\workspace{2.4cm}
 \end{qbox}
 
-\begin{qbox}{Question 8 --- Challenge}
+\begin{qbox}{Question 8}
+Describe $y=3(x+2)^2-4$ as transformations of $y=x^2$, in order.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+A graph $y=f(x)$ has a root at $x=8$. Find the root of $y=f(3x-6)$ (factor first).\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+A graph $y=3f(x-2)+1$ has a minimum at $(5,10)$. Find the corresponding minimum on $y=f(x)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11 --- Challenge}
 A graph $y=f(x)$ has a maximum at $(2,5)$. State the coordinates of the corresponding point on $y=-2f(x-3)$.\workspace{3.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 12 --- Challenge}
+A city's rainfall model is $y=f(m)$ by month. A neighbouring city gets 20\% more rain and its wet season arrives 1 month later. Write its model in terms of $f$.\workspace{3.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Given $f(x)=\sqrt x$, describe $y=f(9x)+2$ as a single vertical stretch plus a shift.\workspace{3cm}
 \end{qbox}
 
 \clearpage
@@ -90,7 +136,12 @@ A graph $y=f(x)$ has a maximum at $(2,5)$. State the coordinates of the correspo
   \item Given $f(x)=x^2$, sketch and describe $y=f(2x)$.
   \item A graph $y=f(x)$ has a minimum at $(3,-2)$. State the minimum point of $y=f(x-1)+4$.
   \item A graph $y=f(x)$ has a root at $x=6$. State the corresponding root of $y=f(x+2)$.
+  \item Describe $y=3(x+2)^2-4$ as transformations of $y=x^2$, in order.
+  \item A graph $y=f(x)$ has a root at $x=8$. Find the root of $y=f(3x-6)$ (factor first).
+  \item A graph $y=3f(x-2)+1$ has a minimum at $(5,10)$. Find the corresponding minimum on $y=f(x)$.
   \item A graph $y=f(x)$ has a maximum at $(2,5)$. State the coordinates of the corresponding point on $y=-2f(x-3)$.
+  \item A city's rainfall model is $y=f(m)$ by month. A neighbouring city gets 20\% more rain and its wet season arrives 1 month later. Write its model in terms of $f$.
+  \item Given $f(x)=\sqrt x$, describe $y=f(9x)+2$ as a single vertical stretch plus a shift.
 \end{enumerate}
 \end{multicols}
 \end{recapbox}
@@ -106,7 +157,12 @@ A graph $y=f(x)$ has a maximum at $(2,5)$. State the coordinates of the correspo
   \item $y=(2x)^2=4x^2$, horizontal compression by $\tfrac12$
   \item $(4,2)$
   \item $x=4$
+  \item stretched vertically by 3, shifted left 2 and down 4; vertex $(-2,-4)$
+  \item compress horizontally by $\tfrac13$ then shift right 2: root at $x=8/3+2=14/3$
+  \item undo stretch/shift: $10=3y+1\Rightarrow y=3$; undo horizontal shift: $x-2=5\Rightarrow x=7$; point $(7,3)$
   \item Shift right 3: $x=5$; reflect and stretch by 2: $y=-2(5)=-10$: point $(5,-10)$
+  \item $y=1.2f(m-1)$
+  \item $y=\sqrt{9x}+2=3\sqrt x+2$: vertical stretch by 3, shifted up 2
 \end{enumerate}
 \end{multicols}
 \end{keybox}

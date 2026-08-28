@@ -39,6 +39,32 @@ Find the inverse of $f(x)=x^2-3$, restricted to $x\geq0$.\soln
 $y=x^2-3$; swap: $x=y^2-3\Rightarrow y^2=x+3\Rightarrow y=\sqrt{x+3}$ (positive root, matching the restriction).\\[3pt]\textbf{Conclusion:} $f^{-1}(x)=\sqrt{x+3}$.
 \end{example}
 
+\begin{example}{ex4}{Example 5 --- Composite requiring domain awareness}
+Given $f(x)=\sqrt x$, $g(x)=x-5$, find the domain of $(f\circ g)(x)$.\soln
+$(f\circ g)(x)=\sqrt{x-5}$, which requires $x-5\geq0$.\\[3pt]\textbf{Conclusion:} domain is $x\geq5$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Finding a function given its composite}
+Given $g(x)=2x+1$ and $(f\circ g)(x)=4x^2+4x+3$, find $f(x)$.\soln
+Since $(f\circ g)(x)=f(2x+1)$, let $u=2x+1\Rightarrow x=\dfrac{u-1}2$. Substitute into $4x^2+4x+3$: after simplifying, this equals $u^2+2$.\\[3pt]\textbf{Conclusion:} $f(x)=x^2+2$. (Check: $f(2x+1)=(2x+1)^2+2=4x^2+4x+1+2=4x^2+4x+3$ ✓)
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Inverse of a rational function}
+Find the inverse of $f(x)=\dfrac{2x+1}{x-3}$.\soln
+$y=\dfrac{2x+1}{x-3}$; swap: $x=\dfrac{2y+1}{y-3}\Rightarrow x(y-3)=2y+1\Rightarrow xy-3x=2y+1$.\\[3pt]
+$xy-2y=3x+1\Rightarrow y(x-2)=3x+1\Rightarrow y=\dfrac{3x+1}{x-2}$.\\[3pt]\textbf{Conclusion:} $f^{-1}(x)=\dfrac{3x+1}{x-2}$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Composing a function with its own inverse}
+Given $f(x)=\dfrac{x-4}{2}$, verify that $f(f^{-1}(10))=10$ without finding $f^{-1}$'s formula.\soln
+By definition, applying $f$ after $f^{-1}$ always returns the original input.\\[3pt]\textbf{Conclusion:} $f(f^{-1}(10))=10$ directly, no formula needed. ✓
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Domain restriction needed for an inverse to exist}
+Explain why $f(x)=(x-2)^2+1$ needs a restricted domain to have an inverse that is a function, and state a valid restriction.\soln
+Without restriction, $f$ fails the horizontal line test (e.g.\ $f(1)=f(3)=2$).\\[3pt]\textbf{Conclusion:} restricting to $x\geq2$ (or $x\leq2$) makes $f$ one-to-one, so its inverse is then a function.
+\end{example}
+
 \clearpage
 \sech{Your Turn --- Show Your Work}
 For each question, show all steps clearly in the space provided.
@@ -71,8 +97,28 @@ Verify that $f(x)=2x+6$ and $g(x)=\dfrac{x-6}{2}$ are inverses by computing both
 Given $f(x)=x-1$, $g(x)=x^2$, find $(g\circ f)(3)$ and $(f\circ g)(3)$, and note they differ.\workspace{2.4cm}
 \end{qbox}
 
-\begin{qbox}{Question 8 --- Challenge}
+\begin{qbox}{Question 8}
+Given $f(x)=\sqrt{x}$, $g(x)=x+8$, find the domain of $(f\circ g)(x)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Find the inverse of $f(x)=\dfrac{3x-2}{x+1}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Explain why $f(x)=x^2-6x+5$ needs a restricted domain to have a function inverse, and state a valid restriction.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11 --- Challenge}
 Given $f(x)=2x-5$, find $f^{-1}(f(8))$ without computing $f^{-1}$'s formula, and explain why your shortcut works.\workspace{3cm}
+\end{qbox}
+
+\begin{qbox}{Question 12 --- Challenge}
+Given $g(x)=3x-2$ and $(f\circ g)(x)=9x^2-12x+7$, find $f(x)$.\workspace{3.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Given $f(x)=\dfrac{x}{x-1}$, find $f^{-1}(x)$ and verify $f^{-1}$ has the same rule as $f$ (i.e.\ $f$ is its own inverse).\workspace{3.4cm}
 \end{qbox}
 
 \clearpage
@@ -89,7 +135,12 @@ Given $f(x)=2x-5$, find $f^{-1}(f(8))$ without computing $f^{-1}$'s formula, and
   \item Find the inverse of $f(x)=x^2+2$, restricted to $x\leq0$.
   \item Verify that $f(x)=2x+6$ and $g(x)=\dfrac{x-6}{2}$ are inverses by computing both compositions.
   \item Given $f(x)=x-1$, $g(x)=x^2$, find $(g\circ f)(3)$ and $(f\circ g)(3)$, and note they differ.
+  \item Given $f(x)=\sqrt{x}$, $g(x)=x+8$, find the domain of $(f\circ g)(x)$.
+  \item Find the inverse of $f(x)=\dfrac{3x-2}{x+1}$.
+  \item Explain why $f(x)=x^2-6x+5$ needs a restricted domain to have a function inverse, and state a valid restriction.
   \item Given $f(x)=2x-5$, find $f^{-1}(f(8))$ without computing $f^{-1}$'s formula, and explain why your shortcut works.
+  \item Given $g(x)=3x-2$ and $(f\circ g)(x)=9x^2-12x+7$, find $f(x)$.
+  \item Given $f(x)=\dfrac{x}{x-1}$, find $f^{-1}(x)$ and verify $f^{-1}$ has the same rule as $f$ (i.e.\ $f$ is its own inverse).
 \end{enumerate}
 \end{multicols}
 \end{recapbox}
@@ -105,7 +156,12 @@ Given $f(x)=2x-5$, find $f^{-1}(f(8))$ without computing $f^{-1}$'s formula, and
   \item $y=-\sqrt{x-2}$ (negative root, matching $x\leq0$)
   \item $f(g(x))=2\left(\tfrac{x-6}{2}\right)+6=x$; $g(f(x))=\tfrac{(2x+6)-6}{2}=x$: both confirm they're inverses
   \item $(g\circ f)(3)=g(2)=4$; $(f\circ g)(3)=f(9)=8$ --- different, showing composition order matters
+  \item $\sqrt{x+8}$ requires $x+8\geq0$: domain $x\geq-8$
+  \item $x(y+1)=3y-2\Rightarrow xy+x=3y-2\Rightarrow y(x-3)=-x-2\Rightarrow y=\dfrac{-x-2}{x-3}=\dfrac{x+2}{3-x}$
+  \item vertex at $x=3$; $f$ fails the horizontal line test around it; restrict to $x\geq3$ (or $x\leq3$)
   \item $f^{-1}(f(8))=8$, since applying a function then its inverse always returns the original input
+  \item let $u=3x-2\Rightarrow x=\tfrac{u+2}3$; substitute into $9x^2-12x+7$, simplifies to $u^2+3$: $f(x)=x^2+3$
+  \item $y=\dfrac{x}{x-1}$; swap: $x=\dfrac{y}{y-1}\Rightarrow x(y-1)=y\Rightarrow xy-x=y\Rightarrow y(x-1)=x\Rightarrow y=\dfrac{x}{x-1}$ --- same rule, so $f=f^{-1}$
 \end{enumerate}
 \end{multicols}
 \end{keybox}

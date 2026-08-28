@@ -39,6 +39,32 @@ A data set has mean 55, SD 6. Every value is tripled, then 4 is subtracted. Find
 Tripling: mean $165$, SD $18$; subtracting 4 changes only the mean.\\[3pt]\textbf{Conclusion:} new mean $161$, SD $18$.
 \end{example}
 
+\begin{example}{ex4}{Example 5 --- Lower outlier check}
+A data set has $Q_1=30$, $Q_3=50$. Is $2$ an outlier?\soln
+$IQR=20$; lower fence $=30-30=0$.\\[3pt]\textbf{Conclusion:} no, since $2>0$ (it's above the lower fence).
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Finding a missing data value from the mean}
+Five values have a mean of 14: $8,12,17,19,x$. Find $x$.\soln
+Sum must be $5(14)=70$. $8+12+17+19=56$, so $x=70-56$.\\[3pt]\textbf{Conclusion:} $x=14$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- SD from a frequency table}
+Find the SD of the data $2$(freq 2), $4$(freq 3), $6$(freq 1) (6 values total).\soln
+Mean $=\dfrac{2(2)+4(3)+6(1)}{6}=\dfrac{4+12+6}{6}=\dfrac{22}{6}\approx3.67$.\\[3pt]
+Deviations squared (weighted): $2(2-3.67)^2+3(4-3.67)^2+1(6-3.67)^2\approx2(2.79)+3(0.109)+1(5.43)\approx11.14$.\\[3pt]\textbf{Conclusion:} $\sigma=\sqrt{11.14/6}\approx1.36$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Comparing spread using range vs IQR}
+Data set E has range 40 but IQR 5; data set F has range 20 but IQR 12. Which is more consistent in its middle 50\%, and why might the ranges be misleading?\soln
+IQR measures the middle 50\% spread, ignoring extreme values; E's small IQR (5) shows most data is tightly clustered despite one or two extreme outliers stretching the range.\\[3pt]\textbf{Conclusion:} E is more consistent in its middle half; its large range is likely driven by outliers, which the IQR correctly ignores.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Application --- effect of a scaling error}
+A scale reads every mass 2 kg too high, and additionally every reading was mistakenly recorded in a unit requiring multiplication by 1.1. If the true mean is 60 kg and true SD is 4 kg, find the reported mean and SD (assume the $+2$ happened before the $\times1.1$).\soln
+Add 2: mean $62$, SD unchanged $4$. Multiply by $1.1$: mean $62(1.1)=68.2$, SD $4(1.1)=4.4$.\\[3pt]\textbf{Conclusion:} reported mean $68.2$ kg, SD $4.4$ kg.
+\end{example}
+
 \clearpage
 \sech{Your Turn --- Show Your Work}
 For each question, show all steps clearly in the space provided.
@@ -75,6 +101,26 @@ A data set has five-number summary $5,15,20,28,55$. Determine whether $55$ is an
 A data set has mean 44 and SD 5. Every value is halved and then 10 is added. Find the new mean and SD.\workspace{3.2cm}
 \end{qbox}
 
+\begin{qbox}{Question 9}
+A data set has $Q_1=25$, $Q_3=45$. Is the value $1$ an outlier?\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Five values have a mean of 20: $14,18,22,25,x$. Find $x$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11 --- Challenge}
+Find the SD of the data $3$(freq 1), $5$(freq 4), $7$(freq 1) (6 values total).\workspace{3.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12 --- Challenge}
+Data set G has range 50 but IQR 6; data set H has range 15 but IQR 10. Which is more consistent in its middle 50\%, and explain why the ranges alone would be misleading.\workspace{3.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+A sensor overreads every value by 3 units, and its readings must then be multiplied by 1.2 to correct the unit. If the true mean is 50 and true SD is 6, find the reported mean and SD.\workspace{3.2cm}
+\end{qbox}
+
 \clearpage
 \sech{Question Recap \& Answer Key}
 
@@ -90,6 +136,11 @@ A data set has mean 44 and SD 5. Every value is halved and then 10 is added. Fin
   \item Class A: median 80, IQR 6. Class B: median 76, IQR 18. Compare performance and consistency.
   \item A data set has five-number summary $5,15,20,28,55$. Determine whether $55$ is an outlier.
   \item A data set has mean 44 and SD 5. Every value is halved and then 10 is added. Find the new mean and SD.
+  \item A data set has $Q_1=25$, $Q_3=45$. Is the value $1$ an outlier?
+  \item Five values have a mean of 20: $14,18,22,25,x$. Find $x$.
+  \item Find the SD of the data $3$(freq 1), $5$(freq 4), $7$(freq 1) (6 values total).
+  \item Data set G has range 50 but IQR 6; data set H has range 15 but IQR 10. Which is more consistent in its middle 50\%, and explain why the ranges alone would be misleading.
+  \item A sensor overreads every value by 3 units, and its readings must then be multiplied by 1.2 to correct the unit. If the true mean is 50 and true SD is 6, find the reported mean and SD.
 \end{enumerate}
 \end{multicols}
 \end{recapbox}
@@ -106,6 +157,11 @@ A data set has mean 44 and SD 5. Every value is halved and then 10 is added. Fin
   \item A has higher median (better typical score) and smaller IQR (more consistent)
   \item $IQR=13$, fence $=28+19.5=47.5$; $55>47.5$: yes, outlier
   \item halving: mean $22$, SD $2.5$; $+10$ changes only mean: mean $32$, SD $2.5$
+  \item $IQR=20$, lower fence $=25-30=-5$; $1>-5$: not an outlier
+  \item sum must be $100$; $14+18+22+25=79$, so $x=21$
+  \item mean $=\tfrac{3+20+7}{6}=5$; deviations sq (weighted): $1(4)+4(0)+1(4)=8$; $\sigma=\sqrt{8/6}\approx1.15$
+  \item H is more consistent in its middle half (smaller IQR); G's large range is likely driven by one or two extreme outliers, which the IQR ignores
+  \item add 3: mean $53$, SD unchanged $6$; multiply by $1.2$: mean $63.6$, SD $7.2$
 \end{enumerate}
 \end{multicols}
 \end{keybox}

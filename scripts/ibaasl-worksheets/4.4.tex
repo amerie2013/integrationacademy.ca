@@ -38,6 +38,32 @@ $P(C)=0.35$, $P(D)=0.4$, $P(C\cup D)=0.75$. Are $C,D$ mutually exclusive?\soln
 $P(C\cap D)=0.35+0.4-0.75=0$.\\[3pt]\textbf{Conclusion:} yes, $P(C\cap D)=0$.
 \end{example}
 
+\begin{example}{ex4}{Example 5 --- Finding a region only in one set}
+Of 70 people, 45 like hiking, 30 like biking, 12 like both. Find $P(\text{hiking only})$.\soln
+Hiking only $=45-12=33$.\\[3pt]\textbf{Conclusion:} $P(\text{hiking only})=\tfrac{33}{70}$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Neither region from a Venn diagram}
+Of 90 people, 50 like jazz, 40 like classical, 20 like both. Find $P(\text{neither})$.\soln
+At least one $=50+40-20=70$; neither $=90-70=20$.\\[3pt]\textbf{Conclusion:} $P(\text{neither})=\tfrac{20}{90}=\tfrac29$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Three-fact independence verification}
+A die is rolled and a coin is flipped. Let $A$="die shows 4" and $B$="coin shows heads". Verify $A,B$ are independent.\soln
+$P(A)=\tfrac16$, $P(B)=\tfrac12$, $P(A\cap B)=\tfrac1{12}$ (one specific outcome out of 12 equally likely).\\[3pt]\textbf{Conclusion:} $P(A)P(B)=\tfrac16\cdot\tfrac12=\tfrac1{12}=P(A\cap B)$ --- confirmed independent (as expected, since a die and coin don't influence each other).
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Solving for a probability given independence}
+$A,B$ are independent, $P(A)=0.6$, $P(A\cup B)=0.88$. Find $P(B)$.\soln
+$P(A\cup B)=P(A)+P(B)-P(A)P(B)\Rightarrow0.88=0.6+P(B)-0.6P(B)$.\\[3pt]
+$0.88=0.6+0.4P(B)\Rightarrow0.28=0.4P(B)$.\\[3pt]\textbf{Conclusion:} $P(B)=0.7$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Application --- overlapping subscriptions}
+Of 500 households, 320 subscribe to streaming service X, 210 to service Y, and 80 subscribe to neither. Find how many subscribe to both, and $P(\text{exactly one})$.\soln
+At least one $=500-80=420$; both $=320+210-420=110$.\\[3pt]\textbf{Conclusion:} both $=110$; exactly one $=420-110=310\Rightarrow P=\tfrac{310}{500}=0.62$.
+\end{example}
+
 \clearpage
 \sech{Your Turn --- Show Your Work}
 For each question, show all steps clearly in the space provided.
@@ -70,6 +96,30 @@ A survey of 100 finds 65 like pop music, 45 like rock, and $x$ like both, with 1
 Explain why two mutually exclusive events with nonzero probability can never be independent.\workspace{2.4cm}
 \end{qbox}
 
+\begin{qbox}{Question 8}
+Of 60 people, 40 like tea, 25 like coffee, 10 like both. Find $P(\text{tea only})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Of 100 people, 55 like reading, 45 like gaming, 20 like both. Find $P(\text{neither})$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+A card is drawn from a deck and a coin flipped. Let $A$="card is a King", $B$="coin shows tails". Verify $A,B$ are independent.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11 --- Challenge}
+$A,B$ are independent, $P(A)=0.5$, $P(A\cup B)=0.75$. Find $P(B)$.\workspace{3.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 12 --- Challenge}
+Of 600 households, 380 subscribe to service X, 250 to service Y, 90 subscribe to neither. Find how many subscribe to both, and $P(\text{exactly one})$.\workspace{3.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+$P(A)=0.35$, $P(B)=0.5$, $P(A\cup B)=0.675$. Determine whether $A,B$ are independent.\workspace{3cm}
+\end{qbox}
+
 \clearpage
 \sech{Question Recap \& Answer Key}
 
@@ -84,6 +134,12 @@ Explain why two mutually exclusive events with nonzero probability can never be 
   \item Of 80 gym members, 50 use weights, 35 use cardio, everyone uses at least one. Find how many use both.
   \item A survey of 100 finds 65 like pop music, 45 like rock, and $x$ like both, with 15 liking neither. Find $x$ and $P(\text{pop only})$.
   \item Explain why two mutually exclusive events with nonzero probability can never be independent.
+  \item Of 60 people, 40 like tea, 25 like coffee, 10 like both. Find $P(\text{tea only})$.
+  \item Of 100 people, 55 like reading, 45 like gaming, 20 like both. Find $P(\text{neither})$.
+  \item A card is drawn from a deck and a coin flipped. Let $A$="card is a King", $B$="coin shows tails". Verify $A,B$ are independent.
+  \item $A,B$ are independent, $P(A)=0.5$, $P(A\cup B)=0.75$. Find $P(B)$.
+  \item Of 600 households, 380 subscribe to service X, 250 to service Y, 90 subscribe to neither. Find how many subscribe to both, and $P(\text{exactly one})$.
+  \item $P(A)=0.35$, $P(B)=0.5$, $P(A\cup B)=0.675$. Determine whether $A,B$ are independent.
 \end{enumerate}
 \end{multicols}
 \end{recapbox}
@@ -99,6 +155,12 @@ Explain why two mutually exclusive events with nonzero probability can never be 
   \item $50+35-80=5$
   \item at least one $=85$; $85=65+45-x\Rightarrow x=25$; pop only $=65-25=40\Rightarrow P=0.40$
   \item if mutually exclusive, one occurring guarantees the other didn't ($P(A\cap B)=0$), which contradicts independence unless one probability is already 0
+  \item tea only $=40-10=30\Rightarrow P=\tfrac{30}{60}=0.5$
+  \item at least one $=55+45-20=80$; neither $=100-80=20\Rightarrow P=0.2$
+  \item $P(A)=\tfrac{4}{52}=\tfrac1{13}$, $P(B)=\tfrac12$, $P(A\cap B)=\tfrac1{26}$; $P(A)P(B)=\tfrac1{26}$, matches: independent
+  \item $0.75=0.5+P(B)-0.5P(B)\Rightarrow0.25=0.5P(B)\Rightarrow P(B)=0.5$
+  \item at least one $=510$; both $=380+250-510=120$; exactly one $=510-120=390\Rightarrow P=0.65$
+  \item $P(A)P(B)=0.175$; $P(A\cap B)=P(A)+P(B)-P(A\cup B)=0.35+0.5-0.675=0.175$: matches, so independent
 \end{enumerate}
 \end{multicols}
 \end{keybox}

@@ -42,6 +42,32 @@ Prove that the difference of squares of two consecutive odd integers is always a
 \textbf{Step 2:} $(2n+3)^2-(2n+1)^2=\big[(2n+3)-(2n+1)\big]\big[(2n+3)+(2n+1)\big]=(2)(4n+4)=8n+8=8(n+1)$.\\[3pt]\textbf{Conclusion:} the difference is $8(n+1)$, a multiple of 8 for every integer $n$.
 \end{example}
 
+\begin{example}{ex4}{Example 5 --- Disproof needing a less obvious counterexample}
+Disprove: "For every positive integer $n$, $2^n>n^2$."\soln
+Test $n=1$: $2>1$ true. Test $n=2$: $4=4$ false (not strictly greater!).\\[3pt]\textbf{Conclusion:} $n=2$ is a counterexample --- $2^2=4^2$... more precisely $2^2=4=2^2$, so $2^n>n^2$ fails at $n=2$ (equality, not strict inequality). ✓
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Proof by exhaustion over a small finite set}
+Prove that $n^2+1$ is never divisible by 4, for $n=0,1,2,3$ (representing all four residues mod 4).\soln
+$n=0:1$; $n=1:2$; $n=2:5$; $n=3:10$ --- remainders mod 4 are $1,2,1,2$, never $0$.\\[3pt]\textbf{Conclusion:} since every integer has one of these four remainders when squared and incremented follows the same pattern (by periodicity), $n^2+1$ is never divisible by 4. ✓
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Direct proof with a clever substitution}
+Prove that $(n+1)^2-n^2$ is always an odd number, for any integer $n$.\soln
+Expand: $(n+1)^2-n^2=n^2+2n+1-n^2=2n+1$.\\[3pt]\textbf{Conclusion:} $2n+1$ is odd for every integer $n$ (one more than an even number). ✓
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Disproof involving a subtle algebra claim}
+Disprove: "For all real $a,b$, $\sqrt{a^2+b^2}=a+b$."\soln
+Test $a=3,b=4$: LHS $=\sqrt{9+16}=\sqrt{25}=5$; RHS $=3+4=7$.\\[3pt]\textbf{Conclusion:} $5\neq7$, so the claim is false. ✓
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Proof combining exhaustion and direct reasoning}
+Prove that the remainder when a perfect square is divided by 3 is never 2.\soln
+\textbf{Step 1:} Any integer $n$ has remainder $0,1,$ or $2$ mod 3.\\[3pt]
+\textbf{Step 2:} $n=3k$: $n^2=9k^2$, remainder $0$. $n=3k+1$: $n^2=9k^2+6k+1$, remainder $1$. $n=3k+2$: $n^2=9k^2+12k+4$, remainder $1$ (since $4=3+1$).\\[3pt]\textbf{Conclusion:} every case gives remainder $0$ or $1$, never $2$. ✓
+\end{example}
+
 \clearpage
 \sech{Your Turn --- Show Your Work}
 For each question, show all steps clearly in the space provided.
@@ -70,12 +96,32 @@ Disprove: "For every real number $x$, $x^2>x$."\workspace{2.4cm}
 Prove that the product of any two odd integers is odd.\workspace{2.4cm}
 \end{qbox}
 
-\begin{qbox}{Question 7 --- Challenge}
+\begin{qbox}{Question 7}
+Disprove: "For every positive integer $n$, $3^n>2^{n+1}$."\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Prove that $(n+2)^2-n^2$ is always divisible by 4, for any integer $n$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Prove by exhaustion that the remainder of a perfect square divided by 4 is never 3 (test $n=0,1,2,3$ mod 4).\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Disprove: "For all real $a,b$: $(a+b)^2=a^2+b^2$."\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11 --- Challenge}
 Prove that $n^3-n$ is always divisible by 6, for every integer $n$ (hint: factor as $n(n-1)(n+1)$ and think about consecutive integers).\workspace{3.6cm}
 \end{qbox}
 
-\begin{qbox}{Question 8 --- Challenge}
+\begin{qbox}{Question 12 --- Challenge}
 A student claims "if $a^2=b^2$ then $a=b$." Determine whether this is true, and prove or disprove it.\workspace{3.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Prove that the sum of the squares of any two consecutive integers is always odd.\workspace{3.2cm}
 \end{qbox}
 
 \clearpage
@@ -91,8 +137,13 @@ A student claims "if $a^2=b^2$ then $a=b$." Determine whether this is true, and 
   \item Prove by exhaustion that every integer from 10 to 14 is either prime or a product of primes.
   \item Disprove: "For every real number $x$, $x^2>x$."
   \item Prove that the product of any two odd integers is odd.
+  \item Disprove: "For every positive integer $n$, $3^n>2^{n+1}$."
+  \item Prove that $(n+2)^2-n^2$ is always divisible by 4, for any integer $n$.
+  \item Prove by exhaustion that the remainder of a perfect square divided by 4 is never 3 (test $n=0,1,2,3$ mod 4).
+  \item Disprove: "For all real $a,b$: $(a+b)^2=a^2+b^2$."
   \item Prove that $n^3-n$ is always divisible by 6, for every integer $n$ (hint: factor as $n(n-1)(n+1)$ and think about consecutive integers).
   \item A student claims "if $a^2=b^2$ then $a=b$." Determine whether this is true, and prove or disprove it.
+  \item Prove that the sum of the squares of any two consecutive integers is always odd.
 \end{enumerate}
 \end{multicols}
 \end{recapbox}
@@ -107,8 +158,13 @@ A student claims "if $a^2=b^2$ then $a=b$." Determine whether this is true, and 
   \item $10=2\cdot5$, $11$ prime, $12=2^2\cdot3$, $13$ prime, $14=2\cdot7$ --- every case checks out
   \item $x=0.5$: $0.25<0.5$ --- disproved
   \item $(2m+1)(2n+1)=4mn+2m+2n+1=2(2mn+m+n)+1$, odd
+  \item $n=1$: $3^1=3$, $2^2=4$; $3<4$, so the inequality fails at $n=1$ --- disproved
+  \item $(n+2)^2-n^2=4n+4=4(n+1)$, a multiple of 4
+  \item $n=0:0$; $n=1:1$; $n=2:4\to0$; $n=3:9\to1$ --- remainders are $0,1,0,1$, never 3
+  \item $a=1,b=1$: LHS $=4$, RHS $=1+1=2$; $4\neq2$ --- disproved
   \item Among $n-1,n,n+1$ (three consecutive integers) one is divisible by 3 and at least one is even, so their product is divisible by both 2 and 3, hence by 6
   \item False: $a=2,b=-2$ gives $a^2=b^2=4$ but $a\neq b$ --- disproved by counterexample
+  \item $n^2+(n+1)^2=2n^2+2n+1=2(n^2+n)+1$, one more than an even number, so always odd
 \end{enumerate}
 \end{multicols}
 \end{keybox}

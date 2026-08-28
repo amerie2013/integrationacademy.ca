@@ -37,6 +37,32 @@ Differentiate $f(x)=x^3(2x+1)^4$, factoring your answer.\soln
 $3x^2(2x+1)^4+x^3\cdot4(2x+1)^3\cdot2$; factor $x^2(2x+1)^3$: $3(2x+1)+8x$.\\[3pt]\textbf{Conclusion:} $f'(x)=x^2(2x+1)^3(14x+3)$.
 \end{example}
 
+\begin{example}{ex4}{Example 5 --- Chain rule applied twice (nested composition)}
+Differentiate $f(x)=\sqrt{(3x-1)^2+4}$ (write as a power first).\soln
+$f(x)=\big[(3x-1)^2+4\big]^{1/2}$; outer derivative $\tfrac12[\cdot]^{-1/2}$, inner derivative $2(3x-1)(3)=6(3x-1)$.\\[3pt]\textbf{Conclusion:} $f'(x)=\dfrac{6(3x-1)}{2\sqrt{(3x-1)^2+4}}=\dfrac{3(3x-1)}{\sqrt{(3x-1)^2+4}}$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Quotient rule combined with chain}
+Differentiate $f(x)=\dfrac{(x+1)^2}{x-3}$.\soln
+$u=(x+1)^2,v=x-3$: $u'=2(x+1)$. $f'(x)=\dfrac{2(x+1)(x-3)-(x+1)^2}{(x-3)^2}$.\\[3pt]
+Factor $(x+1)$ from the numerator: $(x+1)\big[2(x-3)-(x+1)\big]=(x+1)(x-7)$.\\[3pt]\textbf{Conclusion:} $f'(x)=\dfrac{(x+1)(x-7)}{(x-3)^2}$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Finding where the tangent is horizontal}
+Find the $x$-value(s) where the tangent to $f(x)=x^3-12x+5$ is horizontal.\soln
+Horizontal tangent means $f'(x)=0$: $3x^2-12=0\Rightarrow x^2=4$.\\[3pt]\textbf{Conclusion:} $x=2$ or $x=-2$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Product rule with three factors (via grouping)}
+Differentiate $f(x)=x(x+1)(x-2)$ by first expanding two factors.\soln
+Expand $(x+1)(x-2)=x^2-x-2$, so $f(x)=x^3-x^2-2x$.\\[3pt]\textbf{Conclusion:} $f'(x)=3x^2-2x-2$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Application --- marginal cost}
+A company's cost function is $C(x)=x^3-6x^2+400x+1000$ (dollars, for $x$ units). Find the marginal cost (the derivative) at $x=10$.\soln
+$C'(x)=3x^2-12x+400$; $C'(10)=300-120+400$.\\[3pt]\textbf{Conclusion:} marginal cost at $x=10$ is \$580 per additional unit.
+\end{example}
+
 \clearpage
 \sech{Your Turn --- Show Your Work}
 For each question, show all steps clearly in the space provided.
@@ -65,6 +91,34 @@ Differentiate $f(x)=x^2(4x-1)^3$, factoring your answer.\workspace{3.4cm}
 Find the equation of the tangent line to $f(x)=x^3-3x$ at $x=2$.\workspace{3.4cm}
 \end{qbox}
 
+\begin{qbox}{Question 7}
+Differentiate $f(x)=\sqrt{4x^2+9}$ (write as a power first).\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8 --- Challenge}
+Differentiate $f(x)=\dfrac{(x-2)^2}{x+1}$, factoring your answer.\workspace{3.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Find the $x$-value(s) where the tangent to $f(x)=x^3-27x+4$ is horizontal.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Differentiate $f(x)=x(x-3)(x+2)$ by expanding first.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+A company's cost is $C(x)=x^3-9x^2+600x+2000$; find the marginal cost at $x=6$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12 --- Challenge}
+Differentiate $f(x)=(2x+3)^2(x-1)^3$, leaving your answer factored (identify the common factors, no need to fully expand).\workspace{3.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Find the equation of the tangent line to $f(x)=\dfrac{x}{x+2}$ at $x=0$.\workspace{3.4cm}
+\end{qbox}
+
 \clearpage
 \sech{Question Recap \& Answer Key}
 
@@ -78,6 +132,13 @@ Find the equation of the tangent line to $f(x)=x^3-3x$ at $x=2$.\workspace{3.4cm
   \item Differentiate $f(x)=(3x^2-1)^5$.
   \item Differentiate $f(x)=x^2(4x-1)^3$, factoring your answer.
   \item Find the equation of the tangent line to $f(x)=x^3-3x$ at $x=2$.
+  \item Differentiate $f(x)=\sqrt{4x^2+9}$ (write as a power first).
+  \item Differentiate $f(x)=\dfrac{(x-2)^2}{x+1}$, factoring your answer.
+  \item Find the $x$-value(s) where the tangent to $f(x)=x^3-27x+4$ is horizontal.
+  \item Differentiate $f(x)=x(x-3)(x+2)$ by expanding first.
+  \item A company's cost is $C(x)=x^3-9x^2+600x+2000$; find the marginal cost at $x=6$.
+  \item Differentiate $f(x)=(2x+3)^2(x-1)^3$, leaving your answer factored (identify the common factors, no need to fully expand).
+  \item Find the equation of the tangent line to $f(x)=\dfrac{x}{x+2}$ at $x=0$.
 \end{enumerate}
 \end{multicols}
 \end{recapbox}
@@ -92,6 +153,13 @@ Find the equation of the tangent line to $f(x)=x^3-3x$ at $x=2$.\workspace{3.4cm
   \item $30x(3x^2-1)^4$
   \item $2x(4x-1)^3+x^2\cdot3(4x-1)^2\cdot4=x(4x-1)^2[2(4x-1)+12x]=x(4x-1)^2(20x-2)$
   \item $f'(x)=3x^2-3$, $f'(2)=9$; $f(2)=8-6=2$; $y-2=9(x-2)\Rightarrow y=9x-16$
+  \item $f(x)=(4x^2+9)^{1/2}$; $f'(x)=\dfrac{8x}{2\sqrt{4x^2+9}}=\dfrac{4x}{\sqrt{4x^2+9}}$
+  \item $\dfrac{2(x-2)(x+1)-(x-2)^2}{(x+1)^2}$; factor $(x-2)$: $(x-2)[2(x+1)-(x-2)]=(x-2)(x+4)$: $f'(x)=\dfrac{(x-2)(x+4)}{(x+1)^2}$
+  \item $f'(x)=3x^2-27=0\Rightarrow x^2=9\Rightarrow x=\pm3$
+  \item expand $(x-3)(x+2)=x^2-x-6$, so $f(x)=x^3-x^2-6x$: $f'(x)=3x^2-2x-6$
+  \item $C'(x)=3x^2-18x+600$; $C'(6)=108-108+600=\$600$
+  \item $u=(2x+3)^2,v=(x-1)^3$; $u'=4(2x+3)$, $v'=3(x-1)^2$; $f'(x)=4(2x+3)(x-1)^3+3(x-1)^2(2x+3)^2$, factor $(2x+3)(x-1)^2$: $=(2x+3)(x-1)^2[4(x-1)+3(2x+3)]=(2x+3)(x-1)^2(10x+5)$
+  \item $f'(x)=\dfrac{(x+2)-x}{(x+2)^2}=\dfrac2{(x+2)^2}$; $f'(0)=\dfrac24=0.5$; $f(0)=0$; tangent: $y=0.5x$
 \end{enumerate}
 \end{multicols}
 \end{keybox}

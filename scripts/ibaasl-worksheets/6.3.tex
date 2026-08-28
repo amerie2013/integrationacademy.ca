@@ -37,6 +37,31 @@ Evaluate $\displaystyle\int_0^{\pi/2}(3\sin x+\cos x)\,dx$ exactly.\soln
 Antiderivative $-3\cos x+\sin x$; at $\pi/2$: $0+1=1$; at $0$: $-3+0=-3$.\\[3pt]\textbf{Conclusion:} $1-(-3)=4$.
 \end{example}
 
+\begin{example}{ex4}{Example 5 --- Logarithmic-form integral with linear substitution}
+Find $\displaystyle\int\dfrac{3}{2x-5}\,dx$.\soln
+Divide by $a=2$: $\dfrac{3\ln|2x-5|}{2}$.\\[3pt]\textbf{Conclusion:} $\dfrac32\ln|2x-5|+C$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Sine substitution with a negative coefficient}
+Find $\displaystyle\int\sin(4-3x)\,dx$ (note the negative inner coefficient).\soln
+Inner derivative is $-3$: divide by $-3$: $-\dfrac{\cos(4-3x)}{-3}$.\\[3pt]\textbf{Conclusion:} $\dfrac{\cos(4-3x)}{3}+C$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Definite integral requiring exact special angles}
+Evaluate $\displaystyle\int_0^{\pi/3}\sin x\,dx$ exactly.\soln
+Antiderivative $-\cos x$; at $\pi/3$: $-\tfrac12$; at $0$: $-1$.\\[3pt]\textbf{Conclusion:} $-\tfrac12-(-1)=\tfrac12$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Combining exponential and logarithmic integration}
+Find $\displaystyle\int\left(e^{4x}+\dfrac{2}{x}\right)dx$.\soln
+$\dfrac{e^{4x}}4+2\ln|x|$.\\[3pt]\textbf{Conclusion:} $\dfrac{e^{4x}}4+2\ln|x|+C$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Application --- accumulated oscillating rate}
+A tide's rate of change is $r(t)=2\cos\!\left(\dfrac{\pi}6t\right)$ m/hr. Find the net change in depth from $t=0$ to $t=3$.\soln
+$\int_0^3 2\cos(\pi t/6)\,dt=\left[\dfrac{12}{\pi}\sin(\pi t/6)\right]_0^3=\dfrac{12}{\pi}\sin(\pi/2)-0$.\\[3pt]\textbf{Conclusion:} net change $=\dfrac{12}{\pi}\approx3.82$ m.
+\end{example}
+
 \clearpage
 \sech{Your Turn --- Show Your Work}
 For each question, show all steps clearly in the space provided.
@@ -65,6 +90,34 @@ Evaluate $\displaystyle\int_0^{\pi}(2\cos x-\sin x)\,dx$ exactly.\workspace{3.2c
 Find $\displaystyle\int(e^{3x}-\cos(2x)+5)\,dx$.\workspace{2.4cm}
 \end{qbox}
 
+\begin{qbox}{Question 7}
+Find $\displaystyle\int\dfrac{4}{3x-7}\,dx$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Find $\displaystyle\int\cos(5-2x)\,dx$ (note the negative inner coefficient).\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Evaluate $\displaystyle\int_0^{\pi/4}\cos x\,dx$ exactly.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Find $\displaystyle\int\left(e^{2x}+\dfrac{3}{x}\right)dx$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11 --- Challenge}
+A tide's rate of change is $r(t)=3\sin\!\left(\dfrac{\pi}6t\right)$ m/hr; find the net change in depth from $t=0$ to $t=6$.\workspace{3.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 12 --- Challenge}
+Evaluate $\displaystyle\int_0^{\pi/6}2\sin x\,dx$ exactly.\workspace{3cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Find $\displaystyle\int\left(\dfrac{5}{2x+1}-e^{-x}\right)dx$ (careful with the sign on the exponential term).\workspace{3.2cm}
+\end{qbox}
+
 \clearpage
 \sech{Question Recap \& Answer Key}
 
@@ -78,6 +131,13 @@ Find $\displaystyle\int(e^{3x}-\cos(2x)+5)\,dx$.\workspace{2.4cm}
   \item Find $\displaystyle\int\dfrac{1}{5x+2}\,dx$.
   \item Evaluate $\displaystyle\int_0^{\pi}(2\cos x-\sin x)\,dx$ exactly.
   \item Find $\displaystyle\int(e^{3x}-\cos(2x)+5)\,dx$.
+  \item Find $\displaystyle\int\dfrac{4}{3x-7}\,dx$.
+  \item Find $\displaystyle\int\cos(5-2x)\,dx$ (note the negative inner coefficient).
+  \item Evaluate $\displaystyle\int_0^{\pi/4}\cos x\,dx$ exactly.
+  \item Find $\displaystyle\int\left(e^{2x}+\dfrac{3}{x}\right)dx$.
+  \item A tide's rate of change is $r(t)=3\sin\!\left(\dfrac{\pi}6t\right)$ m/hr; find the net change in depth from $t=0$ to $t=6$.
+  \item Evaluate $\displaystyle\int_0^{\pi/6}2\sin x\,dx$ exactly.
+  \item Find $\displaystyle\int\left(\dfrac{5}{2x+1}-e^{-x}\right)dx$ (careful with the sign on the exponential term).
 \end{enumerate}
 \end{multicols}
 \end{recapbox}
@@ -92,6 +152,13 @@ Find $\displaystyle\int(e^{3x}-\cos(2x)+5)\,dx$.\workspace{2.4cm}
   \item $\dfrac{\ln|5x+2|}{5}+C$
   \item antideriv $2\sin x+\cos x$; at $\pi$: $0-1=-1$; at $0$: $0+1=1$; result $=-1-1=-2$
   \item $\dfrac{e^{3x}}{3}-\dfrac{\sin(2x)}{2}+5x+C$
+  \item $\dfrac{4\ln|3x-7|}3+C$
+  \item inner derivative $-2$: $-\dfrac{\sin(5-2x)}{-2}=\dfrac{\sin(5-2x)}2+C$
+  \item $[\sin x]_0^{\pi/4}=\tfrac{\sqrt2}2-0=\tfrac{\sqrt2}2$
+  \item $\dfrac{e^{2x}}2+3\ln|x|+C$
+  \item $\left[-\dfrac{18}\pi\cos(\pi t/6)\right]_0^6=-\dfrac{18}\pi\cos(\pi)-\left(-\dfrac{18}\pi\cos0\right)=\dfrac{18}\pi+\dfrac{18}\pi=\dfrac{36}\pi\approx11.46$ m
+  \item $[-2\cos x]_0^{\pi/6}=-2(\tfrac{\sqrt3}2)-(-2)=2-\sqrt3$
+  \item $\dfrac52\ln|2x+1|+e^{-x}+C$ (the exponential term integrates to $+e^{-x}$ since $\int e^{-x}dx=-e^{-x}$, and we're subtracting that)
 \end{enumerate}
 \end{multicols}
 \end{keybox}

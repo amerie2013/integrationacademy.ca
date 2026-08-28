@@ -38,6 +38,33 @@ Two profit rates (\$1000s/month) are $p_1(t)=t+4$, $p_2(t)=0.4t^2$. Find where $
 $t+4=0.4t^2\Rightarrow0.4t^2-t-4=0\Rightarrow t^2-2.5t-10=0\Rightarrow t=\dfrac{2.5\pm\sqrt{6.25+40}}2\approx4.55$ (positive root). Extra: $\int_0^{4.55}[(t+4)-0.4t^2]dt\approx\left[\tfrac{t^2}2+4t-\tfrac{0.4t^3}3\right]_0^{4.55}\approx10.35+18.2-12.58$.\\[3pt]\textbf{Conclusion:} Company 1 leads for $\approx4.55$ months, gaining $\approx\$15{,}970$.
 \end{example}
 
+\begin{example}{ex4}{Example 5 --- Area between a line and a cubic-adjacent pair (via a shared factor)}
+Find the area enclosed between $f(x)=4x$ and $g(x)=x^3$ for $x\geq0$ (find all intersection points first).\soln
+$4x=x^3\Rightarrow x^3-4x=0\Rightarrow x(x^2-4)=0\Rightarrow x=0,\pm2$; restricting to $x\geq0$: $x=0,2$. On $(0,2)$, $f>g$ (check $x=1$: $4>1$).\\[3pt]
+Area $=\int_0^2(4x-x^3)dx=\left[2x^2-\tfrac{x^4}4\right]_0^2=8-4$.\\[3pt]\textbf{Conclusion:} area $=4$ square units.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Displacement and distance with a cubic velocity}
+$v(t)=t^2-4$ m/s. Find the displacement and total distance from $t=0$ to $t=3$.\soln
+Displacement: $\int_0^3(t^2-4)dt=\left[\tfrac{t^3}3-4t\right]_0^3=9-12=-3$ m.\\[3pt]
+$v=0$ at $t=2$: $\int_0^2(t^2-4)dt=\tfrac83-8=-\tfrac{16}3$; $\int_2^3(t^2-4)dt=(9-12)-(\tfrac83-8)=-3+\tfrac{16}3=\tfrac73$.\\[3pt]\textbf{Conclusion:} displacement $=-3$ m; total distance $=\tfrac{16}3+\tfrac73=\tfrac{23}3\approx7.67$ m.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Area between curves with a shared tangent point}
+Find the area enclosed between $f(x)=x^2$ and $g(x)=2x-1$ (note: these touch rather than cross).\soln
+$x^2=2x-1\Rightarrow x^2-2x+1=0\Rightarrow(x-1)^2=0\Rightarrow x=1$ (a repeated root --- the curves are tangent, not crossing).\\[3pt]\textbf{Conclusion:} since there's only one intersection (a tangency), the curves don't enclose any region --- area $=0$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Application --- net work from a variable force}
+A variable force is $F(x)=10-2x$ N, applied over $x\in[0,4]$ m. Find the net work done (force integrated over distance).\soln
+$W=\int_0^4(10-2x)dx=[10x-x^2]_0^4=40-16$.\\[3pt]\textbf{Conclusion:} $W=24$ J.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Total distance for a velocity with three sign changes}
+$v(t)=(t-1)(t-3)(t-5)$ for $0\leq t\leq6$. Identify every time the particle is at rest, without fully computing the total distance.\soln
+$v(t)=0$ when any factor is zero.\\[3pt]\textbf{Conclusion:} $t=1,3,5$ --- three rest points, meaning the total-distance calculation would need four separate integrals (over $[0,1],[1,3],[3,5],[5,6]$).
+\end{example}
+
 \clearpage
 \sech{Your Turn --- Show Your Work}
 For each question, show all steps clearly in the space provided.
@@ -66,6 +93,34 @@ A particle's velocity is $v(t)=3t^2-18t+24$ m/s; find the total distance travell
 Find the area enclosed between $f(x)=x^2-4x$ and $g(x)=-x^2+4x+8$.\workspace{3.4cm}
 \end{qbox}
 
+\begin{qbox}{Question 7}
+Find the area enclosed between $f(x)=9x$ and $g(x)=x^3$ for $x\geq0$ (find all intersection points first).\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8 --- Challenge}
+$v(t)=t^2-9$ m/s. Find the displacement and total distance from $t=0$ to $t=4$.\workspace{3.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Determine the area enclosed between $f(x)=x^2-2x+1$ and $g(x)=2x-3$ (check whether these curves cross or merely touch first).\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+A variable force is $F(x)=20-4x$ N applied over $x\in[0,5]$ m; find the net work done.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+$v(t)=(t-2)(t-4)(t-6)$ for $0\leq t\leq7$; identify every time the particle is at rest.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12 --- Challenge}
+Find the area enclosed between $f(x)=x^2-6x+9$ and $g(x)=9-x^2$.\workspace{3.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Two cost rates (\$100s/week) are $c_1(t)=20-t$, $c_2(t)=0.5t^2$; find where $c_1>c_2$ and the total savings from using process 1 over that interval.\workspace{3.4cm}
+\end{qbox}
+
 \clearpage
 \sech{Question Recap \& Answer Key}
 
@@ -79,6 +134,13 @@ Find the area enclosed between $f(x)=x^2-4x$ and $g(x)=-x^2+4x+8$.\workspace{3.4
   \item Using the same $v(t)$, find the total distance travelled from $t=0$ to $t=6$.
   \item A particle's velocity is $v(t)=3t^2-18t+24$ m/s; find the total distance travelled from $t=0$ to $t=5$ (first find when it's at rest).
   \item Find the area enclosed between $f(x)=x^2-4x$ and $g(x)=-x^2+4x+8$.
+  \item Find the area enclosed between $f(x)=9x$ and $g(x)=x^3$ for $x\geq0$ (find all intersection points first).
+  \item $v(t)=t^2-9$ m/s. Find the displacement and total distance from $t=0$ to $t=4$.
+  \item Determine the area enclosed between $f(x)=x^2-2x+1$ and $g(x)=2x-3$ (check whether these curves cross or merely touch first).
+  \item A variable force is $F(x)=20-4x$ N applied over $x\in[0,5]$ m; find the net work done.
+  \item $v(t)=(t-2)(t-4)(t-6)$ for $0\leq t\leq7$; identify every time the particle is at rest.
+  \item Find the area enclosed between $f(x)=x^2-6x+9$ and $g(x)=9-x^2$.
+  \item Two cost rates (\$100s/week) are $c_1(t)=20-t$, $c_2(t)=0.5t^2$; find where $c_1>c_2$ and the total savings from using process 1 over that interval.
 \end{enumerate}
 \end{multicols}
 \end{recapbox}
@@ -93,6 +155,13 @@ Find the area enclosed between $f(x)=x^2-4x$ and $g(x)=-x^2+4x+8$.\workspace{3.4
   \item $v=0$ at $t=4$; $\int_0^4(4t-16)dt=(32-64)-0=-32$; $\int_4^6(4t-16)dt=(72-96)-(32-64)=-24-(-32)=8$; total $=32+8=40$ m
   \item $v=0$ at $t=2,4$; $\int_0^2(3t^2-18t+24)dt=(8-36+48)-0=20$; $\int_2^4(\cdot)dt=(64-144+96)-20=16-20=-4$; $\int_4^5(\cdot)dt=(125-225+120)-16=20-16=4$; total $=20+4+4=28$ m
   \item $x^2-4x=-x^2+4x+8\Rightarrow2x^2-8x-8=0\Rightarrow x^2-4x-4=0\Rightarrow x=2\pm2\sqrt2$; area $=\int[(-x^2+4x+8)-(x^2-4x)]dx=\int(-2x^2+8x+8)dx$ over that interval $\approx45.25$
+  \item $9x=x^3\Rightarrow x(x^2-9)=0\Rightarrow x=0,\pm3$; restrict $x\geq0$: $x=0,3$; area $=\int_0^3(9x-x^3)dx=\left[\tfrac{9x^2}2-\tfrac{x^4}4\right]_0^3=40.5-20.25=20.25$
+  \item displacement $=\int_0^4(t^2-9)dt=[\tfrac{t^3}3-9t]_0^4=\tfrac{64}3-36=-\tfrac{44}3$; $v=0$ at $t=3$: $\int_0^3(t^2-9)dt=9-27=-18$; $\int_3^4(t^2-9)dt=(\tfrac{64}3-36)-(9-27)=-\tfrac{44}3+18=\tfrac{10}3$; total distance $=18+\tfrac{10}3=\tfrac{64}3\approx21.33$ m
+  \item $x^2-2x+1=2x-3\Rightarrow x^2-4x+4=0\Rightarrow(x-2)^2=0$: repeated root at $x=2$, so the curves are tangent, not crossing --- area $=0$
+  \item $W=\int_0^5(20-4x)dx=[20x-2x^2]_0^5=100-50=50$ J
+  \item $t=2,4,6$
+  \item $x^2-6x+9=9-x^2\Rightarrow2x^2-6x=0\Rightarrow2x(x-3)=0\Rightarrow x=0,3$; on $(0,3)$, $g>f$ (check $x=1$: $g=8>f=4$); area $=\int_0^3[(9-x^2)-(x^2-6x+9)]dx=\int_0^3(6x-2x^2)dx=[3x^2-\tfrac{2x^3}3]_0^3=27-18=9$
+  \item $20-t=0.5t^2\Rightarrow0.5t^2+t-20=0\Rightarrow t^2+2t-40=0\Rightarrow t=\dfrac{-2+\sqrt{164}}2\approx5.4$ (positive root); savings $=\int_0^{5.4}[(20-t)-0.5t^2]dt\approx[20t-\tfrac{t^2}2-\tfrac{t^3}6]_0^{5.4}\approx108-14.58-26.24\approx67.2$ (\$100s), i.e.\ about \$6720
 \end{enumerate}
 \end{multicols}
 \end{keybox}

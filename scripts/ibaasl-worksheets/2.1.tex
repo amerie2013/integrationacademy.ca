@@ -39,6 +39,32 @@ Find the range of $f(x)=-\sqrt{x-2}+5$.\soln
 Domain is $x\geq2$; at $x=2$, $f=5$ (largest value, since $-\sqrt{\phantom x}$ falls as $x$ grows).\\[3pt]\textbf{Conclusion:} range is $f(x)\leq5$.
 \end{example}
 
+\begin{example}{ex4}{Example 5 --- Combined domain restrictions}
+Find the domain of $f(x)=\dfrac{\sqrt{x+2}}{x-3}$.\soln
+Need $x+2\geq0\Rightarrow x\geq-2$, and also $x-3\neq0\Rightarrow x\neq3$.\\[3pt]\textbf{Conclusion:} domain is $x\geq-2$, $x\neq3$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Range on a restricted domain}
+Find the range of $f(x)=x^2-4x+3$ for $0\leq x\leq5$.\soln
+\textbf{Step 1:} Vertex at $x=2$ (inside the domain): $f(2)=4-8+3=-1$ (minimum).\\[3pt]
+\textbf{Step 2:} Check endpoints: $f(0)=3$, $f(5)=25-20+3=8$.\\[3pt]\textbf{Conclusion:} range is $-1\leq f(x)\leq8$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Application --- domain from a real constraint}
+A rectangle's area is $A(x)=x(20-x)$, where $x$ is one side and $20-x$ is the other (from a fixed perimeter). State the domain that makes physical sense.\soln
+Both sides must be positive: $x>0$ and $20-x>0$.\\[3pt]\textbf{Conclusion:} domain is $0<x<20$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Testing a set of ordered pairs}
+Determine whether $\{(1,2),(2,3),(1,5)\}$ represents a function.\soln
+The input $x=1$ appears twice, with two different outputs ($2$ and $5$).\\[3pt]\textbf{Conclusion:} not a function --- one input must give exactly one output.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Range of a semicircle function}
+Find the range of $f(x)=-\sqrt{16-x^2}$ (domain $-4\leq x\leq4$).\soln
+This is the lower half of a circle of radius 4; $f$ ranges from $-4$ (at $x=0$) up to $0$ (at $x=\pm4$).\\[3pt]\textbf{Conclusion:} range is $-4\leq f(x)\leq0$.
+\end{example}
+
 \clearpage
 \sech{Your Turn --- Show Your Work}
 For each question, show all steps clearly in the space provided.
@@ -71,8 +97,28 @@ Determine whether $x^2+y^2=25$ passes the vertical line test, and explain your r
 Find the domain of $f(x)=\dfrac{x+2}{x^2-4}$ (factor the denominator first).\workspace{2.4cm}
 \end{qbox}
 
-\begin{qbox}{Question 8 --- Challenge}
+\begin{qbox}{Question 8}
+Find the domain of $f(x)=\dfrac{\sqrt{x-1}}{x-5}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Find the range of $f(x)=x^2+2x-3$ for $-3\leq x\leq2$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Determine whether $\{(2,4),(3,4),(2,7)\}$ represents a function, and explain.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11 --- Challenge}
 Find the range of $f(x)=-2\sqrt{x}+7$.\workspace{3.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 12 --- Challenge}
+Find the range of $f(x)=\sqrt{25-x^2}$.\workspace{3.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+A tank's volume model is $V(t)=100-4t$ litres for a draining tank starting at 100 L; state the domain that makes physical sense.\workspace{3cm}
 \end{qbox}
 
 \clearpage
@@ -89,7 +135,12 @@ Find the range of $f(x)=-2\sqrt{x}+7$.\workspace{3.2cm}
   \item Find the range of $f(x)=\sqrt{x+3}-1$.
   \item Determine whether $x^2+y^2=25$ passes the vertical line test, and explain your reasoning.
   \item Find the domain of $f(x)=\dfrac{x+2}{x^2-4}$ (factor the denominator first).
+  \item Find the domain of $f(x)=\dfrac{\sqrt{x-1}}{x-5}$.
+  \item Find the range of $f(x)=x^2+2x-3$ for $-3\leq x\leq2$.
+  \item Determine whether $\{(2,4),(3,4),(2,7)\}$ represents a function, and explain.
   \item Find the range of $f(x)=-2\sqrt{x}+7$.
+  \item Find the range of $f(x)=\sqrt{25-x^2}$.
+  \item A tank's volume model is $V(t)=100-4t$ litres for a draining tank starting at 100 L; state the domain that makes physical sense.
 \end{enumerate}
 \end{multicols}
 \end{recapbox}
@@ -105,7 +156,12 @@ Find the range of $f(x)=-2\sqrt{x}+7$.\workspace{3.2cm}
   \item $f(x)\geq-1$
   \item Fails: a vertical line at $x=0$ meets the circle at both $y=5$ and $y=-5$
   \item $x^2-4=(x-2)(x+2)$; domain is all real $x$ except $2$ and $-2$
-  \item Domain $x\geq0$; at $x=0$, $f=7$ (max); as $x$ grows, $f\to-\infty$: range $f(x)\leq7$
+  \item need $x\geq1$ and $x\neq5$: domain is $x\geq1,x\neq5$
+  \item vertex at $x=-1$ (inside domain): $f(-1)=-4$ (min); endpoints $f(-3)=0$, $f(2)=5$; range $-4\leq f(x)\leq5$
+  \item Not a function --- $x=2$ gives two different outputs, $4$ and $7$
+  \item domain $x\geq0$; at $x=0$, $f=7$ (max); as $x$ grows, $f\to-\infty$: range $f(x)\leq7$
+  \item upper half of a circle radius 5; range $0\leq f(x)\leq5$
+  \item tank can't hold negative volume or run past empty: $0\leq t\leq25$
 \end{enumerate}
 \end{multicols}
 \end{keybox}

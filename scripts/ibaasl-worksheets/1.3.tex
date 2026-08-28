@@ -41,6 +41,32 @@ A savings plan deposits $D_n=25+3n$ dollars in month $n$, for $n=1$ to $12$. Fin
 $\displaystyle\sum_{n=1}^{12}(25+3n)=12(25)+3\sum_{n=1}^{12}n=300+3\left(\dfrac{12(13)}{2}\right)=300+3(78)$.\\[3pt]\textbf{Conclusion:} total $=\$534$.
 \end{example}
 
+\begin{example}{ex4}{Example 5 --- Splitting a sum into known pieces}
+Evaluate $\displaystyle\sum_{n=1}^{10}(4n^2-3n)$ using $\sum n=\tfrac{n(n+1)}2$ and $\sum n^2=\tfrac{n(n+1)(2n+1)}6$.\soln
+$\sum_{n=1}^{10}n^2=\tfrac{10(11)(21)}6=385$; $\sum_{n=1}^{10}n=55$.\\[3pt]\textbf{Conclusion:} $4(385)-3(55)=1540-165=1375$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Shifted-index geometric sum}
+Evaluate $\displaystyle\sum_{n=0}^{5}3(2)^{n}$.\soln
+This is geometric with $u_1=3$ (at $n=0$), $r=2$, and $6$ terms (from $n=0$ to $5$): $S_6=\dfrac{3(2^6-1)}{1}$.\\[3pt]\textbf{Conclusion:} $S_6=3(63)=189$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Application --- attendance decline}
+A festival's attendance is modelled by $A_n=2000-40n$ for day $n=1$ to $10$. Find the total attendance over the 10 days.\soln
+$\displaystyle\sum_{n=1}^{10}(2000-40n)=10(2000)-40\sum_{n=1}^{10}n=20000-40(55)$.\\[3pt]\textbf{Conclusion:} total $=20000-2200=17800$ attendees.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Find an unknown upper limit}
+Find $N$ such that $\displaystyle\sum_{n=1}^{N}(2n-1)=144$.\soln
+\textbf{Step 1:} This is arithmetic ($u_1=1,d=2$): $S_N=\dfrac N2(2+2(N-1))=N^2$.\\[3pt]
+\textbf{Conclusion:} $N^2=144\Rightarrow N=12$. ✓
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Sigma sum requiring factoring first}
+Evaluate $\displaystyle\sum_{n=1}^{5}n(n+1)$ by expanding first.\soln
+$n(n+1)=n^2+n$, so the sum is $\sum n^2+\sum n=\tfrac{5(6)(11)}6+\tfrac{5(6)}2=55+15$.\\[3pt]\textbf{Conclusion:} $70$.
+\end{example}
+
 \clearpage
 \sech{Your Turn --- Show Your Work}
 For each question, show all steps clearly in the space provided.
@@ -73,8 +99,28 @@ Evaluate $\displaystyle\sum_{n=0}^{4}7(0.5)^{n}$.\workspace{2.4cm}
 A theatre adds $D_n=40+2n$ extra dollars in ticket sales on day $n$ of a promotion, for $n=1$ to $10$. Find the total extra revenue.\workspace{2.4cm}
 \end{qbox}
 
-\begin{qbox}{Question 8 --- Challenge}
+\begin{qbox}{Question 8}
+Evaluate $\displaystyle\sum_{n=1}^{8}n^2$ using $\sum n^2=\tfrac{n(n+1)(2n+1)}6$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Evaluate $\displaystyle\sum_{n=1}^{6}n(n-1)$ by expanding first.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Find $N$ such that $\displaystyle\sum_{n=1}^{N}(2n-1)=225$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11 --- Challenge}
 Show that $\displaystyle\sum_{n=1}^{5}(2n+3)$ and $\displaystyle\sum_{n=0}^{4}(2n+5)$ give the same total, and explain why.\workspace{3.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 12 --- Challenge}
+Evaluate $\displaystyle\sum_{n=1}^{12}(3n^2-2n)$ using the standard sum formulas.\workspace{3.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+A model predicts sales of $S_n=500-15n$ units in week $n$, for $n=1$ to $15$. Find total sales over the 15 weeks.\workspace{3.2cm}
 \end{qbox}
 
 \clearpage
@@ -91,7 +137,12 @@ Show that $\displaystyle\sum_{n=1}^{5}(2n+3)$ and $\displaystyle\sum_{n=0}^{4}(2
   \item Write $2+6+18+\cdots+486$ in sigma notation and evaluate it.
   \item Evaluate $\displaystyle\sum_{n=0}^{4}7(0.5)^{n}$.
   \item A theatre adds $D_n=40+2n$ extra dollars in ticket sales on day $n$ of a promotion, for $n=1$ to $10$. Find the total extra revenue.
+  \item Evaluate $\displaystyle\sum_{n=1}^{8}n^2$ using $\sum n^2=\tfrac{n(n+1)(2n+1)}6$.
+  \item Evaluate $\displaystyle\sum_{n=1}^{6}n(n-1)$ by expanding first.
+  \item Find $N$ such that $\displaystyle\sum_{n=1}^{N}(2n-1)=225$.
   \item Show that $\displaystyle\sum_{n=1}^{5}(2n+3)$ and $\displaystyle\sum_{n=0}^{4}(2n+5)$ give the same total, and explain why.
+  \item Evaluate $\displaystyle\sum_{n=1}^{12}(3n^2-2n)$ using the standard sum formulas.
+  \item A model predicts sales of $S_n=500-15n$ units in week $n$, for $n=1$ to $15$. Find total sales over the 15 weeks.
 \end{enumerate}
 \end{multicols}
 \end{recapbox}
@@ -107,7 +158,12 @@ Show that $\displaystyle\sum_{n=1}^{5}(2n+3)$ and $\displaystyle\sum_{n=0}^{4}(2
   \item $u_n=2(3)^{n-1}$, $n=6$; $\sum_{n=1}^{6}2(3)^{n-1}$, $S_6=\tfrac{2(3^6-1)}{2}=728$
   \item $S=\tfrac{7(1-0.5^5)}{1-0.5}=13.5625$
   \item $\sum_{n=1}^{10}(40+2n)=400+2(55)=510$
+  \item $\tfrac{8(9)(17)}6=204$
+  \item $\sum n^2-\sum n=\tfrac{6(7)(13)}6-\tfrac{6(7)}2=91-21=70$
+  \item $N^2=225\Rightarrow N=15$
   \item Both give $5+7+9+11+13=45$ --- shifting the index start from 1 to 0 while adjusting the formula's constant leaves every actual term unchanged
+  \item $3\sum n^2-2\sum n=3\left(\tfrac{12(13)(25)}6\right)-2\left(\tfrac{12(13)}2\right)=3(650)-2(78)=1950-156=1794$
+  \item $15(500)-15\sum_{n=1}^{15}n=7500-15(120)=7500-1800=5700$ units
 \end{enumerate}
 \end{multicols}
 \end{keybox}

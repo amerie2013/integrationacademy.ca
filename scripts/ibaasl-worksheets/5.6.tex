@@ -38,6 +38,31 @@ A ball's height is $s(t)=-5t^2+22t+3$. Find its maximum height and the time it l
 $v(t)=-10t+22=0\Rightarrow t=2.2$; $s(2.2)=27.2$. Landing: $-5t^2+22t+3=0\Rightarrow t=\dfrac{-22\pm\sqrt{484+60}}{-10}$.\\[3pt]\textbf{Conclusion:} max height $27.2$ m at $t=2.2$ s; lands at $t\approx4.53$ s.
 \end{example}
 
+\begin{example}{ex4}{Example 5 --- Acceleration at a point of maximum velocity}
+$s(t)=-t^3+6t^2$ for $t\geq0$. Find the time when velocity is maximized, and the velocity there.\soln
+$v(t)=-3t^2+12t$; velocity is maximized where $a(t)=v'(t)=-6t+12=0\Rightarrow t=2$.\\[3pt]\textbf{Conclusion:} at $t=2$, $v(2)=-12+24=12$ (this is the maximum velocity, since $a$ changes from $+$ to $-$ there).
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Interpreting a negative acceleration with positive velocity}
+A car has $v(t)=40-2t$ m/s and $a(t)=-2$ m/s$^2$ for $0\leq t\leq20$. Describe its motion throughout this interval.\soln
+$v(t)>0$ throughout (from 40 down to 0), and $a(t)=-2<0$ constantly --- same direction of motion (forward) the whole time, but constantly decelerating.\\[3pt]\textbf{Conclusion:} the car moves forward the entire time while continuously slowing down, coming to rest exactly at $t=20$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Average velocity vs instantaneous velocity}
+$s(t)=t^2+2t$. Find the average velocity over $[1,4]$ and compare to the instantaneous velocity at $t=2.5$ (the interval's midpoint).\soln
+Average: $\dfrac{s(4)-s(1)}{4-1}=\dfrac{24-3}{3}=7$. Instantaneous: $v(t)=2t+2$, $v(2.5)=7$.\\[3pt]\textbf{Conclusion:} they're equal here (7 m/s both ways) --- a special feature of this specific quadratic position function.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Total distance requiring three intervals}
+$s(t)=t^3-9t^2+15t$ (from Example 1) for $0\leq t\leq6$; using $s(0)=0$, $s(1)=7$, $s(5)=-25$, $s(6)=-18$, verify the total distance found earlier by re-deriving each leg.\soln
+Leg 1 ($[0,1]$): $|7-0|=7$. Leg 2 ($[1,5]$): $|-25-7|=32$. Leg 3 ($[5,6]$): $|-18-(-25)|=7$.\\[3pt]\textbf{Conclusion:} total $=7+32+7=46$, matching Example 3.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Application --- rocket ascent and descent}
+A model rocket's height is $s(t)=-5t^2+40t$. Find its maximum height, when it lands, and its speed at landing.\soln
+$v(t)=-10t+40=0\Rightarrow t=4$; $s(4)=80$ m (max height). Landing: $-5t^2+40t=0\Rightarrow t(-5t+40)=0\Rightarrow t=8$.\\[3pt]\textbf{Conclusion:} max height $80$ m at $t=4$ s; lands at $t=8$ s with speed $|v(8)|=|-80+40|=40$ m/s.
+\end{example}
+
 \clearpage
 \sech{Your Turn --- Show Your Work}
 For each question, show all steps clearly in the space provided.
@@ -66,6 +91,34 @@ For the ball above, find the time it lands (2 d.p.) and its velocity on impact.\
 Given $s(0)=0$, $s(2)=18$, $s(4)=10$, $s(6)=30$ for a particle reversing direction at $t=2,4$, find the total distance travelled over $[0,6]$.\workspace{3.2cm}
 \end{qbox}
 
+\begin{qbox}{Question 7}
+$s(t)=-t^3+9t^2$ for $t\geq0$; find the time velocity is maximized, and the velocity there.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+A car has $v(t)=30-3t$ m/s for $0\leq t\leq10$; describe its motion (direction and speeding up/slowing down) throughout.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+$s(t)=t^2+4t$; find the average velocity over $[0,3]$ and compare to the instantaneous velocity at $t=1.5$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10 --- Challenge}
+A model rocket's height is $s(t)=-5t^2+60t$; find its maximum height, landing time, and landing speed.\workspace{3.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11 --- Challenge}
+$s(t)=t^3-6t^2+9t$ for $0\leq t\leq5$; given it reverses direction at $t=1,3$ with $s(0)=0,s(1)=4,s(3)=0,s(5)=20$, find the total distance travelled.\workspace{3.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 12 --- Challenge}
+A particle's velocity is $v(t)=6t^2-24t$; find when acceleration is zero, and state what this tells you about velocity at that instant.\workspace{3.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+A car decelerates from $v(0)=50$ m/s at a constant $a=-5$ m/s$^2$; find when it stops and the distance travelled by then (integrate mentally via average velocity, or use $s(t)=50t-2.5t^2$).\workspace{3.2cm}
+\end{qbox}
+
 \clearpage
 \sech{Question Recap \& Answer Key}
 
@@ -79,6 +132,13 @@ Given $s(0)=0$, $s(2)=18$, $s(4)=10$, $s(6)=30$ for a particle reversing directi
   \item A ball's height is $s(t)=-5t^2+16t+2$; find its maximum height and when it occurs.
   \item For the ball above, find the time it lands (2 d.p.) and its velocity on impact.
   \item Given $s(0)=0$, $s(2)=18$, $s(4)=10$, $s(6)=30$ for a particle reversing direction at $t=2,4$, find the total distance travelled over $[0,6]$.
+  \item $s(t)=-t^3+9t^2$ for $t\geq0$; find the time velocity is maximized, and the velocity there.
+  \item A car has $v(t)=30-3t$ m/s for $0\leq t\leq10$; describe its motion (direction and speeding up/slowing down) throughout.
+  \item $s(t)=t^2+4t$; find the average velocity over $[0,3]$ and compare to the instantaneous velocity at $t=1.5$.
+  \item A model rocket's height is $s(t)=-5t^2+60t$; find its maximum height, landing time, and landing speed.
+  \item $s(t)=t^3-6t^2+9t$ for $0\leq t\leq5$; given it reverses direction at $t=1,3$ with $s(0)=0,s(1)=4,s(3)=0,s(5)=20$, find the total distance travelled.
+  \item A particle's velocity is $v(t)=6t^2-24t$; find when acceleration is zero, and state what this tells you about velocity at that instant.
+  \item A car decelerates from $v(0)=50$ m/s at a constant $a=-5$ m/s$^2$; find when it stops and the distance travelled by then (integrate mentally via average velocity, or use $s(t)=50t-2.5t^2$).
 \end{enumerate}
 \end{multicols}
 \end{recapbox}
@@ -93,6 +153,13 @@ Given $s(0)=0$, $s(2)=18$, $s(4)=10$, $s(6)=30$ for a particle reversing directi
   \item $v=-10t+16=0\Rightarrow t=1.6$; $s(1.6)=14.8$ m
   \item $-5t^2+16t+2=0\Rightarrow t=\dfrac{-16\pm\sqrt{256+40}}{-10}\approx4.32$ s; $v(4.32)=-10(4.32)+16\approx-27.2$ m/s
   \item $|18-0|+|10-18|+|30-10|=18+8+20=46$
+  \item $v(t)=-3t^2+18t$; max velocity where $a(t)=-6t+18=0\Rightarrow t=3$; $v(3)=-27+54=27$
+  \item $v(t)>0$ throughout (30 down to 0), $a(t)=-3<0$ constantly: moves forward the whole time while continuously slowing, stopping at $t=10$
+  \item average $=\dfrac{s(3)-s(0)}{3}=\dfrac{21-0}{3}=7$; $v(t)=2t+4$, $v(1.5)=7$: equal
+  \item $v(t)=-10t+60=0\Rightarrow t=6$, $s(6)=180$ m (max); landing: $t(-5t+60)=0\Rightarrow t=12$; landing speed $|v(12)|=|-120+60|=60$ m/s
+  \item $|4-0|+|0-4|+|20-0|=4+4+20=28$
+  \item $a(t)=12t-24=0\Rightarrow t=2$; this is when velocity is at a turning point (a local min or max of $v(t)$, i.e.\ the instant acceleration itself changes sign)
+  \item stops when $v(t)=50-5t=0\Rightarrow t=10$ s; distance $s(10)=500-250=250$ m
 \end{enumerate}
 \end{multicols}
 \end{keybox}

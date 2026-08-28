@@ -40,6 +40,33 @@ Find the equation of a parabola with vertex $(-2,5)$ through $(1,-13)$.\soln
 $y=a(x+2)^2+5$. Substitute $(1,-13)$: $-13=a(9)+5\Rightarrow a=-2$.\\[3pt]\textbf{Conclusion:} $y=-2(x+2)^2+5$.
 \end{example}
 
+\begin{example}{ex4}{Example 5 --- Line through vertex and a root}
+A parabola has vertex $(3,-4)$ and an $x$-intercept at $x=5$. Find its equation.\soln
+$y=a(x-3)^2-4$. Substitute $(5,0)$: $0=a(4)-4\Rightarrow a=1$.\\[3pt]\textbf{Conclusion:} $y=(x-3)^2-4$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Finding where a line meets a parabola}
+Find the intersection point(s) of $y=x+1$ and $y=x^2-2x-3$.\soln
+Set equal: $x+1=x^2-2x-3\Rightarrow x^2-3x-4=0\Rightarrow(x-4)(x+1)=0\Rightarrow x=4$ or $x=-1$.\\[3pt]\textbf{Conclusion:} intersections at $(4,5)$ and $(-1,0)$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Perpendicular line through a parabola's vertex}
+Find the equation of the line perpendicular to $y=2x+1$ passing through the vertex of $y=(x-3)^2+5$.\soln
+Vertex is $(3,5)$. Perpendicular slope: $-\tfrac12$. Line: $y-5=-\tfrac12(x-3)$.\\[3pt]\textbf{Conclusion:} $y=-\tfrac12x+6.5$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Application --- maximizing revenue}
+A shop's weekly revenue is $R(p)=-4p^2+120p$, where $p$ is the price in dollars. Convert to vertex form and find the price that maximizes revenue.\soln
+$R(p)=-4(p^2-30p)=-4(p^2-30p+225-225)=-4(p-15)^2+900$.\\[3pt]\textbf{Conclusion:} vertex $(15,900)$: maximum revenue \$900 at price \$15.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Finding a quadratic from three points (via a system)}
+Find the equation $y=ax^2+bx+c$ of the parabola through $(0,1)$, $(1,4)$, $(2,11)$.\soln
+\textbf{Step 1:} $(0,1)$ gives $c=1$.\\[3pt]
+\textbf{Step 2:} $(1,4)$: $a+b+1=4\Rightarrow a+b=3$. $(2,11)$: $4a+2b+1=11\Rightarrow4a+2b=10\Rightarrow2a+b=5$.\\[3pt]
+\textbf{Step 3:} Subtract: $a=2$, so $b=1$.\\[3pt]\textbf{Conclusion:} $y=2x^2+x+1$.
+\end{example}
+
 \clearpage
 \sech{Your Turn --- Show Your Work}
 For each question, show all steps clearly in the space provided.
@@ -72,8 +99,28 @@ A ball's height is $h(t)=-4.9(t-1.5)^2+11.5$; find its maximum height and when i
 Convert $y=-2x^2+4x+1$ to vertex form.\workspace{3cm}
 \end{qbox}
 
-\begin{qbox}{Question 8 --- Challenge}
+\begin{qbox}{Question 8}
+Find the intersection point(s) of $y=2x-3$ and $y=x^2-4$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+A parabola has vertex $(2,3)$ and an $x$-intercept at $x=5$. Find its equation.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+A company's profit is $P(x)=-3x^2+90x$ for $x$ units sold (in hundreds); convert to vertex form and find the maximizing quantity and max profit.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11 --- Challenge}
+Find the equation $y=ax^2+bx+c$ through $(0,2)$, $(1,7)$, $(2,16)$.\workspace{3.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12 --- Challenge}
 A parabola has $x$-intercepts at $x=2$ and $x=8$ and passes through $(5,-9)$. Find its equation in factored form, then convert to vertex form.\workspace{3.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Find the equation of the line perpendicular to $y=-3x+2$ passing through the vertex of $y=(x+1)^2-6$.\workspace{3.2cm}
 \end{qbox}
 
 \clearpage
@@ -90,7 +137,12 @@ A parabola has $x$-intercepts at $x=2$ and $x=8$ and passes through $(5,-9)$. Fi
   \item Find the equation of a parabola with vertex $(1,-4)$ through $(3,4)$.
   \item A ball's height is $h(t)=-4.9(t-1.5)^2+11.5$; find its maximum height and when it occurs.
   \item Convert $y=-2x^2+4x+1$ to vertex form.
+  \item Find the intersection point(s) of $y=2x-3$ and $y=x^2-4$.
+  \item A parabola has vertex $(2,3)$ and an $x$-intercept at $x=5$. Find its equation.
+  \item A company's profit is $P(x)=-3x^2+90x$ for $x$ units sold (in hundreds); convert to vertex form and find the maximizing quantity and max profit.
+  \item Find the equation $y=ax^2+bx+c$ through $(0,2)$, $(1,7)$, $(2,16)$.
   \item A parabola has $x$-intercepts at $x=2$ and $x=8$ and passes through $(5,-9)$. Find its equation in factored form, then convert to vertex form.
+  \item Find the equation of the line perpendicular to $y=-3x+2$ passing through the vertex of $y=(x+1)^2-6$.
 \end{enumerate}
 \end{multicols}
 \end{recapbox}
@@ -106,7 +158,12 @@ A parabola has $x$-intercepts at $x=2$ and $x=8$ and passes through $(5,-9)$. Fi
   \item $4=a(4)-4\Rightarrow a=2$: $y=2(x-1)^2-4$
   \item max height $11.5$ m at $t=1.5$ s
   \item $y=-2(x^2-2x)+1=-2(x-1)^2+2+1=-2(x-1)^2+3$
+  \item $2x-3=x^2-4\Rightarrow x^2-2x-1=0\Rightarrow x=1\pm\sqrt2$; points $(1+\sqrt2,2\sqrt2-1)$ and $(1-\sqrt2,-2\sqrt2-1)$
+  \item $0=a(3)^2+3\Rightarrow a=-\tfrac13$: $y=-\tfrac13(x-2)^2+3$
+  \item $P(x)=-3(x-15)^2+675$: max profit \$675 (hundred-dollar units) at $x=15$
+  \item $c=2$; $a+b=5$, $4a+2b=14\Rightarrow2a+b=7$; subtract: $a=2,b=3$: $y=2x^2+3x+2$
   \item $y=a(x-2)(x-8)$; at $x=5$: $-9=a(3)(-3)=-9a\Rightarrow a=1$: $y=(x-2)(x-8)=x^2-10x+16=(x-5)^2-9$
+  \item vertex $(-1,-6)$; perpendicular slope $\tfrac13$; $y+6=\tfrac13(x+1)\Rightarrow y=\tfrac13x-\tfrac{17}3$
 \end{enumerate}
 \end{multicols}
 \end{keybox}

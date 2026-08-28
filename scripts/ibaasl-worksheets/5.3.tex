@@ -37,6 +37,31 @@ Using the quotient rule and $\sec x=\dfrac{1}{\cos x}$, prove $\dfrac{d}{dx}[\se
 $\dfrac{0\cdot\cos x-1\cdot(-\sin x)}{\cos^2x}=\dfrac{\sin x}{\cos^2x}=\dfrac1{\cos x}\cdot\dfrac{\sin x}{\cos x}$.\\[3pt]\textbf{Conclusion:} $=\sec x\tan x$.
 \end{example}
 
+\begin{example}{ex4}{Example 5 --- Chain rule with sine of a linear function}
+Differentiate $f(x)=\sin(5x-2)$.\soln
+Inner derivative is $5$.\\[3pt]\textbf{Conclusion:} $f'(x)=5\cos(5x-2)$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Chain rule nested inside a trig function}
+Differentiate $f(x)=\cos(x^2+3x)$.\soln
+Inner derivative is $2x+3$.\\[3pt]\textbf{Conclusion:} $f'(x)=-(2x+3)\sin(x^2+3x)$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Product rule combining trig and log}
+Differentiate $f(x)=\sin x\ln x$.\soln
+$u=\sin x,v=\ln x$: $f'(x)=\cos x\ln x+\sin x\cdot\dfrac1x$.\\[3pt]\textbf{Conclusion:} $f'(x)=\cos x\ln x+\dfrac{\sin x}{x}$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Quotient rule with exponential and trig}
+Differentiate $f(x)=\dfrac{e^x}{\cos x}$.\soln
+$\dfrac{e^x\cos x-e^x(-\sin x)}{\cos^2x}=\dfrac{e^x(\cos x+\sin x)}{\cos^2x}$.\\[3pt]\textbf{Conclusion:} $f'(x)=\dfrac{e^x(\cos x+\sin x)}{\cos^2x}$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Application --- rate of a decaying quantity}
+A radioactive sample's mass is $M(t)=200e^{-0.05t}$ grams. Find the rate of change of mass at $t=10$.\soln
+$M'(t)=200(-0.05)e^{-0.05t}=-10e^{-0.05t}$; $M'(10)=-10e^{-0.5}$.\\[3pt]\textbf{Conclusion:} $M'(10)\approx-6.07$ g/unit time --- the mass is decreasing at about 6.07 g per unit time.
+\end{example}
+
 \clearpage
 \sech{Your Turn --- Show Your Work}
 For each question, show all steps clearly in the space provided.
@@ -65,6 +90,34 @@ Differentiate $f(x)=\dfrac{e^x}{x^2}$ using the quotient rule.\workspace{3.2cm}
 Using the quotient rule and $\csc x=\dfrac1{\sin x}$, derive $\dfrac{d}{dx}[\csc x]=-\csc x\cot x$.\workspace{3.4cm}
 \end{qbox}
 
+\begin{qbox}{Question 7}
+Differentiate $f(x)=\sin(3x+1)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Differentiate $f(x)=\cos(x^2-4x)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Differentiate $f(x)=\cos x\ln x$ using the product rule.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10 --- Challenge}
+Differentiate $f(x)=\dfrac{e^x}{\sin x}$ using the quotient rule.\workspace{3.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+A sample's mass is $M(t)=150e^{-0.03t}$ grams; find the rate of change at $t=20$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Differentiate $f(x)=e^{\sin x}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Differentiate $f(x)=\ln(\cos x)$, stating the domain restriction this creates.\workspace{3.2cm}
+\end{qbox}
+
 \clearpage
 \sech{Question Recap \& Answer Key}
 
@@ -78,6 +131,13 @@ Using the quotient rule and $\csc x=\dfrac1{\sin x}$, derive $\dfrac{d}{dx}[\csc
   \item Differentiate $f(x)=x^3\sin x$ using the product rule.
   \item Differentiate $f(x)=\dfrac{e^x}{x^2}$ using the quotient rule.
   \item Using the quotient rule and $\csc x=\dfrac1{\sin x}$, derive $\dfrac{d}{dx}[\csc x]=-\csc x\cot x$.
+  \item Differentiate $f(x)=\sin(3x+1)$.
+  \item Differentiate $f(x)=\cos(x^2-4x)$.
+  \item Differentiate $f(x)=\cos x\ln x$ using the product rule.
+  \item Differentiate $f(x)=\dfrac{e^x}{\sin x}$ using the quotient rule.
+  \item A sample's mass is $M(t)=150e^{-0.03t}$ grams; find the rate of change at $t=20$.
+  \item Differentiate $f(x)=e^{\sin x}$.
+  \item Differentiate $f(x)=\ln(\cos x)$, stating the domain restriction this creates.
 \end{enumerate}
 \end{multicols}
 \end{recapbox}
@@ -92,6 +152,13 @@ Using the quotient rule and $\csc x=\dfrac1{\sin x}$, derive $\dfrac{d}{dx}[\csc
   \item $3x^2\sin x+x^3\cos x$
   \item $\dfrac{e^x(x^2)-e^x(2x)}{x^4}=\dfrac{e^x(x-2)}{x^3}$
   \item $\dfrac{0\cdot\sin x-1\cdot\cos x}{\sin^2x}=-\dfrac{\cos x}{\sin^2x}=-\dfrac1{\sin x}\cdot\dfrac{\cos x}{\sin x}=-\csc x\cot x$
+  \item $3\cos(3x+1)$
+  \item $-(2x-4)\sin(x^2-4x)$
+  \item $-\sin x\ln x+\dfrac{\cos x}{x}$
+  \item $\dfrac{e^x\sin x-e^x\cos x}{\sin^2x}=\dfrac{e^x(\sin x-\cos x)}{\sin^2x}$
+  \item $M'(t)=-4.5e^{-0.03t}$; $M'(20)=-4.5e^{-0.6}\approx-2.47$ g/unit time
+  \item $\cos x\cdot e^{\sin x}$
+  \item $\dfrac{-\sin x}{\cos x}=-\tan x$; domain requires $\cos x>0$, so excludes wherever $\cos x\leq0$
 \end{enumerate}
 \end{multicols}
 \end{keybox}

@@ -38,6 +38,31 @@ $X\sim B(5,p)$ and $P(X=5)=0.00243$. Find $p$.\soln
 $p^5=0.00243\Rightarrow p=0.00243^{1/5}=0.3$ (recognizing $0.3^5=0.00243$).\\[3pt]\textbf{Conclusion:} $p=0.3$.
 \end{example}
 
+\begin{example}{ex4}{Example 5 --- Expected value of a custom discrete variable}
+A game pays \$10 with probability 0.2, \$0 with probability 0.5, and $-\$5$ (a loss) with probability 0.3. Find the expected value.\soln
+$E(X)=10(0.2)+0(0.5)+(-5)(0.3)=2+0-1.5$.\\[3pt]\textbf{Conclusion:} $E(X)=\$0.50$ --- the game is favourable on average.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- At most $k$ successes}
+$X\sim B(6,0.25)$. Find $P(X\leq1)$.\soln
+$P(X=0)=(0.75)^6\approx0.178$. $P(X=1)=\binom61(0.25)(0.75)^5\approx0.356$.\\[3pt]\textbf{Conclusion:} $P(X\leq1)\approx0.178+0.356=0.534$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Between two values}
+$X\sim B(10,0.4)$. Find $P(2\leq X\leq4)$.\soln
+$P(2)=\binom{10}2(0.4)^2(0.6)^8\approx0.121$; $P(3)\approx0.215$; $P(4)\approx0.251$.\\[3pt]\textbf{Conclusion:} $P(2\leq X\leq4)\approx0.121+0.215+0.251=0.587$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Solve for $n$ given a mean}
+$X\sim B(n,0.3)$ and $E(X)=12$. Find $n$.\soln
+$np=12\Rightarrow0.3n=12$.\\[3pt]\textbf{Conclusion:} $n=40$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Application --- warranty claims}
+A store sells 20 items with a 5\% individual chance of a warranty claim. Find the expected number of claims and the probability of at least 2 claims.\soln
+$E(X)=20(0.05)=1$. $P(X\geq2)=1-P(0)-P(1)=1-(0.95)^{20}-20(0.05)(0.95)^{19}\approx1-0.358-0.377$.\\[3pt]\textbf{Conclusion:} expected claims $=1$; $P(X\geq2)\approx0.265$.
+\end{example}
+
 \clearpage
 \sech{Your Turn --- Show Your Work}
 For each question, show all steps clearly in the space provided.
@@ -70,6 +95,30 @@ $X\sim B(4,p)$ and $P(X=0)=0.0016$. Find $p$.\workspace{2.4cm}
 A factory tests 10 items with a 4\% individual defect rate; find $P(\text{at most 1 defective})$.\workspace{3.4cm}
 \end{qbox}
 
+\begin{qbox}{Question 8}
+A game pays \$20 with probability 0.15, \$0 with probability 0.6, and $-\$8$ with probability 0.25. Find the expected value.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+$X\sim B(7,0.3)$. Find $P(X\leq1)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+$X\sim B(12,0.35)$. Find $P(3\leq X\leq5)$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+$X\sim B(n,0.2)$ and $E(X)=15$. Find $n$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12 --- Challenge}
+A shop sells 25 items with a 4\% individual chance of a return; find the expected number of returns and $P(\text{at least 2 returns})$.\workspace{3.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+$X\sim B(6,p)$ and $\text{Var}(X)=1.5$ with $p<0.5$; find $p$ (solve $6p(1-p)=1.5$).\workspace{3.2cm}
+\end{qbox}
+
 \clearpage
 \sech{Question Recap \& Answer Key}
 
@@ -84,6 +133,12 @@ A factory tests 10 items with a 4\% individual defect rate; find $P(\text{at mos
   \item A basketball player makes 65\% of free throws; for 8 attempts, find $P(\text{makes at least 6})$.
   \item $X\sim B(4,p)$ and $P(X=0)=0.0016$. Find $p$.
   \item A factory tests 10 items with a 4\% individual defect rate; find $P(\text{at most 1 defective})$.
+  \item A game pays \$20 with probability 0.15, \$0 with probability 0.6, and $-\$8$ with probability 0.25. Find the expected value.
+  \item $X\sim B(7,0.3)$. Find $P(X\leq1)$.
+  \item $X\sim B(12,0.35)$. Find $P(3\leq X\leq5)$.
+  \item $X\sim B(n,0.2)$ and $E(X)=15$. Find $n$.
+  \item A shop sells 25 items with a 4\% individual chance of a return; find the expected number of returns and $P(\text{at least 2 returns})$.
+  \item $X\sim B(6,p)$ and $\text{Var}(X)=1.5$ with $p<0.5$; find $p$ (solve $6p(1-p)=1.5$).
 \end{enumerate}
 \end{multicols}
 \end{recapbox}
@@ -99,6 +154,12 @@ A factory tests 10 items with a 4\% individual defect rate; find $P(\text{at mos
   \item $P(6)+P(7)+P(8)=\binom86(0.65)^6(0.35)^2+\binom87(0.65)^7(0.35)+\binom88(0.65)^8\approx0.2587+0.1373+0.0319\approx0.428$
   \item $(1-p)^4=0.0016\Rightarrow1-p=0.0016^{1/4}=0.2\Rightarrow p=0.8$
   \item $P(0)=(0.96)^{10}\approx0.6648$; $P(1)=\binom{10}1(0.04)(0.96)^9\approx0.2770$; sum $\approx0.9418$
+  \item $E(X)=20(0.15)+0(0.6)+(-8)(0.25)=3-2=\$1.00$
+  \item $P(0)=(0.7)^7\approx0.0824$; $P(1)=\binom71(0.3)(0.7)^6\approx0.2471$; sum $\approx0.3295$
+  \item $P(3)\approx0.2039$, $P(4)\approx0.2367$, $P(5)\approx0.1959$; sum $\approx0.6365$
+  \item $0.2n=15\Rightarrow n=75$
+  \item $E(X)=25(0.04)=1$; $P(X\geq2)=1-(0.96)^{25}-25(0.04)(0.96)^{24}\approx1-0.360-0.375\approx0.265$
+  \item $6p-6p^2=1.5\Rightarrow6p^2-6p+1.5=0\Rightarrow4p^2-4p+1=0\Rightarrow(2p-1)^2=0\Rightarrow p=0.5$ (boundary; for $p<0.5$ strictly, note this is the only solution --- the variance is maximized exactly at $p=0.5$)
 \end{enumerate}
 \end{multicols}
 \end{keybox}

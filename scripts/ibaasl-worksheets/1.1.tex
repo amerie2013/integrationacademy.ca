@@ -51,6 +51,39 @@ Logs are stacked with 22 in the bottom row, each row above having 2 fewer, down 
 \textbf{Conclusion:} $130$ logs.
 \end{example}
 
+\begin{example}{ex4}{Example 5 --- Sum from first and last term only}
+An arithmetic sequence has $u_1=5$, $d=6$, and last term $u_n=95$. Find $S_n$.\soln
+\textbf{Step 1:} Find $n$: $95=5+6(n-1)\Rightarrow 90=6(n-1)\Rightarrow n=16$.\\[3pt]
+\textbf{Step 2:} $S_{16}=\dfrac{16}{2}(5+95)=8(100)$.\\[3pt]
+\textbf{Conclusion:} $S_{16}=800$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Application --- rising salary}
+A worker's salary starts at \$38{,}000 and rises by \$1400 each year. Find the total earned over the first 9 years.\soln
+$u_1=38000$, $d=1400$, $n=9$. $S_9=\dfrac92\big(2(38000)+8(1400)\big)=\dfrac92(76000+11200)$.\\[3pt]
+\textbf{Conclusion:} $S_9=\dfrac92(87200)=\$392{,}400$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Solve for $n$ from a sum equation}
+An arithmetic sequence has $u_1=2$, $d=6$. Find $n$ such that $S_n=184$.\soln
+\textbf{Step 1:} $S_n=\dfrac n2\big(4+6(n-1)\big)=n(3n-1)=3n^2-n$.\\[3pt]
+\textbf{Step 2:} $3n^2-n-184=0\Rightarrow(n-8)(3n+23)=0$.\\[3pt]
+\textbf{Conclusion:} $n=8$ (rejecting the negative root). ✓
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Two sequences meeting}
+Sequence A: $u_1=10$, $d=3$. Sequence B: $u_1=50$, $d=-2$. Find the term number where both sequences give the same value.\soln
+\textbf{Step 1:} Set general terms equal: $10+3(n-1)=50-2(n-1)$.\\[3pt]
+\textbf{Step 2:} $3n+7=52-2n\Rightarrow5n=45\Rightarrow n=9$.\\[3pt]
+\textbf{Conclusion:} at $n=9$, both sequences equal $34$. ✓
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Application --- accumulated temperature drop}
+A region's daily low starts at $20°$C on day 1 and drops by $1.5°$C each day. Find the sum of all daily lows over the first 14 days.\soln
+$u_1=20$, $d=-1.5$, $n=14$. $S_{14}=\dfrac{14}2\big(2(20)+13(-1.5)\big)=7(40-19.5)$.\\[3pt]
+\textbf{Conclusion:} $S_{14}=7(20.5)=143.5°$C (sum of daily lows). ✓
+\end{example}
+
 \clearpage
 \sech{Your Turn --- Show Your Work}
 For each question, show all steps clearly in the space provided.
@@ -83,12 +116,28 @@ A theatre has 18 seats in the first row, increasing by 3 seats per row for 12 ro
 Find the number of terms in the sequence $5,9,13,\dots,161$.\workspace{2.4cm}
 \end{qbox}
 
-\begin{qbox}{Question 8 --- Challenge}
+\begin{qbox}{Question 8}
+An arithmetic sequence has $u_1=3$, $d=5$, and last term $u_n=98$. Find $S_n$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+A stadium's rows increase by 4 seats each row, starting at 30 in row 1, for 20 rows. Find the total capacity.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10 --- Challenge}
 How many terms of $3,7,11,\dots$ are needed for the sum to first exceed 200?\workspace{3.2cm}
 \end{qbox}
 
-\begin{qbox}{Question 9 --- Challenge}
+\begin{qbox}{Question 11 --- Challenge}
 An arithmetic sequence has $u_1=4$ and $S_{10}=205$. Find $d$.\workspace{3.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 12 --- Challenge}
+An arithmetic sequence has $u_1=5$, $d=8$. Find $n$ such that $S_n=612$.\workspace{3.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Sequence C: $u_1=100$, $d=-7$. Sequence D: $u_1=4$, $d=9$. Find the term number and value where they meet.\workspace{3.4cm}
 \end{qbox}
 
 \clearpage
@@ -105,8 +154,12 @@ An arithmetic sequence has $u_1=4$ and $S_{10}=205$. Find $d$.\workspace{3.2cm}
   \item Find $S_{40}$ for $100,95,90,\dots$
   \item A theatre has 18 seats in the first row, increasing by 3 seats per row for 12 rows. Find the total seating capacity.
   \item Find the number of terms in the sequence $5,9,13,\dots,161$.
+  \item An arithmetic sequence has $u_1=3$, $d=5$, and last term $u_n=98$. Find $S_n$.
+  \item A stadium's rows increase by 4 seats each row, starting at 30 in row 1, for 20 rows. Find the total capacity.
   \item How many terms of $3,7,11,\dots$ are needed for the sum to first exceed 200?
   \item An arithmetic sequence has $u_1=4$ and $S_{10}=205$. Find $d$.
+  \item An arithmetic sequence has $u_1=5$, $d=8$. Find $n$ such that $S_n=612$.
+  \item Sequence C: $u_1=100$, $d=-7$. Sequence D: $u_1=4$, $d=9$. Find the term number and value where they meet.
 \end{enumerate}
 \end{multicols}
 \end{recapbox}
@@ -122,8 +175,12 @@ An arithmetic sequence has $u_1=4$ and $S_{10}=205$. Find $d$.\workspace{3.2cm}
   \item $S_{40}=-3700$
   \item $12$ rows: $S_{12}=\tfrac{12}{2}(2(18)+11(3))=6(69)=414$ seats
   \item $5+(n-1)4=161\Rightarrow n=40$ terms
+  \item $n$: $98=3+5(n-1)\Rightarrow n=20$; $S_{20}=\tfrac{20}2(3+98)=10(101)=1010$
+  \item $S_{20}=\tfrac{20}2(60+19(4))=10(136)=1360$ seats
   \item $S_n=\tfrac n2(6+4(n-1))>200\Rightarrow 2n^2+4n-200>0\Rightarrow n^2+2n-100>0$; testing, $n=10$ gives $S_{10}=210>200$ (and $n=9$ gives $171<200$), so $n=10$
   \item $S_{10}=\tfrac{10}{2}(8+9d)=205\Rightarrow 40+45d=205\Rightarrow d=\tfrac{165}{45}=\tfrac{11}{3}$
+  \item $S_n=n(4n+3)-n... $ precisely $4n^2+3n=612\Rightarrow(n-12)(4n+51)=0\Rightarrow n=12$
+  \item $100-7(n-1)=4+9(n-1)\Rightarrow107-7n=9n-5\Rightarrow112=16n\Rightarrow n=7$; value $=100-7(6)=58$
 \end{enumerate}
 \end{multicols}
 \end{keybox}

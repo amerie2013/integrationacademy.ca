@@ -39,6 +39,31 @@ A ship sails 30 km on a bearing of $050°$, then 45 km on a bearing of $140°$. 
 Included angle $=140-50=90°$. $d^2=900+2025-0=2925$.\\[3pt]\textbf{Conclusion:} $d\approx54.1$ km.
 \end{example}
 
+\begin{example}{ex4}{Example 5 --- Cosine rule for a side, obtuse angle}
+In $\triangle ABC$, $b=10$, $c=14$, $A=110°$. Find $a$.\soln
+$a^2=100+196-2(10)(14)\cos110°=296-280(-0.342)$.\\[3pt]\textbf{Conclusion:} $a^2\approx391.8\Rightarrow a\approx19.79$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Ambiguous case with only one valid triangle}
+In $\triangle ABC$, $A=110°$, $a=20$, $b=15$. Find $B$, and explain why only one triangle is possible.\soln
+$\sin B=\dfrac{15\sin110°}{20}\approx0.7048\Rightarrow B_1\approx44.8°$. The supplementary option $B_2=135.2°$ would make $A+B_2>180°$, impossible.\\[3pt]\textbf{Conclusion:} only $B\approx44.8°$ is valid --- an obtuse given angle always rules out the second case.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Area via the cosine rule first}
+Find the area of a triangle with sides $8,10,13$.\soln
+Find the angle opposite 13: $\cos C=\dfrac{64+100-169}{160}=-0.03125\Rightarrow C\approx91.8°$.\\[3pt]\textbf{Conclusion:} Area $=\tfrac12(8)(10)\sin(91.8°)\approx39.98$ square units.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Two-leg navigation distance}
+A plane flies 40 km on a bearing of $015°$, then 55 km on a bearing of $100°$. Find the distance between the start and end points.\soln
+Included angle $=100-15=85°$. $d^2=1600+3025-2(40)(55)\cos85°$.\\[3pt]\textbf{Conclusion:} $d^2\approx4241.3\Rightarrow d\approx65.1$ km.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Application --- cost from a triangular area}
+A triangular garden has sides 18 m and 24 m with an included angle of $55°$. Sod costs \$8 per m$^2$. Find the total cost.\soln
+Area $=\tfrac12(18)(24)\sin55°\approx176.9\text{ m}^2$.\\[3pt]\textbf{Conclusion:} cost $\approx176.9\times8\approx\$1415.20$.
+\end{example}
+
 \clearpage
 \sech{Your Turn --- Show Your Work}
 For each question, show all steps clearly in the space provided.
@@ -71,8 +96,28 @@ In $\triangle ABC$, $a=10$, $b=14$, $C=50°$. Find $c$.\workspace{2.4cm}
 A triangular field has sides 80 m, 95 m, and an included angle of $72°$ between them. Find its area in m$^2$.\workspace{2.4cm}
 \end{qbox}
 
-\begin{qbox}{Question 8 --- Challenge}
+\begin{qbox}{Question 8}
+In $\triangle ABC$, $b=9$, $c=13$, $A=100°$. Find $a$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+In $\triangle ABC$, $A=125°$, $a=18$, $b=10$. Find $B$, explaining why only one triangle is possible.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Find the area of a triangle with sides $7,9,11$ (find the angle first).\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11 --- Challenge}
 In $\triangle ABC$, $A=48°$, $a=11$, $c=15$. Find angle $C$, and comment on whether the ambiguous case applies.\workspace{3.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12 --- Challenge}
+A ship sails 30 km on bearing $025°$, then 45 km on bearing $110°$. Find the direct distance between the start and end points.\workspace{3.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+A triangular plot has sides 20 m and 28 m with an included angle of $48°$; sod costs \$6/m$^2$. Find the total cost.\workspace{3.2cm}
 \end{qbox}
 
 \clearpage
@@ -89,7 +134,12 @@ In $\triangle ABC$, $A=48°$, $a=11$, $c=15$. Find angle $C$, and comment on whe
   \item A hiker walks 4 km on a bearing of $030°$, then 6 km on a bearing of $120°$. Find the direct distance back to the start.
   \item In $\triangle ABC$, $a=10$, $b=14$, $C=50°$. Find $c$.
   \item A triangular field has sides 80 m, 95 m, and an included angle of $72°$ between them. Find its area in m$^2$.
+  \item In $\triangle ABC$, $b=9$, $c=13$, $A=100°$. Find $a$.
+  \item In $\triangle ABC$, $A=125°$, $a=18$, $b=10$. Find $B$, explaining why only one triangle is possible.
+  \item Find the area of a triangle with sides $7,9,11$ (find the angle first).
   \item In $\triangle ABC$, $A=48°$, $a=11$, $c=15$. Find angle $C$, and comment on whether the ambiguous case applies.
+  \item A ship sails 30 km on bearing $025°$, then 45 km on bearing $110°$. Find the direct distance between the start and end points.
+  \item A triangular plot has sides 20 m and 28 m with an included angle of $48°$; sod costs \$6/m$^2$. Find the total cost.
 \end{enumerate}
 \end{multicols}
 \end{recapbox}
@@ -105,7 +155,12 @@ In $\triangle ABC$, $A=48°$, $a=11$, $c=15$. Find angle $C$, and comment on whe
   \item included angle $=120-30=90°$: $d^2=16+36=52\Rightarrow d\approx7.21$ km
   \item $c^2=100+196-280\cos50°\approx296-180.0=116.0\Rightarrow c\approx10.77$
   \item $\tfrac12(80)(95)\sin72°\approx3616.6\text{ m}^2$
+  \item $a^2=81+169-2(9)(13)\cos100°\approx250+40.6=290.6\Rightarrow a\approx17.05$
+  \item $\sin B=\tfrac{10\sin125°}{18}\approx0.4551\Rightarrow B\approx27.1°$; the supplementary option would make $A+B_2>180°$, so only one triangle exists
+  \item $\cos C=\tfrac{49+81-121}{126}\approx0.0714\Rightarrow C\approx85.9°$; Area $=\tfrac12(7)(9)\sin85.9°\approx31.4$
   \item $\sin C=\dfrac{15\sin48°}{11}\approx1.013$ --- impossible (sin can't exceed 1), so no triangle exists with these values; the ambiguous case doesn't apply because there's no valid triangle at all
+  \item included angle $=110-25=85°$; $d^2=900+2025-2700\cos85°\approx2925-235.4=2689.6\Rightarrow d\approx51.86$ km
+  \item Area $=\tfrac12(20)(28)\sin48°\approx208.1\text{ m}^2$; cost $\approx208.1\times6\approx\$1248.60$
 \end{enumerate}
 \end{multicols}
 \end{keybox}

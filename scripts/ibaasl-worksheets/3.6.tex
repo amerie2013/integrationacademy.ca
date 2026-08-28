@@ -38,6 +38,32 @@ Solve $2\cos^2x-\sin x-1=0$ for $0\leq x\leq2\pi$.\soln
 $2(1-\sin^2x)-\sin x-1=0\Rightarrow-2\sin^2x-\sin x+1=0\Rightarrow2\sin^2x+\sin x-1=0\Rightarrow(2\sin x-1)(\sin x+1)=0$.\\[3pt]\textbf{Conclusion:} $x=\tfrac{\pi}6,\tfrac{5\pi}6,\tfrac{3\pi}2$ (same equation as Example 3, after substitution).
 \end{example}
 
+\begin{example}{ex4}{Example 5 --- Extended domain (more solutions)}
+Solve $\sin x=0.5$ for $0\leq x\leq4\pi$.\soln
+In $[0,2\pi]$: $x=\tfrac{\pi}6,\tfrac{5\pi}6$. Add $2\pi$ for the second cycle: $x=\tfrac{13\pi}6,\tfrac{17\pi}6$.\\[3pt]\textbf{Conclusion:} $x=\tfrac{\pi}6,\tfrac{5\pi}6,\tfrac{13\pi}6,\tfrac{17\pi}6$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Quadratic-in-cosine requiring the quadratic formula}
+Solve $3\cos^2x-\cos x-1=0$ for $0\leq x\leq2\pi$ (this doesn't factor nicely).\soln
+Let $u=\cos x$: $u=\dfrac{1\pm\sqrt{1+12}}6=\dfrac{1\pm\sqrt{13}}6$, giving $u\approx0.768$ or $u\approx-0.434$.\\[3pt]
+\textbf{Conclusion:} $x\approx0.696,\,2.009,\,4.275,\,5.588$ (four solutions, from the two cosine values each giving two angles).
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Factoring out a common trig factor}
+Solve $2\sin x\cos x-\sin x=0$ for $0\leq x\leq2\pi$.\soln
+Factor: $\sin x(2\cos x-1)=0$. $\sin x=0\Rightarrow x=0,\pi,2\pi$. $\cos x=\tfrac12\Rightarrow x=\tfrac{\pi}3,\tfrac{5\pi}3$.\\[3pt]\textbf{Conclusion:} $x=0,\tfrac{\pi}3,\pi,\tfrac{5\pi}3,2\pi$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Finding a maximum and when it first occurs}
+A wave's height is $h(t)=5\sin(2t)+3$; find the maximum height and the first time $t>0$ it's reached.\soln
+Maximum of $\sin$ is 1, giving $h=5+3=8$, at $2t=\tfrac{\pi}2$.\\[3pt]\textbf{Conclusion:} max height $8$, first reached at $t=\tfrac{\pi}4$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Application --- bridge clearance}
+A bridge's vertical clearance is $C(t)=2\cos\!\left(\dfrac{\pi}6t\right)+5$ m, for $t\in[0,24)$ hours. Find all times the clearance equals 4 m.\soln
+$2\cos(\pi t/6)=-1\Rightarrow\cos(\pi t/6)=-0.5\Rightarrow\pi t/6=\tfrac{2\pi}3$ or $\tfrac{4\pi}3$ (period is 12 h, so this repeats once more in $[0,24)$).\\[3pt]\textbf{Conclusion:} $t=4,\,8,\,16,\,20$ hours.
+\end{example}
+
 \clearpage
 \sech{Your Turn --- Show Your Work}
 For each question, show all steps clearly in the space provided.
@@ -74,6 +100,26 @@ Solve $2\sin^2x+3\sin x+1=0$ for $0\leq x\leq2\pi$.\workspace{2.4cm}
 A Ferris wheel's height is $h(t)=10\sin\!\left(\dfrac{\pi}{4}t\right)+12$ m; find every time in the first 8 minutes it reaches height 17 m.\workspace{3.4cm}
 \end{qbox}
 
+\begin{qbox}{Question 9}
+Solve $\cos x=0.3$ for $0\leq x\leq4\pi$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Solve $2\sin^2x+\sin x=0$ for $0\leq x\leq2\pi$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11 --- Challenge}
+Solve $2\sin^2x-3\sin x-2=0$ for $0\leq x\leq2\pi$ (reject any invalid value of $\sin x$).\workspace{3.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 12 --- Challenge}
+Solve $2\sin^2x+\sin x-2=0$ for $0\leq x\leq2\pi$ (does not factor nicely --- use the quadratic formula).\workspace{3.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+A bridge's clearance is $C(t)=2\cos\!\left(\dfrac{\pi}6t\right)+5$ m for $t\in[0,24)$; find all times the clearance equals $3.5$ m (nearest 0.01 h).\workspace{3.4cm}
+\end{qbox}
+
 \clearpage
 \sech{Question Recap \& Answer Key}
 
@@ -89,6 +135,11 @@ A Ferris wheel's height is $h(t)=10\sin\!\left(\dfrac{\pi}{4}t\right)+12$ m; fin
   \item Solve $\tan x=-1$ for $0\leq x\leq2\pi$.
   \item Solve $2\sin^2x+3\sin x+1=0$ for $0\leq x\leq2\pi$.
   \item A Ferris wheel's height is $h(t)=10\sin\!\left(\dfrac{\pi}{4}t\right)+12$ m; find every time in the first 8 minutes it reaches height 17 m.
+  \item Solve $\cos x=0.3$ for $0\leq x\leq4\pi$.
+  \item Solve $2\sin^2x+\sin x=0$ for $0\leq x\leq2\pi$.
+  \item Solve $2\sin^2x-3\sin x-2=0$ for $0\leq x\leq2\pi$ (reject any invalid value of $\sin x$).
+  \item Solve $2\sin^2x+\sin x-2=0$ for $0\leq x\leq2\pi$ (does not factor nicely --- use the quadratic formula).
+  \item A bridge's clearance is $C(t)=2\cos\!\left(\dfrac{\pi}6t\right)+5$ m for $t\in[0,24)$; find all times the clearance equals $3.5$ m (nearest 0.01 h).
 \end{enumerate}
 \end{multicols}
 \end{recapbox}
@@ -105,6 +156,11 @@ A Ferris wheel's height is $h(t)=10\sin\!\left(\dfrac{\pi}{4}t\right)+12$ m; fin
   \item Q2 and Q4: $x=\tfrac{3\pi}4,\tfrac{7\pi}4$
   \item $(2\sin x+1)(\sin x+1)=0$: $\sin x=-\tfrac12\Rightarrow x=\tfrac{7\pi}6,\tfrac{11\pi}6$; $\sin x=-1\Rightarrow x=\tfrac{3\pi}2$
   \item $10\sin(\pi t/4)=5\Rightarrow\sin(\pi t/4)=0.5\Rightarrow\pi t/4=\pi/6$ or $5\pi/6\Rightarrow t=\tfrac23$ or $\tfrac{10}3$ min (period 8, so no repeats within 8 min beyond these)
+  \item reference $\approx1.266$; solutions $\approx1.266,\,5.017,\,7.549,\,11.300$
+  \item factor $\sin x(2\sin x+1)=0$: $\sin x=0\Rightarrow x=0,\pi,2\pi$; $\sin x=-\tfrac12\Rightarrow x=\tfrac{7\pi}6,\tfrac{11\pi}6$
+  \item $(2\sin x+1)(\sin x-2)=0$; $\sin x=2$ rejected (impossible); $\sin x=-\tfrac12\Rightarrow x=\tfrac{7\pi}6,\tfrac{11\pi}6$
+  \item $u=\dfrac{-1\pm\sqrt{17}}4$: $u\approx0.781$ (valid) or $u\approx-1.281$ (rejected); $x\approx0.896,\,2.246$
+  \item $\cos(\pi t/6)=-0.75\Rightarrow \pi t/6\approx2.419$ or $3.864$ (period 12h): $t\approx4.62,\,7.38,\,16.62,\,19.38$
 \end{enumerate}
 \end{multicols}
 \end{keybox}

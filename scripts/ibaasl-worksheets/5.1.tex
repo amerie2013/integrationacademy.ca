@@ -38,6 +38,31 @@ Use first principles to prove $\dfrac{d}{dx}[ax^2]=2ax$.\soln
 $f(x+h)-f(x)=a(x+h)^2-ax^2=a(2xh+h^2)=h(2ax+ah)$; divide by $h$, let $h\to0$.\\[3pt]\textbf{Conclusion:} $f'(x)=2ax$.
 \end{example}
 
+\begin{example}{ex4}{Example 5 --- Factoring a higher-degree indeterminate form}
+Evaluate $\displaystyle\lim_{x\to3}\dfrac{x^3-27}{x-3}$ using the difference of cubes.\soln
+$x^3-27=(x-3)(x^2+3x+9)$, so the limit simplifies to $x^2+3x+9\to9+9+9$.\\[3pt]\textbf{Conclusion:} $27$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- A limit requiring two factoring steps}
+Evaluate $\displaystyle\lim_{x\to2}\dfrac{x^2-4}{x^2-5x+6}$.\soln
+Factor both: $\dfrac{(x-2)(x+2)}{(x-2)(x-3)}=\dfrac{x+2}{x-3}\to\dfrac{4}{-1}$.\\[3pt]\textbf{Conclusion:} $-4$.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- First principles for a cubic}
+Use first principles to find the derivative of $f(x)=x^3$.\soln
+$f(x+h)-f(x)=(x+h)^3-x^3=3x^2h+3xh^2+h^3=h(3x^2+3xh+h^2)$; divide by $h$, let $h\to0$.\\[3pt]\textbf{Conclusion:} $f'(x)=3x^2$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Rationalizing with a linear numerator shift}
+Evaluate $\displaystyle\lim_{x\to4}\dfrac{\sqrt{x}-2}{x-4}$.\soln
+Multiply by the conjugate: $\dfrac{x-4}{(x-4)(\sqrt x+2)}=\dfrac{1}{\sqrt x+2}\to\dfrac1{4}$.\\[3pt]\textbf{Conclusion:} $\dfrac14$.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- First principles at a specific point}
+Use first principles to find $f'(3)$ for $f(x)=x^2+1$ (evaluate the limit at the specific point $x=3$).\soln
+$\dfrac{f(3+h)-f(3)}h=\dfrac{(3+h)^2+1-10}h=\dfrac{6h+h^2}h=6+h\to6$.\\[3pt]\textbf{Conclusion:} $f'(3)=6$.
+\end{example}
+
 \clearpage
 \sech{Your Turn --- Show Your Work}
 For each question, show all steps clearly in the space provided.
@@ -66,6 +91,34 @@ Use first principles to find the derivative of $f(x)=4x^2-2x$.\workspace{3.4cm}
 Evaluate $\displaystyle\lim_{x\to2}\dfrac{x^3-8}{x-2}$ by factoring the numerator as a difference of cubes.\workspace{3cm}
 \end{qbox}
 
+\begin{qbox}{Question 7}
+Evaluate $\displaystyle\lim_{x\to3}\dfrac{x^2-9}{x^2-2x-3}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8 --- Challenge}
+Use first principles to find the derivative of $f(x)=2x^3$.\workspace{3.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Evaluate $\displaystyle\lim_{x\to9}\dfrac{\sqrt x-3}{x-9}$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Use first principles to find $f'(2)$ for $f(x)=x^2-1$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Evaluate $\displaystyle\lim_{x\to1}\dfrac{x^3-1}{x-1}$ using the difference of cubes.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12 --- Challenge}
+Evaluate $\displaystyle\lim_{x\to-2}\dfrac{x^2-4}{x^2+3x+2}$.\workspace{3cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Use first principles to find the derivative of $f(x)=x^2+5x-2$ (note the constant term's effect).\workspace{3.4cm}
+\end{qbox}
+
 \clearpage
 \sech{Question Recap \& Answer Key}
 
@@ -79,6 +132,13 @@ Evaluate $\displaystyle\lim_{x\to2}\dfrac{x^3-8}{x-2}$ by factoring the numerato
   \item Use first principles to find the derivative of $f(x)=x^2+7x$.
   \item Use first principles to find the derivative of $f(x)=4x^2-2x$.
   \item Evaluate $\displaystyle\lim_{x\to2}\dfrac{x^3-8}{x-2}$ by factoring the numerator as a difference of cubes.
+  \item Evaluate $\displaystyle\lim_{x\to3}\dfrac{x^2-9}{x^2-2x-3}$.
+  \item Use first principles to find the derivative of $f(x)=2x^3$.
+  \item Evaluate $\displaystyle\lim_{x\to9}\dfrac{\sqrt x-3}{x-9}$.
+  \item Use first principles to find $f'(2)$ for $f(x)=x^2-1$.
+  \item Evaluate $\displaystyle\lim_{x\to1}\dfrac{x^3-1}{x-1}$ using the difference of cubes.
+  \item Evaluate $\displaystyle\lim_{x\to-2}\dfrac{x^2-4}{x^2+3x+2}$.
+  \item Use first principles to find the derivative of $f(x)=x^2+5x-2$ (note the constant term's effect).
 \end{enumerate}
 \end{multicols}
 \end{recapbox}
@@ -93,6 +153,13 @@ Evaluate $\displaystyle\lim_{x\to2}\dfrac{x^3-8}{x-2}$ by factoring the numerato
   \item $f'(x)=2x+7$
   \item $f'(x)=8x-2$
   \item $(x-2)(x^2+2x+4)/(x-2)=x^2+2x+4\to4+4+4=12$
+  \item $\dfrac{(x-3)(x+3)}{(x-3)(x+1)}=\dfrac{x+3}{x+1}\to\dfrac64=\dfrac32$
+  \item $f(x+h)-f(x)=2(3x^2h+3xh^2+h^3)=h(6x^2+6xh+2h^2)$; $f'(x)=6x^2$
+  \item $\dfrac{1}{\sqrt x+3}\to\dfrac16$
+  \item $\dfrac{(2+h)^2-1-3}{h}=\dfrac{4h+h^2}h=4+h\to4$
+  \item $(x-1)(x^2+x+1)/(x-1)=x^2+x+1\to1+1+1=3$
+  \item $\dfrac{(x-2)(x+2)}{(x+1)(x+2)}=\dfrac{x-2}{x+1}\to\dfrac{-4}{-1}=4$
+  \item $f(x+h)-f(x)=2xh+h^2+5h=h(2x+h+5)$; $f'(x)=2x+5$ (the constant $-2$ contributes nothing, as expected)
 \end{enumerate}
 \end{multicols}
 \end{keybox}

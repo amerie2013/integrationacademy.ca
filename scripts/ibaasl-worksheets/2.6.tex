@@ -38,6 +38,31 @@ A club's average cost per member is $C(n)=\dfrac{600}{n}+15$ dollars, for $n$ me
 Vertical asymptote $n=0$: the model breaks down with zero members. Horizontal asymptote $y=15$: as membership grows, the average cost per member settles near \$15 (the per-person variable cost).\\[3pt]\textbf{Conclusion:} \$15 is the cost floor once fixed costs are spread thin.
 \end{example}
 
+\begin{example}{ex4}{Example 5 --- Finding the equation from asymptotes and a point}
+A function $y=\dfrac{a}{x-h}+k$ has vertical asymptote $x=-4$, horizontal asymptote $y=-1$, and passes through $(-2,3)$. Find its equation.\soln
+$y=\dfrac{a}{x+4}-1$. Substitute $(-2,3)$: $3=\dfrac a2-1\Rightarrow a=8$.\\[3pt]\textbf{Conclusion:} $y=\dfrac{8}{x+4}-1$.
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Simplifying a rational function with a common factor}
+Simplify $y=\dfrac{x^2-9}{x-3}$ and state what happens at $x=3$.\soln
+$\dfrac{(x-3)(x+3)}{x-3}=x+3$ for $x\neq3$.\\[3pt]\textbf{Conclusion:} the function simplifies to $y=x+3$, but has a hole (not an asymptote) at $x=3$, since that factor cancels.
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Finding the $x$-intercept of a shifted reciprocal}
+Find the $x$-intercept of $y=\dfrac{5}{x-2}-1$.\soln
+Set $y=0$: $\dfrac{5}{x-2}=1\Rightarrow x-2=5\Rightarrow x=7$.\\[3pt]\textbf{Conclusion:} $x$-intercept at $x=7$.
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Comparing two rational functions' asymptotes}
+State whether $y=\dfrac{3}{x-1}+4$ and $y=\dfrac{-3}{x-1}+4$ share the same asymptotes.\soln
+Both have the same $h=1$ (vertical asymptote $x=1$) and $k=4$ (horizontal asymptote $y=4$) --- only the sign of $a$ differs, affecting which quadrants the branches sit in.\\[3pt]\textbf{Conclusion:} yes, identical asymptotes; only the branch orientation differs.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Application --- concentration approaching a limit}
+A drug's blood concentration is modelled by $C(t)=\dfrac{50t}{t+2}$ mg/L for $t\geq0$. Rewrite in the form $\dfrac a{t-h}+k$ and interpret the horizontal asymptote.\soln
+$C(t)=\dfrac{50t}{t+2}=\dfrac{50(t+2)-100}{t+2}=50-\dfrac{100}{t+2}$.\\[3pt]\textbf{Conclusion:} horizontal asymptote $y=50$: the concentration approaches (but never reaches) 50 mg/L as time grows large.
+\end{example}
+
 \clearpage
 \sech{Your Turn --- Show Your Work}
 For each question, show all steps clearly in the space provided.
@@ -71,8 +96,28 @@ Sketch $y=\dfrac{3}{x+2}-1$, labelling both asymptotes.
 A gas's pressure is modelled by $P(v)=\dfrac{200}{v}$ for volume $v>0$; explain what the vertical asymptote at $v=0$ means physically.\workspace{2.4cm}
 \end{qbox}
 
-\begin{qbox}{Question 8 --- Challenge}
+\begin{qbox}{Question 8}
+Simplify $y=\dfrac{x^2-16}{x-4}$ and state what happens at $x=4$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Find the $x$-intercept of $y=\dfrac{6}{x+1}-2$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+A function $y=\dfrac{a}{x-h}+k$ has vertical asymptote $x=3$, horizontal asymptote $y=2$, and passes through $(5,5)$. Find its equation.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11 --- Challenge}
 A function $y=\dfrac{a}{x-h}+k$ has asymptotes $x=-3$ and $y=2$, and passes through $(-1,5)$. Find $a$, then find the $x$-intercept.\workspace{3.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12 --- Challenge}
+Rewrite $C(t)=\dfrac{80t}{t+4}$ in the form $k-\dfrac a{t+4}$ and state the horizontal asymptote.\workspace{3.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+A function $y=\dfrac{a}{x-h}+k$ passes through $(0,5)$ and $(4,9)$ with vertical asymptote $x=2$; find $a,k$.\workspace{3.4cm}
 \end{qbox}
 
 \clearpage
@@ -89,7 +134,12 @@ A function $y=\dfrac{a}{x-h}+k$ has asymptotes $x=-3$ and $y=2$, and passes thro
   \item A function $y=\dfrac{a}{x-h}+k$ has asymptotes $x=5$, $y=1$, and passes through $(6,4)$. Find $a$.
   \item Sketch $y=\dfrac{3}{x+2}-1$, labelling both asymptotes.
   \item A gas's pressure is modelled by $P(v)=\dfrac{200}{v}$ for volume $v>0$; explain what the vertical asymptote at $v=0$ means physically.
+  \item Simplify $y=\dfrac{x^2-16}{x-4}$ and state what happens at $x=4$.
+  \item Find the $x$-intercept of $y=\dfrac{6}{x+1}-2$.
+  \item A function $y=\dfrac{a}{x-h}+k$ has vertical asymptote $x=3$, horizontal asymptote $y=2$, and passes through $(5,5)$. Find its equation.
   \item A function $y=\dfrac{a}{x-h}+k$ has asymptotes $x=-3$ and $y=2$, and passes through $(-1,5)$. Find $a$, then find the $x$-intercept.
+  \item Rewrite $C(t)=\dfrac{80t}{t+4}$ in the form $k-\dfrac a{t+4}$ and state the horizontal asymptote.
+  \item A function $y=\dfrac{a}{x-h}+k$ passes through $(0,5)$ and $(4,9)$ with vertical asymptote $x=2$; find $a,k$.
 \end{enumerate}
 \end{multicols}
 \end{recapbox}
@@ -105,7 +155,12 @@ A function $y=\dfrac{a}{x-h}+k$ has asymptotes $x=-3$ and $y=2$, and passes thro
   \item $4=\dfrac{a}{1}+1\Rightarrow a=3$
   \item asymptotes $x=-2$, $y=-1$
   \item As volume approaches 0, pressure would grow without bound --- physically, a gas cannot be compressed to zero volume
+  \item $=x+4$ for $x\neq4$; hole (not asymptote) at $x=4$
+  \item $\dfrac{6}{x+1}=2\Rightarrow x+1=3\Rightarrow x=2$
+  \item $5=\dfrac a2+2\Rightarrow a=6$: $y=\dfrac6{x-3}+2$
   \item $5=\dfrac{a}{2}+2\Rightarrow a=6$; intercept: $0=\dfrac{6}{x+3}+2\Rightarrow x+3=-3\Rightarrow x=-6$
+  \item $C(t)=80-\dfrac{320}{t+4}$; horizontal asymptote $y=80$
+  \item $5=\dfrac{a}{-2}+k$ and $9=\dfrac a2+k$; subtract: $4=a\Rightarrow a=4$; then $9=2+k\Rightarrow k=7$
 \end{enumerate}
 \end{multicols}
 \end{keybox}
