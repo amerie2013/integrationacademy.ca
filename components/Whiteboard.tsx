@@ -187,7 +187,7 @@ export function Whiteboard({ initialBoardId }: { initialBoardId?: string }) {
     const id = boardIdRef.current; if (!id) return;
     const next = !drawOpenRef.current;
     const r = await saveBoard(id, { draw_open: next });
-    if (r.error) { setSaveMsg(r.error.includes("relation") ? "Run the whiteboard co-draw migration." : r.error); return; }
+    if (r.error) { setSaveMsg(r.error.includes("relation") || r.error.includes("column") ? "Run the whiteboard co-draw migration (see supabase/migrations)." : r.error); return; }
     setDrawOpen(next);
   }
   // While live, absorb shapes appended by guests (via the append-only RPC)
