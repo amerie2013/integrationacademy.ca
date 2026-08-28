@@ -31,6 +31,28 @@ export function combination(n: number, r: number): bigint {
   return result;
 }
 
+/** n^r — sequences of length r from n choices, repetition allowed (PINs, license plates, …). */
+export function permutationWithRepetition(n: number, r: number): bigint {
+  let result = BigInt(1);
+  for (let i = 0; i < r; i++) result *= BigInt(n);
+  return result;
+}
+
+/** Combinations with repetition: choosing r items from n types, order doesn't
+ * matter, repetition allowed (e.g. r donuts from n flavors). Equivalent to
+ * ₍ₙ₊ᵣ₋₁₎Cᵣ (the classic "stars and bars" result). */
+export function combinationWithRepetition(n: number, r: number): bigint {
+  if (n <= 0) return r === 0 ? BigInt(1) : BigInt(0);
+  return combination(n + r - 1, r);
+}
+
+/** 2ⁿ — the number of subsets of an n-element set (including ∅ and the full set). */
+export function subsetCount(n: number): bigint {
+  let result = BigInt(1);
+  for (let i = 0; i < n; i++) result *= BigInt(2);
+  return result;
+}
+
 /** Distinct arrangements of a multiset: n! / (a₁! × a₂! × …) for group sizes a₁, a₂, … */
 export function multisetPermutations(groupSizes: number[]): bigint {
   const n = groupSizes.reduce((a, b) => a + b, 0);

@@ -2,14 +2,15 @@
 
 /**
  * MDM4U Unit 1 — Counting (Combinatorics): the Fundamental Counting
- * Principle, factorial, permutations, combinations, arrangements with
- * repeated items, circular permutations, and Pascal's triangle. A live
- * scratchpad of independent calculators rather than a single figure, so
- * (unlike Stats) there's no save/embed here.
+ * Principle, factorial, permutations, combinations (with and without
+ * repetition), arrangements with repeated items, circular permutations,
+ * subsets, and Pascal's triangle. A live scratchpad of independent
+ * calculators rather than a single figure, so (unlike Stats) there's no
+ * save/embed here.
  */
 
 import { useMemo, useState } from "react";
-import { factorial, permutation, combination, multisetPermutations, letterCounts, pascalRow, fmtBig, MAX_N } from "../lib/countingMath";
+import { factorial, permutation, combination, permutationWithRepetition, combinationWithRepetition, subsetCount, multisetPermutations, letterCounts, pascalRow, fmtBig, MAX_N } from "../lib/countingMath";
 
 export function Counting() {
   const [fcpInput, setFcpInput] = useState("3, 4, 2");
@@ -23,6 +24,11 @@ export function Counting() {
   const [cR, setCR] = useState(2);
   const [word, setWord] = useState("MISSISSIPPI");
   const [circN, setCircN] = useState(6);
+  const [prN, setPrN] = useState(10);
+  const [prR, setPrR] = useState(4);
+  const [crN, setCrN] = useState(5);
+  const [crR, setCrR] = useState(3);
+  const [subN, setSubN] = useState(4);
   const [pascalRows, setPascalRows] = useState(8);
 
   const counts = useMemo(() => letterCounts(word), [word]);
@@ -67,6 +73,23 @@ export function Counting() {
         <Card title="Circular permutations" formula="(n − 1)!" note="Arrangements around a circle — rotations count as the same arrangement.">
           <NumInput label="n (items around the circle)" value={circN} onChange={setCircN} min={1} max={MAX_N} />
           <Result label={`(${circN} − 1)! =`} value={fmtBig(factorial(Math.max(0, circN - 1)))} />
+        </Card>
+
+        <Card title="Permutations with repetition" formula="nʳ" note="Sequences of length r from n choices, repetition allowed — e.g. 4-digit PINs from 10 digits.">
+          <NumInput label="n (choices per position)" value={prN} onChange={setPrN} min={0} max={MAX_N} />
+          <NumInput label="r (length of the sequence)" value={prR} onChange={setPrR} min={0} max={MAX_N} />
+          <Result label={`${prN}^${prR} =`} value={fmtBig(permutationWithRepetition(prN, prR))} />
+        </Card>
+
+        <Card title="Combinations with repetition" formula="₍ₙ₊ᵣ₋₁₎Cᵣ" note="Choosing r items from n types, order doesn't matter, repetition allowed — e.g. r donuts from n flavors.">
+          <NumInput label="n (types)" value={crN} onChange={setCrN} min={0} max={MAX_N} />
+          <NumInput label="r (items chosen)" value={crR} onChange={setCrR} min={0} max={MAX_N} />
+          <Result label={`(${crN}+${crR}−1)C${crR} =`} value={fmtBig(combinationWithRepetition(crN, crR))} />
+        </Card>
+
+        <Card title="Subsets" formula="2ⁿ" note="Every element is either in a subset or not — includes ∅ and the full set. (A Pascal's-triangle row also sums to 2ⁿ.)">
+          <NumInput label="n" value={subN} onChange={setSubN} min={0} max={MAX_N} />
+          <Result label={`2^${subN} =`} value={fmtBig(subsetCount(subN))} />
         </Card>
       </div>
 
