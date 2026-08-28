@@ -118,6 +118,7 @@ export function Calculator({ initialData, initialState, initialId, embed = false
   const [showGrid, setShowGrid] = useState(true);
   const [showAxes, setShowAxes] = useState(true);
   const [showNums, setShowNums] = useState(true);
+  const [shadeIntersectionOnly, setShadeIntersectionOnly] = useState(false);
   const [stepX, setStepX] = useState("auto");
   const [stepY, setStepY] = useState("auto");
   const [title, setTitle] = useState("");
@@ -152,7 +153,7 @@ export function Calculator({ initialData, initialState, initialId, embed = false
     if (Array.isArray(d.sliders)) setSliders(d.sliders.map((s: any) => ({ anim: false, speed: 4, ...s })));
     if (Array.isArray(d.labels)) setLabels(d.labels);
     if (Array.isArray(d.tables)) setTables(d.tables);
-    if (d.settings) { const s = d.settings; setShowGrid(s.showGrid ?? true); setShowAxes(s.showAxes ?? true); setShowNums(s.showNums ?? true); setStepX(s.stepX ?? "auto"); setStepY(s.stepY ?? "auto"); setTitle(s.title ?? ""); }
+    if (d.settings) { const s = d.settings; setShowGrid(s.showGrid ?? true); setShowAxes(s.showAxes ?? true); setShowNums(s.showNums ?? true); setStepX(s.stepX ?? "auto"); setStepY(s.stepY ?? "auto"); setTitle(s.title ?? ""); setShadeIntersectionOnly(s.shadeIntersectionOnly ?? false); }
     if (d.view) {
       // Back-compat: older figures saved a single uniform `zoom`.
       const z = d.view.zoom ?? 40;
@@ -174,7 +175,7 @@ export function Calculator({ initialData, initialState, initialId, embed = false
       fns, sliders, labels, tables,
       images: images.map((i) => ({ id: i.id, src: i.src, x: i.x, y: i.y, width: i.width, rotation: i.rotation, opacity: i.opacity, visible: i.visible })),
       view: viewRef.current,
-      settings: { showGrid, showAxes, showNums, stepX, stepY, title },
+      settings: { showGrid, showAxes, showNums, stepX, stepY, title, shadeIntersectionOnly },
     };
   }
   function flash(m: string) { setToast(m); setTimeout(() => setToast(""), 2200); }
@@ -252,6 +253,13 @@ export function Calculator({ initialData, initialState, initialId, embed = false
     }
 
     // curves
+    // How many visible cartesian functions are inequalities (shaded regions) —
+    // "shade only the overlap" only makes sense with 2+ of them; with 0-1 it's
+    // identical to shading each one normally.
+    const res = 6; const cols = Math.ceil(w / res), rows = Math.ceil(h / res);
+    const inequalityCount = fns.filter((f) => f.visible && f.kind === "cartesian" && /(<=|>=|<|>)/.test(f.expr)).length;
+    const combineShading = shadeIntersectionOnly && inequalityCount >= 2;
+    const pendingFills: { shade: number; val: Float64Array; color: string }[] = [];
     for (const f of fns) {
       if (!f.visible) continue;
       ctx.strokeStyle = f.color; ctx.lineWidth = f.thickness;
@@ -301,7 +309,6 @@ export function Calculator({ initialData, initialState, initialId, embed = false
         const fn = safeCompile(e);
         const dMin = lim(f.dMin, -Infinity), dMax = lim(f.dMax, Infinity);
         const rMin = lim(f.rMin, -Infinity), rMax = lim(f.rMax, Infinity);
-        const res = 6; const cols = Math.ceil(w / res), rows = Math.ceil(h / res);
         const val = new Float64Array((rows + 1) * (cols + 1));
         for (let j = 0; j <= rows; j++) for (let i = 0; i <= cols; i++) {
           const m = toMath(i * res, j * res);
@@ -316,7 +323,9 @@ export function Calculator({ initialData, initialState, initialId, embed = false
         // translucent overlap at every internal grid line into a visible plaid
         // pattern, and only sampling one corner per cell looks blockier than the
         // interpolated stroke.
-        if (shade !== 0) {
+        if (shade !== 0 && combineShading) {
+          pendingFills.push({ shade, val, color: f.color });
+        } else if (shade !== 0) {
           const isIn = (v: number) => (shade === 1 ? v > 0 : v < 0);
           ctx.fillStyle = rgba(f.color, 0.16);
           ctx.beginPath();
@@ -364,6 +373,58 @@ export function Calculator({ initialData, initialState, initialId, embed = false
         ctx.stroke();
         ctx.setLineDash([]);
       }
+    }
+
+    // "Shade only the overlap": fill the region where every deferred
+    // inequality holds at once, as a single pass after all curves are drawn
+    // — so it sits evenly over every boundary line instead of only covering
+    // whichever curves were drawn before it, and doesn't need its own
+    // individually-shaded regions to be visible at all.
+    if (combineShading && pendingFills.length >= 2) {
+      const cornerIn = (idx: number) => {
+        for (const g of pendingFills) {
+          const v = g.val[idx];
+          if (!(g.shade === 1 ? v > 0 : v < 0)) return false; // NaN also fails both comparisons
+        }
+        return true;
+      };
+      let r = 0, gSum = 0, b = 0;
+      for (const g of pendingFills) {
+        const hex = g.color.replace("#", "");
+        const f6 = hex.length === 3 ? hex.split("").map((c) => c + c).join("") : hex;
+        const n = parseInt(f6, 16);
+        r += (n >> 16) & 255; gSum += (n >> 8) & 255; b += n & 255;
+      }
+      const nColors = pendingFills.length;
+      ctx.fillStyle = `rgba(${Math.round(r / nColors)}, ${Math.round(gSum / nColors)}, ${Math.round(b / nColors)}, 0.22)`;
+      ctx.beginPath();
+      for (let j = 0; j < rows; j++) for (let i = 0; i < cols; i++) {
+        const x0 = i * res, x1 = (i + 1) * res, y0 = j * res, y1 = (j + 1) * res;
+        const idx0 = j * (cols + 1) + i, idx1 = idx0 + 1, idx2 = idx0 + (cols + 1) + 1, idx3 = idx0 + (cols + 1);
+        const in0 = cornerIn(idx0), in1 = cornerIn(idx1), in2 = cornerIn(idx2), in3 = cornerIn(idx3);
+        if (in0 && in1 && in2 && in3) { ctx.rect(x0, y0, res, res); continue; }
+        if (!in0 && !in1 && !in2 && !in3) continue;
+        const cx = [x0, x1, x1, x0], cy = [y0, y0, y1, y1], cin = [in0, in1, in2, in3], idxs = [idx0, idx1, idx2, idx3];
+        let started = false;
+        for (let k = 0; k < 4; k++) {
+          const k2 = (k + 1) % 4;
+          if (cin[k]) { if (started) ctx.lineTo(cx[k], cy[k]); else { ctx.moveTo(cx[k], cy[k]); started = true; } }
+          if (cin[k] !== cin[k2]) {
+            // The combined boundary is made of pieces of each contributing
+            // curve's own boundary — use whichever curve actually flips sign
+            // across this edge to place the crossing point.
+            let t = 0.5;
+            for (const g of pendingFills) {
+              const va = g.val[idxs[k]], vb = g.val[idxs[k2]];
+              if (!isNaN(va) && !isNaN(vb) && va !== vb && va * vb <= 0) { t = Math.abs(va) / (Math.abs(va) + Math.abs(vb)); break; }
+            }
+            const px = cx[k] + t * (cx[k2] - cx[k]), py = cy[k] + t * (cy[k2] - cy[k]);
+            if (started) ctx.lineTo(px, py); else { ctx.moveTo(px, py); started = true; }
+          }
+        }
+        if (started) ctx.closePath();
+      }
+      ctx.fill();
     }
 
     // A label's x/y may be a number or an expression in the slider variables,
@@ -422,7 +483,7 @@ export function Calculator({ initialData, initialState, initialId, embed = false
       }
     }
     if (title) { ctx.fillStyle = "#1e293b"; ctx.font = "bold 20px Fraunces, serif"; ctx.textAlign = "center"; ctx.textBaseline = "top"; ctx.fillText(title, w / 2, 14); }
-  }, [fns, sliders, labels, tables, images, showGrid, showAxes, showNums, stepX, stepY, title]);
+  }, [fns, sliders, labels, tables, images, showGrid, showAxes, showNums, stepX, stepY, title, shadeIntersectionOnly]);
 
   useEffect(() => { draw(); }, [draw]);
   useEffect(() => {
@@ -751,6 +812,7 @@ export function Calculator({ initialData, initialState, initialId, embed = false
             <label style={{ flex: 1, fontSize: 12, color: "#475569" }}>y-grid<select value={stepY} onChange={(e) => setStepY(e.target.value)} style={selStyle}>{GRID_OPTS.map((o) => <option key={o} value={o}>{o === "pi" ? "π" : o}</option>)}</select></label>
           </div>
           <Check label="Axes" v={showAxes} on={setShowAxes} /><Check label="Grid" v={showGrid} on={setShowGrid} /><Check label="Numbers" v={showNums} on={setShowNums} />
+          <Check label="Shade overlap only" v={shadeIntersectionOnly} on={setShadeIntersectionOnly} />
         </div>
 
         {/* export / save / embed */}
