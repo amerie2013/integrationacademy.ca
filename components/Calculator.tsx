@@ -110,7 +110,7 @@ const newFn = (i: number): Fn => ({ id: uid("f"), kind: "cartesian", expr: "y = 
 
 export function Calculator({ initialData, initialState, initialId, embed = false }: { initialData?: string; initialState?: any; initialId?: string; embed?: boolean }) {
   const [fns, setFns] = useState<Fn[]>([{ ...newFn(0), expr: "y = a*x^2", color: COLORS[0] }]);
-  const [sliders, setSliders] = useState<Slider[]>([{ id: uid("s"), name: "a", value: 1, min: -10, max: 10, step: 0.1, anim: false, speed: 1 }]);
+  const [sliders, setSliders] = useState<Slider[]>([{ id: uid("s"), name: "a", value: 1, min: -10, max: 10, step: 0.1, anim: false, speed: 4 }]);
   const [labels, setLabels] = useState<Label[]>([]);
   const [tables, setTables] = useState<Tbl[]>([]);
   const [images, setImages] = useState<Img[]>([]);
@@ -131,6 +131,7 @@ export function Calculator({ initialData, initialState, initialId, embed = false
   const viewRef = useRef({ zoomX: 40, zoomY: 40, ox: 0, oy: 0 });
   const sizeRef = useRef({ w: 600, h: 480 });
   const dragRef = useRef<{ x: number; y: number } | null>(null);
+  const sliderRawRef = useRef<Map<string, number>>(new Map()); // unsnapped position per slider, so speed stays continuous even though the displayed value snaps to `step`
 
   // ── load shared/saved data ─────────────────────────────────
   useEffect(() => {
@@ -147,7 +148,7 @@ export function Calculator({ initialData, initialState, initialId, embed = false
 
   function applyState(d: any) {
     if (Array.isArray(d.fns)) setFns(d.fns.map((f: any, i: number) => ({ ...newFn(i), ...f })));
-    if (Array.isArray(d.sliders)) setSliders(d.sliders.map((s: any) => ({ anim: false, speed: 1, ...s })));
+    if (Array.isArray(d.sliders)) setSliders(d.sliders.map((s: any) => ({ anim: false, speed: 4, ...s })));
     if (Array.isArray(d.labels)) setLabels(d.labels);
     if (Array.isArray(d.tables)) setTables(d.tables);
     if (d.settings) { const s = d.settings; setShowGrid(s.showGrid ?? true); setShowAxes(s.showAxes ?? true); setShowNums(s.showNums ?? true); setStepX(s.stepX ?? "auto"); setStepY(s.stepY ?? "auto"); setTitle(s.title ?? ""); }
@@ -403,23 +404,36 @@ export function Calculator({ initialData, initialState, initialId, embed = false
   }, [draw]);
 
   // ── animation loop ─────────────────────────────────────────
+  // Depend only on whether *any* slider is animating, not on `sliders`
+  // itself — the tick below calls setSliders every frame, so depending on
+  // the array would tear down and rebuild this effect (and its rAF chain)
+  // on every single frame, causing stutter and uneven speed.
+  const anySliderAnimating = sliders.some((s) => s.anim);
   useEffect(() => {
-    if (!sliders.some((s) => s.anim)) return;
+    if (!anySliderAnimating) return;
+    for (const s of sliders) sliderRawRef.current.set(s.id, s.value); // resume from wherever each slider currently sits (incl. a manual drag while paused)
     let raf = 0; let last = performance.now();
     const tick = (now: number) => {
       const dt = Math.min(0.05, (now - last) / 1000); last = now;
       setSliders((list) => list.map((s) => {
-        if (!s.anim) return s;
-        let v = s.value + s.speed * dt; let sp = s.speed;
-        if (v >= s.max) { v = s.max; sp = -Math.abs(s.speed); }
-        else if (v <= s.min) { v = s.min; sp = Math.abs(s.speed); }
-        return { ...s, value: Math.round(v * 1000) / 1000, speed: sp };
+        if (!s.anim) { sliderRawRef.current.set(s.id, s.value); return s; }
+        // Integrate an unsnapped position at the full `speed`, then snap the
+        // *displayed* value to the nearest step — so the animation actually
+        // visits -10, -9.5, -9, … for step=0.5 instead of sweeping smoothly
+        // past every value in between, while overall pace stays the same.
+        let raw = (sliderRawRef.current.get(s.id) ?? s.value) + s.speed * dt; let sp = s.speed;
+        if (raw >= s.max) { raw = s.max; sp = -Math.abs(s.speed); }
+        else if (raw <= s.min) { raw = s.min; sp = Math.abs(s.speed); }
+        sliderRawRef.current.set(s.id, raw);
+        const snapped = s.step > 0 ? Math.min(s.max, Math.max(s.min, s.min + Math.round((raw - s.min) / s.step) * s.step)) : raw;
+        return { ...s, value: Math.round(snapped * 1000) / 1000, speed: sp };
       }));
       raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
-  }, [sliders]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [anySliderAnimating]);
 
   // ── interaction ────────────────────────────────────────────
   function onDown(e: React.PointerEvent) { (e.target as HTMLElement).setPointerCapture(e.pointerId); dragRef.current = { x: e.clientX, y: e.clientY }; }
@@ -560,7 +574,7 @@ export function Calculator({ initialData, initialState, initialId, embed = false
           <AddBtn color="#2563eb" onClick={() => setFns((l) => [...l, newFn(l.length)])}>+ Function</AddBtn>
           <AddBtn color="#0ea5e9" onClick={() => setFns((l) => [...l, { ...newFn(l.length), kind: "parametric", expr: "cos(t)", exprY: "sin(t)" }])}>+ Parametric</AddBtn>
           <AddBtn color="#7c3aed" onClick={() => setFns((l) => [...l, { ...newFn(l.length), kind: "polar", expr: "1 + cos(t)" }])}>+ Polar</AddBtn>
-          <AddBtn color="#1b7a44" onClick={() => setSliders((l) => [...l, { id: uid("s"), name: nextName(l), value: 1, min: -10, max: 10, step: 0.1, anim: false, speed: 1 }])}>+ Slider</AddBtn>
+          <AddBtn color="#1b7a44" onClick={() => setSliders((l) => [...l, { id: uid("s"), name: nextName(l), value: 1, min: -10, max: 10, step: 0.1, anim: false, speed: 4 }])}>+ Slider</AddBtn>
           <AddBtn color="#e69138" onClick={() => setTables((l) => [...l, { id: uid("t"), name: "Table", color: "#e69138", shape: "circle", visible: true, points: [{ x: "1", y: "1" }, { x: "2", y: "4" }] }])}>+ Table</AddBtn>
           <AddBtn color="#0d9488" onClick={() => setLabels((l) => [...l, { id: uid("l"), text: "Point", x: 1, y: 1, color: "#0d9488", visible: true, showPoint: true, angle: 0, pos: "above", fontSize: DEFAULT_LABEL_SIZE }])}>+ Text/Point</AddBtn>
           <label style={{ gridColumn: "1 / -1", background: "#c2185b", color: "#fff", padding: "7px", borderRadius: 8, fontWeight: 700, fontSize: 12, textAlign: "center", cursor: "pointer" }}>+ Image<input type="file" accept="image/*" style={{ display: "none" }} onChange={onUpload} /></label>
