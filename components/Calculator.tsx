@@ -133,8 +133,17 @@ export function Calculator({ initialData, initialState, initialId, embed = false
   const viewRef = useRef({ zoomX: 40, zoomY: 40, ox: 0, oy: 0 });
   const sizeRef = useRef({ w: 600, h: 480 });
   const dragRef = useRef<{ x: number; y: number } | null>(null);
+  const logoRef = useRef<HTMLImageElement | null>(null);
+  const [logoReady, setLogoReady] = useState(false); // trigger one redraw once the watermark image has loaded
   const sliderRawRef = useRef<Map<string, number>>(new Map()); // unsnapped position per slider, so speed stays continuous even though the displayed value snaps to `step`
   const sliderDirRef = useRef<Map<string, 1 | -1>>(new Map()); // ping-pong direction per slider, kept out of state so the `speed` field the user typed doesn't flip sign live on screen
+
+  // ── watermark ────────────────────────────────────────────────
+  useEffect(() => {
+    const img = new Image();
+    img.onload = () => { logoRef.current = img; setLogoReady(true); };
+    img.src = "/Logo.png";
+  }, []);
 
   // ── load shared/saved data ─────────────────────────────────
   useEffect(() => {
@@ -207,6 +216,14 @@ export function Calculator({ initialData, initialState, initialId, embed = false
     if (canvas.width !== Math.round(w * dpr) || canvas.height !== Math.round(h * dpr)) { canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr); }
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.clearRect(0, 0, w, h); ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, w, h);
+
+    const logo = logoReady ? logoRef.current : null;
+    if (logo) {
+      const iw = Math.min(w, h) * 0.5, ih = iw * (logo.naturalHeight / logo.naturalWidth);
+      ctx.save(); ctx.globalAlpha = 0.08;
+      ctx.drawImage(logo, w / 2 - iw / 2, h / 2 - ih / 2, iw, ih);
+      ctx.restore();
+    }
 
     const tl = toMath(0, 0), br = toMath(w, h);
     const xMin = tl.x, xMax = br.x, yMin = br.y, yMax = tl.y;
@@ -484,7 +501,7 @@ export function Calculator({ initialData, initialState, initialId, embed = false
       }
     }
     if (title) { ctx.fillStyle = "#1e293b"; ctx.font = "bold 20px Fraunces, serif"; ctx.textAlign = "center"; ctx.textBaseline = "top"; ctx.fillText(title, w / 2, 14); }
-  }, [fns, sliders, labels, tables, images, showGrid, showAxes, showNums, stepX, stepY, title, shadeIntersectionOnly, numSize]);
+  }, [fns, sliders, labels, tables, images, showGrid, showAxes, showNums, stepX, stepY, title, shadeIntersectionOnly, numSize, logoReady]);
 
   useEffect(() => { draw(); }, [draw]);
   useEffect(() => {
