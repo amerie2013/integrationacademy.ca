@@ -119,6 +119,7 @@ export function Calculator({ initialData, initialState, initialId, embed = false
   const [showAxes, setShowAxes] = useState(true);
   const [showNums, setShowNums] = useState(true);
   const [shadeIntersectionOnly, setShadeIntersectionOnly] = useState(false);
+  const [numSize, setNumSize] = useState(11);
   const [stepX, setStepX] = useState("auto");
   const [stepY, setStepY] = useState("auto");
   const [title, setTitle] = useState("");
@@ -153,7 +154,7 @@ export function Calculator({ initialData, initialState, initialId, embed = false
     if (Array.isArray(d.sliders)) setSliders(d.sliders.map((s: any) => ({ anim: false, speed: 4, ...s })));
     if (Array.isArray(d.labels)) setLabels(d.labels);
     if (Array.isArray(d.tables)) setTables(d.tables);
-    if (d.settings) { const s = d.settings; setShowGrid(s.showGrid ?? true); setShowAxes(s.showAxes ?? true); setShowNums(s.showNums ?? true); setStepX(s.stepX ?? "auto"); setStepY(s.stepY ?? "auto"); setTitle(s.title ?? ""); setShadeIntersectionOnly(s.shadeIntersectionOnly ?? false); }
+    if (d.settings) { const s = d.settings; setShowGrid(s.showGrid ?? true); setShowAxes(s.showAxes ?? true); setShowNums(s.showNums ?? true); setStepX(s.stepX ?? "auto"); setStepY(s.stepY ?? "auto"); setTitle(s.title ?? ""); setShadeIntersectionOnly(s.shadeIntersectionOnly ?? false); setNumSize(s.numSize ?? 11); }
     if (d.view) {
       // Back-compat: older figures saved a single uniform `zoom`.
       const z = d.view.zoom ?? 40;
@@ -175,7 +176,7 @@ export function Calculator({ initialData, initialState, initialId, embed = false
       fns, sliders, labels, tables,
       images: images.map((i) => ({ id: i.id, src: i.src, x: i.x, y: i.y, width: i.width, rotation: i.rotation, opacity: i.opacity, visible: i.visible })),
       view: viewRef.current,
-      settings: { showGrid, showAxes, showNums, stepX, stepY, title, shadeIntersectionOnly },
+      settings: { showGrid, showAxes, showNums, stepX, stepY, title, shadeIntersectionOnly, numSize },
     };
   }
   function flash(m: string) { setToast(m); setTimeout(() => setToast(""), 2200); }
@@ -221,7 +222,7 @@ export function Calculator({ initialData, initialState, initialId, embed = false
     }
     if (showAxes) { ctx.lineWidth = 1.5; ctx.strokeStyle = "#334155"; ctx.beginPath(); ctx.moveTo(0, o.py); ctx.lineTo(w, o.py); ctx.moveTo(o.px, 0); ctx.lineTo(o.px, h); ctx.stroke(); }
     if (showNums) {
-      ctx.fillStyle = "#94a3b8"; ctx.font = "11px Inter, system-ui, sans-serif"; ctx.textAlign = "center"; ctx.textBaseline = "top";
+      ctx.fillStyle = "#94a3b8"; ctx.font = `${numSize}px Inter, system-ui, sans-serif`; ctx.textAlign = "center"; ctx.textBaseline = "top";
       for (let x = Math.floor(xMin / sX) * sX; x <= xMax; x += sX) { if (Math.abs(x) < sX / 2) continue; const p = toPx(x, 0); ctx.fillText(fmt(x), p.px, Math.min(Math.max(o.py + 3, 2), h - 14)); }
       ctx.textAlign = "right"; ctx.textBaseline = "middle";
       for (let y = Math.floor(yMin / sY) * sY; y <= yMax; y += sY) { if (Math.abs(y) < sY / 2) continue; const p = toPx(0, y); ctx.fillText(fmt(y), Math.min(Math.max(o.px - 6, 26), w - 2), p.py); }
@@ -483,7 +484,7 @@ export function Calculator({ initialData, initialState, initialId, embed = false
       }
     }
     if (title) { ctx.fillStyle = "#1e293b"; ctx.font = "bold 20px Fraunces, serif"; ctx.textAlign = "center"; ctx.textBaseline = "top"; ctx.fillText(title, w / 2, 14); }
-  }, [fns, sliders, labels, tables, images, showGrid, showAxes, showNums, stepX, stepY, title, shadeIntersectionOnly]);
+  }, [fns, sliders, labels, tables, images, showGrid, showAxes, showNums, stepX, stepY, title, shadeIntersectionOnly, numSize]);
 
   useEffect(() => { draw(); }, [draw]);
   useEffect(() => {
@@ -813,6 +814,9 @@ export function Calculator({ initialData, initialState, initialId, embed = false
           </div>
           <Check label="Axes" v={showAxes} on={setShowAxes} /><Check label="Grid" v={showGrid} on={setShowGrid} /><Check label="Numbers" v={showNums} on={setShowNums} />
           <Check label="Shade overlap only" v={shadeIntersectionOnly} on={setShadeIntersectionOnly} />
+          <div style={{ display: "flex", gap: 8, marginTop: 6 }}>
+            <NumIn label="number size" v={numSize} on={setNumSize} />
+          </div>
         </div>
 
         {/* export / save / embed */}
