@@ -2,6 +2,7 @@
 
 import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import { SiteHeader } from "../../../components/SiteHeader";
 import { Calculator } from "../../../components/Calculator";
 import { supabase } from "../../../lib/supabase";
 
@@ -33,6 +34,7 @@ function GraphTool() {
   }
   return (
     <main style={{ height: "100vh", display: "flex", flexDirection: "column" }}>
+      <SiteHeader />
       <div style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 14px", borderBottom: "1px solid #e2e8f0", background: "#f8faff" }}>
         <span style={{ fontWeight: 800, color: "#1f3a4b" }}>Math Workspace</span>
         <span style={{ fontSize: 13, color: "#94a3b8" }}>Functions, parametric, polar · sliders &amp; animation · save / embed</span>
