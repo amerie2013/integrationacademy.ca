@@ -6,13 +6,15 @@ import { Stats } from "../../../components/Stats";
 import { Counting } from "../../../components/Counting";
 import { Probability } from "../../../components/Probability";
 import { Distributions } from "../../../components/Distributions";
+import { Regression } from "../../../components/Regression";
 
-type Mode = "stats" | "counting" | "probability" | "distributions";
+type Mode = "stats" | "counting" | "probability" | "distributions" | "regression";
 const MODES: { key: Mode; label: string }[] = [
   { key: "stats", label: "1-Variable Stats" },
   { key: "counting", label: "Counting" },
   { key: "probability", label: "Probability" },
   { key: "distributions", label: "Distributions" },
+  { key: "regression", label: "2-Variable Stats" },
 ];
 
 /**
@@ -71,6 +73,7 @@ function StatsTool() {
         {mode === "counting" && <Counting />}
         {mode === "probability" && <Probability />}
         {mode === "distributions" && <Distributions />}
+        {mode === "regression" && <Regression />}
       </div>
     </main>
   );
