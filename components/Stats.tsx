@@ -10,7 +10,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { supabase } from "../lib/supabase";
-import { parseNumbers, summarize, histogramBins, autoBinWidth, type Summary } from "../lib/statsMath";
+import { parseNumbers, summarize, histogramBins, autoBinWidth, percentileRank, percentileValue, type Summary } from "../lib/statsMath";
 
 const COLORS = ["#ef4444", "#3b82f6", "#10b981", "#f59e0b", "#8b5cf6", "#ec4899", "#0ea5e9", "#84cc16"];
 const uid = (p: string) => `${p}${Math.random().toString(36).slice(2, 9)}`;
@@ -74,11 +74,19 @@ export function Stats({ initialData, initialState, initialId, embed = false }: {
   const [showHistogram, setShowHistogram] = useState(initial?.showHistogram ?? true);
   const [showBoxplot, setShowBoxplot] = useState(initial?.showBoxplot ?? true);
   const [selectedStats, setSelectedStats] = useState<StatKey[]>(initial?.selectedStats?.length ? initial.selectedStats : DEFAULT_STATS);
+  const [percentileX, setPercentileX] = useState("20"); // live lookup tool, not part of the saved figure
+  const [percentileP, setPercentileP] = useState("50");
   // Same initial value on server and client (branching on `typeof window` here
   // caused a hydration mismatch whenever the client's first render disagreed
   // with the server's), then a client-only effect narrows it for small screens.
   const [panelOpen, setPanelOpen] = useState(true);
-  useEffect(() => { if (window.innerWidth <= 760) setPanelOpen(false); }, []);
+  useEffect(() => {
+    // A one-time read of the real browser width post-mount — there's no
+    // external-system callback to hang this off, so a direct setState here
+    // is the correct (not just tolerated) use of an effect.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    if (window.innerWidth <= 760) setPanelOpen(false);
+  }, []);
   const [toast, setToast] = useState("");
 
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -269,6 +277,33 @@ export function Stats({ initialData, initialState, initialId, embed = false }: {
           </div>
         );
       })}
+
+      <div style={{ background: "#fff", border: "1px solid #e2e8f0", borderRadius: 12, padding: 12, marginBottom: 12 }}>
+        <div style={{ fontWeight: 800, fontSize: 14, color: "#0f172a", marginBottom: 8 }}>Percentile Lookup</div>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+          <div>
+            <label style={{ display: "block", fontSize: 12, color: "#475569", marginBottom: 6 }}>
+              Percentile rank of value
+              <input value={percentileX} onChange={(e) => setPercentileX(e.target.value)} style={{ width: "100%", padding: "6px 8px", border: "1px solid #cbd5e1", borderRadius: 6, fontSize: 13, marginTop: 2, boxSizing: "border-box" }} />
+            </label>
+            <div style={{ fontSize: 11, color: "#94a3b8", marginBottom: 6 }}>% of the data at or below this value.</div>
+            {Number.isFinite(parseFloat(percentileX)) && rows.map((r) => (
+              <div key={r.d.id} style={{ fontSize: 13, color: r.d.color, fontWeight: 700 }}>{r.d.name}: {fmt(percentileRank(r.values, parseFloat(percentileX)))}th percentile</div>
+            ))}
+          </div>
+          <div>
+            <label style={{ display: "block", fontSize: 12, color: "#475569", marginBottom: 6 }}>
+              Value at percentile (0–100)
+              <input value={percentileP} onChange={(e) => setPercentileP(e.target.value)} style={{ width: "100%", padding: "6px 8px", border: "1px solid #cbd5e1", borderRadius: 6, fontSize: 13, marginTop: 2, boxSizing: "border-box" }} />
+            </label>
+            <div style={{ fontSize: 11, color: "#94a3b8", marginBottom: 6 }}>Linear interpolation between ranks (differs slightly from the exclusive-method Q1/Q3 above at the 25th/75th).</div>
+            {Number.isFinite(parseFloat(percentileP)) && rows.map((r) => (
+              <div key={r.d.id} style={{ fontSize: 13, color: r.d.color, fontWeight: 700 }}>{r.d.name}: {fmt(percentileValue(r.values, parseFloat(percentileP)))}</div>
+            ))}
+          </div>
+        </div>
+      </div>
+
       <div style={{ fontSize: 11, color: "#94a3b8" }}>Q1/Q3 use the exclusive median-of-halves method (the convention TI-83/84 calculators use for 1-Var Stats). Box-plot whiskers cap at 1.5×IQR; points beyond that are plotted as outliers.</div>
     </div>
   );

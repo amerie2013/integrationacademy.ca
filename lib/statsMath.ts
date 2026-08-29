@@ -89,6 +89,38 @@ export function summarize(values: number[]): Summary | null {
   };
 }
 
+/**
+ * Percentile rank of x within values: the % of the data at or below x —
+ * "80% of the data lie at or below that value" is the textbook definition
+ * of the 80th percentile. Distinct from Q1/Q3 above (which answer "what
+ * value splits the data at 25%/75%"); this answers the reverse question,
+ * "where does this value sit in the data."
+ */
+export function percentileRank(values: number[], x: number): number {
+  if (values.length === 0) return NaN;
+  const countLE = values.filter((v) => v <= x).length;
+  return (countLE / values.length) * 100;
+}
+
+/**
+ * The value at the p-th percentile (0–100), via linear interpolation
+ * between the two nearest ranks (the standard general-purpose method —
+ * matches Excel's PERCENTILE.INC / numpy's default). This is a different
+ * method than Q1/Q3's exclusive median-of-halves above, so percentileValue
+ * at p=25 or p=75 won't always exactly match summarize()'s q1/q3 — both are
+ * legitimate conventions, they just split ties differently.
+ */
+export function percentileValue(values: number[], p: number): number {
+  if (values.length === 0) return NaN;
+  const sorted = [...values].sort((a, b) => a - b);
+  const n = sorted.length;
+  if (n === 1) return sorted[0];
+  const rank = (p / 100) * (n - 1);
+  const lo = Math.floor(rank), hi = Math.ceil(rank);
+  if (lo === hi) return sorted[lo];
+  return sorted[lo] + (rank - lo) * (sorted[hi] - sorted[lo]);
+}
+
 export type Bin = { x0: number; x1: number; count: number };
 
 /** Even-width bins spanning [min, max] (or the given range), for a histogram. */
