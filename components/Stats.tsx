@@ -278,32 +278,6 @@ export function Stats({ initialData, initialState, initialId, embed = false }: {
         );
       })}
 
-      <div style={{ background: "#fff", border: "1px solid #e2e8f0", borderRadius: 12, padding: 12, marginBottom: 12 }}>
-        <div style={{ fontWeight: 800, fontSize: 14, color: "#0f172a", marginBottom: 8 }}>Percentile Lookup</div>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
-          <div>
-            <label style={{ display: "block", fontSize: 12, color: "#475569", marginBottom: 6 }}>
-              Percentile rank of value
-              <input value={percentileX} onChange={(e) => setPercentileX(e.target.value)} style={{ width: "100%", padding: "6px 8px", border: "1px solid #cbd5e1", borderRadius: 6, fontSize: 13, marginTop: 2, boxSizing: "border-box" }} />
-            </label>
-            <div style={{ fontSize: 11, color: "#94a3b8", marginBottom: 6 }}>% of the data at or below this value.</div>
-            {Number.isFinite(parseFloat(percentileX)) && rows.map((r) => (
-              <div key={r.d.id} style={{ fontSize: 13, color: r.d.color, fontWeight: 700 }}>{r.d.name}: {fmt(percentileRank(r.values, parseFloat(percentileX)))}th percentile</div>
-            ))}
-          </div>
-          <div>
-            <label style={{ display: "block", fontSize: 12, color: "#475569", marginBottom: 6 }}>
-              Value at percentile (0–100)
-              <input value={percentileP} onChange={(e) => setPercentileP(e.target.value)} style={{ width: "100%", padding: "6px 8px", border: "1px solid #cbd5e1", borderRadius: 6, fontSize: 13, marginTop: 2, boxSizing: "border-box" }} />
-            </label>
-            <div style={{ fontSize: 11, color: "#94a3b8", marginBottom: 6 }}>Linear interpolation between ranks (differs slightly from the exclusive-method Q1/Q3 above at the 25th/75th).</div>
-            {Number.isFinite(parseFloat(percentileP)) && rows.map((r) => (
-              <div key={r.d.id} style={{ fontSize: 13, color: r.d.color, fontWeight: 700 }}>{r.d.name}: {fmt(percentileValue(r.values, parseFloat(percentileP)))}</div>
-            ))}
-          </div>
-        </div>
-      </div>
-
       <div style={{ fontSize: 11, color: "#94a3b8" }}>Q1/Q3 use the exclusive median-of-halves method (the convention TI-83/84 calculators use for 1-Var Stats). Box-plot whiskers cap at 1.5×IQR; points beyond that are plotted as outliers.</div>
     </div>
   );
@@ -347,6 +321,35 @@ export function Stats({ initialData, initialState, initialId, embed = false }: {
                 <CheckRow key={d.key} label={d.label} v={selectedStats.includes(d.key)} on={() => toggleStat(d.key)} />
               ))}
             </div>
+          </div>
+
+          <div style={{ marginTop: 12, background: "#fff", border: "1px solid #e2e8f0", borderRadius: 12, padding: 10 }}>
+            <div style={{ fontSize: 12, fontWeight: 700, color: "#475569", marginBottom: 8 }}>Percentile Lookup</div>
+
+            <label style={{ display: "block", fontSize: 12, color: "#475569", marginBottom: 6 }}>
+              Value → percentile
+              <input value={percentileX} onChange={(e) => setPercentileX(e.target.value)} placeholder="e.g. 20" style={{ width: "100%", padding: "4px 6px", border: "1px solid #cbd5e1", borderRadius: 6, fontSize: 12, marginTop: 2, boxSizing: "border-box" }} />
+            </label>
+            {Number.isFinite(parseFloat(percentileX)) && rows.length > 0 && (
+              <div style={{ marginBottom: 8 }}>
+                {rows.map((r) => (
+                  <div key={r.d.id} style={{ fontSize: 12, color: r.d.color, fontWeight: 700 }}>{r.d.name}: {fmt(percentileRank(r.values, parseFloat(percentileX)))}th percentile</div>
+                ))}
+              </div>
+            )}
+
+            <label style={{ display: "block", fontSize: 12, color: "#475569", marginBottom: 6 }}>
+              Percentile (0–100) → value
+              <input value={percentileP} onChange={(e) => setPercentileP(e.target.value)} placeholder="e.g. 90" style={{ width: "100%", padding: "4px 6px", border: "1px solid #cbd5e1", borderRadius: 6, fontSize: 12, marginTop: 2, boxSizing: "border-box" }} />
+            </label>
+            {Number.isFinite(parseFloat(percentileP)) && rows.length > 0 && (
+              <div style={{ marginBottom: 4 }}>
+                {rows.map((r) => (
+                  <div key={r.d.id} style={{ fontSize: 12, color: r.d.color, fontWeight: 700 }}>{r.d.name}: {fmt(percentileValue(r.values, parseFloat(percentileP)))}</div>
+                ))}
+              </div>
+            )}
+            <div style={{ fontSize: 10.5, color: "#94a3b8" }}>Uses linear interpolation — differs slightly from the exclusive-method Q1/Q3 above at the 25th/75th.</div>
           </div>
 
           <div style={{ marginTop: 12, display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6 }}>
