@@ -74,7 +74,11 @@ export function Stats({ initialData, initialState, initialId, embed = false }: {
   const [showHistogram, setShowHistogram] = useState(initial?.showHistogram ?? true);
   const [showBoxplot, setShowBoxplot] = useState(initial?.showBoxplot ?? true);
   const [selectedStats, setSelectedStats] = useState<StatKey[]>(initial?.selectedStats?.length ? initial.selectedStats : DEFAULT_STATS);
-  const [panelOpen, setPanelOpen] = useState(() => typeof window === "undefined" || window.innerWidth > 760);
+  // Same initial value on server and client (branching on `typeof window` here
+  // caused a hydration mismatch whenever the client's first render disagreed
+  // with the server's), then a client-only effect narrows it for small screens.
+  const [panelOpen, setPanelOpen] = useState(true);
+  useEffect(() => { if (window.innerWidth <= 760) setPanelOpen(false); }, []);
   const [toast, setToast] = useState("");
 
   const wrapRef = useRef<HTMLDivElement>(null);
