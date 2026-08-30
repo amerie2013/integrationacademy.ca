@@ -94,6 +94,39 @@ type Shape = "circle" | "square" | "triangle";
 type Tbl = { id: string; name: string; color: string; shape: Shape; visible: boolean; points: Pt[] };
 type Img = { id: string; src: string; el: HTMLImageElement | null; x: string; y: string; width: number; rotation: number; opacity: number; visible: boolean };
 
+/**
+ * Bisect [xLo, xHi] down to the precise location of a discontinuity, given
+ * the y-values known at (or near) the two ends. Used only to place the open
+ * circles below — the break in the line itself doesn't need this precision.
+ */
+function bisectDiscontinuity(evalX: (x: number) => number, xLo: number, xHi: number, yLoRef: number, yHiRef: number): number {
+  let lo = xLo, hi = xHi;
+  for (let i = 0; i < 80; i++) {
+    const mid = (lo + hi) / 2;
+    const ym = evalX(mid);
+    if (!Number.isFinite(ym)) { const width = hi - lo; lo = mid - width * 1e-3; hi = mid + width * 1e-3; continue; }
+    if (Math.abs(ym - yLoRef) < Math.abs(ym - yHiRef)) lo = mid; else hi = mid;
+  }
+  return (lo + hi) / 2;
+}
+/**
+ * One-sided limit of evalX at x0, approaching from `dir` (-1 left, +1
+ * right) — checked across several decades of step size. A genuine finite
+ * limit (a hole or a jump's endpoint) stays flat across all of them; a
+ * vertical asymptote fans out. Returns null rather than a value in the
+ * asymptote case, so the caller never draws a misleading circle where the
+ * function actually diverges.
+ */
+function estimateOneSidedLimit(evalX: (x: number) => number, x0: number, dir: 1 | -1, xSpan: number): number | null {
+  const decades = [2, 3, 4, 5, 6, 7];
+  const samples = decades.map((d) => evalX(x0 + dir * xSpan * Math.pow(10, -d)));
+  if (samples.some((v) => !Number.isFinite(v))) return null;
+  const lo = Math.min(...samples), hi = Math.max(...samples);
+  const scale = Math.max(Math.abs(samples[samples.length - 1]), 1);
+  if (hi - lo > scale * 0.02) return null;
+  return samples[samples.length - 1];
+}
+
 const GRID_OPTS = ["auto", "0.1", "0.5", "1", "2", "5", "10", "20", "50", "100", "pi"];
 const parseStep = (v: string) => (v === "pi" ? Math.PI : v === "auto" ? null : parseFloat(v));
 function autoStep(zoom: number) {
@@ -317,16 +350,83 @@ export function Calculator({ initialData, initialState, initialId, embed = false
         const im = e.match(/(<=|>=|<|>)/);
         let shade = 0; // 0 = none, 1 = keep g>0 side, -1 = keep g<0 side
         let strict = false;
+        // "y = <expr not containing y>" is a plain function — sampled directly
+        // below instead of going through the general implicit-equation path,
+        // since the marching-squares grid has no concept of "undefined here":
+        // a cell straddling a jump/removable discontinuity (e.g. y=|x-5|/(x-5))
+        // just draws whatever line connects its edge crossings, fabricating a
+        // connector straight across the gap. Anything genuinely implicit
+        // (circles, "x² + y² = 25", …) still needs the grid, so this only
+        // fires when the equation is already solved for y.
+        let explicitExpr: string | null = null;
         if (im) {
           const op = im[1], at = e.indexOf(op);
           const lhs = e.slice(0, at).trim() || "0", rhs = e.slice(at + op.length).trim() || "0";
           e = `(${lhs})-(${rhs})`; shade = op[0] === ">" ? 1 : -1; strict = op.length === 1;
         } else if (e.includes("=")) {
-          const [l, r] = e.split("="); e = `(${l})-(${r})`;
+          const [l, r] = e.split("=");
+          if (l.trim() === "y" && !/\by\b/.test(r)) explicitExpr = r.trim();
+          e = `(${l})-(${r})`;
         } else e = `(${e})-y`;
-        const fn = safeCompile(e);
         const dMin = lim(f.dMin, -Infinity), dMax = lim(f.dMax, Infinity);
         const rMin = lim(f.rMin, -Infinity), rMax = lim(f.rMax, Infinity);
+        if (explicitExpr !== null) {
+          const fx = safeCompile(explicitExpr);
+          const evalX = (x: number) => { const v = fx({ x, ...vars }); return Number.isFinite(v) ? v : NaN; };
+          const loX = Math.max(xMin, dMin), hiX = Math.min(xMax, dMax);
+          if (hiX > loX) {
+            const N = Math.max(200, Math.round(w));
+            const xs = new Float64Array(N + 1), ys = new Float64Array(N + 1);
+            for (let k = 0; k <= N; k++) {
+              const x = loX + ((hiX - loX) * k) / N;
+              let y = evalX(x);
+              if (y < rMin || y > rMax) y = NaN;
+              xs[k] = x; ys[k] = y;
+            }
+            const pxJumpThreshold = 60;
+            const breakIdx: number[] = [];
+            for (let k = 1; k <= N; k++) {
+              const yPrev = ys[k - 1], yCur = ys[k];
+              const bothFinite = Number.isFinite(yPrev) && Number.isFinite(yCur);
+              const isBreak = !bothFinite ? Number.isFinite(yPrev) !== Number.isFinite(yCur) : Math.abs(yCur - yPrev) * zoomY > pxJumpThreshold;
+              if (isBreak) breakIdx.push(k);
+            }
+            ctx.beginPath(); let pen = false;
+            for (let k = 0; k <= N; k++) {
+              const y = ys[k];
+              if (!Number.isFinite(y)) { pen = false; continue; }
+              const p = toPx(xs[k], y);
+              if (!pen) { ctx.moveTo(p.px, p.py); pen = true; } else ctx.lineTo(p.px, p.py);
+            }
+            ctx.stroke();
+
+            // Open circles at genuine jump/removable discontinuities — never
+            // at asymptotes (estimateOneSidedLimit returns null there).
+            // Adjacent break indices near one steep spot are merged first, so
+            // one discontinuity doesn't get bisected (and tested) many times.
+            const xSpan = hiX - loX;
+            const clusters: { first: number; last: number }[] = [];
+            for (const k of breakIdx) {
+              const prevCluster = clusters[clusters.length - 1];
+              if (prevCluster && k - prevCluster.last <= 4) prevCluster.last = k; else clusters.push({ first: k, last: k });
+            }
+            ctx.fillStyle = "#fff";
+            for (const c of clusters) {
+              const yLoRef = Number.isFinite(ys[c.first - 1]) ? ys[c.first - 1] : ys[c.first];
+              const yHiRef = Number.isFinite(ys[c.last]) ? ys[c.last] : ys[c.last - 1];
+              const x0 = bisectDiscontinuity(evalX, xs[c.first - 1], xs[c.last], yLoRef, yHiRef);
+              const left = estimateOneSidedLimit(evalX, x0, -1, xSpan);
+              const right = estimateOneSidedLimit(evalX, x0, 1, xSpan);
+              for (const yAt of [left, right]) {
+                if (yAt === null) continue;
+                const p = toPx(x0, yAt);
+                ctx.beginPath(); ctx.arc(p.px, p.py, 4, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+              }
+            }
+          }
+          continue;
+        }
+        const fn = safeCompile(e);
         const val = new Float64Array((rows + 1) * (cols + 1));
         for (let j = 0; j <= rows; j++) for (let i = 0; i <= cols; i++) {
           const m = toMath(i * res, j * res);
