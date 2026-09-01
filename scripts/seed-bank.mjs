@@ -1786,51 +1786,51 @@ export function gen47() {
   // ── LEVEL 2 — MEDIUM ────────────────────────────────────────
   q.push(mc("medium", "Find the line with slope $\\frac{3}{4}$ through $(8,2)$.", ["$y = \\frac{3}{4}x - 4$", "$y = \\frac{3}{4}x + 4$", "$y = \\frac{3}{4}x - 8$", "$y = \\frac{3}{4}x + 8$"], 0, "$2 = \\frac{3}{4}(8) + b \\Rightarrow b = -4$."));
   q.push(mc("medium", "A line passes through $(2,5)$ and $(4,11)$. Its equation is:", ["$y = 3x - 1$", "$y = 3x + 1$", "$y = 2x + 1$", "$y = 2x - 1$"], 0, "Slope $3$; $b = -1$."));
-  q.push(mc("medium", "Find the line parallel to $y = 4x - 2$ through $(1,3)$.", ["$y = 4x - 1$", "$y = 4x + 1$", "$y = 4x - 7$", "$y = -4x + 7$"], 0, "Slope $4$; $3 = 4(1)+b \\Rightarrow b = -1$."));
-  q.push(mc("medium", "Find the line perpendicular to $y = 2x + 5$ through $(0,-3)$.", ["$y = -\\frac{1}{2}x - 3$", "$y = \\frac{1}{2}x - 3$", "$y = -2x - 3$", "$y = -\\frac{1}{2}x + 3$"], 0, "Perpendicular slope $-\\frac{1}{2}$, y-intercept $-3$."));
+  q.push(mc("medium", "Find the equation of the line through $(5,-3)$ with slope $-2$.", ["$y = -2x + 7$", "$y = -2x - 7$", "$y = 2x - 7$", "$y = -2x + 3$"], 0, "$-3 = -2(5)+b \\Rightarrow b = 7$."));
+  q.push(mc("medium", "A line has slope $\\frac{1}{3}$ and passes through $(-6,4)$. Find its equation.", ["$y = \\frac{1}{3}x + 6$", "$y = \\frac{1}{3}x - 6$", "$y = -\\frac{1}{3}x + 6$", "$y = \\frac{1}{3}x + 2$"], 0, "$4 = \\frac{1}{3}(-6)+b = -2+b \\Rightarrow b = 6$."));
   q.push(mc("medium", "A line has x-intercept $4$ and y-intercept $3$. Its equation is:", ["$y = -\\frac{3}{4}x + 3$", "$y = \\frac{3}{4}x + 3$", "$y = -\\frac{4}{3}x + 3$", "$y = \\frac{4}{3}x + 3$"], 0, "Slope $\\frac{0-3}{4-0} = -\\frac{3}{4}$."));
   // multiple select
   q.push(ms("medium", "Which lines pass through $(2,7)$?", ["$y = 3x + 1$", "$y = 2x + 3$", "$y = 4x - 1$", "$y = -x + 9$"], [0, 1, 2, 3], "All four give $7$ at $x = 2$."));
   q.push(ms("medium", "A line passes through $(1,4)$ and $(3,10)$. Which are true?", ["Slope is $3$", "Equation is $y = 3x + 1$", "y-intercept is $1$", "Equation is $y - 4 = 3(x - 1)$"], [0, 1, 2, 3]));
-  q.push(ms("medium", "Which lines are parallel to $y = \\frac{2}{3}x + 5$?", ["$y = \\frac{2}{3}x - 1$", "$y - \\frac{2x}{3} = 7$", "$y = \\frac{4}{6}x + 3$", "$y = -\\frac{3}{2}x + 2$"], [0, 1, 2], "$\\frac{4}{6} = \\frac{2}{3}$."));
-  q.push(ms("medium", "Which lines are perpendicular to $y = 3x - 2$?", ["$y = -\\frac{1}{3}x + 4$", "$y = \\frac{1}{3}x - 5$", "$y = -3x + 1$", "$y = -\\frac{1}{3}x + 2$"], [0, 3]));
+  q.push(ms("medium", "A line passes through $(-2,1)$ and $(2,9)$. Which are true?", ["Slope is $2$", "Equation is $y = 2x + 5$", "y-intercept is $5$", "Equation is $y - 1 = 2(x + 2)$"], [0, 1, 2, 3]));
+  q.push(ms("medium", "A line has slope $-3$ and passes through $(0,4)$. Which are true?", ["Equation is $y = -3x + 4$", "It passes through $(1,1)$", "y-intercept is $4$", "x-intercept is $\\frac{4}{3}$"], [0, 1, 2, 3]));
   q.push(ms("medium", "A line has equation $2x - 3y = 6$. Which are correct?", ["Slope is $\\frac{2}{3}$", "y-intercept is $-2$", "x-intercept is $3$", "In slope-intercept form it is $y = \\frac{2}{3}x - 2$"], [0, 1, 2, 3]));
   // true / false
   q.push(tf("medium", "The line through $(0,5)$ with slope $-2$ is $y = -2x + 5$.", true));
   q.push(tf("medium", "The line through $(3,1)$ and $(6,7)$ is $y = 2x - 5$.", true, "Slope $2$; $1 = 2(3)+b \\Rightarrow b = -5$."));
-  q.push(tf("medium", "The line perpendicular to $y = -3x + 2$ has slope $3$.", false, "It is $\\frac{1}{3}$."));
+  q.push(tf("medium", "The line through $(4,-1)$ and $(4,5)$ is the vertical line $x = 4$.", true, "Same x-coordinate for both points means a vertical line."));
   q.push(tf("medium", "Horizontal lines have equation $x = c$.", false, "They have the form $y = c$."));
-  q.push(tf("medium", "The lines $y = 4x + 3$ and $y = 4x - 2$ are parallel.", true));
+  q.push(tf("medium", "A line with slope $0$ through $(7,-2)$ is $y = -2$.", true));
   // fill in the blank
   q.push(fill("medium", "A line through $(0,7)$ with slope $-5$ is $y =$ ___.", ["-5x+7", "-5x + 7"]));
   q.push(fill("medium", "The line through $(2,9)$ and $(4,15)$ is $y =$ ___.", ["3x+3", "3x + 3"]));
-  q.push(fill("medium", "A line parallel to $y = 6x + 1$ through $(0,-4)$ is $y =$ ___.", ["6x-4", "6x - 4"]));
-  q.push(fill("medium", "A line perpendicular to $y = -\\frac{1}{2}x + 3$ through $(0,5)$ is $y =$ ___.", ["2x+5", "2x + 5"]));
+  q.push(fill("medium", "A line through $(-4,0)$ with slope $2$ is $y =$ ___.", ["2x+8", "2x + 8"]));
+  q.push(fill("medium", "The line through $(1,-3)$ and $(5,5)$ is $y =$ ___.", ["2x-5", "2x - 5"]));
   q.push(fill("medium", "The slope of $3x + 4y = 12$ is ___.", ["-3/4", "-\\frac{3}{4}"]));
 
   // ── LEVEL 3 — HARD ──────────────────────────────────────────
   q.push(mc("hard", "A line passes through $(3,-2)$ and $(-1,6)$. Its equation is:", ["$y = -2x + 4$", "$y = 2x - 8$", "$y = -2x - 4$", "$y = 2x + 4$"], 0, "Slope $\\frac{8}{-4} = -2$; $-2 = -2(3)+b \\Rightarrow b = 4$."));
   q.push(mc("hard", "A line has slope $-\\frac{3}{5}$ through $(10,-1)$. In standard form $Ax + By = C$ it is:", ["$3x + 5y = 25$", "$3x + 5y = -25$", "$-3x + 5y = 25$", "$3x - 5y = 25$"], 0, "$5y + 5 = -3x + 30 \\Rightarrow 3x + 5y = 25$."));
-  q.push(mc("hard", "Find the line parallel to $2x - 5y = 10$ through $(-5,2)$.", ["$2x - 5y = -20$", "$2x - 5y = 20$", "$-2x + 5y = 20$", "$2x + 5y = -20$"], 0, "Slope $\\frac{2}{5}$; gives $2x - 5y = -20$."));
-  q.push(mc("hard", "A line is perpendicular to $y = 3x + 2$ and has the same y-intercept as $y = -2x + 5$. Its equation is:", ["$y = -\\frac{1}{3}x + 5$", "$y = \\frac{1}{3}x + 5$", "$y = -\\frac{1}{3}x + 2$", "$y = \\frac{1}{3}x + 2$"], 0, "Perpendicular slope $-\\frac{1}{3}$, y-intercept $5$."));
-  q.push(mc("hard", "A line through $(1,2)$ is perpendicular to the line through $(0,0)$ and $(3,4)$. Its equation is:", ["$y = -\\frac{3}{4}x + \\frac{11}{4}$", "$y = -\\frac{3}{4}x + \\frac{5}{4}$", "$y = \\frac{3}{4}x + \\frac{5}{4}$", "$y = \\frac{4}{3}x + \\frac{2}{3}$"], 0, "Given slope $\\frac{4}{3}$; perpendicular $-\\frac{3}{4}$; $2 = -\\frac{3}{4}(1)+b \\Rightarrow b = \\frac{11}{4}$."));
+  q.push(mc("hard", "A line has slope $\\frac{4}{7}$ through $(-7,3)$. In standard form $Ax + By = C$ it is:", ["$4x - 7y = -49$", "$4x - 7y = 49$", "$4x + 7y = -49$", "$-4x + 7y = -49$"], 0, "$7(y-3) = 4(x+7) \\Rightarrow 7y - 21 = 4x + 28 \\Rightarrow 4x - 7y = -49$."));
+  q.push(mc("hard", "A line passes through $(-3,-5)$ and $(2,10)$. Find its equation.", ["$y = 3x + 4$", "$y = 3x - 4$", "$y = -3x + 4$", "$y = 3x + 15$"], 0, "Slope $\\frac{15}{5} = 3$; $-5 = 3(-3)+b \\Rightarrow b = 4$."));
+  q.push(mc("hard", "A line passes through $(0,-6)$ and $(-4,2)$. Find its equation.", ["$y = -2x - 6$", "$y = 2x - 6$", "$y = -2x + 6$", "$y = -6x - 2$"], 0, "Slope $\\frac{2-(-6)}{-4-0} = \\frac{8}{-4} = -2$; y-intercept $-6$ directly from $(0,-6)$."));
   // multiple select
-  q.push(ms("hard", "A line has equation $4x - 2y = 8$. Which are true?", ["Slope is $2$", "y-intercept is $-4$", "x-intercept is $2$", "It is parallel to $y = 2x + 5$"], [0, 1, 2, 3], "$y = 2x - 4$."));
+  q.push(ms("hard", "A line has equation $6x - 3y = 12$. Which are true?", ["Slope is $2$", "y-intercept is $-4$", "x-intercept is $2$", "In slope-intercept form it is $y = 2x - 4$"], [0, 1, 2, 3], "$-3y = 12-6x \\Rightarrow y = 2x - 4$."));
   q.push(ms("hard", "A line passes through $(2,-3)$ and $(6,5)$. Which represent it?", ["$y = 2x - 7$", "$y + 3 = 2(x - 2)$", "$2x - y = 7$", "$y = 2x + 7$"], [0, 1, 2], "Slope $2$; $y = 2x - 7$."));
-  q.push(ms("hard", "Which lines are perpendicular to $2x + 3y = 6$?", ["$y = \\frac{3}{2}x - 4$", "$y = -\\frac{2}{3}x + 1$", "$3x - 2y = 5$", "$y = \\frac{3}{2}x + 7$"], [0, 2, 3], "Given slope $-\\frac{2}{3}$; perpendicular $\\frac{3}{2}$."));
+  q.push(ms("hard", "A line passes through $(-5,-2)$ and $(5,8)$. Which are true?", ["Slope is $1$", "Equation is $y = x + 3$", "y-intercept is $3$", "Passes through $(0,3)$"], [0, 1, 2, 3], "Slope $\\frac{8-(-2)}{5-(-5)} = 1$; $8 = 5+b \\Rightarrow b = 3$."));
   q.push(ms("hard", "A line has x-intercept $-3$ and y-intercept $6$. Which are correct?", ["Slope is $2$", "Equation is $y = 2x + 6$", "Equation is $y = -2x + 6$", "Passes through $(1,8)$"], [0, 1, 3], "Slope $\\frac{6}{3} = 2$; $y = 2x + 6$."));
-  q.push(ms("hard", "Find the line through $(4,1)$ parallel to the line through $(1,3)$ and $(3,7)$. Which are correct?", ["Slope is $2$", "Equation is $y = 2x - 7$", "Equation is $y = 2x + 7$", "Passes through $(2,-3)$"], [0, 1, 3], "Slope $2$; $1 = 2(4)+b \\Rightarrow b = -7$."));
+  q.push(ms("hard", "A line passes through $(0,-9)$ and has slope $4$. Which are correct?", ["Slope is $4$", "Equation is $y = 4x - 9$", "Equation is $y = 4x + 9$", "Passes through $(2,-1)$"], [0, 1, 3], "y-intercept is $-9$ directly; $4(2)-9 = -1$."));
   // true / false
   q.push(tf("hard", "The line with slope $-\\frac{2}{3}$ through $(6,-1)$ is $y = -\\frac{2}{3}x + 3$.", true, "$-1 = -4 + b \\Rightarrow b = 3$."));
   q.push(tf("hard", "The line through $(2,5)$ and $(-1,2)$ is $y = x + 3$.", true, "Slope $1$; $b = 3$."));
-  q.push(tf("hard", "Lines with slopes $3$ and $-\\frac{1}{3}$ are perpendicular.", true, "Product $= -1$."));
+  q.push(tf("hard", "The line through $(2,2)$ and $(2,-5)$ is the vertical line $x = 2$.", true, "Same x-coordinate for both points means a vertical line."));
   q.push(tf("hard", "The equation of a vertical line can be written in slope-intercept form.", false, "Its slope is undefined."));
-  q.push(tf("hard", "The lines $y = 4x - 3$ and $y = 4x + 7$ are parallel and distinct.", true));
+  q.push(tf("hard", "The line through $(0,0)$ and $(5,5)$ has equation $y = x$.", true, "Slope $1$, and it passes through the origin so $b = 0$."));
   // fill in the blank
   q.push(fill("hard", "The line through $(3,4)$ and $(5,10)$ is $y =$ ___.", ["3x-5", "3x - 5"]));
-  q.push(fill("hard", "A line perpendicular to $y = \\frac{5}{2}x - 1$ through $(0,3)$ is $y =$ ___.", ["-2/5x+3", "-\\frac{2}{5}x+3", "-\\frac{2}{5}x + 3"]));
+  q.push(fill("hard", "A line through $(2,-1)$ with slope $-4$ is $y =$ ___.", ["-4x+7", "-4x + 7"]));
   q.push(fill("hard", "The standard form of the line with slope $-\\frac{3}{4}$ through $(8,-2)$ is ___ (as $Ax+By=C$).", ["3x+4y=16", "3x + 4y = 16"]));
-  q.push(num("hard", "A line parallel to $x - 2y = 6$ through $(4,-1)$ has $x - 2y =$ ___.", 6, 0));
+  q.push(fill("hard", "The line through $(7,3)$ and $(7,-2)$ is ___ .", ["x=7", "x = 7"]));
   q.push(fill("hard", "The line with x-intercept $5$ and y-intercept $-2$ is $y =$ ___.", ["2/5x-2", "\\frac{2}{5}x-2", "\\frac{2}{5}x - 2"]));
 
   return q;
