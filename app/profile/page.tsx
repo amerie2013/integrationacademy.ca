@@ -73,8 +73,7 @@ export default function ProfilePage() {
     try {
       const res = await fetch("/api/stripe/portal", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ userId: session.user.id }),
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${session.access_token}` },
       });
       const j = await res.json().catch(() => ({}));
       if (j.url) { window.location.href = j.url; return; }

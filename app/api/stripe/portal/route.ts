@@ -19,7 +19,13 @@ export async function POST(req: NextRequest) {
     }
     const stripe = getStripe();
     const supabaseAdmin = getAdmin();
-    const { userId } = (await req.json()) as { userId: string };
+
+    const token = (req.headers.get("authorization") ?? "").replace(/^Bearer\s+/i, "");
+    const { data: { user } } = await supabaseAdmin.auth.getUser(token);
+    if (!user) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+    const userId = user.id;
 
     const { data: profile } = await supabaseAdmin
       .from("profiles")

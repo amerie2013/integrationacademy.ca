@@ -27,12 +27,18 @@ export async function POST(req: NextRequest) {
     }
     const stripe = getStripe();
     const supabaseAdmin = getAdmin();
-    const { plan, userId, userEmail, courseId } = (await req.json()) as {
+    const { plan, courseId } = (await req.json()) as {
       plan: string;
-      userId: string;
-      userEmail: string;
       courseId: string;
     };
+
+    const token = (req.headers.get("authorization") ?? "").replace(/^Bearer\s+/i, "");
+    const { data: { user } } = await supabaseAdmin.auth.getUser(token);
+    if (!user) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+    const userId = user.id;
+    const userEmail = user.email ?? "";
 
     if (!PRICE_IDS[plan]) {
       return NextResponse.json({ error: "Invalid or unconfigured plan" }, { status: 400 });

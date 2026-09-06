@@ -40,7 +40,7 @@ export default function TeacherClassesPage() {
 
     // Courses this teacher can still open a class for: a free teacher seat
     // (active teacher grant) minus classes already opened for that course.
-    const { data: grants } = await supabase.from("course_grants").select("course_id").eq("user_id", userId).eq("kind", "teacher").in("status", ["active", "trialing"]);
+    const { data: grants } = await supabase.from("course_grants").select("course_id").eq("user_id", userId).eq("kind", "teacher").in("status", ["active", "trialing"]).or(`expires_at.is.null,expires_at.gt.${new Date().toISOString()}`);
     const seatBy: Record<string, number> = {}; (grants ?? []).forEach((g: any) => { seatBy[g.course_id] = (seatBy[g.course_id] || 0) + 1; });
     const usedBy: Record<string, number> = {}; mineList.forEach((c) => { if (c.course_id) usedBy[c.course_id] = (usedBy[c.course_id] || 0) + 1; });
     setAvailCourses(Object.keys(seatBy).filter((cid) => seatBy[cid] > (usedBy[cid] || 0)).map((cid) => ({ id: cid, label: titles[cid] || cid })));

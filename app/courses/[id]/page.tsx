@@ -140,6 +140,7 @@ export default function StudentCoursePage() {
           .eq("user_id", uid)
           .eq("course_id", courseId)
           .in("status", ["active", "trialing"])
+          .or(`expires_at.is.null,expires_at.gt.${new Date().toISOString()}`)
           .limit(1);
         hasGrant = (grant ?? []).length > 0;
         const { data: mem } = await supabase.from("class_students").select("class_id").eq("student_id", uid);
@@ -175,8 +176,8 @@ export default function StudentCoursePage() {
     try {
       const res = await fetch("/api/stripe/checkout", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ plan, userId: session.user.id, userEmail: session.user.email, courseId }),
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${session.access_token}` },
+        body: JSON.stringify({ plan, courseId }),
       });
       const json = await res.json();
       if (json.url) { window.location.href = json.url; return; }
