@@ -18,10 +18,13 @@ export default function TeacherPage() {
   const [saving, setSaving] = useState(false);
 
   async function load(uid: string) {
+    // Admin sees every course, not just ones owned by this specific admin
+    // login — courses are conventionally authored under one shared
+    // content-authoring account, not the individual admin's own id.
+    void uid;
     const { data } = await supabase
       .from("courses")
       .select("id, code, title, level")
-      .eq("teacher_id", uid)
       .order("created_at", { ascending: false });
     setCourses((data ?? []) as Course[]);
   }
