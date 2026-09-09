@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
-import { createRequire } from "module";
+import { readFileSync } from "fs";
+import { join } from "path";
 import { renderWorksheetHtml, renderCompactHtml } from "../../../../../lib/worksheetRender";
 import type { WsContent } from "../../../../../lib/worksheets";
 
@@ -11,9 +12,16 @@ export const maxDuration = 60;
 
 // Lazy — do NOT read KaTeX / launch Chromium at module load (breaks `next build`
 // page-data collection when resolve paths are unavailable in the bundler).
+//
+// createRequire(...).resolve("katex/dist/katex.min.css") used to be here, but
+// under Turbopack's production runtime (this app's bundler as of Next 16) its
+// require() shim doesn't replicate Node's real require.resolve — it silently
+// returns undefined for an externalized/traced non-JS asset instead of
+// throwing, which readFileSync then rejected as "path ... Received
+// undefined". Read it via an explicit path from the function root instead,
+// which outputFileTracingIncludes below guarantees exists.
 function loadKatexCss(): string {
-  const require = createRequire(import.meta.url);
-  return require("fs").readFileSync(require.resolve("katex/dist/katex.min.css"), "utf8");
+  return readFileSync(join(process.cwd(), "node_modules/katex/dist/katex.min.css"), "utf8");
 }
 
 const makeAdmin = () =>
