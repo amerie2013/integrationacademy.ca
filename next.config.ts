@@ -23,7 +23,15 @@ const nextConfig: NextConfig = {
   // from disk, so trace it into that function.
   serverExternalPackages: ["@sparticuz/chromium", "puppeteer-core"],
   outputFileTracingIncludes: {
-    "/api/worksheets/[id]/regenerate": ["./node_modules/katex/dist/katex.min.css"],
+    // katex.min.css is read from disk; @sparticuz/chromium's compressed binary
+    // assets (bin/*.br) are resolved dynamically at runtime by
+    // chromium.executablePath(), so static tracing misses them without this —
+    // that's what caused "input directory .../chromium/bin does not exist" in
+    // production even though the package is correctly externalized above.
+    "/api/worksheets/[id]/regenerate": [
+      "./node_modules/katex/dist/katex.min.css",
+      "./node_modules/@sparticuz/chromium/bin/**",
+    ],
   },
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
