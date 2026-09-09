@@ -94,7 +94,9 @@ export async function POST(req: NextRequest, ctx: { params: Promise<{ id: string
 
     return NextResponse.json({ ok: true, worksheet_url: ws.url, answers_url: cm.url });
   } catch (e: any) {
-    return NextResponse.json({ error: e?.message || "Regeneration failed." }, { status: 500 });
+    // TEMP: stack included to pin down a production-only failure with no
+    // other log access; revert to just { error } once diagnosed.
+    return NextResponse.json({ error: e?.message || "Regeneration failed.", stack: String(e?.stack ?? "").slice(0, 2000) }, { status: 500 });
   } finally {
     if (browser) await browser.close();
   }
