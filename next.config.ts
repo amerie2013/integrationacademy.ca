@@ -28,9 +28,16 @@ const nextConfig: NextConfig = {
     // chromium.executablePath(), so static tracing misses them without this —
     // that's what caused "input directory .../chromium/bin does not exist" in
     // production even though the package is correctly externalized above.
+    // Registered under both key styles (URL path and "/route" file-style) —
+    // which one App Router actually matches on isn't consistently documented,
+    // so covering both is cheap insurance; an unmatched key is a no-op.
     "/api/worksheets/[id]/regenerate": [
       "./node_modules/katex/dist/katex.min.css",
-      "./node_modules/@sparticuz/chromium/bin/**",
+      "./node_modules/@sparticuz/chromium/**",
+    ],
+    "/api/worksheets/[id]/regenerate/route": [
+      "./node_modules/katex/dist/katex.min.css",
+      "./node_modules/@sparticuz/chromium/**",
     ],
   },
   async headers() {
