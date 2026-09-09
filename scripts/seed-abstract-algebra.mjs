@@ -150,6 +150,8 @@ const L1_1 = L("1.1", "Groups: Definition and Basic Examples", [
   </div>
   ${arBox("الزمرة U(n)", `<p>\\(U(n)\\) هي مجموعة الأعداد الأصغر من \\(n\\) والأوّلية نسبيًا (Relatively Prime) معه — أي \\(\\gcd(k,n)=1\\) — مع عملية الضرب Modulo \\(n\\). بما أن كل عنصر في \\(U(n)\\) لا يشترك بعامل مشترك مع \\(n\\)، فإن له دائمًا معكوسًا ضربيًا Mod \\(n\\)؛ ولهذا \\(U(n)\\) زمرة تبديلية (Abelian) دائمًا. ملاحظة: عندما يكون \\(n\\) عددًا أوّليًا (Prime)، فإن \\(U(n)\\) تحوي كل الأعداد من \\(1\\) إلى \\(n-1\\).</p>`)}
 
+  ${arBox("ملخص الأمثلة بالعربي", `<p>راجعنا أربعة أمثلة: <strong>الأعداد الصحيحة ℤ</strong> مع الجمع (Abelian بسيطة)، <strong>المصفوفات القابلة للعكس ٢×٢</strong> مع الضرب (Non-Abelian — أثبتنا ذلك برقمين محددين)، <strong>ℤₙ</strong> مع الجمع Modulo (دائمًا Abelian ومنتهية Finite)، و<strong>U(n)</strong> (الأعداد الأوّلية نسبيًا مع n). القاعدة العملية: عند فحص أي مجموعة، تحقّق من الشروط الأربعة بالترتيب — Closure ثم Associative ثم Identity ثم Inverse — ولإثبات Non-Abelian يكفي مثال عددي واحد مخالف.</p>`)}
+
   ${vocab([
     ["Group", "زمرة"],
     ["Binary operation", "عملية ثنائية"],
@@ -271,6 +273,8 @@ const L1_2 = L("1.2", "Cayley Tables and the Order of an Element", [
     </div>
   </div>
   ${arBox("رتبة العنصر (Order of an Element)", `<p><strong>Order of an Element</strong> \\(a\\) هي أصغر عدد صحيح موجب \\(n\\) بحيث \\(a^n=e\\) (في حالة الضرب) أو \\(na=0\\) (في حالة الجمع). بمعنى آخر: كم مرّة يجب أن "أُكرّر" العملية على العنصر حتى أصل إلى العنصر المحايد؟ لاحظ من المثال أن \\(O(a)\\) و \\(O(a^{-1})\\) متساويان دائمًا.</p>`)}
+
+  ${arBox("ملخص الأمثلة بالعربي", `<p>بنينا جداول Cayley لأربع زمر: \\(\\mathbb{Z}_6\\) و \\(U(12)\\) (كلاهما Abelian — الجدول متماثل)، ومجموعة الجذور الرباعية للوحدة \\(\\{1,-1,i,-i\\}\\)، ومجموعة \\(\\{1,2,3,4\\}\\) مع الضرب Modulo 5 (وهي في الحقيقة \\(U(5)\\)). ثم حسبنا <strong>Order of an Element</strong> في \\(\\mathbb{Z}_6\\) و \\(U(10)\\) — تذكّر: نُكرّر العملية على العنصر حتى نصل للـ Identity، ونَعُدّ عدد الخطوات.</p>`)}
 
   ${vocab([
     ["Cayley table", "جدول كايلي"],
@@ -416,6 +420,8 @@ const L1_3 = L("1.3", "Subgroups and Cosets", [
   </div>
   ${arBox("المجموعات الجانبية (Cosets)", `<p>إذا كانت \\(H\\) زمرة جزئية من \\(G\\)، فإن \\(a\\) و \\(b\\) "متطابقان Modulo \\(H\\)" إذا كان \\(ab^{-1}\\in H\\). هذا يقسّم \\(G\\) إلى مجموعات تسمى <strong>Cosets</strong> (مجموعات جانبية): \\(Ha\\) هي Right Coset و \\(aH\\) هي Left Coset. الملاحظة المهمة في المثال: كل الـ Cosets لها نفس الحجم، وتغطي الزمرة بالكامل دون أي تداخل بينها — وهذه هي الفكرة التي تُبنى عليها نظرية Lagrange لاحقًا في المقرر.</p>`)}
 
+  ${arBox("ملخص الأمثلة بالعربي", `<p>هذا الدرس فيه ثلاثة أجزاء: (١) إثباتات "أَثبِت أن G تبديلية" — النمط واحد في كل مرة: ابدأ من المُعطى واضرب في المعكوس المناسب من نفس الجهة على الطرفين. (٢) اختبار الزمرة الجزئية (Subgroup Test) على أمثلة متعددة: \\(2\\mathbb{Z}\\) في \\(\\mathbb{Z}\\)، الزمر الجزئية لـ \\(\\mathbb{Z}_6\\) و \\(U(10)\\) و \\(U(8)\\)، والمصفوفات المثلثية العلوية. (٣) Cosets — قسّمنا \\(U(12)\\) بالكامل إلى مجموعتين جانبيتين متساويتين في الحجم لا تتقاطعان، وهذه هي الفكرة التي ستُبنى عليها نظرية Lagrange لاحقًا.</p>`)}
+
   ${vocab([
     ["Subgroup", "زمرة جزئية"],
     ["Subgroup test", "اختبار الزمرة الجزئية"],
@@ -514,6 +520,8 @@ const L1_4 = L("1.4", "Combining Subgroups, the Center, and Cyclic Groups", [
     <p>Every cyclic group is abelian: if \(G=\{g^n:n\in\mathbb{Z}\}\), then \(g^mg^n=g^{m+n}=g^{n+m}=g^ng^m\) for any two elements, so they always commute. But the converse is <strong>false</strong> — an abelian group need not be cyclic. Example: the Klein four-group \(V=\{e,a,b,c\}\) with \(a^2=b^2=c^2=e\) and \(ab=c\) (this is exactly the structure of \(U(8)\) above!) is abelian, since every element is its own inverse (Lesson 1.3, Example 2 shows that condition always gives abelian) — but Example 2 just showed \(U(8)\cong V\) is not cyclic, since no single element generates it.</p>
   </div>
   ${arBox("الزمر الدورية (Cyclic Groups)", `<p>الزمرة \\(G\\) تسمى <strong>Cyclic</strong> (دورية) إذا وُجد عنصر واحد \\(g\\) — يسمى <strong>Generator</strong> (مولّد) — بحيث كل عناصر \\(G\\) هي قوى (Powers) لهذا العنصر. كل زمرة دورية هي بالضرورة <strong>Abelian</strong>، لكن العكس غير صحيح: توجد زمر تبديلية ليست دورية، مثل \\(U(8)\\) — كل عناصرها تتبادل، لكن لا يوجد عنصر واحد "يولّد" الزمرة بأكملها.</p>`)}
+
+  ${arBox("ملخص الأمثلة بالعربي", `<p>القاعدة الذهبية لهذا الدرس: <strong>Intersection</strong> (تقاطع) زمرتين جزئيتين دائمًا زمرة جزئية — إثبات مباشر بثلاث خطوات. أما <strong>Union</strong> (اتحاد) فعادة لا يكون كذلك (مثال \\(2\\mathbb{Z}\\cup3\\mathbb{Z}\\)). <strong>Center</strong> \\(Z(G)\\) هو "قلب" الزمرة — كل ما يتبادل مع الجميع — وهو نفسه زمرة جزئية. وأخيرًا: <strong>Cyclic</strong> ⟹ <strong>Abelian</strong> دائمًا، لكن عكس ذلك خاطئ — \\(U(8)\\) مثال على زمرة Abelian ليست Cyclic.</p>`)}
 
   ${vocab([
     ["Intersection", "تقاطع"],
