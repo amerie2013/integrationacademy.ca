@@ -32,7 +32,7 @@ const db = createClient(env.NEXT_PUBLIC_SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_
 const TEACHER_EMAIL = "teacher@integrationacademy.ca";
 // The class (not the course) is taught under Dr. Merie's own teacher account —
 // matches how her other classes (e.g. "Grade 9 Math — Period 1") are set up.
-const CLASS_TEACHER_EMAIL = "dr.merie@integrationacademy.ca";
+const CLASS_TEACHER_EMAIL = "aa_7767@yahoo.com";
 const COURSE_TITLE = "Abstract Algebra I — Groups";
 const COURSE_CODE = "ABALG1";
 const DESC = "University Abstract (Modern) Algebra — Group Theory, following the course lectures topic-for-topic with extra worked detail. Private one-on-one course: bilingual English/Arabic explanations, English terminology throughout (matches the lecture and exams). Join with a class code.";
