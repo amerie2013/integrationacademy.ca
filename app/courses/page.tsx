@@ -14,6 +14,7 @@ type Course = {
   title: string;
   description: string | null;
   level: string | null;
+  published: boolean;
 };
 
 export default function CourseCatalogPage() {
@@ -29,10 +30,15 @@ export default function CourseCatalogPage() {
       const { data: { session } } = await supabase.auth.getSession();
       setUserId(session?.user.id ?? null);
 
+      // No .eq("published", true) filter here on purpose: RLS on `courses`
+      // already returns published courses to everyone, plus any unpublished
+      // (private) course the viewer has real access to — admin, or a
+      // course_access() grant/class membership (see
+      // supabase/migrations/2026-09-08_private_course_class_access.sql).
+      // A random visitor still only ever gets the published ones back.
       const { data: cs } = await supabase
         .from("courses")
-        .select("id, code, title, description, level")
-        .eq("published", true)
+        .select("id, code, title, description, level, published")
         .order("level");
       setCourses((cs ?? []) as Course[]);
 
@@ -81,8 +87,15 @@ export default function CourseCatalogPage() {
                     {c.code ? (
                       <span style={{ fontFamily: "JetBrains Mono, monospace", color: t.primary, fontWeight: 700, fontSize: 13 }}>{c.code}</span>
                     ) : <span />}
-                    <span style={{ fontSize: 12, fontWeight: 700, color: t.badge, background: t.badgeBg, padding: "3px 9px", borderRadius: 999 }}>
-                      {levelLabel(c.level)}
+                    <span style={{ display: "flex", gap: 6 }}>
+                      {!c.published && (
+                        <span style={{ fontSize: 12, fontWeight: 700, color: "#92400e", background: "#fffbeb", border: "1px solid #fde68a", padding: "3px 9px", borderRadius: 999 }}>
+                          Private
+                        </span>
+                      )}
+                      <span style={{ fontSize: 12, fontWeight: 700, color: t.badge, background: t.badgeBg, padding: "3px 9px", borderRadius: 999 }}>
+                        {levelLabel(c.level)}
+                      </span>
                     </span>
                   </div>
                   <h3 style={{ fontSize: 18, fontWeight: 700, margin: "0 0 8px" }}>{c.title}</h3>
