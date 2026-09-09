@@ -28,17 +28,13 @@ const nextConfig: NextConfig = {
     // chromium.executablePath(), so static tracing misses them without this —
     // that's what caused "input directory .../chromium/bin does not exist" in
     // production even though the package is correctly externalized above.
-    // Registered under both key styles (URL path and "/route" file-style) —
-    // which one App Router actually matches on isn't consistently documented,
-    // so covering both is cheap insurance; an unmatched key is a no-op.
-    "/api/worksheets/[id]/regenerate": [
-      "./node_modules/katex/dist/katex.min.css",
-      "./node_modules/@sparticuz/chromium/bin/chromium.br",
-      "./node_modules/@sparticuz/chromium/bin/fonts.tar.br",
-      "./node_modules/@sparticuz/chromium/bin/swiftshader.tar.br",
-      "./node_modules/@sparticuz/chromium/bin/al2023.tar.br",
-    ],
-    "/api/worksheets/[id]/regenerate/route": [
+    //
+    // The key is matched with picomatch as a GLOB against the route path
+    // (per Next.js's own docs, node_modules/next/dist/docs/.../output.md) —
+    // so "[id]" must be escaped, or picomatch reads it as a glob character
+    // class ("one char, i or d") and the key silently never matches the real
+    // route. This was the actual bug behind three earlier failed attempts.
+    "/api/worksheets/\\[id\\]/regenerate": [
       "./node_modules/katex/dist/katex.min.css",
       "./node_modules/@sparticuz/chromium/bin/chromium.br",
       "./node_modules/@sparticuz/chromium/bin/fonts.tar.br",
