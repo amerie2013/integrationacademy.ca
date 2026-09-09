@@ -16,11 +16,18 @@ const PALETTE = ["#2563a0", "#3b7d3b", "#8a5a00", "#a3327a", "#6d28a3", "#b08900
 type Subject = WsContent & { code: string };
 
 function shell(s: Subject, bodyHtml: string, katexCss: string) {
-  return `<!doctype html><html><head><meta charset="utf-8"><style>
+  return `<!doctype html><html><head><meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;700&display=swap">
+<style>
 ${katexCss}
 @page { size: letter; margin: 1.5cm 1.4cm; }
 * { box-sizing: border-box; }
 body { font-family: Georgia, "Times New Roman", serif; color: #1a1a1a; font-size: 11.5pt; margin: 0; }
+/* The minimal serverless Chromium image ships no Arabic-script glyphs at
+   all — without this, dir="rtl" text renders as invisible boxes. */
+[dir="rtl"] { font-family: "Noto Naskh Arabic", Tahoma, "Segoe UI", Arial, sans-serif; }
 .page { width: 100%; border-collapse: collapse; }
 .page thead td, .page tfoot td { border: none; padding: 0; }
 .hdr { text-align: center; padding-bottom: 6px; border-bottom: 2px solid #14653b; margin-bottom: 10px; }

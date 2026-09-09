@@ -60,6 +60,10 @@ async function htmlToPdf(browser: Awaited<ReturnType<typeof launchBrowser>>, htm
   const page = await browser.newPage();
   try {
     await page.setContent(html, { waitUntil: "load", timeout: 30000 });
+    // waitUntil:"load" does not guarantee @font-face webfonts have finished
+    // downloading — without this, Arabic text can rasterize before the Noto
+    // Naskh Arabic font (loaded from Google Fonts) is actually ready.
+    await page.evaluateHandle("document.fonts.ready");
     const pdf = await page.pdf({ printBackground: true, preferCSSPageSize: true });
     return Buffer.from(pdf);
   } finally {
