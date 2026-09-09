@@ -190,6 +190,18 @@ const WS = [
           + arNote("هذه أصغر زمرة غير تافهة ممكنة (Order = 2)، وكل عنصر فيها معكوس نفسه — خاصية ستراها لاحقًا مرتبطة مباشرة بإثبات \"إذا كان $a^2=e$ للجميع فالزمرة تبديلية\" في الدرس ١.٣.")],
         ["Example 3", "List $U(15)$.", "Integers from $1$ to $14$ coprime to $15=3\\cdot5$: exclude multiples of $3$ and $5$. $U(15)=\\{1,2,4,7,8,11,13,14\\}$."
           + arNote("اختصار عملي: بدل فحص $\\gcd$ لكل عدد على حدة، استبعد مباشرة مضاعفات كل عامل أوّلي في $n$ (هنا: مضاعفات ٣ ومضاعفات ٥). هذا أسرع بكثير عندما يكون $n$ كبيرًا.")],
+        ["Example 4", "Show $\\begin{pmatrix}1&2\\\\3&4\\end{pmatrix}$ and $\\begin{pmatrix}1&0\\\\3&-1\\end{pmatrix}$ don't commute.", "$AB=\\begin{pmatrix}7&-2\\\\15&-4\\end{pmatrix}$ but $BA=\\begin{pmatrix}1&2\\\\0&2\\end{pmatrix}$ — different matrices, so $GL_2(\\mathbb{R})$ is non-abelian."
+          + arNote("لاحظ: لم نحتج لإثبات \"عام\" لكل المصفوفات — رقمان محددان كفيا لإسقاط خاصية Abelian بالكامل. هذا أسرع طريق لإثبات \"غير تبديلية\" في أي امتحان.")],
+        ["Example 5", "Is $(\\mathbb{N},-)$ a group, where $\\mathbb{N}=\\{0,1,2,\\dots\\}$?", "No — fails closure: $2-5=-3\\notin\\mathbb{N}$. The result of the operation must stay inside the set."
+          + arNote("Closure يبدو بديهيًا لكنه أول ما ينهار عمليًا. هنا الطرح ببساطة \"يخرج\" من المجموعة — لا حاجة للتحقق من باقي الشروط بعد فشل شرط واحد.")],
+        ["Example 6", "Does $2$ have a multiplicative inverse in $(\\mathbb{Z}_6,\\cdot_6)$?", "Check $2\\cdot_6 x=1$ for $x=0,\\dots,5$: results are $0,2,4,0,2,4$ — $1$ never appears. No inverse exists."
+          + arNote("هذا يثبت عمليًا التحذير في الدرس ١.١: ضرب Modulo على <strong>كل</strong> $\\mathbb{Z}_n$ ليس زمرة — العنصر $2$ هنا بلا معكوس لأن $\\gcd(2,6)=2\\ne1$.")],
+        ["Example 7", "Verify closure for $\\{1,-1,i,-i\\}$ under multiplication using $i\\cdot(-i)$.", "$i\\cdot(-i)=-i^2=-(-1)=1\\in\\{1,-1,i,-i\\}$ — closed for this pair (and, checking every pair, the whole set is closed). This is a group — the 4th roots of unity."
+          + arNote("هذه المجموعة ستظهر مرة أخرى في الدرس ١.٢ كمثال على استخدام جدول Cayley — تذكّرها.")],
+        ["Example 8", "Prove a group has only one identity element.", "Suppose $e_1,e_2$ are both identities. Then $e_1=e_1e_2$ (since $e_2$ is an identity) $=e_2$ (since $e_1$ is an identity). So $e_1=e_2$."
+          + arNote("هذا نمط إثبات كلاسيكي: افترض وجود عنصرين يحققان نفس الخاصية، ثم أثبت أنهما متطابقان بالضرورة. سيتكرر هذا الأسلوب لاحقًا لإثبات تفرّد المعكوس أيضًا.")],
+        ["Example 9", "List $U(20)$.", "$20=2^2\\cdot5$: exclude multiples of $2$ and $5$ from $1,\\dots,19$. $U(20)=\\{1,3,7,9,11,13,17,19\\}$ — $8$ elements."
+          + arNote("عدد عناصر $U(n)$ يُسمّى دالة أويلر $\\varphi(n)$ (Euler's totient function) — ستقابلها لاحقًا في المقرر. هنا $\\varphi(20)=8$.")],
       ],
       questions: [
         ["Q1", "State the four group axioms in your own words.", "Closure, associativity, identity, inverse."],
@@ -198,6 +210,13 @@ const WS = [
         ["Q4", "List $U(14)$.", "$\\{1,3,5,9,11,13\\}$."],
         ["Q5", "Give a counterexample showing $2\\times2$ matrix multiplication is non-abelian.", "Any pair $A,B$ with $AB\\ne BA$, e.g. $\\begin{pmatrix}1&1\\\\0&1\\end{pmatrix}$ and $\\begin{pmatrix}1&0\\\\1&1\\end{pmatrix}$."],
         ["Q6", "Why is $(\\mathbb{Z},\\cdot)$ not a group?", "Most integers (e.g. $2$) have no integer multiplicative inverse."],
+        ["Q7", "Is $(\\mathbb{Z},-)$ a group?", "No — not associative: $(5-3)-1=1$ but $5-(3-1)=3$."],
+        ["Q8", "Compute $6+_9 7$.", "$4$ (since $13\\bmod9=4$)."],
+        ["Q9", "List $U(16)$.", "$\\{1,3,5,7,9,11,13,15\\}$."],
+        ["Q10", "Is $\\{1,i,-1,-i\\}$ closed under multiplication? Check $i\\cdot(-i)$.", "Yes — $i\\cdot(-i)=1$, which is in the set."],
+        ["Q11", "True or false: every group is abelian.", "False — e.g. $GL_2(\\mathbb{R})$ under matrix multiplication."],
+        ["Q12", "Find the inverse of $4$ in $(\\mathbb{Z}_9,+_9)$.", "$5$, since $4+_9 5=9\\equiv0$."],
+        ["Q13 — Challenge", "If a single element $a$ in a group $G$ satisfies $a^2=e$, does that force $G$ to be abelian?", "No — the Lesson 1.3 theorem needs $a^2=e$ for <em>every</em> element, not just one. A single self-inverse element proves nothing about the rest of $G$."],
       ],
     },
   },
@@ -222,6 +241,18 @@ const WS = [
           + arNote("تحقّق سريع: $|U(15)|=8$، و $O(2)=4$ يقسم $8$ ✓ — تمامًا كما توقّعنا في الملاحظة أعلاه.")],
         ["Example 3", "Find $O(3)$ in $(\\mathbb{Z}_9,+_9)$.", "$3,6,0$ — reaches $0$ in $3$ steps. $O(3)=3$."
           + arNote("مرة أخرى: $|\\mathbb{Z}_9|=9$، و $O(3)=3$ يقسم $9$ ✓. لاحظ الفرق بين هذا المثال (جمع Modulo) والمثال السابق (ضرب Modulo) — القاعدة $a^n=e$ تصبح $na=0$ لأن العملية هنا جمعية لا ضربية.")],
+        ["Example 4", "Build the Cayley table for $U(5)=\\{1,2,3,4\\}$ under $\\cdot_5$ and read off the identity.", "Row $1$: $1,2,3,4$. Row $2$: $2,4,1,3$. Row $3$: $3,1,4,2$. Row $4$: $4,3,2,1$. Symmetric; identity is $1$ (its row/column just copies the header)."
+          + arNote("طريقة سريعة لتحديد العنصر المحايد من الجدول مباشرة: هو العنصر الذي يجعل صفّه (وعموده) مطابقًا تمامًا لرأس الجدول.")],
+        ["Example 5", "How would non-abelian behaviour show up in a Cayley table, without building the full table?", "Find one entry where row $a$/col $b$ differs from row $b$/col $a$ — e.g. Lesson 1.1's matrices give $AB\\ne BA$, so their table (if you built one) would NOT be symmetric across the diagonal."
+          + arNote("هذا يوضح أن قراءة الجدول ليست فقط \"ابنِ الجدول ثم افحص\" — يمكنك أحيانًا التنبؤ بعدم التماثل من معرفة مسبقة بأن العملية غير تبديلية.")],
+        ["Example 6", "Find $O(4)$ in $(\\mathbb{Z}_{10},+_{10})$.", "$4,8,12\\equiv2,16\\equiv6,20\\equiv0$ — $5$ steps. $O(4)=5$, which divides $|\\mathbb{Z}_{10}|=10$. ✓"
+          + arNote("تحقّق القسمة يعمل دائمًا كأداة للتأكد من عدم وجود خطأ حسابي — إذا لم يقسم الناتج $|G|$ فأعد الحساب.")],
+        ["Example 7", "Find $O(5)$ in $U(7)=\\{1,2,3,4,5,6\\}$.", "$5,25\\equiv4,20\\equiv6,30\\equiv2,10\\equiv3,15\\equiv1$ — $6$ steps. $O(5)=6=|U(7)|$, so $5$ is a generator."
+          + arNote("عندما تساوي رتبة عنصر رتبة الزمرة بأكملها، فهذا العنصر \"مولّد\" (Generator) — سترى هذا المصطلح رسميًا في الدرس ١.٤.")],
+        ["Example 8", "Find $O(2)$ in $U(9)=\\{1,2,4,5,7,8\\}$.", "$2,4,8,16\\equiv7,14\\equiv5,10\\equiv1$ — $6$ steps. $O(2)=6=|U(9)|$. ✓ divides."
+          + arNote("نفس الفكرة مرة أخرى: الرتبة تساوي حجم الزمرة بالكامل، إذن $2$ مولّد لـ $U(9)$.")],
+        ["Example 9", "In $(\\mathbb{Z}_{12},+_{12})$, find $O(1)$ — the element of maximum possible order.", "$1,2,3,\\dots,12\\equiv0$ — needs all $12$ steps. $O(1)=12=|\\mathbb{Z}_{12}|$: $1$ generates the whole group."
+          + arNote("$1$ هو دائمًا مولّد لأي $\\mathbb{Z}_n$ — منطقي، لأن الجمع المتكرر لـ $1$ يمر بكل الأعداد بالترتيب قبل أن يعود للصفر.")],
       ],
       questions: [
         ["Q1", "Build the Cayley table for $U(9)=\\{1,2,4,5,7,8\\}$ under $\\cdot_9$.", "Symmetric table; identity row/col is $1$."],
@@ -230,6 +261,13 @@ const WS = [
         ["Q4", "In $U(7)=\\{1,2,3,4,5,6\\}$, find $O(3)$.", "$3,2,6,4,5,1$ — $O(3)=6$."],
         ["Q5", "If a Cayley table is NOT symmetric, what does that tell you?", "The group is non-abelian."],
         ["Q6", "Explain why $O(a)=O(a^{-1})$.", "$(a^{-1})^n=(a^n)^{-1}$, so $a^n=e \\iff (a^{-1})^n=e$ — they reach the identity after the same number of steps."],
+        ["Q7", "Build the Cayley table for $(\\mathbb{Z}_3,+_3)$.", "Rows/cols $0,1,2$; entry $(r,c)=(r+c)\\bmod3$. Symmetric."],
+        ["Q8", "Find $O(5)$ in $(\\mathbb{Z}_{10},+_{10})$.", "$5,10\\equiv0$ — $O(5)=2$."],
+        ["Q9", "Find $O(4)$ in $U(9)=\\{1,2,4,5,7,8\\}$.", "$4,16\\equiv7,28\\equiv1$ — $O(4)=3$."],
+        ["Q10", "True or false: a Cayley table for an abelian group is always symmetric.", "True."],
+        ["Q11", "In $U(11)=\\{1,\\dots,10\\}$, find $O(10)$.", "$10\\equiv-1$, and $(-1)^2=1$ — $O(10)=2$."],
+        ["Q12", "If $O(a)=5$ for some element in a group of order $10$, is that possible? Explain.", "Yes — $5$ divides $10$, so it's consistent (though this alone doesn't prove such an element exists)."],
+        ["Q13 — Challenge", "Build the Cayley table for $U(8)=\\{1,3,5,7\\}$ and explain what it reveals about every non-identity element's order.", "Every diagonal entry is $1$ ($3^2\\equiv1,5^2\\equiv1,7^2\\equiv1$) — every non-identity element has order $2$, foreshadowing that $U(8)$ is not cyclic (Lesson 1.4)."],
       ],
     },
   },
@@ -254,6 +292,18 @@ const WS = [
           + arNote("لاحظ نمطًا عميقًا: الزمر الجزئية لـ $\\mathbb{Z}_n$ تُطابق تمامًا <strong>قواسم</strong> $n$. هنا قواسم $4$ هي $1,2,4$ — وهذا بالضبط عدد الزمر الجزئية ($\\{0\\}$ يقابل $4$، $\\{0,2\\}$ يقابل $2$، و$\\mathbb{Z}_4$ يقابل $1$). جرّب تطبيق هذه الملاحظة على $\\mathbb{Z}_6$ من الدرس ١.٣ للتأكد.")],
         ["Example 3", "Find the cosets of $H=\\{1,4\\}$ in $U(5)=\\{1,2,3,4\\}$ under $\\cdot_5$.", "$1H=\\{1,4\\}=H$. $2H=\\{2,8\\bmod5\\}=\\{2,3\\}$. Two cosets cover $U(5)$."
           + arNote("تحقّق العدّ: كل Coset حجمه $2=|H|$، وعدد الـ Cosets هو $2$، والمجموع $2\\times2=4=|U(5)|$ ✓ — هذا بالضبط مبدأ العدّ وراء نظرية Lagrange مطبّقًا هنا عمليًا.")],
+        ["Example 4", "Show the diagonal invertible matrices $H=\\left\\{\\begin{pmatrix}a&0\\\\0&d\\end{pmatrix}:ad\\ne0\\right\\}$ form a subgroup of $GL_2(\\mathbb{R})$.", "Closed: $\\begin{pmatrix}a_1&0\\\\0&d_1\\end{pmatrix}\\begin{pmatrix}a_2&0\\\\0&d_2\\end{pmatrix}=\\begin{pmatrix}a_1a_2&0\\\\0&d_1d_2\\end{pmatrix}$, still diagonal with nonzero entries. Inverse: $\\begin{pmatrix}1/a&0\\\\0&1/d\\end{pmatrix}$, also diagonal. Subgroup confirmed."
+          + arNote("هذا نسخة أبسط من مثال المصفوفات المثلثية العلوية في الدرس ١.٣ — نفس المنطق تمامًا، لكن بحساب أخف لأن المصفوفات القطرية لا تحتاج إلا لضرب الأقطار.")],
+        ["Example 5", "Is $S=\\{1,2,3\\}\\subset\\mathbb{Z}_4$ a subgroup of $(\\mathbb{Z}_4,+_4)$?", "No — $S$ doesn't even contain the identity $0$, and $1+_4 3=0\\notin S$ fails closure too."
+          + arNote("مثال مضاد سريع: إذا لم تجد $0$ (أو $e$ في الحالة العامة) داخل المجموعة الجزئية، فهي ليست زمرة جزئية على الفور — لا حاجة لفحص أي شرط آخر.")],
+        ["Example 6", "Find all subgroups of $(\\mathbb{Z}_8,+_8)$.", "Divisors of $8$: $1,2,4,8$. Subgroups: $\\{0\\}$, $\\{0,4\\}$, $\\{0,2,4,6\\}$, $\\mathbb{Z}_8$."
+          + arNote("تطبيق مباشر لملاحظة \"الزمر الجزئية = قواسم $n$\" من المثال الثاني أعلاه — أربعة قواسم لـ $8$، أربع زمر جزئية بالضبط.")],
+        ["Example 7", "Find a nontrivial subgroup of $U(15)=\\{1,2,4,7,8,11,13,14\\}$.", "$H=\\{1,4\\}$: closed since $4\\cdot4=16\\equiv1\\pmod{15}$, and $4$ is its own inverse. Subgroup of order $2$."
+          + arNote("عندما لا يكون $n$ أوّليًا، غالبًا يمكنك إيجاد زمرة جزئية صغيرة بالبحث عن عنصر $a$ بحيث $a^2\\equiv1$ — فيعطيك مباشرة $\\{1,a\\}$.")],
+        ["Example 8", "Describe the cosets of $3\\mathbb{Z}$ in $(\\mathbb{Z},+)$.", "$3\\mathbb{Z}=\\{\\dots,-3,0,3,6,\\dots\\}$, $1+3\\mathbb{Z}=\\{\\dots,-2,1,4,\\dots\\}$, $2+3\\mathbb{Z}=\\{\\dots,-1,2,5,\\dots\\}$ — exactly the three remainder classes mod $3$."
+          + arNote("هذا يربط Cosets مباشرة بفكرة تعرفها مسبقًا: \"باقي القسمة على $3$\" هي في الحقيقة تقسيم $\\mathbb{Z}$ إلى Cosets لـ $3\\mathbb{Z}$ — حتى في زمرة لا نهائية، الفكرة نفسها تعمل.")],
+        ["Example 9", "Find all cosets of $H=\\{1,4\\}$ in $U(15)=\\{1,2,4,7,8,11,13,14\\}$.", "$1H=\\{1,4\\}$, $2H=\\{2,8\\}$, $7H=\\{7,13\\bmod15\\!=\\!28\\bmod15\\}=\\{7,13\\}$, $11H=\\{11,44\\bmod15\\}=\\{11,14\\}$. Four cosets of size $2$: $4\\times2=8=|U(15)|$. ✓"
+          + arNote("مثال أكبر لنفس مبدأ العدّ: أربع Cosets × حجم ٢ لكل واحدة = ٨ = حجم الزمرة كاملة. هذا التكرار مقصود — احفظ هذا النمط جيدًا فهو أساس نظرية Lagrange.")],
       ],
       questions: [
         ["Q1", "Is $6\\mathbb{Z}$ a subgroup of $(\\mathbb{Z},+)$?", "Yes — same argument as $5\\mathbb{Z}$."],
@@ -262,6 +312,13 @@ const WS = [
         ["Q4", "State $(ab)^{-1}$ in terms of $a^{-1}$ and $b^{-1}$.", "$(ab)^{-1}=b^{-1}a^{-1}$."],
         ["Q5", "Find the cosets of $H=\\{0,2,4\\}$ in $(\\mathbb{Z}_6,+_6)$.", "$0+H=\\{0,2,4\\}$; $1+H=\\{1,3,5\\}$. Two cosets."],
         ["Q6", "Why is associativity never checked in the subgroup test?", "It already holds for every element of the larger group $G$, so it automatically holds for any subset."],
+        ["Q7", "Is $7\\mathbb{Z}$ a subgroup of $(\\mathbb{Z},+)$?", "Yes — same pattern as $5\\mathbb{Z}$ and $6\\mathbb{Z}$."],
+        ["Q8", "Is $H=\\{0,2,4,6\\}$ a subgroup of $(\\mathbb{Z}_8,+_8)$?", "Yes — closed and closed under inverses (matches the divisor-$2$ subgroup of $\\mathbb{Z}_8$)."],
+        ["Q9", "List all subgroups of $(\\mathbb{Z}_{10},+_{10})$.", "Divisors of $10$: $1,2,5,10$. Subgroups: $\\{0\\}$, $\\{0,5\\}$, $\\{0,2,4,6,8\\}$, $\\mathbb{Z}_{10}$."],
+        ["Q10", "Find the cosets of $H=\\{0,3\\}$ in $(\\mathbb{Z}_6,+_6)$.", "$0+H=\\{0,3\\}$, $1+H=\\{1,4\\}$, $2+H=\\{2,5\\}$ — three cosets."],
+        ["Q11", "Is $\\{1,2\\}$ a subgroup of $U(15)$?", "No — fails closure: $2\\cdot2=4\\notin\\{1,2\\}$."],
+        ["Q12", "Is $\\{1,14\\}$ a subgroup of $U(15)$?", "Yes — $14\\equiv-1\\pmod{15}$, and $(-1)^2=1$, so it's closed and $14$ is its own inverse."],
+        ["Q13 — Challenge", "Prove that every right coset $Ha$ has exactly the same number of elements as $H$.", "The map $h\\mapsto ha$ is a bijection $H\\to Ha$ — its inverse is $x\\mapsto xa^{-1}$. A bijection between two sets means they have the same size, so $|Ha|=|H|$."],
       ],
     },
   },
@@ -288,6 +345,18 @@ const WS = [
           + arNote("نتيجة عامة مهمة: $U(p)$ دورية (Cyclic) دائمًا عندما يكون $p$ عددًا أوّليًا — تحقّقنا من هذا هنا لـ $p=11$، وهي نفس النتيجة التي رأيناها سابقًا مع $U(5)$ و$U(7)$. قارن هذا مع $U(8)$ (حيث $8$ ليس أوّليًا) وهي ليست دورية — العددية الأوّلية شرط أساسي هنا.")],
         ["Example 3", "Find $Z(G)$ for an abelian group $G$.", "$Z(G)=G$, since every element commutes with every other by definition of abelian."
           + arNote("هذه أسهل حالة ممكنة لحساب المركز — الجزء الصعب فعليًا هو إيجاد $Z(G)$ لزمرة <strong>غير</strong> تبديلية، حيث $Z(G)$ يكون أصغر من $G$ بشكل حقيقي (مجموعة جزئية صريحة، وليس كل الزمرة).")],
+        ["Example 4", "Find $\\langle2\\rangle\\cap\\langle3\\rangle$ in $(\\mathbb{Z}_{12},+_{12})$, where $\\langle2\\rangle=\\{0,2,4,6,8,10\\}$ and $\\langle3\\rangle=\\{0,3,6,9\\}$.", "Common elements: $\\{0,6\\}$ — matching $\\langle\\text{lcm}(2,3)\\rangle=\\langle6\\rangle$."
+          + arNote("نفس قاعدة $n\\mathbb{Z}\\cap m\\mathbb{Z}=\\text{lcm}(n,m)\\mathbb{Z}$ من المثال الأول، لكن الآن داخل زمرة منتهية $\\mathbb{Z}_{12}$ بدل $\\mathbb{Z}$ اللانهائية — نفس المبدأ ينطبق بالضبط.")],
+        ["Example 5", "Show $H\\cup K$ fails to be a subgroup of $(\\mathbb{Z}_6,+_6)$ for $H=\\{0,3\\}$, $K=\\{0,2,4\\}$.", "$H\\cup K=\\{0,2,3,4\\}$, but $2+_6 3=5\\notin H\\cup K$ — closure fails."
+          + arNote("مثال ملموس داخل زمرة منتهية صغيرة يمكنك التحقق منه يدويًا كاملاً — أفضل طريقة لتصديق أن الاتحاد يفشل فعليًا، لا فقط نظريًا.")],
+        ["Example 6", "Find the center of $GL_2(\\mathbb{R})$ (informally): which matrices commute with every invertible matrix?", "Scalar matrices $kI=\\begin{pmatrix}k&0\\\\0&k\\end{pmatrix}$ ($k\\ne0$): $(kI)A=kA=A(kI)$ for any matrix $A$. So $Z(GL_2(\\mathbb{R}))\\supseteq\\{kI:k\\ne0\\}$."
+          + arNote("هذا مثال عملي على \"مركز غير تافه في زمرة غير تبديلية\" — بالرغم من أن $GL_2(\\mathbb{R})$ نفسها Non-Abelian، إلا أن مضاعفات مصفوفة الهوية تبقى \"هادئة\" دائمًا.")],
+        ["Example 7", "Is $(\\mathbb{Z}_{12},+_{12})$ cyclic? Name a generator.", "Yes — $1$ generates every element ($1,2,3,\\dots,11,0$), so $O(1)=12=|\\mathbb{Z}_{12}|$."
+          + arNote("$1$ (وأي عنصر أوّلي نسبيًا مع $n$) يُعتبر دائمًا مولّدًا لـ $\\mathbb{Z}_n$ — سترى في المثال التالي أن ليست كل الزمر بهذا الوضوح.")],
+        ["Example 8", "Is $U(15)=\\{1,2,4,7,8,11,13,14\\}$ cyclic?", "$|U(15)|=8$, but checking every element gives maximum order $4$ (e.g. $O(2)=4$) — no element reaches order $8$. Not cyclic."
+          + arNote("هذا يطابق نتيجة نظرية معروفة: $U(n)$ دورية فقط عندما $n\\in\\{1,2,4,p^k,2p^k\\}$ لعدد أوّلي $p$ — و $15=3\\times5$ لا يحقق هذا الشرط، فليست دورية.")],
+        ["Example 9", "List all generators of $(\\mathbb{Z}_7,+_7)$.", "$7$ is prime, so every nonzero element generates: $\\{1,2,3,4,5,6\\}$ are all generators."
+          + arNote("في $\\mathbb{Z}_p$ لعدد أوّلي $p$، كل عنصر غير صفري هو مولّد — الحالة الأبسط والأكثر تناظرًا بين كل الزمر الدورية.")],
       ],
       questions: [
         ["Q1", "Find $2\\mathbb{Z}\\cap5\\mathbb{Z}$.", "$10\\mathbb{Z}$."],
@@ -296,6 +365,13 @@ const WS = [
         ["Q4", "State the relationship between cyclic and abelian groups.", "Every cyclic group is abelian; not every abelian group is cyclic."],
         ["Q5", "If $x\\in Z(G)$, is $x^{-1}\\in Z(G)$? Why?", "Yes — $Z(G)$ is a subgroup, so it's closed under inverses."],
         ["Q6", "Name a generator of $(\\mathbb{Z}_7,+_7)$.", "Any nonzero element, e.g. $1$ (or $2,3,4,5,6$)."],
+        ["Q7", "Find $4\\mathbb{Z}\\cap10\\mathbb{Z}$.", "$20\\mathbb{Z}$ (since $\\text{lcm}(4,10)=20$)."],
+        ["Q8", "Find $\\langle2\\rangle\\cap\\langle4\\rangle$ in $(\\mathbb{Z}_{12},+_{12})$.", "$\\{0,4,8\\}=\\langle4\\rangle$ (since $\\langle4\\rangle\\subseteq\\langle2\\rangle$, matching $\\text{lcm}(2,4)=4$)."],
+        ["Q9", "Can a non-abelian group have $Z(G)=\\{e\\}$?", "Yes — many non-abelian groups have a trivial center."],
+        ["Q10", "Is $U(16)$ cyclic?", "No — $|U(16)|=8$ but the maximum element order is $4$, so no generator exists."],
+        ["Q11", "Name a generator of $(\\mathbb{Z}_9,+_9)$.", "Any element coprime to $9$, e.g. $1$ (or $2,4,5,7,8$)."],
+        ["Q12", "True or false: if $G$ is cyclic, every subgroup of $G$ is also cyclic.", "True."],
+        ["Q13 — Challenge", "Find a case where $H\\cup K$ IS a subgroup (contrasting the usual failure).", "Whenever one contains the other, e.g. $H=\\{0,4\\}\\subseteq K=\\{0,2,4,6\\}$ in $\\mathbb{Z}_8$ — then $H\\cup K=K$, still a subgroup."],
       ],
     },
   },
