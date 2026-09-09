@@ -33,11 +33,17 @@ const nextConfig: NextConfig = {
     // so covering both is cheap insurance; an unmatched key is a no-op.
     "/api/worksheets/[id]/regenerate": [
       "./node_modules/katex/dist/katex.min.css",
-      "./node_modules/@sparticuz/chromium/**",
+      "./node_modules/@sparticuz/chromium/bin/chromium.br",
+      "./node_modules/@sparticuz/chromium/bin/fonts.tar.br",
+      "./node_modules/@sparticuz/chromium/bin/swiftshader.tar.br",
+      "./node_modules/@sparticuz/chromium/bin/al2023.tar.br",
     ],
     "/api/worksheets/[id]/regenerate/route": [
       "./node_modules/katex/dist/katex.min.css",
-      "./node_modules/@sparticuz/chromium/**",
+      "./node_modules/@sparticuz/chromium/bin/chromium.br",
+      "./node_modules/@sparticuz/chromium/bin/fonts.tar.br",
+      "./node_modules/@sparticuz/chromium/bin/swiftshader.tar.br",
+      "./node_modules/@sparticuz/chromium/bin/al2023.tar.br",
     ],
   },
   async headers() {
