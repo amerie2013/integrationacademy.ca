@@ -17,6 +17,26 @@ u1["1.1"] = L("1.1", "Power Functions & End Behaviour", [
     <li><strong>Odd \(n\)</strong> (\(x^3,x^5,\dots\)): the ends go <em>opposite</em> ways — down–up if \(a>0\), up–down if \(a<0\).</li>
     <li>We write this with limits: e.g. for \(y=x^3\), as \(x\to+\infty,\ y\to+\infty\) and as \(x\to-\infty,\ y\to-\infty\).</li>
   </ul>
+  <div style="overflow-x:auto;margin:10px 0;">
+    <table style="border-collapse:collapse;width:100%;font-size:14px;">
+      <thead>
+        <tr style="background:#eef2ff;color:#3730a3;">
+          <th style="border:1px solid #c7d2fe;padding:7px 12px;text-align:left;">Degree \(n\)</th>
+          <th style="border:1px solid #c7d2fe;padding:7px 12px;text-align:left;">Sign of \(a\)</th>
+          <th style="border:1px solid #c7d2fe;padding:7px 12px;text-align:left;">Left end (\(x\to-\infty\))</th>
+          <th style="border:1px solid #c7d2fe;padding:7px 12px;text-align:left;">Right end (\(x\to+\infty\))</th>
+          <th style="border:1px solid #c7d2fe;padding:7px 12px;text-align:left;">Shape</th>
+          <th style="border:1px solid #c7d2fe;padding:7px 12px;text-align:left;">Example</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="border:1px solid #e2e8f0;padding:6px 12px;">Even</td><td style="border:1px solid #e2e8f0;padding:6px 12px;">\(a>0\)</td><td style="border:1px solid #e2e8f0;padding:6px 12px;">\(y\to+\infty\)</td><td style="border:1px solid #e2e8f0;padding:6px 12px;">\(y\to+\infty\)</td><td style="border:1px solid #e2e8f0;padding:6px 12px;">up–up</td><td style="border:1px solid #e2e8f0;padding:6px 12px;">\(y=x^2\)</td></tr>
+        <tr><td style="border:1px solid #e2e8f0;padding:6px 12px;">Even</td><td style="border:1px solid #e2e8f0;padding:6px 12px;">\(a<0\)</td><td style="border:1px solid #e2e8f0;padding:6px 12px;">\(y\to-\infty\)</td><td style="border:1px solid #e2e8f0;padding:6px 12px;">\(y\to-\infty\)</td><td style="border:1px solid #e2e8f0;padding:6px 12px;">down–down</td><td style="border:1px solid #e2e8f0;padding:6px 12px;">\(y=-x^2\)</td></tr>
+        <tr><td style="border:1px solid #e2e8f0;padding:6px 12px;">Odd</td><td style="border:1px solid #e2e8f0;padding:6px 12px;">\(a>0\)</td><td style="border:1px solid #e2e8f0;padding:6px 12px;">\(y\to-\infty\)</td><td style="border:1px solid #e2e8f0;padding:6px 12px;">\(y\to+\infty\)</td><td style="border:1px solid #e2e8f0;padding:6px 12px;">down–up</td><td style="border:1px solid #e2e8f0;padding:6px 12px;">\(y=x^3\)</td></tr>
+        <tr><td style="border:1px solid #e2e8f0;padding:6px 12px;">Odd</td><td style="border:1px solid #e2e8f0;padding:6px 12px;">\(a<0\)</td><td style="border:1px solid #e2e8f0;padding:6px 12px;">\(y\to+\infty\)</td><td style="border:1px solid #e2e8f0;padding:6px 12px;">\(y\to-\infty\)</td><td style="border:1px solid #e2e8f0;padding:6px 12px;">up–down</td><td style="border:1px solid #e2e8f0;padding:6px 12px;">\(y=-x^3\)</td></tr>
+      </tbody>
+    </table>
+  </div>
   ${gframe(["y = x^2", "y = x^4"], { title: "Even degree: both ends up (x² and x⁴)" })}
   <h2>🔵 Examples</h2>
   <div class="example-box" ${EX}><h3>Example 1: End behaviour of a full polynomial</h3><p>Determine the end behaviour of \(f(x)=-3x^5+2x^3-7x+4\), using limit notation.</p><div class="solution"><div class="step"><strong>Step 1:</strong> Far from the origin only the <em>leading term</em> matters: here that is \(-3x^5\).</div><div class="step"><strong>Step 2:</strong> Degree \(5\) is odd ⇒ the ends go opposite ways; \(a=-3<0\) ⇒ the left end rises and the right end falls.</div><em>Conclusion: as \(x\to-\infty,\ f(x)\to+\infty\); as \(x\to+\infty,\ f(x)\to-\infty\). ✓</em></div>${gframe(["y = -3*x^5 + 2*x^3 - 7*x + 4"], { title: "f(x)=−3x⁵+2x³−7x+4: left end up, right end down — the −3x⁵ term decides (zoom out)" })}</div>
