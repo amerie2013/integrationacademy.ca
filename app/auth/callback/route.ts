@@ -18,11 +18,22 @@ export async function GET(req: NextRequest) {
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
   );
 
-  const { error } = await supabase.auth.exchangeCodeForSession(code);
+  const { data, error } = await supabase.auth.exchangeCodeForSession(code);
 
   if (error) {
     console.error("Auth callback error:", error.message);
     return NextResponse.redirect(`${appUrl}/login?error=verification_failed`);
+  }
+
+  // OAuth (Google/Microsoft) never collects role/grade — send those straight to
+  // the completion form instead of flashing the dashboard first. Email/password
+  // sign-ups always have a grade already (set at signup), so this only catches
+  // OAuth accounts.
+  if (data.user) {
+    const { data: prof } = await supabase.from("profiles").select("role, level").eq("id", data.user.id).single();
+    if ((prof?.role ?? "student") === "student" && !prof?.level) {
+      return NextResponse.redirect(`${appUrl}/complete-profile`);
+    }
   }
 
   return NextResponse.redirect(`${appUrl}/dashboard`);

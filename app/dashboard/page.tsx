@@ -65,6 +65,14 @@ export default function DashboardPage() {
         .eq("id", session.user.id)
         .single();
 
+      // OAuth sign-ins never collect a grade — catch it here (covers both fresh
+      // sign-ins and existing accounts that were never completed) before showing
+      // any student content.
+      if ((prof?.role ?? "student") === "student" && !prof?.level) {
+        router.push("/complete-profile");
+        return;
+      }
+
       if (prof?.role === "teacher" || prof?.role === "admin") {
         router.push("/teacher");
         return;
