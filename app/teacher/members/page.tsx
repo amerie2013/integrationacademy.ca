@@ -18,6 +18,7 @@ type Row = {
   subscription_expires_at: string | null;
   class_quota: number | null;
   created_at: string | null;
+  stripe_customer_id: string | null;
 };
 
 type AuthMeta = { email_confirmed: boolean; last_sign_in_at: string | null; banned?: boolean };
@@ -42,14 +43,14 @@ export default function MembersAdminPage() {
   const [note, setNote] = useState("");
   const [seatsCol, setSeatsCol] = useState(true); // false → class_quota column not migrated yet
   const [courses, setCourses] = useState<{ id: string; label: string }[]>([]);
-  const [grants, setGrants] = useState<Record<string, { id: string; course_id: string; kind: string; status: string }[]>>({});
+  const [grants, setGrants] = useState<Record<string, { id: string; course_id: string; kind: string; status: string; plan: string | null }[]>>({});
   const [gDraft, setGDraft] = useState<{ course: string; kind: string }>({ course: "", kind: "student" });
 
   function flash(m: string) { setMsg(m); setErr(""); setTimeout(() => setMsg(""), 2600); }
   function fail(m: string) { setErr(m); setMsg(""); }
 
   async function load() {
-    const BASE = "id, full_name, email, role, level, subscription_plan, subscription_status, subscription_expires_at, created_at";
+    const BASE = "id, full_name, email, role, level, subscription_plan, subscription_status, subscription_expires_at, created_at, stripe_customer_id";
     // Try the full select (with class_quota). If that column doesn't exist yet
     // (paywall migration not run), fall back to the base columns so members still
     // load — we just disable the class-seats control instead of blocking the page.
@@ -78,7 +79,7 @@ export default function MembersAdminPage() {
 
   // ── per-course access grants (admin comp) ──
   async function loadGrants(userId: string) {
-    const { data } = await supabase.from("course_grants").select("id, course_id, kind, status").eq("user_id", userId).in("status", ["active", "trialing"]);
+    const { data } = await supabase.from("course_grants").select("id, course_id, kind, status, plan").eq("user_id", userId).in("status", ["active", "trialing"]);
     setGrants((g) => ({ ...g, [userId]: (data ?? []) as any }));
   }
   function toggleExpand(r: Row) {
@@ -349,19 +350,28 @@ export default function MembersAdminPage() {
                       Joined {r.created_at ? new Date(r.created_at).toLocaleDateString() : "—"}
                       {meta[r.id]?.last_sign_in_at ? ` · Last sign-in ${new Date(meta[r.id].last_sign_in_at as string).toLocaleDateString()}` : ""}
                       {r.subscription_plan ? ` · Plan: ${r.subscription_plan}` : ""}
+                      {r.stripe_customer_id ? ` · Stripe: ${r.stripe_customer_id}` : ""}
                     </div>
+                    {r.subscription_plan && !r.stripe_customer_id && (
+                      <div style={{ fontSize: 12, color: "#b45309", background: "#fffbeb", border: "1px solid #fde68a", borderRadius: 8, padding: "6px 10px" }}>
+                        ⚠ No Stripe customer on this profile — this plan was very likely set manually by an admin, not paid for.
+                      </div>
+                    )}
 
                     <div style={{ borderTop: "1px solid #f1f5f9", paddingTop: 12 }}>
-                      <div style={{ fontSize: 12, fontWeight: 700, color: "#475569", marginBottom: 8 }}>Course access (per-course) — comp free access to a specific course</div>
+                      <div style={{ fontSize: 12, fontWeight: 700, color: "#475569", marginBottom: 8 }}>Course access (per-course) — every active grant, bought or comped; use the tools below to comp a free one</div>
                       {(grants[r.id] ?? []).length === 0
-                        ? <div style={{ fontSize: 13, color: "#94a3b8", marginBottom: 10 }}>No comped courses — this member accesses only courses they've bought or joined via a class.</div>
+                        ? <div style={{ fontSize: 13, color: "#94a3b8", marginBottom: 10 }}>No course access — nothing bought, comped, or joined via a class.</div>
                         : <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 10 }}>
-                            {(grants[r.id] ?? []).map((g) => (
-                              <span key={g.id} style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#ecfdf5", border: "1px solid #a7f3d0", borderRadius: 999, padding: "4px 6px 4px 12px", fontSize: 13, fontWeight: 600, color: "#065f46" }}>
-                                {courseLabel(g.course_id)} · {g.kind}
-                                <button onClick={() => revokeGrant(r.id, g.id)} disabled={busy} title="Revoke" style={{ border: "none", background: "#fff", color: "#dc2626", borderRadius: 999, width: 20, height: 20, fontWeight: 800, cursor: "pointer", lineHeight: 1 }}>×</button>
-                              </span>
-                            ))}
+                            {(grants[r.id] ?? []).map((g) => {
+                              const comped = !!g.plan?.endsWith("_comp");
+                              return (
+                                <span key={g.id} style={{ display: "inline-flex", alignItems: "center", gap: 8, background: comped ? "#fff7ed" : "#ecfdf5", border: `1px solid ${comped ? "#fed7aa" : "#a7f3d0"}`, borderRadius: 999, padding: "4px 6px 4px 12px", fontSize: 13, fontWeight: 600, color: comped ? "#9a3412" : "#065f46" }}>
+                                  {courseLabel(g.course_id)} · {g.kind} · {comped ? "🎁 comped" : `💳 ${g.plan ?? "paid"}`}
+                                  <button onClick={() => revokeGrant(r.id, g.id)} disabled={busy} title="Revoke" style={{ border: "none", background: "#fff", color: "#dc2626", borderRadius: 999, width: 20, height: 20, fontWeight: 800, cursor: "pointer", lineHeight: 1 }}>×</button>
+                                </span>
+                              );
+                            })}
                           </div>}
                       <div style={{ display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center" }}>
                         <select value={gDraft.course} onChange={(e) => setGDraft({ ...gDraft, course: e.target.value })} style={sel}>
