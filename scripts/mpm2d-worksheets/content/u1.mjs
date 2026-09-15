@@ -4,9 +4,10 @@ const r = String.raw;
 export default [
 {
   code: "1.2", unit: "1: Linear Systems", title: "Solving Linear Systems by Graphing",
-  intro: r`A \textbf{linear system} is two lines considered together; its \textbf{solution} is the point $(x,y)$ that lies on \emph{both} lines --- the point of intersection (POI).`,
+  intro: r`A \textbf{linear system} is two lines considered together; its \textbf{solution} is the point $(x,y)$ that lies on \emph{both} lines --- the point of intersection (POI). Solve by graphing: draw the first line, draw the second line on the same grid, then read where they cross.`,
   ideas: [
-    r`Put each line in $y=mx+b$, graph both, and read off the intersection point.`,
+    r`For $y=mx+b$: plot the $y$-intercept $b$, use the slope's $\dfrac{\text{rise}}{\text{run}}$ to find a second point, \textbf{check} that point, then draw the line.`,
+    r`For standard form $Ax+By=C$: find the $x$-intercept (set $y=0$) and $y$-intercept (set $x=0$) and draw the line through them --- no need to solve for $y$ first.`,
     r`The POI must satisfy \emph{both} equations --- always \textbf{check} by substituting back.`,
     r`\textbf{One solution:} the lines cross once (different slopes).`,
     r`\textbf{No solution:} parallel lines (equal slopes, different $y$-intercepts).`,
@@ -14,30 +15,56 @@ export default [
   ],
   examples: [
     { t: "Checking a solution", body: r`Verify that $(2,1)$ solves the system $y=x-1$ and $y=-x+3$.
-\soln Substitute: $2-1=1\ \checkmark$ and $-2+3=1\ \checkmark$. It satisfies both, so $(2,1)$ is the solution.
-\plot{-2}{6}{-2}{6}{\addplot[exblue,very thick,domain=-2:6,samples=2]{x-1};\addplot[qorange,very thick,domain=-2:6,samples=2]{-x+3};\addplot[mark=*,only marks,black]coordinates{(2,1)};}` },
+\soln Substitute the point into \emph{both} equations. First equation: $y=x-1\Rightarrow 1=2-1=1\ \checkmark$. Second equation: $y=-x+3\Rightarrow 1=-2+3=1\ \checkmark$. Since it makes both equations true, $(2,1)$ is the point where the two lines cross.
+\plot{-2}{6}{-2}{6}{\addplot[exblue,very thick,domain=-2:6,samples=2]{x-1};\addplot[qorange,very thick,domain=-2:6,samples=2]{-x+3};\addplot[mark=*,only marks,ex3]coordinates{(2,1)};}` },
     { t: "Graphing a simple system", body: r`Solve by graphing: $y=x+1$ and $y=-x+5$.
-\soln Graph both lines; they cross at $(2,3)$. Check: $2+1=3$ and $-2+5=3$. Solution $(2,3)$.
-\plot{-2}{7}{-2}{7}{\addplot[exblue,very thick,domain=-2:6,samples=2]{x+1};\addplot[qorange,very thick,domain=-2:6,samples=2]{-x+5};\addplot[mark=*,only marks,black]coordinates{(2,3)};}` },
+\soln \textbf{Step 1 (draw the first line, $y=x+1$):} $b=1$, plot $(0,1)$. Slope $\tfrac11$ (rise $1$, run $1$): from $(0,1)$ go right $1$, up $1$, to $(1,2)$. Check: $y=1+1=2\ \checkmark$. Draw the line through both points.
+\textbf{Step 2 (draw the second line, $y=-x+5$):} $b=5$, plot $(0,5)$. Slope $\tfrac{-1}{1}$: from $(0,5)$ go right $1$, down $1$, to $(1,4)$. Check: $y=-1+5=4\ \checkmark$. Draw the line.
+\textbf{Step 3 (find the intersection):} the two lines cross at $(2,3)$.
+\textbf{Step 4 (check):} $2+1=3\ \checkmark$ and $-2+5=3\ \checkmark$. Solution $(2,3)$.
+\plot{-2}{7}{-2}{7}{\addplot[exblue,very thick,domain=-2:6,samples=2]{x+1};\addplot[qorange,very thick,domain=-2:6,samples=2]{-x+5};\addplot[mark=*,only marks,exblue]coordinates{(0,1)(1,2)};\addplot[mark=*,only marks,qorange]coordinates{(0,5)(1,4)};\addplot[mark=*,only marks,ex3]coordinates{(2,3)};}` },
     { t: "Steeper lines", body: r`Solve by graphing: $y=2x-3$ and $y=-x+3$.
-\soln Set equal: $2x-3=-x+3\Rightarrow 3x=6\Rightarrow x=2$, so $y=1$. Solution $(2,1)$.
-\plot{-2}{6}{-4}{6}{\addplot[exblue,very thick,domain=-1:4,samples=2]{2*x-3};\addplot[qorange,very thick,domain=-2:5,samples=2]{-x+3};\addplot[mark=*,only marks,black]coordinates{(2,1)};}` },
+\soln \textbf{Step 1 (draw the first line, $y=2x-3$):} $b=-3$, plot $(0,-3)$. Slope $\tfrac21$: from $(0,-3)$ go right $1$, up $2$, to $(1,-1)$. Check: $y=2(1)-3=-1\ \checkmark$. Draw the line.
+\textbf{Step 2 (draw the second line, $y=-x+3$):} $b=3$, plot $(0,3)$. Slope $\tfrac{-1}{1}$: from $(0,3)$ go right $1$, down $1$, to $(1,2)$. Check: $y=-1+3=2\ \checkmark$. Draw the line.
+\textbf{Step 3 (find the intersection):} extending both lines, they cross at $(2,1)$. Confirm algebraically: $2x-3=-x+3\Rightarrow 3x=6\Rightarrow x=2$, so $y=1$.
+\textbf{Step 4 (check):} $1=2(2)-3\ \checkmark$ and $1=-2+3\ \checkmark$. Solution $(2,1)$.
+\plot{-2}{6}{-4}{6}{\addplot[exblue,very thick,domain=-1:4,samples=2]{2*x-3};\addplot[qorange,very thick,domain=-2:5,samples=2]{-x+3};\addplot[mark=*,only marks,exblue]coordinates{(0,-3)(1,-1)};\addplot[mark=*,only marks,qorange]coordinates{(0,3)(1,2)};\addplot[mark=*,only marks,ex3]coordinates{(2,1)};}` },
     { t: "One equation in standard form", body: r`Solve by graphing: $x+y=4$ and $y=2x-2$.
-\soln Rewrite $x+y=4$ as $y=-x+4$. Then $-x+4=2x-2\Rightarrow 6=3x\Rightarrow x=2$, $y=2$. Solution $(2,2)$.
-\plot{-2}{6}{-3}{6}{\addplot[exblue,very thick,domain=-1:4,samples=2]{-x+4};\addplot[qorange,very thick,domain=-1:4,samples=2]{2*x-2};\addplot[mark=*,only marks,black]coordinates{(2,2)};}` },
+\soln \textbf{Step 1 (draw the first line, $x+y=4$, standard form):} $x$-intercept (set $y=0$): $x=4$, plot $(4,0)$. $y$-intercept (set $x=0$): $y=4$, plot $(0,4)$. Draw the line through both intercepts --- no need to solve for $y$ first.
+\textbf{Step 2 (draw the second line, $y=2x-2$, slope-intercept form):} $b=-2$, plot $(0,-2)$. Slope $\tfrac21$: from $(0,-2)$ go right $1$, up $2$, to $(1,0)$. Check: $y=2(1)-2=0\ \checkmark$. Draw the line.
+\textbf{Step 3 (find the intersection):} the lines cross at $(2,2)$. Confirm: $x+y=4\Rightarrow 2+2=4\ \checkmark$; also $-x+4=2x-2\Rightarrow 6=3x\Rightarrow x=2$.
+\textbf{Step 4 (check):} $2+2=4\ \checkmark$ and $2=2(2)-2\ \checkmark$. Solution $(2,2)$.
+\plot{-2}{6}{-3}{6}{\addplot[exblue,very thick,domain=-1:4,samples=2]{-x+4};\addplot[qorange,very thick,domain=-1:4,samples=2]{2*x-2};\addplot[mark=*,only marks,exblue]coordinates{(4,0)(0,4)};\addplot[mark=*,only marks,qorange]coordinates{(0,-2)(1,0)};\addplot[mark=*,only marks,ex3]coordinates{(2,2)};}` },
     { t: "Both in standard form", body: r`Solve by graphing: $2x+y=5$ and $x-y=1$.
-\soln Rewrite as $y=-2x+5$ and $y=x-1$. Then $-2x+5=x-1\Rightarrow 6=3x\Rightarrow x=2$, $y=1$. Solution $(2,1)$.
-\plot{-2}{6}{-4}{6}{\addplot[exblue,very thick,domain=-1:4,samples=2]{-2*x+5};\addplot[qorange,very thick,domain=-2:5,samples=2]{x-1};\addplot[mark=*,only marks,black]coordinates{(2,1)};}` },
+\soln \textbf{Step 1 (draw the first line, $2x+y=5$):} $x$-intercept (set $y=0$): $2x=5\Rightarrow x=2.5$, plot $(2.5,0)$. $y$-intercept (set $x=0$): $y=5$, plot $(0,5)$. Draw the line through both.
+\textbf{Step 2 (draw the second line, $x-y=1$):} $x$-intercept (set $y=0$): $x=1$, plot $(1,0)$. $y$-intercept (set $x=0$): $-y=1\Rightarrow y=-1$, plot $(0,-1)$. Draw the line through both.
+\textbf{Step 3 (find the intersection):} the lines cross at $(2,1)$. Confirm by adding the equations: $2x+y=5$ and $x-y=1$ give $3x=6\Rightarrow x=2$, so $y=1$.
+\textbf{Step 4 (check):} $2(2)+1=5\ \checkmark$ and $2-1=1\ \checkmark$. Solution $(2,1)$.
+\plot{-2}{6}{-4}{6}{\addplot[exblue,very thick,domain=-1:4,samples=2]{-2*x+5};\addplot[qorange,very thick,domain=-2:5,samples=2]{x-1};\addplot[mark=*,only marks,exblue]coordinates{(2.5,0)(0,5)};\addplot[mark=*,only marks,qorange]coordinates{(1,0)(0,-1)};\addplot[mark=*,only marks,ex3]coordinates{(2,1)};}` },
     { t: "Parallel lines (no solution)", body: r`Solve by graphing: $y=2x+1$ and $y=2x-3$.
-\soln Both have slope $2$ but different $y$-intercepts, so the lines are parallel and never meet --- \textbf{no solution}.
-\plot{-4}{4}{-6}{6}{\addplot[exblue,very thick,domain=-4:2,samples=2]{2*x+1};\addplot[qorange,very thick,domain=-2:4,samples=2]{2*x-3};}` },
+\soln \textbf{Step 1 (draw the first line, $y=2x+1$):} $b=1$, plot $(0,1)$. Slope $\tfrac21$: from $(0,1)$ go right $1$, up $2$, to $(1,3)$. Check: $y=2(1)+1=3\ \checkmark$. Draw the line.
+\textbf{Step 2 (draw the second line, $y=2x-3$):} $b=-3$, plot $(0,-3)$. Slope $\tfrac21$ --- \emph{the same rise and run as the first line}: from $(0,-3)$ go right $1$, up $2$, to $(1,-1)$. Check: $y=2(1)-3=-1\ \checkmark$. Draw the line.
+\textbf{Step 3 (find the intersection):} both lines rise at the identical rate, so the second line stays exactly $4$ units below the first everywhere --- they never meet, no matter how far extended.
+\textbf{Conclusion:} equal slopes, different $y$-intercepts $\Rightarrow$ parallel lines $\Rightarrow$ \textbf{no solution}.
+\plot{-4}{4}{-6}{6}{\addplot[exblue,very thick,domain=-4:2,samples=2]{2*x+1};\addplot[qorange,very thick,domain=-2:4,samples=2]{2*x-3};\addplot[mark=*,only marks,exblue]coordinates{(0,1)(1,3)};\addplot[mark=*,only marks,qorange]coordinates{(0,-3)(1,-1)};}` },
     { t: "Same line (infinitely many)", body: r`Solve: $y=x+2$ and $2x-2y=-4$.
-\soln Rearrange $2x-2y=-4\Rightarrow -2y=-2x-4\Rightarrow y=x+2$. This is the \emph{same} line, so there are \textbf{infinitely many solutions}.` },
+\soln \textbf{Step 1 (simplify before drawing):} divide the second equation by $2$: $2x-2y=-4\Rightarrow x-y=-2\Rightarrow y=x+2$ --- identical to the first equation.
+\textbf{Step 2 (draw the line, $y=x+2$):} $b=2$, plot $(0,2)$. Slope $\tfrac11$: from $(0,2)$ go right $1$, up $1$, to $(1,3)$. Check: $y=1+2=3\ \checkmark$. Draw the line.
+\textbf{Step 3 (draw the "second" line):} since the simplified second equation is exactly $y=x+2$ again, its $y$-intercept and second point land on the same two points --- it traces over the first line exactly, with no separate crossing point.
+\textbf{Conclusion:} the two equations describe the \emph{same} line, so there are \textbf{infinitely many solutions}.
+\plot{-3}{4}{-2}{6}{\addplot[exblue,very thick,domain=-3:4,samples=2]{x+2};\addplot[mark=*,only marks,exblue]coordinates{(0,2)(1,3)};}` },
     { t: "An application", body: r`Gym A charges \$5 per visit: $C=5v$. Gym B charges \$4 plus \$3 per visit: $C=3v+4$. When is the cost equal?
-\soln $5v=3v+4\Rightarrow 2v=4\Rightarrow v=2$ visits, and $C=\$10$.
-\plot{0}{6}{0}{26}{\addplot[exblue,very thick,domain=0:5,samples=2]{5*x};\addplot[qorange,very thick,domain=0:5,samples=2]{3*x+4};\addplot[mark=*,only marks,black]coordinates{(2,10)};}` },
+\soln \textbf{Step 1 (draw the first line, $C=5v$):} $b=0$, plot $(0,0)$. Slope $\tfrac51$: from $(0,0)$ go right $1$ visit, up $\$5$, to $(1,5)$. Check: $C=5(1)=5\ \checkmark$. Draw the line.
+\textbf{Step 2 (draw the second line, $C=3v+4$):} $b=4$, plot $(0,4)$. Slope $\tfrac31$: from $(0,4)$ go right $1$, up $\$3$, to $(1,7)$. Check: $C=3(1)+4=7\ \checkmark$. Draw the line.
+\textbf{Step 3 (find the intersection):} extending both lines, they cross at $(2,10)$. Confirm: $5v=3v+4\Rightarrow 2v=4\Rightarrow v=2$ visits.
+\textbf{Step 4 (check):} $5(2)=10\ \checkmark$ and $3(2)+4=10\ \checkmark$. The costs are equal at $v=2$ visits, $C=\$10$.
+\plot{0}{6}{0}{26}{\addplot[exblue,very thick,domain=0:5,samples=2]{5*x};\addplot[qorange,very thick,domain=0:5,samples=2]{3*x+4};\addplot[mark=*,only marks,exblue]coordinates{(0,0)(1,5)};\addplot[mark=*,only marks,qorange]coordinates{(0,4)(1,7)};\addplot[mark=*,only marks,ex3]coordinates{(2,10)};}` },
     { t: "Solve and classify (harder)", body: r`Solve and classify: $3x-2y=6$ and $y=\tfrac32x-3$.
-\soln Rearrange the first: $3x-2y=6\Rightarrow -2y=-3x+6\Rightarrow y=\tfrac32x-3$. It is identical to the second equation, so the system has \textbf{infinitely many solutions} (coincident lines).` },
+\soln \textbf{Step 1 (draw the first line, $3x-2y=6$, standard form):} $x$-intercept (set $y=0$): $3x=6\Rightarrow x=2$, plot $(2,0)$. $y$-intercept (set $x=0$): $-2y=6\Rightarrow y=-3$, plot $(0,-3)$. Draw the line through both.
+\textbf{Step 2 (draw the second line, $y=\tfrac32x-3$, slope-intercept form):} $b=-3$, plot $(0,-3)$ --- \emph{the same point as line 1's $y$-intercept}. Slope $\tfrac32$ (rise $3$, run $2$): from $(0,-3)$ go right $2$, up $3$, to $(2,0)$ --- \emph{the same point as line 1's $x$-intercept}.
+\textbf{Step 3 (compare):} both lines pass through the exact same two points, $(0,-3)$ and $(2,0)$, so they are the identical line.
+\textbf{Conclusion:} the system has \textbf{infinitely many solutions} (coincident lines).
+\plot{-1}{5}{-5}{2}{\addplot[exblue,very thick,domain=-1:4,samples=2]{1.5*x-3};\addplot[mark=*,only marks,ex3]coordinates{(2,0)(0,-3)};}` },
   ],
   questions: [
     { ask: r`Verify whether $(1,4)$ is the solution of $y=2x+2$ and $y=-x+5$.`, ws: "2.4cm" },
