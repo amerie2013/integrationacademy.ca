@@ -2,21 +2,88 @@
 const r = String.raw;
 const U = "2: Polynomial Equations and Inequalities";
 
+// Long-division tableau (grid layout, divisor bracket + subtraction rules) as a LaTeX tabular.
+const texRow = (cells) => cells.join(" & ") + r` \\`;
+const ldivTex = (divisor, quot, rows) => {
+  const n = quot.length;
+  const colspec = "c".repeat(n + 1);
+  const lines = [];
+  lines.push(r`\begin{center}\renewcommand{\arraystretch}{1.2}\begin{tabular}{` + colspec + `}`);
+  lines.push("& " + texRow(quot));
+  lines.push(r`\cline{2-` + (n + 1) + `}`);
+  rows.forEach((row, i) => {
+    const divCell = i === 0 ? r`\multicolumn{1}{r|}{` + divisor + `}` : r`\multicolumn{1}{r|}{}`;
+    lines.push(divCell + " & " + texRow(row.cells));
+    if (row.line) lines.push(r`\cline{2-` + (n + 1) + `}`);
+  });
+  lines.push(r`\end{tabular}\end{center}`);
+  return lines.join("\n");
+};
+// Synthetic-division box: root | coefficients, products, a rule, then the sums.
+const syndivTex = (root, coeffs, prods, sums) => {
+  const n = coeffs.length;
+  const colspec = "c".repeat(n + 1);
+  const lines = [];
+  lines.push(r`\begin{center}\renewcommand{\arraystretch}{1.2}\begin{tabular}{` + colspec + `}`);
+  lines.push(r`\multicolumn{1}{r|}{` + root + `} & ` + texRow(coeffs));
+  lines.push(r`\multicolumn{1}{r|}{} & ` + texRow(prods));
+  lines.push(r`\cline{2-` + (n + 1) + `}`);
+  lines.push(r`\multicolumn{1}{r|}{} & ` + texRow(sums));
+  lines.push(r`\end{tabular}\end{center}`);
+  return lines.join("\n");
+};
+
 export default [
   {
     code: "2.1", unit: U, title: "Dividing Polynomials",
     intro: r`Long division always works; synthetic division is a shortcut for dividing by $x-a$. Every result is a division statement $P(x)=D(x)Q(x)+R(x)$.`,
     ideas: [r`Long division: divide, multiply, subtract, bring down.`, r`Synthetic (by $x-a$): bring down, multiply by $a$, add.`, r`$\deg R<\deg D$; remainder $0$ means $D$ is a factor.`],
     examples: [
-      { t: "Exact long division", body: r`$(x^2+5x+6)\div(x+2)$.\soln $x^2\div x=x$; subtract $x^2+2x$ → $3x+6$; $3x\div x=3$; subtract → $0$. Quotient $x+3$, R $0$. The graph confirms a zero at $x=-2$:` + r`\eplot{-5}{1}{-1}{8}{\addplot[exblue,very thick,domain=-4.6:0.6]{x^2+5*x+6};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(-2,0) (-3,0)};}` },
-      { t: "Exact long division", body: r`$(x^2+7x+10)\div(x+5)$.\soln Quotient $x+2$, R $0$, so $x^2+7x+10=(x+5)(x+2)$.` },
-      { t: "Synthetic division", body: r`$(x^3-4x^2+x+6)\div(x-2)$.\soln Coefficients $1,-4,1,6$, root $2$: bring down $1$; $1{\cdot}2=2,\ -4{+}2=-2$; $-2{\cdot}2=-4,\ 1{-}4=-3$; $-3{\cdot}2=-6,\ 6{-}6=0$. Quotient $x^2-2x-3$, R $0$.` },
-      { t: "Division statement", body: r`Write the statement for $(x^2+5x+6)\div(x+2)$.\soln $x^2+5x+6=(x+2)(x+3)+0$.` },
-      { t: "Nonzero remainder", body: r`$(x^2+3x+5)\div(x+1)$.\soln Quotient $x+2$; $(x+1)(x+2)=x^2+3x+2$; subtract → $3$. So $x^2+3x+5=(x+1)(x+2)+3$.` },
-      { t: "Synthetic", body: r`$(x^3-1)\div(x-1)$.\soln Coefficients $1,0,0,-1$, root $1$: $1,1,1,0$. Quotient $x^2+x+1$, R $0$.` },
-      { t: "Linear over linear", body: r`$(x^2+x-6)\div(x-2)$.\soln Quotient $x+3$, R $0$, so $(x-2)(x+3)$.` },
-      { t: "Remainder", body: r`$(x^2+4x+1)\div(x+1)$.\soln Quotient $x+3$, remainder $-2$: $x^2+4x+1=(x+1)(x+3)-2$.` },
-      { t: "Cubic remainder", body: r`$(x^3+2x^2-5)\div(x-1)$.\soln Synthetic with root $1$ on $1,2,0,-5$: $1,3,3,-2$. Quotient $x^2+3x+3$, R $-2$.` },
+      { t: "Exact long division", body: r`$(x^2+5x+6)\div(x+2)$.\soln $x^2\div x=x$; subtract $x^2+2x$ → $3x+6$; $3x\div x=3$; subtract → $0$. Quotient $x+3$, R $0$. The graph confirms a zero at $x=-2$:` + r`\eplot{-5}{1}{-1}{8}{\addplot[exblue,very thick,domain=-4.6:0.6]{x^2+5*x+6};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(-2,0) (-3,0)};}` + ldivTex("$x+2$", ["", "$x$", "$+3$"], [
+        { cells: ["$x^2$", "$+5x$", "$+6$"] },
+        { cells: ["$x^2$", "$+2x$", ""], line: true },
+        { cells: ["", "$+3x$", "$+6$"] },
+        { cells: ["", "$+3x$", "$+6$"], line: true },
+        { cells: ["", "", "$0$"] },
+      ]) },
+      { t: "Exact long division", body: r`$(x^2+7x+10)\div(x+5)$.\soln Quotient $x+2$, R $0$, so $x^2+7x+10=(x+5)(x+2)$.` + ldivTex("$x+5$", ["", "$x$", "$+2$"], [
+        { cells: ["$x^2$", "$+7x$", "$+10$"] },
+        { cells: ["$x^2$", "$+5x$", ""], line: true },
+        { cells: ["", "$+2x$", "$+10$"] },
+        { cells: ["", "$+2x$", "$+10$"], line: true },
+        { cells: ["", "", "$0$"] },
+      ]) },
+      { t: "Synthetic division", body: r`$(x^3-4x^2+x+6)\div(x-2)$.\soln Coefficients $1,-4,1,6$, root $2$: bring down $1$; $1{\cdot}2=2,\ -4{+}2=-2$; $-2{\cdot}2=-4,\ 1{-}4=-3$; $-3{\cdot}2=-6,\ 6{-}6=0$. Quotient $x^2-2x-3$, R $0$.` + syndivTex("$2$", ["$1$", "$-4$", "$1$", "$6$"], ["", "$2$", "$-4$", "$-6$"], ["$1$", "$-2$", "$-3$", "$0$"]) },
+      { t: "Division statement", body: r`Write the statement for $(x^2+5x+6)\div(x+2)$.\soln $x^2+5x+6=(x+2)(x+3)+0$.` + ldivTex("$x+2$", ["", "$x$", "$+3$"], [
+        { cells: ["$x^2$", "$+5x$", "$+6$"] },
+        { cells: ["$x^2$", "$+2x$", ""], line: true },
+        { cells: ["", "$+3x$", "$+6$"] },
+        { cells: ["", "$+3x$", "$+6$"], line: true },
+        { cells: ["", "", "$0$"] },
+      ]) },
+      { t: "Nonzero remainder", body: r`$(x^2+3x+5)\div(x+1)$.\soln Quotient $x+2$; $(x+1)(x+2)=x^2+3x+2$; subtract → $3$. So $x^2+3x+5=(x+1)(x+2)+3$.` + ldivTex("$x+1$", ["", "$x$", "$+2$"], [
+        { cells: ["$x^2$", "$+3x$", "$+5$"] },
+        { cells: ["$x^2$", "$+x$", ""], line: true },
+        { cells: ["", "$+2x$", "$+5$"] },
+        { cells: ["", "$+2x$", "$+2$"], line: true },
+        { cells: ["", "", "$+3$"] },
+      ]) },
+      { t: "Synthetic", body: r`$(x^3-1)\div(x-1)$.\soln Coefficients $1,0,0,-1$, root $1$: $1,1,1,0$. Quotient $x^2+x+1$, R $0$.` + syndivTex("$1$", ["$1$", "$0$", "$0$", "$-1$"], ["", "$1$", "$1$", "$1$"], ["$1$", "$1$", "$1$", "$0$"]) },
+      { t: "Linear over linear", body: r`$(x^2+x-6)\div(x-2)$.\soln Quotient $x+3$, R $0$, so $(x-2)(x+3)$.` + ldivTex("$x-2$", ["", "$x$", "$+3$"], [
+        { cells: ["$x^2$", "$+x$", "$-6$"] },
+        { cells: ["$x^2$", "$-2x$", ""], line: true },
+        { cells: ["", "$+3x$", "$-6$"] },
+        { cells: ["", "$+3x$", "$-6$"], line: true },
+        { cells: ["", "", "$0$"] },
+      ]) },
+      { t: "Remainder", body: r`$(x^2+4x+1)\div(x+1)$.\soln Quotient $x+3$, remainder $-2$: $x^2+4x+1=(x+1)(x+3)-2$.` + ldivTex("$x+1$", ["", "$x$", "$+3$"], [
+        { cells: ["$x^2$", "$+4x$", "$+1$"] },
+        { cells: ["$x^2$", "$+x$", ""], line: true },
+        { cells: ["", "$+3x$", "$+1$"] },
+        { cells: ["", "$+3x$", "$+3$"], line: true },
+        { cells: ["", "", "$-2$"] },
+      ]) },
+      { t: "Cubic remainder", body: r`$(x^3+2x^2-5)\div(x-1)$.\soln Synthetic with root $1$ on $1,2,0,-5$: $1,3,3,-2$. Quotient $x^2+3x+3$, R $-2$.` + syndivTex("$1$", ["$1$", "$2$", "$0$", "$-5$"], ["", "$1$", "$3$", "$3$"], ["$1$", "$3$", "$3$", "$-2$"]) },
     ],
     questions: [
       { ask: r`$(x^2+6x+8)\div(x+2)$?` },

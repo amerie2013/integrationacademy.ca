@@ -26,39 +26,114 @@ Long division always works; synthetic division is a shortcut for dividing by $x-
 \sech{Worked Examples}
 
 \begin{example}{ex0}{Example 1 --- Exact long division}
-$(x^2+5x+6)\div(x+2)$.\soln $x^2\div x=x$; subtract $x^2+2x$ → $3x+6$; $3x\div x=3$; subtract → $0$. Quotient $x+3$, R $0$. The graph confirms a zero at $x=-2$:\eplot{-5}{1}{-1}{8}{\addplot[exblue,very thick,domain=-4.6:0.6]{x^2+5*x+6};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(-2,0) (-3,0)};}
+$(x^2+5x+6)\div(x+2)$.\soln $x^2\div x=x$; subtract $x^2+2x$ → $3x+6$; $3x\div x=3$; subtract → $0$. Quotient $x+3$, R $0$. The graph confirms a zero at $x=-2$:\eplot{-5}{1}{-1}{8}{\addplot[exblue,very thick,domain=-4.6:0.6]{x^2+5*x+6};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(-2,0) (-3,0)};}\begin{center}\renewcommand{\arraystretch}{1.2}\begin{tabular}{cccc}
+&  & $x$ & $+3$ \\
+\cline{2-4}
+\multicolumn{1}{r|}{$x+2$} & $x^2$ & $+5x$ & $+6$ \\
+\multicolumn{1}{r|}{} & $x^2$ & $+2x$ &  \\
+\cline{2-4}
+\multicolumn{1}{r|}{} &  & $+3x$ & $+6$ \\
+\multicolumn{1}{r|}{} &  & $+3x$ & $+6$ \\
+\cline{2-4}
+\multicolumn{1}{r|}{} &  &  & $0$ \\
+\end{tabular}\end{center}
 \end{example}
 
 \begin{example}{ex1}{Example 2 --- Exact long division}
-$(x^2+7x+10)\div(x+5)$.\soln Quotient $x+2$, R $0$, so $x^2+7x+10=(x+5)(x+2)$.
+$(x^2+7x+10)\div(x+5)$.\soln Quotient $x+2$, R $0$, so $x^2+7x+10=(x+5)(x+2)$.\begin{center}\renewcommand{\arraystretch}{1.2}\begin{tabular}{cccc}
+&  & $x$ & $+2$ \\
+\cline{2-4}
+\multicolumn{1}{r|}{$x+5$} & $x^2$ & $+7x$ & $+10$ \\
+\multicolumn{1}{r|}{} & $x^2$ & $+5x$ &  \\
+\cline{2-4}
+\multicolumn{1}{r|}{} &  & $+2x$ & $+10$ \\
+\multicolumn{1}{r|}{} &  & $+2x$ & $+10$ \\
+\cline{2-4}
+\multicolumn{1}{r|}{} &  &  & $0$ \\
+\end{tabular}\end{center}
 \end{example}
 
 \begin{example}{ex2}{Example 3 --- Synthetic division}
-$(x^3-4x^2+x+6)\div(x-2)$.\soln Coefficients $1,-4,1,6$, root $2$: bring down $1$; $1{\cdot}2=2,\ -4{+}2=-2$; $-2{\cdot}2=-4,\ 1{-}4=-3$; $-3{\cdot}2=-6,\ 6{-}6=0$. Quotient $x^2-2x-3$, R $0$.
+$(x^3-4x^2+x+6)\div(x-2)$.\soln Coefficients $1,-4,1,6$, root $2$: bring down $1$; $1{\cdot}2=2,\ -4{+}2=-2$; $-2{\cdot}2=-4,\ 1{-}4=-3$; $-3{\cdot}2=-6,\ 6{-}6=0$. Quotient $x^2-2x-3$, R $0$.\begin{center}\renewcommand{\arraystretch}{1.2}\begin{tabular}{ccccc}
+\multicolumn{1}{r|}{$2$} & $1$ & $-4$ & $1$ & $6$ \\
+\multicolumn{1}{r|}{} &  & $2$ & $-4$ & $-6$ \\
+\cline{2-5}
+\multicolumn{1}{r|}{} & $1$ & $-2$ & $-3$ & $0$ \\
+\end{tabular}\end{center}
 \end{example}
 
 \begin{example}{ex3}{Example 4 --- Division statement}
-Write the statement for $(x^2+5x+6)\div(x+2)$.\soln $x^2+5x+6=(x+2)(x+3)+0$.
+Write the statement for $(x^2+5x+6)\div(x+2)$.\soln $x^2+5x+6=(x+2)(x+3)+0$.\begin{center}\renewcommand{\arraystretch}{1.2}\begin{tabular}{cccc}
+&  & $x$ & $+3$ \\
+\cline{2-4}
+\multicolumn{1}{r|}{$x+2$} & $x^2$ & $+5x$ & $+6$ \\
+\multicolumn{1}{r|}{} & $x^2$ & $+2x$ &  \\
+\cline{2-4}
+\multicolumn{1}{r|}{} &  & $+3x$ & $+6$ \\
+\multicolumn{1}{r|}{} &  & $+3x$ & $+6$ \\
+\cline{2-4}
+\multicolumn{1}{r|}{} &  &  & $0$ \\
+\end{tabular}\end{center}
 \end{example}
 
 \begin{example}{ex4}{Example 5 --- Nonzero remainder}
-$(x^2+3x+5)\div(x+1)$.\soln Quotient $x+2$; $(x+1)(x+2)=x^2+3x+2$; subtract → $3$. So $x^2+3x+5=(x+1)(x+2)+3$.
+$(x^2+3x+5)\div(x+1)$.\soln Quotient $x+2$; $(x+1)(x+2)=x^2+3x+2$; subtract → $3$. So $x^2+3x+5=(x+1)(x+2)+3$.\begin{center}\renewcommand{\arraystretch}{1.2}\begin{tabular}{cccc}
+&  & $x$ & $+2$ \\
+\cline{2-4}
+\multicolumn{1}{r|}{$x+1$} & $x^2$ & $+3x$ & $+5$ \\
+\multicolumn{1}{r|}{} & $x^2$ & $+x$ &  \\
+\cline{2-4}
+\multicolumn{1}{r|}{} &  & $+2x$ & $+5$ \\
+\multicolumn{1}{r|}{} &  & $+2x$ & $+2$ \\
+\cline{2-4}
+\multicolumn{1}{r|}{} &  &  & $+3$ \\
+\end{tabular}\end{center}
 \end{example}
 
 \begin{example}{ex5}{Example 6 --- Synthetic}
-$(x^3-1)\div(x-1)$.\soln Coefficients $1,0,0,-1$, root $1$: $1,1,1,0$. Quotient $x^2+x+1$, R $0$.
+$(x^3-1)\div(x-1)$.\soln Coefficients $1,0,0,-1$, root $1$: $1,1,1,0$. Quotient $x^2+x+1$, R $0$.\begin{center}\renewcommand{\arraystretch}{1.2}\begin{tabular}{ccccc}
+\multicolumn{1}{r|}{$1$} & $1$ & $0$ & $0$ & $-1$ \\
+\multicolumn{1}{r|}{} &  & $1$ & $1$ & $1$ \\
+\cline{2-5}
+\multicolumn{1}{r|}{} & $1$ & $1$ & $1$ & $0$ \\
+\end{tabular}\end{center}
 \end{example}
 
 \begin{example}{ex6}{Example 7 --- Linear over linear}
-$(x^2+x-6)\div(x-2)$.\soln Quotient $x+3$, R $0$, so $(x-2)(x+3)$.
+$(x^2+x-6)\div(x-2)$.\soln Quotient $x+3$, R $0$, so $(x-2)(x+3)$.\begin{center}\renewcommand{\arraystretch}{1.2}\begin{tabular}{cccc}
+&  & $x$ & $+3$ \\
+\cline{2-4}
+\multicolumn{1}{r|}{$x-2$} & $x^2$ & $+x$ & $-6$ \\
+\multicolumn{1}{r|}{} & $x^2$ & $-2x$ &  \\
+\cline{2-4}
+\multicolumn{1}{r|}{} &  & $+3x$ & $-6$ \\
+\multicolumn{1}{r|}{} &  & $+3x$ & $-6$ \\
+\cline{2-4}
+\multicolumn{1}{r|}{} &  &  & $0$ \\
+\end{tabular}\end{center}
 \end{example}
 
 \begin{example}{ex7}{Example 8 --- Remainder}
-$(x^2+4x+1)\div(x+1)$.\soln Quotient $x+3$, remainder $-2$: $x^2+4x+1=(x+1)(x+3)-2$.
+$(x^2+4x+1)\div(x+1)$.\soln Quotient $x+3$, remainder $-2$: $x^2+4x+1=(x+1)(x+3)-2$.\begin{center}\renewcommand{\arraystretch}{1.2}\begin{tabular}{cccc}
+&  & $x$ & $+3$ \\
+\cline{2-4}
+\multicolumn{1}{r|}{$x+1$} & $x^2$ & $+4x$ & $+1$ \\
+\multicolumn{1}{r|}{} & $x^2$ & $+x$ &  \\
+\cline{2-4}
+\multicolumn{1}{r|}{} &  & $+3x$ & $+1$ \\
+\multicolumn{1}{r|}{} &  & $+3x$ & $+3$ \\
+\cline{2-4}
+\multicolumn{1}{r|}{} &  &  & $-2$ \\
+\end{tabular}\end{center}
 \end{example}
 
 \begin{example}{ex8}{Example 9 --- Cubic remainder}
-$(x^3+2x^2-5)\div(x-1)$.\soln Synthetic with root $1$ on $1,2,0,-5$: $1,3,3,-2$. Quotient $x^2+3x+3$, R $-2$.
+$(x^3+2x^2-5)\div(x-1)$.\soln Synthetic with root $1$ on $1,2,0,-5$: $1,3,3,-2$. Quotient $x^2+3x+3$, R $-2$.\begin{center}\renewcommand{\arraystretch}{1.2}\begin{tabular}{ccccc}
+\multicolumn{1}{r|}{$1$} & $1$ & $2$ & $0$ & $-5$ \\
+\multicolumn{1}{r|}{} &  & $1$ & $3$ & $3$ \\
+\cline{2-5}
+\multicolumn{1}{r|}{} & $1$ & $3$ & $3$ & $-2$ \\
+\end{tabular}\end{center}
 \end{example}
 
 \clearpage
