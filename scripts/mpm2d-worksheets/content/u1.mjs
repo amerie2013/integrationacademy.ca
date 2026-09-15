@@ -108,23 +108,32 @@ export default [
   ],
   examples: [
     { t: "A variable already isolated", body: r`Solve: $y=2x$ and $x+y=9$.
-\soln Substitute $y=2x$: $x+2x=9\Rightarrow 3x=9\Rightarrow x=3$, so $y=6$. Solution $(3,6)$.` },
+\soln Substitute $y=2x$: $x+2x=9\Rightarrow 3x=9\Rightarrow x=3$, so $y=6$. Solution $(3,6)$. The graph confirms it: the two lines cross exactly at $(3,6)$.
+\plot{-1}{9}{-2}{12}{\addplot[exblue,very thick,domain=-1:6,samples=2]{2*x};\addplot[qorange,very thick,domain=-1:9,samples=2]{9-x};\addplot[mark=*,only marks,ex3]coordinates{(3,6)};}` },
     { t: "Substitute and simplify", body: r`Solve: $y=x+1$ and $2x+y=7$.
-\soln $2x+(x+1)=7\Rightarrow 3x+1=7\Rightarrow x=2$, $y=3$. Solution $(2,3)$.` },
+\soln $2x+(x+1)=7\Rightarrow 3x+1=7\Rightarrow x=2$, $y=3$. Solution $(2,3)$. Graphing $y=x+1$ and $y=-2x+7$ (the second equation solved for $y$) shows the lines crossing at $(2,3)$.
+\plot{-1}{5}{-1}{9}{\addplot[exblue,very thick,domain=-1:5,samples=2]{x+1};\addplot[qorange,very thick,domain=-1:4,samples=2]{7-2*x};\addplot[mark=*,only marks,ex3]coordinates{(2,3)};}` },
     { t: "Isolating from $x=$", body: r`Solve: $x=y-2$ and $3x+y=10$.
-\soln $3(y-2)+y=10\Rightarrow 4y-6=10\Rightarrow y=4$, $x=2$. Solution $(2,4)$.` },
+\soln $3(y-2)+y=10\Rightarrow 4y-6=10\Rightarrow y=4$, $x=2$. Solution $(2,4)$. Rewriting both as $y=x+2$ and $y=-3x+10$, the graph shows them meeting at $(2,4)$.
+\plot{-1}{5}{-1}{11}{\addplot[exblue,very thick,domain=-1:5,samples=2]{x+2};\addplot[qorange,very thick,domain=-1:3.5,samples=2]{10-3*x};\addplot[mark=*,only marks,ex3]coordinates{(2,4)};}` },
     { t: "Isolate first", body: r`Solve: $x+y=5$ and $2x-y=4$.
-\soln From the first, $y=5-x$. Then $2x-(5-x)=4\Rightarrow 3x-5=4\Rightarrow x=3$, $y=2$. Solution $(3,2)$.` },
+\soln From the first, $y=5-x$. Then $2x-(5-x)=4\Rightarrow 3x-5=4\Rightarrow x=3$, $y=2$. Solution $(3,2)$. The graph of $y=5-x$ and $y=2x-4$ confirms the crossing point.
+\plot{-1}{6}{-5}{8}{\addplot[exblue,very thick,domain=-1:6,samples=2]{5-x};\addplot[qorange,very thick,domain=-1:6,samples=2]{2*x-4};\addplot[mark=*,only marks,ex3]coordinates{(3,2)};}` },
     { t: "Larger coefficients", body: r`Solve: $2x+y=7$ and $3x-2y=0$.
-\soln $y=7-2x$. Then $3x-2(7-2x)=0\Rightarrow 3x-14+4x=0\Rightarrow 7x=14\Rightarrow x=2$, $y=3$. Solution $(2,3)$.` },
+\soln $y=7-2x$. Then $3x-2(7-2x)=0\Rightarrow 3x-14+4x=0\Rightarrow 7x=14\Rightarrow x=2$, $y=3$. Solution $(2,3)$. Graphing $y=7-2x$ and $y=1.5x$ (the second equation solved for $y$) shows the lines crossing at $(2,3)$.
+\plot{-1}{5}{-3}{9}{\addplot[exblue,very thick,domain=-1:5,samples=2]{7-2*x};\addplot[qorange,very thick,domain=-1:5,samples=2]{1.5*x};\addplot[mark=*,only marks,ex3]coordinates{(2,3)};}` },
     { t: "Infinitely many", body: r`Solve: $y=2x-1$ and $4x-2y=2$.
-\soln $4x-2(2x-1)=2\Rightarrow 4x-4x+2=2\Rightarrow 2=2$. Always true $\Rightarrow$ \textbf{infinitely many solutions}.` },
+\soln $4x-2(2x-1)=2\Rightarrow 4x-4x+2=2\Rightarrow 2=2$. Always true $\Rightarrow$ \textbf{infinitely many solutions}. Graphing $4x-2y=2$ as $y=2x-1$ shows it is the exact same line --- every point on it is a solution.
+\plot{-2}{4}{-4}{6}{\addplot[exblue,very thick,domain=-2:4,samples=2]{2*x-1};}` },
     { t: "No solution", body: r`Solve: $y=3x+2$ and $6x-2y=1$.
-\soln $6x-2(3x+2)=1\Rightarrow 6x-6x-4=1\Rightarrow -4=1$. False $\Rightarrow$ \textbf{no solution}.` },
+\soln $6x-2(3x+2)=1\Rightarrow 6x-6x-4=1\Rightarrow -4=1$. False $\Rightarrow$ \textbf{no solution}. Graphing $6x-2y=1$ as $y=3x-0.5$ shows why: both lines have slope $3$ but different $y$-intercepts ($2$ and $-0.5$), so they are parallel and never cross.
+\plot{-2}{2}{-7}{8}{\addplot[exblue,very thick,domain=-2:2,samples=2]{3*x+2};\addplot[qorange,very thick,domain=-2:2,samples=2]{3*x-0.5};}` },
     { t: "Word problem", body: r`Two numbers have a sum of $20$ and a difference of $4$. Find them.
-\soln $x+y=20$, $x-y=4$. From the second, $x=y+4$; then $(y+4)+y=20\Rightarrow 2y=16\Rightarrow y=8$, $x=12$. The numbers are $12$ and $8$.` },
+\soln $x+y=20$, $x-y=4$. From the second, $x=y+4$; then $(y+4)+y=20\Rightarrow 2y=16\Rightarrow y=8$, $x=12$. The numbers are $12$ and $8$. Graphing $y=20-x$ and $y=x-4$ shows the lines crossing at $(12,8)$, matching the numbers found.
+\plot{0}{20}{-4}{21}{\addplot[exblue,very thick,domain=0:20,samples=2]{20-x};\addplot[qorange,very thick,domain=0:20,samples=2]{x-4};\addplot[mark=*,only marks,ex3]coordinates{(12,8)};}` },
     { t: "Multi-step with check (harder)", body: r`Solve: $x-3y=1$ and $2x+y=9$.
-\soln $x=1+3y$. Then $2(1+3y)+y=9\Rightarrow 2+7y=9\Rightarrow y=1$, $x=4$. Check: $4-3(1)=1\ \checkmark$, $2(4)+1=9\ \checkmark$. Solution $(4,1)$.` },
+\soln $x=1+3y$. Then $2(1+3y)+y=9\Rightarrow 2+7y=9\Rightarrow y=1$, $x=4$. Check: $4-3(1)=1\ \checkmark$, $2(4)+1=9\ \checkmark$. Solution $(4,1)$. Graphing $y=\tfrac{x-1}3$ and $y=9-2x$ confirms the crossing point.
+\plot{-2}{6}{-3}{13}{\addplot[exblue,very thick,domain=-2:6,samples=2]{(x-1)/3};\addplot[qorange,very thick,domain=-2:6,samples=2]{9-2*x};\addplot[mark=*,only marks,ex3]coordinates{(4,1)};}` },
   ],
   questions: [
     { ask: r`Solve by substitution: $y=3x$ and $x+y=8$.`, ws: "2.4cm" },
