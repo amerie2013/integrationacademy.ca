@@ -24,6 +24,18 @@ const ldiv = (divisor, quot, rows) => {
   return out;
 };
 
+// Synthetic-division box: root | coefficients, products shifted one column, a rule, then the sums (quotient coeffs + remainder).
+const syndiv = (root, coeffs, prods, sums) => {
+  const cw = "min-width:40px;padding:3px 10px;text-align:center;white-space:nowrap;";
+  const cell = (v, extra = "") => `<td style="${cw}${extra}">${v ?? ""}</td>`;
+  let out = `<div style="overflow-x:auto;margin:10px 0;"><table style="border-collapse:collapse;font-family:'Courier New',Consolas,monospace;font-size:15px;color:#0f172a;">`;
+  out += `<tr><td rowspan="2" style="${cw}border-right:2px solid #0f172a;text-align:center;">${root}</td>${coeffs.map((v) => cell(v)).join("")}</tr>`;
+  out += `<tr>${prods.map((v) => cell(v)).join("")}</tr>`;
+  out += `<tr><td style="border-right:2px solid #0f172a;"></td>${sums.map((v) => cell(v, "border-top:2px solid #0f172a;")).join("")}</tr>`;
+  out += `</table></div>`;
+  return out;
+};
+
 u2["2.1"] = L("2.1", "Dividing Polynomials", [
   html(String.raw`<div class="lecture-box">
   <h1>➗ Dividing Polynomials</h1>
@@ -52,8 +64,14 @@ u2["2.1"] = L("2.1", "Dividing Polynomials", [
     { cells: ["", "", "3x", "−3"], line: true },
     { cells: ["", "", "", "−2"] },
   ])}</div>
-  <div class="example-box" ${EX}><h3>Example 3: Synthetic division</h3><p>Divide \((x^3-4x^2+x+6)\div(x-2)\).</p><div class="solution"><div class="step"><strong>Step 1:</strong> Coefficients \(1,-4,1,6\), root \(2\). Bring down \(1\).</div><div class="step"><strong>Step 2:</strong> \(1{\cdot}2=2\Rightarrow-4{+}2=-2\); \(-2{\cdot}2=-4\Rightarrow1{-}4=-3\); \(-3{\cdot}2=-6\Rightarrow6{-}6=0\).</div><em>Conclusion: quotient \(x^2-2x-3\), R \(0\). ✓</em></div></div>
-  <div class="example-box" ${EX}><h3>Example 4: Division statement</h3><p>Write the division statement for Example 1.</p><div class="solution"><div class="step"><strong>Step 1:</strong> \(P=(x+2)(x+3)+0\).</div><em>Conclusion: \(x^2+5x+6=(x+2)(x+3)\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 3: Synthetic division</h3><p>Divide \((x^3-4x^2+x+6)\div(x-2)\).</p><div class="solution"><div class="step"><strong>Step 1:</strong> Coefficients \(1,-4,1,6\), root \(2\). Bring down \(1\).</div><div class="step"><strong>Step 2:</strong> \(1{\cdot}2=2\Rightarrow-4{+}2=-2\); \(-2{\cdot}2=-4\Rightarrow1{-}4=-3\); \(-3{\cdot}2=-6\Rightarrow6{-}6=0\).</div><em>Conclusion: quotient \(x^2-2x-3\), R \(0\). ✓</em></div>${syndiv(2, [1, -4, 1, 6], ["", 2, -4, -6], [1, -2, -3, 0])}</div>
+  <div class="example-box" ${EX}><h3>Example 4: Division statement</h3><p>Write the division statement for Example 1.</p><div class="solution"><div class="step"><strong>Step 1:</strong> \(P=(x+2)(x+3)+0\).</div><em>Conclusion: \(x^2+5x+6=(x+2)(x+3)\). ✓</em></div>${ldiv("x + 2", ["", "x", "+3"], [
+    { cells: ["x²", "+5x", "+6"] },
+    { cells: ["x²", "+2x", ""], line: true },
+    { cells: ["", "+3x", "+6"] },
+    { cells: ["", "+3x", "+6"], line: true },
+    { cells: ["", "", "0"] },
+  ])}</div>
   <div class="example-box" ${EX}><h3>Example 5: Nonzero remainder</h3><p>Divide \((x^2+3x+5)\div(x+1)\).</p><div class="solution"><div class="step"><strong>Step 1:</strong> Quotient \(x+2\), and \(x+2\) times \(x+1\) is \(x^2+3x+2\); subtract → \(3\).</div><em>Conclusion: \(x^2+3x+5=(x+1)(x+2)+3\). ✓</em></div>${ldiv("x + 1", ["", "x", "+2"], [
     { cells: ["x²", "+3x", "+5"] },
     { cells: ["x²", "+x", ""], line: true },
