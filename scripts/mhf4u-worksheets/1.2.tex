@@ -26,23 +26,23 @@ Degree $n$ limits the graph: at most $n$ zeros and $n-1$ turning points; the $n$
 \sech{Worked Examples}
 
 \begin{example}{ex0}{Example 1 --- Turning points}
-Max turning points of a degree-5 polynomial?\soln $n-1=5-1=4$.
+Max turning points of a degree-5 polynomial?\soln $n-1=5-1=4$. E.g. $y=x^5-5x^3+4x$ actually reaches that maximum:\eplot{-2.2}{2.2}{-8}{8}{\addplot[exblue,very thick,domain=-2.2:2.2]{x^5-5*x^3+4*x};}
 \end{example}
 
 \begin{example}{ex1}{Example 2 --- x-intercepts}
-Max x-intercepts of a degree-4 polynomial?\soln At most $n=4$.
+Max x-intercepts of a degree-4 polynomial?\soln At most $n=4$. E.g. $y=x^4-5x^2+4=(x-1)(x+1)(x-2)(x+2)$ hits all $4$:\eplot{-2.5}{2.5}{-6}{12}{\addplot[exblue,very thick,domain=-2.5:2.5]{x^4-5*x^2+4};}
 \end{example}
 
 \begin{example}{ex2}{Example 3 --- Degree from differences}
-The 3rd finite differences are constant. Degree?\soln $n$-th differences constant ⇒ degree $n$, so $3$.
+The 3rd finite differences are constant. Degree?\soln $n$-th differences constant ⇒ degree $n$, so $3$ (a cubic shape):\eplot{-2}{2}{-8}{8}{\addplot[exblue,very thick,domain=-2:2]{x^3};}
 \end{example}
 
 \begin{example}{ex3}{Example 4 --- Even function}
-Classify $f(x)=x^4-3x^2+1$.\soln Only even powers ⇒ $f(-x)=f(x)$: even (y-axis symmetry).
+Classify $f(x)=x^4-3x^2+1$.\soln Only even powers ⇒ $f(-x)=f(x)$: even (y-axis symmetry):\eplot{-2.2}{2.2}{-2}{10}{\addplot[exblue,very thick,domain=-2.2:2.2]{x^4-3*x^2+1};}
 \end{example}
 
 \begin{example}{ex4}{Example 5 --- Odd function}
-Classify $f(x)=x^3-4x$.\soln Only odd powers ⇒ $f(-x)=-f(x)$: odd (origin symmetry).
+Classify $f(x)=x^3-4x$.\soln Only odd powers ⇒ $f(-x)=-f(x)$: odd (origin symmetry):\eplot{-2.3}{2.3}{-4}{4}{\addplot[exblue,very thick,domain=-2.3:2.3]{x^3-4*x};}
 \end{example}
 
 \begin{example}{ex5}{Example 6 --- A cubic's graph}
@@ -50,15 +50,15 @@ A cubic $y=x^3-3x$ has how many turning points and zeros?\soln 2 turning points 
 \end{example}
 
 \begin{example}{ex6}{Example 7 --- Minimum degree}
-A polynomial has 4 turning points. Minimum degree?\soln Turning points $\le n-1$, so $n\ge5$.
+A polynomial has 4 turning points. Minimum degree?\soln Turning points $\le n-1$, so $n\ge5$. E.g. $y=x^5-5x^3+4x$ (degree $5$) reaches $4$ turning points:\eplot{-2.2}{2.2}{-8}{8}{\addplot[exblue,very thick,domain=-2.2:2.2]{x^5-5*x^3+4*x};}
 \end{example}
 
 \begin{example}{ex7}{Example 8 --- Degree from differences}
-The 2nd differences are constant. Degree?\soln $2$.
+The 2nd differences are constant. Degree?\soln $2$ (a parabola shape):\eplot{-3}{3}{-1}{9}{\addplot[exblue,very thick,domain=-3:3]{x^2};}
 \end{example}
 
 \begin{example}{ex8}{Example 9 --- Neither}
-Classify $f(x)=x^3+x^2$.\soln Mixed even and odd powers ⇒ neither.
+Classify $f(x)=x^3+x^2$.\soln Mixed even and odd powers ⇒ neither:\eplot{-2}{1.6}{-5}{6}{\addplot[exblue,very thick,domain=-2:1.6]{x^3+x^2};}
 \end{example}
 
 \clearpage
