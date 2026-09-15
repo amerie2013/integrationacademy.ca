@@ -75,9 +75,9 @@ export default [
     examples: [
       { t: "Zeros", body: r`Zeros of $f(x)=(x-3)(x+1)(x-2)$?\soln Set each factor to 0: $x=3,-1,2$.` },
       { t: "Multiplicity", body: r`How does $f(x)=(x+2)(x-1)^2$ meet the x-axis?\soln At $x=-2$ (mult 1) it crosses; at $x=1$ (mult 2) it touches:` + r`\eplot{-4}{3}{-6}{6}{\addplot[exblue,very thick,domain=-2.4:1.9]{(x+2)*(x-1)^2};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(-2,0) (1,0)};}` },
-      { t: "y-intercept", body: r`y-intercept of $f(x)=(x-1)(x+2)(x-3)$?\soln $f(0)=(-1)(2)(-3)=6$, so $(0,6)$.` },
-      { t: "Build an equation", body: r`Write a cubic with zeros $-1,0,2$.\soln $f(x)=a\,x(x+1)(x-2)$; e.g. $y=x(x+1)(x-2)$.` },
-      { t: "Find a", body: r`A cubic has zeros $1,2,3$ and passes through $(0,12)$. Find $a$.\soln $12=a(0-1)(0-2)(0-3)=a(-6)\Rightarrow a=-2$.` },
+      { t: "y-intercept", body: r`y-intercept of $f(x)=(x-1)(x+2)(x-3)$?\soln $f(0)=(-1)(2)(-3)=6$, so $(0,6)$:` + r`\eplot{-2.5}{3.5}{-10}{10}{\addplot[exblue,very thick,domain=-2.5:3.5]{(x-1)*(x+2)*(x-3)};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(-2,0) (1,0) (3,0)};\addplot[qorange,only marks,mark=*,mark size=1.6pt] coordinates {(0,6)};}` },
+      { t: "Build an equation", body: r`Write a cubic with zeros $-1,0,2$.\soln $f(x)=a\,x(x+1)(x-2)$; e.g. $y=x(x+1)(x-2)$:` + r`\eplot{-2}{2.5}{-9}{6}{\addplot[exblue,very thick,domain=-2:2.5]{x*(x+1)*(x-2)};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(-1,0) (0,0) (2,0)};}` },
+      { t: "Find a", body: r`A cubic has zeros $1,2,3$ and passes through $(0,12)$. Find $a$.\soln $12=a(0-1)(0-2)(0-3)=a(-6)\Rightarrow a=-2$:` + r`\eplot{-0.2}{3.7}{-8}{18}{\addplot[exblue,very thick,domain=-0.2:3.7]{-2*(x-1)*(x-2)*(x-3)};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(1,0) (2,0) (3,0)};\addplot[qorange,only marks,mark=*,mark size=1.6pt] coordinates {(0,12)};}` },
       { t: "Zeros with multiplicity", body: r`Zeros of $f(x)=(x-4)(x+2)^2$ and behaviour?\soln $x=4$ (cross), $x=-2$ (touch).` },
       { t: "Cross or touch", body: r`At $x=3$ in $(x-3)^2(x+1)$?\soln Even multiplicity (2): touches.` },
       { t: "y-intercept", body: r`y-intercept of $(x-2)(x+1)(x-4)$?\soln $(-2)(1)(-4)=8$.` },
