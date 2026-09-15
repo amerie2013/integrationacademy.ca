@@ -62,6 +62,7 @@ export function Whiteboard({ initialBoardId }: { initialBoardId?: string }) {
   const [showOpen, setShowOpen] = useState(false);
   const [myBoards, setMyBoards] = useState<WB[]>([]);
   const syncTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const pendingSendsRef = useRef<Shape[][][]>([]); // our own saves awaiting their realtime echo, so an in-flight one can't be mistaken for a guest's edit after we've since undone
 
   // embedded graphing calculator panel (draggable + resizable)
   const [showGraph, setShowGraph] = useState(false);
@@ -130,7 +131,11 @@ export function Whiteboard({ initialBoardId }: { initialBoardId?: string }) {
   function scheduleSync() {
     if (!boardIdRef.current) return;
     if (syncTimer.current) clearTimeout(syncTimer.current);
-    syncTimer.current = setTimeout(() => { saveBoard(boardIdRef.current!, { data: snapshot() }); }, 350);
+    syncTimer.current = setTimeout(() => {
+      const snap = snapshot();
+      pendingSendsRef.current.push(snap.pages);
+      saveBoard(boardIdRef.current!, { data: snap });
+    }, 350);
   }
   function commit(next: Shape[]) {
     const pi = pageRef.current;
@@ -194,9 +199,21 @@ export function Whiteboard({ initialBoardId }: { initialBoardId?: string }) {
   // into local state — only ever growing a page, never shrinking it, so this
   // can't clobber a newer local edit with a stale/self-echoed update (see the
   // 2026-08-28 migration's comment on why guest writes are append-only).
+  //
+  // "Only grow" alone isn't quite enough, though: our OWN save is in flight
+  // for ~350ms+network time, and if an undo (or any shrink) lands in that
+  // window, the echo of that earlier, now-stale, longer save arrives AFTER
+  // our state has already shrunk — which *also* looks like "growth" from
+  // the current state's point of view, resurrecting whatever was just
+  // undone. So an incoming update that matches something we ourselves sent
+  // (tracked in pendingSendsRef) is recognized and dropped outright,
+  // regardless of what our local state has done since we sent it.
   useEffect(() => {
     if (!boardId || !live) return;
     const cleanup = subscribeBoard(boardId, (data) => {
+      const pending = pendingSendsRef.current;
+      const echoIdx = pending.findIndex((sent) => JSON.stringify(sent) === JSON.stringify(data.pages));
+      if (echoIdx !== -1) { pending.splice(0, echoIdx + 1); return; } // our own echo (and any older, presumably-superseded sends) — not new content
       let changed = false;
       (data.pages ?? []).forEach((remotePage, i) => {
         const local = pagesRef.current[i] ?? [];
