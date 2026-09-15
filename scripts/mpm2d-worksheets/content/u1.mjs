@@ -177,23 +177,32 @@ export default [
   ],
   examples: [
     { t: "Add to eliminate", body: r`Solve: $x+y=10$ and $x-y=4$.
-\soln Add: $2x=14\Rightarrow x=7$; then $7+y=10\Rightarrow y=3$. Solution $(7,3)$.` },
+\soln Add: $2x=14\Rightarrow x=7$; then $7+y=10\Rightarrow y=3$. Solution $(7,3)$. Graphing $y=10-x$ and $y=x-4$ shows the lines crossing at $(7,3)$.
+\plot{-1}{12}{-6}{12}{\addplot[exblue,very thick,domain=-1:12,samples=2]{10-x};\addplot[qorange,very thick,domain=-1:12,samples=2]{x-4};\addplot[mark=*,only marks,ex3]coordinates{(7,3)};}` },
     { t: "Add (opposite $y$)", body: r`Solve: $2x+y=7$ and $x-y=2$.
-\soln Add: $3x=9\Rightarrow x=3$; then $3-y=2\Rightarrow y=1$. Solution $(3,1)$.` },
+\soln Add: $3x=9\Rightarrow x=3$; then $3-y=2\Rightarrow y=1$. Solution $(3,1)$. Graphing $y=7-2x$ and $y=x-2$ confirms the crossing point.
+\plot{-1}{6}{-6}{10}{\addplot[exblue,very thick,domain=-1:6,samples=2]{7-2*x};\addplot[qorange,very thick,domain=-1:6,samples=2]{x-2};\addplot[mark=*,only marks,ex3]coordinates{(3,1)};}` },
     { t: "Opposite coefficients", body: r`Solve: $3x+2y=12$ and $3x-2y=0$.
-\soln Add: $6x=12\Rightarrow x=2$; then $6+2y=12\Rightarrow y=3$. Solution $(2,3)$.` },
+\soln Add: $6x=12\Rightarrow x=2$; then $6+2y=12\Rightarrow y=3$. Solution $(2,3)$. Graphing $y=6-1.5x$ and $y=1.5x$ shows the lines meeting at $(2,3)$.
+\plot{-1}{5}{-2}{8}{\addplot[exblue,very thick,domain=-1:5,samples=2]{6-1.5*x};\addplot[qorange,very thick,domain=-1:5,samples=2]{1.5*x};\addplot[mark=*,only marks,ex3]coordinates{(2,3)};}` },
     { t: "Multiply one equation", body: r`Solve: $2x+y=5$ and $x+3y=10$.
-\soln Multiply the first by $3$: $6x+3y=15$. Subtract the second: $5x=5\Rightarrow x=1$; then $y=3$. Solution $(1,3)$.` },
+\soln Multiply the first by $3$: $6x+3y=15$. Subtract the second: $5x=5\Rightarrow x=1$; then $y=3$. Solution $(1,3)$. Graphing $y=5-2x$ and $y=\tfrac{10-x}3$ confirms the crossing point.
+\plot{-1}{4}{-4}{8}{\addplot[exblue,very thick,domain=-1:4,samples=2]{5-2*x};\addplot[qorange,very thick,domain=-1:4,samples=2]{(10-x)/3};\addplot[mark=*,only marks,ex3]coordinates{(1,3)};}` },
     { t: "Multiply both equations", body: r`Solve: $2x+3y=7$ and $3x+2y=8$.
-\soln $\times3$ and $\times2$: $6x+9y=21$ and $6x+4y=16$. Subtract: $5y=5\Rightarrow y=1$; then $x=2$. Solution $(2,1)$.` },
+\soln $\times3$ and $\times2$: $6x+9y=21$ and $6x+4y=16$. Subtract: $5y=5\Rightarrow y=1$; then $x=2$. Solution $(2,1)$. Graphing $y=\tfrac{7-2x}3$ and $y=\tfrac{8-3x}2$ shows the lines crossing at $(2,1)$.
+\plot{-1}{5}{-4}{6}{\addplot[exblue,very thick,domain=-1:5,samples=2]{(7-2*x)/3};\addplot[qorange,very thick,domain=-1:5,samples=2]{(8-3*x)/2};\addplot[mark=*,only marks,ex3]coordinates{(2,1)};}` },
     { t: "Infinitely many", body: r`Solve: $4x-2y=2$ and $2x-y=1$.
-\soln Multiply the second by $2$: $4x-2y=2$ --- identical to the first. \textbf{Infinitely many solutions}.` },
+\soln Multiply the second by $2$: $4x-2y=2$ --- identical to the first. \textbf{Infinitely many solutions}. Graphing $4x-2y=2$ as $y=2x-1$ shows both equations are the exact same line.
+\plot{-2}{4}{-6}{8}{\addplot[exblue,very thick,domain=-2:4,samples=2]{2*x-1};}` },
     { t: "No solution", body: r`Solve: $x+y=3$ and $2x+2y=8$.
-\soln Multiply the first by $2$: $2x+2y=6$, but the second says $2x+2y=8$. Since $6\neq8$, \textbf{no solution}.` },
+\soln Multiply the first by $2$: $2x+2y=6$, but the second says $2x+2y=8$. Since $6\neq8$, \textbf{no solution}. Graphing $y=3-x$ and $y=4-x$ shows why: both have slope $-1$ but different $y$-intercepts, so the lines are parallel and never cross.
+\plot{-2}{5}{-3}{8}{\addplot[exblue,very thick,domain=-2:5,samples=2]{3-x};\addplot[qorange,very thick,domain=-2:5,samples=2]{4-x};}` },
     { t: "Word problem", body: r`Two adults and three children pay \$31; one adult and two children pay \$18. Find each price.
-\soln $2a+3c=31$, $a+2c=18$. Multiply the second by $2$: $2a+4c=36$. Subtract the first: $c=5$, then $a=8$. Adult \$8, child \$5.` },
+\soln $2a+3c=31$, $a+2c=18$. Multiply the second by $2$: $2a+4c=36$. Subtract the first: $c=5$, then $a=8$. Adult \$8, child \$5. Graphing $c=\tfrac{31-2a}3$ and $c=\tfrac{18-a}2$ (adult price $a$ on the horizontal axis, child price $c$ on the vertical) shows the lines crossing at $(8,5)$.
+\plot{0}{15}{-1}{11}{\addplot[exblue,very thick,domain=0:15,samples=2]{(31-2*x)/3};\addplot[qorange,very thick,domain=0:15,samples=2]{(18-x)/2};\addplot[mark=*,only marks,ex3]coordinates{(8,5)};}` },
     { t: "Multiply both (harder)", body: r`Solve: $3x+2y=4$ and $2x+5y=-1$.
-\soln $\times5$ and $\times2$: $15x+10y=20$ and $4x+10y=-2$. Subtract: $11x=22\Rightarrow x=2$; then $6+2y=4\Rightarrow y=-1$. Solution $(2,-1)$.` },
+\soln $\times5$ and $\times2$: $15x+10y=20$ and $4x+10y=-2$. Subtract: $11x=22\Rightarrow x=2$; then $6+2y=4\Rightarrow y=-1$. Solution $(2,-1)$. Graphing $y=\tfrac{4-3x}2$ and $y=\tfrac{-1-2x}5$ confirms the crossing point.
+\plot{-2}{5}{-6}{6}{\addplot[exblue,very thick,domain=-2:5,samples=2]{(4-3*x)/2};\addplot[qorange,very thick,domain=-2:5,samples=2]{(-1-2*x)/5};\addplot[mark=*,only marks,ex3]coordinates{(2,-1)};}` },
   ],
   questions: [
     { ask: r`Solve by elimination: $x+y=8$ and $x-y=2$.`, ws: "2.4cm" },
