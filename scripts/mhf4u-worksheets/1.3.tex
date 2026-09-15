@@ -46,19 +46,19 @@ A cubic has zeros $1,2,3$ and passes through $(0,12)$. Find $a$.\soln $12=a(0-1)
 \end{example}
 
 \begin{example}{ex5}{Example 6 --- Zeros with multiplicity}
-Zeros of $f(x)=(x-4)(x+2)^2$ and behaviour?\soln $x=4$ (cross), $x=-2$ (touch).
+Zeros of $f(x)=(x-4)(x+2)^2$ and behaviour?\soln $x=4$ (cross), $x=-2$ (touch):\eplot{-3}{4.4}{-10}{12}{\addplot[exblue,very thick,domain=-3:4.4]{(x-4)*(x+2)^2};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(4,0)};\addplot[qorange,only marks,mark=*,mark size=1.6pt] coordinates {(-2,0)};}
 \end{example}
 
 \begin{example}{ex6}{Example 7 --- Cross or touch}
-At $x=3$ in $(x-3)^2(x+1)$?\soln Even multiplicity (2): touches.
+At $x=3$ in $(x-3)^2(x+1)$?\soln Even multiplicity (2): touches:\eplot{-1.5}{4.2}{-11}{10}{\addplot[exblue,very thick,domain=-1.5:4.2]{(x-3)^2*(x+1)};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(-1,0)};\addplot[qorange,only marks,mark=*,mark size=1.6pt] coordinates {(3,0)};}
 \end{example}
 
 \begin{example}{ex7}{Example 8 --- y-intercept}
-y-intercept of $(x-2)(x+1)(x-4)$?\soln $(-2)(1)(-4)=8$.
+y-intercept of $(x-2)(x+1)(x-4)$?\soln $(-2)(1)(-4)=8$:\eplot{-1.8}{4.7}{-18}{12}{\addplot[exblue,very thick,domain=-1.8:4.7]{(x-2)*(x+1)*(x-4)};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(-1,0) (2,0) (4,0)};\addplot[qorange,only marks,mark=*,mark size=1.6pt] coordinates {(0,8)};}
 \end{example}
 
 \begin{example}{ex8}{Example 9 --- Build an equation}
-Write a polynomial with zeros $-3$ and $2$.\soln $y=a(x+3)(x-2)$.
+Write a polynomial with zeros $-3$ and $2$.\soln $y=a(x+3)(x-2)$; e.g. $y=(x+3)(x-2)$:\eplot{-4}{3}{-7}{7}{\addplot[exblue,very thick,domain=-4:3]{(x+3)*(x-2)};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(-3,0) (2,0)};}
 \end{example}
 
 \clearpage
