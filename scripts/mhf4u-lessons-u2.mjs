@@ -6,6 +6,24 @@ const PR = `style="background-color:#fff7cc;border-left:5px solid #e69138;paddin
 const QA = `style="background-color:#f0f0f0;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"`;
 export const u2 = {};
 
+// Long-division tableau (grid school-division layout), like the classic 432÷15 figure — adapted to polynomial terms.
+// divisor: label to the left of the bracket. quot: quotient terms, one per column. rows: dividend + each subtract/result row (`line:true` draws the rule under it).
+const ldiv = (divisor, quot, rows) => {
+  const cw = "min-width:40px;padding:3px 8px;text-align:center;white-space:nowrap;";
+  const cell = (v, extra = "") => `<td style="${cw}${extra}">${v || ""}</td>`;
+  let out = `<div style="overflow-x:auto;margin:10px 0;"><table style="border-collapse:collapse;font-family:'Courier New',Consolas,monospace;font-size:15px;color:#0f172a;">`;
+  out += `<tr><td></td>${quot.map((v) => cell(v)).join("")}</tr>`;
+  rows.forEach((r, i) => {
+    const first = i === 0;
+    const divCell = first
+      ? `<td style="${cw}border-right:2px solid #0f172a;text-align:right;padding-right:8px;">${divisor}</td>`
+      : `<td></td>`;
+    out += `<tr>${divCell}${r.cells.map((v) => cell(v, `${first ? "border-top:2px solid #0f172a;" : ""}${r.line ? "border-bottom:1.5px solid #0f172a;" : ""}`)).join("")}</tr>`;
+  });
+  out += `</table></div>`;
+  return out;
+};
+
 u2["2.1"] = L("2.1", "Dividing Polynomials", [
   html(String.raw`<div class="lecture-box">
   <h1>➗ Dividing Polynomials</h1>
@@ -18,11 +36,31 @@ u2["2.1"] = L("2.1", "Dividing Polynomials", [
   </ul>
   ${gframe(["y = x^2 + 5*x + 6"], { title: "x² + 5x + 6 = (x+2)(x+3): zeros at −2 and −3" })}
   <h2>🔵 Examples</h2>
-  <div class="example-box" ${EX}><h3>Example 1: Exact long division</h3><p>Divide \((x^2+5x+6)\div(x+2)\).</p><div class="solution"><div class="step"><strong>Step 1:</strong> \(x^2\div x=x\); \(x(x+2)=x^2+2x\); subtract → \(3x+6\).</div><div class="step"><strong>Step 2:</strong> \(3x\div x=3\); \(3(x+2)=3x+6\); subtract → \(0\).</div><em>Conclusion: quotient \(x+3\), remainder \(0\). ✓</em></div></div>
-  <div class="example-box" ${EX}><h3>Example 2: Long division with a missing term</h3><p>Divide \((x^3+2x^2-5)\div(x-1)\) by long division.</p><div class="solution"><div class="step"><strong>Step 1:</strong> Insert the missing term: \(x^3+2x^2+0x-5\).</div><div class="step"><strong>Step 2:</strong> \(x^3\div x=x^2\); subtract \(x^3-x^2\) → \(3x^2+0x\). Then \(3x^2\div x=3x\); subtract \(3x^2-3x\) → \(3x-5\). Then \(3x\div x=3\); subtract \(3x-3\) → \(-2\).</div><em>Conclusion: quotient \(x^2+3x+3\), remainder \(-2\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 1: Exact long division</h3><p>Divide \((x^2+5x+6)\div(x+2)\).</p><div class="solution"><div class="step"><strong>Step 1:</strong> \(x^2\div x=x\); \(x(x+2)=x^2+2x\); subtract → \(3x+6\).</div><div class="step"><strong>Step 2:</strong> \(3x\div x=3\); \(3(x+2)=3x+6\); subtract → \(0\).</div><em>Conclusion: quotient \(x+3\), remainder \(0\). ✓</em></div>${ldiv("x + 2", ["", "x", "+3"], [
+    { cells: ["x²", "+5x", "+6"] },
+    { cells: ["x²", "+2x", ""], line: true },
+    { cells: ["", "+3x", "+6"] },
+    { cells: ["", "+3x", "+6"], line: true },
+    { cells: ["", "", "0"] },
+  ])}</div>
+  <div class="example-box" ${EX}><h3>Example 2: Long division with a missing term</h3><p>Divide \((x^3+2x^2-5)\div(x-1)\) by long division.</p><div class="solution"><div class="step"><strong>Step 1:</strong> Insert the missing term: \(x^3+2x^2+0x-5\).</div><div class="step"><strong>Step 2:</strong> \(x^3\div x=x^2\); subtract \(x^3-x^2\) → \(3x^2+0x\). Then \(3x^2\div x=3x\); subtract \(3x^2-3x\) → \(3x-5\). Then \(3x\div x=3\); subtract \(3x-3\) → \(-2\).</div><em>Conclusion: quotient \(x^2+3x+3\), remainder \(-2\). ✓</em></div>${ldiv("x − 1", ["", "x²", "3x", "+3"], [
+    { cells: ["x³", "+2x²", "+0x", "−5"] },
+    { cells: ["x³", "−x²", "", ""], line: true },
+    { cells: ["", "3x²", "+0x", "−5"] },
+    { cells: ["", "3x²", "−3x", ""], line: true },
+    { cells: ["", "", "3x", "−5"] },
+    { cells: ["", "", "3x", "−3"], line: true },
+    { cells: ["", "", "", "−2"] },
+  ])}</div>
   <div class="example-box" ${EX}><h3>Example 3: Synthetic division</h3><p>Divide \((x^3-4x^2+x+6)\div(x-2)\).</p><div class="solution"><div class="step"><strong>Step 1:</strong> Coefficients \(1,-4,1,6\), root \(2\). Bring down \(1\).</div><div class="step"><strong>Step 2:</strong> \(1{\cdot}2=2\Rightarrow-4{+}2=-2\); \(-2{\cdot}2=-4\Rightarrow1{-}4=-3\); \(-3{\cdot}2=-6\Rightarrow6{-}6=0\).</div><em>Conclusion: quotient \(x^2-2x-3\), R \(0\). ✓</em></div></div>
   <div class="example-box" ${EX}><h3>Example 4: Division statement</h3><p>Write the division statement for Example 1.</p><div class="solution"><div class="step"><strong>Step 1:</strong> \(P=(x+2)(x+3)+0\).</div><em>Conclusion: \(x^2+5x+6=(x+2)(x+3)\). ✓</em></div></div>
-  <div class="example-box" ${EX}><h3>Example 5: Nonzero remainder</h3><p>Divide \((x^2+3x+5)\div(x+1)\).</p><div class="solution"><div class="step"><strong>Step 1:</strong> Quotient \(x+2\), and \(x+2\) times \(x+1\) is \(x^2+3x+2\); subtract → \(3\).</div><em>Conclusion: \(x^2+3x+5=(x+1)(x+2)+3\). ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 5: Nonzero remainder</h3><p>Divide \((x^2+3x+5)\div(x+1)\).</p><div class="solution"><div class="step"><strong>Step 1:</strong> Quotient \(x+2\), and \(x+2\) times \(x+1\) is \(x^2+3x+2\); subtract → \(3\).</div><em>Conclusion: \(x^2+3x+5=(x+1)(x+2)+3\). ✓</em></div>${ldiv("x + 1", ["", "x", "+2"], [
+    { cells: ["x²", "+3x", "+5"] },
+    { cells: ["x²", "+x", ""], line: true },
+    { cells: ["", "+2x", "+5"] },
+    { cells: ["", "+2x", "+2"], line: true },
+    { cells: ["", "", "+3"] },
+  ])}</div>
   <h2>🟡 Practice Questions</h2>
   <div class="practice-box" ${PR}><h3>Question 1</h3><p>\((x^2+6x+8)\div(x+2)\)?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(x+4\), R 0.</em></div></div></details></div>
   <div class="practice-box" ${PR}><h3>Question 2</h3><p>\((x^2+x-6)\div(x-2)\)?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(x+3\), R 0.</em></div></div></details></div>
