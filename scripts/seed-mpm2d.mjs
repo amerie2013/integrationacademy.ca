@@ -238,10 +238,26 @@ export const subjects = [
   L11,
   { code: "1.2", title: "Solving Linear Systems by Graphing", blocks: [html(String.raw`<div class="lecture-box">
   <h1>📐 Solving Linear Systems by Graphing</h1>
-  <p><strong>Overview.</strong> A <strong>linear system</strong> is two (or more) lines that share the same variables. Its <strong>solution</strong> is the ordered pair \((x,y)\) that satisfies <em>both</em> equations — graphically, the point where the lines cross. You'll graph both lines, read the intersection, check it, and recognize when a system has one, no, or infinitely many solutions.</p>
+  <p><strong>Overview.</strong> A <strong>linear system</strong> is two (or more) lines that share the same variables. Its <strong>solution</strong> is the ordered pair \((x,y)\) that satisfies <em>both</em> equations — graphically, the point where the lines cross. You'll draw the first line, draw the second line, read the intersection, check it, and recognize when a system has one, no, or infinitely many solutions.</p>
 
   <h2>📌 What a Solution Means</h2>
-  <p>The solution lies on <strong>both</strong> lines at once, so it is their point of intersection. To solve by graphing: write each equation as \(y=mx+b\), graph both on one grid, and read where they meet. Always <strong>verify</strong> by substituting the point back into both equations.</p>
+  <p>The solution lies on <strong>both</strong> lines at once, so it is their point of intersection. To solve by graphing: draw the first line, draw the second line on the <em>same</em> grid, and read the point where they cross. Always <strong>verify</strong> by substituting that point back into both original equations.</p>
+
+  <h2>📌 Two Ways to Draw a Line</h2>
+  <p>Which method is faster depends on the form the equation is already in.</p>
+  <p><strong>If the equation is in slope-intercept form, \(y=mx+b\):</strong></p>
+  <ol>
+    <li>Find \(b\) and plot the \(y\)-intercept \((0,b)\) first.</li>
+    <li>Write the slope \(m\) as a fraction \(\dfrac{\text{rise}}{\text{run}}\). From \((0,b)\), move <strong>run</strong> units horizontally and <strong>rise</strong> units vertically to land on a second point.</li>
+    <li><strong>Check the second point</strong> by substituting its \(x\)-value into the equation — the \(y\)-value it gives should match the point you plotted.</li>
+    <li>Draw a straight line through the two points, extending it in both directions.</li>
+  </ol>
+  <p><strong>If the equation is in standard form, \(Ax+By=C\) (no \(y=mx+b\) needed):</strong></p>
+  <ol>
+    <li>Find the <strong>\(x\)-intercept</strong>: set \(y=0\) and solve for \(x\) — this is where the line crosses the \(x\)-axis.</li>
+    <li>Find the <strong>\(y\)-intercept</strong>: set \(x=0\) and solve for \(y\) — this is where the line crosses the \(y\)-axis.</li>
+    <li>Plot both intercepts and draw a straight line through them.</li>
+  </ol>
 
   <h2>📌 The Three Possibilities</h2>
   <ul>
@@ -256,59 +272,67 @@ export const subjects = [
   <h2>🔵 Examples</h2>
 
   <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;">
-    <h3>Example 1: A one-solution system</h3>
+    <h3>Example 1: A one-solution system (slope-intercept form)</h3>
     <p>Solve \( \begin{cases} y=2x+1 \\ y=-x+4 \end{cases} \) by graphing.</p>
     <div class="solution">
-      <div class="step"><strong>Step 1:</strong> Both are already in \(y=mx+b\) form — graph each.</div>
-      <div class="step"><strong>Step 2:</strong> They cross at \((1,3)\).</div>
-      <div class="step"><strong>Step 3 (check):</strong> \(3=2(1)+1\) ✓ and \(3=-(1)+4\) ✓.</div>
+      <div class="step"><strong>Step 1 (draw the first line, \(y=2x+1\)):</strong> \(b=1\), so plot \((0,1)\). The slope \(m=2=\dfrac{2}{1}\) (rise \(2\), run \(1\)): from \((0,1)\) move right \(1\), up \(2\), to \((1,3)\). Check: at \(x=1\), \(y=2(1)+1=3\) ✓ — matches. Draw the line through \((0,1)\) and \((1,3)\).</div>
+      <div class="step"><strong>Step 2 (draw the second line, \(y=-x+4\)):</strong> \(b=4\), so plot \((0,4)\). The slope \(m=-1=\dfrac{-1}{1}\) (rise \(-1\), run \(1\)): from \((0,4)\) move right \(1\), down \(1\), to \((1,3)\). Check: at \(x=1\), \(y=-(1)+4=3\) ✓ — matches. Draw the line through \((0,4)\) and \((1,3)\).</div>
+      <div class="step"><strong>Step 3 (find the intersection):</strong> Reading the graph, the two lines cross at \((1,3)\).</div>
+      <div class="step"><strong>Step 4 (check in both original equations):</strong> \(3=2(1)+1\) ✓ and \(3=-(1)+4\) ✓.</div>
       <em>Conclusion: the solution is \((1,3)\). ✓</em>
     </div>
-    ${gframe(["y = 2*x + 1", "y = -x + 4"], { title: "Solution: (1, 3)", labels: [{ x: 1, y: 3, t: "(1, 3)", c: "#a3327a" }] })}
+    ${gframe(["y = 2*x + 1", "y = -x + 4"], { title: "Solution: (1, 3)", labels: [{ x: 0, y: 1, t: "b=1", c: "#4a90e2" }, { x: 0, y: 4, t: "b=4", c: "#2e7d32" }, { x: 1, y: 3, t: "(1, 3)", c: "#a3327a" }] })}
   </div>
 
   <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;">
-    <h3>Example 2: Reading an integer intersection</h3>
-    <p>Solve \( \begin{cases} y=x-2 \\ y=-2x+4 \end{cases} \).</p>
+    <h3>Example 2: Reading an integer intersection (slope-intercept form)</h3>
+    <p>Solve \( \begin{cases} y=x-2 \\ y=-2x+4 \end{cases} \) by graphing.</p>
     <div class="solution">
-      <div class="step"><strong>Step 1:</strong> Set them equal to locate \(x\): \(x-2=-2x+4\Rightarrow 3x=6\Rightarrow x=2\).</div>
-      <div class="step"><strong>Step 2:</strong> Then \(y=2-2=0\).</div>
+      <div class="step"><strong>Step 1 (draw the first line, \(y=x-2\)):</strong> \(b=-2\), so plot \((0,-2)\). The slope \(m=1=\dfrac11\) (rise \(1\), run \(1\)): from \((0,-2)\) move right \(1\), up \(1\), to \((1,-1)\). Check: at \(x=1\), \(y=1-2=-1\) ✓ — matches. Draw the line through \((0,-2)\) and \((1,-1)\), extending it to the right.</div>
+      <div class="step"><strong>Step 2 (draw the second line, \(y=-2x+4\)):</strong> \(b=4\), so plot \((0,4)\). The slope \(m=-2=\dfrac{-2}{1}\) (rise \(-2\), run \(1\)): from \((0,4)\) move right \(1\), down \(2\), to \((1,2)\). Check: at \(x=1\), \(y=-2(1)+4=2\) ✓ — matches. Draw the line through \((0,4)\) and \((1,2)\).</div>
+      <div class="step"><strong>Step 3 (find the intersection):</strong> Extending both lines, they cross at \((2,0)\). (Confirm algebraically: \(x-2=-2x+4\Rightarrow 3x=6\Rightarrow x=2\), so \(y=2-2=0\).)</div>
+      <div class="step"><strong>Step 4 (check in both original equations):</strong> \(0=2-2\) ✓ and \(0=-2(2)+4\) ✓.</div>
       <em>Conclusion: the lines meet at \((2,0)\). ✓</em>
     </div>
-    ${gframe(["y = x - 2", "y = -2*x + 4"], { title: "Solution: (2, 0)", labels: [{ x: 2, y: 0, t: "(2, 0)", c: "#a3327a" }] })}
+    ${gframe(["y = x - 2", "y = -2*x + 4"], { title: "Solution: (2, 0)", labels: [{ x: 0, y: -2, t: "b=-2", c: "#4a90e2" }, { x: 1, y: -1, t: "(1,-1)", c: "#4a90e2" }, { x: 0, y: 4, t: "b=4", c: "#2e7d32" }, { x: 1, y: 2, t: "(1,2)", c: "#2e7d32" }, { x: 2, y: 0, t: "(2, 0)", c: "#a3327a" }] })}
   </div>
 
   <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;">
-    <h3>Example 3: Convert from standard form first</h3>
+    <h3>Example 3: Graphing directly from standard form using intercepts</h3>
     <p>Solve \( \begin{cases} x+y=5 \\ x-y=1 \end{cases} \) by graphing.</p>
     <div class="solution">
-      <div class="step"><strong>Step 1:</strong> Rewrite each in \(y=mx+b\): \(y=5-x\) and \(y=x-1\).</div>
-      <div class="step"><strong>Step 2:</strong> \(5-x=x-1\Rightarrow 6=2x\Rightarrow x=3\), so \(y=2\).</div>
-      <em>Conclusion: the solution is \((3,2)\). ✓</em>
+      <div class="step"><strong>Step 1 (draw the first line, \(x+y=5\)):</strong> \(x\)-intercept (set \(y=0\)): \(x=5\), so plot \((5,0)\). \(y\)-intercept (set \(x=0\)): \(y=5\), so plot \((0,5)\). Draw the line through \((5,0)\) and \((0,5)\).</div>
+      <div class="step"><strong>Step 2 (draw the second line, \(x-y=1\)):</strong> \(x\)-intercept (set \(y=0\)): \(x=1\), so plot \((1,0)\). \(y\)-intercept (set \(x=0\)): \(-y=1\Rightarrow y=-1\), so plot \((0,-1)\). Draw the line through \((1,0)\) and \((0,-1)\).</div>
+      <div class="step"><strong>Step 3 (find the intersection):</strong> Reading the graph, the two lines cross at \((3,2)\). (Confirm algebraically: adding the equations, \(2x=6\Rightarrow x=3\), so \(y=5-3=2\).)</div>
+      <div class="step"><strong>Step 4 (check in both original equations):</strong> \(3+2=5\) ✓ and \(3-2=1\) ✓.</div>
+      <em>Conclusion: the solution is \((3,2)\). ✓ (Notice neither equation needed to be rewritten as \(y=mx+b\) — the intercepts were enough.)</em>
     </div>
-    ${gframe(["y = 5 - x", "y = x - 1"], { title: "Solution: (3, 2)", labels: [{ x: 3, y: 2, t: "(3, 2)", c: "#a3327a" }] })}
+    ${gframe(["y = 5 - x", "y = x - 1"], { title: "Solution: (3, 2)", labels: [{ x: 5, y: 0, t: "(5,0)", c: "#4a90e2" }, { x: 0, y: 5, t: "(0,5)", c: "#4a90e2" }, { x: 1, y: 0, t: "(1,0)", c: "#2e7d32" }, { x: 0, y: -1, t: "(0,-1)", c: "#2e7d32" }, { x: 3, y: 2, t: "(3, 2)", c: "#a3327a" }] })}
   </div>
 
   <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;">
-    <h3>Example 4: No solution (parallel)</h3>
-    <p>Solve \( \begin{cases} y=2x+1 \\ y=2x-3 \end{cases} \).</p>
+    <h3>Example 4: No solution (parallel lines)</h3>
+    <p>Solve \( \begin{cases} y=2x+1 \\ y=2x-3 \end{cases} \) by graphing.</p>
     <div class="solution">
-      <div class="step"><strong>Step 1:</strong> Equal slopes (both \(2\)) but different intercepts.</div>
-      <div class="step"><strong>Step 2:</strong> The lines are parallel and never cross.</div>
-      <em>Conclusion: <strong>no solution</strong>. ✓</em>
+      <div class="step"><strong>Step 1 (draw the first line, \(y=2x+1\)):</strong> \(b=1\), plot \((0,1)\). Slope \(\dfrac21\): from \((0,1)\) move right \(1\), up \(2\), to \((1,3)\). Check: \(y=2(1)+1=3\) ✓. Draw the line.</div>
+      <div class="step"><strong>Step 2 (draw the second line, \(y=2x-3\)):</strong> \(b=-3\), plot \((0,-3)\). Slope \(\dfrac21\) — <em>the same rise and run as the first line</em>: from \((0,-3)\) move right \(1\), up \(2\), to \((1,-1)\). Check: \(y=2(1)-3=-1\) ✓. Draw the line.</div>
+      <div class="step"><strong>Step 3 (find the intersection):</strong> Because both lines rise at the exact same rate, the second line stays the same vertical distance (\(4\) units) below the first one everywhere — the two lines never touch, no matter how far they're extended.</div>
+      <em>Conclusion: equal slopes with different \(y\)-intercepts means the lines are parallel — <strong>no solution</strong>. ✓</em>
     </div>
-    ${gframe(["y = 2*x + 1", "y = 2*x - 3"], { title: "No solution — parallel (equal slopes)" })}
+    ${gframe(["y = 2*x + 1", "y = 2*x - 3"], { title: "No solution — parallel (equal slopes)", labels: [{ x: 0, y: 1, t: "b=1", c: "#4a90e2" }, { x: 1, y: 3, t: "(1,3)", c: "#4a90e2" }, { x: 0, y: -3, t: "b=-3", c: "#2e7d32" }, { x: 1, y: -1, t: "(1,-1)", c: "#2e7d32" }] })}
   </div>
 
   <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;">
-    <h3>Example 5: Infinitely many (same line)</h3>
-    <p>Solve \( \begin{cases} y=x+1 \\ 2y=2x+2 \end{cases} \).</p>
+    <h3>Example 5: Infinitely many (the same line twice)</h3>
+    <p>Solve \( \begin{cases} y=x+1 \\ 2y=2x+2 \end{cases} \) by graphing.</p>
     <div class="solution">
-      <div class="step"><strong>Step 1:</strong> Simplify the second: \(2y=2x+2\Rightarrow y=x+1\).</div>
-      <div class="step"><strong>Step 2:</strong> Both equations are the <em>same</em> line.</div>
+      <div class="step"><strong>Step 1 (simplify before drawing):</strong> Divide the second equation by \(2\): \(2y=2x+2\Rightarrow y=x+1\) — identical to the first equation.</div>
+      <div class="step"><strong>Step 2 (draw the first line, \(y=x+1\)):</strong> \(b=1\), plot \((0,1)\). Slope \(\dfrac11\): from \((0,1)\) move right \(1\), up \(1\), to \((1,2)\). Check: \(y=1+1=2\) ✓. Draw the line.</div>
+      <div class="step"><strong>Step 3 (draw the second line):</strong> Since the simplified second equation is exactly \(y=x+1\) again, plotting its \(y\)-intercept and second point lands on the same two points, \((0,1)\) and \((1,2)\) — it traces over the first line exactly.</div>
+      <div class="step"><strong>Step 4 (find the intersection):</strong> The two lines overlap completely, so every point on the line is a solution to both equations.</div>
       <em>Conclusion: <strong>infinitely many</strong> solutions. ✓</em>
     </div>
-    ${gframe(["y = x + 1"], { title: "Infinitely many — both equations are this line" })}
+    ${gframe(["y = x + 1"], { title: "Infinitely many — both equations are this line", labels: [{ x: 0, y: 1, t: "b=1", c: "#4a90e2" }, { x: 1, y: 2, t: "(1,2)", c: "#4a90e2" }] })}
   </div>
 
   <h2>🟡 Practice Questions</h2>
@@ -343,7 +367,8 @@ export const subjects = [
     <ul>
       <li>Reading the intersection a unit off — always verify by substitution.</li>
       <li>Calling parallel lines "one solution" — equal slopes with different intercepts means <strong>none</strong>.</li>
-      <li>Graphing a standard-form equation without first solving for \(y\).</li>
+      <li>Plotting only the \(y\)-intercept and forgetting to use the slope's rise/run to find a second point — one point alone can't determine a line.</li>
+      <li>Mixing up the \(x\)-intercept and \(y\)-intercept when graphing from standard form — the \(x\)-intercept has \(y=0\), the \(y\)-intercept has \(x=0\).</li>
     </ul>
   </div>
 
@@ -353,7 +378,7 @@ export const subjects = [
   <div class="qa-box" style="background-color:#f0f0f0;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Q3: When is there no solution?</h3><p><em>Equal slopes but different y-intercepts (parallel lines).</em></p></div>
   <div class="qa-box" style="background-color:#f0f0f0;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Q4: When are there infinitely many?</h3><p><em>Same slope <strong>and</strong> same intercept — the two equations describe one line.</em></p></div>
   <div class="qa-box" style="background-color:#f0f0f0;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Q5: Why can graphing be inaccurate?</h3><p><em>If the intersection isn't at whole numbers it's hard to read exactly — switch to substitution or elimination.</em></p></div>
-  <div class="qa-box" style="background-color:#f0f0f0;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Q6: Must both equations be in \(y=mx+b\)?</h3><p><em>Not required, but it's the easiest form to graph — convert from standard form first.</em></p></div>
+  <div class="qa-box" style="background-color:#f0f0f0;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Q6: Must both equations be in \(y=mx+b\)?</h3><p><em>No — an equation already in standard form \(Ax+By=C\) can be graphed directly from its \(x\)- and \(y\)-intercepts, with no rearranging needed at all.</em></p></div>
 </div>`)] },
 
   { code: "1.3", title: "Solving by Substitution", blocks: [html(String.raw`<div class="lecture-box">
