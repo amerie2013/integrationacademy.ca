@@ -556,7 +556,14 @@ export function Whiteboard({ initialBoardId }: { initialBoardId?: string }) {
         {/* highlighter has its own (translucent) colours; everything else uses the pen colours */}
         <Group>{(tool === "highlight" ? HL_COLORS : COLORS).map((c) => {
           const on = tool === "highlight" ? hlColor === c : color === c;
-          return <button key={c} onClick={() => (tool === "highlight" ? setHlColor(c) : setColor(c))} title={c} style={{ width: 24, height: 24, borderRadius: "50%", background: c, border: on ? "3px solid #fff" : "2px solid #334155", cursor: "pointer", boxShadow: on ? "0 0 0 2px #34d27f" : "none" }} />;
+          // onMouseDown (not onClick) + preventDefault, same as the Font/Size
+          // buttons below: a plain onClick lets the browser blur the text
+          // input FIRST (native focus-loss on mousedown), which fires its
+          // onBlur={commitText} with the *old* color before this button's own
+          // click handler ever runs — so changing color mid-edit silently did
+          // nothing to the text you were typing. Blocking that default keeps
+          // the input focused, so setColor takes effect while still editing.
+          return <button key={c} onMouseDown={(e) => { e.preventDefault(); if (tool === "highlight") setHlColor(c); else setColor(c); }} title={c} style={{ width: 24, height: 24, borderRadius: "50%", background: c, border: on ? "3px solid #fff" : "2px solid #334155", cursor: "pointer", boxShadow: on ? "0 0 0 2px #34d27f" : "none" }} />;
         })}</Group>
         <Group>{WIDTHS.map((w) => (<button key={w} onClick={() => setWidth(w)} title={`width ${w}`} style={tBtn(width === w)}><span style={{ display: "inline-block", width: 18, height: w, background: width === w ? "#04130a" : "#cbd5e1", borderRadius: 4 }} /></button>))}</Group>
         <Group>
