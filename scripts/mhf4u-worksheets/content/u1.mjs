@@ -11,12 +11,12 @@ export default [
     examples: [
       { t: "Odd, positive", body: r`End behaviour of $f(x)=x^3$?\soln Odd degree, $a>0$: as $x\to-\infty,\ y\to-\infty$; as $x\to+\infty,\ y\to+\infty$ (down–up):` + r`\eplot{-3}{3}{-9}{9}{\addplot[exblue,very thick,domain=-2.1:2.1]{x^3};}` },
       { t: "Even, positive", body: r`End behaviour of $f(x)=x^4$?\soln Even degree, $a>0$: both ends $y\to+\infty$ (up–up):` + r`\eplot{-2}{2}{-1}{9}{\addplot[exblue,very thick,domain=-1.7:1.7]{x^4};}` },
-      { t: "Odd, negative", body: r`End behaviour of $f(x)=-2x^3$?\soln Odd, $a<0$ flips it: as $x\to-\infty,\ y\to+\infty$; as $x\to+\infty,\ y\to-\infty$ (up–down).` },
-      { t: "Even, negative", body: r`End behaviour of $f(x)=-x^4$?\soln Even, $a<0$: both ends $y\to-\infty$ (down–down).` },
-      { t: "Read a graph", body: r`A graph falls on the left and rises on the right.\soln Opposite ends ⇒ odd degree; rising on the right ⇒ $a>0$.` },
-      { t: "Odd, positive", body: r`End behaviour of $f(x)=x^5$?\soln Down–up (odd, $a>0$).` },
-      { t: "Even, negative", body: r`End behaviour of $f(x)=-x^2$?\soln Down–down (even, $a<0$).` },
-      { t: "Even, positive", body: r`End behaviour of $f(x)=3x^6$?\soln Up–up (even, $a>0$).` },
+      { t: "Odd, negative", body: r`End behaviour of $f(x)=-2x^3$?\soln Odd, $a<0$ flips it: as $x\to-\infty,\ y\to+\infty$; as $x\to+\infty,\ y\to-\infty$ (up–down):` + r`\eplot{-2}{2}{-9}{9}{\addplot[exblue,very thick,domain=-1.65:1.65]{-2*x^3};}` },
+      { t: "Even, negative", body: r`End behaviour of $f(x)=-x^4$?\soln Even, $a<0$: both ends $y\to-\infty$ (down–down):` + r`\eplot{-2}{2}{-9}{1}{\addplot[exblue,very thick,domain=-1.7:1.7]{-x^4};}` },
+      { t: "Read a graph", body: r`A graph falls on the left and rises on the right.\soln Opposite ends ⇒ odd degree; rising on the right ⇒ $a>0$ (e.g. $y=x^3-x$):` + r`\eplot{-2}{2}{-3}{3}{\addplot[exblue,very thick,domain=-1.9:1.9]{x^3-x};}` },
+      { t: "Odd, positive", body: r`End behaviour of $f(x)=x^5$?\soln Down–up (odd, $a>0$):` + r`\eplot{-2}{2}{-9}{9}{\addplot[exblue,very thick,domain=-1.53:1.53]{x^5};}` },
+      { t: "Even, negative", body: r`End behaviour of $f(x)=-x^2$?\soln Down–down (even, $a<0$):` + r`\eplot{-3}{3}{-9}{1}{\addplot[exblue,very thick,domain=-3:3]{-x^2};}` },
+      { t: "Even, positive", body: r`End behaviour of $f(x)=3x^6$?\soln Up–up (even, $a>0$):` + r`\eplot{-1.5}{1.5}{-1}{9}{\addplot[exblue,very thick,domain=-1.2:1.2]{3*x^6};}` },
       { t: "Compare shapes", body: r`How do $y=x^2$ and $y=x^4$ compare?\soln Both up–up; $x^4$ is flatter near 0 and steeper outside $[-1,1]$:` + r`\eplot{-2}{2}{-1}{9}{\addplot[exblue,very thick,domain=-2.9:2.9]{x^2};\addplot[qorange,very thick,domain=-1.7:1.7]{x^4};}` },
     ],
     questions: [
