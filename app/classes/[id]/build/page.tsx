@@ -8,9 +8,13 @@ import { SiteHeader } from "../../../../components/SiteHeader";
 import { Math as Tex } from "../../../../components/Math";
 import { QKind, QKIND_LABELS } from "../../../../lib/quiz";
 import { exprToTex } from "../../../../lib/mathcheck";
+import { chaptersIn, sampleChapterTest, titleFor, isChapterTest, FORM_LABELS, DifficultyCounts, SampleResult } from "../../../../lib/chapterTest";
 
 type BankRow = { id: string; topic: string | null; difficulty: string; kind: QKind; prompt: string; choices: any; answer: any; tolerance: number | null; points: number; feedback: string | null };
-type ClassQuiz = { id: string; title: string };
+type ClassQuiz = { id: string; title: string; test_group_id: string | null };
+// While stepping through a multi-form chapter test: each finished form's question ids,
+// plus the chapter/settings so the next form's sampling can avoid repeats.
+type TestFlow = { chapter: number; counts: DifficultyCounts; minPerTopic: number; totalForms: number; forms: string[][] };
 
 const KINDS: QKind[] = ["multiple_choice", "multiple_select", "true_false", "numeric", "math_expr", "short_answer", "fill_blank", "matching", "ordering"];
 const DIFFS = ["easy", "medium", "hard"];
@@ -30,8 +34,17 @@ export default function ClassQuizBuilder() {
   const [building, setBuilding] = useState(false);
   const [showAll, setShowAll] = useState(true);
 
+  // chapter test generator
+  const [genOpen, setGenOpen] = useState(false);
+  const [genChapter, setGenChapter] = useState<number | null>(null);
+  const [genCounts, setGenCounts] = useState<DifficultyCounts>({ easy: 6, medium: 6, hard: 3 });
+  const [genMinPerTopic, setGenMinPerTopic] = useState(1);
+  const [genVersions, setGenVersions] = useState(1);
+  const [genWarning, setGenWarning] = useState<string | null>(null);
+  const [testFlow, setTestFlow] = useState<TestFlow | null>(null);
+
   async function loadQuizzes() {
-    const { data } = await supabase.from("quizzes").select("id, title").eq("class_id", classId).order("created_at", { ascending: false });
+    const { data } = await supabase.from("quizzes").select("id, title, test_group_id").eq("class_id", classId).order("created_at", { ascending: false });
     setQuizzes((data ?? []) as ClassQuiz[]);
   }
 
@@ -70,6 +83,7 @@ export default function ClassQuizBuilder() {
   }, [classId]);
 
   const topics = useMemo(() => [...new Set(rows.map((r) => r.topic).filter(Boolean))] as string[], [rows]);
+  const chapters = useMemo(() => chaptersIn(rows), [rows]);
   const filtered = rows.filter((r) => (fTopic === "all" || r.topic === fTopic) && (fDiff === "all" || r.difficulty === fDiff) && (fKind === "all" || r.kind === fKind));
   function toggle(id: string) { setSelected((s) => { const n = new Set(s); n.has(id) ? n.delete(id) : n.add(id); return n; }); }
   const allFilteredSelected = filtered.length > 0 && filtered.every((r) => selected.has(r.id));
@@ -102,8 +116,100 @@ export default function ClassQuizBuilder() {
     return quiz.id;
   }
 
+  function warningText(r: SampleResult, chapter: number): string | null {
+    const parts: string[] = [];
+    if (r.topicsCovered < r.topicsTotal) parts.push(`only ${r.topicsCovered} of ${r.topicsTotal} topics in chapter ${chapter} have questions available`);
+    if (r.reusedCount > 0) parts.push(`${r.reusedCount} question${r.reusedCount === 1 ? "" : "s"} reused from an earlier form (the bank is too small to avoid it)`);
+    const short = Object.entries(r.shortfall).filter(([, n]) => n);
+    if (short.length) parts.push(`short by ${short.map(([d, n]) => `${n} ${d}`).join(", ")}`);
+    return parts.length ? parts.join("; ") + "." : null;
+  }
+
+  // Generates the first form and enters review mode: `selected` becomes that
+  // form's picks so the existing checkbox list below doubles as the review UI.
+  function startGenerate() {
+    if (genChapter == null) return;
+    const result = sampleChapterTest(rows, genChapter, genCounts, { minPerTopic: genMinPerTopic });
+    setTestFlow({ chapter: genChapter, counts: genCounts, minPerTopic: genMinPerTopic, totalForms: genVersions, forms: [] });
+    setSelected(new Set(result.ids));
+    setGenWarning(warningText(result, genChapter));
+    setGenOpen(false);
+    setFTopic("all"); setFDiff("all"); setFKind("all");
+  }
+
+  // Finalizes the form currently under review (using whatever the teacher swapped
+  // `selected` to) and either samples the next form or, if that was the last one,
+  // opens the publish step.
+  function nextForm() {
+    if (!testFlow) return;
+    const forms = [...testFlow.forms, [...selected]];
+    if (forms.length >= testFlow.totalForms) {
+      setTestFlow({ ...testFlow, forms });
+      setSelected(new Set());
+      setGenWarning(null);
+      return;
+    }
+    const usedSoFar = new Set(forms.flat());
+    const result = sampleChapterTest(rows, testFlow.chapter, testFlow.counts, { minPerTopic: testFlow.minPerTopic, exclude: usedSoFar });
+    setTestFlow({ ...testFlow, forms });
+    setSelected(new Set(result.ids));
+    setGenWarning(warningText(result, testFlow.chapter));
+  }
+
+  function cancelTestFlow() {
+    setTestFlow(null);
+    setSelected(new Set());
+    setGenWarning(null);
+  }
+
+  // Called when the publish modal is dismissed (success or cancel) — resets
+  // both the review flow and the modal's own open/closed state.
+  function finishTestFlow() {
+    setBuilding(false);
+    setTestFlow(null);
+    setSelected(new Set());
+    setGenWarning(null);
+  }
+
+  // Publishes every reviewed form as its own quiz, all sharing one test_group_id
+  // so the list below and deletion treat them as one test.
+  async function buildTest(settings: any): Promise<string | null> {
+    if (!cls || !testFlow) return null;
+    const groupId = crypto.randomUUID();
+    const multi = testFlow.forms.length > 1;
+    let firstId: string | null = null;
+    for (let i = 0; i < testFlow.forms.length; i++) {
+      const items = rows.filter((r) => testFlow.forms[i].includes(r.id));
+      const title = titleFor(testFlow.chapter, multi ? FORM_LABELS[i] : undefined);
+      const { data: quiz, error } = await supabase.from("quizzes").insert({
+        course_id: cls.course_id, class_id: classId, created_by: uid, title, published: true,
+        test_group_id: groupId, show_score: true, allow_backtracking: true,
+        attempts_allowed: settings.attempts, time_limit_minutes: settings.timeLimit, passing_score: settings.passing,
+        shuffle_questions: settings.shuffleQ, shuffle_choices: settings.shuffleC, show_answers: settings.showAnswers,
+        due_date: settings.dueDate ? new Date(settings.dueDate).toISOString() : null,
+      }).select("id").single();
+      if (error || !quiz) { alert("Could not create test: " + (error?.message ?? "")); return firstId; }
+      await supabase.from("quiz_questions").insert(items.map((q, j) => ({
+        quiz_id: quiz.id, kind: q.kind, prompt: q.prompt, choices: q.choices ?? null, answer: q.answer ?? null,
+        tolerance: q.tolerance ?? null, points: q.points ?? 1, feedback: q.feedback ?? null, position: j, bank_id: q.id,
+      })));
+      if (!firstId) firstId = quiz.id;
+    }
+    // Deliberately leave testFlow/selected set here — BuildTestModal is only
+    // rendered while testFlow is truthy, so clearing it now would unmount the
+    // modal before it can show its own success screen. finishTestFlow() (wired
+    // to the modal's onClose) does the actual reset once the teacher dismisses it.
+    await loadQuizzes();
+    return firstId;
+  }
+
   async function del(id: string) {
     await supabase.from("quizzes").delete().eq("id", id);
+    await loadQuizzes();
+  }
+
+  async function delGroup(groupId: string) {
+    await supabase.from("quizzes").delete().eq("test_group_id", groupId);
     await loadQuizzes();
   }
 
@@ -117,18 +223,56 @@ export default function ClassQuizBuilder() {
         <h1 style={{ fontFamily: "Fraunces, serif", fontSize: 28, fontWeight: 700, margin: "10px 0 4px" }}>Quizzes — {cls?.name}</h1>
         <p style={{ color: "#64748b", margin: "0 0 22px", fontSize: 15 }}>Pick questions from the bank and build a quiz your students will see in this class.</p>
 
-        {/* existing class quizzes */}
-        <h2 style={{ fontSize: 18, fontWeight: 700, margin: "0 0 10px" }}>Your class quizzes</h2>
+        {/* existing class quizzes — quizzes that share a test_group_id (a chapter test's
+            forms) are shown and deleted together instead of as separate rows */}
+        <h2 style={{ fontSize: 18, fontWeight: 700, margin: "0 0 10px" }}>Your class quizzes &amp; tests</h2>
         {quizzes.length === 0 ? (
           <div style={{ color: "#64748b", background: "#fff", border: "1px solid #e2e8f0", borderRadius: 12, padding: 18, marginBottom: 26 }}>None yet — select questions below and build one.</div>
         ) : (
           <div style={{ background: "#fff", border: "1px solid #e2e8f0", borderRadius: 12, overflow: "hidden", marginBottom: 26 }}>
-            {quizzes.map((q, i) => (
-              <div key={q.id} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "12px 16px", borderTop: i ? "1px solid #f1f5f9" : "none" }}>
-                <span style={{ fontWeight: 600 }}>{q.title}</span>
-                <button onClick={() => del(q.id)} style={{ background: "#fff", border: "1px solid #e2e8f0", borderRadius: 8, padding: "6px 12px", fontWeight: 700, fontSize: 13, color: "#dc2626", cursor: "pointer" }}>Delete</button>
+            {groupQuizzes(quizzes).map((g, i) => (
+              <div key={g.key} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "12px 16px", borderTop: i ? "1px solid #f1f5f9" : "none" }}>
+                <span style={{ fontWeight: 600, display: "flex", gap: 8, alignItems: "center" }}>
+                  {isChapterTest(g.title) && <Badge bg="#fef3c7" color="#92400e">Test</Badge>}
+                  {g.title}
+                  {g.items.length > 1 && <span style={{ color: "#94a3b8", fontWeight: 400, fontSize: 13 }}>({g.items.length} forms)</span>}
+                </span>
+                <button onClick={() => (g.groupId ? delGroup(g.groupId) : del(g.items[0].id))} style={{ background: "#fff", border: "1px solid #e2e8f0", borderRadius: 8, padding: "6px 12px", fontWeight: 700, fontSize: 13, color: "#dc2626", cursor: "pointer" }}>Delete</button>
               </div>
             ))}
+          </div>
+        )}
+
+        {/* chapter test generator */}
+        <h2 style={{ fontSize: 18, fontWeight: 700, margin: "0 0 10px" }}>Chapter test</h2>
+        {testFlow ? (
+          <TestFlowBanner
+            testFlow={testFlow}
+            selectedCount={selected.size}
+            warning={genWarning}
+            onNext={nextForm}
+            onCancel={cancelTestFlow}
+          />
+        ) : chapters.length === 0 ? (
+          <div style={{ color: "#64748b", background: "#fff", border: "1px solid #e2e8f0", borderRadius: 12, padding: 18, marginBottom: 26 }}>No chapters detected yet — topics need a leading number like "1.1 …" for chapter grouping.</div>
+        ) : genOpen ? (
+          <GeneratorPanel
+            chapters={chapters}
+            chapter={genChapter}
+            setChapter={setGenChapter}
+            counts={genCounts}
+            setCounts={setGenCounts}
+            minPerTopic={genMinPerTopic}
+            setMinPerTopic={setGenMinPerTopic}
+            versions={genVersions}
+            setVersions={setGenVersions}
+            onGenerate={startGenerate}
+            onCancel={() => setGenOpen(false)}
+          />
+        ) : (
+          <div style={{ background: "#fff", border: "1px solid #e2e8f0", borderRadius: 12, padding: 18, marginBottom: 26, display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12 }}>
+            <p style={{ color: "#64748b", margin: 0, fontSize: 14 }}>Auto-build a test from the bank across a whole chapter, with as many versions as you like.</p>
+            <button onClick={() => { setGenChapter(chapters[0]); setGenOpen(true); }} style={{ ...primaryL, flexShrink: 0 }}>Generate chapter test →</button>
           </div>
         )}
 
@@ -169,14 +313,22 @@ export default function ClassQuizBuilder() {
         </div>
       </div>
 
-      {selected.size > 0 && !building && (
+      {!testFlow && selected.size > 0 && !building && (
         <div style={{ position: "fixed", bottom: 0, left: 0, right: 0, background: "#0f172a", color: "#fff", padding: "14px 28px", display: "flex", justifyContent: "center", alignItems: "center", gap: 16, zIndex: 90 }}>
           <span style={{ fontWeight: 700 }}>{selected.size} selected</span>
           <button onClick={() => setSelected(new Set())} style={{ background: "transparent", color: "#cbd5e1", border: "1px solid #334155", borderRadius: 8, padding: "8px 14px", fontWeight: 700, cursor: "pointer" }}>Clear</button>
           <button onClick={() => setBuilding(true)} style={{ background: "#1b7a44", color: "#fff", border: "none", borderRadius: 8, padding: "9px 18px", fontWeight: 700, cursor: "pointer" }}>Build quiz →</button>
         </div>
       )}
-      {building && <BuildModal count={selected.size} topics={topics} defaultTopic={fTopic !== "all" ? fTopic : ""} onClose={() => setBuilding(false)} onCreate={build} />}
+      {testFlow && testFlow.forms.length >= testFlow.totalForms && !building && (
+        <div style={{ position: "fixed", bottom: 0, left: 0, right: 0, background: "#0f172a", color: "#fff", padding: "14px 28px", display: "flex", justifyContent: "center", alignItems: "center", gap: 16, zIndex: 90 }}>
+          <span style={{ fontWeight: 700 }}>{testFlow.forms.length} form{testFlow.forms.length !== 1 ? "s" : ""} ready — Chapter {testFlow.chapter}</span>
+          <button onClick={cancelTestFlow} style={{ background: "transparent", color: "#cbd5e1", border: "1px solid #334155", borderRadius: 8, padding: "8px 14px", fontWeight: 700, cursor: "pointer" }}>Discard</button>
+          <button onClick={() => setBuilding(true)} style={{ background: "#1b7a44", color: "#fff", border: "none", borderRadius: 8, padding: "9px 18px", fontWeight: 700, cursor: "pointer" }}>Configure &amp; publish test →</button>
+        </div>
+      )}
+      {building && !testFlow && <BuildModal count={selected.size} topics={topics} defaultTopic={fTopic !== "all" ? fTopic : ""} onClose={() => setBuilding(false)} onCreate={build} />}
+      {building && testFlow && <BuildTestModal chapter={testFlow.chapter} formCount={testFlow.forms.length} onClose={finishTestFlow} onCreate={buildTest} />}
     </main>
   );
 }
@@ -238,6 +390,150 @@ function BuildModal({ count, topics, defaultTopic, onClose, onCreate }: { count:
   );
 }
 
+// Groups quizzes that share a test_group_id (a chapter test's forms) into one
+// row; ungrouped quizzes each get their own row (groupId null).
+function groupQuizzes(quizzes: ClassQuiz[]): { key: string; groupId: string | null; title: string; items: ClassQuiz[] }[] {
+  const byGroup = new Map<string, ClassQuiz[]>();
+  const solo: ClassQuiz[] = [];
+  for (const q of quizzes) {
+    if (q.test_group_id) {
+      const list = byGroup.get(q.test_group_id) ?? [];
+      list.push(q);
+      byGroup.set(q.test_group_id, list);
+    } else solo.push(q);
+  }
+  const groups = [...byGroup.entries()].map(([groupId, items]) => ({
+    key: groupId,
+    groupId,
+    title: items[0].title.replace(/\s*—\s*Form\s+[A-Z]$/i, ""),
+    items,
+  }));
+  const soloRows = solo.map((q) => ({ key: q.id, groupId: null, title: q.title, items: [q] }));
+  return [...groups, ...soloRows];
+}
+
+// Setup form for the chapter-test generator: chapter, per-difficulty counts,
+// a per-topic minimum for coverage, and how many non-identical forms to build.
+function GeneratorPanel({ chapters, chapter, setChapter, counts, setCounts, minPerTopic, setMinPerTopic, versions, setVersions, onGenerate, onCancel }: {
+  chapters: number[]; chapter: number | null; setChapter: (c: number) => void;
+  counts: DifficultyCounts; setCounts: (c: DifficultyCounts) => void;
+  minPerTopic: number; setMinPerTopic: (n: number) => void;
+  versions: number; setVersions: (n: number) => void;
+  onGenerate: () => void; onCancel: () => void;
+}) {
+  const setCount = (d: keyof DifficultyCounts, v: number) => setCounts({ ...counts, [d]: v });
+  const total = counts.easy + counts.medium + counts.hard;
+  return (
+    <div style={{ background: "#fff", border: "1px solid #e2e8f0", borderRadius: 12, padding: 20, marginBottom: 26, display: "flex", flexDirection: "column", gap: 12 }}>
+      <div>
+        <label style={lbl}>Chapter</label>
+        <select value={chapter ?? ""} onChange={(e) => setChapter(Number(e.target.value))} style={field}>
+          {chapters.map((c) => <option key={c} value={c}>Chapter {c}</option>)}
+        </select>
+      </div>
+      <div style={{ display: "flex", gap: 10 }}>
+        {(["easy", "medium", "hard"] as const).map((d) => (
+          <div key={d} style={{ flex: 1 }}>
+            <label style={lbl}>{d[0].toUpperCase() + d.slice(1)} questions</label>
+            <input type="number" min={0} value={counts[d]} onChange={(e) => setCount(d, Math.max(0, Number(e.target.value)))} style={field} />
+          </div>
+        ))}
+      </div>
+      <div style={{ display: "flex", gap: 10 }}>
+        <div style={{ flex: 1 }}>
+          <label style={lbl}>Min. questions per topic (coverage)</label>
+          <input type="number" min={0} value={minPerTopic} onChange={(e) => setMinPerTopic(Math.max(0, Number(e.target.value)))} style={field} />
+        </div>
+        <div style={{ flex: 1 }}>
+          <label style={lbl}>Number of versions (Form A/B/…)</label>
+          <input type="number" min={1} max={FORM_LABELS.length} value={versions} onChange={(e) => setVersions(Math.min(FORM_LABELS.length, Math.max(1, Number(e.target.value))))} style={field} />
+        </div>
+      </div>
+      <p style={{ color: "#64748b", fontSize: 13, margin: 0 }}>Targets {total} question{total !== 1 ? "s" : ""} per form from the bank; you'll review and can swap any of them before publishing.</p>
+      <div style={{ display: "flex", justifyContent: "flex-end", gap: 10 }}>
+        <button onClick={onCancel} style={{ background: "#fff", border: "1px solid #cbd5e1", borderRadius: 9, padding: "9px 16px", fontWeight: 700, fontSize: 14, cursor: "pointer" }}>Cancel</button>
+        <button onClick={onGenerate} disabled={chapter == null || total === 0} style={{ background: "#1b7a44", color: "#fff", border: "none", borderRadius: 9, padding: "9px 18px", fontWeight: 700, fontSize: 14, cursor: "pointer" }}>Generate →</button>
+      </div>
+    </div>
+  );
+}
+
+// Shown in place of the generator panel while stepping through a multi-form
+// test's review — the checkbox bank list below is that form's review UI.
+function TestFlowBanner({ testFlow, selectedCount, warning, onNext, onCancel }: {
+  testFlow: TestFlow; selectedCount: number; warning: string | null; onNext: () => void; onCancel: () => void;
+}) {
+  const reviewing = testFlow.forms.length; // 0-indexed form currently under review
+  const done = reviewing >= testFlow.totalForms;
+  return (
+    <div style={{ background: "#eef2ff", border: "1px solid #c7d2fe", borderRadius: 12, padding: "14px 18px", marginBottom: 26 }}>
+      {!done ? (
+        <>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12, flexWrap: "wrap" }}>
+            <strong style={{ color: "#312e81" }}>
+              Reviewing Form {FORM_LABELS[reviewing]} of {testFlow.totalForms} — Chapter {testFlow.chapter} ({selectedCount} question{selectedCount !== 1 ? "s" : ""})
+            </strong>
+            <div style={{ display: "flex", gap: 8 }}>
+              <button onClick={onCancel} style={{ background: "#fff", border: "1px solid #c7d2fe", borderRadius: 8, padding: "7px 14px", fontWeight: 700, fontSize: 13, cursor: "pointer", color: "#4338ca" }}>Cancel test</button>
+              <button onClick={onNext} style={{ background: "#4338ca", color: "#fff", border: "none", borderRadius: 8, padding: "7px 16px", fontWeight: 700, fontSize: 13, cursor: "pointer" }}>
+                {reviewing + 1 >= testFlow.totalForms ? "Finish review →" : "Looks good, next form →"}
+              </button>
+            </div>
+          </div>
+          <p style={{ margin: "8px 0 0", fontSize: 13, color: "#4338ca" }}>Tick/untick questions below to swap them, then continue.</p>
+        </>
+      ) : (
+        <strong style={{ color: "#312e81" }}>{testFlow.forms.length} form{testFlow.forms.length !== 1 ? "s" : ""} reviewed — configure and publish below.</strong>
+      )}
+      {warning && <p style={{ margin: "8px 0 0", fontSize: 13, color: "#92400e", background: "#fef3c7", borderRadius: 8, padding: "6px 10px" }}>⚠ {warning}</p>}
+    </div>
+  );
+}
+
+// Configure-and-publish modal for a fully-reviewed chapter test (1 or more forms).
+function BuildTestModal({ chapter, formCount, onClose, onCreate }: { chapter: number; formCount: number; onClose: () => void; onCreate: (s: any) => Promise<string | null> }) {
+  const [s, setS] = useState({ attempts: 1 as number | null, timeLimit: 45 as number | null, passing: 60 as number | null, shuffleQ: true, shuffleC: true, showAnswers: "after_close", dueDate: "" });
+  const [saving, setSaving] = useState(false); const [done, setDone] = useState(false);
+  const set = (f: any) => setS({ ...s, ...f });
+  async function go() { setSaving(true); const id = await onCreate(s); setSaving(false); if (id) setDone(true); }
+  return (
+    <div onClick={onClose} style={{ position: "fixed", inset: 0, background: "rgba(15,23,42,0.45)", display: "flex", justifyContent: "center", alignItems: "flex-start", padding: "40px 20px", overflowY: "auto", zIndex: 100 }}>
+      <div onClick={(e) => e.stopPropagation()} style={{ background: "#fff", borderRadius: 16, maxWidth: 520, width: "100%", padding: 26 }}>
+        {done ? (
+          <div style={{ textAlign: "center" }}>
+            <div style={{ fontSize: 40, marginBottom: 8 }}>✅</div>
+            <h2 style={{ fontFamily: "Fraunces, serif", fontSize: 22, fontWeight: 700, margin: "0 0 8px" }}>Chapter {chapter} test published!</h2>
+            <p style={{ color: "#64748b", fontSize: 14, margin: "0 0 18px" }}>{formCount} form{formCount !== 1 ? "s" : ""} · your students can take it now.</p>
+            <button onClick={onClose} style={{ background: "#1b7a44", color: "#fff", border: "none", borderRadius: 9, padding: "10px 20px", fontWeight: 700, fontSize: 14, cursor: "pointer" }}>Done</button>
+          </div>
+        ) : (
+          <>
+            <h2 style={{ fontFamily: "Fraunces, serif", fontSize: 22, fontWeight: 700, margin: "0 0 4px" }}>Publish Chapter {chapter} test</h2>
+            <p style={{ color: "#64748b", fontSize: 14, margin: "0 0 18px" }}>{formCount} form{formCount !== 1 ? "s" : ""}, applied to every form.</p>
+            <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+              <div style={{ display: "flex", gap: 10 }}>
+                <div style={{ flex: 1 }}><label style={lbl}>Attempts (blank = unlimited)</label><input type="number" value={s.attempts ?? ""} onChange={(e) => set({ attempts: e.target.value === "" ? null : Number(e.target.value) })} style={field} /></div>
+                <div style={{ flex: 1 }}><label style={lbl}>Time limit (min)</label><input type="number" value={s.timeLimit ?? ""} onChange={(e) => set({ timeLimit: e.target.value === "" ? null : Number(e.target.value) })} style={field} /></div>
+              </div>
+              <div style={{ display: "flex", gap: 10 }}>
+                <div style={{ flex: 1 }}><label style={lbl}>Passing score (%)</label><input type="number" value={s.passing ?? ""} onChange={(e) => set({ passing: e.target.value === "" ? null : Number(e.target.value) })} style={field} /></div>
+                <div style={{ flex: 1 }}><label style={lbl}>Show answers</label><select value={s.showAnswers} onChange={(e) => set({ showAnswers: e.target.value })} style={field}><option value="after_submit">After submit</option><option value="after_close">After close</option><option value="never">Never</option></select></div>
+              </div>
+              <div><label style={lbl}>Due date (optional)</label><input type="date" value={s.dueDate} onChange={(e) => set({ dueDate: e.target.value })} style={field} /></div>
+              <label style={{ display: "flex", gap: 7, alignItems: "center", fontSize: 14, fontWeight: 600, color: "#334155" }}><input type="checkbox" checked={s.shuffleQ} onChange={(e) => set({ shuffleQ: e.target.checked })} /> Shuffle questions each attempt</label>
+              <label style={{ display: "flex", gap: 7, alignItems: "center", fontSize: 14, fontWeight: 600, color: "#334155" }}><input type="checkbox" checked={s.shuffleC} onChange={(e) => set({ shuffleC: e.target.checked })} /> Shuffle answer choices</label>
+            </div>
+            <div style={{ display: "flex", justifyContent: "flex-end", gap: 10, marginTop: 20 }}>
+              <button onClick={onClose} style={{ background: "#fff", border: "1px solid #cbd5e1", borderRadius: 9, padding: "10px 18px", fontWeight: 700, fontSize: 14, cursor: "pointer" }}>Cancel</button>
+              <button onClick={go} disabled={saving} style={{ background: "#1b7a44", color: "#fff", border: "none", borderRadius: 9, padding: "10px 20px", fontWeight: 700, fontSize: 14, cursor: "pointer" }}>{saving ? "Publishing…" : `Publish ${formCount > 1 ? "all forms" : "test"}`}</button>
+            </div>
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
+
 function PromptText({ prompt }: { prompt: string }) {
   if (!prompt) return null;
   const parts = prompt.split(/(\$[^$]+\$)/g);
@@ -283,3 +579,4 @@ function Badge({ children, bg, color }: { children: React.ReactNode; bg: string;
 }
 const field: React.CSSProperties = { padding: "9px 12px", borderRadius: 8, border: "1px solid #cbd5e1", fontSize: 14, fontFamily: "inherit", outline: "none", boxSizing: "border-box", background: "#fff" };
 const lbl: React.CSSProperties = { fontSize: 12, fontWeight: 700, color: "#475569", display: "block", marginBottom: 4 };
+const primaryL: React.CSSProperties = { background: "#1b7a44", color: "#fff", border: "none", borderRadius: 9, padding: "10px 18px", fontWeight: 700, fontSize: 14, cursor: "pointer" };

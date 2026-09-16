@@ -5,6 +5,7 @@ import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { supabase } from "../../../lib/supabase";
 import { SiteHeader } from "../../../components/SiteHeader";
+import { isChapterTest } from "../../../lib/chapterTest";
 
 type SeqItem = {
   type: "lesson" | "assignment" | "quiz" | "worksheet";
@@ -183,6 +184,7 @@ export default function ClassManagePage() {
     lesson: { label: "Lesson", bg: "#e7f6ec", color: "#1b7a44" },
     assignment: { label: "Assignment", bg: "#fff7ed", color: "#c2410c" },
     quiz: { label: "Quiz", bg: "#ecfdf5", color: "#0d9488" },
+    test: { label: "Test", bg: "#fef3c7", color: "#92400e" }, // a quiz generated as a chapter test — same data, distinct badge
     worksheet: { label: "Worksheet", bg: "#eff6ff", color: "#1d4ed8" },
   } as const;
 
@@ -236,7 +238,7 @@ export default function ClassManagePage() {
 
         <div style={{ background: "#fff", border: "1px solid #e2e8f0", borderRadius: 14, overflow: "hidden" }}>
           {items.length === 0 ? <div style={{ padding: 18, color: "#94a3b8" }}>No content yet.</div> : items.map((it, i) => {
-            const t = TYPE[it.type];
+            const t = it.type === "quiz" && isChapterTest(it.title) ? TYPE.test : TYPE[it.type];
             const isLocked = locked.has(`${it.type}:${it.id}`);
             return (
               <div
