@@ -44,10 +44,15 @@ export function drawBg(ctx: CanvasRenderingContext2D, bg: Bg, w: number, h: numb
 const _imgCache = new Map<string, HTMLImageElement>();
 let _onImg: (() => void) | null = null;
 
-/** A coordinate plane: plain centered x/y axes with arrows and x/y labels (no
- * grid, no tick marks) to graph on by hand. Drawn inside the box [x,y,w,h]. */
+/** A coordinate plane: x/y axes with arrows, numbered ticks from -1 to 10 on
+ * each axis, and x/y labels, to graph on by hand. Drawn inside [x,y,w,h] —
+ * the origin sits 1/11 of the way in from the low end (not centered), so
+ * that full -1..10 range fits both directions. */
 export function drawAxes(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number) {
-  const cx = Math.round(x + w / 2), cy = Math.round(y + h / 2);
+  const MIN = -1, MAX = 10, SPAN = MAX - MIN;
+  const toX = (v: number) => x + ((v - MIN) / SPAN) * w;
+  const toY = (v: number) => y + h - ((v - MIN) / SPAN) * h;
+  const cx = Math.round(toX(0)), cy = Math.round(toY(0));
   ctx.save();
   // the two axis lines
   ctx.strokeStyle = "#334155"; ctx.fillStyle = "#334155"; ctx.lineWidth = 1.5;
@@ -58,9 +63,30 @@ export function drawAxes(ctx: CanvasRenderingContext2D, x: number, y: number, w:
   ctx.moveTo(x + w, cy); ctx.lineTo(x + w - a, cy - a * 0.7); ctx.moveTo(x + w, cy); ctx.lineTo(x + w - a, cy + a * 0.7);
   ctx.moveTo(cx, y); ctx.lineTo(cx - a * 0.7, y + a); ctx.moveTo(cx, y); ctx.lineTo(cx + a * 0.7, y + a);
   ctx.stroke();
-  // labels
+
+  // tick marks, -1..10 on each axis
+  ctx.strokeStyle = "#94a3b8"; ctx.lineWidth = 1;
+  ctx.beginPath();
+  for (let v = MIN; v <= MAX; v++) {
+    if (v === 0) continue; // the origin itself — no tick needed, just the "0" label below
+    const px = Math.round(toX(v)); ctx.moveTo(px, cy - 4); ctx.lineTo(px, cy + 4);
+    const py = Math.round(toY(v)); ctx.moveTo(cx - 4, py); ctx.lineTo(cx + 4, py);
+  }
+  ctx.stroke();
+  // tick numbers
+  ctx.font = "11px Inter, system-ui, sans-serif"; ctx.fillStyle = "#64748b";
+  ctx.textAlign = "center"; ctx.textBaseline = "top";
+  for (let v = MIN; v <= MAX; v++) { if (v !== 0) ctx.fillText(String(v), toX(v), cy + 6); }
+  ctx.textAlign = "right"; ctx.textBaseline = "middle";
+  for (let v = MIN; v <= MAX; v++) { if (v !== 0) ctx.fillText(String(v), cx - 6, toY(v)); }
+  ctx.textAlign = "right"; ctx.textBaseline = "top";
+  ctx.fillText("0", cx - 6, cy + 6);
+
+  // axis letter labels — "x" sits above its arrow (not below, where the "10"
+  // tick number already is) to avoid overlapping it.
   ctx.font = "italic 13px Georgia, serif"; ctx.fillStyle = "#475569";
-  ctx.fillText("x", x + w - 12, cy + 15);
+  ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
+  ctx.fillText("x", x + w - 14, cy - 8);
   ctx.fillText("y", cx + 8, y + 12);
   ctx.restore();
 }
