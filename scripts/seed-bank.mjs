@@ -324,75 +324,75 @@ export function genPowersExp() {
 export function gen15() {
   const q = [];
 
-  // ── LEVEL 1 — EASY ──────────────────────────────────────────
+  // ── LEVEL 1 — EASY: sign prediction & simple integer calculations ──
   // single choice
-  q.push(mc("easy", "The temperature is $-5^\\circ C$. It rises by $8^\\circ C$. The new temperature is:", ["$-13^\\circ C$", "$3^\\circ C$", "$13^\\circ C$", "$-3^\\circ C$"], 1));
-  q.push(mc("easy", "A diver is at $-25$ m (below sea level). He ascends $10$ m. His new position is:", ["$-35$ m", "$-15$ m", "$15$ m", "$35$ m"], 1));
-  q.push(mc("easy", "A bank account has $-\\textdollar 120$ (overdrawn). You deposit $\\textdollar 200$. The new balance is:", ["$-\\textdollar 320$", "$-\\textdollar 80$", "$\\textdollar 80$", "$\\textdollar 320$"], 2));
-  q.push(mc("easy", "The lowest temperature was $-12^\\circ C$ and the highest was $-4^\\circ C$. The temperature change is:", ["$8^\\circ C$", "$-8^\\circ C$", "$16^\\circ C$", "$-16^\\circ C$"], 0));
-  q.push(mc("easy", "A submarine at $-200$ m dives another $50$ m. Its depth is now:", ["$-250$ m", "$-150$ m", "$150$ m", "$250$ m"], 0));
+  q.push(mc("easy", "Without calculating, is $-2^4$ positive or negative?", ["Positive", "Negative"], 1, "The exponent applies to $2$ only, then the whole thing is negated: $-2^4=-16$."));
+  q.push(mc("easy", "Without calculating, is $(-2)^4$ positive or negative?", ["Positive", "Negative"], 0, "The base itself is negative: an even power of a negative is positive."));
+  q.push(mc("easy", "Without calculating, is $-(-3)^3$ positive or negative?", ["Positive", "Negative"], 0, "$(-3)^3$ is negative (odd power); negating a negative gives a positive."));
+  q.push(mc("easy", "$-5^2$ equals:", ["$25$", "$-25$", "$10$", "$-10$"], 1, "$-5^2=-(5^2)=-25$."));
+  q.push(mc("easy", "$(-5)^2$ equals:", ["$25$", "$-25$", "$10$", "$-10$"], 0, "The negative sign is part of the base: $(-5)(-5)=25$."));
   // multiple select
-  q.push(ms("easy", "Which situations represent a negative integer?", ["10 m above sea level", "A loss of $\\textdollar 15$", "3 steps forward", "Temperature $4^\\circ C$ below zero"], [1, 3]));
-  q.push(ms("easy", "The temperature changes from $-3^\\circ C$ to $5^\\circ C$. The increase is:", ["$-8$", "$8$", "$2$", "$5 - (-3)$"], [1, 3]));
-  q.push(ms("easy", "Which operations correctly find the final depth if starting at $-30$ m and rising $12$ m?", ["$-30 + 12$", "$12 - 30$", "$-30 - 12$", "$12 + (-30)$"], [0, 1, 3]));
-  q.push(ms("easy", "Which statements about integers in context are true?", ["Sea level is $0$", "A debt can be represented by a negative integer", "A profit of $\\textdollar 50$ is $+50$", "Temperature cannot be negative"], [0, 1, 2]));
-  q.push(ms("easy", "Which represent the balance after starting with $-\\textdollar 50$ and then withdrawing $\\textdollar 30$?", ["$-\\textdollar 80$", "$-50 - 30$", "$-20$", "$-\\textdollar 20$"], [0, 1]));
+  q.push(ms("easy", "Which of these are negative?", ["$-3^2$", "$(-3)^2$", "$-(-3)^2$", "$(-3)^3$"], [0, 2, 3], "$-3^2=-9$, $(-3)^2=9$, $-(-3)^2=-9$, $(-3)^3=-27$."));
+  q.push(ms("easy", "Which expressions equal $-8$?", ["$-2^3$", "$(-2)^3$", "$-(2^3)$", "$(-2)^2\\times(-2)$"], [0, 1, 2, 3], "All four simplify to $-8$."));
+  q.push(ms("easy", "Which are true about $-4^2$ and $(-4)^2$?", ["$-4^2=-16$", "$(-4)^2=16$", "$-4^2=(-4)^2$", "$-4^2\\ne(-4)^2$"], [0, 1, 3], "$-16\\ne16$, so the third statement is false and the fourth is true."));
+  q.push(ms("easy", "Which expressions equal $9$?", ["$(-3)^2$", "$-3^2$", "$-(-3)^2$", "$-(-3^2)$"], [0, 3], "$(-3)^2=9$ and $-(-9)=9$; the other two equal $-9$."));
+  q.push(ms("easy", "Which of these fractions are negative?", ["$\\frac{-12}{4}$", "$\\frac{12}{-4}$", "$\\frac{-12}{-4}$", "$\\frac{-(-12)}{4}$"], [0, 1], "The first two have one negative sign (negative); the last two have two, or none effectively (positive)."));
   // true / false
-  q.push(tf("easy", "A gain of 7 kg is represented by $-7$.", false));
-  q.push(tf("easy", "If you are at $-4$ and move $+6$, you end at $+2$.", true));
-  q.push(tf("easy", "The opposite of a loss of $\\textdollar 25$ is a gain of $\\textdollar 25$.", true));
-  q.push(tf("easy", "$-10$ m means 10 m above sea level.", false));
-  q.push(tf("easy", "A temperature drop from $2^\\circ C$ to $-3^\\circ C$ is a change of $-5^\\circ C$.", true));
-  // fill in the blank (numeric for reliable grading)
-  q.push(num("easy", "The integer for 8°C below zero is ___.", -8, 0));
-  q.push(num("easy", "Starting at $-15$ and adding $+20$ gives ___.", 5, 0));
-  q.push(num("easy", "A debt of $\\textdollar 200$ is written as ___.", -200, 0));
-  q.push(num("easy", "Sea level is represented by the integer ___.", 0, 0));
-  q.push(num("easy", "The change from $-7$ to $-1$ is an increase of ___.", 6, 0));
+  q.push(tf("easy", "$-3^4$ is negative.", true, "$-3^4=-81$."));
+  q.push(tf("easy", "$(-3)^4$ is negative.", false, "$(-3)^4=81$, positive."));
+  q.push(tf("easy", "$-(-2)^5$ is negative.", false, "$(-2)^5=-32$, so $-(-32)=32$, positive."));
+  q.push(tf("easy", "The expression $\\dfrac{-15}{-3}$ is negative.", false, "A negative divided by a negative is positive: $5$."));
+  q.push(tf("easy", "$-2^2=(-2)^2$.", false, "$-2^2=-4$ but $(-2)^2=4$."));
+  // fill in the blank / numeric
+  q.push(fill("easy", "$-3^2=$ ___.", ["-9"]));
+  q.push(fill("easy", "$(-3)^2=$ ___.", ["9"]));
+  q.push(num("easy", "Evaluate $\\dfrac{-18}{-6}$.", 3, 0));
+  q.push(num("easy", "Evaluate $\\dfrac{24}{-8}$.", -3, 0));
+  q.push(num("easy", "Evaluate $\\dfrac{-5(6)}{-10}$.", 3, 0));
 
-  // ── LEVEL 2 — MEDIUM ────────────────────────────────────────
-  q.push(mc("medium", "At 6:00 AM the temperature was $-8^\\circ C$. It rose $3^\\circ C$ per hour for 4 hours. At 10:00 AM it is:", ["$-20^\\circ C$", "$4^\\circ C$", "$-4^\\circ C$", "$12^\\circ C$"], 1, "$-8 + (3 \\times 4) = 4$."));
-  q.push(mc("medium", "A stock started at $+\\textdollar 50$, fell $\\textdollar 70$, then rose $\\textdollar 30$. The final value is:", ["$-\\textdollar 10$", "$+\\textdollar 10$", "$-\\textdollar 90$", "$+\\textdollar 90$"], 1, "$50 - 70 + 30 = 10$."));
-  q.push(mc("medium", "A city is at elevation $120$ m. Another city is $350$ m lower. Its elevation is:", ["$470$ m", "$-230$ m", "$230$ m", "$-470$ m"], 1, "$120 - 350 = -230$."));
-  q.push(mc("medium", "A hiker starts at $-50$ m, climbs $120$ m, then descends $80$ m. Final altitude:", ["$-10$ m", "$10$ m", "$-90$ m", "$90$ m"], 0, "$-50 + 120 - 80 = -10$."));
-  q.push(mc("medium", "The difference between a profit of $\\textdollar 400$ and a loss of $\\textdollar 250$ is:", ["$\\textdollar 150$", "$\\textdollar 650$", "$-\\textdollar 150$", "$-\\textdollar 650$"], 1, "$400 - (-250) = 650$."));
-  q.push(ms("medium", "Which represent a net change of $+5$?", ["Start at $-2$, end at $3$", "Start at $10$, end at $15$", "Start at $-5$, end at $0$", "Start at $-10$, end at $-5$"], [0, 1, 2, 3]));
-  q.push(ms("medium", "A submarine goes from $-120$ m to $-90$ m. Which calculations are correct?", ["$-90 - (-120) = 30$ m rise", "$-120 + 30 = -90$", "$-90 + 120 = 30$", "$120 - 90 = 30$"], [0, 1, 2]));
-  q.push(ms("medium", "Which scenarios result in a final value of $0$?", ["Start at $-15$, add $+15$", "Start at $+20$, subtract $-20$", "Start at $-8$, subtract $-8$", "Start at $0$, add $0$"], [0, 2, 3]));
-  q.push(ms("medium", "A business has daily profits $-10, +20, -5, +15$. The total profit is:", ["$+20$", "$-10+20-5+15$", "$20$", "$10$"], [0, 1, 2]));
-  q.push(ms("medium", "A diver descends 15 m, ascends 8 m, descends 12 m. Which expressions give the final depth if starting at $-5$ m?", ["$-5 - 15 + 8 - 12$", "$-5 + (-15) + 8 + (-12)$", "$-5 - 15 - 12 + 8$", "$-5 + 8 - 27$"], [0, 1, 2, 3]));
-  q.push(tf("medium", "If you owe $\\textdollar 30$ and pay $\\textdollar 20$, your balance is $-\\textdollar 10$.", true));
-  q.push(tf("medium", "A temperature change from $-5^\\circ C$ to $2^\\circ C$ is an increase of $-7^\\circ C$.", false));
-  q.push(tf("medium", "Starting at $-3$ and moving $+8$ steps ends at $+5$.", true));
-  q.push(tf("medium", "A loss of $\\textdollar 50$ followed by a gain of $\\textdollar 30$ is a net loss of $\\textdollar 20$.", true));
-  q.push(tf("medium", "The elevation difference between $-20$ m and $15$ m is $35$ m.", true, "$15 - (-20) = 35$."));
-  q.push(num("medium", "A plane at $1500$ m descends $2300$ m. Its new altitude (m) is ___.", -800, 0));
-  q.push(num("medium", "From $-6^\\circ C$ to $9^\\circ C$, the temperature rose ___ degrees.", 15, 0));
-  q.push(num("medium", "A team gains 8 yards, loses 12 yards, gains 5 yards. Net change (yards) = ___.", 1, 0));
-  q.push(num("medium", "A checking account: start $+\\textdollar 200$, withdraw $\\textdollar 350$, deposit $\\textdollar 100$. Balance = ___.", -50, 0));
-  q.push(num("medium", "The opposite of a 15 m decrease is a ___ m increase.", 15, 0));
+  // ── LEVEL 2 — MEDIUM: order of operations with brackets & exponents ──
+  q.push(mc("medium", "Evaluate $3(-2)^3$.", ["$-24$", "$24$", "$-48$", "$48$"], 0, "$(-2)^3=-8$, then $3\\times(-8)=-24$."));
+  q.push(mc("medium", "Evaluate $-4(-3)-(-2^3)$.", ["$20$", "$4$", "$-20$", "$-4$"], 0, "$-4(-3)=12$; $-2^3=-8$; $12-(-8)=20$."));
+  q.push(mc("medium", "Evaluate $\\left[-2(-1)^3\\right]^4$.", ["$16$", "$-16$", "$8$", "$-8$"], 0, "$(-1)^3=-1$; $-2(-1)=2$; $2^4=16$."));
+  q.push(mc("medium", "Evaluate $-3^3-(-6+2^2)$.", ["$-25$", "$-29$", "$25$", "$29$"], 0, "$-3^3=-27$; inside the brackets $-6+4=-2$; $-27-(-2)=-25$."));
+  q.push(mc("medium", "Evaluate $\\dfrac{(-4)^2-20}{-2^2}$.", ["$1$", "$-1$", "$4$", "$-4$"], 0, "Numerator $16-20=-4$; denominator $-2^2=-4$; $-4\\div-4=1$."));
+  q.push(ms("medium", "Which expressions equal $-32$?", ["$2(-2)^4\\times(-1)$", "$-2^5$", "$(-2)^5$", "$4\\times(-2)^2$"], [0, 1, 2], "The first three all equal $-32$; the last equals $16$."));
+  q.push(ms("medium", "Which expressions equal $16$?", ["$(-2)^4$", "$-2^4$", "$\\left[-2(-1)\\right]^4$", "$-(-2)^4$"], [0, 2], "$(-2)^4=16$ and $[2]^4=16$; the other two equal $-16$."));
+  q.push(ms("medium", "Which statements are true?", ["$-3^2=-9$", "$(-3)^2=-9$", "$-3^2=(-3)^2$", "$5(-2)^3=-40$"], [0, 3], "$-3^2=-9$ (true) and $5(-8)=-40$ (true); the other two are false."));
+  q.push(ms("medium", "Which expressions equal $2$?", ["$\\dfrac{(-3)^2-5}{2}$", "$\\dfrac{-12}{-6}$", "$\\dfrac{-2^2}{2}$", "$\\dfrac{4(-3)}{-6}$"], [0, 1, 3], "The first, second and fourth all equal $2$; the third equals $-2$."));
+  q.push(ms("medium", "Which expressions equal $-13$?", ["$3-2^4$", "$3-(-2)^4$", "$-3^2+10$", "$-(3^2)+10$"], [0, 1], "$3-16=-13$ both ways; the last two equal $1$."));
+  q.push(tf("medium", "$\\left[-3(-1)^2\\right]^2=9$.", true, "$(-1)^2=1$; $-3(1)=-3$; $(-3)^2=9$."));
+  q.push(tf("medium", "$-2^4=16$.", false, "$-2^4=-16$; only $(-2)^4=16$."));
+  q.push(tf("medium", "$\\dfrac{(-2)^2-10}{-3^2}=\\dfrac{2}{3}$.", true, "Numerator $4-10=-6$; denominator $-9$; $-6\\div-9=\\tfrac23$."));
+  q.push(tf("medium", "$-5^2-(-4+3^2)=-30$.", true, "$-25-(-4+9)=-25-5=-30$."));
+  q.push(tf("medium", "$4(-3)^2\\div(-6)=-6$.", true, "$4(9)=36$; $36\\div-6=-6$."));
+  q.push(fill("medium", "$-2^5=$ ___.", ["-32"]));
+  q.push(fill("medium", "$(-2)^5=$ ___.", ["-32"]));
+  q.push(num("medium", "Evaluate $\\left[-3(-2)^2\\right]\\div(-6)$.", 2, 0, "$(-2)^2=4$; $-3(4)=-12$; $-12\\div-6=2$."));
+  q.push(num("medium", "Evaluate $\\dfrac{3^2+3(1)}{-2^2}$.", -3, 0, "Numerator $9+3=12$; denominator $-4$; $12\\div-4=-3$."));
+  q.push(num("medium", "Evaluate $-4^2+(-3)^3$.", -43, 0, "$-16+(-27)=-43$."));
 
-  // ── LEVEL 3 — HARD ──────────────────────────────────────────
-  q.push(mc("hard", "A climber starts at $-120$ m, climbs $+400$ m, descends $-350$ m, then ascends $+200$ m. Summit altitude:", ["$130$ m", "$370$ m", "$270$ m", "$70$ m"], 0, "$-120 + 400 - 350 + 200 = 130$."));
-  q.push(mc("hard", "On Monday a stock is at $-15$. Tuesday it rises $+20$. Wednesday it falls by $x$ to end at $-5$. Find $x$:", ["$10$", "$0$", "$30$", "$20$"], 0, "$-15 + 20 = 5$; $5 - x = -5 \\Rightarrow x = 10$."));
-  q.push(mc("hard", "A sub starts at $-2500$ m, descends $1500$ m, ascends $2000$ m, descends $1000$ m. Final depth:", ["$-3000$ m", "$-2000$ m", "$-1000$ m", "$0$ m"], 0, "$-2500 - 1500 + 2000 - 1000 = -3000$."));
-  q.push(mc("hard", "Quarterly profits: Q1 $-200$, Q2 $+350$, Q3 $-450$, Q4 $+x$. If the year total is $-100$, find $x$:", ["$200$", "$-200$", "$100$", "$-100$"], 0, "$-300 + x = -100 \\Rightarrow x = 200$."));
-  q.push(mc("hard", "A balloon at $500$ m rises $250$, descends $400$, rises $100$, descends $200$. To end at $0$ m, the final change must be:", ["$-250$ m", "$-150$ m", "$+150$ m", "Already at $0$ m"], 0, "It is at $250$ m, so it must descend $250$ m: a change of $-250$ m."));
-  q.push(ms("hard", "The sum of a gain of $g$ and a loss of $l$ equals $-5$ (with $g, l \\ge 0$). Which pairs $(g,l)$ are possible?", ["$g=10, l=15$", "$g=-5, l=0$", "$g=0, l=5$", "$g=5, l=10$"], [0, 2, 3], "$g - l = -5$ with non-negative $g, l$: $(10,15), (0,5), (5,10)$. $g=-5$ is not a valid gain."));
-  q.push(ms("hard", "An elevator at floor $F$ goes up 12, down 7, up 3, down 10, ending at floor $-2$. Which are true?", ["$F = 0$", "$F = 2$", "Net change is $-2$ from start", "$F = -2$"], [0, 2], "$F + 12 - 7 + 3 - 10 = F - 2 = -2 \\Rightarrow F = 0$."));
-  q.push(ms("hard", "A swimmer goes from $+2$ m to $-8$ m. Which describe the change?", ["$-10$ m", "A dive of $|-10|$ m", "$+10$ m ascent if reversed", "$-10$ m relative"], [0, 1, 2, 3]));
-  q.push(ms("hard", "City A: $-4^\\circ C$, City B: $-9^\\circ C$, City C: $2^\\circ C$. Which statements are true?", ["A is warmer than B by $5^\\circ C$", "C is warmer than B by $11^\\circ C$", "B is colder than A by $5^\\circ C$", "A is warmer than C by $-6^\\circ C$"], [0, 1, 2]));
-  q.push(ms("hard", "A hiker: $E_1=-100$, $E_2=E_1+x$, $E_3=E_2-150$, $E_4=E_3+80$, $E_5=E_4-30=0$. Which are true?", ["$x = 200$", "$E_2 = 100$", "Total climb $= x + 80$", "Total descent $= 150 + 30$"], [0, 1, 2, 3]));
-  q.push(tf("hard", "The net change from $a$ to $b$ is $b - a$.", true));
-  q.push(tf("hard", "If the final depth is $-50$ m and you ascended $30$ m, the starting depth was $-80$ m.", true));
-  q.push(tf("hard", "A $\\textdollar 60$ debt followed by a $\\textdollar 100$ deposit results in $+\\textdollar 40$.", true));
-  q.push(tf("hard", "The temperature change from $-8$ to $-3$ is greater than from $-3$ to $2$.", false, "Both are $+5^\\circ$, so they are equal."));
-  q.push(tf("hard", "A 500 m descent followed by a 200 m ascent is the same as a 300 m descent.", true));
-  q.push(num("hard", "Starting at $-7$, add $x$, subtract $10$, add $3$, end at $0$. Then $x =$ ___.", 14, 0));
-  q.push(num("hard", "A scuba diver at $-15$ m descends $d$ m, ascends $8$ m, ends at $-27$ m. Then $d =$ ___.", 20, 0));
-  q.push(num("hard", "Profit: Jan $-200$, Feb $+300$, Mar $-150$, Apr $+x$. If the average monthly profit is $25$, then $x =$ ___.", 150, 0));
-  q.push(num("hard", "The opposite of a $-350$ m change is ___ m.", 350, 0));
-  q.push(num("hard", "A debt of $-\\textdollar 500$ is reduced by $\\textdollar 200$. The debt becomes ___.", -300, 0));
+  // ── LEVEL 3 — HARD: substitution with $x=-3,\,y=-2$, and harder order of operations ──
+  q.push(mc("hard", "If $x=-3$ and $y=-2$, evaluate $x^2+y^3$.", ["$1$", "$-1$", "$17$", "$-17$"], 0, "$9+(-8)=1$."));
+  q.push(mc("hard", "If $x=-3$ and $y=-2$, evaluate $4y^3(-x^2)$.", ["$288$", "$-288$", "$96$", "$-96$"], 0, "$4(-8)=-32$; $-x^2=-9$; $(-32)(-9)=288$."));
+  q.push(mc("hard", "If $x=-3$ and $y=-2$, evaluate $3y^4-(2-x)^2$.", ["$23$", "$-23$", "$73$", "$-73$"], 0, "$3(16)=48$; $2-(-3)=5$, $5^2=25$; $48-25=23$."));
+  q.push(mc("hard", "If $x=-3$ and $y=-2$, evaluate $x^2+\\left[4x-3(y-x)\\right]$.", ["$-6$", "$6$", "$-24$", "$24$"], 0, "$y-x=1$; $4x-3(1)=-15$; $9+(-15)=-6$."));
+  q.push(mc("hard", "Evaluate $\\dfrac{4^2+4(6)}{-2^3}$.", ["$-5$", "$5$", "$-8$", "$8$"], 0, "$16+24=40$; $-2^3=-8$; $40\\div-8=-5$."));
+  q.push(ms("hard", "If $x=-3$ and $y=-2$, which expressions equal $-6$?", ["$x^2+\\left[4x-3(y-x)\\right]$", "$x+y-1$", "$2x$", "$3x$"], [0, 1, 2], "The first three all equal $-6$; $3x=-9$."));
+  q.push(ms("hard", "If $x=-3$ and $y=-2$, which expressions are positive?", ["$x^2$", "$y^3$", "$(x-y)^2$", "$xy$"], [0, 2, 3], "$x^2=9$, $(x-y)^2=1$, $xy=6$ are positive; $y^3=-8$ is negative."));
+  q.push(ms("hard", "If $x=-3$ and $y=-2$, which expressions equal $23$?", ["$3y^4-(2-x)^2$", "$x^2+14$", "$5x+38$", "$y^2+19$"], [0, 1, 2, 3], "All four evaluate to $23$."));
+  q.push(ms("hard", "If $x=-3$ and $y=-2$, which expressions are negative?", ["$y^5$", "$x^4$", "$xy^3$", "$x^3$"], [0, 3], "$y^5=-32$ and $x^3=-27$ are negative; $x^4=81$ and $xy^3=24$ are positive."));
+  q.push(ms("hard", "If $x=-3$ and $y=-2$, which expressions equal $\\dfrac{2}{3}$?", ["$\\dfrac{6(x+y^2)}{x^2}$", "$\\dfrac{2(x+y^2)}{3}$", "$\\dfrac{y+8}{x^2}$", "$\\dfrac{-2}{-3}$"], [0, 1, 2, 3], "All four evaluate to $\\tfrac23$."));
+  q.push(tf("hard", "If $x=-3$ and $y=-2$, $\\dfrac{6(x+y^2)}{x^2}=\\dfrac{2}{3}$.", true, "$x+y^2=-3+4=1$; $6(1)\\div9=\\tfrac23$."));
+  q.push(tf("hard", "If $x=-3$ and $y=-2$, $\\dfrac{y^5+y^3+y}{y^6+y^4+y^2}=-\\dfrac{1}{2}$.", true, "Numerator $=-42$, denominator $=84$, ratio $=-\\tfrac12$."));
+  q.push(tf("hard", "If $x=-3$ and $y=-2$, $x^2+y^3=1$.", true, "$9+(-8)=1$."));
+  q.push(tf("hard", "If $x=-3$ and $y=-2$, $4y^3(-x^2)=-288$.", false, "It equals $+288$."));
+  q.push(tf("hard", "$\\left[-3(-2)^2\\right]^2\\div(-6)=-24$.", true, "$(-2)^2=4$; $-3(4)=-12$; $(-12)^2=144$; $144\\div-6=-24$."));
+  q.push(fill("hard", "If $x=-3$ and $y=-2$, $x^2+y^3=$ ___.", ["1"]));
+  q.push(fill("hard", "If $x=-3$ and $y=-2$, $3y^4-(2-x)^2=$ ___.", ["23"]));
+  q.push(fill("hard", "If $x=-3$ and $y=-2$, $\\dfrac{6(x+y^2)}{x^2}=$ ___ (as a fraction).", ["2/3"]));
+  q.push(num("hard", "If $x=-3$ and $y=-2$, evaluate $x^2+\\left[4x-3(y-x)\\right]$.", -6, 0));
+  q.push(num("hard", "Evaluate $\\left[-3(-2)^2\\right]^2\\div(-6)$.", -24, 0));
 
   return q;
 }

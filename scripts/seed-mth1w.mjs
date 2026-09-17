@@ -130,19 +130,20 @@ Exponent Laws
 13. Simplify \( \dfrac{a^6 \cdot a^2}{a^3} \).` },
 
   "1.4": { title: "Assignment 1.4 — Integers in Context", description: String.raw`Knowledge & Understanding
-1. Evaluate \( (-8)+5,\ 12-(-4),\ (-3)\times(-6) \).
-2. Evaluate \( -20 \div 4 \).
-3. Write an integer for: 7°C below zero; a \$150 deposit.
+1. Without calculating, state whether each expression is positive or negative, then evaluate it: (a) \( -4^3 \)  (b) \( (-4)^4 \)  (c) \( -(-2)^4 \).
+2. Calculate: (a) \( \dfrac{-9(4)}{-6} \)  (b) \( \dfrac{15}{3(-5)} \).
+3. Evaluate without a calculator: (a) \( 6(-2)^3 \)  (b) \( \left[-4(-1)^3\right]^2 \).
 Thinking
-4. Use a pattern to explain why two negatives multiply to a positive.
-5. Create a real scenario whose answer is \( -7 \).
+4. Explain why \( -3^2 \) and \( (-3)^2 \) give different results, using the order of operations.
+5. Create an expression using at least one exponent and one set of brackets that evaluates to exactly \( -20 \).
 Communication
-6. Explain what subtracting a negative means, using a number-line picture.
-7. Describe a real situation that uses negative numbers.
+6. Describe, in your own words, the rule for deciding the sign of \( (-a)^n \) without evaluating it.
+7. Explain what changes — and what doesn't — when you substitute \( x=-5 \) instead of \( x=5 \) into the expression \( x^2+3x \).
 Application
-8. At 5 a.m. it was \( -5°C \) and rose 3°C each hour. What was the temperature at 11 a.m.?
-9. A diver at \( -12 \) m descends 8 m, then rises 5 m. What is the final depth?
-10. An account has \$250; \$75 is withdrawn each week for 4 weeks. What is the balance?` },
+8. Evaluate \( -2^3-(-9+4^2) \).
+9. Evaluate \( \dfrac{(-3)^2-23}{-2^2} \).
+10. If \( x=-5 \) and \( y=-1 \), evaluate \( x^2+\left[2x-3(y-x)\right] \).
+11. If \( x=-5 \) and \( y=-1 \), evaluate \( \dfrac{25(x+y^2)}{x^2} \).` },
 
   "1.5": { title: "Assignment 1.5 — Fractions & Operations with Positive/Negative Fractions", description: String.raw`Knowledge & Understanding
 1. Classify \( \frac{5}{8},\ \frac{11}{4},\ \frac{7}{7} \) as proper or improper, then simplify \( \frac{24}{36} \) and \( \frac{45}{60} \).
@@ -1251,132 +1252,144 @@ const subjects = [
     blocks: [
       { id: bid(), type: "html", html: String.raw`<div class="lecture-box">
   <h1>➖ Integers in Context</h1>
-  <p><strong>Overview.</strong> Integers are the positive and negative whole numbers and zero: \( \dots, -3, -2, -1, 0, 1, 2, 3, \dots \). We use them to describe <strong>direction, location, amount, and change</strong>.</p>
+  <p><strong>Overview.</strong> Integers are the positive and negative whole numbers and zero: \( \dots, -3, -2, -1, 0, 1, 2, 3, \dots \). Beyond simple addition and subtraction, this lesson goes further: <strong>order of operations</strong> with negative numbers and exponents, the crucial difference between a <strong>negative base</strong> and a <strong>negative sign in front of a power</strong>, and <strong>substituting negative values</strong> into algebraic expressions.</p>
 
-  <h2>📌 What the Sign Means</h2>
-  <p>A negative sign is the <em>opposite</em> of a positive one. \( +5 \) might mean money saved or \( 5°C \) above zero; \( -5 \) means money spent or \( 5°C \) below zero. A drop from \( 3°C \) to \( -4°C \) is a change of \( -7 \).</p>
+  <h2>📌 Negative Base vs. Negative Sign</h2>
+  <p>\( (-2)^4 \) and \( -2^4 \) look similar but are <strong>not</strong> the same. In \( (-2)^4 \), the brackets make \( -2 \) the base, so it means \( (-2)(-2)(-2)(-2)=16 \). In \( -2^4 \), there are no brackets around the \( -2 \), so the exponent applies to \( 2 \) alone, and the whole result is negated: \( -2^4=-(2^4)=-16 \).</p>
+  <ul>
+    <li><strong>Negative base, even exponent</strong> \( (-a)^{\text{even}} \): positive.</li>
+    <li><strong>Negative base, odd exponent</strong> \( (-a)^{\text{odd}} \): negative.</li>
+    <li><strong>No brackets</strong>, like \( -a^n \): always the <em>opposite</em> of \( a^n \) — the sign is applied last.</li>
+  </ul>
 
-  <h2>📌 Adding &amp; Subtracting</h2>
-  <p><strong>Same signs</strong> → add and keep the sign. <strong>Different signs</strong> → subtract and take the sign of the larger. Subtracting is adding the opposite: \( a - b = a + (-b) \). On a number line, \( + \) moves <strong>right</strong> and \( - \) moves <strong>left</strong>.</p>
+  <h2>📌 Order of Operations with Integers</h2>
+  <p>The same BEDMAS/GEMDAS order applies with negative numbers: <strong>B</strong>rackets, <strong>E</strong>xponents, <strong>D</strong>ivision &amp; <strong>M</strong>ultiplication (left to right), <strong>A</strong>ddition &amp; <strong>S</strong>ubtraction (left to right). Work from the innermost brackets outward, and evaluate each power <em>before</em> multiplying or attaching an outside negative sign.</p>
 
-  <div style="text-align:center;margin:16px 0;">
-    <svg viewBox="0 0 560 120" style="max-width:100%;height:auto;" role="img" aria-label="Number line showing negative 7 plus 4 equals negative 3">
-      <line x1="30" y1="78" x2="530" y2="78" stroke="#475569" stroke-width="2"/>
-      <!-- ticks -8..8 -->
-      <g font-size="10" fill="#64748b" text-anchor="middle">
-        <line x1="30" y1="73" x2="30" y2="83" stroke="#94a3b8"/><text x="30" y="98">−8</text>
-        <line x1="61.25" y1="73" x2="61.25" y2="83" stroke="#94a3b8"/><text x="61.25" y="98">−7</text>
-        <line x1="92.5" y1="73" x2="92.5" y2="83" stroke="#94a3b8"/><text x="92.5" y="98">−6</text>
-        <line x1="123.75" y1="73" x2="123.75" y2="83" stroke="#94a3b8"/><text x="123.75" y="98">−5</text>
-        <line x1="155" y1="73" x2="155" y2="83" stroke="#94a3b8"/><text x="155" y="98">−4</text>
-        <line x1="186.25" y1="73" x2="186.25" y2="83" stroke="#94a3b8"/><text x="186.25" y="98">−3</text>
-        <line x1="217.5" y1="73" x2="217.5" y2="83" stroke="#94a3b8"/><text x="217.5" y="98">−2</text>
-        <line x1="248.75" y1="73" x2="248.75" y2="83" stroke="#94a3b8"/><text x="248.75" y="98">−1</text>
-        <line x1="280" y1="71" x2="280" y2="85" stroke="#475569" stroke-width="2"/><text x="280" y="98">0</text>
-        <line x1="311.25" y1="73" x2="311.25" y2="83" stroke="#94a3b8"/><text x="311.25" y="98">1</text>
-        <line x1="342.5" y1="73" x2="342.5" y2="83" stroke="#94a3b8"/><text x="342.5" y="98">2</text>
-        <line x1="373.75" y1="73" x2="373.75" y2="83" stroke="#94a3b8"/><text x="373.75" y="98">3</text>
-        <line x1="405" y1="73" x2="405" y2="83" stroke="#94a3b8"/><text x="405" y="98">4</text>
-        <line x1="436.25" y1="73" x2="436.25" y2="83" stroke="#94a3b8"/><text x="436.25" y="98">5</text>
-        <line x1="467.5" y1="73" x2="467.5" y2="83" stroke="#94a3b8"/><text x="467.5" y="98">6</text>
-        <line x1="498.75" y1="73" x2="498.75" y2="83" stroke="#94a3b8"/><text x="498.75" y="98">7</text>
-        <line x1="530" y1="73" x2="530" y2="83" stroke="#94a3b8"/><text x="530" y="98">8</text>
-      </g>
-      <!-- jump +4 from -7 to -3 -->
-      <path d="M 61.25 60 Q 123.75 22 186.25 60" fill="none" stroke="#2563eb" stroke-width="2.5"/>
-      <polygon points="186.25,60 180,52 190,50" fill="#2563eb"/>
-      <text x="123.75" y="32" font-size="13" fill="#2563eb" text-anchor="middle" font-weight="700">+4</text>
-      <circle cx="61.25" cy="78" r="4.5" fill="#dc2626"/>
-      <circle cx="186.25" cy="78" r="4.5" fill="#16a34a"/>
-      <text x="61.25" y="116" font-size="11" fill="#dc2626" text-anchor="middle">start −7</text>
-      <text x="186.25" y="116" font-size="11" fill="#16a34a" text-anchor="middle">end −3</text>
-    </svg>
-    <div style="font-size:13px;color:#64748b;margin-top:2px;">\( (-7) + 4 \): start at \( -7 \) and move <strong>right</strong> 4 → \( -3 \).</div>
-  </div>
-
-  <h2>📌 Multiplying &amp; Dividing</h2>
-  <p>Same signs give a <strong>positive</strong> result; different signs give a <strong>negative</strong> result: \( (-)(-) = + \), \( (-)(+) = - \).</p>
+  <h2>📌 Substituting Negative Values</h2>
+  <p>To evaluate an algebraic expression, replace every variable with its given value — <strong>in brackets</strong>, so the sign travels with the number — then apply order of operations. For \( x=-4 \), the expression \( x^2 \) becomes \( (-4)^2=16 \), not \( -4^2=-16 \): the substitution itself supplies the brackets.</p>
 
   <h2>🔵 Examples</h2>
 
   <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;">
-    <h3>Example 1: Same signs</h3><p>Evaluate \( (-3) + (-5) \).</p>
+    <h3>Example 1: Negative base vs. negative sign</h3><p>Without calculating, decide whether \( -3^4 \) and \( (-3)^4 \) are positive or negative, then evaluate both.</p>
     <div class="solution">
-      <div class="step"><strong>Step 1:</strong> Signs are the same (both negative) → add the sizes: \( 3 + 5 = 8 \).</div>
-      <div class="step"><strong>Step 2:</strong> Keep the common sign (negative): \( -8 \).</div>
-      <div class="step"><strong>Step 3 (check):</strong> owing \( 3 \) then owing \( 5 \) more = owing \( 8 \). ✓</div>
-      <em>Conclusion: \( -8 \).</em>
+      <div class="step"><strong>Step 1:</strong> \( -3^4 \) has no brackets, so the exponent applies to \( 3 \) only, then the result is negated → <strong>negative</strong>.</div>
+      <div class="step"><strong>Step 2:</strong> \( (-3)^4 \) has an even exponent on a negative base → <strong>positive</strong>.</div>
+      <div class="step"><strong>Step 3 (evaluate):</strong> \( -3^4=-(3^4)=-81 \); \( (-3)^4=(-3)(-3)(-3)(-3)=81 \).</div>
+      <em>Conclusion: \( -3^4=-81 \), \( (-3)^4=81 \). ✓</em>
     </div>
   </div>
 
   <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;">
-    <h3>Example 2: Different signs</h3><p>Evaluate \( (-7) + 4 \).</p>
+    <h3>Example 2: Sign prediction</h3><p>Without calculating, is \( -(-4)^3 \) positive or negative?</p>
     <div class="solution">
-      <div class="step"><strong>Step 1:</strong> Signs differ → subtract the smaller size from the larger: \( 7 - 4 = 3 \).</div>
-      <div class="step"><strong>Step 2:</strong> Take the sign of the larger size (\( 7 \) is negative): \( -3 \).</div>
-      <div class="step"><strong>Step 3 (check):</strong> on the number line above, start at \( -7 \) and move right 4 → \( -3 \). ✓</div>
-      <em>Conclusion: \( -3 \).</em>
+      <div class="step"><strong>Step 1:</strong> \( (-4)^3 \) has an odd exponent on a negative base → negative.</div>
+      <div class="step"><strong>Step 2:</strong> The outside negative sign flips that negative to positive.</div>
+      <div class="step"><strong>Step 3 (evaluate):</strong> \( (-4)^3=-64 \), so \( -(-64)=64 \).</div>
+      <em>Conclusion: positive, \( 64 \). ✓</em>
     </div>
   </div>
 
   <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;">
-    <h3>Example 3: Subtracting a negative</h3><p>Evaluate \( 6 - (-2) \).</p>
+    <h3>Example 3: Calculate a fraction of integers</h3><p>Evaluate \( \dfrac{-6(12)}{-9} \).</p>
     <div class="solution">
-      <div class="step"><strong>Step 1:</strong> Subtracting a negative = adding the opposite: \( 6 - (-2) = 6 + 2 \).</div>
-      <div class="step"><strong>Step 2:</strong> \( 6 + 2 = 8 \).</div>
+      <div class="step"><strong>Step 1 (numerator):</strong> \( -6 \times 12 = -72 \).</div>
+      <div class="step"><strong>Step 2 (divide):</strong> \( \dfrac{-72}{-9} \) — same signs, so the quotient is positive: \( 8 \).</div>
       <em>Conclusion: \( 8 \). ✓</em>
     </div>
   </div>
 
   <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;">
-    <h3>Example 4: Multiplying</h3><p>Evaluate \( (-4) \times 3 \).</p>
+    <h3>Example 4: Order of operations with an exponent</h3><p>Evaluate \( 4(-3)^3 \) without a calculator.</p>
     <div class="solution">
-      <div class="step"><strong>Step 1:</strong> Multiply the sizes: \( 4 \times 3 = 12 \).</div>
-      <div class="step"><strong>Step 2:</strong> Different signs → the result is negative: \( -12 \).</div>
-      <em>Conclusion: \( -12 \). ✓</em>
+      <div class="step"><strong>Step 1 (exponent first):</strong> \( (-3)^3 = -27 \).</div>
+      <div class="step"><strong>Step 2 (multiply):</strong> \( 4 \times (-27) = -108 \).</div>
+      <em>Conclusion: \( -108 \). ✓</em>
     </div>
   </div>
 
   <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;">
-    <h3>Example 5: Dividing two negatives</h3><p>Evaluate \( (-12) \div (-3) \).</p>
+    <h3>Example 5: Nested brackets and an exponent</h3><p>Evaluate \( \left[-3(-1)^2\right]^4 \).</p>
     <div class="solution">
-      <div class="step"><strong>Step 1:</strong> Divide the sizes: \( 12 \div 3 = 4 \).</div>
-      <div class="step"><strong>Step 2:</strong> Same signs → the result is positive: \( +4 \).</div>
+      <div class="step"><strong>Step 1 (innermost exponent):</strong> \( (-1)^2 = 1 \).</div>
+      <div class="step"><strong>Step 2 (inside the square brackets):</strong> \( -3 \times 1 = -3 \).</div>
+      <div class="step"><strong>Step 3 (outer exponent):</strong> \( (-3)^4 = 81 \).</div>
+      <em>Conclusion: \( 81 \). ✓</em>
+    </div>
+  </div>
+
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;">
+    <h3>Example 6: A fraction with exponents top and bottom</h3><p>Evaluate \( \dfrac{(-3)^2-25}{-2^2} \).</p>
+    <div class="solution">
+      <div class="step"><strong>Step 1 (numerator):</strong> \( (-3)^2 = 9 \), so \( 9 - 25 = -16 \).</div>
+      <div class="step"><strong>Step 2 (denominator):</strong> \( -2^2 = -4 \) (no brackets around \( -2 \)).</div>
+      <div class="step"><strong>Step 3 (divide):</strong> \( \dfrac{-16}{-4} = 4 \).</div>
       <em>Conclusion: \( 4 \). ✓</em>
+    </div>
+  </div>
+
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;">
+    <h3>Example 7: Substitution</h3><p>Evaluate \( x^2+y^3 \) when \( x=-4 \) and \( y=-1 \).</p>
+    <div class="solution">
+      <div class="step"><strong>Step 1 (substitute, with brackets):</strong> \( (-4)^2+(-1)^3 \).</div>
+      <div class="step"><strong>Step 2 (exponents):</strong> \( (-4)^2=16 \), \( (-1)^3=-1 \).</div>
+      <div class="step"><strong>Step 3 (add):</strong> \( 16+(-1)=15 \).</div>
+      <em>Conclusion: \( 15 \). ✓</em>
+    </div>
+  </div>
+
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;">
+    <h3>Example 8: Substitution with brackets</h3><p>Evaluate \( x^2+\left[5x-2(y-x)\right] \) when \( x=-4 \) and \( y=-1 \).</p>
+    <div class="solution">
+      <div class="step"><strong>Step 1 (innermost brackets first):</strong> \( y-x=(-1)-(-4)=3 \).</div>
+      <div class="step"><strong>Step 2 (inside the square brackets):</strong> \( 5(-4)-2(3)=-20-6=-26 \).</div>
+      <div class="step"><strong>Step 3 (add \( x^2 \)):</strong> \( (-4)^2+(-26)=16-26=-10 \).</div>
+      <em>Conclusion: \( -10 \). ✓</em>
+    </div>
+  </div>
+
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;">
+    <h3>Example 9: Substitution into a fraction</h3><p>Evaluate \( \dfrac{8(x+y^2)}{x^2} \) when \( x=-4 \) and \( y=-1 \).</p>
+    <div class="solution">
+      <div class="step"><strong>Step 1 (numerator):</strong> \( y^2=1 \), so \( x+y^2=-4+1=-3 \); then \( 8(-3)=-24 \).</div>
+      <div class="step"><strong>Step 2 (denominator):</strong> \( x^2=(-4)^2=16 \).</div>
+      <div class="step"><strong>Step 3 (divide):</strong> \( \dfrac{-24}{16}=-\dfrac{3}{2} \).</div>
+      <em>Conclusion: \( -\dfrac{3}{2} \). ✓</em>
     </div>
   </div>
 
   <h2>🟡 Practice Questions</h2>
 
   <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;">
-    <h3>Question 1</h3><p>Evaluate \( (-8) + 5 \).</p>
-    <details><summary>View answer</summary><div class="solution"><div class="step">Different signs: \( 8 - 5 = 3 \), negative wins. <em>Answer: \( -3 \).</em></div></div></details>
+    <h3>Question 1</h3><p>Without calculating, is \( -2^6 \) positive or negative?</p>
+    <details><summary>View answer</summary><div class="solution"><div class="step">No brackets, so the sign is applied after the power: \( -2^6=-64 \). <em>Answer: negative.</em></div></div></details>
   </div>
 
   <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;">
-    <h3>Question 2</h3><p>Evaluate \( 12 - (-4) \).</p>
-    <details><summary>View answer</summary><div class="solution"><div class="step">Subtracting a negative adds. <em>Answer: \( 16 \).</em></div></div></details>
+    <h3>Question 2</h3><p>Evaluate \( \dfrac{-8(9)}{-6} \).</p>
+    <details><summary>View answer</summary><div class="solution"><div class="step">\( -8\times9=-72 \); \( -72\div-6=12 \) (same signs). <em>Answer: \( 12 \).</em></div></div></details>
   </div>
 
   <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;">
-    <h3>Question 3</h3><p>Evaluate \( (-3) \times (-6) \).</p>
-    <details><summary>View answer</summary><div class="solution"><div class="step">Two negatives make a positive. <em>Answer: \( 18 \).</em></div></div></details>
+    <h3>Question 3</h3><p>Evaluate \( \left[-2(-3)^2\right]^2 \).</p>
+    <details><summary>View answer</summary><div class="solution"><div class="step">\( (-3)^2=9 \); \( -2(9)=-18 \); \( (-18)^2=324 \). <em>Answer: \( 324 \).</em></div></div></details>
   </div>
 
   <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;">
-    <h3>Question 4</h3><p>At 5 a.m. it was \( -3°C \) and rose \( 2°C \) per hour. What was the temperature at 9 a.m.?</p>
-    <details><summary>View answer</summary><div class="solution"><div class="step">\( -3 + 2\times 4 = -3 + 8 \). <em>Answer: \( 5°C \).</em></div></div></details>
+    <h3>Question 4</h3><p>Evaluate \( \dfrac{4^2-19}{-3^2} \).</p>
+    <details><summary>View answer</summary><div class="solution"><div class="step">Numerator \( 16-19=-3 \); denominator \( -3^2=-9 \); \( -3\div-9=\tfrac13 \). <em>Answer: \( \tfrac13 \).</em></div></div></details>
   </div>
 
   <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;">
-    <h3>Question 5</h3><p>Evaluate \( -20 \div 4 \).</p>
-    <details><summary>View answer</summary><div class="solution"><div class="step">Different signs → negative. <em>Answer: \( -5 \).</em></div></div></details>
+    <h3>Question 5</h3><p>Evaluate \( x^2+\left[3x-2(y-x)\right] \) when \( x=-4 \) and \( y=-1 \).</p>
+    <details><summary>View answer</summary><div class="solution"><div class="step">\( y-x=3 \); \( 3(-4)-2(3)=-18 \); \( 16+(-18)=-2 \). <em>Answer: \( -2 \).</em></div></div></details>
   </div>
 
   <h2>❓ Q&amp;A Summary</h2>
-  <div class="qa-box" style="background-color:#f0f0f0;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Q1: What does a negative sign represent?</h3><p><em>The opposite direction or amount — below zero, owed, lost, downward.</em></p></div>
-  <div class="qa-box" style="background-color:#f0f0f0;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Q2: What is subtracting a negative?</h3><p><em>The same as adding a positive: \( 6 - (-2) = 6 + 2 = 8 \).</em></p></div>
-  <div class="qa-box" style="background-color:#f0f0f0;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Q3: What sign is the product of two negatives?</h3><p><em>Positive.</em></p></div>
+  <div class="qa-box" style="background-color:#f0f0f0;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Q1: What's the difference between \( -2^4 \) and \( (-2)^4 \)?</h3><p><em>\( (-2)^4 \) has brackets, so \( -2 \) is the base: \( 16 \). \( -2^4 \) has no brackets, so only \( 2 \) is raised to the power, then negated: \( -16 \).</em></p></div>
+  <div class="qa-box" style="background-color:#f0f0f0;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Q2: In what order do you evaluate an expression with brackets, exponents, and negatives?</h3><p><em>Brackets first (innermost outward), then exponents, then multiplication/division left to right, then addition/subtraction left to right.</em></p></div>
+  <div class="qa-box" style="background-color:#f0f0f0;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Q3: How do you substitute a negative value into an expression?</h3><p><em>Put it in brackets everywhere the variable appears, so the negative sign travels with the number through exponents and multiplication.</em></p></div>
+  <div class="qa-box" style="background-color:#f0f0f0;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Q4: Does an even or odd exponent flip the sign of a negative base?</h3><p><em>An even exponent makes the result positive; an odd exponent keeps it negative.</em></p></div>
 </div>` },
     ],
     assignment: {
