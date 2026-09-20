@@ -6,16 +6,16 @@ export const U3 = {
     topic: "Reciprocal & Rational Functions",
     K: [
       r`For $y=\dfrac{1}{x+4}-2$, state the vertical asymptote, the horizontal asymptote, the domain, the range, and the $x$- and $y$-intercepts.`,
-      r`Find all asymptotes and any holes of $f(x)=\dfrac{x^2-9}{x^2-x-6}$. Give the coordinates of any hole.`,
-      r`Determine the horizontal asymptote, if there is one, of (a) $y=\dfrac{3x^2+1}{x^2-4}$ (b) $y=\dfrac{2x-1}{x^2+1}$ (c) $y=\dfrac{x^2+1}{x-1}$. Explain what the degrees of the numerator and denominator tell you in each case.`,
+      r`Find all asymptotes and any holes of $f(x)=\dfrac{x^2-16}{x^2+x-12}$. Give the coordinates of any hole.`,
+      r`Determine the horizontal asymptote, if there is one, of (a) $y=\dfrac{3x^2+1}{x^2-4}$ (b) $y=\dfrac{2x-1}{x^2+1}$ (c) $y=\dfrac{x^3-x}{x^2+2}$. Explain what the degrees of the numerator and denominator tell you in each case.`,
     ],
     T: [
       r`Write an equation of a rational function with vertical asymptotes at $x=2$ and $x=-1$, a horizontal asymptote at $y=3$, and $x$-intercepts at $x=4$ and $x=-3$. Verify your equation by finding its $y$-intercept.`,
-      r`Let $f(x)=\dfrac{x^2-1}{x-1}$ and $g(x)=\dfrac{x^2+1}{x-1}$. Compare the graphs of $f$ and $g$ near $x=1$. Use tables of values close to $x=1$ to justify why one graph has a hole and the other has a vertical asymptote.`,
+      r`Let $f(x)=\dfrac{x^2+x-6}{x-2}$ and $g(x)=\dfrac{x^2+x-6}{x+1}$. The two functions have the same numerator. Factor and compare the graphs of $f$ near $x=2$ and $g$ near $x=-1$, and use tables of values close to those $x$-values to justify why one graph has a hole and the other has a vertical asymptote.`,
     ],
     C: [
       r`Explain how to tell from the equation of a rational function whether a zero of the denominator produces a vertical asymptote or a hole, and how the horizontal asymptote is found by comparing degrees. Give an example of each.`,
-      r`Describe what happens to the graph of $y=\dfrac1x$ as $x\to0^+$, as $x\to0^-$, as $x\to\infty$ and as $x\to-\infty$, using correct asymptote notation and terminology.`,
+      r`Describe what happens to the graph of $y=\dfrac{2}{x+1}$ as $x\to-1^+$, as $x\to-1^-$, as $x\to\infty$ and as $x\to-\infty$, using correct asymptote notation and terminology.`,
     ],
     A: [
       r`A company's average cost per item, in dollars, when it produces $x$ items is $A(x)=\dfrac{500+20x}{x}$. (a) Find $A(10)$, $A(100)$ and $A(1000)$. (b) State the vertical and horizontal asymptotes and explain what each means in this context. (c) Explain why the average cost can never fall below 20 dollars.`,
@@ -27,9 +27,9 @@ export const U3 = {
   "3.2": {
     topic: "Graphs of Rational Functions",
     K: [
-      r`For $f(x)=\dfrac{2x-6}{x+1}$, find the intercepts and the equations of both asymptotes.`,
+      r`For $f(x)=\dfrac{3x+6}{x-1}$, find the intercepts and the equations of both asymptotes.`,
       r`For $f(x)=\dfrac{x}{x^2-4}$, find the intercepts and asymptotes, and determine the sign of $f(x)$ in each interval determined by the $x$-intercept and vertical asymptotes.`,
-      r`Write $y=\dfrac{x+2}{x-1}$ in the form $y=\dfrac{a}{x-1}+c$, then state the asymptotes, domain and range, and say whether each branch is increasing or decreasing.`,
+      r`Write $y=\dfrac{2x+7}{x+3}$ in the form $y=\dfrac{a}{x+3}+c$, then state the asymptotes, domain and range, and say whether each branch is increasing or decreasing.`,
     ],
     T: [
       r`Write an equation of a rational function with a vertical asymptote at $x=-2$, a hole at $(1,4)$ and a horizontal asymptote at $y=2$. Show how the hole determines one of the constants.`,
@@ -37,10 +37,10 @@ export const U3 = {
     ],
     C: [
       r`Describe a step-by-step method for sketching a rational function, and explain how sign analysis tells you whether the graph goes up or down on each side of a vertical asymptote.`,
-      r`Explain the difference between a graph crossing a horizontal asymptote and a graph crossing a vertical asymptote. Use $y=\dfrac{x}{x^2+1}$ to give an example of a function that crosses its horizontal asymptote.`,
+      r`Explain the difference between a graph crossing a horizontal asymptote and a graph crossing a vertical asymptote. Use $y=\dfrac{x-2}{x^2+4}$ to give an example of a function that crosses its horizontal asymptote.`,
     ],
     A: [
-      r`The concentration of a medication in the blood, in mg/L, $t$ hours after an injection is $C(t)=\dfrac{4t}{t^2+1}$. (a) Find $C(0.5)$, $C(1)$, $C(2)$ and $C(4)$. (b) Identify the horizontal asymptote and explain what it means for the patient. (c) Use your table to estimate when the concentration is highest and to estimate the times when it is at least 1.5 mg/L.`,
+      r`The concentration of a medication in the blood, in mg/L, $t$ hours after an injection is $C(t)=\dfrac{6t}{t^2+4}$. (a) Find $C(1)$, $C(2)$, $C(4)$ and $C(8)$. (b) Identify the horizontal asymptote and explain what it means for the patient. (c) Use your table to estimate when the concentration is highest, and then solve $C(t)\ge1.2$ algebraically to find how long the concentration stays at or above 1.2 mg/L.`,
       r`Two resistors of $6\ \Omega$ and $x\ \Omega$ are connected in parallel, so the combined resistance is $R(x)=\dfrac{6x}{6+x}$ ohms, $x>0$. (a) Find $R(6)$, $R(12)$ and $R(60)$. (b) State the horizontal asymptote and explain why the combined resistance can never reach that value. (c) Explain why $R(x)$ is always less than both 6 and $x$.`,
       r`A call centre's average waiting time in minutes is $W(\rho)=\dfrac{2\rho}{1-\rho}$, where $\rho$ is the fraction of time the operators are busy, $0\le\rho<1$. (a) Find $W(0.5)$, $W(0.8)$, $W(0.9)$ and $W(0.95)$. (b) Identify the vertical asymptote and explain what it means for managers. (c) Find the largest busy fraction for which the average wait is at most 10 minutes.`,
     ],
@@ -51,10 +51,10 @@ export const U3 = {
     K: [
       r`Solve $\dfrac{2}{x+1}=\dfrac{3}{x-2}$ and state the restrictions on $x$.`,
       r`Solve $\dfrac{5}{x-2}-\dfrac{3}{x+2}=\dfrac{2}{x^2-4}$. State the restrictions and check your answer.`,
-      r`Solve the inequality $\dfrac{x+1}{x-2}\le 0$ using a sign chart, and write the answer in interval notation.`,
+      r`Solve the inequality $\dfrac{2x-1}{x+3}<0$ using a sign chart, and write the answer in interval notation.`,
     ],
     T: [
-      r`Solve $\dfrac{x^2}{x-2}=\dfrac{4}{x-2}$. Explain which solution is extraneous and why.`,
+      r`Solve $\dfrac{3}{x-1}-\dfrac{2}{x+1}=\dfrac{4}{x^2-1}$. Explain why the equation has no solution even though the algebra produces a value of $x$.`,
       r`Solve $\dfrac{x-1}{x+3}\ge 2$. Explain why you must not multiply both sides by $x+3$ before considering its sign, and show how moving everything to one side avoids the problem.`,
     ],
     C: [

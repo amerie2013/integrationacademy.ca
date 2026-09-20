@@ -5,8 +5,8 @@ export const U4 = {
   "4.1": {
     topic: "Logarithms & the Laws of Logarithms",
     K: [
-      r`Evaluate without a calculator: (a) $\log_2 32$ (b) $\log_3\dfrac19$ (c) $\log 0.001$ (d) $\log_4 8$.`,
-      r`Write each expression as a single logarithm and evaluate it: (a) $\log_6 4+\log_6 9$ (b) $\log_2 40-\log_2 5$ (c) $2\log_3 6-\log_3 4$.`,
+      r`Evaluate without a calculator: (a) $\log_2 32$ (b) $\log_3\dfrac19$ (c) $\log_5 0.04$ (d) $\log_4 8$.`,
+      r`Write each expression as a single logarithm and evaluate it: (a) $\log_6 4+\log_6 9$ (b) $\log_2 96-\log_2 3$ (c) $2\log_3 6-\log_3 4$.`,
       r`Use the change of base formula to evaluate $\log_7 50$ to three decimal places, and use the laws of logarithms to write $\log_2 12$ in terms of $\log_2 3$.`,
     ],
     T: [
@@ -27,8 +27,8 @@ export const U4 = {
   "4.2": {
     topic: "Graphs of Logarithmic Functions",
     K: [
-      r`For $y=\log_2(x+3)-1$, state the domain, range, vertical asymptote, $x$-intercept and $y$-intercept (to two decimal places).`,
-      r`Find the inverse of $f(x)=3^x+2$. State the domain, range and asymptote of both $f$ and $f^{-1}$.`,
+      r`For $y=-\log_3(x+1)+2$, state the domain, range, vertical asymptote, $x$-intercept and $y$-intercept.`,
+      r`Find the inverse of $f(x)=5^x-3$. State the domain, range and asymptote of both $f$ and $f^{-1}$.`,
       r`Describe the transformations that map $y=\log_3 x$ onto $y=-2\log_3(x-1)+4$, state the vertical asymptote and domain, and find the image of the point $(3,1)$.`,
     ],
     T: [
@@ -36,7 +36,7 @@ export const U4 = {
       r`Compare the graphs of $y=\log(x^2)$ and $y=2\log x$. State the domain, range and symmetry of each, and explain why they are not the same function even though the logarithm law suggests they might be.`,
     ],
     C: [
-      r`Explain how the graph of $y=\log_b x$ is obtained from the graph of $y=b^x$, and describe what happens to the domain, range, asymptote and intercepts.`,
+      r`Show that $\log_b(b^x)=x$ and $b^{\log_b x}=x$. Use these two facts to explain why the graphs of $y=b^x$ and $y=\log_b x$ are reflections of each other in the line $y=x$, and what this does to the domain, range, asymptote and intercepts.`,
       r`Explain how the base affects the graph of $y=\log_b x$ when $b>1$ and when $0<b<1$. Use $y=\log_{1/2}x$ as an example and relate it to a reflection of $y=\log_2 x$.`,
     ],
     A: [
@@ -49,8 +49,8 @@ export const U4 = {
   "4.3": {
     topic: "Solving Exponential & Logarithmic Equations",
     K: [
-      r`Solve by writing both sides with a common base: (a) $5^{2x-1}=125$ (b) $4^x=8^{x-1}$ (c) $\left(\tfrac12\right)^x=32$.`,
-      r`Solve by taking logarithms, giving answers to two decimal places: (a) $3^x=20$ (b) $7(1.05)^t=21$ (c) $5^{x+1}=2^x$.`,
+      r`Solve by writing both sides with a common base: (a) $6^{2x-1}=216$ (b) $9^x=27^{x-2}$ (c) $\left(\tfrac12\right)^x=32$.`,
+      r`Solve by taking logarithms, giving answers to two decimal places: (a) $7^x=45$ (b) $7(1.05)^t=21$ (c) $5^{x+1}=2^x$.`,
       r`Solve and check: (a) $\log_2(x+3)=4$ (b) $\log_5(2x-1)=\log_5(x+4)$ (c) $\log(x^2)=\log(3x+10)$.`,
     ],
     T: [
@@ -59,7 +59,7 @@ export const U4 = {
     ],
     C: [
       r`Describe the two main strategies for solving exponential equations (common base and taking logarithms), explain how you decide which to use, and give one example of each.`,
-      r`Explain why solutions of logarithmic equations must always be checked in the original equation. Use $\log_2 x+\log_2(x-2)=3$ to illustrate, including the roots you get and which one is rejected.`,
+      r`Explain why solutions of logarithmic equations must always be checked in the original equation. Use $\log_3 x+\log_3(x-6)=3$ to illustrate, including the roots you get and which one is rejected.`,
     ],
     A: [
       r`A person invests 8000 dollars at 4.5% per year compounded quarterly, so $A(t)=8000\left(1+\dfrac{0.045}{4}\right)^{4t}$. (a) Write an equation for the time when the investment reaches 12 000 dollars. (b) Solve it using logarithms, to two decimal places. (c) Explain in a sentence what your answer means and how it changes if the interest is compounded monthly.`,
@@ -71,7 +71,7 @@ export const U4 = {
   "4.4": {
     topic: "Applications of Exponential & Log Models",
     K: [
-      r`For $P=2500(1.06)^t$, state the initial value and the growth rate per period, find $P$ after 10 periods, and find the time to double (to one decimal place).`,
+      r`For $P=2500(1.06)^t$, state the initial value and the growth rate per period, find $P$ after 10 periods, and find the time for $P$ to reach 4000 (to one decimal place).`,
       r`In $A=A_0\left(\tfrac12\right)^{t/h}$, state what $h$ represents. What fraction of the original amount remains after 3 half-lives? If $h=8$ days, what fraction remains after 20 days?`,
       r`Rewrite $y=200(3)^{t/5}$ in the form $y=200b^t$, find $b$ to four decimal places, and state the percent growth per unit of time.`,
     ],

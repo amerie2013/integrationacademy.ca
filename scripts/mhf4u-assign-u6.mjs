@@ -5,8 +5,8 @@ export const U6 = {
   "6.1": {
     topic: "Compound Angle Formulas",
     K: [
-      r`State the formulas for $\sin(A+B)$ and $\cos(A-B)$. Then use a compound-angle formula to find the exact value of $\cos105^\circ$ by writing $105^\circ=60^\circ+45^\circ$.`,
-      r`Find the exact value of $\sin\dfrac{\pi}{12}$ by writing $\dfrac{\pi}{12}=\dfrac{\pi}{3}-\dfrac{\pi}{4}$.`,
+      r`State the formulas for $\sin(A+B)$ and $\cos(A-B)$. Then use a compound-angle formula to find the exact value of $\cos165^\circ$ by writing $165^\circ=120^\circ+45^\circ$.`,
+      r`Find the exact value of $\sin\dfrac{17\pi}{12}$ by writing $\dfrac{17\pi}{12}=\dfrac{7\pi}{6}+\dfrac{\pi}{4}$.`,
       r`Simplify $\sin47^\circ\cos13^\circ+\cos47^\circ\sin13^\circ$ to a single trigonometric ratio and find its exact value.`,
     ],
     T: [
@@ -15,7 +15,7 @@ export const U6 = {
     ],
     C: [
       r`Show with the numbers $A=B=30^\circ$ that $\sin(A+B)\ne\sin A+\sin B$. Explain what the compound angle formula says that the incorrect "distributive" idea misses.`,
-      r`Describe a method for finding exact values of angles such as $15^\circ$, $75^\circ$ and $105^\circ$ using compound-angle formulas. Explain how you choose the two special angles and how you check the sign of your answer.`,
+      r`Describe a method for finding exact values of angles such as $165^\circ$, $195^\circ$ and $255^\circ$ using compound-angle formulas. Explain how you choose the two special angles and how you check the sign of your answer.`,
     ],
     A: [
       r`Two alternating-current sources give voltages $v_1=3\sin\theta$ and $v_2=4\cos\theta$. Their sum can be written as $R\sin(\theta+\varphi)$. (a) Expand $R\sin(\theta+\varphi)$ with a compound-angle formula and match coefficients to find $R$ and $\varphi$ (to three decimal places, in radians). (b) State the greatest voltage the combined circuit can reach. (c) Explain why the combined voltage is still a sinusoidal wave.`,
@@ -81,7 +81,7 @@ export const U6 = {
     ],
     C: [
       r`Write a numbered strategy for solving trigonometric equations that mix double angles and single angles, including how to reduce to one trigonometric function, how to factor, and how to check the interval.`,
-      r`Explain why $\sin\theta=2$ has no solution, why $\sin\theta=\dfrac12$ has two solutions on $[0,2\pi)$ and infinitely many on the real numbers, and how the interval changes the number of solutions.`,
+      r`Explain why $\cos\theta=-\dfrac32$ has no solution, why $\cos\theta=-\dfrac{\sqrt3}{2}$ has two solutions on $[0,2\pi)$ and infinitely many on the real numbers, and how the interval changes the number of solutions.`,
     ],
     A: [
       r`The depth of water at a wharf is $d(t)=5.5\cos\!\left(\dfrac{2\pi}{12.4}(t-2.5)\right)+7.5$ metres, where $t$ is in hours. A boat needs at least 9 m of water. (a) Write the equation you must solve. (b) Solve it for one tidal cycle. (c) For how long, to the nearest 0.1 hour, is the water at least 9 m deep in each cycle?`,

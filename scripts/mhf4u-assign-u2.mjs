@@ -49,16 +49,16 @@ export const U2 = {
   "2.3": {
     topic: "Solving Polynomial Equations",
     K: [
-      r`Solve by factoring: (a) $x^3-9x=0$ (b) $x^3+2x^2-5x-6=0$. For (b), start by testing small integers.`,
-      r`Solve $x^4-13x^2+36=0$ by treating it as a quadratic in $x^2$. State all real solutions.`,
+      r`Solve by factoring: (a) $x^3-25x=0$ (b) $x^3+2x^2-5x-6=0$. For (b), start by testing small integers.`,
+      r`Solve $x^4-10x^2+9=0$ by treating it as a quadratic in $x^2$. State all real solutions.`,
       r`Solve $x^3-3x^2-4x+12=0$ by grouping, and state how many real solutions there are.`,
     ],
     T: [
-      r`A student solves $x^3=4x$ by dividing both sides by $x$ and gets $x=2$ or $x=-2$. Explain what went wrong, then solve the equation correctly.`,
+      r`A student solves $x^3=36x$ by dividing both sides by $x$ and gets $x=6$ or $x=-6$. Explain what went wrong, then solve the equation correctly.`,
       r`A cubic equation has roots $-2$, $1$ and $4$, and its graph passes through $(0,16)$. Determine the equation in expanded form and explain how you found the leading coefficient.`,
     ],
     C: [
-      r`Write a complete, well-organized solution to $x^3-7x+6=0$: state your strategy, show the test for a first root, the division, the factoring, the roots and a check. Explain the reason for each step.`,
+      r`Write a complete, well-organized solution to $x^3-13x+12=0$: state your strategy, show the test for a first root, the division, the factoring, the roots and a check. Explain the reason for each step.`,
       r`Explain how the number of real roots of a polynomial equation is related to the degree of the polynomial, the number of $x$-intercepts of its graph and the multiplicity of each root. Give one example with a repeated root.`,
     ],
     A: [
@@ -73,15 +73,15 @@ export const U2 = {
     K: [
       r`Solve $(x+4)(x-1)>0$ and write the solution using interval notation.`,
       r`Solve $x^2-2x-8\le 0$ and write the solution using interval notation. Explain why the end values are included.`,
-      r`Use a sign chart to solve $x(x-3)(x+2)<0$.`,
+      r`Use a sign chart to solve $(x+2)(x-1)(x-4)<0$.`,
     ],
     T: [
-      r`Solve $(x-1)^2(x+3)\ge 0$. Explain why the sign does not change at $x=1$ and why $x=1$ must still be checked.`,
-      r`Solve $x^3\ge 4x$. Explain why dividing both sides by $x$ is not allowed, and show what solutions would be lost if you did.`,
+      r`Solve (a) $(x+2)^2(x-5)\le 0$ and (b) $(x+2)^2(x-5)<0$. Explain why the sign does not change at $x=-2$, and why the two answers are different at that one value.`,
+      r`Solve $x^3\ge 9x$. Explain why dividing both sides by $x$ is not allowed, and show what solutions would be lost if you did.`,
     ],
     C: [
       r`Explain the steps for solving a polynomial inequality algebraically (zeros, intervals, test points, interpreting the inequality symbol), and explain when the end values of an interval are included and when they are not.`,
-      r`A student writes: "$x^2>9$ means $x>3$." Explain the error, give the correct solution and describe how you would show it on a number line and on a graph of $y=x^2-9$.`,
+      r`A student writes: "$x^2>25$ means $x>5$." Explain the error, give the correct solution and describe how you would show it on a number line and on a graph of $y=x^2-25$.`,
     ],
     A: [
       r`A ball is thrown straight up from the ground and its height in metres after $t$ seconds is $h(t)=-5t^2+20t$. (a) For what times is the ball more than 15 m high? (b) For how long is it above 15 m? (c) Explain, using the symmetry of the parabola, why the interval you found is centred where it is.`,

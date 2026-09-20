@@ -51,15 +51,15 @@ export const U5 = {
     K: [
       r`For $y=-3\sin\!\left(2\left(x-\dfrac{\pi}{4}\right)\right)+1$, state the amplitude, period, phase shift, midline, maximum and minimum values, and describe the reflection.`,
       r`Find the period of (a) $y=\cos\dfrac{x}{3}$ (b) $y=\sin(\pi x)$ (c) $y=5\sin(4x)-2$. State the formula you used.`,
-      r`Write the equation of a sine function with amplitude 4, period $\dfrac{\pi}{2}$ and midline $y=-1$, with no phase shift.`,
+      r`Write the equation of a cosine function with amplitude 2.5, period 8, a phase shift of 1 unit to the right and midline $y=4$.`,
     ],
     T: [
       r`A sinusoidal function has a maximum at $\left(\dfrac{\pi}{6},7\right)$ and the next minimum at $\left(\dfrac{\pi}{2},-1\right)$. Determine its amplitude, period and midline, and write a cosine equation. Verify it with the minimum point.`,
-      r`Show that $y=3\sin(2x)$ and $y=3\cos\!\left(2\left(x-\dfrac{\pi}{4}\right)\right)$ have the same graph. Explain why there are infinitely many correct equations for one sinusoidal graph.`,
+      r`Show that $y=5\sin(3x)$ and $y=5\cos\!\left(3\left(x-\dfrac{\pi}{6}\right)\right)$ have the same graph. Explain why there are infinitely many correct equations for one sinusoidal graph.`,
     ],
     C: [
       r`Explain how each of $a$, $k$, $d$ and $c$ changes the graph of $y=a\sin\big(k(x-d)\big)+c$, and describe how you would read each of them from a graph.`,
-      r`A classmate says "$y=\sin(2x)$ has a period of 2." Identify the error, give the correct period and explain why the period is $\dfrac{2\pi}{k}$.`,
+      r`A classmate says "$y=\sin(5x)$ has a period of 5." Identify the error, give the correct period and explain why the period is $\dfrac{2\pi}{k}$.`,
     ],
     A: [
       r`The depth of water at a wharf in Nova Scotia, in metres, is $d(t)=5.5\cos\!\left(\dfrac{2\pi}{12.4}(t-2.5)\right)+7.5$, where $t$ is in hours after midnight. (a) State the amplitude, period and midline and interpret each. (b) When is the first high tide and what is the depth? (c) Find the depth at $t=6$.`,
@@ -71,8 +71,8 @@ export const U5 = {
   "5.4": {
     topic: "Reciprocal Trigonometric Functions",
     K: [
-      r`Find the exact value of each: (a) $\csc\dfrac{\pi}{6}$ (b) $\sec\dfrac{5\pi}{6}$ (c) $\cot\dfrac{3\pi}{4}$ (d) $\csc\!\left(-\dfrac{\pi}{4}\right)$.`,
-      r`State the domain of $y=\sec x$ and of $y=\cot x$, and the equations of their vertical asymptotes on $[0,2\pi]$.`,
+      r`Find the exact value of each: (a) $\csc\dfrac{7\pi}{6}$ (b) $\sec\dfrac{5\pi}{6}$ (c) $\cot\dfrac{3\pi}{4}$ (d) $\csc\!\left(-\dfrac{\pi}{4}\right)$.`,
+      r`For $y=\cot x$, state the domain, the range, the $x$-intercepts and the equations of the vertical asymptotes on $[0,2\pi]$, and say on which intervals the function is decreasing.`,
       r`If $\cos\theta=-\dfrac35$ and $\theta$ is in the third quadrant, find $\sin\theta$, $\csc\theta$, $\sec\theta$ and $\cot\theta$.`,
     ],
     T: [
@@ -81,7 +81,7 @@ export const U5 = {
     ],
     C: [
       r`Explain, using $\csc x=\dfrac{1}{\sin x}$, why the cosecant graph has vertical asymptotes and how it wraps around the graph of the sine function.`,
-      r`Explain how you evaluate $\cot\theta$ at an angle where $\tan\theta$ is undefined, and at an angle where $\tan\theta=0$. Use $\theta=\dfrac{\pi}{2}$ and $\theta=\pi$ as examples.`,
+      r`Explain how you evaluate $\cot\theta$ at an angle where $\tan\theta$ is undefined, and at an angle where $\tan\theta=0$. Use $\theta=\dfrac{3\pi}{2}$ and $\theta=2\pi$ as examples.`,
     ],
     A: [
       r`A searchlight is 200 m from a straight wall and shines a beam at angle $\theta$ from the perpendicular. The beam's length is $L(\theta)=200\sec\theta$. (a) Find $L$ for $\theta=0$, $\dfrac{\pi}{6}$ and $\dfrac{\pi}{3}$. (b) Explain, using the asymptote of $\sec\theta$, what happens as $\theta\to\dfrac{\pi}{2}$. (c) At what angle is the beam 400 m long?`,

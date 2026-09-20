@@ -7,9 +7,9 @@ export const U1 = {
   "1.1": {
     topic: "Power Functions & End Behaviour",
     K: [
-      r`Describe the end behaviour of each power function, stating in which quadrants the graph starts and ends: (a) $f(x)=3x^4$ (b) $g(x)=-2x^5$ (c) $h(x)=-x^6$ (d) $k(x)=0.5x^3$.`,
-      r`On one set of axes, sketch $y=x^2$, $y=x^4$ and $y=x^6$. State the points that all three share, compare their heights for $|x|<1$ and for $|x|>1$, and name the type of symmetry they have.`,
-      r`For $f(x)=-2x^5$ and $g(x)=-2x^6$, state the domain and range, say whether each function is even, odd or neither, and give the intervals on which each is increasing or decreasing.`,
+      r`Describe the end behaviour of each power function, stating in which quadrants the graph starts and ends: (a) $f(x)=6x^5$ (b) $g(x)=-0.5x^8$ (c) $h(x)=-x^{10}$ (d) $k(x)=0.25x^7$.`,
+      r`On one set of axes, sketch $y=x^3$, $y=x^5$ and $y=x^7$. State the points that all three share, compare their distances from the $x$-axis for $|x|<1$ and for $|x|>1$, and name the type of symmetry they have.`,
+      r`For $f(x)=-3x^7$ and $g(x)=4x^6$, state the domain and range, say whether each function is even, odd or neither, and give the intervals on which each is increasing or decreasing.`,
     ],
     T: [
       r`Let $P(x)=x^3$ and $Q(x)=x^3+900x$. (a) Evaluate both functions at $x=3$ and at $x=300$ and compare the two outputs each time. (b) Explain what your results reveal about which term controls the graph near the origin and which controls it far from the origin. (c) Find the $x$-value beyond which $x^3$ is larger than $900x$.`,
@@ -29,16 +29,16 @@ export const U1 = {
   "1.2": {
     topic: "Characteristics of Polynomial Functions",
     K: [
-      r`State the maximum number of turning points and the maximum number of $x$-intercepts for a polynomial of (a) degree 3 (b) degree 6 (c) degree 7. Then state the minimum possible number of $x$-intercepts for an odd-degree polynomial and for an even-degree polynomial.`,
-      r`Use $f(-x)$ to determine whether each function is even, odd or neither: (a) $f(x)=x^4-3x^2+1$ (b) $g(x)=x^3-4x$ (c) $h(x)=x^3+x^2$.`,
+      r`For each polynomial, state its degree, the greatest possible number of $x$-intercepts and of turning points, and whether its graph must cross the $x$-axis: (a) $f(x)=-x^8+3x^2-1$ (b) $g(x)=5x^9+x^4$ (c) $h(x)=2-x^{11}$.`,
+      r`Use $f(-x)$ to determine whether each function is even, odd or neither: (a) $f(x)=2x^6-x^4+7$ (b) $g(x)=x^5+3x^3-x$ (c) $h(x)=3x^4+2x-5$.`,
       r`A polynomial function has the values in the table. Use finite differences to determine its degree and leading coefficient. $x$: 0, 1, 2, 3, 4, 5 and $f(x)$: 1, 0, 5, 22, 57, 116.`,
     ],
     T: [
-      r`Sketch a possible graph of a polynomial that has even degree, exactly 3 turning points, exactly 2 $x$-intercepts and a positive leading coefficient. Explain why its degree must be at least 4, and then test whether $f(x)=x^4-2x^2-1$ has all of these features.`,
+      r`A polynomial has odd degree, a negative leading coefficient, exactly 4 turning points and exactly one $x$-intercept. (a) Explain why its least possible degree is 5. (b) Sketch a possible graph. (c) Could a polynomial with these features have degree 7? Justify your answer.`,
       r`The third differences of a polynomial function, tabulated at $x=0,1,2,3,\dots$, are constant and equal to 12. (a) Determine the degree and the leading coefficient. (b) If also $f(0)=1$, $f(1)=4$ and $f(2)=13$, find the equation of the function.`,
     ],
     C: [
-      r`Explain, using the definition of an odd function and the symmetry of its graph, why $f(x)=x^3-4x$ is odd. Then explain why the sum of an even function and an odd function, such as $x^2+x$, is usually neither even nor odd.`,
+      r`Explain, using the definition of an odd function and the symmetry of its graph, why $f(x)=x^5-7x^3+2x$ is odd. Then explain why the sum of an even function and an odd function, such as $x^2+x$, is usually neither even nor odd.`,
       r`A student writes: "A polynomial of degree 4 must have 4 $x$-intercepts and 3 turning points." Identify what is wrong, rewrite the statement correctly using the phrases "at most" and "at least" where needed, and give a counterexample.`,
     ],
     A: [
@@ -51,12 +51,12 @@ export const U1 = {
   "1.3": {
     topic: "Equations & Graphs of Polynomial Functions",
     K: [
-      r`For $f(x)=(x+3)(x-1)^2(x-4)$, state each zero and its multiplicity, whether the graph crosses or touches the $x$-axis at each zero, the degree, the end behaviour and the $y$-intercept.`,
-      r`Write the equation of the polynomial of least degree that has zeros at $-2$ (order 1), $1$ (order 2) and $3$ (order 1) and passes through the point $(0,12)$.`,
+      r`For $f(x)=-(x+1)^3(x-2)(x-5)^2$, state each zero and its multiplicity, how the graph behaves at each zero (crosses, touches, or crosses while flattening), the degree, the end behaviour and the $y$-intercept.`,
+      r`Write the equation of the polynomial of least degree that has a double zero at $-3$ and single zeros at $0$ and $5$, and passes through the point $(1,128)$.`,
       r`Sketch $f(x)=-x(x+2)(x-3)$ using its zeros and end behaviour, and use a sign chart to state the intervals on which $f(x)>0$.`,
     ],
     T: [
-      r`A polynomial falls to the left and rises to the right, touches the $x$-axis at $x=-1$, crosses the $x$-axis at $x=2$ and has $y$-intercept $-3$. (a) Explain why its least possible degree is 3, not 4. (b) Write its equation.`,
+      r`A quartic polynomial has a double zero at $x=-2$ and a single zero at $x=3$, a leading coefficient of 1 and a $y$-intercept of 24. (a) Explain why it has exactly one more zero and why that zero must be real. (b) Use the $y$-intercept to find that zero and write the equation in factored form. (c) Describe how the graph behaves at each of its zeros.`,
       r`Find every value of $k$ for which $f(x)=(x-k)^2(x+2)$ has a $y$-intercept of 18. For each value of $k$, state where the graph touches the $x$-axis and where it crosses it.`,
     ],
     C: [
@@ -73,12 +73,12 @@ export const U1 = {
   "1.4": {
     topic: "Transformations of Functions",
     K: [
-      r`Describe, in order, the transformations applied to $y=x^3$ to obtain $y=-2(x+1)^3+5$. Then find the image of the point $(2,8)$.`,
-      r`Write the equation of $y=x^4$ after a vertical stretch by a factor of 3, a horizontal compression by a factor of $\tfrac12$, a reflection in the $y$-axis, and a translation 4 units right and 1 unit down. Simplify, and explain why the reflection has no visible effect on this graph.`,
-      r`The point $(-2,16)$ lies on $y=f(x)=x^4$. Find its image on $y=-\tfrac12 f\big(3(x+1)\big)+2$ and verify your answer by substituting into the new equation.`,
+      r`Describe, in order, the transformations applied to $y=x^5$ to obtain $y=3(x-2)^5-4$. Then find the image of the point $(2,32)$.`,
+      r`Write the equation of $y=x^3$ after a horizontal stretch by a factor of 2, a reflection in the $y$-axis, a vertical compression by a factor of $\tfrac13$, and a translation 5 units left and 2 units up. Simplify, and explain why for this function the $y$-axis reflection could be replaced by a reflection in the $x$-axis.`,
+      r`The point $(-2,16)$ lies on $y=f(x)=x^4$. Find its image on $y=2f\big(\tfrac12(x-4)\big)-3$ and verify your answer by substituting into the new equation.`,
     ],
     T: [
-      r`Apply "shift up 3, then stretch vertically by 2" and "stretch vertically by 2, then shift up 3" to $y=x^3$. Write both equations, find the image of $(1,1)$ each time, and explain why the order of the transformations matters.`,
+      r`Apply "shift up 3, then stretch vertically by 2" and "stretch vertically by 2, then shift up 3" to $y=x^3$. Write both equations, find the image of $(-1,-1)$ each time, and explain why the order of the transformations matters.`,
       r`A cubic is a transformation of $y=x^3$. Its point of inflection is $(3,-2)$ and it passes through $(4,6)$. (a) Determine its equation. (b) Show that the same graph can be written using a horizontal compression instead of a vertical stretch, and find the compression factor.`,
     ],
     C: [

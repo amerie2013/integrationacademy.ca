@@ -10,7 +10,7 @@ export const U7 = {
       r`The table gives the distance $d$ (in metres) travelled by a cart after $t$ seconds. $t$: 0, 2, 4, 6, 8 and $d$: 0, 6, 20, 42, 72. Find the average rate of change on $[0,4]$, on $[4,8]$ and on $[0,8]$, and describe what the results say about the cart's motion.`,
     ],
     T: [
-      r`For $f(x)=x^2$, find the average rate of change on $[2,2+h]$ as a simplified expression in $h$. Evaluate it for $h=1$, $0.1$ and $0.01$, and explain how the results suggest the instantaneous rate at $x=2$.`,
+      r`For $f(x)=x^2+3x$, find the average rate of change on $[1,1+h]$ as a simplified expression in $h$. Evaluate it for $h=1$, $0.1$ and $0.01$, and explain how the results suggest the instantaneous rate at $x=1$.`,
       r`Can the average rate of change of a function over an interval be 0 even though the function is never constant? Give an example, calculate it and explain what the graph looks like.`,
     ],
     C: [
@@ -27,7 +27,7 @@ export const U7 = {
   "7.2": {
     topic: "Combining Functions",
     K: [
-      r`For $f(x)=x^2-4$ and $g(x)=x+2$, find $(f+g)(x)$, $(f-g)(x)$, $(fg)(x)$ and $\left(\dfrac fg\right)(x)$, and state the domain of the quotient.`,
+      r`For $f(x)=x^2-x-6$ and $g(x)=x-3$, find $(f+g)(x)$, $(f-g)(x)$, $(fg)(x)$ and $\left(\dfrac fg\right)(x)$, and state the domain of the quotient.`,
       r`For $f(x)=\sqrt{x+3}$ and $g(x)=\dfrac{1}{x-1}$, state the domain of $f+g$ and of $\dfrac fg$, and write $\dfrac fg$ as a simplified expression.`,
       r`Use the table to find each value, or say it does not exist. $x$: $-2$, $-1$, 0, 1, 2; $f(x)$: 3, 1, 0, $-1$, 2; $g(x)$: 2, $-2$, 1, 0, 4. Find $(f+g)(0)$, $(f-g)(1)$, $(fg)(-1)$, $\left(\dfrac fg\right)(2)$ and $\left(\dfrac fg\right)(1)$.`,
     ],
@@ -50,7 +50,7 @@ export const U7 = {
     topic: "Composition of Functions",
     K: [
       r`For $f(x)=2x-3$ and $g(x)=x^2+1$, find $f(g(x))$, $g(f(x))$, $f(g(2))$ and $g(f(2))$.`,
-      r`Find the domain of the composite $f(g(x))$ for (a) $f(x)=\sqrt x$ and $g(x)=x-4$ (b) $f(x)=\dfrac{1}{x-2}$ and $g(x)=x+3$.`,
+      r`Find the domain of the composite $f(g(x))$ for (a) $f(x)=\sqrt x$ and $g(x)=6-2x$ (b) $f(x)=\dfrac{1}{x-2}$ and $g(x)=x^2+1$.`,
       r`Decompose each function as $f(g(x))$ in a sensible way: (a) $h(x)=(3x-1)^4$ (b) $h(x)=\sqrt{x^2+9}$.`,
     ],
     T: [
@@ -59,7 +59,7 @@ export const U7 = {
     ],
     C: [
       r`Explain why $f(g(x))\ne g(f(x))$ in general. Use a specific example, and explain the order in which the functions are applied.`,
-      r`Explain how to find the domain of a composite function in two steps, and give an example, such as $f(x)=x^2$ with $g(x)=\sqrt x$, where the domain of $f(g(x))$ is smaller than the domain of its simplified formula.`,
+      r`Explain how to find the domain of a composite function in two steps, and give an example, such as $f(x)=x^2$ with $g(x)=\sqrt{x-2}$, where the domain of $f(g(x))$ is smaller than the domain of its simplified formula.`,
     ],
     A: [
       r`In Ontario, 13% HST is added to a price $p$, so $t(p)=1.13p$. A store also offers a 10-dollar coupon, so $c(p)=p-10$. (a) Find $t(c(p))$ and $c(t(p))$. (b) For an item priced at 60 dollars, find the final cost in each order. (c) Which order is better for the customer, and why?`,
