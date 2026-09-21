@@ -121,6 +121,109 @@ u1["1.3"] = L("1.3", "Equations & Graphs of Polynomial Functions", [
 </div>`),
 ]);
 
+// ── Lesson 1.4 graphs: parent curve + transformed curve with key points carried through the mapping rule.
+// Every plotted point is checked against its curve when this file loads, so a wrong key point fails loudly.
+const T = { parent: "#64748b", image: "#1b7a44", alt: "#e69138" };
+const mapPt = (a, k, d, c) => (x, y) => [x / k + d, a * y + c]; // (x,y) -> (x/k + d, a*y + c)
+const fmtN = (n) => { const s = String(+n.toFixed(2)); return s === "-0" ? "0" : s; };
+const P2 = (x) => x ** 2, P3 = (x) => x ** 3, P4 = (x) => x ** 4;
+// Parent key points at xs, and their images under `map` (checked against the image curve `imf`).
+const pair = (xs, pf, map, imf, ppos = "below", ipos = "above") => xs.flatMap((x) => {
+  const y = pf(x), [x2, y2] = map(x, y);
+  return [{ x, y, c: T.parent, on: pf, pos: ppos }, { x: x2, y: y2, c: T.image, on: imf, pos: ipos }];
+});
+function tgraph(o) {
+  const { zx = 40, zy = 20, cx = 0, cy = 0 } = o;
+  const inWin = (x, y) => Math.abs(x - cx) * zx < 280 - 24 && Math.abs(y - cy) * zy < 250 - 16;
+  const fns = o.curves.map((c) => ({ kind: "cartesian", expr: "y = " + c.expr, color: c.color, thickness: c.w ?? 2.5 }));
+  const labels = [];
+  o.points.forEach((p, i) => {
+    if (p.on && Math.abs(p.on(p.x) - p.y) > 1e-9) throw new Error(`1.4 graph: (${p.x}, ${p.y}) is not on its curve`);
+    if (!inWin(p.x, p.y)) return;
+    labels.push({ id: "t" + i, text: `(${fmtN(p.x)}, ${fmtN(p.y)})`, x: p.x, y: p.y, color: p.c, visible: true, showPoint: true, pos: p.pos ?? "above" });
+  });
+  const fig = {
+    fns, labels,
+    settings: { title: o.title ?? "", showGrid: true, showAxes: true, showNums: true, stepX: "auto", stepY: "auto" },
+    view: { zoomX: zx, zoomY: zy, ox: -cx * zx, oy: cy * zy },
+  };
+  const data = encodeURIComponent(Buffer.from(encodeURIComponent(JSON.stringify(fig))).toString("base64"));
+  return `<iframe src="/tools/graph?embed=1&data=${data}" loading="lazy" style="width:100%;height:504px;border:1px solid #cbd5e1;border-radius:8px;margin-top:10px;background:#fff;" title="Interactive graph"></iframe>`;
+}
+const G_PARENT3 = tgraph({
+  title: "Parent y = x³", zx: 60, zy: 24,
+  curves: [{ expr: "x^3", color: T.parent }],
+  points: [-2, -1, 0, 1, 2].map((x) => ({ x, y: P3(x), c: T.parent, on: P3, pos: x > 0 ? "right" : x < 0 ? "left" : "below" })),
+});
+const G_PARENT4 = tgraph({
+  title: "Parent y = x⁴", zx: 50, zy: 20, cy: 8,
+  curves: [{ expr: "x^4", color: T.parent }],
+  points: [-2, -1, 0, 1, 2].map((x) => ({ x, y: P4(x), c: T.parent, on: P4, pos: x > 0 ? "right" : x < 0 ? "left" : "below" })),
+});
+const G_INTRO = tgraph({
+  title: "y = 2(x−1)³ + 3", zx: 70, zy: 26, cx: 1, cy: 3,
+  curves: [{ expr: "x^3", color: T.parent }, { expr: "2*(x-1)^3+3", color: T.image }],
+  points: pair([-1, 0, 1], P3, mapPt(2, 1, 1, 3), (x) => 2 * (x - 1) ** 3 + 3),
+});
+const G_EX1 = tgraph({
+  title: "y = −2(x+3)⁴ − 5", zx: 60, zy: 14, cx: -1.5, cy: -3,
+  curves: [{ expr: "x^4", color: T.parent }, { expr: "-2*(x+3)^4-5", color: T.image }],
+  points: pair([-1, 0, 1], P4, mapPt(-2, 1, -3, -5), (x) => -2 * (x + 3) ** 4 - 5),
+});
+const G_EX2 = tgraph({
+  title: "y = −½(x−1)³ + 4", zx: 60, zy: 24, cx: 0.5,
+  curves: [{ expr: "x^3", color: T.parent }, { expr: "-0.5*(x-1)^3+4", color: T.image }],
+  points: pair([-2, 0, 2], P3, mapPt(-0.5, 1, 1, 4), (x) => -0.5 * (x - 1) ** 3 + 4),
+});
+const G_EX3 = tgraph({
+  title: "f(x), f(2x), f(x/2) for f = x³", zx: 80, zy: 40,
+  curves: [{ expr: "x^3", color: T.parent }, { expr: "(2*x)^3", color: T.image }, { expr: "(0.5*x)^3", color: T.alt }],
+  points: [
+    { x: 1, y: 1, c: T.parent, on: P3, pos: "below" },
+    { x: 0.5, y: 1, c: T.image, on: (x) => (2 * x) ** 3, pos: "left" },
+    { x: 2, y: 1, c: T.alt, on: (x) => (0.5 * x) ** 3, pos: "right" },
+  ],
+});
+const G_EX4 = tgraph({
+  title: "y = −3(x+2)⁴ + 1", zx: 60, zy: 20, cx: -1, cy: -6,
+  curves: [{ expr: "x^4", color: T.parent }, { expr: "-3*(x+2)^4+1", color: T.image }],
+  points: pair([-1, 0, 1], P4, mapPt(-3, 1, -2, 1), (x) => -3 * (x + 2) ** 4 + 1),
+});
+const G_EX5 = tgraph({
+  title: "y = (2x−6)³", zx: 60, zy: 24, cx: 3,
+  curves: [{ expr: "x^3", color: T.parent }, { expr: "(2*x-6)^3", color: T.image }],
+  points: pair([-2, 0, 2], P3, mapPt(1, 2, 3, 0), (x) => (2 * x - 6) ** 3),
+});
+const G_Q1 = tgraph({
+  title: "y = −(x−4)³ + 2", zx: 60, zy: 24, cx: 3, cy: 1,
+  curves: [{ expr: "x^3", color: T.parent }, { expr: "-(x-4)^3+2", color: T.image }],
+  points: pair([0, 1, 2], P3, mapPt(-1, 1, 4, 2), (x) => -((x - 4) ** 3) + 2),
+});
+const G_Q2 = tgraph({
+  title: "y = 2(x+1)³ − 3", zx: 80, zy: 36, cx: -0.5, cy: -2,
+  curves: [{ expr: "x^3", color: T.parent }, { expr: "2*(x+1)^3-3", color: T.image }],
+  points: pair([-1, 0, 1], P3, mapPt(2, 1, -1, -3), (x) => 2 * (x + 1) ** 3 - 3, "above", "below"),
+});
+const G_Q3 = tgraph({
+  title: "y = −2(x−3)⁴ − 1", zx: 60, zy: 24, cx: 1.5, cy: -1,
+  curves: [{ expr: "x^4", color: T.parent }, { expr: "-2*(x-3)^4-1", color: T.image }],
+  points: pair([-1, 0, 1], P4, mapPt(-2, 1, 3, -1), (x) => -2 * (x - 3) ** 4 - 1),
+});
+const G_Q4 = tgraph({
+  title: "y = (3x+9)²", zx: 50, zy: 22, cx: -0.5, cy: 9,
+  curves: [{ expr: "x^2", color: T.parent }, { expr: "(3*x+9)^2", color: T.image }],
+  points: pair([-3, 0, 3], P2, mapPt(1, 3, -3, 0), (x) => (3 * x + 9) ** 2),
+});
+const G_Q5 = tgraph({
+  title: "y = x³ and y = 8x³", zx: 120, zy: 30, cx: 0.5, cy: 3,
+  curves: [{ expr: "x^3", color: T.parent }, { expr: "8*x^3", color: T.image }],
+  points: [
+    { x: 1, y: 1, c: T.parent, on: P3, pos: "below" },
+    { x: 1, y: 8, c: T.image, on: (x) => 8 * x ** 3, pos: "right" },
+    { x: 0.5, y: 1, c: T.alt, on: (x) => 8 * x ** 3, pos: "above" },
+  ],
+});
+
 u1["1.4"] = L("1.4", "Transformations of Functions", [
   html(String.raw`<div class="lecture-box">
   <h1>🔧 Transformations of Functions</h1>
@@ -131,6 +234,14 @@ u1["1.4"] = L("1.4", "Transformations of Functions", [
     <li><strong>\(k\):</strong> horizontal stretch by \(\tfrac{1}{|k|}\); reflection in the y-axis if \(k<0\).</li>
     <li><strong>\(d\):</strong> horizontal shift (opposite to the sign). <strong>\(c\):</strong> vertical shift.</li>
   </ul>
+  <h2>📈 The parent functions and their key points</h2>
+  <p>Every transformation starts from a <strong>parent function</strong>. Learn its five key points at \(x=-2,-1,0,1,2\); these are the points you carry through the transformation.</p>
+  <ul>
+    <li>\(y=x^3\) (odd): \((-2,-8),\ (-1,-1),\ (0,0),\ (1,1),\ (2,8)\). The graph passes through the origin, and the ends go down–up.</li>
+    <li>\(y=x^4\) (even): \((-2,16),\ (-1,1),\ (0,0),\ (1,1),\ (2,16)\). The graph is symmetric in the y-axis, and both ends go up.</li>
+  </ul>
+  ${G_PARENT3}
+  ${G_PARENT4}
   <h2>🧭 The mapping rule for points</h2>
   <p>Every point \((x,y)\) on the parent graph \(y=f(x)\) is moved to a new point on \(y=a\,f\big(k(x-d)\big)+c\) by the <strong>mapping rule</strong>:</p>
   \[(x,\,y)\ \longrightarrow\ \left(\dfrac{x}{k}+d,\ \ a\,y+c\right)\]
@@ -140,19 +251,20 @@ u1["1.4"] = L("1.4", "Transformations of Functions", [
     <li><strong>Order matters:</strong> stretches and reflections come first, shifts come last — always in that order.</li>
   </ul>
   <p><strong>Why divide by \(k\)?</strong> The new graph reaches the same height when \(k(x_{\text{new}}-d)=x_{\text{old}}\), so \(x_{\text{new}}=\tfrac{x_{\text{old}}}{k}+d\).</p>
-  ${gframe(["y = 2*(x-1)^3 + 3"], { title: "y = 2(x−1)³ + 3: stretch 2, right 1, up 3" })}
+  <p><strong>Try it:</strong> for \(y=2(x-1)^3+3\) we have \(a=2,\ k=1,\ d=1,\ c=3\), so \((x,y)\to(x+1,\ 2y+3)\). The parent's key points \((-1,-1),(0,0),(1,1)\) move to \((0,1),(1,3),(2,5)\), as the graph shows.</p>
+  ${G_INTRO}
   <h2>🔵 Examples</h2>
-  <div class="example-box" ${EX}><h3>Example 1: Describe all four parameters</h3><p>Describe \(y=-2(x+3)^4-5\) as a sequence of transformations of \(y=x^4\).</p><div class="solution"><div class="step"><strong>Step 1:</strong> Match \(y=-2(x+3)^4-5\) to the general form \(y=a\,f\big(k(x-d)\big)+c\) with \(f(x)=x^4\). Write \(x+3=x-(-3)\), and note there is no number multiplying \(x\) inside, so \(k=1\). This gives \(a=-2,\ k=1,\ d=-3,\ c=-5\).</div><div class="step"><strong>Step 2:</strong> Read each parameter. \(a=-2\): vertical stretch by \(|a|=2\) <em>and</em> a reflection in the x-axis (because \(a<0\)). \(k=1\): no horizontal change. \(d=-3\): shift <strong>left</strong> 3 (opposite the sign). \(c=-5\): shift <strong>down</strong> 5.</div><div class="step"><strong>Step 3:</strong> Apply them in order — stretch and reflect first, then shift. The mapping rule is \((x,y)\to\left(\tfrac{x}{1}+(-3),\ -2y+(-5)\right)=(x-3,\ -2y-5)\). Check with the point \((1,1)\) on \(y=x^4\): it moves to \((1-3,\ -2(1)-5)=(-2,-7)\), and \(-2(-2+3)^4-5=-7\) ✓.</div><em>Conclusion: reflect in the x-axis, stretch vertically ×2, left 3, down 5. ✓</em></div>${gframe(["y = -2*(x+3)^4 - 5"], { title: "y=−2(x+3)⁴−5: reflected (opens down), stretched ×2, left 3, down 5" })}</div>
-  <div class="example-box" ${EX}><h3>Example 2: Map a point through a stretch</h3><p>The point \((2,8)\) lies on \(y=x^3\). Find its image on \(y=-\tfrac12(x-1)^3+4\).</p><div class="solution"><div class="step"><strong>Step 1:</strong> Read the parameters from \(y=-\tfrac12(x-1)^3+4\): \(a=-\tfrac12,\ k=1,\ d=1,\ c=4\).</div><div class="step"><strong>Step 2:</strong> Write the mapping rule: \((x,y)\to\left(\tfrac{x}{k}+d,\ a\,y+c\right)=\left(\tfrac{x}{1}+1,\ -\tfrac12\,y+4\right)\).</div><div class="step"><strong>Step 3:</strong> New \(x\): \(\tfrac{2}{1}+1=3\) (divide by \(k\), then shift right \(d=1\)).</div><div class="step"><strong>Step 4:</strong> New \(y\): \(-\tfrac12(8)+4=-4+4=0\) (multiply by \(a\) first — a reflection and a compression by \(\tfrac12\) — then shift up \(c=4\)).</div><div class="step"><strong>Step 5:</strong> Check that the image lies on the new curve: at \(x=3\), \(y=-\tfrac12(3-1)^3+4=-\tfrac12(8)+4=0\) ✓.</div><em>Conclusion: \((2,8)\to(3,0)\). ✓</em></div></div>
-  <div class="example-box" ${EX}><h3>Example 3: Horizontal stretch vs compression</h3><p>Compare the effect of \(k\) in \(y=f(2x)\) and \(y=f\!\big(\tfrac12 x\big)\).</p><div class="solution"><div class="step"><strong>Step 1:</strong> Here \(a=1,\ d=0,\ c=0\), so only \(k\) acts. The mapping rule reduces to \((x,y)\to\left(\tfrac{x}{k},\ y\right)\): the y-coordinate never changes, and the x-coordinate is <em>divided</em> by \(k\).</div><div class="step"><strong>Step 2:</strong> \(k=2\): \((x,y)\to\left(\tfrac{x}{2},\ y\right)\). The horizontal change is by \(\tfrac1{|k|}=\tfrac12\), a <strong>compression</strong> toward the y-axis. The point \((4,y)\) moves to \((2,y)\).</div><div class="step"><strong>Step 3:</strong> \(k=\tfrac12\): \((x,y)\to\left(\tfrac{x}{1/2},\ y\right)=(2x,\ y)\). The horizontal change is by \(\tfrac1{|k|}=2\), a <strong>stretch</strong> away from the y-axis. The point \((4,y)\) moves to \((8,y)\).</div><em>Conclusion: \(k>1\) squeezes the graph toward the y-axis; \(0<k<1\) pulls it away. The effect on \(x\) is the <em>reciprocal</em> of \(k\). ✓</em></div></div>
-  <div class="example-box" ${EX}><h3>Example 4: Write the equation from a description</h3><p>Write \(y=x^4\) after: reflect in the x-axis, vertical stretch 3, left 2, up 1.</p><div class="solution"><div class="step"><strong>Step 1:</strong> Translate each phrase into a parameter. Reflect in the x-axis and stretch vertically by 3 ⇒ \(a=-3\). No horizontal stretch ⇒ \(k=1\). Left 2 ⇒ \(d=-2\) (left means negative). Up 1 ⇒ \(c=1\).</div><div class="step"><strong>Step 2:</strong> Substitute into \(y=a\,f\big(k(x-d)\big)+c\) with \(f(x)=x^4\): \(y=-3\big(1\cdot(x-(-2))\big)^4+1=-3(x+2)^4+1\).</div><div class="step"><strong>Step 3:</strong> Check with the mapping rule \((x,y)\to\left(\tfrac{x}{1}-2,\ -3y+1\right)\). The point \((1,1)\) on \(y=x^4\) goes to \((-1,-2)\), and \(-3(-1+2)^4+1=-2\) ✓.</div><em>Conclusion: \(y=-3(x+2)^4+1\). ✓</em></div></div>
-  <div class="example-box" ${EX}><h3>Example 5: Factor out \(k\) before reading it</h3><p>Describe the transformations in \(y=(2x-6)^3\).</p><div class="solution"><div class="step"><strong>Step 1:</strong> The form needs \(k(x-d)\) inside the bracket, so factor out the number multiplying \(x\): \(2x-6=2(x-3)\), and \(y=\big(2(x-3)\big)^3\).</div><div class="step"><strong>Step 2:</strong> Read the parameters: \(a=1,\ k=2,\ d=3,\ c=0\). \(k=2\) ⇒ horizontal compression by \(\tfrac1k=\tfrac12\). \(d=3\) ⇒ shift right 3. (Reading \(-6\) as a shift of 6 would be wrong.)</div><div class="step"><strong>Step 3:</strong> Mapping rule: \((x,y)\to\left(\tfrac{x}{2}+3,\ y\right)\). Check with \((2,8)\) on \(y=x^3\): it goes to \((1+3,\ 8)=(4,8)\), and \((2\cdot4-6)^3=2^3=8\) ✓.</div><em>Conclusion: compress horizontally by \(\tfrac12\), then shift right 3 — you must factor out \(k\) first. ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 1: Describe all four parameters</h3><p>Describe \(y=-2(x+3)^4-5\) as a sequence of transformations of \(y=x^4\).</p><div class="solution"><div class="step"><strong>Step 1:</strong> Match \(y=-2(x+3)^4-5\) to the general form \(y=a\,f\big(k(x-d)\big)+c\) with \(f(x)=x^4\). Write \(x+3=x-(-3)\), and note there is no number multiplying \(x\) inside, so \(k=1\). This gives \(a=-2,\ k=1,\ d=-3,\ c=-5\).</div><div class="step"><strong>Step 2:</strong> Read each parameter. \(a=-2\): vertical stretch by \(|a|=2\) <em>and</em> a reflection in the x-axis (because \(a<0\)). \(k=1\): no horizontal change. \(d=-3\): shift <strong>left</strong> 3 (opposite the sign). \(c=-5\): shift <strong>down</strong> 5.</div><div class="step"><strong>Step 3:</strong> Apply them in order — stretch and reflect first, then shift. The mapping rule is \((x,y)\to\left(\tfrac{x}{1}+(-3),\ -2y+(-5)\right)=(x-3,\ -2y-5)\). Check with the point \((1,1)\) on \(y=x^4\): it moves to \((1-3,\ -2(1)-5)=(-2,-7)\), and \(-2(-2+3)^4-5=-7\) ✓.</div><em>Conclusion: reflect in the x-axis, stretch vertically ×2, left 3, down 5. ✓</em></div><p><strong>Graph:</strong> the parent \(y=x^4\) (grey) and its image (green). The key points \((-1,1),(0,0),(1,1)\) map to \((-4,-7),(-3,-5),(-2,-7)\), so the vertex moves from \((0,0)\) to \((-3,-5)\) and the graph opens down.</p>${G_EX1}</div>
+  <div class="example-box" ${EX}><h3>Example 2: Map a point through a stretch</h3><p>The point \((2,8)\) lies on \(y=x^3\). Find its image on \(y=-\tfrac12(x-1)^3+4\).</p><div class="solution"><div class="step"><strong>Step 1:</strong> Read the parameters from \(y=-\tfrac12(x-1)^3+4\): \(a=-\tfrac12,\ k=1,\ d=1,\ c=4\).</div><div class="step"><strong>Step 2:</strong> Write the mapping rule: \((x,y)\to\left(\tfrac{x}{k}+d,\ a\,y+c\right)=\left(\tfrac{x}{1}+1,\ -\tfrac12\,y+4\right)\).</div><div class="step"><strong>Step 3:</strong> New \(x\): \(\tfrac{2}{1}+1=3\) (divide by \(k\), then shift right \(d=1\)).</div><div class="step"><strong>Step 4:</strong> New \(y\): \(-\tfrac12(8)+4=-4+4=0\) (multiply by \(a\) first — a reflection and a compression by \(\tfrac12\) — then shift up \(c=4\)).</div><div class="step"><strong>Step 5:</strong> Check that the image lies on the new curve: at \(x=3\), \(y=-\tfrac12(3-1)^3+4=-\tfrac12(8)+4=0\) ✓.</div><em>Conclusion: \((2,8)\to(3,0)\). ✓</em></div><p><strong>Graph:</strong> the parent \(y=x^3\) (grey) and \(y=-\tfrac12(x-1)^3+4\) (green). The key points \((-2,-8),(0,0),(2,8)\) map to \((-1,8),(1,4),(3,0)\); the centre of the curve moves from \((0,0)\) to \((1,4)\).</p>${G_EX2}</div>
+  <div class="example-box" ${EX}><h3>Example 3: Horizontal stretch vs compression</h3><p>Compare the effect of \(k\) in \(y=f(2x)\) and \(y=f\!\big(\tfrac12 x\big)\).</p><div class="solution"><div class="step"><strong>Step 1:</strong> Here \(a=1,\ d=0,\ c=0\), so only \(k\) acts. The mapping rule reduces to \((x,y)\to\left(\tfrac{x}{k},\ y\right)\): the y-coordinate never changes, and the x-coordinate is <em>divided</em> by \(k\).</div><div class="step"><strong>Step 2:</strong> \(k=2\): \((x,y)\to\left(\tfrac{x}{2},\ y\right)\). The horizontal change is by \(\tfrac1{|k|}=\tfrac12\), a <strong>compression</strong> toward the y-axis. The point \((4,y)\) moves to \((2,y)\).</div><div class="step"><strong>Step 3:</strong> \(k=\tfrac12\): \((x,y)\to\left(\tfrac{x}{1/2},\ y\right)=(2x,\ y)\). The horizontal change is by \(\tfrac1{|k|}=2\), a <strong>stretch</strong> away from the y-axis. The point \((4,y)\) moves to \((8,y)\).</div><em>Conclusion: \(k>1\) squeezes the graph toward the y-axis; \(0<k<1\) pulls it away. The effect on \(x\) is the <em>reciprocal</em> of \(k\). ✓</em></div><p><strong>Graph</strong> (using \(f(x)=x^3\)): the point \((1,1)\) on the parent (grey) moves to \((0.5,1)\) on \(y=(2x)^3\) (green, compressed) and to \((2,1)\) on \(y=\left(\tfrac12x\right)^3\) (orange, stretched). The height stays \(y=1\).</p>${G_EX3}</div>
+  <div class="example-box" ${EX}><h3>Example 4: Write the equation from a description</h3><p>Write \(y=x^4\) after: reflect in the x-axis, vertical stretch 3, left 2, up 1.</p><div class="solution"><div class="step"><strong>Step 1:</strong> Translate each phrase into a parameter. Reflect in the x-axis and stretch vertically by 3 ⇒ \(a=-3\). No horizontal stretch ⇒ \(k=1\). Left 2 ⇒ \(d=-2\) (left means negative). Up 1 ⇒ \(c=1\).</div><div class="step"><strong>Step 2:</strong> Substitute into \(y=a\,f\big(k(x-d)\big)+c\) with \(f(x)=x^4\): \(y=-3\big(1\cdot(x-(-2))\big)^4+1=-3(x+2)^4+1\).</div><div class="step"><strong>Step 3:</strong> Check with the mapping rule \((x,y)\to\left(\tfrac{x}{1}-2,\ -3y+1\right)\). The point \((1,1)\) on \(y=x^4\) goes to \((-1,-2)\), and \(-3(-1+2)^4+1=-2\) ✓.</div><em>Conclusion: \(y=-3(x+2)^4+1\). ✓</em></div><p><strong>Graph:</strong> the parent \(y=x^4\) (grey) and the result (green). The key points \((-1,1),(0,0),(1,1)\) map to \((-3,-2),(-2,1),(-1,-2)\); the vertex moves from \((0,0)\) to \((-2,1)\) and the graph opens down.</p>${G_EX4}</div>
+  <div class="example-box" ${EX}><h3>Example 5: Factor out \(k\) before reading it</h3><p>Describe the transformations in \(y=(2x-6)^3\).</p><div class="solution"><div class="step"><strong>Step 1:</strong> The form needs \(k(x-d)\) inside the bracket, so factor out the number multiplying \(x\): \(2x-6=2(x-3)\), and \(y=\big(2(x-3)\big)^3\).</div><div class="step"><strong>Step 2:</strong> Read the parameters: \(a=1,\ k=2,\ d=3,\ c=0\). \(k=2\) ⇒ horizontal compression by \(\tfrac1k=\tfrac12\). \(d=3\) ⇒ shift right 3. (Reading \(-6\) as a shift of 6 would be wrong.)</div><div class="step"><strong>Step 3:</strong> Mapping rule: \((x,y)\to\left(\tfrac{x}{2}+3,\ y\right)\). Check with \((2,8)\) on \(y=x^3\): it goes to \((1+3,\ 8)=(4,8)\), and \((2\cdot4-6)^3=2^3=8\) ✓.</div><em>Conclusion: compress horizontally by \(\tfrac12\), then shift right 3 — you must factor out \(k\) first. ✓</em></div><p><strong>Graph:</strong> the parent \(y=x^3\) (grey) and \(y=(2x-6)^3\) (green). The key points \((-2,-8),(0,0),(2,8)\) map to \((2,-8),(3,0),(4,8)\): the y-values are unchanged and each x is halved, then shifted right 3.</p>${G_EX5}</div>
   <h2>🟡 Practice Questions</h2>
-  <div class="practice-box" ${PR}><h3>Question 1</h3><p>Describe \(y=-(x-4)^3+2\) fully.</p><details><summary>View answer</summary><div class="solution"><div class="step"><strong>Step 1:</strong> \(y=-(x-4)^3+2\) has \(a=-1,\ k=1,\ d=4,\ c=2\).</div><div class="step"><strong>Step 2:</strong> \(a=-1\): reflection in the x-axis (no stretch, since \(|a|=1\)). \(d=4\): right 4. \(c=2\): up 2. Mapping rule: \((x,y)\to(x+4,\ -y+2)\).</div><em>Conclusion: reflect in the x-axis, right 4, up 2. ✓</em></div></details></div>
-  <div class="practice-box" ${PR}><h3>Question 2</h3><p>Find the image of \((1,1)\) on \(y=x^3\) under \(y=2(x+1)^3-3\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><strong>Step 1:</strong> Parameters of \(y=2(x+1)^3-3\): \(a=2,\ k=1,\ d=-1,\ c=-3\). Mapping rule: \((x,y)\to\left(\tfrac{x}{1}-1,\ 2y-3\right)\).</div><div class="step"><strong>Step 2:</strong> New \(x\): \(\tfrac11-1=0\). New \(y\): \(2(1)-3=-1\).</div><div class="step"><strong>Step 3:</strong> Check: at \(x=0\), \(y=2(0+1)^3-3=-1\) ✓.</div><em>Conclusion: \((1,1)\to(0,-1)\). ✓</em></div></details></div>
-  <div class="practice-box" ${PR}><h3>Question 3</h3><p>Write \(y=x^4\): reflected, stretched ×2, right 3, down 1.</p><details><summary>View answer</summary><div class="solution"><div class="step"><strong>Step 1:</strong> Reflected and stretched ×2 ⇒ \(a=-2\). Right 3 ⇒ \(d=3\). Down 1 ⇒ \(c=-1\). No horizontal change ⇒ \(k=1\).</div><div class="step"><strong>Step 2:</strong> Substitute into \(y=a\,f\big(k(x-d)\big)+c\): \(y=-2(x-3)^4-1\).</div><div class="step"><strong>Step 3:</strong> Check with \((x,y)\to(x+3,\ -2y-1)\): the point \((1,1)\) goes to \((4,-3)\), and \(-2(4-3)^4-1=-3\) ✓.</div><em>Conclusion: \(y=-2(x-3)^4-1\). ✓</em></div></details></div>
-  <div class="practice-box" ${PR}><h3>Question 4</h3><p>Describe \(y=(3x+9)^2\) (factor \(k\) first).</p><details><summary>View answer</summary><div class="solution"><div class="step"><strong>Step 1:</strong> Factor out \(k\): \(3x+9=3(x+3)\), so \(y=\big(3(x+3)\big)^2\).</div><div class="step"><strong>Step 2:</strong> \(a=1,\ k=3,\ d=-3,\ c=0\). \(k=3\): horizontal compression by \(\tfrac13\). \(d=-3\): left 3. Mapping rule: \((x,y)\to\left(\tfrac{x}{3}-3,\ y\right)\).</div><div class="step"><strong>Step 3:</strong> Check: \((3,9)\) on \(y=x^2\) goes to \((1-3,\ 9)=(-2,9)\), and \((3(-2)+9)^2=3^2=9\) ✓.</div><em>Conclusion: compress horizontally by \(\tfrac13\), then left 3. ✓</em></div></details></div>
-  <div class="practice-box" ${PR}><h3>Question 5</h3><p>What single transformation maps \(y=x^3\) to \(y=8x^3\)? Give two equivalent answers.</p><details><summary>View answer</summary><div class="solution"><div class="step"><strong>Step 1:</strong> As a vertical stretch: \(a=8\) gives \(y=8x^3\), with mapping rule \((x,y)\to(x,\ 8y)\).</div><div class="step"><strong>Step 2:</strong> As a horizontal compression: \(k=2\) gives \(y=(2x)^3=8x^3\), because \(2^3=8\). The mapping rule is \((x,y)\to\left(\tfrac{x}{2},\ y\right)\).</div><div class="step"><strong>Step 3:</strong> Check with \((1,1)\): the vertical stretch gives \((1,8)\); the compression gives \(\left(\tfrac12,1\right)\), and \(8\left(\tfrac12\right)^3=1\) ✓. Both points lie on \(y=8x^3\).</div><em>Conclusion: a vertical stretch ×8 — or a horizontal compression by \(\tfrac12\). ✓</em></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 1</h3><p>Describe \(y=-(x-4)^3+2\) fully.</p><details><summary>View answer</summary><div class="solution"><div class="step"><strong>Step 1:</strong> \(y=-(x-4)^3+2\) has \(a=-1,\ k=1,\ d=4,\ c=2\).</div><div class="step"><strong>Step 2:</strong> \(a=-1\): reflection in the x-axis (no stretch, since \(|a|=1\)). \(d=4\): right 4. \(c=2\): up 2. Mapping rule: \((x,y)\to(x+4,\ -y+2)\).</div><div class="step"><strong>Step 3:</strong> Check the key points: \((0,0)\to(4,2)\), \((1,1)\to(5,1)\), \((2,8)\to(6,-6)\). Each satisfies \(y=-(x-4)^3+2\); for example \(-(6-4)^3+2=-6\) ✓.</div><em>Conclusion: reflect in the x-axis, right 4, up 2. ✓</em>${G_Q1}</div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 2</h3><p>Find the image of \((1,1)\) on \(y=x^3\) under \(y=2(x+1)^3-3\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><strong>Step 1:</strong> Parameters of \(y=2(x+1)^3-3\): \(a=2,\ k=1,\ d=-1,\ c=-3\). Mapping rule: \((x,y)\to\left(\tfrac{x}{1}-1,\ 2y-3\right)\).</div><div class="step"><strong>Step 2:</strong> New \(x\): \(\tfrac11-1=0\). New \(y\): \(2(1)-3=-1\).</div><div class="step"><strong>Step 3:</strong> Check: at \(x=0\), \(y=2(0+1)^3-3=-1\) ✓.</div><em>Conclusion: \((1,1)\to(0,-1)\). ✓</em><div class="step"><strong>Graph:</strong> the other key points also land on the curve: \((-1,-1)\to(-2,-5)\) and \((0,0)\to(-1,-3)\), so the centre of the graph moves to \((-1,-3)\).</div>${G_Q2}</div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 3</h3><p>Write \(y=x^4\): reflected, stretched ×2, right 3, down 1.</p><details><summary>View answer</summary><div class="solution"><div class="step"><strong>Step 1:</strong> Reflected and stretched ×2 ⇒ \(a=-2\). Right 3 ⇒ \(d=3\). Down 1 ⇒ \(c=-1\). No horizontal change ⇒ \(k=1\).</div><div class="step"><strong>Step 2:</strong> Substitute into \(y=a\,f\big(k(x-d)\big)+c\): \(y=-2(x-3)^4-1\).</div><div class="step"><strong>Step 3:</strong> Check with \((x,y)\to(x+3,\ -2y-1)\): the point \((1,1)\) goes to \((4,-3)\), and \(-2(4-3)^4-1=-3\) ✓.</div><em>Conclusion: \(y=-2(x-3)^4-1\). ✓</em><div class="step"><strong>Graph:</strong> the key points \((-1,1),(0,0),(1,1)\) map to \((2,-3),(3,-1),(4,-3)\); the vertex moves from \((0,0)\) to \((3,-1)\) and the graph opens down.</div>${G_Q3}</div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 4</h3><p>Describe \(y=(3x+9)^2\) (factor \(k\) first).</p><details><summary>View answer</summary><div class="solution"><div class="step"><strong>Step 1:</strong> Factor out \(k\): \(3x+9=3(x+3)\), so \(y=\big(3(x+3)\big)^2\).</div><div class="step"><strong>Step 2:</strong> \(a=1,\ k=3,\ d=-3,\ c=0\). \(k=3\): horizontal compression by \(\tfrac13\). \(d=-3\): left 3. Mapping rule: \((x,y)\to\left(\tfrac{x}{3}-3,\ y\right)\).</div><div class="step"><strong>Step 3:</strong> Check: \((3,9)\) on \(y=x^2\) goes to \((1-3,\ 9)=(-2,9)\), and \((3(-2)+9)^2=3^2=9\) ✓.</div><em>Conclusion: compress horizontally by \(\tfrac13\), then left 3. ✓</em><div class="step"><strong>Graph:</strong> the parent \(y=x^2\) (grey) has key points \((-3,9),(0,0),(3,9)\); they map to \((-4,9),(-3,0),(-2,9)\), so the vertex moves to \((-3,0)\) and the parabola becomes narrower.</div>${G_Q4}</div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 5</h3><p>What single transformation maps \(y=x^3\) to \(y=8x^3\)? Give two equivalent answers.</p><details><summary>View answer</summary><div class="solution"><div class="step"><strong>Step 1:</strong> As a vertical stretch: \(a=8\) gives \(y=8x^3\), with mapping rule \((x,y)\to(x,\ 8y)\).</div><div class="step"><strong>Step 2:</strong> As a horizontal compression: \(k=2\) gives \(y=(2x)^3=8x^3\), because \(2^3=8\). The mapping rule is \((x,y)\to\left(\tfrac{x}{2},\ y\right)\).</div><div class="step"><strong>Step 3:</strong> Check with \((1,1)\): the vertical stretch gives \((1,8)\); the compression gives \(\left(\tfrac12,1\right)\), and \(8\left(\tfrac12\right)^3=1\) ✓. Both points lie on \(y=8x^3\).</div><em>Conclusion: a vertical stretch ×8 — or a horizontal compression by \(\tfrac12\). ✓</em>${G_Q5}</div></details></div>
   <h2>❓ Q&amp;A Summary</h2>
   <div class="qa-box" ${QA}><h3>Q1: What does \(a\) control?</h3><p><em>Vertical stretch by \(|a|\) and (if \(a<0\)) reflection in the x-axis.</em></p></div>
   <div class="qa-box" ${QA}><h3>Q2: Why must you factor out \(k\) first?</h3><p><em>The shift is read from \(k(x-d)\); in \(2x-6\) the shift is \(3\), not \(6\).</em></p></div>
