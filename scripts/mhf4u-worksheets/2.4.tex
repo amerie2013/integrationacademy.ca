@@ -9,56 +9,184 @@
 \end{center}
 
 \begin{ideabox}
-Find the zeros, then test a point on each interval. The sign flips at odd multiplicity but not at even multiplicity.
+Find the zeros, then use a \textbf{sign table} to find the sign of the polynomial on every interval. The sign flips at odd multiplicity but not at even multiplicity.
 \begin{itemize}[leftmargin=*,itemsep=2pt]
-  \item Move to one side, factor, find the zeros.
-  \item Test a point in each interval for the sign.
-  \item Include endpoints for $\ge$ or $\le$.
+  \item Move everything to one side, factor completely, and find the zeros (with their multiplicities).
+  \item Build a sign table: a column for each interval and each zero, a row for each factor and one for the product.
+  \item Multiply the signs in each column ($-\times-=+$); keep the columns that satisfy the inequality, and include the zeros only for $\ge$ or $\le$.
 \end{itemize}
 \end{ideabox}
 
 \begin{learnbox}
-\lh{Beyond equations}A polynomial \textbf{inequality} asks where the graph lies above or below the axis, not just where it crosses.
-\lh{Use the zeros}The zeros split the number line into intervals; the polynomial keeps one sign on each, so test a single point in each interval.
-\lh{Reading the sign}A sign chart across the intervals gives the full solution — remember an even-multiplicity zero does not change the sign.
+\lh{Beyond equations}A polynomial \textbf{inequality} asks where the graph lies above or below the axis, not just where it crosses. Always move everything to one side first so the other side is $0$; never divide by a factor that contains $x$.
+\lh{Use the zeros}Factor completely and set each factor to zero. The zeros split the number line into intervals; the polynomial keeps one sign on each, so one test point per interval is enough.
+\lh{Build a sign table}Make a column for every interval \emph{and} every zero, a row for every factor, and a row for the product. Fill in the sign of each factor, then multiply the signs down each column: an even number of negatives gives $+$, an odd number gives $-$. The table below solves $(x-1)(x+2)>0$; the $\checkmark$ columns satisfy it.\par\begin{center}\small\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{l|ccccc}
+\hline
+Interval & $x<-2$ & $x=-2$ & $-2<x<1$ & $x=1$ & $x>1$ \\ \hline
+Test point & $-3$ & -- & $-1$ & -- & $2$ \\ \hline
+$x-1$ & $-$ & $-$ & $-$ & $0$ & $+$ \\
+$x+2$ & $-$ & $0$ & $+$ & $+$ & $+$ \\
+\hline
+$P(x)$ & $+$ & $0$ & $-$ & $0$ & $+$ \\ \hline
+$P(x)>0$? & $\checkmark$ & $\times$ & $\times$ & $\times$ & $\checkmark$ \\ \hline
+\end{tabular}\end{center}
+\lh{Reading the sign}Keep the columns that satisfy the inequality. Include the zero columns only for $\ge$ or $\le$. An odd-multiplicity zero changes the sign; an even-multiplicity zero does not (the graph touches the axis and turns back). For a positive leading coefficient, the right-most interval is always $+$.
 \end{learnbox}
 
 \sech{Worked Examples}
 
 \begin{example}{ex0}{Example 1 --- Product positive}
-Solve $(x-2)(x+4)>0$.\soln Zeros $2,-4$; positive outside $[-4,2]$. So $x<-4$ or $x>2$. The graph is above the axis there:\eplot{-6}{4}{-10}{12}{\addplot[exblue,very thick,domain=-5.4:3.4]{(x-2)*(x+4)};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(-4,0) (2,0)};}
+Solve $(x-2)(x+4)>0$.\soln \textbf{Step 1:} It is already compared with $0$ and factored.
+
+\textbf{Step 2:} Zeros: $x-2=0\Rightarrow x=2$ and $x+4=0\Rightarrow x=-4$, each of multiplicity $1$, so the sign changes at each. They split the number line into $x<-4$, $-4<x<2$ and $x>2$.
+
+\textbf{Step 3:} Sign table (one test point in each interval):\begin{center}\small\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{l|ccccc}
+\hline
+Interval & $x<-4$ & $x=-4$ & $-4<x<2$ & $x=2$ & $x>2$ \\ \hline
+Test point & $-5$ & -- & $-3$ & -- & $3$ \\ \hline
+$x-2$ & $-$ & $-$ & $-$ & $0$ & $+$ \\
+$x+4$ & $-$ & $0$ & $+$ & $+$ & $+$ \\
+\hline
+$P(x)$ & $+$ & $0$ & $-$ & $0$ & $+$ \\ \hline
+$P(x)>0$? & $\checkmark$ & $\times$ & $\times$ & $\times$ & $\checkmark$ \\ \hline
+\end{tabular}\end{center}\textbf{Step 4:} Keep the $\checkmark$ columns ($P>0$). The zeros give $0$, which is not $>0$, so they are excluded.
+
+\textbf{Answer:} $x<-4\text{ or }x>2$, i.e.\ $(-\infty,-4)\cup(2,\infty)$. The graph is above the axis there:\eplot{-6}{4}{-10}{12}{\addplot[exblue,very thick,domain=-5.4:3.4]{(x-2)*(x+4)};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(-4,0) (2,0)};}
 \end{example}
 
 \begin{example}{ex1}{Example 2 --- Product negative}
-Solve $(x-2)(x+4)<0$.\soln Negative on the middle interval: $-4<x<2$.
+Solve $(x-2)(x+4)<0$.\soln \textbf{Step 1:} Same factors and zeros as Example 1, so the same table. Now we want $P<0$.\begin{center}\small\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{l|ccccc}
+\hline
+Interval & $x<-4$ & $x=-4$ & $-4<x<2$ & $x=2$ & $x>2$ \\ \hline
+Test point & $-5$ & -- & $-3$ & -- & $3$ \\ \hline
+$x-2$ & $-$ & $-$ & $-$ & $0$ & $+$ \\
+$x+4$ & $-$ & $0$ & $+$ & $+$ & $+$ \\
+\hline
+$P(x)$ & $+$ & $0$ & $-$ & $0$ & $+$ \\ \hline
+$P(x)<0$? & $\times$ & $\times$ & $\checkmark$ & $\times$ & $\times$ \\ \hline
+\end{tabular}\end{center}\textbf{Step 2:} Keep the $-$ column. The strict inequality excludes the zeros.
+
+\textbf{Answer:} $-4<x<2$, i.e.\ $(-4,2)$.
 \end{example}
 
 \begin{example}{ex2}{Example 3 --- Factor first}
-Solve $x^2+x-12>0$.\soln $(x+4)(x-3)>0$; zeros $-4,3$: $x<-4$ or $x>3$.
+Solve $x^2+x-12>0$.\soln \textbf{Step 1:} Factor: two numbers with product $-12$ and sum $1$ are $4$ and $-3$, so $(x+4)(x-3)>0$.
+
+\textbf{Step 2:} Zeros $-4$ and $3$; sign table:\begin{center}\small\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{l|ccccc}
+\hline
+Interval & $x<-4$ & $x=-4$ & $-4<x<3$ & $x=3$ & $x>3$ \\ \hline
+Test point & $-5$ & -- & $-3$ & -- & $4$ \\ \hline
+$x+4$ & $-$ & $0$ & $+$ & $+$ & $+$ \\
+$x-3$ & $-$ & $-$ & $-$ & $0$ & $+$ \\
+\hline
+$P(x)$ & $+$ & $0$ & $-$ & $0$ & $+$ \\ \hline
+$P(x)>0$? & $\checkmark$ & $\times$ & $\times$ & $\times$ & $\checkmark$ \\ \hline
+\end{tabular}\end{center}\textbf{Step 3:} Keep the $+$ columns.
+
+\textbf{Answer:} $x<-4\text{ or }x>3$, i.e.\ $(-\infty,-4)\cup(3,\infty)$.
 \end{example}
 
 \begin{example}{ex3}{Example 4 --- Three factors}
-Solve $x(x+4)(x-1)>0$.\soln Zeros $-4,0,1$; signs $-,+,-,+$. So $-4<x<0$ or $x>1$.
+Solve $x(x+4)(x-1)>0$.\soln \textbf{Step 1:} Zeros $-4,\,0,\,1$, all of multiplicity $1$: four intervals, and the sign of $P$ alternates from one to the next.\begin{center}\small\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{l|ccccccc}
+\hline
+Interval & $x<-4$ & $x=-4$ & $-4<x<0$ & $x=0$ & $0<x<1$ & $x=1$ & $x>1$ \\ \hline
+Test point & $-5$ & -- & $-3$ & -- & $0.5$ & -- & $2$ \\ \hline
+$x$ & $-$ & $-$ & $-$ & $0$ & $+$ & $+$ & $+$ \\
+$x+4$ & $-$ & $0$ & $+$ & $+$ & $+$ & $+$ & $+$ \\
+$x-1$ & $-$ & $-$ & $-$ & $-$ & $-$ & $0$ & $+$ \\
+\hline
+$P(x)$ & $-$ & $0$ & $+$ & $0$ & $-$ & $0$ & $+$ \\ \hline
+$P(x)>0$? & $\times$ & $\times$ & $\checkmark$ & $\times$ & $\times$ & $\times$ & $\checkmark$ \\ \hline
+\end{tabular}\end{center}\textbf{Step 2:} Keep the $+$ columns. Check: for a positive leading coefficient the right-most interval is $+$.
+
+\textbf{Answer:} $-4<x<0\text{ or }x>1$, i.e.\ $(-4,0)\cup(1,\infty)$.
 \end{example}
 
 \begin{example}{ex4}{Example 5 --- Even multiplicity}
-Solve $(x-3)^2(x+2)>0$.\soln $(x-3)^2\ge0$; sign from $x+2$ (and $x\ne3$): $x>-2,\ x\ne3$.
+Solve $(x-3)^2(x+2)>0$.\soln \textbf{Step 1:} Zeros: $x=3$ (multiplicity $2$, even) and $x=-2$ (multiplicity $1$). The factor $(x-3)^2$ is never negative, so it does not change the sign of $P$ at $x=3$.\begin{center}\small\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{l|ccccc}
+\hline
+Interval & $x<-2$ & $x=-2$ & $-2<x<3$ & $x=3$ & $x>3$ \\ \hline
+Test point & $-3$ & -- & $-1$ & -- & $4$ \\ \hline
+$(x-3)^2$ & $+$ & $+$ & $+$ & $0$ & $+$ \\
+$x+2$ & $-$ & $0$ & $+$ & $+$ & $+$ \\
+\hline
+$P(x)$ & $-$ & $0$ & $+$ & $0$ & $+$ \\ \hline
+$P(x)>0$? & $\times$ & $\times$ & $\checkmark$ & $\times$ & $\checkmark$ \\ \hline
+\end{tabular}\end{center}\textbf{Step 2:} $P$ is positive on both sides of $x=3$, but $P(3)=0$ is not $>0$, so $x=3$ is left out.
+
+\textbf{Answer:} $x>-2,\ x\ne3$, i.e.\ $(-2,3)\cup(3,\infty)$.
 \end{example}
 
 \begin{example}{ex5}{Example 6 --- Difference of squares}
-Solve $x^2-16<0$.\soln $(x-4)(x+4)<0\Rightarrow-4<x<4$.
+Solve $x^2-16<0$.\soln \textbf{Step 1:} Factor: $x^2-16=(x-4)(x+4)$, so the zeros are $4$ and $-4$.\begin{center}\small\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{l|ccccc}
+\hline
+Interval & $x<-4$ & $x=-4$ & $-4<x<4$ & $x=4$ & $x>4$ \\ \hline
+Test point & $-5$ & -- & $-3$ & -- & $5$ \\ \hline
+$x-4$ & $-$ & $-$ & $-$ & $0$ & $+$ \\
+$x+4$ & $-$ & $0$ & $+$ & $+$ & $+$ \\
+\hline
+$P(x)$ & $+$ & $0$ & $-$ & $0$ & $+$ \\ \hline
+$P(x)<0$? & $\times$ & $\times$ & $\checkmark$ & $\times$ & $\times$ \\ \hline
+\end{tabular}\end{center}\textbf{Step 2:} Keep the $-$ column (strict, so the zeros are excluded).
+
+\textbf{Answer:} $-4<x<4$, i.e.\ $(-4,4)$.
 \end{example}
 
 \begin{example}{ex6}{Example 7 --- With equality}
-Solve $x^2-3x-10\ge0$.\soln $(x-5)(x+2)\ge0\Rightarrow x\le-2$ or $x\ge5$.
+Solve $x^2-3x-10\ge0$.\soln \textbf{Step 1:} Factor: two numbers with product $-10$ and sum $-3$ are $-5$ and $2$, so $(x-5)(x+2)\ge0$.\begin{center}\small\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{l|ccccc}
+\hline
+Interval & $x<-2$ & $x=-2$ & $-2<x<5$ & $x=5$ & $x>5$ \\ \hline
+Test point & $-3$ & -- & $-1$ & -- & $6$ \\ \hline
+$x-5$ & $-$ & $-$ & $-$ & $0$ & $+$ \\
+$x+2$ & $-$ & $0$ & $+$ & $+$ & $+$ \\
+\hline
+$P(x)$ & $+$ & $0$ & $-$ & $0$ & $+$ \\ \hline
+$P(x)\ge0$? & $\checkmark$ & $\checkmark$ & $\times$ & $\checkmark$ & $\checkmark$ \\ \hline
+\end{tabular}\end{center}\textbf{Step 2:} The inequality is $\ge$, so the zero columns \emph{are} included along with the $+$ intervals.
+
+\textbf{Answer:} $x\le-2\text{ or }x\ge5$, i.e.\ $(-\infty,-2]\cup[5,\infty)$.
 \end{example}
 
 \begin{example}{ex7}{Example 8 --- Three factors}
-Solve $(x+3)(x-1)(x-4)<0$.\soln Zeros $-3,1,4$; signs $-,+,-,+$. So $x<-3$ or $1<x<4$.
+Solve $(x+3)(x-1)(x-4)<0$.\soln \textbf{Step 1:} Zeros $-3,\,1,\,4$, each of multiplicity $1$.\begin{center}\small\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{l|ccccccc}
+\hline
+Interval & $x<-3$ & $x=-3$ & $-3<x<1$ & $x=1$ & $1<x<4$ & $x=4$ & $x>4$ \\ \hline
+Test point & $-4$ & -- & $-2$ & -- & $2$ & -- & $5$ \\ \hline
+$x+3$ & $-$ & $0$ & $+$ & $+$ & $+$ & $+$ & $+$ \\
+$x-1$ & $-$ & $-$ & $-$ & $0$ & $+$ & $+$ & $+$ \\
+$x-4$ & $-$ & $-$ & $-$ & $-$ & $-$ & $0$ & $+$ \\
+\hline
+$P(x)$ & $-$ & $0$ & $+$ & $0$ & $-$ & $0$ & $+$ \\ \hline
+$P(x)<0$? & $\checkmark$ & $\times$ & $\times$ & $\times$ & $\checkmark$ & $\times$ & $\times$ \\ \hline
+\end{tabular}\end{center}\textbf{Step 2:} Keep the $-$ columns.
+
+\textbf{Answer:} $x<-3\text{ or }1<x<4$, i.e.\ $(-\infty,-3)\cup(1,4)$.
 \end{example}
 
 \begin{example}{ex8}{Example 9 --- Cubic}
-Solve $x^3-x<0$.\soln $x(x-1)(x+1)<0$; signs $-,+,-,+$. So $x<-1$ or $0<x<1$.
+Solve $x^3-x<0$.\soln \textbf{Step 1:} Factor: take out $x$, then a difference of squares: $x^3-x=x(x-1)(x+1)$. Zeros $-1,\,0,\,1$.\begin{center}\small\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{l|ccccccc}
+\hline
+Interval & $x<-1$ & $x=-1$ & $-1<x<0$ & $x=0$ & $0<x<1$ & $x=1$ & $x>1$ \\ \hline
+Test point & $-2$ & -- & $-0.5$ & -- & $0.5$ & -- & $2$ \\ \hline
+$x$ & $-$ & $-$ & $-$ & $0$ & $+$ & $+$ & $+$ \\
+$x-1$ & $-$ & $-$ & $-$ & $-$ & $-$ & $0$ & $+$ \\
+$x+1$ & $-$ & $0$ & $+$ & $+$ & $+$ & $+$ & $+$ \\
+\hline
+$P(x)$ & $-$ & $0$ & $+$ & $0$ & $-$ & $0$ & $+$ \\ \hline
+$P(x)<0$? & $\checkmark$ & $\times$ & $\times$ & $\times$ & $\checkmark$ & $\times$ & $\times$ \\ \hline
+\end{tabular}\end{center}\textbf{Step 2:} Keep the $-$ columns.
+
+\textbf{Answer:} $x<-1\text{ or }0<x<1$, i.e.\ $(-\infty,-1)\cup(0,1)$.
 \end{example}
 
 \clearpage
@@ -145,19 +273,19 @@ Solve $x(x-1)(x-2)(x+1)>0$ using a sign chart.\workspace{3.5cm}
 \begin{multicols}{2}
 \small
 \begin{enumerate}[leftmargin=*,itemsep=3pt]
-  \item $x<-5$ or $x>3$
-  \item $-3<x<4$
-  \item $-6<x<6$
-  \item $-1<x<0$ or $x>4$
-  \item $x\le-1$ or $x\ge5$
-  \item $x<-3$ or $x>3$
-  \item $-1<x<4$
-  \item $x<-2$ or $0<x<2$
-  \item $x>-1,\ x\ne2$
-  \item $2\le x\le3$
-  \item $x<-2$ or $0<x<3$
-  \item $x\le-3$ or $x\ge2$
-  \item $x<-1$ or $0<x<1$ or $x>2$
+  \item Zeros $-5,\,3$; signs $+,-,+$; $x<-5\text{ or }x>3$, i.e.\ $(-\infty,-5)\cup(3,\infty)$
+  \item Zeros $-3,\,4$; signs $+,-,+$; $-3<x<4$, i.e.\ $(-3,4)$
+  \item Zeros $-6,\,6$; signs $+,-,+$; $-6<x<6$, i.e.\ $(-6,6)$
+  \item Zeros $-1,\,0,\,4$; signs $-,+,-,+$; $-1<x<0\text{ or }x>4$, i.e.\ $(-1,0)\cup(4,\infty)$
+  \item Zeros $-1,\,5$; signs $+,-,+$; $x\le-1\text{ or }x\ge5$, i.e.\ $(-\infty,-1]\cup[5,\infty)$
+  \item Zeros $-3,\,3$; signs $+,-,+$; $x<-3\text{ or }x>3$, i.e.\ $(-\infty,-3)\cup(3,\infty)$
+  \item Zeros $-1,\,4$; signs $+,-,+$; $-1<x<4$, i.e.\ $(-1,4)$
+  \item Zeros $-2,\,0,\,2$; signs $-,+,-,+$; $x<-2\text{ or }0<x<2$, i.e.\ $(-\infty,-2)\cup(0,2)$
+  \item Zeros $-1,\,2$; signs $-,+,+$; $x>-1,\ x\ne2$, i.e.\ $(-1,2)\cup(2,\infty)$
+  \item Zeros $2,\,3$; signs $+,-,+$; $2\le x\le 3$, i.e.\ $[2,3]$
+  \item Zeros $-2,\,0,\,3$; signs $-,+,-,+$; $x<-2\text{ or }0<x<3$, i.e.\ $(-\infty,-2)\cup(0,3)$
+  \item Zeros $-3,\,2$; signs $+,-,+$; $x\le-3\text{ or }x\ge2$, i.e.\ $(-\infty,-3]\cup[2,\infty)$
+  \item Zeros $-1,\,0,\,1,\,2$; signs $+,-,+,-,+$; $x<-1\text{ or }0<x<1\text{ or }x>2$, i.e.\ $(-\infty,-1)\cup(0,1)\cup(2,\infty)$
 \end{enumerate}
 \end{multicols}
 \end{keybox}

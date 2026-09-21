@@ -2,6 +2,40 @@
 const r = String.raw;
 const U = "2: Polynomial Equations and Inequalities";
 
+// ── Worksheet 2.4: sign tables are generated (signs + solution set are computed) ──
+import { signChart, lin, linPow } from "../../mhf4u-signtable.mjs";
+const sigsOf = (c) => c.cols.filter((x) => x.kind === "int").map((x) => (x.p > 0 ? "+" : "-")).join(",");
+const zerosOf = (c) => c.zeros.map((z) => z[1]).join(",\\,");
+const ANS = (c) => `Zeros $${zerosOf(c)}$; signs $${sigsOf(c)}$; $${c.ineq}$, i.e.\\ $${c.interval}$`;
+const st = (n, t) => `\\textbf{Step ${n}:} ${t}`;
+const fin = (c) => `\\textbf{Answer:} $${c.ineq}$, i.e.\\ $${c.interval}$.`;
+const W = {
+  e1: signChart({ factors: [lin(2), lin(-4)], ineq: ">" }),
+  e2: signChart({ factors: [lin(2), lin(-4)], ineq: "<" }),
+  e3: signChart({ factors: [lin(-4), lin(3)], ineq: ">" }),
+  e4: signChart({ factors: [lin(0), lin(-4), lin(1)], ineq: ">" }),
+  e5: signChart({ factors: [linPow(3, 2), lin(-2)], ineq: ">", ans: "x>-2,\\ x\\ne3" }),
+  e6: signChart({ factors: [lin(4), lin(-4)], ineq: "<" }),
+  e7: signChart({ factors: [lin(5), lin(-2)], ineq: ">=" }),
+  e8: signChart({ factors: [lin(-3), lin(1), lin(4)], ineq: "<" }),
+  e9: signChart({ factors: [lin(0), lin(1), lin(-1)], ineq: "<" }),
+};
+const WQ = [
+  signChart({ factors: [lin(-5), lin(3)], ineq: ">" }),
+  signChart({ factors: [lin(4), lin(-3)], ineq: "<" }),
+  signChart({ factors: [lin(6), lin(-6)], ineq: "<" }),
+  signChart({ factors: [lin(0), lin(4), lin(-1)], ineq: ">" }),
+  signChart({ factors: [lin(5), lin(-1)], ineq: ">=" }),
+  signChart({ factors: [lin(3), lin(-3)], ineq: ">" }),
+  signChart({ factors: [lin(-1), lin(4)], ineq: "<" }),
+  signChart({ factors: [lin(0), lin(2), lin(-2)], ineq: "<" }),
+  signChart({ factors: [linPow(2, 2), lin(-1)], ineq: ">", ans: "x>-1,\\ x\\ne2" }),
+  signChart({ factors: [lin(2), lin(3)], ineq: "<=" }),
+  signChart({ factors: [lin(0), lin(3), lin(-2)], ineq: "<" }),
+  signChart({ factors: [lin(-3), lin(2)], ineq: ">=" }),
+  signChart({ factors: [lin(0), lin(1), lin(2), lin(-1)], ineq: ">" }),
+];
+
 // Long-division tableau (grid layout, divisor bracket + subtraction rules) as a LaTeX tabular.
 const texRow = (cells) => cells.join(" & ") + r` \\`;
 const ldivTex = (divisor, quot, rows) => {
@@ -138,18 +172,18 @@ export default [
   },
   {
     code: "2.4", unit: U, title: "Polynomial Inequalities",
-    intro: r`Find the zeros, then test a point on each interval. The sign flips at odd multiplicity but not at even multiplicity.`,
-    ideas: [r`Move to one side, factor, find the zeros.`, r`Test a point in each interval for the sign.`, r`Include endpoints for $\ge$ or $\le$.`],
+    intro: r`Find the zeros, then use a \textbf{sign table} to find the sign of the polynomial on every interval. The sign flips at odd multiplicity but not at even multiplicity.`,
+    ideas: [r`Move everything to one side, factor completely, and find the zeros (with their multiplicities).`, r`Build a sign table: a column for each interval and each zero, a row for each factor and one for the product.`, r`Multiply the signs in each column ($-\times-=+$); keep the columns that satisfy the inequality, and include the zeros only for $\ge$ or $\le$.`],
     examples: [
-      { t: "Product positive", body: r`Solve $(x-2)(x+4)>0$.\soln Zeros $2,-4$; positive outside $[-4,2]$. So $x<-4$ or $x>2$. The graph is above the axis there:\eplot{-6}{4}{-10}{12}{\addplot[exblue,very thick,domain=-5.4:3.4]{(x-2)*(x+4)};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(-4,0) (2,0)};}` },
-      { t: "Product negative", body: r`Solve $(x-2)(x+4)<0$.\soln Negative on the middle interval: $-4<x<2$.` },
-      { t: "Factor first", body: r`Solve $x^2+x-12>0$.\soln $(x+4)(x-3)>0$; zeros $-4,3$: $x<-4$ or $x>3$.` },
-      { t: "Three factors", body: r`Solve $x(x+4)(x-1)>0$.\soln Zeros $-4,0,1$; signs $-,+,-,+$. So $-4<x<0$ or $x>1$.` },
-      { t: "Even multiplicity", body: r`Solve $(x-3)^2(x+2)>0$.\soln $(x-3)^2\ge0$; sign from $x+2$ (and $x\ne3$): $x>-2,\ x\ne3$.` },
-      { t: "Difference of squares", body: r`Solve $x^2-16<0$.\soln $(x-4)(x+4)<0\Rightarrow-4<x<4$.` },
-      { t: "With equality", body: r`Solve $x^2-3x-10\ge0$.\soln $(x-5)(x+2)\ge0\Rightarrow x\le-2$ or $x\ge5$.` },
-      { t: "Three factors", body: r`Solve $(x+3)(x-1)(x-4)<0$.\soln Zeros $-3,1,4$; signs $-,+,-,+$. So $x<-3$ or $1<x<4$.` },
-      { t: "Cubic", body: r`Solve $x^3-x<0$.\soln $x(x-1)(x+1)<0$; signs $-,+,-,+$. So $x<-1$ or $0<x<1$.` },
+      { t: "Product positive", body: r`Solve $(x-2)(x+4)>0$.\soln ` + st(1, r`It is already compared with $0$ and factored.`) + "\n\n" + st(2, r`Zeros: $x-2=0\Rightarrow x=2$ and $x+4=0\Rightarrow x=-4$, each of multiplicity $1$, so the sign changes at each. They split the number line into $x<-4$, $-4<x<2$ and $x>2$.`) + "\n\n" + st(3, r`Sign table (one test point in each interval):`) + W.e1.tex() + st(4, r`Keep the $\checkmark$ columns ($P>0$). The zeros give $0$, which is not $>0$, so they are excluded.`) + "\n\n" + fin(W.e1) + r` The graph is above the axis there:` + r`\eplot{-6}{4}{-10}{12}{\addplot[exblue,very thick,domain=-5.4:3.4]{(x-2)*(x+4)};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(-4,0) (2,0)};}` },
+      { t: "Product negative", body: r`Solve $(x-2)(x+4)<0$.\soln ` + st(1, r`Same factors and zeros as Example 1, so the same table. Now we want $P<0$.`) + W.e2.tex() + st(2, r`Keep the $-$ column. The strict inequality excludes the zeros.`) + "\n\n" + fin(W.e2) },
+      { t: "Factor first", body: r`Solve $x^2+x-12>0$.\soln ` + st(1, r`Factor: two numbers with product $-12$ and sum $1$ are $4$ and $-3$, so $(x+4)(x-3)>0$.`) + "\n\n" + st(2, r`Zeros $-4$ and $3$; sign table:`) + W.e3.tex() + st(3, r`Keep the $+$ columns.`) + "\n\n" + fin(W.e3) },
+      { t: "Three factors", body: r`Solve $x(x+4)(x-1)>0$.\soln ` + st(1, r`Zeros $-4,\,0,\,1$, all of multiplicity $1$: four intervals, and the sign of $P$ alternates from one to the next.`) + W.e4.tex() + st(2, r`Keep the $+$ columns. Check: for a positive leading coefficient the right-most interval is $+$.`) + "\n\n" + fin(W.e4) },
+      { t: "Even multiplicity", body: r`Solve $(x-3)^2(x+2)>0$.\soln ` + st(1, r`Zeros: $x=3$ (multiplicity $2$, even) and $x=-2$ (multiplicity $1$). The factor $(x-3)^2$ is never negative, so it does not change the sign of $P$ at $x=3$.`) + W.e5.tex() + st(2, r`$P$ is positive on both sides of $x=3$, but $P(3)=0$ is not $>0$, so $x=3$ is left out.`) + "\n\n" + fin(W.e5) },
+      { t: "Difference of squares", body: r`Solve $x^2-16<0$.\soln ` + st(1, r`Factor: $x^2-16=(x-4)(x+4)$, so the zeros are $4$ and $-4$.`) + W.e6.tex() + st(2, r`Keep the $-$ column (strict, so the zeros are excluded).`) + "\n\n" + fin(W.e6) },
+      { t: "With equality", body: r`Solve $x^2-3x-10\ge0$.\soln ` + st(1, r`Factor: two numbers with product $-10$ and sum $-3$ are $-5$ and $2$, so $(x-5)(x+2)\ge0$.`) + W.e7.tex() + st(2, r`The inequality is $\ge$, so the zero columns \emph{are} included along with the $+$ intervals.`) + "\n\n" + fin(W.e7) },
+      { t: "Three factors", body: r`Solve $(x+3)(x-1)(x-4)<0$.\soln ` + st(1, r`Zeros $-3,\,1,\,4$, each of multiplicity $1$.`) + W.e8.tex() + st(2, r`Keep the $-$ columns.`) + "\n\n" + fin(W.e8) },
+      { t: "Cubic", body: r`Solve $x^3-x<0$.\soln ` + st(1, r`Factor: take out $x$, then a difference of squares: $x^3-x=x(x-1)(x+1)$. Zeros $-1,\,0,\,1$.`) + W.e9.tex() + st(2, r`Keep the $-$ columns.`) + "\n\n" + fin(W.e9) },
     ],
     questions: [
       { ask: r`Solve $(x+5)(x-3)>0$.` },
@@ -166,6 +200,6 @@ export default [
       { ask: r`Solve $x^2+x-6\ge0$.` },
       { ask: r`Solve $x(x-1)(x-2)(x+1)>0$ using a sign chart.`, challenge: true, ws: "3.5cm" },
     ],
-    answers: [r`$x<-5$ or $x>3$`, r`$-3<x<4$`, r`$-6<x<6$`, r`$-1<x<0$ or $x>4$`, r`$x\le-1$ or $x\ge5$`, r`$x<-3$ or $x>3$`, r`$-1<x<4$`, r`$x<-2$ or $0<x<2$`, r`$x>-1,\ x\ne2$`, r`$2\le x\le3$`, r`$x<-2$ or $0<x<3$`, r`$x\le-3$ or $x\ge2$`, r`$x<-1$ or $0<x<1$ or $x>2$`],
+    answers: WQ.map(ANS),
   },
 ];

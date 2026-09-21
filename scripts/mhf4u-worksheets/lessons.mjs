@@ -2,6 +2,10 @@
 // build.mjs renders LEARN[code] as a green learnbox before the Worked Examples.
 // LaTeX content; each entry is an array of [heading, bodyLaTeX] blocks.
 
+import { signChart, lin } from "../mhf4u-signtable.mjs";
+
+const DEMO = signChart({ factors: [lin(1), lin(-2)], ineq: ">" });
+
 export const LEARN = {
   // ── Unit 1: Polynomial Functions ───────────────────────────
   "1.1": [
@@ -41,9 +45,10 @@ export const LEARN = {
     ["Repeated roots", "A repeated factor produces a repeated root, seen on the graph as a touch or a flattening at the axis."],
   ],
   "2.4": [
-    ["Beyond equations", "A polynomial \\textbf{inequality} asks where the graph lies above or below the axis, not just where it crosses."],
-    ["Use the zeros", "The zeros split the number line into intervals; the polynomial keeps one sign on each, so test a single point in each interval."],
-    ["Reading the sign", "A sign chart across the intervals gives the full solution — remember an even-multiplicity zero does not change the sign."],
+    ["Beyond equations", "A polynomial \\textbf{inequality} asks where the graph lies above or below the axis, not just where it crosses. Always move everything to one side first so the other side is $0$; never divide by a factor that contains $x$."],
+    ["Use the zeros", "Factor completely and set each factor to zero. The zeros split the number line into intervals; the polynomial keeps one sign on each, so one test point per interval is enough."],
+    ["Build a sign table", "Make a column for every interval \\emph{and} every zero, a row for every factor, and a row for the product. Fill in the sign of each factor, then multiply the signs down each column: an even number of negatives gives $+$, an odd number gives $-$. The table below solves $(x-1)(x+2)>0$; the $\\checkmark$ columns satisfy it.\\par" + DEMO.tex()],
+    ["Reading the sign", "Keep the columns that satisfy the inequality. Include the zero columns only for $\\ge$ or $\\le$. An odd-multiplicity zero changes the sign; an even-multiplicity zero does not (the graph touches the axis and turns back). For a positive leading coefficient, the right-most interval is always $+$."],
   ],
   // ── Unit 3: Rational Functions ─────────────────────────────
   "3.1": [

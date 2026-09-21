@@ -1,5 +1,6 @@
 // MHF4U Unit 2 — Polynomial Equations & Inequalities. Deep single-card lessons.
 import { html, gframe, graph } from "./seed-mpm2d.mjs";
+import { signChart, lin, linPow } from "./mhf4u-signtable.mjs";
 const L = (code, title, blocks) => ({ code, title, blocks });
 const EX = `style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"`;
 const PR = `style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"`;
@@ -155,34 +156,69 @@ u2["2.3"] = L("2.3", "Solving Polynomial Equations", [
 </div>`),
 ]);
 
+// ── Lesson 2.4 sign tables (signs and answers are computed by mhf4u-signtable.mjs) ──
+const S = {
+  demo: signChart({ factors: [lin(1), lin(-2)], ineq: ">" }),
+  e1: signChart({ factors: [lin(1), lin(-2)], ineq: ">" }),
+  e2: signChart({ factors: [lin(-3), lin(1)], ineq: ">=" }),
+  e3: signChart({ factors: [lin(3), lin(-2)], ineq: ">" }),
+  e4: signChart({ factors: [lin(0), lin(2), lin(-1)], ineq: "<" }),
+  e5: signChart({ factors: [linPow(1, 2), lin(-3)], ineq: ">", ans: "x>-3,\\ x\\ne1" }),
+  e6: signChart({ factors: [lin(-2), linPow(1, 2), lin(3)], ineq: "<=" }),
+  q1: signChart({ factors: [lin(3), lin(-1)], ineq: ">" }),
+  q2: signChart({ factors: [lin(3), lin(-1)], ineq: "<" }),
+  q3: signChart({ factors: [lin(2), lin(-2)], ineq: "<" }),
+  q4: signChart({ factors: [lin(0), lin(1), lin(-2)], ineq: ">" }),
+  q5: signChart({ factors: [lin(3), lin(-1)], ineq: ">=" }),
+};
+const T = (c) => `\\(${c.testList}\\)`;
+const concl = (c) => `<em>Conclusion: \\(${c.ineq}\\), in interval notation \\(${c.interval}\\). ✓</em>`;
+
 u2["2.4"] = L("2.4", "Polynomial Inequalities", [
   html(String.raw`<div class="lecture-box">
   <h1>⚖️ Polynomial Inequalities</h1>
-  <p><strong>Overview.</strong> To solve \(P(x)>0\) or \(P(x)<0\), first find the zeros — they split the number line into intervals. On each interval \(P\) keeps a constant sign, so a single <strong>test point</strong> reveals it. A <strong>sign chart</strong> organizes the work. Remember: the sign flips at a zero of odd multiplicity but <em>not</em> at one of even multiplicity.</p>
-  <h2>📌 The method</h2>
+  <p><strong>Overview.</strong> To solve \(P(x)>0\) or \(P(x)<0\), first find the zeros — they split the number line into intervals. On each interval \(P\) keeps a constant sign, so one <strong>test point</strong> reveals it. A <strong>sign table</strong> (interval table) organizes the work: it shows the sign of every factor on every interval, and the sign of the product \(P(x)\) follows from them. Remember: the sign flips at a zero of odd multiplicity but <em>not</em> at one of even multiplicity.</p>
+  <h2>📌 The method: six steps</h2>
+  <ol>
+    <li><strong>Compare with zero.</strong> Move every term to one side so the other side is \(0\). Never divide or cancel a factor that contains \(x\) — you would lose solutions and can flip the inequality by mistake.</li>
+    <li><strong>Factor completely</strong> (common factor, trinomial, grouping, or the factor theorem).</li>
+    <li><strong>Find the zeros:</strong> set each factor equal to \(0\) and note its multiplicity (the exponent of the factor).</li>
+    <li><strong>Build the sign table:</strong> one column for each interval <em>and</em> one for each zero; one row for each factor and one for the product.</li>
+    <li><strong>Fill it in:</strong> pick a test point in each interval, find the sign of each factor there, then multiply the signs. An <em>even</em> number of negative factors gives \(+\); an <em>odd</em> number gives \(-\). At a zero the product is \(0\).</li>
+    <li><strong>Read the answer:</strong> keep the columns that satisfy the inequality. Include the zero columns for \(\ge\) or \(\le\) only. Write the answer as inequalities and in interval notation.</li>
+  </ol>
+  <h2>🧮 How to read a sign table</h2>
+  <p>Here is the table for \((x-1)(x+2)>0\). The first row lists the intervals and the zeros, the second row gives a test point, each factor gets a row, and the last rows give the product and whether it satisfies the inequality.</p>
+  ${S.demo.html()}
   <ul>
-    <li>Move everything to one side; <strong>factor</strong> to find the zeros.</li>
-    <li>Mark the zeros on a number line and <strong>test a point</strong> in each interval.</li>
-    <li>Pick the intervals matching the inequality; include endpoints for \(\ge\) or \(\le\).</li>
+    <li><strong>Factor rows:</strong> the sign of \(x-1\) is \(-\) to the left of \(1\) and \(+\) to the right; \(x+2\) changes sign at \(-2\).</li>
+    <li><strong>Product row:</strong> multiply the signs down each column. \((-)(-)=+\), \((-)(+)=-\), \((+)(+)=+\).</li>
+    <li><strong>Highlighted columns</strong> (✓) satisfy \(P(x)>0\). The zero columns show \(0\), which is not \(>0\), so the endpoints are excluded.</li>
   </ul>
+  <div style="background:#eef2ff;border-left:4px solid #6366f1;padding:8px 12px;border-radius:6px;margin:8px 0;">
+    <strong>Multiplicity rule.</strong> A factor \((x-r)^m\) with \(m\) <em>odd</em> changes sign at \(r\); with \(m\) <em>even</em> it stays \(\ge0\) and touches zero without changing sign. <strong>Quick check:</strong> if the leading coefficient of \(P\) is positive, the right-most interval is always \(+\).
+  </div>
   ${gframe(["y = (x-1)*(x+2)"], { title: "(x−1)(x+2): positive outside [−2, 1], negative inside" })}
   <h2>🔵 Examples</h2>
-  <div class="example-box" ${EX}><h3>Example 1: Product positive</h3><p>Solve \((x-1)(x+2)>0\).</p><div class="solution"><div class="step"><strong>Step 1:</strong> Zeros \(1,-2\). Test \(x=-3\) (+), \(x=0\) (−), \(x=2\) (+).</div><em>Conclusion: \(x<-2\) or \(x>1\). ✓</em></div></div>
-  <div class="example-box" ${EX}><h3>Example 2: Rearrange to one side first</h3><p>Solve \(x^2+2x\ge3\).</p><div class="solution"><div class="step"><strong>Step 1:</strong> Move everything to one side: \(x^2+2x-3\ge0\).</div><div class="step"><strong>Step 2:</strong> Factor \((x+3)(x-1)\ge0\); zeros \(-3,1\). Test points give \(+,-,+\), and \(\ge\) includes the zeros.</div><em>Conclusion: \(x\le-3\) or \(x\ge1\). ✓</em></div>${gframe(["y = x^2 + 2*x - 3"], { title: "x²+2x−3≥0 holds where the parabola sits on or above the axis: x≤−3 or x≥1" })}</div>
-  <div class="example-box" ${EX}><h3>Example 3: Factor first</h3><p>Solve \(x^2-x-6>0\).</p><div class="solution"><div class="step"><strong>Step 1:</strong> \((x-3)(x+2)>0\); zeros \(3,-2\).</div><em>Conclusion: \(x<-2\) or \(x>3\). ✓</em></div>${gframe(["y = x^2 - x - 6"], { title: "x²−x−6>0 holds where the parabola is above the axis: x<−2 or x>3" })}</div>
-  <div class="example-box" ${EX}><h3>Example 4: Three factors</h3><p>Solve \(x(x-2)(x+1)<0\).</p><div class="solution"><div class="step"><strong>Step 1:</strong> Zeros \(-1,0,2\). Signs by interval: \((-\infty,-1)\) −, \((-1,0)\) +, \((0,2)\) −, \((2,\infty)\) +.</div><em>Conclusion: \(x<-1\) or \(0<x<2\). ✓</em></div>${gframe(["y = x*(x-2)*(x+1)"], { title: "x(x−2)(x+1)<0 holds where the cubic dips below the axis: x<−1 or 0<x<2" })}</div>
-  <div class="example-box" ${EX}><h3>Example 5: Even multiplicity</h3><p>Solve \((x-1)^2(x+3)>0\).</p><div class="solution"><div class="step"><strong>Step 1:</strong> \((x-1)^2\ge0\) always; the sign comes from \(x+3\) (and \(x\ne1\)).</div><em>Conclusion: \(x>-3,\ x\ne1\). ✓</em></div>${gframe(["y = (x-1)^2*(x+3)"], { title: "(x−1)²(x+3)>0: above the axis for x>−3, but it only touches (doesn't cross) at x=1" })}</div>
+  <div class="example-box" ${EX}><h3>Example 1: Product positive</h3><p>Solve \((x-1)(x+2)>0\).</p><div class="solution"><div class="step"><strong>Step 1:</strong> The inequality is already compared with \(0\) and factored: \((x-1)(x+2)>0\).</div><div class="step"><strong>Step 2:</strong> Zeros: \(x-1=0\Rightarrow x=1\) and \(x+2=0\Rightarrow x=-2\). Both have multiplicity 1, so the sign changes at each. They split the number line into \(x<-2\), \(-2<x<1\) and \(x>1\).</div><div class="step"><strong>Step 3:</strong> Build the sign table with test points ${T(S.e1)}.</div>${S.e1.html()}<div class="step"><strong>Step 4:</strong> We want \(P(x)>0\), so we keep the two ✓ columns. The zeros give \(0\), which is not \(>0\), so \(-2\) and \(1\) are excluded. Check: at \(x=-3\), \((-4)(-1)=4>0\) ✓.</div>${concl(S.e1)}</div></div>
+  <div class="example-box" ${EX}><h3>Example 2: Rearrange to one side first</h3><p>Solve \(x^2+2x\ge3\).</p><div class="solution"><div class="step"><strong>Step 1:</strong> Move everything to one side so the other side is \(0\): \(x^2+2x-3\ge0\). (Do not divide by \(x\).)</div><div class="step"><strong>Step 2:</strong> Factor: find two numbers with product \(-3\) and sum \(2\), namely \(3\) and \(-1\). So \((x+3)(x-1)\ge0\), with zeros \(-3\) and \(1\).</div><div class="step"><strong>Step 3:</strong> Sign table with test points ${T(S.e2)}.</div>${S.e2.html()}<div class="step"><strong>Step 4:</strong> The inequality is \(\ge\), so the zero columns (where \(P=0\)) <em>are</em> included along with the ✓ intervals. Check: \(x=-3\): \(9-6=3\ge3\) ✓.</div>${concl(S.e2)}${gframe(["y = x^2 + 2*x - 3"], { title: "x²+2x−3≥0 holds where the parabola sits on or above the axis: x≤−3 or x≥1" })}</div></div>
+  <div class="example-box" ${EX}><h3>Example 3: Factor first</h3><p>Solve \(x^2-x-6>0\).</p><div class="solution"><div class="step"><strong>Step 1:</strong> Factor: two numbers with product \(-6\) and sum \(-1\) are \(-3\) and \(2\). So \((x-3)(x+2)>0\).</div><div class="step"><strong>Step 2:</strong> Zeros \(x=3\) and \(x=-2\). Test points ${T(S.e3)}.</div>${S.e3.html()}<div class="step"><strong>Step 3:</strong> Keep the intervals where the product is positive. The inequality is strict, so \(-2\) and \(3\) are excluded.</div>${concl(S.e3)}${gframe(["y = x^2 - x - 6"], { title: "x²−x−6>0 holds where the parabola is above the axis: x<−2 or x>3" })}</div></div>
+  <div class="example-box" ${EX}><h3>Example 4: Three factors</h3><p>Solve \(x(x-2)(x+1)<0\).</p><div class="solution"><div class="step"><strong>Step 1:</strong> Zeros: \(x=0\), \(x=2\), \(x=-1\), all of multiplicity 1. Three zeros make four intervals, and the sign of the product <em>alternates</em> from one interval to the next.</div><div class="step"><strong>Step 2:</strong> Sign table with test points ${T(S.e4)}.</div>${S.e4.html()}<div class="step"><strong>Step 3:</strong> We want \(P(x)<0\), so we keep the \(-\) columns. Check the right-most interval: the leading coefficient is \(+1\), so it is \(+\) ✓.</div>${concl(S.e4)}${gframe(["y = x*(x-2)*(x+1)"], { title: "x(x−2)(x+1)<0 holds where the cubic dips below the axis: x<−1 or 0<x<2" })}</div></div>
+  <div class="example-box" ${EX}><h3>Example 5: Even multiplicity</h3><p>Solve \((x-1)^2(x+3)>0\).</p><div class="solution"><div class="step"><strong>Step 1:</strong> Zeros: \(x=1\) with multiplicity 2 (even) and \(x=-3\) with multiplicity 1 (odd). The factor \((x-1)^2\) is never negative, so it does <em>not</em> change the sign of the product at \(x=1\).</div><div class="step"><strong>Step 2:</strong> Sign table with test points ${T(S.e5)}.</div>${S.e5.html()}<div class="step"><strong>Step 3:</strong> The product is positive on both \(-3<x<1\) and \(x>1\), but \(P(1)=0\), which is not \(>0\). So \(x=1\) is a hole in the solution set.</div>${concl(S.e5)}${gframe(["y = (x-1)^2*(x+3)"], { title: "(x−1)²(x+3)>0: above the axis for x>−3, but it only touches (doesn't cross) at x=1" })}</div></div>
+  <div class="example-box" ${EX}><h3>Example 6: Mixed multiplicities with ≤</h3><p>Solve \((x+2)(x-1)^2(x-3)\le0\).</p><div class="solution"><div class="step"><strong>Step 1:</strong> Zeros: \(-2\) (multiplicity 1), \(1\) (multiplicity 2), \(3\) (multiplicity 1). The sign changes at \(-2\) and \(3\) but <em>not</em> at \(1\).</div><div class="step"><strong>Step 2:</strong> Sign table with test points ${T(S.e6)}.</div>${S.e6.html()}<div class="step"><strong>Step 3:</strong> The inequality is \(\le\), so we keep the \(-\) columns <em>and</em> every zero column. The zero at \(x=1\) sits between two \(-\) intervals, so it joins them into one solution set.</div>${concl(S.e6)}<div class="step"><strong>Compare:</strong> for the strict inequality \((x+2)(x-1)^2(x-3)<0\), the zeros are excluded, so the answer would be \(-2<x<3,\ x\ne1\).</div>${gframe(["y = (x+2)*(x-1)^2*(x-3)"], { title: "(x+2)(x−1)²(x−3)≤0: on or below the axis for −2≤x≤3 (it touches the axis at x=1)" })}</div></div>
   <h2>🟡 Practice Questions</h2>
-  <div class="practice-box" ${PR}><h3>Question 1</h3><p>Solve \((x-3)(x+1)>0\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(x<-1\) or \(x>3\).</em></div></div></details></div>
-  <div class="practice-box" ${PR}><h3>Question 2</h3><p>Solve \((x-3)(x+1)<0\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(-1<x<3\).</em></div></div></details></div>
-  <div class="practice-box" ${PR}><h3>Question 3</h3><p>Solve \(x^2-4<0\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(-2<x<2\).</em></div></div></details></div>
-  <div class="practice-box" ${PR}><h3>Question 4</h3><p>Solve \(x(x-1)(x+2)>0\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(-2<x<0\) or \(x>1\).</em></div></div></details></div>
-  <div class="practice-box" ${PR}><h3>Question 5</h3><p>Solve \(x^2-2x-3\ge0\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(x\le-1\) or \(x\ge3\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 1</h3><p>Solve \((x-3)(x+1)>0\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><strong>Step 1:</strong> Zeros \(x=3\) and \(x=-1\), each of multiplicity 1. Test points ${T(S.q1)}.</div>${S.q1.html()}<div class="step"><strong>Step 2:</strong> Keep the \(+\) columns; the zeros are excluded because the inequality is strict.</div>${concl(S.q1)}</div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 2</h3><p>Solve \((x-3)(x+1)<0\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><strong>Step 1:</strong> Same factors and zeros as Question 1, so the same table — now we keep the \(-\) column.</div>${S.q2.html()}<div class="step"><strong>Step 2:</strong> Only the middle interval is negative, and the strict inequality excludes \(-1\) and \(3\).</div>${concl(S.q2)}</div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 3</h3><p>Solve \(x^2-4<0\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><strong>Step 1:</strong> Factor the difference of squares: \(x^2-4=(x-2)(x+2)\), with zeros \(2\) and \(-2\). Test points ${T(S.q3)}.</div>${S.q3.html()}<div class="step"><strong>Step 2:</strong> Keep the \(-\) column. Check: \(x=0\) gives \(-4<0\) ✓.</div>${concl(S.q3)}</div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 4</h3><p>Solve \(x(x-1)(x+2)>0\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><strong>Step 1:</strong> Zeros \(0,1,-2\), all of multiplicity 1, so the signs alternate. Test points ${T(S.q4)}.</div>${S.q4.html()}<div class="step"><strong>Step 2:</strong> Keep the \(+\) columns.</div>${concl(S.q4)}</div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 5</h3><p>Solve \(x^2-2x-3\ge0\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><strong>Step 1:</strong> Factor: \(x^2-2x-3=(x-3)(x+1)\), with zeros \(3\) and \(-1\). Test points ${T(S.q5)}.</div>${S.q5.html()}<div class="step"><strong>Step 2:</strong> The inequality is \(\ge\), so include the zero columns as well as the \(+\) intervals.</div>${concl(S.q5)}</div></details></div>
   <h2>❓ Q&amp;A Summary</h2>
-  <div class="qa-box" ${QA}><h3>Q1: What do the zeros do?</h3><p><em>Split the number line into intervals of constant sign.</em></p></div>
-  <div class="qa-box" ${QA}><h3>Q2: How do you find the sign on each interval?</h3><p><em>Substitute a single test point.</em></p></div>
-  <div class="qa-box" ${QA}><h3>Q3: Does the sign always change at a zero?</h3><p><em>Only at odd multiplicity; even multiplicity keeps the same sign.</em></p></div>
-  <div class="qa-box" ${QA}><h3>Q4: When are endpoints included?</h3><p><em>For \(\ge\) or \(\le\) (not for strict \(>\) or \(<\)).</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q1: What do the zeros do?</h3><p><em>They split the number line into intervals of constant sign — one column of the sign table for each interval, plus one for each zero.</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q2: How do you find the sign on each interval?</h3><p><em>Substitute one test point, find the sign of each factor, and multiply the signs (an even number of negatives gives \(+\)).</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q3: Does the sign always change at a zero?</h3><p><em>Only at odd multiplicity; even multiplicity keeps the same sign on both sides.</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q4: When are endpoints included?</h3><p><em>For \(\ge\) or \(\le\) (the zero columns satisfy the inequality), not for strict \(>\) or \(<\).</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q5: Why move everything to one side instead of dividing?</h3><p><em>The sign table needs \(P(x)\) compared with \(0\). Dividing by a factor that contains \(x\) can lose solutions, and it flips the inequality when the factor is negative.</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q6: How can you check an answer?</h3><p><em>Test one number inside the solution and one outside in the original inequality, and compare with the graph: \(P>0\) where the curve is above the x-axis.</em></p></div>
 </div>`),
   graph("x^3 - a*x", "a", { xMin: -3, xMax: 3, yMin: -6, yMax: 6, paramMin: 0, paramMax: 5, paramInit: 4, caption: "Animation: y = x³ − a·x. As a grows the two outer roots spread out — watch where the curve is above (P>0) vs below (P<0) the axis." }),
 ]);
