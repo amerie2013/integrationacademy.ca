@@ -25,12 +25,12 @@ $\sin(A\pm B)=\sin A\cos B\pm\cos A\sin B$ and $\cos(A\pm B)=\cos A\cos B\mp\sin
 
 \sech{Worked Examples}
 
-\begin{example}{ex0}{Example 1 --- Sine of a sum}
-Find $\sin 75^\circ=\sin(45^\circ+30^\circ)$.\soln $\sin45\cos30+\cos45\sin30=\tfrac{\sqrt6}{4}+\tfrac{\sqrt2}{4}=\dfrac{\sqrt6+\sqrt2}{4}$. Recall cos is sin shifted by $\tfrac{\pi}{2}$:\begin{center}\begin{tikzpicture}\begin{axis}[width=9.2cm,height=4.6cm,axis lines=middle,xlabel={\small$x$},ylabel={\small$y$},xmin=-0.4,xmax=6.9,ymin=-1.6,ymax=1.6,samples=220,xtick={1.5708,3.1416,4.7124,6.2832},xticklabels={$\frac{\pi}{2}$,$\pi$,$\frac{3\pi}{2}$,$2\pi$}]\addplot[exblue,very thick,domain=0:6.4]{sin(deg(x))};\addplot[qorange,very thick,domain=0:6.4]{cos(deg(x))};\end{axis}\end{tikzpicture}\end{center}
+\begin{example}{ex0}{Example 1 --- Cosine of a sum}
+Find $\cos 345^\circ=\cos(300^\circ+45^\circ)$.\soln $\cos300\cos45-\sin300\sin45=\tfrac12\cdot\tfrac{\sqrt2}{2}+\tfrac{\sqrt3}{2}\cdot\tfrac{\sqrt2}{2}=\dfrac{\sqrt2+\sqrt6}{4}$. Recall cos is sin shifted by $\tfrac{\pi}{2}$:\begin{center}\begin{tikzpicture}\begin{axis}[width=9.2cm,height=4.6cm,axis lines=middle,xlabel={\small$x$},ylabel={\small$y$},xmin=-0.4,xmax=6.9,ymin=-1.6,ymax=1.6,samples=220,xtick={1.5708,3.1416,4.7124,6.2832},xticklabels={$\frac{\pi}{2}$,$\pi$,$\frac{3\pi}{2}$,$2\pi$}]\addplot[exblue,very thick,domain=0:6.4]{sin(deg(x))};\addplot[qorange,very thick,domain=0:6.4]{cos(deg(x))};\end{axis}\end{tikzpicture}\end{center}
 \end{example}
 
-\begin{example}{ex1}{Example 2 --- Cosine of a sum}
-Find $\cos 75^\circ$.\soln $\cos45\cos30-\sin45\sin30=\dfrac{\sqrt6-\sqrt2}{4}$.
+\begin{example}{ex1}{Example 2 --- Sine of a sum}
+Find $\sin 285^\circ=\sin(240^\circ+45^\circ)$.\soln $\sin240\cos45+\cos240\sin45=-\tfrac{\sqrt3}{2}\cdot\tfrac{\sqrt2}{2}-\tfrac12\cdot\tfrac{\sqrt2}{2}=-\dfrac{\sqrt6+\sqrt2}{4}$.
 \end{example}
 
 \begin{example}{ex2}{Example 3 --- Difference}
@@ -42,11 +42,11 @@ Simplify $\cos x\cos y+\sin x\sin y$.\soln This is $\cos(x-y)$.
 \end{example}
 
 \begin{example}{ex4}{Example 5 --- Use given values}
-$\sin A=\tfrac35,\cos A=\tfrac45,\sin B=\tfrac5{13},\cos B=\tfrac{12}{13}$. Find $\sin(A+B)$.\soln $\tfrac35\cdot\tfrac{12}{13}+\tfrac45\cdot\tfrac5{13}=\tfrac{36+20}{65}=\dfrac{56}{65}$.
+$\sin A=\tfrac8{17},\cos A=\tfrac{15}{17},\sin B=\tfrac45,\cos B=\tfrac35$. Find $\sin(A+B)$.\soln $\tfrac8{17}\cdot\tfrac35+\tfrac{15}{17}\cdot\tfrac45=\tfrac{24+60}{85}=\dfrac{84}{85}$.
 \end{example}
 
-\begin{example}{ex5}{Example 6 --- Cosine difference}
-Find $\cos 15^\circ$.\soln $\cos45\cos30+\sin45\sin30=\dfrac{\sqrt6+\sqrt2}{4}$.
+\begin{example}{ex5}{Example 6 --- Tangent difference}
+Find $\tan 15^\circ=\tan(45^\circ-30^\circ)$.\soln $\dfrac{\tan45-\tan30}{1+\tan45\tan30}=\dfrac{1-1/\sqrt3}{1+1/\sqrt3}=\dfrac{\sqrt3-1}{\sqrt3+1}=2-\sqrt3$.
 \end{example}
 
 \begin{example}{ex6}{Example 7 --- Recognize}
@@ -58,7 +58,7 @@ Simplify $\cos x\cos y-\sin x\sin y$.\soln $\cos(x+y)$.
 \end{example}
 
 \begin{example}{ex8}{Example 9 --- Use given values}
-With the Example-5 values, find $\cos(A+B)$.\soln $\tfrac45\cdot\tfrac{12}{13}-\tfrac35\cdot\tfrac5{13}=\dfrac{33}{65}$.
+With the Example-5 values, find $\cos(A+B)$.\soln $\tfrac{15}{17}\cdot\tfrac35-\tfrac8{17}\cdot\tfrac45=\tfrac{45-32}{85}=\dfrac{13}{85}$.
 \end{example}
 
 \clearpage
@@ -66,23 +66,23 @@ With the Example-5 values, find $\cos(A+B)$.\soln $\tfrac45\cdot\tfrac{12}{13}-\
 For each question, show all steps clearly in the space provided.
 
 \begin{qbox}{Question 1}
-Find $\cos 15^\circ$.\workspace{2.4cm}
+Find $\sin 345^\circ$.\workspace{2.4cm}
 \end{qbox}
 
 \begin{qbox}{Question 2}
-Simplify $\sin x\cos y+\cos x\sin y$.\workspace{2.4cm}
+Simplify $\sin 3x\cos x+\cos 3x\sin x$.\workspace{2.4cm}
 \end{qbox}
 
 \begin{qbox}{Question 3}
-Simplify $\cos x\cos y-\sin x\sin y$.\workspace{2.4cm}
+Simplify $\cos 5x\cos 2x-\sin 5x\sin 2x$.\workspace{2.4cm}
 \end{qbox}
 
 \begin{qbox}{Question 4}
-Find $\sin 105^\circ=\sin(60^\circ+45^\circ)$.\workspace{2.4cm}
+Find $\cos 285^\circ=\cos(240^\circ+45^\circ)$.\workspace{2.4cm}
 \end{qbox}
 
 \begin{qbox}{Question 5}
-With Example-5 values, find $\cos(A+B)$.\workspace{2.4cm}
+With Example-5 values, find $\sin(A-B)$.\workspace{2.4cm}
 \end{qbox}
 
 \begin{qbox}{Question 6}
@@ -90,7 +90,7 @@ Find $\cos 105^\circ=\cos(60^\circ+45^\circ)$.\workspace{2.4cm}
 \end{qbox}
 
 \begin{qbox}{Question 7}
-Simplify $\cos x\cos y+\sin x\sin y$.\workspace{2.4cm}
+Simplify $\cos40^\circ\cos10^\circ+\sin40^\circ\sin10^\circ$.\workspace{2.4cm}
 \end{qbox}
 
 \begin{qbox}{Question 8}
@@ -98,7 +98,7 @@ State the formula for $\sin(A-B)$.\workspace{2.4cm}
 \end{qbox}
 
 \begin{qbox}{Question 9}
-Find $\sin 75^\circ$.\workspace{2.4cm}
+Find $\tan 75^\circ=\tan(45^\circ+30^\circ)$.\workspace{2.4cm}
 \end{qbox}
 
 \begin{qbox}{Question 10}
@@ -106,15 +106,15 @@ State the formula for $\cos(A+B)$.\workspace{2.4cm}
 \end{qbox}
 
 \begin{qbox}{Question 11}
-Simplify $\sin x\cos y-\cos x\sin y$.\workspace{2.4cm}
+Simplify $\sin80^\circ\cos20^\circ-\cos80^\circ\sin20^\circ$.\workspace{2.4cm}
 \end{qbox}
 
 \begin{qbox}{Question 12}
-Find $\tan(A+B)$ given $\tan A=1,\tan B=\tfrac1{\sqrt3}$ (formula form).\workspace{2.4cm}
+Find $\tan(A-B)$ given $\tan A=3,\tan B=2$.\workspace{2.4cm}
 \end{qbox}
 
 \begin{qbox}{Question 13 --- Challenge}
-Use $\sin A=\tfrac35,\cos A=\tfrac45,\sin B=\tfrac5{13},\cos B=\tfrac{12}{13}$ to find $\sin(A-B)$.\workspace{3cm}
+Use $\sin A=\tfrac7{25},\cos A=\tfrac{24}{25},\sin B=\tfrac{12}{13},\cos B=\tfrac5{13}$ to find $\sin(A-B)$.\workspace{3cm}
 \end{qbox}
 
 \clearpage
@@ -124,19 +124,19 @@ Use $\sin A=\tfrac35,\cos A=\tfrac45,\sin B=\tfrac5{13},\cos B=\tfrac{12}{13}$ t
 \begin{multicols}{2}
 \small
 \begin{enumerate}[leftmargin=*,itemsep=3pt]
-  \item Find $\cos 15^\circ$.
-  \item Simplify $\sin x\cos y+\cos x\sin y$.
-  \item Simplify $\cos x\cos y-\sin x\sin y$.
-  \item Find $\sin 105^\circ=\sin(60^\circ+45^\circ)$.
-  \item With Example-5 values, find $\cos(A+B)$.
+  \item Find $\sin 345^\circ$.
+  \item Simplify $\sin 3x\cos x+\cos 3x\sin x$.
+  \item Simplify $\cos 5x\cos 2x-\sin 5x\sin 2x$.
+  \item Find $\cos 285^\circ=\cos(240^\circ+45^\circ)$.
+  \item With Example-5 values, find $\sin(A-B)$.
   \item Find $\cos 105^\circ=\cos(60^\circ+45^\circ)$.
-  \item Simplify $\cos x\cos y+\sin x\sin y$.
+  \item Simplify $\cos40^\circ\cos10^\circ+\sin40^\circ\sin10^\circ$.
   \item State the formula for $\sin(A-B)$.
-  \item Find $\sin 75^\circ$.
+  \item Find $\tan 75^\circ=\tan(45^\circ+30^\circ)$.
   \item State the formula for $\cos(A+B)$.
-  \item Simplify $\sin x\cos y-\cos x\sin y$.
-  \item Find $\tan(A+B)$ given $\tan A=1,\tan B=\tfrac1{\sqrt3}$ (formula form).
-  \item Use $\sin A=\tfrac35,\cos A=\tfrac45,\sin B=\tfrac5{13},\cos B=\tfrac{12}{13}$ to find $\sin(A-B)$.
+  \item Simplify $\sin80^\circ\cos20^\circ-\cos80^\circ\sin20^\circ$.
+  \item Find $\tan(A-B)$ given $\tan A=3,\tan B=2$.
+  \item Use $\sin A=\tfrac7{25},\cos A=\tfrac{24}{25},\sin B=\tfrac{12}{13},\cos B=\tfrac5{13}$ to find $\sin(A-B)$.
 \end{enumerate}
 \end{multicols}
 \end{recapbox}
@@ -145,19 +145,19 @@ Use $\sin A=\tfrac35,\cos A=\tfrac45,\sin B=\tfrac5{13},\cos B=\tfrac{12}{13}$ t
 \begin{multicols}{2}
 \small
 \begin{enumerate}[leftmargin=*,itemsep=3pt]
-  \item $\tfrac{\sqrt6+\sqrt2}{4}$
-  \item $\sin(x+y)$
-  \item $\cos(x+y)$
-  \item $\tfrac{\sqrt6+\sqrt2}{4}$
-  \item $\tfrac{33}{65}$
   \item $\tfrac{\sqrt2-\sqrt6}{4}$
-  \item $\cos(x-y)$
+  \item $\sin4x$
+  \item $\cos7x$
+  \item $\tfrac{\sqrt6-\sqrt2}{4}$
+  \item $-\tfrac{36}{85}$
+  \item $\tfrac{\sqrt2-\sqrt6}{4}$
+  \item $\cos30^\circ=\tfrac{\sqrt3}{2}$
   \item $\sin A\cos B-\cos A\sin B$
-  \item $\tfrac{\sqrt6+\sqrt2}{4}$
+  \item $2+\sqrt3$
   \item $\cos A\cos B-\sin A\sin B$
-  \item $\sin(x-y)$
-  \item $\tfrac{1+1/\sqrt3}{1-1/\sqrt3}$
-  \item $\tfrac35\cdot\tfrac{12}{13}-\tfrac45\cdot\tfrac5{13}=\tfrac{16}{65}$
+  \item $\sin60^\circ=\tfrac{\sqrt3}{2}$
+  \item $\tfrac{3-2}{1+6}=\tfrac17$
+  \item $\tfrac{35-288}{325}=-\tfrac{253}{325}$
 \end{enumerate}
 \end{multicols}
 \end{keybox}

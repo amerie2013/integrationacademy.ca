@@ -26,7 +26,7 @@ Factor fully — common factor, grouping, or the factor theorem — then set eac
 \sech{Worked Examples}
 
 \begin{example}{ex0}{Example 1 --- Common factor}
-Solve $x^3-4x=0$.\soln $x(x-2)(x+2)=0\Rightarrow x=0,2,-2$. The graph crosses at all three:\eplot{-3}{3}{-4}{4}{\addplot[exblue,very thick,domain=-2.4:2.4]{x^3-4*x};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(-2,0) (0,0) (2,0)};}
+Solve $3x^3-12x=0$.\soln $3x(x-2)(x+2)=0\Rightarrow x=0,2,-2$. The graph crosses at all three:\eplot{-3}{3}{-12}{14}{\addplot[exblue,very thick,domain=-2.4:2.4]{3*x^3-12*x};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(-2,0) (0,0) (2,0)};}
 \end{example}
 
 \begin{example}{ex1}{Example 2 --- Factor a trinomial}
@@ -34,31 +34,31 @@ Solve $x^3-2x^2-3x=0$.\soln $x(x-3)(x+1)=0\Rightarrow x=0,3,-1$:\eplot{-1.6}{3.6
 \end{example}
 
 \begin{example}{ex2}{Example 3 --- Grouping}
-Solve $x^3+2x^2-x-2=0$.\soln $x^2(x+2)-(x+2)=(x+2)(x-1)(x+1)=0\Rightarrow x=-2,1,-1$:\eplot{-2.4}{1.5}{-3}{4}{\addplot[exblue,very thick,domain=-2.3:1.4]{x^3+2*x^2-x-2};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(-2,0) (-1,0) (1,0)};}
+Solve $x^3+4x^2-4x-16=0$.\soln $x^2(x+4)-4(x+4)=(x+4)(x-2)(x+2)=0\Rightarrow x=-4,2,-2$:\eplot{-5}{3}{-20}{14}{\addplot[exblue,very thick,domain=-4.4:2.4]{x^3+4*x^2-4*x-16};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(-4,0) (-2,0) (2,0)};}
 \end{example}
 
 \begin{example}{ex3}{Example 4 --- Factor theorem}
-Solve $x^3-7x-6=0$.\soln $P(-1)=0$; divide → $(x+1)(x-3)(x+2)=0\Rightarrow x=-1,3,-2$:\eplot{-2.5}{3.3}{-14}{6}{\addplot[exblue,very thick,domain=-2.4:3.2]{x^3-7*x-6};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(-2,0) (-1,0) (3,0)};}
+Solve $x^3-3x^2-6x+8=0$.\soln $P(1)=1-3-6+8=0$; divide → $(x-1)(x-4)(x+2)=0\Rightarrow x=1,4,-2$:\eplot{-3}{5}{-12}{12}{\addplot[exblue,very thick,domain=-2.4:4.4]{x^3-3*x^2-6*x+8};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(-2,0) (1,0) (4,0)};}
 \end{example}
 
 \begin{example}{ex4}{Example 5 --- Quadratic in $x^2$}
-Solve $x^4-5x^2+4=0$.\soln $(x^2-1)(x^2-4)=0\Rightarrow x=\pm1,\pm2$:\eplot{-2.3}{2.3}{-3}{9}{\addplot[exblue,very thick,domain=-2.2:2.2]{x^4-5*x^2+4};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(-2,0) (-1,0) (1,0) (2,0)};}
+Solve $x^4-3x^2-4=0$.\soln $(x^2-4)(x^2+1)=0$; $x^2+1\ne0$ for real $x$, so $x=\pm2$:\eplot{-2.6}{2.6}{-8}{14}{\addplot[exblue,very thick,domain=-2.4:2.4]{x^4-3*x^2-4};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(-2,0) (2,0)};}
 \end{example}
 
-\begin{example}{ex5}{Example 6 --- Common factor}
-Solve $x^3-9x=0$.\soln $x(x-3)(x+3)=0\Rightarrow x=0,3,-3$:\eplot{-3.4}{3.4}{-11}{11}{\addplot[exblue,very thick,domain=-3.3:3.3]{x^3-9*x};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(-3,0) (0,0) (3,0)};}
+\begin{example}{ex5}{Example 6 --- Repeated factor}
+Solve $x^3-6x^2+9x=0$.\soln $x(x^2-6x+9)=x(x-3)^2=0\Rightarrow x=0,3$ (a double root at $3$, where the graph touches):\eplot{-1}{4.5}{-6}{7}{\addplot[exblue,very thick,domain=-0.5:4.2]{x^3-6*x^2+9*x};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(0,0) (3,0)};}
 \end{example}
 
 \begin{example}{ex6}{Example 7 --- Trinomial}
-Solve $x^3-x^2-2x=0$.\soln $x(x-2)(x+1)=0\Rightarrow x=0,2,-1$:\eplot{-1.4}{2.4}{-3}{4}{\addplot[exblue,very thick,domain=-1.3:2.3]{x^3-x^2-2*x};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(-1,0) (0,0) (2,0)};}
+Solve $x^3+x^2-6x=0$.\soln $x(x+3)(x-2)=0\Rightarrow x=0,-3,2$:\eplot{-4}{3}{-9}{10}{\addplot[exblue,very thick,domain=-3.4:2.4]{x^3+x^2-6*x};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(-3,0) (0,0) (2,0)};}
 \end{example}
 
 \begin{example}{ex7}{Example 8 --- Grouping}
-Solve $x^3+3x^2-x-3=0$.\soln $(x+3)(x-1)(x+1)=0\Rightarrow x=-3,1,-1$:\eplot{-3.4}{1.4}{-5}{5}{\addplot[exblue,very thick,domain=-3.3:1.3]{x^3+3*x^2-x-3};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(-3,0) (-1,0) (1,0)};}
+Solve $x^3-2x^2-4x+8=0$.\soln $x^2(x-2)-4(x-2)=(x-2)(x-2)(x+2)=0\Rightarrow x=2$ (double), $x=-2$:\eplot{-3}{3.2}{-9}{12}{\addplot[exblue,very thick,domain=-2.4:3.0]{x^3-2*x^2-4*x+8};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(-2,0) (2,0)};}
 \end{example}
 
 \begin{example}{ex8}{Example 9 --- Factor theorem}
-Solve $x^3-4x^2+x+6=0$ (hint $x=-1$).\soln $(x+1)(x-2)(x-3)=0\Rightarrow x=-1,2,3$:\eplot{-1.4}{3.4}{-7}{7}{\addplot[exblue,very thick,domain=-1.3:3.3]{x^3-4*x^2+x+6};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(-1,0) (2,0) (3,0)};}
+Solve $x^3+2x^2-11x-12=0$ (hint $x=-1$).\soln $(x+1)(x+4)(x-3)=0\Rightarrow x=-1,-4,3$:\eplot{-5}{4}{-23}{16}{\addplot[exblue,very thick,domain=-4.4:3.4]{x^3+2*x^2-11*x-12};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(-4,0) (-1,0) (3,0)};}
 \end{example}
 
 \clearpage
@@ -66,23 +66,23 @@ Solve $x^3-4x^2+x+6=0$ (hint $x=-1$).\soln $(x+1)(x-2)(x-3)=0\Rightarrow x=-1,2,
 For each question, show all steps clearly in the space provided.
 
 \begin{qbox}{Question 1}
-Solve $x^3-9x=0$.\workspace{2.4cm}
+Solve $x^3-49x=0$.\workspace{2.4cm}
 \end{qbox}
 
 \begin{qbox}{Question 2}
-Solve $x^3-x^2-2x=0$.\workspace{2.4cm}
+Solve $x^3+x^2-12x=0$.\workspace{2.4cm}
 \end{qbox}
 
 \begin{qbox}{Question 3}
-Solve $x^3+3x^2-x-3=0$ by grouping.\workspace{2.4cm}
+Solve $x^3-5x^2-x+5=0$ by grouping.\workspace{2.4cm}
 \end{qbox}
 
 \begin{qbox}{Question 4}
-Solve $x^3-4x^2+x+6=0$ (hint $x=-1$).\workspace{2.4cm}
+Solve $x^3-x^2-14x+24=0$ (hint $x=2$).\workspace{2.4cm}
 \end{qbox}
 
 \begin{qbox}{Question 5}
-Solve $x^4-5x^2+4=0$.\workspace{2.4cm}
+Solve $x^4-5x^2-36=0$.\workspace{2.4cm}
 \end{qbox}
 
 \begin{qbox}{Question 6}
@@ -124,11 +124,11 @@ Solve $x^3-6x^2+11x-6=0$ (hint: try $x=1$).\workspace{3.5cm}
 \begin{multicols}{2}
 \small
 \begin{enumerate}[leftmargin=*,itemsep=3pt]
-  \item Solve $x^3-9x=0$.
-  \item Solve $x^3-x^2-2x=0$.
-  \item Solve $x^3+3x^2-x-3=0$ by grouping.
-  \item Solve $x^3-4x^2+x+6=0$ (hint $x=-1$).
-  \item Solve $x^4-5x^2+4=0$.
+  \item Solve $x^3-49x=0$.
+  \item Solve $x^3+x^2-12x=0$.
+  \item Solve $x^3-5x^2-x+5=0$ by grouping.
+  \item Solve $x^3-x^2-14x+24=0$ (hint $x=2$).
+  \item Solve $x^4-5x^2-36=0$.
   \item Solve $x^3-16x=0$.
   \item Solve $x^3-3x^2-4x=0$.
   \item Solve $x^3-x=0$.
@@ -145,11 +145,11 @@ Solve $x^3-6x^2+11x-6=0$ (hint: try $x=1$).\workspace{3.5cm}
 \begin{multicols}{2}
 \small
 \begin{enumerate}[leftmargin=*,itemsep=3pt]
-  \item $0,3,-3$
-  \item $0,2,-1$
-  \item $-3,1,-1$
-  \item $-1,2,3$
-  \item $\pm1,\pm2$
+  \item $0,7,-7$
+  \item $0,-4,3$
+  \item $5,1,-1$
+  \item $2,-4,3$
+  \item $\pm3$
   \item $0,4,-4$
   \item $0,4,-1$
   \item $0,1,-1$

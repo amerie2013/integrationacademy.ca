@@ -5,9 +5,9 @@ export const U5 = {
   "5.1": {
     topic: "Radian Measure",
     K: [
-      r`Convert to radians (exact values): $150^\circ$, $315^\circ$ and $-60^\circ$. Convert to degrees: $\dfrac{7\pi}{6}$, $\dfrac{5\pi}{12}$ and 2 radians (to one decimal place).`,
-      r`A sector has radius 8 cm and central angle $\dfrac{3\pi}{4}$. Find the arc length and the area of the sector, in exact form and to one decimal place.`,
-      r`State the quadrant and the reference angle for each angle: $\dfrac{5\pi}{6}$, $\dfrac{4\pi}{3}$ and $\dfrac{11\pi}{6}$.`,
+      r`Convert to radians (exact values): $165^\circ$, $315^\circ$ and $-60^\circ$. Convert to degrees: $\dfrac{7\pi}{6}$, $\dfrac{5\pi}{12}$ and 2 radians (to one decimal place).`,
+      r`A sector has radius 8 cm and central angle $\dfrac{2\pi}{5}$. Find the arc length and the area of the sector, in exact form and to one decimal place.`,
+      r`State the quadrant and the reference angle for each angle: $\dfrac{2\pi}{3}$, $\dfrac{5\pi}{4}$ and $\dfrac{11\pi}{6}$.`,
     ],
     T: [
       r`Explain why the formula $s=r\theta$ requires $\theta$ to be in radians. What would the formula look like if $\theta$ were in degrees, and why is the radian version simpler?`,

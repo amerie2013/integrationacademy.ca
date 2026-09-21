@@ -26,11 +26,11 @@ The remainder of $P(x)\div(x-a)$ is $P(a)$; and $x-a$ is a factor exactly when $
 \sech{Worked Examples}
 
 \begin{example}{ex0}{Example 1 --- Find a remainder}
-Remainder of $P(x)=x^3-2x+1$ divided by $x-2$.\soln $P(2)=8-4+1=5$.
+Remainder of $P(x)=x^3-4x+3$ divided by $x-3$.\soln $P(3)=27-12+3=18$.
 \end{example}
 
 \begin{example}{ex1}{Example 2 --- Test a factor}
-Is $x-1$ a factor of $x^3-1$?\soln $P(1)=1-1=0$: yes. The graph crosses at $x=1$:\eplot{-2}{2}{-4}{4}{\addplot[exblue,very thick,domain=-1.6:1.6]{x^3-1};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(1,0)};}
+Is $x-1$ a factor of $x^3+x^2-2$?\soln $P(1)=1+1-2=0$: yes. The graph crosses at $x=1$:\eplot{-2.5}{2}{-8}{8}{\addplot[exblue,very thick,domain=-2:1.5]{x^3+x^2-2};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(1,0)};}
 \end{example}
 
 \begin{example}{ex2}{Example 3 --- Sum of cubes}
@@ -38,27 +38,27 @@ Is $x+2$ a factor of $x^3+8$?\soln $P(-2)=-8+8=0$: yes.
 \end{example}
 
 \begin{example}{ex3}{Example 4 --- Solve for k}
-Find $k$ so $x-1$ is a factor of $x^3+kx-2$.\soln $P(1)=1+k-2=0\Rightarrow k=1$.
+Find $k$ so $x-2$ is a factor of $x^3+kx-6$.\soln $P(2)=8+2k-6=0\Rightarrow k=-1$.
 \end{example}
 
 \begin{example}{ex4}{Example 5 --- Find a zero}
-A rational zero of $P(x)=x^3-2x^2-x+2$?\soln Candidates $\pm1,\pm2$. $P(1)=1-2-1+2=0$, so $x=1$.
+A rational zero of $P(x)=x^3-3x^2-x+3$?\soln Candidates $\pm1,\pm3$. $P(1)=1-3-1+3=0$, so $x=1$.
 \end{example}
 
 \begin{example}{ex5}{Example 6 --- Remainder}
-Remainder of $x^3+1$ divided by $x-1$.\soln $P(1)=2$.
+Remainder of $x^3+5$ divided by $x-2$.\soln $P(2)=13$.
 \end{example}
 
 \begin{example}{ex6}{Example 7 --- Difference of cubes}
-Is $x-2$ a factor of $x^3-8$?\soln $P(2)=8-8=0$: yes.
+Is $x-5$ a factor of $x^3-125$?\soln $P(5)=125-125=0$: yes.
 \end{example}
 
 \begin{example}{ex7}{Example 8 --- Solve for k}
-Find $k$ so $x+1$ is a factor of $x^3+kx+4$.\soln $P(-1)=-1-k+4=0\Rightarrow k=3$.
+Find $k$ so $x+2$ is a factor of $x^3+kx+10$.\soln $P(-2)=-8-2k+10=0\Rightarrow k=1$.
 \end{example}
 
 \begin{example}{ex8}{Example 9 --- Find a zero}
-A rational zero of $x^3-x^2-4x+4$?\soln $P(1)=1-1-4+4=0$, so $x=1$.
+A rational zero of $x^3-2x^2-9x+18$?\soln $P(2)=8-8-18+18=0$, so $x=2$.
 \end{example}
 
 \clearpage
@@ -66,23 +66,23 @@ A rational zero of $x^3-x^2-4x+4$?\soln $P(1)=1-1-4+4=0$, so $x=1$.
 For each question, show all steps clearly in the space provided.
 
 \begin{qbox}{Question 1}
-Remainder of $x^3+1$ divided by $x-1$?\workspace{2.4cm}
+Remainder of $x^3+4$ divided by $x+1$?\workspace{2.4cm}
 \end{qbox}
 
 \begin{qbox}{Question 2}
-Is $x-2$ a factor of $x^3-8$?\workspace{2.4cm}
+Is $x-4$ a factor of $x^3-64$?\workspace{2.4cm}
 \end{qbox}
 
 \begin{qbox}{Question 3}
-Is $x+1$ a factor of $x^3+x^2-x-1$?\workspace{2.4cm}
+Is $x+2$ a factor of $x^3+2x^2-4x-8$?\workspace{2.4cm}
 \end{qbox}
 
 \begin{qbox}{Question 4}
-Find $k$ so $x+1$ is a factor of $x^3+kx+4$.\workspace{2.4cm}
+Find $k$ so $x-3$ is a factor of $x^3+kx^2-9$.\workspace{2.4cm}
 \end{qbox}
 
 \begin{qbox}{Question 5}
-A rational zero of $x^3-x^2-4x+4$?\workspace{2.4cm}
+A rational zero of $x^3+x^2-4x-4$?\workspace{2.4cm}
 \end{qbox}
 
 \begin{qbox}{Question 6}
@@ -124,11 +124,11 @@ Show that $x-1$ is a factor of $x^3-2x^2-x+2$, then state another factor.\worksp
 \begin{multicols}{2}
 \small
 \begin{enumerate}[leftmargin=*,itemsep=3pt]
-  \item Remainder of $x^3+1$ divided by $x-1$?
-  \item Is $x-2$ a factor of $x^3-8$?
-  \item Is $x+1$ a factor of $x^3+x^2-x-1$?
-  \item Find $k$ so $x+1$ is a factor of $x^3+kx+4$.
-  \item A rational zero of $x^3-x^2-4x+4$?
+  \item Remainder of $x^3+4$ divided by $x+1$?
+  \item Is $x-4$ a factor of $x^3-64$?
+  \item Is $x+2$ a factor of $x^3+2x^2-4x-8$?
+  \item Find $k$ so $x-3$ is a factor of $x^3+kx^2-9$.
+  \item A rational zero of $x^3+x^2-4x-4$?
   \item Remainder of $x^3-3x+2$ divided by $x-1$?
   \item Is $x-3$ a factor of $x^3-27$?
   \item Find $k$ so $x-2$ is a factor of $x^3-kx+2$.
@@ -145,11 +145,11 @@ Show that $x-1$ is a factor of $x^3-2x^2-x+2$, then state another factor.\worksp
 \begin{multicols}{2}
 \small
 \begin{enumerate}[leftmargin=*,itemsep=3pt]
-  \item $2$
+  \item $3$
   \item yes
   \item yes
-  \item $k=3$
-  \item $x=1$
+  \item $k=-2$
+  \item $x=-1$
   \item $0$
   \item yes
   \item $k=5$

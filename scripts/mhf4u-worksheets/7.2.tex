@@ -26,39 +26,39 @@ Combine functions point by point: $(f\pm g)(x)=f(x)\pm g(x)$, $(fg)(x)=f(x)g(x)$
 \sech{Worked Examples}
 
 \begin{example}{ex0}{Example 1 --- Sum}
-$f=x^2,\ g=x$. Find $(f+g)(x)$.\soln $x^2+x$. Graphs add point by point:\eplot{-4}{3}{-3}{9}{\addplot[gray,thick,domain=-3:3]{x^2};\addplot[gray,thick,domain=-3:3]{x};\addplot[exblue,very thick,domain=-3.5:2.6]{x^2+x};}
+$f=x^2,\ g=2x$. Find $(f+g)(x)$.\soln $x^2+2x$. Graphs add point by point:\eplot{-4}{3}{-3}{12}{\addplot[gray,thick,domain=-3:3]{x^2};\addplot[gray,thick,domain=-3:3]{2*x};\addplot[exblue,very thick,domain=-3.5:2.6]{x^2+2*x};}
 \end{example}
 
 \begin{example}{ex1}{Example 2 --- Difference}
-Find $(f-g)(x)$.\soln $x^2-x$.
+Find $(f-g)(x)$.\soln $x^2-2x$.
 \end{example}
 
 \begin{example}{ex2}{Example 3 --- Product}
-Find $(fg)(x)$.\soln $x^2\cdot x=x^3$.
+Find $(fg)(x)$.\soln $x^2\cdot2x=2x^3$.
 \end{example}
 
 \begin{example}{ex3}{Example 4 --- Quotient}
-Find $\left(\tfrac fg\right)(x)$ and its domain.\soln $\dfrac{x^2}{x}=x$, with $x\ne0$.
+Find $\left(\tfrac fg\right)(x)$ and its domain.\soln $\dfrac{x^2}{2x}=\dfrac x2$, with $x\ne0$.
 \end{example}
 
 \begin{example}{ex4}{Example 5 --- Evaluate}
-Find $(f+g)(2)$.\soln $f(2)+g(2)=4+2=6$.
+Find $(f+g)(2)$.\soln $f(2)+g(2)=4+4=8$.
 \end{example}
 
 \begin{example}{ex5}{Example 6 --- Sum}
-$f=x+1,\ g=x-1$. Find $(f+g)(x)$.\soln $2x$.
+$f=x+4,\ g=x-4$. Find $(f+g)(x)$.\soln $2x$.
 \end{example}
 
 \begin{example}{ex6}{Example 7 --- Product}
-Same $f,g$: find $(fg)(x)$.\soln $(x+1)(x-1)=x^2-1$.
+Same $f,g$: find $(fg)(x)$.\soln $(x+4)(x-4)=x^2-16$.
 \end{example}
 
 \begin{example}{ex7}{Example 8 --- Difference}
-$f=x^2,\ g=3$. Find $(f-g)(x)$.\soln $x^2-3$.
+$f=x^2,\ g=5$. Find $(f-g)(x)$.\soln $x^2-5$.
 \end{example}
 
 \begin{example}{ex8}{Example 9 --- Evaluate}
-$f=x,\ g=x+2$. Find $(f+g)(3)$.\soln $3+5=8$.
+$f=2x,\ g=x-1$. Find $(f+g)(4)$.\soln $8+3=11$.
 \end{example}
 
 \clearpage
@@ -66,7 +66,7 @@ $f=x,\ g=x+2$. Find $(f+g)(3)$.\soln $3+5=8$.
 For each question, show all steps clearly in the space provided.
 
 \begin{qbox}{Question 1}
-$f=x+1,\ g=x-1$. Find $(f+g)(x)$.\workspace{2.4cm}
+$f=x+6,\ g=x-2$. Find $(f+g)(x)$.\workspace{2.4cm}
 \end{qbox}
 
 \begin{qbox}{Question 2}
@@ -74,23 +74,23 @@ Same $f,g$: find $(fg)(x)$.\workspace{2.4cm}
 \end{qbox}
 
 \begin{qbox}{Question 3}
-$f=x^2,\ g=3$. Find $(f-g)(x)$.\workspace{2.4cm}
+$f=x^2,\ g=7$. Find $(f-g)(x)$.\workspace{2.4cm}
 \end{qbox}
 
 \begin{qbox}{Question 4}
-$f=x,\ g=x+2$. Find $(f+g)(3)$.\workspace{2.4cm}
+$f=3x,\ g=x+1$. Find $(f+g)(2)$.\workspace{2.4cm}
 \end{qbox}
 
 \begin{qbox}{Question 5}
-$f=x^2,\ g=x$. Find the domain of $\tfrac fg$.\workspace{2.4cm}
+$f=x^3,\ g=x-2$. Find the domain of $\tfrac fg$.\workspace{2.4cm}
 \end{qbox}
 
 \begin{qbox}{Question 6}
-$f=2x,\ g=x^2$. Find $(f+g)(x)$.\workspace{2.4cm}
+$f=3x,\ g=x^2$. Find $(f+g)(x)$.\workspace{2.4cm}
 \end{qbox}
 
 \begin{qbox}{Question 7}
-$f=x^2,\ g=x$. Find $(fg)(x)$.\workspace{2.4cm}
+$f=x^2,\ g=x+1$. Find $(fg)(x)$.\workspace{2.4cm}
 \end{qbox}
 
 \begin{qbox}{Question 8}
@@ -124,13 +124,13 @@ $f=x^2-1,\ g=x+1$. Find $\left(\tfrac fg\right)(x)$ and state the restriction.\w
 \begin{multicols}{2}
 \small
 \begin{enumerate}[leftmargin=*,itemsep=3pt]
-  \item $f=x+1,\ g=x-1$. Find $(f+g)(x)$.
+  \item $f=x+6,\ g=x-2$. Find $(f+g)(x)$.
   \item Same $f,g$: find $(fg)(x)$.
-  \item $f=x^2,\ g=3$. Find $(f-g)(x)$.
-  \item $f=x,\ g=x+2$. Find $(f+g)(3)$.
-  \item $f=x^2,\ g=x$. Find the domain of $\tfrac fg$.
-  \item $f=2x,\ g=x^2$. Find $(f+g)(x)$.
-  \item $f=x^2,\ g=x$. Find $(fg)(x)$.
+  \item $f=x^2,\ g=7$. Find $(f-g)(x)$.
+  \item $f=3x,\ g=x+1$. Find $(f+g)(2)$.
+  \item $f=x^3,\ g=x-2$. Find the domain of $\tfrac fg$.
+  \item $f=3x,\ g=x^2$. Find $(f+g)(x)$.
+  \item $f=x^2,\ g=x+1$. Find $(fg)(x)$.
   \item $f=x+3,\ g=x-3$. Find $(fg)(x)$.
   \item $f=x^2,\ g=x+1$. Find $(f+g)(1)$.
   \item $f=5,\ g=x$. Find $(f-g)(x)$.
@@ -145,13 +145,13 @@ $f=x^2-1,\ g=x+1$. Find $\left(\tfrac fg\right)(x)$ and state the restriction.\w
 \begin{multicols}{2}
 \small
 \begin{enumerate}[leftmargin=*,itemsep=3pt]
-  \item $2x$
-  \item $x^2-1$
-  \item $x^2-3$
-  \item $8$
-  \item $x\ne0$
-  \item $x^2+2x$
-  \item $x^3$
+  \item $2x+4$
+  \item $x^2+4x-12$
+  \item $x^2-7$
+  \item $9$
+  \item $x\ne2$
+  \item $x^2+3x$
+  \item $x^3+x^2$
   \item $x^2-9$
   \item $3$
   \item $5-x$

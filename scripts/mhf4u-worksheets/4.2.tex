@@ -26,7 +26,7 @@ $y=\log_b x$ is the reflection of $y=b^x$ in $y=x$: vertical asymptote $x=0$, do
 \sech{Worked Examples}
 
 \begin{example}{ex0}{Example 1 --- The log graph}
-Sketch $y=\log_2 x$.\soln VA $x=0$, through $(1,0)$, increasing:\eplot{0}{8}{-4}{4}{\addplot[exblue,very thick,domain=0.08:8,samples=140]{ln(x)/ln(2)};}
+Sketch $y=\log_4 x$.\soln VA $x=0$, through $(1,0)$ and $(4,1)$, increasing:\eplot{0}{8}{-3}{3}{\addplot[exblue,very thick,domain=0.06:8,samples=140]{ln(x)/ln(4)};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(1,0) (4,1)};}
 \end{example}
 
 \begin{example}{ex1}{Example 2 --- Domain}
@@ -34,7 +34,7 @@ Domain of $y=\log x$?\soln Argument $>0$: $x>0$.
 \end{example}
 
 \begin{example}{ex2}{Example 3 --- Inverse pair}
-How are $y=2^x$ and $y=\log_2 x$ related?\soln They are inverses — mirror images across $y=x$:\eplot{-4}{8}{-4}{8}{\addplot[exblue,very thick,domain=-4:3,samples=80]{2^x};\addplot[qorange,very thick,domain=0.08:8,samples=140]{ln(x)/ln(2)};\addplot[gray,dashed,domain=-4:8]{x};}
+How are $y=5^x$ and $y=\log_5 x$ related?\soln They are inverses — mirror images across $y=x$:\eplot{-2}{6}{-2}{6}{\addplot[exblue,very thick,domain=-2:1.1,samples=80]{5^x};\addplot[qorange,very thick,domain=0.05:6,samples=140]{ln(x)/ln(5)};\addplot[gray,dashed,domain=-2:6]{x};}
 \end{example}
 
 \begin{example}{ex3}{Example 4 --- Vertical asymptote}
@@ -54,11 +54,11 @@ Range of $y=\log x$?\soln All real numbers.
 \end{example}
 
 \begin{example}{ex7}{Example 8 --- Inverse}
-Inverse of $y=3^x$?\soln $y=\log_3 x$.
+Inverse of $y=7^x$?\soln $y=\log_7 x$.
 \end{example}
 
 \begin{example}{ex8}{Example 9 --- Transformation}
-VA of $y=\log(x+3)$?\soln $x>-3$, so VA $x=-3$.
+VA of $y=\log(x+6)$?\soln $x+6>0\Rightarrow x>-6$, so VA $x=-6$.
 \end{example}
 
 \clearpage
@@ -66,23 +66,23 @@ VA of $y=\log(x+3)$?\soln $x>-3$, so VA $x=-3$.
 For each question, show all steps clearly in the space provided.
 
 \begin{qbox}{Question 1}
-Domain of $y=\log_2 x$?\workspace{2.4cm}
+Domain of $y=\log_6 x$?\workspace{2.4cm}
 \end{qbox}
 
 \begin{qbox}{Question 2}
-VA of $y=\log(x+3)$?\workspace{2.4cm}
+VA of $y=\log(x+8)$?\workspace{2.4cm}
 \end{qbox}
 
 \begin{qbox}{Question 3}
-What is $\log_b 1$?\workspace{2.4cm}
+What is $\log_b b$?\workspace{2.4cm}
 \end{qbox}
 
 \begin{qbox}{Question 4}
-Is $y=\log_2 x$ increasing or decreasing?\workspace{2.4cm}
+Is $y=\log_7 x$ increasing or decreasing?\workspace{2.4cm}
 \end{qbox}
 
 \begin{qbox}{Question 5}
-Inverse of $y=3^x$?\workspace{2.4cm}
+Inverse of $y=4^x$?\workspace{2.4cm}
 \end{qbox}
 
 \begin{qbox}{Question 6}
@@ -98,7 +98,7 @@ Domain of $y=\log(x-1)$?\workspace{2.4cm}
 \end{qbox}
 
 \begin{qbox}{Question 9}
-Through which point does $y=\log_5 x$ pass on the x-axis?\workspace{2.4cm}
+Through which point does $y=\log_9 x$ pass on the x-axis?\workspace{2.4cm}
 \end{qbox}
 
 \begin{qbox}{Question 10}
@@ -124,15 +124,15 @@ State the domain, range, VA and a key point of $y=\log_2(x-1)$.\workspace{3.5cm}
 \begin{multicols}{2}
 \small
 \begin{enumerate}[leftmargin=*,itemsep=3pt]
-  \item Domain of $y=\log_2 x$?
-  \item VA of $y=\log(x+3)$?
-  \item What is $\log_b 1$?
-  \item Is $y=\log_2 x$ increasing or decreasing?
-  \item Inverse of $y=3^x$?
+  \item Domain of $y=\log_6 x$?
+  \item VA of $y=\log(x+8)$?
+  \item What is $\log_b b$?
+  \item Is $y=\log_7 x$ increasing or decreasing?
+  \item Inverse of $y=4^x$?
   \item Range of $y=\log x$?
   \item VA of $y=\log(x-5)$?
   \item Domain of $y=\log(x-1)$?
-  \item Through which point does $y=\log_5 x$ pass on the x-axis?
+  \item Through which point does $y=\log_9 x$ pass on the x-axis?
   \item Inverse of $y=10^x$?
   \item VA of $y=\log(x)+4$?
   \item As $x\to0^+$, what does $y=\log x$ do?
@@ -146,10 +146,10 @@ State the domain, range, VA and a key point of $y=\log_2(x-1)$.\workspace{3.5cm}
 \small
 \begin{enumerate}[leftmargin=*,itemsep=3pt]
   \item $x>0$
-  \item $x=-3$
-  \item $0$
+  \item $x=-8$
+  \item $1$
   \item increasing
-  \item $y=\log_3 x$
+  \item $y=\log_4 x$
   \item all reals
   \item $x=5$
   \item $x>1$
