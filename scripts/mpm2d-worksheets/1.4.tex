@@ -27,56 +27,83 @@
 \sech{Worked Examples}
 
 \begin{example}{ex0}{Example 1 --- Add to eliminate}
-Solve: $x+y=10$ and $x-y=4$.
-\soln Add: $2x=14\Rightarrow x=7$; then $7+y=10\Rightarrow y=3$. Solution $(7,3)$. Graphing $y=10-x$ and $y=x-4$ shows the lines crossing at $(7,3)$.
+Solve:\[\begin{array}{rll} x+y & = 10 & \text{\textcircled{\scriptsize 1}}\\ x-y & = 4 & \text{\textcircled{\scriptsize 2}} \end{array}\]\soln
+\textbf{Step 1:} Add the equations to eliminate $y$:\[\begin{array}{rl} & x+\cancel{y}=10\\ +\,( & x-\cancel{y}=4\,)\\ \hline & (x+x)+(y-y)=10+4\\ & 2x=14\\ & \frac{2x}{2}=\frac{14}{2}\\ & x=7 \end{array}\]
+\textbf{Step 2:} Substitute $x=7$ into \textcircled{\scriptsize 1}:\[\begin{array}{l} 7+y=10\\ y=10-7\\ y=3 \end{array}\]
+\textbf{Conclusion:} $(x,y)=(7,3)$.
+Graphing $y=10-x$ and $y=x-4$ shows the lines crossing at $(7,3)$.
 \plot{-1}{12}{-6}{12}{\addplot[exblue,very thick,domain=-1:12,samples=2]{10-x};\addplot[qorange,very thick,domain=-1:12,samples=2]{x-4};\addplot[mark=*,only marks,ex3]coordinates{(7,3)};}
 \end{example}
 
 \begin{example}{ex1}{Example 2 --- Add (opposite $y$)}
-Solve: $2x+y=7$ and $x-y=2$.
-\soln Add: $3x=9\Rightarrow x=3$; then $3-y=2\Rightarrow y=1$. Solution $(3,1)$. Graphing $y=7-2x$ and $y=x-2$ confirms the crossing point.
+Solve:\[\begin{array}{rll} 2x+y & = 7 & \text{\textcircled{\scriptsize 1}}\\ x-y & = 2 & \text{\textcircled{\scriptsize 2}} \end{array}\]\soln
+\textbf{Step 1:} Add the equations to eliminate $y$:\[\begin{array}{rl} & 2x+\cancel{y}=7\\ +\,( & x-\cancel{y}=2\,)\\ \hline & (2x+x)+(y-y)=7+2\\ & 3x=9\\ & \frac{3x}{3}=\frac{9}{3}\\ & x=3 \end{array}\]
+\textbf{Step 2:} Substitute $x=3$ into \textcircled{\scriptsize 2}:\[\begin{array}{l} 3-y=2\\ -y=2-3\\ -y=-1\\ \frac{-y}{-1}=\frac{-1}{-1}\\ y=1 \end{array}\]
+\textbf{Conclusion:} $(x,y)=(3,1)$.
+Graphing $y=7-2x$ and $y=x-2$ confirms the crossing point.
 \plot{-1}{6}{-6}{10}{\addplot[exblue,very thick,domain=-1:6,samples=2]{7-2*x};\addplot[qorange,very thick,domain=-1:6,samples=2]{x-2};\addplot[mark=*,only marks,ex3]coordinates{(3,1)};}
 \end{example}
 
 \begin{example}{ex2}{Example 3 --- Opposite coefficients}
-Solve: $3x+2y=12$ and $3x-2y=0$.
-\soln Add: $6x=12\Rightarrow x=2$; then $6+2y=12\Rightarrow y=3$. Solution $(2,3)$. Graphing $y=6-1.5x$ and $y=1.5x$ shows the lines meeting at $(2,3)$.
+Solve:\[\begin{array}{rll} 3x+2y & = 12 & \text{\textcircled{\scriptsize 1}}\\ 3x-2y & = 0 & \text{\textcircled{\scriptsize 2}} \end{array}\]\soln
+\textbf{Step 1:} Add the equations to eliminate $y$ (the $y$-coefficients are opposites):\[\begin{array}{rl} & 3x+\cancel{2y}=12\\ +\,( & 3x-\cancel{2y}=0\,)\\ \hline & (3x+3x)+(2y-2y)=12+0\\ & 6x=12\\ & \frac{6x}{6}=\frac{12}{6}\\ & x=2 \end{array}\]
+\textbf{Step 2:} Substitute $x=2$ into \textcircled{\scriptsize 1}:\[\begin{array}{l} 3(2)+2y=12\\ 6+2y=12\\ 2y=12-6\\ 2y=6\\ \frac{2y}{2}=\frac{6}{2}\\ y=3 \end{array}\]
+\textbf{Conclusion:} $(x,y)=(2,3)$.
+Graphing $y=6-1.5x$ and $y=1.5x$ shows the lines meeting at $(2,3)$.
 \plot{-1}{5}{-2}{8}{\addplot[exblue,very thick,domain=-1:5,samples=2]{6-1.5*x};\addplot[qorange,very thick,domain=-1:5,samples=2]{1.5*x};\addplot[mark=*,only marks,ex3]coordinates{(2,3)};}
 \end{example}
 
 \begin{example}{ex3}{Example 4 --- Multiply one equation}
-Solve: $2x+y=5$ and $x+3y=10$.
-\soln Multiply the first by $3$: $6x+3y=15$. Subtract the second: $5x=5\Rightarrow x=1$; then $y=3$. Solution $(1,3)$. Graphing $y=5-2x$ and $y=\tfrac{10-x}3$ confirms the crossing point.
+Solve:\[\begin{array}{rll} 2x+y & = 5 & \text{\textcircled{\scriptsize 1}}\\ x+3y & = 10 & \text{\textcircled{\scriptsize 2}} \end{array}\]\soln
+\textbf{Step 1:} Multiply \textcircled{\scriptsize 1} by $3$, then subtract \textcircled{\scriptsize 2}:\[\begin{array}{rl} & 6x+\cancel{3y}=15\\ -\,( & x+\cancel{3y}=10\,)\\ \hline & (6x-x)+(3y-3y)=15-10\\ & 5x=5\\ & \frac{5x}{5}=\frac{5}{5}\\ & x=1 \end{array}\]
+\textbf{Step 2:} Substitute $x=1$ into \textcircled{\scriptsize 1}:\[\begin{array}{l} 2(1)+y=5\\ 2+y=5\\ y=5-2\\ y=3 \end{array}\]
+\textbf{Conclusion:} $(x,y)=(1,3)$.
+Graphing $y=5-2x$ and $y=\tfrac{10-x}3$ confirms the crossing point.
 \plot{-1}{4}{-4}{8}{\addplot[exblue,very thick,domain=-1:4,samples=2]{5-2*x};\addplot[qorange,very thick,domain=-1:4,samples=2]{(10-x)/3};\addplot[mark=*,only marks,ex3]coordinates{(1,3)};}
 \end{example}
 
 \begin{example}{ex4}{Example 5 --- Multiply both equations}
-Solve: $2x+3y=7$ and $3x+2y=8$.
-\soln $\times3$ and $\times2$: $6x+9y=21$ and $6x+4y=16$. Subtract: $5y=5\Rightarrow y=1$; then $x=2$. Solution $(2,1)$. Graphing $y=\tfrac{7-2x}3$ and $y=\tfrac{8-3x}2$ shows the lines crossing at $(2,1)$.
+Solve:\[\begin{array}{rll} 2x+3y & = 7 & \text{\textcircled{\scriptsize 1}}\\ 3x+2y & = 8 & \text{\textcircled{\scriptsize 2}} \end{array}\]\soln
+\textbf{Step 1:} To eliminate $x$, multiply \textcircled{\scriptsize 1} by $3$ and \textcircled{\scriptsize 2} by $2$, then subtract:\[\begin{array}{rl} & \cancel{6x}+9y=21\\ -\,( & \cancel{6x}+4y=16\,)\\ \hline & (9y-4y)=(21-16)\\ & 5y=5\\ & \frac{5y}{5}=\frac{5}{5}\\ & y=1 \end{array}\]
+\textbf{Step 2:} Substitute $y=1$ into \textcircled{\scriptsize 1}:\[\begin{array}{l} 2x+3(1)=7\\ 2x+3=7\\ 2x=7-3\\ 2x=4\\ \frac{2x}{2}=\frac{4}{2}\\ x=2 \end{array}\]
+\textbf{Conclusion:} $(x,y)=(2,1)$.
+Graphing $y=\tfrac{7-2x}3$ and $y=\tfrac{8-3x}2$ shows the lines crossing at $(2,1)$.
 \plot{-1}{5}{-4}{6}{\addplot[exblue,very thick,domain=-1:5,samples=2]{(7-2*x)/3};\addplot[qorange,very thick,domain=-1:5,samples=2]{(8-3*x)/2};\addplot[mark=*,only marks,ex3]coordinates{(2,1)};}
 \end{example}
 
 \begin{example}{ex5}{Example 6 --- Infinitely many}
-Solve: $4x-2y=2$ and $2x-y=1$.
-\soln Multiply the second by $2$: $4x-2y=2$ --- identical to the first. \textbf{Infinitely many solutions}. Graphing $4x-2y=2$ as $y=2x-1$ shows both equations are the exact same line.
+Solve:\[\begin{array}{rll} 4x-2y & = 2 & \text{\textcircled{\scriptsize 1}}\\ 2x-y & = 1 & \text{\textcircled{\scriptsize 2}} \end{array}\]\soln
+\textbf{Step 1:} Multiply \textcircled{\scriptsize 2} by $2$, then subtract it from \textcircled{\scriptsize 1}:\[\begin{array}{rl} & \cancel{4x}-\cancel{2y}=2\\ -\,( & \cancel{4x}-\cancel{2y}=2\,)\\ \hline & 0=2-2\\ & 0=0 \end{array}\]
+
+\textbf{Conclusion:} $0=0$ is always true, so there are infinitely many solutions (both equations describe the same line).
+Graphing $4x-2y=2$ as $y=2x-1$ shows both equations are the exact same line.
 \plot{-2}{4}{-6}{8}{\addplot[exblue,very thick,domain=-2:4,samples=2]{2*x-1};}
 \end{example}
 
 \begin{example}{ex6}{Example 7 --- No solution}
-Solve: $x+y=3$ and $2x+2y=8$.
-\soln Multiply the first by $2$: $2x+2y=6$, but the second says $2x+2y=8$. Since $6\neq8$, \textbf{no solution}. Graphing $y=3-x$ and $y=4-x$ shows why: both have slope $-1$ but different $y$-intercepts, so the lines are parallel and never cross.
+Solve:\[\begin{array}{rll} x+y & = 3 & \text{\textcircled{\scriptsize 1}}\\ 2x+2y & = 8 & \text{\textcircled{\scriptsize 2}} \end{array}\]\soln
+\textbf{Step 1:} Multiply \textcircled{\scriptsize 1} by $2$, then subtract \textcircled{\scriptsize 2}:\[\begin{array}{rl} & \cancel{2x}+\cancel{2y}=6\\ -\,( & \cancel{2x}+\cancel{2y}=8\,)\\ \hline & 0=6-8\\ & 0=-2 \end{array}\]
+
+\textbf{Conclusion:} $0=-2$ is false, so there is no solution (the lines are parallel).
+Graphing $y=3-x$ and $y=4-x$ shows why: both have slope $-1$ but different $y$-intercepts, so the lines are parallel and never cross.
 \plot{-2}{5}{-3}{8}{\addplot[exblue,very thick,domain=-2:5,samples=2]{3-x};\addplot[qorange,very thick,domain=-2:5,samples=2]{4-x};}
 \end{example}
 
 \begin{example}{ex7}{Example 8 --- Word problem}
-Two adults and three children pay \$31; one adult and two children pay \$18. Find each price.
-\soln $2a+3c=31$, $a+2c=18$. Multiply the second by $2$: $2a+4c=36$. Subtract the first: $c=5$, then $a=8$. Adult \$8, child \$5. Graphing $c=\tfrac{31-2a}3$ and $c=\tfrac{18-a}2$ (adult price $a$ on the horizontal axis, child price $c$ on the vertical) shows the lines crossing at $(8,5)$.
+Two adults and three children pay \$31; one adult and two children pay \$18. Find each price.\soln Let $a$ be the adult price and $c$ the child price, so the system is\[\begin{array}{rll} 2a+3c & = 31 & \text{\textcircled{\scriptsize 1}}\\ a+2c & = 18 & \text{\textcircled{\scriptsize 2}} \end{array}\]
+\textbf{Step 1:} Multiply \textcircled{\scriptsize 2} by $2$, then subtract \textcircled{\scriptsize 1}:\[\begin{array}{rl} & \cancel{2a}+4c=36\\ -\,( & \cancel{2a}+3c=31\,)\\ \hline & (4c-3c)=(36-31)\\ & c=5 \end{array}\]
+\textbf{Step 2:} Substitute $c=5$ into \textcircled{\scriptsize 2}:\[\begin{array}{l} a+2(5)=18\\ a+10=18\\ a=18-10\\ a=8 \end{array}\]
+\textbf{Conclusion:} $(a,c)=(8,5)$: an adult ticket costs \$8 and a child ticket costs \$5.
+Graphing $c=\tfrac{31-2a}3$ and $c=\tfrac{18-a}2$ (adult price $a$ on the horizontal axis, child price $c$ on the vertical) shows the lines crossing at $(8,5)$.
 \plot{0}{15}{-1}{11}{\addplot[exblue,very thick,domain=0:15,samples=2]{(31-2*x)/3};\addplot[qorange,very thick,domain=0:15,samples=2]{(18-x)/2};\addplot[mark=*,only marks,ex3]coordinates{(8,5)};}
 \end{example}
 
 \begin{example}{ex8}{Example 9 --- Multiply both (harder)}
-Solve: $3x+2y=4$ and $2x+5y=-1$.
-\soln $\times5$ and $\times2$: $15x+10y=20$ and $4x+10y=-2$. Subtract: $11x=22\Rightarrow x=2$; then $6+2y=4\Rightarrow y=-1$. Solution $(2,-1)$. Graphing $y=\tfrac{4-3x}2$ and $y=\tfrac{-1-2x}5$ confirms the crossing point.
+Solve:\[\begin{array}{rll} 3x+2y & = 4 & \text{\textcircled{\scriptsize 1}}\\ 2x+5y & = -1 & \text{\textcircled{\scriptsize 2}} \end{array}\]\soln
+\textbf{Step 1:} To eliminate $y$, multiply \textcircled{\scriptsize 1} by $5$ and \textcircled{\scriptsize 2} by $2$, then subtract:\[\begin{array}{rl} & 15x+\cancel{10y}=20\\ -\,( & 4x+\cancel{10y}=-2\,)\\ \hline & (15x-4x)=(20-(-2))\\ & 11x=22\\ & \frac{11x}{11}=\frac{22}{11}\\ & x=2 \end{array}\]
+\textbf{Step 2:} Substitute $x=2$ into \textcircled{\scriptsize 1}:\[\begin{array}{l} 3(2)+2y=4\\ 6+2y=4\\ 2y=4-6\\ 2y=-2\\ \frac{2y}{2}=\frac{-2}{2}\\ y=-1 \end{array}\]
+\textbf{Conclusion:} $(x,y)=(2,-1)$.
+Graphing $y=\tfrac{4-3x}2$ and $y=\tfrac{-1-2x}5$ confirms the crossing point.
 \plot{-2}{5}{-6}{6}{\addplot[exblue,very thick,domain=-2:5,samples=2]{(4-3*x)/2};\addplot[qorange,very thick,domain=-2:5,samples=2]{(-1-2*x)/5};\addplot[mark=*,only marks,ex3]coordinates{(2,-1)};}
 \end{example}
 

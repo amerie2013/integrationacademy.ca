@@ -9,6 +9,8 @@ import { teacherPassword } from "./_teacher-secret.mjs";
 import { readFileSync } from "fs";
 import { fileURLToPath, pathToFileURL } from "url";
 import { dirname, join } from "path";
+import { elimHtml, elimSys } from "./mpm2d-elim.mjs";
+import { LESSON } from "./mpm2d-elim-data.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const env = {};
@@ -30,6 +32,8 @@ export const graph = (expr, param, o = {}) => ({
   id: bid(), type: "graph", expr, param,
   xMin: o.xMin ?? -10, xMax: o.xMax ?? 10, yMin: o.yMin ?? -10, yMax: o.yMax ?? 10,
   paramMin: o.paramMin ?? -5, paramMax: o.paramMax ?? 5, paramInit: o.paramInit ?? 1, caption: o.caption ?? "",
+  // Optional second independent slider (e.g. for y = m*x + b, param="m", param2="b").
+  ...(o.param2 ? { param2: o.param2, param2Min: o.param2Min ?? -5, param2Max: o.param2Max ?? 5, param2Init: o.param2Init ?? 0 } : {}),
 });
 export const mg = (curves, o = {}) => ({
   id: bid(), type: "multigraph", curves,
@@ -523,86 +527,64 @@ export const subjects = [
 
   <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;">
     <h3>Example 1: Add to eliminate (opposite coefficients)</h3>
-    <p>Solve \( \begin{cases} 2x+y=8 \\ x-y=1 \end{cases} \).</p>
-    <div class="solution">
-      <div class="step"><strong>Step 1:</strong> The \(y\)-coefficients are \(+1\) and \(-1\) — opposites, so <strong>add</strong>: \((2x+x)+(y-y)=8+1\Rightarrow 3x=9\).</div>
-      <div class="step"><strong>Step 2:</strong> \(x=3\); back-substitute into \(x-y=1\): \(3-y=1\Rightarrow y=2\).</div>
-      <em>Conclusion: \((3,2)\). ✓</em>
-    </div>
+    <p>Solve: \[${elimSys(LESSON.e1, "html")}\]</p>
+    <div class="solution">${elimHtml(LESSON.e1)}</div>
     ${gframe(["y = 8 - 2*x", "y = x - 1"], { title: "Solution: (3, 2)", labels: [{ x: 3, y: 2, t: "(3, 2)", c: "#a3327a" }] })}
   </div>
 
   <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;">
     <h3>Example 2: Subtract to eliminate (equal coefficients)</h3>
-    <p>Solve \( \begin{cases} 3x+2y=16 \\ x+2y=8 \end{cases} \).</p>
-    <div class="solution">
-      <div class="step"><strong>Step 1:</strong> The \(y\)-coefficients are equal — <strong>subtract</strong>: \((3x-x)+(2y-2y)=16-8\Rightarrow 2x=8\).</div>
-      <div class="step"><strong>Step 2:</strong> \(x=4\); then \(4+2y=8\Rightarrow y=2\).</div>
-      <em>Conclusion: \((4,2)\). ✓</em>
-    </div>
+    <p>Solve: \[${elimSys(LESSON.e2, "html")}\]</p>
+    <div class="solution">${elimHtml(LESSON.e2)}</div>
     ${gframe(["y = (16 - 3*x)/2", "y = (8 - x)/2"], { title: "Solution: (4, 2)", labels: [{ x: 4, y: 2, t: "(4, 2)", c: "#a3327a" }] })}
   </div>
 
   <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;">
     <h3>Example 3: Scale one equation first</h3>
-    <p>Solve \( \begin{cases} 2x+3y=12 \\ x+y=5 \end{cases} \).</p>
-    <div class="solution">
-      <div class="step"><strong>Step 1:</strong> Multiply the second by 2: \(2x+2y=10\).</div>
-      <div class="step"><strong>Step 2:</strong> Subtract from the first: \((2x+3y)-(2x+2y)=12-10\Rightarrow y=2\).</div>
-      <div class="step"><strong>Step 3:</strong> \(x+2=5\Rightarrow x=3\).</div>
-      <em>Conclusion: \((3,2)\). ✓</em>
-    </div>
+    <p>Solve: \[${elimSys(LESSON.e3, "html")}\]</p>
+    <div class="solution">${elimHtml(LESSON.e3)}</div>
     ${gframe(["y = (12 - 2*x)/3", "y = 5 - x"], { title: "Solution: (3, 2)", labels: [{ x: 3, y: 2, t: "(3, 2)", c: "#a3327a" }] })}
   </div>
 
   <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;">
     <h3>Example 4: Scale both equations</h3>
-    <p>Solve \( \begin{cases} 3x+2y=7 \\ 2x+5y=12 \end{cases} \).</p>
-    <div class="solution">
-      <div class="step"><strong>Step 1:</strong> Eliminate \(x\): multiply the first by 2 and the second by 3 → \(6x+4y=14\) and \(6x+15y=36\).</div>
-      <div class="step"><strong>Step 2:</strong> Subtract: \(-11y=-22\Rightarrow y=2\).</div>
-      <div class="step"><strong>Step 3:</strong> \(3x+4=7\Rightarrow x=1\).</div>
-      <em>Conclusion: \((1,2)\). ✓</em>
-    </div>
+    <p>Solve: \[${elimSys(LESSON.e4, "html")}\]</p>
+    <div class="solution">${elimHtml(LESSON.e4)}</div>
     ${gframe(["y = (7 - 3*x)/2", "y = (12 - 2*x)/5"], { title: "Solution: (1, 2)", labels: [{ x: 1, y: 2, t: "(1, 2)", c: "#a3327a" }] })}
   </div>
 
   <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;">
     <h3>Example 5: Both variables cancel → no solution</h3>
-    <p>Solve \( \begin{cases} x-y=2 \\ 2x-2y=10 \end{cases} \).</p>
-    <div class="solution">
-      <div class="step"><strong>Step 1:</strong> Multiply the first by 2: \(2x-2y=4\).</div>
-      <div class="step"><strong>Step 2:</strong> Compare with \(2x-2y=10\): the left sides match but \(4\neq 10\).</div>
-      <em>Conclusion: contradiction → <strong>no solution</strong> (parallel lines). ✓</em>
-    </div>
+    <p>Solve: \[${elimSys(LESSON.e5, "html")}\]</p>
+    <div class="solution">${elimHtml(LESSON.e5)}</div>
     ${gframe(["y = x - 2", "y = x - 5"], { title: "No solution — parallel (equal slopes)" })}
   </div>
 
   <h2>🟡 Practice Questions</h2>
 
   <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;">
-    <h3>Question 1</h3><p>Solve: \( \begin{cases} x+y=6 \\ x-y=2 \end{cases} \).</p>
-    <details><summary>View answer</summary><div class="solution"><div class="step">Add: \(2x=8\Rightarrow x=4,\ y=2\). <em>Answer: \((4,2)\).</em></div></div></details>
+    <h3>Question 1</h3><p>Solve: \[${elimSys(LESSON.q1, "html")}\]</p>
+    <details><summary>View answer</summary><div class="solution">${elimHtml(LESSON.q1)}</div></details>
   </div>
 
   <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;">
-    <h3>Question 2</h3><p>Solve: \( \begin{cases} 2x+y=7 \\ x+y=4 \end{cases} \).</p>
-    <details><summary>View answer</summary><div class="solution"><div class="step">Subtract: \(x=3\), then \(y=1\). <em>Answer: \((3,1)\).</em></div></div></details>
+    <h3>Question 2</h3><p>Solve: \[${elimSys(LESSON.q2, "html")}\]</p>
+    <details><summary>View answer</summary><div class="solution">${elimHtml(LESSON.q2)}</div></details>
   </div>
 
   <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;">
-    <h3>Question 3</h3><p>Solve: \( \begin{cases} 3x+2y=13 \\ x+2y=7 \end{cases} \).</p>
-    <details><summary>View answer</summary><div class="solution"><div class="step">Subtract: \(2x=6\Rightarrow x=3\), then \(y=2\). <em>Answer: \((3,2)\).</em></div></div></details>
+    <h3>Question 3</h3><p>Solve: \[${elimSys(LESSON.q3, "html")}\]</p>
+    <details><summary>View answer</summary><div class="solution">${elimHtml(LESSON.q3)}</div></details>
   </div>
 
   <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;">
-    <h3>Question 4</h3><p>Solve: \( \begin{cases} 2x+3y=12 \\ x-y=1 \end{cases} \).</p>
-    <details><summary>View answer</summary><div class="solution"><div class="step">×3 the second → \(3x-3y=3\), add: \(5x=15\Rightarrow x=3,\ y=2\). <em>Answer: \((3,2)\).</em></div></div></details>
+    <h3>Question 4</h3><p>Solve: \[${elimSys(LESSON.q4, "html")}\]</p>
+    <details><summary>View answer</summary><div class="solution">${elimHtml(LESSON.q4)}</div></details>
   </div>
 
   <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;">
-    <h3>Question 5 — Challenge</h3><p>Solve: \( \begin{cases} 3x+4y=10 \\ 2x+5y=9 \end{cases} \).</p>
-    <details><summary>View answer</summary><div class="solution"><div class="step">×2 and ×3 → \(6x+8y=20,\ 6x+15y=27\); subtract: \(-7y=-7\Rightarrow y=1,\ x=2\). <em>Answer: \((2,1)\).</em></div></div></details>
+    <h3>Question 5 — Challenge</h3><p>Solve: \[${elimSys(LESSON.q5, "html")}\]</p>
+    <details><summary>View answer</summary><div class="solution">${elimHtml(LESSON.q5)}</div></details>
   </div>
 
   <div class="mistake-box" style="background-color:#fdecea;border-left:5px solid #d9534f;padding:10px 14px;margin:10px 0;border-radius:6px;">
