@@ -52,9 +52,10 @@ export const LEARN = {
   ],
   // ── Unit 3: Rational Functions ─────────────────────────────
   "3.1": [
-    ["Reciprocal functions", "The reciprocal $y=\\dfrac{1}{f(x)}$ blows up where $f(x)=0$, creating a \\textbf{vertical asymptote}, and flattens where $f$ grows large."],
-    ["Rational functions", "A \\textbf{rational function} is a ratio of polynomials; its behaviour is governed by its own zeros and those of its denominator."],
-    ["Asymptotes", "Vertical asymptotes sit where the denominator is zero (but the numerator is not); horizontal or oblique asymptotes come from comparing degrees."],
+    ["Reciprocal functions", "The reciprocal $y=\\dfrac{1}{f(x)}$ blows up where $f(x)=0$, creating a \\textbf{vertical asymptote}, and flattens toward $0$ where $f$ grows large."],
+    ["Rational functions", "A \\textbf{rational function} is a ratio of polynomials $y=\\dfrac{p(x)}{q(x)}$; its behaviour is governed by the zeros of $q$ (the denominator) and by the degrees of $p$ and $q$. Always \\textbf{factor first}: a factor that cancels gives a hole, a factor that stays in the denominator gives a vertical asymptote."],
+    ["Asymptotes", "Vertical asymptotes sit where the denominator is zero but the numerator is not. For the horizontal asymptote compare degrees: top lower $\\Rightarrow y=0$; equal degrees $\\Rightarrow$ ratio of leading coefficients; top higher $\\Rightarrow$ none (a slant asymptote if exactly one degree higher)."],
+    ["Writing solutions", "In every step write the \\textbf{whole function}, even when you are only working on the numerator or the denominator. For example: ``for $y=\\dfrac{x+1}{x-3}$, set the denominator $x-3=0$, so $x=3$.'' This keeps clear which function you are analysing."],
   ],
   "3.2": [
     ["Locate asymptotes first", "Find vertical asymptotes from the denominator's zeros, and the end-behaviour asymptote by comparing the degrees of top and bottom."],

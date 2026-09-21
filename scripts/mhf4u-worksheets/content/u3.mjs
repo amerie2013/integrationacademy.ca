@@ -20,18 +20,54 @@ const rg = (expr, va, win, ha) => {
 export default [
   {
     code: "3.1", unit: U, title: "Reciprocal & Rational Functions",
-    intro: r`A rational function $f(x)=\dfrac{p(x)}{q(x)}$ has vertical asymptotes at zeros of $q$, a horizontal asymptote from the degrees, and a hole wherever a factor cancels.`,
-    ideas: [r`Vertical asymptote: $q(x)=0$ (no cancel). Domain excludes those $x$.`, r`Horizontal asymptote: lower top $\Rightarrow y=0$; equal degrees $\Rightarrow$ ratio of leading coefficients.`, r`Hole: a common factor of $p$ and $q$.`],
+    intro: r`A rational function $f(x)=\dfrac{p(x)}{q(x)}$ has vertical asymptotes at zeros of $q$ that do not cancel, a horizontal asymptote from the degrees, and a hole wherever a factor cancels. In every step, write the \textbf{whole function}, even when you are only working on its numerator or denominator.`,
+    ideas: [r`Vertical asymptote: set the denominator to $0$ and check the numerator is not $0$ there. The domain excludes every such $x$.`, r`Horizontal asymptote: lower top $\Rightarrow y=0$; equal degrees $\Rightarrow$ ratio of leading coefficients; higher top $\Rightarrow$ none.`, r`Hole: factor, cancel, then substitute the cancelled $x$ into the simplified function to get its height.`],
     examples: [
-      { t: "Vertical asymptote", body: r`Vertical asymptote of $y=\dfrac{1}{x-3}$?\soln Denominator zero at $x=3$, so the VA is $x=3$.` },
-      { t: "Horizontal asymptote", body: r`Horizontal asymptote of $y=\dfrac{1}{x-3}$?\soln Degree of top $(0)<$ degree of bottom $(1)$, so $y=0$.` },
-      { t: "The reciprocal graph", body: r`Describe $y=\dfrac1x$.\soln VA $x=0$, HA $y=0$, branches in opposite quadrants:` + rg("1/x", 0, { xmin: -5, xmax: 5, ymin: -5, ymax: 5 }) },
-      { t: "Domain", body: r`Domain of $y=\dfrac{1}{x+2}$?\soln Exclude $x=-2$: domain $x\ne-2$.` },
-      { t: "Equal degrees", body: r`Horizontal asymptote of $y=\dfrac{2x}{x-1}$?\soln Equal degrees → ratio $\tfrac21$, so $y=2$.` },
-      { t: "A hole", body: r`Describe $y=\dfrac{x^2-25}{x-5}$.\soln $\dfrac{(x-5)(x+5)}{x-5}=x+5$ with $x\ne5$: a line with a hole at $(5,10)$.` },
-      { t: "Shifted asymptote", body: r`Vertical asymptote of $y=\dfrac{1}{x-3}$, graphed:\soln VA at $x=3$ (dashed), HA $y=0$:` + rg("1/(x-3)", 3, { xmin: -2, xmax: 8, ymin: -5, ymax: 5 }, 0) },
-      { t: "Equal degrees", body: r`Horizontal asymptote of $y=\dfrac{7x}{x-2}$?\soln $y=7$.` },
-      { t: "Domain", body: r`Domain of $y=\dfrac{x}{x+7}$?\soln $x\ne-7$.` },
+      { t: "Vertical asymptote", body: r`Vertical asymptote of $y=\dfrac{1}{x-3}$?\soln \textbf{Step 1:} Set the denominator of $y=\dfrac{1}{x-3}$ equal to zero: $x-3=0\Rightarrow x=3$.
+
+\textbf{Step 2:} At $x=3$ the numerator of $y=\dfrac{1}{x-3}$ is $1\ne0$ and nothing cancels, so the function is undefined there and the curve shoots off to $\pm\infty$.
+
+\textbf{Answer:} for $y=\dfrac{1}{x-3}$ the vertical asymptote is $x=3$ (domain $x\ne3$).` },
+      { t: "Horizontal asymptote", body: r`Horizontal asymptote of $y=\dfrac{1}{x-3}$?\soln \textbf{Step 1:} In $y=\dfrac{1}{x-3}$ the numerator $1$ has degree $0$ and the denominator $x-3$ has degree $1$.
+
+\textbf{Step 2:} Since $0<1$, the horizontal asymptote of $y=\dfrac{1}{x-3}$ is $y=0$. Check: at $x=1000$, $y=\dfrac{1}{997}\approx0.001$, very close to $0$.
+
+\textbf{Answer:} $y=0$.` },
+      { t: "The reciprocal graph", body: r`Describe $y=\dfrac1x$.\soln \textbf{Step 1 (vertical asymptote):} Set the denominator of $y=\dfrac1x$ equal to zero: $x=0$. The numerator $1\ne0$, so $x=0$ is a VA.
+
+\textbf{Step 2 (horizontal asymptote):} In $y=\dfrac1x$ the numerator has degree $0$ and the denominator $x$ has degree $1$, so the HA is $y=0$.
+
+\textbf{Step 3 (signs):} For $y=\dfrac1x$: if $x>0$ then $y>0$ (quadrant I); if $x<0$ then $y<0$ (quadrant III). The branches lie in opposite quadrants.
+
+\textbf{Step 4 (intercepts):} $y=\dfrac1x$ can never equal $0$ (the numerator is $1$), and $x=0$ is not allowed, so there are no intercepts:` + rg("1/x", 0, { xmin: -5, xmax: 5, ymin: -5, ymax: 5 }) },
+      { t: "Domain", body: r`Domain of $y=\dfrac{1}{x+2}$?\soln \textbf{Step 1:} The domain of $y=\dfrac{1}{x+2}$ excludes every $x$ that makes the denominator zero: $x+2=0\Rightarrow x=-2$.
+
+\textbf{Answer:} all real numbers except $-2$, i.e.\ $x\ne-2$ (and $x=-2$ is a vertical asymptote of $y=\dfrac{1}{x+2}$).` },
+      { t: "Equal degrees", body: r`Horizontal asymptote of $y=\dfrac{2x}{x-1}$?\soln \textbf{Step 1:} In $y=\dfrac{2x}{x-1}$ the numerator $2x$ has degree $1$ and the denominator $x-1$ has degree $1$ --- equal degrees.
+
+\textbf{Step 2:} The HA of $y=\dfrac{2x}{x-1}$ is the ratio of the leading coefficients: $y=\dfrac21=2$. Check: at $x=1000$, $y=\dfrac{2000}{999}\approx2.002$.
+
+\textbf{Answer:} $y=2$.` },
+      { t: "A hole", body: r`Describe $y=\dfrac{x^2-25}{x-5}$.\soln \textbf{Step 1 (factor):} The numerator of $y=\dfrac{x^2-25}{x-5}$ is a difference of squares: $x^2-25=(x-5)(x+5)$, so $y=\dfrac{(x-5)(x+5)}{x-5}$.
+
+\textbf{Step 2 (cancel):} The factor $x-5$ cancels in $y=\dfrac{(x-5)(x+5)}{x-5}$, leaving $y=x+5$ for $x\ne5$.
+
+\textbf{Step 3 (hole):} Substitute $x=5$ into the simplified $y=x+5$: $y=10$. The hole is at $(5,10)$, and there is no vertical asymptote at $x=5$ because the factor cancelled.
+
+\textbf{Answer:} $y=\dfrac{x^2-25}{x-5}$ is the line $y=x+5$ with a hole at $(5,10)$.` },
+      { t: "Shifted asymptote", body: r`Vertical asymptote of $y=\dfrac{2}{x-4}$, graphed:\soln \textbf{Step 1:} Set the denominator of $y=\dfrac{2}{x-4}$ equal to zero: $x-4=0\Rightarrow x=4$. The numerator is $2\ne0$, so the VA is $x=4$ (dashed).
+
+\textbf{Step 2:} In $y=\dfrac{2}{x-4}$ the numerator has degree $0<1$, so the HA is $y=0$ (dashed):` + rg("2/(x-4)", 4, { xmin: -2, xmax: 10, ymin: -5, ymax: 5 }, 0) },
+      { t: "Equal degrees", body: r`Horizontal asymptote of $y=\dfrac{7x}{x-2}$?\soln \textbf{Step 1:} In $y=\dfrac{7x}{x-2}$ both the numerator $7x$ and the denominator $x-2$ have degree $1$.
+
+\textbf{Step 2:} The HA of $y=\dfrac{7x}{x-2}$ is $y=\dfrac71=7$.
+
+\textbf{Answer:} $y=7$ (the vertical asymptote of $y=\dfrac{7x}{x-2}$ is $x=2$).` },
+      { t: "Domain", body: r`Domain of $y=\dfrac{x}{x+7}$?\soln \textbf{Step 1:} The domain of $y=\dfrac{x}{x+7}$ excludes the $x$ that makes the denominator zero: $x+7=0\Rightarrow x=-7$.
+
+\textbf{Step 2:} At $x=-7$ the numerator of $y=\dfrac{x}{x+7}$ is $-7\ne0$, so it is also a vertical asymptote.
+
+\textbf{Answer:} $x\ne-7$.` },
     ],
     questions: [
       { ask: r`Vertical asymptote of $y=\dfrac{1}{x-8}$?` },
@@ -48,7 +84,7 @@ export default [
       { ask: r`Horizontal asymptote of $y=\dfrac{3x}{2x-1}$?` },
       { ask: r`State the VA, HA and domain of $y=\dfrac{2x}{x-4}$.`, challenge: true, ws: "3cm" },
     ],
-    answers: [r`$x=8$`, r`$y=0$`, r`$x\ne9$`, r`$y=9$`, r`$x=7$`, r`$x=-3$`, r`$y=4$`, r`$x\ne1$`, r`$y=0$`, r`$x=6$`, r`$x-3$, hole at $x=-3$`, r`$y=\tfrac32$`, r`VA $x=4$, HA $y=2$, $x\ne4$`],
+    answers: [r`For $y=\dfrac{1}{x-8}$: $x-8=0\Rightarrow x=8$ (numerator $1\ne0$), so the VA is $x=8$`, r`For $y=\dfrac{6}{x-2}$: numerator degree $0<$ denominator degree $1$, so the HA is $y=0$`, r`For $y=\dfrac{x+3}{x-9}$: $x-9=0\Rightarrow x=9$ is excluded, so the domain is $x\ne9$`, r`For $y=\dfrac{9x}{x-1}$: equal degrees, $\dfrac91=9$, so the HA is $y=9$`, r`$y=\dfrac{x^2-49}{x-7}=\dfrac{(x-7)(x+7)}{x-7}=x+7$ for $x\ne7$; the hole is at $x=7$, i.e.\ $(7,14)$`, r`For $y=\dfrac{2}{x+3}$: $x+3=0\Rightarrow x=-3$ (numerator $2\ne0$), so the VA is $x=-3$`, r`For $y=\dfrac{4x}{x-7}$: equal degrees, $\dfrac41=4$, so the HA is $y=4$ (and the VA is $x=7$)`, r`For $y=\dfrac{1}{x-1}$: $x-1=0\Rightarrow x=1$ is excluded, so the domain is $x\ne1$`, r`For $y=\dfrac{1}{x^2+1}$: numerator degree $0<$ denominator degree $2$, so the HA is $y=0$ (and $x^2+1\ne0$, so there is no VA)`, r`For $y=\dfrac{x+1}{x-6}$: $x-6=0\Rightarrow x=6$ (numerator $6+1=7\ne0$), so the VA is $x=6$`, r`$y=\dfrac{x^2-9}{x+3}=\dfrac{(x-3)(x+3)}{x+3}=x-3$ for $x\ne-3$; the hole is at $x=-3$, i.e.\ $(-3,-6)$`, r`For $y=\dfrac{3x}{2x-1}$: equal degrees, $\dfrac32$, so the HA is $y=\tfrac32$ (and the VA is $x=\tfrac12$)`, r`For $y=\dfrac{2x}{x-4}$: VA $x-4=0\Rightarrow x=4$ (numerator $8\ne0$); HA equal degrees, $\dfrac21=2$, so $y=2$; domain $x\ne4$`],
   },
   {
     code: "3.2", unit: U, title: "Graphs of Rational Functions",
