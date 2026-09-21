@@ -73,21 +73,25 @@ export const LEARN = {
     ["A logarithm is an exponent", "$\\log_b x$ is the power to which $b$ must be raised to give $x$ — the inverse operation of exponentiation."],
     ["The laws", "Logs turn products, quotients, and powers into sums, differences, and multiples: $\\log_b(MN)=\\log_b M+\\log_b N$ and $\\log_b M^p=p\\log_b M$."],
     ["Change of base", "Evaluate any logarithm on a calculator with $\\log_b x=\\dfrac{\\log x}{\\log b}$."],
+    ["Writing solutions", "In every step write the \\textbf{whole expression}, for example $\\log_2(8\\cdot16)=\\log_28+\\log_216$, and name the law you use (product, quotient, power, change of base). The argument of a logarithm must always be positive."],
   ],
   "4.2": [
     ["Inverse of the exponential", "$y=\\log_b x$ is the reflection of $y=b^x$ in the line $y=x$, with a \\textbf{vertical} asymptote at $x=0$."],
     ["Domain and range", "A logarithmic function is defined only for $x>0$, and its range is all real numbers — the mirror of the exponential."],
     ["Transformations", "The framework $y=a\\log_b\\!\\left(k(x-d)\\right)+c$ shifts and stretches the curve and moves the vertical asymptote to $x=d$."],
+    ["Writing solutions", "Write the \\textbf{whole function} in every step. To graph $y=a\\log_b\\!\\big(k(x-d)\\big)+c$: draw the asymptote $x=d$, map the parent's key points $\\left(\\tfrac1b,-1\\right),(1,0),(b,1)$ with $(x,y)\\to\\left(\\tfrac xk+d,\\ ay+c\\right)$, then sketch."],
   ],
   "4.3": [
     ["Exponential equations", "Take a logarithm of both sides to bring the variable exponent down, then solve the resulting linear equation."],
     ["Logarithmic equations", "Condense to a single log, rewrite in exponential form, and solve — then confirm each argument stays positive."],
     ["Watch for extraneous roots", "Because logs need positive arguments, discard any solution that makes an argument zero or negative."],
+    ["Writing solutions", "Write the \\textbf{whole equation} in every step. Isolate the power before taking logs; for a log equation state the restriction (argument $>0$) first and check every answer against it. A solution of $f(x)=c$ is where the curve $y=f(x)$ meets the line $y=c$."],
   ],
   "4.4": [
     ["Growth and decay", "Exponential models $A=A_0 b^{\\,t}$ describe populations, radioactive decay, and cooling; logarithms solve them for the time."],
     ["Compound interest", "Investments grow by $A=P(1+i)^n$, and finding the number of periods $n$ requires a logarithm."],
     ["Logarithmic scales", "Quantities spanning huge ranges — sound in decibels, earthquakes on the Richter scale, acidity as pH — use \\textbf{logarithmic} scales."],
+    ["Writing solutions", "State the model and what each letter means, then write the \\textbf{whole model} in every step (for example $P=100\\cdot2^{10/5}$). If the target is a whole number of periods, match the bases; otherwise take logs, and always check by substituting back."],
   ],
   // ── Unit 5: Trigonometric Functions ────────────────────────
   "5.1": [

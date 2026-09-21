@@ -9,11 +9,11 @@
 \end{center}
 
 \begin{ideabox}
-Match bases and set exponents equal, or take logs of both sides; for log equations rewrite in exponential form and check the argument is positive.
+Match bases and set exponents equal, or isolate the power and take logs of both sides; for log equations rewrite in exponential form and check the argument is positive. In every step write the \textbf{whole equation}. The solution of $f(x)=c$ is where the curve $y=f(x)$ meets the line $y=c$.
 \begin{itemize}[leftmargin=*,itemsep=2pt]
-  \item Same base: $b^{f}=b^{g}\Rightarrow f=g$.
-  \item Different bases: $b^x=c\Rightarrow x=\dfrac{\log c}{\log b}$.
-  \item $\log_b x=k\Rightarrow x=b^k$; reject non-positive arguments.
+  \item Same base: $b^{f}=b^{g}\Rightarrow f=g$. Write numbers as powers of the same base first.
+  \item Different bases: isolate the power, then $b^x=c\Rightarrow x=\dfrac{\log c}{\log b}$.
+  \item $\log_b x=k\Rightarrow x=b^k$; state the restriction (argument $>0$) and reject any solution that breaks it.
 \end{itemize}
 \end{ideabox}
 
@@ -21,44 +21,125 @@ Match bases and set exponents equal, or take logs of both sides; for log equatio
 \lh{Exponential equations}Take a logarithm of both sides to bring the variable exponent down, then solve the resulting linear equation.
 \lh{Logarithmic equations}Condense to a single log, rewrite in exponential form, and solve — then confirm each argument stays positive.
 \lh{Watch for extraneous roots}Because logs need positive arguments, discard any solution that makes an argument zero or negative.
+\lh{Writing solutions}Write the \textbf{whole equation} in every step. Isolate the power before taking logs; for a log equation state the restriction (argument $>0$) first and check every answer against it. A solution of $f(x)=c$ is where the curve $y=f(x)$ meets the line $y=c$.
 \end{learnbox}
 
 \sech{Worked Examples}
 
 \begin{example}{ex0}{Example 1 --- Same base}
-Solve $2^x=\tfrac14$.\soln $2^x=2^{-2}\Rightarrow x=-2$. Read across $y=2^x$ at height $\tfrac14$:\eplot{-3}{3}{-1}{9}{\addplot[exblue,very thick,domain=-3:3.1,samples=80]{2^x};}
+Solve $2^x=\tfrac14$.\soln \textbf{Step 1 (common base):} Write $\tfrac14=2^{-2}$, so $2^x=\tfrac14$ becomes $2^x=2^{-2}$.
+
+\textbf{Step 2 (equate the exponents):} Both sides have the base $2$, so $x=-2$.
+
+\textbf{Step 3 (check):} $2^{-2}=\tfrac1{2^2}=\tfrac14$ $\checkmark$. The curve $y=2^x$ meets $y=\tfrac14$ at $\left(-2,\tfrac14\right)$.
+
+\textbf{Answer:} $x=-2$.
+
+\eplotx{-4}{3}{-1}{4}{1}{1}{\addplot[exblue,very thick,domain=-4:3,samples=120]{2^x};\draw[dashed,gray] (axis cs:-4,0.25)--(axis cs:3,0.25);\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(-2,0.25)};\node[font=\tiny,above right] at (axis cs:-2,0.25) {$(-2,1/4)$};}
 \end{example}
 
 \begin{example}{ex1}{Example 2 --- Same base}
-Solve $3^x=81$.\soln $3^x=3^4\Rightarrow x=4$.
+Solve $3^x=81$.\soln \textbf{Step 1 (common base):} Write $81=3^4$, so $3^x=81$ becomes $3^x=3^4$.
+
+\textbf{Step 2 (equate the exponents):} $x=4$.
+
+\textbf{Step 3 (check):} $3^4=81$ $\checkmark$; the curve $y=3^x$ meets $y=81$ at $(4,81)$.
+
+\textbf{Answer:} $x=4$.
+
+\eplotx{-1}{5}{-10}{95}{1}{20}{\addplot[exblue,very thick,domain=-1:4.2,samples=120]{3^x};\draw[dashed,gray] (axis cs:-1,81)--(axis cs:5,81);\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(4,81)};\node[font=\tiny,below right] at (axis cs:4,81) {$(4,81)$};}
 \end{example}
 
 \begin{example}{ex2}{Example 3 --- Take logs}
-Solve $2^x=7$.\soln $x=\dfrac{\log7}{\log2}\approx2.81$.
+Solve $2^x=7$.\soln \textbf{Step 1 (why logs):} $7$ is not a power of $2$, so the bases cannot be matched. Take the logarithm of both sides of $2^x=7$: $\log(2^x)=\log7$.
+
+\textbf{Step 2 (power law):} $\log(2^x)=\log7$ becomes $x\log2=\log7$.
+
+\textbf{Step 3 (solve):} $x=\dfrac{\log7}{\log2}\approx\dfrac{0.8451}{0.3010}\approx2.81$.
+
+\textbf{Step 4 (check):} $2^{2.81}\approx7$: $2^2=4$ and $2^3=8$, so an exponent just below $3$ is reasonable $\checkmark$.
+
+\textbf{Answer:} $x\approx2.81$.
+
+\eplotx{-1}{4}{-1}{9}{1}{2}{\addplot[exblue,very thick,domain=-1:3.2,samples=120]{2^x};\draw[dashed,gray] (axis cs:-1,7)--(axis cs:4,7);\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(2.81,7)};\node[font=\tiny,below right] at (axis cs:2.81,7) {$(2.81,7)$};}
 \end{example}
 
 \begin{example}{ex3}{Example 4 --- Log equation}
-Solve $\log_2 x=7$.\soln $x=2^7=128$.
+Solve $\log_2 x=7$.\soln \textbf{Step 1 (restriction):} The argument of $\log_2x=7$ must be positive: $x>0$.
+
+\textbf{Step 2 (exponential form):} Rewrite $\log_2x=7$ as $2^7=x$, so $x=128$.
+
+\textbf{Step 3 (check):} $128>0$ $\checkmark$ and $\log_2128=7$ because $2^7=128$ $\checkmark$.
+
+\textbf{Answer:} $x=128$.
+
+\eplotx{0}{140}{-2}{9}{20}{2}{\addplot[exblue,very thick,domain=0.05:140,samples=120]{ln(x)/ln(2)};\draw[dashed,gray] (axis cs:0,-2)--(axis cs:0,9);\draw[dashed,gray] (axis cs:0,7)--(axis cs:140,7);\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(128,7)};\node[font=\tiny,below left] at (axis cs:128,7) {$(128,7)$};}
 \end{example}
 
 \begin{example}{ex4}{Example 5 --- Log equation}
-Solve $\log(x-1)=1$.\soln $x-1=10^1\Rightarrow x=11$ (valid).
+Solve $\log(x-1)=1$.\soln \textbf{Step 1 (restriction):} The argument of $\log(x-1)=1$ must be positive: $x-1>0\Rightarrow x>1$.
+
+\textbf{Step 2 (exponential form):} Base $10$: $\log(x-1)=1$ becomes $x-1=10^1=10$.
+
+\textbf{Step 3 (solve):} $x-1=10\Rightarrow x=11$.
+
+\textbf{Step 4 (check):} $11>1$ $\checkmark$ and $\log(11-1)=\log10=1$ $\checkmark$.
+
+\textbf{Answer:} $x=11$.
+
+\eplotx{0}{14}{-3}{3}{2}{1}{\addplot[exblue,very thick,domain=1.05:14,samples=120]{log10(x-1)};\draw[dashed,gray] (axis cs:1,-3)--(axis cs:1,3);\draw[dashed,gray] (axis cs:0,1)--(axis cs:14,1);\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(11,1)};\node[font=\tiny,below right] at (axis cs:11,1) {$(11,1)$};}
 \end{example}
 
 \begin{example}{ex5}{Example 6 --- Same base}
-Solve $7^x=343$.\soln $7^x=7^3\Rightarrow x=3$.
+Solve $7^x=343$.\soln \textbf{Step 1 (common base):} Write $343=7^3$, so $7^x=343$ becomes $7^x=7^3$.
+
+\textbf{Step 2 (equate the exponents):} $x=3$.
+
+\textbf{Step 3 (check):} $7^3=7\cdot7\cdot7=343$ $\checkmark$.
+
+\textbf{Answer:} $x=3$.
+
+\eplotx{-1}{4}{-30}{400}{1}{100}{\addplot[exblue,very thick,domain=-1:3.2,samples=120]{7^x};\draw[dashed,gray] (axis cs:-1,343)--(axis cs:4,343);\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(3,343)};\node[font=\tiny,below right] at (axis cs:3,343) {$(3,343)$};}
 \end{example}
 
 \begin{example}{ex6}{Example 7 --- Log equation}
-Solve $\log_6 x=3$.\soln $x=6^3=216$.
+Solve $\log_6 x=3$.\soln \textbf{Step 1 (restriction):} The argument of $\log_6x=3$ must be positive: $x>0$.
+
+\textbf{Step 2 (exponential form):} Rewrite $\log_6x=3$ as $x=6^3=216$.
+
+\textbf{Step 3 (check):} $216>0$ $\checkmark$ and $\log_6216=3$ because $6^3=216$ $\checkmark$.
+
+\textbf{Answer:} $x=216$.
+
+\eplotx{0}{230}{-1}{5}{50}{1}{\addplot[exblue,very thick,domain=0.05:230,samples=120]{ln(x)/ln(6)};\draw[dashed,gray] (axis cs:0,-1)--(axis cs:0,5);\draw[dashed,gray] (axis cs:0,3)--(axis cs:230,3);\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(216,3)};\node[font=\tiny,below left] at (axis cs:216,3) {$(216,3)$};}
 \end{example}
 
 \begin{example}{ex7}{Example 8 --- Rewrite first}
-Solve $2^{x+1}=16$.\soln $2^{x+1}=2^4\Rightarrow x+1=4\Rightarrow x=3$.
+Solve $2^{x+1}=16$.\soln \textbf{Step 1 (common base):} Write $16=2^4$, so $2^{x+1}=16$ becomes $2^{x+1}=2^4$.
+
+\textbf{Step 2 (equate the exponents):} From $2^{x+1}=2^4$: $x+1=4$.
+
+\textbf{Step 3 (solve):} $x+1=4\Rightarrow x=3$.
+
+\textbf{Step 4 (check):} $2^{3+1}=2^4=16$ $\checkmark$.
+
+\textbf{Answer:} $x=3$.
+
+\eplotx{-2}{5}{-2}{20}{1}{4}{\addplot[exblue,very thick,domain=-2:3.3,samples=120]{2^(x+1)};\draw[dashed,gray] (axis cs:-2,16)--(axis cs:5,16);\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(3,16)};\node[font=\tiny,below right] at (axis cs:3,16) {$(3,16)$};}
 \end{example}
 
 \begin{example}{ex8}{Example 9 --- Take logs}
-Solve $5^x=30$.\soln $x=\dfrac{\log30}{\log5}\approx2.11$.
+Solve $5^x=30$.\soln \textbf{Step 1 (why logs):} $30$ is not a power of $5$. Take the logarithm of both sides of $5^x=30$: $\log(5^x)=\log30$.
+
+\textbf{Step 2 (power law):} $\log(5^x)=\log30$ becomes $x\log5=\log30$.
+
+\textbf{Step 3 (solve):} $x=\dfrac{\log30}{\log5}\approx\dfrac{1.4771}{0.6990}\approx2.11$.
+
+\textbf{Step 4 (check):} $5^{2.11}\approx30$: $5^2=25$ and $5^3=125$ $\checkmark$.
+
+\textbf{Answer:} $x\approx2.11$.
+
+\eplotx{-1}{4}{-10}{130}{1}{30}{\addplot[exblue,very thick,domain=-1:3,samples=120]{5^x};\draw[dashed,gray] (axis cs:-1,30)--(axis cs:4,30);\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(2.11,30)};\node[font=\tiny,above left] at (axis cs:2.11,30) {$(2.11,30)$};}
 \end{example}
 
 \clearpage
@@ -145,19 +226,19 @@ Solve $2^{x}=50$ to two decimal places, showing the log step.\workspace{3cm}
 \begin{multicols}{2}
 \small
 \begin{enumerate}[leftmargin=*,itemsep=3pt]
-  \item $x=5$
-  \item $x=7$
-  \item $x\approx1.58$
-  \item $x=64$
-  \item $x=95$
-  \item $x=3$
-  \item $x=6$
-  \item $x=64$
-  \item $x\approx2.70$
-  \item $x=104$
-  \item $x=2$
-  \item $x=25$
-  \item $x=\tfrac{\log50}{\log2}\approx5.64$
+  \item For $3^x=243$: $243=3^5$, so $3^x=3^5$ and $x=5$
+  \item For $2^x=128$: $128=2^7$, so $2^x=2^7$ and $x=7$
+  \item For $4^x=9$: take logs, $x\log4=\log9$, so $x=\dfrac{\log9}{\log4}\approx1.58$
+  \item For $\log_4x=3$: $x>0$; exponential form $x=4^3=64$
+  \item For $\log(x+5)=2$: $x+5>0$; exponential form $x+5=10^2=100$, so $x=95$
+  \item For $4^x=64$: $64=4^3$, so $4^x=4^3$ and $x=3$
+  \item For $2^{x-1}=32$: $32=2^5$, so $x-1=5$ and $x=6$
+  \item For $\log_2x=6$: $x>0$; exponential form $x=2^6=64$
+  \item For $10^x=500$: take logs, $x=\log500\approx2.70$
+  \item For $\log(x-4)=2$: $x-4>0$; exponential form $x-4=10^2=100$, so $x=104$
+  \item For $3^{2x}=81$: $81=3^4$, so $3^{2x}=3^4$, $2x=4$ and $x=2$
+  \item For $\log_5x=2$: $x>0$; exponential form $x=5^2=25$
+  \item For $2^x=50$: take logs, $x\log2=\log50$, so $x=\dfrac{\log50}{\log2}\approx\dfrac{1.6990}{0.3010}\approx5.64$
 \end{enumerate}
 \end{multicols}
 \end{keybox}

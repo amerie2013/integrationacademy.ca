@@ -9,11 +9,11 @@
 \end{center}
 
 \begin{ideabox}
-A logarithm answers "what exponent?": $\log_b x=y\iff b^y=x$. The laws turn products, quotients and powers into sums, differences and multiples.
+A logarithm answers "what exponent?": $\log_b x=y\iff b^y=x$. The laws turn products, quotients and powers into sums, differences and multiples. In every step write the \textbf{whole expression or equation}, and name the law you use.
 \begin{itemize}[leftmargin=*,itemsep=2pt]
-  \item $\log_b x=y\iff b^y=x$.
-  \item Product $\log_b(xy)=\log_b x+\log_b y$; Quotient subtracts; Power $\log_b(x^n)=n\log_b x$.
-  \item Change of base: $\log_b x=\dfrac{\log x}{\log b}$.
+  \item Switch forms: $\log_b x=y\iff b^y=x$; the base stays the base and the exponent is the logarithm. The argument $x$ must be positive.
+  \item Product $\log_b(xy)=\log_b x+\log_b y$; Quotient $\log_b\frac{x}{y}=\log_b x-\log_b y$; Power $\log_b(x^n)=n\log_b x$.
+  \item Change of base: $\log_b x=\dfrac{\log x}{\log b}$. Mistakes to avoid: $\log(x+y)\ne\log x+\log y$.
 \end{itemize}
 \end{ideabox}
 
@@ -21,44 +21,113 @@ A logarithm answers "what exponent?": $\log_b x=y\iff b^y=x$. The laws turn prod
 \lh{A logarithm is an exponent}$\log_b x$ is the power to which $b$ must be raised to give $x$ — the inverse operation of exponentiation.
 \lh{The laws}Logs turn products, quotients, and powers into sums, differences, and multiples: $\log_b(MN)=\log_b M+\log_b N$ and $\log_b M^p=p\log_b M$.
 \lh{Change of base}Evaluate any logarithm on a calculator with $\log_b x=\dfrac{\log x}{\log b}$.
+\lh{Writing solutions}In every step write the \textbf{whole expression}, for example $\log_2(8\cdot16)=\log_28+\log_216$, and name the law you use (product, quotient, power, change of base). The argument of a logarithm must always be positive.
 \end{learnbox}
 
 \sech{Worked Examples}
 
 \begin{example}{ex0}{Example 1 --- Evaluate}
-Find $\log_2 64$.\soln $2^6=64$, so $\log_2 64=6$. The exponential $y=2^x$ is the inverse:\eplot{-3}{3}{-1}{9}{\addplot[exblue,very thick,domain=-3:3.1,samples=80]{2^x};}
+Find $\log_2 64$.\soln \textbf{Step 1 (ask the question):} $\log_2 64$ asks: 2 to what power gives $64$?
+
+\textbf{Step 2 (exponential form):} Write $\log_2 64=y$ as $2^y=64$.
+
+\textbf{Step 3 (solve):} Since $64=2^6$, the equation $2^y=64$ becomes $2^y=2^6$, so $y=6$.
+
+\textbf{Step 4 (check):} $2^6=64$ $\checkmark$; the point $(64,6)$ is on the graph of $y=\log_2x$.
+
+\textbf{Answer:} $\log_2 64=6$.
+
+\eplotx{0}{70}{-2}{7}{10}{2}{\addplot[exblue,very thick,domain=0.05:70,samples=120]{ln(x)/ln(2)};\draw[dashed,gray] (axis cs:0,-2)--(axis cs:0,7);\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(2,1) (8,3) (64,6)};\node[font=\tiny,below right] at (axis cs:2,1) {$(2,1)$};\node[font=\tiny,below right] at (axis cs:8,3) {$(8,3)$};\node[font=\tiny,below left] at (axis cs:64,6) {$(64,6)$};}
 \end{example}
 
 \begin{example}{ex1}{Example 2 --- Convert to log form}
-Write $10^4=10000$ in logarithmic form.\soln Base 10, exponent 4: $\log 10000=4$.
+Write $10^4=10000$ in logarithmic form.\soln \textbf{Step 1 (identify the parts):} In $10^4=10000$ the base is $10$, the exponent is $4$ and the result is $10000$.
+
+\textbf{Step 2 (logarithmic form):} The exponent is the logarithm and the result is the argument: $\log_{10}10000=4$, i.e.\ $\log10000=4$ (no written base means base $10$).
+
+\textbf{Step 3 (check):} Reverse it: $\log_{10}10000=4\iff10^4=10000$ $\checkmark$.
+
+\textbf{Answer:} $\log10000=4$.
 \end{example}
 
 \begin{example}{ex2}{Example 3 --- Evaluate}
-Find $\log_5 25$.\soln $5^2=25$, so $2$.
+Find $\log_5 25$.\soln \textbf{Step 1 (exponential form):} Write $\log_525=y$ as $5^y=25$.
+
+\textbf{Step 2 (solve):} Since $25=5^2$, $5^y=25$ becomes $5^y=5^2$, so $y=2$.
+
+\textbf{Step 3 (check):} $5^2=25$ $\checkmark$; the points $(5,1)$ and $(25,2)$ are on $y=\log_5x$.
+
+\textbf{Answer:} $\log_525=2$.
+
+\eplotx{0}{30}{-2}{3}{5}{1}{\addplot[exblue,very thick,domain=0.05:30,samples=120]{ln(x)/ln(5)};\draw[dashed,gray] (axis cs:0,-2)--(axis cs:0,3);\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(5,1) (25,2)};\node[font=\tiny,below right] at (axis cs:5,1) {$(5,1)$};\node[font=\tiny,below right] at (axis cs:25,2) {$(25,2)$};}
 \end{example}
 
 \begin{example}{ex3}{Example 4 --- Product law}
-Simplify $\log_2(8\cdot16)$.\soln $\log_2 8+\log_2 16=3+4=7$.
+Simplify $\log_2(8\cdot16)$.\soln \textbf{Step 1 (product law):} $\log_2(8\cdot16)=\log_28+\log_216$.
+
+\textbf{Step 2 (evaluate each term):} $\log_28+\log_216=3+4=7$, because $2^3=8$ and $2^4=16$.
+
+\textbf{Step 3 (check):} $8\cdot16=128=2^7$, so $\log_2128=7$ $\checkmark$.
+
+\textbf{Answer:} $\log_2(8\cdot16)=7$.
+
+\eplotx{0}{135}{-2}{8}{20}{2}{\addplot[exblue,very thick,domain=0.05:135,samples=120]{ln(x)/ln(2)};\draw[dashed,gray] (axis cs:0,-2)--(axis cs:0,8);\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(8,3) (16,4) (128,7)};\node[font=\tiny,below right] at (axis cs:8,3) {$(8,3)$};\node[font=\tiny,below right] at (axis cs:16,4) {$(16,4)$};\node[font=\tiny,below left] at (axis cs:128,7) {$(128,7)$};}
 \end{example}
 
 \begin{example}{ex4}{Example 5 --- Power law}
-Simplify $\log_3(9^3)$.\soln $3\log_3 9=3\cdot2=6$.
+Simplify $\log_3(9^3)$.\soln \textbf{Step 1 (power law):} $\log_3(9^3)=3\log_39$.
+
+\textbf{Step 2 (evaluate):} $3\log_39=3\cdot2=6$, because $3^2=9$.
+
+\textbf{Step 3 (check):} $9^3=(3^2)^3=3^6$, so $\log_3(3^6)=6$ $\checkmark$.
+
+\textbf{Answer:} $\log_3(9^3)=6$.
 \end{example}
 
 \begin{example}{ex5}{Example 6 --- Evaluate}
-Find $\log_7 49$.\soln $7^2=49$, so $2$.
+Find $\log_7 49$.\soln \textbf{Step 1 (exponential form):} Write $\log_749=y$ as $7^y=49$.
+
+\textbf{Step 2 (solve):} Since $49=7^2$, $7^y=7^2$ gives $y=2$.
+
+\textbf{Step 3 (check):} $7^2=49$ $\checkmark$; the point $(49,2)$ is on $y=\log_7x$.
+
+\textbf{Answer:} $\log_749=2$.
+
+\eplotx{0}{55}{-2}{3}{10}{1}{\addplot[exblue,very thick,domain=0.05:55,samples=120]{ln(x)/ln(7)};\draw[dashed,gray] (axis cs:0,-2)--(axis cs:0,3);\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(7,1) (49,2)};\node[font=\tiny,below right] at (axis cs:7,1) {$(7,1)$};\node[font=\tiny,below left] at (axis cs:49,2) {$(49,2)$};}
 \end{example}
 
 \begin{example}{ex6}{Example 7 --- Base 10}
-Find $\log 100000$.\soln $10^5=100000$, so $5$.
+Find $\log 100000$.\soln \textbf{Step 1 (base):} $\log100000$ has no written base, so it is $\log_{10}100000$.
+
+\textbf{Step 2 (exponential form):} Write $\log_{10}100000=y$ as $10^y=100000=10^5$, so $y=5$.
+
+\textbf{Step 3 (check):} Count the zeros: $100000$ has $5$ zeros, so $\log100000=5$ $\checkmark$.
+
+\textbf{Answer:} $\log100000=5$.
 \end{example}
 
 \begin{example}{ex7}{Example 8 --- Quotient law}
-Simplify $\log_2\dfrac{32}{4}$.\soln $\log_2 32-\log_2 4=5-2=3$.
+Simplify $\log_2\dfrac{32}{4}$.\soln \textbf{Step 1 (quotient law):} $\log_2\dfrac{32}{4}=\log_232-\log_24$.
+
+\textbf{Step 2 (evaluate):} $\log_232-\log_24=5-2=3$.
+
+\textbf{Step 3 (check):} $\dfrac{32}{4}=8=2^3$, so $\log_28=3$ $\checkmark$.
+
+\textbf{Answer:} $\log_2\dfrac{32}{4}=3$.
+
+\eplotx{0}{36}{-2}{6}{5}{1}{\addplot[exblue,very thick,domain=0.05:36,samples=120]{ln(x)/ln(2)};\draw[dashed,gray] (axis cs:0,-2)--(axis cs:0,6);\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(4,2) (8,3) (32,5)};\node[font=\tiny,below right] at (axis cs:4,2) {$(4,2)$};\node[font=\tiny,below right] at (axis cs:8,3) {$(8,3)$};\node[font=\tiny,below left] at (axis cs:32,5) {$(32,5)$};}
 \end{example}
 
 \begin{example}{ex8}{Example 9 --- Change of base}
-Express $\log_2 10$ with base-10 logs.\soln $\log_2 10=\dfrac{\log 10}{\log 2}\approx3.32$.
+Express $\log_2 10$ with base-10 logs and evaluate it.\soln \textbf{Step 1 (change of base):} $\log_210=\dfrac{\log10}{\log2}$.
+
+\textbf{Step 2 (calculate):} $\dfrac{\log10}{\log2}=\dfrac{1}{0.3010}\approx3.32$.
+
+\textbf{Step 3 (check):} $2^3=8<10<16=2^4$, so an exponent between $3$ and $4$ is reasonable $\checkmark$.
+
+\textbf{Answer:} $\log_210\approx3.32$.
+
+\eplotx{0}{18}{-2}{5}{4}{1}{\addplot[exblue,very thick,domain=0.05:18,samples=120]{ln(x)/ln(2)};\draw[dashed,gray] (axis cs:0,-2)--(axis cs:0,5);\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(8,3) (10,3.32) (16,4)};\node[font=\tiny,below right] at (axis cs:8,3) {$(8,3)$};\node[font=\tiny,below right] at (axis cs:10,3.32) {$(10,3.32)$};\node[font=\tiny,below right] at (axis cs:16,4) {$(16,4)$};}
 \end{example}
 
 \clearpage
@@ -145,19 +214,19 @@ Write $\log_2 40$ as a sum/difference of $\log_2 2,\log_2 5$ (note $40=2^3\cdot5
 \begin{multicols}{2}
 \small
 \begin{enumerate}[leftmargin=*,itemsep=3pt]
-  \item $4$
-  \item $\log_3 81=4$
-  \item $6$
-  \item $4+5=9$
-  \item $5\cdot2=10$
-  \item $3$
-  \item $6-3=3$
-  \item $0$
-  \item $\dfrac{\log20}{\log3}$
-  \item $7$
-  \item $-2$
-  \item $\log10=1$
-  \item $3+\log_2 5$
+  \item $\log_216=y\iff2^y=16=2^4$, so $y=4$
+  \item base $3$, exponent $4$, result $81$: $\log_381=4$
+  \item $\log10^6=\log_{10}10^6=6$, since $10^6=10^6$
+  \item $\log_2(16\cdot32)=\log_216+\log_232=4+5=9$
+  \item $\log_2(4^5)=5\log_24=5\cdot2=10$
+  \item $\log_464=y\iff4^y=64=4^3$, so $y=3$
+  \item $\log_2\dfrac{64}{8}=\log_264-\log_28=6-3=3$
+  \item $\log_21=y\iff2^y=1=2^0$, so $y=0$
+  \item $\log_320=\dfrac{\log20}{\log3}$ (base-10 logs)
+  \item $\log_bb^7=7\log_bb=7\cdot1=7$
+  \item $\log_{10}0.01=y\iff10^y=0.01=10^{-2}$, so $y=-2$
+  \item $\log2+\log5=\log(2\cdot5)=\log10=1$
+  \item $\log_240=\log_2(2^3\cdot5)=\log_22^3+\log_25=3\log_22+\log_25=3+\log_25$
 \end{enumerate}
 \end{multicols}
 \end{keybox}

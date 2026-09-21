@@ -9,11 +9,11 @@
 \end{center}
 
 \begin{ideabox}
-Model with $A=A_0\,b^{t/p}$ (growth $b>1$, decay $0<b<1$); use logs for doubling time and half-life; log scales (pH, dB, Richter) step by factors of ten.
+Model with $A=A_0\,b^{t/p}$ (growth $b>1$, decay $0<b<1$); use logs for doubling time and half-life; log scales (pH, dB, Richter) step by factors of ten. State the model, name what each letter means, and write the \textbf{whole model} in every step.
 \begin{itemize}[leftmargin=*,itemsep=2pt]
-  \item $A=A_0\,b^{t/p}$, where $p$ is the doubling time or half-life.
-  \item Doubling time $=\dfrac{\log2}{\log(\text{growth factor})}$.
-  \item $\text{pH}=-\log[\text{H}^+]$; each Richter step is $\times10$.
+  \item $A=A_0\,b^{t/p}$: $A_0$ is the start, $b$ the factor per period ($2$ for doubling, $\tfrac12$ for half-life), $p$ the length of a period.
+  \item Finding a time: isolate the power, then match bases or take logs. Doubling time $=\dfrac{\log2}{\log(\text{growth factor})}$.
+  \item $\text{pH}=-\log[\text{H}^+]$; each Richter step is $\times10$, so a difference of $d$ steps is $10^d$.
 \end{itemize}
 \end{ideabox}
 
@@ -21,44 +21,129 @@ Model with $A=A_0\,b^{t/p}$ (growth $b>1$, decay $0<b<1$); use logs for doubling
 \lh{Growth and decay}Exponential models $A=A_0 b^{\,t}$ describe populations, radioactive decay, and cooling; logarithms solve them for the time.
 \lh{Compound interest}Investments grow by $A=P(1+i)^n$, and finding the number of periods $n$ requires a logarithm.
 \lh{Logarithmic scales}Quantities spanning huge ranges — sound in decibels, earthquakes on the Richter scale, acidity as pH — use \textbf{logarithmic} scales.
+\lh{Writing solutions}State the model and what each letter means, then write the \textbf{whole model} in every step (for example $P=100\cdot2^{10/5}$). If the target is a whole number of periods, match the bases; otherwise take logs, and always check by substituting back.
 \end{learnbox}
 
 \sech{Worked Examples}
 
 \begin{example}{ex0}{Example 1 --- Growth}
-$P=120\cdot2^{t/2}$. Find $P$ at $t=6$.\soln $P=120\cdot2^{3}=960$. Growth $2^x$ vs decay $0.5^x$:\eplot{-3}{3}{-1}{9}{\addplot[exblue,very thick,domain=-3:3.1,samples=80]{2^x};\addplot[qorange,very thick,domain=-3.1:3,samples=80]{0.5^x};}
+$P=120\cdot2^{t/2}$. Find $P$ at $t=6$.\soln \textbf{Step 1 (read the model):} In $P=120\cdot2^{t/2}$: $P_0=120$, the factor is $2$ (doubling) and the period is $p=2$.
+
+\textbf{Step 2 (substitute):} Put $t=6$ into $P=120\cdot2^{t/2}$: $P=120\cdot2^{6/2}=120\cdot2^3$.
+
+\textbf{Step 3 (evaluate):} $120\cdot8=960$.
+
+\textbf{Step 4 (check):} Three periods pass, so the amount doubles three times: $120\to240\to480\to960$ $\checkmark$.
+
+\textbf{Answer:} $P=960$.
+
+\eplotx{0}{8}{-100}{1300}{2}{300}{\addplot[exblue,very thick,domain=0:8,samples=120]{120*2^(x/2)};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(0,120) (2,240) (4,480) (6,960)};\node[font=\tiny,above right] at (axis cs:0,120) {$(0,120)$};\node[font=\tiny,above left] at (axis cs:2,240) {$(2,240)$};\node[font=\tiny,above left] at (axis cs:4,480) {$(4,480)$};\node[font=\tiny,above left] at (axis cs:6,960) {$(6,960)$};}
 \end{example}
 
 \begin{example}{ex1}{Example 2 --- Half-life}
-$A=96(\tfrac12)^{t/2}$. Find $A$ at $t=6$.\soln $A=96\cdot(\tfrac12)^3=96\cdot\tfrac18=12$ mg.
+$A=96\left(\tfrac12\right)^{t/2}$. Find $A$ at $t=6$.\soln \textbf{Step 1 (read the model):} In $A=96\left(\tfrac12\right)^{t/2}$: $A_0=96$, the factor is $\tfrac12$ (halving) and the half-life is $p=2$.
+
+\textbf{Step 2 (substitute):} Put $t=6$ into $A=96\left(\tfrac12\right)^{t/2}$: $A=96\left(\tfrac12\right)^{6/2}=96\left(\tfrac12\right)^3$.
+
+\textbf{Step 3 (evaluate):} $96\cdot\tfrac18=12$.
+
+\textbf{Step 4 (check):} Three half-lives: $96\to48\to24\to12$ $\checkmark$.
+
+\textbf{Answer:} $A=12$ mg.
+
+\eplotx{0}{8}{-10}{110}{2}{20}{\addplot[exblue,very thick,domain=0:8,samples=120]{96*0.5^(x/2)};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(0,96) (2,48) (4,24) (6,12)};\node[font=\tiny,above right] at (axis cs:0,96) {$(0,96)$};\node[font=\tiny,above right] at (axis cs:2,48) {$(2,48)$};\node[font=\tiny,above right] at (axis cs:4,24) {$(4,24)$};\node[font=\tiny,above right] at (axis cs:6,12) {$(6,12)$};}
 \end{example}
 
 \begin{example}{ex2}{Example 3 --- Doubling time}
-How long to double at 3\% /yr?\soln $2=1.03^t\Rightarrow t=\dfrac{\log2}{\log1.03}\approx23.4$ yr.
+How long to double at 3\% /yr?\soln \textbf{Step 1 (model):} The yearly growth factor is $1.03$, so $A=A_0(1.03)^t$.
+
+\textbf{Step 2 (set up the doubling):} Doubling means $A=2A_0$: $2A_0=A_0(1.03)^t$, so $2=1.03^t$.
+
+\textbf{Step 3 (take logs):} Take the logarithm of both sides of $2=1.03^t$: $\log2=t\log1.03$.
+
+\textbf{Step 4 (solve):} $t=\dfrac{\log2}{\log1.03}\approx\dfrac{0.3010}{0.01284}\approx23.4$.
+
+\textbf{Step 5 (check):} $1.03^{23.4}\approx2.00$ $\checkmark$.
+
+\textbf{Answer:} about $23.4$ years.
+
+\eplotx{0}{28}{0.5}{2.6}{5}{1}{\addplot[exblue,very thick,domain=0:28,samples=120]{1.03^x};\draw[dashed,gray] (axis cs:0,2)--(axis cs:28,2);\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(0,1) (23.4,2)};\node[font=\tiny,above right] at (axis cs:0,1) {$(0,1)$};\node[font=\tiny,below right] at (axis cs:23.4,2) {$(23.4,2)$};}
 \end{example}
 
 \begin{example}{ex3}{Example 4 --- pH scale}
-Find the pH if $[\text{H}^+]=10^{-6}$.\soln $\text{pH}=-\log(10^{-6})=6$.
+Find the pH if $[\text{H}^+]=10^{-6}$.\soln \textbf{Step 1 (substitute):} $\text{pH}=-\log[\text{H}^+]$ becomes $\text{pH}=-\log(10^{-6})$.
+
+\textbf{Step 2 (evaluate):} $\log(10^{-6})=-6$, so $\text{pH}=-(-6)=6$.
+
+\textbf{Answer:} $\text{pH}=6$.
 \end{example}
 
 \begin{example}{ex4}{Example 5 --- Richter scale}
-How much stronger is magnitude 8 than magnitude 7?\soln Difference $1\Rightarrow10^1=10\times$.
+How much stronger is magnitude 8 than magnitude 7?\soln \textbf{Step 1 (the scale):} Each unit of magnitude multiplies the amplitude by $10$, so the ratio is $10^d$ where $d$ is the difference.
+
+\textbf{Step 2 (difference):} $d=8-7=1$.
+
+\textbf{Step 3 (ratio):} $10^d=10^1=10$.
+
+\textbf{Answer:} $10\times$ the amplitude.
 \end{example}
 
 \begin{example}{ex5}{Example 6 --- Growth}
-$P=250\cdot2^{t/4}$. Find $P$ at $t=12$.\soln $250\cdot2^3=2000$.
+$P=250\cdot2^{t/4}$. Find $P$ at $t=12$.\soln \textbf{Step 1 (read the model):} In $P=250\cdot2^{t/4}$: $P_0=250$, doubling, period $p=4$.
+
+\textbf{Step 2 (substitute):} Put $t=12$ into $P=250\cdot2^{t/4}$: $P=250\cdot2^{12/4}=250\cdot2^3$.
+
+\textbf{Step 3 (evaluate):} $250\cdot8=2000$.
+
+\textbf{Step 4 (check):} Three doublings: $250\to500\to1000\to2000$ $\checkmark$.
+
+\textbf{Answer:} $P=2000$.
+
+\eplotx{0}{14}{-200}{2400}{2}{500}{\addplot[exblue,very thick,domain=0:14,samples=120]{250*2^(x/4)};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(0,250) (4,500) (8,1000) (12,2000)};\node[font=\tiny,above right] at (axis cs:0,250) {$(0,250)$};\node[font=\tiny,above left] at (axis cs:4,500) {$(4,500)$};\node[font=\tiny,above left] at (axis cs:8,1000) {$(8,1000)$};\node[font=\tiny,above left] at (axis cs:12,2000) {$(12,2000)$};}
 \end{example}
 
 \begin{example}{ex6}{Example 7 --- Half-life}
-$A=200(\tfrac12)^{t/6}$. Find $A$ at $t=12$.\soln $200\cdot\tfrac14=50$.
+$A=200\left(\tfrac12\right)^{t/6}$. Find $A$ at $t=12$.\soln \textbf{Step 1 (read the model):} In $A=200\left(\tfrac12\right)^{t/6}$: $A_0=200$, halving, half-life $p=6$.
+
+\textbf{Step 2 (substitute):} Put $t=12$ into $A=200\left(\tfrac12\right)^{t/6}$: $A=200\left(\tfrac12\right)^{12/6}=200\left(\tfrac12\right)^2$.
+
+\textbf{Step 3 (evaluate):} $200\cdot\tfrac14=50$.
+
+\textbf{Step 4 (check):} Two half-lives: $200\to100\to50$ $\checkmark$.
+
+\textbf{Answer:} $A=50$.
+
+\eplotx{0}{14}{-20}{230}{2}{50}{\addplot[exblue,very thick,domain=0:14,samples=120]{200*0.5^(x/6)};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(0,200) (6,100) (12,50)};\node[font=\tiny,above right] at (axis cs:0,200) {$(0,200)$};\node[font=\tiny,above right] at (axis cs:6,100) {$(6,100)$};\node[font=\tiny,above right] at (axis cs:12,50) {$(12,50)$};}
 \end{example}
 
 \begin{example}{ex7}{Example 8 --- Doubling time}
-How long to double at 6\% /yr?\soln $\dfrac{\log2}{\log1.06}\approx11.9$ yr.
+How long to double at 6\% /yr?\soln \textbf{Step 1 (model):} The yearly growth factor is $1.06$, so $A=A_0(1.06)^t$.
+
+\textbf{Step 2 (set up the doubling):} $2A_0=A_0(1.06)^t$, so $2=1.06^t$.
+
+\textbf{Step 3 (take logs and solve):} Take logs of both sides of $2=1.06^t$: $\log2=t\log1.06$, so $t=\dfrac{\log2}{\log1.06}\approx\dfrac{0.3010}{0.02531}\approx11.9$.
+
+\textbf{Step 4 (check):} $1.06^{11.9}\approx2.00$ $\checkmark$.
+
+\textbf{Answer:} about $11.9$ years.
+
+\eplotx{0}{16}{0.5}{2.6}{2}{1}{\addplot[exblue,very thick,domain=0:16,samples=120]{1.06^x};\draw[dashed,gray] (axis cs:0,2)--(axis cs:16,2);\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(0,1) (11.9,2)};\node[font=\tiny,above right] at (axis cs:0,1) {$(0,1)$};\node[font=\tiny,below right] at (axis cs:11.9,2) {$(11.9,2)$};}
 \end{example}
 
-\begin{example}{ex8}{Example 9 --- pH scale}
-Find the pH if $[\text{H}^+]=10^{-11}$.\soln pH $=11$.
+\begin{example}{ex8}{Example 9 --- Solve for time}
+$P=250\cdot2^{t/4}$. When does $P$ reach $4000$?\soln \textbf{Step 1 (set up):} Set $P=4000$ in $P=250\cdot2^{t/4}$: $250\cdot2^{t/4}=4000$.
+
+\textbf{Step 2 (isolate the power):} Divide both sides of $250\cdot2^{t/4}=4000$ by $250$: $2^{t/4}=16$.
+
+\textbf{Step 3 (common base):} $16=2^4$, so $2^{t/4}=2^4$.
+
+\textbf{Step 4 (equate the exponents):} $\dfrac t4=4\Rightarrow t=16$.
+
+\textbf{Step 5 (check):} Four doublings: $250\to500\to1000\to2000\to4000$ $\checkmark$.
+
+\textbf{Answer:} $P=4000$ at $t=16$ (no logs needed).
+
+\eplotx{0}{18}{-300}{4600}{4}{1000}{\addplot[exblue,very thick,domain=0:17,samples=120]{250*2^(x/4)};\draw[dashed,gray] (axis cs:0,4000)--(axis cs:18,4000);\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(16,4000)};\node[font=\tiny,below right] at (axis cs:16,4000) {$(16,4000)$};}
 \end{example}
 
 \clearpage
@@ -145,19 +230,19 @@ Bacteria double every 3 h from 500. Write the model and find the count at $t=9$ 
 \begin{multicols}{2}
 \small
 \begin{enumerate}[leftmargin=*,itemsep=3pt]
-  \item $1200$
-  \item $60$
-  \item $\tfrac{\log2}{\log1.08}\approx9.01$ yr
-  \item $3$
-  \item $1000\times$
-  \item $400$
-  \item $8$
-  \item $\tfrac{\log3}{\log1.05}\approx22.52$ yr
-  \item $9$
-  \item $4$
-  \item $150$
-  \item $\tfrac{\log1.5}{\log1.05}\approx8.31$ yr
-  \item $P=500\cdot2^{t/3}$, $P(9)=4000$
+  \item $P=300\cdot2^{12/6}=300\cdot2^2=1200$
+  \item $A=240\left(\tfrac12\right)^{8/4}=240\left(\tfrac12\right)^2=60$
+  \item Solve $2=1.08^t$: $t=\dfrac{\log2}{\log1.08}\approx9.01$ yr
+  \item $\text{pH}=-\log(10^{-3})=3$
+  \item $10^{6-3}=10^3=1000\times$
+  \item $P=100\cdot2^{20/10}=100\cdot2^2=400$
+  \item $A=64\left(\tfrac12\right)^{6/2}=64\left(\tfrac12\right)^3=8$
+  \item Solve $3=1.05^t$: $t=\dfrac{\log3}{\log1.05}\approx22.52$ yr
+  \item $\text{pH}=-\log(10^{-9})=9$
+  \item $10^d=10^4\Rightarrow d=4$
+  \item $P=50\cdot3^{5/5}=50\cdot3=150$
+  \item Solve $1.5=1.05^t$: $t=\dfrac{\log1.5}{\log1.05}\approx8.31$ yr
+  \item Model $P=500\cdot2^{t/3}$; $P(9)=500\cdot2^{9/3}=500\cdot2^3=4000$
 \end{enumerate}
 \end{multicols}
 \end{keybox}

@@ -9,11 +9,11 @@
 \end{center}
 
 \begin{ideabox}
-$y=\log_b x$ is the reflection of $y=b^x$ in $y=x$: vertical asymptote $x=0$, domain $x>0$, range all reals, through $(1,0)$.
+$y=\log_b x$ is the reflection of $y=b^x$ in $y=x$: vertical asymptote $x=0$, domain $x>0$, range all reals, through $(1,0)$. In every step write the \textbf{whole function}, e.g.\ \emph{the argument of $y=\log(x-2)$ must be positive}.
 \begin{itemize}[leftmargin=*,itemsep=2pt]
-  \item VA at $x=0$; domain $x>0$; range all reals.
-  \item Passes through $(1,0)$; increasing for $b>1$.
-  \item $y=\log_b(x-d)$ shifts the VA to $x=d$.
+  \item VA at $x=0$; domain $x>0$ (the argument must be positive); range all reals.
+  \item Passes through $(1,0)$ and $(b,1)$; increasing for $b>1$.
+  \item For $y=a\log_b\big(k(x-d)\big)+c$ the VA is $x=d$ and points map by $(x,y)\to\left(\tfrac xk+d,\ ay+c\right)$.
 \end{itemize}
 \end{ideabox}
 
@@ -21,44 +21,103 @@ $y=\log_b x$ is the reflection of $y=b^x$ in $y=x$: vertical asymptote $x=0$, do
 \lh{Inverse of the exponential}$y=\log_b x$ is the reflection of $y=b^x$ in the line $y=x$, with a \textbf{vertical} asymptote at $x=0$.
 \lh{Domain and range}A logarithmic function is defined only for $x>0$, and its range is all real numbers — the mirror of the exponential.
 \lh{Transformations}The framework $y=a\log_b\!\left(k(x-d)\right)+c$ shifts and stretches the curve and moves the vertical asymptote to $x=d$.
+\lh{Writing solutions}Write the \textbf{whole function} in every step. To graph $y=a\log_b\!\big(k(x-d)\big)+c$: draw the asymptote $x=d$, map the parent's key points $\left(\tfrac1b,-1\right),(1,0),(b,1)$ with $(x,y)\to\left(\tfrac xk+d,\ ay+c\right)$, then sketch.
 \end{learnbox}
 
 \sech{Worked Examples}
 
 \begin{example}{ex0}{Example 1 --- The log graph}
-Sketch $y=\log_4 x$.\soln VA $x=0$, through $(1,0)$ and $(4,1)$, increasing:\eplot{0}{8}{-3}{3}{\addplot[exblue,very thick,domain=0.06:8,samples=140]{ln(x)/ln(4)};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(1,0) (4,1)};}
+Sketch $y=\log_4 x$.\soln \textbf{Step 1 (vertical asymptote and domain):} The argument of $y=\log_4x$ must be positive, so the domain is $x>0$ and the VA is $x=0$.
+
+\textbf{Step 2 (key points):} From $4^y=x$: $y=-1\Rightarrow x=\tfrac14$; $y=0\Rightarrow x=1$; $y=1\Rightarrow x=4$; $y=2\Rightarrow x=16$. So $\left(\tfrac14,-1\right),(1,0),(4,1),(16,2)$ are on $y=\log_4x$.
+
+\textbf{Step 3 (shape):} The base $4>1$, so the curve is increasing, with range all reals.
+
+\textbf{Answer:} $y=\log_4x$: VA $x=0$, increasing, through $(1,0)$ and $(4,1)$.
+
+\eplotx{0}{18}{-3}{3}{4}{1}{\addplot[exblue,very thick,domain=0.05:18,samples=120]{ln(x)/ln(4)};\draw[dashed,gray] (axis cs:0,-3)--(axis cs:0,3);\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(0.25,-1) (1,0) (4,1) (16,2)};\node[font=\tiny,right] at (axis cs:0.25,-1) {$(1/4,-1)$};\node[font=\tiny,below right] at (axis cs:1,0) {$(1,0)$};\node[font=\tiny,below right] at (axis cs:4,1) {$(4,1)$};\node[font=\tiny,below left] at (axis cs:16,2) {$(16,2)$};}
 \end{example}
 
 \begin{example}{ex1}{Example 2 --- Domain}
-Domain of $y=\log x$?\soln Argument $>0$: $x>0$.
+Domain of $y=\log x$?\soln \textbf{Step 1 (positive argument):} The argument of $y=\log x$ must be positive: $x>0$.
+
+\textbf{Step 2 (test values):} $y=\log5$ is defined, but $y=\log0$ and $y=\log(-3)$ are not.
+
+\textbf{Answer:} the domain of $y=\log x$ is $x>0$.
+
+\eplotx{0}{12}{-2}{3}{2}{1}{\addplot[exblue,very thick,domain=0.05:12,samples=120]{log10(x)};\draw[dashed,gray] (axis cs:0,-2)--(axis cs:0,3);\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(1,0) (10,1)};\node[font=\tiny,below right] at (axis cs:1,0) {$(1,0)$};\node[font=\tiny,below right] at (axis cs:10,1) {$(10,1)$};}
 \end{example}
 
 \begin{example}{ex2}{Example 3 --- Inverse pair}
-How are $y=5^x$ and $y=\log_5 x$ related?\soln They are inverses — mirror images across $y=x$:\eplot{-2}{6}{-2}{6}{\addplot[exblue,very thick,domain=-2:1.1,samples=80]{5^x};\addplot[qorange,very thick,domain=0.05:6,samples=140]{ln(x)/ln(5)};\addplot[gray,dashed,domain=-2:6]{x};}
+How are $y=5^x$ and $y=\log_5 x$ related?\soln \textbf{Step 1 (swap x and y):} Start from $y=5^x$ and swap $x$ and $y$: $x=5^y\iff y=\log_5x$.
+
+\textbf{Step 2 (points swap):} A point $(a,b)$ on $y=5^x$ becomes $(b,a)$ on $y=\log_5x$: $(0,1)\to(1,0)$ and $(1,5)\to(5,1)$.
+
+\textbf{Step 3 (reflect):} The graphs are mirror images across the line $y=x$; the horizontal asymptote $y=0$ of $y=5^x$ becomes the vertical asymptote $x=0$ of $y=\log_5x$.
+
+\textbf{Answer:} $y=5^x$ and $y=\log_5x$ are inverses (reflections in $y=x$).
+
+\eplotx{-2}{6}{-2}{6}{2}{2}{\addplot[exblue,very thick,domain=-2:1.1,samples=80]{5^x};\addplot[exblue,very thick,domain=0.05:6,samples=120]{ln(x)/ln(5)};\addplot[gray,dashed,very thick,domain=-2:6,samples=120]{x};\draw[dashed,gray] (axis cs:0,-2)--(axis cs:0,6);\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(0,1) (1,5) (1,0) (5,1)};\node[font=\tiny,above left] at (axis cs:0,1) {$(0,1)$};\node[font=\tiny,right] at (axis cs:1,5) {$(1,5)$};\node[font=\tiny,below right] at (axis cs:1,0) {$(1,0)$};\node[font=\tiny,below right] at (axis cs:5,1) {$(5,1)$};}
 \end{example}
 
 \begin{example}{ex3}{Example 4 --- Vertical asymptote}
-VA of $y=\log x$?\soln As $x\to0^+,\ y\to-\infty$: $x=0$.
+VA of $y=\log x$?\soln \textbf{Step 1 (look near zero):} For $y=\log x$: $\log0.1=-1$, $\log0.001=-3$, $\log0.000001=-6$. As $x\to0^+$, $y\to-\infty$.
+
+\textbf{Step 2 (asymptote):} The curve $y=\log x$ falls without bound but never reaches the y-axis.
+
+\textbf{Answer:} the vertical asymptote of $y=\log x$ is $x=0$.
 \end{example}
 
 \begin{example}{ex4}{Example 5 --- Key point}
-What point is on every $y=\log_b x$?\soln $\log_b 1=0$, so $(1,0)$.
+What point is on every graph $y=\log_b x$?\soln \textbf{Step 1 (log of 1):} For $y=\log_bx$ set $x=1$: $\log_b1=y\iff b^y=1$, so $y=0$ for every base $b$.
+
+\textbf{Step 2 (also (b, 1)):} Since $\log_bb=1$, the point $(b,1)$ is also on $y=\log_bx$: $(2,1)$, $(5,1)$, $(10,1)$.
+
+\textbf{Answer:} $(1,0)$, whatever the base.
+
+\eplotx{0}{12}{-2}{3}{2}{1}{\addplot[exblue,very thick,domain=0.05:12,samples=120]{ln(x)/ln(2)};\addplot[qorange,very thick,domain=0.05:12,samples=120]{ln(x)/ln(5)};\addplot[red,very thick,domain=0.05:12,samples=120]{log10(x)};\draw[dashed,gray] (axis cs:0,-2)--(axis cs:0,3);\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(1,0)};\node[font=\tiny,below right] at (axis cs:1,0) {$(1,0)$};}
 \end{example}
 
 \begin{example}{ex5}{Example 6 --- Transformation}
-VA of $y=\log(x-2)$?\soln $x-2>0\Rightarrow x>2$, so VA $x=2$.
+VA of $y=\log(x-2)$?\soln \textbf{Step 1 (positive argument):} The argument of $y=\log(x-2)$ must be positive: $x-2>0\Rightarrow x>2$.
+
+\textbf{Step 2 (asymptote):} As $x\to2^+$, $y=\log(x-2)\to-\infty$, so the VA is $x=2$: the graph of $y=\log x$ has moved right $2$.
+
+\textbf{Step 3 (points):} $(1,0)\to(3,0)$ and $(10,1)\to(12,1)$. Check: $\log(3-2)=\log1=0$ $\checkmark$.
+
+\textbf{Answer:} the vertical asymptote of $y=\log(x-2)$ is $x=2$.
+
+\eplotx{0}{14}{-3}{3}{2}{1}{\addplot[exblue,very thick,domain=2.05:14,samples=120]{log10(x-2)};\draw[dashed,gray] (axis cs:2,-3)--(axis cs:2,3);\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(3,0) (12,1)};\node[font=\tiny,below right] at (axis cs:3,0) {$(3,0)$};\node[font=\tiny,below left] at (axis cs:12,1) {$(12,1)$};}
 \end{example}
 
 \begin{example}{ex6}{Example 7 --- Range}
-Range of $y=\log x$?\soln All real numbers.
+Range of $y=\log x$?\soln \textbf{Step 1 (can y be any number?):} For $y=\log x$, every real $y$ has an $x$ with $\log x=y$, namely $x=10^y$.
+
+\textbf{Step 2 (examples):} $y=5$ comes from $x=10^5$; $y=-5$ comes from $x=10^{-5}$.
+
+\textbf{Answer:} the range of $y=\log x$ is all real numbers.
 \end{example}
 
 \begin{example}{ex7}{Example 8 --- Inverse}
-Inverse of $y=7^x$?\soln $y=\log_7 x$.
+Inverse of $y=7^x$?\soln \textbf{Step 1 (swap x and y):} Start from $y=7^x$ and swap: $x=7^y$.
+
+\textbf{Step 2 (logarithmic form):} $x=7^y$ is the same as $y=\log_7x$.
+
+\textbf{Step 3 (check with a point):} $(1,7)$ on $y=7^x$ becomes $(7,1)$ on $y=\log_7x$, and $\log_77=1$ $\checkmark$.
+
+\textbf{Answer:} the inverse of $y=7^x$ is $y=\log_7x$.
 \end{example}
 
 \begin{example}{ex8}{Example 9 --- Transformation}
-VA of $y=\log(x+6)$?\soln $x+6>0\Rightarrow x>-6$, so VA $x=-6$.
+VA of $y=\log(x+6)$?\soln \textbf{Step 1 (positive argument):} The argument of $y=\log(x+6)$ must be positive: $x+6>0\Rightarrow x>-6$.
+
+\textbf{Step 2 (asymptote):} As $x\to-6^+$, $y=\log(x+6)\to-\infty$, so the VA is $x=-6$: the graph of $y=\log x$ has moved left $6$.
+
+\textbf{Step 3 (points):} $(1,0)\to(-5,0)$ and $(10,1)\to(4,1)$. Check: $\log(4+6)=\log10=1$ $\checkmark$.
+
+\textbf{Answer:} the vertical asymptote of $y=\log(x+6)$ is $x=-6$.
+
+\eplotx{-8}{8}{-3}{3}{2}{1}{\addplot[exblue,very thick,domain=-5.95:8,samples=120]{log10(x+6)};\draw[dashed,gray] (axis cs:-6,-3)--(axis cs:-6,3);\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(-5,0) (4,1)};\node[font=\tiny,below right] at (axis cs:-5,0) {$(-5,0)$};\node[font=\tiny,below right] at (axis cs:4,1) {$(4,1)$};}
 \end{example}
 
 \clearpage
@@ -145,19 +204,19 @@ State the domain, range, VA and a key point of $y=\log_2(x-1)$.\workspace{3.5cm}
 \begin{multicols}{2}
 \small
 \begin{enumerate}[leftmargin=*,itemsep=3pt]
-  \item $x>0$
-  \item $x=-8$
-  \item $1$
-  \item increasing
-  \item $y=\log_4 x$
-  \item all reals
-  \item $x=5$
-  \item $x>1$
-  \item $(1,0)$
-  \item $y=\log x$
-  \item $x=0$
-  \item $\to-\infty$
-  \item domain $x>1$, range all reals, VA $x=1$, point $(2,0)$
+  \item For $y=\log_6x$ the argument must be positive, so the domain is $x>0$
+  \item For $y=\log(x+8)$: $x+8>0\Rightarrow x>-8$, so the VA is $x=-8$
+  \item $\log_bb=y\iff b^y=b^1$, so $\log_bb=1$
+  \item For $y=\log_7x$ the base $7>1$, so the function is increasing
+  \item Swap $x$ and $y$ in $y=4^x$: $x=4^y\iff y=\log_4x$
+  \item The range of $y=\log x$ is all reals (e.g.\ $\log10^5=5$ and $\log10^{-5}=-5$)
+  \item For $y=\log(x-5)$: $x-5>0\Rightarrow x>5$, so the VA is $x=5$
+  \item For $y=\log(x-1)$: $x-1>0\Rightarrow x>1$, so the domain is $x>1$
+  \item Set $y=0$ in $y=\log_9x$: $\log_9x=0\Rightarrow x=9^0=1$, so the point is $(1,0)$
+  \item Swap $x$ and $y$ in $y=10^x$: $x=10^y\iff y=\log x$ ($=\log_{10}x$)
+  \item For $y=\log x+4$ the argument is still $x$, so $x>0$ and the VA is $x=0$ (the $+4$ only moves the graph up)
+  \item For $y=\log x$: $\log0.01=-2$ and $\log0.0001=-4$, so $y\to-\infty$
+  \item For $y=\log_2(x-1)$: $x-1>0$ gives domain $x>1$ and VA $x=1$; range all reals; key points $(1,0)\to(2,0)$ and $(2,1)\to(3,1)$, so $(2,0)$ and $(3,1)$ are on the graph
 \end{enumerate}
 \end{multicols}
 \end{keybox}
