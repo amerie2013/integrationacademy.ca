@@ -4,6 +4,29 @@
 const r = String.raw;
 const U = "3: Rational Functions";
 
+// ── Worksheet 3.3: sign tables for the rational inequalities are generated (signs + answers computed) ──
+import { signChart, lin, bottom, cst } from "../../mhf4u-signtable.mjs";
+const s3 = (n, t) => `\\textbf{Step ${n}:} ${t}`;
+const sigs3 = (c) => c.cols.filter((x) => x.kind === "int").map((x) => (x.p > 0 ? "+" : "-")).join(",");
+const zeros3 = (c) => c.zeros.map((z) => z[1]).join(",\\,");
+const fin3 = (c) => `\\textbf{Answer:} $${c.ineq}$, i.e.\\ $${c.interval}$.`;
+const ANS3 = (c) => `For $${c.cond}$: critical values $${zeros3(c)}$ (bottom zeros excluded); signs $${sigs3(c)}$; $${c.ineq}$, i.e.\\ $${c.interval}$`;
+const rneg = (r, tex) => ({ tex, f: (x) => r - x, root: r });
+const W3 = {
+  e4: signChart({ factors: [lin(-1), bottom(lin(3))], ineq: ">", pTex: "\\dfrac{x+1}{x-3}" }),
+  e5: signChart({ factors: [cst(1), bottom(lin(5))], ineq: "<", pTex: "\\dfrac{1}{x-5}" }),
+  e8: signChart({ factors: [lin(4), bottom(lin(0))], ineq: ">", pTex: "\\dfrac{x-4}{x}" }),
+  e9: signChart({ factors: [rneg(5, "5-x"), bottom(lin(1))], ineq: "<=", pTex: "\\dfrac{5-x}{x-1}" }),
+};
+const WQ3 = {
+  3: signChart({ factors: [lin(0), bottom(lin(-6))], ineq: ">", pTex: "\\dfrac{x}{x+6}" }),
+  4: signChart({ factors: [cst(-1), bottom(lin(-2))], ineq: ">", pTex: "\\dfrac{-1}{x+2}" }),
+  8: signChart({ factors: [lin(0), bottom(lin(3))], ineq: "<", pTex: "\\dfrac{x}{x-3}" }),
+  9: signChart({ factors: [cst(1), bottom(lin(4))], ineq: ">", pTex: "\\dfrac{1}{x-4}" }),
+  11: signChart({ factors: [lin(2), bottom(lin(-1))], ineq: ">=", pTex: "\\dfrac{x-2}{x+1}" }),
+  12: signChart({ factors: [lin(-1), bottom(lin(2))], ineq: "<=", pTex: "\\dfrac{x+1}{x-2}" }),
+};
+
 // Build a rational-function TikZ graph split at the vertical asymptote va.
 const rg = (expr, va, win, ha) => {
   const { xmin, xmax, ymin, ymax } = win;
@@ -120,18 +143,18 @@ export default [
   },
   {
     code: "3.3", unit: U, title: "Solving Rational Equations & Inequalities",
-    intro: r`Clear fractions with the LCD and check restrictions; for inequalities, find the critical values (zeros of numerator and denominator) and use a sign chart.`,
-    ideas: [r`Equation: multiply by the LCD, solve, reject extraneous roots.`, r`Inequality: get $0$ on one side, find critical values, test intervals.`, r`Denominator zeros are always excluded (open circles).`],
+    intro: r`Clear fractions with the LCD and check restrictions; for inequalities, get $0$ on one side, find the critical values (zeros of the numerator and of the denominator) and use a \textbf{sign table}. In every step write the \textbf{whole equation or inequality}, even when you are only working on one term.`,
+    ideas: [r`Equation: state the restrictions ($\text{denominator}\ne0$), multiply \emph{every} term by the LCD, solve, then reject extraneous roots.`, r`Inequality: never multiply by an expression with $x$. Get $0$ on one side, write one fraction, find the critical values, and build a sign table (top, bottom, whole fraction).`, r`Denominator zeros are always excluded (undefined); numerator zeros are included only for $\ge$ or $\le$.`],
     examples: [
-      { t: "Simple equation", body: r`Solve $\dfrac1x=2$.\soln $1=2x\Rightarrow x=\tfrac12$.` },
-      { t: "Cross-multiply", body: r`Solve $\dfrac{x+3}{x-1}=4$.\soln $x+3=4(x-1)=4x-4\Rightarrow 7=3x\Rightarrow x=\tfrac73$ (valid).` },
-      { t: "Clear the LCD", body: r`Solve $\dfrac9x+1=4$.\soln $\dfrac9x=3\Rightarrow 9=3x\Rightarrow x=3$.` },
-      { t: "Inequality", body: r`Solve $\dfrac{x+1}{x-3}>0$.\soln Critical values $-1,3$; signs $+,-,+$. So $x<-1$ or $x>3$:` + rg("(x+1)/(x-3)", 3, {"xmin":-5,"xmax":8,"ymin":-6,"ymax":6}, 1) },
-      { t: "Reciprocal inequality", body: r`Solve $\dfrac{1}{x-5}<0$.\soln Negative when $x-5<0$, so $x<5$.` },
-      { t: "Cross-multiply", body: r`Solve $\dfrac{2x-1}{x+2}=3$.\soln $2x-1=3(x+2)=3x+6\Rightarrow x=-7$ (valid).` },
-      { t: "Clear the LCD", body: r`Solve $\dfrac{12}x-1=2$.\soln $\dfrac{12}x=3\Rightarrow x=4$.` },
-      { t: "Inequality", body: r`Solve $\dfrac{x-4}{x}>0$.\soln Critical values $0,4$; signs $+,-,+$: $x<0$ or $x>4$.` },
-      { t: "Reciprocal inequality", body: r`Solve $\dfrac{1}{3-x}>0$.\soln Positive when $3-x>0$, so $x<3$.` },
+      { t: "Simple equation", body: r`Solve $\dfrac1x=2$.\soln ` + s3(1, r`The denominator of $\dfrac1x=2$ is $x$, so $x\ne0$.`) + "\n\n" + s3(2, r`Multiply both sides of $\dfrac1x=2$ by $x$: $1=2x$, so $x=\tfrac12$.`) + "\n\n" + s3(3, r`Check: $x=\tfrac12\ne0$ and $\dfrac{1}{1/2}=2$ $\checkmark$.`) + "\n\n" + r`\textbf{Answer:} $x=\tfrac12$.` },
+      { t: "Cross-multiply", body: r`Solve $\dfrac{x+3}{x-1}=4$.\soln ` + s3(1, r`The denominator of $\dfrac{x+3}{x-1}=4$ is $x-1$, so $x\ne1$.`) + "\n\n" + s3(2, r`Multiply both sides of $\dfrac{x+3}{x-1}=4$ by $x-1$: $x+3=4(x-1)$.`) + "\n\n" + s3(3, r`Expand $x+3=4(x-1)$: $x+3=4x-4$, so $7=3x$ and $x=\tfrac73$.`) + "\n\n" + s3(4, r`Check: $x=\tfrac73\ne1$, and $\dfrac{\frac73+3}{\frac73-1}=\dfrac{16/3}{4/3}=4$ $\checkmark$.`) + "\n\n" + r`\textbf{Answer:} $x=\tfrac73$.` },
+      { t: "Clear the LCD", body: r`Solve $\dfrac9x+1=4$.\soln ` + s3(1, r`The denominator of $\dfrac9x+1=4$ is $x$, so $x\ne0$.`) + "\n\n" + s3(2, r`Multiply \emph{every} term of $\dfrac9x+1=4$ by $x$: $9+x=4x$.`) + "\n\n" + s3(3, r`From $9+x=4x$: $9=3x$, so $x=3$. Check: $\dfrac93+1=4$ $\checkmark$.`) + "\n\n" + r`\textbf{Answer:} $x=3$.` },
+      { t: "Inequality", body: r`Solve $\dfrac{x+1}{x-3}>0$.\soln ` + s3(1, r`Critical values of $\dfrac{x+1}{x-3}$: numerator $x+1=0\Rightarrow x=-1$; denominator $x-3=0\Rightarrow x=3$ (excluded).`) + "\n\n" + s3(2, r`Sign table (the sign of the fraction is the sign of the top times the sign of the bottom):`) + W3.e4.tex() + s3(3, r`Keep the $\checkmark$ columns. At $x=-1$ the fraction is $0$, not $>0$; at $x=3$ it is undefined.`) + "\n\n" + fin3(W3.e4) + r` The curve is above the axis there:` + rg("(x+1)/(x-3)", 3, {"xmin":-5,"xmax":8,"ymin":-6,"ymax":6}, 1) },
+      { t: "Reciprocal inequality", body: r`Solve $\dfrac{1}{x-5}<0$.\soln ` + s3(1, r`The numerator of $\dfrac{1}{x-5}$ is the positive constant $1$, so only the denominator matters. Critical value: $x-5=0\Rightarrow x=5$ (excluded).`) + W3.e5.tex() + s3(2, r`We want $\dfrac{1}{x-5}<0$, so the bottom $x-5$ must be negative.`) + "\n\n" + fin3(W3.e5) },
+      { t: "Cross-multiply", body: r`Solve $\dfrac{2x-1}{x+2}=3$.\soln ` + s3(1, r`The denominator of $\dfrac{2x-1}{x+2}=3$ is $x+2$, so $x\ne-2$.`) + "\n\n" + s3(2, r`Multiply both sides of $\dfrac{2x-1}{x+2}=3$ by $x+2$: $2x-1=3(x+2)=3x+6$.`) + "\n\n" + s3(3, r`Solve: $-7=x$. Check: $x=-7\ne-2$, and $\dfrac{2(-7)-1}{-7+2}=\dfrac{-15}{-5}=3$ $\checkmark$.`) + "\n\n" + r`\textbf{Answer:} $x=-7$.` },
+      { t: "Extraneous root", body: r`Solve $\dfrac{x^2}{x-3}=\dfrac{9}{x-3}$.\soln ` + s3(1, r`The denominators of $\dfrac{x^2}{x-3}=\dfrac{9}{x-3}$ are $x-3$, so $x\ne3$.`) + "\n\n" + s3(2, r`Multiply both sides by $x-3$: $x^2=9$, so $x=3$ or $x=-3$.`) + "\n\n" + s3(3, r`Check: $x=3$ breaks the restriction $x\ne3$, so it is \emph{extraneous}. For $x=-3$: $\dfrac{9}{-6}=-\tfrac32$ and $\dfrac{9}{-6}=-\tfrac32$ $\checkmark$.`) + "\n\n" + r`\textbf{Answer:} $x=-3$ (reject $x=3$).` },
+      { t: "Inequality", body: r`Solve $\dfrac{x-4}{x}>0$.\soln ` + s3(1, r`Critical values of $\dfrac{x-4}{x}$: numerator $x-4=0\Rightarrow x=4$; denominator $x=0$ (excluded).`) + W3.e8.tex() + s3(2, r`Keep the $\checkmark$ columns.`) + "\n\n" + fin3(W3.e8) },
+      { t: "Get 0 on one side", body: r`Solve $\dfrac{x+3}{x-1}\le2$.\soln ` + s3(1, r`Do not multiply $\dfrac{x+3}{x-1}\le2$ by $x-1$ (its sign is unknown). Subtract $2$: $\dfrac{x+3}{x-1}-2\le0$.`) + "\n\n" + s3(2, r`One fraction: $\dfrac{x+3-2(x-1)}{x-1}\le0$, so $\dfrac{5-x}{x-1}\le0$.`) + "\n\n" + s3(3, r`Critical values: numerator $5-x=0\Rightarrow x=5$ (included, because of $\le$); denominator $x-1=0\Rightarrow x=1$ (excluded).`) + W3.e9.tex() + s3(4, r`Keep the $-$ columns and the zero of the numerator.`) + "\n\n" + fin3(W3.e9) },
     ],
     questions: [
       { ask: r`Solve $\dfrac7x=2$.` },
@@ -148,6 +171,6 @@ export default [
       { ask: r`Solve $\dfrac{x-2}{x+1}\ge0$.` },
       { ask: r`Solve $\dfrac{x+1}{x-2}\le0$ using critical values.`, challenge: true, ws: "3.5cm" },
     ],
-    answers: [r`$x=\tfrac72$`, r`$x=\tfrac94$`, r`$x=2$`, r`$x<-6$ or $x>0$`, r`$x<-2$`, r`$x=\tfrac12$`, r`$x=\tfrac52$`, r`$x=2$`, r`$0<x<3$`, r`$x>4$`, r`$x=2$`, r`$x\le-1$ or $x>2$`, r`$-1\le x<2$`],
+    answers: [r`For $\dfrac7x=2$: $x\ne0$; multiply both sides by $x$: $7=2x$, so $x=\tfrac72$ (check: $\dfrac{7}{7/2}=2$)`, r`For $\dfrac{x+4}{x-1}=5$: $x\ne1$; multiply both sides by $x-1$: $x+4=5(x-1)=5x-5$, so $9=4x$ and $x=\tfrac94$ (check: $\dfrac{25/4}{5/4}=5$)`, r`For $\dfrac{10}x-3=2$: $x\ne0$; multiply every term by $x$: $10-3x=2x$, so $10=5x$ and $x=2$ (check: $\dfrac{10}{2}-3=2$)`, ANS3(WQ3[3]), ANS3(WQ3[4]), r`For $\dfrac5x=10$: $x\ne0$; multiply both sides by $x$: $5=10x$, so $x=\tfrac12$ (check: $\dfrac{5}{1/2}=10$)`, r`For $\dfrac{x+2}{x-1}=3$: $x\ne1$; multiply both sides by $x-1$: $x+2=3(x-1)=3x-3$, so $5=2x$ and $x=\tfrac52$ (check: $\dfrac{9/2}{3/2}=3$)`, r`For $\dfrac6x+2=5$: $x\ne0$; multiply every term by $x$: $6+2x=5x$, so $6=3x$ and $x=2$ (check: $\dfrac62+2=5$)`, ANS3(WQ3[8]), ANS3(WQ3[9]), r`For $\dfrac2x=\dfrac{1}{x-1}$: $x\ne0,\,1$; multiply every term by the LCD $x(x-1)$: $2(x-1)=x$, so $2x-2=x$ and $x=2$ (check: $\dfrac22=1$ and $\dfrac{1}{2-1}=1$)`, ANS3(WQ3[11]), ANS3(WQ3[12])],
   },
 ];

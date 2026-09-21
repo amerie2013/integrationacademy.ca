@@ -9,56 +9,143 @@
 \end{center}
 
 \begin{ideabox}
-Clear fractions with the LCD and check restrictions; for inequalities, find the critical values (zeros of numerator and denominator) and use a sign chart.
+Clear fractions with the LCD and check restrictions; for inequalities, get $0$ on one side, find the critical values (zeros of the numerator and of the denominator) and use a \textbf{sign table}. In every step write the \textbf{whole equation or inequality}, even when you are only working on one term.
 \begin{itemize}[leftmargin=*,itemsep=2pt]
-  \item Equation: multiply by the LCD, solve, reject extraneous roots.
-  \item Inequality: get $0$ on one side, find critical values, test intervals.
-  \item Denominator zeros are always excluded (open circles).
+  \item Equation: state the restrictions ($\text{denominator}\ne0$), multiply \emph{every} term by the LCD, solve, then reject extraneous roots.
+  \item Inequality: never multiply by an expression with $x$. Get $0$ on one side, write one fraction, find the critical values, and build a sign table (top, bottom, whole fraction).
+  \item Denominator zeros are always excluded (undefined); numerator zeros are included only for $\ge$ or $\le$.
 \end{itemize}
 \end{ideabox}
 
 \begin{learnbox}
-\lh{Clear the denominators}Solve a rational equation by multiplying through by the common denominator, then solving the resulting polynomial equation.
-\lh{Check restrictions}Any value that makes an original denominator zero is not allowed, so reject such extraneous solutions.
-\lh{Inequalities need a sign chart}For a rational inequality, use the zeros of the numerator \emph{and} the denominator to build a sign chart across the intervals.
+\lh{Solving an equation}State the restrictions (every denominator $\ne0$), find the LCD, and multiply \emph{every} term on both sides by it. Solve what remains, then \textbf{check}: any answer that makes an original denominator zero is an \emph{extraneous root} and must be rejected.
+\lh{Solving an inequality}Never multiply by an expression containing $x$ (its sign is unknown, so you cannot tell whether to flip the inequality). Instead get $0$ on one side, combine into one fraction, and factor the top and bottom.
+\lh{Critical values and the sign table}Zeros of the numerator make the fraction $0$ (included only for $\ge$ or $\le$). Zeros of the denominator make it undefined and are \emph{never} included. Build a sign table with a row for each factor on top and bottom; the fraction's sign is the product of the signs.
+\lh{Writing solutions}In every step write the \textbf{whole equation or inequality}, even when you are only working on one term or one denominator. For example: ``multiply every term of $\dfrac2x+1=3$ by $x$.''
 \end{learnbox}
 
 \sech{Worked Examples}
 
 \begin{example}{ex0}{Example 1 --- Simple equation}
-Solve $\dfrac1x=2$.\soln $1=2x\Rightarrow x=\tfrac12$.
+Solve $\dfrac1x=2$.\soln \textbf{Step 1:} The denominator of $\dfrac1x=2$ is $x$, so $x\ne0$.
+
+\textbf{Step 2:} Multiply both sides of $\dfrac1x=2$ by $x$: $1=2x$, so $x=\tfrac12$.
+
+\textbf{Step 3:} Check: $x=\tfrac12\ne0$ and $\dfrac{1}{1/2}=2$ $\checkmark$.
+
+\textbf{Answer:} $x=\tfrac12$.
 \end{example}
 
 \begin{example}{ex1}{Example 2 --- Cross-multiply}
-Solve $\dfrac{x+3}{x-1}=4$.\soln $x+3=4(x-1)=4x-4\Rightarrow 7=3x\Rightarrow x=\tfrac73$ (valid).
+Solve $\dfrac{x+3}{x-1}=4$.\soln \textbf{Step 1:} The denominator of $\dfrac{x+3}{x-1}=4$ is $x-1$, so $x\ne1$.
+
+\textbf{Step 2:} Multiply both sides of $\dfrac{x+3}{x-1}=4$ by $x-1$: $x+3=4(x-1)$.
+
+\textbf{Step 3:} Expand $x+3=4(x-1)$: $x+3=4x-4$, so $7=3x$ and $x=\tfrac73$.
+
+\textbf{Step 4:} Check: $x=\tfrac73\ne1$, and $\dfrac{\frac73+3}{\frac73-1}=\dfrac{16/3}{4/3}=4$ $\checkmark$.
+
+\textbf{Answer:} $x=\tfrac73$.
 \end{example}
 
 \begin{example}{ex2}{Example 3 --- Clear the LCD}
-Solve $\dfrac9x+1=4$.\soln $\dfrac9x=3\Rightarrow 9=3x\Rightarrow x=3$.
+Solve $\dfrac9x+1=4$.\soln \textbf{Step 1:} The denominator of $\dfrac9x+1=4$ is $x$, so $x\ne0$.
+
+\textbf{Step 2:} Multiply \emph{every} term of $\dfrac9x+1=4$ by $x$: $9+x=4x$.
+
+\textbf{Step 3:} From $9+x=4x$: $9=3x$, so $x=3$. Check: $\dfrac93+1=4$ $\checkmark$.
+
+\textbf{Answer:} $x=3$.
 \end{example}
 
 \begin{example}{ex3}{Example 4 --- Inequality}
-Solve $\dfrac{x+1}{x-3}>0$.\soln Critical values $-1,3$; signs $+,-,+$. So $x<-1$ or $x>3$:\begin{center}\begin{tikzpicture}\begin{axis}[width=7.6cm,height=5cm,axis lines=middle,xlabel={\small$x$},ylabel={\small$y$},xmin=-5,xmax=8,ymin=-6,ymax=6,samples=160,restrict y to domain=-7:7]\addplot[exblue,very thick,domain=-5:2.82]{(x+1)/(x-3)};\addplot[exblue,very thick,domain=3.18:8]{(x+1)/(x-3)};\draw[dashed,gray] (axis cs:3,-6)--(axis cs:3,6);\draw[dashed,gray] (axis cs:-5,1)--(axis cs:8,1);\end{axis}\end{tikzpicture}\end{center}
+Solve $\dfrac{x+1}{x-3}>0$.\soln \textbf{Step 1:} Critical values of $\dfrac{x+1}{x-3}$: numerator $x+1=0\Rightarrow x=-1$; denominator $x-3=0\Rightarrow x=3$ (excluded).
+
+\textbf{Step 2:} Sign table (the sign of the fraction is the sign of the top times the sign of the bottom):\begin{center}\small\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{l|ccccc}
+\hline
+Interval & $x<-1$ & $x=-1$ & $-1<x<3$ & $x=3$ & $x>3$ \\ \hline
+Test point & $-2$ & -- & $0$ & -- & $4$ \\ \hline
+{\scriptsize top} $x+1$ & $-$ & $0$ & $+$ & $+$ & $+$ \\
+{\scriptsize bottom} $x-3$ & $-$ & $-$ & $-$ & $0$ & $+$ \\
+\hline
+$\dfrac{x+1}{x-3}$ & $+$ & $0$ & $-$ & und. & $+$ \\ \hline
+$\dfrac{x+1}{x-3}>0$? & $\checkmark$ & $\times$ & $\times$ & $\times$ & $\checkmark$ \\ \hline
+\end{tabular}\end{center}\textbf{Step 3:} Keep the $\checkmark$ columns. At $x=-1$ the fraction is $0$, not $>0$; at $x=3$ it is undefined.
+
+\textbf{Answer:} $x<-1\text{ or }x>3$, i.e.\ $(-\infty,-1)\cup(3,\infty)$. The curve is above the axis there:\begin{center}\begin{tikzpicture}\begin{axis}[width=7.6cm,height=5cm,axis lines=middle,xlabel={\small$x$},ylabel={\small$y$},xmin=-5,xmax=8,ymin=-6,ymax=6,samples=160,restrict y to domain=-7:7]\addplot[exblue,very thick,domain=-5:2.82]{(x+1)/(x-3)};\addplot[exblue,very thick,domain=3.18:8]{(x+1)/(x-3)};\draw[dashed,gray] (axis cs:3,-6)--(axis cs:3,6);\draw[dashed,gray] (axis cs:-5,1)--(axis cs:8,1);\end{axis}\end{tikzpicture}\end{center}
 \end{example}
 
 \begin{example}{ex4}{Example 5 --- Reciprocal inequality}
-Solve $\dfrac{1}{x-5}<0$.\soln Negative when $x-5<0$, so $x<5$.
+Solve $\dfrac{1}{x-5}<0$.\soln \textbf{Step 1:} The numerator of $\dfrac{1}{x-5}$ is the positive constant $1$, so only the denominator matters. Critical value: $x-5=0\Rightarrow x=5$ (excluded).\begin{center}\small\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{l|ccc}
+\hline
+Interval & $x<5$ & $x=5$ & $x>5$ \\ \hline
+Test point & $4$ & -- & $6$ \\ \hline
+{\scriptsize top} $1$ & $+$ & $+$ & $+$ \\
+{\scriptsize bottom} $x-5$ & $-$ & $0$ & $+$ \\
+\hline
+$\dfrac{1}{x-5}$ & $-$ & und. & $+$ \\ \hline
+$\dfrac{1}{x-5}<0$? & $\checkmark$ & $\times$ & $\times$ \\ \hline
+\end{tabular}\end{center}\textbf{Step 2:} We want $\dfrac{1}{x-5}<0$, so the bottom $x-5$ must be negative.
+
+\textbf{Answer:} $x<5$, i.e.\ $(-\infty,5)$.
 \end{example}
 
 \begin{example}{ex5}{Example 6 --- Cross-multiply}
-Solve $\dfrac{2x-1}{x+2}=3$.\soln $2x-1=3(x+2)=3x+6\Rightarrow x=-7$ (valid).
+Solve $\dfrac{2x-1}{x+2}=3$.\soln \textbf{Step 1:} The denominator of $\dfrac{2x-1}{x+2}=3$ is $x+2$, so $x\ne-2$.
+
+\textbf{Step 2:} Multiply both sides of $\dfrac{2x-1}{x+2}=3$ by $x+2$: $2x-1=3(x+2)=3x+6$.
+
+\textbf{Step 3:} Solve: $-7=x$. Check: $x=-7\ne-2$, and $\dfrac{2(-7)-1}{-7+2}=\dfrac{-15}{-5}=3$ $\checkmark$.
+
+\textbf{Answer:} $x=-7$.
 \end{example}
 
-\begin{example}{ex6}{Example 7 --- Clear the LCD}
-Solve $\dfrac{12}x-1=2$.\soln $\dfrac{12}x=3\Rightarrow x=4$.
+\begin{example}{ex6}{Example 7 --- Extraneous root}
+Solve $\dfrac{x^2}{x-3}=\dfrac{9}{x-3}$.\soln \textbf{Step 1:} The denominators of $\dfrac{x^2}{x-3}=\dfrac{9}{x-3}$ are $x-3$, so $x\ne3$.
+
+\textbf{Step 2:} Multiply both sides by $x-3$: $x^2=9$, so $x=3$ or $x=-3$.
+
+\textbf{Step 3:} Check: $x=3$ breaks the restriction $x\ne3$, so it is \emph{extraneous}. For $x=-3$: $\dfrac{9}{-6}=-\tfrac32$ and $\dfrac{9}{-6}=-\tfrac32$ $\checkmark$.
+
+\textbf{Answer:} $x=-3$ (reject $x=3$).
 \end{example}
 
 \begin{example}{ex7}{Example 8 --- Inequality}
-Solve $\dfrac{x-4}{x}>0$.\soln Critical values $0,4$; signs $+,-,+$: $x<0$ or $x>4$.
+Solve $\dfrac{x-4}{x}>0$.\soln \textbf{Step 1:} Critical values of $\dfrac{x-4}{x}$: numerator $x-4=0\Rightarrow x=4$; denominator $x=0$ (excluded).\begin{center}\small\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{l|ccccc}
+\hline
+Interval & $x<0$ & $x=0$ & $0<x<4$ & $x=4$ & $x>4$ \\ \hline
+Test point & $-1$ & -- & $1$ & -- & $5$ \\ \hline
+{\scriptsize top} $x-4$ & $-$ & $-$ & $-$ & $0$ & $+$ \\
+{\scriptsize bottom} $x$ & $-$ & $0$ & $+$ & $+$ & $+$ \\
+\hline
+$\dfrac{x-4}{x}$ & $+$ & und. & $-$ & $0$ & $+$ \\ \hline
+$\dfrac{x-4}{x}>0$? & $\checkmark$ & $\times$ & $\times$ & $\times$ & $\checkmark$ \\ \hline
+\end{tabular}\end{center}\textbf{Step 2:} Keep the $\checkmark$ columns.
+
+\textbf{Answer:} $x<0\text{ or }x>4$, i.e.\ $(-\infty,0)\cup(4,\infty)$.
 \end{example}
 
-\begin{example}{ex8}{Example 9 --- Reciprocal inequality}
-Solve $\dfrac{1}{3-x}>0$.\soln Positive when $3-x>0$, so $x<3$.
+\begin{example}{ex8}{Example 9 --- Get 0 on one side}
+Solve $\dfrac{x+3}{x-1}\le2$.\soln \textbf{Step 1:} Do not multiply $\dfrac{x+3}{x-1}\le2$ by $x-1$ (its sign is unknown). Subtract $2$: $\dfrac{x+3}{x-1}-2\le0$.
+
+\textbf{Step 2:} One fraction: $\dfrac{x+3-2(x-1)}{x-1}\le0$, so $\dfrac{5-x}{x-1}\le0$.
+
+\textbf{Step 3:} Critical values: numerator $5-x=0\Rightarrow x=5$ (included, because of $\le$); denominator $x-1=0\Rightarrow x=1$ (excluded).\begin{center}\small\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{l|ccccc}
+\hline
+Interval & $x<1$ & $x=1$ & $1<x<5$ & $x=5$ & $x>5$ \\ \hline
+Test point & $0$ & -- & $2$ & -- & $6$ \\ \hline
+{\scriptsize top} $5-x$ & $+$ & $+$ & $+$ & $0$ & $-$ \\
+{\scriptsize bottom} $x-1$ & $-$ & $0$ & $+$ & $+$ & $+$ \\
+\hline
+$\dfrac{5-x}{x-1}$ & $-$ & und. & $+$ & $0$ & $-$ \\ \hline
+$\dfrac{5-x}{x-1}\le0$? & $\checkmark$ & $\times$ & $\times$ & $\checkmark$ & $\checkmark$ \\ \hline
+\end{tabular}\end{center}\textbf{Step 4:} Keep the $-$ columns and the zero of the numerator.
+
+\textbf{Answer:} $x<1\text{ or }x\ge5$, i.e.\ $(-\infty,1)\cup[5,\infty)$.
 \end{example}
 
 \clearpage
@@ -145,19 +232,19 @@ Solve $\dfrac{x+1}{x-2}\le0$ using critical values.\workspace{3.5cm}
 \begin{multicols}{2}
 \small
 \begin{enumerate}[leftmargin=*,itemsep=3pt]
-  \item $x=\tfrac72$
-  \item $x=\tfrac94$
-  \item $x=2$
-  \item $x<-6$ or $x>0$
-  \item $x<-2$
-  \item $x=\tfrac12$
-  \item $x=\tfrac52$
-  \item $x=2$
-  \item $0<x<3$
-  \item $x>4$
-  \item $x=2$
-  \item $x\le-1$ or $x>2$
-  \item $-1\le x<2$
+  \item For $\dfrac7x=2$: $x\ne0$; multiply both sides by $x$: $7=2x$, so $x=\tfrac72$ (check: $\dfrac{7}{7/2}=2$)
+  \item For $\dfrac{x+4}{x-1}=5$: $x\ne1$; multiply both sides by $x-1$: $x+4=5(x-1)=5x-5$, so $9=4x$ and $x=\tfrac94$ (check: $\dfrac{25/4}{5/4}=5$)
+  \item For $\dfrac{10}x-3=2$: $x\ne0$; multiply every term by $x$: $10-3x=2x$, so $10=5x$ and $x=2$ (check: $\dfrac{10}{2}-3=2$)
+  \item For $\dfrac{x}{x+6}>0$: critical values $-6,\,0$ (bottom zeros excluded); signs $+,-,+$; $x<-6\text{ or }x>0$, i.e.\ $(-\infty,-6)\cup(0,\infty)$
+  \item For $\dfrac{-1}{x+2}>0$: critical values $-2$ (bottom zeros excluded); signs $+,-$; $x<-2$, i.e.\ $(-\infty,-2)$
+  \item For $\dfrac5x=10$: $x\ne0$; multiply both sides by $x$: $5=10x$, so $x=\tfrac12$ (check: $\dfrac{5}{1/2}=10$)
+  \item For $\dfrac{x+2}{x-1}=3$: $x\ne1$; multiply both sides by $x-1$: $x+2=3(x-1)=3x-3$, so $5=2x$ and $x=\tfrac52$ (check: $\dfrac{9/2}{3/2}=3$)
+  \item For $\dfrac6x+2=5$: $x\ne0$; multiply every term by $x$: $6+2x=5x$, so $6=3x$ and $x=2$ (check: $\dfrac62+2=5$)
+  \item For $\dfrac{x}{x-3}<0$: critical values $0,\,3$ (bottom zeros excluded); signs $+,-,+$; $0<x<3$, i.e.\ $(0,3)$
+  \item For $\dfrac{1}{x-4}>0$: critical values $4$ (bottom zeros excluded); signs $-,+$; $x>4$, i.e.\ $(4,\infty)$
+  \item For $\dfrac2x=\dfrac{1}{x-1}$: $x\ne0,\,1$; multiply every term by the LCD $x(x-1)$: $2(x-1)=x$, so $2x-2=x$ and $x=2$ (check: $\dfrac22=1$ and $\dfrac{1}{2-1}=1$)
+  \item For $\dfrac{x-2}{x+1}\ge0$: critical values $-1,\,2$ (bottom zeros excluded); signs $+,-,+$; $x<-1\text{ or }x\ge2$, i.e.\ $(-\infty,-1)\cup[2,\infty)$
+  \item For $\dfrac{x+1}{x-2}\le0$: critical values $-1,\,2$ (bottom zeros excluded); signs $+,-,+$; $-1\le x<2$, i.e.\ $[-1,2)$
 \end{enumerate}
 \end{multicols}
 \end{keybox}

@@ -63,9 +63,10 @@ export const LEARN = {
     ["Sketching", "Plot the intercepts, draw the asymptotes as guides, and check the sign in each region to finish the graph."],
   ],
   "3.3": [
-    ["Clear the denominators", "Solve a rational equation by multiplying through by the common denominator, then solving the resulting polynomial equation."],
-    ["Check restrictions", "Any value that makes an original denominator zero is not allowed, so reject such extraneous solutions."],
-    ["Inequalities need a sign chart", "For a rational inequality, use the zeros of the numerator \\emph{and} the denominator to build a sign chart across the intervals."],
+    ["Solving an equation", "State the restrictions (every denominator $\\ne0$), find the LCD, and multiply \\emph{every} term on both sides by it. Solve what remains, then \\textbf{check}: any answer that makes an original denominator zero is an \\emph{extraneous root} and must be rejected."],
+    ["Solving an inequality", "Never multiply by an expression containing $x$ (its sign is unknown, so you cannot tell whether to flip the inequality). Instead get $0$ on one side, combine into one fraction, and factor the top and bottom."],
+    ["Critical values and the sign table", "Zeros of the numerator make the fraction $0$ (included only for $\\ge$ or $\\le$). Zeros of the denominator make it undefined and are \\emph{never} included. Build a sign table with a row for each factor on top and bottom; the fraction's sign is the product of the signs."],
+    ["Writing solutions", "In every step write the \\textbf{whole equation or inequality}, even when you are only working on one term or one denominator. For example: ``multiply every term of $\\dfrac2x+1=3$ by $x$.''"],
   ],
   // ── Unit 4: Exponential & Logarithmic Functions ────────────
   "4.1": [

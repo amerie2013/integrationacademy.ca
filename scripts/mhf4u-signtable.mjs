@@ -14,8 +14,10 @@ const OK = { ">": (s) => s > 0, "<": (s) => s < 0, ">=": (s) => s >= 0, "<=": (s
 const TEXOP = { ">": ">", "<": "<", ">=": "\\ge", "<=": "\\le" };
 
 export function signChart(spec) {
-  const factors = spec.factors.map((f) => ({ mult: 1, rootTex: num(f.root), ...f }));
-  const zeros = [...new Map(factors.map((f) => [f.root, f.rootTex])).entries()].sort((a, b) => a[0] - b[0]);
+  const factors = spec.factors.map((f) => ({ mult: 1, rootTex: f.root === undefined ? "" : num(f.root), ...f }));
+  // constant factors (no root) affect the sign only; `den: true` marks a denominator factor, whose zero makes the quotient undefined
+  const zeros = [...new Map(factors.filter((f) => f.root !== undefined).map((f) => [f.root, f.rootTex])).entries()].sort((a, b) => a[0] - b[0]);
+  const rational = factors.some((f) => f.den);
   const n = zeros.length;
   const test = [];
   for (let k = 0; k <= n; k++) {
@@ -35,8 +37,9 @@ export function signChart(spec) {
   }
   for (const c of cols) {
     c.signs = factors.map((f) => sgn(f.f(c.x)));
-    c.p = c.signs.reduce((a, b) => a * b, 1);
-    c.ok = OK[spec.ineq](c.p);
+    c.und = factors.some((f, i) => f.den && c.signs[i] === 0);
+    c.p = c.und ? 0 : c.signs.reduce((a, b) => a * b, 1);
+    c.ok = !c.und && OK[spec.ineq](c.p);
   }
   // solution set: merge consecutive selected columns into runs
   const runs = [];
@@ -68,8 +71,10 @@ export function signChart(spec) {
     const rows = [];
     rows.push(`<tr><th style="${th}text-align:left;">Interval</th>${cols.map((c) => `<th style="${th}">\\(${c.head}\\)</th>`).join("")}</tr>`);
     rows.push(`<tr><td style="${td}text-align:left;font-style:italic;">Test point</td>${cols.map((c) => `<td style="${td}${c.ok ? "background:#fff7cc;" : ""}">${c.kind === "zero" ? "—" : `\\(x=${num(c.x)}\\)`}</td>`).join("")}</tr>`);
-    factors.forEach((f, i) => rows.push(`<tr><td style="${td}text-align:left;">\\(${f.tex}\\)</td>${cols.map((c) => cell(c.signs[i], c.ok)).join("")}</tr>`));
-    rows.push(`<tr><td style="${td}text-align:left;font-weight:700;">\\(${pTex}\\)</td>${cols.map((c) => cell(c.p, c.ok)).join("")}</tr>`);
+    const role = (f) => (rational ? `<span style="color:#64748b;font-size:12px;">${f.den ? "bottom" : "top"}</span> ` : "");
+    factors.forEach((f, i) => rows.push(`<tr><td style="${td}text-align:left;">${role(f)}\\(${f.tex}\\)</td>${cols.map((c) => cell(c.signs[i], c.ok)).join("")}</tr>`));
+    const pcell = (c) => (c.und ? `<td style="${td}color:#64748b;font-size:13px;font-style:italic;">und.</td>` : cell(c.p, c.ok));
+    rows.push(`<tr><td style="${td}text-align:left;font-weight:700;">\\(${pTex}\\)</td>${cols.map(pcell).join("")}</tr>`);
     rows.push(`<tr><td style="${td}text-align:left;">\\(${cond}\\)?</td>${cols.map((c) => `<td style="${td}${c.ok ? "background:#fff7cc;color:#15803d;font-weight:800;" : "color:#94a3b8;"}">${c.ok ? "✓" : "✗"}</td>`).join("")}</tr>`);
     return `<div style="overflow-x:auto;margin:8px 0;"><table style="border-collapse:collapse;font-size:14px;min-width:60%;">${rows.join("")}</table></div>`;
   };
@@ -78,7 +83,8 @@ export function signChart(spec) {
     const s = (v) => `$${v > 0 ? "+" : v < 0 ? "-" : "0"}$`;
     const head = cols.map((c) => `$${c.head}$`).join(" & ");
     const tp = cols.map((c) => (c.kind === "zero" ? "--" : `$${num(c.x)}$`)).join(" & ");
-    const fr = factors.map((f, i) => `$${f.tex}$ & ${cols.map((c) => s(c.signs[i])).join(" & ")} \\\\`).join("\n");
+    const rl = (f) => (rational ? `{\\scriptsize ${f.den ? "bottom" : "top"}} ` : "");
+    const fr = factors.map((f, i) => `${rl(f)}$${f.tex}$ & ${cols.map((c) => s(c.signs[i])).join(" & ")} \\\\`).join("\n");
     const ck = cols.map((c) => (c.ok ? "$\\checkmark$" : "$\\times$")).join(" & ");
     return String.raw`\begin{center}\small\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.2}
 \begin{tabular}{l|${"c".repeat(cols.length)}}
@@ -87,7 +93,7 @@ Interval & ${head} \\ \hline
 Test point & ${tp} \\ \hline
 ${fr}
 \hline
-$${pTex}$ & ${cols.map((c) => s(c.p)).join(" & ")} \\ \hline
+$${pTex}$ & ${cols.map((c) => (c.und ? "und." : s(c.p))).join(" & ")} \\ \hline
 $${cond}$? & ${ck} \\ \hline
 \end{tabular}\end{center}`;
   };
@@ -100,3 +106,8 @@ $${cond}$? & ${ck} \\ \hline
 export const lin = (r, tex) => ({ tex: tex ?? (r === 0 ? "x" : r > 0 ? `x-${r}` : `x+${-r}`), f: (x) => x - r, root: r });
 // power of a linear factor: (x - r)^m
 export const linPow = (r, m) => ({ tex: `(${r === 0 ? "x" : r > 0 ? `x-${r}` : `x+${-r}`})^${m}`, f: (x) => (x - r) ** m, root: r, mult: m });
+
+// rational-inequality helpers
+export const bottom = (f) => ({ ...f, den: true }); // mark a factor as part of the denominator
+export const cst = (v) => ({ tex: String(v), f: () => v }); // constant factor (sign only)
+export const linNeg = (r) => ({ tex: `${r}-x`, f: (x) => r - x, root: r }); // (r - x)
