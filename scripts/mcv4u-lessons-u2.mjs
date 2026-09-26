@@ -96,63 +96,63 @@ u2["2.3"] = L("2.3", "The Chain Rule", [
   <div style="overflow-x:auto;margin:10px 0;"><table style="border-collapse:collapse;font-size:14px;">
     <thead><tr style="background:#eef2ff;color:#3730a3;"><th style="border:1px solid #c7d2fe;padding:6px 10px;">Function</th><th style="border:1px solid #c7d2fe;padding:6px 10px;">Outer</th><th style="border:1px solid #c7d2fe;padding:6px 10px;">Inner \(g(x)\)</th></tr></thead>
     <tbody>
-      <tr><td style="border:1px solid #e2e8f0;padding:6px 10px;">\((x^2+1)^3\)</td><td style="border:1px solid #e2e8f0;padding:6px 10px;">\(u^3\)</td><td style="border:1px solid #e2e8f0;padding:6px 10px;">\(x^2+1\)</td></tr>
-      <tr><td style="border:1px solid #e2e8f0;padding:6px 10px;">\(\sqrt{x^2+1}\)</td><td style="border:1px solid #e2e8f0;padding:6px 10px;">\(\sqrt u=u^{1/2}\)</td><td style="border:1px solid #e2e8f0;padding:6px 10px;">\(x^2+1\)</td></tr>
-      <tr><td style="border:1px solid #e2e8f0;padding:6px 10px;">\(\dfrac1{(x+1)^2}\)</td><td style="border:1px solid #e2e8f0;padding:6px 10px;">\(u^{-2}\)</td><td style="border:1px solid #e2e8f0;padding:6px 10px;">\(x+1\)</td></tr>
+      <tr><td style="border:1px solid #e2e8f0;padding:6px 10px;">\((x^2+1)^3\)</td><td style="border:1px solid #e2e8f0;padding:6px 10px;">\([g(x)]^3\)</td><td style="border:1px solid #e2e8f0;padding:6px 10px;">\(x^2+1\)</td></tr>
+      <tr><td style="border:1px solid #e2e8f0;padding:6px 10px;">\(\sqrt{x^2+1}\)</td><td style="border:1px solid #e2e8f0;padding:6px 10px;">\(\sqrt{g(x)}=[g(x)]^{1/2}\)</td><td style="border:1px solid #e2e8f0;padding:6px 10px;">\(x^2+1\)</td></tr>
+      <tr><td style="border:1px solid #e2e8f0;padding:6px 10px;">\(\dfrac1{(x+1)^2}\)</td><td style="border:1px solid #e2e8f0;padding:6px 10px;">\([g(x)]^{-2}\)</td><td style="border:1px solid #e2e8f0;padding:6px 10px;">\(x+1\)</td></tr>
     </tbody>
   </table></div>`}
   ${gframe(["y = (x^2-1)^2", "y = 4*x*(x^2-1)"], { title: "f(x)=(x²−1)² and its chain-rule derivative 4x(x²−1): f' is zero at x=0, ±1" })}
   <h2>🔵 Examples</h2>
   ${cex("Example 1: Power of a function", cr`Differentiate \(f(x)=(x^2+1)^3\).`, [
-    ["identify the outer and inner functions", cr`Write \(f(x)=(x^2+1)^3\) as a power of the inner function.${OI("u^3", "3u^2", "x^2+1", "2x")}`],
-    ["apply the chain rule", cr`Take the outer derivative, keep \(g(x)=x^2+1\) inside it, and multiply by \(g'(x)\):\[\begin{aligned}f'(x)&=3\,(x^2+1)^2\cdot g'(x)\\&=3\,(x^2+1)^2\cdot 2x\end{aligned}\]`],
+    ["identify the outer and inner functions", cr`Write \(f(x)=(x^2+1)^3\) as a power of the inner function.${OI("[g(x)]^3", "3[g(x)]^2", "x^2+1", "2x")}`],
+    ["apply the chain rule", cr`Take the outer derivative, keep \(g(x)=x^2+1\) inside it, and multiply by \(g'(x)\):\[\begin{aligned}f'(x)&=3\,[g(x)]^2\cdot g'(x)\\&=3\,(x^2+1)^2\cdot 2x\end{aligned}\]`],
     ["simplify", cr`Multiply the constants \(3\cdot2x=6x\): \(f'(x)=6x\,(x^2+1)^2\).`]],
     cr`\(f'(x)=6x\,(x^2+1)^2\).`, gframe(["y = (x^2+1)^3", "y = 6*x*(x^2+1)^2"], { title: "f(x)=(x²+1)³ and its derivative 6x(x²+1)² — zoom out to see the growth" }))}
   ${cex("Example 2: Radical (fractional power)", cr`Differentiate \(f(x)=\sqrt{x^2+1}\).`, [
-    ["identify the outer and inner functions", cr`Rewrite the root as a power: \(f(x)=(x^2+1)^{1/2}\).${OI("u^{1/2}", cr`\tfrac12u^{-1/2}`, "x^2+1", "2x")}`],
-    ["apply the chain rule", cr`\[\begin{aligned}f'(x)&=\tfrac12\,(x^2+1)^{-1/2}\cdot g'(x)\\&=\tfrac12\,(x^2+1)^{-1/2}\cdot 2x\end{aligned}\]`],
+    ["identify the outer and inner functions", cr`Rewrite the root as a power: \(f(x)=(x^2+1)^{1/2}\).${OI("[g(x)]^{1/2}", cr`\tfrac12[g(x)]^{-1/2}`, "x^2+1", "2x")}`],
+    ["apply the chain rule", cr`\[\begin{aligned}f'(x)&=\tfrac12\,[g(x)]^{-1/2}\cdot g'(x)\\&=\tfrac12\,(x^2+1)^{-1/2}\cdot 2x\end{aligned}\]`],
     ["simplify", cr`Multiply \(\tfrac12\cdot2x=x\), then write the negative power as a denominator: \(f'(x)=x\,(x^2+1)^{-1/2}=\dfrac{x}{\sqrt{x^2+1}}\).`]],
     cr`\(f'(x)=\dfrac{x}{\sqrt{x^2+1}}\).`, gframe(["y = sqrt(x^2+1)", "y = x/sqrt(x^2+1)"], { title: "f(x)=√(x²+1) and its derivative x/√(x²+1) (which levels off at ±1)" }))}
   ${cex("Example 3: Linear inside", cr`Differentiate \(f(x)=(3x-2)^5\).`, [
-    ["identify the outer and inner functions", cr`\(f(x)=(3x-2)^5\) is a fifth power of a linear function.${OI("u^5", "5u^4", "3x-2", "3")}`],
-    ["apply the chain rule", cr`\[\begin{aligned}f'(x)&=5\,(3x-2)^4\cdot g'(x)\\&=5\,(3x-2)^4\cdot 3\end{aligned}\]`],
+    ["identify the outer and inner functions", cr`\(f(x)=(3x-2)^5\) is a fifth power of a linear function.${OI("[g(x)]^5", "5[g(x)]^4", "3x-2", "3")}`],
+    ["apply the chain rule", cr`\[\begin{aligned}f'(x)&=5\,[g(x)]^4\cdot g'(x)\\&=5\,(3x-2)^4\cdot 3\end{aligned}\]`],
     ["simplify", cr`Multiply the constants \(5\cdot3=15\): \(f'(x)=15\,(3x-2)^4\).`]],
     cr`\(f'(x)=15\,(3x-2)^4\).`)}
   ${cex("Example 4: Cubic inside", cr`Differentiate \(f(x)=(x^3+x)^4\).`, [
-    ["identify the outer and inner functions", cr`\(f(x)=(x^3+x)^4\) is a fourth power of a cubic.${OI("u^4", "4u^3", "x^3+x", "3x^2+1")}`],
-    ["apply the chain rule", cr`\[\begin{aligned}f'(x)&=4\,(x^3+x)^3\cdot g'(x)\\&=4\,(x^3+x)^3\cdot(3x^2+1)\end{aligned}\]`],
+    ["identify the outer and inner functions", cr`\(f(x)=(x^3+x)^4\) is a fourth power of a cubic.${OI("[g(x)]^4", "4[g(x)]^3", "x^3+x", "3x^2+1")}`],
+    ["apply the chain rule", cr`\[\begin{aligned}f'(x)&=4\,[g(x)]^3\cdot g'(x)\\&=4\,(x^3+x)^3\cdot(3x^2+1)\end{aligned}\]`],
     ["simplify", cr`Nothing more to multiply out; write the factors in a neat order: \(f'(x)=4\,(3x^2+1)\,(x^3+x)^3\).`]],
     cr`\(f'(x)=4\,(3x^2+1)\,(x^3+x)^3\).`)}
   ${cex("Example 5: Chain inside a product", cr`Differentiate \(f(x)=x\,(2x+1)^3\).`, [
     ["identify the rules needed", cr`\(f(x)=x\,(2x+1)^3\) is a <strong>product</strong> of \(p(x)=x\) and \(q(x)=(2x+1)^3\), and \(q\) is a <strong>composite</strong>, so use the product rule and the chain rule together.`],
-    ["differentiate each part", cr`\(p'(x)=1\). For \(q(x)=(2x+1)^3\) use the chain rule:${OI("u^3", "3u^2", "2x+1", "2")}\[q'(x)=3\,(2x+1)^2\cdot 2=6\,(2x+1)^2\]`],
+    ["differentiate each part", cr`\(p'(x)=1\). For \(q(x)=(2x+1)^3\) use the chain rule:${OI("[g(x)]^3", "3[g(x)]^2", "2x+1", "2")}\[\begin{aligned}q'(x)&=3\,[g(x)]^2\cdot g'(x)\\&=3\,(2x+1)^2\cdot 2\\&=6\,(2x+1)^2\end{aligned}\]`],
     ["apply the product rule", cr`\[\begin{aligned}f'(x)&=p'(x)\,q(x)+p(x)\,q'(x)\\&=(1)(2x+1)^3+x\cdot 6\,(2x+1)^2\end{aligned}\]`],
     ["simplify by factoring", cr`Factor out the common factor \((2x+1)^2\):\[\begin{aligned}f'(x)&=(2x+1)^2\big[(2x+1)+6x\big]\\&=(2x+1)^2\,(8x+1)\end{aligned}\]`]],
     cr`\(f'(x)=(2x+1)^2\,(8x+1)\).`, gframe(["y = x*(2*x+1)^3", "y = (2*x+1)^2*(8*x+1)"], { title: "f(x)=x(2x+1)³ and its derivative (2x+1)²(8x+1)" }))}
   <h2>🟡 Practice Questions</h2>
   ${cpr(1, cr`Differentiate \(f(x)=(x^2-4)^3\).`, [
-    ["identify", cr`${OI("u^3", "3u^2", "x^2-4", "2x")}`],
-    ["apply the chain rule", cr`\[f'(x)=3\,(x^2-4)^2\cdot g'(x)=3\,(x^2-4)^2\cdot 2x\]`],
+    ["identify", cr`${OI("[g(x)]^3", "3[g(x)]^2", "x^2-4", "2x")}`],
+    ["apply the chain rule", cr`\[\begin{aligned}f'(x)&=3\,[g(x)]^2\cdot g'(x)\\&=3\,(x^2-4)^2\cdot 2x\end{aligned}\]`],
     ["simplify", cr`\(f'(x)=6x\,(x^2-4)^2\).`]],
     cr`\(f'(x)=6x\,(x^2-4)^2\).`)}
   ${cpr(2, cr`Differentiate \(f(x)=(5x+1)^4\).`, [
-    ["identify", cr`${OI("u^4", "4u^3", "5x+1", "5")}`],
-    ["apply the chain rule", cr`\[f'(x)=4\,(5x+1)^3\cdot g'(x)=4\,(5x+1)^3\cdot 5\]`],
+    ["identify", cr`${OI("[g(x)]^4", "4[g(x)]^3", "5x+1", "5")}`],
+    ["apply the chain rule", cr`\[\begin{aligned}f'(x)&=4\,[g(x)]^3\cdot g'(x)\\&=4\,(5x+1)^3\cdot 5\end{aligned}\]`],
     ["simplify", cr`\(f'(x)=20\,(5x+1)^3\).`]],
     cr`\(f'(x)=20\,(5x+1)^3\).`)}
   ${cpr(3, cr`Differentiate \(f(x)=\sqrt{2x+1}\).`, [
-    ["identify", cr`Rewrite \(f(x)=(2x+1)^{1/2}\).${OI("u^{1/2}", cr`\tfrac12u^{-1/2}`, "2x+1", "2")}`],
-    ["apply the chain rule", cr`\[f'(x)=\tfrac12\,(2x+1)^{-1/2}\cdot g'(x)=\tfrac12\,(2x+1)^{-1/2}\cdot 2\]`],
+    ["identify", cr`Rewrite \(f(x)=(2x+1)^{1/2}\).${OI("[g(x)]^{1/2}", cr`\tfrac12[g(x)]^{-1/2}`, "2x+1", "2")}`],
+    ["apply the chain rule", cr`\[\begin{aligned}f'(x)&=\tfrac12\,[g(x)]^{-1/2}\cdot g'(x)\\&=\tfrac12\,(2x+1)^{-1/2}\cdot 2\end{aligned}\]`],
     ["simplify", cr`\(\tfrac12\cdot2=1\), so \(f'(x)=(2x+1)^{-1/2}=\dfrac1{\sqrt{2x+1}}\).`]],
     cr`\(f'(x)=\dfrac1{\sqrt{2x+1}}\).`)}
   ${cpr(4, cr`Differentiate \(f(x)=(x^2+3x)^5\).`, [
-    ["identify", cr`${OI("u^5", "5u^4", "x^2+3x", "2x+3")}`],
-    ["apply the chain rule", cr`\[f'(x)=5\,(x^2+3x)^4\cdot g'(x)=5\,(x^2+3x)^4\cdot(2x+3)\]`],
+    ["identify", cr`${OI("[g(x)]^5", "5[g(x)]^4", "x^2+3x", "2x+3")}`],
+    ["apply the chain rule", cr`\[\begin{aligned}f'(x)&=5\,[g(x)]^4\cdot g'(x)\\&=5\,(x^2+3x)^4\cdot(2x+3)\end{aligned}\]`],
     ["simplify", cr`Write the factors in a neat order: \(f'(x)=5\,(2x+3)\,(x^2+3x)^4\).`]],
     cr`\(f'(x)=5\,(2x+3)\,(x^2+3x)^4\).`)}
   ${cpr(5, cr`Differentiate \(f(x)=\dfrac1{(x+1)^2}\).`, [
-    ["identify", cr`Rewrite the reciprocal as a negative power: \(f(x)=(x+1)^{-2}\).${OI("u^{-2}", "-2u^{-3}", "x+1", "1")}`],
-    ["apply the chain rule", cr`\[f'(x)=-2\,(x+1)^{-3}\cdot g'(x)=-2\,(x+1)^{-3}\cdot 1\]`],
+    ["identify", cr`Rewrite the reciprocal as a negative power: \(f(x)=(x+1)^{-2}\).${OI("[g(x)]^{-2}", "-2[g(x)]^{-3}", "x+1", "1")}`],
+    ["apply the chain rule", cr`\[\begin{aligned}f'(x)&=-2\,[g(x)]^{-3}\cdot g'(x)\\&=-2\,(x+1)^{-3}\cdot 1\end{aligned}\]`],
     ["simplify", cr`Write the negative power as a denominator: \(f'(x)=\dfrac{-2}{(x+1)^3}\).`]],
     cr`\(f'(x)=\dfrac{-2}{(x+1)^3}\).`)}
   <h2>❓ Q&amp;A Summary</h2>
@@ -161,7 +161,7 @@ u2["2.3"] = L("2.3", "The Chain Rule", [
   ${cqa("Q3: What's the most-forgotten part?", cr`The inner derivative \(g'(x)\).`)}
   ${cqa("Q4: How do you combine it with other rules?", "Apply product/quotient on the outside, chain on each composite piece.")}
   ${cqa("Q5: How do you set out a chain-rule solution?", "Step 1: identify the outer and inner functions and their derivatives. Step 2: apply the rule (outer derivative with the inside unchanged, times the inner derivative). Step 3: simplify.")}
-  ${cqa("Q6: How do you handle a root or a reciprocal?", cr`Rewrite it as a power first: \(\sqrt{u}=u^{1/2}\) and \(\dfrac1{u^k}=u^{-k}\), then use the chain rule.`)}
+  ${cqa("Q6: How do you handle a root or a reciprocal?", cr`Rewrite it as a power first: \(\sqrt{g(x)}=[g(x)]^{1/2}\) and \(\dfrac1{[g(x)]^k}=[g(x)]^{-k}\), then use the chain rule.`)}
 </div>`),
 ]);
 
