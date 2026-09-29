@@ -26,6 +26,10 @@ create table if not exists lesson_progress (
   completed_at    timestamptz,
   unique (student_id, lesson_id)
 );
+grant select on public.lesson_progress to anon;
+grant select, insert, update, delete on public.lesson_progress to authenticated;
+grant select, insert, update, delete on public.lesson_progress to service_role;
+
 
 alter table lesson_progress enable row level security;
 

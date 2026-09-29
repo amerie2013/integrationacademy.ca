@@ -6,6 +6,10 @@ create table if not exists public.graphs (
   created_by uuid references auth.users(id) on delete set null,
   created_at timestamptz not null default now()
 );
+grant select on public.graphs to anon;
+grant select, insert, update, delete on public.graphs to authenticated;
+grant select, insert, update, delete on public.graphs to service_role;
+
 
 alter table public.graphs enable row level security;
 

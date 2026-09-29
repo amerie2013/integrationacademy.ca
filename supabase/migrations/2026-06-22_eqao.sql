@@ -32,6 +32,10 @@ create table if not exists eqao_questions (
     ('number','algebra','data','geometry_measurement','financial_literacy')),
   constraint eqao_difficulty_chk check (difficulty in ('easy','medium','hard'))
 );
+grant select on public.eqao_questions to anon;
+grant select, insert, update, delete on public.eqao_questions to authenticated;
+grant select, insert, update, delete on public.eqao_questions to service_role;
+
 
 create index if not exists eqao_questions_strand_idx on eqao_questions (strand, difficulty);
 
@@ -52,6 +56,10 @@ create table if not exists eqao_attempts (
   submitted_at       timestamptz,
   created_at         timestamptz not null default now()
 );
+grant select on public.eqao_attempts to anon;
+grant select, insert, update, delete on public.eqao_attempts to authenticated;
+grant select, insert, update, delete on public.eqao_attempts to service_role;
+
 
 create index if not exists eqao_attempts_student_idx on eqao_attempts (student_id, created_at desc);
 

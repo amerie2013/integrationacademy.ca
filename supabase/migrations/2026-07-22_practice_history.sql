@@ -22,6 +22,10 @@ create table if not exists practice_answers (
   max_points  numeric not null default 1,
   answered_at timestamptz not null default now()
 );
+grant select on public.practice_answers to anon;
+grant select, insert, update, delete on public.practice_answers to authenticated;
+grant select, insert, update, delete on public.practice_answers to service_role;
+
 
 -- "my weak topics in this course" and "my recent sets"
 create index if not exists practice_answers_student_course_idx

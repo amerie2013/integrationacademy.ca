@@ -8,6 +8,10 @@ create table if not exists class_order (
   position   int  not null default 0,
   primary key (class_id, item_type, item_id)
 );
+grant select on public.class_order to anon;
+grant select, insert, update, delete on public.class_order to authenticated;
+grant select, insert, update, delete on public.class_order to service_role;
+
 alter table class_order enable row level security;
 
 drop policy if exists "class order readable" on class_order;

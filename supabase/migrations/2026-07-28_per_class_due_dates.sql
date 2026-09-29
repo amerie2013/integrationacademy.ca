@@ -11,6 +11,10 @@ create table if not exists class_assignments (
   updated_at    timestamptz not null default now(),
   primary key (class_id, assignment_id)
 );
+grant select on public.class_assignments to anon;
+grant select, insert, update, delete on public.class_assignments to authenticated;
+grant select, insert, update, delete on public.class_assignments to service_role;
+
 
 alter table class_assignments enable row level security;
 

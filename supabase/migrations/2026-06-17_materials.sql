@@ -14,6 +14,10 @@ create table if not exists materials (
   position    int  not null default 0,
   created_at  timestamptz not null default now()
 );
+grant select on public.materials to anon;
+grant select, insert, update, delete on public.materials to authenticated;
+grant select, insert, update, delete on public.materials to service_role;
+
 create index if not exists materials_owner_idx on materials (owner_type, owner_id);
 
 alter table materials enable row level security;

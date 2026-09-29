@@ -24,6 +24,10 @@ create table if not exists worksheet_progress (
   last_viewed_at  timestamptz not null default now(),
   unique (student_id, worksheet_id)
 );
+grant select on public.worksheet_progress to anon;
+grant select, insert, update, delete on public.worksheet_progress to authenticated;
+grant select, insert, update, delete on public.worksheet_progress to service_role;
+
 
 alter table worksheet_progress enable row level security;
 

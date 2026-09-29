@@ -21,6 +21,10 @@ create table if not exists profiles (
   subscription_expires_at  timestamptz,
   created_at               timestamptz not null default now()
 );
+grant select on public.profiles to anon;
+grant select, insert, update, delete on public.profiles to authenticated;
+grant select, insert, update, delete on public.profiles to service_role;
+
 
 -- Auto-create a profile row when a new auth user signs up,
 -- copying role/level from the sign-up metadata.
@@ -58,6 +62,10 @@ create table if not exists courses (
   published   boolean not null default false,
   created_at  timestamptz not null default now()
 );
+grant select on public.courses to anon;
+grant select, insert, update, delete on public.courses to authenticated;
+grant select, insert, update, delete on public.courses to service_role;
+
 
 -- ── LESSONS ─────────────────────────────────────────────────
 create table if not exists lessons (
@@ -72,6 +80,10 @@ create table if not exists lessons (
   published   boolean not null default false,
   created_at  timestamptz not null default now()
 );
+grant select on public.lessons to anon;
+grant select, insert, update, delete on public.lessons to authenticated;
+grant select, insert, update, delete on public.lessons to service_role;
+
 
 -- ── QUIZZES ─────────────────────────────────────────────────
 create table if not exists quizzes (
@@ -99,6 +111,10 @@ create table if not exists quizzes (
   published             boolean not null default false,
   created_at            timestamptz not null default now()
 );
+grant select on public.quizzes to anon;
+grant select, insert, update, delete on public.quizzes to authenticated;
+grant select, insert, update, delete on public.quizzes to service_role;
+
 
 create table if not exists quiz_questions (
   id          uuid primary key default gen_random_uuid(),
@@ -115,6 +131,10 @@ create table if not exists quiz_questions (
   feedback    text,                  -- shown after answering
   position    int not null default 0
 );
+grant select on public.quiz_questions to anon;
+grant select, insert, update, delete on public.quiz_questions to authenticated;
+grant select, insert, update, delete on public.quiz_questions to service_role;
+
 
 -- ── QUIZ ATTEMPTS ───────────────────────────────────────────
 create table if not exists quiz_attempts (
@@ -134,6 +154,10 @@ create table if not exists quiz_attempts (
   submitted_at  timestamptz,
   time_spent_seconds int
 );
+grant select on public.quiz_attempts to anon;
+grant select, insert, update, delete on public.quiz_attempts to authenticated;
+grant select, insert, update, delete on public.quiz_attempts to service_role;
+
 
 -- ── ASSIGNMENTS ─────────────────────────────────────────────
 create table if not exists assignments (
@@ -144,6 +168,10 @@ create table if not exists assignments (
   due_date    timestamptz,
   created_at  timestamptz not null default now()
 );
+grant select on public.assignments to anon;
+grant select, insert, update, delete on public.assignments to authenticated;
+grant select, insert, update, delete on public.assignments to service_role;
+
 
 create table if not exists submissions (
   id            uuid primary key default gen_random_uuid(),
@@ -155,6 +183,10 @@ create table if not exists submissions (
   submitted_at  timestamptz not null default now(),
   unique (assignment_id, student_id)
 );
+grant select on public.submissions to anon;
+grant select, insert, update, delete on public.submissions to authenticated;
+grant select, insert, update, delete on public.submissions to service_role;
+
 
 -- ── ENROLLMENTS (individual students OR class members) ───────
 create table if not exists enrollments (
@@ -164,6 +196,10 @@ create table if not exists enrollments (
   created_at timestamptz not null default now(),
   unique (student_id, course_id)
 );
+grant select on public.enrollments to anon;
+grant select, insert, update, delete on public.enrollments to authenticated;
+grant select, insert, update, delete on public.enrollments to service_role;
+
 
 -- ── CLASSES (optional teacher-led grouping) ──────────────────
 create table if not exists classes (
@@ -173,12 +209,20 @@ create table if not exists classes (
   join_code  text unique,
   created_at timestamptz not null default now()
 );
+grant select on public.classes to anon;
+grant select, insert, update, delete on public.classes to authenticated;
+grant select, insert, update, delete on public.classes to service_role;
+
 
 create table if not exists class_students (
   class_id   uuid not null references classes (id) on delete cascade,
   student_id uuid not null references profiles (id) on delete cascade,
   primary key (class_id, student_id)
 );
+grant select on public.class_students to anon;
+grant select, insert, update, delete on public.class_students to authenticated;
+grant select, insert, update, delete on public.class_students to service_role;
+
 
 -- ============================================================
 -- ROW LEVEL SECURITY

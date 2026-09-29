@@ -28,6 +28,10 @@ create table if not exists course_grants (
   created_at             timestamptz not null default now(),
   updated_at             timestamptz not null default now()
 );
+grant select on public.course_grants to anon;
+grant select, insert, update, delete on public.course_grants to authenticated;
+grant select, insert, update, delete on public.course_grants to service_role;
+
 create index if not exists course_grants_user_course_idx on course_grants (user_id, course_id);
 create index if not exists course_grants_sub_idx on course_grants (stripe_subscription_id);
 alter table course_grants enable row level security;

@@ -22,6 +22,10 @@ create table if not exists bank_questions (
   feedback    text,
   created_at  timestamptz not null default now()
 );
+grant select on public.bank_questions to anon;
+grant select, insert, update, delete on public.bank_questions to authenticated;
+grant select, insert, update, delete on public.bank_questions to service_role;
+
 
 -- staff = admin or teacher
 create or replace function is_staff() returns boolean

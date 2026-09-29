@@ -16,6 +16,10 @@ create table if not exists class_locks (
   item_id    uuid not null,
   primary key (class_id, item_type, item_id)
 );
+grant select on public.class_locks to anon;
+grant select, insert, update, delete on public.class_locks to authenticated;
+grant select, insert, update, delete on public.class_locks to service_role;
+
 alter table class_locks enable row level security;
 
 -- ── classes RLS ──

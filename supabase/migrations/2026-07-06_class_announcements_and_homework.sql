@@ -18,6 +18,10 @@ create table if not exists announcements (
   body       text not null,
   created_at timestamptz not null default now()
 );
+grant select on public.announcements to anon;
+grant select, insert, update, delete on public.announcements to authenticated;
+grant select, insert, update, delete on public.announcements to service_role;
+
 alter table announcements enable row level security;
 
 drop policy if exists "class staff write announcements" on announcements;

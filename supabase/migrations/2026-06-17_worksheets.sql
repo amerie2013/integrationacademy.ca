@@ -17,6 +17,10 @@ create table if not exists worksheets (
   created_at     timestamptz not null default now(),
   unique (course_id, code)
 );
+grant select on public.worksheets to anon;
+grant select, insert, update, delete on public.worksheets to authenticated;
+grant select, insert, update, delete on public.worksheets to service_role;
+
 create index if not exists worksheets_idx on worksheets (course_id, position);
 
 alter table worksheets enable row level security;

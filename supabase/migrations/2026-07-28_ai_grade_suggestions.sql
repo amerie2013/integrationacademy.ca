@@ -17,6 +17,10 @@ create table if not exists submission_ai_grades (
   model         text,
   created_at    timestamptz not null default now()
 );
+grant select on public.submission_ai_grades to anon;
+grant select, insert, update, delete on public.submission_ai_grades to authenticated;
+grant select, insert, update, delete on public.submission_ai_grades to service_role;
+
 
 alter table submission_ai_grades enable row level security;
 

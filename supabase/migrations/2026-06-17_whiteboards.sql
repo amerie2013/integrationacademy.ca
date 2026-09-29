@@ -7,6 +7,10 @@ create table if not exists whiteboards (
   is_live     boolean not null default false,
   updated_at  timestamptz not null default now()
 );
+grant select on public.whiteboards to anon;
+grant select, insert, update, delete on public.whiteboards to authenticated;
+grant select, insert, update, delete on public.whiteboards to service_role;
+
 create index if not exists whiteboards_owner_idx on whiteboards (owner_id, updated_at desc);
 
 alter table whiteboards enable row level security;

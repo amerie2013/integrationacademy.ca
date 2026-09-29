@@ -13,6 +13,10 @@ create table if not exists tutor_threads (
   updated_at  timestamptz not null default now(),
   unique (user_id, lesson_id)
 );
+grant select on public.tutor_threads to anon;
+grant select, insert, update, delete on public.tutor_threads to authenticated;
+grant select, insert, update, delete on public.tutor_threads to service_role;
+
 
 create index if not exists tutor_threads_user_idx on tutor_threads (user_id);
 create index if not exists tutor_threads_lesson_idx on tutor_threads (lesson_id);
@@ -26,6 +30,10 @@ create table if not exists tutor_messages (
   content     text not null,
   created_at  timestamptz not null default now()
 );
+grant select on public.tutor_messages to anon;
+grant select, insert, update, delete on public.tutor_messages to authenticated;
+grant select, insert, update, delete on public.tutor_messages to service_role;
+
 
 create index if not exists tutor_messages_thread_idx on tutor_messages (thread_id, created_at);
 create index if not exists tutor_messages_user_day_idx on tutor_messages (user_id, created_at)
