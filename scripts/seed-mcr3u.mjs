@@ -274,6 +274,21 @@ const A3 = (code, topic, knowledge, application, thinking) => {
   ].join("\n");
   return { title: `Assignment ${code} — ${topic}`, description };
 };
+
+// 4-category assignment (Knowledge & Understanding / Thinking / Communication / Application),
+// 3/2/2/3 questions — used where a topic needs genuine, distinct-category questions (the
+// Application items must be real applied contexts, not restated skill questions).
+const A4 = (code, topic, knowledge, thinking, communication, application) => {
+  let n = 0;
+  const sec = (arr) => arr.map((q) => `${++n}. ${q}`);
+  const description = [
+    "Knowledge & Understanding", ...sec(knowledge),
+    "Thinking", ...sec(thinking),
+    "Communication", ...sec(communication),
+    "Application", ...sec(application),
+  ].join("\n");
+  return { title: `Assignment ${code} — ${topic}`, description };
+};
 const ASSIGN = {
   "1.1": A3("1.1", "Functions, Relations & Function Notation",
     ["Is $\\{(1,2),(2,4),(3,6)\\}$ a function?", "For $f(x)=2x-5$, find $f(3)$.", "For $f(x)=x^2+1$, find $f(-2)$.", "Does $y=x^2$ pass the vertical-line test?"],
@@ -287,10 +302,17 @@ const ASSIGN = {
     ["Find the inverse of $f(x)=2x-1$.", "Find the inverse of $f(x)=\\dfrac{x}{3}+2$.", "Find the inverse of $f(x)=4x$.", "In which line is an inverse a reflection?"],
     ["Find the inverse of $f(x)=3x-9$ and verify $f(f^{-1}(x))=x$.", "Is the inverse of $f(x)=x^2$ a function? Explain.", "If $f$ has domain $x\\ge0$, range $y\\ge2$, state the domain and range of $f^{-1}$."],
     ["Explain why the inverse is not the reciprocal.", "Describe the horizontal-line test and what it tells you.", "Explain why domain and range swap between $f$ and $f^{-1}$."]),
-  "1.4": A3("1.4", "Transformations of Functions",
-    ["Describe $y=(x-2)^2+3$.", "State the vertex of $y=(x+1)^2-5$.", "What does $a=-1$ do?", "Describe $y=\\sqrt{x}-4$."],
-    ["Describe all transformations of $y=-2(x-3)^2+1$.", "Write $y=x^2$ shifted right $4$ and down $2$.", "State the vertex and direction of $y=-3(x+2)^2+4$."],
-    ["Explain why the horizontal shift is opposite to the sign inside.", "State the order in which transformations are applied.", "Does the value of $a$ change the vertex? Explain."]),
+  "1.4": A4("1.4", "Transformations of Functions",
+    ["For $y=-(x-4)$, state $a$, $k$, $d$ and $c$, then describe the transformation of $y=x$.",
+     "State the vertex of $y=3(x+2)^2-5$ and describe how $y=x^2$ was transformed to get it.",
+     "Write the equation of $y=|x|$ after a vertical stretch by $4$, a shift left $3$, and a shift up $2$."],
+    ["A transformation of $y=\\sqrt{x}$ has domain $x\\ge5$ and passes through $(5,-2)$ and $(9,0)$. Determine $d$ and $c$ (with $a=1$), and explain your reasoning.",
+     "Let $g(x)=2(x-1)^2+3$ and $h(x)=\\big(2(x-1)\\big)^2+3$, both built from $f(x)=x^2$. Explain how the transformation in $g$ differs from the one in $h$, and determine which graph is narrower."],
+    ["Explain, using $g(x)=a\\,f(k(x-d))+c$, why the horizontal shift moves opposite to the sign written inside the brackets. Support your explanation with a specific example.",
+     "A classmate says the graph of $y=-\\sqrt{x}-3$ is \"the same as\" $y=\\sqrt{x}$, just moved down. Explain what is incorrect about this statement."],
+    ["A ball thrown from a balcony has height $h(t)=-5(t-1)^2+25$ metres after $t$ seconds. (a) Describe this as a transformation of $h(t)=t^2$. (b) State the maximum height and when it occurs. (c) Find the height of the balcony (the height at $t=0$).",
+     "A shipping company charges $C(w)=4|w-5|+12$ dollars for a package based on its weight $w$ (in kg) compared to the ideal weight of $5$ kg. (a) Describe this as a transformation of $C=|w|$. (b) Find the cost for a $5$ kg package and for an $8$ kg package. (c) Explain what the value $12$ represents in this context.",
+     "A print shop's average cost per shirt is $A(x)=\\dfrac{500}{x}+3$ dollars for an order of $x$ shirts. (a) Describe this as a transformation of $A=\\dfrac1x$. (b) Find the average cost for orders of $50$ and $500$ shirts. (c) Using the horizontal asymptote, explain what happens to the average cost as the order size grows very large."]),
   "1.5": A3("1.5", "Quadratic Functions: Zeros, Max & Min",
     ["State the vertex of $y=(x-3)^2-4$.", "Complete the square: $x^2+6x+5$.", "Find the minimum of $y=x^2-2x+5$.", "State the axis of symmetry of $y=x^2-6x+5$."],
     ["Find the vertex and zeros of $x^2-6x+5$.", "Does $y=-x^2+4$ have a max or min, and what is its value?", "Complete the square: $x^2+8x+10$."],
@@ -451,4 +473,4 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
   run().catch((e) => { console.error("SEED FAILED:", e.message ?? e); process.exit(1); });
 }
 
-export { subjects };
+export { subjects, ASSIGN };
