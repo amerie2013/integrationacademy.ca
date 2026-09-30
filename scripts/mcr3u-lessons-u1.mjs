@@ -39,31 +39,52 @@ u1["1.1"] = L("1.1", "Functions, Relations & Function Notation", [html(String.ra
 
 u1["1.2"] = L("1.2", "Domain and Range", [html(String.raw`<div class="lecture-box">
   <h1>🎯 Domain and Range</h1>
-  <p><strong>Overview.</strong> The <strong>domain</strong> is all allowed inputs \(x\); the <strong>range</strong> is all resulting outputs \(y\).</p>
-  <h2>📌 Watch for restrictions</h2>
+  <p><strong>Overview.</strong> The <strong>domain</strong> is all allowed inputs \(x\); the <strong>range</strong> is all resulting outputs \(y\). Every function has its own natural domain and range, and the same restriction shows up again and again — a line has none, a square or absolute value restricts the outputs, a square root restricts the inputs, and a reciprocal restricts both. Once you know the five parent functions, you can read off the domain and range of any shifted version of them.</p>
+  <h2>📌 Where restrictions come from</h2>
   <ul>
-    <li>Denominators cannot be zero.</li>
-    <li>Square roots need a non-negative radicand.</li>
-    <li>Context can limit values (time \(\ge0\), etc.).</li>
+    <li><strong>Denominators cannot be zero</strong> — excludes one \(x\)-value from the domain (as in \(y=\dfrac1x\)).</li>
+    <li><strong>Even roots need a non-negative radicand</strong> — the expression under a square root must be \(\ge0\), which limits the domain (as in \(y=\sqrt{x}\)).</li>
+    <li><strong>Squares and absolute values are never negative</strong> — the output is always \(\ge0\) (or \(\le0\) if reflected), which limits the range, not the domain.</li>
+    <li><strong>A shift moves the restriction, it doesn't remove it.</strong> Shifting \(y=\sqrt{x}\) right by \(4\) moves the domain boundary from \(x\ge0\) to \(x\ge4\); shifting \(y=\dfrac1x\) down by \(2\) moves the range boundary from \(y\ne0\) to \(y\ne-2\).</li>
   </ul>
-  ${gframe(["y = sqrt(x - 2)"], { title: "y = √(x − 2): domain x ≥ 2, range y ≥ 0" })}
-  <h2>🔵 Examples</h2>
-  <div class="example-box" ${EX}><h3>Example 1: Square-root domain</h3><p>Domain of \(f(x)=\sqrt{x-2}\)?</p><div class="solution"><div class="step"><strong>Step 1:</strong> Need \(x-2\ge0\).</div><em>Conclusion: \(x\ge2\). ✓</em></div></div>
-  <div class="example-box" ${EX}><h3>Example 2: Square-root range</h3><p>Range of \(f(x)=\sqrt{x-2}\)?</p><div class="solution"><em>Conclusion: \(y\ge0\). ✓</em></div></div>
-  <div class="example-box" ${EX}><h3>Example 3: Quadratic range</h3><p>Range of \(f(x)=x^2+1\)?</p><div class="solution"><div class="step"><strong>Step 1:</strong> Vertex \((0,1)\), opens up.</div><em>Conclusion: \(y\ge1\). ✓</em></div>${gframe(["y = x^2 + 1"], { title: "x²+1: the lowest point is (0,1), so the range is y≥1" })}</div>
-  <div class="example-box" ${EX}><h3>Example 4: Rational domain</h3><p>Domain of \(g(x)=\dfrac{1}{x-3}\)?</p><div class="solution"><div class="step"><strong>Step 1:</strong> Denominator \(\ne0\).</div><em>Conclusion: \(x\ne3\). ✓</em></div>${gframe(["y = 1/(x-3)"], { title: "1/(x−3): undefined at x=3 (vertical asymptote), so the domain is x≠3" })}</div>
-  <div class="example-box" ${EX}><h3>Example 5: Quadratic domain</h3><p>Domain of \(f(x)=x^2-5\)?</p><div class="solution"><em>Conclusion: all real numbers. ✓</em></div>${gframe(["y = x^2 - 5"], { title: "x²−5: defined for every x — the domain is all real numbers" })}</div>
+  <h2>📚 The five parent functions: domain and range</h2>
+  <div style="overflow-x:auto;margin:10px 0;">
+    <table style="border-collapse:collapse;width:100%;font-size:14px;">
+      <thead>
+        <tr style="background:#eef2ff;color:#3730a3;">
+          <th style="border:1px solid #c7d2fe;padding:7px 12px;text-align:left;">Parent function</th>
+          <th style="border:1px solid #c7d2fe;padding:7px 12px;text-align:left;">Domain</th>
+          <th style="border:1px solid #c7d2fe;padding:7px 12px;text-align:left;">Range</th>
+          <th style="border:1px solid #c7d2fe;padding:7px 12px;text-align:left;">Why restricted</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="border:1px solid #e2e8f0;padding:6px 12px;">\(y=x\)</td><td style="border:1px solid #e2e8f0;padding:6px 12px;">\(x\in\mathbb{R}\)</td><td style="border:1px solid #e2e8f0;padding:6px 12px;">\(y\in\mathbb{R}\)</td><td style="border:1px solid #e2e8f0;padding:6px 12px;">no denominator, root, or square — nothing to restrict</td></tr>
+        <tr><td style="border:1px solid #e2e8f0;padding:6px 12px;">\(y=x^2\)</td><td style="border:1px solid #e2e8f0;padding:6px 12px;">\(x\in\mathbb{R}\)</td><td style="border:1px solid #e2e8f0;padding:6px 12px;">\(y\ge0\)</td><td style="border:1px solid #e2e8f0;padding:6px 12px;">squaring can never give a negative output</td></tr>
+        <tr><td style="border:1px solid #e2e8f0;padding:6px 12px;">\(y=|x|\)</td><td style="border:1px solid #e2e8f0;padding:6px 12px;">\(x\in\mathbb{R}\)</td><td style="border:1px solid #e2e8f0;padding:6px 12px;">\(y\ge0\)</td><td style="border:1px solid #e2e8f0;padding:6px 12px;">absolute value can never give a negative output</td></tr>
+        <tr><td style="border:1px solid #e2e8f0;padding:6px 12px;">\(y=\sqrt{x}\)</td><td style="border:1px solid #e2e8f0;padding:6px 12px;">\(x\ge0\)</td><td style="border:1px solid #e2e8f0;padding:6px 12px;">\(y\ge0\)</td><td style="border:1px solid #e2e8f0;padding:6px 12px;">the radicand must be \(\ge0\) (even root)</td></tr>
+        <tr><td style="border:1px solid #e2e8f0;padding:6px 12px;">\(y=\dfrac1x\)</td><td style="border:1px solid #e2e8f0;padding:6px 12px;">\(x\ne0\)</td><td style="border:1px solid #e2e8f0;padding:6px 12px;">\(y\ne0\)</td><td style="border:1px solid #e2e8f0;padding:6px 12px;">the denominator can never be \(0\)</td></tr>
+      </tbody>
+    </table>
+  </div>
+  ${gframe(["y = sqrt(x - 2)"], { title: "y = √(x − 2): the shift moves the domain boundary from x≥0 to x≥2, range stays y≥0" })}
+  <h2>🔵 Examples — one per parent function, each shifted</h2>
+  <div class="example-box" ${EX}><h3>Example 1: Linear, \(y=x\)</h3><p>Find the domain and range of \(g(x)=-3x+4\).</p><div class="solution"><div class="step"><strong>Step 1:</strong> \(g\) is linear with no denominator, root, or square — nothing restricts \(x\).</div><div class="step"><strong>Step 2:</strong> Since the slope \(-3\ne0\), the line rises and falls through every \(y\)-value — nothing restricts \(y\) either.</div></div><em>Conclusion: domain \(x\in\mathbb{R}\), range \(y\in\mathbb{R}\) — unlike the other four parent functions, a (non-flat) line restricts neither. ✓</em>${gframe(["y = -3*x + 4"], { title: "y=-3x+4: a straight line covers every x and every y" })}</div>
+  <div class="example-box" ${EX}><h3>Example 2: Quadratic, \(y=x^2\)</h3><p>Find the domain and range of \(g(x)=2(x-1)^2-5\).</p><div class="solution"><div class="step"><strong>Step 1 (domain):</strong> Squaring \((x-1)\) works for every real \(x\) — no restriction.</div><div class="step"><strong>Step 2 (range):</strong> Vertex form gives vertex \((1,-5)\); since \(a=2>0\), the parabola opens up, so \(-5\) is the minimum output.</div></div><em>Conclusion: domain \(x\in\mathbb{R}\), range \(y\ge-5\). ✓</em>${gframe(["y = 2*(x-1)^2 - 5"], { title: "vertex (1,−5), opens up: the range is y≥−5", labels: [{ x: 1, y: -5, t: "(1,−5)", c: "#1b7a44" }] })}</div>
+  <div class="example-box" ${EX}><h3>Example 3: Absolute value, \(y=|x|\)</h3><p>Find the domain and range of \(g(x)=-|x+2|+3\).</p><div class="solution"><div class="step"><strong>Step 1 (domain):</strong> Absolute value is defined for every real \(x\) — no restriction.</div><div class="step"><strong>Step 2 (range):</strong> The corner is at \(x+2=0\Rightarrow x=-2\), giving \((-2,3)\); since \(a=-1<0\), the V is reflected and opens down, so \(3\) is the maximum output.</div></div><em>Conclusion: domain \(x\in\mathbb{R}\), range \(y\le3\). ✓</em>${gframe(["y = -abs(x+2) + 3"], { title: "corner (−2,3), opens down: the range is y≤3", labels: [{ x: -2, y: 3, t: "(−2,3)", c: "#1b7a44" }] })}</div>
+  <div class="example-box" ${EX}><h3>Example 4: Square root, \(y=\sqrt{x}\)</h3><p>Find the domain and range of \(g(x)=\sqrt{x-4}+1\).</p><div class="solution"><div class="step"><strong>Step 1 (domain):</strong> Need the radicand \(\ge0\): \(x-4\ge0\Rightarrow x\ge4\).</div><div class="step"><strong>Step 2 (range):</strong> A square root's output is always \(\ge0\); shifting the whole function up \(1\) makes the output always \(\ge1\).</div></div><em>Conclusion: domain \(x\ge4\), range \(y\ge1\) — both boundaries moved by the shift, exactly like \(y=\sqrt{x-2}\) above. ✓</em>${gframe([{ kind: "cartesian", expr: "y = sqrt(x-4)+1", dMin: "4" }], { title: "y=√(x−4)+1: domain x≥4, range y≥1" })}</div>
+  <div class="example-box" ${EX}><h3>Example 5: Reciprocal, \(y=\dfrac1x\)</h3><p>Find the domain and range of \(g(x)=\dfrac{1}{x+3}-2\).</p><div class="solution"><div class="step"><strong>Step 1 (domain):</strong> The denominator can't be \(0\): \(x+3=0\Rightarrow x=-3\) is excluded.</div><div class="step"><strong>Step 2 (range):</strong> \(\dfrac1x\) never equals \(0\); shifting the whole function down \(2\) means the output never equals \(-2\) — this is the horizontal asymptote.</div></div><em>Conclusion: domain \(x\ne-3\), range \(y\ne-2\). ✓</em>${gframe(["y = 1/(x+3) - 2"], { title: "y=1/(x+3)−2: asymptotes at x=−3 and y=−2" })}</div>
   <h2>🟡 Practice Questions</h2>
-  <div class="practice-box" ${PR}><h3>Question 1</h3><p>Domain of \(\sqrt{x+5}\)?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(x\ge-5\).</em></div></div></details></div>
-  <div class="practice-box" ${PR}><h3>Question 2</h3><p>Domain of \(\dfrac{1}{x+2}\)?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(x\ne-2\).</em></div></div></details></div>
-  <div class="practice-box" ${PR}><h3>Question 3</h3><p>Range of \(y=x^2-3\)?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(y\ge-3\).</em></div></div></details></div>
-  <div class="practice-box" ${PR}><h3>Question 4</h3><p>Range of \(y=-x^2\)?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(y\le0\).</em></div></div></details></div>
-  <div class="practice-box" ${PR}><h3>Question 5</h3><p>Domain of \(\sqrt{2x-6}\)?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\(x\ge3\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 1 (linear)</h3><p>Domain and range of \(g(x)=5x-7\)?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Domain \(x\in\mathbb{R}\), range \(y\in\mathbb{R}\) — a non-flat line always covers both.</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 2 (quadratic)</h3><p>Domain and range of \(g(x)=-(x+3)^2+2\)?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Domain \(x\in\mathbb{R}\). Vertex \((-3,2)\), opens down (\(a=-1<0\)): range \(y\le2\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 3 (absolute value)</h3><p>Domain and range of \(g(x)=2|x-1|\)?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Domain \(x\in\mathbb{R}\). Corner \((1,0)\), opens up (\(a=2>0\)): range \(y\ge0\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 4 (square root)</h3><p>Domain and range of \(g(x)=\sqrt{x+5}-3\)?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Need \(x+5\ge0\): domain \(x\ge-5\). Output shifted down \(3\): range \(y\ge-3\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 5 (reciprocal)</h3><p>Domain and range of \(g(x)=\dfrac{1}{x-6}+4\)?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Denominator \(0\) at \(x=6\): domain \(x\ne6\). Asymptote shifted up \(4\): range \(y\ne4\).</em></div></div></details></div>
   <h2>❓ Q&amp;A Summary</h2>
-  <div class="qa-box" ${QA}><h3>Q1: How do I write domain/range?</h3><p><em>Set-builder \(\{x\in\mathbb{R}\mid x\ge2\}\) or interval \([2,\infty)\).</em></p></div>
-  <div class="qa-box" ${QA}><h3>Q2: Most common slip?</h3><p><em>Forgetting \(\sqrt{\;}\) needs the inside \(\ge0\), or a denominator \(\ne0\).</em></p></div>
-  <div class="qa-box" ${QA}><h3>Q3: Domain of a plain polynomial?</h3><p><em>All real numbers.</em></p></div>
-  <div class="qa-box" ${QA}><h3>Q4: How do I get the range of a parabola?</h3><p><em>Find the vertex; it is the min (opens up) or max (opens down).</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q1: How do shifts change domain and range?</h3><p><em>A horizontal shift (the \(d\) inside, like \(\sqrt{x-4}\)) moves the domain boundary; a vertical shift (the \(c\) added on, like \(+1\)) moves the range boundary — the same \(d\) and \(c\) you'll meet again in transformations.</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q2: How do I write domain/range?</h3><p><em>Set-builder \(\{x\in\mathbb{R}\mid x\ge4\}\) or interval \([4,\infty)\).</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q3: Most common slip?</h3><p><em>Forgetting a square root needs the inside \(\ge0\), or that a denominator can't be \(0\) — always check for these two before writing "all real numbers."</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q4: Which of the five parent functions have no restriction at all?</h3><p><em>Only \(y=x\) has an unrestricted domain <em>and</em> range. The other four each restrict at least one side: \(x^2\) and \(|x|\) restrict the range, \(\sqrt{x}\) restricts both, and \(\dfrac1x\) restricts both (by excluding one value from each).</em></p></div>
 </div>`)]);
 
 u1["1.3"] = L("1.3", "Inverse Functions", [html(String.raw`<div class="lecture-box">
