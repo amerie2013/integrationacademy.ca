@@ -94,31 +94,54 @@ u1["1.3"] = L("1.3", "Inverse Functions", [html(String.raw`<div class="lecture-b
 
 u1["1.4"] = L("1.4", "Transformations of Functions", [html(String.raw`<div class="lecture-box">
   <h1>🪄 Transformations of Functions</h1>
-  <p><strong>Overview.</strong> Every transformed function has the form \(g(x)=a\,f\big(k(x-d)\big)+c\); each parameter moves or reshapes the parent.</p>
-  <h2>📌 The four parameters</h2>
+  <p><strong>Overview.</strong> Every transformed function can be written in the general form \(g(x)=a\,f\big(k(x-d)\big)+c\), where \(f(x)\) is a <strong>parent function</strong> (the basic, un-transformed graph) and \(a,k,d,c\) are numbers that stretch, reflect, and slide it. Once you know what each parameter does, you can transform <em>any</em> parent function the same way — a line, a parabola, an absolute value, a square root, or a reciprocal.</p>
+  <h2>📌 The four parameters, one at a time</h2>
   <ul>
-    <li>\(a\): vertical stretch by \(|a|\) (reflect if \(a<0\)).</li>
-    <li>\(k\): horizontal stretch by \(\tfrac{1}{|k|}\) (reflect if \(k<0\)).</li>
-    <li>\(d\): horizontal shift right by \(d\) (opposite sign inside). \(c\): vertical shift up by \(c\).</li>
+    <li><strong>\(a\)</strong> (multiplies the output): vertical stretch by \(|a|\); if \(a<0\), also a <strong>reflection in the \(x\)-axis</strong>.</li>
+    <li><strong>\(k\)</strong> (multiplies the input): horizontal stretch by \(\tfrac{1}{|k|}\); if \(k<0\), also a <strong>reflection in the \(y\)-axis</strong>.</li>
+    <li><strong>\(d\)</strong> (subtracted from the input): horizontal shift — right by \(d\) if \(d>0\), left if \(d<0\). It moves <em>opposite</em> to what the sign inside the brackets looks like, because \(x-d=0\) exactly when \(x=d\).</li>
+    <li><strong>\(c\)</strong> (added at the end): vertical shift — up by \(c\) if \(c>0\), down if \(c<0\).</li>
   </ul>
-  ${gframe(["y = x^2", "y = -2*(x - 3)^2 + 1"], { title: "f(x)=x^2 transformed to g(x) = -2(x-3)^2 + 1" })}
-  <h2>🔵 Examples</h2>
-  <div class="example-box" ${EX}><h3>Example 1: Full description</h3><p>Describe \(g(x)=-2(x-3)^2+1\) from \(f(x)=x^2\).</p><div class="solution"><div class="step"><strong>Step 1:</strong> \(a=-2\): stretch by 2, reflect.</div><div class="step"><strong>Step 2:</strong> right 3, up 1; vertex \((3,1)\).</div><em>Conclusion: described. ✓</em></div></div>
-  <div class="example-box" ${EX}><h3>Example 2: Radical</h3><p>Describe \(y=\sqrt{x+4}-2\).</p><div class="solution"><em>Conclusion: left 4, down 2. ✓</em></div>${gframe(["y = sqrt(x+4) - 2"], { title: "√(x+4)−2: the root graph shifted left 4 and down 2" })}</div>
-  <div class="example-box" ${EX}><h3>Example 3: Reflection</h3><p>Describe \(y=-x^2\).</p><div class="solution"><em>Conclusion: reflection in the \(x\)-axis. ✓</em></div>${gframe(["y = x^2", "y = -x^2"], { title: "−x²: y=x² flipped over the x-axis (now opens downward)" })}</div>
-  <div class="example-box" ${EX}><h3>Example 4: Stretch</h3><p>Describe \(y=3x^2\).</p><div class="solution"><em>Conclusion: vertical stretch by 3. ✓</em></div>${gframe(["y = x^2", "y = 3*x^2"], { title: "3x²: y=x² stretched vertically by 3 — three times as tall, so it looks narrower" })}</div>
-  <div class="example-box" ${EX}><h3>Example 5: Vertex from form</h3><p>State the vertex of \(y=(x+1)^2-5\).</p><div class="solution"><em>Conclusion: \((-1,-5)\). ✓</em></div>${gframe(["y = (x+1)^2 - 5"], { title: "(x+1)²−5: vertex form — the lowest point is the vertex (−1,−5)" })}</div>
+  <p><strong>Mapping a point.</strong> If \((x,y)\) is a point on the parent graph \(y=f(x)\), the same point moves to \(\left(\dfrac{x}{k}+d,\ a\,y+c\right)\) on \(g(x)=a\,f\big(k(x-d)\big)+c\). Applying this rule to a few key points is the fastest way to sketch a transformed graph — stretch/reflect first (the \(a\) and \(k\)), then shift (\(d\) and \(c\)).</p>
+  <h2>📚 The five parent functions</h2>
+  <div style="overflow-x:auto;margin:10px 0;">
+    <table style="border-collapse:collapse;width:100%;font-size:14px;">
+      <thead>
+        <tr style="background:#eef2ff;color:#3730a3;">
+          <th style="border:1px solid #c7d2fe;padding:7px 12px;text-align:left;">Parent function</th>
+          <th style="border:1px solid #c7d2fe;padding:7px 12px;text-align:left;">Shape</th>
+          <th style="border:1px solid #c7d2fe;padding:7px 12px;text-align:left;">Domain</th>
+          <th style="border:1px solid #c7d2fe;padding:7px 12px;text-align:left;">Range</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="border:1px solid #e2e8f0;padding:6px 12px;">\(y=x\)</td><td style="border:1px solid #e2e8f0;padding:6px 12px;">straight line through the origin</td><td style="border:1px solid #e2e8f0;padding:6px 12px;">\(x\in\mathbb{R}\)</td><td style="border:1px solid #e2e8f0;padding:6px 12px;">\(y\in\mathbb{R}\)</td></tr>
+        <tr><td style="border:1px solid #e2e8f0;padding:6px 12px;">\(y=x^2\)</td><td style="border:1px solid #e2e8f0;padding:6px 12px;">parabola, vertex \((0,0)\)</td><td style="border:1px solid #e2e8f0;padding:6px 12px;">\(x\in\mathbb{R}\)</td><td style="border:1px solid #e2e8f0;padding:6px 12px;">\(y\ge0\)</td></tr>
+        <tr><td style="border:1px solid #e2e8f0;padding:6px 12px;">\(y=|x|\)</td><td style="border:1px solid #e2e8f0;padding:6px 12px;">V-shape, corner \((0,0)\)</td><td style="border:1px solid #e2e8f0;padding:6px 12px;">\(x\in\mathbb{R}\)</td><td style="border:1px solid #e2e8f0;padding:6px 12px;">\(y\ge0\)</td></tr>
+        <tr><td style="border:1px solid #e2e8f0;padding:6px 12px;">\(y=\sqrt{x}\)</td><td style="border:1px solid #e2e8f0;padding:6px 12px;">half a sideways parabola, starts at \((0,0)\)</td><td style="border:1px solid #e2e8f0;padding:6px 12px;">\(x\ge0\)</td><td style="border:1px solid #e2e8f0;padding:6px 12px;">\(y\ge0\)</td></tr>
+        <tr><td style="border:1px solid #e2e8f0;padding:6px 12px;">\(y=\dfrac1x\)</td><td style="border:1px solid #e2e8f0;padding:6px 12px;">two branches, asymptotes on both axes</td><td style="border:1px solid #e2e8f0;padding:6px 12px;">\(x\ne0\)</td><td style="border:1px solid #e2e8f0;padding:6px 12px;">\(y\ne0\)</td></tr>
+      </tbody>
+    </table>
+  </div>
+  ${gframe(["y = x^2", "y = -2*(x - 3)^2 + 1"], { title: "The general idea: f(x)=x² transformed to g(x) = -2(x-3)² + 1 — a stretch/reflection, then a shift" })}
+  <h2>🔵 Examples — one per parent function</h2>
+  <div class="example-box" ${EX}><h3>Example 1: Linear, \(y=x\)</h3><p>Describe \(g(x)=2(x-3)+1\) as a transformation of \(f(x)=x\), then simplify it.</p><div class="solution"><div class="step"><strong>Step 1:</strong> Match to \(a\,f(k(x-d))+c\): \(a=2,\ k=1,\ d=3,\ c=1\).</div><div class="step"><strong>Step 2:</strong> \(a=2\): vertical stretch by \(2\) (steeper line). \(d=3,\ c=1\): shift right \(3\), up \(1\).</div><div class="step"><strong>Step 3 (map a point):</strong> \((0,0)\) on \(y=x\) moves to \(\left(\tfrac01+3,\ 2(0)+1\right)=(3,1)\).</div><em>Conclusion: \(g(x)=2x-5\), a steeper line through \((3,1)\). ✓</em></div>${gframe(["y = x", "y = 2*(x - 3) + 1"], { title: "y=x stretched by 2, then shifted right 3 and up 1 — passes through (3,1)" })}</div>
+  <div class="example-box" ${EX}><h3>Example 2: Quadratic, \(y=x^2\)</h3><p>Describe \(g(x)=-2(x-3)^2+1\) from \(f(x)=x^2\).</p><div class="solution"><div class="step"><strong>Step 1:</strong> \(a=-2,\ k=1,\ d=3,\ c=1\).</div><div class="step"><strong>Step 2:</strong> \(a=-2\): stretch by \(2\) and reflect (opens down). Shift right \(3\), up \(1\).</div><div class="step"><strong>Step 3 (map the vertex):</strong> \((0,0)\to(0+3,\ -2(0)+1)=(3,1)\).</div><em>Conclusion: vertex \((3,1)\), opens down. ✓</em></div></div>
+  <div class="example-box" ${EX}><h3>Example 3: Absolute value, \(y=|x|\)</h3><p>Describe \(g(x)=3|x+2|-4\) from \(f(x)=|x|\).</p><div class="solution"><div class="step"><strong>Step 1:</strong> Write \(x+2\) as \(x-(-2)\): \(a=3,\ k=1,\ d=-2,\ c=-4\).</div><div class="step"><strong>Step 2:</strong> \(a=3\): stretch by \(3\) (narrower V). \(d=-2\): shift left \(2\). \(c=-4\): shift down \(4\).</div><div class="step"><strong>Step 3 (map the corner):</strong> \((0,0)\to(0-2,\ 3(0)-4)=(-2,-4)\).</div><em>Conclusion: corner at \((-2,-4)\), narrower than \(y=|x|\). ✓</em></div>${gframe(["y = abs(x)", "y = 3*abs(x+2) - 4"], { title: "y=|x| stretched by 3, shifted left 2 and down 4 — corner at (-2,-4)" })}</div>
+  <div class="example-box" ${EX}><h3>Example 4: Square root, \(y=\sqrt{x}\)</h3><p>Describe \(g(x)=2\sqrt{x+1}-3\) from \(f(x)=\sqrt{x}\), and state its domain.</p><div class="solution"><div class="step"><strong>Step 1:</strong> Write \(x+1\) as \(x-(-1)\): \(a=2,\ k=1,\ d=-1,\ c=-3\).</div><div class="step"><strong>Step 2:</strong> \(a=2\): stretch by \(2\). Shift left \(1\), down \(3\).</div><div class="step"><strong>Step 3 (map the start point):</strong> \((0,0)\to(0-1,\ 2(0)-3)=(-1,-3)\).</div><div class="step"><strong>Step 4 (domain):</strong> The parent needs \(x\ge0\); after the shift, the new starting point is \(x=-1\), so the domain is \(x\ge-1\).</div><em>Conclusion: starts at \((-1,-3)\), domain \(x\ge-1\). ✓</em></div>${gframe(["y = sqrt(x)", "y = 2*sqrt(x+1) - 3"], { title: "y=√x stretched by 2, shifted left 1 and down 3 — now starts at (-1,-3)" })}</div>
+  <div class="example-box" ${EX}><h3>Example 5: Reciprocal, \(y=\dfrac1x\)</h3><p>Describe \(g(x)=\dfrac{1}{x-2}+3\) from \(f(x)=\dfrac1x\), and state its asymptotes.</p><div class="solution"><div class="step"><strong>Step 1:</strong> \(a=1,\ k=1,\ d=2,\ c=3\).</div><div class="step"><strong>Step 2:</strong> The parent's asymptotes are \(x=0\) and \(y=0\). Shifting right \(2\) and up \(3\) moves them the same way.</div><em>Conclusion: vertical asymptote \(x=2\), horizontal asymptote \(y=3\). ✓</em></div>${gframe(["y = 1/x", "y = 1/(x - 2) + 3"], { title: "y=1/x shifted right 2 and up 3 — asymptotes move from x=0, y=0 to x=2, y=3" })}</div>
   <h2>🟡 Practice Questions</h2>
-  <div class="practice-box" ${PR}><h3>Question 1</h3><p>Describe \(y=(x-2)^2+3\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Right 2, up 3.</em></div></div></details></div>
-  <div class="practice-box" ${PR}><h3>Question 2</h3><p>Describe \(y=\sqrt{x}-4\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Down 4.</em></div></div></details></div>
-  <div class="practice-box" ${PR}><h3>Question 3</h3><p>State the vertex of \(y=-(x-4)^2+2\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>\((4,2)\), opens down.</em></div></div></details></div>
-  <div class="practice-box" ${PR}><h3>Question 4</h3><p>What does \(a=-1\) do?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Reflects in the \(x\)-axis.</em></div></div></details></div>
-  <div class="practice-box" ${PR}><h3>Question 5</h3><p>Describe \(y=2(x+1)^2\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Stretch by 2, left 1.</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 1 (linear)</h3><p>Describe \(y=-(x-4)\) as a transformation of \(y=x\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Reflection in the \(x\)-axis, shift right \(4\) (it's the line \(y=-x+4\)).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 2 (quadratic)</h3><p>Describe \(y=(x-2)^2+3\) as a transformation of \(y=x^2\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Right \(2\), up \(3\); vertex \((2,3)\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 3 (absolute value)</h3><p>Describe \(y=|x+5|-1\) as a transformation of \(y=|x|\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Left \(5\), down \(1\); corner \((-5,-1)\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 4 (square root)</h3><p>Describe \(y=\sqrt{x-6}+2\) as a transformation of \(y=\sqrt{x}\), and state its domain.</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Right \(6\), up \(2\); domain \(x\ge6\).</em></div></div></details></div>
+  <div class="practice-box" ${PR}><h3>Question 5 (reciprocal)</h3><p>State the asymptotes of \(y=\dfrac{1}{x+3}-5\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Vertical asymptote \(x=-3\); horizontal asymptote \(y=-5\).</em></div></div></details></div>
   <h2>❓ Q&amp;A Summary</h2>
-  <div class="qa-box" ${QA}><h3>Q1: Why is the horizontal shift "opposite"?</h3><p><em>\((x-3)\) shifts right 3 — it asks where the inside equals zero.</em></p></div>
-  <div class="qa-box" ${QA}><h3>Q2: Order of transformations?</h3><p><em>Stretches/reflections first, then translations.</em></p></div>
-  <div class="qa-box" ${QA}><h3>Q3: How do I read the vertex from \(a(x-h)^2+k\)?</h3><p><em>Vertex is \((h,k)\).</em></p></div>
-  <div class="qa-box" ${QA}><h3>Q4: Does \(a\) change the vertex?</h3><p><em>No — it changes width/direction, not the vertex.</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q1: What do a, k, d and c each do?</h3><p><em>\(a\) stretches vertically (and reflects in the \(x\)-axis if negative); \(k\) stretches horizontally (and reflects in the \(y\)-axis if negative); \(d\) shifts horizontally; \(c\) shifts vertically.</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q2: Why is the horizontal shift "opposite" to the sign inside the brackets?</h3><p><em>\((x-d)\) equals zero exactly when \(x=d\), so a "\(-3\)" inside means the graph's key point is now at \(x=3\) — a shift right, even though the sign looks negative.</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q3: What order should I apply the transformations in?</h3><p><em>Stretches and reflections (\(a\) and \(k\)) first, then shifts (\(d\) and \(c\)) — the same order the point-mapping rule uses.</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q4: Does this general form work for every parent function?</h3><p><em>Yes — \(g(x)=a\,f(k(x-d))+c\) transforms any \(f(x)\) the same way, whether \(f\) is a line, a parabola, an absolute value, a square root, or a reciprocal.</em></p></div>
+  <div class="qa-box" ${QA}><h3>Q5: How does a transformation change the domain and range?</h3><p><em>A horizontal shift \(d\) shifts the domain by \(d\); a vertical shift \(c\) shifts the range by \(c\). This matters most for \(y=\sqrt{x}\) (domain) and \(y=\tfrac1x\) (asymptotes).</em></p></div>
 </div>`)]);
 
 u1["1.5"] = L("1.5", "Quadratic Functions: Zeros, Max & Min", [html(String.raw`<div class="lecture-box">
