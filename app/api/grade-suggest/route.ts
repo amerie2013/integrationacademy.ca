@@ -148,11 +148,11 @@ export async function POST(req: NextRequest) {
     });
 
     // Try the configured model, then fall back through known Flash models. Falls
-    // through on 404 (model not found / not available) AND 429 (that model's
-    // free-tier quota is exhausted) — free-tier quotas are PER-MODEL, so another
-    // model may still have room. A first-call 429 usually means the daily quota
-    // for that model is spent, not a real burst limit. Other errors (bad key,
-    // API not enabled) stop and are surfaced.
+    // through on 404 (model not found / not available), 429 (that model's
+    // free-tier quota is exhausted), and 503 (that model is momentarily
+    // overloaded) — all three are PER-MODEL conditions, so another model may
+    // still answer. Other errors (bad key, API not enabled) stop and are
+    // surfaced.
     const candidates = [model, "gemini-2.5-flash", "gemini-2.0-flash", "gemini-flash-latest", "gemini-1.5-flash"].filter((m, i, a) => a.indexOf(m) === i);
     let aiRes: Response | null = null;
     let usedModel = model;
@@ -168,7 +168,7 @@ export async function POST(req: NextRequest) {
       lastStatus = r.status;
       lastErr = await r.text().catch(() => "");
       console.error("grade-suggest model error", m, r.status, lastErr);
-      if (r.status !== 404 && r.status !== 429) break; // stop on real errors (key/API); try next model on missing/quota
+      if (r.status !== 404 && r.status !== 429 && r.status !== 503) break; // stop on real errors (key/API); try next model on missing/quota/overload
     }
     if (!aiRes) {
       let why = lastErr.slice(0, 400);
@@ -177,7 +177,9 @@ export async function POST(req: NextRequest) {
         {
           error: lastStatus === 429
             ? "All the free AI models are out of quota for today. This resets daily — or enable billing on your Google AI Studio project to lift the limit."
-            : `AI grader error ${lastStatus}: ${why}`,
+            : lastStatus === 503
+              ? "The AI grading service is overloaded right now — please try again in a minute."
+              : `AI grader error ${lastStatus}: ${why}`,
         },
         { status: 502 },
       );
