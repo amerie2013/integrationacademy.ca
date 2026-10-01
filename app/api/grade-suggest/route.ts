@@ -85,11 +85,10 @@ export async function POST(req: NextRequest) {
 
     const apiKey = process.env.GEMINI_API_KEY;
     if (!apiKey) return NextResponse.json({ error: "AI grading isn't configured yet. Add GEMINI_API_KEY on the server." }, { status: 503 });
-    // "gemini-flash-latest" is Google's own always-current alias — prefer it as
-    // the default over a pinned version number, since pinned Flash versions get
-    // sunset on a schedule outside our control (2.0 is already shut down; 2.5 is
-    // being phased out through October 2026).
-    const model = process.env.GEMINI_MODEL || "gemini-flash-latest";
+    // Default to the model family Google's own API confirmed this key can use
+    // (see the candidates list below) rather than a pinned alias that may point
+    // at an already-retired generation.
+    const model = process.env.GEMINI_MODEL || "gemini-3.5-flash";
 
     const { data: asg } = await admin.from("assignments").select("title, description").eq("id", sub.assignment_id).maybeSingle();
 
@@ -157,10 +156,13 @@ export async function POST(req: NextRequest) {
     // overloaded) — all three are PER-MODEL conditions, so another model may
     // still answer. Other errors (bad key, API not enabled) stop and are
     // surfaced.
-    // gemini-1.5-flash (confirmed 404 "not found" in production) and
-    // gemini-2.0-flash (Google's docs list it as shut down) are both dead —
-    // dropped so a grading attempt doesn't burn a round trip on either.
-    const candidates = [model, "gemini-flash-latest", "gemini-2.5-flash", "gemini-2.5-flash-lite"].filter((m, i, a) => a.indexOf(m) === i);
+    // gemini-1.5-flash, gemini-2.0-flash, and — for this API key specifically —
+    // the whole 2.x/2.5.x line are confirmed dead in production: Google's own
+    // 404 responses told us this key is on the "no longer available to new
+    // users" cohort for 2.5-flash-lite and pointed us at gemini-3.5-flash-lite.
+    // Lead with the 3.5 line; keep flash-latest/2.5-flash as a cheap safety net
+    // in case Google repoints the alias or this key's access changes again.
+    const candidates = [model, "gemini-3.5-flash", "gemini-3.5-flash-lite", "gemini-flash-latest", "gemini-2.5-flash"].filter((m, i, a) => a.indexOf(m) === i);
     let aiRes: Response | null = null;
     let usedModel = model;
     let lastStatus = 0;
