@@ -157,7 +157,17 @@ export function Calculator({ initialData, initialState, initialId, embed = false
   const [stepY, setStepY] = useState("auto");
   const [title, setTitle] = useState("");
   const [toast, setToast] = useState("");
-  const [panelOpen, setPanelOpen] = useState(() => typeof window === "undefined" || window.innerWidth > 760);
+  // Same initial value on server and client (branching on `typeof window` here
+  // caused a hydration mismatch whenever the client's first render disagreed
+  // with the server's), then a client-only effect narrows it for small screens.
+  const [panelOpen, setPanelOpen] = useState(true);
+  useEffect(() => {
+    // A one-time read of the real browser width post-mount — there's no
+    // external-system callback to hang this off, so a direct setState here
+    // is the correct (not just tolerated) use of an effect.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    if (window.innerWidth <= 760) setPanelOpen(false);
+  }, []);
 
   const [hover, setHover] = useState<{ x: number; y: number } | null>(null);
 
