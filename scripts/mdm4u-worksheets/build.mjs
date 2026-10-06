@@ -17,7 +17,7 @@ function render(w) {
     const tail = qq.grid ? "\n" + GRID : `\\workspace{${qq.ws || "2.4cm"}}`;
     return `\\begin{qbox}{${head}}\n${qq.ask}${tail}\n\\end{qbox}`;
   }).join("\n\n");
-  const recap = w.questions.map((qq) => `  \\item ${qq.ask}`).join("\n");
+  const recap = w.questions.map((qq) => `  \\item ${qq.recap ?? qq.ask}`).join("\n");
   const keys = w.answers.map((a) => `  \\item ${a}`).join("\n");
   const ideas = w.ideas.map((i) => `  \\item ${i}`).join("\n");
   return `\\documentclass[11pt]{article}

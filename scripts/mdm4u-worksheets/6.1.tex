@@ -9,56 +9,59 @@
 \end{center}
 
 \begin{ideabox}
-A scatter plot of paired data shows \emph{direction} (positive/negative), \emph{form} (linear/non-linear), and \emph{strength}. The correlation coefficient $r$ measures \emph{linear} strength, from $-1$ to $1$.
+A scatter plot shows paired data as points. Describe it by \emph{direction}, \emph{form}, \emph{strength} and \emph{unusual features}, in context. The correlation coefficient $r$ (from technology) measures the strength and direction of a \emph{linear} relationship, from $-1$ to $1$. A strong correlation shows \emph{association}, not necessarily \emph{cause and effect}.
 \begin{itemize}[leftmargin=*,itemsep=2pt]
-  \item Explanatory ($x$) vs. response ($y$) variable.
-  \item Describe a scatter by direction, form, and strength.
-  \item $r\in[-1,1]$: the sign gives direction, $|r|$ gives strength; $r$ only measures \emph{linear} association.
+  \item Explanatory ($x$) variable predicts; response ($y$) variable is predicted. Roles are not a claim of cause.
+  \item Describe: direction (positive/negative), form (linear/curved), strength, unusual features (outliers, clusters).
+  \item $-1\le r\le1$: sign $=$ direction, $|r|=$ strength, $r$ detects only \emph{linear} association, and one outlier can change it a lot.
+  \item $r$ has no units; changing units or swapping axes keeps $r$; reversing one scale flips its sign.
+  \item Correlation $\ne$ causation: a lurking variable, reverse cause or coincidence can explain it; only a randomized experiment supports cause and effect.
 \end{itemize}
 \end{ideabox}
 
 \begin{learnbox}
-\lh{Two variables at once}A \textbf{scatter plot} graphs paired data as points to expose a relationship between two variables.
-\lh{Reading correlation}An upward trend is \textbf{positive} correlation, downward is \textbf{negative}, and a shapeless cloud is none. A tight, line-like cloud is \textbf{strong}; a loose one is \textbf{weak}.
-\lh{The correlation coefficient}The value $r$, from $-1$ to $1$, measures the strength and direction of a \emph{linear} relationship; values near $\pm1$ signal a strong linear fit.
+\lh{Two variables at once}A \textbf{scatter plot} graphs \emph{paired data}, one point per individual. The \textbf{explanatory} variable ($x$) is used to predict the \textbf{response} variable ($y$); label both axes with names and units.
+\lh{Describe every scatter in four parts}\textbf{Direction} (positive or negative), \textbf{form} (linear or curved), \textbf{strength} (how tightly the points follow the pattern) and \textbf{unusual features} (outliers, separate clusters) --- always in the context of the problem.
+\lh{The correlation coefficient $r$}Technology gives $r$, with $-1\le r\le1$. The sign is the direction and $|r|$ the strength (about $0.8$ or more is strong). It measures only \emph{linear} association, has no units, and a single outlier can change it a lot. $r\approx0$ means no \emph{linear} relationship, not no relationship.
+\lh{Cause and effect}A strong correlation shows \textbf{association}, not cause. It may come from a direct cause, \textbf{reverse cause}, a \textbf{lurking variable} driving both, or coincidence. Only a \textbf{randomized experiment} supports a cause-and-effect claim.
 \end{learnbox}
 
 \sech{Worked Examples}
 
-\begin{example}{ex0}{Example 1 --- Explanatory vs. response}
-In the pair hours studied vs. test score, which is which?\soln Hours studied is explanatory ($x$); test score is the response ($y$).
+\begin{example}{ex0}{Example 1 --- Assign the roles}
+Name the explanatory and response variable. \\ \textbf{(a)} A teen's nightly sleep and next-day reaction time. \\ \textbf{(b)} A tree's age and its trunk diameter. \\ \textbf{(c)} A company's monthly advertising spending and its website visits.\soln (a) explanatory: hours of sleep; response: reaction time. (b) explanatory: age; response: trunk diameter. (c) explanatory: advertising spending; response: website visits. In each case the first variable is the one used to predict the second.
 \end{example}
 
-\begin{example}{ex1}{Example 2 --- Describe a scatter}
-Points climb steadily along a straight band. Describe the association.\soln Positive, linear, and strong.
+\begin{example}{ex1}{Example 2 --- Plot and describe}
+The age of nine used cars and their resale value are recorded. Technology gives $r=-0.998$. Describe the relationship.\begin{center}\footnotesize\begin{tabular}{|l|*{9}{c|}}\hline Age (years) & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\ \hline Value (\$1000s) & 24.1 & 21.2 & 19.8 & 17.9 & 15.3 & 13.6 & 11.2 & 9.8 & 8.1 \\ \hline\end{tabular}\end{center}\scatterl{0}{10}{0}{26}{Age of car (years)}{Value (\$1000s)}{\addplot[only marks,mark=*,exblue,mark size=2pt] coordinates {(1,24.1)(2,21.2)(3,19.8)(4,17.9)(5,15.3)(6,13.6)(7,11.2)(8,9.8)(9,8.1)};}\soln The points fall steadily from upper left to lower right and hug a straight band: a \textbf{strong, negative, linear} relationship between a car's age and its resale value, with no unusual features.
 \end{example}
 
-\begin{example}{ex2}{Example 3 --- Estimate r by eye}
-A tight, upward-sloping band of points. Estimate $r$.\soln Close to $+1$ (say $r\approx0.9$).
+\begin{example}{ex2}{Example 3 --- A weak relationship}
+Ten adults record their average daily steps (in thousands) and their resting heart rate. Technology gives $r=-0.37$. Describe the relationship.\begin{center}\footnotesize\begin{tabular}{|l|*{10}{c|}}\hline Steps (1000s) & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 \\ \hline Heart rate (bpm) & 72 & 76 & 69 & 75 & 70 & 73 & 68 & 74 & 71 & 69 \\ \hline\end{tabular}\end{center}\scatterl{2}{13}{64}{80}{Daily steps (thousands)}{Resting heart rate (bpm)}{\addplot[only marks,mark=*,exblue,mark size=2pt] coordinates {(3,72)(4,76)(5,69)(6,75)(7,70)(8,73)(9,68)(10,74)(11,71)(12,69)};}\soln There is a slight downward drift (\textbf{negative}), the points are loosely scattered about a line (\textbf{linear}, but \textbf{weak}, $|r|=0.37$): more steps goes with a slightly lower heart rate, but individual points vary widely. No outliers.
 \end{example}
 
-\begin{example}{ex3}{Example 4 --- Negative correlation}
-As outdoor temperature rises, heating cost falls. Describe $r$.\soln Negative --- $r$ is between $-1$ and $0$.
+\begin{example}{ex3}{Example 4 --- A pattern that $r$ misses}
+A ball's height is recorded each second after it is thrown. Technology gives $r=0$. Is height unrelated to time?\begin{center}\footnotesize\begin{tabular}{|l|*{7}{c|}}\hline Time (s) & 0 & 1 & 2 & 3 & 4 & 5 & 6 \\ \hline Height (m) & 1 & 6 & 9 & 10 & 9 & 6 & 1 \\ \hline\end{tabular}\end{center}\scatterl{-0.5}{6.5}{0}{12}{Time (s)}{Height (m)}{\addplot[only marks,mark=*,exblue,mark size=2pt] coordinates {(0,1)(1,6)(2,9)(3,10)(4,9)(5,6)(6,1)};}\soln No. The points trace a clear symmetric arch, so the relationship is strong but \textbf{non-linear}: it rises, then falls, so there is no overall direction. $r=0$ only says there is no \emph{linear} trend.
 \end{example}
 
-\begin{example}{ex4}{Example 5 --- No correlation}
-Shoe size vs. test score shows a shapeless cloud. Estimate $r$.\soln About $0$ --- no linear association.
+\begin{example}{ex4}{Example 5 --- An outlier from a recording error}
+Heights of children aged 3 to 10 are entered in a spreadsheet; the age-8 height was typed as $12.7$ instead of $127$. Technology gives $r=0.12$ with the error and $r=0.998$ after correcting it.\begin{center}\footnotesize\begin{tabular}{|l|*{8}{c|}}\hline Age (years) & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 \\ \hline Height (cm) & 96 & 103 & 110 & 116 & 122 & 12.7 & 133 & 138 \\ \hline\end{tabular}\end{center}\scatterl{2}{11}{0}{150}{Age (years)}{Height (cm)}{\addplot[only marks,mark=*,exblue,mark size=2pt] coordinates {(3,96)(4,103)(5,110)(6,116)(7,122)(9,133)(10,138)};\addplot[only marks,mark=*,red,mark size=2.8pt] coordinates {(8,12.7)};}\soln The point $(8,12.7)$ is a far outlier that drags $r$ from $0.998$ to $0.12$, hiding a very strong, positive, linear relationship. Because the cause is a known typing error, \emph{correct} it to $127$ (and say so); do not simply delete points to improve $r$.
 \end{example}
 
-\begin{example}{ex5}{Example 6 --- Non-linear form}
-Points follow a clear U-shape. Is $r$ a good summary?\soln No --- $r$ only measures \emph{linear} strength and will understate a curved relationship.
+\begin{example}{ex5}{Example 6 --- Rank by strength}
+For plants, technology gives $r$ between height after six weeks and: sunlight hours $0.88$; daily water $0.52$; soil pH $-0.12$; night temperature $-0.93$. Which has the strongest relationship, which the weakest, and which are negative?\soln Compare $|r|$: $0.93>0.88>0.52>0.12$. Strongest: night temperature ($-0.93$). Weakest: soil pH ($-0.12$). Negative: night temperature and soil pH.
 \end{example}
 
-\begin{example}{ex6}{Example 7 --- Interpret a value}
-Interpret $r=-0.85$.\soln A strong \emph{negative} linear relationship.
+\begin{example}{ex6}{Example 7 --- Units and reversed scales}
+Distance run $x$ (km) and calories burned $y$ have $r=0.89$. Find $r$ if \\ \textbf{(a)} distance is in miles; \\ \textbf{(b)} the axes are swapped; \\ \textbf{(c)} $y$ is replaced by $1000-y$ (calories \emph{remaining} of a 1000 kcal goal).\soln (a) $0.89$ --- units do not change $r$. (b) $0.89$ --- $r$ is symmetric in $x$ and $y$. (c) $-0.89$ --- reversing one scale flips the sign only.
 \end{example}
 
-\begin{example}{ex7}{Example 8 --- Read a scatter}
-Describe the plotted data.\soln A strong positive linear trend.\scatter{0}{7}{0}{10}{\addplot[only marks,mark=*,exblue] coordinates {(1,2)(2,3)(3,5)(4,6)(5,8)(6,9)};}
+\begin{example}{ex7}{Example 8 --- Two hidden groups}
+Shoe size and reading speed (words per minute) are recorded for Grade 2 students (blue) and Grade 8 students (orange). All 15 students give $r=0.96$; within Grade 2 alone $r=-0.18$; within Grade 8 alone $r=-0.05$.\scatterl{26}{45}{40}{170}{Shoe size (EU)}{Words per minute}{\addplot[only marks,mark=*,exblue,mark size=2pt] coordinates {(28,62)(29,70)(30,58)(31,66)(32,60)(29.5,64)(30.5,68)};\addplot[only marks,mark=*,qorange,mark size=2pt] coordinates {(38,150)(39,142)(40,158)(41,148)(42,155)(43,146)(39.5,152)(41.5,144)};}\soln The combined $r$ is strong only because of the \emph{gap between two clusters}. Inside each grade there is no linear pattern ($r$ near $0$). Grade level (age) is the hidden factor driving both shoe size and reading speed; do not describe the combined data as one linear trend.
 \end{example}
 
-\begin{example}{ex8}{Example 9 --- Compare r values (multi-part)}
-Given $r=-0.2,\ 0.95,\ -0.99,\ 0.5$, find \\ \textbf{(a)} the strongest; \\ \textbf{(b)} the weakest; \\ \textbf{(c)} the negative ones.\soln (a) $-0.99$ (largest $|r|$). (b) $-0.2$. (c) $-0.2$ and $-0.99$.
+\begin{example}{ex8}{Example 9 --- Cause and effect (multi-part)}
+\textbf{(a)} More fire trucks sent to a fire goes with greater damage ($r=0.80$). Does sending more trucks cause more damage? \\ \textbf{(b)} Cities with more snowplows have more snowfall. Which way might the cause run? \\ \textbf{(c)} How could you test whether a new study app raises quiz marks?\soln (a) No --- the lurking variable is the \emph{size of the fire}: bigger fires need more trucks and cause more damage. (b) Reverse cause: heavy snowfall leads cities to buy more plows. (c) Randomly assign students to use the app or not, keep everything else the same, and compare marks; random assignment spreads lurking variables evenly, so a difference can be attributed to the app.
 \end{example}
 
 \clearpage
@@ -66,55 +69,56 @@ Given $r=-0.2,\ 0.95,\ -0.99,\ 0.5$, find \\ \textbf{(a)} the strongest; \\ \tex
 For each question, show all steps clearly in the space provided.
 
 \begin{qbox}{Question 1}
-Which is the explanatory variable: hours of sunlight vs. plant growth?\workspace{2.4cm}
+Name the explanatory and response variables: a river's water level (m) and the day's rainfall (mm).\workspace{1.6cm}
 \end{qbox}
 
 \begin{qbox}{Question 2}
-Describe the association when $r=0.9$.\workspace{2.4cm}
+Eight musicians record weekly practice hours and the number of mistakes in a recital. Technology gives $r=-0.98$. Describe the relationship in context.\begin{center}\footnotesize\begin{tabular}{|l|*{8}{c|}}\hline Practice (h/week) & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 \\ \hline Mistakes & 14 & 12 & 13 & 10 & 9 & 7 & 6 & 4 \\ \hline\end{tabular}\end{center}\scatterl{0}{9}{0}{16}{Practice (hours/week)}{Mistakes}{\addplot[only marks,mark=*,exblue,mark size=2pt] coordinates {(1,14)(2,12)(3,13)(4,10)(5,9)(6,7)(7,6)(8,4)};}\workspace{2.2cm}
 \end{qbox}
 
 \begin{qbox}{Question 3}
-Describe the association when $r=-0.4$.\workspace{2.4cm}
+Match each value of $r$ to a description: $0.97,\ -0.33,\ 0.62,\ -0.91$. Descriptions: strong negative, weak negative, moderate positive, strong positive.\workspace{2.4cm}
 \end{qbox}
 
 \begin{qbox}{Question 4}
-Which is stronger: $r=0.8$ or $r=-0.9$?\workspace{2.4cm}
+Which relationship is strongest: $r=-0.82$, $r=0.77$ or $r=-0.45$? Explain.\workspace{2cm}
 \end{qbox}
 
 \begin{qbox}{Question 5}
-What does $r=0$ indicate?\workspace{2.4cm}
+All points lie exactly on a straight line that rises to the right. What is $r$? What is $r$ if the line falls?\workspace{2cm}
 \end{qbox}
 
 \begin{qbox}{Question 6}
-A scatter curves sharply upward. Is $r$ a good summary? Why?\workspace{2.4cm}
+The data below follow $y=2^{x}$ and technology gives $r=0.88$. Describe the form, and explain why \textquotedblleft{}strong linear relationship\textquotedblright{} would be a poor description.\begin{center}\footnotesize\begin{tabular}{|l|*{7}{c|}}\hline $x$ & 0 & 1 & 2 & 3 & 4 & 5 & 6 \\ \hline $y$ & 1 & 2 & 4 & 8 & 16 & 32 & 64 \\ \hline\end{tabular}\end{center}\scatterl{-1}{7}{0}{70}{$x$}{$y$}{\addplot[only marks,mark=*,exblue,mark size=2pt] coordinates {(0,1)(1,2)(2,4)(3,8)(4,16)(5,32)(6,64)};}\workspace{2.2cm}
 \end{qbox}
 
 \begin{qbox}{Question 7}
-Estimate $r$ for a tight, downward-sloping line of points.\workspace{2.4cm}
+A scatter plot has $r=-0.31$. After one far-off point is removed, $r=-0.94$. \\ \textbf{(a)} What does this show? \\ \textbf{(b)} What must you do before deleting the point?\workspace{2.6cm}
 \end{qbox}
 
 \begin{qbox}{Question 8}
-What is the likely sign of $r$ for ice-cream sales vs. temperature?\workspace{2.4cm}
+Height and weight have $r=0.78$. Find $r$ if \\ \textbf{(a)} height is converted to metres and weight to pounds; \\ \textbf{(b)} each weight $w$ is replaced by $120-w$.\workspace{2.4cm}
 \end{qbox}
 
 \begin{qbox}{Question 9}
-Rank by strength: $r=0.3,\ -0.7,\ 0.95$.\workspace{2.4cm}
+Countries with more televisions per person have longer life expectancy ($r=0.80$). Does owning televisions lengthen life? Name a lurking variable.\workspace{2.4cm}
 \end{qbox}
 
 \begin{qbox}{Question 10}
-Which is explanatory: age vs. vocabulary size?\workspace{2.4cm}
+Streets with more security cameras report more break-ins ($r=0.60$). Explain how reverse cause could account for this.\workspace{2.4cm}
 \end{qbox}
 
 \begin{qbox}{Question 11}
-Interpret $r=-0.99$.\workspace{2.4cm}
+Sketch a scatter plot of about eight points that is positive, linear and weak, with one outlier.
+\begin{center}\begin{tikzpicture}\begin{axis}[width=8cm,height=6cm,axis lines=middle,grid=both,grid style={gray!16},xmin=-6,xmax=6,ymin=-6,ymax=6,xtick distance=2,ytick distance=2,tick label style={font=\tiny}]\end{axis}\end{tikzpicture}\end{center}
 \end{qbox}
 
 \begin{qbox}{Question 12}
-Two unrelated variables --- what value of $r$ do you expect?\workspace{2.4cm}
+A classmate says \textquotedblleft{}$r=0.92$ means 92\% of the points lie on the line.\textquotedblright{} Explain the error.\workspace{2.4cm}
 \end{qbox}
 
 \begin{qbox}{Question 13 --- Challenge}
-Given $r=0.1,\ -0.6,\ 0.99,\ -0.95$, find \\ \textbf{(a)} the strongest; \\ \textbf{(b)} the weakest; \\ \textbf{(c)} the negative ones.\workspace{3cm}
+A food truck records the day's high temperature and the cups of lemonade sold. Technology gives $r=0.99$.\begin{center}\footnotesize\begin{tabular}{|l|*{8}{c|}}\hline High ($^\circ$C) & 18 & 20 & 22 & 24 & 26 & 28 & 30 & 32 \\ \hline Cups sold & 41 & 49 & 48 & 58 & 62 & 66 & 74 & 79 \\ \hline\end{tabular}\end{center}\par\smallskip\textbf{(a)} Name the explanatory and response variables. \\ \textbf{(b)} Describe the relationship. \\ \textbf{(c)} Find $r$ if temperature is converted to $^\circ$F. \\ \textbf{(d)} A rainy day at $24^\circ$C sells only 12 cups. How would this point appear, and what would it do to $r$? \\ \textbf{(e)} Does hot weather \emph{cause} higher sales? What would you need to be sure?\workspace{6.5cm}
 \end{qbox}
 
 \clearpage
@@ -124,19 +128,19 @@ Given $r=0.1,\ -0.6,\ 0.99,\ -0.95$, find \\ \textbf{(a)} the strongest; \\ \tex
 \begin{multicols}{2}
 \small
 \begin{enumerate}[leftmargin=*,itemsep=3pt]
-  \item Which is the explanatory variable: hours of sunlight vs. plant growth?
-  \item Describe the association when $r=0.9$.
-  \item Describe the association when $r=-0.4$.
-  \item Which is stronger: $r=0.8$ or $r=-0.9$?
-  \item What does $r=0$ indicate?
-  \item A scatter curves sharply upward. Is $r$ a good summary? Why?
-  \item Estimate $r$ for a tight, downward-sloping line of points.
-  \item What is the likely sign of $r$ for ice-cream sales vs. temperature?
-  \item Rank by strength: $r=0.3,\ -0.7,\ 0.95$.
-  \item Which is explanatory: age vs. vocabulary size?
-  \item Interpret $r=-0.99$.
-  \item Two unrelated variables --- what value of $r$ do you expect?
-  \item Given $r=0.1,\ -0.6,\ 0.99,\ -0.95$, find \\ \textbf{(a)} the strongest; \\ \textbf{(b)} the weakest; \\ \textbf{(c)} the negative ones.
+  \item Name the explanatory and response variables: a river's water level (m) and the day's rainfall (mm).
+  \item Describe the practice-vs-mistakes scatter plot ($r=-0.98$) in context.
+  \item Match each value of $r$ to a description: $0.97,\ -0.33,\ 0.62,\ -0.91$. Descriptions: strong negative, weak negative, moderate positive, strong positive.
+  \item Which relationship is strongest: $r=-0.82$, $r=0.77$ or $r=-0.45$? Explain.
+  \item All points lie exactly on a straight line that rises to the right. What is $r$? What is $r$ if the line falls?
+  \item Data follow $y=2^x$ ($r=0.88$): describe the form and say why \textquotedblleft{}strong linear\textquotedblright{} is a poor description.
+  \item A scatter plot has $r=-0.31$. After one far-off point is removed, $r=-0.94$. \\ \textbf{(a)} What does this show? \\ \textbf{(b)} What must you do before deleting the point?
+  \item Height and weight have $r=0.78$. Find $r$ if \\ \textbf{(a)} height is converted to metres and weight to pounds; \\ \textbf{(b)} each weight $w$ is replaced by $120-w$.
+  \item Countries with more televisions per person have longer life expectancy ($r=0.80$). Does owning televisions lengthen life? Name a lurking variable.
+  \item Streets with more security cameras report more break-ins ($r=0.60$). Explain how reverse cause could account for this.
+  \item Sketch a positive, linear, weak scatter with one outlier.
+  \item A classmate says \textquotedblleft{}$r=0.92$ means 92\% of the points lie on the line.\textquotedblright{} Explain the error.
+  \item Lemonade truck ($r=0.99$): (a) roles; (b) describe; (c) $^\circ$F; (d) effect of a 12-cup rainy day; (e) cause and effect?
 \end{enumerate}
 \end{multicols}
 \end{recapbox}
@@ -145,19 +149,19 @@ Given $r=0.1,\ -0.6,\ 0.99,\ -0.95$, find \\ \textbf{(a)} the strongest; \\ \tex
 \begin{multicols}{2}
 \small
 \begin{enumerate}[leftmargin=*,itemsep=3pt]
-  \item hours of sunlight
-  \item strong positive linear
-  \item weak-to-moderate negative
-  \item $r=-0.9$
-  \item no linear correlation
-  \item no --- the relationship is non-linear
-  \item near $-1$
-  \item positive
-  \item $0.95>0.7>0.3$
-  \item age
-  \item very strong negative linear
-  \item $\approx0$
-  \item (a) $0.99$; (b) $0.1$; (c) $-0.6,\ -0.95$
+  \item explanatory: rainfall; response: water level
+  \item strong, negative, linear: more practice goes with fewer mistakes; no outliers
+  \item $0.97$ strong positive; $-0.33$ weak negative; $0.62$ moderate positive; $-0.91$ strong negative
+  \item $r=-0.82$ (largest $|r|$; sign gives direction only)
+  \item $r=1$ (rising line); $r=-1$ (falling line)
+  \item curved (exponential growth) and increasing; $r$ measures only linear fit, so $0.88$ overstates a line's suitability
+  \item (a) one outlier hid a strong negative linear pattern; (b) find out why it is unusual; correct or delete only if it is an error, otherwise keep it and report both $r$ values
+  \item (a) $0.78$; (b) $-0.78$
+  \item no; lurking variable: national wealth/health care, which raises both
+  \item crime leads residents to install cameras, so break-ins (the response) cause the cameras (the \textquotedblleft{}explanatory\textquotedblright{} variable)
+  \item about eight points rising loosely, plus one point far from the pattern
+  \item $r$ measures the strength of a \emph{linear} trend, not a percent of points; few points lie exactly on a line unless $|r|=1$
+  \item (a) explanatory: temperature; response: cups sold; (b) strong, positive, linear; (c) $0.99$ (unchanged); (d) a point far below the pattern (outlier) that would lower $r$; (e) no; association only --- a randomized experiment would be needed
 \end{enumerate}
 \end{multicols}
 \end{keybox}

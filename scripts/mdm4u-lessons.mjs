@@ -9,6 +9,44 @@ const PR = "background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 
 const MK = "background-color:#fdecea;border-left:5px solid #d9534f;padding:10px 14px;margin:10px 0;border-radius:6px;";
 const QA = "background-color:#f0f0f0;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;";
 
+// ── Scatter-plot helpers for lesson 6.1 (inline SVG, responsive, no iframe) ──
+// Data for every plot/table in 6.1 lives in S61 so the plotted points, the
+// printed table and the quoted r-values cannot drift apart.
+const S61 = {
+  solar: { x: [8, 9, 10, 11, 12, 13, 14, 15, 16], y: [3.4, 3.6, 4.9, 5.1, 6.3, 6.4, 7.6, 7.5, 8.9] },
+  screen: { x: [1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5], y: [8.4, 7.2, 8.5, 7.0, 7.9, 6.6, 7.6, 6.5, 7.2, 6.4] },
+  energy: { x: [2, 6, 10, 14, 18, 22, 26, 30, 34], y: [15.8, 10.2, 6.2, 3.8, 3, 3.8, 6.2, 10.2, 15.8] },
+  practice: { x: [1, 2, 3, 4, 5, 6, 7, 8, 7], y: [52, 58, 61, 69, 72, 79, 84, 90, 35] },
+  rec: { x: [2, 2.5, 3, 3.5, 4, 4.5, 5, 3, 4], y: [31, 28, 30, 26, 29, 27, 32, 32, 25] },
+  comp: { x: [10, 11, 12, 13, 14, 10.5, 12.5, 13.5], y: [19.5, 20.5, 19, 21, 19.5, 20.5, 20, 19.5] },
+  cyclist: { x: [10, 12, 14, 16, 18, 20, 22, 24], y: [99, 102, 114, 116, 130, 133, 146, 147] },
+};
+const fmtN = (v) => String(+Number(v).toFixed(4));
+// series: [{ pts: [[x,y],…], c: colour, hi?: [indices drawn red + ringed] }]; o: window, tick steps, axis names.
+const scat = (series, o) => {
+  const W = 520, H = 320, L = 60, R = 18, T = 22, B = 56;
+  const X = (x) => (L + ((x - o.xmin) / (o.xmax - o.xmin)) * (W - L - R)).toFixed(1);
+  const Y = (y) => (H - B - ((y - o.ymin) / (o.ymax - o.ymin)) * (H - T - B)).toFixed(1);
+  let g = "";
+  for (let v = o.xmin; v <= o.xmax + 1e-9; v += o.xs) g += `<line x1="${X(v)}" y1="${T}" x2="${X(v)}" y2="${H - B}" stroke="#e8edf3"/><text x="${X(v)}" y="${H - B + 16}" text-anchor="middle" font-size="11" fill="#64748b">${fmtN(v)}</text>`;
+  for (let v = o.ymin; v <= o.ymax + 1e-9; v += o.ys) g += `<line x1="${L}" y1="${Y(v)}" x2="${W - R}" y2="${Y(v)}" stroke="#e8edf3"/><text x="${L - 7}" y="${(+Y(v) + 4).toFixed(1)}" text-anchor="end" font-size="11" fill="#64748b">${fmtN(v)}</text>`;
+  g += `<line x1="${L}" y1="${H - B}" x2="${W - R}" y2="${H - B}" stroke="#475569" stroke-width="1.5"/><line x1="${L}" y1="${T}" x2="${L}" y2="${H - B}" stroke="#475569" stroke-width="1.5"/>`;
+  g += `<text x="${((L + W - R) / 2).toFixed(0)}" y="${H - 10}" text-anchor="middle" font-size="12.5" font-weight="600" fill="#1e293b">${o.xl}</text>`;
+  g += `<text transform="rotate(-90 15 ${((T + H - B) / 2).toFixed(0)})" x="15" y="${((T + H - B) / 2).toFixed(0)}" text-anchor="middle" font-size="12.5" font-weight="600" fill="#1e293b">${o.yl}</text>`;
+  for (const s of series) s.pts.forEach(([x, y], i) => {
+    const hi = (s.hi || []).includes(i);
+    if (hi) g += `<circle cx="${X(x)}" cy="${Y(y)}" r="9" fill="none" stroke="#d9534f" stroke-width="1.6" stroke-dasharray="3 2"/>`;
+    g += `<circle cx="${X(x)}" cy="${Y(y)}" r="4.6" fill="${hi ? "#d9534f" : s.c || "#2563a0"}" stroke="#fff" stroke-width="1"/>`;
+  });
+  for (const n of o.notes || []) g += `<text x="${X(n.x)}" y="${Y(n.y)}" font-size="12" font-weight="600" fill="${n.c || "#d9534f"}" text-anchor="${n.a || "start"}">${n.t}</text>`;
+  (o.legend || []).forEach((l, i) => { g += `<circle cx="${W - R - 150}" cy="${T + 14 + i * 18}" r="4.6" fill="${l.c}"/><text x="${W - R - 140}" y="${T + 18 + i * 18}" font-size="12" fill="#1e293b">${l.t}</text>`; });
+  return `<div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 ${W} ${H}" style="width:100%;max-width:${W}px;background:#fff;border:1px solid #cbd5e1;border-radius:8px;" role="img" aria-label="${o.alt}">${g}</svg></div>`;
+};
+const TD = "padding:3px 9px;border:1px solid #cbd5e1;text-align:center;";
+const TH = "padding:3px 9px;border:1px solid #cbd5e1;background:#e2e8f0;text-align:left;font-weight:700;";
+const dtab = (xl, yl, d) => `<div style="overflow-x:auto;"><table style="border-collapse:collapse;font-size:13px;margin:8px auto;"><tr><th style="${TH}">${xl}</th>${d.x.map((v) => `<td style="${TD}">${fmtN(v)}</td>`).join("")}</tr><tr><th style="${TH}">${yl}</th>${d.y.map((v) => `<td style="${TD}">${fmtN(v)}</td>`).join("")}</tr></table></div>`;
+const pairs = (d) => d.x.map((x, i) => [x, d.y[i]]);
+
 export const authored = {
   // ── 1.1 The Fundamental Counting Principle ──────────────────
   "1.1": { code: "1.1", title: "The Fundamental Counting Principle", blocks: [html(String.raw`<div class="lecture-box">
@@ -1291,29 +1329,161 @@ export const authored = {
   // ── 6.1 Scatter Plots & Correlation ─────────────────────────
   "6.1": { code: "6.1", title: "Scatter Plots & Correlation", blocks: [html(String.raw`<div class="lecture-box">
   <h1>🔵 Scatter Plots &amp; Correlation</h1>
-  <p><strong>Overview.</strong> A <strong>scatter plot</strong> is the first look at paired data — one variable against another. Reading it means naming which variable explains which, then describing the relationship's <strong>direction</strong>, <strong>form</strong>, and <strong>strength</strong> before any number is computed.</p>
-  <h2>📌 The Vocabulary</h2>
-  <p>The <strong>explanatory</strong> (independent) variable goes on the \(x\)-axis; the <strong>response</strong> (dependent) variable on the \(y\)-axis. Describe the plot by <strong>direction</strong> (positive/negative/none), <strong>form</strong> (linear/curved), and <strong>strength</strong> (how tightly the points follow the pattern). Watch for <strong>outliers</strong> that don't fit.</p>
-  <h2>📌 Contingency (Two-Way) Tables</h2>
-  <p>When <em>both</em> variables are categorical, a scatter plot doesn't apply — instead use a <strong>contingency table</strong> that cross-tabulates the counts. Comparing <strong>conditional proportions</strong> across rows (or columns) reveals whether the two variables are associated: if the proportion changes from row to row, there's an association.</p>
+  <p><strong>Overview.</strong> Measure two things on the same individual — a runner's weekly training time and her race time, a day's temperature and the electricity a city uses — and you have <strong>paired data</strong>. A <strong>scatter plot</strong> turns each pair into one point so you can <em>see</em> whether the two variables move together, and how. This lesson gives you a complete routine: assign roles to the variables, build the plot, describe it in four features, and then put a number on its <em>linear</em> strength with the <strong>correlation coefficient</strong> \(r\) — read from technology, never computed by hand — while knowing exactly what \(r\) can and cannot tell you. Finally you will see why even a very strong correlation does <strong>not</strong> by itself show <strong>cause and effect</strong>.</p>
+
+  <h2>📌 Paired Data and the Two Roles</h2>
+  <p>Every individual (a student, a day, a car) contributes one pair \((x,\,y)\). The two variables play different roles:</p>
+  <ul>
+    <li>The <strong>explanatory variable</strong> (independent, \(x\)) is the one you use to <em>explain or predict</em>. It goes on the <strong>horizontal</strong> axis.</li>
+    <li>The <strong>response variable</strong> (dependent, \(y\)) is the one being explained or predicted. It goes on the <strong>vertical</strong> axis.</li>
+  </ul>
+  <p>A quick test: <em>"Which one would I use to predict the other?"</em> Naming roles does <strong>not</strong> claim that \(x\) causes \(y\) — that is a much stronger statement (§6.5). Sometimes neither variable is naturally the explanatory one (height and arm span); then either assignment is acceptable, and the study's question decides.</p>
+
+  <h2>📌 Building a Scatter Plot</h2>
+  <ol>
+    <li><strong>Assign roles</strong> — explanatory on the \(x\)-axis, response on the \(y\)-axis.</li>
+    <li><strong>Label both axes</strong> with the variable's name <em>and</em> its unit, and give the plot a title.</li>
+    <li><strong>Choose a scale for each axis</strong> that covers the data with evenly spaced tick marks. Unlike a bar graph, a scatter plot's axes do <em>not</em> have to start at 0 — the pattern of the points is what matters — but keep the points filling most of the window.</li>
+    <li><strong>Plot one point per pair.</strong> Never join the points with line segments.</li>
+  </ol>
+
+  <h2>📌 Describing a Scatter Plot: Direction · Form · Strength · Unusual Features</h2>
+  <div style="overflow-x:auto;"><table style="border-collapse:collapse;font-size:14px;margin:8px 0;width:100%;">
+    <tr><th style="${TH}">Feature</th><th style="${TH}">Question it answers</th><th style="${TH}">Vocabulary</th></tr>
+    <tr><td style="${TD}text-align:left;"><strong>Direction</strong></td><td style="${TD}text-align:left;">As \(x\) increases, what does \(y\) tend to do?</td><td style="${TD}text-align:left;"><strong>positive</strong> (rises left→right), <strong>negative</strong> (falls), or none</td></tr>
+    <tr><td style="${TD}text-align:left;"><strong>Form</strong></td><td style="${TD}text-align:left;">What shape do the points follow?</td><td style="${TD}text-align:left;"><strong>linear</strong> (a straight band) or <strong>non-linear / curved</strong> (arch, U, growth that speeds up or levels off)</td></tr>
+    <tr><td style="${TD}text-align:left;"><strong>Strength</strong></td><td style="${TD}text-align:left;">How tightly do the points follow that shape?</td><td style="${TD}text-align:left;"><strong>strong</strong>, <strong>moderate</strong>, <strong>weak</strong></td></tr>
+    <tr><td style="${TD}text-align:left;"><strong>Unusual features</strong></td><td style="${TD}text-align:left;">Is anything off the pattern?</td><td style="${TD}text-align:left;"><strong>outliers</strong> (isolated points), <strong>clusters</strong> or gaps (separate groups)</td></tr>
+  </table></div>
+  <p>A complete description is one sentence <strong>in context</strong>: <em>"There is a [strength], [direction], [form] relationship between [\(x\) in words] and [\(y\) in words], with [any unusual features]."</em></p>
+
+  <h2>📌 The Correlation Coefficient \(r\)</h2>
+  <p>The eye is good at spotting a pattern but poor at comparing two plots. The <strong>correlation coefficient</strong> \(r\) condenses the <strong>direction and strength of a <em>linear</em> relationship</strong> into one number. In MDM4U you obtain \(r\) from technology — a spreadsheet's <code>CORREL</code> function, a graphing calculator's regression output, or graphing software — and your job is to <em>interpret</em> it. Its key properties:</p>
+  <ul>
+    <li>\(-1\le r\le 1\). The extremes \(r=1\) and \(r=-1\) occur only when <em>every</em> point lies exactly on a rising or a falling straight line.</li>
+    <li><strong>The sign is the direction</strong> (+ rising, − falling); <strong>\(|r|\) is the strength</strong>. The closer \(|r|\) is to 1, the more tightly the points hug a line. A value of \(-0.9\) is <em>stronger</em> than \(+0.6\).</li>
+    <li>\(r\approx 0\) means there is no <em>linear</em> trend — a curved relationship can still be there.</li>
+    <li>\(r\) has <strong>no units</strong>. Changing units (cm → m) or swapping which variable is on which axis leaves \(r\) unchanged; reversing one variable's scale (using \(100-y\) instead of \(y\)) changes only its sign.</li>
+    <li>\(r\) is <strong>not resistant</strong>: one outlier can move it dramatically.</li>
+    <li>\(r\) is not a percentage — \(r=0.8\) does not mean "80% of the points lie on the line".</li>
+  </ul>
+  <div style="overflow-x:auto;"><table style="border-collapse:collapse;font-size:14px;margin:8px 0;">
+    <tr><th style="${TH}">\(|r|\)</th><th style="${TH}">0.8 to 1</th><th style="${TH}">0.5 to 0.8</th><th style="${TH}">0.2 to 0.5</th><th style="${TH}">below 0.2</th></tr>
+    <tr><th style="${TH}">Strength</th><td style="${TD}">strong</td><td style="${TD}">moderate</td><td style="${TD}">weak</td><td style="${TD}">very weak / none</td></tr>
+  </table></div>
+  <p><em>These cut-offs are a working guideline, not a law — what counts as "strong" depends on the field.</em> <strong>Always look at the plot before trusting \(r\)</strong>: a curve, an outlier, or two hidden groups can each make \(r\) say something the data do not.</p>
+
+  <h2>📌 Cause and Effect: What a Scatter Plot Cannot Prove</h2>
+  <p>A scatter plot and \(r\) measure <strong>association</strong> — how the two variables move together. A <strong>cause-and-effect</strong> relationship is a stronger claim: that <em>changing</em> \(x\) <em>produces</em> a change in \(y\). Calling \(x\) "explanatory" is a statement about roles, not a claim of cause. When two variables are strongly correlated there are four possible explanations:</p>
+  <ul>
+    <li><strong>Direct cause</strong> — \(x\) really does influence \(y\) (more rain → higher river level).</li>
+    <li><strong>Reverse cause</strong> — the arrow runs the other way: \(y\) influences \(x\).</li>
+    <li><strong>Common cause (lurking or confounding variable)</strong> — a third variable \(z\) drives both \(x\) and \(y\), so they move together although neither affects the other.</li>
+    <li><strong>Coincidence</strong> — the pattern appeared by accident, especially in a small data set or when many pairs were searched.</li>
+  </ul>
+  <p>A scatter plot alone cannot tell these apart. To support cause and effect you need evidence beyond the correlation: a <strong>randomized experiment</strong> — the researcher <em>assigns</em> the values of \(x\) to subjects at random and compares the responses, which spreads every lurking variable evenly across the groups — or, where an experiment is impossible, a consistent pattern across many independent studies together with a plausible mechanism. Data that were merely <em>observed</em> (an observational study) can reveal association but cannot, on their own, establish cause. Section 6.5 returns to this idea in depth.</p>
+
   <h2>🔵 Examples</h2>
-  <div class="example-box" style="${EX}"><h3>Example 1: Explanatory vs response</h3><p>A study relates hours studied to test score. Identify the variables and which axis each goes on.</p><div class="solution"><div class="step">Hours studied is the <strong>explanatory</strong> variable (\(x\)-axis); test score is the <strong>response</strong> (\(y\)-axis) — we ask whether studying predicts the score, not the reverse.</div><em>Conclusion: hours on \(x\), score on \(y\). ✓</em></div></div>
-  <div class="example-box" style="${EX}"><h3>Example 2: Describe a scatter fully</h3><p>Points fall from upper-left to lower-right, clustering tightly around a straight line, with one point far below. Describe direction, form, and strength.</p><div class="solution"><div class="step"><strong>Direction:</strong> negative; <strong>form:</strong> linear; <strong>strength:</strong> strong (tight cluster).</div><div class="step">The single far-below point is an <strong>outlier</strong> that would weaken the measured correlation.</div><em>Conclusion: strong negative linear, with one outlier. ✓</em></div></div>
-  <div class="example-box" style="${EX}"><h3>Example 3: A contingency table</h3><p>Of 100 people surveyed: among 50 men, 30 prefer coffee and 20 tea; among 50 women, 20 prefer coffee and 30 tea. Is drink preference associated with gender?</p><div class="solution"><div class="step"><strong>Step 1:</strong> \(P(\text{coffee}\mid\text{man})=\tfrac{30}{50}=0.60\).</div><div class="step"><strong>Step 2:</strong> \(P(\text{coffee}\mid\text{woman})=\tfrac{20}{50}=0.40\).</div><div class="step"><strong>Step 3:</strong> The conditional proportions differ (0.60 vs 0.40), so preference <strong>is</strong> associated with gender.</div><em>Conclusion: association exists — equal proportions would mean none. ✓</em></div></div>
-  <div class="example-box" style="${EX}"><h3>Example 4: Estimate \(r\) from a scatter</h3><p>A scatter of height vs shoe size rises steadily with points hugging a line. Estimate the sign and rough size of \(r\).</p><div class="solution"><div class="step">Rising → positive; tight → strong. So \(r\) is close to \(+1\), roughly \(0.8\)–\(0.95\).</div><em>Conclusion: a strong positive \(r\). The scatter's tightness estimates \(|r|\) before any calculation. ✓</em></div>
-    ${gframe([], { title: "A tight rising scatter → strong positive r", zoom: 90, zoomY: 38, ox: -270, oy: 152, labels: [{ x: 1, y: 2, t: "", c: "#2563a0" }, { x: 2, y: 3, t: "", c: "#2563a0" }, { x: 3, y: 5, t: "", c: "#2563a0" }, { x: 4, y: 6, t: "", c: "#2563a0" }, { x: 5, y: 7, t: "", c: "#2563a0" }] })}
-  </div>
-  <div class="example-box" style="${EX}"><h3>Example 5: Strong pattern, weak correlation</h3><p>A scatter forms a clear symmetric U-shape. What is its linear correlation, and what does that reveal about \(r\)?</p><div class="solution"><div class="step">A U-shape has a strong <em>curved</em> relationship but no consistent up-or-down linear trend, so \(r\approx0\).</div><em>Conclusion: \(r\approx0\) despite an obvious pattern — \(r\) measures only <strong>linear</strong> association, so always look at the plot. ✓</em></div></div>
+
+  <div class="example-box" style="${EX}"><h3>Example 1: Assigning the roles</h3><p>For each pair of variables, name the explanatory and response variables.<br>(a) A runner's weekly training distance (km) and her 10 km race time (min).<br>(b) The number of hours a phone has been in use since its last charge and its remaining battery level (%).<br>(c) A person's height and arm span.</p><div class="solution">
+    <div class="step"><strong>(a)</strong> Training is done <em>before</em> the race and is used to predict it: explanatory = training distance (\(x\)), response = race time (\(y\)).</div>
+    <div class="step"><strong>(b)</strong> Usage time is what we would use to predict the battery level: explanatory = hours in use, response = remaining battery %.</div>
+    <div class="step"><strong>(c)</strong> Neither is naturally the predictor. Either assignment is acceptable — say which one you chose. If the goal is to estimate a person's height from a quick arm-span measurement, then arm span is explanatory.</div>
+    <em>Conclusion: ask "which would I use to predict the other?"; if the answer is "either", the purpose of the study decides. ✓</em></div></div>
+
+  <div class="example-box" style="${EX}"><h3>Example 2: Build a scatter plot and describe it</h3><p>A homeowner records the hours of daylight and the energy (kWh) her solar panels produced on nine days.</p>
+    ${dtab("Daylight (h)", "Output (kWh)", S61.solar)}
+    <div class="solution">
+    <div class="step"><strong>Roles and axes.</strong> Daylight is used to predict output, so daylight is \(x\) (horizontal) and output is \(y\) (vertical). Scales: \(x\) from 6 to 18 in steps of 2; \(y\) from 2 to 10 in steps of 2 — the data sit well inside, and neither axis needs to start at 0.</div>
+    <div class="step"><strong>Plot</strong> the nine points (below).</div>
+    ${scat([{ pts: pairs(S61.solar), c: "#2563a0" }], { xmin: 6, xmax: 18, xs: 2, ymin: 2, ymax: 10, ys: 2, xl: "Daylight (hours)", yl: "Solar output (kWh)", alt: "Scatter plot: solar output rises steadily as daylight hours increase from 8 to 16." })}
+    <div class="step"><strong>Describe.</strong> The points climb from lower left to upper right (<strong>positive</strong>), stay close to a straight band (<strong>linear</strong>) and scatter only slightly about it (<strong>strong</strong>). Nothing sits apart from the pattern.</div>
+    <div class="step"><strong>Check with technology.</strong> The spreadsheet reports \(r=0.986\) — positive, and above 0.8, agreeing with what we saw.</div>
+    <em>Conclusion: there is a strong, positive, linear relationship between hours of daylight and solar output, with no unusual features. ✓</em></div></div>
+
+  <div class="example-box" style="${EX}"><h3>Example 3: A moderate relationship — reading \(r\) honestly</h3><p>Ten students report their average daily screen time and their average nightly sleep.</p>
+    ${dtab("Screen time (h/day)", "Sleep (h/night)", S61.screen)}
+    ${scat([{ pts: pairs(S61.screen), c: "#2563a0" }], { xmin: 0.5, xmax: 6, xs: 1, ymin: 6, ymax: 9, ys: 0.5, xl: "Screen time (hours per day)", yl: "Sleep (hours per night)", alt: "Scatter plot: sleep tends to fall as screen time rises, with noticeable scatter." })}
+    <p>Technology gives \(r=-0.668\). Describe the relationship.</p><div class="solution">
+    <div class="step"><strong>Direction:</strong> negative — more screen time goes with less sleep. <strong>Form:</strong> roughly linear. <strong>Strength:</strong> \(|r|=0.67\) falls in the 0.5–0.8 band, so <strong>moderate</strong>.</div>
+    <div class="step"><strong>Why "moderate" and not "strong"?</strong> The downward drift is clear, but the points scatter widely about it: the student with 2 h of screen time sleeps 8.5 h, yet the student with only 1.5 h sleeps just 7.2 h, and the student at 4 h (7.6 h) sleeps longer than the one at 2.5 h (7.0 h). The trend describes the group, not every individual.</div>
+    <em>Conclusion: a moderate, negative, linear relationship between daily screen time and nightly sleep, with no outliers. ✓</em></div></div>
+
+  <div class="example-box" style="${EX}"><h3>Example 4: Comparing several relationships by \(r\)</h3><p>A school records four variables for each Grade 12 student. Technology gives the correlation of each with the student's final mark:</p>
+    <div style="overflow-x:auto;"><table style="border-collapse:collapse;font-size:13px;margin:8px auto;"><tr><th style="${TH}">Variable</th><th style="${TH}">Hours studied / week</th><th style="${TH}">Absences</th><th style="${TH}">Part-time job hours</th><th style="${TH}">Number of siblings</th></tr><tr><th style="${TH}">\(r\) with final mark</th><td style="${TD}">0.74</td><td style="${TD}">−0.81</td><td style="${TD}">−0.38</td><td style="${TD}">0.04</td></tr></table></div>
+    <p>(a) Which variable has the strongest linear relationship with the final mark? (b) Which has the weakest? (c) Which two show a negative direction?</p><div class="solution">
+    <div class="step"><strong>(a)</strong> Strength is \(|r|\), so ignore the signs: \(0.81>0.74>0.38>0.04\). The strongest is <strong>absences</strong>, even though its \(r\) is negative.</div>
+    <div class="step"><strong>(b)</strong> The weakest is <strong>number of siblings</strong> (\(|r|=0.04\)) — essentially no linear relationship.</div>
+    <div class="step"><strong>(c)</strong> Negative \(r\): <strong>absences</strong> and <strong>part-time job hours</strong>.</div>
+    <em>Conclusion: absences (−0.81) is a stronger linear predictor than hours studied (+0.74). Compare \(|r|\), never \(r\) itself. ✓</em></div></div>
+
+  <div class="example-box" style="${EX}"><h3>Example 5: A strong pattern with \(r=0\)</h3><p>A building's daily heating-plus-cooling energy use (kWh) is recorded at nine outdoor temperatures. Technology reports \(r=0\).</p>
+    ${dtab("Outdoor temp (°C)", "Energy (kWh)", S61.energy)}
+    ${scat([{ pts: pairs(S61.energy), c: "#6d28a3" }], { xmin: 0, xmax: 36, xs: 6, ymin: 0, ymax: 18, ys: 3, xl: "Outdoor temperature (°C)", yl: "Energy used (kWh/day)", alt: "Scatter plot: a symmetric U shape, energy is highest at cold and hot temperatures and lowest near 18 degrees." })}
+    <p>Does \(r=0\) mean that temperature and energy use are unrelated?</p><div class="solution">
+    <div class="step"><strong>Look first.</strong> The points trace a clean, symmetric <strong>U</strong>: energy falls as it warms from 2 °C to 18 °C (heating), then rises again from 18 °C to 34 °C (cooling).</div>
+    <div class="step"><strong>Why \(r=0\)?</strong> The falling left half and the rising right half cancel exactly; there is no <em>straight-line</em> trend overall, and \(r\) can only detect straight-line trends.</div>
+    <em>Conclusion: the relationship is strong, non-linear (U-shaped), and has no overall direction. \(r\approx 0\) means "no <u>linear</u> relationship", not "no relationship". ✓</em></div></div>
+
+  <div class="example-box" style="${EX}"><h3>Example 6: The influence of one outlier</h3><p>Nine students' practice time and quiz mark are plotted. The ringed point is a student who practised 7 hours but scored only 35.</p>
+    ${dtab("Practice (h)", "Quiz mark (%)", S61.practice)}
+    ${scat([{ pts: pairs(S61.practice), c: "#2563a0", hi: [8] }], { xmin: 0, xmax: 9, xs: 1, ymin: 20, ymax: 100, ys: 20, xl: "Practice time (hours)", yl: "Quiz mark (%)", notes: [{ x: 7.25, y: 33, t: "outlier" }], alt: "Scatter plot: eight points rise tightly along a line; one ringed point at 7 hours and 35 percent lies far below the pattern." })}
+    <p>With all nine points technology gives \(r=0.44\); with the ringed point removed it gives \(r=0.997\). Describe the effect and decide what to do.</p><div class="solution">
+    <div class="step"><strong>Effect.</strong> The other eight points form an almost perfect rising line (\(r=0.997\)). The single outlier drags \(r\) all the way down to 0.44, turning a very strong relationship into a weak-to-moderate one.</div>
+    <div class="step"><strong>What to do.</strong> Do <em>not</em> delete a point just because it spoils \(r\). Investigate: was the mark mis-recorded? Did the student miss the quiz? If it is an error, correct or remove it and say so; if it is a genuine observation, keep it and report <em>both</em> values of \(r\).</div>
+    <em>Conclusion: \(r\) is not resistant — a single point 49 marks off the pattern changes the story. Always plot, find outliers, and explain them. ✓</em></div></div>
+
+  <div class="example-box" style="${EX}"><h3>Example 7: Units, axes, and reversing a scale</h3><p>Forearm length \(x\) (cm) and height \(y\) (cm) for a group of adults give \(r=0.91\). Find \(r\) after each change. (a) Forearm length is converted to millimetres. (b) Height is put on the \(x\)-axis instead. (c) Each height is replaced by \(200-y\), "centimetres below 200".</p><div class="solution">
+    <div class="step"><strong>(a)</strong> Changing units stretches an axis but does not change how tightly the points follow a line: \(r=0.91\).</div>
+    <div class="step"><strong>(b)</strong> Swapping the axes reflects the plot across a diagonal; the strength is identical: \(r=0.91\).</div>
+    <div class="step"><strong>(c)</strong> Replacing \(y\) by \(200-y\) flips the plot upside down: the rising trend becomes a falling trend of the same tightness, so only the sign changes: \(r=-0.91\).</div>
+    <em>Conclusion: \(r\) is unit-free and symmetric in \(x\) and \(y\); reversing one scale flips the sign but not \(|r|\). ✓</em></div></div>
+
+  <div class="example-box" style="${EX}"><h3>Example 8: Two hidden groups</h3><p>A running club records weekly training hours and 5 km time for its recreational runners (blue) and its competitive squad (orange).</p>
+    ${scat([{ pts: pairs(S61.rec), c: "#2563a0" }, { pts: pairs(S61.comp), c: "#e69138" }], { xmin: 0, xmax: 16, xs: 2, ymin: 16, ymax: 36, ys: 4, xl: "Training time (hours per week)", yl: "5 km time (minutes)", legend: [{ c: "#2563a0", t: "recreational" }, { c: "#e69138", t: "competitive" }], alt: "Scatter plot with two separate clusters: recreational runners at low training hours and slow times, competitive runners at high training hours and fast times." })}
+    <p>With all 17 runners technology gives \(r=-0.907\). Within the recreational group alone \(r=-0.18\); within the competitive group alone \(r=-0.14\). Interpret.</p><div class="solution">
+    <div class="step"><strong>Combined plot.</strong> A strong negative linear trend (\(r=-0.91\)): more training goes with faster times.</div>
+    <div class="step"><strong>Inside each group</strong> the points are a shapeless cloud (\(r\) near 0). Extra training hours do <em>not</em> go with faster times among runners at the same level.</div>
+    <div class="step"><strong>What happened?</strong> The strong \(r\) comes entirely from the <em>gap between two clusters</em> — the competitive squad both trains more <em>and</em> runs faster because they are fitter, more experienced athletes — not from a straight-line trend within the data. Athletic level is the hidden factor.</div>
+    <em>Conclusion: clusters are an unusual feature. When you see them, calculate \(r\) for each group and do not describe the combined data as one linear trend. ✓</em></div></div>
+
+  <div class="example-box" style="${EX}"><h3>Example 9: A common cause behind a strong correlation</h3><p>Across students from Grade 1 to Grade 8 in one school, shoe size and reading score have \(r=0.92\). Does a larger shoe size cause a higher reading score?</p><div class="solution">
+    <div class="step"><strong>Strong association?</strong> Yes — \(r=0.92\) is a strong, positive correlation.</div>
+    <div class="step"><strong>Direct cause?</strong> Absurd: buying bigger shoes will not improve anyone's reading. <strong>Reverse cause?</strong> Equally absurd.</div>
+    <div class="step"><strong>Common cause.</strong> <em>Age</em> (or grade) is the lurking variable: older students have bigger feet <em>and</em> have had more years of reading instruction. Age drives both variables.</div>
+    <div class="step"><strong>Test the idea.</strong> Compare students of the <em>same</em> age only. If the relationship disappears within each age group — as in Example 8, where \(r\) was near 0 inside each cluster — the lurking variable accounts for it.</div>
+    <em>Conclusion: the correlation is real but not causal; a lurking variable (age) explains both measurements. ✓</em></div></div>
+
+  <div class="example-box" style="${EX}"><h3>Example 10: Which way does the arrow point?</h3><p>A tutoring centre finds that the more hours of tutoring a student receives per month, the <em>lower</em> the student's test mark: \(r=-0.45\). A parent concludes that tutoring lowers marks. Evaluate the claim.</p><div class="solution">
+    <div class="step"><strong>The data.</strong> A weak-to-moderate negative association between tutoring hours and marks. The numbers themselves are fine.</div>
+    <div class="step"><strong>Reverse cause.</strong> Students who are already struggling are the ones <em>sent</em> for extra tutoring. Low marks lead to more tutoring, not the other way round.</div>
+    <div class="step"><strong>Other possibilities.</strong> A lurking variable such as a hard course load could push marks down and tutoring up together.</div>
+    <em>Conclusion: the observational data cannot show that tutoring lowers marks; the direction of any cause is unknown, and a reverse-cause explanation is the most plausible. ✓</em></div></div>
+
+  <div class="example-box" style="${EX}"><h3>Example 11: What would show cause and effect?</h3><p>A gardener sees that plants given more fertilizer grow taller. Describe a study that could actually show the fertilizer <em>causes</em> the extra growth.</p><div class="solution">
+    <div class="step"><strong>Why the garden observation is not enough.</strong> Plants that got more fertilizer may also have been in sunnier or better soil — a lurking variable.</div>
+    <div class="step"><strong>Run an experiment.</strong> Take 40 identical seedlings and <em>randomly assign</em> 20 to receive fertilizer and 20 to receive none. Give both groups the same soil, light, water and time.</div>
+    <div class="step"><strong>Compare.</strong> Measure all heights after six weeks. Because assignment was random, sun, soil and other lurking variables are spread evenly across both groups, so a clear difference in height can reasonably be attributed to the fertilizer.</div>
+    <em>Conclusion: only an experiment with random assignment (a control group, same conditions) supports a cause-and-effect claim; observation alone supports association only. ✓</em></div></div>
+
   <h2>🟡 Practice Questions</h2>
-  <div class="practice-box" style="${PR}"><h3>Question 1</h3><p>Temperature vs ice-cream sales — name the explanatory and response variables.</p><details><summary>View answer</summary><div class="solution"><div class="step">Explanatory = temperature; response = sales. <em>Answer: as shown.</em></div></div></details></div>
-  <div class="practice-box" style="${PR}"><h3>Question 2</h3><p>In the Example 3 table, find \(P(\text{tea}\mid\text{woman})\).</p><details><summary>View answer</summary><div class="solution"><div class="step">\(\tfrac{30}{50}=0.60\). <em>Answer: 0.60.</em></div></div></details></div>
-  <div class="practice-box" style="${PR}"><h3>Question 3</h3><p>Points are scattered with no trend at all. What is the approximate value of \(r\)?</p><details><summary>View answer</summary><div class="solution"><div class="step">\(r\approx0\) (no linear relationship). <em>Answer: ≈ 0.</em></div></div></details></div>
-  <div class="practice-box" style="${PR}"><h3>Question 4 — Challenge</h3><p>A contingency table shows \(P(\text{pass}\mid\text{tutored})=0.8\) and \(P(\text{pass}\mid\text{not tutored})=0.8\). Is passing associated with tutoring?</p><details><summary>View answer</summary><div class="solution"><div class="step">No — the conditional proportions are equal, so the two variables are <em>not</em> associated. <em>Answer: no association.</em></div></div></details></div>
-  <div class="practice-box" style="${PR}"><h3>Question 5 — Challenge</h3><p>Why can an outlier make a genuinely strong relationship look weak?</p><details><summary>View answer</summary><div class="solution"><div class="step">A point far off the trend inflates the scatter around the line, lowering \(|r|\) even though most points follow the pattern tightly. <em>Answer: it inflates the spread.</em></div></div></details></div>
-  <div class="mistake-box" style="${MK}"><h3>⚠️ Common Mistakes</h3><ul><li>Putting the response variable on the \(x\)-axis.</li><li>Trying to make a scatter plot from two categorical variables (use a contingency table).</li><li>Reading equal conditional proportions as an association (equal = none).</li><li>Calling a curved pattern "no relationship".</li></ul></div>
+  <div class="practice-box" style="${PR}"><h3>Question 1</h3><p>A farmer records spring rainfall (mm) and the corn yield (tonnes per hectare) of each field. Name the explanatory and response variables and say which goes on the \(x\)-axis.</p><details><summary>View answer</summary><div class="solution"><div class="step">Rainfall is used to predict yield. <em>Answer: explanatory = rainfall (\(x\)-axis); response = corn yield (\(y\)-axis).</em></div></div></details></div>
+  <div class="practice-box" style="${PR}"><h3>Question 2</h3><p>A cyclist rides at eight steady speeds and records her heart rate.</p>
+    ${dtab("Speed (km/h)", "Heart rate (bpm)", S61.cyclist)}
+    <p>Technology gives \(r=0.987\). Describe the relationship in context.</p><details><summary>View answer</summary><div class="solution"><div class="step">The points rise steadily from lower left to upper right and stay close to a straight band. <em>Answer: a strong, positive, linear relationship between cycling speed and heart rate; no outliers.</em></div></div></details></div>
+  <div class="practice-box" style="${PR}"><h3>Question 3</h3><p>Rank the four relationships from strongest to weakest, and state which have a negative direction: \(r=-0.92,\ \ 0.64,\ \ -0.15,\ \ 0.88\).</p><details><summary>View answer</summary><div class="solution"><div class="step">Order by \(|r|\): \(0.92>0.88>0.64>0.15\). <em>Answer: \(-0.92\), \(0.88\), \(0.64\), \(-0.15\); negative: \(-0.92\) and \(-0.15\).</em></div></div></details></div>
+  <div class="practice-box" style="${PR}"><h3>Question 4</h3><p>The correlation between a city's daily high temperature in °C and the number of cold drinks sold is \(r=0.83\). What is \(r\) if the temperatures are converted to °F (\(F=1.8C+32\))?</p><details><summary>View answer</summary><div class="solution"><div class="step">A change of units (stretch and shift) does not change \(r\). <em>Answer: \(r=0.83\).</em></div></div></details></div>
+  <div class="practice-box" style="${PR}"><h3>Question 5 — Challenge</h3><p>A scatter plot of a plant's height against the weeks since planting rises quickly at first and then levels off. Technology gives \(r=0.88\). A student writes "strong linear relationship". Is this a fair description? What would you write instead?</p><details><summary>View answer</summary><div class="solution"><div class="step">\(r\) is high because the plot is increasing throughout, but the form is clearly <strong>curved</strong> (growth slows), not a straight band. <em>Answer: not fair — "a strong positive, non-linear relationship that levels off; \(r\) overstates how well a straight line describes it."</em></div></div></details></div>
+  <div class="practice-box" style="${PR}"><h3>Question 6 — Challenge</h3><p>Nine points follow a tight rising line with \(r=0.97\). A tenth point is added far below the line and \(r\) falls to 0.40. Your teammate says, "Delete it so \(r\) is back to 0.97." Respond.</p><details><summary>View answer</summary><div class="solution"><div class="step">Removing data only because it weakens the result is not justified. <em>Answer: investigate why the point is unusual; correct or remove it only if it is an error, and otherwise keep it and report both values of \(r\).</em></div></div></details></div>
+  <div class="practice-box" style="${PR}"><h3>Question 7</h3><p>Over twelve months, a city's sunscreen sales and its number of sunburn cases have \(r=0.90\). Does sunscreen cause sunburn? Name a lurking variable.</p><details><summary>View answer</summary><div class="solution"><div class="step">The association is strong, but sunny summer weather (UV exposure) drives both: more sun means more sunscreen bought <em>and</em> more sunburns. <em>Answer: no — the lurking variable is hot, sunny weather / time spent outdoors.</em></div></div></details></div>
+  <div class="practice-box" style="${PR}"><h3>Question 8 — Challenge</h3><p>A survey of 500 adults finds that those who take a daily vitamin have lower blood pressure (\(r=-0.40\)). Give two explanations other than "vitamins lower blood pressure", then describe a study that could test whether they do.</p><details><summary>View answer</summary><div class="solution"><div class="step"><strong>Other explanations:</strong> a common cause — people who take vitamins may also exercise more and eat better; or reverse cause — people with health worries or a doctor's advice may be the ones who take vitamins. <strong>Test:</strong> an experiment — randomly assign volunteers to a vitamin group or a placebo group, keep everything else the same, and compare blood pressure. <em>Answer: lifestyle (common cause); reverse cause; randomized placebo-controlled experiment.</em></div></div></details></div>
+
+  <div class="mistake-box" style="${MK}"><h3>⚠️ Common Mistakes</h3><ul><li>Reading \(r=-0.9\) as weaker than \(r=0.5\) because it is negative — strength is \(|r|\).</li><li>Quoting \(r\) without looking at the plot (a curve, an outlier or two clusters can each fool it).</li><li>Treating \(r\approx 0\) as "no relationship" instead of "no <em>linear</em> relationship".</li><li>Judging strength by how steep the points rise rather than how tightly they cluster.</li><li>Reading \(r\) as a percentage of points on the line.</li><li>Leaving axes unlabelled, putting the response variable on the \(x\)-axis, or joining the points.</li><li>Deleting an outlier just to improve \(r\).</li><li>Concluding that \(x\) causes \(y\) because the correlation is strong — consider reverse cause, a lurking variable and coincidence first.</li><li>Assuming that naming \(x\) the "explanatory" variable means it is the cause.</li></ul></div>
   <h2>❓ Q&amp;A Summary</h2>
-  <div class="qa-box" style="${QA}"><h3>Q1: What three things describe a scatter?</h3><p><em>Direction, form, and strength (plus any outliers).</em></p></div>
-  <div class="qa-box" style="${QA}"><h3>Q2: Which variable goes where?</h3><p><em>Explanatory on \(x\), response on \(y\).</em></p></div>
+  <div class="qa-box" style="${QA}"><h3>Q1: What four things do I describe in a scatter plot?</h3><p><em>Direction, form, strength, and unusual features (outliers, clusters) — in context.</em></p></div>
+  <div class="qa-box" style="${QA}"><h3>Q2: What does \(r\) tell me, and what doesn't it?</h3><p><em>It gives the direction (sign) and strength (\(|r|\)) of a <strong>linear</strong> relationship, from \(-1\) to \(1\). It does not detect curves, resist outliers, or prove cause.</em></p></div>
+  <div class="qa-box" style="${QA}"><h3>Q3: Does changing units or swapping axes change \(r\)?</h3><p><em>No. Only reversing one variable's scale changes its sign.</em></p></div>
+  <div class="qa-box" style="${QA}"><h3>Q4: Does a strong correlation mean \(x\) causes \(y\)?</h3><p><em>No. It shows association only. The link may be direct cause, reverse cause, a lurking common cause, or coincidence; only a randomized experiment can support a cause-and-effect claim.</em></p></div>
 </div>`)] },
 
   // ── 6.3 The Coefficient of Determination & Prediction ───────

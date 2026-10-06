@@ -166,9 +166,10 @@ export const LEARN = {
   ],
   // ── Unit 6: Two-Variable Statistics ────────────────────────
   "6.1": [
-    ["Two variables at once", "A \\textbf{scatter plot} graphs paired data as points to expose a relationship between two variables."],
-    ["Reading correlation", "An upward trend is \\textbf{positive} correlation, downward is \\textbf{negative}, and a shapeless cloud is none. A tight, line-like cloud is \\textbf{strong}; a loose one is \\textbf{weak}."],
-    ["The correlation coefficient", "The value $r$, from $-1$ to $1$, measures the strength and direction of a \\emph{linear} relationship; values near $\\pm1$ signal a strong linear fit."],
+    ["Two variables at once", "A \\textbf{scatter plot} graphs \\emph{paired data}, one point per individual. The \\textbf{explanatory} variable ($x$) is used to predict the \\textbf{response} variable ($y$); label both axes with names and units."],
+    ["Describe every scatter in four parts", "\\textbf{Direction} (positive or negative), \\textbf{form} (linear or curved), \\textbf{strength} (how tightly the points follow the pattern) and \\textbf{unusual features} (outliers, separate clusters) --- always in the context of the problem."],
+    ["The correlation coefficient $r$", "Technology gives $r$, with $-1\\le r\\le1$. The sign is the direction and $|r|$ the strength (about $0.8$ or more is strong). It measures only \\emph{linear} association, has no units, and a single outlier can change it a lot. $r\\approx0$ means no \\emph{linear} relationship, not no relationship."],
+    ["Cause and effect", "A strong correlation shows \\textbf{association}, not cause. It may come from a direct cause, \\textbf{reverse cause}, a \\textbf{lurking variable} driving both, or coincidence. Only a \\textbf{randomized experiment} supports a cause-and-effect claim."],
   ],
   "6.2": [
     ["The line of best fit", "\\textbf{Linear regression} finds the straight line $y=ax+b$ that best captures the trend in a scatter plot, computed with technology."],
