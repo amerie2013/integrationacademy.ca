@@ -2,74 +2,86 @@
 // IN SCOPE: r and the line of best fit come FROM TECHNOLOGY, then are interpreted;
 // residual = observed - predicted; r^2. NO by-hand least-squares derivation.
 // 60 per topic: 20 easy / 20 medium / 20 hard. Original, creative contexts.
-import { mc, ms, tf, num, fill } from "./helpers.mjs";
+import { mc, ms, tf, num, fill, order, match } from "./helpers.mjs";
 
-// ── 6.1 Scatter Plots & Correlation ─────────────────────────
+// ── 6.1 Scatter Plots & Correlation (incl. cause and effect) ───
+// 60 questions (20 easy / 20 medium / 20 hard). Contexts are deliberately
+// different from the lesson and worksheet. No probability. r values quoted for
+// data sets were checked against the data; correct answers are spread across
+// positions by MCV rather than always being first.
+let _k = 0;
+const MCV = (d, prompt, correct, wrong, fb = "") => {
+  const pos = (_k++ * 3 + 1) % (wrong.length + 1);
+  const ch = [...wrong]; ch.splice(pos, 0, correct);
+  return mc(d, prompt, ch, pos, fb);
+};
 function g61() {
   const q = [];
-  // EASY
-  q.push(mc("easy", "The correlation coefficient $r$ ranges from:", ["$-1$ to $1$", "$0$ to $1$", "$0$ to $100$", "$-\\infty$ to $\\infty$"], 0));
-  q.push(mc("easy", "In 'hours studied vs. test score', the explanatory variable is:", ["hours studied", "test score", "both", "neither"], 0));
-  q.push(mc("easy", "$r=0.9$ describes a relationship that is:", ["strong positive", "weak negative", "no correlation", "strong negative"], 0));
-  q.push(mc("easy", "$r=-0.85$ describes:", ["strong negative", "strong positive", "weak positive", "no correlation"], 0));
-  q.push(mc("easy", "$r=0$ means:", ["no linear correlation", "perfect correlation", "strong positive", "an error"], 0));
-  q.push(mc("easy", "A scatter plot displays:", ["paired (two-variable) data", "one variable", "a single value", "frequencies"], 0));
-  q.push(ms("easy", "Which describe a scatter?", ["direction", "form", "strength", "the mode"], [0, 1, 2]));
-  q.push(ms("easy", "Which indicate a strong linear relationship?", ["$r=0.95$", "$r=-0.9$", "points hug a line", "$r=0.1$"], [0, 1, 2]));
-  q.push(tf("easy", "The sign of $r$ gives the direction of the relationship.", true));
-  q.push(tf("easy", "$|r|$ close to $1$ means a strong linear relationship.", true));
-  q.push(tf("easy", "$r$ measures only LINEAR association.", true));
-  q.push(num("easy", "The maximum possible value of $r$?", 1, 0));
-  q.push(num("easy", "The minimum possible value of $r$?", -1, 0));
-  q.push(fill("easy", "The sign of $r$ gives the ___ of the relationship.", ["direction"]));
-  q.push(fill("easy", "$|r|$ measures the ___ of a linear relationship.", ["strength"]));
-  q.push(mc("easy", "Which is stronger: $r=0.8$ or $r=-0.9$?", ["$r=-0.9$", "$r=0.8$", "equal", "cannot tell"], 0));
-  q.push(mc("easy", "The likely sign of $r$ for ice-cream sales vs. temperature:", ["positive", "negative", "zero", "undefined"], 0));
-  q.push(tf("easy", "Two unrelated variables have $r\\approx0$.", true));
-  q.push(mc("easy", "In 'age vs. vocabulary', the explanatory variable is:", ["age", "vocabulary", "both", "neither"], 0));
-  q.push(fill("easy", "$r$ ranges from $-1$ to ___.", ["1"]));
-  // MEDIUM
-  q.push(mc("medium", "A scatter curves sharply upward (non-linear). Is $r$ a good summary?", ["no", "yes", "always", "only if $r>0$"], 0));
-  q.push(mc("medium", "Estimate $r$ for a tight, downward-sloping band of points:", ["near $-1$", "near $+1$", "near $0$", "exactly $0.5$"], 0));
-  q.push(mc("medium", "Estimate $r$ for a shapeless cloud of points:", ["near $0$", "near $1$", "near $-1$", "exactly $0.9$"], 0));
-  q.push(mc("medium", "Rank by strength: $r=0.3,\\ -0.7,\\ 0.95$. Strongest is:", ["$0.95$", "$-0.7$", "$0.3$", "all equal"], 0));
-  q.push(mc("medium", "$r=-0.99$ describes:", ["a very strong negative linear relationship", "a weak relationship", "no correlation", "a positive relationship"], 0));
-  q.push(mc("medium", "For 'exercise (h/week) vs. resting heart rate', the likely sign of $r$:", ["negative", "positive", "zero", "undefined"], 0));
-  q.push(ms("medium", "Which are true of $r$?", ["ranges $-1$ to $1$", "sign $=$ direction", "$|r|=$ strength", "measures curved fits well"], [0, 1, 2]));
-  q.push(ms("medium", "Which scatters have $|r|$ near $1$?", ["a tight rising line", "a tight falling line", "a shapeless cloud", "points on a straight band"], [0, 1, 3]));
-  q.push(tf("medium", "$r$ understates a strong but curved relationship.", true));
-  q.push(tf("medium", "A tight downward line has $r$ near $-1$.", true));
-  q.push(num("medium", "Given $r=0.1,-0.6,0.99,-0.95$: the largest $|r|$ value (type the $r$)?", 0.99, 0.001));
-  q.push(num("medium", "Given $r=0.1,-0.6,0.99,-0.95$: the weakest (smallest $|r|$) value?", 0.1, 0.001));
-  q.push(fill("medium", "For a perfect positive linear relationship, $r=$ ___.", ["1"]));
-  q.push(fill("medium", "For a perfect negative linear relationship, $r=$ ___.", ["-1"]));
-  q.push(mc("medium", "In a study, one variable is thought to influence the other. The influencer is the:", ["explanatory variable", "response variable", "residual", "outlier"], 0));
-  q.push(num("medium", "Interpreting $r=-0.99$: is it strong (type 1) or weak (type 0)?", 1, 0));
-  q.push(tf("medium", "A near-linear scatter with a slight negative slope has $r$ slightly below $0$.", true));
-  q.push(mc("medium", "'Screen time vs. sleep hours' likely has $r$:", ["negative", "positive", "zero", "exactly 1"], 0));
-  q.push(fill("medium", "Rank strongest of $0.3,-0.7,0.95$: ___.", ["0.95"]));
-  q.push(mc("medium", "Two variables with no relationship show $r$:", ["near $0$", "near $1$", "near $-1$", "exactly $0.5$"], 0));
-  // HARD
-  q.push(mc("hard", "A strong quadratic (U-shaped) relationship can have $r\\approx0$ because:", ["$r$ measures only linear association", "there is no relationship", "the data are random", "$r$ is always $0$"], 0));
-  q.push(mc("hard", "Adding one far-off outlier to a tight positive scatter tends to:", ["weaken (reduce $|r|$)", "always strengthen $r$", "have no effect", "make $r>1$"], 0));
-  q.push(mc("hard", "A scatter has $r=0.6$. Its coefficient of determination is:", ["$0.36$", "$0.6$", "$0.77$", "$0.8$"], 0));
-  q.push(mc("hard", "Which relationship is likely to have the HIGHEST $|r|$?", ["a tight straight-line trend", "a loose cloud", "a U-shaped curve", "random noise"], 0));
-  q.push(mc("hard", "$r$ for a data set is $0.9$; after a units change (cm to m) on one axis, $r$ becomes:", ["$0.9$ (unchanged)", "$0.09$", "$90$", "$0$"], 0));
-  q.push(mc("hard", "Removing a strong outlier that was OFF the trend usually makes $|r|$:", ["increase", "decrease", "stay $0$", "exceed $1$"], 0));
-  q.push(num("hard", "$r=0.6$: its coefficient of determination $r^2$?", 0.36, 0.001));
-  q.push(num("hard", "$r=-0.8$: its $r^2$?", 0.64, 0.001));
-  q.push(num("hard", "A positive scatter has $r^2=0.81$: its $r$?", 0.9, 0.001));
-  q.push(num("hard", "A negative scatter has $r^2=0.49$: its $r$ (type the negative value)?", -0.7, 0.001));
-  q.push(tf("hard", "A linear correlation coefficient does not change when the units of a variable change.", true));
-  q.push(tf("hard", "A curved (non-linear) relationship can have a small $r$ despite being strong.", true));
-  q.push(ms("hard", "Which are true about outliers and $r$?", ["an off-trend outlier can lower $|r|$", "an on-trend extreme point can raise $|r|$", "outliers never matter", "$r$ is resistant to all outliers"], [0, 1]));
-  q.push(mc("hard", "A researcher reports $r=1.4$. This is:", ["impossible ($r\\le1$)", "very strong", "weak", "negative"], 0));
-  q.push(num("hard", "If $r^2=0.25$ for a rising scatter, then $r=$", 0.5, 0.001));
-  q.push(fill("hard", "$r=-0.9$: $r^2=$ ___.", ["0.81"]));
-  q.push(mc("hard", "For a perfectly straight non-horizontal line of points, $r$ is:", ["$\\pm1$", "$0$", "$0.5$", "undefined"], 0));
-  q.push(num("hard", "For a perfect negative linear relationship, $r=$", -1, 0));
-  q.push(tf("hard", "$|r|$ and $r^2$ both increase as points hug the line more tightly.", true));
-  q.push(mc("hard", "A dataset shows a clear curve. The best next step before trusting $r$ is:", ["consider a non-linear model", "report $r$ as final", "delete the curve", "ignore the shape"], 0));
+  // EASY ---------------------------------------------------------------
+  q.push(MCV("easy", "A baker records the oven temperature and the time a loaf takes to brown. Which is the explanatory variable?", "oven temperature", ["browning time", "both", "neither"], "The temperature is set first and is used to predict the time."));
+  q.push(MCV("easy", "On a scatter plot the response variable is placed on the:", "vertical axis", ["horizontal axis", "either axis, chosen at random", "a third axis"]));
+  q.push(tf("easy", "A scatter plot is made by joining consecutive points with line segments.", false, "Plot one point per pair and do not join them."));
+  q.push(MCV("easy", "As $x$ increases, $y$ tends to decrease. The direction of the relationship is:", "negative", ["positive", "none", "curved"]));
+  q.push(ms("easy", "Which belong in a complete description of a scatter plot?", ["direction", "form", "strength", "unusual features such as outliers or clusters", "the mode of $x$"], [0, 1, 2, 3]));
+  q.push(fill("easy", "A single point lying far from the overall pattern is called an ___.", ["outlier"]));
+  q.push(MCV("easy", "Which of these cannot be a correlation coefficient?", "$1.2$", ["$-0.9$", "$0.35$", "$0$"], "$r$ always lies between $-1$ and $1$."));
+  q.push(MCV("easy", "A value of $r=-0.72$ describes a relationship that is:", "moderate, negative and linear", ["strong and positive", "weak and negative", "moderate and positive"], "The sign gives the direction; $|r|=0.72$ falls in the moderate band."));
+  q.push(tf("easy", "A correlation of $r=0$ means there is no linear relationship between the variables.", true));
+  q.push(MCV("easy", "Which value of $r$ shows the strongest linear relationship?", "$-0.85$", ["$0.6$", "$0.2$", "$-0.4$"], "Strength is $|r|$, so the negative sign does not make it weaker."));
+  q.push(num("easy", "All points lie exactly on a line that falls to the right. What is $r$?", -1, 0));
+  q.push(order("easy", "Put the steps for building a scatter plot in order.", ["Decide which variable is explanatory and which is the response", "Label both axes with names and units", "Choose an even scale for each axis that covers the data", "Plot one point for each pair of values"]));
+  q.push(match("easy", "Match each correlation coefficient to its description.", ["$r=0.93$", "$r=-0.58$", "$r=0.12$", "$r=-0.97$"], ["very weak or none", "strong positive", "strong negative", "moderate negative"], [1, 3, 0, 2]));
+  q.push(MCV("easy", "Unlike the axes of a bar graph, the axes of a scatter plot:", "do not have to start at 0", ["must always start at 0", "must have the same scale", "must be in the same units"]));
+  q.push(MCV("easy", "Which spreadsheet function returns the correlation coefficient of two columns?", "CORREL", ["AVERAGE", "MEDIAN", "COUNTIF"]));
+  q.push(MCV("easy", "Two variables are strongly correlated because both depend on a third variable. This type of relationship is:", "common cause", ["reverse cause and effect", "accidental", "cause and effect"]));
+  q.push(fill("easy", "A strong correlation that exists purely by coincidence is called an ___ relationship.", ["accidental"]));
+  q.push(tf("easy", "A strong correlation proves that one variable causes the other.", false));
+  q.push(MCV("easy", "Which kind of study gives the strongest support for a cause-and-effect claim?", "a randomized experiment", ["a survey with no comparison group", "a single observed correlation", "a personal story"]));
+  q.push(MCV("easy", "A coach records weekly swim laps and each swimmer's 400 m time. To predict the time from the laps, the explanatory variable is:", "weekly laps", ["400 m time", "the swimmer's name", "the coach"]));
+
+  // MEDIUM -------------------------------------------------------------
+  q.push(MCV("medium", "The points $(1,9),(2,8),(3,6),(4,5),(5,3),(6,2)$ give $r=-0.995$. The best description is:", "strong, negative, linear", ["strong, positive, linear", "weak, negative, linear", "strong, negative, curved"]));
+  q.push(MCV("medium", "Distances measured in kilometres are converted to metres. The correlation with another variable:", "stays the same", ["is multiplied by $1000$", "becomes negative", "becomes $0$"]));
+  q.push(MCV("medium", "Swapping which variable is on the $x$-axis and which is on the $y$-axis changes $r$ to:", "the same value", ["its negative", "its reciprocal", "$0$"]));
+  q.push(num("medium", "Two variables have $r=0.64$. Every $y$-value is replaced by $50-y$. The new correlation is:", -0.64, 0.001));
+  q.push(MCV("medium", "Study A reports $r=0.70$ and Study B reports $r=-0.78$. Which relationship is stronger and why?", "Study B, because $|-0.78|>|0.70|$", ["Study A, because it is positive", "Study B, because it is negative", "They are equal"]));
+  q.push(ms("medium", "Which statements about $r$ are true?", ["$-1\\le r\\le1$", "the sign of $r$ gives the direction", "$r$ has no units", "$r$ is unaffected by outliers"], [0, 1, 2]));
+  q.push(MCV("medium", "Points follow a clear, symmetric arch. The correlation coefficient will be close to $0$ because:", "$r$ measures only straight-line association", ["the points are unrelated", "arches always have $r=1$", "$r$ cannot be calculated for arches"]));
+  q.push(MCV("medium", "A tight rising band of points has one extra point far above the band. Compared with the band alone, $|r|$ will most likely:", "decrease", ["increase", "stay exactly the same", "become greater than $1$"]));
+  q.push(MCV("medium", "Two separate clusters give a strong overall $r$, but $r$ is near $0$ inside each cluster. The best conclusion is:", "the overall trend comes from the gap between the clusters, not a linear trend within them", ["the variables are strongly linearly related everywhere", "$r$ must have been calculated wrongly", "each cluster has $r=1$"]));
+  q.push(tf("medium", "A relationship can be strong and non-linear while $r$ is close to $0$.", true));
+  q.push(MCV("medium", "Sales of scarves and sales of mittens rise and fall together through the year. The most likely type of relationship is:", "common cause (cold weather)", ["cause and effect", "reverse cause and effect", "accidental"]));
+  q.push(MCV("medium", "A drone's flight time is strongly correlated with its battery capacity. The most likely type of relationship is:", "cause and effect", ["common cause", "accidental", "presumed"], "A larger battery directly supplies more energy."));
+  q.push(MCV("medium", "Cities with more ambulances report more heart-attack emergencies. The most likely type of relationship is:", "reverse cause and effect (more emergencies lead to more ambulances)", ["cause and effect (ambulances cause heart attacks)", "accidental", "presumed"]));
+  q.push(MCV("medium", "A city's yearly rainfall is correlated with its hockey team's goals scored. The most likely type of relationship is:", "accidental", ["cause and effect", "reverse cause and effect", "common cause"]));
+  q.push(MCV("medium", "Hours spent gardening are correlated with reported happiness. It seems sensible, but neither causes the other and no single third variable is obvious. The type is:", "presumed", ["cause and effect", "accidental", "reverse cause and effect"]));
+  q.push(match("medium", "Match each description to the type of relationship.", ["Both variables depend on a third variable", "The roles of the variables are backwards", "A change in one directly produces a change in the other", "A pure coincidence"], ["accidental", "cause and effect", "common cause", "reverse cause and effect"], [2, 3, 1, 0]));
+  q.push(MCV("medium", "A study finds that children who eat breakfast earn higher marks. A plausible lurking variable is:", "a stable family routine", ["the child's name", "the colour of the cereal box", "the number of letters in the school's name"]));
+  q.push(tf("medium", "Calling a variable the explanatory variable means that it is the cause.", false));
+  q.push(num("medium", "Given $r=-0.9,\\ 0.3,\\ -0.55,\\ 0.75$, how many show at least a moderate relationship ($|r|\\ge0.5$)?", 3, 0));
+  q.push(MCV("medium", "Six points give $r=0.89$. The relationship is best described as:", "strong, positive, linear", ["moderate, positive, linear", "strong, negative, linear", "weak, positive, linear"], "Points: $(2,3),(4,5),(6,4),(8,7),(10,6),(12,9)$."));
+
+  // HARD ---------------------------------------------------------------
+  q.push(num("hard", "A scatter has $r=0.82$. After one off-trend point is removed it becomes $0.96$. By how much did $r$ increase?", 0.14, 0.001));
+  q.push(MCV("hard", "Why can the axes of a scatter plot start above $0$ without being misleading?", "the pattern of the points, not the size of bars, carries the information", ["scatter plots never need labelled axes", "the axes must start at the smallest data value", "because $r$ ignores the scale"]));
+  q.push(MCV("hard", "In 12 towns the number of bakeries is strongly correlated with the number of library hours ($r=0.88$). The best explanation is:", "a common cause: town population", ["bakeries cause libraries to open longer", "libraries cause bakeries to open", "the correlation must be accidental"]));
+  q.push(ms("hard", "Which would weaken a claim that $x$ causes $y$?", ["a plausible third variable that drives both", "a plausible reason that $y$ could cause $x$", "the data are only observational, not experimental", "a clear physical mechanism linking $x$ to $y$"], [0, 1, 2]));
+  q.push(MCV("hard", "The points $(0,10),(2,4),(4,1),(6,0),(8,1),(10,4),(12,10)$ give $r=0$. Which statement is correct?", "there is a strong U-shaped relationship but no linear relationship", ["there is no relationship of any kind", "there is a strong positive linear relationship", "$r$ was calculated incorrectly"]));
+  q.push(num("hard", "Height in inches and weight in pounds have $r=0.76$. After converting height to centimetres and weight to kilograms, what is $r$?", 0.76, 0.001));
+  q.push(num("hard", "$r=0.58$ for $(x,y)$. Every $y$ is replaced by $3-2y$. The new correlation is:", -0.58, 0.001));
+  q.push(MCV("hard", "A scientist wants to know whether a new sleep schedule improves memory scores. Why should volunteers be assigned to the schedule at random?", "it spreads lurking variables evenly across the groups", ["it guarantees $r=1$", "it makes the sample larger", "it removes the need for a comparison group"]));
+  q.push(ms("hard", "Which are sound reasons to remove an outlier?", ["a confirmed recording error", "a documented instrument malfunction", "it lowers $r$", "it makes the plot look untidy"], [0, 1]));
+  q.push(MCV("hard", "An observational study of 400 adults finds $r=-0.91$ between daily servings of vegetables and body-mass index. The best statement is:", "a strong negative association was found, but cause and effect has not been established", ["vegetables are proven to lower body-mass index", "there is no relationship", "body-mass index is proven to cause vegetable eating"]));
+  q.push(order("hard", "Order these from weakest to strongest evidence for a cause-and-effect claim.", ["a single personal story", "one observed correlation in a small data set", "repeated observed correlations with a sensible mechanism", "a randomized experiment with a comparison group"]));
+  q.push(tf("hard", "If swapping the axes changes which variable is called explanatory, the value of $r$ also changes.", false));
+  q.push(num("hard", "The points $(1,2),(2,4),(3,6),(4,8)$ lie on a rising line. What is $r$?", 1, 0));
+  q.push(num("hard", "The points $(1,8),(2,6),(3,4),(4,2)$ lie on a falling line. What is $r$?", -1, 0));
+  q.push(MCV("hard", "A student reads $r=-0.62$ and says, \"62% of nights have less sleep when screen time is higher.\" The error is:", "$r$ is not a percentage of cases; it measures the strength of a linear trend", ["there is none; the statement is correct", "$r$ should be positive", "$r=-0.62$ means no relationship"]));
+  q.push(MCV("hard", "Two scatter plots have the same slope of trend, but plot A has $r=0.98$ and plot B has $r=0.55$. What differs?", "the points in A cluster much more tightly about the line", ["plot B rises faster", "plot A has more outliers", "plot B has a negative direction"]));
+  q.push(MCV("hard", "It seems sensible that scores on a geography test and a history test move together, but neither causes the other and no single third variable is obvious. The best classification is:", "presumed relationship", ["cause and effect", "accidental relationship", "reverse cause and effect"]));
+  q.push(MCV("hard", "A newspaper claims that a strong correlation between hours of video-gaming and weekly reading time shows gaming reduces reading. Which response is best?", "Ask whether a third variable or reverse cause could explain it, and look for experimental evidence", ["Accept the claim because $|r|$ is high", "Reject the data because $r$ is negative", "Conclude the relationship is accidental"]));
+  q.push(MCV("hard", "A scatter plot rises quickly then levels off, and $r=0.9$. Which description is best?", "strong, positive and non-linear (curved)", ["strong, positive and linear", "no relationship", "strong, negative and linear"]));
+  q.push(MCV("hard", "Before describing a scatter plot with $r$, the most important first step is to:", "look at the plot for curves, outliers and clusters", ["round $r$ to one decimal", "delete the largest value", "swap the axes"]));
   return q;
 }
 

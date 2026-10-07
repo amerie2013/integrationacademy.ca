@@ -15,7 +15,7 @@ A scatter plot shows paired data as points. Describe it by \emph{direction}, \em
   \item Describe: direction (positive/negative), form (linear/curved), strength, unusual features (outliers, clusters).
   \item $-1\le r\le1$: sign $=$ direction, $|r|=$ strength, $r$ detects only \emph{linear} association, and one outlier can change it a lot.
   \item $r$ has no units; changing units or swapping axes keeps $r$; reversing one scale flips its sign.
-  \item Correlation $\ne$ causation: a lurking variable, reverse cause or coincidence can explain it; only a randomized experiment supports cause and effect.
+  \item Correlation $\ne$ causation. Name the type of relationship: cause and effect, common cause, reverse cause and effect, presumed, or accidental --- and justify it with the reason for the link.
 \end{itemize}
 \end{ideabox}
 
@@ -23,7 +23,7 @@ A scatter plot shows paired data as points. Describe it by \emph{direction}, \em
 \lh{Two variables at once}A \textbf{scatter plot} graphs \emph{paired data}, one point per individual. The \textbf{explanatory} variable ($x$) is used to predict the \textbf{response} variable ($y$); label both axes with names and units.
 \lh{Describe every scatter in four parts}\textbf{Direction} (positive or negative), \textbf{form} (linear or curved), \textbf{strength} (how tightly the points follow the pattern) and \textbf{unusual features} (outliers, separate clusters) --- always in the context of the problem.
 \lh{The correlation coefficient $r$}Technology gives $r$, with $-1\le r\le1$. The sign is the direction and $|r|$ the strength (about $0.8$ or more is strong). It measures only \emph{linear} association, has no units, and a single outlier can change it a lot. $r\approx0$ means no \emph{linear} relationship, not no relationship.
-\lh{Cause and effect}A strong correlation shows \textbf{association}, not cause. It may come from a direct cause, \textbf{reverse cause}, a \textbf{lurking variable} driving both, or coincidence. Only a \textbf{randomized experiment} supports a cause-and-effect claim.
+\lh{Five types of relationship}A strong correlation shows \textbf{association}, not cause. Classify it as \textbf{cause and effect} (a change in $x$ directly causes a change in $y$), \textbf{common cause} (a third variable drives both), \textbf{reverse cause and effect} (the roles are backwards), \textbf{presumed} (sensible link, but no cause or third variable can be named) or \textbf{accidental} (coincidence). Justify the type with the reason for the link; a \textbf{randomized experiment} gives the strongest support for cause and effect.
 \end{learnbox}
 
 \sech{Worked Examples}
@@ -60,8 +60,8 @@ Distance run $x$ (km) and calories burned $y$ have $r=0.89$. Find $r$ if \\ \tex
 Shoe size and reading speed (words per minute) are recorded for Grade 2 students (blue) and Grade 8 students (orange). All 15 students give $r=0.96$; within Grade 2 alone $r=-0.18$; within Grade 8 alone $r=-0.05$.\scatterl{26}{45}{40}{170}{Shoe size (EU)}{Words per minute}{\addplot[only marks,mark=*,exblue,mark size=2pt] coordinates {(28,62)(29,70)(30,58)(31,66)(32,60)(29.5,64)(30.5,68)};\addplot[only marks,mark=*,qorange,mark size=2pt] coordinates {(38,150)(39,142)(40,158)(41,148)(42,155)(43,146)(39.5,152)(41.5,144)};}\soln The combined $r$ is strong only because of the \emph{gap between two clusters}. Inside each grade there is no linear pattern ($r$ near $0$). Grade level (age) is the hidden factor driving both shoe size and reading speed; do not describe the combined data as one linear trend.
 \end{example}
 
-\begin{example}{ex8}{Example 9 --- Cause and effect (multi-part)}
-\textbf{(a)} More fire trucks sent to a fire goes with greater damage ($r=0.80$). Does sending more trucks cause more damage? \\ \textbf{(b)} Cities with more snowplows have more snowfall. Which way might the cause run? \\ \textbf{(c)} How could you test whether a new study app raises quiz marks?\soln (a) No --- the lurking variable is the \emph{size of the fire}: bigger fires need more trucks and cause more damage. (b) Reverse cause: heavy snowfall leads cities to buy more plows. (c) Randomly assign students to use the app or not, keep everything else the same, and compare marks; random assignment spreads lurking variables evenly, so a difference can be attributed to the app.
+\begin{example}{ex8}{Example 9 --- Name the type of relationship}
+Each pair is positively correlated. Name the most likely type of relationship and justify it. \\ \textbf{(a)} The number of fire trucks sent to a fire and the dollar damage. \\ \textbf{(b)} The number of snowplows a city owns and its yearly snowfall. \\ \textbf{(c)} Hours of practice and a dancer's competition score. \\ \textbf{(d)} The number of vowels in a town's name and the town's population. \\ \textbf{(e)} A person's grip strength and their running speed.\soln (a) \emph{Common cause}: the size of the fire drives both. (b) \emph{Reverse cause and effect}: heavy snowfall leads a city to buy more plows. (c) \emph{Cause and effect}: practice directly improves skill (a clear mechanism, though a sample should be large). (d) \emph{Accidental}: no logical link. (e) \emph{Presumed}: both reflect general fitness, but neither causes the other and no single third variable is obvious.
 \end{example}
 
 \clearpage
@@ -81,7 +81,7 @@ Match each value of $r$ to a description: $0.97,\ -0.33,\ 0.62,\ -0.91$. Descrip
 \end{qbox}
 
 \begin{qbox}{Question 4}
-Which relationship is strongest: $r=-0.82$, $r=0.77$ or $r=-0.45$? Explain.\workspace{2cm}
+Name the most likely type of relationship and justify it. \\ \textbf{(a)} Umbrella sales and raincoat sales in a town. \\ \textbf{(b)} The number of passengers on a bus and the bus's total fuel use. \\ \textbf{(c)} The number of letters in a student's surname and their test score. \\ \textbf{(d)} A city's number of hospitals and its number of schools.\workspace{3.4cm}
 \end{qbox}
 
 \begin{qbox}{Question 5}
@@ -97,7 +97,7 @@ A scatter plot has $r=-0.31$. After one far-off point is removed, $r=-0.94$. \\ 
 \end{qbox}
 
 \begin{qbox}{Question 8}
-Height and weight have $r=0.78$. Find $r$ if \\ \textbf{(a)} height is converted to metres and weight to pounds; \\ \textbf{(b)} each weight $w$ is replaced by $120-w$.\workspace{2.4cm}
+A survey finds that adults who take a daily vitamin have lower blood pressure ($r=-0.40$). \\ \textbf{(a)} Give two explanations other than \textquotedblleft{}vitamins lower blood pressure\textquotedblright{}. \\ \textbf{(b)} Describe a study that could test whether vitamins really do lower blood pressure.\workspace{3.2cm}
 \end{qbox}
 
 \begin{qbox}{Question 9}
@@ -131,11 +131,11 @@ A food truck records the day's high temperature and the cups of lemonade sold. T
   \item Name the explanatory and response variables: a river's water level (m) and the day's rainfall (mm).
   \item Describe the practice-vs-mistakes scatter plot ($r=-0.98$) in context.
   \item Match each value of $r$ to a description: $0.97,\ -0.33,\ 0.62,\ -0.91$. Descriptions: strong negative, weak negative, moderate positive, strong positive.
-  \item Which relationship is strongest: $r=-0.82$, $r=0.77$ or $r=-0.45$? Explain.
+  \item Name the type of relationship (cause and effect, common cause, reverse, presumed or accidental) for four pairs.
   \item All points lie exactly on a straight line that rises to the right. What is $r$? What is $r$ if the line falls?
   \item Data follow $y=2^x$ ($r=0.88$): describe the form and say why \textquotedblleft{}strong linear\textquotedblright{} is a poor description.
   \item A scatter plot has $r=-0.31$. After one far-off point is removed, $r=-0.94$. \\ \textbf{(a)} What does this show? \\ \textbf{(b)} What must you do before deleting the point?
-  \item Height and weight have $r=0.78$. Find $r$ if \\ \textbf{(a)} height is converted to metres and weight to pounds; \\ \textbf{(b)} each weight $w$ is replaced by $120-w$.
+  \item Vitamins and blood pressure ($r=-0.40$): two other explanations; design a study to test cause.
   \item Countries with more televisions per person have longer life expectancy ($r=0.80$). Does owning televisions lengthen life? Name a lurking variable.
   \item Streets with more security cameras report more break-ins ($r=0.60$). Explain how reverse cause could account for this.
   \item Sketch a positive, linear, weak scatter with one outlier.
@@ -152,11 +152,11 @@ A food truck records the day's high temperature and the cups of lemonade sold. T
   \item explanatory: rainfall; response: water level
   \item strong, negative, linear: more practice goes with fewer mistakes; no outliers
   \item $0.97$ strong positive; $-0.33$ weak negative; $0.62$ moderate positive; $-0.91$ strong negative
-  \item $r=-0.82$ (largest $|r|$; sign gives direction only)
+  \item (a) common cause (rainy weather); (b) cause and effect (more passengers weigh more, so more fuel); (c) accidental (no logical link); (d) common cause (city population)
   \item $r=1$ (rising line); $r=-1$ (falling line)
   \item curved (exponential growth) and increasing; $r$ measures only linear fit, so $0.88$ overstates a line's suitability
   \item (a) one outlier hid a strong negative linear pattern; (b) find out why it is unusual; correct or delete only if it is an error, otherwise keep it and report both $r$ values
-  \item (a) $0.78$; (b) $-0.78$
+  \item (a) common cause: people who take vitamins may exercise and eat better; reverse cause: people already watching their health are the ones who take vitamins; (b) randomly assign volunteers to a vitamin group or a placebo group, keep all else the same, and compare blood pressure
   \item no; lurking variable: national wealth/health care, which raises both
   \item crime leads residents to install cameras, so break-ins (the response) cause the cameras (the \textquotedblleft{}explanatory\textquotedblright{} variable)
   \item about eight points rising loosely, plus one point far from the pattern
