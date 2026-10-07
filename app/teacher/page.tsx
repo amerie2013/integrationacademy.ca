@@ -117,6 +117,9 @@ export default function TeacherPage() {
             <Link href="/teacher/ai-usage" style={{ background: "#fff", color: "#0f172a", border: "1px solid #cbd5e1", borderRadius: 10, padding: "11px 18px", fontWeight: 700, fontSize: 15, textDecoration: "none" }}>
               AI tutor usage
             </Link>
+            <Link href="/teacher/foundations" style={{ background: "#fff", color: "#0f172a", border: "1px solid #cbd5e1", borderRadius: 10, padding: "11px 18px", fontWeight: 700, fontSize: 15, textDecoration: "none" }}>
+              Foundations progress
+            </Link>
             <button
               onClick={() => setShowNew((s) => !s)}
               style={{ background: "#1b7a44", color: "#fff", border: "none", borderRadius: 10, padding: "11px 20px", fontWeight: 700, fontSize: 15, cursor: "pointer" }}
