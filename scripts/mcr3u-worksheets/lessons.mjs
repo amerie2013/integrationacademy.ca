@@ -41,9 +41,10 @@ export const LEARN = {
     ["Degree check", "The product's degree equals the sum of the factors' degrees — a quick check that no term was lost."],
   ],
   "2.2": [
-    ["A toolbox of methods", "Factoring reverses expansion. Try in order: a \\textbf{common factor}, a \\textbf{difference of squares}, a \\textbf{trinomial} pattern, or \\textbf{grouping} for four terms."],
-    ["Trinomials", "For $ax^2+bx+c$, find factors of $a\\cdot c$ that add to $b$, split the middle term, and group."],
-    ["Factor fully", "Keep going until nothing more factors, and verify by expanding your result."],
+    ["One decision order", "Run the same checklist every time: (1) take out the \\textbf{greatest common factor}; (2) count the terms --- two squares subtracted is a \\textbf{difference of squares}, three terms is a \\textbf{trinomial}; (3) check whether any bracket factors again; (4) \\textbf{check by expanding}."],
+    ["Trinomials with $a=1$", "$x^2+bx+c=(x+p)(x+q)$ where $p,q$ \\textbf{multiply to $c$} and \\textbf{add to $b$}. If $c>0$ the signs match (both take the sign of $b$); if $c<0$ the signs differ and the larger number takes the sign of $b$."],
+    ["Trinomials with $a\\ne1$", "Expanding $(px+q)(rx+s)$ shows the two pieces of the middle term multiply to $ac$ and add to $b$. So: find $ac$; find the pair that multiplies to $ac$ and adds to $b$ (list the factor pairs in a table); \\textbf{split} the middle term; \\textbf{group} and pull out the common bracket."],
+    ["Finishing and checking", "If the brackets do not match, recheck the signs --- when a group starts with a minus, factor the minus out. If no pair of factors of $ac$ adds to $b$, the trinomial is \\textbf{prime}. Always carry the common factor to the end and verify by expanding."],
   ],
   "2.3": [
     ["Fractions with polynomials", "A \\textbf{rational expression} is a ratio of polynomials. Simplify by factoring top and bottom and cancelling common factors."],
