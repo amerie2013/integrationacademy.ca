@@ -53,6 +53,9 @@ export function GamesHub() {
           <p style={{ color: "#475569", fontSize: 15.5, lineHeight: 1.6, margin: "0 0 18px", maxWidth: 640 }}>
             Faster arithmetic makes every other topic easier. Each game trains one skill, adjusts to your level, and brings back the questions you miss.
           </p>
+          <p style={{ margin: "0 0 14px" }}>
+            <Link href="/games/my-stats" style={{ color: "#0d5c30", fontWeight: 800, fontSize: 14.5 }}>See my stats →</Link>
+          </p>
           <Link href="/games/skill-check" className="ia-gcard" style={{ ...gcard, display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, marginBottom: 20, background: "linear-gradient(135deg,#f0fdf4,#fff)", borderColor: "#9fe7bd" }}>
             <div>
               <h2 style={{ fontFamily: "Fraunces, serif", fontSize: 20, fontWeight: 700, margin: "0 0 4px", color: "#0f172a" }}>Not sure where to start?</h2>

@@ -311,7 +311,7 @@ export function FoundationsGame(p: Props) {
               )}
               <button onClick={() => start(level)} style={primaryBtn}>Play again</button>
               <div style={{ color: "#8fd6ab", fontSize: 12.5, marginTop: 12 }}>
-                {saveState === "saved" && "Saved to your progress."}
+                {saveState === "saved" && <>Saved to your progress. <Link href="/games/my-stats" style={{ color: "#9fe7bd" }}>See my stats</Link></>}
                 {saveState === "guest" && <>Playing as a guest — <Link href="/login" style={{ color: "#9fe7bd" }}>sign in</Link> to save your progress.</>}
                 {saveState === "error" && "Couldn't save this round, but your best score is kept on this device."}
               </div>

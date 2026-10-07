@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { supabase } from "../../lib/supabase";
 import { SiteHeader } from "../../components/SiteHeader";
+import { FoundationsCard } from "../../components/FoundationsCard";
 import { levelLabel } from "../../lib/theme";
 
 type Profile = {
@@ -230,6 +231,8 @@ export default function DashboardPage() {
             </div>
           </section>
         )}
+
+        <FoundationsCard />
 
         <section style={{ marginBottom: 28 }}>
           <h2 style={{ fontSize: 20, fontWeight: 700, margin: "0 0 12px" }}>Join a class</h2>
