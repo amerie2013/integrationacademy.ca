@@ -116,7 +116,10 @@ export default function TeacherClassesPage() {
       <SiteHeader />
       <div style={{ maxWidth: 900, margin: "0 auto", padding: "40px 28px" }}>
         <h1 style={{ fontFamily: "Fraunces, serif", fontSize: 30, fontWeight: 700, margin: "0 0 6px" }}>My classes</h1>
-        <p style={{ color: "#64748b", margin: "0 0 20px" }}>Create a class (or claim an open one), then share its code — students join for free with the code.</p>
+        <p style={{ color: "#64748b", margin: "0 0 14px" }}>Create a class (or claim an open one), then share its code — students join for free with the code.</p>
+        <Link href="/teacher/foundations" style={{ display: "inline-block", background: "#fff", color: "#1b7a44", border: "1px solid #bfe3cd", padding: "9px 16px", borderRadius: 9, textDecoration: "none", fontWeight: 700, fontSize: 14, margin: "0 0 20px" }}>
+          Foundations progress (arithmetic games) →
+        </Link>
 
         {/* Create a class */}
         <div style={{ background: "#fff", border: "1px solid #e2e8f0", borderRadius: 14, padding: 18, marginBottom: 30 }}>
