@@ -88,6 +88,14 @@ authored["2.2"] = L("2.2", "Factoring Polynomials", [html(String.raw`<div class=
     <tr><td style="${LTL}"><strong>3. The result</strong></td><td style="${LTL}">any factor that can still be factored</td><td style="${LTL}">Repeat from step 1. Finish with a <strong>check by expanding</strong>.</td></tr>
   </table></div>
 
+  <h2>📌 Common factor (always first)</h2>
+  <p>The <strong>greatest common factor (GCF)</strong> is the largest expression that divides every term. Build it in two parts: the <strong>number</strong> is the greatest number that divides all the coefficients, and the <strong>variable part</strong> is the lowest power of \(x\) that appears in <em>every</em> term (if one term has no \(x\), the GCF has none). Divide each term by the GCF, write the results in a bracket, and check by distributing.</p>
+  <ul>
+    <li>\(6x^2-9x=3x(2x-3)\) — number \(3\), lowest power \(x\).</li>
+    <li>If the first term is negative, take out a <strong>negative</strong> GCF: \(-4x^2+8x=-4x(x-2)\).</li>
+    <li>If a term <em>is</em> the GCF, its quotient is \(1\) — do not drop it: \(5x^2+5x=5x(x+1)\).</li>
+  </ul>
+
   <h2>📌 Trinomials \(x^2+bx+c\) (where \(a=1\)): sum and product</h2>
   <p>Because \((x+p)(x+q)=x^2+(p+q)x+pq\), the numbers \(p,q\) must <strong>multiply to \(c\)</strong> and <strong>add to \(b\)</strong>. List the factor pairs of \(c\) in an organised table and read off the pair with the right sum.</p>
   <p><strong>Sign rule.</strong> If \(c>0\), \(p\) and \(q\) have the <em>same</em> sign — both take the sign of \(b\). If \(c<0\), they have <em>opposite</em> signs — the number with the larger absolute value takes the sign of \(b\).</p>
