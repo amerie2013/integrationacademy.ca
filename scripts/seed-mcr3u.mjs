@@ -274,6 +274,19 @@ const A3 = (code, topic, knowledge, application, thinking) => {
   ].join("\n");
   return { title: `Assignment ${code} — ${topic}`, description };
 };
+
+// Usual Ontario four-category style: 3 Knowledge & Understanding, 2 Thinking, 2 Communication, 3 Application.
+const A4 = (code, topic, knowledge, thinking, communication, application) => {
+  let n = 0;
+  const sec = (arr) => arr.map((q) => `${++n}. ${q}`);
+  const description = [
+    "Knowledge & Understanding", ...sec(knowledge),
+    "Thinking", ...sec(thinking),
+    "Communication", ...sec(communication),
+    "Application", ...sec(application),
+  ].join("\n");
+  return { title: `Assignment ${code} — ${topic}`, description };
+};
 const ASSIGN = {
   "1.1": A3("1.1", "Functions, Relations & Function Notation",
     ["Is $\\{(1,2),(2,4),(3,6)\\}$ a function?", "For $f(x)=2x-5$, find $f(3)$.", "For $f(x)=x^2+1$, find $f(-2)$.", "Does $y=x^2$ pass the vertical-line test?"],
@@ -303,10 +316,11 @@ const ASSIGN = {
     ["Simplify $4(2x-3)+5(x+1)$.", "Expand $3x(2x^2-x+5)$.", "Expand $(x+6)(x-2)$.", "Expand $(2x-5)^2$."],
     ["A rectangle has length $(x+7)$ and width $(x+3)$. Write its area as a polynomial.", "Write a simplified polynomial for the perimeter of a triangle with sides $x+2$, $2x-1$, and $3x+4$.", "Expand and simplify $(x+4)(x-4)+(x+1)^2$."],
     ["A student expands $(x-3)^2$ as $x^2-9$. Explain the error and give the correct expansion.", "Find $k$ so that $(x+k)^2=x^2+10x+25$. Justify.", "Is $(x+2)(x+3)$ ever equal to $x^2+6$? Test a value of $x$ and explain."]),
-  "2.2": A3("2.2", "Factoring Polynomials",
-    ["Factor fully $16x^2+24x$.", "Factor $x^2+10x+16$.", "Factor $x^2-6x-27$.", "Factor $81x^2-4$."],
-    ["Factor $3x^2+14x+11$. Show $ac$, the two numbers, the split and the grouping, then check by expanding.", "Factor $4x^2-8x-5$. Show $ac$, the two numbers, the split and the grouping, then check by expanding.", "Factor fully $8x^2-2x-6$. Take out the common factor first, then factor the trinomial and check."],
-    ["A rectangle has area $10x^2+19x+6$. Find a possible length and width, and check by expanding.", "Use $ac$ and a list of factor pairs to explain why $2x^2+5x+4$ cannot be factored over the integers.", "A student factors $6x^2+x-12$ as $(3x+4)(2x-3)$. Expand to check, find the error, and give the correct factoring."]),
+  "2.2": A4("2.2", "Factoring Polynomials",
+    ["Factor fully $16x^2+24x$.", "Factor $x^2-6x-27$.", "Factor $3x^2+14x+11$. Show $ac$, the two numbers, the split and the grouping, then check by expanding."],
+    ["Factor fully $8x^2-2x-6$. Take out the common factor first, then factor the trinomial and check.", "A student factors $6x^2+x-12$ as $(3x+4)(2x-3)$. Expand to check, find the error, and give the correct factoring."],
+    ["Explain, step by step, how to factor $4x^2-8x-5$ so that a classmate could follow: $ac$, the pair of numbers, the split, the grouping, and the check.", "Use $ac$ and a list of factor pairs to explain why $2x^2+5x+4$ cannot be factored over the integers."],
+    ["A rectangular garden has area $(10x^2+19x+6)$ m$^2$ and width $(5x+2)$ m. Factor the area to find the length as an expression in $x$, then find the length and width when $x=3$ and check the area.", "A ball is thrown upward from a platform. Its height in metres after $t$ seconds is $h=-5t^2+10t+15$. Take out $-5$ first, factor fully, and use the factors to find when the ball lands ($h=0$). Explain why one answer is rejected.", "A rectangular tile has area $(4x^2-25)$ cm$^2$. Factor to find expressions for its side lengths, then find its perimeter when $x=5$."]),
   "2.3": A3("2.3", "Simplifying Rational Expressions",
     ["Simplify $\\dfrac{x^2-16}{x-4}$ and state restrictions.", "Simplify $\\dfrac{3x^2}{6x}$ and state restrictions.", "Simplify $\\dfrac{x^2+5x+6}{x+2}$ and state restrictions.", "State the restrictions for $\\dfrac{5}{x^2-9}$."],
     ["Simplify $\\dfrac{x^2-1}{x}\\cdot\\dfrac{2x}{x+1}$.", "Simplify $\\dfrac{x+2}{x-3}\\div\\dfrac{x+2}{x}$.", "Simplify $\\dfrac{2x^2+8x}{x^2+4x}$."],

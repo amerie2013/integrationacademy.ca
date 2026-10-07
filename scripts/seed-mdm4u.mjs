@@ -613,6 +613,19 @@ const A3 = (code, topic, knowledge, application, thinking) => {
   return { title: `Assignment ${code} — ${topic}`, description };
 };
 
+// Usual Ontario four-category style: 3 Knowledge & Understanding, 2 Thinking, 2 Communication, 3 Application.
+const A4 = (code, topic, knowledge, thinking, communication, application) => {
+  let n = 0;
+  const sec = (arr) => arr.map((q) => `${++n}. ${q}`);
+  const description = [
+    "Knowledge & Understanding", ...sec(knowledge),
+    "Thinking", ...sec(thinking),
+    "Communication", ...sec(communication),
+    "Application", ...sec(application),
+  ].join("\n");
+  return { title: `Assignment ${code} — ${topic}`, description };
+};
+
 const ASSIGN = {
   "1.1": A3("1.1", "The Fundamental Counting Principle",
     ["How many 4-digit PINs are possible (digits may repeat)?", "How many 4-digit PINs have no repeated digit?", "A menu has 3 starters, 5 mains, 4 desserts — how many meals?", "State the difference between the multiplicative and additive principles."],
@@ -738,10 +751,11 @@ const ASSIGN = {
     ["Write the z-score formula.", "Find the z-score of 88 when $\\mu=75,\\sigma=6$.", "What does a positive vs negative z-score indicate?", "Why standardize before comparing?"],
     ["Student X: 82 ($\\mu=78,\\sigma=4$); Student Y: 91 ($\\mu=85,\\sigma=9$). Compare with z-scores.", "A z-score is 2.0 for a value in a set with $\\mu=60,\\sigma=5$; find the value.", "Convert a z-score of 1.0 to a percentile for normal data."],
     ["Explain why raw scores across different tests are not comparable.", "Explain what makes a z-score 'unitless'.", "Explain the link between z-scores and percentiles."]),
-  "6.1": A3("6.1", "Scatter Plots & Correlation",
-    ["Name the explanatory and response variables: a city's daily high temperature and the number of visits to its public pools.", "List the four features used to describe a scatter plot.", "Between which two values must $r$ lie, and what do the sign and the size of $r$ tell you?", "Name the five types of relationship that can explain a correlation."],
-    ["A coach records training sessions per week and a sprinter's 100 m time in seconds: $(1,15.2),(2,14.8),(3,14.5),(4,14.4),(5,14.0),(6,13.9)$. Plot the points and describe the direction, form and strength (technology gives $r=-0.98$).", "Technology gives $r=0.91$ between two measurements. State $r$ after (a) one variable is converted to different units, (b) the axes are swapped, and (c) every $y$-value is replaced by $100-y$.", "Name the most likely type of relationship in each case and justify it: (a) the number of cinemas and the number of pizzerias in a city, (b) a car's speed and its stopping distance, (c) the number of nurses on duty on a hospital ward and the number of patients on the ward, (d) the number of letters in a person's first name and their height."],
-    ["A scatter plot shows a strong U-shape, yet $r\\approx0$. Explain why $r$ misses the pattern and what you would report instead.", "One extra point far from a tight rising line changes $r$ from $0.95$ to $0.50$. Explain why, and say what you would do before deciding whether to keep the point.", "A study of 1000 adults finds that pet owners report lower stress ($r=-0.35$). A reporter writes \"pets reduce stress\". Evaluate the claim: give two other explanations and describe a study that could test whether pets really reduce stress."]),
+  "6.1": A4("6.1", "Scatter Plots & Correlation",
+    ["Name the explanatory and response variables: a city's daily high temperature and the number of visits to its public pools.", "List the four features used to describe a scatter plot.", "Between which two values must $r$ lie, and what do the sign and the size of $r$ tell you?"],
+    ["Technology gives $r=0.91$ between two measurements. State $r$ after (a) one variable is converted to different units, (b) the axes are swapped, and (c) every $y$-value is replaced by $100-y$.", "One extra point far from a tight rising line changes $r$ from $0.95$ to $0.50$. Explain why, and say what you would do before deciding whether to keep the point."],
+    ["A scatter plot shows a strong U-shape, yet $r\\approx0$. Explain why $r$ misses the pattern and what you would report instead.", "A study of 1000 adults finds that pet owners report lower stress ($r=-0.35$). A reporter writes \"pets reduce stress\". Evaluate the claim: name two other types of relationship that could explain it and describe a study that could test whether pets really reduce stress."],
+    ["A coach records training sessions per week and a sprinter's 100 m time in seconds: $(1,15.2),(2,14.8),(3,14.5),(4,14.4),(5,14.0),(6,13.9)$. Plot the points, describe the direction, form and strength in context (technology gives $r=-0.98$), and say what $r$ tells the coach.", "Name the most likely type of relationship in each case and justify it: (a) the number of cinemas and the number of pizzerias in a city, (b) a car's speed and its stopping distance, (c) the number of nurses on duty on a hospital ward and the number of patients on the ward, (d) the number of letters in a person's first name and their height.", "A school finds that students who eat breakfast have higher marks ($r=0.62$), and the principal wants to fund a free-breakfast program. Identify the explanatory and response variables, name one lurking variable, and describe the evidence you would need before claiming that breakfast raises marks."]),
   "6.2": A3("6.2", "Correlation & Linear Regression",
     ["Interpret $r=0.92$.", "Interpret $r=-0.15$.", "State the least-squares slope formula.", "Through which point does the line of best fit always pass?"],
     ["For $(1,3),(2,5),(3,4),(4,7)$, compute $r$.", "Find the line of best fit for that data.", "Use the line to predict $y$ at $x=2.5$ and at $x=15$; label each interpolation or extrapolation."],
