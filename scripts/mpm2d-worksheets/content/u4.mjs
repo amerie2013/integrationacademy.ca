@@ -1,69 +1,9 @@
 // MPM2D Unit 4 — Quadratic Relations (worksheets 4.1–4.6)
+import { W41 } from "../../mpm2d-4_1/ws41.mjs";
 const r = String.raw;
 
 export default [
-{
-  code: "4.1", unit: "4: Quadratic Relations", title: "Introducing Quadratic Relations",
-  intro: r`A \textbf{quadratic relation} has degree $2$ and graphs as a \textbf{parabola}. Its second differences are constant.`,
-  ideas: [
-    r`Standard form $y=ax^2+bx+c$ with $a\neq0$; the base parabola is $y=x^2$.`,
-    r`\textbf{First differences} change; \textbf{second differences} are constant for a quadratic.`,
-    r`The constant second difference equals $2a$.`,
-    r`$a>0$ opens up (minimum); $a<0$ opens down (maximum).`,
-  ],
-  examples: [
-    { t: "Identifying quadratics", body: r`Which are quadratic: $y=x^2-3$, $\ y=2x+1$, $\ y=-4x^2$?
-\soln $y=x^2-3$ and $y=-4x^2$ are quadratic (degree $2$); $y=2x+1$ is linear.` },
-    { t: "Second differences", body: r`Show the relation $x:0,1,2,3$, $\ y:1,3,7,13$ is quadratic.
-\soln First differences $2,4,6$; second differences $2,2$ --- constant, so it is quadratic.` },
-    { t: "Evaluating", body: r`If $f(x)=x^2-2x-3$, find $f(4)$.
-\soln $f(4)=16-8-3=5.$` },
-    { t: "The base parabola", body: r`Graph $y=x^2$.
-\soln A parabola with vertex $(0,0)$ opening up.
-\plot{-4}{4}{-1}{9}{\addplot[exblue,very thick,domain=-3:3,samples=60]{x^2};\addplot[mark=*,only marks,black]coordinates{(0,0)}; }` },
-    { t: "Effect of $a$", body: r`Compare $y=x^2$ and $y=2x^2$.
-\soln $y=2x^2$ is narrower (vertical stretch by $2$); both share vertex $(0,0)$.
-\plot{-4}{4}{-1}{9}{\addplot[exblue,very thick,domain=-3:3,samples=60]{x^2};\addplot[qorange,very thick,domain=-2.1:2.1,samples=60]{2*x^2};}` },
-    { t: "Opening down", body: r`Graph $y=-x^2$.
-\soln Reflection of the base parabola; vertex $(0,0)$, opens down.
-\plot{-4}{4}{-9}{1}{\addplot[exblue,very thick,domain=-3:3,samples=60]{-x^2};}` },
-    { t: "Evaluating with negatives", body: r`If $f(x)=2x^2-x+1$, find $f(-2)$.
-\soln $f(-2)=2(4)-(-2)+1=8+2+1=11.$` },
-    { t: "A height model", body: r`A ball's height is $h=-5t^2+20t$ (m). Find its height at $t=1$ and $t=2$.
-\soln $h(1)=-5+20=15$ m; $h(2)=-20+40=20$ m.` },
-    { t: "Using $2a$ (harder)", body: r`A relation $y=ax^2$ has a constant second difference of $6$. Find $a$ and the value at $x=3$.
-\soln $2a=6\Rightarrow a=3$, so $y=3x^2$ and $y(3)=3(9)=27.$` },
-  ],
-  questions: [
-    { ask: r`Which are quadratic: $y=x^2-7$, $\ y=4x+1$, $\ y=-3x^2$, $\ y=x^3+2$?`, ws: "2.0cm" },
-    { ask: r`Use second differences to decide if $x:0,1,2,3$, $\ y:2,5,10,17$ is quadratic.`, ws: "2.4cm" },
-    { ask: r`If $f(x)=x^2-3x+2$, find $f(5)$.`, ws: "1.8cm" },
-    { ask: r`If $f(x)=-2x^2+4x$, find $f(-1)$.`, ws: "1.8cm" },
-    { ask: r`Graph $y=x^2-1$.`, grid: true },
-    { ask: r`A relation $y=ax^2$ has a constant second difference of $8$. Find $a$.`, ws: "2.0cm" },
-    { ask: r`A ball's height is $h=-5t^2+30t$. Find its height at $t=2$.`, ws: "2.0cm" },
-    { ask: r`Graph $y=-x^2+4$.`, grid: true },
-    { ask: r`If $f(x)=2x^2-5$, find $f(0)$ and $f(3)$.`, ws: "2.0cm" },
-    { ask: r`Are the second differences of a \emph{linear} relation constant? What is their value?`, ws: "2.0cm" },
-    { ask: r`The points $x:1,2,3,4$, $\ y:1,4,9,16$ follow which quadratic relation?`, ws: "2.0cm" },
-    { ask: r`Does $y=5-2x^2$ open up or down? Give its maximum or minimum value.`, ws: "2.0cm" },
-    { ask: r`A relation $y=ax^2$ has a constant second difference of $10$. Find $a$ and the value at $x=4$.`, ws: "2.6cm", challenge: true },
-  ],
-  answers: [
-    r`$y=x^2-7$ and $y=-3x^2$ are quadratic.`,
-    r`First diffs $3,5,7$; second diffs $2,2$ --- yes, quadratic.`,
-    r`$25-15+2=12$.`, r`$-2-4=-6$.`,
-    r`Parabola, vertex $(0,-1)$, opens up.`,
-    r`$2a=8\Rightarrow a=4$.`,
-    r`$-20+60=40$.`,
-    r`Parabola, vertex $(0,4)$, opens down.`,
-    r`$f(0)=-5$, $f(3)=13$.`,
-    r`Yes, second differences are $0$.`,
-    r`$y=x^2$.`,
-    r`Opens down; maximum value $5$.`,
-    r`$2a=10\Rightarrow a=5$; $y(4)=5(16)=80$.`,
-  ],
-},
+W41,
 {
   code: "4.2", unit: "4: Quadratic Relations", title: "Key Features of a Parabola",
   intro: r`Every parabola has a \textbf{vertex}, an \textbf{axis of symmetry}, a \textbf{max or min}, possibly \textbf{zeros}, and a \textbf{$y$-intercept}.`,

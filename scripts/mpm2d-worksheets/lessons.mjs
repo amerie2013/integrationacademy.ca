@@ -1,3 +1,4 @@
+import { LEARN41 } from "../mpm2d-4_1/ws41.mjs";
 // "Concept Spotlight" teaching sections for MPM2D worksheets, keyed by code.
 // build.mjs renders LEARN[code] as a green learnbox before the Worked Examples.
 // LaTeX content ($...$ math, \textbf{}, \emph{}, \dfrac, ...). Each entry is an
@@ -88,11 +89,7 @@ export const LEARN = {
     ["A common trap", "$(a+b)^2\\ne a^2+b^2$: the middle term $2ab$ is essential and must never be dropped."],
   ],
   // ── Unit 4: Quadratic Relations ────────────────────────────
-  "4.1": [
-    ["What makes it quadratic", "A \\textbf{quadratic relation} contains a squared variable, and its graph is a \\textbf{parabola} — a smooth U-shaped curve rather than a line."],
-    ["Spotting one", "In a table, quadratics have equal \\textbf{second differences} (the differences of the first differences), just as linear relations have equal first differences."],
-    ["Where they appear", "Falling objects, projectile paths, and areas all follow quadratic relations."],
-  ],
+  "4.1": LEARN41,
   "4.2": [
     ["The landmarks", "Every parabola has a \\textbf{vertex} (its highest or lowest point), an \\textbf{axis of symmetry} through the vertex, a \\textbf{$y$-intercept}, and often \\textbf{$x$-intercepts} — the zeros."],
     ["Opening and width", "The sign of the leading coefficient decides whether the parabola opens up or down, and its size controls how narrow or wide the curve is."],
