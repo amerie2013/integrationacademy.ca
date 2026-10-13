@@ -1,0 +1,77 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize\color{black!60}Worksheet 4.7}
+\begin{document}
+
+\wstitle{4.7}{Indeterminate Forms and L'H\^opital's Rule}{Unit 4: Derivatives in Context}
+
+\begin{ideabox}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+  \item If $\dfrac{f(x)}{g(x)}$ has the form $\dfrac00$ or $\dfrac{\infty}{\infty}$, then $\displaystyle\lim\dfrac{f(x)}{g(x)}=\lim\dfrac{f'(x)}{g'(x)}$, provided the second limit exists.
+  \item Differentiate numerator and denominator \textbf{separately}. This is not the quotient rule.
+  \item \textbf{Check the form first}, and say so: state that both limits are 0 (or both infinite) before applying the rule.
+  \item If the result is again indeterminate, apply the rule again.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked examples}
+\begin{example}{Example 1 \textperiodcentered{} The form 0/0}
+Evaluate $\displaystyle\lim_{x\to 0}\dfrac{\sin(4x)}{3x}$.\soln Both $\sin(4x)$ and $3x$ tend to 0. By L'H\^opital's Rule the limit is $\displaystyle\lim_{x\to 0}\dfrac{4\cos(4x)}{3}$.\result{$\dfrac43$.}
+\end{example}
+
+\begin{example}{Example 2 \textperiodcentered{} The form infinity over infinity}
+Evaluate $\displaystyle\lim_{x\to \infty}\dfrac{\ln x}{x}$.\soln Both tend to infinity. The rule gives $\displaystyle\lim_{x\to \infty}\dfrac{1/x}{1}$.\result{$0$.}
+\end{example}
+
+\begin{example}{Example 3 \textperiodcentered{} Applying the rule twice}
+Evaluate $\displaystyle\lim_{x\to 0}\dfrac{e^{x}-1-x}{x^2}$.\soln Form $\tfrac00$: $\displaystyle\lim_{x\to 0}\dfrac{e^{x}-1}{2x}$, again $\tfrac00$: $\displaystyle\lim_{x\to 0}\dfrac{e^{x}}{2}$.\result{$\dfrac12$.}
+\end{example}
+
+\newpage
+\sech{Practice}
+
+\level{Core}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item Evaluate $\displaystyle\lim_{x\to 2}\dfrac{x^2-4}{x-2}$ using L'H\^opital's Rule.\work{2.3cm}
+  \item Evaluate $\displaystyle\lim_{x\to 0}\dfrac{1-\cos x}{x}$.\work{2.3cm}
+  \item Evaluate $\displaystyle\lim_{x\to 1}\dfrac{x^5-1}{x-1}$.\work{2.3cm}
+  \item Can L'H\^opital's Rule be used for $\displaystyle\lim_{x\to 0}\dfrac{x+1}{x+3}$? Find the limit.\work{2.3cm}
+\end{enumerate}
+
+\level{Exam level}
+\begin{enumerate}[leftmargin=*,itemsep=2pt,start=5]
+  \item Evaluate $\displaystyle\lim_{x\to 0}\dfrac{\tan(3x)}{\sin(2x)}$.\work{2.8cm}
+  \item Evaluate $\displaystyle\lim_{x\to \infty}\dfrac{x^2+1}{e^{x}}$.\work{2.8cm}
+  \item Evaluate $\displaystyle\lim_{x\to 0}\dfrac{\sin x-x}{x^2}$.\work{2.8cm}
+  \item A differentiable function $f$ has $f(2)=0$ and $f'(2)=3$, and $f'$ is continuous. Find $\displaystyle\lim_{x\to 2}\dfrac{f(x)}{x^3-8}$.\work{2.8cm}
+\end{enumerate}
+
+\begin{frbox}{Question 9 \textperiodcentered{} Free-response practice}
+Evaluate each limit. In each part, show that L'H\^opital's Rule applies.
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=2pt]
+  \item $\displaystyle\lim_{x\to 0}\dfrac{e^{2x}-1}{\tan x}$\work{2.6cm}
+  \item $\displaystyle\lim_{x\to \pi/2}\dfrac{\cos x}{x-\frac{\pi}{2}}$\work{2.6cm}
+  \item $\displaystyle\lim_{x\to 0}\dfrac{g(x)}{e^{x}-1}$, where $g$ is differentiable with $g(0)=0$ and $g'(0)=5$, and $g'$ is continuous.\work{2.6cm}
+\end{enumerate}
+\end{frbox}
+
+\newpage
+\begin{solbox}
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item Form $\tfrac00$: $\displaystyle\lim_{x\to 2}\dfrac{2x}{1}=4$.
+  \item Form $\tfrac00$: $\displaystyle\lim_{x\to 0}\dfrac{\sin x}{1}=0$.
+  \item Form $\tfrac00$: $\displaystyle\lim_{x\to 1}5x^4=5$.
+  \item No: the numerator tends to 1 and the denominator to 3, so the form is not indeterminate. The limit is $\dfrac13$.
+  \item Form $\tfrac00$: $\displaystyle\lim_{x\to 0}\dfrac{3\sec^2(3x)}{2\cos(2x)}=\dfrac32$.
+  \item Form $\tfrac\infty\infty$, twice: $\displaystyle\lim_{x\to \infty}\dfrac{2x}{e^{x}}=\displaystyle\lim_{x\to \infty}\dfrac{2}{e^{x}}=0$.
+  \item Form $\tfrac00$, twice: $\displaystyle\lim_{x\to 0}\dfrac{\cos x-1}{2x}=\displaystyle\lim_{x\to 0}\dfrac{-\sin x}{2}=0$.
+  \item Both $f(x)$ and $x^3-8$ tend to 0. $\displaystyle\lim_{x\to 2}\dfrac{f'(x)}{3x^2}=\dfrac{3}{12}=\dfrac14$.
+  \item \begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=3pt]
+    \item $e^{2x}-1\to0$ and $\tan x\to0$. $\displaystyle\lim_{x\to 0}\dfrac{2e^{2x}}{\sec^2x}=2$.
+    \item $\cos x\to0$ and $x-\dfrac\pi2\to0$. $\displaystyle\lim_{x\to \pi/2}\dfrac{-\sin x}{1}=-1$.
+    \item $g(x)\to g(0)=0$ because $g$ is continuous, and $e^{x}-1\to0$. $\displaystyle\lim_{x\to 0}\dfrac{g'(x)}{e^{x}}=\dfrac{5}{1}=5$.
+  \end{enumerate}
+\end{enumerate}
+\end{solbox}
+
+\end{document}

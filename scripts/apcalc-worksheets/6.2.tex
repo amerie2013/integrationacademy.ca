@@ -1,0 +1,77 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize\color{black!60}Worksheet 6.2}
+\begin{document}
+
+\wstitle{6.2}{Riemann Sums and the Trapezoidal Rule}{Unit 6: Integration and Accumulation of Change}
+
+\begin{ideabox}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+  \item A \textbf{left}, \textbf{right} or \textbf{midpoint} Riemann sum adds rectangles whose heights are taken at the left end, right end or midpoint of each subinterval.
+  \item A \textbf{trapezoidal sum} uses the average of the two end heights on each subinterval.
+  \item With a table, use the table's own subintervals. The widths are often \textbf{unequal}.
+  \item If $f$ is increasing, a left sum underestimates and a right sum overestimates; if $f$ is decreasing, the reverse.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked examples}
+\begin{example}{Example 1 \textperiodcentered{} Equal widths}
+Approximate $\displaystyle\int_{0}^{3}\left(x^2+1\right)\,dx$ with left and right Riemann sums using 3 subintervals.\soln Width 1. Left: $f(0)+f(1)+f(2)=1+2+5$. Right: $f(1)+f(2)+f(3)=2+5+10$.\result{Left sum 8; right sum 17.}
+\end{example}
+
+\begin{example}{Example 2 \textperiodcentered{} Unequal widths}
+Selected values of $h$ are shown.\begin{center}\renewcommand{\arraystretch}{1.25}\begin{tabular}{|c|c|c|c|c|}\hline $t$ & $0$ & $1$ & $4$ & $6$ \\ \hline $h(t)$ & $2$ & $5$ & $9$ & $7$ \\ \hline\end{tabular}\end{center}Approximate $\displaystyle\int_{0}^{6}h(t)\,dt$ with a trapezoidal sum.\soln $\dfrac12(2+5)(1)+\dfrac12(5+9)(3)+\dfrac12(9+7)(2)=3.5+21+16$.\result{$40.5$.}
+\end{example}
+
+\begin{example}{Example 3 \textperiodcentered{} Over or under}
+A function is increasing on $[a,b]$. Compare its left and right Riemann sums with the integral.\soln Each left rectangle lies below the graph and each right rectangle above it.\result{Left sum $<$ integral $<$ right sum.}
+\end{example}
+
+\newpage
+\sech{Practice}
+Questions 5 to 7 use this table of values of a continuous function $R$.\begin{center}\renewcommand{\arraystretch}{1.25}\begin{tabular}{|c|c|c|c|c|c|}\hline $t$ & $0$ & $2$ & $3$ & $7$ & $10$ \\ \hline $R(t)$ & $6$ & $10$ & $12$ & $8$ & $2$ \\ \hline\end{tabular}\end{center}
+\level{Core}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item Find the left Riemann sum for $f(x)=2x$ on $[0,4]$ with 4 equal subintervals.\work{2.3cm}
+  \item Find the right Riemann sum for $f(x)=2x$ on $[0,4]$ with 4 equal subintervals.\work{2.3cm}
+  \item Find the midpoint Riemann sum for $f(x)=x^2$ on $[0,4]$ with 2 equal subintervals.\work{2.3cm}
+  \item A function is decreasing on $[a,b]$. Does a left Riemann sum overestimate or underestimate the integral?\work{2.3cm}
+\end{enumerate}
+
+\level{Exam level}
+\begin{enumerate}[leftmargin=*,itemsep=2pt,start=5]
+  \item Approximate $\displaystyle\int_{0}^{10}R(t)\,dt$ with a left Riemann sum using the four subintervals of the table.\work{2.8cm}
+  \item Approximate the same integral with a right Riemann sum.\work{2.8cm}
+  \item Approximate the same integral with a trapezoidal sum.\work{2.8cm}
+  \item Find the midpoint Riemann sum for $f(x)=\dfrac1x$ on $[1,5]$ with 2 equal subintervals.\work{2.8cm}
+\end{enumerate}
+
+\begin{frbox}{Question 9 \textperiodcentered{} Free-response practice}
+The speed of a train, $v(t)$ metres per second, is recorded at times $t$ seconds.\begin{center}\renewcommand{\arraystretch}{1.25}\begin{tabular}{|c|c|c|c|c|c|}\hline $t$ & $0$ & $10$ & $25$ & $40$ & $60$ \\ \hline $v(t)$ & $0$ & $12$ & $20$ & $16$ & $4$ \\ \hline\end{tabular}\end{center}
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=2pt]
+  \item Approximate $\displaystyle\int_{0}^{60}v(t)\,dt$ with a trapezoidal sum using the four subintervals of the table.\work{2.6cm}
+  \item Using correct units, explain the meaning of the integral in part (a).\work{2.6cm}
+  \item Use your answer to estimate the average speed of the train over the 60 seconds.\work{2.6cm}
+\end{enumerate}
+\end{frbox}
+
+\newpage
+\begin{solbox}
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item $1(0+2+4+6)=12$.
+  \item $1(2+4+6+8)=20$.
+  \item Midpoints 1 and 3, width 2: $2(1+9)=20$.
+  \item It overestimates.
+  \item $(2)(6)+(1)(10)+(4)(12)+(3)(8)=94$.
+  \item $(2)(10)+(1)(12)+(4)(8)+(3)(2)=70$.
+  \item $\dfrac12(6+10)(2)+\dfrac12(10+12)(1)+\dfrac12(12+8)(4)+\dfrac12(8+2)(3)=16+11+40+15=82$.
+  \item Midpoints 2 and 4, width 2: $2\left(\dfrac12+\dfrac14\right)=1.5$.
+  \item \begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=3pt]
+    \item $\dfrac12(0+12)(10)+\dfrac12(12+20)(15)+\dfrac12(20+16)(15)+\dfrac12(16+4)(20)=60+240+270+200=770$.
+    \item The distance the train travels, in metres, during the 60 seconds.
+    \item $\dfrac{770}{60}\approx12.8$ metres per second.
+  \end{enumerate}
+\end{enumerate}
+\end{solbox}
+
+\end{document}

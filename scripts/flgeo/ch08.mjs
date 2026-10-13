@@ -11,6 +11,21 @@ import {
   copyAngleFig, bisectFig, incenterFig, circumcenterFig,
   sampleSpaceFig, treeDiagram, twoWayTable, permuteCombine,
 } from "./figures2.mjs";
+import {
+  threePointsPlane, collinearPts, numberLineDist, midpointAlgebra, classifyAngles,
+  copyAngleObtuse, angleCombine, biconditionalFig, paragraphProofFig,
+  parallelConverse, perpTransversal, horizVert, constructPerpOnLine, constructRectangle,
+  translatePolygon, reflectYX, reflectVertical, rotate180, rotate270, glideReflect,
+  parallelReflect, intersectReflect, parallelogramSym, squareSym, scaleneNoSym,
+  exteriorAngle, angleSumTri, equilateralFig, altitudeIsos, aasMarks, medianFig,
+  dilatePoint, sssSimilar, sasSimilar, midsegmentTri, threeParallel, mirrorMethod,
+  depressionFig, guyWire, twoElevations,
+  diameterChord, semicircleRight, chordPerp, chordChord, tangentSecant, twoSecants, circleEq,
+  pyramidFig, coneFig, sphereFig, densityFig, popDensity, coneSlice, sphereSlice, frustumFig,
+  dieFig, bagMarbles, complementFig, cardsFig, expectedValue, withWithout,
+} from "./figures3.mjs";
+import { hexagonSymmetryFig } from "./figures2.mjs";
+import { copySegment, angleBisector } from "./figures.mjs";
 
 export const ch = {};
 
@@ -41,6 +56,7 @@ ch["8.1"] = L("8.1", "The Distance, Midpoint, and Slope Formulas (Review and App
       {
         h: "Finding a midpoint",
         p: "Find the midpoint of the segment joining \\((-3,5)\\) and \\((7,-1)\\).",
+        fig: distanceMidpoint(),
         steps: [
           `<strong>Step 1 — Average the \\(x\\)-coordinates:</strong> \\(\\dfrac{-3+7}{2}=\\dfrac{4}{2}=2\\).`,
           `<strong>Step 2 — Average the \\(y\\)-coordinates:</strong> \\(\\dfrac{5+(-1)}{2}=\\dfrac{4}{2}=2\\).`,
@@ -50,6 +66,7 @@ ch["8.1"] = L("8.1", "The Distance, Midpoint, and Slope Formulas (Review and App
       {
         h: "Finding a slope",
         p: "Find the slope of the line through \\((2,-1)\\) and \\((5,8)\\).",
+        fig: distanceMidpoint(),
         steps: [
           `<strong>Step 1 — Apply the formula:</strong> \\(m=\\dfrac{8-(-1)}{5-2}\\).`,
           `<strong>Step 2 — Simplify:</strong> \\(m=\\dfrac{9}{3}=3\\).`,
@@ -59,6 +76,7 @@ ch["8.1"] = L("8.1", "The Distance, Midpoint, and Slope Formulas (Review and App
       {
         h: "Finding a missing endpoint",
         p: "\\(M(3,1)\\) is the midpoint of \\(\\overline{AB}\\), with \\(A(-1,-2)\\). Find \\(B\\).",
+        fig: distanceMidpoint(),
         steps: [
           `<strong>Step 1 — Set up the midpoint equations:</strong> \\(3=\\dfrac{-1+x_B}{2}\\) and \\(1=\\dfrac{-2+y_B}{2}\\).`,
           `<strong>Step 2 — Solve for \\(x_B\\):</strong> \\(6=-1+x_B \\Rightarrow x_B=7\\).`,
@@ -69,6 +87,7 @@ ch["8.1"] = L("8.1", "The Distance, Midpoint, and Slope Formulas (Review and App
       {
         h: "Using distance to test for an equilateral triangle",
         p: "Is the triangle with vertices \\(A(0,0)\\), \\(B(4,0)\\), \\(C(2,2\\sqrt{3})\\) equilateral?",
+        fig: equilateralFig(),
         steps: [
           `<strong>Step 1 — Find \\(AB\\):</strong> \\(AB=\\sqrt{(4-0)^2+0^2}=4\\).`,
           `<strong>Step 2 — Find \\(AC\\):</strong> \\(AC=\\sqrt{2^2+(2\\sqrt3)^2}=\\sqrt{4+12}=\\sqrt{16}=4\\).`,
@@ -122,6 +141,7 @@ ch["8.2"] = L("8.2", "Weighted Average of Points on a Line (MA.912.GR.3.1 — Ne
       {
         h: "A two-dimensional partition point",
         p: "Find the point \\(P\\) dividing \\(\\overline{AB}\\) in the ratio \\(AP:PB=1:3\\), where \\(A(1,2)\\) and \\(B(9,10)\\).",
+        fig: weightedAvgFig(),
         steps: [
           `<strong>Step 1 — Find the fraction:</strong> \\(\\dfrac{1}{1+3}=\\dfrac14\\).`,
           `<strong>Step 2 — Find \\(\\Delta x\\) and \\(\\Delta y\\):</strong> \\(\\Delta x=9-1=8\\), \\(\\Delta y=10-2=8\\).`,
@@ -132,6 +152,7 @@ ch["8.2"] = L("8.2", "Weighted Average of Points on a Line (MA.912.GR.3.1 — Ne
       {
         h: "A ratio closer to the far endpoint",
         p: "Find the point \\(P\\) dividing \\(\\overline{AB}\\) in the ratio \\(AP:PB=3:1\\), where \\(A(-2,5)\\) and \\(B(6,-3)\\).",
+        fig: weightedAvgFig(),
         steps: [
           `<strong>Step 1 — Find the fraction:</strong> \\(\\dfrac{3}{3+1}=\\dfrac34\\).`,
           `<strong>Step 2 — Find \\(\\Delta x\\) and \\(\\Delta y\\):</strong> \\(\\Delta x=6-(-2)=8\\), \\(\\Delta y=-3-5=-8\\).`,
@@ -142,6 +163,7 @@ ch["8.2"] = L("8.2", "Weighted Average of Points on a Line (MA.912.GR.3.1 — Ne
       {
         h: "Working backward to find an endpoint",
         p: "Point \\(P(5,4)\\) lies on \\(\\overline{AB}\\) with \\(AP:PB=1:2\\), and \\(A(2,1)\\). Find \\(B\\).",
+        fig: weightedAvgFig(),
         steps: [
           `<strong>Step 1 — Write the step form:</strong> \\(P=A+\\dfrac13(B-A)\\), since the fraction is \\(\\dfrac{1}{1+2}=\\dfrac13\\).`,
           `<strong>Step 2 — Isolate \\(B-A\\):</strong> \\(P-A=\\dfrac13(B-A) \\Rightarrow B-A=3(P-A)\\).`,
@@ -152,6 +174,7 @@ ch["8.2"] = L("8.2", "Weighted Average of Points on a Line (MA.912.GR.3.1 — Ne
       {
         h: "A fraction-of-the-way phrasing",
         p: "Find the point that is \\(\\dfrac14\\) of the way from \\(A(0,0)\\) to \\(B(8,12)\\).",
+        fig: weightedAvgFig(),
         steps: [
           `<strong>Step 1 — Recognize the fraction directly:</strong> "\\(\\dfrac14\\) of the way from \\(A\\) to \\(B\\)" is already the fraction \\(\\dfrac{m}{m+n}=\\dfrac14\\) (equivalent to ratio \\(1:3\\)).`,
           `<strong>Step 2 — Apply the step form:</strong> \\(P=(0,0)+\\dfrac14(8,12)\\).`,
@@ -203,6 +226,7 @@ ch["8.3"] = L("8.3", "Area of 2D Figures (Triangles, Quadrilaterals, Regular Pol
       {
         h: "Area of a trapezoid",
         p: "Find the area of a trapezoid with bases 8 and 14 and height 5.",
+        fig: trapezoidFig(),
         steps: [
           `<strong>Step 1 — Apply the formula:</strong> \\(A=\\dfrac12(8+14)(5)\\).`,
           `<strong>Step 2 — Simplify:</strong> \\(A=\\dfrac12(22)(5)=55\\).`,
@@ -211,6 +235,7 @@ ch["8.3"] = L("8.3", "Area of 2D Figures (Triangles, Quadrilaterals, Regular Pol
       {
         h: "Area of a rhombus from its diagonals",
         p: "Find the area of a rhombus with diagonals 10 and 16.",
+        fig: kiteFig(),
         steps: [
           `<strong>Step 1 — Apply the formula:</strong> \\(A=\\dfrac12(10)(16)\\).`,
           `<strong>Step 2 — Simplify:</strong> \\(A=\\dfrac12(160)=80\\).`,
@@ -219,6 +244,7 @@ ch["8.3"] = L("8.3", "Area of 2D Figures (Triangles, Quadrilaterals, Regular Pol
       {
         h: "Area of a regular hexagon",
         p: "Find the area of a regular hexagon with side length 6.",
+        fig: hexagonSymmetryFig(),
         steps: [
           `<strong>Step 1 — Find the apothem:</strong> a regular hexagon's apothem is \\(a=\\dfrac{s\\sqrt3}{2}=\\dfrac{6\\sqrt3}{2}=3\\sqrt3\\).`,
           `<strong>Step 2 — Find the perimeter:</strong> \\(P=6(6)=36\\).`,
@@ -229,6 +255,7 @@ ch["8.3"] = L("8.3", "Area of 2D Figures (Triangles, Quadrilaterals, Regular Pol
       {
         h: "Area of a composite figure",
         p: "A rectangle measuring 10 by 6 has a right-triangular corner cut off, with legs 6 and 4. Find the remaining area.",
+        fig: areaFig(),
         steps: [
           `<strong>Step 1 — Find the full rectangle's area:</strong> \\(A_{\\text{rect}}=10(6)=60\\).`,
           `<strong>Step 2 — Find the cut-off triangle's area:</strong> \\(A_{\\text{tri}}=\\dfrac12(6)(4)=12\\).`,
@@ -269,6 +296,7 @@ ch["8.4"] = L("8.4", "Perimeter and Area in the Coordinate Plane (MA.912.GR.3.4)
       {
         h: "Perimeter and area of an axis-aligned rectangle",
         p: "Rectangle \\(ABCD\\) has vertices \\(A(1,1)\\), \\(B(6,1)\\), \\(C(6,4)\\), \\(D(1,4)\\). Find its perimeter and area.",
+        fig: areaFig(),
         steps: [
           `<strong>Step 1 — Find the side lengths:</strong> \\(AB=6-1=5\\) and \\(BC=4-1=3\\) (both axis-aligned, so simple subtraction works).`,
           `<strong>Step 2 — Perimeter:</strong> \\(P=2(5+3)=16\\).`,
@@ -278,6 +306,7 @@ ch["8.4"] = L("8.4", "Perimeter and Area in the Coordinate Plane (MA.912.GR.3.4)
       {
         h: "Perimeter and area of a triangle",
         p: "Triangle \\(ABC\\) has vertices \\(A(0,0)\\), \\(B(6,0)\\), \\(C(3,4)\\). Find its perimeter and area.",
+        fig: areaFig(),
         steps: [
           `<strong>Step 1 — Find the side lengths:</strong> \\(AB=6\\); \\(BC=\\sqrt{(6-3)^2+4^2}=\\sqrt{25}=5\\); \\(CA=\\sqrt{3^2+4^2}=5\\).`,
           `<strong>Step 2 — Perimeter:</strong> \\(P=6+5+5=16\\).`,
@@ -288,6 +317,7 @@ ch["8.4"] = L("8.4", "Perimeter and Area in the Coordinate Plane (MA.912.GR.3.4)
       {
         h: "Area with the shoelace formula",
         p: "Quadrilateral \\(ABCD\\) has vertices \\(A(0,0)\\), \\(B(5,0)\\), \\(C(6,4)\\), \\(D(1,3)\\), listed in order. Find its area.",
+        fig: distanceMidpoint(),
         steps: [
           `<strong>Step 1 — Compute each cross term \\(x_iy_{i+1}-x_{i+1}y_i\\):</strong> \\(A\\to B: (0)(0)-(5)(0)=0\\); \\(B\\to C: (5)(4)-(6)(0)=20\\); \\(C\\to D: (6)(3)-(1)(4)=14\\); \\(D\\to A: (1)(0)-(0)(3)=0\\).`,
           `<strong>Step 2 — Add the terms:</strong> \\(0+20+14+0=34\\).`,
@@ -297,6 +327,7 @@ ch["8.4"] = L("8.4", "Perimeter and Area in the Coordinate Plane (MA.912.GR.3.4)
       {
         h: "Area of a composite (L-shaped) figure on a grid",
         p: "An L-shaped figure has vertices \\((0,0)\\), \\((6,0)\\), \\((6,3)\\), \\((3,3)\\), \\((3,5)\\), \\((0,5)\\) in order. Find its area by decomposition.",
+        fig: areaFig(),
         steps: [
           `<strong>Step 1 — Split into two rectangles:</strong> a lower rectangle from \\((0,0)\\) to \\((6,3)\\), and an upper rectangle from \\((0,3)\\) to \\((3,5)\\).`,
           `<strong>Step 2 — Lower rectangle area:</strong> \\(6\\times3=18\\).`,
@@ -307,6 +338,7 @@ ch["8.4"] = L("8.4", "Perimeter and Area in the Coordinate Plane (MA.912.GR.3.4)
       {
         h: "Perimeter with a diagonal side",
         p: "Triangle \\(ABC\\) has vertices \\(A(-2,1)\\), \\(B(3,1)\\), \\(C(3,-3)\\). Find its perimeter.",
+        fig: distanceMidpoint(),
         steps: [
           `<strong>Step 1 — Find \\(AB\\) (horizontal):</strong> \\(AB=3-(-2)=5\\).`,
           `<strong>Step 2 — Find \\(BC\\) (vertical):</strong> \\(BC=1-(-3)=4\\).`,
@@ -358,6 +390,7 @@ ch["8.5"] = L("8.5", "How Dilations Affect Perimeter and Area (MA.912.GR.4.3)", 
       {
         h: "Scaling area directly",
         p: "A triangle has area 15. It's dilated by a scale factor of \\(k=2\\). Find the new area.",
+        fig: dilationScale(),
         steps: [
           `<strong>Step 1 — Apply the area scaling rule:</strong> \\(A'=k^2A=2^2(15)\\).`,
           `<strong>Step 2 — Simplify:</strong> \\(A'=4(15)=60\\).`,
@@ -366,6 +399,7 @@ ch["8.5"] = L("8.5", "How Dilations Affect Perimeter and Area (MA.912.GR.4.3)", 
       {
         h: "Finding k from an area ratio, then finding perimeter",
         p: "A figure with area 24 is dilated to an image with area 216. If the original perimeter was 20, find the new perimeter.",
+        fig: dilationScale(),
         steps: [
           `<strong>Step 1 — Find \\(k^2\\):</strong> \\(k^2=\\dfrac{216}{24}=9\\), so \\(k=3\\).`,
           `<strong>Step 2 — Apply the perimeter scaling rule:</strong> \\(P'=3(20)\\).`,
@@ -375,6 +409,7 @@ ch["8.5"] = L("8.5", "How Dilations Affect Perimeter and Area (MA.912.GR.4.3)", 
       {
         h: "Finding k from a perimeter ratio, then finding area",
         p: "A figure's perimeter goes from 8 to 28 under a dilation. If the original area was 40, find the new area.",
+        fig: dilationScale(),
         steps: [
           `<strong>Step 1 — Find \\(k\\):</strong> \\(k=\\dfrac{28}{8}=3.5\\).`,
           `<strong>Step 2 — Find \\(k^2\\):</strong> \\(k^2=3.5^2=12.25\\).`,
@@ -384,6 +419,7 @@ ch["8.5"] = L("8.5", "How Dilations Affect Perimeter and Area (MA.912.GR.4.3)", 
       {
         h: "Using corresponding sides to compare two similar figures",
         p: "Two similar polygons have corresponding sides 4 and 10. If the smaller polygon's area is 32, find the larger polygon's area.",
+        fig: dilationScale(),
         steps: [
           `<strong>Step 1 — Find the scale factor:</strong> \\(k=\\dfrac{10}{4}=2.5\\).`,
           `<strong>Step 2 — Find \\(k^2\\):</strong> \\(k^2=6.25\\).`,

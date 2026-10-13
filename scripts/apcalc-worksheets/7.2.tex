@@ -1,0 +1,77 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize\color{black!60}Worksheet 7.2}
+\begin{document}
+
+\wstitle{7.2}{Checking a Proposed Solution}{Unit 7: Differential Equations}
+
+\begin{ideabox}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+  \item A \textbf{solution} of a differential equation is a function that makes the equation true for every $x$ in an interval.
+  \item To check: compute the derivatives, substitute into each side \emph{separately}, and compare.
+  \item A \textbf{general} solution has an arbitrary constant; an initial condition selects a \textbf{particular} solution.
+  \item A constant function $y=c$ is a solution exactly when it makes the right-hand side zero.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked examples}
+\begin{example}{Example 1 \textperiodcentered{} A direct check}
+Show that $y=3e^{2x}+1$ is a solution of $\dfrac{dy}{dx}=2y-2$.\soln Left side: $6e^{2x}$. Right side: $2\left(3e^{2x}+1\right)-2=6e^{2x}$.\result{The sides are equal for all $x$.}
+\end{example}
+
+\begin{example}{Example 2 \textperiodcentered{} Finding an exponent}
+For what values of $k$ is $y=e^{kx}$ a solution of $y''-y'-6y=0$?\soln $e^{kx}\left(k^2-k-6\right)=0$, and $e^{kx}\neq0$.\result{$k=3$ or $k=-2$.}
+\end{example}
+
+\begin{example}{Example 3 \textperiodcentered{} Constant solutions}
+Find the constant solutions of $\dfrac{dy}{dt}=y^2-4y+3$.\soln $(y-1)(y-3)=0$.\result{$y=1$ and $y=3$.}
+\end{example}
+
+\newpage
+\sech{Practice}
+
+\level{Core}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item Is $y=e^{-x}$ a solution of $y'+y=0$?\work{2.3cm}
+  \item Is $y=x^2$ a solution of $y'=2y$?\work{2.3cm}
+  \item Find the constant solution of $\dfrac{dy}{dt}=5-y$.\work{2.3cm}
+  \item The general solution of a differential equation is $y=Ce^{x}$. Find the particular solution through $(0,7)$.\work{2.3cm}
+\end{enumerate}
+
+\level{Exam level}
+\begin{enumerate}[leftmargin=*,itemsep=2pt,start=5]
+  \item Show that $y=\sin(3x)$ is a solution of $y''+9y=0$.\work{2.8cm}
+  \item For what values of $m$ is $y=x^m$ a solution of $x^2y''-12y=0$ for $x>0$?\work{2.8cm}
+  \item Show that $y=-\dfrac{3}{x^3+C}$ is a solution of $\dfrac{dy}{dx}=x^2y^2$ for every constant $C$, and find $C$ if the solution passes through $(0,1)$.\work{2.8cm}
+  \item Every function $y=A\cos(2x)$ satisfies $y''+4y=0$. Find $A$ if $y(0)=5$.\work{2.8cm}
+\end{enumerate}
+
+\begin{frbox}{Question 9 \textperiodcentered{} Free-response practice}
+Let $y=xe^{-x}$.
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=2pt]
+  \item Find $\dfrac{dy}{dx}$.\work{2.6cm}
+  \item Show that $y$ is a solution of $\dfrac{dy}{dx}+y=e^{-x}$.\work{2.6cm}
+  \item Find $\dfrac{d^2y}{dx^2}$, and show that $y$ is also a solution of $y''+2y'+y=0$.\work{2.6cm}
+\end{enumerate}
+\end{frbox}
+
+\newpage
+\begin{solbox}
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item Yes: $y'=-e^{-x}$, so $y'+y=0$.
+  \item No: $y'=2x$ but $2y=2x^2$.
+  \item $y=5$.
+  \item $C=7$: $y=7e^{x}$.
+  \item $y''=-9\sin(3x)$, so $y''+9y=0$.
+  \item $m(m-1)-12=(m-4)(m+3)=0$: $m=4$ or $m=-3$.
+  \item $\dfrac{dy}{dx}=\dfrac{9x^2}{(x^3+C)^2}=x^2\cdot\dfrac{9}{(x^3+C)^2}=x^2y^2$. Through $(0,1)$: $-\dfrac3C=1$, so $C=-3$.
+  \item $y(0)=A=5$.
+  \item \begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=3pt]
+    \item $e^{-x}-xe^{-x}=(1-x)e^{-x}$.
+    \item $(1-x)e^{-x}+xe^{-x}=e^{-x}$.
+    \item $y''=-e^{-x}-(1-x)e^{-x}=(x-2)e^{-x}$. Then $y''+2y'+y=\big[(x-2)+2(1-x)+x\big]e^{-x}=0$.
+  \end{enumerate}
+\end{enumerate}
+\end{solbox}
+
+\end{document}

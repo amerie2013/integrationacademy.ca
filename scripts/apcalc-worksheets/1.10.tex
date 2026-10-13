@@ -1,0 +1,77 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize\color{black!60}Worksheet 1.10}
+\begin{document}
+
+\wstitle{1.10}{Guaranteed Values: The Intermediate Value Theorem}{Unit 1: Limits and Continuity}
+
+\begin{ideabox}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+  \item \textbf{IVT.} If $f$ is continuous on $[a,b]$ and $N$ is between $f(a)$ and $f(b)$, then $f(c)=N$ for at least one $c$ in $(a,b)$.
+  \item A justification has three parts: continuity, the inequality with numbers, and the theorem named.
+  \item The theorem guarantees \emph{at least one} value; it does not locate it or count them.
+  \item To show $f(c)=g(c)$ for some $c$, apply the theorem to $h=f-g$.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked examples}
+\begin{example}{Example 1 \textperiodcentered{} A root in an interval}
+Show that $x^3-4x+1=0$ has a solution in $(0,1)$.\soln Let $f(x)=x^3-4x+1$, a polynomial, so $f$ is continuous on $[0,1]$. $f(0)=1$ and $f(1)=-2$, so $f(1)<0<f(0)$.\result{By the Intermediate Value Theorem there is a $c$ in $(0,1)$ with $f(c)=0$.}
+\end{example}
+
+\begin{example}{Example 2 \textperiodcentered{} Counting from a table}
+A function $f$ is continuous on $[0,9]$.\begin{center}\renewcommand{\arraystretch}{1.25}\begin{tabular}{|c|c|c|c|c|c|}\hline $x$ & $0$ & $2$ & $4$ & $7$ & $9$ \\ \hline $f(x)$ & $5$ & $-1$ & $2$ & $6$ & $-3$ \\ \hline\end{tabular}\end{center}What is the least number of zeros of $f$ on $[0,9]$?\soln The sign changes on $[0,2]$, $[2,4]$ and $[7,9]$, but not on $[4,7]$.\result{At least $3$.}
+\end{example}
+
+\begin{example}{Example 3 \textperiodcentered{} Two functions}
+$f$ and $g$ are continuous, with $f(2)=1$, $g(2)=6$, $f(5)=9$, $g(5)=4$. Show that $f(c)=g(c)$ for some $c$ in $(2,5)$.\soln Let $h=f-g$, continuous on $[2,5]$. $h(2)=-5<0$ and $h(5)=5>0$.\result{By the Intermediate Value Theorem $h(c)=0$ for some $c$ in $(2,5)$, so $f(c)=g(c)$.}
+\end{example}
+
+\newpage
+\sech{Practice}
+
+\level{Core}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item State the hypothesis of the Intermediate Value Theorem.\work{2.3cm}
+  \item $f$ is continuous on $[0,3]$ with $f(0)=-2$ and $f(3)=7$. Which of the values $0$, $5$, $8$ must $f$ take on $(0,3)$?\work{2.3cm}
+  \item Show that $x^5+x-1=0$ has a solution in $(0,1)$.\work{2.3cm}
+  \item Explain why the Intermediate Value Theorem cannot be applied to $f(x)=\dfrac{1}{x-1}$ on $[0,2]$.\work{2.3cm}
+\end{enumerate}
+
+\level{Exam level}
+\begin{enumerate}[leftmargin=*,itemsep=2pt,start=5]
+  \item Show that the equation $e^x=4-x^2$ has a solution in $(1,2)$.\work{2.8cm}
+  \item A differentiable function $P$ has $P(1)=12$ and $P(4)=-3$. Must there be a $t$ in $(1,4)$ with $P(t)=5$? Justify.\work{2.8cm}
+  \item $f$ is continuous on $[1,6]$ with $f(1)=4$ and $f(6)=4$. Must $f$ have a zero in $(1,6)$? Explain.\work{2.8cm}
+  \item For which values of $k$ does the theorem guarantee that $f(x)=x^2+x+k$ has a zero in $(0,1)$?\work{2.8cm}
+\end{enumerate}
+
+\begin{frbox}{Question 9 \textperiodcentered{} Free-response practice}
+The temperature in a greenhouse, $T(t)$ $^\circ$C, is a continuous function of time $t$ hours.\begin{center}\renewcommand{\arraystretch}{1.25}\begin{tabular}{|c|c|c|c|c|}\hline $t$ & $0$ & $5$ & $10$ & $20$ \\ \hline $T(t)$ & $18$ & $25$ & $21$ & $30$ \\ \hline\end{tabular}\end{center}
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=2pt]
+  \item Must there be a time $t$, $0<t<5$, at which $T(t)=23$? Justify your answer.\work{2.6cm}
+  \item What is the least number of times in $[0,20]$ at which $T(t)=23$? Show your reasoning.\work{2.6cm}
+  \item A student claims the table shows the temperature never fell below 18 $^\circ$C. Is the claim justified?\work{2.6cm}
+\end{enumerate}
+\end{frbox}
+
+\newpage
+\begin{solbox}
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item $f$ is continuous on the closed interval $[a,b]$.
+  \item $0$ and $5$ (both lie between $-2$ and $7$). Not necessarily $8$.
+  \item $f(x)=x^5+x-1$ is continuous on $[0,1]$; $f(0)=-1<0<1=f(1)$. By the IVT there is a $c$ in $(0,1)$ with $f(c)=0$.
+  \item $f$ is not continuous on $[0,2]$: it is undefined at $x=1$.
+  \item Let $h(x)=e^x+x^2-4$, continuous on $[1,2]$. $h(1)=e-3<0$ and $h(2)=e^2>0$. By the IVT $h(c)=0$ for some $c$ in $(1,2)$.
+  \item Yes. $P$ is differentiable, hence continuous, on $[1,4]$, and $P(4)=-3<5<12=P(1)$. By the IVT such a $t$ exists.
+  \item Not necessarily. $0$ is not between $f(1)$ and $f(6)$, so the theorem guarantees nothing.
+  \item $f(0)=k$ and $f(1)=2+k$. Zero lies between them when $k<0<2+k$: $-2<k<0$.
+  \item \begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=3pt]
+    \item Yes. $T$ is continuous on $[0,5]$ and $T(0)=18<23<25=T(5)$. By the Intermediate Value Theorem there is a time $t$ in $(0,5)$ with $T(t)=23$.
+    \item 23 lies between the endpoint values on $[0,5]$ (18 and 25), on $[5,10]$ (25 and 21) and on $[10,20]$ (21 and 30). At least $3$ times.
+    \item No. The table gives the temperature at four times only; between them $T$ may have dipped below 18 and returned.
+  \end{enumerate}
+\end{enumerate}
+\end{solbox}
+
+\end{document}

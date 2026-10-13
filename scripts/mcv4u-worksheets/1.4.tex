@@ -4,61 +4,103 @@
 \begin{document}
 
 \begin{center}
-{\LARGE\bfseries\color{titleblue}Worksheet 1.4 --- The Derivative from First Principles}\\[2pt]
+{\LARGE\bfseries\color{titleblue}Worksheet 1.4 --- Slope of Tangent}\\[2pt]
 {\small Grade 12 Calculus and Vectors (MCV4U) \textperiodcentered{} Unit 1: Rates of Change and Limits}
 \end{center}
 
 \begin{ideabox}
-$f'(x)=\displaystyle\lim_{h\to0}\dfrac{f(x+h)-f(x)}{h}$. Expand, simplify to cancel $h$, then let $h\to0$.
+Now that limits are exact (Lessons 1.2--1.3), find the tangent slope at a specific point $x=a$ exactly: $m=\displaystyle\lim_{h\to0}\dfrac{f(a+h)-f(a)}{h}$. Then the tangent line is $y-f(a)=m(x-a)$.
 \begin{itemize}[leftmargin=*,itemsep=2pt]
-  \item $f'(x)=\displaystyle\lim_{h\to0}\dfrac{f(x+h)-f(x)}{h}$.
-  \item Combine fractions / rationalize so $h$ cancels.
-  \item Tangent line at $a$: $y-f(a)=f'(a)(x-a)$.
+  \item $m=\displaystyle\lim_{h\to0}\dfrac{f(a+h)-f(a)}{h}$ --- expand, simplify to cancel $h$, then let $h\to0$.
+  \item Tangent line at $a$: $y-f(a)=m(x-a)$.
+  \item This is the exact version of Lesson 1.1's estimate.
 \end{itemize}
 \end{ideabox}
 
 \begin{learnbox}
-\lh{The definition}The \textbf{derivative} is $f'(x)=\displaystyle\lim_{h\to0}\dfrac{f(x+h)-f(x)}{h}$ — the limit of the secant slope as the interval collapses to zero.
-\lh{What it measures}$f'(x)$ gives the instantaneous rate of change, equivalently the slope of the tangent line at $x$.
-\lh{First principles}Computing this limit directly is differentiating from \emph{first principles}, and it justifies the shortcut rules that follow.
+\lh{Exact, not estimated}Lesson 1.1 estimated the tangent slope with a tiny $h$. Now that limits are exact, the tangent slope at $x=a$ is $m=\displaystyle\lim_{h\to0}\dfrac{f(a+h)-f(a)}{h}$, computed precisely.
+\lh{One point at a time}This limit is evaluated at a specific number $a$ — the next lesson generalizes it to every $x$ at once.
+\lh{The tangent line}Once $m$ and the point $(a,f(a))$ are known, the tangent line follows from point-slope form: $y-f(a)=m(x-a)$.
 \end{learnbox}
 
 \sech{Worked Examples}
 
-\begin{example}{ex0}{Example 1 --- Polynomial}
-Differentiate $f(x)=x^2$ from first principles.\soln $\dfrac{(x+h)^2-x^2}{h}=2x+h\to f'(x)=2x$.
+\begin{example}{ex0}{Example 1 --- Confirming the estimate}
+Find the exact tangent slope of $f(x)=3x^2$ at $x=2$.\soln
+\textbf{Step 1 (form the quotient):} $\dfrac{f(2+h)-f(2)}{h}=\dfrac{3(2+h)^2-12}{h}$.\\[3pt]
+\textbf{Step 2 (expand):} $3(2+h)^2=3(4+4h+h^2)=12+12h+3h^2$, so the numerator is $12h+3h^2$.\\[3pt]
+\textbf{Step 3 (factor and cancel $h$):} $\dfrac{12h+3h^2}{h}=12+3h$.\\[3pt]
+\textbf{Step 4 (limit):} $\lim_{h\to0}(12+3h)=12$.\\[3pt]
+\textbf{Conclusion:} $m=12$ exactly --- matching Lesson 1.1's estimate of $\approx12$:\eplot{-1}{3}{-2}{18}{\addplot[exblue,very thick,domain=-1:2.44]{3*x^2};\addplot[qorange,thick,domain=0.9:2.5]{12*x-12};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(2,12)};}
 \end{example}
 
-\begin{example}{ex1}{Example 2 --- Polynomial}
-Differentiate $f(x)=3x^2-x$ from first principles.\soln Numerator $=6xh+3h^2-h$; divide by $h$ and let $h\to0$: $f'(x)=6x-1$.
+\begin{example}{ex1}{Example 2 --- Tangent line}
+Find the tangent line to $y=x^2$ at $x=-3$.\soln
+\textbf{Step 1 (find the slope):} $\dfrac{(-3+h)^2-9}{h}=\dfrac{-6h+h^2}{h}=-6+h\to-6$.\\[3pt]
+\textbf{Step 2 (find the point):} $f(-3)=9$, so the point is $(-3,9)$.\\[3pt]
+\textbf{Step 3 (point-slope form):} $y-9=-6(x+3)$.\\[3pt]
+\textbf{Conclusion:} $y=-6x-9$:\eplot{-5}{1}{-2}{16}{\addplot[exblue,very thick,domain=-4:1]{x^2};\addplot[qorange,thick,domain=-4.2:-1]{-6*x-9};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(-3,9)};}
 \end{example}
 
-\begin{example}{ex2}{Example 3 --- Reciprocal}
-Differentiate $f(x)=\dfrac1x$ from first principles.\soln $\dfrac{\frac1{x+h}-\frac1x}{h}=\dfrac{-1}{x(x+h)}\to f'(x)=-\dfrac1{x^2}$.
+\begin{example}{ex2}{Example 3 --- Polynomial}
+Find the exact tangent slope of $f(x)=2x^2+x$ at $x=-1$.\soln
+\textbf{Step 1 (form the quotient):} $\dfrac{f(-1+h)-f(-1)}{h}=\dfrac{[2(-1+h)^2+(-1+h)]-1}{h}$.\\[3pt]
+\textbf{Step 2 (expand):} $2(-1+h)^2+(-1+h)=2(1-2h+h^2)-1+h=2-4h+2h^2-1+h=1-3h+2h^2$, so the numerator is $-3h+2h^2$.\\[3pt]
+\textbf{Step 3 (factor and cancel $h$):} $\dfrac{-3h+2h^2}{h}=-3+2h$.\\[3pt]
+\textbf{Step 4 (limit):} $\lim_{h\to0}(-3+2h)=-3$.\\[3pt]
+\textbf{Conclusion:} $m=-3$.
 \end{example}
 
-\begin{example}{ex3}{Example 4 --- Tangent line}
-Find the tangent to $y=x^2$ at $x=3$.\soln $f'(3)=6$, point $(3,9)$: $y=6x-9$:\eplot{-1}{5}{-2}{12}{\addplot[exblue,very thick,domain=-1.4:3.4]{x^2};\addplot[qorange,thick,domain=1.2:5]{6*x-9};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(3,9)};}
+\begin{example}{ex3}{Example 4 --- Reciprocal}
+Find the exact tangent slope of $f(x)=\dfrac1x$ at $x=4$.\soln
+\textbf{Step 1 (form the quotient):} $\dfrac{f(4+h)-f(4)}{h}=\dfrac{\frac1{4+h}-\frac14}{h}$.\\[3pt]
+\textbf{Step 2 (combine the fractions):} $\dfrac1{4+h}-\dfrac14=\dfrac{4-(4+h)}{4(4+h)}=\dfrac{-h}{4(4+h)}$.\\[3pt]
+\textbf{Step 3 (divide by $h$ and cancel):} $\dfrac{-h}{4(4+h)h}=\dfrac{-1}{4(4+h)}$.\\[3pt]
+\textbf{Step 4 (limit):} $\lim_{h\to0}\dfrac{-1}{4(4+h)}=\dfrac{-1}{16}$.\\[3pt]
+\textbf{Conclusion:} $m=-\dfrac1{16}$.
 \end{example}
 
 \begin{example}{ex4}{Example 5 --- Radical}
-Differentiate $f(x)=\sqrt{x}$ from first principles.\soln Rationalize: $\dfrac{1}{\sqrt{x+h}+\sqrt{x}}\to f'(x)=\dfrac1{2\sqrt{x}}$.
+Find the exact tangent slope of $f(x)=\sqrt{x}$ at $x=16$.\soln
+\textbf{Step 1 (form the quotient):} $\dfrac{\sqrt{16+h}-\sqrt{16}}{h}=\dfrac{\sqrt{16+h}-4}{h}$.\\[3pt]
+\textbf{Step 2 (multiply by the conjugate):} $\dfrac{(16+h)-16}{h(\sqrt{16+h}+4)}=\dfrac{h}{h(\sqrt{16+h}+4)}$.\\[3pt]
+\textbf{Step 3 (cancel $h$):} $=\dfrac{1}{\sqrt{16+h}+4}$.\\[3pt]
+\textbf{Step 4 (limit):} $\lim_{h\to0}\dfrac{1}{\sqrt{16+h}+4}=\dfrac{1}{4+4}$.\\[3pt]
+\textbf{Conclusion:} $m=\dfrac18$.
 \end{example}
 
 \begin{example}{ex5}{Example 6 --- Polynomial}
-Differentiate $f(x)=x^2+5x$ from first principles.\soln $\dfrac{(x+h)^2+5(x+h)-(x^2+5x)}{h}=2x+5+h\to 2x+5$.
+Find the exact tangent slope of $f(x)=x^2+5x$ at $x=2$.\soln
+\textbf{Step 1 (form the quotient):} $\dfrac{[(2+h)^2+5(2+h)]-14}{h}$.\\[3pt]
+\textbf{Step 2 (expand):} $(2+h)^2+5(2+h)=4+4h+h^2+10+5h=14+9h+h^2$, so the numerator is $9h+h^2$.\\[3pt]
+\textbf{Step 3 (factor and cancel $h$):} $\dfrac{9h+h^2}{h}=9+h$.\\[3pt]
+\textbf{Step 4 (limit):} $\lim_{h\to0}(9+h)=9$.\\[3pt]
+\textbf{Conclusion:} $m=9$.
 \end{example}
 
-\begin{example}{ex6}{Example 7 --- Polynomial}
-Differentiate $f(x)=2x^2$ from first principles.\soln $\dfrac{2(x+h)^2-2x^2}{h}=4x+2h\to4x$.
+\begin{example}{ex6}{Example 7 --- Tangent line}
+Find the tangent line to $y=2x^2$ at $x=1$.\soln
+\textbf{Step 1 (find the slope):} $\dfrac{2(1+h)^2-2}{h}=\dfrac{4h+2h^2}{h}=4+2h\to4$.\\[3pt]
+\textbf{Step 2 (find the point):} $f(1)=2$, so the point is $(1,2)$.\\[3pt]
+\textbf{Step 3 (point-slope form):} $y-2=4(x-1)$.\\[3pt]
+\textbf{Conclusion:} $y=4x-2$:\eplot{-1}{3}{-2}{10}{\addplot[exblue,very thick,domain=-1:2.24]{2*x^2};\addplot[qorange,thick,domain=-1:3]{4*x-2};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(1,2)};}
 \end{example}
 
-\begin{example}{ex7}{Example 8 --- Tangent line}
-Find the tangent to $y=x^2$ at $x=1$.\soln $f'(1)=2$, point $(1,1)$: $y=2x-1$.
+\begin{example}{ex7}{Example 8 --- Linear}
+Find the exact tangent slope of $f(x)=5x-3$ at $x=4$.\soln
+\textbf{Step 1 (form the quotient):} $\dfrac{[5(4+h)-3]-17}{h}$.\\[3pt]
+\textbf{Step 2 (expand):} $5(4+h)-3=20+5h-3=17+5h$, so the numerator is $5h$.\\[3pt]
+\textbf{Step 3 (divide by $h$):} $\dfrac{5h}{h}=5$ --- no $h$ remains.\\[3pt]
+\textbf{Conclusion:} $m=5$ (a line's slope is constant everywhere).
 \end{example}
 
-\begin{example}{ex8}{Example 9 --- Linear}
-Differentiate $f(x)=5x-3$ from first principles.\soln $\dfrac{5(x+h)-3-(5x-3)}{h}=5\to f'(x)=5$.
+\begin{example}{ex8}{Example 9 --- Polynomial}
+Find the exact tangent slope of $f(x)=4x^2-x$ at $x=-1$.\soln
+\textbf{Step 1 (form the quotient):} $\dfrac{[4(-1+h)^2-(-1+h)]-5}{h}$.\\[3pt]
+\textbf{Step 2 (expand):} $4(-1+h)^2-(-1+h)=4(1-2h+h^2)+1-h=4-8h+4h^2+1-h=5-9h+4h^2$, so the numerator is $-9h+4h^2$.\\[3pt]
+\textbf{Step 3 (factor and cancel $h$):} $\dfrac{-9h+4h^2}{h}=-9+4h$.\\[3pt]
+\textbf{Step 4 (limit):} $\lim_{h\to0}(-9+4h)=-9$.\\[3pt]
+\textbf{Conclusion:} $m=-9$.
 \end{example}
 
 \clearpage
@@ -66,55 +108,55 @@ Differentiate $f(x)=5x-3$ from first principles.\soln $\dfrac{5(x+h)-3-(5x-3)}{h
 For each question, show all steps clearly in the space provided.
 
 \begin{qbox}{Question 1}
-Differentiate $f(x)=x^2$ from first principles.\workspace{2.4cm}
+Find the exact tangent slope of $f(x)=x^2$ at $x=7$.\workspace{2.4cm}
 \end{qbox}
 
 \begin{qbox}{Question 2}
-Differentiate $f(x)=x^2+5x$ from first principles.\workspace{2.4cm}
+Find the tangent line to $y=x^2$ at $x=-4$.\workspace{2.4cm}
 \end{qbox}
 
 \begin{qbox}{Question 3}
-Differentiate $f(x)=2x^2$ from first principles.\workspace{2.4cm}
+Find the exact tangent slope of $f(x)=2x^2$ at $x=4$.\workspace{2.4cm}
 \end{qbox}
 
 \begin{qbox}{Question 4}
-Find the tangent to $y=x^2$ at $x=1$.\workspace{2.4cm}
+Find the exact tangent slope of $f(x)=\dfrac1x$ at $x=-3$.\workspace{2.4cm}
 \end{qbox}
 
 \begin{qbox}{Question 5}
-Differentiate $f(x)=5x-3$ from first principles.\workspace{2.4cm}
+Find the exact tangent slope of $f(x)=\sqrt{x}$ at $x=9$.\workspace{2.4cm}
 \end{qbox}
 
 \begin{qbox}{Question 6}
-Differentiate $f(x)=4x^2-x$ from first principles.\workspace{2.4cm}
+Find the exact tangent slope of $f(x)=3x^2-x$ at $x=2$.\workspace{2.4cm}
 \end{qbox}
 
 \begin{qbox}{Question 7}
-Differentiate $f(x)=\dfrac1x$ from first principles.\workspace{2.4cm}
+Find the tangent line to $y=x^2$ at $x=-2$.\workspace{2.4cm}
 \end{qbox}
 
 \begin{qbox}{Question 8}
-Find the tangent to $y=x^2$ at $x=2$.\workspace{2.4cm}
+Find the exact tangent slope of $f(x)=5x-3$ at $x=10$.\workspace{2.4cm}
 \end{qbox}
 
 \begin{qbox}{Question 9}
-Differentiate $f(x)=x^2-3x$ from first principles.\workspace{2.4cm}
+Find the exact tangent slope of $f(x)=x^2+5x$ at $x=0$.\workspace{2.4cm}
 \end{qbox}
 
 \begin{qbox}{Question 10}
-Differentiate $f(x)=7$ from first principles.\workspace{2.4cm}
+Find the exact tangent slope of $f(x)=4x^2-x$ at $x=1$.\workspace{2.4cm}
 \end{qbox}
 
 \begin{qbox}{Question 11}
-Find the tangent to $y=x^2$ at $x=-1$.\workspace{2.4cm}
+Find the tangent line to $y=3x^2$ at $x=1$.\workspace{2.4cm}
 \end{qbox}
 
 \begin{qbox}{Question 12}
-Differentiate $f(x)=3x^2$ from first principles.\workspace{2.4cm}
+Find the exact tangent slope of $f(x)=\dfrac1x$ at $x=-1$.\workspace{2.4cm}
 \end{qbox}
 
 \begin{qbox}{Question 13 --- Challenge}
-Differentiate $f(x)=\sqrt{x}$ from first principles (rationalize).\workspace{3.5cm}
+Find the exact tangent slope of $f(x)=\sqrt{x}$ at $x=1$ (rationalize).\workspace{3.5cm}
 \end{qbox}
 
 \clearpage
@@ -124,19 +166,19 @@ Differentiate $f(x)=\sqrt{x}$ from first principles (rationalize).\workspace{3.5
 \begin{multicols}{2}
 \small
 \begin{enumerate}[leftmargin=*,itemsep=3pt]
-  \item Differentiate $f(x)=x^2$ from first principles.
-  \item Differentiate $f(x)=x^2+5x$ from first principles.
-  \item Differentiate $f(x)=2x^2$ from first principles.
-  \item Find the tangent to $y=x^2$ at $x=1$.
-  \item Differentiate $f(x)=5x-3$ from first principles.
-  \item Differentiate $f(x)=4x^2-x$ from first principles.
-  \item Differentiate $f(x)=\dfrac1x$ from first principles.
-  \item Find the tangent to $y=x^2$ at $x=2$.
-  \item Differentiate $f(x)=x^2-3x$ from first principles.
-  \item Differentiate $f(x)=7$ from first principles.
-  \item Find the tangent to $y=x^2$ at $x=-1$.
-  \item Differentiate $f(x)=3x^2$ from first principles.
-  \item Differentiate $f(x)=\sqrt{x}$ from first principles (rationalize).
+  \item Find the exact tangent slope of $f(x)=x^2$ at $x=7$.
+  \item Find the tangent line to $y=x^2$ at $x=-4$.
+  \item Find the exact tangent slope of $f(x)=2x^2$ at $x=4$.
+  \item Find the exact tangent slope of $f(x)=\dfrac1x$ at $x=-3$.
+  \item Find the exact tangent slope of $f(x)=\sqrt{x}$ at $x=9$.
+  \item Find the exact tangent slope of $f(x)=3x^2-x$ at $x=2$.
+  \item Find the tangent line to $y=x^2$ at $x=-2$.
+  \item Find the exact tangent slope of $f(x)=5x-3$ at $x=10$.
+  \item Find the exact tangent slope of $f(x)=x^2+5x$ at $x=0$.
+  \item Find the exact tangent slope of $f(x)=4x^2-x$ at $x=1$.
+  \item Find the tangent line to $y=3x^2$ at $x=1$.
+  \item Find the exact tangent slope of $f(x)=\dfrac1x$ at $x=-1$.
+  \item Find the exact tangent slope of $f(x)=\sqrt{x}$ at $x=1$ (rationalize).
 \end{enumerate}
 \end{multicols}
 \end{recapbox}
@@ -145,19 +187,19 @@ Differentiate $f(x)=\sqrt{x}$ from first principles (rationalize).\workspace{3.5
 \begin{multicols}{2}
 \small
 \begin{enumerate}[leftmargin=*,itemsep=3pt]
-  \item $2x$
-  \item $2x+5$
-  \item $4x$
-  \item $y=2x-1$
+  \item $14$
+  \item $y=-8x-16$
+  \item $16$
+  \item $-\tfrac19$
+  \item $\tfrac16$
+  \item $11$
+  \item $y=-4x-4$
   \item $5$
-  \item $8x-1$
-  \item $-\tfrac1{x^2}$
-  \item $y=4x-4$
-  \item $2x-3$
-  \item $0$
-  \item $y=-2x-1$
-  \item $6x$
-  \item $\tfrac1{2\sqrt{x}}$
+  \item $5$
+  \item $7$
+  \item $y=6x-3$
+  \item $-1$
+  \item $\tfrac12$
 \end{enumerate}
 \end{multicols}
 \end{keybox}

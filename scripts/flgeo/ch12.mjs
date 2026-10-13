@@ -11,6 +11,21 @@ import {
   copyAngleFig, bisectFig, incenterFig, circumcenterFig,
   sampleSpaceFig, treeDiagram, twoWayTable, permuteCombine,
 } from "./figures2.mjs";
+import {
+  threePointsPlane, collinearPts, numberLineDist, midpointAlgebra, classifyAngles,
+  copyAngleObtuse, angleCombine, biconditionalFig, paragraphProofFig,
+  parallelConverse, perpTransversal, horizVert, constructPerpOnLine, constructRectangle,
+  translatePolygon, reflectYX, reflectVertical, rotate180, rotate270, glideReflect,
+  parallelReflect, intersectReflect, parallelogramSym, squareSym, scaleneNoSym,
+  exteriorAngle, angleSumTri, equilateralFig, altitudeIsos, aasMarks, medianFig,
+  dilatePoint, sssSimilar, sasSimilar, midsegmentTri, threeParallel, mirrorMethod,
+  depressionFig, guyWire, twoElevations,
+  diameterChord, semicircleRight, chordPerp, chordChord, tangentSecant, twoSecants, circleEq,
+  pyramidFig, coneFig, sphereFig, densityFig, popDensity, coneSlice, sphereSlice, frustumFig,
+  dieFig, bagMarbles, complementFig, cardsFig, expectedValue, withWithout,
+} from "./figures3.mjs";
+import { hexagonSymmetryFig } from "./figures2.mjs";
+import { copySegment, angleBisector } from "./figures.mjs";
 
 export const ch = {};
 
@@ -32,24 +47,28 @@ ch["12.1"] = L("12.1", "Introduction to Probability and Sample Spaces (MA.912.DP
       {
         h: "Basic probability from a die",
         p: "A fair six-sided die is rolled. Find \\(P(\\text{rolling a } 4)\\).",
+        fig: dieFig(),
         steps: [`Sample space: \\(S = \\{1,2,3,4,5,6\\}\\), so \\(n(S) = 6\\)`, `Only one outcome is favorable: \\(n(E) = 1\\)`, `\\(P(4) = \\dfrac{1}{6}\\)`],
         check: `\\(P(4) = \\dfrac{1}{6}\\).`,
       },
       {
         h: "Counting multiple favorable outcomes",
         p: "A fair six-sided die is rolled. Find \\(P(\\text{rolling an even number})\\).",
+        fig: dieFig(),
         steps: [`Favorable outcomes: \\(\\{2,4,6\\}\\), so \\(n(E) = 3\\)`, `\\(P(\\text{even}) = \\dfrac{3}{6}\\)`, `Simplify: \\(\\dfrac{3}{6} = \\dfrac{1}{2}\\)`],
         check: `\\(P(\\text{even}) = \\dfrac{1}{2}\\).`,
       },
       {
         h: "Probability from a bag of marbles",
         p: "A bag contains 5 red, 3 blue, and 2 green marbles. One marble is drawn at random. Find \\(P(\\text{green})\\).",
+        fig: bagMarbles(),
         steps: [`Total marbles: \\(n(S) = 5+3+2 = 10\\)`, `Favorable (green): \\(n(E) = 2\\)`, `\\(P(\\text{green}) = \\dfrac{2}{10} = \\dfrac{1}{5}\\)`],
         check: `\\(P(\\text{green}) = \\dfrac{1}{5}\\).`,
       },
       {
         h: "Using the complement rule",
         p: "Using the same bag (5 red, 3 blue, 2 green out of 10), find \\(P(\\text{not red})\\) using the complement rule.",
+        fig: complementFig(),
         steps: [`\\(P(\\text{red}) = \\dfrac{5}{10} = \\dfrac{1}{2}\\)`, `\\(P(\\text{not red}) = 1 - P(\\text{red}) = 1 - \\dfrac{1}{2}\\)`, `\\(P(\\text{not red}) = \\dfrac{1}{2}\\)`],
         check: `\\(P(\\text{not red}) = \\dfrac{1}{2}\\), matching the direct count of \\(\\tfrac{3+2}{10}\\).`,
       },
@@ -102,6 +121,7 @@ ch["12.2"] = L("12.2", "Independent and Dependent Events (MA.912.DP.1.2)", [
       {
         h: "Dependent events without replacement",
         p: "Two cards are drawn without replacement from a standard 52-card deck. Find \\(P(\\text{both are aces})\\).",
+        fig: withWithout(),
         steps: [
           `\\(P(\\text{first ace}) = \\dfrac{4}{52}\\)`,
           `After removing one ace, only 3 aces remain out of 51 cards: \\(P(\\text{second ace}) = \\dfrac{3}{51}\\)`,
@@ -112,6 +132,7 @@ ch["12.2"] = L("12.2", "Independent and Dependent Events (MA.912.DP.1.2)", [
       {
         h: "Dependent events with a bag of marbles",
         p: "A bag has 4 red and 6 blue marbles (10 total). Two are drawn without replacement. Find \\(P(\\text{both blue})\\).",
+        fig: bagMarbles(),
         steps: [
           `\\(P(\\text{first blue}) = \\dfrac{6}{10}\\)`,
           `After removing one blue marble, 5 blue remain out of 9 total: \\(P(\\text{second blue}) = \\dfrac{5}{9}\\)`,
@@ -122,6 +143,7 @@ ch["12.2"] = L("12.2", "Independent and Dependent Events (MA.912.DP.1.2)", [
       {
         h: "The same bag, but with replacement",
         p: "Using the same bag (4 red, 6 blue), a marble is drawn, replaced, then a second is drawn. Find \\(P(\\text{both blue})\\).",
+        fig: withWithout(),
         steps: [
           `Because the marble is replaced, the bag is identical for both draws — the events are independent.`,
           `\\(P(\\text{blue}) = \\dfrac{6}{10} = \\dfrac{3}{5}\\) each time`,
@@ -132,6 +154,7 @@ ch["12.2"] = L("12.2", "Independent and Dependent Events (MA.912.DP.1.2)", [
       {
         h: "Two independent dice rolls",
         p: "Two dice are rolled. Find \\(P(\\text{first die shows } 3 \\text{ and second die shows } 5)\\).",
+        fig: dieFig(),
         steps: [`Each die's outcome has no effect on the other, so the events are independent.`, `\\(P(\\text{first is }3) = \\dfrac{1}{6}\\), \\(P(\\text{second is }5) = \\dfrac{1}{6}\\)`, `\\(P = \\dfrac{1}{6}\\cdot\\dfrac{1}{6} = \\dfrac{1}{36}\\)`],
         check: `\\(P = \\dfrac{1}{36}\\).`,
       },
@@ -177,24 +200,28 @@ ch["12.3"] = L("12.3", "Conditional Probability (MA.912.DP.1.4)", [
       {
         h: "Reversing the condition",
         p: "Using the same table, find \\(P(\\text{boy} \\mid \\text{likes sports})\\).",
+        fig: twoWayTable(),
         steps: [`Restrict attention to students who like sports: \\(40+20 = 60\\) total.`, `Of those, 40 are boys.`, `\\(P(\\text{boy}\\mid\\text{likes sports}) = \\dfrac{40}{60} = \\dfrac{2}{3}\\)`],
         check: `\\(P = \\dfrac{2}{3}\\), different from the previous example.`,
       },
       {
         h: "Using the conditional probability formula directly",
         p: "\\(P(A \\text{ and } B) = 0.15\\) and \\(P(B) = 0.25\\). Find \\(P(A \\mid B)\\).",
+        fig: twoWayTable(),
         steps: [`\\(P(A\\mid B) = \\dfrac{P(A\\text{ and }B)}{P(B)} = \\dfrac{0.15}{0.25}\\)`, `\\(P(A\\mid B) = 0.6 = \\dfrac{3}{5}\\)`],
         check: `\\(P(A\\mid B) = \\dfrac{3}{5}\\).`,
       },
       {
         h: "Checking for independence",
         p: "\\(P(A) = 0.4\\) and \\(P(A\\mid B) = 0.4\\). Are \\(A\\) and \\(B\\) independent?",
+        fig: twoWayTable(),
         steps: [`Independence requires \\(P(A\\mid B) = P(A)\\).`, `Since \\(0.4 = 0.4\\), the condition holds.`],
         check: "Yes — A and B are independent, since knowing B occurred didn't change the probability of A.",
       },
       {
         h: "Conditional probability with cards",
         p: "One card is drawn from a standard deck. Find \\(P(\\text{King} \\mid \\text{face card})\\).",
+        fig: cardsFig(),
         steps: [`There are 12 face cards (J, Q, K in each of 4 suits).`, `Of those, 4 are Kings.`, `\\(P(\\text{King}\\mid\\text{face card}) = \\dfrac{4}{12} = \\dfrac{1}{3}\\)`],
         check: `\\(P = \\dfrac{1}{3}\\).`,
       },
@@ -241,24 +268,28 @@ ch["12.4"] = L("12.4", "Permutations and Combinations (MA.912.DP.1.3)", [
       {
         h: "Combination — a committee",
         p: "How many ways can a committee of 3 students be chosen from a class of 8?",
+        fig: permuteCombine(),
         steps: [`A committee has no ranking — order doesn't matter, so use a combination.`, `\\(_8C_3 = \\dfrac{8!}{3!\\,5!}\\)`, `\\(_8C_3 = \\dfrac{8\\cdot7\\cdot6}{3\\cdot2\\cdot1} = \\dfrac{336}{6} = 56\\)`],
         check: `\\(_8C_3 = 56\\).`,
       },
       {
         h: "Permutation — arranging letters",
         p: "How many 4-letter arrangements (no repeats) can be made from the 7 letters A, B, C, D, E, F, G?",
+        fig: permuteCombine(),
         steps: [`The order of the letters matters, so use a permutation.`, `\\(_7P_4 = \\dfrac{7!}{(7-4)!} = \\dfrac{7!}{3!}\\)`, `\\(_7P_4 = 7\\cdot6\\cdot5\\cdot4 = 840\\)`],
         check: `\\(_7P_4 = 840\\).`,
       },
       {
         h: "Combination — pizza toppings",
         p: "A pizza shop offers 10 toppings. How many different 3-topping pizzas can be made (order of toppings doesn't matter)?",
+        fig: permuteCombine(),
         steps: [`Choosing toppings has no order, so use a combination.`, `\\(_{10}C_3 = \\dfrac{10!}{3!\\,7!} = \\dfrac{10\\cdot9\\cdot8}{3\\cdot2\\cdot1}\\)`, `\\(_{10}C_3 = \\dfrac{720}{6} = 120\\)`],
         check: `\\(_{10}C_3 = 120\\).`,
       },
       {
         h: "Using counting in a probability problem",
         p: "5 different books are placed on a shelf in a completely random order. Find the probability they land in one specific order (say, alphabetical).",
+        fig: permuteCombine(),
         steps: [`Total arrangements: \\(5! = 120\\)`, `Only 1 of those arrangements is the specific order asked for.`, `\\(P(\\text{that exact order}) = \\dfrac{1}{120}\\)`],
         check: `\\(P = \\dfrac{1}{120}\\).`,
       },
@@ -298,18 +329,21 @@ ch["12.5"] = L("12.5", "Probability Models and Real-World Applications (MA.912.D
       {
         h: "Building a probability model",
         p: "A spinner has 4 equal-sized sections colored red, blue, green, and yellow. Build the probability model and confirm it's valid.",
+        fig: sampleSpaceFig(),
         steps: [`Each of the 4 equally sized sections has the same chance: \\(P(\\text{each color}) = \\dfrac{1}{4}\\)`, `Check the total: \\(\\dfrac{1}{4}+\\dfrac{1}{4}+\\dfrac{1}{4}+\\dfrac{1}{4} = 1\\)`],
         check: "The model is valid since the probabilities sum to 1.",
       },
       {
         h: "Experimental probability",
         p: "A basketball player made 18 of her last 25 free throws in practice. Estimate the probability she makes her next free throw.",
+        fig: dieFig(),
         steps: [`Experimental probability \\(= \\dfrac{\\text{successes}}{\\text{trials}} = \\dfrac{18}{25}\\)`, `This fraction is already in lowest terms (gcd(18,25) = 1).`],
         check: `\\(P(\\text{make next shot}) \\approx \\dfrac{18}{25}\\).`,
       },
       {
         h: "Expected value and fairness",
         p: "A game costs $2 to play. You win $10 with probability \\(\\dfrac{1}{10}\\), and win nothing otherwise. Find the expected winnings, and decide if the game is fair.",
+        fig: expectedValue(),
         steps: [
           `\\(E = 10\\left(\\dfrac{1}{10}\\right) + 0\\left(\\dfrac{9}{10}\\right)\\)`,
           `\\(E = 1 + 0 = 1\\)`,
@@ -320,12 +354,14 @@ ch["12.5"] = L("12.5", "Probability Models and Real-World Applications (MA.912.D
       {
         h: "Weighted probability model",
         p: "A weighted spinner has \\(P(\\text{red}) = 0.5\\), \\(P(\\text{blue}) = 0.3\\), and \\(P(\\text{green}) = 0.2\\). Find \\(P(\\text{not green})\\) as a fraction in lowest terms.",
+        fig: expectedValue(),
         steps: [`Check the model: \\(0.5+0.3+0.2 = 1\\), so it's valid.`, `\\(P(\\text{not green}) = 1 - 0.2 = 0.8\\)`, `As a fraction: \\(0.8 = \\dfrac{8}{10} = \\dfrac{4}{5}\\)`],
         check: `\\(P(\\text{not green}) = \\dfrac{4}{5}\\).`,
       },
       {
         h: "Expected value in a real decision",
         p: "A $500 appliance has a 2% chance of needing a $500 warranty repair within a year. Is it worth buying a $15 warranty?",
+        fig: expectedValue(),
         steps: [
           `Expected repair cost without warranty: \\(E = 500(0.02) + 0(0.98) = 10\\)`,
           `The expected cost of *not* buying the warranty is $10, which is less than the $15 warranty price.`,

@@ -1,0 +1,77 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize\color{black!60}Worksheet 2.6}
+\begin{document}
+
+\wstitle{2.6}{Derivatives of Sine, Cosine, $e^{x}$ and $\ln x$}{Unit 2: The Derivative}
+
+\begin{ideabox}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+  \item $\dfrac{d}{dx}[\sin x]=\cos x$ \quad and \quad $\dfrac{d}{dx}[\cos x]=-\sin x$ \quad ($x$ in radians).
+  \item $\dfrac{d}{dx}\left[e^{x}\right]=e^{x}$ \quad and \quad $\dfrac{d}{dx}[\ln x]=\dfrac1x$ for $x>0$.
+  \item These combine with the sum and constant-multiple rules exactly as powers do.
+  \item Exact trigonometric values are expected: know sine and cosine at $0,\ \tfrac\pi6,\ \tfrac\pi4,\ \tfrac\pi3,\ \tfrac\pi2$.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked examples}
+\begin{example}{Example 1 \textperiodcentered{} A sum}
+Find $\dfrac{d}{dx}\left[3\sin x-4\cos x+2e^{x}\right]$.\soln Differentiate each term; the derivative of $-4\cos x$ is $+4\sin x$.\result{$3\cos x+4\sin x+2e^{x}$.}
+\end{example}
+
+\begin{example}{Example 2 \textperiodcentered{} A tangent line}
+Write an equation of the line tangent to $y=\ln x$ at $x=2$.\soln The point is $(2,\ln2)$ and the slope is $\dfrac12$.\result{$y-\ln2=\dfrac12(x-2)$.}
+\end{example}
+
+\begin{example}{Example 3 \textperiodcentered{} Horizontal tangents}
+Find the values of $x$ in $[0,2\pi]$ at which $y=\sqrt3\,x+2\cos x$ has a horizontal tangent.\soln $y'=\sqrt3-2\sin x=0$ gives $\sin x=\dfrac{\sqrt3}{2}$.\result{$x=\dfrac\pi3$ and $x=\dfrac{2\pi}{3}$.}
+\end{example}
+
+\newpage
+\sech{Practice}
+
+\level{Core}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item Find $\dfrac{d}{dx}\left[5e^{x}\right]$.\work{2.3cm}
+  \item Find $\dfrac{d}{dx}\left[2\sin x+x^3\right]$.\work{2.3cm}
+  \item Find $\dfrac{d}{dx}\left[4\ln x-x\right]$.\work{2.3cm}
+  \item For $f(x)=\cos x$, find $f'\!\left(\dfrac\pi6\right)$.\work{2.3cm}
+\end{enumerate}
+
+\level{Exam level}
+\begin{enumerate}[leftmargin=*,itemsep=2pt,start=5]
+  \item Write an equation of the line tangent to $y=2\sin x$ at $x=\dfrac\pi3$.\work{2.8cm}
+  \item At what value of $x$ does the graph of $y=2x-e^{x}$ have a horizontal tangent?\work{2.8cm}
+  \item Evaluate $\displaystyle\lim_{h\to 0}\dfrac{e^{3+h}-e^{3}}{h}$.\work{2.8cm}
+  \item Let $f(x)=6\ln x+x^2$ for $x>0$. Find all values of $x$ at which $f'(x)=7$.\work{2.8cm}
+\end{enumerate}
+
+\begin{frbox}{Question 9 \textperiodcentered{} Free-response practice}
+Let $f(x)=4\sin x+2x$ for $0\le x\le2\pi$.
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=2pt]
+  \item Find $f'(x)$.\work{2.6cm}
+  \item Find all values of $x$ in the interval at which the graph of $f$ has a horizontal tangent.\work{2.6cm}
+  \item Write an equation of the line tangent to the graph of $f$ at $x=0$.\work{2.6cm}
+\end{enumerate}
+\end{frbox}
+
+\newpage
+\begin{solbox}
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item $5e^{x}$.
+  \item $2\cos x+3x^2$.
+  \item $\dfrac4x-1$.
+  \item $-\sin\dfrac\pi6=-\dfrac12$.
+  \item The point is $\left(\dfrac\pi3,\sqrt3\right)$ and the slope is $2\cos\dfrac\pi3=1$: $y-\sqrt3=x-\dfrac\pi3$.
+  \item $2-e^{x}=0$ at $x=\ln2$.
+  \item The derivative of $e^{x}$ at 3: $e^{3}$.
+  \item $\dfrac6x+2x=7$ gives $2x^2-7x+6=(2x-3)(x-2)=0$: $x=\dfrac32$ and $x=2$.
+  \item \begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=3pt]
+    \item $f'(x)=4\cos x+2$.
+    \item $\cos x=-\dfrac12$: $x=\dfrac{2\pi}{3}$ and $x=\dfrac{4\pi}{3}$.
+    \item $f(0)=0$ and $f'(0)=6$: $y=6x$.
+  \end{enumerate}
+\end{enumerate}
+\end{solbox}
+
+\end{document}

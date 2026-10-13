@@ -26,39 +26,74 @@ Product: $(fg)'=f'g+fg'$. Quotient: $\left(\dfrac fg\right)'=\dfrac{f'g-fg'}{g^2
 \sech{Worked Examples}
 
 \begin{example}{ex0}{Example 1 --- Product rule}
-Differentiate $f(x)=x^2(x+1)$.\soln $2x(x+1)+x^2(1)=3x^2+2x$ (check: $x^3+x^2\to3x^2+2x$).
+Differentiate $f(x)=x^2(x+1)$.\soln
+\textbf{Step 1 (identify the two factors):} $u=x^2$ (so $u'=2x$) and $v=x+1$ (so $v'=1$).\\[3pt]
+\textbf{Step 2 (apply the product rule $u'v+uv'$):} $2x(x+1)+x^2(1)$.\\[3pt]
+\textbf{Step 3 (expand and simplify):} $2x^2+2x+x^2=3x^2+2x$.\\[3pt]
+\textbf{Conclusion:} $f'(x)=3x^2+2x$ (check by expanding first: $x^2(x+1)=x^3+x^2\to3x^2+2x$, matching). ✓
 \end{example}
 
 \begin{example}{ex1}{Example 2 --- Two factors}
-Differentiate $f(x)=(2x+1)(x^2-3)$.\soln $2(x^2-3)+(2x+1)(2x)=6x^2+2x-6$.
+Differentiate $f(x)=(2x+1)(x^2-3)$.\soln
+\textbf{Step 1 (identify the two factors):} $u=2x+1$ (so $u'=2$) and $v=x^2-3$ (so $v'=2x$).\\[3pt]
+\textbf{Step 2 (apply the product rule):} $2(x^2-3)+(2x+1)(2x)$.\\[3pt]
+\textbf{Step 3 (expand):} $2x^2-6+4x^2+2x$.\\[3pt]
+\textbf{Conclusion:} $f'(x)=6x^2+2x-6$.
 \end{example}
 
 \begin{example}{ex2}{Example 3 --- Quotient rule}
-Differentiate $f(x)=\dfrac{x+1}{x-1}$.\soln $\dfrac{(x-1)-(x+1)}{(x-1)^2}=\dfrac{-2}{(x-1)^2}$.
+Differentiate $f(x)=\dfrac{x+1}{x-1}$.\soln
+\textbf{Step 1 (identify top and bottom):} $u=x+1$ (so $u'=1$) and $v=x-1$ (so $v'=1$).\\[3pt]
+\textbf{Step 2 (apply the quotient rule $\frac{u'v-uv'}{v^2}$):} $\dfrac{(1)(x-1)-(x+1)(1)}{(x-1)^2}$.\\[3pt]
+\textbf{Step 3 (simplify the numerator):} $(x-1)-(x+1)=-2$.\\[3pt]
+\textbf{Conclusion:} $f'(x)=\dfrac{-2}{(x-1)^2}$.
 \end{example}
 
 \begin{example}{ex3}{Example 4 --- Polynomial over linear}
-Differentiate $f(x)=\dfrac{x^2}{x+1}$.\soln $\dfrac{2x(x+1)-x^2}{(x+1)^2}=\dfrac{x^2+2x}{(x+1)^2}$.
+Differentiate $f(x)=\dfrac{x^2}{x+1}$.\soln
+\textbf{Step 1 (identify top and bottom):} $u=x^2$ (so $u'=2x$) and $v=x+1$ (so $v'=1$).\\[3pt]
+\textbf{Step 2 (apply the quotient rule):} $\dfrac{2x(x+1)-x^2(1)}{(x+1)^2}$.\\[3pt]
+\textbf{Step 3 (simplify the numerator):} $2x^2+2x-x^2=x^2+2x$.\\[3pt]
+\textbf{Conclusion:} $f'(x)=\dfrac{x^2+2x}{(x+1)^2}$.
 \end{example}
 
 \begin{example}{ex4}{Example 5 --- From a table}
-Given $f(2)=3,f'(2)=1,g(2)=4,g'(2)=-2$, find $(fg)'(2)$.\soln $(1)(4)+(3)(-2)=-2$.
+Given $f(2)=3,f'(2)=1,g(2)=4,g'(2)=-2$, find $(fg)'(2)$.\soln
+\textbf{Step 1 (recall the product rule):} $(fg)'=f'g+fg'$.\\[3pt]
+\textbf{Step 2 (substitute the given values at $x=2$):} $(1)(4)+(3)(-2)$.\\[3pt]
+\textbf{Conclusion:} $=4-6=-2$.
 \end{example}
 
 \begin{example}{ex5}{Example 6 --- Product rule}
-Differentiate $f(x)=x^3(x-2)$.\soln $3x^2(x-2)+x^3=4x^3-6x^2$.
+Differentiate $f(x)=x^3(x-2)$.\soln
+\textbf{Step 1 (identify the two factors):} $u=x^3$ (so $u'=3x^2$) and $v=x-2$ (so $v'=1$).\\[3pt]
+\textbf{Step 2 (apply the product rule):} $3x^2(x-2)+x^3(1)$.\\[3pt]
+\textbf{Step 3 (expand and combine):} $3x^3-6x^2+x^3$.\\[3pt]
+\textbf{Conclusion:} $f'(x)=4x^3-6x^2$.
 \end{example}
 
 \begin{example}{ex6}{Example 7 --- Two factors}
-Differentiate $f(x)=(x+2)(x^2+1)$.\soln $(x^2+1)+(x+2)(2x)=3x^2+4x+1$.
+Differentiate $f(x)=(x+2)(x^2+1)$.\soln
+\textbf{Step 1 (identify the two factors):} $u=x+2$ (so $u'=1$) and $v=x^2+1$ (so $v'=2x$).\\[3pt]
+\textbf{Step 2 (apply the product rule):} $(1)(x^2+1)+(x+2)(2x)$.\\[3pt]
+\textbf{Step 3 (expand and combine):} $x^2+1+2x^2+4x$.\\[3pt]
+\textbf{Conclusion:} $f'(x)=3x^2+4x+1$.
 \end{example}
 
 \begin{example}{ex7}{Example 8 --- Quotient rule}
-Differentiate $f(x)=\dfrac{x}{x+2}$.\soln $\dfrac{(x+2)-x}{(x+2)^2}=\dfrac{2}{(x+2)^2}$.
+Differentiate $f(x)=\dfrac{x}{x+2}$.\soln
+\textbf{Step 1 (identify top and bottom):} $u=x$ (so $u'=1$) and $v=x+2$ (so $v'=1$).\\[3pt]
+\textbf{Step 2 (apply the quotient rule):} $\dfrac{(1)(x+2)-x(1)}{(x+2)^2}$.\\[3pt]
+\textbf{Step 3 (simplify the numerator):} $(x+2)-x=2$.\\[3pt]
+\textbf{Conclusion:} $f'(x)=\dfrac{2}{(x+2)^2}$.
 \end{example}
 
 \begin{example}{ex8}{Example 9 --- Quotient rule}
-Differentiate $f(x)=\dfrac{x-1}{x+1}$.\soln $\dfrac{(x+1)-(x-1)}{(x+1)^2}=\dfrac{2}{(x+1)^2}$.
+Differentiate $f(x)=\dfrac{x-1}{x+1}$.\soln
+\textbf{Step 1 (identify top and bottom):} $u=x-1$ (so $u'=1$) and $v=x+1$ (so $v'=1$).\\[3pt]
+\textbf{Step 2 (apply the quotient rule):} $\dfrac{(1)(x+1)-(x-1)(1)}{(x+1)^2}$.\\[3pt]
+\textbf{Step 3 (simplify the numerator):} $(x+1)-(x-1)=2$.\\[3pt]
+\textbf{Conclusion:} $f'(x)=\dfrac{2}{(x+1)^2}$.
 \end{example}
 
 \clearpage

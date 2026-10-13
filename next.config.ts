@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import createNextIntlPlugin from "next-intl/plugin";
 
 // Conservative security headers. We deliberately avoid a strict CSP here because
 // the app uses inline styles, KaTeX, Supabase, and Stripe; a CSP should be added
@@ -47,4 +48,6 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
+
+export default withNextIntl(nextConfig);

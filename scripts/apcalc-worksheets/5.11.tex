@@ -1,0 +1,77 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize\color{black!60}Worksheet 5.11}
+\begin{document}
+
+\wstitle{5.11}{Behaviour of Implicitly Defined Curves}{Unit 5: Analysing Functions}
+
+\begin{ideabox}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+  \item Write $\dfrac{dy}{dx}$ as a single fraction. The tangent is \textbf{horizontal} where the numerator is zero (and the denominator is not).
+  \item The tangent is \textbf{vertical} where the denominator is zero (and the numerator is not).
+  \item A condition such as $y=2x$ must be substituted back into the \textbf{original equation} to find actual points. Some conditions give no points.
+  \item At a point with a horizontal tangent, the sign of $\dfrac{d^2y}{dx^2}$ decides between a maximum and a minimum.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked examples}
+\begin{example}{Example 1 \textperiodcentered{} Slope at a point}
+Find the slope of $x^2+y^2=10$ at $(1,3)$.\soln $\dfrac{dy}{dx}=-\dfrac xy$.\result{$-\dfrac13$.}
+\end{example}
+
+\begin{example}{Example 2 \textperiodcentered{} Horizontal and vertical tangents}
+Find the points on the ellipse $4x^2+y^2=16$ where the tangent is horizontal, and where it is vertical.\soln $8x+2y\dfrac{dy}{dx}=0$, so $\dfrac{dy}{dx}=-\dfrac{4x}{y}$. Numerator zero: $x=0$, $y=\pm4$. Denominator zero: $y=0$, $x=\pm2$.\result{Horizontal at $(0,\pm4)$; vertical at $(\pm2,0)$.}
+\end{example}
+
+\begin{example}{Example 3 \textperiodcentered{} Maximum or minimum}
+For the same ellipse, find $\dfrac{d^2y}{dx^2}$ at $(0,4)$ and interpret it.\soln Differentiate $8x+2y\dfrac{dy}{dx}=0$ again: $8+2\left(\dfrac{dy}{dx}\right)^2+2y\dfrac{d^2y}{dx^2}=0$. At $(0,4)$ with $\dfrac{dy}{dx}=0$: $8+8\dfrac{d^2y}{dx^2}=0$.\result{$\dfrac{d^2y}{dx^2}=-1<0$: the curve has a relative maximum at $(0,4)$.}
+\end{example}
+
+\newpage
+\sech{Practice}
+\emph{Questions 5 to 8 refer to the curve $y^3-3y=x^2$.}
+\level{Core}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item Find $\dfrac{dy}{dx}$ for $x^2+y^2=10$.\work{2.3cm}
+  \item Find the slope of that circle at the point $(3,-1)$.\work{2.3cm}
+  \item At which points of the circle $x^2+y^2=10$ is the tangent horizontal?\work{2.3cm}
+  \item At which points of that circle is the tangent vertical?\work{2.3cm}
+\end{enumerate}
+
+\level{Exam level}
+\begin{enumerate}[leftmargin=*,itemsep=2pt,start=5]
+  \item Find $\dfrac{dy}{dx}$ in terms of $x$ and $y$.\work{2.8cm}
+  \item Find all points of the curve at which the tangent line is horizontal.\work{2.8cm}
+  \item Find all points of the curve at which the tangent line is vertical.\work{2.8cm}
+  \item Verify that $\left(3\sqrt2,3\right)$ lies on the curve, and find the slope there.\work{2.8cm}
+\end{enumerate}
+
+\begin{frbox}{Question 9 \textperiodcentered{} Free-response practice}
+Consider the curve $xy+y^2=8$.
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=2pt]
+  \item Find $\dfrac{dy}{dx}$ in terms of $x$ and $y$.\work{2.6cm}
+  \item Write an equation of the line tangent to the curve at the point $(2,2)$.\work{2.6cm}
+  \item Show that the curve has no horizontal tangent and no vertical tangent.\work{2.6cm}
+\end{enumerate}
+\end{frbox}
+
+\newpage
+\begin{solbox}
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item $\dfrac{dy}{dx}=-\dfrac xy$.
+  \item $-\dfrac{3}{-1}=3$.
+  \item Where $x=0$: $\left(0,\sqrt{10}\right)$ and $\left(0,-\sqrt{10}\right)$.
+  \item Where $y=0$: $\left(\sqrt{10},0\right)$ and $\left(-\sqrt{10},0\right)$.
+  \item $\left(3y^2-3\right)\dfrac{dy}{dx}=2x$, so $\dfrac{dy}{dx}=\dfrac{2x}{3y^2-3}$.
+  \item $x=0$ gives $y^3-3y=0$, so $y=0$ or $y=\pm\sqrt3$: the points $(0,0)$, $\left(0,\sqrt3\right)$ and $\left(0,-\sqrt3\right)$.
+  \item $y=\pm1$. $y=1$ gives $x^2=-2$ (no points); $y=-1$ gives $x^2=2$: the points $\left(\sqrt2,-1\right)$ and $\left(-\sqrt2,-1\right)$.
+  \item $27-9=18=\left(3\sqrt2\right)^2$. The slope is $\dfrac{6\sqrt2}{24}=\dfrac{\sqrt2}{4}$.
+  \item \begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=3pt]
+    \item $y+x\dfrac{dy}{dx}+2y\dfrac{dy}{dx}=0$, so $\dfrac{dy}{dx}=-\dfrac{y}{x+2y}$.
+    \item The slope is $-\dfrac{2}{6}=-\dfrac13$: $y-2=-\dfrac13(x-2)$.
+    \item Horizontal needs $y=0$, but then $0=8$: no such point. Vertical needs $x=-2y$, which gives $-2y^2+y^2=8$, that is $y^2=-8$: no such point.
+  \end{enumerate}
+\end{enumerate}
+\end{solbox}
+
+\end{document}

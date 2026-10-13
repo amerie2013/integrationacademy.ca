@@ -1,0 +1,77 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize\color{black!60}Worksheet 5.7}
+\begin{document}
+
+\wstitle{5.7}{The Second Derivative Test}{Unit 5: Analysing Functions}
+
+\begin{ideabox}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+  \item If $f'(c)=0$ and $f''(c)>0$, then $f$ has a relative \textbf{minimum} at $c$.
+  \item If $f'(c)=0$ and $f''(c)<0$, then $f$ has a relative \textbf{maximum} at $c$.
+  \item If $f'(c)=0$ and $f''(c)=0$, the test is \textbf{inconclusive}: use the first derivative test.
+  \item If $c$ is the only critical point and $f''$ has one sign on the whole interval, the extremum is absolute.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked examples}
+\begin{example}{Example 1 \textperiodcentered{} Two critical points}
+Classify the critical points of $f(x)=x^3-3x^2+2$.\soln $f'(x)=3x(x-2)$ and $f''(x)=6x-6$. $f''(0)=-6$ and $f''(2)=6$.\result{Relative maximum at $x=0$; relative minimum at $x=2$.}
+\end{example}
+
+\begin{example}{Example 2 \textperiodcentered{} When the test fails}
+What does the test say about $f(x)=x^5$ at $x=0$?\soln $f'(0)=0$ and $f''(0)=0$: inconclusive. $f'(x)=5x^4$ is positive on both sides.\result{The test gives no information; in fact there is no extremum.}
+\end{example}
+
+\begin{example}{Example 3 \textperiodcentered{} An absolute minimum}
+Find the absolute minimum of $f(x)=2x+\dfrac8x$ for $x>0$.\soln $f'(x)=2-\dfrac{8}{x^2}=0$ at $x=2$, the only critical point. $f''(x)=\dfrac{16}{x^3}>0$ for all $x>0$.\result{The absolute minimum is $f(2)=8$.}
+\end{example}
+
+\newpage
+\sech{Practice}
+
+\level{Core}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item Given $f'(3)=0$ and $f''(3)=2$, what does $f$ have at $x=3$?\work{2.3cm}
+  \item Given $f'(1)=0$ and $f''(1)=-5$, what does $f$ have at $x=1$?\work{2.3cm}
+  \item Use the second derivative test on $f(x)=x^2-8x$.\work{2.3cm}
+  \item Given $f'(c)=0$ and $f''(c)=0$, what can be concluded?\work{2.3cm}
+\end{enumerate}
+
+\level{Exam level}
+\begin{enumerate}[leftmargin=*,itemsep=2pt,start=5]
+  \item Use the second derivative test to classify the critical points of $f(x)=x^3-48x$.\work{2.8cm}
+  \item Find and classify the critical point of $f(x)=x^2-\ln x$ for $x>0$.\work{2.8cm}
+  \item Use the second derivative test to classify the critical points of $f(x)=2\sin x+x$ on $(0,2\pi)$.\work{2.8cm}
+  \item A solution of $\dfrac{dy}{dx}=x^2-y$ passes through the point $(2,4)$. Show that it has a relative minimum there.\work{2.8cm}
+\end{enumerate}
+
+\begin{frbox}{Question 9 \textperiodcentered{} Free-response practice}
+Let $f(x)=\dfrac{x^4}{4}-2x^2$.
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=2pt]
+  \item Find the critical points of $f$.\work{2.6cm}
+  \item Use the second derivative test to classify each critical point.\work{2.6cm}
+  \item Find the relative maximum value and the relative minimum value of $f$.\work{2.6cm}
+\end{enumerate}
+\end{frbox}
+
+\newpage
+\begin{solbox}
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item A relative minimum.
+  \item A relative maximum.
+  \item $f'(4)=0$ and $f''(4)=2>0$: relative minimum at $x=4$.
+  \item Nothing: the test is inconclusive.
+  \item $f'(x)=3x^2-48=0$ at $x=\pm4$; $f''(x)=6x$. Minimum at $x=4$, maximum at $x=-4$.
+  \item $f'(x)=2x-\dfrac1x=0$ at $x=\dfrac{1}{\sqrt2}$. $f''(x)=2+\dfrac{1}{x^2}>0$: a relative (and absolute) minimum.
+  \item $f'(x)=2\cos x+1=0$ at $\dfrac{2\pi}{3}$ and $\dfrac{4\pi}{3}$. $f''(x)=-2\sin x$: $-\sqrt3$ at $\dfrac{2\pi}{3}$ (maximum), $\sqrt3$ at $\dfrac{4\pi}{3}$ (minimum).
+  \item At $(2,4)$, $\dfrac{dy}{dx}=4-4=0$, and $\dfrac{d^2y}{dx^2}=2x-\dfrac{dy}{dx}=4>0$.
+  \item \begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=3pt]
+    \item $f'(x)=x^3-4x=x(x-2)(x+2)$: $x=0$ and $x=\pm2$.
+    \item $f''(x)=3x^2-4$. $f''(0)=-4<0$: maximum. $f''(\pm2)=8>0$: minima.
+    \item Maximum value $f(0)=0$; minimum value $f(\pm2)=4-8=-4$.
+  \end{enumerate}
+\end{enumerate}
+\end{solbox}
+
+\end{document}

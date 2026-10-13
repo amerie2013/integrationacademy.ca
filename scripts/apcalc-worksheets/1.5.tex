@@ -1,0 +1,77 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize\color{black!60}Worksheet 1.5}
+\begin{document}
+
+\wstitle{1.5}{Resolving 0/0: Factoring, Conjugates and Compound Fractions}{Unit 1: Limits and Continuity}
+
+\begin{ideabox}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+  \item $\tfrac00$ is \textbf{indeterminate}: a signal to rewrite, never an answer.
+  \item Polynomials: factor and cancel. Square roots: multiply by the conjugate. Fractions within fractions: use a common denominator.
+  \item Absolute values and piecewise rules: take one-sided limits separately.
+  \item Keep \textquotedblleft{}$\lim$\textquotedblright{} on every line that still contains the variable; drop it on the line where you substitute.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked examples}
+\begin{example}{Example 1 \textperiodcentered{} Factoring}
+Evaluate $\displaystyle\lim_{x\to 2}\dfrac{x^2+3x-10}{x^2-4}$.\soln $\displaystyle\lim_{x\to 2}\dfrac{(x+5)(x-2)}{(x-2)(x+2)}=\displaystyle\lim_{x\to 2}\dfrac{x+5}{x+2}$.\result{The limit is $\dfrac74$.}
+\end{example}
+
+\begin{example}{Example 2 \textperiodcentered{} Conjugate}
+Evaluate $\displaystyle\lim_{x\to 0}\dfrac{\sqrt{x+25}-5}{x}$.\soln Multiply by $\dfrac{\sqrt{x+25}+5}{\sqrt{x+25}+5}$: $\dfrac{x}{x\left(\sqrt{x+25}+5\right)}=\dfrac{1}{\sqrt{x+25}+5}$.\result{The limit is $\dfrac1{10}$.}
+\end{example}
+
+\begin{example}{Example 3 \textperiodcentered{} Compound fraction}
+Evaluate $\displaystyle\lim_{x\to 3}\dfrac{\frac1x-\frac13}{x-3}$.\soln $\dfrac1x-\dfrac13=\dfrac{3-x}{3x}$, so the expression is $\dfrac{3-x}{3x(x-3)}=-\dfrac{1}{3x}$.\result{The limit is $-\dfrac19$.}
+\end{example}
+
+\newpage
+\sech{Practice}
+
+\level{Core}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item Evaluate $\displaystyle\lim_{x\to -1}\dfrac{x^2-1}{x+1}$.\work{2.3cm}
+  \item Evaluate $\displaystyle\lim_{x\to 3}\dfrac{x^2-2x-3}{x-3}$.\work{2.3cm}
+  \item Evaluate $\displaystyle\lim_{h\to 0}\dfrac{(4+h)^2-16}{h}$.\work{2.3cm}
+  \item Evaluate $\displaystyle\lim_{x\to 1}\dfrac{x^3-1}{x-1}$.\work{2.3cm}
+\end{enumerate}
+
+\level{Exam level}
+\begin{enumerate}[leftmargin=*,itemsep=2pt,start=5]
+  \item Evaluate $\displaystyle\lim_{x\to 25}\dfrac{\sqrt x-5}{x-25}$.\work{2.8cm}
+  \item Evaluate $\displaystyle\lim_{x\to 1}\dfrac{\frac{1}{x+2}-\frac13}{x-1}$.\work{2.8cm}
+  \item Find the value of $k$ for which $\displaystyle\lim_{x\to -2}\dfrac{x^2+kx+6}{x+2}$ exists, and find the limit.\work{2.8cm}
+  \item Evaluate $\displaystyle\lim_{x\to 5^-}\dfrac{|x-5|}{x^2-25}$.\work{2.8cm}
+\end{enumerate}
+
+\begin{frbox}{Question 9 \textperiodcentered{} Free-response practice}
+Let $f(x)=\dfrac{x^2-9}{\sqrt{x+1}-2}$ for $x\neq3$, $x\ge-1$.
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=2pt]
+  \item Show that direct substitution at $x=3$ gives an indeterminate form.\work{2.6cm}
+  \item Evaluate $\displaystyle\lim_{x\to 3}f(x)$, showing correct limit notation at each step.\work{2.6cm}
+  \item What value must be assigned to $f(3)$ to make $f$ continuous at $x=3$? Give a reason.\work{2.6cm}
+\end{enumerate}
+\end{frbox}
+
+\newpage
+\begin{solbox}
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item $x-1\to-2$.
+  \item $\dfrac{(x-3)(x+1)}{x-3}=x+1\to4$.
+  \item $\dfrac{8h+h^2}{h}=8+h\to8$.
+  \item $x^2+x+1\to3$.
+  \item $\dfrac{\sqrt x-5}{(\sqrt x-5)(\sqrt x+5)}=\dfrac{1}{\sqrt x+5}\to\dfrac1{10}$.
+  \item $\dfrac{3-(x+2)}{3(x+2)(x-1)}=\dfrac{-(x-1)}{3(x+2)(x-1)}=-\dfrac{1}{3(x+2)}\to-\dfrac19$.
+  \item The numerator must vanish at $-2$: $4-2k+6=0$, so $k=5$. Then $x^2+5x+6=(x+2)(x+3)$ and the limit is $1$.
+  \item For $x<5$, $|x-5|=-(x-5)$, so the expression is $-\dfrac{1}{x+5}\to-\dfrac1{10}$.
+  \item \begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=3pt]
+    \item Numerator: $9-9=0$. Denominator: $\sqrt4-2=0$. The form is $\tfrac00$.
+    \item $\displaystyle\lim_{x\to 3}\dfrac{(x^2-9)\left(\sqrt{x+1}+2\right)}{(x+1)-4}=\displaystyle\lim_{x\to 3}\dfrac{(x-3)(x+3)\left(\sqrt{x+1}+2\right)}{x-3}=\displaystyle\lim_{x\to 3}(x+3)\left(\sqrt{x+1}+2\right)=6\cdot4=24$.
+    \item $f(3)=24$, because continuity at 3 requires $f(3)=\displaystyle\lim_{x\to 3}f(x)$.
+  \end{enumerate}
+\end{enumerate}
+\end{solbox}
+
+\end{document}

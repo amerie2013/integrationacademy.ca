@@ -2,10 +2,12 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { supabase } from "../../lib/supabase";
 import { LEVELS } from "../../lib/theme";
 
 export default function CompleteProfilePage() {
+  const t = useTranslations("completeProfile");
   const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -38,7 +40,7 @@ export default function CompleteProfilePage() {
     });
     const json = await res.json().catch(() => ({}));
     if (!res.ok) {
-      setError(json.error || "Could not save your profile.");
+      setError(json.error || t("errGeneric"));
       setSaving(false);
       return;
     }
@@ -66,7 +68,7 @@ export default function CompleteProfilePage() {
   if (loading) {
     return (
       <main style={{ minHeight: "100vh", background: "#f6f8fc", display: "grid", placeItems: "center" }}>
-        <div style={{ color: "#64748b" }}>Loading…</div>
+        <div style={{ color: "#64748b" }}>{t("loading")}</div>
       </main>
     );
   }
@@ -74,9 +76,9 @@ export default function CompleteProfilePage() {
   return (
     <main style={{ minHeight: "100vh", background: "#f6f8fc", display: "flex", alignItems: "center", justifyContent: "center", padding: "40px 20px" }}>
       <div style={{ background: "#fff", borderRadius: 18, boxShadow: "0 12px 40px rgba(15,23,42,0.10)", padding: "36px 34px", width: "100%", maxWidth: 420 }}>
-        <h1 style={{ fontFamily: "Fraunces, serif", fontSize: 24, fontWeight: 700, margin: "0 0 6px" }}>One more thing</h1>
+        <h1 style={{ fontFamily: "Fraunces, serif", fontSize: 24, fontWeight: 700, margin: "0 0 6px" }}>{t("title")}</h1>
         <p style={{ color: "#64748b", fontSize: 14, margin: "0 0 24px" }}>
-          Your Google/Microsoft sign-in didn't tell us your grade — please confirm a couple of details before continuing.
+          {t("subtitle")}
         </p>
 
         {error && (
@@ -87,16 +89,16 @@ export default function CompleteProfilePage() {
 
         <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
           <div>
-            <label style={label}>I am a…</label>
+            <label style={label}>{t("iAm")}</label>
             <select value={role} onChange={(e) => setRole(e.target.value as "student" | "teacher")} style={input}>
-              <option value="student">Student</option>
-              <option value="teacher">Instructor / Tutor</option>
+              <option value="student">{t("student")}</option>
+              <option value="teacher">{t("instructor")}</option>
             </select>
           </div>
 
           {role === "student" && (
             <div>
-              <label style={label}>My grade *</label>
+              <label style={label}>{t("myGrade")}</label>
               <select value={level} onChange={(e) => setLevel(e.target.value)} style={input}>
                 {LEVELS.map((l) => (
                   <option key={l.value} value={l.value}>{l.label}</option>
@@ -120,7 +122,7 @@ export default function CompleteProfilePage() {
               marginTop: 4,
             }}
           >
-            {saving ? "Saving…" : "Continue"}
+            {saving ? t("saving") : t("continue")}
           </button>
         </div>
       </div>

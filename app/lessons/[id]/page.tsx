@@ -12,6 +12,7 @@ import { fetchMaterials } from "../../../lib/materials";
 import { Block } from "../../../lib/blocks";
 import { TutorChat } from "../../../components/TutorChat";
 import { accentFor, accentClass } from "../../../lib/courseAccent";
+import { courseNotice } from "../../../lib/courseNotice";
 
 export default function LessonViewPage() {
   const params = useParams();
@@ -120,6 +121,7 @@ export default function LessonViewPage() {
               <>
                 <h1 style={{ fontFamily: "Fraunces, serif", fontSize: 38, fontWeight: 700, margin: "0 0 16px" }}>{title}</h1>
                 <BlockRenderer blocks={blocks} />
+                {courseNotice(courseCode) && <p style={{ color: "#94a3b8", fontSize: 12.5, lineHeight: 1.55, margin: "18px 0 0", textAlign: "center" }}>{courseNotice(courseCode)}</p>}
                 {role === "student" && (
                   <div style={{ display: "flex", justifyContent: "center", gap: 12, flexWrap: "wrap", margin: "32px 0 4px" }}>
                     <button

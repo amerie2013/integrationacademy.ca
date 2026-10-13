@@ -26,39 +26,73 @@ Run the checklist: domain/symmetry, intercepts, asymptotes, $f'$ (extrema), $f''
 \sech{Worked Examples}
 
 \begin{example}{ex0}{Example 1 --- Cubic}
-Sketch $f(x)=x^3-3x$.\soln x-ints $0,\pm\sqrt3$; max $(-1,2)$, min $(1,-2)$; inflection $(0,0)$; ends down–up:\eplot{-3}{3}{-4}{4}{\addplot[exblue,very thick,domain=-2.1:2.1]{x^3-3*x};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(-1,2) (1,-2) (0,0)};}
+Sketch $f(x)=x^3-3x$.\soln
+\textbf{Step 1 (intercepts):} $f(x)=x(x^2-3)=0\Rightarrow x=0,\pm\sqrt3$; $y$-intercept $f(0)=0$.\\[3pt]
+\textbf{Step 2 (extrema from $f'$):} $f'(x)=3x^2-3=0\Rightarrow x=\pm1$; sign test gives max $(-1,2)$, min $(1,-2)$.\\[3pt]
+\textbf{Step 3 (inflection from $f''$):} $f''(x)=6x=0\Rightarrow x=0$, so $(0,0)$.\\[3pt]
+\textbf{Step 4 (end behaviour):} odd degree, positive leading coefficient $\Rightarrow$ down--up.\\[3pt]
+\textbf{Conclusion:} x-intercepts $0,\pm\sqrt3$; max $(-1,2)$, min $(1,-2)$; inflection $(0,0)$; ends down--up:\eplot{-3}{3}{-4}{4}{\addplot[exblue,very thick,domain=-2.1:2.1]{x^3-3*x};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(-1,2) (1,-2) (0,0)};}
 \end{example}
 
 \begin{example}{ex1}{Example 2 --- Quartic (even)}
-Sketch $f(x)=x^4-2x^2$.\soln Even; x-ints $0,\pm\sqrt2$; max $(0,0)$, mins $(\pm1,-1)$; inflections at $x=\pm\tfrac1{\sqrt3}$; ends up–up (a "W").
+Sketch $f(x)=x^4-2x^2$.\soln
+\textbf{Step 1 (symmetry):} only even powers of $x$ $\Rightarrow$ even function, symmetric about the $y$-axis.\\[3pt]
+\textbf{Step 2 (intercepts):} $x^2(x^2-2)=0\Rightarrow x=0,\pm\sqrt2$.\\[3pt]
+\textbf{Step 3 (extrema from $f'$):} $f'(x)=4x^3-4x=4x(x-1)(x+1)=0\Rightarrow x=0,\pm1$; testing signs gives max $(0,0)$, mins $(\pm1,-1)$.\\[3pt]
+\textbf{Step 4 (inflection from $f''$):} $f''(x)=12x^2-4=0\Rightarrow x=\pm\tfrac1{\sqrt3}$.\\[3pt]
+\textbf{Step 5 (end behaviour):} even degree, positive leading coefficient $\Rightarrow$ up--up.\\[3pt]
+\textbf{Conclusion:} x-intercepts $0,\pm\sqrt2$; max $(0,0)$, mins $(\pm1,-1)$; inflections at $x=\pm\tfrac1{\sqrt3}$; ends up--up (a "W" shape).
 \end{example}
 
 \begin{example}{ex2}{Example 3 --- Cubic}
-Sketch $f(x)=x^3-3x^2$.\soln x-ints $0,3$; max $(0,0)$, min $(2,-4)$; inflection $(1,-2)$; ends down–up.
+Sketch $f(x)=x^3-3x^2$.\soln
+\textbf{Step 1 (intercepts):} $x^2(x-3)=0\Rightarrow x=0,3$.\\[3pt]
+\textbf{Step 2 (extrema from $f'$):} $f'(x)=3x^2-6x=3x(x-2)=0\Rightarrow x=0,2$; testing signs gives max $(0,0)$, min $(2,-4)$.\\[3pt]
+\textbf{Step 3 (inflection from $f''$):} $f''(x)=6x-6=0\Rightarrow x=1$, so $(1,-2)$.\\[3pt]
+\textbf{Step 4 (end behaviour):} odd degree, positive leading coefficient $\Rightarrow$ down--up.\\[3pt]
+\textbf{Conclusion:} x-intercepts $0,3$; max $(0,0)$, min $(2,-4)$; inflection $(1,-2)$; ends down--up.
 \end{example}
 
 \begin{example}{ex3}{Example 4 --- From clues}
-$f'>0$ on $(-\infty,0)\cup(2,\infty)$, $f'<0$ on $(0,2)$, $f''>0$ on $(1,\infty)$.\soln Max at $0$, min at $2$, inflection at $1$ — a cubic shape.
+$f'>0$ on $(-\infty,0)\cup(2,\infty)$, $f'<0$ on $(0,2)$, $f''>0$ on $(1,\infty)$.\soln
+\textbf{Step 1 (locate extrema from the $f'$ sign changes):} $+\to-$ at $x=0$ (local max); $-\to+$ at $x=2$ (local min).\\[3pt]
+\textbf{Step 2 (locate the inflection from the $f''$ sign change):} concave up begins at $x=1$, so that's the inflection point.\\[3pt]
+\textbf{Conclusion:} max at $x=0$, min at $x=2$, inflection at $x=1$ --- consistent with a cubic shape.
 \end{example}
 
 \begin{example}{ex4}{Example 5 --- Match f to f'}
-$f$ has a max at $-1$, min at $1$. What is $f'$?\soln $f'=0$ at $\pm1$, $+$ outside, $-$ inside: an upward parabola (e.g. $3x^2-3$).
+$f$ has a max at $-1$, min at $1$. What is $f'$?\soln
+\textbf{Step 1 (recall what a max/min means for $f'$):} $f'=0$ at both $x=-1$ and $x=1$.\\[3pt]
+\textbf{Step 2 (use the sign pattern of a max-then-min):} $f'$ must be $+$ before $-1$, $-$ between $-1$ and $1$, then $+$ again after $1$ --- a parabola opening upward with roots at $\pm1$.\\[3pt]
+\textbf{Conclusion:} $f'$ is an upward-opening parabola with zeros at $x=\pm1$, e.g.\ $f'(x)=3x^2-3$.
 \end{example}
 
 \begin{example}{ex5}{Example 6 --- Intercepts}
-x-intercepts of $f(x)=x^3-3x$.\soln $x(x^2-3)=0\Rightarrow 0,\pm\sqrt3$.
+x-intercepts of $f(x)=x^3-3x$.\soln
+\textbf{Step 1 (factor):} $f(x)=x(x^2-3)$.\\[3pt]
+\textbf{Step 2 (set each factor to $0$):} $x=0$ or $x^2=3\Rightarrow x=\pm\sqrt3$.\\[3pt]
+\textbf{Conclusion:} x-intercepts at $0,\pm\sqrt3$.
 \end{example}
 
 \begin{example}{ex6}{Example 7 --- Symmetry}
-Is $f(x)=x^4-2x^2$ even or odd?\soln Even (only even powers).
+Is $f(x)=x^4-2x^2$ even or odd?\soln
+\textbf{Step 1 (test $f(-x)$):} $f(-x)=(-x)^4-2(-x)^2=x^4-2x^2=f(x)$.\\[3pt]
+\textbf{Step 2 (interpret):} $f(-x)=f(x)$ is the definition of even.\\[3pt]
+\textbf{Conclusion:} even (only even powers of $x$ appear).
 \end{example}
 
 \begin{example}{ex7}{Example 8 --- Extrema}
-Local extrema of $f(x)=x^3-3x^2$.\soln Max $(0,0)$, min $(2,-4)$.
+Local extrema of $f(x)=x^3-3x^2$.\soln
+\textbf{Step 1 (differentiate and find critical numbers):} $f'(x)=3x^2-6x=3x(x-2)=0\Rightarrow x=0,2$.\\[3pt]
+\textbf{Step 2 (test signs to classify):} $+\to-$ at $x=0$ (max); $-\to+$ at $x=2$ (min).\\[3pt]
+\textbf{Conclusion:} max $(0,0)$, min $(2,-4)$.
 \end{example}
 
 \begin{example}{ex8}{Example 9 --- Always increasing}
-If $f'>0$ everywhere, what does the curve do?\soln Always increasing — no extrema.
+If $f'>0$ everywhere, what does the curve do?\soln
+\textbf{Step 1 (recall the meaning of $f'>0$):} the slope is positive at every point.\\[3pt]
+\textbf{Step 2 (interpret for the whole curve):} a curve with positive slope everywhere never turns around.\\[3pt]
+\textbf{Conclusion:} the graph is always increasing, with no local extrema.
 \end{example}
 
 \clearpage

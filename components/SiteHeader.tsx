@@ -3,27 +3,41 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useLocale, useTranslations } from "next-intl";
 import { supabase } from "../lib/supabase";
 import { Logo } from "./Logo";
+import { LOCALE_COOKIE, type Locale } from "../i18n/locales";
 
-const NAV = [
-  { href: "/courses", label: "Courses" },
-  { href: "/practice", label: "Practice" },
-  { href: "/eqao", label: "EQAO" },
-  { href: "/articles", label: "Articles" },
-  { href: "/games", label: "Games" },
-  { href: "/tools/graph", label: "Calculator" },
-  { href: "/tools/stats", label: "Statistics" },
-  { href: "/tools/whiteboard", label: "Whiteboard" },
-  { href: "/pricing", label: "Pricing" },
-  { href: "/help", label: "Help" },
-];
+function navItems(t: ReturnType<typeof useTranslations<"nav">>) {
+  return [
+    { href: "/courses", label: t("courses") },
+    { href: "/practice", label: t("practice") },
+    { href: "/eqao", label: t("eqao") },
+    { href: "/articles", label: t("articles") },
+    { href: "/games", label: t("games") },
+    { href: "/tools/graph", label: t("calculator") },
+    { href: "/tools/stats", label: t("statistics") },
+    { href: "/tools/whiteboard", label: t("whiteboard") },
+    { href: "/pricing", label: t("pricing") },
+    { href: "/help", label: t("help") },
+  ];
+}
 
 export function SiteHeader() {
   const router = useRouter();
+  const locale = useLocale() as Locale;
+  const tNav = useTranslations("nav");
+  const tHeader = useTranslations("header");
+  const NAV = navItems(tNav);
   const [email, setEmail] = useState<string | null>(null);
   const [role, setRole] = useState<string | null>(null);
   const [open, setOpen] = useState(false);
+
+  function switchLocale(next: Locale) {
+    document.cookie = `${LOCALE_COOKIE}=${next}; path=/; max-age=${60 * 60 * 24 * 365}`;
+    setOpen(false);
+    router.refresh();
+  }
 
   useEffect(() => {
     supabase.auth.getSession().then(async ({ data: { session } }) => {
@@ -57,17 +71,18 @@ export function SiteHeader() {
         ))}
         {email ? (
           <>
-            <Link href={dashHref} className="ia-nav-link">Dashboard</Link>
-            <Link href="/profile" className="ia-nav-link">Profile</Link>
-            <button onClick={signOut} className="ia-signout">Sign out</button>
+            <Link href={dashHref} className="ia-nav-link">{tHeader("dashboard")}</Link>
+            <Link href="/profile" className="ia-nav-link">{tHeader("profile")}</Link>
+            <button onClick={signOut} className="ia-signout">{tHeader("signOut")}</button>
           </>
         ) : (
-          <Link href="/login" className="ia-signin">Sign in</Link>
+          <Link href="/login" className="ia-signin">{tHeader("signIn")}</Link>
         )}
+        <LangSwitch locale={locale} onSwitch={switchLocale} />
       </nav>
 
       {/* mobile hamburger */}
-      <button className="ia-burger" aria-label="Menu" aria-expanded={open} onClick={() => setOpen((v) => !v)}>
+      <button className="ia-burger" aria-label={tHeader("menu")} aria-expanded={open} onClick={() => setOpen((v) => !v)}>
         {open ? "✕" : "☰"}
       </button>
 
@@ -79,16 +94,40 @@ export function SiteHeader() {
           ))}
           {email ? (
             <>
-              <Link href={dashHref} className="ia-mlink" onClick={() => setOpen(false)}>Dashboard</Link>
-              <Link href="/profile" className="ia-mlink" onClick={() => setOpen(false)}>Profile</Link>
-              <button onClick={signOut} className="ia-mlink ia-mlink-btn">Sign out</button>
+              <Link href={dashHref} className="ia-mlink" onClick={() => setOpen(false)}>{tHeader("dashboard")}</Link>
+              <Link href="/profile" className="ia-mlink" onClick={() => setOpen(false)}>{tHeader("profile")}</Link>
+              <button onClick={signOut} className="ia-mlink ia-mlink-btn">{tHeader("signOut")}</button>
             </>
           ) : (
-            <Link href="/login" className="ia-mlink ia-mlink-primary" onClick={() => setOpen(false)}>Sign in</Link>
+            <Link href="/login" className="ia-mlink ia-mlink-primary" onClick={() => setOpen(false)}>{tHeader("signIn")}</Link>
           )}
+          <div className="ia-mlink-lang">
+            <LangSwitch locale={locale} onSwitch={switchLocale} />
+          </div>
         </div>
       )}
     </header>
+  );
+}
+
+function LangSwitch({ locale, onSwitch }: { locale: Locale; onSwitch: (l: Locale) => void }) {
+  return (
+    <div className="ia-lang" role="group" aria-label="Language">
+      <button
+        className={`ia-lang-btn${locale === "en" ? " ia-lang-active" : ""}`}
+        onClick={() => onSwitch("en")}
+        aria-pressed={locale === "en"}
+      >
+        EN
+      </button>
+      <button
+        className={`ia-lang-btn${locale === "fr" ? " ia-lang-active" : ""}`}
+        onClick={() => onSwitch("fr")}
+        aria-pressed={locale === "fr"}
+      >
+        FR
+      </button>
+    </div>
   );
 }
 
@@ -105,6 +144,12 @@ const HDR_CSS = `
 .ia-mlink:hover{background:#f1f5f9;}
 .ia-mlink-primary{color:var(--primary);font-weight:800;}
 .ia-mlink-btn{color:#475569;}
+.ia-lang{display:flex;align-items:center;border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.ia-lang-btn{background:none;border:none;padding:6px 10px;font-size:12px;font-weight:700;color:#94a3b8;cursor:pointer;font-family:inherit;}
+.ia-lang-btn:hover{color:#475569;}
+.ia-lang-active{background:var(--primary);color:#fff;}
+.ia-lang-active:hover{color:#fff;}
+.ia-mlink-lang{padding:10px 16px;}
 @keyframes iahdrdrop{from{opacity:0;transform:translateY(-6px);}to{opacity:1;transform:none;}}
 @media (max-width:880px){
   .ia-nav-desktop{display:none;}

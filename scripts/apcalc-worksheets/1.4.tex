@@ -1,0 +1,79 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize\color{black!60}Worksheet 1.4}
+\begin{document}
+
+\wstitle{1.4}{Limit Laws and Direct Substitution}{Unit 1: Limits and Continuity}
+
+\begin{ideabox}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+  \item If $\displaystyle\lim_{x\to c}f(x)=L$ and $\displaystyle\lim_{x\to c}g(x)=M$ are real numbers, limits of sums, differences, products and constant multiples are found termwise.
+  \item The quotient law requires $M\neq0$.
+  \item For polynomial, rational, root, trigonometric, exponential and logarithmic functions, $\displaystyle\lim_{x\to c}f(x)=f(c)$ at every $c$ in the domain.
+  \item $\displaystyle\lim_{x\to c}f\big(g(x)\big)=f\big(\displaystyle\lim_{x\to c}g(x)\big)$ only when $f$ is continuous at that inner limit.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked examples}
+\begin{example}{Example 1 \textperiodcentered{} Direct substitution}
+Evaluate $\displaystyle\lim_{x\to -1}\dfrac{2x^3-x+4}{x^2+3}$.\soln The denominator at $x=-1$ is $4\neq0$, so substitute: $\dfrac{-2+1+4}{4}$.\result{The limit is $\dfrac34$.}
+\end{example}
+
+\begin{example}{Example 2 \textperiodcentered{} Laws with unknown functions}
+Given $\displaystyle\lim_{x\to 1}f(x)=3$ and $\displaystyle\lim_{x\to 1}g(x)=-4$, find $\displaystyle\lim_{x\to 1}\dfrac{[f(x)]^2-2g(x)}{f(x)+g(x)+5}$.\soln Numerator: $9+8=17$. Denominator: $3-4+5=4\neq0$.\result{The limit is $\dfrac{17}{4}$.}
+\end{example}
+
+\begin{example}{Example 3 \textperiodcentered{} Working backwards}
+Suppose $\displaystyle\lim_{x\to 5}\dfrac{f(x)-2}{x-5}=7$. Find $\displaystyle\lim_{x\to 5}f(x)$.\soln $f(x)-2=\dfrac{f(x)-2}{x-5}\cdot(x-5)\to7\cdot0=0$.\result{$\displaystyle\lim_{x\to 5}f(x)=2$.}
+\end{example}
+
+\newpage
+\sech{Practice}
+
+\level{Core}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item Evaluate $\displaystyle\lim_{x\to 2}\left(x^4-3x\right)$.\work{2.3cm}
+  \item Evaluate $\displaystyle\lim_{x\to \pi/4}\sin x\cos x$.\work{2.3cm}
+  \item Evaluate $\displaystyle\lim_{x\to 0}\dfrac{3e^x-2}{x+1}$.\work{2.3cm}
+  \item Evaluate $\displaystyle\lim_{x\to 4}\sqrt{x^2+9}$.\work{2.3cm}
+\end{enumerate}
+
+\level{Exam level}
+\begin{enumerate}[leftmargin=*,itemsep=2pt,start=5]
+  \item Given $\displaystyle\lim_{x\to 3}f(x)=-2$ and $\displaystyle\lim_{x\to 3}g(x)=6$, find $\displaystyle\lim_{x\to 3}\big[g(x)-(f(x))^2\big]f(x)$.\work{2.8cm}
+  \item With the same $f$ and $g$, find $\displaystyle\lim_{x\to 3}\sqrt{g(x)+f(x)+5}$.\work{2.8cm}
+  \item With the same $f$ and $g$, what can be said about $\displaystyle\lim_{x\to 3}\dfrac{f(x)}{g(x)-6}$? Explain.\work{2.8cm}
+  \item Suppose $\displaystyle\lim_{x\to -1}\dfrac{f(x)+4}{x+1}=3$. Find $\displaystyle\lim_{x\to -1}f(x)$.\work{2.8cm}
+\end{enumerate}
+
+\begin{frbox}{Question 9 \textperiodcentered{} Free-response practice}
+Let $f(x)=4+(x-2)^2$ and $g(u)=\begin{cases}u^2,&u\le4\\10-u,&u>4.\end{cases}$
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=2pt]
+  \item Find $\displaystyle\lim_{x\to 2}f(x)$, and state whether $f(x)$ approaches this value from above, from below, or from both sides.\work{2cm}
+  \item Explain why $\displaystyle\lim_{x\to 2}g\big(f(x)\big)$ cannot be found by computing $g\big(\displaystyle\lim_{x\to 2}f(x)\big)$.\work{2cm}
+  \item Find $\displaystyle\lim_{x\to 2}g\big(f(x)\big)$.\work{2cm}
+  \item Find $\displaystyle\lim_{x\to 2}g\big(k(x)\big)$ where $k(x)=4-(x-2)^2$.\work{2cm}
+\end{enumerate}
+\end{frbox}
+
+\newpage
+\begin{solbox}
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item $16-6=10$.
+  \item $\dfrac{\sqrt2}{2}\cdot\dfrac{\sqrt2}{2}=\dfrac12$.
+  \item $\dfrac{3-2}{1}=1$.
+  \item $\sqrt{25}=5$.
+  \item $(6-4)(-2)=-4$.
+  \item $\sqrt{6-2+5}=3$.
+  \item It does not exist. The denominator tends to 0 while the numerator tends to $-2\neq0$, so the quotient is unbounded; the quotient law does not apply.
+  \item $f(x)+4=\dfrac{f(x)+4}{x+1}(x+1)\to3\cdot0=0$, so the limit is $-4$.
+  \item \begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=3pt]
+    \item $4$. Since $(x-2)^2>0$ for $x\neq2$, $f(x)>4$: it approaches 4 from above only.
+    \item $g$ is not continuous at $u=4$: $\displaystyle\lim_{u\to 4^-}g(u)=16$ but $\displaystyle\lim_{u\to 4^+}g(u)=6$.
+    \item $f(x)\to4^+$, so the limit is $\displaystyle\lim_{u\to 4^+}g(u)=6$.
+    \item Now $k(x)<4$ for $x\neq2$, so $k(x)\to4^-$ and the limit is $16$.
+  \end{enumerate}
+\end{enumerate}
+\end{solbox}
+
+\end{document}

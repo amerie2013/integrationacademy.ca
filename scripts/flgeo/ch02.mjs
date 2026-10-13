@@ -4,6 +4,19 @@ import {
   perpendicularLines, perpParallel,
   constructPerp, constructParallel,
 } from "./figures.mjs";
+import {
+  threePointsPlane, collinearPts, numberLineDist, midpointAlgebra, classifyAngles,
+  copyAngleObtuse, angleCombine, biconditionalFig, paragraphProofFig,
+  parallelConverse, perpTransversal, horizVert, constructPerpOnLine, constructRectangle,
+  translatePolygon, reflectYX, reflectVertical, rotate180, rotate270, glideReflect,
+  parallelReflect, intersectReflect, parallelogramSym, squareSym, scaleneNoSym,
+  exteriorAngle, angleSumTri, equilateralFig, altitudeIsos, aasMarks, medianFig,
+  dilatePoint, sssSimilar, sasSimilar, midsegmentTri, threeParallel, mirrorMethod,
+  depressionFig, guyWire, twoElevations,
+  diameterChord, semicircleRight, chordPerp, chordChord, tangentSecant, twoSecants, circleEq,
+  pyramidFig, coneFig, sphereFig, densityFig, popDensity, coneSlice, sphereSlice, frustumFig,
+  dieFig, bagMarbles, complementFig, cardsFig, expectedValue, withWithout,
+} from "./figures3.mjs";
 
 export const ch = {};
 
@@ -65,6 +78,7 @@ ch["2.1"] = L("2.1", "Lines and Angles (Parallel, Skew, Transversal)", [
       {
         h: "Sorting a full set of pairs",
         p: "From the eight labeled angles \\(1\\)–\\(8\\), classify each of these pairs: (a) \\(\\angle 1,\\angle 5\\); (b) \\(\\angle 4,\\angle 6\\); (c) \\(\\angle 2,\\angle 7\\); (d) \\(\\angle 1,\\angle 4\\).",
+        fig: transversalAngles(),
         steps: [
           `<strong>(a) \\(\\angle 1,\\angle 5\\):</strong> both upper-left at their respective intersections — <strong>corresponding angles</strong>.`,
           `<strong>(b) \\(\\angle 4,\\angle 6\\):</strong> both interior, opposite sides of the transversal — <strong>alternate interior angles</strong>.`,
@@ -139,6 +153,7 @@ ch["2.2"] = L("2.2", "Proving Theorems about Parallel Lines (Corresponding, Alte
       {
         h: "Using a converse to prove lines parallel",
         p: "A transversal crosses two lines. A pair of same-side interior angles measures \\(65^\\circ\\) and \\(115^\\circ\\). Are the two lines parallel? Justify your answer.",
+        fig: parallelConverse(),
         steps: [
           `<strong>Step 1 — Check the relationship:</strong> \\(65^\\circ+115^\\circ=180^\\circ\\), so the same-side interior angles are supplementary.`,
           `<strong>Step 2 — Apply the converse:</strong> the Converse of the Same-Side Interior Angles Theorem states that if same-side interior angles are supplementary, the lines are parallel.`,
@@ -148,6 +163,7 @@ ch["2.2"] = L("2.2", "Proving Theorems about Parallel Lines (Corresponding, Alte
       {
         h: "Two-column proof: alternate exterior angles",
         p: "<strong>Given:</strong> \\(\\ell_1\\parallel\\ell_2\\), cut by transversal \\(t\\), forming \\(\\angle 1\\) and \\(\\angle 8\\) as an alternate exterior pair (with \\(\\angle 5\\) corresponding to \\(\\angle 1\\)). <strong>Prove:</strong> \\(\\angle 1\\cong\\angle 8\\).",
+        fig: transversalAngles({ parallel: true, highlight: "altext" }),
         steps: [
           `<strong>Step 1 — Statement:</strong> \\(\\ell_1\\parallel\\ell_2\\). <strong>Reason:</strong> Given.`,
           `<strong>Step 2 — Statement:</strong> \\(\\angle 1\\cong\\angle 5\\). <strong>Reason:</strong> Corresponding Angles Theorem.`,
@@ -190,6 +206,7 @@ ch["2.3"] = L("2.3", "Proving Theorems about Perpendicular Lines", [
       {
         h: "All four angles are right angles",
         p: "\\(\\overleftrightarrow{AB}\\perp\\overleftrightarrow{CD}\\) at point \\(E\\). Explain why all four angles formed at \\(E\\) measure \\(90^\\circ\\), even though only one is marked as a right angle in the diagram.",
+        fig: perpendicularLines(),
         steps: [
           `<strong>Step 1 — Start from the given right angle:</strong> say \\(m\\angle AEC=90^\\circ\\) (given by the perpendicular mark).`,
           `<strong>Step 2 — Use the linear pair:</strong> \\(\\angle AEC\\) and \\(\\angle AED\\) form a linear pair, so \\(m\\angle AED=180^\\circ-90^\\circ=90^\\circ\\).`,
@@ -200,6 +217,7 @@ ch["2.3"] = L("2.3", "Proving Theorems about Perpendicular Lines", [
       {
         h: "Solving for x at a perpendicular intersection",
         p: "\\(\\overleftrightarrow{AB}\\perp\\overleftrightarrow{CD}\\) at \\(E\\). One of the four angles measures \\(4x+10\\) degrees. Find \\(x\\).",
+        fig: perpendicularLines(),
         steps: [
           `<strong>Step 1 — Use the perpendicular relationship:</strong> every angle at a perpendicular intersection measures \\(90^\\circ\\), so \\(4x+10=90\\).`,
           `<strong>Step 2 — Solve:</strong> \\(4x=80 \\Rightarrow x=20\\).`,
@@ -220,6 +238,7 @@ ch["2.3"] = L("2.3", "Proving Theorems about Perpendicular Lines", [
       {
         h: "Perpendicular Transversal Theorem",
         p: "<strong>Given:</strong> \\(\\ell_1\\parallel\\ell_2\\) and \\(t\\perp\\ell_1\\). <strong>Prove:</strong> \\(t\\perp\\ell_2\\).",
+        fig: perpTransversal(),
         steps: [
           `<strong>Step 1 — Statement:</strong> \\(\\ell_1\\parallel\\ell_2\\) and \\(t\\perp\\ell_1\\). <strong>Reason:</strong> Given.`,
           `<strong>Step 2 — Statement:</strong> the angle formed where \\(t\\) meets \\(\\ell_1\\) is \\(90^\\circ\\). <strong>Reason:</strong> Definition of perpendicular.`,
@@ -230,6 +249,7 @@ ch["2.3"] = L("2.3", "Proving Theorems about Perpendicular Lines", [
       {
         h: "Combining perpendicular and parallel relationships",
         p: "\\(\\ell_1\\parallel\\ell_2\\) and \\(t\\perp\\ell_1\\). The angle where \\(t\\) crosses \\(\\ell_2\\) is labeled \\(5x-15\\) degrees. Find \\(x\\).",
+        fig: perpParallel(),
         steps: [
           `<strong>Step 1 — Apply the Perpendicular Transversal Theorem:</strong> since \\(\\ell_1\\parallel\\ell_2\\) and \\(t\\perp\\ell_1\\), it must also be true that \\(t\\perp\\ell_2\\).`,
           `<strong>Step 2 — Use the definition of perpendicular:</strong> the angle where \\(t\\) crosses \\(\\ell_2\\) must measure \\(90^\\circ\\), so \\(5x-15=90\\).`,
@@ -271,6 +291,7 @@ ch["2.4"] = L("2.4", "Equations of Parallel and Perpendicular Lines (in the Coor
       {
         h: "Equation of a parallel line",
         p: "Write the equation of the line parallel to \\(y=3x-4\\) that passes through \\((2,5)\\).",
+        fig: perpParallel(),
         steps: [
           `<strong>Step 1 — Identify the given slope:</strong> \\(y=3x-4\\) has slope \\(m=3\\).`,
           `<strong>Step 2 — Apply the parallel rule:</strong> a parallel line has the same slope, \\(m=3\\).`,
@@ -294,6 +315,7 @@ ch["2.4"] = L("2.4", "Equations of Parallel and Perpendicular Lines (in the Coor
       {
         h: "Classifying two lines from their equations",
         p: "Are the lines \\(4x+2y=6\\) and \\(y=2x-5\\) parallel, perpendicular, or neither?",
+        fig: perpParallel(),
         steps: [
           `<strong>Step 1 — Rewrite the first equation in slope-intercept form:</strong> \\(2y=-4x+6 \\Rightarrow y=-2x+3\\), so \\(m_1=-2\\).`,
           `<strong>Step 2 — Read the second slope directly:</strong> \\(m_2=2\\).`,
@@ -304,6 +326,7 @@ ch["2.4"] = L("2.4", "Equations of Parallel and Perpendicular Lines (in the Coor
       {
         h: "The horizontal/vertical special case",
         p: "Write the equation of the line perpendicular to the vertical line \\(x=5\\) that passes through \\((5,-3)\\)... actually through \\((2,-3)\\).",
+        fig: horizVert(),
         steps: [
           `<strong>Step 1 — Recall the special rule:</strong> a line perpendicular to a vertical line (\\(x=5\\), undefined slope) must be horizontal (\\(m=0\\)).`,
           `<strong>Step 2 — Write a horizontal line through the given point:</strong> a horizontal line has equation \\(y=k\\) for some constant \\(k\\), and it must pass through \\((2,-3)\\), so \\(k=-3\\).`,
@@ -314,6 +337,7 @@ ch["2.4"] = L("2.4", "Equations of Parallel and Perpendicular Lines (in the Coor
       {
         h: "A coordinate geometry application",
         p: "Quadrilateral \\(ABCD\\) has \\(A(0,0)\\), \\(B(4,2)\\), \\(C(6,-2)\\), \\(D(2,-4)\\). Show that \\(\\overline{AB}\\perp\\overline{BC}\\).",
+        fig: horizVert(),
         steps: [
           `<strong>Step 1 — Find the slope of \\(\\overline{AB}\\):</strong> \\(m_{AB}=\\dfrac{2-0}{4-0}=\\dfrac{2}{4}=\\dfrac{1}{2}\\).`,
           `<strong>Step 2 — Find the slope of \\(\\overline{BC}\\):</strong> \\(m_{BC}=\\dfrac{-2-2}{6-4}=\\dfrac{-4}{2}=-2\\).`,
@@ -355,6 +379,7 @@ ch["2.5"] = L("2.5", "Constructions: Parallel and Perpendicular Lines (MA.912.GR
       {
         h: "Perpendicular through a point on the line",
         p: "Given point \\(P\\) on line \\(\\ell\\), construct a line through \\(P\\) perpendicular to \\(\\ell\\).",
+        fig: constructPerpOnLine(),
         steps: [
           `<strong>Step 1 — Mark equidistant points:</strong> place the compass point on \\(P\\) and swing an arc of any radius that crosses \\(\\ell\\) on both sides of \\(P\\); label the crossing points \\(A\\) and \\(B\\). Now \\(PA=PB\\).`,
           `<strong>Step 2 — Swing two larger equal arcs:</strong> open the compass wider than before. From \\(A\\), swing an arc above line \\(\\ell\\); from \\(B\\), using the exact same compass width, swing another arc above the line so it crosses the first one. Label the crossing point \\(Q\\).`,
@@ -387,6 +412,7 @@ ch["2.5"] = L("2.5", "Constructions: Parallel and Perpendicular Lines (MA.912.GR
       {
         h: "Why the perpendicular construction works",
         p: "In the Example 1 construction, explain why \\(\\overleftrightarrow{PQ}\\) is guaranteed to be perpendicular to \\(\\ell\\), rather than just looking close to perpendicular.",
+        fig: constructPerp(),
         steps: [
           `<strong>Step 1 — Identify the congruent triangles:</strong> \\(\\triangle APQ\\) and \\(\\triangle BPQ\\) share side \\(\\overline{PQ}\\), and by construction \\(PA=PB\\) (Step 1's arc) and \\(QA=QB\\) (Step 2's equal-radius arcs).`,
           `<strong>Step 2 — Apply SSS:</strong> three pairs of congruent sides mean \\(\\triangle APQ\\cong\\triangle BPQ\\).`,
@@ -397,6 +423,7 @@ ch["2.5"] = L("2.5", "Constructions: Parallel and Perpendicular Lines (MA.912.GR
       {
         h: "Building a rectangle using perpendicular constructions",
         p: "Describe how to use two perpendicular constructions to build a rectangle starting from segment \\(\\overline{AB}\\).",
+        fig: constructRectangle(),
         steps: [
           `<strong>Step 1 — Construct a perpendicular at each endpoint:</strong> using the point-on-a-line method, construct a line perpendicular to \\(\\overline{AB}\\) at \\(A\\), and another perpendicular to \\(\\overline{AB}\\) at \\(B\\).`,
           `<strong>Step 2 — Mark equal heights:</strong> using the same compass width, mark point \\(D\\) on the perpendicular at \\(A\\) and point \\(C\\) on the perpendicular at \\(B\\), both at the same distance from \\(\\overline{AB}\\).`,

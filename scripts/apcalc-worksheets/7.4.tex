@@ -1,0 +1,77 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize\color{black!60}Worksheet 7.4}
+\begin{document}
+
+\wstitle{7.4}{Reasoning from a Slope Field}{Unit 7: Differential Equations}
+
+\begin{ideabox}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+  \item An \textbf{equilibrium solution} is a constant solution: a horizontal line in the slope field.
+  \item A solution curve cannot cross an equilibrium. The sign of $\dfrac{dy}{dt}$ on each side tells you whether solutions approach it or move away.
+  \item $\dfrac{d^2y}{dx^2}$ is found by differentiating the equation and substituting for $\dfrac{dy}{dx}$. Its sign gives concavity.
+  \item For a logistic-type equation, growth is fastest halfway between the equilibria, and the solution has a point of inflection there.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked examples}
+\begin{example}{Example 1 \textperiodcentered{} One equilibrium}
+Describe the long-run behaviour of solutions of $\dfrac{dy}{dt}=3-y$.\soln Equilibrium $y=3$. Above it the derivative is negative; below it, positive.\result{Every solution approaches 3.}
+\end{example}
+
+\begin{example}{Example 2 \textperiodcentered{} Two equilibria}
+For $\dfrac{dy}{dt}=y(5-y)$, describe the solutions with $y(0)=1$ and with $y(0)=7$.\soln Equilibria 0 and 5. Between them the derivative is positive; above 5 it is negative.\result{The first increases toward 5; the second decreases toward 5.}
+\end{example}
+
+\begin{example}{Example 3 \textperiodcentered{} A second derivative}
+For $\dfrac{dy}{dx}=3x-y$, find $\dfrac{d^2y}{dx^2}$ in terms of $x$ and $y$.\soln Differentiate: $3-\dfrac{dy}{dx}$, then substitute.\result{$3-3x+y$.}
+\end{example}
+
+\newpage
+\sech{Practice}
+
+\level{Core}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item Find the equilibrium solutions of $\dfrac{dy}{dt}=y^2-16$.\work{2.3cm}
+  \item A solution of $\dfrac{dy}{dt}=0.4(20-y)$ has $y(0)=5$. Find $\displaystyle\lim_{t\to\infty}y(t)$.\work{2.3cm}
+  \item For the same equation, describe the solution with $y(0)=30$.\work{2.3cm}
+  \item For $\dfrac{dy}{dx}=x^2+y$, find $\dfrac{d^2y}{dx^2}$ in terms of $x$ and $y$.\work{2.3cm}
+\end{enumerate}
+
+\level{Exam level}
+\begin{enumerate}[leftmargin=*,itemsep=2pt,start=5]
+  \item For $\dfrac{dy}{dt}=\dfrac{y(10-y)}{5}$ with $0<y<10$, at what value of $y$ is the solution growing fastest, and how fast?\work{2.8cm}
+  \item For the equation in Question 5, at what value of $y$ does a solution have a point of inflection? Give a reason.\work{2.8cm}
+  \item A solution of $\dfrac{dy}{dx}=x-y^2$ passes through $(4,2)$. Show that it has a relative minimum there.\work{2.8cm}
+  \item For $\dfrac{dy}{dx}=3x-y$, describe the region of the plane in which solution curves are concave up.\work{2.8cm}
+\end{enumerate}
+
+\begin{frbox}{Question 9 \textperiodcentered{} Free-response practice}
+A fish population $P$, in thousands, satisfies $\dfrac{dP}{dt}=0.2P\left(1-\dfrac{P}{50}\right)$, where $t$ is in years.
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=2pt]
+  \item Find the equilibrium solutions.\work{2.6cm}
+  \item If $P(0)=10$, find $\displaystyle\lim_{t\to\infty}P(t)$ and explain why $P$ is increasing for all $t$.\work{2.6cm}
+  \item Find the population at which the fish are increasing fastest, and the rate of increase then.\work{2.6cm}
+\end{enumerate}
+\end{frbox}
+
+\newpage
+\begin{solbox}
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item $y=4$ and $y=-4$.
+  \item $20$.
+  \item It decreases, approaching 20 from above.
+  \item $2x+\dfrac{dy}{dx}=2x+x^2+y$.
+  \item At $y=5$, halfway between the equilibria; the rate is $\dfrac{5(5)}{5}=5$.
+  \item At $y=5$: $\dfrac{d^2y}{dt^2}=\dfrac{10-2y}{5}\cdot\dfrac{dy}{dt}$ changes sign there.
+  \item $\dfrac{dy}{dx}=4-4=0$, and $\dfrac{d^2y}{dx^2}=1-2y\dfrac{dy}{dx}=1>0$.
+  \item $\dfrac{d^2y}{dx^2}=3-3x+y>0$: above the line $y=3x-3$.
+  \item \begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=3pt]
+    \item $P=0$ and $P=50$.
+    \item $50$. For $0<P<50$ both factors are positive, so $\dfrac{dP}{dt}>0$, and the solution cannot cross the equilibrium $P=50$.
+    \item At $P=25$ thousand: $0.2(25)(0.5)=2.5$ thousand fish per year.
+  \end{enumerate}
+\end{enumerate}
+\end{solbox}
+
+\end{document}

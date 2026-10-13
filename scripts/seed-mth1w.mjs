@@ -37,6 +37,8 @@ const graph = (expr, param, o = {}) => ({
   id: bid(), type: "graph", expr, param,
   xMin: o.xMin ?? -10, xMax: o.xMax ?? 10, yMin: o.yMin ?? -10, yMax: o.yMax ?? 10,
   paramMin: o.paramMin ?? -5, paramMax: o.paramMax ?? 5, paramInit: o.paramInit ?? 1, caption: o.caption ?? "",
+  // Optional second independent slider (e.g. for y = m*x + b, param="m", param2="b").
+  ...(o.param2 ? { param2: o.param2, param2Min: o.param2Min ?? -5, param2Max: o.param2Max ?? 5, param2Init: o.param2Init ?? 0 } : {}),
 });
 const mg = (curves, o = {}) => ({
   id: bid(), type: "multigraph", curves,
@@ -165,14 +167,14 @@ Application
 2. Simplify the ratio \( 6:4 \).
 3. Solve the proportion \( \frac{3}{4} = \frac{x}{12} \).
 Thinking
-4. Which is the better deal: 20% off, or \$20 off a \$90 item? Justify.
-5. If 3 kg of apples cost \$7.50, find the cost of 5 kg.
+4. Which is the better deal: 20% off, or \( \$20 \) off a \( \$90 \) item? Justify.
+5. If 3 kg of apples cost \( \$7.50 \), find the cost of 5 kg.
 Communication
 6. Explain the difference between a ratio, a rate, and a unit rate.
 7. Explain, in words, how to find a percent of a number.
 Application
 8. A car travels 240 km in 4 hours. What is the unit rate in km/h?
-9. An \$80 item has 13% tax. What is the total cost?
+9. An \( \$80 \) item has 13% tax. What is the total cost?
 10. A population grows from 200 to 250. What is the percent increase?` },
 
   "2.1": { title: "Assignment 2.1 — Writing Expressions", description: String.raw`Knowledge & Understanding
@@ -187,7 +189,7 @@ Communication
 7. Explain why generalizing a pattern with an expression is useful.
 Application
 8. Write an expression for the perimeter of a rectangle with length \( l \) and width \( w \).
-9. A taxi charges \$4 plus \$2 per km. Write an expression for the cost of \( k \) km.
+9. A taxi charges \( \$4 \) plus \( \$2 \) per km. Write an expression for the cost of \( k \) km.
 10. Use your taxi expression to find the cost of a 12 km ride.` },
 
   "2.2": { title: "Assignment 2.2 — Equivalent Expressions", description: String.raw`Knowledge & Understanding
@@ -285,7 +287,7 @@ Application
 2. Is the number of houses on a street discrete or continuous? Explain.
 3. Is the height of a growing sunflower over several days discrete or continuous? Explain.
 Thinking
-4. A taxi charges \$4 plus \$2/km. Make a table of cost for \( d = 0,1,2,3 \) km.
+4. A taxi charges \( \$4 \) plus \( \$2 \)/km. Make a table of cost for \( d = 0,1,2,3 \) km.
 5. A table has \( x: 0,1,2,3 \to y: 2,7,12,17 \). Find the rate of change and the equation.
 Communication
 6. Explain the difference between the independent and dependent variable, using an example.
@@ -306,7 +308,7 @@ Communication
 6. Explain how you can tell from a graph whether a relation is linear.
 7. Explain, in words, what "rate of change" means.
 Application
-8. A taxi charges \$4 plus \$2/km. Is cost vs. distance linear? What is the rate of change?
+8. A taxi charges \( \$4 \) plus \( \$2 \)/km. Is cost vs. distance linear? What is the rate of change?
 9. Describe the difference between the graphs of \( y = 2x \) and \( y = x^2 \).
 10. A plant's height (cm) over weeks is \( 2, 5, 8, 11 \). Is the growth linear? Explain.` },
 
@@ -332,13 +334,13 @@ Application
 3. Are \( y = 2x + 1 \) and \( y = 2x - 3 \) parallel?
 Thinking
 4. Compare \( y = 3x + 1 \) and \( y = -3x + 1 \): how do their steepness and direction differ?
-5. Where do \( y = 2x + 1 \) and \( y = x + 4 \) cross?
+5. Where do \( y = 2x + 1 \) and \( y = x + 4 \) cross, and for \( x \)-values greater than that, which line has the higher \( y \)-values?
 Communication
 6. Explain how the slope affects a line's steepness and direction.
 7. Explain what the y-intercept tells you on a graph.
 Application
-8. Plan A: \$20 + \$5/month; Plan B: \$35 + \$2/month. Write each as an equation.
-9. Which plan is cheaper at 3 months?
+8. Plan A: \( \$20 \) + \( \$5 \)/month; Plan B: \( \$35 \) + \( \$2 \)/month. Write each as an equation.
+9. For what range of months is Plan A cheaper than Plan B? Solve the inequality.
 10. After how many months do the two plans cost the same?` },
 
   "4.5": { title: "Assignment 4.5 — Graphing Special Lines", description: String.raw`Knowledge & Understanding
@@ -346,15 +348,15 @@ Application
 2. Describe the graph of \( x = -2 \).
 3. Describe the graph of \( y = x \).
 Thinking
-4. Where do \( y = 4 \) and \( x = 1 \) intersect?
+4. Where do \( y = 4 \), \( x = 1 \), and \( y = x \) all pairwise intersect? List all three intersection points.
 5. Is \( x = 5 \) a function? Explain.
 Communication
 6. Explain why \( y = k \) is horizontal but \( x = k \) is vertical.
 7. Describe the line \( y = x \) in words.
 Application
 8. Graph \( y = 2x - 3 \) using the slope and y-intercept (give two points).
-9. A item costs \$7 no matter how many you buy. What type of line models cost vs. quantity?
-10. Sketch \( y = -x \) and state its slope.` },
+9. A item costs \( \$7 \) no matter how many you buy. What type of line models cost vs. quantity?
+10. Find the equation of the line through the origin that is perpendicular to \( y = -x \), and state its slope.` },
 
   "4.6": { title: "Assignment 4.6 — Transformations of Lines", description: String.raw`Knowledge & Understanding
 1. Start with \( y = 2x \). Write the equation after shifting it up 3.
@@ -367,9 +369,9 @@ Communication
 6. Explain the difference between changing the slope and changing the y-intercept.
 7. Describe what reflecting \( y = 2x \) in the x-axis does to the line.
 Application
-8. \( y = x + 1 \) is shifted up 4. Write the new equation.
+8. \( y = x + 1 \) is shifted up 4, then reflected in the x-axis. Write the final equation.
 9. A line \( y = 2x \) is made less steep, to slope 1. Write the new equation.
-10. Translate \( y = -x + 2 \) down 3 and write the result.` },
+10. \( y = -x + 2 \) is reflected in the x-axis, then translated down 3. Write the final equation.` },
 
   "4.7": { title: "Assignment 4.7 — Finding the Equation of a Line", description: String.raw`Knowledge & Understanding
 1. A line has slope 2 and y-intercept 5. Write its equation.
@@ -377,16 +379,16 @@ Application
 3. A line has slope 0 and passes through \( (0, 4) \). Write its equation.
 Thinking
 4. Find the equation of the line through \( (0, 2) \) and \( (3, 8) \).
-5. Find the slope of the line through \( (1, 3) \) and \( (4, 12) \).
+5. Find the equation of the line through \( (1, 3) \) and \( (4, 12) \), then determine whether \( (10, 39) \) lies on it.
 Communication
 6. Explain how to find a line's equation from two points.
 7. Explain how to read the slope and y-intercept from a graph.
 Application
 8. A candle starts at 20 cm and burns 2 cm/hour. Write the equation for height vs. time.
 9. From the table \( x: 0,2,4 \), \( y: 3,7,11 \), find the equation.
-10. Using your candle equation, what is the height after 5 hours?` },
+10. Using your candle equation, find the height after 5 hours, and find when the candle burns out completely (height \( = 0 \)).` },
 
-  "4.8": { title: "Assignment 4.8 — General Form", description: String.raw`Knowledge & Understanding
+  "4.8": { title: "Assignment 4.8 — General Form vs Slope-Intercept Form", description: String.raw`Knowledge & Understanding
 1. Write \( y = 3x - 4 \) in general form \( Ax + By + C = 0 \).
 2. Convert \( 3x + y - 7 = 0 \) to slope-intercept form.
 3. State which form shows the slope directly.
@@ -399,7 +401,7 @@ Communication
 Application
 8. A line has x-intercept \( 8 \) and y-intercept \( -2 \). Write it in general form.
 9. Two lines are \( 2x + 3y = 6 \) and \( y = -\frac{2}{3}x + 5 \). Convert the first and decide whether the lines are parallel.
-10. Write the vertical line through \( (7, -3) \) in general form.` },
+10. Write both the vertical line and the horizontal line through \( (7, -3) \) in general form, and state their point of intersection.` },
 
   "4.9": { title: "Assignment 4.9 — Parallel and Perpendicular Lines", description: String.raw`Knowledge & Understanding
 1. State the slope relationship for parallel lines.
@@ -412,7 +414,7 @@ Communication
 6. Explain how to tell, from two equations, whether the lines are parallel, perpendicular, or neither.
 7. Explain why a horizontal and a vertical line are perpendicular even though the "product of slopes" rule cannot be applied directly.
 Application
-8. Find the equation of the line through \( (0, 4) \) parallel to \( y = -3x + 1 \).
+8. Find the equation of the line through \( (0, 4) \) parallel to \( y = -3x + 1 \), then find where this new line crosses \( y = x \).
 9. Find the equation of the line through \( (0, -1) \) perpendicular to \( y = \frac{1}{2}x + 6 \).
 10. A line through \( (2, 5) \) is perpendicular to the line through \( (0,0) \) and \( (2,4) \). Find its equation.` },
 
@@ -427,7 +429,7 @@ Communication
 6. Explain, in 2–3 sentences, why standardized units of measurement were a turning point in mathematics and trade.
 7. Describe one way measurement tools have changed from antiquity to today and the mathematical idea behind the improvement.
 Application
-8. An ancient builder lays out a right angle with a 3-4-5 rope. Verify it is a right angle using the Pythagorean relationship.
+8. An ancient builder lays out a right angle with a 3-4-5 rope. Verify it is a right angle using the Pythagorean relationship, then determine whether a 5-6-7 rope would also form a right angle.
 9. A scale drawing uses 1 unit = 12 ancient "palms." A wall is 9 units long on the drawing. How many palms is the real wall?
 10. Research-style: a circle's circumference was estimated as \( \frac{256}{81}\,d \) (an early value of \(\pi\)). Compute this factor as a decimal and find its percent error from \( \pi \).` },
 
@@ -436,7 +438,7 @@ Application
 2. Define a central angle and an inscribed angle in a circle.
 3. A radius is 5 cm. State the diameter.
 Thinking
-4. Two angles of a triangle are \(47^\circ\) and \(68^\circ\). Find the third, and classify the triangle by angles.
+4. Two angles of a triangle are \(47^\circ\) and \(68^\circ\). Find the third, classify the triangle by angles, and determine whether it could also be classified as a right triangle.
 5. An inscribed angle subtends the same arc as a central angle of \(80^\circ\). Find the inscribed angle and state the property used.
 Communication
 6. Explain why the exterior angle of a triangle equals the sum of the two non-adjacent interior angles.
@@ -459,7 +461,7 @@ Communication
 Application
 8. A room is \(4.2 \text{ m} \times 3.5 \text{ m}\). Find its area in \(\text{m}^2\) and in \(\text{cm}^2\).
 9. A car travels \(540 \text{ km}\) on \(45 \text{ L}\). Express fuel use in \(\text{L}/100\text{ km}\).
-10. A tank holds \(0.75 \text{ m}^3\). Convert to litres (1 \(\text{m}^3 = 1000\) L) and to millilitres.` },
+10. A tank holds \(0.75 \text{ m}^3\) and drains at \(500 \text{ mL/min}\). Convert the tank's volume to litres, and find how many hours it takes to drain completely.` },
 
   "5.4": { title: "Assignment 5.4 — The Pythagorean Theorem", description: String.raw`Knowledge & Understanding
 1. State the Pythagorean theorem.
@@ -472,7 +474,7 @@ Communication
 6. Explain how to decide whether a triangle is right-angled given its three side lengths.
 7. Explain why the converse of the Pythagorean theorem lets builders check for square corners.
 Application
-8. A 5 m ladder leans against a wall with its base 1.5 m out. How high up the wall does it reach? Round to 2 decimals.
+8. A 5 m ladder leans against a wall with its base 1.5 m out. How high up the wall does it reach? A second 5 m ladder has its base only 0.5 m out — how much higher does it reach than the first? Round to 2 decimals.
 9. A rectangular field is \(120 \text{ m} \times 90 \text{ m}\). Find the length of the diagonal path across it.
 10. A drone flies 40 m east then 30 m north. How far is it from the start, and explain why the straight-line distance is shorter than the path flown.` },
 
@@ -488,7 +490,7 @@ Communication
 7. Describe a real situation where the perimeter scale factor matters (e.g. fencing, framing).
 Application
 8. A triangle has perimeter 18. After scaling by 4, find the new perimeter.
-9. A square's perimeter is 20. Find the perimeter after each side is tripled.
+9. A square's perimeter is 20. Find the perimeter if every side is tripled. Then find the perimeter if instead only the length is tripled, turning it into a rectangle with the original width — explain why the two answers differ.
 10. A map uses scale \(1 : 50\,000\). A park's boundary is 12 cm on the map. Find the real perimeter in km.` },
 
   "5.6": { title: "Assignment 5.6 — Changing Dimensions: Area", description: String.raw`Knowledge & Understanding
@@ -503,7 +505,7 @@ Communication
 7. Describe a real situation where knowing the area scale factor (not just the length factor) matters.
 Application
 8. A photo \(10 \times 15 \text{ cm}\) is enlarged so each side is \(2.5\times\). Find the new area.
-9. A rectangle's area is 20. If both sides are doubled, find the new area.
+9. A rectangle's area is 20. If both sides are doubled, find the new area. If instead only the length is doubled (width unchanged), find the new area, and explain why the two results differ.
 10. A model car is built at scale \(1:18\). The real car's surface needs \(9 \text{ m}^2\) of paint. Estimate the model's surface area in \(\text{cm}^2\).` },
 
   "5.7": { title: "Assignment 5.7 — Volume", description: String.raw`Knowledge & Understanding
@@ -511,7 +513,7 @@ Application
 2. Find the volume of a cylinder with \(r = 3\), \(h = 10\) (leave in terms of \(\pi\)).
 3. State the formula for the volume of a sphere.
 Thinking
-4. A cone and a cylinder share the same radius and height. Compare their volumes and justify the ratio.
+4. A cone and a cylinder share the same radius and height. Compare their volumes and justify the ratio. If the cone's height is doubled (radius unchanged), how does its new volume compare to the original cylinder's?
 5. A sphere has volume \(36\pi \text{ cm}^3\). Find its radius.
 Communication
 6. Explain why volume scales by \(k^3\) when all lengths scale by \(k\).
@@ -533,7 +535,7 @@ Communication
 7. Describe a situation where minimizing surface area for a fixed volume is useful (e.g. packaging).
 Application
 8. Find the total surface area of a cylinder with \(r = 4 \text{ cm}\), \(h = 9 \text{ cm}\) (round to 1 decimal).
-9. Find the surface area of a sphere with \(r = 5\) (leave in terms of \(\pi\)).
+9. A sphere and a cube have equal surface area. If the cube has edge 5 cm, find the sphere's radius (round to 2 decimals).
 10. A net of a cube is made of 6 congruent squares of side 3 cm. Find the cube's total surface area.` },
 
   "6.1": { title: "Assignment 6.1 — Big Data & Its Implications", description: String.raw`Knowledge & Understanding
@@ -547,7 +549,7 @@ Communication
 6. Describe one benefit and one risk of companies collecting large amounts of personal data.
 7. Explain the difference between a population and a sample, and why sampling is used.
 Application
-8. A sensor records 5 readings per second. How many readings does it collect in one full day?
+8. A sensor records 5 readings per second, and each reading takes 2 KB to store. How many readings does it collect in one full day, and how many GB of storage does that require (1 GB = 1000 MB = 1 000 000 KB)?
 9. A website logs 1.2 KB per visit and gets 50 000 visits a day. How many MB of logs per day (1 MB = 1000 KB)?
 10. A company claims "90% of users love our app" from a survey of only its paying members. Identify the sampling problem and suggest a fairer method.` },
 
@@ -556,7 +558,7 @@ Application
 2. Find the median of \( 3, 7, 9, 2, 5 \).
 3. Find the mode of \( 2, 4, 4, 6, 9, 4 \).
 Thinking
-4. Find the range and the mean of \( 12, 15, 11, 20, 17 \).
+4. Find the range and the mean of \( 12, 15, 11, 20, 17 \). If the value \( 20 \) turns out to be a data-entry error and should have been \( 12 \), find how much the mean changes.
 5. A data set of 5 numbers has a mean of 10. Four of them are \( 8, 9, 11, 12 \). Find the fifth.
 Communication
 6. Explain when the median is a better measure of centre than the mean.
@@ -572,7 +574,7 @@ Application
 3. State what "no correlation" means for a scatter plot.
 Thinking
 4. Hours studied vs test score tends to rise together. What type of correlation is this, and roughly what slope sign would the line of best fit have?
-5. Find the slope of a line of best fit passing through \( (0, 2) \) and \( (5, 12) \).
+5. Find the equation of a line of best fit passing through \( (0, 2) \) and \( (5, 12) \), then predict the \( y \)-value at \( x = 8 \), and state whether this prediction is interpolation or extrapolation.
 Communication
 6. Explain the difference between interpolation and extrapolation, and which is generally more reliable.
 7. Explain why "correlation does not imply causation," with an example.
@@ -586,75 +588,75 @@ Application
 2. State what it means to "make assumptions" when building a model.
 3. A model gives cost \( C = 15n + 40 \). State the fixed cost and the cost per item.
 Thinking
-4. Using \( C = 15n + 40 \), find the cost for 12 items.
+4. Using \( C = 15n + 40 \), find the cost for 12 items, then find the maximum number of items you can buy with a budget of \( \$250 \).
 5. A phone plan is modelled by \( C = 0.10m + 25 \) (\(m\) = minutes). Find the cost for 300 minutes.
 Communication
 6. Explain why a model usually needs to be tested and revised, not just built once.
 7. Describe one limitation of using a straight-line model for real population growth.
 Application
-8. A taxi charges \$3.50 plus \$1.75/km. Write a model for cost vs distance and find the cost of a 10 km trip.
+8. A taxi charges \( \$3.50 \) plus \( \$1.75 \)/km. Write a model for cost vs distance and find the cost of a 10 km trip.
 9. A pool drains at 50 L/min from 3000 L. Write a model for volume vs time and find when it is empty.
 10. You model your weekly savings as \( S = 20w + 50 \). Interpret the 20 and the 50, and predict your savings after 8 weeks.` },
 
   "7.1": { title: "Assignment 7.1 — Making Financial Decisions", description: String.raw`Knowledge & Understanding
 1. Define "fixed cost" and "variable cost" with one example each.
-2. A phone plan costs \$30/month plus \$0.05/text. Write the monthly cost \( C \) for \( t \) texts.
+2. A phone plan costs \( \$30 \)/month plus \( \$0.05 \)/text. Write the monthly cost \( C \) for \( t \) texts.
 3. State what a "unit price" is and why it helps compare deals.
 Thinking
-4. Plan A: \$40 flat. Plan B: \$15 + \$0.50/GB. For how many GB is Plan B cheaper than Plan A?
-5. A 750 mL juice costs \$3.00 and a 2 L bottle costs \$7.20. Which is the better unit price, and by how much per litre?
+4. Plan A: \( \$40 \) flat. Plan B: \( \$15 \) + \( \$0.50 \)/GB. For how many GB is Plan B cheaper than Plan A?
+5. A 750 mL juice costs \( \$3.00 \) and a 2 L bottle costs \( \$7.20 \). Which is the better unit price, and by how much per litre?
 Communication
 6. Explain the difference between "needs" and "wants" when making a financial decision.
 7. Explain why the cheapest sticker price is not always the best financial decision (give a factor to consider).
 Application
-8. A gym charges \$25 to join plus \$18/month. Write the cost model and find the total for one year.
-9. Store A sells a laptop for \$900 with no tax; Store B for \$820 plus 13% tax. Which is cheaper, and by how much?
-10. You earn \$60 for 5 hours of tutoring. Find your hourly rate and predict earnings for a 13-hour week.` },
+8. A gym charges \( \$25 \) to join plus \( \$18 \)/month. Write the cost model and find the total for one year.
+9. Store A sells a laptop for \( \$900 \) with no tax; Store B for \( \$820 \) plus 13% tax. Which is cheaper, and by how much?
+10. You earn \( \$60 \) for 5 hours of tutoring. Find your hourly rate, predict earnings for a 13-hour week, and find how many hours you'd need to work to earn \( \$500 \).` },
 
   "7.2": { title: "Assignment 7.2 — Appreciation & Depreciation", description: String.raw`Knowledge & Understanding
 1. Define appreciation and depreciation.
-2. A \$1000 asset grows 5% in a year. Find its new value.
-3. A \$1000 asset loses 10% in a year. Find its new value.
+2. A \( \$1000 \) asset grows 5% in a year. Find its new value.
+3. A \( \$1000 \) asset loses 10% in a year. Find its new value.
 Thinking
-4. Write the formula for the value of a \$1000 asset after \( n \) years at 5% annual appreciation.
-5. A car depreciates 15%/year from \$20 000. Find its value after 2 years (to the nearest dollar).
+4. Write the formula for the value of a \( \$1000 \) asset after \( n \) years at 5% annual appreciation.
+5. A car depreciates 15%/year from \( \$20 000 \). Find its value after 2 years (to the nearest dollar).
 Communication
 6. Explain why depreciation is modelled with repeated multiplication rather than subtracting a fixed amount each year.
 7. Explain the difference between the growth factor for 8% appreciation and for 8% depreciation.
 Application
-8. A house worth \$300 000 appreciates 4%/year. Find its value after 3 years (nearest dollar).
-9. A phone worth \$1200 depreciates 25%/year. What is it worth after 3 years?
-10. Collectible art appreciates 6%/year from \$5000. Write the model and find when it first exceeds \$6000 (whole years).` },
+8. A house worth \( \$300 000 \) appreciates 4%/year. A second house worth \( \$250 000 \) appreciates 6%/year. After how many whole years is the second house worth more than the first?
+9. A phone worth \( \$1200 \) depreciates 25%/year. What is it worth after 3 years?
+10. Collectible art appreciates 6%/year from \( \$5000 \). Write the model and find when it first exceeds \( \$6000 \) (whole years).` },
 
   "7.3": { title: "Assignment 7.3 — Interest & Borrowing", description: String.raw`Knowledge & Understanding
 1. State the simple interest formula \( I = Prt \).
-2. Find the simple interest on \$2000 at 4%/year for 3 years.
+2. Find the simple interest on \( \$2000 \) at 4%/year for 3 years.
 3. Define "principal" and "interest rate."
 Thinking
-4. Find the total amount owed on a \$1500 loan at 6% simple interest for 2 years.
-5. \$1000 is invested at 5% compounded annually. Find the amount after 3 years (nearest cent).
+4. Find the total amount owed on a \( \$1500 \) loan at 6% simple interest for 2 years.
+5. \( \$1000 \) is invested at 5% compounded annually. Find the amount after 3 years (nearest cent).
 Communication
 6. Explain the difference between simple and compound interest.
 7. Explain why credit-card debt can grow quickly when only the minimum is paid.
 Application
-8. A \$5000 loan charges 8% simple interest per year. How much interest after 4 years?
-9. \$2000 invested at 6% compounded annually — find the amount after 5 years (nearest cent).
-10. Compare \$1000 at 5% simple vs 5% compound interest after 10 years; which earns more and by roughly how much?` },
+8. A \( \$5000 \) loan charges 8% simple interest per year. How much interest after 4 years? If it instead compounded annually at 8%, how much more interest would you owe after 4 years?
+9. \( \$2000 \) invested at 6% compounded annually — find the amount after 5 years (nearest cent).
+10. Compare \( \$1000 \) at 5% simple vs 5% compound interest after 10 years; which earns more and by roughly how much?` },
 
   "7.4": { title: "Assignment 7.4 — Budgets", description: String.raw`Knowledge & Understanding
 1. Define a budget.
 2. State what it means for a budget to "balance."
-3. Monthly income is \$2400 and expenses are \$2100. Find the monthly surplus.
+3. Monthly income is \( \$2400 \) and expenses are \( \$2100 \). Find the monthly surplus.
 Thinking
-4. A budget allocates 50% to needs, 30% to wants, 20% to savings on \$2000 income. Find each amount.
-5. Income is \$1800/month; rent \$700, food \$400, transport \$200, other \$300. How much is left to save?
+4. A budget allocates 50% to needs, 30% to wants, 20% to savings on \( \$2000 \) income. Find each amount.
+5. Income is \( \$1800 \)/month; rent \( \$700 \), food \( \$400 \), transport \( \$200 \), other \( \$300 \). How much is left to save?
 Communication
 6. Explain why tracking expenses is important even when income is steady.
 7. Explain the "50/30/20" budgeting guideline in your own words.
 Application
-8. You want to save \$1200 in a year. How much must you set aside each month?
-9. Income \$2500/month with \$2200 expenses. If you save the surplus, how long to reach \$1800 saved?
-10. Your phone bill rises from \$45 to \$60/month. By how much must you cut other spending to keep the same total budget, and what % increase was the phone bill?` },
+8. You want to save \( \$1200 \) in a year. How much must you set aside each month? If you've already saved \( \$300 \) in the first 2 months, how much must you save each remaining month to still reach \( \$1200 \) by year's end?
+9. Income \( \$2500 \)/month with \( \$2200 \) expenses. If you save the surplus, how long to reach \( \$1800 \) saved?
+10. Your phone bill rises from \( \$45 \) to \( \$60 \)/month. By how much must you cut other spending to keep the same total budget, and what % increase was the phone bill?` },
 };
 
 const subjects = [
@@ -710,6 +712,17 @@ const subjects = [
       <div class="step"><strong>Step 2:</strong> Because \( \mathbb{N} \subset \mathbb{W} \subset \mathbb{Z} \subset \mathbb{Q} \subset \mathbb{R} \), it automatically belongs to every set further out.</div>
       <div class="step"><strong>Step 3 (check):</strong> \( 7 = \frac{7}{1} \) is a ratio of integers, confirming it is also rational.</div>
       <em>Conclusion: \( 7 \) is natural, whole, an integer, rational, and real. ✓</em>
+      <div style="text-align:center;margin:10px 0;">
+        <svg viewBox="0 0 200 200" width="170" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;">
+          <circle cx="100" cy="100" r="80" fill="#f5f3ff" stroke="#6d28d9" stroke-width="1.5"/>
+          <circle cx="100" cy="100" r="65" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+          <circle cx="100" cy="100" r="50" fill="#ecfdf5" stroke="#0d9488" stroke-width="1.5"/>
+          <circle cx="100" cy="100" r="35" fill="#fff7ed" stroke="#ea580c" stroke-width="1.5"/>
+          <circle cx="100" cy="100" r="20" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/>
+          <circle cx="100" cy="100" r="5" fill="#111827"/>
+          <text x="112" y="104" font-size="12" fill="#111827">7</text>
+        </svg>
+      </div>
     </div>
   </div>
 
@@ -720,6 +733,17 @@ const subjects = [
       <div class="step"><strong>Step 1:</strong> Check for a perfect square: \( \sqrt{16} = 4 \), because \( 4^2 = 16 \).</div>
       <div class="step"><strong>Step 2:</strong> \( 4 = \frac{4}{1} \) is a ratio of integers, so it is rational.</div>
       <em>Conclusion: \( \sqrt{16} = 4 \) is rational. ✓</em>
+      <div style="text-align:center;margin:10px 0;">
+        <svg viewBox="0 0 200 200" width="170" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;">
+          <circle cx="100" cy="100" r="80" fill="#f5f3ff" stroke="#6d28d9" stroke-width="1.5"/>
+          <circle cx="100" cy="100" r="65" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+          <circle cx="100" cy="100" r="50" fill="#ecfdf5" stroke="#0d9488" stroke-width="1.5"/>
+          <circle cx="100" cy="100" r="35" fill="#fff7ed" stroke="#ea580c" stroke-width="1.5"/>
+          <circle cx="100" cy="100" r="20" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/>
+          <circle cx="100" cy="100" r="5" fill="#111827"/>
+          <text x="112" y="104" font-size="12" fill="#111827">√16 = 4</text>
+        </svg>
+      </div>
     </div>
   </div>
 
@@ -731,6 +755,17 @@ const subjects = [
       <div class="step"><strong>Step 2:</strong> It is a ratio of integers, \( \frac{-3}{4} \), so it is rational.</div>
       <div class="step"><strong>Step 3 (check):</strong> its decimal \( -0.75 \) terminates — another sign it is rational.</div>
       <em>Conclusion: the smallest set is the rationals, \( \mathbb{Q} \). ✓</em>
+      <div style="text-align:center;margin:10px 0;">
+        <svg viewBox="0 0 200 200" width="170" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;">
+          <circle cx="100" cy="100" r="80" fill="#f5f3ff" stroke="#6d28d9" stroke-width="1.5"/>
+          <circle cx="100" cy="100" r="65" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+          <circle cx="100" cy="100" r="50" fill="#ecfdf5" stroke="#0d9488" stroke-width="1.5"/>
+          <circle cx="100" cy="100" r="35" fill="#fff7ed" stroke="#ea580c" stroke-width="1.5"/>
+          <circle cx="100" cy="100" r="20" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/>
+          <circle cx="100" cy="157" r="5" fill="#111827"/>
+          <text x="112" y="161" font-size="12" fill="#111827">−3/4</text>
+        </svg>
+      </div>
     </div>
   </div>
 
@@ -742,6 +777,17 @@ const subjects = [
       <div class="step"><strong>Step 2:</strong> Subtract: \( 10x - x = 3.\overline{3} - 0.\overline{3} = 3 \), so \( 9x = 3 \Rightarrow x = \frac{3}{9} = \frac{1}{3} \).</div>
       <div class="step"><strong>Step 3:</strong> \( \frac{1}{3} \) is a ratio of integers, hence rational.</div>
       <em>Conclusion: \( 0.\overline{3} = \frac{1}{3} \) is rational. ✓ (Every terminating <em>or</em> repeating decimal is rational.)</em>
+      <div style="text-align:center;margin:10px 0;">
+        <svg viewBox="0 0 200 200" width="170" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;">
+          <circle cx="100" cy="100" r="80" fill="#f5f3ff" stroke="#6d28d9" stroke-width="1.5"/>
+          <circle cx="100" cy="100" r="65" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+          <circle cx="100" cy="100" r="50" fill="#ecfdf5" stroke="#0d9488" stroke-width="1.5"/>
+          <circle cx="100" cy="100" r="35" fill="#fff7ed" stroke="#ea580c" stroke-width="1.5"/>
+          <circle cx="100" cy="100" r="20" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/>
+          <circle cx="100" cy="157" r="5" fill="#111827"/>
+          <text x="112" y="161" font-size="12" fill="#111827">1/3</text>
+        </svg>
+      </div>
     </div>
   </div>
 
@@ -753,6 +799,17 @@ const subjects = [
       <div class="step"><strong>Step 2:</strong> Simplify: \( \sqrt{50} = \sqrt{25 \cdot 2} = 5\sqrt{2} \approx 7.071\ldots \), a decimal that never repeats.</div>
       <div class="step"><strong>Step 3 (check):</strong> \( \sqrt{2} \) is irrational, and a (non-zero) rational times an irrational is irrational.</div>
       <em>Conclusion: \( \sqrt{50} \) is irrational. ✓</em>
+      <div style="text-align:center;margin:10px 0;">
+        <svg viewBox="0 0 200 200" width="170" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;">
+          <circle cx="100" cy="100" r="80" fill="#f5f3ff" stroke="#6d28d9" stroke-width="1.5"/>
+          <circle cx="100" cy="100" r="65" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+          <circle cx="100" cy="100" r="50" fill="#ecfdf5" stroke="#0d9488" stroke-width="1.5"/>
+          <circle cx="100" cy="100" r="35" fill="#fff7ed" stroke="#ea580c" stroke-width="1.5"/>
+          <circle cx="100" cy="100" r="20" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/>
+          <circle cx="100" cy="172" r="5" fill="#111827"/>
+          <text x="112" y="176" font-size="12" fill="#111827">√50</text>
+        </svg>
+      </div>
     </div>
   </div>
 
@@ -876,6 +933,7 @@ const subjects = [
     <div class="solution">
       <div class="step"><strong>Step 1:</strong> Add them&nbsp; \( \left(\frac{1}{4}+\frac{1}{2}\right) =\frac{1}{4}+ \frac{1}{2}\cdot\frac{2}{2}=\frac{3}{4} \) (Commend denominator).</div><div class="step"><span style="font-weight: bolder;">Step 2:</span> Divid by 2:&nbsp; \( \frac{ \frac{3}{4}}{2}=\frac{3}{8} \).</div>
       <em>Conclusion: \( \frac{3}{8} \), and \( \frac{1}{4} &lt; \frac{3}{8} &lt; \frac{1}{2} \). ✓</em>
+      <div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 240 70" width="240" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><line x1="20" y1="35" x2="220" y2="35" stroke="#94a3b8" stroke-width="2"/><circle cx="70" cy="35" r="4" fill="#4a90e2"/><text x="70" y="55" font-size="11" text-anchor="middle" fill="#1e3a5f">1/4</text><circle cx="120" cy="35" r="4" fill="#c2185b"/><text x="120" y="20" font-size="11" text-anchor="middle" fill="#7a1044">3/8</text><circle cx="170" cy="35" r="4" fill="#4a90e2"/><text x="170" y="55" font-size="11" text-anchor="middle" fill="#1e3a5f">1/2</text></svg></div>
     </div>
   </div>
 
@@ -887,6 +945,7 @@ const subjects = [
       <div class="step"><strong>Step 2:</strong> Divide by 2 to land exactly in the middle:&nbsp; \( \frac{1.41}{2} = 0.705 \).</div>
       <div class="step"><strong>Step 3 (check):</strong> \( 0.7 &lt; 0.705 &lt; 0.71 \). ✓</div>
       <em>Conclusion: \( 0.705 \). And we are not stuck — between \( 0.7 \) and \( 0.705 \) sits \( 0.7025 \), and so on <strong>forever</strong>.</em>
+      <div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 240 70" width="240" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><line x1="20" y1="35" x2="220" y2="35" stroke="#94a3b8" stroke-width="2"/><circle cx="30" cy="35" r="4" fill="#4a90e2"/><text x="30" y="55" font-size="11" text-anchor="middle" fill="#1e3a5f">0.7</text><circle cx="120" cy="35" r="4" fill="#c2185b"/><text x="120" y="20" font-size="11" text-anchor="middle" fill="#7a1044">0.705</text><circle cx="210" cy="35" r="4" fill="#4a90e2"/><text x="210" y="55" font-size="11" text-anchor="middle" fill="#1e3a5f">0.71</text></svg></div>
     </div>
   </div>
 
@@ -902,7 +961,7 @@ const subjects = [
   </div>
 </div>
 ` },
-      graph("(1/3)^x", "", { xMin: 0, xMax: 6, yMin: 0, yMax: 1.1, caption: "Example 3: the sequence 1, 1/3, 1/9, 1/27, … shown as y = (1/3)^x. It dives toward 0 (the limit) but never touches the x-axis." }),
+      graph("b^x", "b", { xMin: 0, xMax: 6, yMin: 0, yMax: 1.1, paramMin: 0.05, paramMax: 0.95, paramInit: 1/3, caption: "Example 3: y = b^x, starting at b = 1/3 (the sequence 1, 1/3, 1/9, 1/27, …). Slide b — for any base between 0 and 1 the curve still dives toward the limit 0, but never touches the x-axis." }),
       { id: bid(), type: "html", html: String.raw`<div class="lecture-box">
   <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;">
     <h3>Example 4: Build a sequence that approaches 2</h3>
@@ -912,6 +971,7 @@ const subjects = [
       <div class="step"><strong>Step 2:</strong> Each step, close <em>half</em> of the remaining gap — add \( \frac{1}{2} \), then \( \frac{1}{4} \), then \( \frac{1}{8} \), \( \dots \):&nbsp; \( 1 \to 1.5 \to 1.75 \to 1.875 \to 1.9375 \).</div>
       <div class="step"><strong>Step 3:</strong> The gap is now \( 1,\ 0.5,\ 0.25,\ 0.125,\ \dots \) — it halves every time, heading to \( 0 \). So the terms head to \( 2 \).</div>
       <em>Conclusion: \( 1,\ 1.5,\ 1.75,\ 1.875,\ 1.9375,\ \dots \to 2 \) (the limit is \( 2 \)).</em>
+      <div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 240 70" width="240" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><line x1="20" y1="35" x2="220" y2="35" stroke="#94a3b8" stroke-width="2"/><circle cx="20" cy="35" r="4" fill="#4a90e2"/><circle cx="120" cy="35" r="4" fill="#4a90e2"/><circle cx="170" cy="35" r="4" fill="#4a90e2"/><circle cx="195" cy="35" r="4" fill="#4a90e2"/><circle cx="207" cy="35" r="4" fill="#4a90e2"/><circle cx="220" cy="35" r="5" fill="#c2185b"/><text x="20" y="55" font-size="10" text-anchor="middle" fill="#1e3a5f">1</text><text x="220" y="20" font-size="11" text-anchor="middle" fill="#7a1044">2 (limit)</text></svg></div>
     </div>
   </div>
 
@@ -923,6 +983,7 @@ const subjects = [
       <div class="step"><strong>Step 2:</strong> For the reals, take any two and average them to get a new one in between — e.g. between \( 0 \) and \( 1 \): \( 0.5 \), then \( 0.25 \), then \( 0.125 \), \( \dots \) — infinitely many.</div>
       <div class="step"><strong>Step 3:</strong> "Denser" means more values packed into the same interval.</div>
       <em>Conclusion: the real numbers are far denser — infinitely many, versus just \( 9 \) integers.</em>
+      <div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 240 90" width="240" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><text x="120" y="15" font-size="11" text-anchor="middle" fill="#1e3a5f">integers</text><line x1="20" y1="30" x2="220" y2="30" stroke="#94a3b8" stroke-width="2"/><circle cx="40" cy="30" r="3" fill="#4a90e2"/><circle cx="60" cy="30" r="3" fill="#4a90e2"/><circle cx="80" cy="30" r="3" fill="#4a90e2"/><circle cx="100" cy="30" r="3" fill="#4a90e2"/><circle cx="120" cy="30" r="3" fill="#4a90e2"/><circle cx="140" cy="30" r="3" fill="#4a90e2"/><circle cx="160" cy="30" r="3" fill="#4a90e2"/><circle cx="180" cy="30" r="3" fill="#4a90e2"/><circle cx="200" cy="30" r="3" fill="#4a90e2"/><text x="120" y="55" font-size="11" text-anchor="middle" fill="#7a1044">reals (dense)</text><rect x="20" y="65" width="200" height="8" fill="#c2185b" opacity="0.5"/></svg></div>
     </div>
   </div>
 
@@ -959,7 +1020,7 @@ const subjects = [
   <div class="qa-box" style="background-color:#f0f0f0;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Q3: Quick way to find a number between two values?</h3><p><em>Take their average (midpoint).</em></p></div>
 </div>
 ` },
-      graph("(1/2)^x", "", { xMin: 0, xMax: 6, yMin: 0, yMax: 1.1, caption: "The limit example: 1, 1/2, 1/4, 1/8, … as y = (1/2)^x — it approaches the limit 0." }),
+      graph("b^x", "b", { xMin: 0, xMax: 6, yMin: 0, yMax: 1.1, paramMin: 0.05, paramMax: 0.95, paramInit: 0.5, caption: "The limit example: y = b^x, starting at b = 1/2 (1, 1/2, 1/4, 1/8, …). Slide b — it always approaches the limit 0." }),
     ],
     assignment: {
       title: "Assignment 1.2 — Patterns, Density & Limits",
@@ -1029,6 +1090,7 @@ const subjects = [
       <div class="step"><strong>Step 1:</strong> Write it as repeated multiplication: \( 2^4 = 2\times2\times2\times2 \).</div>
       <div class="step"><strong>Step 2:</strong> Multiply two at a time: \( 2\times2 = 4 \), then \( 4\times2 = 8 \), then \( 8\times2 = 16 \).</div>
       <em>Conclusion: \( 2^4 = 16 \). ✓</em>
+      <div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 190 110" width="190" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="15" y="90" width="25" height="10" fill="#e6f3ff" stroke="#4a90e2" stroke-width="1.5"/><text x="27" y="105" font-size="9" text-anchor="middle" fill="#1e3a5f">2¹</text><rect x="55" y="80" width="25" height="20" fill="#e6f3ff" stroke="#4a90e2" stroke-width="1.5"/><text x="67" y="105" font-size="9" text-anchor="middle" fill="#1e3a5f">2²</text><rect x="95" y="60" width="25" height="40" fill="#e6f3ff" stroke="#4a90e2" stroke-width="1.5"/><text x="107" y="105" font-size="9" text-anchor="middle" fill="#1e3a5f">2³</text><rect x="135" y="20" width="35" height="80" fill="#e6f3ff" stroke="#4a90e2" stroke-width="1.5"/><text x="152" y="15" font-size="10" text-anchor="middle" fill="#1e3a5f">2⁴=16</text></svg></div>
     </div>
   </div>
 
@@ -1039,6 +1101,7 @@ const subjects = [
       <div class="step"><strong>Step 1:</strong> A negative exponent means "reciprocal": \( a^{-n}=\frac{1}{a^{n}} \), so \( 3^{-2} = \frac{1}{3^{2}} \).</div>
       <div class="step"><strong>Step 2:</strong> Evaluate the denominator: \( 3^{2} = 9 \), giving \( \frac{1}{9} \).</div>
       <em>Conclusion: \( 3^{-2} = \frac{1}{9} \approx 0.111 \). ✓</em>
+      <div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 220 70" width="220" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="10" y="20" width="70" height="30" rx="6" fill="#e6f3ff" stroke="#4a90e2" stroke-width="1.5"/><text x="45" y="39" font-size="11" text-anchor="middle" fill="#1e3a5f">3⁻²</text><line x1="85" y1="35" x2="120" y2="35" stroke="#9a5b00" stroke-width="2"/><text x="102" y="28" font-size="9" text-anchor="middle" fill="#9a5b00">reciprocal</text><rect x="130" y="20" width="80" height="30" rx="6" fill="#fde8ef" stroke="#c2185b" stroke-width="1.5"/><text x="170" y="39" font-size="11" text-anchor="middle" fill="#7a1044">1/9</text></svg></div>
     </div>
   </div>
 
@@ -1050,6 +1113,7 @@ const subjects = [
       <div class="step"><strong>Step 2:</strong> \( -2^4 \) raises only the \( 2 \): \( -(2\times2\times2\times2) = -(16) = -16 \).</div>
       <div class="step"><strong>Step 3 (rule):</strong> an <em>even</em> exponent on a bracketed negative is positive; without brackets the negative is applied last.</div>
       <em>Conclusion: \( (-2)^4 = 16 \) but \( -2^4 = -16 \). ✓</em>
+      <div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 200 130" width="200" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><line x1="20" y1="65" x2="180" y2="65" stroke="#94a3b8" stroke-width="1.5"/><rect x="40" y="15" width="30" height="50" fill="#e6f3ff" stroke="#4a90e2" stroke-width="1.5"/><text x="55" y="80" font-size="10" text-anchor="middle" fill="#1e3a5f">(−2)⁴=16</text><rect x="120" y="65" width="30" height="50" fill="#fde8ef" stroke="#c2185b" stroke-width="1.5"/><text x="135" y="128" font-size="10" text-anchor="middle" fill="#7a1044">−2⁴=−16</text></svg></div>
     </div>
   </div>
 
@@ -1061,6 +1125,7 @@ const subjects = [
       <div class="step"><strong>Step 2:</strong> Count how far the decimal moved <em>left</em>: \( 4\,500\,000. \to 4.5 \) is \( 6 \) places, so the power is \( 10^{6} \) (large number ⇒ positive exponent).</div>
       <div class="step"><strong>Step 3 (check):</strong> \( 4.5 \times 10^{6} = 4\,500\,000 \). ✓</div>
       <em>Conclusion: \( 4.5 \times 10^{6} \).</em>
+      <div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 260 80" width="260" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><text x="70" y="30" font-size="13" text-anchor="middle" fill="#1e3a5f">4500000.</text><path d="M120,40 Q70,60 25,40" stroke="#9a5b00" stroke-width="2" fill="none"/><text x="70" y="68" font-size="10" text-anchor="middle" fill="#9a5b00">6 places ←</text><text x="200" y="30" font-size="13" text-anchor="middle" fill="#7a1044">4.5 × 10⁶</text></svg></div>
     </div>
   </div>
 
@@ -1072,6 +1137,7 @@ const subjects = [
       <div class="step"><strong>Step 2:</strong> Count how far the decimal moved <em>right</em>: \( 0.00067 \to 6.7 \) is \( 4 \) places, so the power is \( 10^{-4} \) (small number ⇒ negative exponent).</div>
       <div class="step"><strong>Step 3 (check):</strong> \( 6.7 \times 10^{-4} = 0.00067 \). ✓</div>
       <em>Conclusion: \( 6.7 \times 10^{-4} \).</em>
+      <div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 260 80" width="260" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><text x="60" y="30" font-size="13" text-anchor="middle" fill="#1e3a5f">0.00067</text><path d="M100,40 Q150,60 195,40" stroke="#9a5b00" stroke-width="2" fill="none"/><text x="150" y="68" font-size="10" text-anchor="middle" fill="#9a5b00">4 places →</text><text x="220" y="30" font-size="13" text-anchor="middle" fill="#7a1044">6.7 × 10⁻⁴</text></svg></div>
     </div>
   </div>
 
@@ -1476,6 +1542,7 @@ const subjects = [
       <div class="step"><strong>Step 2:</strong> \( \frac{24\div12}{36\div12}=\frac{2}{3} \).</div>
       <div class="step"><strong>Step 3 (check):</strong> \( 2 \) and \( 3 \) share no factor — fully simplified.</div>
       <em>Conclusion: \( \frac{2}{3} \). ✓</em>
+      <div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 160 50" width="160" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="10" y="8" width="46.7" height="24" fill="#bfdbfe" stroke="#1e3a8a"/><rect x="56.7" y="8" width="46.7" height="24" fill="#bfdbfe" stroke="#1e3a8a"/><rect x="103.3" y="8" width="46.7" height="24" fill="#fff" stroke="#1e3a8a"/><text x="80" y="46" font-size="10" text-anchor="middle" fill="#1e3a8a">24/36 = 2/3</text></svg></div>
     </div>
   </div>
 
@@ -1486,6 +1553,7 @@ const subjects = [
       <div class="step"><strong>Step 2:</strong> \( \frac{5}{8}=\frac{15}{24},\ \frac{2}{3}=\frac{16}{24},\ \frac{7}{12}=\frac{14}{24} \).</div>
       <div class="step"><strong>Step 3:</strong> Compare numerators \( 14<15<16 \).</div>
       <em>Conclusion: \( \frac{7}{12},\ \frac{5}{8},\ \frac{2}{3} \). ✓</em>
+      <div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 170 90" width="170" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="10" y="8" width="87.5" height="16" fill="#c2185b" opacity="0.35" stroke="#c2185b"/><text x="5" y="20" font-size="9" text-anchor="end" fill="#7a1044">7/12</text><rect x="10" y="32" width="93.75" height="16" fill="#bfdbfe" stroke="#1e3a8a"/><text x="5" y="44" font-size="9" text-anchor="end" fill="#1e3a8a">5/8</text><rect x="10" y="56" width="100" height="16" fill="#0f766e" opacity="0.35" stroke="#0f766e"/><text x="5" y="68" font-size="9" text-anchor="end" fill="#0f766e">2/3</text></svg></div>
     </div>
   </div>
 
@@ -1495,6 +1563,7 @@ const subjects = [
       <div class="step"><strong>Step 1:</strong> \( 23\div6 = 3 \) remainder \( 5 \), so \( \frac{23}{6}=3\frac{5}{6} \).</div>
       <div class="step"><strong>Step 2:</strong> \( 3\frac{3}{4}=\frac{3\times4+3}{4}=\frac{15}{4} \).</div>
       <em>Conclusion: \( 3\frac{5}{6} \) and \( \frac{15}{4} \). ✓</em>
+      <div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 200 60" width="200" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="10" y="15" width="80" height="30" rx="6" fill="#e6f3ff" stroke="#4a90e2" stroke-width="1.5"/><text x="50" y="34" font-size="10" text-anchor="middle" fill="#1e3a5f">23/6</text><line x1="95" y1="30" x2="120" y2="30" stroke="#9a5b00" stroke-width="2"/><rect x="130" y="15" width="70" height="30" rx="6" fill="#fde8ef" stroke="#c2185b" stroke-width="1.5"/><text x="165" y="34" font-size="10" text-anchor="middle" fill="#7a1044">3⅚</text></svg></div>
     </div>
   </div>
 
@@ -1505,6 +1574,7 @@ const subjects = [
       <div class="step"><strong>Step 2:</strong> Add: \( \frac{29}{24} \).</div>
       <div class="step"><strong>Step 3:</strong> Improper, so write as a mixed number: \( \frac{29}{24}=1\frac{5}{24} \).</div>
       <em>Conclusion: \( 1\frac{5}{24} \). ✓</em>
+      <div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 200 60" width="200" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="10" y="15" width="80" height="30" rx="6" fill="#e6f3ff" stroke="#4a90e2" stroke-width="1.5"/><text x="50" y="34" font-size="10" text-anchor="middle" fill="#1e3a5f">5/6 + 3/8</text><line x1="95" y1="30" x2="120" y2="30" stroke="#9a5b00" stroke-width="2"/><rect x="130" y="15" width="70" height="30" rx="6" fill="#fde8ef" stroke="#c2185b" stroke-width="1.5"/><text x="165" y="34" font-size="10" text-anchor="middle" fill="#7a1044">1 5/24</text></svg></div>
     </div>
   </div>
 
@@ -1514,6 +1584,7 @@ const subjects = [
       <div class="step"><strong>Step 1:</strong> LCD is \( 12 \): \( -\frac{9}{12}-\frac{2}{12} \).</div>
       <div class="step"><strong>Step 2:</strong> Both terms are negative, so they combine: \( -\frac{11}{12} \).</div>
       <em>Conclusion: \( -\frac{11}{12} \). ✓</em>
+      <div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 200 60" width="200" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="10" y="15" width="90" height="30" rx="6" fill="#e6f3ff" stroke="#4a90e2" stroke-width="1.5"/><text x="55" y="34" font-size="10" text-anchor="middle" fill="#1e3a5f">−3/4 − 1/6</text><line x1="105" y1="30" x2="130" y2="30" stroke="#9a5b00" stroke-width="2"/><rect x="140" y="15" width="60" height="30" rx="6" fill="#fde8ef" stroke="#c2185b" stroke-width="1.5"/><text x="170" y="34" font-size="10" text-anchor="middle" fill="#7a1044">−11/12</text></svg></div>
     </div>
   </div>
 
@@ -1523,6 +1594,7 @@ const subjects = [
       <div class="step"><strong>Step 1:</strong> Cancel: \( \frac{8}{4}=2 \) and \( \frac{3}{9}=\frac{1}{3} \), leaving \( \frac{2}{1}\times\frac{1}{3}=\frac{2}{3} \).</div>
       <div class="step"><strong>Step 2:</strong> Different signs → negative.</div>
       <em>Conclusion: \( -\frac{2}{3} \). ✓</em>
+      <div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 200 60" width="200" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="10" y="15" width="90" height="30" rx="6" fill="#e6f3ff" stroke="#4a90e2" stroke-width="1.5"/><text x="55" y="34" font-size="10" text-anchor="middle" fill="#1e3a5f">−8/9 × 3/4</text><line x1="105" y1="30" x2="130" y2="30" stroke="#9a5b00" stroke-width="2"/><rect x="140" y="15" width="60" height="30" rx="6" fill="#fde8ef" stroke="#c2185b" stroke-width="1.5"/><text x="170" y="34" font-size="10" text-anchor="middle" fill="#7a1044">−2/3</text></svg></div>
     </div>
   </div>
 
@@ -1533,6 +1605,7 @@ const subjects = [
       <div class="step"><strong>Step 2:</strong> Across: \( \frac{60}{30}=2 \).</div>
       <div class="step"><strong>Step 3:</strong> Same signs → positive.</div>
       <em>Conclusion: \( 2 \). ✓</em>
+      <div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 200 60" width="200" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="10" y="15" width="100" height="30" rx="6" fill="#e6f3ff" stroke="#4a90e2" stroke-width="1.5"/><text x="60" y="34" font-size="10" text-anchor="middle" fill="#1e3a5f">−5/6 ÷ −5/12</text><line x1="115" y1="30" x2="140" y2="30" stroke="#9a5b00" stroke-width="2"/><rect x="150" y="15" width="40" height="30" rx="6" fill="#e7f7ef" stroke="#2e9e6e" stroke-width="1.5"/><text x="170" y="34" font-size="11" text-anchor="middle" fill="#1c5c43">2</text></svg></div>
     </div>
   </div>
 
@@ -1542,6 +1615,7 @@ const subjects = [
       <div class="step"><strong>Step 1:</strong> Multiply first: \( \frac{2}{3}\times\left(-\frac{3}{4}\right)=-\frac{6}{12}=-\frac{1}{2} \).</div>
       <div class="step"><strong>Step 2:</strong> Then add: \( \frac{1}{2}+\left(-\frac{1}{2}\right)=0 \).</div>
       <em>Conclusion: \( 0 \). ✓</em>
+      <div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 220 60" width="220" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="10" y="15" width="110" height="30" rx="6" fill="#e6f3ff" stroke="#4a90e2" stroke-width="1.5"/><text x="65" y="34" font-size="9" text-anchor="middle" fill="#1e3a5f">1/2 + 2/3×(−3/4)</text><line x1="125" y1="30" x2="150" y2="30" stroke="#9a5b00" stroke-width="2"/><rect x="160" y="15" width="50" height="30" rx="6" fill="#e7f7ef" stroke="#2e9e6e" stroke-width="1.5"/><text x="185" y="34" font-size="11" text-anchor="middle" fill="#1c5c43">0</text></svg></div>
     </div>
   </div>
 
@@ -1552,6 +1626,7 @@ const subjects = [
       <div class="step"><strong>Step 2:</strong> Multiply by the reciprocal of the bottom: \( \frac{1}{2}\times\frac{4}{3}=\frac{4}{6} \).</div>
       <div class="step"><strong>Step 3:</strong> Simplify: \( \frac{4}{6}=\frac{2}{3} \).</div>
       <em>Conclusion: \( \frac{2}{3} \). ✓</em>
+      <div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 200 60" width="200" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="10" y="15" width="80" height="30" rx="6" fill="#e6f3ff" stroke="#4a90e2" stroke-width="1.5"/><text x="50" y="34" font-size="10" text-anchor="middle" fill="#1e3a5f">(1/2)/(3/4)</text><line x1="95" y1="30" x2="120" y2="30" stroke="#9a5b00" stroke-width="2"/><rect x="130" y="15" width="60" height="30" rx="6" fill="#e7f7ef" stroke="#2e9e6e" stroke-width="1.5"/><text x="160" y="34" font-size="11" text-anchor="middle" fill="#1c5c43">2/3</text></svg></div>
     </div>
   </div>
 
@@ -1561,6 +1636,7 @@ const subjects = [
       <div class="step"><strong>Step 1:</strong> Combine the top over a common denominator: \( \frac{2}{3}+\frac{1}{6}=\frac{4}{6}+\frac{1}{6}=\frac{5}{6} \).</div>
       <div class="step"><strong>Step 2:</strong> Now divide: \( \frac{5}{6}\div\frac{5}{6}=\frac{5}{6}\times\frac{6}{5}=1 \).</div>
       <em>Conclusion: \( 1 \). ✓</em>
+      <div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 200 60" width="200" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="10" y="15" width="100" height="30" rx="6" fill="#e6f3ff" stroke="#4a90e2" stroke-width="1.5"/><text x="60" y="34" font-size="9" text-anchor="middle" fill="#1e3a5f">(2/3+1/6)/(5/6)</text><line x1="115" y1="30" x2="140" y2="30" stroke="#9a5b00" stroke-width="2"/><rect x="150" y="15" width="40" height="30" rx="6" fill="#e7f7ef" stroke="#2e9e6e" stroke-width="1.5"/><text x="170" y="34" font-size="11" text-anchor="middle" fill="#1c5c43">1</text></svg></div>
     </div>
   </div>
 
@@ -1662,6 +1738,7 @@ const subjects = [
       <div class="step"><strong>Step 2:</strong> "of" means multiply: \( 0.25 \times 80 = 20 \).</div>
       <div class="step"><strong>Step 3 (check):</strong> \( 25\% \) is one quarter, and a quarter of \( 80 \) is \( 20 \). ✓</div>
       <em>Conclusion: \( 20 \).</em>
+      <div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 140 130" width="120" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><circle cx="70" cy="60" r="45" fill="#fff" stroke="#4a90e2" stroke-width="1.5"/><path d="M70,60 L70,15 A45,45 0 0,1 115,60 Z" fill="#4a90e2" opacity="0.4"/><text x="70" y="115" font-size="10" text-anchor="middle" fill="#1e3a5f">25% of 80 = 20</text></svg></div>
     </div>
   </div>
 
@@ -1672,6 +1749,7 @@ const subjects = [
       <div class="step"><strong>Step 2:</strong> Divide both sides by \( 4 \): \( x = 9 \).</div>
       <div class="step"><strong>Step 3 (check):</strong> \( \frac{9}{12} = \frac{3}{4} \). ✓</div>
       <em>Conclusion: \( x = 9 \).</em>
+      <div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 160 60" width="160" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="10" y="10" width="45" height="14" fill="#bfdbfe" stroke="#1e3a8a"/><rect x="55" y="10" width="15" height="14" fill="#fff" stroke="#1e3a8a"/><text x="5" y="21" font-size="9" text-anchor="end" fill="#1e3a8a">3/4</text><rect x="10" y="34" width="105" height="14" fill="#0f766e" opacity="0.4" stroke="#0f766e"/><rect x="115" y="34" width="35" height="14" fill="#fff" stroke="#0f766e"/><text x="5" y="45" font-size="9" text-anchor="end" fill="#0f766e">9/12</text></svg></div>
     </div>
   </div>
 
@@ -1681,6 +1759,7 @@ const subjects = [
       <div class="step"><strong>Step 1:</strong> A unit rate is the amount per \( 1 \) hour: divide distance by time, \( 150 \div 3 \).</div>
       <div class="step"><strong>Step 2:</strong> \( 150 \div 3 = 50 \).</div>
       <em>Conclusion: \( 50 \) km/h. ✓</em>
+      <div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 200 60" width="200" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="10" y="15" width="80" height="30" rx="6" fill="#e6f3ff" stroke="#4a90e2" stroke-width="1.5"/><text x="50" y="34" font-size="10" text-anchor="middle" fill="#1e3a5f">150 km / 3 h</text><line x1="95" y1="30" x2="120" y2="30" stroke="#9a5b00" stroke-width="2"/><rect x="130" y="15" width="70" height="30" rx="6" fill="#fde8ef" stroke="#c2185b" stroke-width="1.5"/><text x="165" y="34" font-size="10" text-anchor="middle" fill="#7a1044">50 km/h</text></svg></div>
     </div>
   </div>
 
@@ -1701,6 +1780,7 @@ const subjects = [
       <div class="step"><strong>Step 2:</strong> Total \( = 80 + 10.40 = \$90.40 \).</div>
       <div class="step"><strong>Step 3 (shortcut check):</strong> multiply by \( 1.13 \): \( 1.13 \times 80 = \$90.40 \). ✓</div>
       <em>Conclusion: \( \$90.40 \).</em>
+      <div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 200 70" width="200" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="20" y="20" width="130" height="30" fill="#bfdbfe" stroke="#1e3a8a"/><rect x="150" y="20" width="20" height="30" fill="#fde68a" stroke="#b45309"/><text x="85" y="40" font-size="10" text-anchor="middle" fill="#1e3a8a">$80</text><text x="160" y="15" font-size="9" text-anchor="middle" fill="#b45309">+13%</text><text x="90" y="63" font-size="10" text-anchor="middle" fill="#7a1044">total $90.40</text></svg></div>
     </div>
   </div>
 
@@ -1810,6 +1890,7 @@ const subjects = [
       <div class="step"><strong>Step 1:</strong> "more than" signals addition.</div>
       <div class="step"><strong>Step 2:</strong> Start with the number \( n \) and add \( 5 \): \( n + 5 \).</div>
       <em>Conclusion: \( n + 5 \). ✓</em>
+      <div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 200 60" width="200" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="10" y="15" width="50" height="30" rx="6" fill="#e6f3ff" stroke="#4a90e2" stroke-width="1.5"/><text x="35" y="34" font-size="12" text-anchor="middle" fill="#1e3a5f">n</text><line x1="65" y1="30" x2="100" y2="30" stroke="#9a5b00" stroke-width="2"/><text x="82" y="23" font-size="9" text-anchor="middle" fill="#9a5b00">+5</text><rect x="110" y="15" width="80" height="30" rx="6" fill="#fde8ef" stroke="#c2185b" stroke-width="1.5"/><text x="150" y="34" font-size="12" text-anchor="middle" fill="#7a1044">n + 5</text></svg></div>
     </div>
   </div>
 
@@ -1820,6 +1901,7 @@ const subjects = [
       <div class="step"><strong>Step 2:</strong> "then subtract 3": \( 2x - 3 \).</div>
       <div class="step"><strong>Watch the order:</strong> it is \( 2x - 3 \), not \( 3 - 2x \).</div>
       <em>Conclusion: \( 2x - 3 \). ✓</em>
+      <div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 240 60" width="240" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="5" y="15" width="45" height="30" rx="6" fill="#e6f3ff" stroke="#4a90e2" stroke-width="1.5"/><text x="27" y="34" font-size="11" text-anchor="middle" fill="#1e3a5f">x</text><line x1="55" y1="30" x2="80" y2="30" stroke="#9a5b00" stroke-width="2"/><text x="67" y="23" font-size="8" text-anchor="middle" fill="#9a5b00">×2</text><rect x="85" y="15" width="45" height="30" rx="6" fill="#fff3e4" stroke="#e69138" stroke-width="1.5"/><text x="107" y="34" font-size="10" text-anchor="middle" fill="#9a5b00">2x</text><line x1="135" y1="30" x2="160" y2="30" stroke="#9a5b00" stroke-width="2"/><text x="147" y="23" font-size="8" text-anchor="middle" fill="#9a5b00">−3</text><rect x="165" y="15" width="70" height="30" rx="6" fill="#fde8ef" stroke="#c2185b" stroke-width="1.5"/><text x="200" y="34" font-size="10" text-anchor="middle" fill="#7a1044">2x − 3</text></svg></div>
     </div>
   </div>
 
@@ -1829,6 +1911,7 @@ const subjects = [
       <div class="step"><strong>Step 1:</strong> "3 times the width" means \( 3 \times w = 3w \).</div>
       <div class="step"><strong>Step 2 (check):</strong> if \( w = 5 \), then \( l = 3(5) = 15 \). ✓</div>
       <em>Conclusion: \( l = 3w \).</em>
+      <div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 200 80" width="200" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="20" y="20" width="150" height="35" fill="#e6f3ff" stroke="#4a90e2" stroke-width="1.5"/><text x="95" y="15" font-size="10" text-anchor="middle" fill="#1e3a5f">l = 3w</text><text x="10" y="42" font-size="10" text-anchor="end" fill="#1e3a5f">w</text></svg></div>
     </div>
   </div>
 
@@ -1839,6 +1922,7 @@ const subjects = [
       <div class="step"><strong>Step 2:</strong> Each term \( = 2 \times \) its position \( = 2n \).</div>
       <div class="step"><strong>Step 3 (check):</strong> position \( n = 3 \) gives \( 2(3) = 6 \). ✓</div>
       <em>Conclusion: \( 2n \).</em>
+      <div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 190 90" width="190" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="15" y="70" width="25" height="10" fill="#e6f3ff" stroke="#4a90e2" stroke-width="1.5"/><text x="27" y="85" font-size="8" text-anchor="middle" fill="#1e3a5f">2</text><rect x="55" y="60" width="25" height="20" fill="#e6f3ff" stroke="#4a90e2" stroke-width="1.5"/><text x="67" y="85" font-size="8" text-anchor="middle" fill="#1e3a5f">4</text><rect x="95" y="50" width="25" height="30" fill="#e6f3ff" stroke="#4a90e2" stroke-width="1.5"/><text x="107" y="85" font-size="8" text-anchor="middle" fill="#1e3a5f">6</text><rect x="135" y="40" width="35" height="40" fill="#e6f3ff" stroke="#4a90e2" stroke-width="1.5"/><text x="152" y="30" font-size="9" text-anchor="middle" fill="#1e3a5f">8=2n</text></svg></div>
     </div>
   </div>
 
@@ -1849,6 +1933,7 @@ const subjects = [
       <div class="step"><strong>Step 2:</strong> So the term at position \( n \) is \( n^2 \).</div>
       <div class="step"><strong>Step 3 (check):</strong> \( n = 4 \) gives \( 4^2 = 16 \). ✓</div>
       <em>Conclusion: \( n^2 \).</em>
+      <div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 200 70" width="200" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="10" y="50" width="10" height="10" fill="#e6f3ff" stroke="#4a90e2"/><text x="15" y="68" font-size="8" text-anchor="middle" fill="#1e3a5f">1</text><rect x="35" y="40" width="20" height="20" fill="#e6f3ff" stroke="#4a90e2"/><text x="45" y="68" font-size="8" text-anchor="middle" fill="#1e3a5f">4</text><rect x="70" y="30" width="30" height="30" fill="#e6f3ff" stroke="#4a90e2"/><text x="85" y="68" font-size="8" text-anchor="middle" fill="#1e3a5f">9</text><rect x="115" y="20" width="40" height="40" fill="#e6f3ff" stroke="#4a90e2"/><text x="135" y="15" font-size="9" text-anchor="middle" fill="#1e3a5f">16 = n²</text></svg></div>
     </div>
   </div>
 
@@ -1919,6 +2004,7 @@ const subjects = [
       <div class="step"><strong>Step 2:</strong> Compare: \( 2x + 6 \neq 2x + 3 \) (the constants differ).</div>
       <div class="step"><strong>Step 3 (check):</strong> at \( x = 0 \), \( 2(3) = 6 \) but \( 2(0)+3 = 3 \) — different. ✓</div>
       <em>Conclusion: NOT equivalent.</em>
+      <div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 220 70" width="220" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="10" y="15" width="90" height="30" fill="#bfdbfe" stroke="#2563eb" stroke-width="1.5"/><text x="55" y="34" font-size="11" text-anchor="middle" fill="#1e3a8a">2x + 6</text><text x="120" y="34" font-size="14" fill="#c2185b">≠</text><rect x="140" y="15" width="70" height="30" fill="#fde8ef" stroke="#c2185b" stroke-width="1.5"/><text x="175" y="34" font-size="11" text-anchor="middle" fill="#7a1044">2x + 3</text></svg></div>
     </div>
   </div>
 
@@ -1928,6 +2014,7 @@ const subjects = [
       <div class="step"><strong>Step 1:</strong> Distribute the \( x \): \( x\cdot x - x\cdot 4 \).</div>
       <div class="step"><strong>Step 2:</strong> \( = x^2 - 4x \).</div>
       <em>Conclusion: yes, equivalent. ✓</em>
+      <div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 200 90" width="200" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="20" y="20" width="90" height="50" fill="#bfdbfe" stroke="#2563eb" stroke-width="1.5"/><text x="65" y="48" font-size="12" text-anchor="middle" fill="#1e3a8a">x²</text><rect x="110" y="20" width="40" height="50" fill="#fde68a" stroke="#b45309" stroke-width="1.5"/><text x="130" y="48" font-size="11" text-anchor="middle" fill="#7a4a00">−4x</text><text x="65" y="14" font-size="9" text-anchor="middle" fill="#475569">x</text><text x="130" y="14" font-size="9" text-anchor="middle" fill="#475569">−4</text><text x="10" y="48" font-size="9" text-anchor="end" fill="#475569">x</text></svg></div>
     </div>
   </div>
 
@@ -1937,6 +2024,7 @@ const subjects = [
       <div class="step"><strong>Step 1:</strong> Combine like terms: \( 3x + 5x = (3+5)x = 8x \).</div>
       <div class="step"><strong>Step 2 (check):</strong> at \( x = 2 \), \( 6 + 10 = 16 \) and \( 8(2) = 16 \). ✓</div>
       <em>Conclusion: yes — both simplify to \( 8x \).</em>
+      <div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 200 60" width="200" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="10" y="15" width="80" height="30" rx="6" fill="#e6f3ff" stroke="#4a90e2" stroke-width="1.5"/><text x="50" y="34" font-size="11" text-anchor="middle" fill="#1e3a5f">3x + 5x</text><line x1="95" y1="30" x2="120" y2="30" stroke="#9a5b00" stroke-width="2"/><rect x="130" y="15" width="60" height="30" rx="6" fill="#fde8ef" stroke="#c2185b" stroke-width="1.5"/><text x="160" y="34" font-size="12" text-anchor="middle" fill="#7a1044">8x</text></svg></div>
     </div>
   </div>
 
@@ -1946,6 +2034,7 @@ const subjects = [
       <div class="step"><strong>Step 1:</strong> Distribute the \( 3 \): \( 3\cdot 2x - 3\cdot 5 \).</div>
       <div class="step"><strong>Step 2:</strong> \( = 6x - 15 \).</div>
       <em>Conclusion: \( 6x - 15 \). ✓</em>
+      <div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 200 90" width="200" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="20" y="20" width="90" height="40" fill="#bfdbfe" stroke="#2563eb" stroke-width="1.5"/><text x="65" y="45" font-size="12" text-anchor="middle" fill="#1e3a8a">6x</text><rect x="110" y="20" width="60" height="40" fill="#fde8ef" stroke="#c2185b" stroke-width="1.5"/><text x="140" y="45" font-size="11" text-anchor="middle" fill="#7a1044">−15</text><text x="65" y="14" font-size="9" text-anchor="middle" fill="#475569">2x</text><text x="140" y="14" font-size="9" text-anchor="middle" fill="#475569">−5</text><text x="10" y="45" font-size="9" text-anchor="end" fill="#475569">3</text></svg></div>
     </div>
   </div>
 
@@ -1991,6 +2080,7 @@ const subjects = [
       <div class="step"><strong>Step 1:</strong> Both are like terms (each has \( x \)), so add the coefficients: \( 3 + 5 = 8 \).</div>
       <div class="step"><strong>Step 2:</strong> Keep the variable: \( 8x \).</div>
       <em>Conclusion: \( 8x \). ✓</em>
+      <div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 200 60" width="200" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="10" y="15" width="80" height="30" rx="6" fill="#e6f3ff" stroke="#4a90e2" stroke-width="1.5"/><text x="50" y="34" font-size="11" text-anchor="middle" fill="#1e3a5f">3x + 5x</text><line x1="95" y1="30" x2="120" y2="30" stroke="#9a5b00" stroke-width="2"/><rect x="130" y="15" width="60" height="30" rx="6" fill="#fde8ef" stroke="#c2185b" stroke-width="1.5"/><text x="160" y="34" font-size="12" text-anchor="middle" fill="#7a1044">8x</text></svg></div>
     </div>
   </div>
 
@@ -2001,6 +2091,7 @@ const subjects = [
       <div class="step"><strong>Step 2:</strong> \( 3x^2 - 2x^2 = x^2 \); the lone \( x \) has no partner.</div>
       <div class="step"><strong>Note:</strong> \( x^2 \) and \( x \) are <em>not</em> like terms, so we stop here.</div>
       <em>Conclusion: \( x^2 + x \). ✓</em>
+      <div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 200 60" width="200" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="10" y="15" width="90" height="30" rx="6" fill="#e6f3ff" stroke="#4a90e2" stroke-width="1.5"/><text x="55" y="34" font-size="10" text-anchor="middle" fill="#1e3a5f">3x²+x−2x²</text><line x1="105" y1="30" x2="130" y2="30" stroke="#9a5b00" stroke-width="2"/><rect x="140" y="15" width="60" height="30" rx="6" fill="#fde8ef" stroke="#c2185b" stroke-width="1.5"/><text x="170" y="34" font-size="11" text-anchor="middle" fill="#7a1044">x²+x</text></svg></div>
     </div>
   </div>
 
@@ -2010,6 +2101,7 @@ const subjects = [
       <div class="step"><strong>Step 1:</strong> Distribute the \( 2 \): \( 2\cdot x + 2\cdot 4 \).</div>
       <div class="step"><strong>Step 2:</strong> \( = 2x + 8 \).</div>
       <em>Conclusion: \( 2x + 8 \). ✓</em>
+      <div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 200 90" width="200" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="20" y="20" width="90" height="40" fill="#bfdbfe" stroke="#2563eb" stroke-width="1.5"/><text x="65" y="45" font-size="12" text-anchor="middle" fill="#1e3a8a">2x</text><rect x="110" y="20" width="40" height="40" fill="#fde8ef" stroke="#c2185b" stroke-width="1.5"/><text x="130" y="45" font-size="11" text-anchor="middle" fill="#7a1044">8</text><text x="65" y="14" font-size="9" text-anchor="middle" fill="#475569">x</text><text x="130" y="14" font-size="9" text-anchor="middle" fill="#475569">4</text><text x="10" y="45" font-size="9" text-anchor="end" fill="#475569">2</text></svg></div>
     </div>
   </div>
 
@@ -2020,6 +2112,7 @@ const subjects = [
       <div class="step"><strong>Step 2:</strong> Group like terms: \( (2x + 3x) + (6 - 3) \).</div>
       <div class="step"><strong>Step 3:</strong> \( = 5x + 3 \).</div>
       <em>Conclusion: \( 5x + 3 \). ✓</em>
+      <div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 200 60" width="200" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="10" y="15" width="100" height="30" rx="6" fill="#e6f3ff" stroke="#4a90e2" stroke-width="1.5"/><text x="60" y="34" font-size="9" text-anchor="middle" fill="#1e3a5f">2(x+3)+3(x−1)</text><line x1="115" y1="30" x2="140" y2="30" stroke="#9a5b00" stroke-width="2"/><rect x="150" y="15" width="50" height="30" rx="6" fill="#fde8ef" stroke="#c2185b" stroke-width="1.5"/><text x="175" y="34" font-size="11" text-anchor="middle" fill="#7a1044">5x+3</text></svg></div>
     </div>
   </div>
 
@@ -2030,6 +2123,7 @@ const subjects = [
       <div class="step"><strong>Step 2:</strong> Group like terms: \( (x^2 + 3x^2) + (2x + 6x) - 15 \).</div>
       <div class="step"><strong>Step 3:</strong> \( = 4x^2 + 8x - 15 \).</div>
       <em>Conclusion: \( 4x^2 + 8x - 15 \). ✓</em>
+      <div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 220 60" width="220" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="10" y="15" width="110" height="30" rx="6" fill="#e6f3ff" stroke="#4a90e2" stroke-width="1.5"/><text x="65" y="34" font-size="8" text-anchor="middle" fill="#1e3a5f">x(x+2)+3(x²+2x−5)</text><line x1="125" y1="30" x2="150" y2="30" stroke="#9a5b00" stroke-width="2"/><rect x="160" y="15" width="55" height="30" rx="6" fill="#fde8ef" stroke="#c2185b" stroke-width="1.5"/><text x="187" y="34" font-size="9" text-anchor="middle" fill="#7a1044">4x²+8x−15</text></svg></div>
     </div>
   </div>
 
@@ -2092,6 +2186,7 @@ const subjects = [
       <div class="step"><strong>Step 2:</strong> \( x = 5 \).</div>
       <div class="step"><strong>Step 3 (check):</strong> \( 5 + 7 = 12 \). ✓</div>
       <em>Conclusion: \( x = 5 \).</em>
+      <div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 200 110" width="180" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><line x1="40" y1="45" x2="160" y2="45" stroke="#475569" stroke-width="2"/><line x1="100" y1="45" x2="100" y2="75" stroke="#475569" stroke-width="2"/><polygon points="100,73 88,95 112,95" fill="#94a3b8"/><path d="M 45 62 A 17 9 0 0 0 79 62 Z" fill="#bfdbfe" stroke="#2563eb" stroke-width="1.2"/><text x="62" y="38" font-size="11" fill="#1e3a8a" text-anchor="middle" font-weight="700">x+7</text><path d="M 121 62 A 17 9 0 0 0 155 62 Z" fill="#99f6e4" stroke="#0f766e" stroke-width="1.2"/><text x="138" y="38" font-size="11" fill="#0f766e" text-anchor="middle" font-weight="700">12</text></svg></div>
     </div>
   </div>
 
@@ -2102,6 +2197,7 @@ const subjects = [
       <div class="step"><strong>Step 2:</strong> \( x = 7 \).</div>
       <div class="step"><strong>Step 3 (check):</strong> \( 3(7) = 21 \). ✓</div>
       <em>Conclusion: \( x = 7 \).</em>
+      <div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 200 110" width="180" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><line x1="40" y1="45" x2="160" y2="45" stroke="#475569" stroke-width="2"/><line x1="100" y1="45" x2="100" y2="75" stroke="#475569" stroke-width="2"/><polygon points="100,73 88,95 112,95" fill="#94a3b8"/><path d="M 45 62 A 17 9 0 0 0 79 62 Z" fill="#bfdbfe" stroke="#2563eb" stroke-width="1.2"/><text x="62" y="38" font-size="11" fill="#1e3a8a" text-anchor="middle" font-weight="700">3x</text><path d="M 121 62 A 17 9 0 0 0 155 62 Z" fill="#99f6e4" stroke="#0f766e" stroke-width="1.2"/><text x="138" y="38" font-size="11" fill="#0f766e" text-anchor="middle" font-weight="700">21</text></svg></div>
     </div>
   </div>
 
@@ -2112,6 +2208,7 @@ const subjects = [
       <div class="step"><strong>Step 2:</strong> Divide both sides by \( 2 \): \( x = 4 \).</div>
       <div class="step"><strong>Step 3 (check):</strong> \( 2(4) + 3 = 11 \). ✓</div>
       <em>Conclusion: \( x = 4 \).</em>
+      <div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 200 110" width="180" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><line x1="40" y1="45" x2="160" y2="45" stroke="#475569" stroke-width="2"/><line x1="100" y1="45" x2="100" y2="75" stroke="#475569" stroke-width="2"/><polygon points="100,73 88,95 112,95" fill="#94a3b8"/><path d="M 45 62 A 17 9 0 0 0 79 62 Z" fill="#bfdbfe" stroke="#2563eb" stroke-width="1.2"/><text x="62" y="38" font-size="11" fill="#1e3a8a" text-anchor="middle" font-weight="700">2x+3</text><path d="M 121 62 A 17 9 0 0 0 155 62 Z" fill="#99f6e4" stroke="#0f766e" stroke-width="1.2"/><text x="138" y="38" font-size="11" fill="#0f766e" text-anchor="middle" font-weight="700">11</text></svg></div>
     </div>
   </div>
 
@@ -2123,6 +2220,7 @@ const subjects = [
       <div class="step"><strong>Step 3:</strong> Divide by \( 3 \): \( x = 5 \).</div>
       <div class="step"><strong>Step 4 (check):</strong> \( 3(5+1) = 3(6) = 18 \). ✓</div>
       <em>Conclusion: \( x = 5 \).</em>
+      <div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 200 110" width="180" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><line x1="40" y1="45" x2="160" y2="45" stroke="#475569" stroke-width="2"/><line x1="100" y1="45" x2="100" y2="75" stroke="#475569" stroke-width="2"/><polygon points="100,73 88,95 112,95" fill="#94a3b8"/><path d="M 45 62 A 17 9 0 0 0 79 62 Z" fill="#bfdbfe" stroke="#2563eb" stroke-width="1.2"/><text x="62" y="38" font-size="10" fill="#1e3a8a" text-anchor="middle" font-weight="700">3(x+1)</text><path d="M 121 62 A 17 9 0 0 0 155 62 Z" fill="#99f6e4" stroke="#0f766e" stroke-width="1.2"/><text x="138" y="38" font-size="11" fill="#0f766e" text-anchor="middle" font-weight="700">18</text></svg></div>
     </div>
   </div>
 
@@ -2134,6 +2232,7 @@ const subjects = [
       <div class="step"><strong>Step 3:</strong> Divide by \( 2 \): \( x = 6 \).</div>
       <div class="step"><strong>Step 4 (check):</strong> \( 4(6) - 5 = 19 \) and \( 2(6) + 7 = 19 \). ✓</div>
       <em>Conclusion: \( x = 6 \).</em>
+      <div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 200 110" width="180" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><line x1="40" y1="45" x2="160" y2="45" stroke="#475569" stroke-width="2"/><line x1="100" y1="45" x2="100" y2="75" stroke="#475569" stroke-width="2"/><polygon points="100,73 88,95 112,95" fill="#94a3b8"/><path d="M 45 62 A 17 9 0 0 0 79 62 Z" fill="#bfdbfe" stroke="#2563eb" stroke-width="1.2"/><text x="62" y="38" font-size="10" fill="#1e3a8a" text-anchor="middle" font-weight="700">4x−5</text><path d="M 121 62 A 17 9 0 0 0 155 62 Z" fill="#99f6e4" stroke="#0f766e" stroke-width="1.2"/><text x="138" y="38" font-size="10" fill="#0f766e" text-anchor="middle" font-weight="700">2x+7</text></svg></div>
     </div>
   </div>
 
@@ -2186,6 +2285,7 @@ output area     → 24</pre>
       <div class="step"><strong>Step 2:</strong> <code>set y to x + 3</code> → \( y = 5 + 3 = 8 \).</div>
       <div class="step"><strong>Step 3:</strong> <code>output y</code> prints \( 8 \).</div>
       <em>Conclusion: 8. ✓</em>
+      <div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 200 60" width="200" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="10" y="15" width="70" height="30" rx="6" fill="#e6f3ff" stroke="#4a90e2" stroke-width="1.5"/><text x="45" y="34" font-size="11" text-anchor="middle" fill="#1e3a5f">x = 5</text><line x1="85" y1="30" x2="110" y2="30" stroke="#9a5b00" stroke-width="2"/><text x="97" y="23" font-size="8" text-anchor="middle" fill="#9a5b00">+3</text><rect x="120" y="15" width="70" height="30" rx="6" fill="#fde8ef" stroke="#c2185b" stroke-width="1.5"/><text x="155" y="34" font-size="11" text-anchor="middle" fill="#7a1044">y = 8</text></svg></div>
     </div>
   </div>
 
@@ -2195,6 +2295,7 @@ output area     → 24</pre>
       <div class="step"><strong>Step 1:</strong> \( a = 4 \).</div>
       <div class="step"><strong>Step 2:</strong> \( b = a \times a = 4 \times 4 = 16 \).</div>
       <em>Conclusion: 16. ✓</em>
+      <div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 200 60" width="200" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="10" y="15" width="70" height="30" rx="6" fill="#e6f3ff" stroke="#4a90e2" stroke-width="1.5"/><text x="45" y="34" font-size="11" text-anchor="middle" fill="#1e3a5f">a = 4</text><line x1="85" y1="30" x2="110" y2="30" stroke="#9a5b00" stroke-width="2"/><text x="97" y="23" font-size="8" text-anchor="middle" fill="#9a5b00">×a</text><rect x="120" y="15" width="70" height="30" rx="6" fill="#fde8ef" stroke="#c2185b" stroke-width="1.5"/><text x="155" y="34" font-size="11" text-anchor="middle" fill="#7a1044">b = 16</text></svg></div>
     </div>
   </div>
 
@@ -2204,6 +2305,7 @@ output area     → 24</pre>
       <div class="step"><strong>Step 1:</strong> \( x = 10 \).</div>
       <div class="step"><strong>Step 2:</strong> <code>set x to x - 4</code> uses the <em>old</em> \( x \): \( 10 - 4 = 6 \), then stores \( 6 \) back into \( x \).</div>
       <em>Conclusion: 6. ✓ (a variable can be updated using its own current value)</em>
+      <div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 200 60" width="200" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="10" y="15" width="70" height="30" rx="6" fill="#e6f3ff" stroke="#4a90e2" stroke-width="1.5"/><text x="45" y="34" font-size="11" text-anchor="middle" fill="#1e3a5f">x = 10</text><line x1="85" y1="30" x2="110" y2="30" stroke="#9a5b00" stroke-width="2"/><text x="97" y="23" font-size="8" text-anchor="middle" fill="#9a5b00">−4</text><rect x="120" y="15" width="70" height="30" rx="6" fill="#fde8ef" stroke="#c2185b" stroke-width="1.5"/><text x="155" y="34" font-size="11" text-anchor="middle" fill="#7a1044">x = 6</text></svg></div>
     </div>
   </div>
 
@@ -2213,6 +2315,7 @@ output area     → 24</pre>
       <div class="step"><strong>Step 1:</strong> Substitute the parameter \( n = 7 \).</div>
       <div class="step"><strong>Step 2:</strong> \( 2 \times 7 = 14 \).</div>
       <em>Conclusion: 14. ✓</em>
+      <div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 200 60" width="200" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="10" y="15" width="80" height="30" rx="6" fill="#e6f3ff" stroke="#4a90e2" stroke-width="1.5"/><text x="50" y="34" font-size="11" text-anchor="middle" fill="#1e3a5f">double(7)</text><line x1="95" y1="30" x2="120" y2="30" stroke="#9a5b00" stroke-width="2"/><rect x="130" y="15" width="60" height="30" rx="6" fill="#fde8ef" stroke="#c2185b" stroke-width="1.5"/><text x="160" y="34" font-size="12" text-anchor="middle" fill="#7a1044">14</text></svg></div>
     </div>
   </div>
 
@@ -2302,6 +2405,7 @@ else:
       <div class="step"><strong>Step 1:</strong> Start with \( s = 0 \).</div>
       <div class="step"><strong>Step 2:</strong> Each pass adds \( i \): \( i=1 \Rightarrow s=1 \); \( i=2 \Rightarrow s=3 \); \( i=3 \Rightarrow s=6 \); \( i=4 \Rightarrow s=10 \).</div>
       <em>Conclusion: 10. ✓</em>
+      <div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 240 50" width="240" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="5" y="10" width="35" height="28" rx="4" fill="#e6f3ff" stroke="#4a90e2"/><text x="22" y="28" font-size="9" text-anchor="middle" fill="#1e3a5f">s=0</text><rect x="50" y="10" width="35" height="28" rx="4" fill="#e6f3ff" stroke="#4a90e2"/><text x="67" y="28" font-size="9" text-anchor="middle" fill="#1e3a5f">s=1</text><rect x="95" y="10" width="35" height="28" rx="4" fill="#e6f3ff" stroke="#4a90e2"/><text x="112" y="28" font-size="9" text-anchor="middle" fill="#1e3a5f">s=3</text><rect x="140" y="10" width="35" height="28" rx="4" fill="#e6f3ff" stroke="#4a90e2"/><text x="157" y="28" font-size="9" text-anchor="middle" fill="#1e3a5f">s=6</text><rect x="185" y="10" width="45" height="28" rx="4" fill="#fde8ef" stroke="#c2185b"/><text x="207" y="28" font-size="9" text-anchor="middle" fill="#7a1044">s=10</text></svg></div>
     </div>
   </div>
 
@@ -2311,6 +2415,7 @@ else:
       <div class="step"><strong>Step 1:</strong> Start with \( x = 1 \).</div>
       <div class="step"><strong>Step 2:</strong> Double three times: \( 1 \to 2 \to 4 \to 8 \).</div>
       <em>Conclusion: 8. ✓</em>
+      <div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 220 50" width="220" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="5" y="10" width="35" height="28" rx="4" fill="#e6f3ff" stroke="#4a90e2"/><text x="22" y="28" font-size="10" text-anchor="middle" fill="#1e3a5f">1</text><rect x="55" y="10" width="35" height="28" rx="4" fill="#e6f3ff" stroke="#4a90e2"/><text x="72" y="28" font-size="10" text-anchor="middle" fill="#1e3a5f">2</text><rect x="105" y="10" width="35" height="28" rx="4" fill="#e6f3ff" stroke="#4a90e2"/><text x="122" y="28" font-size="10" text-anchor="middle" fill="#1e3a5f">4</text><rect x="155" y="10" width="45" height="28" rx="4" fill="#fde8ef" stroke="#c2185b"/><text x="177" y="28" font-size="10" text-anchor="middle" fill="#7a1044">8</text></svg></div>
     </div>
   </div>
 
@@ -2330,6 +2435,7 @@ else:
       <div class="step"><strong>Step 2:</strong> Then compute: \( \text{area} = \text{length} \times \text{width} \).</div>
       <div class="step"><strong>Step 3:</strong> Finally, output the area.</div>
       <em>Conclusion: read length &amp; width → multiply → output. ✓</em>
+      <div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 240 50" width="240" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="5" y="10" width="65" height="28" rx="5" fill="#e6f3ff" stroke="#4a90e2"/><text x="37" y="28" font-size="9" text-anchor="middle" fill="#1e3a5f">read l, w</text><rect x="85" y="10" width="70" height="28" rx="5" fill="#fff3e4" stroke="#e69138"/><text x="120" y="28" font-size="9" text-anchor="middle" fill="#9a5b00">compute l×w</text><rect x="170" y="10" width="65" height="28" rx="5" fill="#fde8ef" stroke="#c2185b"/><text x="202" y="28" font-size="9" text-anchor="middle" fill="#7a1044">output area</text></svg></div>
     </div>
   </div>
 
@@ -2339,6 +2445,7 @@ else:
       <div class="step"><strong>Step 1:</strong> The loop runs once for each value \( i = 1, 2, \dots, n \).</div>
       <div class="step"><strong>Step 2:</strong> That is \( n \) passes, each printing one number.</div>
       <em>Conclusion: \( n \) numbers. ✓</em>
+      <div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 180 60" width="180" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="60" y="10" width="60" height="30" rx="6" fill="#e6f3ff" stroke="#4a90e2"/><text x="90" y="29" font-size="10" text-anchor="middle" fill="#1e3a5f">output i</text><path d="M120,20 C150,20 150,45 90,45 C60,45 60,35 65,25" fill="none" stroke="#9a5b00" stroke-width="1.5" marker-end="url(#loopar32b)"/><defs><marker id="loopar32b" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#9a5b00"/></marker></defs><text x="90" y="56" font-size="9" text-anchor="middle" fill="#9a5b00">n times</text></svg></div>
     </div>
   </div>
 
@@ -2382,6 +2489,7 @@ output c        → 7</pre>
       <div class="step"><strong>Step 1:</strong> \( a = 3 \), \( b = 4 \).</div>
       <div class="step"><strong>Step 2:</strong> \( c = a \times b = 3 \times 4 = 12 \).</div>
       <em>Conclusion: 12. ✓</em>
+      <div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 200 60" width="200" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="10" y="15" width="80" height="30" rx="6" fill="#e6f3ff" stroke="#4a90e2" stroke-width="1.5"/><text x="50" y="34" font-size="10" text-anchor="middle" fill="#1e3a5f">a=3, b=4</text><line x1="95" y1="30" x2="120" y2="30" stroke="#9a5b00" stroke-width="2"/><rect x="130" y="15" width="60" height="30" rx="6" fill="#fde8ef" stroke="#c2185b" stroke-width="1.5"/><text x="160" y="34" font-size="11" text-anchor="middle" fill="#7a1044">c = 12</text></svg></div>
     </div>
   </div>
 
@@ -2408,6 +2516,7 @@ output c        → 7</pre>
       <div class="step"><strong>Step 1:</strong> Everything is the same up to \( x = 32 \) after pass 4.</div>
       <div class="step"><strong>Step 2:</strong> One extra pass doubles again: \( 32 \times 2 = 64 \).</div>
       <em>Conclusion: 64. ✓ (raising the loop count raises the output)</em>
+      <div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 200 60" width="200" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="10" y="15" width="70" height="30" rx="6" fill="#e6f3ff" stroke="#4a90e2" stroke-width="1.5"/><text x="45" y="34" font-size="11" text-anchor="middle" fill="#1e3a5f">x = 32</text><line x1="85" y1="30" x2="110" y2="30" stroke="#9a5b00" stroke-width="2"/><text x="97" y="23" font-size="8" text-anchor="middle" fill="#9a5b00">×2</text><rect x="120" y="15" width="70" height="30" rx="6" fill="#fde8ef" stroke="#c2185b" stroke-width="1.5"/><text x="155" y="34" font-size="11" text-anchor="middle" fill="#7a1044">x = 64</text></svg></div>
     </div>
   </div>
 
@@ -2417,6 +2526,7 @@ output c        → 7</pre>
       <div class="step"><strong>Step 1:</strong> Start \( s = 0 \).</div>
       <div class="step"><strong>Step 2:</strong> Add each \( i \): \( 0+1+2+3+4+5 = 15 \).</div>
       <em>Conclusion: 15. ✓</em>
+      <div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 260 50" width="260" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="5" y="10" width="30" height="28" rx="4" fill="#e6f3ff" stroke="#4a90e2"/><text x="20" y="28" font-size="8" text-anchor="middle" fill="#1e3a5f">s=0</text><rect x="45" y="10" width="30" height="28" rx="4" fill="#e6f3ff" stroke="#4a90e2"/><text x="60" y="28" font-size="8" text-anchor="middle" fill="#1e3a5f">s=1</text><rect x="85" y="10" width="30" height="28" rx="4" fill="#e6f3ff" stroke="#4a90e2"/><text x="100" y="28" font-size="8" text-anchor="middle" fill="#1e3a5f">s=3</text><rect x="125" y="10" width="30" height="28" rx="4" fill="#e6f3ff" stroke="#4a90e2"/><text x="140" y="28" font-size="8" text-anchor="middle" fill="#1e3a5f">s=6</text><rect x="165" y="10" width="35" height="28" rx="4" fill="#e6f3ff" stroke="#4a90e2"/><text x="182" y="28" font-size="8" text-anchor="middle" fill="#1e3a5f">s=10</text><rect x="210" y="10" width="40" height="28" rx="4" fill="#fde8ef" stroke="#c2185b"/><text x="230" y="28" font-size="8" text-anchor="middle" fill="#7a1044">s=15</text></svg></div>
     </div>
   </div>
 
@@ -2426,6 +2536,7 @@ output c        → 7</pre>
       <div class="step"><strong>Step 1:</strong> The rule is \( \text{total} = p \times 3 \); now \( p = 8 \).</div>
       <div class="step"><strong>Step 2:</strong> \( 8 \times 3 = 24 \).</div>
       <em>Conclusion: 24. ✓</em>
+      <div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 200 60" width="200" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="10" y="15" width="70" height="30" rx="6" fill="#e6f3ff" stroke="#4a90e2" stroke-width="1.5"/><text x="45" y="34" font-size="11" text-anchor="middle" fill="#1e3a5f">p = 8</text><line x1="85" y1="30" x2="110" y2="30" stroke="#9a5b00" stroke-width="2"/><text x="97" y="23" font-size="8" text-anchor="middle" fill="#9a5b00">×3</text><rect x="120" y="15" width="70" height="30" rx="6" fill="#fde8ef" stroke="#c2185b" stroke-width="1.5"/><text x="155" y="34" font-size="11" text-anchor="middle" fill="#7a1044">total=24</text></svg></div>
     </div>
   </div>
 
@@ -2460,6 +2571,7 @@ output c        → 7</pre>
       <div class="step"><strong>Step 1:</strong> You control the streaming time, so <strong>time</strong> is independent.</div>
       <div class="step"><strong>Step 2:</strong> The battery level responds to it, so it is <strong>dependent</strong>.</div>
       <em>Conclusion: time is independent; battery level is dependent. ✓</em>
+      <div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 220 60" width="220" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="10" y="15" width="90" height="30" rx="6" fill="#e6f3ff" stroke="#4a90e2" stroke-width="1.5"/><text x="55" y="34" font-size="10" text-anchor="middle" fill="#1e3a5f">time (independent)</text><line x1="105" y1="30" x2="130" y2="30" stroke="#9a5b00" stroke-width="2"/><rect x="140" y="15" width="80" height="30" rx="6" fill="#fde8ef" stroke="#c2185b" stroke-width="1.5"/><text x="180" y="34" font-size="9" text-anchor="middle" fill="#7a1044">battery (dependent)</text></svg></div>
     </div>
   </div>
   <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;">
@@ -2476,6 +2588,7 @@ output c        → 7</pre>
       <div class="step"><strong>Step 1:</strong> Points: \( (1,3), (2,6), (3,9), (4,12) \).</div>
       <div class="step"><strong>Step 2:</strong> You cannot have part of a tricycle, so this is <strong>discrete</strong> — plot separate points, not a line.</div>
       <em>Conclusion: discrete. ✓</em>
+      <div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 160 100" width="160" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><line x1="20" y1="85" x2="150" y2="85" stroke="#94a3b8" stroke-width="1.2"/><line x1="20" y1="85" x2="20" y2="10" stroke="#94a3b8" stroke-width="1.2"/><circle cx="45" cy="70" r="4" fill="#4a90e2"/><circle cx="75" cy="55" r="4" fill="#4a90e2"/><circle cx="105" cy="40" r="4" fill="#4a90e2"/><circle cx="135" cy="25" r="4" fill="#4a90e2"/><text x="85" y="98" font-size="9" text-anchor="middle" fill="#64748b">discrete points (not a line)</text></svg></div>
     </div>
   </div>
   <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;">
@@ -2571,7 +2684,14 @@ output c        → 7</pre>
   <div class="qa-box" style="background-color:#f0f0f0;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Q2: What is the rate of change?</h3><p><em>How much y changes per 1 unit of x — the slope.</em></p></div>
   <div class="qa-box" style="background-color:#f0f0f0;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Q3: How does a non-linear graph look?</h3><p><em>It curves instead of being a straight line.</em></p></div>
 </div>` },
-      mg([{ expr: "2*x + 1", label: "y = 2x + 1 (linear)" }, { expr: "x^2", label: "y = x² (non-linear)" }], { markIntersection: false, xMin: -4, xMax: 4, yMin: -2, yMax: 10, caption: "Linear is a straight line; non-linear curves." }),
+      mg([{ expr: "m*x + b", label: "y = mx + b (linear)" }, { expr: "x^2", label: "y = x² (non-linear)" }], {
+        params: [
+          { name: "m", min: -4, max: 4, init: 2 },
+          { name: "b", min: -3, max: 3, init: 1 },
+        ],
+        markIntersection: false, xMin: -4, xMax: 4, yMin: -2, yMax: 10,
+        caption: "Slide m and b — the line always stays straight; y = x² always curves.",
+      }),
     ],
   },
 
@@ -2635,6 +2755,7 @@ output c        → 7</pre>
       <div class="step"><strong>Step 2:</strong> Since the first differences are not constant, the relation is <strong>not linear</strong> — its graph is a curve.</div>
       <div class="step"><strong>Step 3:</strong> Each \( y \) equals the square of \( x \): \( y = x^2 \).</div>
       <em>Conclusion: non-linear; \( y = x^2 \). ✓</em>
+      <div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 160 100" width="160" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><line x1="15" y1="85" x2="145" y2="85" stroke="#94a3b8" stroke-width="1"/><line x1="80" y1="10" x2="80" y2="85" stroke="#94a3b8" stroke-width="1"/><path d="M20,20 Q80,90 140,20" fill="none" stroke="#4a90e2" stroke-width="2"/><circle cx="30" cy="25" r="3" fill="#c2185b"/><circle cx="55" cy="45" r="3" fill="#c2185b"/><circle cx="80" cy="85" r="3" fill="#c2185b"/><circle cx="105" cy="45" r="3" fill="#c2185b"/><circle cx="130" cy="25" r="3" fill="#c2185b"/><text x="80" y="98" font-size="9" text-anchor="middle" fill="#64748b">y = x² (curve)</text></svg></div>
     </div>
   </div>
   <h2>🟡 Practice Questions</h2>
@@ -2704,7 +2825,7 @@ output c        → 7</pre>
       <div class="step"><strong>Step 1:</strong> Set equal: \( 3x - 2 = x + 4 \).</div>
       <div class="step"><strong>Step 2:</strong> \( 2x = 6 \Rightarrow x = 3 \).</div>
       <div class="step"><strong>Step 3:</strong> \( y = 3(3) - 2 = 7 \) (check: \( 3 + 4 = 7 \) ✓).</div>
-      <em>Conclusion: \( (3, 7) \). ✓</em>
+      <em>Conclusion: \( (3, 7) \). ✓</em>${gframe(["y = 3*x - 2", "y = x + 4"], { title: "y = 3x - 2 and y = x + 4 cross at (3, 7)" })}
     </div>
   </div>
   <h2>🟡 Practice Questions</h2>
@@ -2778,11 +2899,38 @@ output c        → 7</pre>
   </div>
 
   <h2>🔵 Examples (Application &amp; Challenge)</h2>
-  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:12px 16px;margin:16px 0;border-radius:16px;"><h3>📌 Example 1 — Constant Temperature (horizontal)</h3><p>A reactor is held at \( 72^\circ\text{F} \) for 4 hours. Write temperature \( T \) as a function of time \( t \) and describe its graph for \( 0 \le t \le 5 \).</p><div class="solution"><div class="step"><strong>Step 1:</strong> \( T \) never changes ⇒ \( T = 72 \).</div><div class="step"><strong>Step 2:</strong> the graph is a horizontal line crossing the \( T \)-axis at 72, slope \( 0 \).</div><em>✅ Every point \( (t, 72) \) satisfies it — a constant relation.</em></div></div>
-  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:12px 16px;margin:16px 0;border-radius:16px;"><h3>📌 Example 2 — Delivery Boundary (vertical)</h3><p>A store at the origin delivers only where the east–west coordinate satisfies \( x \le 5 \) km. Give the boundary line and decide whether \( (5, 12) \) is eligible.</p><div class="solution"><div class="step"><strong>Step 1:</strong> the boundary is the vertical line \( x = 5 \).</div><div class="step"><strong>Step 2:</strong> \( (5,12) \) has \( x = 5 \), which satisfies \( x \le 5 \) — it lies exactly on the boundary.</div><em>✅ Eligible. The vertical line \( x = 5 \) is the maximum eastward limit.</em></div></div>
-  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:12px 16px;margin:16px 0;border-radius:16px;"><h3>📌 Example 3 — Direct Variation (through origin)</h3><p>Cost \( C \) of apples is proportional to weight \( w \). If 3 kg cost $7.50, find the equation and name the special line.</p><div class="solution"><div class="step"><strong>Step 1:</strong> direct variation ⇒ \( C = mw \), through \( (0,0) \).</div><div class="step"><strong>Step 2:</strong> \( 7.50 = m(3) \Rightarrow m = 2.5 \).</div><em>✅ \( C = 2.5w \): a line through the origin with unit rate $2.50/kg.</em></div></div>
-  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:12px 16px;margin:16px 0;border-radius:16px;"><h3>📌 Example 4 — Parking Grid (intersecting special lines)</h3><p>A lot is bounded by \( x = 2 \), \( x = 8 \), \( y = 1 \), \( y = 5 \). Give the corner coordinates and the area.</p><div class="solution"><div class="step"><strong>Step 1:</strong> corners are intersections: \( (2,1), (8,1), (2,5), (8,5) \).</div><div class="step"><strong>Step 2:</strong> width \( = 8-2 = 6 \), height \( = 5-1 = 4 \).</div><em>✅ Area \( = 6 \times 4 = 24 \) square units — special lines fence the region.</em></div></div>
-  <div class="example-box" style="background-color:#fff0f5;border-left:5px solid #c2185b;padding:12px 16px;margin:16px 0;border-radius:16px;"><h3>⭐ Example 5 (Challenge) — Reflection over \( y = -x \)</h3><p>Reflect \( P(3, -4) \) across the diagonal \( y = -x \).</p><div class="solution"><div class="step"><strong>Step 1:</strong> \( y = -x \) has slope \( -1 \) through the origin.</div><div class="step"><strong>Step 2:</strong> the reflection rule over \( y=-x \) is \( (a,b) \to (-b,-a) \).</div><div class="step"><strong>Step 3:</strong> \( P(3,-4) \to (-(-4), -3) = (4, -3) \).</div><em>✅ \( P' = (4,-3) \). The midpoint of \( PP' \) lies on \( y=-x \) and \( PP' \perp \) the line.</em></div></div>
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:12px 16px;margin:16px 0;border-radius:16px;"><h3>📌 Example 1 — Constant Temperature (horizontal)</h3><p>A reactor is held at \( 72^\circ\text{F} \) for 4 hours. Write temperature \( T \) as a function of time \( t \) and describe its graph for \( 0 \le t \le 5 \).</p><div class="solution"><div class="step"><strong>Step 1:</strong> \( T \) never changes ⇒ \( T = 72 \).</div><div class="step"><strong>Step 2:</strong> the graph is a horizontal line crossing the \( T \)-axis at 72, slope \( 0 \).</div><em>✅ Every point \( (t, 72) \) satisfies it — a constant relation.</em>
+    <div style="text-align:center;margin-top:10px;"><svg viewBox="0 0 300 170" width="280" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:12px;">
+      <line x1="40" y1="150" x2="290" y2="150" stroke="#94a3b8" stroke-width="1.5"/><line x1="40" y1="10" x2="40" y2="150" stroke="#94a3b8" stroke-width="1.5"/>
+      <text x="278" y="145" font-size="11" fill="#64748b">t</text><text x="20" y="20" font-size="11" fill="#64748b">T</text>
+      <line x1="45" y1="60" x2="285" y2="60" stroke="#4a90e2" stroke-width="3"/><text x="170" y="52" font-size="12" fill="#1e3a5f" font-weight="700">T = 72</text>
+      <text x="12" y="64" font-size="10" fill="#64748b">72</text><circle cx="45" cy="60" r="3.5" fill="#4a90e2"/>
+    </svg></div>
+  </div></div>
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:12px 16px;margin:16px 0;border-radius:16px;"><h3>📌 Example 2 — Delivery Boundary (vertical)</h3><p>A store at the origin delivers only where the east–west coordinate satisfies \( x \le 5 \) km. Give the boundary line and decide whether \( (5, 12) \) is eligible.</p><div class="solution"><div class="step"><strong>Step 1:</strong> the boundary is the vertical line \( x = 5 \).</div><div class="step"><strong>Step 2:</strong> \( (5,12) \) has \( x = 5 \), which satisfies \( x \le 5 \) — it lies exactly on the boundary.</div><em>✅ Eligible. The vertical line \( x = 5 \) is the maximum eastward limit.</em>
+    <div style="text-align:center;margin-top:10px;"><svg viewBox="0 0 300 190" width="280" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:12px;">
+      <rect x="40" y="10" width="150" height="160" fill="#e6f3ff"/>
+      <line x1="20" y1="170" x2="290" y2="170" stroke="#94a3b8" stroke-width="1.5"/><line x1="40" y1="10" x2="40" y2="180" stroke="#94a3b8" stroke-width="1.5"/>
+      <text x="278" y="165" font-size="11" fill="#64748b">x (km)</text>
+      <line x1="190" y1="10" x2="190" y2="170" stroke="#2e9e6e" stroke-width="3"/><text x="150" y="26" font-size="12" fill="#1c5c43" font-weight="700">x = 5</text>
+      <circle cx="190" cy="60" r="5" fill="#dc2626"/><text x="196" y="52" font-size="11" fill="#7f1d1d" font-weight="700">(5, 12)</text>
+      <text x="58" y="100" font-size="11" fill="#2c6e9e">eligible (x ≤ 5)</text>
+    </svg></div>
+  </div></div>
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:12px 16px;margin:16px 0;border-radius:16px;"><h3>📌 Example 3 — Direct Variation (through origin)</h3><p>Cost \( C \) of apples is proportional to weight \( w \). If 3 kg cost $7.50, find the equation and name the special line.</p><div class="solution"><div class="step"><strong>Step 1:</strong> direct variation ⇒ \( C = mw \), through \( (0,0) \).</div><div class="step"><strong>Step 2:</strong> \( 7.50 = m(3) \Rightarrow m = 2.5 \).</div><em>✅ \( C = 2.5w \): a line through the origin with unit rate $2.50/kg.</em>${gframe(["y = 2.5*x"], { title: "C = 2.5w — a line through the origin, rate $2.50/kg", labels: [{ x: 3, y: 7.5, t: "(3, 7.5)", c: "#a3327a" }] })}</div></div>
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:12px 16px;margin:16px 0;border-radius:16px;"><h3>📌 Example 4 — Parking Grid (intersecting special lines)</h3><p>A lot is bounded by \( x = 2 \), \( x = 8 \), \( y = 1 \), \( y = 5 \). Give the corner coordinates and the area.</p><div class="solution"><div class="step"><strong>Step 1:</strong> corners are intersections: \( (2,1), (8,1), (2,5), (8,5) \).</div><div class="step"><strong>Step 2:</strong> width \( = 8-2 = 6 \), height \( = 5-1 = 4 \).</div><em>✅ Area \( = 6 \times 4 = 24 \) square units — special lines fence the region.</em>
+    <div style="text-align:center;margin-top:10px;"><svg viewBox="0 0 300 180" width="280" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:12px;">
+      <line x1="20" y1="170" x2="290" y2="170" stroke="#94a3b8" stroke-width="1.5"/><line x1="40" y1="10" x2="40" y2="180" stroke="#94a3b8" stroke-width="1.5"/>
+      <rect x="90" y="40" width="150" height="90" fill="#fff7ed"/>
+      <line x1="90" y1="10" x2="90" y2="170" stroke="#2e9e6e" stroke-width="2.5"/><text x="72" y="24" font-size="11" fill="#1c5c43" font-weight="700">x=2</text>
+      <line x1="240" y1="10" x2="240" y2="170" stroke="#2e9e6e" stroke-width="2.5"/><text x="222" y="24" font-size="11" fill="#1c5c43" font-weight="700">x=8</text>
+      <line x1="20" y1="130" x2="290" y2="130" stroke="#4a90e2" stroke-width="2.5"/><text x="250" y="124" font-size="11" fill="#1e3a5f" font-weight="700">y=1</text>
+      <line x1="20" y1="40" x2="290" y2="40" stroke="#4a90e2" stroke-width="2.5"/><text x="250" y="34" font-size="11" fill="#1e3a5f" font-weight="700">y=5</text>
+      <circle cx="90" cy="130" r="3.5" fill="#0f172a"/><circle cx="240" cy="130" r="3.5" fill="#0f172a"/><circle cx="90" cy="40" r="3.5" fill="#0f172a"/><circle cx="240" cy="40" r="3.5" fill="#0f172a"/>
+      <text x="105" y="90" font-size="12" fill="#7c3aed" font-weight="700">Area = 24</text>
+    </svg></div>
+  </div></div>
+  <div class="example-box" style="background-color:#fff0f5;border-left:5px solid #c2185b;padding:12px 16px;margin:16px 0;border-radius:16px;"><h3>⭐ Example 5 (Challenge) — Reflection over \( y = -x \)</h3><p>Reflect \( P(3, -4) \) across the diagonal \( y = -x \).</p><div class="solution"><div class="step"><strong>Step 1:</strong> \( y = -x \) has slope \( -1 \) through the origin.</div><div class="step"><strong>Step 2:</strong> the reflection rule over \( y=-x \) is \( (a,b) \to (-b,-a) \).</div><div class="step"><strong>Step 3:</strong> \( P(3,-4) \to (-(-4), -3) = (4, -3) \).</div><em>✅ \( P' = (4,-3) \). The midpoint of \( PP' \) lies on \( y=-x \) and \( PP' \perp \) the line.</em>${gframe(["y = -x"], { title: "Reflection over y = -x: P(3,-4) → P'(4,-3)", labels: [{ x: 3, y: -4, t: "P(3,-4)", c: "#dc2626" }, { x: 4, y: -3, t: "P'(4,-3)", c: "#2e9e6e" }] })}</div></div>
 
   <h2>🟡 Practice Questions (Skill &amp; Word Problems)</h2>
   <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:12px 16px;margin:16px 0;border-radius:16px;"><h3>📝 Question 1 — Water Level</h3><p>A pool sits at a constant depth of 1.8 m. Write depth \( d \) as a function of horizontal position \( x \) and name the line type.</p><details><summary>🔎 Show Answer</summary><div class="solution"><div class="step">Depth is constant ⇒ \( d = 1.8 \), a horizontal line (slope 0).</div></div></details></div>
@@ -2806,7 +2954,11 @@ output c        → 7</pre>
     <p style="margin:0;">✨ These four line types are the building blocks that make graphing systems and regions fast.</p>
   </div>
 </div>` },
-      mg([{ expr: "3", label: "y = 3 (horizontal)" }, { expr: "x", label: "y = x" }], { markIntersection: false, xMin: -5, xMax: 5, yMin: -5, yMax: 6, caption: "y = 3 is flat; y = x rises at 45°. (Vertical lines x = k can't be drawn as y = f(x).)" }),
+      mg([{ expr: "c", label: "y = c (horizontal)" }, { expr: "x", label: "y = x" }], {
+        params: [{ name: "c", min: -5, max: 5, init: 3 }],
+        markIntersection: false, xMin: -5, xMax: 5, yMin: -5, yMax: 6,
+        caption: "Slide c — y = c stays flat at every height; y = x rises at 45°. (Vertical lines x = k can't be drawn as y = f(x).)",
+      }),
     ],
   },
 
@@ -2873,8 +3025,12 @@ output c        → 7</pre>
   <div class="qa-box" style="background-color:#f0f0f0;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Q2: What does changing \( m \) do?</h3><p><em>Rotates the line (changes steepness/direction).</em></p></div>
   <div class="qa-box" style="background-color:#f0f0f0;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Q3: What is a reflection in the x-axis?</h3><p><em>Negating the slope (and intercept), flipping the line over the x-axis.</em></p></div>
 </div>` },
-      graph("a*x", "a", { xMin: -5, xMax: 5, yMin: -6, yMax: 6, paramMin: -3, paramMax: 3, paramInit: 2, caption: "y = ax through the origin — slide a to rotate (and reflect when a < 0)." }),
-      graph("2*x + a", "a", { xMin: -5, xMax: 5, yMin: -6, yMax: 8, paramMin: -4, paramMax: 4, paramInit: 0, caption: "y = 2x + a — slide a to translate the line up and down." }),
+      graph("m*x + b", "m", {
+        xMin: -5, xMax: 5, yMin: -6, yMax: 8,
+        paramMin: -3, paramMax: 3, paramInit: 2,
+        param2: "b", param2Min: -4, param2Max: 4, param2Init: 0,
+        caption: "y = mx + b — slide m to rotate (change steepness, and reflect when m < 0); slide b to translate the line up and down.",
+      }),
     ],
   },
 
@@ -2945,15 +3101,22 @@ output c        → 7</pre>
   <div class="qa-box" style="background-color:#f0f0f0;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Q2: How do I find slope from two points?</h3><p><em>Rise over run: \( \frac{y_2 - y_1}{x_2 - x_1} \).</em></p></div>
   <div class="qa-box" style="background-color:#f0f0f0;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Q3: Where is the y-intercept in a table?</h3><p><em>The y-value when \( x = 0 \).</em></p></div>
 </div>` },
-      mg([{ expr: "2*x + 1", label: "y = 2x + 1" }], { markIntersection: false, xMin: -4, xMax: 4, yMin: -4, yMax: 8, caption: "This line has slope 2 and y-intercept 1." }),
+      mg([{ expr: "m*x + b", label: "y = mx + b" }], {
+        params: [
+          { name: "m", min: -4, max: 4, init: 2 },
+          { name: "b", min: -4, max: 4, init: 1 },
+        ],
+        markIntersection: false, xMin: -4, xMax: 4, yMin: -4, yMax: 8,
+        caption: "Slide m (the slope) and b (the y-intercept) to build any line.",
+      }),
     ],
   },
 
   {
-    code: "4.8", title: "General Form", quizzes: [],
+    code: "4.8", title: "General Form vs Slope-Intercept Form", quizzes: [],
     blocks: [
       { id: bid(), type: "html", html: String.raw`<div class="lecture-box">
-  <h1>📐 General Form</h1>
+  <h1>📐 General Form vs Slope-Intercept Form</h1>
   <p><strong>Overview.</strong> Every straight line can be written in <strong>general form</strong> \( Ax + By + C = 0 \), where \( A, B, C \) are integers and \( A \ge 0 \). <strong>Slope-intercept form</strong> \( y = mx + b \) shows the slope and y-intercept at a glance — ideal for graphing and comparing. General form is a tidy, integer-coefficient standard that also handles <em>vertical</em> lines, which have no slope-intercept form at all.</p>
   <h2>📌 Writing a Line in General Form</h2>
   <p>Start from \( y = mx + b \), move every term to one side, and clear fractions so all coefficients are integers. Example: \( y = \frac{2}{3}x - 1 \Rightarrow 3y = 2x - 3 \Rightarrow 2x - 3y - 3 = 0 \).</p>
@@ -2966,7 +3129,7 @@ output c        → 7</pre>
   <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 2</h3><p>Find the intercepts of \( 3x + 4y = 12 \).</p><div class="solution"><div class="step"><strong>x-intercept:</strong> \( y = 0 \Rightarrow 3x = 12 \Rightarrow x = 4 \), point \( (4,0) \).</div><div class="step"><strong>y-intercept:</strong> \( x = 0 \Rightarrow 4y = 12 \Rightarrow y = 3 \), point \( (0,3) \).</div><em>Conclusion: \( (4,0) \) and \( (0,3) \).</em>${gframe(["y = (12 - 3*x)/4"], { title: "3x + 4y = 12 crosses the axes at (4,0) and (0,3)" })}</div></div>
   <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 3</h3><p>Convert \( 3x - 4y = 12 \) to slope-intercept form.</p><div class="solution"><div class="step"><strong>Step 1:</strong> \( -4y = -3x + 12 \).</div><div class="step"><strong>Step 2:</strong> \( y = \frac{3}{4}x - 3 \).</div><em>Conclusion: \( y = \frac{3}{4}x - 3 \).</em>${gframe(["y = 0.75*x - 3"], { title: "3x - 4y = 12 is y = ¾x - 3" })}</div></div>
   <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 4</h3><p>Convert \( y = -\frac{1}{2}x + 4 \) to general form (integers).</p><div class="solution"><div class="step"><strong>Step 1:</strong> \( \times 2 \): \( 2y = -x + 8 \).</div><div class="step"><strong>Step 2:</strong> \( x + 2y - 8 = 0 \).</div><em>Conclusion: \( x + 2y - 8 = 0 \).</em>${gframe(["y = -0.5*x + 4"], { title: "y = -½x + 4 is the same line as x + 2y - 8 = 0" })}</div></div>
-  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>⭐ Advanced Example 5</h3><p>Why can't \( x = 3 \) be written as \( y = mx + b \)?</p><div class="solution"><div class="step"><strong>Reason:</strong> a vertical line has <em>undefined</em> slope, so there is no value of \( m \).</div><div class="step">General form handles it: \( x - 3 = 0 \).</div><em>Conclusion: use general form for vertical lines.</em></div></div>
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>⭐ Advanced Example 5</h3><p>Why can't \( x = 3 \) be written as \( y = mx + b \)?</p><div class="solution"><div class="step"><strong>Reason:</strong> a vertical line has <em>undefined</em> slope, so there is no value of \( m \).</div><div class="step">General form handles it: \( x - 3 = 0 \).</div><em>Conclusion: use general form for vertical lines.</em><div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 140 140" width="140" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><line x1="20" y1="70" x2="120" y2="70" stroke="#94a3b8" stroke-width="1"/><line x1="70" y1="10" x2="70" y2="130" stroke="#94a3b8" stroke-width="1"/><line x1="95" y1="10" x2="95" y2="130" stroke="#c2185b" stroke-width="2.5"/><text x="95" y="8" font-size="10" text-anchor="middle" fill="#7a1044">x = 3</text></svg></div></div></div>
   <h2>🟡 Practice Questions</h2>
   <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Question 1</h3><p>Write \( y = x - 7 \) in general form.</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Answer: \( x - y - 7 = 0 \).</em></div></div></details></div>
   <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Question 2</h3><p>Find the x-intercept of \( 5x + 2y = 20 \).</p><details><summary>View answer</summary><div class="solution"><div class="step">\( y = 0 \Rightarrow 5x = 20 \). <em>Answer: \( (4,0) \).</em></div></div></details></div>
@@ -2978,7 +3141,14 @@ output c        → 7</pre>
   <div class="qa-box" style="background-color:#f0f0f0;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Q2: Which form is best for graphing quickly?</h3><p><em>Slope-intercept form, \( y = mx + b \).</em></p></div>
   <div class="qa-box" style="background-color:#f0f0f0;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Q3: Which form can represent a vertical line?</h3><p><em>General form (e.g. \( x - 3 = 0 \)).</em></p></div>
 </div>` },
-      mg([{ expr: "-2*x + 6", label: "y = -2x + 6" }], { markIntersection: false, xMin: -2, xMax: 6, yMin: -2, yMax: 8, caption: "One line, two names: 2x + y − 6 = 0 (general) = y = −2x + 6 (slope-intercept)." }),
+      mg([{ expr: "m*x + b", label: "y = mx + b" }], {
+        params: [
+          { name: "m", min: -4, max: 4, init: -2 },
+          { name: "b", min: -2, max: 8, init: 6 },
+        ],
+        markIntersection: false, xMin: -2, xMax: 6, yMin: -2, yMax: 8,
+        caption: "Slide m and b — every line has two names: y = mx + b (slope-intercept) and mx − y + b = 0 (general form).",
+      }),
     ],
   },
 
@@ -2997,7 +3167,7 @@ output c        → 7</pre>
   <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 2</h3><p>What slope is perpendicular to slope \( 4 \)?</p><div class="solution"><div class="step"><strong>Step 1:</strong> negative reciprocal of \( 4 \) is \( -\frac{1}{4} \).</div><em>Conclusion: \( -\frac{1}{4} \).</em>${gframe(["y = 4*x", "y = -0.25*x"], { title: "slopes 4 and -¼ multiply to -1 — the lines meet at a right angle" })}</div></div>
   <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 3</h3><p>Find the line through \( (0,1) \) parallel to \( y = 2x - 3 \).</p><div class="solution"><div class="step"><strong>Step 1:</strong> same slope \( 2 \), y-intercept \( 1 \).</div><em>Conclusion: \( y = 2x + 1 \).</em>${gframe(["y = 2*x - 3", "y = 2*x + 1"], { title: "y = 2x + 1 is parallel to y = 2x - 3 and passes through (0,1)" })}</div></div>
   <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 4</h3><p>Find the line through \( (0,-2) \) perpendicular to \( y = \frac{1}{2}x + 4 \).</p><div class="solution"><div class="step"><strong>Step 1:</strong> perpendicular slope \( = -2 \), y-intercept \( -2 \).</div><em>Conclusion: \( y = -2x - 2 \).</em>${gframe(["y = 0.5*x + 4", "y = -2*x - 2"], { title: "y = -2x - 2 is perpendicular to y = ½x + 4 (slopes ½ and -2)" })}</div></div>
-  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>⭐ Advanced Example 5</h3><p>Is the line through \( (1,2) \) and \( (3,8) \) perpendicular to \( y = -\frac{1}{3}x \)?</p><div class="solution"><div class="step"><strong>Step 1:</strong> slope \( = \frac{8-2}{3-1} = 3 \).</div><div class="step"><strong>Step 2:</strong> \( 3 \times \left(-\frac{1}{3}\right) = -1 \).</div><em>Conclusion: yes, perpendicular.</em></div></div>
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>⭐ Advanced Example 5</h3><p>Is the line through \( (1,2) \) and \( (3,8) \) perpendicular to \( y = -\frac{1}{3}x \)?</p><div class="solution"><div class="step"><strong>Step 1:</strong> slope \( = \frac{8-2}{3-1} = 3 \).</div><div class="step"><strong>Step 2:</strong> \( 3 \times \left(-\frac{1}{3}\right) = -1 \).</div><em>Conclusion: yes, perpendicular.</em>${gframe(["y = 3*x - 1", "y = (-1/3)*x"], { title: "the line through (1,2),(3,8) has slope 3; y = -⅓x has slope -⅓ — product -1, perpendicular", labels: [{ x: 1, y: 2, t: "(1, 2)", c: "#a3327a" }, { x: 3, y: 8, t: "(3, 8)", c: "#a3327a" }] })}</div></div>
   <h2>🟡 Practice Questions</h2>
   <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Question 1</h3><p>What is the slope of any line parallel to \( y = -5x + 1 \)?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Answer: \( -5 \).</em></div></div></details></div>
   <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Question 2</h3><p>What is the slope of any line perpendicular to \( y = \frac{2}{3}x \)?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Answer: \( -\frac{3}{2} \).</em></div></div></details></div>
@@ -3010,10 +3180,14 @@ output c        → 7</pre>
   <div class="qa-box" style="background-color:#f0f0f0;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Q3: How are horizontal and vertical lines related?</h3><p><em>They are perpendicular to each other.</em></p></div>
 </div>` },
       mg([
-        { expr: "2*x + 1", label: "y = 2x + 1" },
-        { expr: "2*x - 3", label: "y = 2x − 3 (parallel)" },
-        { expr: "-0.5*x + 1", label: "y = −½x + 1 (perpendicular)" },
-      ], { markIntersection: false, xMin: -5, xMax: 5, yMin: -5, yMax: 6, caption: "Equal slopes ⇒ parallel; negative-reciprocal slopes (2 and −½) ⇒ perpendicular." }),
+        { expr: "m*x + 1", label: "y = mx + 1" },
+        { expr: "m*x - 3", label: "y = mx − 3 (parallel)" },
+        { expr: "(-1/m)*x + 1", label: "y = (−1/m)x + 1 (perpendicular)" },
+      ], {
+        params: [{ name: "m", min: 0.5, max: 4, init: 2 }],
+        markIntersection: false, xMin: -5, xMax: 5, yMin: -5, yMax: 6,
+        caption: "Slide m (kept away from 0) — equal slopes ⇒ parallel; negative-reciprocal slopes ⇒ perpendicular.",
+      }),
     ],
   },
 
@@ -3045,7 +3219,7 @@ output c        → 7</pre>
     <div class="solution">
       <div class="step"><strong>Step 1:</strong> Each cubit is \( 6 \) hands, so multiply: \( 2 \times 6 \).</div>
       <div class="step"><strong>Step 2:</strong> \( 2 \times 6 = 12 \).</div>
-      <em>Conclusion: 12 hands. ✓</em>
+      <em>Conclusion: 12 hands. ✓</em>${gframe(["y = 6*x"], { title: "hands = 6 × cubits", zoom: 10, labels: [{ t: "(2, 12)", x: 2, y: 12 }] })}
     </div>
   </div>
   <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;">
@@ -3055,6 +3229,21 @@ output c        → 7</pre>
       <div class="step"><strong>Step 2:</strong> Square the longest side: \( 5^2 = 25 \).</div>
       <div class="step"><strong>Step 3:</strong> They are equal, so the Pythagorean relationship holds — the triangle is right-angled.</div>
       <em>Conclusion: yes, the 3-4-5 rope gives a right angle. ✓</em>
+      <div style="text-align:center;margin:14px 0;">
+        <svg viewBox="-40 -50 320 330" width="300" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;">
+          <polygon points="50,150 150,150 50,75" fill="#e6f3ff" stroke="#4a90e2" stroke-width="2"/>
+          <polygon points="50,150 150,150 150,250 50,250" fill="#d1fae5" stroke="#10b981" stroke-width="2"/>
+          <polygon points="50,150 50,75 -25,75 -25,150" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+          <polygon points="150,150 50,75 125,-25 225,50" fill="#fce7f3" stroke="#db2777" stroke-width="2"/>
+          <text x="100" y="205" font-size="16" font-weight="700" text-anchor="middle" fill="#065f46">16</text>
+          <text x="12" y="118" font-size="16" font-weight="700" text-anchor="middle" fill="#92400e">9</text>
+          <text x="137" y="68" font-size="16" font-weight="700" text-anchor="middle" fill="#9d174d">25</text>
+          <text x="100" y="142" font-size="12" text-anchor="middle" fill="#1e3a5f">4</text>
+          <text x="65" y="117" font-size="12" text-anchor="middle" fill="#1e3a5f">3</text>
+          <text x="91" y="129" font-size="12" text-anchor="middle" fill="#1e3a5f">5</text>
+        </svg>
+        <div style="font-size:13px;color:#64748b;">The squares on the two legs (9 + 16) exactly cover the square on the hypotenuse (25).</div>
+      </div>
     </div>
   </div>
   <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;">
@@ -3063,6 +3252,21 @@ output c        → 7</pre>
       <div class="step"><strong>Step 1:</strong> \( 60 \) minutes make \( 1 \) hour; subtract: \( 75 - 60 = 15 \).</div>
       <div class="step"><strong>Step 2:</strong> So \( 75 \) min \( = 1 \) hour and \( 15 \) minutes.</div>
       <em>Conclusion: 1 hour 15 minutes. ✓</em>
+      <div style="text-align:center;margin:14px 0;">
+        <svg viewBox="0 0 280 100" width="280" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;">
+          <rect x="20" y="30" width="180" height="36" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+          <rect x="200" y="30" width="45" height="36" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+          <line x1="20" y1="30" x2="20" y2="72" stroke="#334155" stroke-width="1.5"/>
+          <line x1="200" y1="30" x2="200" y2="72" stroke="#334155" stroke-width="1.5"/>
+          <line x1="245" y1="30" x2="245" y2="72" stroke="#334155" stroke-width="1.5"/>
+          <text x="20" y="86" font-size="11" text-anchor="middle" fill="#334155">0</text>
+          <text x="200" y="86" font-size="11" text-anchor="middle" fill="#334155">60</text>
+          <text x="245" y="86" font-size="11" text-anchor="middle" fill="#334155">75</text>
+          <text x="110" y="22" font-size="12" font-weight="700" text-anchor="middle" fill="#1e40af">60 min = 1 hour</text>
+          <text x="222" y="22" font-size="12" font-weight="700" text-anchor="middle" fill="#92400e">15 min</text>
+        </svg>
+        <div style="font-size:13px;color:#64748b;">75 minutes splits into one full hour (60) plus a 15-minute remainder.</div>
+      </div>
     </div>
   </div>
   <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;">
@@ -3070,7 +3274,7 @@ output c        → 7</pre>
     <div class="solution">
       <div class="step"><strong>Step 1:</strong> Each cubit is \( 4 \) palms, so multiply: \( 5 \times 4 \).</div>
       <div class="step"><strong>Step 2:</strong> \( 5 \times 4 = 20 \).</div>
-      <em>Conclusion: 20 palms. ✓</em>
+      <em>Conclusion: 20 palms. ✓</em>${gframe(["y = 4*x"], { title: "palms = 4 × cubits", zoom: 6, labels: [{ t: "(5, 20)", x: 5, y: 20 }] })}
     </div>
   </div>
   <div class="example-box" style="background-color:#fff0f5;border-left:5px solid #c2185b;padding:10px 14px;margin:10px 0;border-radius:6px;">
@@ -3079,6 +3283,24 @@ output c        → 7</pre>
       <div class="step"><strong>Step 1:</strong> \( \frac{256}{81} \approx 3.1605 \).</div>
       <div class="step"><strong>Step 2:</strong> Percent error \( = \frac{3.1605 - 3.14159}{3.14159} \times 100\% \approx 0.60\% \).</div>
       <em>Conclusion: remarkably close — about 0.6% high. ✓</em>
+      <div style="text-align:center;margin:14px 0;">
+        <svg viewBox="0 0 300 100" width="300" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;">
+          <line x1="10" y1="60" x2="290" y2="60" stroke="#94a3b8" stroke-width="2"/>
+          <line x1="20" y1="54" x2="20" y2="66" stroke="#94a3b8" stroke-width="1.5"/>
+          <text x="20" y="80" font-size="11" text-anchor="middle" fill="#334155">3.12</text>
+          <line x1="106.7" y1="54" x2="106.7" y2="66" stroke="#94a3b8" stroke-width="1.5"/>
+          <text x="106.7" y="80" font-size="11" text-anchor="middle" fill="#334155">3.14</text>
+          <line x1="193.3" y1="54" x2="193.3" y2="66" stroke="#94a3b8" stroke-width="1.5"/>
+          <text x="193.3" y="80" font-size="11" text-anchor="middle" fill="#334155">3.16</text>
+          <line x1="280" y1="54" x2="280" y2="66" stroke="#94a3b8" stroke-width="1.5"/>
+          <text x="280" y="80" font-size="11" text-anchor="middle" fill="#334155">3.18</text>
+          <circle cx="113.6" cy="60" r="5" fill="#1b7a44"/>
+          <text x="113.6" y="38" font-size="12" font-weight="700" text-anchor="middle" fill="#1b7a44">π ≈ 3.1416</text>
+          <circle cx="195.5" cy="60" r="5" fill="#c2185b"/>
+          <text x="195.5" y="38" font-size="12" font-weight="700" text-anchor="middle" fill="#c2185b">256/81 ≈ 3.1605</text>
+        </svg>
+        <div style="font-size:13px;color:#64748b;">Zoomed in near 3.14 — the scribe's fraction lands just 0.019 to the right of true π.</div>
+      </div>
     </div>
   </div>
   <h2>🟡 Practice Questions</h2>
@@ -3092,6 +3314,19 @@ output c        → 7</pre>
   <div class="qa-box" style="background-color:#f0f0f0;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Q2: What is a conjecture?</h3><p><em>An educated guess about a pattern, later tested and possibly proved.</em></p></div>
   <div class="qa-box" style="background-color:#f0f0f0;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Q3: Why is the modern metre more reliable than a cubit?</h3><p><em>It's defined by a physical constant (the speed of light), so it never varies.</em></p></div>
 </div>` },
+      mg([{ expr: "m1*x", label: "Rope leg 1: y = m1·x" }, { expr: "m2*x", label: "Rope leg 2: y = m2·x" }], {
+        params: [
+          { name: "m1", min: -4, max: 4, init: 1 },
+          { name: "m2", min: -4, max: 4, init: -1 },
+        ],
+        markIntersection: false, xMin: -4, xMax: 4, yMin: -4, yMax: 4,
+        caption: "Two stretched ropes from the same corner — slide m1 and m2. Whenever m1 × m2 = −1 the ropes meet in a perfect right angle, exactly the check the 3-4-5 knot performs with no protractor at all.",
+      }),
+      mg([{ expr: "n*sin(pi/n)", label: "n-sided rope polygon: perimeter ÷ diameter" }, { expr: "pi", label: "true π" }], {
+        params: [{ name: "n", min: 3, max: 60, init: 6 }],
+        markIntersection: false, xMin: -4, xMax: 4, yMin: 2.4, yMax: 3.3,
+        caption: "Slide n (the number of sides) — a rope polygon stretched around a circle gets its perimeter-to-diameter ratio closer to π as it gains sides. This is exactly how ancient mathematicians closed in on π, like the scribe's 256/81 ≈ 3.16 above.",
+      }),
     ],
   },
 
@@ -3125,6 +3360,14 @@ output c        → 7</pre>
       <div class="step"><strong>Step 1:</strong> The three interior angles sum to \(180^\circ\).</div>
       <div class="step"><strong>Step 2:</strong> Third \( = 180 - 47 - 68 = 65^\circ \).</div>
       <em>Conclusion: \(65^\circ\) — all angles \(&lt; 90^\circ\), so an acute triangle. ✓</em>
+      <div style="text-align:center;margin:10px 0;">
+        <svg viewBox="0 0 200 140" width="200" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;">
+          <polygon points="30,120 170,120 60,20" fill="#e6f3ff" stroke="#4a90e2" stroke-width="2"/>
+          <text x="45" y="112" font-size="12" fill="#1e3a5f">47°</text>
+          <text x="140" y="112" font-size="12" fill="#1e3a5f">68°</text>
+          <text x="60" y="40" font-size="12" fill="#1e3a5f">65°</text>
+        </svg>
+      </div>
     </div>
   </div>
   <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;">
@@ -3133,6 +3376,18 @@ output c        → 7</pre>
       <div class="step"><strong>Step 1:</strong> The inscribed angle is <em>half</em> the central angle on the same arc.</div>
       <div class="step"><strong>Step 2:</strong> \( 80 \div 2 = 40^\circ \).</div>
       <em>Conclusion: \(40^\circ\). ✓</em>
+      <div style="text-align:center;margin:10px 0;">
+        <svg viewBox="0 0 200 200" width="200" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;">
+          <circle cx="100" cy="100" r="75" fill="#e6f3ff" stroke="#4a90e2" stroke-width="2"/>
+          <circle cx="100" cy="100" r="3" fill="#1e3a5f"/>
+          <line x1="100" y1="100" x2="55" y2="35" stroke="#4a90e2" stroke-width="2"/>
+          <line x1="100" y1="100" x2="145" y2="35" stroke="#4a90e2" stroke-width="2"/>
+          <text x="100" y="72" font-size="12" text-anchor="middle" fill="#1e3a5f">80°</text>
+          <line x1="100" y1="175" x2="55" y2="35" stroke="#e69138" stroke-width="2"/>
+          <line x1="100" y1="175" x2="145" y2="35" stroke="#e69138" stroke-width="2"/>
+          <text x="100" y="168" font-size="12" text-anchor="middle" fill="#9a5b00">40°</text>
+        </svg>
+      </div>
     </div>
   </div>
   <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;">
@@ -3141,6 +3396,16 @@ output c        → 7</pre>
       <div class="step"><strong>Step 1:</strong> The diameter is twice the radius: \( d = 2r \).</div>
       <div class="step"><strong>Step 2:</strong> \( 2 \times 5 = 10 \) cm.</div>
       <em>Conclusion: \(10\) cm. ✓</em>
+      <div style="text-align:center;margin:10px 0;">
+        <svg viewBox="0 0 200 150" width="200" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;">
+          <circle cx="100" cy="70" r="55" fill="#e6f3ff" stroke="#4a90e2" stroke-width="2"/>
+          <line x1="45" y1="70" x2="155" y2="70" stroke="#e69138" stroke-width="3"/>
+          <line x1="100" y1="70" x2="155" y2="70" stroke="#4a90e2" stroke-width="3"/>
+          <circle cx="100" cy="70" r="3" fill="#1e3a5f"/>
+          <text x="128" y="60" font-size="12" text-anchor="middle" fill="#1e3a5f">r=5</text>
+          <text x="100" y="140" font-size="12" text-anchor="middle" fill="#9a5b00">d=10</text>
+        </svg>
+      </div>
     </div>
   </div>
   <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;">
@@ -3149,6 +3414,18 @@ output c        → 7</pre>
       <div class="step"><strong>Step 1:</strong> Reverse the half-rule: central \( = 2 \times \) inscribed.</div>
       <div class="step"><strong>Step 2:</strong> \( 2 \times 35 = 70^\circ \).</div>
       <em>Conclusion: \(70^\circ\). ✓</em>
+      <div style="text-align:center;margin:10px 0;">
+        <svg viewBox="0 0 200 200" width="200" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;">
+          <circle cx="100" cy="100" r="75" fill="#e6f3ff" stroke="#4a90e2" stroke-width="2"/>
+          <circle cx="100" cy="100" r="3" fill="#1e3a5f"/>
+          <line x1="100" y1="100" x2="60" y2="30" stroke="#4a90e2" stroke-width="2"/>
+          <line x1="100" y1="100" x2="140" y2="30" stroke="#4a90e2" stroke-width="2"/>
+          <text x="100" y="72" font-size="12" text-anchor="middle" fill="#1e3a5f">70°</text>
+          <line x1="100" y1="175" x2="60" y2="30" stroke="#e69138" stroke-width="2"/>
+          <line x1="100" y1="175" x2="140" y2="30" stroke="#e69138" stroke-width="2"/>
+          <text x="100" y="168" font-size="12" text-anchor="middle" fill="#9a5b00">35°</text>
+        </svg>
+      </div>
     </div>
   </div>
   <div class="example-box" style="background-color:#fff0f5;border-left:5px solid #c2185b;padding:10px 14px;margin:10px 0;border-radius:6px;">
@@ -3158,6 +3435,14 @@ output c        → 7</pre>
       <div class="step"><strong>Step 2:</strong> Each part \( = 180 \div 9 = 20^\circ \).</div>
       <div class="step"><strong>Step 3:</strong> Multiply out: \( 2(20), 3(20), 4(20) \).</div>
       <em>Conclusion: \(40^\circ, 60^\circ, 80^\circ\) (sum \(= 180^\circ\) ✓).</em>
+      <div style="text-align:center;margin:10px 0;">
+        <svg viewBox="0 0 200 140" width="200" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;">
+          <polygon points="25,120 175,120 95,15" fill="#fde8ef" stroke="#c2185b" stroke-width="2"/>
+          <text x="42" y="112" font-size="12" fill="#7a1044">40°</text>
+          <text x="145" y="112" font-size="12" fill="#7a1044">60°</text>
+          <text x="95" y="35" font-size="12" fill="#7a1044">80°</text>
+        </svg>
+      </div>
     </div>
   </div>
   <h2>🟡 Practice Questions</h2>
@@ -3194,6 +3479,7 @@ output c        → 7</pre>
       <div class="step"><strong>Step 1:</strong> \(1 \text{ m} = 100 \text{ cm}\), so multiply by \(100\).</div>
       <div class="step"><strong>Step 2:</strong> \(3.5 \times 100 = 350\) cm.</div>
       <em>Conclusion: \(350\) cm. ✓</em>
+      <div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 200 60" width="200" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="10" y="15" width="70" height="30" rx="6" fill="#e6f3ff" stroke="#4a90e2" stroke-width="1.5"/><text x="45" y="34" font-size="11" text-anchor="middle" fill="#1e3a5f">3.5 m</text><line x1="85" y1="30" x2="120" y2="30" stroke="#9a5b00" stroke-width="2"/><text x="102" y="23" font-size="9" text-anchor="middle" fill="#9a5b00">×100</text><rect x="130" y="15" width="70" height="30" rx="6" fill="#fde8ef" stroke="#c2185b" stroke-width="1.5"/><text x="165" y="34" font-size="11" text-anchor="middle" fill="#7a1044">350 cm</text></svg></div>
     </div>
   </div>
   <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;">
@@ -3202,6 +3488,7 @@ output c        → 7</pre>
       <div class="step"><strong>Step 1:</strong> \(1 \text{ kg} = 1000 \text{ g}\), so divide by \(1000\).</div>
       <div class="step"><strong>Step 2:</strong> \(2500 \div 1000 = 2.5\) kg.</div>
       <em>Conclusion: \(2.5\) kg. ✓</em>
+      <div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 200 60" width="200" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="10" y="15" width="70" height="30" rx="6" fill="#e6f3ff" stroke="#4a90e2" stroke-width="1.5"/><text x="45" y="34" font-size="11" text-anchor="middle" fill="#1e3a5f">2500 g</text><line x1="85" y1="30" x2="120" y2="30" stroke="#9a5b00" stroke-width="2"/><text x="102" y="23" font-size="8" text-anchor="middle" fill="#9a5b00">÷1000</text><rect x="130" y="15" width="70" height="30" rx="6" fill="#fde8ef" stroke="#c2185b" stroke-width="1.5"/><text x="165" y="34" font-size="11" text-anchor="middle" fill="#7a1044">2.5 kg</text></svg></div>
     </div>
   </div>
   <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;">
@@ -3210,6 +3497,7 @@ output c        → 7</pre>
       <div class="step"><strong>Step 1:</strong> Fuel rate \( = \frac{45}{540} \) L per km.</div>
       <div class="step"><strong>Step 2:</strong> Scale to 100 km: \( \frac{45}{540} \times 100 = 8.33 \).</div>
       <em>Conclusion: about \(8.3 \text{ L}/100\text{ km}\). ✓</em>
+      <div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 220 60" width="220" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="10" y="15" width="90" height="30" rx="6" fill="#e6f3ff" stroke="#4a90e2" stroke-width="1.5"/><text x="55" y="34" font-size="10" text-anchor="middle" fill="#1e3a5f">45 L / 540 km</text><line x1="105" y1="30" x2="130" y2="30" stroke="#9a5b00" stroke-width="2"/><rect x="140" y="15" width="75" height="30" rx="6" fill="#fde8ef" stroke="#c2185b" stroke-width="1.5"/><text x="177" y="34" font-size="9" text-anchor="middle" fill="#7a1044">8.3 L/100km</text></svg></div>
     </div>
   </div>
   <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;">
@@ -3218,6 +3506,7 @@ output c        → 7</pre>
       <div class="step"><strong>Step 1:</strong> Square the linear factor: \(1 \text{ m}^2 = 100^2 = 10\,000 \text{ cm}^2\).</div>
       <div class="step"><strong>Step 2:</strong> \(2 \times 10\,000 = 20\,000 \text{ cm}^2\).</div>
       <em>Conclusion: \(20\,000 \text{ cm}^2\). ✓</em>
+      <div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 160 130" width="140" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="20" y="10" width="90" height="90" fill="#e6f3ff" stroke="#4a90e2" stroke-width="1.5"/><text x="65" y="112" font-size="10" text-anchor="middle" fill="#1e3a5f">1 m² = 10,000 cm²</text><text x="65" y="125" font-size="10" text-anchor="middle" fill="#7a1044">2 m² = 20,000 cm²</text></svg></div>
     </div>
   </div>
   <div class="example-box" style="background-color:#fff0f5;border-left:5px solid #c2185b;padding:10px 14px;margin:10px 0;border-radius:6px;">
@@ -3226,6 +3515,7 @@ output c        → 7</pre>
       <div class="step"><strong>Step 1:</strong> Area \(= 4.2 \times 3.5 = 14.7 \text{ m}^2\).</div>
       <div class="step"><strong>Step 2:</strong> Multiply by \(10\,000\) (since \(1\text{ m}^2 = 10\,000\text{ cm}^2\)): \(14.7 \times 10\,000 = 147\,000 \text{ cm}^2\).</div>
       <em>Conclusion: \(147\,000 \text{ cm}^2\). ✓</em>
+      <div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 200 100" width="200" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="30" y="15" width="140" height="60" fill="#fde8ef" stroke="#c2185b" stroke-width="1.5"/><text x="100" y="10" font-size="10" text-anchor="middle" fill="#7a1044">4.2 m</text><text x="18" y="48" font-size="10" text-anchor="end" fill="#7a1044">3.5 m</text><text x="100" y="90" font-size="10" text-anchor="middle" fill="#7a1044">14.7 m² = 147,000 cm²</text></svg></div>
     </div>
   </div>
   <h2>🟡 Practice Questions</h2>
@@ -3272,6 +3562,15 @@ output c        → 7</pre>
       <div class="step"><strong>Step 1:</strong> Add the squares of the legs: \(6^2 + 8^2 = 36 + 64 = 100\).</div>
       <div class="step"><strong>Step 2:</strong> Take the square root: \(\sqrt{100} = 10\).</div>
       <em>Conclusion: the hypotenuse is \(10\). ✓</em>
+      <div style="text-align:center;margin:10px 0;">
+        <svg viewBox="0 0 200 160" width="200" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;">
+          <polygon points="40,130 160,130 40,40" fill="#e6f3ff" stroke="#4a90e2" stroke-width="2.5"/>
+          <rect x="40" y="112" width="18" height="18" fill="none" stroke="#4a90e2" stroke-width="2"/>
+          <text x="100" y="148" font-size="13" text-anchor="middle" fill="#1e3a5f">8</text>
+          <text x="26" y="88" font-size="13" text-anchor="middle" fill="#1e3a5f">6</text>
+          <text x="108" y="80" font-size="13" text-anchor="middle" fill="#9a5b00" transform="rotate(-37 108 80)">10</text>
+        </svg>
+      </div>
     </div>
   </div>
   <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;">
@@ -3280,6 +3579,15 @@ output c        → 7</pre>
       <div class="step"><strong>Step 1:</strong> Subtract (the hypotenuse is known): \(15^2 - 9^2 = 225 - 81 = 144\).</div>
       <div class="step"><strong>Step 2:</strong> \(\sqrt{144} = 12\).</div>
       <em>Conclusion: the other leg is \(12\). ✓</em>
+      <div style="text-align:center;margin:10px 0;">
+        <svg viewBox="0 0 200 160" width="200" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;">
+          <polygon points="40,130 160,130 40,40" fill="#e6f3ff" stroke="#4a90e2" stroke-width="2.5"/>
+          <rect x="40" y="112" width="18" height="18" fill="none" stroke="#4a90e2" stroke-width="2"/>
+          <text x="100" y="148" font-size="13" text-anchor="middle" fill="#1e3a5f">12</text>
+          <text x="26" y="88" font-size="13" text-anchor="middle" fill="#1e3a5f">9</text>
+          <text x="108" y="80" font-size="13" text-anchor="middle" fill="#9a5b00" transform="rotate(-37 108 80)">15</text>
+        </svg>
+      </div>
     </div>
   </div>
   <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;">
@@ -3288,6 +3596,15 @@ output c        → 7</pre>
       <div class="step"><strong>Step 1:</strong> Add the squares of the two shorter sides: \(5^2 + 12^2 = 25 + 144 = 169\).</div>
       <div class="step"><strong>Step 2:</strong> Compare to the longest side squared: \(13^2 = 169\). Equal, so the converse holds.</div>
       <em>Conclusion: yes, it is a right triangle. ✓</em>
+      <div style="text-align:center;margin:10px 0;">
+        <svg viewBox="0 0 200 160" width="200" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;">
+          <polygon points="40,130 160,130 40,40" fill="#e6f3ff" stroke="#4a90e2" stroke-width="2.5"/>
+          <rect x="40" y="112" width="18" height="18" fill="none" stroke="#4a90e2" stroke-width="2"/>
+          <text x="100" y="148" font-size="13" text-anchor="middle" fill="#1e3a5f">12</text>
+          <text x="26" y="88" font-size="13" text-anchor="middle" fill="#1e3a5f">5</text>
+          <text x="108" y="80" font-size="13" text-anchor="middle" fill="#9a5b00" transform="rotate(-37 108 80)">13</text>
+        </svg>
+      </div>
     </div>
   </div>
   <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;">
@@ -3296,6 +3613,15 @@ output c        → 7</pre>
       <div class="step"><strong>Step 1:</strong> \(9^2 + 12^2 = 81 + 144 = 225\).</div>
       <div class="step"><strong>Step 2:</strong> \(\sqrt{225} = 15\).</div>
       <em>Conclusion: the hypotenuse is \(15\). ✓</em>
+      <div style="text-align:center;margin:10px 0;">
+        <svg viewBox="0 0 200 160" width="200" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;">
+          <polygon points="40,130 160,130 40,40" fill="#e6f3ff" stroke="#4a90e2" stroke-width="2.5"/>
+          <rect x="40" y="112" width="18" height="18" fill="none" stroke="#4a90e2" stroke-width="2"/>
+          <text x="100" y="148" font-size="13" text-anchor="middle" fill="#1e3a5f">12</text>
+          <text x="26" y="88" font-size="13" text-anchor="middle" fill="#1e3a5f">9</text>
+          <text x="108" y="80" font-size="13" text-anchor="middle" fill="#9a5b00" transform="rotate(-37 108 80)">15</text>
+        </svg>
+      </div>
     </div>
   </div>
   <div class="example-box" style="background-color:#fff0f5;border-left:5px solid #c2185b;padding:10px 14px;margin:10px 0;border-radius:6px;">
@@ -3304,6 +3630,15 @@ output c        → 7</pre>
       <div class="step"><strong>Step 1:</strong> \(d = \sqrt{7^2 + 7^2} = \sqrt{98}\).</div>
       <div class="step"><strong>Step 2:</strong> \(\sqrt{98} = \sqrt{49 \cdot 2} = 7\sqrt{2}\).</div>
       <em>Conclusion: \(7\sqrt{2} \approx 9.90\). ✓</em>
+      <div style="text-align:center;margin:10px 0;">
+        <svg viewBox="0 0 200 160" width="200" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;">
+          <polygon points="40,130 160,130 40,40" fill="#fde8ef" stroke="#c2185b" stroke-width="2.5"/>
+          <rect x="40" y="112" width="18" height="18" fill="none" stroke="#c2185b" stroke-width="2"/>
+          <text x="100" y="148" font-size="13" text-anchor="middle" fill="#7a1044">7</text>
+          <text x="26" y="88" font-size="13" text-anchor="middle" fill="#7a1044">7</text>
+          <text x="108" y="80" font-size="13" text-anchor="middle" fill="#7a1044" transform="rotate(-37 108 80)">7√2</text>
+        </svg>
+      </div>
     </div>
   </div>
   <h2>🟡 Practice Questions</h2>
@@ -3345,6 +3680,13 @@ output c        → 7</pre>
       <div class="step"><strong>Step 1:</strong> A square has 4 equal sides, so \(P = 4 \times \text{side}\).</div>
       <div class="step"><strong>Step 2:</strong> \(4 \times 5 = 20\) cm.</div>
       <em>Conclusion: \(P = 20\) cm. ✓</em>
+      <div style="text-align:center;margin:10px 0;">
+        <svg viewBox="0 0 160 120" width="160" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;">
+          <rect x="40" y="20" width="80" height="80" fill="#e6f3ff" stroke="#4a90e2" stroke-width="2"/>
+          <text x="80" y="112" font-size="12" text-anchor="middle" fill="#1e3a5f">side = 5</text>
+          <text x="80" y="65" font-size="12" text-anchor="middle" fill="#1e3a5f">P = 20</text>
+        </svg>
+      </div>
     </div>
   </div>
   <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;">
@@ -3353,6 +3695,14 @@ output c        → 7</pre>
       <div class="step"><strong>Step 1:</strong> \(P = 2(l + w)\).</div>
       <div class="step"><strong>Step 2:</strong> \(2(8 + 3) = 2(11) = 22\).</div>
       <em>Conclusion: \(P = 22\). ✓</em>
+      <div style="text-align:center;margin:10px 0;">
+        <svg viewBox="0 0 200 120" width="200" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;">
+          <rect x="30" y="30" width="140" height="52" fill="#e6f3ff" stroke="#4a90e2" stroke-width="2"/>
+          <text x="100" y="20" font-size="12" text-anchor="middle" fill="#1e3a5f">8</text>
+          <text x="18" y="60" font-size="12" text-anchor="middle" fill="#1e3a5f">3</text>
+          <text x="100" y="60" font-size="12" text-anchor="middle" fill="#1e3a5f">P = 22</text>
+        </svg>
+      </div>
     </div>
   </div>
   <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;">
@@ -3361,6 +3711,16 @@ output c        → 7</pre>
       <div class="step"><strong>Step 1:</strong> Perimeter is a length, so it scales by the same factor \(k\) as the sides.</div>
       <div class="step"><strong>Step 2:</strong> Here \(k = 4\).</div>
       <em>Conclusion: 4 times. ✓</em>
+      <div style="text-align:center;margin:10px 0;">
+        <svg viewBox="0 0 240 130" width="240" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;">
+          <rect x="10" y="50" width="24" height="24" fill="#e6f3ff" stroke="#4a90e2" stroke-width="2"/>
+          <text x="22" y="90" font-size="11" text-anchor="middle" fill="#1e3a5f">s</text>
+          <line x1="45" y1="62" x2="85" y2="62" stroke="#9a5b00" stroke-width="2"/>
+          <text x="65" y="52" font-size="11" text-anchor="middle" fill="#9a5b00">×4</text>
+          <rect x="95" y="14" width="96" height="96" fill="#e6f3ff" stroke="#4a90e2" stroke-width="2"/>
+          <text x="143" y="122" font-size="11" text-anchor="middle" fill="#1e3a5f">4s</text>
+        </svg>
+      </div>
     </div>
   </div>
   <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;">
@@ -3369,6 +3729,16 @@ output c        → 7</pre>
       <div class="step"><strong>Step 1:</strong> Old perimeter \(= 4 \times 6 = 24\).</div>
       <div class="step"><strong>Step 2:</strong> New \(= k \times\) old \(= 2.5 \times 24 = 60\).</div>
       <em>Conclusion: new perimeter \(= 60\). ✓</em>
+      <div style="text-align:center;margin:10px 0;">
+        <svg viewBox="0 0 240 130" width="240" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;">
+          <rect x="10" y="60" width="30" height="30" fill="#e6f3ff" stroke="#4a90e2" stroke-width="2"/>
+          <text x="25" y="105" font-size="11" text-anchor="middle" fill="#1e3a5f">6 (P=24)</text>
+          <line x1="50" y1="75" x2="85" y2="75" stroke="#9a5b00" stroke-width="2"/>
+          <text x="67" y="65" font-size="11" text-anchor="middle" fill="#9a5b00">×2.5</text>
+          <rect x="95" y="14" width="75" height="75" fill="#e6f3ff" stroke="#4a90e2" stroke-width="2"/>
+          <text x="132" y="105" font-size="11" text-anchor="middle" fill="#1e3a5f">15 (P=60)</text>
+        </svg>
+      </div>
     </div>
   </div>
   <div class="example-box" style="background-color:#fff0f5;border-left:5px solid #c2185b;padding:10px 14px;margin:10px 0;border-radius:6px;">
@@ -3376,6 +3746,16 @@ output c        → 7</pre>
     <div class="solution">
       <div class="step"><strong>Step 1:</strong> \(k = \dfrac{\text{new}}{\text{old}} = \dfrac{75}{30} = 2.5\).</div>
       <em>Conclusion: each length was multiplied by 2.5. ✓</em>
+      <div style="text-align:center;margin:10px 0;">
+        <svg viewBox="0 0 240 130" width="240" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;">
+          <rect x="10" y="60" width="30" height="30" fill="#fde8ef" stroke="#c2185b" stroke-width="2"/>
+          <text x="25" y="105" font-size="11" text-anchor="middle" fill="#7a1044">P=30</text>
+          <line x1="50" y1="75" x2="85" y2="75" stroke="#7a1044" stroke-width="2"/>
+          <text x="67" y="65" font-size="11" text-anchor="middle" fill="#7a1044">k=?</text>
+          <rect x="95" y="14" width="75" height="75" fill="#fde8ef" stroke="#c2185b" stroke-width="2"/>
+          <text x="132" y="105" font-size="11" text-anchor="middle" fill="#7a1044">P=75</text>
+        </svg>
+      </div>
     </div>
   </div>
   <h2>🟡 Practice Questions</h2>
@@ -3411,11 +3791,11 @@ output c        → 7</pre>
     <div style="font-size:13px;color:#64748b;">Double the side → 4× the area (\(2^2\)).</div>
   </div>
   <h2>🔵 Examples</h2>
-  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 1</h3><p>A square has side 5 cm. Find its area.</p><div class="solution"><div class="step"><strong>Step 1:</strong> for a square, \(A = s^2\), and here \(s = 5\) cm.</div><div class="step"><strong>Step 2:</strong> \(A = 5^2 = 5 \times 5 = 25\).</div><em>Conclusion: \(A = 25 \text{ cm}^2\). ✓ (units squared because we multiplied cm × cm)</em></div></div>
-  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 2</h3><p>A rectangle is \(8 \times 3\). Find its area.</p><div class="solution"><div class="step"><strong>Step 1:</strong> for a rectangle, \(A = \text{length} \times \text{width} = 8 \times 3\).</div><div class="step"><strong>Step 2:</strong> \(8 \times 3 = 24\).</div><em>Conclusion: \(A = 24\) square units. ✓</em></div></div>
-  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 3</h3><p>Double every side of a square. By what factor does the area change?</p><div class="solution"><div class="step"><strong>Step 1:</strong> the scale factor of the lengths is \(k = 2\).</div><div class="step"><strong>Step 2:</strong> area scales by \(k^2 = 2^2 = 4\).</div><div class="step"><strong>Check:</strong> a \(3 \times 3\) square (area 9) becomes \(6 \times 6\) (area 36), and \(36 / 9 = 4\). ✓</div><em>Conclusion: the area becomes \(4\) times larger.</em></div></div>
-  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 4</h3><p>All sides of a triangle are scaled by 3. By what factor does its area change?</p><div class="solution"><div class="step"><strong>Step 1:</strong> the length scale factor is \(k = 3\).</div><div class="step"><strong>Step 2:</strong> area scales by \(k^2 = 3^2 = 9\).</div><div class="step"><strong>Check:</strong> base and height each triple, so \(\tfrac12 (3b)(3h) = 9 \cdot \tfrac12 bh\). ✓</div><em>Conclusion: the area becomes \(9\) times larger.</em></div></div>
-  <div class="example-box" style="background-color:#fff0f5;border-left:5px solid #c2185b;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>⭐ Advanced Example — Enlarging a photo</h3><p>A \(10 \times 15 \text{ cm}\) photo is enlarged so each side is \(2.5\times\). Find the new area.</p><div class="solution"><div class="step"><strong>Step 1:</strong> original area \(= 10 \times 15 = 150 \text{ cm}^2\).</div><div class="step"><strong>Step 2:</strong> area factor \(= 2.5^2 = 6.25\).</div><div class="step"><strong>Step 3:</strong> \(150 \times 6.25 = 937.5 \text{ cm}^2\).</div><em>Conclusion: the enlarged photo has area \(937.5 \text{ cm}^2\). ✓ (a 2.5× enlargement uses over 6× the paper)</em></div></div>
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 1</h3><p>A square has side 5 cm. Find its area.</p><div class="solution"><div class="step"><strong>Step 1:</strong> for a square, \(A = s^2\), and here \(s = 5\) cm.</div><div class="step"><strong>Step 2:</strong> \(A = 5^2 = 5 \times 5 = 25\).</div><em>Conclusion: \(A = 25 \text{ cm}^2\). ✓ (units squared because we multiplied cm × cm)</em><div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 160 120" width="160" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="40" y="20" width="80" height="80" fill="#e6f3ff" stroke="#4a90e2" stroke-width="2"/><text x="80" y="112" font-size="12" text-anchor="middle" fill="#1e3a5f">side = 5</text><text x="80" y="65" font-size="12" text-anchor="middle" fill="#1e3a5f">A = 25</text></svg></div></div></div>
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 2</h3><p>A rectangle is \(8 \times 3\). Find its area.</p><div class="solution"><div class="step"><strong>Step 1:</strong> for a rectangle, \(A = \text{length} \times \text{width} = 8 \times 3\).</div><div class="step"><strong>Step 2:</strong> \(8 \times 3 = 24\).</div><em>Conclusion: \(A = 24\) square units. ✓</em><div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 200 120" width="200" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="30" y="30" width="140" height="52" fill="#e6f3ff" stroke="#4a90e2" stroke-width="2"/><text x="100" y="20" font-size="12" text-anchor="middle" fill="#1e3a5f">8</text><text x="18" y="60" font-size="12" text-anchor="middle" fill="#1e3a5f">3</text><text x="100" y="60" font-size="12" text-anchor="middle" fill="#1e3a5f">A = 24</text></svg></div></div></div>
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 3</h3><p>Double every side of a square. By what factor does the area change?</p><div class="solution"><div class="step"><strong>Step 1:</strong> the scale factor of the lengths is \(k = 2\).</div><div class="step"><strong>Step 2:</strong> area scales by \(k^2 = 2^2 = 4\).</div><div class="step"><strong>Check:</strong> a \(3 \times 3\) square (area 9) becomes \(6 \times 6\) (area 36), and \(36 / 9 = 4\). ✓</div><em>Conclusion: the area becomes \(4\) times larger.</em><div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 240 120" width="240" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="10" y="50" width="30" height="30" fill="#e6f3ff" stroke="#4a90e2" stroke-width="2"/><text x="25" y="95" font-size="11" text-anchor="middle" fill="#1e3a5f">A = 9</text><line x1="50" y1="65" x2="85" y2="65" stroke="#9a5b00" stroke-width="2"/><text x="67" y="55" font-size="11" text-anchor="middle" fill="#9a5b00">×2</text><rect x="95" y="20" width="60" height="60" fill="#e6f3ff" stroke="#4a90e2" stroke-width="2"/><line x1="125" y1="20" x2="125" y2="80" stroke="#4a90e2" stroke-width="1"/><line x1="95" y1="50" x2="155" y2="50" stroke="#4a90e2" stroke-width="1"/><text x="125" y="95" font-size="11" text-anchor="middle" fill="#1e3a5f">A = 36 (×4)</text></svg></div></div></div>
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 4</h3><p>All sides of a triangle are scaled by 3. By what factor does its area change?</p><div class="solution"><div class="step"><strong>Step 1:</strong> the length scale factor is \(k = 3\).</div><div class="step"><strong>Step 2:</strong> area scales by \(k^2 = 3^2 = 9\).</div><div class="step"><strong>Check:</strong> base and height each triple, so \(\tfrac12 (3b)(3h) = 9 \cdot \tfrac12 bh\). ✓</div><em>Conclusion: the area becomes \(9\) times larger.</em><div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 240 120" width="240" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><polygon points="10,80 40,80 25,55" fill="#e6f3ff" stroke="#4a90e2" stroke-width="2"/><line x1="55" y1="65" x2="90" y2="65" stroke="#9a5b00" stroke-width="2"/><text x="72" y="55" font-size="11" text-anchor="middle" fill="#9a5b00">×3</text><polygon points="100,90 190,90 145,15" fill="#e6f3ff" stroke="#4a90e2" stroke-width="2"/><text x="145" y="105" font-size="11" text-anchor="middle" fill="#1e3a5f">area ×9</text></svg></div></div></div>
+  <div class="example-box" style="background-color:#fff0f5;border-left:5px solid #c2185b;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>⭐ Advanced Example — Enlarging a photo</h3><p>A \(10 \times 15 \text{ cm}\) photo is enlarged so each side is \(2.5\times\). Find the new area.</p><div class="solution"><div class="step"><strong>Step 1:</strong> original area \(= 10 \times 15 = 150 \text{ cm}^2\).</div><div class="step"><strong>Step 2:</strong> area factor \(= 2.5^2 = 6.25\).</div><div class="step"><strong>Step 3:</strong> \(150 \times 6.25 = 937.5 \text{ cm}^2\).</div><em>Conclusion: the enlarged photo has area \(937.5 \text{ cm}^2\). ✓ (a 2.5× enlargement uses over 6× the paper)</em><div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 240 130" width="240" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="10" y="45" width="30" height="45" fill="#fde8ef" stroke="#c2185b" stroke-width="2"/><text x="25" y="105" font-size="10" text-anchor="middle" fill="#7a1044">10×15 (150)</text><line x1="50" y1="65" x2="80" y2="65" stroke="#7a1044" stroke-width="2"/><text x="65" y="55" font-size="11" text-anchor="middle" fill="#7a1044">×2.5</text><rect x="90" y="15" width="75" height="112" fill="#fde8ef" stroke="#c2185b" stroke-width="2"/><text x="127" y="105" font-size="10" text-anchor="middle" fill="#7a1044">25×37.5</text><text x="200" y="65" font-size="11" text-anchor="middle" fill="#7a1044">937.5 cm²</text></svg></div></div></div>
   <h2>🟡 Practice Questions</h2>
   <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Question 1</h3><p>If all sides of a shape are scaled by 5, the area scales by ___.</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Answer: 25 (\(5^2\)).</em></div></div></details></div>
   <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Question 2</h3><p>A rectangle's area is 20. If both sides are doubled, the new area is ___.</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Answer: \(20 \times 2^2 = 80\).</em></div></div></details></div>
@@ -3457,11 +3837,11 @@ output c        → 7</pre>
     </svg>
   </div>
   <h2>🔵 Examples</h2>
-  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 1</h3><p>Rectangular prism \(5 \times 4 \times 3\). Find the volume.</p><div class="solution"><div class="step"><strong>Step 1:</strong> for a prism, \(V = l \times w \times h = 5 \times 4 \times 3\).</div><div class="step"><strong>Step 2:</strong> \(5 \times 4 = 20\), then \(20 \times 3 = 60\).</div><em>Conclusion: \(V = 60 \text{ units}^3\). ✓ (three lengths multiplied → cubic units)</em></div></div>
-  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 2</h3><p>Cylinder \(r = 3\), \(h = 10\). Find the volume (in terms of \(\pi\)).</p><div class="solution"><div class="step"><strong>Step 1:</strong> use \(V = \pi r^2 h\) with \(r = 3\), \(h = 10\).</div><div class="step"><strong>Step 2:</strong> \(r^2 = 3^2 = 9\), so \(V = \pi (9)(10)\).</div><div class="step"><strong>Step 3:</strong> \(9 \times 10 = 90\), giving \(V = 90\pi\).</div><em>Conclusion: \(V = 90\pi \approx 282.7 \text{ units}^3\). ✓</em></div></div>
-  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 3</h3><p>A cone and cylinder share \(r\) and \(h\). Compare volumes.</p><div class="solution"><div class="step"><strong>Step 1:</strong> cylinder \(V = \pi r^2 h\); cone \(V = \tfrac{1}{3}\pi r^2 h\).</div><div class="step"><strong>Step 2:</strong> divide: \(\dfrac{\text{cone}}{\text{cylinder}} = \dfrac{\frac{1}{3}\pi r^2 h}{\pi r^2 h} = \dfrac{1}{3}\).</div><em>Conclusion: the cone holds exactly \(\tfrac{1}{3}\) of the cylinder — you could fill the cylinder with three coneloads. ✓</em></div></div>
-  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 4</h3><p>Find the volume of a sphere with \(r = 3\) (in terms of \(\pi\)).</p><div class="solution"><div class="step"><strong>Step 1:</strong> use \(V = \tfrac{4}{3}\pi r^3\) with \(r = 3\).</div><div class="step"><strong>Step 2:</strong> \(r^3 = 3^3 = 27\), so \(V = \tfrac{4}{3}\pi (27)\).</div><div class="step"><strong>Step 3:</strong> \(\tfrac{4}{3} \times 27 = 4 \times 9 = 36\).</div><em>Conclusion: \(V = 36\pi \approx 113.1 \text{ units}^3\). ✓</em></div></div>
-  <div class="example-box" style="background-color:#fff0f5;border-left:5px solid #c2185b;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>⭐ Advanced Example — Scaling volume</h3><p>Every edge of a solid is tripled. By what factor does the volume change?</p><div class="solution"><div class="step"><strong>Step 1:</strong> the length scale factor is \(k = 3\); volume scales by \(k^3\).</div><div class="step"><strong>Step 2:</strong> \(k^3 = 3^3 = 27\).</div><div class="step"><strong>Check:</strong> a \(1\times1\times1\) cube (volume 1) becomes \(3\times3\times3\) (volume 27). ✓</div><em>Conclusion: the volume becomes \(27\) times larger.</em></div></div>
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 1</h3><p>Rectangular prism \(5 \times 4 \times 3\). Find the volume.</p><div class="solution"><div class="step"><strong>Step 1:</strong> for a prism, \(V = l \times w \times h = 5 \times 4 \times 3\).</div><div class="step"><strong>Step 2:</strong> \(5 \times 4 = 20\), then \(20 \times 3 = 60\).</div><em>Conclusion: \(V = 60 \text{ units}^3\). ✓ (three lengths multiplied → cubic units)</em><div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 200 140" width="200" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="40" y="50" width="70" height="55" fill="#e6f3ff" stroke="#4a90e2" stroke-width="2"/><polygon points="40,50 60,30 130,30 110,50" fill="#e6f3ff" stroke="#4a90e2" stroke-width="2"/><polygon points="110,50 130,30 130,85 110,105" fill="#e6f3ff" stroke="#4a90e2" stroke-width="2"/><text x="75" y="120" font-size="11" text-anchor="middle" fill="#1e3a5f">5×4×3</text><text x="75" y="135" font-size="11" text-anchor="middle" fill="#1e3a5f">V = 60</text></svg></div></div></div>
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 2</h3><p>Cylinder \(r = 3\), \(h = 10\). Find the volume (in terms of \(\pi\)).</p><div class="solution"><div class="step"><strong>Step 1:</strong> use \(V = \pi r^2 h\) with \(r = 3\), \(h = 10\).</div><div class="step"><strong>Step 2:</strong> \(r^2 = 3^2 = 9\), so \(V = \pi (9)(10)\).</div><div class="step"><strong>Step 3:</strong> \(9 \times 10 = 90\), giving \(V = 90\pi\).</div><em>Conclusion: \(V = 90\pi \approx 282.7 \text{ units}^3\). ✓</em><div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 160 140" width="160" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><ellipse cx="80" cy="30" rx="35" ry="12" fill="#e6f3ff" stroke="#4a90e2" stroke-width="2"/><path d="M45,30 V95 A35,12 0 0 0 115,95 V30" fill="#e6f3ff" stroke="#4a90e2" stroke-width="2"/><text x="80" y="20" font-size="11" text-anchor="middle" fill="#1e3a5f">r=3</text><text x="128" y="65" font-size="11" text-anchor="middle" fill="#1e3a5f">h=10</text><text x="80" y="125" font-size="12" text-anchor="middle" fill="#1e3a5f">V = 90π</text></svg></div></div></div>
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 3</h3><p>A cone and cylinder share \(r\) and \(h\). Compare volumes.</p><div class="solution"><div class="step"><strong>Step 1:</strong> cylinder \(V = \pi r^2 h\); cone \(V = \tfrac{1}{3}\pi r^2 h\).</div><div class="step"><strong>Step 2:</strong> divide: \(\dfrac{\text{cone}}{\text{cylinder}} = \dfrac{\frac{1}{3}\pi r^2 h}{\pi r^2 h} = \dfrac{1}{3}\).</div><em>Conclusion: the cone holds exactly \(\tfrac{1}{3}\) of the cylinder — you could fill the cylinder with three coneloads. ✓</em><div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 240 140" width="240" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><ellipse cx="55" cy="25" rx="28" ry="9" fill="#e6f3ff" stroke="#4a90e2" stroke-width="2"/><path d="M27,25 V85 A28,9 0 0 0 83,85 V25" fill="#e6f3ff" stroke="#4a90e2" stroke-width="2"/><text x="55" y="105" font-size="11" text-anchor="middle" fill="#1e3a5f">cylinder</text><path d="M155,85 L182,20 L209,85 A28,9 0 0 1 155,85" fill="#e6f3ff" stroke="#4a90e2" stroke-width="2"/><text x="182" y="105" font-size="11" text-anchor="middle" fill="#1e3a5f">cone</text><text x="120" y="125" font-size="12" text-anchor="middle" fill="#1e3a5f">V(cone) = ⅓ V(cylinder)</text></svg></div></div></div>
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 4</h3><p>Find the volume of a sphere with \(r = 3\) (in terms of \(\pi\)).</p><div class="solution"><div class="step"><strong>Step 1:</strong> use \(V = \tfrac{4}{3}\pi r^3\) with \(r = 3\).</div><div class="step"><strong>Step 2:</strong> \(r^3 = 3^3 = 27\), so \(V = \tfrac{4}{3}\pi (27)\).</div><div class="step"><strong>Step 3:</strong> \(\tfrac{4}{3} \times 27 = 4 \times 9 = 36\).</div><em>Conclusion: \(V = 36\pi \approx 113.1 \text{ units}^3\). ✓</em><div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 160 140" width="160" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><circle cx="80" cy="60" r="45" fill="#e6f3ff" stroke="#4a90e2" stroke-width="2"/><ellipse cx="80" cy="60" rx="45" ry="15" fill="none" stroke="#4a90e2" stroke-width="1" stroke-dasharray="3,3"/><text x="80" y="20" font-size="11" text-anchor="middle" fill="#1e3a5f">r=3</text><text x="80" y="130" font-size="12" text-anchor="middle" fill="#1e3a5f">V = 36π</text></svg></div></div></div>
+  <div class="example-box" style="background-color:#fff0f5;border-left:5px solid #c2185b;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>⭐ Advanced Example — Scaling volume</h3><p>Every edge of a solid is tripled. By what factor does the volume change?</p><div class="solution"><div class="step"><strong>Step 1:</strong> the length scale factor is \(k = 3\); volume scales by \(k^3\).</div><div class="step"><strong>Step 2:</strong> \(k^3 = 3^3 = 27\).</div><div class="step"><strong>Check:</strong> a \(1\times1\times1\) cube (volume 1) becomes \(3\times3\times3\) (volume 27). ✓</div><em>Conclusion: the volume becomes \(27\) times larger.</em><div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 240 130" width="240" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="10" y="65" width="24" height="24" fill="#fde8ef" stroke="#c2185b" stroke-width="2"/><polygon points="10,65 20,55 44,55 34,65" fill="#fde8ef" stroke="#c2185b" stroke-width="2"/><polygon points="34,65 44,55 44,79 34,89" fill="#fde8ef" stroke="#c2185b" stroke-width="2"/><text x="27" y="105" font-size="10" text-anchor="middle" fill="#7a1044">V=1</text><line x1="55" y1="72" x2="90" y2="72" stroke="#7a1044" stroke-width="2"/><text x="72" y="62" font-size="11" text-anchor="middle" fill="#7a1044">×3</text><rect x="100" y="30" width="60" height="60" fill="#fde8ef" stroke="#c2185b" stroke-width="2"/><polygon points="100,30 120,10 180,10 160,30" fill="#fde8ef" stroke="#c2185b" stroke-width="2"/><polygon points="160,30 180,10 180,70 160,90" fill="#fde8ef" stroke="#c2185b" stroke-width="2"/><text x="140" y="110" font-size="11" text-anchor="middle" fill="#7a1044">V=27</text></svg></div></div></div>
   <h2>🟡 Practice Questions</h2>
   <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Question 1</h3><p>Find the volume of a cube with edge 5.</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Answer: \(125 \text{ units}^3\).</em></div></div></details></div>
   <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Question 2</h3><p>Volume of a cylinder \(r = 2\), \(h = 5\) (in terms of \(\pi\))?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Answer: \(20\pi\).</em></div></div></details></div>
@@ -3503,11 +3883,11 @@ output c        → 7</pre>
     <div style="font-size:13px;color:#64748b;">Each face has area \(s^2\); six faces give \(SA = 6s^2\).</div>
   </div>
   <h2>🔵 Examples</h2>
-  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 1</h3><p>A cube has edge 4. Find its surface area.</p><div class="solution"><div class="step"><strong>Step 1:</strong> a cube has 6 faces, so \(SA = 6s^2\) with \(s = 4\).</div><div class="step"><strong>Step 2:</strong> \(s^2 = 4^2 = 16\), so \(SA = 6 \times 16\).</div><div class="step"><strong>Step 3:</strong> \(6 \times 16 = 96\).</div><em>Conclusion: \(SA = 96 \text{ units}^2\). ✓</em></div></div>
-  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 2</h3><p>Rectangular prism \(5 \times 4 \times 3\). Find the surface area.</p><div class="solution"><div class="step"><strong>Step 1:</strong> use \(SA = 2(lw + lh + wh)\) with \(l=5, w=4, h=3\).</div><div class="step"><strong>Step 2:</strong> \(lw = 20\), \(lh = 15\), \(wh = 12\); sum \(= 47\).</div><div class="step"><strong>Step 3:</strong> \(2 \times 47 = 94\).</div><em>Conclusion: \(SA = 94 \text{ units}^2\). ✓ (each of the 3 pairs of faces counted twice)</em></div></div>
-  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 3</h3><p>Cylinder \(r = 4\), \(h = 9\). Surface area (in terms of \(\pi\)).</p><div class="solution"><div class="step"><strong>Step 1:</strong> \(SA = \underbrace{2\pi r^2}_{\text{two circles}} + \underbrace{2\pi r h}_{\text{side}}\).</div><div class="step"><strong>Step 2:</strong> two circles: \(2\pi (4)^2 = 32\pi\).</div><div class="step"><strong>Step 3:</strong> side: \(2\pi (4)(9) = 72\pi\).</div><div class="step"><strong>Step 4:</strong> add: \(32\pi + 72\pi = 104\pi\).</div><em>Conclusion: \(SA = 104\pi \approx 326.7 \text{ units}^2\). ✓</em></div></div>
-  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 4</h3><p>Find the surface area of a sphere with \(r = 3\) (in terms of \(\pi\)).</p><div class="solution"><div class="step"><strong>Step 1:</strong> use \(SA = 4\pi r^2\) with \(r = 3\).</div><div class="step"><strong>Step 2:</strong> \(r^2 = 3^2 = 9\), so \(SA = 4\pi(9)\).</div><div class="step"><strong>Step 3:</strong> \(4 \times 9 = 36\).</div><em>Conclusion: \(SA = 36\pi \approx 113.1 \text{ units}^2\). ✓</em></div></div>
-  <div class="example-box" style="background-color:#fff0f5;border-left:5px solid #c2185b;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>⭐ Advanced Example — Scaling surface area</h3><p>Every edge of a cube is doubled. By what factor does the surface area change?</p><div class="solution"><div class="step"><strong>Step 1:</strong> the length scale factor is \(k = 2\); surface area scales by \(k^2\).</div><div class="step"><strong>Step 2:</strong> \(k^2 = 2^2 = 4\).</div><div class="step"><strong>Check:</strong> edge 1 gives \(SA = 6\); edge 2 gives \(SA = 6(4) = 24\), and \(24/6 = 4\). ✓</div><em>Conclusion: the surface area becomes \(4\) times larger.</em></div></div>
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 1</h3><p>A cube has edge 4. Find its surface area.</p><div class="solution"><div class="step"><strong>Step 1:</strong> a cube has 6 faces, so \(SA = 6s^2\) with \(s = 4\).</div><div class="step"><strong>Step 2:</strong> \(s^2 = 4^2 = 16\), so \(SA = 6 \times 16\).</div><div class="step"><strong>Step 3:</strong> \(6 \times 16 = 96\).</div><em>Conclusion: \(SA = 96 \text{ units}^2\). ✓</em><div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 160 130" width="160" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="30" y="40" width="60" height="60" fill="#e6f3ff" stroke="#4a90e2" stroke-width="2"/><polygon points="30,40 48,22 108,22 90,40" fill="#e6f3ff" stroke="#4a90e2" stroke-width="2"/><polygon points="90,40 108,22 108,82 90,100" fill="#e6f3ff" stroke="#4a90e2" stroke-width="2"/><text x="60" y="115" font-size="11" text-anchor="middle" fill="#1e3a5f">s = 4</text><text x="60" y="128" font-size="11" text-anchor="middle" fill="#1e3a5f">SA = 96</text></svg></div></div></div>
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 2</h3><p>Rectangular prism \(5 \times 4 \times 3\). Find the surface area.</p><div class="solution"><div class="step"><strong>Step 1:</strong> use \(SA = 2(lw + lh + wh)\) with \(l=5, w=4, h=3\).</div><div class="step"><strong>Step 2:</strong> \(lw = 20\), \(lh = 15\), \(wh = 12\); sum \(= 47\).</div><div class="step"><strong>Step 3:</strong> \(2 \times 47 = 94\).</div><em>Conclusion: \(SA = 94 \text{ units}^2\). ✓ (each of the 3 pairs of faces counted twice)</em><div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 200 140" width="200" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="40" y="50" width="70" height="55" fill="#e6f3ff" stroke="#4a90e2" stroke-width="2"/><polygon points="40,50 60,30 130,30 110,50" fill="#e6f3ff" stroke="#4a90e2" stroke-width="2"/><polygon points="110,50 130,30 130,85 110,105" fill="#e6f3ff" stroke="#4a90e2" stroke-width="2"/><text x="75" y="120" font-size="11" text-anchor="middle" fill="#1e3a5f">5×4×3</text><text x="75" y="135" font-size="11" text-anchor="middle" fill="#1e3a5f">SA = 94</text></svg></div></div></div>
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 3</h3><p>Cylinder \(r = 4\), \(h = 9\). Surface area (in terms of \(\pi\)).</p><div class="solution"><div class="step"><strong>Step 1:</strong> \(SA = \underbrace{2\pi r^2}_{\text{two circles}} + \underbrace{2\pi r h}_{\text{side}}\).</div><div class="step"><strong>Step 2:</strong> two circles: \(2\pi (4)^2 = 32\pi\).</div><div class="step"><strong>Step 3:</strong> side: \(2\pi (4)(9) = 72\pi\).</div><div class="step"><strong>Step 4:</strong> add: \(32\pi + 72\pi = 104\pi\).</div><em>Conclusion: \(SA = 104\pi \approx 326.7 \text{ units}^2\). ✓</em><div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 160 140" width="160" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><ellipse cx="80" cy="30" rx="35" ry="12" fill="#e6f3ff" stroke="#4a90e2" stroke-width="2"/><path d="M45,30 V95 A35,12 0 0 0 115,95 V30" fill="#e6f3ff" stroke="#4a90e2" stroke-width="2"/><text x="80" y="20" font-size="11" text-anchor="middle" fill="#1e3a5f">r=4</text><text x="128" y="65" font-size="11" text-anchor="middle" fill="#1e3a5f">h=9</text><text x="80" y="125" font-size="12" text-anchor="middle" fill="#1e3a5f">SA = 104π</text></svg></div></div></div>
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 4</h3><p>Find the surface area of a sphere with \(r = 3\) (in terms of \(\pi\)).</p><div class="solution"><div class="step"><strong>Step 1:</strong> use \(SA = 4\pi r^2\) with \(r = 3\).</div><div class="step"><strong>Step 2:</strong> \(r^2 = 3^2 = 9\), so \(SA = 4\pi(9)\).</div><div class="step"><strong>Step 3:</strong> \(4 \times 9 = 36\).</div><em>Conclusion: \(SA = 36\pi \approx 113.1 \text{ units}^2\). ✓</em><div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 160 140" width="160" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><circle cx="80" cy="60" r="45" fill="#e6f3ff" stroke="#4a90e2" stroke-width="2"/><ellipse cx="80" cy="60" rx="45" ry="15" fill="none" stroke="#4a90e2" stroke-width="1" stroke-dasharray="3,3"/><text x="80" y="20" font-size="11" text-anchor="middle" fill="#1e3a5f">r=3</text><text x="80" y="130" font-size="12" text-anchor="middle" fill="#1e3a5f">SA = 36π</text></svg></div></div></div>
+  <div class="example-box" style="background-color:#fff0f5;border-left:5px solid #c2185b;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>⭐ Advanced Example — Scaling surface area</h3><p>Every edge of a cube is doubled. By what factor does the surface area change?</p><div class="solution"><div class="step"><strong>Step 1:</strong> the length scale factor is \(k = 2\); surface area scales by \(k^2\).</div><div class="step"><strong>Step 2:</strong> \(k^2 = 2^2 = 4\).</div><div class="step"><strong>Check:</strong> edge 1 gives \(SA = 6\); edge 2 gives \(SA = 6(4) = 24\), and \(24/6 = 4\). ✓</div><em>Conclusion: the surface area becomes \(4\) times larger.</em><div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 240 130" width="240" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="10" y="65" width="24" height="24" fill="#fde8ef" stroke="#c2185b" stroke-width="2"/><polygon points="10,65 20,55 44,55 34,65" fill="#fde8ef" stroke="#c2185b" stroke-width="2"/><polygon points="34,65 44,55 44,79 34,89" fill="#fde8ef" stroke="#c2185b" stroke-width="2"/><text x="27" y="105" font-size="10" text-anchor="middle" fill="#7a1044">SA=6</text><line x1="55" y1="72" x2="90" y2="72" stroke="#7a1044" stroke-width="2"/><text x="72" y="62" font-size="11" text-anchor="middle" fill="#7a1044">×2</text><rect x="100" y="30" width="60" height="60" fill="#fde8ef" stroke="#c2185b" stroke-width="2"/><polygon points="100,30 120,10 180,10 160,30" fill="#fde8ef" stroke="#c2185b" stroke-width="2"/><polygon points="160,30 180,10 180,70 160,90" fill="#fde8ef" stroke="#c2185b" stroke-width="2"/><text x="140" y="110" font-size="11" text-anchor="middle" fill="#7a1044">SA=24</text></svg></div></div></div>
   <h2>🟡 Practice Questions</h2>
   <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Question 1</h3><p>Find the surface area of a cube with edge 3.</p><details><summary>View answer</summary><div class="solution"><div class="step">\(6 \times 9\). <em>Answer: 54.</em></div></div></details></div>
   <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Question 2</h3><p>Surface area of a sphere with \(r = 5\) (in terms of \(\pi\))?</p><details><summary>View answer</summary><div class="solution"><div class="step">\(4\pi(25)\). <em>Answer: \(100\pi\).</em></div></div></details></div>
@@ -3545,11 +3925,11 @@ output c        → 7</pre>
   <h2>📌 Samples, Bias &amp; Privacy</h2>
   <p>We rarely measure a whole <strong>population</strong> — we take a <strong>sample</strong>. A biased sample (e.g. only asking paying customers) gives misleading conclusions. Big data also raises <strong>privacy</strong> concerns: who owns it, and how is it used?</p>
   <h2>🔵 Examples</h2>
-  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 1</h3><p>Convert 2 GB to MB.</p><div class="solution"><div class="step"><strong>Step 1:</strong> each step up the size ladder is ×1000, and \(1\text{ GB} = 1000\text{ MB}\).</div><div class="step"><strong>Step 2:</strong> we are going from a bigger unit (GB) to a smaller one (MB), so we <em>multiply</em>: \(2 \times 1000\).</div><em>Conclusion: \(2\text{ GB} = 2000\text{ MB}\). ✓ (more, smaller units — answer should be bigger, and it is)</em></div></div>
-  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 2</h3><p>Name the "three V's" of big data and what each measures.</p><div class="solution"><div class="step"><strong>Volume</strong> — how much data there is.</div><div class="step"><strong>Velocity</strong> — how fast it arrives.</div><div class="step"><strong>Variety</strong> — how many different forms it takes (text, images, clicks, sensors).</div><em>Conclusion: Volume, Velocity, Variety. ✓</em></div></div>
-  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 3</h3><p>A sensor takes 5 readings per second. How many in one minute?</p><div class="solution"><div class="step"><strong>Step 1:</strong> one minute \(= 60\) seconds.</div><div class="step"><strong>Step 2:</strong> readings \(= 5 \text{ per second} \times 60 \text{ seconds} = 300\).</div><em>Conclusion: 300 readings in one minute. ✓ (this is the "Velocity" of the data)</em></div></div>
-  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 4</h3><p>Why is surveying only paying members biased?</p><div class="solution"><div class="step"><strong>Step 1:</strong> the <em>population</em> you care about is all users — but the <em>sample</em> is only paying members.</div><div class="step"><strong>Step 2:</strong> non-paying or former users are systematically left out, and they may feel very differently.</div><em>Conclusion: the sample isn't representative, so any conclusion is biased toward the views of paying members. ✓</em></div></div>
-  <div class="example-box" style="background-color:#fff0f5;border-left:5px solid #c2185b;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>⭐ Advanced Example — Daily data load</h3><p>A website logs 1.2 KB per visit and gets 50 000 visits a day. How many MB per day?</p><div class="solution"><div class="step"><strong>Step 1:</strong> total per day \(= 1.2 \text{ KB} \times 50\,000 = 60\,000\) KB.</div><div class="step"><strong>Step 2:</strong> convert KB → MB by dividing by 1000: \(60\,000 \div 1000 = 60\) MB.</div><em>Conclusion: about \(60\) MB per day. ✓ (over a year that's \(60 \times 365 \approx 21\,900\) MB ≈ 22 GB — small data adds up fast)</em></div></div>
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 1</h3><p>Convert 2 GB to MB.</p><div class="solution"><div class="step"><strong>Step 1:</strong> each step up the size ladder is ×1000, and \(1\text{ GB} = 1000\text{ MB}\).</div><div class="step"><strong>Step 2:</strong> we are going from a bigger unit (GB) to a smaller one (MB), so we <em>multiply</em>: \(2 \times 1000\).</div><em>Conclusion: \(2\text{ GB} = 2000\text{ MB}\). ✓ (more, smaller units — answer should be bigger, and it is)</em><div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 220 70" width="220" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="10" y="20" width="70" height="30" rx="6" fill="#e6f3ff" stroke="#4a90e2" stroke-width="1.5"/><text x="45" y="39" font-size="12" text-anchor="middle" fill="#1e3a5f">2 GB</text><line x1="85" y1="35" x2="120" y2="35" stroke="#9a5b00" stroke-width="2"/><text x="102" y="28" font-size="10" text-anchor="middle" fill="#9a5b00">×1000</text><rect x="130" y="20" width="80" height="30" rx="6" fill="#fde8ef" stroke="#c2185b" stroke-width="1.5"/><text x="170" y="39" font-size="12" text-anchor="middle" fill="#7a1044">2000 MB</text></svg></div></div></div>
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 2</h3><p>Name the "three V's" of big data and what each measures.</p><div class="solution"><div class="step"><strong>Volume</strong> — how much data there is.</div><div class="step"><strong>Velocity</strong> — how fast it arrives.</div><div class="step"><strong>Variety</strong> — how many different forms it takes (text, images, clicks, sensors).</div><em>Conclusion: Volume, Velocity, Variety. ✓</em><div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 240 60" width="240" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="5" y="10" width="70" height="40" rx="6" fill="#e6f3ff" stroke="#4a90e2" stroke-width="1.5"/><text x="40" y="34" font-size="10" text-anchor="middle" fill="#1e3a5f">Volume</text><rect x="85" y="10" width="70" height="40" rx="6" fill="#fff7ed" stroke="#ea580c" stroke-width="1.5"/><text x="120" y="34" font-size="10" text-anchor="middle" fill="#9a4a10">Velocity</text><rect x="165" y="10" width="70" height="40" rx="6" fill="#fde8ef" stroke="#c2185b" stroke-width="1.5"/><text x="200" y="34" font-size="10" text-anchor="middle" fill="#7a1044">Variety</text></svg></div></div></div>
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 3</h3><p>A sensor takes 5 readings per second. How many in one minute?</p><div class="solution"><div class="step"><strong>Step 1:</strong> one minute \(= 60\) seconds.</div><div class="step"><strong>Step 2:</strong> readings \(= 5 \text{ per second} \times 60 \text{ seconds} = 300\).</div><em>Conclusion: 300 readings in one minute. ✓ (this is the "Velocity" of the data)</em><div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 240 70" width="240" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="10" y="20" width="90" height="30" rx="6" fill="#e6f3ff" stroke="#4a90e2" stroke-width="1.5"/><text x="55" y="39" font-size="11" text-anchor="middle" fill="#1e3a5f">5 / second</text><line x1="105" y1="35" x2="140" y2="35" stroke="#9a5b00" stroke-width="2"/><text x="122" y="28" font-size="9" text-anchor="middle" fill="#9a5b00">×60</text><rect x="150" y="20" width="90" height="30" rx="6" fill="#fde8ef" stroke="#c2185b" stroke-width="1.5"/><text x="195" y="39" font-size="11" text-anchor="middle" fill="#7a1044">300 / minute</text></svg></div></div></div>
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 4</h3><p>Why is surveying only paying members biased?</p><div class="solution"><div class="step"><strong>Step 1:</strong> the <em>population</em> you care about is all users — but the <em>sample</em> is only paying members.</div><div class="step"><strong>Step 2:</strong> non-paying or former users are systematically left out, and they may feel very differently.</div><em>Conclusion: the sample isn't representative, so any conclusion is biased toward the views of paying members. ✓</em><div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 200 160" width="180" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><circle cx="100" cy="80" r="70" fill="#e6f3ff" stroke="#4a90e2" stroke-width="2"/><circle cx="80" cy="95" r="35" fill="#fde8ef" stroke="#c2185b" stroke-width="2"/><text x="100" y="30" font-size="11" text-anchor="middle" fill="#1e3a5f">all users</text><text x="80" y="95" font-size="9" text-anchor="middle" fill="#7a1044">paying</text><text x="80" y="107" font-size="9" text-anchor="middle" fill="#7a1044">members</text></svg></div></div></div>
+  <div class="example-box" style="background-color:#fff0f5;border-left:5px solid #c2185b;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>⭐ Advanced Example — Daily data load</h3><p>A website logs 1.2 KB per visit and gets 50 000 visits a day. How many MB per day?</p><div class="solution"><div class="step"><strong>Step 1:</strong> total per day \(= 1.2 \text{ KB} \times 50\,000 = 60\,000\) KB.</div><div class="step"><strong>Step 2:</strong> convert KB → MB by dividing by 1000: \(60\,000 \div 1000 = 60\) MB.</div><em>Conclusion: about \(60\) MB per day. ✓ (over a year that's \(60 \times 365 \approx 21\,900\) MB ≈ 22 GB — small data adds up fast)</em><div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 260 70" width="260" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="5" y="20" width="80" height="30" rx="6" fill="#e6f3ff" stroke="#4a90e2" stroke-width="1.5"/><text x="45" y="39" font-size="10" text-anchor="middle" fill="#1e3a5f">1.2 KB × 50k</text><line x1="90" y1="35" x2="120" y2="35" stroke="#9a5b00" stroke-width="2"/><rect x="125" y="20" width="55" height="30" rx="6" fill="#fff7ed" stroke="#ea580c" stroke-width="1.5"/><text x="152" y="39" font-size="10" text-anchor="middle" fill="#9a4a10">60000 KB</text><line x1="185" y1="35" x2="205" y2="35" stroke="#9a5b00" stroke-width="2"/><text x="195" y="28" font-size="8" text-anchor="middle" fill="#9a5b00">÷1000</text><rect x="210" y="20" width="45" height="30" rx="6" fill="#fde8ef" stroke="#c2185b" stroke-width="1.5"/><text x="232" y="39" font-size="10" text-anchor="middle" fill="#7a1044">60 MB</text></svg></div></div></div>
   <h2>🟡 Practice Questions</h2>
   <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Question 1</h3><p>Convert 3 TB to GB.</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Answer: 3000 GB.</em></div></div></details></div>
   <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Question 2</h3><p>Which "V" refers to how <em>fast</em> data arrives?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Answer: Velocity.</em></div></div></details></div>
@@ -3586,11 +3966,11 @@ output c        → 7</pre>
     </svg>
   </div>
   <h2>🔵 Examples</h2>
-  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 1</h3><p>Find the mean of \(4, 8, 6, 10, 2\).</p><div class="solution"><div class="step"><strong>Step 1:</strong> add every value: \(4 + 8 + 6 + 10 + 2 = 30\).</div><div class="step"><strong>Step 2:</strong> count how many: there are \(5\) values.</div><div class="step"><strong>Step 3:</strong> mean \(= \dfrac{\text{sum}}{\text{count}} = \dfrac{30}{5} = 6\).</div><em>Conclusion: the mean is \(6\). ✓ (6 sits in the middle of the data — sensible)</em></div></div>
-  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 2</h3><p>Find the median of \(3, 7, 9, 2, 5\).</p><div class="solution"><div class="step"><strong>Step 1:</strong> sort smallest → largest: \(2,\ 3,\ \mathbf{5},\ 7,\ 9\).</div><div class="step"><strong>Step 2:</strong> there are 5 values (odd), so the median is the single middle one — the 3rd.</div><em>Conclusion: the median is \(5\). ✓ (two values below it, two above it)</em></div></div>
-  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 3</h3><p>Find the mode of \(2, 4, 4, 6, 9, 4\).</p><div class="solution"><div class="step"><strong>Step 1:</strong> tally how often each value appears: 2→once, 4→<strong>three</strong> times, 6→once, 9→once.</div><div class="step"><strong>Step 2:</strong> the mode is the value with the highest count.</div><em>Conclusion: the mode is \(4\) (it appears three times). ✓</em></div></div>
-  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 4</h3><p>Find the range of \(12, 15, 11, 20, 17\).</p><div class="solution"><div class="step"><strong>Step 1:</strong> identify the maximum \(= 20\) and the minimum \(= 11\).</div><div class="step"><strong>Step 2:</strong> range \(= \text{max} - \text{min} = 20 - 11\).</div><em>Conclusion: the range is \(9\). ✓ (the data spans 9 units from lowest to highest)</em></div></div>
-  <div class="example-box" style="background-color:#fff0f5;border-left:5px solid #c2185b;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>⭐ Advanced Example — Find a missing value</h3><p>Five numbers have a mean of 10. Four of them are \(8, 9, 11, 12\). Find the fifth.</p><div class="solution"><div class="step"><strong>Step 1:</strong> work backwards from the mean. If the mean is 10 over 5 numbers, the total must be \(5 \times 10 = 50\).</div><div class="step"><strong>Step 2:</strong> add the four known values: \(8 + 9 + 11 + 12 = 40\).</div><div class="step"><strong>Step 3:</strong> the fifth value \(= \text{total} - \text{known sum} = 50 - 40 = 10\).</div><em>Conclusion: the fifth number is \(10\). ✓ (check: \((8+9+11+12+10)/5 = 50/5 = 10\))</em></div></div>
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 1</h3><p>Find the mean of \(4, 8, 6, 10, 2\).</p><div class="solution"><div class="step"><strong>Step 1:</strong> add every value: \(4 + 8 + 6 + 10 + 2 = 30\).</div><div class="step"><strong>Step 2:</strong> count how many: there are \(5\) values.</div><div class="step"><strong>Step 3:</strong> mean \(= \dfrac{\text{sum}}{\text{count}} = \dfrac{30}{5} = 6\).</div><em>Conclusion: the mean is \(6\). ✓ (6 sits in the middle of the data — sensible)</em><div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 200 60" width="200" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><line x1="15" y1="30" x2="190" y2="30" stroke="#94a3b8" stroke-width="1.5"/><circle cx="50" cy="30" r="4" fill="#4a90e2"/><circle cx="80" cy="30" r="4" fill="#4a90e2"/><circle cx="110" cy="30" r="4" fill="#4a90e2"/><circle cx="140" cy="30" r="4" fill="#4a90e2"/><circle cx="170" cy="30" r="4" fill="#4a90e2"/><line x1="110" y1="10" x2="110" y2="50" stroke="#c2185b" stroke-width="1.5" stroke-dasharray="3,2"/><text x="110" y="8" font-size="10" text-anchor="middle" fill="#7a1044">mean=6</text></svg></div></div></div>
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 2</h3><p>Find the median of \(3, 7, 9, 2, 5\).</p><div class="solution"><div class="step"><strong>Step 1:</strong> sort smallest → largest: \(2,\ 3,\ \mathbf{5},\ 7,\ 9\).</div><div class="step"><strong>Step 2:</strong> there are 5 values (odd), so the median is the single middle one — the 3rd.</div><em>Conclusion: the median is \(5\). ✓ (two values below it, two above it)</em><div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 180 60" width="180" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><line x1="15" y1="30" x2="170" y2="30" stroke="#94a3b8" stroke-width="1.5"/><circle cx="50" cy="30" r="4" fill="#4a90e2"/><circle cx="65" cy="30" r="4" fill="#4a90e2"/><circle cx="95" cy="30" r="5" fill="#c2185b"/><circle cx="125" cy="30" r="4" fill="#4a90e2"/><circle cx="155" cy="30" r="4" fill="#4a90e2"/><text x="95" y="15" font-size="10" text-anchor="middle" fill="#7a1044">median=5</text></svg></div></div></div>
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 3</h3><p>Find the mode of \(2, 4, 4, 6, 9, 4\).</p><div class="solution"><div class="step"><strong>Step 1:</strong> tally how often each value appears: 2→once, 4→<strong>three</strong> times, 6→once, 9→once.</div><div class="step"><strong>Step 2:</strong> the mode is the value with the highest count.</div><em>Conclusion: the mode is \(4\) (it appears three times). ✓</em><div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 180 80" width="180" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><line x1="15" y1="55" x2="170" y2="55" stroke="#94a3b8" stroke-width="1.5"/><circle cx="50" cy="45" r="4" fill="#4a90e2"/><circle cx="80" cy="45" r="4" fill="#c2185b"/><circle cx="80" cy="30" r="4" fill="#c2185b"/><circle cx="80" cy="15" r="4" fill="#c2185b"/><circle cx="110" cy="45" r="4" fill="#4a90e2"/><circle cx="155" cy="45" r="4" fill="#4a90e2"/><text x="80" y="70" font-size="10" text-anchor="middle" fill="#7a1044">mode=4</text></svg></div></div></div>
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 4</h3><p>Find the range of \(12, 15, 11, 20, 17\).</p><div class="solution"><div class="step"><strong>Step 1:</strong> identify the maximum \(= 20\) and the minimum \(= 11\).</div><div class="step"><strong>Step 2:</strong> range \(= \text{max} - \text{min} = 20 - 11\).</div><em>Conclusion: the range is \(9\). ✓ (the data spans 9 units from lowest to highest)</em><div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 190 60" width="190" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><line x1="15" y1="30" x2="185" y2="30" stroke="#94a3b8" stroke-width="1.5"/><circle cx="35" cy="30" r="5" fill="#c2185b"/><circle cx="50" cy="30" r="4" fill="#4a90e2"/><circle cx="95" cy="30" r="4" fill="#4a90e2"/><circle cx="125" cy="30" r="4" fill="#4a90e2"/><circle cx="170" cy="30" r="5" fill="#c2185b"/><path d="M35,45 L170,45" stroke="#7a1044" stroke-width="1.5"/><text x="102" y="58" font-size="10" text-anchor="middle" fill="#7a1044">range = 20−11 = 9</text></svg></div></div></div>
+  <div class="example-box" style="background-color:#fff0f5;border-left:5px solid #c2185b;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>⭐ Advanced Example — Find a missing value</h3><p>Five numbers have a mean of 10. Four of them are \(8, 9, 11, 12\). Find the fifth.</p><div class="solution"><div class="step"><strong>Step 1:</strong> work backwards from the mean. If the mean is 10 over 5 numbers, the total must be \(5 \times 10 = 50\).</div><div class="step"><strong>Step 2:</strong> add the four known values: \(8 + 9 + 11 + 12 = 40\).</div><div class="step"><strong>Step 3:</strong> the fifth value \(= \text{total} - \text{known sum} = 50 - 40 = 10\).</div><em>Conclusion: the fifth number is \(10\). ✓ (check: \((8+9+11+12+10)/5 = 50/5 = 10\))</em><div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 140 60" width="140" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><line x1="15" y1="30" x2="130" y2="30" stroke="#94a3b8" stroke-width="1.5"/><circle cx="38" cy="30" r="4" fill="#4a90e2"/><circle cx="56" cy="30" r="4" fill="#4a90e2"/><circle cx="74" cy="30" r="5" fill="#c2185b"/><circle cx="92" cy="30" r="4" fill="#4a90e2"/><circle cx="110" cy="30" r="4" fill="#4a90e2"/><text x="74" y="15" font-size="10" text-anchor="middle" fill="#7a1044">?=10</text></svg></div></div></div>
   <h2>🟡 Practice Questions</h2>
   <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Question 1</h3><p>Find the mean of \(5, 10, 15\).</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Answer: 10.</em></div></div></details></div>
   <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Question 2</h3><p>Find the median of \(8, 3, 5, 9, 1, 7\) (even count).</p><details><summary>View answer</summary><div class="solution"><div class="step">Sorted: 1,3,5,7,8,9; middle two are 5 and 7. <em>Answer: 6.</em></div></div></details></div>
@@ -3644,11 +4024,11 @@ output c        → 7</pre>
   <h2>📌 Interpolation vs Extrapolation; Causation</h2>
   <p><strong>Interpolation</strong> predicts <em>within</em> the data range (reliable); <strong>extrapolation</strong> predicts <em>beyond</em> it (risky). And <strong>correlation does not imply causation</strong> — a hidden "lurking" variable may be the real cause.</p>
   <h2>🔵 Examples</h2>
-  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 1</h3><p>Hours studied vs test score rise together. What correlation?</p><div class="solution"><div class="step"><strong>Step 1:</strong> ask how \(y\) moves as \(x\) increases — here, more hours (\(x\)↑) go with higher scores (\(y\)↑).</div><div class="step"><strong>Step 2:</strong> both move the <em>same</em> direction, so the best-fit line slopes <em>up</em>.</div><em>Conclusion: positive correlation. ✓</em></div></div>
-  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 2</h3><p>Outside temperature vs heating cost. What correlation?</p><div class="solution"><div class="step"><strong>Step 1:</strong> as temperature rises (\(x\)↑), you run the heater less, so cost falls (\(y\)↓).</div><div class="step"><strong>Step 2:</strong> they move in <em>opposite</em> directions, so the best-fit line slopes <em>down</em>.</div><em>Conclusion: negative correlation. ✓</em></div></div>
-  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 3</h3><p>Find the slope of the best-fit line through \((0,2)\) and \((5,12)\).</p><div class="solution"><div class="step"><strong>Step 1:</strong> slope \(= \dfrac{\text{rise}}{\text{run}} = \dfrac{y_2 - y_1}{x_2 - x_1} = \dfrac{12-2}{5-0}\).</div><div class="step"><strong>Step 2:</strong> \(\dfrac{10}{5} = 2\).</div><em>Conclusion: slope \(= 2\) — \(y\) rises 2 for every 1 unit of \(x\). ✓ (positive slope ⇒ positive correlation)</em></div></div>
-  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 4</h3><p>Best-fit line \(y = 3x + 5\). Predict the score for 4 study hours.</p><div class="solution"><div class="step"><strong>Step 1:</strong> substitute \(x = 4\) into the equation: \(y = 3(4) + 5\).</div><div class="step"><strong>Step 2:</strong> \(3(4) = 12\), then \(12 + 5 = 17\).</div><em>Conclusion: a predicted score of about 17. ✓ (this is interpolation if 4 is inside the data range)</em></div></div>
-  <div class="example-box" style="background-color:#fff0f5;border-left:5px solid #c2185b;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>⭐ Advanced Example — Causation trap</h3><p>Ice-cream sales and drowning incidents are positively correlated. Does ice cream cause drowning?</p><div class="solution"><div class="step"><strong>Step 1:</strong> the data really do rise together — the correlation is real.</div><div class="step"><strong>Step 2:</strong> but look for a <em>lurking variable</em>: hot weather independently drives BOTH ice-cream sales and swimming (so drownings).</div><em>Conclusion: no — ice cream does not cause drowning; correlation ≠ causation. ✓</em></div></div>
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 1</h3><p>Hours studied vs test score rise together. What correlation?</p><div class="solution"><div class="step"><strong>Step 1:</strong> ask how \(y\) moves as \(x\) increases — here, more hours (\(x\)↑) go with higher scores (\(y\)↑).</div><div class="step"><strong>Step 2:</strong> both move the <em>same</em> direction, so the best-fit line slopes <em>up</em>.</div><em>Conclusion: positive correlation. ✓</em><div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 120 100" width="120" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><line x1="15" y1="85" x2="105" y2="85" stroke="#1e3a5f" stroke-width="1.2"/><line x1="15" y1="85" x2="15" y2="10" stroke="#1e3a5f" stroke-width="1.2"/><circle cx="25" cy="75" r="3" fill="#4a90e2"/><circle cx="40" cy="65" r="3" fill="#4a90e2"/><circle cx="55" cy="52" r="3" fill="#4a90e2"/><circle cx="70" cy="40" r="3" fill="#4a90e2"/><circle cx="90" cy="22" r="3" fill="#4a90e2"/><line x1="20" y1="80" x2="95" y2="18" stroke="#c2185b" stroke-width="1.3" stroke-dasharray="3,2"/><text x="60" y="97" font-size="9" text-anchor="middle" fill="#64748b">hours → score</text></svg></div></div></div>
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 2</h3><p>Outside temperature vs heating cost. What correlation?</p><div class="solution"><div class="step"><strong>Step 1:</strong> as temperature rises (\(x\)↑), you run the heater less, so cost falls (\(y\)↓).</div><div class="step"><strong>Step 2:</strong> they move in <em>opposite</em> directions, so the best-fit line slopes <em>down</em>.</div><em>Conclusion: negative correlation. ✓</em><div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 120 100" width="120" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><line x1="15" y1="85" x2="105" y2="85" stroke="#1e3a5f" stroke-width="1.2"/><line x1="15" y1="85" x2="15" y2="10" stroke="#1e3a5f" stroke-width="1.2"/><circle cx="25" cy="22" r="3" fill="#4a90e2"/><circle cx="40" cy="35" r="3" fill="#4a90e2"/><circle cx="55" cy="50" r="3" fill="#4a90e2"/><circle cx="70" cy="63" r="3" fill="#4a90e2"/><circle cx="90" cy="78" r="3" fill="#4a90e2"/><line x1="20" y1="18" x2="95" y2="82" stroke="#c2185b" stroke-width="1.3" stroke-dasharray="3,2"/><text x="60" y="97" font-size="9" text-anchor="middle" fill="#64748b">temp → cost</text></svg></div></div></div>
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 3</h3><p>Find the slope of the best-fit line through \((0,2)\) and \((5,12)\).</p><div class="solution"><div class="step"><strong>Step 1:</strong> slope \(= \dfrac{\text{rise}}{\text{run}} = \dfrac{y_2 - y_1}{x_2 - x_1} = \dfrac{12-2}{5-0}\).</div><div class="step"><strong>Step 2:</strong> \(\dfrac{10}{5} = 2\).</div><em>Conclusion: slope \(= 2\) — \(y\) rises 2 for every 1 unit of \(x\). ✓ (positive slope ⇒ positive correlation)</em><div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 160 110" width="160" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><line x1="20" y1="90" x2="150" y2="90" stroke="#94a3b8" stroke-width="1.2"/><line x1="20" y1="90" x2="20" y2="15" stroke="#94a3b8" stroke-width="1.2"/><line x1="20" y1="82" x2="140" y2="22" stroke="#4a90e2" stroke-width="2"/><circle cx="20" cy="82" r="4" fill="#c2185b"/><text x="12" y="82" font-size="9" text-anchor="end" fill="#7a1044">(0,2)</text><circle cx="140" cy="22" r="4" fill="#c2185b"/><text x="140" y="15" font-size="9" text-anchor="middle" fill="#7a1044">(5,12)</text></svg></div></div></div>
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 4</h3><p>Best-fit line \(y = 3x + 5\). Predict the score for 4 study hours.</p><div class="solution"><div class="step"><strong>Step 1:</strong> substitute \(x = 4\) into the equation: \(y = 3(4) + 5\).</div><div class="step"><strong>Step 2:</strong> \(3(4) = 12\), then \(12 + 5 = 17\).</div><em>Conclusion: a predicted score of about 17. ✓ (this is interpolation if 4 is inside the data range)</em><div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 160 110" width="160" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><line x1="20" y1="90" x2="150" y2="90" stroke="#94a3b8" stroke-width="1.2"/><line x1="20" y1="90" x2="20" y2="15" stroke="#94a3b8" stroke-width="1.2"/><line x1="20" y1="78" x2="140" y2="20" stroke="#4a90e2" stroke-width="2"/><circle cx="112" cy="34" r="5" fill="#c2185b"/><text x="112" y="24" font-size="9" text-anchor="middle" fill="#7a1044">(4,17)</text></svg></div></div></div>
+  <div class="example-box" style="background-color:#fff0f5;border-left:5px solid #c2185b;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>⭐ Advanced Example — Causation trap</h3><p>Ice-cream sales and drowning incidents are positively correlated. Does ice cream cause drowning?</p><div class="solution"><div class="step"><strong>Step 1:</strong> the data really do rise together — the correlation is real.</div><div class="step"><strong>Step 2:</strong> but look for a <em>lurking variable</em>: hot weather independently drives BOTH ice-cream sales and swimming (so drownings).</div><em>Conclusion: no — ice cream does not cause drowning; correlation ≠ causation. ✓</em><div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 220 110" width="220" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="75" y="10" width="70" height="30" rx="6" fill="#fff7ed" stroke="#ea580c" stroke-width="1.5"/><text x="110" y="29" font-size="10" text-anchor="middle" fill="#9a4a10">hot weather</text><line x1="90" y1="40" x2="40" y2="70" stroke="#9a5b00" stroke-width="1.5"/><line x1="130" y1="40" x2="180" y2="70" stroke="#9a5b00" stroke-width="1.5"/><rect x="5" y="70" width="70" height="30" rx="6" fill="#e6f3ff" stroke="#4a90e2" stroke-width="1.5"/><text x="40" y="89" font-size="9" text-anchor="middle" fill="#1e3a5f">ice-cream sales</text><rect x="145" y="70" width="70" height="30" rx="6" fill="#fde8ef" stroke="#c2185b" stroke-width="1.5"/><text x="180" y="89" font-size="9" text-anchor="middle" fill="#7a1044">drownings</text></svg></div></div></div>
   <h2>🟡 Practice Questions</h2>
   <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Question 1</h3><p>As \(x\) goes up, \(y\) goes down. What correlation?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Answer: negative.</em></div></div></details></div>
   <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Question 2</h3><p>Random scattered points with no trend show ___ correlation.</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Answer: no (zero) correlation.</em></div></div></details></div>
@@ -3702,10 +4082,10 @@ output c        → 7</pre>
   <p>In \( C = 15n + 40 \): the \(40\) is the <strong>fixed cost</strong> (start value) and \(15\) is the <strong>rate</strong> (cost per item). Slide the rate below to see how the model line changes.</p>
   <h2>🔵 Examples</h2>
   <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 1</h3><p>In \(C = 15n + 40\), state the fixed cost and cost per item.</p><div class="solution"><div class="step"><strong>Step 1:</strong> match the model to \(y = mx + b\): here \(b = 40\) (the constant) and \(m = 15\) (the coefficient of \(n\)).</div><div class="step"><strong>Step 2:</strong> \(b\) is the value when \(n = 0\) — the cost before making anything = the <em>fixed cost</em>; \(m\) is the per-item <em>rate</em>.</div><em>Conclusion: fixed cost $40, and $15 per item. ✓</em>${gframe(["y = 15*x + 40"], { title: "C = 15n + 40: fixed cost 40 (y-intercept) plus 15 per item (slope)" })}</div></div>
-  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 2</h3><p>Using \(C = 15n + 40\), find the cost for 12 items.</p><div class="solution"><div class="step"><strong>Step 1:</strong> substitute \(n = 12\): \(C = 15(12) + 40\).</div><div class="step"><strong>Step 2:</strong> \(15 \times 12 = 180\), then \(180 + 40 = 220\).</div><em>Conclusion: the cost is $220. ✓</em></div></div>
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 2</h3><p>Using \(C = 15n + 40\), find the cost for 12 items.</p><div class="solution"><div class="step"><strong>Step 1:</strong> substitute \(n = 12\): \(C = 15(12) + 40\).</div><div class="step"><strong>Step 2:</strong> \(15 \times 12 = 180\), then \(180 + 40 = 220\).</div><em>Conclusion: the cost is $220. ✓<div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 200 60" width="200" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="10" y="15" width="70" height="30" rx="6" fill="#e6f3ff" stroke="#4a90e2" stroke-width="1.5"/><text x="45" y="34" font-size="11" text-anchor="middle" fill="#1e3a5f">n = 12</text><line x1="85" y1="30" x2="120" y2="30" stroke="#9a5b00" stroke-width="2"/><rect x="130" y="15" width="70" height="30" rx="6" fill="#fde8ef" stroke="#c2185b" stroke-width="1.5"/><text x="165" y="34" font-size="11" text-anchor="middle" fill="#7a1044">C = $220</text></svg></div></em></div></div>
   <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 3</h3><p>A taxi charges $3.50 plus $1.75/km. Write the model for cost vs distance \(d\).</p><div class="solution"><div class="step"><strong>Step 1:</strong> identify the fixed part ($3.50, charged no matter what) → that's \(b\).</div><div class="step"><strong>Step 2:</strong> identify the rate ($1.75 per km) → that's \(m\), the coefficient of \(d\).</div><em>Conclusion: \(C = 1.75d + 3.50\). ✓ (check: at \(d = 0\), \(C = $3.50\), the base fare)</em>${gframe(["y = 1.75*x + 3.5"], { title: "taxi model C = 1.75d + 3.50: base fare 3.50, rising 1.75 per km" })}</div></div>
-  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 4</h3><p>List the modelling cycle stages in order.</p><div class="solution"><div class="step"><strong>Step 1:</strong> start by making sense of the situation, then set up.</div><div class="step"><strong>Step 2:</strong> the full loop: <strong>understand → assume → build → test → interpret/revise</strong> (then repeat).</div><em>Conclusion: understand → assume → build → test → interpret/revise. ✓</em></div></div>
-  <div class="example-box" style="background-color:#fff0f5;border-left:5px solid #c2185b;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>⭐ Advanced Example — Draining pool</h3><p>A pool drains at 50 L/min from 3000 L. Write a model for volume \(V\) vs time \(t\), and find when it is empty.</p><div class="solution"><div class="step"><strong>Step 1:</strong> start value is 3000 L; it <em>decreases</em> by 50 each minute, so the rate is \(-50\): \(V = 3000 - 50t\).</div><div class="step"><strong>Step 2:</strong> "empty" means \(V = 0\): set \(3000 - 50t = 0\).</div><div class="step"><strong>Step 3:</strong> \(50t = 3000\), so \(t = 3000 \div 50 = 60\).</div><em>Conclusion: the pool is empty after 60 minutes. ✓ (check: \(V = 3000 - 50(60) = 0\))</em></div></div>
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Example 4</h3><p>List the modelling cycle stages in order.</p><div class="solution"><div class="step"><strong>Step 1:</strong> start by making sense of the situation, then set up.</div><div class="step"><strong>Step 2:</strong> the full loop: <strong>understand → assume → build → test → interpret/revise</strong> (then repeat).</div><em>Conclusion: understand → assume → build → test → interpret/revise. ✓<div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 260 50" width="260" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="5" y="10" width="42" height="28" rx="5" fill="#e6f3ff" stroke="#4a90e2"/><text x="26" y="28" font-size="8" text-anchor="middle" fill="#1e3a5f">Understand</text><rect x="55" y="10" width="38" height="28" rx="5" fill="#e6f3ff" stroke="#4a90e2"/><text x="74" y="28" font-size="8" text-anchor="middle" fill="#1e3a5f">Assume</text><rect x="101" y="10" width="34" height="28" rx="5" fill="#e6f3ff" stroke="#4a90e2"/><text x="118" y="28" font-size="8" text-anchor="middle" fill="#1e3a5f">Build</text><rect x="143" y="10" width="34" height="28" rx="5" fill="#e6f3ff" stroke="#4a90e2"/><text x="160" y="28" font-size="8" text-anchor="middle" fill="#1e3a5f">Test</text><rect x="185" y="10" width="70" height="28" rx="5" fill="#cfe8ff" stroke="#4a90e2"/><text x="220" y="28" font-size="8" text-anchor="middle" fill="#1e3a5f">Interpret/Revise</text><line x1="47" y1="24" x2="55" y2="24" stroke="#4a90e2"/><line x1="93" y1="24" x2="101" y2="24" stroke="#4a90e2"/><line x1="135" y1="24" x2="143" y2="24" stroke="#4a90e2"/><line x1="177" y1="24" x2="185" y2="24" stroke="#4a90e2"/></svg></div></em></div></div>
+  <div class="example-box" style="background-color:#fff0f5;border-left:5px solid #c2185b;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>⭐ Advanced Example — Draining pool</h3><p>A pool drains at 50 L/min from 3000 L. Write a model for volume \(V\) vs time \(t\), and find when it is empty.</p><div class="solution"><div class="step"><strong>Step 1:</strong> start value is 3000 L; it <em>decreases</em> by 50 each minute, so the rate is \(-50\): \(V = 3000 - 50t\).</div><div class="step"><strong>Step 2:</strong> "empty" means \(V = 0\): set \(3000 - 50t = 0\).</div><div class="step"><strong>Step 3:</strong> \(50t = 3000\), so \(t = 3000 \div 50 = 60\).</div><em>Conclusion: the pool is empty after 60 minutes. ✓ (check: \(V = 3000 - 50(60) = 0\))<div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 200 110" width="200" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><line x1="20" y1="90" x2="180" y2="90" stroke="#94a3b8" stroke-width="1.2"/><line x1="20" y1="90" x2="20" y2="15" stroke="#94a3b8" stroke-width="1.2"/><line x1="20" y1="20" x2="180" y2="90" stroke="#4a90e2" stroke-width="2"/><circle cx="20" cy="20" r="4" fill="#c2185b"/><text x="20" y="14" font-size="9" text-anchor="middle" fill="#7a1044">3000 L</text><circle cx="180" cy="90" r="4" fill="#c2185b"/><text x="180" y="103" font-size="9" text-anchor="middle" fill="#7a1044">t=60 (empty)</text></svg></div></em></div></div>
   <h2>🟡 Practice Questions</h2>
   <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Question 1</h3><p>In \(C = 0.10m + 25\), what is the fixed monthly cost?</p><details><summary>View answer</summary><div class="solution"><div class="step"><em>Answer: $25.</em></div></div></details></div>
   <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:10px 14px;margin:10px 0;border-radius:6px;"><h3>Question 2</h3><p>Using \(C = 0.10m + 25\), find the cost for 300 minutes.</p><details><summary>View answer</summary><div class="solution"><div class="step">\(0.10(300) + 25 = 30 + 25\). <em>Answer: $55.</em></div></div></details></div>
@@ -3761,11 +4141,11 @@ output c        → 7</pre>
   </div>
 
   <h2>🔵 Examples (Application &amp; Challenge)</h2>
-  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:12px 16px;margin:16px 0;border-radius:16px;"><h3>📌 Example 1 — Build a cost model</h3><p>A phone plan is $30/month plus $0.05/text. Write the monthly cost \( C \) for \( t \) texts.</p><div class="solution"><div class="step"><strong>Step 1:</strong> the $30 is fixed (charged even for 0 texts) → constant term.</div><div class="step"><strong>Step 2:</strong> the $0.05 is the rate per text → coefficient of \( t \): \( 0.05t \).</div><em>✅ \( C = 0.05t + 30 \). (check: 0 texts → $30, the fixed fee)</em></div></div>
-  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:12px 16px;margin:16px 0;border-radius:16px;"><h3>📌 Example 2 — Break-even</h3><p>Plan A: $40 flat. Plan B: $15 + $0.50/GB. For how many GB is Plan B cheaper?</p><div class="solution"><div class="step"><strong>Step 1:</strong> set equal: \( 15 + 0.5g = 40 \).</div><div class="step"><strong>Step 2:</strong> \( 0.5g = 25 \Rightarrow g = 50 \).</div><em>✅ Plan B is cheaper below 50 GB; above 50 GB choose Plan A.</em></div></div>
-  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:12px 16px;margin:16px 0;border-radius:16px;"><h3>📌 Example 3 — Unit price</h3><p>A 750 mL juice costs $3.00; a 2 L bottle costs $7.20. Which is the better deal?</p><div class="solution"><div class="step"><strong>Step 1:</strong> small: \( 3.00 / 0.75 = \$4.00 \)/L.</div><div class="step"><strong>Step 2:</strong> large: \( 7.20 / 2 = \$3.60 \)/L.</div><em>✅ The 2 L bottle is better by $0.40/L.</em></div></div>
-  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:12px 16px;margin:16px 0;border-radius:16px;"><h3>📌 Example 4 — Tax changes the winner</h3><p>Store A: $900, no tax. Store B: $820 + 13% tax. Which is cheaper?</p><div class="solution"><div class="step"><strong>Step 1:</strong> add 13% tax to B by multiplying by \( 1.13 \): \( 820 \times 1.13 = \$926.60 \).</div><div class="step"><strong>Step 2:</strong> compare totals: A = $900 vs B = $926.60.</div><em>✅ Store A is cheaper by $26.60 — the lower sticker price (B) lost once tax was added.</em></div></div>
-  <div class="example-box" style="background-color:#fff0f5;border-left:5px solid #c2185b;padding:12px 16px;margin:16px 0;border-radius:16px;"><h3>⭐ Example 5 (Challenge) — Three-way compare</h3><p>Gym X: $25 join + $18/month. Gym Y: $40/month, no join fee. Over one year, which costs less, and when do they break even?</p><div class="solution"><div class="step"><strong>Step 1:</strong> X: \( 25 + 18(12) = \$241 \). Y: \( 40(12) = \$480 \).</div><div class="step"><strong>Step 2:</strong> break-even: \( 25 + 18m = 40m \Rightarrow 25 = 22m \Rightarrow m \approx 1.1 \) months.</div><em>✅ After about 1 month, Gym X is cheaper; over a year it saves $239.</em></div></div>
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:12px 16px;margin:16px 0;border-radius:16px;"><h3>📌 Example 1 — Build a cost model</h3><p>A phone plan is $30/month plus $0.05/text. Write the monthly cost \( C \) for \( t \) texts.</p><div class="solution"><div class="step"><strong>Step 1:</strong> the $30 is fixed (charged even for 0 texts) → constant term.</div><div class="step"><strong>Step 2:</strong> the $0.05 is the rate per text → coefficient of \( t \): \( 0.05t \).</div><em>✅ \( C = 0.05t + 30 \). (check: 0 texts → $30, the fixed fee)<div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 200 60" width="200" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="10" y="15" width="80" height="30" rx="6" fill="#e6f3ff" stroke="#4a90e2" stroke-width="1.5"/><text x="50" y="34" font-size="10" text-anchor="middle" fill="#1e3a5f">$30 + $0.05/text</text><line x1="95" y1="30" x2="120" y2="30" stroke="#9a5b00" stroke-width="2"/><rect x="130" y="15" width="70" height="30" rx="6" fill="#fde8ef" stroke="#c2185b" stroke-width="1.5"/><text x="165" y="34" font-size="10" text-anchor="middle" fill="#7a1044">C=0.05t+30</text></svg></div></em></div></div>
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:12px 16px;margin:16px 0;border-radius:16px;"><h3>📌 Example 2 — Break-even</h3><p>Plan A: $40 flat. Plan B: $15 + $0.50/GB. For how many GB is Plan B cheaper?</p><div class="solution"><div class="step"><strong>Step 1:</strong> set equal: \( 15 + 0.5g = 40 \).</div><div class="step"><strong>Step 2:</strong> \( 0.5g = 25 \Rightarrow g = 50 \).</div><em>✅ Plan B is cheaper below 50 GB; above 50 GB choose Plan A.<div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 160 110" width="160" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><line x1="20" y1="90" x2="150" y2="90" stroke="#94a3b8" stroke-width="1.2"/><line x1="20" y1="90" x2="20" y2="15" stroke="#94a3b8" stroke-width="1.2"/><line x1="20" y1="35" x2="150" y2="35" stroke="#4a90e2" stroke-width="2"/><text x="130" y="28" font-size="9" fill="#1e3a5f">Plan A $40</text><line x1="20" y1="70" x2="150" y2="20" stroke="#e69138" stroke-width="2"/><text x="60" y="72" font-size="9" fill="#9a4a10">Plan B</text><circle cx="115" cy="35" r="4" fill="#c2185b"/><text x="115" y="50" font-size="9" text-anchor="middle" fill="#7a1044">50 GB</text></svg></div></em></div></div>
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:12px 16px;margin:16px 0;border-radius:16px;"><h3>📌 Example 3 — Unit price</h3><p>A 750 mL juice costs $3.00; a 2 L bottle costs $7.20. Which is the better deal?</p><div class="solution"><div class="step"><strong>Step 1:</strong> small: \( 3.00 / 0.75 = \$4.00 \)/L.</div><div class="step"><strong>Step 2:</strong> large: \( 7.20 / 2 = \$3.60 \)/L.</div><em>✅ The 2 L bottle is better by $0.40/L.<div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 200 90" width="200" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="20" y="20" width="30" height="60" fill="#e6f3ff" stroke="#4a90e2" stroke-width="1.5"/><text x="35" y="15" font-size="10" text-anchor="middle" fill="#1e3a5f">$4.00/L</text><rect x="130" y="30" width="30" height="50" fill="#fde8ef" stroke="#c2185b" stroke-width="1.5"/><text x="145" y="25" font-size="10" text-anchor="middle" fill="#7a1044">$3.60/L</text><text x="35" y="88" font-size="9" text-anchor="middle" fill="#64748b">750 mL</text><text x="145" y="88" font-size="9" text-anchor="middle" fill="#64748b">2 L</text></svg></div></em></div></div>
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:12px 16px;margin:16px 0;border-radius:16px;"><h3>📌 Example 4 — Tax changes the winner</h3><p>Store A: $900, no tax. Store B: $820 + 13% tax. Which is cheaper?</p><div class="solution"><div class="step"><strong>Step 1:</strong> add 13% tax to B by multiplying by \( 1.13 \): \( 820 \times 1.13 = \$926.60 \).</div><div class="step"><strong>Step 2:</strong> compare totals: A = $900 vs B = $926.60.</div><em>✅ Store A is cheaper by $26.60 — the lower sticker price (B) lost once tax was added.<div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 200 90" width="200" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="20" y="20" width="30" height="60" fill="#e6f3ff" stroke="#4a90e2" stroke-width="1.5"/><text x="35" y="15" font-size="10" text-anchor="middle" fill="#1e3a5f">$900</text><rect x="130" y="15" width="30" height="65" fill="#fde8ef" stroke="#c2185b" stroke-width="1.5"/><text x="145" y="10" font-size="10" text-anchor="middle" fill="#7a1044">$926.60</text><text x="35" y="88" font-size="9" text-anchor="middle" fill="#64748b">Store A</text><text x="145" y="88" font-size="9" text-anchor="middle" fill="#64748b">Store B+tax</text></svg></div></em></div></div>
+  <div class="example-box" style="background-color:#fff0f5;border-left:5px solid #c2185b;padding:12px 16px;margin:16px 0;border-radius:16px;"><h3>⭐ Example 5 (Challenge) — Three-way compare</h3><p>Gym X: $25 join + $18/month. Gym Y: $40/month, no join fee. Over one year, which costs less, and when do they break even?</p><div class="solution"><div class="step"><strong>Step 1:</strong> X: \( 25 + 18(12) = \$241 \). Y: \( 40(12) = \$480 \).</div><div class="step"><strong>Step 2:</strong> break-even: \( 25 + 18m = 40m \Rightarrow 25 = 22m \Rightarrow m \approx 1.1 \) months.</div><em>✅ After about 1 month, Gym X is cheaper; over a year it saves $239.<div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 160 110" width="160" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><line x1="20" y1="90" x2="150" y2="90" stroke="#94a3b8" stroke-width="1.2"/><line x1="20" y1="90" x2="20" y2="15" stroke="#94a3b8" stroke-width="1.2"/><line x1="20" y1="80" x2="150" y2="20" stroke="#4a90e2" stroke-width="2"/><text x="120" y="18" font-size="9" fill="#1e3a5f">Gym X</text><line x1="20" y1="88" x2="150" y2="18" stroke="#c2185b" stroke-width="2"/><text x="60" y="86" font-size="9" fill="#7a1044">Gym Y</text><circle cx="27" cy="87" r="4" fill="#9a5b00"/><text x="40" y="100" font-size="9" fill="#9a5b00">m≈1.1</text></svg></div></em></div></div>
 
   <h2>🟡 Practice Questions</h2>
   <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:12px 16px;margin:16px 0;border-radius:16px;"><h3>📝 Question 1</h3><p>A gym charges $25 to join plus $18/month. Write the cost model and find the one-year total.</p><details><summary>🔎 Show Answer</summary><div class="solution"><div class="step">\( C = 18m + 25 \); one year: \( 18(12)+25 = \$241 \).</div></div></details></div>
@@ -3786,7 +4166,15 @@ output c        → 7</pre>
     <p style="margin:0;">🧠 <strong>Pro Tip:</strong> Turn every offer into an equation \( C = rx + f \). Two equations + "set equal" answers almost any "which is cheaper?" question.</p>
   </div>
 </div>` },
-      mg([{ expr: "40", label: "Plan A: $40 flat" }, { expr: "15 + 0.5*x", label: "Plan B: 15 + 0.5·GB" }], { markIntersection: true, xMin: 0, xMax: 80, yMin: 0, yMax: 60, caption: "The marked crossing is the break-even point (≈ 50 GB). Left of it Plan B wins; right of it Plan A wins." }),
+      mg([{ expr: "f", label: "Plan A (flat fee)" }, { expr: "b2 + r*x", label: "Plan B (base + rate)" }], {
+        params: [
+          { name: "f", min: 10, max: 60, init: 40 },
+          { name: "b2", min: 0, max: 30, init: 15 },
+          { name: "r", min: 0.1, max: 1.5, init: 0.5 },
+        ],
+        markIntersection: true, xMin: 0, xMax: 80, yMin: 0, yMax: 60,
+        caption: "Slide the fees and rate — the marked crossing is always the break-even point. Left of it Plan B wins; right of it Plan A wins.",
+      }),
     ],
   },
 
@@ -3833,11 +4221,11 @@ output c        → 7</pre>
   </div>
 
   <h2>🔵 Examples (Application &amp; Challenge)</h2>
-  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:12px 16px;margin:16px 0;border-radius:16px;"><h3>📌 Example 1 — One year up</h3><p>A $1000 asset appreciates 5% in a year. Find its value.</p><div class="solution"><div class="step"><strong>Step 1:</strong> +5% means a growth factor of \( 1 + 0.05 = 1.05 \).</div><div class="step"><strong>Step 2:</strong> multiply the start value by the factor: \( 1000 \times 1.05 = 1050 \).</div><em>✅ $1050. (check: a $50 gain is exactly 5% of $1000)</em></div></div>
-  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:12px 16px;margin:16px 0;border-radius:16px;"><h3>📌 Example 2 — One year down</h3><p>A $1000 asset depreciates 10% in a year. Find its value.</p><div class="solution"><div class="step"><strong>Step 1:</strong> −10% means a growth factor of \( 1 - 0.10 = 0.90 \).</div><div class="step"><strong>Step 2:</strong> multiply: \( 1000 \times 0.90 = 900 \).</div><em>✅ $900. (check: a $100 loss is 10% of $1000)</em></div></div>
-  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:12px 16px;margin:16px 0;border-radius:16px;"><h3>📌 Example 3 — Write the model</h3><p>Write the value of a $1000 asset after \( n \) years at 5% appreciation.</p><div class="solution"><div class="step"><strong>Step 1:</strong> use \( V = V_0(1+r)^n \) with \( V_0 = 1000 \) and \( r = 0.05 \).</div><div class="step"><strong>Step 2:</strong> the factor \( 1+r = 1.05 \) is applied once per year, so it is raised to the power \( n \).</div><em>✅ \( V = 1000(1.05)^n \). (check: \( n=1 \) gives $1050, matching Example 1)</em></div></div>
-  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:12px 16px;margin:16px 0;border-radius:16px;"><h3>📌 Example 4 — Car after 2 years</h3><p>A $20 000 car depreciates 15%/year. Find its value after 2 years.</p><div class="solution"><div class="step"><strong>Step 1:</strong> −15%/year means factor \( 0.85 \); over 2 years apply it twice: \( 0.85^2 = 0.7225 \).</div><div class="step"><strong>Step 2:</strong> \( 20000 \times 0.7225 = 14450 \).</div><em>✅ $14 450. (check: year 1 → $17 000, year 2 → $14 450)</em></div></div>
-  <div class="example-box" style="background-color:#fff0f5;border-left:5px solid #c2185b;padding:12px 16px;margin:16px 0;border-radius:16px;"><h3>⭐ Example 5 (Challenge) — When does it pass a target?</h3><p>Art worth $5000 appreciates 6%/year. In how many whole years does it first exceed $6000?</p><div class="solution"><div class="step"><strong>Step 1:</strong> \( 5000(1.06)^n > 6000 \Rightarrow 1.06^n > 1.2 \).</div><div class="step"><strong>Step 2:</strong> test: \( 1.06^3 = 1.191 \) (no), \( 1.06^4 = 1.262 \) (yes).</div><em>✅ After 4 years (≈ $6312).</em></div></div>
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:12px 16px;margin:16px 0;border-radius:16px;"><h3>📌 Example 1 — One year up</h3><p>A $1000 asset appreciates 5% in a year. Find its value.</p><div class="solution"><div class="step"><strong>Step 1:</strong> +5% means a growth factor of \( 1 + 0.05 = 1.05 \).</div><div class="step"><strong>Step 2:</strong> multiply the start value by the factor: \( 1000 \times 1.05 = 1050 \).</div><em>✅ $1050. (check: a $50 gain is exactly 5% of $1000)<div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 200 60" width="200" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="10" y="15" width="70" height="30" rx="6" fill="#e6f3ff" stroke="#4a90e2" stroke-width="1.5"/><text x="45" y="34" font-size="11" text-anchor="middle" fill="#1e3a5f">$1000</text><line x1="85" y1="30" x2="120" y2="30" stroke="#2e9e6e" stroke-width="2"/><text x="102" y="23" font-size="9" text-anchor="middle" fill="#2e9e6e">×1.05</text><rect x="130" y="15" width="70" height="30" rx="6" fill="#e7f7ef" stroke="#2e9e6e" stroke-width="1.5"/><text x="165" y="34" font-size="11" text-anchor="middle" fill="#1c5c43">$1050</text></svg></div></em></div></div>
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:12px 16px;margin:16px 0;border-radius:16px;"><h3>📌 Example 2 — One year down</h3><p>A $1000 asset depreciates 10% in a year. Find its value.</p><div class="solution"><div class="step"><strong>Step 1:</strong> −10% means a growth factor of \( 1 - 0.10 = 0.90 \).</div><div class="step"><strong>Step 2:</strong> multiply: \( 1000 \times 0.90 = 900 \).</div><em>✅ $900. (check: a $100 loss is 10% of $1000)<div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 200 60" width="200" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="10" y="15" width="70" height="30" rx="6" fill="#e6f3ff" stroke="#4a90e2" stroke-width="1.5"/><text x="45" y="34" font-size="11" text-anchor="middle" fill="#1e3a5f">$1000</text><line x1="85" y1="30" x2="120" y2="30" stroke="#c2185b" stroke-width="2"/><text x="102" y="23" font-size="9" text-anchor="middle" fill="#c2185b">×0.90</text><rect x="130" y="15" width="70" height="30" rx="6" fill="#fde8ef" stroke="#c2185b" stroke-width="1.5"/><text x="165" y="34" font-size="11" text-anchor="middle" fill="#7a1044">$900</text></svg></div></em></div></div>
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:12px 16px;margin:16px 0;border-radius:16px;"><h3>📌 Example 3 — Write the model</h3><p>Write the value of a $1000 asset after \( n \) years at 5% appreciation.</p><div class="solution"><div class="step"><strong>Step 1:</strong> use \( V = V_0(1+r)^n \) with \( V_0 = 1000 \) and \( r = 0.05 \).</div><div class="step"><strong>Step 2:</strong> the factor \( 1+r = 1.05 \) is applied once per year, so it is raised to the power \( n \).</div><em>✅ \( V = 1000(1.05)^n \). (check: \( n=1 \) gives $1050, matching Example 1)<div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 160 90" width="160" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><line x1="20" y1="75" x2="150" y2="75" stroke="#94a3b8" stroke-width="1.2"/><line x1="20" y1="75" x2="20" y2="15" stroke="#94a3b8" stroke-width="1.2"/><path d="M20,70 Q90,55 150,20" fill="none" stroke="#2e9e6e" stroke-width="2"/><text x="60" y="85" font-size="9" text-anchor="middle" fill="#1c5c43">V = 1000(1.05)ⁿ</text></svg></div></em></div></div>
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:12px 16px;margin:16px 0;border-radius:16px;"><h3>📌 Example 4 — Car after 2 years</h3><p>A $20 000 car depreciates 15%/year. Find its value after 2 years.</p><div class="solution"><div class="step"><strong>Step 1:</strong> −15%/year means factor \( 0.85 \); over 2 years apply it twice: \( 0.85^2 = 0.7225 \).</div><div class="step"><strong>Step 2:</strong> \( 20000 \times 0.7225 = 14450 \).</div><em>✅ $14 450. (check: year 1 → $17 000, year 2 → $14 450)<div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 240 60" width="240" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="5" y="15" width="65" height="30" rx="6" fill="#e6f3ff" stroke="#4a90e2" stroke-width="1.5"/><text x="37" y="34" font-size="10" text-anchor="middle" fill="#1e3a5f">$20000</text><line x1="72" y1="30" x2="95" y2="30" stroke="#c2185b" stroke-width="2"/><rect x="100" y="15" width="55" height="30" rx="6" fill="#fde8ef" stroke="#c2185b" stroke-width="1.5"/><text x="127" y="34" font-size="9" text-anchor="middle" fill="#7a1044">$17000</text><line x1="157" y1="30" x2="180" y2="30" stroke="#c2185b" stroke-width="2"/><rect x="185" y="15" width="55" height="30" rx="6" fill="#fde8ef" stroke="#c2185b" stroke-width="1.5"/><text x="212" y="34" font-size="9" text-anchor="middle" fill="#7a1044">$14450</text></svg></div></em></div></div>
+  <div class="example-box" style="background-color:#fff0f5;border-left:5px solid #c2185b;padding:12px 16px;margin:16px 0;border-radius:16px;"><h3>⭐ Example 5 (Challenge) — When does it pass a target?</h3><p>Art worth $5000 appreciates 6%/year. In how many whole years does it first exceed $6000?</p><div class="solution"><div class="step"><strong>Step 1:</strong> \( 5000(1.06)^n > 6000 \Rightarrow 1.06^n > 1.2 \).</div><div class="step"><strong>Step 2:</strong> test: \( 1.06^3 = 1.191 \) (no), \( 1.06^4 = 1.262 \) (yes).</div><em>✅ After 4 years (≈ $6312).<div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 160 90" width="160" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><line x1="20" y1="75" x2="150" y2="75" stroke="#94a3b8" stroke-width="1.2"/><line x1="20" y1="75" x2="20" y2="15" stroke="#94a3b8" stroke-width="1.2"/><path d="M20,70 Q90,50 150,18" fill="none" stroke="#2e9e6e" stroke-width="2"/><line x1="20" y1="40" x2="150" y2="40" stroke="#c2185b" stroke-width="1.5" stroke-dasharray="3,2"/><text x="140" y="35" font-size="8" text-anchor="middle" fill="#7a1044">$6000</text><circle cx="128" cy="28" r="4" fill="#c2185b"/><text x="128" y="18" font-size="8" text-anchor="middle" fill="#7a1044">n=4</text></svg></div></em></div></div>
 
   <h2>🟡 Practice Questions</h2>
   <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:12px 16px;margin:16px 0;border-radius:16px;"><h3>📝 Question 1</h3><p>A $2000 item appreciates 10% in one year. New value?</p><details><summary>🔎 Show Answer</summary><div class="solution"><div class="step">\( 2000 \times 1.10 = \$2200 \).</div></div></details></div>
@@ -3898,11 +4286,11 @@ output c        → 7</pre>
   </div>
 
   <h2>🔵 Examples (Application &amp; Challenge)</h2>
-  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:12px 16px;margin:16px 0;border-radius:16px;"><h3>📌 Example 1 — Simple interest</h3><p>Find the simple interest on $2000 at 4%/year for 3 years.</p><div class="solution"><div class="step"><strong>Step 1:</strong> use \( I = Prt \) with \( P = 2000 \), \( r = 0.04 \), \( t = 3 \).</div><div class="step"><strong>Step 2:</strong> \( 2000 \times 0.04 = 80 \) (one year), then \( 80 \times 3 = 240 \).</div><em>✅ $240 interest. (simple interest adds the same $80 each year)</em></div></div>
-  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:12px 16px;margin:16px 0;border-radius:16px;"><h3>📌 Example 2 — Total owed</h3><p>A $1500 loan at 6% simple interest for 2 years — total to repay?</p><div class="solution"><div class="step"><strong>Step 1:</strong> \( I = 1500 \times 0.06 \times 2 = 180 \).</div><div class="step"><strong>Step 2:</strong> \( A = 1500 + 180 \).</div><em>✅ $1680.</em></div></div>
-  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:12px 16px;margin:16px 0;border-radius:16px;"><h3>📌 Example 3 — Compound interest</h3><p>$1000 at 5% compounded annually for 3 years.</p><div class="solution"><div class="step"><strong>Step 1:</strong> compound annually means factor \( 1.05 \) applied 3 times: \( 1.05^3 = 1.157625 \).</div><div class="step"><strong>Step 2:</strong> \( A = 1000 \times 1.157625 = 1157.625 \), round to the cent.</div><em>✅ $1157.63. (vs $1150 with simple interest — compounding adds $7.63 extra)</em></div></div>
-  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:12px 16px;margin:16px 0;border-radius:16px;"><h3>📌 Example 4 — Loan interest</h3><p>A $5000 loan at 8% simple interest. Interest after 4 years?</p><div class="solution"><div class="step"><strong>Step 1:</strong> simple interest \( I = Prt = 5000 \times 0.08 \times 4 \).</div><div class="step"><strong>Step 2:</strong> \( 5000 \times 0.08 = 400 \) per year, then \( 400 \times 4 = 1600 \).</div><em>✅ $1600 interest. (the borrower repays $5000 + $1600 = $6600 total)</em></div></div>
-  <div class="example-box" style="background-color:#fff0f5;border-left:5px solid #c2185b;padding:12px 16px;margin:16px 0;border-radius:16px;"><h3>⭐ Example 5 (Challenge) — Simple vs compound</h3><p>Compare $1000 at 5% simple vs 5% compound after 10 years.</p><div class="solution"><div class="step"><strong>Simple:</strong> \( A = 1000(1 + 0.05\times10) = \$1500 \).</div><div class="step"><strong>Compound:</strong> \( A = 1000(1.05)^{10} \approx \$1628.89 \).</div><em>✅ Compound earns ≈ $128.89 more.</em></div></div>
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:12px 16px;margin:16px 0;border-radius:16px;"><h3>📌 Example 1 — Simple interest</h3><p>Find the simple interest on $2000 at 4%/year for 3 years.</p><div class="solution"><div class="step"><strong>Step 1:</strong> use \( I = Prt \) with \( P = 2000 \), \( r = 0.04 \), \( t = 3 \).</div><div class="step"><strong>Step 2:</strong> \( 2000 \times 0.04 = 80 \) (one year), then \( 80 \times 3 = 240 \).</div><em>✅ $240 interest. (simple interest adds the same $80 each year)<div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 200 60" width="200" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="10" y="15" width="80" height="30" rx="6" fill="#e6f3ff" stroke="#4a90e2" stroke-width="1.5"/><text x="50" y="34" font-size="10" text-anchor="middle" fill="#1e3a5f">$2000 @ 4% × 3yr</text><line x1="95" y1="30" x2="120" y2="30" stroke="#9a5b00" stroke-width="2"/><rect x="130" y="15" width="70" height="30" rx="6" fill="#fde8ef" stroke="#c2185b" stroke-width="1.5"/><text x="165" y="34" font-size="11" text-anchor="middle" fill="#7a1044">I = $240</text></svg></div></em></div></div>
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:12px 16px;margin:16px 0;border-radius:16px;"><h3>📌 Example 2 — Total owed</h3><p>A $1500 loan at 6% simple interest for 2 years — total to repay?</p><div class="solution"><div class="step"><strong>Step 1:</strong> \( I = 1500 \times 0.06 \times 2 = 180 \).</div><div class="step"><strong>Step 2:</strong> \( A = 1500 + 180 \).</div><em>✅ $1680.<div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 200 60" width="200" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="10" y="15" width="80" height="30" rx="6" fill="#e6f3ff" stroke="#4a90e2" stroke-width="1.5"/><text x="50" y="34" font-size="10" text-anchor="middle" fill="#1e3a5f">$1500 @ 6% × 2yr</text><line x1="95" y1="30" x2="120" y2="30" stroke="#9a5b00" stroke-width="2"/><rect x="130" y="15" width="70" height="30" rx="6" fill="#fde8ef" stroke="#c2185b" stroke-width="1.5"/><text x="165" y="34" font-size="11" text-anchor="middle" fill="#7a1044">total $1680</text></svg></div></em></div></div>
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:12px 16px;margin:16px 0;border-radius:16px;"><h3>📌 Example 3 — Compound interest</h3><p>$1000 at 5% compounded annually for 3 years.</p><div class="solution"><div class="step"><strong>Step 1:</strong> compound annually means factor \( 1.05 \) applied 3 times: \( 1.05^3 = 1.157625 \).</div><div class="step"><strong>Step 2:</strong> \( A = 1000 \times 1.157625 = 1157.625 \), round to the cent.</div><em>✅ $1157.63. (vs $1150 with simple interest — compounding adds $7.63 extra)<div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 160 90" width="160" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><line x1="20" y1="75" x2="150" y2="75" stroke="#94a3b8" stroke-width="1.2"/><line x1="20" y1="75" x2="20" y2="15" stroke="#94a3b8" stroke-width="1.2"/><path d="M20,70 Q90,55 150,25" fill="none" stroke="#2e9e6e" stroke-width="2"/><circle cx="150" cy="25" r="4" fill="#1c5c43"/><text x="120" y="18" font-size="9" text-anchor="middle" fill="#1c5c43">$1157.63</text></svg></div></em></div></div>
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:12px 16px;margin:16px 0;border-radius:16px;"><h3>📌 Example 4 — Loan interest</h3><p>A $5000 loan at 8% simple interest. Interest after 4 years?</p><div class="solution"><div class="step"><strong>Step 1:</strong> simple interest \( I = Prt = 5000 \times 0.08 \times 4 \).</div><div class="step"><strong>Step 2:</strong> \( 5000 \times 0.08 = 400 \) per year, then \( 400 \times 4 = 1600 \).</div><em>✅ $1600 interest. (the borrower repays $5000 + $1600 = $6600 total)<div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 200 60" width="200" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="10" y="15" width="80" height="30" rx="6" fill="#e6f3ff" stroke="#4a90e2" stroke-width="1.5"/><text x="50" y="34" font-size="10" text-anchor="middle" fill="#1e3a5f">$5000 @ 8% × 4yr</text><line x1="95" y1="30" x2="120" y2="30" stroke="#9a5b00" stroke-width="2"/><rect x="130" y="15" width="70" height="30" rx="6" fill="#fde8ef" stroke="#c2185b" stroke-width="1.5"/><text x="165" y="34" font-size="11" text-anchor="middle" fill="#7a1044">I = $1600</text></svg></div></em></div></div>
+  <div class="example-box" style="background-color:#fff0f5;border-left:5px solid #c2185b;padding:12px 16px;margin:16px 0;border-radius:16px;"><h3>⭐ Example 5 (Challenge) — Simple vs compound</h3><p>Compare $1000 at 5% simple vs 5% compound after 10 years.</p><div class="solution"><div class="step"><strong>Simple:</strong> \( A = 1000(1 + 0.05\times10) = \$1500 \).</div><div class="step"><strong>Compound:</strong> \( A = 1000(1.05)^{10} \approx \$1628.89 \).</div><em>✅ Compound earns ≈ $128.89 more.<div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 200 90" width="200" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="20" y="40" width="30" height="40" fill="#e6f3ff" stroke="#4a90e2" stroke-width="1.5"/><text x="35" y="35" font-size="10" text-anchor="middle" fill="#1e3a5f">$1500</text><rect x="130" y="20" width="30" height="60" fill="#e7f7ef" stroke="#2e9e6e" stroke-width="1.5"/><text x="145" y="15" font-size="10" text-anchor="middle" fill="#1c5c43">$1628.89</text><text x="35" y="88" font-size="9" text-anchor="middle" fill="#64748b">simple</text><text x="145" y="88" font-size="9" text-anchor="middle" fill="#64748b">compound</text></svg></div></em></div></div>
 
   <h2>🟡 Practice Questions</h2>
   <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:12px 16px;margin:16px 0;border-radius:16px;"><h3>📝 Question 1</h3><p>Simple interest on $800 at 5%/year for 2 years?</p><details><summary>🔎 Show Answer</summary><div class="solution"><div class="step">\( 800 \times 0.05 \times 2 = \$80 \).</div></div></details></div>
@@ -3923,7 +4311,11 @@ output c        → 7</pre>
     <p style="margin:0;">🧠 <strong>Pro Tip:</strong> Simple interest adds the same amount each year; compound multiplies by \( (1+r) \) each year. Over long periods, compounding wins big.</p>
   </div>
 </div>` },
-      mg([{ expr: "1000 + 1000*0.05*x", label: "Simple: 1000 + 50·t" }, { expr: "1000*1.05^x", label: "Compound: 1000·1.05ᵗ" }], { markIntersection: false, xMin: 0, xMax: 20, yMin: 900, yMax: 2800, caption: "$1000 at 5%/year: the straight line is simple interest; the curve is compound — it pulls away over time." }),
+      mg([{ expr: "1000 + 1000*r*x", label: "Simple: 1000 + 1000·r·t" }, { expr: "1000*(1+r)^x", label: "Compound: 1000·(1+r)ᵗ" }], {
+        params: [{ name: "r", min: 0.01, max: 0.15, init: 0.05 }],
+        markIntersection: false, xMin: 0, xMax: 20, yMin: 900, yMax: 2800,
+        caption: "$1000 at rate r — slide r: simple interest always stays a straight line, while compound curves away faster and faster.",
+      }),
     ],
   },
 
@@ -3964,11 +4356,11 @@ output c        → 7</pre>
   </div>
 
   <h2>🔵 Examples (Application &amp; Challenge)</h2>
-  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:12px 16px;margin:16px 0;border-radius:16px;"><h3>📌 Example 1 — Surplus</h3><p>Income $2400, expenses $2100. Find the monthly surplus.</p><div class="solution"><div class="step"><strong>Step 1:</strong> surplus \( = \) income \( - \) expenses \( = 2400 - 2100 \).</div><div class="step"><strong>Step 2:</strong> \( 2400 - 2100 = 300 \), and it is positive, so the budget balances.</div><em>✅ $300 surplus each month. (a negative result would be a deficit)</em></div></div>
-  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:12px 16px;margin:16px 0;border-radius:16px;"><h3>📌 Example 2 — Apply 50/30/20</h3><p>On $2000 income, find the needs/wants/savings amounts.</p><div class="solution"><div class="step"><strong>Step 1:</strong> turn each percent into a decimal: 50% → 0.5, 30% → 0.3, 20% → 0.2.</div><div class="step"><strong>Step 2:</strong> multiply income by each: \( 0.5(2000)=1000,\ 0.3(2000)=600,\ 0.2(2000)=400 \).</div><em>✅ $1000 needs / $600 wants / $400 savings. (check: \( 1000+600+400 = 2000 \), the whole income)</em></div></div>
-  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:12px 16px;margin:16px 0;border-radius:16px;"><h3>📌 Example 3 — What's left to save?</h3><p>Income $1800; rent $700, food $400, transport $200, other $300. How much can you save?</p><div class="solution"><div class="step"><strong>Step 1:</strong> add all expenses: \( 700+400+200+300 = 1600 \).</div><div class="step"><strong>Step 2:</strong> savings \( = \) income \( - \) expenses \( = 1800 - 1600 \).</div><em>✅ $200 left to save. (that’s \( 200/1800 \approx 11\% \) — below the 20% target)</em></div></div>
-  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:12px 16px;margin:16px 0;border-radius:16px;"><h3>📌 Example 4 — Monthly toward a goal</h3><p>You want $1200 saved in a year. How much per month?</p><div class="solution"><div class="step"><strong>Step 1:</strong> spread the goal evenly over 12 months: \( 1200 \div 12 \).</div><div class="step"><strong>Step 2:</strong> \( 1200 \div 12 = 100 \).</div><em>✅ $100/month. (check: \( 100 \times 12 = \$1200 \), the goal)</em></div></div>
-  <div class="example-box" style="background-color:#fff0f5;border-left:5px solid #c2185b;padding:12px 16px;margin:16px 0;border-radius:16px;"><h3>⭐ Example 5 (Challenge) — Absorbing a price rise</h3><p>Your phone bill rises from $45 to $60/month. By how much must other spending be cut to keep the same total, and what % increase was the bill?</p><div class="solution"><div class="step"><strong>Step 1:</strong> increase \( = 60 - 45 = \$15 \) → cut $15 elsewhere.</div><div class="step"><strong>Step 2:</strong> percent increase \( = 15/45 = 33.\overline{3}\% \).</div><em>✅ Cut $15; the bill rose about 33%.</em></div></div>
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:12px 16px;margin:16px 0;border-radius:16px;"><h3>📌 Example 1 — Surplus</h3><p>Income $2400, expenses $2100. Find the monthly surplus.</p><div class="solution"><div class="step"><strong>Step 1:</strong> surplus \( = \) income \( - \) expenses \( = 2400 - 2100 \).</div><div class="step"><strong>Step 2:</strong> \( 2400 - 2100 = 300 \), and it is positive, so the budget balances.</div><em>✅ $300 surplus each month. (a negative result would be a deficit)<div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 200 90" width="200" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="20" y="20" width="30" height="60" fill="#e6f3ff" stroke="#4a90e2" stroke-width="1.5"/><text x="35" y="15" font-size="10" text-anchor="middle" fill="#1e3a5f">$2400</text><rect x="130" y="27" width="30" height="53" fill="#e7f7ef" stroke="#2e9e6e" stroke-width="1.5"/><text x="145" y="22" font-size="10" text-anchor="middle" fill="#1c5c43">$2100</text><text x="35" y="88" font-size="9" text-anchor="middle" fill="#64748b">income</text><text x="145" y="88" font-size="9" text-anchor="middle" fill="#64748b">expenses</text></svg></div></em></div></div>
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:12px 16px;margin:16px 0;border-radius:16px;"><h3>📌 Example 2 — Apply 50/30/20</h3><p>On $2000 income, find the needs/wants/savings amounts.</p><div class="solution"><div class="step"><strong>Step 1:</strong> turn each percent into a decimal: 50% → 0.5, 30% → 0.3, 20% → 0.2.</div><div class="step"><strong>Step 2:</strong> multiply income by each: \( 0.5(2000)=1000,\ 0.3(2000)=600,\ 0.2(2000)=400 \).</div><em>✅ $1000 needs / $600 wants / $400 savings. (check: \( 1000+600+400 = 2000 \), the whole income)<div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 220 60" width="220" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="5" y="10" width="70" height="30" rx="6" fill="#e6f3ff" stroke="#4a90e2" stroke-width="1.5"/><text x="40" y="29" font-size="10" text-anchor="middle" fill="#1e3a5f">needs $1000</text><rect x="80" y="10" width="65" height="30" rx="6" fill="#fff3e4" stroke="#e69138" stroke-width="1.5"/><text x="112" y="29" font-size="10" text-anchor="middle" fill="#9a5b00">wants $600</text><rect x="150" y="10" width="65" height="30" rx="6" fill="#e7f7ef" stroke="#2e9e6e" stroke-width="1.5"/><text x="182" y="29" font-size="9" text-anchor="middle" fill="#1c5c43">save $400</text></svg></div></em></div></div>
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:12px 16px;margin:16px 0;border-radius:16px;"><h3>📌 Example 3 — What's left to save?</h3><p>Income $1800; rent $700, food $400, transport $200, other $300. How much can you save?</p><div class="solution"><div class="step"><strong>Step 1:</strong> add all expenses: \( 700+400+200+300 = 1600 \).</div><div class="step"><strong>Step 2:</strong> savings \( = \) income \( - \) expenses \( = 1800 - 1600 \).</div><em>✅ $200 left to save. (that’s \( 200/1800 \approx 11\% \) — below the 20% target)<div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 60 90" width="60" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="10" y="10" width="35" height="35" fill="#e6f3ff" stroke="#4a90e2" stroke-width="1.5"/><text x="27" y="30" font-size="8" text-anchor="middle" fill="#1e3a5f">$1600</text><rect x="10" y="45" width="35" height="10" fill="#e7f7ef" stroke="#2e9e6e" stroke-width="1.5"/><text x="27" y="80" font-size="8" text-anchor="middle" fill="#1c5c43">save $200</text></svg></div></em></div></div>
+  <div class="example-box" style="background-color:#e6f3ff;border-left:5px solid #4a90e2;padding:12px 16px;margin:16px 0;border-radius:16px;"><h3>📌 Example 4 — Monthly toward a goal</h3><p>You want $1200 saved in a year. How much per month?</p><div class="solution"><div class="step"><strong>Step 1:</strong> spread the goal evenly over 12 months: \( 1200 \div 12 \).</div><div class="step"><strong>Step 2:</strong> \( 1200 \div 12 = 100 \).</div><em>✅ $100/month. (check: \( 100 \times 12 = \$1200 \), the goal)<div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 200 60" width="200" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="10" y="15" width="70" height="30" rx="6" fill="#e6f3ff" stroke="#4a90e2" stroke-width="1.5"/><text x="45" y="34" font-size="11" text-anchor="middle" fill="#1e3a5f">$1200 goal</text><line x1="85" y1="30" x2="120" y2="30" stroke="#9a5b00" stroke-width="2"/><text x="102" y="23" font-size="9" text-anchor="middle" fill="#9a5b00">÷12</text><rect x="130" y="15" width="70" height="30" rx="6" fill="#e7f7ef" stroke="#2e9e6e" stroke-width="1.5"/><text x="165" y="34" font-size="11" text-anchor="middle" fill="#1c5c43">$100/mo</text></svg></div></em></div></div>
+  <div class="example-box" style="background-color:#fff0f5;border-left:5px solid #c2185b;padding:12px 16px;margin:16px 0;border-radius:16px;"><h3>⭐ Example 5 (Challenge) — Absorbing a price rise</h3><p>Your phone bill rises from $45 to $60/month. By how much must other spending be cut to keep the same total, and what % increase was the bill?</p><div class="solution"><div class="step"><strong>Step 1:</strong> increase \( = 60 - 45 = \$15 \) → cut $15 elsewhere.</div><div class="step"><strong>Step 2:</strong> percent increase \( = 15/45 = 33.\overline{3}\% \).</div><em>✅ Cut $15; the bill rose about 33%.<div style="text-align:center;margin:10px 0;"><svg viewBox="0 0 200 60" width="200" style="max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><rect x="10" y="15" width="70" height="30" rx="6" fill="#e6f3ff" stroke="#4a90e2" stroke-width="1.5"/><text x="45" y="34" font-size="11" text-anchor="middle" fill="#1e3a5f">$45</text><line x1="85" y1="30" x2="120" y2="30" stroke="#c2185b" stroke-width="2"/><text x="102" y="23" font-size="9" text-anchor="middle" fill="#c2185b">+33%</text><rect x="130" y="15" width="70" height="30" rx="6" fill="#fde8ef" stroke="#c2185b" stroke-width="1.5"/><text x="165" y="34" font-size="11" text-anchor="middle" fill="#7a1044">$60</text></svg></div></em></div></div>
 
   <h2>🟡 Practice Questions</h2>
   <div class="practice-box" style="background-color:#fff7cc;border-left:5px solid #e69138;padding:12px 16px;margin:16px 0;border-radius:16px;"><h3>📝 Question 1</h3><p>Income $3000, expenses $2500. Find the surplus.</p><details><summary>🔎 Show Answer</summary><div class="solution"><div class="step">\( 3000 - 2500 = \$500 \).</div></div></details></div>

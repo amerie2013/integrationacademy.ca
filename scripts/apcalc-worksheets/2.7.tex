@@ -1,0 +1,77 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize\color{black!60}Worksheet 2.7}
+\begin{document}
+
+\wstitle{2.7}{Differentiating Products and Quotients}{Unit 2: The Derivative}
+
+\begin{ideabox}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+  \item \textbf{Product rule}: $(fg)'=f'g+fg'$. The derivative of a product is \emph{not} the product of the derivatives.
+  \item \textbf{Quotient rule}: $\left(\dfrac fg\right)'=\dfrac{f'g-fg'}{g^2}$. The order in the numerator matters.
+  \item With a table of values, substitute the numbers straight into the rule.
+  \item If a product or quotient can be simplified by algebra first, that is usually quicker.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked examples}
+\begin{example}{Example 1 \textperiodcentered{} A product}
+Find $\dfrac{d}{dx}\left[x^3e^{x}\right]$.\soln $3x^2e^{x}+x^3e^{x}$.\result{$e^{x}\left(x^3+3x^2\right)$.}
+\end{example}
+
+\begin{example}{Example 2 \textperiodcentered{} A quotient}
+Find $\dfrac{d}{dx}\left[\dfrac{2x+1}{x-3}\right]$.\soln $\dfrac{2(x-3)-(2x+1)(1)}{(x-3)^2}$.\result{$-\dfrac{7}{(x-3)^2}$.}
+\end{example}
+
+\begin{example}{Example 3 \textperiodcentered{} From values}
+Given $f(1)=2$, $f'(1)=3$, $g(1)=-4$ and $g'(1)=5$, find $(fg)'(1)$ and $\left(\dfrac fg\right)'(1)$.\soln $(fg)'(1)=3(-4)+2(5)$. \ $\left(\dfrac fg\right)'(1)=\dfrac{3(-4)-2(5)}{(-4)^2}$.\result{$-2$ and $-\dfrac{11}{8}$.}
+\end{example}
+
+\newpage
+\sech{Practice}
+
+\level{Core}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item Find $\dfrac{d}{dx}[x\sin x]$.\work{2.3cm}
+  \item Find $\dfrac{d}{dx}\left[x^2\ln x\right]$.\work{2.3cm}
+  \item Find $\dfrac{d}{dx}\left[\dfrac{x}{x+1}\right]$.\work{2.3cm}
+  \item Find $\dfrac{d}{dx}\left[e^{x}\cos x\right]$.\work{2.3cm}
+\end{enumerate}
+
+\level{Exam level}
+\begin{enumerate}[leftmargin=*,itemsep=2pt,start=5]
+  \item Find $\dfrac{d}{dx}\left[\dfrac{\cos x}{x}\right]$.\work{2.8cm}
+  \item Find $\dfrac{d}{dx}\left[\dfrac{x^2-1}{x^2+1}\right]$ in simplified form.\work{2.8cm}
+  \item A differentiable function $f$ has $f(2)=8$ and $f'(2)=-4$. Let $h(x)=\dfrac{f(x)}{x^2}$. Find $h'(2)$.\work{2.8cm}
+  \item At what value of $x$ does the graph of $y=(x-3)e^{x}$ have a horizontal tangent?\work{2.8cm}
+\end{enumerate}
+
+\begin{frbox}{Question 9 \textperiodcentered{} Free-response practice}
+Let $f(x)=\left(x^2-3\right)e^{x}$.
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=2pt]
+  \item Find $f'(x)$ in factored form.\work{2.6cm}
+  \item Find all values of $x$ at which the graph of $f$ has a horizontal tangent.\work{2.6cm}
+  \item Write an equation of the line tangent to the graph of $f$ at $x=0$.\work{2.6cm}
+\end{enumerate}
+\end{frbox}
+
+\newpage
+\begin{solbox}
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item $\sin x+x\cos x$.
+  \item $2x\ln x+x$.
+  \item $\dfrac{(x+1)-x}{(x+1)^2}=\dfrac{1}{(x+1)^2}$.
+  \item $e^{x}\cos x-e^{x}\sin x=e^{x}(\cos x-\sin x)$.
+  \item $\dfrac{-x\sin x-\cos x}{x^2}$.
+  \item $\dfrac{2x(x^2+1)-2x(x^2-1)}{(x^2+1)^2}=\dfrac{4x}{(x^2+1)^2}$.
+  \item $h'(x)=\dfrac{x^2f'(x)-2xf(x)}{x^4}$, so $h'(2)=\dfrac{4(-4)-4(8)}{16}=-3$.
+  \item $y'=e^{x}+(x-3)e^{x}=(x-2)e^{x}$, which is zero at $x=2$.
+  \item \begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=3pt]
+    \item $2xe^{x}+\left(x^2-3\right)e^{x}=\left(x^2+2x-3\right)e^{x}=(x+3)(x-1)e^{x}$.
+    \item $x=-3$ and $x=1$, since $e^{x}$ is never zero.
+    \item $f(0)=-3$ and $f'(0)=-3$: $y=-3x-3$.
+  \end{enumerate}
+\end{enumerate}
+\end{solbox}
+
+\end{document}

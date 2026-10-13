@@ -1,0 +1,77 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize\color{black!60}Worksheet 6.8}
+\begin{document}
+
+\wstitle{6.8}{Antiderivatives and the Basic Rules}{Unit 6: Integration and Accumulation of Change}
+
+\begin{ideabox}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+  \item $\displaystyle\int x^n\,dx=\dfrac{x^{n+1}}{n+1}+C$ for $n\neq-1$, and $\displaystyle\int\dfrac1x\,dx=\ln|x|+C$.
+  \item Every derivative formula read backwards is an antiderivative formula: $\displaystyle\int\sec^2x\,dx=\tan x+C$, and so on.
+  \item An indefinite integral always includes $+C$.
+  \item An initial condition fixes the constant. Two integrations need two conditions.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked examples}
+\begin{example}{Example 1 \textperiodcentered{} Term by term}
+Find $\displaystyle\int\left(6x^2-4x+5\right)dx$.\soln Raise each power by one and divide by the new power.\result{$2x^3-2x^2+5x+C$.}
+\end{example}
+
+\begin{example}{Example 2 \textperiodcentered{} Mixed functions}
+Find $\displaystyle\int\left(\dfrac3x-2e^{x}+\sec^2x\right)dx$.\soln Each term is a standard form.\result{$3\ln|x|-2e^{x}+\tan x+C$.}
+\end{example}
+
+\begin{example}{Example 3 \textperiodcentered{} With an initial condition}
+Given $f'(x)=3\sqrt{x}$ and $f(4)=10$, find $f(x)$.\soln $f(x)=2x^{3/2}+C$, and $2(8)+C=10$.\result{$f(x)=2x^{3/2}-6$.}
+\end{example}
+
+\newpage
+\sech{Practice}
+
+\level{Core}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item Find $\displaystyle\int x^5\,dx$.\work{2.3cm}
+  \item Find $\displaystyle\int\left(4x^3-1\right)dx$.\work{2.3cm}
+  \item Find $\displaystyle\int\cos x\,dx$.\work{2.3cm}
+  \item Find $\displaystyle\int\dfrac{1}{x^2}\,dx$.\work{2.3cm}
+\end{enumerate}
+
+\level{Exam level}
+\begin{enumerate}[leftmargin=*,itemsep=2pt,start=5]
+  \item Find $\displaystyle\int(x+1)(x-2)\,dx$.\work{2.8cm}
+  \item Find $\displaystyle\int\dfrac{x^2+4}{x}\,dx$.\work{2.8cm}
+  \item Find $\displaystyle\int\left(\csc^2x+\dfrac{1}{1+x^2}\right)dx$.\work{2.8cm}
+  \item Given $f''(x)=6x$, $f'(1)=5$ and $f(0)=2$, find $f(x)$.\work{2.8cm}
+\end{enumerate}
+
+\begin{frbox}{Question 9 \textperiodcentered{} Free-response practice}
+A particle moves along a line with acceleration $a(t)=6t-4$. At $t=0$ its velocity is 3 and its position is 1.
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=2pt]
+  \item Find the velocity $v(t)$.\work{2.6cm}
+  \item Find the position $x(t)$.\work{2.6cm}
+  \item Does the particle ever come to rest? Justify your answer.\work{2.6cm}
+\end{enumerate}
+\end{frbox}
+
+\newpage
+\begin{solbox}
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item $\dfrac{x^6}{6}+C$.
+  \item $x^4-x+C$.
+  \item $\sin x+C$.
+  \item $-\dfrac1x+C$.
+  \item $\displaystyle\int\left(x^2-x-2\right)dx=\dfrac{x^3}{3}-\dfrac{x^2}{2}-2x+C$.
+  \item $\displaystyle\int\left(x+\dfrac4x\right)dx=\dfrac{x^2}{2}+4\ln|x|+C$.
+  \item $-\cot x+\arctan x+C$.
+  \item $f'(x)=3x^2+C_1$ with $3+C_1=5$, so $f'(x)=3x^2+2$. Then $f(x)=x^3+2x+2$.
+  \item \begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=3pt]
+    \item $v(t)=3t^2-4t+C$ with $C=3$: $v(t)=3t^2-4t+3$.
+    \item $x(t)=t^3-2t^2+3t+1$.
+    \item No. $3t^2-4t+3=0$ has discriminant $16-36<0$, so $v(t)$ is never zero.
+  \end{enumerate}
+\end{enumerate}
+\end{solbox}
+
+\end{document}

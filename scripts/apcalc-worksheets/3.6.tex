@@ -1,0 +1,77 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize\color{black!60}Worksheet 3.6}
+\begin{document}
+
+\wstitle{3.6}{Second and Higher Derivatives}{Unit 3: Composite, Implicit and Inverse Functions}
+
+\begin{ideabox}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+  \item The second derivative is the derivative of the first: $f''(x)$, or $\dfrac{d^2y}{dx^2}$.
+  \item For motion: position $s$, velocity $s'$, acceleration $s''$.
+  \item Implicitly: differentiate $\dfrac{dy}{dx}$ with respect to $x$ (quotient rule), then \textbf{substitute} for $\dfrac{dy}{dx}$.
+  \item Repeated derivatives of $\sin$, $\cos$ and $e^{kx}$ follow patterns: use the pattern, do not differentiate fifty times.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked examples}
+\begin{example}{Example 1 \textperiodcentered{} A polynomial}
+Find $f''(x)$ for $f(x)=x^4-2x^3$.\soln $f'(x)=4x^3-6x^2$.\result{$f''(x)=12x^2-12x$.}
+\end{example}
+
+\begin{example}{Example 2 \textperiodcentered{} A pattern}
+Find the third derivative of $y=e^{3x}$, and a formula for the $n$th derivative.\soln Each derivative multiplies by 3.\result{$27e^{3x}$; in general $3^ne^{3x}$.}
+\end{example}
+
+\begin{example}{Example 3 \textperiodcentered{} Implicitly}
+Find $\dfrac{d^2y}{dx^2}$ for $x^2+y^2=9$.\soln $\dfrac{dy}{dx}=-\dfrac xy$. Then $\dfrac{d^2y}{dx^2}=-\dfrac{y-x\frac{dy}{dx}}{y^2}=-\dfrac{y+\frac{x^2}{y}}{y^2}=-\dfrac{x^2+y^2}{y^3}$.\result{$-\dfrac{9}{y^3}$.}
+\end{example}
+
+\newpage
+\sech{Practice}
+
+\level{Core}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item Find $f''(x)$ for $f(x)=5x^3-x$.\work{2.3cm}
+  \item Find $\dfrac{d^2y}{dx^2}$ for $y=\cos(2x)$.\work{2.3cm}
+  \item Find $\dfrac{d^2y}{dx^2}$ for $y=\ln x$.\work{2.3cm}
+  \item A particle has position $s(t)=t^3-3t^2$. Find its acceleration.\work{2.3cm}
+\end{enumerate}
+
+\level{Exam level}
+\begin{enumerate}[leftmargin=*,itemsep=2pt,start=5]
+  \item Find $f''(x)$ for $f(x)=x^2e^{x}$.\work{2.8cm}
+  \item Find $\dfrac{d^2y}{dx^2}$ for $y=\sin^2x$, in simplified form.\work{2.8cm}
+  \item For the curve $y^2=4x$, find $\dfrac{d^2y}{dx^2}$ at the point $(1,2)$.\work{2.8cm}
+  \item Find the fourth derivative of $y=\sin(2x)$.\work{2.8cm}
+\end{enumerate}
+
+\begin{frbox}{Question 9 \textperiodcentered{} Free-response practice}
+Consider the curve $x^2+2y^2=6$.
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=2pt]
+  \item Find $\dfrac{dy}{dx}$ in terms of $x$ and $y$.\work{2.6cm}
+  \item Show that $\dfrac{d^2y}{dx^2}=-\dfrac{3}{2y^3}$.\work{2.6cm}
+  \item Find the values of $\dfrac{dy}{dx}$ and $\dfrac{d^2y}{dx^2}$ at the point $(2,1)$. Is the curve concave up or concave down there?\work{2.6cm}
+\end{enumerate}
+\end{frbox}
+
+\newpage
+\begin{solbox}
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item $f'(x)=15x^2-1$, so $f''(x)=30x$.
+  \item $y'=-2\sin(2x)$, so $y''=-4\cos(2x)$.
+  \item $y'=\dfrac1x$, so $y''=-\dfrac{1}{x^2}$.
+  \item $s'(t)=3t^2-6t$, so $a(t)=6t-6$.
+  \item $f'(x)=\left(x^2+2x\right)e^{x}$, so $f''(x)=\left(x^2+4x+2\right)e^{x}$.
+  \item $y'=2\sin x\cos x=\sin(2x)$, so $y''=2\cos(2x)$.
+  \item $2y\dfrac{dy}{dx}=4$, so $\dfrac{dy}{dx}=\dfrac2y$ and $\dfrac{d^2y}{dx^2}=-\dfrac{2}{y^2}\dfrac{dy}{dx}=-\dfrac{4}{y^3}=-\dfrac12$.
+  \item Each pair of derivatives multiplies by $-4$: $16\sin(2x)$.
+  \item \begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=3pt]
+    \item $2x+4y\dfrac{dy}{dx}=0$, so $\dfrac{dy}{dx}=-\dfrac{x}{2y}$.
+    \item $\dfrac{d^2y}{dx^2}=-\dfrac{2y-2x\frac{dy}{dx}}{4y^2}=-\dfrac{2y+\frac{x^2}{y}}{4y^2}=-\dfrac{2y^2+x^2}{4y^3}=-\dfrac{6}{4y^3}$.
+    \item $\dfrac{dy}{dx}=-1$ and $\dfrac{d^2y}{dx^2}=-\dfrac32$. The second derivative is negative, so the curve is concave down.
+  \end{enumerate}
+\end{enumerate}
+\end{solbox}
+
+\end{document}

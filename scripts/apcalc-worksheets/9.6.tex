@@ -1,0 +1,77 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize\color{black!60}Worksheet 9.6}
+\begin{document}
+
+\wstitle{9.6}{Free-Response Type: Particle Motion}{Unit 9: Exam Strategy and Free-Response Types}
+
+\begin{ideabox}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+  \item The particle moves right when $v>0$ and left when $v<0$. It changes direction where $v$ changes sign.
+  \item Speed is increasing when $v$ and $a$ have the same sign.
+  \item Position: $x(b)=x(a)+\displaystyle\int_{a}^{b}v(t)\,dt$. Total distance: $\displaystyle\int_{a}^{b}|v(t)|\,dt$.
+  \item For \textquotedblleft{}farthest left\textquotedblright{} or \textquotedblleft{}farthest right\textquotedblright{}, compare positions at the endpoints and at each change of direction.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked examples}
+\begin{example}{Example 1 \textperiodcentered{} Changes of direction}
+A particle has $v(t)=t^2-5t+4$ for $0\le t\le6$ and $x(0)=2$. When does it change direction?\soln $v(t)=(t-1)(t-4)$ changes sign at both zeros.\result{At $t=1$ and $t=4$.}
+\end{example}
+
+\begin{example}{Example 2 \textperiodcentered{} Speeding up or slowing down}
+Is the particle speeding up or slowing down at $t=2$?\soln $v(2)=-2$ and $a(2)=2(2)-5=-1$.\result{Speeding up: $v$ and $a$ have the same sign.}
+\end{example}
+
+\begin{example}{Example 3 \textperiodcentered{} Position}
+Find the position of the particle at $t=4$.\soln $2+\displaystyle\int_{0}^{4}(t^2-5t+4)\,dt=2+\left(\dfrac{64}{3}-40+16\right)$.\result{$x(4)=-\dfrac23$.}
+\end{example}
+
+\newpage
+\sech{Practice}
+
+\level{Core}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item A particle has $v(t)=12-3t^2$ for $t\ge0$. When is it at rest?\work{2.3cm}
+  \item Find the acceleration of that particle at $t=1$.\work{2.3cm}
+  \item Find the displacement of that particle for $0\le t\le2$.\work{2.3cm}
+  \item Find the total distance that particle travels for $0\le t\le3$.\work{2.3cm}
+\end{enumerate}
+
+\level{Exam level}
+\begin{enumerate}[leftmargin=*,itemsep=2pt,start=5]
+  \item \emph{Calculator.} A particle has $v(t)=\ln\!\left(t^2+1\right)-1.5$ for $0\le t\le5$, and $x(0)=4$. Find the time at which it changes direction. Justify your answer.\work{2.8cm}
+  \item \emph{Calculator.} Find the acceleration of that particle at $t=3$. Is its speed increasing or decreasing then?\work{2.8cm}
+  \item \emph{Calculator.} Find the position of that particle at $t=5$.\work{2.8cm}
+  \item \emph{Calculator.} Find the total distance that particle travels for $0\le t\le5$.\work{2.8cm}
+\end{enumerate}
+
+\begin{frbox}{Question 9 \textperiodcentered{} Free-response practice}
+\emph{No calculator.} A particle moves along the $x$-axis with velocity $v(t)=6-3\sqrt{t}$ for $0\le t\le9$. At time $t=0$ its position is $x=-5$.
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=2pt]
+  \item Find the time at which the particle is at rest, and the direction in which it moves before that time.\work{2.6cm}
+  \item Find the position of the particle at $t=9$.\work{2.6cm}
+  \item Find the total distance travelled for $0\le t\le9$, and the acceleration of the particle at $t=4$.\work{2.6cm}
+\end{enumerate}
+\end{frbox}
+
+\newpage
+\begin{solbox}
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item $t=2$.
+  \item $a(t)=-6t$, so $a(1)=-6$.
+  \item $\Big[12t-t^3\Big]_0^2=16$.
+  \item Displacement on $[2,3]$ is $(36-27)-16=-7$. Distance $16+7=23$.
+  \item $v(t)=0$ at $t\approx1.866$, where $v$ changes from negative to positive.
+  \item $a(3)=\dfrac{2(3)}{10}=0.6$, and $v(3)\approx0.803>0$. The speed is increasing, since $v$ and $a$ are both positive.
+  \item $4+\displaystyle\int_{0}^{5}v(t)\,dt\approx5.537$.
+  \item $\displaystyle\int_{0}^{5}|v(t)|\,dt\approx4.686$.
+  \item \begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=3pt]
+    \item $6-3\sqrt t=0$ at $t=4$. For $0\le t<4$, $v>0$: the particle moves to the right.
+    \item $-5+\Big[6t-2t^{3/2}\Big]_0^9=-5+(54-54)=-5$.
+    \item Displacement on $[0,4]$ is $24-16=8$ and on $[4,9]$ is $-8$: distance 16. $a(t)=-\dfrac{3}{2\sqrt t}$, so $a(4)=-\dfrac34$.
+  \end{enumerate}
+\end{enumerate}
+\end{solbox}
+
+\end{document}

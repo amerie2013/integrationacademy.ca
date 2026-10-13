@@ -1,0 +1,77 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize\color{black!60}Worksheet 9.4}
+\begin{document}
+
+\wstitle{9.4}{Free-Response Type: Rates and Accumulation}{Unit 9: Exam Strategy and Free-Response Types}
+
+\begin{ideabox}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+  \item An integral of a rate is an amount. Its units are the units of the rate times the units of time.
+  \item Amount at time $t$ $=$ starting amount $+$ integral of (rate in $-$ rate out).
+  \item The derivative of a rate tells how fast the rate itself is changing: units per time, per time.
+  \item For a greatest or least amount, compare the endpoints with every time at which rate in $=$ rate out.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked examples}
+\begin{example}{Example 1 \textperiodcentered{} An amount}
+A bath fills at $R(t)=20-2t$ litres per minute for $0\le t\le10$. How much water enters in the first 5 minutes?\soln $\displaystyle\int_{0}^{5}(20-2t)\,dt=100-25$.\result{75 litres.}
+\end{example}
+
+\begin{example}{Example 2 \textperiodcentered{} An average rate}
+Find the average rate at which the bath fills for $0\le t\le10$.\soln $\dfrac{1}{10}\displaystyle\int_{0}^{10}(20-2t)\,dt=\dfrac{100}{10}$.\result{10 litres per minute.}
+\end{example}
+
+\begin{example}{Example 3 \textperiodcentered{} The derivative of a rate}
+Find $R'(4)$ and interpret it.\soln $R'(t)=-2$.\result{The rate of filling is decreasing at 2 litres per minute per minute.}
+\end{example}
+
+\newpage
+\sech{Practice}
+\emph{A calculator is required on this page. Give decimal answers to three places.}
+\level{Core}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item $r(t)$ is measured in people per hour and $t$ in hours. What are the units of $\displaystyle\int_{2}^{5}r(t)\,dt$?\work{2.3cm}
+  \item With the same units, what are the units of $r'(t)$?\work{2.3cm}
+  \item A tank holds 200 litres at $t=0$. Water enters at $f(t)$ and leaves at $g(t)$ litres per minute. Write an expression for the amount in the tank at time $t$.\work{2.3cm}
+  \item Explain in words the meaning of $\dfrac15\displaystyle\int_{0}^{5}r(t)\,dt$, where $r(t)$ is in people per hour.\work{2.3cm}
+\end{enumerate}
+
+\level{Exam level}
+\begin{enumerate}[leftmargin=*,itemsep=2pt,start=5]
+  \item Visitors enter a gallery at $E(t)=60te^{-0.3t}$ people per hour and leave at $L(t)=25+3t$ people per hour, for $0\le t\le9$. There are 100 visitors at $t=0$. How many visitors enter for $0\le t\le9$?\work{2.8cm}
+  \item Is the number of visitors in the gallery increasing or decreasing at $t=6$? Give a reason.\work{2.8cm}
+  \item Find $E'(2)$, and interpret it in context with units.\work{2.8cm}
+  \item Find the greatest number of visitors in the gallery for $0\le t\le9$. Justify your answer.\work{2.8cm}
+\end{enumerate}
+
+\begin{frbox}{Question 9 \textperiodcentered{} Free-response practice}
+Parcels arrive at a depot at the rate $A(t)=150+60\sin\!\left(\dfrac{\pi t}{6}\right)$ parcels per hour and are sorted at a constant rate of 160 parcels per hour, for $0\le t\le8$. At $t=0$ there are 200 unsorted parcels.
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=2pt]
+  \item How many parcels arrive for $0\le t\le8$?\work{2.6cm}
+  \item Is the number of unsorted parcels increasing or decreasing at $t=4$? Give a reason.\work{2.6cm}
+  \item Find the greatest number of unsorted parcels for $0\le t\le8$. Justify your answer.\work{2.6cm}
+\end{enumerate}
+\end{frbox}
+
+\newpage
+\begin{solbox}
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item People.
+  \item People per hour per hour.
+  \item $200+\displaystyle\int_{0}^{t}\big(f(x)-g(x)\big)\,dx$.
+  \item The average rate, in people per hour, over the first 5 hours.
+  \item $\displaystyle\int_{0}^{9}E(t)\,dt\approx500.893$, about 501 visitors.
+  \item Increasing: $E(6)\approx59.508>L(6)=43$.
+  \item $E'(2)\approx13.171$. At $t=2$ hours, the rate at which visitors enter is increasing at about 13.171 people per hour per hour.
+  \item $E(t)=L(t)$ at $t\approx0.517$ and $t\approx7.494$. Numbers: 100 at $t=0$; about 93.910 at $t\approx0.517$; about 266.427 at $t\approx7.494$; about 254.393 at $t=9$. The greatest is about 266 visitors.
+  \item \begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=3pt]
+    \item $\displaystyle\int_{0}^{8}A(t)\,dt\approx1371.887$ parcels.
+    \item Increasing: $A(4)-160\approx41.962>0$.
+    \item $A(t)=160$ at $t\approx0.320$ and $t\approx5.680$. Unsorted parcels: 200 at $t=0$; about 198.405 at $t\approx0.320$; $200+\displaystyle\int_{0}^{5.68}\big(A(t)-160\big)\,dt\approx370.778$ at $t\approx5.680$; about 291.887 at $t=8$. The greatest is about 371 parcels.
+  \end{enumerate}
+\end{enumerate}
+\end{solbox}
+
+\end{document}

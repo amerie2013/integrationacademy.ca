@@ -34,6 +34,38 @@ function inline(text: string): React.ReactNode[] {
 export function AssignmentBody({ text }: { text: string }) {
   if (!text) return <p style={{ color: "#94a3b8" }}>No instructions provided.</p>;
   const lines = text.split(/\n/).map((s) => s.trim()).filter(Boolean);
+
+  // Exam-format free response: a "Free response · 9 points · …" header line,
+  // the stem, then lettered parts "(a) …". Laid out like an exam page.
+  if (/^free response\b/i.test(lines[0] ?? "")) {
+    const chips = lines[0].split("·").map((s) => s.trim()).filter(Boolean);
+    return (
+      <div style={{ color: "#1e293b", fontSize: 16 }}>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 14 }}>
+          {chips.map((c, i) => (
+            <span key={i} style={{ fontSize: 12, fontWeight: 700, letterSpacing: 0.3, color: i ? "#334155" : "#fff", background: i ? "#f1f5f9" : "#1e2a4a", border: `1px solid ${i ? "#e2e8f0" : "#1e2a4a"}`, borderRadius: 6, padding: "4px 10px" }}>{c}</span>
+          ))}
+        </div>
+        {lines.slice(1).map((line, i) => {
+          const m = line.match(/^\(([a-z])\)\s*([\s\S]*)$/);
+          if (!m) {
+            const alone = /^\$[^$]+\$$/.test(line); // a table or display on its own line
+            return <p key={i} style={{ margin: "0 0 12px", lineHeight: 1.7, textAlign: alone ? "center" : undefined, overflowX: "auto" }}>{inline(line)}</p>;
+          }
+          return (
+            <div key={i} style={{ display: "flex", gap: 12, padding: "10px 0", borderTop: "1px solid #e2e8f0" }}>
+              <span style={{ fontWeight: 700, color: "#1e2a4a", minWidth: 26 }}>({m[1]})</span>
+              <span style={{ lineHeight: 1.7 }}>{inline(m[2])}</span>
+            </div>
+          );
+        })}
+        <p style={{ margin: "14px 0 0", fontSize: 13, color: "#64748b", lineHeight: 1.6, borderTop: "1px solid #e2e8f0", paddingTop: 10 }}>
+          Show all your work. Each part is scored point by point on the working and reasoning shown, not on the final answer alone. Time yourself and work without notes.
+        </p>
+      </div>
+    );
+  }
+
   const structured = lines.some((l) => catFor(l)) || lines.some((l) => /^\d+\./.test(l));
 
   if (!structured) {

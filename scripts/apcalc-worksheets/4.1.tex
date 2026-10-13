@@ -1,0 +1,77 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize\color{black!60}Worksheet 4.1}
+\begin{document}
+
+\wstitle{4.1}{What a Derivative Means, in Words and Units}{Unit 4: Derivatives in Context}
+
+\begin{ideabox}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+  \item $f'(a)$ is the \textbf{rate} at which $f$ is changing at the instant $x=a$. Its units are the units of $f$ per unit of $x$.
+  \item A complete interpretation names the instant, the quantity, whether it is increasing or decreasing, the rate (as a positive number) and the units.
+  \item If $f$ is itself a rate, $f'$ is a rate of change of a rate: for example litres per minute \emph{per minute}.
+  \item A value and a rate give a nearby estimate: $f(a+h)\approx f(a)+f'(a)\,h$.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked examples}
+\begin{example}{Example 1 \textperiodcentered{} Interpreting}
+The cost of producing $q$ kilograms of flour is $C(q)$ dollars. Interpret $C'(40)=3.5$.\soln The units are dollars per kilogram, at the production level $q=40$.\result{When 40 kg are being produced, the cost is increasing at 3.5 dollars per additional kilogram.}
+\end{example}
+
+\begin{example}{Example 2 \textperiodcentered{} Estimating}
+A plant has height $h(t)$ cm after $t$ weeks, with $h(6)=30$ and $h'(6)=2.5$. Estimate its height at 8 weeks.\soln $h(8)\approx30+2.5(2)$.\result{About 35 cm.}
+\end{example}
+
+\begin{example}{Example 3 \textperiodcentered{} A rate of a rate}
+A car's velocity is $v(t)$ metres per second at time $t$ seconds. State the units of $v'(3)$ and interpret $v'(3)=-1.2$.\soln Metres per second per second.\result{At $t=3$ seconds the velocity is decreasing at 1.2 metres per second each second.}
+\end{example}
+
+\newpage
+\sech{Practice}
+
+\level{Core}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item The volume of water in a tank is $V$ litres at time $t$ hours. State the units of $\dfrac{dV}{dt}$.\work{2.3cm}
+  \item The temperature of a drink is $T(t)$ degrees Celsius after $t$ minutes. Interpret $T'(15)=-0.8$.\work{2.3cm}
+  \item Given $A(20)=150$ and $A'(20)=4$, estimate $A(22)$.\work{2.3cm}
+  \item What does $f'(5)<0$ tell you about $f$ at $x=5$?\work{2.3cm}
+\end{enumerate}
+
+\level{Exam level}
+\begin{enumerate}[leftmargin=*,itemsep=2pt,start=5]
+  \item The revenue from selling $x$ items is $R(x)$ dollars. Interpret $R'(100)=1.5$.\work{2.8cm}
+  \item A car has $F(t)$ litres of fuel in its tank after $t$ hours of driving. Interpret $F'(2)=-7$.\work{2.8cm}
+  \item Gas flows into a cylinder at the rate $G(t)$ litres per minute. State the units of $G'(4)$ and interpret $G'(4)=0.3$.\work{2.8cm}
+  \item A patient's weight is $W(t)$ kg after $t$ weeks, with $W(10)=65$, $W'(10)=-0.5$ and $W''(10)=0.02$. Estimate $W(12)$, and say whether the weight loss is speeding up or slowing down at $t=10$.\work{2.8cm}
+\end{enumerate}
+
+\begin{frbox}{Question 9 \textperiodcentered{} Free-response practice}
+The depth of snow on a field is $S(t)$ centimetres, where $t$ is the number of hours after midnight and $S$ is differentiable with a continuous derivative. It is known that $S(3)=12$, $S'(3)=1.8$ and $S'(9)=-0.6$.
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=2pt]
+  \item Using correct units, interpret $S'(3)=1.8$.\work{2.6cm}
+  \item Use a tangent line to estimate the depth of snow at $t=4$.\work{2.6cm}
+  \item Explain why there must be a time between $t=3$ and $t=9$ at which the depth of snow is neither increasing nor decreasing.\work{2.6cm}
+\end{enumerate}
+\end{frbox}
+
+\newpage
+\begin{solbox}
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item Litres per hour.
+  \item At $t=15$ minutes the temperature of the drink is decreasing at 0.8 degrees Celsius per minute.
+  \item $150+4(2)=158$.
+  \item $f$ is decreasing at $x=5$.
+  \item When 100 items have been sold, revenue is increasing at 1.5 dollars per additional item.
+  \item After 2 hours of driving, the amount of fuel in the tank is decreasing at 7 litres per hour.
+  \item Litres per minute per minute. At $t=4$ minutes the rate at which gas flows in is increasing by 0.3 litres per minute each minute.
+  \item $W(12)\approx65-0.5(2)=64$ kg. The rate $W'$ is negative and increasing (becoming less negative), so the weight loss is slowing down.
+  \item \begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=3pt]
+    \item At 3 a.m. the depth of snow is increasing at 1.8 centimetres per hour.
+    \item $S(4)\approx12+1.8(1)=13.8$ cm.
+    \item $S'$ is continuous with $S'(3)>0$ and $S'(9)<0$, so by the Intermediate Value Theorem $S'(c)=0$ for some $c$ between 3 and 9.
+  \end{enumerate}
+\end{enumerate}
+\end{solbox}
+
+\end{document}

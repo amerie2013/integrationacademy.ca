@@ -1,0 +1,77 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize\color{black!60}Worksheet 4.6}
+\begin{document}
+
+\wstitle{4.6}{Tangent-Line Approximation}{Unit 4: Derivatives in Context}
+
+\begin{ideabox}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+  \item Near $x=a$, \ $f(x)\approx L(x)=f(a)+f'(a)(x-a)$: the tangent line stands in for the curve.
+  \item Choose $a$ where $f(a)$ and $f'(a)$ are easy and close to the value wanted.
+  \item If the graph is \textbf{concave up} near $a$, the tangent line lies below it: an \textbf{underestimate}. Concave down: an \textbf{overestimate}.
+  \item Justify over or under with the sign of $f''$ on the interval, never with the sign of $f'$.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked examples}
+\begin{example}{Example 1 \textperiodcentered{} A square root}
+Use a tangent line to approximate $\sqrt{26}$.\soln $f(x)=\sqrt x$ at $a=25$: $f(25)=5$, $f'(25)=\dfrac{1}{10}$.\result{$\sqrt{26}\approx5+\dfrac{1}{10}(1)=5.1$.}
+\end{example}
+
+\begin{example}{Example 2 \textperiodcentered{} Over or under}
+Use the tangent line to $f(x)=\sin x$ at $x=0$ to approximate $\sin(0.1)$. Is it an overestimate?\soln $L(x)=x$, so $\sin(0.1)\approx0.1$. $f''(x)=-\sin x<0$ for $0<x<0.1$.\result{$0.1$, an overestimate: the graph is concave down there.}
+\end{example}
+
+\begin{example}{Example 3 \textperiodcentered{} From values}
+Given $f(2)=7$ and $f'(2)=-3$, approximate $f(2.2)$.\soln $7+(-3)(0.2)$.\result{$6.4$.}
+\end{example}
+
+\newpage
+\sech{Practice}
+
+\level{Core}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item Write the tangent-line approximation $L(x)$ for $f(x)=x^3$ at $x=2$.\work{2.3cm}
+  \item Use your answer to Question 1 to approximate $(2.1)^3$.\work{2.3cm}
+  \item Given $f(5)=4$ and $f'(5)=0.5$, approximate $f(4.8)$.\work{2.3cm}
+  \item A graph is concave up near $x=a$. Is a tangent-line approximation there an overestimate or an underestimate?\work{2.3cm}
+\end{enumerate}
+
+\level{Exam level}
+\begin{enumerate}[leftmargin=*,itemsep=2pt,start=5]
+  \item Use the tangent line to $f(x)=\dfrac1x$ at $x=2$ to approximate $\dfrac{1}{2.1}$. Is it an overestimate or an underestimate? Justify.\work{2.8cm}
+  \item Use the tangent line to $f(x)=\ln x$ at $x=1$ to approximate $\ln(0.9)$. Is it an overestimate or an underestimate? Justify.\work{2.8cm}
+  \item A function has $f(1)=2$ and $f'(x)=x^2+\ln x$ for $x>0$. Approximate $f(1.1)$ and say whether the approximation is an overestimate or an underestimate.\work{2.8cm}
+  \item The point $(3,1)$ lies on the curve $x^2+y^3=10$. Use the tangent line there to approximate the $y$-coordinate of the point on the curve with $x=3.1$.\work{2.8cm}
+\end{enumerate}
+
+\begin{frbox}{Question 9 \textperiodcentered{} Free-response practice}
+Let $f(x)=\tan x$ for $-\dfrac\pi2<x<\dfrac\pi2$.
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=2pt]
+  \item Write an equation of the line tangent to the graph of $f$ at $x=\dfrac\pi4$.\work{2.6cm}
+  \item Use the tangent line to approximate $\tan\!\left(\dfrac\pi4+0.05\right)$.\work{2.6cm}
+  \item Is the approximation in part (b) an overestimate or an underestimate? Justify your answer.\work{2.6cm}
+\end{enumerate}
+\end{frbox}
+
+\newpage
+\begin{solbox}
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item $L(x)=8+12(x-2)$.
+  \item $8+12(0.1)=9.2$.
+  \item $4+0.5(-0.2)=3.9$.
+  \item An underestimate.
+  \item $f(2)=\dfrac12$, $f'(2)=-\dfrac14$: $0.5-0.25(0.1)=0.475$. $f''(x)=\dfrac{2}{x^3}>0$, so concave up: an underestimate.
+  \item $L(x)=x-1$, so $\ln(0.9)\approx-0.1$. $f''(x)=-\dfrac{1}{x^2}<0$, so concave down: an overestimate.
+  \item $f'(1)=1$, so $f(1.1)\approx2.1$. $f''(x)=2x+\dfrac1x>0$ near 1: an underestimate.
+  \item $2x+3y^2\dfrac{dy}{dx}=0$ gives $\dfrac{dy}{dx}=-\dfrac{6}{3}=-2$ at $(3,1)$, so $y\approx1-2(0.1)=0.8$.
+  \item \begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=3pt]
+    \item $f\!\left(\dfrac\pi4\right)=1$ and $f'\!\left(\dfrac\pi4\right)=\sec^2\dfrac\pi4=2$: $y=1+2\left(x-\dfrac\pi4\right)$.
+    \item $1+2(0.05)=1.1$.
+    \item $f''(x)=2\sec^2x\tan x>0$ for $x$ near $\dfrac\pi4$, so the graph is concave up and the tangent line lies below it: an underestimate.
+  \end{enumerate}
+\end{enumerate}
+\end{solbox}
+
+\end{document}

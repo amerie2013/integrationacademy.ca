@@ -2,9 +2,11 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { supabase } from "../../../lib/supabase";
 
 export default function ResetPasswordPage() {
+  const t = useTranslations("resetPassword");
   const router = useRouter();
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -13,7 +15,7 @@ export default function ResetPasswordPage() {
 
   async function submit() {
     if (password.length < 6) {
-      setError("Password must be at least 6 characters.");
+      setError(t("errMinLength"));
       return;
     }
     setLoading(true);
@@ -41,7 +43,7 @@ export default function ResetPasswordPage() {
         }}
       >
         <h1 style={{ fontFamily: "Fraunces, serif", fontSize: 24, fontWeight: 700, margin: "0 0 18px" }}>
-          Set a new password
+          {t("title")}
         </h1>
         {error && (
           <div style={{ background: "#fef2f2", border: "1px solid #fecaca", borderRadius: 10, padding: "10px 14px", color: "#dc2626", fontSize: 13, fontWeight: 600, marginBottom: 16 }}>
@@ -50,7 +52,7 @@ export default function ResetPasswordPage() {
         )}
         {done ? (
           <div style={{ background: "#ecfdf5", border: "1px solid #a7f3d0", borderRadius: 10, padding: "12px 14px", color: "#065f46", fontSize: 14, fontWeight: 600, textAlign: "center" }}>
-            Password updated — redirecting to sign in…
+            {t("success")}
           </div>
         ) : (
           <>
@@ -58,7 +60,7 @@ export default function ResetPasswordPage() {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="New password"
+              placeholder={t("placeholder")}
               style={{ width: "100%", padding: "11px 14px", borderRadius: 10, border: "1px solid #cbd5e1", fontSize: 15, outline: "none", fontFamily: "inherit", marginBottom: 14 }}
             />
             <button
@@ -66,7 +68,7 @@ export default function ResetPasswordPage() {
               disabled={loading}
               style={{ width: "100%", background: loading ? "#a5b4fc" : "#1b7a44", color: "#fff", border: "none", borderRadius: 10, padding: "13px", fontWeight: 700, fontSize: 16, cursor: loading ? "not-allowed" : "pointer" }}
             >
-              {loading ? "Saving…" : "Update password"}
+              {loading ? t("saving") : t("submit")}
             </button>
           </>
         )}

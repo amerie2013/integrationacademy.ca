@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { SITE_TRADEMARK_NOTICE } from "../lib/courseNotice";
 
 const col: React.CSSProperties = { display: "flex", flexDirection: "column", gap: 8 };
 const head: React.CSSProperties = { fontSize: 13, fontWeight: 800, letterSpacing: "0.06em", textTransform: "uppercase", color: "#0d5c30", margin: "0 0 4px" };
@@ -40,6 +41,7 @@ export function SiteFooter() {
       </div>
       <div style={{ borderTop: "1px solid var(--border, #e2e8f0)", padding: "16px 28px", textAlign: "center", color: "#94a3b8", fontSize: 13.5 }}>
         © {new Date().getFullYear()} Integration Academy · integrationacademy.ca · Made in Ontario, Canada 🇨🇦
+        <div style={{ fontSize: 12, marginTop: 6 }}>{SITE_TRADEMARK_NOTICE}</div>
       </div>
       <style>{`@media (max-width:760px){.ia-foot-grid{grid-template-columns:1fr 1fr !important;gap:24px !important;}}`}</style>
     </footer>

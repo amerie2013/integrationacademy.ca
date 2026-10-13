@@ -1,0 +1,77 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize\color{black!60}Worksheet 6.7}
+\begin{document}
+
+\wstitle{6.7}{The Fundamental Theorem, Part 2: Evaluating Integrals}{Unit 6: Integration and Accumulation of Change}
+
+\begin{ideabox}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+  \item \textbf{Fundamental Theorem, Part 2.} If $F'=f$, then $\displaystyle\int_{a}^{b}f(x)\,dx=F(b)-F(a)$.
+  \item Write the antiderivative in brackets with the limits, then substitute: upper limit first.
+  \item $\displaystyle\int_{a}^{b}f'(x)\,dx=f(b)-f(a)$: the integral of a rate of change is the net change. So $f(b)=f(a)+\displaystyle\int_{a}^{b}f'(x)\,dx$.
+  \item For an absolute value or a piecewise function, split the interval where the formula changes.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked examples}
+\begin{example}{Example 1 \textperiodcentered{} A polynomial}
+Evaluate $\displaystyle\int_{0}^{2}\left(3x^2+2x\right)\,dx$.\soln $\Big[x^3+x^2\Big]_0^2=(8+4)-0$.\result{$12$.}
+\end{example}
+
+\begin{example}{Example 2 \textperiodcentered{} A trigonometric function}
+Evaluate $\displaystyle\int_{\pi/6}^{\pi/2}\cos x\,dx$.\soln $\Big[\sin x\Big]_{\pi/6}^{\pi/2}=1-\dfrac12$.\result{$\dfrac12$.}
+\end{example}
+
+\begin{example}{Example 3 \textperiodcentered{} A value from a rate}
+Given $f(1)=4$ and $f'(x)=2x+3$, find $f(3)$.\soln $f(3)=4+\displaystyle\int_{1}^{3}(2x+3)\,dx=4+\Big[x^2+3x\Big]_1^3=4+(18-4)$.\result{$18$.}
+\end{example}
+
+\newpage
+\sech{Practice}
+
+\level{Core}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item Evaluate $\displaystyle\int_{1}^{3}2x\,dx$.\work{2.3cm}
+  \item Evaluate $\displaystyle\int_{1}^{4}\dfrac{1}{\sqrt{x}}\,dx$.\work{2.3cm}
+  \item Evaluate $\displaystyle\int_{0}^{\ln2}e^{x}\,dx$.\work{2.3cm}
+  \item Evaluate $\displaystyle\int_{1}^{2}\dfrac{3}{x^2}\,dx$.\work{2.3cm}
+\end{enumerate}
+
+\level{Exam level}
+\begin{enumerate}[leftmargin=*,itemsep=2pt,start=5]
+  \item Evaluate $\displaystyle\int_{1}^{8}\sqrt[3]{x}\,dx$.\work{2.8cm}
+  \item Evaluate $\displaystyle\int_{0}^{\pi/3}\sec x\tan x\,dx$.\work{2.8cm}
+  \item Let $f(x)=x^2$ for $x\le2$ and $f(x)=4$ for $x>2$. Evaluate $\displaystyle\int_{0}^{5}f(x)\,dx$.\work{2.8cm}
+  \item A particle has velocity $v(t)=3t^2-6t$ and position $x(0)=2$. Find $x(3)$.\work{2.8cm}
+\end{enumerate}
+
+\begin{frbox}{Question 9 \textperiodcentered{} Free-response practice}
+Answer each part. No calculator is permitted.
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=2pt]
+  \item Evaluate $\displaystyle\int_{1}^{e}\left(\dfrac2x+1\right)\,dx$.\work{2.6cm}
+  \item A function $f$ has $f(0)=5$ and $f'(x)=4\cos x$. Find $f\!\left(\dfrac\pi2\right)$.\work{2.6cm}
+  \item Find the area of the region under $y=4-x^2$ and above the $x$-axis for $0\le x\le2$.\work{2.6cm}
+\end{enumerate}
+\end{frbox}
+
+\newpage
+\begin{solbox}
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item $\Big[x^2\Big]_1^3=8$.
+  \item $\Big[2\sqrt x\Big]_1^4=4-2=2$.
+  \item $e^{\ln2}-e^0=1$.
+  \item $\Big[-\dfrac3x\Big]_1^2=-\dfrac32+3=\dfrac32$.
+  \item $\Big[\dfrac34x^{4/3}\Big]_1^8=\dfrac34(16-1)=\dfrac{45}{4}$.
+  \item $\Big[\sec x\Big]_0^{\pi/3}=2-1=1$.
+  \item $\displaystyle\int_{0}^{2}x^2\,dx+\displaystyle\int_{2}^{5}4\,dx=\dfrac83+12=\dfrac{44}{3}$.
+  \item $2+\Big[t^3-3t^2\Big]_0^3=2+0=2$.
+  \item \begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=3pt]
+    \item $\Big[2\ln x+x\Big]_1^e=(2+e)-(0+1)=e+1$.
+    \item $5+\displaystyle\int_{0}^{\pi/2}4\cos x\,dx=5+4=9$.
+    \item $\Big[4x-\dfrac{x^3}{3}\Big]_0^2=8-\dfrac83=\dfrac{16}{3}$.
+  \end{enumerate}
+\end{enumerate}
+\end{solbox}
+
+\end{document}

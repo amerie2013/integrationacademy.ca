@@ -11,15 +11,36 @@ export default [
     intro: r`A vector has magnitude and direction (velocity, force); a scalar has magnitude only (speed, mass). Equal vectors share magnitude and direction; $-\vec v$ reverses direction.`,
     ideas: [r`Vector = magnitude + direction; scalar = magnitude only.`, r`Equal vectors: same magnitude and direction (position-free).`, r`Directions via bearings ($N30^\circ E$, $030^\circ$).`],
     examples: [
-      { t: "Vector or scalar", body: r`Classify velocity, speed, force, temperature, displacement.\soln Vectors: velocity, force, displacement. Scalars: speed, temperature.` },
-      { t: "Magnitude & direction", body: r`A plane flies 500 km at $N60^\circ E$.\soln Magnitude $500$ km; direction $N60^\circ E$.` },
-      { t: "Equal vectors", body: r`When are two displacement vectors equal?\soln When they share magnitude and direction — location is irrelevant.` },
-      { t: "Opposite vector", body: r`If $\vec v$ is 8 m/s east, describe $-\vec v$.\soln 8 m/s west.` },
-      { t: "Bearing", body: r`Express "$40^\circ$ east of north" as a true bearing.\soln $040^\circ$.` },
-      { t: "Vector or scalar", body: r`Is acceleration a vector or scalar?\soln Vector.` },
-      { t: "Vector or scalar", body: r`Is mass a vector or scalar?\soln Scalar.` },
-      { t: "Opposite", body: r`Describe $-\vec v$ if $\vec v$ is 10 N north.\soln 10 N south.` },
-      { t: "Bearing", body: r`Write $N75^\circ E$ as a true bearing.\soln $075^\circ$.` },
+      { t: "Vector or scalar", body: r`Classify velocity, speed, force, temperature, displacement.\soln
+\textbf{Step 1 (ask whether direction matters for each quantity):} velocity, force, and displacement all depend on which way they point; speed and temperature do not.\\[3pt]
+\textbf{Conclusion:} vectors: velocity, force, displacement. Scalars: speed, temperature.` },
+      { t: "Magnitude & direction", body: r`A plane flies 500 km at $N60^\circ E$.\soln
+\textbf{Step 1 (identify the magnitude):} the distance travelled is $500$ km.\\[3pt]
+\textbf{Step 2 (identify the direction):} the bearing $N60^\circ E$ means $60^\circ$ measured from north, toward east.\\[3pt]
+\textbf{Conclusion:} magnitude $500$ km; direction $N60^\circ E$.` },
+      { t: "Equal vectors", body: r`When are two displacement vectors equal?\soln
+\textbf{Step 1 (recall what defines a vector):} magnitude and direction, not position.\\[3pt]
+\textbf{Conclusion:} two vectors are equal exactly when they share magnitude and direction --- where they're drawn doesn't matter.` },
+      { t: "Opposite vector", body: r`If $\vec v$ is 8 m/s east, describe $-\vec v$.\soln
+\textbf{Step 1 (recall what $-\vec v$ means):} same magnitude, reversed direction.\\[3pt]
+\textbf{Step 2 (apply it):} magnitude stays $8$ m/s; east reverses to west.\\[3pt]
+\textbf{Conclusion:} $-\vec v$ is 8 m/s west.` },
+      { t: "Bearing", body: r`Express "$40^\circ$ east of north" as a true bearing.\soln
+\textbf{Step 1 (recall true bearing format):} measured clockwise from north, as a 3-digit angle.\\[3pt]
+\textbf{Step 2 (convert):} "$40^\circ$ east of north" is already $40^\circ$ clockwise from north.\\[3pt]
+\textbf{Conclusion:} $040^\circ$.` },
+      { t: "Vector or scalar", body: r`Is acceleration a vector or scalar?\soln
+\textbf{Step 1 (ask if direction matters):} acceleration has a direction (the way the velocity is changing).\\[3pt]
+\textbf{Conclusion:} vector.` },
+      { t: "Vector or scalar", body: r`Is mass a vector or scalar?\soln
+\textbf{Step 1 (ask if direction matters):} mass is just an amount, with no direction.\\[3pt]
+\textbf{Conclusion:} scalar.` },
+      { t: "Opposite", body: r`Describe $-\vec v$ if $\vec v$ is 10 N north.\soln
+\textbf{Step 1 (keep the magnitude, reverse the direction):} $10$ N stays the same; north reverses to south.\\[3pt]
+\textbf{Conclusion:} $-\vec v$ is 10 N south.` },
+      { t: "Bearing", body: r`Write $N75^\circ E$ as a true bearing.\soln
+\textbf{Step 1 (convert from N-E form to true bearing):} $N75^\circ E$ means $75^\circ$ clockwise from north.\\[3pt]
+\textbf{Conclusion:} $075^\circ$.` },
     ],
     questions: [
       { ask: r`Is force a vector or a scalar?` },
@@ -43,15 +64,42 @@ export default [
     intro: r`Add tip-to-tail (triangle law); subtract via $\vec a-\vec b=\vec a+(-\vec b)$; scale by $k$ to change length (and flip if $k<0$).`,
     ideas: [r`Addition: tip-to-tail; resultant from first tail to last tip.`, r`Subtraction: $\vec a-\vec b=\vec a+(-\vec b)$.`, r`$k\vec v$ has length $|k||\vec v|$; reversed if $k<0$.`],
     examples: [
-      { t: "Perpendicular resultant", body: r`Add 3 east and 4 north; find the resultant.\soln $\sqrt{3^2+4^2}=5$, direction $\tan^{-1}\tfrac43\approx53^\circ$ N of E:` + resfig },
-      { t: "Triangle law", body: r`How do you draw $\vec a+\vec b$?\soln Tail of $\vec b$ at the tip of $\vec a$; resultant from $\vec a$'s tail to $\vec b$'s tip.` },
-      { t: "Scalar multiple", body: r`Describe $3\vec v$ and $-2\vec v$.\soln $3\vec v$: three times as long, same direction; $-2\vec v$: twice as long, opposite.` },
-      { t: "Subtraction", body: r`How do you draw $\vec a-\vec b$?\soln Add $\vec a$ and $-\vec b$ tip-to-tail.` },
-      { t: "Resultant force", body: r`Forces 6 N east and 8 N north. Find the resultant.\soln $\sqrt{36+64}=10$ N at $\tan^{-1}\tfrac86\approx53^\circ$ N of E.` },
-      { t: "Perpendicular resultant", body: r`Resultant magnitude of 5 east and 12 north?\soln $\sqrt{25+144}=13$.` },
-      { t: "Scalar multiple", body: r`Describe $-\tfrac12\vec v$.\soln Half the length, opposite direction.` },
-      { t: "Perpendicular resultant", body: r`Resultant magnitude of 9 east and 12 north?\soln $\sqrt{81+144}=15$.` },
-      { t: "Direction", body: r`Direction of the resultant of 3 east, 4 north?\soln $\tan^{-1}\tfrac43\approx53^\circ$ north of east.` },
+      { t: "Perpendicular resultant", body: r`Add 3 east and 4 north; find the resultant.\soln
+\textbf{Step 1 (the two vectors are perpendicular, so use the Pythagorean theorem for magnitude):} $|\vec R|=\sqrt{3^2+4^2}=\sqrt{9+16}=\sqrt{25}$.\\[3pt]
+\textbf{Step 2 (find the direction with $\tan^{-1}$ of opposite over adjacent):} $\theta=\tan^{-1}\tfrac43\approx53^\circ$ north of east.\\[3pt]
+\textbf{Conclusion:} magnitude $5$, direction $\approx53^\circ$ N of E:` + resfig },
+      { t: "Triangle law", body: r`How do you draw $\vec a+\vec b$?\soln
+\textbf{Step 1 (draw $\vec a$ first):} start anywhere and draw $\vec a$.\\[3pt]
+\textbf{Step 2 (attach $\vec b$ tip-to-tail):} place the tail of $\vec b$ at the tip (arrowhead) of $\vec a$.\\[3pt]
+\textbf{Step 3 (draw the resultant):} the sum $\vec a+\vec b$ runs from $\vec a$'s starting tail to $\vec b$'s final tip.\\[3pt]
+\textbf{Conclusion:} tip-to-tail, then close the triangle from the first tail to the last tip.` },
+      { t: "Scalar multiple", body: r`Describe $3\vec v$ and $-2\vec v$.\soln
+\textbf{Step 1 (scalar multiplication scales the length by $|k|$):} for $3\vec v$, $|k|=3$; for $-2\vec v$, $|k|=2$.\\[3pt]
+\textbf{Step 2 (the sign of $k$ determines direction):} positive $k$ keeps the same direction; negative $k$ reverses it.\\[3pt]
+\textbf{Conclusion:} $3\vec v$ is three times as long, same direction; $-2\vec v$ is twice as long, opposite direction.` },
+      { t: "Subtraction", body: r`How do you draw $\vec a-\vec b$?\soln
+\textbf{Step 1 (rewrite subtraction as addition of the opposite):} $\vec a-\vec b=\vec a+(-\vec b)$.\\[3pt]
+\textbf{Step 2 (draw $-\vec b$, i.e.\ $\vec b$ reversed):} flip $\vec b$'s direction, keeping its length.\\[3pt]
+\textbf{Step 3 (add tip-to-tail):} attach $-\vec b$'s tail to $\vec a$'s tip, as in ordinary addition.\\[3pt]
+\textbf{Conclusion:} draw $\vec a$, then add the reversed $\vec b$ tip-to-tail.` },
+      { t: "Resultant force", body: r`Forces 6 N east and 8 N north. Find the resultant.\soln
+\textbf{Step 1 (perpendicular components, use Pythagorean theorem):} $|\vec R|=\sqrt{6^2+8^2}=\sqrt{36+64}=\sqrt{100}$.\\[3pt]
+\textbf{Step 2 (find the direction):} $\theta=\tan^{-1}\tfrac86\approx53^\circ$ north of east.\\[3pt]
+\textbf{Conclusion:} $10$ N at $\approx53^\circ$ N of E.` },
+      { t: "Perpendicular resultant", body: r`Resultant magnitude of 5 east and 12 north?\soln
+\textbf{Step 1 (Pythagorean theorem, since the components are perpendicular):} $\sqrt{5^2+12^2}=\sqrt{25+144}=\sqrt{169}$.\\[3pt]
+\textbf{Conclusion:} $13$.` },
+      { t: "Scalar multiple", body: r`Describe $-\tfrac12\vec v$.\soln
+\textbf{Step 1 (magnitude scales by $|k|=\tfrac12$):} half the original length.\\[3pt]
+\textbf{Step 2 (negative $k$ reverses direction):} points opposite to $\vec v$.\\[3pt]
+\textbf{Conclusion:} half the length, opposite direction.` },
+      { t: "Perpendicular resultant", body: r`Resultant magnitude of 9 east and 12 north?\soln
+\textbf{Step 1 (Pythagorean theorem):} $\sqrt{9^2+12^2}=\sqrt{81+144}=\sqrt{225}$.\\[3pt]
+\textbf{Conclusion:} $15$.` },
+      { t: "Direction", body: r`Direction of the resultant of 3 east, 4 north?\soln
+\textbf{Step 1 (set up the tangent ratio, opposite over adjacent):} $\tan\theta=\tfrac{4}{3}$ (north component over east component).\\[3pt]
+\textbf{Step 2 (solve for $\theta$):} $\theta=\tan^{-1}\tfrac43\approx53^\circ$.\\[3pt]
+\textbf{Conclusion:} $\approx53^\circ$ north of east.` },
     ],
     questions: [
       { ask: r`Resultant magnitude of 5 east and 12 north?` },
@@ -75,15 +123,38 @@ export default [
     intro: r`Component form $(a,b)$ or $(a,b,c)$; magnitude $\sqrt{a^2+b^2(+c^2)}$; operate componentwise; $\vec{AB}=B-A$; unit vector $\vec v/|\vec v|$.`,
     ideas: [r`$|(a,b)|=\sqrt{a^2+b^2}$, $|(a,b,c)|=\sqrt{a^2+b^2+c^2}$.`, r`Add/subtract/scale componentwise; $\vec{AB}=B-A$.`, r`Unit vector $\hat v=\vec v/|\vec v|$.`],
     examples: [
-      { t: "Magnitude (2-D)", body: r`Find $|(3,4)|$.\soln $\sqrt{9+16}=5$:` + vfig },
-      { t: "Magnitude (3-D)", body: r`Find $|(1,2,2)|$.\soln $\sqrt{1+4+4}=3$.` },
-      { t: "Componentwise", body: r`Compute $(2,3)+(1,-1)$ and $3(2,-1)$.\soln $(3,2)$ and $(6,-3)$.` },
-      { t: "Between points", body: r`Find $\vec{AB}$ and $|\vec{AB}|$ for $A(1,2),B(4,6)$.\soln $\vec{AB}=(3,4)$, length $5$.` },
-      { t: "Unit vector", body: r`Unit vector of $(3,4)$.\soln $\big(\tfrac35,\tfrac45\big)$.` },
-      { t: "Magnitude (2-D)", body: r`Find $|(6,8)|$.\soln $10$.` },
-      { t: "Magnitude (3-D)", body: r`Find $|(2,3,6)|$.\soln $\sqrt{4+9+36}=7$.` },
-      { t: "Componentwise", body: r`Compute $(5,1)-(2,4)$.\soln $(3,-3)$.` },
-      { t: "Between points", body: r`Find $\vec{AB}$ for $A(2,1),B(5,5)$.\soln $(3,4)$.` },
+      { t: "Magnitude (2-D)", body: r`Find $|(3,4)|$.\soln
+\textbf{Step 1 (apply the 2-D magnitude formula):} $|(a,b)|=\sqrt{a^2+b^2}$.\\[3pt]
+\textbf{Step 2 (substitute):} $\sqrt{3^2+4^2}=\sqrt{9+16}=\sqrt{25}$.\\[3pt]
+\textbf{Conclusion:} $|(3,4)|=5$:` + vfig },
+      { t: "Magnitude (3-D)", body: r`Find $|(1,2,2)|$.\soln
+\textbf{Step 1 (apply the 3-D magnitude formula):} $|(a,b,c)|=\sqrt{a^2+b^2+c^2}$.\\[3pt]
+\textbf{Step 2 (substitute):} $\sqrt{1^2+2^2+2^2}=\sqrt{1+4+4}=\sqrt9$.\\[3pt]
+\textbf{Conclusion:} $|(1,2,2)|=3$.` },
+      { t: "Componentwise", body: r`Compute $(2,3)+(1,-1)$ and $3(2,-1)$.\soln
+\textbf{Step 1 (add component by component):} $(2+1,\,3+(-1))=(3,2)$.\\[3pt]
+\textbf{Step 2 (scale each component by $3$):} $(3\cdot2,\,3\cdot(-1))=(6,-3)$.\\[3pt]
+\textbf{Conclusion:} $(2,3)+(1,-1)=(3,2)$ and $3(2,-1)=(6,-3)$.` },
+      { t: "Between points", body: r`Find $\vec{AB}$ and $|\vec{AB}|$ for $A(1,2),B(4,6)$.\soln
+\textbf{Step 1 (subtract $A$ from $B$, tail from tip):} $\vec{AB}=B-A=(4-1,\,6-2)=(3,4)$.\\[3pt]
+\textbf{Step 2 (find the magnitude):} $|\vec{AB}|=\sqrt{3^2+4^2}=\sqrt{25}$.\\[3pt]
+\textbf{Conclusion:} $\vec{AB}=(3,4)$, with length $5$.` },
+      { t: "Unit vector", body: r`Unit vector of $(3,4)$.\soln
+\textbf{Step 1 (find the magnitude):} $|(3,4)|=\sqrt{9+16}=5$.\\[3pt]
+\textbf{Step 2 (divide each component by the magnitude):} $\left(\dfrac35,\dfrac45\right)$.\\[3pt]
+\textbf{Conclusion:} the unit vector is $\big(\tfrac35,\tfrac45\big)$.` },
+      { t: "Magnitude (2-D)", body: r`Find $|(6,8)|$.\soln
+\textbf{Step 1 (apply the magnitude formula):} $\sqrt{6^2+8^2}=\sqrt{36+64}=\sqrt{100}$.\\[3pt]
+\textbf{Conclusion:} $10$.` },
+      { t: "Magnitude (3-D)", body: r`Find $|(2,3,6)|$.\soln
+\textbf{Step 1 (apply the 3-D magnitude formula):} $\sqrt{2^2+3^2+6^2}=\sqrt{4+9+36}=\sqrt{49}$.\\[3pt]
+\textbf{Conclusion:} $7$.` },
+      { t: "Componentwise", body: r`Compute $(5,1)-(2,4)$.\soln
+\textbf{Step 1 (subtract component by component):} $(5-2,\,1-4)$.\\[3pt]
+\textbf{Conclusion:} $(3,-3)$.` },
+      { t: "Between points", body: r`Find $\vec{AB}$ for $A(2,1),B(5,5)$.\soln
+\textbf{Step 1 (subtract $A$ from $B$):} $(5-2,\,5-1)$.\\[3pt]
+\textbf{Conclusion:} $\vec{AB}=(3,4)$.` },
     ],
     questions: [
       { ask: r`Find $|(6,8)|$.` },
@@ -107,15 +178,40 @@ export default [
     intro: r`$\vec a\cdot\vec b=a_1b_1+a_2b_2(+a_3b_3)=|\vec a||\vec b|\cos\theta$. Gives the angle; zero means perpendicular; work $=\vec F\cdot\vec d$.`,
     ideas: [r`Components: $\vec a\cdot\vec b=a_1b_1+a_2b_2+a_3b_3$.`, r`$\cos\theta=\dfrac{\vec a\cdot\vec b}{|\vec a||\vec b|}$.`, r`Perpendicular $\iff\vec a\cdot\vec b=0$; work $=\vec F\cdot\vec d$.`],
     examples: [
-      { t: "Dot product (2-D)", body: r`Find $(2,3)\cdot(4,-1)$.\soln $8-3=5$.` },
-      { t: "Dot product (3-D)", body: r`Find $(1,2,3)\cdot(2,0,-1)$.\soln $2+0-3=-1$.` },
-      { t: "Angle", body: r`Angle between $(1,0)$ and $(1,1)$?\soln $\cos\theta=\dfrac1{\sqrt2}\Rightarrow45^\circ$.` },
-      { t: "Perpendicular", body: r`Are $(2,3)$ and $(3,-2)$ perpendicular?\soln $6-6=0$: yes.` },
-      { t: "Work", body: r`$\vec F=(3,4)$ N, $\vec d=(2,0)$ m. Find the work.\soln $W=\vec F\cdot\vec d=6$ J.` },
-      { t: "Dot product", body: r`Find $(1,2)\cdot(3,4)$.\soln $3+8=11$.` },
-      { t: "Dot product (3-D)", body: r`Find $(2,-1,3)\cdot(1,4,2)$.\soln $2-4+6=4$.` },
-      { t: "Angle", body: r`Angle between $(1,0)$ and $(0,1)$?\soln Dot $=0\Rightarrow90^\circ$.` },
-      { t: "Work", body: r`$\vec F=(5,0)$, $\vec d=(3,4)$. Find the work.\soln $15+0=15$ J.` },
+      { t: "Dot product (2-D)", body: r`Find $(2,3)\cdot(4,-1)$.\soln
+\textbf{Step 1 (multiply matching components):} $(2)(4)$ and $(3)(-1)$.\\[3pt]
+\textbf{Step 2 (add the products):} $8+(-3)$.\\[3pt]
+\textbf{Conclusion:} $=5$.` },
+      { t: "Dot product (3-D)", body: r`Find $(1,2,3)\cdot(2,0,-1)$.\soln
+\textbf{Step 1 (multiply matching components):} $(1)(2)$, $(2)(0)$, $(3)(-1)$.\\[3pt]
+\textbf{Step 2 (add the products):} $2+0+(-3)$.\\[3pt]
+\textbf{Conclusion:} $=-1$.` },
+      { t: "Angle", body: r`Angle between $(1,0)$ and $(1,1)$?\soln
+\textbf{Step 1 (find the dot product):} $(1)(1)+(0)(1)=1$.\\[3pt]
+\textbf{Step 2 (find both magnitudes):} $|(1,0)|=1$; $|(1,1)|=\sqrt2$.\\[3pt]
+\textbf{Step 3 (apply $\cos\theta=\frac{\vec a\cdot\vec b}{|\vec a||\vec b|}$):} $\cos\theta=\dfrac{1}{1\cdot\sqrt2}=\dfrac1{\sqrt2}$.\\[3pt]
+\textbf{Conclusion:} $\theta=45^\circ$.` },
+      { t: "Perpendicular", body: r`Are $(2,3)$ and $(3,-2)$ perpendicular?\soln
+\textbf{Step 1 (compute the dot product):} $(2)(3)+(3)(-2)=6-6$.\\[3pt]
+\textbf{Step 2 (recall the perpendicularity test, dot product $=0$):} the result is $0$.\\[3pt]
+\textbf{Conclusion:} yes, perpendicular.` },
+      { t: "Work", body: r`$\vec F=(3,4)$ N, $\vec d=(2,0)$ m. Find the work.\soln
+\textbf{Step 1 (recall the work formula):} $W=\vec F\cdot\vec d$.\\[3pt]
+\textbf{Step 2 (compute the dot product):} $(3)(2)+(4)(0)=6+0$.\\[3pt]
+\textbf{Conclusion:} $W=6$ J.` },
+      { t: "Dot product", body: r`Find $(1,2)\cdot(3,4)$.\soln
+\textbf{Step 1 (multiply matching components and add):} $(1)(3)+(2)(4)=3+8$.\\[3pt]
+\textbf{Conclusion:} $=11$.` },
+      { t: "Dot product (3-D)", body: r`Find $(2,-1,3)\cdot(1,4,2)$.\soln
+\textbf{Step 1 (multiply matching components and add):} $(2)(1)+(-1)(4)+(3)(2)=2-4+6$.\\[3pt]
+\textbf{Conclusion:} $=4$.` },
+      { t: "Angle", body: r`Angle between $(1,0)$ and $(0,1)$?\soln
+\textbf{Step 1 (compute the dot product):} $(1)(0)+(0)(1)=0$.\\[3pt]
+\textbf{Step 2 (interpret a zero dot product):} the vectors are perpendicular.\\[3pt]
+\textbf{Conclusion:} $90^\circ$.` },
+      { t: "Work", body: r`$\vec F=(5,0)$, $\vec d=(3,4)$. Find the work.\soln
+\textbf{Step 1 (apply $W=\vec F\cdot\vec d$):} $(5)(3)+(0)(4)=15+0$.\\[3pt]
+\textbf{Conclusion:} $W=15$ J.` },
     ],
     questions: [
       { ask: r`Find $(1,2)\cdot(3,4)$.` },
@@ -139,15 +235,38 @@ export default [
     intro: r`$\vec a\times\vec b=(a_2b_3-a_3b_2,\,a_3b_1-a_1b_3,\,a_1b_2-a_2b_1)$ is perpendicular to both; $|\vec a\times\vec b|$ is the parallelogram area.`,
     ideas: [r`$\vec a\times\vec b=(a_2b_3-a_3b_2,\,a_3b_1-a_1b_3,\,a_1b_2-a_2b_1)$.`, r`$\vec a\times\vec b\perp\vec a$ and $\perp\vec b$.`, r`$|\vec a\times\vec b|=$ parallelogram area; triangle $=\tfrac12|\vec a\times\vec b|$.`],
     examples: [
-      { t: "Standard basis", body: r`Compute $(1,0,0)\times(0,1,0)$.\soln $(0,0,1)$.` },
-      { t: "General", body: r`Compute $(1,2,3)\times(4,5,6)$.\soln $(2\cdot6-3\cdot5,\,3\cdot4-1\cdot6,\,1\cdot5-2\cdot4)=(-3,6,-3)$.` },
-      { t: "Perpendicular check", body: r`Verify $(-3,6,-3)\perp(1,2,3)$.\soln $-3+12-9=0$: perpendicular.` },
-      { t: "Parallelogram area", body: r`Area from $(1,0,0)$ and $(0,2,0)$.\soln Cross $=(0,0,2)$, magnitude $2$: area $2$.` },
-      { t: "Triangle area", body: r`Triangle area from $(1,0,0)$ and $(0,2,0)$.\soln $\tfrac12(2)=1$.` },
-      { t: "Standard basis", body: r`Compute $(0,1,0)\times(0,0,1)$.\soln $(1,0,0)$.` },
-      { t: "General", body: r`Compute $(2,0,0)\times(0,3,0)$.\soln $(0,0,6)$.` },
-      { t: "General", body: r`Compute $(1,1,0)\times(0,1,1)$.\soln $(1,-1,1)$.` },
-      { t: "Parallelogram area", body: r`Area from $(3,0,0)$ and $(0,4,0)$.\soln $(0,0,12)$, area $12$.` },
+      { t: "Standard basis", body: r`Compute $(1,0,0)\times(0,1,0)$.\soln
+\textbf{Step 1 (apply the cross-product formula $(a_2b_3-a_3b_2,\,a_3b_1-a_1b_3,\,a_1b_2-a_2b_1)$ with $\vec a=(1,0,0),\vec b=(0,1,0)$):} first component $0\cdot0-0\cdot1=0$; second $0\cdot0-1\cdot0=0$; third $1\cdot1-0\cdot0=1$.\\[3pt]
+\textbf{Conclusion:} $(1,0,0)\times(0,1,0)=(0,0,1)$.` },
+      { t: "General", body: r`Compute $(1,2,3)\times(4,5,6)$.\soln
+\textbf{Step 1 (label components):} $\vec a=(1,2,3)$, $\vec b=(4,5,6)$.\\[3pt]
+\textbf{Step 2 (apply the formula component by component):} first: $2\cdot6-3\cdot5=12-15=-3$; second: $3\cdot4-1\cdot6=12-6=6$; third: $1\cdot5-2\cdot4=5-8=-3$.\\[3pt]
+\textbf{Conclusion:} $(1,2,3)\times(4,5,6)=(-3,6,-3)$.` },
+      { t: "Perpendicular check", body: r`Verify $(-3,6,-3)\perp(1,2,3)$.\soln
+\textbf{Step 1 (use the dot product to test perpendicularity):} $(-3)(1)+(6)(2)+(-3)(3)$.\\[3pt]
+\textbf{Step 2 (compute):} $-3+12-9$.\\[3pt]
+\textbf{Conclusion:} $=0$, so the vectors are perpendicular (as the cross product must be, to both original vectors).` },
+      { t: "Parallelogram area", body: r`Area from $(1,0,0)$ and $(0,2,0)$.\soln
+\textbf{Step 1 (compute the cross product):} $(1,0,0)\times(0,2,0)=(0\cdot0-0\cdot2,\,0\cdot0-1\cdot0,\,1\cdot2-0\cdot0)=(0,0,2)$.\\[3pt]
+\textbf{Step 2 (the parallelogram area equals the magnitude of the cross product):} $|(0,0,2)|=2$.\\[3pt]
+\textbf{Conclusion:} area $=2$.` },
+      { t: "Triangle area", body: r`Triangle area from $(1,0,0)$ and $(0,2,0)$.\soln
+\textbf{Step 1 (recall the triangle is half the parallelogram):} from the previous example, the parallelogram area is $2$.\\[3pt]
+\textbf{Step 2 (halve it):} $\tfrac12(2)$.\\[3pt]
+\textbf{Conclusion:} triangle area $=1$.` },
+      { t: "Standard basis", body: r`Compute $(0,1,0)\times(0,0,1)$.\soln
+\textbf{Step 1 (apply the formula with $\vec a=(0,1,0),\vec b=(0,0,1)$):} first: $1\cdot1-0\cdot0=1$; second: $0\cdot0-0\cdot1=0$; third: $0\cdot0-1\cdot0=0$.\\[3pt]
+\textbf{Conclusion:} $(0,1,0)\times(0,0,1)=(1,0,0)$.` },
+      { t: "General", body: r`Compute $(2,0,0)\times(0,3,0)$.\soln
+\textbf{Step 1 (apply the formula):} first: $0\cdot0-0\cdot3=0$; second: $0\cdot0-2\cdot0=0$; third: $2\cdot3-0\cdot0=6$.\\[3pt]
+\textbf{Conclusion:} $(2,0,0)\times(0,3,0)=(0,0,6)$.` },
+      { t: "General", body: r`Compute $(1,1,0)\times(0,1,1)$.\soln
+\textbf{Step 1 (apply the formula with $\vec a=(1,1,0),\vec b=(0,1,1)$):} first: $1\cdot1-0\cdot1=1$; second: $0\cdot0-1\cdot1=-1$; third: $1\cdot1-1\cdot0=1$.\\[3pt]
+\textbf{Conclusion:} $(1,1,0)\times(0,1,1)=(1,-1,1)$.` },
+      { t: "Parallelogram area", body: r`Area from $(3,0,0)$ and $(0,4,0)$.\soln
+\textbf{Step 1 (compute the cross product):} $(3,0,0)\times(0,4,0)=(0\cdot0-0\cdot4,\,0\cdot0-3\cdot0,\,3\cdot4-0\cdot0)=(0,0,12)$.\\[3pt]
+\textbf{Step 2 (take the magnitude):} $|(0,0,12)|=12$.\\[3pt]
+\textbf{Conclusion:} area $=12$.` },
     ],
     questions: [
       { ask: r`Compute $(0,1,0)\times(0,0,1)$.` },

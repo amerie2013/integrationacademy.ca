@@ -1,0 +1,82 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize\color{black!60}Worksheet 6.1}
+\begin{document}
+
+\wstitle{6.1}{Accumulating Change}{Unit 6: Integration and Accumulation of Change}
+
+\begin{ideabox}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+  \item A rate multiplied by a time gives an amount. On a graph of a rate, an amount is an \textbf{area}.
+  \item The area under a rate graph from $t=a$ to $t=b$ is the \textbf{net change} in the quantity over that interval.
+  \item Area below the axis counts as negative: the quantity is decreasing there.
+  \item Amount at time $b$ $=$ amount at time $a$ $+$ net change from $a$ to $b$.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked examples}
+\begin{example}{Example 1 \textperiodcentered{} A constant rate}
+A cyclist rides at a constant 12 km/h for 2.5 hours. How far does she travel?\soln The area of a rectangle of height 12 and width 2.5.\result{30 km.}
+\end{example}
+
+\begin{example}{Example 2 \textperiodcentered{} A linear rate}
+Water flows at $r(t)=4+2t$ litres per minute for $0\le t\le3$. How much water flows?\soln A trapezoid with parallel sides 4 and 10 and width 3: $\dfrac12(4+10)(3)$.\result{21 litres.}
+\end{example}
+
+\begin{example}{Example 3 \textperiodcentered{} A rate that changes sign}
+A particle has velocity $v(t)=8-4t$ m/s for $0\le t\le3$. Find its net change in position and the total distance it travels.\soln A triangle of area 8 above the axis on $[0,2]$ and one of area 2 below it on $[2,3]$.\result{Net change 6 m; total distance 10 m.}
+\end{example}
+
+\newpage
+\sech{Practice}
+Questions 1 to 7 use this graph. Water flows into a tank at the rate $r(t)$ litres per minute, where $t$ is in minutes.
+\begin{apgraph}{-0.5}{9}{-0.5}{7}
+\addplot[color=ink, mark=none, line width=1.1pt] coordinates {(0,2) (2,6) (5,6) (8,0)};
+\closeddot{0}{2}\closeddot{8}{0}
+\node[font=\small, color=ink] at (axis cs:6.9,3.6) {$y=r(t)$};
+\end{apgraph}
+\level{Core}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item How much water flows into the tank from $t=0$ to $t=2$?\work{1.1cm}
+  \item How much water flows into the tank from $t=2$ to $t=5$?\work{1.1cm}
+  \item How much water flows into the tank from $t=0$ to $t=8$?\work{1.1cm}
+  \item State the units of the area under the graph of $r$.\work{1.1cm}
+\end{enumerate}
+
+\level{Exam level}
+\begin{enumerate}[leftmargin=*,itemsep=2pt,start=5]
+  \item The tank holds 10 litres at $t=0$. How much does it hold at $t=5$?\work{2.1cm}
+  \item At what time have exactly 17 litres flowed into the tank?\work{2.1cm}
+  \item Find the average rate at which water flows into the tank over $0\le t\le8$.\work{2.1cm}
+  \item A particle has velocity $v(t)=10-2t$ m/s for $0\le t\le8$. Find its displacement and the total distance travelled.\work{2.1cm}
+\end{enumerate}
+
+\begin{frbox}{Question 9 \textperiodcentered{} Free-response practice}
+A factory makes parts at the rate $p(t)$ parts per hour during a 10-hour shift. The graph of $p$ consists of the line segments joining $(0,40)$, $(4,60)$, $(6,60)$ and $(10,20)$.
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=2pt]
+  \item How many parts are made in the first 4 hours?\work{1.9cm}
+  \item How many parts are made during the whole shift?\work{1.9cm}
+  \item Interpret $p(6)=60$, and find the time at which the 260th part is completed.\work{1.9cm}
+\end{enumerate}
+\end{frbox}
+
+\newpage
+\begin{solbox}
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item A trapezoid: $\dfrac12(2+6)(2)=8$ litres.
+  \item A rectangle: $6\times3=18$ litres.
+  \item $8+18+\dfrac12(6)(3)=35$ litres.
+  \item (litres per minute) $\times$ (minutes) $=$ litres.
+  \item $10+8+18=36$ litres.
+  \item 8 litres by $t=2$; 9 more at 6 litres per minute takes 1.5 minutes: $t=3.5$.
+  \item $\dfrac{35}{8}=4.375$ litres per minute.
+  \item Above the axis on $[0,5]$: 25. Below on $[5,8]$: 9. Displacement 16 m; distance 34 m.
+  \item \begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=3pt]
+    \item $\dfrac12(40+60)(4)=200$ parts.
+    \item $200+60(2)+\dfrac12(60+20)(4)=200+120+160=480$ parts.
+    \item Six hours into the shift, parts are being made at 60 per hour. 200 parts are done by $t=4$; 60 more at 60 per hour takes one hour: $t=5$.
+  \end{enumerate}
+\end{enumerate}
+\end{solbox}
+
+\end{document}

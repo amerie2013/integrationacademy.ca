@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Analytics } from "@vercel/analytics/next";
+import { NextIntlClientProvider } from "next-intl";
+import { getLocale, getMessages } from "next-intl/server";
 import "./globals.css";
 
 const DESC = "Math Simplified, Success Amplified. Interactive lessons, auto-graded quizzes, worksheets, math games, and a teaching whiteboard for Grade 9–12, college, and university.";
@@ -28,13 +30,16 @@ export const viewport: Viewport = {
   themeColor: "#1b7a44",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const locale = await getLocale();
+  const messages = await getMessages();
+
   return (
-    <html lang="en">
+    <html lang={locale}>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
@@ -48,8 +53,10 @@ export default function RootLayout({
         />
       </head>
       <body>
-        {children}
-        <Analytics />
+        <NextIntlClientProvider locale={locale} messages={messages}>
+          {children}
+          <Analytics />
+        </NextIntlClientProvider>
       </body>
     </html>
   );

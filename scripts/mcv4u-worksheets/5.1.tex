@@ -26,39 +26,82 @@ Write the quantity to optimize, reduce it to one variable using the constraint, 
 \sech{Worked Examples}
 
 \begin{example}{ex0}{Example 1 --- Max area, fixed perimeter}
-A pen uses 40 m of fence. Maximize the area.\soln $A=x(20-x)$; $A'=20-2x=0\Rightarrow x=10$; $A''=-2<0$. Square $10\times10$, area $100$ m²:\eplot{0}{20}{0}{120}{\addplot[exblue,very thick,domain=0:20]{x*(20-x)};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(10,100)};}
+A pen uses 40 m of fence. Maximize the area.\soln
+\textbf{Step 1 (define a variable and write the constraint):} let the width be $x$; since $2x+2y=40$, the length is $y=20-x$.\\[3pt]
+\textbf{Step 2 (write the quantity to optimize, in one variable):} $A(x)=x(20-x)$.\\[3pt]
+\textbf{Step 3 (differentiate and solve $A'=0$):} $A'(x)=20-2x=0\Rightarrow x=10$.\\[3pt]
+\textbf{Step 4 (verify it's a max):} $A''(x)=-2<0$, so concave down --- a maximum.\\[3pt]
+\textbf{Conclusion:} a $10\times10$ square, giving maximum area $100$ m$^2$:\eplot{0}{20}{0}{120}{\addplot[exblue,very thick,domain=0:20]{x*(20-x)};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(10,100)};}
 \end{example}
 
 \begin{example}{ex1}{Example 2 --- Wall on one side}
-Only 3 sides fenced with 20 m. Maximize the area.\soln $A=x(20-2x)$; $A'=20-4x=0\Rightarrow x=5$, length $10$; area $50$ m².
+Only 3 sides fenced with 20 m. Maximize the area.\soln
+\textbf{Step 1 (define a variable and the constraint):} let $x$ be each of the two equal sides perpendicular to the wall; the constraint is $2x+y=20$, so $y=20-2x$.\\[3pt]
+\textbf{Step 2 (write $A$ in one variable):} $A(x)=x(20-2x)$.\\[3pt]
+\textbf{Step 3 (differentiate and solve $A'=0$):} $A'(x)=20-4x=0\Rightarrow x=5$.\\[3pt]
+\textbf{Step 4 (find the other dimension and the area):} $y=20-10=10$; $A=5(10)=50$.\\[3pt]
+\textbf{Conclusion:} maximum area $50$ m$^2$, with the fenced sides $5$ m and $10$ m.
 \end{example}
 
 \begin{example}{ex2}{Example 3 --- Minimize a sum}
-For $x>0$, minimize $f(x)=x+\dfrac{16}{x}$.\soln $f'=1-\dfrac{16}{x^2}=0\Rightarrow x=4$; $f''>0$; min value $8$.
+For $x>0$, minimize $f(x)=x+\dfrac{16}{x}$.\soln
+\textbf{Step 1 (differentiate):} $f'(x)=1-\dfrac{16}{x^2}$.\\[3pt]
+\textbf{Step 2 (set $f'=0$ and solve):} $1=\dfrac{16}{x^2}\Rightarrow x^2=16\Rightarrow x=4$ (since $x>0$).\\[3pt]
+\textbf{Step 3 (verify it's a minimum):} $f''(x)=\dfrac{32}{x^3}>0$ for $x>0$, so concave up --- a minimum.\\[3pt]
+\textbf{Step 4 (find the minimum value):} $f(4)=4+\dfrac{16}{4}=4+4$.\\[3pt]
+\textbf{Conclusion:} minimum value $8$, at $x=4$.
 \end{example}
 
 \begin{example}{ex3}{Example 4 --- Max-volume open box}
-Cut side-$x$ squares from a $12\times12$ sheet; fold into an open box. Maximize the volume.\soln $V=x(12-2x)^2$; $V'=(12-2x)(12-6x)=0\Rightarrow x=2$; $V=128$ cm³.
+Cut side-$x$ squares from a $12\times12$ sheet; fold into an open box. Maximize the volume.\soln
+\textbf{Step 1 (set up the dimensions):} folding up flaps of size $x$ leaves a base of side $12-2x$ and height $x$.\\[3pt]
+\textbf{Step 2 (write $V$ in one variable):} $V(x)=x(12-2x)^2$.\\[3pt]
+\textbf{Step 3 (differentiate using the product rule with the chain rule):} $V'(x)=(12-2x)^2+x\cdot2(12-2x)(-2)=(12-2x)[(12-2x)-4x]=(12-2x)(12-6x)$.\\[3pt]
+\textbf{Step 4 (solve $V'=0$ within the valid domain $0<x<6$):} $12-6x=0\Rightarrow x=2$ (the factor $12-2x=0$ gives $x=6$, an endpoint with zero volume).\\[3pt]
+\textbf{Step 5 (compute the volume):} $V(2)=2(8)^2=2(64)$.\\[3pt]
+\textbf{Conclusion:} maximum volume $128$ cm$^3$, at $x=2$.
 \end{example}
 
 \begin{example}{ex4}{Example 5 --- Maximum profit}
-Maximize $P(x)=-2x^2+40x-100$.\soln $P'=-4x+40=0\Rightarrow x=10$; $P(10)=100$.
+Maximize $P(x)=-2x^2+40x-100$.\soln
+\textbf{Step 1 (differentiate):} $P'(x)=-4x+40$.\\[3pt]
+\textbf{Step 2 (set $P'=0$ and solve):} $-4x+40=0\Rightarrow x=10$.\\[3pt]
+\textbf{Step 3 (verify it's a max):} $P''(x)=-4<0$, so concave down --- a maximum.\\[3pt]
+\textbf{Step 4 (find the maximum value):} $P(10)=-2(100)+400-100=-200+400-100$.\\[3pt]
+\textbf{Conclusion:} maximum profit $100$, at $x=10$.
 \end{example}
 
 \begin{example}{ex5}{Example 6 --- Max product}
-Two positive numbers sum to 12. Maximize the product.\soln $P=x(12-x)$; $P'=12-2x=0\Rightarrow x=6$; product $36$.
+Two positive numbers sum to 12. Maximize the product.\soln
+\textbf{Step 1 (define variables using the constraint):} let the numbers be $x$ and $12-x$.\\[3pt]
+\textbf{Step 2 (write the product):} $P(x)=x(12-x)$.\\[3pt]
+\textbf{Step 3 (differentiate and solve $P'=0$):} $P'(x)=12-2x=0\Rightarrow x=6$.\\[3pt]
+\textbf{Step 4 (find the product):} both numbers are $6$, so $P=6(6)$.\\[3pt]
+\textbf{Conclusion:} maximum product $36$, when both numbers equal $6$.
 \end{example}
 
 \begin{example}{ex6}{Example 7 --- Max area}
-Maximize the area of a rectangle with 60 m of fence.\soln $15\times15$, area $225$ m².
+Maximize the area of a rectangle with 60 m of fence.\soln
+\textbf{Step 1 (define a variable and the constraint):} let the width be $x$; since $2x+2y=60$, $y=30-x$.\\[3pt]
+\textbf{Step 2 (write $A$ in one variable and optimize):} $A(x)=x(30-x)$, $A'(x)=30-2x=0\Rightarrow x=15$.\\[3pt]
+\textbf{Step 3 (find the dimensions and area):} $y=30-15=15$; $A=15(15)$.\\[3pt]
+\textbf{Conclusion:} a $15\times15$ square, giving maximum area $225$ m$^2$.
 \end{example}
 
 \begin{example}{ex7}{Example 8 --- Minimize a sum}
-For $x>0$, minimize $f(x)=x+\dfrac{9}{x}$.\soln $1-\dfrac9{x^2}=0\Rightarrow x=3$; min value $6$.
+For $x>0$, minimize $f(x)=x+\dfrac{9}{x}$.\soln
+\textbf{Step 1 (differentiate):} $f'(x)=1-\dfrac{9}{x^2}$.\\[3pt]
+\textbf{Step 2 (set $f'=0$ and solve):} $x^2=9\Rightarrow x=3$ (since $x>0$).\\[3pt]
+\textbf{Step 3 (find the minimum value):} $f(3)=3+\dfrac93=3+3$.\\[3pt]
+\textbf{Conclusion:} minimum value $6$, at $x=3$.
 \end{example}
 
 \begin{example}{ex8}{Example 9 --- Maximum value}
-Maximize $P(x)=-x^2+10x$.\soln $P'=-2x+10=0\Rightarrow x=5$; $P(5)=25$.
+Maximize $P(x)=-x^2+10x$.\soln
+\textbf{Step 1 (differentiate):} $P'(x)=-2x+10$.\\[3pt]
+\textbf{Step 2 (set $P'=0$ and solve):} $-2x+10=0\Rightarrow x=5$.\\[3pt]
+\textbf{Step 3 (find the maximum value):} $P(5)=-25+50$.\\[3pt]
+\textbf{Conclusion:} maximum value $25$, at $x=5$.
 \end{example}
 
 \clearpage

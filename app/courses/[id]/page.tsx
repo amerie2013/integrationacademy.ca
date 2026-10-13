@@ -3,11 +3,13 @@
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { supabase } from "../../../lib/supabase";
 import { SiteHeader } from "../../../components/SiteHeader";
-import { levelLabel } from "../../../lib/theme";
+import { useLevelLabel } from "../../../lib/useLevelLabel";
 import { getSubscriptionInfo } from "../../../lib/subscription";
 import { accentFor } from "../../../lib/courseAccent";
+import { courseNotice } from "../../../lib/courseNotice";
 
 type Course = { id: string; code: string | null; title: string; description: string | null; level: string | null };
 type Lesson = { id: string; title: string; position: number };
@@ -17,6 +19,8 @@ type Announcement = { id: string; body: string; created_at: string };
 type WorksheetRow = { id: string; code: string; title: string };
 
 export default function StudentCoursePage() {
+  const t = useTranslations("courseDetail");
+  const levelLabel = useLevelLabel();
   const params = useParams();
   const router = useRouter();
   const courseId = params.id as string;
@@ -192,7 +196,7 @@ export default function StudentCoursePage() {
     return (
       <main>
         <SiteHeader />
-        <div style={{ padding: 48, color: "#64748b" }}>Loading…</div>
+        <div style={{ padding: 48, color: "#64748b" }}>{t("loading")}</div>
       </main>
     );
   }
@@ -200,7 +204,7 @@ export default function StudentCoursePage() {
     return (
       <main>
         <SiteHeader />
-        <div style={{ padding: 48, color: "#64748b" }}>This course isn't available.</div>
+        <div style={{ padding: 48, color: "#64748b" }}>{t("notAvailable")}</div>
       </main>
     );
   }
@@ -217,64 +221,65 @@ export default function StudentCoursePage() {
   ].sort((x, y) => x.code[0] - y.code[0] || x.code[1] - y.code[1] || KIND[x.kind] - KIND[y.kind]);
 
   // Per-course accent — keyed by course code (e.g. ALG1 = Florida orange 🍊).
-  const t = accentFor(course.code);
+  const accent = accentFor(course.code);
 
   return (
     <main style={{ minHeight: "100vh" }}>
       <SiteHeader />
       <div style={{ maxWidth: 860, margin: "0 auto", padding: "40px 28px" }}>
-        <Link href="/courses" style={{ color: "#64748b", fontWeight: 600, fontSize: 14, textDecoration: "none" }}>← All courses</Link>
+        <Link href="/courses" style={{ color: "#64748b", fontWeight: 600, fontSize: 14, textDecoration: "none" }}>{t("allCourses")}</Link>
 
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", margin: "12px 0 28px", gap: 20 }}>
           <div>
-            {course.code && <div style={{ fontFamily: "JetBrains Mono, monospace", color: t.primary, fontWeight: 700, fontSize: 14 }}>{course.code}</div>}
+            {course.code && <div style={{ fontFamily: "JetBrains Mono, monospace", color: accent.primary, fontWeight: 700, fontSize: 14 }}>{course.code}</div>}
             <h1 style={{ fontFamily: "Fraunces, serif", fontSize: 32, fontWeight: 700, margin: "4px 0 8px" }}>{course.title}</h1>
-            <span style={{ fontSize: 13, fontWeight: 700, color: t.badge, background: t.badgeBg, padding: "3px 10px", borderRadius: 999 }}>{levelLabel(course.level)}</span>
+            <span style={{ fontSize: 13, fontWeight: 700, color: accent.badge, background: accent.badgeBg, padding: "3px 10px", borderRadius: 999 }}>{levelLabel(course.level)}</span>
             {course.description && <p style={{ color: "#475569", fontSize: 16, lineHeight: 1.6, marginTop: 16, maxWidth: 560 }}>{course.description}</p>}
+            {courseNotice(course.code) && <p style={{ color: "#94a3b8", fontSize: 12.5, lineHeight: 1.55, marginTop: 10, maxWidth: 560 }}>{courseNotice(course.code)}</p>}
           </div>
           {access && !enrolled && (
-            <button onClick={enroll} disabled={busy} style={{ background: t.badge, color: "#fff", border: "none", borderRadius: 10, padding: "12px 24px", fontWeight: 700, fontSize: 15, cursor: "pointer", whiteSpace: "nowrap" }}>
-              {busy ? "Adding…" : "Add to my courses"}
+            <button onClick={enroll} disabled={busy} style={{ background: accent.badge, color: "#fff", border: "none", borderRadius: 10, padding: "12px 24px", fontWeight: 700, fontSize: 15, cursor: "pointer", whiteSpace: "nowrap" }}>
+              {busy ? t("adding") : t("addToCourses")}
             </button>
           )}
         </div>
 
         {!access ? (
           <div style={{ background: "#fff7ed", border: "1px solid #fed7aa", borderRadius: 14, padding: 24, color: "#9a3412" }}>
-            <strong style={{ fontSize: 17 }}>🔒 Unlock {course.title}</strong>
+            <strong style={{ fontSize: 17 }}>{t("unlock", { title: course.title })}</strong>
             <p style={{ color: "#7c2d12", fontSize: 15, lineHeight: 1.6, margin: "8px 0 18px", maxWidth: 560 }}>
-              Get full access to <strong>this course</strong> — every lesson, worksheet, quiz, and assignment. Or join your teacher's class with a code, which is free for class students.
+              {t.rich("unlockBody", { b: (chunks) => <strong>{chunks}</strong> })}
             </p>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(230px, 1fr))", gap: 14 }}>
               <div style={buyCard}>
-                <div style={buyLabel}>For students</div>
+                <div style={buyLabel}>{t("forStudents")}</div>
                 <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-                  <BuyBtn onClick={() => buyCourse("student_monthly")} busy={buying === "student_monthly"}>Monthly</BuyBtn>
-                  <BuyBtn onClick={() => buyCourse("student_annual")} busy={buying === "student_annual"} primary>Annual — best value</BuyBtn>
+                  <BuyBtn onClick={() => buyCourse("student_monthly")} busy={buying === "student_monthly"} label={t("monthly")} startingLabel={t("starting")} />
+                  <BuyBtn onClick={() => buyCourse("student_annual")} busy={buying === "student_annual"} primary label={t("annualBestValue")} startingLabel={t("starting")} />
                 </div>
               </div>
               <div style={buyCard}>
-                <div style={buyLabel}>For teachers — run a class</div>
+                <div style={buyLabel}>{t("forTeachers")}</div>
                 <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-                  <BuyBtn onClick={() => buyCourse("tutor_monthly")} busy={buying === "tutor_monthly"}>Monthly</BuyBtn>
-                  <BuyBtn onClick={() => buyCourse("tutor_annual")} busy={buying === "tutor_annual"} primary>Annual</BuyBtn>
+                  <BuyBtn onClick={() => buyCourse("tutor_monthly")} busy={buying === "tutor_monthly"} label={t("monthly")} startingLabel={t("starting")} />
+                  <BuyBtn onClick={() => buyCourse("tutor_annual")} busy={buying === "tutor_annual"} primary label={t("annual")} startingLabel={t("starting")} />
                 </div>
               </div>
             </div>
             <div style={{ marginTop: 16 }}>
-              <Link href="/dashboard" style={{ background: "#fff", color: "#1b7a44", border: "1px solid #bfe3cd", padding: "10px 22px", borderRadius: 10, textDecoration: "none", fontWeight: 700 }}>Have a class code? Enter it →</Link>
+              <Link href="/dashboard" style={{ background: "#fff", color: "#1b7a44", border: "1px solid #bfe3cd", padding: "10px 22px", borderRadius: 10, textDecoration: "none", fontWeight: 700 }}>{t("haveClassCode")}</Link>
             </div>
           </div>
         ) : (
           <>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 16, flexWrap: "wrap", background: t.soft, border: `1px solid ${t.softBorder}`, borderRadius: 14, padding: "14px 18px", marginBottom: 24 }}>
-              <div style={{ color: t.dark, fontWeight: 600, fontSize: 14 }}>
-                {lessons.length} lesson{lessons.length !== 1 ? "s" : ""} · {quizzes.length} quiz{quizzes.length !== 1 ? "zes" : ""} · {assignments.length} assignment{assignments.length !== 1 ? "s" : ""}
-                {Object.keys(bestScores).length > 0 && <> · {Object.keys(bestScores).length}/{quizzes.length} quizzes attempted</>}
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 16, flexWrap: "wrap", background: accent.soft, border: `1px solid ${accent.softBorder}`, borderRadius: 14, padding: "14px 18px", marginBottom: 24 }}>
+              <div style={{ color: accent.dark, fontWeight: 600, fontSize: 14 }}>
+                {t("summary", { lessonsCount: lessons.length, quizzesCount: quizzes.length, assignmentsCount: assignments.length })}
+                {Object.keys(bestScores).length > 0 && <> · {t("attempted", { attempted: Object.keys(bestScores).length, total: quizzes.length })}</>}
               </div>
               <div style={{ display: "flex", gap: 14, alignItems: "center" }}>
-                {lessons.length > 0 && <Link href={`/lessons/${lessons[0].id}`} style={{ background: t.primary, color: "#fff", padding: "8px 16px", borderRadius: 9, textDecoration: "none", fontWeight: 700, fontSize: 14 }}>Start learning →</Link>}
-                <Link href="/progress" style={{ color: t.primary, fontWeight: 700, fontSize: 14, textDecoration: "none" }}>My progress ↗</Link>
+                {lessons.length > 0 && <Link href={`/lessons/${lessons[0].id}`} style={{ background: accent.primary, color: "#fff", padding: "8px 16px", borderRadius: 9, textDecoration: "none", fontWeight: 700, fontSize: 14 }}>{t("startLearning")}</Link>}
+                <Link href="/progress" style={{ color: accent.primary, fontWeight: 700, fontSize: 14, textDecoration: "none" }}>{t("myProgress")}</Link>
               </div>
             </div>
 
@@ -282,7 +287,7 @@ export default function StudentCoursePage() {
               <section style={{ marginBottom: 24 }}>
                 {announcements.map((a) => (
                   <div key={a.id} style={{ background: "#fffbeb", border: "1px solid #fde68a", borderRadius: 12, padding: "12px 16px", marginBottom: 8 }}>
-                    <div style={{ fontSize: 12, fontWeight: 800, color: "#92400e", textTransform: "uppercase", letterSpacing: "0.04em", marginBottom: 4 }}>📣 Announcement</div>
+                    <div style={{ fontSize: 12, fontWeight: 800, color: "#92400e", textTransform: "uppercase", letterSpacing: "0.04em", marginBottom: 4 }}>{t("announcement")}</div>
                     <div style={{ fontSize: 14, color: "#0f172a", whiteSpace: "pre-wrap", lineHeight: 1.5 }}>{a.body}</div>
                     <div style={{ fontSize: 12, color: "#b45309", marginTop: 4 }}>{new Date(a.created_at).toLocaleString()}</div>
                   </div>
@@ -290,21 +295,21 @@ export default function StudentCoursePage() {
               </section>
             )}
 
-            <Section title="Course content">
-              {content.length === 0 ? <Empty>No content published yet.</Empty> : content.map((it) => (
+            <Section title={t("courseContent")}>
+              {content.length === 0 ? <Empty>{t("noContent")}</Empty> : content.map((it) => (
                 <Link key={it.kind + it.id} href={it.href} style={rowLink}>
                   <span style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                    <span style={it.kind === "lesson" ? badgeBase(t.soft, t.dark) : badgeStyle[it.kind]}>{badgeLabel[it.kind]}</span>
+                    <span style={it.kind === "lesson" ? badgeBase(accent.soft, accent.dark) : badgeStyle[it.kind]}>{t(`${it.kind}Badge` as any)}</span>
                     <span>{it.title}</span>
                   </span>
                   <span style={{ display: "flex", gap: 12, alignItems: "center" }}>
-                    {it.kind === "assignment" && <span style={{ color: "#64748b", fontSize: 14 }}>{it.due ? `Due ${new Date(it.due).toLocaleDateString()}` : "No due date"}</span>}
-                    {it.kind === "quiz" && it.due && <span style={{ color: "#64748b", fontSize: 14 }}>Due {new Date(it.due).toLocaleDateString()}</span>}
+                    {it.kind === "assignment" && <span style={{ color: "#64748b", fontSize: 14 }}>{it.due ? t("dueOn", { date: new Date(it.due).toLocaleDateString() }) : t("noDueDate")}</span>}
+                    {it.kind === "quiz" && it.due && <span style={{ color: "#64748b", fontSize: 14 }}>{t("dueOn", { date: new Date(it.due).toLocaleDateString() })}</span>}
                     {it.kind === "quiz" && bestScores[it.id] != null && (
-                      <span style={{ fontSize: 13, fontWeight: 700, color: "#059669", background: "#ecfdf5", padding: "3px 9px", borderRadius: 999 }}>Best {bestScores[it.id]}%</span>
+                      <span style={{ fontSize: 13, fontWeight: 700, color: "#059669", background: "#ecfdf5", padding: "3px 9px", borderRadius: 999 }}>{t("best", { pct: bestScores[it.id] })}</span>
                     )}
-                    <span style={{ color: t.primary, fontWeight: 700, fontSize: 14 }}>
-                      {it.kind === "worksheet" ? "📄 Open →" : it.kind === "assignment" ? "Open →" : it.kind === "quiz" ? (bestScores[it.id] != null ? "Review →" : "Start →") : "Read →"}
+                    <span style={{ color: accent.primary, fontWeight: 700, fontSize: 14 }}>
+                      {it.kind === "worksheet" ? t("openWorksheet") : it.kind === "assignment" ? t("open") : it.kind === "quiz" ? (bestScores[it.id] != null ? t("review") : t("start")) : t("read")}
                     </span>
                   </span>
                 </Link>
@@ -328,13 +333,13 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 function Empty({ children }: { children: React.ReactNode }) {
   return <div style={{ color: "#94a3b8", padding: "16px 18px" }}>{children}</div>;
 }
-function BuyBtn({ children, onClick, busy, primary }: { children: React.ReactNode; onClick: () => void; busy?: boolean; primary?: boolean }) {
+function BuyBtn({ label, startingLabel, onClick, busy, primary }: { label: string; startingLabel: string; onClick: () => void; busy?: boolean; primary?: boolean }) {
   return (
     <button onClick={onClick} disabled={busy} style={{
       background: primary ? "#1b7a44" : "#fff", color: primary ? "#fff" : "#1b7a44",
       border: primary ? "none" : "1px solid #bfe3cd", borderRadius: 9, padding: "9px 16px",
       fontWeight: 700, fontSize: 14, cursor: busy ? "default" : "pointer", opacity: busy ? 0.6 : 1, whiteSpace: "nowrap",
-    }}>{busy ? "Starting…" : children}</button>
+    }}>{busy ? startingLabel : label}</button>
   );
 }
 const buyCard: React.CSSProperties = { background: "#fff", border: "1px solid #fed7aa", borderRadius: 12, padding: "14px 16px" };
@@ -346,7 +351,6 @@ const badgeStyle: Record<"lesson" | "worksheet" | "assignment" | "quiz", React.C
   assignment: badgeBase("#fff7ed", "#b45309"),
   quiz: badgeBase("#f5f3ff", "#6d28d9"),
 };
-const badgeLabel: Record<"lesson" | "worksheet" | "assignment" | "quiz", string> = { lesson: "Lesson", worksheet: "Worksheet", assignment: "Assignment", quiz: "Quiz" };
 const rowLink: React.CSSProperties = {
   display: "flex",
   justifyContent: "space-between",

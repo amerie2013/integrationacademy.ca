@@ -8,15 +8,58 @@ export default [
     intro: r`Write the quantity to optimize, reduce it to one variable using the constraint, solve $Q'=0$, and verify.`,
     ideas: [r`Define a variable; write $Q$.`, r`Use the constraint to make $Q$ one-variable; state the domain.`, r`Solve $Q'=0$; verify with the 1st/2nd derivative test.`],
     examples: [
-      { t: "Max area, fixed perimeter", body: r`A pen uses 40 m of fence. Maximize the area.\soln $A=x(20-x)$; $A'=20-2x=0\Rightarrow x=10$; $A''=-2<0$. Square $10\times10$, area $100$ m²:` + r`\eplot{0}{20}{0}{120}{\addplot[exblue,very thick,domain=0:20]{x*(20-x)};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(10,100)};}` },
-      { t: "Wall on one side", body: r`Only 3 sides fenced with 20 m. Maximize the area.\soln $A=x(20-2x)$; $A'=20-4x=0\Rightarrow x=5$, length $10$; area $50$ m².` },
-      { t: "Minimize a sum", body: r`For $x>0$, minimize $f(x)=x+\dfrac{16}{x}$.\soln $f'=1-\dfrac{16}{x^2}=0\Rightarrow x=4$; $f''>0$; min value $8$.` },
-      { t: "Max-volume open box", body: r`Cut side-$x$ squares from a $12\times12$ sheet; fold into an open box. Maximize the volume.\soln $V=x(12-2x)^2$; $V'=(12-2x)(12-6x)=0\Rightarrow x=2$; $V=128$ cm³.` },
-      { t: "Maximum profit", body: r`Maximize $P(x)=-2x^2+40x-100$.\soln $P'=-4x+40=0\Rightarrow x=10$; $P(10)=100$.` },
-      { t: "Max product", body: r`Two positive numbers sum to 12. Maximize the product.\soln $P=x(12-x)$; $P'=12-2x=0\Rightarrow x=6$; product $36$.` },
-      { t: "Max area", body: r`Maximize the area of a rectangle with 60 m of fence.\soln $15\times15$, area $225$ m².` },
-      { t: "Minimize a sum", body: r`For $x>0$, minimize $f(x)=x+\dfrac{9}{x}$.\soln $1-\dfrac9{x^2}=0\Rightarrow x=3$; min value $6$.` },
-      { t: "Maximum value", body: r`Maximize $P(x)=-x^2+10x$.\soln $P'=-2x+10=0\Rightarrow x=5$; $P(5)=25$.` },
+      { t: "Max area, fixed perimeter", body: r`A pen uses 40 m of fence. Maximize the area.\soln
+\textbf{Step 1 (define a variable and write the constraint):} let the width be $x$; since $2x+2y=40$, the length is $y=20-x$.\\[3pt]
+\textbf{Step 2 (write the quantity to optimize, in one variable):} $A(x)=x(20-x)$.\\[3pt]
+\textbf{Step 3 (differentiate and solve $A'=0$):} $A'(x)=20-2x=0\Rightarrow x=10$.\\[3pt]
+\textbf{Step 4 (verify it's a max):} $A''(x)=-2<0$, so concave down --- a maximum.\\[3pt]
+\textbf{Conclusion:} a $10\times10$ square, giving maximum area $100$ m$^2$:` + r`\eplot{0}{20}{0}{120}{\addplot[exblue,very thick,domain=0:20]{x*(20-x)};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(10,100)};}` },
+      { t: "Wall on one side", body: r`Only 3 sides fenced with 20 m. Maximize the area.\soln
+\textbf{Step 1 (define a variable and the constraint):} let $x$ be each of the two equal sides perpendicular to the wall; the constraint is $2x+y=20$, so $y=20-2x$.\\[3pt]
+\textbf{Step 2 (write $A$ in one variable):} $A(x)=x(20-2x)$.\\[3pt]
+\textbf{Step 3 (differentiate and solve $A'=0$):} $A'(x)=20-4x=0\Rightarrow x=5$.\\[3pt]
+\textbf{Step 4 (find the other dimension and the area):} $y=20-10=10$; $A=5(10)=50$.\\[3pt]
+\textbf{Conclusion:} maximum area $50$ m$^2$, with the fenced sides $5$ m and $10$ m.` },
+      { t: "Minimize a sum", body: r`For $x>0$, minimize $f(x)=x+\dfrac{16}{x}$.\soln
+\textbf{Step 1 (differentiate):} $f'(x)=1-\dfrac{16}{x^2}$.\\[3pt]
+\textbf{Step 2 (set $f'=0$ and solve):} $1=\dfrac{16}{x^2}\Rightarrow x^2=16\Rightarrow x=4$ (since $x>0$).\\[3pt]
+\textbf{Step 3 (verify it's a minimum):} $f''(x)=\dfrac{32}{x^3}>0$ for $x>0$, so concave up --- a minimum.\\[3pt]
+\textbf{Step 4 (find the minimum value):} $f(4)=4+\dfrac{16}{4}=4+4$.\\[3pt]
+\textbf{Conclusion:} minimum value $8$, at $x=4$.` },
+      { t: "Max-volume open box", body: r`Cut side-$x$ squares from a $12\times12$ sheet; fold into an open box. Maximize the volume.\soln
+\textbf{Step 1 (set up the dimensions):} folding up flaps of size $x$ leaves a base of side $12-2x$ and height $x$.\\[3pt]
+\textbf{Step 2 (write $V$ in one variable):} $V(x)=x(12-2x)^2$.\\[3pt]
+\textbf{Step 3 (differentiate using the product rule with the chain rule):} $V'(x)=(12-2x)^2+x\cdot2(12-2x)(-2)=(12-2x)[(12-2x)-4x]=(12-2x)(12-6x)$.\\[3pt]
+\textbf{Step 4 (solve $V'=0$ within the valid domain $0<x<6$):} $12-6x=0\Rightarrow x=2$ (the factor $12-2x=0$ gives $x=6$, an endpoint with zero volume).\\[3pt]
+\textbf{Step 5 (compute the volume):} $V(2)=2(8)^2=2(64)$.\\[3pt]
+\textbf{Conclusion:} maximum volume $128$ cm$^3$, at $x=2$.` },
+      { t: "Maximum profit", body: r`Maximize $P(x)=-2x^2+40x-100$.\soln
+\textbf{Step 1 (differentiate):} $P'(x)=-4x+40$.\\[3pt]
+\textbf{Step 2 (set $P'=0$ and solve):} $-4x+40=0\Rightarrow x=10$.\\[3pt]
+\textbf{Step 3 (verify it's a max):} $P''(x)=-4<0$, so concave down --- a maximum.\\[3pt]
+\textbf{Step 4 (find the maximum value):} $P(10)=-2(100)+400-100=-200+400-100$.\\[3pt]
+\textbf{Conclusion:} maximum profit $100$, at $x=10$.` },
+      { t: "Max product", body: r`Two positive numbers sum to 12. Maximize the product.\soln
+\textbf{Step 1 (define variables using the constraint):} let the numbers be $x$ and $12-x$.\\[3pt]
+\textbf{Step 2 (write the product):} $P(x)=x(12-x)$.\\[3pt]
+\textbf{Step 3 (differentiate and solve $P'=0$):} $P'(x)=12-2x=0\Rightarrow x=6$.\\[3pt]
+\textbf{Step 4 (find the product):} both numbers are $6$, so $P=6(6)$.\\[3pt]
+\textbf{Conclusion:} maximum product $36$, when both numbers equal $6$.` },
+      { t: "Max area", body: r`Maximize the area of a rectangle with 60 m of fence.\soln
+\textbf{Step 1 (define a variable and the constraint):} let the width be $x$; since $2x+2y=60$, $y=30-x$.\\[3pt]
+\textbf{Step 2 (write $A$ in one variable and optimize):} $A(x)=x(30-x)$, $A'(x)=30-2x=0\Rightarrow x=15$.\\[3pt]
+\textbf{Step 3 (find the dimensions and area):} $y=30-15=15$; $A=15(15)$.\\[3pt]
+\textbf{Conclusion:} a $15\times15$ square, giving maximum area $225$ m$^2$.` },
+      { t: "Minimize a sum", body: r`For $x>0$, minimize $f(x)=x+\dfrac{9}{x}$.\soln
+\textbf{Step 1 (differentiate):} $f'(x)=1-\dfrac{9}{x^2}$.\\[3pt]
+\textbf{Step 2 (set $f'=0$ and solve):} $x^2=9\Rightarrow x=3$ (since $x>0$).\\[3pt]
+\textbf{Step 3 (find the minimum value):} $f(3)=3+\dfrac93=3+3$.\\[3pt]
+\textbf{Conclusion:} minimum value $6$, at $x=3$.` },
+      { t: "Maximum value", body: r`Maximize $P(x)=-x^2+10x$.\soln
+\textbf{Step 1 (differentiate):} $P'(x)=-2x+10$.\\[3pt]
+\textbf{Step 2 (set $P'=0$ and solve):} $-2x+10=0\Rightarrow x=5$.\\[3pt]
+\textbf{Step 3 (find the maximum value):} $P(5)=-25+50$.\\[3pt]
+\textbf{Conclusion:} maximum value $25$, at $x=5$.` },
     ],
     questions: [
       { ask: r`Two positive numbers sum to 20. Maximize the product.` },
@@ -40,15 +83,50 @@ export default [
     intro: r`Write an equation relating the quantities, differentiate both sides with respect to $t$, then substitute the instant and solve for the unknown rate.`,
     ideas: [r`Identify known/unknown rates.`, r`Relate the quantities; differentiate w.r.t. $t$ (chain rule).`, r`Substitute the instant's values; solve.`],
     examples: [
-      { t: "Expanding circle", body: r`$\dfrac{dr}{dt}=2$ cm/s. Find $\dfrac{dA}{dt}$ at $r=5$.\soln $A=\pi r^2\Rightarrow\dfrac{dA}{dt}=2\pi r\dfrac{dr}{dt}=2\pi(5)(2)=20\pi\approx62.8$ cm²/s.` },
-      { t: "Sliding ladder", body: r`A 13 m ladder's base slides out at 2 m/s. Find the top's rate when the base is 5 m out.\soln $x^2+y^2=169$, $y=12$; $2xx'+2yy'=0\Rightarrow y'=-\dfrac{5(2)}{12}=-\dfrac56$ m/s.` + r`\rtri{5}{12}{$y$}{$x$}{$13$}` },
-      { t: "Inflating balloon", body: r`$\dfrac{dV}{dt}=100$ cm³/s. Find $\dfrac{dr}{dt}$ at $r=5$.\soln $V=\tfrac43\pi r^3\Rightarrow\dfrac{dV}{dt}=4\pi r^2\dfrac{dr}{dt}$; $100=4\pi(25)\dfrac{dr}{dt}\Rightarrow\dfrac{dr}{dt}=\dfrac1\pi$ cm/s.` },
-      { t: "Growing square", body: r`A square's side grows at 3 cm/s. Find $\dfrac{dA}{dt}$ at $s=10$.\soln $A=s^2\Rightarrow 2s\dfrac{ds}{dt}=2(10)(3)=60$ cm²/s.` },
-      { t: "Two cars", body: r`Car A north at 60, car B east at 80 km/h from a point. Find the rate the distance grows after 1 h.\soln $D=100$; $2DD'=2aa'+2bb'\Rightarrow D'=\dfrac{60(60)+80(80)}{100}=100$ km/h.` },
-      { t: "Expanding circle", body: r`$\dfrac{dr}{dt}=3$ cm/s. Find $\dfrac{dA}{dt}$ at $r=4$.\soln $2\pi(4)(3)=24\pi$ cm²/s.` },
-      { t: "Growing square", body: r`Side grows at 2 cm/s. Find $\dfrac{dA}{dt}$ at $s=6$.\soln $2(6)(2)=24$ cm²/s.` },
-      { t: "Inflating balloon", body: r`$\dfrac{dV}{dt}=36\pi$ cm³/s. Find $\dfrac{dr}{dt}$ at $r=3$.\soln $36\pi=4\pi(9)\dfrac{dr}{dt}\Rightarrow\dfrac{dr}{dt}=1$ cm/s.` },
-      { t: "Sliding ladder", body: r`A 10 m ladder's base slides out at 1 m/s. Find the top's rate at base $=6$ m.\soln $y=8$; $y'=-\dfrac{6(1)}{8}=-\dfrac34$ m/s.` },
+      { t: "Expanding circle", body: r`$\dfrac{dr}{dt}=2$ cm/s. Find $\dfrac{dA}{dt}$ at $r=5$.\soln
+\textbf{Step 1 (write the relating equation):} $A=\pi r^2$.\\[3pt]
+\textbf{Step 2 (differentiate both sides with respect to $t$, using the chain rule on $r^2$):} $\dfrac{dA}{dt}=2\pi r\dfrac{dr}{dt}$.\\[3pt]
+\textbf{Step 3 (substitute $r=5$ and $\frac{dr}{dt}=2$):} $\dfrac{dA}{dt}=2\pi(5)(2)$.\\[3pt]
+\textbf{Conclusion:} $\dfrac{dA}{dt}=20\pi\approx62.8$ cm$^2$/s.` },
+      { t: "Sliding ladder", body: r`A 13 m ladder's base slides out at 2 m/s. Find the top's rate when the base is 5 m out.\soln
+\textbf{Step 1 (write the relating equation, Pythagorean theorem):} $x^2+y^2=169$.\\[3pt]
+\textbf{Step 2 (find $y$ at this instant):} $x=5\Rightarrow y=\sqrt{169-25}=\sqrt{144}=12$.\\[3pt]
+\textbf{Step 3 (differentiate both sides with respect to $t$):} $2x\dfrac{dx}{dt}+2y\dfrac{dy}{dt}=0$.\\[3pt]
+\textbf{Step 4 (substitute known values and solve for $\frac{dy}{dt}$):} $2(5)(2)+2(12)\dfrac{dy}{dt}=0\Rightarrow\dfrac{dy}{dt}=-\dfrac{20}{24}$.\\[3pt]
+\textbf{Conclusion:} $\dfrac{dy}{dt}=-\dfrac56$ m/s (negative --- the top is sliding down):` + r`\rtri{5}{12}{$y$}{$x$}{$13$}` },
+      { t: "Inflating balloon", body: r`$\dfrac{dV}{dt}=100$ cm³/s. Find $\dfrac{dr}{dt}$ at $r=5$.\soln
+\textbf{Step 1 (write the relating equation):} $V=\tfrac43\pi r^3$.\\[3pt]
+\textbf{Step 2 (differentiate both sides with respect to $t$):} $\dfrac{dV}{dt}=4\pi r^2\dfrac{dr}{dt}$.\\[3pt]
+\textbf{Step 3 (substitute $r=5$ and $\frac{dV}{dt}=100$):} $100=4\pi(25)\dfrac{dr}{dt}=100\pi\dfrac{dr}{dt}$.\\[3pt]
+\textbf{Conclusion:} $\dfrac{dr}{dt}=\dfrac1\pi$ cm/s.` },
+      { t: "Growing square", body: r`A square's side grows at 3 cm/s. Find $\dfrac{dA}{dt}$ at $s=10$.\soln
+\textbf{Step 1 (write the relating equation):} $A=s^2$.\\[3pt]
+\textbf{Step 2 (differentiate both sides with respect to $t$):} $\dfrac{dA}{dt}=2s\dfrac{ds}{dt}$.\\[3pt]
+\textbf{Step 3 (substitute $s=10$ and $\frac{ds}{dt}=3$):} $2(10)(3)$.\\[3pt]
+\textbf{Conclusion:} $\dfrac{dA}{dt}=60$ cm$^2$/s.` },
+      { t: "Two cars", body: r`Car A north at 60, car B east at 80 km/h from a point. Find the rate the distance grows after 1 h.\soln
+\textbf{Step 1 (write the relating equation):} if $a,b$ are the cars' distances travelled and $D$ the distance between them, $D^2=a^2+b^2$.\\[3pt]
+\textbf{Step 2 (find the values after 1 h):} $a=60,\ b=80\Rightarrow D=\sqrt{60^2+80^2}=\sqrt{10000}=100$.\\[3pt]
+\textbf{Step 3 (differentiate both sides with respect to $t$):} $2D\dfrac{dD}{dt}=2a\dfrac{da}{dt}+2b\dfrac{db}{dt}$.\\[3pt]
+\textbf{Step 4 (substitute and solve for $\frac{dD}{dt}$):} $\dfrac{dD}{dt}=\dfrac{60(60)+80(80)}{100}=\dfrac{3600+6400}{100}$.\\[3pt]
+\textbf{Conclusion:} $\dfrac{dD}{dt}=100$ km/h.` },
+      { t: "Expanding circle", body: r`$\dfrac{dr}{dt}=3$ cm/s. Find $\dfrac{dA}{dt}$ at $r=4$.\soln
+\textbf{Step 1 (differentiate $A=\pi r^2$ with respect to $t$):} $\dfrac{dA}{dt}=2\pi r\dfrac{dr}{dt}$.\\[3pt]
+\textbf{Step 2 (substitute $r=4$, $\frac{dr}{dt}=3$):} $2\pi(4)(3)$.\\[3pt]
+\textbf{Conclusion:} $\dfrac{dA}{dt}=24\pi$ cm$^2$/s.` },
+      { t: "Growing square", body: r`Side grows at 2 cm/s. Find $\dfrac{dA}{dt}$ at $s=6$.\soln
+\textbf{Step 1 (differentiate $A=s^2$ with respect to $t$):} $\dfrac{dA}{dt}=2s\dfrac{ds}{dt}$.\\[3pt]
+\textbf{Step 2 (substitute $s=6$, $\frac{ds}{dt}=2$):} $2(6)(2)$.\\[3pt]
+\textbf{Conclusion:} $\dfrac{dA}{dt}=24$ cm$^2$/s.` },
+      { t: "Inflating balloon", body: r`$\dfrac{dV}{dt}=36\pi$ cm³/s. Find $\dfrac{dr}{dt}$ at $r=3$.\soln
+\textbf{Step 1 (differentiate $V=\tfrac43\pi r^3$ with respect to $t$):} $\dfrac{dV}{dt}=4\pi r^2\dfrac{dr}{dt}$.\\[3pt]
+\textbf{Step 2 (substitute $r=3$, $\frac{dV}{dt}=36\pi$):} $36\pi=4\pi(9)\dfrac{dr}{dt}=36\pi\dfrac{dr}{dt}$.\\[3pt]
+\textbf{Conclusion:} $\dfrac{dr}{dt}=1$ cm/s.` },
+      { t: "Sliding ladder", body: r`A 10 m ladder's base slides out at 1 m/s. Find the top's rate at base $=6$ m.\soln
+\textbf{Step 1 (write the relating equation and find $y$):} $x^2+y^2=100$; at $x=6$, $y=\sqrt{100-36}=\sqrt{64}=8$.\\[3pt]
+\textbf{Step 2 (differentiate with respect to $t$):} $2x\dfrac{dx}{dt}+2y\dfrac{dy}{dt}=0$.\\[3pt]
+\textbf{Step 3 (substitute and solve):} $2(6)(1)+2(8)\dfrac{dy}{dt}=0\Rightarrow\dfrac{dy}{dt}=-\dfrac{12}{16}$.\\[3pt]
+\textbf{Conclusion:} $\dfrac{dy}{dt}=-\dfrac34$ m/s.` },
     ],
     questions: [
       { ask: r`A circle's radius grows at 5 cm/s. Find $\dfrac{dA}{dt}$ at $r=2$.` },
@@ -72,15 +150,43 @@ export default [
     intro: r`$v=s'$, $a=v'=s''$, speed $=|v|$. At rest when $v=0$; speeding up when $v,a$ share a sign.`,
     ideas: [r`$v(t)=s'(t)$, $a(t)=s''(t)$.`, r`At rest: $v=0$; direction: sign of $v$.`, r`Speeding up: $v,a$ same sign; slowing: opposite.`],
     examples: [
-      { t: "v and a", body: r`For $s(t)=t^2-4t$, find $v$ and $a$.\soln $v=2t-4$, $a=2$. Velocity is the slope of position; at rest at the lowest point ($t=2$):` + r`\eplot{-1}{5}{-5}{6}{\addplot[exblue,very thick,domain=0:4.5]{x^2-4*x};\addplot[qorange,very thick,domain=0:4.5]{2*x-4};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(2,-4)};}` },
-      { t: "At rest", body: r`When is $s(t)=t^2-4t$ at rest?\soln $v=2t-4=0\Rightarrow t=2$ s.` },
-      { t: "Multiple rest times", body: r`When is $s(t)=t^3-6t^2+9t$ at rest?\soln $v=3t^2-12t+9=3(t-1)(t-3)=0\Rightarrow t=1,3$.` },
-      { t: "Direction & accel", body: r`Describe the motion of $s(t)=t^3-6t^2+9t$ at $t=0$.\soln $v(0)=9>0$ (moving right); $a=6t-12$, $a(0)=-12<0$ (decelerating).` },
-      { t: "Speeding up?", body: r`Is $s(t)=t^3-6t^2+9t$ speeding up at $t=4$?\soln $v(4)=9>0$, $a(4)=12>0$; same sign ⇒ speeding up.` },
-      { t: "Velocity", body: r`For $s(t)=t^2-6t$, find $v(t)$.\soln $2t-6$.` },
-      { t: "At rest", body: r`When is $s(t)=t^2-6t$ at rest?\soln $2t-6=0\Rightarrow t=3$.` },
-      { t: "Acceleration", body: r`For $s(t)=t^3-3t^2$, find $a(t)$.\soln $v=3t^2-6t$, $a=6t-6$.` },
-      { t: "Max height", body: r`A projectile has $h(t)=-5t^2+20t$. When is it highest?\soln $v=-10t+20=0\Rightarrow t=2$ s.` },
+      { t: "v and a", body: r`For $s(t)=t^2-4t$, find $v$ and $a$.\soln
+\textbf{Step 1 (velocity is the derivative of position):} $v(t)=s'(t)=2t-4$.\\[3pt]
+\textbf{Step 2 (acceleration is the derivative of velocity):} $a(t)=v'(t)=2$.\\[3pt]
+\textbf{Conclusion:} $v(t)=2t-4$, $a(t)=2$. Velocity is the slope of position; at rest at the lowest point ($t=2$):` + r`\eplot{-1}{5}{-5}{6}{\addplot[exblue,very thick,domain=0:4.5]{x^2-4*x};\addplot[qorange,very thick,domain=0:4.5]{2*x-4};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(2,-4)};}` },
+      { t: "At rest", body: r`When is $s(t)=t^2-4t$ at rest?\soln
+\textbf{Step 1 (find $v(t)$):} $v(t)=2t-4$.\\[3pt]
+\textbf{Step 2 (set $v=0$, since "at rest" means zero velocity):} $2t-4=0$.\\[3pt]
+\textbf{Conclusion:} $t=2$ s.` },
+      { t: "Multiple rest times", body: r`When is $s(t)=t^3-6t^2+9t$ at rest?\soln
+\textbf{Step 1 (find $v(t)$):} $v(t)=3t^2-12t+9$.\\[3pt]
+\textbf{Step 2 (set $v=0$ and factor):} $3(t^2-4t+3)=3(t-1)(t-3)=0$.\\[3pt]
+\textbf{Conclusion:} at rest at $t=1$ and $t=3$.` },
+      { t: "Direction & accel", body: r`Describe the motion of $s(t)=t^3-6t^2+9t$ at $t=0$.\soln
+\textbf{Step 1 (find $v(t)$ and evaluate at $t=0$):} $v(t)=3t^2-12t+9\Rightarrow v(0)=9>0$, so the object is moving in the positive direction.\\[3pt]
+\textbf{Step 2 (find $a(t)$ and evaluate at $t=0$):} $a(t)=6t-12\Rightarrow a(0)=-12<0$.\\[3pt]
+\textbf{Step 3 (interpret):} positive velocity but negative acceleration means it's slowing down (decelerating) while still moving forward.\\[3pt]
+\textbf{Conclusion:} at $t=0$ the object moves right ($v(0)=9>0$) while decelerating ($a(0)=-12<0$).` },
+      { t: "Speeding up?", body: r`Is $s(t)=t^3-6t^2+9t$ speeding up at $t=4$?\soln
+\textbf{Step 1 (evaluate $v(4)$):} $v(t)=3t^2-12t+9\Rightarrow v(4)=48-48+9=9>0$.\\[3pt]
+\textbf{Step 2 (evaluate $a(4)$):} $a(t)=6t-12\Rightarrow a(4)=24-12=12>0$.\\[3pt]
+\textbf{Step 3 (apply the rule: same sign means speeding up):} $v(4)$ and $a(4)$ are both positive.\\[3pt]
+\textbf{Conclusion:} yes, speeding up at $t=4$.` },
+      { t: "Velocity", body: r`For $s(t)=t^2-6t$, find $v(t)$.\soln
+\textbf{Step 1 (differentiate $s(t)$):} $v(t)=s'(t)$.\\[3pt]
+\textbf{Conclusion:} $v(t)=2t-6$.` },
+      { t: "At rest", body: r`When is $s(t)=t^2-6t$ at rest?\soln
+\textbf{Step 1 (find $v(t)$):} $v(t)=2t-6$.\\[3pt]
+\textbf{Step 2 (set $v=0$ and solve):} $2t-6=0$.\\[3pt]
+\textbf{Conclusion:} $t=3$.` },
+      { t: "Acceleration", body: r`For $s(t)=t^3-3t^2$, find $a(t)$.\soln
+\textbf{Step 1 (find $v(t)$):} $v(t)=3t^2-6t$.\\[3pt]
+\textbf{Step 2 (differentiate $v(t)$ to get $a(t)$):} $a(t)=6t-6$.\\[3pt]
+\textbf{Conclusion:} $a(t)=6t-6$.` },
+      { t: "Max height", body: r`A projectile has $h(t)=-5t^2+20t$. When is it highest?\soln
+\textbf{Step 1 (find $v(t)$):} $v(t)=h'(t)=-10t+20$.\\[3pt]
+\textbf{Step 2 (set $v=0$, since the height is maximized when the velocity is momentarily zero):} $-10t+20=0$.\\[3pt]
+\textbf{Conclusion:} $t=2$ s.` },
     ],
     questions: [
       { ask: r`For $s(t)=t^2-6t$, find $v(t)$.` },

@@ -38,10 +38,15 @@ export function QuestionView({ q, number, value, onChange }: { q: Question; numb
 function Input({ q, value, onChange }: { q: Question; value: any; onChange: (v: any) => void }) {
   if (q.kind === "multiple_choice") {
     return (
-      <div style={optWrap}>
+      // options that are figures (e.g. four slope fields) sit two to a row
+      <div style={(q.choices ?? []).some((c: any) => c.image) ? optGrid : optWrap}>
         {(q.choices ?? []).map((c: any) => (
           <Opt key={c.id} selected={value === c.id} onClick={() => onChange(c.id)} type="radio">
             <PromptText prompt={c.text} />
+            {c.image && (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={c.image} alt={`Option ${String(c.id).toUpperCase()}`} style={{ display: "block", width: "100%", maxWidth: 260, borderRadius: 8 }} />
+            )}
           </Opt>
         ))}
       </div>
@@ -141,7 +146,19 @@ function Input({ q, value, onChange }: { q: Question; value: any; onChange: (v: 
 export function CorrectAnswer({ q }: { q: Question }) {
   let parts: string[] = [];
   let sep = ", ";
-  if (q.kind === "multiple_choice") { const t = (q.choices ?? []).find((c: any) => c.id === q.answer)?.text; if (t) parts = [t]; }
+  if (q.kind === "multiple_choice") {
+    const hit = (q.choices ?? []).find((c: any) => c.id === q.answer);
+    if (hit?.image) {
+      return (
+        <div style={{ fontSize: 13, color: "#059669", marginTop: 6, fontWeight: 600 }}>
+          Correct: option {String(hit.id).toUpperCase()}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={hit.image} alt="" style={{ display: "block", width: 200, marginTop: 6, borderRadius: 8, border: "1px solid #a7f3d0" }} />
+        </div>
+      );
+    }
+    if (hit?.text) parts = [hit.text];
+  }
   else if (q.kind === "multiple_select") parts = (q.choices ?? []).filter((c: any) => (q.answer ?? []).includes(c.id)).map((c: any) => c.text);
   else if (q.kind === "true_false" || q.kind === "numeric") parts = [String(q.answer)];
   else if (q.kind === "math_expr") {
@@ -204,5 +221,6 @@ function Opt({ children, selected, onClick, type }: { children: React.ReactNode;
   );
 }
 const optWrap: React.CSSProperties = { display: "flex", flexDirection: "column", gap: 10 };
+const optGrid: React.CSSProperties = { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(210px, 1fr))", gap: 10 };
 const textInput: React.CSSProperties = { width: "100%", padding: "12px 14px", borderRadius: 10, border: "1px solid #cbd5e1", fontSize: 15, fontFamily: "inherit", outline: "none", boxSizing: "border-box" };
 const miniMove: React.CSSProperties = { width: 32, height: 32, borderRadius: 7, border: "1px solid #e2e8f0", background: "#fff", cursor: "pointer", fontWeight: 700 };

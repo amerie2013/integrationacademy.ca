@@ -11,6 +11,21 @@ import {
   copyAngleFig, bisectFig, incenterFig, circumcenterFig,
   sampleSpaceFig, treeDiagram, twoWayTable, permuteCombine,
 } from "./figures2.mjs";
+import {
+  threePointsPlane, collinearPts, numberLineDist, midpointAlgebra, classifyAngles,
+  copyAngleObtuse, angleCombine, biconditionalFig, paragraphProofFig,
+  parallelConverse, perpTransversal, horizVert, constructPerpOnLine, constructRectangle,
+  translatePolygon, reflectYX, reflectVertical, rotate180, rotate270, glideReflect,
+  parallelReflect, intersectReflect, parallelogramSym, squareSym, scaleneNoSym,
+  exteriorAngle, angleSumTri, equilateralFig, altitudeIsos, aasMarks, medianFig,
+  dilatePoint, sssSimilar, sasSimilar, midsegmentTri, threeParallel, mirrorMethod,
+  depressionFig, guyWire, twoElevations,
+  diameterChord, semicircleRight, chordPerp, chordChord, tangentSecant, twoSecants, circleEq,
+  pyramidFig, coneFig, sphereFig, densityFig, popDensity, coneSlice, sphereSlice, frustumFig,
+  dieFig, bagMarbles, complementFig, cardsFig, expectedValue, withWithout,
+} from "./figures3.mjs";
+import { hexagonSymmetryFig } from "./figures2.mjs";
+import { copySegment, angleBisector } from "./figures.mjs";
 
 export const ch = {};
 
@@ -32,6 +47,7 @@ ch["11.1"] = L("11.1", "Copying Segments and Angles (MA.912.GR.5.1)", [
       {
         h: "Copying a segment",
         p: "Copy \\(\\overline{AB}\\) onto a new ray starting at point \\(A'\\).",
+        fig: copySegment(),
         steps: [
           `Draw a ray starting at \\(A'\\), extending in any direction.`,
           `Place the compass point on \\(A\\) and open it until the pencil tip reaches \\(B\\) — this fixes the compass width at exactly \\(AB\\).`,
@@ -56,6 +72,7 @@ ch["11.1"] = L("11.1", "Copying Segments and Angles (MA.912.GR.5.1)", [
       {
         h: "Copying a segment length within a diagram",
         p: "\\(\\overline{PQ}\\) is one side of a triangle. Copy its length onto ray \\(r\\) starting at point \\(R\\), so that \\(RQ' = PQ\\).",
+        fig: copySegment(),
         steps: [
           `Set the compass width to \\(PQ\\) by placing the point on \\(P\\) and the pencil on \\(Q\\).`,
           `Without changing the width, place the compass point on \\(R\\) and swing an arc crossing ray \\(r\\).`,
@@ -66,6 +83,7 @@ ch["11.1"] = L("11.1", "Copying Segments and Angles (MA.912.GR.5.1)", [
       {
         h: "Copying an obtuse angle",
         p: "Copy the obtuse angle \\(\\angle XYZ\\) using compass and straightedge, without ever measuring it in degrees.",
+        fig: copyAngleObtuse(),
         steps: [
           `The method is identical no matter the angle's size — it never depends on knowing the angle's numerical measure.`,
           `Draw a new ray, center an arc at \\(Y\\) crossing both original rays, copy that arc at the new vertex, then copy the chord distance between the two arc points to fix the second ray's direction.`,
@@ -76,6 +94,7 @@ ch["11.1"] = L("11.1", "Copying Segments and Angles (MA.912.GR.5.1)", [
       {
         h: "Building a congruent triangle by copying all three sides",
         p: "Given \\(\\triangle ABC\\), construct \\(\\triangle DEF \\cong \\triangle ABC\\) using only compass and straightedge (an \\(SSS\\) construction).",
+        fig: sssMarks(),
         steps: [
           `Copy \\(\\overline{AB}\\) onto a new segment \\(\\overline{DE}\\), using the segment-copying method.`,
           `Set the compass to width \\(AC\\); center it at \\(D\\) and draw a wide arc where the third vertex must lie.`,
@@ -132,12 +151,14 @@ ch["11.2"] = L("11.2", "Bisecting Segments and Angles (MA.912.GR.5.2)", [
       {
         h: "Using the bisected lengths",
         p: "In the construction above, if \\(AB = 12\\) cm, find \\(AM\\) and \\(MB\\).",
+        fig: bisectFig(),
         steps: [`Bisecting splits the segment into two exactly equal parts: \\(AM = MB = \\dfrac{AB}{2}\\)`, `\\(AM = MB = \\dfrac{12}{2} = 6\\)`],
         check: "AM = MB = 6 cm.",
       },
       {
         h: "Constructing an angle bisector",
         p: "Construct the bisector of \\(\\angle ABC\\).",
+        fig: angleBisector(),
         steps: [
           `Center the compass at vertex \\(B\\) and draw an arc crossing both rays of the angle, at points \\(D\\) and \\(E\\).`,
           `Center the compass at \\(D\\) and draw an arc inside the angle; without changing the width, center it at \\(E\\) and draw another arc that crosses the first.`,
@@ -148,12 +169,14 @@ ch["11.2"] = L("11.2", "Bisecting Segments and Angles (MA.912.GR.5.2)", [
       {
         h: "Using the bisected angle measure",
         p: "If \\(\\angle ABC = 80^\\circ\\), find the measure of each half after bisecting.",
+        fig: angleBisector(),
         steps: [`\\(\\angle ABF = \\angle FBC = \\dfrac{80^\\circ}{2}\\)`, `\\(\\angle ABF = \\angle FBC = 40^\\circ\\)`],
         check: "Each half measures 40°.",
       },
       {
         h: "Combining bisection with a perpendicular",
         p: "Bisect \\(\\overline{AB}\\) to find its midpoint \\(M\\), then use \\(M\\) to construct a segment perpendicular to \\(\\overline{AB}\\) at that point.",
+        fig: bisectFig(),
         steps: [
           `Construct the perpendicular bisector of \\(\\overline{AB}\\) as before, locating midpoint \\(M\\) where the bisector crosses \\(\\overline{AB}\\).`,
           `The perpendicular bisector line itself already passes through \\(M\\) at a right angle to \\(\\overline{AB}\\) — no extra construction is needed.`,
@@ -209,6 +232,7 @@ ch["11.3"] = L("11.3", "Constructing Inscribed and Circumscribed Circles of a Tr
       {
         h: "Using the incircle",
         p: "After constructing the incenter \\(I\\) of a triangle, the perpendicular distance from \\(I\\) to each side is found to be 4 cm. Describe the resulting incircle.",
+        fig: incenterFig(),
         steps: [`Since the inradius is the same in every direction from the incenter, a single distance value describes the whole circle.`, `A circle of radius 4 cm, centered at \\(I\\), touches all three sides of the triangle exactly once.`],
         check: "The incircle has radius 4 cm and is tangent to every side.",
       },
@@ -227,6 +251,7 @@ ch["11.3"] = L("11.3", "Constructing Inscribed and Circumscribed Circles of a Tr
       {
         h: "Circumcenter of a right triangle",
         p: "A right triangle has legs 6 and 8 and hypotenuse 10. Find the circumradius.",
+        fig: circumcenterFig(),
         steps: [
           `For any right triangle, the circumcenter always lands exactly at the midpoint of the hypotenuse.`,
           `The circumradius is therefore half the hypotenuse: \\(R = \\dfrac{10}{2}\\)`,
@@ -237,6 +262,7 @@ ch["11.3"] = L("11.3", "Constructing Inscribed and Circumscribed Circles of a Tr
       {
         h: "Incenter and circumcenter of an equilateral triangle",
         p: "An equilateral triangle has side length 6. Find its circumradius and inradius.",
+        fig: equilateralFig(),
         steps: [
           `In an equilateral triangle, the incenter and circumcenter are the same point, and \\(R = 2r\\).`,
           `Circumradius: \\(R = \\dfrac{s}{\\sqrt{3}} = \\dfrac{6}{\\sqrt{3}} = 2\\sqrt{3}\\)`,

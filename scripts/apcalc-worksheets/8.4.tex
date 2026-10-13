@@ -1,0 +1,77 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize\color{black!60}Worksheet 8.4}
+\begin{document}
+
+\wstitle{8.4}{Area Between Curves, Slicing Vertically}{Unit 8: Applications of Integration}
+
+\begin{ideabox}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+  \item The area between two graphs for $a\le x\le b$ is $\displaystyle\int_{a}^{b}\big(\text{top}-\text{bottom}\big)\,dx$.
+  \item The limits are usually the $x$-coordinates of the points of intersection: set the two formulas equal.
+  \item Top minus bottom is never negative, so an area found this way is positive even when the region lies below the $x$-axis.
+  \item Sketch first. A test value between the intersections shows which graph is on top.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked examples}
+\begin{example}{Example 1 \textperiodcentered{} A line and a parabola}
+Find the area enclosed by $y=x^2-4x$ and $y=2x-5$.\soln $x^2-6x+5=0$ gives $x=1,5$. The line is on top: $\displaystyle\int_{1}^{5}(-x^2+6x-5)\,dx$.\result{$\dfrac{32}{3}$.}
+\end{example}
+
+\begin{example}{Example 2 \textperiodcentered{} Given limits}
+Find the area between $y=e^{x}$ and $y=x$ for $0\le x\le2$.\soln $\displaystyle\int_{0}^{2}(e^{x}-x)\,dx=\Big[e^{x}-\tfrac{x^2}{2}\Big]_0^2$.\result{$e^2-3$.}
+\end{example}
+
+\begin{example}{Example 3 \textperiodcentered{} Finding the limits}
+Find the area enclosed by $y=3\sqrt{x}$ and $y=x$.\soln They meet at $x=0$ and $x=9$: $\displaystyle\int_{0}^{9}\left(3\sqrt x-x\right)\,dx=54-\dfrac{81}{2}$.\result{$\dfrac{27}{2}$.}
+\end{example}
+
+\newpage
+\sech{Practice}
+
+\level{Core}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item Write, but do not evaluate, an integral for the area enclosed by $y=x+2$ and $y=x^2$.\work{2.3cm}
+  \item Evaluate the integral in Question 1.\work{2.3cm}
+  \item Find the area enclosed by $y=x^2$ and $y=4$.\work{2.3cm}
+  \item Find the area between $y=x$ and $y=x^3$ for $0\le x\le1$.\work{2.3cm}
+\end{enumerate}
+
+\level{Exam level}
+\begin{enumerate}[leftmargin=*,itemsep=2pt,start=5]
+  \item Find the area enclosed by $y=x^2$ and $y=8-x^2$.\work{2.8cm}
+  \item Find the area between $y=\cos x$ and $y=\sin x$ for $0\le x\le\dfrac\pi4$.\work{2.8cm}
+  \item Find the area between $y=e^{x}$ and $y=e^{-x}$ for $0\le x\le1$.\work{2.8cm}
+  \item \emph{Calculator.} Find the area of the region in the first quadrant enclosed by $y=3\sin x$ and $y=x$.\work{2.8cm}
+\end{enumerate}
+
+\begin{frbox}{Question 9 \textperiodcentered{} Free-response practice}
+Let $f(x)=5x-x^2$ and $g(x)=x$. Let $R$ be the region enclosed by the graphs of $f$ and $g$.
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=2pt]
+  \item Find the $x$-coordinates of the points of intersection of the two graphs.\work{2.6cm}
+  \item Find the area of $R$.\work{2.6cm}
+  \item Find the value of $x$ at which the vertical distance between the two graphs within $R$ is greatest, and find that distance.\work{2.6cm}
+\end{enumerate}
+\end{frbox}
+
+\newpage
+\begin{solbox}
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item $\displaystyle\int_{-1}^{2}(x+2-x^2)\,dx$.
+  \item $\dfrac92$.
+  \item $\displaystyle\int_{-2}^{2}(4-x^2)\,dx=\dfrac{32}{3}$.
+  \item $\dfrac12-\dfrac14=\dfrac14$.
+  \item They meet at $x=\pm2$: $\displaystyle\int_{-2}^{2}(8-2x^2)\,dx=\dfrac{64}{3}$.
+  \item $\Big[\sin x+\cos x\Big]_0^{\pi/4}=\sqrt2-1$.
+  \item $\Big[e^{x}+e^{-x}\Big]_0^1=e+\dfrac1e-2$.
+  \item They meet at $x=0$ and $x\approx2.279$: $\displaystyle\int_{0}^{2.279}(3\sin x-x)\,dx\approx2.354$.
+  \item \begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=3pt]
+    \item $5x-x^2=x$ gives $x=0$ and $x=4$.
+    \item $\displaystyle\int_{0}^{4}(4x-x^2)\,dx=32-\dfrac{64}{3}=\dfrac{32}{3}$.
+    \item The distance is $4x-x^2$, with derivative $4-2x$ changing from positive to negative at $x=2$. The greatest distance is $4$.
+  \end{enumerate}
+\end{enumerate}
+\end{solbox}
+
+\end{document}

@@ -26,39 +26,72 @@ $f$ increases where $f'>0$ and decreases where $f'<0$. Critical numbers ($f'=0$ 
 \sech{Worked Examples}
 
 \begin{example}{ex0}{Example 1 --- Intervals}
-Where is $f(x)=x^2-4x$ increasing/decreasing?\soln $f'=2x-4$; decreasing on $(-\infty,2)$, increasing on $(2,\infty)$.
+Where is $f(x)=x^2-4x$ increasing/decreasing?\soln
+\textbf{Step 1 (differentiate):} $f'(x)=2x-4$.\\[3pt]
+\textbf{Step 2 (find where $f'=0$, the boundary between the intervals):} $2x-4=0\Rightarrow x=2$.\\[3pt]
+\textbf{Step 3 (test the sign of $f'$ on each side):} for $x<2$, e.g.\ $x=0$: $f'(0)=-4<0$ (decreasing). For $x>2$, e.g.\ $x=3$: $f'(3)=2>0$ (increasing).\\[3pt]
+\textbf{Conclusion:} decreasing on $(-\infty,2)$, increasing on $(2,\infty)$.
 \end{example}
 
 \begin{example}{ex1}{Example 2 --- Critical numbers}
-Critical numbers of $f(x)=x^3-3x$.\soln $3x^2-3=0\Rightarrow x=\pm1$. $f$ rises where $f'>0$, falls where $f'<0$:\eplot{-3}{3}{-6}{6}{\addplot[exblue,very thick,domain=-2.2:2.2]{x^3-3*x};\addplot[qorange,very thick,domain=-1.7:1.7]{3*x^2-3};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(-1,2) (1,-2)};}
+Critical numbers of $f(x)=x^3-3x$.\soln
+\textbf{Step 1 (differentiate):} $f'(x)=3x^2-3$.\\[3pt]
+\textbf{Step 2 (set $f'=0$):} $3x^2-3=0\Rightarrow x^2=1$.\\[3pt]
+\textbf{Step 3 (solve):} $x=\pm1$.\\[3pt]
+\textbf{Conclusion:} critical numbers at $x=-1$ and $x=1$. $f$ rises where $f'>0$, falls where $f'<0$:\eplot{-3}{3}{-6}{6}{\addplot[exblue,very thick,domain=-2.2:2.2]{x^3-3*x};\addplot[qorange,very thick,domain=-1.7:1.7]{3*x^2-3};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(-1,2) (1,-2)};}
 \end{example}
 
 \begin{example}{ex2}{Example 3 --- Classify}
-Classify the critical points of $f(x)=x^3-3x$.\soln $x=-1$: $+\to-$, local max $(-1,2)$; $x=1$: $-\to+$, local min $(1,-2)$.
+Classify the critical points of $f(x)=x^3-3x$.\soln
+\textbf{Step 1 (recall the critical numbers):} from the previous example, $x=-1$ and $x=1$, with $f'(x)=3x^2-3$.\\[3pt]
+\textbf{Step 2 (test the sign of $f'$ around $x=-1$):} $f'$ goes from $+$ (e.g.\ $f'(-2)=9>0$) to $-$ (e.g.\ $f'(0)=-3<0$) --- a local max.\\[3pt]
+\textbf{Step 3 (test the sign of $f'$ around $x=1$):} $f'$ goes from $-$ to $+$ (e.g.\ $f'(2)=9>0$) --- a local min.\\[3pt]
+\textbf{Conclusion:} local max at $(-1,2)$; local min at $(1,-2)$.
 \end{example}
 
 \begin{example}{ex3}{Example 4 --- Neither}
-Classify the critical point of $f(x)=x^3$.\soln $f'=3x^2=0$ at $0$, but no sign change ⇒ neither (inflection).
+Classify the critical point of $f(x)=x^3$.\soln
+\textbf{Step 1 (differentiate and set to $0$):} $f'(x)=3x^2=0\Rightarrow x=0$.\\[3pt]
+\textbf{Step 2 (test the sign of $f'$ on each side):} $f'(x)=3x^2\ge0$ for every $x$ --- it's $+$ on both sides of $0$, never negative.\\[3pt]
+\textbf{Step 3 (interpret):} no sign change means neither a max nor a min.\\[3pt]
+\textbf{Conclusion:} $x=0$ is neither (it's an inflection point instead).
 \end{example}
 
 \begin{example}{ex4}{Example 5 --- Several}
-Find and classify the critical points of $f(x)=x^4-2x^2$.\soln $4x(x-1)(x+1)=0\Rightarrow x=0,\pm1$; signs $-,+,-,+$: min at $\pm1$ ($-1$), max at $0$ ($0$).
+Find and classify the critical points of $f(x)=x^4-2x^2$.\soln
+\textbf{Step 1 (differentiate):} $f'(x)=4x^3-4x$.\\[3pt]
+\textbf{Step 2 (factor and set to $0$):} $4x(x^2-1)=4x(x-1)(x+1)=0\Rightarrow x=0,1,-1$.\\[3pt]
+\textbf{Step 3 (test the sign of $f'$ in each of the four intervals):} the signs go $-,+,-,+$ moving left to right through $x=-1,0,1$.\\[3pt]
+\textbf{Conclusion:} local min at $x=-1$ ($f(-1)=-1$), local max at $x=0$ ($f(0)=0$), local min at $x=1$ ($f(1)=-1$).
 \end{example}
 
 \begin{example}{ex5}{Example 6 --- Intervals}
-Where is $f(x)=x^2-6x$ decreasing?\soln $2x-6<0\Rightarrow x<3$.
+Where is $f(x)=x^2-6x$ decreasing?\soln
+\textbf{Step 1 (differentiate):} $f'(x)=2x-6$.\\[3pt]
+\textbf{Step 2 (set up the decreasing condition, $f'<0$):} $2x-6<0$.\\[3pt]
+\textbf{Step 3 (solve the inequality):} $2x<6\Rightarrow x<3$.\\[3pt]
+\textbf{Conclusion:} decreasing on $(-\infty,3)$.
 \end{example}
 
 \begin{example}{ex6}{Example 7 --- Critical numbers}
-Critical numbers of $f(x)=x^3-12x$.\soln $3x^2-12=0\Rightarrow x=\pm2$.
+Critical numbers of $f(x)=x^3-12x$.\soln
+\textbf{Step 1 (differentiate):} $f'(x)=3x^2-12$.\\[3pt]
+\textbf{Step 2 (set $f'=0$ and solve):} $3x^2=12\Rightarrow x^2=4\Rightarrow x=\pm2$.\\[3pt]
+\textbf{Conclusion:} critical numbers at $x=-2$ and $x=2$.
 \end{example}
 
 \begin{example}{ex7}{Example 8 --- Always increasing}
-Is $f(x)=x^3+x$ ever decreasing?\soln $f'=3x^2+1>0$ always — never decreasing.
+Is $f(x)=x^3+x$ ever decreasing?\soln
+\textbf{Step 1 (differentiate):} $f'(x)=3x^2+1$.\\[3pt]
+\textbf{Step 2 (analyze the sign):} $3x^2\ge0$ for every $x$, so $3x^2+1\ge1>0$ always.\\[3pt]
+\textbf{Conclusion:} $f'(x)>0$ for every $x$, so $f$ is never decreasing.
 \end{example}
 
 \begin{example}{ex8}{Example 9 --- Classify}
-Classify the critical point of $f(x)=x^2-4x$.\soln $x=2$: $-\to+$, local min.
+Classify the critical point of $f(x)=x^2-4x$.\soln
+\textbf{Step 1 (differentiate and find the critical number):} $f'(x)=2x-4=0\Rightarrow x=2$.\\[3pt]
+\textbf{Step 2 (test the sign on each side):} for $x<2$, $f'<0$ (decreasing); for $x>2$, $f'>0$ (increasing) --- a $-\to+$ pattern.\\[3pt]
+\textbf{Conclusion:} local min at $x=2$.
 \end{example}
 
 \clearpage

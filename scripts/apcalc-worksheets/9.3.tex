@@ -1,0 +1,77 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize\color{black!60}Worksheet 9.3}
+\begin{document}
+
+\wstitle{9.3}{Calculator Strategy}{Unit 9: Exam Strategy and Free-Response Types}
+
+\begin{ideabox}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+  \item The calculator is for four jobs: graphing in a window, solving an equation, a derivative at a point, and a definite integral.
+  \item Write the mathematics, not the keystrokes: the integral or equation in standard notation, then $\approx$ and the value.
+  \item Store intermediate values. Round only the final answer, to three decimal places.
+  \item Radian mode, always.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked examples}
+\begin{example}{Example 1 \textperiodcentered{} Solving}
+Solve $x^3+x=5$.\soln Graph $y=x^3+x-5$ and find its zero.\result{$x\approx1.516$.}
+\end{example}
+
+\begin{example}{Example 2 \textperiodcentered{} A derivative at a point}
+Find $f'(2)$ for $f(x)=\sqrt{x}\,\sin x$.\soln Use the numerical derivative at $x=2$.\result{$f'(2)\approx-0.267$.}
+\end{example}
+
+\begin{example}{Example 3 \textperiodcentered{} A definite integral}
+Evaluate $\displaystyle\int_{0}^{2}\sqrt{1+x^3}\,dx$.\soln Use the numerical integral.\result{$\approx3.241$.}
+\end{example}
+
+\newpage
+\sech{Practice}
+\emph{A calculator is required on this page. Give decimal answers to three places.}
+\level{Core}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item Evaluate $\displaystyle\int_{0}^{1}e^{x^2}\,dx$.\work{2.3cm}
+  \item Solve $\ln x+x=3$.\work{2.3cm}
+  \item Find $f'(0.5)$ for $f(x)=\tan\!\left(x^2\right)$.\work{2.3cm}
+  \item A calculator displays $7.34846\ldots$ Which of $7.3$, $7.34$, $7.348$ and $7.349$ are acceptable final answers?\work{2.3cm}
+\end{enumerate}
+
+\level{Exam level}
+\begin{enumerate}[leftmargin=*,itemsep=2pt,start=5]
+  \item Find the area between $y=\sin\!\left(x^2\right)$ and the $x$-axis for $0\le x\le\sqrt{\pi}$.\work{2.8cm}
+  \item A particle has $v(t)=\ln(t+1)-1$ for $0\le t\le4$. Find the total distance it travels. Write the integral first.\work{2.8cm}
+  \item Find the average value of $f(x)=\sqrt{x}\,\cos x$ on $[0,3]$.\work{2.8cm}
+  \item A rate is modelled by $R(t)=10te^{-0.4t}$ for $t\ge0$. Find both times at which $R(t)=6$.\work{2.8cm}
+\end{enumerate}
+
+\begin{frbox}{Question 9 \textperiodcentered{} Free-response practice}
+Rain falls at the rate $r(t)=5\sqrt{t}\,e^{-0.3t}$ millimetres per hour for $0\le t\le8$, where $t$ is in hours.
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=2pt]
+  \item Find the total rainfall for $0\le t\le8$.\work{2.6cm}
+  \item Find $r'(3)$, and interpret it in context with units.\work{2.6cm}
+  \item Find the interval of time during which rain is falling at more than 3 millimetres per hour.\work{2.6cm}
+\end{enumerate}
+\end{frbox}
+
+\newpage
+\begin{solbox}
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item $\approx1.463$.
+  \item $x\approx2.208$.
+  \item $f'(0.5)\approx1.065$.
+  \item $7.348$ (rounded or truncated). The value $7.349$ is wrong, and the others have too few places.
+  \item $\displaystyle\int_{0}^{\sqrt\pi}\sin\!\left(x^2\right)\,dx\approx0.895$.
+  \item $\displaystyle\int_{0}^{4}\left|\ln(t+1)-1\right|\,dt\approx1.484$.
+  \item $\dfrac13\displaystyle\int_{0}^{3}\sqrt x\,\cos x\,dx\approx-0.216$.
+  \item $t\approx0.839$ and $t\approx5.571$.
+  \item \begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=3pt]
+    \item $\displaystyle\int_{0}^{8}r(t)\,dt\approx21.923$ millimetres.
+    \item $r'(3)\approx-0.469$. At $t=3$ hours the rate of rainfall is decreasing at about 0.469 millimetres per hour per hour.
+    \item $r(t)=3$ at $t\approx0.480$ and $t\approx4.023$, and $r(t)>3$ between them: $0.480<t<4.023$.
+  \end{enumerate}
+\end{enumerate}
+\end{solbox}
+
+\end{document}

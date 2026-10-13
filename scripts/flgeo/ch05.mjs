@@ -11,6 +11,21 @@ import {
   copyAngleFig, bisectFig, incenterFig, circumcenterFig,
   sampleSpaceFig, treeDiagram, twoWayTable, permuteCombine,
 } from "./figures2.mjs";
+import {
+  threePointsPlane, collinearPts, numberLineDist, midpointAlgebra, classifyAngles,
+  copyAngleObtuse, angleCombine, biconditionalFig, paragraphProofFig,
+  parallelConverse, perpTransversal, horizVert, constructPerpOnLine, constructRectangle,
+  translatePolygon, reflectYX, reflectVertical, rotate180, rotate270, glideReflect,
+  parallelReflect, intersectReflect, parallelogramSym, squareSym, scaleneNoSym,
+  exteriorAngle, angleSumTri, equilateralFig, altitudeIsos, aasMarks, medianFig,
+  dilatePoint, sssSimilar, sasSimilar, midsegmentTri, threeParallel, mirrorMethod,
+  depressionFig, guyWire, twoElevations,
+  diameterChord, semicircleRight, chordPerp, chordChord, tangentSecant, twoSecants, circleEq,
+  pyramidFig, coneFig, sphereFig, densityFig, popDensity, coneSlice, sphereSlice, frustumFig,
+  dieFig, bagMarbles, complementFig, cardsFig, expectedValue, withWithout,
+} from "./figures3.mjs";
+import { hexagonSymmetryFig } from "./figures2.mjs";
+import { copySegment, angleBisector } from "./figures.mjs";
 
 export const ch = {};
 
@@ -27,7 +42,8 @@ ch["5.1"] = L("5.1", "Dilations on the Coordinate Plane (MA.912.GR.2.2)", [
     ],
     figure: fig(dilationFig(), "A dilation from a center scales all distances by |k|."),
     examples: [
-      { h: "Dilate a point from the origin", p: `Find the image of \\(A(3,-2)\\) under a dilation centered at the origin with scale factor \\(k=2\\).`, steps: [
+      { h: "Dilate a point from the origin", p: `Find the image of \\(A(3,-2)\\) under a dilation centered at the origin with scale factor \\(k=2\\).`, fig: dilatePoint(),
+        steps: [
         `<strong>Step 1 — apply the rule:</strong> \\((x,y)\\mapsto(2x,2y)\\).`,
         `<strong>Step 2 — substitute:</strong> \\(A'(2\\cdot3,\\,2\\cdot(-2))=A'(6,-4)\\).`,
       ] },
@@ -37,16 +53,19 @@ ch["5.1"] = L("5.1", "Dilations on the Coordinate Plane (MA.912.GR.2.2)", [
         `<strong>Step 2 — compute the images:</strong> \\(A'(1,2)\\), \\(B'(3,2)\\), \\(C'(3,-1)\\).`,
         `<strong>Step 3 — classify:</strong> since \\(0<k<1\\), the image is a <strong>reduction</strong> — smaller than the original.`,
       ] },
-      { h: "Find the scale factor from a point and its image", p: `Under a dilation centered at the origin, \\(P(4,6)\\) maps to \\(P'(10,15)\\). Find the scale factor \\(k\\).`, steps: [
+      { h: "Find the scale factor from a point and its image", p: `Under a dilation centered at the origin, \\(P(4,6)\\) maps to \\(P'(10,15)\\). Find the scale factor \\(k\\).`, fig: dilatePoint(),
+        steps: [
         `<strong>Step 1 — compare corresponding coordinates:</strong> \\(k=\\dfrac{x'}{x}=\\dfrac{10}{4}\\), or \\(k=\\dfrac{y'}{y}=\\dfrac{15}{6}\\).`,
         `<strong>Step 2 — simplify:</strong> both ratios reduce to \\(k=\\dfrac{5}{2}\\).`,
       ] },
-      { h: "Dilate about a center other than the origin", p: `Find the image of \\(Q(5,3)\\) under a dilation centered at \\(P(1,1)\\) with scale factor \\(k=3\\).`, steps: [
+      { h: "Dilate about a center other than the origin", p: `Find the image of \\(Q(5,3)\\) under a dilation centered at \\(P(1,1)\\) with scale factor \\(k=3\\).`, fig: dilationFig(),
+        steps: [
         `<strong>Step 1 — subtract the center:</strong> \\((5-1,\\,3-1)=(4,2)\\).`,
         `<strong>Step 2 — scale by k:</strong> \\(3(4,2)=(12,6)\\).`,
         `<strong>Step 3 — add the center back:</strong> \\((12+1,\\,6+1)=(13,7)\\).`,
       ], check: `So \\(Q'(13,7)\\).` },
-      { h: "Use the distance-scaling property", p: `\\(\\overline{MN}\\) has length \\(8\\). After a dilation centered at the origin with scale factor \\(k=-1.5\\), what is the length of the image \\(\\overline{M'N'}\\), and what does the negative sign indicate?`, steps: [
+      { h: "Use the distance-scaling property", p: `\\(\\overline{MN}\\) has length \\(8\\). After a dilation centered at the origin with scale factor \\(k=-1.5\\), what is the length of the image \\(\\overline{M'N'}\\), and what does the negative sign indicate?`, fig: dilatePoint(),
+        steps: [
         `<strong>Step 1 — scale the length by \\(|k|\\):</strong> \\(M'N'=|{-1.5}|\\times8=12\\).`,
         `<strong>Step 2 — interpret the sign of k:</strong> a negative scale factor produces an image on the opposite side of the center from the original figure (like a \\(180^\\circ\\) rotation combined with the scaling).`,
       ] },
@@ -87,22 +106,26 @@ ch["5.2"] = L("5.2", "Proving Similarity: AA, SAS, and SSS Similarity Theorems (
         `<strong>Step 2 — apply AA:</strong> two pairs of congruent angles are enough.`,
         `<strong>Step 3 — conclude:</strong> \\(\\triangle ABC\\sim\\triangle DEF\\).`,
       ], check: `The third angle pair is automatically congruent too, since \\(180^\\circ-50^\\circ-70^\\circ=60^\\circ\\) in both triangles.` },
-      { h: "Prove similarity with SSS Similarity", p: `\\(\\triangle GHI\\) has sides \\(6,8,10\\); \\(\\triangle JKL\\) has sides \\(9,12,15\\). Prove the triangles are similar.`, steps: [
+      { h: "Prove similarity with SSS Similarity", p: `\\(\\triangle GHI\\) has sides \\(6,8,10\\); \\(\\triangle JKL\\) has sides \\(9,12,15\\). Prove the triangles are similar.`, fig: sssSimilar(),
+        steps: [
         `<strong>Step 1 — order the sides and form ratios:</strong> \\(\\dfrac{9}{6}=\\dfrac{3}{2}\\), \\(\\dfrac{12}{8}=\\dfrac{3}{2}\\), \\(\\dfrac{15}{10}=\\dfrac{3}{2}\\).`,
         `<strong>Step 2 — confirm all three ratios are equal:</strong> every pair of corresponding sides has the same ratio \\(\\dfrac{3}{2}\\).`,
         `<strong>Step 3 — apply SSS Similarity:</strong> \\(\\triangle JKL\\sim\\triangle GHI\\) with scale factor \\(\\dfrac{3}{2}\\).`,
       ] },
-      { h: "Prove similarity with SAS Similarity", p: `In \\(\\triangle MNP\\), \\(MN=4\\), \\(MP=6\\), \\(\\angle M=40^\\circ\\). In \\(\\triangle QRS\\), \\(QR=6\\), \\(QS=9\\), \\(\\angle Q=40^\\circ\\). Prove the triangles are similar.`, steps: [
+      { h: "Prove similarity with SAS Similarity", p: `In \\(\\triangle MNP\\), \\(MN=4\\), \\(MP=6\\), \\(\\angle M=40^\\circ\\). In \\(\\triangle QRS\\), \\(QR=6\\), \\(QS=9\\), \\(\\angle Q=40^\\circ\\). Prove the triangles are similar.`, fig: sasSimilar(),
+        steps: [
         `<strong>Step 1 — check the included angle:</strong> \\(\\angle M\\cong\\angle Q\\) (both \\(40^\\circ\\)), and each is between the two given sides.`,
         `<strong>Step 2 — compare the side ratios:</strong> \\(\\dfrac{QR}{MN}=\\dfrac{6}{4}=\\dfrac{3}{2}\\) and \\(\\dfrac{QS}{MP}=\\dfrac{9}{6}=\\dfrac{3}{2}\\).`,
         `<strong>Step 3 — apply SAS Similarity:</strong> the ratios match and the included angles are congruent, so \\(\\triangle QRS\\sim\\triangle MNP\\).`,
       ] },
-      { h: "Use similarity to find a missing side", p: `\\(\\triangle ABC\\sim\\triangle DEF\\), with \\(AB=8\\), \\(DE=12\\), and \\(BC=10\\). Find \\(EF\\).`, steps: [
+      { h: "Use similarity to find a missing side", p: `\\(\\triangle ABC\\sim\\triangle DEF\\), with \\(AB=8\\), \\(DE=12\\), and \\(BC=10\\). Find \\(EF\\).`, fig: similarTriangles(),
+        steps: [
         `<strong>Step 1 — set up a proportion:</strong> \\(\\dfrac{AB}{DE}=\\dfrac{BC}{EF}\\).`,
         `<strong>Step 2 — substitute:</strong> \\(\\dfrac{8}{12}=\\dfrac{10}{EF}\\).`,
         `<strong>Step 3 — cross-multiply and solve:</strong> \\(8\\cdot EF=120\\), so \\(EF=15\\).`,
       ] },
-      { h: "Combine AA with algebra", p: `\\(\\overline{BC}\\parallel\\overline{DE}\\) in the diagram, so \\(\\triangle ABC\\sim\\triangle ADE\\). If \\(AB=6\\), \\(BD=4\\) (so \\(AD=10\\)), and \\(BC=9\\), find \\(DE\\).`, steps: [
+      { h: "Combine AA with algebra", p: `\\(\\overline{BC}\\parallel\\overline{DE}\\) in the diagram, so \\(\\triangle ABC\\sim\\triangle ADE\\). If \\(AB=6\\), \\(BD=4\\) (so \\(AD=10\\)), and \\(BC=9\\), find \\(DE\\).`, fig: similarTriangles(),
+        steps: [
         `<strong>Step 1 — justify the similarity:</strong> \\(\\overline{BC}\\parallel\\overline{DE}\\) creates congruent corresponding angles at the transversal crossings, and \\(\\angle A\\) is shared — AA gives \\(\\triangle ABC\\sim\\triangle ADE\\).`,
         `<strong>Step 2 — set up the proportion:</strong> \\(\\dfrac{AB}{AD}=\\dfrac{BC}{DE}\\).`,
         `<strong>Step 3 — substitute:</strong> \\(\\dfrac{6}{10}=\\dfrac{9}{DE}\\).`,
@@ -145,23 +168,27 @@ ch["5.3"] = L("5.3", "Using Similar Triangles to Solve Real-World Problems (Indi
         `<strong>Step 2 — write the proportion:</strong> \\(\\dfrac{\\text{person height}}{\\text{person shadow}}=\\dfrac{\\text{pole height}}{\\text{pole shadow}}\\), i.e. \\(\\dfrac{6}{4}=\\dfrac{h}{30}\\).`,
         `<strong>Step 3 — cross-multiply and solve:</strong> \\(4h=180\\), so \\(h=45\\) feet.`,
       ] },
-      { h: "Mirror method", p: `A mirror is placed \\(2\\) meters from the base of a tree. A person whose eyes are \\(1.5\\) meters above the ground stands \\(0.8\\) meters from the mirror on the other side and sees the top of the tree reflected. Find the height of the tree.`, steps: [
+      { h: "Mirror method", p: `A mirror is placed \\(2\\) meters from the base of a tree. A person whose eyes are \\(1.5\\) meters above the ground stands \\(0.8\\) meters from the mirror on the other side and sees the top of the tree reflected. Find the height of the tree.`, fig: mirrorMethod(),
+        steps: [
         `<strong>Step 1 — identify the similar right triangles:</strong> the person's height and distance from the mirror form one triangle; the tree's height and distance from the mirror form the other. Reflection angles are equal, so the triangles are similar by AA.`,
         `<strong>Step 2 — write the proportion:</strong> \\(\\dfrac{\\text{tree height}}{\\text{tree distance}}=\\dfrac{\\text{person height}}{\\text{person distance}}\\), i.e. \\(\\dfrac{h}{2}=\\dfrac{1.5}{0.8}\\).`,
         `<strong>Step 3 — cross-multiply:</strong> \\(0.8h=3\\).`,
         `<strong>Step 4 — solve:</strong> \\(h=3.75\\) meters.`,
       ] },
-      { h: "Indirect measurement of a river's width", p: `To find the width of a river, a surveyor sets up two similar right triangles on the same bank: legs of \\(12\\) m and \\(5\\) m in the larger triangle correspond to legs of \\(3\\) m and \\(w\\) (the river's width) in the smaller, similar triangle. Find \\(w\\).`, steps: [
+      { h: "Indirect measurement of a river's width", p: `To find the width of a river, a surveyor sets up two similar right triangles on the same bank: legs of \\(12\\) m and \\(5\\) m in the larger triangle correspond to legs of \\(3\\) m and \\(w\\) (the river's width) in the smaller, similar triangle. Find \\(w\\).`, fig: shadowMeasure(),
+        steps: [
         `<strong>Step 1 — write the proportion between corresponding legs:</strong> \\(\\dfrac{12}{3}=\\dfrac{5}{w}\\).`,
         `<strong>Step 2 — cross-multiply:</strong> \\(12w=15\\).`,
         `<strong>Step 3 — solve:</strong> \\(w=1.25\\) m.`,
       ] },
-      { h: "Using an object of known length and a shared sighting angle", p: `Holding a \\(30\\)-cm ruler vertically at arm's length (\\(60\\) cm from your eye), you line up its top with the top of a building \\(150\\) m away. Assuming similar triangles from your eye, find the height of the building above eye level.`, steps: [
+      { h: "Using an object of known length and a shared sighting angle", p: `Holding a \\(30\\)-cm ruler vertically at arm's length (\\(60\\) cm from your eye), you line up its top with the top of a building \\(150\\) m away. Assuming similar triangles from your eye, find the height of the building above eye level.`, fig: shadowMeasure(),
+        steps: [
         `<strong>Step 1 — set up the similar triangles:</strong> the ruler-and-arm-length triangle and the building-and-distance triangle share the sighting angle at your eye, so they are similar by AA.`,
         `<strong>Step 2 — write the proportion (convert consistently to meters):</strong> \\(\\dfrac{0.30}{0.60}=\\dfrac{h}{150}\\).`,
         `<strong>Step 3 — cross-multiply and solve:</strong> \\(0.60h=45\\), so \\(h=75\\) m.`,
       ] },
-      { h: "Two shadows, solve for the missing height", p: `A \\(2.4\\)-meter street sign casts a \\(3.6\\)-meter shadow. At the same time, a building's shadow measures \\(54\\) meters. How tall is the building?`, steps: [
+      { h: "Two shadows, solve for the missing height", p: `A \\(2.4\\)-meter street sign casts a \\(3.6\\)-meter shadow. At the same time, a building's shadow measures \\(54\\) meters. How tall is the building?`, fig: shadowMeasure(),
+        steps: [
         `<strong>Step 1 — write the proportion:</strong> \\(\\dfrac{2.4}{3.6}=\\dfrac{h}{54}\\).`,
         `<strong>Step 2 — simplify the known ratio:</strong> \\(\\dfrac{2.4}{3.6}=\\dfrac{2}{3}\\).`,
         `<strong>Step 3 — cross-multiply:</strong> \\(3h=108\\).`,
@@ -205,22 +232,26 @@ ch["5.4"] = L("5.4", "Triangle Proportionality Theorem and its Converse (MA.912.
         `<strong>Step 3 — cross-multiply:</strong> \\(6\\cdot EC=72\\).`,
         `<strong>Step 4 — solve:</strong> \\(EC=12\\).`,
       ] },
-      { h: "Use whole-side ratios instead", p: `In \\(\\triangle ABC\\), \\(\\overline{DE}\\parallel\\overline{BC}\\), \\(AD=4\\), \\(AB=10\\), and \\(AC=15\\). Find \\(AE\\).`, steps: [
+      { h: "Use whole-side ratios instead", p: `In \\(\\triangle ABC\\), \\(\\overline{DE}\\parallel\\overline{BC}\\), \\(AD=4\\), \\(AB=10\\), and \\(AC=15\\). Find \\(AE\\).`, fig: proportionalityFig(),
+        steps: [
         `<strong>Step 1 — recognize the equivalent whole-to-part proportion:</strong> \\(\\dfrac{AD}{AB}=\\dfrac{AE}{AC}\\) (this follows from the theorem by adding \\(1\\) to both sides of the part-to-part ratio).`,
         `<strong>Step 2 — substitute:</strong> \\(\\dfrac{4}{10}=\\dfrac{AE}{15}\\).`,
         `<strong>Step 3 — cross-multiply and solve:</strong> \\(10\\cdot AE=60\\), so \\(AE=6\\).`,
       ] },
-      { h: "Prove lines parallel using the Converse", p: `In \\(\\triangle PQR\\), \\(S\\) is on \\(\\overline{PQ}\\) with \\(PS=6\\), \\(SQ=8\\); \\(T\\) is on \\(\\overline{PR}\\) with \\(PT=9\\), \\(TR=12\\). Determine whether \\(\\overline{ST}\\parallel\\overline{QR}\\).`, steps: [
+      { h: "Prove lines parallel using the Converse", p: `In \\(\\triangle PQR\\), \\(S\\) is on \\(\\overline{PQ}\\) with \\(PS=6\\), \\(SQ=8\\); \\(T\\) is on \\(\\overline{PR}\\) with \\(PT=9\\), \\(TR=12\\). Determine whether \\(\\overline{ST}\\parallel\\overline{QR}\\).`, fig: proportionalityFig(),
+        steps: [
         `<strong>Step 1 — form both ratios:</strong> \\(\\dfrac{PS}{SQ}=\\dfrac{6}{8}=\\dfrac{3}{4}\\) and \\(\\dfrac{PT}{TR}=\\dfrac{9}{12}=\\dfrac{3}{4}\\).`,
         `<strong>Step 2 — compare:</strong> the ratios are equal.`,
         `<strong>Step 3 — apply the Converse:</strong> since \\(\\dfrac{PS}{SQ}=\\dfrac{PT}{TR}\\), \\(\\overline{ST}\\parallel\\overline{QR}\\).`,
       ] },
-      { h: "Apply the Midsegment Theorem", p: `\\(M\\) and \\(N\\) are the midpoints of \\(\\overline{AB}\\) and \\(\\overline{AC}\\) in \\(\\triangle ABC\\), where \\(BC=18\\). Find \\(MN\\) and describe the relationship between \\(\\overline{MN}\\) and \\(\\overline{BC}\\).`, steps: [
+      { h: "Apply the Midsegment Theorem", p: `\\(M\\) and \\(N\\) are the midpoints of \\(\\overline{AB}\\) and \\(\\overline{AC}\\) in \\(\\triangle ABC\\), where \\(BC=18\\). Find \\(MN\\) and describe the relationship between \\(\\overline{MN}\\) and \\(\\overline{BC}\\).`, fig: midsegmentTri(),
+        steps: [
         `<strong>Step 1 — apply the Midsegment Theorem:</strong> the segment joining two midpoints is parallel to the third side and half its length.`,
         `<strong>Step 2 — compute:</strong> \\(MN=\\dfrac{1}{2}(18)=9\\).`,
         `<strong>Step 3 — state the relationship:</strong> \\(\\overline{MN}\\parallel\\overline{BC}\\) and \\(MN=9\\).`,
       ] },
-      { h: "Three parallel lines cutting two transversals", p: `Three parallel lines cut transversal 1 into segments of \\(5\\) and \\(7\\), and cut transversal 2 into corresponding segments of \\(x\\) and \\(10.5\\). Find \\(x\\).`, steps: [
+      { h: "Three parallel lines cutting two transversals", p: `Three parallel lines cut transversal 1 into segments of \\(5\\) and \\(7\\), and cut transversal 2 into corresponding segments of \\(x\\) and \\(10.5\\). Find \\(x\\).`, fig: threeParallel(),
+        steps: [
         `<strong>Step 1 — set up the proportion (parallel lines divide transversals proportionally):</strong> \\(\\dfrac{5}{7}=\\dfrac{x}{10.5}\\).`,
         `<strong>Step 2 — cross-multiply:</strong> \\(7x=52.5\\).`,
         `<strong>Step 3 — solve:</strong> \\(x=7.5\\).`,
@@ -256,31 +287,36 @@ ch["5.5"] = L("5.5", "Using Transformations to Prove Similarity (MA.912.GR.2.8)"
     ],
     figure: fig(dilationFig(), "Similarity = rigid motions composed with a dilation."),
     examples: [
-      { h: "Find the dilation scale factor between two similar figures", p: `\\(\\triangle ABC\\) has vertices \\(A(0,0)\\), \\(B(2,0)\\), \\(C(0,3)\\). \\(\\triangle DEF\\) has vertices \\(D(0,0)\\), \\(E(6,0)\\), \\(F(0,9)\\). Describe a similarity transformation mapping \\(\\triangle ABC\\) to \\(\\triangle DEF\\).`, steps: [
+      { h: "Find the dilation scale factor between two similar figures", p: `\\(\\triangle ABC\\) has vertices \\(A(0,0)\\), \\(B(2,0)\\), \\(C(0,3)\\). \\(\\triangle DEF\\) has vertices \\(D(0,0)\\), \\(E(6,0)\\), \\(F(0,9)\\). Describe a similarity transformation mapping \\(\\triangle ABC\\) to \\(\\triangle DEF\\).`, fig: dilationFig(),
+        steps: [
         `<strong>Step 1 — compare corresponding sides:</strong> \\(AB=2\\), \\(DE=6\\); \\(AC=3\\), \\(DF=9\\); both ratios equal \\(3\\).`,
         `<strong>Step 2 — find the scale factor:</strong> \\(k=3\\).`,
         `<strong>Step 3 — apply the dilation centered at the origin (a shared vertex, \\(A=D\\)):</strong> \\((x,y)\\mapsto(3x,3y)\\) sends \\(A\\to D\\), \\(B(2,0)\\to(6,0)=E\\), \\(C(0,3)\\to(0,9)=F\\).`,
         `<strong>Step 4 — conclude:</strong> a single dilation (no additional rigid motion needed) maps \\(\\triangle ABC\\) onto \\(\\triangle DEF\\), so \\(\\triangle ABC\\sim\\triangle DEF\\).`,
       ] },
-      { h: "Combine a dilation with a translation", p: `\\(\\triangle GHI\\) has vertices \\(G(0,0)\\), \\(H(4,0)\\), \\(I(0,2)\\). \\(\\triangle JKL\\) has vertices \\(J(5,1)\\), \\(K(7,1)\\), \\(L(5,2)\\). Describe a sequence of transformations proving \\(\\triangle GHI\\sim\\triangle JKL\\).`, steps: [
+      { h: "Combine a dilation with a translation", p: `\\(\\triangle GHI\\) has vertices \\(G(0,0)\\), \\(H(4,0)\\), \\(I(0,2)\\). \\(\\triangle JKL\\) has vertices \\(J(5,1)\\), \\(K(7,1)\\), \\(L(5,2)\\). Describe a sequence of transformations proving \\(\\triangle GHI\\sim\\triangle JKL\\).`, fig: compositionFig(),
+        steps: [
         `<strong>Step 1 — find the scale factor:</strong> \\(GH=4\\), \\(JK=2\\), giving ratio \\(\\dfrac{1}{2}\\); check \\(GI=2\\), \\(JL=1\\), the same ratio \\(\\dfrac{1}{2}\\).`,
         `<strong>Step 2 — dilate \\(\\triangle GHI\\) by \\(k=\\dfrac{1}{2}\\) centered at the origin:</strong> \\(G\\to(0,0)\\), \\(H(4,0)\\to(2,0)\\), \\(I(0,2)\\to(0,1)\\).`,
         `<strong>Step 3 — translate the dilated image to match \\(\\triangle JKL\\):</strong> shift every point by \\((5,1)\\): \\((0,0)\\to(5,1)=J\\), \\((2,0)\\to(7,1)=K\\), \\((0,1)\\to(5,2)=L\\).`,
         `<strong>Step 4 — conclude:</strong> the dilation followed by the translation maps \\(\\triangle GHI\\) exactly onto \\(\\triangle JKL\\), so \\(\\triangle GHI\\sim\\triangle JKL\\).`,
       ] },
-      { h: "Combine a dilation with a reflection", p: `\\(\\triangle MNO\\) has vertices \\(M(0,0)\\), \\(N(3,0)\\), \\(O(0,1)\\). \\(\\triangle PQR\\) has vertices \\(P(0,0)\\), \\(Q(-6,0)\\), \\(R(0,2)\\). Describe a sequence of transformations proving \\(\\triangle MNO\\sim\\triangle PQR\\).`, steps: [
+      { h: "Combine a dilation with a reflection", p: `\\(\\triangle MNO\\) has vertices \\(M(0,0)\\), \\(N(3,0)\\), \\(O(0,1)\\). \\(\\triangle PQR\\) has vertices \\(P(0,0)\\), \\(Q(-6,0)\\), \\(R(0,2)\\). Describe a sequence of transformations proving \\(\\triangle MNO\\sim\\triangle PQR\\).`, fig: compositionFig(),
+        steps: [
         `<strong>Step 1 — find the scale factor:</strong> \\(MN=3\\), \\(PQ=6\\), giving ratio \\(2\\); check \\(MO=1\\), \\(PR=2\\), the same ratio \\(2\\).`,
         `<strong>Step 2 — dilate by \\(k=2\\) centered at the origin:</strong> \\(M\\to(0,0)\\), \\(N(3,0)\\to(6,0)\\), \\(O(0,1)\\to(0,2)\\).`,
         `<strong>Step 3 — reflect across the \\(y\\)-axis to flip the sign of the x-coordinates:</strong> \\((0,0)\\to(0,0)\\), \\((6,0)\\to(-6,0)=Q\\), \\((0,2)\\to(0,2)=R\\).`,
         `<strong>Step 4 — conclude:</strong> a dilation followed by a reflection maps \\(\\triangle MNO\\) exactly onto \\(\\triangle PQR\\), so \\(\\triangle MNO\\sim\\triangle PQR\\).`,
       ] },
-      { h: "Verify a claimed similarity transformation", p: `A student claims that rotating \\(\\triangle ABC\\) \\(90^\\circ\\) about the origin and then dilating by \\(k=\\dfrac{3}{2}\\) maps it onto \\(\\triangle DEF\\). \\(\\triangle ABC\\) has \\(A(0,0)\\), \\(B(2,0)\\), \\(C(0,2)\\); \\(\\triangle DEF\\) has \\(D(0,0)\\), \\(E(0,3)\\), \\(F(-3,0)\\). Verify the claim.`, steps: [
+      { h: "Verify a claimed similarity transformation", p: `A student claims that rotating \\(\\triangle ABC\\) \\(90^\\circ\\) about the origin and then dilating by \\(k=\\dfrac{3}{2}\\) maps it onto \\(\\triangle DEF\\). \\(\\triangle ABC\\) has \\(A(0,0)\\), \\(B(2,0)\\), \\(C(0,2)\\); \\(\\triangle DEF\\) has \\(D(0,0)\\), \\(E(0,3)\\), \\(F(-3,0)\\). Verify the claim.`, fig: dilationFig(),
+        steps: [
         `<strong>Step 1 — apply the \\(90^\\circ\\) rotation rule \\((x,y)\\mapsto(-y,x)\\):</strong> \\(A(0,0)\\to(0,0)\\), \\(B(2,0)\\to(0,2)\\), \\(C(0,2)\\to(-2,0)\\).`,
         `<strong>Step 2 — apply the dilation \\((x,y)\\mapsto\\left(\\dfrac{3}{2}x,\\dfrac{3}{2}y\\right)\\):</strong> \\((0,0)\\to(0,0)\\), \\((0,2)\\to(0,3)\\), \\((-2,0)\\to(-3,0)\\).`,
         `<strong>Step 3 — compare to \\(\\triangle DEF\\):</strong> the results \\((0,0)\\), \\((0,3)\\), \\((-3,0)\\) exactly match \\(D\\), \\(E\\), \\(F\\).`,
         `<strong>Step 4 — conclude:</strong> the claim is verified — \\(\\triangle ABC\\sim\\triangle DEF\\) by this rotation-then-dilation.`,
       ] },
-      { h: "Determine the scale factor from a perimeter ratio", p: `\\(\\triangle ABC\\sim\\triangle DEF\\) via some sequence of rigid motions and a dilation. If the perimeter of \\(\\triangle ABC\\) is \\(15\\) and the perimeter of \\(\\triangle DEF\\) is \\(45\\), what is the scale factor of the dilation used in the sequence?`, steps: [
+      { h: "Determine the scale factor from a perimeter ratio", p: `\\(\\triangle ABC\\sim\\triangle DEF\\) via some sequence of rigid motions and a dilation. If the perimeter of \\(\\triangle ABC\\) is \\(15\\) and the perimeter of \\(\\triangle DEF\\) is \\(45\\), what is the scale factor of the dilation used in the sequence?`, fig: dilationScale(),
+        steps: [
         `<strong>Step 1 — recall that a dilation scales every length (including perimeter) by the same factor \\(k\\):</strong> the perimeter ratio equals \\(k\\).`,
         `<strong>Step 2 — compute the ratio:</strong> \\(k=\\dfrac{45}{15}=3\\).`,
         `<strong>Step 3 — state the conclusion:</strong> the dilation in the similarity sequence has scale factor \\(3\\) (any rigid motions included do not change lengths, so they do not affect this ratio).`,

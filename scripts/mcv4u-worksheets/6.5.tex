@@ -26,39 +26,62 @@ $\vec a\times\vec b=(a_2b_3-a_3b_2,\,a_3b_1-a_1b_3,\,a_1b_2-a_2b_1)$ is perpendi
 \sech{Worked Examples}
 
 \begin{example}{ex0}{Example 1 --- Standard basis}
-Compute $(1,0,0)\times(0,1,0)$.\soln $(0,0,1)$.
+Compute $(1,0,0)\times(0,1,0)$.\soln
+\textbf{Step 1 (apply the cross-product formula $(a_2b_3-a_3b_2,\,a_3b_1-a_1b_3,\,a_1b_2-a_2b_1)$ with $\vec a=(1,0,0),\vec b=(0,1,0)$):} first component $0\cdot0-0\cdot1=0$; second $0\cdot0-1\cdot0=0$; third $1\cdot1-0\cdot0=1$.\\[3pt]
+\textbf{Conclusion:} $(1,0,0)\times(0,1,0)=(0,0,1)$.
 \end{example}
 
 \begin{example}{ex1}{Example 2 --- General}
-Compute $(1,2,3)\times(4,5,6)$.\soln $(2\cdot6-3\cdot5,\,3\cdot4-1\cdot6,\,1\cdot5-2\cdot4)=(-3,6,-3)$.
+Compute $(1,2,3)\times(4,5,6)$.\soln
+\textbf{Step 1 (label components):} $\vec a=(1,2,3)$, $\vec b=(4,5,6)$.\\[3pt]
+\textbf{Step 2 (apply the formula component by component):} first: $2\cdot6-3\cdot5=12-15=-3$; second: $3\cdot4-1\cdot6=12-6=6$; third: $1\cdot5-2\cdot4=5-8=-3$.\\[3pt]
+\textbf{Conclusion:} $(1,2,3)\times(4,5,6)=(-3,6,-3)$.
 \end{example}
 
 \begin{example}{ex2}{Example 3 --- Perpendicular check}
-Verify $(-3,6,-3)\perp(1,2,3)$.\soln $-3+12-9=0$: perpendicular.
+Verify $(-3,6,-3)\perp(1,2,3)$.\soln
+\textbf{Step 1 (use the dot product to test perpendicularity):} $(-3)(1)+(6)(2)+(-3)(3)$.\\[3pt]
+\textbf{Step 2 (compute):} $-3+12-9$.\\[3pt]
+\textbf{Conclusion:} $=0$, so the vectors are perpendicular (as the cross product must be, to both original vectors).
 \end{example}
 
 \begin{example}{ex3}{Example 4 --- Parallelogram area}
-Area from $(1,0,0)$ and $(0,2,0)$.\soln Cross $=(0,0,2)$, magnitude $2$: area $2$.
+Area from $(1,0,0)$ and $(0,2,0)$.\soln
+\textbf{Step 1 (compute the cross product):} $(1,0,0)\times(0,2,0)=(0\cdot0-0\cdot2,\,0\cdot0-1\cdot0,\,1\cdot2-0\cdot0)=(0,0,2)$.\\[3pt]
+\textbf{Step 2 (the parallelogram area equals the magnitude of the cross product):} $|(0,0,2)|=2$.\\[3pt]
+\textbf{Conclusion:} area $=2$.
 \end{example}
 
 \begin{example}{ex4}{Example 5 --- Triangle area}
-Triangle area from $(1,0,0)$ and $(0,2,0)$.\soln $\tfrac12(2)=1$.
+Triangle area from $(1,0,0)$ and $(0,2,0)$.\soln
+\textbf{Step 1 (recall the triangle is half the parallelogram):} from the previous example, the parallelogram area is $2$.\\[3pt]
+\textbf{Step 2 (halve it):} $\tfrac12(2)$.\\[3pt]
+\textbf{Conclusion:} triangle area $=1$.
 \end{example}
 
 \begin{example}{ex5}{Example 6 --- Standard basis}
-Compute $(0,1,0)\times(0,0,1)$.\soln $(1,0,0)$.
+Compute $(0,1,0)\times(0,0,1)$.\soln
+\textbf{Step 1 (apply the formula with $\vec a=(0,1,0),\vec b=(0,0,1)$):} first: $1\cdot1-0\cdot0=1$; second: $0\cdot0-0\cdot1=0$; third: $0\cdot0-1\cdot0=0$.\\[3pt]
+\textbf{Conclusion:} $(0,1,0)\times(0,0,1)=(1,0,0)$.
 \end{example}
 
 \begin{example}{ex6}{Example 7 --- General}
-Compute $(2,0,0)\times(0,3,0)$.\soln $(0,0,6)$.
+Compute $(2,0,0)\times(0,3,0)$.\soln
+\textbf{Step 1 (apply the formula):} first: $0\cdot0-0\cdot3=0$; second: $0\cdot0-2\cdot0=0$; third: $2\cdot3-0\cdot0=6$.\\[3pt]
+\textbf{Conclusion:} $(2,0,0)\times(0,3,0)=(0,0,6)$.
 \end{example}
 
 \begin{example}{ex7}{Example 8 --- General}
-Compute $(1,1,0)\times(0,1,1)$.\soln $(1,-1,1)$.
+Compute $(1,1,0)\times(0,1,1)$.\soln
+\textbf{Step 1 (apply the formula with $\vec a=(1,1,0),\vec b=(0,1,1)$):} first: $1\cdot1-0\cdot1=1$; second: $0\cdot0-1\cdot1=-1$; third: $1\cdot1-1\cdot0=1$.\\[3pt]
+\textbf{Conclusion:} $(1,1,0)\times(0,1,1)=(1,-1,1)$.
 \end{example}
 
 \begin{example}{ex8}{Example 9 --- Parallelogram area}
-Area from $(3,0,0)$ and $(0,4,0)$.\soln $(0,0,12)$, area $12$.
+Area from $(3,0,0)$ and $(0,4,0)$.\soln
+\textbf{Step 1 (compute the cross product):} $(3,0,0)\times(0,4,0)=(0\cdot0-0\cdot4,\,0\cdot0-3\cdot0,\,3\cdot4-0\cdot0)=(0,0,12)$.\\[3pt]
+\textbf{Step 2 (take the magnitude):} $|(0,0,12)|=12$.\\[3pt]
+\textbf{Conclusion:} area $=12$.
 \end{example}
 
 \clearpage

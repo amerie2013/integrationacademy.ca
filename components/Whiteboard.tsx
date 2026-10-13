@@ -6,6 +6,7 @@ import { supabase } from "../lib/supabase";
 import { MathField } from "./MathField";
 import { renderAll, type Pt, type Shape, type Bg, type BoardData } from "../lib/wbdraw";
 import { listMine, getBoard, createBoard, saveBoard, subscribeBoard, type WB } from "../lib/whiteboards";
+import { officeFileKind, renderSpreadsheetToDataUrl, renderWordToDataUrl, renderPdfToDataUrls } from "../lib/officeImport";
 
 type Tool = "move" | "pen" | "highlight" | "line" | "arrow" | "rect" | "ellipse" | "text" | "math" | "eraseObj" | "eraseArea";
 
@@ -79,6 +80,7 @@ export function Whiteboard({ initialBoardId }: { initialBoardId?: string }) {
   const imgRzRef = useRef<{ idx: number; sx: number; sy: number; w: number; h: number; ratio: number; rot: number; cx: number; cy: number } | null>(null);
   const rotRef = useRef<{ idx: number } | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const officeFileInputRef = useRef<HTMLInputElement>(null);
 
   const drawingRef = useRef(false);
   const curRef = useRef<Shape | null>(null);
@@ -425,36 +427,72 @@ export function Whiteboard({ initialBoardId }: { initialBoardId?: string }) {
     setTool("move"); setShowGraph(false);
     setSaveMsg("✓ Graph added to the board"); setTimeout(() => setSaveMsg(""), 2500);
   }
-  // Insert a user-supplied image (file picker or paste) as an image shape, then
-  // switch to Move so it can be repositioned/resized. Draw/write on it with any
-  // tool afterward — ink and text render on top. Downscaled so the saved board
-  // JSON stays small.
+  // Downscale a data URL and drop it on the board as an image shape, then
+  // select it (Move tool) so it can be repositioned/resized right away.
+  // `offset` staggers multiple inserts (e.g. PDF pages) so they don't land
+  // in an exact stack — still need to be dragged apart, but at least visible.
+  async function insertImageDataUrl(dataUrl: string, offset = 0) {
+    const img: HTMLImageElement = await new Promise((res, rej) => {
+      const im = new Image(); im.onload = () => res(im); im.onerror = rej; im.src = dataUrl;
+    });
+    const MAX = 1600; // cap the stored pixel size
+    const down = Math.min(1, MAX / Math.max(img.naturalWidth, img.naturalHeight) || 1);
+    const nw = Math.max(1, Math.round(img.naturalWidth * down)), nh = Math.max(1, Math.round(img.naturalHeight * down));
+    const off = document.createElement("canvas"); off.width = nw; off.height = nh;
+    off.getContext("2d")!.drawImage(img, 0, 0, nw, nh);
+    let src = off.toDataURL("image/png");
+    if (src.length > 1_800_000) src = off.toDataURL("image/jpeg", 0.85); // keep large photos/pages from bloating the save
+    const W = dims().w, H = dims().h;
+    const fit = Math.min(1, (W * 0.7) / nw, (H * 0.7) / nh);
+    const w = nw * fit, h = nh * fit;
+    const stagger = offset * 24;
+    commit([...shapes(), { t: "image", x: (W - w) / 2 + stagger, y: (H - h) / 2 + stagger, w, h, src, rot: 0 }]);
+    return shapes().length - 1;
+  }
+  // Insert a user-supplied image (file picker or paste) as an image shape.
+  // Draw/write on it with any tool afterward — ink and text render on top.
   async function insertImageFromFile(file: File) {
     if (!file || !file.type.startsWith("image/")) return;
     try {
       const dataUrl: string = await new Promise((res, rej) => {
         const fr = new FileReader(); fr.onload = () => res(fr.result as string); fr.onerror = rej; fr.readAsDataURL(file);
       });
-      const img: HTMLImageElement = await new Promise((res, rej) => {
-        const im = new Image(); im.onload = () => res(im); im.onerror = rej; im.src = dataUrl;
-      });
-      const MAX = 1600; // cap the stored pixel size
-      const down = Math.min(1, MAX / Math.max(img.naturalWidth, img.naturalHeight) || 1);
-      const nw = Math.max(1, Math.round(img.naturalWidth * down)), nh = Math.max(1, Math.round(img.naturalHeight * down));
-      const off = document.createElement("canvas"); off.width = nw; off.height = nh;
-      off.getContext("2d")!.drawImage(img, 0, 0, nw, nh);
-      let src = off.toDataURL("image/png");
-      if (src.length > 1_800_000) src = off.toDataURL("image/jpeg", 0.85); // keep large photos from bloating the save
-      const W = dims().w, H = dims().h;
-      const fit = Math.min(1, (W * 0.7) / nw, (H * 0.7) / nh);
-      const w = nw * fit, h = nh * fit;
-      commit([...shapes(), { t: "image", x: (W - w) / 2, y: (H - h) / 2, w, h, src, rot: 0 }]);
-      setTool("move"); setSelIdx(shapes().length - 1); // select it so the move/resize/rotate handles show
+      const idx = await insertImageDataUrl(dataUrl);
+      setTool("move"); setSelIdx(idx); // select it so the move/resize/rotate handles show
       setSaveMsg("✓ Image added — drag to move, corner to resize, ↻ to rotate"); setTimeout(() => setSaveMsg(""), 3000);
     } catch { setSaveMsg("⚠ Couldn't load that image"); setTimeout(() => setSaveMsg(""), 3000); }
   }
   function onPickImage(e: React.ChangeEvent<HTMLInputElement>) {
     const f = e.target.files?.[0]; if (f) insertImageFromFile(f); e.currentTarget.value = "";
+  }
+  // Excel/CSV, Word, and PDF files, rendered client-side (see lib/officeImport.ts)
+  // and dropped on as image(s) — read-only snapshots you can annotate over, not
+  // editable documents.
+  async function insertOfficeFile(file: File) {
+    const kind = officeFileKind(file);
+    if (!kind) { setSaveMsg("⚠ That file type isn't supported — try .xlsx, .csv, .docx, or .pdf"); setTimeout(() => setSaveMsg(""), 3500); return; }
+    setSaveMsg("Converting…");
+    try {
+      if (kind === "spreadsheet") {
+        const idx = await insertImageDataUrl(await renderSpreadsheetToDataUrl(file));
+        setTool("move"); setSelIdx(idx);
+        setSaveMsg("✓ Spreadsheet added (first sheet) — drag to move, corner to resize"); setTimeout(() => setSaveMsg(""), 3500);
+      } else if (kind === "word") {
+        const idx = await insertImageDataUrl(await renderWordToDataUrl(file));
+        setTool("move"); setSelIdx(idx);
+        setSaveMsg("✓ Document text added — formatting is approximate, not exact"); setTimeout(() => setSaveMsg(""), 3500);
+      } else {
+        const { pages, truncated } = await renderPdfToDataUrls(file);
+        let lastIdx = -1;
+        for (let i = 0; i < pages.length; i++) lastIdx = await insertImageDataUrl(pages[i], i);
+        setTool("move"); setSelIdx(lastIdx);
+        setSaveMsg(truncated ? `✓ First ${pages.length} pages added (the rest were skipped) — drag them apart` : `✓ ${pages.length} page${pages.length === 1 ? "" : "s"} added — drag them apart`);
+        setTimeout(() => setSaveMsg(""), 3500);
+      }
+    } catch { setSaveMsg("⚠ Couldn't read that file"); setTimeout(() => setSaveMsg(""), 3500); }
+  }
+  function onPickOfficeFile(e: React.ChangeEvent<HTMLInputElement>) {
+    const f = e.target.files?.[0]; if (f) insertOfficeFile(f); e.currentTarget.value = "";
   }
   // Drop a coordinate plane on the board to graph on by hand (no calculator needed).
   function insertAxes() {
@@ -551,6 +589,8 @@ export function Whiteboard({ initialBoardId }: { initialBoardId?: string }) {
           ))}
           <button onClick={() => fileInputRef.current?.click()} title="Insert an image to draw or write on (or paste one with Ctrl+V)" style={tBtn(false)}>🖼</button>
           <input ref={fileInputRef} type="file" accept="image/*" onChange={onPickImage} style={{ display: "none" }} />
+          <button onClick={() => officeFileInputRef.current?.click()} title="Insert an Excel, Word, or PDF file — rendered as a read-only image you can annotate over" style={tBtn(false)}>📄</button>
+          <input ref={officeFileInputRef} type="file" accept=".xlsx,.xls,.csv,.docx,.doc,.pdf" onChange={onPickOfficeFile} style={{ display: "none" }} />
           <button onClick={insertAxes} title="Insert coordinate axes to graph on by hand" style={tBtn(false)}>📐</button>
         </Group>
         {/* highlighter has its own (translucent) colours; everything else uses the pen colours */}

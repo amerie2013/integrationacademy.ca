@@ -1,0 +1,77 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize\color{black!60}Worksheet 3.1}
+\begin{document}
+
+\wstitle{3.1}{Functions Inside Functions: The Chain Rule}{Unit 3: Composite, Implicit and Inverse Functions}
+
+\begin{ideabox}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+  \item \textbf{Chain rule}: $\dfrac{d}{dx}\Big[f\big(g(x)\big)\Big]=f'\big(g(x)\big)\cdot g'(x)$: the derivative of the outside, evaluated at the inside, times the derivative of the inside.
+  \item Work from the outside in. With three layers there are three factors.
+  \item $\sin^3x$ means $(\sin x)^3$: the outside function is the cube.
+  \item With a table, $f'$ is evaluated at $g(a)$, not at $a$.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked examples}
+\begin{example}{Example 1 \textperiodcentered{} A power of a polynomial}
+Find $\dfrac{d}{dx}\left[\left(2x^3+1\right)^5\right]$.\soln $5\left(2x^3+1\right)^4\cdot6x^2$.\result{$30x^2\left(2x^3+1\right)^4$.}
+\end{example}
+
+\begin{example}{Example 2 \textperiodcentered{} A root of a trigonometric function}
+Find $\dfrac{d}{dx}\left[\sqrt{3+\cos x}\right]$.\soln $\dfrac12(3+\cos x)^{-1/2}\cdot(-\sin x)$.\result{$-\dfrac{\sin x}{2\sqrt{3+\cos x}}$.}
+\end{example}
+
+\begin{example}{Example 3 \textperiodcentered{} From values}
+Let $h(x)=f\big(g(x)\big)$, with $g(3)=2$, $g'(3)=-4$ and $f'(2)=5$. Find $h'(3)$.\soln $h'(3)=f'\big(g(3)\big)\,g'(3)=f'(2)\cdot(-4)$.\result{$h'(3)=-20$.}
+\end{example}
+
+\newpage
+\sech{Practice}
+
+\level{Core}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item Find $\dfrac{d}{dx}[\sin(5x)]$.\work{2.3cm}
+  \item Find $\dfrac{d}{dx}\left[e^{x^2}\right]$.\work{2.3cm}
+  \item Find $\dfrac{d}{dx}\left[\left(x^2+3x\right)^4\right]$.\work{2.3cm}
+  \item Find $\dfrac{d}{dx}[\ln(4x+1)]$.\work{2.3cm}
+\end{enumerate}
+
+\level{Exam level}
+\begin{enumerate}[leftmargin=*,itemsep=2pt,start=5]
+  \item Find $\dfrac{d}{dx}\left[\cos^3x\right]$.\work{2.8cm}
+  \item Find $\dfrac{d}{dx}\left[e^{-2x}\sin(3x)\right]$.\work{2.8cm}
+  \item Find $\dfrac{d}{dx}\left[\tan\!\left(\sqrt{x}\right)\right]$.\work{2.8cm}
+  \item Let $f(x)=\sqrt{g(x)}$, where $g(4)=25$ and $g'(4)=-10$. Find $f'(4)$.\work{2.8cm}
+\end{enumerate}
+
+\begin{frbox}{Question 9 \textperiodcentered{} Free-response practice}
+Let $f(x)=\left(x^2-4\right)^3$.
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=2pt]
+  \item Find $f'(x)$.\work{2.6cm}
+  \item Find all values of $x$ at which the graph of $f$ has a horizontal tangent.\work{2.6cm}
+  \item Write an equation of the line tangent to the graph of $f$ at $x=1$.\work{2.6cm}
+\end{enumerate}
+\end{frbox}
+
+\newpage
+\begin{solbox}
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item $5\cos(5x)$.
+  \item $2xe^{x^2}$.
+  \item $4\left(x^2+3x\right)^3(2x+3)$.
+  \item $\dfrac{4}{4x+1}$.
+  \item $3\cos^2x\cdot(-\sin x)=-3\cos^2x\sin x$.
+  \item $-2e^{-2x}\sin(3x)+3e^{-2x}\cos(3x)=e^{-2x}\big(3\cos(3x)-2\sin(3x)\big)$.
+  \item $\sec^2\!\left(\sqrt x\right)\cdot\dfrac{1}{2\sqrt x}$.
+  \item $f'(4)=\dfrac{g'(4)}{2\sqrt{g(4)}}=\dfrac{-10}{10}=-1$.
+  \item \begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=3pt]
+    \item $3\left(x^2-4\right)^2\cdot2x=6x\left(x^2-4\right)^2$.
+    \item $x=0$, $x=2$ and $x=-2$.
+    \item $f(1)=-27$ and $f'(1)=6(9)=54$: $y+27=54(x-1)$.
+  \end{enumerate}
+\end{enumerate}
+\end{solbox}
+
+\end{document}

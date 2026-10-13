@@ -1,0 +1,77 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize\color{black!60}Worksheet 6.4}
+\begin{document}
+
+\wstitle{6.4}{Accumulation Functions and the Fundamental Theorem, Part 1}{Unit 6: Integration and Accumulation of Change}
+
+\begin{ideabox}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+  \item \textbf{Fundamental Theorem, Part 1.} If $f$ is continuous, then $\dfrac{d}{dx}\displaystyle\int_{a}^{x}f(t)\,dt=f(x)$.
+  \item With a function as the upper limit, use the chain rule: $\dfrac{d}{dx}\displaystyle\int_{a}^{g(x)}f(t)\,dt=f\big(g(x)\big)\,g'(x)$.
+  \item If the variable is the \emph{lower} limit, the sign changes.
+  \item An accumulation function is zero where its two limits are equal: $\displaystyle\int_{a}^{a}f(t)\,dt=0$.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked examples}
+\begin{example}{Example 1 \textperiodcentered{} The basic case}
+Find $\dfrac{d}{dx}\displaystyle\int_{2}^{x}\sqrt{1+t^4}\,dt$.\soln Replace $t$ by $x$ in the integrand.\result{$\sqrt{1+x^4}$.}
+\end{example}
+
+\begin{example}{Example 2 \textperiodcentered{} With the chain rule}
+Find $\dfrac{d}{dx}\displaystyle\int_{0}^{x^3}\sin t\,dt$.\soln Substitute the upper limit and multiply by its derivative.\result{$3x^2\sin\!\left(x^3\right)$.}
+\end{example}
+
+\begin{example}{Example 3 \textperiodcentered{} Values of an accumulation function}
+Let $g(x)=\displaystyle\int_{1}^{x}\left(3t^2-2\right)\,dt$. Find $g(1)$, $g'(2)$ and $g''(x)$.\soln Equal limits give $g(1)=0$. $g'(x)=3x^2-2$.\result{$g(1)=0$, $g'(2)=10$, $g''(x)=6x$.}
+\end{example}
+
+\newpage
+\sech{Practice}
+
+\level{Core}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item Find $\dfrac{d}{dx}\displaystyle\int_{0}^{x}\cos\!\left(t^2\right)\,dt$.\work{2.3cm}
+  \item Find $\dfrac{d}{dx}\displaystyle\int_{5}^{x}\dfrac{e^{t}}{t}\,dt$.\work{2.3cm}
+  \item Let $F(x)=\displaystyle\int_{3}^{x}\left(t^2+1\right)\,dt$. Find $F(3)$.\work{2.3cm}
+  \item For the function $F$ in Question 3, find $F'(3)$.\work{2.3cm}
+\end{enumerate}
+
+\level{Exam level}
+\begin{enumerate}[leftmargin=*,itemsep=2pt,start=5]
+  \item Find $\dfrac{d}{dx}\displaystyle\int_{x}^{4}\sqrt{t+1}\,dt$.\work{2.8cm}
+  \item Find $\dfrac{d}{dx}\displaystyle\int_{0}^{2x}\ln(1+t)\,dt$.\work{2.8cm}
+  \item Find $\dfrac{d}{dx}\displaystyle\int_{x}^{x^2}t^3\,dt$.\work{2.8cm}
+  \item Let $h(x)=\displaystyle\int_{0}^{\sin x}e^{t^2}\,dt$. Find $h'(0)$.\work{2.8cm}
+\end{enumerate}
+
+\begin{frbox}{Question 9 \textperiodcentered{} Free-response practice}
+Let $F(x)=\displaystyle\int_{0}^{x}\left(t^2-4t\right)\,dt$ for $x\ge0$.
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=2pt]
+  \item Find $F'(x)$.\work{2.6cm}
+  \item On what interval is $F$ decreasing? Justify your answer.\work{2.6cm}
+  \item Find the $x$-coordinate of the point of inflection of the graph of $F$, and the value of $F(4)$.\work{2.6cm}
+\end{enumerate}
+\end{frbox}
+
+\newpage
+\begin{solbox}
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item $\cos\!\left(x^2\right)$.
+  \item $\dfrac{e^{x}}{x}$.
+  \item $0$.
+  \item $F'(x)=x^2+1$, so $F'(3)=10$.
+  \item $-\sqrt{x+1}$.
+  \item $2\ln(1+2x)$.
+  \item $\left(x^2\right)^3(2x)-x^3=2x^7-x^3$.
+  \item $h'(x)=e^{\sin^2x}\cos x$, so $h'(0)=1$.
+  \item \begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=3pt]
+    \item $F'(x)=x^2-4x$.
+    \item $F'(x)=x(x-4)<0$ for $0<x<4$.
+    \item $F''(x)=2x-4$ changes sign at $x=2$. $F(4)=\dfrac{64}{3}-32=-\dfrac{32}{3}$.
+  \end{enumerate}
+\end{enumerate}
+\end{solbox}
+
+\end{document}

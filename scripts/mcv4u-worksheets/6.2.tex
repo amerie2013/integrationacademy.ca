@@ -26,39 +26,66 @@ Add tip-to-tail (triangle law); subtract via $\vec a-\vec b=\vec a+(-\vec b)$; s
 \sech{Worked Examples}
 
 \begin{example}{ex0}{Example 1 --- Perpendicular resultant}
-Add 3 east and 4 north; find the resultant.\soln $\sqrt{3^2+4^2}=5$, direction $\tan^{-1}\tfrac43\approx53^\circ$ N of E:\begin{center}\begin{tikzpicture}[scale=0.7]\draw[->,thick,exblue](0,0)--(3,0)node[midway,below]{$3$ E};\draw[->,thick,qorange](3,0)--(3,4)node[midway,right]{$4$ N};\draw[->,very thick,red](0,0)--(3,4)node[midway,above left]{$R=5$};\end{tikzpicture}\end{center}
+Add 3 east and 4 north; find the resultant.\soln
+\textbf{Step 1 (the two vectors are perpendicular, so use the Pythagorean theorem for magnitude):} $|\vec R|=\sqrt{3^2+4^2}=\sqrt{9+16}=\sqrt{25}$.\\[3pt]
+\textbf{Step 2 (find the direction with $\tan^{-1}$ of opposite over adjacent):} $\theta=\tan^{-1}\tfrac43\approx53^\circ$ north of east.\\[3pt]
+\textbf{Conclusion:} magnitude $5$, direction $\approx53^\circ$ N of E:\begin{center}\begin{tikzpicture}[scale=0.7]\draw[->,thick,exblue](0,0)--(3,0)node[midway,below]{$3$ E};\draw[->,thick,qorange](3,0)--(3,4)node[midway,right]{$4$ N};\draw[->,very thick,red](0,0)--(3,4)node[midway,above left]{$R=5$};\end{tikzpicture}\end{center}
 \end{example}
 
 \begin{example}{ex1}{Example 2 --- Triangle law}
-How do you draw $\vec a+\vec b$?\soln Tail of $\vec b$ at the tip of $\vec a$; resultant from $\vec a$'s tail to $\vec b$'s tip.
+How do you draw $\vec a+\vec b$?\soln
+\textbf{Step 1 (draw $\vec a$ first):} start anywhere and draw $\vec a$.\\[3pt]
+\textbf{Step 2 (attach $\vec b$ tip-to-tail):} place the tail of $\vec b$ at the tip (arrowhead) of $\vec a$.\\[3pt]
+\textbf{Step 3 (draw the resultant):} the sum $\vec a+\vec b$ runs from $\vec a$'s starting tail to $\vec b$'s final tip.\\[3pt]
+\textbf{Conclusion:} tip-to-tail, then close the triangle from the first tail to the last tip.
 \end{example}
 
 \begin{example}{ex2}{Example 3 --- Scalar multiple}
-Describe $3\vec v$ and $-2\vec v$.\soln $3\vec v$: three times as long, same direction; $-2\vec v$: twice as long, opposite.
+Describe $3\vec v$ and $-2\vec v$.\soln
+\textbf{Step 1 (scalar multiplication scales the length by $|k|$):} for $3\vec v$, $|k|=3$; for $-2\vec v$, $|k|=2$.\\[3pt]
+\textbf{Step 2 (the sign of $k$ determines direction):} positive $k$ keeps the same direction; negative $k$ reverses it.\\[3pt]
+\textbf{Conclusion:} $3\vec v$ is three times as long, same direction; $-2\vec v$ is twice as long, opposite direction.
 \end{example}
 
 \begin{example}{ex3}{Example 4 --- Subtraction}
-How do you draw $\vec a-\vec b$?\soln Add $\vec a$ and $-\vec b$ tip-to-tail.
+How do you draw $\vec a-\vec b$?\soln
+\textbf{Step 1 (rewrite subtraction as addition of the opposite):} $\vec a-\vec b=\vec a+(-\vec b)$.\\[3pt]
+\textbf{Step 2 (draw $-\vec b$, i.e.\ $\vec b$ reversed):} flip $\vec b$'s direction, keeping its length.\\[3pt]
+\textbf{Step 3 (add tip-to-tail):} attach $-\vec b$'s tail to $\vec a$'s tip, as in ordinary addition.\\[3pt]
+\textbf{Conclusion:} draw $\vec a$, then add the reversed $\vec b$ tip-to-tail.
 \end{example}
 
 \begin{example}{ex4}{Example 5 --- Resultant force}
-Forces 6 N east and 8 N north. Find the resultant.\soln $\sqrt{36+64}=10$ N at $\tan^{-1}\tfrac86\approx53^\circ$ N of E.
+Forces 6 N east and 8 N north. Find the resultant.\soln
+\textbf{Step 1 (perpendicular components, use Pythagorean theorem):} $|\vec R|=\sqrt{6^2+8^2}=\sqrt{36+64}=\sqrt{100}$.\\[3pt]
+\textbf{Step 2 (find the direction):} $\theta=\tan^{-1}\tfrac86\approx53^\circ$ north of east.\\[3pt]
+\textbf{Conclusion:} $10$ N at $\approx53^\circ$ N of E.
 \end{example}
 
 \begin{example}{ex5}{Example 6 --- Perpendicular resultant}
-Resultant magnitude of 5 east and 12 north?\soln $\sqrt{25+144}=13$.
+Resultant magnitude of 5 east and 12 north?\soln
+\textbf{Step 1 (Pythagorean theorem, since the components are perpendicular):} $\sqrt{5^2+12^2}=\sqrt{25+144}=\sqrt{169}$.\\[3pt]
+\textbf{Conclusion:} $13$.
 \end{example}
 
 \begin{example}{ex6}{Example 7 --- Scalar multiple}
-Describe $-\tfrac12\vec v$.\soln Half the length, opposite direction.
+Describe $-\tfrac12\vec v$.\soln
+\textbf{Step 1 (magnitude scales by $|k|=\tfrac12$):} half the original length.\\[3pt]
+\textbf{Step 2 (negative $k$ reverses direction):} points opposite to $\vec v$.\\[3pt]
+\textbf{Conclusion:} half the length, opposite direction.
 \end{example}
 
 \begin{example}{ex7}{Example 8 --- Perpendicular resultant}
-Resultant magnitude of 9 east and 12 north?\soln $\sqrt{81+144}=15$.
+Resultant magnitude of 9 east and 12 north?\soln
+\textbf{Step 1 (Pythagorean theorem):} $\sqrt{9^2+12^2}=\sqrt{81+144}=\sqrt{225}$.\\[3pt]
+\textbf{Conclusion:} $15$.
 \end{example}
 
 \begin{example}{ex8}{Example 9 --- Direction}
-Direction of the resultant of 3 east, 4 north?\soln $\tan^{-1}\tfrac43\approx53^\circ$ north of east.
+Direction of the resultant of 3 east, 4 north?\soln
+\textbf{Step 1 (set up the tangent ratio, opposite over adjacent):} $\tan\theta=\tfrac{4}{3}$ (north component over east component).\\[3pt]
+\textbf{Step 2 (solve for $\theta$):} $\theta=\tan^{-1}\tfrac43\approx53^\circ$.\\[3pt]
+\textbf{Conclusion:} $\approx53^\circ$ north of east.
 \end{example}
 
 \clearpage

@@ -75,6 +75,17 @@ export const symmetryFig = () => wrap("0 0 320 240", "Line and rotational symmet
   <text x="160" y="230" text-anchor="middle" font-size="12" fill="#64748b" ${F}>regular pentagon: 5 lines + order-5 rotation</text>
 `, "300px");
 
+/** Regular hexagon with one symmetry line marked (for Ex. asking about hexagon). */
+export const hexagonSymmetryFig = () => wrap("0 0 320 260", "Regular hexagon lines of symmetry", `
+  <polygon points="160,30 240,75 240,165 160,210 80,165 80,75" fill="#eef2ff" stroke="#6366f1" stroke-width="2"/>
+  <line x1="160" y1="20" x2="160" y2="220" stroke="#ea580c" stroke-width="2" stroke-dasharray="5 3"/>
+  <line x1="70" y1="120" x2="250" y2="120" stroke="#0d9488" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <line x1="95" y1="50" x2="225" y2="190" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <line x1="225" y1="50" x2="95" y2="190" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <circle cx="160" cy="120" r="4" fill="#0f172a"/>
+  <text x="160" y="250" text-anchor="middle" font-size="12" fill="#64748b" ${F}>regular hexagon: 6 lines of symmetry</text>
+`, "300px");
+
 // ── Ch 4 Triangles ───────────────────────────────────────────
 export const triangleTypes = () => wrap("0 0 420 180", "Triangle classifications", `
   <polygon points="50,140 110,40 170,140" fill="none" stroke="#0f172a" stroke-width="2"/>

@@ -1,0 +1,77 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize\color{black!60}Worksheet 7.3}
+\begin{document}
+
+\wstitle{7.3}{Drawing Slope Fields}{Unit 7: Differential Equations}
+
+\begin{ideabox}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+  \item A \textbf{slope field} shows, at each point $(x,y)$, a short segment whose slope is the value of $\dfrac{dy}{dx}$ there.
+  \item To draw one, substitute each point into the differential equation.
+  \item Segments are horizontal wherever $\dfrac{dy}{dx}=0$.
+  \item If $\dfrac{dy}{dx}$ depends only on $x$, every column of the field is identical; if only on $y$, every row is.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked examples}
+\begin{example}{Example 1 \textperiodcentered{} Computing slopes}
+For $\dfrac{dy}{dx}=y-2x$, find the slopes at $(1,1)$, $(0,2)$ and $(2,4)$.\soln Substitute each point.\result{$-1$, $2$ and $0$.}
+\end{example}
+
+\begin{example}{Example 2 \textperiodcentered{} Horizontal segments}
+Where are the segments of the slope field for $\dfrac{dy}{dx}=y-2x$ horizontal?\soln Set $y-2x=0$.\result{Along the line $y=2x$.}
+\end{example}
+
+\begin{example}{Example 3 \textperiodcentered{} Recognising a pattern}
+A slope field has the same segments all the way up each vertical line. What does this say about the differential equation?\soln The slope does not change when $y$ changes.\result{$\dfrac{dy}{dx}$ depends on $x$ only.}
+\end{example}
+
+\newpage
+\sech{Practice}
+
+\level{Core}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item For $\dfrac{dy}{dx}=x^2y$, find the slope at $(2,3)$.\work{2.3cm}
+  \item For $\dfrac{dy}{dx}=x^2y$, find the slope at $(-1,-2)$.\work{2.3cm}
+  \item For $\dfrac{dy}{dx}=x^2y$, where are the segments horizontal?\work{2.3cm}
+  \item For $\dfrac{dy}{dx}=x^2y$, what is the sign of the slopes in the third quadrant?\work{2.3cm}
+\end{enumerate}
+
+\level{Exam level}
+\begin{enumerate}[leftmargin=*,itemsep=2pt,start=5]
+  \item For $\dfrac{dy}{dx}=x^2+y^2$, explain why no segment has negative slope, and find where the slope is zero.\work{2.8cm}
+  \item Describe the slope field of $\dfrac{dy}{dx}=(y-1)(y+2)$: where are the segments horizontal, and what is special about each row?\work{2.8cm}
+  \item Describe the slope field of $\dfrac{dy}{dx}=x-2$, and the shape of its solution curves.\work{2.8cm}
+  \item A slope field has horizontal segments along the curve $y=x^3$, positive slopes above that curve and negative slopes below it. Suggest a differential equation.\work{2.8cm}
+\end{enumerate}
+
+\begin{frbox}{Question 9 \textperiodcentered{} Free-response practice}
+Consider the differential equation $\dfrac{dy}{dx}=y(2-x)$.
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=2pt]
+  \item Find the slope at each of the points $(0,1)$, $(2,3)$, $(3,2)$ and $(1,-1)$.\work{2.6cm}
+  \item Describe all points at which the segments of the slope field are horizontal.\work{2.6cm}
+  \item The solution through $(2,3)$ has a horizontal tangent there. Is this a relative maximum or a relative minimum? Justify your answer.\work{2.6cm}
+\end{enumerate}
+\end{frbox}
+
+\newpage
+\begin{solbox}
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item $12$.
+  \item $-2$.
+  \item Along both axes: $x=0$ or $y=0$.
+  \item Negative ($x^2>0$, $y<0$).
+  \item $x^2+y^2\ge0$ always; it is zero only at the origin.
+  \item Horizontal along $y=1$ and $y=-2$. The slope depends only on $y$, so each row has identical segments. Slopes are negative between the two lines and positive outside them.
+  \item The slope depends only on $x$: columns are identical, negative for $x<2$ and positive for $x>2$. Solutions are parabolas $y=\dfrac{x^2}{2}-2x+C$ with their lowest points at $x=2$.
+  \item $\dfrac{dy}{dx}=y-x^3$.
+  \item \begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=3pt]
+    \item $2$, $0$, $-2$ and $-1$.
+    \item The line $y=0$ and the line $x=2$.
+    \item $\dfrac{d^2y}{dx^2}=\dfrac{dy}{dx}(2-x)-y$, which equals $-3$ at $(2,3)$. A zero first derivative and a negative second derivative: a relative maximum.
+  \end{enumerate}
+\end{enumerate}
+\end{solbox}
+
+\end{document}

@@ -11,6 +11,21 @@ import {
   copyAngleFig, bisectFig, incenterFig, circumcenterFig,
   sampleSpaceFig, treeDiagram, twoWayTable, permuteCombine,
 } from "./figures2.mjs";
+import {
+  threePointsPlane, collinearPts, numberLineDist, midpointAlgebra, classifyAngles,
+  copyAngleObtuse, angleCombine, biconditionalFig, paragraphProofFig,
+  parallelConverse, perpTransversal, horizVert, constructPerpOnLine, constructRectangle,
+  translatePolygon, reflectYX, reflectVertical, rotate180, rotate270, glideReflect,
+  parallelReflect, intersectReflect, parallelogramSym, squareSym, scaleneNoSym,
+  exteriorAngle, angleSumTri, equilateralFig, altitudeIsos, aasMarks, medianFig,
+  dilatePoint, sssSimilar, sasSimilar, midsegmentTri, threeParallel, mirrorMethod,
+  depressionFig, guyWire, twoElevations,
+  diameterChord, semicircleRight, chordPerp, chordChord, tangentSecant, twoSecants, circleEq,
+  pyramidFig, coneFig, sphereFig, densityFig, popDensity, coneSlice, sphereSlice, frustumFig,
+  dieFig, bagMarbles, complementFig, cardsFig, expectedValue, withWithout,
+} from "./figures3.mjs";
+import { hexagonSymmetryFig } from "./figures2.mjs";
+import { copySegment, angleBisector } from "./figures.mjs";
 
 export const ch = {};
 
@@ -44,6 +59,7 @@ ch["10.1"] = L("10.1", "Surface Area of Prisms, Pyramids, Cylinders, Cones, and 
       {
         h: "Cylinder",
         p: "A can (cylinder) has radius 4 cm and height 9 cm. Find its total surface area.",
+        fig: cylinderFig(),
         steps: [
           `\\(SA = 2\\pi r(r+h) = 2\\pi(4)(4+9)\\)`,
           `\\(SA = 2\\pi(4)(13) = 104\\pi\\)`,
@@ -54,6 +70,7 @@ ch["10.1"] = L("10.1", "Surface Area of Prisms, Pyramids, Cylinders, Cones, and 
       {
         h: "Square pyramid",
         p: "A square pyramid has a base edge of 10 m and a slant height of 13 m. Find its surface area.",
+        fig: pyramidFig(),
         steps: [
           `Base area \\(B = 10^2 = 100\\); perimeter \\(P = 4(10) = 40\\)`,
           `\\(SA = B + \\dfrac{1}{2}P\\ell = 100 + \\dfrac{1}{2}(40)(13)\\)`,
@@ -64,6 +81,7 @@ ch["10.1"] = L("10.1", "Surface Area of Prisms, Pyramids, Cylinders, Cones, and 
       {
         h: "Cone (finding slant height first)",
         p: "A cone has radius 5 in and height 12 in. The slant height isn't given — find the total surface area.",
+        fig: coneFig(),
         steps: [
           `Since \\(r\\), \\(h\\), and \\(\\ell\\) form a right triangle: \\(\\ell = \\sqrt{r^2+h^2} = \\sqrt{25+144} = \\sqrt{169} = 13\\)`,
           `\\(SA = \\pi r^2 + \\pi r\\ell = \\pi(25) + \\pi(5)(13)\\)`,
@@ -74,6 +92,7 @@ ch["10.1"] = L("10.1", "Surface Area of Prisms, Pyramids, Cylinders, Cones, and 
       {
         h: "Sphere",
         p: "A basketball has a diameter of 18 in. Find its surface area.",
+        fig: sphereFig(),
         steps: [
           `Radius \\(r = \\dfrac{18}{2} = 9\\)`,
           `\\(SA = 4\\pi r^2 = 4\\pi(81) = 324\\pi\\)`,
@@ -117,6 +136,7 @@ ch["10.2"] = L("10.2", "Volume of Prisms, Pyramids, Cylinders, Cones, and Sphere
       {
         h: "Rectangular prism",
         p: "Find the volume of a rectangular prism with length 8 in, width 5 in, and height 6 in.",
+        fig: prismNet(),
         steps: [`\\(V = lwh = (8)(5)(6)\\)`, `\\(V = 240\\)`],
         check: "V = 240 in³.",
       },
@@ -130,18 +150,21 @@ ch["10.2"] = L("10.2", "Volume of Prisms, Pyramids, Cylinders, Cones, and Sphere
       {
         h: "Square pyramid",
         p: "A square pyramid has base edge 10 m and height 12 m (the true height, not slant height). Find its volume.",
+        fig: pyramidFig(),
         steps: [`\\(B = 10^2 = 100\\)`, `\\(V = \\dfrac{1}{3}Bh = \\dfrac{1}{3}(100)(12)\\)`, `\\(V = \\dfrac{1200}{3} = 400\\)`],
         check: "V = 400 m³.",
       },
       {
         h: "Cone",
         p: "Find the volume of a cone with radius 5 in and height 12 in.",
+        fig: coneFig(),
         steps: [`\\(V = \\dfrac{1}{3}\\pi r^2h = \\dfrac{1}{3}\\pi(25)(12)\\)`, `\\(V = \\dfrac{300\\pi}{3} = 100\\pi \\approx 314.2\\)`],
         check: "V = 100π ≈ 314.2 in³.",
       },
       {
         h: "Sphere",
         p: "Find the volume of a sphere with radius 9 ft.",
+        fig: sphereFig(),
         steps: [`\\(V = \\dfrac{4}{3}\\pi r^3 = \\dfrac{4}{3}\\pi(729)\\)`, `\\(V = 972\\pi \\approx 3053.6\\)`],
         check: "V = 972π ≈ 3053.6 ft³.",
       },
@@ -181,30 +204,35 @@ ch["10.3"] = L("10.3", "Solving Density and Population Density Problems (MA.912.
       {
         h: "Finding density from mass and volume",
         p: "A metal cube measures 4 cm on each edge and has a mass of 372.7 g. Find its density.",
+        fig: densityFig(),
         steps: [`\\(V = s^3 = 4^3 = 64\\) cm³`, `\\(\\rho = \\dfrac{m}{V} = \\dfrac{372.7}{64}\\)`, `\\(\\rho \\approx 5.82\\) g/cm³ (close to the density of zinc)`],
         check: "ρ ≈ 5.82 g/cm³.",
       },
       {
         h: "Finding mass from density and volume",
         p: "A cylindrical pine rod has radius 3 cm and length 20 cm. Pine has a density of about 0.5 g/cm³. Find the rod's mass.",
+        fig: densityFig(),
         steps: [`\\(V = \\pi r^2h = \\pi(9)(20) = 180\\pi \\approx 565.5\\) cm³`, `\\(m = \\rho V \\approx (0.5)(565.5)\\)`, `\\(m \\approx 282.7\\) g`],
         check: "m ≈ 282.7 g.",
       },
       {
         h: "Finding volume from density and mass",
         p: "A gold bar has a mass of 3860 g. Gold's density is 19.3 g/cm³. Find the bar's volume.",
+        fig: densityFig(),
         steps: [`\\(V = \\dfrac{m}{\\rho} = \\dfrac{3860}{19.3}\\)`, `\\(V = 200\\)`],
         check: "V = 200 cm³.",
       },
       {
         h: "Population density",
         p: "A city has a population of 250,000 people spread over 125 mi². Find the population density.",
+        fig: popDensity(),
         steps: [`\\(D = \\dfrac{P}{A} = \\dfrac{250{,}000}{125}\\)`, `\\(D = 2000\\)`],
         check: "D = 2000 people per mi².",
       },
       {
         h: "Finding population from density and area",
         p: "A rectangular county is 40 mi by 60 mi and has a population density of 350 people/mi². Find the total population.",
+        fig: popDensity(),
         steps: [`Area \\(A = 40 \\times 60 = 2400\\) mi²`, `\\(P = D \\cdot A = (350)(2400)\\)`, `\\(P = 840{,}000\\)`],
         check: "P = 840,000 people.",
       },
@@ -244,24 +272,28 @@ ch["10.4"] = L("10.4", "Cross-Sections of 3D Figures (MA.912.GR.4.1)", [
       {
         h: "Prism sliced parallel to its base",
         p: "A rectangular box is sliced by a plane parallel to its base. Describe the cross-section.",
+        fig: crossSectionFig(),
         steps: [`A plane parallel to the base of a prism never changes shape as it moves through the solid.`, `The cross-section is a rectangle congruent to the base.`],
         check: "The cross-section is a rectangle congruent to the base.",
       },
       {
         h: "Cylinder sliced through its axis",
         p: "A cylinder with radius 3 in and height 10 in is sliced by a plane that contains its central axis. Describe and measure the cross-section.",
+        fig: cylinderFig(),
         steps: [`A plane through the axis cuts straight down through the circular top and bottom, producing a shape with two straight sides (the height) and two straight sides (the diameter).`, `Width = diameter \\(= 2(3) = 6\\) in; length = height \\(= 10\\) in.`],
         check: "The cross-section is a 6 in by 10 in rectangle.",
       },
       {
         h: "Cone sliced parallel to its base",
         p: "A cone with base radius 6 in is sliced by a plane parallel to the base, exactly halfway up (measuring from the base to the apex). Find the radius of the circular cross-section.",
+        fig: coneSlice(),
         steps: [`By similar triangles, the cross-section's radius scales in proportion to how far up the cone you cut — halfway up gives half the radius.`, `\\(r_{\\text{cross}} = \\dfrac{1}{2}(6) = 3\\)`],
         check: "The cross-section is a circle with radius 3 in.",
       },
       {
         h: "Sphere sliced off-center",
         p: "A sphere of radius 5 cm is sliced by a plane 3 cm from its center. Find the radius of the circular cross-section.",
+        fig: sphereSlice(),
         steps: [`The center, the cross-section's radius, and the sphere's radius form a right triangle: \\(r_{\\text{cross}}^2 + d^2 = R^2\\)`, `\\(r_{\\text{cross}}^2 = 5^2 - 3^2 = 25-9 = 16\\)`, `\\(r_{\\text{cross}} = 4\\)`],
         check: "The cross-section is a circle with radius 4 cm.",
       },
@@ -315,24 +347,28 @@ ch["10.5"] = L("10.5", "Solids of Revolution (Rotating 2D Shapes to Make 3D Obje
       {
         h: "Right triangle → cone",
         p: "A right triangle with legs 6 and 8 is rotated \\(360^\\circ\\) about the leg of length 8. Identify the solid and find its volume.",
+        fig: coneFig(),
         steps: [`Rotating a right triangle about one leg sweeps out a cone: the leg of rotation (8) becomes the height, and the other leg (6) becomes the radius.`, `\\(V = \\dfrac{1}{3}\\pi r^2h = \\dfrac{1}{3}\\pi(36)(8) = 96\\pi\\)`],
         check: "A cone with V = 96π ≈ 301.6 cubic units.",
       },
       {
         h: "Semicircle → sphere",
         p: "A semicircle with radius 7 is rotated \\(360^\\circ\\) about its diameter. Identify the solid and find its volume.",
+        fig: sphereFig(),
         steps: [`Sweeping a semicircle fully around its own diameter traces out every point of a full sphere of the same radius.`, `\\(V = \\dfrac{4}{3}\\pi r^3 = \\dfrac{4}{3}\\pi(343) = \\dfrac{1372}{3}\\pi \\approx 1436.8\\)`],
         check: "A sphere with V ≈ 1436.8 cubic units.",
       },
       {
         h: "Right trapezoid → frustum",
         p: "A right trapezoid with parallel sides 4 and 9 and a perpendicular leg of 6 is rotated \\(360^\\circ\\) about that perpendicular leg. Identify the solid.",
+        fig: frustumFig(),
         steps: [`The two parallel sides sweep out two circles of different radii (4 and 9), connected by a slanted surface — this is a frustum, or a cone with its tip cut off.`],
         check: "The solid is a frustum with radii 4 and 9 and height 6.",
       },
       {
         h: "Rectangle rotated with a gap → hollow cylinder",
         p: "A 3 by 5 rectangle is rotated \\(360^\\circ\\) about an axis parallel to (and 2 units away from) its nearer side. Identify the solid and find its volume.",
+        fig: cylinderFig(),
         steps: [`Since the rectangle doesn't touch the axis, it sweeps out a tube: an outer cylinder minus an inner cylinder.`, `Inner radius = 2 (the gap); outer radius = \\(2+3 = 5\\); height = 5`, `\\(V = \\pi(R^2-r^2)h = \\pi(25-4)(5) = 105\\pi\\)`],
         check: "A hollow cylinder with V = 105π ≈ 329.9 cubic units.",
       },
@@ -384,6 +420,7 @@ ch["10.6"] = L("10.6", "How Dilations Affect Surface Area and Volume (MA.912.GR.
       {
         h: "Scaling a given surface area",
         p: "Two similar cylinders have radii 5 and 15. The smaller cylinder has a surface area of \\(200\\pi\\). Find the larger cylinder's surface area.",
+        fig: scale3d(),
         steps: [
           `Scale factor: \\(k = \\dfrac{15}{5} = 3\\)`,
           `Surface area scales by \\(k^2 = 9\\)`,
@@ -394,6 +431,7 @@ ch["10.6"] = L("10.6", "How Dilations Affect Surface Area and Volume (MA.912.GR.
       {
         h: "Finding scale factor from a volume ratio",
         p: "Two similar spheres have volumes \\(36\\pi\\) and \\(288\\pi\\). Find the scale factor from the smaller to the larger.",
+        fig: scale3d(),
         steps: [
           `Volume ratio \\(= \\dfrac{288\\pi}{36\\pi} = 8\\)`,
           `\\(k = \\sqrt[3]{8} = 2\\)`,
@@ -403,6 +441,7 @@ ch["10.6"] = L("10.6", "How Dilations Affect Surface Area and Volume (MA.912.GR.
       {
         h: "Scaling down",
         p: "A pyramid has volume 480 cm³. A similar, smaller pyramid is made with scale factor \\(k=\\dfrac{1}{2}\\). Find its volume.",
+        fig: scale3d(),
         steps: [
           `New volume \\(= 480 \\times k^3 = 480 \\times \\dfrac{1}{8}\\)`,
           `New volume \\(= 60\\)`,
@@ -412,6 +451,7 @@ ch["10.6"] = L("10.6", "How Dilations Affect Surface Area and Volume (MA.912.GR.
       {
         h: "Going from a surface-area ratio to a volume ratio",
         p: "Two similar cones have surface areas 50 and 200. Find the scale factor, then the ratio of their volumes.",
+        fig: scale3d(),
         steps: [
           `Area ratio \\(= \\dfrac{200}{50} = 4\\), so \\(k = \\sqrt{4} = 2\\)`,
           `Volume ratio \\(= k^3 = 2^3 = 8\\)`,

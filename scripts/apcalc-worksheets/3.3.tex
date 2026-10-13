@@ -1,0 +1,77 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize\color{black!60}Worksheet 3.3}
+\begin{document}
+
+\wstitle{3.3}{Slopes of Inverse Functions}{Unit 3: Composite, Implicit and Inverse Functions}
+
+\begin{ideabox}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+  \item If $g=f^{-1}$ and $f(a)=b$, then $g(b)=a$ and $g'(b)=\dfrac{1}{f'(a)}$.
+  \item The slope of the inverse at $b$ is the reciprocal of the slope of $f$ at the \textbf{matching} point $a$, not at $b$.
+  \item To find $a$, solve $f(a)=b$. On the exam it can always be found by inspection.
+  \item A function with $f'(x)>0$ everywhere is increasing, hence one-to-one, hence invertible.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked examples}
+\begin{example}{Example 1 \textperiodcentered{} From a formula}
+Let $f(x)=x^3+3x+1$. Find $\left(f^{-1}\right)'(5)$.\soln $f(1)=5$, so $f^{-1}(5)=1$. $f'(x)=3x^2+3$, so $f'(1)=6$.\result{$\left(f^{-1}\right)'(5)=\dfrac16$.}
+\end{example}
+
+\begin{example}{Example 2 \textperiodcentered{} From values}
+A differentiable function $f$ has an inverse, with $f(2)=6$ and $f'(2)=4$. Find $\left(f^{-1}\right)'(6)$.\soln The matching point is $x=2$.\result{$\dfrac14$.}
+\end{example}
+
+\begin{example}{Example 3 \textperiodcentered{} An exponential}
+Let $f(x)=e^{x}+2x$. Find $\left(f^{-1}\right)'(1)$.\soln $f(0)=1$ and $f'(x)=e^{x}+2$, so $f'(0)=3$.\result{$\dfrac13$.}
+\end{example}
+
+\newpage
+\sech{Practice}
+
+\level{Core}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item Let $g=f^{-1}$, with $f(4)=9$ and $f'(4)=\dfrac12$. Find $g'(9)$.\work{2.3cm}
+  \item Let $f(x)=2x-7$. Find $\left(f^{-1}\right)'(x)$.\work{2.3cm}
+  \item Let $f(x)=x^3$. Find $\left(f^{-1}\right)'(8)$.\work{2.3cm}
+  \item The graph of $f$ has slope 5 at the point $(2,3)$. What is the slope of the graph of $f^{-1}$, and at which point?\work{2.3cm}
+\end{enumerate}
+
+\level{Exam level}
+\begin{enumerate}[leftmargin=*,itemsep=2pt,start=5]
+  \item Let $f(x)=x^5+x^3+1$. Find $\left(f^{-1}\right)'(3)$.\work{2.8cm}
+  \item Let $f(x)=x^3+\ln x$ for $x>0$. Find $\left(f^{-1}\right)'(1)$.\work{2.8cm}
+  \item Let $f(x)=x+\sin x$. Explain what happens to $\left(f^{-1}\right)'$ at $x=\pi$.\work{2.8cm}
+  \item Selected values of an increasing differentiable function $f$ are shown.\begin{center}\renewcommand{\arraystretch}{1.25}\begin{tabular}{|c|c|c|c|}\hline $x$ & $1$ & $2$ & $3$ \\ \hline $f(x)$ & $4$ & $7$ & $12$ \\ \hline\end{tabular}\end{center}\begin{center}\renewcommand{\arraystretch}{1.25}\begin{tabular}{|c|c|c|c|}\hline $x$ & $1$ & $2$ & $3$ \\ \hline $f'(x)$ & $2$ & $5$ & $6$ \\ \hline\end{tabular}\end{center}Write an equation of the line tangent to the graph of $f^{-1}$ at $x=7$.\work{2.8cm}
+\end{enumerate}
+
+\begin{frbox}{Question 9 \textperiodcentered{} Free-response practice}
+Let $f(x)=x^3+x-4$.
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=2pt]
+  \item Explain why $f$ has an inverse function.\work{2.6cm}
+  \item Find $\left(f^{-1}\right)'(6)$.\work{2.6cm}
+  \item Write an equation of the line tangent to the graph of $f^{-1}$ at $x=-2$.\work{2.6cm}
+\end{enumerate}
+\end{frbox}
+
+\newpage
+\begin{solbox}
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item $\dfrac{1}{1/2}=2$.
+  \item $f'(x)=2$ everywhere, so $\left(f^{-1}\right)'(x)=\dfrac12$.
+  \item $f(2)=8$ and $f'(2)=12$: $\dfrac{1}{12}$.
+  \item Slope $\dfrac15$, at the point $(3,2)$.
+  \item $f(1)=3$ and $f'(1)=5+3=8$: $\dfrac18$.
+  \item $f(1)=1$ and $f'(1)=3+1=4$: $\dfrac14$.
+  \item $f(\pi)=\pi$ and $f'(\pi)=1+\cos\pi=0$. The reciprocal is undefined: the graph of $f^{-1}$ has a vertical tangent at $x=\pi$.
+  \item $f(2)=7$, so the point is $(7,2)$ and the slope is $\dfrac{1}{f'(2)}=\dfrac15$: $y-2=\dfrac15(x-7)$.
+  \item \begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=3pt]
+    \item $f'(x)=3x^2+1>0$ for all $x$, so $f$ is increasing and therefore one-to-one.
+    \item $f(2)=6$ and $f'(2)=13$: $\dfrac{1}{13}$.
+    \item $f(1)=-2$ and $f'(1)=4$. The point is $(-2,1)$ and the slope is $\dfrac14$: $y-1=\dfrac14(x+2)$.
+  \end{enumerate}
+\end{enumerate}
+\end{solbox}
+
+\end{document}

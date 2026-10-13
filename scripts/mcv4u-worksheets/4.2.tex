@@ -26,39 +26,73 @@ $f''>0$ concave up, $f''<0$ concave down; inflection where $f''$ changes sign. 2
 \sech{Worked Examples}
 
 \begin{example}{ex0}{Example 1 --- Always concave up}
-Concavity of $f(x)=x^2$.\soln $f''=2>0$: concave up everywhere.
+Concavity of $f(x)=x^2$.\soln
+\textbf{Step 1 (find $f'$):} $f'(x)=2x$.\\[3pt]
+\textbf{Step 2 (find $f''$):} $f''(x)=2$.\\[3pt]
+\textbf{Step 3 (check the sign):} $f''=2>0$ for every $x$ --- constant and positive.\\[3pt]
+\textbf{Conclusion:} concave up everywhere.
 \end{example}
 
 \begin{example}{ex1}{Example 2 --- Switches}
-Concavity of $f(x)=x^3$.\soln $f''=6x$: down for $x<0$, up for $x>0$, inflection at $(0,0)$:\eplot{-2.5}{2.5}{-8}{8}{\addplot[exblue,very thick,domain=-2:2]{x^3};\addplot[qorange,very thick,domain=-1.3:1.3]{6*x};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(0,0)};}
+Concavity of $f(x)=x^3$.\soln
+\textbf{Step 1 (find $f'$ and $f''$):} $f'(x)=3x^2$, $f''(x)=6x$.\\[3pt]
+\textbf{Step 2 (analyze the sign of $f''$):} for $x<0$, $f''<0$ (concave down); for $x>0$, $f''>0$ (concave up).\\[3pt]
+\textbf{Step 3 (find where the sign changes):} at $x=0$.\\[3pt]
+\textbf{Conclusion:} concave down for $x<0$, concave up for $x>0$, inflection at $(0,0)$:\eplot{-2.5}{2.5}{-8}{8}{\addplot[exblue,very thick,domain=-2:2]{x^3};\addplot[qorange,very thick,domain=-1.3:1.3]{6*x};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(0,0)};}
 \end{example}
 
 \begin{example}{ex2}{Example 3 --- 2nd-derivative test}
-Classify the critical point of $f(x)=x^2-4x$.\soln $f'=2x-4=0\Rightarrow x=2$; $f''=2>0$: local min.
+Classify the critical point of $f(x)=x^2-4x$.\soln
+\textbf{Step 1 (find the critical number):} $f'(x)=2x-4=0\Rightarrow x=2$.\\[3pt]
+\textbf{Step 2 (find $f''$):} $f''(x)=2$.\\[3pt]
+\textbf{Step 3 (apply the 2nd-derivative test):} $f''(2)=2>0$, so the graph is concave up there.\\[3pt]
+\textbf{Conclusion:} local min at $x=2$.
 \end{example}
 
 \begin{example}{ex3}{Example 4 --- Inflection}
-Inflection point of $f(x)=x^3-3x^2$.\soln $f''=6x-6=0\Rightarrow x=1$; $f(1)=-2$: $(1,-2)$.
+Inflection point of $f(x)=x^3-3x^2$.\soln
+\textbf{Step 1 (find $f'$ and $f''$):} $f'(x)=3x^2-6x$, $f''(x)=6x-6$.\\[3pt]
+\textbf{Step 2 (set $f''=0$):} $6x-6=0\Rightarrow x=1$.\\[3pt]
+\textbf{Step 3 (find the $y$-coordinate):} $f(1)=1-3=-2$.\\[3pt]
+\textbf{Conclusion:} inflection point at $(1,-2)$.
 \end{example}
 
 \begin{example}{ex4}{Example 5 --- Classify all}
-Use $f''$ on $f(x)=x^4-2x^2$.\soln $f''=12x^2-4$; $f''(0)=-4$ (max), $f''(\pm1)=8$ (min).
+Use $f''$ on $f(x)=x^4-2x^2$.\soln
+\textbf{Step 1 (find $f'$ and its zeros):} $f'(x)=4x^3-4x=4x(x-1)(x+1)=0\Rightarrow x=0,\pm1$.\\[3pt]
+\textbf{Step 2 (find $f''$):} $f''(x)=12x^2-4$.\\[3pt]
+\textbf{Step 3 (evaluate $f''$ at each critical number):} $f''(0)=-4<0$ (max); $f''(\pm1)=12-4=8>0$ (min).\\[3pt]
+\textbf{Conclusion:} local max at $x=0$; local mins at $x=1$ and $x=-1$.
 \end{example}
 
 \begin{example}{ex5}{Example 6 --- Concave down}
-Concavity of $f(x)=-x^2$.\soln $f''=-2<0$: concave down everywhere.
+Concavity of $f(x)=-x^2$.\soln
+\textbf{Step 1 (find $f'$ and $f''$):} $f'(x)=-2x$, $f''(x)=-2$.\\[3pt]
+\textbf{Step 2 (check the sign):} $f''=-2<0$ for every $x$.\\[3pt]
+\textbf{Conclusion:} concave down everywhere.
 \end{example}
 
 \begin{example}{ex6}{Example 7 --- Concave up where}
-Where is $f(x)=x^3$ concave up?\soln $6x>0\Rightarrow x>0$.
+Where is $f(x)=x^3$ concave up?\soln
+\textbf{Step 1 (find $f''$):} $f''(x)=6x$.\\[3pt]
+\textbf{Step 2 (set up the concave-up condition, $f''>0$):} $6x>0$.\\[3pt]
+\textbf{Step 3 (solve):} $x>0$.\\[3pt]
+\textbf{Conclusion:} concave up on $(0,\infty)$.
 \end{example}
 
 \begin{example}{ex7}{Example 8 --- 2nd-derivative test}
-Classify the critical point of $f(x)=x^2+6x$.\soln $x=-3$; $f''=2>0$: local min.
+Classify the critical point of $f(x)=x^2+6x$.\soln
+\textbf{Step 1 (find the critical number):} $f'(x)=2x+6=0\Rightarrow x=-3$.\\[3pt]
+\textbf{Step 2 (find $f''$ and apply the test):} $f''(x)=2>0$, so concave up.\\[3pt]
+\textbf{Conclusion:} local min at $x=-3$.
 \end{example}
 
 \begin{example}{ex8}{Example 9 --- Inflection}
-Inflection point of $f(x)=x^3-6x^2$.\soln $f''=6x-12=0\Rightarrow x=2$; $f(2)=-16$: $(2,-16)$.
+Inflection point of $f(x)=x^3-6x^2$.\soln
+\textbf{Step 1 (find $f''$):} $f'(x)=3x^2-12x$, so $f''(x)=6x-12$.\\[3pt]
+\textbf{Step 2 (set $f''=0$):} $6x-12=0\Rightarrow x=2$.\\[3pt]
+\textbf{Step 3 (find the $y$-coordinate):} $f(2)=8-24=-16$.\\[3pt]
+\textbf{Conclusion:} inflection point at $(2,-16)$.
 \end{example}
 
 \clearpage

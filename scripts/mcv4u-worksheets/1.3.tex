@@ -26,39 +26,72 @@ Continuous at $a$: $f(a)$ defined, the limit exists, and they are equal. Discont
 \sech{Worked Examples}
 
 \begin{example}{ex0}{Example 1 --- Verify continuity}
-Is $f(x)=x^2+1$ continuous at $x=2$?\soln $f(2)=5$ and $\lim_{x\to2}(x^2+1)=5$; equal, so yes.
+Is $f(x)=x^2+1$ continuous at $x=2$?\soln
+\textbf{Step 1 ($f(a)$ defined?):} $f(2)=2^2+1=5$, which is defined.\\[3pt]
+\textbf{Step 2 (limit exists?):} $f$ is a polynomial, so $\lim_{x\to2}(x^2+1)=2^2+1=5$ by direct substitution.\\[3pt]
+\textbf{Step 3 (do they match?):} $f(2)=5$ and $\lim_{x\to2}f(x)=5$ --- equal.\\[3pt]
+\textbf{Conclusion:} all three conditions hold, so $f$ is continuous at $x=2$.
 \end{example}
 
 \begin{example}{ex1}{Example 2 --- Removable}
-Classify the discontinuity of $\dfrac{x^2-4}{x-2}$ at $x=2$.\soln $f(2)$ undefined but the limit is $4$: removable (a hole).
+Classify the discontinuity of $\dfrac{x^2-4}{x-2}$ at $x=2$.\soln
+\textbf{Step 1 ($f(a)$ defined?):} at $x=2$ the denominator is $0$, so $f(2)$ is undefined.\\[3pt]
+\textbf{Step 2 (does the limit exist?):} $\dfrac{x^2-4}{x-2}=\dfrac{(x-2)(x+2)}{x-2}=x+2$ for $x\ne2$, so $\lim_{x\to2}f(x)=4$, which exists.\\[3pt]
+\textbf{Step 3 (compare):} the limit exists ($4$) but $f(2)$ doesn't --- a single missing point.\\[3pt]
+\textbf{Conclusion:} removable discontinuity (a hole at $(2,4)$).
 \end{example}
 
 \begin{example}{ex2}{Example 3 --- Infinite}
-Classify the discontinuity of $\dfrac1{x-3}$ at $x=3$.\soln One-sided limits are $\pm\infty$: infinite (vertical asymptote):\eplot{-1}{7}{-6}{6}{\addplot[exblue,very thick,domain=-1:2.82,samples=120]{1/(x-3)};\addplot[exblue,very thick,domain=3.18:7,samples=120]{1/(x-3)};\draw[dashed,gray] (axis cs:3,-6)--(axis cs:3,6);}
+Classify the discontinuity of $\dfrac1{x-3}$ at $x=3$.\soln
+\textbf{Step 1 (right-hand limit):} as $x\to3^+$, $x-3\to0^+$ (small positive), so $\dfrac1{x-3}\to+\infty$.\\[3pt]
+\textbf{Step 2 (left-hand limit):} as $x\to3^-$, $x-3\to0^-$ (small negative), so $\dfrac1{x-3}\to-\infty$.\\[3pt]
+\textbf{Step 3 (interpret):} the function grows without bound on both sides --- no finite limit, no hole to fill in.\\[3pt]
+\textbf{Conclusion:} infinite discontinuity (a vertical asymptote at $x=3$):\eplot{-1}{7}{-6}{6}{\addplot[exblue,very thick,domain=-1:2.82,samples=120]{1/(x-3)};\addplot[exblue,very thick,domain=3.18:7,samples=120]{1/(x-3)};\draw[dashed,gray] (axis cs:3,-6)--(axis cs:3,6);}
 \end{example}
 
 \begin{example}{ex3}{Example 4 --- Jump}
-For $f(x)=\begin{cases}x,&x<1\\x+2,&x\ge1\end{cases}$, what happens at $x=1$?\soln Left limit $1$, right limit $3$: a jump discontinuity.
+For $f(x)=\begin{cases}x,&x<1\\x+2,&x\ge1\end{cases}$, what happens at $x=1$?\soln
+\textbf{Step 1 (left-hand limit):} for $x<1$, $f(x)=x$, so $\lim_{x\to1^-}f(x)=1$.\\[3pt]
+\textbf{Step 2 (right-hand limit):} for $x\ge1$, $f(x)=x+2$, so $\lim_{x\to1^+}f(x)=1+2=3$.\\[3pt]
+\textbf{Step 3 (compare):} $1\ne3$ --- the one-sided limits disagree, so the two-sided limit does not exist.\\[3pt]
+\textbf{Conclusion:} a jump discontinuity at $x=1$.
 \end{example}
 
 \begin{example}{ex4}{Example 5 --- Make it continuous}
-Find $k$ so $f(x)=\begin{cases}x^2,&x\le2\\kx,&x>2\end{cases}$ is continuous at $2$.\soln $2^2=2k\Rightarrow k=2$.
+Find $k$ so $f(x)=\begin{cases}x^2,&x\le2\\kx,&x>2\end{cases}$ is continuous at $2$.\soln
+\textbf{Step 1 (left piece at $x=2$):} $f(2)=2^2=4$.\\[3pt]
+\textbf{Step 2 (right piece's limit at $x=2$):} $\lim_{x\to2^+}kx=2k$.\\[3pt]
+\textbf{Step 3 (set them equal):} for continuity the pieces must meet, so $2k=4$.\\[3pt]
+\textbf{Conclusion:} $k=2$.
 \end{example}
 
 \begin{example}{ex5}{Example 6 --- Where discontinuous}
-Where is $\dfrac1{x^2-9}$ discontinuous?\soln $x^2-9=0\Rightarrow x=3,-3$.
+Where is $\dfrac1{x^2-9}$ discontinuous?\soln
+\textbf{Step 1 (find where the denominator is $0$):} solve $x^2-9=0$.\\[3pt]
+\textbf{Step 2 (factor):} $(x-3)(x+3)=0$.\\[3pt]
+\textbf{Step 3 (solve):} $x=3$ or $x=-3$.\\[3pt]
+\textbf{Conclusion:} discontinuous (infinite, vertical asymptotes) at $x=3$ and $x=-3$.
 \end{example}
 
 \begin{example}{ex6}{Example 7 --- Removable}
-Classify $\dfrac{x^2-1}{x-1}$ at $x=1$.\soln Removable (hole at $(1,2)$).
+Classify $\dfrac{x^2-1}{x-1}$ at $x=1$.\soln
+\textbf{Step 1 ($f(1)$ defined?):} the denominator is $0$ at $x=1$, so $f(1)$ is undefined.\\[3pt]
+\textbf{Step 2 (does the limit exist?):} $\dfrac{x^2-1}{x-1}=\dfrac{(x-1)(x+1)}{x-1}=x+1$ for $x\ne1$, so $\lim_{x\to1}f(x)=2$.\\[3pt]
+\textbf{Conclusion:} removable discontinuity (a hole at $(1,2)$).
 \end{example}
 
 \begin{example}{ex7}{Example 8 --- Limit laws}
-$\displaystyle\lim_{x\to2}(3x^2-x)$.\soln $3(4)-2=10$.
+$\displaystyle\lim_{x\to2}(3x^2-x)$.\soln
+\textbf{Step 1 (split by the sum/difference law):} $\lim_{x\to2}3x^2-\lim_{x\to2}x$.\\[3pt]
+\textbf{Step 2 (evaluate each piece by substitution, since both are continuous):} $3(2)^2-2=3(4)-2$.\\[3pt]
+\textbf{Conclusion:} $=12-2=10$.
 \end{example}
 
 \begin{example}{ex8}{Example 9 --- Domain \& continuity}
-Where is $\sqrt{x}$ continuous?\soln On its domain $x\ge0$.
+Where is $\sqrt{x}$ continuous?\soln
+\textbf{Step 1 (find the domain):} $\sqrt{x}$ is only defined for $x\ge0$.\\[3pt]
+\textbf{Step 2 (check continuity on that domain):} for every $a\ge0$, $\lim_{x\to a}\sqrt{x}=\sqrt{a}=f(a)$, so the three conditions hold throughout.\\[3pt]
+\textbf{Conclusion:} $\sqrt{x}$ is continuous on its whole domain, $x\ge0$.
 \end{example}
 
 \clearpage

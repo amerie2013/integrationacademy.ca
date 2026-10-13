@@ -3,10 +3,12 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { supabase } from "../../lib/supabase";
 import { LEVELS } from "../../lib/theme";
 
 export default function LoginPage() {
+  const t = useTranslations("login");
   const router = useRouter();
   const [mode, setMode] = useState<"login" | "signup" | "forgot">("login");
   const [loading, setLoading] = useState(false);
@@ -31,7 +33,7 @@ export default function LoginPage() {
     const appUrl = window.location.origin;
 
     if (mode === "forgot") {
-      if (!form.email) return fail("Please enter your email.");
+      if (!form.email) return fail(t("errEnterEmail"));
       const { error } = await supabase.auth.resetPasswordForEmail(form.email, {
         redirectTo: `${appUrl}/auth/reset-password`,
       });
@@ -43,7 +45,7 @@ export default function LoginPage() {
 
     if (mode === "signup") {
       if (!form.full_name || !form.email || !form.password)
-        return fail("Please fill in all required fields.");
+        return fail(t("errFillRequired"));
       const { error } = await supabase.auth.signUp({
         email: form.email,
         password: form.password,
@@ -65,7 +67,7 @@ export default function LoginPage() {
       email: form.email,
       password: form.password,
     });
-    if (error) return fail("Incorrect email or password.");
+    if (error) return fail(t("errIncorrect"));
     router.push("/dashboard");
   }
 
@@ -142,14 +144,10 @@ export default function LoginPage() {
           }}
         >
           <h1 style={{ fontFamily: "Fraunces, serif", fontSize: 26, fontWeight: 700, margin: "0 0 6px" }}>
-            {mode === "forgot" ? "Reset password" : mode === "signup" ? "Create your account" : "Welcome back"}
+            {mode === "forgot" ? t("resetTitle") : mode === "signup" ? t("signupTitle") : t("loginTitle")}
           </h1>
           <p style={{ color: "#64748b", fontSize: 14, margin: "0 0 24px" }}>
-            {mode === "forgot"
-              ? "We'll email you a reset link."
-              : mode === "signup"
-                ? "Start learning in minutes."
-                : "Sign in to continue."}
+            {mode === "forgot" ? t("resetSubtitle") : mode === "signup" ? t("signupSubtitle") : t("loginSubtitle")}
           </p>
 
           {error && (
@@ -172,14 +170,14 @@ export default function LoginPage() {
           {mode !== "forgot" && (
             <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 18 }}>
               <button onClick={() => oauth("google")} style={ssoBtn}>
-                Continue with Google
+                {t("continueGoogle")}
               </button>
               <button onClick={() => oauth("azure")} style={ssoBtn}>
-                Continue with Microsoft
+                {t("continueMicrosoft")}
               </button>
               <div style={{ display: "flex", alignItems: "center", gap: 12, margin: "2px 0" }}>
                 <div style={{ flex: 1, height: 1, background: "#e2e8f0" }} />
-                <span style={{ color: "#94a3b8", fontSize: 12, fontWeight: 600 }}>or</span>
+                <span style={{ color: "#94a3b8", fontSize: 12, fontWeight: 600 }}>{t("or")}</span>
                 <div style={{ flex: 1, height: 1, background: "#e2e8f0" }} />
               </div>
             </div>
@@ -188,35 +186,35 @@ export default function LoginPage() {
           <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
             {mode === "signup" && (
               <div>
-                <label style={label}>Full name *</label>
-                <input name="full_name" value={form.full_name} onChange={update} style={input} placeholder="e.g. Emma Smith" />
+                <label style={label}>{t("fullName")}</label>
+                <input name="full_name" value={form.full_name} onChange={update} style={input} placeholder={t("fullNamePlaceholder")} />
               </div>
             )}
 
             <div>
-              <label style={label}>Email *</label>
-              <input name="email" type="email" value={form.email} onChange={update} style={input} placeholder="you@email.com" />
+              <label style={label}>{t("email")}</label>
+              <input name="email" type="email" value={form.email} onChange={update} style={input} placeholder={t("emailPlaceholder")} />
             </div>
 
             {mode !== "forgot" && (
               <div>
-                <label style={label}>Password *</label>
-                <input name="password" type="password" value={form.password} onChange={update} style={input} placeholder="at least 6 characters" />
+                <label style={label}>{t("password")}</label>
+                <input name="password" type="password" value={form.password} onChange={update} style={input} placeholder={t("passwordPlaceholder")} />
               </div>
             )}
 
             {mode === "signup" && (
               <>
                 <div>
-                  <label style={label}>I am a…</label>
+                  <label style={label}>{t("iAm")}</label>
                   <select name="role" value={form.role} onChange={update} style={input}>
-                    <option value="student">Student</option>
-                    <option value="teacher">Instructor / Tutor</option>
+                    <option value="student">{t("student")}</option>
+                    <option value="teacher">{t("instructor")}</option>
                   </select>
                 </div>
                 {form.role === "student" && (
                   <div>
-                    <label style={label}>My level</label>
+                    <label style={label}>{t("myLevel")}</label>
                     <select name="level" value={form.level} onChange={update} style={input}>
                       {LEVELS.map((l) => (
                         <option key={l.value} value={l.value}>
@@ -245,12 +243,12 @@ export default function LoginPage() {
               }}
             >
               {loading
-                ? "Please wait…"
+                ? t("pleaseWait")
                 : mode === "forgot"
-                  ? "Send reset link"
+                  ? t("sendResetLink")
                   : mode === "signup"
-                    ? "Create account"
-                    : "Sign in"}
+                    ? t("createAccount")
+                    : t("signIn")}
             </button>
           </div>
 
@@ -268,7 +266,7 @@ export default function LoginPage() {
                 textAlign: "center",
               }}
             >
-              Email sent — check your inbox to reset your password.
+              {t("resetSent")}
             </div>
           )}
 
@@ -276,27 +274,27 @@ export default function LoginPage() {
             {mode === "login" && (
               <>
                 <button onClick={() => setMode("forgot")} style={linkBtn}>
-                  Forgot password?
+                  {t("forgotPassword")}
                 </button>
                 <div style={{ marginTop: 10 }}>
-                  No account?{" "}
+                  {t("noAccount")}{" "}
                   <button onClick={() => setMode("signup")} style={linkBtnStrong}>
-                    Sign up
+                    {t("signUp")}
                   </button>
                 </div>
               </>
             )}
             {mode === "signup" && (
               <div>
-                Already have an account?{" "}
+                {t("alreadyHaveAccount")}{" "}
                 <button onClick={() => setMode("login")} style={linkBtnStrong}>
-                  Sign in
+                  {t("signIn")}
                 </button>
               </div>
             )}
             {mode === "forgot" && (
               <button onClick={() => { setMode("login"); setResetSent(false); }} style={linkBtn}>
-                ← Back to sign in
+                {t("backToSignIn")}
               </button>
             )}
           </div>

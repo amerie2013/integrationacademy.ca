@@ -1,0 +1,77 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize\color{black!60}Worksheet 4.5}
+\begin{document}
+
+\wstitle{4.5}{Related Rates: Solving}{Unit 4: Derivatives in Context}
+
+\begin{ideabox}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+  \item A length that does not change (a ladder, a rope of fixed length) is a \textbf{constant}: put its value in before differentiating.
+  \item A length that changes must stay a \textbf{variable} until after differentiating.
+  \item For a cone, use similar triangles to write $r$ in terms of $h$ (or the reverse) before differentiating.
+  \item For an angle, choose the trigonometric ratio that involves only one changing length if you can.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked examples}
+\begin{example}{Example 1 \textperiodcentered{} A ladder}
+A 17 m ladder leans against a wall. Its foot is pulled away from the wall at 1.5 m/s. How fast is the top moving when the foot is 8 m from the wall?\soln $x^2+y^2=289$, so $x\dfrac{dx}{dt}+y\dfrac{dy}{dt}=0$. When $x=8$, $y=15$: $8(1.5)+15\dfrac{dy}{dt}=0$.\result{The top is sliding down at 0.8 m/s.}
+\end{example}
+
+\begin{example}{Example 2 \textperiodcentered{} A cone}
+Water is poured at 2 m$^3$/min into an inverted cone of height 6 m and top radius 4 m. How fast is the water level rising when the water is 3 m deep?\soln $r=\dfrac{2h}{3}$, so $V=\dfrac13\pi\left(\dfrac{2h}{3}\right)^2h=\dfrac{4\pi h^3}{27}$ and $\dfrac{dV}{dt}=\dfrac{4\pi h^2}{9}\dfrac{dh}{dt}$. At $h=3$: $2=4\pi\dfrac{dh}{dt}$.\result{$\dfrac{1}{2\pi}$ m/min.}
+\end{example}
+
+\begin{example}{Example 3 \textperiodcentered{} A shadow}
+A person 1.8 m tall walks at 1.2 m/s away from a lamp post 5.4 m high. How fast is the length of the shadow increasing?\soln With $x$ the distance from the post and $s$ the shadow: $\dfrac{x+s}{5.4}=\dfrac{s}{1.8}$, so $s=\dfrac x2$.\result{$0.6$ m/s.}
+\end{example}
+
+\newpage
+\sech{Practice}
+
+\level{Core}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item A circular ripple has radius increasing at 2 cm/s. How fast is its area increasing when the radius is 10 cm?\work{2.3cm}
+  \item The edge of a cube is increasing at 0.1 cm/s. How fast is its volume increasing when the edge is 5 cm?\work{2.3cm}
+  \item A 15 m ladder leans against a wall. Its foot moves away from the wall at 2 m/s. How fast is the top moving when the foot is 9 m from the wall?\work{2.3cm}
+  \item A spherical balloon is inflated at $64\pi$ cm$^3$/s. How fast is its radius increasing when $r=2$ cm?\work{2.3cm}
+\end{enumerate}
+
+\level{Exam level}
+\begin{enumerate}[leftmargin=*,itemsep=2pt,start=5]
+  \item Sand is poured at 10 m$^3$/min onto a conical pile whose height always equals its radius. How fast is the height increasing when the pile is 5 m high?\work{2.8cm}
+  \item Two cars leave the same point at the same time. One travels east at 60 km/h and the other north at 80 km/h. How fast is the distance between them increasing after 2 hours?\work{2.8cm}
+  \item A camera on the ground is 300 m from a launch pad. A rocket rises vertically at 150 m/s. How fast is the camera's angle of elevation changing when the rocket is 400 m high?\work{2.8cm}
+  \item Water is pumped at $18\pi$ m$^3$/h into a cylindrical tank of radius 3 m. How fast is the water level rising?\work{2.8cm}
+\end{enumerate}
+
+\begin{frbox}{Question 9 \textperiodcentered{} Free-response practice}
+A boat is pulled toward a dock by a rope that passes through a ring on the dock 5 m higher than the bow of the boat. The rope is pulled in at 2 m/s. Let $x$ be the horizontal distance from the boat to the dock and $z$ the length of rope between the boat and the ring.
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=2pt]
+  \item Write an equation relating $x$ and $z$, and differentiate it with respect to time.\work{2.6cm}
+  \item How fast is the boat approaching the dock when 13 m of rope are out?\work{2.6cm}
+  \item Let $\theta$ be the angle between the rope and the water. How fast is $\theta$ changing at that moment?\work{2.6cm}
+\end{enumerate}
+\end{frbox}
+
+\newpage
+\begin{solbox}
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item $\dfrac{dA}{dt}=2\pi r\dfrac{dr}{dt}=40\pi$ cm$^2$/s.
+  \item $3(25)(0.1)=7.5$ cm$^3$/s.
+  \item $y=12$. $9(2)+12\dfrac{dy}{dt}=0$, so the top slides down at 1.5 m/s.
+  \item $64\pi=4\pi(4)\dfrac{dr}{dt}$, so 4 cm/s.
+  \item $r=h$, so $V=\dfrac{\pi h^3}{3}$ and $\dfrac{dV}{dt}=\pi h^2\dfrac{dh}{dt}$: $10=25\pi\dfrac{dh}{dt}$, giving $\dfrac{2}{5\pi}$ m/min.
+  \item $x=120$, $y=160$, $z=200$. $200\dfrac{dz}{dt}=120(60)+160(80)$, so 100 km/h.
+  \item $\tan\theta=\dfrac{y}{300}$, so $\sec^2\theta\,\dfrac{d\theta}{dt}=\dfrac{150}{300}$. With $\sec^2\theta=1+\dfrac{16}{9}=\dfrac{25}{9}$: $\dfrac{d\theta}{dt}=0.18$ rad/s.
+  \item $V=9\pi h$, so $18\pi=9\pi\dfrac{dh}{dt}$: 2 m/h.
+  \item \begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=3pt]
+    \item $z^2=x^2+25$, so $z\dfrac{dz}{dt}=x\dfrac{dx}{dt}$.
+    \item $x=12$ and $\dfrac{dz}{dt}=-2$: $13(-2)=12\dfrac{dx}{dt}$, so the boat approaches at $\dfrac{13}{6}$ m/s.
+    \item $\sin\theta=\dfrac5z$, so $\cos\theta\,\dfrac{d\theta}{dt}=-\dfrac{5}{z^2}\dfrac{dz}{dt}$. With $\cos\theta=\dfrac{12}{13}$: $\dfrac{12}{13}\dfrac{d\theta}{dt}=\dfrac{10}{169}$, so $\dfrac{d\theta}{dt}=\dfrac{5}{78}$ rad/s (increasing).
+  \end{enumerate}
+\end{enumerate}
+\end{solbox}
+
+\end{document}

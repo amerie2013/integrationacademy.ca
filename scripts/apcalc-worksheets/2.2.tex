@@ -1,0 +1,77 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize\color{black!60}Worksheet 2.2}
+\begin{document}
+
+\wstitle{2.2}{The Derivative as a Limit}{Unit 2: The Derivative}
+
+\begin{ideabox}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+  \item $f'(x)=\displaystyle\lim_{h\to 0}\dfrac{f(x+h)-f(x)}{h}$, wherever this limit exists.
+  \item At a single point: $f'(a)=\displaystyle\lim_{x\to a}\dfrac{f(x)-f(a)}{x-a}$.
+  \item Keep the symbol $\lim$ on every line until the limit has actually been taken.
+  \item A limit that has the form of a difference quotient can be \textbf{recognised} as a derivative and evaluated with a rule.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked examples}
+\begin{example}{Example 1 \textperiodcentered{} A polynomial}
+Use the definition to find $f'(x)$ for $f(x)=x^2-5x$.\soln $\displaystyle\lim_{h\to 0}\dfrac{(x+h)^2-5(x+h)-x^2+5x}{h}=\displaystyle\lim_{h\to 0}\dfrac{2xh+h^2-5h}{h}=\displaystyle\lim_{h\to 0}(2x+h-5)$.\result{$f'(x)=2x-5$.}
+\end{example}
+
+\begin{example}{Example 2 \textperiodcentered{} A square root}
+Use the definition to find $f'(x)$ for $f(x)=\sqrt{2x+1}$.\soln Multiply by the conjugate: $\displaystyle\lim_{h\to 0}\dfrac{(2x+2h+1)-(2x+1)}{h\left(\sqrt{2x+2h+1}+\sqrt{2x+1}\right)}=\displaystyle\lim_{h\to 0}\dfrac{2}{\sqrt{2x+2h+1}+\sqrt{2x+1}}$.\result{$f'(x)=\dfrac{1}{\sqrt{2x+1}}$.}
+\end{example}
+
+\begin{example}{Example 3 \textperiodcentered{} Recognising a derivative}
+Evaluate $\displaystyle\lim_{h\to 0}\dfrac{\sqrt{9+h}-3}{h}$.\soln This is $g'(9)$ for $g(x)=\sqrt{x}$, and $g'(x)=\dfrac{1}{2\sqrt x}$.\result{$\dfrac16$.}
+\end{example}
+
+\newpage
+\sech{Practice}
+
+\level{Core}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item Use the definition to find $f'(x)$ for $f(x)=3x+2$.\work{2.3cm}
+  \item Use the definition to find $f'(x)$ for $f(x)=x^2+x$.\work{2.3cm}
+  \item Evaluate $\displaystyle\lim_{h\to 0}\dfrac{(5+h)^2-25}{h}$.\work{2.3cm}
+  \item Evaluate $\displaystyle\lim_{x\to 2}\dfrac{x^5-32}{x-2}$ by recognising it as a derivative.\work{2.3cm}
+\end{enumerate}
+
+\level{Exam level}
+\begin{enumerate}[leftmargin=*,itemsep=2pt,start=5]
+  \item Use the definition to find $f'(x)$ for $f(x)=\dfrac{1}{x^2}$.\work{2.8cm}
+  \item Use the definition to find $f'(x)$ for $f(x)=x^3+2x$.\work{2.8cm}
+  \item If $f'(4)=-3$, find $\displaystyle\lim_{h\to 0}\dfrac{f(4+h)-f(4)}{2h}$.\work{2.8cm}
+  \item Evaluate $\displaystyle\lim_{h\to 0}\dfrac{\ln(2+h)-\ln2}{h}$.\work{2.8cm}
+\end{enumerate}
+
+\begin{frbox}{Question 9 \textperiodcentered{} Free-response practice}
+Let $f(x)=\dfrac{3}{x-1}$ for $x\neq1$.
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=2pt]
+  \item Use the limit definition to find $f'(x)$.\work{2.6cm}
+  \item Write an equation of the line tangent to the graph of $f$ at $x=2$.\work{2.6cm}
+  \item Evaluate $\displaystyle\lim_{h\to 0}\dfrac{f(4+h)-f(4)}{h}$.\work{2.6cm}
+\end{enumerate}
+\end{frbox}
+
+\newpage
+\begin{solbox}
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item $\displaystyle\lim_{h\to 0}\dfrac{3(x+h)+2-3x-2}{h}=\displaystyle\lim_{h\to 0}3=3$.
+  \item $\displaystyle\lim_{h\to 0}\dfrac{2xh+h^2+h}{h}=2x+1$.
+  \item The derivative of $x^2$ at 5: $10$.
+  \item The derivative of $x^5$ at 2: $5(2)^4=80$.
+  \item $\displaystyle\lim_{h\to 0}\dfrac{x^2-(x+h)^2}{h\,x^2(x+h)^2}=\displaystyle\lim_{h\to 0}\dfrac{-2x-h}{x^2(x+h)^2}=-\dfrac{2}{x^3}$.
+  \item $\displaystyle\lim_{h\to 0}\dfrac{3x^2h+3xh^2+h^3+2h}{h}=3x^2+2$.
+  \item $\dfrac12f'(4)=-\dfrac32$.
+  \item The derivative of $\ln x$ at 2: $\dfrac12$.
+  \item \begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=3pt]
+    \item $\displaystyle\lim_{h\to 0}\dfrac{\frac{3}{x+h-1}-\frac{3}{x-1}}{h}=\displaystyle\lim_{h\to 0}\dfrac{-3}{(x+h-1)(x-1)}=-\dfrac{3}{(x-1)^2}$.
+    \item $f(2)=3$ and $f'(2)=-3$: $y-3=-3(x-2)$.
+    \item This is $f'(4)=-\dfrac{3}{9}=-\dfrac13$.
+  \end{enumerate}
+\end{enumerate}
+\end{solbox}
+
+\end{document}

@@ -1,0 +1,85 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize\color{black!60}Worksheet 1.2}
+\begin{document}
+
+\wstitle{1.2}{Reading Limits off a Graph}{Unit 1: Limits and Continuity}
+
+\begin{ideabox}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+  \item To read a limit, cover the point and follow the curve toward it from each side.
+  \item A filled dot gives the \textbf{value} $f(c)$; it says nothing about the limit.
+  \item A limit fails to exist at a jump, where the function is unbounded, or where it oscillates.
+  \item For $\displaystyle\lim_{x\to c}f(g(x))$: find what $g(x)$ approaches \emph{and from which side}, then take that one-sided limit of $f$.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked examples}
+\begin{example}{Example 1 \textperiodcentered{} Limit and value at the same point}
+The graph of $p$ is shown on the next page. Find $\displaystyle\lim_{x\to -1}p(x)$ and $p(-1)$.\soln From both sides the graph heads for the open circle at height 3. The filled dot at $x=-1$ is at height 1.\result{$\displaystyle\lim_{x\to -1}p(x)=3$ and $p(-1)=1$.}
+\end{example}
+
+\begin{example}{Example 2 \textperiodcentered{} A jump}
+For the same function, find $\displaystyle\lim_{x\to 2^-}p(x)$, $\displaystyle\lim_{x\to 2^+}p(x)$ and $\displaystyle\lim_{x\to 2}p(x)$.\soln From the left the parabola comes down to the filled dot at height 0. From the right the line starts at the open circle at height 1.\result{$\displaystyle\lim_{x\to 2^-}p(x)=0$, $\displaystyle\lim_{x\to 2^+}p(x)=1$, and $\displaystyle\lim_{x\to 2}p(x)$ does not exist.}
+\end{example}
+
+\begin{example}{Example 3 \textperiodcentered{} A composition}
+For the same function, find $\displaystyle\lim_{x\to 2^-}p\big(p(x)\big)$.\soln As $x\to2^-$, $p(x)=4-x^2\to0$ through values \emph{greater} than 0. So we need $\displaystyle\lim_{u\to 0^+}p(u)=4$.\result{$\displaystyle\lim_{x\to 2^-}p\big(p(x)\big)=4$.}
+\end{example}
+
+\newpage
+\sech{Practice}
+All questions on this page refer to the graph of $p$ below, defined on $[-4,5]$.
+\begin{apgraph}{-5}{6}{-1.5}{5.5}
+\addplot[domain=-4:-1]{x+4};
+\addplot[domain=-1:2]{4-x^2};
+\addplot[domain=2:5]{x-1};
+\closeddot{-4}{0}\closeddot{-1}{1}\closeddot{2}{0}\closeddot{5}{4}
+\opendot{-1}{3}\opendot{2}{1}
+\node[font=\small, color=ink] at (axis cs:4.1,2.1) {$y=p(x)$};
+\end{apgraph}
+\level{Core}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item Find $\displaystyle\lim_{x\to 0}p(x)$.\work{1.2cm}
+  \item Find $p(2)$.\work{1.2cm}
+  \item Find $\displaystyle\lim_{x\to -1^+}p(x)$.\work{1.2cm}
+  \item Find $\displaystyle\lim_{x\to 5^-}p(x)$.\work{1.2cm}
+\end{enumerate}
+
+\level{Exam level}
+\begin{enumerate}[leftmargin=*,itemsep=2pt,start=5]
+  \item Evaluate $\displaystyle\lim_{x\to -1}p(x)+p(2)$.\work{1.8cm}
+  \item Evaluate $\displaystyle\lim_{x\to 1}\big[p(x)\big]^2$.\work{1.8cm}
+  \item For which value(s) of $a$ in $(-4,5)$ does $\displaystyle\lim_{x\to a}p(x)$ exist but differ from $p(a)$?\work{1.8cm}
+  \item At how many values of $x$ in $(-4,5)$ is $p$ discontinuous? List them.\work{1.8cm}
+\end{enumerate}
+
+\begin{frbox}{Question 9 \textperiodcentered{} Free-response practice}
+Use the graph of $p$ on the previous page.
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=2pt]
+  \item Does $\displaystyle\lim_{x\to 2}p(x)$ exist? Justify your answer.\work{2.2cm}
+  \item Find $\displaystyle\lim_{x\to 2^+}p\big(p(x)\big)$. Show your reasoning.\work{2.2cm}
+  \item Does $\displaystyle\lim_{x\to 2}p\big(p(x)\big)$ exist? Justify, using part (b) and Example 3.\work{2.2cm}
+\end{enumerate}
+\end{frbox}
+
+\newpage
+\begin{solbox}
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item $4$.
+  \item $0$ (the filled dot).
+  \item $3$.
+  \item $4$.
+  \item $3+0=3$.
+  \item $p(x)\to3$ as $x\to1$, so the limit is $9$.
+  \item $a=-1$ only: the limit is 3 but $p(-1)=1$. (At $x=2$ the limit does not exist.)
+  \item Two: $x=-1$ (limit 3, value 1) and $x=2$ (a jump).
+  \item \begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=3pt]
+    \item No. $\displaystyle\lim_{x\to 2^-}p(x)=0$ and $\displaystyle\lim_{x\to 2^+}p(x)=1$. Since the one-sided limits are not equal, the limit does not exist.
+    \item As $x\to2^+$, $p(x)=x-1\to1$ through values greater than 1. Near $u=1$ the graph is the parabola, which is continuous there, so the limit is $p(1)=4-1=3$.
+    \item No. $\displaystyle\lim_{x\to 2^-}p(p(x))=4$ (Example 3) and $\displaystyle\lim_{x\to 2^+}p(p(x))=3$. They are not equal, so the limit does not exist.
+  \end{enumerate}
+\end{enumerate}
+\end{solbox}
+
+\end{document}

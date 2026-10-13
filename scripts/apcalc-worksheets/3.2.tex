@@ -1,0 +1,77 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize\color{black!60}Worksheet 3.2}
+\begin{document}
+
+\wstitle{3.2}{Curves That Are Not Functions: Implicit Differentiation}{Unit 3: Composite, Implicit and Inverse Functions}
+
+\begin{ideabox}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+  \item Differentiate both sides with respect to $x$, treating $y$ as a function of $x$.
+  \item Every term containing $y$ produces a factor $\dfrac{dy}{dx}$: \ $\dfrac{d}{dx}\left[y^3\right]=3y^2\dfrac{dy}{dx}$.
+  \item A term such as $xy$ needs the \textbf{product rule}: $y+x\dfrac{dy}{dx}$.
+  \item Collect the $\dfrac{dy}{dx}$ terms, factor, and divide. Substitute a point only \emph{after} differentiating.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked examples}
+\begin{example}{Example 1 \textperiodcentered{} A circle}
+Find the slope of $x^2+y^2=29$ at the point $(5,2)$.\soln $2x+2y\dfrac{dy}{dx}=0$, so $\dfrac{dy}{dx}=-\dfrac xy$.\result{The slope is $-\dfrac52$.}
+\end{example}
+
+\begin{example}{Example 2 \textperiodcentered{} A product term}
+Find $\dfrac{dy}{dx}$ for $x^3+xy+y^2=7$, and its value at $(1,2)$.\soln $3x^2+y+x\dfrac{dy}{dx}+2y\dfrac{dy}{dx}=0$, so $\dfrac{dy}{dx}=-\dfrac{3x^2+y}{x+2y}$.\result{At $(1,2)$: $-\dfrac55=-1$.}
+\end{example}
+
+\begin{example}{Example 3 \textperiodcentered{} A trigonometric relation}
+Find $\dfrac{dy}{dx}$ if $\sin y=x^2$.\soln $\cos y\,\dfrac{dy}{dx}=2x$.\result{$\dfrac{dy}{dx}=\dfrac{2x}{\cos y}$.}
+\end{example}
+
+\newpage
+\sech{Practice}
+
+\level{Core}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item Find $\dfrac{dy}{dx}$ for $x^2+y^2=20$.\work{2.3cm}
+  \item Find $\dfrac{dy}{dx}$ for $y^3+y=x$.\work{2.3cm}
+  \item Find the slope of $xy=18$ at the point $(3,6)$.\work{2.3cm}
+  \item Find the slope of $4x^2+y^2=8$ at the point $(1,2)$.\work{2.3cm}
+\end{enumerate}
+
+\level{Exam level}
+\begin{enumerate}[leftmargin=*,itemsep=2pt,start=5]
+  \item Find $\dfrac{dy}{dx}$ for $x^2y+y=10$, and its value at $(2,2)$.\work{2.8cm}
+  \item Find the slope of $e^{y}+xy=e$ at the point $(0,1)$.\work{2.8cm}
+  \item Write an equation of the line tangent to $x^2-xy-y^2=1$ at the point $(2,1)$.\work{2.8cm}
+  \item Find the points on the curve $x^2+y^2-4x=0$ at which the tangent line is horizontal.\work{2.8cm}
+\end{enumerate}
+
+\begin{frbox}{Question 9 \textperiodcentered{} Free-response practice}
+Consider the curve $x^2+3y^2=12$.
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=2pt]
+  \item Find $\dfrac{dy}{dx}$ in terms of $x$ and $y$.\work{2.6cm}
+  \item Find the coordinates of the points on the curve at which the slope of the tangent line is 1.\work{2.6cm}
+  \item Find the coordinates of the points on the curve at which the tangent line is vertical.\work{2.6cm}
+\end{enumerate}
+\end{frbox}
+
+\newpage
+\begin{solbox}
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item $\dfrac{dy}{dx}=-\dfrac xy$.
+  \item $\left(3y^2+1\right)\dfrac{dy}{dx}=1$, so $\dfrac{dy}{dx}=\dfrac{1}{3y^2+1}$.
+  \item $y+x\dfrac{dy}{dx}=0$, so $\dfrac{dy}{dx}=-\dfrac yx=-2$.
+  \item $8x+2y\dfrac{dy}{dx}=0$, so $\dfrac{dy}{dx}=-\dfrac{4x}{y}=-2$.
+  \item $2xy+x^2\dfrac{dy}{dx}+\dfrac{dy}{dx}=0$, so $\dfrac{dy}{dx}=-\dfrac{2xy}{x^2+1}$; at $(2,2)$ this is $-\dfrac85$.
+  \item $e^{y}\dfrac{dy}{dx}+y+x\dfrac{dy}{dx}=0$, so $\dfrac{dy}{dx}=-\dfrac{y}{e^{y}+x}=-\dfrac1e$.
+  \item $2x-y-x\dfrac{dy}{dx}-2y\dfrac{dy}{dx}=0$, so $\dfrac{dy}{dx}=\dfrac{2x-y}{x+2y}=\dfrac34$: $y-1=\dfrac34(x-2)$.
+  \item $2x+2y\dfrac{dy}{dx}-4=0$, so $\dfrac{dy}{dx}=\dfrac{2-x}{y}$, zero at $x=2$. Then $y^2=4$: the points $(2,2)$ and $(2,-2)$.
+  \item \begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=3pt]
+    \item $2x+6y\dfrac{dy}{dx}=0$, so $\dfrac{dy}{dx}=-\dfrac{x}{3y}$.
+    \item $-\dfrac{x}{3y}=1$ gives $x=-3y$. Then $9y^2+3y^2=12$, so $y=\pm1$: the points $(-3,1)$ and $(3,-1)$.
+    \item The denominator $3y$ is zero when $y=0$, and then $x^2=12$: the points $\left(2\sqrt3,0\right)$ and $\left(-2\sqrt3,0\right)$.
+  \end{enumerate}
+\end{enumerate}
+\end{solbox}
+
+\end{document}

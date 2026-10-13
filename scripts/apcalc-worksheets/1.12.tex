@@ -1,0 +1,41 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize\color{black!60}Unit 1 free response}
+\begin{document}
+
+\wstitle{1.12}{Unit 1 Free-Response Practice}{Unit 1: Limits and Continuity \textperiodcentered{} two questions, 9 points each \textperiodcentered{} suggested time 30 minutes}
+
+\begin{scorebox}{Instructions}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+  \item Show all your work. A correct answer with no supporting work may not earn credit.
+  \item Use correct notation: \textquotedblleft{}$\lim$\textquotedblright{} stays until you substitute, and \textquotedblleft{}$=$\textquotedblright{} joins only equal things.
+  \item When asked to justify, name the theorem and state its conditions.
+  \item Question 1: no calculator. Question 2: a graphing calculator is required; give decimals to three places.
+\end{itemize}
+\end{scorebox}
+
+\begin{frbox}{Question 1 \textperiodcentered{} No calculator}
+Let $f$ be the function defined by
+\[ f(x)=\begin{cases}\dfrac{x^2-x-2}{x-2},&x<2\\[2mm]k,&x=2\\[1mm]\sqrt{x+7},&x>2\end{cases}\]
+where $k$ is a constant.
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=2pt]
+  \item Find $\displaystyle\lim_{x\to 2^-}f(x)$ and $\displaystyle\lim_{x\to 2^+}f(x)$. Show the work that leads to your answers.\work{3.4cm}
+  \item For what value of $k$ is $f$ continuous at $x=2$? Justify your answer.\work{2.6cm}
+  \item Suppose instead that $k=5$. What type of discontinuity does $f$ have at $x=2$? Give a reason.\work{2.2cm}
+  \item Evaluate $\displaystyle\lim_{x\to \infty}\dfrac{f(x)}{\sqrt{x}}$.\work{2.6cm}
+  \item Let $k$ have the value found in part (b). Is there a number $c$, $2<c<9$, such that $f(c)=3.5$? Justify your answer.\work{2.8cm}
+\end{enumerate}
+\end{frbox}
+
+\newpage
+\begin{frbox}{Question 2 \textperiodcentered{} Graphing calculator required}
+The amount of water in a reservoir, $W(t)$ megalitres, is a continuous function of time $t$ days. Selected values are shown.
+\begin{center}\renewcommand{\arraystretch}{1.25}\begin{tabular}{|c|c|c|c|c|}\hline $t$ & $0$ & $2$ & $6$ & $10$ \\ \hline $W(t)$ & $40$ & $52$ & $46$ & $61$ \\ \hline\end{tabular}\end{center}
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=2pt]
+  \item Find the average rate of change of $W$ on the interval $2\le t\le6$. Using correct units, interpret your answer in context.\work{3cm}
+  \item What is the least number of times $t$ in $0\le t\le10$ at which $W(t)=50$? Justify your answer.\work{3.2cm}
+  \item An engineer models the reservoir with $M(t)=60-20e^{-0.3t}$. Find $\displaystyle\lim_{t\to \infty}M(t)$ and interpret it in context.\work{2.6cm}
+  \item Use the model to estimate $\displaystyle\lim_{t\to 0}\dfrac{M(t)-40}{t}$ to three decimal places, showing the values you used.\work{3cm}
+\end{enumerate}
+\end{frbox}
+\end{document}

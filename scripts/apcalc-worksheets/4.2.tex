@@ -1,0 +1,77 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize\color{black!60}Worksheet 4.2}
+\begin{document}
+
+\wstitle{4.2}{Motion Along a Line}{Unit 4: Derivatives in Context}
+
+\begin{ideabox}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+  \item Velocity $v=x'$; acceleration $a=v'=x''$; speed $=|v|$.
+  \item The particle is \textbf{at rest} when $v=0$ and \textbf{changes direction} when $v$ changes sign.
+  \item Speed is increasing when $v$ and $a$ have the \textbf{same sign}, decreasing when they have opposite signs.
+  \item For total distance, find the positions at the start, at each change of direction and at the end, and add the distances between them.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked examples}
+\begin{example}{Example 1 \textperiodcentered{} Velocity and rest}
+A particle has position $x(t)=t^3-12t^2+36t$ for $t\ge0$. Find $v(t)$, $a(t)$ and the times at which it is at rest.\soln $v(t)=3t^2-24t+36=3(t-2)(t-6)$ and $a(t)=6t-24$.\result{At rest at $t=2$ and $t=6$.}
+\end{example}
+
+\begin{example}{Example 2 \textperiodcentered{} Speeding up or slowing down}
+For the same particle, is the speed increasing or decreasing at $t=3$?\soln $v(3)=-9$ and $a(3)=-6$.\result{Increasing: velocity and acceleration have the same sign.}
+\end{example}
+
+\begin{example}{Example 3 \textperiodcentered{} Total distance}
+For the same particle, find the total distance travelled for $0\le t\le7$.\soln $x(0)=0$, $x(2)=32$, $x(6)=0$, $x(7)=7$. The distances are $32$, $32$ and $7$.\result{$71$.}
+\end{example}
+
+\newpage
+\sech{Practice}
+
+\level{Core}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item A particle has position $s(t)=t^2-8t+5$. Find its velocity.\work{2.3cm}
+  \item For the particle in Question 1, at what time is it at rest?\work{2.3cm}
+  \item For the particle in Question 1, find its acceleration.\work{2.3cm}
+  \item For the particle in Question 1, on what interval of $t\ge0$ is it moving in the negative direction?\work{2.3cm}
+\end{enumerate}
+
+\level{Exam level}
+\begin{enumerate}[leftmargin=*,itemsep=2pt,start=5]
+  \item A particle has position $x(t)=t^3-3t^2$ for $t\ge0$. At what time does it change direction? Justify your answer.\work{2.8cm}
+  \item For the particle in Question 5, is the speed increasing or decreasing at $t=1.5$? Give a reason.\work{2.8cm}
+  \item For the particle in Question 5, find the total distance travelled for $0\le t\le3$.\work{2.8cm}
+  \item On a small moon, a ball thrown upward has height $h(t)=24t-4t^2$ metres after $t$ seconds. Find its maximum height and its velocity when it returns to the ground.\work{2.8cm}
+\end{enumerate}
+
+\begin{frbox}{Question 9 \textperiodcentered{} Free-response practice}
+A particle moves along the $x$-axis with position $x(t)=2t^3-9t^2+12t+1$ for $t\ge0$.
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=2pt]
+  \item Find $v(t)$ and $a(t)$.\work{2.6cm}
+  \item On what interval is the particle moving to the left? Justify your answer.\work{2.6cm}
+  \item Find the total distance travelled by the particle for $0\le t\le3$.\work{2.6cm}
+\end{enumerate}
+\end{frbox}
+
+\newpage
+\begin{solbox}
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item $v(t)=2t-8$.
+  \item $t=4$.
+  \item $a(t)=2$.
+  \item $0\le t<4$, where $v(t)<0$.
+  \item $v(t)=3t^2-6t=3t(t-2)$ changes from negative to positive at $t=2$.
+  \item $v(1.5)=-2.25$ and $a(1.5)=6(1.5)-6=3$: opposite signs, so the speed is decreasing.
+  \item $x(0)=0$, $x(2)=-4$, $x(3)=0$: $4+4=8$.
+  \item $h'(t)=24-8t=0$ at $t=3$, so the maximum height is $h(3)=36$ m. It lands at $t=6$ with velocity $-24$ m/s.
+  \item \begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=3pt]
+    \item $v(t)=6t^2-18t+12$ and $a(t)=12t-18$.
+    \item $v(t)=6(t-1)(t-2)<0$ for $1<t<2$.
+    \item $x(0)=1$, $x(1)=6$, $x(2)=5$, $x(3)=10$: $5+1+5=11$.
+  \end{enumerate}
+\end{enumerate}
+\end{solbox}
+
+\end{document}

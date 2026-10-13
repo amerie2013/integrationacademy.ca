@@ -1,0 +1,77 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize\color{black!60}Worksheet 1.9}
+\begin{document}
+
+\wstitle{1.9}{Unbounded Behaviour: Vertical and Horizontal Asymptotes}{Unit 1: Limits and Continuity}
+
+\begin{ideabox}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+  \item $x=c$ is a \textbf{vertical asymptote} if a one-sided limit at $c$ is $\pm\infty$. Find the sign factor by factor.
+  \item $y=L$ is a \textbf{horizontal asymptote} if $f(x)\to L$ as $x\to\infty$ or $x\to-\infty$.
+  \item Rational functions at infinity: compare degrees; equal degrees give the ratio of leading coefficients.
+  \item $\sqrt{x^2}=|x|$, which equals $-x$ when $x\to-\infty$. Growth: $\ln x\ll x^p\ll e^x$.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked examples}
+\begin{example}{Example 1 \textperiodcentered{} The sign of an infinite limit}
+Find $\displaystyle\lim_{x\to 1^-}\dfrac{x+3}{x-1}$ and $\displaystyle\lim_{x\to 1^+}\dfrac{x+3}{x-1}$.\soln The numerator is near 4. For $x<1$ the denominator is a small negative number; for $x>1$ a small positive number.\result{$-\infty$ from the left; $\infty$ from the right. The line $x=1$ is a vertical asymptote.}
+\end{example}
+
+\begin{example}{Example 2 \textperiodcentered{} Rational limits at infinity}
+Evaluate $\displaystyle\lim_{x\to \infty}\dfrac{2x^2-7}{3x^2+x}$ and $\displaystyle\lim_{x\to -\infty}\dfrac{x+1}{x^2+4}$.\soln First: equal degrees, ratio of leading coefficients. Second: the denominator has the higher degree.\result{$\dfrac23$ and $0$.}
+\end{example}
+
+\begin{example}{Example 3 \textperiodcentered{} A square root as $x\to-\infty$}
+Evaluate $\displaystyle\lim_{x\to -\infty}\dfrac{\sqrt{x^2+9}}{2x-1}$.\soln $\sqrt{x^2+9}=|x|\sqrt{1+\tfrac{9}{x^2}}=-x\sqrt{1+\tfrac9{x^2}}$ for $x<0$. The expression is $\dfrac{-\sqrt{1+\frac9{x^2}}}{2-\frac1x}$.\result{The limit is $-\dfrac12$.}
+\end{example}
+
+\newpage
+\sech{Practice}
+
+\level{Core}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item Evaluate $\displaystyle\lim_{x\to \infty}\dfrac{5x^3-x}{2x^3+4}$.\work{2.3cm}
+  \item Evaluate $\displaystyle\lim_{x\to -2^+}\dfrac{1}{x+2}$.\work{2.3cm}
+  \item Evaluate $\displaystyle\lim_{x\to \infty}\dfrac{4x+1}{x^2-3}$.\work{2.3cm}
+  \item Evaluate $\displaystyle\lim_{x\to -\infty}e^x$.\work{2.3cm}
+\end{enumerate}
+
+\level{Exam level}
+\begin{enumerate}[leftmargin=*,itemsep=2pt,start=5]
+  \item Find both horizontal asymptotes of $f(x)=\dfrac{4e^x-1}{2e^x+3}$.\work{2.8cm}
+  \item Find all vertical and horizontal asymptotes, and any holes, of $f(x)=\dfrac{x^2-4}{x^2-5x+6}$.\work{2.8cm}
+  \item Evaluate $\displaystyle\lim_{x\to -\infty}\dfrac{3x+2}{\sqrt{4x^2+1}}$.\work{2.8cm}
+  \item Evaluate $\displaystyle\lim_{x\to \infty}\left(\sqrt{x^2+8x}-x\right)$.\work{2.8cm}
+\end{enumerate}
+
+\begin{frbox}{Question 9 \textperiodcentered{} Free-response practice}
+Let $f(x)=\dfrac{3x^2-12}{x^2+x-6}$.
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=2pt]
+  \item Show that $f$ has a removable discontinuity at $x=2$, and find $\displaystyle\lim_{x\to 2}f(x)$.\work{2.6cm}
+  \item Write an equation for the vertical asymptote of the graph of $f$. Justify with a limit.\work{2.6cm}
+  \item Write an equation for the horizontal asymptote of the graph of $f$. Justify with a limit.\work{2.6cm}
+\end{enumerate}
+\end{frbox}
+
+\newpage
+\begin{solbox}
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item $\dfrac52$.
+  \item $\infty$.
+  \item $0$.
+  \item $0$.
+  \item As $x\to\infty$: $\dfrac{4-e^{-x}}{2+3e^{-x}}\to2$. As $x\to-\infty$: $\dfrac{0-1}{0+3}=-\dfrac13$. Asymptotes $y=2$ and $y=-\dfrac13$.
+  \item $f(x)=\dfrac{(x-2)(x+2)}{(x-2)(x-3)}=\dfrac{x+2}{x-3}$ for $x\neq2$. Vertical asymptote $x=3$; horizontal asymptote $y=1$; hole at $(2,-4)$.
+  \item $\sqrt{4x^2+1}=-x\sqrt{4+\tfrac1{x^2}}$ for $x<0$, so the limit is $\dfrac{3}{-2}=-\dfrac32$.
+  \item $\dfrac{8x}{\sqrt{x^2+8x}+x}=\dfrac{8}{\sqrt{1+\frac8x}+1}\to4$.
+  \item \begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=3pt]
+    \item $f(x)=\dfrac{3(x-2)(x+2)}{(x+3)(x-2)}=\dfrac{3(x+2)}{x+3}$ for $x\neq2$. So $\displaystyle\lim_{x\to 2}f(x)=\dfrac{12}{5}$ exists while $f(2)$ is undefined: removable.
+    \item $x=-3$, because $\displaystyle\lim_{x\to -3^+}f(x)=-\infty$ (numerator near $-3$, denominator small and positive).
+    \item $y=3$, because $\displaystyle\lim_{x\to \infty}f(x)=3$.
+  \end{enumerate}
+\end{enumerate}
+\end{solbox}
+
+\end{document}

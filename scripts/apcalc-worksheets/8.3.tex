@@ -1,0 +1,77 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize\color{black!60}Worksheet 8.3}
+\begin{document}
+
+\wstitle{8.3}{Rate In, Rate Out}{Unit 8: Applications of Integration}
+
+\begin{ideabox}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+  \item The integral of a rate is an amount: $\displaystyle\int_{a}^{b}R(t)\,dt$ is the amount that entered from $t=a$ to $t=b$.
+  \item Amount at time $t$ $=$ starting amount $+\displaystyle\int_{0}^{t}\big(\text{in}-\text{out}\big)\,dx$.
+  \item The amount is increasing when the rate in exceeds the rate out.
+  \item A greatest or least amount occurs at an endpoint or where rate in $=$ rate out. Compare the amount at every candidate.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked examples}
+\begin{example}{Example 1 \textperiodcentered{} The amount}
+A tank holds 50 litres. Water enters at 12 litres per minute and leaves at $2t$ litres per minute, for $0\le t\le10$. How much is in the tank at $t=10$?\soln $50+\displaystyle\int_{0}^{10}(12-2t)\,dt=50+120-100$.\result{70 litres.}
+\end{example}
+
+\begin{example}{Example 2 \textperiodcentered{} The greatest amount}
+When does that tank hold the most water, and how much?\soln $12=2t$ at $t=6$; the net rate changes from positive to negative there. Amount: $50+72-36$.\result{86 litres, at $t=6$.}
+\end{example}
+
+\begin{example}{Example 3 \textperiodcentered{} Increasing or decreasing}
+Is the amount of water in that tank increasing or decreasing at $t=8$?\soln Net rate $12-16=-4$ litres per minute.\result{Decreasing, because the rate out exceeds the rate in.}
+\end{example}
+
+\newpage
+\sech{Practice}
+\emph{A calculator may be used where a decimal answer is requested. Give decimals to three places.}
+\level{Core}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item A tank holds 40 litres. Liquid enters at 8 litres per minute and leaves at 5 litres per minute. How much is in the tank after 10 minutes?\work{2.3cm}
+  \item $R(t)$ is the rate, in litres per hour, at which oil enters a tank. Explain the meaning of $\displaystyle\int_{0}^{6}R(t)\,dt$.\work{2.3cm}
+  \item Sand enters a bin at $6t$ kg per minute and leaves at $t^2$ kg per minute, for $0\le t\le10$. On what interval is the amount of sand increasing?\work{2.3cm}
+  \item The bin in Question 3 holds 10 kg at $t=0$. How much does it hold at $t=6$?\work{2.3cm}
+\end{enumerate}
+
+\level{Exam level}
+\begin{enumerate}[leftmargin=*,itemsep=2pt,start=5]
+  \item Coffee beans are loaded into a hopper at $L(t)=18e^{-0.15t}$ kg per minute and used at $U(t)=4+0.5t$ kg per minute, for $0\le t\le10$. The hopper holds 25 kg at $t=0$. How many kilograms are loaded during the 10 minutes?\work{2.8cm}
+  \item Is the amount of beans in the hopper increasing or decreasing at $t=6$? Give a reason.\work{2.8cm}
+  \item Find the amount of beans in the hopper at $t=10$.\work{2.8cm}
+  \item Find the time at which the hopper holds the most beans, and that amount. Justify your answer.\work{2.8cm}
+\end{enumerate}
+
+\begin{frbox}{Question 9 \textperiodcentered{} Free-response practice}
+Fuel enters a tank at the rate $F(t)=8+4\sin\!\left(\dfrac t2\right)$ litres per minute and is drawn off at the rate $D(t)=0.3t^2$ litres per minute, for $0\le t\le8$. The tank holds 30 litres at $t=0$.
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=2pt]
+  \item How many litres of fuel enter the tank for $0\le t\le8$?\work{2.6cm}
+  \item Find the rate at which the amount of fuel in the tank is changing at $t=5$. Include units.\work{2.6cm}
+  \item Find the greatest amount of fuel in the tank for $0\le t\le8$. Justify your answer.\work{2.6cm}
+\end{enumerate}
+\end{frbox}
+
+\newpage
+\begin{solbox}
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item $40+10(8-5)=70$ litres.
+  \item The number of litres of oil that enter the tank during the first 6 hours.
+  \item $6t>t^2$ for $0<t<6$.
+  \item $10+\displaystyle\int_{0}^{6}(6t-t^2)\,dt=10+108-72=46$ kg.
+  \item $\displaystyle\int_{0}^{10}L(t)\,dt\approx93.224$ kg.
+  \item $L(6)\approx7.318$ and $U(6)=7$. Increasing, because $L(6)>U(6)$.
+  \item $25+\displaystyle\int_{0}^{10}\big(L(t)-U(t)\big)\,dt\approx53.224$ kg.
+  \item $L(t)=U(t)$ at $t\approx6.201$. Amounts: 25 at $t=0$, about 63.244 at $t\approx6.201$, and 53.224 at $t=10$. The most is about 63.244 kg.
+  \item \begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=3pt]
+    \item $\displaystyle\int_{0}^{8}F(t)\,dt\approx77.229$ litres.
+    \item $F(5)-D(5)\approx2.894$ litres per minute.
+    \item $F(t)=D(t)$ only at $t\approx5.587$. Amounts: 30 at $t=0$, $30+\displaystyle\int_{0}^{5.587}\big(F(t)-D(t)\big)\,dt\approx72.777$ at $t\approx5.587$, and about 56.029 at $t=8$. The greatest amount is about 72.777 litres.
+  \end{enumerate}
+\end{enumerate}
+\end{solbox}
+
+\end{document}

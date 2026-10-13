@@ -1,0 +1,77 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize\color{black!60}Worksheet 9.2}
+\begin{document}
+
+\wstitle{9.2}{A Phrase Bank for Justifications}{Unit 9: Exam Strategy and Free-Response Types}
+
+\begin{ideabox}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+  \item \textbf{Extremum}: \textquotedblleft{}$f'$ changes from positive to negative at $x=c$, so $f$ has a relative maximum there.\textquotedblright{} Name the sign change.
+  \item \textbf{Theorems}: state the condition, then the conclusion. IVT and EVT need continuity; MVT needs continuity on $[a,b]$ and differentiability on $(a,b)$.
+  \item \textbf{Over or under}: a tangent line lies below a graph that is concave up; a left sum underestimates for an increasing function.
+  \item \textbf{Speed}: increasing when $v$ and $a$ have the same sign. Give both values.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked examples}
+\begin{example}{Example 1 \textperiodcentered{} A sign change}
+$f'(x)=(x-2)(x+1)^2$. Justify the location of every relative extremum of $f$.\soln $f'$ changes from negative to positive at $x=2$. At $x=-1$ it is negative on both sides.\result{A relative minimum at $x=2$ only; no extremum at $x=-1$ because $f'$ does not change sign.}
+\end{example}
+
+\begin{example}{Example 2 \textperiodcentered{} A theorem}
+$f$ is continuous on $[1,5]$ with $f(1)=-3$ and $f(5)=4$. Must $f(c)=0$ for some $c$ in $(1,5)$?\soln $0$ lies between $f(1)$ and $f(5)$.\result{Yes: $f$ is continuous on $[1,5]$ and $-3<0<4$, so by the Intermediate Value Theorem such a $c$ exists.}
+\end{example}
+
+\begin{example}{Example 3 \textperiodcentered{} Over or under}
+$f''(x)>0$ for all $x$. Is a tangent-line approximation of $f$ an overestimate or an underestimate?\soln The graph is concave up, so it lies above each tangent line.\result{An underestimate, because $f''>0$.}
+\end{example}
+
+\newpage
+\sech{Practice}
+\emph{No calculator on this page.}
+\level{Core}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item $f'(3)=0$ and $f''(3)=-2$. What can you conclude, and why?\work{2.3cm}
+  \item $g'(x)>0$ for all $x$ in $(0,4)$. Write a one-sentence justification that $g$ is increasing on $[0,4]$.\work{2.3cm}
+  \item $h$ is differentiable on $[2,6]$ with $h(2)=1$ and $h(6)=13$. What does the Mean Value Theorem guarantee?\work{2.3cm}
+  \item Is a left Riemann sum for a decreasing function an overestimate or an underestimate of the integral?\work{2.3cm}
+\end{enumerate}
+
+\level{Exam level}
+\begin{enumerate}[leftmargin=*,itemsep=2pt,start=5]
+  \item $f$ is differentiable for all $x$, with $f(0)=5$, $f(2)=1$ and $f(5)=7$. Explain why $f'(c)=0$ for some $c$ in $(0,5)$.\work{2.8cm}
+  \item $f''(x)=(x-1)^2(x-4)$. Find the $x$-coordinate of every point of inflection of $f$, with justification.\work{2.8cm}
+  \item $f''(x)>0$ on $[a,b]$. Is a trapezoidal sum for $\displaystyle\int_{a}^{b}f(x)\,dx$ an overestimate or an underestimate? Give a reason.\work{2.8cm}
+  \item A particle has $v(3)=-4$ and $a(3)=2$. Is its speed increasing or decreasing at $t=3$? Give a reason.\work{2.8cm}
+\end{enumerate}
+
+\begin{frbox}{Question 9 \textperiodcentered{} Free-response practice}
+The function $f$ is twice differentiable. Selected values of $f$ and $f'$ are given in the table.\begin{center}\renewcommand{\arraystretch}{1.25}\begin{tabular}{|c|c|c|c|c|}\hline $x$ & $1$ & $3$ & $5$ & $8$ \\ \hline $f(x)$ & $2$ & $6$ & $5$ & $11$ \\ \hline $f'(x)$ & $3$ & $1$ & $-2$ & $4$ \\ \hline\end{tabular}\end{center}
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=2pt]
+  \item Must there be a value $c$, $3<c<5$, with $f'(c)=-\dfrac12$? Justify your answer.\work{2.6cm}
+  \item Must there be a value $c$, $5<c<8$, with $f'(c)=0$? Justify your answer.\work{2.6cm}
+  \item Use the tangent line at $x=3$ to approximate $f(3.5)$. Given that $f''(x)<0$ for $3<x<5$, is the approximation an overestimate or an underestimate? Give a reason.\work{2.6cm}
+\end{enumerate}
+\end{frbox}
+
+\newpage
+\begin{solbox}
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item $f$ has a relative maximum at $x=3$, by the Second Derivative Test: $f'(3)=0$ and $f''(3)<0$.
+  \item $g$ is increasing on $[0,4]$ because $g'(x)>0$ on $(0,4)$.
+  \item $h$ is differentiable, hence continuous, so there is a $c$ in $(2,6)$ with $h'(c)=\dfrac{13-1}{6-2}=3$.
+  \item An overestimate: each rectangle uses the left, largest, value.
+  \item $f$ is continuous, and $5$ lies between $f(2)=1$ and $f(5)=7$, so by the IVT $f(b)=5$ for some $b$ in $(2,5)$. Then $f(0)=f(b)$, and the MVT on $[0,b]$ gives $f'(c)=0$.
+  \item $x=4$ only: $f''$ changes from negative to positive there. At $x=1$, $f''$ is negative on both sides, so there is no change of concavity.
+  \item An overestimate: the graph is concave up, so each chord lies above the graph.
+  \item Decreasing, because $v(3)<0$ and $a(3)>0$ have opposite signs.
+  \item \begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=3pt]
+    \item Yes. $f$ is differentiable, hence continuous, on $[3,5]$, so by the MVT there is a $c$ with $f'(c)=\dfrac{5-6}{5-3}=-\dfrac12$.
+    \item Yes. $f$ is twice differentiable, so $f'$ is continuous on $[5,8]$, and $f'(5)=-2<0<4=f'(8)$. By the IVT, $f'(c)=0$ for some $c$.
+    \item $f(3.5)\approx6+1(0.5)=6.5$. An overestimate: $f''<0$, so the graph is concave down and lies below its tangent line.
+  \end{enumerate}
+\end{enumerate}
+\end{solbox}
+
+\end{document}

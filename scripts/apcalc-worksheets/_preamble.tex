@@ -1,0 +1,73 @@
+% ===========================================================================
+%  Shared preamble for the AP Calculus AB exam-preparation worksheets.
+%  Input right after \documentclass. Files beginning with "_" are not compiled
+%  on their own. Navy and gold, to match the course's lesson pages.
+% ===========================================================================
+\usepackage[letterpaper,top=2.3cm,bottom=2.2cm,left=1.7cm,right=1.7cm,headheight=28pt,footskip=30pt]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{array}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+\definecolor{navy}{HTML}{161E54}
+\definecolor{ink}{HTML}{27357E}
+\definecolor{gold}{HTML}{B98A00}
+\definecolor{goldbg}{HTML}{FFFDF3}
+\definecolor{inkbg}{HTML}{F6F7FD}
+\definecolor{rule}{HTML}{C9CFF0}
+\definecolor{okgreen}{HTML}{1B7A44}
+\definecolor{okbg}{HTML}{F1F8F3}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\footnotesize Name: \underline{\hspace{4cm}}}
+\fancyhead[C]{\textbf{\color{navy}Integration Academy}\\[-2pt]{\scriptsize Calculus AB \textperiodcentered{} AP\textsuperscript{\textregistered} Exam Preparation}}
+\fancyfoot[L]{\tiny\color{black!55}\parbox[t]{0.78\textwidth}{AP\textsuperscript{\textregistered} is a registered trademark of the College Board, which was not involved in the production of, and does not endorse, this material. \textcopyright{} Integration Academy.}}
+\fancyfoot[R]{\scriptsize\thepage}
+\renewcommand{\headrulewidth}{1.2pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{gold}\leaders\hrule height \headrulewidth\hfill}}
+\renewcommand{\footrulewidth}{0pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+
+% Title block: \wstitle{code}{title}{unit line}
+\newcommand{\wstitle}[3]{\begin{center}{\small\bfseries\color{gold}WORKSHEET #1}\\[3pt]{\LARGE\bfseries\color{navy}#2}\\[3pt]{\small\color{black!60}#3}\end{center}\vspace{2pt}}
+% Section heading
+\newcommand{\sech}[1]{\par\vspace{10pt}{\large\bfseries\color{navy}#1}\par\nobreak\vspace{2pt}{\color{rule}\hrule height0.8pt}\vspace{7pt}}
+% A level tag printed beside a group of questions
+\newcommand{\level}[1]{\par\vspace{6pt}{\footnotesize\bfseries\color{gold}\MakeUppercase{#1}}\par\nobreak\vspace{2pt}}
+
+\newtcolorbox{ideabox}{colframe=ink,colback=inkbg,coltitle=white,colbacktitle=ink,fonttitle=\bfseries\small,title={Key ideas},arc=2pt,boxrule=0.8pt,left=8pt,right=8pt}
+\newtcolorbox{example}[1]{colframe=rule,colback=white,coltitle=navy,colbacktitle=inkbg,fonttitle=\bfseries\small,title={#1},arc=2pt,boxrule=0.8pt,borderline west={3pt}{0pt}{ink},left=10pt,right=8pt}
+\newtcolorbox{frbox}[1]{colframe=gold,colback=goldbg,coltitle=white,colbacktitle=gold,fonttitle=\bfseries\small,title={#1},arc=2pt,boxrule=0.8pt,breakable,left=8pt,right=8pt}
+\newtcolorbox{solbox}{colframe=okgreen,colback=okbg,coltitle=white,colbacktitle=okgreen,fonttitle=\bfseries\small,title={Worked solutions},arc=2pt,boxrule=0.8pt,breakable,left=8pt,right=8pt}
+\newtcolorbox{scorebox}[1]{colframe=navy,colback=white,coltitle=white,colbacktitle=navy,fonttitle=\bfseries\small,title={#1},arc=2pt,boxrule=0.8pt,breakable,left=8pt,right=8pt}
+
+\newcommand{\soln}{\par\smallskip\textbf{\color{ink}Solution.}\ }
+\newcommand{\result}[1]{\par\smallskip\textbf{#1}}
+% blank working space of a given height
+\newcommand{\work}[1]{\par\vspace{#1}}
+% a point value in the margin of a scoring guide
+\newcommand{\pts}[1]{\hfill{\footnotesize\bfseries\color{gold}[#1]}}
+
+% Coordinate grid for graph questions: \begin{apgraph}{xmin}{xmax}{ymin}{ymax} ... \end{apgraph}
+\newenvironment{apgraph}[4]{\begin{center}\begin{tikzpicture}\begin{axis}[
+  axis lines=middle, xmin=#1, xmax=#2, ymin=#3, ymax=#4,
+  grid=both, grid style={black!12}, xtick distance=1, ytick distance=1,
+  ticklabel style={font=\scriptsize}, xlabel={$x$}, ylabel={$y$},
+  width=10cm, height=7.2cm, samples=80, clip=false,
+  every axis plot/.append style={line width=1.1pt, color=ink}]}{\end{axis}\end{tikzpicture}\end{center}}
+\newcommand{\closeddot}[2]{\addplot[only marks, mark=*, mark size=2.2pt, color=ink] coordinates {(#1,#2)};}
+\newcommand{\opendot}[2]{\addplot[only marks, mark=*, mark size=2.2pt, color=ink, mark options={fill=white}] coordinates {(#1,#2)};}
+
+% Multiple-choice options: four across, or stacked when the options are long.
+\newcommand{\opts}[4]{\par\vspace{3pt}\begin{tabular}{@{}p{0.235\linewidth}p{0.235\linewidth}p{0.235\linewidth}p{0.235\linewidth}@{}}(A)\ #1 & (B)\ #2 & (C)\ #3 & (D)\ #4\end{tabular}\par\vspace{9pt}}
+\newcommand{\optsv}[4]{\par\vspace{3pt}\begin{tabular}{@{}l@{\ \ }p{0.9\linewidth}@{}}(A) & #1\\(B) & #2\\(C) & #3\\(D) & #4\end{tabular}\par\vspace{9pt}}

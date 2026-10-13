@@ -1,0 +1,77 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize\color{black!60}Worksheet 7.7}
+\begin{document}
+
+\wstitle{7.7}{Exponential Growth and Decay}{Unit 7: Differential Equations}
+
+\begin{ideabox}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+  \item If $\dfrac{dy}{dt}=ky$, then $y=y_0e^{kt}$, where $y_0$ is the value at $t=0$.
+  \item $k>0$ is growth; $k<0$ is decay.
+  \item \textbf{Doubling time} $=\dfrac{\ln2}{k}$; \textbf{half-life} $=\dfrac{\ln2}{|k|}$. Neither depends on the starting amount.
+  \item If the rate is proportional to the \emph{difference} from a fixed level $L$, that difference decays exponentially: $y-L=(y_0-L)e^{kt}$.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked examples}
+\begin{example}{Example 1 \textperiodcentered{} Growth}
+Solve $\dfrac{dy}{dt}=0.08y$ with $y(0)=250$, and find $y(10)$.\soln $y=250e^{0.08t}$.\result{$y(10)=250e^{0.8}\approx556.4$.}
+\end{example}
+
+\begin{example}{Example 2 \textperiodcentered{} Half-life}
+A substance has a half-life of 8 days. How much of a 100 mg sample remains after 20 days?\soln $100\left(\dfrac12\right)^{20/8}=100\cdot2^{-2.5}$.\result{About 17.7 mg.}
+\end{example}
+
+\begin{example}{Example 3 \textperiodcentered{} Doubling time}
+A quantity grows according to $\dfrac{dy}{dt}=0.035y$. Find its doubling time.\soln $\dfrac{\ln2}{0.035}$.\result{About 19.8 time units.}
+\end{example}
+
+\newpage
+\sech{Practice}
+\emph{A calculator may be used for decimal answers on this page.}
+\level{Core}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item Solve $\dfrac{dy}{dt}=2y$ with $y(0)=5$.\work{2.3cm}
+  \item Solve $\dfrac{dy}{dt}=-0.3y$ with $y(0)=40$.\work{2.3cm}
+  \item Find the doubling time for $\dfrac{dy}{dt}=0.07y$.\work{2.3cm}
+  \item Find the half-life for $\dfrac{dy}{dt}=-0.02y$.\work{2.3cm}
+\end{enumerate}
+
+\level{Exam level}
+\begin{enumerate}[leftmargin=*,itemsep=2pt,start=5]
+  \item A population grows exponentially from 3000 to 4500 in 5 years. Find $k$, and the population after 12 years.\work{2.8cm}
+  \item A radioactive isotope has a half-life of 5730 years. What fraction of a sample remains after 2000 years?\work{2.8cm}
+  \item A quantity satisfies $\dfrac{dy}{dt}=ky$ with $y(1)=4$ and $y(3)=36$. Find $y(0)$.\work{2.8cm}
+  \item A hot plate at 85 $^\circ$C cools in a 25 $^\circ$C room according to $\dfrac{dT}{dt}=k(T-25)$. After 10 minutes it is at 55 $^\circ$C. Find its temperature after 20 minutes.\work{2.8cm}
+\end{enumerate}
+
+\begin{frbox}{Question 9 \textperiodcentered{} Free-response practice}
+An investment of 2000 dollars grows so that its value $A$ satisfies $\dfrac{dA}{dt}=0.05A$, where $t$ is in years.
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=2pt]
+  \item Find $A(t)$.\work{2.6cm}
+  \item Find the value of the investment after 10 years.\work{2.6cm}
+  \item Find the time at which the value reaches 5000 dollars, and the rate at which it is growing at that time.\work{2.6cm}
+\end{enumerate}
+\end{frbox}
+
+\newpage
+\begin{solbox}
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item $y=5e^{2t}$.
+  \item $y=40e^{-0.3t}$.
+  \item $\dfrac{\ln2}{0.07}\approx9.902$.
+  \item $\dfrac{\ln2}{0.02}\approx34.657$.
+  \item $e^{5k}=1.5$, so $k=\dfrac{\ln1.5}{5}\approx0.0811$. $P(12)=3000(1.5)^{12/5}\approx7939$.
+  \item $2^{-2000/5730}\approx0.785$.
+  \item $e^{2k}=9$, so $e^{k}=3$ and $y(0)=\dfrac43$.
+  \item The difference $T-25$ falls from 60 to 30 in 10 minutes: it halves. After 20 minutes it is 15, so $T=40$ $^\circ$C.
+  \item \begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=3pt]
+    \item $A(t)=2000e^{0.05t}$.
+    \item $2000e^{0.5}\approx3297.44$ dollars.
+    \item $e^{0.05t}=2.5$, so $t=20\ln2.5\approx18.326$ years. The rate is $0.05(5000)=250$ dollars per year.
+  \end{enumerate}
+\end{enumerate}
+\end{solbox}
+
+\end{document}

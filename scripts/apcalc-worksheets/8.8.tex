@@ -1,0 +1,77 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize\color{black!60}Worksheet 8.8}
+\begin{document}
+
+\wstitle{8.8}{Solids of Revolution: Discs}{Unit 8: Applications of Integration}
+
+\begin{ideabox}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+  \item When a region that touches the axis is revolved, each slice is a disc: $V=\pi\displaystyle\int_{a}^{b}R^2\,dx$.
+  \item $R$ is the distance from the curve to the axis of revolution.
+  \item About a horizontal line $y=k$: $R=|f(x)-k|$, and integrate in $x$.
+  \item About the $y$-axis or a vertical line: write the curve as $x=\ldots$ and integrate in $y$.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked examples}
+\begin{example}{Example 1 \textperiodcentered{} About the $x$-axis}
+The region under $y=\dfrac2x$ for $1\le x\le4$ is revolved about the $x$-axis. Find the volume.\soln $\pi\displaystyle\int_{1}^{4}\dfrac{4}{x^2}\,dx=4\pi\left(1-\dfrac14\right)$.\result{$3\pi$.}
+\end{example}
+
+\begin{example}{Example 2 \textperiodcentered{} About the $y$-axis}
+The region in the first quadrant bounded by $y=x^4$, the $y$-axis and $y=1$ is revolved about the $y$-axis. Find the volume.\soln $R=x=y^{1/4}$: $\pi\displaystyle\int_{0}^{1}y^{1/2}\,dy$.\result{$\dfrac{2\pi}{3}$.}
+\end{example}
+
+\begin{example}{Example 3 \textperiodcentered{} About another line}
+The region enclosed by $y=x^2$ and $y=4$ is revolved about the line $y=4$. Find the volume.\soln $R=4-x^2$: $\pi\displaystyle\int_{-2}^{2}(4-x^2)^2\,dx$.\result{$\dfrac{512\pi}{15}$.}
+\end{example}
+
+\newpage
+\sech{Practice}
+
+\level{Core}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item The region under $y=3$ for $0\le x\le5$ is revolved about the $x$-axis. Find the volume.\work{2.3cm}
+  \item The region under $y=x$ for $0\le x\le3$ is revolved about the $x$-axis. Find the volume.\work{2.3cm}
+  \item The region under $y=\sqrt{x+1}$ for $0\le x\le3$ is revolved about the $x$-axis. Find the volume.\work{2.3cm}
+  \item Write, but do not evaluate, an integral for the volume when the region under $y=\cos x$ for $0\le x\le\dfrac\pi2$ is revolved about the $x$-axis.\work{2.3cm}
+\end{enumerate}
+
+\level{Exam level}
+\begin{enumerate}[leftmargin=*,itemsep=2pt,start=5]
+  \item The region under $y=\sec x$ for $0\le x\le\dfrac\pi4$ is revolved about the $x$-axis. Find the volume.\work{2.8cm}
+  \item The region under $y=2\sqrt{\cos x}$ for $0\le x\le\dfrac\pi2$ is revolved about the $x$-axis. Find the volume.\work{2.8cm}
+  \item The region bounded by $y=\ln x$, the $y$-axis, $y=0$ and $y=2$ is revolved about the $y$-axis. Find the volume.\work{2.8cm}
+  \item The region bounded by $y=\sqrt{x}$, the $x$-axis and $x=4$ is revolved about the line $x=4$. Find the volume.\work{2.8cm}
+\end{enumerate}
+
+\begin{frbox}{Question 9 \textperiodcentered{} Free-response practice}
+Let $R$ be the region in the first quadrant bounded by $y=\sqrt{9-x}$ and the coordinate axes.
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=2pt]
+  \item Find the area of $R$.\work{2.6cm}
+  \item Find the volume of the solid generated when $R$ is revolved about the $x$-axis.\work{2.6cm}
+  \item Find the volume of the solid generated when $R$ is revolved about the $y$-axis.\work{2.6cm}
+\end{enumerate}
+\end{frbox}
+
+\newpage
+\begin{solbox}
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item A cylinder: $\pi(3)^2(5)=45\pi$.
+  \item $\pi\displaystyle\int_{0}^{3}x^2\,dx=9\pi$.
+  \item $\pi\displaystyle\int_{0}^{3}(x+1)\,dx=\dfrac{15\pi}{2}$.
+  \item $\pi\displaystyle\int_{0}^{\pi/2}\cos^2x\,dx$.
+  \item $\pi\Big[\tan x\Big]_0^{\pi/4}=\pi$.
+  \item $\pi\displaystyle\int_{0}^{\pi/2}4\cos x\,dx=4\pi$.
+  \item $x=e^{y}$: $\pi\displaystyle\int_{0}^{2}e^{2y}\,dy=\dfrac{\pi(e^4-1)}{2}$.
+  \item $R=4-y^2$ for $0\le y\le2$: $\pi\displaystyle\int_{0}^{2}(16-8y^2+y^4)\,dy=\pi\left(32-\dfrac{64}{3}+\dfrac{32}{5}\right)=\dfrac{256\pi}{15}$.
+  \item \begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=3pt]
+    \item $\displaystyle\int_{0}^{9}\sqrt{9-x}\,dx=\dfrac23(27)=18$.
+    \item $\pi\displaystyle\int_{0}^{9}(9-x)\,dx=\dfrac{81\pi}{2}$.
+    \item $x=9-y^2$ for $0\le y\le3$: $\pi\displaystyle\int_{0}^{3}(9-y^2)^2\,dy=\pi\left(243-162+\dfrac{243}{5}\right)=\dfrac{648\pi}{5}$.
+  \end{enumerate}
+\end{enumerate}
+\end{solbox}
+
+\end{document}

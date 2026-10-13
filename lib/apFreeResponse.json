@@ -1,0 +1,2828 @@
+{
+ "0.1": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "State the domain and the range of $f$.",
+    "points": 2,
+    "guide": "1 point: domain $x\\ge-4$. 1 point: range $y\\ge0$."
+   },
+   {
+    "label": "(b)",
+    "question": "Find $g\\big(f(x)\\big)$ in simplified form, and state its domain.",
+    "points": 2,
+    "guide": "1 point: $\\left(\\sqrt{x+4}\\right)^2-13=x-9$. 1 point: domain $x\\ge-4$ (the domain of $f$). A domain of all real numbers loses the second point."
+   },
+   {
+    "label": "(c)",
+    "question": "Find $f\\big(g(x)\\big)$, and state its domain.",
+    "points": 2,
+    "guide": "1 point: $\\sqrt{x^2-9}$. 1 point: $x\\le-3$ or $x\\ge3$."
+   },
+   {
+    "label": "(d)",
+    "question": "Find $f^{-1}(x)$, and state its domain.",
+    "points": 2,
+    "guide": "1 point: $x=y^2-4$, so $f^{-1}(x)=x^2-4$. 1 point: domain $x\\ge0$ (the range of $f$)."
+   },
+   {
+    "label": "(e)",
+    "question": "Describe how the graph of $y=f(x-2)+1$ is obtained from the graph of $f$.",
+    "points": 1,
+    "guide": "1 point: moved right 2 and up 1 (its starting point moves from $(-4,0)$ to $(-2,1)$)."
+   }
+  ]
+ },
+ "0.2": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Find $\\sin\\dfrac{2\\pi}{3}$ and $\\cos\\dfrac{7\\pi}{6}$.",
+    "points": 2,
+    "guide": "1 point: $\\dfrac{\\sqrt3}{2}$. 1 point: $-\\dfrac{\\sqrt3}{2}$."
+   },
+   {
+    "label": "(b)",
+    "question": "Solve $2\\cos x-1=0$ for $0\\le x\\lt2\\pi$.",
+    "points": 2,
+    "guide": "1 point: $\\cos x=\\dfrac12$ with $x=\\dfrac\\pi3$. 1 point: the second solution $x=\\dfrac{5\\pi}{3}$."
+   },
+   {
+    "label": "(c)",
+    "question": "Solve $2\\sin^2x+\\sin x-1=0$ for $0\\le x\\lt2\\pi$.",
+    "points": 3,
+    "guide": "1 point: factors as $(2\\sin x-1)(\\sin x+1)=0$. 1 point: $x=\\dfrac\\pi6$ and $x=\\dfrac{5\\pi}{6}$. 1 point: $x=\\dfrac{3\\pi}{2}$."
+   },
+   {
+    "label": "(d)",
+    "question": "Given that $\\sin\\theta=-\\dfrac45$ and $\\theta$ is in quadrant III, find $\\cos\\theta$ and $\\sin2\\theta$.",
+    "points": 2,
+    "guide": "1 point: $\\cos\\theta=-\\dfrac35$ (negative in quadrant III). 1 point: $\\sin2\\theta=2\\left(-\\dfrac45\\right)\\left(-\\dfrac35\\right)=\\dfrac{24}{25}$."
+   }
+  ]
+ },
+ "0.3": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Simplify $\\ln\\!\\left(e^{2}\\right)+e^{\\ln3}$ and $\\ln\\dfrac{1}{e^{3}}$.",
+    "points": 2,
+    "guide": "1 point: $2+3=5$. 1 point: $-3$."
+   },
+   {
+    "label": "(b)",
+    "question": "Solve $4e^{x}=20$ and $\\ln(3x)=2$.",
+    "points": 2,
+    "guide": "1 point: $x=\\ln5$. 1 point: $x=\\dfrac{e^{2}}{3}$."
+   },
+   {
+    "label": "(c)",
+    "question": "Solve $e^{2x}-4e^{x}-5=0$.",
+    "points": 3,
+    "guide": "1 point: treats the equation as a quadratic in $e^{x}$: $(e^{x}-5)(e^{x}+1)=0$. 1 point: rejects $e^{x}=-1$, because $e^{x}\\gt0$. 1 point: $x=\\ln5$."
+   },
+   {
+    "label": "(d)",
+    "question": "Solve $\\ln(x+1)+\\ln(x-1)=\\ln3$.",
+    "points": 2,
+    "guide": "1 point: combines to $\\ln\\!\\left(x^2-1\\right)=\\ln3$, so $x^2=4$. 1 point: $x=2$ only, rejecting $x=-2$ because the logarithms would be undefined."
+   }
+  ]
+ },
+ "0.4": {
+  "max": 9,
+  "calculator": true,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Find all zeros of $f$.",
+    "points": 2,
+    "guide": "2 points: $x\\approx-2.115$, $x\\approx0.254$ and $x\\approx1.861$. Award 1 point for two correct zeros. Answers to two decimal places earn at most 1 point."
+   },
+   {
+    "label": "(b)",
+    "question": "Find $p'(2)$.",
+    "points": 2,
+    "guide": "1 point: the notation $p'(2)$ (or an equivalent derivative expression evaluated at 2). 1 point: $-1.433$."
+   },
+   {
+    "label": "(c)",
+    "question": "Evaluate $\\displaystyle\\int_0^2p(x)\\,dx$.",
+    "points": 2,
+    "guide": "1 point: the integral written with its limits. 1 point: $0.581$ (accept $0.580$)."
+   },
+   {
+    "label": "(d)",
+    "question": "The graphs of $y=\\sqrt{x}$ and $y=2\\cos x$ intersect once in the first quadrant, at $x=a$. Find $a$, and find the area of the region bounded by the two graphs and the $y$-axis.",
+    "points": 2,
+    "guide": "1 point: $a\\approx1.037$, from $\\sqrt x=2\\cos x$. 1 point: $\\displaystyle\\int_0^{a}\\left(2\\cos x-\\sqrt x\\right)dx\\approx1.018$."
+   },
+   {
+    "label": "(e)",
+    "question": "State the angle mode your calculator must be in for parts (b), (c) and (d), and explain why.",
+    "points": 1,
+    "guide": "1 point: radian mode, because the input of the cosine is a real number (a radian measure) throughout calculus."
+   }
+  ]
+ },
+ "1.1": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Find the average rate of change of $H$ over the interval $2\\le t\\le5$. Indicate units of measure.",
+    "points": 2,
+    "guide": "1 point: the difference quotient $\\dfrac{H(5)-H(2)}{5-2}=\\dfrac{70-34}{3}$ with the value $12$. 1 point: units of metres per minute."
+   },
+   {
+    "label": "(b)",
+    "question": "Using correct units, interpret your answer to part (a) in the context of the problem.",
+    "points": 1,
+    "guide": "1 point: from $t=2$ to $t=5$ minutes the height of the balloon increased at an average rate of 12 metres per minute. Must name the interval and say \"average\" (or equivalent); an instantaneous-rate statement does not earn the point."
+   },
+   {
+    "label": "(c)",
+    "question": "For $0\\le t\\le4$ the height is modelled by $s(t)=t^2+10t+10$. Simplify the average rate of change of $s$ over $[2,2+h]$ for $h\\neq0$, and use it to find the instantaneous rate of change of $s$ at $t=2$.",
+    "points": 3,
+    "guide": "1 point: sets up $\\dfrac{s(2+h)-s(2)}{h}$ with $s(2)=34$. 1 point: simplifies to $14+h$. 1 point: takes the limit as $h\\to0$ to get 14 (metres per minute). An answer of $14+h$ with no limit earns the first two points only."
+   },
+   {
+    "label": "(d)",
+    "question": "A faulty sensor reports a function $g$ with $\\displaystyle\\lim_{t\\to 5^-}g(t)=70$, $\\displaystyle\\lim_{t\\to 5^+}g(t)=70$ and $g(5)=0$. State $\\displaystyle\\lim_{t\\to 5}g(t)$ and explain why the value $g(5)$ does not affect it.",
+    "points": 2,
+    "guide": "1 point: the limit is 70. 1 point: reason that the one-sided limits are equal and a limit depends only on values of $g$ near 5, not at 5."
+   },
+   {
+    "label": "(e)",
+    "question": "Is the balloon rising faster, on average, over $[2,5]$ or over $[5,9]$? Show the work that leads to your answer.",
+    "points": 1,
+    "guide": "1 point: computes $\\dfrac{82-70}{4}=3$ and concludes the balloon rises faster on $[2,5]$ (12 compared with 3 metres per minute). A conclusion with no computation does not earn the point."
+   }
+  ]
+ },
+ "1.2": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Find $\\displaystyle\\lim_{x\\to -1^-}f(x)$ and $\\displaystyle\\lim_{x\\to -1^+}f(x)$.",
+    "points": 2,
+    "guide": "1 point: left-hand limit 2. 1 point: right-hand limit 1."
+   },
+   {
+    "label": "(b)",
+    "question": "Does $\\displaystyle\\lim_{x\\to -1}f(x)$ exist? Justify your answer.",
+    "points": 2,
+    "guide": "1 point: answer no. 1 point: justification that the left-hand limit (2) and right-hand limit (1) are not equal. \"There is a jump\" without the limits does not earn the justification point. The value $f(-1)=1$ is not a valid reason."
+   },
+   {
+    "label": "(c)",
+    "question": "Find $\\displaystyle\\lim_{x\\to 2}f(x)$, and determine whether $f$ is continuous at $x=2$. Justify your answer.",
+    "points": 2,
+    "guide": "1 point: the limit is 4, supported by both one-sided limits ($2^2=4$ and $6-2=4$). 1 point: continuous, because the limit equals $f(2)=4$."
+   },
+   {
+    "label": "(d)",
+    "question": "Find $\\displaystyle\\lim_{x\\to -1^-}f\\big(f(x)\\big)$. Show your reasoning.",
+    "points": 2,
+    "guide": "1 point: as $x\\to-1^-$, $f(x)\\to2$ through values less than 2 (direction must be indicated). 1 point: answer 4, from $\\displaystyle\\lim_{u\\to 2^-}f(u)=u^2\\to4$. Because $f$ is continuous at 2, an answer of 4 obtained from $f(2)=4$ with the inner limit 2 stated earns both points."
+   },
+   {
+    "label": "(e)",
+    "question": "Find $\\displaystyle\\lim_{x\\to -1^+}f\\big(f(x)\\big)$.",
+    "points": 1,
+    "guide": "1 point: answer 1. For $x$ slightly greater than $-1$, $f(x)=x^2\\to1$ from below, and $f(u)=u^2\\to1$."
+   }
+  ]
+ },
+ "1.3": {
+  "max": 9,
+  "calculator": true,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Find $k(-0.1)$, $k(-0.01)$, $k(0.01)$ and $k(0.1)$, each to four decimal places.",
+    "points": 2,
+    "guide": "1 point: $k(0.1)=1.1612$ and $k(-0.1)=1.0404$. 1 point: $k(0.01)=1.1047$ and $k(-0.01)=1.0926$. Accept values correct to three decimal places."
+   },
+   {
+    "label": "(b)",
+    "question": "Use inputs closer to 0 to estimate $\\displaystyle\\lim_{x\\to 0}k(x)$ to three decimal places. Show the values you used.",
+    "points": 2,
+    "guide": "1 point: values on both sides of 0, for example $k(0.001)=1.0992$ and $k(-0.001)=1.0980$. 1 point: estimate $1.099$ (accept 1.098 to 1.099)."
+   },
+   {
+    "label": "(c)",
+    "question": "Explain why your work in part (b) does not prove the value of the limit.",
+    "points": 1,
+    "guide": "1 point: a table shows only finitely many inputs; the function could behave differently at inputs closer to 0 than those tested."
+   },
+   {
+    "label": "(d)",
+    "question": "Now let $m(x)=\\cos\\!\\left(\\dfrac{\\pi}{x}\\right)$. Evaluate $m$ at $x=0.1,\\ 0.01,\\ 0.001$, and then at $x=\\tfrac15$ and $x=\\tfrac{1}{51}$. What do you conclude about $\\displaystyle\\lim_{x\\to 0}m(x)$?",
+    "points": 3,
+    "guide": "1 point: $m(0.1)=m(0.01)=m(0.001)=1$. 1 point: $m\\!\\left(\\tfrac15\\right)=m\\!\\left(\\tfrac1{51}\\right)=-1$. 1 point: the limit does not exist because the values do not approach a single number (the function oscillates)."
+   },
+   {
+    "label": "(e)",
+    "question": "Which angle mode must the calculator be in for part (d), and why?",
+    "points": 1,
+    "guide": "1 point: radian mode, because $\\pi/x$ is a radian measure (or: calculus formulas for trigonometric functions assume radians)."
+   }
+  ]
+ },
+ "1.4": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Find $\\displaystyle\\lim_{x\\to 3}\\big[f(x)\\,g(x)+4\\big]$.",
+    "points": 1,
+    "guide": "1 point: $(5)(-2)+4=-6$."
+   },
+   {
+    "label": "(b)",
+    "question": "Find $\\displaystyle\\lim_{x\\to 3}\\dfrac{f(x)-\\big[g(x)\\big]^2}{f(x)+g(x)-2}$. Show that the law you use applies.",
+    "points": 2,
+    "guide": "1 point: numerator limit $5-4=1$ and denominator limit $5-2-2=1$. 1 point: notes the denominator limit is not zero and gives the answer 1."
+   },
+   {
+    "label": "(c)",
+    "question": "Find $\\displaystyle\\lim_{x\\to 3}\\sqrt{f(x)+4}$.",
+    "points": 1,
+    "guide": "1 point: $\\sqrt{9}=3$."
+   },
+   {
+    "label": "(d)",
+    "question": "What can be said about $\\displaystyle\\lim_{x\\to 3}\\dfrac{g(x)}{f(x)-5}$? Explain.",
+    "points": 2,
+    "guide": "1 point: the denominator tends to 0 while the numerator tends to $-2\\neq0$. 1 point: so the limit does not exist (the quotient is unbounded); the quotient law cannot be used. An answer of \"$-2/0$\" or \"undefined\" with no explanation earns at most 1 point."
+   },
+   {
+    "label": "(e)",
+    "question": "A function $p$ satisfies $\\displaystyle\\lim_{x\\to 3}\\dfrac{p(x)-6}{x-3}=2$. Find $\\displaystyle\\lim_{x\\to 3}p(x)$, showing your reasoning.",
+    "points": 2,
+    "guide": "1 point: writes $p(x)-6=\\dfrac{p(x)-6}{x-3}\\cdot(x-3)$ (or argues that the numerator must tend to 0 because the denominator does and the limit is finite). 1 point: concludes the limit of $p$ is 6."
+   },
+   {
+    "label": "(f)",
+    "question": "Explain why the limit laws cannot be used to evaluate $\\displaystyle\\lim_{x\\to 0}\\left[x\\cdot\\sin\\!\\left(\\dfrac1x\\right)\\right]$ as a product of two limits.",
+    "points": 1,
+    "guide": "1 point: $\\displaystyle\\lim_{x\\to 0}\\sin(1/x)$ does not exist, and the product law requires both limits to exist."
+   }
+  ]
+ },
+ "1.5": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Show that direct substitution of $x=4$ gives an indeterminate form.",
+    "points": 1,
+    "guide": "1 point: numerator $16-16=0$ and denominator $2-2=0$, giving the form $0/0$."
+   },
+   {
+    "label": "(b)",
+    "question": "Evaluate $\\displaystyle\\lim_{x\\to 4}f(x)$, using correct limit notation at each step.",
+    "points": 3,
+    "guide": "1 point: multiplies by the conjugate $\\sqrt{x}+2$ (or factors $x-4=(\\sqrt x-2)(\\sqrt x+2)$). 1 point: simplifies to $x\\left(\\sqrt{x}+2\\right)$. 1 point: answer 16. Deduct at most 1 point for notation errors such as dropping \"lim\" before substituting or writing \"= 0/0\" as a line of working."
+   },
+   {
+    "label": "(c)",
+    "question": "Evaluate $\\displaystyle\\lim_{x\\to 4}\\dfrac{\\frac{1}{x+1}-\\frac15}{x-4}$.",
+    "points": 3,
+    "guide": "1 point: combines the numerator as $\\dfrac{4-x}{5(x+1)}$. 1 point: cancels to $-\\dfrac{1}{5(x+1)}$, with the sign correct. 1 point: answer $-\\dfrac{1}{25}$."
+   },
+   {
+    "label": "(d)",
+    "question": "Evaluate $\\displaystyle\\lim_{x\\to 4}\\dfrac{|x-4|}{x^2-16}$, or explain why it does not exist.",
+    "points": 2,
+    "guide": "1 point: one-sided limits $\\dfrac18$ (from the right) and $-\\dfrac18$ (from the left). 1 point: concludes the limit does not exist because they are not equal."
+   }
+  ]
+ },
+ "1.6": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Evaluate $\\displaystyle\\lim_{x\\to 0}\\dfrac{\\sin(8x)}{3x}$.",
+    "points": 1,
+    "guide": "1 point: $\\dfrac83$."
+   },
+   {
+    "label": "(b)",
+    "question": "Evaluate $\\displaystyle\\lim_{x\\to 0}\\dfrac{\\sin(2x)}{\\tan(6x)}$. Show your work.",
+    "points": 2,
+    "guide": "1 point: rewrites using $\\dfrac{\\sin(2x)}{2x}$ and $\\dfrac{6x}{\\sin(6x)}$ with the factor $\\cos(6x)$ (or an equivalent correct method). 1 point: answer $\\dfrac13$."
+   },
+   {
+    "label": "(c)",
+    "question": "A function $f$ satisfies $2-|x|\\le f(x)\\le2+x^2$ for all $x$. Find $\\displaystyle\\lim_{x\\to 0}f(x)$ and justify your answer.",
+    "points": 2,
+    "guide": "1 point: both bounding limits equal 2. 1 point: conclusion 2 by the squeeze theorem (the theorem must be named or clearly described)."
+   },
+   {
+    "label": "(d)",
+    "question": "Show that $\\displaystyle\\lim_{x\\to 0}x^4\\sin\\!\\left(\\dfrac{1}{x^2}\\right)=0$.",
+    "points": 3,
+    "guide": "1 point: the inequality $-x^4\\le x^4\\sin\\!\\left(\\tfrac{1}{x^2}\\right)\\le x^4$ (from $-1\\le\\sin\\le1$ and $x^4\\ge0$). 1 point: both outer limits are 0. 1 point: conclusion by the squeeze theorem. An argument using the product law earns no points."
+   },
+   {
+    "label": "(e)",
+    "question": "Evaluate $\\displaystyle\\lim_{x\\to \\infty}\\dfrac{x+\\cos x}{x}$, with justification.",
+    "points": 1,
+    "guide": "1 point: answer 1, justified by $\\dfrac{\\cos x}{x}\\to0$ (bounded numerator over an unbounded denominator, or the squeeze theorem with $\\pm\\tfrac1x$)."
+   }
+  ]
+ },
+ "1.7": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Find all values of $x$ at which $r$ is discontinuous.",
+    "points": 1,
+    "guide": "1 point: $x=3$ and $x=-3$."
+   },
+   {
+    "label": "(b)",
+    "question": "Classify the discontinuity of $r$ at $x=-3$. Justify your answer with a limit.",
+    "points": 2,
+    "guide": "1 point: $\\displaystyle\\lim_{x\\to -3}r(x)=\\displaystyle\\lim_{x\\to -3}\\dfrac{x-5}{x-3}=\\dfrac{-8}{-6}=\\dfrac43$. 1 point: removable, because the limit exists but $r(-3)$ is undefined."
+   },
+   {
+    "label": "(c)",
+    "question": "Classify the discontinuity of $r$ at $x=3$. Justify your answer with a limit.",
+    "points": 2,
+    "guide": "1 point: a one-sided limit that is infinite, for example $\\displaystyle\\lim_{x\\to 3^+}r(x)=-\\infty$ (numerator near $-2$, denominator small and positive) or $\\displaystyle\\lim_{x\\to 3^-}r(x)=\\infty$. 1 point: infinite discontinuity (vertical asymptote)."
+   },
+   {
+    "label": "(d)",
+    "question": "Let $s(x)=r(x)$ for $x\\neq-3$ and $s(-3)=c$. For what value of $c$ is $s$ continuous at $x=-3$?",
+    "points": 1,
+    "guide": "1 point: $c=\\dfrac43$."
+   },
+   {
+    "label": "(e)",
+    "question": "Classify the discontinuity of $w(x)=\\dfrac{x^2-9}{|x+3|}$ at $x=-3$. Justify your answer.",
+    "points": 3,
+    "guide": "1 point: $\\displaystyle\\lim_{x\\to -3^+}w(x)=-6$ (for $x>-3$, $w(x)=x-3$). 1 point: $\\displaystyle\\lim_{x\\to -3^-}w(x)=6$ (for $x<-3$, $w(x)=-(x-3)$). 1 point: jump discontinuity, because the one-sided limits exist and are not equal."
+   }
+  ]
+ },
+ "1.8": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Find $\\displaystyle\\lim_{x\\to 1^-}f(x)$ and $\\displaystyle\\lim_{x\\to 1^+}f(x)$ in terms of $a$.",
+    "points": 2,
+    "guide": "1 point: left-hand limit $1+a$. 1 point: right-hand limit $2a-1$."
+   },
+   {
+    "label": "(b)",
+    "question": "Find the values of $a$ and $b$ for which $f$ is continuous at $x=1$.",
+    "points": 2,
+    "guide": "1 point: $1+a=2a-1$, so $a=2$. 1 point: $b=3$."
+   },
+   {
+    "label": "(c)",
+    "question": "With the values from part (b), justify that $f$ is continuous at $x=1$.",
+    "points": 2,
+    "guide": "1 point: states the three values, $\\displaystyle\\lim_{x\\to 1^-}f(x)=3$, $\\displaystyle\\lim_{x\\to 1^+}f(x)=3$ and $f(1)=3$. 1 point: concludes continuity because they are equal. \"Because the pieces meet\" without limits earns at most 1 point."
+   },
+   {
+    "label": "(d)",
+    "question": "On what intervals is $h(x)=\\dfrac{\\sqrt{x+4}}{x-2}$ continuous? Give a reason.",
+    "points": 2,
+    "guide": "1 point: $[-4,2)$ and $(2,\\infty)$. 1 point: reason: root needs $x\\ge-4$, the denominator is zero at $x=2$, and quotients of continuous functions are continuous where defined."
+   },
+   {
+    "label": "(e)",
+    "question": "What value should be assigned to $k(0)$ to make $k(x)=\\dfrac{\\sin(3x)}{x}$ continuous at $x=0$?",
+    "points": 1,
+    "guide": "1 point: $k(0)=3$, the value of the limit."
+   }
+  ]
+ },
+ "1.9": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Find $\\displaystyle\\lim_{x\\to 2}f(x)$ and state the type of discontinuity $f$ has at $x=2$.",
+    "points": 2,
+    "guide": "1 point: factors to $\\dfrac{2(x+3)(x-2)}{(x-2)(x+2)}$ and finds the limit $\\dfrac{10}{4}=\\dfrac52$. 1 point: removable."
+   },
+   {
+    "label": "(b)",
+    "question": "Write an equation for the vertical asymptote of the graph of $f$. Justify your answer with a limit.",
+    "points": 2,
+    "guide": "1 point: the equation $x=-2$ (must be an equation of a line). 1 point: a correct infinite one-sided limit, for example $\\displaystyle\\lim_{x\\to -2^+}f(x)=\\infty$ or $\\displaystyle\\lim_{x\\to -2^-}f(x)=-\\infty$."
+   },
+   {
+    "label": "(c)",
+    "question": "Write an equation for the horizontal asymptote of the graph of $f$. Justify your answer with a limit.",
+    "points": 2,
+    "guide": "1 point: the equation $y=2$. 1 point: $\\displaystyle\\lim_{x\\to \\infty}f(x)=2$ (or the limit as $x\\to-\\infty$)."
+   },
+   {
+    "label": "(d)",
+    "question": "Evaluate $\\displaystyle\\lim_{x\\to -\\infty}\\dfrac{\\sqrt{9x^2+1}}{x-4}$. Show the work that leads to your answer.",
+    "points": 2,
+    "guide": "1 point: uses $\\sqrt{x^2}=|x|=-x$ for negative $x$. 1 point: answer $-3$. An answer of $3$ earns at most 1 point (for otherwise correct division by the highest power)."
+   },
+   {
+    "label": "(e)",
+    "question": "Does the graph of $f$ ever cross its horizontal asymptote? Justify your answer.",
+    "points": 1,
+    "guide": "1 point: no; $\\dfrac{2(x+3)}{x+2}=2$ leads to $2x+6=2x+4$, which has no solution."
+   }
+  ]
+ },
+ "1.10": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Must there be a number $c$, $0<c<2$, such that $f(c)=0$? Justify your answer.",
+    "points": 2,
+    "guide": "1 point: states that $f$ is continuous on $[0,2]$ and that $f(2)=-3<0<5=f(0)$. 1 point: concludes yes by the Intermediate Value Theorem (named)."
+   },
+   {
+    "label": "(b)",
+    "question": "What is the least number of solutions of $f(x)=0$ in $[0,8]$? Show your reasoning.",
+    "points": 2,
+    "guide": "1 point: identifies a sign change on each of $[0,2]$, $[2,4]$, $[4,6]$ and $[6,8]$. 1 point: answer 4."
+   },
+   {
+    "label": "(c)",
+    "question": "What is the least number of solutions of $f(x)=3$ in $[0,8]$? Show your reasoning.",
+    "points": 2,
+    "guide": "1 point: 3 lies between the endpoint values on $[0,2]$ (5 and $-3$) and on $[6,8]$ ($-2$ and 4), and on no other subinterval. 1 point: answer 2."
+   },
+   {
+    "label": "(d)",
+    "question": "Show that there is a number $c$, $0<c<2$, such that $f(c)=c$.",
+    "points": 2,
+    "guide": "1 point: defines $g(x)=f(x)-x$, continuous on $[0,2]$, with $g(0)=5>0$ and $g(2)=-5<0$. 1 point: concludes by the Intermediate Value Theorem that $g(c)=0$, so $f(c)=c$."
+   },
+   {
+    "label": "(e)",
+    "question": "Can it be concluded from the table that $f(x)\\le5$ for all $x$ in $[0,8]$? Explain.",
+    "points": 1,
+    "guide": "1 point: no; the table gives $f$ at five inputs only, and between them $f$ could exceed 5."
+   }
+  ]
+ },
+ "2.1": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Find the average rate of change of $f$ over the interval $[1,4]$.",
+    "points": 2,
+    "guide": "1 point: the difference quotient $\\dfrac{f(4)-f(1)}{4-1}=\\dfrac{20-(-1)}{3}$. 1 point: answer $7$."
+   },
+   {
+    "label": "(b)",
+    "question": "For $h\\neq0$, simplify $\\dfrac{f(2+h)-f(2)}{h}$, and use your result to find the slope of the line tangent to the graph of $f$ at $x=2$.",
+    "points": 3,
+    "guide": "1 point: $f(2+h)=2(2+h)^2-3(2+h)$ and $f(2)=2$ substituted. 1 point: simplifies to $5+2h$. 1 point: takes the limit as $h\\to0$ to obtain slope $5$. Stopping at $5+2h$ earns the first two points only."
+   },
+   {
+    "label": "(c)",
+    "question": "Write an equation of the line tangent to the graph of $f$ at $x=2$.",
+    "points": 2,
+    "guide": "1 point: the point $(2,2)$. 1 point: $y-2=5(x-2)$ or an equivalent equation. Follow through from the slope found in part (b)."
+   },
+   {
+    "label": "(d)",
+    "question": "At what value of $x$ is the tangent line to the graph of $f$ parallel to the secant line in part (a)? Show the work that leads to your answer.",
+    "points": 2,
+    "guide": "1 point: sets the slope of the tangent, $4x-3$ (found by a limit or by a derivative rule), equal to $7$. 1 point: $x=\\dfrac52$."
+   }
+  ]
+ },
+ "2.2": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Use the limit definition of the derivative to find $f'(x)$.",
+    "points": 4,
+    "guide": "1 point: the set-up $\\displaystyle\\lim_{h\\to 0}\\dfrac{\\frac{1}{x+h+2}-\\frac{1}{x+2}}{h}$. 1 point: combines the fractions to get numerator $(x+2)-(x+h+2)=-h$. 1 point: cancels $h$ to get $\\dfrac{-1}{(x+h+2)(x+2)}$, keeping limit notation until the limit is taken. 1 point: $f'(x)=-\\dfrac{1}{(x+2)^2}$. An answer from the power or quotient rule with no limit earns at most 1 point."
+   },
+   {
+    "label": "(b)",
+    "question": "Evaluate $\\displaystyle\\lim_{h\\to 0}\\dfrac{(3+h)^4-81}{h}$ by recognising it as a derivative.",
+    "points": 2,
+    "guide": "1 point: identifies the limit as $g'(3)$ for $g(x)=x^4$. 1 point: $4(3)^3=108$."
+   },
+   {
+    "label": "(c)",
+    "question": "Find $\\displaystyle\\lim_{h\\to 0}\\dfrac{f(1+2h)-f(1)}{h}$.",
+    "points": 2,
+    "guide": "1 point: rewrites as $2\\cdot\\dfrac{f(1+2h)-f(1)}{2h}$, so the limit is $2f'(1)$. 1 point: $2\\left(-\\dfrac19\\right)=-\\dfrac29$."
+   },
+   {
+    "label": "(d)",
+    "question": "Find $\\displaystyle\\lim_{x\\to 0}\\dfrac{f(x)-f(0)}{x-0}$.",
+    "points": 1,
+    "guide": "1 point: this is $f'(0)=-\\dfrac14$."
+   }
+  ]
+ },
+ "2.3": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Use the data to estimate $W'(7)$. Show the work that leads to your answer and indicate units of measure.",
+    "points": 2,
+    "guide": "1 point: $\\dfrac{W(10)-W(4)}{10-4}=\\dfrac{15}{6}=2.5$. 1 point: units of degrees Celsius per minute."
+   },
+   {
+    "label": "(b)",
+    "question": "Interpret your answer to part (a) in the context of the problem.",
+    "points": 2,
+    "guide": "1 point: at time $t=7$ minutes (an instant, not an interval). 1 point: the temperature of the water is increasing at about 2.5 degrees Celsius per minute."
+   },
+   {
+    "label": "(c)",
+    "question": "Must there be a time $t$, $0\\lt t\\lt24$, at which $W'(t)=1.75$? Justify your answer.",
+    "points": 2,
+    "guide": "1 point: the average rate of change on $[0,24]$ is $\\dfrac{60-18}{24}=1.75$. 1 point: yes, by the Mean Value Theorem, because $W$ is differentiable (and so continuous) on the interval. The theorem and its hypothesis must both appear."
+   },
+   {
+    "label": "(d)",
+    "question": "Find the average rate of change of $W$ on each of the four subintervals of the table. What do these values suggest about the concavity of the graph of $W$?",
+    "points": 2,
+    "guide": "1 point: the four values $3$, $2.5$, $1.5$ and $0.75$. 1 point: the rates are decreasing, which suggests the graph of $W$ is concave down. \"Suggests\" (or equivalent) is acceptable; a claim of proof is not required."
+   },
+   {
+    "label": "(e)",
+    "question": "Use the data to estimate $W(12)$.",
+    "points": 1,
+    "guide": "1 point: $45+2\\cdot\\dfrac{54-45}{16-10}=48$ degrees Celsius (accept any estimate from a correct secant or tangent-line argument, between 47 and 49)."
+   }
+  ]
+ },
+ "2.4": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Write an equation in $a$ and $b$ that must hold if $g$ is continuous at $x=1$.",
+    "points": 2,
+    "guide": "1 point: left-hand limit $2$ and right-hand limit $a+b$. 1 point: $a+b=2$."
+   },
+   {
+    "label": "(b)",
+    "question": "Find the values of $a$ and $b$ for which $g$ is differentiable at $x=1$.",
+    "points": 3,
+    "guide": "1 point: left-hand derivative $2(1)+1=3$. 1 point: right-hand derivative $3a$, set equal to 3. 1 point: $a=1$ and $b=1$. Matching slopes without using continuity earns at most 2 points."
+   },
+   {
+    "label": "(c)",
+    "question": "Let $h(x)=|x-3|+2$. Use one-sided limits of the difference quotient to show that $h$ is not differentiable at $x=3$.",
+    "points": 2,
+    "guide": "1 point: $\\displaystyle\\lim_{k\\to 0^-}\\dfrac{h(3+k)-h(3)}{k}=-1$ and $\\displaystyle\\lim_{k\\to 0^+}\\dfrac{h(3+k)-h(3)}{k}=1$. 1 point: the one-sided limits differ, so $h'(3)$ does not exist. \"There is a corner\" alone earns no points."
+   },
+   {
+    "label": "(d)",
+    "question": "Let $k(x)=x^{1/3}$. Is $k$ continuous at $x=0$? Is $k$ differentiable at $x=0$? Justify both answers.",
+    "points": 2,
+    "guide": "1 point: continuous, since $\\displaystyle\\lim_{x\\to 0}x^{1/3}=0=k(0)$. 1 point: not differentiable, since $\\displaystyle\\lim_{h\\to 0}\\dfrac{h^{1/3}}{h}=\\displaystyle\\lim_{h\\to 0}h^{-2/3}$ is infinite (a vertical tangent)."
+   }
+  ]
+ },
+ "2.5": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Find $p'(x)$ and $p'(2)$.",
+    "points": 2,
+    "guide": "1 point: $p'(x)=3x^2-12x+9$. 1 point: $p'(2)=-3$."
+   },
+   {
+    "label": "(b)",
+    "question": "Write an equation of the line tangent to the graph of $p$ at $x=2$.",
+    "points": 2,
+    "guide": "1 point: $p(2)=4$. 1 point: $y-4=-3(x-2)$ or equivalent."
+   },
+   {
+    "label": "(c)",
+    "question": "Find the coordinates of all points on the graph of $p$ at which the tangent line is horizontal.",
+    "points": 2,
+    "guide": "1 point: $3(x-1)(x-3)=0$, so $x=1$ and $x=3$. 1 point: the points $(1,6)$ and $(3,2)$."
+   },
+   {
+    "label": "(d)",
+    "question": "Find all values of $x$ at which the tangent line to the graph of $p$ is parallel to the line $y=9x-5$.",
+    "points": 2,
+    "guide": "1 point: $3x^2-12x+9=9$. 1 point: $x=0$ and $x=4$."
+   },
+   {
+    "label": "(e)",
+    "question": "Find $q'(x)$ for $q(x)=4\\sqrt{x}-\\dfrac{6}{x^2}$.",
+    "points": 1,
+    "guide": "1 point: $q'(x)=\\dfrac{2}{\\sqrt x}+\\dfrac{12}{x^3}$ (or $2x^{-1/2}+12x^{-3}$)."
+   }
+  ]
+ },
+ "2.6": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Find $f'(x)$ and $f'(1)$.",
+    "points": 2,
+    "guide": "1 point: $f'(x)=2x-\\dfrac8x$. 1 point: $f'(1)=-6$."
+   },
+   {
+    "label": "(b)",
+    "question": "Find the coordinates of the point on the graph of $f$ at which the tangent line is horizontal.",
+    "points": 2,
+    "guide": "1 point: $2x-\\dfrac8x=0$ gives $x=2$ (the value $x=-2$ is rejected or not listed, since $x\\gt0$). 1 point: the point $(2,\\,4-8\\ln2)$."
+   },
+   {
+    "label": "(c)",
+    "question": "Write an equation of the line tangent to the graph of $g$ at $x=0$.",
+    "points": 2,
+    "guide": "1 point: $g'(x)=-5\\sin x+e^{x}$, so $g'(0)=1$. 1 point: $g(0)=6$ and the line $y=x+6$."
+   },
+   {
+    "label": "(d)",
+    "question": "Evaluate $\\displaystyle\\lim_{h\\to 0}\\dfrac{\\cos\\!\\left(\\frac{\\pi}{2}+h\\right)}{h}$. Show the reasoning that leads to your answer.",
+    "points": 2,
+    "guide": "1 point: since $\\cos\\dfrac\\pi2=0$, the limit is the derivative of $\\cos x$ at $x=\\dfrac\\pi2$. 1 point: $-\\sin\\dfrac\\pi2=-1$."
+   },
+   {
+    "label": "(e)",
+    "question": "Find $\\dfrac{d}{dx}\\big[7e^{x}-3\\sin x+\\ln x\\big]$.",
+    "points": 1,
+    "guide": "1 point: $7e^{x}-3\\cos x+\\dfrac1x$."
+   }
+  ]
+ },
+ "2.7": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Let $p(x)=f(x)\\,g(x)$. Find $p'(3)$.",
+    "points": 2,
+    "guide": "1 point: the product rule $f'(3)g(3)+f(3)g'(3)$. 1 point: $-10+12=2$. An answer of $f'(3)g'(3)=-6$ earns no points."
+   },
+   {
+    "label": "(b)",
+    "question": "Let $q(x)=\\dfrac{f(x)}{g(x)}$. Find $q'(3)$.",
+    "points": 2,
+    "guide": "1 point: the quotient rule $\\dfrac{f'(3)g(3)-f(3)g'(3)}{[g(3)]^2}$. 1 point: $\\dfrac{-10-12}{25}=-\\dfrac{22}{25}$."
+   },
+   {
+    "label": "(c)",
+    "question": "Let $h(x)=x^2f(x)$. Find $h'(3)$.",
+    "points": 2,
+    "guide": "1 point: $h'(x)=2xf(x)+x^2f'(x)$. 1 point: $24-18=6$."
+   },
+   {
+    "label": "(d)",
+    "question": "Find all values of $x$ at which the graph of $y=\\dfrac{x^2+1}{x-1}$ has a horizontal tangent.",
+    "points": 3,
+    "guide": "1 point: quotient rule, $y'=\\dfrac{2x(x-1)-(x^2+1)}{(x-1)^2}$. 1 point: numerator simplified to $x^2-2x-1$. 1 point: $x=1\\pm\\sqrt2$."
+   }
+  ]
+ },
+ "2.8": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Find $f'\\!\\left(\\dfrac{\\pi}{3}\\right)$.",
+    "points": 2,
+    "guide": "1 point: $f'(x)=\\sec x\\tan x$. 1 point: $2\\cdot\\sqrt3=2\\sqrt3$."
+   },
+   {
+    "label": "(b)",
+    "question": "Write an equation of the line tangent to the graph of $f$ at $x=\\dfrac{\\pi}{3}$.",
+    "points": 2,
+    "guide": "1 point: the point $\\left(\\dfrac\\pi3,2\\right)$. 1 point: $y-2=2\\sqrt3\\left(x-\\dfrac\\pi3\\right)$."
+   },
+   {
+    "label": "(c)",
+    "question": "Starting from $\\csc x=\\dfrac{1}{\\sin x}$, show that $\\dfrac{d}{dx}\\big[\\csc x\\big]=-\\csc x\\cot x$.",
+    "points": 2,
+    "guide": "1 point: quotient or chain rule, giving $-\\dfrac{\\cos x}{\\sin^2x}$. 1 point: rewrites as $-\\dfrac{1}{\\sin x}\\cdot\\dfrac{\\cos x}{\\sin x}=-\\csc x\\cot x$."
+   },
+   {
+    "label": "(d)",
+    "question": "Let $g(x)=x\\csc x$. Find $g'\\!\\left(\\dfrac{\\pi}{2}\\right)$.",
+    "points": 2,
+    "guide": "1 point: $g'(x)=\\csc x-x\\csc x\\cot x$. 1 point: $1-0=1$."
+   },
+   {
+    "label": "(e)",
+    "question": "At what value of $x$ in $\\left(-\\dfrac{\\pi}{2},\\dfrac{\\pi}{2}\\right)$ does the graph of $f$ have a horizontal tangent?",
+    "points": 1,
+    "guide": "1 point: $\\sec x\\tan x=0$ only when $\\tan x=0$, so $x=0$."
+   }
+  ]
+ },
+ "3.1": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Find $\\dfrac{d}{dx}\\Big[\\left(3x^2-5\\right)^4\\Big]$.",
+    "points": 2,
+    "guide": "1 point: $4(3x^2-5)^3$ multiplied by the derivative of the inside. 1 point: $24x(3x^2-5)^3$. Omitting the factor $6x$ earns no points."
+   },
+   {
+    "label": "(b)",
+    "question": "Find $\\dfrac{d}{dx}\\Big[e^{\\sin(2x)}\\Big]$.",
+    "points": 2,
+    "guide": "1 point: $e^{\\sin(2x)}\\cdot\\cos(2x)$. 1 point: the further factor 2, giving $2\\cos(2x)\\,e^{\\sin(2x)}$."
+   },
+   {
+    "label": "(c)",
+    "question": "Let $h(x)=f\\big(g(x)\\big)$. Find $h'(1)$.",
+    "points": 2,
+    "guide": "1 point: $h'(1)=f'\\big(g(1)\\big)\\,g'(1)$. 1 point: $f'(2)\\cdot4=-24$. Using $f'(1)$ earns no points."
+   },
+   {
+    "label": "(d)",
+    "question": "Let $k(x)=\\sqrt{f(x)}$. Find $k'(2)$.",
+    "points": 2,
+    "guide": "1 point: $k'(x)=\\dfrac{f'(x)}{2\\sqrt{f(x)}}$. 1 point: $\\dfrac{-6}{2\\cdot3}=-1$."
+   },
+   {
+    "label": "(e)",
+    "question": "Find the slope of the graph of $y=\\ln(3x+1)$ at $x=1$.",
+    "points": 1,
+    "guide": "1 point: $\\dfrac{3}{3x+1}$ at $x=1$ is $\\dfrac34$."
+   }
+  ]
+ },
+ "3.2": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Show that $\\dfrac{dy}{dx}=-\\dfrac{2xy}{x^2+3y^2}$.",
+    "points": 3,
+    "guide": "1 point: product rule on $x^2y$, giving $2xy+x^2\\dfrac{dy}{dx}$. 1 point: $3y^2\\dfrac{dy}{dx}$ and the right side $0$. 1 point: solves for $\\dfrac{dy}{dx}$. Because the answer is given, each step must be shown."
+   },
+   {
+    "label": "(b)",
+    "question": "Find the slope of the curve at the point $(1,2)$.",
+    "points": 1,
+    "guide": "1 point: $-\\dfrac{4}{13}$."
+   },
+   {
+    "label": "(c)",
+    "question": "Write an equation of the line tangent to the curve at $(1,2)$, and use it to approximate the $y$-coordinate of the point on the curve where $x=1.1$.",
+    "points": 2,
+    "guide": "1 point: $y-2=-\\dfrac{4}{13}(x-1)$. 1 point: $y\\approx2-\\dfrac{0.4}{13}\\approx1.969$."
+   },
+   {
+    "label": "(d)",
+    "question": "Find the coordinates of every point on the curve at which the tangent line is horizontal. Justify your answer.",
+    "points": 3,
+    "guide": "1 point: the numerator must be zero, $2xy=0$, with the denominator non-zero. 1 point: $x=0$ gives $y^3=10$, the point $\\left(0,\\sqrt[3]{10}\\right)$. 1 point: $y=0$ is rejected because no point of the curve has $y=0$ (it would give $0=10$)."
+   }
+  ]
+ },
+ "3.3": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Explain why $f$ has an inverse function.",
+    "points": 2,
+    "guide": "1 point: $f'(x)=5x^4+1$. 1 point: $f'(x)\\gt0$ for all $x$, so $f$ is strictly increasing and therefore one-to-one."
+   },
+   {
+    "label": "(b)",
+    "question": "Find $\\left(f^{-1}\\right)'(4)$.",
+    "points": 2,
+    "guide": "1 point: $f(1)=4$, so $f^{-1}(4)=1$. 1 point: $\\dfrac{1}{f'(1)}=\\dfrac16$. An answer of $\\dfrac{1}{f'(4)}$ earns no points."
+   },
+   {
+    "label": "(c)",
+    "question": "Write an equation of the line tangent to the graph of $f^{-1}$ at $x=4$.",
+    "points": 2,
+    "guide": "1 point: the point $(4,1)$. 1 point: $y-1=\\dfrac16(x-4)$."
+   },
+   {
+    "label": "(d)",
+    "question": "Find $\\left(f^{-1}\\right)'(2)$. Show the work that leads to your answer.",
+    "points": 2,
+    "guide": "1 point: $f(0)=2$. 1 point: $\\dfrac{1}{f'(0)}=1$."
+   },
+   {
+    "label": "(e)",
+    "question": "A differentiable function $g$ has an inverse, with $g(3)=7$ and $g'(3)=-2$. Find $\\left(g^{-1}\\right)'(7)$.",
+    "points": 1,
+    "guide": "1 point: $\\dfrac{1}{g'(3)}=-\\dfrac12$."
+   }
+  ]
+ },
+ "3.4": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Let $f(x)=\\arctan(3x)$. Find $f'(x)$ and $f'\\!\\left(\\dfrac13\\right)$.",
+    "points": 2,
+    "guide": "1 point: $f'(x)=\\dfrac{3}{1+9x^2}$. 1 point: $\\dfrac32$."
+   },
+   {
+    "label": "(b)",
+    "question": "Find $\\dfrac{d}{dx}\\Big[\\arctan\\!\\left(x^2\\right)\\Big]$.",
+    "points": 2,
+    "guide": "1 point: $\\dfrac{1}{1+(x^2)^2}$. 1 point: the chain-rule factor, giving $\\dfrac{2x}{1+x^4}$."
+   },
+   {
+    "label": "(c)",
+    "question": "Write an equation of the line tangent to the graph of $y=\\arctan x$ at $x=1$.",
+    "points": 2,
+    "guide": "1 point: the point $\\left(1,\\dfrac\\pi4\\right)$ and slope $\\dfrac{1}{1+1}=\\dfrac12$. 1 point: $y-\\dfrac\\pi4=\\dfrac12(x-1)$."
+   },
+   {
+    "label": "(d)",
+    "question": "Let $g(x)=\\arcsin\\!\\left(\\dfrac x3\\right)$. Show that $g'(x)=\\dfrac{1}{\\sqrt{9-x^2}}$, and find $g'\\!\\left(\\sqrt5\\right)$.",
+    "points": 2,
+    "guide": "1 point: $\\dfrac{1}{\\sqrt{1-x^2/9}}\\cdot\\dfrac13$ simplified to $\\dfrac{1}{\\sqrt{9-x^2}}$. 1 point: $\\dfrac{1}{\\sqrt{9-5}}=\\dfrac12$."
+   },
+   {
+    "label": "(e)",
+    "question": "Evaluate $\\displaystyle\\lim_{h\\to 0}\\dfrac{\\arctan(1+h)-\\frac{\\pi}{4}}{h}$.",
+    "points": 1,
+    "guide": "1 point: the derivative of $\\arctan x$ at $x=1$, which is $\\dfrac12$."
+   }
+  ]
+ },
+ "3.5": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "$y=x^3\\ln x$",
+    "points": 2,
+    "guide": "1 point: product rule structure. 1 point: $3x^2\\ln x+x^2$."
+   },
+   {
+    "label": "(b)",
+    "question": "$y=\\sin^3(2x)$",
+    "points": 2,
+    "guide": "1 point: $3\\sin^2(2x)\\cdot\\cos(2x)$. 1 point: the further factor 2, giving $6\\sin^2(2x)\\cos(2x)$."
+   },
+   {
+    "label": "(c)",
+    "question": "$y=\\dfrac{e^{x}}{1+x^2}$",
+    "points": 2,
+    "guide": "1 point: quotient rule structure. 1 point: $\\dfrac{e^{x}(1+x^2)-2xe^{x}}{(1+x^2)^2}$, or equivalently $\\dfrac{e^{x}(x-1)^2}{(1+x^2)^2}$."
+   },
+   {
+    "label": "(d)",
+    "question": "$y=\\sqrt{x^2+\\tan x}$",
+    "points": 2,
+    "guide": "1 point: $\\dfrac{1}{2\\sqrt{x^2+\\tan x}}$. 1 point: multiplied by $2x+\\sec^2x$."
+   },
+   {
+    "label": "(e)",
+    "question": "For $y=\\ln(x\\cos x)$, state which rule is applied first, and why.",
+    "points": 1,
+    "guide": "1 point: the chain rule, because the last operation performed is the logarithm (the product is inside it). Also accept: rewrite as $\\ln x+\\ln(\\cos x)$ first, with the reason that the logarithm of a product is a sum."
+   }
+  ]
+ },
+ "3.6": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Let $f(x)=xe^{2x}$. Find $f'(x)$ and $f''(x)$.",
+    "points": 2,
+    "guide": "1 point: $f'(x)=e^{2x}+2xe^{2x}$. 1 point: $f''(x)=4e^{2x}+4xe^{2x}$."
+   },
+   {
+    "label": "(b)",
+    "question": "Let $y=\\ln(\\sin x)$ for $0\\lt x\\lt\\pi$. Find $\\dfrac{d^2y}{dx^2}$.",
+    "points": 2,
+    "guide": "1 point: $\\dfrac{dy}{dx}=\\cot x$. 1 point: $\\dfrac{d^2y}{dx^2}=-\\csc^2x$."
+   },
+   {
+    "label": "(c)",
+    "question": "For the curve $x^2+4y^2=20$, find $\\dfrac{dy}{dx}$ and $\\dfrac{d^2y}{dx^2}$ at the point $(2,2)$.",
+    "points": 3,
+    "guide": "1 point: $\\dfrac{dy}{dx}=-\\dfrac{x}{4y}=-\\dfrac14$ at $(2,2)$. 1 point: differentiates again with the quotient rule (or implicitly), treating $y$ as a function of $x$. 1 point: $\\dfrac{d^2y}{dx^2}=-\\dfrac{5}{32}$."
+   },
+   {
+    "label": "(d)",
+    "question": "A particle has position $s(t)=t^3-6t^2$. Find the time at which its acceleration is zero and its velocity at that time.",
+    "points": 2,
+    "guide": "1 point: $a(t)=6t-12=0$ at $t=2$. 1 point: $v(2)=3(4)-12(2)=-12$."
+   }
+  ]
+ },
+ "4.1": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Using correct units, interpret the meaning of $B'(20)=1.2$ in the context of the problem.",
+    "points": 2,
+    "guide": "1 point: at time $t=20$ minutes (an instant). 1 point: the charge is increasing at a rate of 1.2 percent per minute."
+   },
+   {
+    "label": "(b)",
+    "question": "Use the line tangent to the graph of $B$ at $t=20$ to approximate the charge at $t=25$.",
+    "points": 2,
+    "guide": "1 point: $45+1.2(25-20)$. 1 point: $51$ percent."
+   },
+   {
+    "label": "(c)",
+    "question": "Using correct units, interpret the meaning of $B''(20)=-0.03$ in the context of the problem.",
+    "points": 2,
+    "guide": "1 point: it describes the rate of change of the charging rate, with units of percent per minute per minute. 1 point: at $t=20$ minutes the rate at which the battery is charging is decreasing by 0.03 percent per minute each minute. A statement that the charge is decreasing earns no points."
+   },
+   {
+    "label": "(d)",
+    "question": "Assume $B''(t)\\lt0$ for $20\\le t\\le25$. Is your approximation in part (b) an overestimate or an underestimate? Give a reason.",
+    "points": 2,
+    "guide": "1 point: overestimate. 1 point: because $B''\\lt0$ the graph of $B$ is concave down on the interval, so the tangent line lies above the graph."
+   },
+   {
+    "label": "(e)",
+    "question": "The average rate of change of $B$ over $20\\le t\\le30$ is 1.0 percent per minute. Find $B(30)$.",
+    "points": 1,
+    "guide": "1 point: $45+1.0(10)=55$ percent."
+   }
+  ]
+ },
+ "4.2": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Find the velocity $v(t)$ and the acceleration $a(t)$ of the particle.",
+    "points": 2,
+    "guide": "1 point: $v(t)=3t^2-18t+15$. 1 point: $a(t)=6t-18$."
+   },
+   {
+    "label": "(b)",
+    "question": "Find the times at which the particle is at rest, and the interval on which it is moving to the left. Justify your answer.",
+    "points": 2,
+    "guide": "1 point: $v(t)=3(t-1)(t-5)=0$ at $t=1$ and $t=5$. 1 point: moving left for $1\\lt t\\lt5$ because $v(t)\\lt0$ there."
+   },
+   {
+    "label": "(c)",
+    "question": "Is the speed of the particle increasing or decreasing at time $t=2$? Give a reason for your answer.",
+    "points": 2,
+    "guide": "1 point: $v(2)=-9$ and $a(2)=-6$. 1 point: speed is increasing because velocity and acceleration have the same sign."
+   },
+   {
+    "label": "(d)",
+    "question": "Find the total distance travelled by the particle for $0\\le t\\le6$.",
+    "points": 3,
+    "guide": "1 point: positions at the turning points and endpoints, $x(0)=4$, $x(1)=11$, $x(5)=-21$, $x(6)=-14$ (or the equivalent integrals of $|v|$). 1 point: adds the three distances $7+32+7$. 1 point: answer $46$. The displacement, $-18$, earns no points."
+   }
+  ]
+ },
+ "4.3": {
+  "max": 9,
+  "calculator": true,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Find $M'(10)$. Indicate units of measure.",
+    "points": 2,
+    "guide": "1 point: $M'(10)=-20e^{-0.4}\\approx-13.406$. 1 point: grams per minute."
+   },
+   {
+    "label": "(b)",
+    "question": "Interpret your answer to part (a) in the context of the problem.",
+    "points": 2,
+    "guide": "1 point: at time $t=10$ minutes. 1 point: the mass of the ice is decreasing at about 13.406 grams per minute. \"Decreasing at $-13.406$\" loses the second point."
+   },
+   {
+    "label": "(c)",
+    "question": "At what time $t$ is the mass of the ice decreasing at 5 grams per minute?",
+    "points": 2,
+    "guide": "1 point: $-20e^{-0.04t}=-5$. 1 point: $t=25\\ln4\\approx34.657$ minutes."
+   },
+   {
+    "label": "(d)",
+    "question": "Find the average rate of change of the mass over the interval $0\\le t\\le10$.",
+    "points": 2,
+    "guide": "1 point: $\\dfrac{M(10)-M(0)}{10}$. 1 point: $-16.484$ grams per minute."
+   },
+   {
+    "label": "(e)",
+    "question": "Show that $M'(t)=-0.04\\,M(t)$ for all $t$.",
+    "points": 1,
+    "guide": "1 point: $M'(t)=500(-0.04)e^{-0.04t}=-0.04\\left(500e^{-0.04t}\\right)$."
+   }
+  ]
+ },
+ "4.4": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "The radius $r$ of a circular oil slick is increasing at 0.5 metres per second. Find the rate at which its area is increasing when $r=8$ metres.",
+    "points": 2,
+    "guide": "1 point: $\\dfrac{dA}{dt}=2\\pi r\\dfrac{dr}{dt}$. 1 point: $8\\pi$ square metres per second."
+   },
+   {
+    "label": "(b)",
+    "question": "The length $x$ of a rectangle is increasing at 2 cm/s and its width $y$ is decreasing at 1 cm/s. When $x=6$ and $y=8$, find the rate of change of (i) the area, (ii) the length of the diagonal.",
+    "points": 3,
+    "guide": "1 point: $\\dfrac{dA}{dt}=\\dfrac{dx}{dt}y+x\\dfrac{dy}{dt}=16-6=10$ cm²/s. 1 point: $D^2=x^2+y^2$ differentiated to $D\\dfrac{dD}{dt}=x\\dfrac{dx}{dt}+y\\dfrac{dy}{dt}$, with $\\dfrac{dy}{dt}=-1$. 1 point: $\\dfrac{dD}{dt}=\\dfrac{12-8}{10}=0.4$ cm/s."
+   },
+   {
+    "label": "(c)",
+    "question": "A cone has fixed height 9 cm. Its volume $V=\\tfrac13\\pi r^2h$ is increasing at $12\\pi$ cm³/s. Find the rate at which its radius is increasing when $r=2$ cm.",
+    "points": 2,
+    "guide": "1 point: $V=3\\pi r^2$, so $\\dfrac{dV}{dt}=6\\pi r\\dfrac{dr}{dt}$. 1 point: $\\dfrac{dr}{dt}=1$ cm/s."
+   },
+   {
+    "label": "(d)",
+    "question": "A car travels toward an intersection along a road, at distance $x$ from it; a second car travels away from the intersection along a perpendicular road, at distance $y$. Write an equation relating the rate of change of the distance $z$ between the cars to $\\dfrac{dx}{dt}$ and $\\dfrac{dy}{dt}$, and state the sign of each of those two rates.",
+    "points": 2,
+    "guide": "1 point: $z^2=x^2+y^2$ gives $z\\dfrac{dz}{dt}=x\\dfrac{dx}{dt}+y\\dfrac{dy}{dt}$. 1 point: $\\dfrac{dx}{dt}\\lt0$ (approaching) and $\\dfrac{dy}{dt}\\gt0$ (moving away)."
+   }
+  ]
+ },
+ "4.5": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Write an equation relating $x$ and $z$, and differentiate it with respect to time.",
+    "points": 2,
+    "guide": "1 point: $z^2=x^2+60^2$. 1 point: $2z\\dfrac{dz}{dt}=2x\\dfrac{dx}{dt}$. Substituting $z=100$ before differentiating earns no points."
+   },
+   {
+    "label": "(b)",
+    "question": "Find the rate at which string is being let out when 100 metres of string are out.",
+    "points": 2,
+    "guide": "1 point: $x=80$ when $z=100$. 1 point: $\\dfrac{dz}{dt}=\\dfrac{80\\cdot4}{100}=3.2$ metres per second."
+   },
+   {
+    "label": "(c)",
+    "question": "Find the rate at which $\\theta$ is changing at that moment.",
+    "points": 3,
+    "guide": "1 point: $\\tan\\theta=\\dfrac{60}{x}$ (or an equivalent relation). 1 point: $\\sec^2\\theta\\,\\dfrac{d\\theta}{dt}=-\\dfrac{60}{x^2}\\dfrac{dx}{dt}$. 1 point: with $\\cos\\theta=0.8$, $\\dfrac{d\\theta}{dt}=-0.024$ radians per second (the angle is decreasing)."
+   },
+   {
+    "label": "(d)",
+    "question": "Find the rate at which the area of the right triangle formed by the string, the horizontal and the vertical is changing.",
+    "points": 2,
+    "guide": "1 point: $A=\\dfrac12(60)x=30x$. 1 point: $\\dfrac{dA}{dt}=30(4)=120$ square metres per second."
+   }
+  ]
+ },
+ "4.6": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Write an equation of the line tangent to the graph of $f$ at $x=8$.",
+    "points": 2,
+    "guide": "1 point: $f(8)=2$ and $f'(8)=\\dfrac13(8)^{-2/3}=\\dfrac{1}{12}$. 1 point: $y=2+\\dfrac{1}{12}(x-8)$."
+   },
+   {
+    "label": "(b)",
+    "question": "Use your tangent line to approximate $\\sqrt[3]{8.3}$.",
+    "points": 1,
+    "guide": "1 point: $2+\\dfrac{0.3}{12}=2.025$."
+   },
+   {
+    "label": "(c)",
+    "question": "Is the approximation in part (b) greater than or less than the actual value? Justify your answer.",
+    "points": 2,
+    "guide": "1 point: $f''(x)=-\\dfrac29x^{-5/3}\\lt0$ for $x\\gt0$. 1 point: the graph is concave down near $x=8$, so the tangent line lies above it and the approximation is greater than the actual value."
+   },
+   {
+    "label": "(d)",
+    "question": "Use the line tangent to the graph of $g$ at $x=3$ to approximate $g(2.8)$.",
+    "points": 2,
+    "guide": "1 point: $g'(3)=5$. 1 point: $7+5(-0.2)=6$."
+   },
+   {
+    "label": "(e)",
+    "question": "Is the approximation in part (d) an overestimate or an underestimate of $g(2.8)$? Justify your answer.",
+    "points": 2,
+    "guide": "1 point: $g''(x)=\\dfrac{x}{\\sqrt{x^2+16}}\\gt0$ for $2.8\\le x\\le3$. 1 point: the graph of $g$ is concave up there, so the tangent line lies below it: an underestimate."
+   }
+  ]
+ },
+ "4.7": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "$\\displaystyle\\lim_{x\\to 0}\\dfrac{\\cos x-1}{x^2}$",
+    "points": 2,
+    "guide": "1 point: both numerator and denominator tend to 0, and the rule gives $\\displaystyle\\lim_{x\\to 0}\\dfrac{-\\sin x}{2x}$ (again of the form $\\tfrac00$). 1 point: a second application, or the known limit of $\\dfrac{\\sin x}{x}$, gives $-\\dfrac12$. Writing \"$=\\tfrac00$\" as a value loses the first point."
+   },
+   {
+    "label": "(b)",
+    "question": "$\\displaystyle\\lim_{x\\to \\infty}\\dfrac{\\ln x}{\\sqrt{x}}$",
+    "points": 2,
+    "guide": "1 point: both tend to infinity, and the rule gives $\\displaystyle\\lim_{x\\to \\infty}\\dfrac{1/x}{1/(2\\sqrt x)}$. 1 point: this is $\\displaystyle\\lim_{x\\to \\infty}\\dfrac{2}{\\sqrt x}=0$."
+   },
+   {
+    "label": "(c)",
+    "question": "$\\displaystyle\\lim_{x\\to 2}\\dfrac{x^3-8}{\\ln(x-1)}$",
+    "points": 2,
+    "guide": "1 point: $\\displaystyle\\lim_{x\\to 2}(x^3-8)=0$ and $\\displaystyle\\lim_{x\\to 2}\\ln(x-1)=0$ stated. 1 point: $\\displaystyle\\lim_{x\\to 2}\\dfrac{3x^2}{1/(x-1)}=12$."
+   },
+   {
+    "label": "(d)",
+    "question": "A differentiable function $f$ has $f(1)=0$ and $f'(1)=6$, and $f'$ is continuous. Find $\\displaystyle\\lim_{x\\to 1}\\dfrac{f(x)}{x^2-1}$.",
+    "points": 2,
+    "guide": "1 point: both $f(x)$ and $x^2-1$ tend to 0 as $x\\to1$ ($f$ is continuous because it is differentiable). 1 point: $\\displaystyle\\lim_{x\\to 1}\\dfrac{f'(x)}{2x}=\\dfrac62=3$."
+   },
+   {
+    "label": "(e)",
+    "question": "Explain why L'Hôpital's Rule cannot be used for $\\displaystyle\\lim_{x\\to 0}\\dfrac{x+2}{x+1}$, and give the value of the limit.",
+    "points": 1,
+    "guide": "1 point: the limit is not of an indeterminate form (numerator tends to 2, denominator to 1); by substitution it equals 2."
+   }
+  ]
+ },
+ "5.1": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Explain why the Mean Value Theorem applies to $f$ on the interval $[0,3]$.",
+    "points": 2,
+    "guide": "1 point: $f$ is continuous on $[0,3]$. 1 point: $f$ is differentiable on $(0,3)$ (a polynomial is both). Both conditions, with their intervals, are required for 2 points."
+   },
+   {
+    "label": "(b)",
+    "question": "Find the value of $c$ in $(0,3)$ guaranteed by the theorem.",
+    "points": 2,
+    "guide": "1 point: $\\dfrac{f(3)-f(0)}{3}=6$ and $f'(c)=3c^2-3$. 1 point: $c=\\sqrt3$ (the value $-\\sqrt3$ is not in the interval)."
+   },
+   {
+    "label": "(c)",
+    "question": "Must there be a value $c$, $1\\lt c\\lt5$, with $g'(c)=2$? Justify your answer.",
+    "points": 2,
+    "guide": "1 point: $\\dfrac{g(5)-g(1)}{5-1}=2$. 1 point: yes, by the Mean Value Theorem, since $g$ is differentiable and therefore continuous on $[1,5]$."
+   },
+   {
+    "label": "(d)",
+    "question": "Must there be a value $c$, $1\\lt c\\lt9$, with $g'(c)=0$? Justify your answer.",
+    "points": 2,
+    "guide": "1 point: $g(1)=g(9)$, so the average rate of change on $[1,9]$ is 0. 1 point: yes, by the Mean Value Theorem (or Rolle's Theorem), with the hypotheses stated."
+   },
+   {
+    "label": "(e)",
+    "question": "Explain why the Mean Value Theorem cannot be applied to $h(x)=|x-2|$ on $[0,5]$.",
+    "points": 1,
+    "guide": "1 point: $h$ is not differentiable at $x=2$, which lies in $(0,5)$."
+   }
+  ]
+ },
+ "5.2": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Find all critical points of $f$.",
+    "points": 2,
+    "guide": "1 point: $f'(x)=15x^4-15x^2=15x^2(x-1)(x+1)$. 1 point: $x=-1$, $x=0$ and $x=1$."
+   },
+   {
+    "label": "(b)",
+    "question": "Find the absolute maximum and absolute minimum values of $f$ on $[-2,2]$, and explain why they must exist.",
+    "points": 2,
+    "guide": "1 point: $f$ is continuous on a closed interval, so the Extreme Value Theorem guarantees both. 1 point: comparing $f(-2)=-56$, $f(-1)=2$, $f(0)=0$, $f(1)=-2$ and $f(2)=56$: maximum 56, minimum $-56$."
+   },
+   {
+    "label": "(c)",
+    "question": "Does $f$ have a relative extremum at $x=0$? Justify your answer.",
+    "points": 1,
+    "guide": "1 point: no; $f'(x)=15x^2(x^2-1)$ is negative on both sides of 0, so $f'$ does not change sign."
+   },
+   {
+    "label": "(d)",
+    "question": "Let $g(x)=x^{1/3}$. Explain why $x=0$ is a critical point of $g$, and determine whether $g$ has a relative extremum there.",
+    "points": 2,
+    "guide": "1 point: $g'(x)=\\dfrac13x^{-2/3}$ does not exist at $x=0$, and 0 is in the domain of $g$. 1 point: no extremum, because $g'(x)\\gt0$ on both sides."
+   },
+   {
+    "label": "(e)",
+    "question": "Let $k(x)=\\dfrac1x$ on the interval $(0,3]$. Find any absolute extrema of $k$, and explain why the Extreme Value Theorem does not apply.",
+    "points": 2,
+    "guide": "1 point: absolute minimum $\\dfrac13$ at $x=3$; no absolute maximum, since $k$ is unbounded as $x\\to0^+$. 1 point: the interval is not closed."
+   }
+  ]
+ },
+ "5.3": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Find $f'(x)$.",
+    "points": 2,
+    "guide": "1 point: quotient rule, $\\dfrac{(x^2+9)-2x^2}{(x^2+9)^2}$. 1 point: $f'(x)=\\dfrac{9-x^2}{(x^2+9)^2}$."
+   },
+   {
+    "label": "(b)",
+    "question": "Find the intervals on which $f$ is increasing and the intervals on which $f$ is decreasing. Justify your answer.",
+    "points": 3,
+    "guide": "1 point: critical points $x=\\pm3$. 1 point: increasing on $(-3,3)$ because $f'(x)\\gt0$ there. 1 point: decreasing on $(-\\infty,-3)$ and $(3,\\infty)$ because $f'(x)\\lt0$ there. Intervals with no reference to the sign of $f'$ earn at most 1 point."
+   },
+   {
+    "label": "(c)",
+    "question": "A function $g$ has derivative $g'(x)=(x-2)^2(x+1)e^{x}$. On what intervals is $g$ increasing? Justify your answer.",
+    "points": 2,
+    "guide": "1 point: $(x-2)^2\\ge0$ and $e^{x}\\gt0$, so the sign of $g'$ is the sign of $x+1$. 1 point: $g$ is increasing for $x\\gt-1$ (accept $(-1,2)$ and $(2,\\infty)$, or $(-1,\\infty)$)."
+   },
+   {
+    "label": "(d)",
+    "question": "A differentiable function $h$ satisfies $h'(x)\\gt0$ for $1\\lt x\\lt4$ and $h(1)=-3$. Is it possible that $h(4)=-5$? Explain.",
+    "points": 2,
+    "guide": "1 point: no. 1 point: $h$ is continuous on $[1,4]$ and increasing on the interval, so $h(4)\\gt h(1)=-3$ (or by the Mean Value Theorem, $h(4)-h(1)=3h'(c)\\gt0$)."
+   }
+  ]
+ },
+ "5.4": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Find the critical points of $f$.",
+    "points": 2,
+    "guide": "1 point: $f'(x)=6x^2+6x-36=6(x+3)(x-2)$. 1 point: $x=-3$ and $x=2$."
+   },
+   {
+    "label": "(b)",
+    "question": "Find the relative maximum and relative minimum values of $f$. Justify your answer.",
+    "points": 3,
+    "guide": "1 point: relative maximum at $x=-3$ because $f'$ changes from positive to negative there. 1 point: relative minimum at $x=2$ because $f'$ changes from negative to positive there. 1 point: the values $f(-3)=81$ and $f(2)=-44$. \"$f'=0$\" alone is not a justification."
+   },
+   {
+    "label": "(c)",
+    "question": "A function $g$ has derivative $g'(x)=x(x-4)^2(x+2)$. Find the $x$-coordinate of each relative extremum of $g$ and classify it. Justify your answer.",
+    "points": 2,
+    "guide": "1 point: relative maximum at $x=-2$ ($g'$ changes from positive to negative) and relative minimum at $x=0$ ($g'$ changes from negative to positive). 1 point: no extremum at $x=4$, because $g'$ is positive on both sides."
+   },
+   {
+    "label": "(d)",
+    "question": "Let $h(x)=x-2\\sqrt{x}$ for $x\\gt0$. Find and classify the relative extremum of $h$.",
+    "points": 2,
+    "guide": "1 point: $h'(x)=1-\\dfrac{1}{\\sqrt x}=0$ at $x=1$. 1 point: relative minimum, value $h(1)=-1$, since $h'$ changes from negative to positive."
+   }
+  ]
+ },
+ "5.5": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Find the critical points of $f$ in the interval $(-1,5)$.",
+    "points": 2,
+    "guide": "1 point: $f'(x)=3x^2-12x=3x(x-4)$. 1 point: $x=0$ and $x=4$."
+   },
+   {
+    "label": "(b)",
+    "question": "Find the absolute maximum and absolute minimum values of $f$ on $[-1,5]$. Justify your answer.",
+    "points": 3,
+    "guide": "1 point: evaluates $f$ at both critical points and both endpoints: $f(-1)=-2$, $f(0)=5$, $f(4)=-27$, $f(5)=-20$. 1 point: absolute maximum 5 (at $x=0$). 1 point: absolute minimum $-27$ (at $x=4$). Omitting the endpoints loses the first point."
+   },
+   {
+    "label": "(c)",
+    "question": "Find the absolute maximum and absolute minimum values of $g$ on $[0,4]$.",
+    "points": 2,
+    "guide": "1 point: $g'(x)=1-\\dfrac{1}{2\\sqrt x}=0$ at $x=\\dfrac14$. 1 point: comparing $g(0)=0$, $g\\!\\left(\\dfrac14\\right)=-\\dfrac14$ and $g(4)=2$: maximum 2, minimum $-\\dfrac14$."
+   },
+   {
+    "label": "(d)",
+    "question": "A student writes: \"$f'(0)=0$ and $f'$ changes from positive to negative at $x=0$, so the absolute maximum of $f$ on $[-1,5]$ is at $x=0$.\" Explain what is missing from this justification.",
+    "points": 2,
+    "guide": "1 point: the sign change shows only a relative maximum. 1 point: an absolute maximum on a closed interval requires comparing the value there with the values at the endpoints (and any other critical points)."
+   }
+  ]
+ },
+ "5.6": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Find $f''(x)$.",
+    "points": 2,
+    "guide": "1 point: $f'(x)=e^{x}+xe^{x}$. 1 point: $f''(x)=(x+2)e^{x}$."
+   },
+   {
+    "label": "(b)",
+    "question": "Find the intervals on which the graph of $f$ is concave up and concave down, and the coordinates of its point of inflection.",
+    "points": 2,
+    "guide": "1 point: concave down for $x\\lt-2$ and concave up for $x\\gt-2$, from the sign of $f''$. 1 point: the point $\\left(-2,-2e^{-2}\\right)$."
+   },
+   {
+    "label": "(c)",
+    "question": "Find all values of $x$ at which the graph of $g$ has a point of inflection. Justify your answer.",
+    "points": 3,
+    "guide": "1 point: $g''(x)=20x^3-60x^2=20x^2(x-3)$. 1 point: a point of inflection at $x=3$, where $g''$ changes sign from negative to positive. 1 point: none at $x=0$, because $g''\\le0$ on both sides. Listing $x=0$ as a point of inflection loses the last point."
+   },
+   {
+    "label": "(d)",
+    "question": "A function $h$ has second derivative $h''(x)=(x-1)(x+4)$. On what interval is the graph of $h$ concave down, and where are its points of inflection?",
+    "points": 2,
+    "guide": "1 point: concave down on $(-4,1)$. 1 point: points of inflection at $x=-4$ and $x=1$, where $h''$ changes sign."
+   }
+  ]
+ },
+ "5.7": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Find the critical point of $f$.",
+    "points": 2,
+    "guide": "1 point: $f'(x)=2x-\\dfrac{16}{x^2}$. 1 point: $x=2$."
+   },
+   {
+    "label": "(b)",
+    "question": "Use the second derivative test to classify the critical point, and find the value of $f$ there.",
+    "points": 2,
+    "guide": "1 point: $f''(x)=2+\\dfrac{32}{x^3}$ and $f''(2)=6\\gt0$. 1 point: a relative minimum, with $f(2)=12$."
+   },
+   {
+    "label": "(c)",
+    "question": "Explain why $f(2)$ is the absolute minimum value of $f$ on $(0,\\infty)$.",
+    "points": 2,
+    "guide": "1 point: $x=2$ is the only critical point. 1 point: $f''(x)\\gt0$ for all $x\\gt0$, so the graph is concave up on the whole interval (or $f'$ is negative before 2 and positive after). $f''(2)\\gt0$ alone is not sufficient."
+   },
+   {
+    "label": "(d)",
+    "question": "A twice-differentiable function $g$ has $g'(3)=0$, $g''(3)=-4$, $g'(5)=0$ and $g''(5)=0$. What does the second derivative test conclude at $x=3$ and at $x=5$?",
+    "points": 2,
+    "guide": "1 point: a relative maximum at $x=3$. 1 point: the test is inconclusive at $x=5$."
+   },
+   {
+    "label": "(e)",
+    "question": "A function $y=f(x)$ satisfies $\\dfrac{dy}{dx}=3x-y$ and passes through $(1,3)$. Show that it has a relative minimum there.",
+    "points": 1,
+    "guide": "1 point: $\\dfrac{dy}{dx}=0$ at $(1,3)$, and $\\dfrac{d^2y}{dx^2}=3-\\dfrac{dy}{dx}=3\\gt0$."
+   }
+  ]
+ },
+ "5.8": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Write an equation for the horizontal asymptote of the graph of $f$.",
+    "points": 1,
+    "guide": "1 point: $y=1$."
+   },
+   {
+    "label": "(b)",
+    "question": "Find $f'(x)$ and the intervals on which $f$ is increasing and decreasing.",
+    "points": 2,
+    "guide": "1 point: $f'(x)=\\dfrac{6x}{(x^2+3)^2}$. 1 point: decreasing for $x\\lt0$ and increasing for $x\\gt0$."
+   },
+   {
+    "label": "(c)",
+    "question": "Find the coordinates of the relative extremum of $f$ and classify it. Justify your answer.",
+    "points": 2,
+    "guide": "1 point: the point $(0,0)$. 1 point: a relative (and absolute) minimum because $f'$ changes from negative to positive at $x=0$."
+   },
+   {
+    "label": "(d)",
+    "question": "Find $f''(x)$, the intervals of concavity, and the coordinates of the points of inflection.",
+    "points": 3,
+    "guide": "1 point: $f''(x)=\\dfrac{18(1-x^2)}{(x^2+3)^3}$. 1 point: concave up on $(-1,1)$ and concave down on $(-\\infty,-1)$ and $(1,\\infty)$. 1 point: points of inflection $\\left(-1,\\dfrac14\\right)$ and $\\left(1,\\dfrac14\\right)$."
+   },
+   {
+    "label": "(e)",
+    "question": "State the range of $f$.",
+    "points": 1,
+    "guide": "1 point: $0\\le y\\lt1$."
+   }
+  ]
+ },
+ "5.9": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Find the $x$-coordinates of all relative maxima of $f$. Justify your answer.",
+    "points": 2,
+    "guide": "1 point: $x=-\\dfrac32$ and $x=3$. 1 point: $f'$ changes from positive to negative at each."
+   },
+   {
+    "label": "(b)",
+    "question": "Find the $x$-coordinate of the relative minimum of $f$. Justify your answer.",
+    "points": 2,
+    "guide": "1 point: $x=0$. 1 point: $f'$ changes from negative to positive there."
+   },
+   {
+    "label": "(c)",
+    "question": "On what interval is the graph of $f$ concave up? Give a reason for your answer.",
+    "points": 2,
+    "guide": "1 point: $(-1,2)$. 1 point: $f'$ is increasing on that interval (equivalently $f''\\gt0$)."
+   },
+   {
+    "label": "(d)",
+    "question": "Find the $x$-coordinates of the points of inflection of the graph of $f$. Give a reason for your answer.",
+    "points": 2,
+    "guide": "1 point: $x=-1$ and $x=2$. 1 point: $f'$ changes from decreasing to increasing, or from increasing to decreasing, at these values."
+   },
+   {
+    "label": "(e)",
+    "question": "Find $f''(1)$.",
+    "points": 1,
+    "guide": "1 point: the slope of the segment from $(-1,-1)$ to $(2,2)$, which is 1."
+   }
+  ]
+ },
+ "5.10": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Write the area $A$ of the pen as a function of $x$, and state the domain of the function.",
+    "points": 2,
+    "guide": "1 point: $3x+y=120$, so $A(x)=x(120-3x)$. 1 point: $0\\lt x\\lt40$."
+   },
+   {
+    "label": "(b)",
+    "question": "Find the value of $x$ at which $A'(x)=0$.",
+    "points": 2,
+    "guide": "1 point: $A'(x)=120-6x$. 1 point: $x=20$."
+   },
+   {
+    "label": "(c)",
+    "question": "Justify that this value of $x$ gives the greatest possible area.",
+    "points": 2,
+    "guide": "1 point: an argument such as $A''(x)=-6\\lt0$ for all $x$, or $A'$ changes from positive to negative at $x=20$. 1 point: the argument is global: the only critical point with the graph concave down throughout, or comparison with $A\\to0$ at both ends of the domain."
+   },
+   {
+    "label": "(d)",
+    "question": "State the dimensions and the area of the largest pen.",
+    "points": 1,
+    "guide": "1 point: $x=20$ m, $y=60$ m, area 1200 m²."
+   },
+   {
+    "label": "(e)",
+    "question": "Find the point on the line $y=2x+5$ that is closest to the origin.",
+    "points": 2,
+    "guide": "1 point: minimises $D^2=x^2+(2x+5)^2$, with derivative $2x+4(2x+5)=0$. 1 point: $x=-2$, giving the point $(-2,1)$."
+   }
+  ]
+ },
+ "5.11": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Show that $\\dfrac{dy}{dx}=\\dfrac{y-x}{3y-x}$.",
+    "points": 2,
+    "guide": "1 point: $2x-2y-2x\\dfrac{dy}{dx}+6y\\dfrac{dy}{dx}=0$. 1 point: solves to the given form."
+   },
+   {
+    "label": "(b)",
+    "question": "Find the coordinates of the points on the curve at which the tangent line is horizontal.",
+    "points": 2,
+    "guide": "1 point: $y=x$ substituted into the curve gives $2x^2=18$. 1 point: $(3,3)$ and $(-3,-3)$."
+   },
+   {
+    "label": "(c)",
+    "question": "Find the coordinates of the points on the curve at which the tangent line is vertical.",
+    "points": 2,
+    "guide": "1 point: $x=3y$ substituted gives $6y^2=18$. 1 point: $\\left(3\\sqrt3,\\sqrt3\\right)$ and $\\left(-3\\sqrt3,-\\sqrt3\\right)$."
+   },
+   {
+    "label": "(d)",
+    "question": "Find the value of $\\dfrac{d^2y}{dx^2}$ at the point $(3,3)$, and determine whether the curve has a relative maximum, a relative minimum or neither at that point. Justify your answer.",
+    "points": 3,
+    "guide": "1 point: differentiates $(3y-x)\\dfrac{dy}{dx}=y-x$ (or the quotient) with respect to $x$. 1 point: with $\\dfrac{dy}{dx}=0$ this gives $6\\dfrac{d^2y}{dx^2}=-1$, so $\\dfrac{d^2y}{dx^2}=-\\dfrac16$. 1 point: a relative maximum, because the first derivative is 0 and the second is negative."
+   }
+  ]
+ },
+ "6.1": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "How many litres of water flow into the tank during $0\\le t\\le12$?",
+    "points": 2,
+    "guide": "1 point: the three areas $20$, $42$ and $7$ (a trapezoid, a rectangle and a triangle). 1 point: total 69 litres."
+   },
+   {
+    "label": "(b)",
+    "question": "How many litres of water are in the tank at time $t=10$?",
+    "points": 2,
+    "guide": "1 point: $25+(20+42)$. 1 point: 87 litres. An answer of 62 (the change alone) earns 1 point."
+   },
+   {
+    "label": "(c)",
+    "question": "Explain, with units, the meaning of $R(4)=7$ and the meaning of the area under the graph of $R$ from $t=4$ to $t=10$.",
+    "points": 2,
+    "guide": "1 point: at $t=4$ minutes water is flowing in at 7 litres per minute. 1 point: 42 litres of water flow into the tank between $t=4$ and $t=10$ minutes."
+   },
+   {
+    "label": "(d)",
+    "question": "At what time have exactly 41 litres of water flowed into the tank?",
+    "points": 2,
+    "guide": "1 point: 20 litres by $t=4$, leaving 21 more at 7 litres per minute. 1 point: $t=7$."
+   },
+   {
+    "label": "(e)",
+    "question": "Find the average rate at which water flows into the tank over $0\\le t\\le12$.",
+    "points": 1,
+    "guide": "1 point: $\\dfrac{69}{12}=5.75$ litres per minute."
+   }
+  ]
+ },
+ "6.2": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Approximate $\\displaystyle\\int_0^{14}v(t)\\,dt$ using a left Riemann sum with the four subintervals indicated by the table.",
+    "points": 2,
+    "guide": "1 point: $(2)(5)+(4)(9)+(3)(14)+(5)(12)$, with the correct unequal widths. 1 point: 148."
+   },
+   {
+    "label": "(b)",
+    "question": "Approximate the same integral using a right Riemann sum with the four subintervals.",
+    "points": 2,
+    "guide": "1 point: $(2)(9)+(4)(14)+(3)(12)+(5)(4)$. 1 point: 130."
+   },
+   {
+    "label": "(c)",
+    "question": "Approximate the same integral using a trapezoidal sum with the four subintervals.",
+    "points": 2,
+    "guide": "1 point: $\\tfrac12(5+9)(2)+\\tfrac12(9+14)(4)+\\tfrac12(14+12)(3)+\\tfrac12(12+4)(5)$ (or the mean of the answers to (a) and (b)). 1 point: 139."
+   },
+   {
+    "label": "(d)",
+    "question": "Using correct units, explain the meaning of $\\displaystyle\\int_0^{14}v(t)\\,dt$ in the context of the problem.",
+    "points": 2,
+    "guide": "1 point: the distance the cyclist travels (her change in position), in metres. 1 point: from $t=0$ to $t=14$ seconds."
+   },
+   {
+    "label": "(e)",
+    "question": "Can it be determined from the table whether the left Riemann sum is an overestimate or an underestimate? Explain.",
+    "points": 1,
+    "guide": "1 point: no; the values rise and then fall, so $v$ is not monotonic on $[0,14]$ and neither rule applies."
+   }
+  ]
+ },
+ "6.3": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Write $\\displaystyle\\lim_{n\\to\\infty}\\sum_{i=1}^{n}\\left(3+\\frac{2i}{n}\\right)^{3}\\cdot\\frac{2}{n}$ as a definite integral.",
+    "points": 2,
+    "guide": "1 point: limits from $\\Delta x=\\dfrac2n$ and $x_i=3+\\dfrac{2i}{n}$: the interval $[3,5]$. 1 point: $\\displaystyle\\int_3^5x^3\\,dx$ (or the equivalent $\\displaystyle\\int_0^2(3+x)^3dx$)."
+   },
+   {
+    "label": "(b)",
+    "question": "Write $\\displaystyle\\int_0^4\\sqrt{1+x}\\,dx$ as the limit of a right Riemann sum.",
+    "points": 2,
+    "guide": "1 point: $\\Delta x=\\dfrac4n$ and $x_i=\\dfrac{4i}{n}$. 1 point: $\\displaystyle\\lim_{n\\to\\infty}\\sum_{i=1}^{n}\\sqrt{1+\\frac{4i}{n}}\\cdot\\frac4n$."
+   },
+   {
+    "label": "(c)",
+    "question": "Use geometry to evaluate $\\displaystyle\\int_{-5}^{5}\\sqrt{25-x^2}\\,dx$.",
+    "points": 2,
+    "guide": "1 point: identifies a semicircle of radius 5. 1 point: $\\dfrac{25\\pi}{2}$."
+   },
+   {
+    "label": "(d)",
+    "question": "Use geometry to evaluate $\\displaystyle\\int_0^6(x-2)\\,dx$.",
+    "points": 2,
+    "guide": "1 point: a triangle of area 2 below the axis on $[0,2]$ and a triangle of area 8 above it on $[2,6]$. 1 point: $-2+8=6$."
+   },
+   {
+    "label": "(e)",
+    "question": "Use geometry to evaluate $\\displaystyle\\int_{-2}^{1}|x|\\,dx$.",
+    "points": 1,
+    "guide": "1 point: $2+\\dfrac12=\\dfrac52$."
+   }
+  ]
+ },
+ "6.4": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Find $g'(x)$ and $g'(3)$.",
+    "points": 2,
+    "guide": "1 point: $g'(x)=x^2-4$. 1 point: $g'(3)=5$."
+   },
+   {
+    "label": "(b)",
+    "question": "Find $\\dfrac{d}{dx}\\displaystyle\\int_0^{x^2}\\cos t\\,dt$.",
+    "points": 2,
+    "guide": "1 point: $\\cos\\!\\left(x^2\\right)$. 1 point: the chain-rule factor, giving $2x\\cos\\!\\left(x^2\\right)$."
+   },
+   {
+    "label": "(c)",
+    "question": "Find $F(2)$ and $F'(2)$.",
+    "points": 2,
+    "guide": "1 point: $F(2)=0$, since the limits of integration are equal. 1 point: $F'(2)=\\sqrt{9}=3$."
+   },
+   {
+    "label": "(d)",
+    "question": "Write an equation of the line tangent to the graph of $F$ at $x=2$.",
+    "points": 2,
+    "guide": "1 point: uses the point $(2,0)$ and slope 3 from part (c). 1 point: $y=3(x-2)$."
+   },
+   {
+    "label": "(e)",
+    "question": "Find $\\dfrac{d}{dx}\\displaystyle\\int_x^3\\ln\\!\\left(1+t^2\\right)dt$.",
+    "points": 1,
+    "guide": "1 point: $-\\ln\\!\\left(1+x^2\\right)$."
+   }
+  ]
+ },
+ "6.5": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Find $g(4)$ and $g'(4)$.",
+    "points": 2,
+    "guide": "1 point: $g(4)=4-2=2$. 1 point: $g'(4)=f(4)=-2$."
+   },
+   {
+    "label": "(b)",
+    "question": "Find the $x$-coordinate of each relative extremum of $g$ on $(0,8)$ and classify it. Justify your answer.",
+    "points": 2,
+    "guide": "1 point: relative maximum at $x=2$, because $g'=f$ changes from positive to negative. 1 point: relative minimum at $x=6$, because $g'=f$ changes from negative to positive."
+   },
+   {
+    "label": "(c)",
+    "question": "Find the absolute maximum and absolute minimum values of $g$ on $[0,8]$. Justify your answer.",
+    "points": 2,
+    "guide": "1 point: the candidates $g(0)=0$, $g(2)=4$, $g(6)=0$ and $g(8)=3$. 1 point: maximum 4 and minimum 0."
+   },
+   {
+    "label": "(d)",
+    "question": "On what interval is the graph of $g$ concave up, and where is its point of inflection? Give a reason.",
+    "points": 2,
+    "guide": "1 point: concave up on $(4,8)$, where $g'=f$ is increasing. 1 point: point of inflection at $x=4$, where $f$ changes from decreasing to increasing."
+   },
+   {
+    "label": "(e)",
+    "question": "Find $g''(1)$.",
+    "points": 1,
+    "guide": "1 point: the slope of $f$ on $(0,2)$, which is $-2$."
+   }
+  ]
+ },
+ "6.6": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Find $\\displaystyle\\int_0^8f(x)\\,dx$.",
+    "points": 1,
+    "guide": "1 point: $4+(-6)=-2$."
+   },
+   {
+    "label": "(b)",
+    "question": "Find $\\displaystyle\\int_0^8\\big[2f(x)-3g(x)\\big]dx$.",
+    "points": 2,
+    "guide": "1 point: $2(-2)-3(5)$. 1 point: $-19$. Follow through from part (a)."
+   },
+   {
+    "label": "(c)",
+    "question": "Find $\\displaystyle\\int_8^3f(x)\\,dx$ and $\\displaystyle\\int_3^3g(x)\\,dx$.",
+    "points": 2,
+    "guide": "1 point: $6$. 1 point: $0$."
+   },
+   {
+    "label": "(d)",
+    "question": "Find $\\displaystyle\\int_0^8\\big[g(x)+2\\big]dx$.",
+    "points": 2,
+    "guide": "1 point: the constant integrates to $2\\times8=16$. 1 point: $21$. An answer of 7 earns no points."
+   },
+   {
+    "label": "(e)",
+    "question": "Suppose in addition that $f$ is an even function. Find $\\displaystyle\\int_{-3}^{3}f(x)\\,dx$ and $\\displaystyle\\int_{-3}^{0}f(x)\\,dx$.",
+    "points": 2,
+    "guide": "1 point: $8$. 1 point: $4$."
+   }
+  ]
+ },
+ "6.7": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Evaluate $\\displaystyle\\int_1^4\\left(3\\sqrt{x}-\\frac{2}{x^2}\\right)dx$.",
+    "points": 2,
+    "guide": "1 point: antiderivative $2x^{3/2}+\\dfrac2x$. 1 point: $\\left(16+\\dfrac12\\right)-(2+2)=\\dfrac{25}{2}$."
+   },
+   {
+    "label": "(b)",
+    "question": "Evaluate $\\displaystyle\\int_0^{\\pi/4}\\sec^2x\\,dx$.",
+    "points": 2,
+    "guide": "1 point: antiderivative $\\tan x$. 1 point: $1$."
+   },
+   {
+    "label": "(c)",
+    "question": "A function $f$ satisfies $f(2)=3$ and $f'(x)=6x-x^2$. Find $f(5)$.",
+    "points": 2,
+    "guide": "1 point: $f(5)=3+\\displaystyle\\int_2^5(6x-x^2)\\,dx$. 1 point: $3+24=27$. An answer of 24 earns the integral only if the set-up is shown."
+   },
+   {
+    "label": "(d)",
+    "question": "Evaluate $\\displaystyle\\int_0^4|x-3|\\,dx$.",
+    "points": 2,
+    "guide": "1 point: splits at $x=3$. 1 point: $\\dfrac92+\\dfrac12=5$."
+   },
+   {
+    "label": "(e)",
+    "question": "Evaluate $\\displaystyle\\int_1^e\\frac{3}{x}\\,dx$.",
+    "points": 1,
+    "guide": "1 point: $3\\ln e-3\\ln1=3$."
+   }
+  ]
+ },
+ "6.8": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Find $\\displaystyle\\int\\left(4x^3-6\\sqrt{x}+\\frac{5}{x}\\right)dx$.",
+    "points": 2,
+    "guide": "1 point: $x^4-4x^{3/2}$. 1 point: $+5\\ln|x|+C$. A missing constant of integration loses 1 point once in the question, not in every part."
+   },
+   {
+    "label": "(b)",
+    "question": "Find $\\displaystyle\\int\\left(\\sec x\\tan x+3\\cos x\\right)dx$.",
+    "points": 2,
+    "guide": "1 point: $\\sec x$. 1 point: $+3\\sin x+C$."
+   },
+   {
+    "label": "(c)",
+    "question": "A function $f$ satisfies $f''(x)=12x-4$, $f'(0)=3$ and $f(0)=-1$. Find $f(x)$.",
+    "points": 2,
+    "guide": "1 point: $f'(x)=6x^2-4x+3$. 1 point: $f(x)=2x^3-2x^2+3x-1$."
+   },
+   {
+    "label": "(d)",
+    "question": "A particle has velocity $v(t)=4e^{t}-2$ and position $x(0)=5$. Find $x(t)$.",
+    "points": 2,
+    "guide": "1 point: $x(t)=4e^{t}-2t+C$. 1 point: $C=1$, so $x(t)=4e^{t}-2t+1$."
+   },
+   {
+    "label": "(e)",
+    "question": "Find $\\displaystyle\\int\\left(x^2-2\\right)^2dx$.",
+    "points": 1,
+    "guide": "1 point: expands to $x^4-4x^2+4$ and obtains $\\dfrac{x^5}{5}-\\dfrac{4x^3}{3}+4x+C$."
+   }
+  ]
+ },
+ "6.9": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Find $\\displaystyle\\int2x\\cos\\!\\left(x^2+3\\right)dx$.",
+    "points": 2,
+    "guide": "1 point: the substitution $u=x^2+3$, $du=2x\\,dx$. 1 point: $\\sin\\!\\left(x^2+3\\right)+C$."
+   },
+   {
+    "label": "(b)",
+    "question": "Evaluate $\\displaystyle\\int_0^2\\frac{x^2}{x^3+1}\\,dx$.",
+    "points": 2,
+    "guide": "1 point: $u=x^3+1$ with limits changed to 1 and 9 (or back-substitution before evaluating). 1 point: $\\dfrac13\\ln9$ (equivalently $\\dfrac23\\ln3$)."
+   },
+   {
+    "label": "(c)",
+    "question": "Evaluate $\\displaystyle\\int_0^{\\pi/2}e^{\\sin x}\\cos x\\,dx$.",
+    "points": 2,
+    "guide": "1 point: $u=\\sin x$, limits 0 and 1. 1 point: $e-1$."
+   },
+   {
+    "label": "(d)",
+    "question": "Find $\\displaystyle\\int\\frac{x}{\\sqrt{x^2+4}}\\,dx$.",
+    "points": 2,
+    "guide": "1 point: $u=x^2+4$, giving $\\dfrac12\\displaystyle\\int u^{-1/2}du$. 1 point: $\\sqrt{x^2+4}+C$."
+   },
+   {
+    "label": "(e)",
+    "question": "If $\\displaystyle\\int_1^7f(x)\\,dx=10$, find $\\displaystyle\\int_0^2f(3x+1)\\,dx$.",
+    "points": 1,
+    "guide": "1 point: with $u=3x+1$ the integral is $\\dfrac13\\displaystyle\\int_1^7f(u)\\,du=\\dfrac{10}{3}$."
+   }
+  ]
+ },
+ "6.10": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Find $\\displaystyle\\int\\frac{x^2+3x+1}{x}\\,dx$.",
+    "points": 2,
+    "guide": "1 point: divides to $x+3+\\dfrac1x$. 1 point: $\\dfrac{x^2}{2}+3x+\\ln|x|+C$."
+   },
+   {
+    "label": "(b)",
+    "question": "Find $\\displaystyle\\int\\frac{x^2}{x+1}\\,dx$.",
+    "points": 2,
+    "guide": "1 point: long division, $x-1+\\dfrac{1}{x+1}$. 1 point: $\\dfrac{x^2}{2}-x+\\ln|x+1|+C$."
+   },
+   {
+    "label": "(c)",
+    "question": "Find $\\displaystyle\\int\\frac{1}{x^2+6x+13}\\,dx$.",
+    "points": 3,
+    "guide": "1 point: completes the square, $(x+3)^2+4$. 1 point: recognises the arctangent form with $a=2$. 1 point: $\\dfrac12\\arctan\\!\\left(\\dfrac{x+3}{2}\\right)+C$. Omitting the factor $\\dfrac12$ loses the last point."
+   },
+   {
+    "label": "(d)",
+    "question": "Evaluate $\\displaystyle\\int_0^1\\frac{4}{1+x^2}\\,dx$.",
+    "points": 2,
+    "guide": "1 point: $4\\arctan x$. 1 point: $4\\cdot\\dfrac\\pi4=\\pi$."
+   }
+  ]
+ },
+ "6.11": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "$\\displaystyle\\int\\frac{(\\ln x)^3}{x}\\,dx$",
+    "points": 2,
+    "guide": "1 point: substitution $u=\\ln x$. 1 point: $\\dfrac{(\\ln x)^4}{4}+C$."
+   },
+   {
+    "label": "(b)",
+    "question": "$\\displaystyle\\int\\frac{x+1}{x^2+2x+5}\\,dx$",
+    "points": 2,
+    "guide": "1 point: substitution $u=x^2+2x+5$, noting $du=2(x+1)\\,dx$. 1 point: $\\dfrac12\\ln\\!\\left(x^2+2x+5\\right)+C$."
+   },
+   {
+    "label": "(c)",
+    "question": "$\\displaystyle\\int\\frac{1}{x^2+2x+5}\\,dx$",
+    "points": 2,
+    "guide": "1 point: completes the square, $(x+1)^2+4$. 1 point: $\\dfrac12\\arctan\\!\\left(\\dfrac{x+1}{2}\\right)+C$."
+   },
+   {
+    "label": "(d)",
+    "question": "$\\displaystyle\\int\\frac{x^3+1}{x^2}\\,dx$",
+    "points": 2,
+    "guide": "1 point: divides each term, $x+x^{-2}$. 1 point: $\\dfrac{x^2}{2}-\\dfrac1x+C$."
+   },
+   {
+    "label": "(e)",
+    "question": "Explain why the substitution $u=x^2$ does not help with $\\displaystyle\\int e^{x^2}dx$, although it does with $\\displaystyle\\int xe^{x^2}dx$.",
+    "points": 1,
+    "guide": "1 point: $du=2x\\,dx$ requires a factor of $x$ in the integrand, which the first integral lacks."
+   }
+  ]
+ },
+ "6.12": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Approximate $\\displaystyle\\int_0^8f(x)\\,dx$ using a trapezoidal sum with the three subintervals indicated by the table.",
+    "points": 2,
+    "guide": "1 point: $\\tfrac12(2+6)(3)+\\tfrac12(6+5)(2)+\\tfrac12(5-1)(3)$. 1 point: $12+11+6=29$."
+   },
+   {
+    "label": "(b)",
+    "question": "Find the exact value of $\\displaystyle\\int_0^8f'(x)\\,dx$.",
+    "points": 2,
+    "guide": "1 point: the Fundamental Theorem, $f(8)-f(0)$. 1 point: $-3$. A Riemann-sum estimate earns no points."
+   },
+   {
+    "label": "(c)",
+    "question": "Find $\\displaystyle\\int_0^8\\big[3f'(x)+2\\big]dx$.",
+    "points": 2,
+    "guide": "1 point: $3(-3)+2(8)$. 1 point: $7$."
+   },
+   {
+    "label": "(d)",
+    "question": "Find the average value of $f'$ on $[0,8]$. Must there be a number $c$ in $(0,8)$ at which $f'(c)$ equals this value? Justify your answer.",
+    "points": 2,
+    "guide": "1 point: $\\dfrac18(-3)=-\\dfrac38$. 1 point: yes, by the Mean Value Theorem applied to $f$ on $[0,8]$, since $f$ is differentiable (and so continuous) there."
+   },
+   {
+    "label": "(e)",
+    "question": "Find $\\displaystyle\\int_3^5f'(x)\\,dx$.",
+    "points": 1,
+    "guide": "1 point: $f(5)-f(3)=-1$."
+   }
+  ]
+ },
+ "6.13": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Find $G'(x)$ and $G''(x)$.",
+    "points": 2,
+    "guide": "1 point: $G'(x)=x^2-5x+4$. 1 point: $G''(x)=2x-5$."
+   },
+   {
+    "label": "(b)",
+    "question": "Find the $x$-coordinate of each relative extremum of $G$ on $(0,6)$ and classify it. Justify your answer.",
+    "points": 2,
+    "guide": "1 point: relative maximum at $x=1$, where $G'=(x-1)(x-4)$ changes from positive to negative. 1 point: relative minimum at $x=4$, where $G'$ changes from negative to positive."
+   },
+   {
+    "label": "(c)",
+    "question": "Find $G(1)$ and $G(4)$.",
+    "points": 2,
+    "guide": "1 point: $G(1)=\\dfrac13-\\dfrac52+4=\\dfrac{11}{6}$. 1 point: $G(4)=\\dfrac{64}{3}-40+16=-\\dfrac83$."
+   },
+   {
+    "label": "(d)",
+    "question": "Find the absolute maximum value of $G$ on $[0,6]$. Justify your answer.",
+    "points": 2,
+    "guide": "1 point: compares $G(0)=0$, $G(1)=\\dfrac{11}{6}$, $G(4)=-\\dfrac83$ and $G(6)=6$. 1 point: the absolute maximum is 6, at the endpoint $x=6$."
+   },
+   {
+    "label": "(e)",
+    "question": "Find the $x$-coordinate of the point of inflection of the graph of $G$.",
+    "points": 1,
+    "guide": "1 point: $x=\\dfrac52$, where $G''$ changes sign."
+   }
+  ]
+ },
+ "7.1": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "The rate of change of a population $P$ is proportional to the square root of $P$. Write a differential equation for $P$.",
+    "points": 2,
+    "guide": "1 point: a derivative $\\dfrac{dP}{dt}$ on the left. 1 point: $\\dfrac{dP}{dt}=k\\sqrt{P}$, with a constant of proportionality."
+   },
+   {
+    "label": "(b)",
+    "question": "For the population in part (a), $\\dfrac{dP}{dt}=30$ when $P=900$. Find the constant of proportionality.",
+    "points": 2,
+    "guide": "1 point: $30=k\\sqrt{900}$. 1 point: $k=1$."
+   },
+   {
+    "label": "(c)",
+    "question": "A tank contains $A$ grams of a dissolved chemical. The chemical is added at 6 grams per minute, and it leaves at a rate equal to 2% of the amount present per minute. Write a differential equation for $A$, and find the amount at which $A$ is not changing.",
+    "points": 2,
+    "guide": "1 point: $\\dfrac{dA}{dt}=6-0.02A$. 1 point: $A=300$ grams."
+   },
+   {
+    "label": "(d)",
+    "question": "The temperature $T$ of an object in a room at 18 °C changes at a rate proportional to the difference between $T$ and 18. When $T=78$ the object is cooling at 2.4 °C per minute. Write the differential equation, including the value of the constant.",
+    "points": 2,
+    "guide": "1 point: $\\dfrac{dT}{dt}=k(T-18)$. 1 point: $-2.4=k(60)$, so $k=-0.04$ and $\\dfrac{dT}{dt}=-0.04(T-18)$. Using $+2.4$ loses the second point."
+   },
+   {
+    "label": "(e)",
+    "question": "For the model in part (d), what does the differential equation predict when $T\\lt18$?",
+    "points": 1,
+    "guide": "1 point: $T-18\\lt0$ and $k\\lt0$, so $\\dfrac{dT}{dt}\\gt0$: the object warms toward 18 °C."
+   }
+  ]
+ },
+ "7.2": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Show that $y=2e^{3x}-1$ is a solution of $\\dfrac{dy}{dx}=3y+3$.",
+    "points": 2,
+    "guide": "1 point: left side $\\dfrac{dy}{dx}=6e^{3x}$. 1 point: right side $3\\left(2e^{3x}-1\\right)+3=6e^{3x}$, with the two sides compared."
+   },
+   {
+    "label": "(b)",
+    "question": "For what values of $k$ is $y=e^{kx}$ a solution of $y''+2y'-8y=0$?",
+    "points": 2,
+    "guide": "1 point: substitution gives $e^{kx}\\left(k^2+2k-8\\right)=0$. 1 point: $k=2$ and $k=-4$."
+   },
+   {
+    "label": "(c)",
+    "question": "Find all constant solutions of $\\dfrac{dy}{dt}=y^2-3y-10$.",
+    "points": 2,
+    "guide": "1 point: a constant solution requires $y^2-3y-10=0$. 1 point: $y=5$ and $y=-2$."
+   },
+   {
+    "label": "(d)",
+    "question": "Show that $y=Cx^4$ is a solution of $x\\dfrac{dy}{dx}=4y$ for every constant $C$, and find the value of $C$ for which the solution passes through $(2,8)$.",
+    "points": 2,
+    "guide": "1 point: $x\\cdot4Cx^3=4Cx^4=4y$. 1 point: $16C=8$, so $C=\\dfrac12$."
+   },
+   {
+    "label": "(e)",
+    "question": "Is $y=\\sin x$ a solution of $y''+y=0$? Show your work.",
+    "points": 1,
+    "guide": "1 point: yes; $y''=-\\sin x$, so $y''+y=0$."
+   }
+  ]
+ },
+ "7.3": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Find the slope of the solution curve through each of the points $(0,1)$, $(2,1)$, $(1,3)$ and $(3,-1)$.",
+    "points": 2,
+    "guide": "2 points: the four slopes $-1$, $1$, $0$ and $-2$. Award 1 point for two or three correct."
+   },
+   {
+    "label": "(b)",
+    "question": "Describe all points of the plane at which the segments of the slope field are horizontal.",
+    "points": 2,
+    "guide": "1 point: the line $x=1$. 1 point: the line $y=0$ (the $x$-axis)."
+   },
+   {
+    "label": "(c)",
+    "question": "Describe the regions of the plane in which the segments of the slope field have positive slope.",
+    "points": 2,
+    "guide": "1 point: $x\\gt1$ with $y\\gt0$. 1 point: $x\\lt1$ with $y\\lt0$."
+   },
+   {
+    "label": "(d)",
+    "question": "The solution curve through $(1,2)$ has a horizontal tangent there. Does it have a relative maximum, a relative minimum or neither at that point? Justify your answer.",
+    "points": 2,
+    "guide": "1 point: $\\dfrac{d^2y}{dx^2}=y+(x-1)\\dfrac{dy}{dx}$, which equals 2 at $(1,2)$. 1 point: a relative minimum, since the first derivative is 0 and the second is positive. (Also accept the sign change of $(x-1)y$ with $y\\gt0$.)"
+   },
+   {
+    "label": "(e)",
+    "question": "Identify a constant function that is a solution of the differential equation.",
+    "points": 1,
+    "guide": "1 point: $y=0$."
+   }
+  ]
+ },
+ "7.4": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Find the equilibrium (constant) solutions.",
+    "points": 2,
+    "guide": "1 point: $y=0$. 1 point: $y=8$."
+   },
+   {
+    "label": "(b)",
+    "question": "A solution has $y(0)=2$. Find $\\displaystyle\\lim_{t\\to\\infty}y(t)$, and give a reason.",
+    "points": 2,
+    "guide": "1 point: 8. 1 point: for $0\\lt y\\lt8$ the derivative is positive, so the solution increases, and it cannot cross the equilibrium $y=8$."
+   },
+   {
+    "label": "(c)",
+    "question": "A solution has $y(0)=10$. Describe its behaviour as $t$ increases.",
+    "points": 2,
+    "guide": "1 point: for $y\\gt8$ the derivative is negative, so the solution decreases. 1 point: it approaches 8 (from above)."
+   },
+   {
+    "label": "(d)",
+    "question": "For a solution with $0\\lt y\\lt8$, find the value of $y$ at which the population is growing fastest, and the rate of growth at that time.",
+    "points": 2,
+    "guide": "1 point: $y=4$, the vertex of the quadratic $0.5y\\left(1-\\dfrac y8\\right)$. 1 point: $0.5(4)(0.5)=1$ thousand per year."
+   },
+   {
+    "label": "(e)",
+    "question": "Find $\\dfrac{d^2y}{dt^2}$ in terms of $y$ and $\\dfrac{dy}{dt}$, and state the value of $y$ at which a solution with $0\\lt y\\lt8$ has a point of inflection.",
+    "points": 1,
+    "guide": "1 point: $\\dfrac{d^2y}{dt^2}=\\left(0.5-\\dfrac y8\\right)\\dfrac{dy}{dt}$, which changes sign at $y=4$."
+   }
+  ]
+ },
+ "7.5": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "$\\dfrac{dy}{dx}=y\\cos x$",
+    "points": 3,
+    "guide": "1 point: separates, $\\dfrac{dy}{y}=\\cos x\\,dx$. 1 point: $\\ln|y|=\\sin x+C$, with the constant introduced at this step. 1 point: $y=Ae^{\\sin x}$. A solution of the form $e^{\\sin x}+C$ earns at most 1 point."
+   },
+   {
+    "label": "(b)",
+    "question": "$\\dfrac{dy}{dx}=2x\\left(1+y^2\\right)$",
+    "points": 3,
+    "guide": "1 point: separates, $\\dfrac{dy}{1+y^2}=2x\\,dx$. 1 point: $\\arctan y=x^2+C$. 1 point: $y=\\tan\\!\\left(x^2+C\\right)$."
+   },
+   {
+    "label": "(c)",
+    "question": "$\\dfrac{dy}{dx}=3x^2\\sqrt{y}$, for $y\\gt0$",
+    "points": 2,
+    "guide": "1 point: $y^{-1/2}dy=3x^2dx$ integrated to $2\\sqrt y=x^3+C$. 1 point: $y=\\left(\\dfrac{x^3+C}{2}\\right)^2$."
+   },
+   {
+    "label": "(d)",
+    "question": "Explain why $\\dfrac{dy}{dx}=x^2+y$ cannot be solved by separation of variables.",
+    "points": 1,
+    "guide": "1 point: $x^2+y$ cannot be written as a product of a function of $x$ and a function of $y$."
+   }
+  ]
+ },
+ "7.6": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Find the slope of the graph of $f$ at the point $(0,-1)$.",
+    "points": 1,
+    "guide": "1 point: $(-1)^2(1)=1$."
+   },
+   {
+    "label": "(b)",
+    "question": "Write an equation of the line tangent to the graph of $f$ at $(0,-1)$, and use it to approximate $f(0.1)$.",
+    "points": 2,
+    "guide": "1 point: $y=-1+x$. 1 point: $f(0.1)\\approx-0.9$."
+   },
+   {
+    "label": "(c)",
+    "question": "Find the particular solution $y=f(x)$.",
+    "points": 5,
+    "guide": "1 point: separation of variables, $\\dfrac{dy}{y^2}=(2x+1)\\,dx$. 1 point: antiderivative $-\\dfrac1y$. 1 point: antiderivative $x^2+x$. 1 point: constant of integration and use of the initial condition, giving $C=1$. 1 point: $y=-\\dfrac{1}{x^2+x+1}$. With no separation of variables, 0 of 5; with no constant of integration, at most 2 of 5."
+   },
+   {
+    "label": "(d)",
+    "question": "State the domain of the solution found in part (c), and give a reason.",
+    "points": 1,
+    "guide": "1 point: all real numbers, because $x^2+x+1$ is never zero (its discriminant is negative)."
+   }
+  ]
+ },
+ "7.7": {
+  "max": 9,
+  "calculator": true,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Find the value of $k$.",
+    "points": 2,
+    "guide": "1 point: $P=400e^{kt}$ and $1000=400e^{3k}$. 1 point: $k=\\dfrac{\\ln2.5}{3}\\approx0.305$."
+   },
+   {
+    "label": "(b)",
+    "question": "Find the number of bacteria at $t=5$.",
+    "points": 2,
+    "guide": "1 point: $400e^{5k}$. 1 point: about 1842 (accept 1838 to 1843; a value from $k$ rounded to 0.305 is acceptable)."
+   },
+   {
+    "label": "(c)",
+    "question": "Find the time it takes for the number of bacteria to double.",
+    "points": 2,
+    "guide": "1 point: $e^{kt}=2$. 1 point: $t=\\dfrac{\\ln2}{k}\\approx2.269$ hours."
+   },
+   {
+    "label": "(d)",
+    "question": "Find the rate at which the number of bacteria is increasing at $t=5$. Indicate units of measure.",
+    "points": 2,
+    "guide": "1 point: $\\dfrac{dP}{dt}=kP(5)\\approx0.3054\\times1842$. 1 point: about 563 bacteria per hour (accept 560 to 564), with units."
+   },
+   {
+    "label": "(e)",
+    "question": "At what time does the number of bacteria reach 10 000?",
+    "points": 1,
+    "guide": "1 point: $t=\\dfrac{\\ln25}{k}\\approx10.539$ hours."
+   }
+  ]
+ },
+ "8.1": {
+  "max": 9,
+  "calculator": true,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Find the average depth of the water for $0\\le t\\le3$.",
+    "points": 2,
+    "guide": "1 point: the set-up $\\dfrac13\\displaystyle\\int_0^3D(t)\\,dt$. 1 point: answer $5+\\dfrac4\\pi\\approx6.273$ metres. An answer with no integral shown earns the answer point only."
+   },
+   {
+    "label": "(b)",
+    "question": "Find the average rate of change of the depth for $0\\le t\\le3$. Indicate units of measure.",
+    "points": 1,
+    "guide": "1 point: $\\dfrac{D(3)-D(0)}{3}=\\dfrac{5-7}{3}=-\\dfrac23$ metres per hour (accept $-0.667$). Units are required."
+   },
+   {
+    "label": "(c)",
+    "question": "Explain, in the context of the harbour, the difference between what your answers to parts (a) and (b) measure.",
+    "points": 2,
+    "guide": "1 point: part (a) is the mean depth of the water, in metres, over the first three hours. 1 point: part (b) is the average rate at which the depth is changing over those hours, in metres per hour (the depth falls by two thirds of a metre per hour on average). Each statement must refer to the context."
+   },
+   {
+    "label": "(d)",
+    "question": "Find the time $t$, $0\\le t\\le3$, at which the depth equals the average depth found in part (a).",
+    "points": 2,
+    "guide": "1 point: the equation $5+2\\cos\\!\\left(\\dfrac{\\pi t}{6}\\right)=5+\\dfrac4\\pi$ (or with $6.273$). 1 point: $t\\approx1.682$."
+   },
+   {
+    "label": "(e)",
+    "question": "Without differentiating $D$, find the average value of $D'(t)$ for $0\\le t\\le3$. Show the reasoning that leads to your answer.",
+    "points": 2,
+    "guide": "1 point: $\\dfrac13\\displaystyle\\int_0^3D'(t)\\,dt=\\dfrac{D(3)-D(0)}{3}$, by the Fundamental Theorem of Calculus. 1 point: $-\\dfrac23$, the same as part (b). If the student differentiates and integrates correctly, award the answer point only."
+   }
+  ]
+ },
+ "8.2": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Find all times $t$, $0\\lt t\\lt5$, at which the particle changes direction. Justify your answer.",
+    "points": 2,
+    "guide": "1 point: $t=2$ and $t=4$, from $v(t)=(t-2)(t-4)=0$. 1 point: justification that $v$ changes sign at each (positive to negative at $t=2$, negative to positive at $t=4$). \"$v=0$\" alone does not justify."
+   },
+   {
+    "label": "(b)",
+    "question": "Find the displacement of the particle from $t=0$ to $t=5$.",
+    "points": 1,
+    "guide": "1 point: $\\displaystyle\\int_0^5v(t)\\,dt=\\dfrac{125}{3}-75+40=\\dfrac{20}{3}$."
+   },
+   {
+    "label": "(c)",
+    "question": "Find the total distance travelled by the particle from $t=0$ to $t=5$.",
+    "points": 3,
+    "guide": "1 point: $\\displaystyle\\int_0^5|v(t)|\\,dt$, or a sum of three integrals split at $t=2$ and $t=4$. 1 point: the three pieces $\\dfrac{20}{3}$, $-\\dfrac43$ and $\\dfrac43$ (at least two correct). 1 point: answer $\\dfrac{28}{3}$. An answer of $\\dfrac{20}{3}$ earns no points in this part."
+   },
+   {
+    "label": "(d)",
+    "question": "Find the position of the particle at time $t=5$.",
+    "points": 1,
+    "guide": "1 point: $3+\\dfrac{20}{3}=\\dfrac{29}{3}$. Follow through from part (b). The initial position must be used."
+   },
+   {
+    "label": "(e)",
+    "question": "Is the speed of the particle increasing or decreasing at time $t=2.5$? Give a reason for your answer.",
+    "points": 2,
+    "guide": "1 point: $v(2.5)=-0.75$ and $a(2.5)=2(2.5)-6=-1$. 1 point: speed is increasing because velocity and acceleration have the same sign. A conclusion based on acceleration alone earns no points."
+   }
+  ]
+ },
+ "8.3": {
+  "max": 9,
+  "calculator": true,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "How many litres of water are pumped into the tank during the time interval $0\\le t\\le8$?",
+    "points": 2,
+    "guide": "1 point: $\\displaystyle\\int_0^8E(t)\\,dt$. 1 point: $86.798$ litres (accept $86.797$ to $86.798$)."
+   },
+   {
+    "label": "(b)",
+    "question": "Is the amount of water in the tank increasing or decreasing at time $t=2$? Give a reason for your answer.",
+    "points": 2,
+    "guide": "1 point: $E(2)\\approx9.882$ and $D(2)=7.6$, compared. 1 point: increasing, because $E(2)\\gt D(2)$ (the net rate $E(2)-D(2)\\approx2.282$ is positive). A conclusion with no values earns no points."
+   },
+   {
+    "label": "(c)",
+    "question": "How many litres of water are in the tank at time $t=8$?",
+    "points": 2,
+    "guide": "1 point: $40+\\displaystyle\\int_0^8\\big[E(t)-D(t)\\big]dt$ (the initial 40 must appear). 1 point: $53.198$ litres."
+   },
+   {
+    "label": "(d)",
+    "question": "At what time $t$, $0\\le t\\le8$, is the amount of water in the tank greatest? Justify your answer.",
+    "points": 3,
+    "guide": "1 point: considers $E(t)-D(t)=0$. 1 point: $t\\approx6.717$. 1 point: justification, either that $E-D$ changes from positive to negative there and this is the only critical point, or a comparison of the candidates $A(0)=40$, $A(6.717)\\approx56.286$ and $A(8)\\approx53.198$. Setting $E'(t)=0$ earns no points."
+   }
+  ]
+ },
+ "8.4": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Find the $x$-coordinates of the points of intersection of the two graphs.",
+    "points": 1,
+    "guide": "1 point: $8-x^2=2x$ gives $x^2+2x-8=0$, so $x=-4$ and $x=2$."
+   },
+   {
+    "label": "(b)",
+    "question": "Find the area of $R$.",
+    "points": 3,
+    "guide": "1 point: integrand $(8-x^2)-2x$, in that order. 1 point: limits $-4$ and $2$. 1 point: answer $36$. A reversed integrand with an answer made positive without explanation loses the integrand point."
+   },
+   {
+    "label": "(c)",
+    "question": "Find the area of the part of $R$ that lies to the right of the $y$-axis.",
+    "points": 2,
+    "guide": "1 point: $\\displaystyle\\int_0^2(8-2x-x^2)\\,dx$. 1 point: answer $\\dfrac{28}{3}$."
+   },
+   {
+    "label": "(d)",
+    "question": "For $-4\\le x\\le2$, find the value of $x$ at which the vertical distance between the two graphs is greatest, and find that distance. Justify your answer.",
+    "points": 3,
+    "guide": "1 point: $d(x)=8-2x-x^2$ and $d'(x)=-2-2x$. 1 point: $x=-1$ with $d(-1)=9$. 1 point: justification ($d'$ changes from positive to negative, or $d''=-2\\lt0$ with a single critical point, or comparison with $d(-4)=d(2)=0$)."
+   }
+  ]
+ },
+ "8.5": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Find the coordinates of the two points at which the graphs intersect.",
+    "points": 2,
+    "guide": "1 point: $y^2=2y+3$ gives $y=-1$ and $y=3$. 1 point: the points $(1,-1)$ and $(9,3)$."
+   },
+   {
+    "label": "(b)",
+    "question": "Find the area of $R$ using an integral with respect to $y$.",
+    "points": 3,
+    "guide": "1 point: integrand $(2y+3)-y^2$, right minus left. 1 point: limits $y=-1$ and $y=3$ with $dy$. 1 point: answer $\\dfrac{32}{3}$. Limits of 1 and 9 lose the limits point."
+   },
+   {
+    "label": "(c)",
+    "question": "Write, but do not evaluate, an expression involving one or more integrals with respect to $x$ that gives the area of $R$.",
+    "points": 3,
+    "guide": "1 point: recognises that two integrals are needed, split at $x=1$. 1 point: $\\displaystyle\\int_0^1\\big[\\sqrt x-(-\\sqrt x)\\big]dx$, that is $\\displaystyle\\int_0^12\\sqrt x\\,dx$. 1 point: $\\displaystyle\\int_1^9\\left[\\sqrt x-\\dfrac{x-3}{2}\\right]dx$. A single integral from 0 to 9 earns at most 1 point."
+   },
+   {
+    "label": "(d)",
+    "question": "Find the length of the horizontal segment that lies in $R$ at height $y=1$.",
+    "points": 1,
+    "guide": "1 point: $(2(1)+3)-1^2=4$."
+   }
+  ]
+ },
+ "8.6": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Evaluate $\\displaystyle\\int_0^4f(x)\\,dx$.",
+    "points": 1,
+    "guide": "1 point: $\\Big[\\dfrac{x^4}{4}-2x^3+4x^2\\Big]_0^4=64-128+64=0$."
+   },
+   {
+    "label": "(b)",
+    "question": "Find the total area of the regions enclosed by the graph of $f$ and the $x$-axis for $0\\le x\\le4$.",
+    "points": 3,
+    "guide": "1 point: splits at $x=2$, where $f(x)=x(x-2)(x-4)$ changes sign. 1 point: $\\displaystyle\\int_0^2f=4$ and $\\displaystyle\\int_2^4f=-4$. 1 point: area $4+4=8$. An answer of 0 earns no points in this part."
+   },
+   {
+    "label": "(c)",
+    "question": "Explain why your answers to parts (a) and (b) are different.",
+    "points": 1,
+    "guide": "1 point: the integral counts the region below the $x$-axis (on $[2,4]$) as negative, so the two equal regions cancel; area counts both as positive."
+   },
+   {
+    "label": "(d)",
+    "question": "Find the average value of $f$ on the interval $[0,2]$.",
+    "points": 1,
+    "guide": "1 point: $\\dfrac12\\cdot4=2$."
+   },
+   {
+    "label": "(e)",
+    "question": "Let $g(x)=-x$. Find the area of the region between the graphs of $f$ and $g$ for $0\\le x\\le3$. Show that a single integral is sufficient.",
+    "points": 3,
+    "guide": "1 point: $f(x)-g(x)=x^3-6x^2+9x=x(x-3)^2\\ge0$ on $[0,3]$, so $f$ stays on or above $g$ and no split is needed. 1 point: $\\displaystyle\\int_0^3(x^3-6x^2+9x)\\,dx$. 1 point: answer $\\dfrac{27}{4}$."
+   }
+  ]
+ },
+ "8.7": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Find the area of $R$.",
+    "points": 2,
+    "guide": "1 point: $\\displaystyle\\int_0^4(4x-x^2)\\,dx$. 1 point: $\\dfrac{32}{3}$."
+   },
+   {
+    "label": "(b)",
+    "question": "Each cross-section perpendicular to the $x$-axis is a square. Find the volume of the solid.",
+    "points": 3,
+    "guide": "1 point: integrand $(4x-x^2)^2$. 1 point: expands to $16x^2-8x^3+x^4$ and antidifferentiates. 1 point: answer $\\dfrac{512}{15}$. An integrand of $4x-x^2$ (not squared) earns no points."
+   },
+   {
+    "label": "(c)",
+    "question": "Each cross-section perpendicular to the $x$-axis is a semicircle with its diameter in $R$. Find the volume of the solid.",
+    "points": 2,
+    "guide": "1 point: area $\\dfrac{\\pi}{8}(4x-x^2)^2$, with the radius taken as half the diameter. 1 point: answer $\\dfrac{\\pi}{8}\\cdot\\dfrac{512}{15}=\\dfrac{64\\pi}{15}$. A constant of $\\dfrac{\\pi}{2}$ loses the first point; follow through for the second."
+   },
+   {
+    "label": "(d)",
+    "question": "Each cross-section perpendicular to the $x$-axis is a rectangle with its base in $R$ and height equal to $x$. Find the volume of the solid.",
+    "points": 2,
+    "guide": "1 point: $\\displaystyle\\int_0^4x(4x-x^2)\\,dx$. 1 point: answer $\\dfrac{256}{3}-64=\\dfrac{64}{3}$."
+   }
+  ]
+ },
+ "8.8": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Find the area of $R$.",
+    "points": 2,
+    "guide": "1 point: $\\displaystyle\\int_0^3\\sqrt{x+1}\\,dx$. 1 point: $\\dfrac23(8-1)=\\dfrac{14}{3}$."
+   },
+   {
+    "label": "(b)",
+    "question": "Find the volume of the solid generated when $R$ is rotated about the $x$-axis.",
+    "points": 3,
+    "guide": "1 point: the constant $\\pi$ and limits 0 and 3. 1 point: integrand $\\left(\\sqrt{x+1}\\right)^2=x+1$. 1 point: answer $\\dfrac{15\\pi}{2}$."
+   },
+   {
+    "label": "(c)",
+    "question": "Find the volume of the solid generated when $S$ is rotated about the line $y=2$.",
+    "points": 3,
+    "guide": "1 point: radius $2-\\sqrt{x+1}$, measured from the axis of rotation. 1 point: $\\pi\\displaystyle\\int_0^3\\left(2-\\sqrt{x+1}\\right)^2dx$. 1 point: answer $\\dfrac{5\\pi}{6}$. A washer set-up with radii 2 and $\\sqrt{x+1}$ (rotation about the $x$-axis) earns no points."
+   },
+   {
+    "label": "(d)",
+    "question": "The plane $x=k$ divides the solid in part (b) into two solids of equal volume. Write an equation whose solution is $k$, and solve it.",
+    "points": 1,
+    "guide": "1 point: $\\pi\\left(\\dfrac{k^2}{2}+k\\right)=\\dfrac{15\\pi}{4}$, giving $k=-1+\\dfrac{\\sqrt{34}}{2}$ (about $1.915$)."
+   }
+  ]
+ },
+ "8.9": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Find the area of $R$.",
+    "points": 2,
+    "guide": "1 point: the graphs meet at $x=0$ and $x=2$, and the integrand is $(3x-x^2)-x=2x-x^2$. 1 point: answer $\\dfrac43$."
+   },
+   {
+    "label": "(b)",
+    "question": "Find the volume of the solid generated when $R$ is rotated about the $x$-axis.",
+    "points": 3,
+    "guide": "1 point: the form $\\pi\\displaystyle\\int_0^2\\big(R^2-r^2\\big)dx$ with correct limits. 1 point: integrand $(3x-x^2)^2-x^2=8x^2-6x^3+x^4$. 1 point: answer $\\dfrac{56\\pi}{15}$. An integrand of $(2x-x^2)^2$ earns the first point only."
+   },
+   {
+    "label": "(c)",
+    "question": "Write, but do not evaluate, an integral expression for the volume of the solid generated when $R$ is rotated about the line $y=-2$.",
+    "points": 2,
+    "guide": "1 point: outer radius $3x-x^2+2$ and inner radius $x+2$. 1 point: $\\pi\\displaystyle\\int_0^2\\Big[(3x-x^2+2)^2-(x+2)^2\\Big]dx$."
+   },
+   {
+    "label": "(d)",
+    "question": "Write, but do not evaluate, an integral expression for the volume of the solid generated when $R$ is rotated about the line $y=3$.",
+    "points": 2,
+    "guide": "1 point: recognises that the line $y=x$ is now farther from the axis, with outer radius $3-x$ and inner radius $3-(3x-x^2)$. 1 point: $\\pi\\displaystyle\\int_0^2\\Big[(3-x)^2-(3-3x+x^2)^2\\Big]dx$. Radii in the reverse order earn at most 1 point."
+   }
+  ]
+ },
+ "8.10": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Find the area of $R$.",
+    "points": 3,
+    "guide": "1 point: integrand $\\sqrt x-\\dfrac{x^3}{32}$. 1 point: limits 0 and 4 (the graphs meet at $(4,2)$). 1 point: answer $\\dfrac{16}{3}-2=\\dfrac{10}{3}$."
+   },
+   {
+    "label": "(b)",
+    "question": "Find the volume of the solid generated when $R$ is rotated about the $x$-axis.",
+    "points": 3,
+    "guide": "1 point: $\\pi$ and the limits. 1 point: integrand $x-\\dfrac{x^6}{1024}$. 1 point: answer $\\pi\\left(8-\\dfrac{16}{7}\\right)=\\dfrac{40\\pi}{7}$."
+   },
+   {
+    "label": "(c)",
+    "question": "Write, but do not evaluate, an integral expression for the volume of the solid generated when $R$ is rotated about the line $y=3$.",
+    "points": 2,
+    "guide": "1 point: outer radius $3-\\dfrac{x^3}{32}$ and inner radius $3-\\sqrt x$. 1 point: $\\pi\\displaystyle\\int_0^4\\left[\\left(3-\\dfrac{x^3}{32}\\right)^2-\\left(3-\\sqrt x\\right)^2\\right]dx$."
+   },
+   {
+    "label": "(d)",
+    "question": "$R$ is the base of a solid whose cross-sections perpendicular to the $x$-axis are semicircles with diameters in $R$. Write, but do not evaluate, an integral expression for its volume.",
+    "points": 1,
+    "guide": "1 point: $\\dfrac{\\pi}{8}\\displaystyle\\int_0^4\\left(\\sqrt x-\\dfrac{x^3}{32}\\right)^2dx$."
+   }
+  ]
+ },
+ "9.1": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Find $f'(x)$ and all critical points of $f$.",
+    "points": 2,
+    "guide": "1 point: $f'(x)=4x^3-18x^2+18x$, or the factored form $2x(2x-3)(x-3)$. 1 point: $x=0$, $x=\\dfrac32$ and $x=3$."
+   },
+   {
+    "label": "(b)",
+    "question": "Classify each critical point as a relative maximum, a relative minimum or neither. Justify your answers.",
+    "points": 3,
+    "guide": "1 point: relative minimum at $x=0$, because $f'$ changes from negative to positive. 1 point: relative maximum at $x=\\dfrac32$, because $f'$ changes from positive to negative. 1 point: relative minimum at $x=3$, because $f'$ changes from negative to positive. A classification with no sign-change (or second-derivative) reason earns no point for that critical point."
+   },
+   {
+    "label": "(c)",
+    "question": "Find the absolute maximum value of $f$ on the interval $[-1,4]$. Justify your answer.",
+    "points": 2,
+    "guide": "1 point: the candidates $f(-1)=16$, $f(0)=0$, $f\\!\\left(\\dfrac32\\right)=\\dfrac{81}{16}$, $f(3)=0$ and $f(4)=16$. 1 point: the absolute maximum is 16 (attained at both endpoints). An answer of $\\dfrac{81}{16}$ earns no points."
+   },
+   {
+    "label": "(d)",
+    "question": "Find the $x$-coordinates of the points of inflection of the graph of $f$. Justify your answer.",
+    "points": 2,
+    "guide": "1 point: $f''(x)=12x^2-36x+18=0$ gives $x=\\dfrac{3\\pm\\sqrt3}{2}$. 1 point: $f''$ changes sign at each of these values."
+   }
+  ]
+ },
+ "9.2": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Find the $x$-coordinates of all relative minima of $f$ on $(-4,6)$. Justify your answer.",
+    "points": 2,
+    "guide": "1 point: $x=-\\dfrac52$ and $x=5$. 1 point: $f'$ changes from negative to positive at each. A justification that does not name $f'$ earns no point."
+   },
+   {
+    "label": "(b)",
+    "question": "Find the $x$-coordinate of the relative maximum of $f$ on $(-4,6)$. Justify your answer.",
+    "points": 2,
+    "guide": "1 point: $x=\\dfrac12$. 1 point: $f'$ changes from positive to negative there."
+   },
+   {
+    "label": "(c)",
+    "question": "On what interval is the graph of $f$ concave down? Find the $x$-coordinates of its points of inflection. Give a reason for each answer.",
+    "points": 2,
+    "guide": "1 point: concave down on $(-1,2)$, because $f'$ is decreasing there. 1 point: points of inflection at $x=-1$ and $x=2$, where $f'$ changes from increasing to decreasing or the reverse."
+   },
+   {
+    "label": "(d)",
+    "question": "Find $f(2)$, and find the absolute maximum value of $f$ on $[-1,2]$. Show the work that leads to your answers.",
+    "points": 3,
+    "guide": "1 point: $f(2)=f(0)+\\displaystyle\\int_0^2f'(x)\\,dx$, with the integral found as a signed area (or from $f'(x)=1-2x$): $\\tfrac14-\\tfrac94=-2$. 1 point: $f(2)=2$. 1 point: comparing $f(-1)=2$, $f\\!\\left(\\dfrac12\\right)=\\dfrac{17}{4}$ and $f(2)=2$, the absolute maximum is $\\dfrac{17}{4}$."
+   }
+  ]
+ },
+ "9.3": {
+  "max": 9,
+  "calculator": true,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "How many people enter the museum during the 12 hours? Round to the nearest whole number.",
+    "points": 2,
+    "guide": "1 point: $\\displaystyle\\int_0^{12}E(t)\\,dt$. 1 point: about 403 people (402.752)."
+   },
+   {
+    "label": "(b)",
+    "question": "Find $E'(5)$. Using correct units, interpret your answer in the context of the problem.",
+    "points": 2,
+    "guide": "1 point: $E'(5)\\approx-4.113$. 1 point: at $t=5$ hours, the rate at which visitors enter is decreasing by about 4.113 people per hour each hour. An interpretation about the number of people in the museum earns no point."
+   },
+   {
+    "label": "(c)",
+    "question": "How many people are in the museum at $t=12$? Round to the nearest whole number.",
+    "points": 2,
+    "guide": "1 point: $30+\\displaystyle\\int_0^{12}\\big[E(t)-L(t)\\big]dt$, including the initial 30. 1 point: about 169 people (168.752)."
+   },
+   {
+    "label": "(d)",
+    "question": "At what time $t$, $0\\le t\\le12$, is the number of people in the museum greatest? Justify your answer.",
+    "points": 3,
+    "guide": "1 point: considers $E(t)=L(t)$. 1 point: $t\\approx8.436$ (the other solution, $t\\approx0.041$, is where the number briefly stops decreasing). 1 point: justification by comparing candidates, $N(0)=30$, $N(0.041)\\approx29.864$, $N(8.436)\\approx202.726$ and $N(12)\\approx168.752$, or by the sign of $E-L$ on the whole interval."
+   }
+  ]
+ },
+ "9.4": {
+  "max": 9,
+  "calculator": true,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Find $P'(4)$. Using correct units, interpret your answer in the context of the problem.",
+    "points": 2,
+    "guide": "1 point: $P'(4)=\\dfrac{15}{5}=3$. 1 point: at $t=4$ minutes, the rate at which oil is pumped in is increasing by 3 litres per minute each minute."
+   },
+   {
+    "label": "(b)",
+    "question": "How many litres of oil are pumped into the tank during the 12 minutes?",
+    "points": 2,
+    "guide": "1 point: $\\displaystyle\\int_0^{12}P(t)\\,dt$. 1 point: $320.165$ litres."
+   },
+   {
+    "label": "(c)",
+    "question": "Is the amount of oil in the tank increasing or decreasing at $t=5$? Give a reason for your answer.",
+    "points": 2,
+    "guide": "1 point: $P(5)\\approx26.876$ and $W(5)=17.5$. 1 point: increasing, because $P(5)\\gt W(5)$."
+   },
+   {
+    "label": "(d)",
+    "question": "Find the maximum amount of oil in the tank for $0\\le t\\le12$. Justify your answer.",
+    "points": 3,
+    "guide": "1 point: $P(t)=W(t)$ at $t\\approx10.448$. 1 point: the amount then is $50+\\displaystyle\\int_0^{10.448}\\big[P(t)-W(t)\\big]dt\\approx120.870$ litres. 1 point: justification, by comparison with $A(0)=50$ and $A(12)\\approx118.165$, or by the sign change of $P-W$ from positive to negative at the only critical point."
+   }
+  ]
+ },
+ "9.5": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Use the data to estimate $f'(7)$. Show the work that leads to your answer.",
+    "points": 2,
+    "guide": "1 point: $\\dfrac{f(8)-f(6)}{8-6}$. 1 point: $\\dfrac{1-(-2)}{2}=1.5$."
+   },
+   {
+    "label": "(b)",
+    "question": "Approximate $\\displaystyle\\int_1^{11}f(x)\\,dx$ using a left Riemann sum with the four subintervals indicated by the table.",
+    "points": 2,
+    "guide": "1 point: $(2)(10)+(3)(4)+(2)(-2)+(3)(1)$, with the correct widths. 1 point: 31."
+   },
+   {
+    "label": "(c)",
+    "question": "What is the least number of zeros of $f$ in the interval $(1,11)$? Justify your answer.",
+    "points": 2,
+    "guide": "1 point: $f$ is differentiable, hence continuous, and changes sign on $[3,6]$ and on $[6,8]$. 1 point: by the Intermediate Value Theorem there are at least 2 zeros."
+   },
+   {
+    "label": "(d)",
+    "question": "Must there be a number $c$, $1\\lt c\\lt3$, such that $f'(c)=-3$? Justify your answer.",
+    "points": 2,
+    "guide": "1 point: $\\dfrac{f(3)-f(1)}{3-1}=-3$. 1 point: yes, by the Mean Value Theorem, since $f$ is differentiable on $(1,3)$ and continuous on $[1,3]$."
+   },
+   {
+    "label": "(e)",
+    "question": "Find the exact value of $\\displaystyle\\int_3^8f'(x)\\,dx$.",
+    "points": 1,
+    "guide": "1 point: $f(8)-f(3)=-3$."
+   }
+  ]
+ },
+ "9.6": {
+  "max": 9,
+  "calculator": true,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Find the acceleration of the particle at $t=2$. Is the speed of the particle increasing or decreasing at $t=2$? Give a reason for your answer.",
+    "points": 2,
+    "guide": "1 point: $a(2)=v'(2)\\approx-0.220$. 1 point: decreasing, because $v(2)\\approx1.771\\gt0$ and $a(2)\\lt0$ have opposite signs."
+   },
+   {
+    "label": "(b)",
+    "question": "Find the time $t$, $0\\lt t\\lt5$, at which the particle changes direction. Justify your answer.",
+    "points": 2,
+    "guide": "1 point: $t=\\pi$ (accept 3.142). 1 point: $v$ changes from positive to negative there."
+   },
+   {
+    "label": "(c)",
+    "question": "Find the total distance travelled by the particle for $0\\le t\\le5$.",
+    "points": 2,
+    "guide": "1 point: $\\displaystyle\\int_0^5|v(t)|\\,dt$. 1 point: $8.904$. The displacement, $-1.975$, earns no points."
+   },
+   {
+    "label": "(d)",
+    "question": "Find the position of the particle at $t=5$, and find its position at the time when it is farthest to the right. Explain how you know when that is.",
+    "points": 3,
+    "guide": "1 point: $x(5)=-2+\\displaystyle\\int_0^5v(t)\\,dt\\approx-3.975$. 1 point: the particle is farthest right at $t=\\pi$, because $v\\gt0$ on $(0,\\pi)$ and $v\\lt0$ on $(\\pi,5)$. 1 point: $x(\\pi)=-2+\\displaystyle\\int_0^{\\pi}v(t)\\,dt\\approx1.465$."
+   }
+  ]
+ },
+ "9.7": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Write an equation of the line tangent to the graph of $f$ at $x=1$, and use it to approximate $f(1.2)$.",
+    "points": 2,
+    "guide": "1 point: slope $\\dfrac{0+1}{1}=1$, giving $y=x-1$. 1 point: $f(1.2)\\approx0.2$."
+   },
+   {
+    "label": "(b)",
+    "question": "Find $\\dfrac{d^2y}{dx^2}$ in terms of $x$ and $y$. Is your approximation in part (a) an overestimate or an underestimate? Give a reason.",
+    "points": 2,
+    "guide": "1 point: $\\dfrac{d^2y}{dx^2}=\\dfrac{1}{x^2}\\dfrac{dy}{dx}-\\dfrac{2(y+1)}{x^3}=\\dfrac{(y+1)(1-2x)}{x^4}$. 1 point: at $(1,0)$ this is $-1\\lt0$, so the graph is concave down near $x=1$ and the approximation is an overestimate."
+   },
+   {
+    "label": "(c)",
+    "question": "Find the particular solution $y=f(x)$.",
+    "points": 5,
+    "guide": "1 point: separation of variables, $\\dfrac{dy}{y+1}=\\dfrac{dx}{x^2}$. 1 point: antiderivative $\\ln|y+1|$. 1 point: antiderivative $-\\dfrac1x$. 1 point: constant of integration and use of the initial condition, giving $C=1$. 1 point: $y=e^{1-1/x}-1$. With no separation of variables, 0 of 5; with no constant of integration, at most 2 of 5."
+   }
+  ]
+ },
+ "9.8": {
+  "max": 9,
+  "calculator": false,
+  "parts": [
+   {
+    "label": "(a)",
+    "question": "Find $\\dfrac{d}{dx}\\displaystyle\\int_2^{x^2}\\ln t\\,dt$, and evaluate it at $x=e$.",
+    "points": 2,
+    "guide": "1 point: $\\ln\\!\\left(x^2\\right)\\cdot2x$, with the chain-rule factor. 1 point: at $x=e$ this is $2e\\cdot2=4e$."
+   },
+   {
+    "label": "(b)",
+    "question": "Evaluate $\\displaystyle\\lim_{x\\to1}\\dfrac{x^2-1}{\\ln x}$.",
+    "points": 2,
+    "guide": "1 point: both numerator and denominator tend to 0, so L'Hôpital's Rule applies. 1 point: $\\displaystyle\\lim_{x\\to1}\\dfrac{2x}{1/x}=2$."
+   },
+   {
+    "label": "(c)",
+    "question": "Evaluate $\\displaystyle\\int_0^{\\pi/3}\\tan x\\sec^2x\\,dx$.",
+    "points": 2,
+    "guide": "1 point: substitution $u=\\tan x$ (or $u=\\sec x$), with limits changed or back-substitution. 1 point: $\\dfrac12\\left(\\sqrt3\\right)^2=\\dfrac32$."
+   },
+   {
+    "label": "(d)",
+    "question": "Write an equation of the line tangent to the graph of $y=xe^{x}$ at $x=1$.",
+    "points": 2,
+    "guide": "1 point: $y'=(1+x)e^{x}$, so the slope is $2e$. 1 point: $y-e=2e(x-1)$."
+   },
+   {
+    "label": "(e)",
+    "question": "Find the average value of $g(x)=x^2+1$ on the interval $[0,3]$.",
+    "points": 1,
+    "guide": "1 point: $\\dfrac13\\displaystyle\\int_0^3\\left(x^2+1\\right)dx=\\dfrac13(12)=4$."
+   }
+  ]
+ }
+}

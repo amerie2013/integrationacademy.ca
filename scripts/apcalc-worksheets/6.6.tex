@@ -1,0 +1,77 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize\color{black!60}Worksheet 6.6}
+\begin{document}
+
+\wstitle{6.6}{Properties of Definite Integrals}{Unit 6: Integration and Accumulation of Change}
+
+\begin{ideabox}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+  \item $\displaystyle\int_{a}^{b}f\,dx+\displaystyle\int_{b}^{c}f\,dx=\displaystyle\int_{a}^{c}f\,dx$, \quad $\displaystyle\int_{b}^{a}f\,dx=-\displaystyle\int_{a}^{b}f\,dx$, \quad $\displaystyle\int_{a}^{a}f\,dx=0$.
+  \item Constants factor out, and sums split: $\displaystyle\int_{a}^{b}\big[kf+g\big]\,dx=k\displaystyle\int_{a}^{b}f\,dx+\displaystyle\int_{a}^{b}g\,dx$.
+  \item A constant integrates to the constant times the width: $\displaystyle\int_{a}^{b}k\,dx=k(b-a)$.
+  \item For an odd function, $\displaystyle\int_{-a}^{a}f\,dx=0$. For an even function, $\displaystyle\int_{-a}^{a}f\,dx=2\displaystyle\int_{0}^{a}f\,dx$.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked examples}
+\begin{example}{Example 1 \textperiodcentered{} Joining and reversing}
+Given $\displaystyle\int_{1}^{4}f(x)\,dx=5$ and $\displaystyle\int_{4}^{9}f(x)\,dx=-2$, find $\displaystyle\int_{1}^{9}f(x)\,dx$ and $\displaystyle\int_{9}^{4}f(x)\,dx$.\soln Add for the first; change the sign for the second.\result{$3$ and $2$.}
+\end{example}
+
+\begin{example}{Example 2 \textperiodcentered{} A constant inside}
+Given $\displaystyle\int_{0}^{3}f(x)\,dx=7$, find $\displaystyle\int_{0}^{3}\big[2f(x)-4\big]\,dx$.\soln $2(7)-4(3)$.\result{$2$.}
+\end{example}
+
+\begin{example}{Example 3 \textperiodcentered{} Symmetry}
+Evaluate $\displaystyle\int_{-2}^{2}\left(x^3+3x^2\right)\,dx$.\soln $x^3$ is odd and contributes 0. $3x^2$ is even: $2\displaystyle\int_{0}^{2}3x^2\,dx=2(8)$.\result{$16$.}
+\end{example}
+
+\newpage
+\sech{Practice}
+Questions 1 to 6 use: \ $\displaystyle\int_{0}^{2}f(x)\,dx=5$, \ $\displaystyle\int_{2}^{7}f(x)\,dx=8$ \ and \ $\displaystyle\int_{0}^{7}g(x)\,dx=-4$.
+\level{Core}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item Find $\displaystyle\int_{0}^{7}f(x)\,dx$.\work{2.3cm}
+  \item Find $\displaystyle\int_{7}^{2}f(x)\,dx$.\work{2.3cm}
+  \item Find $\displaystyle\int_{0}^{7}\big[f(x)+g(x)\big]\,dx$.\work{2.3cm}
+  \item Find $\displaystyle\int_{2}^{2}f(x)\,dx$.\work{2.3cm}
+\end{enumerate}
+
+\level{Exam level}
+\begin{enumerate}[leftmargin=*,itemsep=2pt,start=5]
+  \item Find $\displaystyle\int_{0}^{7}\big[3f(x)-g(x)+1\big]\,dx$.\work{2.8cm}
+  \item Find $\displaystyle\int_{0}^{2}\big[f(x)+3x\big]\,dx$.\work{2.8cm}
+  \item An odd function $h$ has $\displaystyle\int_{0}^{5}h(x)\,dx=6$. Find $\displaystyle\int_{-5}^{5}h(x)\,dx$ and $\displaystyle\int_{-5}^{0}h(x)\,dx$.\work{2.8cm}
+  \item Evaluate $\displaystyle\int_{-\pi}^{\pi}(\sin x+2)\,dx$.\work{2.8cm}
+\end{enumerate}
+
+\begin{frbox}{Question 9 \textperiodcentered{} Free-response practice}
+A continuous function $f$ satisfies $\displaystyle\int_{-2}^{3}f(x)\,dx=10$ and $\displaystyle\int_{3}^{6}f(x)\,dx=-4$.
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=2pt]
+  \item Find $\displaystyle\int_{-2}^{6}f(x)\,dx$.\work{2.6cm}
+  \item Find $\displaystyle\int_{-2}^{3}\big[f(x)-2\big]\,dx$.\work{2.6cm}
+  \item Find $\displaystyle\int_{6}^{-2}f(x)\,dx$, and find the value of the constant $k$ for which $\displaystyle\int_{3}^{6}\big[f(x)+k\big]\,dx=5$.\work{2.6cm}
+\end{enumerate}
+\end{frbox}
+
+\newpage
+\begin{solbox}
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item $5+8=13$.
+  \item $-8$.
+  \item $13+(-4)=9$.
+  \item $0$.
+  \item $3(13)-(-4)+1(7)=50$.
+  \item $5+\displaystyle\int_{0}^{2}3x\,dx=5+6=11$.
+  \item $0$ and $-6$.
+  \item $\sin x$ is odd; the constant gives $2(2\pi)=4\pi$.
+  \item \begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=3pt]
+    \item $10+(-4)=6$.
+    \item $10-2(5)=0$.
+    \item $-6$. For the second: $-4+3k=5$, so $k=3$.
+  \end{enumerate}
+\end{enumerate}
+\end{solbox}
+
+\end{document}

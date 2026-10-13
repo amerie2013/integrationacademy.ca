@@ -1,0 +1,77 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize\color{black!60}Worksheet 7.5}
+\begin{document}
+
+\wstitle{7.5}{Separation of Variables}{Unit 7: Differential Equations}
+
+\begin{ideabox}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+  \item If $\dfrac{dy}{dx}=g(x)\,h(y)$, move everything in $y$ to one side and everything in $x$ to the other: $\dfrac{dy}{h(y)}=g(x)\,dx$.
+  \item Integrate both sides. Add \textbf{one} constant of integration, at this step.
+  \item Then solve for $y$. An exponential turns the constant into a multiplier: $y=Ae^{\ldots}$.
+  \item Dividing by $h(y)$ can lose a constant solution where $h(y)=0$. Check for it separately.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked examples}
+\begin{example}{Example 1 \textperiodcentered{} An exponential solution}
+Solve $\dfrac{dy}{dx}=3x^2y$.\soln $\dfrac{dy}{y}=3x^2\,dx$, so $\ln|y|=x^3+C$.\result{$y=Ae^{x^3}$.}
+\end{example}
+
+\begin{example}{Example 2 \textperiodcentered{} A square root}
+Solve $\dfrac{dy}{dx}=\dfrac{\cos x}{y}$.\soln $y\,dy=\cos x\,dx$, so $\dfrac{y^2}{2}=\sin x+C_0$.\result{$y^2=2\sin x+C$.}
+\end{example}
+
+\begin{example}{Example 3 \textperiodcentered{} A reciprocal}
+Solve $\dfrac{dy}{dx}=\dfrac{y^2}{x}$ for $x>0$, $y\neq0$.\soln $y^{-2}\,dy=\dfrac{dx}{x}$, so $-\dfrac1y=\ln x+C$.\result{$y=-\dfrac{1}{\ln x+C}$.}
+\end{example}
+
+\newpage
+\sech{Practice}
+
+\level{Core}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item Separate the variables in $\dfrac{dy}{dx}=xy^3$. Do not integrate.\work{2.3cm}
+  \item Solve $\dfrac{dy}{dx}=4y$.\work{2.3cm}
+  \item Solve $\dfrac{dy}{dx}=6x^2$.\work{2.3cm}
+  \item Solve $\dfrac{dy}{dx}=-y$.\work{2.3cm}
+\end{enumerate}
+
+\level{Exam level}
+\begin{enumerate}[leftmargin=*,itemsep=2pt,start=5]
+  \item Solve $\dfrac{dy}{dx}=\dfrac{x+1}{y}$, leaving your answer in the form $y^2=\ldots$\work{2.8cm}
+  \item Solve $\dfrac{dy}{dx}=y\sin x$.\work{2.8cm}
+  \item Solve $\dfrac{dy}{dx}=e^{2x-y}$.\work{2.8cm}
+  \item Solve $\dfrac{dy}{dx}=\sqrt{1-y^2}$ for $-1<y<1$.\work{2.8cm}
+\end{enumerate}
+
+\begin{frbox}{Question 9 \textperiodcentered{} Free-response practice}
+Consider the differential equation $\dfrac{dy}{dx}=x\sqrt{y}$ for $y\ge0$.
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=2pt]
+  \item Separate the variables.\work{2.6cm}
+  \item Find the general solution for $y>0$, in the form $y=\ldots$\work{2.6cm}
+  \item Show that $y=0$ is also a solution, and explain why the method of part (b) did not produce it.\work{2.6cm}
+\end{enumerate}
+\end{frbox}
+
+\newpage
+\begin{solbox}
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item $\dfrac{dy}{y^3}=x\,dx$.
+  \item $y=Ae^{4x}$.
+  \item $y=2x^3+C$.
+  \item $y=Ae^{-x}$.
+  \item $y\,dy=(x+1)\,dx$: $y^2=x^2+2x+C$.
+  \item $\ln|y|=-\cos x+C$: $y=Ae^{-\cos x}$.
+  \item $e^{y}\,dy=e^{2x}\,dx$: $e^{y}=\dfrac12e^{2x}+C$, so $y=\ln\!\left(\dfrac12e^{2x}+C\right)$.
+  \item $\dfrac{dy}{\sqrt{1-y^2}}=dx$: $\arcsin y=x+C$, so $y=\sin(x+C)$.
+  \item \begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=3pt]
+    \item $\dfrac{dy}{\sqrt y}=x\,dx$.
+    \item $2\sqrt y=\dfrac{x^2}{2}+C_0$, so $y=\left(\dfrac{x^2}{4}+C\right)^2$.
+    \item If $y=0$ for all $x$, both sides of the equation are 0. Separating required division by $\sqrt y$, which is not allowed when $y=0$.
+  \end{enumerate}
+\end{enumerate}
+\end{solbox}
+
+\end{document}

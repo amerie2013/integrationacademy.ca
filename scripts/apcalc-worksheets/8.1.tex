@@ -1,0 +1,77 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize\color{black!60}Worksheet 8.1}
+\begin{document}
+
+\wstitle{8.1}{Average Value of a Function}{Unit 8: Applications of Integration}
+
+\begin{ideabox}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+  \item The \textbf{average value} of $f$ on $[a,b]$ is $\dfrac{1}{b-a}\displaystyle\int_{a}^{b}f(x)\,dx$.
+  \item It is the height of the rectangle on $[a,b]$ with the same area as the region under the graph.
+  \item If $f$ is continuous on $[a,b]$, then $f(c)$ equals the average value for at least one $c$ in the interval.
+  \item Do not confuse it with the \textbf{average rate of change}, $\dfrac{f(b)-f(a)}{b-a}$, which is the average value of $f'$.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked examples}
+\begin{example}{Example 1 \textperiodcentered{} A polynomial}
+Find the average value of $f(x)=3x^2-2x$ on $[1,4]$.\soln $\displaystyle\int_{1}^{4}(3x^2-2x)\,dx=\Big[x^3-x^2\Big]_1^4=48$.\result{$\dfrac{48}{3}=16$.}
+\end{example}
+
+\begin{example}{Example 2 \textperiodcentered{} Where the average is reached}
+Find the value of $c$ in $[0,9]$ at which $f(x)=\sqrt{x}$ equals its average value on $[0,9]$.\soln $\displaystyle\int_{0}^{9}\sqrt x\,dx=18$, so the average is 2. Solve $\sqrt c=2$.\result{$c=4$.}
+\end{example}
+
+\begin{example}{Example 3 \textperiodcentered{} An exponential}
+Find the average value of $f(x)=e^{2x}$ on $[0,1]$.\soln $\dfrac{1}{1}\Big[\tfrac12e^{2x}\Big]_0^1$.\result{$\dfrac{e^2-1}{2}$.}
+\end{example}
+
+\newpage
+\sech{Practice}
+
+\level{Core}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item Find the average value of $f(x)=6x$ on $[0,4]$.\work{2.3cm}
+  \item Find the average value of $f(x)=x^3$ on $[0,2]$.\work{2.3cm}
+  \item Find the average value of $f(x)=\dfrac{1}{x^2}$ on $[1,4]$.\work{2.3cm}
+  \item Given $\displaystyle\int_{2}^{7}f(x)\,dx=30$, find the average value of $f$ on $[2,7]$.\work{2.3cm}
+\end{enumerate}
+
+\level{Exam level}
+\begin{enumerate}[leftmargin=*,itemsep=2pt,start=5]
+  \item Find the average value of $f(x)=x\sqrt{x^2+9}$ on $[0,4]$.\work{2.8cm}
+  \item The average value of $f$ on $[1,5]$ is 7. Find $\displaystyle\int_{1}^{5}\big(f(x)+2\big)\,dx$.\work{2.8cm}
+  \item Find the value of $c$ in $[0,6]$ at which $f(x)=x^2+2$ equals its average value on $[0,6]$.\work{2.8cm}
+  \item The table gives the temperature $H(t)$, in $^\circ$C, at selected times $t$ hours. Use a trapezoidal sum with three subintervals to estimate the average temperature for $0\le t\le10$.\begin{center}\renewcommand{\arraystretch}{1.25}\begin{tabular}{|c|c|c|c|c|}\hline $t$ & $0$ & $2$ & $6$ & $10$ \\ \hline $H(t)$ & $12$ & $18$ & $20$ & $14$ \\ \hline\end{tabular}\end{center}\work{2.8cm}
+\end{enumerate}
+
+\begin{frbox}{Question 9 \textperiodcentered{} Free-response practice}
+\emph{Calculator permitted.} The temperature in a greenhouse is $W(t)=20+15\sin\!\left(\dfrac{\pi t}{12}\right)$ degrees Celsius, for $0\le t\le12$, where $t$ is in hours.
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=2pt]
+  \item Find the average temperature for $0\le t\le12$.\work{2.6cm}
+  \item Find the average rate of change of the temperature for $0\le t\le6$. Include units.\work{2.6cm}
+  \item Find the times at which the temperature equals its average value.\work{2.6cm}
+\end{enumerate}
+\end{frbox}
+
+\newpage
+\begin{solbox}
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item $\dfrac14(48)=12$.
+  \item $\dfrac12(4)=2$.
+  \item $\dfrac13\left(1-\dfrac14\right)=\dfrac14$.
+  \item $\dfrac{30}{5}=6$.
+  \item $\dfrac14\Big[\tfrac13(x^2+9)^{3/2}\Big]_0^4=\dfrac14\cdot\dfrac{125-27}{3}=\dfrac{49}{6}$.
+  \item $\displaystyle\int_{1}^{5}f(x)\,dx=28$, and $\displaystyle\int_{1}^{5}2\,dx=8$: total 36.
+  \item Average $=\dfrac16(72+12)=14$; $c^2+2=14$ gives $c=2\sqrt3$.
+  \item $\dfrac{2(12+18)}{2}+\dfrac{4(18+20)}{2}+\dfrac{4(20+14)}{2}=174$; average $\approx17.4$ $^\circ$C.
+  \item \begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=3pt]
+    \item $\dfrac{1}{12}\displaystyle\int_{0}^{12}W(t)\,dt=20+\dfrac{30}{\pi}\approx29.549$ $^\circ$C.
+    \item $\dfrac{W(6)-W(0)}{6}=\dfrac{35-20}{6}=2.5$ $^\circ$C per hour.
+    \item $\sin\!\left(\dfrac{\pi t}{12}\right)=\dfrac2\pi$: $t\approx2.636$ and $t\approx9.364$ hours.
+  \end{enumerate}
+\end{enumerate}
+\end{solbox}
+
+\end{document}

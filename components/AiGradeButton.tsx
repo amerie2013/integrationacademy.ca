@@ -4,13 +4,14 @@ import { useState } from "react";
 import { supabase } from "../lib/supabase";
 
 // Teacher-assist: ask the AI to grade each assignment question out of 10 and
-// draft feedback. The AI never sets the grade — "Use this" only pre-fills the
+// draft feedback. Exam-format free-response questions come back with a `max`
+// per part instead (points from the scoring guide), and are shown out of that. The AI never sets the grade — "Use this" only pre-fills the
 // teacher's grade (the total) and feedback boxes, which they edit and save.
 // The draft is cached server-side in a staff-only table (never shown to students).
-type QDraft = { label: string; mark: number; comment: string };
+type QDraft = { label: string; mark: number; comment: string; max?: number };
 type Draft = { total: number; max: number; feedback: string; breakdown: QDraft[]; usedImage: boolean; cached?: boolean };
 
-const markColor = (m: number) => (m >= 8 ? "#059669" : m >= 5 ? "#ca8a04" : "#dc2626");
+const markColor = (m: number, max = 10) => (m >= 0.8 * max ? "#059669" : m >= 0.5 * max ? "#ca8a04" : "#dc2626");
 
 export function AiGradeButton({ submissionId, onUse }: { submissionId: string; onUse: (grade: string, feedback: string) => void }) {
   const [busy, setBusy] = useState(false);
@@ -37,7 +38,7 @@ export function AiGradeButton({ submissionId, onUse }: { submissionId: string; o
   // Build the feedback the teacher can drop into the box: overall summary + a
   // per-question line for each question, ending with the total.
   function compiledFeedback(d: Draft) {
-    const lines = d.breakdown.map((q) => `${q.label}: ${q.mark}/10 — ${q.comment}`);
+    const lines = d.breakdown.map((q) => `${q.label}: ${q.mark}/${q.max ?? 10} — ${q.comment}`);
     return [d.feedback.trim(), ...lines, `Total: ${d.total}/${d.max}`].filter(Boolean).join("\n");
   }
 
@@ -61,7 +62,7 @@ export function AiGradeButton({ submissionId, onUse }: { submissionId: string; o
           <div style={{ display: "grid", gap: 4, marginBottom: 10 }}>
             {draft.breakdown.map((q, i) => (
               <div key={i} style={{ display: "flex", gap: 8, fontSize: 13, alignItems: "baseline" }}>
-                <span style={{ fontWeight: 800, color: markColor(q.mark), width: 42, flexShrink: 0 }}>{q.mark}/10</span>
+                <span style={{ fontWeight: 800, color: markColor(q.mark, q.max), width: 42, flexShrink: 0 }}>{q.mark}/{q.max ?? 10}</span>
                 <span style={{ fontWeight: 700, color: "#334155", width: 40, flexShrink: 0 }}>{q.label}</span>
                 <span style={{ color: "#475569" }}>{q.comment}</span>
               </div>

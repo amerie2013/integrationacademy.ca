@@ -1,0 +1,77 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize\color{black!60}Worksheet 9.7}
+\begin{document}
+
+\wstitle{9.7}{Free-Response Type: Differential Equations}{Unit 9: Exam Strategy and Free-Response Types}
+
+\begin{ideabox}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+  \item A slope-field segment at $(x,y)$ has slope equal to the value of $\dfrac{dy}{dx}$ there.
+  \item A tangent-line approximation uses the given point and the slope from the equation.
+  \item $\dfrac{d^2y}{dx^2}$: differentiate the equation implicitly, then substitute for $\dfrac{dy}{dx}$. Its sign decides over or under.
+  \item To solve: separate, integrate with $+C$, use the initial condition, then solve for $y$. No separation, no points.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked examples}
+\begin{example}{Example 1 \textperiodcentered{} A tangent-line approximation}
+Let $y=f(x)$ be the solution of $\dfrac{dy}{dx}=2x(y-1)$ with $f(1)=4$. Approximate $f(1.1)$.\soln Slope at $(1,4)$: $2(1)(3)=6$. Tangent line: $y=4+6(x-1)$.\result{$f(1.1)\approx4.6$.}
+\end{example}
+
+\begin{example}{Example 2 \textperiodcentered{} Over or under}
+Is that approximation an overestimate or an underestimate?\soln $\dfrac{d^2y}{dx^2}=2(y-1)+2x\dfrac{dy}{dx}$, which is $6+12=18$ at $(1,4)$.\result{An underestimate: the graph is concave up near $x=1$.}
+\end{example}
+
+\begin{example}{Example 3 \textperiodcentered{} The particular solution}
+Find $f(x)$.\soln $\dfrac{dy}{y-1}=2x\,dx$ gives $\ln|y-1|=x^2+C$, and $\ln3=1+C$.\result{$y=1+3e^{x^2-1}$.}
+\end{example}
+
+\newpage
+\sech{Practice}
+\emph{No calculator on this page.}
+\level{Core}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item For $\dfrac{dy}{dx}=x-2y$, find the slope at $(3,1)$.\work{2.3cm}
+  \item For the same equation, along what line are the slope-field segments horizontal?\work{2.3cm}
+  \item For the same equation, find $\dfrac{d^2y}{dx^2}$ in terms of $x$ and $y$.\work{2.3cm}
+  \item Show that $y=\dfrac x2-\dfrac14$ is a solution of $\dfrac{dy}{dx}=x-2y$.\work{2.3cm}
+\end{enumerate}
+
+\level{Exam level}
+\begin{enumerate}[leftmargin=*,itemsep=2pt,start=5]
+  \item Solve $\dfrac{dy}{dx}=\dfrac{2x}{e^{y}}$ with $y(0)=0$.\work{2.8cm}
+  \item Solve $\dfrac{dy}{dx}=-xy^2$ with $y(0)=2$.\work{2.8cm}
+  \item Solve $\dfrac{dP}{dt}=0.5(80-P)$ with $P(0)=20$, and find $\displaystyle\lim_{t\to\infty}P(t)$.\work{2.8cm}
+  \item Find the values of $m$ and $b$ for which $y=mx+b$ is a solution of $\dfrac{dy}{dx}=y-4x$.\work{2.8cm}
+\end{enumerate}
+
+\begin{frbox}{Question 9 \textperiodcentered{} Free-response practice}
+Consider the differential equation $\dfrac{dy}{dx}=x(4-y)$. Let $y=f(x)$ be the particular solution with $f(2)=1$.
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=2pt]
+  \item Write an equation of the line tangent to the graph of $f$ at $(2,1)$, and use it to approximate $f(2.1)$.\work{2.6cm}
+  \item Find $\dfrac{d^2y}{dx^2}$ in terms of $x$ and $y$. Is the approximation in part (a) an overestimate or an underestimate? Give a reason.\work{2.6cm}
+  \item Find the particular solution $y=f(x)$.\work{2.6cm}
+\end{enumerate}
+\end{frbox}
+
+\newpage
+\begin{solbox}
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item $3-2=1$.
+  \item $y=\dfrac x2$.
+  \item $1-2\dfrac{dy}{dx}=1-2x+4y$.
+  \item $\dfrac{dy}{dx}=\dfrac12$, and $x-2y=x-x+\dfrac12=\dfrac12$.
+  \item $e^{y}\,dy=2x\,dx$: $e^{y}=x^2+C$ with $C=1$, so $y=\ln\!\left(x^2+1\right)$.
+  \item $-y^{-2}\,dy=x\,dx$: $\dfrac1y=\dfrac{x^2}{2}+C$ with $C=\dfrac12$, so $y=\dfrac{2}{x^2+1}$.
+  \item $-\ln|80-P|=0.5t+C$; $80-P=60e^{-0.5t}$, so $P=80-60e^{-0.5t}$ and the limit is 80.
+  \item $m=mx+b-4x$ for all $x$ requires $m=4$ and $b=4$: $y=4x+4$.
+  \item \begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=3pt]
+    \item Slope $2(4-1)=6$: $y=1+6(x-2)$, so $f(2.1)\approx1.6$.
+    \item $\dfrac{d^2y}{dx^2}=(4-y)-x\dfrac{dy}{dx}=(4-y)\left(1-x^2\right)$, which is $-9$ at $(2,1)$. The graph is concave down there, so the approximation is an overestimate.
+    \item $\dfrac{dy}{4-y}=x\,dx$ gives $-\ln|4-y|=\dfrac{x^2}{2}+C$, and $-\ln3=2+C$. So $4-y=3e^{2-x^2/2}$ and $y=4-3e^{2-x^2/2}$.
+  \end{enumerate}
+\end{enumerate}
+\end{solbox}
+
+\end{document}

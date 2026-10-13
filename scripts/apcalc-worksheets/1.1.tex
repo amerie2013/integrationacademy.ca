@@ -1,0 +1,77 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize\color{black!60}Worksheet 1.1}
+\begin{document}
+
+\wstitle{1.1}{The Instant Problem: From Average Rates to Limits}{Unit 1: Limits and Continuity}
+
+\begin{ideabox}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+  \item The \textbf{average rate of change} of $f$ on $[a,b]$ is $\dfrac{f(b)-f(a)}{b-a}$, with units of $f$ per unit of $x$.
+  \item An \textbf{instantaneous} rate is the limit of average rates as the interval shrinks to a point.
+  \item $\displaystyle\lim_{x\to c}f(x)$ describes the values of $f$ \emph{near} $c$. The value $f(c)$ plays no part.
+  \item A two-sided limit exists exactly when the left-hand and right-hand limits exist and are equal.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked examples}
+\begin{example}{Example 1 \textperiodcentered{} Average rate from a formula}
+Find the average rate of change of $f(x)=x^2-5x$ on $[2,6]$.\soln $f(6)=6$ and $f(2)=-6$, so $\dfrac{6-(-6)}{6-2}=\dfrac{12}{4}$.\result{The average rate of change is $3$.}
+\end{example}
+
+\begin{example}{Example 2 \textperiodcentered{} Shrinking the interval}
+For $s(t)=2t^2+t$, simplify the average rate of change on $[3,3+h]$, $h\neq0$, and find what it approaches as $h\to0$.\soln $\dfrac{2(3+h)^2+(3+h)-21}{h}=\dfrac{13h+2h^2}{h}=13+2h$.\result{As $h\to0$ the average rates approach $13$.}
+\end{example}
+
+\begin{example}{Example 3 \textperiodcentered{} Interpreting in context}
+The depth of water in a pool, $D(t)$ cm, is measured at times $t$ minutes.\begin{center}\renewcommand{\arraystretch}{1.25}\begin{tabular}{|c|c|c|c|c|}\hline $t$ & $0$ & $4$ & $10$ & $15$ \\ \hline $D(t)$ & $60$ & $52$ & $34$ & $29$ \\ \hline\end{tabular}\end{center}Find the average rate of change of $D$ on $[4,10]$ and interpret it.\soln $\dfrac{D(10)-D(4)}{10-4}=\dfrac{34-52}{6}=-3$.\result{From $t=4$ to $t=10$ minutes, the depth of the water decreased at an average rate of 3 cm per minute.}
+\end{example}
+
+\newpage
+\sech{Practice}
+
+\level{Core}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item Find the average rate of change of $f(x)=x^3$ on $[-1,2]$.\work{2.3cm}
+  \item Find the average rate of change of $f(x)=\dfrac1x$ on $[1,4]$.\work{2.3cm}
+  \item A function has $\displaystyle\lim_{x\to 3^-}f(x)=5$, $\displaystyle\lim_{x\to 3^+}f(x)=5$ and $f(3)=1$. State $\displaystyle\lim_{x\to 3}f(x)$.\work{2.3cm}
+  \item A function has $\displaystyle\lim_{x\to 0^-}g(x)=-2$ and $\displaystyle\lim_{x\to 0^+}g(x)=2$. Does $\displaystyle\lim_{x\to 0}g(x)$ exist? Explain.\work{2.3cm}
+\end{enumerate}
+
+\level{Exam level}
+\begin{enumerate}[leftmargin=*,itemsep=2pt,start=5]
+  \item For $s(t)=t^2-3t$, simplify the average rate of change on $[2,2+h]$, $h\neq0$, and state the instantaneous rate of change at $t=2$.\work{2.8cm}
+  \item Let $g(x)=\dfrac{x^2-1}{x-1}$ for $x\neq1$ and $g(1)=7$. Find $\displaystyle\lim_{x\to 1}g(x)$.\work{2.8cm}
+  \item Using the pool table in Example 3, find the average rate of change of $D$ on $[10,15]$ and interpret it with units.\work{2.8cm}
+  \item The average rate of change of $f$ on $[2,5]$ is $-4$, and $f(5)=1$. Find $f(2)$.\work{2.8cm}
+\end{enumerate}
+
+\begin{frbox}{Question 9 \textperiodcentered{} Free-response practice}
+The volume of water in a tank, $V(t)$ litres, is recorded at selected times $t$ minutes.\begin{center}\renewcommand{\arraystretch}{1.25}\begin{tabular}{|c|c|c|c|c|}\hline $t$ & $0$ & $3$ & $8$ & $12$ \\ \hline $V(t)$ & $200$ & $170$ & $130$ & $122$ \\ \hline\end{tabular}\end{center}
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=2pt]
+  \item Find the average rate of change of $V$ on $[3,8]$. Indicate units of measure.\work{2.6cm}
+  \item Using correct units, interpret your answer to part (a) in context.\work{2.6cm}
+  \item On which of the intervals $[0,3]$, $[3,8]$, $[8,12]$ is the water draining fastest on average? Show the work that leads to your answer.\work{2.6cm}
+\end{enumerate}
+\end{frbox}
+
+\newpage
+\begin{solbox}
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item $\dfrac{8-(-1)}{2-(-1)}=\dfrac93=3$.
+  \item $\dfrac{\frac14-1}{4-1}=\dfrac{-\frac34}{3}=-\dfrac14$.
+  \item $5$. The one-sided limits agree; the value $f(3)=1$ is irrelevant.
+  \item No. The one-sided limits exist but are not equal.
+  \item $\dfrac{(2+h)^2-3(2+h)-(-2)}{h}=\dfrac{h+h^2}{h}=1+h$, which approaches $1$.
+  \item For $x\neq1$, $g(x)=x+1$, so the limit is $2$ (not $g(1)=7$).
+  \item $\dfrac{29-34}{15-10}=-1$. From $t=10$ to $t=15$ minutes the depth decreased at an average rate of 1 cm per minute.
+  \item $\dfrac{1-f(2)}{3}=-4$ gives $f(2)=13$.
+  \item \begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=3pt]
+    \item $\dfrac{V(8)-V(3)}{8-3}=\dfrac{130-170}{5}=-8$ litres per minute.
+    \item From $t=3$ to $t=8$ minutes, the volume of water in the tank decreased at an average rate of 8 litres per minute.
+    \item $[0,3]$: $\dfrac{170-200}{3}=-10$. $[3,8]$: $-8$. $[8,12]$: $\dfrac{122-130}{4}=-2$. The water drains fastest on $[0,3]$, at an average of 10 litres per minute.
+  \end{enumerate}
+\end{enumerate}
+\end{solbox}
+
+\end{document}

@@ -1,0 +1,77 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize\color{black!60}Worksheet 6.10}
+\begin{document}
+
+\wstitle{6.10}{Rational Integrands: Division and Completing the Square}{Unit 6: Integration and Accumulation of Change}
+
+\begin{ideabox}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+  \item If the denominator is a single term, \textbf{divide each term} of the numerator by it.
+  \item If the numerator's degree is at least the denominator's, do \textbf{long division} first.
+  \item $\displaystyle\int\dfrac{1}{x^2+a^2}\,dx=\dfrac1a\arctan\!\left(\dfrac xa\right)+C$.
+  \item A quadratic denominator with no real zeros: \textbf{complete the square}, then use the arctangent form.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked examples}
+\begin{example}{Example 1 \textperiodcentered{} Dividing term by term}
+Find $\displaystyle\int\dfrac{x^3-2x+4}{x^2}\,dx$.\soln $\displaystyle\int\left(x-\dfrac2x+4x^{-2}\right)dx$.\result{$\dfrac{x^2}{2}-2\ln|x|-\dfrac4x+C$.}
+\end{example}
+
+\begin{example}{Example 2 \textperiodcentered{} Long division}
+Find $\displaystyle\int\dfrac{x^2+1}{x-1}\,dx$.\soln $\dfrac{x^2+1}{x-1}=x+1+\dfrac{2}{x-1}$.\result{$\dfrac{x^2}{2}+x+2\ln|x-1|+C$.}
+\end{example}
+
+\begin{example}{Example 3 \textperiodcentered{} Completing the square}
+Find $\displaystyle\int\dfrac{1}{x^2+4x+5}\,dx$.\soln $x^2+4x+5=(x+2)^2+1$.\result{$\arctan(x+2)+C$.}
+\end{example}
+
+\newpage
+\sech{Practice}
+
+\level{Core}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item Find $\displaystyle\int\dfrac{x+3}{x}\,dx$.\work{2.3cm}
+  \item Find $\displaystyle\int\dfrac{1}{x^2+25}\,dx$.\work{2.3cm}
+  \item Find $\displaystyle\int\dfrac{5}{x+2}\,dx$.\work{2.3cm}
+  \item Complete the square: $x^2-6x+13$.\work{2.3cm}
+\end{enumerate}
+
+\level{Exam level}
+\begin{enumerate}[leftmargin=*,itemsep=2pt,start=5]
+  \item Find $\displaystyle\int\dfrac{x^2+3x}{x+2}\,dx$.\work{2.8cm}
+  \item Find $\displaystyle\int\dfrac{1}{x^2-6x+13}\,dx$.\work{2.8cm}
+  \item Find $\displaystyle\int\dfrac{2x+3}{x^2+1}\,dx$.\work{2.8cm}
+  \item Evaluate $\displaystyle\int_0^{\sqrt3}\dfrac{1}{1+x^2}\,dx$.\work{2.8cm}
+\end{enumerate}
+
+\begin{frbox}{Question 9 \textperiodcentered{} Free-response practice}
+Let $q(x)=x^2+4x+8$.
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=2pt]
+  \item Find $\displaystyle\int\dfrac{4x+8}{q(x)}\,dx$.\work{2.6cm}
+  \item Find $\displaystyle\int\dfrac{1}{q(x)}\,dx$.\work{2.6cm}
+  \item Use parts (a) and (b) to find $\displaystyle\int\dfrac{4x+9}{q(x)}\,dx$.\work{2.6cm}
+\end{enumerate}
+\end{frbox}
+
+\newpage
+\begin{solbox}
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item $x+3\ln|x|+C$.
+  \item $\dfrac15\arctan\!\left(\dfrac x5\right)+C$.
+  \item $5\ln|x+2|+C$.
+  \item $(x-3)^2+4$.
+  \item $\dfrac{x^2+3x}{x+2}=x+1-\dfrac{2}{x+2}$: $\dfrac{x^2}{2}+x-2\ln|x+2|+C$.
+  \item $(x-3)^2+4$: $\dfrac12\arctan\!\left(\dfrac{x-3}{2}\right)+C$.
+  \item $\displaystyle\int\dfrac{2x}{x^2+1}\,dx+3\int\dfrac{1}{x^2+1}\,dx=\ln\!\left(x^2+1\right)+3\arctan x+C$.
+  \item $\Big[\arctan x\Big]_0^{\sqrt3}=\dfrac\pi3$.
+  \item \begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=3pt]
+    \item The numerator is $2q'(x)$: $2\ln\!\left(x^2+4x+8\right)+C$.
+    \item $q(x)=(x+2)^2+4$: $\dfrac12\arctan\!\left(\dfrac{x+2}{2}\right)+C$.
+    \item $4x+9=(4x+8)+1$: $2\ln\!\left(x^2+4x+8\right)+\dfrac12\arctan\!\left(\dfrac{x+2}{2}\right)+C$.
+  \end{enumerate}
+\end{enumerate}
+\end{solbox}
+
+\end{document}

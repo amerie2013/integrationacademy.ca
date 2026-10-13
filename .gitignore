@@ -47,3 +47,5 @@ __pycache__/
 
 # FTCE OCR dump (large; regenerate from the PDF)
 scripts/_ftce/fulltext.txt
+
+.vercel

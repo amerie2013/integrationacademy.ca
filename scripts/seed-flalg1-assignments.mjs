@@ -26,15 +26,18 @@ async function run() {
   if (ce || !course) throw ce || new Error("ALG1 course not found");
   console.log("Course:", course.id);
 
-  await db.from("assignments").delete().eq("course_id", course.id);
-
+  // assignments.id is referenced by submissions.assignment_id ON DELETE CASCADE —
+  // never delete assignment rows (it destroys student submissions). Upsert by title.
   const codes = Object.keys(ASSIGN).sort((a, b) => rank(a) - rank(b));
   let n = 0;
   for (const code of codes) {
     const ad = ASSIGN[code];
-    const { error } = await db.from("assignments").insert({
-      course_id: course.id, title: ad.title, description: ad.description, published: true,
-    });
+    const existingA = await db.from("assignments").select("id").eq("course_id", course.id).eq("title", ad.title).maybeSingle();
+    const { error } = existingA.data
+      ? await db.from("assignments").update({ description: ad.description, published: true }).eq("id", existingA.data.id)
+      : await db.from("assignments").insert({
+          course_id: course.id, title: ad.title, description: ad.description, published: true,
+        });
     if (error) throw error;
     n++;
     console.log(`  ${ad.title}`);

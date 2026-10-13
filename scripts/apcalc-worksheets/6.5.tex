@@ -1,0 +1,82 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize\color{black!60}Worksheet 6.5}
+\begin{document}
+
+\wstitle{6.5}{Analysing a Function Defined by an Integral}{Unit 6: Integration and Accumulation of Change}
+
+\begin{ideabox}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+  \item If $g(x)=\displaystyle\int_{a}^{x}f(t)\,dt$, then $g'(x)=f(x)$ and $g''(x)=f'(x)$.
+  \item $g$ is increasing where $f$ is positive; $g$ has a relative maximum where $f$ changes from positive to negative.
+  \item The graph of $g$ is concave up where $f$ is increasing, and has a point of inflection where $f$ changes direction.
+  \item Values of $g$ are signed areas under the graph of $f$.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked examples}
+\begin{example}{Example 1 \textperiodcentered{} A relative minimum}
+Let $g(x)=\displaystyle\int_{0}^{x}(t-3)\,dt$. Find the relative minimum of $g$.\soln $g'(x)=x-3$ changes from negative to positive at $x=3$. $g(3)$ is the signed area of a triangle below the axis.\result{Relative minimum $g(3)=-\dfrac92$.}
+\end{example}
+
+\begin{example}{Example 2 \textperiodcentered{} Concavity}
+If $g'=f$ and $f$ is decreasing on $(2,5)$, what is true of the graph of $g$ there?\soln $g''=f'<0$.\result{It is concave down.}
+\end{example}
+
+\begin{example}{Example 3 \textperiodcentered{} An absolute extremum}
+Let $g(x)=\displaystyle\int_{0}^{x}\left(4-t^2\right)\,dt$. Find the absolute maximum of $g$ on $[0,3]$.\soln $g'(x)=4-x^2=0$ at $x=2$. $g(0)=0$, $g(2)=8-\dfrac83=\dfrac{16}{3}$, $g(3)=12-9=3$.\result{$\dfrac{16}{3}$, at $x=2$.}
+\end{example}
+
+\newpage
+\sech{Practice}
+Questions 1 to 8 use this graph of $f$, which consists of three line segments. Let $g(x)=\displaystyle\int_{0}^{x}f(t)\,dt$.
+\begin{apgraph}{-0.5}{9}{-3}{3}
+\addplot[color=ink, mark=none, line width=1.1pt] coordinates {(0,-2) (2,2) (6,-2) (8,0)};
+\closeddot{0}{-2}\closeddot{8}{0}
+\node[font=\small, color=ink] at (axis cs:3.3,1.9) {$y=f(t)$};
+\end{apgraph}
+\level{Core}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item Find $g(2)$.\work{1.1cm}
+  \item Find $g'(2)$.\work{1.1cm}
+  \item Find $g(4)$.\work{1.1cm}
+  \item Find $g''(3)$.\work{1.1cm}
+\end{enumerate}
+
+\level{Exam level}
+\begin{enumerate}[leftmargin=*,itemsep=2pt,start=5]
+  \item Find the $x$-coordinates of the relative minimum and the relative maximum of $g$ on $(0,8)$. Justify your answers.\work{2.1cm}
+  \item Find the absolute maximum and absolute minimum values of $g$ on $[0,8]$.\work{2.1cm}
+  \item On what intervals is the graph of $g$ concave up? Where are its points of inflection?\work{2.1cm}
+  \item Write an equation of the line tangent to the graph of $g$ at $x=6$.\work{2.1cm}
+\end{enumerate}
+
+\begin{frbox}{Question 9 \textperiodcentered{} Free-response practice}
+Let $H(x)=\displaystyle\int_{1}^{x}\ln t\,dt$ for $x>0$.
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=2pt]
+  \item Find $H(1)$ and $H'(x)$.\work{1.9cm}
+  \item Show that $H$ has its absolute minimum at $x=1$.\work{1.9cm}
+  \item Describe the concavity of the graph of $H$. Given that $H(e)=1$, write an equation of the tangent line at $x=e$.\work{1.9cm}
+\end{enumerate}
+\end{frbox}
+
+\newpage
+\begin{solbox}
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item The areas on $[0,1]$ and $[1,2]$ are $-1$ and $1$: $g(2)=0$.
+  \item $g'(2)=f(2)=2$.
+  \item $g(2)+2=2$ (a triangle of area 2 on $[2,4]$).
+  \item The slope of $f$ on $(2,6)$: $-1$.
+  \item Minimum at $x=1$, where $g'=f$ changes from negative to positive. Maximum at $x=4$, where $f$ changes from positive to negative.
+  \item $g(0)=0$, $g(1)=-1$, $g(4)=2$, $g(8)=2-2-2=-2$. Maximum 2; minimum $-2$ (at $x=8$).
+  \item Concave up on $(0,2)$ and $(6,8)$, where $f$ is increasing. Points of inflection at $x=2$ and $x=6$.
+  \item $g(6)=0$ and $g'(6)=f(6)=-2$: $y=-2(x-6)$.
+  \item \begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=3pt]
+    \item $H(1)=0$ and $H'(x)=\ln x$.
+    \item $H'(x)<0$ for $0<x<1$ and $H'(x)>0$ for $x>1$, so $H$ decreases and then increases: the absolute minimum is $H(1)=0$.
+    \item $H''(x)=\dfrac1x>0$: concave up for all $x>0$. The slope at $x=e$ is $\ln e=1$: $y-1=x-e$.
+  \end{enumerate}
+\end{enumerate}
+\end{solbox}
+
+\end{document}

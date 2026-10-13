@@ -1,0 +1,77 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize\color{black!60}Worksheet 4.3}
+\begin{document}
+
+\wstitle{4.3}{Rates of Change Beyond Motion}{Unit 4: Derivatives in Context}
+
+\begin{ideabox}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+  \item Any derivative is a rate: of area with respect to side length, of population with respect to time, of cost with respect to quantity.
+  \item \textbf{Marginal} cost, revenue or profit means the derivative with respect to the number of items.
+  \item Read the independent variable carefully. $\dfrac{dA}{dr}$ is a rate per unit of length, not per unit of time.
+  \item A quantity stops increasing or decreasing where its derivative changes sign.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked examples}
+\begin{example}{Example 1 \textperiodcentered{} Geometry}
+A square has side $s$ cm and area $A=s^2$. Find the rate of change of the area with respect to the side when $s=6$.\soln $\dfrac{dA}{ds}=2s$.\result{$12$ cm$^2$ per cm.}
+\end{example}
+
+\begin{example}{Example 2 \textperiodcentered{} Growth}
+A town has population $P(t)=1200e^{0.05t}$ after $t$ years. How fast is it growing at $t=0$?\soln $P'(t)=60e^{0.05t}$.\result{60 people per year.}
+\end{example}
+
+\begin{example}{Example 3 \textperiodcentered{} Marginal cost}
+The cost of making $x$ items is $C(x)=500+8x+0.02x^2$ dollars. Find the marginal cost when $x=150$.\soln $C'(x)=8+0.04x$.\result{14 dollars per item.}
+\end{example}
+
+\newpage
+\sech{Practice}
+
+\level{Core}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item A circle has circumference $C=2\pi r$. Find $\dfrac{dC}{dr}$.\work{2.3cm}
+  \item A cube has edge $x$ and volume $V=x^3$. Find $\dfrac{dV}{dx}$ when $x=2$.\work{2.3cm}
+  \item A quantity is $Q(t)=100-4t^2$. Find $Q'(3)$.\work{2.3cm}
+  \item Pressure $P$ is measured in kilopascals and volume $V$ in litres. State the units of $\dfrac{dP}{dV}$.\work{2.3cm}
+\end{enumerate}
+
+\level{Exam level}
+\begin{enumerate}[leftmargin=*,itemsep=2pt,start=5]
+  \item A population of insects is $N(t)=\dfrac{600}{1+2t}$ after $t$ weeks. Find $N'(2)$.\work{2.8cm}
+  \item The temperature of a metal plate is $T(t)=18+52e^{-0.05t}$ degrees Celsius after $t$ minutes. How fast is it cooling at $t=0$?\work{2.8cm}
+  \item The profit from selling $x$ items is $P(x)=30x-0.05x^2-200$ dollars. At what value of $x$ is the marginal profit zero?\work{2.8cm}
+  \item A cylinder has fixed height 10 cm and radius $r$ cm. Find the rate of change of its volume with respect to its radius when $r=3$.\work{2.8cm}
+\end{enumerate}
+
+\begin{frbox}{Question 9 \textperiodcentered{} Free-response practice}
+The mass of a bacterial culture is $M(t)=40+10t-t^2$ grams for $0\le t\le8$ hours.
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=2pt]
+  \item Find $M'(2)$. Indicate units of measure.\work{2.6cm}
+  \item At what time is the mass of the culture greatest, and what is that mass?\work{2.6cm}
+  \item Find the average rate of change of the mass over $0\le t\le8$, and the time at which the instantaneous rate of change equals it.\work{2.6cm}
+\end{enumerate}
+\end{frbox}
+
+\newpage
+\begin{solbox}
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item $2\pi$.
+  \item $3x^2=12$.
+  \item $Q'(t)=-8t$, so $Q'(3)=-24$.
+  \item Kilopascals per litre.
+  \item $N'(t)=-\dfrac{1200}{(1+2t)^2}$, so $N'(2)=-48$ insects per week.
+  \item $T'(t)=-2.6e^{-0.05t}$, so it is cooling at 2.6 degrees Celsius per minute.
+  \item $P'(x)=30-0.1x=0$ at $x=300$.
+  \item $V=10\pi r^2$, so $\dfrac{dV}{dr}=20\pi r=60\pi$ cm$^3$ per cm.
+  \item \begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=3pt]
+    \item $M'(t)=10-2t$, so $M'(2)=6$ grams per hour.
+    \item $M'(t)=0$ at $t=5$, where $M'$ changes from positive to negative. $M(5)=65$ grams.
+    \item $\dfrac{M(8)-M(0)}{8}=\dfrac{56-40}{8}=2$ grams per hour. $10-2t=2$ at $t=4$.
+  \end{enumerate}
+\end{enumerate}
+\end{solbox}
+
+\end{document}

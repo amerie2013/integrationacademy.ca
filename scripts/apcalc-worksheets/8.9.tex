@@ -1,0 +1,77 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize\color{black!60}Worksheet 8.9}
+\begin{document}
+
+\wstitle{8.9}{Solids of Revolution: Washers}{Unit 8: Applications of Integration}
+
+\begin{ideabox}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+  \item If the region does not touch the axis, each slice is a washer: $V=\pi\displaystyle\int_{a}^{b}\big(R^2-r^2\big)\,dx$.
+  \item $R$ is the distance from the axis to the \textbf{far} boundary; $r$ is the distance to the \textbf{near} boundary.
+  \item Square each radius separately. $(R-r)^2$ is wrong.
+  \item About $y=k$, both radii are distances from $k$: for a line below the region, $R=\text{top}-k$ and $r=\text{bottom}-k$.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked examples}
+\begin{example}{Example 1 \textperiodcentered{} About the $x$-axis}
+The region enclosed by $y=2x$ and $y=x^2$ is revolved about the $x$-axis. Find the volume.\soln They meet at $x=0,2$; $R=2x$, $r=x^2$: $\pi\displaystyle\int_{0}^{2}(4x^2-x^4)\,dx$.\result{$\dfrac{64\pi}{15}$.}
+\end{example}
+
+\begin{example}{Example 2 \textperiodcentered{} About the $y$-axis}
+The same region is revolved about the $y$-axis. Find the volume.\soln $R=\sqrt y$, $r=\dfrac y2$, $0\le y\le4$: $\pi\displaystyle\int_{0}^{4}\left(y-\tfrac{y^2}{4}\right)\,dy$.\result{$\dfrac{8\pi}{3}$.}
+\end{example}
+
+\begin{example}{Example 3 \textperiodcentered{} About a line below}
+The region bounded by $y=\sqrt{x}$, the $x$-axis and $x=4$ is revolved about the line $y=-1$. Find the volume.\soln $R=\sqrt x+1$, $r=1$: $\pi\displaystyle\int_{0}^{4}(x+2\sqrt x)\,dx$.\result{$\dfrac{56\pi}{3}$.}
+\end{example}
+
+\newpage
+\sech{Practice}
+
+\level{Core}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item Find the area of a washer with outer radius 5 and inner radius 3.\work{2.3cm}
+  \item The region between $y=3$ and $y=1$ for $0\le x\le2$ is revolved about the $x$-axis. Find the volume.\work{2.3cm}
+  \item Write, but do not evaluate, an integral for the volume when the region enclosed by $y=\sqrt{x}$ and $y=x$ is revolved about the $x$-axis.\work{2.3cm}
+  \item Evaluate the integral in Question 3.\work{2.3cm}
+\end{enumerate}
+
+\level{Exam level}
+\begin{enumerate}[leftmargin=*,itemsep=2pt,start=5]
+  \item The region enclosed by $y=x^2$ and $y=4$ is revolved about the $x$-axis. Find the volume.\work{2.8cm}
+  \item The region in the first quadrant enclosed by $y=x^3$ and $y=x$ is revolved about the $x$-axis. Find the volume.\work{2.8cm}
+  \item The region enclosed by $y=x^2$ and $y=x$ is revolved about the line $y=3$. Find the volume.\work{2.8cm}
+  \item \emph{Calculator.} The region bounded by $y=e^{x}$, the $y$-axis and $y=3$ is revolved about the $x$-axis. Find the volume to three decimal places.\work{2.8cm}
+\end{enumerate}
+
+\begin{frbox}{Question 9 \textperiodcentered{} Free-response practice}
+Let $R$ be the region enclosed by $y=x^2+1$ and $y=2x+1$.
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=2pt]
+  \item Find the area of $R$.\work{2.6cm}
+  \item Find the volume of the solid generated when $R$ is revolved about the $x$-axis.\work{2.6cm}
+  \item Write, but do not evaluate, an integral for the volume of the solid generated when $R$ is revolved about the line $y=-2$.\work{2.6cm}
+\end{enumerate}
+\end{frbox}
+
+\newpage
+\begin{solbox}
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item $\pi(25-9)=16\pi$.
+  \item $\pi(9-1)(2)=16\pi$.
+  \item $\pi\displaystyle\int_{0}^{1}(x-x^2)\,dx$.
+  \item $\pi\left(\dfrac12-\dfrac13\right)=\dfrac\pi6$.
+  \item $\pi\displaystyle\int_{-2}^{2}(16-x^4)\,dx=2\pi\left(32-\dfrac{32}{5}\right)=\dfrac{256\pi}{5}$.
+  \item $\pi\displaystyle\int_{0}^{1}(x^2-x^6)\,dx=\pi\left(\dfrac13-\dfrac17\right)=\dfrac{4\pi}{21}$.
+  \item $R=3-x^2$, $r=3-x$: $\pi\displaystyle\int_{0}^{1}(x^4-7x^2+6x)\,dx=\pi\left(\dfrac15-\dfrac73+3\right)=\dfrac{13\pi}{15}$.
+  \item $\pi\displaystyle\int_{0}^{\ln3}(9-e^{2x})\,dx=\pi(9\ln3-4)\approx18.496$.
+  \item \begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=3pt]
+    \item The graphs meet at $x=0$ and $x=2$: $\displaystyle\int_{0}^{2}(2x-x^2)\,dx=\dfrac43$.
+    \item $\pi\displaystyle\int_{0}^{2}\big[(2x+1)^2-(x^2+1)^2\big]\,dx=\pi\displaystyle\int_{0}^{2}(-x^4+2x^2+4x)\,dx=\dfrac{104\pi}{15}$.
+    \item $\pi\displaystyle\int_{0}^{2}\big[(2x+3)^2-(x^2+3)^2\big]\,dx$.
+  \end{enumerate}
+\end{enumerate}
+\end{solbox}
+
+\end{document}

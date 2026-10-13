@@ -1,0 +1,77 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize\color{black!60}Worksheet 5.10}
+\begin{document}
+
+\wstitle{5.10}{Optimisation}{Unit 5: Analysing Functions}
+
+\begin{ideabox}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+  \item Name the quantity to be made largest or smallest, and write it as a function of \textbf{one} variable, using the constraint to eliminate the other.
+  \item State the domain: the values of the variable that make sense.
+  \item Find the critical points, then \textbf{justify}: candidates test on a closed interval, or a sign argument over the whole domain.
+  \item Answer the question that was asked: a dimension, a value, or a point.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked examples}
+\begin{example}{Example 1 \textperiodcentered{} A product}
+Two positive numbers have sum 20. Find the largest possible product.\soln $P(x)=x(20-x)$, $0<x<20$. $P'(x)=20-2x=0$ at $x=10$, and $P''=-2<0$.\result{The largest product is 100.}
+\end{example}
+
+\begin{example}{Example 2 \textperiodcentered{} An open box}
+Squares of side $x$ cm are cut from the corners of a 12 cm by 12 cm sheet, and the sides are folded up. Find the largest possible volume.\soln $V(x)=x(12-2x)^2$, $0<x<6$. $V'(x)=(12-2x)(12-6x)=0$ at $x=2$ in the domain; $V\to0$ at both ends.\result{$V(2)=128$ cm$^3$.}
+\end{example}
+
+\begin{example}{Example 3 \textperiodcentered{} A nearest point}
+Find the points on $y=x^2$ closest to $(0,3)$.\soln Minimise $D=x^2+\left(x^2-3\right)^2$. $D'=2x+4x\left(x^2-3\right)=2x\left(2x^2-5\right)$. $D$ is smaller at $x=\pm\sqrt{\tfrac52}$ than at $x=0$.\result{$\left(\pm\sqrt{\tfrac52},\tfrac52\right)$.}
+\end{example}
+
+\newpage
+\sech{Practice}
+
+\level{Core}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item A rectangle has perimeter 40 cm. Find the largest possible area.\work{2.3cm}
+  \item Find the smallest value of $x+\dfrac{25}{x}$ for $x>0$.\work{2.3cm}
+  \item Find the largest value of $8x-x^2$.\work{2.3cm}
+  \item Why is finding where the derivative is zero not, by itself, a complete solution?\work{2.3cm}
+\end{enumerate}
+
+\level{Exam level}
+\begin{enumerate}[leftmargin=*,itemsep=2pt,start=5]
+  \item A farmer has 80 m of fencing for three sides of a rectangular field; the fourth side is a river. Find the largest possible area.\work{2.8cm}
+  \item A closed cylindrical can must hold $54\pi$ cm$^3$. Find the radius and height that use the least material.\work{2.8cm}
+  \item A rectangle has its base on the $x$-axis and its upper corners on $y=9-x^2$. Find the largest possible area.\work{2.8cm}
+  \item The profit from selling $x$ items is $P(x)=-2x^2+120x-400$ dollars. Find the largest possible profit.\work{2.8cm}
+\end{enumerate}
+
+\begin{frbox}{Question 9 \textperiodcentered{} Free-response practice}
+An open-topped box with a square base of side $x$ metres must have volume 108 m$^3$.
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=2pt]
+  \item Show that the surface area of the box is $S(x)=x^2+\dfrac{432}{x}$.\work{2.6cm}
+  \item Find the value of $x$ that makes the surface area as small as possible.\work{2.6cm}
+  \item Justify that this value gives the absolute minimum, and state the dimensions and surface area of the box.\work{2.6cm}
+\end{enumerate}
+\end{frbox}
+
+\newpage
+\begin{solbox}
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item $A=x(20-x)$ is greatest at $x=10$: 100 cm$^2$.
+  \item $1-\dfrac{25}{x^2}=0$ at $x=5$, where the value is 10.
+  \item $8-2x=0$ at $x=4$: the largest value is 16.
+  \item A zero derivative gives a candidate only. It must be shown to be a maximum or minimum, and an absolute one.
+  \item $A=x(80-2x)$, $A'=80-4x=0$ at $x=20$: $20\times40=800$ m$^2$.
+  \item $h=\dfrac{54}{r^2}$, so $S=2\pi r^2+\dfrac{108\pi}{r}$. $S'=4\pi r-\dfrac{108\pi}{r^2}=0$ at $r=3$; then $h=6$.
+  \item $A=2x\left(9-x^2\right)$, $A'=18-6x^2=0$ at $x=\sqrt3$: $A=2\sqrt3(6)=12\sqrt3$.
+  \item $P'(x)=-4x+120=0$ at $x=30$: $P(30)=1400$ dollars.
+  \item \begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=3pt]
+    \item With height $h$, $x^2h=108$ so $h=\dfrac{108}{x^2}$. $S=x^2+4xh=x^2+\dfrac{432}{x}$.
+    \item $S'(x)=2x-\dfrac{432}{x^2}=0$ gives $x^3=216$, so $x=6$.
+    \item $S''(x)=2+\dfrac{864}{x^3}>0$ for all $x>0$, and $x=6$ is the only critical point, so it is the absolute minimum. The box is $6\times6\times3$ m with surface area 108 m$^2$.
+  \end{enumerate}
+\end{enumerate}
+\end{solbox}
+
+\end{document}

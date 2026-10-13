@@ -1,0 +1,77 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize\color{black!60}Worksheet 0.3}
+\begin{document}
+
+\wstitle{0.3}{Exponentials, Logarithms and Their Laws}{Unit 0: Readiness}
+
+\begin{ideabox}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+  \item $y=\ln x$ means $e^{y}=x$. So $\ln\!\left(e^{x}\right)=x$ for all $x$, and $e^{\ln x}=x$ for $x>0$.
+  \item $\ln(ab)=\ln a+\ln b$, \quad $\ln\dfrac ab=\ln a-\ln b$, \quad $\ln\!\left(a^{b}\right)=b\ln a$. There is no law for $\ln(a+b)$.
+  \item To solve for an exponent: \textbf{isolate} the exponential, then take the natural logarithm.
+  \item A logarithmic equation can produce a value that is not allowed. \textbf{Check} every solution in the original equation.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked examples}
+\begin{example}{Example 1 \textperiodcentered{} Simplifying}
+Simplify $e^{\ln4+\ln3}$ and $\ln\!\left(e^{2}\sqrt{e}\right)$.\soln $e^{\ln4+\ln3}=e^{\ln12}$. $\ln\!\left(e^{2}\cdot e^{1/2}\right)=\ln\!\left(e^{5/2}\right)$.\result{$12$ and $\dfrac52$.}
+\end{example}
+
+\begin{example}{Example 2 \textperiodcentered{} Isolate, then take logs}
+Solve $5e^{2x}-3=17$.\soln $5e^{2x}=20$, so $e^{2x}=4$ and $2x=\ln4$.\result{$x=\dfrac{\ln4}{2}=\ln2$.}
+\end{example}
+
+\begin{example}{Example 3 \textperiodcentered{} A difference of logarithms}
+Solve $\ln(x+6)-\ln x=\ln4$.\soln $\ln\dfrac{x+6}{x}=\ln4$, so $x+6=4x$.\result{$x=2$, which makes both logarithms defined.}
+\end{example}
+
+\newpage
+\sech{Practice}
+
+\level{Core}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item Simplify $\ln\!\left(e^{7}\right)-e^{\ln2}$.\work{2.3cm}
+  \item Solve $e^{x}=\dfrac12$.\work{2.3cm}
+  \item Solve $\ln x=-1$.\work{2.3cm}
+  \item Write $2\ln a-\ln b+\ln c$ as a single logarithm.\work{2.3cm}
+\end{enumerate}
+
+\level{Exam level}
+\begin{enumerate}[leftmargin=*,itemsep=2pt,start=5]
+  \item Solve $e^{2x}-9e^{x}+20=0$.\work{2.8cm}
+  \item Solve $\ln(x-2)+\ln(x+2)=\ln5$.\work{2.8cm}
+  \item Solve $3^{x}=15$, giving an exact answer in terms of natural logarithms.\work{2.8cm}
+  \item Write $\ln\dfrac{x^3e^{x}}{\sqrt{x^2+1}}$ as a sum and difference of simpler terms.\work{2.8cm}
+\end{enumerate}
+
+\begin{frbox}{Question 9 \textperiodcentered{} Free-response practice}
+The amount of a drug in a patient's bloodstream $t$ hours after an injection is $A(t)=80e^{-0.1t}$ milligrams.
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=2pt]
+  \item How much of the drug is present at $t=0$?\work{2.6cm}
+  \item Find the exact time at which 20 milligrams remain.\work{2.6cm}
+  \item Find the exact half-life of the drug, and explain how it is related to your answer to part (b).\work{2.6cm}
+\end{enumerate}
+\end{frbox}
+
+\newpage
+\begin{solbox}
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item $7-2=5$.
+  \item $x=\ln\dfrac12=-\ln2$.
+  \item $x=e^{-1}=\dfrac1e$.
+  \item $\ln\dfrac{a^2c}{b}$.
+  \item $(e^{x}-4)(e^{x}-5)=0$, so $x=\ln4$ or $x=\ln5$.
+  \item $\ln\!\left(x^2-4\right)=\ln5$ gives $x^2=9$. Only $x=3$ is allowed, since $x=-3$ makes the logarithms undefined.
+  \item $x\ln3=\ln15$, so $x=\dfrac{\ln15}{\ln3}$.
+  \item $3\ln x+x-\dfrac12\ln\!\left(x^2+1\right)$.
+  \item \begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=3pt]
+    \item $A(0)=80$ milligrams.
+    \item $80e^{-0.1t}=20$ gives $e^{-0.1t}=\dfrac14$, so $t=10\ln4$ hours (about 13.9).
+    \item $e^{-0.1t}=\dfrac12$ gives $t=10\ln2$ hours. Falling from 80 to 20 is two halvings, and $10\ln4=2\cdot10\ln2$.
+  \end{enumerate}
+\end{enumerate}
+\end{solbox}
+
+\end{document}

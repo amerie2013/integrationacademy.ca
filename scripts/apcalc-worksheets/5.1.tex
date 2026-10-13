@@ -1,0 +1,77 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize\color{black!60}Worksheet 5.1}
+\begin{document}
+
+\wstitle{5.1}{The Mean Value Theorem}{Unit 5: Analysing Functions}
+
+\begin{ideabox}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+  \item \textbf{Mean Value Theorem.} If $f$ is continuous on $[a,b]$ and differentiable on $(a,b)$, there is a $c$ in $(a,b)$ with $f'(c)=\dfrac{f(b)-f(a)}{b-a}$.
+  \item In words: at some point the instantaneous rate equals the average rate.
+  \item If also $f(a)=f(b)$, then $f'(c)=0$ for some $c$ (Rolle's Theorem).
+  \item To \emph{use} the theorem in a justification, state both conditions. \textquotedblleft{}Differentiable, and therefore continuous\textquotedblright{} covers both.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked examples}
+\begin{example}{Example 1 \textperiodcentered{} Finding c}
+Find the value of $c$ guaranteed by the Mean Value Theorem for $f(x)=x^2-2x$ on $[1,4]$.\soln $\dfrac{f(4)-f(1)}{3}=\dfrac{8-(-1)}{3}=3$. Solve $2c-2=3$.\result{$c=\dfrac52$.}
+\end{example}
+
+\begin{example}{Example 2 \textperiodcentered{} A reciprocal}
+Find the value of $c$ guaranteed by the theorem for $f(x)=\dfrac1x$ on $[1,9]$.\soln $\dfrac{\frac19-1}{8}=-\dfrac19$. Solve $-\dfrac{1}{c^2}=-\dfrac19$ with $1<c<9$.\result{$c=3$.}
+\end{example}
+
+\begin{example}{Example 3 \textperiodcentered{} From values}
+A differentiable function $g$ has $g(0)=5$ and $g(4)=13$. What does the theorem guarantee?\soln $\dfrac{13-5}{4}=2$, and $g$ is differentiable, hence continuous, on $[0,4]$.\result{There is a $c$ in $(0,4)$ with $g'(c)=2$.}
+\end{example}
+
+\newpage
+\sech{Practice}
+
+\level{Core}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item Find the value of $c$ guaranteed by the Mean Value Theorem for $f(x)=x^2+1$ on $[0,2]$.\work{2.3cm}
+  \item Find the value of $c$ guaranteed by the theorem for $f(x)=x^3$ on $[-1,2]$.\work{2.3cm}
+  \item State the two conditions of the Mean Value Theorem.\work{2.3cm}
+  \item Explain why the theorem does not apply to $f(x)=|x|$ on $[-1,1]$.\work{2.3cm}
+\end{enumerate}
+
+\level{Exam level}
+\begin{enumerate}[leftmargin=*,itemsep=2pt,start=5]
+  \item Find the value of $c$ guaranteed by the theorem for $f(x)=\sqrt{x}$ on $[1,9]$.\work{2.8cm}
+  \item Find the value of $c$ guaranteed by the theorem for $f(x)=\ln x$ on $[1,e]$.\work{2.8cm}
+  \item A car travels 150 km along a road in exactly 2 hours. Explain why its speedometer must have read 75 km/h at some instant. State any assumption you make.\work{2.8cm}
+  \item A differentiable function $h$ has $h(2)=3$ and $h(7)=3$. Must there be a $c$ in $(2,7)$ with $h'(c)=0$? Must there be a $c$ with $h(c)=0$?\work{2.8cm}
+\end{enumerate}
+
+\begin{frbox}{Question 9 \textperiodcentered{} Free-response practice}
+Let $f(x)=x^3-x^2$.
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=2pt]
+  \item Explain why the Mean Value Theorem applies to $f$ on $[0,2]$.\work{2.6cm}
+  \item Find the value of $c$ in $(0,2)$ guaranteed by the theorem.\work{2.6cm}
+  \item Show that $f(0)=f(1)$, and find the value of $c$ in $(0,1)$ at which $f'(c)=0$.\work{2.6cm}
+\end{enumerate}
+\end{frbox}
+
+\newpage
+\begin{solbox}
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item Average rate $\dfrac{5-1}{2}=2$; $2c=2$ gives $c=1$.
+  \item Average rate $\dfrac{8-(-1)}{3}=3$; $3c^2=3$ gives $c=1$ (the value $c=-1$ is not inside the interval).
+  \item $f$ is continuous on $[a,b]$ and differentiable on $(a,b)$.
+  \item $f$ is not differentiable at $x=0$, which lies in $(-1,1)$.
+  \item Average rate $\dfrac{3-1}{8}=\dfrac14$; $\dfrac{1}{2\sqrt c}=\dfrac14$ gives $c=4$.
+  \item Average rate $\dfrac{1-0}{e-1}$; $\dfrac1c=\dfrac{1}{e-1}$ gives $c=e-1$.
+  \item Assuming the position is a differentiable function of time, its average rate of change is $\dfrac{150}{2}=75$ km/h, so by the Mean Value Theorem the velocity equals 75 km/h at some instant.
+  \item Yes to the first: $h$ is differentiable and $h(2)=h(7)$, so the theorem gives $h'(c)=\dfrac{3-3}{5}=0$. No to the second: nothing forces $h$ to take the value 0 (for example $h$ could be constant at 3).
+  \item \begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=3pt]
+    \item $f$ is a polynomial, so it is continuous on $[0,2]$ and differentiable on $(0,2)$.
+    \item $\dfrac{f(2)-f(0)}{2}=\dfrac{4}{2}=2$. $3c^2-2c=2$ gives $c=\dfrac{1+\sqrt7}{3}\approx1.215$ (the other root is negative).
+    \item $f(0)=0$ and $f(1)=1-1=0$. $f'(c)=3c^2-2c=c(3c-2)=0$ in $(0,1)$ gives $c=\dfrac23$.
+  \end{enumerate}
+\end{enumerate}
+\end{solbox}
+
+\end{document}

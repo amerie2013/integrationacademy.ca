@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
+import scoringGuides from "../../../lib/apFreeResponse.json";
 
 // AI grade suggestions for assignment submissions. Teacher-triggered, cached,
 // advisory only — the teacher always makes the final call. Uses a vision-capable
@@ -51,6 +52,17 @@ function parseJson(text: string): any | null {
   const end = body.lastIndexOf("}");
   if (start < 0 || end <= start) return null;
   try { return JSON.parse(body.slice(start, end + 1)); } catch { return null; }
+}
+
+// Exam-format free-response questions carry a scoring guide (written by
+// scripts/apcalc-free-response.mjs, server-side only). When the assignment is
+// one of them the draft is marked against that guide, point by point, instead
+// of the generous out-of-10 classroom scheme.
+type GuidePart = { label: string; question: string; points: number; guide: string };
+type Guide = { max: number; calculator: boolean; parts: GuidePart[] };
+function guideFor(title?: string | null): Guide | null {
+  const code = title?.match(/^Free Response (\d+\.\d+)/)?.[1];
+  return code ? ((scoringGuides as Record<string, Guide>)[code] ?? null) : null;
 }
 
 export async function POST(req: NextRequest) {
@@ -126,7 +138,22 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Nothing for the AI to read — this submission has no typed answer and no readable attachment." }, { status: 422 });
     }
 
-    const system =
+    const guide = guideFor(asg?.title);
+
+    const examSystem = guide &&
+      `You are an experienced reader (marker) of calculus free-response examinations. You are ADVISING a human teacher who makes the final decision — you only suggest. ` +
+      `The QUESTION is in the "Question" section below and its SCORING GUIDE follows it. The student's WORK is in the attached image(s)/PDF(s) and/or the typed answer; match each piece of work to the lettered part it answers. ` +
+      `Mark STRICTLY against the scoring guide, one point at a time. Each point is either earned (1) or not (0): there are no half points and no marks for effort. ` +
+      `A point is earned only when the work on the page shows what the guide requires. A correct final answer with no supporting work earns an answer point only where the guide awards one for the answer alone. Where the guide asks for a justification, a reason or a named theorem, the point is not earned unless the student states it; do not supply it for them. ` +
+      `Accept any mathematically correct method and any equivalent form of an answer (answers need not be simplified; decimals must be correct to three places). ` +
+      `If a later part is done correctly using a wrong value imported from an earlier part, award the later points (follow-through) unless the error made the later part trivial. ` +
+      `Mathematically incorrect statements, such as an equals sign linking unequal expressions or "lim" dropped before the limit is taken, lose a point only where the guide says so. ` +
+      `If a part is blank, award 0 for it. Read handwriting carefully; if a line is genuinely illegible, do not award its point and say so. Do not be generous and do not be harsh: apply the guide. ` +
+      `Respond with ONLY a JSON object of this exact shape: ` +
+      `{"questions":[{"label":"<part label exactly as in the guide, e.g. (a)>","mark":<whole number of points earned in that part>,"comment":"<one or two short sentences naming each point earned or lost, and why>"}, ...],"feedback":"<2-3 sentences to the student: what cost them points and what to do differently in an exam>"}. ` +
+      `Include exactly one entry per part of the scoring guide, in order.`;
+
+    const system = examSystem ||
       `You are a fair, experienced Ontario secondary-school math teacher. You are ADVISING a human teacher who makes the final grading decision — you only suggest. ` +
       `The QUESTIONS are in the "Assignment" section below. The student's WORK is in the attached image(s)/PDF(s) and/or the typed answer — a scan may show only their answers and working WITHOUT restating the questions, so match each piece of their work to the corresponding assignment question. ` +
       `Identify EVERY question in the assignment, in order. Grade EACH question out of 10. ` +
@@ -136,7 +163,13 @@ export async function POST(req: NextRequest) {
       `{"questions":[{"label":"<short question label e.g. Q1>","mark":<0-10>,"comment":"<one short sentence on this question>"}, ...],"feedback":"<2-3 sentence overall summary addressed to the student>"}. ` +
       `Include one entry per assignment question, in order.`;
 
-    const parts: any[] = [
+    const guideText = guide
+      ? `\n\nScoring guide (${guide.max} points; never shown to the student):\n` + guide.parts.map((p) => `${p.label} [${p.points} point${p.points === 1 ? "" : "s"}] ${p.guide}`).join("\n")
+      : "";
+    const parts: any[] = guide ? [
+      { text: `Question:\n${asg?.title ?? ""}\n${asg?.description ?? ""}${guideText}\n\nStudent's typed answer:\n${typed || "(none — see the attached file(s) for their work)"}` },
+      ...inlineParts,
+    ] : [
       { text: `Assignment (the questions):\n${asg?.title ?? "(untitled)"}\n${asg?.description ?? "(no description provided)"}\n\nStudent's typed answer:\n${typed || "(none — see the attached file(s) for their work)"}` },
       ...inlineParts,
     ];
@@ -215,14 +248,27 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Each question is graded out of 10; the total is the sum, out of 10 × count.
-    const breakdown = rawQs.slice(0, 50).map((q: any, i: number) => ({
-      label: String(q?.label ?? `Q${i + 1}`).slice(0, 40),
-      mark: Math.max(0, Math.min(10, Math.round(Number(q?.mark) || 0))),
-      comment: String(q?.comment ?? "").slice(0, 300),
-    }));
+    // Classroom assignments: each question out of 10, total out of 10 × count.
+    // Free-response questions: one row per part of the scoring guide, each out
+    // of that part's points (a part the model left out scores 0), total out of 9.
+    const norm = (s: unknown) => String(s ?? "").toLowerCase().replace(/[^a-z0-9]/g, "");
+    const breakdown: { label: string; mark: number; comment: string; max?: number }[] = guide
+      ? guide.parts.map((p, i) => {
+          const q = rawQs.find((x: any) => norm(x?.label) === norm(p.label)) ?? (rawQs.length === guide.parts.length ? rawQs[i] : null);
+          return {
+            label: p.label,
+            mark: Math.max(0, Math.min(p.points, Math.round(Number(q?.mark) || 0))),
+            max: p.points,
+            comment: String(q?.comment ?? "The AI did not report on this part; mark it by hand.").slice(0, 400),
+          };
+        })
+      : rawQs.slice(0, 50).map((q: any, i: number) => ({
+          label: String(q?.label ?? `Q${i + 1}`).slice(0, 40),
+          mark: Math.max(0, Math.min(10, Math.round(Number(q?.mark) || 0))),
+          comment: String(q?.comment ?? "").slice(0, 300),
+        }));
     const total = breakdown.reduce((s: number, q: any) => s + q.mark, 0);
-    const max = breakdown.length * 10;
+    const max = guide ? guide.max : breakdown.length * 10;
     const feedback = [String(parsed.feedback ?? "").trim(), fileNote].filter(Boolean).join("\n\n");
 
     // Cache (staff-only table; never exposed to the student).

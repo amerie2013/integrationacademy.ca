@@ -1,0 +1,77 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize\color{black!60}Worksheet 5.6}
+\begin{document}
+
+\wstitle{5.6}{Concavity and Points of Inflection}{Unit 5: Analysing Functions}
+
+\begin{ideabox}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+  \item The graph of $f$ is \textbf{concave up} where $f''(x)>0$ (equivalently, where $f'$ is increasing) and \textbf{concave down} where $f''(x)<0$.
+  \item A \textbf{point of inflection} is a point of the graph where the concavity changes.
+  \item $f''(c)=0$ is not enough: $f''$ must \textbf{change sign} at $c$.
+  \item A point of inflection is a point: give both coordinates when asked for the point.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked examples}
+\begin{example}{Example 1 \textperiodcentered{} A cubic}
+Find the point of inflection of $f(x)=x^3+3x^2$.\soln $f''(x)=6x+6$ changes from negative to positive at $x=-1$.\result{The point $(-1,2)$.}
+\end{example}
+
+\begin{example}{Example 2 \textperiodcentered{} A quartic}
+Find the $x$-coordinates of the points of inflection of $f(x)=x^4-12x^2$.\soln $f''(x)=12x^2-24=12\left(x^2-2\right)$ changes sign at $x=\pm\sqrt2$.\result{$x=-\sqrt2$ and $x=\sqrt2$.}
+\end{example}
+
+\begin{example}{Example 3 \textperiodcentered{} A bell-shaped curve}
+Find the $x$-coordinates of the points of inflection of $f(x)=e^{-x^2}$.\soln $f'(x)=-2xe^{-x^2}$ and $f''(x)=\left(4x^2-2\right)e^{-x^2}$.\result{$x=\pm\dfrac{1}{\sqrt2}$.}
+\end{example}
+
+\newpage
+\sech{Practice}
+
+\level{Core}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item Show that the graph of $f(x)=x^2+3x$ is concave up everywhere.\work{2.3cm}
+  \item Find the point of inflection of $f(x)=x^3$.\work{2.3cm}
+  \item Describe the concavity of $f(x)=\ln x$.\work{2.3cm}
+  \item A function has $f''(x)=x-1$. Where is its graph concave up?\work{2.3cm}
+\end{enumerate}
+
+\level{Exam level}
+\begin{enumerate}[leftmargin=*,itemsep=2pt,start=5]
+  \item Find the $x$-coordinates of the points of inflection of $f(x)=x^4-8x^3$.\work{2.8cm}
+  \item Find the $x$-coordinate of the point of inflection of $f(x)=x^2\ln x$ for $x>0$.\work{2.8cm}
+  \item A function has $f''(x)=(x+2)^2(x-3)$. Where does its graph have a point of inflection?\work{2.8cm}
+  \item Find the point of inflection of $f(x)=\sin x$ on $(0,2\pi)$, and describe the concavity on each side.\work{2.8cm}
+\end{enumerate}
+
+\begin{frbox}{Question 9 \textperiodcentered{} Free-response practice}
+Let $f(x)=x^5-10x^3$.
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=2pt]
+  \item Find $f''(x)$ in factored form.\work{2.6cm}
+  \item Find the intervals on which the graph of $f$ is concave up.\work{2.6cm}
+  \item Find the $x$-coordinates of all points of inflection. Justify your answer.\work{2.6cm}
+\end{enumerate}
+\end{frbox}
+
+\newpage
+\begin{solbox}
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item $f''(x)=2>0$ for all $x$.
+  \item $f''(x)=6x$ changes sign at $x=0$: the point $(0,0)$.
+  \item $f''(x)=-\dfrac{1}{x^2}<0$: concave down for all $x>0$.
+  \item For $x>1$.
+  \item $f''(x)=12x^2-48x=12x(x-4)$ changes sign at $x=0$ and $x=4$.
+  \item $f'(x)=2x\ln x+x$ and $f''(x)=2\ln x+3$, which changes sign at $x=e^{-3/2}$.
+  \item Only at $x=3$: $(x+2)^2$ does not change sign.
+  \item $f''(x)=-\sin x$ changes sign at $x=\pi$: the point $(\pi,0)$. Concave down on $(0,\pi)$, concave up on $(\pi,2\pi)$.
+  \item \begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=3pt]
+    \item $f'(x)=5x^4-30x^2$ and $f''(x)=20x^3-60x=20x\left(x^2-3\right)$.
+    \item $f''>0$ on $\left(-\sqrt3,0\right)$ and $\left(\sqrt3,\infty\right)$.
+    \item $x=-\sqrt3$, $x=0$ and $x=\sqrt3$: $f''$ changes sign at each.
+  \end{enumerate}
+\end{enumerate}
+\end{solbox}
+
+\end{document}

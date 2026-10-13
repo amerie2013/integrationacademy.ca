@@ -1,0 +1,77 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize\color{black!60}Worksheet 8.2}
+\begin{document}
+
+\wstitle{8.2}{Position, Velocity and Acceleration by Integration}{Unit 8: Applications of Integration}
+
+\begin{ideabox}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+  \item \textbf{Displacement} on $[a,b]$ is $\displaystyle\int_{a}^{b}v(t)\,dt$. \textbf{Position}: $x(b)=x(a)+\displaystyle\int_{a}^{b}v(t)\,dt$.
+  \item \textbf{Total distance} is $\displaystyle\int_{a}^{b}|v(t)|\,dt$. Without a calculator, split the interval where $v$ changes sign.
+  \item \textbf{Velocity}: $v(b)=v(a)+\displaystyle\int_{a}^{b}a(t)\,dt$.
+  \item Speed is $|v|$. It increases when $v$ and $a$ have the same sign.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked examples}
+\begin{example}{Example 1 \textperiodcentered{} Position}
+A particle has $v(t)=t^2-6t+8$ and $x(0)=1$. Find $x(6)$.\soln $\displaystyle\int_{0}^{6}(t^2-6t+8)\,dt=\Big[\tfrac{t^3}{3}-3t^2+8t\Big]_0^6=12$.\result{$x(6)=13$.}
+\end{example}
+
+\begin{example}{Example 2 \textperiodcentered{} Total distance}
+Find the total distance travelled by that particle for $0\le t\le6$.\soln $v=0$ at $t=2$ and $t=4$. The displacements on the three intervals are $\dfrac{20}{3}$, $-\dfrac43$ and $\dfrac{20}{3}$.\result{$\dfrac{20}{3}+\dfrac43+\dfrac{20}{3}=\dfrac{44}{3}$.}
+\end{example}
+
+\begin{example}{Example 3 \textperiodcentered{} From acceleration}
+A particle has $a(t)=6t-4$ and $v(0)=3$. Find $v(2)$.\soln $v(2)=3+\displaystyle\int_{0}^{2}(6t-4)\,dt=3+(12-8)$.\result{$v(2)=7$.}
+\end{example}
+
+\newpage
+\sech{Practice}
+
+\level{Core}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item A particle has $v(t)=4t-6$. Find its displacement for $0\le t\le5$.\work{2.3cm}
+  \item For the particle in Question 1, find the total distance travelled for $0\le t\le5$.\work{2.3cm}
+  \item A particle has $a(t)=12t^2$ and $v(0)=-5$. Find $v(2)$.\work{2.3cm}
+  \item A particle has $x(1)=4$ and $\displaystyle\int_{1}^{6}v(t)\,dt=-9$. Find $x(6)$.\work{2.3cm}
+\end{enumerate}
+
+\level{Exam level}
+\begin{enumerate}[leftmargin=*,itemsep=2pt,start=5]
+  \item A particle has $v(t)=6\sin(2t)$ for $0\le t\le\pi$. Find its displacement and the total distance travelled.\work{2.8cm}
+  \item A particle has $v(t)=e^{t}-3$ and $x(0)=5$. Find its position at the moment it is at rest.\work{2.8cm}
+  \item A ball is thrown upward with velocity 20 metres per second, and its acceleration is $-10$ metres per second per second. How far above its starting point does it rise?\work{2.8cm}
+  \item \emph{Calculator.} A particle has $v(t)=e^{t/2}\cos t$ for $0\le t\le4$. Find the total distance travelled, and the displacement.\work{2.8cm}
+\end{enumerate}
+
+\begin{frbox}{Question 9 \textperiodcentered{} Free-response practice}
+A particle moves along the $x$-axis with velocity $v(t)=t^3-6t^2+8t$ for $0\le t\le5$. At time $t=0$ the particle is at $x=3$.
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=2pt]
+  \item Find the interval of time during which the particle is moving to the left. Justify your answer.\work{2.6cm}
+  \item Find the position of the particle at $t=4$, and the total distance it travels for $0\le t\le4$.\work{2.6cm}
+  \item Is the speed of the particle increasing or decreasing at $t=3$? Give a reason.\work{2.6cm}
+\end{enumerate}
+\end{frbox}
+
+\newpage
+\begin{solbox}
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item $\Big[2t^2-6t\Big]_0^5=20$.
+  \item $v=0$ at $t=1.5$. Displacements $-4.5$ and $24.5$: distance 29.
+  \item $-5+\Big[4t^3\Big]_0^2=27$.
+  \item $4+(-9)=-5$.
+  \item Displacement $\Big[-3\cos(2t)\Big]_0^{\pi}=0$. Distance $2\displaystyle\int_{0}^{\pi/2}6\sin(2t)\,dt=12$.
+  \item At rest when $t=\ln3$. $x=5+\Big[e^{t}-3t\Big]_0^{\ln3}=7-3\ln3$.
+  \item $v=20-10t=0$ at $t=2$; rise $=\displaystyle\int_{0}^{2}(20-10t)\,dt=20$ metres.
+  \item Distance $\displaystyle\int_{0}^{4}\left|e^{t/2}\cos t\right|\,dt\approx9.515$; displacement $\approx-6.806$.
+  \item \begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=3pt]
+    \item $v(t)=t(t-2)(t-4)$, which is negative for $2<t<4$. The particle moves left on that interval because $v<0$.
+    \item With $s(t)=\dfrac{t^4}{4}-2t^3+4t^2$: displacement on $[0,2]$ is 4 and on $[2,4]$ is $-4$. Position $x(4)=3$; distance $4+4=8$.
+    \item $v(3)=-3$ and $a(3)=3(9)-12(3)+8=-1$. Both are negative, so the speed is increasing.
+  \end{enumerate}
+\end{enumerate}
+\end{solbox}
+
+\end{document}

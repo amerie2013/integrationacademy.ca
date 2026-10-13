@@ -1,0 +1,77 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize\color{black!60}Worksheet 9.8}
+\begin{document}
+
+\wstitle{9.8}{Multiple-Choice Technique and the Last Two Weeks}{Unit 9: Exam Strategy and Free-Response Types}
+
+\begin{ideabox}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+  \item Eliminate first. A sign, a size or a unit often removes two options before any calculus.
+  \item Do only the work the question needs. If the options differ in one feature, find that feature.
+  \item Check an antiderivative by differentiating it, and a formula by trying an easy value.
+  \item Two minutes without progress: choose, mark the question, move on. Never leave a blank.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked examples}
+\begin{example}{Example 1 \textperiodcentered{} Reading the leading terms}
+$\displaystyle\lim_{x\to\infty}\dfrac{3x^2+1}{5x^2-x}$ is \\[2pt] (A) $0$ \qquad (B) $\dfrac35$ \qquad (C) $1$ \qquad (D) $\infty$\soln Equal degrees: the ratio of the leading coefficients.\result{(B).}
+\end{example}
+
+\begin{example}{Example 2 \textperiodcentered{} Using symmetry}
+$\displaystyle\int_{-2}^{2}(x^3+1)\,dx$ is \\[2pt] (A) $0$ \qquad (B) $2$ \qquad (C) $4$ \qquad (D) $8$\soln The odd part $x^3$ integrates to 0 on a symmetric interval, leaving $\displaystyle\int_{-2}^{2}1\,dx$.\result{(C).}
+\end{example}
+
+\begin{example}{Example 3 \textperiodcentered{} Checking by differentiating}
+An antiderivative of $x\cos\!\left(x^2\right)$ is \\[2pt] (A) $\sin\!\left(x^2\right)$ \qquad (B) $\tfrac12\sin\!\left(x^2\right)$ \qquad (C) $2\sin\!\left(x^2\right)$ \qquad (D) $-\tfrac12\sin\!\left(x^2\right)$\soln Differentiate each option: $\tfrac12\sin\!\left(x^2\right)$ gives $x\cos\!\left(x^2\right)$.\result{(B).}
+\end{example}
+
+\newpage
+\sech{Practice}
+\emph{No calculator on this page.}
+\level{Core}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item If $f(x)=\sin(3x)$, then $f'(0)$ is \\[2pt] (A) $0$ \qquad (B) $1$ \qquad (C) $3$ \qquad (D) $-3$\work{2.3cm}
+  \item $\displaystyle\int_{0}^{1}4x^3\,dx$ is \\[2pt] (A) $1$ \qquad (B) $4$ \qquad (C) $12$ \qquad (D) $\tfrac14$\work{2.3cm}
+  \item If $f'(x)<0$ and $f''(x)>0$, the graph of $f$ is \\[2pt] (A) increasing, concave up \qquad (B) decreasing, concave up \qquad (C) decreasing, concave down \qquad (D) increasing, concave down\work{2.3cm}
+  \item $\displaystyle\lim_{x\to0}\dfrac{\sin(5x)}{x}$ is \\[2pt] (A) $0$ \qquad (B) $1$ \qquad (C) $5$ \qquad (D) nonexistent\work{2.3cm}
+\end{enumerate}
+
+\level{Exam level}
+\begin{enumerate}[leftmargin=*,itemsep=2pt,start=5]
+  \item $\dfrac{d}{dx}\displaystyle\int_{1}^{x^2}\dfrac{1}{1+t^4}\,dt$ is \\[2pt] (A) $\dfrac{1}{1+x^8}$ \qquad (B) $\dfrac{2x}{1+x^8}$ \qquad (C) $\dfrac{2x}{1+x^4}$ \qquad (D) $\dfrac{1}{1+x^4}$\work{2.8cm}
+  \item If $f'(x)=(x-1)^2(x-3)$, then $f$ has \\[2pt] (A) a relative minimum at $x=1$ \qquad (B) a relative maximum at $x=1$ \qquad (C) a relative minimum at $x=3$ \qquad (D) a relative maximum at $x=3$\work{2.8cm}
+  \item The average value of $3x^2$ on $[0,2]$ is \\[2pt] (A) $4$ \qquad (B) $8$ \qquad (C) $12$ \qquad (D) $2$\work{2.8cm}
+  \item The line tangent to $y=e^{2x}$ at $x=0$ is used to approximate $e^{0.2}$. The approximation is \\[2pt] (A) $1.02$ \qquad (B) $1.1$ \qquad (C) $1.2$ \qquad (D) $1.4$\work{2.8cm}
+\end{enumerate}
+
+\begin{frbox}{Question 9 \textperiodcentered{} Free-response practice}
+Answer each part in one or two sentences.
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=2pt]
+  \item Without evaluating it, explain why $\displaystyle\int_{0}^{2}(x^2+1)\,dx$ cannot equal 1.\work{2.6cm}
+  \item A question offers $xe^{x}+e^{x}$ and $xe^{x}$ as possible derivatives of $xe^{x}$. Decide between them by considering the slope of the graph at $x=0$, without the product rule.\work{2.6cm}
+  \item You have used 30 of the 38 minutes of the calculator multiple-choice part and answered 9 of 13 questions. Describe what you should do with the remaining time.\work{2.6cm}
+\end{enumerate}
+\end{frbox}
+
+\newpage
+\begin{solbox}
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item (C): $f'(x)=3\cos(3x)$.
+  \item (A): $\Big[x^4\Big]_0^1=1$.
+  \item (B).
+  \item (C).
+  \item (B): substitute the upper limit and multiply by its derivative, $2x$.
+  \item (C): $f'$ changes sign, from negative to positive, only at $x=3$.
+  \item (A): $\dfrac12\Big[x^3\Big]_0^2=4$.
+  \item (C): the tangent line is $y=1+2x$, and $e^{0.2}=e^{2(0.1)}$, so use $x=0.1$.
+  \item \begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=3pt]
+    \item On $[0,2]$ the integrand is at least 1, so the integral is at least $1\times2=2$.
+    \item Near $x=0$, $e^{x}\approx1$, so $xe^{x}\approx x$ and the slope at $x=0$ is 1. The first option gives $0+1=1$ and the second gives 0, so the first is correct.
+    \item About 2 minutes for each of the 4 remaining questions. Answer first those that need one calculator step, choose an option for every question, and leave none blank.
+  \end{enumerate}
+\end{enumerate}
+\end{solbox}
+
+\end{document}

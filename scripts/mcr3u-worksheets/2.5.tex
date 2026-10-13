@@ -9,56 +9,73 @@
 \end{center}
 
 \begin{ideabox}
-Simplify radicals with the largest perfect-square factor, then add like radicals and multiply with the distributive property.
+A radical such as $\sqrt{72}$ is an \textbf{exact} number; the calculator's $8.485\ldots$ is only an approximation. We simplify radicals so that equal numbers look equal, and we always check a rewrite on a calculator: \emph{the value must not change}. The two key rules are $\sqrt a\sqrt b=\sqrt{ab}$ and $\dfrac{\sqrt a}{\sqrt b}=\sqrt{\dfrac ab}$. There is \textbf{no} rule $\sqrt{a+b}=\sqrt a+\sqrt b$.
 \begin{itemize}[leftmargin=*,itemsep=2pt]
-  \item $\sqrt{ab}=\sqrt{a}\cdot\sqrt{b}$; pull out the largest perfect square.
-  \item Only \textbf{like radicals} (same value under the root) can be added or subtracted.
-  \item Conjugates: $(a+\sqrt{b})(a-\sqrt{b})=a^2-b$.
+  \item \textbf{Simplify:} divide out the \emph{largest perfect square}: $\sqrt{72}=\sqrt{36\cdot2}=6\sqrt2$. Perfect squares: $4,9,16,25,36,49,64,81,100,121,144,\ldots$
+  \item \textbf{Add/subtract} only \emph{like} radicals, after simplifying each: $3\sqrt5+7\sqrt5=10\sqrt5$, but $\sqrt2+\sqrt3$ stays as it is.
+  \item \textbf{Multiply:} $(a\sqrt b)(c\sqrt d)=ac\sqrt{bd}$; use FOIL for binomials and remember $(\sqrt a)^2=a$.
+  \item \textbf{Conjugates:} $(a+\sqrt b)(a-\sqrt b)=a^2-b$ is rational. To rationalise a binomial denominator multiply top and bottom by the conjugate.
+  \item \textbf{Variables:} $\sqrt{x^2}=|x|$; we assume the variables are non-negative to write $\sqrt{18x^3}=3x\sqrt{2x}$.
 \end{itemize}
 \end{ideabox}
 
 \begin{learnbox}
-\lh{Simplifying radicals}A radical is simplest when no perfect-square factor remains under the root: $\sqrt{50}=\sqrt{25\cdot2}=5\sqrt2$.
-\lh{Operating with radicals}Add or subtract only \emph{like} radicals (same root), and multiply with $\sqrt{a}\cdot\sqrt{b}=\sqrt{ab}$.
-\lh{Rationalizing}Remove a radical from a denominator by multiplying top and bottom by it (or by the conjugate) to get an equivalent, tidier expression.
+\lh{Simplifying radicals}Divide out the \textbf{largest perfect square} factor: $\sqrt{72}=6\sqrt2$. Add or subtract only \textbf{like radicals}, after simplifying each. Multiply radicands: $(a\sqrt b)(c\sqrt d)=ac\sqrt{bd}$, and $(\sqrt a)^2=a$.
+\lh{Conjugates and rationalising}$(a+\sqrt b)(a-\sqrt b)=a^2-b$ is rational. To remove a radical from a denominator multiply top and bottom by $\sqrt b$ (monomial) or by the \textbf{conjugate} (binomial).
+\lh{Checking}There is no sum rule: $\sqrt{a+b}\ne\sqrt a+\sqrt b$. Check any rewrite on a calculator --- equivalent exact forms have the same decimal value.
 \end{learnbox}
 
 \sech{Worked Examples}
 
-\begin{example}{ex0}{Example 1 --- Simplify}
-Simplify $\sqrt{50}$.\soln Largest perfect-square factor: $\sqrt{25\cdot2}=\sqrt{25}\cdot\sqrt2=5\sqrt{2}$.
+\begin{example}{ex0}{Example 1 --- Simplify a radical}
+Simplify $\sqrt{200}$.\soln The largest perfect square dividing $200$ is $100$: $\sqrt{200}=\sqrt{100\cdot2}=10\sqrt2$. \\ Check: $\sqrt{200}=14.142$ and $10\sqrt2=14.142$ \checkmark.
 \end{example}
 
-\begin{example}{ex1}{Example 2 --- Simplify}
-Simplify $\sqrt{72}$.\soln $\sqrt{36\cdot2}=6\sqrt{2}$.
+\begin{example}{ex1}{Example 2 --- Mixed and entire radicals}
+(a) Simplify $\sqrt{63}$. (b) Write $7\sqrt3$ as an entire radical.\soln (a) $\sqrt{63}=\sqrt{9\cdot7}=3\sqrt7$. \\ (b) Square the coefficient and move it inside: $7\sqrt3=\sqrt{49\cdot3}=\sqrt{147}$.
 \end{example}
 
-\begin{example}{ex2}{Example 3 --- Add like radicals}
-Simplify $\sqrt{12}+\sqrt{27}$.\soln Simplify each: $2\sqrt{3}+3\sqrt{3}$. \\ Add like radicals: $5\sqrt{3}$.
+\begin{example}{ex2}{Example 3 --- Adding and subtracting}
+Simplify $5\sqrt{12}-2\sqrt{27}+\sqrt{48}$.\soln Simplify first: $\sqrt{12}=2\sqrt3$, $\sqrt{27}=3\sqrt3$, $\sqrt{48}=4\sqrt3$. \\ $10\sqrt3-6\sqrt3+4\sqrt3=8\sqrt3$.
 \end{example}
 
-\begin{example}{ex3}{Example 4 --- Subtract}
-Simplify $5\sqrt{2}-\sqrt{8}$.\soln $\sqrt8=2\sqrt2$, so $5\sqrt{2}-2\sqrt{2}=3\sqrt{2}$.
+\begin{example}{ex3}{Example 4 --- Multiplying}
+Simplify $(3\sqrt7)(2\sqrt{14})$.\soln $6\sqrt{98}=6\cdot7\sqrt2=42\sqrt2$. \\ Check: $3(2.646)\cdot2(3.742)=59.40$ and $42(1.4142)=59.40$ \checkmark.
 \end{example}
 
-\begin{example}{ex4}{Example 5 --- Multiply roots}
-Simplify $\sqrt{3}\cdot\sqrt{6}$.\soln $\sqrt{18}=\sqrt{9\cdot2}=3\sqrt{2}$.
+\begin{example}{ex4}{Example 5 --- Distributing}
+Simplify $\sqrt3\left(\sqrt{12}+2\sqrt5\right)$.\soln $\sqrt{36}+2\sqrt{15}=6+2\sqrt{15}$. \\ The terms $6$ and $2\sqrt{15}$ are not like terms, so this is final.
 \end{example}
 
-\begin{example}{ex5}{Example 6 --- Distribute}
-Simplify $\sqrt{2}(\sqrt{10}+\sqrt{2})$.\soln $\sqrt{20}+\sqrt4=2\sqrt{5}+2$.
+\begin{example}{ex5}{Example 6 --- FOIL with radicals}
+Expand $(2\sqrt3+1)(\sqrt3-4)$.\soln First $2\cdot3=6$; Outer $-8\sqrt3$; Inner $\sqrt3$; Last $-4$. \\ $6-4=2$ and $-8\sqrt3+\sqrt3=-7\sqrt3$: $2-7\sqrt3$.
 \end{example}
 
-\begin{example}{ex6}{Example 7 --- Square a radical}
-Evaluate $(2\sqrt{3})^2$.\soln $2^2\cdot(\sqrt3)^2=4\cdot3=12$.
+\begin{example}{ex6}{Example 7 --- Squaring a binomial}
+Expand $\left(\sqrt5-2\sqrt3\right)^2$.\soln $a^2-2ab+b^2$ with $a=\sqrt5$, $b=2\sqrt3$: $5-2(\sqrt5)(2\sqrt3)+4\cdot3=5-4\sqrt{15}+12$. \\ $=17-4\sqrt{15}$.
 \end{example}
 
-\begin{example}{ex7}{Example 8 --- Conjugates}
-Expand $(3+\sqrt{2})(3-\sqrt{2})$.\soln Difference of squares: $9-2=7$.
+\begin{example}{ex7}{Example 8 --- Rationalising denominators}
+Rationalise (a) $\dfrac{12}{\sqrt6}$ \quad (b) $\dfrac{4}{\sqrt7-\sqrt3}$.\soln (a) Multiply by $\dfrac{\sqrt6}{\sqrt6}$: $\dfrac{12\sqrt6}{6}=2\sqrt6$. \\ (b) Multiply by the conjugate $\dfrac{\sqrt7+\sqrt3}{\sqrt7+\sqrt3}$: the denominator is $7-3=4$, so $\dfrac{4(\sqrt7+\sqrt3)}{4}=\sqrt7+\sqrt3$.
 \end{example}
 
-\begin{example}{ex8}{Example 9 --- Verify equivalence}
-Is $\sqrt{8}+\sqrt{18}=5\sqrt{2}$?\soln $2\sqrt{2}+3\sqrt{2}=5\sqrt{2}$ — yes.
+\begin{example}{ex8}{Example 9 --- Radicals with variables}
+Simplify $\sqrt{72a^5}$ where $a\ge0$.\soln $72=36\cdot2$ and $a^5=a^4\cdot a$, so $\sqrt{36\cdot a^4\cdot2a}=6a^2\sqrt{2a}$.
+\end{example}
+
+\begin{example}{ex0}{Example 10 --- Application: distance between points}
+Find the exact distance between $A(-2,1)$ and $B(4,5)$.\soln $d=\sqrt{(4-(-2))^2+(5-1)^2}=\sqrt{36+16}=\sqrt{52}$. \\ $\sqrt{52}=\sqrt{4\cdot13}=2\sqrt{13}\approx7.21$ units.
+\end{example}
+
+\begin{example}{ex1}{Example 11 --- Test before you trust}
+A student claims $\sqrt{x^2+9}=x+3$. Test it.
+\begin{center}\renewcommand{\arraystretch}{1.35}\setlength{\tabcolsep}{3pt}\begin{tabular}{l|cccc}
+$x$ & $0$ & $1$ & $2$ & $4$ \\ \hline
+$\sqrt{x^2+9}$ & \makebox[1.35cm]{\strut $3$} & \makebox[1.35cm]{\strut $3.162$} & \makebox[1.35cm]{\strut $3.606$} & \makebox[1.35cm]{\strut $5$} \\
+$x+3$ & \makebox[1.35cm]{\strut $3$} & \makebox[1.35cm]{\strut $4$} & \makebox[1.35cm]{\strut $5$} & \makebox[1.35cm]{\strut $7$} \\
+\hline same? & \makebox[1.35cm]{\strut $\checkmark$} & \makebox[1.35cm]{\strut $\times$} & \makebox[1.35cm]{\strut $\times$} & \makebox[1.35cm]{\strut $\times$} \\
+\end{tabular}\end{center}
+\soln The two sides agree at $x=0$ only. One mismatch is enough to prove the claim false: there is no sum rule $\sqrt{a+b}=\sqrt a+\sqrt b$ (here $\sqrt{x^2+9}\ne\sqrt{x^2}+\sqrt9$).
 \end{example}
 
 \clearpage
@@ -66,55 +83,59 @@ Is $\sqrt{8}+\sqrt{18}=5\sqrt{2}$?\soln $2\sqrt{2}+3\sqrt{2}=5\sqrt{2}$ — yes.
 For each question, show all steps clearly in the space provided.
 
 \begin{qbox}{Question 1}
-Simplify $\sqrt{8}$.\workspace{2.4cm}
+Simplify $\sqrt{120}$.\workspace{1.8cm}
 \end{qbox}
 
 \begin{qbox}{Question 2}
-Simplify $\sqrt{45}$.\workspace{2.4cm}
+Simplify $\sqrt{675}$.\workspace{2cm}
 \end{qbox}
 
 \begin{qbox}{Question 3}
-Simplify $\sqrt{200}$.\workspace{2.4cm}
+Write $4\sqrt7$ as an entire radical and check both forms with a calculator.\workspace{2.2cm}
 \end{qbox}
 
 \begin{qbox}{Question 4}
-Simplify $\sqrt{18}+\sqrt{2}$.\workspace{2.4cm}
+Simplify $4\sqrt8+3\sqrt{18}-\sqrt{50}$.\workspace{2.8cm}
 \end{qbox}
 
 \begin{qbox}{Question 5}
-Simplify $2\sqrt{5}+\sqrt{20}$.\workspace{2.4cm}
+Simplify $(5\sqrt2)(3\sqrt6)$.\workspace{2.2cm}
 \end{qbox}
 
 \begin{qbox}{Question 6}
-Simplify $\sqrt{48}-\sqrt{12}$.\workspace{2.4cm}
+Expand and simplify $\sqrt5\left(4\sqrt{10}-3\right)$.\workspace{2.6cm}
 \end{qbox}
 
 \begin{qbox}{Question 7}
-Simplify $\sqrt{3}\cdot\sqrt{12}$.\workspace{2.4cm}
+Expand and simplify $\left(3\sqrt2-4\right)\left(2\sqrt2+5\right)$.\workspace{3cm}
 \end{qbox}
 
 \begin{qbox}{Question 8}
-Simplify $\sqrt{2}(\sqrt{8}+\sqrt{2})$.\workspace{3cm}
+Expand (a) $\left(\sqrt{11}+\sqrt5\right)\left(\sqrt{11}-\sqrt5\right)$ \quad (b) $\left(2\sqrt3+\sqrt7\right)^2$.\workspace{3.2cm}
 \end{qbox}
 
 \begin{qbox}{Question 9}
-Evaluate $(\sqrt{6})^2$.\workspace{2.4cm}
+Rationalise the denominator of $\dfrac{9}{2\sqrt3}$.\workspace{2.6cm}
 \end{qbox}
 
 \begin{qbox}{Question 10}
-Expand $(1+\sqrt{3})(1-\sqrt{3})$.\workspace{2.4cm}
+Rationalise the denominator of $\dfrac{6}{4-\sqrt{10}}$ and simplify.\workspace{3.2cm}
 \end{qbox}
 
 \begin{qbox}{Question 11}
-Expand $(4+\sqrt{5})(4-\sqrt{5})$.\workspace{2.4cm}
+Simplify $\sqrt{98x^4y^3}$, where $x,y\ge0$.\workspace{2.6cm}
 \end{qbox}
 
 \begin{qbox}{Question 12}
-Simplify $\sqrt{27}+\sqrt{75}-\sqrt{12}$.\workspace{3cm}
+A box is $3$ m by $4$ m by $5$ m. Find the exact length of its longest diagonal, $\sqrt{l^2+w^2+h^2}$, and a decimal approximation to $2$ decimal places.\workspace{3cm}
 \end{qbox}
 
-\begin{qbox}{Question 13 --- Challenge}
-Expand $(2+\sqrt{3})^2$.\workspace{3cm}
+\begin{qbox}{Question 13}
+A student writes $\sqrt{a^2-b^2}=a-b$. Test the claim with $a=5,\ b=3$, then explain which rule the student mis-used.\workspace{3.2cm}
+\end{qbox}
+
+\begin{qbox}{Question 14 --- Challenge}
+Show that $\sqrt{9+4\sqrt5}=2+\sqrt5$ by squaring the right-hand side, and then check both sides with a calculator.\workspace{4cm}
 \end{qbox}
 
 \clearpage
@@ -124,19 +145,20 @@ Expand $(2+\sqrt{3})^2$.\workspace{3cm}
 \begin{multicols}{2}
 \small
 \begin{enumerate}[leftmargin=*,itemsep=3pt]
-  \item Simplify $\sqrt{8}$.
-  \item Simplify $\sqrt{45}$.
-  \item Simplify $\sqrt{200}$.
-  \item Simplify $\sqrt{18}+\sqrt{2}$.
-  \item Simplify $2\sqrt{5}+\sqrt{20}$.
-  \item Simplify $\sqrt{48}-\sqrt{12}$.
-  \item Simplify $\sqrt{3}\cdot\sqrt{12}$.
-  \item Simplify $\sqrt{2}(\sqrt{8}+\sqrt{2})$.
-  \item Evaluate $(\sqrt{6})^2$.
-  \item Expand $(1+\sqrt{3})(1-\sqrt{3})$.
-  \item Expand $(4+\sqrt{5})(4-\sqrt{5})$.
-  \item Simplify $\sqrt{27}+\sqrt{75}-\sqrt{12}$.
-  \item Expand $(2+\sqrt{3})^2$.
+  \item Simplify $\sqrt{120}$.
+  \item Simplify $\sqrt{675}$.
+  \item Write $4\sqrt7$ as an entire radical and check both forms with a calculator.
+  \item Simplify $4\sqrt8+3\sqrt{18}-\sqrt{50}$.
+  \item Simplify $(5\sqrt2)(3\sqrt6)$.
+  \item Expand and simplify $\sqrt5\left(4\sqrt{10}-3\right)$.
+  \item Expand and simplify $\left(3\sqrt2-4\right)\left(2\sqrt2+5\right)$.
+  \item Expand (a) $\left(\sqrt{11}+\sqrt5\right)\left(\sqrt{11}-\sqrt5\right)$ \quad (b) $\left(2\sqrt3+\sqrt7\right)^2$.
+  \item Rationalise the denominator of $\dfrac{9}{2\sqrt3}$.
+  \item Rationalise the denominator of $\dfrac{6}{4-\sqrt{10}}$ and simplify.
+  \item Simplify $\sqrt{98x^4y^3}$, where $x,y\ge0$.
+  \item A box is $3$ m by $4$ m by $5$ m. Find the exact length of its longest diagonal, $\sqrt{l^2+w^2+h^2}$, and a decimal approximation to $2$ decimal places.
+  \item A student writes $\sqrt{a^2-b^2}=a-b$. Test the claim with $a=5,\ b=3$, then explain which rule the student mis-used.
+  \item Show that $\sqrt{9+4\sqrt5}=2+\sqrt5$ by squaring the right-hand side, and then check both sides with a calculator.
 \end{enumerate}
 \end{multicols}
 \end{recapbox}
@@ -145,19 +167,20 @@ Expand $(2+\sqrt{3})^2$.\workspace{3cm}
 \begin{multicols}{2}
 \small
 \begin{enumerate}[leftmargin=*,itemsep=3pt]
-  \item $2\sqrt{2}$
-  \item $3\sqrt{5}$
-  \item $10\sqrt{2}$
-  \item $4\sqrt{2}$
-  \item $4\sqrt{5}$
-  \item $2\sqrt{3}$
-  \item $6$
-  \item $6$
-  \item $6$
-  \item $-2$
-  \item $11$
-  \item $6\sqrt{3}$
-  \item $7+4\sqrt{3}$
+  \item $\sqrt{120}=\sqrt{4\cdot30}=2\sqrt{30}$.
+  \item $675=225\cdot3$, so $15\sqrt3$.
+  \item $4\sqrt7=\sqrt{16\cdot7}=\sqrt{112}$. Both are $10.583$.
+  \item $8\sqrt2+9\sqrt2-5\sqrt2=12\sqrt2$.
+  \item $15\sqrt{12}=15\cdot2\sqrt3=30\sqrt3$.
+  \item $4\sqrt{50}-3\sqrt5=20\sqrt2-3\sqrt5$.
+  \item $12+15\sqrt2-8\sqrt2-20=-8+7\sqrt2$.
+  \item (a) $11-5=6$. \quad (b) $12+4\sqrt{21}+7=19+4\sqrt{21}$.
+  \item $\dfrac{9\sqrt3}{2\cdot3}=\dfrac{3\sqrt3}{2}$.
+  \item Multiply by $\dfrac{4+\sqrt{10}}{4+\sqrt{10}}$: denominator $16-10=6$; $\dfrac{6(4+\sqrt{10})}{6}=4+\sqrt{10}$.
+  \item $\sqrt{49\cdot2\cdot x^4\cdot y^2\cdot y}=7x^2y\sqrt{2y}$.
+  \item $\sqrt{9+16+25}=\sqrt{50}=5\sqrt2\approx7.07$ m.
+  \item With $a=5,\ b=3$: $\sqrt{25-9}=4$ but $5-3=2$. The student treated the root as if it distributed over subtraction; the root rules apply to \emph{products and quotients} only. ($\sqrt{a^2-b^2}=\sqrt{(a-b)(a+b)}$.)
+  \item $(2+\sqrt5)^2=4+4\sqrt5+5=9+4\sqrt5$ and $2+\sqrt5>0$, so $\sqrt{9+4\sqrt5}=2+\sqrt5$. Calculator: $\sqrt{17.944}=4.236$ and $2+2.236=4.236$ \checkmark.
 \end{enumerate}
 \end{multicols}
 \end{keybox}

@@ -26,39 +26,72 @@ Line–plane: substitute the line into the plane and solve for $t$. Compare dire
 \sech{Worked Examples}
 
 \begin{example}{ex0}{Example 1 --- Line meets a plane}
-Where does $\vec r=(1,0,0)+t(0,0,1)$ meet $z=5$?\soln $z=t=5$; $(1,0,5)$.
+Where does $\vec r=(1,0,0)+t(0,0,1)$ meet $z=5$?\soln
+\textbf{Step 1 (write the line's $z$-component):} $z=0+t\cdot1=t$.\\[3pt]
+\textbf{Step 2 (set it equal to the plane's condition $z=5$ and solve):} $t=5$.\\[3pt]
+\textbf{Step 3 (substitute $t=5$ into all three components):} $x=1$, $y=0$, $z=5$.\\[3pt]
+\textbf{Conclusion:} they meet at $(1,0,5)$.
 \end{example}
 
 \begin{example}{ex1}{Example 2 --- Substitute into the plane}
-Where does $x=t,y=t,z=t$ meet $x+y+z=6$?\soln $3t=6\Rightarrow t=2$; $(2,2,2)$.
+Where does $x=t,y=t,z=t$ meet $x+y+z=6$?\soln
+\textbf{Step 1 (substitute the line's components into the plane's equation):} $t+t+t=6$.\\[3pt]
+\textbf{Step 2 (solve for $t$):} $3t=6\Rightarrow t=2$.\\[3pt]
+\textbf{Step 3 (substitute back):} $x=y=z=2$.\\[3pt]
+\textbf{Conclusion:} they meet at $(2,2,2)$.
 \end{example}
 
 \begin{example}{ex2}{Example 3 --- Line parallel to a plane}
-Is $\vec r=(0,0,1)+t(1,1,0)$ parallel to $z=5$?\soln $\vec d\cdot\vec n=(1,1,0)\cdot(0,0,1)=0$ and $(0,0,1)$ not on $z=5$: parallel.
+Is $\vec r=(0,0,1)+t(1,1,0)$ parallel to $z=5$?\soln
+\textbf{Step 1 (identify the line's direction and the plane's normal):} $\vec d=(1,1,0)$; the plane $z=5$ has normal $(0,0,1)$.\\[3pt]
+\textbf{Step 2 (test parallelism, $\vec d\cdot\vec n=0$):} $(1,1,0)\cdot(0,0,1)=0+0+0=0$.\\[3pt]
+\textbf{Step 3 (rule out the line lying in the plane):} the given point $(0,0,1)$ does not satisfy $z=5$.\\[3pt]
+\textbf{Conclusion:} parallel (and not contained in the plane).
 \end{example}
 
 \begin{example}{ex3}{Example 4 --- Parallel lines}
-Are $\vec r=(0,0)+t(2,4)$ and $\vec r=(1,1)+s(1,2)$ parallel?\soln $(2,4)=2(1,2)$: yes.
+Are $\vec r=(0,0)+t(2,4)$ and $\vec r=(1,1)+s(1,2)$ parallel?\soln
+\textbf{Step 1 (compare the direction vectors):} $(2,4)$ and $(1,2)$.\\[3pt]
+\textbf{Step 2 (check if one is a scalar multiple of the other):} $(2,4)=2\cdot(1,2)$.\\[3pt]
+\textbf{Conclusion:} yes, parallel (the directions are scalar multiples).
 \end{example}
 
 \begin{example}{ex4}{Example 5 --- Parallel planes}
-Are $2x+y-z=1$ and $4x+2y-2z=9$ parallel?\soln Normals $(2,1,-1)$ and $2(2,1,-1)$; equations not multiples ⇒ parallel \& distinct.
+Are $2x+y-z=1$ and $4x+2y-2z=9$ parallel?\soln
+\textbf{Step 1 (read off both normals):} $(2,1,-1)$ and $(4,2,-2)$.\\[3pt]
+\textbf{Step 2 (check if one normal is a scalar multiple of the other):} $(4,2,-2)=2\cdot(2,1,-1)$ --- yes, so the planes are parallel.\\[3pt]
+\textbf{Step 3 (check if they're actually the same plane by scaling the first equation):} $2\times(2x+y-z=1)$ gives $4x+2y-2z=2$, which does \emph{not} match the given $=9$.\\[3pt]
+\textbf{Conclusion:} parallel and distinct (not the same plane).
 \end{example}
 
 \begin{example}{ex5}{Example 6 --- Line meets a plane}
-Where does $x=t,y=2t,z=0$ meet $z=0$?\soln Every point — the line lies in the plane.
+Where does $x=t,y=2t,z=0$ meet $z=0$?\soln
+\textbf{Step 1 (compare the line's $z$-component to the plane's condition):} the line always has $z=0$, exactly matching the plane $z=0$.\\[3pt]
+\textbf{Step 2 (interpret):} the condition holds for every value of $t$, not just one.\\[3pt]
+\textbf{Conclusion:} the line lies entirely in the plane --- every point on the line is an intersection point.
 \end{example}
 
 \begin{example}{ex6}{Example 7 --- Substitute}
-Where does $x=t,y=t,z=t$ meet $x+y+z=9$?\soln $3t=9\Rightarrow t=3$; $(3,3,3)$.
+Where does $x=t,y=t,z=t$ meet $x+y+z=9$?\soln
+\textbf{Step 1 (substitute into the plane's equation):} $t+t+t=9$.\\[3pt]
+\textbf{Step 2 (solve):} $3t=9\Rightarrow t=3$.\\[3pt]
+\textbf{Conclusion:} they meet at $(3,3,3)$.
 \end{example}
 
 \begin{example}{ex7}{Example 8 --- Line crosses a plane}
-Is direction $(1,1,1)$ parallel to $x+y+z=4$?\soln $\vec d\cdot\vec n=3\ne0$: no, it crosses.
+Is direction $(1,1,1)$ parallel to $x+y+z=4$?\soln
+\textbf{Step 1 (identify the plane's normal):} $(1,1,1)$.\\[3pt]
+\textbf{Step 2 (test $\vec d\cdot\vec n=0$):} $(1,1,1)\cdot(1,1,1)=1+1+1=3$.\\[3pt]
+\textbf{Step 3 (interpret):} since the dot product isn't $0$, the direction isn't perpendicular to the normal.\\[3pt]
+\textbf{Conclusion:} no, not parallel --- the line crosses the plane.
 \end{example}
 
 \begin{example}{ex8}{Example 9 --- Simple plane}
-Where does $\vec r=(0,0,0)+t(1,0,0)$ meet $x=4$?\soln $t=4$; $(4,0,0)$.
+Where does $\vec r=(0,0,0)+t(1,0,0)$ meet $x=4$?\soln
+\textbf{Step 1 (write the line's $x$-component):} $x=0+t=t$.\\[3pt]
+\textbf{Step 2 (set equal to $4$ and solve):} $t=4$.\\[3pt]
+\textbf{Step 3 (substitute back):} $y=0$, $z=0$.\\[3pt]
+\textbf{Conclusion:} they meet at $(4,0,0)$.
 \end{example}
 
 \clearpage

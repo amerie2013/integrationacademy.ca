@@ -11,6 +11,21 @@ import {
   copyAngleFig, bisectFig, incenterFig, circumcenterFig,
   sampleSpaceFig, treeDiagram, twoWayTable, permuteCombine,
 } from "./figures2.mjs";
+import {
+  threePointsPlane, collinearPts, numberLineDist, midpointAlgebra, classifyAngles,
+  copyAngleObtuse, angleCombine, biconditionalFig, paragraphProofFig,
+  parallelConverse, perpTransversal, horizVert, constructPerpOnLine, constructRectangle,
+  translatePolygon, reflectYX, reflectVertical, rotate180, rotate270, glideReflect,
+  parallelReflect, intersectReflect, parallelogramSym, squareSym, scaleneNoSym,
+  exteriorAngle, angleSumTri, equilateralFig, altitudeIsos, aasMarks, medianFig,
+  dilatePoint, sssSimilar, sasSimilar, midsegmentTri, threeParallel, mirrorMethod,
+  depressionFig, guyWire, twoElevations,
+  diameterChord, semicircleRight, chordPerp, chordChord, tangentSecant, twoSecants, circleEq,
+  pyramidFig, coneFig, sphereFig, densityFig, popDensity, coneSlice, sphereSlice, frustumFig,
+  dieFig, bagMarbles, complementFig, cardsFig, expectedValue, withWithout,
+} from "./figures3.mjs";
+import { hexagonSymmetryFig } from "./figures2.mjs";
+import { copySegment, angleBisector } from "./figures.mjs";
 
 export const ch = {};
 
@@ -33,23 +48,27 @@ ch["4.1"] = L("4.1", "Classifying Triangles and Triangle Angle-Sum Theorem (MA.9
         `<strong>Step 2 — classify by sides:</strong> a triangle with all sides congruent is <strong>equilateral</strong>.`,
         `<strong>Step 3 — connect to angles:</strong> every equilateral triangle is also <strong>equiangular</strong>, so each angle measures \\(\\dfrac{180^\\circ}{3}=60^\\circ\\).`,
       ], check: `An equilateral triangle is automatically isosceles too, since it has at least two congruent sides.` },
-      { h: "Classify a triangle by its angles", p: `A triangle has angles measuring \\(40^\\circ\\), \\(90^\\circ\\), and \\(50^\\circ\\). Classify it by angles.`, steps: [
+      { h: "Classify a triangle by its angles", p: `A triangle has angles measuring \\(40^\\circ\\), \\(90^\\circ\\), and \\(50^\\circ\\). Classify it by angles.`, fig: triangleTypes(),
+        steps: [
         `<strong>Step 1 — check the sum:</strong> \\(40^\\circ+90^\\circ+50^\\circ=180^\\circ\\), so these could be the angles of a triangle.`,
         `<strong>Step 2 — look for a right angle:</strong> one angle equals \\(90^\\circ\\).`,
         `<strong>Step 3 — classify:</strong> a triangle with one \\(90^\\circ\\) angle is a <strong>right triangle</strong>. Since all three angles are different, it is also scalene.`,
       ] },
-      { h: "Find a missing angle with the Angle-Sum Theorem", p: `Two angles of a triangle measure \\(55^\\circ\\) and \\(65^\\circ\\). Find the third angle and classify the triangle.`, steps: [
+      { h: "Find a missing angle with the Angle-Sum Theorem", p: `Two angles of a triangle measure \\(55^\\circ\\) and \\(65^\\circ\\). Find the third angle and classify the triangle.`, fig: angleSumTri(),
+        steps: [
         `<strong>Step 1 — set up the sum:</strong> \\(55^\\circ+65^\\circ+x=180^\\circ\\).`,
         `<strong>Step 2 — solve:</strong> \\(x=180^\\circ-120^\\circ=60^\\circ\\).`,
         `<strong>Step 3 — classify:</strong> all three angles (\\(55^\\circ,60^\\circ,65^\\circ\\)) are less than \\(90^\\circ\\), so the triangle is <strong>acute</strong> (and scalene, since no two angles match).`,
       ] },
-      { h: "Solve for angles given in terms of x", p: `The angles of a triangle measure \\(x^\\circ\\), \\(2x^\\circ\\), and \\(3x^\\circ\\). Find the measure of each angle and classify the triangle.`, steps: [
+      { h: "Solve for angles given in terms of x", p: `The angles of a triangle measure \\(x^\\circ\\), \\(2x^\\circ\\), and \\(3x^\\circ\\). Find the measure of each angle and classify the triangle.`, fig: angleSumTri(),
+        steps: [
         `<strong>Step 1 — write the angle-sum equation:</strong> \\(x+2x+3x=180\\).`,
         `<strong>Step 2 — solve for x:</strong> \\(6x=180\\), so \\(x=30\\).`,
         `<strong>Step 3 — evaluate each angle:</strong> the angles are \\(30^\\circ\\), \\(60^\\circ\\), and \\(90^\\circ\\).`,
         `<strong>Step 4 — classify:</strong> one angle is \\(90^\\circ\\), so this is a <strong>right</strong> (and scalene) triangle.`,
       ] },
-      { h: "Use the Exterior Angle Theorem", p: `An exterior angle of a triangle measures \\(130^\\circ\\). The two remote interior angles measure \\(3x^\\circ\\) and \\(2x^\\circ\\). Find \\(x\\), the two remote angles, and the third interior angle.`, steps: [
+      { h: "Use the Exterior Angle Theorem", p: `An exterior angle of a triangle measures \\(130^\\circ\\). The two remote interior angles measure \\(3x^\\circ\\) and \\(2x^\\circ\\). Find \\(x\\), the two remote angles, and the third interior angle.`, fig: exteriorAngle(),
+        steps: [
         `<strong>Step 1 — apply the Exterior Angle Theorem:</strong> \\(3x+2x=130\\).`,
         `<strong>Step 2 — solve for x:</strong> \\(5x=130\\), so \\(x=26\\).`,
         `<strong>Step 3 — find the remote angles:</strong> \\(3(26)^\\circ=78^\\circ\\) and \\(2(26)^\\circ=52^\\circ\\).`,
@@ -92,24 +111,28 @@ ch["4.2"] = L("4.2", "Isosceles and Equilateral Triangle Theorems (MA.912.GR.1.3
         `<strong>Step 2 — apply the Base Angles Theorem:</strong> \\(\\angle C\\cong\\angle B=50^\\circ\\).`,
         `<strong>Step 3 — find the vertex angle:</strong> \\(\\angle A=180^\\circ-50^\\circ-50^\\circ=80^\\circ\\).`,
       ] },
-      { h: "Apply the converse to find a missing side", p: `In \\(\\triangle DEF\\), \\(\\angle D=\\angle E=65^\\circ\\). If \\(EF=3x-2\\) and \\(DF=x+6\\), find \\(x\\) and the length of each side.`, steps: [
+      { h: "Apply the converse to find a missing side", p: `In \\(\\triangle DEF\\), \\(\\angle D=\\angle E=65^\\circ\\). If \\(EF=3x-2\\) and \\(DF=x+6\\), find \\(x\\) and the length of each side.`, fig: isoscelesFig(),
+        steps: [
         `<strong>Step 1 — identify which sides must be congruent:</strong> since \\(\\angle D\\cong\\angle E\\), the sides opposite them, \\(\\overline{EF}\\) and \\(\\overline{DF}\\), must be congruent.`,
         `<strong>Step 2 — set the expressions equal:</strong> \\(3x-2=x+6\\).`,
         `<strong>Step 3 — solve for x:</strong> \\(2x=8\\), so \\(x=4\\).`,
         `<strong>Step 4 — evaluate:</strong> \\(EF=DF=3(4)-2=10\\).`,
       ] },
-      { h: "Use the equilateral/equiangular corollary", p: `\\(\\triangle GHI\\) is equilateral, with sides \\(2x+1\\), \\(x+7\\), and \\(3x-5\\). Find \\(x\\), the side length, and each angle.`, steps: [
+      { h: "Use the equilateral/equiangular corollary", p: `\\(\\triangle GHI\\) is equilateral, with sides \\(2x+1\\), \\(x+7\\), and \\(3x-5\\). Find \\(x\\), the side length, and each angle.`, fig: equilateralFig(),
+        steps: [
         `<strong>Step 1 — set two expressions equal (all sides are congruent):</strong> \\(2x+1=x+7\\).`,
         `<strong>Step 2 — solve:</strong> \\(x=6\\).`,
         `<strong>Step 3 — check the third side:</strong> \\(3(6)-5=13\\), and \\(2(6)+1=13\\), \\(6+7=13\\). ✓ Every side is \\(13\\).`,
         `<strong>Step 4 — find the angles:</strong> an equilateral triangle is equiangular, so each angle is \\(60^\\circ\\).`,
       ] },
-      { h: "Use the vertex bisector as an altitude", p: `Isosceles \\(\\triangle JKL\\) has legs \\(JK=JL=13\\) and base \\(KL=10\\). Find the height from \\(J\\) to the base.`, steps: [
+      { h: "Use the vertex bisector as an altitude", p: `Isosceles \\(\\triangle JKL\\) has legs \\(JK=JL=13\\) and base \\(KL=10\\). Find the height from \\(J\\) to the base.`, fig: altitudeIsos(),
+        steps: [
         `<strong>Step 1 — recall the key fact:</strong> the bisector of the vertex angle \\(\\angle J\\) is also the altitude to the base, so it meets \\(\\overline{KL}\\) at its midpoint and forms a right angle.`,
         `<strong>Step 2 — find the half-base:</strong> the midpoint splits \\(KL=10\\) into two segments of \\(5\\).`,
         `<strong>Step 3 — apply the Pythagorean Theorem:</strong> \\(h=\\sqrt{13^2-5^2}=\\sqrt{169-25}=\\sqrt{144}=12\\).`,
       ] },
-      { h: "Solve a system with base angles and the vertex angle", p: `In isosceles \\(\\triangle MNP\\), the vertex angle \\(\\angle M\\) measures \\(x^\\circ\\) and each base angle measures \\((2x+15)^\\circ\\). Find \\(x\\) and each angle.`, steps: [
+      { h: "Solve a system with base angles and the vertex angle", p: `In isosceles \\(\\triangle MNP\\), the vertex angle \\(\\angle M\\) measures \\(x^\\circ\\) and each base angle measures \\((2x+15)^\\circ\\). Find \\(x\\) and each angle.`, fig: isoscelesFig(),
+        steps: [
         `<strong>Step 1 — write the angle-sum equation:</strong> \\(x+2(2x+15)=180\\).`,
         `<strong>Step 2 — simplify:</strong> \\(x+4x+30=180\\), so \\(5x=150\\).`,
         `<strong>Step 3 — solve:</strong> \\(x=30\\).`,
@@ -152,7 +175,8 @@ ch["4.3"] = L("4.3", "Proving Congruence: SSS and SAS (MA.912.GR.1.2)", [
         `<strong>Step 2 — match to a postulate:</strong> three sides congruent to three sides is the <strong>SSS</strong> postulate.`,
         `<strong>Step 3 — conclude:</strong> \\(\\triangle ABC\\cong\\triangle DEF\\) by SSS.`,
       ] },
-      { h: "Use a shared side to complete SSS", p: `Given \\(\\overline{AB}\\cong\\overline{CB}\\) and \\(\\overline{AD}\\cong\\overline{CD}\\), prove \\(\\triangle ABD\\cong\\triangle CBD\\).`, steps: [
+      { h: "Use a shared side to complete SSS", p: `Given \\(\\overline{AB}\\cong\\overline{CB}\\) and \\(\\overline{AD}\\cong\\overline{CD}\\), prove \\(\\triangle ABD\\cong\\triangle CBD\\).`, fig: sssMarks(),
+        steps: [
         `<strong>Step 1 — mark the given congruences:</strong> \\(\\overline{AB}\\cong\\overline{CB}\\) and \\(\\overline{AD}\\cong\\overline{CD}\\).`,
         `<strong>Step 2 — find the third pair:</strong> \\(\\overline{BD}\\cong\\overline{BD}\\) by the Reflexive Property (shared side).`,
         `<strong>Step 3 — conclude:</strong> \\(\\triangle ABD\\cong\\triangle CBD\\) by SSS.`,
@@ -164,13 +188,15 @@ ch["4.3"] = L("4.3", "Proving Congruence: SSS and SAS (MA.912.GR.1.2)", [
         `<strong>Step 3 — supply the shared side:</strong> \\(\\overline{CD}\\cong\\overline{CD}\\) by the Reflexive Property.`,
         `<strong>Step 4 — conclude:</strong> \\(\\triangle ACD\\cong\\triangle BCD\\) by SAS.`,
       ] },
-      { h: "Use vertical angles to set up SAS", p: `Segments \\(\\overline{AB}\\) and \\(\\overline{CD}\\) bisect each other at point \\(E\\). Prove \\(\\triangle AEC\\cong\\triangle BED\\).`, steps: [
+      { h: "Use vertical angles to set up SAS", p: `Segments \\(\\overline{AB}\\) and \\(\\overline{CD}\\) bisect each other at point \\(E\\). Prove \\(\\triangle AEC\\cong\\triangle BED\\).`, fig: sasMarks(),
+        steps: [
         `<strong>Step 1 — use the definition of bisect:</strong> \\(\\overline{AE}\\cong\\overline{BE}\\) and \\(\\overline{CE}\\cong\\overline{DE}\\).`,
         `<strong>Step 2 — find the included angle:</strong> \\(\\angle AEC\\) and \\(\\angle BED\\) are vertical angles, so \\(\\angle AEC\\cong\\angle BED\\).`,
         `<strong>Step 3 — check the angle is included:</strong> it lies between the two given sides at \\(E\\) in each triangle.`,
         `<strong>Step 4 — conclude:</strong> \\(\\triangle AEC\\cong\\triangle BED\\) by SAS.`,
       ] },
-      { h: "Apply CPCTC after an SSS proof", p: `Given \\(\\triangle PQR\\cong\\triangle STU\\) (already proven by SSS), with \\(\\angle P=52^\\circ\\) and \\(\\angle Q=63^\\circ\\), find \\(\\angle T\\) and \\(\\angle U\\).`, steps: [
+      { h: "Apply CPCTC after an SSS proof", p: `Given \\(\\triangle PQR\\cong\\triangle STU\\) (already proven by SSS), with \\(\\angle P=52^\\circ\\) and \\(\\angle Q=63^\\circ\\), find \\(\\angle T\\) and \\(\\angle U\\).`, fig: sssMarks(),
+        steps: [
         `<strong>Step 1 — match corresponding vertices:</strong> \\(P\\leftrightarrow S\\), \\(Q\\leftrightarrow T\\), \\(R\\leftrightarrow U\\).`,
         `<strong>Step 2 — apply CPCTC:</strong> \\(\\angle T\\cong\\angle Q=63^\\circ\\).`,
         `<strong>Step 3 — find the remaining angle:</strong> \\(\\angle U=180^\\circ-52^\\circ-63^\\circ=65^\\circ\\).`,
@@ -212,23 +238,27 @@ ch["4.4"] = L("4.4", "Proving Congruence: ASA and AAS (MA.912.GR.1.2)", [
         `<strong>Step 2 — match to a postulate:</strong> two angles and the included side is <strong>ASA</strong>.`,
         `<strong>Step 3 — conclude:</strong> \\(\\triangle ABC\\cong\\triangle DEF\\) by ASA.`,
       ] },
-      { h: "Recognize AAS from a diagram", p: `In \\(\\triangle GHI\\) and \\(\\triangle JKL\\), \\(\\angle G\\cong\\angle J\\), \\(\\angle H\\cong\\angle K\\), and \\(\\overline{HI}\\cong\\overline{KL}\\). Prove the triangles congruent.`, steps: [
+      { h: "Recognize AAS from a diagram", p: `In \\(\\triangle GHI\\) and \\(\\triangle JKL\\), \\(\\angle G\\cong\\angle J\\), \\(\\angle H\\cong\\angle K\\), and \\(\\overline{HI}\\cong\\overline{KL}\\). Prove the triangles congruent.`, fig: aasMarks(),
+        steps: [
         `<strong>Step 1 — check where the side falls:</strong> \\(\\overline{HI}\\) is opposite \\(\\angle G\\)/\\(\\angle J\\), not between the two marked angles \\(\\angle G\\) and \\(\\angle H\\).`,
         `<strong>Step 2 — match to a postulate:</strong> two angles and a non-included side is <strong>AAS</strong>.`,
         `<strong>Step 3 — conclude:</strong> \\(\\triangle GHI\\cong\\triangle JKL\\) by AAS.`,
       ] },
-      { h: "Use a shared side for ASA", p: `In the diagram, \\(\\overline{BD}\\) is a shared side, \\(\\angle ABD\\cong\\angle CDB\\), and \\(\\angle ADB\\cong\\angle CBD\\). Prove \\(\\triangle ABD\\cong\\triangle CDB\\).`, steps: [
+      { h: "Use a shared side for ASA", p: `In the diagram, \\(\\overline{BD}\\) is a shared side, \\(\\angle ABD\\cong\\angle CDB\\), and \\(\\angle ADB\\cong\\angle CBD\\). Prove \\(\\triangle ABD\\cong\\triangle CDB\\).`, fig: asaMarks(),
+        steps: [
         `<strong>Step 1 — locate the shared side:</strong> \\(\\overline{BD}\\cong\\overline{DB}\\) by the Reflexive Property.`,
         `<strong>Step 2 — check the side is included:</strong> \\(\\overline{BD}\\) lies between \\(\\angle ABD\\)/\\(\\angle ADB\\) in the first triangle and between \\(\\angle CDB\\)/\\(\\angle CBD\\) in the second.`,
         `<strong>Step 3 — conclude:</strong> \\(\\triangle ABD\\cong\\triangle CDB\\) by ASA.`,
       ] },
-      { h: "Use base angles and a shared side for AAS", p: `In isosceles \\(\\triangle JKL\\) with \\(\\overline{JK}\\cong\\overline{JL}\\), altitude \\(\\overline{JM}\\) is drawn to base \\(\\overline{KL}\\) (\\(M\\) is on \\(\\overline{KL}\\)). Prove \\(\\triangle JKM\\cong\\triangle JLM\\).`, steps: [
+      { h: "Use base angles and a shared side for AAS", p: `In isosceles \\(\\triangle JKL\\) with \\(\\overline{JK}\\cong\\overline{JL}\\), altitude \\(\\overline{JM}\\) is drawn to base \\(\\overline{KL}\\) (\\(M\\) is on \\(\\overline{KL}\\)). Prove \\(\\triangle JKM\\cong\\triangle JLM\\).`, fig: aasMarks(),
+        steps: [
         `<strong>Step 1 — get a pair of congruent angles:</strong> since \\(\\overline{JK}\\cong\\overline{JL}\\), \\(\\angle K\\cong\\angle L\\) by the Base Angles Theorem.`,
         `<strong>Step 2 — get a second pair:</strong> \\(\\overline{JM}\\) is an altitude, so \\(\\angle JMK\\cong\\angle JML\\) (both right angles).`,
         `<strong>Step 3 — supply the shared side:</strong> \\(\\overline{JM}\\cong\\overline{JM}\\) by the Reflexive Property — this side is opposite \\(\\angle K\\) and \\(\\angle L\\), so it is non-included.`,
         `<strong>Step 4 — conclude:</strong> \\(\\triangle JKM\\cong\\triangle JLM\\) by AAS.`,
       ] },
-      { h: "Solve for x using ASA/AAS with algebraic sides", p: `\\(\\triangle NOP\\cong\\triangle QRS\\) by ASA, with \\(\\overline{OP}\\) corresponding to \\(\\overline{RS}\\). If \\(OP=5x-3\\) and \\(RS=2x+9\\), find \\(x\\) and the length of the included side.`, steps: [
+      { h: "Solve for x using ASA/AAS with algebraic sides", p: `\\(\\triangle NOP\\cong\\triangle QRS\\) by ASA, with \\(\\overline{OP}\\) corresponding to \\(\\overline{RS}\\). If \\(OP=5x-3\\) and \\(RS=2x+9\\), find \\(x\\) and the length of the included side.`, fig: asaMarks(),
+        steps: [
         `<strong>Step 1 — use CPCTC:</strong> since the triangles are congruent, \\(\\overline{OP}\\cong\\overline{RS}\\).`,
         `<strong>Step 2 — set the expressions equal:</strong> \\(5x-3=2x+9\\).`,
         `<strong>Step 3 — solve:</strong> \\(3x=12\\), so \\(x=4\\).`,
@@ -272,23 +302,27 @@ ch["4.5"] = L("4.5", "Proving Congruence: Hypotenuse-Leg (HL) for Right Triangle
         `<strong>Step 3 — identify the legs:</strong> \\(\\overline{AB}\\cong\\overline{DE}\\) is one pair of legs.`,
         `<strong>Step 4 — conclude:</strong> \\(\\triangle ABC\\cong\\triangle DEF\\) by HL.`,
       ] },
-      { h: "Use a shared leg for HL", p: `\\(\\overline{BD}\\perp\\overline{AC}\\) at \\(D\\), with \\(\\overline{AB}\\cong\\overline{CB}\\) (the hypotenuses of the two right triangles formed). Prove \\(\\triangle ABD\\cong\\triangle CBD\\).`, steps: [
+      { h: "Use a shared leg for HL", p: `\\(\\overline{BD}\\perp\\overline{AC}\\) at \\(D\\), with \\(\\overline{AB}\\cong\\overline{CB}\\) (the hypotenuses of the two right triangles formed). Prove \\(\\triangle ABD\\cong\\triangle CBD\\).`, fig: hlFig(),
+        steps: [
         `<strong>Step 1 — confirm right angles:</strong> \\(\\overline{BD}\\perp\\overline{AC}\\) means \\(\\angle ADB\\) and \\(\\angle CDB\\) are both right angles.`,
         `<strong>Step 2 — identify the hypotenuses:</strong> \\(\\overline{AB}\\) and \\(\\overline{CB}\\), opposite the right angles, are congruent (given).`,
         `<strong>Step 3 — supply the shared leg:</strong> \\(\\overline{BD}\\cong\\overline{BD}\\) by the Reflexive Property.`,
         `<strong>Step 4 — conclude:</strong> \\(\\triangle ABD\\cong\\triangle CBD\\) by HL.`,
       ] },
-      { h: "Distinguish HL from ordinary SSA", p: `Explain why \\(\\overline{AC}\\cong\\overline{DF}\\) and \\(\\overline{BC}\\cong\\overline{EF}\\) (with right angles at \\(B\\) and \\(E\\)) is enough to prove \\(\\triangle ABC\\cong\\triangle DEF\\), while the same two-sides-and-a-non-included-angle pattern would fail without the right angle.`, steps: [
+      { h: "Distinguish HL from ordinary SSA", p: `Explain why \\(\\overline{AC}\\cong\\overline{DF}\\) and \\(\\overline{BC}\\cong\\overline{EF}\\) (with right angles at \\(B\\) and \\(E\\)) is enough to prove \\(\\triangle ABC\\cong\\triangle DEF\\), while the same two-sides-and-a-non-included-angle pattern would fail without the right angle.`, fig: hlFig(),
+        steps: [
         `<strong>Step 1 — recall why plain SSA fails:</strong> in general, two sides and a non-included angle can be satisfied by two non-congruent triangles (an "ambiguous case").`,
         `<strong>Step 2 — see what the right angle fixes:</strong> once the hypotenuse and one leg are set, the Pythagorean Theorem \\(a^2+b^2=c^2\\) forces the remaining leg to a single value — no second triangle is possible.`,
         `<strong>Step 3 — conclude:</strong> the right angle removes the ambiguity, which is exactly why HL is a valid postulate only for right triangles.`,
       ] },
-      { h: "Solve for x using HL and CPCTC", p: `Right triangles \\(\\triangle GHI\\) and \\(\\triangle JKL\\) have right angles at \\(H\\) and \\(K\\), congruent hypotenuses \\(\\overline{GI}\\cong\\overline{JL}\\), and legs \\(GH=4x-1\\), \\(JK=15\\). If \\(\\triangle GHI\\cong\\triangle JKL\\) by HL, find \\(x\\).`, steps: [
+      { h: "Solve for x using HL and CPCTC", p: `Right triangles \\(\\triangle GHI\\) and \\(\\triangle JKL\\) have right angles at \\(H\\) and \\(K\\), congruent hypotenuses \\(\\overline{GI}\\cong\\overline{JL}\\), and legs \\(GH=4x-1\\), \\(JK=15\\). If \\(\\triangle GHI\\cong\\triangle JKL\\) by HL, find \\(x\\).`, fig: hlFig(),
+        steps: [
         `<strong>Step 1 — use CPCTC:</strong> since the triangles are congruent, \\(\\overline{GH}\\cong\\overline{JK}\\).`,
         `<strong>Step 2 — set the expressions equal:</strong> \\(4x-1=15\\).`,
         `<strong>Step 3 — solve:</strong> \\(4x=16\\), so \\(x=4\\).`,
       ] },
-      { h: "Apply HL in a diagram with a common hypotenuse pair", p: `Isosceles \\(\\triangle PQR\\) has \\(\\overline{PQ}\\cong\\overline{PR}\\), and altitude \\(\\overline{PM}\\) is drawn from \\(P\\) to \\(\\overline{QR}\\). Prove \\(\\triangle PMQ\\cong\\triangle PMR\\) using HL.`, steps: [
+      { h: "Apply HL in a diagram with a common hypotenuse pair", p: `Isosceles \\(\\triangle PQR\\) has \\(\\overline{PQ}\\cong\\overline{PR}\\), and altitude \\(\\overline{PM}\\) is drawn from \\(P\\) to \\(\\overline{QR}\\). Prove \\(\\triangle PMQ\\cong\\triangle PMR\\) using HL.`, fig: hlFig(),
+        steps: [
         `<strong>Step 1 — confirm right angles:</strong> the altitude \\(\\overline{PM}\\) creates \\(\\angle PMQ\\cong\\angle PMR\\), both right angles.`,
         `<strong>Step 2 — identify the hypotenuses:</strong> \\(\\overline{PQ}\\) and \\(\\overline{PR}\\), opposite the right angles, are congruent (given).`,
         `<strong>Step 3 — supply the shared leg:</strong> \\(\\overline{PM}\\cong\\overline{PM}\\) by the Reflexive Property.`,
@@ -332,25 +366,29 @@ ch["4.6"] = L("4.6", "Triangle Proofs with Overlapping Triangles and Medians/Alt
         `<strong>Step 3 — find the included angle:</strong> \\(\\angle AEB\\) and \\(\\angle DEC\\) are vertical angles, so they are congruent.`,
         `<strong>Step 4 — conclude:</strong> \\(\\triangle ABE\\cong\\triangle DCE\\) by SAS.`,
       ] },
-      { h: "Use the Segment Addition Postulate on a shared segment", p: `Points \\(A, B, C, D\\) lie on a line in that order, with \\(\\overline{AB}\\cong\\overline{CD}\\). Prove \\(\\overline{AC}\\cong\\overline{BD}\\).`, steps: [
+      { h: "Use the Segment Addition Postulate on a shared segment", p: `Points \\(A, B, C, D\\) lie on a line in that order, with \\(\\overline{AB}\\cong\\overline{CD}\\). Prove \\(\\overline{AC}\\cong\\overline{BD}\\).`, fig: overlappingFig(),
+        steps: [
         `<strong>Step 1 — apply Segment Addition:</strong> \\(AC=AB+BC\\) and \\(BD=BC+CD\\).`,
         `<strong>Step 2 — substitute the given congruence:</strong> since \\(AB=CD\\), the two sums become \\(AC=CD+BC\\) and \\(BD=BC+CD\\).`,
         `<strong>Step 3 — compare the two sums:</strong> both equal \\(BC+CD\\) (addition is commutative).`,
         `<strong>Step 4 — conclude:</strong> \\(AC=BD\\), so \\(\\overline{AC}\\cong\\overline{BD}\\). This "shared middle piece" trick is common in overlapping-triangle proofs.`,
       ] },
-      { h: "Prove two medians create congruent segments", p: `In \\(\\triangle ABC\\), \\(\\overline{AB}\\cong\\overline{AC}\\), and \\(\\overline{BM}\\), \\(\\overline{CN}\\) are the medians to sides \\(\\overline{AC}\\) and \\(\\overline{AB}\\) (so \\(M\\), \\(N\\) are midpoints). Prove \\(\\overline{BM}\\cong\\overline{CN}\\).`, steps: [
+      { h: "Prove two medians create congruent segments", p: `In \\(\\triangle ABC\\), \\(\\overline{AB}\\cong\\overline{AC}\\), and \\(\\overline{BM}\\), \\(\\overline{CN}\\) are the medians to sides \\(\\overline{AC}\\) and \\(\\overline{AB}\\) (so \\(M\\), \\(N\\) are midpoints). Prove \\(\\overline{BM}\\cong\\overline{CN}\\).`, fig: medianFig(),
+        steps: [
         `<strong>Step 1 — use the midpoint definition:</strong> \\(M\\) is the midpoint of \\(\\overline{AC}\\), so \\(AM=\\dfrac{1}{2}AC\\); \\(N\\) is the midpoint of \\(\\overline{AB}\\), so \\(AN=\\dfrac{1}{2}AB\\). Since \\(AB\\cong AC\\), \\(\\overline{AM}\\cong\\overline{AN}\\).`,
         `<strong>Step 2 — find a shared angle:</strong> \\(\\angle A\\) is common to \\(\\triangle ABM\\) and \\(\\triangle ACN\\).`,
         `<strong>Step 3 — use the isosceles hypothesis again:</strong> \\(\\overline{AB}\\cong\\overline{AC}\\) directly gives the second pair of sides.`,
         `<strong>Step 4 — apply SAS:</strong> \\(\\triangle ABM\\cong\\triangle ACN\\) (sides \\(\\overline{AB}\\cong\\overline{AC}\\), angle \\(A\\) shared, sides \\(\\overline{AM}\\cong\\overline{AN}\\)), so by CPCTC \\(\\overline{BM}\\cong\\overline{CN}\\).`,
       ] },
-      { h: "Use two altitudes in an isosceles triangle", p: `In isosceles \\(\\triangle ABC\\) with \\(\\overline{AB}\\cong\\overline{AC}\\), altitudes \\(\\overline{BD}\\) and \\(\\overline{CE}\\) are drawn to sides \\(\\overline{AC}\\) and \\(\\overline{AB}\\). Prove \\(\\overline{BD}\\cong\\overline{CE}\\).`, steps: [
+      { h: "Use two altitudes in an isosceles triangle", p: `In isosceles \\(\\triangle ABC\\) with \\(\\overline{AB}\\cong\\overline{AC}\\), altitudes \\(\\overline{BD}\\) and \\(\\overline{CE}\\) are drawn to sides \\(\\overline{AC}\\) and \\(\\overline{AB}\\). Prove \\(\\overline{BD}\\cong\\overline{CE}\\).`, fig: altitudeIsos(),
+        steps: [
         `<strong>Step 1 — identify the right angles:</strong> \\(\\angle ADB\\) and \\(\\angle AEC\\) are right angles (definition of altitude).`,
         `<strong>Step 2 — find a shared angle:</strong> \\(\\angle A\\) is common to \\(\\triangle ADB\\) and \\(\\triangle AEC\\).`,
         `<strong>Step 3 — use the isosceles hypothesis:</strong> \\(\\overline{AB}\\cong\\overline{AC}\\) are the hypotenuses of the two right triangles.`,
         `<strong>Step 4 — conclude:</strong> \\(\\triangle ADB\\cong\\triangle AEC\\) by AAS (\\(\\angle A\\), right angle, hypotenuse), so \\(\\overline{BD}\\cong\\overline{CE}\\) by CPCTC.`,
       ] },
-      { h: "Multi-step overlapping proof with angle addition", p: `Rays \\(\\overrightarrow{BA}\\), \\(\\overrightarrow{BD}\\), \\(\\overrightarrow{BC}\\), \\(\\overrightarrow{BE}\\) are drawn in that order around vertex \\(B\\), so \\(\\overrightarrow{BD}\\) lies inside \\(\\angle ABC\\) and \\(\\overrightarrow{BC}\\) lies inside \\(\\angle DBE\\). Given \\(\\angle ABD\\cong\\angle CBE\\), prove \\(\\angle ABC\\cong\\angle DBE\\).`, steps: [
+      { h: "Multi-step overlapping proof with angle addition", p: `Rays \\(\\overrightarrow{BA}\\), \\(\\overrightarrow{BD}\\), \\(\\overrightarrow{BC}\\), \\(\\overrightarrow{BE}\\) are drawn in that order around vertex \\(B\\), so \\(\\overrightarrow{BD}\\) lies inside \\(\\angle ABC\\) and \\(\\overrightarrow{BC}\\) lies inside \\(\\angle DBE\\). Given \\(\\angle ABD\\cong\\angle CBE\\), prove \\(\\angle ABC\\cong\\angle DBE\\).`, fig: overlappingFig(),
+        steps: [
         `<strong>Step 1 — apply the Angle Addition Postulate to each large angle:</strong> \\(\\angle ABC=\\angle ABD+\\angle DBC\\) and \\(\\angle DBE=\\angle DBC+\\angle CBE\\).`,
         `<strong>Step 2 — substitute the given congruence:</strong> since \\(\\angle ABD\\cong\\angle CBE\\), replace \\(\\angle ABD\\) with \\(\\angle CBE\\) in the first equation: \\(\\angle ABC=\\angle CBE+\\angle DBC\\).`,
         `<strong>Step 3 — compare the two sums:</strong> \\(\\angle ABC=\\angle DBC+\\angle CBE\\), which is exactly the expression for \\(\\angle DBE\\).`,

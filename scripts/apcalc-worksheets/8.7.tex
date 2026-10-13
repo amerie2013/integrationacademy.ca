@@ -1,0 +1,77 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize\color{black!60}Worksheet 8.7}
+\begin{document}
+
+\wstitle{8.7}{Volumes from Known Cross-Sections}{Unit 8: Applications of Integration}
+
+\begin{ideabox}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+  \item If the cross-section at $x$ has area $A(x)$, the volume is $\displaystyle\int_{a}^{b}A(x)\,dx$.
+  \item The side $s$ of each cross-section lies in the base: $s=\text{top}-\text{bottom}$.
+  \item Square: $s^2$. \quad Semicircle of diameter $s$: $\dfrac{\pi}{8}s^2$. \quad Equilateral triangle: $\dfrac{\sqrt3}{4}s^2$.
+  \item Isosceles right triangle with a leg in the base: $\dfrac12s^2$. \quad Rectangle of height $h$: $sh$.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked examples}
+\begin{example}{Example 1 \textperiodcentered{} Squares}
+The base of a solid is bounded by $y=x+1$, the $x$-axis, $x=0$ and $x=3$. Cross-sections perpendicular to the $x$-axis are squares. Find the volume.\soln $\displaystyle\int_{0}^{3}(x+1)^2\,dx=\dfrac{64-1}{3}$.\result{$21$.}
+\end{example}
+
+\begin{example}{Example 2 \textperiodcentered{} Semicircles}
+The base is bounded by $y=\sqrt{x}$, the $x$-axis and $x=9$. Cross-sections perpendicular to the $x$-axis are semicircles with diameter in the base. Find the volume.\soln $\dfrac\pi8\displaystyle\int_{0}^{9}x\,dx=\dfrac\pi8\cdot\dfrac{81}{2}$.\result{$\dfrac{81\pi}{16}$.}
+\end{example}
+
+\begin{example}{Example 3 \textperiodcentered{} Perpendicular to the $y$-axis}
+The base lies in the first quadrant, bounded by $y=x^2$, the $y$-axis and $y=9$. Cross-sections perpendicular to the $y$-axis are squares. Find the volume.\soln The side is $x=\sqrt y$: $\displaystyle\int_{0}^{9}y\,dy$.\result{$\dfrac{81}{2}$.}
+\end{example}
+
+\newpage
+\sech{Practice}
+
+\level{Core}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item Find the area of a semicircle with diameter 6.\work{2.3cm}
+  \item Find the area of an equilateral triangle with side 4.\work{2.3cm}
+  \item A solid has cross-sectional area $A(x)=3x^2$ for $0\le x\le2$. Find its volume.\work{2.3cm}
+  \item A solid has square cross-sections of side $2x$ for $0\le x\le3$. Find its volume.\work{2.3cm}
+\end{enumerate}
+
+\level{Exam level}
+\begin{enumerate}[leftmargin=*,itemsep=2pt,start=5]
+  \item The base of a solid is the disc $x^2+y^2\le25$. Cross-sections perpendicular to the $x$-axis are semicircles with diameter in the base. Find the volume.\work{2.8cm}
+  \item The base is the region enclosed by $y=x$ and $y=x^2$. Cross-sections perpendicular to the $x$-axis are isosceles right triangles with a leg in the base. Find the volume.\work{2.8cm}
+  \item The base is bounded by $y=6-2x$ and the coordinate axes. Cross-sections perpendicular to the $x$-axis are equilateral triangles. Find the volume.\work{2.8cm}
+  \item \emph{Calculator.} The base is bounded by $y=\ln x$, the $x$-axis and $x=e$. Cross-sections perpendicular to the $x$-axis are squares. Find the volume to three decimal places.\work{2.8cm}
+\end{enumerate}
+
+\begin{frbox}{Question 9 \textperiodcentered{} Free-response practice}
+Let $R$ be the region bounded by $y=6x-x^2$ and the $x$-axis. $R$ is the base of a solid.
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=2pt]
+  \item Find the area of $R$.\work{2.6cm}
+  \item Cross-sections of the solid perpendicular to the $x$-axis are squares. Find the volume.\work{2.6cm}
+  \item For a different solid with the same base, the cross-section at $x$ is a rectangle whose height is $x$. Find the volume.\work{2.6cm}
+\end{enumerate}
+\end{frbox}
+
+\newpage
+\begin{solbox}
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item $\dfrac12\pi(3)^2=\dfrac{9\pi}{2}$.
+  \item $\dfrac{\sqrt3}{4}(16)=4\sqrt3$.
+  \item $\Big[x^3\Big]_0^2=8$.
+  \item $\displaystyle\int_{0}^{3}4x^2\,dx=36$.
+  \item Diameter $2\sqrt{25-x^2}$: $\dfrac\pi8\displaystyle\int_{-5}^{5}4(25-x^2)\,dx=\dfrac\pi2\cdot\dfrac{500}{3}=\dfrac{250\pi}{3}$ (half of a sphere of radius 5).
+  \item $\dfrac12\displaystyle\int_{0}^{1}(x-x^2)^2\,dx=\dfrac12\left(\dfrac13-\dfrac12+\dfrac15\right)=\dfrac{1}{60}$.
+  \item $\dfrac{\sqrt3}{4}\displaystyle\int_{0}^{3}(6-2x)^2\,dx=\dfrac{\sqrt3}{4}(36)=9\sqrt3$.
+  \item $\displaystyle\int_{1}^{e}(\ln x)^2\,dx\approx0.718$.
+  \item \begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=3pt]
+    \item $\displaystyle\int_{0}^{6}(6x-x^2)\,dx=108-72=36$.
+    \item $\displaystyle\int_{0}^{6}(36x^2-12x^3+x^4)\,dx=2592-3888+\dfrac{7776}{5}=\dfrac{1296}{5}$.
+    \item $\displaystyle\int_{0}^{6}x(6x-x^2)\,dx=432-324=108$.
+  \end{enumerate}
+\end{enumerate}
+\end{solbox}
+
+\end{document}

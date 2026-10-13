@@ -1,0 +1,77 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize\color{black!60}Worksheet 1.8}
+\begin{document}
+
+\wstitle{1.8}{The Three-Part Continuity Test}{Unit 1: Limits and Continuity}
+
+\begin{ideabox}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+  \item $f$ is continuous at $c$ when $f(c)$ is defined, $\displaystyle\lim_{x\to c}f(x)$ exists, and the two are equal.
+  \item For a piecewise function the justification is one line: $\displaystyle\lim_{x\to c^-}f(x)=\displaystyle\lim_{x\to c^+}f(x)=f(c)$.
+  \item Polynomial, rational, root, trigonometric, exponential and logarithmic functions are continuous on their domains.
+  \item To make pieces join, set the limits equal at each boundary: one equation per boundary.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked examples}
+\begin{example}{Example 1 \textperiodcentered{} Verifying continuity}
+Is $f(x)=\begin{cases}x^3,&x\le1\\3x-2,&x>1\end{cases}$ continuous at $x=1$?\soln $\displaystyle\lim_{x\to 1^-}f(x)=1$, $\displaystyle\lim_{x\to 1^+}f(x)=3-2=1$, and $f(1)=1$.\result{Yes: the three values are equal.}
+\end{example}
+
+\begin{example}{Example 2 \textperiodcentered{} One constant}
+Find $k$ so that $f(x)=\begin{cases}kx-3,&x<2\\x^2+k,&x\ge2\end{cases}$ is continuous at $x=2$.\soln $2k-3=4+k$.\result{$k=7$. Check: both sides give 11.}
+\end{example}
+
+\begin{example}{Example 3 \textperiodcentered{} A function value and two constants}
+Find $a$ and $b$ so that $f(x)=\begin{cases}ax+2,&x<1\\5,&x=1\\bx^2,&x>1\end{cases}$ is continuous at $x=1$.\soln Left limit: $a+2$. Right limit: $b$. Both must equal $f(1)=5$.\result{$a=3$ and $b=5$.}
+\end{example}
+
+\newpage
+\sech{Practice}
+
+\level{Core}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item Is $f(x)=\begin{cases}4-x,&x<3\\x-2,&x\ge3\end{cases}$ continuous at $x=3$? Justify.\work{2.3cm}
+  \item On what set is $f(x)=\dfrac{1}{x^2-9}$ continuous?\work{2.3cm}
+  \item On what interval is $f(x)=\sqrt{x-2}$ continuous?\work{2.3cm}
+  \item What value should be assigned to $f(6)$ to make $f(x)=\dfrac{x^2-36}{x-6}$ continuous at $x=6$?\work{2.3cm}
+\end{enumerate}
+
+\level{Exam level}
+\begin{enumerate}[leftmargin=*,itemsep=2pt,start=5]
+  \item Find $k$ so that $f(x)=\begin{cases}x^2-k,&x\le2\\kx+1,&x>2\end{cases}$ is continuous at $x=2$.\work{2.8cm}
+  \item Find $k$ so that $f(x)=\begin{cases}\dfrac{\sin(4x)}{x},&x\neq0\\k,&x=0\end{cases}$ is continuous at $x=0$.\work{2.8cm}
+  \item Find $a$ and $b$ so that $f(x)=\begin{cases}x+a,&x<0\\x^2+3,&0\le x\le2\\bx-1,&x>2\end{cases}$ is continuous for all real $x$.\work{2.8cm}
+  \item On what interval is $f(x)=\ln(5-x)$ continuous?\work{2.8cm}
+\end{enumerate}
+
+\begin{frbox}{Question 9 \textperiodcentered{} Free-response practice}
+Let $f(x)=\begin{cases}x^2+1,&x<2\\5,&x=2\\7-x,&x>2.\end{cases}$
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=2pt]
+  \item Find $\displaystyle\lim_{x\to 2^-}f(x)$ and $\displaystyle\lim_{x\to 2^+}f(x)$.\work{2.6cm}
+  \item Is $f$ continuous at $x=2$? Justify your answer.\work{2.6cm}
+  \item Let $h(x)=f(x)$ for $x\neq2$ and $h(2)=4$. Is $h$ continuous at $x=2$? If not, name the type of discontinuity.\work{2.6cm}
+\end{enumerate}
+\end{frbox}
+
+\newpage
+\begin{solbox}
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item $\displaystyle\lim_{x\to 3^-}f(x)=1$, $\displaystyle\lim_{x\to 3^+}f(x)=1$, $f(3)=1$. All equal, so yes.
+  \item All real numbers except $x=3$ and $x=-3$.
+  \item $[2,\infty)$.
+  \item $12$, the limit of $x+6$.
+  \item $4-k=2k+1$ gives $k=1$.
+  \item $\displaystyle\lim_{x\to 0}\dfrac{\sin4x}{x}=4$, so $k=4$.
+  \item At 0: $a=3$. At 2: $7=2b-1$, so $b=4$.
+  \item $5-x>0$: the interval $(-\infty,5)$.
+  \item \begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=3pt]
+    \item $\displaystyle\lim_{x\to 2^-}f(x)=4+1=5$ and $\displaystyle\lim_{x\to 2^+}f(x)=7-2=5$.
+    \item Yes. $\displaystyle\lim_{x\to 2^-}f(x)=\displaystyle\lim_{x\to 2^+}f(x)=f(2)=5$.
+    \item No. $\displaystyle\lim_{x\to 2}h(x)=5$ but $h(2)=4$: a removable discontinuity.
+  \end{enumerate}
+\end{enumerate}
+\end{solbox}
+
+\end{document}

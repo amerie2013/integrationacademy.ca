@@ -1,0 +1,77 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize\color{black!60}Worksheet 2.8}
+\begin{document}
+
+\wstitle{2.8}{The Other Four Trigonometric Derivatives}{Unit 2: The Derivative}
+
+\begin{ideabox}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+  \item $\dfrac{d}{dx}[\tan x]=\sec^2x$ \quad and \quad $\dfrac{d}{dx}[\cot x]=-\csc^2x$.
+  \item $\dfrac{d}{dx}[\sec x]=\sec x\tan x$ \quad and \quad $\dfrac{d}{dx}[\csc x]=-\csc x\cot x$.
+  \item The three \textbf{co}-functions (cosine, cotangent, cosecant) have derivatives with a minus sign.
+  \item Each formula follows from the quotient rule applied to sines and cosines.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked examples}
+\begin{example}{Example 1 \textperiodcentered{} Simplifying afterwards}
+Find $\dfrac{d}{dx}[\cot x+x]$.\soln $-\csc^2x+1$, and $1-\csc^2x=-\cot^2x$.\result{$-\cot^2x$.}
+\end{example}
+
+\begin{example}{Example 2 \textperiodcentered{} With the product rule}
+Find $\dfrac{d}{dx}[x\sec x]$.\soln $(1)\sec x+x\sec x\tan x$.\result{$\sec x\,(1+x\tan x)$.}
+\end{example}
+
+\begin{example}{Example 3 \textperiodcentered{} A tangent line}
+Write an equation of the line tangent to $y=\cot x$ at $x=\dfrac\pi4$.\soln The point is $\left(\dfrac\pi4,1\right)$ and the slope is $-\csc^2\dfrac\pi4=-2$.\result{$y-1=-2\left(x-\dfrac\pi4\right)$.}
+\end{example}
+
+\newpage
+\sech{Practice}
+
+\level{Core}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item Find $\dfrac{d}{dx}[3\tan x]$.\work{2.3cm}
+  \item Find $\dfrac{d}{dx}[\csc x]$.\work{2.3cm}
+  \item For $f(x)=\sec x$, find $f'(0)$.\work{2.3cm}
+  \item For $f(x)=\cot x$, find $f'\!\left(\dfrac\pi2\right)$.\work{2.3cm}
+\end{enumerate}
+
+\level{Exam level}
+\begin{enumerate}[leftmargin=*,itemsep=2pt,start=5]
+  \item Find $\dfrac{d}{dx}\left[\dfrac{\tan x}{x}\right]$.\work{2.8cm}
+  \item Find $\dfrac{d}{dx}[\sec x\tan x]$.\work{2.8cm}
+  \item At what value of $x$ in $(0,\pi)$ does the graph of $y=x+\cot x$ have a horizontal tangent?\work{2.8cm}
+  \item For $f(x)=e^{x}\tan x$, find $f'(0)$.\work{2.8cm}
+\end{enumerate}
+
+\begin{frbox}{Question 9 \textperiodcentered{} Free-response practice}
+Let $f(x)=2\sec x-\tan x$ for $-\dfrac\pi2<x<\dfrac\pi2$.
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=2pt]
+  \item Find $f'(x)$, and show that $f'(x)=\dfrac{2\sin x-1}{\cos^2x}$.\work{2.6cm}
+  \item Find the value of $x$ in the interval at which the graph of $f$ has a horizontal tangent.\work{2.6cm}
+  \item Find the coordinates of the point on the graph of $f$ at that value of $x$.\work{2.6cm}
+\end{enumerate}
+\end{frbox}
+
+\newpage
+\begin{solbox}
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item $3\sec^2x$.
+  \item $-\csc x\cot x$.
+  \item $\sec0\tan0=0$.
+  \item $-\csc^2\dfrac\pi2=-1$.
+  \item $\dfrac{x\sec^2x-\tan x}{x^2}$.
+  \item $\sec x\tan x\cdot\tan x+\sec x\cdot\sec^2x=\sec x\tan^2x+\sec^3x$.
+  \item $1-\csc^2x=0$ gives $\sin^2x=1$, so $x=\dfrac\pi2$.
+  \item $f'(x)=e^{x}\tan x+e^{x}\sec^2x$, so $f'(0)=0+1=1$.
+  \item \begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=3pt]
+    \item $f'(x)=2\sec x\tan x-\sec^2x=\dfrac{2\sin x}{\cos^2x}-\dfrac{1}{\cos^2x}=\dfrac{2\sin x-1}{\cos^2x}$.
+    \item $\sin x=\dfrac12$, so $x=\dfrac\pi6$.
+    \item $f\!\left(\dfrac\pi6\right)=2\cdot\dfrac{2}{\sqrt3}-\dfrac{1}{\sqrt3}=\dfrac{3}{\sqrt3}=\sqrt3$: the point $\left(\dfrac\pi6,\sqrt3\right)$.
+  \end{enumerate}
+\end{enumerate}
+\end{solbox}
+
+\end{document}

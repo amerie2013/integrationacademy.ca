@@ -216,10 +216,10 @@ export default function CourseHubPage() {
             if (items.length === 0) return <Empty>No content yet — use “Add content” above.</Empty>;
             return items.map((it) => (
               <Row key={it.key}>
-                <span style={{ fontWeight: 600, display: "flex", alignItems: "center", gap: 10, minWidth: 0 }}>
+                <Link href={it.href} style={{ fontWeight: 600, display: "flex", alignItems: "center", gap: 10, minWidth: 0, color: "inherit", textDecoration: "none" }}>
                   <TypeChip kind={it.kind} />
                   <span style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{it.title}</span>
-                </span>
+                </Link>
                 <span style={{ display: "flex", gap: 12, alignItems: "center", flexShrink: 0 }}>
                   {it.due !== undefined && <span style={{ color: "#64748b", fontSize: 13 }}>{it.due ? new Date(it.due).toLocaleDateString() : "No due date"}</span>}
                   {it.togglable && <PublishToggle on={it.published} onClick={it.toggle} />}

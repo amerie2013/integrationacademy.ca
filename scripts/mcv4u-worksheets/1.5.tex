@@ -1,0 +1,240 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize MCV4U \textperiodcentered{} 1.5}
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{titleblue}Worksheet 1.5 --- Derivative Using Definition}\\[2pt]
+{\small Grade 12 Calculus and Vectors (MCV4U) \textperiodcentered{} Unit 1: Rates of Change and Limits}
+\end{center}
+
+\begin{ideabox}
+$f'(x)=\displaystyle\lim_{h\to0}\dfrac{f(x+h)-f(x)}{h}$, with $x$ left general (unlike Lesson 1.4's single point). Expand, simplify to cancel $h$, then let $h\to0$.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item $f'(x)=\displaystyle\lim_{h\to0}\dfrac{f(x+h)-f(x)}{h}$.
+  \item Layout: Step 1 --- find $f(x+h)$ and expand it. Step 2 --- substitute into the definition, cross out the terms that cancel, factor out $h$, cancel it, and box the answer.
+  \item Combine fractions / rationalize so $h$ cancels.
+  \item Once $f'(x)$ is known, the slope at any point $a$ is just $f'(a)$ --- no limit needed.
+\end{itemize}
+\end{ideabox}
+
+\begin{learnbox}
+\lh{The definition}The \textbf{derivative} is $f'(x)=\displaystyle\lim_{h\to0}\dfrac{f(x+h)-f(x)}{h}$ — the same limit as Lesson 1.4, but with $x$ left general instead of one fixed point.
+\lh{What it measures}$f'(x)$ gives the instantaneous rate of change, equivalently the slope of the tangent line, at \emph{every} $x$ at once.
+\lh{Using the definition}Computing this limit directly is differentiating \emph{using the definition} (or \emph{first principles}), and it justifies the shortcut rules that follow.
+\end{learnbox}
+
+\sech{Worked Examples}
+
+\begin{example}{ex0}{Example 1 --- Polynomial}
+Differentiate $f(x)=x^2$ using the definition.\soln
+\textbf{Step 1:} Find $f(x+h)$: $f(x+h)=(x+h)^2=x^2+2xh+h^2$.\\[3pt]
+\textbf{Step 2:} Substitute into the definition, cross out what cancels, factor out $h$, and cancel it:
+\begin{align*}
+f'(x)&=\lim_{h\to0}\frac{f(x+h)-f(x)}{h}\\
+&=\lim_{h\to0}\frac{(x^2+2xh+h^2)-(x)^2}{h}\\
+&=\lim_{h\to0}\frac{\cancel{x^2}+2xh+h^2-\cancel{x^2}}{h}\\
+&=\lim_{h\to0}\frac{\cancel{h}(2x+h)}{\cancel{h}}\\
+&=\boxed{2x}
+\end{align*}\eplot{-3}{3}{-6}{9}{\addplot[exblue,very thick,domain=-3:3]{x^2};\addplot[qorange,thick,domain=-3:3]{2*x};}
+\end{example}
+
+\begin{example}{ex1}{Example 2 --- Polynomial}
+Differentiate $f(x)=3x^2-x$ using the definition.\soln
+\textbf{Step 1:} Find $f(x+h)$: $f(x+h)=3(x+h)^2-(x+h)=3x^2+6xh+3h^2-x-h$.\\[3pt]
+\textbf{Step 2:} Substitute into the definition, cross out what cancels, factor out $h$, and cancel it:
+\begin{align*}
+f'(x)&=\lim_{h\to0}\frac{f(x+h)-f(x)}{h}\\
+&=\lim_{h\to0}\frac{(3x^2+6xh+3h^2-x-h)-(3x^2-x)}{h}\\
+&=\lim_{h\to0}\frac{\cancel{3x^2}+6xh+3h^2-\cancel{x}-h-\cancel{3x^2}+\cancel{x}}{h}\\
+&=\lim_{h\to0}\frac{\cancel{h}(6x+3h-1)}{\cancel{h}}\\
+&=\boxed{6x-1}
+\end{align*}
+\end{example}
+
+\begin{example}{ex2}{Example 3 --- Reciprocal}
+Differentiate $f(x)=\dfrac1x$ using the definition.\soln
+\textbf{Step 1:} Find $f(x+h)$: $f(x+h)=\dfrac{1}{x+h}$.\\[3pt]
+\textbf{Step 2:} Substitute into the definition, combine the fractions over the common denominator $x(x+h)$, cross out what cancels, and cancel $h$:
+\begin{align*}
+f'(x)&=\lim_{h\to0}\frac{f(x+h)-f(x)}{h}\\
+&=\lim_{h\to0}\dfrac{\dfrac{1}{x+h}-\dfrac{1}{x}}{h}\\
+&=\lim_{h\to0}\dfrac{\dfrac{x-(x+h)}{x(x+h)}}{h}\\
+&=\lim_{h\to0}\frac{\cancel{x}-\cancel{x}-h}{x(x+h)\cdot h}\\
+&=\lim_{h\to0}\frac{-\cancel{h}}{x(x+h)\cancel{h}}\\
+&=\lim_{h\to0}\frac{-1}{x(x+h)}\\
+&=\boxed{-\frac{1}{x^2}}
+\end{align*}\eplot{0.6}{3}{-3}{3}{\addplot[exblue,very thick,domain=0.6:3]{1/x};\addplot[qorange,thick,domain=0.6:3]{-1/x^2};}
+\end{example}
+
+\begin{example}{ex3}{Example 4 --- Using the formula}
+From Example 1, $f'(x)=2x$. Find the tangent slope of $f(x)=x^2$ at $x=5$.\soln
+\textbf{Step 1:} We already have $f'(x)=2x$ as a formula valid for every $x$ --- no need to redo the limit.\\[3pt]
+\textbf{Step 2 (substitute):} $f'(5)=2(5)$.\\[3pt]
+\textbf{Conclusion:} $10$ --- instant, once $f'(x)$ is known (compare to redoing the limit in Lesson 1.4).
+\end{example}
+
+\begin{example}{ex4}{Example 5 --- Radical}
+Differentiate $f(x)=\sqrt{x}$ using the definition.\soln
+\textbf{Step 1:} Find $f(x+h)$: $f(x+h)=\sqrt{x+h}$.\\[3pt]
+\textbf{Step 2:} Substitute into the definition, multiply top and bottom by the conjugate $\sqrt{x+h}+\sqrt{x}$, cross out what cancels, and cancel $h$:
+\begin{align*}
+f'(x)&=\lim_{h\to0}\frac{f(x+h)-f(x)}{h}\\
+&=\lim_{h\to0}\frac{\sqrt{x+h}-\sqrt{x}}{h}\\
+&=\lim_{h\to0}\frac{\left(\sqrt{x+h}-\sqrt{x}\right)\left(\sqrt{x+h}+\sqrt{x}\right)}{h\left(\sqrt{x+h}+\sqrt{x}\right)}\\
+&=\lim_{h\to0}\frac{\cancel{x}+h-\cancel{x}}{h\left(\sqrt{x+h}+\sqrt{x}\right)}\\
+&=\lim_{h\to0}\frac{\cancel{h}}{\cancel{h}\left(\sqrt{x+h}+\sqrt{x}\right)}\\
+&=\lim_{h\to0}\frac{1}{\sqrt{x+h}+\sqrt{x}}\\
+&=\boxed{\frac{1}{2\sqrt{x}}}
+\end{align*}\eplot{0}{4}{0}{2.5}{\addplot[exblue,very thick,domain=0:4]{sqrt(x)};\addplot[qorange,thick,domain=0.15:4]{1/(2*sqrt(x))};}
+\end{example}
+
+\begin{example}{ex5}{Example 6 --- Polynomial}
+Differentiate $f(x)=x^2+5x$ using the definition.\soln
+\textbf{Step 1:} Find $f(x+h)$: $f(x+h)=(x+h)^2+5(x+h)=x^2+2xh+h^2+5x+5h$.\\[3pt]
+\textbf{Step 2:} Substitute into the definition, cross out what cancels, factor out $h$, and cancel it:
+\begin{align*}
+f'(x)&=\lim_{h\to0}\frac{f(x+h)-f(x)}{h}\\
+&=\lim_{h\to0}\frac{(x^2+2xh+h^2+5x+5h)-(x^2+5x)}{h}\\
+&=\lim_{h\to0}\frac{\cancel{x^2}+2xh+h^2+\cancel{5x}+5h-\cancel{x^2}-\cancel{5x}}{h}\\
+&=\lim_{h\to0}\frac{\cancel{h}(2x+h+5)}{\cancel{h}}\\
+&=\boxed{2x+5}
+\end{align*}
+\end{example}
+
+\begin{example}{ex6}{Example 7 --- Polynomial}
+Differentiate $f(x)=2x^2$ using the definition.\soln
+\textbf{Step 1:} Find $f(x+h)$: $f(x+h)=2(x+h)^2=2x^2+4xh+2h^2$.\\[3pt]
+\textbf{Step 2:} Substitute into the definition, cross out what cancels, factor out $h$, and cancel it:
+\begin{align*}
+f'(x)&=\lim_{h\to0}\frac{f(x+h)-f(x)}{h}\\
+&=\lim_{h\to0}\frac{(2x^2+4xh+2h^2)-(2x^2)}{h}\\
+&=\lim_{h\to0}\frac{\cancel{2x^2}+4xh+2h^2-\cancel{2x^2}}{h}\\
+&=\lim_{h\to0}\frac{\cancel{h}(4x+2h)}{\cancel{h}}\\
+&=\boxed{4x}
+\end{align*}\eplot{-2}{2}{-8}{8}{\addplot[exblue,very thick,domain=-2:2]{2*x^2};\addplot[qorange,thick,domain=-2:2]{4*x};}
+\end{example}
+
+\begin{example}{ex7}{Example 8 --- Using the formula}
+From Example 7, $f'(x)=4x$ for $f(x)=2x^2$. Find the tangent slope at $x=1$.\soln
+\textbf{Step 1:} Substitute directly into the formula $f'(x)=4x$.\\[3pt]
+\textbf{Step 2:} $f'(1)=4(1)$.\\[3pt]
+\textbf{Conclusion:} $4$ --- no limit needed.
+\end{example}
+
+\begin{example}{ex8}{Example 9 --- Linear}
+Differentiate $f(x)=5x-3$ using the definition.\soln
+\textbf{Step 1:} Find $f(x+h)$: $f(x+h)=5(x+h)-3=5x+5h-3$.\\[3pt]
+\textbf{Step 2:} Substitute into the definition, cross out what cancels, and cancel $h$:
+\begin{align*}
+f'(x)&=\lim_{h\to0}\frac{f(x+h)-f(x)}{h}\\
+&=\lim_{h\to0}\frac{(5x+5h-3)-(5x-3)}{h}\\
+&=\lim_{h\to0}\frac{\cancel{5x}+5h-\cancel{3}-\cancel{5x}+\cancel{3}}{h}\\
+&=\lim_{h\to0}\frac{5\cancel{h}}{\cancel{h}}\\
+&=\boxed{5}
+\end{align*}
+A line's derivative is its constant slope.
+\end{example}
+
+\clearpage
+\sech{Your Turn --- Show Your Work}
+For each question, show all steps clearly in the space provided.
+
+\begin{qbox}{Question 1}
+Using the definition, differentiate $f(x)=x^2$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 2}
+Using the definition, differentiate $f(x)=x^2+5x$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 3}
+Using the definition, differentiate $f(x)=2x^2$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 4}
+Given $f'(x)=2x$ for $f(x)=x^2$, find the tangent slope at $x=1$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 5}
+Using the definition, differentiate $f(x)=5x-3$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 6}
+Using the definition, differentiate $f(x)=4x^2-x$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 7}
+Using the definition, differentiate $f(x)=\dfrac1x$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 8}
+Given $f'(x)=2x$ for $f(x)=x^2$, find the tangent slope at $x=2$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 9}
+Using the definition, differentiate $f(x)=x^2-3x$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 10}
+Using the definition, differentiate $f(x)=7$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 11}
+Given $f'(x)=2x$ for $f(x)=x^2$, find the tangent slope at $x=-1$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 12}
+Using the definition, differentiate $f(x)=3x^2$.\workspace{2.4cm}
+\end{qbox}
+
+\begin{qbox}{Question 13 --- Challenge}
+Using the definition, differentiate $f(x)=\sqrt{x}$ (rationalize).\workspace{3.5cm}
+\end{qbox}
+
+\clearpage
+\sech{Question Recap \& Answer Key}
+
+\begin{recapbox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item Using the definition, differentiate $f(x)=x^2$.
+  \item Using the definition, differentiate $f(x)=x^2+5x$.
+  \item Using the definition, differentiate $f(x)=2x^2$.
+  \item Given $f'(x)=2x$ for $f(x)=x^2$, find the tangent slope at $x=1$.
+  \item Using the definition, differentiate $f(x)=5x-3$.
+  \item Using the definition, differentiate $f(x)=4x^2-x$.
+  \item Using the definition, differentiate $f(x)=\dfrac1x$.
+  \item Given $f'(x)=2x$ for $f(x)=x^2$, find the tangent slope at $x=2$.
+  \item Using the definition, differentiate $f(x)=x^2-3x$.
+  \item Using the definition, differentiate $f(x)=7$.
+  \item Given $f'(x)=2x$ for $f(x)=x^2$, find the tangent slope at $x=-1$.
+  \item Using the definition, differentiate $f(x)=3x^2$.
+  \item Using the definition, differentiate $f(x)=\sqrt{x}$ (rationalize).
+\end{enumerate}
+\end{multicols}
+\end{recapbox}
+
+\begin{keybox}
+\begin{multicols}{2}
+\small
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item $2x$
+  \item $2x+5$
+  \item $4x$
+  \item $2$
+  \item $5$
+  \item $8x-1$
+  \item $-\tfrac1{x^2}$
+  \item $4$
+  \item $2x-3$
+  \item $0$
+  \item $-2$
+  \item $6x$
+  \item $\tfrac1{2\sqrt{x}}$
+\end{enumerate}
+\end{multicols}
+\end{keybox}
+
+\end{document}

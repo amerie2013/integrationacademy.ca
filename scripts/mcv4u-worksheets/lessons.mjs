@@ -20,9 +20,14 @@ export const LEARN = {
     ["Evaluating", "For continuous functions a limit is found by direct substitution; only breaks require closer analysis."],
   ],
   "1.4": [
-    ["The definition", "The \\textbf{derivative} is $f'(x)=\\displaystyle\\lim_{h\\to0}\\dfrac{f(x+h)-f(x)}{h}$ — the limit of the secant slope as the interval collapses to zero."],
-    ["What it measures", "$f'(x)$ gives the instantaneous rate of change, equivalently the slope of the tangent line at $x$."],
-    ["First principles", "Computing this limit directly is differentiating from \\emph{first principles}, and it justifies the shortcut rules that follow."],
+    ["Exact, not estimated", "Lesson 1.1 estimated the tangent slope with a tiny $h$. Now that limits are exact, the tangent slope at $x=a$ is $m=\\displaystyle\\lim_{h\\to0}\\dfrac{f(a+h)-f(a)}{h}$, computed precisely."],
+    ["One point at a time", "This limit is evaluated at a specific number $a$ — the next lesson generalizes it to every $x$ at once."],
+    ["The tangent line", "Once $m$ and the point $(a,f(a))$ are known, the tangent line follows from point-slope form: $y-f(a)=m(x-a)$."],
+  ],
+  "1.5": [
+    ["The definition", "The \\textbf{derivative} is $f'(x)=\\displaystyle\\lim_{h\\to0}\\dfrac{f(x+h)-f(x)}{h}$ — the same limit as Lesson 1.4, but with $x$ left general instead of one fixed point."],
+    ["What it measures", "$f'(x)$ gives the instantaneous rate of change, equivalently the slope of the tangent line, at \\emph{every} $x$ at once."],
+    ["Using the definition", "Computing this limit directly is differentiating \\emph{using the definition} (or \\emph{first principles}), and it justifies the shortcut rules that follow."],
   ],
   // ── Unit 2: Derivative Rules ───────────────────────────────
   "2.1": [

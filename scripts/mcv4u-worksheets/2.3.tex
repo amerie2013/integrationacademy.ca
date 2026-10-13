@@ -26,39 +26,75 @@ $\dfrac{d}{dx}f(g(x))=f'(g(x))\cdot g'(x)$ — derivative of the outside (inside
 \sech{Worked Examples}
 
 \begin{example}{ex0}{Example 1 --- Power of a function}
-Differentiate $f(x)=(x^2+1)^3$.\soln $3(x^2+1)^2\cdot2x=6x(x^2+1)^2$.
+Differentiate $f(x)=(x^2+1)^3$.\soln
+\textbf{Step 1 (identify outer and inner):} outer is $(\,\cdot\,)^3$, inner is $g(x)=x^2+1$ (so $g'(x)=2x$).\\[3pt]
+\textbf{Step 2 (differentiate the outer, leaving the inner alone):} $3(x^2+1)^2$.\\[3pt]
+\textbf{Step 3 (multiply by the inner derivative):} $3(x^2+1)^2\cdot2x$.\\[3pt]
+\textbf{Conclusion:} $f'(x)=6x(x^2+1)^2$.
 \end{example}
 
 \begin{example}{ex1}{Example 2 --- Radical}
-Differentiate $f(x)=\sqrt{x^2+1}$.\soln $\tfrac12(x^2+1)^{-1/2}\cdot2x=\dfrac{x}{\sqrt{x^2+1}}$.
+Differentiate $f(x)=\sqrt{x^2+1}$.\soln
+\textbf{Step 1 (rewrite as a power):} $f(x)=(x^2+1)^{1/2}$, with inner $g(x)=x^2+1$ (so $g'(x)=2x$).\\[3pt]
+\textbf{Step 2 (differentiate the outer power):} $\tfrac12(x^2+1)^{-1/2}$.\\[3pt]
+\textbf{Step 3 (multiply by the inner derivative):} $\tfrac12(x^2+1)^{-1/2}\cdot2x$.\\[3pt]
+\textbf{Step 4 (simplify):} the $2$'s cancel, and $(x^2+1)^{-1/2}=\dfrac1{\sqrt{x^2+1}}$.\\[3pt]
+\textbf{Conclusion:} $f'(x)=\dfrac{x}{\sqrt{x^2+1}}$.
 \end{example}
 
 \begin{example}{ex2}{Example 3 --- Linear inside}
-Differentiate $f(x)=(3x-2)^5$.\soln $5(3x-2)^4\cdot3=15(3x-2)^4$.
+Differentiate $f(x)=(3x-2)^5$.\soln
+\textbf{Step 1 (identify outer and inner):} outer is $(\,\cdot\,)^5$, inner is $g(x)=3x-2$ (so $g'(x)=3$).\\[3pt]
+\textbf{Step 2 (differentiate the outer):} $5(3x-2)^4$.\\[3pt]
+\textbf{Step 3 (multiply by the inner derivative):} $5(3x-2)^4\cdot3$.\\[3pt]
+\textbf{Conclusion:} $f'(x)=15(3x-2)^4$.
 \end{example}
 
 \begin{example}{ex3}{Example 4 --- Cubic inside}
-Differentiate $f(x)=(x^3+x)^4$.\soln $4(x^3+x)^3(3x^2+1)$.
+Differentiate $f(x)=(x^3+x)^4$.\soln
+\textbf{Step 1 (identify outer and inner):} outer is $(\,\cdot\,)^4$, inner is $g(x)=x^3+x$ (so $g'(x)=3x^2+1$).\\[3pt]
+\textbf{Step 2 (differentiate the outer):} $4(x^3+x)^3$.\\[3pt]
+\textbf{Step 3 (multiply by the inner derivative):} $4(x^3+x)^3(3x^2+1)$.\\[3pt]
+\textbf{Conclusion:} $f'(x)=4(x^3+x)^3(3x^2+1)$.
 \end{example}
 
 \begin{example}{ex4}{Example 5 --- Chain inside a product}
-Differentiate $f(x)=x(2x+1)^3$.\soln $(2x+1)^3+x\cdot3(2x+1)^2\cdot2=(2x+1)^2(8x+1)$.
+Differentiate $f(x)=x(2x+1)^3$.\soln
+\textbf{Step 1 (identify the two factors for the product rule):} $u=x$ (so $u'=1$) and $v=(2x+1)^3$.\\[3pt]
+\textbf{Step 2 (differentiate $v$ with the chain rule):} outer $3(\,\cdot\,)^2$, inner derivative $2$, so $v'=3(2x+1)^2\cdot2=6(2x+1)^2$.\\[3pt]
+\textbf{Step 3 (apply the product rule $u'v+uv'$):} $(1)(2x+1)^3+x\cdot6(2x+1)^2$.\\[3pt]
+\textbf{Step 4 (factor out the common $(2x+1)^2$):} $(2x+1)^2\left[(2x+1)+6x\right]=(2x+1)^2(8x+1)$.\\[3pt]
+\textbf{Conclusion:} $f'(x)=(2x+1)^2(8x+1)$.
 \end{example}
 
 \begin{example}{ex5}{Example 6 --- Power of a function}
-Differentiate $f(x)=(x^2-4)^3$.\soln $6x(x^2-4)^2$.
+Differentiate $f(x)=(x^2-4)^3$.\soln
+\textbf{Step 1 (identify outer and inner):} outer is $(\,\cdot\,)^3$, inner is $g(x)=x^2-4$ (so $g'(x)=2x$).\\[3pt]
+\textbf{Step 2 (differentiate the outer, multiply by the inner derivative):} $3(x^2-4)^2\cdot2x$.\\[3pt]
+\textbf{Conclusion:} $f'(x)=6x(x^2-4)^2$.
 \end{example}
 
 \begin{example}{ex6}{Example 7 --- Linear inside}
-Differentiate $f(x)=(5x+1)^4$.\soln $20(5x+1)^3$.
+Differentiate $f(x)=(5x+1)^4$.\soln
+\textbf{Step 1 (identify outer and inner):} outer is $(\,\cdot\,)^4$, inner is $g(x)=5x+1$ (so $g'(x)=5$).\\[3pt]
+\textbf{Step 2 (differentiate the outer, multiply by the inner derivative):} $4(5x+1)^3\cdot5$.\\[3pt]
+\textbf{Conclusion:} $f'(x)=20(5x+1)^3$.
 \end{example}
 
 \begin{example}{ex7}{Example 8 --- Radical}
-Differentiate $f(x)=\sqrt{2x+1}$.\soln $\dfrac1{\sqrt{2x+1}}$.
+Differentiate $f(x)=\sqrt{2x+1}$.\soln
+\textbf{Step 1 (rewrite as a power):} $f(x)=(2x+1)^{1/2}$, with inner derivative $2$.\\[3pt]
+\textbf{Step 2 (differentiate the outer, multiply by the inner derivative):} $\tfrac12(2x+1)^{-1/2}\cdot2$.\\[3pt]
+\textbf{Step 3 (simplify, the $2$'s cancel):} $(2x+1)^{-1/2}$.\\[3pt]
+\textbf{Conclusion:} $f'(x)=\dfrac1{\sqrt{2x+1}}$.
 \end{example}
 
 \begin{example}{ex8}{Example 9 --- Reciprocal power}
-Differentiate $f(x)=\dfrac1{(x+1)^2}$.\soln $(x+1)^{-2}\to-2(x+1)^{-3}=\dfrac{-2}{(x+1)^3}$.
+Differentiate $f(x)=\dfrac1{(x+1)^2}$.\soln
+\textbf{Step 1 (rewrite as a power):} $f(x)=(x+1)^{-2}$, with inner derivative $1$.\\[3pt]
+\textbf{Step 2 (differentiate the outer, multiply by the inner derivative):} $-2(x+1)^{-3}\cdot1$.\\[3pt]
+\textbf{Step 3 (rewrite back as a fraction):} $-2(x+1)^{-3}=\dfrac{-2}{(x+1)^3}$.\\[3pt]
+\textbf{Conclusion:} $f'(x)=\dfrac{-2}{(x+1)^3}$.
 \end{example}
 
 \clearpage

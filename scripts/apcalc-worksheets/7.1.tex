@@ -1,0 +1,77 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize\color{black!60}Worksheet 7.1}
+\begin{document}
+
+\wstitle{7.1}{Writing a Differential Equation from a Description}{Unit 7: Differential Equations}
+
+\begin{ideabox}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+  \item \textquotedblleft{}The rate of change of $y$\textquotedblright{} is a derivative: $\dfrac{dy}{dt}$.
+  \item \textquotedblleft{}Proportional to\textquotedblright{} means a constant times: $ky$. \textquotedblleft{}Inversely proportional to\textquotedblright{} means a constant divided by: $\dfrac ky$.
+  \item When something is added at one rate and removed at another, the equation is (rate in) $-$ (rate out).
+  \item A given rate at a given value fixes the constant $k$. A decreasing quantity has a negative rate.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked examples}
+\begin{example}{Example 1 \textperiodcentered{} A direct translation}
+The rate of change of $y$ with respect to $t$ is proportional to the square of $y$. Write a differential equation.\soln Rate: $\dfrac{dy}{dt}$. Proportional to $y^2$: $ky^2$.\result{$\dfrac{dy}{dt}=ky^2$.}
+\end{example}
+
+\begin{example}{Example 2 \textperiodcentered{} In and out}
+A savings account with balance $B$ dollars earns interest at 3\% per year, and 2000 dollars per year is withdrawn. Write a differential equation, and find the balance that stays constant.\soln Rate in $0.03B$; rate out 2000.\result{$\dfrac{dB}{dt}=0.03B-2000$; constant when $B\approx66\,667$ dollars.}
+\end{example}
+
+\begin{example}{Example 3 \textperiodcentered{} Finding the constant}
+A frozen meal at temperature $T$ warms in a room at 21 $^\circ$C at a rate proportional to $21-T$. When $T=5$ it is warming at 1.6 $^\circ$C per minute. Write the differential equation.\soln $\dfrac{dT}{dt}=k(21-T)$, and $1.6=k(16)$.\result{$\dfrac{dT}{dt}=0.1(21-T)$.}
+\end{example}
+
+\newpage
+\sech{Practice}
+
+\level{Core}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item Write a differential equation: the rate of change of $y$ with respect to $x$ is proportional to $x$.\work{2.3cm}
+  \item Write a differential equation: the rate of change of $P$ with respect to $t$ is inversely proportional to $P$.\work{2.3cm}
+  \item Write a differential equation: a quantity $N$ decreases at a rate proportional to $N$. State the sign of your constant.\work{2.3cm}
+  \item A quantity satisfies $\dfrac{dy}{dt}=ky$, and $\dfrac{dy}{dt}=12$ when $y=3$. Find $k$.\work{2.3cm}
+\end{enumerate}
+
+\level{Exam level}
+\begin{enumerate}[leftmargin=*,itemsep=2pt,start=5]
+  \item A pollutant enters a lake at 12 kg per day, and each day 5\% of the amount $Q$ present is removed. Write a differential equation for $Q$, and find the amount at which $Q$ is steady.\work{2.8cm}
+  \item A population $P$ grows at a rate proportional to the product of $P$ and $2000-P$. Write a differential equation, and find the value of $P$ at which the growth is fastest.\work{2.8cm}
+  \item The depth $h$ cm of water in a tank falls at a rate proportional to $\sqrt{h}$. When $h=16$ the depth is falling at 2 cm per minute. Write the differential equation, including the constant.\work{2.8cm}
+  \item In $\dfrac{dM}{dt}=kM$, the mass $M$ is in grams and the time $t$ in hours. What are the units of $k$?\work{2.8cm}
+\end{enumerate}
+
+\begin{frbox}{Question 9 \textperiodcentered{} Free-response practice}
+A trainee's score $S$ on a skills test, out of 100, increases with practice at a rate proportional to $100-S$, where $t$ is the number of weeks of practice. When $S=40$, the score is increasing at 3 points per week.
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=2pt]
+  \item Write a differential equation for $S$ in terms of a constant $k$.\work{2.6cm}
+  \item Find the value of $k$.\work{2.6cm}
+  \item Find the rate at which the score is increasing when $S=80$, and describe what the model predicts as $S$ approaches 100.\work{2.6cm}
+\end{enumerate}
+\end{frbox}
+
+\newpage
+\begin{solbox}
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item $\dfrac{dy}{dx}=kx$.
+  \item $\dfrac{dP}{dt}=\dfrac kP$.
+  \item $\dfrac{dN}{dt}=-kN$ with $k>0$ (or $\dfrac{dN}{dt}=kN$ with $k<0$).
+  \item $12=3k$, so $k=4$.
+  \item $\dfrac{dQ}{dt}=12-0.05Q$, steady when $Q=240$ kg.
+  \item $\dfrac{dP}{dt}=kP(2000-P)$; $P(2000-P)$ is greatest at $P=1000$.
+  \item $\dfrac{dh}{dt}=-k\sqrt h$ with $-2=-k(4)$: $\dfrac{dh}{dt}=-0.5\sqrt h$.
+  \item Grams per hour divided by grams: per hour.
+  \item \begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=3pt]
+    \item $\dfrac{dS}{dt}=k(100-S)$.
+    \item $3=k(60)$, so $k=0.05$.
+    \item $0.05(20)=1$ point per week. As $S\to100$ the rate tends to 0: improvement slows and the score levels off below 100.
+  \end{enumerate}
+\end{enumerate}
+\end{solbox}
+
+\end{document}

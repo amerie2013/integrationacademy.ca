@@ -11,6 +11,21 @@ import {
   copyAngleFig, bisectFig, incenterFig, circumcenterFig,
   sampleSpaceFig, treeDiagram, twoWayTable, permuteCombine,
 } from "./figures2.mjs";
+import {
+  threePointsPlane, collinearPts, numberLineDist, midpointAlgebra, classifyAngles,
+  copyAngleObtuse, angleCombine, biconditionalFig, paragraphProofFig,
+  parallelConverse, perpTransversal, horizVert, constructPerpOnLine, constructRectangle,
+  translatePolygon, reflectYX, reflectVertical, rotate180, rotate270, glideReflect,
+  parallelReflect, intersectReflect, parallelogramSym, squareSym, scaleneNoSym,
+  exteriorAngle, angleSumTri, equilateralFig, altitudeIsos, aasMarks, medianFig,
+  dilatePoint, sssSimilar, sasSimilar, midsegmentTri, threeParallel, mirrorMethod,
+  depressionFig, guyWire, twoElevations,
+  diameterChord, semicircleRight, chordPerp, chordChord, tangentSecant, twoSecants, circleEq,
+  pyramidFig, coneFig, sphereFig, densityFig, popDensity, coneSlice, sphereSlice, frustumFig,
+  dieFig, bagMarbles, complementFig, cardsFig, expectedValue, withWithout,
+} from "./figures3.mjs";
+import { hexagonSymmetryFig } from "./figures2.mjs";
+import { copySegment, angleBisector } from "./figures.mjs";
 
 export const ch = {};
 
@@ -33,23 +48,27 @@ ch["6.1"] = L("6.1", "The Pythagorean Theorem and its Converse", [
         `<strong>Step 2 — compute:</strong> \\(c^2=36+64=100\\).`,
         `<strong>Step 3 — take the square root:</strong> \\(c=\\sqrt{100}=10\\).`,
       ] },
-      { h: "Find a missing leg", p: `A right triangle has a hypotenuse of \\(17\\) and one leg of \\(8\\). Find the other leg.`, steps: [
+      { h: "Find a missing leg", p: `A right triangle has a hypotenuse of \\(17\\) and one leg of \\(8\\). Find the other leg.`, fig: pythagoreanFig(),
+        steps: [
         `<strong>Step 1 — apply the theorem:</strong> \\(8^2+b^2=17^2\\).`,
         `<strong>Step 2 — compute the squares:</strong> \\(64+b^2=289\\).`,
         `<strong>Step 3 — isolate \\(b^2\\):</strong> \\(b^2=225\\).`,
         `<strong>Step 4 — take the square root:</strong> \\(b=15\\).`,
       ] },
-      { h: "Use the Converse to test for a right triangle", p: `A triangle has sides \\(9\\), \\(12\\), and \\(15\\). Determine whether it is a right triangle.`, steps: [
+      { h: "Use the Converse to test for a right triangle", p: `A triangle has sides \\(9\\), \\(12\\), and \\(15\\). Determine whether it is a right triangle.`, fig: pythagoreanFig(),
+        steps: [
         `<strong>Step 1 — identify the longest side:</strong> \\(15\\) is the longest, so it plays the role of \\(c\\).`,
         `<strong>Step 2 — compare \\(a^2+b^2\\) to \\(c^2\\):</strong> \\(9^2+12^2=81+144=225\\), and \\(15^2=225\\).`,
         `<strong>Step 3 — apply the Converse:</strong> since \\(81+144=225\\), the triangle is a <strong>right</strong> triangle.`,
       ] },
-      { h: "Classify a triangle as acute or obtuse", p: `A triangle has sides \\(7\\), \\(9\\), and \\(13\\). Classify the triangle.`, steps: [
+      { h: "Classify a triangle as acute or obtuse", p: `A triangle has sides \\(7\\), \\(9\\), and \\(13\\). Classify the triangle.`, fig: pythagoreanFig(),
+        steps: [
         `<strong>Step 1 — identify the longest side:</strong> \\(13\\).`,
         `<strong>Step 2 — compare:</strong> \\(7^2+9^2=49+81=130\\), and \\(13^2=169\\).`,
         `<strong>Step 3 — interpret:</strong> since \\(130<169\\) (i.e. \\(a^2+b^2<c^2\\)), the triangle is <strong>obtuse</strong>.`,
       ] },
-      { h: "Apply the Pythagorean Theorem to a diagonal", p: `A rectangular garden measures \\(20\\) m by \\(21\\) m. Find the length of its diagonal.`, steps: [
+      { h: "Apply the Pythagorean Theorem to a diagonal", p: `A rectangular garden measures \\(20\\) m by \\(21\\) m. Find the length of its diagonal.`, fig: pythagoreanFig(),
+        steps: [
         `<strong>Step 1 — recognize the right triangle:</strong> the diagonal splits the rectangle into two right triangles with legs \\(20\\) and \\(21\\).`,
         `<strong>Step 2 — apply the theorem:</strong> \\(d^2=20^2+21^2=400+441=841\\).`,
         `<strong>Step 3 — take the square root:</strong> \\(d=\\sqrt{841}=29\\) m.`,
@@ -90,7 +109,8 @@ ch["6.2"] = L("6.2", "Special Right Triangles (45-45-90 and 30-60-90)", [
         `<strong>Step 1 — apply the ratio:</strong> hypotenuse \\(=\\text{leg}\\times\\sqrt2\\).`,
         `<strong>Step 2 — substitute:</strong> hypotenuse \\(=7\\sqrt2\\).`,
       ] },
-      { h: "Find the legs of a 45-45-90 triangle from the hypotenuse", p: `A 45-45-90 triangle has a hypotenuse of \\(12\\sqrt2\\). Find the length of each leg.`, steps: [
+      { h: "Find the legs of a 45-45-90 triangle from the hypotenuse", p: `A 45-45-90 triangle has a hypotenuse of \\(12\\sqrt2\\). Find the length of each leg.`, fig: special4545(),
+        steps: [
         `<strong>Step 1 — set up the ratio equation:</strong> \\(x\\sqrt2=12\\sqrt2\\).`,
         `<strong>Step 2 — solve for x:</strong> divide both sides by \\(\\sqrt2\\): \\(x=12\\).`,
         `<strong>Step 3 — state the answer:</strong> each leg is \\(12\\).`,
@@ -101,12 +121,14 @@ ch["6.2"] = L("6.2", "Special Right Triangles (45-45-90 and 30-60-90)", [
         `<strong>Step 2 — find the long leg:</strong> \\(x\\sqrt3=5\\sqrt3\\).`,
         `<strong>Step 3 — find the hypotenuse:</strong> \\(2x=10\\).`,
       ] },
-      { h: "Work backward from the long leg", p: `A 30-60-90 triangle has a long leg (opposite \\(60^\\circ\\)) of length \\(9\\sqrt3\\). Find the short leg and the hypotenuse.`, steps: [
+      { h: "Work backward from the long leg", p: `A 30-60-90 triangle has a long leg (opposite \\(60^\\circ\\)) of length \\(9\\sqrt3\\). Find the short leg and the hypotenuse.`, fig: special3060(),
+        steps: [
         `<strong>Step 1 — set up the ratio equation:</strong> \\(x\\sqrt3=9\\sqrt3\\).`,
         `<strong>Step 2 — solve for x:</strong> \\(x=9\\).`,
         `<strong>Step 3 — find the hypotenuse:</strong> \\(2x=18\\).`,
       ] },
-      { h: "Work backward from the hypotenuse", p: `A 30-60-90 triangle has a hypotenuse of \\(16\\). Find the short leg and the long leg.`, steps: [
+      { h: "Work backward from the hypotenuse", p: `A 30-60-90 triangle has a hypotenuse of \\(16\\). Find the short leg and the long leg.`, fig: special3060(),
+        steps: [
         `<strong>Step 1 — set up the ratio equation:</strong> \\(2x=16\\).`,
         `<strong>Step 2 — solve for x (the short leg):</strong> \\(x=8\\).`,
         `<strong>Step 3 — find the long leg:</strong> \\(x\\sqrt3=8\\sqrt3\\).`,
@@ -148,22 +170,26 @@ ch["6.3"] = L("6.3", "The Sine, Cosine, and Tangent Ratios (MA.912.T.1.2)", [
         `<strong>Step 2 — apply CAH:</strong> \\(\\cos(A)=\\dfrac{\\text{adjacent}}{\\text{hypotenuse}}=\\dfrac{8}{10}=\\dfrac{4}{5}\\).`,
         `<strong>Step 3 — apply TOA:</strong> \\(\\tan(A)=\\dfrac{\\text{opposite}}{\\text{adjacent}}=\\dfrac{6}{8}=\\dfrac{3}{4}\\).`,
       ] },
-      { h: "Find a missing side using sine", p: `In a right triangle, an acute angle measures \\(35^\\circ\\), and the hypotenuse is \\(20\\). Find the side opposite the \\(35^\\circ\\) angle.`, steps: [
+      { h: "Find a missing side using sine", p: `In a right triangle, an acute angle measures \\(35^\\circ\\), and the hypotenuse is \\(20\\). Find the side opposite the \\(35^\\circ\\) angle.`, fig: sohcahtoa(),
+        steps: [
         `<strong>Step 1 — choose the ratio that relates opposite and hypotenuse:</strong> \\(\\sin(35^\\circ)=\\dfrac{\\text{opposite}}{20}\\).`,
         `<strong>Step 2 — solve for the opposite side:</strong> opposite \\(=20\\sin(35^\\circ)\\).`,
         `<strong>Step 3 — evaluate:</strong> opposite \\(\\approx20(0.5736)\\approx11.5\\).`,
       ] },
-      { h: "Find a missing side using tangent", p: `In a right triangle, an acute angle measures \\(52^\\circ\\), and the adjacent side is \\(9\\). Find the side opposite the \\(52^\\circ\\) angle.`, steps: [
+      { h: "Find a missing side using tangent", p: `In a right triangle, an acute angle measures \\(52^\\circ\\), and the adjacent side is \\(9\\). Find the side opposite the \\(52^\\circ\\) angle.`, fig: sohcahtoa(),
+        steps: [
         `<strong>Step 1 — choose the ratio that relates opposite and adjacent:</strong> \\(\\tan(52^\\circ)=\\dfrac{\\text{opposite}}{9}\\).`,
         `<strong>Step 2 — solve:</strong> opposite \\(=9\\tan(52^\\circ)\\).`,
         `<strong>Step 3 — evaluate:</strong> opposite \\(\\approx9(1.2799)\\approx11.5\\).`,
       ] },
-      { h: "Find an angle using an inverse trig ratio", p: `A right triangle has a leg of \\(7\\) opposite an acute angle \\(\\theta\\), and a hypotenuse of \\(25\\). Find \\(\\theta\\) to the nearest degree.`, steps: [
+      { h: "Find an angle using an inverse trig ratio", p: `A right triangle has a leg of \\(7\\) opposite an acute angle \\(\\theta\\), and a hypotenuse of \\(25\\). Find \\(\\theta\\) to the nearest degree.`, fig: sohcahtoa(),
+        steps: [
         `<strong>Step 1 — set up the ratio:</strong> \\(\\sin(\\theta)=\\dfrac{7}{25}=0.28\\).`,
         `<strong>Step 2 — apply the inverse sine:</strong> \\(\\theta=\\sin^{-1}(0.28)\\).`,
         `<strong>Step 3 — evaluate:</strong> \\(\\theta\\approx16^\\circ\\).`,
       ] },
-      { h: "Confirm the ratio is the same across similar triangles", p: `Two right triangles both contain a \\(30^\\circ\\) angle: one has opposite \\(=5\\), hypotenuse \\(=10\\); the other has opposite \\(=8\\), hypotenuse \\(=16\\). Show that \\(\\sin(30^\\circ)\\) is the same for both.`, steps: [
+      { h: "Confirm the ratio is the same across similar triangles", p: `Two right triangles both contain a \\(30^\\circ\\) angle: one has opposite \\(=5\\), hypotenuse \\(=10\\); the other has opposite \\(=8\\), hypotenuse \\(=16\\). Show that \\(\\sin(30^\\circ)\\) is the same for both.`, fig: similarTriangles(),
+        steps: [
         `<strong>Step 1 — compute the first ratio:</strong> \\(\\dfrac{5}{10}=0.5\\).`,
         `<strong>Step 2 — compute the second ratio:</strong> \\(\\dfrac{8}{16}=0.5\\).`,
         `<strong>Step 3 — conclude:</strong> both equal \\(0.5=\\sin(30^\\circ)\\), confirming that the sine ratio depends only on the angle, not the triangle's size (the two triangles are similar by AA).`,
@@ -199,27 +225,32 @@ ch["6.4"] = L("6.4", "Solving Right Triangles Using Trigonometry", [
     ],
     figure: fig(sohcahtoa(), "Choose sine, cosine, or tangent from the given information."),
     examples: [
-      { h: "Solve a right triangle given an angle and the hypotenuse", p: `In right \\(\\triangle ABC\\) (right angle at \\(C\\)), \\(\\angle A=38^\\circ\\) and hypotenuse \\(c=AB=14\\). Solve the triangle (find \\(\\angle B\\), \\(a\\), and \\(b\\)).`, steps: [
+      { h: "Solve a right triangle given an angle and the hypotenuse", p: `In right \\(\\triangle ABC\\) (right angle at \\(C\\)), \\(\\angle A=38^\\circ\\) and hypotenuse \\(c=AB=14\\). Solve the triangle (find \\(\\angle B\\), \\(a\\), and \\(b\\)).`, fig: sohcahtoa(),
+        steps: [
         `<strong>Step 1 — find \\(\\angle B\\):</strong> \\(\\angle B=90^\\circ-38^\\circ=52^\\circ\\).`,
         `<strong>Step 2 — find \\(a\\) (opposite \\(A\\)) using sine:</strong> \\(a=c\\sin(38^\\circ)=14\\sin(38^\\circ)\\approx8.6\\).`,
         `<strong>Step 3 — find \\(b\\) (adjacent to \\(A\\)) using cosine:</strong> \\(b=c\\cos(38^\\circ)=14\\cos(38^\\circ)\\approx11.0\\).`,
       ], check: `Check with Pythagoras: \\(8.6^2+11.0^2\\approx73.96+121=194.96\\approx14^2=196\\) (small rounding difference). ✓` },
-      { h: "Solve a right triangle given an angle and a leg", p: `In right \\(\\triangle DEF\\) (right angle at \\(F\\)), \\(\\angle D=62^\\circ\\) and leg \\(DF=10\\) (adjacent to \\(D\\)). Solve the triangle (find \\(\\angle E\\), \\(EF\\), and \\(DE\\)).`, steps: [
+      { h: "Solve a right triangle given an angle and a leg", p: `In right \\(\\triangle DEF\\) (right angle at \\(F\\)), \\(\\angle D=62^\\circ\\) and leg \\(DF=10\\) (adjacent to \\(D\\)). Solve the triangle (find \\(\\angle E\\), \\(EF\\), and \\(DE\\)).`, fig: sohcahtoa(),
+        steps: [
         `<strong>Step 1 — find \\(\\angle E\\):</strong> \\(\\angle E=90^\\circ-62^\\circ=28^\\circ\\).`,
         `<strong>Step 2 — find \\(EF\\) (opposite \\(D\\)) using tangent:</strong> \\(\\tan(62^\\circ)=\\dfrac{EF}{10}\\Rightarrow EF=10\\tan(62^\\circ)\\approx18.8\\).`,
         `<strong>Step 3 — find \\(DE\\) (hypotenuse) using cosine:</strong> \\(\\cos(62^\\circ)=\\dfrac{10}{DE}\\Rightarrow DE=\\dfrac{10}{\\cos(62^\\circ)}\\approx21.3\\).`,
       ] },
-      { h: "Solve a right triangle given two legs", p: `In right \\(\\triangle GHI\\) (right angle at \\(I\\)), legs \\(GI=9\\) and \\(HI=12\\). Solve the triangle (find \\(GH\\), \\(\\angle G\\), and \\(\\angle H\\)).`, steps: [
+      { h: "Solve a right triangle given two legs", p: `In right \\(\\triangle GHI\\) (right angle at \\(I\\)), legs \\(GI=9\\) and \\(HI=12\\). Solve the triangle (find \\(GH\\), \\(\\angle G\\), and \\(\\angle H\\)).`, fig: pythagoreanFig(),
+        steps: [
         `<strong>Step 1 — find the hypotenuse with the Pythagorean Theorem:</strong> \\(GH=\\sqrt{9^2+12^2}=\\sqrt{81+144}=\\sqrt{225}=15\\).`,
         `<strong>Step 2 — find \\(\\angle H\\) (opposite the leg \\(GI=9\\)) using inverse sine:</strong> \\(\\sin(H)=\\dfrac{9}{15}=0.6\\Rightarrow \\angle H=\\sin^{-1}(0.6)\\approx36.9^\\circ\\).`,
         `<strong>Step 3 — find \\(\\angle G\\):</strong> \\(\\angle G=90^\\circ-36.9^\\circ\\approx53.1^\\circ\\).`,
       ] },
-      { h: "Solve a right triangle given the hypotenuse and one leg", p: `In right \\(\\triangle JKL\\) (right angle at \\(K\\)), hypotenuse \\(JL=26\\) and leg \\(JK=10\\). Solve the triangle (find \\(KL\\), \\(\\angle J\\), and \\(\\angle L\\)).`, steps: [
+      { h: "Solve a right triangle given the hypotenuse and one leg", p: `In right \\(\\triangle JKL\\) (right angle at \\(K\\)), hypotenuse \\(JL=26\\) and leg \\(JK=10\\). Solve the triangle (find \\(KL\\), \\(\\angle J\\), and \\(\\angle L\\)).`, fig: sohcahtoa(),
+        steps: [
         `<strong>Step 1 — find \\(KL\\) with the Pythagorean Theorem:</strong> \\(KL=\\sqrt{26^2-10^2}=\\sqrt{676-100}=\\sqrt{576}=24\\).`,
         `<strong>Step 2 — find \\(\\angle L\\) (opposite the leg \\(JK=10\\)) using inverse sine:</strong> \\(\\sin(L)=\\dfrac{10}{26}\\approx0.3846\\Rightarrow \\angle L\\approx22.6^\\circ\\).`,
         `<strong>Step 3 — find \\(\\angle J\\):</strong> \\(\\angle J=90^\\circ-22.6^\\circ\\approx67.4^\\circ\\).`,
       ] },
-      { h: "Double-check a solved triangle for consistency", p: `A right triangle is reported to have \\(\\angle A=30^\\circ\\), \\(\\angle B=60^\\circ\\), leg \\(a=5\\) (opposite \\(A\\)), leg \\(b=5\\sqrt3\\) (opposite \\(B\\)), and hypotenuse \\(c=10\\). Verify all values are consistent.`, steps: [
+      { h: "Double-check a solved triangle for consistency", p: `A right triangle is reported to have \\(\\angle A=30^\\circ\\), \\(\\angle B=60^\\circ\\), leg \\(a=5\\) (opposite \\(A\\)), leg \\(b=5\\sqrt3\\) (opposite \\(B\\)), and hypotenuse \\(c=10\\). Verify all values are consistent.`, fig: sohcahtoa(),
+        steps: [
         `<strong>Step 1 — check the angle sum:</strong> \\(30^\\circ+60^\\circ+90^\\circ=180^\\circ\\). ✓`,
         `<strong>Step 2 — check the Pythagorean Theorem:</strong> \\(5^2+(5\\sqrt3)^2=25+75=100=10^2\\). ✓`,
         `<strong>Step 3 — check the trig ratio:</strong> \\(\\sin(30^\\circ)=\\dfrac{5}{10}=0.5\\), which matches the known value \\(\\sin(30^\\circ)=0.5\\). ✓`,
@@ -262,23 +293,27 @@ ch["6.5"] = L("6.5", "Real-World Applications: Angles of Elevation and Depressio
         `<strong>Step 2 — choose tangent (opposite/adjacent):</strong> \\(\\tan(52^\\circ)=\\dfrac{h}{40}\\).`,
         `<strong>Step 3 — solve:</strong> \\(h=40\\tan(52^\\circ)\\approx51.2\\) m.`,
       ] },
-      { h: "Find a distance using the angle of depression", p: `A lighthouse keeper standing \\(60\\) m above sea level sees a boat at an angle of depression of \\(15^\\circ\\). Find the boat's horizontal distance from the base of the lighthouse.`, steps: [
+      { h: "Find a distance using the angle of depression", p: `A lighthouse keeper standing \\(60\\) m above sea level sees a boat at an angle of depression of \\(15^\\circ\\). Find the boat's horizontal distance from the base of the lighthouse.`, fig: depressionFig(),
+        steps: [
         `<strong>Step 1 — use the alternate interior angle relationship:</strong> the angle of elevation from the boat up to the keeper also equals \\(15^\\circ\\).`,
         `<strong>Step 2 — sketch the right triangle:</strong> the height (\\(60\\) m) is opposite the \\(15^\\circ\\) angle at the boat; the horizontal distance \\(d\\) is adjacent.`,
         `<strong>Step 3 — choose tangent:</strong> \\(\\tan(15^\\circ)=\\dfrac{60}{d}\\).`,
         `<strong>Step 4 — solve:</strong> \\(d=\\dfrac{60}{\\tan(15^\\circ)}\\approx223.9\\) m.`,
       ] },
-      { h: "Find the angle of elevation given height and distance", p: `A drone hovers \\(80\\) m above the ground, directly above a point \\(150\\) m from an observer. Find the angle of elevation from the observer to the drone.`, steps: [
+      { h: "Find the angle of elevation given height and distance", p: `A drone hovers \\(80\\) m above the ground, directly above a point \\(150\\) m from an observer. Find the angle of elevation from the observer to the drone.`, fig: elevationFig(),
+        steps: [
         `<strong>Step 1 — sketch the right triangle:</strong> the height \\(80\\) m is opposite the angle of elevation; the horizontal distance \\(150\\) m is adjacent.`,
         `<strong>Step 2 — choose inverse tangent:</strong> \\(\\theta=\\tan^{-1}\\left(\\dfrac{80}{150}\\right)\\).`,
         `<strong>Step 3 — evaluate:</strong> \\(\\theta\\approx28.1^\\circ\\).`,
       ] },
-      { h: "Use the angle of elevation with the hypotenuse (a guy wire)", p: `A guy wire is anchored to the ground \\(25\\) m from the base of a pole and makes an angle of elevation of \\(58^\\circ\\) with the ground. Find the length of the wire.`, steps: [
+      { h: "Use the angle of elevation with the hypotenuse (a guy wire)", p: `A guy wire is anchored to the ground \\(25\\) m from the base of a pole and makes an angle of elevation of \\(58^\\circ\\) with the ground. Find the length of the wire.`, fig: guyWire(),
+        steps: [
         `<strong>Step 1 — identify the sides:</strong> the \\(25\\) m distance is adjacent to \\(58^\\circ\\); the wire itself is the hypotenuse.`,
         `<strong>Step 2 — choose cosine (adjacent/hypotenuse):</strong> \\(\\cos(58^\\circ)=\\dfrac{25}{L}\\).`,
         `<strong>Step 3 — solve:</strong> \\(L=\\dfrac{25}{\\cos(58^\\circ)}\\approx47.2\\) m.`,
       ] },
-      { h: "Combine two angles of elevation to find a height", p: `From a point on the ground, the angle of elevation to the top of a building is \\(35^\\circ\\). From a point \\(50\\) m closer to the building, the angle of elevation is \\(50^\\circ\\). Find the height of the building.`, steps: [
+      { h: "Combine two angles of elevation to find a height", p: `From a point on the ground, the angle of elevation to the top of a building is \\(35^\\circ\\). From a point \\(50\\) m closer to the building, the angle of elevation is \\(50^\\circ\\). Find the height of the building.`, fig: twoElevations(),
+        steps: [
         `<strong>Step 1 — set up two equations using the unknown distance \\(x\\) from the closer point:</strong> \\(\\tan(50^\\circ)=\\dfrac{h}{x}\\) and \\(\\tan(35^\\circ)=\\dfrac{h}{x+50}\\).`,
         `<strong>Step 2 — substitute \\(x=\\dfrac{h}{\\tan(50^\\circ)}\\) into the second equation:</strong> \\(\\tan(35^\\circ)=\\dfrac{h}{\\frac{h}{\\tan(50^\\circ)}+50}\\).`,
         `<strong>Step 3 — solve numerically:</strong> using \\(\\tan(50^\\circ)\\approx1.1918\\) and \\(\\tan(35^\\circ)\\approx0.7002\\), this gives \\(h\\approx84.9\\) m.`,

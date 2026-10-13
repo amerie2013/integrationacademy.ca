@@ -1,0 +1,77 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize\color{black!60}Worksheet 2.3}
+\begin{document}
+
+\wstitle{2.3}{Estimating a Derivative from Data and Graphs}{Unit 2: The Derivative}
+
+\begin{ideabox}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+  \item From a table, estimate $f'(c)$ with the slope between the \textbf{nearest values on either side} of $c$. Show the difference quotient.
+  \item From a graph, $f'(c)$ is the slope of the graph at $c$. At a corner the derivative does not exist.
+  \item An estimate of a derivative carries units, and can be interpreted like any other rate.
+  \item A known value and a known rate give a linear estimate nearby: $f(c+h)\approx f(c)+f'(c)\,h$.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked examples}
+\begin{example}{Example 1 \textperiodcentered{} From a table}
+The distance travelled by a train, $D(t)$ km, is recorded at times $t$ minutes.\begin{center}\renewcommand{\arraystretch}{1.25}\begin{tabular}{|c|c|c|c|c|}\hline $t$ & $0$ & $5$ & $10$ & $20$ \\ \hline $D(t)$ & $0$ & $6$ & $15$ & $40$ \\ \hline\end{tabular}\end{center}Estimate $D'(7.5)$ with units.\soln Use $t=5$ and $t=10$: $\dfrac{15-6}{10-5}=1.8$.\result{$D'(7.5)\approx1.8$ km per minute.}
+\end{example}
+
+\begin{example}{Example 2 \textperiodcentered{} A symmetric estimate}
+Given $f(2.9)=7.1$, $f(3)=7.5$ and $f(3.1)=8.1$, estimate $f'(3)$.\soln The values on either side of 3 give $\dfrac{8.1-7.1}{3.1-2.9}$.\result{$f'(3)\approx5$.}
+\end{example}
+
+\begin{example}{Example 3 \textperiodcentered{} From a graph of line segments}
+The graph of $g$ contains the line segment from $(1,2)$ to $(4,8)$. Find $g'(2)$.\soln On a line segment the derivative is the slope of the segment: $\dfrac{8-2}{4-1}$.\result{$g'(2)=2$.}
+\end{example}
+
+\newpage
+\sech{Practice}
+Questions 1 to 7 use this table. The population of a town, $P(t)$ people, is a differentiable function of time $t$ years.\begin{center}\renewcommand{\arraystretch}{1.25}\begin{tabular}{|c|c|c|c|c|c|}\hline $t$ & $0$ & $2$ & $4$ & $7$ & $10$ \\ \hline $P(t)$ & $100$ & $112$ & $130$ & $160$ & $172$ \\ \hline\end{tabular}\end{center}
+\level{Core}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item Estimate $P'(3)$.\work{2.3cm}
+  \item Estimate $P'(8.5)$.\work{2.3cm}
+  \item Find the average rate of change of $P$ on $[0,10]$.\work{2.3cm}
+  \item State the units of $P'(t)$.\work{2.3cm}
+\end{enumerate}
+
+\level{Exam level}
+\begin{enumerate}[leftmargin=*,itemsep=2pt,start=5]
+  \item Estimate $P'(5.5)$ and interpret your answer in context.\work{2.8cm}
+  \item Use $P(4)=130$ and your estimate from Question 5 to approximate $P(4.5)$.\work{2.8cm}
+  \item Find the average rate of change of $P$ on each of the four subintervals. What do the values suggest about how the growth of the town is changing?\work{2.8cm}
+  \item The graph of $f$ consists of the line segments joining $(0,1)$, $(2,5)$ and $(5,-1)$. Find $f'(1)$ and $f'(3)$, and explain why $f'(2)$ does not exist.\work{2.8cm}
+\end{enumerate}
+
+\begin{frbox}{Question 9 \textperiodcentered{} Free-response practice}
+The temperature along a metal rod, $T(x)$ degrees Celsius, is a differentiable function of the distance $x$ centimetres from one end.\begin{center}\renewcommand{\arraystretch}{1.25}\begin{tabular}{|c|c|c|c|c|c|}\hline $x$ & $0$ & $2$ & $5$ & $9$ & $12$ \\ \hline $T(x)$ & $80$ & $71$ & $62$ & $54$ & $51$ \\ \hline\end{tabular}\end{center}
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=2pt]
+  \item Estimate $T'(7)$. Indicate units of measure.\work{2.6cm}
+  \item Interpret your answer to part (a) in the context of the problem.\work{2.6cm}
+  \item Must there be a point of the rod at which $T'(x)=-\dfrac{29}{12}$? Justify your answer.\work{2.6cm}
+\end{enumerate}
+\end{frbox}
+
+\newpage
+\begin{solbox}
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item $\dfrac{130-112}{4-2}=9$ people per year.
+  \item $\dfrac{172-160}{10-7}=4$ people per year.
+  \item $\dfrac{172-100}{10}=7.2$ people per year.
+  \item People per year.
+  \item $\dfrac{160-130}{7-4}=10$. At $t=5.5$ years the population is increasing at about 10 people per year.
+  \item $130+10(0.5)=135$ people.
+  \item $6$, $9$, $10$ and $4$ people per year. The growth speeds up and then slows down, which suggests the graph of $P$ changes from concave up to concave down.
+  \item $f'(1)=\dfrac{5-1}{2}=2$ and $f'(3)=\dfrac{-1-5}{3}=-2$. At $x=2$ the slopes from the left and right are 2 and $-2$: a corner.
+  \item \begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=3pt]
+    \item $\dfrac{54-62}{9-5}=-2$ degrees Celsius per centimetre.
+    \item At the point 7 cm from the end, the temperature is decreasing at about 2 degrees Celsius per centimetre of distance along the rod.
+    \item Yes. $\dfrac{T(12)-T(0)}{12}=-\dfrac{29}{12}$, and $T$ is differentiable (so continuous) on $[0,12]$, so the Mean Value Theorem guarantees such a point.
+  \end{enumerate}
+\end{enumerate}
+\end{solbox}
+
+\end{document}

@@ -1,0 +1,77 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize\color{black!60}Worksheet 8.10}
+\begin{document}
+
+\wstitle{8.10}{Unit 8 Synthesis: The Area and Volume Free-Response Question}{Unit 8: Applications of Integration}
+
+\begin{ideabox}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+  \item The usual parts: an area, a volume of revolution, and a volume with known cross-sections, all for one region.
+  \item Find the points of intersection first, and store them in the calculator. Do not round until the final answer.
+  \item Write every integral in full, with limits, before giving its value. The set-up earns most of the points.
+  \item \textquotedblleft{}Write, but do not evaluate\textquotedblright{} means stop at the integral.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked examples}
+\begin{example}{Example 1 \textperiodcentered{} The area}
+Let $R$ be the region enclosed by $y=\sqrt{x}$ and $y=\dfrac x3$. Find the area of $R$.\soln They meet at $x=0$ and $x=9$: $\displaystyle\int_{0}^{9}\left(\sqrt x-\tfrac x3\right)\,dx=18-\dfrac{27}{2}$.\result{$\dfrac92$.}
+\end{example}
+
+\begin{example}{Example 2 \textperiodcentered{} A solid of revolution}
+Find the volume when $R$ is revolved about the $x$-axis.\soln $\pi\displaystyle\int_{0}^{9}\left(x-\tfrac{x^2}{9}\right)\,dx=\pi\left(\dfrac{81}{2}-27\right)$.\result{$\dfrac{27\pi}{2}$.}
+\end{example}
+
+\begin{example}{Example 3 \textperiodcentered{} Known cross-sections}
+$R$ is the base of a solid whose cross-sections perpendicular to the $x$-axis are squares. Find the volume.\soln $\displaystyle\int_{0}^{9}\left(\sqrt x-\tfrac x3\right)^2\,dx=\dfrac{81}{2}-\dfrac{324}{5}+27$.\result{$\dfrac{27}{10}$.}
+\end{example}
+
+\newpage
+\sech{Practice}
+\emph{A calculator may be used where a decimal answer is requested. Give decimals to three places.}
+\level{Core}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item Let $S$ be the region enclosed by $y=x^2$ and $y=3x$. Find the area of $S$.\work{2.3cm}
+  \item Write, but do not evaluate, an integral for the volume when $S$ is revolved about the $x$-axis.\work{2.3cm}
+  \item Evaluate the integral in Question 2.\work{2.3cm}
+  \item $S$ is the base of a solid whose cross-sections perpendicular to the $x$-axis are squares. Write, but do not evaluate, an integral for the volume.\work{2.3cm}
+\end{enumerate}
+
+\level{Exam level}
+\begin{enumerate}[leftmargin=*,itemsep=2pt,start=5]
+  \item Let $T$ be the region enclosed by $y=4-x^2$ and $y=e^{x}$. Find the $x$-coordinates of the two points of intersection.\work{2.8cm}
+  \item Find the area of $T$.\work{2.8cm}
+  \item Find the volume of the solid generated when $T$ is revolved about the $x$-axis.\work{2.8cm}
+  \item $T$ is the base of a solid whose cross-sections perpendicular to the $x$-axis are semicircles with diameter in the base. Find the volume.\work{2.8cm}
+\end{enumerate}
+
+\begin{frbox}{Question 9 \textperiodcentered{} Free-response practice}
+Let $R$ be the region enclosed by $y=2\sqrt{x}$ and $y=x$.
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=2pt]
+  \item Find the area of $R$.\work{2.6cm}
+  \item Find the volume of the solid generated when $R$ is revolved about the $x$-axis.\work{2.6cm}
+  \item $R$ is the base of a solid whose cross-sections perpendicular to the $y$-axis are semicircles with diameter in the base. Find the volume.\work{2.6cm}
+\end{enumerate}
+\end{frbox}
+
+\newpage
+\begin{solbox}
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item $\displaystyle\int_{0}^{3}(3x-x^2)\,dx=\dfrac92$.
+  \item $\pi\displaystyle\int_{0}^{3}(9x^2-x^4)\,dx$.
+  \item $\pi\left(81-\dfrac{243}{5}\right)=\dfrac{162\pi}{5}$.
+  \item $\displaystyle\int_{0}^{3}(3x-x^2)^2\,dx$.
+  \item $x\approx-1.965$ and $x\approx1.058$.
+  \item $\displaystyle\int_{-1.965}^{1.058}\big(4-x^2-e^{x}\big)\,dx\approx6.428$.
+  \item $\pi\displaystyle\int_{-1.965}^{1.058}\big[(4-x^2)^2-e^{2x}\big]\,dx\approx84.705$.
+  \item $\dfrac\pi8\displaystyle\int_{-1.965}^{1.058}\big(4-x^2-e^{x}\big)^2\,dx\approx6.422$.
+  \item \begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=3pt]
+    \item They meet at $x=0$ and $x=4$: $\displaystyle\int_{0}^{4}(2\sqrt x-x)\,dx=\dfrac{32}{3}-8=\dfrac83$.
+    \item $\pi\displaystyle\int_{0}^{4}(4x-x^2)\,dx=\pi\left(32-\dfrac{64}{3}\right)=\dfrac{32\pi}{3}$.
+    \item At height $y$ the region runs from $x=\dfrac{y^2}{4}$ to $x=y$: $\dfrac\pi8\displaystyle\int_{0}^{4}\left(y-\tfrac{y^2}{4}\right)^2\,dy=\dfrac\pi8\cdot\dfrac{32}{15}=\dfrac{4\pi}{15}$.
+  \end{enumerate}
+\end{enumerate}
+\end{solbox}
+
+\end{document}

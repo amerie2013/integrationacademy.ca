@@ -26,39 +26,65 @@ A plane needs a point and a normal $\vec n=(A,B,C)$. Scalar: $Ax+By+Cz=D$ (the c
 \sech{Worked Examples}
 
 \begin{example}{ex0}{Example 1 --- From point \& normal}
-Plane through $(1,2,3)$ with normal $(2,1,-1)$.\soln $2(x-1)+(y-2)-(z-3)=0\Rightarrow 2x+y-z=1$.
+Plane through $(1,2,3)$ with normal $(2,1,-1)$.\soln
+\textbf{Step 1 (apply $A(x-x_0)+B(y-y_0)+C(z-z_0)=0$):} with $(A,B,C)=(2,1,-1)$ and $(x_0,y_0,z_0)=(1,2,3)$: $2(x-1)+1(y-2)-1(z-3)=0$.\\[3pt]
+\textbf{Step 2 (expand):} $2x-2+y-2-z+3=0$.\\[3pt]
+\textbf{Step 3 (simplify and isolate the constant):} $2x+y-z-1=0\Rightarrow2x+y-z=1$.\\[3pt]
+\textbf{Conclusion:} $2x+y-z=1$.
 \end{example}
 
 \begin{example}{ex1}{Example 2 --- Read the normal}
-Normal of $2x+y-z=5$.\soln $(2,1,-1)$.
+Normal of $2x+y-z=5$.\soln
+\textbf{Step 1 (recall that in $Ax+By+Cz=D$, the coefficients form the normal):} $(A,B,C)$.\\[3pt]
+\textbf{Conclusion:} normal $=(2,1,-1)$.
 \end{example}
 
 \begin{example}{ex2}{Example 3 --- Point on the plane?}
-Is $(1,1,1)$ on $2x+y-z=2$?\soln $2+1-1=2$ ✓: yes.
+Is $(1,1,1)$ on $2x+y-z=2$?\soln
+\textbf{Step 1 (substitute the point into the plane's equation):} $2(1)+1-1$.\\[3pt]
+\textbf{Step 2 (compare to the right side):} $2+1-1=2$, matching the required value of $2$.\\[3pt]
+\textbf{Conclusion:} yes, $(1,1,1)$ is on the plane.
 \end{example}
 
 \begin{example}{ex3}{Example 4 --- Normal from directions}
-Plane contains $\vec u=(1,0,0),\vec v=(0,1,0)$. Find a normal.\soln $\vec n=\vec u\times\vec v=(0,0,1)$.
+Plane contains $\vec u=(1,0,0),\vec v=(0,1,0)$. Find a normal.\soln
+\textbf{Step 1 (recall that a normal is perpendicular to both in-plane directions, found via the cross product):} $\vec n=\vec u\times\vec v$.\\[3pt]
+\textbf{Step 2 (compute the cross product):} $(0\cdot0-0\cdot1,\,0\cdot0-1\cdot0,\,1\cdot1-0\cdot0)=(0,0,1)$.\\[3pt]
+\textbf{Conclusion:} $\vec n=(0,0,1)$.
 \end{example}
 
 \begin{example}{ex4}{Example 5 --- Through three points}
-Plane through $A(0,0,0),B(1,0,0),C(0,1,0)$.\soln $\vec{AB}\times\vec{AC}=(0,0,1)$; equation $z=0$.
+Plane through $A(0,0,0),B(1,0,0),C(0,1,0)$.\soln
+\textbf{Step 1 (build two in-plane direction vectors from the points):} $\vec{AB}=(1,0,0)$, $\vec{AC}=(0,1,0)$.\\[3pt]
+\textbf{Step 2 (find the normal via the cross product):} $\vec{AB}\times\vec{AC}=(0,0,1)$.\\[3pt]
+\textbf{Step 3 (write the equation using $A(0,0,0)$ as the point):} $0(x-0)+0(y-0)+1(z-0)=0$.\\[3pt]
+\textbf{Conclusion:} $z=0$.
 \end{example}
 
 \begin{example}{ex5}{Example 6 --- From point \& normal}
-Plane through $(0,0,0)$ with normal $(1,2,3)$.\soln $x+2y+3z=0$.
+Plane through $(0,0,0)$ with normal $(1,2,3)$.\soln
+\textbf{Step 1 (apply $A(x-x_0)+B(y-y_0)+C(z-z_0)=0$ with the origin as the point):} $1(x-0)+2(y-0)+3(z-0)=0$.\\[3pt]
+\textbf{Conclusion:} $x+2y+3z=0$.
 \end{example}
 
 \begin{example}{ex6}{Example 7 --- Read the normal}
-Normal of $3x-y+4z=7$.\soln $(3,-1,4)$.
+Normal of $3x-y+4z=7$.\soln
+\textbf{Step 1 (read the coefficients of $x,y,z$ directly):} $(3,-1,4)$.\\[3pt]
+\textbf{Conclusion:} normal $=(3,-1,4)$.
 \end{example}
 
 \begin{example}{ex7}{Example 8 --- Point on the plane?}
-Is $(2,0,1)$ on $x+y+z=3$?\soln $2+0+1=3$ ✓: yes.
+Is $(2,0,1)$ on $x+y+z=3$?\soln
+\textbf{Step 1 (substitute the point):} $2+0+1$.\\[3pt]
+\textbf{Step 2 (compare to $3$):} $2+0+1=3$, matches.\\[3pt]
+\textbf{Conclusion:} yes.
 \end{example}
 
 \begin{example}{ex8}{Example 9 --- Vertical plane}
-Plane through $(2,0,0)$ with normal $(1,0,0)$.\soln $x-2=0\Rightarrow x=2$.
+Plane through $(2,0,0)$ with normal $(1,0,0)$.\soln
+\textbf{Step 1 (apply the point-normal formula):} $1(x-2)+0(y-0)+0(z-0)=0$.\\[3pt]
+\textbf{Step 2 (simplify):} $x-2=0$.\\[3pt]
+\textbf{Conclusion:} $x=2$.
 \end{example}
 
 \clearpage

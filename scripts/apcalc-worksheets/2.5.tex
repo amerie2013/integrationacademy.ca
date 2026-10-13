@@ -1,0 +1,77 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize\color{black!60}Worksheet 2.5}
+\begin{document}
+
+\wstitle{2.5}{Power, Sum and Constant-Multiple Rules}{Unit 2: The Derivative}
+
+\begin{ideabox}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+  \item $\dfrac{d}{dx}\left[x^n\right]=nx^{n-1}$ for every real number $n$.
+  \item Constants multiply through, and sums are differentiated term by term. The derivative of a constant is 0.
+  \item \textbf{Rewrite first}: $\sqrt{x}=x^{1/2}$, \ $\dfrac{1}{x^3}=x^{-3}$. Expand products and divide out simple quotients.
+  \item A horizontal tangent occurs where $f'(x)=0$; a tangent parallel to a line of slope $m$ occurs where $f'(x)=m$.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked examples}
+\begin{example}{Example 1 \textperiodcentered{} Term by term}
+Find $\dfrac{d}{dx}\left[2x^6-5x^3+4x-1\right]$.\soln Apply the power rule to each term.\result{$12x^5-15x^2+4$.}
+\end{example}
+
+\begin{example}{Example 2 \textperiodcentered{} Rewriting}
+Find $\dfrac{d}{dx}\left[\dfrac{6}{x^3}-2\sqrt{x}\right]$.\soln Write as $6x^{-3}-2x^{1/2}$, giving $-18x^{-4}-x^{-1/2}$.\result{$-\dfrac{18}{x^4}-\dfrac{1}{\sqrt x}$.}
+\end{example}
+
+\begin{example}{Example 3 \textperiodcentered{} A tangent line}
+Write an equation of the line tangent to $y=x^4-2x$ at $x=1$.\soln $y(1)=-1$ and $y'=4x^3-2$, so the slope is 2.\result{$y+1=2(x-1)$.}
+\end{example}
+
+\newpage
+\sech{Practice}
+
+\level{Core}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item Find $\dfrac{d}{dx}\left[x^7\right]$.\work{2.3cm}
+  \item Find $\dfrac{d}{dx}\left[3x^4-x+5\right]$.\work{2.3cm}
+  \item Find $\dfrac{d}{dx}\left[10\sqrt{x}\right]$.\work{2.3cm}
+  \item Find $\dfrac{d}{dx}\left[\dfrac2x\right]$.\work{2.3cm}
+\end{enumerate}
+
+\level{Exam level}
+\begin{enumerate}[leftmargin=*,itemsep=2pt,start=5]
+  \item Find $f'(x)$ for $f(x)=\left(x^2+1\right)(x-3)$ by expanding first.\work{2.8cm}
+  \item Find $f'(x)$ for $f(x)=\dfrac{x^3-4x}{x}$, $x\neq0$.\work{2.8cm}
+  \item Find the coordinates of the points on $y=2x^3-24x$ at which the tangent line is horizontal.\work{2.8cm}
+  \item The function $f(x)=ax^3+bx^2$ satisfies $f(1)=5$ and $f'(1)=12$. Find $a$ and $b$.\work{2.8cm}
+\end{enumerate}
+
+\begin{frbox}{Question 9 \textperiodcentered{} Free-response practice}
+Let $p(x)=x^3-3x^2-24x+5$.
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=2pt]
+  \item Find $p'(x)$.\work{2.6cm}
+  \item Find all values of $x$ at which the tangent line to the graph of $p$ is horizontal.\work{2.6cm}
+  \item Write an equation of the tangent line at $x=0$, and find the other value of $x$ at which the tangent line is parallel to it.\work{2.6cm}
+\end{enumerate}
+\end{frbox}
+
+\newpage
+\begin{solbox}
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item $7x^6$.
+  \item $12x^3-1$.
+  \item $5x^{-1/2}=\dfrac{5}{\sqrt x}$.
+  \item $-2x^{-2}=-\dfrac{2}{x^2}$.
+  \item $f(x)=x^3-3x^2+x-3$, so $f'(x)=3x^2-6x+1$.
+  \item $f(x)=x^2-4$, so $f'(x)=2x$.
+  \item $y'=6x^2-24=0$ at $x=\pm2$: the points $(2,-32)$ and $(-2,32)$.
+  \item $a+b=5$ and $3a+2b=12$. Then $a=2$ and $b=3$.
+  \item \begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=3pt]
+    \item $p'(x)=3x^2-6x-24$.
+    \item $3(x-4)(x+2)=0$, so $x=4$ and $x=-2$.
+    \item $p(0)=5$ and $p'(0)=-24$: $y=-24x+5$. $3x^2-6x-24=-24$ gives $3x(x-2)=0$, so the other value is $x=2$.
+  \end{enumerate}
+\end{enumerate}
+\end{solbox}
+
+\end{document}

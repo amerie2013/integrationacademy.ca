@@ -126,6 +126,8 @@ export function SlideDeck({ title, blocks }: { title: string; blocks: Block[] })
   const [voice, setVoice] = useState<SpeechSynthesisVoice | null>(null);
   const [ttsOk, setTtsOk] = useState(true);
 
+  // Lessons written with the AP exam-prep theme keep it when presented.
+  const apx = useMemo(() => blocks.some((b) => b.type === "html" && b.html.includes("lecture-box apx")), [blocks]);
   const slides = useMemo<Slide[]>(() => {
     const out: Slide[] = [];
     for (const b of blocks) {
@@ -225,7 +227,7 @@ export function SlideDeck({ title, blocks }: { title: string; blocks: Block[] })
             </div>
           ) : (
             <div
-              className={"lecture-box iadeck-doc" + (cur.kind === "title" ? " iadeck-title" : "")}
+              className={"lecture-box iadeck-doc" + (apx ? " apx" : "") + (cur.kind === "title" ? " iadeck-title" : "")}
               dangerouslySetInnerHTML={{ __html: renderMath(cur.html) }}
             />
           )}

@@ -1,0 +1,77 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize\color{black!60}Worksheet 1.7}
+\begin{document}
+
+\wstitle{1.7}{Where Graphs Break: Classifying Discontinuities}{Unit 1: Limits and Continuity}
+
+\begin{ideabox}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+  \item \textbf{Removable:} the limit exists but $f(c)$ is undefined or different. A hole.
+  \item \textbf{Jump:} both one-sided limits exist and are unequal.
+  \item \textbf{Infinite:} a one-sided limit is $\pm\infty$. A vertical asymptote.
+  \item For a rational function, factor first: a cancelled factor gives a hole; a surviving factor gives an asymptote.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked examples}
+\begin{example}{Example 1 \textperiodcentered{} A rational function}
+Find and classify the discontinuities of $f(x)=\dfrac{x^2-4x}{x^2-16}$.\soln $f(x)=\dfrac{x(x-4)}{(x-4)(x+4)}$. At $x=4$ the factor cancels and $\displaystyle\lim_{x\to 4}f(x)=\dfrac48=\dfrac12$. At $x=-4$ the factor remains and the numerator tends to $-4\neq0$.\result{Removable at $x=4$; infinite at $x=-4$.}
+\end{example}
+
+\begin{example}{Example 2 \textperiodcentered{} A piecewise function}
+Classify the discontinuity at $x=2$ of $g(x)=\begin{cases}2x-1,&x<2\\6,&x=2\\x+1,&x>2.\end{cases}$\soln $\displaystyle\lim_{x\to 2^-}g(x)=3$ and $\displaystyle\lim_{x\to 2^+}g(x)=3$, so the limit is 3; but $g(2)=6$.\result{Removable.}
+\end{example}
+
+\begin{example}{Example 3 \textperiodcentered{} An absolute value}
+Classify the discontinuity at $x=3$ of $h(x)=\dfrac{x^2-9}{|x-3|}$.\soln For $x>3$: $h(x)=x+3\to6$. For $x<3$: $h(x)=-(x+3)\to-6$.\result{Jump.}
+\end{example}
+
+\newpage
+\sech{Practice}
+
+\level{Core}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item Classify the discontinuity of $f(x)=\dfrac{x^2-1}{x-1}$ at $x=1$.\work{2.3cm}
+  \item Classify the discontinuity of $f(x)=\dfrac{3}{x-2}$ at $x=2$.\work{2.3cm}
+  \item Classify the discontinuity at $x=0$ of $f(x)=\begin{cases}x,&x<0\\x+2,&x\ge0.\end{cases}$\work{2.3cm}
+  \item Classify the discontinuity of $f(x)=\dfrac{x-5}{(x-5)^2}$ at $x=5$.\work{2.3cm}
+\end{enumerate}
+
+\level{Exam level}
+\begin{enumerate}[leftmargin=*,itemsep=2pt,start=5]
+  \item Find and classify all discontinuities of $f(x)=\dfrac{x^2+x-2}{x^2-x-6}$.\work{2.8cm}
+  \item How many vertical asymptotes does the graph of $f(x)=\dfrac{x^2-9}{x^3-9x}$ have? Justify.\work{2.8cm}
+  \item For what value of $a$ does $f(x)=\dfrac{x^2+ax-8}{x-4}$ have a removable discontinuity at $x=4$? Give the coordinates of the hole.\work{2.8cm}
+  \item Classify the discontinuity of $f(x)=\dfrac{1-\cos x}{x}$ at $x=0$.\work{2.8cm}
+\end{enumerate}
+
+\begin{frbox}{Question 9 \textperiodcentered{} Free-response practice}
+Let $g(x)=\begin{cases}\dfrac{x^2-1}{x-1},&x<1\\[2mm]k,&x=1\\[1mm]3-x,&x>1\end{cases}$ where $k$ is a constant.
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=2pt]
+  \item Find $\displaystyle\lim_{x\to 1^-}g(x)$ and $\displaystyle\lim_{x\to 1^+}g(x)$.\work{2.6cm}
+  \item If $k=5$, what type of discontinuity does $g$ have at $x=1$? Give a reason.\work{2.6cm}
+  \item For what value of $k$ is $g$ continuous at $x=1$?\work{2.6cm}
+\end{enumerate}
+\end{frbox}
+
+\newpage
+\begin{solbox}
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item Removable: $f(x)=x+1$ for $x\neq1$, limit 2, $f(1)$ undefined.
+  \item Infinite: numerator 3, denominator tends to 0.
+  \item Jump: left limit 0, right limit 2.
+  \item Infinite: $f(x)=\dfrac{1}{x-5}$ for $x\neq5$; one factor remains.
+  \item $f(x)=\dfrac{(x+2)(x-1)}{(x-3)(x+2)}$. Removable at $x=-2$ (limit $\dfrac{-3}{-5}=\dfrac35$); infinite at $x=3$.
+  \item One. $f(x)=\dfrac{(x-3)(x+3)}{x(x-3)(x+3)}=\dfrac1x$ for $x\neq\pm3$: holes at $x=\pm3$, an asymptote only at $x=0$.
+  \item $16+4a-8=0$ gives $a=-2$. Then $x^2-2x-8=(x-4)(x+2)$ and the hole is at $(4,6)$.
+  \item Removable: $f(0)$ is undefined but $\displaystyle\lim_{x\to 0}\dfrac{1-\cos x}{x}=0$.
+  \item \begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=3pt]
+    \item For $x<1$, $g(x)=x+1$, so $\displaystyle\lim_{x\to 1^-}g(x)=2$. $\displaystyle\lim_{x\to 1^+}g(x)=3-1=2$.
+    \item Removable, because $\displaystyle\lim_{x\to 1}g(x)=2$ exists but $g(1)=5\neq2$.
+    \item $k=2$, so that $g(1)$ equals the limit.
+  \end{enumerate}
+\end{enumerate}
+\end{solbox}
+
+\end{document}

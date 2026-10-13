@@ -3,9 +3,10 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { supabase } from "../../lib/supabase";
 import { SiteHeader } from "../../components/SiteHeader";
-import { levelLabel } from "../../lib/theme";
+import { useLevelLabel } from "../../lib/useLevelLabel";
 import { accentFor } from "../../lib/courseAccent";
 
 type Course = {
@@ -14,10 +15,13 @@ type Course = {
   title: string;
   description: string | null;
   level: string | null;
+  language: string | null;
   published: boolean;
 };
 
 export default function CourseCatalogPage() {
+  const t = useTranslations("courses");
+  const levelLabel = useLevelLabel();
   const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [courses, setCourses] = useState<Course[]>([]);
@@ -38,7 +42,7 @@ export default function CourseCatalogPage() {
       // A random visitor still only ever gets the published ones back.
       const { data: cs } = await supabase
         .from("courses")
-        .select("id, code, title, description, level, published")
+        .select("id, code, title, description, level, language, published")
         .order("level");
       setCourses((cs ?? []) as Course[]);
 
@@ -65,35 +69,40 @@ export default function CourseCatalogPage() {
     <main style={{ minHeight: "100vh" }}>
       <SiteHeader />
       <div style={{ maxWidth: 1000, margin: "0 auto", padding: "44px 28px" }}>
-        <h1 style={{ fontFamily: "Fraunces, serif", fontSize: 36, fontWeight: 700, margin: "0 0 8px" }}>Course catalog</h1>
+        <h1 style={{ fontFamily: "Fraunces, serif", fontSize: 36, fontWeight: 700, margin: "0 0 8px" }}>{t("catalogTitle")}</h1>
         <p style={{ color: "#64748b", fontSize: 16, margin: "0 0 32px" }}>
-          Enroll to unlock interactive lessons, quizzes, and assignments.
+          {t("catalogSubtitle")}
         </p>
 
         {loading ? (
-          <p style={{ color: "#64748b" }}>Loading…</p>
+          <p style={{ color: "#64748b" }}>{t("loading")}</p>
         ) : courses.length === 0 ? (
           <div style={{ background: "#fff", border: "1px solid #e2e8f0", borderRadius: 14, padding: 28, color: "#64748b" }}>
-            No published courses yet. Check back soon.
+            {t("empty")}
           </div>
         ) : (
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: 18 }}>
             {courses.map((c) => {
               const isEnrolled = enrolledIds.has(c.id);
-              const t = accentFor(c.code);
+              const accent = accentFor(c.code);
               return (
                 <div key={c.id} style={{ background: "#fff", border: "1px solid #e2e8f0", borderRadius: 16, padding: 22, display: "flex", flexDirection: "column" }}>
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
                     {c.code ? (
-                      <span style={{ fontFamily: "JetBrains Mono, monospace", color: t.primary, fontWeight: 700, fontSize: 13 }}>{c.code}</span>
+                      <span style={{ fontFamily: "JetBrains Mono, monospace", color: accent.primary, fontWeight: 700, fontSize: 13 }}>{c.code}</span>
                     ) : <span />}
                     <span style={{ display: "flex", gap: 6 }}>
-                      {!c.published && (
-                        <span style={{ fontSize: 12, fontWeight: 700, color: "#92400e", background: "#fffbeb", border: "1px solid #fde68a", padding: "3px 9px", borderRadius: 999 }}>
-                          Private
+                      {c.language === "fr" && (
+                        <span style={{ fontSize: 12, fontWeight: 700, color: "#1e3a8a", background: "#eff6ff", border: "1px solid #bfdbfe", padding: "3px 9px", borderRadius: 999 }}>
+                          {t("french")}
                         </span>
                       )}
-                      <span style={{ fontSize: 12, fontWeight: 700, color: t.badge, background: t.badgeBg, padding: "3px 9px", borderRadius: 999 }}>
+                      {!c.published && (
+                        <span style={{ fontSize: 12, fontWeight: 700, color: "#92400e", background: "#fffbeb", border: "1px solid #fde68a", padding: "3px 9px", borderRadius: 999 }}>
+                          {t("private")}
+                        </span>
+                      )}
+                      <span style={{ fontSize: 12, fontWeight: 700, color: accent.badge, background: accent.badgeBg, padding: "3px 9px", borderRadius: 999 }}>
                         {levelLabel(c.level)}
                       </span>
                     </span>
@@ -102,16 +111,16 @@ export default function CourseCatalogPage() {
                   {c.description && <p style={{ color: "#64748b", fontSize: 14, lineHeight: 1.5, margin: "0 0 16px", flex: 1 }}>{c.description}</p>}
                   <div style={{ display: "flex", gap: 10, marginTop: "auto" }}>
                     {isEnrolled ? (
-                      <Link href={`/courses/${c.id}`} style={{ flex: 1, textAlign: "center", background: t.primary, color: "#fff", padding: "10px", borderRadius: 9, textDecoration: "none", fontWeight: 700, fontSize: 14 }}>
-                        Open course →
+                      <Link href={`/courses/${c.id}`} style={{ flex: 1, textAlign: "center", background: accent.primary, color: "#fff", padding: "10px", borderRadius: 9, textDecoration: "none", fontWeight: 700, fontSize: 14 }}>
+                        {t("openCourse")}
                       </Link>
                     ) : (
                       <>
                         <Link href={`/courses/${c.id}`} style={{ background: "#fff", color: "#0f172a", padding: "10px 14px", borderRadius: 9, textDecoration: "none", fontWeight: 700, fontSize: 14, border: "1px solid #cbd5e1" }}>
-                          Details
+                          {t("details")}
                         </Link>
-                        <button onClick={() => enroll(c.id)} disabled={busy === c.id} style={{ flex: 1, background: t.badge, color: "#fff", border: "none", padding: "10px", borderRadius: 9, fontWeight: 700, fontSize: 14, cursor: "pointer" }}>
-                          {busy === c.id ? "Enrolling…" : "Enroll"}
+                        <button onClick={() => enroll(c.id)} disabled={busy === c.id} style={{ flex: 1, background: accent.badge, color: "#fff", border: "none", padding: "10px", borderRadius: 9, fontWeight: 700, fontSize: 14, cursor: "pointer" }}>
+                          {busy === c.id ? t("enrolling") : t("enroll")}
                         </button>
                       </>
                     )}

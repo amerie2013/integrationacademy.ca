@@ -1,6 +1,12 @@
 // "Concept Essentials" teaching sections for MCR3U worksheets, keyed by code.
 // build.mjs renders LEARN[code] as a green learnbox before the Worked Examples.
 // LaTeX content; each entry is an array of [heading, bodyLaTeX] blocks.
+// Chapter 2 (2.1–2.5) was rebuilt in scripts/mcr3u-ch2/ — its entries are applied at the bottom of this file.
+import { LEARN21 } from "../mcr3u-ch2/t2_1.mjs";
+import { LEARN22 } from "../mcr3u-ch2/t2_2.mjs";
+import { LEARN23 } from "../mcr3u-ch2/t2_3.mjs";
+import { LEARN24 } from "../mcr3u-ch2/t2_4.mjs";
+import { LEARN25 } from "../mcr3u-ch2/t2_5.mjs";
 
 export const LEARN = {
   // ── Unit 1: Functions ──────────────────────────────────────
@@ -176,5 +182,7 @@ export const LEARN = {
     ["Everyday uses", "Annuity formulas model mortgages, car loans, and retirement savings, where equal payments meet compound interest."],
   ],
 };
+
+Object.assign(LEARN, { "2.1": LEARN21, "2.2": LEARN22, "2.3": LEARN23, "2.4": LEARN24, "2.5": LEARN25 });
 
 export default LEARN;

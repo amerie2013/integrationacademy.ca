@@ -1,0 +1,77 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize\color{black!60}Worksheet 5.9}
+\begin{document}
+
+\wstitle{5.9}{Moving Between the Graphs of $f$, $f'$ and $f''$}{Unit 5: Analysing Functions}
+
+\begin{ideabox}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+  \item Where the graph of $f'$ is \textbf{above} the axis, $f$ is increasing; below, decreasing.
+  \item $f$ has a relative maximum where $f'$ crosses the axis from above to below, and a minimum where it crosses from below to above.
+  \item Where the graph of $f'$ is \textbf{rising}, $f$ is concave up; falling, concave down.
+  \item $f$ has a point of inflection where $f'$ has a relative maximum or minimum. Always say which graph you are describing.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked examples}
+\begin{example}{Example 1 \textperiodcentered{} Reading the derivative}
+The graph of $f'$ consists of the line segments joining $(0,-2)$, $(2,2)$ and $(5,-1)$. Find the relative extrema of $f$.\soln $f'$ crosses the axis at $x=1$ (from negative to positive) and at $x=4$ (from positive to negative).\result{Relative minimum at $x=1$; relative maximum at $x=4$.}
+\end{example}
+
+\begin{example}{Example 2 \textperiodcentered{} Concavity from the derivative}
+For the same $f'$, where is the graph of $f$ concave up, and where is its point of inflection?\soln $f'$ is increasing on $(0,2)$ and decreasing on $(2,5)$.\result{Concave up on $(0,2)$; point of inflection at $x=2$.}
+\end{example}
+
+\begin{example}{Example 3 \textperiodcentered{} From f to f prime}
+On an interval, $f$ is increasing and concave down. What is true of $f'$ there?\soln Increasing: $f'>0$. Concave down: $f'$ is decreasing.\result{$f'$ is positive and decreasing.}
+\end{example}
+
+\newpage
+\sech{Practice}
+\emph{Questions 5 to 8 refer to a function $f$ that is continuous on $[-2,6]$. The graph of its derivative $f'$ consists of three line segments joining the points $(-2,4)$, $(1,-2)$, $(3,2)$ and $(6,-1)$, in that order.}
+\level{Core}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item If $f'(x)>0$ on $(1,5)$, what is true of $f$ on that interval?\work{2.3cm}
+  \item If $f'$ has a relative maximum at $x=3$, what does the graph of $f$ have at $x=3$?\work{2.3cm}
+  \item If $f''(x)<0$ on $(0,2)$, what is true of $f'$ and of the graph of $f$ there?\work{2.3cm}
+  \item If $f'(2)=0$ and $f'$ changes from positive to negative at $x=2$, what does $f$ have there?\work{2.3cm}
+\end{enumerate}
+
+\level{Exam level}
+\begin{enumerate}[leftmargin=*,itemsep=2pt,start=5]
+  \item Find the $x$-coordinates of the relative maxima of $f$. Justify your answer.\work{2.8cm}
+  \item Find the $x$-coordinate of the relative minimum of $f$. Justify your answer.\work{2.8cm}
+  \item On what interval is the graph of $f$ concave up? Where are its points of inflection?\work{2.8cm}
+  \item Find $f''(2)$ and $f''(4)$.\work{2.8cm}
+\end{enumerate}
+
+\begin{frbox}{Question 9 \textperiodcentered{} Free-response practice}
+The derivative of a function $f$ is $f'(x)=x^2-4x+3$.
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=2pt]
+  \item On what intervals is $f$ increasing? Justify your answer.\work{2.6cm}
+  \item Find the $x$-coordinates of the relative maximum and the relative minimum of $f$.\work{2.6cm}
+  \item Find the $x$-coordinate of the point of inflection of the graph of $f$, and explain how it can be seen on the graph of $f'$.\work{2.6cm}
+\end{enumerate}
+\end{frbox}
+
+\newpage
+\begin{solbox}
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item $f$ is increasing on $(1,5)$.
+  \item A point of inflection.
+  \item $f'$ is decreasing and the graph of $f$ is concave down.
+  \item A relative maximum.
+  \item $x=0$ and $x=5$: $f'$ changes from positive to negative at each.
+  \item $x=2$: $f'$ changes from negative to positive.
+  \item Concave up on $(1,3)$, where $f'$ is increasing. Points of inflection at $x=1$ and $x=3$, where $f'$ changes direction.
+  \item The slopes of the graph of $f'$: $f''(2)=\dfrac{2-(-2)}{3-1}=2$ and $f''(4)=\dfrac{-1-2}{6-3}=-1$.
+  \item \begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=3pt]
+    \item $f'(x)=(x-1)(x-3)>0$ for $x<1$ and for $x>3$.
+    \item Maximum at $x=1$ ($f'$ changes from positive to negative); minimum at $x=3$.
+    \item $f''(x)=2x-4$ changes sign at $x=2$. On the graph of $f'$ this is the vertex of the parabola, where $f'$ changes from decreasing to increasing.
+  \end{enumerate}
+\end{enumerate}
+\end{solbox}
+
+\end{document}

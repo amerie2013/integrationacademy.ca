@@ -6,6 +6,19 @@ import {
   complementaryFig, supplementaryFig, verticalAngles, adjacentAngles,
   conditionalMap, twoColumnSample, flowchartProof,
 } from "./figures.mjs";
+import {
+  threePointsPlane, collinearPts, numberLineDist, midpointAlgebra, classifyAngles,
+  copyAngleObtuse, angleCombine, biconditionalFig, paragraphProofFig,
+  parallelConverse, perpTransversal, horizVert, constructPerpOnLine, constructRectangle,
+  translatePolygon, reflectYX, reflectVertical, rotate180, rotate270, glideReflect,
+  parallelReflect, intersectReflect, parallelogramSym, squareSym, scaleneNoSym,
+  exteriorAngle, angleSumTri, equilateralFig, altitudeIsos, aasMarks, medianFig,
+  dilatePoint, sssSimilar, sasSimilar, midsegmentTri, threeParallel, mirrorMethod,
+  depressionFig, guyWire, twoElevations,
+  diameterChord, semicircleRight, chordPerp, chordChord, tangentSecant, twoSecants, circleEq,
+  pyramidFig, coneFig, sphereFig, densityFig, popDensity, coneSlice, sphereSlice, frustumFig,
+  dieFig, bagMarbles, complementFig, cardsFig, expectedValue, withWithout,
+} from "./figures3.mjs";
 
 export const ch = {};
 
@@ -26,6 +39,7 @@ ch["1.1"] = L("1.1", "Points, Lines, and Planes", [
       {
         h: "Naming lines and planes",
         p: "Points \\(A\\), \\(B\\), and \\(C\\) are noncollinear. Name the line through \\(A\\) and \\(B\\) in two ways, and name the plane containing all three points.",
+        fig: pointsLinesPlanes(),
         steps: [
           `<strong>Step 1 — Name the line:</strong> a line is named by any two of its points with a double arrow, or by a single lowercase letter if one is given. Here the line is \\(\\overleftrightarrow{AB}\\), which is the same line as \\(\\overleftrightarrow{BA}\\).`,
           `<strong>Step 2 — Name the plane:</strong> three noncollinear points determine exactly one plane, so this plane can be called plane \\(ABC\\) (any order of the three letters is acceptable).`,
@@ -35,6 +49,7 @@ ch["1.1"] = L("1.1", "Points, Lines, and Planes", [
       {
         h: "Collinear or coplanar?",
         p: "Points \\(D\\), \\(E\\), and \\(F\\) all lie on line \\(\\ell\\). Point \\(G\\) is in the same plane as \\(\\ell\\) but is not on \\(\\ell\\). Describe the relationships among \\(D\\), \\(E\\), \\(F\\), and \\(G\\).",
+        fig: collinearPts(),
         steps: [
           `<strong>Step 1 — Check collinearity:</strong> \\(D\\), \\(E\\), \\(F\\) all lie on the same line \\(\\ell\\), so they are <strong>collinear</strong>. \\(G\\) is not on \\(\\ell\\), so \\(G\\) is not collinear with the other three.`,
           `<strong>Step 2 — Check coplanarity:</strong> a line and a point not on it always determine a plane, and \\(G\\) was said to lie in that same plane. So \\(D\\), \\(E\\), \\(F\\), and \\(G\\) are all <strong>coplanar</strong>, even though \\(G\\) is not collinear with the rest.`,
@@ -54,6 +69,7 @@ ch["1.1"] = L("1.1", "Points, Lines, and Planes", [
       {
         h: "Applying a point–line–plane postulate",
         p: "Line \\(\\overleftrightarrow{AB}\\) lies in plane \\(\\mathcal{P}\\), and point \\(C\\) also lies in plane \\(\\mathcal{P}\\) but is not on \\(\\overleftrightarrow{AB}\\). How many planes contain both \\(\\overleftrightarrow{AB}\\) and point \\(C\\)?",
+        fig: threePointsPlane(),
         steps: [
           `<strong>Step 1 — Recall the postulate:</strong> through any three noncollinear points, there is exactly one plane. A line and a point not on that line give us three noncollinear points (any two points on the line, plus \\(C\\)).`,
           `<strong>Step 2 — Apply it:</strong> since \\(A\\), \\(B\\), and \\(C\\) are noncollinear, exactly one plane contains all three — and we're told that plane is \\(\\mathcal{P}\\).`,
@@ -105,6 +121,7 @@ ch["1.2"] = L("1.2", "Measuring and Constructing Segments", [
       {
         h: "Distance on a number line",
         p: "Points \\(A\\) and \\(B\\) lie on a number line at coordinates \\(-4\\) and \\(7\\). Find \\(AB\\).",
+        fig: numberLineDist(),
         steps: [
           `<strong>Step 1 — Apply the distance formula:</strong> \\(AB=|x_2-x_1|=|7-(-4)|\\).`,
           `<strong>Step 2 — Simplify:</strong> \\(AB=|11|=11\\).`,
@@ -114,6 +131,7 @@ ch["1.2"] = L("1.2", "Measuring and Constructing Segments", [
       {
         h: "Using the Segment Addition Postulate",
         p: "\\(B\\) is between \\(A\\) and \\(C\\). If \\(AB=3x-1\\), \\(BC=2x+4\\), and \\(AC=23\\), find \\(x\\) and the lengths \\(AB\\) and \\(BC\\).",
+        fig: segmentAddition(),
         steps: [
           `<strong>Step 1 — Write the postulate as an equation:</strong> \\(AB+BC=AC\\), so \\((3x-1)+(2x+4)=23\\).`,
           `<strong>Step 2 — Solve for \\(x\\):</strong> \\(5x+3=23\\), so \\(5x=20\\) and \\(x=4\\).`,
@@ -134,6 +152,7 @@ ch["1.2"] = L("1.2", "Measuring and Constructing Segments", [
       {
         h: "Solving for x using a midpoint",
         p: "\\(M\\) is the midpoint of \\(\\overline{AB}\\). \\(AM=2x+1\\) and \\(MB=3x-4\\). Find \\(x\\) and \\(AB\\).",
+        fig: midpointAlgebra(),
         steps: [
           `<strong>Step 1 — Use the definition of midpoint:</strong> a midpoint creates two congruent segments, so \\(AM=MB\\): \\(2x+1=3x-4\\).`,
           `<strong>Step 2 — Solve for \\(x\\):</strong> \\(5=x\\), so \\(x=5\\).`,
@@ -186,6 +205,7 @@ ch["1.3"] = L("1.3", "Measuring and Constructing Angles", [
       {
         h: "Classifying an angle",
         p: "Classify an angle with measure \\(m\\angle A=124^\\circ\\).",
+        fig: classifyAngles(),
         steps: [
           `<strong>Step 1 — Compare to the benchmarks:</strong> \\(90^\\circ<124^\\circ<180^\\circ\\).`,
           `<strong>Conclusion:</strong> \\(\\angle A\\) is <strong>obtuse</strong>.`,
@@ -204,6 +224,7 @@ ch["1.3"] = L("1.3", "Measuring and Constructing Angles", [
       {
         h: "Solving for x with Angle Addition",
         p: "\\(\\overrightarrow{BD}\\) is in the interior of \\(\\angle ABC\\), with \\(m\\angle ABD=3x\\), \\(m\\angle DBC=2x+10\\), and \\(m\\angle ABC=90^\\circ\\). Find \\(x\\) and both smaller angle measures.",
+        fig: angleAddition(),
         steps: [
           `<strong>Step 1 — Set up the equation:</strong> \\(3x+(2x+10)=90\\).`,
           `<strong>Step 2 — Solve:</strong> \\(5x+10=90 \\Rightarrow 5x=80 \\Rightarrow x=16\\).`,
@@ -225,6 +246,7 @@ ch["1.3"] = L("1.3", "Measuring and Constructing Angles", [
       {
         h: "Copying an angle",
         p: "Describe the compass-and-straightedge steps to construct \\(\\angle DEF\\) congruent to a given \\(\\angle ABC\\).",
+        fig: copyAngleObtuse(),
         steps: [
           `<strong>Step 1 — Draw a ray:</strong> draw ray \\(\\overrightarrow{EF}\\) to be one side of the new angle, with vertex \\(E\\).`,
           `<strong>Step 2 — Mark an arc on the original angle:</strong> with the compass point on \\(B\\), swing an arc that crosses both rays of \\(\\angle ABC\\); label the crossing points.`,
@@ -311,6 +333,7 @@ ch["1.4"] = L("1.4", "Pairs of Angles (Complementary, Supplementary, Vertical, A
       {
         h: "Combining relationships",
         p: "An angle measures four times its complement. Find the angle and its complement.",
+        fig: angleCombine(),
         steps: [
           `<strong>Step 1 — Set up variables:</strong> let the complement be \\(x\\); then the angle itself is \\(4x\\).`,
           `<strong>Step 2 — Use the complementary relationship:</strong> the angle and its complement sum to \\(90^\\circ\\): \\(4x+x=90\\).`,
@@ -352,6 +375,7 @@ ch["1.5"] = L("1.5", "Conditional Statements and Logical Reasoning (If-Then, Con
       {
         h: "Writing a statement in if-then form",
         p: "Rewrite \"Vertical angles are congruent\" as a conditional statement, and identify the hypothesis and conclusion.",
+        fig: conditionalMap(),
         steps: [
           `<strong>Step 1 — Find the underlying idea:</strong> the statement is really saying that being vertical angles guarantees congruence.`,
           `<strong>Step 2 — Write it as if-then:</strong> "If two angles are vertical angles, then they are congruent."`,
@@ -361,6 +385,7 @@ ch["1.5"] = L("1.5", "Conditional Statements and Logical Reasoning (If-Then, Con
       {
         h: "Converse, inverse, contrapositive",
         p: "Given the conditional \"If a number is divisible by 4, then it is divisible by 2,\" write the converse, inverse, and contrapositive, and state whether each is true.",
+        fig: conditionalMap(),
         steps: [
           `<strong>Original</strong> (true): "If a number is divisible by 4, then it is divisible by 2." ✓ True — every multiple of 4 is also a multiple of 2.`,
           `<strong>Converse</strong> \\(q\\rightarrow p\\): "If a number is divisible by 2, then it is divisible by 4." False — counterexample: 6 is divisible by 2 but not by 4.`,
@@ -372,6 +397,7 @@ ch["1.5"] = L("1.5", "Conditional Statements and Logical Reasoning (If-Then, Con
       {
         h: "A geometry example with a false converse",
         p: "Consider \"If a figure is a square, then it is a rectangle.\" Write the converse and determine whether it's true, giving a counterexample if not.",
+        fig: conditionalMap(),
         steps: [
           `<strong>Step 1 — Check the original:</strong> true — every square has four right angles, which is exactly the definition of a rectangle.`,
           `<strong>Step 2 — Write the converse:</strong> "If a figure is a rectangle, then it is a square."`,
@@ -382,6 +408,7 @@ ch["1.5"] = L("1.5", "Conditional Statements and Logical Reasoning (If-Then, Con
       {
         h: "When can you form a true biconditional?",
         p: "Can the statement \"A triangle is equilateral if and only if it is equiangular\" be justified as a valid biconditional?",
+        fig: biconditionalFig(),
         steps: [
           `<strong>Step 1 — Recall the rule:</strong> a biconditional \\(p\\leftrightarrow q\\) is valid exactly when both \\(p\\rightarrow q\\) and its converse \\(q\\rightarrow p\\) are true.`,
           `<strong>Step 2 — Check the conditional:</strong> "If a triangle is equilateral, then it is equiangular" — true.`,
@@ -392,6 +419,7 @@ ch["1.5"] = L("1.5", "Conditional Statements and Logical Reasoning (If-Then, Con
       {
         h: "Using logical equivalence without rewriting",
         p: "You're told the contrapositive of a conditional is false. What, if anything, can you conclude about the original conditional — without writing it out?",
+        fig: conditionalMap(),
         steps: [
           `<strong>Step 1 — Recall the equivalence rule:</strong> a conditional and its contrapositive always share the same truth value.`,
           `<strong>Step 2 — Apply it directly:</strong> since the contrapositive is false, the original conditional must also be false.`,
@@ -433,6 +461,7 @@ ch["1.6"] = L("1.6", "Introduction to Proofs (Paragraph, Flowchart, and Two-Colu
       {
         h: "Two-column proof from a definition",
         p: "<strong>Given:</strong> \\(M\\) is the midpoint of \\(\\overline{AB}\\). <strong>Prove:</strong> \\(AM=MB\\).",
+        fig: twoColumnSample(),
         steps: [
           `<strong>Step 1 — Statement:</strong> \\(M\\) is the midpoint of \\(\\overline{AB}\\). <strong>Reason:</strong> Given.`,
           `<strong>Step 2 — Statement:</strong> \\(\\overline{AM}\\cong\\overline{MB}\\). <strong>Reason:</strong> Definition of midpoint.`,
@@ -443,6 +472,7 @@ ch["1.6"] = L("1.6", "Introduction to Proofs (Paragraph, Flowchart, and Two-Colu
       {
         h: "A shared-segment proof",
         p: "\\(A\\), \\(B\\), \\(C\\), \\(D\\) are collinear in that order. <strong>Given:</strong> \\(AB=CD\\). <strong>Prove:</strong> \\(AC=BD\\).",
+        fig: segmentAddition(),
         steps: [
           `<strong>Step 1 — Statement:</strong> \\(AB=CD\\). <strong>Reason:</strong> Given.`,
           `<strong>Step 2 — Statement:</strong> \\(AB+BC=AC\\) and \\(BC+CD=BD\\). <strong>Reason:</strong> Segment Addition Postulate (applied twice, since \\(B\\) is between \\(A,C\\) and \\(C\\) is between \\(B,D\\)).`,
@@ -454,6 +484,7 @@ ch["1.6"] = L("1.6", "Introduction to Proofs (Paragraph, Flowchart, and Two-Colu
       {
         h: "Proving vertical angles congruent",
         p: "Lines \\(\\overleftrightarrow{AC}\\) and \\(\\overleftrightarrow{BD}\\) intersect at point \\(E\\), forming \\(\\angle AEB\\) and \\(\\angle CED\\) as a vertical pair. <strong>Prove:</strong> \\(\\angle AEB\\cong\\angle CED\\).",
+        fig: verticalAngles(),
         steps: [
           `<strong>Step 1 — Statement:</strong> \\(\\angle AEB\\) and \\(\\angle BEC\\) form a linear pair; \\(\\angle BEC\\) and \\(\\angle CED\\) form a linear pair. <strong>Reason:</strong> Given (from the intersecting lines diagram).`,
           `<strong>Step 2 — Statement:</strong> \\(m\\angle AEB+m\\angle BEC=180^\\circ\\) and \\(m\\angle BEC+m\\angle CED=180^\\circ\\). <strong>Reason:</strong> Linear Pair \\(\\Rightarrow\\) supplementary.`,
@@ -466,6 +497,7 @@ ch["1.6"] = L("1.6", "Introduction to Proofs (Paragraph, Flowchart, and Two-Colu
       {
         h: "A paragraph proof",
         p: "<strong>Given:</strong> \\(\\angle 1\\) and \\(\\angle 2\\) are both complementary to \\(\\angle 3\\). <strong>Prove:</strong> \\(\\angle 1\\cong\\angle 2\\). Write this as a paragraph proof.",
+        fig: paragraphProofFig(),
         steps: [
           `<strong>Paragraph proof:</strong> "Since \\(\\angle 1\\) is complementary to \\(\\angle 3\\), \\(m\\angle 1+m\\angle 3=90^\\circ\\) by the definition of complementary angles. Since \\(\\angle 2\\) is also complementary to \\(\\angle 3\\), \\(m\\angle 2+m\\angle 3=90^\\circ\\) as well. Because both sums equal \\(90^\\circ\\), \\(m\\angle 1+m\\angle 3=m\\angle 2+m\\angle 3\\) by substitution. Subtracting \\(m\\angle 3\\) from both sides gives \\(m\\angle 1=m\\angle 2\\) by the Subtraction Property of Equality. Therefore \\(\\angle 1\\cong\\angle 2\\) by the definition of congruent angles."`,
         ],

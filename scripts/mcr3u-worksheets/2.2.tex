@@ -9,57 +9,64 @@
 \end{center}
 
 \begin{ideabox}
-Factoring is expansion in reverse: rewrite a sum as a product.
+\textbf{Factoring is expanding in reverse}: it turns a sum of terms into a product. Factors are useful because each factor $(x-a)$ gives an $x$-intercept of the graph at $x=a$, and because they let us cancel in fractions. \textbf{Every factorisation can be checked by expanding it.}
 \begin{itemize}[leftmargin=*,itemsep=2pt]
-  \item Always remove a \textbf{common factor} first.
-  \item $x^2+bx+c$: find two numbers that multiply to $c$ and add to $b$.
-  \item $ax^2+bx+c$: decomposition (split the middle term, then group).
-  \item Patterns: $a^2-b^2=(a+b)(a-b)$ and $a^2\pm2ab+b^2=(a\pm b)^2$.
+  \item \textbf{Order of attack:} (1) GCF first; (2) count the terms --- 2: difference of squares; 3: trinomial; 4: grouping; (3) factor \textbf{completely}; (4) check by expanding.
+  \item \textbf{Simple trinomial} $x^2+bx+c$: two numbers with product $c$ and sum $b$. \textbf{Complex trinomial} $ax^2+bx+c$: product $ac$, sum $b$; split the middle term and group.
+  \item \textbf{Patterns:} $a^2-b^2=(a-b)(a+b)$ and $a^2\pm2ab+b^2=(a\pm b)^2$. A \emph{sum} of squares $a^2+b^2$ does not factor over the integers.
+  \item \textbf{Quadratic form:} $x^4-13x^2+36$ is a trinomial in $u=x^2$; factor it, then factor again.
+  \item \textbf{Graph link:} the factored form shows the $x$-intercepts at a glance: $y=(x-5)(x+3)$ crosses at $5$ and $-3$.
 \end{itemize}
 \end{ideabox}
 
 \begin{learnbox}
-\lh{A toolbox of methods}Factoring reverses expansion. Try in order: a \textbf{common factor}, a \textbf{difference of squares}, a \textbf{trinomial} pattern, or \textbf{grouping} for four terms.
-\lh{Trinomials}For $ax^2+bx+c$, find factors of $a\cdot c$ that add to $b$, split the middle term, and group.
-\lh{Factor fully}Keep going until nothing more factors, and verify by expanding your result.
+\lh{Factoring undoes expanding}Factoring writes a sum as a product. Always \textbf{check by expanding}. Start with the \textbf{GCF}, then count terms: 2 terms $\to$ difference of squares; 3 terms $\to$ trinomial; 4 terms $\to$ grouping. Keep going until no factor can be factored again.
+\lh{Trinomials}$x^2+bx+c$: find two numbers with product $c$ and sum $b$. $ax^2+bx+c$: find two numbers with product $ac$ and sum $b$, split the middle term, and group. If no pair works, the trinomial is prime.
+\lh{Why factors matter}Each factor $(x-a)$ means the graph crosses the $x$-axis at $a$. Factors also let you cancel in rational expressions (2.3) and solve equations (the zero-product property).
 \end{learnbox}
 
 \sech{Worked Examples}
 
-\begin{example}{ex0}{Example 1 --- Common factor}
-Factor $6x+9$.\soln The GCF is $3$: $3(2x+3)$.
+\begin{example}{ex0}{Example 1 --- Greatest common factor (two variables)}
+Factor $18x^3y-24x^2y^2+6xy$.\soln Numbers: $\gcd(18,24,6)=6$; variables: $xy$ is in every term. GCF $=6xy$. \\ Divide each term: $3x^2,\ -4xy,\ 1$. \\ $=6xy(3x^2-4xy+1)$ --- note the last term leaves a \emph{1}, not nothing.
 \end{example}
 
-\begin{example}{ex1}{Example 2 --- Common factor with a variable}
-Factor $4x^2-8x$.\soln The GCF is $4x$: $4x(x-2)$.
+\begin{example}{ex1}{Example 2 --- Common binomial factor}
+Factor $5x(2x+1)-3(2x+1)$.\soln The bracket $(2x+1)$ appears in both terms: take it out. \\ $=(2x + 1)(5x - 3)$ \quad (expanded: $10x^2 - x - 3$).
 \end{example}
 
-\begin{example}{ex2}{Example 3 --- Simple trinomial}
-Factor $x^2+8x+15$.\soln Two numbers with product $15$, sum $8$: $3$ and $5$. \\ $(x+3)(x+5)$ — the factors are the x-intercepts $-3,-5$:\eplot{-7}{1}{-3}{8}{\addplot[exblue,very thick,domain=-6.2:0.2]{x^2+8*x+15};\addplot[red,only marks,mark=*,mark size=1.6pt] coordinates {(-3,0) (-5,0)};}
+\begin{example}{ex2}{Example 3 --- Grouping}
+Factor $6x^3+9x^2-10x-15$.\soln Pair the terms: $(6x^3+9x^2)+(-10x-15)=3x^2(2x+3)-5(2x+3)$. \\ The brackets match, so take out $(2x+3)$: $(2x + 3)(3x^2 - 5)$. \\ Note the $-5$: taking out $-5$ from $-10x-15$ keeps the brackets equal.
 \end{example}
 
-\begin{example}{ex3}{Example 4 --- Negative constant}
-Factor $x^2-5x-14$.\soln Product $-14$, sum $-5$: $-7$ and $2$. \\ $(x-7)(x+2)$.
+\begin{example}{ex3}{Example 4 --- Simple trinomial}
+Factor $x^2-2x-48$.\soln Product $-48$, sum $-2$. Opposite signs; the larger number is negative: $-8$ and $6$. \\ $=(x - 8)(x + 6)$. Check: $x^2+6x-8x-48$ \checkmark.
 \end{example}
 
-\begin{example}{ex4}{Example 5 --- Negative middle}
-Factor $x^2-9x+20$.\soln Product $20$, sum $-9$: $-4$ and $-5$. \\ $(x-4)(x-5)$.
+\begin{example}{ex4}{Example 5 --- Complex trinomial by decomposition}
+Factor $10x^2-x-21$.\soln $ac=-210$; we need product $-210$ and sum $-1$: $14$ and $-15$. \\ $10x^2+14x-15x-21=2x(5x+7)-3(5x+7)$. \\ $=(5x + 7)(2x - 3)$.
 \end{example}
 
-\begin{example}{ex5}{Example 6 --- Complex trinomial}
-Factor $2x^2+7x+3$.\soln $ac=6$; split $7x=6x+x$: $2x^2+6x+x+3$. \\ Group: $2x(x+3)+1(x+3)=(x+3)(2x+1)$.
+\begin{example}{ex5}{Example 6 --- Difference of squares and perfect squares}
+Factor (a) $64x^2-49$ \quad (b) $16x^2+40x+25$.\soln (a) $(8x)^2-7^2=(8x - 7)(8x + 7)$. \\ (b) $(4x)^2$, $5^2$ and $2(4x)(5)=40x$ \checkmark, so $=(4x + 5)^2$.
 \end{example}
 
-\begin{example}{ex6}{Example 7 --- Complex trinomial}
-Factor $3x^2-10x-8$.\soln $ac=-24$; split $-12x+2x$: $3x^2-12x+2x-8$. \\ Group: $3x(x-4)+2(x-4)=(3x+2)(x-4)$.
+\begin{example}{ex6}{Example 7 --- Factor completely}
+Factor (a) $5x^3-45x$ \quad (b) $-3x^2+3x+36$.\soln (a) $5x(x^2-9)=5x(x - 3)(x + 3)$. \\ (b) Take out $-3$: $-3(x^2-x-12)$; product $-12$, sum $-1$: $-4,3$. $=-3(x - 4)(x + 3)$.
 \end{example}
 
-\begin{example}{ex7}{Example 8 --- Difference of squares}
-Factor $25x^2-16$.\soln $(5x)^2-(4)^2=(5x-4)(5x+4)$.
+\begin{example}{ex7}{Example 8 --- Quadratic form}
+Factor $x^4-5x^2+4$.\soln Let $u=x^2$: $u^2-5u+4=(u-1)(u-4)$. \\ Back-substitute: $(x^2-1)(x^2-4)=(x - 1)(x + 1)(x - 2)(x + 2)$.
 \end{example}
 
-\begin{example}{ex8}{Example 9 --- Factor fully}
-Factor $2x^2-50$.\soln Common factor 2: $2(x^2-25)$. \\ Difference of squares: $2(x-5)(x+5)$.
+\begin{example}{ex8}{Example 9 --- Application: when does the ball land?}
+A ball's height is $h=-5t^2+15t+20$ (metres, $t$ in seconds). When does it hit the ground?\soln Factor: $h=-5(t - 4)(t + 1)$. \\ $h=0$ when $t-4=0$ or $t+1=0$: $t=4$ or $t=-1$. Time cannot be negative, so the ball lands at $t=4$ s. \\ The zeros $-1$ and $4$ are symmetric about $t=1.5$, so the maximum is at $t=1.5$ s.
+\end{example}
+
+\begin{example}{ex0}{Example 10 --- Reading a graph from the factored form}
+Factor $y=x^2-2x-15$ and describe its graph.\soln $y=(x - 5)(x + 3)$: $x$-intercepts $5$ and $-3$; $y$-intercept $-15$; opens up. The vertex lies halfway between the intercepts, at $x=1$, where $y=-16$.\begin{center}\begin{tikzpicture}\begin{axis}[width=8.2cm,height=5.2cm,axis lines=middle,xlabel={\scriptsize$x$},ylabel={\scriptsize$y$},grid=both,grid style={gray!16},xmin=-5,xmax=7,ymin=-18,ymax=10,xtick distance=1,ytick distance=4,tick label style={font=\tiny},axis line style={-}]
+\addplot[exblue,very thick,domain=-5:7,samples=120,restrict y to domain=-19:11]{x^2-2*x-15};\addplot[only marks,mark=*,mark size=2pt,green!45!black]coordinates{(5,0)(-3,0)(0,-15)(1,-16)};\node[font=\tiny,anchor=south west,green!30!black] at (axis cs:5,0){$(5,0)$};\node[font=\tiny,anchor=south west,green!30!black] at (axis cs:-3,0){$(-3,0)$};\node[font=\tiny,anchor=south west,green!30!black] at (axis cs:0,-15){$(0,-15)$};\node[font=\tiny,anchor=south west,green!30!black] at (axis cs:1,-16){$(1,-16)$};
+\end{axis}\end{tikzpicture}\\[-2pt]{\scriptsize The factors give the intercepts; symmetry gives the vertex.}\end{center}
 \end{example}
 
 \clearpage
@@ -67,55 +74,60 @@ Factor $2x^2-50$.\soln Common factor 2: $2(x^2-25)$. \\ Difference of squares: $
 For each question, show all steps clearly in the space provided.
 
 \begin{qbox}{Question 1}
-Factor $10x-15$.\workspace{2.4cm}
+Factor $14x^2-21x$.\workspace{1.6cm}
 \end{qbox}
 
 \begin{qbox}{Question 2}
-Factor $6x^2+9x$.\workspace{2.4cm}
+Factor $12a^2b^3-18ab^2+6ab$.\workspace{2.2cm}
 \end{qbox}
 
 \begin{qbox}{Question 3}
-Factor $x^2+6x+8$.\workspace{2.4cm}
+Factor completely $x^3+5x^2-4x-20$ (use grouping, then look again).\workspace{3cm}
 \end{qbox}
 
 \begin{qbox}{Question 4}
-Factor $x^2+2x-15$.\workspace{2.4cm}
+Factor (a) $x^2+11x+28$ \quad (b) $x^2-3x-40$. Say why the signs in (b) are opposite.\workspace{2.8cm}
 \end{qbox}
 
 \begin{qbox}{Question 5}
-Factor $x^2-7x+10$.\workspace{2.4cm}
+Factor $6x^2-17x+12$ by decomposition. Show the split of the middle term.\workspace{3.4cm}
 \end{qbox}
 
 \begin{qbox}{Question 6}
-Factor $x^2-x-20$.\workspace{2.4cm}
+Factor $12x^2+5x-2$ and check by expanding.\workspace{3.4cm}
 \end{qbox}
 
 \begin{qbox}{Question 7}
-Factor $2x^2+5x+2$.\workspace{2.4cm}
+Factor (a) $81x^2-16$ \quad (b) $25x^2+30x+9$.\workspace{2.6cm}
 \end{qbox}
 
 \begin{qbox}{Question 8}
-Factor $3x^2+8x+4$.\workspace{2.4cm}
+Factor completely (a) $2x^3-18x$ \quad (b) $x^4-17x^2+16$.\workspace{3.4cm}
 \end{qbox}
 
 \begin{qbox}{Question 9}
-Factor $x^2-49$.\workspace{2.4cm}
+Factor $(x-2)^2-36$ and simplify. Then check by expanding the original.\workspace{3cm}
 \end{qbox}
 
 \begin{qbox}{Question 10}
-Factor $9x^2-1$.\workspace{2.4cm}
+A ball's height is $h=-5t^2+10t+15$. Factor, find when it lands, and find its maximum height. (The maximum is halfway between the zeros.)\workspace{4cm}
 \end{qbox}
 
 \begin{qbox}{Question 11}
-Factor $x^2-12x+36$.\workspace{2.4cm}
+A rectangle has area $x^2+14x+48$ and width $x+6$. Find its length, then its perimeter when $x=3$.\workspace{3.4cm}
 \end{qbox}
 
 \begin{qbox}{Question 12}
-Factor fully $5x^2-20$.\workspace{3cm}
+A student claims that $x^2+16=(x+4)(x-4)$. Test the claim with $x=1$, then explain why $x^2+16$ cannot be written as $(x+a)(x+b)$ for integers $a,b$.\workspace{3.6cm}
 \end{qbox}
 
-\begin{qbox}{Question 13 --- Challenge}
-Factor $6x^2-x-2$.\workspace{3cm}
+\begin{qbox}{Question 13}
+Sketch $y=(x+2)(x-1)(x-4)$ by finding its $x$-intercepts and $y$-intercept. Does the graph go up or down on the far right? On the far left?
+\begin{center}\begin{tikzpicture}\begin{axis}[width=8cm,height=6cm,axis lines=middle,grid=both,grid style={gray!16},xmin=-6,xmax=6,ymin=-6,ymax=6,xtick distance=2,ytick distance=2,tick label style={font=\tiny}]\end{axis}\end{tikzpicture}\end{center}
+\end{qbox}
+
+\begin{qbox}{Question 14 --- Challenge}
+Show that $x^4+x^2+1=(x^2+x+1)(x^2-x+1)$. (Hint: write $x^4+x^2+1=(x^2+1)^2-x^2$.)\workspace{3.6cm}
 \end{qbox}
 
 \clearpage
@@ -125,19 +137,20 @@ Factor $6x^2-x-2$.\workspace{3cm}
 \begin{multicols}{2}
 \small
 \begin{enumerate}[leftmargin=*,itemsep=3pt]
-  \item Factor $10x-15$.
-  \item Factor $6x^2+9x$.
-  \item Factor $x^2+6x+8$.
-  \item Factor $x^2+2x-15$.
-  \item Factor $x^2-7x+10$.
-  \item Factor $x^2-x-20$.
-  \item Factor $2x^2+5x+2$.
-  \item Factor $3x^2+8x+4$.
-  \item Factor $x^2-49$.
-  \item Factor $9x^2-1$.
-  \item Factor $x^2-12x+36$.
-  \item Factor fully $5x^2-20$.
-  \item Factor $6x^2-x-2$.
+  \item Factor $14x^2-21x$.
+  \item Factor $12a^2b^3-18ab^2+6ab$.
+  \item Factor completely $x^3+5x^2-4x-20$ (use grouping, then look again).
+  \item Factor (a) $x^2+11x+28$ \quad (b) $x^2-3x-40$. Say why the signs in (b) are opposite.
+  \item Factor $6x^2-17x+12$ by decomposition. Show the split of the middle term.
+  \item Factor $12x^2+5x-2$ and check by expanding.
+  \item Factor (a) $81x^2-16$ \quad (b) $25x^2+30x+9$.
+  \item Factor completely (a) $2x^3-18x$ \quad (b) $x^4-17x^2+16$.
+  \item Factor $(x-2)^2-36$ and simplify. Then check by expanding the original.
+  \item A ball's height is $h=-5t^2+10t+15$. Factor, find when it lands, and find its maximum height. (The maximum is halfway between the zeros.)
+  \item A rectangle has area $x^2+14x+48$ and width $x+6$. Find its length, then its perimeter when $x=3$.
+  \item A student claims that $x^2+16=(x+4)(x-4)$. Test the claim with $x=1$, then explain why $x^2+16$ cannot be written as $(x+a)(x+b)$ for integers $a,b$.
+  \item Sketch $y=(x+2)(x-1)(x-4)$ by finding its $x$-intercepts and $y$-intercept. Does the graph go up or down on the far right? On the far left?
+  \item Show that $x^4+x^2+1=(x^2+x+1)(x^2-x+1)$. (Hint: write $x^4+x^2+1=(x^2+1)^2-x^2$.)
 \end{enumerate}
 \end{multicols}
 \end{recapbox}
@@ -146,19 +159,20 @@ Factor $6x^2-x-2$.\workspace{3cm}
 \begin{multicols}{2}
 \small
 \begin{enumerate}[leftmargin=*,itemsep=3pt]
-  \item $5(2x-3)$
-  \item $3x(2x+3)$
-  \item $(x+2)(x+4)$
-  \item $(x+5)(x-3)$
-  \item $(x-2)(x-5)$
-  \item $(x-5)(x+4)$
-  \item $(2x+1)(x+2)$
-  \item $(3x+2)(x+2)$
-  \item $(x-7)(x+7)$
-  \item $(3x-1)(3x+1)$
-  \item $(x-6)^2$
-  \item $5(x-2)(x+2)$
-  \item $(3x-2)(2x+1)$
+  \item $7x(2x - 3)$.
+  \item $6ab(2ab^2-3b+1)$. Check: $6ab\cdot2ab^2=12a^2b^3$ \checkmark.
+  \item $x^2(x+5)-4(x+5)=(x+5)(x^2-4)=(x + 5)(x - 2)(x + 2)$.
+  \item (a) $(x + 4)(x + 7)$ \quad (b) $(x - 8)(x + 5)$. In (b) the product $-40$ is negative, so one number is positive and one negative; their sum is $-3$, so the larger in size ($-8$) is negative.
+  \item $ac=72$, sum $-17$: $-8$ and $-9$. $6x^2-8x-9x+12=2x(3x-4)-3(3x-4)=(2x - 3)(3x - 4)$.
+  \item $ac=-24$, sum $5$: $8$ and $-3$. $12x^2+8x-3x-2=4x(3x+2)-1(3x+2)=(4x - 1)(3x + 2)$.
+  \item (a) $(9x - 4)(9x + 4)$ \quad (b) $(5x + 3)^2$.
+  \item (a) $2x(x - 3)(x + 3)$ \quad (b) $(x - 1)(x + 1)(x - 4)(x + 4)$.
+  \item $(x-2-6)(x-2+6)=(x - 8)(x + 4)$. Expanding: $x^2-4x+4-36=x^2-4x-32$ \checkmark.
+  \item $h=-5(t - 3)(t + 1)$. Lands at $t=3$ s (the other zero $-1$ is rejected). Zeros $-1$ and $3$, so the maximum is at $t=1$: $h(1)=-5+10+15=20$ m.
+  \item $x^2+14x+48=(x+6)(x+8)$: the length is $x+8$. For $x=3$: $9$ by $11$, perimeter $2(9+11)=40$.
+  \item At $x=1$: $1+16=17$ but $(1+4)(1-4)=-15$, so the claim is false. For $(x+a)(x+b)=x^2+(a+b)x+ab$ we would need $a+b=0$ and $ab=16$; but $a+b=0$ means $b=-a$, so $ab=-a^2\le0$, never $16$.
+  \item Intercepts: $x=-2,\ 1,\ 4$; $y$-intercept: $(2)(-1)(-4)=8$. The leading term is $x^3$, so the right end goes \emph{up} and the left end goes \emph{down}.
+  \item $(x^2+1)^2-x^2=x^4+2x^2+1-x^2=x^4+x^2+1$, and it is a difference of squares: $(x^2+1-x)(x^2+1+x)=(x^2 + x + 1)(x^2 - x + 1)$.
 \end{enumerate}
 \end{multicols}
 \end{keybox}

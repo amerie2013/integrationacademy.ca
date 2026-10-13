@@ -16,9 +16,10 @@ export type Accent = {
 export const ACCENTS = {
   default: { primary: "#1b7a44", dark: "#0d5c30", soft: "#e7f6ec", softBorder: "#bfe3cd", badge: "#0d9488", badgeBg: "#ecfdf5" },
   orange: { primary: "#ea580c", dark: "#9a3412", soft: "#fff7ed", softBorder: "#fed7aa", badge: "#ea580c", badgeBg: "#fff7ed" },
+  indigo: { primary: "#27357e", dark: "#161e54", soft: "#eef0fb", softBorder: "#c9cff0", badge: "#27357e", badgeBg: "#eef0fb" },
 } as const satisfies Record<string, Accent>;
 
-export const CODE_ACCENT: Record<string, keyof typeof ACCENTS> = { ALG1: "orange", GEO1: "orange", FTCEMATH612: "orange" };
+export const CODE_ACCENT: Record<string, keyof typeof ACCENTS> = { ALG1: "orange", GEO1: "orange", FTCEMATH612: "orange", APCALCAB: "indigo" };
 
 export function accentFor(code?: string | null): Accent {
   return ACCENTS[CODE_ACCENT[code ?? ""] ?? "default"];

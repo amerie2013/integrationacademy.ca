@@ -1,0 +1,77 @@
+\documentclass[11pt]{article}
+\input{_preamble}
+\fancyhead[R]{\footnotesize\color{black!60}Worksheet 8.6}
+\begin{document}
+
+\wstitle{8.6}{Regions with More Than One Piece}{Unit 8: Applications of Integration}
+
+\begin{ideabox}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+  \item If the graphs cross inside the interval, the top graph changes. Split the integral at each crossing.
+  \item In one formula: area $=\displaystyle\int_{a}^{b}|f(x)-g(x)|\,dx$. On a calculator, enter the absolute value directly.
+  \item $\displaystyle\int_{a}^{b}\big(f(x)-g(x)\big)\,dx$ without the absolute value gives a \textbf{net} amount, in which pieces cancel.
+  \item A region with a corner in its boundary also needs two integrals, one for each boundary curve.
+\end{itemize}
+\end{ideabox}
+
+\sech{Worked examples}
+\begin{example}{Example 1 \textperiodcentered{} A cubic and a line}
+Find the total area enclosed by $y=x^3$ and $y=4x$.\soln They meet at $x=-2,0,2$. By symmetry, $2\displaystyle\int_{0}^{2}(4x-x^3)\,dx$.\result{$2(8-4)=8$.}
+\end{example}
+
+\begin{example}{Example 2 \textperiodcentered{} Net against total}
+Compare $\displaystyle\int_{0}^{\pi}\cos x\,dx$ with the area between $y=\cos x$ and the $x$-axis for $0\le x\le\pi$.\soln The integral is 0. The area is $\int_{0}^{\pi/2}\cos x\,dx+\left|\int_{\pi/2}^{\pi}\cos x\,dx\right|$.\result{The integral is 0; the area is 2.}
+\end{example}
+
+\begin{example}{Example 3 \textperiodcentered{} Splitting at a zero}
+Find the area between $y=x^2-4$ and the $x$-axis for $0\le x\le3$.\soln $\displaystyle\int_{0}^{2}(4-x^2)\,dx=\dfrac{16}{3}$ and $\displaystyle\int_{2}^{3}(x^2-4)\,dx=\dfrac73$.\result{$\dfrac{23}{3}$.}
+\end{example}
+
+\newpage
+\sech{Practice}
+
+\level{Core}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item Find the area between $y=x-1$ and the $x$-axis for $0\le x\le4$.\work{2.3cm}
+  \item At what value of $x$ in $(0,3)$ do the graphs of $y=x^2$ and $y=2x$ cross?\work{2.3cm}
+  \item Find the area between $y=x^2$ and $y=2x$ for $0\le x\le3$.\work{2.3cm}
+  \item Evaluate $\displaystyle\int_{0}^{3}(x^2-2x)\,dx$, and explain the result using Question 3.\work{2.3cm}
+\end{enumerate}
+
+\level{Exam level}
+\begin{enumerate}[leftmargin=*,itemsep=2pt,start=5]
+  \item Find the total area between $y=x^3-x$ and the $x$-axis for $-1\le x\le1$.\work{2.8cm}
+  \item Find the area between $y=\sin x$ and $y=\dfrac12$ for $0\le x\le\dfrac\pi2$.\work{2.8cm}
+  \item Find the area of the region in the first quadrant bounded by $y=x^2$, $y=2-x$ and the $x$-axis.\work{2.8cm}
+  \item \emph{Calculator.} Find the area between $y=\cos x$ and $y=\dfrac x2$ for $0\le x\le3$.\work{2.8cm}
+\end{enumerate}
+
+\begin{frbox}{Question 9 \textperiodcentered{} Free-response practice}
+Let $f(x)=x^3-5x^2+4x$.
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=2pt]
+  \item Evaluate $\displaystyle\int_{0}^{4}f(x)\,dx$.\work{2.6cm}
+  \item Find the total area between the graph of $f$ and the $x$-axis for $0\le x\le4$.\work{2.6cm}
+  \item Explain why the answers to parts (a) and (b) differ, and write a single integral that gives the area in part (b).\work{2.6cm}
+\end{enumerate}
+\end{frbox}
+
+\newpage
+\begin{solbox}
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item $\dfrac12+\dfrac92=5$.
+  \item $x=2$.
+  \item $\displaystyle\int_{0}^{2}(2x-x^2)\,dx+\displaystyle\int_{2}^{3}(x^2-2x)\,dx=\dfrac43+\dfrac43=\dfrac83$.
+  \item $0$: the two pieces have equal area, and they cancel.
+  \item $2\left(\dfrac14\right)=\dfrac12$.
+  \item They cross at $x=\dfrac\pi6$: $\left(\dfrac{\pi}{12}-1+\dfrac{\sqrt3}{2}\right)+\left(\dfrac{\sqrt3}{2}-\dfrac\pi6\right)=\sqrt3-1-\dfrac{\pi}{12}$.
+  \item The curves meet at $x=1$: $\displaystyle\int_{0}^{1}x^2\,dx+\displaystyle\int_{1}^{2}(2-x)\,dx=\dfrac13+\dfrac12=\dfrac56$.
+  \item $\displaystyle\int_{0}^{3}\left|\cos x-\tfrac x2\right|\,dx\approx3.293$ (the graphs cross at $x\approx1.030$).
+  \item \begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=3pt]
+    \item $\Big[\tfrac{x^4}{4}-\tfrac{5x^3}{3}+2x^2\Big]_0^4=-\dfrac{32}{3}$.
+    \item $f(x)=x(x-1)(x-4)$: $\displaystyle\int_{0}^{1}f(x)\,dx=\dfrac{7}{12}$ and $\displaystyle\int_{1}^{4}f(x)\,dx=-\dfrac{45}{4}$. Area $=\dfrac{7}{12}+\dfrac{45}{4}=\dfrac{71}{6}$.
+    \item Part (a) counts the piece below the axis as negative, so the pieces partly cancel. Area $=\displaystyle\int_{0}^{4}|f(x)|\,dx$.
+  \end{enumerate}
+\end{enumerate}
+\end{solbox}
+
+\end{document}

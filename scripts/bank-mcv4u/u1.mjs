@@ -2,6 +2,10 @@
 import { mc, ms, tf, num, fill, order, match } from "../bank-mpm2d/helpers.mjs";
 
 // ── 1.1 Average & Instantaneous Rate of Change ───────────────
+// No limit notation here on purpose — limits haven't been taught yet at this
+// point in the course. Instantaneous rate is estimated with a tiny h (e.g.
+// h=0.001) plugged into the difference quotient; the exact limit comes next
+// lesson (1.2).
 function g11() {
   const q = [];
   q.push(mc("easy", "The average rate of change over $[a,b]$ is:", ["$\\dfrac{f(b)-f(a)}{b-a}$", "$f(b)-f(a)$", "$f'(a)$", "$\\dfrac{b-a}{f(b)-f(a)}$"], 0));
@@ -9,14 +13,14 @@ function g11() {
   q.push(mc("easy", "The instantaneous rate of change is the slope of the:", ["tangent", "secant", "x-axis", "midline"], 0));
   q.push(mc("easy", "Average rate of change of $f(x)=x^2$ on $[1,3]$:", ["4", "8", "2", "9"], 0));
   q.push(mc("easy", "The difference quotient is:", ["$\\dfrac{f(x+h)-f(x)}{h}$", "$f(x+h)-f(x)$", "$\\dfrac{f(x)}{h}$", "$f(x)\\cdot h$"], 0));
-  q.push(mc("easy", "To get the instantaneous rate you let:", ["$h\\to0$", "$h\\to\\infty$", "$x\\to0$", "$h=1$"], 0));
-  q.push(ms("easy", "Rates of change:", ["average = secant slope", "instantaneous = tangent slope", "difference quotient → tangent", "average = tangent slope"], [0, 1, 2]));
-  q.push(ms("easy", "The difference quotient:", ["$\\dfrac{f(x+h)-f(x)}{h}$", "is a secant slope", "→ derivative as $h\\to0$", "needs $h=0$ directly"], [0, 1, 2]));
+  q.push(mc("easy", "To get a better estimate of the instantaneous rate, you should make $h$:", ["smaller", "larger", "negative", "equal to $x$"], 0));
+  q.push(ms("easy", "Rates of change:", ["average = secant slope", "instantaneous = tangent slope", "a smaller $h$ gives a better estimate of the tangent slope", "average = tangent slope"], [0, 1, 2]));
+  q.push(ms("easy", "The difference quotient:", ["$\\dfrac{f(x+h)-f(x)}{h}$", "is a secant slope", "gets closer to the tangent slope as $h$ shrinks", "needs $h=0$ directly"], [0, 1, 2]));
   q.push(ms("easy", "Average rate over $[a,b]$:", ["$\\dfrac{f(b)-f(a)}{b-a}$", "change in $y$ over change in $x$", "a secant slope", "the tangent slope"], [0, 1, 2]));
-  q.push(ms("easy", "Instantaneous rate:", ["a tangent slope", "a limit of secant slopes", "at a single point", "an interval average"], [0, 1, 2]));
+  q.push(ms("easy", "Instantaneous rate:", ["a tangent slope", "estimated using a very small $h$", "at a single point", "an interval average"], [0, 1, 2]));
   q.push(tf("easy", "The average rate of change is a secant slope.", true));
   q.push(tf("easy", "The instantaneous rate of change is a secant slope.", false));
-  q.push(tf("easy", "Letting $h\\to0$ turns the secant slope into the tangent slope.", true));
+  q.push(tf("easy", "Using a smaller $h$ gives a better estimate of the tangent slope.", true));
   q.push(fill("easy", "Average rate of change of $f(x)=x^2$ on $[1,3]$.", ["4"]));
   q.push(fill("easy", "Average rate of change of $f(x)=x^2$ on $[2,4]$.", ["6"]));
   q.push(fill("easy", "The tangent slope is the ___ rate of change.", ["instantaneous"]));
@@ -25,45 +29,45 @@ function g11() {
   q.push(num("easy", "Average rate of change of $f(x)=3x+1$ on $[2,5]$.", 3, 0));
   q.push(match("easy", "Match each to its average rate.", ["$x^2$ on $[1,3]$", "$x^2$ on $[2,4]$", "$3x+1$ on $[2,5]$"], ["$4$", "$6$", "$3$"], [0, 1, 2]));
   q.push(mc("medium", "Simplify the difference quotient of $f(x)=x^2$:", ["$2x+h$", "$2x$", "$x+h$", "$2xh$"], 0));
-  q.push(mc("medium", "Instantaneous rate of $f(x)=x^2$ at $x=2$:", ["4", "5", "2", "8"], 0));
-  q.push(mc("medium", "Instantaneous rate of $f(x)=3x^2$ at $x=2$:", ["12", "6", "9", "18"], 0));
-  q.push(mc("medium", "For $s(t)=t^2$, the instantaneous velocity at $t=4$:", ["8", "16", "4", "2"], 0));
+  q.push(mc("medium", "Estimating with a tiny $h$, the instantaneous rate of $f(x)=x^2$ at $x=2$ is closest to:", ["4", "5", "2", "8"], 0));
+  q.push(mc("medium", "Estimating with a tiny $h$, the instantaneous rate of $f(x)=3x^2$ at $x=2$ is closest to:", ["12", "6", "9", "18"], 0));
+  q.push(mc("medium", "For $s(t)=t^2$, estimating with a tiny $h$, the instantaneous velocity at $t=4$ is closest to:", ["8", "16", "4", "2"], 0));
   q.push(mc("medium", "Average rate of change of $f(x)=x^3$ on $[1,2]$:", ["7", "8", "1", "9"], 0));
   q.push(mc("medium", "The difference quotient of $f(x)=2x^2$ simplifies to:", ["$4x+2h$", "$2x+h$", "$4x$", "$2x+2h$"], 0));
-  q.push(ms("medium", "$\\dfrac{(x+h)^2-x^2}{h}$:", ["$=\\dfrac{2xh+h^2}{h}$", "$=2x+h$", "limit $2x$", "$=2x+h^2$"], [0, 1, 2]));
-  q.push(ms("medium", "Instantaneous rate of $x^2$ at $x=2$:", ["$\\lim_{h\\to0}(4+h)$", "$=4$", "the tangent slope", "$=5$"], [0, 1, 2]));
-  q.push(ms("medium", "Velocity from position:", ["instantaneous rate of $s$", "$v=\\lim\\frac{\\Delta s}{\\Delta t}$", "tangent to the $s$–$t$ graph", "the average over all time"], [0, 1, 2]));
-  q.push(ms("medium", "For $f(x)=x^2$ the slope function is:", ["$2x$", "the derivative", "the slider's limit", "$x^2$"], [0, 1, 2]));
+  q.push(ms("medium", "$\\dfrac{(x+h)^2-x^2}{h}$:", ["$=\\dfrac{2xh+h^2}{h}$", "$=2x+h$", "gets closer to $2x$ as $h$ shrinks", "$=2x+h^2$"], [0, 1, 2]));
+  q.push(ms("medium", "Estimating the instantaneous rate of $x^2$ at $x=2$:", ["use a tiny $h$, like $0.001$", "plug into $\\dfrac{f(2+h)-f(2)}{h}$", "the result is close to $4$", "the result is exactly $5$"], [0, 1, 2]));
+  q.push(ms("medium", "Velocity from position:", ["instantaneous rate of $s$", "approximately $\\dfrac{\\Delta s}{\\Delta t}$ for a tiny $\\Delta t$", "tangent to the $s$–$t$ graph", "the average over all time"], [0, 1, 2]));
+  q.push(ms("medium", "Estimating the instantaneous rate of $f(x)=x^2$ with smaller and smaller $h$, the results:", ["get closer together", "settle toward a single value", "are secant slopes", "jump around randomly"], [0, 1, 2]));
   q.push(tf("medium", "The difference quotient of $f(x)=x^2$ is $2x+h$.", true));
-  q.push(tf("medium", "The instantaneous rate of $x^2$ at $x=2$ is $4$.", true));
-  q.push(tf("medium", "The instantaneous rate of $3x^2$ at $x=2$ is $6$.", false));
+  q.push(tf("medium", "Estimating with a tiny $h$, the instantaneous rate of $x^2$ at $x=2$ is close to $4$.", true));
+  q.push(tf("medium", "Estimating with a tiny $h$, the instantaneous rate of $3x^2$ at $x=2$ is close to $6$.", false));
   q.push(fill("medium", "Difference quotient of $f(x)=x^2$ (simplified).", ["2x+h"]));
-  q.push(fill("medium", "Instantaneous rate of $f(x)=x^2$ at $x=5$.", ["10"]));
-  q.push(fill("medium", "Instantaneous velocity of $s(t)=t^2$ at $t=4$.", ["8"]));
-  q.push(num("medium", "Instantaneous rate of $f(x)=x^2$ at $x=5$.", 10, 0));
-  q.push(num("medium", "Instantaneous rate of $f(x)=3x^2$ at $x=2$.", 12, 0));
+  q.push(fill("medium", "Estimate of the instantaneous rate of $f(x)=x^2$ at $x=5$.", ["10"]));
+  q.push(fill("medium", "Estimate of the instantaneous velocity of $s(t)=t^2$ at $t=4$.", ["8"]));
+  q.push(num("medium", "Estimate of the instantaneous rate of $f(x)=x^2$ at $x=5$.", 10, 0.1));
+  q.push(num("medium", "Estimate of the instantaneous rate of $f(x)=3x^2$ at $x=2$.", 12, 0.1));
   q.push(num("medium", "Average rate of change of $f(x)=x^3$ on $[1,2]$.", 7, 0));
-  q.push(match("medium", "Match each to its instantaneous rate.", ["$x^2$ at $x=5$", "$3x^2$ at $x=2$", "$t^2$ at $t=4$"], ["$10$", "$12$", "$8$"], [0, 1, 2]));
-  q.push(mc("hard", "Instantaneous rate of $f(x)=x^2$ at a general $x$:", ["$2x$", "$2x+h$", "$x^2$", "$x$"], 0));
+  q.push(match("medium", "Match each to its estimated instantaneous rate.", ["$x^2$ at $x=5$", "$3x^2$ at $x=2$", "$t^2$ at $t=4$"], ["$10$", "$12$", "$8$"], [0, 1, 2]));
+  q.push(mc("hard", "Estimating with a tiny $h$, the instantaneous rate of $f(x)=x^2$ at $x=10$ is closest to:", ["20", "10", "100", "21"], 0));
   q.push(mc("hard", "A ball's height is $h(t)=20t-5t^2$; its velocity at $t=1$:", ["10", "15", "20", "0"], 0));
   q.push(mc("hard", "$h(t)=20t-5t^2$; average velocity on $[1,3]$:", ["0", "10", "5", "−10"], 0));
   q.push(mc("hard", "Simplify $\\dfrac{(x+h)^3-x^3}{h}$:", ["$3x^2+3xh+h^2$", "$3x^2$", "$x^2+h$", "$3x^2+h$"], 0));
-  q.push(mc("hard", "So the instantaneous rate of $f(x)=x^3$ is:", ["$3x^2$", "$3x$", "$x^2$", "$2x$"], 0));
-  q.push(ms("hard", "$h(t)=20t-5t^2$ at $t=1$:", ["$\\lim_{h\\to0}(10-5h)$", "$=10$ m/s", "instantaneous velocity", "$=0$"], [0, 1, 2]));
-  q.push(ms("hard", "Average vs instantaneous for the ball:", ["average on $[1,3]$ is $0$", "up then back to the same height", "instantaneous at $t=1$ is $10$", "they are equal"], [0, 1, 2]));
-  q.push(ms("hard", "$\\dfrac{(x+h)^3-x^3}{h}$:", ["expand $(x+h)^3$", "$=3x^2+3xh+h^2$", "limit $3x^2$", "$=3x^2+h$"], [0, 1, 2]));
-  q.push(ms("hard", "Generalizing $f(x)=x^2$:", ["secant slope $2x+h$", "limit gives $2x$", "valid for every $x$", "only at $x=2$"], [0, 1, 2]));
-  q.push(tf("hard", "The instantaneous rate of $x^3$ at a general $x$ is $3x^2$.", true));
+  q.push(mc("hard", "Estimating with a tiny $h$, the instantaneous rate of $f(x)=x^3$ at $x=2$ is closest to:", ["12", "8", "6", "24"], 0));
+  q.push(ms("hard", "Estimating $h(t)=20t-5t^2$ at $t=1$ with a tiny $h$:", ["use $\\dfrac{h(1+h)-h(1)}{h}$", "the result is close to $10$ m/s", "this estimates the instantaneous velocity", "the result is $0$"], [0, 1, 2]));
+  q.push(ms("hard", "Average vs instantaneous for the ball:", ["average on $[1,3]$ is $0$", "up then back to the same height", "instantaneous at $t=1$ is close to $10$", "they are equal"], [0, 1, 2]));
+  q.push(ms("hard", "$\\dfrac{(x+h)^3-x^3}{h}$:", ["expand $(x+h)^3$", "$=3x^2+3xh+h^2$", "gets closer to $3x^2$ as $h$ shrinks", "$=3x^2+h$"], [0, 1, 2]));
+  q.push(ms("hard", "Estimating for $f(x)=x^2$ at different points:", ["the secant slope is $2x+h$", "a small $h$ estimates the tangent slope", "this works at any $x$, not just one value", "it only works at $x=2$"], [0, 1, 2]));
+  q.push(tf("hard", "Estimating with a tiny $h$, the instantaneous rate of $x^3$ at $x=2$ is close to $12$.", true));
   q.push(tf("hard", "For $h(t)=20t-5t^2$, the average velocity on $[1,3]$ is $0$.", true));
   q.push(tf("hard", "The difference quotient of $x^3$ is $3x^2$ (no $h$ terms).", false));
-  q.push(fill("hard", "Instantaneous rate of $f(x)=x^2$ at a general $x$.", ["2x"]));
+  q.push(fill("hard", "Estimate of the instantaneous rate of $f(x)=x^2$ at $x=10$.", ["20"]));
   q.push(fill("hard", "Simplified difference quotient of $f(x)=x^3$.", ["3x^2+3xh+h^2"]));
   q.push(fill("hard", "Velocity of $h(t)=20t-5t^2$ at $t=1$.", ["10"]));
   q.push(num("hard", "Velocity of $h(t)=20t-5t^2$ at $t=1$.", 10, 0));
   q.push(num("hard", "Average velocity of $h(t)=20t-5t^2$ on $[1,3]$.", 0, 0));
-  q.push(num("hard", "Instantaneous rate of $f(x)=x^3$ at $x=2$ (uses $3x^2$).", 12, 0));
-  q.push(order("hard", "Order the steps to find the instantaneous rate of $f(x)=x^2$ at $x=2$.", ["Form $\\dfrac{(2+h)^2-4}{h}$", "Expand: $\\dfrac{4h+h^2}{h}$", "Cancel $h$: $4+h$", "Let $h\\to0$: $4$"]));
-  q.push(match("hard", "Match each to its instantaneous-rate function.", ["$x^2$", "$x^3$", "$3x^2$"], ["$2x$", "$3x^2$", "$6x$"], [0, 1, 2]));
+  q.push(num("hard", "Estimate of the instantaneous rate of $f(x)=x^3$ at $x=2$.", 12, 0.5));
+  q.push(order("hard", "Order the steps to estimate the instantaneous rate of $f(x)=x^2$ at $x=2$ using $h=0.001$.", ["Form $\\dfrac{(2.001)^2-2^2}{0.001}$", "Compute $(2.001)^2=4.004001$", "Subtract: $\\dfrac{0.004001}{0.001}$", "Result: $\\approx4$"]));
+  q.push(match("hard", "Match each function and point to its estimated instantaneous rate.", ["$x^2$ at $x=5$", "$x^3$ at $x=3$", "$3x^2$ at $x=2$"], ["$10$", "$27$", "$12$"], [0, 1, 2]));
   return q;
 }
 
@@ -199,8 +203,74 @@ function g13() {
   return q;
 }
 
-// ── 1.4 The Derivative from First Principles ─────────────────
+// ── 1.4 Slope of Tangent ──────────────────────────────────────
 function g14() {
+  const q = [];
+  q.push(mc("easy", "The tangent slope at $x=a$ is:", ["$\\lim_{h\\to0}\\dfrac{f(a+h)-f(a)}{h}$", "$\\dfrac{f(b)-f(a)}{b-a}$", "$f(a+h)-f(a)$", "$\\dfrac{f(a)}{h}$"], 0));
+  q.push(mc("easy", "The tangent line at $x=a$ uses point-slope form:", ["$y-f(a)=m(x-a)$", "$y=mx$", "$y=f(a)$", "$x=a$"], 0));
+  q.push(mc("easy", "The tangent slope of $f(x)=x^2$ at $x=2$ is:", ["4", "5", "2", "8"], 0));
+  q.push(mc("easy", "The first step to find a tangent slope at $x=a$ is to form:", ["$\\dfrac{f(a+h)-f(a)}{h}$", "$f'(x)$", "$f(0)$", "the tangent line"], 0));
+  q.push(mc("easy", "After simplifying $\\dfrac{f(a+h)-f(a)}{h}$, you let:", ["$h\\to0$", "$a\\to0$", "$h\\to\\infty$", "$h=1$"], 0));
+  q.push(mc("easy", "The tangent slope of $f(x)=5x-3$ at $x=4$ is:", ["5", "20", "17", "4"], 0));
+  q.push(ms("easy", "The tangent slope at a point:", ["is a limit", "is exact (not estimated)", "is the same idea as Lesson 1.1's estimate", "is always positive"], [0, 1, 2]));
+  q.push(ms("easy", "Finding a tangent line needs:", ["the slope $m$", "the point $(a,f(a))$", "point-slope form", "the value of $h$"], [0, 1, 2]));
+  q.push(ms("easy", "Tangent-slope routine:", ["form the difference quotient at $a$", "simplify to cancel $h$", "let $h\\to0$", "set $h=0$ first"], [0, 1, 2]));
+  q.push(ms("easy", "Why this lesson matters:", ["it makes Lesson 1.1's estimate exact", "it works one point at a time", "the next lesson generalizes it to every $x$", "no limit is needed"], [0, 1, 2]));
+  q.push(tf("easy", "The tangent slope at $x=a$ is the limit of the difference quotient.", true));
+  q.push(tf("easy", "You set $h=0$ at the very first step.", false));
+  q.push(tf("easy", "The tangent slope of $f(x)=x^2$ at $x=2$ is exactly $4$.", true));
+  q.push(fill("easy", "Tangent slope of $f(x)=x^2$ at $x=2$.", ["4"]));
+  q.push(fill("easy", "Tangent slope of $f(x)=5x-3$ at $x=4$ (constant slope).", ["5"]));
+  q.push(fill("easy", "The line found from a tangent slope and a point is the ___ line.", ["tangent"]));
+  q.push(num("easy", "Tangent slope of $f(x)=x^2$ at $x=3$.", 6, 0));
+  q.push(num("easy", "Tangent slope of $f(x)=x^2$ at $x=1$.", 2, 0));
+  q.push(num("easy", "Tangent slope of $f(x)=7$ (constant function) at any $x$.", 0, 0));
+  q.push(match("easy", "Match each to its tangent slope at the given point.", ["$x^2$ at $x=2$", "$x^2$ at $x=3$", "$5x-3$ at $x=4$"], ["$4$", "$6$", "$5$"], [0, 1, 2]));
+  q.push(mc("medium", "The tangent slope of $f(x)=3x^2-x$ at $x=1$:", ["5", "6", "2", "3"], 0));
+  q.push(mc("medium", "The tangent slope of $f(x)=x^2+5x$ at $x=2$:", ["9", "10", "7", "4"], 0));
+  q.push(mc("medium", "The tangent slope of $f(x)=2x^2$ at $x=1$:", ["4", "2", "8", "1"], 0));
+  q.push(mc("medium", "The tangent line to $y=x^2$ at $x=3$:", ["$y=6x-9$", "$y=6x+9$", "$y=3x-9$", "$y=2x-9$"], 0));
+  q.push(mc("medium", "The tangent line to $y=x^2$ at $x=1$:", ["$y=2x-1$", "$y=2x+1$", "$y=x-1$", "$y=2x$"], 0));
+  q.push(mc("medium", "The tangent slope of $f(x)=4x^2-x$ at $x=-1$:", ["−9", "−8", "−1", "9"], 0));
+  q.push(ms("medium", "Finding the tangent slope of $3x^2-x$ at $x=1$:", ["numerator $5h+3h^2$", "divide by $h$: $5+3h$", "$h\\to0$: $5$", "$=3-1$"], [0, 1, 2]));
+  q.push(ms("medium", "Tangent line at $x=3$ for $y=x^2$:", ["slope $6$", "point $(3,9)$", "$y=6x-9$", "$y=6x$"], [0, 1, 2]));
+  q.push(ms("medium", "Finding the tangent slope of $x^2+5x$ at $x=2$:", ["expand $(2+h)^2+5(2+h)$", "quotient $9+h$", "$h\\to0$: $9$", "$=2+5$"], [0, 1, 2]));
+  q.push(ms("medium", "Linear functions:", ["have constant slope everywhere", "have the same tangent slope at every $x$", "have a tangent line equal to the function itself", "have a slope that changes with $x$"], [0, 1, 2]));
+  q.push(tf("medium", "The tangent slope of $3x^2-x$ at $x=1$ is $5$.", true));
+  q.push(tf("medium", "The tangent line to $y=x^2$ at $x=3$ is $y=6x-9$.", true));
+  q.push(tf("medium", "The tangent slope of $2x^2$ at $x=1$ is $2$.", false));
+  q.push(fill("medium", "Tangent slope of $f(x)=3x^2-x$ at $x=1$.", ["5"]));
+  q.push(fill("medium", "Tangent line to $y=x^2$ at $x=3$.", ["y=6x-9"]));
+  q.push(fill("medium", "Tangent slope of $f(x)=2x^2$ at $x=1$.", ["4"]));
+  q.push(num("medium", "Tangent slope of $f(x)=3x^2-x$ at $x=2$.", 11, 0));
+  q.push(num("medium", "Tangent slope of $f(x)=x^2+5x$ at $x=0$.", 5, 0));
+  q.push(num("medium", "Tangent slope of $f(x)=4x^2-x$ at $x=1$.", 7, 0));
+  q.push(match("medium", "Match each to its tangent slope at the given point.", ["$3x^2-x$ at $x=1$", "$x^2+5x$ at $x=2$", "$2x^2$ at $x=1$"], ["$5$", "$9$", "$4$"], [0, 1, 2]));
+  q.push(mc("hard", "The tangent slope of $f(x)=\\dfrac1x$ at $x=2$:", ["$-\\dfrac14$", "$\\dfrac14$", "$-\\dfrac12$", "$-2$"], 0));
+  q.push(mc("hard", "The tangent slope of $f(x)=\\sqrt{x}$ at $x=4$:", ["$\\dfrac14$", "$\\dfrac12$", "4", "2"], 0));
+  q.push(mc("hard", "$\\dfrac{\\frac1{2+h}-\\frac12}{h}$ simplifies to:", ["$\\dfrac{-1}{2(2+h)}$", "$\\dfrac{1}{2(2+h)}$", "$-\\dfrac14$", "$-\\dfrac{h}{2}$"], 0));
+  q.push(mc("hard", "To find the tangent slope of $\\sqrt{x}$ you:", ["rationalize the numerator", "factor", "expand a square", "substitute $h=0$ first"], 0));
+  q.push(mc("hard", "The tangent slope of $f(x)=\\dfrac1x$ at $x=1$:", ["−1", "1", "−2", "$-\\tfrac12$"], 0));
+  q.push(ms("hard", "Finding the tangent slope of $\\dfrac1x$ at $x=2$:", ["combine fractions", "get $\\dfrac{-h}{2(2+h)h}$", "cancel $h$ → $\\dfrac{-1}{2(2+h)}$", "limit $-\\dfrac14$"], [0, 1, 2, 3]));
+  q.push(ms("hard", "Finding the tangent slope of $\\sqrt{x}$ at $x=4$:", ["multiply by conjugate", "numerator becomes $h$", "cancel $h$", "limit $\\dfrac14$"], [0, 1, 2, 3]));
+  q.push(ms("hard", "Tangent line to $y=\\dfrac1x$ at $x=1$:", ["slope $-1$", "point $(1,1)$", "$y=-x+2$", "slope $1$"], [0, 1, 2]));
+  q.push(ms("hard", "Why these need a trick:", ["$\\tfrac00$ after direct substitution", "must cancel the $h$", "fractions/roots block direct substitution", "no trick needed"], [0, 1, 2]));
+  q.push(tf("hard", "The tangent slope of $\\dfrac1x$ at $x=2$ is $-\\dfrac14$.", true));
+  q.push(tf("hard", "The tangent slope of $\\sqrt{x}$ at $x=4$ is $\\dfrac14$.", true));
+  q.push(tf("hard", "The tangent slope of $\\dfrac1x$ at $x=1$ is $1$.", false));
+  q.push(fill("hard", "Tangent slope of $f(x)=\\dfrac1x$ at $x=2$.", ["-1/4"]));
+  q.push(fill("hard", "Tangent slope of $f(x)=\\sqrt{x}$ at $x=4$.", ["1/4"]));
+  q.push(fill("hard", "Tangent slope of $f(x)=\\dfrac1x$ at $x=1$.", ["-1"]));
+  q.push(num("hard", "Tangent slope of $f(x)=\\dfrac1x$ at $x=1$.", -1, 0));
+  q.push(num("hard", "Tangent slope of $f(x)=\\sqrt{x}$ at $x=4$ (decimal).", 0.25, 0.01));
+  q.push(num("hard", "Tangent slope of $f(x)=\\dfrac1x$ at $x=2$ (decimal).", -0.25, 0.01));
+  q.push(order("hard", "Order the steps to find the tangent slope of $f(x)=\\dfrac1x$ at $x=2$.", ["Form $\\dfrac{\\frac1{2+h}-\\frac12}{h}$", "Combine: $\\dfrac{-h}{2(2+h)h}$", "Cancel $h$: $\\dfrac{-1}{2(2+h)}$", "Let $h\\to0$: $-\\dfrac14$"]));
+  q.push(match("hard", "Match each to its tangent slope at the given point.", ["$\\dfrac1x$ at $x=2$", "$\\sqrt{x}$ at $x=4$", "$\\dfrac1x$ at $x=1$"], ["$-\\dfrac14$", "$\\dfrac14$", "$-1$"], [0, 1, 2]));
+  return q;
+}
+
+// ── 1.5 Derivative Using Definition ───────────────────────────
+function g15() {
   const q = [];
   q.push(mc("easy", "The derivative is defined as:", ["$\\lim_{h\\to0}\\dfrac{f(x+h)-f(x)}{h}$", "$\\dfrac{f(b)-f(a)}{b-a}$", "$f(x+h)-f(x)$", "$\\dfrac{f(x)}{x}$"], 0));
   q.push(mc("easy", "$f'(x)$ gives the slope of the:", ["tangent", "secant", "x-axis", "asymptote"], 0));
@@ -270,4 +340,5 @@ export default [
   { code: "1.2", gen: g12 },
   { code: "1.3", gen: g13 },
   { code: "1.4", gen: g14 },
+  { code: "1.5", gen: g15 },
 ];

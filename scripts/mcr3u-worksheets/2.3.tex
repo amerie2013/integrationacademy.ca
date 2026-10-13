@@ -9,56 +9,71 @@
 \end{center}
 
 \begin{ideabox}
-Treat algebraic fractions like number fractions: factor, cancel common factors, and state restrictions.
+A \textbf{rational expression} is a ratio of polynomials. We simplify it by \textbf{factoring} and \textbf{cancelling common factors} --- never terms --- and we always record the \textbf{restrictions}: the values of $x$ that make an \emph{original} denominator zero. A simplified expression is equivalent to the original only for allowed values of $x$; where a cancelled factor is zero the graph has a \textbf{hole}.
 \begin{itemize}[leftmargin=*,itemsep=2pt]
-  \item Factor numerator and denominator, then cancel common \textbf{factors} (never terms in a sum).
-  \item State restrictions: any value making an original denominator $0$.
-  \item Multiply: cancel across, then multiply. Divide: multiply by the reciprocal.
+  \item \textbf{Steps:} (1) factor completely; (2) write the restrictions from the \emph{original} denominators; (3) cancel common factors; (4) keep the restrictions.
+  \item \textbf{Cancel factors, not terms:} $\dfrac{x+6}{6}\ne x+1$ because the $6$ is \emph{added}.
+  \item \textbf{Opposites:} $\dfrac{a-b}{b-a}=-1$. Rewrite $b-a=-(a-b)$ before cancelling.
+  \item \textbf{Dividing} means multiplying by the reciprocal --- and the divisor's \emph{numerator} becomes a restriction too.
+  \item \textbf{Hole vs asymptote:} a restriction whose factor cancels is a hole; a restriction that survives in the denominator is a vertical asymptote. Find the hole's $y$ by substituting into the simplified form.
 \end{itemize}
 \end{ideabox}
 
 \begin{learnbox}
-\lh{Fractions with polynomials}A \textbf{rational expression} is a ratio of polynomials. Simplify by factoring top and bottom and cancelling common factors.
-\lh{State restrictions}Any value making the original denominator $0$ is excluded — list these before cancelling, since cancelling can hide them.
-\lh{Only factors cancel}You may cancel matching \emph{factors}, never individual terms: $\dfrac{x+2}{x}$ does not become $2$.
+\lh{Cancel factors, not terms}A rational expression is simplified by factoring numerator and denominator and cancelling common \textbf{factors}. $\dfrac{x+6}{6}$ cannot be cancelled: the $6$ is a \emph{term}. $\dfrac{a-b}{b-a}=-1$.
+\lh{Restrictions}Every value that makes an \emph{original} denominator zero is excluded --- and stays excluded after cancelling. When dividing, also exclude values that make the divisor's numerator zero.
+\lh{Holes and asymptotes}A cancelled factor leaves a \textbf{hole}: substitute the restricted $x$ into the simplified expression for its $y$. A factor that stays in the denominator gives a vertical \textbf{asymptote}.
 \end{learnbox}
 
 \sech{Worked Examples}
 
-\begin{example}{ex0}{Example 1 --- Cancel a monomial}
-Simplify $\dfrac{3x^2}{6x}$.\soln Divide coefficients and subtract exponents: $\dfrac{3}{6}x^{2-1}=\dfrac{x}{2},\ x\ne0$.
+\begin{example}{ex0}{Example 1 --- Restrictions}
+State the restrictions on $\dfrac{x + 5}{x^2 - 3x - 10}$.\soln Factor the denominator: $x^2-3x-10=(x-5)(x+2)$. Set each factor to $0$. \\ $x\ne -2,\ 5$. The numerator never creates a restriction.
 \end{example}
 
-\begin{example}{ex1}{Example 2 --- Difference of squares}
-Simplify $\dfrac{x^2-9}{x-3}$.\soln Factor the top: $\dfrac{(x-3)(x+3)}{x-3}$. \\ Cancel $(x-3)$: $x+3,\ x\ne3$.
+\begin{example}{ex1}{Example 2 --- Monomials}
+Simplify $\dfrac{20m^4n^2}{35mn^6}$.\soln Numbers: $\dfrac{20}{35}=\dfrac47$. Variables: $m^{4-1}=m^3$ stays on top; $n^{2-6}=n^{-4}$, so $n^4$ goes to the bottom. \\ $=\dfrac{4m^3}{7n^4}$, with $m\ne0,\ n\ne0$.
 \end{example}
 
-\begin{example}{ex2}{Example 3 --- Trinomial over binomial}
-Simplify $\dfrac{x^2+5x+6}{x+2}$.\soln $\dfrac{(x+2)(x+3)}{x+2}=x+3,\ x\ne-2$.
+\begin{example}{ex2}{Example 3 --- Trinomial and difference of squares}
+Simplify $\dfrac{x^2 - 16}{x^2 - x - 12}$.\soln $\dfrac{(x-4)(x+4)}{(x-4)(x+3)}$; restrictions $x\ne -3,\ 4$. Cancel $(x-4)$. \\ $=\dfrac{(x + 4)}{(x + 3)}$, $x\ne -3,\ 4$.
 \end{example}
 
-\begin{example}{ex3}{Example 4 --- Trinomial over trinomial}
-Simplify $\dfrac{x^2-x-6}{x^2-9}$.\soln Factor both: $\dfrac{(x-3)(x+2)}{(x-3)(x+3)}$. \\ Cancel $(x-3)$: $\dfrac{x+2}{x+3},\ x\ne\pm3$.
+\begin{example}{ex3}{Example 4 --- Complex trinomial}
+Simplify $\dfrac{4x^2 - 9}{2x^2 + x - 6}$.\soln $4x^2-9=(2x-3)(2x+3)$ and $2x^2+x-6=(2x-3)(x+2)$. \\ Restrictions: $x\ne\tfrac32,\ -2$. Cancel $(2x-3)$. \\ $=\dfrac{(2x + 3)}{(x + 2)}$.
 \end{example}
 
-\begin{example}{ex4}{Example 5 --- Common factor}
-Simplify $\dfrac{2x+4}{x^2+2x}$.\soln $\dfrac{2(x+2)}{x(x+2)}=\dfrac{2}{x},\ x\ne0,-2$.
+\begin{example}{ex4}{Example 5 --- Opposite factors}
+Simplify $\dfrac{3-x}{x^2-9}$.\soln $3-x=-(x-3)$ and $x^2-9=(x-3)(x+3)$. \\ $\dfrac{-(x-3)}{(x-3)(x+3)}=-\dfrac{1}{x+3}$, with $x\ne\pm3$.
 \end{example}
 
-\begin{example}{ex5}{Example 6 --- Multiply}
-Simplify $\dfrac{x^2-4}{x}\cdot\dfrac{3}{x+2}$.\soln Factor and cancel across: $\dfrac{(x-2)(x+2)}{x}\cdot\dfrac{3}{x+2}=\dfrac{3(x-2)}{x},\ x\ne0,-2$.
+\begin{example}{ex5}{Example 6 --- Multiplying}
+Simplify $\dfrac{x^2 + 2x - 15}{x^2 - 9}\times\dfrac{x + 3}{x + 5}$.\soln Factor: $\dfrac{(x+5)(x-3)}{(x-3)(x+3)}\times\dfrac{x+3}{x+5}$. Restrictions: $x\ne -5,\ -3,\ 3$. \\ Everything cancels: $=1$, $x\ne -5,\ -3,\ 3$ --- the answer is $1$ \emph{except} at three missing points.
 \end{example}
 
-\begin{example}{ex6}{Example 7 --- Multiply to 1}
-Simplify $\dfrac{x+1}{x-2}\cdot\dfrac{x-2}{x+1}$.\soln Everything cancels: $1,\ x\ne2,-1$.
+\begin{example}{ex6}{Example 7 --- Dividing}
+Simplify $\dfrac{2x^2 - 8}{x^2 + 6x + 9}\div\dfrac{x - 2}{x + 3}$.\soln Factor and flip the second fraction: $\dfrac{2(x-2)(x+2)}{(x+3)^2}\times\dfrac{x+3}{x-2}$. \\ Cancel $(x-2)$ and one $(x+3)$: $=\dfrac{2(x + 2)}{(x + 3)}$. \\ Restrictions: $x\ne-3$ (denominators) and $x\ne2$ (we divided by $\frac{x-2}{x+3}$). So $x\ne -3,\ 2$.
 \end{example}
 
-\begin{example}{ex7}{Example 8 --- Divide}
-Simplify $\dfrac{x}{x+3}\div\dfrac{x^2}{x+3}$.\soln Multiply by the reciprocal: $\dfrac{x}{x+3}\cdot\dfrac{x+3}{x^2}=\dfrac{1}{x},\ x\ne-3,0$.
+\begin{example}{ex7}{Example 8 --- Application: density}
+A block has mass $(15x^2-4x-4)$ g and volume $(3x-2)$ cm$^3$. Write its density as a simplified expression and evaluate at $x=2$.\soln Density $=\dfrac{\text{mass}}{\text{volume}}=\dfrac{(5x+2)(3x-2)}{3x-2}=5x+2$ g/cm$^3$, $x\ne\tfrac23$. \\ At $x=2$: $12$ g/cm$^3$. Check: $\dfrac{60-8-4}{4}=12$ \checkmark.
 \end{example}
 
-\begin{example}{ex8}{Example 9 --- Divide with factoring}
-Simplify $\dfrac{x^2-1}{x}\div\dfrac{x+1}{x}$.\soln $\dfrac{x^2-1}{x}\cdot\dfrac{x}{x+1}=\dfrac{(x-1)(x+1)}{x+1}=x-1,\ x\ne0,-1$.
+\begin{example}{ex8}{Example 9 --- Finding a hole}
+Simplify $y=\dfrac{x^2-x-6}{x-3}$ and find the coordinates of the hole.\soln $\dfrac{(x-3)(x+2)}{x-3}=x+2$, $x\ne3$. \\ At $x=3$ the line has $y=5$, so the hole is at $(3,5)$.\begin{center}\begin{tikzpicture}\begin{axis}[width=8.2cm,height=5.2cm,axis lines=middle,xlabel={\scriptsize$x$},ylabel={\scriptsize$y$},grid=both,grid style={gray!16},xmin=-4,xmax=6,ymin=-3,ymax=9,xtick distance=1,ytick distance=2,tick label style={font=\tiny},axis line style={-}]
+\addplot[exblue,very thick,domain=-4:6,samples=120,restrict y to domain=-4:10]{x+2};\addplot[only marks,mark=o,mark size=2.6pt,very thick,red!75!black]coordinates{(3,5)};\node[font=\tiny,anchor=south west,red!70!black] at (axis cs:3,5){$(3,5)$};
+\end{axis}\end{tikzpicture}\\[-2pt]{\scriptsize The graph is the line $y=x+2$ with one point removed.}\end{center}
+\end{example}
+
+\begin{example}{ex0}{Example 10 --- Test before you trust}
+A student says $\dfrac{x^2+9}{x+3}=x+3$. Test the claim.
+\begin{center}\renewcommand{\arraystretch}{1.35}\setlength{\tabcolsep}{3pt}\begin{tabular}{l|cccc}
+$x$ & $0$ & $1$ & $2$ & $3$ \\ \hline
+$\dfrac{x^2+9}{x+3}$ & \makebox[1.35cm]{\strut $3$} & \makebox[1.35cm]{\strut $5/2$} & \makebox[1.35cm]{\strut $13/5$} & \makebox[1.35cm]{\strut $3$} \\
+$x+3$ & \makebox[1.35cm]{\strut $3$} & \makebox[1.35cm]{\strut $4$} & \makebox[1.35cm]{\strut $5$} & \makebox[1.35cm]{\strut $6$} \\
+\hline same? & \makebox[1.35cm]{\strut $\checkmark$} & \makebox[1.35cm]{\strut $\times$} & \makebox[1.35cm]{\strut $\times$} & \makebox[1.35cm]{\strut $\times$} \\
+\end{tabular}\end{center}
+\soln The values agree at $x=0$ and $x=3$ but not at $x=1$ or $x=2$. One mismatch is enough to prove the expressions are \emph{not} equivalent. $x^2+9$ is a sum of squares and does not factor, so nothing cancels: the claim confuses a \emph{term} with a \emph{factor}.
 \end{example}
 
 \clearpage
@@ -66,55 +81,60 @@ Simplify $\dfrac{x^2-1}{x}\div\dfrac{x+1}{x}$.\soln $\dfrac{x^2-1}{x}\cdot\dfrac
 For each question, show all steps clearly in the space provided.
 
 \begin{qbox}{Question 1}
-Simplify $\dfrac{4x^3}{8x}$ and state restrictions.\workspace{2.4cm}
+State the restrictions on $\dfrac{2x - 1}{x^2 - x - 12}$.\workspace{1.8cm}
 \end{qbox}
 
 \begin{qbox}{Question 2}
-Simplify $\dfrac{x^2-25}{x+5}$.\workspace{2.4cm}
+Simplify $\dfrac{36a^2b^5}{48a^4b^2}$.\workspace{2cm}
 \end{qbox}
 
 \begin{qbox}{Question 3}
-Simplify $\dfrac{x^2+7x+12}{x+3}$.\workspace{2.4cm}
+Simplify $\dfrac{x^2 - x - 20}{x^2 - 25}$ and state the restrictions.\workspace{3cm}
 \end{qbox}
 
 \begin{qbox}{Question 4}
-Simplify $\dfrac{x^2-4}{x^2-2x}$.\workspace{2.4cm}
+Simplify $\dfrac{3x^2 + x - 2}{3x^2 - 5x + 2}$ and state the restrictions.\workspace{3.4cm}
 \end{qbox}
 
 \begin{qbox}{Question 5}
-Simplify $\dfrac{3x+12}{x^2+4x}$.\workspace{2.4cm}
+Simplify $\dfrac{2-x}{x^2-4x+4}$. (Look for opposites.)\workspace{3cm}
 \end{qbox}
 
 \begin{qbox}{Question 6}
-Simplify $\dfrac{x^2-x-6}{x^2-9}$.\workspace{2.4cm}
+Simplify $\dfrac{x^2 - 1}{x^2 + 3x + 2}\times\dfrac{x + 2}{x - 1}$. State all the restrictions.\workspace{3.6cm}
 \end{qbox}
 
 \begin{qbox}{Question 7}
-Simplify $\dfrac{x^2-1}{x+2}\cdot\dfrac{x+2}{x-1}$.\workspace{2.4cm}
+Simplify $\dfrac{x^2 - 6x + 9}{x^2 - 4}\div\dfrac{x - 3}{x + 2}$. State all the restrictions.\workspace{3.8cm}
 \end{qbox}
 
 \begin{qbox}{Question 8}
-Simplify $\dfrac{x+3}{x}\cdot\dfrac{2x}{x+3}$.\workspace{2.4cm}
+Simplify $\dfrac{2x^3 - 8x}{x^2 - 2x}$ and state the restrictions.\workspace{3.2cm}
 \end{qbox}
 
 \begin{qbox}{Question 9}
-Simplify $\dfrac{x+2}{x-1}\div\dfrac{x+2}{x}$.\workspace{2.4cm}
+The graph of $y=\dfrac{x^2+x-12}{x^2-9}$ has one hole and one vertical asymptote. Find the coordinates of the hole and the equation of the asymptote.\workspace{3.8cm}
 \end{qbox}
 
 \begin{qbox}{Question 10}
-Simplify $\dfrac{x^2}{x-4}\div\dfrac{x}{x-4}$.\workspace{2.4cm}
+A metal bar has mass $(10x^2-x-3)$ g and volume $(2x+1)$ cm$^3$. Find its density in simplest form, and the density when $x=4$.\workspace{3.2cm}
 \end{qbox}
 
 \begin{qbox}{Question 11}
-Simplify $\dfrac{2x^2-8}{x^2-4}$.\workspace{3cm}
+A student writes $\dfrac{x^2+x-6}{x^2-9}=\dfrac{x-6}{-9}$, \emph{cancelling the $x^2$ terms}. Test the claim at $x=4$, explain the mistake, and simplify correctly.\workspace{3.8cm}
 \end{qbox}
 
 \begin{qbox}{Question 12}
-State the restrictions for $\dfrac{x+1}{x^2-x-6}$.\workspace{2.4cm}
+Explain why $\dfrac{x+4}{4}$ is not equal to $x+1$. Use the value $x=4$ and the words \emph{term} and \emph{factor}.\workspace{3cm}
 \end{qbox}
 
-\begin{qbox}{Question 13 --- Challenge}
-Simplify $\dfrac{x^2-4}{x+3}\cdot\dfrac{x^2+6x+9}{x-2}$.\workspace{3.5cm}
+\begin{qbox}{Question 13}
+Simplify $\dfrac{x^2-4}{x+2}$, then sketch its graph, marking the hole.
+\begin{center}\begin{tikzpicture}\begin{axis}[width=8cm,height=6cm,axis lines=middle,grid=both,grid style={gray!16},xmin=-6,xmax=6,ymin=-6,ymax=6,xtick distance=2,ytick distance=2,tick label style={font=\tiny}]\end{axis}\end{tikzpicture}\end{center}
+\end{qbox}
+
+\begin{qbox}{Question 14 --- Challenge}
+Simplify $\dfrac{x^4 - 5x^2 + 4}{x^3 - x^2 - 4x + 4}$ and list all restrictions. (Factor the denominator by grouping.)\workspace{4.4cm}
 \end{qbox}
 
 \clearpage
@@ -124,19 +144,20 @@ Simplify $\dfrac{x^2-4}{x+3}\cdot\dfrac{x^2+6x+9}{x-2}$.\workspace{3.5cm}
 \begin{multicols}{2}
 \small
 \begin{enumerate}[leftmargin=*,itemsep=3pt]
-  \item Simplify $\dfrac{4x^3}{8x}$ and state restrictions.
-  \item Simplify $\dfrac{x^2-25}{x+5}$.
-  \item Simplify $\dfrac{x^2+7x+12}{x+3}$.
-  \item Simplify $\dfrac{x^2-4}{x^2-2x}$.
-  \item Simplify $\dfrac{3x+12}{x^2+4x}$.
-  \item Simplify $\dfrac{x^2-x-6}{x^2-9}$.
-  \item Simplify $\dfrac{x^2-1}{x+2}\cdot\dfrac{x+2}{x-1}$.
-  \item Simplify $\dfrac{x+3}{x}\cdot\dfrac{2x}{x+3}$.
-  \item Simplify $\dfrac{x+2}{x-1}\div\dfrac{x+2}{x}$.
-  \item Simplify $\dfrac{x^2}{x-4}\div\dfrac{x}{x-4}$.
-  \item Simplify $\dfrac{2x^2-8}{x^2-4}$.
-  \item State the restrictions for $\dfrac{x+1}{x^2-x-6}$.
-  \item Simplify $\dfrac{x^2-4}{x+3}\cdot\dfrac{x^2+6x+9}{x-2}$.
+  \item State the restrictions on $\dfrac{2x - 1}{x^2 - x - 12}$.
+  \item Simplify $\dfrac{36a^2b^5}{48a^4b^2}$.
+  \item Simplify $\dfrac{x^2 - x - 20}{x^2 - 25}$ and state the restrictions.
+  \item Simplify $\dfrac{3x^2 + x - 2}{3x^2 - 5x + 2}$ and state the restrictions.
+  \item Simplify $\dfrac{2-x}{x^2-4x+4}$. (Look for opposites.)
+  \item Simplify $\dfrac{x^2 - 1}{x^2 + 3x + 2}\times\dfrac{x + 2}{x - 1}$. State all the restrictions.
+  \item Simplify $\dfrac{x^2 - 6x + 9}{x^2 - 4}\div\dfrac{x - 3}{x + 2}$. State all the restrictions.
+  \item Simplify $\dfrac{2x^3 - 8x}{x^2 - 2x}$ and state the restrictions.
+  \item The graph of $y=\dfrac{x^2+x-12}{x^2-9}$ has one hole and one vertical asymptote. Find the coordinates of the hole and the equation of the asymptote.
+  \item A metal bar has mass $(10x^2-x-3)$ g and volume $(2x+1)$ cm$^3$. Find its density in simplest form, and the density when $x=4$.
+  \item A student writes $\dfrac{x^2+x-6}{x^2-9}=\dfrac{x-6}{-9}$, \emph{cancelling the $x^2$ terms}. Test the claim at $x=4$, explain the mistake, and simplify correctly.
+  \item Explain why $\dfrac{x+4}{4}$ is not equal to $x+1$. Use the value $x=4$ and the words \emph{term} and \emph{factor}.
+  \item Simplify $\dfrac{x^2-4}{x+2}$, then sketch its graph, marking the hole.
+  \item Simplify $\dfrac{x^4 - 5x^2 + 4}{x^3 - x^2 - 4x + 4}$ and list all restrictions. (Factor the denominator by grouping.)
 \end{enumerate}
 \end{multicols}
 \end{recapbox}
@@ -145,19 +166,20 @@ Simplify $\dfrac{x^2-4}{x+3}\cdot\dfrac{x^2+6x+9}{x-2}$.\workspace{3.5cm}
 \begin{multicols}{2}
 \small
 \begin{enumerate}[leftmargin=*,itemsep=3pt]
-  \item $\dfrac{x^2}{2},\ x\ne0$
-  \item $x-5,\ x\ne-5$
-  \item $x+4,\ x\ne-3$
-  \item $\dfrac{x+2}{x},\ x\ne0,2$
-  \item $\dfrac{3}{x},\ x\ne0,-4$
-  \item $\dfrac{x+2}{x+3},\ x\ne\pm3$
-  \item $x+1,\ x\ne-2,1$
-  \item $2,\ x\ne0,-3$
-  \item $\dfrac{x}{x-1},\ x\ne0,1,-2$
-  \item $x,\ x\ne0,4$
-  \item $2,\ x\ne\pm2$
-  \item $x\ne3,-2$
-  \item $(x+2)(x+3),\ x\ne-3,2$
+  \item $x^2-x-12=(x-4)(x+3)$, so $x\ne -3,\ 4$.
+  \item $\dfrac{3b^3}{4a^2}$, with $a\ne0,\ b\ne0$.
+  \item $\dfrac{(x-5)(x+4)}{(x-5)(x+5)}=\dfrac{(x + 4)}{(x + 5)}$, $x\ne -5,\ 5$.
+  \item $\dfrac{(3x-2)(x+1)}{(3x-2)(x-1)}=\dfrac{(x + 1)}{(x - 1)}$, $x\ne \tfrac{2}{3},\ 1$.
+  \item $\dfrac{-(x-2)}{(x-2)^2}=-\dfrac{1}{x-2}$, $x\ne2$.
+  \item $\dfrac{(x-1)(x+1)}{(x+1)(x+2)}\times\dfrac{x+2}{x-1}=1$, $x\ne -2,\ -1,\ 1$.
+  \item $\dfrac{(x-3)^2}{(x-2)(x+2)}\times\dfrac{x+2}{x-3}=\dfrac{(x - 3)}{(x - 2)}$, $x\ne -2,\ 2,\ 3$.
+  \item $\dfrac{2x(x-2)(x+2)}{x(x-2)}=2(x+2)$, $x\ne 0,\ 2$.
+  \item $\dfrac{(x+4)(x-3)}{(x-3)(x+3)}=\dfrac{x+4}{x+3}$. Hole: $x=3$, $y=\tfrac76$, at $(3,\tfrac76)$. The factor $(x+3)$ survives, so the vertical asymptote is $x=-3$.
+  \item $\dfrac{(5x-3)(2x+1)}{2x+1}=5x-3$ g/cm$^3$, $x\ne-\tfrac12$. At $x=4$: $17$ g/cm$^3$.
+  \item At $x=4$: $\dfrac{16+4-6}{16-9}=2$ but $\dfrac{4-6}{-9}=\tfrac29$. The student cancelled $x^2$, which is a \emph{term} in each part. Correct: $\dfrac{(x-2)(x+3)}{(x-3)(x+3)}=\dfrac{x-2}{x-3}$, $x\ne\pm3$ (at $x=4$ this gives $2$ \checkmark).
+  \item At $x=4$: $\dfrac{8}{4}=2$ but $x+1=5$. The $4$ in the numerator is \emph{added} to $x$ (a term), so it cannot be cancelled; only a \emph{factor} that multiplies the whole numerator and the whole denominator can be cancelled.
+  \item $\dfrac{(x-2)(x+2)}{x+2}=x-2$, $x\ne-2$. The graph is the line $y=x-2$ with a hole at $(-2,-4)$.
+  \item Denominator: $x^2(x-1)-4(x-1)=(x-1)(x-2)(x+2)$. Numerator: $(x^2-1)(x^2-4)=(x-1)(x+1)(x-2)(x+2)$. Result $(x + 1)$, $x\ne -2,\ 1,\ 2$.
 \end{enumerate}
 \end{multicols}
 \end{keybox}

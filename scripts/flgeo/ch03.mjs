@@ -1,6 +1,6 @@
 import { L, lessonHtml } from "./_helpers.mjs";
 import {
-  fig, translationFig, reflectionFig, rotationFig, compositionFig, symmetryFig,
+  fig, translationFig, reflectionFig, rotationFig, compositionFig, symmetryFig, hexagonSymmetryFig,
   triangleTypes, isoscelesFig, sssMarks, sasMarks, asaMarks, hlFig, overlappingFig,
   dilationFig, similarTriangles, shadowMeasure, proportionalityFig,
   pythagoreanFig, special4545, special3060, sohcahtoa, elevationFig,
@@ -11,6 +11,20 @@ import {
   copyAngleFig, bisectFig, incenterFig, circumcenterFig,
   sampleSpaceFig, treeDiagram, twoWayTable, permuteCombine,
 } from "./figures2.mjs";
+import {
+  threePointsPlane, collinearPts, numberLineDist, midpointAlgebra, classifyAngles,
+  copyAngleObtuse, angleCombine, biconditionalFig, paragraphProofFig,
+  parallelConverse, perpTransversal, horizVert, constructPerpOnLine, constructRectangle,
+  translatePolygon, reflectYX, reflectVertical, rotate180, rotate270, glideReflect,
+  parallelReflect, intersectReflect, parallelogramSym, squareSym, scaleneNoSym,
+  exteriorAngle, angleSumTri, equilateralFig, altitudeIsos, aasMarks, medianFig,
+  dilatePoint, sssSimilar, sasSimilar, midsegmentTri, threeParallel, mirrorMethod,
+  depressionFig, guyWire, twoElevations,
+  diameterChord, semicircleRight, chordPerp, chordChord, tangentSecant, twoSecants, circleEq,
+  pyramidFig, coneFig, sphereFig, densityFig, popDensity, coneSlice, sphereSlice, frustumFig,
+  dieFig, bagMarbles, complementFig, cardsFig, expectedValue, withWithout,
+} from "./figures3.mjs";
+import { copySegment, angleBisector } from "./figures.mjs";
 
 export const ch = {};
 
@@ -42,6 +56,7 @@ ch["3.1"] = L("3.1", "Translations on the Coordinate Plane (MA.912.GR.2.1)", [
       {
         h: "Writing a translation rule from a vector",
         p: "Translate point \\(P(-2,3)\\) by vector \\(\\langle 5,-1\\rangle\\). Find \\(P'\\).",
+        fig: translatePolygon(),
         steps: [
           `<strong>Step 1 — Interpret the vector as a rule:</strong> \\(\\langle 5,-1\\rangle\\) means \\((x,y)\\to(x+5,y-1)\\).`,
           `<strong>Step 2 — Apply it:</strong> \\(P'(-2+5,3-1)=P'(3,2)\\).`,
@@ -50,6 +65,7 @@ ch["3.1"] = L("3.1", "Translations on the Coordinate Plane (MA.912.GR.2.1)", [
       {
         h: "Finding the translation rule from two points",
         p: "\\(A(2,-1)\\) is translated to \\(A'(-3,4)\\). Find the translation rule and use it to translate \\(B(6,0)\\).",
+        fig: translatePolygon(),
         steps: [
           `<strong>Step 1 — Find the horizontal shift:</strong> \\(a=x'-x=-3-2=-5\\).`,
           `<strong>Step 2 — Find the vertical shift:</strong> \\(b=y'-y=4-(-1)=5\\).`,
@@ -61,6 +77,7 @@ ch["3.1"] = L("3.1", "Translations on the Coordinate Plane (MA.912.GR.2.1)", [
       {
         h: "Confirming congruence after a translation",
         p: "\\(\\overline{AB}\\) has \\(A(0,0)\\) and \\(B(3,4)\\). Translate by \\((x,y)\\to(x+2,y-1)\\) to get \\(\\overline{A'B'}\\). Verify that \\(A'B'=AB\\).",
+        fig: translatePolygon(),
         steps: [
           `<strong>Step 1 — Find the image points:</strong> \\(A'(2,-1)\\), \\(B'(5,3)\\).`,
           `<strong>Step 2 — Compute \\(AB\\):</strong> \\(AB=\\sqrt{(3-0)^2+(4-0)^2}=\\sqrt{9+16}=\\sqrt{25}=5\\).`,
@@ -71,6 +88,7 @@ ch["3.1"] = L("3.1", "Translations on the Coordinate Plane (MA.912.GR.2.1)", [
       {
         h: "Translating a polygon and describing the image",
         p: "Square \\(WXYZ\\) has \\(W(-1,1)\\), \\(X(1,1)\\), \\(Y(1,-1)\\), \\(Z(-1,-1)\\). Translate by \\((x,y)\\to(x+4,y+2)\\) and describe the image figure.",
+        fig: translatePolygon(),
         steps: [
           `<strong>Step 1 — Translate each vertex:</strong> \\(W'(3,3)\\), \\(X'(5,3)\\), \\(Y'(5,1)\\), \\(Z'(3,1)\\).`,
           `<strong>Step 2 — Compare side lengths:</strong> each side of the image still has length 2, same as the original square, since translations preserve distance.`,
@@ -120,6 +138,7 @@ ch["3.2"] = L("3.2", "Reflections on the Coordinate Plane (MA.912.GR.2.1)", [
       {
         h: "Reflecting across y = x",
         p: "Reflect point \\(P(4,-1)\\) across the line \\(y=x\\).",
+        fig: reflectYX(),
         steps: [
           `<strong>Step 1 — Apply the rule \\((x,y)\\to(y,x)\\):</strong> \\(P'(-1,4)\\).`,
         ],
@@ -128,6 +147,7 @@ ch["3.2"] = L("3.2", "Reflections on the Coordinate Plane (MA.912.GR.2.1)", [
       {
         h: "Reflecting across a vertical line other than the y-axis",
         p: "Reflect point \\(Q(2,5)\\) across the vertical line \\(x=6\\).",
+        fig: reflectVertical(),
         steps: [
           `<strong>Step 1 — Find the horizontal distance to the line:</strong> \\(Q\\) is at \\(x=2\\); the line is at \\(x=6\\), a distance of \\(6-2=4\\).`,
           `<strong>Step 2 — Reflect the same distance on the other side:</strong> the image must be \\(4\\) units on the other side of \\(x=6\\), at \\(x=6+4=10\\).`,
@@ -138,6 +158,7 @@ ch["3.2"] = L("3.2", "Reflections on the Coordinate Plane (MA.912.GR.2.1)", [
       {
         h: "Finding the line of reflection",
         p: "\\(R(3,2)\\) reflects to \\(R'(3,-6)\\). Find the line of reflection.",
+        fig: reflectVertical(),
         steps: [
           `<strong>Step 1 — Notice the x-coordinate didn't change:</strong> this means the reflection line must be horizontal (a reflection across a horizontal line only changes \\(y\\)).`,
           `<strong>Step 2 — Find the midpoint of \\(\\overline{RR'}\\):</strong> the line of reflection passes through the midpoint: \\(\\left(3,\\dfrac{2+(-6)}{2}\\right)=(3,-2)\\).`,
@@ -147,6 +168,7 @@ ch["3.2"] = L("3.2", "Reflections on the Coordinate Plane (MA.912.GR.2.1)", [
       {
         h: "A reflection reverses orientation",
         p: "\\(\\triangle ABC\\) has vertices listed counterclockwise: \\(A(0,0)\\), \\(B(4,0)\\), \\(C(0,3)\\). Reflect across the \\(y\\)-axis and explain what happens to the orientation.",
+        fig: reflectYX(),
         steps: [
           `<strong>Step 1 — Apply the rule \\((x,y)\\to(-x,y)\\):</strong> \\(A'(0,0)\\), \\(B'(-4,0)\\), \\(C'(0,3)\\).`,
           `<strong>Step 2 — Trace the new vertex order:</strong> going \\(A'\\to B'\\to C'\\) now traces the triangle clockwise instead of counterclockwise.`,
@@ -196,6 +218,7 @@ ch["3.3"] = L("3.3", "Rotations on the Coordinate Plane (MA.912.GR.2.1)", [
       {
         h: "Rotating 180° about the origin",
         p: "Rotate point \\(P(-3,5)\\) by \\(180^\\circ\\) about the origin.",
+        fig: rotate180(),
         steps: [
           `<strong>Step 1 — Apply \\((x,y)\\to(-x,-y)\\):</strong> \\(P'(3,-5)\\).`,
         ],
@@ -204,6 +227,7 @@ ch["3.3"] = L("3.3", "Rotations on the Coordinate Plane (MA.912.GR.2.1)", [
       {
         h: "Rotating 270° counterclockwise",
         p: "Rotate \\(Q(5,-2)\\) by \\(270^\\circ\\) counterclockwise about the origin.",
+        fig: rotate270(),
         steps: [
           `<strong>Step 1 — Apply \\((x,y)\\to(y,-x)\\):</strong> \\(Q'(-2,-5)\\).`,
         ],
@@ -212,6 +236,7 @@ ch["3.3"] = L("3.3", "Rotations on the Coordinate Plane (MA.912.GR.2.1)", [
       {
         h: "Identifying the rotation from a point pair",
         p: "Point \\(M(3,4)\\) rotates about the origin to \\(M'(-4,3)\\). What rotation was applied?",
+        fig: rotate180(),
         steps: [
           `<strong>Step 1 — Compare to the three rules:</strong> \\(90^\\circ\\) CCW gives \\((-y,x)=(-4,3)\\), which matches \\(M'\\) exactly.`,
           `<strong>Conclusion:</strong> the rotation was \\(90^\\circ\\) counterclockwise about the origin.`,
@@ -220,6 +245,7 @@ ch["3.3"] = L("3.3", "Rotations on the Coordinate Plane (MA.912.GR.2.1)", [
       {
         h: "Rotation preserves side lengths and angle measures",
         p: "Square \\(WXYZ\\) has \\(W(1,1)\\), \\(X(3,1)\\), \\(Y(3,3)\\), \\(Z(1,3)\\). Rotate \\(180^\\circ\\) about the origin and verify the image is still a square with the same side length.",
+        fig: rotate180(),
         steps: [
           `<strong>Step 1 — Apply \\((x,y)\\to(-x,-y)\\):</strong> \\(W'(-1,-1)\\), \\(X'(-3,-1)\\), \\(Y'(-3,-3)\\), \\(Z'(-1,-3)\\).`,
           `<strong>Step 2 — Check a side length:</strong> \\(W'X'=\\sqrt{(-3-(-1))^2+(-1-(-1))^2}=\\sqrt{4}=2\\), matching the original side \\(WX=2\\).`,
@@ -271,6 +297,7 @@ ch["3.4"] = L("3.4", "Compositions of Transformations (MA.912.GR.2.3)", [
       {
         h: "Order matters",
         p: "Repeat Example 1 with the order swapped: translate \\(A(2,1)\\) by \\((x,y)\\to(x+3,y-2)\\) first, then reflect across the \\(y\\)-axis. Compare the result to Example 1.",
+        fig: compositionFig(),
         steps: [
           `<strong>Step 1 — Translate first:</strong> \\(A(2,1)\\to(2+3,1-2)=(5,-1)\\).`,
           `<strong>Step 2 — Reflect across the \\(y\\)-axis:</strong> \\((5,-1)\\to(-5,-1)\\).`,
@@ -281,6 +308,7 @@ ch["3.4"] = L("3.4", "Compositions of Transformations (MA.912.GR.2.3)", [
       {
         h: "Composing two reflections over parallel lines",
         p: "Reflect \\(P(1,2)\\) across the line \\(x=1\\), then reflect that image across the line \\(x=5\\). Describe the net transformation.",
+        fig: parallelReflect(),
         steps: [
           `<strong>Step 1 — Reflect across \\(x=1\\):</strong> \\(P(1,2)\\) is already on the line \\(x=1\\), so it maps to itself: \\((1,2)\\).`,
           `<strong>Step 2 — Reflect that result across \\(x=5\\):</strong> distance from \\(x=1\\) to \\(x=5\\) is 4, so the image is 4 units past \\(x=5\\), at \\(x=9\\): final point \\((9,2)\\).`,
@@ -291,6 +319,7 @@ ch["3.4"] = L("3.4", "Compositions of Transformations (MA.912.GR.2.3)", [
       {
         h: "Composing two reflections over intersecting lines",
         p: "Two lines intersect at the origin at an angle of \\(30^\\circ\\) between them. A figure is reflected across the first line, then across the second. Describe the net transformation.",
+        fig: intersectReflect(),
         steps: [
           `<strong>Step 1 — Recall the rule:</strong> two reflections over intersecting lines compose into a rotation about the intersection point, with angle equal to twice the angle between the lines.`,
           `<strong>Step 2 — Apply it:</strong> the angle between the lines is \\(30^\\circ\\), so the net rotation angle is \\(2\\times 30^\\circ=60^\\circ\\), centered at the origin.`,
@@ -300,6 +329,7 @@ ch["3.4"] = L("3.4", "Compositions of Transformations (MA.912.GR.2.3)", [
       {
         h: "A glide reflection",
         p: "Point \\(A(2,3)\\) undergoes a glide reflection: translate by \\((x,y)\\to(x+4,y)\\), then reflect across the \\(x\\)-axis (which is parallel to the translation direction). Find the image.",
+        fig: glideReflect(),
         steps: [
           `<strong>Step 1 — Translate:</strong> \\(A(2,3)\\to(2+4,3)=(6,3)\\).`,
           `<strong>Step 2 — Reflect across the \\(x\\)-axis:</strong> \\((6,3)\\to(6,-3)\\).`,
@@ -340,7 +370,7 @@ ch["3.5"] = L("3.5", "Line and Rotational Symmetry (MA.912.GR.2.4)", [
       {
         h: "Lines of symmetry in a regular polygon",
         p: "How many lines of symmetry does a regular hexagon have?",
-        fig: symmetryFig(),
+        fig: hexagonSymmetryFig(),
         steps: [
           `<strong>Step 1 — Apply the regular-\\(n\\)-gon rule:</strong> a regular \\(n\\)-gon has \\(n\\) lines of symmetry.`,
           `<strong>Step 2 — Substitute \\(n=6\\):</strong> a regular hexagon has 6 lines of symmetry.`,
@@ -350,6 +380,7 @@ ch["3.5"] = L("3.5", "Line and Rotational Symmetry (MA.912.GR.2.4)", [
       {
         h: "Finding the order of rotational symmetry",
         p: "A regular pentagon is rotated about its center. What is the order of its rotational symmetry, and what is the smallest angle of rotation that maps it onto itself?",
+        fig: symmetryFig(),
         steps: [
           `<strong>Step 1 — Apply the regular-\\(n\\)-gon rule:</strong> a regular pentagon (\\(n=5\\)) has rotational symmetry of order 5.`,
           `<strong>Step 2 — Find the smallest angle:</strong> \\(\\dfrac{360^\\circ}{5}=72^\\circ\\).`,
@@ -359,6 +390,7 @@ ch["3.5"] = L("3.5", "Line and Rotational Symmetry (MA.912.GR.2.4)", [
       {
         h: "A figure with rotational but not line symmetry",
         p: "Does a standard parallelogram (not a rectangle or rhombus) have line symmetry? Does it have rotational symmetry?",
+        fig: parallelogramSym(),
         steps: [
           `<strong>Step 1 — Test for line symmetry:</strong> try reflecting across a diagonal or across the segment joining midpoints of opposite sides — in a general parallelogram, none of these reflections map the figure onto itself, since the side lengths and angles aren't symmetric that way.`,
           `<strong>Step 2 — Test for rotational symmetry:</strong> rotate the parallelogram \\(180^\\circ\\) about the intersection point of its diagonals — opposite sides and angles swap places exactly, mapping the figure onto itself.`,
@@ -368,6 +400,7 @@ ch["3.5"] = L("3.5", "Line and Rotational Symmetry (MA.912.GR.2.4)", [
       {
         h: "A figure with both types of symmetry",
         p: "Identify all lines of symmetry and the order of rotational symmetry for a square.",
+        fig: squareSym(),
         steps: [
           `<strong>Step 1 — Lines of symmetry:</strong> a square has 4 lines of symmetry — the two diagonals, and the two lines connecting midpoints of opposite sides.`,
           `<strong>Step 2 — Rotational symmetry:</strong> a square is a regular 4-gon, so it has rotational symmetry of order 4, with smallest angle \\(\\dfrac{360^\\circ}{4}=90^\\circ\\).`,
@@ -376,6 +409,7 @@ ch["3.5"] = L("3.5", "Line and Rotational Symmetry (MA.912.GR.2.4)", [
       {
         h: "A figure with neither type of symmetry",
         p: "A scalene triangle (all sides different lengths) is drawn. Does it have line symmetry or rotational symmetry?",
+        fig: scaleneNoSym(),
         steps: [
           `<strong>Step 1 — Test for line symmetry:</strong> a line of symmetry in a triangle would need to map each vertex to another vertex at the same distance from the line — but since all three sides (and hence angles) are different, no such line exists.`,
           `<strong>Step 2 — Test for rotational symmetry:</strong> any rotation less than \\(360^\\circ\\) about the triangle's center would need to map vertices to other vertices in a way that preserves the (unequal) side lengths — impossible here.`,
@@ -416,6 +450,7 @@ ch["3.6"] = L("3.6", "Using Transformations to Prove Congruence (MA.912.GR.2.6)"
       {
         h: "A single translation proves congruence",
         p: "\\(\\triangle ABC\\) has \\(A(1,1)\\), \\(B(4,1)\\), \\(C(1,3)\\). \\(\\triangle DEF\\) has \\(D(5,-2)\\), \\(E(8,-2)\\), \\(F(5,0)\\). Describe a rigid motion mapping \\(\\triangle ABC\\) onto \\(\\triangle DEF\\), and conclude the triangles are congruent.",
+        fig: translatePolygon(),
         steps: [
           `<strong>Step 1 — Compare corresponding vertices:</strong> \\(A\\to D\\) requires \\((1,1)\\to(5,-2)\\), a shift of \\((+4,-3)\\).`,
           `<strong>Step 2 — Test the same shift on the other vertices:</strong> \\(B(4,1)+(4,-3)=(8,-2)=E\\). ✓ \\(C(1,3)+(4,-3)=(5,0)=F\\). ✓`,
@@ -426,6 +461,7 @@ ch["3.6"] = L("3.6", "Using Transformations to Prove Congruence (MA.912.GR.2.6)"
       {
         h: "A rotation plus a translation",
         p: "\\(\\triangle ABC\\) has \\(A(0,0)\\), \\(B(3,0)\\), \\(C(0,2)\\). \\(\\triangle A'B'C'\\) has \\(A'(5,4)\\), \\(B'(5,7)\\), \\(C'(3,4)\\). Describe a sequence of rigid motions mapping one onto the other.",
+        fig: compositionFig(),
         steps: [
           `<strong>Step 1 — Try a rotation first:</strong> rotating \\(\\triangle ABC\\) by \\(90^\\circ\\) counterclockwise about the origin, \\((x,y)\\to(-y,x)\\), gives \\(A(0,0)\\to(0,0)\\), \\(B(3,0)\\to(0,3)\\), \\(C(0,2)\\to(-2,0)\\).`,
           `<strong>Step 2 — Find the needed translation:</strong> comparing \\(A(0,0)\\) to the target \\(A'(5,4)\\), we need a translation of \\((+5,+4)\\). Check: \\((0,3)+(5,4)=(5,7)=B'\\). ✓ \\((-2,0)+(5,4)=(3,4)=C'\\). ✓`,
@@ -436,6 +472,7 @@ ch["3.6"] = L("3.6", "Using Transformations to Prove Congruence (MA.912.GR.2.6)"
       {
         h: "When a reflection is required",
         p: "\\(\\triangle ABC\\) has \\(A(0,0)\\), \\(B(4,0)\\), \\(C(0,2)\\), listed counterclockwise. \\(\\triangle A'B'C'\\) has \\(A'(0,0)\\), \\(B'(-4,0)\\), \\(C'(0,2)\\), listed clockwise. Explain why a reflection (not just a rotation) is needed, and describe one.",
+        fig: reflectYX(),
         steps: [
           `<strong>Step 1 — Compare orientation:</strong> \\(\\triangle ABC\\) is labeled counterclockwise, but \\(\\triangle A'B'C'\\) is labeled clockwise — no rotation or translation alone can change orientation, only a reflection can.`,
           `<strong>Step 2 — Find the reflection:</strong> reflecting \\(\\triangle ABC\\) across the \\(y\\)-axis, \\((x,y)\\to(-x,y)\\), gives \\(A(0,0)\\to(0,0)\\), \\(B(4,0)\\to(-4,0)\\), \\(C(0,2)\\to(0,2)\\) — exactly \\(A'\\), \\(B'\\), \\(C'\\).`,
@@ -445,6 +482,7 @@ ch["3.6"] = L("3.6", "Using Transformations to Prove Congruence (MA.912.GR.2.6)"
       {
         h: "Connecting to corresponding parts",
         p: "In Example 1, once you've shown the translation maps \\(A\\to D\\), \\(B\\to E\\), \\(C\\to F\\), what can you immediately conclude about \\(\\overline{AB}\\) and \\(\\overline{DE}\\), and about \\(\\angle A\\) and \\(\\angle D\\)?",
+        fig: translatePolygon(),
         steps: [
           `<strong>Step 1 — Recall that a translation is a rigid motion:</strong> rigid motions preserve distance and angle measure.`,
           `<strong>Step 2 — Apply this to corresponding sides:</strong> since the translation maps \\(A\\to D\\) and \\(B\\to E\\), it maps segment \\(\\overline{AB}\\) exactly onto segment \\(\\overline{DE}\\), so \\(\\overline{AB}\\cong\\overline{DE}\\).`,
@@ -455,6 +493,7 @@ ch["3.6"] = L("3.6", "Using Transformations to Prove Congruence (MA.912.GR.2.6)"
       {
         h: "Describing a full congruence transformation sequence",
         p: "Write a complete justification that quadrilateral \\(PQRS\\) with \\(P(1,1)\\), \\(Q(3,1)\\), \\(R(3,3)\\), \\(S(1,3)\\) is congruent to quadrilateral \\(P'Q'R'S'\\) with \\(P'(-1,-1)\\), \\(Q'(-3,-1)\\), \\(R'(-3,-3)\\), \\(S'(-1,-3)\\).",
+        fig: compositionFig(),
         steps: [
           `<strong>Step 1 — Test a single transformation:</strong> a \\(180^\\circ\\) rotation about the origin, \\((x,y)\\to(-x,-y)\\), gives \\(P(1,1)\\to(-1,-1)=P'\\), \\(Q(3,1)\\to(-3,-1)=Q'\\), \\(R(3,3)\\to(-3,-3)=R'\\), \\(S(1,3)\\to(-1,-3)=S'\\).`,
           `<strong>Step 2 — Confirm every vertex matches:</strong> all four vertices map exactly to their primed counterparts.`,

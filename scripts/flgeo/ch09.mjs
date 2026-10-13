@@ -11,6 +11,21 @@ import {
   copyAngleFig, bisectFig, incenterFig, circumcenterFig,
   sampleSpaceFig, treeDiagram, twoWayTable, permuteCombine,
 } from "./figures2.mjs";
+import {
+  threePointsPlane, collinearPts, numberLineDist, midpointAlgebra, classifyAngles,
+  copyAngleObtuse, angleCombine, biconditionalFig, paragraphProofFig,
+  parallelConverse, perpTransversal, horizVert, constructPerpOnLine, constructRectangle,
+  translatePolygon, reflectYX, reflectVertical, rotate180, rotate270, glideReflect,
+  parallelReflect, intersectReflect, parallelogramSym, squareSym, scaleneNoSym,
+  exteriorAngle, angleSumTri, equilateralFig, altitudeIsos, aasMarks, medianFig,
+  dilatePoint, sssSimilar, sasSimilar, midsegmentTri, threeParallel, mirrorMethod,
+  depressionFig, guyWire, twoElevations,
+  diameterChord, semicircleRight, chordPerp, chordChord, tangentSecant, twoSecants, circleEq,
+  pyramidFig, coneFig, sphereFig, densityFig, popDensity, coneSlice, sphereSlice, frustumFig,
+  dieFig, bagMarbles, complementFig, cardsFig, expectedValue, withWithout,
+} from "./figures3.mjs";
+import { hexagonSymmetryFig } from "./figures2.mjs";
+import { copySegment, angleBisector } from "./figures.mjs";
 
 export const ch = {};
 
@@ -40,6 +55,7 @@ ch["9.1"] = L("9.1", "Circle Vocabulary and Central Angles (MA.912.GR.6.2)", [
       {
         h: "Using the Arc Addition Postulate",
         p: "\\(m\\widehat{AB}=40^\\circ\\) and \\(m\\widehat{BC}=65^\\circ\\), where \\(B\\) lies between \\(A\\) and \\(C\\) on the circle. Find \\(m\\widehat{AC}\\).",
+        fig: centralAngleFig(),
         steps: [
           `<strong>Step 1 — Apply the postulate:</strong> \\(m\\widehat{AC}=m\\widehat{AB}+m\\widehat{BC}\\).`,
           `<strong>Step 2 — Add:</strong> \\(m\\widehat{AC}=40^\\circ+65^\\circ=105^\\circ\\).`,
@@ -48,6 +64,7 @@ ch["9.1"] = L("9.1", "Circle Vocabulary and Central Angles (MA.912.GR.6.2)", [
       {
         h: "Central angles around a full circle",
         p: "Three central angles at the same center measure \\(110^\\circ\\), \\(95^\\circ\\), and \\(x\\), with no overlap and covering the whole circle. Find \\(x\\).",
+        fig: centralAngleFig(),
         steps: [
           `<strong>Step 1 — Use the fact that central angles around a point sum to \\(360^\\circ\\):</strong> \\(110^\\circ+95^\\circ+x=360^\\circ\\).`,
           `<strong>Step 2 — Solve:</strong> \\(205^\\circ+x=360^\\circ \\Rightarrow x=155^\\circ\\).`,
@@ -56,6 +73,7 @@ ch["9.1"] = L("9.1", "Circle Vocabulary and Central Angles (MA.912.GR.6.2)", [
       {
         h: "A diameter splitting central angles",
         p: "\\(A\\) and \\(B\\) are endpoints of a diameter, and \\(C\\) is another point on the circle. \\(m\\angle AOC=2x\\) and \\(m\\angle BOC=3x\\). Find \\(x\\) and each angle.",
+        fig: diameterChord(),
         steps: [
           `<strong>Step 1 — Use the straight-line relationship:</strong> since \\(A\\), \\(O\\), \\(B\\) are collinear (a diameter), \\(\\angle AOC\\) and \\(\\angle BOC\\) form a linear pair: \\(2x+3x=180^\\circ\\).`,
           `<strong>Step 2 — Solve:</strong> \\(5x=180^\\circ \\Rightarrow x=36^\\circ\\).`,
@@ -66,6 +84,7 @@ ch["9.1"] = L("9.1", "Circle Vocabulary and Central Angles (MA.912.GR.6.2)", [
       {
         h: "The diameter is the longest chord",
         p: "A circle has radius 9. Is a chord of length 20 possible in this circle?",
+        fig: diameterChord(),
         steps: [
           `<strong>Step 1 — Find the diameter:</strong> \\(d=2(9)=18\\).`,
           `<strong>Step 2 — Compare:</strong> the diameter is the longest possible chord, and \\(20>18\\).`,
@@ -116,6 +135,7 @@ ch["9.2"] = L("9.2", "Inscribed Angles and Intercepted Arcs (MA.912.GR.6.2)", [
       {
         h: "Arc from an inscribed angle",
         p: "An inscribed angle measures \\(55^\\circ\\). Find its intercepted arc.",
+        fig: inscribedAngleFig(),
         steps: [
           `<strong>Step 1 — Reverse the theorem:</strong> the arc is double the inscribed angle: \\(m\\widehat{\\text{arc}}=2(55^\\circ)\\).`,
           `<strong>Step 2 — Simplify:</strong> \\(m\\widehat{\\text{arc}}=110^\\circ\\).`,
@@ -124,6 +144,7 @@ ch["9.2"] = L("9.2", "Inscribed Angles and Intercepted Arcs (MA.912.GR.6.2)", [
       {
         h: "Two inscribed angles on the same arc",
         p: "Inscribed angles \\(\\angle ACB\\) and \\(\\angle ADB\\) both intercept arc \\(AB\\), with \\(m\\angle ACB=3x+5\\) and \\(m\\angle ADB=4x-10\\). Find \\(x\\) and each angle.",
+        fig: inscribedAngleFig(),
         steps: [
           `<strong>Step 1 — Use the congruent-inscribed-angles corollary:</strong> since both intercept the same arc, \\(3x+5=4x-10\\).`,
           `<strong>Step 2 — Solve:</strong> \\(15=x\\).`,
@@ -134,6 +155,7 @@ ch["9.2"] = L("9.2", "Inscribed Angles and Intercepted Arcs (MA.912.GR.6.2)", [
       {
         h: "A right triangle inscribed in a semicircle",
         p: "Triangle \\(ABC\\) is inscribed in a circle with \\(\\overline{AB}\\) as a diameter. \\(m\\angle A=35^\\circ\\). Find \\(m\\angle B\\).",
+        fig: semicircleRight(),
         steps: [
           `<strong>Step 1 — Apply Thales' Theorem:</strong> since \\(\\overline{AB}\\) is a diameter, the angle at \\(C\\) (opposite it) is a right angle: \\(m\\angle C=90^\\circ\\).`,
           `<strong>Step 2 — Use the Triangle Angle-Sum Theorem:</strong> \\(m\\angle B=180^\\circ-90^\\circ-35^\\circ\\).`,
@@ -143,6 +165,7 @@ ch["9.2"] = L("9.2", "Inscribed Angles and Intercepted Arcs (MA.912.GR.6.2)", [
       {
         h: "Comparing a central and inscribed angle",
         p: "Central angle \\(\\angle AOB=100^\\circ\\), and \\(C\\) is a point on the major arc \\(AB\\). Find inscribed angle \\(\\angle ACB\\).",
+        fig: inscribedAngleFig(),
         steps: [
           `<strong>Step 1 — Find the intercepted arc:</strong> the central angle equals its arc, so \\(m\\widehat{AB}=100^\\circ\\) (the minor arc, which \\(\\angle ACB\\) intercepts from the major-arc side).`,
           `<strong>Step 2 — Apply the Inscribed Angle Theorem:</strong> \\(m\\angle ACB=\\dfrac12(100^\\circ)\\).`,
@@ -185,6 +208,7 @@ ch["9.3"] = L("9.3", "Chords, Tangents, and Secants (Lengths and Angle Measures)
       {
         h: "Perpendicular bisecting a chord",
         p: "A circle has radius 13. A chord sits a distance of 5 from the center. Find the chord's length.",
+        fig: chordPerp(),
         steps: [
           `<strong>Step 1 — Set up the right triangle:</strong> the radius, the distance to the chord, and half the chord form a right triangle, with the radius as the hypotenuse.`,
           `<strong>Step 2 — Apply the Pythagorean theorem:</strong> half-chord \\(=\\sqrt{13^2-5^2}=\\sqrt{169-25}=\\sqrt{144}=12\\).`,
@@ -203,6 +227,7 @@ ch["9.3"] = L("9.3", "Chords, Tangents, and Secants (Lengths and Angle Measures)
       {
         h: "Chord–chord length theorem",
         p: "Two chords intersect inside a circle. One chord splits into segments 6 and 12; the other splits into segments 8 and \\(x\\). Find \\(x\\).",
+        fig: chordChord(),
         steps: [
           `<strong>Step 1 — Apply the chord–chord product rule:</strong> \\(6\\cdot12=8\\cdot x\\).`,
           `<strong>Step 2 — Solve:</strong> \\(72=8x \\Rightarrow x=9\\).`,
@@ -211,6 +236,7 @@ ch["9.3"] = L("9.3", "Chords, Tangents, and Secants (Lengths and Angle Measures)
       {
         h: "Tangent–secant length theorem",
         p: "From an external point, a tangent segment has length \\(t\\), and a secant through the same point has an external segment of length 4 and a far segment of length 12 (so the whole secant is \\(16\\)). Find \\(t\\).",
+        fig: tangentSecant(),
         steps: [
           `<strong>Step 1 — Apply the tangent–secant rule:</strong> \\(t^2=(\\text{whole})(\\text{external})=16(4)\\).`,
           `<strong>Step 2 — Simplify:</strong> \\(t^2=64\\).`,
@@ -220,6 +246,7 @@ ch["9.3"] = L("9.3", "Chords, Tangents, and Secants (Lengths and Angle Measures)
       {
         h: "Angle from two secants outside the circle",
         p: "Two secants from an external point intercept arcs of \\(100^\\circ\\) and \\(30^\\circ\\). Find the angle at their intersection.",
+        fig: twoSecants(),
         steps: [
           `<strong>Step 1 — Apply the outside-angle rule:</strong> angle \\(=\\dfrac12(\\text{difference of the arcs})=\\dfrac12(100^\\circ-30^\\circ)\\).`,
           `<strong>Step 2 — Simplify:</strong> angle \\(=\\dfrac12(70^\\circ)=35^\\circ\\).`,
@@ -260,6 +287,7 @@ ch["9.4"] = L("9.4", "Circles in the Coordinate Plane: Equation $(x-h)^{2}+(y-k)
       {
         h: "Writing an equation from center and radius",
         p: "Write the equation of the circle with center \\((3,-2)\\) and radius \\(5\\).",
+        fig: circleEq(),
         steps: [
           `<strong>Step 1 — Substitute into standard form:</strong> \\((x-3)^2+(y-(-2))^2=5^2\\).`,
           `<strong>Step 2 — Simplify:</strong> \\((x-3)^2+(y+2)^2=25\\).`,
@@ -268,6 +296,7 @@ ch["9.4"] = L("9.4", "Circles in the Coordinate Plane: Equation $(x-h)^{2}+(y-k)
       {
         h: "Reading center and radius from an equation",
         p: "Find the center and radius of \\((x+1)^2+(y-4)^2=49\\).",
+        fig: circleEq(),
         steps: [
           `<strong>Step 1 — Match to standard form:</strong> \\((x-(-1))^2+(y-4)^2=7^2\\).`,
           `<strong>Step 2 — Read off center and radius:</strong> center \\((-1,4)\\), radius \\(7\\).`,
@@ -276,6 +305,7 @@ ch["9.4"] = L("9.4", "Circles in the Coordinate Plane: Equation $(x-h)^{2}+(y-k)
       {
         h: "Writing an equation from the center and a point",
         p: "Write the equation of the circle centered at the origin that passes through \\((6,8)\\).",
+        fig: circleEq(),
         steps: [
           `<strong>Step 1 — Find the radius with the distance formula:</strong> \\(r=\\sqrt{6^2+8^2}=\\sqrt{100}=10\\).`,
           `<strong>Step 2 — Write the equation:</strong> \\(x^2+y^2=100\\).`,
@@ -284,6 +314,7 @@ ch["9.4"] = L("9.4", "Circles in the Coordinate Plane: Equation $(x-h)^{2}+(y-k)
       {
         h: "Completing the square to find center and radius",
         p: "Rewrite \\(x^2+y^2-6x+4y-12=0\\) in standard form, then find its center and radius.",
+        fig: circleEq(),
         steps: [
           `<strong>Step 1 — Group and move the constant:</strong> \\((x^2-6x)+(y^2+4y)=12\\).`,
           `<strong>Step 2 — Complete the square in \\(x\\):</strong> \\(x^2-6x+9=(x-3)^2\\), adding \\(9\\) to both sides.`,
@@ -294,6 +325,7 @@ ch["9.4"] = L("9.4", "Circles in the Coordinate Plane: Equation $(x-h)^{2}+(y-k)
       {
         h: "Testing a point's position relative to a circle",
         p: "Is the point \\((2,2)\\) inside, on, or outside the circle \\((x-1)^2+(y-1)^2=4\\)?",
+        fig: circleEq(),
         steps: [
           `<strong>Step 1 — Substitute the point:</strong> \\((2-1)^2+(2-1)^2=1^2+1^2\\).`,
           `<strong>Step 2 — Simplify:</strong> \\(1+1=2\\).`,
@@ -345,6 +377,7 @@ ch["9.5"] = L("9.5", "Arc Length and Sector Area (MA.912.GR.6.4)", [
       {
         h: "Finding sector area",
         p: "A circle has radius 12. Find the sector area for a central angle of \\(90^\\circ\\).",
+        fig: sectorFig(),
         steps: [
           `<strong>Step 1 — Apply the formula:</strong> \\(A_{\\text{sector}}=\\dfrac{90}{360}\\cdot\\pi(12)^2\\).`,
           `<strong>Step 2 — Simplify the fraction:</strong> \\(\\dfrac{90}{360}=\\dfrac14\\).`,
@@ -354,6 +387,7 @@ ch["9.5"] = L("9.5", "Arc Length and Sector Area (MA.912.GR.6.4)", [
       {
         h: "Solving for the central angle from arc length",
         p: "A circle has radius 8, and an arc length of \\(4\\pi\\). Find the central angle \\(\\theta\\).",
+        fig: sectorFig(),
         steps: [
           `<strong>Step 1 — Set up the formula:</strong> \\(4\\pi=\\dfrac{\\theta}{360}\\cdot2\\pi(8)=\\dfrac{\\theta}{360}\\cdot16\\pi\\).`,
           `<strong>Step 2 — Isolate the fraction:</strong> \\(\\dfrac{4\\pi}{16\\pi}=\\dfrac{\\theta}{360} \\Rightarrow \\dfrac14=\\dfrac{\\theta}{360}\\).`,
@@ -363,6 +397,7 @@ ch["9.5"] = L("9.5", "Arc Length and Sector Area (MA.912.GR.6.4)", [
       {
         h: "Solving for the radius from sector area",
         p: "A sector has area \\(24\\pi\\) and central angle \\(120^\\circ\\). Find the radius.",
+        fig: sectorFig(),
         steps: [
           `<strong>Step 1 — Set up the formula:</strong> \\(24\\pi=\\dfrac{120}{360}\\cdot\\pi r^2=\\dfrac13\\pi r^2\\).`,
           `<strong>Step 2 — Isolate \\(r^2\\):</strong> \\(72=r^2\\).`,
@@ -372,6 +407,7 @@ ch["9.5"] = L("9.5", "Arc Length and Sector Area (MA.912.GR.6.4)", [
       {
         h: "A real-world sector problem",
         p: "A pizza slice has a radius of 7 in and a central angle of \\(45^\\circ\\). Find the length of its crust (the arc) and its area.",
+        fig: sectorFig(),
         steps: [
           `<strong>Step 1 — Find the arc length:</strong> \\(\\ell=\\dfrac{45}{360}\\cdot2\\pi(7)=\\dfrac18(14\\pi)=1.75\\pi\\approx5.5\\) in.`,
           `<strong>Step 2 — Find the sector area:</strong> \\(A=\\dfrac{45}{360}\\cdot\\pi(7)^2=\\dfrac18(49\\pi)=6.125\\pi\\approx19.2\\) in\\(^2\\).`,
@@ -421,6 +457,7 @@ ch["9.6"] = L("9.6", "Triangles and Quadrilaterals Inscribed in Circles (MA.912.
       {
         h: "Solving for x with opposite angles",
         p: "Cyclic quadrilateral \\(ABCD\\) has \\(m\\angle B=(3x+10)^\\circ\\) and \\(m\\angle D=(2x+30)^\\circ\\). Find \\(x\\) and both angles.",
+        fig: cyclicQuad(),
         steps: [
           `<strong>Step 1 — Set up the equation:</strong> \\((3x+10)+(2x+30)=180\\).`,
           `<strong>Step 2 — Solve:</strong> \\(5x+40=180 \\Rightarrow 5x=140 \\Rightarrow x=28\\).`,
@@ -431,6 +468,7 @@ ch["9.6"] = L("9.6", "Triangles and Quadrilaterals Inscribed in Circles (MA.912.
       {
         h: "Right angle from an inscribed diameter",
         p: "Triangle \\(ABC\\) is inscribed in a circle with \\(\\overline{AC}\\) as a diameter. \\(m\\angle A=40^\\circ\\). Find \\(m\\angle C\\).",
+        fig: semicircleRight(),
         steps: [
           `<strong>Step 1 — Apply Thales' Theorem:</strong> the angle opposite the diameter, \\(\\angle B\\), is \\(90^\\circ\\).`,
           `<strong>Step 2 — Use the Triangle Angle-Sum Theorem:</strong> \\(m\\angle C=180^\\circ-90^\\circ-40^\\circ\\).`,
@@ -440,6 +478,7 @@ ch["9.6"] = L("9.6", "Triangles and Quadrilaterals Inscribed in Circles (MA.912.
       {
         h: "Combining arcs and inscribed angles in a cyclic quadrilateral",
         p: "Cyclic quadrilateral \\(ABCD\\) has arcs \\(m\\widehat{AB}=80^\\circ\\), \\(m\\widehat{BC}=95^\\circ\\), \\(m\\widehat{CD}=x\\), \\(m\\widehat{DA}=110^\\circ\\). Find \\(x\\), then find \\(m\\angle B\\), the inscribed angle at vertex \\(B\\).",
+        fig: cyclicQuad(),
         steps: [
           `<strong>Step 1 — Use the fact that all four arcs sum to \\(360^\\circ\\):</strong> \\(80+95+x+110=360 \\Rightarrow x=75^\\circ\\).`,
           `<strong>Step 2 — Identify what \\(\\angle B\\) intercepts:</strong> \\(\\angle B\\) is formed by chords \\(\\overline{BA}\\) and \\(\\overline{BC}\\), so it intercepts the arc from \\(A\\) to \\(C\\) that does <em>not</em> contain \\(B\\) — that's arc \\(ADC=m\\widehat{AD}+m\\widehat{DC}=110^\\circ+75^\\circ=185^\\circ\\).`,
@@ -450,6 +489,7 @@ ch["9.6"] = L("9.6", "Triangles and Quadrilaterals Inscribed in Circles (MA.912.
       {
         h: "Testing whether a quadrilateral can be cyclic",
         p: "A quadrilateral has \\(m\\angle A=70^\\circ\\) and \\(m\\angle C=100^\\circ\\) (opposite angles). Could this quadrilateral be inscribed in a circle?",
+        fig: cyclicQuad(),
         steps: [
           `<strong>Step 1 — Check the cyclic-quadrilateral condition:</strong> opposite angles must sum to \\(180^\\circ\\).`,
           `<strong>Step 2 — Add:</strong> \\(70^\\circ+100^\\circ=170^\\circ\\neq180^\\circ\\).`,
