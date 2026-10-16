@@ -397,6 +397,8 @@ function BlockEditor({
         <input value={b.url} onChange={(e) => patch(block.id, { url: e.target.value })} style={fieldStyle} placeholder="YouTube URL" />
       )}
 
+      {block.type === "widget" && <WidgetJsonField widget={b.widget} props={b.props} onChange={(p) => patch(block.id, p)} />}
+
       {block.type === "callout" && (
         <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
           <select value={b.variant} onChange={(e) => patch(block.id, { variant: e.target.value })} style={fieldStyle}>
@@ -476,5 +478,25 @@ function IconBtn({ children, onClick, disabled, danger }: { children: React.Reac
     >
       {children}
     </button>
+  );
+}
+
+// Widget blocks are authored by scripts; here they are editable as raw JSON.
+function WidgetJsonField({ widget, props, onChange }: { widget: string; props?: Record<string, unknown>; onChange: (p: { widget?: string; props?: Record<string, unknown> }) => void }) {
+  const [text, setText] = useState(() => JSON.stringify(props ?? {}, null, 2));
+  const [err, setErr] = useState<string | null>(null);
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+      <input value={widget} onChange={(e) => onChange({ widget: e.target.value })} style={fieldStyle} placeholder="Widget name, e.g. integerExplorer" />
+      <textarea
+        value={text}
+        onChange={(e) => {
+          setText(e.target.value);
+          try { onChange({ props: JSON.parse(e.target.value) }); setErr(null); } catch { setErr("Not valid JSON yet — changes are not saved until it parses."); }
+        }}
+        style={{ ...fieldStyle, minHeight: 140, resize: "vertical", fontFamily: "monospace", fontSize: 12.5 }}
+      />
+      {err && <span style={{ color: "#b91c1c", fontSize: 12.5 }}>{err}</span>}
+    </div>
   );
 }

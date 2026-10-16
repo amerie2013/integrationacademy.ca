@@ -10,6 +10,7 @@ import { CourseNav } from "../../../components/CourseNav";
 import { MaterialsPanel } from "../../../components/MaterialsPanel";
 import { fetchMaterials } from "../../../lib/materials";
 import { Block } from "../../../lib/blocks";
+import { previewBlocks } from "../../../lib/lessonPreview";
 import { TutorChat } from "../../../components/TutorChat";
 import { accentFor, accentClass } from "../../../lib/courseAccent";
 import { courseNotice } from "../../../lib/courseNotice";
@@ -34,16 +35,19 @@ export default function LessonViewPage() {
 
   useEffect(() => {
     (async () => {
-      const { data } = await supabase
+      const preview = await previewBlocks(lessonId);
+      const { data: row } = await supabase
         .from("lessons")
         .select("title, blocks, course_id")
         .eq("id", lessonId)
         .single();
+      // dev-only preview also works signed out (no DB row visible): use its title.
+      const data = row ?? (preview ? { title: preview.title, blocks: preview.blocks, course_id: null } : null);
       if (!data) {
         setNotFound(true);
       } else {
         setTitle(data.title ?? "");
-        setBlocks(Array.isArray(data.blocks) ? (data.blocks as Block[]) : []);
+        setBlocks(preview?.blocks ?? (Array.isArray(data.blocks) ? (data.blocks as Block[]) : []));
         setCourseId(data.course_id ?? "");
         if (data.course_id) {
           const { data: c } = await supabase.from("courses").select("code").eq("id", data.course_id).single();

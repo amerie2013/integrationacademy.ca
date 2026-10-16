@@ -7,6 +7,7 @@ import { supabase } from "../../../lib/supabase";
 import { SiteHeader } from "../../../components/SiteHeader";
 import { CourseNav } from "../../../components/CourseNav";
 import { AssignmentBody } from "../../../components/AssignmentBody";
+import { previewAssignment } from "../../../lib/lessonPreview";
 import { MathInput } from "../../../components/MathInput";
 import { MaterialsPanel } from "../../../components/MaterialsPanel";
 import { TutorChat } from "../../../components/TutorChat";
@@ -40,7 +41,10 @@ export default function AssignmentPage() {
 
   useEffect(() => {
     (async () => {
-      const { data } = await supabase.from("assignments").select("id, title, description, due_date, course_id, tutor_enabled").eq("id", id).single();
+      const preview = await previewAssignment(id);
+      const { data: row } = await supabase.from("assignments").select("id, title, description, due_date, course_id, tutor_enabled").eq("id", id).single();
+      // dev-only preview (also works signed out): staged text overrides the database copy
+      const data = preview ? { id, due_date: null, tutor_enabled: false, ...(row ?? {}), title: preview.title, description: preview.description, course_id: row?.course_id ?? preview.course_id ?? "" } : row;
       if (!data) { setNotFound(true); setLoading(false); return; }
       setA(data as Assignment);
       // Default is the admin's course-level due date — used only for INDIVIDUAL

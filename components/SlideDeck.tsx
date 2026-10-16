@@ -132,6 +132,8 @@ export function SlideDeck({ title, blocks }: { title: string; blocks: Block[] })
     const out: Slide[] = [];
     for (const b of blocks) {
       if (b.type === "html") out.push(...splitHtml(b.html, title));
+      else if (b.type === "widget" && b.widget === "practice") out.push({ kind: "block", block: b, eyebrow: "Practice", speech: "Practice questions. Work each one on paper, then type your answer and check it." });
+      else if (b.type === "widget") out.push({ kind: "block", block: b, eyebrow: "Explore", speech: "Here is an interactive explorer. Try the controls and watch how the picture and the numbers change." });
       else out.push({ kind: "block", block: b, eyebrow: "Interactive graph", speech: "Here is an interactive graph. Try adjusting the slider to explore how the relationship changes." });
     }
     if (out.length === 0) out.push({ kind: "title", html: `<h1>${title}</h1>` });

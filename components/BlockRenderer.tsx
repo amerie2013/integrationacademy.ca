@@ -11,6 +11,7 @@ import { VectorFigure } from "./VectorFigure";
 import { PointPlot } from "./PointPlot";
 import { EquationGame } from "./EquationGame";
 import { FactoringSteps } from "./FactoringSteps";
+import { LessonWidget } from "./widgets/LessonWidget";
 
 const CALLOUT_STYLES: Record<string, { bg: string; border: string; label: string }> = {
   note: { bg: "#eff6ff", border: "#bfdbfe", label: "Note" },
@@ -167,6 +168,8 @@ function renderBlock(b: Block) {
           check={b.check}
         />
       );
+    case "widget":
+      return <LessonWidget widget={b.widget} props={b.props} />;
     case "callout": {
       const s = CALLOUT_STYLES[b.variant] ?? CALLOUT_STYLES.note;
       return (

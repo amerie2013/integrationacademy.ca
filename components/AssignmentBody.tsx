@@ -16,6 +16,25 @@ function catFor(line: string) {
 function tex(s: string) {
   try { return katex.renderToString(s.trim(), { throwOnError: false, displayMode: false }); } catch { return s; }
 }
+// A question line may carry figures as ![caption](https://…); they render under the text.
+const IMG = /!\[([^\]]*)\]\((https?:\/\/[^)\s]+)\)/g;
+function withFigures(text: string): React.ReactNode {
+  const figs = [...text.matchAll(IMG)];
+  if (!figs.length) return inline(text);
+  return (
+    <>
+      {inline(text.replace(IMG, "").trim())}
+      {figs.map((f, i) => (
+        <figure key={i} style={{ margin: "10px 0 4px" }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={f[2]} alt={f[1]} style={{ display: "block", maxWidth: "100%", height: "auto", borderRadius: 8, border: "1px solid #e2e8f0", background: "#fff" }} />
+          {f[1] && <figcaption style={{ fontSize: 12.5, color: "#64748b", marginTop: 4 }}>{f[1]}</figcaption>}
+        </figure>
+      ))}
+    </>
+  );
+}
+
 function inline(text: string): React.ReactNode[] {
   const parts = text.split(/(\\\([\s\S]*?\\\)|\$[^$]+\$)/g);
   return parts.map((p, i) => {
@@ -109,7 +128,7 @@ export function AssignmentBody({ text }: { text: string }) {
       out.push(
         <div key={`q${i}`} style={{ display: "flex", gap: 10, padding: "8px 12px", borderLeft: `3px solid ${current?.color ?? "#cbd5e1"}`, background: "#fafbff", borderRadius: 6, marginBottom: 6 }}>
           {num && <span style={{ fontWeight: 800, color: current?.color ?? "#64748b", minWidth: 20 }}>{num}.</span>}
-          <span style={{ lineHeight: 1.6, color: "#1e293b" }}>{inline(body)}</span>
+          <span style={{ lineHeight: 1.6, color: "#1e293b", minWidth: 0 }}>{withFigures(body)}</span>
         </div>,
       );
     }

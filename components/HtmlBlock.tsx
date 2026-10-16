@@ -92,7 +92,7 @@ function tex(src: string, display: boolean) {
   }
 }
 
-function renderMath(html: string): string {
+export function renderMath(html: string): string {
   let s = html;
   s = s.replace(/\\\[([\s\S]+?)\\\]/g, (_m, t) => tex(t, true));
   s = s.replace(/\\\(([\s\S]+?)\\\)/g, (_m, t) => tex(t, false));

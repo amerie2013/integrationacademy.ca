@@ -15,7 +15,8 @@ export type BlockType =
   | "callout"
   | "pointset"
   | "equationgame"
-  | "factorsteps";
+  | "factorsteps"
+  | "widget";
 
 export type Block =
   | { id: string; type: "html"; html: string }
@@ -126,7 +127,10 @@ export type Block =
       prompt: string;
       frames: { latex: string; caption: string; kind?: "start" | "highlight" | "pull" | "group" | "done" }[];
       check?: string;
-    };
+    }
+  // Named interactive React widget (components/widgets). `props` is the widget's
+  // own JSON config; unknown names render a notice instead of crashing.
+  | { id: string; type: "widget"; widget: string; props?: Record<string, unknown>; caption?: string };
 
 export const BLOCK_LABELS: Record<BlockType, string> = {
   html: "HTML lecture (boxes, view-answer)",
@@ -143,6 +147,7 @@ export const BLOCK_LABELS: Record<BlockType, string> = {
   pointset: "Data table + points plot",
   equationgame: "Equation solver game (+ graph check)",
   factorsteps: "Animated factoring steps (GCF / grouping)",
+  widget: "Interactive widget (explorer / checked practice)",
 };
 
 let counter = 0;
@@ -331,5 +336,7 @@ export function newBlock(type: BlockType): Block {
         ],
         check: "3x\\cdot 2x + 3x\\cdot 3 = 6x^2 + 9x",
       };
+    case "widget":
+      return { id: uid(), type, widget: "integerExplorer", props: {} };
   }
 }

@@ -71,7 +71,8 @@ async function allBank(select: string, courseId: string, topic?: string) {
   const PAGE = 1000;
   const out: any[] = [];
   for (let from = 0; from < 10000; from += PAGE) {
-    let q = admin.from("bank_questions").select(select).eq("course_id", courseId).range(from, from + PAGE - 1);
+    // long_answer questions need a teacher to mark them, so self-practice never draws them
+    let q = admin.from("bank_questions").select(select).eq("course_id", courseId).neq("kind", "long_answer").range(from, from + PAGE - 1);
     if (topic) q = q.eq("topic", topic);
     const { data, error } = await q;
     if (error) throw new Error(error.message);

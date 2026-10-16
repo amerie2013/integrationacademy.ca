@@ -9,6 +9,7 @@ export type BankLike = {
   id: string;
   topic?: string | null;
   difficulty?: string | null; // "easy" | "medium" | "hard"
+  kind?: string | null;
 };
 
 export type DifficultyCounts = { easy: number; medium: number; hard: number };
@@ -60,7 +61,9 @@ export function sampleChapterTest(
   opts: { minPerTopic?: number; exclude?: Set<string> } = {},
 ): SampleResult {
   const { minPerTopic = 0, exclude = new Set<string>() } = opts;
-  const inChapter = rows.filter((r) => chapterOf(r.topic) === chapter);
+  // Teacher-graded written problems (long_answer) are for printed tests; keep them out of
+  // auto-built online tests, where they would sit ungraded.
+  const inChapter = rows.filter((r) => chapterOf(r.topic) === chapter && r.kind !== "long_answer");
   const byId = new Map(inChapter.map((r) => [r.id, r]));
   const fresh = inChapter.filter((r) => !exclude.has(r.id));
   const stale = inChapter.filter((r) => exclude.has(r.id));

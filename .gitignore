@@ -49,3 +49,7 @@ __pycache__/
 scripts/_ftce/fulltext.txt
 
 .vercel
+/.lesson-preview/
+/scripts/mth1w-ch1/v2/ws/out/
+/scripts/mth1w-ch1/v2/bank/out/
+/scripts/mth1w-ch1/v2/backup/

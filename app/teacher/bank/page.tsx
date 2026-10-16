@@ -18,7 +18,7 @@ type CourseOpt = { id: string; code: string | null; title: string; level: string
 // plus the chapter/settings so the next form's sampling can avoid repeats.
 type TestFlow = { chapter: number; counts: DifficultyCounts; minPerTopic: number; totalForms: number; forms: string[][] };
 
-const KINDS: QKind[] = ["multiple_choice", "multiple_select", "true_false", "numeric", "math_expr", "short_answer", "fill_blank", "matching", "ordering"];
+const KINDS: QKind[] = ["multiple_choice", "multiple_select", "true_false", "numeric", "math_expr", "short_answer", "fill_blank", "matching", "ordering", "long_answer"];
 const DIFFS = ["easy", "medium", "hard"];
 
 export default function QuestionBankPage() {
@@ -313,8 +313,11 @@ function QuestionBankInner() {
           />
         ) : (
           <div style={{ background: "#fff", border: "1px solid #e2e8f0", borderRadius: 12, padding: 18, marginBottom: 26, display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12 }}>
-            <p style={{ color: "#64748b", margin: 0, fontSize: 14 }}>Auto-build a test from the bank across a whole chapter, with as many versions as you like.</p>
-            <button onClick={() => { setGenChapter(chapters[0]); setGenOpen(true); }} style={{ ...primary, flexShrink: 0 }}>Generate chapter test →</button>
+            <p style={{ color: "#64748b", margin: 0, fontSize: 14 }}>Auto-build a test from the bank across a whole chapter, with as many versions as you like — as an online quiz, or as a printable paper test with writing space and an answer key.</p>
+            <span style={{ display: "flex", gap: 8, flexShrink: 0 }}>
+              <Link href={`/tests/paper?course=${courseId}`} style={{ ...primary, textDecoration: "none", background: "#fff", color: "#1b7a44", border: "1px solid #1b7a44" }}>Printable test (PDF)</Link>
+              <button onClick={() => { setGenChapter(chapters[0]); setGenOpen(true); }} style={{ ...primary, flexShrink: 0 }}>Generate online test →</button>
+            </span>
           </div>
         )}
 
@@ -604,8 +607,10 @@ function Editor({ editing, setEditing, topics, onSave, onClose }: any) {
         {editing.prompt?.includes("$") && <div style={{ background: "#f8fafc", borderRadius: 8, padding: "6px 10px", margin: "6px 0", fontSize: 14 }}><PromptText prompt={editing.prompt} /></div>}
         <div style={{ marginTop: 10 }}><AnswerEditor q={editing} set={set} /></div>
         <div style={{ marginTop: 12 }}>
-          <label style={lbl}>Feedback (optional)</label>
-          <input value={editing.feedback ?? ""} onChange={(e) => set({ feedback: e.target.value })} style={field} />
+          <label style={lbl}>{editing.kind === "long_answer" ? "Model solution and marking notes (printed in the answer key)" : "Feedback (optional)"}</label>
+          {editing.kind === "long_answer"
+            ? <textarea value={editing.feedback ?? ""} onChange={(e) => set({ feedback: e.target.value })} rows={5} style={{ ...field, lineHeight: 1.5, resize: "vertical" }} />
+            : <input value={editing.feedback ?? ""} onChange={(e) => set({ feedback: e.target.value })} style={field} />}
         </div>
         <div style={{ display: "flex", justifyContent: "flex-end", gap: 10, marginTop: 18 }}>
           <button onClick={onClose} style={{ ...mini, padding: "10px 18px" }}>Cancel</button>

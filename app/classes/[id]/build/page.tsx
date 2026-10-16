@@ -272,7 +272,10 @@ export default function ClassQuizBuilder() {
         ) : (
           <div style={{ background: "#fff", border: "1px solid #e2e8f0", borderRadius: 12, padding: 18, marginBottom: 26, display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12 }}>
             <p style={{ color: "#64748b", margin: 0, fontSize: 14 }}>Auto-build a test from the bank across a whole chapter, with as many versions as you like.</p>
-            <button onClick={() => { setGenChapter(chapters[0]); setGenOpen(true); }} style={{ ...primaryL, flexShrink: 0 }}>Generate chapter test →</button>
+            <span style={{ display: "flex", gap: 8, flexShrink: 0 }}>
+              {cls && <Link href={`/tests/paper?course=${cls.course_id}&class=${classId}`} style={{ ...primaryL, textDecoration: "none", background: "#fff", color: "#1b7a44", border: "1px solid #1b7a44" }}>Printable test (PDF)</Link>}
+              <button onClick={() => { setGenChapter(chapters[0]); setGenOpen(true); }} style={{ ...primaryL, flexShrink: 0 }}>Generate online test →</button>
+            </span>
           </div>
         )}
 
