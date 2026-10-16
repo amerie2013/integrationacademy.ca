@@ -1,5 +1,6 @@
 // Worksheet 1.2 — Adding & Subtracting Integers (teacher edition, one PDF with answer key)
 import { numberLine, chips, thermometer, barChart } from "./tikz.mjs";
+import { PROBLEMS } from "./p1_2.mjs";
 
 export const WS = {
   code: "1.2",
@@ -72,23 +73,5 @@ Teach students to \textbf{estimate the sign first}: are the positives or the neg
     { title: "Distance between elevations", q: String.raw`The lowest point in North America (Death Valley) is about $-86$ m and the highest point in Canada (Mount Logan) is about $5959$ m. How far apart are they vertically?`,
       steps: [String.raw`Distance $=$ higher $-$ lower $=5959-(-86)$.`, String.raw`$=5959+86=6045$.`], ans: "about $6045$ m" },
   ],
-  problems: [
-    { level: 1, q: String.raw`Evaluate $-8+3$.`, ans: "$-5$", sol: String.raw`Different signs: $8-3=5$; $-8$ is farther from $0$, so $-5$.` },
-    { level: 1, q: String.raw`Evaluate $-4+(-12)$.`, ans: "$-16$", sol: String.raw`Same signs: $4+12=16$, keep the negative: $-16$.` },
-    { level: 1, q: String.raw`Evaluate $9-15$.`, ans: "$-6$", sol: String.raw`$9+(-15)$: $15-9=6$, negative because $-15$ is larger in size.` },
-    { level: 1, q: String.raw`Evaluate $-7-(-7)$. Explain the answer.`, ans: "$0$", sol: String.raw`$-7+7=0$: a number plus its opposite is zero.` },
-    { level: 1, q: String.raw`Write the opposite of $-14$ and evaluate $|-14|+|6|$.`, ans: "$14$; $20$", sol: String.raw`The opposite of $-14$ is $14$. $|-14|+|6|=14+6=20$.` },
-    { level: 2, q: String.raw`Evaluate $-11+6-(-9)$.`, ans: "$4$", sol: String.raw`$-11+6+9$: positives $15$, negatives $-11$; $15-11=4$.` },
-    { level: 2, q: String.raw`Evaluate $15-(-3)+(-22)$.`, ans: "$-4$", sol: String.raw`$15+3+(-22)=18-22=-4$.` },
-    { level: 2, q: String.raw`Maya has $60$ dollars in her account. She spends $85$ dollars on a jacket, then deposits $40$ dollars. What is her balance?`, ans: "$15$ dollars", sol: String.raw`$60-85=-25$ (overdrawn), then $-25+40=15$.` },
-    { level: 2, q: String.raw`The chart shows the daily change in the noon temperature. The temperature on Sunday was $-1\,^\circ$C. What was it on Friday?`,
-      fig: barChart([["Mon", 3], ["Tue", -5], ["Wed", -2], ["Thu", 6], ["Fri", -4]], { ylabel: "change ($^\\circ$C)", ymin: -6, ymax: 7 }), space: 2.6, ans: String.raw`$-3\,^\circ$C`,
-      sol: String.raw`$-1+3+(-5)+(-2)+6+(-4)$. Positives: $3+6=9$; negatives: $-1-5-2-4=-12$; total $9-12=-3$.` },
-    { level: 2, q: String.raw`An elevator starts on floor $4$, goes down $9$ floors into the parking levels, then up $2$ floors. On which floor does it stop? (Ground is floor $0$.)`, ans: "floor $-3$ (parking level 3)", sol: String.raw`$4-9+2=-5+2=-3$.` },
-    { level: 3, q: String.raw`Find the missing integer: $-13-\square=6$. Check your answer.`, ans: "$-19$", sol: String.raw`Subtracting the missing number gives a larger result, so it must be negative. $-13-(-19)=-13+19=6$ \checkmark` },
-    { level: 3, q: String.raw`Find two integers whose sum is $-5$ and whose difference (larger minus smaller) is $11$.`, ans: "$3$ and $-8$", sol: String.raw`Try pairs adding to $-5$: $(0,-5)$ diff $5$; $(1,-6)$ diff $7$; $(2,-7)$ diff $9$; $(3,-8)$ diff $11$ \checkmark. So $3$ and $-8$.` },
-    { level: 3, q: String.raw`Use a number line to explain why $a-b$ and $b-a$ are always opposites. Use $a=2$, $b=-5$ as your example.`, space: 3.6, ans: "$7$ and $-7$", sol: String.raw`$a-b$ is the move from $b$ to $a$; $b-a$ is the move from $a$ to $b$ --- the same distance in the opposite direction. $2-(-5)=7$ and $-5-2=-7$.` },
-    { level: 3, q: String.raw`Is $|a+b|=|a|+|b|$ always true? Test $a=3$, $b=-5$, and state when it \emph{is} true.`, ans: "no; true when $a$ and $b$ have the same sign (or one is $0$)", sol: String.raw`$|3+(-5)|=|-2|=2$ but $|3|+|-5|=8$, so not always. When the signs differ, part of each number cancels. It is true when $a$ and $b$ have the same sign or one of them is $0$.` },
-    { level: 3, q: String.raw`A hockey team has scored $37$ goals and allowed $52$. (a) What is its goal differential (for minus against)? (b) By how many goals in total must it outscore opponents in the rest of the season to finish at $+5$?`, ans: "(a) $-15$ (b) $20$", sol: String.raw`(a) $37-52=-15$. (b) From $-15$ to $5$ is $5-(-15)=20$ goals.` },
-  ],
+  problems: PROBLEMS,
 };

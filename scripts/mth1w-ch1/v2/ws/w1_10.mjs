@@ -1,5 +1,6 @@
 // Worksheet 1.10 — Density, Infinity & Limit (teacher edition)
 import { numberLine, pointsGraph, raw } from "./tikz.mjs";
+import { PROBLEMS } from "./p1_10.mjs";
 
 const ZOOM = raw(String.raw`\draw[thick,<->] (0,2) -- (12,2); \foreach \x/\l in {1/{0},6/{\frac12},11/{1}} {\draw (\x,1.9) -- (\x,2.1) node[above,font=\small] {$\l$};}
 \draw[thick,<->] (0,0) -- (12,0); \foreach \x/\l in {1/{\frac12},3.5/{\frac{9}{16}},6/{\frac58},8.5/{\frac{11}{16}},11/{\frac34}} {\draw (\x,-0.1) -- (\x,0.1) node[below=4pt,font=\small] {$\l$};}
@@ -77,21 +78,5 @@ ${SQUARES}`],
       steps: [String.raw`$\frac{8}{16}+\frac{4}{16}+\frac{2}{16}+\frac{1}{16}=\frac{15}{16}$.`, String.raw`The unshaded part is $\frac1{16}$, then $\frac1{32}$, \ldots\ which shrinks to $0$.`], ans: String.raw`$\frac{15}{16}$; limit $1$` },
     { title: "A repeating decimal as a limit", q: String.raw`Explain why $0.\overline{3}=\frac13$ exactly.`, steps: [String.raw`$0.3,0.33,0.333,\dots$ get closer to $\frac13$.`, String.raw`The gaps are $\frac1{30},\frac1{300},\frac1{3000},\dots$, which approach $0$.`, String.raw`The infinite decimal means the limit, which is $\frac13$.`], ans: String.raw`$0.\overline{3}=\frac13$` },
   ],
-  problems: [
-    { level: 1, q: String.raw`Find the midpoint of $\frac38$ and $\frac12$.`, ans: String.raw`$\frac{7}{16}$`, sol: String.raw`$\frac38+\frac48=\frac78$; $\frac78\div2=\frac{7}{16}$.` },
-    { level: 1, q: String.raw`Find a number between $1.4$ and $1.5$.`, ans: "e.g. $1.45$", sol: String.raw`Any decimal $1.41$ to $1.49$, or $1.4\overline{1}$, etc.` },
-    { level: 1, q: String.raw`How many integers lie strictly between $-4$ and $3$?`, ans: "$6$", sol: String.raw`$-3,-2,-1,0,1,2$.` },
-    { level: 1, q: String.raw`What value does $1,\ \frac1{10},\ \frac1{100},\ \frac1{1000},\dots$ approach?`, ans: "$0$", sol: String.raw`Each term is one tenth of the previous; terms approach $0$.` },
-    { level: 1, q: String.raw`Write the next two terms of $\frac12,\frac23,\frac34,\dots$ and state the limit.`, ans: String.raw`$\frac45,\frac56$; limit $1$`, sol: String.raw`Numerator $n$, denominator $n+1$.` },
-    { level: 2, q: String.raw`Find the midpoint of $-\frac34$ and $\frac12$.`, ans: String.raw`$-\frac18$`, sol: String.raw`$-\frac34+\frac24=-\frac14$; $-\frac14\div2=-\frac18$.` },
-    { level: 2, q: String.raw`Find three fractions between $\frac59$ and $\frac23$.`, ans: String.raw`e.g.\ $\frac{21}{36},\frac{22}{36},\frac{23}{36}$`, sol: String.raw`$\frac59=\frac{20}{36}$, $\frac23=\frac{24}{36}$.` },
-    { level: 2, q: String.raw`What is the limit of $5-\frac1n$ as $n$ grows?`, ans: "$5$", sol: String.raw`$\frac1n\to0$, so $5-\frac1n\to5$ (always slightly less than $5$).` },
-    { level: 2, q: String.raw`What number does $3,\ 3.3,\ 3.33,\ 3.333,\dots$ approach? Give it as a fraction.`, ans: String.raw`$\frac{10}{3}$`, sol: String.raw`The limit is $3.\overline{3}=3+\frac13=\frac{10}{3}$.` },
-    { level: 2, q: String.raw`Find $\frac12+\frac14+\frac18+\frac1{16}+\frac1{32}+\frac1{64}$. How far is it from $1$?`, ans: String.raw`$\frac{63}{64}$; $\frac1{64}$`, sol: String.raw`$\frac{32+16+8+4+2+1}{64}=\frac{63}{64}$.` },
-    { level: 3, q: String.raw`Explain why there is no “next” rational number after $0.5$.`, space: 3.4, ans: "between 0.5 and any candidate is their midpoint", sol: String.raw`Suppose $r>0.5$ is the next one. The midpoint $\frac{0.5+r}{2}$ is rational and lies between $0.5$ and $r$, so $r$ was not next. This works for every candidate.` },
-    { level: 3, q: String.raw`Use $\frac13=0.\overline{3}$ and $\frac23=0.\overline{6}$ to explain why $0.\overline{9}=1$.`, ans: "add the two", sol: String.raw`$\frac13+\frac23=1$, and $0.\overline{3}+0.\overline{6}=0.\overline{9}$ (digit by digit, no carrying). So $0.\overline{9}=1$.` },
-    { level: 3, q: String.raw`Give an irrational number between $1.41$ and $1.42$. Explain how you know it lies there.`, ans: String.raw`$\sqrt2$`, sol: String.raw`$1.41^2=1.9881<2<2.0164=1.42^2$, so $1.41<\sqrt2<1.42$, and $\sqrt2$ is irrational.` },
-    { level: 3, q: String.raw`A frog jumps $1$ m, and each later jump is $\frac13$ as long as the one before. (a) How far has it gone after $4$ jumps? (b) What distance does it approach?`, ans: String.raw`(a) $\frac{40}{27}\approx1.48$ m (b) $1.5$ m`, sol: String.raw`(a) $1+\frac13+\frac19+\frac1{27}=\frac{27+9+3+1}{27}=\frac{40}{27}$. (b) The totals $1,\ 1.33,\ 1.44,\ 1.48,\dots$ leave gaps to $1.5$ of $0.5,\ 0.17,\ 0.06,\ 0.02,\dots$ --- each gap is one third of the previous one, so the gap approaches $0$ and the distance approaches $1.5$ m.` },
-    { level: 3, q: String.raw`Pair every natural number $n$ with $2n$. Explain why this suggests there are “as many” even numbers as natural numbers, even though the even numbers are only part of $\mathbb{N}$.`, space: 3.8, ans: "a perfect one-to-one pairing", sol: String.raw`$1\leftrightarrow2$, $2\leftrightarrow4$, $3\leftrightarrow6$, \ldots\ Every natural number has exactly one partner and every even number is used exactly once. For infinite sets, a part can be the “same size” as the whole --- unlike finite sets.` },
-  ],
+  problems: PROBLEMS,
 };

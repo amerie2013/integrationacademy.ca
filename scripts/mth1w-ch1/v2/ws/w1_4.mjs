@@ -1,5 +1,6 @@
 // Worksheet 1.4 — Fractions: Equivalence, Comparing, Adding & Subtracting (teacher edition)
 import { numberLine, fracBar, barStack, tape } from "./tikz.mjs";
+import { PROBLEMS } from "./p1_4.mjs";
 
 const fifths = ["$0$", "$\\frac15$", "$\\frac25$", "$\\frac35$", "$\\frac45$", "$1$"];
 
@@ -67,23 +68,5 @@ ${barStack([{ n: 1, d: 4, label: "$\\frac14$" }, { n: 2, d: 3, label: "$\\frac23
       fig: tape([{ n: 3, label: "cut off $2\\frac56$ m", color: "red" }, { n: 4, label: "left: ?", color: "green" }], { unit: 1.1, total: "$6\\frac18$ m" }),
       steps: [String.raw`LCD $24$: $6\frac{3}{24}-2\frac{20}{24}$.`, String.raw`$\frac{3}{24}<\frac{20}{24}$, so regroup one whole: $5\frac{27}{24}-2\frac{20}{24}$.`, String.raw`$=3\frac{7}{24}$.`], ans: String.raw`$3\frac{7}{24}$ m` },
   ],
-  problems: [
-    { level: 1, q: String.raw`Write $\frac{45}{105}$ in lowest terms.`, ans: String.raw`$\frac37$`, sol: String.raw`GCF of $45$ and $105$ is $15$: $\frac{45\div15}{105\div15}=\frac37$.` },
-    { level: 1, q: String.raw`Fill in the blank: $\frac49=\frac{\square}{63}$.`, ans: "$28$", sol: String.raw`$9\times7=63$, so $4\times7=28$.` },
-    { level: 1, q: String.raw`Write $\frac{41}{8}$ as a mixed number and $3\frac29$ as an improper fraction.`, ans: String.raw`$5\frac18$; $\frac{29}{9}$`, sol: String.raw`$41\div8=5$ R $1$. $3\frac29=\frac{27+2}{9}=\frac{29}{9}$.` },
-    { level: 1, q: String.raw`Evaluate $\frac{5}{12}+\frac{1}{12}$ in lowest terms.`, ans: String.raw`$\frac12$`, sol: String.raw`Same denominator: $\frac{6}{12}=\frac12$.` },
-    { level: 1, q: String.raw`Which is larger, $\frac58$ or $\frac{7}{12}$? Show the common denominator.`, ans: String.raw`$\frac58$`, sol: String.raw`LCD $24$: $\frac{15}{24}$ vs $\frac{14}{24}$.` },
-    { level: 2, q: String.raw`Evaluate $\frac38+\frac56$. Give a mixed number.`, ans: String.raw`$1\frac{5}{24}$`, sol: String.raw`$\frac{9}{24}+\frac{20}{24}=\frac{29}{24}=1\frac{5}{24}$.` },
-    { level: 2, q: String.raw`Evaluate $-\frac23+\frac14$.`, ans: String.raw`$-\frac{5}{12}$`, sol: String.raw`$-\frac{8}{12}+\frac{3}{12}=-\frac{5}{12}$.` },
-    { level: 2, q: String.raw`Evaluate $\frac45-\left(-\frac16\right)$.`, ans: String.raw`$\frac{29}{30}$`, sol: String.raw`Add the opposite: $\frac{24}{30}+\frac{5}{30}=\frac{29}{30}$.` },
-    { level: 2, q: String.raw`Evaluate $2\frac34+3\frac58$.`, ans: String.raw`$6\frac38$`, sol: String.raw`Wholes $5$; parts $\frac68+\frac58=\frac{11}{8}=1\frac38$; total $6\frac38$.` },
-    { level: 2, q: String.raw`Leah walks $1\frac12$ km to school, $\frac34$ km to the library and $2\frac13$ km home. How far does she walk altogether?`, ans: String.raw`$4\frac{7}{12}$ km`, sol: String.raw`$\frac32+\frac34+\frac73=\frac{18}{12}+\frac{9}{12}+\frac{28}{12}=\frac{55}{12}=4\frac{7}{12}$.` },
-    { level: 3, q: String.raw`Order from least to greatest: $-\frac56,\ -\frac79,\ -0.8$. Explain.`, ans: String.raw`$-\frac56<-0.8<-\frac79$`, sol: String.raw`As decimals: $-0.8\overline{3}$, $-0.\overline{7}$, $-0.8$. The largest size is farthest left: $-0.833<-0.8<-0.778$.` },
-    { level: 3, q: String.raw`Find the fraction exactly halfway between $\frac13$ and $\frac12$.`, ans: String.raw`$\frac{5}{12}$`, sol: String.raw`$\frac13=\frac{4}{12}$, $\frac12=\frac{6}{12}$; halfway is $\frac{5}{12}$ (or $(\frac13+\frac12)\div2=\frac56\div2=\frac{5}{12}$).` },
-    { level: 3, q: String.raw`A student wrote $\frac23+\frac14=\frac37$. Use fraction bars to explain the error and give the correct answer.`, space: 4, ans: String.raw`$\frac{11}{12}$`,
-      fig: barStack([{ n: 2, d: 3, label: "$\\frac23$" }, { n: 1, d: 4, label: "$\\frac14$", color: "amber" }], { width: 8 }),
-      sol: String.raw`The student added numerators and denominators. But $\frac37<\frac12$, while $\frac23$ alone is more than $\frac12$, so the sum must be larger. Thirds and quarters are different sizes; re-cut into twelfths: $\frac{8}{12}+\frac{3}{12}=\frac{11}{12}$.` },
-    { level: 3, q: String.raw`A tank is $\frac58$ full. Water equal to $\frac13$ of the tank's capacity is used, then water equal to $\frac14$ of the capacity is added. What fraction of the tank is full now?`, ans: String.raw`$\frac{13}{24}$`, sol: String.raw`$\frac58-\frac13+\frac14=\frac{15}{24}-\frac{8}{24}+\frac{6}{24}=\frac{13}{24}$.` },
-    { level: 3, q: String.raw`What number must be subtracted from $4\frac16$ to get $1\frac34$?`, ans: String.raw`$2\frac{5}{12}$`, sol: String.raw`$4\frac16-1\frac34=\frac{25}{6}-\frac74=\frac{50}{12}-\frac{21}{12}=\frac{29}{12}=2\frac{5}{12}$. Check: $4\frac16-2\frac{5}{12}=1\frac34$.` },
-  ],
+  problems: PROBLEMS,
 };

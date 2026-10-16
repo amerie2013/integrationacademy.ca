@@ -1,5 +1,6 @@
 // Worksheet 1.9 — Rates, Percentages & Percent Change (teacher edition)
 import { pointsGraph, percentBar, doubleLine } from "./tikz.mjs";
+import { PROBLEMS } from "./p1_9.mjs";
 
 export const WS = {
   code: "1.9",
@@ -54,23 +55,5 @@ Increase by $r\%$: $\times\left(1+\frac{r}{100}\right)$; decrease by $r\%$: $\ti
     { title: "Percent change both ways", q: String.raw`A price rises from $80$ to $92$ dollars, then falls back to $80$. Find both percent changes.`, steps: [String.raw`Up: $\frac{92-80}{80}=\frac{12}{80}=15\%$.`, String.raw`Down: $\frac{80-92}{92}=\frac{-12}{92}\approx-13.0\%$.`, String.raw`The same $12$-dollar change is a smaller percent of the larger original.`], ans: String.raw`$+15\%$ and about $-13.0\%$` },
     { title: "Discount, then HST", q: String.raw`A $240$-dollar bike is $35\%$ off, then $13\%$ HST is added. Find the final price.`, steps: [String.raw`$240\times0.65=156$.`, String.raw`$156\times1.13=176.28$.`], ans: "$176.28$ dollars" },
   ],
-  problems: [
-    { level: 1, q: String.raw`Find $32\%$ of $150$.`, ans: "$48$", sol: String.raw`$0.32\times150=48$.` },
-    { level: 1, q: String.raw`Write $0.65$ and $\frac35$ as percents, and $7.5\%$ as a decimal.`, ans: String.raw`$65\%$, $60\%$, $0.075$`, sol: String.raw`$0.65\times100$; $3\div5=0.6$; $7.5\div100=0.075$.` },
-    { level: 1, q: String.raw`$6$ kg of apples cost $14.10$ dollars. Find the unit price.`, ans: "$2.35$ dollars/kg", sol: String.raw`$14.10\div6=2.35$.` },
-    { level: 1, q: String.raw`$21$ is what percent of $35$?`, ans: String.raw`$60\%$`, sol: String.raw`$\frac{21}{35}=0.6$.` },
-    { level: 1, q: String.raw`A bus travels $288$ km in $4.5$ h. Find its average speed.`, ans: "$64$ km/h", sol: String.raw`$288\div4.5=64$.` },
-    { level: 2, q: String.raw`$30$ is $12\%$ of what number?`, ans: "$250$", sol: String.raw`$0.12w=30$, $w=250$.` },
-    { level: 2, q: String.raw`Juice costs $3.49$ dollars for $2$ L or $5.10$ dollars for $3$ L. Which is the better buy?`, ans: "the 3 L size", sol: String.raw`$3.49\div2\approx1.75$ per L; $5.10\div3=1.70$ per L.` },
-    { level: 2, q: String.raw`A price drops from $50$ to $42$ dollars. Find the percent change.`, ans: String.raw`$-16\%$`, sol: String.raw`$\frac{42-50}{50}=\frac{-8}{50}=-0.16$.` },
-    { level: 2, q: String.raw`Shoes cost $75$ dollars. They are $20\%$ off, and $13\%$ HST is added. Find the final price.`, ans: "$67.80$ dollars", sol: String.raw`$75\times0.8=60$; $60\times1.13=67.80$.` },
-    { level: 2, q: String.raw`A car's value falls from $28\,000$ to $19\,600$ dollars in $3$ years. Find the average rate of change of its value and the percent decrease.`, ans: String.raw`$-2800$ dollars/year; $30\%$`, sol: String.raw`$\frac{19\,600-28\,000}{3}=\frac{-8400}{3}=-2800$. $\frac{8400}{28\,000}=0.3=30\%$.` },
-    { level: 3, q: String.raw`After a $25\%$ raise, Sam earns $50\,000$ dollars. What did he earn before the raise?`, ans: "$40\\,000$ dollars", sol: String.raw`$1.25s=50\,000$, $s=40\,000$. (Not $50\,000\times0.75=37\,500$ --- the $25\%$ was of the original.)` },
-    { level: 3, q: String.raw`The temperature falls steadily from $5\,^\circ$C at 2 p.m.\ to $-13\,^\circ$C at 8 p.m. (a) Find the rate of change. (b) At what time was it $0\,^\circ$C?`,
-      fig: pointsGraph({ pts: [[0, 5], [6, -13]], xmin: 0, xmax: 6.5, ymin: -15, ymax: 7, xlabel: "hours after 2 p.m.", ylabel: "$^\\circ$C", xtick: "0,1,...,6", ytick: "-15,-10,...,5", height: 4.6 }), space: 3.2, ans: String.raw`(a) $-3\,^\circ$C/h (b) 3:40 p.m.`,
-      sol: String.raw`(a) $\frac{-13-5}{6}=-3$. (b) It must fall $5$ degrees: $5\div3=1\frac23$ h $=1$ h $40$ min after 2 p.m.` },
-    { level: 3, q: String.raw`A price falls $40\%$ and then rises $40\%$. Is it back to the original price? By what percent has it changed overall?`, ans: String.raw`no; $-16\%$`, sol: String.raw`$0.6\times1.4=0.84$, so the final price is $84\%$ of the original: a $16\%$ decrease.` },
-    { level: 3, q: String.raw`A $300$ mL solution is $15\%$ salt. (a) How much salt does it contain? (b) If $100$ mL of water is added, what percent salt is it now?`, ans: String.raw`(a) $45$ mL (b) $11.25\%$`, sol: String.raw`(a) $0.15\times300=45$. (b) $\frac{45}{400}=0.1125$.` },
-    { level: 3, q: String.raw`A car uses $6.8$ L of fuel per $100$ km. How much fuel is needed for a $450$ km trip, and what does it cost at $1.55$ dollars/L?`, ans: String.raw`$30.6$ L; $47.43$ dollars`, sol: String.raw`$6.8\times4.5=30.6$ L; $30.6\times1.55=47.43$.` },
-  ],
+  problems: PROBLEMS,
 };

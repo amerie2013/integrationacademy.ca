@@ -1,5 +1,6 @@
 // Worksheet 1.6 — Powers: Zero & Negative Exponents (teacher edition)
 import { pointsGraph, raw } from "./tikz.mjs";
+import { PROBLEMS } from "./p1_6.mjs";
 
 const SQUARE_CUBE = raw(String.raw`\draw[blue!70!black,very thick] (0,0) -- (1.8,0) node[midway,below,font=\small] {length $x$};
 \draw[blue!70!black,thick,fill=blue!10] (3,0) rectangle (4.8,1.8); \node at (3.9,0.9) {$x^2$}; \node[below,font=\small] at (3.9,0) {area $(x)(x)$};
@@ -73,21 +74,5 @@ ${pointsGraph({ pts: [[-3, 0.125], [-2, 0.25], [-1, 0.5], [0, 1], [1, 2], [2, 4]
       fig: pointsGraph({ pts: [[0, 0.1], [1, 0.2], [2, 0.4], [3, 0.8], [4, 1.6], [5, 3.2], [6, 6.4], [7, 12.8]], xmin: 0, xmax: 7.5, ymin: 0, ymax: 14, xlabel: "folds $n$", ylabel: "mm", highlight: [7, 12.8], xtick: "0,1,...,7", ytick: "0,2,...,14", height: 5 }),
       steps: [String.raw`$2^7=128$.`, String.raw`$0.1\times128=12.8$ mm.`], ans: "$12.8$ mm" },
   ],
-  problems: [
-    { level: 1, q: String.raw`Evaluate $6^3$.`, ans: "$216$", sol: String.raw`$6\times6\times6=216$.` },
-    { level: 1, q: String.raw`Evaluate $(-2)^4$ and $-2^4$. Explain why they differ.`, ans: "$16$ and $-16$", sol: String.raw`In $(-2)^4$ the base is $-2$ (four negative factors $\Rightarrow16$); in $-2^4$ the base is $2$, then the sign: $-16$.` },
-    { level: 1, q: String.raw`Evaluate $9^0$, $(-9)^0$ and $-9^0$.`, ans: "$1,\\ 1,\\ -1$", sol: String.raw`Any non-zero base to the power $0$ is $1$; $-9^0=-(9^0)=-1$.` },
-    { level: 1, q: String.raw`Evaluate $2^{-4}$ as a fraction.`, ans: String.raw`$\frac{1}{16}$`, sol: String.raw`$\frac{1}{2^4}=\frac1{16}$.` },
-    { level: 1, q: String.raw`Evaluate $\left(\frac13\right)^2$ and $\left(-\frac13\right)^3$.`, ans: String.raw`$\frac19$ and $-\frac1{27}$`, sol: String.raw`$\frac{1}{9}$; odd exponent with negative base: $-\frac{1}{27}$.` },
-    { level: 2, q: String.raw`Write $10^{-3}$ as a fraction and as a decimal.`, ans: String.raw`$\frac{1}{1000}=0.001$`, sol: String.raw`$10^{-3}=\frac{1}{10^3}=\frac1{1000}=0.001$.` },
-    { level: 2, q: String.raw`Evaluate $\left(\frac23\right)^{-2}$.`, ans: String.raw`$\frac94$`, sol: String.raw`Flip: $\left(\frac32\right)^2=\frac94$.` },
-    { level: 2, q: String.raw`Evaluate $3^2+3^{-1}\times6$.`, ans: "$11$", sol: String.raw`$9+\frac13\times6=9+2=11$.` },
-    { level: 2, q: String.raw`Solve $x^2=196$, and evaluate $\sqrt[3]{-125}+\sqrt{1.21}$.`, ans: String.raw`$x=\pm14$; $-3.9$`, sol: String.raw`$14^2=(-14)^2=196$, so $x=\pm14$. $\sqrt[3]{-125}=-5$ and $\sqrt{1.21}=1.1$; $-5+1.1=-3.9$.` },
-    { level: 2, q: String.raw`Find the area of a square with side $1.2$ m and the volume of a cube with edge $0.5$ m.`, ans: String.raw`$1.44$ m$^2$; $0.125$ m$^3$`, sol: String.raw`$1.2^2=1.44$; $0.5^3=0.125$.` },
-    { level: 3, q: String.raw`Find the integer $n$ if $2^n=\frac{1}{32}$.`, ans: "$-5$", sol: String.raw`$32=2^5$, so $\frac1{32}=2^{-5}$; $n=-5$.` },
-    { level: 3, q: String.raw`Which is greater, $3^{-2}$ or $2^{-3}$? Show the values.`, ans: String.raw`$2^{-3}=\frac18>\frac19=3^{-2}$`, sol: String.raw`$3^{-2}=\frac19$, $2^{-3}=\frac18$. Eighths are larger than ninths.` },
-    { level: 3, q: String.raw`Use a pattern to explain why $5^0=1$ and $5^{-1}=\frac15$.`, space: 4, ans: "each step down divides by 5", sol: String.raw`$5^3=125$, $5^2=25$, $5^1=5$: dividing by $5$ each time. Continue: $5\div5=1=5^0$ and $1\div5=\frac15=5^{-1}$.` },
-    { level: 3, q: String.raw`A ball dropped from $16$ m rebounds to half its previous height each time, so after $n$ bounces it reaches $16\times\left(\frac12\right)^n$ m. (a) Find the height after $3$ bounces. (b) After how many bounces is the height $0.5$ m?`, ans: "(a) $2$ m (b) $5$", sol: String.raw`(a) $16\times\frac18=2$ m. (b) $16\times\left(\frac12\right)^n=0.5$ means $\left(\frac12\right)^n=\frac1{32}$, so $n=5$.` },
-    { level: 3, q: String.raw`Is $(-a)^2=-a^2$ ever true? Explain.`, ans: "only when $a=0$", sol: String.raw`$(-a)^2=a^2\ge0$ while $-a^2\le0$. They are equal only if both are $0$, i.e.\ $a=0$.` },
-  ],
+  problems: PROBLEMS,
 };

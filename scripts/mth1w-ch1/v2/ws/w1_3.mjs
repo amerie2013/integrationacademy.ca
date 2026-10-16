@@ -1,5 +1,6 @@
 // Worksheet 1.3 — Multiplying & Dividing Integers (teacher edition, one PDF with answer key)
 import { numberLine, pointsGraph, raw } from "./tikz.mjs";
+import { PROBLEMS } from "./p1_3.mjs";
 
 const jumps = (n, size, extra = {}) => numberLine({
   min: Math.min(0, n * size) - 1, max: Math.max(0, n * size) + 1, unit: extra.unit ?? 0.8,
@@ -91,21 +92,5 @@ ${SIGNS}`],
       fig: pointsGraph({ pts: [[0, 4], [1, 1], [2, -2], [3, -5], [4, -8], [5, -11], [6, -14], [7, -17]], xmin: 0, xmax: 7.5, ymin: -19, ymax: 6, xlabel: "hours after 6 p.m.", ylabel: "temp ($^\\circ$C)", highlight: [7, -17], xtick: "0,1,...,7", ytick: "-18,-15,...,6" }),
       steps: [String.raw`6 p.m.\ to 1 a.m.\ is $7$ hours.`, String.raw`Change $=7\times(-3)=-21$.`, String.raw`$4+(-21)=-17$.`], ans: String.raw`$-17\,^\circ$C` },
   ],
-  problems: [
-    { level: 1, q: String.raw`Evaluate $(-9)(4)$.`, ans: "$-36$", sol: String.raw`Different signs: negative; $9\times4=36$.` },
-    { level: 1, q: String.raw`Evaluate $(-8)(-11)$.`, ans: "$88$", sol: String.raw`Same signs: positive; $8\times11=88$.` },
-    { level: 1, q: String.raw`Evaluate $-63\div(-9)$.`, ans: "$7$", sol: String.raw`Same signs: positive; $63\div9=7$. Check $7\times(-9)=-63$.` },
-    { level: 1, q: String.raw`Evaluate $120\div(-8)$.`, ans: "$-15$", sol: String.raw`Different signs: negative; $120\div8=15$.` },
-    { level: 1, q: String.raw`Predict the sign, then evaluate $(-2)(-3)(-4)(5)$.`, ans: "negative; $-120$", sol: String.raw`Three negative factors (odd) $\Rightarrow$ negative. $2\times3\times4\times5=120$, so $-120$.` },
-    { level: 2, q: String.raw`Evaluate $7-2(-6)$.`, ans: "$19$", sol: String.raw`$2(-6)=-12$; $7-(-12)=19$.` },
-    { level: 2, q: String.raw`Evaluate $-36\div(-4)\times(-3)$.`, ans: "$-27$", sol: String.raw`Left to right: $-36\div(-4)=9$; $9\times(-3)=-27$.` },
-    { level: 2, q: String.raw`Evaluate $(-5)^2-3(-4)+(-10)\div2$.`, ans: "$32$", sol: String.raw`$25+12+(-5)=32$.` },
-    { level: 2, q: String.raw`Evaluate $4a-b^2$ when $a=-2$ and $b=-3$.`, ans: "$-17$", sol: String.raw`$4(-2)-(-3)^2=-8-9=-17$.` },
-    { level: 2, q: String.raw`A diver starts at the surface and descends $4$ m every $30$ seconds. Write and evaluate an expression for her depth after $3$ minutes.`, ans: "$-24$ m", sol: String.raw`$3$ minutes $=6$ half-minutes. Depth $=6\times(-4)=-24$ m.` },
-    { level: 3, q: String.raw`Find the integer $n$ if $n\times(-6)=54$. Explain how you know the sign.`, ans: "$-9$", sol: String.raw`$54$ is positive and $-6$ is negative, so $n$ must be negative (different signs would give a negative). $n=54\div(-6)=-9$.` },
-    { level: 3, q: String.raw`Find the mean of the daily temperature changes $-8,\ 5,\ -12,\ 3,\ -3$. What does the sign tell you?`, ans: "$-3$; on average it got colder", sol: String.raw`Sum: $-8+5-12+3-3=-15$. Mean $=-15\div5=-3$. Negative: on average the temperature fell $3$ degrees per day.` },
-    { level: 3, q: String.raw`Write a pattern of at least five lines that shows why $(-4)(-5)=20$.`, space: 4, ans: "pattern with steps of $+5$", sol: String.raw`$2(-5)=-10$, $1(-5)=-5$, $0(-5)=0$, $(-1)(-5)=5$, $(-2)(-5)=10$, $(-3)(-5)=15$, $(-4)(-5)=20$. Each time the first factor decreases by $1$, the product increases by $5$.` },
-    { level: 3, q: String.raw`Insert one pair of brackets to make the statement true: $-2+6\times-3=-12$.`, ans: "$(-2+6)\\times(-3)=-12$", sol: String.raw`Without brackets: $-2+(-18)=-20$. With $(-2+6)\times(-3)=4\times(-3)=-12$ \checkmark` },
-    { level: 3, q: String.raw`A quiz gives $+4$ for a correct answer, $-2$ for a wrong answer and $0$ for a blank. (a) Liam has $13$ correct, $5$ wrong, $2$ blank. Find his score. (b) Ana has $12$ correct and scored $36$. How many did she get wrong?`, space: 4, ans: "(a) $42$ (b) $6$", sol: String.raw`(a) $13(4)+5(-2)=52-10=42$. (b) $12(4)=48$; $48+w(-2)=36$, so $-2w=-12$ and $w=6$.` },
-  ],
+  problems: PROBLEMS,
 };

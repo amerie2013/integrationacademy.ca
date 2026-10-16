@@ -1,0 +1,48 @@
+// 2.6 Rearranging Formulas — 20 easy + 20 medium questions
+import { mc, num, tf, mx } from "./kit.mjs";
+
+export const E = [
+  mx(String.raw`Solve $P=4s$ for $s$.`, "P/4", String.raw`Divide both sides by $4$: $s=\frac P4$.`),
+  mx(String.raw`Solve $A=lw$ for $w$.`, "A/l", String.raw`$w=\frac Al$.`),
+  mx(String.raw`Solve $y=x+5$ for $x$.`, "y-5", String.raw`Subtract $5$: $x=y-5$.`),
+  mx(String.raw`Solve $d=vt$ for $t$.`, "d/v", String.raw`$t=\frac dv$.`),
+  mc(String.raw`To isolate $t$ in $d=vt$, you should…`, "divide both sides by v", ["subtract v from both sides", "multiply both sides by v", "divide both sides by d"], String.raw`$t$ is multiplied by $v$.`),
+  mx(String.raw`Solve $y=3x$ for $x$.`, "y/3", String.raw`$x=\frac y3$.`),
+  num(String.raw`Use $t=\frac dv$ to find $t$ when $d=240$ and $v=60$.`, 4, String.raw`$\frac{240}{60}=4$.`),
+  mx(String.raw`Solve $C=\pi d$ for $d$. (Type pi for $\pi$.)`, "C/pi", String.raw`$d=\frac{C}{\pi}$.`),
+  mx(String.raw`Solve $a+b=10$ for $b$.`, "10-a", String.raw`$b=10-a$.`),
+  tf(String.raw`Solving $F=ma$ for $a$ gives $a=\frac Fm$.`, true, String.raw`Divide both sides by $m$.`),
+  mx(String.raw`Solve $y=x-4$ for $x$.`, "y+4", String.raw`Add $4$.`),
+  num(String.raw`Use $l=\frac Aw$ with $A=72$ and $w=8$.`, 9, String.raw`$72\div8=9$.`),
+  mc(String.raw`Which is $P=2l+2w$ solved for $l$?`, "$l=\\frac{P-2w}{2}$", ["$l=P-2w$", "$l=\\frac P2-2w$", "$l=\\frac{P-w}{2}$"], String.raw`Subtract $2w$, then divide by $2$.`),
+  mx(String.raw`Solve $V=Bh$ for $h$.`, "V/B", String.raw`$h=\frac VB$.`),
+  mx(String.raw`Solve $m=2n-6$ for $n$.`, "(m+6)/2", String.raw`$m+6=2n$.`),
+  num(String.raw`Solve $I=Prt$ for $t$, then find $t$ when $I=60$, $P=500$, $r=0.04$.`, 3, String.raw`$t=\frac{I}{Pr}=\frac{60}{20}=3$.`),
+  tf(String.raw`To solve $y=mx+b$ for $x$, the first step is to divide by $m$.`, false, String.raw`First subtract $b$ (it was added last), then divide by $m$.`),
+  mx(String.raw`Solve $s=\frac t4$ for $t$.`, "4*s", String.raw`Multiply by $4$: $t=4s$.`),
+  num(String.raw`Use $v=\frac dt$ to find $d$ when $v=80$ km/h and $t=2.5$ h.`, 200, String.raw`$d=vt=200$ km.`),
+  mc(String.raw`A rectangle has area $A$ and length $l$. Which formula gives its width?`, "$w=\\frac Al$", ["$w=A-l$", "$w=Al$", "$w=\\frac lA$"], String.raw`$A=lw$, so divide by $l$.`),
+];
+
+export const M = [
+  mx(String.raw`Solve $y=2x+7$ for $x$.`, "(y-7)/2", String.raw`$y-7=2x$.`),
+  mx(String.raw`Solve $P=2l+2w$ for $w$.`, "(P-2*l)/2", String.raw`$w=\frac{P-2l}{2}=\frac P2-l$.`),
+  mx(String.raw`Solve $3x+y=12$ for $y$.`, "12-3*x", String.raw`$y=12-3x$.`),
+  mx(String.raw`Solve $4x-2y=8$ for $y$.`, "2*x-4", String.raw`$-2y=8-4x$, so $y=2x-4$.`),
+  mx(String.raw`Solve $A=\frac12bh$ for $h$.`, "2*A/b", String.raw`$2A=bh$, $h=\frac{2A}{b}$.`),
+  mx(String.raw`Solve $F=1.8C+32$ for $C$.`, "(F-32)/1.8", String.raw`$C=\frac{F-32}{1.8}$.`),
+  num(String.raw`Use $C=\frac{F-32}{1.8}$ to convert $59\,^\circ$F to Celsius.`, 15, String.raw`$\frac{27}{1.8}=15$.`),
+  mx(String.raw`Solve $I=Prt$ for $r$.`, "I/(P*t)", String.raw`$r=\frac{I}{Pt}$.`),
+  mx(String.raw`Solve $A=P+I$ for $P$.`, "A-I", String.raw`$P=A-I$.`),
+  mc(String.raw`What is the slope of $6x+3y=9$?`, "$-2$", ["$6$", "$3$", "$2$"], String.raw`$3y=-6x+9$, $y=-2x+3$.`),
+  num(String.raw`What is the $y$-intercept of $5x+2y=14$?`, 7, String.raw`$y=-\frac52x+7$.`),
+  mx(String.raw`Solve $V=lwh$ for $h$.`, "V/(l*w)", String.raw`$h=\frac{V}{lw}$.`),
+  num(String.raw`A polygon's angle sum is $S=180(n-2)$. How many sides does a polygon with angle sum $1080^\circ$ have?`, 8, String.raw`$n=\frac{S}{180}+2=6+2$.`),
+  mx(String.raw`Solve $y=\frac x3-2$ for $x$.`, "3*(y+2)", String.raw`$y+2=\frac x3$, $x=3(y+2)$.`),
+  mc(String.raw`Which is $C=2\pi r$ solved for $r$?`, "$r=\\frac{C}{2\\pi}$", ["$r=C-2\\pi$", "$r=2\\pi C$", "$r=\\frac C2-\\pi$"], String.raw`Divide both sides by $2\pi$.`),
+  num(String.raw`Use $h=\frac{2A}{b}$ to find the height of a triangle with area $30$ cm² and base $12$ cm.`, 5, String.raw`$\frac{60}{12}=5$.`),
+  tf(String.raw`From $2w=P-2l$, it follows that $w=P-l$.`, false, String.raw`Divide both terms by $2$: $w=\frac P2-l$.`),
+  mx(String.raw`Solve $E=mc^2$ for $m$.`, "E/c^2", String.raw`$m=\frac{E}{c^2}$.`),
+  num(String.raw`A data plan costs $C=20+0.08k$ dollars. Solve for $k$ and find $k$ when $C=36$.`, 200, String.raw`$k=\frac{C-20}{0.08}=200$.`),
+  mx(String.raw`Solve $d=\frac{a+b}{2}$ for $b$.`, "2*d-a", String.raw`$2d=a+b$, $b=2d-a$.`),
+];

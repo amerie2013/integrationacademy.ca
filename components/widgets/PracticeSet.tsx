@@ -58,7 +58,7 @@ export function PracticeSet({ title = "Practice — check your understanding", q
                 </div>
               ) : (
                 <form onSubmit={(e) => { e.preventDefault(); if (s.value.trim()) check(s.value); }} style={{ display: "flex", gap: 8, flexWrap: "wrap", marginTop: 10, alignItems: "center" }}>
-                  <input value={s.value} onChange={(e) => set(i, { value: e.target.value, correct: false, formNote: false })} placeholder={q.placeholder ?? "Your answer"} aria-label={`Answer to question ${i + 1}`}
+                  <input value={s.value} onChange={(e) => set(i, { value: e.target.value, correct: false, formNote: false })} placeholder={q.placeholder ?? (q.answer.kind === "expr" ? "e.g. 3x^2 - 2x + 5" : "Your answer")} aria-label={`Answer to question ${i + 1}`}
                     style={{ border: "1px solid #cbd5e1", borderRadius: 9, padding: "8px 12px", fontSize: 16, minWidth: 180, flex: "0 1 260px", fontFamily: "inherit" }} />
                   <button type="submit" style={btn(true)}>Check</button>
                 </form>
@@ -66,7 +66,7 @@ export function PracticeSet({ title = "Practice — check your understanding", q
 
               <div aria-live="polite" style={{ marginTop: 8, display: "flex", flexDirection: "column", gap: 8 }}>
                 {s.correct && <span style={{ color: C.green, fontWeight: 800 }}>Correct.{s.tries > 1 ? ` (on try ${s.tries})` : ""}</span>}
-                {s.formNote && !s.correct && <span style={{ color: C.amber, fontWeight: 700 }}>{q.answer.kind === "ratio" ? "Equivalent ratio — now write it in simplest form." : q.answer.kind === "number" && q.answer.form === "sci" ? "Right value — now write it in scientific notation, like 4.5 x 10^6." : "Right value — now write it as a fraction (like 3/4), not a decimal."}</span>}
+                {s.formNote && !s.correct && <span style={{ color: C.amber, fontWeight: 700 }}>{q.answer.kind === "ratio" ? "Equivalent ratio — now write it in simplest form." : q.answer.kind === "expr" ? "Equivalent — now simplify fully: expand any brackets and collect like terms." : q.answer.kind === "number" && q.answer.form === "sci" ? "Right value — now write it in scientific notation, like 4.5 x 10^6." : "Right value — now write it as a fraction (like 3/4), not a decimal."}</span>}
                 {wrong && <span style={{ color: C.red, fontWeight: 700 }}>Not yet — try again.</span>}
                 {wrong && (
                   <div style={{ background: C.amberSoft, borderRadius: 8, padding: "8px 12px", fontSize: 14.5 }}>

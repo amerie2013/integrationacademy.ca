@@ -1,5 +1,6 @@
 // Worksheet 1.5 — Fractions: Multiplying, Dividing & Reciprocals (teacher edition)
 import { areaModel, tape, fracBar, raw } from "./tikz.mjs";
+import { PROBLEMS } from "./p1_5.mjs";
 
 /** "How many fit": a bar of `total` wholes cut into pieces of size 1/d, grouped in groups of g pieces. */
 const fitBar = (wholes, d, g, caption) => {
@@ -82,21 +83,5 @@ $-1.8\times2.5$ & different $\Rightarrow-$ & $4.5$ & $-4.5$\\ $-0.9\div\left(-\f
     { title: "Order of operations", q: String.raw`Evaluate $\frac12+\frac23\times\left(-\frac34\right)$.`,
       steps: [String.raw`Multiply first: $\frac23\times\left(-\frac34\right)=-\frac{6}{12}=-\frac12$.`, String.raw`$\frac12+\left(-\frac12\right)=0$.`], ans: "$0$" },
   ],
-  problems: [
-    { level: 1, q: String.raw`Evaluate $\frac34\times\frac27$.`, ans: String.raw`$\frac{3}{14}$`, sol: String.raw`Simplify $2$ with $4$: $\frac32\cdot\frac17$ gives $\frac{3}{14}$.` },
-    { level: 1, q: String.raw`Find $\frac56$ of $42$.`, ans: "$35$", sol: String.raw`$42\div6=7$; $5\times7=35$.` },
-    { level: 1, q: String.raw`Write the reciprocal of $-\frac{3}{11}$ and of $2\frac12$.`, ans: String.raw`$-\frac{11}{3}$ and $\frac25$`, sol: String.raw`Flip, keep the sign. $2\frac12=\frac52\to\frac25$.` },
-    { level: 1, q: String.raw`Evaluate $\frac45\div\frac{2}{15}$.`, ans: "$6$", sol: String.raw`$\frac45\times\frac{15}{2}=\frac{60}{10}=6$.` },
-    { level: 1, q: String.raw`Evaluate $\frac{9}{10}\times\frac56$.`, ans: String.raw`$\frac34$`, sol: String.raw`Simplify $9$/$6$ by $3$ and $5$/$10$ by $5$: $\frac32\times\frac12=\frac34$.` },
-    { level: 2, q: String.raw`Evaluate $-\frac{7}{12}\times\frac{18}{35}$.`, ans: String.raw`$-\frac{3}{10}$`, sol: String.raw`Simplify $7$/$35$ by $7$ and $18$/$12$ by $6$: $-\frac{1}{2}\times\frac{3}{5}=-\frac{3}{10}$.` },
-    { level: 2, q: String.raw`Evaluate $3\frac13\times1\frac45$.`, ans: "$6$", sol: String.raw`$\frac{10}{3}\times\frac95=\frac{2}{1}\times\frac31=6$.` },
-    { level: 2, q: String.raw`Evaluate $-0.75\times1\frac13-(-2.5)$. Estimate first.`, ans: "$1.5$", sol: String.raw`Estimate: $-1+2.5=1.5$. Exactly: $-\frac34\times\frac43=-1$; $-1-(-2.5)=-1+2.5=1.5$.` },
-    { level: 2, q: String.raw`Evaluate $4\frac12\div1\frac18$.`, ans: "$4$", sol: String.raw`$\frac92\div\frac98=\frac92\times\frac89=4$.` },
-    { level: 2, q: String.raw`A recipe uses $\frac34$ cup of sugar per batch. How much sugar is needed for $2\frac13$ batches?`, ans: String.raw`$1\frac34$ cups`, sol: String.raw`“Of” $\Rightarrow$ multiply: $\frac34\times\frac73=\frac{7}{4}=1\frac34$.` },
-    { level: 3, q: String.raw`Draw an area model to show that $\frac34\times\frac23=\frac12$.`, space: 4.4, ans: String.raw`$6$ of $12$ rectangles $=\frac12$`, sol: String.raw`A $4$-by-$3$ grid: shade $3$ of $4$ columns and $2$ of $3$ rows. The overlap is $6$ of $12$ rectangles, $\frac{6}{12}=\frac12$.` },
-    { level: 3, q: String.raw`A $12$ m rope is cut into pieces $\frac35$ m long. (a) How many pieces are there? (b) If $\frac14$ of the pieces are used, how many metres of rope are used?`, ans: "(a) $20$ (b) $3$ m", sol: String.raw`(a) $12\div\frac35=12\times\frac53=20$. (b) $\frac14\times20=5$ pieces; $5\times\frac35=3$ m (or $\frac14$ of $12$ m).` },
-    { level: 3, q: String.raw`Evaluate $\left(\frac23-\frac56\right)\div\left(\frac14+\frac{1}{12}\right)$.`, ans: String.raw`$-\frac12$`, sol: String.raw`First bracket: $\frac46-\frac56=-\frac16$. Second: $\frac{3}{12}+\frac{1}{12}=\frac13$. $-\frac16\div\frac13=-\frac16\times3=-\frac12$.` },
-    { level: 3, q: String.raw`Without calculating exactly, which is greater: $5\div\frac23$ or $5\times\frac23$? Explain, then check.`, ans: String.raw`$5\div\frac23$ ($7\frac12$ vs $3\frac13$)`, sol: String.raw`Multiplying by $\frac23<1$ shrinks $5$; dividing by $\frac23<1$ enlarges it. Check: $5\div\frac23=\frac{15}{2}=7\frac12$ and $5\times\frac23=\frac{10}{3}=3\frac13$.` },
-    { level: 3, q: String.raw`A cyclist rides $5\frac14$ km in $\frac38$ of an hour. What is her speed in km per hour?`, ans: "$14$ km/h", sol: String.raw`Speed $=$ distance $\div$ time $=\frac{21}{4}\div\frac38=\frac{21}{4}\times\frac83=14$ km/h.` },
-  ],
+  problems: PROBLEMS,
 };

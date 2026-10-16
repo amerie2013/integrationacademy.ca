@@ -1,5 +1,6 @@
 // Worksheet 1.1 — Number Sets & Their Subsets (teacher edition, one PDF with answer key)
 import { numberSets, numberLine, raw } from "./tikz.mjs";
+import { PROBLEMS } from "./p1_1.mjs";
 
 const ROOTS = numberLine({ min: 0, max: 10, dots: [
   { at: Math.sqrt(2), label: "$\\sqrt2$", color: "red" }, { at: Math.sqrt(10), label: "$\\sqrt{10}$", color: "red" },
@@ -103,38 +104,5 @@ Negative numbers and zero were not “obvious”. Chinese mathematicians balance
       steps: [String.raw`Simplify: $\sqrt{100}=10$ and $0.\overline{9}=1$ (both natural).`, String.raw`$0$ is whole; $-2$ is an integer; $\frac73$ and $-1.4=-\frac75$ are rational but not integers; $\sqrt5$ is irrational.`],
       ans: "see the diagram" },
   ],
-  problems: [
-    { level: 1, q: String.raw`List every set that $23$, $-23$ and $0$ belong to.`, space: 2.6, ans: String.raw`$23$: $\mathbb{N},\mathbb{W},\mathbb{Z},\mathbb{Q},\mathbb{R}$; $-23$: $\mathbb{Z},\mathbb{Q},\mathbb{R}$; $0$: $\mathbb{W},\mathbb{Z},\mathbb{Q},\mathbb{R}$`,
-      sol: String.raw`$23$ is a counting number. $-23$ is the opposite of a counting number (an integer, not whole). $0$ is whole but not natural. All three are rational and real.` },
-    { level: 1, q: String.raw`Simplify, then classify: (a) $\frac{14}{2}$ \quad (b) $-\frac{24}{6}$ \quad (c) $\sqrt{121}$`, space: 2.6, ans: String.raw`(a) $7$: natural; (b) $-4$: integer; (c) $11$: natural (each is also rational and real)`,
-      sol: String.raw`(a) $14\div2=7$. (b) $-24\div6=-4$. (c) $11^2=121$, so $\sqrt{121}=11$.` },
-    { level: 1, q: String.raw`Write $0.875$ as a fraction in lowest terms.`, space: 2.4, ans: String.raw`$\frac78$`,
-      sol: String.raw`$0.875=\frac{875}{1000}$. The GCF of $875$ and $1000$ is $125$: $\frac{875\div125}{1000\div125}=\frac78$.` },
-    { level: 1, q: String.raw`Which of these are irrational? \ $\sqrt{50}$, \ $\sqrt{49}$, \ $1.010010001\ldots$ (one more zero each time), \ $0.\overline{5}$`, space: 2.6, ans: String.raw`$\sqrt{50}$ and $1.010010001\ldots$`,
-      sol: String.raw`$\sqrt{49}=7$ is rational; $0.\overline{5}=\frac59$ is rational. $50$ is not a perfect square, so $\sqrt{50}$ is irrational. $1.010010001\ldots$ never ends and its pattern never repeats as a block, so it is irrational.` },
-    { level: 1, q: String.raw`Explain why $-\frac{3}{8}$ is a rational number but not an integer.`, space: 2.4, ans: "it is a quotient of integers, but it is not a whole number or its opposite",
-      sol: String.raw`$-\frac38=\frac{-3}{8}$ is a quotient of the integers $-3$ and $8$, so it is rational. It lies between $-1$ and $0$ on the number line, where there are no integers.` },
-    { level: 2, q: String.raw`Write $0.\overline{6}$ as a fraction in lowest terms. Show the algebra.`, space: 3, ans: String.raw`$\frac23$`,
-      sol: String.raw`$x=0.\overline{6}$; $10x=6.\overline{6}$; $10x-x=6$; $9x=6$; $x=\frac69=\frac23$.` },
-    { level: 2, q: String.raw`Write $0.\overline{54}$ as a fraction in lowest terms.`, space: 3, ans: String.raw`$\frac{6}{11}$`,
-      sol: String.raw`Two digits repeat: $100x=54.\overline{54}$, so $99x=54$ and $x=\frac{54}{99}=\frac{6}{11}$.` },
-    { level: 2, q: String.raw`Write $1.\overline{2}$ as an improper fraction.`, space: 3, ans: String.raw`$\frac{11}{9}$`,
-      sol: String.raw`$x=1.\overline{2}$; $10x=12.\overline{2}$; $9x=11$; $x=\frac{11}{9}$. Check: $11\div9=1.222\ldots$` },
-    { level: 2, q: String.raw`Between which two consecutive integers does $\sqrt{90}$ lie? Estimate it to one decimal place and mark it on the number line.`,
-      fig: numberLine({ min: 8, max: 11, step: 0.5, labelEvery: 2, unit: 1.6 }), space: 2.4, ans: String.raw`$9<\sqrt{90}<10$; \ $\sqrt{90}\approx9.5$`,
-      sol: String.raw`$81<90<100$, so $9<\sqrt{90}<10$. $90$ is about halfway between $81$ and $100$; $9.5^2=90.25$, so $\sqrt{90}\approx9.5$ (it is $9.487\ldots$).` },
-    { level: 2, q: String.raw`Order from least to greatest: \ $\sqrt{15}$, \ $3.9$, \ $4$, \ $\frac{15}{4}$. Show them on a number line.`,
-      fig: numberLine({ min: 3.5, max: 4.25, step: 0.05, labelEvery: 5, unit: 0.9 }), space: 2.4, ans: String.raw`$\frac{15}{4}<\sqrt{15}<3.9<4$`,
-      sol: String.raw`$\frac{15}{4}=3.75$; $\sqrt{15}\approx3.873$ (since $3.87^2\approx14.98$); $3.9$; $4$. So $3.75<3.873<3.9<4$.` },
-    { level: 3, q: String.raw`Write $0.2\overline{3}=0.2333\ldots$ as a fraction in lowest terms.`, space: 3.4, ans: String.raw`$\frac{7}{30}$`,
-      sol: String.raw`$10x=2.\overline{3}$ and $100x=23.\overline{3}$. Subtract: $90x=21$, so $x=\frac{21}{90}=\frac{7}{30}$.` },
-    { level: 3, q: String.raw`True or false: “The product of two irrational numbers is always irrational.” Justify your answer.`, space: 3, ans: String.raw`false, e.g.\ $\sqrt2\times\sqrt2=2$`,
-      sol: String.raw`One counterexample is enough: $\sqrt{2}$ is irrational, but $\sqrt2\times\sqrt2=2$ is rational (natural, even). (Other examples: $\sqrt3\times\sqrt{12}=6$.)` },
-    { level: 3, q: String.raw`Use division to explain why every fraction with denominator $8$ has a terminating decimal, but $\frac13$ and $\frac{2}{3}$ repeat.`, space: 3.6, ans: String.raw`$8=2^3$ divides a power of $10$; $3$ never does`,
-      sol: String.raw`$\frac{a}{8}=\frac{125a}{1000}$ because $8\times125=1000$, so the decimal stops after at most three places. No power of $10$ is divisible by $3$ ($10,100,1000,\dots$ leave remainder $1$ when divided by $3$), so long division of $1\div3$ gives remainder $1$ forever and the digit $3$ repeats.` },
-    { level: 3, q: String.raw`Find one rational number and one irrational number between $3$ and $3.1$. Explain how you know each is the type you claim.`, space: 3, ans: String.raw`e.g.\ rational $3.05$; irrational $\sqrt{9.3}$ or $3.0101001000\ldots$`,
-      sol: String.raw`$3.05=\frac{61}{20}$ terminates, so it is rational. $\sqrt{9.3}$: $3^2=9<9.3<9.61=3.1^2$, so $3<\sqrt{9.3}<3.1$, and $9.3=\frac{93}{10}$ is not the square of a fraction, so $\sqrt{9.3}$ is irrational. (Any non-repeating, non-terminating decimal such as $3.0101001000\ldots$ also works.)` },
-    { level: 3, q: String.raw`(B1.1) Describe one way negative numbers were represented in ancient China, and give two ways negative numbers are used in Canada today.`, space: 3.6, ans: "red/black counting rods for gains and debts; temperatures, bank balances, elevations, golf scores",
-      sol: String.raw`In \emph{The Nine Chapters on the Mathematical Art}, calculators used red rods for positive amounts (gains) and black rods for negative amounts (debts), with rules for combining them. Today: winter temperatures below $0\,^\circ$C, an overdrawn bank account, elevations below sea level, a golf score under par, a loss on a business statement. (Accept any two correct, explained uses.)` },
-  ],
+  problems: PROBLEMS,
 };

@@ -9,7 +9,10 @@ export type AnswerSpec =
   | { kind: "number"; value: number; tol?: number; percent?: boolean; form?: "fraction" | "sci" }
   | { kind: "text"; accept: string[] }
   | { kind: "choice"; options: string[]; correct: number }
-  | { kind: "ratio"; value: [number, number]; lowest?: boolean }; // equivalent ratios count; lowest: must be in simplest form
+  | { kind: "ratio"; value: [number, number]; lowest?: boolean } // equivalent ratios count; lowest: must be in simplest form
+  // an algebraic expression, e.g. "6x^2-3x+4"; any equivalent expression counts. simplified: no brackets
+  // (unless the answer has them) and no more terms than the answer. A leading "y =" is ignored.
+  | { kind: "expr"; value: string; simplified?: boolean };
 
 const MINUS = /[−–—]/g; // typographic minus / dashes -> "-"
 
@@ -51,7 +54,8 @@ export function checkAnswer(spec: AnswerSpec, raw: string | number): boolean {
     if (!r || !sameRatio(r, spec.value)) return false;
     return !(spec.lowest && notLowest(r[0], r[1]));
   }
-  let v = parseNumber(s);
+  if (spec.kind === "expr") return sameExpr(spec.value, s) && !(spec.simplified && notSimplified(spec.value, s));
+  let v = parseNumber(s.replace(/^\s*[a-zA-Z]\s*=\s*/, "")); // "x = 4" counts as 4
   if (v === null) return false;
   // "35" for a percent question means 35%.
   if (spec.percent && !s.trim().endsWith("%")) v = v / 100;
@@ -85,7 +89,102 @@ export function rightValueWrongForm(spec: AnswerSpec, raw: string): boolean {
     const r = parseRatio(raw);
     return !!spec.lowest && !!r && sameRatio(r, spec.value) && notLowest(r[0], r[1]);
   }
+  if (spec.kind === "expr") return !!spec.simplified && sameExpr(spec.value, raw) && notSimplified(spec.value, raw);
   if (spec.kind !== "number" || !spec.form || !wrongForm(spec, raw)) return false;
   const v = parseNumber(raw);
   return v !== null && Math.abs(v - spec.value) <= Math.max(1e-6, Math.abs(spec.value) * 1e-6);
+}
+
+// ---------- algebraic expressions ----------
+// A small recursive-descent parser (no eval): numbers, one-letter variables, + - * / ^, brackets,
+// implicit multiplication ("3x", "2(x+1)", "xy"). Two expressions are equivalent when they agree at
+// several fixed non-integer points — enough to tell polynomials and rational expressions apart here.
+
+type Ev = (v: Record<string, number>) => number;
+
+function parseExpr(raw: string): { f: Ev; vars: Set<string> } | null {
+  const s = raw.replace(MINUS, "-").replace(/[×·]/g, "*").replace(/÷/g, "/").replace(/\*\*/g, "^").replace(/²/g, "^2").replace(/³/g, "^3");
+  const found = s.match(/\d*\.?\d+|[a-zA-Z]|[-+*/^()]|\S/g);
+  if (!found) return null;
+  const toks: string[] = found;
+  let i = 0;
+  const vars = new Set<string>();
+  const peek = () => toks[i];
+  const isAtomStart = (t?: string) => !!t && (/^[\d.]/.test(t) || /^[a-zA-Z]$/.test(t) || t === "(");
+  function expr(): Ev {
+    let f = term();
+    while (peek() === "+" || peek() === "-") {
+      const op = toks[i++], a = f, b = term();
+      f = op === "+" ? (v) => a(v) + b(v) : (v) => a(v) - b(v);
+    }
+    return f;
+  }
+  function term(): Ev {
+    let f = unary();
+    for (;;) {
+      const t = peek();
+      if (t === "*" || t === "/") { i++; const a = f, b = unary(); f = t === "*" ? (v) => a(v) * b(v) : (v) => a(v) / b(v); }
+      else if (isAtomStart(t)) { const a = f, b = power(); f = (v) => a(v) * b(v); }
+      else return f;
+    }
+  }
+  function unary(): Ev {
+    if (peek() === "-") { i++; const a = unary(); return (v) => -a(v); }
+    if (peek() === "+") { i++; return unary(); }
+    return power();
+  }
+  function power(): Ev {
+    const base = atom();
+    if (peek() === "^") { i++; const e = unary(); return (v) => Math.pow(base(v), e(v)); }
+    return base;
+  }
+  function atom(): Ev {
+    const t = toks[i++];
+    if (t === undefined) throw new Error("end");
+    if (t === "(") { const f = expr(); if (toks[i++] !== ")") throw new Error(")"); return f; }
+    if (/^[\d.]/.test(t)) { const n = Number(t); if (!Number.isFinite(n)) throw new Error("num"); return () => n; }
+    if (/^[a-zA-Z]$/.test(t)) { vars.add(t); return (v) => (t in v ? v[t] : NaN); }
+    throw new Error("token " + t);
+  }
+  try {
+    const f = expr();
+    return i === toks.length ? { f, vars } : null;
+  } catch {
+    return null;
+  }
+}
+
+/** Drop a leading "y =" / "x=" so a typed equation compares by its right side. */
+const rhs = (s: string) => s.replace(/^\s*[a-zA-Z]\s*=\s*/, "");
+const SAMPLES = [0.37, -1.29, 2.18, -0.61, 1.73, 3.07];
+
+export function sameExpr(expected: string, typed: string): boolean {
+  const A = parseExpr(rhs(expected)), B = parseExpr(rhs(typed));
+  if (!A || !B) return false;
+  for (const name of B.vars) if (!A.vars.has(name)) return false;
+  const names = [...A.vars];
+  for (let k = 0; k < SAMPLES.length; k++) {
+    const pt = Object.fromEntries(names.map((n, j) => [n, SAMPLES[(k + j * 2) % SAMPLES.length] + j * 0.11]));
+    const a = A.f(pt), b = B.f(pt);
+    if (!Number.isFinite(a) || !Number.isFinite(b) || Math.abs(a - b) > 1e-7 * Math.max(1, Math.abs(a))) return false;
+  }
+  return true;
+}
+
+/** Number of top-level + / − terms (a leading sign and signs right after ^ * / ( don't split). */
+function termCount(s: string): number {
+  const t = rhs(s).replace(MINUS, "-").replace(/\s+/g, "");
+  let depth = 0, n = 1;
+  for (let k = 0; k < t.length; k++) {
+    const ch = t[k];
+    if (ch === "(") depth++;
+    else if (ch === ")") depth--;
+    else if ((ch === "+" || ch === "-") && depth === 0 && k > 0 && !/[\^*/(]/.test(t[k - 1])) n++;
+  }
+  return n;
+}
+
+function notSimplified(expected: string, typed: string): boolean {
+  if (/[()]/.test(rhs(typed)) && !/[()]/.test(rhs(expected))) return true;
+  return termCount(typed) > termCount(expected);
 }

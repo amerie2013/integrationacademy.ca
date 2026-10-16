@@ -9,6 +9,7 @@ import { FractionAddSub, FractionMulDiv } from "./Fractions";
 import { PowerPattern, ExponentLaws, SciNotation } from "./Powers";
 import { RatioScale, PercentBar } from "./Ratios";
 import { DensityZoom, LimitSteps } from "./Density";
+import { PatternRule, AlgebraTiles, DistributiveArea, BalanceSolver, EquationGraph, FormulaRearrange } from "./Algebra";
 
 // Registry of named lesson widgets. A lesson block { type: "widget", widget, props }
 // renders REGISTRY[widget] with its props. Keep names stable — they are stored in the DB.
@@ -27,6 +28,12 @@ const REGISTRY: Record<string, ComponentType<any>> = {
   percentBar: PercentBar,
   densityZoom: DensityZoom,
   limitSteps: LimitSteps,
+  patternRule: PatternRule,
+  algebraTiles: AlgebraTiles,
+  distributiveArea: DistributiveArea,
+  balanceSolver: BalanceSolver,
+  equationGraph: EquationGraph,
+  formulaRearrange: FormulaRearrange,
 };
 
 export const WIDGET_NAMES = Object.keys(REGISTRY);

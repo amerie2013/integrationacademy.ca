@@ -1,5 +1,6 @@
 // Worksheet 1.8 — Working with Ratios and Proportions (teacher edition)
 import { tape, doubleLine, mapScale } from "./tikz.mjs";
+import { PROBLEMS } from "./p1_8.mjs";
 
 export const WS = {
   code: "1.8",
@@ -68,21 +69,5 @@ ${mapScale({ cm: 7, scaleText: "$1:200\\,000$", from: "Town A", to: "Town B", ca
       steps: [String.raw`$6.4\times250\,000=1\,600\,000$ cm.`, String.raw`$\div100\,000$: $16$ km.`], ans: "$16$ km" },
     { title: "Using the total", q: String.raw`Two numbers are in the ratio $4:9$ and their sum is $104$. Find them.`, steps: [String.raw`$4+9=13$ parts; one part $=104\div13=8$.`, String.raw`$4\times8=32$ and $9\times8=72$.`], ans: "$32$ and $72$" },
   ],
-  problems: [
-    { level: 1, q: String.raw`Simplify $42:56$.`, ans: "$3:4$", sol: String.raw`GCF $14$: $3:4$.` },
-    { level: 1, q: String.raw`A team won $10$ games and lost $6$ (no ties). Write wins : losses and wins : games played in simplest form.`, ans: "$5:3$ and $5:8$", sol: String.raw`$10:6=5:3$; games $=16$, $10:16=5:8$.` },
-    { level: 1, q: String.raw`Are $6:15$ and $10:25$ equivalent? Show how you know.`, ans: "yes", sol: String.raw`Both simplify to $2:5$.` },
-    { level: 1, q: String.raw`Solve $x:18=5:6$.`, ans: "$x=15$", sol: String.raw`$6\times3=18$, so $x=5\times3=15$.` },
-    { level: 1, q: String.raw`Simplify $1.2:2$.`, ans: "$3:5$", sol: String.raw`$\times10$: $12:20=3:5$.` },
-    { level: 2, q: String.raw`Solve $\dfrac{9}{x}=\dfrac{12}{20}$.`, ans: "$x=15$", sol: String.raw`$12x=180$, $x=15$. Or $\frac{12}{20}=\frac35$ and $\frac{9}{15}=\frac35$.` },
-    { level: 2, q: String.raw`Lemonade is mixed $2$ parts concentrate to $7$ parts water. How much concentrate is needed for $3.5$ L of water?`, ans: "$1$ L", sol: String.raw`$\frac{2}{7}=\frac{c}{3.5}$, so $7c=7$, $c=1$ L.` },
-    { level: 2, q: String.raw`Share $350$ dollars in the ratio $3:4$.`, ans: "$150$ and $200$ dollars", sol: String.raw`$7$ parts of $50$: $150$ and $200$.` },
-    { level: 2, q: String.raw`On a map with scale $1:50\,000$, a trail is $7.2$ cm long. How long is the real trail in km?`, ans: "$3.6$ km", sol: String.raw`$7.2\times50\,000=360\,000$ cm $=3.6$ km.` },
-    { level: 2, q: String.raw`Flour and sugar are mixed $5:2$. Complete the ratio table: \quad flour $10,\ \square,\ 25$; \quad sugar $\square,\ 6,\ \square$.`, ans: "sugar $4$; flour $15$; sugar $10$", sol: String.raw`$10=5\times2\Rightarrow$ sugar $4$; $6=2\times3\Rightarrow$ flour $15$; $25=5\times5\Rightarrow$ sugar $10$.` },
-    { level: 3, q: String.raw`The angles of a triangle are in the ratio $3:4:5$. Find each angle. (The angles of a triangle add to $180^\circ$.)`, ans: String.raw`$45^\circ,\ 60^\circ,\ 75^\circ$`, sol: String.raw`$12$ parts; one part $=180^\circ\div12=15^\circ$; angles $3\times15=45^\circ$, $4\times15=60^\circ$, $5\times15=75^\circ$.` },
-    { level: 3, q: String.raw`A class of $36$ has boys and girls in the ratio $5:4$. Four more girls join. What is the new ratio of boys to girls?`, ans: "$1:1$", sol: String.raw`$9$ parts of $4$: $20$ boys, $16$ girls. After: $20:20=1:1$.` },
-    { level: 3, q: String.raw`Store A sells $3$ kg of rice for $7.50$ dollars; store B sells $5$ kg for $12$ dollars. Are the prices proportional? Which is the better buy?`, ans: "no; store B", sol: String.raw`A: $7.50\div3=2.50$ per kg; B: $12\div5=2.40$ per kg. Different unit prices, so not proportional; B is cheaper.` },
-    { level: 3, q: String.raw`A $10$ cm by $15$ cm photo is enlarged so its width becomes $24$ cm (same shape). What is the new height? Show the proportion.`, ans: "$36$ cm", sol: String.raw`$\frac{10}{15}=\frac{24}{h}$, $10h=360$, $h=36$ cm (scale factor $2.4$).` },
-    { level: 3, q: String.raw`Jordan says $2:3$ and $4:5$ are equivalent because “both differ by $1$”. Explain why he is wrong.`, ans: "equivalent ratios come from multiplying, not adding", sol: String.raw`$\frac23\approx0.667$ but $\frac45=0.8$. Equivalent ratios come from multiplying both terms by the same number ($2:3=4:6$), not adding the same number.` },
-  ],
+  problems: PROBLEMS,
 };

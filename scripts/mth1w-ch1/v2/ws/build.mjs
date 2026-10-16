@@ -41,11 +41,17 @@ const PRE = String.raw`\documentclass[11pt]{article}
 \newtcolorbox{tipbox}{colframe=tipred,colback=tipred!4,coltitle=white,colbacktitle=tipred,fonttitle=\bfseries,title={Common Mistakes \& Teaching Tips},arc=3pt,breakable,boxrule=1pt}
 \newtcolorbox{example}[2]{colframe=#1,colback=#1!6,coltitle=white,colbacktitle=#1,fonttitle=\bfseries,title={#2},arc=3pt,breakable,boxrule=1pt}
 \newtcolorbox{qbox}[2]{colframe=#1,colback=white,coltitle=white,colbacktitle=#1,fonttitle=\bfseries,title={#2},arc=3pt,boxrule=0.9pt}
+\newtcolorbox{recapbox}[1]{colframe=keygray,colback=keybg,coltitle=white,colbacktitle=keygray,fonttitle=\bfseries,title={#1},arc=3pt,boxrule=0.8pt}
 \newtcolorbox{keyitem}[1]{colframe=keygray,colback=keybg,coltitle=white,colbacktitle=keygray,fonttitle=\bfseries,title={#1},arc=3pt,breakable,boxrule=0.8pt}
 \newcommand{\sech}[1]{\par\vspace{8pt}{\Large\bfseries\color{iagreen}#1}\par\nobreak\vspace{2pt}{\color{black!20}\hrule height1pt}\vspace{6pt}}
 \newcommand{\workspace}[1]{\par\vspace{3pt}\fcolorbox{black!30}{white}{\begin{minipage}[t][#1][t]{\dimexpr\linewidth-2\fboxsep\relax}\ \end{minipage}}\par}
 \newcommand{\step}[2]{\par\noindent\textbf{Step #1.}\ #2}
 `;
+
+/** Multi-part problems: start each "(a)", "(b)", … that begins a new source line on its own line. */
+const partLines = (q) => clean(q).replace(/\n(?=\([a-z]\))/g, "\\par\\smallskip ");
+/** Plain-text safety: a bare % would start a LaTeX comment; → is not in the font. */
+const clean = (s) => String(s).replace(/(?<!\\)%/g, "\\%").replace(/→/g, "$\\to$");
 
 function texDoc(t) {
   const goals = t.goals.map((g) => String.raw`\item ${g}`).join("\n");
@@ -61,29 +67,37 @@ ${e.fig ?? ""}
 ${e.steps.map((s, k) => String.raw`\step{${k + 1}}{${s}}`).join("\n")}
 \par\smallskip\colorbox{white}{\textbf{Answer:} ${e.ans}}
 \end{example}`).join("\n");
-  const LV = { 1: ["lv1", "Level 1 --- Knowledge \\& Understanding"], 2: ["lv2", "Level 2 --- Application"], 3: ["lv3", "Level 3 --- Thinking \\& Problem Solving"] };
+  const LV = { 1: ["lv1", "Level 1 --- Knowledge \\& Understanding"], 2: ["lv2", "Level 2 --- Application"], 3: ["lv3", "Level 3 --- Thinking \\& Problem Solving (textbook level)"] };
   let n = 0;
   const practice = [1, 2, 3].map((lv) => {
     const ps = t.problems.filter((p) => p.level === lv);
     if (!ps.length) return "";
     return String.raw`\par\medskip{\large\bfseries\color{${LV[lv][0]}}${LV[lv][1]}}\par\smallskip
 ` + ps.map((p) => { n++; return String.raw`\begin{qbox}{${LV[lv][0]}}{Problem ${n}}
-${p.q}
+${partLines(p.q)}
 ${p.fig ?? ""}
 \workspace{${p.space ?? 3.2}cm}
 \end{qbox}`; }).join("\n");
   }).join("\n");
-  n = 0;
-  const key = [1, 2, 3].flatMap((lv) => t.problems.filter((p) => p.level === lv)).map((p) => { n++; return String.raw`\begin{keyitem}{Problem ${n} \quad\normalfont\small ${p.q.replace(/\n/g, " ")}}
-${p.sol}
-\par\textbf{Answer:} ${p.ans}
-\end{keyitem}`; }).join("\n");
+  // Last page: compact two-column question recap and answer key (one line or so per problem).
+  const ordered = [1, 2, 3].flatMap((lv) => t.problems.filter((p) => p.level === lv));
+  const list = (items) => String.raw`\begin{multicols}{2}\small
+\begin{enumerate}[leftmargin=*,itemsep=4pt,label=\arabic*.]
+${items.map((s) => String.raw`\item ${clean(s)}`).join("\n")}
+\end{enumerate}
+\end{multicols}`;
+  const key = String.raw`\begin{recapbox}{Question Recap}
+${list(ordered.map((p) => p.recap ?? p.q))}
+\end{recapbox}
+\begin{recapbox}{$\checkmark$\ Answer Key}
+${list(ordered.map((p) => p.ans))}
+\end{recapbox}`;
 
   return PRE + String.raw`\fancyhead[R]{\footnotesize MTH1W \textperiodcentered{} ${t.code}}
 \begin{document}
 \begin{center}
 {\LARGE\bfseries\color{titleblue}Worksheet ${t.code} --- ${esc(t.title)}}\\[2pt]
-{\small Grade 9 Mathematics (MTH1W) \textperiodcentered{} Unit 1: Number Sense \textperiodcentered{} Teacher notes, worked examples, practice and full answer key}
+{\small Grade 9 Mathematics (MTH1W) \textperiodcentered{} Unit 1: Number Sense \textperiodcentered{} Teacher notes, worked examples, practice and answer key}
 \end{center}
 \begin{ideabox}
 ${t.bigideas}
@@ -116,7 +130,7 @@ Show your reasoning clearly in the space provided. Level 1 checks the skills, Le
 ${practice}
 
 \clearpage
-\sech{Answer Key --- full solutions}
+\sech{Question Recap \& Answer Key}
 ${key}
 \end{document}
 `;
@@ -147,9 +161,9 @@ for (const code of codes) {
   if (!fs.existsSync(file)) { console.log(`skip ${code}: no ${path.basename(file)}`); continue; }
   const t = (await import(pathToFileURL(file).href)).WS;
   if (t.examples.length !== 9) throw new Error(`${code}: need 9 examples (has ${t.examples.length})`);
-  if (t.problems.length !== 15 || [1, 2, 3].some((lv) => t.problems.filter((p) => p.level === lv).length !== 5)) throw new Error(`${code}: need 5 problems at each of 3 levels`);
+  if (t.problems.length !== 13 || [[1, 3], [2, 5], [3, 5]].some(([lv, k]) => t.problems.filter((p) => p.level === lv).length !== k)) throw new Error(`${code}: need 13 problems (3 + 5 + 5 by level)`);
   const name = `ws_${code}`;
-  fs.writeFileSync(path.join(OUT, name + ".tex"), texDoc(t).replace(/“/g, "\\textquotedblleft{}").replace(/”/g, "\\textquotedblright{}").replace(/’/g, "'"));
+  fs.writeFileSync(path.join(OUT, name + ".tex"), texDoc(t).replace(/“/g, "\\textquotedblleft{}").replace(/”/g, "\\textquotedblright{}").replace(/’/g, "'").replace(/§/g, "\\S{}").replace(/ā/g, "\\={a}").replace(/ī/g, "\\={\\i}").replace(/è/g, "\\`{e}").replace(/−/g, "{\\ensuremath{-}}").replace(/…/g, "\\ldots{}").replace(/✓/g, "\\ensuremath{\\checkmark}").replace(/²/g, "\\textsuperscript{2}").replace(/³/g, "\\textsuperscript{3}").replace(/⁴/g, "\\textsuperscript{4}").replace(/⁵/g, "\\textsuperscript{5}").replace(/≈/g, "\\ensuremath{\\approx}").replace(/—/g, "---").replace(/–/g, "--").replace(/°/g, "\\ensuremath{^\\circ}"));
   try { execFileSync(BIN, ["-X", "compile", name + ".tex", "--outdir", "."], { cwd: OUT, stdio: "pipe" }); }
   catch (e) { console.error(`COMPILE FAIL ${code}:\n` + (e.stderr?.toString() || e.message).split("\n").filter((l) => /error|!|Undefined/i.test(l)).slice(0, 8).join("\n")); process.exit(1); }
   const pdf = fs.readFileSync(path.join(OUT, name + ".pdf"));

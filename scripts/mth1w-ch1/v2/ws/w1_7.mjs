@@ -1,5 +1,6 @@
 // Worksheet 1.7 — Exponent Laws & Scientific Notation (teacher edition)
 import { factorTiles, logScale } from "./tikz.mjs";
+import { PROBLEMS } from "./p1_7.mjs";
 
 const SCALE = logScale({ lo: -10, hi: 12, objects: [
   { p: -9.6, label: "virus" }, { p: -5.1, label: "red blood cell" }, { p: -4.1, label: "hair width" }, { p: 0.2, label: "student" },
@@ -60,21 +61,5 @@ If the decimal part is not between $1$ and $10$, adjust it and the exponent toge
     { title: "Multiplying", q: String.raw`Evaluate $(6\times10^{4})(7\times10^{-9})$ in scientific notation.`, steps: [String.raw`$6\times7=42$; $10^{4+(-9)}=10^{-5}$.`, String.raw`$42\times10^{-5}=4.2\times10^{-4}$.`], ans: String.raw`$4.2\times10^{-4}$` },
     { title: "Population density of Canada", q: String.raw`Canada has about $4.1\times10^{7}$ people and an area of about $9.98\times10^{6}$ km$^2$. About how many people per km$^2$?`, steps: [String.raw`$\frac{4.1\times10^{7}}{9.98\times10^{6}}=\frac{4.1}{9.98}\times10^{1}$.`, String.raw`$\approx0.41\times10=4.1$.`], ans: "about $4$ people per km$^2$" },
   ],
-  problems: [
-    { level: 1, q: String.raw`Simplify $3^2\times3^5$, then evaluate.`, ans: "$3^7=2187$", sol: String.raw`Add exponents: $3^7=2187$.` },
-    { level: 1, q: String.raw`Simplify $b^{12}\div b^4$.`, ans: "$b^8$", sol: String.raw`Subtract exponents: $b^{8}$.` },
-    { level: 1, q: String.raw`Evaluate $(2^3)^2$.`, ans: "$64$", sol: String.raw`$2^6=64$.` },
-    { level: 1, q: String.raw`Write $52\,000$ in scientific notation.`, ans: String.raw`$5.2\times10^4$`, sol: String.raw`Move the decimal $4$ places left.` },
-    { level: 1, q: String.raw`Write $7.1\times10^{-3}$ in standard form.`, ans: "$0.0071$", sol: String.raw`Move the decimal $3$ places left.` },
-    { level: 2, q: String.raw`Simplify $(5c^4)^2$.`, ans: "$25c^8$", sol: String.raw`$5^2(c^4)^2=25c^8$.` },
-    { level: 2, q: String.raw`Simplify $\dfrac{6x^7}{2x^2}$.`, ans: "$3x^5$", sol: String.raw`$\frac62=3$ and $x^{7-2}=x^5$.` },
-    { level: 2, q: String.raw`Evaluate $9^4\div9^6$ as a fraction.`, ans: String.raw`$\frac1{81}$`, sol: String.raw`$9^{-2}=\frac{1}{81}$.` },
-    { level: 2, q: String.raw`Evaluate $\dfrac{8\times10^{6}}{2\times10^{-3}}$ in scientific notation.`, ans: String.raw`$4\times10^{9}$`, sol: String.raw`$\frac82=4$; $10^{6-(-3)}=10^9$.` },
-    { level: 2, q: String.raw`A human hair is about $8\times10^{-5}$ m wide. How many hairs side by side make $1$ cm ($10^{-2}$ m)?`, ans: "$125$", sol: String.raw`$\frac{10^{-2}}{8\times10^{-5}}=\frac18\times10^{3}=125$.` },
-    { level: 3, q: String.raw`Simplify $(2a^3b)^3\cdot(ab^2)^{-1}$. Use positive exponents.`, ans: String.raw`$8a^8b$`, sol: String.raw`$(2a^3b)^3=8a^9b^3$; $(ab^2)^{-1}=a^{-1}b^{-2}$. Product: $8a^{8}b^{1}$.` },
-    { level: 3, q: String.raw`Find $n$ if $4^n\times4^3=4^{-2}$.`, ans: "$-5$", sol: String.raw`$n+3=-2$, so $n=-5$.` },
-    { level: 3, q: String.raw`A student simplified $(3x^2)^3$ as $9x^6$. Explain the error and correct it.`, ans: "$27x^6$", sol: String.raw`The student multiplied the coefficient $3$ by the exponent $3$. The exponent applies to every factor: $3^3(x^2)^3=27x^6$.` },
-    { level: 3, q: String.raw`Order from least to greatest: $3.2\times10^{-4}$, $2.9\times10^{-3}$, $4.1\times10^{-4}$, $1\times10^{-5}$.`, ans: String.raw`$1\times10^{-5}<3.2\times10^{-4}<4.1\times10^{-4}<2.9\times10^{-3}$`, sol: String.raw`Compare exponents first ($-5<-4<-3$), then decimal parts for the same exponent ($3.2<4.1$).` },
-    { level: 3, q: String.raw`The Sun is about $1.5\times10^{11}$ m from Earth and light travels $3\times10^{8}$ m/s. How long does sunlight take to reach us, in seconds and in minutes?`, ans: "$500$ s $\\approx8.3$ min", sol: String.raw`$\frac{1.5\times10^{11}}{3\times10^{8}}=0.5\times10^{3}=500$ s; $500\div60\approx8.3$ min (8 min 20 s).` },
-  ],
+  problems: PROBLEMS,
 };
