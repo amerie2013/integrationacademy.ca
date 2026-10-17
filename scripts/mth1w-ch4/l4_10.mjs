@@ -17,7 +17,6 @@ export const blocks = () => [
       "check your readiness for the chapter test.",
     ],
     curriculum: "C3.1–C3.2, C4.1–C4.4 (whole chapter)",
-    book: "Nelson Principles of Mathematics 9, Ch. 3 and Ch. 5 Chapter Reviews and Self-Tests",
     prior: [
       [String.raw`Slope through \((-1,3)\) and \((3,-5)\)?`, String.raw`\(\frac{-8}{4}=-2\).`],
       [String.raw`Is \(y=x^2+1\) linear?`, "No: it has an x² term (quadratic)."],

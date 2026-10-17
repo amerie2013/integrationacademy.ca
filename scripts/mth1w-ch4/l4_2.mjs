@@ -17,7 +17,6 @@ export const blocks = () => [
       "decide from an equation whether a relation is linear (the variable has degree 1).",
     ],
     curriculum: "C3.2 (compare linear and non-linear), C4.1 (characteristics of graphs, tables and equations), C4.2 (xy = k)",
-    book: "Nelson Principles of Mathematics 9, §3.3 Linear and Non-Linear Relations; §6.3 (curves of good fit)",
     prior: [
       [String.raw`Find the differences between consecutive terms of \(4, 9, 14, 19\).`, String.raw`\(5, 5, 5\).`],
       [String.raw`Evaluate \(2^x\) for \(x=0,1,2,3\).`, String.raw`\(1, 2, 4, 8\).`],

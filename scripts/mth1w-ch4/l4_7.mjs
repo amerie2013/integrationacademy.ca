@@ -17,7 +17,6 @@ export const blocks = () => [
       "model a situation from two data points and use the equation to predict.",
     ],
     curriculum: "C4.3 (determine the equation of a line), C4.4 (solve problems)",
-    book: "Nelson Principles of Mathematics 9, §5.3 Using the Slope Formula; §5.4 Linear Equations from Two Points / a Point and the Slope",
     prior: [
       [String.raw`Solve \(7=-2(3)+b\).`, String.raw`\(b=13\).`],
       [String.raw`Simplify \(\dfrac{-9}{6}\).`, String.raw`\(-\tfrac32\).`],

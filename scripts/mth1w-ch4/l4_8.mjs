@@ -16,8 +16,7 @@ export const blocks = () => [
       "use \\(m=-\\frac AB\\) and \\(b=-\\frac CB\\) as shortcuts and explain why they work;",
       "model a situation with general form and interpret its intercepts.",
     ],
-    curriculum: "C4.2, C4.3 (forms of linear relations); extends to the Nelson analytic geometry chapter",
-    book: "Nelson Principles of Mathematics 9, §5.2 Expressing Equations in Slope–Intercept Form; intercepts",
+    curriculum: "C4.2, C4.3 (forms of linear relations)",
     prior: [
       [String.raw`Solve \(3x-4y=12\) for \(y\).`, String.raw`\(y=\tfrac34x-3\).`],
       [String.raw`Multiply \(\tfrac23x-4=y\) by \(3\).`, String.raw`\(2x-12=3y\).`],

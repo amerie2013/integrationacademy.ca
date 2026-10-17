@@ -56,7 +56,6 @@ export const WS = {
   bigideas: String.raw`Area measures two-dimensional space. Composite areas are found by adding and subtracting simple shapes. Changing one dimension by a factor multiplies the area by that factor, but scaling \emph{every} length by $k$ multiplies the area by $k^2$. For a fixed perimeter the greatest rectangular area is a square; with a wall it is half a square ($l=2w$).`,
   goals: ["Use area formulas for common shapes.", "Find composite areas by adding and subtracting.", "Apply the $k^2$ rule and work backward to $k$.", "Maximize area for a fixed perimeter, with and without walls."],
   curriculum: "E1.4",
-  book: "Nelson Principles of Mathematics 9, 8.1, 8.2, 9.1--9.2",
   vocab: [["Area", "number of unit squares covering a region"], ["Perpendicular height", "height at right angles to the base"], ["Trapezoid", "$A=\\frac12(a+b)h$"], ["Area factor", "$k^2$ for a scale factor $k$"]],
   hook: String.raw`Show two pizzas: a $30$ cm pizza and a $40$ cm pizza. Ask: “The bigger one is only $10$ cm wider. How much more pizza is it?” Students usually guess $33\%$; the answer is about $78\%$.`,
   concepts: [

@@ -17,7 +17,6 @@ export const blocks = () => [
       "check your readiness for the chapter test.",
     ],
     curriculum: "E1.1–E1.6 (whole strand E1)",
-    book: "Nelson Principles of Mathematics 9, Ch. 7 and Ch. 8 Chapter Reviews and Self-Tests",
     prior: [
       [String.raw`Each interior angle of a regular hexagon?`, String.raw`\(720^\circ\div6=120^\circ\).`],
       [String.raw`\(1\ \text{m}^3\) in litres?`, String.raw`\(1000\) L.`],

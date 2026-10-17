@@ -17,7 +17,6 @@ export const blocks = () => [
       "calculate with any rational numbers — negative decimals, fractions and mixed numbers together — choosing the easier form and estimating first.",
     ],
     curriculum: "B3.3 (signs), B3.4 (operations with fractions and mixed numbers, formulas and measurement)",
-    book: "Nelson Principles of Mathematics 9, §1.2 Multiplying and Dividing Mixed Numbers, §1.5 Rational Number Operations",
     prior: [
       [String.raw`Write \(3\tfrac{1}{2}\) as an improper fraction.`, String.raw`\(\tfrac{7}{2}\), because \(3\times2+1=7\).`],
       [String.raw`Simplify \(\tfrac{15}{40}\).`, String.raw`\(\tfrac{3}{8}\) (divide by \(5\)).`],

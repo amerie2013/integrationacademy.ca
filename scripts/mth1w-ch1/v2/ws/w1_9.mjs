@@ -14,7 +14,6 @@ export const WS = {
     "Find percent increase/decrease and apply discounts, taxes and successive changes with multipliers.",
   ],
   curriculum: "B3.3, B3.5; links to F1",
-  book: "Nelson Principles of Mathematics 9, Ch. 1 (proportional reasoning), Ch. 3 (rate of change)",
   vocab: [
     ["Rate / unit rate", "a comparison of different units / the rate for one unit: $72$ km/h"],
     ["Rate of change", "$\\frac{\\text{change in quantity}}{\\text{change in time}}$; its sign shows rising or falling"],

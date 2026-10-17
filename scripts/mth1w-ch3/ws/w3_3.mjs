@@ -54,7 +54,6 @@ export const WS = {
     "Alter parameters, constraints and conditions to model similar or new situations.",
   ],
   curriculum: "C2.3",
-  book: "Not in the Nelson text; uses relations (Ch. 4) and interest/depreciation (Ch. 7)",
   vocab: [
     ["Trace table", "columns for variables, one row per change"],
     ["Syntax error", "breaks Python's grammar; nothing runs"],

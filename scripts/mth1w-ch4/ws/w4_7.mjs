@@ -51,7 +51,6 @@ export const WS = {
   bigideas: String.raw`To write $y=mx+b$, find the slope $m$ (rise over run, or $m=\frac{y_2-y_1}{x_2-x_1}$), then find $b$ by substituting a point ($b=y-mx$) or reading the y-intercept, and check with another point. This works from graphs, tables and real data alike.`,
   goals: ["Read m and b from a graph.", "Find b from a point and a slope.", "Use the slope formula with two points.", "Write equations from tables (including unequal steps).", "Model situations from two data points."],
   curriculum: "C4.3, C4.4",
-  book: "Nelson Principles of Mathematics 9, §5.3; §5.4",
   vocab: [["Slope formula", String.raw`$m=\frac{y_2-y_1}{x_2-x_1}$`], ["b from a point", String.raw`$b=y-mx$`], ["Collinear", "on one straight line"]],
   hook: String.raw`Two clues: “A plumber charged $155$ dollars for $2$ hours and $260$ dollars for $3.5$ hours.” Ask students to work out the hourly rate and the call-out fee with no formula. They reinvent the slope formula and $b=y-mx$.`,
   concepts: [

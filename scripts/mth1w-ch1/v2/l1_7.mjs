@@ -16,7 +16,6 @@ export const blocks = () => [
       "multiply and divide numbers in scientific notation and solve problems about very large and very small quantities.",
     ],
     curriculum: "B2.1 (scientific notation), B2.2 (relationships between exponents and operations with powers)",
-    book: "Nelson Principles of Mathematics 9, §2.2 Multiplying and Dividing Powers, §2.3 Power of a Power",
     prior: [
       [String.raw`Write \(x^3\) as repeated multiplication.`, String.raw`\(x\cdot x\cdot x\).`],
       [String.raw`Evaluate \(10^{-2}\).`, String.raw`\(\tfrac{1}{100}=0.01\).`],

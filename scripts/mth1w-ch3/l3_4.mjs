@@ -76,7 +76,6 @@ export const blocks = () => [
       "check your readiness for the chapter test.",
     ],
     curriculum: "C2.1–C2.3 (whole chapter)",
-    book: "Not in the Nelson text; draws on Ch. 2 and Ch. 4",
     prior: [
       [String.raw`What does ${ic("print(17 % 5)")} show?`, String.raw`\(2\).`],
       [String.raw`How many values are in ${ic("range(3, 10)")}?`, String.raw`\(7\).`],

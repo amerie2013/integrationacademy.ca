@@ -68,7 +68,6 @@ export const blocks = () => [
       "use a loop to find every integer in a range that satisfies an inequality.",
     ],
     curriculum: "C2.1 (variables, parameters, equations and inequalities in code)",
-    book: "Not in the Nelson text (coding is new in the 2021 MTH1W curriculum); links to Ch. 2 expressions and Ch. 4 equations",
     prior: [
       [String.raw`Evaluate \(3x^2-2x\) when \(x=4\).`, String.raw`\(48-8=40\).`],
       [String.raw`Is \(x=2\) a solution of \(5x-3=7\)?`, String.raw`Yes: \(10-3=7\).`],

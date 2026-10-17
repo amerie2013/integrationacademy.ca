@@ -17,7 +17,6 @@ export const blocks = () => [
       "write \\(y=mx+b\\) for a real situation and use it to answer questions.",
     ],
     curriculum: "C4.2 (represent linear relations), C4.3 (initial value and rate of change)",
-    book: "Nelson Principles of Mathematics 9, §3.4 Direct and Partial Variation; §5.1 Interpreting Slope and y-Intercept",
     prior: [
       [String.raw`Evaluate \(3x-4\) when \(x=-2\).`, String.raw`\(-10\).`],
       [String.raw`A table goes \(4, 7, 10, 13\) for \(x=0,1,2,3\). What is the first difference?`, String.raw`\(3\).`],

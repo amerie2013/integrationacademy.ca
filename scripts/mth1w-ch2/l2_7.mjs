@@ -32,7 +32,6 @@ export const blocks = () => [
       "check your readiness for the chapter test with the self-assessment list.",
     ],
     curriculum: "C1.1–C1.5 (whole chapter)",
-    book: "Nelson Principles of Mathematics 9, Ch. 2 and Ch. 4 Chapter Reviews and Self-Tests",
     prior: [
       [String.raw`Simplify \(3x-(x-4)\).`, String.raw`\(2x+4\).`],
       [String.raw`Solve \(3x-(x-4)=10\).`, String.raw`\(2x+4=10\), so \(x=3\).`],

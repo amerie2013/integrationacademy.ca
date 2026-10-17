@@ -20,7 +20,6 @@ export const blocks = () => [
       "find the rectangle with the least perimeter for a given area (a square), with and without a wall.",
     ],
     curriculum: "E1.4 (how changing dimensions affects perimeter; optimization)",
-    book: "Nelson Principles of Mathematics 9, 8.1 Optimal Dimensions of Rectangles, 8.2 Composite 2-D Shapes, 9 Optimizing Measurements",
     prior: [
       [String.raw`Perimeter of a \(7\) by \(3\) rectangle?`, String.raw`\(2(7+3)=20\).`],
       [String.raw`Circumference of a circle with diameter \(10\)?`, String.raw`\(10\pi\approx31.4\).`],

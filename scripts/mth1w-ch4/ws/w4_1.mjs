@@ -61,7 +61,6 @@ export const WS = {
     "Interpolate and extrapolate, and judge reliability.",
   ],
   curriculum: "C3.1, C4.1",
-  book: "Nelson Principles of Mathematics 9, §3.1; §6.5",
   vocab: [
     ["Independent variable", "the variable you control; horizontal axis"],
     ["Dependent variable", "the variable that responds; vertical axis"],

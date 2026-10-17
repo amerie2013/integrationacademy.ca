@@ -17,7 +17,6 @@ export const blocks = () => [
       "use a graph to interpolate (estimate between data) and extrapolate (predict beyond the data).",
     ],
     curriculum: "C3.1 (relations from real situations; tables and graphs), C4.1 (characteristics of graphs)",
-    book: "Nelson Principles of Mathematics 9, Ch. 3 (3.1 Exploring Relationships) and §6.5 Describing Situations from Graphs",
     prior: [
       [String.raw`Evaluate \(12+3t\) for \(t=0,1,2\).`, String.raw`\(12, 15, 18\).`],
       [String.raw`Plot the point \((3,-2)\): which way do you move first?`, String.raw`Right \(3\), then down \(2\).`],

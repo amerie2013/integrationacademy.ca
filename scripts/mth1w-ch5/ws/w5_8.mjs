@@ -48,7 +48,6 @@ export const WS = {
   bigideas: String.raw`Surface area is the total area of the faces of a solid --- the area of its net. Prisms: two bases plus a band of rectangles; cylinders: two circles plus a rectangle $2\pi r$ long. Pyramids and cones need the \emph{slant height} $s$, from the Pythagorean theorem. Leave out faces that are open or hidden. Scaling every length by $k$ multiplies surface area by $k^2$.`,
   goals: ["Find surface areas of prisms and cylinders from nets.", "Find slant heights with Pythagoras.", "Find surface areas of pyramids, cones and spheres.", "Handle open and composite solids.", "Compare designs that use less material."],
   curriculum: "E1.4, E1.6",
-  book: "Nelson Principles of Mathematics 9, 8.3, 8.4, 8.6",
   vocab: [["Net", "flat pattern that folds into a solid"], ["Lateral area", "area of the sides only"], ["Slant height $s$", "along a face from apex to base edge"], ["Surface area", "total area of all faces"]],
   hook: String.raw`Give groups a cereal box to cut open along its edges. Ask: “How much cardboard is used? Which faces are the same size?” Then show a can and ask how to unroll its side.`,
   concepts: [

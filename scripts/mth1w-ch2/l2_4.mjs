@@ -18,7 +18,6 @@ export const blocks = () => [
       "estimate a solution from a graph and confirm it with algebra.",
     ],
     curriculum: "C1.5 (create and solve equations), C3 link (linear relations); B3 (rational-number operations)",
-    book: "Nelson Principles of Mathematics 9, §4.1 Solving Equations Using Graphs and Tables; §4.2 Solving Equations by Working Backward",
     prior: [
       [String.raw`Evaluate \(5x-8\) at \(x=-2\).`, String.raw`\(-18\).`],
       [String.raw`What undoes “multiply by \(4\)”?`, String.raw`Divide by \(4\).`],

@@ -51,7 +51,6 @@ export const WS = {
   bigideas: String.raw`Two linear relations can be compared by their \textbf{rates of change} (slopes) and \textbf{initial values} (intercepts). Where they are equal is the \textbf{point of intersection}, found from a table, estimated from a graph, or calculated exactly by setting the expressions equal. The intersection is the break-even point: one option is better before it, the other after. Parallel lines (equal slopes) never meet.`,
   goals: ["Compare slopes and intercepts in context.", "Find intersections from tables.", "Estimate intersections from graphs.", "Solve for intersections algebraically.", "Interpret break-even points and make decisions."],
   curriculum: "C4.1, C4.4",
-  book: "Nelson Principles of Mathematics 9, §4.5",
   vocab: [["Point of intersection", "same x and y on both lines"], ["Break-even point", "where two options are equal"], ["Linear system", "two linear relations together"], ["Parallel", "same slope: no intersection"]],
   hook: String.raw`Offer two job offers: A pays $200$ dollars a week plus $5\%$ of sales; B pays $350$ a week, no commission. Ask students to vote, then ask: “For what sales does it matter?” Graphing both shows the answer is the crossing point.`,
   concepts: [

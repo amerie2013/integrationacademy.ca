@@ -26,7 +26,6 @@ export const blocks = () => [
       "explain why scaling every length by \\(k\\) multiplies the volume by \\(k^3\\).",
     ],
     curriculum: "E1.4 (how changing dimensions affects volume), E1.6 (solve problems involving volume of prisms, pyramids, cylinders, cones and spheres)",
-    book: "Nelson Principles of Mathematics 9, 8.3 Surface Area and Volume of Prisms and Cylinders, 8.5 Volume of a Pyramid and a Cone, 8.6 Volume and Surface Area of a Sphere",
     prior: [
       [String.raw`Area of a circle with radius \(3\)?`, String.raw`\(9\pi\approx28.3\).`],
       [String.raw`\(\tfrac13\times27=?\)`, String.raw`\(9\).`],

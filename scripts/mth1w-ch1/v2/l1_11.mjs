@@ -34,7 +34,6 @@ export const blocks = () => [
       "check your own readiness for the chapter test with the self-assessment list.",
     ],
     curriculum: "B1.1–B1.3, B2.1–B2.2, B3.1–B3.5 (whole chapter)",
-    book: "Nelson Principles of Mathematics 9, Chapter 1 Review and Chapter Self-Test",
     prior: [
       [String.raw`What is \((-3)\times(-4)\)? What is \((-3)+(-4)\)?`, String.raw`\(12\) and \(-7\). Different rules for multiplying and adding.`],
       [String.raw`What is \(2^{-2}\)?`, String.raw`\(\tfrac14\) — a negative exponent means reciprocal.`],

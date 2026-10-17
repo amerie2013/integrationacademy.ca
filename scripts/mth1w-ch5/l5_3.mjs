@@ -17,7 +17,6 @@ export const blocks = () => [
       "convert rates such as km/h to m/s using the unit-factor method.",
     ],
     curriculum: "E1.3 (solve problems involving different units within and between measurement systems)",
-    book: "Nelson Principles of Mathematics 9, Ch. 8 Measurement (Getting Started: metric and imperial units)",
     prior: [
       [String.raw`\(3.6\times1000=?\)`, String.raw`\(3600\): move the decimal 3 places right.`],
       [String.raw`\(450\div100=?\)`, String.raw`\(4.5\).`],

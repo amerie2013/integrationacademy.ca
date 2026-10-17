@@ -68,7 +68,6 @@ export const WS = {
     "Model growth, decay and savings situations and search for solutions with loops.",
   ],
   curriculum: "C2.2",
-  book: "Not in the Nelson text; links to patterns (Ch. 2), linear relations (Ch. 4) and growth/decay (Ch. 7)",
   vocab: [
     ["Algorithm", "ordered steps that solve a problem"],
     ["Selection", "choosing a path with a condition"],

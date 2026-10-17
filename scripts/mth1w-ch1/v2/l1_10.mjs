@@ -25,7 +25,6 @@ export const blocks = () => [
       "connect these ideas to real situations such as repeatedly halving a distance.",
     ],
     curriculum: "B1.3 (density, infinity and limit as they relate to number sets)",
-    book: "Nelson Principles of Mathematics 9, §1.4 Rational Numbers (between any two rationals)",
     prior: [
       [String.raw`What is the average of \(4\) and \(10\)?`, String.raw`\(\tfrac{4+10}{2}=7\), halfway between them.`],
       [String.raw`Write \(\tfrac{1}{3}\) as a decimal.`, String.raw`\(0.\overline{3}=0.333\ldots\)`],

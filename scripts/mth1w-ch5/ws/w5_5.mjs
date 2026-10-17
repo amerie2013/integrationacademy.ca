@@ -57,7 +57,6 @@ export const WS = {
   bigideas: String.raw`Perimeter is a length. Adding $x$ to one dimension of a rectangle adds $2x$ to the perimeter; multiplying \emph{every} length by $k$ multiplies the perimeter by $k$. For a fixed area, the rectangle with the least perimeter is a square, and against a wall the best shape is half a square (the wall side is twice the width). Of all shapes, a circle encloses a given area with the least boundary.`,
   goals: ["Find perimeters of composite shapes, including arcs.", "Predict the effect of changing one dimension.", "Use the scale-factor rule for perimeter.", "Minimize perimeter for a fixed area, with and without a wall."],
   curriculum: "E1.4",
-  book: "Nelson Principles of Mathematics 9, 8.1, 8.2, Ch. 9",
   vocab: [["Perimeter", "length of the boundary"], ["Circumference", "$C=\\pi d=2\\pi r$"], ["Composite shape", "made of simpler shapes"], ["Scale factor", "the multiplier for every length"], ["Optimal", "best possible (least or greatest)"]],
   hook: String.raw`Give each pair $24$ toothpicks (or a $24$ cm loop of string) and grid paper. Ask: “Make rectangles with an area of exactly $36$ squares. Which uses the fewest toothpicks?” Then turn it around for 5.6.`,
   concepts: [

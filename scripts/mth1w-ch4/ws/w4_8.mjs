@@ -51,7 +51,6 @@ export const WS = {
   bigideas: String.raw`A line can be written in \textbf{slope-intercept form} $y=mx+b$ (shows slope and y-intercept) or \textbf{general form} $Ax+By+C=0$ (integers, $A\ge0$; good for intercepts and for situations where two quantities share a total). Convert by rearranging; $m=-\frac AB$, $b=-\frac CB$. Intercepts: set $y=0$ for the x-intercept, $x=0$ for the y-intercept.`,
   goals: ["Write lines in general form.", "Convert general form to slope-intercept form.", "Find intercepts and graph from them.", "Use m = −A/B and b = −C/B.", "Model situations in general form."],
   curriculum: "C4.2, C4.3",
-  book: "Nelson Principles of Mathematics 9, §5.2",
   vocab: [["General form", "Ax + By + C = 0"], ["Slope-intercept form", "y = mx + b"], ["x-intercept", "y = 0"], ["y-intercept", "x = 0"]],
   hook: String.raw`A class has $360$ dollars to spend on $3$-dollar hot dogs and $2$-dollar drinks. Students list possible orders: $(120, 0)$, $(100, 30)$, $(0, 180)$\ldots Plotting them gives a line whose natural equation is $3h+2d=360$ — general form.`,
   concepts: [

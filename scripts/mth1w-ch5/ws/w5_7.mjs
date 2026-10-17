@@ -51,7 +51,6 @@ export const WS = {
   bigideas: String.raw`Volume counts cubic units. Every prism and cylinder has $V=(\text{area of base})\times\text{height}$; a pyramid or cone holds exactly one third of its matching prism or cylinder; a sphere has $V=\frac43\pi r^3$. Composite solids are added or subtracted. Scaling every length by $k$ multiplies volume by $k^3$, and $1$ cm$^3=1$ mL links volume to capacity.`,
   goals: ["Find volumes of prisms, cylinders, pyramids, cones and spheres.", "Find a missing dimension from a volume.", "Find volumes of composite and hollow solids.", "Use the $k^3$ rule and convert to litres."],
   curriculum: "E1.4, E1.6",
-  book: "Nelson Principles of Mathematics 9, 8.3, 8.5, 8.6",
   vocab: [["Volume", "cubic units filling a solid"], ["Capacity", "how much a container holds"], ["Base area $B$", "area of the base shape"], ["Hemisphere", "half a sphere"]],
   hook: String.raw`Fill a cone with rice and pour it into a cylinder with the same base and height. Ask students to predict how many cones fill the cylinder before you try it (three).`,
   concepts: [

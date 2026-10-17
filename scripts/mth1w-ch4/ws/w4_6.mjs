@@ -53,7 +53,6 @@ export const WS = {
   bigideas: String.raw`Starting from $y=x$, changing $b$ \textbf{translates} the line vertically (parallel lines), changing the size of $m$ \textbf{rotates} it about $(0,b)$ (steeper or flatter), and changing the sign of $m$ \textbf{reflects} it in the y-axis. In context: a new fixed fee moves the graph up or down; a new rate changes its steepness.`,
   goals: ["Describe the effect of changing b.", "Describe the effect of changing m.", "Describe reflections from changing the sign of m.", "Write equations after transformations.", "Interpret transformations in real situations."],
   curriculum: "C4.2, C4.3",
-  book: "Nelson Principles of Mathematics 9, §5.1",
   vocab: [["Translation", "slide: change b"], ["Rotation", "turn about (0, b): change m"], ["Reflection", "mirror in the y-axis: m → −m"], ["Family of lines", "lines sharing a slope or an intercept"]],
   hook: String.raw`Give each pair of students a strand of spaghetti on a grid. “Make $y=x$. Now slide it up 3 without turning it. Now pin it at $(0,3)$ and make it steeper.” Students physically perform translations and rotations before seeing the equations.`,
   concepts: [

@@ -79,7 +79,6 @@ export const blocks = () => [
       "alter parameters, constraints and conditions so that code models a similar or new situation, and predict the effect.",
     ],
     curriculum: "C2.3 (read code to predict outcomes; alter code to adjust constraints, parameters and outcomes)",
-    book: "Not in the Nelson text; uses relations from Ch. 2 and Ch. 4 and depreciation (7.2)",
     prior: [
       [String.raw`What does ${ic("range(2, 8, 2)")} produce?`, String.raw`\(2, 4, 6\).`],
       [String.raw`After ${ic("a = 3")}, ${ic("a = a * a")}, what is ${ic("a")}?`, String.raw`\(9\).`],

@@ -19,7 +19,6 @@ export const WS = {
     String.raw`Write an expression for the $n$th figure of a linear pattern and for a real situation (fixed cost + rate).`,
   ],
   curriculum: "C1.1, C1.2, C1.3",
-  book: "Nelson Principles of Mathematics 9, Ch. 2 Getting Started, §2.4; §4.1",
   vocab: [
     ["Variable", "a letter representing a number that can vary or is unknown"],
     ["Term", String.raw`a part of an expression separated by $+$ or $-$, sign included`],

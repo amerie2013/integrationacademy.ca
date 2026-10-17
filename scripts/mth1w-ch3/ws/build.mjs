@@ -106,7 +106,7 @@ ${t.bigideas}
 \begin{itemize}[leftmargin=*,itemsep=1pt]
 ${goals}
 \end{itemize}
-{\small\textbf{Ontario MTH1W:} ${t.curriculum} \quad\textbf{Textbook:} ${t.book}}
+{\small\textbf{Ontario MTH1W:} ${t.curriculum}}
 ${vocab}
 \end{goalbox}
 \begin{hookbox}

@@ -16,7 +16,6 @@ export const WS = {
     "Add and subtract fractions and mixed numbers (with regrouping) and solve measurement problems.",
   ],
   curriculum: "B3.2, B3.3, B3.4",
-  book: "Nelson Principles of Mathematics 9, §1.1, §1.4, §1.5",
   vocab: [
     ["Numerator / denominator", "pieces taken / equal pieces in one whole"],
     ["Equivalent fractions", "fractions with the same value: $\\frac23=\\frac{10}{15}$"],

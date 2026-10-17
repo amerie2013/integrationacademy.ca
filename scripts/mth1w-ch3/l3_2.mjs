@@ -87,7 +87,6 @@ export const blocks = () => [
       "write code that models a situation and answers a question such as “how many weeks until…?” or “which integer solves…?”.",
     ],
     curriculum: "C2.2 (decompose situations into computational steps; create code to solve problems)",
-    book: "Not in the Nelson text; connects to Ch. 2 patterns, Ch. 4 equations and 7.2 appreciation/depreciation",
     prior: [
       [String.raw`What does ${ic("x = x + 2")} do?`, "It increases the value stored in x by 2."],
       [String.raw`Which integers from 1 to 20 are multiples of 6?`, String.raw`\(6, 12, 18\).`],

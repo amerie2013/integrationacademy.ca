@@ -30,7 +30,6 @@ export const WS = {
     String.raw`Interpret repeating decimals such as $0.\overline{3}$ and $0.\overline{9}$ as limits.`,
   ],
   curriculum: "B1.3",
-  book: "Nelson Principles of Mathematics 9, §1.4",
   vocab: [
     ["Dense", "between any two members of the set there is another member"],
     ["Midpoint", "the number halfway between $a$ and $b$: $\\frac{a+b}{2}$"],

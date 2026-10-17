@@ -16,7 +16,6 @@ export const blocks = () => [
       "add and subtract mixed numbers and solve problems with them.",
     ],
     curriculum: "B3.2 (unit fractions), B3.3 (signs on fractions), B3.4 (operations with fractions and mixed numbers)",
-    book: "Nelson Principles of Mathematics 9, §1.1 Adding and Subtracting Mixed Numbers, §1.4–1.5 Rational Numbers",
     prior: [
       [String.raw`What is the GCF of \(18\) and \(24\)?`, String.raw`\(6\) — the greatest number that divides both.`],
       [String.raw`What is the LCM of \(4\) and \(6\)?`, String.raw`\(12\) — the smallest number both divide into.`],

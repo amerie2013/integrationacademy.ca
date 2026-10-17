@@ -19,7 +19,6 @@ export const WS = {
     "Evaluate expressions with powers in the correct order and solve growth/decay problems.",
   ],
   curriculum: "B2.1",
-  book: "Nelson Principles of Mathematics 9, §1.6, §2.1",
   vocab: [
     ["Power", "an expression $a^n$ (base $a$, exponent $n$)"],
     ["Base", "the factor being repeated"],

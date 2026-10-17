@@ -17,7 +17,6 @@ export const blocks = () => [
       "model a situation with a linear inequality and decide whether a point satisfies it.",
     ],
     curriculum: "C4.2 (graphs of linear relations, including special cases; linear inequalities)",
-    book: "Nelson Principles of Mathematics 9, §5.1 (slope of horizontal/vertical lines); inequalities extend the text",
     prior: [
       [String.raw`What is the slope through \((1,4)\) and \((5,4)\)?`, String.raw`\(\frac{0}{4}=0\).`],
       [String.raw`Is \(x=3\) a solution of \(2x+1>6\)?`, String.raw`Yes: \(7>6\).`],

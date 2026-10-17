@@ -55,7 +55,6 @@ export const WS = {
   bigideas: String.raw`Every measurement is a number \emph{and} a unit. To change units, multiply by a conversion factor equal to $1$ --- such as $\frac{100\ \text{cm}}{1\ \text{m}}$ or $\frac{2.54\ \text{cm}}{1\ \text{in}}$ --- with the wanted unit on top. Area and volume units change by the square and cube of the length factor: $1$ m$^2=10\,000$ cm$^2$ and $1$ m$^3=1\,000\,000$ cm$^3$. Volume and capacity meet at $1$ cm$^3=1$ mL.`,
   goals: ["Convert within the metric system.", "Convert imperial lengths and between imperial and metric.", "Convert area and volume units.", "Relate volume and capacity.", "Convert rates such as km/h and m/s."],
   curriculum: "E1.3",
-  book: "Nelson Principles of Mathematics 9, Ch. 8 Getting Started",
   vocab: [["Conversion factor", "a fraction equal to 1 that changes units"], ["Imperial units", "in, ft, yd, mi, lb, gal"], ["Capacity", "amount a container holds (L, mL)"], ["Rate", "comparison of quantities with different units"]],
   hook: String.raw`Show a lumber price tag (\$ per board foot), a Canadian highway sign in km and a U.S. sign in miles. Ask: “How fast is $100$ km/h in miles per hour? Make a guess, then let's work it out.”`,
   concepts: [

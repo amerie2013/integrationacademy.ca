@@ -51,7 +51,6 @@ export const WS = {
   bigideas: String.raw`A relation is \textbf{linear} when its rate of change is constant: equal first differences for equal x-steps, or equal $\frac{\Delta y}{\Delta x}$ in general; its graph is a straight line and its equation has degree $1$. Non-linear relations include \textbf{quadratic} (constant second differences, parabola), \textbf{exponential} (constant ratio) and \textbf{inverse variation} $xy=k$ (hyperbola).`,
   goals: ["Use first differences and Δy/Δx to test for linearity.", "Recognize quadratic relations by second differences.", "Recognize exponential relations by a constant ratio.", "Recognize inverse variation xy = k.", "Classify relations from tables, graphs and equations."],
   curriculum: "C3.2, C4.1, C4.2",
-  book: "Nelson Principles of Mathematics 9, §3.3; §6.3",
   vocab: [["First differences", "changes in y for equal steps in x"], ["Rate of change", String.raw`$\frac{\Delta y}{\Delta x}$`], ["Second differences", "differences of the first differences"], ["Constant ratio", "each y divided by the previous y"], ["Inverse variation", "xy = k"]],
   hook: String.raw`Show three graphs without labels: a straight line, a parabola and a steep curve. Ask: “Which one is the cost of gas, which is the height of a thrown ball, which is a viral video's views?” Then reveal the tables. Students discover that the table already tells which is which.`,
   concepts: [

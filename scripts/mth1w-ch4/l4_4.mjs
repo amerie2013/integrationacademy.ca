@@ -17,7 +17,6 @@ export const blocks = () => [
       "interpret the point of intersection and decide which option is better on each side of it.",
     ],
     curriculum: "C4.1 (compare linear relations), C4.4 (solve problems; point of intersection)",
-    book: "Nelson Principles of Mathematics 9, §4.5 Solving Problems Using Linear Relations (linear systems by graphing)",
     prior: [
       [String.raw`Solve \(3x+5=x+13\).`, String.raw`\(2x=8\), \(x=4\).`],
       [String.raw`Which line is steeper, slope \(2\) or slope \(-5\)?`, String.raw`Slope \(-5\) (larger size).`],

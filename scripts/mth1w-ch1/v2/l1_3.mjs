@@ -16,7 +16,6 @@ export const blocks = () => [
       "evaluate integer expressions with brackets, powers and all four operations, and substitute integers into formulas.",
     ],
     curriculum: "B3.1, B3.3 (effect of signs); B3.4 (formulas)",
-    book: "Nelson Principles of Mathematics 9, §1.3 Integer Operations with Powers",
     prior: [
       [String.raw`Evaluate \(-3+(-3)+(-3)+(-3)\).`, String.raw`\(-12\). Four groups of \(-3\).`],
       [String.raw`What is \(7\times8\)? \(56\div7\)?`, String.raw`\(56\) and \(8\). Division undoes multiplication.`],

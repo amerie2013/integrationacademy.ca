@@ -14,7 +14,6 @@ export const WS = {
     "Solve problems involving temperature, elevation, money and scores, including distances between values.",
   ],
   curriculum: "B3.1",
-  book: "Nelson Principles of Mathematics 9, §1.3",
   vocab: [
     ["Opposites", "numbers the same distance from $0$ on opposite sides; they add to $0$ ($7$ and $-7$)"],
     ["Absolute value", "distance from $0$, never negative: $|-7|=7$"],

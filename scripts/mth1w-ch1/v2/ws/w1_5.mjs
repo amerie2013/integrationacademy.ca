@@ -25,7 +25,6 @@ export const WS = {
     "Choose multiplication or division correctly in word problems (recipes, lengths, rates).",
   ],
   curriculum: "B3.3, B3.4",
-  book: "Nelson Principles of Mathematics 9, §1.2, §1.5",
   vocab: [
     ["“of”", "in fraction problems, “of” means multiply: $\\frac34$ of $20$ is $\\frac34\\times20=15$"],
     ["Reciprocal", "the number you multiply by to get $1$; flip the fraction: $\\frac25\\to\\frac52$"],
@@ -53,7 +52,7 @@ Teach students to \textbf{estimate first}: $\frac56\approx1$ and $\frac{10}{9}\a
 \begin{center}\begin{tabular}{llll}\toprule Expression & Sign & Size & Answer\\\midrule
 $-1.8\times2.5$ & different $\Rightarrow-$ & $4.5$ & $-4.5$\\ $-0.9\div\left(-\frac35\right)$ & same $\Rightarrow+$ & $0.9\times\frac53=1.5$ & $1.5$\\ $-2.25-\left(-\frac34\right)$ & add the opposite & $-2.25+0.75$ & $-1.5$\\\bottomrule\end{tabular}\end{center}
 \textbf{Choose the easier form:} use decimals when the fractions convert neatly ($\frac34=0.75$); use fractions when a decimal would repeat ($0.2\times\frac13=\frac15\times\frac13=\frac{1}{15}$, exact).\\
-\textbf{Teacher note.} Insist on an estimate first: $-1.8\times2.5\approx-2\times2.5=-5$, so $-4.5$ is sensible and $+4.5$ or $-45$ is not. This is Nelson §1.5 (rational number operations) and curriculum B3.3.`],
+\textbf{Teacher note.} Insist on an estimate first: $-1.8\times2.5\approx-2\times2.5=-5$, so $-4.5$ is sensible and $+4.5$ or $-45$ is not. This is curriculum B3.3.`],
   ],
   tips: [
     String.raw`Flip the \emph{divisor} (second number), never the first one.`,

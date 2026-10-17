@@ -16,7 +16,6 @@ export const blocks = () => [
       "share a quantity in a given ratio and solve scale-drawing problems.",
     ],
     curriculum: "B3.5 (rates, percentages and proportions in various contexts)",
-    book: "Nelson Principles of Mathematics 9, Ch. 1 (proportional reasoning applied throughout)",
     prior: [
       [String.raw`Simplify \(\tfrac{12}{18}\).`, String.raw`\(\tfrac23\) (divide by \(6\)).`],
       [String.raw`What is \(\tfrac35\) of \(40\)?`, String.raw`\(24\).`],

@@ -13,6 +13,7 @@ import { PatternRule, AlgebraTiles, DistributiveArea, BalanceSolver, EquationGra
 import { CodeTracer } from "./CodeTracer";
 import { SlopeExplorer, RelationTypes, LinePair, TwoPointLine, InequalityRegion, MotionStory } from "./Lines";
 import { PiPolygon, TriangleAngles, CircleAngles, UnitLadder, Pythagoras, ScaleShape, RectOptimizer, SolidVolume, NetExplorer } from "./Measure";
+import { SamplingLab, MisleadingGraph, StatsExplorer, HistogramBins, ScatterFit, ModelFit } from "./Data";
 
 // Registry of named lesson widgets. A lesson block { type: "widget", widget, props }
 // renders REGISTRY[widget] with its props. Keep names stable — they are stored in the DB.
@@ -53,6 +54,12 @@ const REGISTRY: Record<string, ComponentType<any>> = {
   rectOptimizer: RectOptimizer,
   solidVolume: SolidVolume,
   netExplorer: NetExplorer,
+  samplingLab: SamplingLab,
+  misleadingGraph: MisleadingGraph,
+  statsExplorer: StatsExplorer,
+  histogramBins: HistogramBins,
+  scatterFit: ScatterFit,
+  modelFit: ModelFit,
 };
 
 export const WIDGET_NAMES = Object.keys(REGISTRY);

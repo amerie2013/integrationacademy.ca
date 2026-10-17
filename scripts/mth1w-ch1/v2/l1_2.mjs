@@ -16,7 +16,6 @@ export const blocks = () => [
       "solve problems about change and distance (temperature, elevation, money).",
     ],
     curriculum: "B3.1 (integers for location, direction, amount and change)",
-    book: "Nelson Principles of Mathematics 9, §1.3 Integer Operations",
     prior: [
       [String.raw`Which is greater, \(-8\) or \(-3\)?`, String.raw`\(-3\). On a number line it is to the right of \(-8\).`],
       [String.raw`What is the opposite of \(12\)?`, String.raw`\(-12\). Opposites are the same distance from \(0\) on opposite sides.`],

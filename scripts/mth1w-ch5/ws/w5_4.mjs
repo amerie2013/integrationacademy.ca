@@ -54,7 +54,6 @@ export const WS = {
   bigideas: String.raw`In every right triangle the squares on the legs add up to the square on the hypotenuse: $a^2+b^2=c^2$. Use it forwards to find the hypotenuse, rearranged to find a leg, and in reverse (the converse) to test whether an angle is $90^\circ$. Distances on a grid, heights of isosceles triangles, diagonals of rectangles and boxes, and slant heights are all hidden right triangles.`,
   goals: ["Identify the hypotenuse and legs.", "Find a missing hypotenuse or leg.", "Use the converse to classify triangles.", "Find distances between points.", "Solve multi-step and 3-D problems."],
   curriculum: "E1.5",
-  book: "Nelson Principles of Mathematics 9, Ch. 8 Getting Started; 8.4",
   vocab: [["Hypotenuse", "side opposite the right angle; the longest"], ["Legs", "the two sides forming the right angle"], ["Pythagorean triple", "whole numbers with $a^2+b^2=c^2$"], ["Converse", "if $a^2+b^2=c^2$ then the angle is $90^\\circ$"]],
   hook: String.raw`Draw squares on the sides of a $3$-$4$-$5$ triangle on grid paper and have students count the unit squares ($9+16=25$). Then try a $2$-$3$-$4$ triangle: the squares no longer match. Ask what makes the first triangle special.`,
   concepts: [

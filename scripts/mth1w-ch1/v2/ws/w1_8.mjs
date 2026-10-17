@@ -14,7 +14,6 @@ export const WS = {
     "Share quantities in a given ratio and solve map and scale-drawing problems.",
   ],
   curriculum: "B3.5",
-  book: "Nelson Principles of Mathematics 9, Ch. 1 (proportional reasoning)",
   vocab: [
     ["Ratio", "a comparison of quantities in the same unit: $a:b$, $a$ to $b$, $\\frac ab$"],
     ["Part-to-part / part-to-whole", "compares two parts / compares one part with the total"],

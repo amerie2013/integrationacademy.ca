@@ -18,7 +18,6 @@ export const blocks = () => [
       "factor out the greatest common factor of a polynomial, and write area and perimeter expressions for shapes.",
     ],
     curriculum: "C1.3, C1.4 (simplify expressions by expanding and collecting like terms)",
-    book: "Nelson Principles of Mathematics 9, §2.5 Multiplying a Polynomial by a Monomial; §2.6 Simplifying Polynomial Expressions",
     prior: [
       [String.raw`Simplify \(x^3\times x^4\).`, String.raw`\(x^7\) — same base, add the exponents.`],
       [String.raw`Evaluate \(-4\times(-6)\).`, String.raw`\(24\).`],

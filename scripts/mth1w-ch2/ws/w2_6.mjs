@@ -14,7 +14,6 @@ export const WS = {
     "Use rearranged formulas from measurement, science and finance.",
   ],
   curriculum: "C1.5",
-  book: "Nelson Principles of Mathematics 9, §4.4",
   vocab: [
     ["Subject", String.raw`the variable alone on one side: $A$ in $A=lw$`],
     ["Rearrange", "make a different variable the subject"],

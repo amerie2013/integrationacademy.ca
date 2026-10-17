@@ -20,7 +20,6 @@ export const blocks = () => [
       "model and solve word problems (perimeter, angles, ages, consecutive numbers, rates) and verify the answer in context.",
     ],
     curriculum: "C1.5 (solve multi-step equations, including fractional coefficients)",
-    book: "Nelson Principles of Mathematics 9, §4.3 Solving Equations Using Inverse Operations / Balancing (variables on both sides, fractions)",
     prior: [
       [String.raw`Solve \(4x+7=-13\).`, String.raw`\(x=-5\).`],
       [String.raw`Expand \(-3(2x-5)\).`, String.raw`\(-6x+15\).`],

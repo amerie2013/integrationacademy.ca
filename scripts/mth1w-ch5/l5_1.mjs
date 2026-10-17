@@ -17,7 +17,6 @@ export const blocks = () => [
       "explain how Archimedes trapped π between two polygons and compare historical values of π.",
     ],
     curriculum: "E1.1 (geometric and measurement relationships developed in various cultures)",
-    book: "Nelson Principles of Mathematics 9, Ch. 8 Measurement (Getting Started; history notes on π and the Pythagorean theorem)",
     prior: [
       [String.raw`Evaluate \(3^2+4^2\).`, String.raw`\(9+16=25=5^2\).`],
       [String.raw`What fraction of a full turn is \(36^\circ\)?`, String.raw`\(\frac{36}{360}=\frac{1}{10}\).`],

@@ -57,7 +57,6 @@ export const WS = {
   bigideas: String.raw`Geometry grew from practical needs: re-marking fields, building square corners, tracking the Sun and stars, sharing land. Many cultures discovered the same truths independently --- the $3$-$4$-$5$ right angle, the constant ratio $\pi$, base-60 angle measure --- and each improved the tools for measuring. Today's formulas are the result of thousands of years of shared work.`,
   goals: ["Describe geometry and measurement ideas from several cultures.", "Use a knotted rope and Pythagorean triples to make right angles.", "Convert between base 60 and decimals.", "Apply Eratosthenes' angle--arc method.", "Compare historical values of $\\pi$."],
   curriculum: "E1.1",
-  book: "Nelson Principles of Mathematics 9, Ch. 8 (history notes)",
   vocab: [["Pythagorean triple", "whole numbers with $a^2+b^2=c^2$"], ["Base 60", "place values 1, 1/60, 1/3600"], ["Circumference", "distance around a circle, $C=\\pi d$"], ["Approximation", "a value close to the exact value"]],
   hook: String.raw`Hand each group a loop of string with $12$ equally spaced marks (or a strip of paper). Ask: “Without a protractor or set square, make a perfect right angle.” After a few minutes, reveal the Egyptian $3$-$4$-$5$ method and check it with a corner of a book.`,
   concepts: [

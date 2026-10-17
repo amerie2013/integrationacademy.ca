@@ -23,7 +23,6 @@ export const blocks = () => [
       "evaluate expressions with powers using the order of operations, and solve problems.",
     ],
     curriculum: "B2.1 (sign and size of an exponent and the value of a power)",
-    book: "Nelson Principles of Mathematics 9, §1.6 Powers of Rational Numbers, §2.1–2.2 Powers",
     prior: [
       [String.raw`Evaluate \(5\times5\times5\).`, String.raw`\(125\).`],
       [String.raw`Evaluate \((-2)(-2)(-2)\).`, String.raw`\(-8\): three negative factors give a negative product.`],

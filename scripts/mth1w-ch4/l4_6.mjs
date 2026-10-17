@@ -17,7 +17,6 @@ export const blocks = () => [
       "interpret changes in m and b in a real situation.",
     ],
     curriculum: "C4.2, C4.3 (effects of changing the rate of change and initial value)",
-    book: "Nelson Principles of Mathematics 9, §5.1 (significance of m and b)",
     prior: [
       [String.raw`What are \(m\) and \(b\) in \(y=-3x+7\)?`, String.raw`\(m=-3\), \(b=7\).`],
       [String.raw`Which is steeper: \(y=\tfrac12x\) or \(y=2x\)?`, String.raw`\(y=2x\).`],

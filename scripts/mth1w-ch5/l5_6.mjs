@@ -20,7 +20,6 @@ export const blocks = () => [
       "find the rectangle with the greatest area for a given perimeter (a square), with and without a wall.",
     ],
     curriculum: "E1.4 (how changing dimensions affects area; optimization)",
-    book: "Nelson Principles of Mathematics 9, 8.1 Optimal Dimensions of Rectangles, 8.2 Composite 2-D Shapes, 9.1–9.2 Optimizing Area",
     prior: [
       [String.raw`Area of a triangle with base \(10\) and height \(6\)?`, String.raw`\(\tfrac12(10)(6)=30\).`],
       [String.raw`Area of a circle with radius \(2\)?`, String.raw`\(4\pi\approx12.6\).`],

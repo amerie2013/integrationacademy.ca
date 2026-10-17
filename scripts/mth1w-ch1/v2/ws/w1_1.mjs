@@ -24,7 +24,6 @@ export const WS = {
     "Use counterexamples to test statements about number sets, and tell the story of zero and negative numbers (B1.1).",
   ],
   curriculum: "B1.1, B1.2",
-  book: "Nelson Principles of Mathematics 9, §1.4",
   vocab: [
     ["Natural $\\mathbb{N}$", "the counting numbers $1,2,3,\\dots$"],
     ["Whole $\\mathbb{W}$", "the natural numbers together with $0$"],

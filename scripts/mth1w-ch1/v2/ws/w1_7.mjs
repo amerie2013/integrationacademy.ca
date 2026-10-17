@@ -19,7 +19,6 @@ export const WS = {
     "Multiply and divide in scientific notation and solve problems about very large and very small quantities.",
   ],
   curriculum: "B2.1, B2.2",
-  book: "Nelson Principles of Mathematics 9, §2.2, §2.3",
   vocab: [
     ["Product law", "$a^m\\cdot a^n=a^{m+n}$ (same base)"],
     ["Quotient law", "$a^m\\div a^n=a^{m-n}$ (same base, $a\\neq0$)"],

@@ -17,7 +17,6 @@ export const blocks = () => [
       "solve problems about composite solids and explain why scaling by \\(k\\) multiplies surface area by \\(k^2\\).",
     ],
     curriculum: "E1.4 (how changing dimensions affects surface area), E1.6 (solve problems involving surface area of prisms, pyramids, cylinders, cones and spheres)",
-    book: "Nelson Principles of Mathematics 9, 8.3 Surface Area and Volume of Prisms and Cylinders, 8.4 Surface Area of a Pyramid and a Cone, 8.6 Volume and Surface Area of a Sphere",
     prior: [
       [String.raw`Area of a triangle, base \(6\), height \(5\)?`, String.raw`\(15\).`],
       [String.raw`Circumference of a circle, radius \(4\)?`, String.raw`\(8\pi\approx25.1\).`],

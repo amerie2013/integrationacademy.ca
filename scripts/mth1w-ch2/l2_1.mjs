@@ -17,7 +17,6 @@ export const blocks = () => [
       String.raw`write and use an expression for the \(n\)th figure of a linear growing pattern, and for a real situation such as a service charge.`,
     ],
     curriculum: "C1.1 (history of algebra), C1.2 (create expressions from patterns), C1.3 (evaluate expressions)",
-    book: "Nelson Principles of Mathematics 9, Ch. 2 Getting Started and §2.4; Ch. 4.1",
     prior: [
       [String.raw`Evaluate \(3+4\times5\).`, String.raw`\(23\) — multiplication before addition.`],
       [String.raw`Evaluate \((-2)^3\).`, String.raw`\(-8\) — three negative factors.`],

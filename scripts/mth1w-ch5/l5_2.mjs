@@ -29,7 +29,6 @@ export const blocks = () => [
       "analyse and design figures built from triangles, polygons and circles.",
     ],
     curriculum: "E1.2 (create and analyse designs using circle and triangle properties)",
-    book: "Nelson Principles of Mathematics 9, Ch. 7 Properties of 2-D Figures (7.1 interior angles of polygons, 7.2 exterior angles, 7.5 applying properties)",
     prior: [
       [String.raw`Angles on a straight line add to…?`, String.raw`\(180^\circ\).`],
       [String.raw`Angles around a point add to…?`, String.raw`\(360^\circ\).`],

@@ -18,7 +18,6 @@ export const blocks = () => [
       "use multipliers for discounts, tax and successive percent changes.",
     ],
     curriculum: "B3.3 (signs on ratios, rates and decimals), B3.5 (rates, percentages and proportions); connects to F1 (financial literacy)",
-    book: "Nelson Principles of Mathematics 9, Ch. 1 (proportional reasoning); rates of change appear again in Ch. 3",
     prior: [
       [String.raw`Write \(\tfrac{3}{4}\) as a decimal.`, String.raw`\(0.75\).`],
       [String.raw`Solve \(\tfrac{x}{10}=\tfrac{3}{5}\).`, String.raw`\(x=6\).`],

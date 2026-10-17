@@ -14,7 +14,6 @@ export const WS = {
     "Model and solve geometry, consecutive-number, age, coin and rate problems; verify in context.",
   ],
   curriculum: "C1.5",
-  book: "Nelson Principles of Mathematics 9, §4.3",
   vocab: [
     ["LCD", "lowest common denominator of all fractions in the equation"],
     ["Collect", "move terms to one side by adding or subtracting on both sides"],

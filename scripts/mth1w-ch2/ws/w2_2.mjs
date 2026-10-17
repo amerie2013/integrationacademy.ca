@@ -20,7 +20,6 @@ export const WS = {
     "Test expressions for equivalence by substitution and by simplifying.",
   ],
   curriculum: "C1.3, C1.4",
-  book: "Nelson Principles of Mathematics 9, §2.4 Modelling and Simplifying Polynomials",
   vocab: [
     ["Polynomial", "a term, or a sum of terms, with whole-number exponents on the variables"],
     ["Degree", "of a term: sum of the exponents of its variables; of a polynomial: the highest term degree"],

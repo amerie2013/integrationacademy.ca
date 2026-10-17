@@ -18,7 +18,6 @@ export const blocks = () => [
       "solve multi-step problems, including diagonals of rectangles and boxes.",
     ],
     curriculum: "E1.5 (solve problems involving the Pythagorean theorem)",
-    book: "Nelson Principles of Mathematics 9, Ch. 8 Measurement (Getting Started: the Pythagorean theorem; 8.4 slant heights)",
     prior: [
       [String.raw`Evaluate \(\sqrt{169}\).`, String.raw`\(13\).`],
       [String.raw`Between which two whole numbers is \(\sqrt{50}\)?`, String.raw`\(7\) and \(8\) (\(49<50<64\)).`],

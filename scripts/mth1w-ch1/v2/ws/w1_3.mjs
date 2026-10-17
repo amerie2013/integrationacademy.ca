@@ -30,7 +30,6 @@ export const WS = {
     "Evaluate integer expressions with brackets, powers and all four operations, and substitute negative values into formulas.",
   ],
   curriculum: "B3.1, B3.3, B3.4",
-  book: "Nelson Principles of Mathematics 9, §1.3",
   vocab: [
     ["Product / quotient", "the result of multiplying / dividing"],
     ["Factor", "a number being multiplied"],

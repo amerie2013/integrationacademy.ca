@@ -14,7 +14,6 @@ export const WS = {
     "Estimate solutions from a graph or table and confirm them algebraically.",
   ],
   curriculum: "C1.5 (with C3 link to linear relations)",
-  book: "Nelson Principles of Mathematics 9, §4.1, §4.2",
   vocab: [
     ["Equation", "two expressions joined by $=$"],
     ["Solution / root", "a value of the variable that makes the equation true"],

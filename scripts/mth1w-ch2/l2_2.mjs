@@ -17,7 +17,6 @@ export const blocks = () => [
       "test whether two expressions are equivalent by substitution, and use a counter-example to show they are not.",
     ],
     curriculum: "C1.3 (equivalent expressions), C1.4 (simplify and verify)",
-    book: "Nelson Principles of Mathematics 9, §2.4 Modelling and Simplifying Polynomials",
     prior: [
       [String.raw`Evaluate \(-7+3-(-5)\).`, String.raw`\(1\). Subtracting \(-5\) adds \(5\).`],
       [String.raw`What is the coefficient in \(-x^2\)?`, String.raw`\(-1\).`],

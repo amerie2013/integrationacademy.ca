@@ -52,7 +52,6 @@ export const WS = {
   bigideas: String.raw`\textbf{Parallel} lines have equal slopes (and different intercepts). \textbf{Perpendicular} lines have slopes that are negative reciprocals: $m_1m_2=-1$; horizontal and vertical lines are perpendicular. These facts let us write lines parallel or perpendicular to a given line through a point, and prove right angles and rectangles in the coordinate plane.`,
   goals: ["Classify pairs of lines by their slopes.", "Find negative reciprocals.", "Write a parallel line through a point.", "Write a perpendicular line through a point.", "Use slopes to prove right angles and rectangles."],
   curriculum: "C4.2, C4.4",
-  book: "Nelson Principles of Mathematics 9, §5.5",
   vocab: [["Parallel", "equal slopes"], ["Perpendicular", "slopes multiply to −1"], ["Negative reciprocal", "flip and change sign"], ["Altitude", "perpendicular from a vertex to the opposite side"]],
   hook: String.raw`Draw a rectangle on graph paper whose sides are not horizontal (e.g. $(1,1),(5,3),(4,5),(0,3)$). Ask: “How can we be sure this is a rectangle without a protractor?” Computing the slopes reveals the $\frac12$ and $-2$ pattern.`,
   concepts: [

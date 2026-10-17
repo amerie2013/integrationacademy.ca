@@ -36,7 +36,6 @@ export const blocks = () => [
       "use rearranged formulas from measurement, science and finance, with units.",
     ],
     curriculum: "C1.5 (rearrange formulas to isolate a variable); C3 link (forms of a linear relation)",
-    book: "Nelson Principles of Mathematics 9, §4.4 Solving Equations for a Variable (rearranging formulas)",
     prior: [
       [String.raw`Solve \(4x+10=30\).`, String.raw`\(x=5\): subtract \(10\), then divide by \(4\).`],
       [String.raw`What undoes “multiply by \(\tfrac95\)”?`, String.raw`Multiply by \(\tfrac59\).`],

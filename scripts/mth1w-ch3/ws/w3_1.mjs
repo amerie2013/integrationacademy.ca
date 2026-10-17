@@ -45,7 +45,6 @@ export const WS = {
     "Use a loop to list the integers in a range that satisfy an inequality.",
   ],
   curriculum: "C2.1",
-  book: "Not in the Nelson text (new in MTH1W 2021); connects to Ch. 2 and Ch. 4",
   vocab: [
     ["Assignment", String.raw`${ct("name = expression")}: evaluate the right side, store it on the left`],
     ["Function", String.raw`${ct("def name(parameters):")} \ldots ${ct("return value")}`],

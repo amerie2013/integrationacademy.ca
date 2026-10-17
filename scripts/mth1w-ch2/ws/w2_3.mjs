@@ -18,7 +18,6 @@ export const WS = {
     "Factor out the greatest common factor; write area and perimeter expressions.",
   ],
   curriculum: "C1.3, C1.4",
-  book: "Nelson Principles of Mathematics 9, §2.5 Multiplying a Polynomial by a Monomial; §2.6 Simplifying Polynomial Expressions",
   vocab: [
     ["Distributive property", "$a(b+c)=ab+ac$"],
     ["Expand", "multiply out the brackets"],

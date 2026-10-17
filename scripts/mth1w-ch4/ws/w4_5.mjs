@@ -50,7 +50,6 @@ export const WS = {
   bigideas: String.raw`Special lines: \textbf{horizontal} $y=k$ (slope $0$), \textbf{vertical} $x=k$ (slope undefined) and \textbf{direct variation} $y=mx$ (through the origin). A \textbf{linear inequality} describes a region: draw the boundary (dashed for $<,>$; solid for $\le,\ge$), test a point, and shade. Inequalities model budgets and limits.`,
   goals: ["Graph and write y = k and x = k.", "Explain slope 0 vs undefined slope.", "Recognize direct variation y = mx.", "Graph linear inequalities using a boundary and test point.", "Model and test situations with inequalities."],
   curriculum: "C4.2",
-  book: "Nelson Principles of Mathematics 9, §5.1 (special cases); inequalities extend the text",
   vocab: [["Horizontal line", "y = k, slope 0"], ["Vertical line", "x = k, slope undefined"], ["Boundary line", "the line y = mx + b of an inequality"], ["Test point", "a point used to choose the side to shade"]],
   hook: String.raw`Mark a chalk line across the floor. Ask students to stand on the side where “distance from the door is less than $3$ metres”. The line is the boundary; the crowd is the shaded region. Now ask: “Should people standing \emph{on} the line count?” That decides solid vs dashed.`,
   concepts: [

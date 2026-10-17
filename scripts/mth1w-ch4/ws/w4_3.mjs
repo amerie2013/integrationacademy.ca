@@ -52,7 +52,6 @@ export const WS = {
   bigideas: String.raw`Every linear relation can be written $y=mx+b$: $m$ is the \textbf{rate of change} (slope $=\frac{\text{rise}}{\text{run}}$) and $b$ is the \textbf{initial value} (y-intercept). When $b=0$ the relation is a \textbf{direct variation} (through the origin); otherwise it is a \textbf{partial variation}. Graph from $(0,b)$ using the slope as a step.`,
   goals: ["Identify m and b in words, tables, graphs and equations.", "Compute slope as rise over run.", "Distinguish direct and partial variation.", "Graph y = mx + b from b and m.", "Model situations and answer questions with the equation."],
   curriculum: "C4.2, C4.3",
-  book: "Nelson Principles of Mathematics 9, §3.4; §5.1",
   vocab: [["Slope", "rise ÷ run; rate of change"], ["y-intercept", "value at x = 0; initial value"], ["Direct variation", "y = mx (through the origin)"], ["Partial variation", "y = mx + b, b ≠ 0"]],
   hook: String.raw`Show two taxi signs: “2.50 per km” and “4.00 + 2.00 per km”. Ask which is better for a 3-km ride and for a 20-km ride. Students compute, then we graph both: one starts at the origin, one does not. That difference — the initial value — is today's idea.`,
   concepts: [

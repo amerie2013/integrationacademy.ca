@@ -16,8 +16,7 @@ export const blocks = () => [
       "write the equation of a line perpendicular to a given line through a given point;",
       "use slopes to show that a triangle has a right angle or that a shape is a rectangle.",
     ],
-    curriculum: "C4.2, C4.4 (connections between equations and graphs; solve problems) — extends the Nelson analytic geometry chapter",
-    book: "Nelson Principles of Mathematics 9, §5.5 Parallel and Perpendicular Lines",
+    curriculum: "C4.2, C4.4 (connections between equations and graphs; solve problems)",
     prior: [
       [String.raw`What is the reciprocal of \(\tfrac25\)?`, String.raw`\(\tfrac52\).`],
       [String.raw`What is the slope of \(2x+y-7=0\)?`, String.raw`\(-2\).`],

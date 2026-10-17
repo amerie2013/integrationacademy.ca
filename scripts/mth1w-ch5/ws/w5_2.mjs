@@ -67,7 +67,6 @@ export const WS = {
   bigideas: String.raw`A small set of angle facts lets you find every angle in a design made of triangles, polygons and circles: the angle sum of a triangle ($180^\circ$), the exterior angle property, the polygon angle sum $(n-2)\times180^\circ$, and the circle properties --- inscribed angle $=\frac12$ central angle, the angle in a semicircle is $90^\circ$, and a tangent is perpendicular to the radius. Chaining them, with a reason for each step, is how designs are analysed and created.`,
   goals: ["Find unknown angles using triangle and polygon properties.", "Use isosceles triangles formed by radii.", "Apply inscribed/central angle, semicircle and tangent properties.", "Solve angle problems with algebra.", "Analyse and create designs with regular polygons."],
   curriculum: "E1.2",
-  book: "Nelson Principles of Mathematics 9, 7.1, 7.2, 7.5",
   vocab: [["Exterior angle", "between a side and the extension of the next side"], ["Regular polygon", "all sides and angles equal"], ["Central angle", "vertex at the centre"], ["Inscribed angle", "vertex on the circle"], ["Tangent", "touches the circle at one point"]],
   hook: String.raw`Show three logos or a stained-glass window built from a circle and a regular polygon. Ask: “How could the designer know the exact angle to cut each piece?” Collect ideas, then reveal that every angle follows from a handful of facts.`,
   concepts: [

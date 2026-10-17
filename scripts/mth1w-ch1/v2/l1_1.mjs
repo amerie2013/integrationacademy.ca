@@ -25,7 +25,6 @@ export const blocks = () => [
       "describe how zero and negative numbers developed in different cultures and why they matter today.",
     ],
     curriculum: "B1.1 (story of a number concept), B1.2 (subsets of a number system)",
-    book: "Nelson Principles of Mathematics 9, §1.4 Rational Numbers",
     prior: [
       [String.raw`What is \(\sqrt{81}\)?`, String.raw`\(9\), because \(9\times9=81\).`],
       [String.raw`Write \(0.3\) as a fraction.`, String.raw`\(\tfrac{3}{10}\) — the last digit is in the tenths place.`],
