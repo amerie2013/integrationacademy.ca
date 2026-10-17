@@ -1,4 +1,4 @@
-// Worksheet 1.4 problems: 3 knowledge, 5 application, 5 textbook-level (multi-part) problems.
+// Worksheet 1.4 problems: 3 knowledge, 5 application, 5 challenge (multi-part) problems.
 export const PROBLEMS = [
   { level: 1, q: String.raw`Write $\frac{45}{105}$ in lowest terms.`, ans: String.raw`$\frac37$` },
   { level: 1, q: String.raw`Fill in the blank: $\frac49=\frac{\square}{63}$.`, ans: "$28$" },

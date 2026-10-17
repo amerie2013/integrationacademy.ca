@@ -1,4 +1,4 @@
-// Worksheet 1.7 problems: 3 knowledge, 5 application, 5 textbook-level (multi-part) problems.
+// Worksheet 1.7 problems: 3 knowledge, 5 application, 5 challenge (multi-part) problems.
 export const PROBLEMS = [
   { level: 1, q: String.raw`Simplify $3^2\times3^5$, then evaluate.`, ans: "$3^7=2187$" },
   { level: 1, q: String.raw`Simplify $b^{12}\div b^4$ and $(2^3)^2$.`, ans: "$b^8$; $2^6=64$" },

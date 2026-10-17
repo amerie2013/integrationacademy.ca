@@ -1,4 +1,4 @@
-// Worksheet 1.3 problems: 3 knowledge, 5 application, 5 textbook-level (multi-part) problems.
+// Worksheet 1.3 problems: 3 knowledge, 5 application, 5 challenge (multi-part) problems.
 export const PROBLEMS = [
   { level: 1, q: String.raw`Evaluate (a) $(-9)(4)$ \quad (b) $(-8)(-11)$.`, recap: String.raw`$(-9)(4)$; $(-8)(-11)$.`, ans: "(a) $-36$ (b) $88$" },
   { level: 1, q: String.raw`Evaluate (a) $-63\div(-9)$ \quad (b) $120\div(-8)$.`, recap: String.raw`$-63\div(-9)$; $120\div(-8)$.`, ans: "(a) $7$ (b) $-15$" },

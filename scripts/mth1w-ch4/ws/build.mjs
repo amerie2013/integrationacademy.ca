@@ -67,7 +67,7 @@ ${e.fig ?? ""}
 ${e.steps.map((s, k) => String.raw`\step{${k + 1}}{${s}}`).join("\n")}
 \par\smallskip\colorbox{white}{\textbf{Answer:} ${e.ans}}
 \end{example}`).join("\n");
-  const LV = { 1: ["lv1", "Level 1 --- Knowledge \\& Understanding"], 2: ["lv2", "Level 2 --- Application"], 3: ["lv3", "Level 3 --- Thinking \\& Problem Solving (textbook level)"] };
+  const LV = { 1: ["lv1", "Level 1 --- Knowledge \\& Understanding"], 2: ["lv2", "Level 2 --- Application"], 3: ["lv3", "Level 3 --- Thinking \\& Problem Solving (challenge)"] };
   let n = 0;
   const practice = [1, 2, 3].map((lv) => {
     const ps = t.problems.filter((p) => p.level === lv);

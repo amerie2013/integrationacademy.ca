@@ -1,4 +1,4 @@
-// Worksheet 1.2 problems: 3 knowledge, 5 application, 5 textbook-level (multi-part) problems.
+// Worksheet 1.2 problems: 3 knowledge, 5 application, 5 challenge (multi-part) problems.
 import { barChart } from "./tikz.mjs";
 
 export const PROBLEMS = [

@@ -9,7 +9,7 @@ export const blocks = () => [
   intro({
     icon: "🧩",
     title: "Chapter 4 Review — Linear and Non-Linear Relations",
-    overview: String.raw`This page pulls the chapter together before the test: every lesson's key idea on one screen, questions where you must choose the method, mixed textbook-level examples, mixed practice and a readiness checklist. Work through it after 4.1–4.9 and return to any lesson where you get stuck.`,
+    overview: String.raw`This page pulls the chapter together before the test: every lesson's key idea on one screen, questions where you must choose the method, mixed test-level examples, mixed practice and a readiness checklist. Work through it after 4.1–4.9 and return to any lesson where you get stuck.`,
     goals: [
       "recall the key idea, a typical example and the common mistake of each lesson;",
       "choose the right representation and method for a problem about relations;",

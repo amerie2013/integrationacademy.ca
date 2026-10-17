@@ -1,4 +1,4 @@
-// Worksheet 3.1 problems: 3 knowledge, 5 application, 5 textbook-level (multi-part) problems.
+// Worksheet 3.1 problems: 3 knowledge, 5 application, 5 challenge (multi-part) problems.
 // Every output is computed by running the code (codekit.out).
 import { codeT, ct, out } from "./codekit.mjs";
 

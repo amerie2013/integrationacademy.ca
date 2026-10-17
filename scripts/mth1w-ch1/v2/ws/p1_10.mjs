@@ -1,4 +1,4 @@
-// Worksheet 1.10 problems: 3 knowledge, 5 application, 5 textbook-level (multi-part) problems.
+// Worksheet 1.10 problems: 3 knowledge, 5 application, 5 challenge (multi-part) problems.
 export const PROBLEMS = [
   { level: 1, q: String.raw`Find the midpoint of $\frac38$ and $\frac12$.`, ans: String.raw`$\frac{7}{16}$` },
   { level: 1, q: String.raw`Find a number between $1.4$ and $1.5$.`, ans: "e.g. $1.45$" },

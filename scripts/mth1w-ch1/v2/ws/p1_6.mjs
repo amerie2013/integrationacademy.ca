@@ -1,4 +1,4 @@
-// Worksheet 1.6 problems: 3 knowledge, 5 application, 5 textbook-level (multi-part) problems.
+// Worksheet 1.6 problems: 3 knowledge, 5 application, 5 challenge (multi-part) problems.
 export const PROBLEMS = [
   { level: 1, q: String.raw`Evaluate $6^3$ and $2^{-4}$.`, ans: String.raw`$216$; $\frac1{16}$` },
   { level: 1, q: String.raw`Evaluate $(-2)^4$ and $-2^4$. Explain why they differ.`, recap: String.raw`$(-2)^4$ vs $-2^4$.`, ans: String.raw`$16$ and $-16$ (base $-2$ vs base $2$)` },

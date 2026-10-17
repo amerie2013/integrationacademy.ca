@@ -1,4 +1,4 @@
-// Worksheet 3.2 problems: 3 knowledge, 5 application, 5 textbook-level (multi-part) problems.
+// Worksheet 3.2 problems: 3 knowledge, 5 application, 5 challenge (multi-part) problems.
 import { codeT, ct, out } from "./codekit.mjs";
 
 const P1 = `for i in range(4, 20, 5):

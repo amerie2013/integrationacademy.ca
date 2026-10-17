@@ -1,4 +1,4 @@
-// Worksheet 1.5 problems: 3 knowledge, 5 application, 5 textbook-level (multi-part) problems.
+// Worksheet 1.5 problems: 3 knowledge, 5 application, 5 challenge (multi-part) problems.
 export const PROBLEMS = [
   { level: 1, q: String.raw`Evaluate $\frac34\times\frac27$.`, ans: String.raw`$\frac{3}{14}$` },
   { level: 1, q: String.raw`Find $\frac56$ of $42$.`, ans: "$35$" },

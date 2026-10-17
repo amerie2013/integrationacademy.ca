@@ -24,7 +24,7 @@ export const blocks = () => [
   intro({
     icon: "🧩",
     title: "Chapter 2 Review — Algebra",
-    overview: String.raw`This page pulls the chapter together before the chapter test: the key idea of every lesson on one screen, how the lessons connect, questions where you must choose the method, mixed multi-step examples at textbook-test level, and a readiness checklist. Do it after 2.1–2.6, and go back to any lesson where you get stuck.`,
+    overview: String.raw`This page pulls the chapter together before the chapter test: the key idea of every lesson on one screen, how the lessons connect, questions where you must choose the method, mixed multi-step examples at chapter-test level, and a readiness checklist. Do it after 2.1–2.6, and go back to any lesson where you get stuck.`,
     goals: [
       "recall the key idea, a typical example and the most common mistake of each lesson;",
       "tell expressions (simplify) from equations (solve) and choose the right method;",

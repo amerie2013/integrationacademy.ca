@@ -1,4 +1,4 @@
-// Worksheet 1.8 problems: 3 knowledge, 5 application, 5 textbook-level (multi-part) problems.
+// Worksheet 1.8 problems: 3 knowledge, 5 application, 5 challenge (multi-part) problems.
 export const PROBLEMS = [
   { level: 1, q: String.raw`Simplify $42:56$.`, ans: "$3:4$" },
   { level: 1, q: String.raw`A team won $10$ games and lost $6$. Write wins : losses and wins : games played in simplest form.`, recap: "Wins 10, losses 6: two ratios.", ans: "$5:3$ and $5:8$" },

@@ -1,4 +1,4 @@
-// Worksheet 1.9 problems: 3 knowledge, 5 application, 5 textbook-level (multi-part) problems.
+// Worksheet 1.9 problems: 3 knowledge, 5 application, 5 challenge (multi-part) problems.
 export const PROBLEMS = [
   { level: 1, q: String.raw`Find $32\%$ of $150$.`, ans: "$48$" },
   { level: 1, q: String.raw`Write $0.65$ and $\frac35$ as percents, and $7.5\%$ as a decimal.`, recap: String.raw`$0.65$, $\frac35$ as %; $7.5\%$ as a decimal.`, ans: String.raw`$65\%$, $60\%$, $0.075$` },

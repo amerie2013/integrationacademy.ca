@@ -1,4 +1,4 @@
-// Worksheet 2.6 problems: 3 knowledge, 5 application, 5 textbook-level (multi-part) problems.
+// Worksheet 2.6 problems: 3 knowledge, 5 application, 5 challenge (multi-part) problems.
 import { lineT } from "./tikz2.mjs";
 
 export const PROBLEMS = [

@@ -9,7 +9,7 @@ export const blocks = () => [
   intro({
     icon: "🧩",
     title: "Chapter 5 Review — Geometry & Measurement",
-    overview: String.raw`This page pulls the chapter together before the test: each lesson's key idea on one screen, questions where you must choose the right formula, multi-step textbook-level examples, mixed practice and a readiness checklist. Work through it after 5.1–5.8 and go back to any lesson where you get stuck.`,
+    overview: String.raw`This page pulls the chapter together before the test: each lesson's key idea on one screen, questions where you must choose the right formula, multi-step test-level examples, mixed practice and a readiness checklist. Work through it after 5.1–5.8 and go back to any lesson where you get stuck.`,
     goals: [
       "recall the key idea, a typical example and the common mistake of each lesson;",
       "choose the correct property or formula for a geometry or measurement problem;",
