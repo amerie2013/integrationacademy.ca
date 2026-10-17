@@ -12,6 +12,7 @@ import { DensityZoom, LimitSteps } from "./Density";
 import { PatternRule, AlgebraTiles, DistributiveArea, BalanceSolver, EquationGraph, FormulaRearrange } from "./Algebra";
 import { CodeTracer } from "./CodeTracer";
 import { SlopeExplorer, RelationTypes, LinePair, TwoPointLine, InequalityRegion, MotionStory } from "./Lines";
+import { PiPolygon, TriangleAngles, CircleAngles, UnitLadder, Pythagoras, ScaleShape, RectOptimizer, SolidVolume, NetExplorer } from "./Measure";
 
 // Registry of named lesson widgets. A lesson block { type: "widget", widget, props }
 // renders REGISTRY[widget] with its props. Keep names stable — they are stored in the DB.
@@ -43,6 +44,15 @@ const REGISTRY: Record<string, ComponentType<any>> = {
   twoPointLine: TwoPointLine,
   inequalityRegion: InequalityRegion,
   motionStory: MotionStory,
+  piPolygon: PiPolygon,
+  triangleAngles: TriangleAngles,
+  circleAngles: CircleAngles,
+  unitLadder: UnitLadder,
+  pythagoras: Pythagoras,
+  scaleShape: ScaleShape,
+  rectOptimizer: RectOptimizer,
+  solidVolume: SolidVolume,
+  netExplorer: NetExplorer,
 };
 
 export const WIDGET_NAMES = Object.keys(REGISTRY);
