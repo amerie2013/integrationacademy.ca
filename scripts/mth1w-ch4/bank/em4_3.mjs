@@ -1,0 +1,51 @@
+// 4.3 Representing Linear and Non-Linear Relations (y = mx + b) — 21 easy + 21 medium questions
+import { mc, ms, num, tf, mx } from "./kit.mjs";
+import { planeDoc } from "./fig.mjs";
+
+export const E = [
+  num(String.raw`What is the slope of $y=4x-9$?`, 4, "The coefficient of x."),
+  num(String.raw`What is the y-intercept of $y=4x-9$?`, -9, "The constant term."),
+  num(String.raw`What is the slope of $y=8-3x$?`, -3, "Rewrite as y = −3x + 8."),
+  tf(String.raw`$y=7x$ is a direct variation.`, true, "b = 0: through the origin."),
+  tf(String.raw`$C=20+5n$ is a direct variation.`, false, "b = 20 ≠ 0: partial variation."),
+  num(`A line rises 6 for a run of 2. What is its slope?`, 3, "6 ÷ 2."),
+  num(String.raw`Find the slope through $(0,1)$ and $(4,9)$.`, 2, "8 ÷ 4."),
+  mx(String.raw`Write the equation of the line with slope $5$ and y-intercept $-2$.`, "5*x-2", "y = 5x − 2."),
+  mc(String.raw`In $C=12+0.5d$, what does $12$ represent?`, "the fixed (starting) cost", ["the cost per km", "the distance", "the total cost"], "b is the initial value."),
+  mc(String.raw`In $C=12+0.5d$, what does $0.5$ represent?`, "the cost per unit of d", ["the fixed cost", "the distance", "the y-intercept"], "m is the rate of change."),
+  num(String.raw`For $y=2x+3$, what is $y$ when $x=5$?`, 13, "10 + 3."),
+  mc(`A line passes through the origin with slope −2. Its equation is…`, String.raw`$y=-2x$`, [String.raw`$y=x-2$`, String.raw`$y=-2$`, String.raw`$y=2x$`], "Direct variation y = mx."),
+  num(`A table: x = 0, 1, 2; y = 7, 10, 13. What is b?`, 7, "y at x = 0."),
+  num(`For the same table (7, 10, 13), what is m?`, 3, "First difference."),
+  mc(`Which line is steeper?`, String.raw`$y=-5x+1$`, [String.raw`$y=2x+10$`, String.raw`$y=0.5x$`, String.raw`$y=x-7$`], "Largest |m|."),
+  tf(`A negative slope means the line falls from left to right.`, true, "y decreases as x increases."),
+  num(`Read the graph: what is the y-intercept?`, 3, "The line crosses the y-axis at 3.", planeDoc({ view: { xmin: -6, xmax: 6, ymin: -6, ymax: 6 }, lines: [{ m: -1, b: 3 }] })),
+  num(`Read the same graph: what is the slope?`, -1, "Down 1 for each 1 right.", planeDoc({ view: { xmin: -6, xmax: 6, ymin: -6, ymax: 6 }, lines: [{ m: -1, b: 3 }], points: [{ x: 0, y: 3 }, { x: 3, y: 0 }] })),
+  mx(`A gym charges 30 dollars to join plus 20 dollars per month. Write the cost C for m months.`, "30+20*m", "C = 20m + 30."),
+  num(String.raw`For $C=20m+30$, what is the cost for 6 months?`, 150, "120 + 30."),
+  mc(`Which is a partial variation?`, String.raw`$y=3x+4$`, [String.raw`$y=3x$`, String.raw`$y=-x$`, String.raw`$y=\tfrac12x$`], "Non-zero b."),
+];
+
+export const M = [
+  num(String.raw`Find the slope through $(-2,7)$ and $(3,-3)$.`, -2, "−10 ÷ 5."),
+  mx(String.raw`Write the equation of the line through $(0,-4)$ with slope $\frac23$.`, "(2/3)*x-4", String.raw`$y=\frac23x-4$.`),
+  num(String.raw`A table: $x$ = 1, 2, 3, 4; $y$ = 9, 13, 17, 21. What is the y-intercept?`, 5, "m = 4; 9 − 4 = 5."),
+  mx(`Write the equation for the table x = 1, 2, 3, 4; y = 9, 13, 17, 21.`, "4*x+5", "y = 4x + 5."),
+  num(String.raw`A plumber charges $C=65h+45$. How many hours for a 305-dollar bill?`, 4, "65h = 260."),
+  num(`Read the graph: what is the slope? (decimal)`, 1.5, "From (0, −1) to (2, 2): rise 3, run 2.", planeDoc({ view: { xmin: -6, xmax: 6, ymin: -6, ymax: 6 }, lines: [{ m: 1.5, b: -1 }], points: [{ x: 0, y: -1 }, { x: 2, y: 2 }] }), 0.001),
+  mx(`Write the equation of the line in the previous graph (through (0, −1) and (2, 2)).`, "1.5*x-1", "y = 1.5x − 1."),
+  ms(`Which are direct variations? Select all.`, [String.raw`$y=-4x$`, String.raw`$C=0.25k$`, String.raw`$y=2x+0.1$`, String.raw`$d=80t$`, String.raw`$y=7$`], [0, 1, 3], "Through the origin, b = 0."),
+  num(`A candle 24 cm tall burns 1.5 cm per hour. How many hours until it is 6 cm tall?`, 12, "24 − 1.5t = 6."),
+  mc(`A car rental costs 40 dollars plus 0.25 dollars per km. Which graph feature shows the 40?`, "the y-intercept", ["the slope", "the x-intercept", "the steepness"], "Initial value."),
+  num(String.raw`$E=13.5h$ is a babysitter's pay. How many dollars for 6.5 hours?`, 87.75, "13.5 × 6.5.", null, 0.001),
+  tf(String.raw`The lines $y=2x+5$ and $y=2x-1$ have the same slope.`, true, "Both m = 2."),
+  num(String.raw`A line has slope $-\frac34$. If you move 8 units right, how much does y change?`, -6, "−3/4 × 8."),
+  mc(String.raw`Which equation matches: starts at 500 and decreases by 25 each week?`, String.raw`$y=500-25x$`, [String.raw`$y=25x-500$`, String.raw`$y=500x-25$`, String.raw`$y=25-500x$`], "b = 500, m = −25."),
+  num(String.raw`For $V=500-25w$, after how many weeks is V = 0?`, 20, "25w = 500."),
+  mx(`A phone plan: 15 dollars plus 0.10 dollars per text. Write C for t texts.`, "15+0.1*t", "C = 0.1t + 15."),
+  num(String.raw`With $C=0.1t+15$, how many texts make a 32-dollar bill?`, 170, "0.1t = 17."),
+  mc(`A line has slope 0 and y-intercept −3. Its equation is…`, String.raw`$y=-3$`, [String.raw`$x=-3$`, String.raw`$y=-3x$`, String.raw`$y=x-3$`], "Horizontal."),
+  num(String.raw`Find b for the line through $(3,10)$ with slope $2$.`, 4, "10 = 6 + b."),
+  ms(`Which statements about y = −2x + 6 are true? Select all.`, ["it falls to the right", "it crosses the y-axis at 6", "it passes through (3, 0)", "it is a direct variation", "its slope is 6"], [0, 1, 2], "m = −2, b = 6; −6 + 6 = 0 at x = 3."),
+  num(String.raw`A tank holds 1200 L and drains at 80 L/min. How much is left after 7.5 min (L)?`, 600, "1200 − 600."),
+];

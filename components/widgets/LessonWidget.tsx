@@ -11,6 +11,7 @@ import { RatioScale, PercentBar } from "./Ratios";
 import { DensityZoom, LimitSteps } from "./Density";
 import { PatternRule, AlgebraTiles, DistributiveArea, BalanceSolver, EquationGraph, FormulaRearrange } from "./Algebra";
 import { CodeTracer } from "./CodeTracer";
+import { SlopeExplorer, RelationTypes, LinePair, TwoPointLine, InequalityRegion, MotionStory } from "./Lines";
 
 // Registry of named lesson widgets. A lesson block { type: "widget", widget, props }
 // renders REGISTRY[widget] with its props. Keep names stable — they are stored in the DB.
@@ -36,6 +37,12 @@ const REGISTRY: Record<string, ComponentType<any>> = {
   equationGraph: EquationGraph,
   formulaRearrange: FormulaRearrange,
   codeTracer: CodeTracer,
+  slopeExplorer: SlopeExplorer,
+  relationTypes: RelationTypes,
+  linePair: LinePair,
+  twoPointLine: TwoPointLine,
+  inequalityRegion: InequalityRegion,
+  motionStory: MotionStory,
 };
 
 export const WIDGET_NAMES = Object.keys(REGISTRY);
