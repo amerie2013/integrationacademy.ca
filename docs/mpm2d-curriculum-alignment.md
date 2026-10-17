@@ -28,7 +28,7 @@ All lesson, worksheet, bank, assignment and test content is original.
 |---|---|---|
 | 1 Linear Systems (1.1–1.6) | AG1 (and linear-relation review from Grade 9) | **Covered.** Add equivalent systems (multiplying an equation by a constant) inside elimination, more realistic problems (mixtures, interest, rates), and a chapter review. |
 | 2 Analytic Geometry (2.1–2.6) | AG2, AG3 | **Covered after the upgrade.** Distance from a point to a line was missing; it is now taught in 2.6 (perpendicular → intersection → length). Classifying triangles and quadrilaterals is explicit in 2.5. A 2.7 chapter review was added. |
-| 3 Polynomials & Factoring (3.1–3.5) | QR3 (expand, factor) | **Covered.** |
+| 3 Polynomials & Factoring (3.1–3.5) | QR3 (expand, factor) | **Covered.** Rebuilt with area-model, sum-and-product, decomposition and special-product explorers; factoring practice now requires the fully factored form. A 3.6 chapter review was added. |
 | 4 Quadratic Relations (4.1–4.6) | QR1, QR2, QR3 (zeros/factored form, sketching from standard form) | **Gap:** QR1 requires comparing y = x² with y = 2ˣ and the meaning of zero and negative exponents — not taught. Add a lesson. Collecting data and curves of best fit should appear in 4.1. |
 | 5 Quadratic Equations (5.1–5.6) | QR3, QR4 | **Covered.** 5.6 Linear–Quadratic Systems goes beyond MPM2D (it belongs to Grade 11) — keep as enrichment. Interval questions ("when is the height above 3 m?") should appear in 5.5. |
 | 6 Similar & Right Triangles (6.1–6.6) | T1, T2 | **Covered.** Defining the ratios through similar right triangles should be explicit in 6.3. |

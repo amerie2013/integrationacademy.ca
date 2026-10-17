@@ -17,6 +17,7 @@ import { SamplingLab, MisleadingGraph, StatsExplorer, HistogramBins, ScatterFit,
 import { PlanCompare, InflationCalc, ValueTimeline, InterestGrowth, CreditPayoff, BudgetBuilder } from "./Finance";
 import { StandardForm, SystemGraph, SubstitutionStepper, EliminationLab, SystemStory } from "./Systems";
 import { MidpointLab, DistanceLab, CircleLab, TriangleLines, ShapeProver, PointLineDistance } from "./Geometry";
+import { AreaModel, CommonFactor, TrinomialFinder, DecompositionLab, SpecialPatterns } from "./Polynomials";
 
 // Registry of named lesson widgets. A lesson block { type: "widget", widget, props }
 // renders REGISTRY[widget] with its props. Keep names stable — they are stored in the DB.
@@ -80,6 +81,11 @@ const REGISTRY: Record<string, ComponentType<any>> = {
   triangleLines: TriangleLines,
   shapeProver: ShapeProver,
   pointLineDistance: PointLineDistance,
+  areaModel: AreaModel,
+  commonFactor: CommonFactor,
+  trinomialFinder: TrinomialFinder,
+  decompositionLab: DecompositionLab,
+  specialPatterns: SpecialPatterns,
 };
 
 export const WIDGET_NAMES = Object.keys(REGISTRY);

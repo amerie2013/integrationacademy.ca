@@ -12,7 +12,9 @@ export type AnswerSpec =
   | { kind: "ratio"; value: [number, number]; lowest?: boolean } // equivalent ratios count; lowest: must be in simplest form
   // an algebraic expression, e.g. "6x^2-3x+4"; any equivalent expression counts. simplified: no brackets
   // (unless the answer has them) and no more terms than the answer. A leading "y =" is ignored.
-  | { kind: "expr"; value: string; simplified?: boolean };
+  // factored: must be written as a product — one term, at least as many bracket factors as the answer, and the
+  // answer's leading common factor (e.g. the 2 in 2(x+1)(x+2)) taken out.
+  | { kind: "expr"; value: string; simplified?: boolean; factored?: boolean };
 
 const MINUS = /[−–—]/g; // typographic minus / dashes -> "-"
 
@@ -54,7 +56,7 @@ export function checkAnswer(spec: AnswerSpec, raw: string | number): boolean {
     if (!r || !sameRatio(r, spec.value)) return false;
     return !(spec.lowest && notLowest(r[0], r[1]));
   }
-  if (spec.kind === "expr") return sameExpr(spec.value, s) && !(spec.simplified && notSimplified(spec.value, s));
+  if (spec.kind === "expr") return sameExpr(spec.value, s) && !(spec.simplified && notSimplified(spec.value, s)) && !(spec.factored && notFactored(spec.value, s));
   let v = parseNumber(s.replace(/^\s*[a-zA-Z]\s*=\s*/, "")); // "x = 4" counts as 4
   if (v === null) return false;
   // "35" for a percent question means 35%.
@@ -89,7 +91,7 @@ export function rightValueWrongForm(spec: AnswerSpec, raw: string): boolean {
     const r = parseRatio(raw);
     return !!spec.lowest && !!r && sameRatio(r, spec.value) && notLowest(r[0], r[1]);
   }
-  if (spec.kind === "expr") return !!spec.simplified && sameExpr(spec.value, raw) && notSimplified(spec.value, raw);
+  if (spec.kind === "expr") return sameExpr(spec.value, raw) && ((!!spec.simplified && notSimplified(spec.value, raw)) || (!!spec.factored && notFactored(spec.value, raw)));
   if (spec.kind !== "number" || !spec.form || !wrongForm(spec, raw)) return false;
   const v = parseNumber(raw);
   return v !== null && Math.abs(v - spec.value) <= Math.max(1e-6, Math.abs(spec.value) * 1e-6);
@@ -182,6 +184,20 @@ function termCount(s: string): number {
     else if ((ch === "+" || ch === "-") && depth === 0 && k > 0 && !/[\^*/(]/.test(t[k - 1])) n++;
   }
   return n;
+}
+
+/** Number of top-level bracket groups, e.g. 2 for "3(x+1)(x-2)" and 1 for "(x+3)^2". */
+function bracketGroups(s: string): number {
+  const t = rhs(s).replace(/\s+/g, "");
+  let depth = 0, n = 0;
+  for (const ch of t) { if (ch === "(") { if (depth === 0) n++; depth++; } else if (ch === ")") depth--; }
+  return n;
+}
+/** Leading whole-number factor written in front of the brackets ("-3(x+1)" gives 3), or 1. */
+const leadFactor = (s: string) => { const m = rhs(s).replace(MINUS, "-").replace(/\s+/g, "").match(/^-?(\d+)\*?\(/); return m ? Number(m[1]) : 1; };
+function notFactored(expected: string, typed: string): boolean {
+  if (termCount(typed) > 1 || bracketGroups(typed) < bracketGroups(expected)) return true;
+  return leadFactor(expected) > 1 && leadFactor(typed) !== leadFactor(expected);
 }
 
 function notSimplified(expected: string, typed: string): boolean {
