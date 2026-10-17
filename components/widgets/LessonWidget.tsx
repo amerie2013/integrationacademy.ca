@@ -15,6 +15,7 @@ import { SlopeExplorer, RelationTypes, LinePair, TwoPointLine, InequalityRegion,
 import { PiPolygon, TriangleAngles, CircleAngles, UnitLadder, Pythagoras, ScaleShape, RectOptimizer, SolidVolume, NetExplorer } from "./Measure";
 import { SamplingLab, MisleadingGraph, StatsExplorer, HistogramBins, ScatterFit, ModelFit } from "./Data";
 import { PlanCompare, InflationCalc, ValueTimeline, InterestGrowth, CreditPayoff, BudgetBuilder } from "./Finance";
+import { StandardForm, SystemGraph, SubstitutionStepper, EliminationLab, SystemStory } from "./Systems";
 
 // Registry of named lesson widgets. A lesson block { type: "widget", widget, props }
 // renders REGISTRY[widget] with its props. Keep names stable — they are stored in the DB.
@@ -67,6 +68,11 @@ const REGISTRY: Record<string, ComponentType<any>> = {
   interestGrowth: InterestGrowth,
   creditPayoff: CreditPayoff,
   budgetBuilder: BudgetBuilder,
+  standardForm: StandardForm,
+  systemGraph: SystemGraph,
+  substitutionStepper: SubstitutionStepper,
+  eliminationLab: EliminationLab,
+  systemStory: SystemStory,
 };
 
 export const WIDGET_NAMES = Object.keys(REGISTRY);

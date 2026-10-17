@@ -72,3 +72,6 @@ scripts/_ftce/fulltext.txt
 /scripts/mth1w-ch7/ws/out/
 /scripts/mth1w-ch7/bank/out/
 /scripts/mth1w-ch7/backup/
+/scripts/mpm2d-ch*/ws/out/
+/scripts/mpm2d-ch*/bank/out/
+/scripts/mpm2d-ch*/backup/

@@ -16,12 +16,12 @@ const META = `style="font-size:13.5px;color:#475569;margin:6px 0 0;"`;
 const KEY = `style="background:#eef2ff;border-left:5px solid #4338ca;border-radius:8px;padding:10px 16px;margin:12px 0;"`;
 
 /** First card of every lesson. */
-export function intro({ icon, title, overview, goals, curriculum, book, prior, words }) {
+export function intro({ icon, title, overview, goals, curriculum, prior, words, course = "MTH1W" }) {
   return html(`<div class="lecture-box">
   <h1>${icon} ${title}</h1>
   <p><strong>Overview.</strong> ${overview}</p>
   <div ${GOALS}><strong>By the end of this lesson you will be able to:</strong><ul style="margin:6px 0 0;">${goals.map((g) => `<li>${g}</li>`).join("")}</ul>
-  <p ${META}><strong>Ontario MTH1W:</strong> ${curriculum}</p></div>
+  <p ${META}><strong>Ontario ${course}:</strong> ${curriculum}</p></div>
   <h2>🧭 Before you start</h2>
   <p>Answer these in your head first. If any feels shaky, open the answer and review it before going on.</p>
   ${prior.map(([q, a]) => `<details style="margin:6px 0;"><summary><strong>${q}</strong></summary><p style="margin:6px 0 0 18px;"><em>${a}</em></p></details>`).join("")}

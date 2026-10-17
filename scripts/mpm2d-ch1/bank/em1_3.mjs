@@ -1,0 +1,48 @@
+// 1.3 Solving by Substitution — 20 easy + 20 medium questions (money written as "dollars")
+import { mc, ms, num, tf, mx, fill } from "./kit.mjs";
+
+export const E = [
+  num(`Solve $y=x+2$ and $x+y=10$. What is $x$?`, 4, "$x+(x+2)=10\\Rightarrow 2x=8$."),
+  num(`Solve $y=3x$ and $x+y=12$. What is $y$?`, 9, "$4x=12$, $x=3$, $y=9$."),
+  num(`Solve $x=2y$ and $x+y=9$. What is $y$?`, 3, "$2y+y=9$."),
+  mc(`Substituting $y=2x-1$ into $3x+y=9$ gives…`, "$3x+(2x-1)=9$", ["$3(2x-1)+y=9$", "$3x+2x-1=y$", "$2x-1=9$"], "Replace $y$ by the whole expression, in brackets."),
+  num(`Solve $y=x-4$ and $2x+y=5$. What is $y$?`, -1, "$3x-4=5$, $x=3$, $y=-1$."),
+  mc(`In the system $3x+y=7$, $2x+5y=9$, which variable is easiest to isolate?`, "$y$ in the first equation", ["$x$ in the first equation", "$x$ in the second equation", "$y$ in the second equation"], "Its coefficient is $1$, so no fractions appear."),
+  mx(`Isolate $y$ in $4x+y=11$. Type the right side of $y=\\ldots$`, "-4*x+11", "Subtract $4x$ from both sides."),
+  mx(`Isolate $x$ in $x-3y=2$. Type the right side of $x=\\ldots$`, "3*y+2", "Add $3y$ to both sides."),
+  num(`Solve $y=2x$ and $3x+y=20$. What is $x$?`, 4, "$5x=20$."),
+  tf(`After finding $x$, you must substitute back to find $y$.`, true, "A solution is an ordered pair; both values are needed."),
+  num(`Solve $y=5-x$ and $2x-y=4$. What is $x$?`, 3, "$2x-(5-x)=4\\Rightarrow 3x=9$."),
+  num(`Solve $x=y+1$ and $2x+3y=12$. What is $y$?`, 2, "$2y+2+3y=12\\Rightarrow 5y=10$."),
+  num(`Solve $y=2x+3$ and $y=x+5$. What is $x$?`, 2, "Set the expressions equal: $2x+3=x+5$."),
+  fill(`Solve $y=4x$ and $x+y=15$: $x=$ ___.`, ["3"], "$5x=15$."),
+  mc(`While solving by substitution you get $4=4$. This means…`, "infinitely many solutions", ["no solution", "$x=4$", "exactly one solution"], "A true statement: the equations are the same line."),
+  tf(`Substitution gives exact answers, even when they are fractions.`, true, "Unlike graphing, no estimating is needed."),
+  num(`Solve $y=-x+6$ and $y=2x$. What is $y$?`, 4, "$3x=6$, $x=2$, $y=4$."),
+  num(`Two numbers add to $20$ and one is $3$ times the other. Find the smaller number.`, 5, "$x+3x=20$."),
+  mc(`What is the solution of $y=x$ and $x+y=8$?`, "$(4,4)$", ["$(8,0)$", "$(0,8)$", "$(2,6)$"], "$2x=8$."),
+  num(`Solve $x=3$ and $2x+y=10$. What is $y$?`, 4, "$6+y=10$."),
+];
+
+export const M = [
+  mc(`Solve $3x+y=5$ and $2x-3y=7$.`, "$(2,-1)$", ["$(-1,2)$", "$(2,1)$", "$(1,2)$"], "$y=5-3x$; $2x-15+9x=7\\Rightarrow x=2$."),
+  num(`Solve $x-2y=1$ and $3x+y=10$. What is $x$?`, 3, "$x=2y+1$; $6y+3+y=10\\Rightarrow y=1$."),
+  num(`Solve $2x+y=-4$ and $5x+3y=-9$. What is $y$?`, 2, "$y=-4-2x$; $5x-12-6x=-9\\Rightarrow x=-3$."),
+  mc(`Solve $y=\\frac12x+2$ and $2x-4y=-6$.`, "no solution", ["$(0,2)$", "infinitely many solutions", "$(2,3)$"], "$2x-4\\left(\\frac12x+2\\right)=-6\\Rightarrow -8=-6$, false."),
+  tf(`The system $x+3y=5$, $2x+6y=10$ has infinitely many solutions.`, true, "$x=5-3y$ gives $10-6y+6y=10$, always true."),
+  num(`Solve $y=\\frac23x-1$ and $x+3y=15$. What is $y$?`, 3, "$x+2x-3=15\\Rightarrow x=6$."),
+  num(`Solve $\\frac{x}{2}+y=5$ and $x-y=4$. What is $x$?`, 6, "$y=x-4$; $\\frac{x}{2}+x-4=5\\Rightarrow \\frac32x=9$."),
+  num(`Solve $4x-y=9$ and $x+2y=0$. What is $x$?`, 2, "$x=-2y$; $-8y-y=9\\Rightarrow y=-1$."),
+  ms(`For $x+y=7$ and $2x-y=2$, which substitutions lead to the solution?`, ["$y=7-x$ into the second equation", "$x=7-y$ into the second equation", "$y=2x-2$ into the first equation", "$y=7-x$ into the first equation"], [0, 1, 2], "Substituting into the same equation you rearranged only gives $7=7$."),
+  num(`A rectangle has perimeter $40$ cm and its length is $6$ cm more than its width. Find the length (cm).`, 13, "$2(w+6+w)=40\\Rightarrow w=7$."),
+  num(`200 tickets were sold: adults at 10 dollars, students at 6 dollars, for 1560 dollars. How many adult tickets?`, 90, "$10a+6(200-a)=1560\\Rightarrow 4a=360$."),
+  mc(`A student solved $y=3x-2$, $2x-y=8$ by writing $2x-3x-2=8$. What went wrong?`, "no brackets: it should be $2x-(3x-2)=8$", ["$y$ should be isolated in the second equation", "they should have added the equations", "nothing — it is correct"], "The minus sign must apply to the whole expression."),
+  num(`Solve $y=3x-7$ and $y=-2x+8$. What is $y$?`, 2, "$5x=15$, $x=3$."),
+  num(`Solve $2x+3y=13$ and $x=5-y$. What is $x$?`, 2, "$10-2y+3y=13\\Rightarrow y=3$."),
+  num(`Two numbers add to $85$. The larger is $5$ more than $3$ times the smaller. Find the larger.`, 65, "$s+3s+5=85\\Rightarrow s=20$."),
+  num(`A jar holds 25 coins, all loonies (1 dollar) and toonies (2 dollars), worth 38 dollars. How many toonies?`, 13, "$\\ell=25-t$; $25-t+2t=38$."),
+  fill(`Solve $x=4-2y$ and $3x-y=5$: $y=$ ___.`, ["1"], "$12-6y-y=5\\Rightarrow 7y=7$."),
+  num(`Solve $y=-x+1$ and $3x+2y=5$. What is $y$?`, -2, "$3x-2x+2=5\\Rightarrow x=3$."),
+  tf(`The system $y=2x+5$, $4x-2y=-10$ has no solution.`, false, "$4x-2(2x+5)=-10$ gives $-10=-10$: infinitely many."),
+  mc(`Solve $5x-2y=4$ and $y=2x-1$.`, "$(2,3)$", ["$(3,2)$", "$(2,-3)$", "$(1,1)$"], "$5x-4x+2=4\\Rightarrow x=2$."),
+];
