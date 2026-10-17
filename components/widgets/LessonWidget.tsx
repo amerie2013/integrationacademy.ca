@@ -18,6 +18,7 @@ import { PlanCompare, InflationCalc, ValueTimeline, InterestGrowth, CreditPayoff
 import { StandardForm, SystemGraph, SubstitutionStepper, EliminationLab, SystemStory } from "./Systems";
 import { MidpointLab, DistanceLab, CircleLab, TriangleLines, ShapeProver, PointLineDistance } from "./Geometry";
 import { AreaModel, CommonFactor, TrinomialFinder, DecompositionLab, SpecialPatterns } from "./Polynomials";
+import { DiffTable, QuadFit, ParabolaFeatures, TransformLab, StepGraph, FactoredForm, CompleteSquare, ExpCompare } from "./Quadratics";
 
 // Registry of named lesson widgets. A lesson block { type: "widget", widget, props }
 // renders REGISTRY[widget] with its props. Keep names stable — they are stored in the DB.
@@ -86,6 +87,14 @@ const REGISTRY: Record<string, ComponentType<any>> = {
   trinomialFinder: TrinomialFinder,
   decompositionLab: DecompositionLab,
   specialPatterns: SpecialPatterns,
+  diffTable: DiffTable,
+  quadFit: QuadFit,
+  parabolaFeatures: ParabolaFeatures,
+  transformLab: TransformLab,
+  stepGraph: StepGraph,
+  factoredForm: FactoredForm,
+  completeSquare: CompleteSquare,
+  expCompare: ExpCompare,
 };
 
 export const WIDGET_NAMES = Object.keys(REGISTRY);
