@@ -1,5 +1,5 @@
 // MPM2D Worksheet 1.3 — Solving by Substitution (teacher edition)
-import { planeT } from "./figT.mjs";
+import { planeT, F, pt, std, gridT, circ, poly, rectT, trackT } from "./figT.mjs";
 
 const EXAMPLES = [
   { title: "y already isolated", q: String.raw`Solve $y=3x-5$ and $2x+y=10$.`,
@@ -40,6 +40,23 @@ const PROBLEMS = [
   { level: 3, space: 5, q: String.raw`Tickets for a game cost \$$12$ for adults and \$$5$ for children. $250$ tickets brought in \$$2230$. Use substitution to find how many of each were sold, and check.`, recap: "Game tickets.", ans: String.raw`$a+c=250$, $12a+5c=2230$: $7a=980$, $a=140$, $c=110$; check $1680+550=2230$` },
   { level: 3, space: 5, q: "Explain when substitution is the best method and when it is not. Give one system of each kind.", recap: "When to use substitution.", ans: "best when a variable is isolated or has coefficient ±1 (e.g. y = 2x + 1, 3x + y = 6); awkward when all coefficients are large (e.g. 3x + 4y = 7, 5x − 6y = 2)" },
 ];
+
+// ---- figures added to examples and problems
+const ex = EXAMPLES, pr = PROBLEMS;
+const S = (l1, l2, p, view, extra = {}) => F({ view, lines: [{ color: "blue", ...l1 }, { color: "red", ...l2 }], points: p ? [p] : [], ...extra });
+ex[0].fig = S({ m: 3, b: -5 }, { m: -2, b: 10 }, pt(3, 4, null, "green"), { xmin: -1, xmax: 6, ymin: -3, ymax: 8 });
+ex[1].fig = S({ m: 0.5, b: -0.5 }, { m: 0.75, b: -2.25 }, pt(7, 3, null, "green"), { xmin: -1, xmax: 10, ymin: -3, ymax: 6 });
+ex[2].fig = S({ m: -4, b: 2 }, { m: 1.5, b: -9 }, pt(2, -6, null, "green"), { xmin: -2, xmax: 6, ymin: -9, ymax: 4 });
+ex[3].fig = S({ m: 5, b: 1 }, { m: -2 / 3, b: 20 / 3 }, pt(1, 6, null, "green"), { xmin: -2, xmax: 5, ymin: -2, ymax: 9 });
+ex[4].fig = S({ m: -1 / 3, b: 4 / 3 }, { m: 2, b: -5 }, { x: 19 / 7, y: 3 / 7, label: "(19/7, 3/7)", color: "green" }, { xmin: -1, xmax: 5, ymin: -3, ymax: 3 });
+ex[5].fig = S({ m: -0.5, b: 6 }, { m: 1, b: -3 }, pt(6, 3, null, "green"), { xmin: -1, xmax: 10, ymin: -3, ymax: 7 });
+ex[6].fig = S({ m: 4, b: -7 }, { m: -2, b: 11 }, pt(3, 5, null, "green"), { xmin: -1, xmax: 6, ymin: -2, ymax: 10 });
+ex[7].fig = F({ view: { xmin: -4, xmax: 6, ymin: -3, ymax: 3 }, lines: [{ m: -1 / 3, b: 2 / 3, color: "violet" }] }, 6.5, "Both equations give this one line.");
+ex[8].fig = S({ m: -1, b: 52 }, { m: 3, b: 4 }, pt(12, 40, null, "green"), { xmin: 0, xmax: 20, ymin: 0, ymax: 56 }, { step: { x: 2, y: 8 } });
+for (const i of [0, 1, 2]) { pr[i].q += " Check your answer on the grid."; pr[i].fig = gridT({ xmin: -5, xmax: 5, ymin: -6, ymax: 7 }); }
+pr[7].fig = F({ view: { xmin: -2, xmax: 4, ymin: -4, ymax: 5 }, lines: [{ m: 2, b: -3, color: "blue", label: "y = 2x − 3", lx: 2.4 }, { m: 2, b: -2.5, color: "red", label: "4x − 2y = 5", lx: -1.5 }] });
+pr[8].fig = rectT("length = 2w − 3", "w", "perimeter 54 cm");
+// ---- end figures
 
 export const WS = {
   code: "1.3",

@@ -1,5 +1,5 @@
 // MPM2D Worksheet 1.4 — Solving by Elimination (teacher edition)
-import { planeT } from "./figT.mjs";
+import { planeT, F, pt, std, gridT, circ, poly, rectT, trackT } from "./figT.mjs";
 
 const EXAMPLES = [
   { title: "Equivalent systems", q: String.raw`Show that $x+y=5$, $x-y=1$ and the system $2x=6$, $x+y=5$ have the same solution.`,
@@ -38,6 +38,22 @@ const PROBLEMS = [
   { level: 3, space: 5, q: String.raw`Explain why multiplying an equation by a non-zero constant does not change the solution of a system, using the graph of $x+2y=6$ and $3x+6y=18$.`, recap: "Why multiplying is allowed.", ans: "both equations have exactly the same points (same intercepts (6, 0) and (0, 3)): it is the same line" },
   { level: 3, space: 5, q: String.raw`For what value of $k$ does elimination give $0=0$ for $4x-ky=10$ and $-6x+9y=-15$?`, recap: "Find k for 0 = 0.", ans: String.raw`$\frac{4}{-6}=\frac{-k}{9}=\frac{10}{-15}\Rightarrow k=6$` },
 ];
+
+// ---- figures added to examples and problems
+const ex = EXAMPLES, pr = PROBLEMS;
+const S = (l1, l2, p, view) => F({ view, lines: [{ color: "blue", ...l1 }, { color: "red", ...l2 }], points: p ? [p] : [] });
+ex[1].fig = S({ m: -1.5, b: 3.5 }, { m: 2.5, b: -8.5 }, pt(3, -1, null, "green"), { xmin: -1, xmax: 6, ymin: -5, ymax: 5 });
+ex[2].fig = S({ m: -4 / 3, b: 6 }, { m: 4, b: -2 }, { x: 1.5, y: 4, label: "(1.5, 4)", color: "green" }, { xmin: -1, xmax: 5, ymin: -3, ymax: 7 });
+ex[3].fig = S({ m: -2, b: 4 }, { m: -5 / 3, b: 3 }, pt(3, -2, null, "green"), { xmin: -1, xmax: 6, ymin: -6, ymax: 5 });
+ex[4].fig = S({ m: -1.25, b: 1.5 }, { m: 0.5, b: 5 }, pt(-2, 4, null, "green"), { xmin: -6, xmax: 3, ymin: -1, ymax: 8 });
+ex[5].fig = S({ m: 0.6, b: -0.2 }, { m: -2 / 3, b: 7 / 3 }, pt(2, 1, null, "green"), { xmin: -2, xmax: 5, ymin: -2, ymax: 4 });
+ex[6].fig = S({ m: 2 / 3, b: -11 / 3 }, { m: 1.25, b: -5.25 }, { x: 19 / 7, y: -13 / 7, label: "(19/7, −13/7)", color: "green" }, { xmin: -1, xmax: 6, ymin: -6, ymax: 2 });
+ex[7].fig = S({ m: -1.5, b: 8 }, { m: 1.25, b: -0.5 }, { x: 34 / 11, y: 37 / 11, label: "(34/11, 37/11)", color: "green" }, { xmin: -1, xmax: 7, ymin: -2, ymax: 8 });
+ex[8].fig = F({ view: { xmin: -3, xmax: 6, ymin: -4, ymax: 3 }, lines: [{ m: 2 / 3, b: -4 / 3, color: "violet" }] }, 6.5, "Both equations describe this one line.");
+for (const i of [0, 1, 2]) { pr[i].q += " Check your answer on the grid."; pr[i].fig = gridT({ xmin: -4, xmax: 9, ymin: -4, ymax: 7 }); }
+pr[11].fig = F({ view: { xmin: -2, xmax: 8, ymin: -2, ymax: 5 }, lines: [{ m: -0.5, b: 3, color: "violet" }], points: [pt(6, 0), pt(0, 3)] });
+pr[12].fig = F({ view: { xmin: -2, xmax: 6, ymin: -4, ymax: 3 }, lines: [{ m: 2 / 3, b: -5 / 3, color: "red", label: "−6x + 9y = −15", lx: 0.5 }] });
+// ---- end figures
 
 export const WS = {
   code: "1.4",

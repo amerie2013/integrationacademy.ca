@@ -23,7 +23,7 @@ const PRE = String.raw`\documentclass[11pt]{article}
 \usepackage[T1]{fontenc}\usepackage[utf8]{inputenc}\usepackage{lmodern}
 \usepackage{xcolor}\usepackage[most]{tcolorbox}\usepackage{enumitem}\usepackage{multicol}\usepackage{array}\usepackage{booktabs}\usepackage{fancyhdr}
 \usepackage{graphicx}\usepackage{tikz}\usetikzlibrary{calc,decorations.pathreplacing,arrows.meta}
-\usepackage{pgfplots}\pgfplotsset{compat=1.18}
+\usepackage{pgfplots}\pgfplotsset{compat=1.18}\usepackage{needspace}
 \definecolor{titleblue}{HTML}{1D4ED8}\definecolor{iagreen}{HTML}{14653B}\definecolor{keygray}{HTML}{475569}\definecolor{keybg}{HTML}{F1F5F9}
 \definecolor{tipred}{HTML}{B91C1C}\definecolor{hookviolet}{HTML}{6D28D9}
 \definecolor{lv1}{HTML}{15803D}\definecolor{lv2}{HTML}{B45309}\definecolor{lv3}{HTML}{7C2D12}
@@ -53,6 +53,10 @@ const partLines = (q) => clean(q).replace(/\n(?=\([a-z]\))/g, "\\par\\smallskip 
 /** Plain-text safety: a bare % would start a LaTeX comment; → is not in the font. */
 const clean = (s) => String(s).replace(/(?<!\\)%/g, "\\%").replace(/→/g, "$\\to$");
 
+/** text (solution or work space) on the left, the figure on the right */
+const sideBySide = (left, fig, w) => String.raw`\par\smallskip\noindent\begin{minipage}[t]{${w}\linewidth}\vspace{0pt}${left}\end{minipage}\hfill\begin{minipage}[t]{${(0.98 - w).toFixed(2)}\linewidth}\vspace{0pt}${fig}\end{minipage}\par`;
+const stepsOf = (e) => e.steps.map((s, k) => String.raw`\step{${k + 1}}{${clean(s)}}`).join("\n");
+
 function texDoc(t) {
   const goals = t.goals.map((g) => String.raw`\item ${g}`).join("\n");
   const vocab = t.vocab?.length ? String.raw`\par\smallskip\textbf{Key vocabulary}\\[2pt]\begin{tabular}{@{}>{\bfseries}p{3.4cm}p{13.4cm}@{}}${t.vocab.map(([w, m]) => `${w} & ${m}\\\\`).join("\n")}\end{tabular}` : "";
@@ -62,9 +66,9 @@ ${body}
   const tips = t.tips.map((x) => String.raw`\item ${x}`).join("\n");
   const examples = t.examples.map((e, i) => String.raw`\begin{example}{ex${i % 9}}{Example ${i + 1} --- ${e.title}}
 ${clean(e.q)}
-${e.fig ?? ""}
-\par\smallskip\textbf{\textit{Solution.}}
-${e.steps.map((s, k) => String.raw`\step{${k + 1}}{${clean(s)}}`).join("\n")}
+${e.fig ? sideBySide(String.raw`\textbf{\textit{Solution.}}
+${stepsOf(e)}`, e.fig, 0.53) : String.raw`\par\smallskip\textbf{\textit{Solution.}}
+${stepsOf(e)}`}
 \par\smallskip\colorbox{white}{\textbf{Answer:} ${clean(e.ans)}}
 \end{example}`).join("\n");
   const LV = { 1: ["lv1", "Level 1 --- Knowledge \\& Understanding"], 2: ["lv2", "Level 2 --- Application"], 3: ["lv3", "Level 3 --- Thinking \\& Problem Solving (challenge)"] };
@@ -72,11 +76,10 @@ ${e.steps.map((s, k) => String.raw`\step{${k + 1}}{${clean(s)}}`).join("\n")}
   const practice = [1, 2, 3].map((lv) => {
     const ps = t.problems.filter((p) => p.level === lv);
     if (!ps.length) return "";
-    return String.raw`\par\medskip{\large\bfseries\color{${LV[lv][0]}}${LV[lv][1]}}\par\smallskip
+    return String.raw`\par\needspace{9cm}\medskip{\large\bfseries\color{${LV[lv][0]}}${LV[lv][1]}}\par\smallskip
 ` + ps.map((p) => { n++; return String.raw`\begin{qbox}{${LV[lv][0]}}{Problem ${n}}
 ${partLines(p.q)}
-${p.fig ?? ""}
-\workspace{${p.space ?? 3.2}cm}
+${p.fig ? sideBySide(String.raw`\workspace{${Math.max(p.space ?? 3.2, 5.6)}cm}`, p.fig, 0.55) : String.raw`\workspace{${p.space ?? 3.2}cm}`}
 \end{qbox}`; }).join("\n");
   }).join("\n");
   // Last page: compact two-column question recap and answer key (one line or so per problem).

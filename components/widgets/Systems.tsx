@@ -7,23 +7,23 @@
 import { useState, type ReactNode } from "react";
 import { C, MathText, Readout, Row, Segmented, Slider, WidgetCard, btn, gcd } from "./kit";
 
-type View = { xmin: number; xmax: number; ymin: number; ymax: number };
+export type View = { xmin: number; xmax: number; ymin: number; ymax: number };
 const W = 520, H = 400;
-const r2 = (v: number, d = 2) => { const k = 10 ** d; const r = Math.round(v * k) / k; return Object.is(r, -0) ? "0" : String(r); };
+export const r2 = (v: number, d = 2) => { const k = 10 ** d; const r = Math.round(v * k) / k; return Object.is(r, -0) ? "0" : String(r); };
 /** exact fraction p/q in LaTeX */
-function fr(p: number, q = 1): string {
+export function fr(p: number, q = 1): string {
   if (q < 0) { p = -p; q = -q; }
   const g = gcd(Math.round(p), Math.round(q)) || 1; p = Math.round(p) / g; q = Math.round(q) / g;
   return q === 1 ? String(p) : `${p < 0 ? "-" : ""}\\tfrac{${Math.abs(p)}}{${q}}`;
 }
 /** a·x + b·y = c as LaTeX */
-function stdTex(a: number, b: number, c: number) {
+export function stdTex(a: number, b: number, c: number) {
   const term = (k: number, v: string, first: boolean) => k === 0 ? "" : `${first ? (k < 0 ? "-" : "") : k < 0 ? "-" : "+"}${Math.abs(k) === 1 ? "" : Math.abs(k)}${v}`;
   const lhs = `${term(a, "x", true)}${term(b, "y", a === 0)}` || "0";
   return `${lhs}=${c}`;
 }
 
-function Plane({ view, children, label, step = 1 }: { view: View; children: (X: (x: number) => number, Y: (y: number) => number) => ReactNode; label: string; step?: number }) {
+export function Plane({ view, children, label, step = 1 }: { view: View; children: (X: (x: number) => number, Y: (y: number) => number) => ReactNode; label: string; step?: number }) {
   const { xmin, xmax, ymin, ymax } = view;
   const X = (x: number) => ((x - xmin) / (xmax - xmin)) * W, Y = (y: number) => H - ((y - ymin) / (ymax - ymin)) * H;
   const xs: number[] = [], ys: number[] = [];
@@ -44,12 +44,12 @@ function Plane({ view, children, label, step = 1 }: { view: View; children: (X: 
   );
 }
 /** segment of ax + by = c across the view (handles vertical lines) */
-function stdSeg(X: (x: number) => number, Y: (y: number) => number, a: number, b: number, c: number, v: View) {
+export function stdSeg(X: (x: number) => number, Y: (y: number) => number, a: number, b: number, c: number, v: View) {
   if (b === 0) { const x = c / a; return { x1: X(x), y1: Y(v.ymin), x2: X(x), y2: Y(v.ymax) }; }
   const f = (x: number) => (c - a * x) / b;
   return { x1: X(v.xmin), y1: Y(f(v.xmin)), x2: X(v.xmax), y2: Y(f(v.xmax)) };
 }
-const V10: View = { xmin: -10, xmax: 10, ymin: -10, ymax: 10 };
+export const V10: View = { xmin: -10, xmax: 10, ymin: -10, ymax: 10 };
 
 /* ---------------------------------------------------------------- 1.1 standard form */
 

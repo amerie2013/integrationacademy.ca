@@ -1,5 +1,5 @@
 // MPM2D Worksheet 1.2 — Solving Linear Systems by Graphing (teacher edition)
-import { planeT } from "./figT.mjs";
+import { planeT, F, pt, std, gridT, circ, poly, rectT, trackT } from "./figT.mjs";
 
 const EXAMPLES = [
   { title: "Checking an ordered pair", q: String.raw`Is $(-2,5)$ a solution of $3x+2y=4$ and $x-y=-7$?`,
@@ -43,6 +43,29 @@ const PROBLEMS = [
   { level: 3, space: 5, q: String.raw`Create a system whose solution is $(-1,4)$, with one line horizontal. Graph it and verify.`, recap: "Create a system with solution (−1, 4).", ans: String.raw`e.g. $y=4$ and $y=2x+6$` },
   { level: 3, space: 5, q: String.raw`A car rental costs \$$49$/day plus $\$0.20$/km; another costs \$$35$/day plus $\$0.30$/km. Graph both for one day and explain which to choose for a $120$ km trip and for a $200$ km trip.`, recap: "Two car rentals.", ans: String.raw`break-even $140$ km; $120$ km: second ($\$71$ vs $\$73$); $200$ km: first ($\$89$ vs $\$95$)` },
 ];
+
+// ---- figures added to examples and problems
+const ex = EXAMPLES, pr = PROBLEMS;
+ex[0].fig = F({ view: { xmin: -6, xmax: 4, ymin: -2, ymax: 9 }, lines: [{ m: -1.5, b: 2, color: "blue", label: "3x + 2y = 4", lx: 0.8 }, { m: 1, b: 7, color: "red", label: "x − y = −7", lx: -5.5 }], points: [pt(-2, 5, null, "green")] });
+ex[1].fig = F({ view: { xmin: -2, xmax: 8, ymin: -3, ymax: 6 }, lines: [{ m: 0.5, b: -1, color: "blue", label: "y = ½x − 1", lx: 6 }, { m: -2 / 3, b: 10 / 3, color: "red", label: "2x + 3y = 10", lx: 5.5 }], points: [pt(4, 1, null, "green")] }, 6.5, "(4, 1) is on the blue line but not on the red one.");
+ex[5].fig = F({ view: { xmin: 0, xmax: 7, ymin: 0, ymax: 280 }, lines: [{ m: 25, b: 50, color: "blue", label: "A", lx: 6 }, { m: 40, b: 0, color: "red", label: "B", lx: 5.6 }], points: [{ x: 10 / 3, y: 400 / 3, label: "(3⅓, 133⅓)", color: "green" }], xlabel: "months", ylabel: "cost", step: { x: 1, y: 40 } });
+ex[6].fig = F({ view: { xmin: -2, xmax: 5, ymin: -3, ymax: 5 }, lines: [{ m: 3, b: -2, color: "blue" }, { m: -0.5, b: 3, color: "red" }], points: [{ x: 10 / 7, y: 16 / 7, label: "≈(1.4, 2.3)", color: "green" }] });
+ex[7].fig = F({ view: { xmin: -6, xmax: 6, ymin: -5, ymax: 5 }, lines: [{ m: 1 / 3, b: 2, color: "blue", label: "y = ⅓x + 2", lx: 1 }, { m: 1 / 3, b: -2, color: "red", label: "x − 3y = 6", lx: 1.5 }] });
+ex[8].fig = F({ view: { xmin: -2, xmax: 6, ymin: -2, ymax: 7 }, lines: [{ m: 1, b: 1, color: "blue" }, { m: -1, b: 5, color: "red" }, { m: 1.5, b: 0, color: "green", dash: true }], points: [pt(2, 3, null, "green"), pt(0, 0, "O", "gray")] });
+pr[0].fig = F({ view: { xmin: -3, xmax: 5, ymin: -6, ymax: 3 }, lines: [{ m: 2, b: -5, color: "blue", label: "2x − y = 5", lx: 3.3 }, { m: -1 / 3, b: -8 / 3, color: "red", label: "x + 3y = −8", lx: -2.8 }] });
+pr[1].fig = gridT({ xmin: -2, xmax: 6, ymin: -4, ymax: 8 });
+pr[2].fig = F({ view: { xmin: -2, xmax: 6, ymin: -2, ymax: 6 }, lines: [{ m: 1, b: 0, color: "blue" }, { m: -0.5, b: 4.5, color: "red" }], points: [pt(3, 3, "P", "green")] }, 6.5, "What does P tell you about the two equations?");
+pr[3].fig = gridT({ xmin: -2, xmax: 6, ymin: -2, ymax: 7 });
+pr[4].fig = gridT({ xmin: -5, xmax: 5, ymin: -5, ymax: 5 });
+pr[5].fig = gridT({ xmin: 0, xmax: 8, ymin: 0, ymax: 60 }, { x: 1, y: 10 }, 6.5, { xlabel: "GB", ylabel: "cost" });
+pr[6].fig = F({ view: { xmin: -1, xmax: 4, ymin: -1, ymax: 3 }, points: [pt(2, 1), pt(1, 2), pt(3, 0)] });
+pr[7].fig = F({ view: { xmin: -2, xmax: 5, ymin: -4, ymax: 8 }, lines: [{ m: 4, b: -3, color: "blue", label: "y = 4x − 3", lx: 2.3 }], vlines: [{ x: 2, color: "gray", dash: true }] });
+pr[8].fig = gridT({ xmin: 0, xmax: 16, ymin: 0, ymax: 26 }, { x: 2, y: 2 }, 6.5, { xlabel: "t (h)", ylabel: "h (cm)" });
+pr[9].fig = gridT({ xmin: -4, xmax: 6, ymin: -4, ymax: 8 });
+pr[10].fig = F({ view: { xmin: 0, xmax: 5, ymin: 0, ymax: 7 }, lines: [{ m: 1.5, b: 0.2, color: "blue" }, { m: -1, b: 6.7, color: "red" }] });
+pr[11].fig = gridT({ xmin: -6, xmax: 4, ymin: -2, ymax: 8 });
+pr[12].fig = gridT({ xmin: 0, xmax: 250, ymin: 0, ymax: 120 }, { x: 50, y: 20 }, 6.5, { xlabel: "km", ylabel: "cost" });
+// ---- end figures
 
 export const WS = {
   code: "1.2",

@@ -1,5 +1,5 @@
 // MPM2D Worksheet 1.5 — Solving Problems with Linear Systems (teacher edition)
-import { planeT } from "./figT.mjs";
+import { planeT, F, pt, std, gridT, circ, poly, rectT, trackT } from "./figT.mjs";
 
 const EXAMPLES = [
   { title: "Coins", q: String.raw`A jar has $45$ coins, all dimes and quarters, worth $\$7.95$. How many of each?`,
@@ -41,6 +41,24 @@ const PROBLEMS = [
 (c) Which should a family that prints $300$ pages a month for $3$ years buy?`, recap: "Two printers.", ans: String.raw`(a) $C=0.05p+180$, $C=0.09p+100$ (b) $2000$ pages (c) $10\,800$ pages: A ($\$720$ vs $\$1072$)` },
   { level: 3, space: 5, q: "Write your own word problem that leads to the system x + y = 20 and 3x + 5y = 80. Solve it and interpret the answer.", recap: "Write a problem for a given system.", ans: "answers vary; solution x = 10, y = 10" },
 ];
+
+// ---- figures added to examples and problems
+const ex = EXAMPLES, pr = PROBLEMS;
+const S = (l1, l2, p, view, xl, yl, step) => F({ view, lines: [{ color: "blue", ...l1 }, { color: "red", ...l2 }], points: [p], xlabel: xl, ylabel: yl, step });
+ex[0].fig = S({ m: -1, b: 45, label: "count", lx: 3 }, { m: -0.4, b: 31.8, label: "value", lx: 36 }, pt(22, 23, null, "green"), { xmin: 0, xmax: 50, ymin: 0, ymax: 50 }, "dimes", "quarters", { x: 10, y: 10 });
+ex[1].fig = S({ m: -1, b: 1200 }, { m: -1.5, b: 1420 }, pt(440, 760, null, "green"), { xmin: 0, xmax: 1300, ymin: 0, ymax: 1500 }, "floor", "balcony", { x: 200, y: 300 });
+ex[2].fig = S({ m: -1, b: 25 }, { m: -4 / 9, b: 50 / 3 }, pt(15, 10, null, "green"), { xmin: 0, xmax: 30, ymin: 0, ymax: 30 }, "peanuts (kg)", "cashews (kg)", { x: 5, y: 5 });
+ex[3].fig = S({ m: -1, b: 50 }, { m: -0.375, b: 31.25 }, pt(30, 20, null, "green"), { xmin: 0, xmax: 60, ymin: 0, ymax: 55 }, "15% (mL)", "40% (mL)", { x: 10, y: 10 });
+ex[4].fig = S({ m: -1, b: 12000 }, { m: -2.4, b: 19000 }, pt(5000, 7000, null, "green"), { xmin: 0, xmax: 13000, ymin: 0, ymax: 20000 }, "at 6%", "at 2.5%", { x: 2000, y: 4000 });
+ex[5].fig = S({ m: -1, b: 24 }, { m: 1, b: -16 }, pt(20, 4, null, "green"), { xmin: 0, xmax: 28, ymin: -4, ymax: 26 }, "boat (km/h)", "current (km/h)", { x: 4, y: 4 });
+ex[6].fig = S({ m: -1, b: 10 }, { m: -5 / 12, b: 6.25 }, { x: 45 / 7, y: 25 / 7, label: "(6.43, 3.57)", color: "green" }, { xmin: 0, xmax: 12, ymin: 0, ymax: 11 }, "run (km)", "walk (km)", { x: 2, y: 2 });
+ex[8].fig = S({ m: 4, b: 0, label: "m = 4b", lx: 3.5 }, { m: 2, b: 6, label: "m + 6 = 2(b + 6)", lx: 4.5 }, pt(3, 12, null, "green"), { xmin: 0, xmax: 8, ymin: 0, ymax: 24 }, "brother", "Mia", { x: 1, y: 4 });
+pr[5].fig = trackT("start", "destination", "2400 km", "with the wind: 3 h", "against: 4 h");
+pr[6].fig = gridT({ xmin: 0, xmax: 400, ymin: 0, ymax: 160 }, { x: 50, y: 20 }, 6.5, { xlabel: "km", ylabel: "cost" });
+pr[7].fig = rectT("length = w + 8", "w", "perimeter 64 cm");
+pr[10].fig = trackT("Station A", "Station B", "540 km", "speed b + 20", "speed b");
+pr[11].fig = gridT({ xmin: 0, xmax: 4000, ymin: 0, ymax: 400 }, { x: 500, y: 50 }, 6.5, { xlabel: "pages", ylabel: "cost" });
+// ---- end figures
 
 export const WS = {
   code: "1.5",

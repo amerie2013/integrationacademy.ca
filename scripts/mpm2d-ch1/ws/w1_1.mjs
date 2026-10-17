@@ -1,5 +1,5 @@
 // MPM2D Worksheet 1.1 — Review of Linear Relations (teacher edition)
-import { planeT } from "./figT.mjs";
+import { planeT, F, pt, std, gridT, circ, poly, rectT, trackT } from "./figT.mjs";
 
 const EXAMPLES = [
   { title: "Slope from two points", q: String.raw`Find the slope of the line through $(-5,2)$ and $(3,-4)$ and describe the line.`,
@@ -45,6 +45,27 @@ const PROBLEMS = [
 (c) A bill was \$$442.50$. How many hours were worked?`, recap: "Plumber C = 85h + 60.", ans: String.raw`(b) $85h-C=-60$ (c) $85h=382.5\Rightarrow h=4.5$ h` },
   { level: 3, space: 5, q: String.raw`Explain why the lines $ax+by=c$ and $bx-ay=d$ are always perpendicular (for $a,b\ne0$). Test your explanation with one example.`, recap: "Why ax + by = c ⟂ bx − ay = d.", ans: String.raw`slopes $-\frac ab$ and $\frac ba$ multiply to $-1$; e.g. $2x+3y=6$ and $3x-2y=1$` },
 ];
+
+// ---- figures added to examples and problems
+const ex = EXAMPLES, pr = PROBLEMS;
+ex[0].fig = F({ view: { xmin: -7, xmax: 5, ymin: -6, ymax: 4 }, lines: [{ m: -0.75, b: -1.75, color: "violet" }], points: [pt(-5, 2), pt(3, -4)] });
+ex[2].fig = F({ view: { xmin: -2, xmax: 9, ymin: -2, ymax: 5 }, lines: [{ m: -0.4, b: 3, color: "violet", label: "2x + 5y = 15", lx: 4 }], points: [pt(0, 3), { x: 7.5, y: 0, label: "(7.5, 0)", color: "blue" }] });
+ex[3].fig = F({ view: { xmin: -2, xmax: 7, ymin: -7, ymax: 4 }, lines: [{ m: 1.5, b: -5, color: "violet" }], points: [pt(0, -5), { x: 10 / 3, y: 0, label: "(10/3, 0)", color: "blue" }] });
+ex[5].fig = F({ view: { xmin: -2, xmax: 7, ymin: -5, ymax: 11 }, lines: [{ m: 3, b: -6, color: "violet" }], points: [pt(1, -3), pt(5, 9)], step: { x: 1, y: 2 } });
+ex[6].fig = F({ view: { xmin: -2, xmax: 9, ymin: -4, ymax: 8 }, lines: [{ m: 2, b: -7, color: "gray", dash: true, label: "y = 2x − 7", lx: 6.3 }, { m: 2, b: -5, color: "blue", label: "(a)", lx: 5 }, { m: -0.5, b: 5, color: "red", label: "(b)", lx: 7 }], points: [pt(4, 3, null, "green")] });
+ex[7].fig = F({ view: { xmin: -12, xmax: 2, ymin: -10, ymax: 2 }, lines: [{ m: -1, b: -12, color: "blue", label: "y = 5(x − 2) − 2(3x + 1)", lx: -11.5 }, { m: 0, b: -4, color: "red", label: "y = −4", lx: -3 }], points: [pt(-8, -4, null, "green")] }, 6.5, "Graphical check: the two sides are equal where the lines meet, at x = −8.");
+ex[8].fig = F({ view: { xmin: -2, xmax: 4, ymin: -2, ymax: 3 }, lines: [{ m: 0.9, b: -0.2, color: "blue", label: "left side", lx: 2.2 }, { m: 0, b: 0.7, color: "red", label: "y = 0.7", lx: -1.5 }], points: [{ x: 1, y: 0.7, label: "(1, 0.7)", color: "green" }] }, 6.5, "The sides are equal at x = 1.");
+pr[0].fig = F({ view: { xmin: -6, xmax: 4, ymin: -8, ymax: 5 }, points: [pt(2, -6), pt(-4, 3)] });
+pr[1].fig = gridT({ xmin: -2, xmax: 8, ymin: -2, ymax: 6 });
+pr[3].fig = F({ view: { xmin: -5, xmax: 8, ymin: -3, ymax: 7 }, points: [pt(-3, 5), pt(6, -1)] });
+pr[4].fig = gridT({ xmin: -2, xmax: 6, ymin: -4, ymax: 2 });
+pr[5].fig = F({ view: { xmin: -2, xmax: 7, ymin: -5, ymax: 4 }, lines: [{ m: 2.5, b: -4, color: "violet", label: "5x − 2y = 8", lx: 3.2 }], points: [pt(5, -1, null, "red")] });
+pr[7].fig = F({ view: { xmin: 0, xmax: 12, ymin: 0, ymax: 32 }, points: [{ x: 6, y: 17.6, label: "(6, 17.60)", color: "blue" }, pt(10, 26)], xlabel: "km", ylabel: "dollars", step: { x: 2, y: 4 } });
+pr[8].fig = F({ view: { xmin: -4, xmax: 6, ymin: -7, ymax: 6 }, segs: [poly([[-2, 1], [4, 4], [1, -5]], "gray")], points: [pt(-2, 1, "A"), pt(4, 4, "B"), pt(1, -5, "C")] });
+pr[9].fig = F({ view: { xmin: -4, xmax: 4, ymin: -4, ymax: 8 }, lines: [{ m: 4, b: 1, color: "violet", label: "y = 4x + 1", lx: 0.3 }], points: [pt(2, -1, null, "red")] });
+pr[11].fig = gridT({ xmin: 0, xmax: 5, ymin: 0, ymax: 500 }, { x: 1, y: 50 }, 6.5, { xlabel: "h", ylabel: "C" });
+pr[12].fig = gridT({ xmin: -6, xmax: 6, ymin: -6, ymax: 6 });
+// ---- end figures
 
 export const WS = {
   code: "1.1",
