@@ -58,9 +58,9 @@ async function run() {
   // ---- lessons ----
   const { data: lessons, error: le } = await db.from("lessons").select("id, title, position").eq("course_id", CID);
   if (le) throw le;
-  // run-once guard: after --apply, old 7.1 (id 22ecd156) is "1.5 …"; running MAP again would renumber twice
-  const old71 = lessons.find((l) => l.id === "22ecd156-551f-4549-958b-994dd499fe7c");
-  if (old71 && old71.title.startsWith("1.5 ")) { console.log("Restructure already applied (old 7.1 is now 1.5) — nothing to do."); return; }
+  // run-once guard: only --apply creates chapter-8 lessons (old 7.2/7.3); running MAP again would renumber twice.
+  // (lessons-publish already retitles the chapter-1 rows, including old 7.1, so they can't be the marker.)
+  if (lessons.some((l) => /^8\.\d+ /.test(l.title))) { console.log("Restructure already applied (chapter 8 lessons exist) — nothing to do."); return; }
   const ch1Ids = new Set(CH1.map(([id]) => id));
   const missingNew = CH1.filter(([id]) => !lessons.some((l) => l.id === id)).map(([, t]) => t);
   const finalL = CH1.map(([id, title]) => ({ id, title }));

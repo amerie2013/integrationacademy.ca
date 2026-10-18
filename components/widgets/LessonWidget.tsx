@@ -28,6 +28,7 @@ import { PowerLadder, RationalPower, GrowthCompare, ExpTransform, ExpModel } fro
 import { SpecialTriangles, TerminalArm, IdentityCheck, AmbiguousCase, CosineLaw, TowerLab } from "./Trig11";
 import { PeriodicReader, UnitWave, WheelLab, SinTransform, KeyPointMapper, FitSinusoid, ModelLab } from "./Sinusoidal";
 import { PowerLab, PolyFeatures, FactoredPoly, PowerTransform, SecantLab, TangentSlope } from "./PolyFunctions";
+import { SyntheticDivide, FactorFinder, RootSolver, PolyFamily, InequalityGraph, SignChart } from "./PolyEquations";
 
 // Registry of named lesson widgets. A lesson block { type: "widget", widget, props }
 // renders REGISTRY[widget] with its props. Keep names stable — they are stored in the DB.
@@ -156,6 +157,12 @@ const REGISTRY: Record<string, ComponentType<any>> = {
   powerTransform: PowerTransform,
   secantLab: SecantLab,
   tangentSlope: TangentSlope,
+  syntheticDivide: SyntheticDivide,
+  factorFinder: FactorFinder,
+  rootSolver: RootSolver,
+  polyFamily: PolyFamily,
+  inequalityGraph: InequalityGraph,
+  signChart: SignChart,
 };
 
 export const WIDGET_NAMES = Object.keys(REGISTRY);
