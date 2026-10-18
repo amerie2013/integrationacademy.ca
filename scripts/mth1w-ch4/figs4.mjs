@@ -1,12 +1,12 @@
 // Coordinate-plane figures for chapter 4: one SVG builder used by lessons (HTML), bank and assignments (SVG docs).
 //   plane({ view, lines:[{m,b,color,dash,label}], vlines:[{x,color,label}], curves:[{f,a,b,color}],
 //           points:[{x,y,label,color}], shade:{m,b,above}, segs:[{pts:[[x,y]...],color}], tri:{x,y,run,rise},
-//           xlabel, ylabel, step }, caption)
+//           xlabel, ylabel, step, bare (no grid or axes: 3-D sketches) }, caption)
 const COL = { blue: "#1e40af", red: "#be123c", green: "#15803d", violet: "#6d28d9", amber: "#b45309", gray: "#475569" };
 const fmt = (v) => { const r = Math.round(v * 100) / 100; return r < 0 ? `−${-r}` : String(r); };
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/-/g, "−");
 
-export function planeSvg({ view = { xmin: -8, xmax: 8, ymin: -8, ymax: 8 }, lines = [], vlines = [], curves = [], points = [], shade = null, segs = [], tri = null, xlabel = "x", ylabel = "y", step = null, width = 420, height = null }) {
+export function planeSvg({ view = { xmin: -8, xmax: 8, ymin: -8, ymax: 8 }, lines = [], vlines = [], curves = [], points = [], shade = null, segs = [], tri = null, xlabel = "x", ylabel = "y", step = null, width = 420, height = null, bare = false }) {
   const { xmin, xmax, ymin, ymax } = view;
   // equal ranges (geometry grids) stay square so slopes and right angles look true; data graphs use a fixed aspect
   const Wd = width, Ht = height ?? (Math.abs((ymax - ymin) - (xmax - xmin)) < 1e-9 ? width : Math.round(width * 0.68));
@@ -14,16 +14,18 @@ export function planeSvg({ view = { xmin: -8, xmax: 8, ymin: -8, ymax: 8 }, line
   const X = (x) => PL + ((x - xmin) / (xmax - xmin)) * Wd, Y = (y) => PT + Ht - ((y - ymin) / (ymax - ymin)) * Ht;
   const sx = step?.x ?? Math.max(1, Math.round((xmax - xmin) / 10)), sy = step?.y ?? Math.max(1, Math.round((ymax - ymin) / 10));
   const cid = `pc${Wd}${Ht}${Math.round(xmin)}${Math.round(ymax)}`;
-  let s = `<clipPath id="${cid}"><rect x="${PL}" y="${PT}" width="${Wd}" height="${Ht}"/></clipPath><rect x="${PL}" y="${PT}" width="${Wd}" height="${Ht}" fill="#fff" stroke="#cbd5e1"/>`;
+  let s = `<clipPath id="${cid}"><rect x="${PL}" y="${PT}" width="${Wd}" height="${Ht}"/></clipPath><rect x="${PL}" y="${PT}" width="${Wd}" height="${Ht}" fill="#fff"${bare ? "" : ` stroke="#cbd5e1"`}/>`;
   if (shade) {
     const y1 = shade.m * xmin + shade.b, y2 = shade.m * xmax + shade.b, edge = shade.above ? PT : PT + Ht;
     s += `<g clip-path="url(#${cid})"><polygon points="${X(xmin)},${Y(y1)} ${X(xmax)},${Y(y2)} ${PL + Wd},${edge} ${PL},${edge}" fill="#dcfce7" opacity="0.85"/></g>`;
   }
-  for (let x = Math.ceil(xmin / sx) * sx; x <= xmax + 1e-9; x += sx) s += `<line x1="${X(x)}" y1="${PT}" x2="${X(x)}" y2="${PT + Ht}" stroke="#eef2f7"/>` + (Math.abs(x) > 1e-9 ? `<text x="${X(x)}" y="${Math.min(PT + Ht + 15, Math.max(PT + 12, Y(Math.max(ymin, Math.min(ymax, 0))) + 15))}" font-size="12.5" text-anchor="middle" fill="#475569">${fmt(x)}</text>` : "");
-  for (let y = Math.ceil(ymin / sy) * sy; y <= ymax + 1e-9; y += sy) s += `<line x1="${PL}" y1="${Y(y)}" x2="${PL + Wd}" y2="${Y(y)}" stroke="#eef2f7"/>` + (Math.abs(y) > 1e-9 ? `<text x="${Math.max(PL - 4, X(Math.max(xmin, Math.min(xmax, 0))) - 5)}" y="${Y(y) + 4}" font-size="12.5" text-anchor="end" fill="#475569">${fmt(y)}</text>` : "");
-  const ax = Math.max(xmin, Math.min(xmax, 0)), ay = Math.max(ymin, Math.min(ymax, 0));
-  s += `<line x1="${PL}" y1="${Y(ay)}" x2="${PL + Wd}" y2="${Y(ay)}" stroke="#0f172a" stroke-width="1.5"/><line x1="${X(ax)}" y1="${PT}" x2="${X(ax)}" y2="${PT + Ht}" stroke="#0f172a" stroke-width="1.5"/>`;
-  s += `<text x="${PL + Wd - 2}" y="${Y(ay) - 6}" font-size="12" font-weight="700" text-anchor="end" fill="#0f172a">${esc(xlabel)}</text><text x="${X(ax) + 6}" y="${PT + 12}" font-size="12" font-weight="700" fill="#0f172a">${esc(ylabel)}</text>`;
+  if (!bare) {
+    for (let x = Math.ceil(xmin / sx) * sx; x <= xmax + 1e-9; x += sx) s += `<line x1="${X(x)}" y1="${PT}" x2="${X(x)}" y2="${PT + Ht}" stroke="#eef2f7"/>` + (Math.abs(x) > 1e-9 ? `<text x="${X(x)}" y="${Math.min(PT + Ht + 15, Math.max(PT + 12, Y(Math.max(ymin, Math.min(ymax, 0))) + 15))}" font-size="12.5" text-anchor="middle" fill="#475569">${fmt(x)}</text>` : "");
+    for (let y = Math.ceil(ymin / sy) * sy; y <= ymax + 1e-9; y += sy) s += `<line x1="${PL}" y1="${Y(y)}" x2="${PL + Wd}" y2="${Y(y)}" stroke="#eef2f7"/>` + (Math.abs(y) > 1e-9 ? `<text x="${Math.max(PL - 4, X(Math.max(xmin, Math.min(xmax, 0))) - 5)}" y="${Y(y) + 4}" font-size="12.5" text-anchor="end" fill="#475569">${fmt(y)}</text>` : "");
+    const ax = Math.max(xmin, Math.min(xmax, 0)), ay = Math.max(ymin, Math.min(ymax, 0));
+    s += `<line x1="${PL}" y1="${Y(ay)}" x2="${PL + Wd}" y2="${Y(ay)}" stroke="#0f172a" stroke-width="1.5"/><line x1="${X(ax)}" y1="${PT}" x2="${X(ax)}" y2="${PT + Ht}" stroke="#0f172a" stroke-width="1.5"/>`;
+    s += `<text x="${PL + Wd - 2}" y="${Y(ay) - 6}" font-size="12" font-weight="700" text-anchor="end" fill="#0f172a">${esc(xlabel)}</text><text x="${X(ax) + 6}" y="${PT + 12}" font-size="12" font-weight="700" fill="#0f172a">${esc(ylabel)}</text>`;
+  }
   let clip = "";
   for (const l of lines) clip += `<line x1="${X(xmin)}" y1="${Y(l.m * xmin + l.b)}" x2="${X(xmax)}" y2="${Y(l.m * xmax + l.b)}" stroke="${COL[l.color ?? "violet"]}" stroke-width="2.6"${l.dash ? ` stroke-dasharray="8 6"` : ""}/>`;
   for (const v of vlines) clip += `<line x1="${X(v.x)}" y1="${PT}" x2="${X(v.x)}" y2="${PT + Ht}" stroke="${COL[v.color ?? "red"]}" stroke-width="2.6"${v.dash ? ` stroke-dasharray="8 6"` : ""}/>`;
