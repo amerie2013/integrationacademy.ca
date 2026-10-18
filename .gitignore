@@ -75,3 +75,7 @@ scripts/_ftce/fulltext.txt
 /scripts/mpm2d-ch*/ws/out/
 /scripts/mpm2d-ch*/bank/out/
 /scripts/mpm2d-ch*/backup/
+/scripts/mcr3u-ch*/ws/out/
+/scripts/mcr3u-ch*/bank/out/
+/scripts/mcr3u-ch*/backup/
+/scripts/mcr3u-ch*/renumbered-ws/

@@ -22,6 +22,7 @@ import { DiffTable, QuadFit, ParabolaFeatures, TransformLab, StepGraph, Factored
 import { ZeroProduct, SquareSolve, FormulaLab, DiscriminantLab, HeightInterval, FenceArea, LinQuad } from "./Equations";
 import { SimilarLab, ShadowLab, RatioLab, SideFinder, AngleFinder, ElevationLab } from "./Trig";
 import { SineDerive, CosineDerive, LawChooser, SurveyLab } from "./Laws";
+import { RelationTest, NotationLab, ParentGallery, DomainRangeLab, InverseLab, FuncTransform } from "./Functions";
 
 // Registry of named lesson widgets. A lesson block { type: "widget", widget, props }
 // renders REGISTRY[widget] with its props. Keep names stable — they are stored in the DB.
@@ -115,6 +116,12 @@ const REGISTRY: Record<string, ComponentType<any>> = {
   cosineDerive: CosineDerive,
   lawChooser: LawChooser,
   surveyLab: SurveyLab,
+  relationTest: RelationTest,
+  notationLab: NotationLab,
+  parentGallery: ParentGallery,
+  domainRangeLab: DomainRangeLab,
+  inverseLab: InverseLab,
+  funcTransform: FuncTransform,
 };
 
 export const WIDGET_NAMES = Object.keys(REGISTRY);
