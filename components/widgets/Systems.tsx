@@ -23,12 +23,13 @@ export function stdTex(a: number, b: number, c: number) {
   return `${lhs}=${c}`;
 }
 
-export function Plane({ view, children, label, step = 1 }: { view: View; children: (X: (x: number) => number, Y: (y: number) => number) => ReactNode; label: string; step?: number }) {
+export function Plane({ view, children, label, step = 1, stepY }: { view: View; children: (X: (x: number) => number, Y: (y: number) => number) => ReactNode; label: string; step?: number; stepY?: number }) {
+  const sy = stepY ?? step;
   const { xmin, xmax, ymin, ymax } = view;
   const X = (x: number) => ((x - xmin) / (xmax - xmin)) * W, Y = (y: number) => H - ((y - ymin) / (ymax - ymin)) * H;
   const xs: number[] = [], ys: number[] = [];
   for (let x = Math.ceil(xmin / step) * step; x <= xmax; x += step) xs.push(x);
-  for (let y = Math.ceil(ymin / step) * step; y <= ymax; y += step) ys.push(y);
+  for (let y = Math.ceil(ymin / sy) * sy; y <= ymax; y += sy) ys.push(y);
   const id = `sys-${label.replace(/\W/g, "")}`;
   return (
     <svg viewBox={`-28 -8 ${W + 40} ${H + 30}`} style={{ width: "100%", maxWidth: 560, display: "block", margin: "8px auto" }} role="img" aria-label={label}>
@@ -38,7 +39,7 @@ export function Plane({ view, children, label, step = 1 }: { view: View; childre
       {ys.map((y) => <line key={"gy" + y} x1={0} y1={Y(y)} x2={W} y2={Y(y)} stroke="#eef2f7" />)}
       <line x1={X(0)} y1={0} x2={X(0)} y2={H} stroke={C.ink} strokeWidth={1.5} /><line x1={0} y1={Y(0)} x2={W} y2={Y(0)} stroke={C.ink} strokeWidth={1.5} />
       {xs.filter((x) => x !== 0 && x % (step * 2) === 0).map((x) => <text key={"tx" + x} x={X(x)} y={Y(0) + 14} fontSize={11} textAnchor="middle" fill={C.muted}>{x}</text>)}
-      {ys.filter((y) => y !== 0 && y % (step * 2) === 0).map((y) => <text key={"ty" + y} x={X(0) - 5} y={Y(y) + 4} fontSize={11} textAnchor="end" fill={C.muted}>{y}</text>)}
+      {ys.filter((y) => y !== 0 && Math.abs(y % (sy * 2)) < 1e-9).map((y) => <text key={"ty" + y} x={X(0) - 5} y={Y(y) + 4} fontSize={11} textAnchor="end" fill={C.muted}>{y}</text>)}
       <g clipPath={`url(#${id})`}>{children(X, Y)}</g>
     </svg>
   );

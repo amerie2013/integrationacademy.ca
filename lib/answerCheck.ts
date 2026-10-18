@@ -14,7 +14,10 @@ export type AnswerSpec =
   // (unless the answer has them) and no more terms than the answer. A leading "y =" is ignored.
   // factored: must be written as a product — one term, at least as many bracket factors as the answer, and the
   // answer's leading common factor (e.g. the 2 in 2(x+1)(x+2)) taken out.
-  | { kind: "expr"; value: string; simplified?: boolean; factored?: boolean };
+  | { kind: "expr"; value: string; simplified?: boolean; factored?: boolean }
+  // the roots of an equation, typed in any order: "-3, 5", "x = -3 or x = 5", "±4". An empty value means
+  // there are no real roots ("none", "no real roots"). tol allows rounded answers (e.g. 0.01).
+  | { kind: "roots"; value: number[]; tol?: number };
 
 const MINUS = /[−–—]/g; // typographic minus / dashes -> "-"
 
@@ -57,6 +60,7 @@ export function checkAnswer(spec: AnswerSpec, raw: string | number): boolean {
     return !(spec.lowest && notLowest(r[0], r[1]));
   }
   if (spec.kind === "expr") return sameExpr(spec.value, s) && !(spec.simplified && notSimplified(spec.value, s)) && !(spec.factored && notFactored(spec.value, s));
+  if (spec.kind === "roots") return rootsMatch(spec, s) === "all";
   let v = parseNumber(s.replace(/^\s*[a-zA-Z]\s*=\s*/, "")); // "x = 4" counts as 4
   if (v === null) return false;
   // "35" for a percent question means 35%.
@@ -85,8 +89,41 @@ export function wrongForm(spec: AnswerSpec, raw: string): boolean {
   return !raw.includes("/");
 }
 
+const NO_ROOTS = /^(none|no( real)? (roots?|solutions?|zeros?)|no solution|ø|∅)$/;
+
+/** Parse a typed list of roots. null = unreadable; [] = "no real roots". */
+export function parseRoots(raw: string): number[] | null {
+  if (!norm(raw)) return null;
+  const s = norm(raw).replace(/[{}]/g, " ").trim();
+  if (!s || NO_ROOTS.test(s)) return []; // "{ }" is the empty set
+  const out: number[] = [];
+  for (let part of s.split(/\s*(?:,|;|\bor\b|\band\b)\s*/)) {
+    part = part.replace(/^[a-z]\s*=\s*/, "").trim();
+    if (!part) continue;
+    const pm = part.match(/^(?:\+\/-|±)\s*(.+)$/);
+    const v = parseNumber(pm ? pm[1] : part);
+    if (v === null) return null;
+    out.push(v);
+    if (pm && v !== 0) out.push(-v);
+  }
+  return out.length ? out : null;
+}
+
+/** "all" = exactly the roots; "some" = only correct roots but at least one missing; "no" otherwise. */
+export function rootsMatch(spec: { value: number[]; tol?: number }, raw: string): "all" | "some" | "no" {
+  const got = parseRoots(raw);
+  if (got === null) return "no";
+  const tol = spec.tol ?? 1e-6;
+  const want = [...new Set(spec.value.map((v) => Math.round(v / 1e-9) * 1e-9))];
+  if (want.length === 0) return got.length === 0 ? "all" : "no";
+  if (got.length === 0) return "no";
+  if (!got.every((g) => want.some((w) => Math.abs(g - w) <= tol))) return "no";
+  return want.every((w) => got.some((g) => Math.abs(g - w) <= tol)) ? "all" : "some";
+}
+
 /** Right value, wrong form — lets the UI say so instead of "not yet". */
 export function rightValueWrongForm(spec: AnswerSpec, raw: string): boolean {
+  if (spec.kind === "roots") return rootsMatch(spec, raw) === "some";
   if (spec.kind === "ratio") {
     const r = parseRatio(raw);
     return !!spec.lowest && !!r && sameRatio(r, spec.value) && notLowest(r[0], r[1]);

@@ -1,0 +1,117 @@
+// MPM2D chapter 5 assignments (homework): 10 questions each — Knowledge 1-3, Thinking 4-5, Communication 6-7, Application 8-10.
+// [[key|caption]] in a line is replaced by a figure (uploaded SVG) when published. Titles match the existing rows.
+// Figures show given information only. No bare $ signs.
+import { planeDoc } from "../../mth1w-ch4/figs4.mjs";
+import { rectDoc, triDoc, frameDoc } from "../bank/fig.mjs";
+
+const grid = (view, step = { x: 1, y: 1 }, extra = {}) => planeDoc({ view, step, ...extra });
+
+export const ASSIGNMENTS = [
+  { code: "5.1", title: "Assignment 5.1 — Solving Quadratic Equations by Factoring", figs: {
+      g: grid({ xmin: -7, xmax: 6, ymin: -22, ymax: 6 }, { x: 1, y: 2 }),
+      r: rectDoc("w + 5", "w", "area 66 m²") }, lines: [
+    "Knowledge & Understanding",
+    String.raw`1. Solve \(x^2+4x-21=0\).`,
+    String.raw`2. Solve \(2x^2-9x+4=0\).`,
+    String.raw`3. Solve \(16x^2-1=0\).`,
+    "Thinking",
+    String.raw`4. \(x=-2\) is a root of \(x^2+kx-10=0\). Find k and the other root.`,
+    String.raw`5. Solve \((x-1)(x+2)=18\). Then sketch \(y=x^2+x-20\) on the grid, marking its zeros. [[g|Grid for question 5]]`,
+    "Communication",
+    "6. State the zero product property and explain why a quadratic equation must have 0 on one side before you factor.",
+    String.raw`7. A classmate solves \(3x^2=12x\) by dividing both sides by 3x and gets x = 4 only. Explain the error and give the full solution.`,
+    "Application",
+    "8. A rectangle is 5 m longer than it is wide and has an area of 66 m². Find its dimensions. [[r|Rectangle for question 8]]",
+    String.raw`9. A ball's height is \(h=-5t^2+25t+30\) (metres, seconds). When does it land? Explain which root you reject.`,
+    "10. The product of two consecutive odd integers is 143. Find all possible pairs.",
+  ] },
+  { code: "5.2", title: "Assignment 5.2 — Completing the Square", figs: {
+      g: grid({ xmin: -6, xmax: 4, ymin: -4, ymax: 30 }, { x: 1, y: 2 }) }, lines: [
+    "Knowledge & Understanding",
+    String.raw`1. Solve \(x^2=169\) and \((x-6)^2=4\).`,
+    String.raw`2. What must be added to \(x^2-16x\) to complete the square? Write the result as a square.`,
+    String.raw`3. Solve \(x^2+2x-24=0\) by completing the square.`,
+    "Thinking",
+    String.raw`4. Solve \(x^2-6x+4=0\) by completing the square. Give exact roots and roots to two decimal places.`,
+    String.raw`5. For which values of c does \(x^2+10x+c=0\) have no real roots? Explain.`,
+    "Communication",
+    String.raw`6. Use the graphs of \(y=x^2\), \(y=9\) and \(y=-9\) to explain why \(x^2=9\) has two roots but \(x^2=-9\) has none.`,
+    String.raw`7. Explain each step of solving \(x^2+8x+7=0\) by completing the square, in words.`,
+    "Application",
+    String.raw`8. Find the zeros of \(y=-3(x+1)^2+27\) and sketch the parabola on the grid. [[g|Grid for question 8]]`,
+    "9. A square photo is enlarged by adding 5 cm to each side. The new area is 200 cm². Find the original side length to two decimal places.",
+    String.raw`10. A ball's height is \(h=-5(t-2.5)^2+36.25\). When does it land (to two decimal places)?`,
+  ] },
+  { code: "5.3", title: "Assignment 5.3 — The Quadratic Formula", figs: {
+      t: triDoc("x", "x + 1", "29"),
+      r: rectDoc("15 − w", "w", "area 40 m²") }, lines: [
+    "Knowledge & Understanding",
+    String.raw`1. Write \(5x=3-2x^2\) in standard form and state a, b and c.`,
+    String.raw`2. Solve \(x^2+3x-18=0\) with the quadratic formula.`,
+    String.raw`3. Solve \(3x^2-6x+1=0\). Give exact roots in simplest form and decimals.`,
+    "Thinking",
+    String.raw`4. Solve \(0.4x^2+1.2x-2=0\) to two decimal places.`,
+    String.raw`5. Use the quadratic formula to show that the product of the roots of \(x^2+bx+c=0\) is c.`,
+    "Communication",
+    String.raw`6. Solve \(2x^2+3x-2=0\) by factoring and by the formula. Which method was faster here, and when would you choose the other?`,
+    "7. Explain why the quadratic formula contains ± and why the whole numerator is divided by 2a.",
+    "Application",
+    "8. A right triangle has legs x and x + 1 and hypotenuse 29 cm. Find the legs. [[t|Triangle for question 8]]",
+    String.raw`9. A ball's height is \(h=-4.9t^2+18t+1\). When does it land (to two decimal places)?`,
+    "10. A rectangle has perimeter 30 m and area 40 m². Find its dimensions to two decimal places. [[r|Rectangle for question 10]]",
+  ] },
+  { code: "5.4", title: "Assignment 5.4 — The Discriminant & the Number of Roots", figs: {
+      g: grid({ xmin: -2, xmax: 5, ymin: -8, ymax: 2 }, { x: 1, y: 1 }),
+      p: grid({ xmin: -1, xmax: 9, ymin: -1, ymax: 10 }, { x: 1, y: 1 }, { curves: [{ f: (x) => x * x - 8 * x + 20, color: "violet" }] }) }, lines: [
+    "Knowledge & Understanding",
+    String.raw`1. Find the discriminant of \(3x^2-7x+2=0\) and describe its roots.`,
+    String.raw`2. How many real roots does \(25x^2-10x+1=0\) have?`,
+    String.raw`3. Use the discriminant to find the number of x-intercepts of \(y=-x^2+3x-4\), then sketch it on the grid to confirm. [[g|Grid for question 3]]`,
+    "Thinking",
+    String.raw`4. Find k so that \(kx^2+8x+4=0\) has exactly one root.`,
+    String.raw`5. For which values of b does \(x^2+bx+25=0\) have two real roots?`,
+    "Communication",
+    "6. Explain, with three sketches, how the discriminant tells you the number of x-intercepts of a parabola.",
+    "7. Explain why a quadratic equation with integer coefficients factors over the integers exactly when its discriminant is a perfect square.",
+    "Application",
+    "8. Can a rectangle have perimeter 30 m and area 60 m²? Use the discriminant, then find the largest possible area.",
+    String.raw`9. A ball's height is \(h=-5t^2+18t+1\). Use the discriminant to decide whether it reaches 18 m. What is its maximum height?`,
+    String.raw`10. The parabola \(y=x^2-8x+20\) is shown. How many times does the line y = k meet it for k = 2, 4 and 6? Confirm with the discriminant. [[p|Parabola for question 10]]`,
+  ] },
+  { code: "5.5", title: "Assignment 5.5 — Quadratic Word Problems", figs: {
+      f: frameDoc("30 cm", "20 cm", "x", "painting"),
+      h: grid({ xmin: 0, xmax: 5, ymin: 0, ymax: 28 }, { x: 0.5, y: 2 }, { xlabel: "t (s)", ylabel: "h (m)" }) }, lines: [
+    "Knowledge & Understanding",
+    String.raw`1. A rocket's height is \(h=-5t^2+50t+3\). Find its maximum height and when it occurs.`,
+    String.raw`2. A stone's height is \(h=-5t^2+45t+50\). When does it land?`,
+    "3. What is the largest area of a rectangle with perimeter 52 m?",
+    "Thinking",
+    String.raw`4. A ball's height is \(h=-5t^2+45t\). For how long is it above 90 m?`,
+    "5. 240 m of fencing encloses a rectangle split into two pens by one fence parallel to the width. Find the dimensions that give the largest total area.",
+    "Communication",
+    "6. Explain how to decide whether a question needs the vertex, the zeros, or a solution of h = H. Give one example of each.",
+    String.raw`7. Solve \(-5t^2+10t+40=0\) and explain which root is rejected and why.`,
+    "Application",
+    "8. A club sells 240 shirts at 15 dollars. Each 1 dollar increase sells 12 fewer. Find the price that maximizes revenue and the maximum revenue.",
+    "9. A 30 cm by 20 cm painting has a mat of uniform width. The painting and mat cover 1200 cm². How wide is the mat? [[f|Painting for question 9]]",
+    String.raw`10. A ball's height is \(h=-4.9t^2+22t+1.5\). Between which times is it above 20 m (to two decimal places)? Sketch the situation on the grid. [[h|Grid for question 10]]`,
+  ] },
+  { code: "5.6", title: "Assignment 5.6 — Linear–Quadratic Systems", figs: {
+      g: grid({ xmin: -5, xmax: 5, ymin: -5, ymax: 8 }, { x: 1, y: 1 }),
+      s: grid({ xmin: -5, xmax: 4, ymin: -5, ymax: 8 }, { x: 1, y: 1 }) }, lines: [
+    "Knowledge & Understanding",
+    String.raw`1. (Enrichment) Solve \(y=x^2\) and \(y=-2x+3\).`,
+    String.raw`2. Solve \(y=x^2-5\) and \(y=4x\).`,
+    String.raw`3. How many times do \(y=x^2+2x+3\) and \(y=2\) meet?`,
+    "Thinking",
+    String.raw`4. Find k so that \(y=3x+k\) is tangent to \(y=x^2+x\).`,
+    String.raw`5. For which values of m does \(y=mx+1\) meet \(y=x^2+2\) at two points?`,
+    "Communication",
+    "6. Use sketches on the grid to explain the three ways a line and a parabola can meet, and how the discriminant tells them apart. [[g|Grid for question 6]]",
+    "7. Explain why solving by substitution is better than reading a graph when you need exact coordinates.",
+    "Application",
+    String.raw`8. A ball follows \(y=-0.05x^2+1.2x+1.5\) and lands on a ramp \(y=0.3x+1.5\) (metres). Where does it land?`,
+    String.raw`9. A company's revenue is \(R=-2x^2+60x\) and its cost is \(C=10x+200\) (x in hundreds of items). Find the break-even quantities.`,
+    String.raw`10. Sketch \(y=x^2-4\) and \(y=-x+2\) on the grid and solve the system algebraically. [[s|Grid for question 10]]`,
+  ] },
+];

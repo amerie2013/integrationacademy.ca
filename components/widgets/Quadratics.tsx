@@ -8,23 +8,23 @@ import { useState, type ReactNode } from "react";
 import { C, MathText, Readout, Row, Segmented, Slider, WidgetCard, btn } from "./kit";
 import { Plane, fr, r2, type View } from "./Systems";
 
-const sgn = (v: number, first = false) => (v < 0 ? `-${r2(-v)}` : first ? r2(v) : `+${r2(v)}`);
+export const sgn = (v: number, first = false) => (v < 0 ? `-${r2(-v)}` : first ? r2(v) : `+${r2(v)}`);
 /** y = ax² + bx + c as LaTeX (decimals allowed) */
-function stdForm(a: number, b: number, c: number) {
+export function stdForm(a: number, b: number, c: number) {
   const t: string[] = [];
   const add = (k: number, s: string) => { if (k === 0) return; const mag = Math.abs(k) === 1 && s ? "" : r2(Math.abs(k)); t.push(`${k < 0 ? "-" : t.length ? "+" : ""}${mag}${s}`); };
   add(a, "x^2"); add(b, "x"); add(c, "");
   return t.join("") || "0";
 }
 /** a(x − h)² + k as LaTeX */
-function vertexForm(a: number, h: number, k: number) {
+export function vertexForm(a: number, h: number, k: number) {
   const A = a === 1 ? "" : a === -1 ? "-" : r2(a);
   const inner = h === 0 ? "x" : `x${h > 0 ? "-" : "+"}${r2(Math.abs(h))}`;
   return `${A}(${inner})^2${k === 0 ? "" : sgn(k)}`;
 }
-function Curves({ view, label, step, fs, children }: { view: View; label: string; step: number; fs: { f: (x: number) => number; color: string; width?: number; dash?: string }[]; children?: (X: (x: number) => number, Y: (y: number) => number) => ReactNode }) {
+export function Curves({ view, label, step, stepY, fs, children }: { view: View; label: string; step: number; stepY?: number; fs: { f: (x: number) => number; color: string; width?: number; dash?: string }[]; children?: (X: (x: number) => number, Y: (y: number) => number) => ReactNode }) {
   return (
-    <Plane view={view} label={label} step={step}>
+    <Plane view={view} label={label} step={step} stepY={stepY}>
       {(X, Y) => (
         <>
           {fs.map((c, i) => {
@@ -42,7 +42,7 @@ function Curves({ view, label, step, fs, children }: { view: View; label: string
     </Plane>
   );
 }
-const dot = (X: (x: number) => number, Y: (y: number) => number, x: number, y: number, color: string, label?: string, key?: string | number) => (
+export const dot = (X: (x: number) => number, Y: (y: number) => number, x: number, y: number, color: string, label?: string, key?: string | number) => (
   <g key={key}><circle cx={X(x)} cy={Y(y)} r={6} fill={color} stroke="#fff" strokeWidth={2} />{label && <text x={X(x) + 8} y={Y(y) - 8} fontSize={13} fontWeight={700} fill={color} stroke="#fff" strokeWidth={3} paintOrder="stroke">{label}</text>}</g>
 );
 const V10: View = { xmin: -10, xmax: 10, ymin: -10, ymax: 10 };
