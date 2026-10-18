@@ -1,0 +1,118 @@
+// MPM2D chapter 6 assignments (homework): 10 questions each — Knowledge 1-3, Thinking 4-5, Communication 6-7, Application 8-10.
+// [[key|caption]] in a line is replaced by a figure (uploaded SVG) when published. Titles match the existing rows.
+// Figures show given information only. No bare $ signs.
+import { figDoc, polygon, rtDoc, rtADoc, sceneDoc, pairDoc } from "../bank/fig.mjs";
+
+const g = (a, b) => ({ seg: [[a, 0], [b, 0]], color: "gray" });
+const ns = (x, y) => ({ text: "not to scale", at: [x, y], size: 11, color: "gray" });
+
+export const ASSIGNMENTS = [
+  { code: "6.1", title: "Assignment 6.1 — Congruence & Similar Triangles", figs: {
+      pair: pairDoc([[0, 0], [8, 0], [2.4, 4.8]], 1.5, { sides: ["8", "7", "x"], names: ["A", "B", "C"] }, { sides: ["12", "y", "7.5"], names: ["D", "E", "F"] }),
+      nest: figDoc({ w: 320, items: [...polygon([[0, 0], [10, 0], [3, 7]], { names: ["B", "C", "A"] }), { seg: [[1.8, 4.2], [5.8, 4.2]], color: "red", width: 2.6 }, { text: "D", at: [1.0, 4.3], bold: true }, { text: "E", at: [6.6, 4.3], bold: true }, { text: "x", at: [1.6, 5.8], color: "blue", bold: true }, { text: "8", at: [0.3, 2.1], color: "blue" }, { text: "6", at: [3.8, 4.8], color: "red", bold: true }, { text: "14", at: [5, -0.8], color: "blue" }] }) }, lines: [
+    "Knowledge & Understanding",
+    "1. State the three conditions that prove triangles congruent and the three that prove them similar.",
+    "2. Are triangles with sides 5, 8, 10 and 7.5, 12, 15 similar? Justify with ratios.",
+    String.raw`3. \(\triangle ABC\sim\triangle DEF\), as shown. Find x and y. [[pair|Similar triangles for question 3]]`,
+    "Thinking",
+    String.raw`4. In the figure, \(DE\parallel BC\). Find x. [[nest|Nested triangles for question 4]]`,
+    "5. Two similar triangles have perimeters 30 cm and 45 cm. The sides of the smaller triangle are in the ratio 3 : 4 : 5. Find the sides of both triangles.",
+    "Communication",
+    "6. Explain the difference between congruent and similar triangles, and why AAA proves similarity but not congruence.",
+    "7. Explain how to write a similarity statement so that corresponding vertices match. Use an example.",
+    "Application",
+    "8. A photo 10 cm by 15 cm is enlarged so that its shorter side is 25 cm. Use similar figures to find the longer side, and explain why the corners still look the same.",
+    "9. A triangular sail has sides 3 m, 4 m and 5 m. A model of the sail has a longest side of 20 cm. Find the other sides of the model.",
+    "10. Find a real object or image that contains similar triangles (a roof truss, a bridge, a shadow). Sketch it and explain why the triangles are similar.",
+  ] },
+  { code: "6.2", title: "Assignment 6.2 — Solving Problems with Similar Triangles", figs: {
+      shadow: sceneDoc([g(-0.5, 16), ...polygon([[0, 0], [10, 0], [0, 8]], { fill: "green", color: "green", rightAt: [0], sides: ["24 m", "", "h"] }), ...polygon([[11.5, 0], [15.5, 0], [11.5, 3.2]], { fill: "blue", rightAt: [0], sides: ["2.5 m", "", "1.5 m"] }), ns(5, 8.7)], 400),
+      lamp: sceneDoc([g(-0.5, 9), { seg: [[0, 0], [0, 6]], color: "gray", width: 4 }, { seg: [[0, 6], [8.6, 0]], color: "amber" }, { seg: [[5.6, 0], [5.6, 2.09]], color: "blue", width: 4 }, { text: "5.4 m", at: [-1, 3], bold: true }, { text: "1.8 m", at: [4.7, 1.1], color: "blue", bold: true }, { text: "6 m", at: [2.8, -0.6] }, { text: "s", at: [7.1, -0.6], bold: true, color: "red" }, ns(4.5, 6.6)], 380) }, lines: [
+    "Knowledge & Understanding",
+    "1. A 1.5 m post casts a 2.5 m shadow when a tree casts a 24 m shadow. Find the tree's height. [[shadow|Shadows for question 1]]",
+    "2. A person whose eyes are 1.5 m high stands 2 m from a mirror on the ground and sees the top of a building 30 m beyond the mirror. Find the building's height.",
+    "3. On a 1 : 50 000 map, two lakes are 7.5 cm apart. How far apart are they in kilometres?",
+    "Thinking",
+    "4. A 1.8 m person stands 6 m from a 5.4 m lamp post. Find the length of the person's shadow. [[lamp|Lamp post for question 4]]",
+    "5. A 30 cm ruler held at arm's length (65 cm from the eye) just covers a building 260 m away. How tall is the building? Draw the similar triangles.",
+    "Communication",
+    "6. Explain why the sun's rays produce similar triangles for a person and a tree. What could make the method inaccurate?",
+    "7. In a mirror problem, explain why you must use the eye height and not the person's full height.",
+    "Application",
+    "8. To find the width of a river, a student marks similar right triangles on the bank: the large one has legs w (across) and 36 m, and the small one has matching legs 7.5 m and 12 m. Find w.",
+    "9. A ramp rises 1.5 m over a horizontal run of 9 m. A support post is needed every 1.5 m of run. Find the height of each post.",
+    "10. Plan a way to measure the height of your school using only a mirror, a measuring tape and a partner. List the measurements, the proportion you would use and two possible sources of error.",
+  ] },
+  { code: "6.3", title: "Assignment 6.3 — The Primary Trigonometric Ratios", figs: {
+      t1: rtDoc(15, 8, { adj: "15", opp: "8", hyp: "17", theta: "θ", other: "β" }),
+      two: figDoc({ w: 440, items: [...polygon([[0, 0], [4, 0], [4, 3]], { sides: ["4", "3", "5"], rightAt: [1], angles: [[0, "θ"]] }), ...polygon([[6, 0], [18, 0], [18, 9]], { sides: ["12", "9", "15"], rightAt: [1], angles: [[0, "θ"]], fill: "green", color: "green" })] }) }, lines: [
+    "Knowledge & Understanding",
+    String.raw`1. For the triangle shown, write \(\sin\theta\), \(\cos\theta\) and \(\tan\theta\), then \(\sin\beta\), \(\cos\beta\) and \(\tan\beta\). [[t1|Triangle for question 1]]`,
+    String.raw`2. Evaluate to four decimal places: \(\sin52^\circ\), \(\cos18^\circ\), \(\tan71^\circ\).`,
+    "3. A right triangle has legs 9 and 40. Find the hypotenuse and the three ratios for the angle opposite 9.",
+    "Thinking",
+    String.raw`4. For an acute angle, \(\sin\theta=\frac{20}{29}\). Find \(\cos\theta\) and \(\tan\theta\) as fractions.`,
+    String.raw`5. Explain, using the two similar triangles shown, why \(\tan\theta\) is the same in both. Then explain why this means \(\tan\theta\) depends only on \(\theta\). [[two|Similar right triangles for question 5]]`,
+    "Communication",
+    "6. Explain how to identify the opposite, adjacent and hypotenuse for a given angle, and what changes if you use the other acute angle.",
+    String.raw`7. Explain why \(\sin\theta\) and \(\cos\theta\) are less than 1 for acute angles, but \(\tan\theta\) can be greater than 1.`,
+    "Application",
+    String.raw`8. Make a table of \(\sin\theta\), \(\cos\theta\) and \(\tan\theta\) for \(\theta=15^\circ,30^\circ,45^\circ,60^\circ,75^\circ\). Describe two patterns you see.`,
+    String.raw`9. Show that \(\sin40^\circ=\cos50^\circ\) and explain why using a right triangle.`,
+    String.raw`10. A ramp has \(\tan\theta=\frac1{12}\). If the ramp rises 0.5 m, how long is its horizontal run? What is \(\sin\theta\) as a fraction?`,
+  ] },
+  { code: "6.4", title: "Assignment 6.4 — Finding Side Lengths", figs: {
+      a: rtADoc(42, { hyp: "16", opp: "x", adj: "y", theta: "42°" }),
+      b: rtADoc(33, { opp: "9", adj: "x", theta: "33°" }) }, lines: [
+    "Knowledge & Understanding",
+    "1. Find x and y in the triangle shown, to one decimal place. [[a|Triangle for question 1]]",
+    "2. Find x in the triangle shown. [[b|Triangle for question 2]]",
+    String.raw`3. The side adjacent to a \(57^\circ\) angle is 11. Find the opposite side and the hypotenuse.`,
+    "Thinking",
+    String.raw`4. The side opposite a \(64^\circ\) angle is 22. Find the hypotenuse, and explain why you divide rather than multiply.`,
+    String.raw`5. An isosceles triangle has equal sides of 8 cm and base angles of \(65^\circ\). Find its base and its height.`,
+    "Communication",
+    "6. Explain how to choose between sine, cosine and tangent when finding a side. Give an example of each.",
+    "7. A classmate's answer for a leg is longer than the hypotenuse. Explain how this shows an error and what the likely mistake is.",
+    "Application",
+    String.raw`8. A person whose eyes are 1.6 m high sees the top of a tree at an angle of elevation of \(31^\circ\) from 65 m away. Find the tree's height.`,
+    String.raw`9. A wheelchair ramp must rise 0.35 m at an angle of \(5^\circ\). How long must the ramp be?`,
+    String.raw`10. A 3.5 m ladder must reach a shelf at an angle of \(65^\circ\) with the floor. How far from the wall is its foot, and how high does it reach?`,
+  ] },
+  { code: "6.5", title: "Assignment 6.5 — Finding Angles", figs: {
+      a: rtDoc(11, 7, { adj: "11", opp: "7", theta: "θ" }),
+      b: rtDoc(9, Math.sqrt(115), { adj: "9", hyp: "14", theta: "θ" }) }, lines: [
+    "Knowledge & Understanding",
+    "1. Find θ in the triangle shown, to one decimal place. [[a|Triangle for question 1]]",
+    "2. Find θ in the triangle shown. [[b|Triangle for question 2]]",
+    String.raw`3. \(\sin\theta=0.65\). Find θ, then the other acute angle of the right triangle.`,
+    "Thinking",
+    "4. A 6 m ladder has its foot 1.5 m from a wall. Find the angle it makes with the ground. Safety guides recommend about 75°. Is it safe?",
+    String.raw`5. A roof rises 3 m over a horizontal run of 4.5 m. Find its pitch. A second roof is twice as high over twice the run — what is its pitch? Explain.`,
+    "Communication",
+    String.raw`6. Explain what \(\tan^{-1}\) means and why \(\tan^{-1}(2)\) is not the same as \(\frac{1}{\tan2}\).`,
+    "7. Explain how you can check an angle you found, using a second ratio or the side lengths.",
+    "Application",
+    String.raw`8. A road climbs 1 m for every 15 m of horizontal distance. Find its angle of inclination.`,
+    "9. A tower is braced by a cable from the top (2.1 m high) to a point on the ground 0.7 m from its base. Find the angle between the cable and the ground.",
+    "10. Measure (or estimate) the rise and run of a staircase at home or school and find its angle. Is it within the common range of 30° to 37°?",
+  ] },
+  { code: "6.6", title: "Assignment 6.6 — Solving Right Triangles & Applications", figs: {
+      two: sceneDoc([g(-1, 90), { seg: [[0, 0], [0, 45.9]], color: "green", width: 5 }, { seg: [[42.8, 0], [0, 45.9]], color: "red" }, { seg: [[82.8, 0], [0, 45.9]], color: "blue" }, { arc: [[0, 0], [42.8, 0], [0, 45.9]], label: "47°", color: "red" }, { arc: [[0, 0], [82.8, 0], [0, 45.9]], label: "29°", color: "blue" }, { text: "A", at: [42.8, -4], bold: true }, { text: "B", at: [82.8, -4], bold: true }, { text: "40 m", at: [62.8, -4] }, { text: "h", at: [-3, 23], bold: true, color: "green" }], 420),
+      dep: sceneDoc([g(-0.5, 12), { seg: [[0, 0], [0, 6]], color: "green", width: 5 }, { seg: [[0, 6], [12, 6]], color: "gray", dash: true }, { seg: [[0, 6], [5.5, 0]], color: "red" }, { seg: [[0, 6], [11, 0]], color: "blue" }, { dot: [5.5, 0], color: "red", r: 5 }, { dot: [11, 0], color: "blue", r: 5 }, { arc: [[12, 6], [0, 6], [5.5, 0]], label: "33°", color: "red", r: 1.6 }, { arc: [[12, 6], [0, 6], [11, 0]], label: "19°", color: "blue", r: 3 }, { text: "85 m", at: [-1.1, 3], bold: true, color: "green" }, ns(6, 6.8)], 380) }, lines: [
+    "Knowledge & Understanding",
+    String.raw`1. Solve the right triangle with hypotenuse 20 and an acute angle of \(36^\circ\).`,
+    "2. Solve the right triangle with legs 12 and 7.",
+    String.raw`3. From the top of a 120 m cliff, the angle of depression to a boat is \(14^\circ\). How far is the boat from the base of the cliff?`,
+    "Thinking",
+    "4. The angles of elevation to the top of a tower from A and B are shown, with B 40 m farther away. Find the tower's height. [[two|Two sightings for question 4]]",
+    "5. From an 85 m lighthouse, the angles of depression to two boats in line with it are shown. Find the distance between the boats if they are (a) on the same side (b) on opposite sides. [[dep|Lighthouse for question 5]]",
+    "Communication",
+    "6. Explain the difference between an angle of elevation and an angle of depression, and why they are equal for the same two points. Include a diagram.",
+    "7. Explain the strategy for a two-triangle problem where neither triangle can be solved alone.",
+    "Application",
+    String.raw`8. From 40 m away, the angle of elevation to the top of a building is \(46^\circ\) and to the top of a flagpole on its roof is \(51^\circ\). How long is the flagpole?`,
+    String.raw`9. A plane at 2500 m sees an airport at an angle of depression of \(12^\circ\). How far must it fly horizontally to be directly above the airport? At what angle should it descend in a straight line from its current position?`,
+    "10. Use a protractor-and-straw clinometer (or an app) to measure the angle of elevation to the top of a tall object, and its distance. Calculate its height and explain your sources of error.",
+  ] },
+];
