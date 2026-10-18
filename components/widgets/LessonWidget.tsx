@@ -27,6 +27,7 @@ import { QuadForms, RevenueLab, DiscriminantK, FamilyLab, TangentLab } from "./Q
 import { PowerLadder, RationalPower, GrowthCompare, ExpTransform, ExpModel } from "./Exponential";
 import { SpecialTriangles, TerminalArm, IdentityCheck, AmbiguousCase, CosineLaw, TowerLab } from "./Trig11";
 import { PeriodicReader, UnitWave, WheelLab, SinTransform, KeyPointMapper, FitSinusoid, ModelLab } from "./Sinusoidal";
+import { PowerLab, PolyFeatures, FactoredPoly, PowerTransform, SecantLab, TangentSlope } from "./PolyFunctions";
 
 // Registry of named lesson widgets. A lesson block { type: "widget", widget, props }
 // renders REGISTRY[widget] with its props. Keep names stable — they are stored in the DB.
@@ -149,6 +150,12 @@ const REGISTRY: Record<string, ComponentType<any>> = {
   keyPointMapper: KeyPointMapper,
   fitSinusoid: FitSinusoid,
   modelLab: ModelLab,
+  powerLab: PowerLab,
+  polyFeatures: PolyFeatures,
+  factoredPoly: FactoredPoly,
+  powerTransform: PowerTransform,
+  secantLab: SecantLab,
+  tangentSlope: TangentSlope,
 };
 
 export const WIDGET_NAMES = Object.keys(REGISTRY);
