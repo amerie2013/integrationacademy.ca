@@ -19,9 +19,12 @@ export type Shape =
   | { t: "text"; x: number; y: number; s: string; c: string; size: number; font?: string }
   | { t: "math"; x: number; y: number; latex: string; c: string; size: number }
   | { t: "image"; x: number; y: number; w: number; h: number; src: string; rot?: number }
-  | { t: "axes"; x: number; y: number; w: number; h: number } // coordinate plane to graph on
+  | { t: "axes"; x: number; y: number; w: number; h: number; range?: AxesRange } // coordinate plane to graph on
+
   | { t: "erase"; pts: Pt[]; w: number };
 export type Bg = "blank" | "grid" | "graph" | "dots" | "lined";
+/** "q1": -1..10 on both axes (first quadrant); "full": -10..10 on both axes. */
+export type AxesRange = "q1" | "full";
 
 /**
  * A saved board: an array of pages, plus which page is active (for live follow).
@@ -96,46 +99,66 @@ export function drawBg(ctx: CanvasRenderingContext2D, bg: Bg, w: number, h: numb
 const _imgCache = new Map<string, HTMLImageElement>();
 let _onImg: (() => void) | null = null;
 
-/** A coordinate plane: x/y axes with arrows, numbered ticks from -1 to 10 on
- * each axis, and x/y labels, to graph on by hand. Drawn inside [x,y,w,h] —
- * the origin sits 1/11 of the way in from the low end (not centered), so
- * that full -1..10 range fits both directions. */
-export function drawAxes(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number) {
-  const MIN = -1, MAX = 10, SPAN = MAX - MIN;
+/** A coordinate plane to graph on by hand, drawn inside [x,y,w,h]: x/y axes
+ * with arrows, a tick per unit, numbers and x/y labels.
+ *  - "q1" (default): -1..10 on each axis, the origin 1/11 of the way in from
+ *    the low end so the first quadrant gets the room.
+ *  - "full": -10..10 on each axis, origin centred, arrows at both ends, faint
+ *    unit grid, every second tick numbered so the labels don't crowd. */
+export function drawAxes(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, range: AxesRange = "q1") {
+  const full = range === "full";
+  const MIN = full ? -10 : -1, MAX = 10, SPAN = MAX - MIN;
   const toX = (v: number) => x + ((v - MIN) / SPAN) * w;
   const toY = (v: number) => y + h - ((v - MIN) / SPAN) * h;
   const cx = Math.round(toX(0)), cy = Math.round(toY(0));
+  const labelEvery = full ? 2 : 1;
   ctx.save();
+  if (full) {
+    // faint unit grid so points can be plotted accurately
+    ctx.strokeStyle = "#e2e8f0"; ctx.lineWidth = 1;
+    ctx.beginPath();
+    for (let v = MIN; v <= MAX; v++) {
+      if (v === 0) continue;
+      const px = Math.round(toX(v)) + 0.5, py = Math.round(toY(v)) + 0.5;
+      ctx.moveTo(px, y); ctx.lineTo(px, y + h); ctx.moveTo(x, py); ctx.lineTo(x + w, py);
+    }
+    ctx.stroke();
+  }
   // the two axis lines
   ctx.strokeStyle = "#334155"; ctx.fillStyle = "#334155"; ctx.lineWidth = 1.5;
   ctx.beginPath(); ctx.moveTo(x, cy); ctx.lineTo(x + w, cy); ctx.moveTo(cx, y + h); ctx.lineTo(cx, y); ctx.stroke();
-  // arrowheads: +x (right), +y (up)
+  // arrowheads: +x (right), +y (up) — and -x, -y too on the full plane
   const a = 6;
   ctx.beginPath();
   ctx.moveTo(x + w, cy); ctx.lineTo(x + w - a, cy - a * 0.7); ctx.moveTo(x + w, cy); ctx.lineTo(x + w - a, cy + a * 0.7);
   ctx.moveTo(cx, y); ctx.lineTo(cx - a * 0.7, y + a); ctx.moveTo(cx, y); ctx.lineTo(cx + a * 0.7, y + a);
+  if (full) {
+    ctx.moveTo(x, cy); ctx.lineTo(x + a, cy - a * 0.7); ctx.moveTo(x, cy); ctx.lineTo(x + a, cy + a * 0.7);
+    ctx.moveTo(cx, y + h); ctx.lineTo(cx - a * 0.7, y + h - a); ctx.moveTo(cx, y + h); ctx.lineTo(cx + a * 0.7, y + h - a);
+  }
   ctx.stroke();
 
-  // tick marks, -1..10 on each axis
+  // tick marks, one per unit (none at the ends, where the arrowheads are)
   ctx.strokeStyle = "#94a3b8"; ctx.lineWidth = 1;
   ctx.beginPath();
   for (let v = MIN; v <= MAX; v++) {
-    if (v === 0) continue; // the origin itself — no tick needed, just the "0" label below
+    if (v === 0 || (full && (v === MIN || v === MAX))) continue; // the origin itself — no tick needed, just the "0" label below
     const px = Math.round(toX(v)); ctx.moveTo(px, cy - 4); ctx.lineTo(px, cy + 4);
     const py = Math.round(toY(v)); ctx.moveTo(cx - 4, py); ctx.lineTo(cx + 4, py);
   }
   ctx.stroke();
   // tick numbers
+  const show = (v: number) => v !== 0 && v % labelEvery === 0 && !(full && (v === MIN || v === MAX));
   ctx.font = "11px Inter, system-ui, sans-serif"; ctx.fillStyle = "#64748b";
   ctx.textAlign = "center"; ctx.textBaseline = "top";
-  for (let v = MIN; v <= MAX; v++) { if (v !== 0) ctx.fillText(String(v), toX(v), cy + 6); }
+  for (let v = MIN; v <= MAX; v++) { if (show(v)) ctx.fillText(String(v), toX(v), cy + 6); }
   ctx.textAlign = "right"; ctx.textBaseline = "middle";
-  for (let v = MIN; v <= MAX; v++) { if (v !== 0) ctx.fillText(String(v), cx - 6, toY(v)); }
+  for (let v = MIN; v <= MAX; v++) { if (show(v)) ctx.fillText(String(v), cx - 6, toY(v)); }
   ctx.textAlign = "right"; ctx.textBaseline = "top";
   ctx.fillText("0", cx - 6, cy + 6);
 
-  // axis letter labels — "x" sits above its arrow (not below, where the "10"
-  // tick number already is) to avoid overlapping it.
+  // axis letter labels — "x" sits above its arrow (not below, where the last
+  // tick number is) to avoid overlapping it.
   ctx.font = "italic 13px Georgia, serif"; ctx.fillStyle = "#475569";
   ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
   ctx.fillText("x", x + w - 14, cy - 8);
@@ -175,7 +198,7 @@ export function drawShape(ctx: CanvasRenderingContext2D, s: Shape) {
     }
     return;
   }
-  if (s.t === "axes") { drawAxes(ctx, s.x, s.y, s.w, s.h); return; }
+  if (s.t === "axes") { drawAxes(ctx, s.x, s.y, s.w, s.h, s.range); return; }
   if (s.t === "text") {
     ctx.fillStyle = s.c;
     ctx.font = `${s.size}px ${textFont(s.font)}`;

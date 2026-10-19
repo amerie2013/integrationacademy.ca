@@ -20,6 +20,7 @@ const P = {
   image: <><rect width="18" height="18" x="3" y="3" rx="2" /><circle cx="9" cy="9" r="2" /><path d="m21 15-3.09-3.09a2 2 0 0 0-2.82 0L6 21" /></>,
   file: <><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" /><path d="M14 2v4a2 2 0 0 0 2 2h4" /><path d="M10 9H8" /><path d="M16 13H8" /><path d="M16 17H8" /></>,
   axes: <><path d="M6 21V3" /><path d="M3 18h18" /><path d="m4 5 2-2 2 2" /><path d="m19 16 2 2-2 2" /></>,
+  axesFull: <><path d="M12 3v18" /><path d="M3 12h18" /><path d="m10 5 2-2 2 2" /><path d="m19 10 2 2-2 2" /><path d="m10 19 2 2 2-2" /><path d="m5 10-2 2 2 2" /></>,
   chart: <><path d="M3 3v16a2 2 0 0 0 2 2h16" /><path d="m19 9-5 5-4-4-3 3" /></>,
   undo: <><path d="M9 14 4 9l5-5" /><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11" /></>,
   redo: <><path d="m15 14 5-5-5-5" /><path d="M20 9H9.5a5.5 5.5 0 0 0 0 11H13" /></>,

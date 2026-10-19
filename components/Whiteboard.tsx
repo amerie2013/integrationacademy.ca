@@ -5,8 +5,9 @@ import katex from "katex";
 import { supabase } from "../lib/supabase";
 import { MathField } from "./MathField";
 import { Icon, type IconName } from "./WhiteboardIcons";
-import { renderAll, fitView, textFont as fontFor, GRID, IDENTITY, type Pt, type Rect, type View, type Shape, type Bg, type BoardData } from "../lib/wbdraw";
+import { renderAll, fitView, textFont as fontFor, GRID, IDENTITY, type Pt, type Rect, type View, type Shape, type Bg, type BoardData, type AxesRange } from "../lib/wbdraw";
 import { listMine, getBoard, createBoard, saveBoard, subscribeBoard, type WB } from "../lib/whiteboards";
+import { renderPage, jpegsToPdf, canvasToJpeg, downloadBlob } from "../lib/wbexport";
 import { officeFileKind, renderSpreadsheetToDataUrl, renderWordToDataUrl, renderPdfToDataUrls } from "../lib/officeImport";
 
 type Tool = "select" | "hand" | "pen" | "highlight" | "line" | "arrow" | "rect" | "ellipse" | "text" | "math" | "eraseObj" | "eraseArea";
@@ -678,46 +679,36 @@ export function Whiteboard({ initialBoardId }: { initialBoardId?: string }) {
     if (!b || (b.x >= 0 && b.y >= 0 && b.x + b.w <= W && b.y + b.h <= H)) return { ...IDENTITY };
     return fitView({ x: b.x - 24, y: b.y - 24, w: b.w + 48, h: b.h + 48 }, W, H, 0, 1);
   }
-  function exportPng() {
+  async function exportPng() {
     setMenu(null);
-    const { w: W, h: H } = size(), pg = shapes(), k = 2;
-    const off = document.createElement("canvas"); off.width = Math.round(W * k); off.height = Math.round(H * k);
-    const ctx = off.getContext("2d")!; ctx.setTransform(k, 0, 0, k, 0, 0);
-    renderAll(ctx, pg, bgRef.current, W, H, undefined, exportViewFor(pg, W, H));
-    const a = document.createElement("a"); a.download = (title || "whiteboard") + ".png"; a.href = off.toDataURL("image/png"); a.click();
+    const { w: W, h: H } = size(), pg = shapes();
+    flash("Preparing image…", "info", 0);
+    try {
+      const c = await renderPage(pg, bgRef.current, W, H, exportViewFor(pg, W, H), 2);
+      const blob = await new Promise<Blob | null>((res) => c.toBlob(res, "image/png"));
+      if (!blob) throw new Error("empty");
+      downloadBlob(blob, (title || "whiteboard") + ".png");
+      flash("PNG downloaded");
+    } catch { flash("Couldn't create the image", "err", 3500); }
   }
-  // Export ALL pages to a PDF via a print window: each page = its canvas image (ink/text)
-  // + KaTeX equation overlays, so equations are included. User picks "Save as PDF".
-  function exportPdf() {
+  // Export ALL pages as a real PDF file (one page each, equations included),
+  // downloaded directly — no print dialog. Each PDF page takes the board's
+  // aspect ratio (longest side 280 mm), so it's a 1:1 capture of the board.
+  async function exportPdf() {
     setMenu(null);
     const { w: W, h: H } = size();
-    // Match the PDF page to what's on screen: the page takes the board's exact
-    // aspect ratio (longest side = 280 mm) so the export is a 1:1 capture of the
-    // board — nothing cropped, nothing letter-boxed.
-    const LONG = 280; // mm
-    const pageWmm = W >= H ? LONG : (LONG * W) / H;
-    const pageHmm = W >= H ? (LONG * H) / W : LONG;
-    const scale = ((pageWmm / 25.4) * 96) / W; // board px -> page px so the inner fills the page exactly
-    let css = "";
-    for (const sh of Array.from(document.styleSheets)) { try { for (const r of Array.from((sh as CSSStyleSheet).cssRules)) css += r.cssText + "\n"; } catch {} }
-    const pagesHtml = pagesRef.current.map((pg) => {
-      const v = exportViewFor(pg, W, H);
-      const off = document.createElement("canvas");
-      off.width = Math.round(W * dpr.current); off.height = Math.round(H * dpr.current);
-      const ctx = off.getContext("2d")!; ctx.setTransform(dpr.current, 0, 0, dpr.current, 0, 0);
-      renderAll(ctx, pg, bgRef.current, W, H, undefined, v);
-      const img = off.toDataURL("image/png");
-      const math = pg.filter((s): s is MathShape => s.t === "math").map((m) => `<div style="position:absolute;left:${m.x * v.z + v.x}px;top:${m.y * v.z + v.y}px;color:${m.c};font-size:${m.size * v.z}px;line-height:1;white-space:nowrap;">${katexHtml(m.latex)}</div>`).join("");
-      return `<div class="pg"><div class="inner" style="width:${W}px;height:${H}px;transform:scale(${scale});"><img src="${img}" style="width:${W}px;height:${H}px;display:block;"/>${math}</div></div>`;
-    }).join("");
-    const html = `<!doctype html><html><head><meta charset="utf-8"><base href="${location.origin}/"><title>${title || "Whiteboard"}</title><style>${css}
-      @page{ size: ${pageWmm.toFixed(1)}mm ${pageHmm.toFixed(1)}mm; margin: 0; } *{ box-sizing:border-box; } body{ margin:0; background:#fff; }
-      .pg{ width:${pageWmm.toFixed(1)}mm; height:${pageHmm.toFixed(1)}mm; overflow:hidden; page-break-after:always; }
-      .inner{ transform-origin:top left; position:relative; }
-    </style></head><body>${pagesHtml}<script>window.onload=function(){setTimeout(function(){window.print();},350);};<\/script></body></html>`;
-    const w = window.open("", "_blank");
-    if (!w) { flash("Allow pop-ups to export a PDF", "err", 3500); return; }
-    w.document.open(); w.document.write(html); w.document.close();
+    const LONG = (280 / 25.4) * 72; // pt
+    const pageW = W >= H ? LONG : (LONG * W) / H, pageH = W >= H ? (LONG * H) / W : LONG;
+    flash("Preparing PDF…", "info", 0);
+    try {
+      const pages = [];
+      for (const pg of pagesRef.current) {
+        const c = await renderPage(pg, bgRef.current, W, H, exportViewFor(pg, W, H), 2);
+        pages.push({ jpeg: canvasToJpeg(c, 0.92), w: c.width, h: c.height });
+      }
+      downloadBlob(jpegsToPdf(pages, pageW, pageH), (title || "whiteboard") + ".pdf");
+      flash(`PDF downloaded (${pages.length} page${pages.length === 1 ? "" : "s"})`);
+    } catch { flash("Couldn't create the PDF", "err", 3500); }
   }
   function fullscreen() { if (!document.fullscreenElement) rootRef.current?.requestFullscreen?.(); else document.exitFullscreen?.(); }
 
@@ -802,10 +793,11 @@ export function Whiteboard({ initialBoardId }: { initialBoardId?: string }) {
     const f = e.target.files?.[0]; if (f) insertOfficeFile(f); e.currentTarget.value = "";
   }
   // Drop a coordinate plane on the board to graph on by hand (no calculator needed).
-  function insertAxes() {
-    const vr = visibleRect(), c = snapPt(viewCenter());
-    const w = Math.min(360 / viewRef.current.z, vr.w * 0.6), h = Math.min(300 / viewRef.current.z, vr.h * 0.6);
-    commit([...shapes(), { t: "axes", x: c.x - w / 2, y: c.y - h / 2, w, h }]);
+  function insertAxes(range: AxesRange) {
+    const vr = visibleRect(), c = snapPt(viewCenter()), z = viewRef.current.z;
+    // the -10..10 plane is square with room for 20 units; the first-quadrant one keeps its original size
+    const w = Math.min((range === "full" ? 420 : 360) / z, vr.w * 0.6), h = range === "full" ? Math.min(w, vr.h * 0.7) : Math.min(300 / z, vr.h * 0.6);
+    commit([...shapes(), { t: "axes", x: c.x - w / 2, y: c.y - h / 2, w, h, range }]);
     setTool("select"); setSel([shapes().length - 1]);
     flash("Axes added — draw your graph on it");
   }
@@ -1063,7 +1055,7 @@ export function Whiteboard({ initialBoardId }: { initialBoardId?: string }) {
                 <div style={{ position: "fixed", inset: 0, zIndex: 70 }} onClick={() => setMenu(null)} />
                 <div className="wb-panel wb-menu" role="menu">
                   <button type="button" role="menuitem" onClick={exportPdf}><strong>PDF</strong><span>All pages, with equations</span></button>
-                  <button type="button" role="menuitem" onClick={exportPng}><strong>PNG image</strong><span>Current page (ink, text and images)</span></button>
+                  <button type="button" role="menuitem" onClick={exportPng}><strong>PNG image</strong><span>Current page</span></button>
                 </div>
               </>
             )}
@@ -1239,7 +1231,8 @@ export function Whiteboard({ initialBoardId }: { initialBoardId?: string }) {
                 <div className="wb-panel wb-menu wb-menu-side" role="menu">
                   <button type="button" role="menuitem" onClick={() => { setMenu(null); fileInputRef.current?.click(); }}><Icon name="image" /><span><strong>Image</strong><span>From a file — or paste with Ctrl+V</span></span></button>
                   <button type="button" role="menuitem" onClick={() => { setMenu(null); officeFileInputRef.current?.click(); }}><Icon name="file" /><span><strong>PDF, Word or Excel</strong><span>Added as pages you can write on</span></span></button>
-                  <button type="button" role="menuitem" onClick={() => { setMenu(null); insertAxes(); }}><Icon name="axes" /><span><strong>Coordinate axes</strong><span>A plane to sketch graphs by hand</span></span></button>
+                  <button type="button" role="menuitem" onClick={() => { setMenu(null); insertAxes("q1"); }}><Icon name="axes" /><span><strong>Axes: first quadrant</strong><span>x and y from −1 to 10</span></span></button>
+                  <button type="button" role="menuitem" onClick={() => { setMenu(null); insertAxes("full"); }}><Icon name="axesFull" /><span><strong>Axes: four quadrants</strong><span>x and y from −10 to 10, with a grid</span></span></button>
                   <button type="button" role="menuitem" onClick={() => { setMenu(null); setShowGraph((s) => !s); }}><Icon name="chart" /><span><strong>Graphing calculator</strong><span>Plot functions, then add the graph</span></span></button>
                 </div>
               </>
