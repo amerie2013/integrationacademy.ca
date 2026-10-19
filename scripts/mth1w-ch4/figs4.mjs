@@ -31,7 +31,7 @@ export function planeSvg({ view = { xmin: -8, xmax: 8, ymin: -8, ymax: 8 }, line
   for (const v of vlines) clip += `<line x1="${X(v.x)}" y1="${PT}" x2="${X(v.x)}" y2="${PT + Ht}" stroke="${COL[v.color ?? "red"]}" stroke-width="2.6"${v.dash ? ` stroke-dasharray="8 6"` : ""}/>`;
   for (const c of curves) {
     let d = "", pen = false;
-    for (let i = 0; i <= 240; i++) { const x = (c.a ?? xmin) + (((c.b ?? xmax) - (c.a ?? xmin)) * i) / 240, y = c.f(x); if (!Number.isFinite(y) || y > ymax * 3 + 50 || y < ymin * 3 - 50) { pen = false; continue; } d += `${pen ? "L" : "M"}${X(x).toFixed(1)},${Y(y).toFixed(1)} `; pen = true; }
+    for (let i = 0; i <= 240; i++) { const x = (c.a ?? xmin) + (((c.b ?? xmax) - (c.a ?? xmin)) * i) / 240, y = c.f(x); if (!Number.isFinite(y) || y > ymax + 3 * (ymax - ymin) || y < ymin - 3 * (ymax - ymin)) { pen = false; continue; } d += `${pen ? "L" : "M"}${X(x).toFixed(1)},${Y(y).toFixed(1)} `; pen = true; }
     clip += `<path d="${d}" fill="none" stroke="${COL[c.color ?? "violet"]}" stroke-width="2.6"/>`;
   }
   for (const g of segs) clip += `<polyline points="${g.pts.map(([x, y]) => `${X(x)},${Y(y)}`).join(" ")}" fill="none" stroke="${COL[g.color ?? "blue"]}" stroke-width="2.8"/>`;

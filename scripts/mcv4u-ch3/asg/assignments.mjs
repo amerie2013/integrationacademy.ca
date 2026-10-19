@@ -1,0 +1,143 @@
+// MCV4U chapter 3 assignments (homework): 12 questions each — Knowledge 1-3, Thinking 4-5, Communication 6-7,
+// Application 8-10, Hard Level 11-12. [[key|caption]] in a line is replaced by a figure (uploaded SVG) when published.
+// Titles are the renumbered chapter-3 titles (publish.mjs matches the existing rows by their old titles; 3.4 is new).
+import { planeDoc, P } from "../bank/fig.mjs";
+
+const S = String.raw;
+const grid = (view, step) => planeDoc({ view, ...(step ? { step } : {}) });
+/** rational curve split at its vertical asymptotes */
+const rat = (f, poles, v, color = "violet") => {
+  const cuts = [v.xmin, ...poles, v.xmax];
+  return cuts.slice(0, -1).map((a, i) => ({ f, a: i === 0 ? a : a + 0.004, b: i === cuts.length - 2 ? cuts[i + 1] : cuts[i + 1] - 0.004, color }));
+};
+const VR = { xmin: -6, xmax: 5, ymin: -6, ymax: 10 };
+
+export const ASSIGNMENTS = [
+  { code: "3.1", title: "Assignment 3.1 — Increasing and Decreasing Functions", figs: {
+      fp: planeDoc({ view: { xmin: -4, xmax: 5, ymin: -8, ymax: 8 }, curves: [{ f: (x) => x * x - x - 6, color: "blue" }], step: { x: 1, y: 1 }, ylabel: "f′" }),
+      g: grid({ xmin: -4, xmax: 5, ymin: -5, ymax: 6 }, { x: 1, y: 1 }) }, lines: [
+    "Knowledge & Understanding",
+    S`1. Find the intervals of increase and decrease of \(f(x)=2x^3+9x^2-24x\).`,
+    S`2. \(f'(x)=(x+3)(x-2)^2\). Make a sign chart and state where \(f\) is increasing.`,
+    S`3. The graph of \(f'\) is shown. Where is \(f\) increasing, and where is it decreasing? [[fp|Graph of f′ for question 3]]`,
+    "Thinking",
+    S`4. Show that \(f(x)=\dfrac{x^2-4}{x+1}\) is increasing on each part of its domain.`,
+    S`5. Find all values of \(k\) for which \(f(x)=2x^3-6x^2+kx\) is increasing for every \(x\).`,
+    "Communication",
+    "6. Explain why, for a polynomial, the sign of f′ can change only at a zero of f′. Why is it enough to test one value in each interval?",
+    S`7. Sketch a continuous function with \(f(0)=2\), \(f'\gt0\) for \(x\lt-2\), \(f'\lt0\) on \((-2,3)\), and \(f'\gt0\) for \(x\gt3\). Explain your reasoning. [[g|Grid for question 7]]`,
+    "Application",
+    S`8. A greenhouse temperature is \(T(t)=-0.1t^3+1.2t^2+18\) °C for \(0\le t\le12\) h. When is it rising and when falling?`,
+    S`9. The average cost of producing \(x\) items is \(A(x)=\dfrac{x}{10}+\dfrac{250}{x}\) dollars. For which production levels is the average cost decreasing?`,
+    S`10. A population is \(P(t)=\dfrac{1000(t+2)}{t^2+4}\). Find when it is growing and when it is shrinking, for \(t\ge0\).`,
+    "Hard Level",
+    S`11. Use the derivative to show that \(f(x)=x^3+x-5\) is always increasing, and explain why \(f(x)=0\) has exactly one real solution.`,
+    S`12. Find the intervals of increase and decrease of \(f(x)=x^{1/3}(x-7)^2\).`,
+  ] },
+  { code: "3.2", title: "Assignment 3.2 — Maxima and Minima", figs: {
+      e: planeDoc({ view: { xmin: -1.5, xmax: 3.5, ymin: -1, ymax: 6 }, curves: [{ f: (x) => -(x ** 3) + 3 * x * x + 1, a: -1, b: 3, color: "violet" }], points: [P(-1, 5), P(0, 1), P(2, 5), P(3, 1)], step: { x: 0.5, y: 1 } }),
+      c: planeDoc({ view: { xmin: -2, xmax: 12, ymin: -6, ymax: 3 }, curves: [{ f: (x) => x - 3 * Math.cbrt(x * x), color: "violet" }], step: { x: 1, y: 1 } }) }, lines: [
+    "Knowledge & Understanding",
+    S`1. Find and classify the local extrema of \(f(x)=x^3+6x^2+9x+3\).`,
+    S`2. Find the absolute extrema of \(f(x)=x^2-6x+4\) on \([0,5]\).`,
+    S`3. The graph of \(f(x)=-x^3+3x^2+1\) on \([-1,3]\) is shown. State its local and absolute extrema. [[e|Graph for question 3]]`,
+    "Thinking",
+    S`4. Find the absolute extrema of \(f(x)=x^4-4x^3+4\) on \([-1,4]\).`,
+    S`5. Find and classify the critical points of \(f(x)=x-3x^{2/3}\), including where \(f'\) does not exist. [[c|Graph for question 5]]`,
+    "Communication",
+    "6. Explain the difference between a local maximum and an absolute maximum. Sketch a function on [0, 5] where they occur at different places.",
+    S`7. Explain why \(f(x)=x^3\) has a critical number but no extremum, using the first derivative test.`,
+    "Application",
+    S`8. A theatre's profit is \(P(x)=-0.5x^2+40x-300\) dollars for \(0\le x\le60\) shows. Find the maximum profit.`,
+    S`9. A river level is \(h(t)=t^3-18t^2+81t+10\) cm for \(0\le t\le12\) h. Find the highest and lowest levels and when they occur.`,
+    S`10. A ball's height is \(h(t)=-4.9t^2+29.4t+1.5\) m. Find its maximum height.`,
+    "Hard Level",
+    S`11. Find \(a\), \(b\) and \(c\) so that \(f(x)=x^3+ax^2+bx+c\) has a local maximum at \((-1,10)\) and a local minimum at \(x=3\). Find the local minimum value.`,
+    S`12. Find the absolute extrema of \(f(x)=\dfrac{x}{x^2+x+1}\) on \([-2,2]\).`,
+  ] },
+  { code: "3.3", title: "Assignment 3.3 — Concavity and the Second Derivative Test", figs: {
+      c: planeDoc({ view: { xmin: -3.2, xmax: 3.2, ymin: -5, ymax: 4 }, curves: [{ f: (x) => (x ** 4) / 4 - 2 * x * x, color: "violet" }], step: { x: 0.5, y: 1 } }),
+      w: grid({ xmin: 0, xmax: 7, ymin: 0, ymax: 120 }, { x: 1, y: 10 }) }, lines: [
+    "Knowledge & Understanding",
+    S`1. Find the intervals of concavity and the inflection point of \(f(x)=x^3-12x^2+20x\).`,
+    S`2. Find \(f''(x)\) for \(f(x)=x^5-3x^3+x\), and evaluate \(f''(-1)\).`,
+    S`3. The graph of \(f(x)=\frac14x^4-2x^2\) is shown. Estimate where it is concave up and where its inflection points are, then check with \(f''\). [[c|Graph for question 3]]`,
+    "Thinking",
+    S`4. Use the second derivative test to classify the critical points of \(f(x)=-x^4+8x^2\).`,
+    S`5. Find the inflection points of \(f(x)=x^{7/3}-7x^{1/3}\).`,
+    "Communication",
+    "6. Explain, with a sketch, why a concave up graph lies above its tangent lines.",
+    S`7. Explain why the second derivative test gives no answer for \(f(x)=x^4\) at \(x=0\), and how to classify the point instead.`,
+    "Application",
+    S`8. A student learns \(W(t)=-2t^3+18t^2\) words after \(t\) hours of study (\(0\le t\le6\)). When is the rate of learning greatest? Sketch \(W\). [[w|Grid for question 8]]`,
+    S`9. A car's position is \(s(t)=t^3-12t^2+36t\) m. When is the graph of \(s\) concave down, and what does that say about the car's velocity?`,
+    S`10. The cost of producing \(x\) units is \(C(x)=x^3-24x^2+200x+500\). Find the production level with the lowest marginal cost.`,
+    "Hard Level",
+    S`11. Find \(a\) and \(b\) so that \(f(x)=ax^4+bx^3\) has an inflection point at \((1,-1)\).`,
+    S`12. Prove that the inflection point of any cubic with two critical numbers lies exactly halfway (in x) between the local maximum and the local minimum.`,
+  ] },
+  { code: "3.4", title: "Assignment 3.4 — Simple Rational Functions", figs: {
+      r: planeDoc({ view: VR, curves: rat((x) => (2 * x - 4) / (x + 1), [-1], VR), vlines: [{ x: -1, color: "red", dash: true }], lines: [{ m: 0, b: 2, color: "red", dash: true }], step: { x: 1, y: 1 } }),
+      s: grid({ xmin: -6, xmax: 6, ymin: -5, ymax: 6 }, { x: 1, y: 1 }) }, lines: [
+    "Knowledge & Understanding",
+    S`1. Find the asymptotes and intercepts of \(f(x)=\dfrac{4x-2}{x+3}\).`,
+    S`2. Find the vertical asymptote, the hole and the horizontal asymptote of \(f(x)=\dfrac{x^2-x-6}{x^2-9}\).`,
+    S`3. Read the asymptotes and intercepts from the graph shown, and suggest an equation for it. [[r|Graph for question 3]]`,
+    "Thinking",
+    S`4. Find the oblique asymptote and the local extrema of \(f(x)=\dfrac{x^2+1}{x-2}\) (2 decimals).`,
+    S`5. Describe the behaviour of \(f(x)=\dfrac{x+5}{x^2-4}\) on each side of each vertical asymptote.`,
+    "Communication",
+    "6. Explain how comparing the degrees of the numerator and denominator determines the end behaviour of a rational function. Give one example of each case.",
+    S`7. Explain the difference between the graphs of \(\dfrac{x^2-1}{x-1}\) and \(\dfrac{1}{x-1}\) at \(x=1\).`,
+    "Application",
+    S`8. Producing \(x\) items costs \(1200+6x\) dollars. Describe the average cost \(A(x)=\dfrac{1200+6x}{x}\), and find when it drops below 10 dollars per item.`,
+    S`9. A drug's concentration is \(C(t)=\dfrac{20t}{t^2+16}\) mg/L. Find the highest concentration and describe the long-run behaviour.`,
+    S`10. A population is \(P(t)=\dfrac{5000t+3000}{t+5}\). Find its long-run value and \(P'(5)\).`,
+    "Hard Level",
+    S`11. Sketch \(f(x)=\dfrac{x^2-1}{x^2-4}\) with its asymptotes, intercepts, extremum and concavity. [[s|Grid for question 11]]`,
+    S`12. Write a rational function with vertical asymptotes \(x=\pm1\), horizontal asymptote \(y=0\), and \(f(0)=2\). Sketch it.`,
+  ] },
+  { code: "3.5", title: "Assignment 3.5 — Putting It All Together", figs: {
+      fp: planeDoc({ view: { xmin: -3.5, xmax: 3.5, ymin: -5, ymax: 6 }, curves: [{ f: (x) => x * x - 4, color: "blue" }], step: { x: 1, y: 1 }, ylabel: "f′" }),
+      m: planeDoc({ view: { xmin: -1, xmax: 5, ymin: -6, ymax: 10 }, curves: [{ f: (x) => x ** 3 - 6 * x * x + 8 * x, color: "violet" }, { f: (x) => 3 * x * x - 12 * x + 8, color: "blue" }, { f: (x) => 6 * x - 12, color: "amber" }], step: { x: 1, y: 2 } }),
+      g: grid({ xmin: -5, xmax: 7, ymin: -5, ymax: 7 }, { x: 1, y: 1 }) }, lines: [
+    "Knowledge & Understanding",
+    S`1. Describe the end behaviour and intercepts of \(f(x)=-x(x+2)^2(x-3)\), noting where the graph touches and where it crosses the x-axis.`,
+    S`2. Classify each function as even, odd or neither: \(x^5-3x^3\), \(x^4+\dfrac1{x^2}\), \(x^3+1\).`,
+    S`3. The graph of \(f'\) is shown. Find the x-values of the local extrema and of the inflection point of \(f\). [[fp|Graph of f′ for question 3]]`,
+    "Thinking",
+    S`4. Sketch \(f(x)=-2x^3+9x^2-12x+6\), labelling the extrema and the inflection point.`,
+    S`5. Sketch \(f(x)=(x^2-2)^2\), labelling the extrema and the inflection points.`,
+    "Communication",
+    "6. Describe the curve-sketching algorithm in your own words and explain why the asymptotes should be found before the critical numbers.",
+    S`7. The graphs of \(f\), \(f'\) and \(f''\) are shown in violet, blue and amber. Explain how each pair of graphs is related. [[m|Graphs for question 7]]`,
+    "Application",
+    S`8. The depth of water in a reservoir is \(d(t)=t^3-15t^2+72t+10\) cm for \(0\le t\le10\) days. Sketch \(d\) and describe when the level rises and falls.`,
+    S`9. A drug concentration is \(C(t)=\dfrac{6t}{t^2+25}\). Sketch it for \(t\ge0\), labelling the maximum and the inflection point.`,
+    S`10. Sketch a function with a vertical asymptote \(x=2\), horizontal asymptote \(y=-1\), \(f'\gt0\) everywhere it is defined, and \(f(0)=0\). [[g|Grid for question 10]]`,
+    "Hard Level",
+    S`11. Sketch \(f(x)=x^{2/3}(6-x)\), including the cusp and the local maximum.`,
+    S`12. Sketch \(f(x)=\dfrac{x^3}{x^2+3}\): show it is always increasing, find its oblique asymptote and its inflection points.`,
+  ] },
+  { code: "3.6", title: "Assignment 3.6 — Optimization Problems", figs: {
+      a: planeDoc({ view: { xmin: 0, xmax: 52, ymin: 0, ymax: 1400 }, curves: [{ f: (x) => x * (100 - 2 * x), a: 0, b: 50, color: "violet" }], step: { x: 5, y: 100 }, xlabel: "x (m)", ylabel: "A (m²)" }),
+      r: grid({ xmin: 0, xmax: 1300, ymin: 0, ymax: 400 }, { x: 100, y: 50 }) }, lines: [
+    "Knowledge & Understanding",
+    "1. Two numbers add to 24. Find the largest possible product.",
+    "2. A rectangle has area 400 m². Find the smallest possible perimeter.",
+    S`3. The area of a pen is \(A(x)=x(100-2x)\) (graph shown). Estimate the best x from the graph, then find it exactly. [[a|Graph for question 3]]`,
+    "Thinking",
+    "4. A closed box with a square base must hold 1000 cm³. Find the dimensions that use the least material.",
+    S`5. Find the point on the curve \(y=2x^2\) closest to \((9,0)\).`,
+    "Communication",
+    "6. Solve a fencing problem of your choice, labelling each step of the optimization method and explaining why it is needed.",
+    "7. Explain why it is valid to minimize the square of a distance instead of the distance itself.",
+    "Application",
+    "8. A can must hold 330 mL. Find the radius and height that use the least metal.",
+    "9. A farmer has 2400 m of fence to enclose a field along a river, divided into three plots by fences perpendicular to the river. Find the largest total area.",
+    "10. A bakery sells 600 loaves a day at 3 dollars; each 10-cent increase loses 15 sales. What price maximizes revenue?",
+    "Hard Level",
+    S`11. A cable runs from a power station on one bank of a 300 m wide river to a factory on the other bank, 1200 m downstream. Cable costs 50 dollars per metre underwater and 30 dollars per metre on land. Find the cheapest route. [[r|Grid for a diagram]]`,
+    "12. Find the largest volume of a cylinder inscribed in a cone of radius 5 cm and height 15 cm.",
+  ] },
+];

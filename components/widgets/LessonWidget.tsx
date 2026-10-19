@@ -34,6 +34,7 @@ import { SyntheticDivide, FactorFinder, RootSolver, PolyFamily, InequalityGraph,
 import { ReciprocalLinear, ReciprocalQuadratic, RationalLinear, RationalSolver, RationalModel } from "./Rational";
 import { RateReader, DifferenceQuotient, LimitExplorer, ContinuityLab, DerivativeBuilder } from "./Calculus1";
 import { PowerRuleLab, ProductRuleLab, MotionLab, ChainRuleLab, QuotientLab, MarginalCost } from "./Calculus2";
+import { MonotonicityLab, ExtremaLab, ConcavityLab, RationalSketch, CurveSketcher, OptimizationLab } from "./Calculus3";
 
 // Registry of named lesson widgets. A lesson block { type: "widget", widget, props }
 // renders REGISTRY[widget] with its props. Keep names stable — they are stored in the DB.
@@ -197,6 +198,12 @@ const REGISTRY: Record<string, ComponentType<any>> = {
   chainRuleLab: ChainRuleLab,
   quotientLab: QuotientLab,
   marginalCost: MarginalCost,
+  monotonicityLab: MonotonicityLab,
+  extremaLab: ExtremaLab,
+  concavityLab: ConcavityLab,
+  rationalSketch: RationalSketch,
+  curveSketcher: CurveSketcher,
+  optimizationLab: OptimizationLab,
 };
 
 export const WIDGET_NAMES = Object.keys(REGISTRY);
