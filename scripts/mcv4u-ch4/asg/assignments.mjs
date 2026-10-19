@@ -1,0 +1,95 @@
+// MCV4U chapter 4 assignments (homework): 12 questions each — Knowledge 1-3, Thinking 4-5, Communication 6-7,
+// Application 8-10, Hard Level 11-12. [[key|caption]] in a line is replaced by a figure (uploaded SVG) when published.
+// 4.2 matches the existing row by its old title; 4.1, 4.3 and 4.4 are new rows with fixed ids (publish.mjs NEWID).
+import { planeDoc, P } from "../bank/fig.mjs";
+
+const S = String.raw;
+const PI = Math.PI;
+const grid = (view, step) => planeDoc({ view, ...(step ? { step } : {}) });
+
+export const ASSIGNMENTS = [
+  { code: "4.1", title: "Assignment 4.1 — Instantaneous Rates of Change of Sinusoidal Functions", figs: {
+      s: planeDoc({ view: { xmin: -0.2, xmax: 6.6, ymin: -1.5, ymax: 1.5 }, curves: [{ f: Math.sin, a: 0, b: 2 * PI, color: "violet" }], step: { x: 0.5, y: 0.5 } }),
+      g: grid({ xmin: -0.2, xmax: 6.6, ymin: -1.5, ymax: 1.5 }, { x: 0.5, y: 0.5 }) }, lines: [
+    "Knowledge & Understanding",
+    S`1. State the slope of \(y=\sin x\) at \(x=0,\ \frac\pi2,\ \pi,\ \frac{3\pi}2,\ 2\pi\), and explain each value from the shape of the graph.`,
+    S`2. Estimate the slope of \(y=\cos x\) at \(x=\frac\pi4\) using \(h=0.001\), and compare it with \(-\sin\frac\pi4\).`,
+    S`3. Using the graph of \(y=\sin x\), plot its slopes at multiples of \(\frac\pi4\) on the empty grid and join them. [[s|Graph of y = sin x]] [[g|Grid for your slope graph]]`,
+    "Thinking",
+    S`4. Evaluate \(\frac{\sin2h}{h}\) for \(h=0.1,\ 0.01,\ 0.001\) and state the limit. Explain the result using \(\frac{\sin u}{u}\to1\).`,
+    S`5. Find all \(x\) in \([0,2\pi]\) where the tangent to \(y=\sin x\) is parallel to the line \(y=-\frac{\sqrt3}{2}x\).`,
+    "Communication",
+    "6. Explain why calculus with trigonometric functions uses radians. What would the slope of y = sin x be at x = 0 in degrees?",
+    "7. Explain, using the graph of y = sin x, why the curve is steepest where it crosses its midline and flat at its peaks and troughs.",
+    "Application",
+    S`8. The depth of a river mouth is \(d(t)=1.2\sin\left(\frac{\pi}{6.2}t\right)+3.5\) m. Find the average rate of change over the first 3.1 h and estimate the instantaneous rate at \(t=0\).`,
+    S`9. A rider's height is \(h(t)=12-10\cos\left(\frac{\pi}{20}t\right)\) m. Use a difference quotient to estimate the vertical speed at \(t=10\) s.`,
+    S`10. Daylight in a northern city is \(D(t)=12+2.8\sin\left(\frac{2\pi}{365}(t-80)\right)\) hours. Estimate the rate of change on day 80 and on day 172, and explain the difference.`,
+    "Hard Level",
+    S`11. Use \(\sin(x+h)=\sin x\cos h+\cos x\sin h\) and the two key limits to prove that the slope of \(\sin x\) is \(\cos x\).`,
+    S`12. Evaluate \(\frac{\sin x-x}{x^3}\) for \(x=0.1,\ 0.01\) and estimate its limit as \(x\to0\).`,
+  ] },
+  { code: "4.2", title: "Assignment 4.2 — Derivatives of the Sine and Cosine Functions", figs: {
+      c: planeDoc({ view: { xmin: -2 * PI, xmax: 2 * PI, ymin: -1.5, ymax: 1.5 }, curves: [{ f: Math.cos, color: "violet" }, { f: (x) => -Math.sin(x), color: "blue" }], step: { x: 1, y: 0.5 } }),
+      g: grid({ xmin: 0, xmax: 6.6, ymin: -1, ymax: 8 }, { x: 0.5, y: 1 }) }, lines: [
+    "Knowledge & Understanding",
+    S`1. Differentiate \(y=5\sin x-4\cos x+\pi\).`,
+    S`2. Differentiate \(y=\sqrt x\cos x\).`,
+    S`3. Find the equation of the tangent to \(y=\sin x+\cos x\) at \(x=\frac\pi2\).`,
+    "Thinking",
+    S`4. Find the points on \(y=2\sin x-x\), \(0\le x\le2\pi\), where the tangent is horizontal, and classify them.`,
+    S`5. Show that \(\frac{d}{dx}\cot x=-\csc^2x\), and find the slope of \(y=\cot x\) at \(x=\frac\pi6\).`,
+    "Communication",
+    S`6. Explain the four-step cycle of derivatives of \(\cos x\), and use it to find the 2027th derivative.`,
+    S`7. The graphs of \(y=\cos x\) (violet) and its derivative (blue) are shown. Explain three features of the blue graph using the violet one. [[c|Graphs for question 7]]`,
+    "Application",
+    S`8. A particle moves with \(s(t)=t+\sin t\). Find \(v(t)\) and \(a(t)\), and the first time \(t\gt0\) when it is momentarily at rest.`,
+    S`9. For \(y=\sin x\tan x\), find \(y'\left(\frac\pi4\right)\).`,
+    S`10. Sketch \(f(x)=x+\sin x\) on \([0,2\pi]\) using \(f'\) (where it increases) and \(f''\) (its concavity). [[g|Grid for question 10]]`,
+    "Hard Level",
+    S`11. Show that \(g(x)=\sin x-x\) is decreasing, and use this to prove that \(\sin x\lt x\) for all \(x\gt0\).`,
+    S`12. Find the fourth derivative of \(f(x)=x\sin x\) and evaluate it at \(x=0\).`,
+  ] },
+  { code: "4.3", title: "Assignment 4.3 — Differentiation Rules for Sinusoidal Functions", figs: {
+      s: planeDoc({ view: { xmin: -0.2, xmax: 4.4, ymin: -2.5, ymax: 2.5 }, curves: [{ f: (x) => 2 * Math.sin(3 * x), a: 0, b: 4.4, color: "violet" }], step: { x: 0.25, y: 0.5 } }),
+      g: grid({ xmin: 0, xmax: 6.6, ymin: -2, ymax: 3.5 }, { x: 0.5, y: 0.5 }) }, lines: [
+    "Knowledge & Understanding",
+    S`1. Differentiate \(y=\sin(8x)\), \(y=\cos\left(\frac x5\right)\) and \(y=3\sin(2x+1)\).`,
+    S`2. Differentiate \(y=\sin^2(4x)\) and simplify.`,
+    S`3. The graph of \(y=2\sin(3x)\) is shown. Estimate its greatest slope from the graph, then find it exactly. [[s|Graph for question 3]]`,
+    "Thinking",
+    S`4. For \(y=x\cos(3x)\), find \(y'\left(\frac\pi3\right)\).`,
+    S`5. Find all horizontal tangents of \(y=\cos(2x)+2\cos x\) on \([0,2\pi]\). [[g|Grid for a sketch]]`,
+    "Communication",
+    S`6. Explain the difference between \(\sin^2x\) and \(\sin(x^2)\), and differentiate each.`,
+    S`7. Explain how each of \(A\), \(k\), \(c\) and \(d\) in \(y=A\sin(kx+c)+d\) affects the derivative.`,
+    "Application",
+    S`8. A sound wave's pressure is \(p(t)=0.02\sin(880\pi t)\) Pa. Find its greatest rate of change.`,
+    S`9. For \(y=\sqrt{\cos2x}\), find the slope at \(x=\frac\pi6\).`,
+    S`10. Find the equation of the tangent to \(y=\tan(3x)\) at \(x=\frac\pi{12}\).`,
+    "Hard Level",
+    S`11. Find the maximum value of \(y=\sin x+\frac12\sin(2x)\) on \([0,2\pi]\).`,
+    S`12. Show that differentiating \(\sin(2x)\) and differentiating \(2\sin x\cos x\) give the same result.`,
+  ] },
+  { code: "4.4", title: "Assignment 4.4 — Applications of Sinusoidal Functions and Their Derivatives", figs: {
+      s: planeDoc({ view: { xmin: 0, xmax: 4.4, ymin: -8, ymax: 8 }, curves: [{ f: (t) => 7 * Math.sin(2 * t), a: 0, b: 4.4, color: "violet" }], step: { x: 0.5, y: 1 }, xlabel: "t (s)", ylabel: "s (cm)" }),
+      w: grid({ xmin: 0, xmax: 3.3, ymin: 0, ymax: 70 }, { x: 0.25, y: 10 }) }, lines: [
+    "Knowledge & Understanding",
+    S`1. A mass moves with \(s(t)=7\sin(2t)\) cm. Find \(v(t)\), \(a(t)\) and the maximum speed.`,
+    S`2. State the amplitude, period and \(\omega\) of \(h(t)=20-15\cos\left(\frac{\pi}{30}t\right)\).`,
+    S`3. The graph of \(s(t)\) from question 1 is shown. Mark where the velocity is 0 and where the speed is greatest. [[s|Graph for question 3]]`,
+    "Thinking",
+    "4. A Ferris wheel of radius 14 m turns once every 40 s. Find a rider's greatest vertical speed and where on the wheel it occurs.",
+    S`5. A triangle has sides 9 cm and 14 cm with angle \(\theta\) between them. Find the largest area, and sketch \(A(\theta)\). [[w|Grid for question 5]]`,
+    "Communication",
+    S`6. Explain what \(a=-\omega^2s\) tells you about simple harmonic motion.`,
+    "7. Explain, using a sinusoidal model, why the number of daylight hours changes fastest near the equinoxes.",
+    "Application",
+    S`8. A spring has \(s(t)=6\cos(3t)\) cm. Find the first time the speed is 9 cm/s.`,
+    S`9. A ball is launched at 18 m/s with range \(R(\theta)=\frac{324\sin2\theta}{9.8}\) m. Find the best angle and the greatest range.`,
+    S`10. A lighthouse 1.5 km from a straight shore turns three times per minute. How fast does the beam move along the shore when it makes an angle of \(\frac\pi6\) with the perpendicular?`,
+    "Hard Level",
+    S`11. Corridors 4 m and 2 m wide meet at a right angle. Find the longest rod that can be carried horizontally around the corner.`,
+    S`12. Two masses move with \(s_1=3\sin t\) and \(s_2=4\cos t\). Find the greatest distance between them.`,
+  ] },
+];
