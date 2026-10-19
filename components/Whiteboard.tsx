@@ -727,10 +727,9 @@ export function Whiteboard({ initialBoardId }: { initialBoardId?: string }) {
     setTool("select"); setSel([shapes().length - 1]); setShowGraph(false);
     flash("Graph added to the board");
   }
-  // Downscale a data URL and drop it on the board as an image shape, centred in
-  // the current view. `offset` staggers multiple inserts (e.g. PDF pages) so they
-  // don't land in an exact stack — still need to be dragged apart, but at least visible.
-  async function insertImageDataUrl(dataUrl: string, offset = 0) {
+  // Downscale a data URL for storage (it's saved inside the board). Photos and
+  // document pages go to JPEG when PNG would bloat the save.
+  async function downscale(dataUrl: string, preferJpeg = false) {
     const img: HTMLImageElement = await new Promise((res, rej) => {
       const im = new Image(); im.onload = () => res(im); im.onerror = rej; im.src = dataUrl;
     });
@@ -738,15 +737,53 @@ export function Whiteboard({ initialBoardId }: { initialBoardId?: string }) {
     const down = Math.min(1, MAX / Math.max(img.naturalWidth, img.naturalHeight) || 1);
     const nw = Math.max(1, Math.round(img.naturalWidth * down)), nh = Math.max(1, Math.round(img.naturalHeight * down));
     const off = document.createElement("canvas"); off.width = nw; off.height = nh;
-    off.getContext("2d")!.drawImage(img, 0, 0, nw, nh);
-    let src = off.toDataURL("image/png");
-    if (src.length > 1_800_000) src = off.toDataURL("image/jpeg", 0.85); // keep large photos/pages from bloating the save
+    const octx = off.getContext("2d")!;
+    octx.fillStyle = "#fff"; octx.fillRect(0, 0, nw, nh); // JPEG has no transparency
+    octx.drawImage(img, 0, 0, nw, nh);
+    let src = preferJpeg ? off.toDataURL("image/jpeg", 0.85) : off.toDataURL("image/png");
+    if (src.length > 1_800_000) src = off.toDataURL("image/jpeg", 0.85);
+    return { src, nw, nh };
+  }
+  // Drop an image on the board, centred in the current view.
+  async function insertImageDataUrl(dataUrl: string) {
+    const { src, nw, nh } = await downscale(dataUrl);
     const vr = visibleRect(), c = viewCenter();
     const fit = Math.min(1 / viewRef.current.z, (vr.w * 0.7) / nw, (vr.h * 0.7) / nh);
     const w = nw * fit, h = nh * fit;
-    const stagger = (offset * 24) / viewRef.current.z;
-    commit([...shapes(), { t: "image", x: c.x - w / 2 + stagger, y: c.y - h / 2 + stagger, w, h, src, rot: 0 }]);
+    commit([...shapes(), { t: "image", x: c.x - w / 2, y: c.y - h / 2, w, h, src, rot: 0 }]);
     return shapes().length - 1;
+  }
+  // A PDF becomes one board page per PDF page: each page image fills the board's
+  // height on the right-hand side (wider for landscape pages), leaving the left
+  // free to work on. The first PDF page reuses the current board page if it's
+  // empty; the rest are inserted as new board pages right after it.
+  async function insertPdfPages(file: File) {
+    const { pages, truncated } = await renderPdfToDataUrls(file, 60);
+    if (!pages.length) throw new Error("no pages");
+    const { w: W, h: H } = size();
+    const M = 12, BOTTOM = 64; // keep clear of the page/zoom docks along the bottom
+    let pi = shapes().length ? pageRef.current + 1 : pageRef.current;
+    const first = pi;
+    for (let i = 0; i < pages.length; i++) {
+      flash(`Adding page ${i + 1} of ${pages.length}…`, "info", 0);
+      const { src, nw, nh } = await downscale(pages[i], true);
+      const ratio = nw / nh, maxW = ratio > 1 ? W * 0.66 : W * 0.5;
+      let h = H - M - BOTTOM, w = h * ratio;
+      if (w > maxW) { w = maxW; h = w / ratio; }
+      const img: Shape = { t: "image", x: W - M - w, y: M + (H - M - BOTTOM - h) / 2, w, h, src, rot: 0 };
+      if (pi === pageRef.current && !shapes().length) {
+        commit([img]); // the empty current page: undoable like any insert
+      } else {
+        pagesRef.current.splice(pi, 0, [img]);
+        histRef.current.splice(pi, 0, { h: [[img]], i: 0 });
+      }
+      pi++;
+    }
+    pageRef.current = first;
+    viewRef.current = { ...IDENTITY };
+    setSel([]); setTool("pen");
+    redraw(); scheduleSync(); rerender();
+    flash(truncated ? `First ${pages.length} pages added, one per board page (the rest were skipped)` : `${pages.length} page${pages.length === 1 ? "" : "s"} added, one per board page`, "ok", 4000);
   }
   // Insert a user-supplied image (file picker or paste) as an image shape.
   // Draw/write on it with any tool afterward — ink and text render on top.
@@ -781,11 +818,7 @@ export function Whiteboard({ initialBoardId }: { initialBoardId?: string }) {
         setTool("select"); setSel([idx]);
         flash("Document text added — formatting is approximate, not exact", "ok", 3500);
       } else {
-        const { pages, truncated } = await renderPdfToDataUrls(file);
-        let lastIdx = -1;
-        for (let i = 0; i < pages.length; i++) lastIdx = await insertImageDataUrl(pages[i], i);
-        setTool("select"); setSel([lastIdx]);
-        flash(truncated ? `First ${pages.length} pages added (the rest were skipped) — drag them apart` : `${pages.length} page${pages.length === 1 ? "" : "s"} added — drag them apart`, "ok", 3500);
+        await insertPdfPages(file);
       }
     } catch { flash("Couldn't read that file", "err", 3500); }
   }
@@ -1230,7 +1263,7 @@ export function Whiteboard({ initialBoardId }: { initialBoardId?: string }) {
                 <div style={{ position: "fixed", inset: 0, zIndex: 70 }} onClick={() => setMenu(null)} />
                 <div className="wb-panel wb-menu wb-menu-side" role="menu">
                   <button type="button" role="menuitem" onClick={() => { setMenu(null); fileInputRef.current?.click(); }}><Icon name="image" /><span><strong>Image</strong><span>From a file — or paste with Ctrl+V</span></span></button>
-                  <button type="button" role="menuitem" onClick={() => { setMenu(null); officeFileInputRef.current?.click(); }}><Icon name="file" /><span><strong>PDF, Word or Excel</strong><span>Added as pages you can write on</span></span></button>
+                  <button type="button" role="menuitem" onClick={() => { setMenu(null); officeFileInputRef.current?.click(); }}><Icon name="file" /><span><strong>PDF, Word or Excel</strong><span>A PDF fills one board page per page</span></span></button>
                   <button type="button" role="menuitem" onClick={() => { setMenu(null); insertAxes("q1"); }}><Icon name="axes" /><span><strong>Axes: first quadrant</strong><span>x and y from −1 to 10</span></span></button>
                   <button type="button" role="menuitem" onClick={() => { setMenu(null); insertAxes("full"); }}><Icon name="axesFull" /><span><strong>Axes: four quadrants</strong><span>x and y from −10 to 10, with a grid</span></span></button>
                   <button type="button" role="menuitem" onClick={() => { setMenu(null); setShowGraph((s) => !s); }}><Icon name="chart" /><span><strong>Graphing calculator</strong><span>Plot functions, then add the graph</span></span></button>
