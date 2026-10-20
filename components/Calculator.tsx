@@ -118,13 +118,17 @@ function bisectDiscontinuity(evalX: (x: number) => number, xLo: number, xHi: num
  * function actually diverges.
  */
 function estimateOneSidedLimit(evalX: (x: number) => number, x0: number, dir: 1 | -1, xSpan: number): number | null {
-  const decades = [2, 3, 4, 5, 6, 7];
-  const samples = decades.map((d) => evalX(x0 + dir * xSpan * Math.pow(10, -d)));
-  if (samples.some((v) => !Number.isFinite(v))) return null;
-  const lo = Math.min(...samples), hi = Math.max(...samples);
-  const scale = Math.max(Math.abs(samples[samples.length - 1]), 1);
-  if (hi - lo > scale * 0.02) return null;
-  return samples[samples.length - 1];
+  // A finite limit converges: each ten-fold smaller step changes the value
+  // less than the one before (even on a steep line like y = x + 2). An
+  // asymptote's changes grow instead. Judging by convergence rather than
+  // "stays flat" is what lets a hole on a sloped curve be recognised.
+  const s = [3, 4, 5, 6, 7].map((d) => evalX(x0 + dir * xSpan * Math.pow(10, -d)));
+  if (s.some((v) => !Number.isFinite(v))) return null;
+  const diff = (i: number) => Math.abs(s[i + 1] - s[i]);
+  const scale = Math.max(Math.abs(s[4]), 1);
+  for (let i = 1; i < 4; i++) if (diff(i) > diff(i - 1) * 0.5 + 1e-9 * scale) return null;
+  if (diff(3) > 1e-3 * scale) return null;
+  return s[4] + (s[4] - s[3]) / 9;
 }
 
 const GRID_OPTS = ["auto", "0.1", "0.5", "1", "2", "5", "10", "20", "50", "100", "pi"];
@@ -421,10 +425,12 @@ export function Calculator({ initialData, initialState, initialId, embed = false
               if (prevCluster && k - prevCluster.last <= 4) prevCluster.last = k; else clusters.push({ first: k, last: k });
             }
             ctx.fillStyle = "#fff";
+            const markedX: number[] = [];
             for (const c of clusters) {
               const yLoRef = Number.isFinite(ys[c.first - 1]) ? ys[c.first - 1] : ys[c.first];
               const yHiRef = Number.isFinite(ys[c.last]) ? ys[c.last] : ys[c.last - 1];
               const x0 = bisectDiscontinuity(evalX, xs[c.first - 1], xs[c.last], yLoRef, yHiRef);
+              markedX.push(x0);
               const left = estimateOneSidedLimit(evalX, x0, -1, xSpan);
               const right = estimateOneSidedLimit(evalX, x0, 1, xSpan);
               for (const yAt of [left, right]) {
@@ -432,6 +438,23 @@ export function Calculator({ initialData, initialState, initialId, embed = false
                 const p = toPx(x0, yAt);
                 ctx.beginPath(); ctx.arc(p.px, p.py, 4, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
               }
+            }
+            // A removable hole like (x²−x−6)/(x²−4) at x=−2 is undefined only at
+            // that exact x, so no sample lands on it and the curve looks
+            // continuous. Probe "nice" x-values (multiples of ¼) for an undefined
+            // point whose two one-sided limits agree, and mark it.
+            const probeStep = Math.max(0.25, Math.ceil(xSpan / 800 / 0.25) * 0.25);
+            for (let kk = Math.ceil(loX / probeStep); kk * probeStep <= hiX; kk++) {
+              const x0 = kk * probeStep;
+              if (Number.isFinite(evalX(x0))) continue;
+              if (markedX.some((m) => Math.abs(m - x0) < (xSpan / N) * 3)) continue;
+              const left = estimateOneSidedLimit(evalX, x0, -1, xSpan);
+              const right = estimateOneSidedLimit(evalX, x0, 1, xSpan);
+              if (left === null || right === null || Math.abs(left - right) > 1e-3 * Math.max(1, Math.abs(left))) continue;
+              const yAt = (left + right) / 2;
+              if (yAt < rMin || yAt > rMax) continue;
+              const p = toPx(x0, yAt);
+              ctx.beginPath(); ctx.arc(p.px, p.py, 4, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
             }
           }
           continue;
