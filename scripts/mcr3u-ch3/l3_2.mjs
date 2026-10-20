@@ -1,123 +1,134 @@
-// MCR3U 3.2 — Maximum and Minimum Values: completing the square (a ≠ 1, fractions), partial factoring, averaging zeros,
-// revenue from price changes, profit = revenue − cost, area optimisation
-import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, q, num, hard, plane } from "./lib.mjs";
+// MCR3U 3.2 — Converting Between Forms: expanding, factoring, the axis x = −b/(2a), equations from a vertex or zeros and a point
+import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, q, num, choice, hard, plane } from "./lib.mjs";
 
-export const TITLE = "3.2 Maximum and Minimum Values";
-export const ID = "5c3e0001-0001-4001-8001-000000000302";
+export const TITLE = "3.2 Converting Between Forms";
+export const ID = "5c3e0001-0001-4001-8001-000000000312";
 const S = String.raw;
 
 export const blocks = () => [
   intro({
-    icon: "🏔️",
-    title: "Maximum and Minimum Values",
-    overview: S`The vertex of a parabola gives the largest or smallest value of a quadratic function — the best price, the greatest area, the lowest cost. In this lesson you will find it algebraically in three ways (completing the square, partial factoring, and averaging the zeros) and use it to solve revenue, profit and area problems.`,
+    icon: "🔄",
+    title: "Converting Between Forms",
+    overview: S`In 3.1 you read different features from different forms. Often the question asks for a feature the given form hides: the zeros of a function in vertex form, or the vertex of a function in standard form. In this lesson you will expand to reach standard form, factor to reach factored form, use the axis \(x=-\frac{b}{2a}\) to reach vertex form, and build an equation in the most useful form from a vertex or the zeros and one more point.`,
     goals: [
-      "complete the square, including when a ≠ 1 or b is odd;",
-      "use partial factoring to find the axis without the zeros;",
-      "find the vertex by averaging the zeros;",
-      "build revenue and profit functions and maximise them;",
-      "interpret the optimal value in context (including whole-number answers).",
+      "expand vertex form and factored form into standard form;",
+      "factor standard form (common factor first) to find the zeros;",
+      "find the vertex from factored form by averaging the zeros;",
+      "explain and use the axis formula \\(x=-\\frac{b}{2a}\\) to write standard form in vertex form;",
+      "write the equation of a parabola from its vertex and a point, or its zeros and a point, in all three forms.",
     ],
-    curriculum: "A2.2 (determine the maximum or minimum value of a quadratic function in the form f(x) = ax² + bx + c, using an algebraic method), A2.3 (solve problems involving quadratic functions arising from real-world applications)",
+    curriculum: "A1.2 (represent quadratic functions using function notation, from equations, tables and graphs), A2.2 (determine the maximum or minimum of a quadratic function)",
     prior: [
-      [S`Expand \((x-4)^2\).`, S`\(x^2-8x+16\).`],
-      [S`What number completes \(x^2+10x+\square\) to a square?`, S`\(25\).`],
-      [S`Factor \(3x^2-12x\).`, S`\(3x(x-4)\).`],
+      [S`Expand \((x+6)^2\).`, S`\(x^2+12x+36\).`],
+      [S`Factor \(x^2+3x-10\).`, S`\((x+5)(x-2)\).`],
+      [S`Factor \(4x^2-20x\).`, S`\(4x(x-5)\).`],
     ],
     words: [
-      ["Optimal value", "the maximum or minimum of the function", ""],
-      ["Completing the square", "rewriting \\(ax^2+bx+c\\) as \\(a(x-h)^2+k\\)", ""],
-      ["Partial factoring", "\\(ax^2+bx+c=x(ax+b)+c\\)", ""],
-      ["Revenue / profit", "price × quantity / revenue − cost", ""],
+      ["Expand", "multiply out the brackets and collect like terms", "\\((x-2)^2=x^2-4x+4\\)"],
+      ["Factor", "write as a product; take out a common factor first", "\\(2x^2-8=2(x-2)(x+2)\\)"],
+      ["Axis formula", "the axis of \\(ax^2+bx+c\\) is \\(x=-\\frac{b}{2a}\\)", "\\(x^2+4x-7\\): \\(x=-2\\)"],
+      ["Leading coefficient", "the value of \\(a\\); the same in all three forms", "\\(a=-3\\)"],
     ],
   }),
 
-  section("📌 Three algebraic methods", S`
-  ${table(["Method", "How", "Best when"], [
-    ["Complete the square", "factor \\(a\\) from the x-terms, add and subtract \\((\\frac{b}{2a})^2\\) inside", "you want vertex form"],
-    ["Partial factoring", "\\(x(ax+b)+c\\) equals \\(c\\) at \\(x=0\\) and \\(x=-\\frac ba\\); axis halfway", "it does not factor"],
-    ["Average the zeros", "axis \\(=\\frac{r+s}2\\), then substitute", "it factors, or is given in factored form"],
+  section("📌 The routes between the forms", S`
+  ${table(["From → to", "Method"], [
+    ["vertex → standard", "expand the square, distribute a, add k"],
+    ["factored → standard", "multiply the two brackets, then distribute a"],
+    ["standard → factored", "common factor first, then factor the trinomial (only if it has real zeros)"],
+    ["factored → vertex", "average the zeros for h, substitute to get k"],
+    ["standard → vertex", "axis h = −b/(2a), substitute to get k (3.4 shows a second way: completing the square)"],
   ])}
-  ${keyIdea(S`All three give the same axis \(x=-\frac{b}{2a}\). Substitute that x to get the optimal value.`)}`),
+  ${keyIdea(S`The leading coefficient \(a\) never changes when you convert. If your new form has a different \(a\), something went wrong.`)}`),
 
-  section("📌 Explore: revenue", S`<p>A store raises its price in equal steps and loses customers with each step. Revenue \(=\) price \(\times\) quantity is a product of two linear factors — a parabola whose zeros are easy to read. The best number of steps is halfway between them.</p>`),
+  section("📌 Why the axis is \\(x=-\\frac{b}{2a}\\)", S`
+  <p>Find where \(f(x)=ax^2+bx+c\) has height \(c\): \(ax^2+bx+c=c\Rightarrow x(ax+b)=0\Rightarrow x=0\) or \(x=-\frac{b}{a}\). Two points at the same height are mirror images across the axis, so the axis is halfway between them:</p>
+  <p style="text-align:center">\(h=\dfrac{0+\left(-\frac{b}{a}\right)}{2}=-\dfrac{b}{2a}\).</p>
+  ${plane({ view: { xmin: -6, xmax: 2, ymin: -7, ymax: 4 }, curves: [{ f: (x) => x * x + 4 * x - 2, color: "violet" }], lines: [{ m: 0, b: -2, color: "green", dash: true }], vlines: [{ x: -2, color: "gray", dash: true }], points: [{ x: 0, y: -2, label: "(0, −2)", color: "green" }, { x: -4, y: -2, label: "(−4, −2)", color: "green" }, { x: -2, y: -6, label: "(−2, −6)", color: "blue" }], step: { x: 1, y: 1 } }, "y = x² + 4x − 2 has height −2 at x = 0 and x = −4, so its axis is x = −2")}
+  <p>This works even when the parabola has no zeros, so it is the quickest way from standard form to the vertex.</p>`),
 
-  widget("revenueLab", { init: [18, 400, 1, 15] }),
+  section("📌 Explore", S`<p>Set \(a\), \(h\) and \(k\). In <em>vertex → standard</em> mode the explorer expands step by step and tells you whether a factored form exists. Switch to <em>standard → vertex</em> to see the axis formula bring you back.</p>`),
 
-  section("📌 Completing the square with fractions", S`
-  <p>\(f(x)=x^2+5x-2\): half of 5 is \(\tfrac52\), and \((\tfrac52)^2=6.25\):</p>
-  <p style="text-align:center">\(f(x)=(x^2+5x+6.25)-6.25-2=(x+2.5)^2-8.25\)</p>
-  ${plane({ view: { xmin: -7, xmax: 3, ymin: -9, ymax: 5 }, curves: [{ f: (x) => x * x + 5 * x - 2, color: "violet" }], points: [{ x: -2.5, y: -8.25, label: "(−2.5, −8.25)" }], step: { x: 1, y: 1 } })}
+  widget("formConverter", { init: [2, -1, -8] }),
+
+  section("📌 Building an equation in the right form", S`
+  <p>Choose the form that uses the facts you are given, then use one more point to find \(a\).</p>
+  <p><strong>Zeros and a point.</strong> Zeros \(-3\) and \(2\), through \((1,-8)\): \(f(x)=a(x+3)(x-2)\), so \(a(4)(-1)=-8\) and \(a=2\).</p>
+  ${plane({ view: { xmin: -5, xmax: 4, ymin: -14, ymax: 8 }, curves: [{ f: (x) => 2 * (x + 3) * (x - 2), color: "violet" }], points: [{ x: -3, y: 0, label: "(−3, 0)" }, { x: 2, y: 0, label: "(2, 0)" }, { x: 1, y: -8, label: "(1, −8)", color: "green" }], step: { x: 1, y: 2 } }, "f(x) = 2(x + 3)(x − 2)")}
+  <p><strong>Vertex and a point.</strong> Start from \(f(x)=a(x-h)^2+k\) and substitute the point (Example 5).</p>
   ${watchOut([
-    "Factor a out of the x-terms only, not the constant.",
-    "When the square leaves the bracket it is multiplied by a.",
-    "Revenue = price × number sold — both change with the number of steps.",
-    "If the steps must be whole numbers, test the nearest whole numbers to the vertex.",
+    "Expand the square before multiplying by a: −3(x + 1)² + 5 is −3(x² + 2x + 1) + 5, not (−3x − 3)² + 5.",
+    "Take out a common factor first: 3x² − 12x − 36 = 3(x² − 4x − 12) is much easier to factor.",
+    "In x = −b/(2a), keep the signs: for −2x² + 8x, h = −8/(−4) = 2.",
+    "After finding h, you still need k: substitute h into the original equation.",
   ])}`),
 
   examples([
-    ["Completing the square, a ≠ 1", S`Find the minimum of \(f(x)=3x^2-12x+7\).`,
-      [S`\(3(x^2-4x)+7=3(x^2-4x+4-4)+7\).`, S`\(=3(x-2)^2-12+7=3(x-2)^2-5\).`],
-      S`minimum \(-5\) at \(x=2\)`],
-    ["Partial factoring", S`Find the maximum of \(f(x)=-2x^2+10x+3\).`,
-      [S`\(f(x)=-2x(x-5)+3\): \(f(0)=f(5)=3\).`, S`Axis \(x=2.5\); \(f(2.5)=-12.5+25+3=15.5\).`],
-      S`maximum \(15.5\) at \(x=2.5\)`,
-      plane({ view: { xmin: -1, xmax: 6, ymin: -1, ymax: 17 }, curves: [{ f: (x) => -2 * x * x + 10 * x + 3, color: "violet" }], points: [{ x: 0, y: 3, label: "(0, 3)", color: "green" }, { x: 5, y: 3, label: "(5, 3)", color: "green" }, { x: 2.5, y: 15.5, label: "(2.5, 15.5)" }], step: { x: 1, y: 2 } })],
-    ["An odd b", S`Write \(f(x)=x^2+5x-2\) in vertex form.`,
-      [S`Add and subtract \((\tfrac52)^2=6.25\).`],
-      S`\(f(x)=(x+2.5)^2-8.25\); minimum \(-8.25\)`],
-    ["Maximum revenue", S`Tickets cost 18 dollars and 400 are sold. Each 1-dollar increase loses 15 sales. What price maximises revenue?`,
-      [S`\(R(x)=(18+x)(400-15x)\) for \(x\) increases.`, S`Zeros \(x=-18\) and \(x=\tfrac{80}{3}\approx26.67\); axis \(x\approx4.33\).`, S`Whole dollars: \(R(4)=22(340)=7480\), \(R(5)=23(325)=7475\).`],
-      "charge 22 dollars: revenue 7480 dollars"],
-    ["Maximum profit", S`A company's revenue is \(R(x)=-2x^2+60x\) and its cost is \(C(x)=10x+200\) (thousands of dollars, \(x\) thousand items). Find the maximum profit.`,
-      [S`\(P(x)=R(x)-C(x)=-2x^2+50x-200\).`, S`Axis \(x=\frac{-50}{-4}=12.5\); \(P(12.5)=-312.5+625-200=112.5\).`],
-      "112.5 thousand dollars at 12 500 items"],
+    ["Vertex → standard", S`Write \(f(x)=-3(x+1)^2+5\) in standard form.`,
+      [S`Expand the square: \((x+1)^2=x^2+2x+1\).`, S`Distribute: \(-3x^2-6x-3\).`, S`Add 5: \(-3x^2-6x+2\). Check the y-intercept: \(f(0)=-3(1)+5=2\) ✓.`],
+      S`\(f(x)=-3x^2-6x+2\)`,
+      plane({ view: { xmin: -4, xmax: 2, ymin: -8, ymax: 7 }, curves: [{ f: (x) => -3 * (x + 1) ** 2 + 5, color: "violet" }], points: [{ x: -1, y: 5, label: "(−1, 5)", color: "blue" }, { x: 0, y: 2, label: "(0, 2)", color: "green" }], step: { x: 1, y: 1 } })],
+    ["Factored → standard and vertex", S`Write \(f(x)=2(x+5)(x-1)\) in standard form and in vertex form.`,
+      [S`Multiply the brackets: \((x+5)(x-1)=x^2+4x-5\); distribute: \(2x^2+8x-10\).`, S`Axis: \(\frac{-5+1}{2}=-2\); \(f(-2)=2(3)(-3)=-18\).`, S`Vertex form \(2(x+2)^2-18\). Check: \(2(x^2+4x+4)-18=2x^2+8x-10\) ✓.`],
+      S`\(2x^2+8x-10=2(x+2)^2-18\)`,
+      plane({ view: { xmin: -7, xmax: 3, ymin: -20, ymax: 6 }, curves: [{ f: (x) => 2 * (x + 5) * (x - 1), color: "violet" }], vlines: [{ x: -2, color: "gray", dash: true }], points: [{ x: -5, y: 0, label: "(−5, 0)" }, { x: 1, y: 0, label: "(1, 0)" }, { x: -2, y: -18, label: "(−2, −18)", color: "blue" }, { x: 0, y: -10, label: "(0, −10)", color: "green" }], step: { x: 1, y: 2 } })],
+    ["Standard → factored → vertex", S`Find the zeros and the vertex of \(f(x)=3x^2-12x-36\).`,
+      [S`Common factor: \(3(x^2-4x-12)\).`, S`Factor: \(3(x-6)(x+2)\), zeros 6 and \(-2\).`, S`Axis \(x=2\); \(f(2)=3(-4)(4)=-48\), so \(f(x)=3(x-2)^2-48\).`],
+      S`zeros \(-2\) and 6; vertex \((2,-48)\)`],
+    ["Standard → vertex with the axis formula", S`Write \(f(x)=2x^2+6x-1\) in vertex form.`,
+      [S`It does not factor nicely, so use \(h=-\frac{b}{2a}=-\frac{6}{4}=-1.5\).`, S`\(k=f(-1.5)=2(2.25)-9-1=-5.5\).`, S`\(f(x)=2(x+1.5)^2-5.5\). Check: \(2(x^2+3x+2.25)-5.5=2x^2+6x-1\) ✓.`],
+      S`\(f(x)=2(x+1.5)^2-5.5\)`,
+      plane({ view: { xmin: -5, xmax: 2, ymin: -7, ymax: 5 }, curves: [{ f: (x) => 2 * x * x + 6 * x - 1, color: "violet" }], lines: [{ m: 0, b: -1, color: "green", dash: true }], vlines: [{ x: -1.5, color: "gray", dash: true }], points: [{ x: 0, y: -1, label: "(0, −1)", color: "green" }, { x: -3, y: -1, label: "(−3, −1)", color: "green" }, { x: -1.5, y: -5.5, label: "(−1.5, −5.5)", color: "blue" }], step: { x: 1, y: 1 } })],
+    ["Vertex and a point → all three forms", S`A parabola has vertex \((3,8)\) and passes through \((5,0)\). Write it in vertex, factored and standard form.`,
+      [S`\(f(x)=a(x-3)^2+8\); \(0=a(2)^2+8\Rightarrow a=-2\).`, S`Zeros: \((x-3)^2=4\Rightarrow x=1\) or \(5\), so \(f(x)=-2(x-1)(x-5)\).`, S`Expand: \(-2(x^2-6x+5)=-2x^2+12x-10\).`],
+      S`\(-2(x-3)^2+8=-2(x-1)(x-5)=-2x^2+12x-10\)`,
+      plane({ view: { xmin: -1, xmax: 7, ymin: -12, ymax: 10 }, curves: [{ f: (x) => -2 * (x - 3) ** 2 + 8, color: "violet" }], points: [{ x: 3, y: 8, label: "(3, 8)", color: "blue" }, { x: 5, y: 0, label: "(5, 0)", color: "green" }, { x: 1, y: 0, label: "(1, 0)" }, { x: 0, y: -10, label: "(0, −10)" }], step: { x: 1, y: 2 } })],
   ]),
 
   practice([
-    q("complete the square", S`Find the minimum value of \(f(x)=x^2-8x+21\).`, num(5),
-      "Half of −8 is −4.", [S`\((x-4)^2-16+21\).`], S`\(5\)`),
-    q("a ≠ 1", S`Find the maximum value of \(f(x)=-4x^2+24x-11\).`, num(25),
-      "Axis −b/(2a).", [S`\(x=3\): \(-36+72-11\).`], S`\(25\)`),
-    q("axis", S`Find the x-coordinate of the vertex of \(f(x)=5x^2+15x-2\).`, num(-1.5),
-      "Partial factoring: 5x(x + 3) − 2.", [S`Halfway between 0 and −3.`], S`\(-1.5\)`),
-    q("revenue", S`\(R(x)=(10+x)(200-8x)\). For what \(x\) is revenue greatest?`, num(7.5),
-      "Average the zeros.", [S`Zeros \(-10\) and \(25\).`], S`\(7.5\)`),
-    q("profit", S`Profit is \(P(x)=-x^2+14x-24\) (thousands of dollars). Find the maximum profit.`, num(25),
-      "x = 7.", [S`\(-49+98-24\).`], S`\(25\) thousand dollars`),
+    q("vertex → standard", S`Write \(f(x)=(x-4)^2+1\) in standard form. What is the constant term \(c\)?`, num(17),
+      "Expand the square first.", [S`\(x^2-8x+16+1\).`], S`\(17\)`),
+    q("factored → standard", S`Write \(f(x)=2(x+4)(x-1)\) in standard form. What is \(b\)?`, num(6),
+      "Multiply the brackets, then distribute 2.", [S`\(2(x^2+3x-4)=2x^2+6x-8\).`], S`\(6\)`),
+    q("axis formula", S`Use \(x=-\frac{b}{2a}\) to find the axis of \(f(x)=3x^2-18x+4\). Enter the x-value.`, num(3),
+      "b = −18, a = 3.", [S`\(-\frac{-18}{6}\).`], S`\(x=3\)`),
+    q("vertex", S`Find the y-coordinate of the vertex of \(f(x)=x^2+10x+21\).`, num(-4),
+      "Axis first, then substitute.", [S`\(h=-5\); \(25-50+21\).`], S`\(-4\)`),
+    q("factor", S`Which is the factored form of \(x^2-2x-15\)?`, choice(["(x − 5)(x + 3)", "(x + 5)(x − 3)", "(x − 15)(x + 1)", "(x − 5)(x − 3)"], 0),
+      "Two numbers with product −15 and sum −2.", [S`\(-5\) and \(3\).`], S`\((x-5)(x+3)\)`),
   ]),
 
   ...hard([
-    ["Three pens", S`A farmer has 240 m of fence to build a rectangle split into 3 pens by 2 fences parallel to the width. What dimensions give the greatest total area?`,
-      [S`With width \(w\) and length \(L\): \(4w+2L=240\Rightarrow L=120-2w\).`, S`\(A(w)=w(120-2w)\), zeros 0 and 60, axis \(w=30\).`, S`\(L=60\), \(A=1800\).`],
-      "30 m by 60 m, 1800 m²",
-      plane({ view: { xmin: 0, xmax: 62, ymin: 0, ymax: 2000 }, curves: [{ f: (w) => w * (120 - 2 * w), a: 0, b: 60, color: "violet" }], points: [{ x: 30, y: 1800, label: "(30, 1800)" }], step: { x: 10, y: 200 }, xlabel: "w (m)", ylabel: "A (m²)" })],
-    ["Demand and cost", S`The price that sells \(x\) thousand items is \(p(x)=-0.5x+25\) dollars, and the cost is \(C(x)=5x+60\) thousand dollars. Find the price that maximises profit and the maximum profit.`,
-      [S`Revenue \(R=x(-0.5x+25)=-0.5x^2+25x\).`, S`Profit \(P=-0.5x^2+20x-60\); axis \(x=20\).`, S`\(P(20)=-200+400-60=140\); price \(p(20)=15\).`],
-      "price 15 dollars, profit 140 thousand dollars"],
+    ["Choose b and c", S`Find \(b\) and \(c\) so that \(f(x)=2x^2+bx+c\) has vertex \((-3,4)\). Then explain why it has no zeros.`,
+      [S`The vertex form must be \(f(x)=2(x+3)^2+4\) (same \(a\)).`, S`Expand: \(2(x^2+6x+9)+4=2x^2+12x+22\), so \(b=12\), \(c=22\).`, S`It opens up and its lowest value is 4, so \(f(x)\ge4>0\) for every \(x\).`],
+      S`\(b=12\), \(c=22\); minimum 4, so no zeros`,
+      plane({ view: { xmin: -7, xmax: 1, ymin: -1, ymax: 14 }, curves: [{ f: (x) => 2 * (x + 3) ** 2 + 4, color: "violet" }], vlines: [{ x: -3, color: "gray", dash: true }], points: [{ x: -3, y: 4, label: "(−3, 4)", color: "blue" }], step: { x: 1, y: 2 } })],
+    ["Zeros and a point → all three forms", S`A parabola has zeros \(-4\) and \(6\) and passes through \((2,-12)\). Write it in factored, standard and vertex form.`,
+      [S`\(f(x)=a(x+4)(x-6)\); \(a(6)(-4)=-24a=-12\Rightarrow a=\tfrac12\).`, S`Standard: \(\tfrac12(x^2-2x-24)=\tfrac12x^2-x-12\).`, S`Axis \(x=1\); \(f(1)=\tfrac12(5)(-5)=-12.5\), so \(f(x)=\tfrac12(x-1)^2-12.5\).`],
+      S`\(\tfrac12(x+4)(x-6)=\tfrac12x^2-x-12=\tfrac12(x-1)^2-12.5\)`],
   ], [
-    q("hard", S`Find the minimum value of \(x^2+7x+15\).`, num(2.75),
-      "Half of 7 is 3.5.", [S`\((x+3.5)^2-12.25+15\).`], S`\(2.75\)`),
-    q("hard", "Two numbers differ by 10. What is the smallest possible product?", num(-25),
-      "Use x and x + 10.", [S`\(x(x+10)\) has its vertex at \(x=-5\).`], S`\(-25\)`),
-    q("hard", S`A booth sells 800 drinks at 4 dollars. Each 0.25-dollar increase loses 40 sales. What is the maximum revenue?`, num(3240),
-      "R(x) = (4 + 0.25x)(800 − 40x).", [S`Zeros \(-16\) and 20; axis \(x=2\): price 4.50, 720 drinks.`], S`\(3240\) dollars`),
+    q("hard", S`\(f(x)=-(x-2)^2+k\) has y-intercept 5. Find \(k\).`, num(9),
+      "Substitute x = 0.", [S`\(-4+k=5\).`], S`\(9\)`),
+    q("hard", S`\(f(x)=x^2+bx+c\) has vertex \((4,-1)\). Find \(c\).`, num(15),
+      "Write the vertex form with a = 1 and expand.", [S`\((x-4)^2-1=x^2-8x+15\).`], S`\(15\)`),
+    q("hard", S`The axis of \(f(x)=5x^2+bx-3\) is \(x=-0.8\). Find \(b\).`, num(8),
+      "Set −b/(2a) equal to −0.8.", [S`\(-\frac{b}{10}=-0.8\).`], S`\(8\)`),
   ]),
 
   wrapUp({
     qas: [
-      ["Which method is fastest?", "If it factors, average the zeros. If not, partial factoring finds the axis quickly; completing the square gives the full vertex form."],
-      ["Why is revenue a parabola?", "It is (price) × (quantity) and both are linear in the number of steps, so the product is quadratic."],
-      ["What if the vertex is not a whole number?", "If only whole steps make sense, compare the two nearest whole numbers."],
-      ["Is maximum profit the same as maximum revenue?", "No. Costs shift the vertex: profit peaks at a different quantity."],
-      ["How do I know it is a maximum and not a minimum?", "Look at a: negative means the parabola opens down, so the vertex is a maximum."],
+      ["Do I always have to convert?", "No. Convert only when the form you have hides the feature you need."],
+      ["Why take out a common factor first?", "It leaves a simpler trinomial (often with a = 1), and it keeps a visible in the factored form."],
+      ["What if standard form will not factor?", "Use x = −b/(2a) for the vertex. The zeros may still exist; 3.5 finds them with the quadratic formula."],
+      ["How can I check a conversion?", "Compare the y-intercepts (substitute x = 0 into both forms) and check that a is the same."],
+      ["Which point should I use to find a?", "Any point on the parabola other than the zeros or the vertex you already used."],
     ],
     summary: [
-      "Complete the square: a(x − h)² + k.",
-      "Partial factoring: x(ax + b) + c; axis halfway between 0 and −b/a.",
-      "Axis = average of the zeros = −b/(2a).",
-      "Revenue = price × quantity; profit = revenue − cost.",
+      "Vertex or factored → standard: expand, then distribute a.",
+      "Standard → factored: common factor, then factor the trinomial.",
+      "Axis: average of the zeros, or x = −b/(2a); then substitute for k.",
+      "Given the vertex or the zeros, start in that form and use one point to find a.",
     ],
-    next: "3.3 solves quadratic equations that come from models.",
+    next: "3.3 recognises quadratics from tables of values and finds their equations from data.",
   }),
 ];

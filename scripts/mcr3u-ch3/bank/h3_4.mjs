@@ -1,29 +1,27 @@
-// 3.4 The Zeros and the Discriminant — 20 hard questions
+// 3.4 Maximum and Minimum Values — 20 hard questions
 import { mc, num, tf } from "./kit.mjs";
 import { P, graph, planeDoc } from "./fig.mjs";
 
-const V8 = { xmin: -6, xmax: 6, ymin: -6, ymax: 8 };
-
-export const TOPIC = "3.4 The Zeros and the Discriminant";
+export const TOPIC = "3.4 Maximum and Minimum Values";
 export const Q = [
-  num(String.raw`For which nonzero $k$ does $x^2+(k+2)x+2k+1=0$ have exactly one root?`, 4, "D = k² − 4k = 0."),
-  num(String.raw`How many integers $k$ make $kx^2+4x+k=0$ a quadratic with two real roots?`, 2, "16 − 4k² > 0, k ≠ 0: k = ±1."),
-  mc(String.raw`How many real roots does $x^2-2mx+m^2-1=0$ have?`, "always two, for every m", ["always one", "none for some m", "it depends on the sign of m"], "D = 4m² − 4m² + 4 = 4."),
-  num(String.raw`$y=x^2+bx+9$ touches the x-axis and $b<0$. Find $b$.`, -6, "b² = 36."),
-  num(String.raw`$h(t)=-4.9t^2+20t+2$. What is the greatest height it can reach (2 decimals)? Use the discriminant of $h(t)=H$.`, 2 + 400 / 19.6, "400 − 19.6(H − 2) ≥ 0.", null, 0.01),
-  num(String.raw`For which $c$ are the zeros of $y=c-2(x+1)^2$ 4 units apart?`, 8, "Zeros −1 ± √(c/2): 2√(c/2) = 4.", graph((x) => 8 - 2 * (x + 1) ** 2, { xmin: -6, xmax: 4, ymin: -6, ymax: 10 }, [P(-3, 0), P(1, 0), P(-1, 8)])),
-  tf("If ac < 0, the equation ax² + bx + c = 0 has two real roots.", true, "D = b² − 4ac > 0."),
-  num(String.raw`For how many integers $m$ from $-10$ to $10$ does $mx^2-6x+3=0$ have two real roots?`, 12, "36 − 12m > 0 → m < 3, m ≠ 0: −10, …, 2 except 0."),
-  num(String.raw`The discriminant of $x^2-(a+b)x+ab$ simplifies to $(a-b)^2$. Evaluate it for $a=7$, $b=2$.`, 25, "(7 − 2)²."),
-  num("The graph shows y = a(x − 2)² + 3 for several a. How many zeros does the member with a = −1.5 have?", 2, "a < 0 and k > 0.", planeDoc({ view: V8, curves: [-1.5, -0.5, 1].map((a, i) => ({ f: (x) => a * (x - 2) ** 2 + 3, color: ["red", "amber", "blue"][i] })), points: [P(2, 3)] })),
-  num(String.raw`For which $k$ does $y=x^2-kx+k-1$ have a double root?`, 2, "D = (k − 2)²."),
-  mc(String.raw`For every real $k$, $x^2+kx+k^2+1=0$ has…`, "no real roots", ["two real roots", "one real root", "roots that depend on k"], "D = −3k² − 4 < 0."),
-  num(String.raw`For which $c$ are the zeros of $x^2-6x+c$ 4 units apart?`, 5, "Distance 2√(9 − c) = 4."),
-  num("The horizontal line y = k touches y = x² − 4x + 7 exactly once. Find k.", 3, "The vertex (2, 3).", graph((x) => x * x - 4 * x + 7, V8, [P(2, 3)], { lines: [{ m: 0, b: 3, color: "amber", dash: true }] })),
-  num(String.raw`For which positive $p$ does $2x^2-px+8=0$ have equal roots?`, 8, "p² = 64."),
-  num(String.raw`A rocket's height is $h(t)=-5t^2+40t$. What is the smallest whole-number height it never reaches?`, 81, "Maximum 80."),
-  tf("A quadratic with rational coefficients can have exactly one irrational root.", false, "Irrational roots come in conjugate pairs."),
-  num(String.raw`How many of $x^2+3x+1$, $x^2+2x+1$, $x^2+x+1$, $x^2+1$ have real zeros?`, 2, "D = 5, 0, −3, −4."),
-  num("The line y = k crosses y = −(x − 1)² + 5 twice. What is the largest integer k?", 4, "Twice when k < 5.", graph((x) => -((x - 1) ** 2) + 5, V8, [P(1, 5)])),
-  num(String.raw`Find the sum of all $k$ for which $x^2+2kx+k+6=0$ has a double root.`, 1, "4k² − 4(k + 6) = 0 → k = 3, −2."),
+  num(String.raw`What is the smallest value of $x^2+7x+10.25$?`, -2, "(x + 3.5)² − 12.25 + 10.25."),
+  num("A theatre sells 600 seats at 15 dollars. Each 0.50-dollar increase loses 15 seats. What is the maximum revenue?", 9187.5, "(15 + 0.5x)(600 − 15x): zeros −30, 40, x = 5: 17.5 × 525.", graph((x) => (15 + 0.5 * x) * (600 - 15 * x), { xmin: -32, xmax: 42, ymin: -500, ymax: 10500 }, [P(-30, 0), P(40, 0)], { step: { x: 10, y: 1000 } }), 0.01),
+  num("For the theatre above (600 seats at 15 dollars, −15 seats per 0.50-dollar increase), what ticket price maximises revenue?", 17.5, "x = 5 increases.", null, 0.001),
+  num(String.raw`Price $p=-0.25x+20$ dollars sells $x$ thousand items; cost $C=4x+120$ thousand dollars. What is the maximum profit (thousands)?`, 136, "P = −0.25x² + 16x − 120 at x = 32."),
+  num("160 m of fence make a rectangle split into 3 pens by 2 fences parallel to the width. What is the largest total area (m²)?", 800, "4w + 2L = 160: A = w(80 − 2w), w = 20."),
+  num(String.raw`What is the minimum value of $2x^2-12x+25$?`, 7, "2(x − 3)² + 7."),
+  num("A rectangular yard against a barn uses 200 m of fence on the other three sides, but a 10 m gate opening in the side opposite the barn needs no fence. What is the largest area (m²)?", 5512.5, "2w + (L − 10) = 200 → A = w(210 − 2w), w = 52.5.", null, 0.01),
+  num(String.raw`Two numbers satisfy $x+2y=24$. What is the largest possible value of $xy$?`, 72, "y(24 − 2y) at y = 6."),
+  num("A rectangle has one corner at the origin and the opposite corner on y = 10 − 2x. What is its largest area?", 12.5, "x(10 − 2x) at x = 2.5.", planeDoc({ view: { xmin: -1, xmax: 6, ymin: -1, ymax: 11 }, lines: [{ m: -2, b: 10, color: "violet" }], segs: [{ pts: [[0, 0], [2, 0], [2, 6], [0, 6], [0, 0]], color: "green" }], points: [P(2, 6, "(x, y)")] }), 0.001),
+  num("Two numbers add to 14. What is the smallest possible sum of their squares?", 98, "x² + (14 − x)² is least at x = 7."),
+  mc("Which function has the largest maximum value?", String.raw`$y=-x^2+6x$`, [String.raw`$y=-2x^2+8x$`, String.raw`$y=-\tfrac12x^2+4x$`, String.raw`$y=-x^2+4x+4$`], "Maxima 9, 8, 8, 8."),
+  num(String.raw`For which $c$ does $y=x^2-6x+c$ have a minimum value of 0?`, 9, "(x − 3)² + c − 9."),
+  num("The graph shows h(t) = −5t² + 20t + 25. At what time is the height greatest?", 2, "−20/(−10).", graph((t) => -5 * t * t + 20 * t + 25, { xmin: 0, xmax: 5.5, ymin: 0, ymax: 50 }, [P(2, 45)], { a: 0, step: { x: 0.5, y: 5 } })),
+  num(String.raw`What is the greatest height reached by $h(t)=-5t^2+20t+25$?`, 45, "h(2)."),
+  num("A cinema sells 400 tickets at 12 dollars. Each 1-dollar decrease adds 40 customers. What is the maximum revenue?", 4840, "(12 − x)(400 + 40x): zeros 12, −10 → x = 1: 11 × 440."),
+  num(String.raw`The cost of producing $x$ hundred units is $C(x)=0.5x^2-30x+600$. What is the minimum cost?`, 150, "x = 30."),
+  tf("Maximum profit always occurs at the same quantity as maximum revenue.", false, "Costs move the vertex."),
+  num("The profit graph has break-even points 2 and 14 and has the form P(x) = −(x − 2)(x − 14). What is the maximum profit?", 36, "At x = 8: −(6)(−6).", graph((x) => -(x - 2) * (x - 14), { xmin: 0, xmax: 16, ymin: -10, ymax: 40 }, [P(2, 0), P(14, 0), P(8, 36)], { step: { x: 2, y: 5 } })),
+  num(String.raw`$y=a(x-3)^2+k$ has a maximum value of 8 and passes through $(5,0)$. Find its y-intercept.`, -10, "4a + 8 = 0 → a = −2; −18 + 8."),
+  num(String.raw`If $x+y=10$, what is the smallest value of $x^2+3y^2$?`, 75, "4x² − 60x + 300 at x = 7.5."),
 ];

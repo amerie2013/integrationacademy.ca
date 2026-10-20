@@ -23,7 +23,7 @@ import { ZeroProduct, SquareSolve, FormulaLab, DiscriminantLab, HeightInterval, 
 import { SimilarLab, ShadowLab, RatioLab, SideFinder, AngleFinder, ElevationLab } from "./Trig";
 import { SineDerive, CosineDerive, LawChooser, SurveyLab } from "./Laws";
 import { RelationTest, NotationLab, ParentGallery, DomainRangeLab, InverseLab, FuncTransform } from "./Functions";
-import { QuadForms, RevenueLab, DiscriminantK, FamilyLab, TangentLab } from "./Quadratics11";
+import { QuadForms, FormConverter, DiffLab, RevenueLab, DiscriminantK, FamilyLab, TangentLab } from "./Quadratics11";
 import { PowerLadder, RationalPower, GrowthCompare, ExpTransform, ExpModel } from "./Exponential";
 import { SpecialTriangles, TerminalArm, IdentityCheck, AmbiguousCase, CosineLaw, TowerLab } from "./Trig11";
 import { PeriodicReader, UnitWave, WheelLab, SinTransform, KeyPointMapper, FitSinusoid, ModelLab } from "./Sinusoidal";
@@ -140,6 +140,8 @@ const REGISTRY: Record<string, ComponentType<any>> = {
   inverseLab: InverseLab,
   funcTransform: FuncTransform,
   quadForms: QuadForms,
+  formConverter: FormConverter,
+  diffLab: DiffLab,
   revenueLab: RevenueLab,
   discriminantK: DiscriminantK,
   familyLab: FamilyLab,

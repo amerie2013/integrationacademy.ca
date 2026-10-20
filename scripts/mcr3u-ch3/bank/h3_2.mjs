@@ -1,27 +1,30 @@
-// 3.2 Maximum and Minimum Values — 20 hard questions
-import { mc, num, tf } from "./kit.mjs";
+// 3.2 Converting Between Forms — 20 hard questions
+import { mc, ms, num, tf } from "./kit.mjs";
 import { P, graph, planeDoc } from "./fig.mjs";
 
-export const TOPIC = "3.2 Maximum and Minimum Values";
+const S = String.raw;
+const V10 = { xmin: -10, xmax: 10, ymin: -10, ymax: 10 };
+
+export const TOPIC = "3.2 Converting Between Forms";
 export const Q = [
-  num(String.raw`What is the smallest value of $x^2+7x+10.25$?`, -2, "(x + 3.5)² − 12.25 + 10.25."),
-  num("A theatre sells 600 seats at 15 dollars. Each 0.50-dollar increase loses 15 seats. What is the maximum revenue?", 9187.5, "(15 + 0.5x)(600 − 15x): zeros −30, 40, x = 5: 17.5 × 525.", graph((x) => (15 + 0.5 * x) * (600 - 15 * x), { xmin: -32, xmax: 42, ymin: -500, ymax: 10500 }, [P(-30, 0), P(40, 0)], { step: { x: 10, y: 1000 } }), 0.01),
-  num("For the theatre above (600 seats at 15 dollars, −15 seats per 0.50-dollar increase), what ticket price maximises revenue?", 17.5, "x = 5 increases.", null, 0.001),
-  num(String.raw`Price $p=-0.25x+20$ dollars sells $x$ thousand items; cost $C=4x+120$ thousand dollars. What is the maximum profit (thousands)?`, 136, "P = −0.25x² + 16x − 120 at x = 32."),
-  num("160 m of fence make a rectangle split into 3 pens by 2 fences parallel to the width. What is the largest total area (m²)?", 800, "4w + 2L = 160: A = w(80 − 2w), w = 20."),
-  num(String.raw`What is the minimum value of $2x^2-12x+25$?`, 7, "2(x − 3)² + 7."),
-  num("A rectangular yard against a barn uses 200 m of fence on the other three sides, but a 10 m gate opening in the side opposite the barn needs no fence. What is the largest area (m²)?", 5512.5, "2w + (L − 10) = 200 → A = w(210 − 2w), w = 52.5.", null, 0.01),
-  num(String.raw`Two numbers satisfy $x+2y=24$. What is the largest possible value of $xy$?`, 72, "y(24 − 2y) at y = 6."),
-  num("A rectangle has one corner at the origin and the opposite corner on y = 10 − 2x. What is its largest area?", 12.5, "x(10 − 2x) at x = 2.5.", planeDoc({ view: { xmin: -1, xmax: 6, ymin: -1, ymax: 11 }, lines: [{ m: -2, b: 10, color: "violet" }], segs: [{ pts: [[0, 0], [2, 0], [2, 6], [0, 6], [0, 0]], color: "green" }], points: [P(2, 6, "(x, y)")] }), 0.001),
-  num("Two numbers add to 14. What is the smallest possible sum of their squares?", 98, "x² + (14 − x)² is least at x = 7."),
-  mc("Which function has the largest maximum value?", String.raw`$y=-x^2+6x$`, [String.raw`$y=-2x^2+8x$`, String.raw`$y=-\tfrac12x^2+4x$`, String.raw`$y=-x^2+4x+4$`], "Maxima 9, 8, 8, 8."),
-  num(String.raw`For which $c$ does $y=x^2-6x+c$ have a minimum value of 0?`, 9, "(x − 3)² + c − 9."),
-  num("The graph shows h(t) = −5t² + 20t + 25. At what time is the height greatest?", 2, "−20/(−10).", graph((t) => -5 * t * t + 20 * t + 25, { xmin: 0, xmax: 5.5, ymin: 0, ymax: 50 }, [P(2, 45)], { a: 0, step: { x: 0.5, y: 5 } })),
-  num(String.raw`What is the greatest height reached by $h(t)=-5t^2+20t+25$?`, 45, "h(2)."),
-  num("A cinema sells 400 tickets at 12 dollars. Each 1-dollar decrease adds 40 customers. What is the maximum revenue?", 4840, "(12 − x)(400 + 40x): zeros 12, −10 → x = 1: 11 × 440."),
-  num(String.raw`The cost of producing $x$ hundred units is $C(x)=0.5x^2-30x+600$. What is the minimum cost?`, 150, "x = 30."),
-  tf("Maximum profit always occurs at the same quantity as maximum revenue.", false, "Costs move the vertex."),
-  num("The profit graph has break-even points 2 and 14 and has the form P(x) = −(x − 2)(x − 14). What is the maximum profit?", 36, "At x = 8: −(6)(−6).", graph((x) => -(x - 2) * (x - 14), { xmin: 0, xmax: 16, ymin: -10, ymax: 40 }, [P(2, 0), P(14, 0), P(8, 36)], { step: { x: 2, y: 5 } })),
-  num(String.raw`$y=a(x-3)^2+k$ has a maximum value of 8 and passes through $(5,0)$. Find its y-intercept.`, -10, "4a + 8 = 0 → a = −2; −18 + 8."),
-  num(String.raw`If $x+y=10$, what is the smallest value of $x^2+3y^2$?`, 75, "4x² − 60x + 300 at x = 7.5."),
+  num(S`A parabola has zeros $-4$ and $8$ and a maximum value of 18. Find its y-intercept.`, 16, "Axis 2: a(6)(−6) = 18 → a = −½; y(0) = −½(4)(−8)."),
+  num(S`$f(x)=x^2+bx+c$ has vertex $(-3,2)$. Find $f(1)$.`, 18, "(x + 3)² + 2 = x² + 6x + 11."),
+  mc("The parabola shown has zeros 0 and 4 and vertex (2, −8). Which equation is it?", S`$y=2x^2-8x$`, [S`$y=x^2-4x$`, S`$y=-2x^2+8x$`, S`$y=2x^2+8x$`], "2x(x − 4).", graph((x) => 2 * x * x - 8 * x, V10, [P(0, 0), P(4, 0), P(2, -8)])),
+  num(S`A parabola passes through $(1,0)$, $(5,0)$ and $(3,-6)$. Find $a$.`, 1.5, "a(2)(−2) = −6.", null, 0.001),
+  num(S`How far apart are the vertices of $y=x^2-4x+7$ and $y=-x^2+4x-1$?`, 0, "Both vertices are (2, 3)."),
+  num(S`$y=x^2+bx+16$ has its vertex on the x-axis and $b>0$. Find $b$.`, 8, "(x + 4)²."),
+  num(S`A ball's height is $h(t)=-5t^2+20t+2$ m. Find its maximum height.`, 22, "t = 2: −20 + 40 + 2."),
+  num(S`$f(x)=-2x^2+bx-7$ has its maximum at $x=3$. Find the maximum value.`, 11, "b = 12; −18 + 36 − 7."),
+  num(S`A parabola has vertex $(2,-3)$ and a zero at $x=5$. Find its y-intercept (3 decimals).`, -1.667, "9a − 3 = 0 → a = ⅓; ⅓(4) − 3.", null, 0.002),
+  mc(S`Which quadratic has zeros 2 and 8 and passes through $(5,18)$?`, S`$y=-2(x-2)(x-8)$`, [S`$y=2(x-2)(x-8)$`, S`$y=-2(x+2)(x+8)$`, S`$y=-(x-2)(x-8)$`], "a(3)(−3) = 18."),
+  num("The parabola passes through (−2, 0), (4, 0) and (0, −4). Find the y-coordinate of its vertex.", -4.5, "a(2)(−4) = −4 → a = ½; vertex at x = 1: ½(3)(−3).", graph((x) => 0.5 * (x + 2) * (x - 4), V10, [P(-2, 0), P(4, 0), P(0, -4)]), 0.001),
+  tf("Two different quadratic functions can have the same vertex and the same y-intercept.", false, "Vertex form plus one more point fixes a."),
+  num("How far apart are the zeros of y = 2x² − 4x − 6?", 4, "2(x − 3)(x + 1).", planeDoc({ view: V10, curves: [{ f: (x) => 2 * x * x - 4 * x - 6, color: "violet" }], points: [P(-1, 0), P(3, 0)] })),
+  num(S`$y=ax^2+bx+c$ has vertex $(1,-8)$ and passes through $(3,0)$. Find $c$.`, -6, "4a − 8 = 0 → a = 2; 2(x − 1)² − 8 = 2x² − 4x − 6."),
+  num(S`$y=-x^2+bx+c$ has zeros $-1$ and $5$. Find $b+c$.`, 9, "−(x + 1)(x − 5) = −x² + 4x + 5."),
+  num("The parabola shown passes through (−3, 0), (1, 0) and (−1, 8). Write it in standard form. What is c?", 6, "a(2)(−2) = 8 → a = −2; −2(x² + 2x − 3).", graph((x) => -2 * (x + 3) * (x - 1), V10, [P(-3, 0), P(1, 0), P(-1, 8)])),
+  ms(S`Which expressions equal $x^2-6x+5$? Select all.`, ["(x − 1)(x − 5)", "(x − 3)² − 4", "(x − 3)² + 5", "(x + 1)(x + 5)"], [0, 1], "(x − 3)² − 4 = x² − 6x + 9 − 4."),
+  num(S`For $y=kx^2-8x+3$ the axis is $x=2$. Find $k$.`, 2, "8/(2k) = 2."),
+  num(S`The parabolas $y=x^2-6x+c$ and $y=-(x-3)^2+5$ have the same vertex. Find $c$.`, 14, "Vertex of the first: (3, c − 9) = (3, 5)."),
+  num("The parabola shown has zeros −1 and 5 and y-intercept 2.5. In vertex form y = a(x − h)² + k, what is k?", 4.5, "a(1)(−5) = 2.5 → a = −½; axis 2: −½(3)(−3).", graph((x) => -0.5 * (x + 1) * (x - 5), V10, [P(-1, 0), P(5, 0), P(0, 2.5)]), 0.001),
 ];

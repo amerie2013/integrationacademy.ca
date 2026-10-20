@@ -1,29 +1,29 @@
-// 3.6 Linear–Quadratic Systems — 20 hard questions
+// 3.6 The Zeros and the Discriminant — 20 hard questions
 import { mc, num, tf } from "./kit.mjs";
-import { P, planeDoc } from "./fig.mjs";
+import { P, graph, planeDoc } from "./fig.mjs";
 
-const V8 = { xmin: -6, xmax: 6, ymin: -8, ymax: 12 };
+const V8 = { xmin: -6, xmax: 6, ymin: -6, ymax: 8 };
 
-export const TOPIC = "3.6 Linear–Quadratic Systems";
+export const TOPIC = "3.6 The Zeros and the Discriminant";
 export const Q = [
-  num(String.raw`For $k>0$, $y=kx-4$ is tangent to $y=x^2$. Find the y-coordinate of the point of contact.`, 4, "x² − kx + 4: k = 4, x = 2."),
-  num(String.raw`Which line of slope 3, $y=3x+k$, is tangent to $y=x^2+x+5$? Give $k$.`, 4, "x² − 2x + 5 − k: 4 − 4(5 − k) = 0."),
-  num(String.raw`Tank A holds $4(t-10)^2$ L for $0\le t\le10$ min; tank B starts empty and fills at 20 L/min. When do they hold equal amounts (min)?`, 5, "4t² − 100t + 400 = 0 → t² − 25t + 100 = 0 → t = 5 (20 is outside)."),
-  num(String.raw`For the tanks above (A: $4(t-10)^2$, B: $20t$), how many litres are in each when they are equal?`, 100, "20 × 5."),
-  num(String.raw`Find the distance between the points where $y=x^2-4x$ meets $y=2x-5$ (2 decimals).`, Math.sqrt(80), "x = 1, 5: (1, −3), (5, 5).", planeDoc({ view: { xmin: -1, xmax: 7, ymin: -6, ymax: 8 }, curves: [{ f: (x) => x * x - 4 * x, color: "violet" }], lines: [{ m: 2, b: -5, color: "blue" }], points: [P(1, -3), P(5, 5)] }), 0.01),
-  num(String.raw`$y=x^2$ meets $y=x+2$ at two points A and B. Find the area of triangle OAB (O is the origin).`, 3, "A(2, 4), B(−1, 1): ½|2·1 − (−1)·4|."),
-  mc(String.raw`For which $b$ is $y=2x+b$ tangent to $y=-x^2+4x$?`, String.raw`$b=1$`, [String.raw`$b=-1$`, String.raw`$b=4$`, String.raw`$b=0$`], "−x² + 2x − b: 4 − 4b = 0."),
-  num(String.raw`A rocket's height is $h(t)=-5t^2+50t$ and a drone's is $d(t)=10t+35$. For how many seconds is the rocket above the drone?`, 6, "t² − 8t + 7 = 0 → 1 and 7."),
-  num("A line through (0, −5) with positive slope is tangent to y = x². Find its slope (2 decimals).", Math.sqrt(20), "x² − mx + 5 = 0: m² = 20.", planeDoc({ view: V8, curves: [{ f: (x) => x * x, color: "violet" }], lines: [{ m: Math.sqrt(20), b: -5, color: "amber", dash: true }], points: [P(0, -5)] }), 0.01),
-  tf("A vertical line can be tangent to a parabola that opens up.", false, "It crosses exactly once but is not tangent; the system method needs non-vertical lines."),
-  num(String.raw`For which $c$ is $y=x^2+c$ tangent to $y=6x$?`, 9, "x² − 6x + c: 36 − 4c = 0."),
-  num(String.raw`$y=x^2-2x-3$ and $y=2x-3$ meet at the y-intercept and one other point. Find its x-coordinate.`, 4, "x² − 4x = 0."),
-  num(String.raw`For how many integers $m$ from $-10$ to $10$ does $y=mx+1$ miss $y=x^2+2$?`, 3, "x² − mx + 1: m² < 4 → m = −1, 0, 1."),
-  num("Revenue R = −x² + 26x and cost C = 4x + 85 (thousands). For how wide an interval of x is there a profit?", 12, "x² − 22x + 85 = 0 → 5 and 17.", planeDoc({ view: { xmin: 0, xmax: 26, ymin: 0, ymax: 180 }, curves: [{ f: (x) => -x * x + 26 * x, color: "violet" }], lines: [{ m: 4, b: 85, color: "blue" }], points: [P(5, 105), P(17, 153)], step: { x: 2, y: 20 } })),
-  num(String.raw`$y=x^2$ and $y=2x+3$ meet at A and B. Find the x-coordinate of the midpoint of AB.`, 1, "x = −1 and 3."),
-  mc(String.raw`Which parabola $y=x^2+bx+c$ is tangent to $y=2x+1$ at $x=1$?`, String.raw`$y=x^2+2$`, [String.raw`$y=x^2+1$`, String.raw`$y=x^2+2x$`, String.raw`$y=x^2-2x+4$`], "x² + (b − 2)x + c − 1 = (x − 1)²: b = 0, c = 2."),
-  num(String.raw`A ball's height is $h(t)=-4.9t^2+24.5t$ and a lift rises as $p(t)=4.9t+9.8$. When does the ball first pass the lift (2 decimals)?`, 2 - Math.sqrt(2), "t² − 4t + 2 = 0 → t = 2 ± √2.", null, 0.01),
-  num("The horizontal line y = k meets y = −(x − 2)² + 4 exactly once. Find k.", 4, "At the vertex.", planeDoc({ view: V8, curves: [{ f: (x) => -((x - 2) ** 2) + 4, color: "violet" }], lines: [{ m: 0, b: 4, color: "amber", dash: true }], points: [P(2, 4)] })),
-  num("Two lines through (1, −3) are tangent to y = x². What is the sum of their slopes?", 4, "y = m(x − 1) − 3: x² − mx + m + 3 = 0, D = m² − 4m − 12 = 0 → m = 6, −2."),
-  num(String.raw`$y=x^2$ and $y=x+k$ meet at two points whose x-coordinates differ by 5. Find $k$.`, 6, "x² − x − k: the roots differ by √(1 + 4k) = 5."),
+  num(String.raw`For which nonzero $k$ does $x^2+(k+2)x+2k+1=0$ have exactly one root?`, 4, "D = k² − 4k = 0."),
+  num(String.raw`How many integers $k$ make $kx^2+4x+k=0$ a quadratic with two real roots?`, 2, "16 − 4k² > 0, k ≠ 0: k = ±1."),
+  mc(String.raw`How many real roots does $x^2-2mx+m^2-1=0$ have?`, "always two, for every m", ["always one", "none for some m", "it depends on the sign of m"], "D = 4m² − 4m² + 4 = 4."),
+  num(String.raw`$y=x^2+bx+9$ touches the x-axis and $b<0$. Find $b$.`, -6, "b² = 36."),
+  num(String.raw`$h(t)=-4.9t^2+20t+2$. What is the greatest height it can reach (2 decimals)? Use the discriminant of $h(t)=H$.`, 2 + 400 / 19.6, "400 − 19.6(H − 2) ≥ 0.", null, 0.01),
+  num(String.raw`For which $c$ are the zeros of $y=c-2(x+1)^2$ 4 units apart?`, 8, "Zeros −1 ± √(c/2): 2√(c/2) = 4.", graph((x) => 8 - 2 * (x + 1) ** 2, { xmin: -6, xmax: 4, ymin: -6, ymax: 10 }, [P(-3, 0), P(1, 0), P(-1, 8)])),
+  tf("If ac < 0, the equation ax² + bx + c = 0 has two real roots.", true, "D = b² − 4ac > 0."),
+  num(String.raw`For how many integers $m$ from $-10$ to $10$ does $mx^2-6x+3=0$ have two real roots?`, 12, "36 − 12m > 0 → m < 3, m ≠ 0: −10, …, 2 except 0."),
+  num(String.raw`The discriminant of $x^2-(a+b)x+ab$ simplifies to $(a-b)^2$. Evaluate it for $a=7$, $b=2$.`, 25, "(7 − 2)²."),
+  num("The graph shows y = a(x − 2)² + 3 for several a. How many zeros does the member with a = −1.5 have?", 2, "a < 0 and k > 0.", planeDoc({ view: V8, curves: [-1.5, -0.5, 1].map((a, i) => ({ f: (x) => a * (x - 2) ** 2 + 3, color: ["red", "amber", "blue"][i] })), points: [P(2, 3)] })),
+  num(String.raw`For which $k$ does $y=x^2-kx+k-1$ have a double root?`, 2, "D = (k − 2)²."),
+  mc(String.raw`For every real $k$, $x^2+kx+k^2+1=0$ has…`, "no real roots", ["two real roots", "one real root", "roots that depend on k"], "D = −3k² − 4 < 0."),
+  num(String.raw`For which $c$ are the zeros of $x^2-6x+c$ 4 units apart?`, 5, "Distance 2√(9 − c) = 4."),
+  num("The horizontal line y = k touches y = x² − 4x + 7 exactly once. Find k.", 3, "The vertex (2, 3).", graph((x) => x * x - 4 * x + 7, V8, [P(2, 3)], { lines: [{ m: 0, b: 3, color: "amber", dash: true }] })),
+  num(String.raw`For which positive $p$ does $2x^2-px+8=0$ have equal roots?`, 8, "p² = 64."),
+  num(String.raw`A rocket's height is $h(t)=-5t^2+40t$. What is the smallest whole-number height it never reaches?`, 81, "Maximum 80."),
+  tf("A quadratic with rational coefficients can have exactly one irrational root.", false, "Irrational roots come in conjugate pairs."),
+  num(String.raw`How many of $x^2+3x+1$, $x^2+2x+1$, $x^2+x+1$, $x^2+1$ have real zeros?`, 2, "D = 5, 0, −3, −4."),
+  num("The line y = k crosses y = −(x − 1)² + 5 twice. What is the largest integer k?", 4, "Twice when k < 5.", graph((x) => -((x - 1) ** 2) + 5, V8, [P(1, 5)])),
+  num(String.raw`Find the sum of all $k$ for which $x^2+2kx+k+6=0$ has a double root.`, 1, "4k² − 4(k + 6) = 0 → k = 3, −2."),
 ];

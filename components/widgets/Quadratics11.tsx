@@ -1,8 +1,8 @@
 "use client";
 
-// MCR3U chapter 3 (quadratic functions) explorers: one parabola in three forms, revenue/price optimisation,
-// the discriminant as a function of a parameter, families of parabolas with the same zeros, and the tangent
-// line of a linear–quadratic system.
+// MCR3U chapter 3 (quadratic functions) explorers: one parabola in three forms, converting between forms, finite
+// differences, revenue/price optimisation, the discriminant as a function of a parameter, families of parabolas
+// with the same zeros, and the tangent line of a linear–quadratic system.
 
 import { useState } from "react";
 import { C, MathText, Readout, Row, Segmented, Slider, WidgetCard } from "./kit";
@@ -58,7 +58,91 @@ export function QuadForms({ init = [1, -1, 3] }: { init?: [number, number, numbe
   );
 }
 
-/* ---------------------------------------------------------------- 3.2 revenue */
+/* ---------------------------------------------------------------- 3.2 converting between forms */
+
+export function FormConverter({ init = [2, 1, -8] }: { init?: [number, number, number] }) {
+  const [mode, setMode] = useState<"vs" | "sv">("vs");
+  const [a, setA] = useState(init[0]), [h, setH] = useState(init[1]), [k, setK] = useState(init[2]);
+  const b = -2 * a * h, c = a * h * h + k, f = (x: number) => a * (x - h) ** 2 + k;
+  const rs = roots(a, b, c);
+  const view: View = { xmin: -8, xmax: 8, ymin: -12, ymax: 12 };
+  const inner = h === 0 ? "x" : `x${sgn(-h)}`;
+  const sq = h === 0 ? "x^2" : `x^2${sgn(-2 * h)}x${sgn(h * h)}`;
+  const facTex = rs.length === 2 && rs.every((x) => Math.abs(x - Math.round(x * 100) / 100) < 1e-9) ? fac(a, rs[0], rs[1]) : rs.length === 1 ? vertexForm(a, h, 0) : "";
+  const zeroTex = rs.length === 0
+    ? `\\((${inner})^2=${n(-k / a, 3)}<0\\): no real zeros, so there is <strong>no factored form</strong>.`
+    : rs.length === 1 ? `one zero, \\(x=${n(h)}\\) (the vertex is on the x-axis).`
+    : `\\(x=${n(h)}\\pm${Number.isInteger(Math.sqrt(-k / a)) ? Math.sqrt(-k / a) : `\\sqrt{${n(-k / a, 3)}}`}\\)${facTex ? `, so \\(y=${facTex}\\)` : ` \\(\\approx ${n(rs[0])}\\) and \\(${n(rs[1])}\\) (not whole numbers, so the factored form has decimals)`}.`;
+  const vs = `<strong>Vertex → standard.</strong> \\(y=${vertexForm(a, h, k)}\\)<br/>Expand the square: \\(y=${a === 1 ? "" : a === -1 ? "-" : n(a)}(${sq})${sgn(k)}\\)<br/>Distribute and collect: \\(y=${stdForm(a, b, c)}\\)<br/>Zeros: ${zeroTex}`;
+  const sv = `<strong>Standard → vertex.</strong> \\(y=${stdForm(a, b, c)}\\)<br/>Axis: \\(x=-\\dfrac{b}{2a}=-\\dfrac{${n(b)}}{${n(2 * a)}}=${n(h)}\\)<br/>Vertex height: \\(y(${n(h)})=${n(k)}\\), so \\(y=${vertexForm(a, h, k)}\\)<br/>${rs.length === 2 ? `Check: the zeros ${n(rs[0])} and ${n(rs[1])} average to ${n(h)}.` : "With no pair of zeros, \\(-b/(2a)\\) is the only quick route to the axis."}`;
+  return (
+    <WidgetCard title="Changing forms" subtitle="expand to reach standard form; use the axis to get back to vertex form">
+      <Row><Segmented value={mode} onChange={setMode} options={[{ value: "vs", label: "vertex → standard" }, { value: "sv", label: "standard → vertex" }]} /></Row>
+      <Row>
+        <Slider label="a" value={a} min={-3} max={3} step={0.5} onChange={(v) => setA(v === 0 ? 0.5 : v)} format={(v) => n(v)} color={C.blue} />
+        <Slider label="h" value={h} min={-5} max={5} onChange={setH} color={C.violet} />
+        <Slider label="k" value={k} min={-10} max={10} onChange={setK} color={C.violet} />
+      </Row>
+      <Curves view={view} label="Converting forms" step={1} stepY={2} fs={[{ f, color: C.violet }]}>
+        {(X, Y) => <>
+          <line x1={X(h)} y1={Y(view.ymin)} x2={X(h)} y2={Y(view.ymax)} stroke={C.faint} strokeDasharray="6 5" />
+          {Math.abs(k) <= 12 && dot(X, Y, h, k, C.blue, `V(${n(h)}, ${n(k)})`, "v")}
+          {rs.map((x, i) => dot(X, Y, x, 0, C.red, undefined, i))}
+          {Math.abs(c) <= 12 && dot(X, Y, 0, c, C.green, `(0, ${n(c)})`, "c")}
+        </>}
+      </Curves>
+      <Readout tone={rs.length ? "blue" : "amber"}><MathText html={mode === "vs" ? vs : sv} /></Readout>
+    </WidgetCard>
+  );
+}
+
+/* ---------------------------------------------------------------- 3.3 finite differences */
+
+export function DiffLab({ init = ["quad", 2, -3, 1] }: { init?: ["lin" | "quad" | "exp", number, number, number] }) {
+  const [kind, setKind] = useState<"lin" | "quad" | "exp">(init[0]);
+  const [p, setP] = useState(init[1]), [q, setQ] = useState(init[2]), [r, setR] = useState(init[3]);
+  const [step, setStep] = useState<number>(1);
+  const pick = (v: "lin" | "quad" | "exp") => { setKind(v); setP(2); setQ(-3); setR(1); };
+  const f = (x: number) => kind === "lin" ? p * x + q : kind === "quad" ? p * x * x + q * x + r : r * Math.pow(Math.abs(p) || 1, x);
+  const xs = [0, 1, 2, 3, 4, 5].map((i) => -step + i * step), ys = xs.map(f);
+  const d1 = ys.slice(1).map((y, i) => y - ys[i]), d2 = d1.slice(1).map((d, i) => d - d1[i]);
+  const ratio = ys.slice(1).map((y, i) => (Math.abs(ys[i]) < 1e-12 ? NaN : y / ys[i]));
+  const const1 = d1.every((d) => Math.abs(d - d1[0]) < 1e-9), const2 = d2.every((d) => Math.abs(d - d2[0]) < 1e-9);
+  const eqTex = kind === "lin" ? `y=${stdForm(0, p, q)}` : kind === "quad" ? `y=${stdForm(p, q, r)}` : `y=${r === 1 ? "" : n(r)}${r === 1 ? n(Math.abs(p) || 1) : `(${n(Math.abs(p) || 1)})`}^x`;
+  const ymax = Math.max(4, ...ys.map(Math.abs)) * 1.15;
+  const view: View = { xmin: xs[0] - step, xmax: xs[5] + step, ymin: -ymax, ymax };
+  const msg = kind === "lin" ? `The first differences are constant (\\(${n(d1[0])}\\)): linear. Each is the slope times the step, \\(${n(p)}\\times${step}\\).`
+    : kind === "quad" ? `The first differences change but the second differences are constant: \\(${n(d2[0])}=2a\\cdot(\\text{step})^2=2(${n(p)})(${step})^2\\). ${step === 1 ? "With a step of 1 this is just \\(2a\\)." : `With a step of ${step}, dividing by \\(2(${step})^2\\) gives \\(a=${n(p)}\\).`}`
+    : `Neither difference row is constant, but every ratio is \\(${n(Math.abs(p) || 1)}\\): exponential, not quadratic.`;
+  return (
+    <WidgetCard title="Finite differences" subtitle="constant 1st differences → linear · constant 2nd → quadratic · constant ratio → exponential">
+      <Row>
+        <Segmented value={kind} onChange={pick} options={[{ value: "lin", label: "linear" }, { value: "quad", label: "quadratic" }, { value: "exp", label: "exponential" }]} />
+        <Segmented label="x-step" value={step} onChange={setStep} options={[{ value: 1, label: "1" }, { value: 2, label: "2" }, { value: 0.5, label: "0.5" }]} />
+      </Row>
+      <Row>
+        <Slider label={kind === "lin" ? "slope m" : kind === "quad" ? "a" : "base"} value={p} min={kind === "exp" ? 1.5 : -3} max={3} step={0.5} onChange={(v) => setP(kind === "quad" && v === 0 ? 0.5 : v)} format={(v) => n(v)} color={C.blue} />
+        {kind !== "exp" && <Slider label={kind === "lin" ? "intercept" : "b"} value={q} min={-6} max={6} onChange={setQ} color={C.violet} />}
+        {kind !== "lin" && <Slider label={kind === "quad" ? "c" : "start"} value={r} min={kind === "exp" ? 1 : -6} max={6} onChange={setR} color={C.violet} />}
+      </Row>
+      <Curves view={view} label="Table of values" step={step} stepY={Math.max(1, Math.round(ymax / 5))} fs={[{ f, color: "#cbd5e1", width: 1.5 }]}>
+        {(X, Y) => <>{xs.map((x, i) => dot(X, Y, x, ys[i], C.violet, undefined, i))}</>}
+      </Curves>
+      <table style={{ borderCollapse: "collapse", margin: "4px auto", fontSize: 14 }}>
+        <tbody>
+          <tr><th style={cell}>x</th>{xs.map((x) => <td key={x} style={cell}>{n(x)}</td>)}</tr>
+          <tr><th style={cell}>y</th>{ys.map((y, i) => <td key={i} style={cell}>{n(y)}</td>)}</tr>
+          <tr><th style={cell}>1st diff.</th>{d1.map((d, i) => <td key={i} style={{ ...cell, ...(const1 ? { color: C.blue, fontWeight: 700 } : {}) }}>{n(d)}</td>)}</tr>
+          <tr><th style={cell}>2nd diff.</th>{d2.map((d, i) => <td key={i} style={{ ...cell, ...(const2 && !const1 ? { color: C.blue, fontWeight: 700 } : {}) }}>{n(d)}</td>)}</tr>
+          {kind === "exp" && <tr><th style={cell}>ratio</th>{ratio.map((d, i) => <td key={i} style={{ ...cell, color: C.green, fontWeight: 700 }}>{Number.isFinite(d) ? n(d) : "—"}</td>)}</tr>}
+        </tbody>
+      </table>
+      <Readout tone={kind === "quad" ? "blue" : kind === "lin" ? "green" : "amber"}><MathText html={`\\(${eqTex}\\). ${msg}`} /></Readout>
+    </WidgetCard>
+  );
+}
+
+/* ---------------------------------------------------------------- 3.4 revenue */
 
 export function RevenueLab({ init = [12, 300, 0.5, 10] }: { init?: [number, number, number, number] }) {
   const [p0, setP0] = useState(init[0]), [q0, setQ0] = useState(init[1]), [dp, setDp] = useState(init[2]), [dq, setDq] = useState(init[3]);
@@ -92,7 +176,7 @@ export function RevenueLab({ init = [12, 300, 0.5, 10] }: { init?: [number, numb
   );
 }
 
-/* ---------------------------------------------------------------- 3.4 discriminant with a parameter */
+/* ---------------------------------------------------------------- 3.6 discriminant with a parameter */
 
 export function DiscriminantK({ init = [1, 9] }: { init?: [number, number] }) {
   const [a] = useState(init[0]), [c] = useState(init[1]);
@@ -114,7 +198,7 @@ export function DiscriminantK({ init = [1, 9] }: { init?: [number, number] }) {
   );
 }
 
-/* ---------------------------------------------------------------- 3.5 families */
+/* ---------------------------------------------------------------- 3.7 families */
 
 export function FamilyLab({ init = [-2, 4] }: { init?: [number, number] }) {
   const [mode, setMode] = useState<"rat" | "irr">("rat");
@@ -151,7 +235,7 @@ export function FamilyLab({ init = [-2, 4] }: { init?: [number, number] }) {
   );
 }
 
-/* ---------------------------------------------------------------- 3.6 tangent lines */
+/* ---------------------------------------------------------------- 3.8 tangent lines */
 
 export function TangentLab({ init = [-1, 6, 0, 2] }: { init?: [number, number, number, number] }) {
   const [a] = useState(init[0]), [b] = useState(init[1]), [c] = useState(init[2]);

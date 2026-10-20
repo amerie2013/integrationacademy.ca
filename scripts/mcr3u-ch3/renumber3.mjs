@@ -1,3 +1,4 @@
+// APPLIED 2026-10-18 (6 lessons + review). Do not rerun: the 3.1 split is handled by split31.mjs.
 // MCR3U chapter 3 rebuild (6 lessons + review instead of 2): renames the old 3.1 / 3.2 bank topics and worksheet rows,
 // and re-sorts every lesson position after the new 3.2–3.5 and 3.7 lessons are inserted.
 //   node scripts/mcr3u-ch3/renumber3.mjs          -> dry run

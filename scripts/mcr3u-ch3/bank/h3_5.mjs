@@ -1,27 +1,27 @@
-// 3.5 Families of Quadratic Functions — 20 hard questions
+// 3.5 Solving Quadratic Equations — 20 hard questions
 import { mc, num, tf } from "./kit.mjs";
-import { P, planeDoc } from "./fig.mjs";
+import { P, graph, planeDoc } from "./fig.mjs";
 
-export const TOPIC = "3.5 Families of Quadratic Functions";
+export const TOPIC = "3.5 Solving Quadratic Equations";
 export const Q = [
-  num("A tunnel arch is 16 m wide; 3 m from one side it is 6 m high. A truck 4 m wide drives down the middle. What is the arch's height above the truck's edges (2 decimals)?", (6 / 39) * 6 * 10, "y = ax(x − 16): a(3)(−13) = 6 → a = −6/39; y(6) = (6/39)(6)(10).", planeDoc({ view: { xmin: -1, xmax: 17, ymin: -1, ymax: 11 }, curves: [{ f: (x) => (-6 / 39) * x * (x - 16), a: 0, b: 16, color: "violet" }], segs: [{ pts: [[6, 0], [6, 5.5], [10, 5.5], [10, 0]], color: "blue" }], points: [P(3, 6)], step: { x: 1, y: 1 } }), 0.01),
-  num(String.raw`A parabola has zeros $2\pm\sqrt5$ and y-intercept 3. What is its maximum value?`, 15, "a[(x − 2)² − 5]: −a = 3 → a = −3; vertex value −3(−5)."),
-  num("A parabola has zeros 0 and 8 and its vertex lies on y = x + 2. Find a.", -0.375, "Vertex (4, 6): a(4)(−4) = 6.", null, 0.001),
-  num(String.raw`Which member of $y=a(x-1)(x-5)$ has its vertex on the line $y=6$? Give $a$.`, -1.5, "Vertex (3, −4a): −4a = 6.", null, 0.001),
-  num(String.raw`A parabola has zeros $-3\pm\sqrt2$ and y-intercept 14. Find its minimum value.`, -4, "a(x² + 6x + 7): 7a = 14 → a = 2; vertex value 2(−2)."),
-  num("Both parabolas have zeros 0 and 6. The blue one passes through (3, 9). The red one passes through (3, −4.5). Find a for the red one.", 0.5, "a(3)(−3) = −4.5.", planeDoc({ view: { xmin: -1, xmax: 7, ymin: -6, ymax: 10 }, curves: [{ f: (x) => -x * (x - 6), color: "blue" }, { f: (x) => 0.5 * x * (x - 6), color: "red" }], points: [P(3, 9), P(3, -4.5)] }), 0.001),
-  num("A suspension cable hangs between two 30 m towers 100 m apart; its lowest point is 5 m above the road at the centre. How high is it 20 m from a tower?", 14, "y = a(x − 50)² + 5, 2500a + 5 = 30 → a = 0.01; at x = 20: 9 + 5.", planeDoc({ view: { xmin: -5, xmax: 105, ymin: 0, ymax: 35 }, curves: [{ f: (x) => 0.01 * (x - 50) ** 2 + 5, a: 0, b: 100, color: "violet" }], points: [P(0, 30), P(100, 30), P(50, 5)], step: { x: 10, y: 5 } })),
-  mc(String.raw`Which point lies on every member of $y=a(x^2-4x)+3$?`, String.raw`$(4,3)$`, [String.raw`$(4,0)$`, String.raw`$(2,3)$`, String.raw`$(3,4)$`], "At x = 0 and x = 4 the bracket is 0, so y = 3."),
-  num(String.raw`$y=a(x-2)^2-4a$ is a family with shared zeros. What is the larger zero?`, 4, "a[(x − 2)² − 4] = a·x(x − 4)."),
-  tf(String.raw`The family $y=(x-1)(x-5)+k$ shares its zeros.`, false, "Changing k is a vertical shift — the zeros move; the axis is shared."),
-  num("The arch has zeros −6 and 6 and passes through (4, 5). How high is it at the centre?", 9, "a(10)(−2) = 5 → a = −¼; −¼(6)(−6).", planeDoc({ view: { xmin: -7, xmax: 7, ymin: -1, ymax: 10 }, curves: [{ f: (x) => -0.25 * (x + 6) * (x - 6), a: -6, b: 6, color: "violet" }], points: [P(4, 5), P(-6, 0), P(6, 0)] })),
-  num(String.raw`A parabola has zeros $1\pm\sqrt3$ and passes through $(3,8)$. Find the y-coordinate of its vertex.`, -24, "a[(x − 1)² − 3]: a(1) = 8; vertex value 8(−3)."),
-  num(String.raw`Two members of $y=a(x-2)(x-8)$ are reflections of each other in the x-axis; one has vertex $(5,18)$. Find $a$ for the other.`, 2, "a(3)(−3) = 18 → a = −2; the reflection has a = 2."),
-  num("A parabola has zeros 6 units apart, axis x = 1, and passes through (0, −16). Find the y-coordinate of its vertex.", -18, "Zeros −2 and 4: −8a = −16 → a = 2; 2(3)(−3)."),
-  mc("The red, blue and green curves are members of y = a(x + 2)(x − 2). Which a belongs to the red curve?", String.raw`$a=-2$`, [String.raw`$a=-\tfrac12$`, String.raw`$a=1$`, String.raw`$a=2$`], "Red opens down and is the narrowest: y-intercept 8.", planeDoc({ view: { xmin: -4, xmax: 4, ymin: -6, ymax: 9 }, curves: [{ f: (x) => -2 * (x + 2) * (x - 2), color: "red" }, { f: (x) => -0.5 * (x + 2) * (x - 2), color: "blue" }, { f: (x) => 1 * (x + 2) * (x - 2), color: "green" }], points: [P(0, 8)] })),
-  num("A parabolic dome is 50 m wide and 20 m tall. How tall is it 10 m from its edge?", 12.8, "a(25)(−25) = 20 → a = −0.032; 0.032(10)(40).", null, 0.001),
-  num(String.raw`$y=k(x^2-9)$ passes through $(1,16)$. Find $k$.`, -2, "−8k = 16."),
-  num(String.raw`How far apart are the vertices of the members $a=1$ and $a=-1$ of $y=a(x+2)(x-4)$?`, 18, "(1, −9) and (1, 9)."),
-  num("The two curves are y = (x − 1)(x − 3) and y = 3(x − 1)(x − 3). How far apart are they vertically at x = 2?", 2, "−1 versus −3.", planeDoc({ view: { xmin: -1, xmax: 5, ymin: -4, ymax: 6 }, curves: [{ f: (x) => (x - 1) * (x - 3), color: "blue" }, { f: (x) => 3 * (x - 1) * (x - 3), color: "red" }], points: [P(2, -1), P(2, -3)] })),
-  num(String.raw`Find the sum of all $a$ for which the vertex of $y=a(x-1)(x-4)$ is 9 units from the x-axis.`, 0, "Vertex value −2.25a: |2.25a| = 9 → a = ±4."),
+  num("A 30 cm by 20 cm picture has a frame of uniform width. Picture and frame together cover 816 cm². How wide is the frame (cm)?", 2, "(30 + 2x)(20 + 2x) = 816 → x² + 25x − 54 = 0."),
+  num(String.raw`Find the larger root of $3x^2-6x-2=0$ (3 decimals).`, 1 + Math.sqrt(15) / 3, "(3 ± √15)/3.", null, 0.002),
+  num(String.raw`$h(t)=-4.9t^2+29.4t+1$. For how long is the object above 30 m (2 decimals)?`, Math.sqrt(29.4 ** 2 - 4 * 4.9 * 29) / 4.9, "−4.9t² + 29.4t − 29 = 0: the roots differ by √D/4.9.", graph((t) => -4.9 * t * t + 29.4 * t + 1, { xmin: 0, xmax: 6.5, ymin: 0, ymax: 50 }, [], { a: 0, lines: [{ m: 0, b: 30, color: "amber", dash: true }], step: { x: 0.5, y: 5 } }), 0.01),
+  num(String.raw`Profit is $P(x)=-x^2+14x-18$. For how wide an interval of $x$ is the profit at least 22?`, 6, "x² − 14x + 40 ≤ 0 → 4 ≤ x ≤ 10."),
+  num("Two consecutive positive even integers have squares adding to 340. What is the smaller?", 12, "x² + (x + 2)² = 340."),
+  num("A rectangle has perimeter 34 cm and a diagonal of 13 cm. What is its area?", 60, "l + w = 17, l² + w² = 169 → 5 and 12."),
+  num(String.raw`A polygon with $n$ sides has $\frac{n(n-3)}{2}$ diagonals. Which polygon has 54?`, 12, "n² − 3n − 108 = 0."),
+  num(String.raw`Solve $x=\sqrt{x+6}$.`, 3, "x² − x − 6 = 0; x = −2 is extraneous."),
+  num(String.raw`Find the largest root of $x^4-13x^2+36=0$.`, 3, "Let u = x²: u = 4 or 9."),
+  num("A 10 m by 6 m pool has a walkway of uniform width whose area equals the pool's area. How wide is the walkway (2 decimals)?", -4 + Math.sqrt(31), "(10 + 2x)(6 + 2x) = 120 → x² + 8x − 15 = 0.", planeDoc({ view: { xmin: -1, xmax: 14, ymin: -1, ymax: 10 }, segs: [{ pts: [[0, 0], [13.1, 0], [13.1, 9.1], [0, 9.1], [0, 0]], color: "amber" }, { pts: [[1.57, 1.57], [11.57, 1.57], [11.57, 7.57], [1.57, 7.57], [1.57, 1.57]], color: "blue" }], step: { x: 1, y: 1 } }), 0.01),
+  mc(String.raw`Which equation has roots $2\pm\sqrt3$?`, String.raw`$x^2-4x+1=0$`, [String.raw`$x^2+4x+1=0$`, String.raw`$x^2-4x-1=0$`, String.raw`$x^2-2x+3=0$`], "(x − 2)² − 3."),
+  num(String.raw`One root of $x^2+kx-12=0$ is 3. Find the other root.`, -4, "Product of roots −12."),
+  num("A 120 km trip would take 1 hour less at a speed 10 km/h faster. What is the original speed (km/h)?", 30, "120/v − 120/(v + 10) = 1 → v² + 10v − 1200 = 0."),
+  tf(String.raw`$x^2-2x+5=0$ has two real roots.`, false, "D = 4 − 20 < 0."),
+  num("A bridge cable follows y = 0.01x² + 1 (metres). How far from the centre is the cable 9 m high (2 decimals)?", Math.sqrt(800), "x² = 800.", graph((x) => 0.01 * x * x + 1, { xmin: -35, xmax: 35, ymin: 0, ymax: 14 }, [P(Math.sqrt(800), 9, false)], { lines: [{ m: 0, b: 9, color: "amber", dash: true }], step: { x: 5, y: 2 } }), 0.01),
+  num(String.raw`Find the larger root of $(x-1)(x-2)=12$.`, 5, "x² − 3x − 10 = 0."),
+  num("A number plus its reciprocal is 2.9. What is the larger such number?", 2.5, "x² − 2.9x + 1 = 0 → 2.5, 0.4.", null, 0.001),
+  num(String.raw`$h(t)=-4.9t^2+12t+1.5$. When does the ball land (2 decimals)?`, (12 + Math.sqrt(144 + 29.4)) / 9.8, "(12 + √173.4)/9.8.", graph((t) => -4.9 * t * t + 12 * t + 1.5, { xmin: 0, xmax: 3, ymin: 0, ymax: 10 }, [], { a: 0, step: { x: 0.5, y: 1 } }), 0.01),
+  num("A rectangular garden has area 120 m² and uses 46 m of fence around it. What is the shorter side (m)?", 8, "l + w = 23 → w² − 23w + 120 = 0."),
+  num(String.raw`For which positive $k$ is $x=2$ a root of $kx^2-kx+k^2-18=0$?`, 3, "4k − 2k + k² − 18 = 0 → k² + 2k − 15 = 0 → (k + 5)(k − 3)."),
 ];

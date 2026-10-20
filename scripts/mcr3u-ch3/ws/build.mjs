@@ -14,7 +14,7 @@ const BIN = "C:\\Users\\am778\\tools\\tectonic\\tectonic.exe";
 const CID = "4819065e-1703-478f-adb7-8226825be6aa";
 const APPLY = process.argv.includes("--apply");
 let codes = process.argv.slice(2).filter((a) => !a.startsWith("--"));
-if (process.argv.includes("--all")) codes = ["3.1", "3.2", "3.3", "3.4", "3.5", "3.6"];
+if (process.argv.includes("--all")) codes = ["3.1", "3.2", "3.3", "3.4", "3.5", "3.6", "3.7", "3.8"];
 
 const esc = (s) => String(s).replace(/&/g, "\\&");
 const PRE = String.raw`\documentclass[11pt]{article}
@@ -184,7 +184,7 @@ for (const code of codes) {
   const row = { worksheet_url: url, worksheet_name: `${code}_worksheet.pdf`, answers_url: null, answers_name: null, content: contentOf(t), title: t.title };
   const { data: have, error: e1 } = await sb.from("worksheets").select("id").eq("course_id", CID).eq("code", code);
   if (e1) throw e1;
-  // new chapter-3 worksheets (3.2–3.5) have no row yet: insert at position 1000 + lesson number
+  // brand-new chapter-3 worksheets (3.2, 3.3 after the 3.1 split) have no row yet: insert at position 3000 + lesson number
   const r = have.length
     ? await sb.from("worksheets").update(row).eq("course_id", CID).eq("code", code)
     : await sb.from("worksheets").insert({ ...row, course_id: CID, code, position: 3000 + Number(code.split(".")[1]), published: true });

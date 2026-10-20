@@ -1,27 +1,30 @@
-// 3.3 Solving Quadratic Equations — 20 hard questions
-import { mc, num, tf } from "./kit.mjs";
-import { P, graph, planeDoc } from "./fig.mjs";
+// 3.3 Finite Differences and Quadratic Models — 20 hard questions
+import { ms, num, tf } from "./kit.mjs";
+import { P, planeDoc } from "./fig.mjs";
 
-export const TOPIC = "3.3 Solving Quadratic Equations";
+const S = String.raw;
+const dots = (pts, view, step, xlabel = "x", ylabel = "y") => planeDoc({ view, points: pts.map(([x, y]) => P(x, y, false)), xlabel, ylabel, ...(step ? { step } : {}) });
+
+export const TOPIC = "3.3 Finite Differences and Quadratic Models";
 export const Q = [
-  num("A 30 cm by 20 cm picture has a frame of uniform width. Picture and frame together cover 816 cm². How wide is the frame (cm)?", 2, "(30 + 2x)(20 + 2x) = 816 → x² + 25x − 54 = 0."),
-  num(String.raw`Find the larger root of $3x^2-6x-2=0$ (3 decimals).`, 1 + Math.sqrt(15) / 3, "(3 ± √15)/3.", null, 0.002),
-  num(String.raw`$h(t)=-4.9t^2+29.4t+1$. For how long is the object above 30 m (2 decimals)?`, Math.sqrt(29.4 ** 2 - 4 * 4.9 * 29) / 4.9, "−4.9t² + 29.4t − 29 = 0: the roots differ by √D/4.9.", graph((t) => -4.9 * t * t + 29.4 * t + 1, { xmin: 0, xmax: 6.5, ymin: 0, ymax: 50 }, [], { a: 0, lines: [{ m: 0, b: 30, color: "amber", dash: true }], step: { x: 0.5, y: 5 } }), 0.01),
-  num(String.raw`Profit is $P(x)=-x^2+14x-18$. For how wide an interval of $x$ is the profit at least 22?`, 6, "x² − 14x + 40 ≤ 0 → 4 ≤ x ≤ 10."),
-  num("Two consecutive positive even integers have squares adding to 340. What is the smaller?", 12, "x² + (x + 2)² = 340."),
-  num("A rectangle has perimeter 34 cm and a diagonal of 13 cm. What is its area?", 60, "l + w = 17, l² + w² = 169 → 5 and 12."),
-  num(String.raw`A polygon with $n$ sides has $\frac{n(n-3)}{2}$ diagonals. Which polygon has 54?`, 12, "n² − 3n − 108 = 0."),
-  num(String.raw`Solve $x=\sqrt{x+6}$.`, 3, "x² − x − 6 = 0; x = −2 is extraneous."),
-  num(String.raw`Find the largest root of $x^4-13x^2+36=0$.`, 3, "Let u = x²: u = 4 or 9."),
-  num("A 10 m by 6 m pool has a walkway of uniform width whose area equals the pool's area. How wide is the walkway (2 decimals)?", -4 + Math.sqrt(31), "(10 + 2x)(6 + 2x) = 120 → x² + 8x − 15 = 0.", planeDoc({ view: { xmin: -1, xmax: 14, ymin: -1, ymax: 10 }, segs: [{ pts: [[0, 0], [13.1, 0], [13.1, 9.1], [0, 9.1], [0, 0]], color: "amber" }, { pts: [[1.57, 1.57], [11.57, 1.57], [11.57, 7.57], [1.57, 7.57], [1.57, 1.57]], color: "blue" }], step: { x: 1, y: 1 } }), 0.01),
-  mc(String.raw`Which equation has roots $2\pm\sqrt3$?`, String.raw`$x^2-4x+1=0$`, [String.raw`$x^2+4x+1=0$`, String.raw`$x^2-4x-1=0$`, String.raw`$x^2-2x+3=0$`], "(x − 2)² − 3."),
-  num(String.raw`One root of $x^2+kx-12=0$ is 3. Find the other root.`, -4, "Product of roots −12."),
-  num("A 120 km trip would take 1 hour less at a speed 10 km/h faster. What is the original speed (km/h)?", 30, "120/v − 120/(v + 10) = 1 → v² + 10v − 1200 = 0."),
-  tf(String.raw`$x^2-2x+5=0$ has two real roots.`, false, "D = 4 − 20 < 0."),
-  num("A bridge cable follows y = 0.01x² + 1 (metres). How far from the centre is the cable 9 m high (2 decimals)?", Math.sqrt(800), "x² = 800.", graph((x) => 0.01 * x * x + 1, { xmin: -35, xmax: 35, ymin: 0, ymax: 14 }, [P(Math.sqrt(800), 9, false)], { lines: [{ m: 0, b: 9, color: "amber", dash: true }], step: { x: 5, y: 2 } }), 0.01),
-  num(String.raw`Find the larger root of $(x-1)(x-2)=12$.`, 5, "x² − 3x − 10 = 0."),
-  num("A number plus its reciprocal is 2.9. What is the larger such number?", 2.5, "x² − 2.9x + 1 = 0 → 2.5, 0.4.", null, 0.001),
-  num(String.raw`$h(t)=-4.9t^2+12t+1.5$. When does the ball land (2 decimals)?`, (12 + Math.sqrt(144 + 29.4)) / 9.8, "(12 + √173.4)/9.8.", graph((t) => -4.9 * t * t + 12 * t + 1.5, { xmin: 0, xmax: 3, ymin: 0, ymax: 10 }, [], { a: 0, step: { x: 0.5, y: 1 } }), 0.01),
-  num("A rectangular garden has area 120 m² and uses 46 m of fence around it. What is the shorter side (m)?", 8, "l + w = 23 → w² − 23w + 120 = 0."),
-  num(String.raw`For which positive $k$ is $x=2$ a root of $kx^2-kx+k^2-18=0$?`, 3, "4k − 2k + k² − 18 = 0 → k² + 2k − 15 = 0 → (k + 5)(k − 3)."),
+  num(S`A quadratic passes through $(-1,10)$, $(0,4)$ and $(2,4)$. Find the y-coordinate of its vertex.`, 2, "c = 4, b = −2a, a + 2a = 6 → a = 2, b = −4; vertex at x = 1."),
+  num("A quadratic table uses x-values 3 apart; its second differences are 54. Find a.", 3, "2a(3²) = 54."),
+  tf("If a quadratic table has negative second differences, the parabola opens down.", true, "2a < 0."),
+  num(S`A quadratic table gives $y=1,2,7,k$ at $x=0,1,2,3$. Find $k$.`, 16, "Differences 1, 5 → second 4 → next difference 9."),
+  num("x = 0, 3, 6, 9 and y = 2, 20, 74, 164 is quadratic. Find a.", 2, "First 18, 54, 90; second 36 = 2a(3²)."),
+  num("A quadratic table (x-step 1) begins y = 2, 7, 16 at x = 0, 1, 2. What is y at x = 5?", 67, "First 5, 9 → 13, 17, 21: 29, 46, 67."),
+  num(S`A quadratic passes through $(-1,6)$, $(1,2)$ and $(2,6)$. Find $a$.`, 2, "Subtracting the first two: b = −2, a + c = 4; 4a − 4 + c = 6 → 3a = 6."),
+  num(S`A quadratic passes through $(1,0)$, $(2,3)$ and $(4,15)$. Find $c$.`, -1, "3a + b = 3 and 12a + 2b = 12 → a = 1, b = 0."),
+  num("Stopping distances (shown): v = 10, 20, 30, 40 km/h give d = 3, 8, 15, 24 m. Use a quadratic model to predict d at 60 km/h.", 48, "Second difference 2 = 2a(10²) → a = 0.01; d(0) = 0; b = 0.2: 36 + 12.", dots([[10, 3], [20, 8], [30, 15], [40, 24]], { xmin: -5, xmax: 70, ymin: -2, ymax: 55 }, { x: 10, y: 5 }, "v", "d")),
+  num("Dot pattern n uses 2, 6, 12, 20 dots for n = 1, 2, 3, 4. How many dots are in pattern 10?", 110, "Second difference 2 → a = 1; d(0) = 0; n² + n."),
+  num("Pattern n uses 4, 9, 16, 25 squares for n = 1, 2, 3, 4. Which pattern uses 169 squares?", 12, "(n + 1)² = 169."),
+  tf("If the third differences of a table are constant and the second are not, the relation is quadratic.", false, "Constant third differences mean cubic."),
+  num(S`The second differences of $y=ax^2+bx+c$ for an x-step of 0.5 are 3. Find $a$.`, 6, "2a(0.25) = 3."),
+  num("The plotted points (x = 0 to 3) lie on a quadratic. Find the y-coordinate of its vertex.", 1.75, "y = 4, 2, 2, 4: a = 1, c = 4, b = −3; vertex at x = 1.5.", dots([[0, 4], [1, 2], [2, 2], [3, 4]], { xmin: -1, xmax: 4, ymin: -1, ymax: 6 }), 0.001),
+  num("A ball's heights at t = 0, 0.5, 1, 1.5 s are 1, 6.775, 10.1, 10.975 m. Find a in h = at² + bt + c.", -4.9, "First 5.775, 3.325, 0.875; second −2.45 = 2a(0.5²).", null, 0.001),
+  num("A price increase of x steps (x = 0, 1, 2, 3) gives revenue 1000, 1150, 1260, 1330 dollars (shown). Use a quadratic model to find the maximum revenue (2 decimals).", 1361.25, "a = −20, b = 170, c = 1000; vertex x = 4.25.", dots([[0, 1000], [1, 1150], [2, 1260], [3, 1330]], { xmin: -1, xmax: 9, ymin: 900, ymax: 1400 }, { x: 1, y: 100 }, "x", "R"), 0.01),
+  ms("Which tables (x = 0 to 4) are quadratic? Select all.", ["y: 1, 3, 7, 13, 21", "y: 2, 4, 8, 16, 32", "y: 0, −1, 0, 3, 8", "y: 5, 8, 11, 14, 17"], [0, 2], "Second differences 2 and 2; the others are exponential and linear."),
+  num("A quadratic table (x-step 1) has y(0) = 4, first difference −5 from x = 0 to 1, and second differences 6. Find y at x = 3.", 7, "First differences −5, 1, 7: y = 4, −1, 0, 7."),
+  num("The quadratic through the three points shown, (0, 6), (1, 2) and (3, 0), has two zeros. Find the larger one.", 3, "c = 6; a + b = −4; 3a + b = −2 → a = 1, b = −5: (x − 2)(x − 3).", dots([[0, 6], [1, 2], [3, 0]], { xmin: -1, xmax: 5, ymin: -1, ymax: 7 })),
+  tf("Two different quadratics can pass through the same three points with different x-values.", false, "Three such points fix a, b and c."),
 ];

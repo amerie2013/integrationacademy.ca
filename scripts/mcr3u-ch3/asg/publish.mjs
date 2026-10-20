@@ -35,15 +35,16 @@ const stamp = new Date().toISOString().replace(/[:.]/g, "-");
 fs.mkdirSync(path.resolve("scripts/mcr3u-ch3/backup"), { recursive: true });
 fs.mkdirSync(".lesson-preview", { recursive: true });
 
-// chapter 3 is renumbered: existing rows may still carry their old titles (renumber3.mjs renames them);
-// brand-new assignments get fixed ids so they can be previewed before they exist.
-const OLD = { "3.1": "Assignment 3.1 — Quadratic Functions: Zeros, Max & Min", "3.6": "Assignment 3.2 — Solving Quadratics & Linear–Quadratic Systems" };
-const NEWID = { "3.2": "5c3e0001-0001-4001-8001-0000000a0302", "3.3": "5c3e0001-0001-4001-8001-0000000a0303", "3.4": "5c3e0001-0001-4001-8001-0000000a0304", "3.5": "5c3e0001-0001-4001-8001-0000000a0305" };
+// chapter 3 has been renumbered twice, so every assignment is matched by a fixed id (its title is rewritten here);
+// the two brand-new ones (3.2, 3.3 after the 3.1 split) are inserted with their ids so they can be previewed first.
+const NEWID = {
+  "3.1": "e6cb9995-6a01-459b-b2a8-e24131f67ed5", "3.2": "5c3e0001-0001-4001-8001-0000000a0312", "3.3": "5c3e0001-0001-4001-8001-0000000a0313",
+  "3.4": "5c3e0001-0001-4001-8001-0000000a0302", "3.5": "5c3e0001-0001-4001-8001-0000000a0303", "3.6": "5c3e0001-0001-4001-8001-0000000a0304",
+  "3.7": "5c3e0001-0001-4001-8001-0000000a0305", "3.8": "ae54b9ef-a9d6-4dbb-942f-e4014ac7ddaa",
+};
 for (const a of ASSIGNMENTS) {
-  let { data: rows, error } = await db.from("assignments").select("id, title, description, course_id").eq("course_id", CID).eq("title", a.title);
+  const { data: rows, error } = await db.from("assignments").select("id, title, description, course_id").eq("id", NEWID[a.code]);
   if (error) throw error;
-  if (!rows.length && OLD[a.code]) rows = (await db.from("assignments").select("id, title, description, course_id").eq("course_id", CID).eq("title", OLD[a.code])).data ?? [];
-  if (!rows.length && NEWID[a.code]) rows = (await db.from("assignments").select("id, title, description, course_id").eq("id", NEWID[a.code])).data ?? [];
   if (rows.length > 1) { console.log(`SKIP ${a.title}: ${rows.length} matching rows`); continue; }
   const urls = {};
   for (const [key, svg] of Object.entries(a.figs)) {

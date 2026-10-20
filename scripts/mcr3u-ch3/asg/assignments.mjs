@@ -6,28 +6,71 @@ const S = String.raw;
 const grid = (v) => planeDoc({ view: v });
 
 export const ASSIGNMENTS = [
-  { code: "3.1", title: "Assignment 3.1 — Properties of Quadratic Functions", figs: {
+  { code: "3.1", title: "Assignment 3.1 — The Three Forms of a Quadratic Function", figs: {
       g: planeDoc({ view: { xmin: -5, xmax: 3, ymin: -6, ymax: 8 }, curves: [{ f: (x) => -(x + 3) * (x - 1), color: "violet" }], points: [P(-3, 0), P(1, 0), P(-1, 4), P(0, 3)] }),
-      t: planeDoc({ view: { xmin: -1, xmax: 5, ymin: -2, ymax: 26 }, points: [[0, 1], [1, 2], [2, 7], [3, 16], [4, 29]].map(([x, y]) => P(x, y)), step: { x: 1, y: 2 } }) }, lines: [
+      s: grid({ xmin: -4, xmax: 8, ymin: -4, ymax: 10 }),
+      a: planeDoc({ view: { xmin: -4, xmax: 44, ymin: -4, ymax: 24 }, curves: [{ f: (x) => -0.05 * (x - 20) ** 2 + 20, a: 0, b: 40, color: "violet" }], points: [P(0, 0), P(40, 0), P(20, 20)], step: { x: 4, y: 4 }, xlabel: "x (m)", ylabel: "y (m)" }) }, lines: [
     "Knowledge & Understanding",
     S`1. State the vertex, axis, maximum or minimum, and range of \(y=-2(x+1)^2+6\).`,
     S`2. State the zeros, axis and y-intercept of \(y=3(x-4)(x+2)\).`,
-    "3. Write the equation of the parabola in the graph in factored, vertex and standard form. [[g|Graph for question 3]]",
+    "3. For the parabola in the graph, state the vertex, the zeros, the y-intercept, the direction of opening and the range. [[g|Graph for question 3]]",
     "Thinking",
-    "4. The table of values is plotted. Use differences to find the quadratic. [[t|Plotted table for question 4]]",
-    S`5. A parabola has zeros \(-5\) and \(3\) and a minimum value of \(-32\). Write it in all three forms.`,
+    S`4. A parabola \(y=a(x-r)(x-s)\) has axis \(x=-2\), one zero at \(x=3\) and a minimum value of \(-50\). Find the other zero and \(a\).`,
+    S`5. Sketch \(y=-\tfrac12(x-2)^2+8\) on the grid. Label the vertex, both zeros and the y-intercept. [[s|Grid for question 5]]`,
     "Communication",
     "6. Explain which form of a quadratic you would use to find (a) the zeros, (b) the maximum, (c) the y-intercept, and why.",
-    "7. Explain why the second differences of a quadratic table are constant, and how they relate to a.",
+    "7. Explain how you can tell from vertex form alone whether a parabola has 0, 1 or 2 zeros. Give an example of each case.",
     "Application",
     S`8. A diver's height is \(h(t)=-5(t-0.5)^2+11.25\) m. Find the maximum height, the starting height and when the diver enters the water.`,
-    "9. A parabola passes through (−1, 6), (0, 2) and (2, 6). Find its equation and vertex.",
-    "10. A parabolic bridge arch has zeros at 0 m and 40 m and is 16 m high in the middle. Write its equation.",
+    S`9. A ball's height is \(h(t)=-5(t+0.5)(t-3.5)\) m. Find its starting height, its maximum height and when it lands, and state a sensible domain and range.`,
+    S`10. The arch shown has equation \(y=-0.05(x-20)^2+20\) (metres). How wide is it at the ground and how high is it? State a sensible domain and range. [[a|Arch for question 10]]`,
     "Hard Level",
-    "11. A table uses x-values 0, 2, 4, 6 and y-values 5, 1, 13, 41. Find the quadratic. (Careful: the x-step is 2.)",
+    S`11. \(y=a(x-2)^2+k\) has range \(y\le9\) and passes through \((5,0)\). Find \(a\), both zeros and the y-intercept.`,
+    S`12. Explain why a parabola with zeros \(r\) and \(s\) has its axis at \(x=\frac{r+s}{2}\). Then find the vertex and range of \(y=-3(x-1.5)(x+4.5)\).`,
+  ] },
+  { code: "3.2", title: "Assignment 3.2 — Converting Between Forms", figs: {
+      g: planeDoc({ view: { xmin: -4, xmax: 6, ymin: -10, ymax: 6 }, curves: [{ f: (x) => (x + 2) * (x - 4), color: "violet" }], points: [P(-2, 0), P(4, 0), P(1, -9), P(0, -8)], step: { x: 1, y: 2 } }),
+      b: planeDoc({ view: { xmin: -4, xmax: 44, ymin: -2, ymax: 20 }, curves: [{ f: (x) => -0.04 * x * (x - 40), a: 0, b: 40, color: "violet" }], points: [P(0, 0), P(40, 0), P(20, 16)], step: { x: 4, y: 2 }, xlabel: "x (m)", ylabel: "y (m)" }) }, lines: [
+    "Knowledge & Understanding",
+    S`1. Write \(y=-3(x-2)^2+7\) in standard form.`,
+    S`2. Write \(y=(2x-1)(x+3)\) in standard form, then state its zeros.`,
+    S`3. Factor \(y=3x^2+3x-36\) and state its zeros.`,
+    "Thinking",
+    S`4. A parabola has zeros \(-5\) and \(3\) and a minimum value of \(-32\). Write it in all three forms.`,
+    S`5. Use \(x=-\frac{b}{2a}\) to write \(y=3x^2-9x+2\) in vertex form.`,
+    "Communication",
+    S`6. Explain why the axis of \(y=ax^2+bx+c\) is \(x=-\frac{b}{2a}\), using the two points where the graph has height \(c\).`,
+    S`7. A student writes \(-2(x-3)^2+1=-2x^2-12x+19\). Find and explain the errors, and give the correct standard form.`,
+    "Application",
+    "8. Write the equation of the parabola in the graph in factored, vertex and standard form. [[g|Graph for question 8]]",
+    "9. A parabolic bridge arch has zeros at 0 m and 40 m and is 16 m high in the middle (shown). Write its equation in all three forms. [[b|Bridge arch for question 9]]",
+    S`10. A ball's height is \(h(t)=-5t^2+30t+1.5\) m. Write it in vertex form and state the maximum height and when it occurs.`,
+    "Hard Level",
+    S`11. Find \(b\) and \(c\) so that \(y=-3x^2+bx+c\) has vertex \((-1,6)\). Then find its zeros exactly.`,
     S`12. Prove that \(y=-x^2+6x-11\) has no zeros by writing it in vertex form, and state its range.`,
   ] },
-  { code: "3.2", title: "Assignment 3.2 — Maximum and Minimum Values", figs: {
+  { code: "3.3", title: "Assignment 3.3 — Finite Differences and Quadratic Models", figs: {
+      t: planeDoc({ view: { xmin: -1, xmax: 5, ymin: -2, ymax: 32 }, points: [[0, 1], [1, 2], [2, 7], [3, 16], [4, 29]].map(([x, y]) => P(x, y)), step: { x: 1, y: 4 } }),
+      r: planeDoc({ view: { xmin: -0.5, xmax: 9, ymin: -5, ymax: 90 }, points: [[0, 0], [1, 35.1], [2, 60.4], [3, 75.9]].map(([x, y]) => P(x, y)), step: { x: 1, y: 10 }, xlabel: "t (s)", ylabel: "h (m)" }) }, lines: [
+    "Knowledge & Understanding",
+    "1. Classify each table (x = 0, 1, 2, 3) as linear, quadratic or exponential: (a) y = 4, 7, 10, 13 (b) y = 3, 6, 12, 24 (c) y = 1, 0, 1, 4.",
+    "2. Find the first and second differences for x = 0, 1, 2, 3, 4 and y = −3, −1, 5, 15, 29, and state the value of a.",
+    S`3. What are the second differences of \(y=-3x^2+2x+1\) for an x-step of 1? Explain how you know without making a table.`,
+    "Thinking",
+    "4. The table of values is plotted. Use differences to find the quadratic. [[t|Plotted table for question 4]]",
+    S`5. Find the quadratic through \((-2,3)\), \((0,-5)\) and \((3,13)\).`,
+    "Communication",
+    "6. Explain why the second differences of a quadratic table are constant, and why they equal 2ah² when the x-step is h.",
+    "7. A student says the table y = 2, 4, 8, 16, 32 is quadratic because the differences keep increasing. Explain the error.",
+    "Application",
+    "8. With 2, 3, 4 and 5 people there are 1, 3, 6 and 10 handshakes. Find a quadratic model H(n) and the number of handshakes for 30 people.",
+    "9. A parabola passes through (−1, 6), (0, 2) and (2, 6). Find its equation and vertex.",
+    "10. A rocket's height at t = 0, 1, 2, 3 s is 0, 35.1, 60.4 and 75.9 m (plotted). Find a quadratic model, its maximum height and when it reaches it. [[r|Rocket data for question 10]]",
+    "Hard Level",
+    "11. A table uses x-values 0, 2, 4, 6 and y-values 5, 1, 13, 41. Find the quadratic. (Careful: the x-step is 2.)",
+    "12. A quadratic table (x-step 1) has second differences of −6, y = 4 at x = 0, and its vertex at x = 2. Find the equation and the maximum value.",
+  ] },
+  { code: "3.4", title: "Assignment 3.4 — Maximum and Minimum Values", figs: {
       r: planeDoc({ view: { xmin: -12, xmax: 32, ymin: 0, ymax: 15000 }, curves: [{ f: (x) => (25 + x) * (500 - 15 * x), a: -25, b: 33.3, color: "violet" }], step: { x: 5, y: 2000 }, xlabel: "x", ylabel: "R" }) }, lines: [
     "Knowledge & Understanding",
     S`1. Complete the square: \(y=x^2-10x+31\). State the minimum.`,
@@ -47,7 +90,7 @@ export const ASSIGNMENTS = [
     "11. 240 m of fence make a rectangle divided into 4 pens by 3 fences parallel to the width. Find the dimensions that maximise the total area.",
     S`12. Price \(p=60-0.2x\) dollars sells \(x\) units; cost \(C=12x+1500\). Find the price for maximum profit and the maximum profit.`,
   ] },
-  { code: "3.3", title: "Assignment 3.3 — Solving Quadratic Equations", figs: {
+  { code: "3.5", title: "Assignment 3.5 — Solving Quadratic Equations", figs: {
       h: planeDoc({ view: { xmin: 0, xmax: 5, ymin: 0, ymax: 32 }, curves: [{ f: (t) => -4.9 * t * t + 19.6 * t + 9.8, a: 0, color: "violet" }], step: { x: 0.5, y: 4 }, xlabel: "t (s)", ylabel: "h (m)" }) }, lines: [
     "Knowledge & Understanding",
     S`1. Solve by factoring: \(x^2-11x+28=0\) and \(3x^2+10x-8=0\).`,
@@ -67,7 +110,7 @@ export const ASSIGNMENTS = [
     "11. A 40 cm by 30 cm poster has a border of uniform width. The border's area is half the poster's area. Find the width of the border.",
     "12. A boat travels 24 km upstream and back in 5 h. Its speed in still water is 10 km/h. Find the speed of the current.",
   ] },
-  { code: "3.4", title: "Assignment 3.4 — The Zeros and the Discriminant", figs: {
+  { code: "3.6", title: "Assignment 3.6 — The Zeros and the Discriminant", figs: {
       fam: planeDoc({ view: { xmin: -4, xmax: 6, ymin: -5, ymax: 8 }, curves: [-3, 1, 5].map((c, i) => ({ f: (x) => x * x - 2 * x + c, color: ["green", "amber", "red"][i] })) }) }, lines: [
     "Knowledge & Understanding",
     S`1. Find the discriminant and number of roots: \(2x^2-5x+4=0\), \(x^2+6x+9=0\), \(3x^2+x-2=0\).`,
@@ -87,7 +130,7 @@ export const ASSIGNMENTS = [
     S`11. Show that \(x^2+(k-1)x-k=0\) has real roots for every k, and find the k that gives a double root.`,
     S`12. For which values of m does \(y=mx^2+4x+m\) never cross the x-axis?`,
   ] },
-  { code: "3.5", title: "Assignment 3.5 — Families of Quadratic Functions", figs: {
+  { code: "3.7", title: "Assignment 3.7 — Families of Quadratic Functions", figs: {
       arch: planeDoc({ view: { xmin: -1, xmax: 25, ymin: -1, ymax: 16 }, curves: [{ f: (x) => (-15 / 144) * x * (x - 24), a: 0, b: 24, color: "violet" }], step: { x: 2, y: 2 } }) }, lines: [
     "Knowledge & Understanding",
     S`1. Describe what all members of \(y=a(x+4)(x-2)\) have in common and how they differ.`,
@@ -107,7 +150,7 @@ export const ASSIGNMENTS = [
     "11. A tunnel arch is 10 m wide; 2 m from one side it is 4 m high. Can a truck 3 m wide and 5 m tall pass through the centre? Justify.",
     S`12. Find all a for which the member of \(y=a(x-2)(x-6)\) has its vertex 12 units from the x-axis.`,
   ] },
-  { code: "3.6", title: "Assignment 3.6 — Linear–Quadratic Systems", figs: {
+  { code: "3.8", title: "Assignment 3.8 — Linear–Quadratic Systems", figs: {
       s: planeDoc({ view: { xmin: -4, xmax: 6, ymin: -6, ymax: 10 }, curves: [{ f: (x) => x * x - 2 * x - 3, color: "violet" }], lines: [{ m: 2, b: 2, color: "blue" }] }) }, lines: [
     "Knowledge & Understanding",
     S`1. Solve \(y=x^2-5\) and \(y=4x\).`,

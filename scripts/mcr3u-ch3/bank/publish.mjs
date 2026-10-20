@@ -16,7 +16,7 @@ const DIR = path.resolve("scripts/mcr3u-ch3/bank");
 const OUT = path.join(DIR, "out");
 const APPLY = process.argv.includes("--apply");
 let names = process.argv.slice(2).filter((a) => !a.startsWith("--"));
-if (process.argv.includes("--all")) names = ["3_1", "3_2", "3_3", "3_4", "3_5", "3_6"];
+if (process.argv.includes("--all")) names = ["3_1", "3_2", "3_3", "3_4", "3_5", "3_6", "3_7", "3_8"];
 
 let bad = 0;
 const fail = (m) => { bad++; console.log("  FAIL:", m); };

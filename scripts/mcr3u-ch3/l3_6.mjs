@@ -1,122 +1,115 @@
-// MCR3U 3.6 — Linear–Quadratic Systems: solving by substitution, counting intersections with the discriminant,
-// tangent lines, lines of a fixed slope, and two-quantity models
-import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, q, num, choice, roots, hard, plane } from "./lib.mjs";
+// MCR3U 3.6 — The Zeros and the Discriminant: counting zeros from b² − 4ac, from vertex form, rational vs irrational,
+// parameters that change the number of zeros, proofs that a family always has roots
+import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, q, num, choice, hard, plane } from "./lib.mjs";
 
-export const TITLE = "3.6 Linear–Quadratic Systems";
-export const ID = "ad761bbd-b9ea-4af0-b8a2-f8832035b794";
+export const TITLE = "3.6 The Zeros and the Discriminant";
+export const ID = "5c3e0001-0001-4001-8001-000000000304";
 const S = String.raw;
 
 export const blocks = () => [
   intro({
-    icon: "✂️",
-    title: "Linear–Quadratic Systems",
-    overview: S`A line can cross a parabola twice, touch it once, or miss it. Setting the two expressions equal gives a quadratic equation, and its discriminant tells which. In this lesson you will solve linear–quadratic systems algebraically and graphically, find tangent lines, find which lines of a given slope meet a parabola, and solve problems where one quantity changes linearly and another quadratically.`,
+    icon: "🔍",
+    title: "The Zeros and the Discriminant",
+    overview: S`Before solving, you can predict how many zeros a quadratic has. The discriminant \(D=b^2-4ac\) — the expression under the root in the quadratic formula — decides: two zeros, one, or none. In this lesson you will count zeros from the discriminant and from vertex form, tell rational from irrational roots, and find the parameter values that change the number of zeros.`,
     goals: [
-      "solve a linear–quadratic system by substitution;",
-      "use the discriminant to count the points of intersection;",
-      "find the line of a given slope that is tangent to a parabola;",
-      "describe all lines of a given slope that meet a parabola once, twice or never;",
-      "solve problems modelled by a line and a parabola.",
+      "calculate the discriminant and state the number of zeros;",
+      "count zeros from vertex form using the vertex and the direction of opening;",
+      "decide whether the roots are rational or irrational;",
+      "find parameter values that give two, one or no zeros;",
+      "prove that every member of a family has real roots.",
     ],
-    curriculum: "A2.5 (solve problems involving the intersection of a linear function and a quadratic function graphically and algebraically)",
+    curriculum: "A2.1 (determine the number of zeros of a quadratic function, using a variety of strategies — inspecting graphs, factoring, calculating the discriminant)",
     prior: [
-      [S`Solve \(x^2-3x-4=0\).`, S`\(x=4\) or \(x=-1\).`],
-      [S`What is the discriminant of \(x^2-2x+1\)?`, S`\(0\).`],
-      [S`Substitute \(x=4\) into \(y=x+1\).`, S`\(y=5\).`],
+      [S`Evaluate \(b^2-4ac\) for \(2x^2-3x-1\).`, S`\(9+8=17\).`],
+      [S`Is \(\sqrt{-16}\) a real number?`, S`No.`],
+      [S`Solve \(k^2>25\).`, S`\(k<-5\) or \(k>5\).`],
     ],
     words: [
-      ["System", "two equations solved together", ""],
-      ["Secant", "a line meeting the parabola twice", ""],
-      ["Tangent", "a line touching the parabola once", ""],
-      ["Point of intersection", "a point on both graphs", ""],
+      ["Discriminant", "\\(D=b^2-4ac\\)", ""],
+      ["Double root", "one repeated root when \\(D=0\\)", "\\((x-3)^2=0\\)"],
+      ["Rational roots", "roots that are fractions; \\(D\\) a perfect square", "\\(D=49\\)"],
+      ["Parameter", "a letter that stands for a fixed but unknown number", "\\(k\\) in \\(x^2+kx+9\\)"],
     ],
   }),
 
-  section("📌 The method", S`
-  ${table(["Step", "Example: y = x² − 2x − 3 and y = x + 1"], [
-    ["1. Set equal", "\\(x^2-2x-3=x+1\\)"],
-    ["2. Rearrange to 0", "\\(x^2-3x-4=0\\)"],
-    ["3. Discriminant", "\\(D=9+16=25>0\\): two points"],
-    ["4. Solve", "\\((x-4)(x+1)=0\\): \\(x=4,\\ -1\\)"],
-    ["5. y from the LINE", "\\((4,5)\\) and \\((-1,0)\\)"],
-  ])}
-  ${plane({ view: { xmin: -3, xmax: 6, ymin: -5, ymax: 7 }, curves: [{ f: (x) => x * x - 2 * x - 3, color: "violet" }], lines: [{ m: 1, b: 1, color: "blue" }], points: [{ x: 4, y: 5, label: "(4, 5)" }, { x: -1, y: 0, label: "(−1, 0)" }], step: { x: 1, y: 1 } })}
-  ${keyIdea(S`After setting equal and rearranging, \(D>0\): two points (secant); \(D=0\): one point (tangent); \(D<0\): none.`)}`),
+  section("📌 What the discriminant tells you", S`
+  ${table(["D = b² − 4ac", "Number of zeros", "Graph"], [["\\(D>0\\)", "two", "crosses the x-axis twice"], ["\\(D=0\\)", "one (double)", "vertex on the x-axis"], ["\\(D<0\\)", "none", "misses the x-axis"]])}
+  ${plane({ view: { xmin: -4, xmax: 6, ymin: -4, ymax: 8 }, curves: [{ f: (x) => x * x - 2 * x - 2, color: "green" }, { f: (x) => x * x - 2 * x + 1, color: "amber" }, { f: (x) => x * x - 2 * x + 4, color: "red" }], step: { x: 1, y: 1 } }, "same axis, different c: D = 12 (green), 0 (amber), −12 (red)")}
+  ${keyIdea(S`In vertex form \(a(x-h)^2+k\) you can count without the discriminant: if \(a\) and \(k\) have opposite signs there are two zeros; if \(k=0\), one; if they have the same sign, none.`)}`),
 
-  section("📌 Explore", S`<p>The parabola is \(y=-x^2+6x\). Change the slope and intercept of the line. The dashed amber line is the tangent with the same slope.</p>`),
+  section("📌 Explore", S`<p>The parameter \(k\) changes the middle coefficient of \(y=x^2+kx+16\). Find the values of \(k\) where the number of zeros changes.</p>`),
 
-  widget("tangentLab", { init: [-1, 6, 0, 2] }),
+  widget("discriminantK", { init: [1, 16] }),
 
   section("📌 Watch out", watchOut([
-    "Get every term on one side before using the discriminant.",
-    "Substitute x into the simpler (linear) equation to get y.",
-    "A tangent gives a double root: the quadratic is a perfect square.",
-    "In a context, keep only intersections inside the domain.",
+    "Write the equation as ax² + bx + c = 0 before reading a, b and c.",
+    "D < 0 means no REAL zeros; the formula would need √(negative).",
+    "With a parameter, solve an inequality in k: D > 0, D = 0 or D < 0.",
+    "If a can be 0, the equation is not quadratic — exclude it.",
   ])),
 
   examples([
-    ["Two intersections", S`Solve \(y=x^2-2x-3\) and \(y=x+1\).`,
-      [S`\(x^2-3x-4=0\Rightarrow x=4\) or \(-1\).`, S`\(y=x+1\): \((4,5)\), \((-1,0)\).`],
-      S`\((4,5)\) and \((-1,0)\)`],
-    ["No intersection", S`How many points do \(y=-x^2+4x\) and \(y=2x+3\) share?`,
-      [S`\(-x^2+4x=2x+3\Rightarrow-x^2+2x-3=0\).`, S`\(D=4-12=-8<0\).`],
-      "none — the line passes above the parabola"],
-    ["A tangent", S`Find \(k\) so that \(y=2x+k\) is tangent to \(y=x^2+1\), and the point of contact.`,
-      [S`\(x^2-2x+1-k=0\): \(D=4-4(1-k)=4k=0\Rightarrow k=0\).`, S`\(x^2-2x+1=0\Rightarrow x=1\), \(y=2\).`],
-      S`\(k=0\); touches at \((1,2)\)`],
-    ["Lines of a fixed slope", S`For which \(k\) does \(y=x+k\) meet \(f(x)=x(8-x)\) once, twice, never?`,
-      [S`\(8x-x^2=x+k\Rightarrow x^2-7x+k=0\): \(D=49-4k\).`, S`Once: \(k=12.25\). Twice: \(k<12.25\). Never: \(k>12.25\).`],
-      S`tangent at \(k=12.25\)`,
-      plane({ view: { xmin: -2, xmax: 10, ymin: -4, ymax: 20 }, curves: [{ f: (x) => x * (8 - x), color: "violet" }], lines: [{ m: 1, b: 12.25, color: "amber", dash: true }, { m: 1, b: 4, color: "blue" }, { m: 1, b: 16, color: "red" }], step: { x: 1, y: 2 } })],
-    ["A ball and a drone", S`A ball's height is \(h(t)=-5t^2+25t+1\) m; a drone rises as \(d(t)=4t+7\) m. When are they at the same height?`,
-      [S`\(-5t^2+25t+1=4t+7\Rightarrow5t^2-21t+6=0\).`, S`\(t=\frac{21\pm\sqrt{441-120}}{10}=\frac{21\pm\sqrt{321}}{10}\).`],
-      S`\(t\approx0.31\) s and \(t\approx3.89\) s`],
+    ["No zeros", S`How many zeros does \(f(x)=2x^2-3x+5\) have?`,
+      [S`\(D=(-3)^2-4(2)(5)=9-40=-31<0\).`],
+      "none"],
+    ["From vertex form", S`How many zeros do \(y=-3(x+1)^2+4\) and \(y=2(x-3)^2+1\) have?`,
+      [S`First: opens down from \((-1,4)\), above the axis: two zeros.`, S`Second: opens up from \((3,1)\), above the axis: none.`],
+      "two and none"],
+    ["A double root", S`Solve \(4x^2-12x+9=0\) using the discriminant first.`,
+      [S`\(D=144-144=0\): one root.`, S`\((2x-3)^2=0\Rightarrow x=1.5\).`],
+      S`one zero, \(x=1.5\)`],
+    ["A parameter", S`For which \(k\) does \(x^2+kx+16=0\) have two real roots?`,
+      [S`\(D=k^2-64>0\Rightarrow k^2>64\).`],
+      S`\(k<-8\) or \(k>8\)`],
+    ["A changing leading coefficient", S`For which \(k\) does \(kx^2-4x+1=0\) have two, one or no real roots?`,
+      [S`\(D=16-4k\).`, S`Two: \(16-4k>0\Rightarrow k<4\) (\(k\ne0\)). One: \(k=4\). None: \(k>4\).`, S`(At \(k=0\) the equation is linear with one root.)`],
+      S`two for \(k<4,\ k\ne0\); one for \(k=4\); none for \(k>4\)`],
   ]),
 
   practice([
-    q("solve", S`Find the x-coordinates where \(y=x^2\) meets \(y=x+6\).`, roots(3, -2),
-      "x² − x − 6 = 0.", [S`\((x-3)(x+2)=0\).`], S`\(x=3,\ -2\)`),
-    q("count", S`How many points do \(y=x^2+4\) and \(y=4x\) share?`, num(1),
-      "Compute D of x² − 4x + 4.", [S`\(D=16-16=0\).`], S`\(1\)`),
-    q("horizontal tangent", S`For which \(k\) is the line \(y=k\) tangent to \(y=x^2-4x+7\)?`, num(3),
-      "The tangent horizontal line goes through the vertex.", [S`\((x-2)^2+3\).`], S`\(k=3\)`),
-    q("point", S`\(y=2x^2\) and \(y=3x+2\) meet at a point with \(x>0\). Find its y-coordinate.`, num(8),
-      "Solve 2x² − 3x − 2 = 0.", [S`\((2x+1)(x-2)=0\Rightarrow x=2\); \(y=3(2)+2\).`], S`\(8\)`),
-    q("meaning", "If the discriminant of the combined equation is negative, the line and the parabola…", choice(["do not meet", "meet once", "meet twice", "are the same curve"], 0),
-      "No real roots.", ["No real x-values satisfy both equations."], "do not meet"),
+    q("discriminant", S`Find the discriminant of \(3x^2+4x-2=0\).`, num(40),
+      "b² − 4ac with c = −2.", [S`\(16-4(3)(-2)=16+24\).`], S`\(40\)`),
+    q("count", S`How many real zeros does \(5x^2-2x+1\) have?`, num(0),
+      "Compute D.", [S`\(4-20=-16<0\).`], S`\(0\)`),
+    q("one zero", S`For which \(k\) does \(x^2-6x+k\) have exactly one zero?`, num(9),
+      "D = 0.", [S`\(36-4k=0\).`], S`\(k=9\)`),
+    q("vertex form", S`How many zeros does \(y=-2(x-4)^2-3\) have?`, num(0),
+      "Opens down from a vertex below the axis.", [S`a and k are both negative.`], S`\(0\)`),
+    q("type of roots", S`The roots of \(x^2-5x+6=0\) are…`, choice(["rational", "irrational", "not real", "equal"], 0),
+      "Is D a perfect square?", [S`\(D=25-24=1\).`], "rational"),
   ]),
 
   ...hard([
-    ["Two tangents from one family", S`Find every \(k\) for which \(y=kx-1\) is tangent to \(y=x^2+3\), and the points of contact.`,
-      [S`\(x^2-kx+4=0\): \(D=k^2-16=0\Rightarrow k=\pm4\).`, S`Double root \(x=\frac k2=\pm2\); \(y=4+3=7\).`],
-      S`\(k=4\) at \((2,7)\); \(k=-4\) at \((-2,7)\)`,
-      plane({ view: { xmin: -5, xmax: 5, ymin: -2, ymax: 14 }, curves: [{ f: (x) => x * x + 3, color: "violet" }], lines: [{ m: 4, b: -1, color: "blue" }, { m: -4, b: -1, color: "red" }], points: [{ x: 2, y: 7, label: "(2, 7)" }, { x: -2, y: 7, label: "(−2, 7)" }, { x: 0, y: -1, label: "(0, −1)", color: "gray" }], step: { x: 1, y: 2 } })],
-    ["Two tanks", S`Tank A drains so that it holds \(V_A=2(t-20)^2\) litres for \(0\le t\le20\) minutes. Tank B starts empty and fills at 30 L/min. When do they hold the same volume, and how much?`,
-      [S`\(2(t-20)^2=30t\Rightarrow2t^2-110t+800=0\Rightarrow t^2-55t+400=0\).`, S`\(t=\frac{55\pm\sqrt{1425}}{2}\approx8.63\) or \(46.37\) (outside the domain).`, S`\(V\approx30(8.63)\approx259\) L.`],
-      "after about 8.6 min, with about 259 L in each"],
+    ["A parameter in two places", S`For which values of \(k\) does \(kx^2+6x+k=0\) have two distinct real roots?`,
+      [S`\(D=36-4k^2>0\Rightarrow k^2<9\Rightarrow-3<k<3\).`, S`\(k=0\) makes it linear, so exclude it.`],
+      S`\(-3<k<3\), \(k\ne0\)`],
+    ["Always two roots", S`Show that \(x^2+(m-2)x-m=0\) has two real roots for every value of \(m\).`,
+      [S`\(D=(m-2)^2-4(1)(-m)=m^2-4m+4+4m=m^2+4\).`, S`\(m^2\ge0\), so \(D\ge4>0\) for every \(m\).`],
+      "D = m² + 4 is always positive",
+      plane({ view: { xmin: -4, xmax: 4, ymin: -1, ymax: 16 }, curves: [{ f: (m) => m * m + 4, color: "violet" }], points: [{ x: 0, y: 4, label: "(0, 4)" }], step: { x: 1, y: 2 }, xlabel: "m", ylabel: "D" })],
   ], [
-    q("hard", S`For how many integers \(k\) from \(-10\) to \(10\) does \(y=2x+k\) meet \(y=x^2-4x+5\) twice?`, num(14),
-      "Set equal; D > 0.", [S`\(x^2-6x+5-k=0\): \(D=16+4k>0\Rightarrow k>-4\); \(k=-3,\dots,10\).`], S`\(14\)`),
-    q("hard", S`For \(m>0\), \(y=mx+1\) is tangent to \(y=x^2+2\). Find \(m\).`, num(2),
-      "x² − mx + 1 = 0 with D = 0.", [S`\(m^2-4=0\).`], S`\(2\)`),
-    q("hard", S`\(y=-x^2+6x-5\) and \(y=x-1\) meet at two points. Find the distance between them (2 decimals).`, num(Math.sqrt(18), 0.006),
-      "Find both points first.", [S`\(x^2-5x+4=0\Rightarrow x=1,4\): \((1,0)\), \((4,3)\).`, S`\(\sqrt{9+9}\).`], S`\(\sqrt{18}\approx4.24\)`),
+    q("hard", S`What is the smallest integer \(k\) for which \(2x^2-5x+k=0\) has no real roots?`, num(4),
+      "25 − 8k < 0.", [S`\(k>3.125\).`], S`\(4\)`),
+    q("hard", S`For \(k>0\), \(y=x^2+2kx+9\) touches the x-axis once. Find \(k\).`, num(3),
+      "D = 0.", [S`\(4k^2-36=0\).`], S`\(3\)`),
+    q("hard", S`For how many integers \(k\) does \(x^2+kx+7=0\) have no real roots?`, num(11),
+      "k² < 28.", [S`\(|k|\le5\): \(k=-5,\dots,5\).`], S`\(11\)`),
   ]),
 
   wrapUp({
     qas: [
-      ["Why substitute into the line for y?", "It is linear, so the arithmetic is easier — both equations give the same y at an intersection."],
-      ["What does a tangent look like algebraically?", "The combined quadratic is a perfect square: one double root."],
-      ["Can a vertical line be tangent to a parabola that opens up?", "No — a vertical line always crosses it exactly once, but it is not a tangent."],
-      ["How do I find all lines of slope m that meet the parabola?", "Write y = mx + k, set equal, and solve D ≥ 0 for k."],
-      ["Do both intersections always matter in a model?", "Only those inside the domain of the context."],
+      ["Why does D decide the number of roots?", "It sits under the ± square root: positive gives two values, zero gives one, negative gives none."],
+      ["How can I tell rational roots?", "If D is a perfect square (and a, b, c are integers), the roots are rational and the quadratic factors."],
+      ["Can I count zeros without D?", "Yes, from vertex form: compare the sign of a with the sign of k."],
+      ["What does D tell me about a graph?", "Whether the parabola crosses, touches or misses the x-axis."],
+      ["How do parameters change the zeros?", "They move or stretch the graph; solving D = 0 finds the values where it just touches."],
     ],
     summary: [
-      "Set the line equal to the parabola; rearrange to = 0.",
-      "D > 0 two points, D = 0 tangent, D < 0 none.",
-      "Get y from the line.",
-      "Tangent conditions: solve D = 0 for the parameter.",
+      "D = b² − 4ac: > 0 two, = 0 one, < 0 none.",
+      "Perfect-square D → rational roots.",
+      "Vertex form: opposite signs of a and k → two zeros.",
+      "Parameters: solve D > 0, D = 0 or D < 0.",
     ],
-    next: "3.7 reviews the chapter.",
+    next: "3.7 builds families of parabolas from their zeros.",
   }),
 ];
