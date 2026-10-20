@@ -36,6 +36,7 @@ import { RateReader, DifferenceQuotient, LimitExplorer, ContinuityLab, Derivativ
 import { PowerRuleLab, ProductRuleLab, MotionLab, ChainRuleLab, QuotientLab, MarginalCost } from "./Calculus2";
 import { MonotonicityLab, ExtremaLab, ConcavityLab, RationalSketch, CurveSketcher, OptimizationLab } from "./Calculus3";
 import { SineSlopeLab, DerivativeCycle, SinusoidRuleLab, SpringLab } from "./Calculus4";
+import { ExpBaseLab, LnLab, ExpRuleLab, GrowthModelLab } from "./Calculus5";
 
 // Registry of named lesson widgets. A lesson block { type: "widget", widget, props }
 // renders REGISTRY[widget] with its props. Keep names stable — they are stored in the DB.
@@ -209,6 +210,10 @@ const REGISTRY: Record<string, ComponentType<any>> = {
   derivativeCycle: DerivativeCycle,
   sinusoidRuleLab: SinusoidRuleLab,
   springLab: SpringLab,
+  expBaseLab: ExpBaseLab,
+  lnLab: LnLab,
+  expRuleLab: ExpRuleLab,
+  growthModelLab: GrowthModelLab,
 };
 
 export const WIDGET_NAMES = Object.keys(REGISTRY);
