@@ -1,7 +1,7 @@
 // IB AA SL chapter 4 rebuild (3 lessons + review): re-sorts every lesson position after the new 4.1, 4.2 and 4.4
 // lessons are inserted. 4.3 keeps its id, title, bank topic and worksheet code; no topics are renamed.
 //   node scripts/ibaasl-ch4/renumber4.mjs          -> dry run
-//   node scripts/ibaasl-ch4/renumber4.mjs --apply  -> writes (backup first). Apply ONCE.
+//   node scripts/ibaasl-ch4/renumber4.mjs --apply  -> writes (backup first). Apply ONCE. APPLIED 2026-10-21 — never rerun.
 // Order: lessons-publish --all --apply → renumber4 --apply → ws/build --all --apply → bank → asg → written.
 import { createClient } from "@supabase/supabase-js";
 import fs from "fs";
