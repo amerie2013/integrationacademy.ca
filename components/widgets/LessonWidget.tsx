@@ -29,6 +29,7 @@ import { SpecialTriangles, TerminalArm, IdentityCheck, AmbiguousCase, CosineLaw,
 import { PeriodicReader, UnitWave, WheelLab, SinTransform, KeyPointMapper, FitSinusoid, ModelLab } from "./Sinusoidal";
 import { ArithLab, GeoLab, RecursiveLab, FibLab, SeriesPairs, GeoSums, PascalLab } from "./Sequences";
 import { SigmaLab, SequenceLab, SeriesLab, InterestLab, BinomialLab, ConjectureLab } from "./IBSequences";
+import { FunctionTest, FnNotationLab, GraphFeatures, DomainRange, CompositeLab, FnInverseLab } from "./IBFunctions";
 import { SimpleCompound, CompoundLab, PresentValueLab, AnnuityFV, AnnuityPV, AmortLab } from "./Finance11";
 import { PowerLab, PolyFeatures, FactoredPoly, PowerTransform, SecantLab, TangentSlope } from "./PolyFunctions";
 import { SyntheticDivide, FactorFinder, RootSolver, PolyFamily, InequalityGraph, SignChart } from "./PolyEquations";
@@ -178,6 +179,12 @@ const REGISTRY: Record<string, ComponentType<any>> = {
   interestLab: InterestLab,
   binomialLab: BinomialLab,
   conjectureLab: ConjectureLab,
+  functionTest: FunctionTest,
+  fnNotation: FnNotationLab,
+  graphFeatures: GraphFeatures,
+  domainRange: DomainRange,
+  compositeLab: CompositeLab,
+  fnInverse: FnInverseLab,
   simpleCompound: SimpleCompound,
   compoundLab: CompoundLab,
   presentValueLab: PresentValueLab,
