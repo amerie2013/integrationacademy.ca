@@ -1,0 +1,55 @@
+// IB AA SL chapter 3 written-response (long_answer) questions for printed chapter tests (Part C), each with a figure.
+import { planeDoc, P } from "../mcr3u-ch1/bank/fig.mjs";
+
+const T = {
+  1: "3.1 The Gradient of a Line", 2: "3.2 Linear Functions and Models", 3: "3.3 Transformations of Functions",
+  4: "3.4 Graphing Quadratic Functions", 5: "3.5 Factorising and Completing the Square",
+  6: "3.6 The Quadratic Formula and the Discriminant", 7: "3.7 Applications of Quadratics",
+};
+const W = (t, difficulty, points, prompt, feedback, fig) => ({ topic: T[t], difficulty, points, prompt, feedback, kind: "long_answer", answer: null, choices: null, fig });
+const S = String.raw;
+
+export const WRITTEN = [
+  W(1, "medium", 4, S`$A(-3,-1)$, $B(1,1)$ and $C(3,-3)$ are shown. (a) Find the gradients of $AB$ and $BC$. (b) Show that angle $ABC$ is a right angle. (c) Find the gradient of $AC$.`,
+    S`(a) $\frac{2}{4}=\frac12$ and $\frac{-4}{2}=-2$. (b) $\frac12\times(-2)=-1$, so $AB\perp BC$. (c) $\frac{-2}{6}=-\frac13$. [2, 1, 1.]`,
+    planeDoc({ view: { xmin: -5, xmax: 5, ymin: -5, ymax: 3 }, segs: [{ pts: [[-3, -1], [1, 1], [3, -3], [-3, -1]], color: "violet" }], points: [P(-3, -1, "A"), P(1, 1, "B"), P(3, -3, "C")] })),
+  W(1, "hard", 5, S`$P(2,1)$, $Q(6,3)$ and $R(t,7)$. (a) Find $t$ if $P$, $Q$ and $R$ are collinear. (b) Find $t$ if $PQ\perp QR$. (c) For the value in (b), find the gradient of $PR$ and explain why the angle at $P$ is not a right angle.`,
+    S`(a) gradient $\frac12$: $\frac{6}{t-2}=\frac12\Rightarrow t=14$. (b) $QR$ gradient $-2$: $\frac{4}{t-6}=-2\Rightarrow t=4$. (c) $PR$: $\frac{6}{2}=3$; $3\times\frac12\ne-1$. [2, 2, 1.]`,
+    planeDoc({ view: { xmin: -1, xmax: 8, ymin: -1, ymax: 8 }, segs: [{ pts: [[2, 1], [6, 3], [4, 7], [2, 1]], color: "violet" }], points: [P(2, 1, "P"), P(6, 3, "Q"), P(4, 7, "R")] })),
+  W(2, "medium", 4, S`A plumber charges a call-out fee plus an hourly rate. A 2-hour job costs 190 and a 5-hour job costs 385 (graphed). (a) Find the cost equation. (b) Interpret the gradient and intercept. (c) Find the length of a job costing 515.`,
+    S`(a) $m=\frac{195}{3}=65$; $C=60+65h$. (b) 65 per hour; 60 call-out fee. (c) $65h=455\Rightarrow h=7$. [2, 1, 1.]`,
+    planeDoc({ view: { xmin: -0.5, xmax: 8, ymin: -20, ymax: 580 }, lines: [{ m: 65, b: 60 }], points: [P(2, 190), P(5, 385)], step: { x: 1, y: 50 }, xlabel: "hours", ylabel: "cost" })),
+  W(2, "hard", 5, S`$L_1$: $3x-y=4$ and $L_2$: $x+2y=13$ are shown. (a) Find their intersection $A$. (b) Find the line through $A$ perpendicular to $L_1$. (c) Find the area of the triangle formed by $L_1$, $L_2$ and the y-axis.`,
+    S`(a) $y=3x-4$: $x+6x-8=13\Rightarrow A(3,5)$. (b) $y-5=-\frac13(x-3)$, i.e. $y=-\frac13x+6$. (c) y-intercepts $-4$ and $6.5$, base $10.5$, height 3: area $15.75$. [1, 2, 2.]`,
+    planeDoc({ view: { xmin: -2, xmax: 7, ymin: -5, ymax: 8 }, lines: [{ m: 3, b: -4, label: "L₁" }, { m: -0.5, b: 6.5, color: "green", label: "L₂" }], points: [P(3, 5, "A")] })),
+  W(3, "medium", 4, S`The graph of $y=f(x)$ is shown, with points $(-2,0)$, $(0,3)$ and $(2,1)$. (a) Find the images of these points on $y=f(x+1)-2$. (b) Find their images on $y=-\frac12f(x)$. (c) Describe the transformation in (b) in words.`,
+    S`(a) $(-3,-2)$, $(-1,1)$, $(1,-1)$. (b) $(-2,0)$, $(0,-1.5)$, $(2,-0.5)$. (c) vertical stretch factor $\frac12$ and reflection in the x-axis. [2, 1, 1.]`,
+    planeDoc({ view: { xmin: -4, xmax: 4, ymin: -3, ymax: 4 }, segs: [{ pts: [[-2, 0], [0, 3], [2, 1]], color: "violet" }], points: [P(-2, 0), P(0, 3), P(2, 1)] })),
+  W(3, "hard", 5, S`$f(x)=x^2$ (grey) is mapped to $g(x)=-2(x-3)^2+8$ (violet). (a) List the transformations in a correct order. (b) Find the zeros and range of $g$. (c) $g$ is then reflected in the y-axis to give $h$. Write $h(x)$ and state its vertex.`,
+    S`(a) vertical stretch 2, reflection in the x-axis, translation 3 right and 8 up. (b) $(x-3)^2=4\Rightarrow x=1,5$; $y\le8$. (c) $h(x)=-2(x+3)^2+8$, vertex $(-3,8)$. [2, 2, 1.]`,
+    planeDoc({ view: { xmin: -2, xmax: 7, ymin: -3, ymax: 10 }, curves: [{ f: (x) => x * x, color: "gray" }, { f: (x) => -2 * (x - 3) ** 2 + 8 }], points: [P(3, 8), P(1, 0), P(5, 0)] })),
+  W(4, "medium", 4, S`The parabola shown has zeros $-1$ and $5$ and passes through $(0,-2.5)$. (a) Find its equation in intercept form. (b) Find its vertex. (c) Write it in standard form.`,
+    S`(a) $a(1)(-5)=-2.5\Rightarrow a=0.5$: $y=0.5(x+1)(x-5)$. (b) axis $x=2$: $0.5(3)(-3)=-4.5$, vertex $(2,-4.5)$. (c) $0.5x^2-2x-2.5$. [2, 1, 1.]`,
+    planeDoc({ view: { xmin: -3, xmax: 7, ymin: -6, ymax: 5 }, curves: [{ f: (x) => 0.5 * (x + 1) * (x - 5) }], points: [P(-1, 0), P(5, 0), P(0, -2.5)] })),
+  W(4, "hard", 5, S`$f(x)=ax^2+bx+c$ passes through $(1,0)$, $(2,3)$ and $(-1,6)$. (a) Find $a$, $b$ and $c$. (b) Find the vertex and the range. (c) Sketch the graph (shown for checking) and state the other zero.`,
+    S`(a) $a+b+c=0$, $4a+2b+c=3$, $a-b+c=6$: $b=-3$, $a=2$, $c=1$. (b) $x=\frac34$: $f=-\frac18$; range $y\ge-\frac18$. (c) $2x^2-3x+1=(2x-1)(x-1)$: other zero $\frac12$. [2, 2, 1.]`,
+    planeDoc({ view: { xmin: -2, xmax: 3, ymin: -1, ymax: 7 }, curves: [{ f: (x) => 2 * x * x - 3 * x + 1 }], points: [P(1, 0), P(2, 3), P(-1, 6)] })),
+  W(5, "medium", 4, S`(a) Solve $4x^2+4x-15=0$ by factorising. (b) Write $x^2-8x+5$ in the form $(x-h)^2+k$. (c) Hence solve $x^2-8x+5=0$ exactly (graph shown).`,
+    S`(a) $(2x+5)(2x-3)=0$: $x=-2.5$ or $1.5$. (b) $(x-4)^2-11$. (c) $x=4\pm\sqrt{11}$. [2, 1, 1.]`,
+    planeDoc({ view: { xmin: -1, xmax: 9, ymin: -12, ymax: 8 }, curves: [{ f: (x) => x * x - 8 * x + 5 }], points: [P(4, -11)], step: { x: 1, y: 2 } })),
+  W(5, "hard", 5, S`A rectangular lawn is 6 m longer than it is wide. A path 1 m wide runs around the outside (shown) and the path has area 52 m². (a) Write an equation for the width $x$. (b) Solve it. (c) Show that the lawn's area can be written as $(x+3)^2-9$ and use this to explain why the area grows faster than the width.`,
+    S`(a) $(x+2)(x+8)-x(x+6)=52\Rightarrow4x+16=52$. (b) $x=9$ (lawn 9 m by 15 m). (c) $x(x+6)=x^2+6x=(x+3)^2-9$; a square term grows faster than a linear one. [2, 1, 2.]`,
+    planeDoc({ view: { xmin: -1, xmax: 18, ymin: -1, ymax: 12 }, segs: [{ pts: [[0, 0], [17, 0], [17, 11], [0, 11], [0, 0]], color: "green" }, { pts: [[1, 1], [16, 1], [16, 10], [1, 10], [1, 1]], color: "violet" }], step: { x: 1, y: 1 } })),
+  W(6, "medium", 4, S`For $2x^2-6x+k=0$: (a) find the discriminant in terms of $k$; (b) find $k$ for equal roots and the repeated root; (c) for $k=-3$, solve the equation (3 s.f.). The graphs for $k=-3$, $4.5$ and $7$ are shown.`,
+    S`(a) $36-8k$. (b) $k=4.5$, root $x=1.5$. (c) $x=\frac{6\pm\sqrt{60}}{4}\approx3.44$ or $-0.436$. [1, 2, 1.]`,
+    planeDoc({ view: { xmin: -2, xmax: 5, ymin: -9, ymax: 10 }, curves: [{ f: (x) => 2 * x * x - 6 * x - 3, color: "green" }, { f: (x) => 2 * x * x - 6 * x + 4.5, color: "amber" }, { f: (x) => 2 * x * x - 6 * x + 7, color: "red" }], step: { x: 1, y: 2 } })),
+  W(6, "hard", 5, S`The line $y=k-x$ and the parabola $y=x^2-5x+7$ are shown for one value of $k$. (a) Show that they meet where $x^2-4x+7-k=0$. (b) Find $k$ for a tangent and the point of contact. (c) Find the values of $k$ for two points of intersection.`,
+    S`(a) $x^2-5x+7=k-x$. (b) $\Delta=16-4(7-k)=0\Rightarrow k=3$; $x=2$, point $(2,1)$. (c) $16-28+4k>0\Rightarrow k>3$. [1, 2, 2.]`,
+    planeDoc({ view: { xmin: -1, xmax: 6, ymin: -2, ymax: 8 }, curves: [{ f: (x) => x * x - 5 * x + 7 }], lines: [{ m: -1, b: 3, color: "green" }], points: [P(2, 1)] })),
+  W(7, "medium", 4, S`A ball's height is $h=-5t^2+22t+3$ m (graphed). (a) Find its greatest height and when it occurs. (b) Find when it lands (3 s.f.). (c) Find for how long it is above 20 m.`,
+    S`(a) $t=2.2$: $h=27.2$ m. (b) $5t^2-22t-3=0\Rightarrow t\approx4.53$ s. (c) $5t^2-22t+17<0\Rightarrow1<t<3.4$: 2.4 s. [2, 1, 1.]`,
+    planeDoc({ view: { xmin: -0.3, xmax: 5, ymin: -3, ymax: 31 }, curves: [{ f: (t) => -5 * t * t + 22 * t + 3, a: 0, b: 4.53 }], lines: [{ m: 0, b: 20, color: "green", dash: true }], points: [P(2.2, 27.2)], step: { x: 0.5, y: 5 }, xlabel: "t", ylabel: "h" })),
+  W(7, "hard", 5, S`A theatre has 800 seats. At 40 per ticket it sells 500; each 2 decrease sells 50 more. Let $x$ be the number of 2 decreases. (a) Write the revenue $R(x)$. (b) Find the price for the greatest revenue and the revenue. (c) Explain why the model fails for large $x$ and state its largest sensible $x$.`,
+    S`(a) $R=(40-2x)(500+50x)$. (b) zeros $20$ and $-10$, so $x=5$: price 30, $30\times750=22\,500$. (c) only 800 seats: $500+50x\le800\Rightarrow x\le6$. [1, 2, 2.]`,
+    planeDoc({ view: { xmin: -1, xmax: 21, ymin: -1000, ymax: 25000 }, curves: [{ f: (x) => (40 - 2 * x) * (500 + 50 * x), a: 0, b: 20 }], vlines: [{ x: 6, color: "red", dash: true }], points: [P(5, 22500)], step: { x: 2, y: 5000 } })),
+];

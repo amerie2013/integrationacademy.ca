@@ -30,6 +30,7 @@ import { PeriodicReader, UnitWave, WheelLab, SinTransform, KeyPointMapper, FitSi
 import { ArithLab, GeoLab, RecursiveLab, FibLab, SeriesPairs, GeoSums, PascalLab } from "./Sequences";
 import { SigmaLab, SequenceLab, SeriesLab, InterestLab, BinomialLab, ConjectureLab } from "./IBSequences";
 import { FunctionTest, FnNotationLab, GraphFeatures, DomainRange, CompositeLab, FnInverseLab } from "./IBFunctions";
+import { IBGradient, IBLinearModel, IBTransform, IBQuadratic, IBSquare, IBDiscriminant, IBQuadApps } from "./IBQuadratics";
 import { SimpleCompound, CompoundLab, PresentValueLab, AnnuityFV, AnnuityPV, AmortLab } from "./Finance11";
 import { PowerLab, PolyFeatures, FactoredPoly, PowerTransform, SecantLab, TangentSlope } from "./PolyFunctions";
 import { SyntheticDivide, FactorFinder, RootSolver, PolyFamily, InequalityGraph, SignChart } from "./PolyEquations";
@@ -185,6 +186,13 @@ const REGISTRY: Record<string, ComponentType<any>> = {
   domainRange: DomainRange,
   compositeLab: CompositeLab,
   fnInverse: FnInverseLab,
+  ibGradient: IBGradient,
+  ibLinearModel: IBLinearModel,
+  ibTransform: IBTransform,
+  ibQuadratic: IBQuadratic,
+  ibSquare: IBSquare,
+  ibDiscriminant: IBDiscriminant,
+  ibQuadApps: IBQuadApps,
   simpleCompound: SimpleCompound,
   compoundLab: CompoundLab,
   presentValueLab: PresentValueLab,
