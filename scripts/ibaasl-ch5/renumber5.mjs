@@ -2,7 +2,7 @@
 // their new titles (5.3 keeps its title) and re-sorts every lesson position after the new 5.2 and 5.7 are inserted.
 // Worksheet codes 5.1/5.3–5.6 stay; titles are rewritten by ws/build.mjs, assignments by asg/publish.mjs (by id).
 //   node scripts/ibaasl-ch5/renumber5.mjs          -> dry run
-//   node scripts/ibaasl-ch5/renumber5.mjs --apply  -> writes (backup first). Apply ONCE.
+//   node scripts/ibaasl-ch5/renumber5.mjs --apply  -> writes (backup first). Apply ONCE. APPLIED 2026-10-21 — never rerun.
 // Order: lessons-publish --all --apply → renumber5 --apply → ws/build --all --apply → bank → asg → written.
 import { createClient } from "@supabase/supabase-js";
 import fs from "fs";
