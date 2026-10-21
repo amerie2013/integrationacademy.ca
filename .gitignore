@@ -87,3 +87,8 @@ scripts/_ftce/fulltext.txt
 /scripts/mcv4u-ch*/bank/out/
 /scripts/mcv4u-ch*/backup/
 /scripts/mcv4u-ch*/renumbered-ws/
+/scripts/ibaasl-ch*/out/
+/scripts/ibaasl-ch*/ws/out/
+/scripts/ibaasl-ch*/bank/out/
+/scripts/ibaasl-ch*/renumbered-ws/
+/scripts/ibaasl-ch*/backup/

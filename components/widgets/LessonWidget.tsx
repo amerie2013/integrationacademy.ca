@@ -28,6 +28,7 @@ import { PowerLadder, RationalPower, GrowthCompare, ExpTransform, ExpModel } fro
 import { SpecialTriangles, TerminalArm, IdentityCheck, AmbiguousCase, CosineLaw, TowerLab } from "./Trig11";
 import { PeriodicReader, UnitWave, WheelLab, SinTransform, KeyPointMapper, FitSinusoid, ModelLab } from "./Sinusoidal";
 import { ArithLab, GeoLab, RecursiveLab, FibLab, SeriesPairs, GeoSums, PascalLab } from "./Sequences";
+import { SigmaLab, SequenceLab, SeriesLab, InterestLab, BinomialLab, ConjectureLab } from "./IBSequences";
 import { SimpleCompound, CompoundLab, PresentValueLab, AnnuityFV, AnnuityPV, AmortLab } from "./Finance11";
 import { PowerLab, PolyFeatures, FactoredPoly, PowerTransform, SecantLab, TangentSlope } from "./PolyFunctions";
 import { SyntheticDivide, FactorFinder, RootSolver, PolyFamily, InequalityGraph, SignChart } from "./PolyEquations";
@@ -171,6 +172,12 @@ const REGISTRY: Record<string, ComponentType<any>> = {
   seriesPairs: SeriesPairs,
   geoSums: GeoSums,
   pascalLab: PascalLab,
+  sigmaLab: SigmaLab,
+  sequenceLab: SequenceLab,
+  seriesLab: SeriesLab,
+  interestLab: InterestLab,
+  binomialLab: BinomialLab,
+  conjectureLab: ConjectureLab,
   simpleCompound: SimpleCompound,
   compoundLab: CompoundLab,
   presentValueLab: PresentValueLab,
