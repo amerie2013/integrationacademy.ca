@@ -36,6 +36,7 @@ import { IBLimit, IBDerivative, IBPowerRule, IBShape, IBBox, IBMotion } from "./
 import { IBSampling, IBPresent, IBCentre, IBSpread } from "./IBStats";
 import { IBScatter, IBPearson, IBRegression } from "./IBBivariate";
 import { IBRelFreq, IBVenn, IBConditional, IBTree } from "./IBProbability";
+import { IBExpLaws, IBExpGraph, IBCompound, IBLogGraph, IBLogLaws, IBExpSolve, IBExpDeriv } from "./IBExpLog";
 import { SimpleCompound, CompoundLab, PresentValueLab, AnnuityFV, AnnuityPV, AmortLab } from "./Finance11";
 import { PowerLab, PolyFeatures, FactoredPoly, PowerTransform, SecantLab, TangentSlope } from "./PolyFunctions";
 import { SyntheticDivide, FactorFinder, RootSolver, PolyFamily, InequalityGraph, SignChart } from "./PolyEquations";
@@ -218,6 +219,13 @@ const REGISTRY: Record<string, ComponentType<any>> = {
   ibVenn: IBVenn,
   ibConditional: IBConditional,
   ibTree: IBTree,
+  ibExpLaws: IBExpLaws,
+  ibExpGraph: IBExpGraph,
+  ibCompound: IBCompound,
+  ibLogGraph: IBLogGraph,
+  ibLogLaws: IBLogLaws,
+  ibExpSolve: IBExpSolve,
+  ibExpDeriv: IBExpDeriv,
   simpleCompound: SimpleCompound,
   compoundLab: CompoundLab,
   presentValueLab: PresentValueLab,
