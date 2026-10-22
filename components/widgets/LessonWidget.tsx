@@ -38,6 +38,7 @@ import { IBScatter, IBPearson, IBRegression } from "./IBBivariate";
 import { IBRelFreq, IBVenn, IBConditional, IBTree } from "./IBProbability";
 import { IBExpLaws, IBExpGraph, IBCompound, IBLogGraph, IBLogLaws, IBExpSolve, IBExpDeriv } from "./IBExpLog";
 import { IBAntideriv, IBLogArea, IBRiemann, IBSignedArea, IBBetween, IBVelocity } from "./IBIntegral";
+import { IBSolid, IBRightTrig, IBSineRule, IBCosineRule, IBBearing } from "./IBTrig";
 import { SimpleCompound, CompoundLab, PresentValueLab, AnnuityFV, AnnuityPV, AmortLab } from "./Finance11";
 import { PowerLab, PolyFeatures, FactoredPoly, PowerTransform, SecantLab, TangentSlope } from "./PolyFunctions";
 import { SyntheticDivide, FactorFinder, RootSolver, PolyFamily, InequalityGraph, SignChart } from "./PolyEquations";
@@ -233,6 +234,11 @@ const REGISTRY: Record<string, ComponentType<any>> = {
   ibSignedArea: IBSignedArea,
   ibBetween: IBBetween,
   ibVelocity: IBVelocity,
+  ibSolid: IBSolid,
+  ibRightTrig: IBRightTrig,
+  ibSineRule: IBSineRule,
+  ibCosineRule: IBCosineRule,
+  ibBearing: IBBearing,
   simpleCompound: SimpleCompound,
   compoundLab: CompoundLab,
   presentValueLab: PresentValueLab,

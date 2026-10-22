@@ -2,7 +2,7 @@
 // new titles and re-sorts every lesson position after the new 10.2, 10.4, 10.6 and 10.7 are inserted.
 // Worksheet codes 10.1/10.3/10.5 stay; titles are rewritten by ws/build.mjs, assignments by asg/publish.mjs (by id).
 //   node scripts/ibaasl-ch10/renumber10.mjs          -> dry run
-//   node scripts/ibaasl-ch10/renumber10.mjs --apply  -> writes (backup first). Apply ONCE.
+//   node scripts/ibaasl-ch10/renumber10.mjs --apply  -> writes (backup first). Apply ONCE. APPLIED 2026-10-22 — never rerun.
 // Order: lessons-publish --all --apply → renumber10 --apply → ws/build --all --apply → bank → asg → written.
 import { createClient } from "@supabase/supabase-js";
 import fs from "fs";
