@@ -80,7 +80,7 @@ export const ASSIGNMENTS = [
     S`3. Use the graph to estimate the solutions of \(\cos x=-0.35\) for \(0\le x\le2\pi\), then find them to 3 s.f. [[g|Cosine curve and a horizontal line]]`,
     "Thinking",
     S`4. Solve \(2\sin2x=1.2\) for \(0\le x\le2\pi\) and check that the number of solutions matches the graph. [[h|y = 2 sin 2x and y = 1.2]]`,
-    S`5. Solve \(2\cos^2x+5\cos x-3=0\) for \(0\le x\le2\pi\).`,
+    S`5. Solve \(2\sin^2x-7\sin x+3=0\) for \(0\le x\le2\pi\).`,
     "Communication",
     S`6. Explain why \(\tan x=k\) always has exactly two solutions in \([0,2\pi)\), while \(\sin x=k\) may have none, one or two.`,
     S`7. Explain how to adjust the interval when solving \(\cos3x=k\) for \(0\le x\le2\pi\), and why skipping this step loses solutions.`,

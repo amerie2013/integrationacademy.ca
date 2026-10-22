@@ -25,7 +25,7 @@ export const blocks = () => [
       [S`Units of a slope with \(y\) in m and \(x\) in s?`, S`m/s.`],
     ],
     words: [
-      ["Rate of change", "change in y ÷ change in x", "km/h, \\$/item"],
+      ["Rate of change", "change in y ÷ change in x", "km/h, $/item"],
       ["Average rate of change", "\\(\\frac{f(b)-f(a)}{b-a}\\) over \\([a,b]\\)", ""],
       ["Secant", "a line through two points of a curve", ""],
       ["Interval", "\\([a,b]\\): all x from a to b", ""],
