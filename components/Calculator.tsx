@@ -1,7 +1,8 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { safeCompile } from "../lib/mathExpr";
+import { safeCompile, compilePiecewise } from "../lib/mathExpr";
+import { substituteSliders, latexLabelImage } from "../lib/latexLabel";
 import { supabase } from "../lib/supabase";
 import { MathField, toggleMathKeyboard } from "./MathField";
 import { MathKeyboard } from "./MathKeyboard";
@@ -88,7 +89,7 @@ function rgba(hex: string, a: number) {
 type Kind = "cartesian" | "parametric" | "polar";
 type Fn = { id: string; kind: Kind; expr: string; exprY: string; tMin: number; tMax: number; color: string; thickness: number; visible: boolean; dMin: string; dMax: string; rMin: string; rMax: string };
 type Slider = { id: string; name: string; value: number; min: number; max: number; step: number; anim: boolean; speed: number };
-type Label = { id: string; text: string; x: number | string; y: number | string; color: string; visible: boolean; showPoint: boolean; angle?: number | string; pos?: LabelPos; fontSize?: number };
+type Label = { id: string; text: string; latex?: boolean; x: number | string; y: number | string; color: string; visible: boolean; showPoint: boolean; angle?: number | string; pos?: LabelPos; fontSize?: number };
 type Pt = { x: string; y: string };
 type Shape = "circle" | "square" | "triangle";
 type Tbl = { id: string; name: string; color: string; shape: Shape; visible: boolean; points: Pt[] };
@@ -111,20 +112,59 @@ function bisectDiscontinuity(evalX: (x: number) => number, xLo: number, xHi: num
 }
 /**
  * One-sided limit of evalX at x0, approaching from `dir` (-1 left, +1
- * right) — checked across several decades of step size. A genuine finite
- * limit (a hole or a jump's endpoint) stays flat across all of them; a
- * vertical asymptote fans out. Returns null rather than a value in the
- * asymptote case, so the caller never draws a misleading circle where the
- * function actually diverges.
+ * right) across several decades of step size. A genuine finite limit (a hole,
+ * or the end of one piece — sloped or flat) converges: each step shrinks. A
+ * vertical asymptote's steps grow instead. Returns null in the asymptote
+ * case, so the caller never draws a misleading circle where the function
+ * actually diverges.
  */
 function estimateOneSidedLimit(evalX: (x: number) => number, x0: number, dir: 1 | -1, xSpan: number): number | null {
-  const decades = [2, 3, 4, 5, 6, 7];
-  const samples = decades.map((d) => evalX(x0 + dir * xSpan * Math.pow(10, -d)));
-  if (samples.some((v) => !Number.isFinite(v))) return null;
-  const lo = Math.min(...samples), hi = Math.max(...samples);
-  const scale = Math.max(Math.abs(samples[samples.length - 1]), 1);
-  if (hi - lo > scale * 0.02) return null;
-  return samples[samples.length - 1];
+  const s = [3, 4, 5, 6, 7, 8].map((d) => evalX(x0 + dir * xSpan * Math.pow(10, -d)));
+  if (s.some((v) => !Number.isFinite(v))) return null;
+  const diff = (i: number) => Math.abs(s[i + 1] - s[i]);
+  const scale = Math.max(Math.abs(s[5]), 1);
+  for (let i = 1; i < 5; i++) if (diff(i) > diff(i - 1) * 0.5 + 1e-9 * scale) return null;
+  if (diff(4) > 1e-3 * scale) return null;
+  return s[5] + (s[5] - s[4]) / 9; // linear extrapolation to the limit itself
+}
+
+/**
+ * Is the gap between two adjacent samples a real discontinuity (jump or
+ * asymptote) rather than just a steep but continuous stretch? Re-samples
+ * inside the gap: a continuous curve passes through intermediate values in
+ * small steps, while a jump has one big step and an asymptote overshoots.
+ */
+function isTrueDiscontinuity(evalX: (x: number) => number, xa: number, xb: number, ya: number, yb: number): boolean {
+  const M = 48, total = Math.abs(yb - ya);
+  let prev = ya, maxStep = 0;
+  const lo = Math.min(ya, yb) - 0.25 * total, hi = Math.max(ya, yb) + 0.25 * total;
+  for (let i = 1; i <= M; i++) {
+    const y = evalX(xa + ((xb - xa) * i) / (M + 1));
+    if (!Number.isFinite(y) || y < lo || y > hi) return true;
+    maxStep = Math.max(maxStep, Math.abs(y - prev)); prev = y;
+  }
+  return Math.max(maxStep, Math.abs(yb - prev)) > 0.5 * total;
+}
+/**
+ * Indices k where the curve must not be joined from sample k-1 to k: a domain
+ * edge (defined ↔ undefined), or a confirmed jump/asymptote. Cheap candidate
+ * tests pick the suspicious gaps; only those pay for the re-sampling above.
+ */
+function findCurveBreaks(evalX: (x: number) => number, xs: Float64Array, ys: Float64Array, zoomY: number): number[] {
+  const N = xs.length - 1, out: number[] = [];
+  let budget = 300;
+  for (let k = 1; k <= N; k++) {
+    const a = ys[k - 1], b = ys[k];
+    const fa = Number.isFinite(a), fb = Number.isFinite(b);
+    if (!fa || !fb) { if (fa !== fb) out.push(k); continue; }
+    const d = Math.abs(b - a);
+    if (d * zoomY <= 3) continue;
+    const pStep = k >= 2 && Number.isFinite(ys[k - 2]) ? Math.abs(a - ys[k - 2]) : 0;
+    const nStep = k < N && Number.isFinite(ys[k + 1]) ? Math.abs(ys[k + 1] - b) : 0;
+    const diverging = a * b < 0 && k >= 2 && k < N && Math.abs(a) > Math.abs(ys[k - 2]) && Math.abs(b) > Math.abs(ys[k + 1]);
+    if ((d * zoomY > 60 || d > 3 * Math.max(pStep, nStep) || diverging) && budget-- > 0 && isTrueDiscontinuity(evalX, xs[k - 1], xs[k], a, b)) out.push(k);
+  }
+  return out;
 }
 
 const GRID_OPTS = ["auto", "0.1", "0.5", "1", "2", "5", "10", "20", "50", "100", "pi"];
@@ -145,6 +185,7 @@ export function Calculator({ initialData, initialState, initialId, embed = false
   const [fns, setFns] = useState<Fn[]>([{ ...newFn(0), expr: "y = a*x^2", color: COLORS[0] }]);
   const [sliders, setSliders] = useState<Slider[]>([{ id: uid("s"), name: "a", value: 1, min: -10, max: 10, step: 0.1, anim: false, speed: 4 }]);
   const [labels, setLabels] = useState<Label[]>([]);
+  const [latexTick, setLatexTick] = useState(0); // bumps when a LaTeX label finishes rendering, to redraw
   const [tables, setTables] = useState<Tbl[]>([]);
   const [images, setImages] = useState<Img[]>([]);
 
@@ -308,7 +349,7 @@ export function Calculator({ initialData, initialState, initialId, embed = false
     // "shade only the overlap" only makes sense with 2+ of them; with 0-1 it's
     // identical to shading each one normally.
     const res = 6; const cols = Math.ceil(w / res), rows = Math.ceil(h / res);
-    const inequalityCount = fns.filter((f) => f.visible && f.kind === "cartesian" && /(<=|>=|<|>)/.test(f.expr)).length;
+    const inequalityCount = fns.filter((f) => f.visible && f.kind === "cartesian" && !f.expr.includes("{") && /(<=|>=|<|>)/.test(f.expr)).length;
     const combineShading = shadeIntersectionOnly && inequalityCount >= 2;
     const pendingFills: { shade: number; val: Float64Array; color: string }[] = [];
     for (const f of fns) {
@@ -347,7 +388,10 @@ export function Calculator({ initialData, initialState, initialId, embed = false
         // An inequality (y > x, y ≤ 2x+1, x ≥ 3, …) shades its solution region
         // and draws the boundary dashed (strict < >) or solid (≤ ≥). Anything
         // else is drawn as the zero contour of the equation/function, as before.
-        const im = e.match(/(<=|>=|<|>)/);
+        // Piecewise ("y = {x<0: -x, x^2}") or restricted ("y = x^2 {x>0}") —
+        // braces mean the comparisons are conditions, not a shaded inequality.
+        const piecewise = compilePiecewise(e);
+        const im = piecewise ? null : e.match(/(<=|>=|<|>)/);
         let shade = 0; // 0 = none, 1 = keep g>0 side, -1 = keep g<0 side
         let strict = false;
         // "y = <expr not containing y>" is a plain function — sampled directly
@@ -363,6 +407,8 @@ export function Calculator({ initialData, initialState, initialId, embed = false
           const op = im[1], at = e.indexOf(op);
           const lhs = e.slice(0, at).trim() || "0", rhs = e.slice(at + op.length).trim() || "0";
           e = `(${lhs})-(${rhs})`; shade = op[0] === ">" ? 1 : -1; strict = op.length === 1;
+        } else if (piecewise) {
+          explicitExpr = e;
         } else if (e.includes("=")) {
           const [l, r] = e.split("=");
           if (l.trim() === "y" && !/\by\b/.test(r)) explicitExpr = r.trim();
@@ -371,7 +417,7 @@ export function Calculator({ initialData, initialState, initialId, embed = false
         const dMin = lim(f.dMin, -Infinity), dMax = lim(f.dMax, Infinity);
         const rMin = lim(f.rMin, -Infinity), rMax = lim(f.rMax, Infinity);
         if (explicitExpr !== null) {
-          const fx = safeCompile(explicitExpr);
+          const fx = piecewise ?? safeCompile(explicitExpr);
           const evalX = (x: number) => { const v = fx({ x, ...vars }); return Number.isFinite(v) ? v : NaN; };
           const loX = Math.max(xMin, dMin), hiX = Math.min(xMax, dMax);
           if (hiX > loX) {
@@ -383,18 +429,13 @@ export function Calculator({ initialData, initialState, initialId, embed = false
               if (y < rMin || y > rMax) y = NaN;
               xs[k] = x; ys[k] = y;
             }
-            const pxJumpThreshold = 60;
-            const breakIdx: number[] = [];
-            for (let k = 1; k <= N; k++) {
-              const yPrev = ys[k - 1], yCur = ys[k];
-              const bothFinite = Number.isFinite(yPrev) && Number.isFinite(yCur);
-              const isBreak = !bothFinite ? Number.isFinite(yPrev) !== Number.isFinite(yCur) : Math.abs(yCur - yPrev) * zoomY > pxJumpThreshold;
-              if (isBreak) breakIdx.push(k);
-            }
+            const breakIdx = findCurveBreaks(evalX, xs, ys, zoomY);
+            const isBreakAt = new Set(breakIdx);
             ctx.beginPath(); let pen = false;
             for (let k = 0; k <= N; k++) {
               const y = ys[k];
               if (!Number.isFinite(y)) { pen = false; continue; }
+              if (isBreakAt.has(k)) pen = false;
               const p = toPx(xs[k], y);
               if (!pen) { ctx.moveTo(p.px, p.py); pen = true; } else ctx.lineTo(p.px, p.py);
             }
@@ -410,15 +451,23 @@ export function Calculator({ initialData, initialState, initialId, embed = false
               const prevCluster = clusters[clusters.length - 1];
               if (prevCluster && k - prevCluster.last <= 4) prevCluster.last = k; else clusters.push({ first: k, last: k });
             }
-            ctx.fillStyle = "#fff";
             for (const c of clusters) {
               const yLoRef = Number.isFinite(ys[c.first - 1]) ? ys[c.first - 1] : ys[c.first];
               const yHiRef = Number.isFinite(ys[c.last]) ? ys[c.last] : ys[c.last - 1];
-              const x0 = bisectDiscontinuity(evalX, xs[c.first - 1], xs[c.last], yLoRef, yHiRef);
+              let x0 = bisectDiscontinuity(evalX, xs[c.first - 1], xs[c.last], yLoRef, yHiRef);
+              // A boundary like x = 2 bisects to 1.9999999…; snap to the round
+              // value so "is the function defined exactly here?" is answered fairly.
+              const snapped = Math.round(x0 * 1e6) / 1e6;
+              if (Math.abs(snapped - x0) < 1e-9 * Math.max(1, xSpan)) x0 = snapped;
+              const atX0 = evalX(x0);
               const left = estimateOneSidedLimit(evalX, x0, -1, xSpan);
               const right = estimateOneSidedLimit(evalX, x0, 1, xSpan);
               for (const yAt of [left, right]) {
                 if (yAt === null) continue;
+                // Filled where the function really takes that value at x0 (a
+                // closed end of a piece), hollow where it doesn't (a hole / open end).
+                const closed = Number.isFinite(atX0) && Math.abs(atX0 - yAt) < 1e-3 * Math.max(1, Math.abs(yAt));
+                ctx.fillStyle = closed ? f.color : "#fff";
                 const p = toPx(x0, yAt);
                 ctx.beginPath(); ctx.arc(p.px, p.py, 4, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
               }
@@ -557,6 +606,25 @@ export function Calculator({ initialData, initialState, initialId, embed = false
       const lx = cx(l.x), ly = cx(l.y);
       const p = toPx(lx, ly); ctx.fillStyle = l.color;
       if (l.showPoint) { ctx.beginPath(); ctx.arc(p.px, p.py, 4, 0, Math.PI * 2); ctx.fill(); }
+      // LaTeX label: slider names become their live values, then KaTeX draws it.
+      if (l.latex) {
+        const lsize = (typeof l.fontSize === "number" && l.fontSize > 0 ? l.fontSize : DEFAULT_LABEL_SIZE) * 1.15;
+        const src = substituteSliders(l.text || "", vars);
+        const li = src.trim() ? latexLabelImage(l.id, src, l.color, lsize, () => setLatexTick((t) => t + 1)) : null;
+        if (li) {
+          const gap = Math.max(4, Math.round(LABEL_GAP * lsize / DEFAULT_LABEL_SIZE));
+          const lpos: LabelPos = l.pos === "below" || l.pos === "left" || l.pos === "right" ? l.pos : "above";
+          const ox = lpos === "left" ? -gap - li.w : lpos === "right" ? gap : -li.w / 2;
+          const oy = lpos === "above" ? -gap - li.h : lpos === "below" ? gap : -li.h / 2;
+          const ang = l.angle == null || l.angle === "" ? 0 : cx(l.angle);
+          ctx.save();
+          ctx.translate(p.px, p.py);
+          if (ang) ctx.rotate(-ang * Math.PI / 180);
+          ctx.drawImage(li.img, ox, oy, li.w, li.h);
+          ctx.restore();
+        }
+        continue;
+      }
       // Dynamic text (GeoGebra-style):
       //  1) {expression} is evaluated live (e.g. "y = {a}" or "{x^2+1}").
       //  2) Bare slider names become their live values, except a leading
@@ -603,7 +671,7 @@ export function Calculator({ initialData, initialState, initialId, embed = false
     if (title) { ctx.fillStyle = "#1e293b"; ctx.font = "bold 20px Fraunces, serif"; ctx.textAlign = "center"; ctx.textBaseline = "top"; ctx.fillText(title, w / 2, 14); }
   }, [fns, sliders, labels, tables, images, showGrid, showAxes, showNums, stepX, stepY, title, shadeIntersectionOnly, numSize, logoReady]);
 
-  useEffect(() => { draw(); }, [draw]);
+  useEffect(() => { draw(); }, [draw, latexTick]);
   useEffect(() => {
     const el = wrapRef.current; if (!el) return;
     const ro = new ResizeObserver(() => { sizeRef.current = { w: el.clientWidth, h: el.clientHeight }; draw(); });
@@ -784,11 +852,12 @@ export function Calculator({ initialData, initialState, initialId, embed = false
 
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6, marginBottom: 10 }}>
           <AddBtn color="#2563eb" onClick={() => setFns((l) => [...l, newFn(l.length)])}>+ Function</AddBtn>
+          <AddBtn color="#db2777" onClick={() => setFns((l) => [...l, { ...newFn(l.length), expr: "y = {x<0: -x, 0<=x<2: x^2, x>=2: 6}" }])}>+ Piecewise</AddBtn>
           <AddBtn color="#0ea5e9" onClick={() => setFns((l) => [...l, { ...newFn(l.length), kind: "parametric", expr: "cos(t)", exprY: "sin(t)" }])}>+ Parametric</AddBtn>
           <AddBtn color="#7c3aed" onClick={() => setFns((l) => [...l, { ...newFn(l.length), kind: "polar", expr: "1 + cos(t)" }])}>+ Polar</AddBtn>
           <AddBtn color="#1b7a44" onClick={() => setSliders((l) => [...l, { id: uid("s"), name: nextName(l), value: 1, min: -10, max: 10, step: 0.1, anim: false, speed: 4 }])}>+ Slider</AddBtn>
           <AddBtn color="#e69138" onClick={() => setTables((l) => [...l, { id: uid("t"), name: "Table", color: "#e69138", shape: "circle", visible: true, points: [{ x: "1", y: "1" }, { x: "2", y: "4" }] }])}>+ Table</AddBtn>
-          <AddBtn color="#0d9488" onClick={() => setLabels((l) => [...l, { id: uid("l"), text: "Point", x: 1, y: 1, color: "#0d9488", visible: true, showPoint: true, angle: 0, pos: "above", fontSize: DEFAULT_LABEL_SIZE }])}>+ Text/Point</AddBtn>
+          <AddBtn color="#0d9488" onClick={() => setLabels((l) => [...l, { id: uid("l"), text: "a=a", latex: true, x: 1, y: 1, color: "#0d9488", visible: true, showPoint: true, angle: 0, pos: "above", fontSize: DEFAULT_LABEL_SIZE }])}>+ Text/Point</AddBtn>
           <label style={{ gridColumn: "1 / -1", background: "#c2185b", color: "#fff", padding: "7px", borderRadius: 8, fontWeight: 700, fontSize: 12, textAlign: "center", cursor: "pointer" }}>+ Image<input type="file" accept="image/*" style={{ display: "none" }} onChange={onUpload} /></label>
         </div>
 
@@ -888,7 +957,14 @@ export function Calculator({ initialData, initialState, initialId, embed = false
           <Card key={l.id}>
             <Row>
               <input type="color" value={l.color} onChange={(e) => patch(setLabels, l.id, { color: e.target.value })} style={{ width: 22, height: 22, border: "none", background: "none", cursor: "pointer", padding: 0 }} />
-              <input value={l.text} onChange={(e) => patch(setLabels, l.id, { text: e.target.value })} placeholder="text — use {a} for a live value" title="Type {expression} for a live value, e.g. y = {a} or {x^2+1}" style={{ flex: 1, minWidth: 0, padding: "5px 8px", border: "1px solid #cbd5e1", borderRadius: 7, fontSize: 13 }} />
+              {l.latex ? (
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <MathField format="latex" value={l.text} onChange={(v) => patch(setLabels, l.id, { text: v })} placeholder="type math — a slider's name (e.g. a) shows its value" style={exprIn} ariaLabel="label text" />
+                </div>
+              ) : (
+                <input value={l.text} onChange={(e) => patch(setLabels, l.id, { text: e.target.value })} placeholder="text — use {a} for a live value" title="Type {expression} for a live value, e.g. y = {a} or {x^2+1}" style={{ flex: 1, minWidth: 0, padding: "5px 8px", border: "1px solid #cbd5e1", borderRadius: 7, fontSize: 13 }} />
+              )}
+              <button onClick={() => patch(setLabels, l.id, { latex: !l.latex })} title="LaTeX: typeset the label as math. A slider's name (like a) is replaced by its live value." style={{ ...eyeBtn(!!l.latex), width: "auto", padding: "0 6px", fontSize: 11, fontWeight: 700 }}>TeX</button>
               <button onClick={() => patch(setLabels, l.id, { showPoint: !l.showPoint })} title="Toggle dot" style={eyeBtn(l.showPoint)}>•</button>
               <X onClick={() => drop(setLabels, l.id)} />
             </Row>

@@ -1,7 +1,7 @@
 "use client";
 
 import { createElement, useEffect, useMemo, useRef, useState } from "react";
-import { asciiToExpr } from "../lib/mathInput";
+import { asciiToExpr, exprToLatex } from "../lib/mathInput";
 import { kbStore, type FieldApi } from "./MathKeyboard";
 
 /**
@@ -168,6 +168,18 @@ const MATH_KB_LAYOUT = {
   ],
 };
 
+// Load a value into the field. A piecewise "{ … }" can't go through MathLive's
+// ASCII-math reader (it mangles it, and can overflow the stack), so those load
+// as LaTeX instead.
+function loadValue(el: { setValue: (v: string, o: object) => void }, value: string, ioFormat: string) {
+  try {
+    if (ioFormat === "ascii-math" && value.includes("{")) el.setValue(exprToLatex(value), { format: "latex", suppressChangeNotifications: true });
+    else el.setValue(value, { format: ioFormat, suppressChangeNotifications: true });
+  } catch {
+    try { el.setValue("", { suppressChangeNotifications: true }); } catch {}
+  }
+}
+
 /** MathLive-backed WYSIWYG field (desktop, and LaTeX fields everywhere). */
 function MathLiveField({ value, onChange, placeholder, style, ariaLabel, format = "expr" }: Props) {
   const ioFormat = format === "latex" ? "latex" : "ascii-math";
@@ -200,7 +212,7 @@ function MathLiveField({ value, onChange, placeholder, style, ariaLabel, format 
       // Show the on-screen math keyboard on focus for touch devices; desktop
       // users can type and use the toggle button.
       el.mathVirtualKeyboardPolicy = "auto";
-      el.setValue(value ?? "", { format: ioFormat, suppressChangeNotifications: true });
+      loadValue(el, value ?? "", ioFormat);
       lastValue.current = value ?? "";
       handler = () => {
         const out = fromField(el.getValue(ioFormat));
@@ -222,7 +234,7 @@ function MathLiveField({ value, onChange, placeholder, style, ariaLabel, format 
   useEffect(() => {
     const el = ref.current;
     if (el && typeof el.setValue === "function" && value !== lastValue.current) {
-      el.setValue(value ?? "", { format: ioFormat, suppressChangeNotifications: true });
+      loadValue(el, value ?? "", ioFormat);
       lastValue.current = value ?? "";
     }
   }, [value]);

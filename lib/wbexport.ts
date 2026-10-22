@@ -20,7 +20,7 @@ function bytesToBase64(bytes: Uint8Array): string {
 }
 
 /** The page's KaTeX rules, with each @font-face pointing at an embedded woff2. */
-function loadKatexCss(): Promise<string> {
+export function loadKatexCss(): Promise<string> {
   if (katexCss) return katexCss;
   katexCss = (async () => {
     const rules: string[] = [];

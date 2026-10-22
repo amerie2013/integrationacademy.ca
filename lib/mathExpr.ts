@@ -174,6 +174,88 @@ export function safeCompile(src: string): CompiledExpr {
   }
 }
 
+// Index of the "}" matching the "{" at `open`, or -1.
+function matchBrace(s: string, open: number): number {
+  let d = 0;
+  for (let i = open; i < s.length; i++) {
+    if (s[i] === "{") d++;
+    else if (s[i] === "}" && --d === 0) return i;
+  }
+  return -1;
+}
+
+// Split on `sep` outside (), {} nesting.
+function splitTop(s: string, sep: string): string[] {
+  const parts: string[] = [];
+  let d = 0, from = 0;
+  for (let i = 0; i < s.length; i++) {
+    const c = s[i];
+    if (c === "(" || c === "{") d++;
+    else if (c === ")" || c === "}") d--;
+    else if (c === sep && d === 0) { parts.push(s.slice(from, i)); from = i + 1; }
+  }
+  parts.push(s.slice(from));
+  return parts;
+}
+
+/** A condition like "x<0", "0<=x<2" or "x=3" (chained comparisons allowed). */
+function compileCondition(src: string): CompiledExpr {
+  const pieces = src.replace(/≤/g, "<=").replace(/≥/g, ">=").split(/(<=|>=|==|<|>|=)/);
+  const operands = pieces.filter((_, i) => i % 2 === 0).map((p) => safeCompile(p));
+  const ops = pieces.filter((_, i) => i % 2 === 1);
+  if (ops.length === 0) return () => NaN;
+  return (vars) => {
+    let left = operands[0](vars);
+    for (let i = 0; i < ops.length; i++) {
+      const right = operands[i + 1](vars);
+      const op = ops[i];
+      const ok = op === "<" ? left < right : op === "<=" ? left <= right : op === ">" ? left > right : op === ">=" ? left >= right : Math.abs(left - right) < 1e-9;
+      if (!ok) return 0;
+      left = right;
+    }
+    return 1;
+  };
+}
+
+/**
+ * Compile a piecewise function written Desmos-style, or null if `src` has no
+ * braces. Accepts either
+ *   y = { x<0: -x, 0<=x<2: x^2, 4 }     branches "condition: expression"; a branch
+ *                                        with no condition is the "otherwise" case
+ *   y = x^2 { 1<x<=3 }                  an expression restricted to where the
+ *                                        condition holds
+ * The "y =" is optional. Where no branch applies the value is NaN (a gap).
+ */
+export function compilePiecewise(src: string): CompiledExpr | null {
+  if (!src.includes("{")) return null;
+  const s = src.trim().replace(/^y\s*=(?!=)\s*/, "");
+  const open = s.indexOf("{");
+  if (open < 0) return null;
+  const close = matchBrace(s, open);
+  if (close < 0) return () => NaN;
+  const head = s.slice(0, open).trim();
+  const body = s.slice(open + 1, close);
+  if (s.slice(close + 1).trim() !== "") return () => NaN;
+
+  if (head === "") {
+    const branches = splitTop(body, ",").map((b) => {
+      const colon = splitTop(b, ":");
+      return colon.length >= 2
+        ? { cond: compileCondition(colon[0]), val: safeCompile(colon.slice(1).join(":")) }
+        : { cond: null, val: safeCompile(colon[0]) };
+    });
+    return (vars) => {
+      for (const b of branches) {
+        if (b.cond === null) return b.val(vars);
+        if (b.cond(vars) === 1) return b.val(vars);
+      }
+      return NaN;
+    };
+  }
+  const val = safeCompile(head), cond = compileCondition(body);
+  return (vars) => (cond(vars) === 1 ? val(vars) : NaN);
+}
+
 /**
  * Build a readable equation with the current parameter value(s) substituted in,
  * e.g. liveEquation("x^2+k", "k", 2) → "y = x² + 2". Handles negatives (sign

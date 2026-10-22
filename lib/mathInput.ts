@@ -74,6 +74,21 @@ function tokenize(s: string): Tk[] {
 const isValueEnd = (t: Tk) => t.type === "num" || t.type === "name" || t.type === "const" || t.type === "rp";
 const isValueStart = (t: Tk) => t.type === "num" || t.type === "name" || t.type === "const" || t.type === "func" || t.type === "lp";
 
+/**
+ * Our expression syntax → LaTeX, for loading a piecewise definition into the
+ * math-field. MathLive's ASCII-math reader mangles (or even overflows the stack
+ * on) a "{ cond: value }" group, but reads the equivalent LaTeX fine.
+ */
+export function exprToLatex(expr: string): string {
+  return expr
+    .replace(/<=/g, "\\le ").replace(/>=/g, "\\ge ")
+    .replace(/\{/g, "\\lbrace ").replace(/\}/g, "\\rbrace ")
+    .replace(/\*/g, "\\cdot ")
+    .replace(/\^\(([^()]*)\)/g, "^{$1}").replace(/\^(-?[0-9.]+|[a-zA-Z])/g, "^{$1}")
+    .replace(/\bsqrt\(([^()]*)\)/g, "\\sqrt{$1}")
+    .replace(/\b(sin|cos|tan|sec|csc|cot|ln|log|exp)\b/g, "\\$1");
+}
+
 /** Convert the math-field's ASCII-math output into our parser's syntax. */
 export function asciiToExpr(input: string): string {
   if (!input) return "";
@@ -88,8 +103,11 @@ export function asciiToExpr(input: string): string {
   // Absolute-value bars |...| -> abs(...). Repeat for multiple pairs.
   let prev: string;
   do { prev = s; s = s.replace(/\|([^|]*)\|/, "abs($1)"); } while (s !== prev);
-  // Braces are only ever grouping here.
+  // Braces are grouping — except a { … } holding a condition or a "cond: value"
+  // branch, which is piecewise syntax (see compilePiecewise) and must survive.
+  s = s.replace(/\{([^{}]*)\}/g, (m, body: string) => (/[:<>≤≥]/.test(body) ? `\u0001${body}\u0002` : m));
   s = s.replace(/[{[]/g, "(").replace(/[}\]]/g, ")");
+  s = s.replace(/\u0001/g, "{").replace(/\u0002/g, "}");
 
   const tks = tokenize(s);
   let out = "";
