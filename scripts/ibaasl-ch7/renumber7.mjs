@@ -2,7 +2,7 @@
 // re-sorts every lesson position after the new 7.2, 7.3 and 7.4 are inserted.
 // Worksheet code 7.1 stays; titles are rewritten by ws/build.mjs, assignments by asg/publish.mjs (by id).
 //   node scripts/ibaasl-ch7/renumber7.mjs          -> dry run
-//   node scripts/ibaasl-ch7/renumber7.mjs --apply  -> writes (backup first). Apply ONCE.
+//   node scripts/ibaasl-ch7/renumber7.mjs --apply  -> writes (backup first). Apply ONCE. APPLIED 2026-10-21 — never rerun.
 // Order: lessons-publish --all --apply → renumber7 --apply → ws/build --all --apply → bank → asg → written.
 import { createClient } from "@supabase/supabase-js";
 import fs from "fs";
