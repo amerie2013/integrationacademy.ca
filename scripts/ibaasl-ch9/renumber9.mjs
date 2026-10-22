@@ -3,7 +3,7 @@
 // worksheet), and re-sorts every lesson position after the new 9.2, 9.4, 9.5, 9.6 and 9.7 lessons are inserted.
 // Worksheet titles are rewritten by ws/build.mjs; assignment titles by asg/publish.mjs (matched by id).
 //   node scripts/ibaasl-ch9/renumber9.mjs          -> dry run
-//   node scripts/ibaasl-ch9/renumber9.mjs --apply  -> writes (backup first). Apply ONCE.
+//   node scripts/ibaasl-ch9/renumber9.mjs --apply  -> writes (backup first). Apply ONCE. APPLIED 2026-10-22 — never rerun.
 // Order: lessons-publish --all --apply → renumber9 --apply → ws/build --all --apply → bank → asg → written.
 import { createClient } from "@supabase/supabase-js";
 import fs from "fs";
