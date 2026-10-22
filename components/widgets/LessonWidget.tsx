@@ -34,6 +34,7 @@ import { IBGradient, IBLinearModel, IBTransform, IBQuadratic, IBSquare, IBDiscri
 import { IBReciprocal, IBRecipTransform, IBRational } from "./IBRational";
 import { IBLimit, IBDerivative, IBPowerRule, IBShape, IBBox, IBMotion } from "./IBCalculus";
 import { IBSampling, IBPresent, IBCentre, IBSpread } from "./IBStats";
+import { IBScatter, IBPearson, IBRegression } from "./IBBivariate";
 import { SimpleCompound, CompoundLab, PresentValueLab, AnnuityFV, AnnuityPV, AmortLab } from "./Finance11";
 import { PowerLab, PolyFeatures, FactoredPoly, PowerTransform, SecantLab, TangentSlope } from "./PolyFunctions";
 import { SyntheticDivide, FactorFinder, RootSolver, PolyFamily, InequalityGraph, SignChart } from "./PolyEquations";
@@ -209,6 +210,9 @@ const REGISTRY: Record<string, ComponentType<any>> = {
   ibPresent: IBPresent,
   ibCentre: IBCentre,
   ibSpread: IBSpread,
+  ibScatter: IBScatter,
+  ibPearson: IBPearson,
+  ibRegression: IBRegression,
   simpleCompound: SimpleCompound,
   compoundLab: CompoundLab,
   presentValueLab: PresentValueLab,
