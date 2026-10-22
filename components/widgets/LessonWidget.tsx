@@ -39,6 +39,7 @@ import { IBRelFreq, IBVenn, IBConditional, IBTree } from "./IBProbability";
 import { IBExpLaws, IBExpGraph, IBCompound, IBLogGraph, IBLogLaws, IBExpSolve, IBExpDeriv } from "./IBExpLog";
 import { IBAntideriv, IBLogArea, IBRiemann, IBSignedArea, IBBetween, IBVelocity } from "./IBIntegral";
 import { IBSolid, IBRightTrig, IBSineRule, IBCosineRule, IBBearing } from "./IBTrig";
+import { IBRadian, IBUnitCircle, IBIdentity, IBTrigEq, IBTrigGraph, IBSinusoid } from "./IBCircular";
 import { SimpleCompound, CompoundLab, PresentValueLab, AnnuityFV, AnnuityPV, AmortLab } from "./Finance11";
 import { PowerLab, PolyFeatures, FactoredPoly, PowerTransform, SecantLab, TangentSlope } from "./PolyFunctions";
 import { SyntheticDivide, FactorFinder, RootSolver, PolyFamily, InequalityGraph, SignChart } from "./PolyEquations";
@@ -239,6 +240,12 @@ const REGISTRY: Record<string, ComponentType<any>> = {
   ibSineRule: IBSineRule,
   ibCosineRule: IBCosineRule,
   ibBearing: IBBearing,
+  ibRadian: IBRadian,
+  ibUnitCircle: IBUnitCircle,
+  ibIdentity: IBIdentity,
+  ibTrigEq: IBTrigEq,
+  ibTrigGraph: IBTrigGraph,
+  ibSinusoid: IBSinusoid,
   simpleCompound: SimpleCompound,
   compoundLab: CompoundLab,
   presentValueLab: PresentValueLab,
