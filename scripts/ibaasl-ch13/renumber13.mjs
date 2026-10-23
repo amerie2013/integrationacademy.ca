@@ -4,7 +4,7 @@
 // 13.5, 13.6 and 13.7 lessons are inserted.
 // Worksheet titles are rewritten by ws/build.mjs; assignment titles by asg/publish.mjs (matched by id).
 //   node scripts/ibaasl-ch13/renumber13.mjs          -> dry run
-//   node scripts/ibaasl-ch13/renumber13.mjs --apply  -> writes (backup first). Apply ONCE.
+//   node scripts/ibaasl-ch13/renumber13.mjs --apply  -> writes (backup first). Apply ONCE. APPLIED 2026-10-23 — never rerun.
 // Order: lessons-publish --all --apply → renumber13 --apply → ws/build --all --apply → bank → asg → written.
 import { createClient } from "@supabase/supabase-js";
 import fs from "fs";

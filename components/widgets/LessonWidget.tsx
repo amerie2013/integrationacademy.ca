@@ -41,6 +41,7 @@ import { IBAntideriv, IBLogArea, IBRiemann, IBSignedArea, IBBetween, IBVelocity 
 import { IBSolid, IBRightTrig, IBSineRule, IBCosineRule, IBBearing } from "./IBTrig";
 import { IBRadian, IBUnitCircle, IBIdentity, IBTrigEq, IBTrigGraph, IBSinusoid } from "./IBCircular";
 import { IBRules, IBTrigDeriv, IBTangentNormal, IBTrigArea, IBSubstitution, IBAccumulate } from "./IBMoreCalc";
+import { IBDiscreteRV, IBBinomial, IBNormal, IBInverseNormal } from "./IBDistributions";
 import { SimpleCompound, CompoundLab, PresentValueLab, AnnuityFV, AnnuityPV, AmortLab } from "./Finance11";
 import { PowerLab, PolyFeatures, FactoredPoly, PowerTransform, SecantLab, TangentSlope } from "./PolyFunctions";
 import { SyntheticDivide, FactorFinder, RootSolver, PolyFamily, InequalityGraph, SignChart } from "./PolyEquations";
@@ -253,6 +254,10 @@ const REGISTRY: Record<string, ComponentType<any>> = {
   ibTrigArea: IBTrigArea,
   ibSubstitution: IBSubstitution,
   ibAccumulate: IBAccumulate,
+  ibDiscreteRV: IBDiscreteRV,
+  ibBinomial: IBBinomial,
+  ibNormal: IBNormal,
+  ibInverseNormal: IBInverseNormal,
   simpleCompound: SimpleCompound,
   compoundLab: CompoundLab,
   presentValueLab: PresentValueLab,
