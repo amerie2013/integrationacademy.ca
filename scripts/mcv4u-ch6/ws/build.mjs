@@ -90,7 +90,7 @@ ${items.map((s) => String.raw`\item ${clean(s)}`).join("\n")}
 \end{enumerate}
 \end{multicols}`;
   const key = String.raw`\begin{recapbox}{Question Recap}
-${list(ordered.map((p) => p.recap ?? p.q))}
+${list(ordered.map((p) => p.q))}
 \end{recapbox}
 \begin{recapbox}{$\checkmark$\ Answer Key}
 ${list(ordered.map((p) => p.ans))}
