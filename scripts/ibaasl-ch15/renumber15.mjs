@@ -2,7 +2,7 @@
 // re-sorts every lesson position after the new 15.2, 15.3 and 15.4 are inserted.
 // Worksheet code 15.1 stays; titles are rewritten by ws/build.mjs, assignments by asg/publish.mjs (by id).
 //   node scripts/ibaasl-ch15/renumber15.mjs          -> dry run
-//   node scripts/ibaasl-ch15/renumber15.mjs --apply  -> writes (backup first). Apply ONCE.
+//   node scripts/ibaasl-ch15/renumber15.mjs --apply  -> writes (backup first). Apply ONCE. APPLIED 2026-10-23 — never rerun.
 // Order: lessons-publish --all --apply → renumber15 --apply → ws/build --all --apply → bank → asg → written.
 import { createClient } from "@supabase/supabase-js";
 import fs from "fs";
