@@ -406,3 +406,37 @@ export function boxTreeSvg(nodes, o = {}) {
   else place(nodes, 0, null, null);
   return doc(W, H, s);
 }
+
+/* ------------------------------------------------------------------ two-variable statistics */
+const niceStep = (span) => [0.1, 0.2, 0.25, 0.5, 1, 2, 2.5, 5, 10, 20, 25, 50, 100, 200, 250, 500, 1000, 2000, 5000].find((s) => span / s <= 8) ?? 10000;
+/**
+ * scatterSvg(points [[x, y], …], { xmin, xmax, ymin, ymax, line: { a, b } (y = ax + b), curve: f, residuals: true,
+ *   groups: [color per point], hl: [indexes in red], xlabel, ylabel, labels: [[x, y, text]] })
+ */
+export function scatterSvg(pts, o = {}) {
+  const W = 460, H = 300, L = 52, R = 16, T = 14, B = 44, w = W - L - R, h = H - T - B;
+  const xs = pts.map((p) => p[0]), ys = pts.map((p) => p[1]);
+  const x0 = o.xmin ?? Math.min(...xs), x1 = o.xmax ?? Math.max(...xs), y0 = o.ymin ?? Math.min(...ys), y1 = o.ymax ?? Math.max(...ys);
+  const X = (x) => L + ((x - x0) / (x1 - x0)) * w, Y = (y) => T + h - ((y - y0) / (y1 - y0)) * h;
+  const sx = o.xstep ?? niceStep(x1 - x0), sy = o.ystep ?? niceStep(y1 - y0), r2 = (v) => Math.round(v * 1000) / 1000;
+  let s = `<rect x="${L}" y="${T}" width="${w}" height="${h}" fill="#fff" stroke="#cbd5e1"/>`;
+  for (let v = Math.ceil(x0 / sx) * sx; v <= x1 + 1e-9; v += sx) s += `<line x1="${X(v)}" y1="${T}" x2="${X(v)}" y2="${T + h}" stroke="#eef2f7"/>` + txt(X(v), T + h + 15, r2(v), { size: 10.5, color: "gray", bold: false });
+  for (let v = Math.ceil(y0 / sy) * sy; v <= y1 + 1e-9; v += sy) s += `<line x1="${L}" y1="${Y(v)}" x2="${L + w}" y2="${Y(v)}" stroke="#eef2f7"/>` + txt(L - 6, Y(v) + 4, r2(v), { size: 10.5, anchor: "end", color: "gray", bold: false });
+  if (o.zero && y0 < 0 && y1 > 0) s += `<line x1="${L}" y1="${Y(0)}" x2="${L + w}" y2="${Y(0)}" stroke="${COL.ink}" stroke-width="1.4"/>`;
+  const clip = `<clipPath id="sc"><rect x="${L}" y="${T}" width="${w}" height="${h}"/></clipPath>`;
+  let fit = "";
+  if (o.line) { const f = (x) => o.line.a * x + o.line.b; if (o.residuals) pts.forEach(([x, y]) => (fit += `<line x1="${X(x)}" y1="${Y(y)}" x2="${X(x)}" y2="${Y(f(x))}" stroke="${COL.amber}" stroke-width="1.6" stroke-dasharray="3 2"/>`)); fit += `<line x1="${X(x0)}" y1="${Y(f(x0))}" x2="${X(x1)}" y2="${Y(f(x1))}" stroke="${COL.red}" stroke-width="2.2"/>`; }
+  if (o.curve) { let d = ""; for (let i = 0; i <= 120; i++) { const x = x0 + ((x1 - x0) * i) / 120; d += `${i ? "L" : "M"}${X(x).toFixed(1)},${Y(o.curve(x)).toFixed(1)} `; } fit += `<path d="${d}" fill="none" stroke="${COL.violet}" stroke-width="2.2"/>`; }
+  s += clip + `<g clip-path="url(#sc)">${fit}</g>`;
+  pts.forEach(([x, y], i) => { const c = o.hl?.includes(i) ? "red" : o.groups?.[i] ?? "blue"; s += `<circle cx="${X(x)}" cy="${Y(y)}" r="4.8" fill="${FILL[c]}" stroke="${COL[c]}" stroke-width="1.8"/>`; });
+  for (const [x, y, t] of o.labels ?? []) s += txt(X(x) + 7, Y(y) - 7, t, { size: 11, anchor: "start", color: "red", halo: true });
+  if (o.xlabel) s += txt(L + w / 2, H - 8, o.xlabel, { size: 12 });
+  if (o.ylabel) s += `<text x="14" y="${T + h / 2}" font-size="12" font-weight="700" text-anchor="middle" fill="${COL.ink}" transform="rotate(-90 14 ${T + h / 2})">${esc(o.ylabel)}</text>`;
+  return doc(W, H, s);
+}
+/** residualPlotSvg(points, { a, b } line, opts) — residuals y − ŷ against x with a zero line */
+export function residualPlotSvg(pts, line, o = {}) {
+  const res = pts.map(([x, y]) => [x, Math.round((y - (line.a * x + line.b)) * 1000) / 1000]);
+  const m = Math.max(...res.map((p) => Math.abs(p[1]))) * 1.25 || 1;
+  return scatterSvg(res, { ymin: -m, ymax: m, zero: true, ylabel: "residual", ...o });
+}
