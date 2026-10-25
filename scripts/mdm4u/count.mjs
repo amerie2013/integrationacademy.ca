@@ -33,3 +33,29 @@ export const geo = (p, k) => (1 - p) ** k * p;
 export const hyp = (N, a, r, x) => (C(a, x) * C(N - a, r - x)) / C(N, r);
 /** expected value of [[x, p], ...] */
 export const ev = (pairs) => pairs.reduce((s, [x, p]) => s + x * p, 0);
+/** standard normal CDF Φ(z) (Abramowitz–Stegun 26.2.17, error < 7.5e-8) */
+export const phi = (z) => { const t = 1 / (1 + 0.2316419 * Math.abs(z)), d = Math.exp((-z * z) / 2) / Math.sqrt(2 * Math.PI); const p = d * t * (0.31938153 + t * (-0.356563782 + t * (1.781477937 + t * (-1.821255978 + t * 1.330274429)))); return z >= 0 ? 1 - p : p; };
+/** normal CDF P(X ≤ x) for mean mu, sd s */
+export const ncdf = (x, mu = 0, s = 1) => phi((x - mu) / s);
+/** inverse standard normal (bisection) */
+export const invPhi = (p) => { let lo = -8, hi = 8; for (let i = 0; i < 100; i++) { const m = (lo + hi) / 2; if (phi(m) < p) lo = m; else hi = m; } return (lo + hi) / 2; };
+/** z rounded to 2 decimals, as read from a z-table */
+export const z2 = (x, mu, s) => Math.round(((x - mu) / s) * 100) / 100;
+/** table-style probability: Φ of z rounded to 2 decimals, to 4 places */
+export const tphi = (z) => Math.round(phi(Math.round(z * 100) / 100) * 1e4) / 1e4;
+/* one-variable statistics (quartiles: median of each half, the middle value excluded when n is odd) */
+export const sum = (xs) => xs.reduce((a, b) => a + b, 0);
+export const mean = (xs) => sum(xs) / xs.length;
+export const median = (xs) => { const s = [...xs].sort((a, b) => a - b), n = s.length; return n % 2 ? s[(n - 1) / 2] : (s[n / 2 - 1] + s[n / 2]) / 2; };
+export const modes = (xs) => { const c = new Map(); xs.forEach((x) => c.set(x, (c.get(x) ?? 0) + 1)); const mx = Math.max(...c.values()); return mx === 1 ? [] : [...c].filter(([, k]) => k === mx).map(([x]) => x).sort((a, b) => a - b); };
+export const quartiles = (xs) => { const s = [...xs].sort((a, b) => a - b), n = s.length, h = Math.floor(n / 2); return [median(s.slice(0, h)), median(s), median(s.slice(n - h))]; };
+export const varP = (xs) => { const m = mean(xs); return sum(xs.map((x) => (x - m) ** 2)) / xs.length; };
+export const varS = (xs) => { const m = mean(xs); return sum(xs.map((x) => (x - m) ** 2)) / (xs.length - 1); };
+export const sdP = (xs) => Math.sqrt(varP(xs));
+export const sdS = (xs) => Math.sqrt(varS(xs));
+/** fences for outliers: [Q1 − 1.5 IQR, Q3 + 1.5 IQR] */
+export const fences = (xs) => { const [q1, , q3] = quartiles(xs), i = q3 - q1; return [q1 - 1.5 * i, q3 + 1.5 * i]; };
+/** percentile rank: percent of values below x plus half of those equal to x */
+export const pctRank = (xs, x) => (100 * (xs.filter((v) => v < x).length + 0.5 * xs.filter((v) => v === x).length)) / xs.length;
+/** value at the P-th percentile: L = (P/100)·n; if L is whole, average the L-th and (L+1)-th values, else take the next whole position */
+export const pctVal = (xs, P) => { const s = [...xs].sort((a, b) => a - b), L = (P / 100) * s.length; return Number.isInteger(L) ? (s[L - 1] + s[L]) / 2 : s[Math.ceil(L) - 1]; };

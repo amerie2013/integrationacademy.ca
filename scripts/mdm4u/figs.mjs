@@ -277,3 +277,132 @@ export function lineSvg(vals, o = {}) {
   if (o.ylabel) s += `<text x="13" y="${T + h / 2}" font-size="12" font-weight="700" text-anchor="middle" fill="${COL.ink}" transform="rotate(-90 13 ${T + h / 2})">${esc(o.ylabel)}</text>`;
   return doc(W, H, s);
 }
+
+/* ------------------------------------------------------------------ normal curves and intervals */
+const npdf = (x, mu, s) => Math.exp(-(((x - mu) / s) ** 2) / 2) / (s * Math.sqrt(2 * Math.PI));
+/**
+ * normalSvg({ mu, s, shade: [[a, b, color]], marks: [[x, label]], ticks: "sd" | number[], zAxis: true, labels: [[x, text]] })
+ * a bell curve from μ − 3.6σ to μ + 3.6σ with shaded regions (a or b may be ±Infinity)
+ */
+export function normalSvg(o) {
+  const { mu = 0, s = 1 } = o, lo = mu - 3.6 * s, hi = mu + 3.6 * s, W = 460, H = o.zAxis ? 196 : 176, L = 16, T = 12, B = o.zAxis ? 50 : 30, w = W - 32, h = H - T - B, top = npdf(mu, mu, s) * 1.1;
+  const X = (x) => L + ((x - lo) / (hi - lo)) * w, Y = (y) => T + h - (y / top) * h;
+  const area = (a, b) => { a = Math.max(lo, a); b = Math.min(hi, b); let d = `M${X(a)},${Y(0)} `; for (let i = 0; i <= 100; i++) { const x = a + ((b - a) * i) / 100; d += `L${X(x).toFixed(1)},${Y(npdf(x, mu, s)).toFixed(1)} `; } return d + `L${X(b)},${Y(0)} Z`; };
+  let g = "";
+  for (const [a, b, c] of o.shade ?? []) g += `<path d="${area(a, b)}" fill="${FILL[c ?? "blue"]}" stroke="${COL[c ?? "blue"]}" stroke-width="1"/>`;
+  g += `<path d="${area(lo, hi).replace(/ Z$/, "")}" fill="none" stroke="${COL.violet}" stroke-width="2.4"/><line x1="${L}" y1="${Y(0)}" x2="${L + w}" y2="${Y(0)}" stroke="${COL.ink}" stroke-width="1.3"/>`;
+  const tk = Array.isArray(o.ticks) ? o.ticks : [-3, -2, -1, 0, 1, 2, 3].map((k) => mu + k * s);
+  for (const x of tk) { const z = (x - mu) / s; g += `<line x1="${X(x)}" y1="${Y(0)}" x2="${X(x)}" y2="${Y(0) + 5}" stroke="${COL.ink}"/>` + txt(X(x), Y(0) + 18, Math.round(x * 100) / 100, { size: 11, color: "gray", bold: false }); if (o.zAxis) g += txt(X(x), Y(0) + 36, `z = ${Math.round(z * 100) / 100}`, { size: 10.5, color: "violet", bold: false }); }
+  for (const [x, label, c] of o.marks ?? []) g += `<line x1="${X(x)}" y1="${T + 4}" x2="${X(x)}" y2="${Y(0)}" stroke="${COL[c ?? "red"]}" stroke-width="2" stroke-dasharray="5 4"/>` + txt(X(x), T + 2, label, { size: 11.5, color: c ?? "red", halo: true });
+  for (const [x, text] of o.labels ?? []) g += txt(X(x), Y(npdf(x, mu, s)) + (npdf(x, mu, s) > top * 0.4 ? 26 : -8), text, { size: 12, color: "ink", halo: true });
+  return doc(W, H, g);
+}
+/** intervalsSvg([[lo, hi], …], { truth, min, max, label }) — confidence intervals as horizontal segments */
+export function intervalsSvg(list, o = {}) {
+  const min = o.min ?? 0, max = o.max ?? 1, W = 440, rh = 16, H = 40 + list.length * rh + 20, L = 20, w = W - 40, X = (v) => L + ((v - min) / (max - min)) * w;
+  let g = o.truth !== undefined ? `<line x1="${X(o.truth)}" y1="18" x2="${X(o.truth)}" y2="${H - 26}" stroke="${COL.green}" stroke-width="2"/>` + txt(X(o.truth), 13, o.label ?? `true value ${o.truth}`, { size: 11.5, color: "green", halo: true }) : "";
+  list.forEach(([a, b], i) => { const ok = o.truth === undefined || (a <= o.truth && o.truth <= b), y = 26 + i * rh; g += `<line x1="${X(a)}" y1="${y}" x2="${X(b)}" y2="${y}" stroke="${ok ? COL.blue : COL.red}" stroke-width="4"/>`; });
+  for (const v of o.ticks ?? []) g += txt(X(v), H - 26 + 14, v, { size: 10.5, color: "gray", bold: false });
+  return doc(W, H, g);
+}
+
+/* ------------------------------------------------------------------ one-variable statistics displays */
+/** dotPlotSvg(values, { min, max, step, marks: [[x, label, color]], xlabel }) — stacked dots on a number line */
+export function dotPlotSvg(vals, o = {}) {
+  const min = o.min ?? Math.min(...vals), max = o.max ?? Math.max(...vals), step = o.step ?? 1, W = 460, L = 24, w = W - 48;
+  const counts = new Map(); vals.forEach((v) => counts.set(v, (counts.get(v) ?? 0) + 1));
+  const top = Math.max(...counts.values()), r = 7, H = 56 + top * 16 + (o.marks ? 30 : 0) + (o.xlabel ? 14 : 0), base = H - 34 - (o.xlabel ? 14 : 0), X = (v) => L + ((v - min) / (max - min)) * w;
+  let g = `<line x1="${L - 8}" y1="${base}" x2="${L + w + 8}" y2="${base}" stroke="${COL.ink}" stroke-width="1.4"/>`;
+  for (let v = min; v <= max + 1e-9; v += step) g += `<line x1="${X(v)}" y1="${base}" x2="${X(v)}" y2="${base + 5}" stroke="${COL.ink}"/>` + txt(X(v), base + 18, Math.round(v * 100) / 100, { size: 11, color: "gray", bold: false });
+  for (const [v, k] of counts) for (let i = 0; i < k; i++) g += `<circle cx="${X(v)}" cy="${base - 9 - i * 16}" r="${r}" fill="${FILL[o.color ?? "blue"]}" stroke="${COL[o.color ?? "blue"]}" stroke-width="1.5"/>`;
+  (o.marks ?? []).forEach(([x, label, c], k) => { g += `<line x1="${X(x)}" y1="${16 + (k % 2) * 13}" x2="${X(x)}" y2="${base}" stroke="${COL[c ?? "red"]}" stroke-width="2" stroke-dasharray="5 4"/>` + txt(X(x), 12 + (k % 2) * 13, label, { size: 11.5, color: c ?? "red", halo: true }); });
+  if (o.xlabel) g += txt(L + w / 2, H - 6, o.xlabel, { size: 11.5 });
+  return doc(W, H, g);
+}
+const medF = (s) => { const n = s.length; return n % 2 ? s[(n - 1) / 2] : (s[n / 2 - 1] + s[n / 2]) / 2; };
+const quartilesF = (s) => { const n = s.length, h = Math.floor(n / 2); return [medF(s.slice(0, h)), medF(s), medF(s.slice(n - h))]; };
+/** boxPlotSvg([{ data } or { five: [min, q1, med, q3, max], outliers, label, color }], { min, max, step, xlabel }) — horizontal box plots on one axis */
+export function boxPlotSvg(rows, o = {}) {
+  const W = 460, L = o.labelW ?? (rows.some((r) => r.label) ? 84 : 20), w = W - L - 20, rh = 46, H = 40 + rows.length * rh + (o.xlabel ? 16 : 0);
+  const all = rows.flatMap((r) => (r.data ? r.data : [...r.five, ...(r.outliers ?? [])]));
+  const min = o.min ?? Math.min(...all), max = o.max ?? Math.max(...all), X = (v) => L + ((v - min) / (max - min)) * w, step = o.step ?? Math.max(1, Math.round((max - min) / 8));
+  let g = "";
+  rows.forEach((r, i) => {
+    let five = r.five, outl = r.outliers ?? [];
+    if (r.data) {
+      const s = [...r.data].sort((a, b) => a - b), q = quartilesF(s), iq = q[2] - q[0], lo = q[0] - 1.5 * iq, hi = q[2] + 1.5 * iq, inn = s.filter((v) => v >= lo && v <= hi);
+      outl = r.showOutliers === false ? [] : s.filter((v) => v < lo || v > hi);
+      five = r.showOutliers === false ? [s[0], ...q, s[s.length - 1]] : [inn[0], ...q, inn[inn.length - 1]];
+    }
+    const y = 14 + i * rh + rh / 2, c = r.color ?? ["blue", "red", "green", "violet"][i % 4];
+    g += `<line x1="${X(five[0])}" y1="${y}" x2="${X(five[1])}" y2="${y}" stroke="${COL[c]}" stroke-width="2"/><line x1="${X(five[3])}" y1="${y}" x2="${X(five[4])}" y2="${y}" stroke="${COL[c]}" stroke-width="2"/>`;
+    g += `<line x1="${X(five[0])}" y1="${y - 8}" x2="${X(five[0])}" y2="${y + 8}" stroke="${COL[c]}" stroke-width="2"/><line x1="${X(five[4])}" y1="${y - 8}" x2="${X(five[4])}" y2="${y + 8}" stroke="${COL[c]}" stroke-width="2"/>`;
+    g += `<rect x="${X(five[1])}" y="${y - 14}" width="${X(five[3]) - X(five[1])}" height="28" fill="${FILL[c]}" stroke="${COL[c]}" stroke-width="2"/><line x1="${X(five[2])}" y1="${y - 14}" x2="${X(five[2])}" y2="${y + 14}" stroke="${COL[c]}" stroke-width="3"/>`;
+    for (const v of outl) g += `<circle cx="${X(v)}" cy="${y}" r="4.5" fill="#fff" stroke="${COL[c]}" stroke-width="2"/>`;
+    if (r.label) g += txt(L - 8, y + 4, r.label, { size: 12, anchor: "end", color: c });
+  });
+  const by = 14 + rows.length * rh;
+  g += `<line x1="${L}" y1="${by}" x2="${L + w}" y2="${by}" stroke="${COL.ink}" stroke-width="1.2"/>`;
+  for (let v = Math.ceil(min / step) * step; v <= max + 1e-9; v += step) g += `<line x1="${X(v)}" y1="${by}" x2="${X(v)}" y2="${by + 5}" stroke="${COL.ink}"/>` + txt(X(v), by + 18, Math.round(v * 100) / 100, { size: 11, color: "gray", bold: false });
+  if (o.xlabel) g += txt(L + w / 2, H - 6, o.xlabel, { size: 11.5 });
+  return doc(W, H, g);
+}
+/** stemLeafSvg(values, { stemUnit: 10, key }) — a stem-and-leaf plot with a key */
+export function stemLeafSvg(vals, o = {}) {
+  const u = o.stemUnit ?? 10, s = [...vals].sort((a, b) => a - b), stems = new Map();
+  for (const v of s) { const st = Math.floor(v / u), lf = Math.round(v - st * u); if (!stems.has(st)) stems.set(st, []); stems.get(st).push(lf); }
+  const lo = Math.floor(s[0] / u), hi = Math.floor(s[s.length - 1] / u), rows = [];
+  for (let st = lo; st <= hi; st++) rows.push([st, stems.get(st) ?? []]);
+  const W = 360, rh = 24, H = 30 + rows.length * rh + 26;
+  let g = txt(40, 18, "stem", { size: 11, color: "gray" }) + txt(70, 18, "leaf", { size: 11, color: "gray", anchor: "start" }) + `<line x1="56" y1="24" x2="56" y2="${24 + rows.length * rh}" stroke="${COL.ink}" stroke-width="1.5"/>`;
+  rows.forEach(([st, lf], i) => { const y = 24 + i * rh + 17; g += txt(46, y, st, { size: 14, anchor: "end" }) + txt(66, y, lf.join("  "), { size: 14, anchor: "start", color: "blue", bold: false }); });
+  g += txt(20, H - 8, o.key ?? `key: ${rows[0][0]} | ${rows[0][1][0] ?? 0} = ${rows[0][0] * u + (rows[0][1][0] ?? 0)}`, { size: 11.5, anchor: "start", color: "gray", bold: false });
+  return doc(W, H, g);
+}
+/** pieSvg([[label, value, color]]) — a circle graph with a legend of percentages */
+export function pieSvg(parts) {
+  const tot = parts.reduce((s, p) => s + p[1], 0), R = 80, cx = 110, cy = 100, W = 400, H = Math.max(200, 30 + parts.length * 24);
+  let g = "", a0 = -Math.PI / 2, ly = 30;
+  for (const [lab, v, c] of parts) {
+    const fr = v / tot, a1 = a0 + fr * 2 * Math.PI, large = fr > 0.5 ? 1 : 0;
+    g += fr >= 0.9999 ? `<circle cx="${cx}" cy="${cy}" r="${R}" fill="${FILL[c]}" stroke="${COL[c]}" stroke-width="2"/>` : `<path d="M${cx},${cy} L${cx + R * Math.cos(a0)},${cy + R * Math.sin(a0)} A${R},${R} 0 ${large} 1 ${cx + R * Math.cos(a1)},${cy + R * Math.sin(a1)} Z" fill="${FILL[c]}" stroke="${COL[c]}" stroke-width="2"/>`;
+    g += `<rect x="215" y="${ly - 11}" width="14" height="14" fill="${FILL[c]}" stroke="${COL[c]}"/>` + txt(236, ly, `${lab}: ${Math.round(fr * 1000) / 10}%`, { size: 12.5, anchor: "start", color: c });
+    ly += 24; a0 = a1;
+  }
+  return doc(W, H, g);
+}
+/** popGridSvg(rows, cols, { groupOf(i, r, c) → color, selected: Set, clusters: cols per block, clusterRows, legend: [[label, color]] }) — a population as dots */
+export function popGridSvg(nr, nc, o = {}) {
+  const u = o.u ?? 18, L = 14, T = 14, sel = o.selected ?? new Set();
+  let g = "", lx = L;
+  const legendW = (o.legend ?? []).reduce((s, [lab]) => s + 24 + lab.length * 6.6, L + 10);
+  const W = Math.max(L * 2 + nc * u, legendW), H = T * 2 + nr * u + (o.legend ? 22 : 0);
+  if (o.clusters) for (let c = 0; c < nc; c += o.clusters) for (let r = 0; r < nr; r += o.clusterRows ?? nr) g += `<rect x="${L + c * u + 1}" y="${T + r * u + 1}" width="${o.clusters * u - 2}" height="${(o.clusterRows ?? nr) * u - 2}" rx="5" fill="${o.pickClusters?.has(`${r},${c}`) ? "#fef3c7" : "none"}" stroke="#94a3b8" stroke-dasharray="4 3"/>`;
+  for (let r = 0; r < nr; r++) for (let c = 0; c < nc; c++) {
+    const i = r * nc + c, col = o.groupOf ? o.groupOf(i, r, c) : "blue", on = sel.has(i);
+    g += `<circle cx="${L + c * u + u / 2}" cy="${T + r * u + u / 2}" r="${on ? 6.5 : 4.5}" fill="${on ? COL[col] : FILL[col]}" stroke="${COL[col]}" stroke-width="${on ? 1.5 : 1}"/>`;
+  }
+  for (const [lab, c] of o.legend ?? []) { g += `<circle cx="${lx + 6}" cy="${H - 12}" r="5" fill="${COL[c]}"/>` + txt(lx + 15, H - 8, lab, { size: 11, anchor: "start", color: c }); lx += 24 + lab.length * 6.6; }
+  return doc(W, H, g);
+}
+/** boxTreeSvg(nodes, { root, color }) — a left-to-right hierarchy of labelled boxes; nodes = [{ t, p (edge label), c: [children], color }] */
+export function boxTreeSvg(nodes, o = {}) {
+  const cols = [], walk = (ns, d) => ns.forEach((n) => { (cols[d] ??= []).push(n); walk(n.c ?? [], d + 1); });
+  if (o.root) cols.push([]); walk(nodes, o.root ? 1 : 0);
+  const cw = cols.map((c, d) => Math.max(d === 0 && o.root ? String(o.root).length : 0, ...c.map((n) => String(n.t).length)) * 7 + 22);
+  const count = (n) => (n.c?.length ? n.c.reduce((s, k) => s + count(k), 0) : 1), total = nodes.reduce((s, n) => s + count(n), 0);
+  const dy = o.dy ?? 40, gap = o.gap ?? 46, H = 16 + total * dy, xs = cw.map((_, d) => 10 + cw.slice(0, d).reduce((a, b) => a + b + gap, 0)), W = xs[xs.length - 1] + cw[cw.length - 1] + 10;
+  let s = "", row = 0;
+  const box = (x, y, w, t, c) => `<rect x="${x}" y="${y - 14}" width="${w}" height="28" rx="7" fill="${FILL[c]}" stroke="${COL[c]}" stroke-width="1.6"/>` + txt(x + w / 2, y + 4.5, t, { size: 12.5, color: c });
+  const place = (ns, d, px, py) => {
+    for (const n of ns) {
+      const k = count(n), y = 8 + (row + k / 2) * dy, x = xs[d], c = n.color ?? o.color ?? (d % 2 ? "violet" : "blue");
+      if (px !== null) { s += `<line x1="${px}" y1="${py}" x2="${x}" y2="${y}" stroke="${COL.gray}" stroke-width="1.5"/>`; if (n.p !== undefined) s += txt((px + x) / 2, (py + y) / 2 - 5, n.p, { size: 11.5, color: "red", halo: true }); }
+      if (n.c?.length) place(n.c, d + 1, x + cw[d], y); else row += 1;
+      s += box(x, y, cw[d], n.t, c);
+    }
+  };
+  if (o.root) { const y = 8 + (total / 2) * dy; place(nodes, 1, xs[0] + cw[0], y); s += box(xs[0], y, cw[0], o.root, "gray"); }
+  else place(nodes, 0, null, null);
+  return doc(W, H, s);
+}

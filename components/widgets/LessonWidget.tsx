@@ -58,6 +58,8 @@ import { LineLab, PlaneLab, LinesMeetLab, LinePlaneLab, PlanesLab } from "./Vect
 import { CountingTree, PermLab, WordArrange, ConstraintLab, CombLab, CommitteeLab, PascalPaths, BinomialExpand } from "./Counting12";
 import { DiceSpace, SimLab, OddsLab, VennProb, DrawLab, TwoWayTable, ScreeningTree, CountProb } from "./Probability12";
 import { RVHistogram, ExpectedGame, UniformLab, BinomialDist, GeometricDist, HyperLab, CompareDists } from "./Distributions12";
+import { FreqPolygon, NormalCurve, NormalArea, NormalApprox, ConfidenceLab } from "./Normal12";
+import { DataTypes, SchoolSampling, BiasLab, CentralTendency, SpreadLab, BoxPlotLab, DisplayLab, ZCompare } from "./Stats12";
 
 // Registry of named lesson widgets. A lesson block { type: "widget", widget, props }
 // renders REGISTRY[widget] with its props. Keep names stable — they are stored in the DB.
@@ -353,6 +355,19 @@ const REGISTRY: Record<string, ComponentType<any>> = {
   geometricDist: GeometricDist,
   hyperLab: HyperLab,
   compareDists: CompareDists,
+  freqPolygon: FreqPolygon,
+  normalCurve: NormalCurve,
+  normalArea: NormalArea,
+  normalApprox: NormalApprox,
+  confidenceLab: ConfidenceLab,
+  dataTypes: DataTypes,
+  schoolSampling: SchoolSampling,
+  biasLab: BiasLab,
+  centralTendency: CentralTendency,
+  spreadLab: SpreadLab,
+  boxPlotLab: BoxPlotLab,
+  displayLab: DisplayLab,
+  zCompare: ZCompare,
 };
 
 export const WIDGET_NAMES = Object.keys(REGISTRY);
