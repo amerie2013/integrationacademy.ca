@@ -57,6 +57,7 @@ import { CartesianLab, DotLab, ProjectionLab, Space3Lab, CrossLab, TorqueLab } f
 import { LineLab, PlaneLab, LinesMeetLab, LinePlaneLab, PlanesLab } from "./Vectors8";
 import { CountingTree, PermLab, WordArrange, ConstraintLab, CombLab, CommitteeLab, PascalPaths, BinomialExpand } from "./Counting12";
 import { DiceSpace, SimLab, OddsLab, VennProb, DrawLab, TwoWayTable, ScreeningTree, CountProb } from "./Probability12";
+import { RVHistogram, ExpectedGame, UniformLab, BinomialDist, GeometricDist, HyperLab, CompareDists } from "./Distributions12";
 
 // Registry of named lesson widgets. A lesson block { type: "widget", widget, props }
 // renders REGISTRY[widget] with its props. Keep names stable — they are stored in the DB.
@@ -345,6 +346,13 @@ const REGISTRY: Record<string, ComponentType<any>> = {
   twoWayTable: TwoWayTable,
   screeningTree: ScreeningTree,
   countProb: CountProb,
+  rvHistogram: RVHistogram,
+  expectedGame: ExpectedGame,
+  uniformLab: UniformLab,
+  binomialDist: BinomialDist,
+  geometricDist: GeometricDist,
+  hyperLab: HyperLab,
+  compareDists: CompareDists,
 };
 
 export const WIDGET_NAMES = Object.keys(REGISTRY);

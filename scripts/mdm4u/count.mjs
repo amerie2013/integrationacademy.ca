@@ -23,3 +23,13 @@ export const fs = (a, b) => { const g = gcd(a, b), n = a / g, d = b / g; return 
 export const fx = (a, b) => { const g = gcd(a, b), n = a / g, d = b / g; return d === 1 ? String(n) : `\frac{${n}}{${d}}`; };
 /** round to 3 or k decimals */
 export const r3 = (v, k = 3) => Math.round(v * 10 ** k) / 10 ** k;
+/** binomial P(X = x) for n trials with success probability p */
+export const bin = (n, p, x) => C(n, x) * p ** x * (1 - p) ** (n - x);
+/** binomial P(X ≤ k) */
+export const binLE = (n, p, k) => Array.from({ length: k + 1 }, (_, x) => bin(n, p, x)).reduce((a, b) => a + b, 0);
+/** geometric P(X = k), X = failures before the first success */
+export const geo = (p, k) => (1 - p) ** k * p;
+/** hypergeometric P(X = x): sample r from N with a successes */
+export const hyp = (N, a, r, x) => (C(a, x) * C(N - a, r - x)) / C(N, r);
+/** expected value of [[x, p], ...] */
+export const ev = (pairs) => pairs.reduce((s, [x, p]) => s + x * p, 0);
