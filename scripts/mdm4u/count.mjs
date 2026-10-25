@@ -59,3 +59,19 @@ export const fences = (xs) => { const [q1, , q3] = quartiles(xs), i = q3 - q1; r
 export const pctRank = (xs, x) => (100 * (xs.filter((v) => v < x).length + 0.5 * xs.filter((v) => v === x).length)) / xs.length;
 /** value at the P-th percentile: L = (P/100)·n; if L is whole, average the L-th and (L+1)-th values, else take the next whole position */
 export const pctVal = (xs, P) => { const s = [...xs].sort((a, b) => a - b), L = (P / 100) * s.length; return Number.isInteger(L) ? (s[L - 1] + s[L]) / 2 : s[Math.ceil(L) - 1]; };
+/* two-variable statistics: least squares y = a x + b, Pearson r, r², residuals, fitted non-linear models */
+export const linreg = (xs, ys) => { const n = xs.length, sx = sum(xs), sy = sum(ys), sxy = sum(xs.map((x, i) => x * ys[i])), sxx = sum(xs.map((x) => x * x)); const a = (n * sxy - sx * sy) / (n * sxx - sx * sx); return { a, b: (sy - a * sx) / n }; };
+export const corr = (xs, ys) => { const n = xs.length, sx = sum(xs), sy = sum(ys), sxy = sum(xs.map((x, i) => x * ys[i])), sxx = sum(xs.map((x) => x * x)), syy = sum(ys.map((y) => y * y)); return (n * sxy - sx * sy) / Math.sqrt((n * sxx - sx * sx) * (n * syy - sy * sy)); };
+export const residuals = (xs, ys) => { const { a, b } = linreg(xs, ys); return ys.map((y, i) => y - (a * xs[i] + b)); };
+/** coefficient of determination of any model f against the data: 1 − SSres/SStot */
+export const rsq = (xs, ys, f) => { const m = mean(ys); return 1 - sum(ys.map((y, i) => (y - f(xs[i])) ** 2)) / sum(ys.map((y) => (y - m) ** 2)); };
+/** exponential fit y = A·B^x by least squares on ln y */
+export const expreg = (xs, ys) => { const { a, b } = linreg(xs, ys.map(Math.log)); return { A: Math.exp(b), B: Math.exp(a) }; };
+/** quadratic least squares y = a x² + b x + c */
+export const quadreg = (xs, ys) => {
+  const S = (p, q = 0) => sum(xs.map((x, i) => x ** p * (q ? ys[i] : 1)));
+  const M = [[S(4), S(3), S(2), S(2, 1)], [S(3), S(2), S(1), S(1, 1)], [S(2), S(1), xs.length, S(0, 1)]];
+  for (let i = 0; i < 3; i++) { for (let k = i + 1; k < 3; k++) { const f = M[k][i] / M[i][i]; for (let j = i; j < 4; j++) M[k][j] -= f * M[i][j]; } }
+  const c = M[2][3] / M[2][2], b = (M[1][3] - M[1][2] * c) / M[1][1], a = (M[0][3] - M[0][1] * b - M[0][2] * c) / M[0][0];
+  return { a, b, c };
+};
