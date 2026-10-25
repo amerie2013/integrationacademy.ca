@@ -235,3 +235,45 @@ export function tableSvg(rows, o = {}) {
   rows.forEach((r, i) => { let x = 1; r.forEach((c, j) => { s += `<rect x="${x}" y="${1 + i * rh}" width="${cw[j]}" height="${rh}" fill="${i === 0 ? "#e2e8f0" : o.hl?.some(([a, b]) => a === i && b === j) ? FILL.amber : "#fff"}" stroke="#94a3b8"/>` + txt(x + cw[j] / 2, 1 + i * rh + 19, c, { size: 12.5, bold: i === 0 || j === 0 && o.rowHead }); x += cw[j]; }); });
   return doc(W, H, s);
 }
+
+/* ------------------------------------------------------------------ probability panels */
+/** diceGridSvg((a, b) => boolean, { faces: 6, label: (a, b) => text }) — the sample space of two dice, event cells shaded */
+export function diceGridSvg(pred = () => false, o = {}) {
+  const f = o.faces ?? 6, u = o.u ?? 38, L = 44, T = 30, W = L + f * u + 12, H = T + f * u + 10;
+  let s = txt(L + (f * u) / 2, 14, o.colTitle ?? "second die", { size: 12, color: "red" }) + `<text x="14" y="${T + (f * u) / 2}" font-size="12" font-weight="700" text-anchor="middle" fill="${COL.blue}" transform="rotate(-90 14 ${T + (f * u) / 2})">${esc(o.rowTitle ?? "first die")}</text>`;
+  for (let b = 1; b <= f; b++) s += txt(L + (b - 0.5) * u, T - 5, b, { size: 12, color: "red" });
+  for (let a = 1; a <= f; a++) {
+    s += txt(L - 8, T + (a - 0.5) * u + 4, a, { size: 12, color: "blue", anchor: "end" });
+    for (let b = 1; b <= f; b++) {
+      const on = pred(a, b), lab = o.label ? o.label(a, b) : `${a},${b}`;
+      s += `<rect x="${L + (b - 1) * u + 2}" y="${T + (a - 1) * u + 2}" width="${u - 4}" height="${u - 4}" rx="5" fill="${on ? FILL.green : "#fff"}" stroke="${on ? COL.green : "#cbd5e1"}" stroke-width="${on ? 2 : 1}"/>` + txt(L + (b - 0.5) * u, T + (a - 0.5) * u + 4, lab, { size: 11, color: on ? "green" : "gray", bold: on });
+    }
+  }
+  return doc(W, H, s);
+}
+/** spinnerSvg([[label, fraction, color], ...]) — a spinner divided into sectors (fractions add to 1) */
+export function spinnerSvg(sectors, o = {}) {
+  const R = o.r ?? 80, cx = R + 20, cy = R + 20, W = 2 * R + 40, H = 2 * R + 40;
+  let s = "", a0 = -Math.PI / 2;
+  for (const [lab, fr, col] of sectors) {
+    const a1 = a0 + fr * 2 * Math.PI, large = fr > 0.5 ? 1 : 0, mid = (a0 + a1) / 2;
+    s += `<path d="M${cx},${cy} L${cx + R * Math.cos(a0)},${cy + R * Math.sin(a0)} A${R},${R} 0 ${large} 1 ${cx + R * Math.cos(a1)},${cy + R * Math.sin(a1)} Z" fill="${FILL[col] ?? FILL.gray}" stroke="${COL[col] ?? COL.gray}" stroke-width="2"/>`;
+    s += txt(cx + R * 0.6 * Math.cos(mid), cy + R * 0.6 * Math.sin(mid) + 5, lab, { size: 14, color: col });
+    a0 = a1;
+  }
+  s += `<line x1="${cx}" y1="${cy}" x2="${cx + R * 0.55 * Math.cos(o.arrow ?? 0.6)}" y2="${cy + R * 0.55 * Math.sin(o.arrow ?? 0.6)}" stroke="${COL.ink}" stroke-width="3"/><circle cx="${cx}" cy="${cy}" r="6" fill="${COL.ink}"/>`;
+  return doc(W, H, s);
+}
+/** lineSvg(values, { p: reference line, xlabel, ylabel, xs }) — a running relative frequency (0..1) as a line chart */
+export function lineSvg(vals, o = {}) {
+  const W = 460, H = 220, L = 46, T = 14, R = 14, B = 34, w = W - L - R, h = H - T - B, n = vals.length;
+  const X = (i) => L + (n === 1 ? w / 2 : (i / (n - 1)) * w), Y = (v) => T + h - (v / (o.ymax ?? 1)) * h;
+  let s = `<rect x="${L}" y="${T}" width="${w}" height="${h}" fill="#fff" stroke="#cbd5e1"/>`;
+  const nt = o.nt ?? 4; for (let k = 0; k <= nt; k++) { const v = ((o.ymax ?? 1) * k) / nt; s += `<line x1="${L}" y1="${Y(v)}" x2="${L + w}" y2="${Y(v)}" stroke="#eef2f7"/>` + txt(L - 6, Y(v) + 4, Math.round(v * 100) / 100, { size: 11, anchor: "end", color: "gray", bold: false }); }
+  if (o.p !== undefined) s += `<line x1="${L}" y1="${Y(o.p)}" x2="${L + w}" y2="${Y(o.p)}" stroke="${COL.red}" stroke-width="2" stroke-dasharray="7 5"/>` + txt(L + w - 4, Y(o.p) - 6, o.pLabel ?? `theoretical ${Math.round(o.p * 1000) / 1000}`, { size: 11, anchor: "end", color: "red", halo: true });
+  s += `<polyline points="${vals.map((v, i) => `${X(i)},${Y(v)}`).join(" ")}" fill="none" stroke="${COL.violet}" stroke-width="2.4"/>` + vals.map((v, i) => `<circle cx="${X(i)}" cy="${Y(v)}" r="3.5" fill="${COL.violet}"/>`).join("");
+  (o.xs ?? vals.map((_, i) => i + 1)).forEach((x, i) => { if (n <= 12 || i % Math.ceil(n / 10) === 0) s += txt(X(i), T + h + 15, x, { size: 10.5, color: "gray", bold: false }); });
+  if (o.xlabel) s += txt(L + w / 2, H - 4, o.xlabel, { size: 12 });
+  if (o.ylabel) s += `<text x="13" y="${T + h / 2}" font-size="12" font-weight="700" text-anchor="middle" fill="${COL.ink}" transform="rotate(-90 13 ${T + h / 2})">${esc(o.ylabel)}</text>`;
+  return doc(W, H, s);
+}

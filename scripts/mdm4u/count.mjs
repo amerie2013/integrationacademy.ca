@@ -16,3 +16,10 @@ export function countPerms(items, pred = () => true) {
 }
 /** term coefficient of x^(n-k) in (a x + b)^n */
 export const binTerm = (a, b, N, k) => C(N, k) * a ** (N - k) * b ** k;
+export const gcd = (a, b) => { a = Math.abs(a); b = Math.abs(b); while (b) [a, b] = [b, a % b]; return a || 1; };
+/** reduced fraction as text "a/b" (or "a" when whole) */
+export const fs = (a, b) => { const g = gcd(a, b), n = a / g, d = b / g; return d === 1 ? String(n) : `${n}/${d}`; };
+/** reduced fraction in TeX */
+export const fx = (a, b) => { const g = gcd(a, b), n = a / g, d = b / g; return d === 1 ? String(n) : `\frac{${n}}{${d}}`; };
+/** round to 3 or k decimals */
+export const r3 = (v, k = 3) => Math.round(v * 10 ** k) / 10 ** k;
