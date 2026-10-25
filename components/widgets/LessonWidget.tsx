@@ -61,6 +61,7 @@ import { RVHistogram, ExpectedGame, UniformLab, BinomialDist, GeometricDist, Hyp
 import { FreqPolygon, NormalCurve, NormalArea, NormalApprox, ConfidenceLab } from "./Normal12";
 import { DataTypes, SchoolSampling, BiasLab, CentralTendency, SpreadLab, BoxPlotLab, DisplayLab, ZCompare } from "./Stats12";
 import { ScatterLab, RegressionLab, PredictionLab, ModelChoice, CausationLab, ResidualLab, GroupLab } from "./Regression12";
+import { QuestionLab, CleaningLab, ToolChooser, ConclusionCheck, CritiqueLab } from "./Investigation12";
 
 // Registry of named lesson widgets. A lesson block { type: "widget", widget, props }
 // renders REGISTRY[widget] with its props. Keep names stable — they are stored in the DB.
@@ -376,6 +377,11 @@ const REGISTRY: Record<string, ComponentType<any>> = {
   causationLab: CausationLab,
   residualLab: ResidualLab,
   groupLab: GroupLab,
+  questionLab: QuestionLab,
+  cleaningLab: CleaningLab,
+  toolChooser: ToolChooser,
+  conclusionCheck: ConclusionCheck,
+  critiqueLab: CritiqueLab,
 };
 
 export const WIDGET_NAMES = Object.keys(REGISTRY);
