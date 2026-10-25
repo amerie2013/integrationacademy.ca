@@ -92,3 +92,6 @@ scripts/_ftce/fulltext.txt
 /scripts/ibaasl-ch*/bank/out/
 /scripts/ibaasl-ch*/renumbered-ws/
 /scripts/ibaasl-ch*/backup/
+/scripts/mdm4u-ch*/ws/out/
+/scripts/mdm4u-ch*/bank/out/
+/scripts/mdm4u-ch*/backup/
