@@ -245,6 +245,25 @@ export default function MembersAdminPage() {
     return tierOfPlan(r.subscription_plan);
   }
 
+  // Only members who opted in to marketing email (CASL) — with the consent date as the record.
+  async function exportMarketing() {
+    const { data, error } = await supabase
+      .from("profiles")
+      .select("full_name, email, role, level, marketing_opt_in_at")
+      .eq("marketing_opt_in", true)
+      .order("marketing_opt_in_at", { ascending: false });
+    if (error) return alert(error.message);
+    const cell = (v: unknown) => `"${String(v ?? "").replace(/"/g, '""')}"`;
+    const csv = [["name", "email", "role", "level", "consented_at"], ...(data ?? []).map((r: any) => [r.full_name, r.email, r.role, r.level, r.marketing_opt_in_at])]
+      .map((row) => row.map(cell).join(","))
+      .join("\n");
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv" }));
+    a.download = `marketing-opt-in-${new Date().toISOString().slice(0, 10)}.csv`;
+    a.click();
+    URL.revokeObjectURL(a.href);
+  }
+
   if (loading) return (<main><SiteHeader /><div style={{ padding: 48, color: "#64748b" }}>Loading…</div></main>);
   if (denied) return (<main><SiteHeader /><div style={{ padding: 48, color: "#64748b" }}>Only admins can manage members.</div></main>);
 
@@ -262,6 +281,9 @@ export default function MembersAdminPage() {
           <Stat label="Teachers" value={counts.teacher} />
           <Stat label="Admins" value={counts.admin} />
           <Stat label="Active subs" value={counts.active} />
+          <button onClick={exportMarketing} title="Members who agreed to marketing email" style={{ marginLeft: "auto", alignSelf: "center", background: "#fff", color: "#1b7a44", border: "1px solid #bfe3cd", borderRadius: 10, padding: "10px 16px", fontWeight: 700, fontSize: 14, cursor: "pointer" }}>
+            Download marketing list (CSV)
+          </button>
         </div>
 
         <div style={{ display: "flex", gap: 10, alignItems: "center", marginBottom: 12, flexWrap: "wrap" }}>

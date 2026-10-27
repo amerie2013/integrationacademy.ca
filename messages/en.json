@@ -51,7 +51,8 @@
     "backToSignIn": "← Back to sign in",
     "errFillRequired": "Please fill in all required fields.",
     "errEnterEmail": "Please enter your email.",
-    "errIncorrect": "Incorrect email or password."
+    "errIncorrect": "Incorrect email or password.",
+    "marketingOptIn": "Email me updates, new courses, and offers from Integration Academy. You can unsubscribe anytime."
   },
   "resetPassword": {
     "title": "Set a new password",
@@ -77,7 +78,8 @@
     "myGrade": "My grade *",
     "saving": "Saving…",
     "continue": "Continue",
-    "errGeneric": "Could not save your profile."
+    "errGeneric": "Could not save your profile.",
+    "marketingOptIn": "Email me updates, new courses, and offers from Integration Academy. You can unsubscribe anytime."
   },
   "levels": {
     "9": "Grade 9",

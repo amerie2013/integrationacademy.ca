@@ -10,6 +10,7 @@ export default function ProfilePage() {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [saved, setSaved] = useState(false);
+  const [marketing, setMarketing] = useState(false);
   const [billingBusy, setBillingBusy] = useState(false);
   const [billingMsg, setBillingMsg] = useState("");
   const [form, setForm] = useState({
@@ -43,6 +44,9 @@ export default function ProfilePage() {
           bio: data.bio ?? "",
         });
       }
+      // separate read so the page still loads if the consent migration isn't applied
+      const { data: mk } = await supabase.from("profiles").select("marketing_opt_in").eq("id", session.user.id).single();
+      setMarketing(!!mk?.marketing_opt_in);
       setLoading(false);
     })();
   }, [router]);
@@ -61,6 +65,7 @@ export default function ProfilePage() {
         bio: form.bio,
       })
       .eq("id", session.user.id);
+    await supabase.from("profiles").update({ marketing_opt_in: marketing }).eq("id", session.user.id);
     setSaved(true);
     setTimeout(() => setSaved(false), 2000);
   }
@@ -144,6 +149,11 @@ export default function ProfilePage() {
               onChange={(e) => setForm({ ...form, bio: e.target.value })}
             />
           </div>
+
+          <label style={{ display: "flex", gap: 10, alignItems: "flex-start", fontSize: 14, color: "#475569", lineHeight: 1.45, cursor: "pointer" }}>
+            <input type="checkbox" checked={marketing} onChange={(e) => setMarketing(e.target.checked)} style={{ marginTop: 3, width: 16, height: 16, flexShrink: 0, accentColor: "#1b7a44" }} />
+            <span>Email me updates, new courses, and offers from Integration Academy. You can unsubscribe anytime.</span>
+          </label>
 
           <button
             onClick={save}

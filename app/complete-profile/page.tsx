@@ -14,6 +14,7 @@ export default function CompleteProfilePage() {
   const [error, setError] = useState("");
   const [role, setRole] = useState<"student" | "teacher">("student");
   const [level, setLevel] = useState("11");
+  const [marketing, setMarketing] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -44,6 +45,7 @@ export default function CompleteProfilePage() {
       setSaving(false);
       return;
     }
+    if (marketing) await supabase.from("profiles").update({ marketing_opt_in: true }).eq("id", session.user.id);
     router.push(role === "teacher" ? "/teacher" : "/dashboard");
   }
 
@@ -106,6 +108,11 @@ export default function CompleteProfilePage() {
               </select>
             </div>
           )}
+
+          <label style={{ display: "flex", gap: 10, alignItems: "flex-start", fontSize: 13.5, color: "#475569", lineHeight: 1.45, cursor: "pointer" }}>
+            <input type="checkbox" checked={marketing} onChange={(e) => setMarketing(e.target.checked)} style={{ marginTop: 3, width: 16, height: 16, flexShrink: 0, accentColor: "#1b7a44" }} />
+            <span>{t("marketingOptIn")}</span>
+          </label>
 
           <button
             onClick={submit}

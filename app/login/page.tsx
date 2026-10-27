@@ -25,6 +25,8 @@ export default function LoginPage() {
     role: "student",
     level: "11",
   });
+  // marketing email consent — unticked by default (CASL needs an active opt-in)
+  const [marketing, setMarketing] = useState(false);
 
   function update(e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -59,6 +61,7 @@ export default function LoginPage() {
             full_name: form.full_name,
             role: form.role,
             level: form.role === "student" ? form.level : null,
+            marketing_opt_in: marketing,
           },
         },
       });
@@ -228,6 +231,10 @@ export default function LoginPage() {
                     </select>
                   </div>
                 )}
+              <label style={{ display: "flex", gap: 10, alignItems: "flex-start", fontSize: 13.5, color: "#475569", lineHeight: 1.45, cursor: "pointer" }}>
+                <input type="checkbox" checked={marketing} onChange={(e) => setMarketing(e.target.checked)} style={{ marginTop: 3, width: 16, height: 16, flexShrink: 0, accentColor: "#1b7a44" }} />
+                <span>{t("marketingOptIn")}</span>
+              </label>
               </>
             )}
 
