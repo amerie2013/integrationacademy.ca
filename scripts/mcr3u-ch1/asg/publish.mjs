@@ -2,6 +2,7 @@
 //   node scripts/mcr3u-ch1/asg/publish.mjs            -> check only
 //   node scripts/mcr3u-ch1/asg/publish.mjs --preview  -> upload figures + write .lesson-preview/<assignmentId>.json (dev server only)
 //   node scripts/mcr3u-ch1/asg/publish.mjs --apply    -> upload figures + update assignments.description (old text backed up)
+//   add --code=1.6 to publish a single assignment
 // --apply needs the AssignmentBody figure support to be deployed first, or live pages show raw ![..](..) text.
 import { createRequire } from "module";
 import { createClient } from "@supabase/supabase-js";
@@ -39,7 +40,8 @@ fs.mkdirSync(".lesson-preview", { recursive: true });
 // brand-new assignments get fixed ids so they can be previewed before they exist.
 const OLD = { "1.1": "Assignment 1.1 — Functions, Relations & Function Notation", "1.4": "Assignment 1.2 — Domain and Range", "1.5": "Assignment 1.3 — Inverse Functions", "1.6": "Assignment 1.4 — Transformations of Functions" };
 const NEWID = { "1.2": "5c3e0001-0001-4001-8001-0000000a0102", "1.3": "5c3e0001-0001-4001-8001-0000000a0103", "1.7": "5c3e0001-0001-4001-8001-0000000a0107", "1.8": "5c3e0001-0001-4001-8001-0000000a0108" };
-for (const a of ASSIGNMENTS) {
+const CODE = (process.argv.find((x) => x.startsWith("--code=")) ?? "").slice(7); // e.g. --code=1.6 publishes one assignment
+for (const a of ASSIGNMENTS.filter((x) => !CODE || x.code === CODE)) {
   let { data: rows, error } = await db.from("assignments").select("id, title, description, course_id").eq("course_id", CID).eq("title", a.title);
   if (error) throw error;
   if (!rows.length && OLD[a.code]) rows = (await db.from("assignments").select("id, title, description, course_id").eq("course_id", CID).eq("title", OLD[a.code])).data ?? [];
