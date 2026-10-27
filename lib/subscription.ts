@@ -31,7 +31,7 @@ export const PLAN_PRICES: Record<NonNullable<SubscriptionPlan>, { price: string;
   allaccess_monthly: { price: "$29.99", per: "/month" },
   allaccess_annual: { price: "$239", per: "/school year" },
   tutor_monthly: { price: "$39.99", per: "/month" },
-  tutor_annual: { price: "$349", per: "/school year" },
+  tutor_annual: { price: "$360", per: "/school year" },
 };
 
 /** All-access plans unlock every published course (their grant has no course_id). */
