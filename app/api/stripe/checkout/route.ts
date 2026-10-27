@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 import { createClient } from "@supabase/supabase-js";
-import { planExpiry } from "../../../../lib/subscription";
+import { planExpiry, isAllAccessPlan, hasTrial, TRIAL_DAYS } from "../../../../lib/subscription";
 import { rateLimit, clientKey } from "../../../../lib/rateLimit";
 
 // Created lazily so `next build` can collect this route without the env vars
@@ -14,7 +14,10 @@ const getAdmin = () => (_admin ??= makeAdmin());
 
 const PRICE_IDS: Record<string, string | undefined> = {
   student_monthly: process.env.STRIPE_PRICE_STUDENT_MONTHLY,
+  student_semester: process.env.STRIPE_PRICE_STUDENT_SEMESTER,
   student_annual: process.env.STRIPE_PRICE_STUDENT_ANNUAL,
+  allaccess_monthly: process.env.STRIPE_PRICE_ALLACCESS_MONTHLY,
+  allaccess_annual: process.env.STRIPE_PRICE_ALLACCESS_ANNUAL,
   tutor_monthly: process.env.STRIPE_PRICE_TUTOR_MONTHLY,
   tutor_annual: process.env.STRIPE_PRICE_TUTOR_ANNUAL,
 };
@@ -27,10 +30,13 @@ export async function POST(req: NextRequest) {
     }
     const stripe = getStripe();
     const supabaseAdmin = getAdmin();
-    const { plan, courseId } = (await req.json()) as {
+    const { plan, courseId: rawCourseId } = (await req.json()) as {
       plan: string;
-      courseId: string;
+      courseId?: string;
     };
+    // All-access plans cover every course, so they never carry a course.
+    const allAccess = isAllAccessPlan(plan ?? "");
+    const courseId = allAccess ? "" : rawCourseId ?? "";
 
     const token = (req.headers.get("authorization") ?? "").replace(/^Bearer\s+/i, "");
     const { data: { user } } = await supabaseAdmin.auth.getUser(token);
@@ -43,7 +49,7 @@ export async function POST(req: NextRequest) {
     if (!PRICE_IDS[plan]) {
       return NextResponse.json({ error: "Invalid or unconfigured plan" }, { status: 400 });
     }
-    if (!courseId) {
+    if (!allAccess && !courseId) {
       return NextResponse.json({ error: "No course specified for purchase" }, { status: 400 });
     }
 
@@ -73,18 +79,29 @@ export async function POST(req: NextRequest) {
     // Jun 30 / Aug 31). Access for a subscription is managed by its status (no
     // fixed expiry); the one-time pass carries a term-based expiry.
     const isSubscription = plan.endsWith("_monthly");
-    const metadata: Record<string, string> = { supabase_user_id: userId, plan, course_id: courseId };
+    const metadata: Record<string, string> = { supabase_user_id: userId, plan };
+    if (courseId) metadata.course_id = courseId;
     if (!isSubscription) metadata.expires_at = planExpiry(plan).toISOString();
+
+    // Free trial on student-side monthly plans, first purchase only.
+    let trialDays = 0;
+    if (isSubscription && hasTrial(plan)) {
+      const { count } = await supabaseAdmin.from("course_grants").select("id", { count: "exact", head: true }).eq("user_id", userId);
+      if (!count) trialDays = TRIAL_DAYS;
+    }
+    const returnPath = courseId ? `/courses/${courseId}` : "/courses";
 
     const session = await stripe.checkout.sessions.create({
       customer: customerId,
       payment_method_types: ["card"],
-      success_url: `${appUrl}/courses/${courseId}?purchased=true`,
-      cancel_url: `${appUrl}/courses/${courseId}?cancelled=true`,
+      success_url: `${appUrl}${returnPath}?purchased=true`,
+      cancel_url: `${appUrl}${returnPath}?cancelled=true`,
       metadata,
       mode: isSubscription ? "subscription" : "payment",
       allow_promotion_codes: true, // shows an "Add promotion code" box on Stripe's checkout
-      line_items: [{ price: PRICE_IDS[plan]!, quantity: 1 }],
+      // 13% HST added on top of the listed price.
+      line_items: [{ price: PRICE_IDS[plan]!, quantity: 1, ...(process.env.STRIPE_TAX_RATE_ID ? { tax_rates: [process.env.STRIPE_TAX_RATE_ID] } : {}) }],
+      ...(trialDays ? { subscription_data: { trial_period_days: trialDays } } : {}),
     });
 
     return NextResponse.json({ url: session.url });

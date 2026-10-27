@@ -109,7 +109,7 @@
     "unlockBody": "Get full access to <b>this course</b> — every lesson, worksheet, quiz, and assignment. Or join your teacher's class with a code, which is free for class students.",
     "forStudents": "For students",
     "monthly": "Monthly",
-    "annualBestValue": "Annual — best value",
+    "annualBestValue": "School year — best value",
     "forTeachers": "For teachers — run a class",
     "annual": "Annual",
     "haveClassCode": "Have a class code? Enter it →",
@@ -132,7 +132,17 @@
     "lessonBadge": "Lesson",
     "worksheetBadge": "Worksheet",
     "assignmentBadge": "Assignment",
-    "quizBadge": "Quiz"
+    "quizBadge": "Quiz",
+    "semester": "Semester",
+    "schoolYear": "School year",
+    "allAccess": "All-access — every course",
+    "trialNote": "Monthly starts with a {days}-day free trial on your first plan. Semester = 5 months; school year runs to June 30.",
+    "allAccessNote": "Unlocks every published course on the site, including ones added later.",
+    "comparePlans": "Compare all plans →",
+    "freePreview": "Try Chapter 1 free",
+    "freePreviewBody": "These lessons are open to everyone — no payment needed.",
+    "freeBadge": "Free",
+    "taxNote": "Prices in CAD, plus 13% HST."
   },
   "common": {
     "loading": "Loading…",

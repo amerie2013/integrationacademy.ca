@@ -35,10 +35,11 @@ export async function POST(req: NextRequest) {
       const expiresAt = session.metadata?.expires_at ?? null;
 
       // Per-COURSE grant — the real access record. kind derived from the plan.
-      if (courseId) {
+      // All-access grants have no course: they unlock every published course.
+      if (courseId || plan.startsWith("allaccess")) {
         await supabaseAdmin.from("course_grants").insert({
           user_id: userId,
-          course_id: courseId,
+          course_id: courseId ?? null,
           kind: plan.startsWith("tutor") ? "teacher" : "student",
           plan,
           status: "active",

@@ -7,11 +7,11 @@ import { useTranslations } from "next-intl";
 import { supabase } from "../../../lib/supabase";
 import { SiteHeader } from "../../../components/SiteHeader";
 import { useLevelLabel } from "../../../lib/useLevelLabel";
-import { getSubscriptionInfo } from "../../../lib/subscription";
+import { getSubscriptionInfo, PLAN_PRICES, TRIAL_DAYS, type SubscriptionPlan } from "../../../lib/subscription";
 import { accentFor } from "../../../lib/courseAccent";
 import { courseNotice } from "../../../lib/courseNotice";
 
-type Course = { id: string; code: string | null; title: string; description: string | null; level: string | null };
+type Course = { id: string; code: string | null; title: string; description: string | null; level: string | null; published?: boolean };
 type Lesson = { id: string; title: string; position: number };
 type Quiz = { id: string; title: string; due_date: string | null };
 type Assignment = { id: string; title: string; due_date: string | null };
@@ -114,7 +114,7 @@ export default function StudentCoursePage() {
 
       const { data: c } = await supabase
         .from("courses")
-        .select("id, code, title, description, level")
+        .select("id, code, title, description, level, published")
         .eq("id", courseId)
         .single();
       if (!c) {
@@ -134,19 +134,18 @@ export default function StudentCoursePage() {
           .maybeSingle();
         setEnrolled(!!en);
 
-        // Access is PER-COURSE: admin, OR an active grant for THIS course, OR a
-        // member of a class for it (free via the teacher).
+        // Access is PER-COURSE: admin, OR an active grant for THIS course (or an
+        // all-access grant, course_id null, for a published course), OR a member
+        // of a class for it (free via the teacher).
         const sub = await getSubscriptionInfo();
         isAdmin = sub?.role === "admin";
-        const { data: grant } = await supabase
+        const { data: grants } = await supabase
           .from("course_grants")
-          .select("id")
+          .select("course_id")
           .eq("user_id", uid)
-          .eq("course_id", courseId)
           .in("status", ["active", "trialing"])
-          .or(`expires_at.is.null,expires_at.gt.${new Date().toISOString()}`)
-          .limit(1);
-        hasGrant = (grant ?? []).length > 0;
+          .or(`expires_at.is.null,expires_at.gt.${new Date().toISOString()}`);
+        hasGrant = (grants ?? []).some((g: any) => g.course_id === courseId || (g.course_id === null && (c as Course).published));
         const { data: mem } = await supabase.from("class_students").select("class_id").eq("student_id", uid);
         const ids = (mem ?? []).map((m: any) => m.class_id);
         if (ids.length) {
@@ -254,23 +253,53 @@ export default function StudentCoursePage() {
               <div style={buyCard}>
                 <div style={buyLabel}>{t("forStudents")}</div>
                 <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-                  <BuyBtn onClick={() => buyCourse("student_monthly")} busy={buying === "student_monthly"} label={t("monthly")} startingLabel={t("starting")} />
-                  <BuyBtn onClick={() => buyCourse("student_annual")} busy={buying === "student_annual"} primary label={t("annualBestValue")} startingLabel={t("starting")} />
+                  <BuyBtn onClick={() => buyCourse("student_monthly")} busy={buying === "student_monthly"} label={`${t("monthly")} · ${priceOf("student_monthly")}`} startingLabel={t("starting")} />
+                  <BuyBtn onClick={() => buyCourse("student_semester")} busy={buying === "student_semester"} label={`${t("semester")} · ${priceOf("student_semester")}`} startingLabel={t("starting")} />
+                  <BuyBtn onClick={() => buyCourse("student_annual")} busy={buying === "student_annual"} primary label={`${t("annualBestValue")} · ${priceOf("student_annual")}`} startingLabel={t("starting")} />
                 </div>
+                <div style={buyNote}>{t("trialNote", { days: TRIAL_DAYS })} {t("taxNote")}</div>
+              </div>
+              <div style={buyCard}>
+                <div style={buyLabel}>{t("allAccess")}</div>
+                <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                  <BuyBtn onClick={() => buyCourse("allaccess_monthly")} busy={buying === "allaccess_monthly"} label={`${t("monthly")} · ${priceOf("allaccess_monthly")}`} startingLabel={t("starting")} />
+                  <BuyBtn onClick={() => buyCourse("allaccess_annual")} busy={buying === "allaccess_annual"} primary label={`${t("schoolYear")} · ${priceOf("allaccess_annual")}`} startingLabel={t("starting")} />
+                </div>
+                <div style={buyNote}>{t("allAccessNote")}</div>
               </div>
               <div style={buyCard}>
                 <div style={buyLabel}>{t("forTeachers")}</div>
                 <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-                  <BuyBtn onClick={() => buyCourse("tutor_monthly")} busy={buying === "tutor_monthly"} label={t("monthly")} startingLabel={t("starting")} />
-                  <BuyBtn onClick={() => buyCourse("tutor_annual")} busy={buying === "tutor_annual"} primary label={t("annual")} startingLabel={t("starting")} />
+                  <BuyBtn onClick={() => buyCourse("tutor_monthly")} busy={buying === "tutor_monthly"} label={`${t("monthly")} · ${priceOf("tutor_monthly")}`} startingLabel={t("starting")} />
+                  <BuyBtn onClick={() => buyCourse("tutor_annual")} busy={buying === "tutor_annual"} primary label={`${t("annual")} · ${priceOf("tutor_annual")}`} startingLabel={t("starting")} />
                 </div>
               </div>
             </div>
-            <div style={{ marginTop: 16 }}>
+            <div style={{ marginTop: 16, display: "flex", gap: 10, flexWrap: "wrap" }}>
               <Link href="/dashboard" style={{ background: "#fff", color: "#1b7a44", border: "1px solid #bfe3cd", padding: "10px 22px", borderRadius: 10, textDecoration: "none", fontWeight: 700 }}>{t("haveClassCode")}</Link>
+              <Link href="/pricing" style={{ color: "#9a3412", padding: "10px 4px", textDecoration: "none", fontWeight: 700 }}>{t("comparePlans")}</Link>
             </div>
           </div>
-        ) : (
+        ) : null}
+
+        {!access && lessons.length > 0 && (
+          <div style={{ marginTop: 28 }}>
+            <Section title={t("freePreview")}>
+              <div style={{ color: "#475569", fontSize: 14, padding: "12px 18px", borderBottom: "1px solid #f1f5f9" }}>{t("freePreviewBody")}</div>
+              {lessons.map((l) => (
+                <Link key={l.id} href={`/lessons/${l.id}`} style={rowLink}>
+                  <span style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                    <span style={badgeBase(accent.soft, accent.dark)}>{t("freeBadge")}</span>
+                    <span>{l.title}</span>
+                  </span>
+                  <span style={{ color: accent.primary, fontWeight: 700, fontSize: 14 }}>{t("read")}</span>
+                </Link>
+              ))}
+            </Section>
+          </div>
+        )}
+
+        {!access ? null : (
           <>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 16, flexWrap: "wrap", background: accent.soft, border: `1px solid ${accent.softBorder}`, borderRadius: 14, padding: "14px 18px", marginBottom: 24 }}>
               <div style={{ color: accent.dark, fontWeight: 600, fontSize: 14 }}>
@@ -343,6 +372,8 @@ function BuyBtn({ label, startingLabel, onClick, busy, primary }: { label: strin
   );
 }
 const buyCard: React.CSSProperties = { background: "#fff", border: "1px solid #fed7aa", borderRadius: 12, padding: "14px 16px" };
+const priceOf = (plan: NonNullable<SubscriptionPlan>) => PLAN_PRICES[plan].price;
+const buyNote: React.CSSProperties = { fontSize: 12.5, color: "#7c2d12", marginTop: 10, lineHeight: 1.45 };
 const buyLabel: React.CSSProperties = { fontSize: 12, fontWeight: 800, color: "#9a3412", textTransform: "uppercase", letterSpacing: "0.04em", marginBottom: 10 };
 const badgeBase = (bg: string, fg: string): React.CSSProperties => ({ fontSize: 10.5, fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.04em", color: fg, background: bg, padding: "3px 8px", borderRadius: 999, whiteSpace: "nowrap", minWidth: 78, textAlign: "center" });
 const badgeStyle: Record<"lesson" | "worksheet" | "assignment" | "quiz", React.CSSProperties> = {

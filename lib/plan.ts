@@ -18,7 +18,7 @@ export function tierOfPlan(plan: string | null | undefined): Tier {
   const p = (plan ?? "").toLowerCase();
   if (p.startsWith("platinum")) return "platinum";
   if (p.startsWith("gold")) return "gold";
-  if (p.startsWith("student")) return "gold"; // grandfather old student plans
+  if (p.startsWith("student") || p.startsWith("allaccess")) return "gold"; // grandfather old student plans
   return "free";
 }
 

@@ -109,7 +109,7 @@
     "unlockBody": "Obtenez un accès complet à <b>ce cours</b> — chaque leçon, feuille d'exercices, quiz et devoir. Ou joignez la classe de votre enseignant(e) avec un code, gratuit pour les élèves de la classe.",
     "forStudents": "Pour les élèves",
     "monthly": "Mensuel",
-    "annualBestValue": "Annuel — meilleure valeur",
+    "annualBestValue": "Année scolaire — meilleure valeur",
     "forTeachers": "Pour les enseignants — gérer une classe",
     "annual": "Annuel",
     "haveClassCode": "Vous avez un code de classe? Entrez-le →",
@@ -132,7 +132,17 @@
     "lessonBadge": "Leçon",
     "worksheetBadge": "Exercices",
     "assignmentBadge": "Devoir",
-    "quizBadge": "Quiz"
+    "quizBadge": "Quiz",
+    "semester": "Semestre",
+    "schoolYear": "Année scolaire",
+    "allAccess": "Accès complet — tous les cours",
+    "trialNote": "Le forfait mensuel commence par un essai gratuit de {days} jours lors de votre premier achat. Semestre = 5 mois; l'année scolaire se termine le 30 juin.",
+    "allAccessNote": "Débloque tous les cours publiés du site, y compris ceux ajoutés plus tard.",
+    "comparePlans": "Comparer les forfaits →",
+    "freePreview": "Essayez le chapitre 1 gratuitement",
+    "freePreviewBody": "Ces leçons sont ouvertes à tous — aucun paiement requis.",
+    "freeBadge": "Gratuit",
+    "taxNote": "Prix en dollars canadiens, plus 13 % de TVH."
   },
   "common": {
     "loading": "Chargement…",

@@ -12,10 +12,34 @@ export type SubscriptionStatus =
 
 export type SubscriptionPlan =
   | "student_monthly"
+  | "student_semester"
   | "student_annual"
+  | "allaccess_monthly"
+  | "allaccess_annual"
   | "tutor_monthly"
   | "tutor_annual"
   | null;
+
+/** HST added on top of every price at checkout (Stripe tax rate STRIPE_TAX_RATE_ID). */
+export const TAX_LABEL = "+ 13% HST";
+
+/** Prices in CAD, before tax. Must match the Stripe prices behind each STRIPE_PRICE_* env var. */
+export const PLAN_PRICES: Record<NonNullable<SubscriptionPlan>, { price: string; per: string }> = {
+  student_monthly: { price: "$14.99", per: "/month" },
+  student_semester: { price: "$69", per: "/semester" },
+  student_annual: { price: "$119", per: "/school year" },
+  allaccess_monthly: { price: "$29.99", per: "/month" },
+  allaccess_annual: { price: "$239", per: "/school year" },
+  tutor_monthly: { price: "$39.99", per: "/month" },
+  tutor_annual: { price: "$349", per: "/school year" },
+};
+
+/** All-access plans unlock every published course (their grant has no course_id). */
+export const isAllAccessPlan = (plan: string) => plan.startsWith("allaccess");
+
+/** Monthly student-side plans start with a free trial for first-time customers. */
+export const TRIAL_DAYS = 7;
+export const hasTrial = (plan: string) => plan === "student_monthly" || plan === "allaccess_monthly";
 
 export type SubInfo = {
   status: SubscriptionStatus;
@@ -68,13 +92,17 @@ export async function getSubscriptionInfo(): Promise<SubInfo | null> {
 /** Human-readable plan label */
 export function planLabel(plan: SubscriptionPlan): string {
   const labels: Record<NonNullable<SubscriptionPlan>, string> = {
-    student_monthly: "Student Monthly ($19.99/mo)",
-    student_annual: "Student Annual ($179/year)",
-    tutor_monthly: "Instructor Monthly ($39.99/mo)",
-    tutor_annual: "Instructor Annual ($349/year)",
+    student_monthly: "Student Monthly",
+    student_semester: "Student Semester Pass",
+    student_annual: "Student School-Year Pass",
+    allaccess_monthly: "All-Access Monthly",
+    allaccess_annual: "All-Access School-Year Pass",
+    tutor_monthly: "Instructor Monthly",
+    tutor_annual: "Instructor Annual",
   };
   if (!plan) return "No subscription";
-  return labels[plan] ?? plan;
+  const p = PLAN_PRICES[plan];
+  return labels[plan] ? `${labels[plan]} (${p.price}${p.per})` : plan;
 }
 
 /** One year from today, used for annual one-time plans. */
@@ -87,6 +115,7 @@ export function oneYearFromNow(): Date {
 /**
  * Fixed, term-based expiry for a one-time purchase:
  *   • *_monthly → exactly 1 month after purchase
+ *   • *_semester → 5 months after purchase (one Ontario semester)
  *   • *_annual  → a term pass: bought Jul 1–Aug 31 expires Aug 31 (summer);
  *                 otherwise expires the coming Jun 30 (school year).
  * (Months are 0-indexed: Jun=5, Jul=6, Aug=7, Sep=8.)
@@ -95,6 +124,11 @@ export function planExpiry(plan: string, now: Date = new Date()): Date {
   if (plan.endsWith("_monthly")) {
     const d = new Date(now);
     d.setUTCMonth(d.getUTCMonth() + 1);
+    return d;
+  }
+  if (plan.endsWith("_semester")) {
+    const d = new Date(now);
+    d.setUTCMonth(d.getUTCMonth() + 5);
     return d;
   }
   const y = now.getUTCFullYear();
