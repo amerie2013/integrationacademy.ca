@@ -14,7 +14,7 @@ const BIN = "C:\\Users\\am778\\tools\\tectonic\\tectonic.exe";
 const CID = "7d3e0ca4-1c49-47d4-84f2-9c41c09dd49d";
 const APPLY = process.argv.includes("--apply");
 let codes = process.argv.slice(2).filter((a) => !a.startsWith("--"));
-if (process.argv.includes("--all")) codes = ["6.1"];
+if (process.argv.includes("--all")) codes = ["6.1", "6.2"];
 
 const esc = (s) => String(s).replace(/&/g, "\\&");
 const PRE = String.raw`\documentclass[11pt]{article}
