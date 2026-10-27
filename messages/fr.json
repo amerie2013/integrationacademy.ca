@@ -139,10 +139,15 @@
     "trialNote": "Le forfait mensuel commence par un essai gratuit de {days} jours lors de votre premier achat. Semestre = 5 mois; l'année scolaire se termine le 30 juin.",
     "allAccessNote": "Débloque tous les cours publiés du site, y compris ceux ajoutés plus tard.",
     "comparePlans": "Comparer les forfaits →",
-    "freePreview": "Essayez le chapitre 1 gratuitement",
-    "freePreviewBody": "Ces leçons sont ouvertes à tous — aucun paiement requis.",
+    "freePreview": "Essayez le sujet 1.1 gratuitement",
+    "freePreviewBody": "Le premier sujet est gratuit avec votre compte : la leçon, les exercices, les questions de pratique et le devoir avec le tuteur IA.",
     "freeBadge": "Gratuit",
-    "taxNote": "Prix en dollars canadiens, plus 13 % de TVH."
+    "taxNote": "Prix en dollars canadiens, plus 13 % de TVH.",
+    "freePreviewSignedOut": "Créez un compte gratuit pour ouvrir le premier sujet de ce cours : la leçon, les exercices, les questions de pratique et le devoir avec le tuteur IA. Aucun paiement requis.",
+    "createFreeAccount": "Créer un compte gratuit",
+    "signIn": "Se connecter",
+    "practiceBadge": "Pratique",
+    "freePractice": "Questions de pratique 1.1 avec rétroaction immédiate"
   },
   "common": {
     "loading": "Chargement…",

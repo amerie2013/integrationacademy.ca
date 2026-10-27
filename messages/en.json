@@ -139,10 +139,15 @@
     "trialNote": "Monthly starts with a {days}-day free trial on your first plan. Semester = 5 months; school year runs to June 30.",
     "allAccessNote": "Unlocks every published course on the site, including ones added later.",
     "comparePlans": "Compare all plans →",
-    "freePreview": "Try Chapter 1 free",
-    "freePreviewBody": "These lessons are open to everyone — no payment needed.",
+    "freePreview": "Try topic 1.1 free",
+    "freePreviewBody": "The first topic is free with your account: the lesson, worksheet, practice questions, and assignment with the AI tutor.",
     "freeBadge": "Free",
-    "taxNote": "Prices in CAD, plus 13% HST."
+    "taxNote": "Prices in CAD, plus 13% HST.",
+    "freePreviewSignedOut": "Create a free account to open the first topic of this course: the lesson, worksheet, practice questions, and assignment with the AI tutor. No payment needed.",
+    "createFreeAccount": "Create a free account",
+    "signIn": "Sign in",
+    "practiceBadge": "Practice",
+    "freePractice": "1.1 practice questions with instant feedback"
   },
   "common": {
     "loading": "Loading…",

@@ -40,7 +40,7 @@ const GROUPS: { title: string; sub: string; plans: Plan[] }[] = [
 ];
 
 const FAQ: [string, string][] = [
-  ["Can I try before I pay?", `Yes. Chapter 1 of every course is free to read with no account, and monthly plans start with a ${TRIAL_DAYS}-day free trial on your first purchase.`],
+  ["Can I try before I pay?", `Yes. Create a free account and the first topic of every course is open: the lesson, worksheet, practice questions, and assignment with the AI tutor. Monthly plans also start with a ${TRIAL_DAYS}-day free trial on your first purchase.`],
   ["What's the difference between the semester and school-year passes?", "Both are one-time payments with no renewal. A semester pass lasts 5 months from purchase. A school-year pass runs to June 30 (or August 31 if bought in July or August)."],
   ["I'm in a teacher's class. Do I need to pay?", "No. Students who join a class with a class code get that course free through their instructor."],
   ["What currency are prices in?", "All prices are in Canadian dollars (CAD). 13% HST is added at checkout, so a $119 school-year pass comes to $134.47."],
@@ -106,7 +106,7 @@ export default function PricingPage() {
         </p>
 
         <div style={{ maxWidth: 620, margin: "0 auto 36px", background: "#e7f6ec", border: "1px solid #bfe3cd", borderRadius: 12, padding: "12px 16px", textAlign: "center", color: "#0d5c30", fontSize: 14.5, fontWeight: 600 }}>
-          Chapter 1 of every course is free to read. <Link href="/courses" style={{ color: "#1b7a44" }}>Browse courses →</Link>
+          The first topic of every course is free with an account. <Link href="/login?mode=signup" style={{ color: "#1b7a44" }}>Create a free account →</Link>
         </div>
 
         <div style={{ maxWidth: 420, margin: "0 auto 40px" }}>

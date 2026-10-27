@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
@@ -11,6 +11,10 @@ export default function LoginPage() {
   const t = useTranslations("login");
   const router = useRouter();
   const [mode, setMode] = useState<"login" | "signup" | "forgot">("login");
+  // /login?mode=signup (the "Create a free account" links) opens on the sign-up form
+  useEffect(() => {
+    if (new URLSearchParams(window.location.search).get("mode") === "signup") setMode("signup");
+  }, []);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [resetSent, setResetSent] = useState(false);

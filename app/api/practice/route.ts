@@ -44,7 +44,15 @@ const userClient = (token: string) =>
     auth: { persistSession: false, autoRefreshToken: false },
   });
 
-/** Signed in + has access to this course (RLS on lessons gates by course_access). */
+// Bank topics are "1.1 Power Functions", "1.10 …" — the trailing space keeps 1.10+ out.
+const FREE_TOPIC_PREFIX = "1.1 ";
+const isFreeTopic = (t: string | null | undefined) => !!t && t.startsWith(FREE_TOPIC_PREFIX);
+
+/**
+ * Signed in + either full course access, or the free topic-1.1 preview (any
+ * signed-in user who can see the course's free lesson). `full: false` limits
+ * every bank read to the free topic.
+ */
 async function gate(req: NextRequest, courseId: string) {
   const authz = req.headers.get("authorization") ?? "";
   const token = authz.startsWith("Bearer ") ? authz.slice(7) : "";
@@ -53,9 +61,12 @@ async function gate(req: NextRequest, courseId: string) {
   const { data: u, error } = await admin.auth.getUser(token);
   if (error || !u?.user) return { ok: false as const, res: NextResponse.json({ error: "Session expired — sign in again." }, { status: 401 }) };
   if (!courseId) return { ok: false as const, res: NextResponse.json({ error: "Pick a course." }, { status: 400 }) };
-  const { data: lesson } = await userClient(token).from("lessons").select("id").eq("course_id", courseId).limit(1).maybeSingle();
+  const user = userClient(token);
+  const { data: full } = await user.rpc("course_access", { cid: courseId });
+  if (full) return { ok: true as const, uid: u.user.id, full: true };
+  const { data: lesson } = await user.from("lessons").select("id").eq("course_id", courseId).eq("free_preview", true).limit(1).maybeSingle();
   if (!lesson) return { ok: false as const, res: NextResponse.json({ error: "You don't have access to this course yet." }, { status: 403 }) };
-  return { ok: true as const, uid: u.user.id };
+  return { ok: true as const, uid: u.user.id, full: false };
 }
 
 /** Strip everything that would give the answer away. */
@@ -66,7 +77,7 @@ const publicQ = (r: any, i: number) => ({
 
 // Supabase caps a single request at 1000 rows, and the banks are bigger than
 // that (up to 2400/course) — page through or later topics never get sampled.
-async function allBank(select: string, courseId: string, topic?: string) {
+async function allBank(select: string, courseId: string, topic?: string, freeOnly = false) {
   const admin = getAdmin();
   const PAGE = 1000;
   const out: any[] = [];
@@ -74,6 +85,7 @@ async function allBank(select: string, courseId: string, topic?: string) {
     // long_answer questions need a teacher to mark them, so self-practice never draws them
     let q = admin.from("bank_questions").select(select).eq("course_id", courseId).neq("kind", "long_answer").range(from, from + PAGE - 1);
     if (topic) q = q.eq("topic", topic);
+    if (freeOnly) q = q.like("topic", `${FREE_TOPIC_PREFIX}%`);
     const { data, error } = await q;
     if (error) throw new Error(error.message);
     out.push(...(data ?? []));
@@ -141,12 +153,13 @@ export async function POST(req: NextRequest) {
     const g = await gate(req, courseId);
     if (!g.ok) return g.res;
     const admin = getAdmin();
+    const freeOnly = !g.full;
 
     // Topics + question count, for the picker.
     if (action === "meta") {
-      const rows = await allBank("topic", courseId);
+      const rows = await allBank("topic", courseId, undefined, freeOnly);
       const topics = [...new Set(rows.map((r: any) => r.topic).filter(Boolean))].sort();
-      return NextResponse.json({ topics, total: rows.length });
+      return NextResponse.json({ topics, total: rows.length, preview: freeOnly });
     }
 
     // Practice history for this course: totals, streak, and per-topic accuracy.
@@ -181,16 +194,16 @@ export async function POST(req: NextRequest) {
       let picked: string[];
       if (mode === "exam") {
         // Cumulative: every topic in the course is eligible, evenly sampled.
-        const rows = await allBank("id, topic", courseId);
+        const rows = await allBank("id, topic", courseId, undefined, freeOnly);
         picked = stratify(rows as any[], count);
       } else if (mode === "mistakes") {
         // Only questions whose most recent verdict was wrong — get one right
         // and it drops out of the pool for good.
-        const hist = await allHistory(g.uid, courseId);
+        const hist = (await allHistory(g.uid, courseId)).filter((r) => !freeOnly || isFreeTopic(r.topic));
         picked = shuffle(outstandingMistakes(topic ? hist.filter((r) => r.topic === topic) : hist)).slice(0, count);
         if (!picked.length) return NextResponse.json({ error: "No mistakes to review — you've answered everything correctly. Try a fresh set!" }, { status: 404 });
       } else {
-        const ids = await allBank("id", courseId, topic || undefined);
+        const ids = await allBank("id", courseId, topic || undefined, freeOnly);
         picked = shuffle(ids.map((r: any) => r.id)).slice(0, count);
       }
       if (!picked.length) return NextResponse.json({ error: "No questions available for that selection." }, { status: 404 });
@@ -210,11 +223,13 @@ export async function POST(req: NextRequest) {
       const answers = (body?.answers ?? {}) as Record<string, any>;
       const ids = Object.keys(answers);
       if (!ids.length) return NextResponse.json({ error: "Nothing to grade." }, { status: 400 });
-      const { data: rows, error } = await admin
+      let gq = admin
         .from("bank_questions")
         .select("id, kind, prompt, image_url, choices, answer, tolerance, points, feedback, topic")
         .eq("course_id", courseId)
         .in("id", ids);
+      if (freeOnly) gq = gq.like("topic", `${FREE_TOPIC_PREFIX}%`);
+      const { data: rows, error } = await gq;
       if (error) return NextResponse.json({ error: error.message }, { status: 500 });
       const questions: Question[] = (rows ?? []).map((r: any, i: number) => ({
         id: r.id, kind: r.kind, prompt: r.prompt, image_url: r.image_url, choices: r.choices,

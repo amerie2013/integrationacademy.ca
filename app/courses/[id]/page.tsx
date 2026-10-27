@@ -282,19 +282,44 @@ export default function StudentCoursePage() {
           </div>
         ) : null}
 
-        {!access && lessons.length > 0 && (
+        {/* Free preview: topic 1.1 (lesson, worksheet, practice, assignment) for
+            signed-in users. RLS only returns the free rows here, so `content`
+            is exactly the preview. Visitors are asked to register first. */}
+        {!access && !userId && (
+          <div style={{ marginTop: 28 }}>
+            <Section title={t("freePreview")}>
+              <div style={{ padding: "16px 18px", display: "flex", justifyContent: "space-between", alignItems: "center", gap: 16, flexWrap: "wrap" }}>
+                <div style={{ color: "#475569", fontSize: 14.5, lineHeight: 1.55, maxWidth: 520 }}>{t("freePreviewSignedOut")}</div>
+                <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
+                  <Link href="/login?mode=signup" style={{ background: accent.primary, color: "#fff", padding: "10px 18px", borderRadius: 10, textDecoration: "none", fontWeight: 700, fontSize: 14, whiteSpace: "nowrap" }}>{t("createFreeAccount")}</Link>
+                  <Link href="/login" style={{ color: accent.primary, fontWeight: 700, fontSize: 14, textDecoration: "none", whiteSpace: "nowrap" }}>{t("signIn")}</Link>
+                </div>
+              </div>
+            </Section>
+          </div>
+        )}
+        {!access && userId && content.length > 0 && (
           <div style={{ marginTop: 28 }}>
             <Section title={t("freePreview")}>
               <div style={{ color: "#475569", fontSize: 14, padding: "12px 18px", borderBottom: "1px solid #f1f5f9" }}>{t("freePreviewBody")}</div>
-              {lessons.map((l) => (
-                <Link key={l.id} href={`/lessons/${l.id}`} style={rowLink}>
+              {content.map((it) => (
+                <Link key={it.kind + it.id} href={it.href} style={rowLink}>
                   <span style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                    <span style={badgeBase(accent.soft, accent.dark)}>{t("freeBadge")}</span>
-                    <span>{l.title}</span>
+                    <span style={it.kind === "lesson" ? badgeBase(accent.soft, accent.dark) : badgeStyle[it.kind]}>{t(`${it.kind}Badge` as any)}</span>
+                    <span>{it.title}</span>
                   </span>
-                  <span style={{ color: accent.primary, fontWeight: 700, fontSize: 14 }}>{t("read")}</span>
+                  <span style={{ color: accent.primary, fontWeight: 700, fontSize: 14 }}>
+                    {it.kind === "worksheet" ? t("openWorksheet") : it.kind === "assignment" ? t("open") : t("read")}
+                  </span>
                 </Link>
               ))}
+              <Link href={`/practice?course=${courseId}`} style={rowLink}>
+                <span style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                  <span style={badgeStyle.quiz}>{t("practiceBadge")}</span>
+                  <span>{t("freePractice")}</span>
+                </span>
+                <span style={{ color: accent.primary, fontWeight: 700, fontSize: 14 }}>{t("start")}</span>
+              </Link>
             </Section>
           </div>
         )}
