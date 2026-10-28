@@ -1,20 +1,56 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { SiteHeader } from "../components/SiteHeader";
 import { SiteFooter } from "../components/SiteFooter";
 import { FunctionGraph } from "../components/FunctionGraph";
 import { Math as Tex } from "../components/Math";
+import { PLAN_PRICES, TAX_LABEL, TRIAL_DAYS } from "../lib/subscription";
 
-const COURSES = [
-  { code: "MPM1D", name: "Grade 9 Principles of Mathematics", tag: "Grade 9" },
-  { code: "MPM2D", name: "Grade 10 Principles of Mathematics", tag: "Grade 10" },
-  { code: "MCR3U", name: "Functions", tag: "Grade 11" },
-  { code: "MHF4U", name: "Advanced Functions", tag: "Grade 12" },
-  { code: "MCV4U", name: "Calculus & Vectors", tag: "Grade 12" },
-  { code: "MDM4U", name: "Data Management", tag: "Grade 12" },
-  { code: "MATH1A", name: "First-Year Calculus", tag: "University" },
-  { code: "MATH1B", name: "Linear Algebra", tag: "University" },
+type Course = { id: string; code: string; name: string; tag: string };
+
+// Published courses, grouped so a Grade 9 family isn't greeted by "university" first.
+const COURSE_GROUPS: { key: string; label: string; sub: string; courses: Course[] }[] = [
+  {
+    key: "ontario",
+    label: "Ontario High School (Grades 9–12)",
+    sub: "Every course follows the Ontario curriculum, unit by unit.",
+    courses: [
+      { id: "fef1dc8e-c6f7-4632-baa1-7eb940130557", code: "MTH1W", name: "Grade 9 Mathematics", tag: "Grade 9" },
+      { id: "86e723b3-29a3-4df7-8575-ce33cf9a1930", code: "MTH1W", name: "Mathématiques, 9e année", tag: "Grade 9 · Français" },
+      { id: "ff375ff3-820d-4b59-9822-4b615aa0df97", code: "MPM2D", name: "Principles of Mathematics", tag: "Grade 10" },
+      { id: "8a413a21-8f80-49ff-9bde-e76e61eff33b", code: "MFM2P", name: "Foundations of Mathematics", tag: "Grade 10" },
+      { id: "4819065e-1703-478f-adb7-8226825be6aa", code: "MCR3U", name: "Functions", tag: "Grade 11" },
+      { id: "9b5d2c58-858e-4609-a021-005c72bde403", code: "MCF3M", name: "Functions and Applications", tag: "Grade 11" },
+      { id: "1b2e9821-f357-4b7d-b865-976693727d9a", code: "MBF3C", name: "Foundations for College Mathematics", tag: "Grade 11" },
+      { id: "7d3e0ca4-1c49-47d4-84f2-9c41c09dd49d", code: "MHF4U", name: "Advanced Functions", tag: "Grade 12" },
+      { id: "26a9a4f5-7b5f-495d-901e-6359746e199b", code: "MHF4U", name: "Fonctions avancées", tag: "Grade 12 · Français" },
+      { id: "88ea0686-581a-4236-b4df-8059c8f1d214", code: "MCV4U", name: "Calculus and Vectors", tag: "Grade 12" },
+      { id: "5906c8e7-bea7-4501-9ef6-6378d6fb3350", code: "MDM4U", name: "Mathematics of Data Management", tag: "Grade 12" },
+      { id: "40a531ee-d2e5-4b0c-a191-2ea59b271111", code: "MAP4C", name: "Foundations for College Mathematics", tag: "Grade 12" },
+      { id: "4fffca58-e9f9-4918-9e5f-3849cf224f3b", code: "MCT4C", name: "Mathematics for College Technology", tag: "Grade 12" },
+    ],
+  },
+  {
+    key: "advanced",
+    label: "University & Advanced",
+    sub: "Exam prep for AP and IB, and certification prep for future math teachers.",
+    courses: [
+      { id: "7032f89e-430d-4ab4-b3f7-7b457c8352b4", code: "APCALCAB", name: "AP® Calculus AB Exam Preparation", tag: "AP" },
+      { id: "f635431f-3244-45c3-9c4a-39a33fd209b9", code: "IBAASL", name: "Mathematics: Analysis & Approaches SL", tag: "IB Diploma" },
+      { id: "8a8d0e91-8390-4032-8eca-f51b2b2c200b", code: "FTCE", name: "FTCE Mathematics 6–12", tag: "Certification" },
+    ],
+  },
+  {
+    key: "florida",
+    label: "Florida (B.E.S.T.)",
+    sub: "Courses built to Florida's B.E.S.T. standards.",
+    courses: [
+      { id: "1a583d2f-864b-418f-84db-73568f6a0720", code: "ALG1", name: "Algebra 1", tag: "Grade 9" },
+      { id: "0203cf68-41b1-4912-938a-8ba0cf7a4081", code: "GEO1", name: "Geometry", tag: "Grade 10" },
+    ],
+  },
 ];
 
 const CHIPS = [
@@ -26,34 +62,12 @@ const CHIPS = [
   { t: "e^{i\\pi}+1=0", top: "84%", left: "30%", d: "1.5s" },
 ];
 
-const EXPLORE = [
-  {
-    href: "/courses",
-    badge: "Learn",
-    title: "Courses",
-    desc: "Interactive lessons, auto-graded quizzes, and assignments — Grade 9 to university.",
-    cta: "Browse courses",
-    glyph: "∫",
-  },
-  {
-    href: "/articles",
-    badge: "Read",
-    title: "Articles",
-    desc: "Deep-dives, study strategies, and the big ideas behind the math you're learning.",
-    cta: "Read articles",
-    glyph: "✎",
-  },
-  {
-    href: "/games",
-    badge: "Play",
-    title: "Math Games",
-    desc: "High-school math, gamified. Beat the clock, climb streaks, and have fun getting sharper.",
-    cta: "Play now",
-    glyph: "◆",
-  },
-];
+// Add real student/parent quotes here (with permission). The section stays hidden while empty.
+const TESTIMONIALS: { quote: string; who: string }[] = [];
 
 export default function HomePage() {
+  const [group, setGroup] = useState(COURSE_GROUPS[0].key);
+
   return (
     <main style={{ minHeight: "100vh" }}>
       <style>{CSS}</style>
@@ -73,7 +87,7 @@ export default function HomePage() {
         <div className="ia-hero-inner">
           <div>
             <span className="ia-eyebrow">
-              <span className="ia-dot" /> Grade 9–12 · College · University
+              <span className="ia-dot" /> Ontario Grades 9–12 · AP · IB
             </span>
             <h1 className="ia-title">
               Math <span className="ia-grad">Simplified</span>,
@@ -86,13 +100,13 @@ export default function HomePage() {
               make practice fun.
             </p>
             <div className="ia-cta-row">
-              <Link href="/login" className="ia-btn ia-btn-primary">Get started →</Link>
-              <Link href="/courses" className="ia-btn ia-btn-ghost">Browse courses</Link>
+              <Link href="/pricing" className="ia-btn ia-btn-primary">Start Free Trial →</Link>
+              <a href="#courses" className="ia-btn ia-btn-ghost">Browse Courses</a>
             </div>
             <div className="ia-trust">
-              <span>⚡ Live interactive graphs</span>
-              <span>🔊 Narrated lessons</span>
-              <span>🎮 Math games</span>
+              <span>{TRIAL_DAYS}-day free trial</span>
+              <span>First topic of every course free</span>
+              <span>Cancel anytime</span>
             </div>
           </div>
 
@@ -117,59 +131,117 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── EXPLORE: Courses · Articles · Games ── */}
-      <section style={{ maxWidth: 1100, margin: "0 auto", padding: "64px 28px 24px" }}>
-        <h2 style={{ fontFamily: "Fraunces, serif", fontSize: 32, fontWeight: 700, margin: "0 0 6px" }}>
-          Three ways to get better at math
-        </h2>
-        <p style={{ color: "#475569", fontSize: 16, margin: "0 0 28px" }}>
-          Learn it, read about it, then play with it.
-        </p>
-        <div className="ia-explore">
-          {EXPLORE.map((e) => (
-            <Link key={e.href} href={e.href} className="ia-xcard">
-              <div className="ia-xglyph">{e.glyph}</div>
-              <span className="ia-xbadge">{e.badge}</span>
-              <h3 className="ia-xtitle">{e.title}</h3>
-              <p className="ia-xdesc">{e.desc}</p>
-              <span className="ia-xcta">{e.cta} →</span>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      {/* ── FORMULA STRIP ── */}
-      <section className="ia-formula">
-        <div style={{ fontSize: 22 }}>
-          <Tex expr="\frac{d}{dx}\left[\int_a^x f(t)\,dt\right] = f(x)" block />
-        </div>
-        <p style={{ color: "#9fe7bd", fontWeight: 600, marginTop: 10 }}>
-          Beautiful math typesetting built in — write LaTeX, students see clean equations.
-        </p>
-      </section>
-
       {/* ── COURSES ── */}
-      <section id="courses" style={{ maxWidth: 1100, margin: "0 auto", padding: "64px 28px" }}>
+      <section id="courses" style={{ maxWidth: 1100, margin: "0 auto", padding: "64px 28px 40px", scrollMarginTop: 80 }}>
         <h2 style={{ fontFamily: "Fraunces, serif", fontSize: 34, fontWeight: 700, margin: "0 0 8px" }}>
           Courses
         </h2>
-        <p style={{ color: "#475569", fontSize: 16, margin: "0 0 32px" }}>
-          Aligned to the Ontario curriculum and first-year university math.
+        <p style={{ color: "#475569", fontSize: 16, margin: "0 0 24px" }}>
+          Lessons, worksheets, practice questions, and assignments for every unit.
         </p>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))", gap: 16 }}>
-          {COURSES.map((c) => (
-            <div key={c.code} className="ia-course">
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
-                <span style={{ fontFamily: "JetBrains Mono, monospace", fontWeight: 700, color: "var(--brand-dark)", fontSize: 14 }}>
-                  {c.code}
-                </span>
-                <span style={{ fontSize: 12, fontWeight: 700, color: "var(--brand-dark)", background: "#e7f6ec", padding: "3px 9px", borderRadius: 999 }}>
-                  {c.tag}
-                </span>
-              </div>
-              <div style={{ fontWeight: 700, fontSize: 16, color: "#0f172a" }}>{c.name}</div>
-            </div>
+        <div className="ia-tabs" role="tablist" aria-label="Course groups">
+          {COURSE_GROUPS.map((g) => (
+            <button
+              key={g.key}
+              role="tab"
+              id={`tab-${g.key}`}
+              aria-selected={group === g.key}
+              aria-controls={`panel-${g.key}`}
+              className={`ia-tab${group === g.key ? " ia-tab-on" : ""}`}
+              onClick={() => setGroup(g.key)}
+            >
+              {g.label}
+            </button>
           ))}
+        </div>
+        {COURSE_GROUPS.map((g) => (
+          <div key={g.key} role="tabpanel" id={`panel-${g.key}`} aria-labelledby={`tab-${g.key}`} hidden={group !== g.key}>
+            <p style={{ color: "#64748b", fontSize: 14.5, margin: "0 0 18px" }}>{g.sub}</p>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))", gap: 16 }}>
+              {g.courses.map((c) => (
+                <Link key={c.id} href={`/courses/${c.id}`} className="ia-course">
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 8, marginBottom: 10 }}>
+                    <span style={{ fontFamily: "JetBrains Mono, monospace", fontWeight: 700, color: "var(--brand-dark)", fontSize: 14 }}>
+                      {c.code}
+                    </span>
+                    <span style={{ fontSize: 12, fontWeight: 700, color: "var(--brand-dark)", background: "#e7f6ec", padding: "3px 9px", borderRadius: 999, whiteSpace: "nowrap" }}>
+                      {c.tag}
+                    </span>
+                  </div>
+                  <div style={{ fontWeight: 700, fontSize: 16, color: "#0f172a" }}>{c.name}</div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        ))}
+      </section>
+
+      {/* ── TRUST: instructor + testimonials ── */}
+      <section style={{ maxWidth: 1100, margin: "0 auto", padding: "24px 28px 56px" }}>
+        <div className="ia-about">
+          <div className="ia-about-mark">PhD</div>
+          <div>
+            <span className="ia-xbadge">About the instructor</span>
+            <h2 style={{ fontFamily: "Fraunces, serif", fontSize: 28, fontWeight: 700, margin: "12px 0 8px", color: "#f0fff6" }}>
+              Built by a PhD in Mathematics
+            </h2>
+            <p style={{ margin: 0, fontSize: 16, lineHeight: 1.65, color: "#bfe9cf", maxWidth: 680 }}>
+              Built by a PhD in Mathematics, designed to align perfectly with the Ontario curriculum.
+              Every lesson, worksheet, and assignment is written and checked by a mathematician.
+            </p>
+          </div>
+        </div>
+        {TESTIMONIALS.length > 0 && (
+          <div className="ia-quotes">
+            {TESTIMONIALS.map((t) => (
+              <figure key={t.who} className="ia-quote">
+                <blockquote style={{ margin: 0, fontFamily: "Fraunces, serif", fontSize: 18, lineHeight: 1.5, color: "#0f172a" }}>
+                  &ldquo;{t.quote}&rdquo;
+                </blockquote>
+                <figcaption style={{ marginTop: 12, fontSize: 14, fontWeight: 700, color: "#64748b" }}>{t.who}</figcaption>
+              </figure>
+            ))}
+          </div>
+        )}
+      </section>
+
+      {/* ── PRICING ── */}
+      <section id="pricing" style={{ maxWidth: 1100, margin: "0 auto", padding: "8px 28px 72px" }}>
+        <div className="ia-price">
+          <div style={{ maxWidth: 560 }}>
+            <h2 style={{ fontFamily: "Fraunces, serif", fontSize: 30, fontWeight: 700, margin: "0 0 10px" }}>
+              Start with a {TRIAL_DAYS}-day free trial
+            </h2>
+            <p style={{ color: "#334155", fontSize: 16.5, lineHeight: 1.6, margin: "0 0 10px" }}>
+              Only {PLAN_PRICES.student_monthly.price}/month for one course after your trial, or{" "}
+              {PLAN_PRICES.allaccess_monthly.price}/month for every course. Cancel anytime.
+            </p>
+            <p style={{ color: "#0d5c30", fontSize: 15, fontWeight: 700, margin: "0 0 22px" }}>
+              Not ready yet? The first topic of every course is free with an account — no credit card required.
+            </p>
+            <div className="ia-cta-row">
+              <Link href="/pricing" className="ia-btn ia-btn-primary">Start Free Trial →</Link>
+              <Link href="/login?mode=signup" className="ia-btn ia-btn-light">Create a free account</Link>
+            </div>
+          </div>
+          <div className="ia-plans">
+            {([
+              ["One course", PLAN_PRICES.student_monthly],
+              ["All-access", PLAN_PRICES.allaccess_monthly],
+              ["School-year pass", PLAN_PRICES.student_annual],
+            ] as const).map(([name, p]) => (
+              <Link key={name} href="/pricing" className="ia-plan">
+                <span style={{ fontWeight: 700, color: "#334155" }}>{name}</span>
+                <span>
+                  <span style={{ fontFamily: "Fraunces, serif", fontSize: 24, fontWeight: 700, color: "#0f172a" }}>{p.price}</span>
+                  <span style={{ color: "#64748b", fontWeight: 600, fontSize: 14 }}>{p.per}</span>
+                </span>
+              </Link>
+            ))}
+            <div style={{ color: "#94a3b8", fontSize: 12.5, fontWeight: 600, textAlign: "right" }}>
+              CAD {TAX_LABEL} · <Link href="/pricing" style={{ color: "var(--brand-dark)" }}>All plans →</Link>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -202,20 +274,26 @@ const CSS = `
 .ia-hero-art{position:relative;}
 .ia-logo-halo{position:absolute;top:-64px;left:50%;transform:translateX(-50%);z-index:3;background:#fff;border-radius:18px;padding:12px 16px;box-shadow:0 10px 34px rgba(52,210,127,.45),0 0 0 1px rgba(159,231,189,.4);animation:iafloat 6s ease-in-out infinite;}
 .ia-glass{background:rgba(255,255,255,.06);border:1px solid rgba(159,231,189,.22);border-radius:20px;padding:14px;backdrop-filter:blur(8px);box-shadow:0 24px 60px rgba(0,0,0,.45);}
-.ia-explore{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
-.ia-xcard{position:relative;overflow:hidden;display:block;text-decoration:none;color:inherit;background:#fff;border:1px solid var(--border);border-radius:18px;padding:24px;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;}
-.ia-xcard:hover{transform:translateY(-4px);box-shadow:0 18px 44px rgba(13,92,48,.16);border-color:#9fe7bd;}
-.ia-xglyph{position:absolute;top:-10px;right:6px;font-size:96px;line-height:1;color:#eef7f1;font-family:Fraunces,serif;pointer-events:none;}
-.ia-xbadge{position:relative;display:inline-block;font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#0d5c30;background:#e7f6ec;padding:4px 10px;border-radius:999px;}
-.ia-xtitle{position:relative;font-family:Fraunces,serif;font-size:24px;font-weight:700;margin:14px 0 6px;}
-.ia-xdesc{position:relative;color:#475569;font-size:15px;line-height:1.55;margin:0 0 16px;}
-.ia-xcta{position:relative;font-weight:800;color:var(--brand-dark);}
-.ia-formula{background:linear-gradient(135deg,#07150d,#0d3a23);color:#e7f6ec;padding:30px 28px;text-align:center;}
-.ia-course{background:#fff;border:1px solid var(--border);border-radius:14px;padding:20px;box-shadow:0 1px 3px rgba(15,23,42,.06);transition:transform .15s ease,box-shadow .15s ease;}
+.ia-course{display:block;text-decoration:none;color:inherit;background:#fff;border:1px solid var(--border);border-radius:14px;padding:20px;box-shadow:0 1px 3px rgba(15,23,42,.06);transition:transform .15s ease,box-shadow .15s ease;}
 .ia-course:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(13,92,48,.12);}
+.ia-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px;border-bottom:1px solid var(--border);}
+.ia-tab{background:none;border:none;border-bottom:3px solid transparent;margin-bottom:-1px;padding:10px 14px;font:inherit;font-weight:700;font-size:15px;color:#64748b;cursor:pointer;}
+.ia-tab:hover{color:#0f172a;}
+.ia-tab-on{color:var(--brand-dark);border-bottom-color:#1f8a4c;}
+.ia-about{display:flex;gap:28px;align-items:center;background:linear-gradient(135deg,#07150d,#0d3a23);border-radius:20px;padding:32px;}
+.ia-about-mark{flex:none;width:96px;height:96px;border-radius:50%;display:grid;place-items:center;font-family:Fraunces,serif;font-size:30px;font-weight:700;color:#04130a;background:linear-gradient(135deg,#1f8a4c,#34d27f);box-shadow:0 10px 30px rgba(52,210,127,.35);}
+.ia-xbadge{display:inline-block;font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#9fe7bd;background:rgba(52,210,127,.12);border:1px solid rgba(52,210,127,.3);padding:4px 10px;border-radius:999px;}
+.ia-quotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:18px;}
+.ia-quote{margin:0;background:#fff;border:1px solid var(--border);border-radius:16px;padding:22px;}
+.ia-price{display:grid;grid-template-columns:1.2fr .8fr;gap:36px;align-items:center;background:#f3faf6;border:1px solid #bfe3cd;border-radius:20px;padding:36px;}
+.ia-btn-light{background:#fff;color:#0f172a;border:1px solid #cbd5e1;}
+.ia-btn-light:hover{border-color:#1f8a4c;}
+.ia-plans{display:flex;flex-direction:column;gap:10px;}
+.ia-plan{display:flex;justify-content:space-between;align-items:baseline;gap:12px;text-decoration:none;background:#fff;border:1px solid var(--border);border-radius:12px;padding:14px 18px;transition:border-color .15s ease;}
+.ia-plan:hover{border-color:#1f8a4c;}
 @keyframes iafloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-14px);}}
 @keyframes iapulse{0%{box-shadow:0 0 0 0 rgba(52,210,127,.7);}70%{box-shadow:0 0 0 9px rgba(52,210,127,0);}100%{box-shadow:0 0 0 0 rgba(52,210,127,0);}}
 .ia-logo-halo,.ia-glow-b,.ia-chip{will-change:transform;}
-@media (max-width:860px){.ia-hero-inner{grid-template-columns:1fr;gap:60px;}.ia-hero-art{margin-top:40px;}.ia-explore{grid-template-columns:1fr;}.ia-chip{display:none;}}
+@media (max-width:860px){.ia-hero-inner{grid-template-columns:1fr;gap:60px;}.ia-hero-art{margin-top:40px;}.ia-price{grid-template-columns:1fr;padding:24px;}.ia-about{flex-direction:column;align-items:flex-start;padding:24px;}.ia-chip{display:none;}}
 @media (prefers-reduced-motion:reduce){.ia-chip,.ia-glow-b,.ia-logo-halo,.ia-dot{animation:none;}}
 `;
