@@ -19,6 +19,29 @@ type Course = {
   published: boolean;
 };
 
+// Catalog order: Ontario high school (Grade 9 → 12), then university & advanced
+// (AP, IB, certification, college/university), then U.S. courses — same groups as the homepage tabs.
+const ADVANCED_CODES = ["APCALCAB", "IBAASL", "FTCEMATH612"];
+const US_CODES = ["ALG1", "GEO1"];
+
+function courseGroup(c: Course) {
+  const code = c.code ?? "";
+  if (US_CODES.includes(code)) return 2;
+  if (ADVANCED_CODES.includes(code) || !/^\d+$/.test(c.level ?? "")) return 1;
+  return 0;
+}
+
+function compareCourses(a: Course, b: Course) {
+  const level = (c: Course) => (/^\d+$/.test(c.level ?? "") ? +c.level! : 100);
+  const base = (c: Course) => (c.code ?? "").replace(/-FR$/, "");
+  return (
+    courseGroup(a) - courseGroup(b) ||
+    level(a) - level(b) ||
+    base(a).localeCompare(base(b)) ||
+    (a.language === "fr" ? 1 : 0) - (b.language === "fr" ? 1 : 0)
+  );
+}
+
 export default function CourseCatalogPage() {
   const t = useTranslations("courses");
   const levelLabel = useLevelLabel();
@@ -44,7 +67,7 @@ export default function CourseCatalogPage() {
         .from("courses")
         .select("id, code, title, description, level, language, published")
         .order("level");
-      setCourses((cs ?? []) as Course[]);
+      setCourses(((cs ?? []) as Course[]).sort(compareCourses));
 
       if (session) {
         const { data: en } = await supabase
