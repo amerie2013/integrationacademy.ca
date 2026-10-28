@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 // Canonical origin. Hard-coded (not NEXT_PUBLIC_APP_URL) so the sitemap and
 // canonical tags never point Google at a *.vercel.app preview address.
-export const SITE = "https://integrationacademy.ca";
+export const SITE = "https://www.integrationacademy.ca";
 
 // Per-page metadata with a canonical URL, written the way teachers and
 // students search ("<topic> Game – Grade N Ontario Math").

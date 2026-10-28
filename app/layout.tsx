@@ -7,7 +7,7 @@ import "./globals.css";
 const DESC = "Math Simplified, Success Amplified. Interactive lessons, auto-graded quizzes, worksheets, math games, and a teaching whiteboard for Grade 9–12, college, and university.";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://integrationacademy.ca"),
+  metadataBase: new URL("https://www.integrationacademy.ca"),
   title: "Integration Academy — High School & University Math",
   description: DESC,
   applicationName: "Integration Academy",
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Integration Academy — High School & University Math",
     description: DESC,
-    url: "https://integrationacademy.ca",
+    url: "https://www.integrationacademy.ca",
     siteName: "Integration Academy",
     images: [{ url: "/Logo.png", width: 258, height: 252, alt: "Integration Academy" }],
     type: "website",
