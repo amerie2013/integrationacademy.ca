@@ -43,9 +43,9 @@ const COURSE_GROUPS: { key: string; label: string; sub: string; courses: Course[
     ],
   },
   {
-    key: "florida",
-    label: "Florida (B.E.S.T.)",
-    sub: "Courses built to Florida's B.E.S.T. standards.",
+    key: "us",
+    label: "U.S. Courses",
+    sub: "High school Algebra 1 and Geometry for U.S. students, aligned to state standards (including Florida B.E.S.T.).",
     courses: [
       { id: "1a583d2f-864b-418f-84db-73568f6a0720", code: "ALG1", name: "Algebra 1", tag: "Grade 9" },
       { id: "0203cf68-41b1-4912-938a-8ba0cf7a4081", code: "GEO1", name: "Geometry", tag: "Grade 10" },
