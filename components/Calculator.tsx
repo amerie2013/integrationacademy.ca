@@ -129,6 +129,25 @@ function estimateOneSidedLimit(evalX: (x: number) => number, x0: number, dir: 1 
 }
 
 /**
+ * Round x-values in [lo, hi] where the function is undefined but defined just
+ * beside it — candidates for a removable hole. Checks multiples of 1/d for
+ * small d, skipping any spacing too fine for the current view.
+ */
+function findRemovableHoles(evalX: (x: number) => number, lo: number, hi: number): number[] {
+  const out = new Set<number>();
+  for (const d of [1, 2, 3, 4, 5, 6, 8, 10]) {
+    if ((hi - lo) * d > 4000) continue;
+    for (let n = Math.ceil(lo * d); n <= Math.floor(hi * d); n++) {
+      const x = n / d;
+      if (Number.isFinite(evalX(x))) continue;
+      const eps = 1e-7 * Math.max(1, Math.abs(x));
+      if (Number.isFinite(evalX(x - eps)) && Number.isFinite(evalX(x + eps))) out.add(Math.round(x * 1e9) / 1e9);
+    }
+  }
+  return [...out];
+}
+
+/**
  * Is the gap between two adjacent samples a real discontinuity (jump or
  * asymptote) rather than just a steep but continuous stretch? Re-samples
  * inside the gap: a continuous curve passes through intermediate values in
@@ -446,6 +465,7 @@ export function Calculator({ initialData, initialState, initialId, embed = false
             // Adjacent break indices near one steep spot are merged first, so
             // one discontinuity doesn't get bisected (and tested) many times.
             const xSpan = hiX - loX;
+            const circled: number[] = [];
             const clusters: { first: number; last: number }[] = [];
             for (const k of breakIdx) {
               const prevCluster = clusters[clusters.length - 1];
@@ -462,6 +482,7 @@ export function Calculator({ initialData, initialState, initialId, embed = false
               const atX0 = evalX(x0);
               const left = estimateOneSidedLimit(evalX, x0, -1, xSpan);
               const right = estimateOneSidedLimit(evalX, x0, 1, xSpan);
+              circled.push(x0);
               for (const yAt of [left, right]) {
                 if (yAt === null) continue;
                 // Filled where the function really takes that value at x0 (a
@@ -471,6 +492,21 @@ export function Calculator({ initialData, initialState, initialId, embed = false
                 const p = toPx(x0, yAt);
                 ctx.beginPath(); ctx.arc(p.px, p.py, 4, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
               }
+            }
+
+            // Removable holes like (x-2)/((x-2)(x+2)) at x = 2 are a single
+            // undefined point, so the samples above almost never land on one.
+            // Probe round x-values (where textbook holes sit) for that pattern.
+            ctx.fillStyle = "#fff";
+            for (const x0 of findRemovableHoles(evalX, loX, hiX)) {
+              if (circled.some((c) => Math.abs(c - x0) < 1e-6 * Math.max(1, xSpan))) continue;
+              const left = estimateOneSidedLimit(evalX, x0, -1, xSpan);
+              const right = estimateOneSidedLimit(evalX, x0, 1, xSpan);
+              if (left === null || right === null || Math.abs(left - right) > 1e-4 * Math.max(1, Math.abs(left))) continue;
+              const yAt = (left + right) / 2;
+              if (yAt < rMin || yAt > rMax) continue;
+              const p = toPx(x0, yAt);
+              ctx.beginPath(); ctx.arc(p.px, p.py, 4, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
             }
           }
           continue;
