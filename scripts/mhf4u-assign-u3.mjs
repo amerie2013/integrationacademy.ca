@@ -19,7 +19,7 @@ export const U3 = {
     ],
     A: [
       r`A company's average cost per item, in dollars, when it produces $x$ items is $A(x)=\dfrac{500+20x}{x}$. (a) Find $A(10)$, $A(100)$ and $A(1000)$. (b) State the vertical and horizontal asymptotes and explain what each means in this context. (c) Explain why the average cost can never fall below 20 dollars.`,
-      r`A 240 km trip is driven at a steady speed of $v$ km/h with one 30-minute rest stop, so the total time in hours is $T(v)=\dfrac{240}{v}+0.5$. (a) Find $T(80)$ and $T(120)$. (b) State the asymptotes and interpret the horizontal asymptote. (c) Describe how the graph is a transformation of $y=\dfrac1x$.`,
+      r`A 240 km trip is driven at a steady speed of $v$ km/h with one 30-minute rest stop, so the total time in hours is $T(v)=\dfrac{240}{v}+0.5$. (a) Find $T(80)$ and $T(120)$. (b) State the asymptotes and interpret the horizontal asymptote. (c) Describe how the graph is a transformation of $y=\dfrac1x$. [[interactive:road-trip]]`,
       r`A student's test score after $n$ hours of practice is modelled by $S(n)=\dfrac{90n}{n+3}$, $n\ge0$. (a) Find $S(3)$, $S(9)$ and $S(27)$. (b) State the horizontal asymptote and interpret it. (c) Explain why the vertical asymptote of the equation is not part of the graph in this context.`,
     ],
   },

@@ -1,6 +1,9 @@
 "use client";
 
 import katex from "katex";
+import { BallRamp } from "./widgets/BallMotion";
+import { OpenBoxGraph } from "./widgets/OpenBox";
+import { RoadTrip } from "./widgets/RoadTrip";
 
 const CATS = [
   { key: "knowledge", label: "Knowledge & Understanding", color: "#1d4ed8", bg: "#eff6ff" },
@@ -18,12 +21,21 @@ function tex(s: string) {
 }
 // A question line may carry figures as ![caption](https://…); they render under the text.
 const IMG = /!\[([^\]]*)\]\((https?:\/\/[^)\s]+)\)/g;
+// …and interactive figures as [[interactive:name]], from this registry.
+const INTERACTIVE: Record<string, () => React.ReactNode> = {
+  "ball-ramp": () => <BallRamp />,
+  "open-box": () => <OpenBoxGraph />,
+  "road-trip": () => <RoadTrip />,
+};
+const LIVE = /\[\[interactive:([\w-]+)\]\]/g;
 function withFigures(text: string): React.ReactNode {
   const figs = [...text.matchAll(IMG)];
-  if (!figs.length) return inline(text);
+  const lives = [...text.matchAll(LIVE)].filter((m) => INTERACTIVE[m[1]]);
+  if (!figs.length && !lives.length) return inline(text);
   return (
     <>
-      {inline(text.replace(IMG, "").trim())}
+      {inline(text.replace(IMG, "").replace(LIVE, "").trim())}
+      {lives.map((m, i) => <div key={`live${i}`} style={{ margin: "10px 0 4px" }}>{INTERACTIVE[m[1]]()}</div>)}
       {figs.map((f, i) => (
         <figure key={i} style={{ margin: "10px 0 4px" }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
