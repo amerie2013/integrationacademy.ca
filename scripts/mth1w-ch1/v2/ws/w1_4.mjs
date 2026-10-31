@@ -62,10 +62,10 @@ ${barStack([{ n: 1, d: 4, label: "$\\frac14$" }, { n: 2, d: 3, label: "$\\frac23
       steps: [String.raw`LCD $24$: $-\frac{12}{24},\ -\frac{9}{24},\ -\frac{10}{24}$.`, String.raw`On the number line, $-12$ is farthest left, then $-10$, then $-9$.`], ans: String.raw`$-\frac12<-\frac{5}{12}<-\frac38$` },
     { title: "Adding with the LCD", q: String.raw`Evaluate $\frac14+\frac23$.`, steps: [String.raw`LCD $12$: $\frac{3}{12}+\frac{8}{12}$.`, String.raw`$=\frac{11}{12}$ (already in lowest terms).`], ans: String.raw`$\frac{11}{12}$` },
     { title: "A subtraction with a negative result", q: String.raw`Evaluate $\frac{7}{10}-\frac56$.`, steps: [String.raw`LCD $30$: $\frac{21}{30}-\frac{25}{30}$.`, String.raw`$=-\frac{4}{30}=-\frac{2}{15}$.`], ans: String.raw`$-\frac{2}{15}$` },
-    { title: "Adding mixed numbers", q: String.raw`Evaluate $3\frac25+1\frac34$.`, steps: [String.raw`Wholes: $3+1=4$. Parts: $\frac25+\frac34=\frac{8}{20}+\frac{15}{20}=\frac{23}{20}=1\frac{3}{20}$.`, String.raw`Total: $4+1\frac{3}{20}=5\frac{3}{20}$.`], ans: String.raw`$5\frac{3}{20}$` },
     { title: "Subtracting with regrouping", q: String.raw`A ribbon is $6\frac18$ m long. A piece $2\frac56$ m long is cut off. How much is left?`,
       fig: tape([{ n: 3, label: "cut off $2\\frac56$ m", color: "red" }, { n: 4, label: "left: ?", color: "green" }], { unit: 1.1, total: "$6\\frac18$ m" }),
       steps: [String.raw`LCD $24$: $6\frac{3}{24}-2\frac{20}{24}$.`, String.raw`$\frac{3}{24}<\frac{20}{24}$, so regroup one whole: $5\frac{27}{24}-2\frac{20}{24}$.`, String.raw`$=3\frac{7}{24}$.`], ans: String.raw`$3\frac{7}{24}$ m` },
+    { title: "Finding a capacity", q: String.raw`A tank is $\frac25$ full. After $25$ L is added, it is $\frac{11}{15}$ full. Find the capacity of the tank.`, steps: [String.raw`Find the increase as a fraction: $\dfrac{11}{15}-\dfrac25=\dfrac{11}{15}-\dfrac{6}{15}=\dfrac{5}{15}=\dfrac13$ of the tank.`, String.raw`So one third of the tank is $25$ L.`, String.raw`The whole tank is $3\times25=75$ L.`], ans: "$75$ L" },
   ],
   problems: PROBLEMS,
 };

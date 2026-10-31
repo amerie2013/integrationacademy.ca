@@ -3,7 +3,7 @@ export const PROBLEMS = [
   { level: 1, q: String.raw`Evaluate (a) $(-9)(4)$ \quad (b) $(-8)(-11)$.`, recap: String.raw`$(-9)(4)$; $(-8)(-11)$.`, ans: "(a) $-36$ (b) $88$" },
   { level: 1, q: String.raw`Evaluate (a) $-63\div(-9)$ \quad (b) $120\div(-8)$.`, recap: String.raw`$-63\div(-9)$; $120\div(-8)$.`, ans: "(a) $7$ (b) $-15$" },
   { level: 1, q: String.raw`Predict the sign, then evaluate $(-2)(-3)(-4)(5)$.`, ans: "negative; $-120$" },
-  { level: 2, q: String.raw`Evaluate $7-2(-6)$.`, ans: "$19$" },
+  { level: 2, q: String.raw`Evaluate $7-2(-6)^2\div(-3)$.`, ans: "$31$" },
   { level: 2, q: String.raw`Evaluate $-36\div(-4)\times(-3)$.`, ans: "$-27$" },
   { level: 2, q: String.raw`Evaluate $(-5)^2-3(-4)+(-10)\div2$.`, ans: "$32$" },
   { level: 2, q: String.raw`Evaluate $4a-b^2$ when $a=-2$ and $b=-3$.`, ans: "$-17$" },
@@ -35,11 +35,11 @@ export const PROBLEMS = [
 (c) Is a score of $149$ possible? Explain.`,
     recap: "Contest +5 / −2 / 0: Jo's score; Max's correct answers; is 149 possible?",
     ans: String.raw`(a) $74$ (b) $5c-2(30-c)=66$, $c=18$ (c) no: $30$ correct gives $150$; $29$ correct gives at most $145$.` },
-  { level: 3, space: 5,
-    q: String.raw`At noon it is $5\,^\circ$C. The temperature falls $4$ degrees each hour until 6 p.m., then rises $1$ degree each hour.
-(a) What is the temperature at 6 p.m.?
-(b) What is it at 11 p.m.?
-(c) Find the mean of the hourly readings from noon to 6 p.m.\ (seven readings).`,
-    recap: String.raw`Noon $5\,^\circ$C, $-4$/h to 6 p.m., then $+1$/h.`,
-    ans: String.raw`(a) $5+6(-4)=-19\,^\circ$C (b) $-14\,^\circ$C (c) $(5+1-3-7-11-15-19)\div7=-7\,^\circ$C.` },
+  { level: 3, space: 5.5,
+    q: String.raw`Let $x=-3$ and $y=2$.
+(a) Evaluate $x^2-2xy+y^2$.
+(b) Evaluate $(x-y)^2$. What do you notice?
+(c) Evaluate $x^3y^2\div(x+y)$.
+(d) Evaluate $\left[(-1)^{x^2}+(xy)^2\right]\div(-5)$.`,
+    ans: String.raw`(a) $9+12+4=25$ (b) $(-5)^2=25$, the same value (c) $-108\div(-1)=108$ (d) $(-1)^9=-1$ and $36$, so $35\div(-5)=-7$.` },
 ];

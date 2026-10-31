@@ -189,6 +189,38 @@ export function factorTiles(groups, { cancel = 0, caption } = {}) {
   return center(s + String.raw`\end{tikzpicture}`, caption);
 }
 
+/** A quotient written out as factors: columns [{sym, top, bottom}], one per variable. Pairs that cancel are crossed out. */
+export function quotientTiles(columns, caption) {
+  const u = 0.62, styles = ["blue!70!black,fill=blue!10", "orange!85!black,fill=orange!12", "green!50!black,fill=green!10"];
+  let s = String.raw`\begin{tikzpicture}`, x = 0;
+  const row = (sym, n, crossed, x0, y, style) => {
+    let out = "";
+    for (let i = 0; i < n; i++) {
+      const tx = +(x0 + i * u).toFixed(3);
+      out += String.raw`\draw[thick,${style},rounded corners=2pt] (${tx + 0.04},${y}) rectangle (${+(tx + u - 0.04).toFixed(3)},${y + 0.52});\node at (${+(tx + u / 2).toFixed(3)},${y + 0.26}) {$${sym}$};`;
+      if (i < crossed) out += String.raw`\draw[red!75!black,thick] (${tx + 0.08},${y + 0.04}) -- (${+(tx + u - 0.08).toFixed(3)},${y + 0.48});`;
+    }
+    return out;
+  };
+  columns.forEach((c, k) => {
+    const crossed = Math.min(c.top, c.bottom);
+    s += row(c.sym, c.top, crossed, x, 0.14, styles[k % 3]) + row(c.sym, c.bottom, crossed, x, -0.66, styles[k % 3]);
+    x += Math.max(c.top, c.bottom) * u + 0.3;
+  });
+  s += String.raw`\draw[very thick] (-0.1,0) -- (${+(x - 0.2).toFixed(3)},0);`;
+  return center(s + String.raw`\end{tikzpicture}`, caption);
+}
+
+/** A cube in perspective with its edge labelled. */
+export function cube(edge, caption) {
+  return center(String.raw`\begin{tikzpicture}[line join=round]
+\draw[thick,blue!70!black,fill=blue!10] (0,0) rectangle (1.6,1.6);
+\draw[thick,blue!70!black,fill=blue!4] (0,1.6) -- (0.6,2.2) -- (2.2,2.2) -- (1.6,1.6) -- cycle;
+\draw[thick,blue!70!black,fill=blue!20] (1.6,0) -- (2.2,0.6) -- (2.2,2.2) -- (1.6,1.6) -- cycle;
+\node[below,font=\small] at (0.8,0) {${edge}};
+\end{tikzpicture}`, caption);
+}
+
 /** Simple scale-drawing/map figure: two points joined with a measured segment. */
 export function mapScale({ cm, scaleText, from = "A", to = "B", caption }) {
   return center(String.raw`\begin{tikzpicture}\draw[black!30,fill=green!4] (-0.5,-0.8) rectangle (${cm + 0.5},1);\fill (0,0) circle (2pt) node[above] {${from}};\fill (${cm},0) circle (2pt) node[above] {${to}};

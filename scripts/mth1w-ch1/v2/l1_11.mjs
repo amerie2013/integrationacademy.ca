@@ -1,5 +1,5 @@
 // MTH1W 1.11 — Chapter 1 Review (self-study format, new lesson placed after 1.10)
-import { intro, section, keyIdea, widget, examples, practice, wrapUp, table, q, num, frac, sci, choice } from "./lib.mjs";
+import { intro, section, keyIdea, widget, examples, practice, wrapUp, table, q, num, frac, sci, choice, hard } from "./lib.mjs";
 
 export const TITLE = "1.11 Chapter 1 Review";
 // New lesson: created on --apply with this id at this position (later lessons shift down by one).
@@ -122,6 +122,42 @@ export const blocks = () => [
       ["1.10", "I can find a number between any two rationals and describe a limit."],
     ].map(([c, t]) => `<li style="margin:6px 0;"><label><input type="checkbox"> <strong>${c}</strong> — ${t}</label></li>`).join("")}
   </ul>`),
+
+  ...hard([
+    ["Powers, fractions and absolute value", String.raw`Evaluate \(\left(-\tfrac23\right)^{-2}\times\left(2^{-3}\div4^{-2}\right)-\left|-1\tfrac12\right|\).`,
+      [String.raw`Flip and square: \(\left(-\tfrac23\right)^{-2}=\left(-\tfrac32\right)^2=\tfrac94\).`,
+        String.raw`The bracket: \(2^{-3}\div4^{-2}=\tfrac18\div\tfrac{1}{16}=2\).`,
+        String.raw`Multiply: \(\tfrac94\times2=\tfrac92\).`,
+        String.raw`Subtract the absolute value: \(\tfrac92-\tfrac32=3\).`],
+      String.raw`the value is \(3\)`],
+    ["Percent growth and scientific notation", String.raw`A company stores \(2.4\times10^{6}\) GB of data. The amount grows \(25\%\) a year for \(2\) years. It is then shared equally among \(1.5\times10^{4}\) users. How many GB is that per user?`,
+      [String.raw`Growth factor: \(1.25\times1.25=1.5625\).`,
+        String.raw`New amount: \(2.4\times1.5625=3.75\), so \(3.75\times10^{6}\) GB.`,
+        String.raw`Divide: \(\tfrac{3.75}{1.5}=2.5\) and \(10^{6-4}=10^{2}\).`,
+        String.raw`\(2.5\times10^{2}=250\) GB.`],
+      String.raw`each user gets \(250\) GB`],
+    ["A changing ratio", String.raw`A \(40\) kg alloy is copper and zinc in the ratio \(7:3\). How much zinc must be added to make the ratio \(7:5\)?`,
+      [String.raw`There are \(10\) parts, each \(4\) kg, so there are \(28\) kg of copper and \(12\) kg of zinc.`,
+        String.raw`The copper does not change, and \(28\) kg is still \(7\) parts of \(4\) kg.`,
+        String.raw`The new zinc is \(5\times4=20\) kg, so add \(20-12=8\) kg.`],
+      String.raw`add \(8\) kg of zinc`],
+  ], [
+    q("negative exponents", String.raw`Evaluate \(\left(3^{-1}+6^{-1}\right)^{-2}\).`, num(4),
+      "Add inside the bracket first.",
+      [String.raw`\(\tfrac13+\tfrac16=\tfrac12\).`, String.raw`\(\left(\tfrac12\right)^{-2}=2^2=4\).`], String.raw`\(4\)`),
+    q("fractions", String.raw`Evaluate \(\tfrac34\div\left(\tfrac25-1\right)+\left|-\tfrac12\right|\).`, frac(-3, 4),
+      "Do the bracket, then divide, then add.",
+      [String.raw`\(\tfrac25-1=-\tfrac35\).`, String.raw`\(\tfrac34\times\left(-\tfrac53\right)=-\tfrac54\).`, String.raw`\(-\tfrac54+\tfrac12=-\tfrac34\).`], String.raw`\(-\tfrac34\)`, { placeholder: "a fraction like -2/3" }),
+    q("percent", String.raw`A price rises \(25\%\) and then falls \(10\%\). What is the overall percent increase? Give the number of percent.`, num(12.5, 0.001),
+      "Multiply the factors.",
+      [String.raw`\(1.25\times0.9=1.125\).`, String.raw`That is a \(12.5\%\) increase.`], String.raw`\(12.5\)`),
+    q("scientific notation", String.raw`Evaluate \(\dfrac{(6\times10^{-3})^{2}}{9\times10^{-4}}\) in scientific notation.`, sci(4, -2),
+      "Square both parts of the top, then divide.",
+      [String.raw`Top: \(36\times10^{-6}\).`, String.raw`\(\tfrac{36}{9}=4\) and \(10^{-6-(-4)}=10^{-2}\).`], String.raw`\(4\times10^{-2}\)`, { placeholder: "e.g. 4.5 x 10^6" }),
+    q("integers", String.raw`Evaluate \(\left[(-2)^5+|-7-5|\right]\div(-4)\).`, num(5),
+      "The power is negative because the exponent is odd.",
+      [String.raw`\((-2)^5=-32\) and \(|-12|=12\).`, String.raw`\(-32+12=-20\).`, String.raw`\(-20\div(-4)=5\).`], String.raw`\(5\)`),
+  ]),
 
   wrapUp({
     qas: [

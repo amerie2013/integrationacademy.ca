@@ -3,11 +3,11 @@ export const PROBLEMS = [
   { level: 1, q: String.raw`Simplify $42:56$.`, ans: "$3:4$" },
   { level: 1, q: String.raw`A team won $10$ games and lost $6$. Write wins : losses and wins : games played in simplest form.`, recap: "Wins 10, losses 6: two ratios.", ans: "$5:3$ and $5:8$" },
   { level: 1, q: String.raw`Solve $x:18=5:6$.`, ans: "$x=15$" },
-  { level: 2, q: String.raw`Solve $\dfrac{9}{x}=\dfrac{12}{20}$.`, ans: "$x=15$" },
+  { level: 2, q: String.raw`Solve $(x+2):12=5:6$.`, ans: "$x=8$" },
   { level: 2, q: String.raw`Lemonade is $2$ parts concentrate to $7$ parts water. How much concentrate goes with $3.5$ L of water?`, recap: "Concentrate for 3.5 L water at 2:7.", ans: "$1$ L" },
   { level: 2, q: String.raw`Share $350$ dollars in the ratio $3:4$.`, ans: "$150$ and $200$ dollars" },
   { level: 2, q: String.raw`On a map with scale $1:50\,000$, a trail is $7.2$ cm long. How long is the real trail in km?`, recap: "Map 1:50 000, 7.2 cm.", ans: "$3.6$ km" },
-  { level: 2, q: String.raw`Flour and sugar are mixed $5:2$. Complete: flour $10,\ \square,\ 25$; sugar $\square,\ 6,\ \square$.`, recap: "Ratio table 5:2.", ans: "sugar $4$; flour $15$; sugar $10$" },
+  { level: 2, q: String.raw`Flour, sugar and butter are mixed $5:2:3$ by mass. How many grams of each are in $1.5$ kg of the mixture?`, ans: "$750$ g, $300$ g, $450$ g" },
   { level: 3, space: 5,
     q: String.raw`A bicycle's front gear has $48$ teeth and its back gear has $16$ teeth.
 (a) Write the gear ratio front : back in simplest form.
@@ -22,20 +22,19 @@ export const PROBLEMS = [
 (c) Check your answer.`,
     recap: "Boys : girls 3 : 4 becomes 1 : 2 after changes.",
     ans: String.raw`(a) $\frac{3k-3}{4k+2}=\frac12$ (b) $k=4$: $12$ boys, $16$ girls, $28$ students (c) $9:18=1:2$ \checkmark` },
-  { level: 3, space: 5,
-    q: String.raw`Green paint is mixed blue : yellow $=2:3$. You have $5$ L of blue and $6$ L of yellow.
-(a) What is the most green paint you can make? Which colour runs out first?
-(b) How much of the other colour is left over?
-(c) How much more yellow would you need to use all of the blue?`,
-    recap: "Green paint 2 : 3 with 5 L blue, 6 L yellow.",
-    ans: String.raw`(a) $10$ L (yellow runs out; needs $4$ L blue) (b) $1$ L blue (c) $7.5-6=1.5$ L.` },
-  { level: 3, space: 5,
+  { level: 3, space: 5.5,
+    q: String.raw`A $30$ L tank holds concentrate and water in the ratio $2:3$.
+(a) How many litres of each does it hold?
+(b) You drain $10$ L of the mixture and refill the tank with water. What is the new ratio, in simplest form?
+(c) How many more litres of concentrate would you need to add to that mixture to make the ratio $1:2$?`,
+    ans: String.raw`(a) $12$ L and $18$ L (b) $10$ L removed holds $4$ L and $6$ L; now $8:22=4:11$ (c) $22$ L of water needs $11$ L of concentrate, so add $3$ L.` },
+  { level: 3, space: 5.5,
     q: String.raw`A model of a building is built at a scale of $1:150$.
 (a) The model is $42$ cm tall. How tall is the real building, in metres?
 (b) The real building is $27$ m wide. How wide is the model?
-(c) A model of a second building, at a scale of $1:200$, is also $42$ cm tall. Which real building is taller, and by how much?`,
-    recap: "Models at 1:150 and 1:200, both 42 cm tall.",
-    ans: String.raw`(a) $63$ m (b) $18$ cm (c) the second ($84$ m), by $21$ m.` },
+(c) The model's floor has an area of $360$ cm$^2$. Find the real floor area, in m$^2$.
+(d) Explain why the area is not simply multiplied by $150$.`,
+    ans: String.raw`(a) $63$ m (b) $18$ cm (c) $360\times150^2=8\,100\,000$ cm$^2=810$ m$^2$ (d) both the length and the width are multiplied by $150$, so the area is multiplied by $150^2$.` },
   { level: 3, space: 5,
     q: String.raw`Ana, Ben and Cal share $540$ dollars. Ana gets twice as much as Ben, and Cal gets $60$ dollars more than Ben.
 (a) How much does each person get?

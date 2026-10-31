@@ -1,5 +1,6 @@
 // MTH1W 1.2 — Adding & Subtracting Integers (self-study format)
-import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, numberLine, chips, q, num, choice } from "./lib.mjs";
+import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, numberLine, chips, q, num, choice, hard, fig } from "./lib.mjs";
+import { barChart } from "./bank/svg.mjs";
 
 export const TITLE = "1.2 Adding & Subtracting Integers";
 
@@ -99,6 +100,51 @@ export const blocks = () => [
     q("bank balance", String.raw`A bank account is overdrawn: its balance is \(-45\) dollars. A deposit of \(120\) dollars is made, then \(90\) dollars is withdrawn. What is the new balance (in dollars)?`, num(-15),
       "A deposit adds; a withdrawal subtracts. Work one step at a time.",
       [String.raw`After the deposit: \(-45+120=75\).`, String.raw`After the withdrawal: \(75-90=-15\).`], String.raw`\(-15\) dollars (overdrawn by \(15\) dollars)`),
+  ]),
+
+  ...hard([
+    ["Absolute values inside a long expression", String.raw`Evaluate \(-|-8-(-3)|-\left(-|4-11|+5\right)\).`,
+      [String.raw`Work inside the first bars: \(-8-(-3)=-8+3=-5\), and \(|-5|=5\). With the minus in front, this term is \(-5\).`,
+        String.raw`Work inside the second bars: \(4-11=-7\), and \(|-7|=7\).`,
+        String.raw`Evaluate the bracket: \(-7+5=-2\).`,
+        String.raw`Put it together: \(-5-(-2)=-5+2=-3\).`],
+      String.raw`the value is \(-3\)`],
+    ["Adding a long run of integers", String.raw`Find the sum of all the integers from \(-40\) to \(37\).`,
+      [String.raw`Every integer from \(-37\) to \(37\) has its opposite in the list, and each pair adds to \(0\).`,
+        String.raw`Only \(-40\), \(-39\) and \(-38\) have no partner.`,
+        String.raw`Add them: \(-40+(-39)+(-38)=-117\).`],
+      String.raw`the sum is \(-117\)`],
+    ["Two unknown integers", String.raw`Two integers have a sum of \(-8\). The larger minus the smaller is \(22\). Find the integers.`,
+      [String.raw`Larger \(+\) smaller \(=-8\) and larger \(-\) smaller \(=22\).`,
+        String.raw`Add the two statements. The smaller number cancels, so \(2\times\text{larger}=14\).`,
+        String.raw`The larger integer is \(7\).`,
+        String.raw`The smaller integer is \(-8-7=-15\).`,
+        String.raw`Check: \(7+(-15)=-8\) and \(7-(-15)=22\).`],
+      String.raw`the integers are \(7\) and \(-15\)`],
+    ["The lowest point of a bank balance", String.raw`A balance starts at \(-25\) dollars and changes as the chart shows. Find the lowest balance and the difference between the lowest and the final balance.`,
+      [String.raw`Keep a running balance: \(-25+60=35\).`,
+        String.raw`\(35-110=-75\).`,
+        String.raw`\(-75+45=-30\), then \(-30-30=-60\), then \(-60+80=20\).`,
+        String.raw`The lowest balance is \(-75\) dollars, and the final balance is \(20\) dollars.`,
+        String.raw`The difference is \(20-(-75)=95\).`],
+      String.raw`the lowest balance is \(-75\) dollars, \(95\) dollars below the final balance`,
+      fig(barChart([["1", 60], ["2", -110], ["3", 45], ["4", -30], ["5", 80]], { ylabel: "change (dollars)", min: -120, max: 100, step: 20 }), "The change in the balance for each of five transactions.")],
+  ], [
+    q("absolute values", String.raw`Evaluate \(-|6-15|-\left(-|-4|\right)+(-7)\).`, num(-12),
+      "Do what is inside the bars first, then handle the signs outside.",
+      [String.raw`\(|6-15|=|-9|=9\), so the first term is \(-9\).`, String.raw`\(-|-4|=-4\), and subtracting it adds \(4\).`, String.raw`\(-9+4-7=-12\).`], String.raw`\(-12\)`),
+    q("a long sum", String.raw`Find the sum of all the integers from \(-25\) to \(21\).`, num(-94),
+      "Cancel opposite pairs. Which numbers have no partner?",
+      [String.raw`\(-21\) to \(21\) cancels to \(0\).`, String.raw`The numbers left are \(-25,-24,-23,-22\).`, String.raw`Their sum is \(-94\).`], String.raw`\(-94\)`),
+    q("two integers", String.raw`Two integers have a sum of \(-14\) and a difference (larger minus smaller) of \(26\). What is the smaller integer?`, num(-20),
+      "Add the two statements to find the larger integer first.",
+      [String.raw`\(2\times\text{larger}=-14+26=12\), so the larger integer is \(6\).`, String.raw`The smaller integer is \(-14-6=-20\).`], String.raw`\(-20\)`),
+    q("substitution", String.raw`If \(a=-9\) and \(b=14\), evaluate \(|a|-|b|-|a-b|\).`, num(-28),
+      "Find each absolute value separately.",
+      [String.raw`\(|a|=9\) and \(|b|=14\).`, String.raw`\(a-b=-9-14=-23\), so \(|a-b|=23\).`, String.raw`\(9-14-23=-28\).`], String.raw`\(-28\)`),
+    q("temperature", String.raw`At 6 a.m. it is \(-14\,^\circ\)C. It rises \(5\) degrees an hour for \(3\) hours, then falls \(2\) degrees an hour for \(4\) hours. How many degrees must it then rise to reach \(3\,^\circ\)C?`, num(10),
+      "Find the temperature after the rise and fall, then subtract it from 3.",
+      [String.raw`After the rise: \(-14+15=1\).`, String.raw`After the fall: \(1-8=-7\).`, String.raw`\(3-(-7)=10\).`], String.raw`\(10\)`),
   ]),
 
   wrapUp({

@@ -1,5 +1,6 @@
 // MTH1W 1.8 — Working with Ratios and Proportions (self-study format)
-import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, tape, q, num, ratio } from "./lib.mjs";
+import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, tape, q, num, ratio, hard, fig } from "./lib.mjs";
+import { rectangle } from "./bank/svg.mjs";
 
 export const TITLE = "1.8 Working with Ratios and Proportions";
 
@@ -85,6 +86,50 @@ export const blocks = () => [
       "Total parts, then the value of one part.", [String.raw`\(3+5=8\) parts; one part \(=240\div8=30\).`, String.raw`Larger share \(=5\times30=150\).`], String.raw`\(150\) dollars`),
     q("recipe", String.raw`Rice is cooked with \(2\) cups of rice to \(3\) cups of water. How many cups of water are needed for \(5\) cups of rice?`, num(7.5),
       String.raw`Set up \(\tfrac{2}{3}=\tfrac{5}{w}\).`, [String.raw`\(2w=15\).`, String.raw`\(w=7.5\).`], String.raw`\(7.5\) cups`),
+  ]),
+
+  ...hard([
+    ["When a ratio changes", String.raw`A club has juniors and seniors in the ratio \(5:3\). After \(8\) juniors leave and \(4\) seniors join, the numbers are equal. How many members were there at first?`,
+      [String.raw`Let there be \(5k\) juniors and \(3k\) seniors.`,
+        String.raw`After the changes the numbers are equal: \(5k-8=3k+4\).`,
+        String.raw`Subtract \(3k\) from both sides and add \(8\): \(2k=12\), so \(k=6\).`,
+        String.raw`At first there were \(30\) juniors and \(18\) seniors, which is \(48\) members. Check: \(22=22\).`],
+      String.raw`there were \(48\) members at first`],
+    ["Linking two ratios", String.raw`\(A:B=3:4\) and \(B:C=6:5\). If \(A+B+C=310\), find each number.`,
+      [String.raw`\(B\) has different values in the two ratios. The least common multiple of \(4\) and \(6\) is \(12\).`,
+        String.raw`Scale: \(A:B=9:12\) and \(B:C=12:10\), so \(A:B:C=9:12:10\).`,
+        String.raw`There are \(9+12+10=31\) parts, and one part is \(310\div31=10\).`,
+        String.raw`\(A=90\), \(B=120\), \(C=100\).`],
+      String.raw`\(A=90\), \(B=120\) and \(C=100\)`],
+    ["Removing a mixture", String.raw`A \(12\) L jug holds juice and water in the ratio \(3:1\). You pour out \(4\) L of the mixture and refill the jug with water. What is the new ratio?`,
+      [String.raw`At first there are \(9\) L of juice and \(3\) L of water.`,
+        String.raw`The \(4\) L poured out has the same \(3:1\) ratio, so it holds \(3\) L of juice and \(1\) L of water.`,
+        String.raw`What is left: \(6\) L of juice and \(2\) L of water.`,
+        String.raw`Add \(4\) L of water: \(6\) L of juice and \(6\) L of water.`],
+      String.raw`the new ratio is \(1:1\)`],
+    ["Scale and area", String.raw`A floor plan has a scale of \(1:50\). A room is \(24\) cm by \(18\) cm on the plan. Find its real area, and compare the area on the plan with the real area.`,
+      [String.raw`Real length: \(24\times50=1200\) cm \(=12\) m. Real width: \(18\times50=900\) cm \(=9\) m.`,
+        String.raw`Real area: \(12\times9=108\) m².`,
+        String.raw`Area on the plan: \(24\times18=432\) cm². Real area in the same unit: \(1200\times900=1\,080\,000\) cm².`,
+        String.raw`\(1\,080\,000\div432=2500=50^2\). Lengths scale by \(50\), but areas scale by \(50^2\).`],
+      String.raw`the room is \(108\) m², and the area ratio is \(1:2500\)`,
+      fig(rectangle("24 cm", "18 cm"), "The room on the plan, at a scale of 1 : 50.")],
+  ], [
+    q("changing ratio", String.raw`Boys and girls in a group are in the ratio \(5:7\). After \(6\) boys join and \(2\) girls leave, the numbers are equal. How many people were in the group at first?`, num(48),
+      "Write the group as 5k and 7k, then set the new numbers equal.",
+      [String.raw`\(5k+6=7k-2\), so \(2k=8\) and \(k=4\).`, String.raw`At first: \(20\) boys and \(28\) girls, which is \(48\).`], String.raw`\(48\)`),
+    q("linking ratios", String.raw`\(A:B=2:5\) and \(B:C=3:4\). Write \(A:C\) in simplest form.`, ratio(3, 10),
+      "Make B the same number in both ratios.",
+      [String.raw`Scale: \(A:B=6:15\) and \(B:C=15:20\).`, String.raw`\(A:C=6:20=3:10\).`], String.raw`\(3:10\)`),
+    q("mixture", String.raw`A \(20\) L can of paint is red and white in the ratio \(3:2\). How many litres of red must be added to make the ratio \(2:1\)?`, num(4),
+      "The amount of white does not change.",
+      [String.raw`At first: \(12\) L of red and \(8\) L of white.`, String.raw`For \(2:1\) with \(8\) L of white, red must be \(16\) L.`, String.raw`Add \(16-12=4\) L.`], String.raw`\(4\)`),
+    q("area scale", String.raw`A plan has a scale of \(1:200\). A park covers \(30\) cm² on the plan. What is its real area, in m²?`, num(120),
+      "Areas scale by the square of the length scale. Remember that 1 m² is 10 000 cm².",
+      [String.raw`Area scale: \(200^2=40\,000\).`, String.raw`\(30\times40\,000=1\,200\,000\) cm².`, String.raw`\(1\,200\,000\div10\,000=120\) m².`], String.raw`\(120\)`),
+    q("fractional ratio", String.raw`Share \(390\) dollars in the ratio \(\tfrac12:\tfrac13:\tfrac14\). How many dollars is the smallest share?`, num(90),
+      "Multiply all the terms by 12 to get whole numbers.",
+      [String.raw`Multiply by \(12\): \(6:4:3\), which is \(13\) parts.`, String.raw`One part is \(390\div13=30\).`, String.raw`The smallest share is \(3\times30=90\).`], String.raw`\(90\)`),
   ]),
 
   wrapUp({

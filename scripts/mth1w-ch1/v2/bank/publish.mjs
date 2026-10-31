@@ -62,7 +62,7 @@ for (const n of names) {
       }
     });
     if (!APPLY) continue;
-    const { data: rows, error } = await db.from("bank_questions").select("id").eq("course_id", CID).eq("topic", TOPIC).eq("difficulty", diff).order("id");
+    const { data: rows, error } = await db.from("bank_questions").select("id").eq("course_id", CID).eq("topic", TOPIC).eq("difficulty", diff).neq("kind", "long_answer").order("id");
     if (error) throw error;
     if (rows.length !== S.length) { fail(`DB has ${rows.length} ${diff} rows for ${TOPIC}; expected ${S.length} — skipped`); continue; }
     for (let i = 0; i < S.length; i++) {

@@ -66,7 +66,7 @@ ${mapScale({ cm: 7, scaleText: "$1:200\\,000$", from: "Town A", to: "Town B", ca
       steps: [String.raw`$7$ parts; one part $=168\div7=24$.`, String.raw`$2\times24=48$ and $5\times24=120$. Check: $48+120=168$.`], ans: "$48$ dollars and $120$ dollars" },
     { title: "Map distance", q: String.raw`On a map with scale $1:250\,000$, two lakes are $6.4$ cm apart. How far apart are they in km?`, fig: mapScale({ cm: 6.4, scaleText: "$1:250\\,000$", from: "Lake 1", to: "Lake 2" }),
       steps: [String.raw`$6.4\times250\,000=1\,600\,000$ cm.`, String.raw`$\div100\,000$: $16$ km.`], ans: "$16$ km" },
-    { title: "Using the total", q: String.raw`Two numbers are in the ratio $4:9$ and their sum is $104$. Find them.`, steps: [String.raw`$4+9=13$ parts; one part $=104\div13=8$.`, String.raw`$4\times8=32$ and $9\times8=72$.`], ans: "$32$ and $72$" },
+    { title: "When a ratio changes", q: String.raw`Two groups are in the ratio $7:4$. After $9$ people join the second group, the two groups are equal. How many people are in each group at first?`, steps: [String.raw`Write the groups as $7k$ and $4k$.`, String.raw`After the change they are equal: $7k=4k+9$.`, String.raw`Subtract $4k$ from both sides: $3k=9$, so $k=3$.`, String.raw`At first the groups have $21$ and $12$ people. Check: $12+9=21$.`], ans: "$21$ and $12$" },
   ],
   problems: PROBLEMS,
 };

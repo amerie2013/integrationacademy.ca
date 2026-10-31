@@ -152,6 +152,48 @@ export function percentBar({ pct, leftLabel = "", rightLabel = "" }) {
   return doc(W, 100, s);
 }
 
+/** A quotient written out as factors: columns [{sym, top, bottom}], one per variable. Pairs that cancel are crossed out. */
+export function quotientTiles(columns) {
+  const u = 34, gap = 16;
+  const row = (sym, n, crossed, x, y, col, bg) => {
+    let s = "";
+    for (let i = 0; i < n; i++) {
+      const tx = x + i * u;
+      s += `<rect x="${tx + 2}" y="${y}" width="${u - 4}" height="30" rx="5" fill="${i < crossed ? "#f1f5f9" : bg}" stroke="${i < crossed ? "#94a3b8" : col}" stroke-width="1.6"/><text x="${tx + u / 2}" y="${y + 21}" font-size="18" font-style="italic" font-family="Georgia, serif" text-anchor="middle" fill="${i < crossed ? "#94a3b8" : col}">${sym}</text>`;
+      if (i < crossed) s += `<line x1="${tx + 5}" y1="${y + 27}" x2="${tx + u - 5}" y2="${y + 3}" stroke="${C.red}" stroke-width="2.2"/>`;
+    }
+    return s;
+  };
+  let s = "", x = 14;
+  const palette = [[C.blue, soft.blue], [C.amber, soft.amber], [C.green, soft.green]];
+  columns.forEach((c, k) => {
+    const n = Math.max(c.top, c.bottom), crossed = Math.min(c.top, c.bottom), [col, bg] = palette[k % 3];
+    s += row(c.sym, c.top, crossed, x, 12, col, bg) + row(c.sym, c.bottom, crossed, x, 62, col, bg);
+    x += n * u + gap;
+  });
+  s += `<line x1="8" y1="53" x2="${x - gap + 6}" y2="53" stroke="${C.ink}" stroke-width="2.4"/>`;
+  return doc(x - gap + 14, 104, s);
+}
+
+/** A cube drawn in perspective with its edge labelled. */
+export function cube(edge) {
+  const a = 110, d = 42, X = 40, Y = 60;
+  const face = (pts, fill) => `<polygon points="${pts}" fill="${fill}" stroke="${C.blue}" stroke-width="2"/>`;
+  const s = face(`${X},${Y} ${X + a},${Y} ${X + a},${Y + a} ${X},${Y + a}`, soft.blue)
+    + face(`${X},${Y} ${X + d},${Y - d} ${X + a + d},${Y - d} ${X + a},${Y}`, "#eff6ff")
+    + face(`${X + a},${Y} ${X + a + d},${Y - d} ${X + a + d},${Y + a - d} ${X + a},${Y + a}`, "#bfdbfe")
+    + `<text x="${X + a / 2}" y="${Y + a + 24}" font-size="15" font-weight="700" text-anchor="middle" fill="${C.ink}">${esc(edge)}</text>`;
+  return doc(X + a + d + 30, Y + a + 36, s);
+}
+
+/** A rectangle with its two side lengths labelled. */
+export function rectangle(w, h) {
+  const s = `<rect x="80" y="20" width="240" height="120" fill="${soft.green}" stroke="${C.green}" stroke-width="2.2"/>`
+    + `<text x="200" y="164" font-size="17" font-weight="700" font-style="italic" text-anchor="middle" fill="${C.ink}">${esc(w)}</text>`
+    + `<text x="70" y="85" font-size="17" font-weight="700" font-style="italic" text-anchor="end" fill="${C.ink}">${esc(h)}</text>`;
+  return doc(350, 176, s);
+}
+
 /** Factor tiles: groups [{n, sym}] drawn as boxed groups of letter tiles. */
 export function tiles(groups) {
   let s = "", x = 16;

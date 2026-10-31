@@ -1,5 +1,6 @@
 // MTH1W 1.3 — Multiplying & Dividing Integers (self-study format)
-import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, numberLine, q, num } from "./lib.mjs";
+import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, numberLine, q, num, hard, fig } from "./lib.mjs";
+import { graph } from "./bank/svg.mjs";
 
 export const TITLE = "1.3 Multiplying & Dividing Integers";
 
@@ -94,6 +95,55 @@ export const blocks = () => [
     q("substitution", String.raw`Evaluate \(3m-m^2\) when \(m=-4\).`, num(-28),
       String.raw`Bracket the negative: \(3(-4)-(-4)^2\).`,
       [String.raw`\(3(-4)=-12\).`, String.raw`\((-4)^2=16\).`, String.raw`\(-12-16=-28\).`], String.raw`\(-28\)`),
+  ]),
+
+  ...hard([
+    ["Brackets, powers and signs together", String.raw`Evaluate \(\left[(-4)^3-(-2)^4\right]\div\left[(-5)(-2)-(-6)\right]\).`,
+      [String.raw`Evaluate the powers in the first bracket: \((-4)^3=-64\) and \((-2)^4=16\).`,
+        String.raw`First bracket: \(-64-16=-80\).`,
+        String.raw`Second bracket: \((-5)(-2)=10\), and \(10-(-6)=16\).`,
+        String.raw`Divide: \(-80\div16=-5\).`],
+      String.raw`the value is \(-5\)`],
+    ["Three variables, all with signs", String.raw`Evaluate \(x^2y-3yz^2-(x-z)^3\div y\) when \(x=-3\), \(y=2\) and \(z=-1\).`,
+      [String.raw`\(x^2y=(-3)^2(2)=18\).`,
+        String.raw`\(3yz^2=3(2)(-1)^2=6\).`,
+        String.raw`\(x-z=-3-(-1)=-2\), so \((x-z)^3=-8\), and \(-8\div2=-4\).`,
+        String.raw`Combine, watching the subtractions: \(18-6-(-4)=16\).`],
+      String.raw`the value is \(16\)`],
+    ["Deciding the sign without calculating", String.raw`Is \(-2^6\times(-3)^5\div(-1)^9\) positive or negative? Explain.`,
+      [String.raw`\(-2^6\) means \(-(2^6)\), so it is negative.`,
+        String.raw`\((-3)^5\) has an odd exponent, so it is negative.`,
+        String.raw`\((-1)^9\) has an odd exponent, so it is negative.`,
+        String.raw`Three negative factors make a negative result.`],
+      "the result is negative"],
+    ["Working backward from a score", String.raw`A contest gives \(+4\) for a correct answer and \(-2\) for a wrong one. Dana answered all \(25\) questions and scored \(46\). How many did Dana get right?`,
+      [String.raw`A perfect score would be \(25\times4=100\).`,
+        String.raw`Changing one answer from right to wrong changes the score by \(-2-4=-6\).`,
+        String.raw`The score is \(100-46=54\) below perfect, so there are \(54\div6=9\) wrong answers.`,
+        String.raw`Right answers: \(25-9=16\). Check: \(16(4)+9(-2)=64-18=46\).`],
+      String.raw`Dana got \(16\) right`],
+    ["Reading a rate from a graph", String.raw`The graph shows a temperature falling at a constant rate. When will it reach \(-22\,^\circ\)C?`,
+      [String.raw`Read two points: \((0,8)\) and \((2,2)\). The temperature falls \(6\) degrees in \(2\) hours, a rate of \(-3\) degrees per hour.`,
+        String.raw`The total change needed is \(-22-8=-30\).`,
+        String.raw`Divide: \(-30\div(-3)=10\).`],
+      String.raw`the temperature reaches \(-22\,^\circ\)C after \(10\) hours`,
+      fig(graph({ series: [{ pts: [[0, 8], [2, 2], [4, -4]] }], xmin: 0, xmax: 11, ymin: -24, ymax: 10, xstep: 1, ystep: 4, xlabel: "hours", ylabel: "°C" }), "A temperature that falls at a constant rate.")],
+  ], [
+    q("order of operations", String.raw`Evaluate \(\left[(-3)^4-(-5)^2\right]\div\left[(-2)(7)\right]\).`, num(-4),
+      "Find each bracket separately. Watch which powers are positive.",
+      [String.raw`\((-3)^4=81\) and \((-5)^2=25\), so the first bracket is \(56\).`, String.raw`The second bracket is \(-14\).`, String.raw`\(56\div(-14)=-4\).`], String.raw`\(-4\)`),
+    q("substitution", String.raw`Evaluate \(x^3y-2xy^2\) when \(x=-2\) and \(y=-3\).`, num(60),
+      "Substitute with brackets around every negative number.",
+      [String.raw`\(x^3y=(-8)(-3)=24\).`, String.raw`\(2xy^2=2(-2)(9)=-36\).`, String.raw`\(24-(-36)=60\).`], String.raw`\(60\)`),
+    q("missing value", String.raw`The readings \(-14,\ 7,\ -3,\ -20,\ 5\) and one more have a mean of \(-6\). What is the missing reading?`, num(-11),
+      "Multiply the mean by 6 to get the total of all six readings.",
+      [String.raw`Total of six readings: \(6(-6)=-36\).`, String.raw`Sum of the five known readings: \(-25\).`, String.raw`Missing reading: \(-36-(-25)=-11\).`], String.raw`\(-11\)`),
+    q("contest", String.raw`A contest gives \(+3\) for a correct answer and \(-2\) for a wrong one. Ravi answered all \(20\) questions and scored \(20\). How many did Ravi get right?`, num(12),
+      "Each answer that changes from right to wrong lowers the score by 5.",
+      [String.raw`A perfect score is \(60\), which is \(40\) above Ravi's score.`, String.raw`\(40\div5=8\) wrong answers.`, String.raw`\(20-8=12\) right. Check: \(36-16=20\).`], String.raw`\(12\)`),
+    q("product and sum", String.raw`Two integers have a product of \(-54\) and a sum of \(-3\). What is the smaller integer?`, num(-9),
+      "The product is negative, so the signs differ. The sum is negative, so the negative number has the larger size.",
+      [String.raw`Factor pairs of \(54\) that differ by \(3\): \(6\) and \(9\).`, String.raw`The larger size is negative: \(6+(-9)=-3\).`], String.raw`\(-9\)`),
   ]),
 
   wrapUp({

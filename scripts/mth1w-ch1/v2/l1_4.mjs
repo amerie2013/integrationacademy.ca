@@ -1,5 +1,6 @@
 // MTH1W 1.4 — Fractions: Equivalence, Comparing, Adding & Subtracting (self-study format)
-import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, numberLine, fracBar, q, frac, choice } from "./lib.mjs";
+import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, numberLine, fracBar, q, frac, choice, hard, fig, num } from "./lib.mjs";
+import { bars } from "./bank/svg.mjs";
 
 export const TITLE = "1.4 Fractions: Equivalence, Comparing, Adding & Subtracting";
 
@@ -92,6 +93,48 @@ export const blocks = () => [
     q("mixed numbers", String.raw`Evaluate \(2\tfrac{1}{4}+1\tfrac{5}{6}\). Give a mixed number or an improper fraction.`, frac(49, 12),
       String.raw`Convert to improper fractions, then use the LCD \(12\).`,
       [String.raw`\(\tfrac{9}{4}+\tfrac{11}{6}\).`, String.raw`\(\tfrac{27}{12}+\tfrac{22}{12}=\tfrac{49}{12}\).`, String.raw`\(\tfrac{49}{12}=4\tfrac{1}{12}\).`], String.raw`\(4\tfrac{1}{12}\) \(\left(=\tfrac{49}{12}\right)\)`, { placeholder: "e.g. 3 1/2 or 7/2" }),
+  ]),
+
+  ...hard([
+    ["Mixed numbers, negatives and absolute value", String.raw`Evaluate \(-2\tfrac13-\left(-1\tfrac34\right)+\tfrac56-\left|\tfrac13-1\tfrac12\right|\).`,
+      [String.raw`Change to improper fractions: \(-\tfrac73+\tfrac74+\tfrac56-\left|\tfrac13-\tfrac32\right|\).`,
+        String.raw`Inside the bars: \(\tfrac13-\tfrac32=\tfrac26-\tfrac96=-\tfrac76\), so the absolute value is \(\tfrac76\).`,
+        String.raw`Use the common denominator \(12\): \(\tfrac{-28+21+10-14}{12}\).`,
+        String.raw`Add the numerators: \(-\tfrac{11}{12}\).`],
+      String.raw`the value is \(-\tfrac{11}{12}\)`],
+    ["Finding a capacity from a change in fractions", String.raw`A tank is \(\tfrac38\) full. After \(22\) L is added, it is \(\tfrac56\) full. Find the capacity of the tank.`,
+      [String.raw`The increase is \(\tfrac56-\tfrac38=\tfrac{20}{24}-\tfrac{9}{24}=\tfrac{11}{24}\) of the tank.`,
+        String.raw`So \(\tfrac{11}{24}\) of the tank is \(22\) L, which means \(\tfrac{1}{24}\) of the tank is \(22\div11=2\) L.`,
+        String.raw`The whole tank is \(24\times2=48\) L.`],
+      String.raw`the tank holds \(48\) L`,
+      fig(bars([{ n: 9, d: 24, label: "before" }, { n: 20, d: 24, label: "after", color: "amber" }]), "Each small box is 1/24 of the tank. The fill level rises by 11 boxes.")],
+    ["A fraction between two close negatives", String.raw`Find a fraction between \(-\tfrac47\) and \(-\tfrac59\).`,
+      [String.raw`Use the common denominator \(63\): \(-\tfrac{36}{63}\) and \(-\tfrac{35}{63}\).`,
+        String.raw`No integer lies between \(35\) and \(36\), so double the denominators: \(-\tfrac{72}{126}\) and \(-\tfrac{70}{126}\).`,
+        String.raw`\(-\tfrac{71}{126}\) lies between them.`],
+      String.raw`\(-\tfrac{71}{126}\) is one such fraction`],
+    ["A long sum that collapses", String.raw`Evaluate \(\tfrac{1}{1\times2}+\tfrac{1}{2\times3}+\tfrac{1}{3\times4}+\cdots+\tfrac{1}{9\times10}\).`,
+      [String.raw`Notice a pattern: \(\tfrac12-\tfrac13=\tfrac{3-2}{6}=\tfrac{1}{2\times3}\). In the same way, each term is a difference of two unit fractions.`,
+        String.raw`Rewrite the sum: \(\left(1-\tfrac12\right)+\left(\tfrac12-\tfrac13\right)+\left(\tfrac13-\tfrac14\right)+\cdots+\left(\tfrac19-\tfrac{1}{10}\right)\).`,
+        String.raw`Each \(-\tfrac12\) cancels the next \(+\tfrac12\), and so on. Only the first and last pieces remain.`,
+        String.raw`\(1-\tfrac{1}{10}=\tfrac{9}{10}\).`],
+      String.raw`the sum is \(\tfrac{9}{10}\)`],
+  ], [
+    q("long expression", String.raw`Evaluate \(3\tfrac25-\left(-1\tfrac12\right)-\left|-2\tfrac34+\tfrac12\right|\). Answer as a fraction.`, frac(53, 20),
+      "Find the absolute value first, then use the denominator 20.",
+      [String.raw`\(-\tfrac{11}{4}+\tfrac24=-\tfrac94\), so the absolute value is \(\tfrac94\).`, String.raw`\(\tfrac{17}{5}+\tfrac32-\tfrac94=\tfrac{68+30-45}{20}\).`, String.raw`\(=\tfrac{53}{20}\).`], String.raw`\(\tfrac{53}{20}\)`, { placeholder: "a fraction like 7/4" }),
+    q("capacity", String.raw`A tank is \(\tfrac25\) full. After \(26\) L is added, it is \(\tfrac56\) full. Find the capacity of the tank, in litres.`, num(60),
+      "Subtract the fractions to find what part of the tank 26 L is.",
+      [String.raw`\(\tfrac56-\tfrac25=\tfrac{25-12}{30}=\tfrac{13}{30}\).`, String.raw`\(\tfrac{1}{30}\) of the tank is \(26\div13=2\) L.`, String.raw`The tank holds \(60\) L.`], String.raw`\(60\)`),
+    q("collapsing sum", String.raw`Evaluate \(\tfrac{1}{2\times3}+\tfrac{1}{3\times4}+\cdots+\tfrac{1}{7\times8}\).`, frac(3, 8),
+      String.raw`Each term is a difference, such as \(\tfrac12-\tfrac13\). What is left after cancelling?`,
+      [String.raw`The sum is \(\left(\tfrac12-\tfrac13\right)+\left(\tfrac13-\tfrac14\right)+\cdots+\left(\tfrac17-\tfrac18\right)\).`, String.raw`Everything cancels except \(\tfrac12-\tfrac18\).`, String.raw`\(\tfrac48-\tfrac18=\tfrac38\).`], String.raw`\(\tfrac38\)`, { placeholder: "a fraction like 2/5" }),
+    q("missing number", String.raw`What number must be added to \(-2\tfrac16\) to get \(\tfrac34\)? Answer as a fraction.`, frac(35, 12),
+      "Subtract: the target minus the starting number.",
+      [String.raw`\(\tfrac34-\left(-\tfrac{13}{6}\right)=\tfrac34+\tfrac{13}{6}\).`, String.raw`\(=\tfrac{9}{12}+\tfrac{26}{12}=\tfrac{35}{12}\).`], String.raw`\(\tfrac{35}{12}\)`, { placeholder: "a fraction like 7/4" }),
+    q("closest fraction", String.raw`Which fraction is closest to \(\tfrac23\)?`, choice([String.raw`\(\tfrac58\)`, String.raw`\(\tfrac{7}{10}\)`, String.raw`\(\tfrac{9}{14}\)`, String.raw`\(\tfrac{11}{15}\)`], 2),
+      String.raw`Find the distance from \(\tfrac23\) to each one as a fraction.`,
+      [String.raw`\(\tfrac23-\tfrac58=\tfrac{1}{24}\).`, String.raw`\(\tfrac{7}{10}-\tfrac23=\tfrac{1}{30}\).`, String.raw`\(\tfrac23-\tfrac{9}{14}=\tfrac{1}{42}\).`, String.raw`\(\tfrac{11}{15}-\tfrac23=\tfrac{1}{15}\). The smallest distance is \(\tfrac{1}{42}\).`], String.raw`\(\tfrac{9}{14}\)`),
   ]),
 
   wrapUp({

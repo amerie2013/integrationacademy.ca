@@ -1,5 +1,6 @@
 // MTH1W 1.10 — Density, Infinity & Limit (self-study format)
-import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, numberLine, q, num, frac, choice } from "./lib.mjs";
+import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, numberLine, q, num, frac, choice, hard, fig } from "./lib.mjs";
+import { graph } from "./bank/svg.mjs";
 
 export const TITLE = "1.10 Density, Infinity & Limit";
 
@@ -101,6 +102,48 @@ export const blocks = () => [
       String.raw`Use \(0.\overline{9}=1\).`, [String.raw`\(2.\overline{9}=2+0.\overline{9}\).`, String.raw`\(=2+1=3\).`], String.raw`\(3\)`),
     q("smallest fraction?", String.raw`True or false: there is a smallest positive fraction.`, choice(["True", "False"], 1),
       String.raw`If someone names one, can you always find a smaller positive fraction?`, [String.raw`For any positive fraction \(\tfrac{a}{b}\), the fraction \(\tfrac{a}{2b}\) is half as big and still positive.`, "So no smallest one can exist."], "False"),
+  ]),
+
+  ...hard([
+    ["Halving a gap", String.raw`Find the midpoint of \(\tfrac17\) and \(\tfrac16\). If you keep taking the midpoint with \(\tfrac16\), how many steps does it take for the gap to \(\tfrac16\) to fall below \(0.001\)?`,
+      [String.raw`Use the common denominator \(42\): \(\tfrac{6}{42}\) and \(\tfrac{7}{42}\).`,
+        String.raw`The midpoint is \(\tfrac{6.5}{42}=\tfrac{13}{84}\).`,
+        String.raw`The first gap is \(\tfrac{1}{42}\), and each midpoint cuts it in half. After \(k\) steps it is \(\tfrac{1}{42\times2^k}\).`,
+        String.raw`We need \(42\times2^k>1000\), so \(2^k>23.8\). Since \(2^4=16\) and \(2^5=32\), \(k=5\).`],
+      String.raw`the midpoint is \(\tfrac{13}{84}\), and \(5\) steps are needed`],
+    ["How close is close enough?", String.raw`The sequence \(a_n=\dfrac{4n-3}{2n}\). Find its limit, and the first \(n\) for which \(a_n\) is within \(0.01\) of the limit.`,
+      [String.raw`Split the fraction: \(\dfrac{4n-3}{2n}=2-\dfrac{3}{2n}\).`,
+        String.raw`As \(n\) grows, \(\dfrac{3}{2n}\) approaches \(0\), so the limit is \(2\).`,
+        String.raw`The gap is \(\dfrac{3}{2n}\). We need \(\dfrac{3}{2n}<0.01\), which means \(2n>300\), so \(n>150\).`,
+        String.raw`The first such \(n\) is \(151\).`],
+      String.raw`the limit is \(2\), and \(n=151\) is the first term within \(0.01\)`],
+    ["An endless bounce with a finite distance", String.raw`A ball is dropped from \(16\) m, and each bounce reaches half the previous height. What total distance does it travel, in the model where it bounces forever?`,
+      [String.raw`The bounce heights are \(8,\ 4,\ 2,\ 1,\dots\) Their sum approaches \(16\), just as \(\tfrac12+\tfrac14+\cdots\) approaches \(1\).`,
+        String.raw`The ball travels each bounce height twice, once up and once down: \(2\times16=32\) m.`,
+        String.raw`Add the first drop: \(16+32=48\) m.`],
+      String.raw`the total distance approaches \(48\) m, even with infinitely many bounces`,
+      fig(graph({ series: [{ pts: [[0, 16], [1, 8], [2, 4], [3, 2], [4, 1], [5, 0.5], [6, 0.25]], join: false }], xmin: 0, xmax: 7, ymin: 0, ymax: 18, xstep: 1, ystep: 2, xlabel: "bounce number", ylabel: "height (m)" }), "The bounce heights approach 0 m.")],
+    ["An irrational number in a tiny gap", String.raw`Find a rational number and an irrational number between \(0.3\) and \(0.31\).`,
+      [String.raw`\(0.305\) terminates, so it is a rational number in the gap.`,
+        String.raw`Build a decimal that never ends and never repeats: \(0.3010010001\ldots\), with one more zero each time.`,
+        String.raw`It starts with \(0.30\), so it is greater than \(0.3\) and less than \(0.31\).`],
+      String.raw`\(0.305\) and \(0.3010010001\ldots\) both lie in the gap`],
+  ], [
+    q("midpoint", String.raw`Find the midpoint of \(\tfrac29\) and \(\tfrac14\).`, frac(17, 72),
+      "Add the fractions, then divide by 2.",
+      [String.raw`\(\tfrac{8}{36}+\tfrac{9}{36}=\tfrac{17}{36}\).`, String.raw`\(\tfrac{17}{36}\div2=\tfrac{17}{72}\).`], String.raw`\(\tfrac{17}{72}\)`, { placeholder: "a fraction like 2/5" }),
+    q("limit", String.raw`What value does \(\dfrac{5n+2}{2n}\) approach as \(n\) gets very large? Give a decimal.`, num(2.5),
+      "Split the fraction into two parts.",
+      [String.raw`\(\dfrac{5n+2}{2n}=\dfrac52+\dfrac1n\).`, String.raw`\(\dfrac1n\) approaches \(0\), so the limit is \(2.5\).`], String.raw`\(2.5\)`),
+    q("close enough", String.raw`What is the first \(n\) for which \(3+\dfrac1n\) is within \(0.002\) of \(3\)?`, num(501),
+      "The gap is 1/n. Solve 1/n < 0.002.",
+      [String.raw`\(\tfrac1n<0.002\) means \(n>500\).`, String.raw`The first such whole number is \(501\).`], String.raw`\(501\)`),
+    q("total distance", String.raw`A ball is dropped from \(20\) m, and each bounce reaches half the previous height. In metres, what value does the total distance travelled approach?`, num(60),
+      "The bounce heights add up to 20. Each is travelled twice.",
+      [String.raw`Bounce heights: \(10+5+2.5+\cdots\) approaches \(20\).`, String.raw`Up and down: \(40\) m.`, String.raw`Add the first drop: \(20+40=60\) m.`], String.raw`\(60\)`),
+    q("repeating decimals", String.raw`Evaluate \(0.\overline{27}+0.\overline{4}\) as a fraction.`, frac(71, 99),
+      "Write each decimal as a fraction first.",
+      [String.raw`\(0.\overline{27}=\tfrac{27}{99}\) and \(0.\overline{4}=\tfrac49=\tfrac{44}{99}\).`, String.raw`The sum is \(\tfrac{71}{99}\).`], String.raw`\(\tfrac{71}{99}\)`, { placeholder: "a fraction like 2/5" }),
   ]),
 
   wrapUp({

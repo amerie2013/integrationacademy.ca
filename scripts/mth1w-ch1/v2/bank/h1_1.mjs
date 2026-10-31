@@ -1,6 +1,6 @@
 // 1.1 Number Sets — 20 hard questions
 import { mc, ms, num, fill, tf } from "./kit.mjs";
-import { numberLine, setsDiagram } from "./svg.mjs";
+import { numberLine, setsDiagram, rectangle } from "./svg.mjs";
 
 export const TOPIC = "1.1 Number Sets & Their Subsets";
 export const Q = [
@@ -22,13 +22,13 @@ export const Q = [
   mc(String.raw`In the diagram, point C sits in the “Whole” region but outside “Natural”. Which number could C be?`, "$0$", ["$1$", "$-1$", String.raw`$\frac12$`], String.raw`The only whole number that is not natural is $0$.`,
     setsDiagram([{ set: "N", label: "A" }, { set: "Z", label: "B" }, { set: "W", label: "C" }, { set: "I", label: "D" }])),
   num(String.raw`The decimal for $\frac{5}{7}$ repeats. How many digits are in its repeating block?`, 6, String.raw`$\frac57=0.\overline{714285}$: six digits repeat.`),
-  mc(String.raw`Which statement is false?`, "Every real number is rational.", ["Every natural number is a whole number.", "Every integer is rational.", "Every rational number is real."], String.raw`$\sqrt2$ is real but not rational, so “every real number is rational” is false.`),
-  num(String.raw`Evaluate $0.\overline{2}+0.\overline{7}$ exactly.`, 1, String.raw`$\frac29+\frac79=\frac99=1$.`),
+  mc(String.raw`Which statement is always true?`, "The product of a non-zero rational number and an irrational number is irrational.", ["The product of two irrational numbers is irrational.", "The sum of two irrational numbers is irrational.", "The square root of a positive rational number is irrational."], String.raw`If $rx=q$ with $r\neq0$, then $x=\frac qr$ would be rational. Counterexamples for the others: $\sqrt2\sqrt2=2$, $\sqrt2+(-\sqrt2)=0$, $\sqrt{\frac14}=\frac12$.`),
+  fill(String.raw`Evaluate $0.\overline{18}+0.\overline{3}$ as a fraction in lowest terms: ___`, ["17/33"], String.raw`$\frac{18}{99}=\frac{2}{11}$ and $0.\overline3=\frac13$. Then $\frac{6}{33}+\frac{11}{33}=\frac{17}{33}$.`),
   ms(String.raw`Which numbers lie strictly between $3$ and $4$? Select all.`, [String.raw`$\sqrt{10}$`, String.raw`$\sqrt{17}$`, String.raw`$\frac{22}{7}$`, String.raw`$\pi$`, String.raw`$3.\overline{9}$`], [0, 2, 3],
     String.raw`$\sqrt{10}\approx3.16$, $\frac{22}{7}\approx3.14$, $\pi\approx3.14$. $\sqrt{17}\approx4.12$ and $3.\overline9=4$ are not strictly between.`),
-  mc(String.raw`$0.\overline{09}$ is equal to`, String.raw`$\frac{1}{11}$`, [String.raw`$\frac{9}{100}$`, String.raw`$\frac19$`, String.raw`$\frac{9}{10}$`], String.raw`$\frac{9}{99}=\frac{1}{11}$.`),
+  mc(String.raw`$3.2\overline{45}$ is equal to`, String.raw`$\frac{357}{110}$`, [String.raw`$\frac{36}{11}$`, String.raw`$\frac{119}{37}$`, String.raw`$\frac{649}{200}$`], String.raw`$1000x-10x=3245-32=3213$, so $x=\frac{3213}{990}=\frac{357}{110}$.`),
   fill(String.raw`Write $1.2\overline{7}=1.2777\ldots$ as an improper fraction in lowest terms: ___`, ["23/18"], String.raw`$100x-10x=127.\overline7-12.\overline7=115$, so $x=\frac{115}{90}=\frac{23}{18}$.`),
   tf(String.raw`$\sqrt{a^2}=a$ for every integer $a$.`, false, String.raw`False: $a=-3$ gives $\sqrt{9}=3\neq-3$. In general $\sqrt{a^2}=|a|$.`),
-  mc(String.raw`A square floor tile has area $50$ cm$^2$. Its side length is`, "irrational, between 7 and 8 cm", ["rational, exactly 25 cm", "irrational, between 6 and 7 cm", "rational, exactly 7.5 cm"], String.raw`Side $=\sqrt{50}$; $49<50<64$ so it is between $7$ and $8$, and $50$ is not a perfect square.`),
-  num(String.raw`How many natural numbers $n$ with $n\le100$ have a rational square root?`, 10, String.raw`Only perfect squares: $1,4,9,\dots,100$ --- ten of them.`),
+  mc(String.raw`Find the area of the rectangle. Is it rational?`, "$12$ m$^2$, rational", ["$26$ m$^2$, rational", String.raw`$\sqrt{26}$ m$^2$, irrational`, String.raw`$\sqrt{144}$ m$^2$, irrational`], String.raw`$\sqrt8\times\sqrt{18}=\sqrt{144}=12$. Both sides are irrational, but the area is not.`, rectangle("√18 m", "√8 m")),
+  num(String.raw`How many integers $n$ satisfy $-\sqrt{50}<n<\sqrt{90}$?`, 17, String.raw`$\sqrt{50}\approx7.07$ and $\sqrt{90}\approx9.49$, so $n=-7,\dots,9$, which is $17$ integers.`),
 ];

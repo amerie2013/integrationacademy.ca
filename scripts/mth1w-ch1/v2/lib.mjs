@@ -63,6 +63,22 @@ export const choice = (options, correct) => ({ kind: "choice", options, correct 
 export const ratio = (a, b, lowest = true) => ({ kind: "ratio", value: [a, b], lowest });
 export const q = (label, prompt, answer, hint, solution, final, extra = {}) => ({ label, prompt, answer, hint, solution, final, ...extra });
 
+export const fig = (svg, caption) => `<div style="text-align:center;margin:12px 0;">${svg.replace(/ width="\d+" height="\d+"/, (m) => `${m} style="max-width:100%;height:auto;"`)}<div style="font-size:13px;color:#64748b;margin-top:2px;">${caption}</div></div>`;
+
+const CH = `style="background-color:#fdf2f8;border-left:5px solid #be185d;padding:10px 14px;margin:12px 0;border-radius:6px;"`;
+
+/** Hard level: `items` = worked challenges [title, question, steps[], conclusion, figure?]; `qs` = 5 checked hard questions. */
+export function hard(items, qs) {
+  if (qs.length !== 5) throw new Error(`hard(): need 5 hard practice questions, got ${qs.length}`);
+  return [
+    html(`<div class="lecture-box"><h2>🔴 Hard level</h2>
+  <p>These go beyond the examples: several laws in one question, negative exponents everywhere, and answers you have to tidy up. Try each one on paper before you open the solution.</p>
+  ${items.map(([t, q, s, c, fig], i) => `<div class="challenge-box" ${CH}><h3>Challenge ${i + 1}: ${t}</h3><p>${q}</p>${fig ?? ""}<details><summary><strong>Show solution</strong></summary><div class="solution">${s.map((x, k) => `<div class="step"><strong>Step ${k + 1}:</strong> ${x}</div>`).join("")}<em>Conclusion: ${c} ✓</em></div></details></div>`).join("\n")}
+</div>`),
+    widget("practice", { questions: qs, title: "Hard-level practice" }),
+  ];
+}
+
 /** Q&A (5 items) + summary + what comes next. */
 export function wrapUp({ qas, summary, next }) {
   if (qas.length !== 5) throw new Error(`need exactly 5 Q&A items, got ${qas.length}`);

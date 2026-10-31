@@ -77,10 +77,9 @@ $-1.8\times2.5$ & different $\Rightarrow-$ & $4.5$ & $-4.5$\\ $-0.9\div\left(-\f
       steps: [String.raw`Three wholes make $12$ quarters.`, String.raw`Groups of $3$ quarters: $12\div3=4$ groups.`, String.raw`Check: $3\times\frac43=4$.`], ans: "$4$" },
     { title: "Quarter cups", q: String.raw`How many $\frac14$-cup scoops are in $\frac78$ of a cup?`,
       steps: [String.raw`“How many fit” $\Rightarrow$ divide: $\frac78\div\frac14$.`, String.raw`$=\frac78\times\frac41=\frac{28}{8}=\frac72$.`], ans: String.raw`$3\frac12$ scoops` },
-    { title: "Mixing decimals and fractions", q: String.raw`Evaluate $-3.5\times0.4+\left(-\frac14\right)\div0.5$.`,
-      steps: [String.raw`Estimate: about $-1.5+(-0.5)=-2$.`, String.raw`$-3.5\times0.4=-1.4$ (different signs).`, String.raw`$-\frac14\div0.5=-0.25\div0.5=-0.5$.`, String.raw`$-1.4+(-0.5)=-1.9$ --- close to the estimate.`], ans: "$-1.9$" },
     { title: "Order of operations", q: String.raw`Evaluate $\frac12+\frac23\times\left(-\frac34\right)$.`,
       steps: [String.raw`Multiply first: $\frac23\times\left(-\frac34\right)=-\frac{6}{12}=-\frac12$.`, String.raw`$\frac12+\left(-\frac12\right)=0$.`], ans: "$0$" },
+    { title: "Working backward through remainders", q: String.raw`Omar spends $\frac25$ of his money, then $\frac12$ of what is left, then $\frac13$ of what is left after that. He has $40$ dollars left. How much did he start with?`, steps: [String.raw`After each purchase the fraction left is $\frac35$, then $\frac12$ of that, then $\frac23$ of that.`, String.raw`Multiply: $\dfrac35\times\dfrac12\times\dfrac23=\dfrac15$.`, String.raw`So $\frac15$ of his money is $40$ dollars, and the total is $5\times40=200$ dollars.`, String.raw`Check: spend $80$, leaving $120$; spend $60$, leaving $60$; spend $20$, leaving $40$.`], ans: "$200$ dollars" },
   ],
   problems: PROBLEMS,
 };

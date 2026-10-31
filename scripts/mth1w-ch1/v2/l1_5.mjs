@@ -1,5 +1,6 @@
 // MTH1W 1.5 — Fractions: Multiplying, Dividing & Reciprocals (self-study format)
-import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, areaModel, tape, q, num, frac } from "./lib.mjs";
+import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, areaModel, tape, q, num, frac, hard, fig } from "./lib.mjs";
+import { tape as tapeSvg, rectangle } from "./bank/svg.mjs";
 
 export const TITLE = "1.5 Fractions: Multiplying, Dividing & Reciprocals";
 
@@ -102,6 +103,48 @@ export const blocks = () => [
       "Improper fraction, then multiply by the reciprocal of 3/5.", [String.raw`\(\tfrac{12}{5}\times\tfrac{5}{3}\).`, String.raw`\(=\tfrac{12}{3}=4\).`], String.raw`\(4\)`),
     q("jug problem", String.raw`A jug holds \(2\tfrac{1}{4}\) L. How many glasses of \(\tfrac{3}{8}\) L can it fill?`, num(6),
       String.raw`How many \(\tfrac38\)'s fit into \(2\tfrac14\)? Divide.`, [String.raw`\(\tfrac{9}{4}\div\tfrac{3}{8}=\tfrac{9}{4}\times\tfrac{8}{3}\).`, String.raw`\(=\tfrac{3}{1}\times\tfrac{2}{1}=6\).`], String.raw`\(6\) glasses`),
+  ]),
+
+  ...hard([
+    ["Everything at once", String.raw`Evaluate \(\left[\left(\tfrac12-\tfrac23\right)\div\tfrac34+1\tfrac13\right]\times\left(-\tfrac{9}{10}\right)\).`,
+      [String.raw`Inner bracket: \(\tfrac12-\tfrac23=\tfrac36-\tfrac46=-\tfrac16\).`,
+        String.raw`Divide by multiplying by the reciprocal: \(-\tfrac16\times\tfrac43=-\tfrac29\).`,
+        String.raw`Add: \(-\tfrac29+\tfrac43=-\tfrac29+\tfrac{12}{9}=\tfrac{10}{9}\).`,
+        String.raw`Multiply: \(\tfrac{10}{9}\times\left(-\tfrac{9}{10}\right)=-1\), because these are opposite reciprocals.`],
+      String.raw`the value is \(-1\)`],
+    ["A fraction inside a fraction", String.raw`Evaluate \(1+\dfrac{1}{2+\dfrac13}\).`,
+      [String.raw`Start at the bottom: \(2+\tfrac13=\tfrac73\).`,
+        String.raw`Dividing \(1\) by \(\tfrac73\) gives its reciprocal, \(\tfrac37\).`,
+        String.raw`Add: \(1+\tfrac37=\tfrac{10}{7}\).`],
+      String.raw`the value is \(\tfrac{10}{7}\)`],
+    ["Working backward through remainders", String.raw`Sara spends \(\tfrac13\) of her money, then \(\tfrac14\) of what is left, then \(\tfrac15\) of what is left after that. She has \(48\) dollars left. How much did she start with?`,
+      [String.raw`Spending \(\tfrac13\) leaves \(\tfrac23\). Spending \(\tfrac14\) of that leaves \(\tfrac34\) of it. Spending \(\tfrac15\) leaves \(\tfrac45\) of that.`,
+        String.raw`The fraction left is \(\tfrac23\times\tfrac34\times\tfrac45=\tfrac25\).`,
+        String.raw`So \(\tfrac25\) of her money is \(48\) dollars, and the total is \(48\div\tfrac25=48\times\tfrac52=120\).`],
+      String.raw`she started with \(120\) dollars`,
+      fig(tapeSvg([{ n: 10, label: "1/3", color: "blue" }, { n: 5, label: "1/4 of rest", color: "amber" }, { n: 3, label: "1/5", color: "violet" }, { n: 12, label: "left: 48 dollars", color: "green" }], { unit: 16 }), "Sara's money in 30 equal parts. Each purchase is taken from what is left at that point.")],
+    ["Tiling a floor", String.raw`A floor is \(2\tfrac23\) m by \(3\tfrac38\) m. Tiles are \(\tfrac34\) m by \(\tfrac12\) m. How many tiles cover the floor?`,
+      [String.raw`Floor area: \(\tfrac83\times\tfrac{27}{8}=9\) m².`,
+        String.raw`Tile area: \(\tfrac34\times\tfrac12=\tfrac38\) m².`,
+        String.raw`Divide: \(9\div\tfrac38=9\times\tfrac83=24\).`],
+      String.raw`\(24\) tiles cover the floor, if none need cutting`,
+      fig(rectangle("3 3/8 m", "2 2/3 m"), "The floor.")],
+  ], [
+    q("everything at once", String.raw`Evaluate \(\left[\left(\tfrac34-\tfrac56\right)\div\tfrac23+1\tfrac18\right]\times\left(-\tfrac45\right)\).`, frac(-4, 5),
+      "Work from the innermost bracket outward.",
+      [String.raw`\(\tfrac34-\tfrac56=-\tfrac{1}{12}\).`, String.raw`\(-\tfrac{1}{12}\times\tfrac32=-\tfrac18\).`, String.raw`\(-\tfrac18+\tfrac98=1\).`, String.raw`\(1\times\left(-\tfrac45\right)=-\tfrac45\).`], String.raw`\(-\tfrac45\)`, { placeholder: "a fraction like -2/3" }),
+    q("nested fraction", String.raw`Evaluate \(2+\dfrac{1}{3+\dfrac12}\). Answer as a fraction.`, frac(16, 7),
+      "Start at the bottom and work up.",
+      [String.raw`\(3+\tfrac12=\tfrac72\).`, String.raw`Its reciprocal is \(\tfrac27\).`, String.raw`\(2+\tfrac27=\tfrac{16}{7}\).`], String.raw`\(\tfrac{16}{7}\)`, { placeholder: "a fraction like 7/4" }),
+    q("remainders", String.raw`Theo spends \(\tfrac14\) of his money, then \(\tfrac23\) of what is left. He has \(30\) dollars left. How many dollars did he start with?`, num(120),
+      "Multiply the fractions that remain.",
+      [String.raw`Fraction left: \(\tfrac34\times\tfrac13=\tfrac14\).`, String.raw`\(\tfrac14\) of his money is \(30\) dollars, so he started with \(120\) dollars.`], String.raw`\(120\)`),
+    q("area", String.raw`A floor is \(4\tfrac12\) m by \(3\tfrac13\) m. Each tile covers \(\tfrac38\) m². How many tiles are needed?`, num(40),
+      "Find the floor area, then divide by the tile area.",
+      [String.raw`\(\tfrac92\times\tfrac{10}{3}=15\) m².`, String.raw`\(15\div\tfrac38=15\times\tfrac83=40\).`], String.raw`\(40\)`),
+    q("unknown number", String.raw`\(\tfrac25\) of a number is \(-\tfrac78\). What is the number? Answer as a fraction.`, frac(-35, 16),
+      String.raw`Divide by \(\tfrac25\), which means multiply by its reciprocal.`,
+      [String.raw`Number \(=-\tfrac78\div\tfrac25\).`, String.raw`\(=-\tfrac78\times\tfrac52=-\tfrac{35}{16}\).`], String.raw`\(-\tfrac{35}{16}\)`, { placeholder: "a fraction like -7/4" }),
   ]),
 
   wrapUp({

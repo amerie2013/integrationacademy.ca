@@ -1,5 +1,6 @@
 // MTH1W 1.6 — Powers: Zero & Negative Exponents (self-study format)
-import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, q, num, frac } from "./lib.mjs";
+import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, q, num, frac, hard, fig } from "./lib.mjs";
+import { graph } from "./bank/svg.mjs";
 
 export const TITLE = "1.6 Powers: Zero & Negative Exponents";
 
@@ -117,6 +118,49 @@ export const blocks = () => [
       "The side length is the square root of the area.", [String.raw`Side \(=\sqrt{2.25}\).`, String.raw`\(1.5^2=2.25\), so the side is \(1.5\) m.`], String.raw`\(1.5\) m`),
     q("volume", String.raw`A cube-shaped box has edges \(2.5\) cm long. What is its volume in cm³? (\(V=s^3\))`, num(15.625),
       String.raw`Volume of a cube is edge × edge × edge.`, [String.raw`\(V=2.5^3=2.5\times2.5\times2.5\).`, String.raw`\(6.25\times2.5=15.625\).`], String.raw`\(15.625\) cm³`),
+  ]),
+
+  ...hard([
+    ["Negative exponents inside and outside", String.raw`Evaluate \(\left(2^{-1}+3^{-1}\right)^{-2}\).`,
+      [String.raw`Inside the bracket: \(2^{-1}=\tfrac12\) and \(3^{-1}=\tfrac13\).`,
+        String.raw`Add: \(\tfrac12+\tfrac13=\tfrac56\).`,
+        String.raw`A negative power flips the fraction: \(\left(\tfrac56\right)^{-2}=\left(\tfrac65\right)^2\).`,
+        String.raw`Square the top and the bottom: \(\tfrac{36}{25}\). Note that the answer is not \(2^2+3^2\): the exponent does not spread over a sum.`],
+      String.raw`the value is \(\tfrac{36}{25}\)`],
+    ["Three kinds of power in one line", String.raw`Evaluate \(\left(-\tfrac12\right)^{-3}-\left(\tfrac23\right)^{-2}+(-4)^0\).`,
+      [String.raw`Flip the first base: \(\left(-\tfrac12\right)^{-3}=(-2)^3=-8\).`,
+        String.raw`Flip the second base: \(\left(\tfrac23\right)^{-2}=\left(\tfrac32\right)^2=\tfrac94\).`,
+        String.raw`Any non-zero base to the power \(0\) is \(1\): \((-4)^0=1\).`,
+        String.raw`Combine: \(-8-\tfrac94+1=-7-\tfrac94=-\tfrac{37}{4}\).`],
+      String.raw`the value is \(-\tfrac{37}{4}\)`],
+    ["Finding a negative exponent", String.raw`Find the integer \(n\) if \(\left(\tfrac34\right)^n=\tfrac{64}{27}\).`,
+      [String.raw`Notice that \(\tfrac{64}{27}=\tfrac{4^3}{3^3}=\left(\tfrac43\right)^3\).`,
+        String.raw`\(\tfrac43\) is the reciprocal of \(\tfrac34\), and a reciprocal comes from a negative exponent: \(\left(\tfrac43\right)^3=\left(\tfrac34\right)^{-3}\).`,
+        String.raw`So \(n=-3\).`],
+      String.raw`\(n=-3\)`],
+    ["Half-life forward and backward", String.raw`A sample has a mass of \(4800\) mg and a half-life of \(8\) hours, as the graph shows. (a) When will it reach \(150\) mg? (b) What was its mass \(16\) hours ago?`,
+      [String.raw`(a) \(4800\div150=32=2^5\), so the sample must halve \(5\) times.`,
+        String.raw`\(5\times8=40\) hours.`,
+        String.raw`(b) \(16\) hours is \(2\) half-lives backward. Going backward uses a negative power of \(\tfrac12\): \(4800\times\left(\tfrac12\right)^{-2}\).`,
+        String.raw`\(4800\times4=19\,200\) mg.`],
+      String.raw`it reaches \(150\) mg after \(40\) hours, and it was \(19\,200\) mg \(16\) hours ago`,
+      fig(graph({ series: [{ pts: [[0, 4800], [8, 2400], [16, 1200], [24, 600]] }], xmin: 0, xmax: 40, ymin: 0, ymax: 5000, xstep: 8, ystep: 1000, xlabel: "hours", ylabel: "mg" }), "The mass halves every 8 hours.")],
+  ], [
+    q("inside and outside", String.raw`Evaluate \(\left(3^{-1}-4^{-1}\right)^{-1}\).`, num(12),
+      "Write the powers as fractions and subtract. Then flip the result.",
+      [String.raw`\(\tfrac13-\tfrac14=\tfrac{1}{12}\).`, String.raw`\(\left(\tfrac{1}{12}\right)^{-1}=12\).`], String.raw`\(12\)`),
+    q("three powers", String.raw`Evaluate \(\left(-\tfrac13\right)^{-2}-\left(\tfrac12\right)^{-3}+5^0\).`, num(2),
+      "Flip each base, then apply the positive power.",
+      [String.raw`\((-3)^2=9\).`, String.raw`\(2^3=8\).`, String.raw`\(5^0=1\).`, String.raw`\(9-8+1=2\).`], String.raw`\(2\)`),
+    q("find the exponent", String.raw`Find the integer \(n\) if \(\left(\tfrac25\right)^n=\tfrac{125}{8}\).`, num(-3),
+      "Is the right side a power of 2/5 or of its reciprocal?",
+      [String.raw`\(\tfrac{125}{8}=\left(\tfrac52\right)^3\).`, String.raw`\(\left(\tfrac52\right)^3=\left(\tfrac25\right)^{-3}\), so \(n=-3\).`], String.raw`\(-3\)`),
+    q("fraction of powers", String.raw`Evaluate \(\dfrac{2^{-2}+2^{-3}}{2^{-1}}\) as a fraction.`, frac(3, 4),
+      "Find the top as a single fraction first.",
+      [String.raw`Top: \(\tfrac14+\tfrac18=\tfrac38\).`, String.raw`Bottom: \(\tfrac12\).`, String.raw`\(\tfrac38\div\tfrac12=\tfrac34\).`], String.raw`\(\tfrac34\)`, { placeholder: "a fraction like 2/5" }),
+    q("growth", String.raw`A culture triples every \(2\) hours and now has \(7290\) cells. How many hours ago did it have \(90\) cells?`, num(8),
+      "How many times has it tripled?",
+      [String.raw`\(7290\div90=81=3^4\), so it has tripled \(4\) times.`, String.raw`\(4\times2=8\) hours.`], String.raw`\(8\)`),
   ]),
 
   wrapUp({

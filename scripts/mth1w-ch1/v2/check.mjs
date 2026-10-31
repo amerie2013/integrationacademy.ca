@@ -121,6 +121,8 @@ for (const f of files) {
     } else if (a.kind === "text") {
       if (!a.accept.length) fail(`${L}: no accepted text`);
       if (!checkAnswer(a, a.accept[0])) fail(`${L}: checker rejects first accepted text`);
+    } else if (a.kind === "expr") {
+      if (!checkAnswer(a, a.value)) fail(`${L}: expression spec rejects itself`);
     } else if (a.kind === "ratio") {
       if (!checkAnswer(a, `${a.value[0]}:${a.value[1]}`)) fail(`${L}: ratio spec rejects itself`);
     }
@@ -130,7 +132,8 @@ for (const f of files) {
   // a bare number or symbol (\sqrt{2}, \pi, -4) is not a reused question; an expression with an operation is
   // (a bare identity such as 4^0=1 inside a solution step is not a reused question)
   // (nor is a substituted value like a=-2, or a physical constant like the speed of light)
-  const isExpr = (s) => !/^\(?-?\d+\)?\^0=1$/.test(s) && !/^[a-z]=-?\d+$/.test(s) && s !== "3\\times10^{8}" &&/[-+*/=:^]|\\times|\\div|\\frac|\\cdot/.test(s.replace(/^-/, ""));
+  // (nor is a plain fraction like \frac34, or a ratio or map scale like 1:200)
+  const isExpr = (s) => !/^-?\\frac(\d\d|\{\d+\}\{\d+\})$/.test(s) && !/^\d+:\d+$/.test(s) && !/^\(?-?\d+\)?\^0=1$/.test(s) &&!/^[a-z]=-?\d+$/.test(s) && s !== "3\\times10^{8}" &&/[-+*/=:^]|\\times|\\div|\\frac|\\cdot/.test(s.replace(/^-/, ""));
   const hitsW = [...lessonExprs].filter((s) => isExpr(s) && wsSpans[code]?.has(s));
   const hitsB = [...lessonExprs].filter((s) => isExpr(s) && bankSpans[code]?.has(s));
   if (hitsW.length) fail(`shares expressions with worksheet ${code}: ${hitsW.slice(0, 6).join("  ")}`);

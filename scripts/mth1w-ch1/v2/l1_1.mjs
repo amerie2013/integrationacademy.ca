@@ -1,5 +1,6 @@
 // MTH1W 1.1 — Number Sets & Their Subsets (self-study format)
-import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, numberLine, q, num, frac, txt, choice } from "./lib.mjs";
+import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, numberLine, q, num, frac, txt, choice, hard, fig } from "./lib.mjs";
+import { numberLine as lineSvg } from "./bank/svg.mjs";
 
 export const TITLE = "1.1 Number Sets & Their Subsets";
 
@@ -130,6 +131,50 @@ export const blocks = () => [
       "Find the perfect squares just below and just above 70.",
       [String.raw`\(8^2=64\) and \(9^2=81\).`, String.raw`\(64<70<81\), so \(8<\sqrt{70}<9\).`],
       String.raw`between \(8\) and \(9\) (\(\sqrt{70}\approx8.37\))`),
+  ]),
+
+  ...hard([
+    ["A repeating decimal with a late start", String.raw`Write \(2.1\overline{36}=2.13636\ldots\) as a fraction in lowest terms.`,
+      [String.raw`Let \(x=2.1\overline{36}\). One digit comes before the repeat, so \(10x=21.\overline{36}\).`,
+        String.raw`Two digits repeat, so move two more places: \(1000x=2136.\overline{36}\).`,
+        String.raw`Subtract so the tails cancel: \(1000x-10x=2136-21\), which gives \(990x=2115\).`,
+        String.raw`Divide and reduce by \(45\): \(x=\tfrac{2115}{990}=\tfrac{47}{22}\).`,
+        String.raw`Check: \(47\div22=2.13636\ldots\) ✓`],
+      String.raw`\(2.1\overline{36}=\tfrac{47}{22}\)`],
+    ["Do not trust the look of a number", String.raw`Classify each number as rational or irrational: \(\sqrt{12}\times\sqrt{3}\), \(\ \sqrt{2.25}\), \(\ 3+\sqrt{2}\), \(\ \sqrt{0.4}\).`,
+      [String.raw`Multiply under the root: \(\sqrt{12}\times\sqrt{3}=\sqrt{36}=6\), which is rational.`,
+        String.raw`\(1.5^2=2.25\), so \(\sqrt{2.25}=1.5\), which is rational.`,
+        String.raw`\(\sqrt{2}\) is irrational, and adding a rational number cannot remove the endless decimal, so \(3+\sqrt{2}\) is irrational.`,
+        String.raw`\(0.4=\tfrac{2}{5}\), and neither \(2\) nor \(5\) is a perfect square, so \(\sqrt{0.4}\) is irrational. It is not \(0.2\), because \(0.2^2=0.04\).`],
+      String.raw`\(\sqrt{12}\times\sqrt{3}\) and \(\sqrt{2.25}\) are rational; \(3+\sqrt{2}\) and \(\sqrt{0.4}\) are irrational`],
+    ["A short proof", String.raw`Explain why \(2+\sqrt{3}\) cannot be rational, given that \(\sqrt{3}\) is irrational.`,
+      [String.raw`Suppose \(2+\sqrt{3}\) were rational. Call it \(r\).`,
+        String.raw`Subtract \(2\) from both sides: \(\sqrt{3}=r-2\).`,
+        String.raw`A rational number minus a rational number is rational, so \(\sqrt{3}\) would be rational.`,
+        String.raw`That contradicts what we know about \(\sqrt{3}\), so the supposition must be false.`],
+      String.raw`\(2+\sqrt{3}\) is irrational`],
+    ["Trapping a square root", String.raw`Find \(\sqrt{47}\) to one decimal place without using the root key. Use only multiplication.`,
+      [String.raw`\(6^2=36\) and \(7^2=49\), so \(\sqrt{47}\) is between \(6\) and \(7\), close to \(7\).`,
+        String.raw`Try tenths: \(6.8^2=46.24\) is too small, and \(6.9^2=47.61\) is too big.`,
+        String.raw`Compare the gaps: \(47-46.24=0.76\) and \(47.61-47=0.61\). The second gap is smaller.`],
+      String.raw`\(\sqrt{47}\approx6.9\)`,
+      fig(lineSvg({ min: 6.5, max: 7.5, step: 0.1, labelEvery: 5, letters: [{ at: 6.86, label: "√47" }] }), "√47 lies between 6.8 and 6.9, a little closer to 6.9.")],
+  ], [
+    q("late repeat", String.raw`Write \(0.2\overline{7}=0.2777\ldots\) as a fraction in lowest terms.`, frac(5, 18),
+      String.raw`Compare \(100x\) with \(10x\), so the repeating tails line up.`,
+      [String.raw`\(100x=27.\overline{7}\) and \(10x=2.\overline{7}\).`, String.raw`Subtract: \(90x=25\).`, String.raw`\(x=\tfrac{25}{90}=\tfrac{5}{18}\).`], String.raw`\(\tfrac{5}{18}\)`, { placeholder: "a fraction like 2/3" }),
+    q("repeating block", String.raw`Write \(1.\overline{18}=1.1818\ldots\) as an improper fraction in lowest terms.`, frac(13, 11),
+      "Two digits repeat, so compare 100x with x.",
+      [String.raw`\(100x=118.\overline{18}\) and \(x=1.\overline{18}\).`, String.raw`Subtract: \(99x=117\).`, String.raw`\(x=\tfrac{117}{99}=\tfrac{13}{11}\).`], String.raw`\(\tfrac{13}{11}\)`, { placeholder: "a fraction like 7/3" }),
+    q("spot the irrational", "Which number is irrational?", choice([String.raw`\(\sqrt{2}\times\sqrt{18}\)`, String.raw`\(\sqrt{0.09}\)`, String.raw`\(\sqrt{0.9}\)`, String.raw`\((\sqrt{7})^2\)`], 2),
+      "Simplify each one first. Be careful with the decimals under the root signs.",
+      [String.raw`\(\sqrt{2}\times\sqrt{18}=\sqrt{36}=6\).`, String.raw`\(\sqrt{0.09}=0.3\).`, String.raw`\((\sqrt{7})^2=7\).`, String.raw`\(0.9=\tfrac{9}{10}\), and \(10\) is not a perfect square, so \(\sqrt{0.9}\) is irrational.`], String.raw`\(\sqrt{0.9}\)`),
+    q("counting integers", String.raw`How many integers lie strictly between \(-\sqrt{30}\) and \(\sqrt{50}\)?`, num(13),
+      "Locate each root between two integers, then count, and remember to count 0.",
+      [String.raw`\(25<30<36\), so \(-\sqrt{30}\) is between \(-6\) and \(-5\).`, String.raw`\(49<50<64\), so \(\sqrt{50}\) is between \(7\) and \(8\).`, String.raw`The integers are \(-5,-4,\dots,6,7\), which is \(13\) integers.`], String.raw`\(13\)`),
+    q("always true?", "Which statement is always true?", choice(["The product of two irrational numbers is irrational.", "The sum of two rational numbers is rational.", "The quotient of two integers is rational.", "The square root of a positive rational number is rational."], 1),
+      "Look for a counterexample to each statement.",
+      [String.raw`\(\sqrt{2}\times\sqrt{2}=2\) rules out the first.`, String.raw`\(5\div0\) is undefined, which rules out the third.`, String.raw`\(\sqrt{2}\) rules out the fourth.`, String.raw`Adding fractions of integers always gives a fraction of integers.`], "The sum of two rational numbers is rational."),
   ]),
 
   wrapUp({

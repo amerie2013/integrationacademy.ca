@@ -5,7 +5,7 @@ export const PROBLEMS = [
   { level: 1, q: String.raw`How many integers lie strictly between $-4$ and $3$?`, ans: "$6$" },
   { level: 2, q: String.raw`Find the midpoint of $-\frac34$ and $\frac12$.`, ans: String.raw`$-\frac18$` },
   { level: 2, q: String.raw`Find three fractions between $\frac59$ and $\frac23$.`, ans: String.raw`e.g.\ $\frac{21}{36},\frac{22}{36},\frac{23}{36}$` },
-  { level: 2, q: String.raw`What is the limit of $5-\frac1n$ as $n$ grows?`, ans: "$5$" },
+  { level: 2, q: String.raw`What is the limit of $\dfrac{6n-1}{2n}$ as $n$ grows?`, ans: "$3$" },
   { level: 2, q: String.raw`What number does $3,\ 3.3,\ 3.33,\ 3.333,\dots$ approach? Give a fraction.`, ans: String.raw`$\frac{10}{3}$` },
   { level: 2, q: String.raw`Find $\frac12+\frac14+\frac18+\frac1{16}+\frac1{32}+\frac1{64}$. How far is it from $1$?`, recap: String.raw`$\frac12+\dots+\frac1{64}$; distance from $1$.`, ans: String.raw`$\frac{63}{64}$; $\frac1{64}$` },
   { level: 3, space: 5,
@@ -34,10 +34,9 @@ export const PROBLEMS = [
 (c) What value do the heights approach? Does the ball ever stop in this model?`,
     recap: String.raw`Ball from $12$ m, bounces to $\frac34$ height.`,
     ans: String.raw`(a) $9,\ 6.75,\ 5.0625,\ 3.796875$ m (b) $9$ bounces (c) $0$; in the model it never reaches $0$.` },
-  { level: 3, space: 5,
-    q: String.raw`(a) Use $\frac19=0.\overline{1}$ to write $\frac29$, $\frac89$ and $\frac99$ as repeating decimals.
-(b) Explain what (a) tells you about $0.\overline{9}$.
+  { level: 3, space: 5.5,
+    q: String.raw`(a) The sequence $a_n=\dfrac{3n+1}{n}$. Find its limit, and the first $n$ for which it is within $0.002$ of the limit.
+(b) The sum of $n$ terms of $\dfrac12+\dfrac14+\dfrac18+\cdots$ is $1-\dfrac{1}{2^n}$. Find the first $n$ for which the sum is within $0.001$ of $1$.
 (c) Show that $0.\overline{36}+0.\overline{63}=1$ using fractions.`,
-    recap: String.raw`From $\frac19=0.\overline1$; $0.\overline{36}+0.\overline{63}$.`,
-    ans: String.raw`(a) $0.\overline2$, $0.\overline8$, $0.\overline9$ (b) $\frac99=1$, so $0.\overline9=1$ (c) $\frac{36}{99}+\frac{63}{99}=1$.` },
+    ans: String.raw`(a) limit $3$; gap $\dfrac1n<0.002$ gives $n=501$ (b) $2^n>1000$ gives $n=10$ (c) $\dfrac{36}{99}+\dfrac{63}{99}=1$.` },
 ];

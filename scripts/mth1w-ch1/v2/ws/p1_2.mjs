@@ -5,8 +5,8 @@ export const PROBLEMS = [
   { level: 1, q: String.raw`Evaluate (a) $-8+3$ \quad (b) $-4+(-12)$.`, recap: String.raw`$-8+3$; $-4+(-12)$.`, ans: "(a) $-5$ (b) $-16$" },
   { level: 1, q: String.raw`Evaluate (a) $9-15$ \quad (b) $-7-(-7)$.`, recap: String.raw`$9-15$; $-7-(-7)$.`, ans: "(a) $-6$ (b) $0$" },
   { level: 1, q: String.raw`Write the opposite of $-14$, and evaluate $|-14|+|6|$.`, recap: String.raw`Opposite of $-14$; $|-14|+|6|$.`, ans: "$14$; $20$" },
-  { level: 2, q: String.raw`Evaluate $-11+6-(-9)$.`, ans: "$4$" },
-  { level: 2, q: String.raw`Evaluate $15-(-3)+(-22)$.`, ans: "$-4$" },
+  { level: 2, q: String.raw`Evaluate $-|-11+6|-(-9)+|3-8|$.`, ans: "$9$" },
+  { level: 2, q: String.raw`Evaluate $15-(-3)+(-22)-|-4-(-9)|$.`, ans: "$-9$" },
   { level: 2, q: String.raw`Maya has $60$ dollars in her account. She spends $85$ dollars, then deposits $40$ dollars. What is her balance?`, recap: "Maya's balance: 60, −85, +40.", ans: "$15$ dollars" },
   { level: 2, q: String.raw`The chart shows the daily change in the noon temperature. Sunday's temperature was $-1\,^\circ$C. What was it on Friday?`, recap: String.raw`Friday temperature from the chart (start $-1\,^\circ$C).`,
     fig: barChart([["Mon", 3], ["Tue", -5], ["Wed", -2], ["Thu", 6], ["Fri", -4]], { ylabel: "change ($^\\circ$C)", ymin: -6, ymax: 7 }), space: 2.6, ans: String.raw`$-3\,^\circ$C` },
@@ -32,13 +32,11 @@ export const PROBLEMS = [
 (c) Complete the square if the top row is $-3,\ 2,\ 1$.`,
     recap: String.raw`Magic square with $-4$ to $4$.`,
     ans: String.raw`(a) $0$ (total $0$ shared by $3$ rows) (b) $0$ (c) rows: $-3,2,1$ / $4,0,-4$ / $-1,-2,3$.` },
-  { level: 3, space: 5,
-    q: String.raw`Two students evaluated $-7-(-3)+(-5)$.\quad Kai: $-7-3-5=-15$.\quad Lea: $-7+3-5=-9$.
-(a) Who is correct?
-(b) Explain the other student's error.
-(c) Create your own expression with four integers, including subtracting a negative, whose value is $-2$.`,
-    recap: String.raw`Kai vs Lea: $-7-(-3)+(-5)$; create an expression equal to $-2$.`,
-    ans: String.raw`(a) Lea, $-9$ (b) Kai changed $-(-3)$ into $-3$; subtracting a negative adds (c) e.g.\ $5-(-1)+(-6)-2=-2$.` },
+  { level: 3, space: 5.5,
+    q: String.raw`(a) Find the sum of the integers from $-30$ to $27$.
+(b) For a positive integer $n$, explain why the sum of the integers from $-n$ to $n+3$ is $3n+6$.
+(c) For which $n$ is that sum equal to $21$? Check by listing the numbers that do not cancel.`,
+    ans: String.raw`(a) $-30-29-28=-87$ (b) $-n$ to $n$ cancels, leaving $(n+1)+(n+2)+(n+3)=3n+6$ (c) $n=5$: from $-5$ to $8$, $6+7+8=21$.` },
   { level: 3, space: 5,
     q: String.raw`A helicopter hovers $120$ m above sea level. A diver is at $-35$ m and a submarine at $-250$ m.
 (a) How far is the helicopter from each of them?

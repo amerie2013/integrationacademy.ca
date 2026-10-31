@@ -1,7 +1,8 @@
 // MTH1W 1.9 — Rates, Percentages & Percent Change (self-study format)
 // 1.8 covers ratios and proportions; this lesson concentrates on rates (including signed rates of change)
 // and percentages, and uses proportions as the tool.
-import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, numberLine, q, num, pct } from "./lib.mjs";
+import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, numberLine, q, num, pct, hard, fig } from "./lib.mjs";
+import { graph } from "./bank/svg.mjs";
 
 export const TITLE = "1.9 Rates, Percentages & Percent Change";
 
@@ -104,6 +105,49 @@ export const blocks = () => [
       "Change divided by the original price.", [String.raw`Change \(=36-30=6\).`, String.raw`\(\tfrac{6}{30}=0.2=20\%\).`], String.raw`\(20\%\)`, { placeholder: "e.g. 15%" }),
     q("discount and tax", String.raw`A \(45\)-dollar item is \(15\%\) off, then \(13\%\) HST is added. What is the final price in dollars (to the nearest cent)?`, num(43.22, 0.006),
       String.raw`Multiply by \(0.85\), then by \(1.13\).`, [String.raw`\(45\times0.85=38.25\).`, String.raw`\(38.25\times1.13=43.2225\).`, String.raw`Round: \(43.22\).`], String.raw`\(43.22\) dollars`),
+  ]),
+
+  ...hard([
+    ["Working backward through discount and tax", String.raw`A coat is \(25\%\) off, and \(13\%\) HST is added to the sale price. The final price is \(101.70\) dollars. What was the original price?`,
+      [String.raw`Each change is a multiplication: original \(\times0.75\times1.13=101.70\).`,
+        String.raw`Undo the tax first: \(101.70\div1.13=90\) dollars is the sale price.`,
+        String.raw`Undo the discount: \(90\div0.75=120\) dollars.`,
+        String.raw`Check: \(120\times0.75\times1.13=101.70\).`],
+      String.raw`the original price was \(120\) dollars`],
+    ["Several percent changes", String.raw`A share rises \(20\%\), falls \(25\%\), then rises \(10\%\). Find the overall percent change, and the percent rise needed to get back to the start.`,
+      [String.raw`Multiply the factors: \(1.2\times0.75\times1.1=0.99\).`,
+        String.raw`The share is at \(99\%\) of its starting value, which is a \(1\%\) decrease overall.`,
+        String.raw`To get back, multiply by \(1\div0.99\approx1.0101\).`,
+        String.raw`That is a rise of about \(1.01\%\), which is a little more than the \(1\%\) that was lost.`],
+      String.raw`the overall change is \(-1\%\), and a rise of about \(1.01\%\) restores it`],
+    ["Catching up", String.raw`A train leaves at \(90\) km/h. A second train leaves the same station \(40\) minutes later at \(120\) km/h on a parallel track. When and where does it catch the first?`,
+      [String.raw`In \(40\) minutes, which is \(\tfrac23\) of an hour, the first train travels \(90\times\tfrac23=60\) km.`,
+        String.raw`The second train gains \(120-90=30\) km every hour.`,
+        String.raw`Time to close the gap: \(60\div30=2\) hours after the second train leaves.`,
+        String.raw`Distance: \(120\times2=240\) km from the station. Check: the first train has travelled for \(2\tfrac23\) hours, and \(90\times2\tfrac23=240\).`],
+      String.raw`it catches up \(2\) hours after leaving, \(240\) km from the station`,
+      fig(graph({ series: [{ pts: [[0, 0], [1, 90], [2, 180], [3, 270]], color: "blue", label: "first" }, { pts: [[0.667, 0], [1.667, 120], [2.667, 240]], color: "red", label: "second" }], xmin: 0, xmax: 3.5, ymin: 0, ymax: 320, xstep: 0.5, ystep: 40, xlabel: "hours after the first train leaves", ylabel: "km" }), "The lines cross where the second train catches the first.")],
+    ["Diluting a mixture", String.raw`A \(5\) L jug of drink is \(40\%\) juice. How much water must be added to make it \(25\%\) juice?`,
+      [String.raw`The amount of juice does not change: \(40\%\) of \(5\) L is \(2\) L.`,
+        String.raw`In the new drink, \(2\) L must be \(25\%\) of the total, so the total is \(2\div0.25=8\) L.`,
+        String.raw`Water to add: \(8-5=3\) L.`],
+      String.raw`add \(3\) L of water`],
+  ], [
+    q("working backward", String.raw`A price is \(15\%\) off, then \(13\%\) HST is added. The final price is \(76.84\) dollars. What was the original price, in dollars?`, num(80, 0.01),
+      "Divide by 1.13, then by 0.85.",
+      [String.raw`\(76.84\div1.13=68\).`, String.raw`\(68\div0.85=80\).`], String.raw`\(80\)`),
+    q("several changes", String.raw`A price rises \(25\%\), falls \(20\%\), then rises \(10\%\). What is the overall percent increase? Give the number of percent.`, num(10, 0.001),
+      "Multiply the three factors.",
+      [String.raw`\(1.25\times0.8\times1.1=1.1\).`, String.raw`That is a \(10\%\) increase.`], String.raw`\(10\)`),
+    q("catching up", String.raw`A car leaves at \(96\) km/h. A second car leaves \(30\) minutes later from the same place at \(120\) km/h. How many hours after it leaves does the second car catch up?`, num(2, 0.001),
+      "Find the head start in km, then how fast the gap closes.",
+      [String.raw`Head start: \(96\times\tfrac12=48\) km.`, String.raw`The gap closes at \(120-96=24\) km/h.`, String.raw`\(48\div24=2\) hours.`], String.raw`\(2\)`),
+    q("dilution", String.raw`A \(10\) L tub of solution is \(30\%\) salt. How many litres of water must be added to make it \(20\%\) salt?`, num(5, 0.001),
+      "The amount of salt stays the same.",
+      [String.raw`Salt: \(0.3\times10=3\) L.`, String.raw`New total: \(3\div0.2=15\) L.`, String.raw`Add \(15-10=5\) L.`], String.raw`\(5\)`),
+    q("two raises", String.raw`After raises of \(5\%\) and then \(8\%\), a salary is \(56\,700\) dollars. What was it before the raises, in dollars?`, num(50000, 0.5),
+      "Multiply the factors, then divide.",
+      [String.raw`\(1.05\times1.08=1.134\).`, String.raw`\(56\,700\div1.134=50\,000\).`], String.raw`\(50\,000\)`),
   ]),
 
   wrapUp({

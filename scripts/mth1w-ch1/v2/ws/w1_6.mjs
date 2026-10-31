@@ -69,9 +69,7 @@ ${pointsGraph({ pts: [[-3, 0.125], [-2, 0.25], [-1, 0.5], [0, 1], [1, 2], [2, 4]
     { title: "Negative exponents", q: String.raw`Evaluate $4^{-3}$, $(-3)^{-2}$ and $-3^{-2}$.`, steps: [String.raw`$4^{-3}=\frac{1}{64}$.`, String.raw`$(-3)^{-2}=\frac{1}{(-3)^2}=\frac19$.`, String.raw`$-3^{-2}=-\frac{1}{3^2}=-\frac19$.`], ans: String.raw`$\frac{1}{64},\ \frac19,\ -\frac19$` },
     { title: "Negative exponent, fraction base", q: String.raw`Evaluate $\left(\frac32\right)^{-3}$ and $\left(-\frac14\right)^{-2}$.`, steps: [String.raw`Flip: $\left(\frac23\right)^3=\frac{8}{27}$.`, String.raw`Flip: $(-4)^2=16$.`], ans: String.raw`$\frac{8}{27}$ and $16$` },
     { title: "Order of operations", q: String.raw`Evaluate $2^3-3^2\times2^{-1}+(-2)^0$.`, steps: [String.raw`Powers: $8$, $9$, $\frac12$, $1$.`, String.raw`Multiply: $9\times\frac12=4.5$.`, String.raw`$8-4.5+1=4.5$.`], ans: "$4.5$" },
-    { title: "Folding paper", q: String.raw`A sheet $0.1$ mm thick is folded in half $n$ times, so its thickness is $0.1\times2^n$ mm. Find the thickness after $7$ folds.`,
-      fig: pointsGraph({ pts: [[0, 0.1], [1, 0.2], [2, 0.4], [3, 0.8], [4, 1.6], [5, 3.2], [6, 6.4], [7, 12.8]], xmin: 0, xmax: 7.5, ymin: 0, ymax: 14, xlabel: "folds $n$", ylabel: "mm", highlight: [7, 12.8], xtick: "0,1,...,7", ytick: "0,2,...,14", height: 5 }),
-      steps: [String.raw`$2^7=128$.`, String.raw`$0.1\times128=12.8$ mm.`], ans: "$12.8$ mm" },
+    { title: "Negative exponents inside and outside", q: String.raw`Evaluate $\left(4^{-1}+2^{-1}\right)^{-2}+\left(-\dfrac13\right)^{-2}$.`, steps: [String.raw`Inside the first bracket: $\dfrac14+\dfrac12=\dfrac34$.`, String.raw`Flip and square: $\left(\dfrac34\right)^{-2}=\left(\dfrac43\right)^2=\dfrac{16}{9}$.`, String.raw`Flip the second base and square: $(-3)^2=9$.`, String.raw`Add: $\dfrac{16}{9}+9=\dfrac{16}{9}+\dfrac{81}{9}=\dfrac{97}{9}$.`], ans: String.raw`$\dfrac{97}{9}$` },
   ],
   problems: PROBLEMS,
 };

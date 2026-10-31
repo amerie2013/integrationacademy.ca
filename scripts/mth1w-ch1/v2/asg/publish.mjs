@@ -35,7 +35,8 @@ const stamp = new Date().toISOString().replace(/[:.]/g, "-");
 fs.mkdirSync(path.resolve("scripts/mth1w-ch1/v2/backup"), { recursive: true });
 fs.mkdirSync(".lesson-preview", { recursive: true });
 
-for (const a of ASSIGNMENTS) {
+const ONLY = (process.argv.find((a) => a.startsWith("--only=")) ?? "").slice(7); // e.g. --only=1.7
+for (const a of ASSIGNMENTS.filter((x) => !ONLY || x.code === ONLY)) {
   const { data: rows, error } = await db.from("assignments").select("id, title, description, course_id").eq("course_id", CID).eq("title", a.title);
   if (error) throw error;
   if (rows.length !== 1) { console.log(`SKIP ${a.title}: ${rows.length} matching rows`); continue; }
