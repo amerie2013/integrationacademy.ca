@@ -1,0 +1,166 @@
+// LINALG1 chapter 5 assignments (homework): 12 questions each — Knowledge 1-3, Thinking 4-5, Communication 6-7,
+// Application 8-10, Hard Level 11-12. [[key|caption]] in a line is replaced by a figure (uploaded SVG) when published.
+// Every assignment is a new row with a fixed id (publish.mjs NEWID). Vectors and matrices here appear nowhere else
+// in the course (lessons, worksheets and bank use their own).
+import { vdoc } from "../vecfig.mjs";
+import { F } from "../bank/gen5.mjs";
+import { am } from "../bank/la.mjs";
+
+const S = String.raw;
+const grid = (view) => vdoc({ width: 300, view, step: 1 });
+
+export const ASSIGNMENTS = [
+  { code: "5.1", title: "Assignment 5.1 — Subspaces and the Subspace Test", figs: {
+      g: grid({ xmin: -4, xmax: 4, ymin: -4, ymax: 4 }),
+      p: F.plane([1, 0, 2], [0, 1, -3], { lu: "(1, 0, 2)", lv: "(0, 1, −3)" }) }, lines: [
+    "Knowledge & Understanding",
+    S`1. State the three conditions of the subspace test, and explain why every subspace contains \(\vec 0\).`,
+    S`2. Which of these contain \(\vec 0\)? (a) \(x_1-4x_2=0\) (b) \(x_1+x_2=x_3+1\) (c) \(x_1x_2x_3=0\) (d) \(x_1^2=x_2\).`,
+    S`3. Is \(\{(2t,\ -5t): t\in\mathbb R\}\) a subspace of \(\mathbb R^2\)? Sketch it on the grid. [[g|Grid]]`,
+    "Thinking",
+    S`4. For which \(a\) and \(b\) is \(\{\vec x\in\mathbb R^3: x_1+ax_2=b,\ x_3=b^2+a\}\) a subspace?`,
+    S`5. Is \(\{(x,y): y\ge-|x|\}\) closed under addition? Under scalar multiplication? Is it a subspace?`,
+    "Communication",
+    S`6. Explain why one example of two vectors whose sum stays in \(S\) does not prove that \(S\) is closed under addition, while one example whose sum leaves \(S\) does disprove it.`,
+    S`7. The plane through \(\vec 0\) spanned by \((1,0,2)\) and \((0,1,-3)\) is shown. Find its equation and prove with the subspace test that it is a subspace. [[p|A plane through the origin]]`,
+    "Application",
+    S`8. Prove that \(\{\vec x\in\mathbb R^4: x_1-x_2=0,\ 2x_3+x_4=0\}\) is a subspace and describe it with parameters.`,
+    S`9. A recipe uses flour, sugar and eggs in amounts \((f,s,e)\). The "balanced" recipes satisfy \(f=2s\) and \(e=s\). Is the set of balanced amount vectors a subspace of \(\mathbb R^3\)? What if we also require \(f\ge0\)?`,
+    S`10. Decide which are subspaces of \(\mathbb R^3\), with a proof or a counterexample: (a) \(\{(a,\ b,\ 0)\}\) (b) \(\{(a,\ 1,\ b)\}\) (c) \(\{(a,\ b,\ a-b)\}\).`,
+    "Hard Level",
+    S`11. Prove: if \(U\) and \(W\) are subspaces of \(\mathbb R^n\), then \(U+W=\{\vec u+\vec w\}\) is the smallest subspace containing both \(U\) and \(W\).`,
+    S`12. Let \(S\) be a nonempty set closed under the single operation \((\vec u,\vec v)\mapsto\vec u-\vec v\) and under scalar multiplication. Prove \(S\) is a subspace.`,
+  ] },
+
+  { code: "5.2", title: "Assignment 5.2 — Spans and Solution Sets as Subspaces", figs: {
+      p: F.plane([1, 3, 0], [0, 1, 2], { lu: "(1, 3, 0)", lv: "(0, 1, 2)", more: [[[2, 7, 2], "(2, 7, 2)", "green"]], len: 4 }),
+      l: F.line([3, -1, 2], { label: "(3, −1, 2)" }) }, lines: [
+    "Knowledge & Understanding",
+    S`1. Write \(\{(a-2b,\ 3a,\ b): a,b\in\mathbb R\}\) as a span and describe it.`,
+    S`2. Write the solution set of \(x_1-2x_2+4x_3=0\) as a span.`,
+    S`3. Is \((2,7,2)\) in \(\operatorname{Span}\{(1,3,0),(0,1,2)\}\) (figure)? Find the coefficients, showing every matrix. [[p|Two spanning vectors and a target]]`,
+    "Thinking",
+    S`4. Find a homogeneous equation describing \(\operatorname{Span}\{(1,3,0),(0,1,2)\}\), by row reduction and by the cross product.`,
+    S`5. For which \(k\) is \((1,k,4)\) in \(\operatorname{Span}\{(1,1,1),(1,2,4)\}\)?`,
+    "Communication",
+    S`6. Explain why \(\operatorname{Span}\{\vec u,\vec v\}=\operatorname{Span}\{\vec u,\ \vec v-5\vec u\}\), and connect this to row operations.`,
+    S`7. The line spanned by \((3,-1,2)\) is shown. Write two homogeneous equations whose solution set is exactly this line. [[l|A line through the origin]]`,
+    "Application",
+    S`8. Write the solution set of \(x_1+x_2-x_3+2x_4=0,\ x_2+x_3-x_4=0\) as a span, showing every matrix.`,
+    S`9. Two ingredient mixes contain (protein, fat, carbs) per kg of \((2,1,3)\) and \((1,1,1)\). Which target vectors \((p,f,c)\) can be produced exactly by combining them (allowing negative amounts)? Give an equation.`,
+    S`10. Does \(\{(1,2,1),(2,1,0),(0,3,2)\}\) span \(\mathbb R^3\)? If not, describe its span.`,
+    "Hard Level",
+    S`11. Prove that \(\operatorname{Span}\{\vec v_1,\dots,\vec v_k\}\) is contained in every subspace that contains \(\vec v_1,\dots,\vec v_k\).`,
+    S`12. For which \(a\) do \((1,a,a^2)\), \((1,1,1)\) and \((1,-1,1)\) span \(\mathbb R^3\)?`,
+  ] },
+
+  { code: "5.3", title: "Assignment 5.3 — Bases of a Subspace", figs: {
+      v: F.v3([[[1, 2, 0], "(1, 2, 0)"], [[0, 1, 3], "(0, 1, 3)"], [[2, 5, 3], "(2, 5, 3)", "green"]], { plane: [[1, 2, 0], [0, 1, 3], 1] }),
+      p: F.plane([1, 0, -3], [0, 1, 2], { lu: "", lv: "" }) }, lines: [
+    "Knowledge & Understanding",
+    S`1. Test \(\{(1,2,0),(0,1,3),(2,5,3)\}\) for independence; give a dependence relation if there is one. [[v|Three vectors]]`,
+    S`2. Is \(\{(1,-1),(2,3)\}\) a basis of \(\mathbb R^2\)? Find the coordinates of \((7,3)\) in it.`,
+    S`3. State the definition of a basis and the standard basis of \(\mathbb R^4\).`,
+    "Thinking",
+    S`4. For which \(k\) is \(\{(1,0,k),(0,1,1),(k,1,0)\}\) a basis of \(\mathbb R^3\)?`,
+    S`5. Find a basis of the plane \(3x_1-2x_2+x_3=0\) (figure) that contains the vector \((1,1,-1)\). [[p|The plane]]`,
+    "Communication",
+    S`6. Explain why the basis of a span must be taken from the original vectors in the pivot columns and not from the columns of the RREF.`,
+    S`7. Explain why coordinates in a basis are unique, and why they would not be unique for a spanning set that is not independent.`,
+    "Application",
+    S`8. Find a basis of \(\{\vec x\in\mathbb R^4: x_1+x_2+x_3=0,\ x_2-x_4=0\}\).`,
+    S`9. Find a basis of \(\operatorname{Span}\{(1,1,2,0),(2,2,4,0),(0,1,1,1),(1,2,3,1)\}\).`,
+    S`10. The vectors \((1,0,1)\), \((0,1,1)\), \((1,1,0)\) give "colour mixes". Find how much of each produces \((4,6,8)\).`,
+    "Hard Level",
+    S`11. Prove: if \(\{\vec v_1,\dots,\vec v_k\}\) is independent and \(\vec w\notin\operatorname{Span}\{\vec v_i\}\), then \(\{\vec v_1,\dots,\vec v_k,\vec w\}\) is independent.`,
+    S`12. Find all \((a,b)\) for which \(\{(1,a,0),(0,1,b),(1,0,1)\}\) is NOT a basis of \(\mathbb R^3\).`,
+  ] },
+
+  { code: "5.4", title: "Assignment 5.4 — Dimension", figs: {
+      v: F.v3([[[1, 1, 2], "(1, 1, 2)"], [[2, 1, 1], "(2, 1, 1)"], [[3, 2, 3], "(3, 2, 3)", "green"]], { plane: [[1, 1, 2], [2, 1, 1], 0.8] }),
+      l: F.plane([1, 0, 0], [0, 1, 1], { lu: "", lv: "", line: [1, 2, 2] }) }, lines: [
+    "Knowledge & Understanding",
+    S`1. Find \(\dim\operatorname{Span}\{(1,1,2),(2,1,1),(3,2,3)\}\) and a basis. [[v|Three vectors]]`,
+    S`2. Find the dimension of the solution space of \(x_1+2x_2-x_3+x_4-x_5=0\).`,
+    S`3. What are the possible dimensions of subspaces of \(\mathbb R^4\)? Give an example of each.`,
+    "Thinking",
+    S`4. Can a subspace of dimension 2 in \(\mathbb R^4\) contain three independent vectors? Can a set of three vectors span a 4-dimensional space? Explain.`,
+    S`5. Show that \(\{(1,2,2),(0,1,1)\}\) is a basis of the plane \(x_2=x_3\) using only the counting theorem.`,
+    "Communication",
+    S`6. Explain in your own words why all bases of a subspace have the same number of vectors.`,
+    S`7. The figure shows a line inside a plane inside \(\mathbb R^3\). Explain the inequalities between their dimensions and when equality would force two subspaces to be equal. [[l|Nested subspaces]]`,
+    "Application",
+    S`8. Find the dimension of the solution space of \(A\vec x=\vec 0\) for \(A=${am([[1, 2, -1, 0, 1], [2, 4, 1, 3, 0], [1, 2, 2, 3, -1]], false)}\).`,
+    S`9. A data set has 6 measured quantities subject to 2 independent linear constraints. What is the dimension of the set of possible measurement vectors? Justify.`,
+    S`10. Find \(\dim\{(a+b,\ b+c,\ a+2b+c,\ c-a)\}\).`,
+    "Hard Level",
+    S`11. Prove: if \(U\) and \(W\) are subspaces of \(\mathbb R^3\) of dimension 2, then \(U\cap W\ne\{\vec 0\}\).`,
+    S`12. For which \(k\) is \(\dim\operatorname{Span}\{(1,k,1),(k,1,1),(1,1,k)\}\) equal to 1, 2, 3?`,
+  ] },
+
+  { code: "5.5", title: "Assignment 5.5 — Orthogonal and Orthonormal Bases", figs: {
+      v: F.v3([[[1, 1, 1], "(1, 1, 1)"], [[1, -2, 1], "(1, −2, 1)"], [[1, 0, -1], "(1, 0, −1)"]]),
+      q: F.v2([[[4, 3], "(4, 3)", "blue"], [[-3, 4], "(−3, 4)", "red"], [[5, 10], "x", "green"]], { xmin: -4, xmax: 6, ymin: -1, ymax: 11 }) }, lines: [
+    "Knowledge & Understanding",
+    S`1. Show that \(\{(2,3,1),(1,-1,1),(-4,1,5)\}\) is an orthogonal basis of \(\mathbb R^3\).`,
+    S`2. Normalise the basis of Question 1.`,
+    S`3. Find the coordinates of \((5,10)\) in the orthogonal basis \(\{(4,3),(-3,4)\}\) using dot products. [[q|An orthogonal basis of ℝ²]]`,
+    "Thinking",
+    S`4. For which \(a,b\) is \(\{(1,a,2),(b,1,0),(2,0,-1)\}\) orthogonal?`,
+    S`5. Use the dot-product formula to decide whether \((1,4,2)\) lies in the plane with orthogonal basis \(\{(1,1,0),(1,-1,1)\}\).`,
+    "Communication",
+    S`6. Prove that orthogonal nonzero vectors are independent and explain where "nonzero" is used.`,
+    S`7. The figure shows an orthogonal set in \(\mathbb R^3\). Explain why any vector \(\vec x\) equals the sum of its three projections onto these vectors. [[v|An orthogonal basis of ℝ³]]`,
+    "Application",
+    S`8. Find the coordinates of \((3,0,6)\) in the orthogonal basis \(\{(1,1,1),(1,-2,1),(1,0,-1)\}\).`,
+    S`9. Complete \(\{(1,2,-2)\}\) to an orthogonal basis of \(\mathbb R^3\) (show your homogeneous system).`,
+    S`10. In an orthonormal basis, \(\vec x\) has coordinates \((1,-2,2)\) and \(\vec y\) has \((2,0,1)\). Find \(\|\vec x\|\), \(\|\vec y\|\) and \(\vec x\cdot\vec y\).`,
+    "Hard Level",
+    S`11. Prove: if \(\{\vec w_1,\dots,\vec w_k\}\) is orthonormal and \(\vec x\in\mathbb R^n\), then \(\sum_i(\vec x\cdot\vec w_i)^2\le\|\vec x\|^2\).`,
+    S`12. Find an orthonormal basis of the plane \(x_1+x_2+x_3=0\).`,
+  ] },
+
+  { code: "5.6", title: "Assignment 5.6 — Null Space, Column Space and Row Space", figs: {
+      c: F.plane([1, 1, 2], [2, -1, 1], { lu: "a₁", lv: "a₂", more: [[[4, 1, 5], "(4, 1, 5)", "green"]], len: 4.5 }),
+      n: F.plane([1, 0, -1], [0, 1, 2], { lu: "row 1", lv: "row 2", line: [1, -2, 1], fill: "#ede9fe", edge: "violet" }) }, lines: [
+    "Knowledge & Understanding",
+    S`1. For \(A=${am([[1, 2], [1, -1], [2, 1]], false)}\), compute \(A\vec x\) for \(\vec x=(2,1)\) as a combination of columns.`,
+    S`2. Is \((4,1,5)\) in \(\operatorname{Col}A\) for the matrix of Question 1 (figure)? Is \((1,1,1)\)? [[c|The column space]]`,
+    S`3. Is \((2,-1,1)\) in \(\operatorname{Null}A\) for \(A=${am([[1, 3, 1], [2, 1, -3]], false)}\)?`,
+    "Thinking",
+    S`4. Describe \(\operatorname{Col}A\) for the matrix of Question 1 by an equation.`,
+    S`5. For which \(h\) is \((1,h,1)\) in the row space of \(${am([[1, 0, -1], [0, 1, 2]], false)}\)?`,
+    "Communication",
+    S`6. Explain why row operations preserve the row space but not the column space, with a \(2\times2\) example.`,
+    S`7. For \(A=${am([[1, 0, -1], [0, 1, 2]], false)}\) the row space and null space are shown. Explain why they are perpendicular. [[n|Row space and null space]]`,
+    "Application",
+    S`8. Find \(\operatorname{Null}A\) as a span for \(A=${am([[1, -1, 2, 1], [2, -1, 3, 4]], false)}\).`,
+    S`9. A network of 3 roads must satisfy \(A\vec x=\vec b\) with \(A=${am([[1, 1, 0], [0, 1, 1], [1, 2, 1]], false)}\). Which demand vectors \(\vec b\) can be met?`,
+    S`10. Show that \(A\) and its RREF have the same null space and row space for \(A=${am([[2, 4, 2], [1, 3, 2]], false)}\), and compare the column spaces.`,
+    "Hard Level",
+    S`11. Prove that \(\operatorname{Null}A\cap\operatorname{Row}A=\{\vec 0\}\).`,
+    S`12. Find a \(3\times3\) matrix whose column space is the plane \(x_1-x_2+x_3=0\) and whose null space is the line spanned by \((1,1,1)\).`,
+  ] },
+
+  { code: "5.7", title: "Assignment 5.7 — Bases for the Fundamental Subspaces and Rank–Nullity", figs: {
+      r: F.plane([1, 0, 2], [0, 1, -1], { lu: "row 1", lv: "row 2", line: [-2, 1, 1], fill: "#ede9fe", edge: "violet" }),
+      c: F.plane([1, 2, 1], [0, 1, 1], { lu: "a₁", lv: "a₃" }) }, lines: [
+    "Knowledge & Understanding",
+    S`1. Find bases of \(\operatorname{Null}A\), \(\operatorname{Col}A\), \(\operatorname{Row}A\) for \(A=${am([[1, 3, 0, 2], [2, 6, 1, 5], [1, 3, 1, 3]], false)}\), showing every matrix.`,
+    S`2. Verify the rank–nullity theorem for the matrix of Question 1.`,
+    S`3. \(A\) is \(5\times8\) with rank 3. Find the dimensions of all three fundamental subspaces.`,
+    "Thinking",
+    S`4. For which \(k\) does \(${am([[1, 2, 1], [2, 4, "k"], [1, 2, 1]], false)}\) have nullity 2?`,
+    S`5. Can a \(4\times6\) matrix have a null space of dimension 1? Explain with rank–nullity.`,
+    "Communication",
+    S`6. Explain why the nonzero rows of an RREF are linearly independent.`,
+    S`7. The figure shows the row space and null space of a \(2\times3\) matrix with RREF rows \((1,0,2)\), \((0,1,-1)\). Explain how rank–nullity shows up in the picture. [[r|Row space and null space]]`,
+    "Application",
+    S`8. Find a basis of \(\operatorname{Col}A\) for \(A=${am([[1, 2, 0, 1], [2, 4, 1, 3], [1, 2, 1, 2]], false)}\) and describe it geometrically (figure). [[c|Column space]]`,
+    S`9. A \(6\times4\) system \(A\vec x=\vec b\) has \(\operatorname{rank}A=4\). Is it always consistent? When consistent, how many solutions?`,
+    S`10. Find the rank of \(A^T\) for \(A=${am([[1, 1, 2], [2, 3, 5], [1, 2, 3], [0, 1, 1]], false)}\) without row reducing \(A^T\).`,
+    "Hard Level",
+    S`11. Prove that for every \(m\times n\) matrix \(A\), \(\dim\operatorname{Null}A+\dim\operatorname{Col}A^T=n\).`,
+    S`12. Construct a \(3\times4\) matrix with \(\operatorname{Null}A=\operatorname{Span}\{(1,0,1,0),(0,1,0,1)\}\). What is its rank?`,
+  ] },
+];

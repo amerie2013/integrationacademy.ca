@@ -1,0 +1,166 @@
+// LINALG1 chapter 6 assignments (homework): 12 questions each — Knowledge 1-3, Thinking 4-5, Communication 6-7,
+// Application 8-10, Hard Level 11-12. [[key|caption]] in a line is replaced by a figure (uploaded SVG) when published.
+// Every assignment is a new row with a fixed id (publish.mjs NEWID). Matrices here appear nowhere else in the course
+// (lessons, worksheets and bank use their own).
+import { F } from "../bank/gen6.mjs";
+import { am } from "../bank/la.mjs";
+
+const S = String.raw;
+const M = (m) => am(m, false);
+const D = (m) => S`\left|\begin{array}{${"c".repeat(m[0].length)}}${m.map((r) => r.join(" & ")).join(" \\\\ ")}\end{array}\right|`;
+
+export const ASSIGNMENTS = [
+  { code: "6.1", title: "Assignment 6.1 — The Inverse of a Matrix", figs: {
+      p: F.row([[[[4, 7], [1, 2]], { label: "A" }], [[[2, -7], [-1, 4]], { label: "B" }]]),
+      s: F.v2([[[2, -1], "column 1", "blue"], [[-6, 3], "column 2", "red"]], { xmin: -7, xmax: 3, ymin: -2, ymax: 4 }) }, lines: [
+    "Knowledge & Understanding",
+    S`1. Show that the matrices in the figure are inverses of each other by computing both products. [[p|A and B]]`,
+    S`2. Use the formula to invert \(${M([[6, 5], [5, 4]])}\) and check your answer.`,
+    S`3. Explain from the figure why \(${M([[2, -6], [-1, 3]])}\) is singular, then confirm with \(ad-bc\) and a nonzero solution of \(A\vec x=\vec 0\). [[s|Its two columns]]`,
+    "Thinking",
+    S`4. For which \(k\) is \(${M([["k", 6], [2, "k-1"]])}\) singular? Find its inverse for \(k=0\).`,
+    S`5. \(A^{-1}=${M([[1, 2], [1, 3]])}\) and \(B^{-1}=${M([[2, 1], [1, 1]])}\). Find \((AB)^{-1}\), \((BA)^{-1}\) and \(A\).`,
+    "Communication",
+    S`6. Explain why \((AB)^{-1}=B^{-1}A^{-1}\) and not \(A^{-1}B^{-1}\), using a real-life analogy and a proof.`,
+    S`7. Explain why an invertible matrix has exactly one inverse, and why a matrix with a zero row cannot be invertible.`,
+    "Application",
+    S`8. A cipher encodes pairs of numbers \(\vec x\) as \(A\vec x\) with \(A=${M([[3, 2], [4, 3]])}\). Decode the messages \((8,11)\) and \((13,18)\).`,
+    S`9. Solve \(5x_1+2x_2=1,\ 7x_1+3x_2=2\) using the inverse of the coefficient matrix, and check.`,
+    S`10. Solve the matrix equation \(XA=B\) for \(A=${M([[2, 1], [3, 2]])}\), \(B=${M([[1, 0], [4, 1]])}\).`,
+    "Hard Level",
+    S`11. Prove that if \(A^2-4A+3I=0\) then \(A\) is invertible, and express \(A^{-1}\) as a combination of \(A\) and \(I\).`,
+    S`12. Prove that if \(A\) is invertible and symmetric, then \(A^{-1}\) is symmetric.`,
+  ] },
+
+  { code: "6.2", title: "Assignment 6.2 — Computing Inverses by Row Reduction", figs: {
+      a: F.row([[[[1, 2, 1, 1, 0, 0], [0, 1, 2, 0, 1, 0], [1, 1, 0, 0, 0, 1]], { label: "[ A | I ]" }]]),
+      t: F.pat("upper", 4) }, lines: [
+    "Knowledge & Understanding",
+    S`1. Invert \(${M([[1, 5], [2, 11]])}\) by row reducing \([\,A\mid I\,]\), showing every operation and matrix.`,
+    S`2. Reduce the matrix in the figure to find \(A^{-1}\), and check one product. [[a|[A | I] for a 3 × 3 matrix]]`,
+    S`3. Invert \(\operatorname{diag}(5,-2,\tfrac13)\) and explain the shortcut.`,
+    "Thinking",
+    S`4. Show by row reduction that \(${M([[1, 2, 3], [2, 1, 3], [3, 3, 6]])}\) is singular, and find a nonzero \(\vec x\) with \(A\vec x=\vec 0\).`,
+    S`5. For which \(a\) is \(${M([[1, 1, 0], [1, "a", 1], [0, 1, 1]])}\) invertible? Invert it for \(a=3\).`,
+    "Communication",
+    S`6. Explain why the right block of the reduced \([\,A\mid I\,]\) is \(A^{-1}\), using the systems \(A\vec x=\vec e_j\).`,
+    S`7. Explain why an upper triangular matrix with nonzero diagonal has an upper triangular inverse (pattern shown). [[t|An upper triangular pattern]]`,
+    "Application",
+    S`8. A company's three products need machine hours given by \(A=${M([[1, 1, 0], [0, 1, 1], [1, 0, 2]])}\) (rows: machines, columns: products). Using \(A^{-1}\), find production levels that use exactly \((10,12,14)\) hours, and \((5,5,5)\) hours.`,
+    S`9. Solve \(AX=B\) for \(A=${M([[1, 2], [3, 5]])}\), \(B=${M([[1, 0, 2], [0, 1, 1]])}\) by reducing \([\,A\mid B\,]\).`,
+    S`10. Invert the \(4\times4\) matrix \(${M([[1, 0, 0, 0], [2, 1, 0, 0], [0, 3, 1, 0], [0, 0, 4, 1]])}\) and describe the pattern.`,
+    "Hard Level",
+    S`11. Prove that if a square matrix has integer entries and its inverse also has integer entries, then \(\det A=\pm1\). (Use 6.6 if needed.)`,
+    S`12. Explain why the number of arithmetic operations to invert an \(n\times n\) matrix by row reduction grows like \(n^3\).`,
+  ] },
+
+  { code: "6.3", title: "Assignment 6.3 — Elementary Matrices", figs: {
+      e: F.row([[[[1, 0, 0], [0, 1, 0], [-5, 0, 1]], { label: "E" }], [[[1, 2, 0], [3, 1, 4], [5, 0, 2]], { label: "A" }]]),
+      r: F.mat([[2, 6], [1, 4]], { label: "A" }) }, lines: [
+    "Knowledge & Understanding",
+    S`1. Identify the operation performed by \(E\) in the figure, compute \(EA\), and give \(E^{-1}\). [[e|An elementary matrix and A]]`,
+    S`2. Write the \(3\times3\) elementary matrices for \(R_2\leftrightarrow R_3\), \(R_1\to-4R_1\) and \(R_3\to R_3+2R_2\).`,
+    S`3. Explain why every elementary matrix is invertible.`,
+    "Thinking",
+    S`4. Reduce the matrix in the figure to \(I\), record each step as an elementary matrix, and compute \(A^{-1}\) as their product. [[r|A 2 × 2 matrix]]`,
+    S`5. Write \(${M([[1, 0, 0], [3, 1, 0], [2, 4, 1]])}\) as a product of elementary matrices.`,
+    "Communication",
+    S`6. Explain the difference between \(EA\) and \(AE\) for an elementary \(E\), with an example.`,
+    S`7. Explain why, in \(E_k\cdots E_1A=I\), the first operation is the rightmost factor, and why \(A=E_1^{-1}\cdots E_k^{-1}\).`,
+    "Application",
+    S`8. In a spreadsheet, a row operation is applied to a table \(T\). Write the matrix \(E\) that subtracts 3 times row 1 from row 2 of a 3-row table and apply it to \(${M([[2, 4], [6, 1], [0, 5]])}\).`,
+    S`9. Find a single matrix that performs "swap rows 1 and 2, then add 2·row 1 to row 3" on any \(3\times n\) matrix.`,
+    S`10. Show that \(${M([[1, 2], [3, 4]])}\) is a product of four elementary matrices.`,
+    "Hard Level",
+    S`11. Prove that the product of two lower triangular matrices with 1s on the diagonal is again of that form, using elementary matrices.`,
+    S`12. Prove that \(E^T\) is elementary whenever \(E\) is, and describe its operation.`,
+  ] },
+
+  { code: "6.4", title: "Assignment 6.4 — The Invertible Matrix Theorem", figs: {
+      c: F.v3([[[1, 2, 1], "a₁"], [[0, 1, 2], "a₂"], [[1, 3, 3], "a₃"]]),
+      w: F.mat([[1, 0], [2, 1], [0, 3]], { label: "3 × 2" }) }, lines: [
+    "Knowledge & Understanding",
+    S`1. List six conditions equivalent to "\(A\) is invertible" for an \(n\times n\) matrix.`,
+    S`2. The columns of \(A\) are shown. Are they coplanar? Decide whether \(A\) is invertible and state three consequences. [[c|The columns of A]]`,
+    S`3. Is \(${M([[1, 2, 0], [0, 1, 3], [2, 4, 1]])}\) invertible? Show the row reduction.`,
+    "Thinking",
+    S`4. For which \(t\) is \(${M([[1, "t", 1], ["t", 1, 0], [1, 0, 1]])}\) invertible?`,
+    S`5. \(A\) is \(5\times5\) and \(A\vec x=\vec e_3\) has no solution. List four other facts about \(A\).`,
+    "Communication",
+    S`6. Explain why the theorem does not apply to the \(3\times2\) matrix in the figure: are its columns independent? Do they span \(\mathbb R^3\)? [[w|A 3 × 2 matrix]]`,
+    S`7. Explain why a square matrix with a one-sided inverse is invertible.`,
+    "Application",
+    S`8. A network of three nodes has flow equations with coefficient matrix \(${M([[1, -1, 0], [0, 1, -1], [-1, 0, 1]])}\). Show that the system cannot be solved for every demand vector, and find a demand vector that does work.`,
+    S`9. Show that \(${M([[2, 1, 1], [1, 2, 1], [1, 1, 2]])}\) is invertible without computing its inverse.`,
+    S`10. Give a \(3\times3\) matrix with no zero entries that is singular, and explain how you built it.`,
+    "Hard Level",
+    S`11. Prove: if \(A\) and \(B\) are \(n\times n\) and \(AB\) is invertible, then both \(A\) and \(B\) are invertible.`,
+    S`12. Prove: if \(A^k=0\) for some \(k\ge1\), then \(I-A\) is invertible with \((I-A)^{-1}=I+A+\dots+A^{k-1}\), but \(A\) itself is singular.`,
+  ] },
+
+  { code: "6.5", title: "Assignment 6.5 — Determinants and Cofactor Expansion", figs: {
+      p: F.v2([[[4, 1], "a₁", "blue"], [[1, 3], "a₂", "red"], [[5, 4], "", "red", [4, 1], true], [[5, 4], "", "blue", [1, 3], true]], { xmin: -1, xmax: 6, ymin: -1, ymax: 5 }),
+      z: F.mat([[3, 0, 1, 0], [2, 0, 0, 1], [1, 4, 2, 3], [0, 0, 5, 1]], { col: 1, label: "column 2" }) }, lines: [
+    "Knowledge & Understanding",
+    S`1. Compute \(\det\) of the matrix whose columns are shown and interpret its sign and size. [[p|The parallelogram on a₁ and a₂]]`,
+    S`2. Compute \(\det${M([[2, -1, 4], [3, 0, 1], [1, 2, -2]])}\) by expanding along row 1 and again along column 2.`,
+    S`3. Find all cofactors in row 2 of \(${M([[1, 3, 0], [2, -1, 4], [0, 5, 1]])}\).`,
+    "Thinking",
+    S`4. Compute the \(4\times4\) determinant in the figure, choosing the best column. [[z|A 4 × 4 matrix]]`,
+    S`5. For which \(x\) is \(${D([["x", 1, 2], [1, "x", 0], [2, 0, "x"]])}=0\)?`,
+    "Communication",
+    S`6. Explain why expanding along a row with many zeros saves work, and why the checkerboard signs are needed.`,
+    S`7. Explain why the determinant of a triangular matrix is the product of its diagonal.`,
+    "Application",
+    S`8. Find the area of the triangle with vertices \((2,1)\), \((7,3)\), \((3,6)\).`,
+    S`9. A plot of land has corners \((0,0)\), \((40,10)\), \((50,40)\), \((10,30)\) metres. Split it into two triangles and find its area with determinants.`,
+    S`10. Use a determinant to decide whether \((1,2)\), \((3,5)\), \((5,8)\) lie on one line.`,
+    "Hard Level",
+    S`11. Prove that a \(3\times3\) matrix with two equal rows has determinant 0, using cofactor expansion.`,
+    S`12. Compute \(${D([[1, 1, 1], ["a", "b", "c"], ["a^2", "b^2", "c^2"]])}\) and factor it.`,
+  ] },
+
+  { code: "6.6", title: "Assignment 6.6 — Properties of Determinants", figs: {
+      s: F.v2([[[3, 0], "a₁", "blue"], [[1, 2], "a₂", "red"], [[4, 2], "a₂ + a₁", "green", null, true]], { xmin: -1, xmax: 5, ymin: -1, ymax: 3 }),
+      r: F.mat([[0, 2, 4, 2], [1, 1, 2, 3], [2, 3, 5, 9], [1, 0, 1, 2]], { label: "A" }) }, lines: [
+    "Knowledge & Understanding",
+    S`1. State how each elementary row operation changes the determinant, and illustrate the replacement rule with the shear in the figure. [[s|A shear keeps the area]]`,
+    S`2. \(\det A=-2\), \(\det B=5\) (\(3\times3\)). Find \(\det(AB)\), \(\det(A^TB)\), \(\det(B^{-1})\), \(\det(3A)\), \(\det(A^2B^{-1})\).`,
+    S`3. Compute \(\det${M([[1, 2, 1], [3, 7, 4], [2, 3, 6]])}\) by row reduction.`,
+    "Thinking",
+    S`4. Compute the determinant of the \(4\times4\) matrix in the figure by row reduction, recording every swap and scaling. [[r|A 4 × 4 matrix]]`,
+    S`5. \(\det${M([["a", "b", "c"], ["d", "e", "f"], ["g", "h", "i"]])}=-3\). Find \(\det${M([["g", "h", "i"], ["2d", "2e", "2f"], ["a-d", "b-e", "c-f"]])}\).`,
+    "Communication",
+    S`6. Explain why \(\det A\ne0\) exactly when \(A\) is invertible.`,
+    S`7. Explain why \(\det(kA)=k^n\det A\), and give an example where \(\det(A+B)\ne\det A+\det B\).`,
+    "Application",
+    S`8. A design is scaled by \(A=${M([[2, 1], [0, 3]])}\) and then rotated by a matrix with determinant 1. By what factor does its area change?`,
+    S`9. Show that the volume of the box on the columns of \(AB\) equals the product of the volumes for \(A\) and \(B\), with \(A=${M([[1, 1, 0], [0, 1, 1], [1, 0, 1]])}\), \(B=\operatorname{diag}(1,2,3)\).`,
+    S`10. Use determinants to decide for which \(k\) the vectors \((1,2,k)\), \((2,k,1)\), \((k,1,2)\) are independent (hint: add all rows to the first).`,
+    "Hard Level",
+    S`11. Prove that if \(A\) is \(n\times n\) with \(n\) odd and \(A^T=-A\), then \(\det A=0\).`,
+    S`12. Prove \(\det(A^{-1}BA)=\det B\), and explain what it says about "similar" matrices.`,
+  ] },
+
+  { code: "6.7", title: "Assignment 6.7 — Cramer's Rule, the Adjugate and Volume", figs: {
+      v: F.v3([[[2, 0, 1], "a₁"], [[1, 3, 0], "a₂"], [[0, 1, 2], "a₃"]]),
+      c: F.row([[[[3, 2], [5, -1]], { label: "A" }], " ", [[[7, 2], [9, -1]], { col: 0, colFill: "#dcfce7", label: "A₁(b)" }], " ", [[[3, 7], [5, 9]], { col: 1, colFill: "#dcfce7", label: "A₂(b)" }]]) }, lines: [
+    "Knowledge & Understanding",
+    S`1. Solve the system shown by Cramer's rule and check. [[c|A, A₁(b), A₂(b)]]`,
+    S`2. Find \(\operatorname{adj}A\) and \(A^{-1}\) for \(A=${M([[1, 2, 0], [0, 1, 1], [2, 0, 1]])}\).`,
+    S`3. Find the volume of the box on the vectors in the figure. [[v|Three edge vectors]]`,
+    "Thinking",
+    S`4. Solve \(x_1+2x_2+x_3=4,\ 2x_1-x_2+x_3=3,\ x_1+x_2-x_3=1\) by Cramer's rule.`,
+    S`5. For which \(k\) is Cramer's rule applicable to \(kx_1+x_2=2,\ 4x_1+kx_2=k\)? Find \(x_1\) as a function of \(k\).`,
+    "Communication",
+    S`6. Explain why \(A\operatorname{adj}A=(\det A)I\): what are the diagonal and the off-diagonal entries?`,
+    S`7. Compare Cramer's rule and row reduction: when is each one the better tool?`,
+    "Application",
+    S`8. A linear map has matrix \(${M([[3, 1], [2, 2]])}\). A park of area 1500 m² is drawn on a map; what area does its image have?`,
+    S`9. Find the volume of the tetrahedron with vertices \((0,0,0)\), \((2,1,0)\), \((0,3,1)\), \((1,0,4)\) (volume \(=\tfrac16|\det|\)).`,
+    S`10. Use Cramer's rule to show that the solution of an integer system with \(\det A=\pm1\) has integer entries, and illustrate with \(A=${M([[2, 3], [1, 2]])}\), \(\vec b=(5,4)\).`,
+    "Hard Level",
+    S`11. Prove \(\det(\operatorname{adj}A)=(\det A)^{n-1}\) for invertible \(A\).`,
+    S`12. Prove Cramer's rule using the matrix \(I_i(\vec x)\) (the identity with column \(i\) replaced by \(\vec x\)).`,
+  ] },
+];

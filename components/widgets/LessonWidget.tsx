@@ -43,6 +43,15 @@ import { IBRadian, IBUnitCircle, IBIdentity, IBTrigEq, IBTrigGraph, IBSinusoid }
 import { IBRules, IBTrigDeriv, IBTangentNormal, IBTrigArea, IBSubstitution, IBAccumulate } from "./IBMoreCalc";
 import { IBDiscreteRV, IBBinomial, IBNormal, IBInverseNormal } from "./IBDistributions";
 import { IBCriteria, IBTopicNarrow, IBGraphQuality, IBModelFit } from "./IBExploration";
+import { LinearComboLab, LinePlaneLab as LALinePlane, NormLab, DotAngleLab, CrossProductLab, PlaneNormalLab, ProjectionLab as LAProjection } from "./LinAlg1";
+import { SystemLinesLab, RowOpsLab, GaussJordanLab, RankLab, SolutionSetLab, InterpolationLab } from "./LinAlg2";
+import { SubspaceTestLab, SpanDimensionLab, OrthoCoordsLab, FundamentalSubspacesLab } from "./LinAlg5";
+import { MatrixOpsLab, TransposeLab, MatVecLab, MatMulLab } from "./LinAlg3";
+import { Span2Lab, Span3Lab, DependLab, CoordsLab } from "./LinAlg4";
+import { Inverse2Lab, InverseStepsLab, ElementaryLab, DetAreaLab, CramerLab } from "./LinAlg6";
+import { Map2Lab, GeoLab as PlaneMapsLab, ComposeLab, KernelLab, BasisLab } from "./LinAlg7";
+import { EigHuntLab, CharPolyLab, EigSpaceLab, DiagLab, OrbitLab, SpiralLab, SymLab } from "./LinAlg8";
+import { PerpLab, OrthoMatLab, ProjLineLab, ProjMatLab, GSLab, QRLab, LsqLab } from "./LinAlg9";
 import { SimpleCompound, CompoundLab, PresentValueLab, AnnuityFV, AnnuityPV, AmortLab } from "./Finance11";
 import { PowerLab, PolyFeatures, FactoredPoly, PowerTransform, SecantLab, TangentSlope } from "./PolyFunctions";
 import { SyntheticDivide, FactorFinder, RootSolver, PolyFamily, InequalityGraph, SignChart } from "./PolyEquations";
@@ -267,6 +276,55 @@ const REGISTRY: Record<string, ComponentType<any>> = {
   ibNormal: IBNormal,
   ibInverseNormal: IBInverseNormal,
   ibCriteria: IBCriteria,
+  laCombo: LinearComboLab,
+  laLinePlane: LALinePlane,
+  laNorm: NormLab,
+  laDot: DotAngleLab,
+  laCross: CrossProductLab,
+  laPlaneNormal: PlaneNormalLab,
+  laProj: LAProjection,
+  laLines: SystemLinesLab,
+  laRowOps: RowOpsLab,
+  laGauss: GaussJordanLab,
+  laRank: RankLab,
+  laSolSet: SolutionSetLab,
+  laInterp: InterpolationLab,
+  laSubspace: SubspaceTestLab,
+  laSpanDim: SpanDimensionLab,
+  laOrthoCoords: OrthoCoordsLab,
+  laFundamental: FundamentalSubspacesLab,
+  laMatOps: MatrixOpsLab,
+  laTranspose: TransposeLab,
+  laMatVec: MatVecLab,
+  laMatMul: MatMulLab,
+  laSpan2: Span2Lab,
+  laSpan3: Span3Lab,
+  laDepend: DependLab,
+  laCoords: CoordsLab,
+  laInv2: Inverse2Lab,
+  laInvSteps: InverseStepsLab,
+  laElem: ElementaryLab,
+  laDetArea: DetAreaLab,
+  laCramer: CramerLab,
+  laMap2: Map2Lab,
+  laGeo: PlaneMapsLab,
+  laCompose: ComposeLab,
+  laKernel: KernelLab,
+  laBasis: BasisLab,
+  laEigHunt: EigHuntLab,
+  laCharPoly: CharPolyLab,
+  laEigSpace: EigSpaceLab,
+  laDiag: DiagLab,
+  laOrbit: OrbitLab,
+  laSpiral: SpiralLab,
+  laSym: SymLab,
+  laPerp: PerpLab,
+  laOrthoMat: OrthoMatLab,
+  laProjLine: ProjLineLab,
+  laProjMat: ProjMatLab,
+  laGS: GSLab,
+  laQR: QRLab,
+  laLsq: LsqLab,
   ibTopicNarrow: IBTopicNarrow,
   ibGraphQuality: IBGraphQuality,
   ibModelFit: IBModelFit,

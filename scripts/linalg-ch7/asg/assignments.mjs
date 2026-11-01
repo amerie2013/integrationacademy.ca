@@ -1,0 +1,166 @@
+// LINALG1 chapter 7 assignments (homework): 12 questions each — Knowledge 1-3, Thinking 4-5, Communication 6-7,
+// Application 8-10, Hard Level 11-12. [[key|caption]] in a line is replaced by a figure (uploaded SVG) when published.
+// Every assignment is a new row with a fixed id (publish.mjs NEWID). Matrices here appear nowhere else in the course
+// (lessons, worksheets and bank use their own).
+import { F } from "../bank/gen7.mjs";
+import { am } from "../bank/la.mjs";
+
+const S = String.raw;
+const M = (m) => am(m, false);
+const L = [[0, 0], [2, 0], [2, 1], [1, 1], [1, 3], [0, 3]];
+
+export const ASSIGNMENTS = [
+  { code: "7.1", title: "Assignment 7.1 — Matrix Transformations", figs: {
+      q: F.sq([[2, -1], [1, 2]]),
+      t: F.shape([[1, 1], [-1, 2]], [[0, 0], [3, 0], [0, 2]]) }, lines: [
+    "Knowledge & Understanding",
+    S`1. For \(A=${M([[3, 0, -1], [1, 2, 4]])}\), state the domain and codomain of \(T(\vec x)=A\vec x\) and compute \(T(2,-1,1)\) and \(T(0,3,1)\) with one matrix product.`,
+    S`2. Find the image of the unit square under the matrix in the figure and list its corners. [[q|The unit square and its image]]`,
+    S`3. Is \((2,5,1)\) in the range of \(T(\vec x)=${M([[1, 1], [2, 3], [1, -1]])}\vec x\)? Show the row reduction of \([A\mid\vec b]\).`,
+    "Thinking",
+    S`4. For \(A=${M([[1, -2, 1], [3, -6, 4]])}\), find every \(\vec x\) with \(T(\vec x)=(2,7)\), and check your particular input and direction vector by multiplication.`,
+    S`5. For which \(h\) is \((3,h,1)\) in the range of \(T(\vec x)=${M([[1, 2], [0, 1], [1, 1]])}\vec x\)? Describe the range as a plane.`,
+    "Communication",
+    S`6. Explain why the range of \(T(\vec x)=A\vec x\) is \(\operatorname{Col}A\), and why a \(3\times2\) matrix can never have all of \(\mathbb R^3\) as its range.`,
+    S`7. Explain why \(T(\vec x)=A\vec x\) sends lines to lines or points. When does a line collapse to a point?`,
+    "Application",
+    S`8. Transform the triangle in the figure by computing \(AP\) for the matrix of corners \(P\), and find the ratio of the areas. [[t|A triangle and its image]]`,
+    S`9. A store's sales of three products are \(\vec x\) and \(T(\vec x)=${M([[4, 6, 10], [1, 1, 2]])}\vec x\) gives (revenue, units of packaging). Find \(\vec x\) with whole-number entries when \(T(\vec x)=(64,12)\) and \(x_3=2\).`,
+    S`10. Find the image of the line \(\vec x=(0,1)+t(1,2)\) under \(${M([[1, 1], [3, -1]])}\) and of the line along \((1,-1)\) under \(${M([[2, 2], [1, 1]])}\).`,
+    "Hard Level",
+    S`11. Prove that if \(A\vec x=\vec b\) has two different solutions, then it has infinitely many, using \(T(\vec u)=T(\vec v)\).`,
+    S`12. Find a \(3\times3\) matrix whose range is the plane \(x_1+x_2+x_3=0\), and prove your answer.`,
+  ] },
+
+  { code: "7.2", title: "Assignment 7.2 — Linear Transformations", figs: {
+      s: F.v2([[[2, 1], "u", "blue"], [[1, 3], "v", "red"], [[3, 4], "u + v", "violet", null, true]], { xmin: -1, xmax: 4, ymin: -1, ymax: 5 }),
+      r: F.row([[[[1], [-2]], { label: "b" }], [[[3, 1, 2]], { label: "aᵀ" }]]) }, lines: [
+    "Knowledge & Understanding",
+    S`1. Prove that \(T(x_1,x_2,x_3)=(x_1-4x_3,\ 2x_2+x_3)\) is linear by writing it as \(A\vec x\), and check property (i) on \(\vec u=(1,1,0)\), \(\vec v=(2,0,1)\).`,
+    S`2. Decide whether each map is linear, giving a matrix or a numerical counterexample: \((x_1+x_2,\ x_1-x_2)\), \((x_1,\ x_2-3)\), \((x_1x_2,\ x_2)\).`,
+    S`3. \(T\) is linear, \(T(\vec u)=(4,-1)\), \(T(\vec v)=(1,2)\) for the vectors in the figure. Find \(T(\vec u+\vec v)\), \(T(3\vec u-\vec v)\) as matrix products. [[s|u, v and u + v]]`,
+    "Thinking",
+    S`4. \(T\) is linear with \(T(2,1)=(1,4)\) and \(T(1,1)=(0,3)\). Find \(T(\vec e_1)\), \(T(\vec e_2)\) and a formula for \(T\).`,
+    S`5. Find the matrix of \(T(\vec x)=(\vec a\cdot\vec x)\vec b\) for the vectors in the figure, and compute \(T(1,0,-1)\) two ways. [[r|b and aᵀ]]`,
+    "Communication",
+    S`6. Explain why \(T(\vec 0)=\vec 0\) is necessary but not sufficient for linearity, with an example of each kind.`,
+    S`7. Explain why knowing \(T(\vec e_1),\dots,T(\vec e_n)\) determines a linear map completely.`,
+    "Application",
+    S`8. A recipe map sends quantities of two mixes \((x_1,x_2)\) to grams of (flour, sugar, butter): mix 1 gives \((200,50,30)\), mix 2 gives \((100,80,40)\). Write the linear map as a matrix and compute the totals for 3 of mix 1 and 2 of mix 2.`,
+    S`9. Show that converting temperatures by \(F=\tfrac95C+32\) is not linear, but the change in temperature \(\Delta F=\tfrac95\Delta C\) is.`,
+    S`10. \(T:\mathbb R^2\to\mathbb R\) is linear with \(T(1,2)=7\) and \(T(3,-1)=0\). Find \(T(x_1,x_2)\).`,
+    "Hard Level",
+    S`11. Prove that if \(T\) is linear and \(\vec v_1,\dots,\vec v_k\) are linearly dependent, then \(T(\vec v_1),\dots,T(\vec v_k)\) are dependent. Is the converse true?`,
+    S`12. Prove that the set of linear maps \(\mathbb R^n\to\mathbb R^m\) is closed under addition and scalar multiples, and give the matrix of \(S+T\).`,
+  ] },
+
+  { code: "7.3", title: "Assignment 7.3 — The Standard Matrix", figs: {
+      g: F.sq([[0, 1], [-1, 0]], { names: ["T(e₁)", "T(e₂)"] }),
+      u: F.row([[[["A"]], {}], [[[1, 2], [1, 3]], { label: "U" }], "=", [[[4, 5], [1, 0]], { label: "W" }]]) }, lines: [
+    "Knowledge & Understanding",
+    S`1. Find the standard matrix of \(T(x_1,x_2,x_3)=(3x_1-x_2,\ x_2+5x_3,\ x_1-x_3,\ 2x_2)\), stating its size.`,
+    S`2. Read the standard matrix off the figure, describe the map, and apply it to \((4,1)\). [[g|Images of e₁ and e₂]]`,
+    S`3. Find the standard matrices of the projection of \(\mathbb R^3\) onto the \(x_2x_3\)-plane and of the map that swaps \(x_1\) and \(x_3\).`,
+    "Thinking",
+    S`4. Use the figure to find \(A\) from \(AU=W\), and check \(AU=W\). [[u|A U = W]]`,
+    S`5. \(T(1,0,1)=(2,1)\), \(T(0,1,1)=(1,1)\), \(T(0,0,1)=(1,0)\). Find the standard matrix of \(T\).`,
+    "Communication",
+    S`6. Explain why the standard matrix is unique, and why its columns (not rows) are the \(T(\vec e_j)\).`,
+    S`7. Explain why the data \(T(1,2)=(1,0)\), \(T(3,6)=(3,1)\) describe no linear map, while \(T(1,2)=(1,0)\), \(T(3,6)=(3,0)\) describe infinitely many.`,
+    "Application",
+    S`8. A graphics program first flips images left–right and then stretches them vertically by 2. Find the standard matrix of the combined effect and apply it to the corners of the unit square.`,
+    S`9. A linear map on \(\mathbb R^3\) gives the change in (x, y, z) position of a robot arm per unit of three motor settings: motor 1 moves \((1,0,2)\), motor 2 moves \((0,1,1)\), motor 3 moves \((1,1,0)\). Find the matrix and the movement for settings \((2,3,1)\).`,
+    S`10. Find the standard matrix of \(T(\vec x)=\vec x-2(\vec u\cdot\vec x)\vec u\) for \(\vec u=\tfrac1{\sqrt2}(1,1)\), and identify the map.`,
+    "Hard Level",
+    S`11. Prove that if \(T\) is linear and \(T(\vec u_j)=\vec w_j\) for a basis \(\vec u_1,\dots,\vec u_n\), then \(A=WU^{-1}\), and explain what goes wrong without a basis.`,
+    S`12. Find all \(2\times2\) matrices \(A\) with \(A(1,1)=(1,1)\) and \(A(1,-1)=(-1,1)\), and describe the map geometrically.`,
+  ] },
+
+  { code: "7.4", title: "Assignment 7.4 — Geometric Transformations of the Plane", figs: {
+      f: F.shape([[0, -1], [1, 0]], L, { label: "image" }),
+      p: F.v2([[[6, 2], "x", "blue"]], { xmin: -1, xmax: 7, ymin: -1, ymax: 5 }, { segs: [{ pts: [[-1, -0.5], [7, 3.5]], color: "green", w: 2.4 }] }) }, lines: [
+    "Knowledge & Understanding",
+    S`1. Write \(R_{30^\circ}\) and \(R_{135^\circ}\) exactly and rotate \((2,2)\) by each.`,
+    S`2. Identify the map in the figure, write its matrix, and confirm with the corners. [[f|An L-shape and its image]]`,
+    S`3. Write the matrices of the reflections in the \(x_2\)-axis and in \(x_2=-x_1\), and reflect \((5,-3)\) in each.`,
+    "Thinking",
+    S`4. Find the projection and the reflection in the line \(x_2=\tfrac12x_1\) and apply both to the vector in the figure. Check that \(P\vec x\) is the midpoint of \(\vec x\) and \(R\vec x\). [[p|The line x₂ = ½x₁ and x]]`,
+    S`5. Identify \(A=\tfrac1{13}${M([[5, 12], [12, -5]])}\) geometrically, with full justification.`,
+    "Communication",
+    S`6. Derive \(R_\theta\) from the images of \(\vec e_1\) and \(\vec e_2\), with a sketch.`,
+    S`7. Explain why a shear keeps areas but a projection does not, using determinants and a picture.`,
+    "Application",
+    S`8. A satellite dish is turned by \(60^\circ\). Find where the feed point \((0,3)\) moves, exactly and to 2 decimals.`,
+    S`9. A "shadow" is made by projecting onto the line \(x_2=3x_1\). Find the images of the corners of the triangle \((1,0),(2,2),(0,2)\) with one product \(PC\), and explain why the shadow has area 0.`,
+    S`10. Find the single matrix that rotates by \(90^\circ\) and then reflects in \(x_2=x_1\), and identify it.`,
+    "Hard Level",
+    S`11. Prove that a \(2\times2\) matrix with \(A^TA=I\) and \(\det A=1\) is a rotation.`,
+    S`12. Prove that the composition of two reflections in lines through \(\vec 0\) at angles \(\alpha\) and \(\beta\) is the rotation by \(2(\beta-\alpha)\).`,
+  ] },
+
+  { code: "7.5", title: "Assignment 7.5 — Composition and Inverse Transformations", figs: {
+      c: F.shape([[0, 1], [-1, 0]], L, { label: "after both" }),
+      h: F.sq([[1, -2], [0, 1]]) }, lines: [
+    "Knowledge & Understanding",
+    S`1. \(T\) has matrix \(${M([[2, 1], [0, 1]])}\) and \(S\) has \(${M([[1, 0], [3, 1]])}\). Find the matrices of \(S\circ T\) and \(T\circ S\) and compare.`,
+    S`2. The figure shows an L-shape after a reflection in the \(x_1\)-axis followed by another map. Find the second map. [[c|After both maps]]`,
+    S`3. Find the inverse of the shear in the figure and check both products. [[h|A shear of the unit square]]`,
+    "Thinking",
+    S`4. \(T:\mathbb R^3\to\mathbb R^2\) has \(A=${M([[1, -1, 0], [2, 0, 1]])}\) and \(S:\mathbb R^2\to\mathbb R^3\) has \(B=${M([[1, 0], [1, 1], [0, 2]])}\). Find the matrices of \(S\circ T\) and \(T\circ S\); which can be invertible?`,
+    S`5. Find \(T^{-1}\) for \(T(\vec x)=${M([[1, 2, 1], [0, 1, 1], [1, 2, 2]])}\vec x\) by row reducing \([A\mid I]\), and solve \(T(\vec x)=(4,2,5)\).`,
+    "Communication",
+    S`6. Explain why the matrix of "first \(T\), then \(S\)" is \(BA\), not \(AB\).`,
+    S`7. Explain why \((S\circ T)^{-1}=T^{-1}\circ S^{-1}\), with an everyday analogy.`,
+    "Application",
+    S`8. A design is rotated by \(45^\circ\), then scaled by 2. Find the single matrix, and the matrix that undoes the whole edit.`,
+    S`9. An encoding multiplies by \(${M([[2, 3], [3, 5]])}\) and then by \(${M([[1, 1], [0, 1]])}\). Decode the message \((13,8)\).`,
+    S`10. Find the matrix of rotating by \(30^\circ\) six times, and of rotating by \(30^\circ\) and then by \(-30^\circ\).`,
+    "Hard Level",
+    S`11. Let \(T:\mathbb R^3\to\mathbb R^2\) and \(S:\mathbb R^2\to\mathbb R^3\) be linear. Prove that \(S\circ T:\mathbb R^3\to\mathbb R^3\) is never invertible.`,
+    S`12. Find all \(2\times2\) matrices that commute with every rotation, and prove your answer.`,
+  ] },
+
+  { code: "7.6", title: "Assignment 7.6 — Kernel and Range; One-to-One and Onto", figs: {
+      k: F.ker([3, -1]),
+      m: F.mat([[1, 2, 0, -1], [2, 4, 1, 1], [1, 2, 1, 2]], { label: "A" }) }, lines: [
+    "Knowledge & Understanding",
+    S`1. Find bases of the kernel and the range of \(T(\vec x)=${M([[1, 3, -2], [2, 6, -4]])}\vec x\), and check the dimension count.`,
+    S`2. The figure shows the kernel of a \(2\times2\) matrix. Find such a matrix whose range is the \(x_1\)-axis. [[k|A kernel line]]`,
+    S`3. Decide whether \(T(\vec x)=${M([[1, 0], [1, 1], [2, 1]])}\vec x\) is one-to-one and whether it is onto, with row reduction.`,
+    "Thinking",
+    S`4. Find \(\dim\ker T\), \(\dim\operatorname{range}T\) and a kernel basis for the matrix in the figure. [[m|A 3 × 4 matrix]]`,
+    S`5. For which \(h\) is \(T(\vec x)=${M([[1, 1, 2], [1, "h", 3], [2, 3, "h+3"]])}\vec x\) one-to-one?`,
+    "Communication",
+    S`6. Explain why a pivot in every column means one-to-one, and a pivot in every row means onto.`,
+    S`7. Explain why, for square matrices, one-to-one and onto are equivalent.`,
+    "Application",
+    S`8. A mixing machine sends ingredient amounts \((x_1,x_2,x_3)\) to two measured properties by \(${M([[1, 2, 3], [2, 4, 6]])}\). Which property pairs are achievable? Which ingredient mixes give \((0,0)\)?`,
+    S`9. A sensor network computes \(A\vec x\) with \(A\) of size \(5\times3\) and rank 3. Can it tell different states \(\vec x\) apart? Can it produce every reading?`,
+    S`10. Find two different inputs with the same image under \(${M([[2, -1, 1], [4, -2, 2]])}\).`,
+    "Hard Level",
+    S`11. Prove that \(\ker T\) and \(\operatorname{range}T\) are subspaces, and that \(T\) is one-to-one exactly when \(\ker T=\{\vec 0\}\).`,
+    S`12. Prove that if \(T:\mathbb R^n\to\mathbb R^m\) is onto and \(S:\mathbb R^m\to\mathbb R^p\) is onto, then \(S\circ T\) is onto. Is the same true for one-to-one?`,
+  ] },
+
+  { code: "7.7", title: "Assignment 7.7 — The Matrix of a Transformation Relative to a Basis", figs: {
+      b: F.v2([[[1, 2], "b₁", "blue"], [[1, 1], "b₂", "red"], [[3, 5], "x", "violet"]], { xmin: -1, xmax: 4, ymin: -1, ymax: 6 }),
+      e: F.v2([[[1, 1], "b₁", "blue"], [[4, 4], "T(b₁)", "blue", null, true], [[1, -2], "b₂", "red"], [[1, -2], "", "red"]], { xmin: -1, xmax: 5, ymin: -3, ymax: 5 }) }, lines: [
+    "Knowledge & Understanding",
+    S`1. Find \([\vec x]_{\mathcal B}\) for the basis and vector in the figure, and check \(\vec x=P[\vec x]_{\mathcal B}\). [[b|A basis and a vector]]`,
+    S`2. For \(\mathcal B=\{(2,1),(1,1)\}\), find \(\vec x\) with \([\vec x]_{\mathcal B}=(3,-2)\).`,
+    S`3. \(T(\vec b_1)=4\vec b_1\) and \(T(\vec b_2)=\vec b_2\) as in the figure. Write \([T]_{\mathcal B}\) and find \(A=P[T]_{\mathcal B}P^{-1}\). [[e|b₁ is stretched, b₂ is fixed]]`,
+    "Thinking",
+    S`4. Find \([T]_{\mathcal B}=P^{-1}AP\) for \(A=${M([[3, 2], [1, 2]])}\) and \(\mathcal B=\{(2,1),(1,-1)\}\), showing \(AP\) first.`,
+    S`5. Use your answer to 4 to compute \(A^6\).`,
+    "Communication",
+    S`6. Explain why the columns of \([T]_{\mathcal B}\) are the \(\mathcal B\)-coordinates of \(T(\vec b_j)\).`,
+    S`7. Explain why similar matrices have the same determinant and trace, and give two matrices with equal determinant and trace that are not similar.`,
+    "Application",
+    S`8. A population model updates (young, adult) numbers by \(${M([[0, 2], ["\\tfrac12", 0]])}\). Using \(\mathcal B=\{(2,1),(-2,1)\}\), find \([T]_{\mathcal B}\) and describe the long-run behaviour.`,
+    S`9. Find the standard matrix of the stretch by 3 along \((1,2)\) that fixes \((-2,1)\).`,
+    S`10. Find the matrix of the reflection in the plane \(x_3=0\) of \(\mathbb R^3\) relative to \(\mathcal B=\{(1,0,1),(0,1,0),(1,0,-1)\}\).`,
+    "Hard Level",
+    S`11. Prove that if \(A=PDP^{-1}\) then \(A^k=PD^kP^{-1}\) for every \(k\ge1\), and \(A^{-1}=PD^{-1}P^{-1}\) when \(D\) is invertible.`,
+    S`12. Prove that \(${M([[1, 1], [0, 1]])}\) is not similar to any diagonal matrix.`,
+  ] },
+];

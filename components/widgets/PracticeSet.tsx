@@ -58,7 +58,7 @@ export function PracticeSet({ title = "Practice — check your understanding", q
                 </div>
               ) : (
                 <form onSubmit={(e) => { e.preventDefault(); if (s.value.trim()) check(s.value); }} style={{ display: "flex", gap: 8, flexWrap: "wrap", marginTop: 10, alignItems: "center" }}>
-                  <input value={s.value} onChange={(e) => set(i, { value: e.target.value, correct: false, formNote: false })} placeholder={q.placeholder ?? (q.answer.kind === "expr" ? "e.g. 3x^2 - 2x + 5" : q.answer.kind === "roots" ? "all roots, e.g. x = 1 or x = 2" : "Your answer")} aria-label={`Answer to question ${i + 1}`}
+                  <input value={s.value} onChange={(e) => set(i, { value: e.target.value, correct: false, formNote: false })} placeholder={q.placeholder ?? (q.answer.kind === "expr" ? "e.g. 3x^2 - 2x + 5" : q.answer.kind === "roots" ? "all roots, e.g. x = 1 or x = 2" : q.answer.kind === "vector" ? `components, e.g. (${q.answer.value.map((_, k) => [2, -1, 3, 0, 5][k % 5]).join(", ")})` : "Your answer")} aria-label={`Answer to question ${i + 1}`}
                     style={{ border: "1px solid #cbd5e1", borderRadius: 9, padding: "8px 12px", fontSize: 16, minWidth: 180, flex: "0 1 260px", fontFamily: "inherit" }} />
                   <button type="submit" style={btn(true)}>Check</button>
                 </form>

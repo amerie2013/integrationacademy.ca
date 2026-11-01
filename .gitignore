@@ -95,3 +95,9 @@ scripts/_ftce/fulltext.txt
 /scripts/mdm4u-ch*/ws/out/
 /scripts/mdm4u-ch*/bank/out/
 /scripts/mdm4u-ch*/backup/
+/scripts/linalg-ch*/out/
+/scripts/linalg-ch*/ws/out/
+/scripts/linalg-ch*/bank/out/
+/scripts/linalg-ch*/backup/
+/scripts/linalg-ch*/asg/out/
+/Linear Algebra Abdulahad/

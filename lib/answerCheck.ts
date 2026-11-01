@@ -17,7 +17,10 @@ export type AnswerSpec =
   | { kind: "expr"; value: string; simplified?: boolean; factored?: boolean }
   // the roots of an equation, typed in any order: "-3, 5", "x = -3 or x = 5", "±4". An empty value means
   // there are no real roots ("none", "no real roots"). tol allows rounded answers (e.g. 0.01).
-  | { kind: "roots"; value: number[]; tol?: number };
+  | { kind: "roots"; value: number[]; tol?: number }
+  // a vector, components in order: "(2, -1, 3)", "[2 -1 3]", "<2,-1,3>", fractions allowed. parallel: any nonzero
+  // scalar multiple counts (a direction or normal vector, where the length is a free choice).
+  | { kind: "vector"; value: number[]; tol?: number; parallel?: boolean };
 
 const MINUS = /[−–—]/g; // typographic minus / dashes -> "-"
 
@@ -61,6 +64,7 @@ export function checkAnswer(spec: AnswerSpec, raw: string | number): boolean {
   }
   if (spec.kind === "expr") return sameExpr(spec.value, s) && !(spec.simplified && notSimplified(spec.value, s)) && !(spec.factored && notFactored(spec.value, s));
   if (spec.kind === "roots") return rootsMatch(spec, s) === "all";
+  if (spec.kind === "vector") return vectorMatch(spec, s);
   let v = parseNumber(s.replace(/^\s*[a-zA-Z]\s*=\s*/, "")); // "x = 4" counts as 4
   if (v === null) return false;
   // "35" for a percent question means 35%.
@@ -119,6 +123,27 @@ export function rootsMatch(spec: { value: number[]; tol?: number }, raw: string)
   if (got.length === 0) return "no";
   if (!got.every((g) => want.some((w) => Math.abs(g - w) <= tol))) return "no";
   return want.every((w) => got.some((g) => Math.abs(g - w) <= tol)) ? "all" : "some";
+}
+
+/** Parse a typed vector: brackets of any kind (or none), components split by commas, semicolons or spaces. */
+export function parseVector(raw: string): number[] | null {
+  const s = raw.replace(MINUS, "-").replace(/^\s*[a-z]\s*=\s*/i, "").replace(/[()[\]<>⟨⟩{}]/g, " ").trim();
+  if (!s) return null;
+  const parts = s.includes(",") || s.includes(";") ? s.split(/\s*[,;]\s*/) : s.split(/\s+/);
+  const out = parts.filter((p) => p !== "").map((p) => parseNumber(p));
+  return out.length && out.every((v) => v !== null) ? (out as number[]) : null;
+}
+
+function vectorMatch(spec: { value: number[]; tol?: number; parallel?: boolean }, raw: string): boolean {
+  const got = parseVector(raw);
+  if (!got || got.length !== spec.value.length) return false;
+  const tol = spec.tol ?? 1e-6;
+  if (!spec.parallel) return got.every((g, i) => Math.abs(g - spec.value[i]) <= tol);
+  // nonzero multiple: scale by the largest component of the expected vector
+  const i = spec.value.reduce((b, v, k) => (Math.abs(v) > Math.abs(spec.value[b]) ? k : b), 0);
+  if (Math.abs(got[i]) <= 1e-12) return false;
+  const k = got[i] / spec.value[i];
+  return got.every((g, j) => Math.abs(g - k * spec.value[j]) <= tol * Math.max(1, Math.abs(k)));
 }
 
 /** Right value, wrong form — lets the UI say so instead of "not yet". */
