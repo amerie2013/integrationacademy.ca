@@ -35,8 +35,9 @@ const COURSE_GROUPS: { key: string; label: string; sub: string; courses: Course[
   {
     key: "advanced",
     label: "University & Advanced",
-    sub: "Exam prep for AP and IB, and certification prep for future math teachers.",
+    sub: "University courses, exam prep for AP and IB, and certification prep for future math teachers.",
     courses: [
+      { id: "ecde4f8f-5ccf-410d-a70a-a71a89847088", code: "LINALG1", name: "Linear Algebra I", tag: "University" },
       { id: "7032f89e-430d-4ab4-b3f7-7b457c8352b4", code: "APCALCAB", name: "AP® Calculus AB Exam Preparation", tag: "AP" },
       { id: "f635431f-3244-45c3-9c4a-39a33fd209b9", code: "IBAASL", name: "Mathematics: Analysis & Approaches SL", tag: "IB Diploma" },
       { id: "8a8d0e91-8390-4032-8eca-f51b2b2c200b", code: "FTCE", name: "FTCE Mathematics 6–12", tag: "Certification" },
