@@ -1,6 +1,6 @@
 // MTH1W 5.3 — Units & Unit Conversion (self-study format): metric, imperial, area/volume units, rates
 import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, q, num, choice } from "./lib.mjs";
-import { fig, rect } from "./figs5.mjs";
+import { fig, rect, prism } from "./figs5.mjs";
 
 export const TITLE = "5.3 Units & Unit Conversion";
 
@@ -64,20 +64,37 @@ export const blocks = () => [
 
   examples([
     ["Within metric", String.raw`A trail is \(4.8\) km long. Write the length in metres and in centimetres.`,
-      [String.raw`\(4.8\times1000=4800\) m.`, String.raw`\(4800\times100=480\,000\) cm.`],
+      [String.raw`<b>Facts.</b> \(1\ \text{km}=1000\ \text{m}\) and \(1\ \text{m}=100\ \text{cm}\).`,
+        String.raw`<b>Rule.</b> Going to a <i>smaller</i> unit gives a <i>bigger</i> number, so multiply.`,
+        String.raw`<b>km to m:</b> \(4.8\times1000=4800\) m.`,
+        String.raw`<b>m to cm:</b> \(4800\times100=480\,000\) cm.`,
+        String.raw`<b>Check:</b> \(1\ \text{km}=100\,000\ \text{cm}\), and \(4.8\times100\,000=480\,000\) ✓.`],
       String.raw`\(4800\) m \(=480\,000\) cm`],
     ["A height in feet and inches", String.raw`A player is \(5\) ft \(7\) in tall. Find the height in centimetres.`,
-      [String.raw`\(5\times12+7=67\) in.`, String.raw`\(67\times2.54=170.18\) cm.`],
+      [String.raw`<b>Facts.</b> \(1\ \text{ft}=12\ \text{in}\) and \(1\ \text{in}=2.54\ \text{cm}\).`,
+        String.raw`<b>Write everything in inches.</b> \(5\) ft \(=5\times12=60\) in, plus \(7\) in: \(60+7=67\) in.`,
+        String.raw`<b>Inches to centimetres:</b> \(67\times2.54=170.18\) cm.`,
+        String.raw`<b>Check:</b> \(170.18\div2.54=67\) in ✓.`],
       String.raw`about \(170.2\) cm`],
     ["Area units", String.raw`A floor is \(3.2\) m by \(4.5\) m. Find its area in \(\text{m}^2\) and in \(\text{cm}^2\).`,
-      [String.raw`\(3.2\times4.5=14.4\ \text{m}^2\).`, String.raw`\(1\ \text{m}^2=10\,000\ \text{cm}^2\), so \(14.4\times10\,000=144\,000\ \text{cm}^2\).`, String.raw`Check another way: \(320\times450=144\,000\) ✓`],
+      [String.raw`<b>Formula.</b> \[A=l\times w\] \(A=3.2\times4.5=14.4\ \text{m}^2\).`,
+        String.raw`<b>Square units.</b> A \(1\ \text{m}\times1\ \text{m}\) square is \(100\ \text{cm}\times100\ \text{cm}\), so \(1\ \text{m}^2=10\,000\ \text{cm}^2\) (not 100!).`,
+        String.raw`<b>Convert:</b> \(14.4\times10\,000=144\,000\ \text{cm}^2\).`,
+        String.raw`<b>Check another way.</b> Convert the lengths first: \(320\ \text{cm}\times450\ \text{cm}\), and \(320\times450=144\,000\) ✓.`],
       String.raw`\(14.4\ \text{m}^2=144\,000\ \text{cm}^2\)`,
       fig({ w: 260, items: rect(4.5, 3.2, { lw: "4.5 m", lh: "3.2 m" }) })],
     ["Volume and capacity", String.raw`An aquarium is \(60\) cm by \(30\) cm by \(40\) cm. How many litres does it hold? About how many US gallons?`,
-      [String.raw`\(V=60\times30\times40=72\,000\ \text{cm}^3\).`, String.raw`\(1000\ \text{cm}^3=1\) L, so \(72\,000\div1000=72\) L.`, String.raw`\(72\div3.785\approx19.0\) gallons.`],
-      String.raw`\(72\) L, about \(19\) US gallons`],
+      [String.raw`<b>Formula.</b> \[V=l\times w\times h\] \(V=60\times30\times40=72\,000\ \text{cm}^3\).`,
+        String.raw`<b>Capacity.</b> \(1000\ \text{cm}^3=1\) L, so \(72\,000\div1000=72\) L.`,
+        String.raw`<b>Litres to gallons.</b> \(1\) US gallon \(\approx3.785\) L. A gallon is bigger than a litre, so divide: \(72\div3.785\approx19.0\).`,
+        String.raw`<b>Check:</b> \(19\times3.785\approx71.9\), close to \(72\) L ✓.`],
+      String.raw`\(72\) L, about \(19\) US gallons`,
+      fig({ w: 260, items: prism(6, 3, 4, { ll: "60 cm", lw: "30 cm", lh: "40 cm" }) })],
     ["Converting a rate", String.raw`A highway speed limit is \(100\) km/h. Write it in metres per second and in miles per hour.`,
-      [String.raw`\(100\times1000\div3600\approx27.8\) m/s.`, String.raw`\(100\div1.609\approx62.1\) mi/h.`],
+      [String.raw`<b>Method.</b> Multiply by conversion fractions that are equal to 1, so the unwanted units cancel: \[100\ \tfrac{\text{km}}{\text{h}}\times\tfrac{1000\ \text{m}}{1\ \text{km}}\times\tfrac{1\ \text{h}}{3600\ \text{s}}\]`,
+        String.raw`<b>Metres per second:</b> \(\frac{100\times1000}{3600}=\frac{100\,000}{3600}\approx27.8\) m/s.`,
+        String.raw`<b>Miles per hour.</b> \(1\) mi \(\approx1.609\) km, so \(100\div1.609\approx62.1\) mi/h.`,
+        String.raw`<b>Check:</b> \(27.8\times3600\approx100\,080\) m, about \(100\) km in one hour ✓.`],
       String.raw`about \(27.8\) m/s, or \(62\) mi/h`],
   ]),
 
