@@ -1,7 +1,7 @@
 // MTH1W 6.2 — One-Variable Data & Statistics (self-study format): mean, median, mode, range, quartiles,
 // IQR, box plots, outliers, frequency tables and histograms
 import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, q, num, choice } from "./lib.mjs";
-import { boxPlot, dotPlot, histogram } from "./figs6.mjs";
+import { boxPlot, dotPlot, histogram, barChart } from "./figs6.mjs";
 
 export const TITLE = "6.2 One-Variable Data & Statistics";
 
@@ -69,21 +69,42 @@ export const blocks = () => [
 
   examples([
     ["Mean, median, mode", String.raw`The numbers of minutes eight students spent on homework were \(35, 50, 20, 45, 50, 60, 40, 30\). Find the mean, median and mode.`,
-      [String.raw`Sum \(=330\); mean \(=330\div8=41.25\) min.`, String.raw`Ordered: \(20, 30, 35, 40, 45, 50, 50, 60\). Median \(=\frac{40+45}{2}=42.5\) min.`, String.raw`Mode \(=50\) min (twice).`],
-      String.raw`mean \(41.25\), median \(42.5\), mode \(50\) minutes`],
+      [String.raw`<b>Definitions.</b> \[\text{mean}=\frac{\text{sum of values}}{\text{number of values}}\] The <i>median</i> is the middle value of the ordered list; the <i>mode</i> is the most frequent value.`,
+        String.raw`<b>Mean:</b> sum \(=35+50+20+45+50+60+40+30=330\); mean \(=330\div8=41.25\) min.`,
+        String.raw`<b>Median.</b> Order the data: \(20, 30, 35, 40, 45, 50, 50, 60\). With \(n=8\) (even) there are two middle values, the 4th and 5th: \(\frac{40+45}{2}=42.5\) min.`,
+        String.raw`<b>Mode:</b> \(50\) appears twice, more than any other value: mode \(=50\) min.`],
+      String.raw`mean \(41.25\), median \(42.5\), mode \(50\) minutes`,
+      dotPlot({ data: [35, 50, 20, 45, 50, 60, 40, 30], lo: 15, hi: 65, step: 5, label: "minutes", w: 360 })],
     ["Five-number summary and box plot", String.raw`Find the five-number summary and IQR of \(12, 18, 7, 15, 21, 9, 16, 25, 14\) and draw a box plot.`,
-      [String.raw`Ordered: \(7, 9, 12, 14, 15, 16, 18, 21, 25\); \(n=9\), median is the 5th value: \(15\).`, String.raw`Lower half \(7, 9, 12, 14\): \(Q_1=\frac{9+12}{2}=10.5\). Upper half \(16, 18, 21, 25\): \(Q_3=\frac{18+21}{2}=19.5\).`, String.raw`IQR \(=19.5-10.5=9\).`],
+      [String.raw`<b>Definitions.</b> Five-number summary: min, \(Q_1\), median, \(Q_3\), max. \(Q_1\) is the median of the lower half and \(Q_3\) of the upper half. \[\text{IQR}=Q_3-Q_1\]`,
+        String.raw`<b>Order and find the median.</b> \(7, 9, 12, 14, 15, 16, 18, 21, 25\); \(n=9\), so the median is the 5th value: \(15\).`,
+        String.raw`<b>\(Q_1\):</b> lower half \(7, 9, 12, 14\): \(\frac{9+12}{2}=10.5\).`,
+        String.raw`<b>\(Q_3\):</b> upper half \(16, 18, 21, 25\): \(\frac{18+21}{2}=19.5\).`,
+        String.raw`<b>IQR:</b> \(19.5-10.5=9\). The box runs from \(10.5\) to \(19.5\) with a line at \(15\); whiskers reach \(7\) and \(25\).`],
       String.raw`\(7, 10.5, 15, 19.5, 25\); IQR \(=9\)`,
       boxPlot({ five: [7, 10.5, 15, 19.5, 25], lo: 4, hi: 28, step: 2, showValues: true })],
     ["Comparing two box plots", String.raw`Class A's quiz results have five-number summary \(8, 12, 15, 17, 20\); class B's are \(5, 13, 14, 16, 19\). Compare the classes.`,
-      ["Centre: A's median (15) is higher than B's (14).", String.raw`Spread: IQRs are \(17-12=5\) for A and \(16-13=3\) for B — B's middle half is more consistent.`, "B's range (14) is wider than A's (12) because of one low score."],
-      "A scored slightly higher; B's middle half was more consistent"],
+      [String.raw`<b>Method.</b> Compare the <i>centre</i> (median) and the <i>spread</i> (IQR and range).`,
+        String.raw`<b>Centre:</b> A's median \(15\) is higher than B's \(14\).`,
+        String.raw`<b>Spread of the middle half:</b> IQR of A \(=17-12=5\); IQR of B \(=16-13=3\). B's middle half is more consistent.`,
+        String.raw`<b>Range:</b> A \(=20-8=12\); B \(=19-5=14\). B's range is wider only because of one low score.`],
+      "A scored slightly higher; B's middle half was more consistent",
+      boxPlot({ five: [8, 12, 15, 17, 20], lo: 4, hi: 22, step: 2, label: "Class A", showValues: true }) + boxPlot({ five: [5, 13, 14, 16, 19], lo: 4, hi: 22, step: 2, label: "Class B", showValues: true })],
     ["Outliers and the best measure", String.raw`Weekly earnings (dollars) of seven student workers: \(80, 95, 100, 110, 115, 120, 400\). Is \(400\) an outlier? Which measure of centre is best?`,
-      [String.raw`\(Q_1=95\), median \(=110\), \(Q_3=120\); IQR \(=25\).`, String.raw`Upper fence \(=120+1.5(25)=157.5\); \(400>157.5\): outlier.`, String.raw`Mean \(=1020\div7\approx145.7\) — higher than six of the seven values. The median, \(110\), is more typical.`],
-      String.raw`yes, \(400\) is an outlier; use the median (\(110\) dollars)`],
+      [String.raw`<b>Outlier rule.</b> A value is an outlier if it is above \(Q_3+1.5\times\text{IQR}\) or below \(Q_1-1.5\times\text{IQR}\).`,
+        String.raw`<b>Quartiles.</b> \(n=7\): median (4th) \(=110\); lower half \(80, 95, 100\): \(Q_1=95\); upper half \(115, 120, 400\): \(Q_3=120\). IQR \(=120-95=25\).`,
+        String.raw`<b>Upper fence:</b> \(120+1.5(25)=120+37.5=157.5\). Since \(400>157.5\), \(400\) is an outlier.`,
+        String.raw`<b>Mean:</b> \(1020\div7\approx145.7\), higher than six of the seven values. The outlier pulls the mean up.`,
+        String.raw`<b>Best centre:</b> the median, \(110\), is not affected by the outlier and is more typical.`],
+      String.raw`yes, \(400\) is an outlier; use the median (\(110\) dollars)`,
+      boxPlot({ five: [80, 95, 110, 120, 120], lo: 60, hi: 420, step: 40, outliers: [400], label: "dollars" })],
     ["Mean from a frequency table", String.raw`A survey of \(25\) families recorded the number of children: \(1\) child: \(8\) families; \(2\): \(10\); \(3\): \(5\); \(4\): \(2\). Find the mean and median.`,
-      [String.raw`Total children \(=1(8)+2(10)+3(5)+4(2)=8+20+15+8=51\).`, String.raw`Mean \(=51\div25=2.04\).`, String.raw`Median: the 13th family. The first \(8\) have 1 child; families 9–18 have 2, so the median is \(2\).`],
-      String.raw`mean \(2.04\), median \(2\) children`],
+      [String.raw`<b>Rule.</b> \[\text{mean}=\frac{\sum(\text{value}\times\text{frequency})}{\sum\text{frequency}}\]`,
+        String.raw`<b>Total children:</b> \(1(8)+2(10)+3(5)+4(2)=8+20+15+8=51\).`,
+        String.raw`<b>Mean:</b> \(51\div25=2.04\).`,
+        String.raw`<b>Median.</b> \(n=25\), so the median is the 13th family. Running totals: families 1–8 have 1 child, families 9–18 have 2. The 13th family is in the second group: median \(=2\).`],
+      String.raw`mean \(2.04\), median \(2\) children`,
+      barChart({ bars: [["1", 8], ["2", 10], ["3", 5], ["4", 2]], step: 2, ylabel: "families", w: 300 })],
   ]),
 
   practice([

@@ -1,6 +1,6 @@
 // MTH1W 6.5 — Chapter 6 Review (NEW lesson, placed after 6.4)
 import { intro, section, keyIdea, widget, examples, practice, wrapUp, table, q, num, choice } from "./lib.mjs";
-import { boxPlot } from "./figs6.mjs";
+import { boxPlot, scatter } from "./figs6.mjs";
 
 export const TITLE = "6.5 Chapter 6 Review";
 export const NEW = { id: "6c6e7c1a-0a65-4d1e-9c65-c6a9f0000605", position: 45 };
@@ -54,20 +54,36 @@ export const blocks = () => [
 
   examples([
     ["Sample to population", String.raw`A stratified random sample of \(150\) of a city's \(18\,000\) teenagers finds that \(42\) volunteer regularly. Estimate the number of teenage volunteers in the city, and say why the method is appropriate.`,
-      [String.raw`\(\frac{42}{150}=0.28\); \(0.28\times18\,000=5040\).`, "Stratified random sampling keeps every group (age, neighbourhood) in proportion, so the sample should be representative."],
+      [String.raw`<b>Rule.</b> population estimate \(=\) sample proportion \(\times\) population size.`,
+        String.raw`<b>Sample proportion:</b> \(\frac{42}{150}=0.28\).`,
+        String.raw`<b>Estimate:</b> \(0.28\times18\,000=5040\).`,
+        String.raw`<b>Why the method works:</b> stratified random sampling keeps every group (age, neighbourhood) in the same proportions as the city, so the sample should be representative.`],
       String.raw`about \(5040\) teenagers`],
     ["Box plots and outliers", String.raw`Times (s) to solve a puzzle: \(28, 31, 33, 35, 36, 38, 40, 41, 44, 75\). Find the five-number summary, test \(75\) for being an outlier, and describe the effect of removing it on the mean and median.`,
-      [String.raw`\(n=10\): median \(=\frac{36+38}{2}=37\); \(Q_1=33\), \(Q_3=41\); IQR \(=8\).`, String.raw`Upper fence \(41+12=53\): \(75\) is an outlier.`, String.raw`Mean with it: \(401\div10=40.1\); without: \(326\div9\approx36.2\). Median without: \(36\) — it changes much less than the mean.`],
+      [String.raw`<b>Median.</b> \(n=10\) (even): average of the 5th and 6th values: \(\frac{36+38}{2}=37\).`,
+        String.raw`<b>Quartiles.</b> Lower half \(28, 31, 33, 35, 36\): \(Q_1=33\). Upper half \(38, 40, 41, 44, 75\): \(Q_3=41\). IQR \(=41-33=8\).`,
+        String.raw`<b>Outlier test:</b> upper fence \(Q_3+1.5\times\text{IQR}=41+12=53\). Since \(75>53\), it is an outlier.`,
+        String.raw`<b>Mean.</b> With \(75\): \(401\div10=40.1\). Without: \(326\div9\approx36.2\). It drops by about \(3.9\).`,
+        String.raw`<b>Median without \(75\):</b> \(n=9\), the 5th value, \(36\). It drops by only \(1\). The median resists outliers; the mean does not.`],
       String.raw`\(28, 33, 37, 41, 75\); \(75\) is an outlier; the mean drops about \(3.9\), the median only \(1\)`,
       boxPlot({ five: [28, 33, 37, 41, 44], lo: 25, hi: 80, step: 5, outliers: [75], showValues: true })],
     ["Line of best fit and prediction", String.raw`Data on outdoor temperature (°C) and daily drink sales at a stand follow the line \(S=6.5T-20\) for temperatures from \(15\) to \(32\) °C. Predict sales at \(26\) °C and at \(5\) °C, and comment.`,
-      [String.raw`\(26\) °C: \(6.5(26)-20=149\) drinks — interpolation, reasonable.`, String.raw`\(5\) °C: \(6.5(5)-20=12.5\) — extrapolation below the data; possible, but the trend may not hold in the cold.`],
-      String.raw`\(149\) drinks; about \(12\) at \(5\) °C, but less reliable`],
+      [String.raw`<b>At \(26\) °C:</b> \(S=6.5(26)-20=169-20=149\) drinks. \(26\) is inside \(15\)–\(32\): interpolation, reasonable.`,
+        String.raw`<b>At \(5\) °C:</b> \(S=6.5(5)-20=32.5-20=12.5\), about \(12\) drinks.`,
+        String.raw`<b>Comment:</b> \(5\) is below the data: extrapolation. The trend may not hold in cold weather, so this is less reliable.`],
+      String.raw`\(149\) drinks; about \(12\) at \(5\) °C, but less reliable`,
+      scatter({ pts: [[26, 149], [5, 12.5]], view: { xmin: 0, xmax: 35, ymin: 0, ymax: 200 }, step: { x: 5, y: 40 }, xlabel: "temperature (°C)", ylabel: "drinks sold", line: { m: 6.5, b: -20, dash: true }, w: 320 })],
     ["Choosing a model", String.raw`A video's views were \(2000\), \(3000\), \(4500\), \(6750\) on days \(0\)–\(3\). Choose a model, predict day \(6\) and comment on how long the model can last.`,
-      [String.raw`Ratios \(1.5\) each day: exponential, \(V=2000(1.5)^d\).`, String.raw`Day 6: \(2000(1.5)^6\approx22\,781\) views.`, "Exponential growth cannot last: the number of interested viewers is limited, so growth will slow."],
+      [String.raw`<b>Test.</b> Differences \(1000, 1500, 2250\): not constant. Ratios: \(\frac{3000}{2000}=1.5\), \(\frac{4500}{3000}=1.5\), \(\frac{6750}{4500}=1.5\): constant, so exponential.`,
+        String.raw`<b>Model:</b> \(V=2000(1.5)^d\).`,
+        String.raw`<b>Day 6:</b> \(2000(1.5)^6=2000(11.390625)\approx22\,781\) views.`,
+        String.raw`<b>Limits:</b> the number of interested viewers is limited, so exponential growth cannot last; it will slow down.`],
       String.raw`\(V=2000(1.5)^d\); about \(22\,800\) on day 6`],
     ["Evaluating a claim", "An ad says: “9 out of 10 dentists recommend our toothpaste.” The survey asked 10 dentists who already sell the brand. Evaluate the claim.",
-      ["Sample of 10 is very small.", "Dentists who sell the brand have a reason to favour it: sampling bias.", "The claim cannot be generalized to all dentists."],
+      [String.raw`<b>Questions to ask:</b> How big is the sample? How was it chosen? Does anyone gain from the result?`,
+        String.raw`<b>Sample size:</b> only 10 dentists, far too small to stand for all dentists.`,
+        String.raw`<b>Selection:</b> dentists who sell the brand have a reason to favour it: sampling bias.`,
+        String.raw`<b>Conclusion:</b> the claim cannot be generalized to dentists in general.`],
       "not convincing: tiny, biased sample"],
   ]),
 
