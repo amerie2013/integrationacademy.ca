@@ -1,0 +1,106 @@
+// MHF4U Worksheet 5.2 — Graphs of Reciprocal Trigonometric Functions (teacher edition)
+import { F } from "./figT.mjs";
+import { TG } from "../trigfig.mjs";
+const S = String.raw;
+const V = { xmin: -0.5, xmax: 6.8, ymin: -4, ymax: 4 };
+const cut = (g) => (x) => (Math.abs(g(x)) < 0.07 ? NaN : 1 / g(x));
+const csc = cut(Math.sin), sec = cut(Math.cos), cot = (x) => (Math.abs(Math.sin(x)) < 0.07 ? NaN : Math.cos(x) / Math.sin(x));
+const vl = (xs) => ({ vlines: xs.map((x) => ({ x, color: "red", dash: true })) });
+
+const EXAMPLES = [
+  { title: "Reciprocal values", q: S`Evaluate exactly: $\csc\frac\pi6$, $\sec\frac\pi3$, $\cot\frac\pi4$ and $\sec\pi$.`,
+    steps: [S`\textbf{Definitions:} $\csc x=\dfrac1{\sin x}$, \ $\sec x=\dfrac1{\cos x}$, \ $\cot x=\dfrac1{\tan x}=\dfrac{\cos x}{\sin x}$.`,
+      S`\textbf{Special values:} $\sin\frac\pi6=\frac12$, $\cos\frac\pi3=\frac12$, $\tan\frac\pi4=1$, $\cos\pi=-1$.`,
+      S`\textbf{Take reciprocals:} $\csc\frac\pi6=2$, \ $\sec\frac\pi3=2$, \ $\cot\frac\pi4=1$, \ $\sec\pi=-1$.`,
+      S`\textbf{Check:} a value and its reciprocal multiply to $1$: $\frac12\times2=1$ \checkmark`],
+    ans: S`$2,\ 2,\ 1,\ -1$` },
+  { title: "Sketching cosecant from sine", q: S`Sketch $y=\csc x$ for $0<x<2\pi$ using the graph of $y=\sin x$. Give the asymptotes and the turning points.`,
+    fig: F(TG([[Math.sin, "violet"], [csc, "red"]], V, [{ x: Math.PI / 2, y: 1, label: "(π/2, 1)" }, { x: 1.5 * Math.PI, y: -1, label: "(3π/2, −1)" }], vl([0, Math.PI, 2 * Math.PI]))),
+    steps: [S`\textbf{Rule for $y=\frac1{f(x)}$:} where $f=0$ there is a vertical asymptote; where $f=\pm1$ the reciprocal equals $f$; where $|f|$ is small the reciprocal is large, with the same sign.`,
+      S`\textbf{Asymptotes:} $\sin x=0$ at $x=0,\ \pi,\ 2\pi$.`,
+      S`\textbf{Turning points:} $\sin\frac\pi2=1$ gives the local minimum $\left(\frac\pi2,1\right)$; $\sin\frac{3\pi}2=-1$ gives the local maximum $\left(\frac{3\pi}2,-1\right)$.`,
+      S`\textbf{Shape:} on $(0,\pi)$ sine is positive, so the branch opens upward; on $(\pi,2\pi)$ it opens downward.`,
+      S`\textbf{Check a value:} $\csc\frac\pi6=2$, and the branch at $x\approx0.52$ is at height $2$ \checkmark`],
+    ans: S`asymptotes $x=0,\pi,2\pi$; local min $\left(\frac\pi2,1\right)$, local max $\left(\frac{3\pi}2,-1\right)$` },
+  { title: "Domain and range of secant", q: S`State the domain, range and period of $y=\sec x$.`,
+    fig: F(TG([[Math.cos, "green"], [sec, "red"]], V, [], vl([Math.PI / 2, 1.5 * Math.PI]))),
+    steps: [S`\textbf{Domain:} $\sec x=\frac1{\cos x}$ is not defined where $\cos x=0$, i.e. $x=\frac\pi2+n\pi$, $n\in\mathbb{Z}$.`,
+      S`\textbf{Range:} $-1\le\cos x\le1$ and $\cos x\ne0$, so $|\cos x|\le1$ and the reciprocal has $|\sec x|\ge1$: $y\le-1$ or $y\ge1$.`,
+      S`\textbf{Period:} $\cos x$ repeats every $2\pi$, so its reciprocal does too.`,
+      S`\textbf{Check:} $\sec0=1$ and $\sec\pi=-1$ are the values closest to $0$ \checkmark`],
+    ans: S`$x\ne\frac\pi2+n\pi$; $y\le-1$ or $y\ge1$; period $2\pi$` },
+  { title: "Cotangent", q: S`Find the asymptotes and zeros of $y=\cot x$ for $0<x<2\pi$, and its period.`,
+    fig: F(TG([[cot, "blue"]], V, [], vl([0, Math.PI, 2 * Math.PI]))),
+    steps: [S`\textbf{Rule:} $\cot x=\dfrac{\cos x}{\sin x}$: asymptotes where $\sin x=0$, zeros where $\cos x=0$.`,
+      S`\textbf{Asymptotes:} $x=0,\ \pi,\ 2\pi$. \textbf{Zeros:} $x=\frac\pi2,\ \frac{3\pi}2$.`,
+      S`\textbf{Period:} like tangent, $\cot(x+\pi)=\frac{-\cos x}{-\sin x}=\cot x$, so the period is $\pi$.`,
+      S`\textbf{Shape:} each branch \emph{falls} from $+\infty$ to $-\infty$ (opposite to tangent). Check: $\cot\frac\pi4=1>\cot\frac{3\pi}4=-1$ \checkmark`],
+    ans: S`asymptotes $x=0,\pi,2\pi$; zeros $\frac\pi2,\frac{3\pi}2$; period $\pi$` },
+  { title: "Increasing or decreasing", q: S`On $0<x<\pi$, where is $y=\csc x$ increasing and where is it decreasing?`,
+    steps: [S`\textbf{Rule:} for positive values, when $f$ increases its reciprocal $\frac1f$ decreases, and vice versa.`,
+      S`\textbf{Sine on $(0,\pi)$:} positive; increasing on $\left(0,\frac\pi2\right)$, decreasing on $\left(\frac\pi2,\pi\right)$.`,
+      S`\textbf{So cosecant:} decreasing on $\left(0,\frac\pi2\right)$, increasing on $\left(\frac\pi2,\pi\right)$.`,
+      S`\textbf{Check:} $\csc\frac\pi6=2>\csc\frac\pi2=1<\csc\frac{5\pi}6=2$ \checkmark`],
+    ans: S`decreasing on $\left(0,\frac\pi2\right)$, increasing on $\left(\frac\pi2,\pi\right)$` },
+  { title: "Solving with secant", q: S`Solve $\sec x=2$ for $0\le x\le2\pi$.`,
+    steps: [S`\textbf{Rule:} rewrite using the reciprocal: $\sec x=2\Leftrightarrow\cos x=\frac12$.`,
+      S`\textbf{Reference angle:} $\cos\frac\pi3=\frac12$.`,
+      S`\textbf{Quadrants:} cosine is positive in Q1 and Q4: $x=\frac\pi3$ and $x=2\pi-\frac\pi3=\frac{5\pi}3$.`,
+      S`\textbf{Check:} $\sec\frac{5\pi}3=\frac1{\cos(5\pi/3)}=\frac1{1/2}=2$ \checkmark`],
+    ans: S`$x=\frac\pi3,\ \frac{5\pi}3$` },
+  { title: "Solving with cosecant", q: S`Solve $\csc x=-\sqrt2$ for $0\le x\le2\pi$.`,
+    steps: [S`\textbf{Rewrite:} $\sin x=-\frac1{\sqrt2}=-\frac{\sqrt2}2$.`,
+      S`\textbf{Reference angle:} $\sin\frac\pi4=\frac{\sqrt2}2$.`,
+      S`\textbf{Quadrants:} sine is negative in Q3 and Q4: $x=\pi+\frac\pi4=\frac{5\pi}4$ and $x=2\pi-\frac\pi4=\frac{7\pi}4$.`,
+      S`\textbf{Check:} $\sin\frac{5\pi}4=-\frac{\sqrt2}2$, so $\csc\frac{5\pi}4=-\frac2{\sqrt2}=-\sqrt2$ \checkmark`],
+    ans: S`$x=\frac{5\pi}4,\ \frac{7\pi}4$` },
+  { title: "A value that is impossible", q: S`Explain why $\sec x=\frac12$ has no solution.`,
+    steps: [S`\textbf{Rewrite:} $\sec x=\frac12$ would need $\cos x=2$.`,
+      S`\textbf{Range of cosine:} $-1\le\cos x\le1$, so $\cos x=2$ is impossible.`,
+      S`\textbf{Graph view:} the range of secant is $y\le-1$ or $y\ge1$; the line $y=\frac12$ lies in the gap and never meets the graph.`],
+    ans: "no solution: the range of secant excludes values between −1 and 1" },
+  { title: "A stretched cosecant", q: S`For $y=3\csc x$ on $0<x<2\pi$, find the asymptotes, the turning points and the range.`,
+    fig: F(TG([[(x) => 3 * Math.sin(x), "violet"], [(x) => 3 * csc(x), "red"]], { xmin: -0.5, xmax: 6.8, ymin: -7, ymax: 7 }, [{ x: Math.PI / 2, y: 3, label: "(π/2, 3)" }, { x: 1.5 * Math.PI, y: -3, label: "(3π/2, −3)" }], vl([0, Math.PI, 2 * Math.PI]))),
+    steps: [S`\textbf{Rule:} $3\csc x=\dfrac{3}{\sin x}$, a vertical stretch by $3$ of $y=\csc x$; asymptotes do not move.`,
+      S`\textbf{Asymptotes:} still where $\sin x=0$: $x=0,\pi,2\pi$.`,
+      S`\textbf{Turning points:} multiply the $y$-values by $3$: local min $\left(\frac\pi2,3\right)$, local max $\left(\frac{3\pi}2,-3\right)$.`,
+      S`\textbf{Range:} $|\csc x|\ge1$, so $|3\csc x|\ge3$: $y\le-3$ or $y\ge3$.`,
+      S`\textbf{Check:} $x=\frac\pi6$: $3\csc\frac\pi6=3(2)=6\ge3$ \checkmark`],
+    ans: S`asymptotes $x=0,\pi,2\pi$; $\left(\frac\pi2,3\right)$, $\left(\frac{3\pi}2,-3\right)$; $y\le-3$ or $y\ge3$` },
+];
+
+const PROBLEMS = [
+  { level: 1, q: S`Evaluate exactly: $\csc\frac\pi2$, $\sec\frac\pi4$, $\cot\frac\pi6$.`, ans: S`$1,\ \sqrt2,\ \sqrt3$` },
+  { level: 1, q: S`State the equations of the asymptotes of $y=\sec x$ for $0\le x\le2\pi$.`, ans: S`$x=\frac\pi2,\ x=\frac{3\pi}2$` },
+  { level: 1, q: S`State the period of $y=\csc x$ and of $y=\cot x$.`, ans: S`$2\pi$; $\pi$` },
+  { level: 2, q: S`Solve $\csc x=2$ for $0\le x\le2\pi$.`, ans: S`$\frac\pi6,\ \frac{5\pi}6$` },
+  { level: 2, q: S`Solve $\cot x=-1$ for $0\le x\le2\pi$.`, ans: S`$\frac{3\pi}4,\ \frac{7\pi}4$` },
+  { level: 2, q: S`Give the local maximum and minimum points of $y=\sec x$ for $0\le x\le2\pi$.`, ans: S`local min $(0,1)$ and $(2\pi,1)$; local max $(\pi,-1)$` },
+  { level: 2, q: S`On which intervals of $0\le x\le2\pi$ is $y=\csc x$ negative?`, ans: S`$\pi<x<2\pi$` },
+  { level: 2, q: S`State the domain and range of $y=2\sec x$.`, ans: S`$x\ne\frac\pi2+n\pi$; $y\le-2$ or $y\ge2$` },
+  { level: 3, space: 5, q: S`Explain, using the graphs, why $y=\sec x$ is decreasing on $\left(\pi,\frac{3\pi}2\right)$.`, ans: S`$\cos x$ is negative and decreasing towards $0$ there, so $\frac1{\cos x}$ decreases towards $-\infty$` },
+  { level: 3, space: 5, q: S`Find all points of intersection of $y=\sin x$ and $y=\csc x$ for $0<x<2\pi$.`, ans: S`$\sin^2x=1$: $\left(\frac\pi2,1\right)$, $\left(\frac{3\pi}2,-1\right)$` },
+  { level: 3, space: 5, q: S`Solve $\sec^2x=2$ for $0\le x\le2\pi$.`, ans: S`$\cos x=\pm\frac{\sqrt2}2$: $\frac\pi4,\frac{3\pi}4,\frac{5\pi}4,\frac{7\pi}4$` },
+  { level: 3, space: 5, q: S`Show that $\cot x=\tan\left(\frac\pi2-x\right)$ and describe how the graph of cotangent is obtained from the graph of tangent.`, ans: S`cofunction relation; reflect $y=\tan x$ in the $y$-axis, then shift right $\frac\pi2$` },
+  { level: 3, space: 5, q: S`For which values of $k$ does $\csc x=k$ have exactly two solutions in $0<x<2\pi$? Explain.`, ans: S`$k>1$ or $k<-1$ (for $k=\pm1$ only one solution; for $|k|<1$ none)` },
+];
+
+export const WS = {
+  code: "5.2",
+  title: "Graphs of Reciprocal Trigonometric Functions",
+  bigideas: S`Cosecant, secant and cotangent are the reciprocals of sine, cosine and tangent. Each reciprocal graph is built from the original: a zero of the original becomes a vertical asymptote, the points where the original equals $\pm1$ stay fixed, and small values become large values with the same sign.`,
+  goals: ["Define cosecant, secant and cotangent.", "Sketch each reciprocal graph from its original.", "State domain, range, period and asymptotes.", "Solve simple equations with reciprocal functions."],
+  curriculum: "B2.3",
+  vocab: [["Cosecant", "$\\csc x=\\frac1{\\sin x}$"], ["Secant", "$\\sec x=\\frac1{\\cos x}$"], ["Cotangent", "$\\cot x=\\frac{\\cos x}{\\sin x}$"], ["Reciprocal", "the number that multiplies with a value to give 1"]],
+  hook: S`If $\sin x=0.01$, what is $\csc x$? What if $\sin x=0.0001$? What happens to the graph of $y=\csc x$ as $\sin x$ gets close to $0$?`,
+  concepts: [
+    ["1. Building a reciprocal graph", S`Mark the zeros of the original as asymptotes, mark the points where it equals $1$ or $-1$, then draw branches that move away from the axis as the original approaches $0$.
+${F(TG([[Math.sin, "violet"], [csc, "red"]], V, [], vl([0, Math.PI, 2 * Math.PI])), 6.5, "y = sin x (violet) and y = csc x (red).")}`],
+    ["2. Secant and cotangent", S`Secant is built from cosine in the same way, so its asymptotes are at $x=\frac\pi2+n\pi$. Cotangent is $\frac{\cos x}{\sin x}$: asymptotes at $x=n\pi$, zeros at $x=\frac\pi2+n\pi$, period $\pi$.
+${F(TG([[Math.cos, "green"], [sec, "red"]], V, [], vl([Math.PI / 2, 1.5 * Math.PI])), 6.5, "y = cos x (green) and y = sec x (red).")}`],
+    ["3. Summary", S`\begin{center}\begin{tabular}{@{}llll@{}}\textbf{Function} & \textbf{Asymptotes} & \textbf{Range} & \textbf{Period}\\ $\csc x$ & $x=n\pi$ & $|y|\ge1$ & $2\pi$\\ $\sec x$ & $x=\frac\pi2+n\pi$ & $|y|\ge1$ & $2\pi$\\ $\cot x$ & $x=n\pi$ & all reals & $\pi$\end{tabular}\end{center}`],
+  ],
+  tips: ["Draw the original function lightly first.", "Zeros of the original become asymptotes.", "Points at height $\\pm1$ are shared by both graphs.", "$\\csc x$ is not $\\sin^{-1}x$.", "Rewrite reciprocal equations in terms of sin, cos or tan before solving."],
+  examples: EXAMPLES,
+  problems: PROBLEMS,
+};
