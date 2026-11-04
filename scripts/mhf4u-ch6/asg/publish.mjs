@@ -37,8 +37,8 @@ fs.mkdirSync(".lesson-preview", { recursive: true });
 
 // chapter 6 topics may be retitled later: existing rows may still carry their old titles (matched below);
 // brand-new assignments get fixed ids so they can be previewed before they exist.
-const OLD = {};
-const NEWID = { "6.1": "6d4f0006-0001-4001-8001-0000000a0601" };
+const OLD = { "6.2": "Assignment 6.2 — Logarithms & the Laws of Logarithms", "6.3": "Assignment 6.3 — Graphs of Logarithmic Functions" };
+const NEWID = { "6.1": "6d4f0006-0001-4001-8001-0000000a0601", "6.4": "6d4f0006-0001-4001-8001-0000000a0604", "6.5": "6d4f0006-0001-4001-8001-0000000a0605" };
 for (const a of ASSIGNMENTS) {
   let { data: rows, error } = await db.from("assignments").select("id, title, description, course_id").eq("course_id", CID).eq("title", a.title);
   if (error) throw error;

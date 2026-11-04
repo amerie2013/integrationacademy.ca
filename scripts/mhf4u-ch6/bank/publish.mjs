@@ -16,7 +16,7 @@ const DIR = path.resolve("scripts/mhf4u-ch6/bank");
 const OUT = path.join(DIR, "out");
 const APPLY = process.argv.includes("--apply");
 let names = process.argv.slice(2).filter((a) => !a.startsWith("--"));
-if (process.argv.includes("--all")) names = ["6_1"];
+if (process.argv.includes("--all")) names = ["6_1", "6_2", "6_3", "6_4", "6_5"];
 
 let bad = 0;
 const fail = (m) => { bad++; console.log("  FAIL:", m); };
