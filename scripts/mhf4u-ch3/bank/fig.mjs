@@ -39,3 +39,5 @@ export const rat = (f, poles, view, color = "violet") => {
   const cuts = [view.xmin, ...poles.filter((p) => p > view.xmin && p < view.xmax).sort((a, b) => a - b), view.xmax];
   return cuts.slice(0, -1).map((a, i) => ({ f, a: i === 0 ? a : a + 0.004, b: i === cuts.length - 2 ? cuts[i + 1] : cuts[i + 1] - 0.004, color }));
 };
+/** a rational function with dashed red asymptotes */
+export const RG = (f, poles, view, ha = null, points = [], extra = {}) => planeDoc({ view, curves: rat(f, poles, view), vlines: poles.map((x) => ({ x, color: "red", dash: true })), lines: ha === null ? [] : [{ m: 0, b: ha, color: "red", dash: true }], points, ...extra });

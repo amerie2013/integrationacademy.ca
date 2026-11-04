@@ -1,0 +1,61 @@
+// MHF4U Worksheet 4.3 — Equivalent Trigonometric Expressions (teacher edition)
+import { F } from "./figT.mjs";
+import { UC, TG } from "../trigfig.mjs";
+const S = String.raw;
+
+const EXAMPLES = [
+  { title: "A cofunction value", q: S`Given $\cos\dfrac\pi7\approx0.9010$, find $\sin\dfrac{5\pi}{14}$.`, fig: F(UC((5 * 180) / 14, "5π/14")),
+    steps: [S`$\frac\pi2-\frac\pi7=\frac{7\pi-2\pi}{14}=\frac{5\pi}{14}$.`, S`$\sin\left(\frac\pi2-x\right)=\cos x$.`], ans: S`$\approx0.9010$` },
+  { title: "Supplementary angles", q: S`Given $\sin\dfrac{2\pi}9\approx0.6428$, find $\sin\dfrac{7\pi}9$.`, fig: F(UC(140, "7π/9", [{ x: Math.cos((2 * Math.PI) / 9), y: Math.sin((2 * Math.PI) / 9), label: "2π/9", color: "blue" }])),
+    steps: [S`$\frac{7\pi}9=\pi-\frac{2\pi}9$.`, S`$\sin(\pi-x)=\sin x$.`], ans: S`$\approx0.6428$` },
+  { title: "Opposite angles", q: S`Simplify $\sin(-x)+\sin x+\cos(-x)$.`, fig: F(TG([[Math.cos, "green"], [Math.sin, "violet"]], { xmin: -6.5, xmax: 6.5, ymin: -2, ymax: 2 })),
+    steps: [S`$\sin(-x)=-\sin x$; $\cos(-x)=\cos x$.`, S`$-\sin x+\sin x+\cos x$.`], ans: S`$\cos x$` },
+  { title: "Half-turn", q: S`Simplify $\dfrac{\sin(\pi+x)}{\cos(\pi+x)}$.`,
+    steps: [S`$\frac{-\sin x}{-\cos x}=\frac{\sin x}{\cos x}$.`], ans: S`$\tan x$` },
+  { title: "A special value", q: S`Write $\cos\dfrac{7\pi}4$ as $\cos(2\pi-x)$ and evaluate it.`, fig: F(UC(315, "7π/4")),
+    steps: [S`$\frac{7\pi}4=2\pi-\frac\pi4$.`, S`$\cos(2\pi-x)=\cos x$, so the value is $\frac{\sqrt2}2$.`], ans: S`$\frac{\sqrt2}2$` },
+  { title: "A quarter-turn", q: S`Show that $\cos\left(\dfrac\pi2+x\right)=-\sin x$ using a graph or a test value.`, fig: F(TG([[(x) => Math.cos(Math.PI / 2 + x), "violet"], [(x) => -Math.sin(x) + 0.03, "green"]], { xmin: -6.5, xmax: 6.5, ymin: -2, ymax: 2 })),
+    steps: [S`Test $x=\frac\pi3$: $\cos\frac{5\pi}6=-\frac{\sqrt3}2$ and $-\sin\frac\pi3=-\frac{\sqrt3}2$.`, S`The graphs coincide: a shift of $\cos x$ by $\frac\pi2$ left is $-\sin x$.`], ans: S`both sides equal $-\sin x$` },
+  { title: "Tangent and cotangent", q: S`Given $\tan\dfrac{3\pi}{10}\approx1.3764$, find $\cot\dfrac\pi5$.`,
+    steps: [S`$\frac\pi2-\frac{3\pi}{10}=\frac\pi5$.`, S`$\cot\left(\frac\pi2-x\right)=\tan x$.`], ans: S`$\approx1.3764$` },
+  { title: "Combining relations", q: S`Simplify $\sin\left(\dfrac\pi2-x\right)\cos(\pi-x)$.`,
+    steps: [S`$\sin\left(\frac\pi2-x\right)=\cos x$.`, S`$\cos(\pi-x)=-\cos x$.`, S`The product is $-\cos^2x$.`], ans: S`$-\cos^2x$` },
+  { title: "Using a value", q: S`$\sin x=\dfrac25$ with $x$ in Q1. Find $\cos\left(\dfrac\pi2-x\right)$, $\sin(\pi+x)$ and $\cos(\pi-x)$.`, fig: F(UC(23.58, "x")),
+    steps: [S`$\cos\left(\frac\pi2-x\right)=\sin x=\frac25$.`, S`$\sin(\pi+x)=-\frac25$.`, S`$\cos x=\frac{\sqrt{21}}5$, so $\cos(\pi-x)=-\frac{\sqrt{21}}5$.`], ans: S`$\frac25,\ -\frac25,\ -\frac{\sqrt{21}}5$` },
+];
+
+const PROBLEMS = [
+  { level: 1, q: S`Write an expression equal to $\cos\left(\dfrac\pi2-x\right)$.`, ans: S`$\sin x$` },
+  { level: 1, q: S`Write an expression equal to $\sin(2\pi-x)$.`, ans: S`$-\sin x$` },
+  { level: 1, q: S`Write an expression equal to $\cos(\pi+x)$.`, ans: S`$-\cos x$` },
+  { level: 2, q: S`Given $\sin\dfrac\pi9\approx0.3420$, find $\cos\dfrac{7\pi}{18}$.`, ans: S`$\approx0.3420$` },
+  { level: 2, q: S`Given $\cos\dfrac{2\pi}7\approx0.6235$, find $\cos\dfrac{5\pi}7$.`, ans: S`$\approx-0.6235$` },
+  { level: 2, q: S`Simplify $\cos(-x)+\cos(\pi-x)$.`, ans: S`$0$` },
+  { level: 2, q: S`Simplify $\dfrac{\sin(\pi-x)}{\sin\left(\frac\pi2-x\right)}$.`, ans: S`$\tan x$` },
+  { level: 2, q: S`Evaluate $\sin\dfrac{5\pi}6+\cos\dfrac{5\pi}3$ using equivalent expressions.`, ans: S`$\frac12+\frac12=1$` },
+  { level: 3, space: 5, q: S`Find an equivalent expression for $\sin\left(\dfrac{3\pi}2+x\right)$ using the circle, and check it at $x=\frac\pi6$.`, ans: S`$-\cos x$; $\sin\frac{5\pi}3=-\frac{\sqrt3}2$` },
+  { level: 3, space: 5, q: S`Simplify $\cos(\pi-x)\cos(-x)-\sin\left(\dfrac\pi2+x\right)\sin(-x)\tan x$.`, ans: S`$-\cos^2x+\sin^2x$` },
+  { level: 3, space: 5, q: S`$\cos x=a$ with $x$ in Q4. Express $\sin x$, $\sin(\pi-x)$ and $\tan(\pi+x)$ in terms of $a$.`, ans: S`$-\sqrt{1-a^2}$; $-\sqrt{1-a^2}$; $-\frac{\sqrt{1-a^2}}a$` },
+  { level: 3, space: 5, q: S`Explain, using the unit circle, why reflecting in the line $y=x$ swaps sine and cosine, and how this proves the cofunction relation.`, ans: S`reflection sends $(a,b)$ to $(b,a)$ and $\theta$ to $\frac\pi2-\theta$, so $\cos\left(\frac\pi2-\theta\right)=\sin\theta$` },
+  { level: 3, space: 5, q: S`In triangle $ABC$, show that $\sin(A+B)=\sin C$ and $\cos(A+B)=-\cos C$.`, ans: S`$A+B=\pi-C$; apply the $\pi-x$ relations` },
+];
+
+export const WS = {
+  code: "4.3",
+  title: "Equivalent Trigonometric Expressions",
+  bigideas: S`The unit circle is symmetric across both axes, about its centre and across the line $y=x$. Each symmetry gives a family of equivalent expressions: $\sin\left(\frac\pi2-x\right)=\cos x$, $\sin(\pi-x)=\sin x$, $\cos(\pi+x)=-\cos x$, $\cos(-x)=\cos x$, and so on. They let you evaluate one ratio from another and simplify expressions without any calculation.`,
+  goals: ["Use cofunction relations.", "Use the relations for $\\pi\\pm x$, $2\\pi-x$ and $-x$.", "Explain each relation with the circle or a graph.", "Simplify expressions and evaluate ratios."],
+  curriculum: "B3.1",
+  vocab: [["Equivalent expressions", "equal for every value of the variable"], ["Cofunction", "sin and cos, tan and cot, sec and csc"], ["Even function", "$f(-x)=f(x)$, such as cosine"], ["Odd function", "$f(-x)=-f(x)$, such as sine and tangent"]],
+  hook: S`Graph $y=\sin x$ and $y=\cos x$ on one set of axes. How far must you slide one to land on the other? Is there more than one answer?`,
+  concepts: [
+    ["1. The relations", S`\begin{center}\begin{tabular}{@{}lllll@{}}\textbf{Angle} & \textbf{sin} & \textbf{cos} & \textbf{tan} & \textbf{Move}\\ $-x$ & $-\sin x$ & $\cos x$ & $-\tan x$ & reflect in the x-axis\\ $\pi-x$ & $\sin x$ & $-\cos x$ & $-\tan x$ & reflect in the y-axis\\ $\pi+x$ & $-\sin x$ & $-\cos x$ & $\tan x$ & half-turn\\ $2\pi-x$ & $-\sin x$ & $\cos x$ & $-\tan x$ & reflect in the x-axis\\ $\frac\pi2-x$ & $\cos x$ & $\sin x$ & $\cot x$ & reflect in $y=x$\\ $\frac\pi2+x$ & $\cos x$ & $-\sin x$ & $-\cot x$ & quarter-turn\end{tabular}\end{center}`],
+    ["2. Reasoning instead of memorizing", S`Imagine $x$ as a small angle in Q1. Locate the new angle, and take its sign from CAST. The name changes only with $\frac\pi2$ or $\frac{3\pi}2$. For example, $\sin\left(\frac{3\pi}2-x\right)$ is in Q3, where sine is negative, and the name changes: $-\cos x$.
+${F(UC(150, "π − x", [{ x: Math.cos(Math.PI / 6), y: 0.5, label: "x", color: "blue" }]), 6.5, "Angles x and π − x have the same height.")}`],
+    ["3. From a graph", S`$\cos x$ is $\sin x$ shifted $\frac\pi2$ to the left, so $\sin\left(x+\frac\pi2\right)=\cos x$. Cosine is symmetric about the y-axis (even), and sine has rotational symmetry about the origin (odd).
+${F(TG([[Math.sin, "violet"], [Math.cos, "green"]], { xmin: -6.5, xmax: 6.5, ymin: -2, ymax: 2 }))}`],
+  ],
+  tips: ["$\\sin(\\pi-x)$ stays $\\sin x$, but $\\cos(\\pi-x)$ changes sign.", "Only $\\frac\\pi2$ and $\\frac{3\\pi}2$ swap the name.", "A test value can disprove a relation but cannot prove it.", "Sine does not distribute over the sum.", "State the quadrant when you need a square root."],
+  examples: EXAMPLES,
+  problems: PROBLEMS,
+};
