@@ -1,5 +1,5 @@
 // MTH1W 1.10 — Density, Infinity & Limit (self-study format)
-import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, numberLine, q, num, frac, choice, hard, fig } from "./lib.mjs";
+import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, numberLine, tape, q, num, frac, choice, hard, fig } from "./lib.mjs";
 import { graph } from "./bank/svg.mjs";
 
 export const TITLE = "1.10 Density, Infinity & Limit";
@@ -74,21 +74,40 @@ export const blocks = () => [
 
   examples([
     ["Three numbers between two fractions", String.raw`Find three rational numbers between \(\dfrac{2}{7}\) and \(\dfrac{3}{7}\).`,
-      [String.raw`There is no whole numerator between \(2\) and \(3\), so use a larger denominator: multiply top and bottom by \(4\).`, String.raw`\(\tfrac{2}{7}=\tfrac{8}{28}\) and \(\tfrac{3}{7}=\tfrac{12}{28}\).`, String.raw`Between them: \(\tfrac{9}{28},\ \tfrac{10}{28}=\tfrac{5}{14},\ \tfrac{11}{28}\).`],
+      [String.raw`<b>Density property.</b> Between any two different rational numbers there is always another rational number, so there are infinitely many.`,
+        String.raw`<b>Problem:</b> with denominator \(7\) there is no whole numerator between \(2\) and \(3\). <b>Fix:</b> make the pieces smaller by using an equivalent fraction with a larger denominator.`,
+        String.raw`<b>Multiply top and bottom by \(4\):</b> \(\tfrac{2}{7}=\tfrac{8}{28}\) and \(\tfrac{3}{7}=\tfrac{12}{28}\).`,
+        String.raw`<b>Read off the numbers between:</b> \(\tfrac{9}{28},\ \tfrac{10}{28}=\tfrac{5}{14},\ \tfrac{11}{28}\).`,
+        String.raw`<b>Check with decimals:</b> \(\tfrac27\approx0.286\), \(\tfrac{9}{28}\approx0.321\), \(\tfrac{5}{14}\approx0.357\), \(\tfrac{11}{28}\approx0.393\), \(\tfrac37\approx0.429\) — all in order ✓`],
       String.raw`\(\tfrac{9}{28},\ \tfrac{5}{14},\ \tfrac{11}{28}\) (many other answers are possible)`],
     ["Between two negative decimals", String.raw`Find a number between \(-0.31\) and \(-0.3\).`,
-      [String.raw`Write both to three decimal places: \(-0.310\) and \(-0.300\).`, String.raw`Any of \(-0.309,\dots,-0.301\) works; the midpoint is \(\tfrac{-0.31+(-0.3)}{2}=-0.305\).`],
+      [String.raw`<b>Midpoint formula.</b> The number halfway between \(a\) and \(b\) is \[m=\frac{a+b}{2}\] and it always lies between them.`,
+        String.raw`<b>Line up the decimal places:</b> \(-0.310\) and \(-0.300\). Now the gap is visible: \(-0.309,\ -0.308,\dots,-0.301\) all fit.`,
+        String.raw`<b>Midpoint:</b> \(\tfrac{-0.31+(-0.3)}{2}=\tfrac{-0.61}{2}=-0.305\).`,
+        String.raw`<b>Check the order:</b> \(-0.310<-0.305<-0.300\), because on the number line \(-0.305\) is right of \(-0.310\) and left of \(-0.300\) ✓`],
       String.raw`\(-0.305\) (for example)`,
       numberLine({ min: -1, max: 0, dots: [{ at: -0.31, label: "", color: "blue" }, { at: -0.3, label: "", color: "blue" }], caption: "Zoomed out, −0.31 and −0.3 look like one point — zooming in shows room for many more numbers.", id: "nl101", unit: 480 })],
     ["No largest number below 1", String.raw`Sam claims \(0.99\) is the largest number less than \(1\). Show that Sam is wrong.`,
-      [String.raw`Take the midpoint of \(0.99\) and \(1\): \(\tfrac{0.99+1}{2}=0.995\).`, String.raw`\(0.995<1\), but \(0.995>0.99\).`, String.raw`The same argument works for any number less than \(1\), so no largest one exists.`],
+      [String.raw`<b>Logic.</b> To disprove "\(0.99\) is the largest", find one number that is bigger than \(0.99\) and still less than \(1\).`,
+        String.raw`<b>Use the midpoint:</b> \(\tfrac{0.99+1}{2}=\tfrac{1.99}{2}=0.995\).`,
+        String.raw`<b>Check both conditions:</b> \(0.995>0.99\) ✓ and \(0.995<1\) ✓.`,
+        String.raw`<b>Generalize:</b> for <i>any</i> number \(x<1\), the midpoint \(\tfrac{x+1}{2}\) is between \(x\) and \(1\). So whatever number someone names, there is a bigger one below \(1\): no largest one exists.`],
       String.raw`\(0.995\) is a counterexample; there is no largest number less than \(1\)`],
     ["Describing a limit", String.raw`What is the limit of the sequence \(2,\ 1.5,\ 1.25,\ 1.125,\ \dots\)? Write the \(n\)th term.`,
-      [String.raw`Subtract \(1\) from each term: \(1,\ 0.5,\ 0.25,\ 0.125,\dots\) — these halve each time.`, String.raw`So the \(n\)th term is \(1+\left(\tfrac12\right)^{n-1}\).`, String.raw`As \(n\) grows, \(\left(\tfrac12\right)^{n-1}\) gets as close to \(0\) as you like, so the terms approach \(1\).`],
-      String.raw`the limit is \(1\)`],
+      [String.raw`<b>Idea.</b> A sequence has limit \(L\) if its terms get as close to \(L\) as we like (and stay close) as \(n\) grows.`,
+        String.raw`<b>Look for the pattern:</b> subtract \(1\) from each term: \(1,\ 0.5,\ 0.25,\ 0.125,\dots\). Each is half the one before, so these are \(\left(\tfrac12\right)^0,\left(\tfrac12\right)^1,\left(\tfrac12\right)^2,\dots\)`,
+        String.raw`<b>\(n\)th term:</b> \[t_n=1+\left(\tfrac12\right)^{n-1}\] Check: \(t_1=1+1=2\) ✓, \(t_4=1+\tfrac18=1.125\) ✓.`,
+        String.raw`<b>Find the limit:</b> \(\left(\tfrac12\right)^{n-1}\) keeps halving towards \(0\) (e.g. \(t_{11}=1+\tfrac{1}{1024}\approx1.001\)), so \(t_n\) gets as close to \(1+0=1\) as we like.`],
+      String.raw`the limit is \(1\)`,
+      fig(graph({ series: [{ pts: [[1, 2], [2, 1.5], [3, 1.25], [4, 1.125], [5, 1.0625], [6, 1.03125], [7, 1.015625]], color: "blue", join: false }, { pts: [[0, 1], [8, 1]], color: "red", label: "y = 1" }], xmin: 0, xmax: 8, ymin: 0, ymax: 2.5, xstep: 1, ystep: 0.5, xlabel: "n", ylabel: "tₙ" }), "The terms fall towards the red line y = 1 but never reach it.")],
     ["Halving the distance", String.raw`You stand \(8\) m from a wall and repeatedly walk half of the remaining distance. How far have you walked after \(5\) steps, and what is the limit?`,
-      [String.raw`Steps: \(4,\ 2,\ 1,\ \tfrac12,\ \tfrac14\) m.`, String.raw`After 5 steps: \(4+2+1+0.5+0.25=7.75\) m.`, String.raw`The distance left after \(n\) steps is \(8\left(\tfrac12\right)^n\), which approaches \(0\).`],
-      String.raw`\(7.75\) m after 5 steps; the total approaches the limit \(8\) m`],
+      [String.raw`<b>Model.</b> Each step is half of what is left, so the distance left is multiplied by \(\tfrac12\) each step: after \(n\) steps \[\text{left}=8\left(\tfrac12\right)^n,\qquad\text{walked}=8-8\left(\tfrac12\right)^n\]`,
+        String.raw`<b>The steps:</b> \(4,\ 2,\ 1,\ \tfrac12,\ \tfrac14\) m (each half of the remaining distance).`,
+        String.raw`<b>Add them:</b> \(4+2+1+0.5+0.25=7.75\) m.`,
+        String.raw`<b>Check with the formula:</b> left \(=8\left(\tfrac12\right)^5=\tfrac{8}{32}=0.25\) m, walked \(=8-0.25=7.75\) m ✓`,
+        String.raw`<b>Limit:</b> \(8\left(\tfrac12\right)^n\to0\) as \(n\) grows, so the distance walked approaches \(8-0=8\) m but never exceeds it.`],
+      String.raw`\(7.75\) m after 5 steps; the total approaches the limit \(8\) m`,
+      table(["Step", "Walk (m)", "Walked so far (m)", "Left (m)"], [["1", "4", "4", "4"], ["2", "2", "6", "2"], ["3", "1", "7", "1"], ["4", "0.5", "7.5", "0.5"], ["5", "0.25", "7.75", "0.25"]])],
   ]),
 
   practice([

@@ -55,22 +55,22 @@ export const blocks = () => [
 
   examples([
     ["Direct variation", String.raw`Ava earns \(16.50\) dollars per hour. Write an equation for her earnings \(E\) for \(h\) hours, find her pay for \(7.5\) h, and describe the graph.`,
-      [String.raw`No fixed amount, so \(b=0\): \(E=16.5h\).`, String.raw`\(E=16.5(7.5)=123.75\) dollars.`, "A straight line through the origin with slope 16.5: direct variation."],
+      [String.raw`<b>Form.</b> A linear relation is \(y=mx+b\): \(m\) is the rate of change, \(b\) the starting value. <b>Direct variation</b> has \(b=0\) (\(y=mx\)); <b>partial variation</b> has \(b\ne0\).`, String.raw`No fixed amount, so \(b=0\): \(E=16.5h\).`, String.raw`\(E=16.5(7.5)=123.75\) dollars.`, "A straight line through the origin with slope 16.5: direct variation.", String.raw`<b>Check:</b> \(7\) h earn \(115.50\) and the extra half hour earns \(8.25\): \(115.50+8.25=123.75\) ✓`],
       String.raw`\(E=16.5h\); \(123.75\) dollars`],
     ["Partial variation from a table", String.raw`Write the equation of the relation.
     ${table(["x", "1", "2", "3", "4"], [["y", "7.5", "11", "14.5", "18"]])}`,
-      [String.raw`First differences: \(3.5\) each, so \(m=3.5\).`, String.raw`Work back to \(x=0\): \(7.5-3.5=4\), so \(b=4\).`, String.raw`Check \(x=4\): \(3.5(4)+4=18\) ✓`],
+      [String.raw`<b>Method.</b> In \(y=mx+b\), \(m\) is the constant first difference (when \(x\) goes up by \(1\)), and \(b\) is the value at \(x=0\), found by going one step back from \(x=1\).`, String.raw`First differences: \(3.5\) each, so \(m=3.5\).`, String.raw`Work back to \(x=0\): \(7.5-3.5=4\), so \(b=4\).`, String.raw`Check \(x=4\): \(3.5(4)+4=18\) ✓`],
       String.raw`\(y=3.5x+4\)`],
     ["Graphing from the equation", String.raw`Graph \(y=-\tfrac23x+4\).`,
-      [String.raw`Start at \((0,4)\).`, String.raw`Slope \(-\frac23\): right \(3\), down \(2\) to \((3,2)\); again to \((6,0)\).`, "Draw the line through the points; it falls to the right."],
+      [String.raw`<b>Slope–intercept form.</b> In \(y=mx+b\), \(b\) is the \(y\)-intercept (start point \((0,b)\)) and \(m=\dfrac{\text{rise}}{\text{run}}\) tells how to move to the next point. Here \(b=4\) and \(m=-\tfrac23\): run \(3\), rise \(-2\).`, String.raw`Start at \((0,4)\).`, String.raw`Slope \(-\frac23\): right \(3\), down \(2\) to \((3,2)\); again to \((6,0)\).`, "Draw the line through the points; it falls to the right.", String.raw`<b>Check a point:</b> \(x=6\): \(-\tfrac23(6)+4=-4+4=0\), so \((6,0)\) is on the line ✓`],
       "line through (0, 4), (3, 2), (6, 0)",
       plane({ view: { xmin: -4, xmax: 8, ymin: -4, ymax: 8 }, lines: [{ m: -2 / 3, b: 4, label: "y = −(2/3)x + 4" }], tri: { x: 0, y: 4, run: 3, rise: -2 }, points: [{ x: 0, y: 4, color: "green" }, { x: 3, y: 2 }, { x: 6, y: 0 }] })],
     ["Reading a graph", String.raw`The graph shows the cost of renting a canoe. Find \(m\) and \(b\), write the equation, and explain each number.`,
-      [String.raw`The line starts at \((0,20)\): \(b=20\).`, String.raw`It passes through \((4,50)\): \(m=\frac{50-20}{4-0}=7.5\).`, String.raw`\(C=7.5h+20\): a \(20\)-dollar deposit plus \(7.50\) dollars per hour.`],
+      [String.raw`<b>Method.</b> \(b\) is where the line crosses the vertical axis; \(m=\dfrac{y_2-y_1}{x_2-x_1}\) from two clear points on the line.`, String.raw`The line starts at \((0,20)\): \(b=20\).`, String.raw`It passes through \((4,50)\): \(m=\frac{50-20}{4-0}=7.5\).`, String.raw`\(C=7.5h+20\): a \(20\)-dollar deposit plus \(7.50\) dollars per hour.`, String.raw`<b>Check another point:</b> \(h=2\): \(7.5(2)+20=35\), which should be on the graph halfway between \(20\) and \(50\) ✓`],
       String.raw`\(C=7.5h+20\)`,
       plane({ view: { xmin: 0, xmax: 8, ymin: 0, ymax: 80 }, lines: [{ m: 7.5, b: 20, color: "blue" }], points: [{ x: 0, y: 20, label: "(0, 20)", color: "green" }, { x: 4, y: 50, label: "(4, 50)" }], xlabel: "hours h", ylabel: "cost C", step: { x: 1, y: 10 } })],
     ["Interpreting and using an equation", String.raw`A car rental costs \(C=0.35d+12\) dollars for \(d\) km. (a) Explain \(0.35\) and \(12\). (b) What does \(80\) km cost? (c) How far can you drive for \(54\) dollars?`,
-      [String.raw`(a) \(12\) dollars is the fixed daily charge (\(b\)); \(0.35\) dollars is the cost per km (\(m\)).`, String.raw`(b) \(0.35(80)+12=40\) dollars.`, String.raw`(c) \(0.35d+12=54\Rightarrow0.35d=42\Rightarrow d=120\) km.`],
+      [String.raw`<b>Meaning of the parts.</b> In \(C=md+b\), \(b\) is the cost when \(d=0\) (fixed charge) and \(m\) is the extra cost for each km. (b) asks to <i>evaluate</i>; (c) asks to <i>solve</i>.`, String.raw`(a) \(12\) dollars is the fixed daily charge (\(b\)); \(0.35\) dollars is the cost per km (\(m\)).`, String.raw`(b) \(0.35(80)+12=40\) dollars.`, String.raw`(c) \(0.35d+12=54\Rightarrow0.35d=42\Rightarrow d=120\) km.`, String.raw`<b>Check (c):</b> \(0.35(120)+12=42+12=54\) ✓`],
       String.raw`(b) \(40\) dollars (c) \(120\) km`],
   ]),
 

@@ -1,5 +1,5 @@
 // MTH1W 1.4 — Fractions: Equivalence, Comparing, Adding & Subtracting (self-study format)
-import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, numberLine, fracBar, q, frac, choice, hard, fig, num } from "./lib.mjs";
+import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, numberLine, fracBar, tape, q, frac, choice, hard, fig, num } from "./lib.mjs";
 import { bars } from "./bank/svg.mjs";
 
 export const TITLE = "1.4 Fractions: Equivalence, Comparing, Adding & Subtracting";
@@ -64,21 +64,46 @@ export const blocks = () => [
 
   examples([
     ["Lowest terms with the GCF", String.raw`Write \(\dfrac{84}{126}\) in lowest terms.`,
-      [String.raw`Factors: \(84=2^2\times3\times7\) and \(126=2\times3^2\times7\).`, String.raw`GCF \(=2\times3\times7=42\).`, String.raw`\(\tfrac{84\div42}{126\div42}=\tfrac{2}{3}\).`],
-      String.raw`\(\tfrac{84}{126}=\tfrac{2}{3}\)`],
+      [String.raw`<b>Rule.</b> Dividing the numerator and denominator by the same non-zero number gives an equivalent fraction: \[\frac{a}{b}=\frac{a\div k}{b\div k}\] Using \(k=\) the GCF reaches lowest terms in one step.`,
+        String.raw`<b>Prime factors:</b> \(84=2\times2\times3\times7=2^2\times3\times7\) and \(126=2\times3\times3\times7=2\times3^2\times7\).`,
+        String.raw`<b>GCF</b> = the primes they share, each to the smaller power: \(2\times3\times7=42\).`,
+        String.raw`<b>Divide:</b> \(\tfrac{84\div42}{126\div42}=\tfrac{2}{3}\).`,
+        String.raw`<b>Check:</b> \(2\) and \(3\) share no factor except \(1\), so the fraction is in lowest terms; and \(2\times126=252=3\times84\), so the fractions are equal ✓`],
+      String.raw`\(\tfrac{84}{126}=\tfrac{2}{3}\)`,
+      table(["", "Prime factors", "Shared"], [["\\(84\\)", "\\(2\\cdot2\\cdot3\\cdot7\\)", "\\(2\\cdot3\\cdot7\\)"], ["\\(126\\)", "\\(2\\cdot3\\cdot3\\cdot7\\)", "\\(2\\cdot3\\cdot7\\)"], ["GCF", "", "\\(42\\)"]])],
     ["Comparing negative fractions", String.raw`Which is greater, \(-\dfrac{2}{3}\) or \(-\dfrac{5}{8}\)?`,
-      [String.raw`LCD of \(3\) and \(8\) is \(24\): \(-\tfrac{2}{3}=-\tfrac{16}{24}\) and \(-\tfrac{5}{8}=-\tfrac{15}{24}\).`, String.raw`\(-15\) is to the right of \(-16\) on a number line, so \(-\tfrac{15}{24}>-\tfrac{16}{24}\).`],
+      [String.raw`<b>Rule.</b> To compare fractions, write them with a common denominator; then compare numerators. On a number line, the number farther <i>right</i> is greater.`,
+        String.raw`<b>LCD of \(3\) and \(8\):</b> they share no factors, so LCD \(=3\times8=24\).`,
+        String.raw`<b>Rewrite:</b> \(-\tfrac{2}{3}=-\tfrac{2\times8}{3\times8}=-\tfrac{16}{24}\) and \(-\tfrac{5}{8}=-\tfrac{5\times3}{8\times3}=-\tfrac{15}{24}\).`,
+        String.raw`<b>Compare:</b> \(-15>-16\) (\(-15\) is closer to \(0\)), so \(-\tfrac{15}{24}>-\tfrac{16}{24}\).`,
+        String.raw`<b>Check with decimals:</b> \(-\tfrac58=-0.625\) and \(-\tfrac23\approx-0.667\); \(-0.625\) is to the right ✓`],
       String.raw`\(-\tfrac{5}{8}>-\tfrac{2}{3}\)`,
       numberLine({ min: -1, max: 0, dots: [{ at: -0.6667, label: "−2/3", color: "red" }, { at: -0.625, label: "−5/8", color: "green" }], caption: "−5/8 is closer to 0, so it is the greater number.", id: "nl42", unit: 480 })],
     ["Adding with the LCD", String.raw`Evaluate \(\dfrac{3}{4}+\dfrac{5}{6}\).`,
-      [String.raw`LCD of \(4\) and \(6\) is \(12\): \(\tfrac{3}{4}=\tfrac{9}{12}\), \(\tfrac{5}{6}=\tfrac{10}{12}\).`, String.raw`Add the numerators: \(\tfrac{9+10}{12}=\tfrac{19}{12}\).`, String.raw`As a mixed number: \(\tfrac{19}{12}=1\tfrac{7}{12}\).`],
-      String.raw`\(\tfrac{3}{4}+\tfrac{5}{6}=\tfrac{19}{12}=1\tfrac{7}{12}\)`],
+      [String.raw`<b>Rule.</b> Fractions can be added only when the pieces are the same size: \[\frac{a}{d}+\frac{b}{d}=\frac{a+b}{d}\]`,
+        String.raw`<b>LCD of \(4\) and \(6\):</b> multiples of \(6\) are \(6, 12, \dots\); \(12\) is the first that \(4\) also divides. LCD \(=12\).`,
+        String.raw`<b>Rewrite:</b> \(\tfrac{3}{4}=\tfrac{3\times3}{4\times3}=\tfrac{9}{12}\) and \(\tfrac{5}{6}=\tfrac{5\times2}{6\times2}=\tfrac{10}{12}\).`,
+        String.raw`<b>Add the numerators:</b> \(\tfrac{9+10}{12}=\tfrac{19}{12}\).`,
+        String.raw`<b>Mixed number:</b> \(19=12+7\), so \(\tfrac{19}{12}=1\tfrac{7}{12}\).`,
+        String.raw`<b>Check by estimating:</b> \(0.75+0.83\approx1.58\), and \(1\tfrac{7}{12}\approx1.58\) ✓`],
+      String.raw`\(\tfrac{3}{4}+\tfrac{5}{6}=\tfrac{19}{12}=1\tfrac{7}{12}\)`,
+      `${fracBar({ n: 9, d: 12, caption: "3/4 = 9/12" })}${fracBar({ n: 10, d: 12, caption: "5/6 = 10/12" })}`],
     ["Subtracting with a negative", String.raw`Evaluate \(-\dfrac{1}{2}-\dfrac{3}{5}\).`,
-      [String.raw`LCD is \(10\): \(-\tfrac{5}{10}-\tfrac{6}{10}\).`, String.raw`Add the opposite: \(-\tfrac{5}{10}+\left(-\tfrac{6}{10}\right)=-\tfrac{11}{10}\) (same signs, so add the sizes and keep the sign).`],
-      String.raw`\(-\tfrac{1}{2}-\tfrac{3}{5}=-\tfrac{11}{10}=-1\tfrac{1}{10}\)`],
+      [String.raw`<b>Rules.</b> Use a common denominator, and change subtraction to adding the opposite: \(a-b=a+(-b)\).`,
+        String.raw`<b>LCD of \(2\) and \(5\):</b> \(10\). So \(-\tfrac{1}{2}=-\tfrac{5}{10}\) and \(\tfrac{3}{5}=\tfrac{6}{10}\).`,
+        String.raw`<b>Add the opposite:</b> \(-\tfrac{5}{10}-\tfrac{6}{10}=-\tfrac{5}{10}+\left(-\tfrac{6}{10}\right)\).`,
+        String.raw`<b>Same signs:</b> add the sizes and keep \(-\): \(-\tfrac{5+6}{10}=-\tfrac{11}{10}=-1\tfrac{1}{10}\).`,
+        String.raw`<b>Check with decimals:</b> \(-0.5-0.6=-1.1\) ✓`],
+      String.raw`\(-\tfrac{1}{2}-\tfrac{3}{5}=-\tfrac{11}{10}=-1\tfrac{1}{10}\)`,
+      numberLine({ min: -2, max: 0, arrows: [{ from: 0, to: -0.5, label: "−1/2", color: "gray", lane: 0 }, { from: -0.5, to: -1.1, label: "−3/5", color: "red", lane: 1 }], dots: [{ at: -1.1, label: "", color: "green" }], caption: "Start at −1/2 and move 6 tenths further left, ending at −11/10 (the green dot).", id: "nlx44", unit: 170 })],
     ["Mixed numbers in a problem", String.raw`A board is \(4\tfrac{1}{3}\) m long. A piece \(1\tfrac{3}{4}\) m long is cut off. How long is the remaining piece?`,
-      [String.raw`Improper fractions: \(4\tfrac13=\tfrac{13}{3}\) and \(1\tfrac34=\tfrac{7}{4}\).`, String.raw`LCD \(12\): \(\tfrac{52}{12}-\tfrac{21}{12}=\tfrac{31}{12}\).`, String.raw`\(\tfrac{31}{12}=2\tfrac{7}{12}\).`, String.raw`Estimate: \(4.3-1.8\approx2.5\) ✓`],
-      String.raw`the remaining piece is \(2\tfrac{7}{12}\) m long`],
+      [String.raw`<b>Model.</b> "Cut off" means subtract: remaining \(=4\tfrac13-1\tfrac34\).`,
+        String.raw`<b>Improper fractions</b> (so we never have to borrow a whole): \(4\tfrac13=\tfrac{4\times3+1}{3}=\tfrac{13}{3}\) and \(1\tfrac34=\tfrac{1\times4+3}{4}=\tfrac{7}{4}\).`,
+        String.raw`<b>LCD of \(3\) and \(4\) is \(12\):</b> \(\tfrac{13}{3}=\tfrac{52}{12}\) and \(\tfrac{7}{4}=\tfrac{21}{12}\).`,
+        String.raw`<b>Subtract:</b> \(\tfrac{52-21}{12}=\tfrac{31}{12}\). As a mixed number: \(31=2\times12+7\), so \(2\tfrac{7}{12}\).`,
+        String.raw`<b>Check by adding back:</b> \(2\tfrac{7}{12}+1\tfrac{9}{12}=3\tfrac{16}{12}=4\tfrac{4}{12}=4\tfrac13\) ✓`],
+      String.raw`the remaining piece is \(2\tfrac{7}{12}\) m long`,
+      tape([{ n: 21, label: "cut off: 21/12 m", fill: "#fecdd3", stroke: "#be123c" }, { n: 31, label: "left: 31/12 m", fill: "#dcfce7", stroke: "#15803d" }], "The board in twelfths of a metre: 52 parts = 21 cut off + 31 left.", 8)],
   ]),
 
   practice([

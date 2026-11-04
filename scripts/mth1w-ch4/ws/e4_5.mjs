@@ -2,15 +2,15 @@
 import { planeT } from "./plotT.mjs";
 
 export const EXAMPLES = [
-  { title: "Horizontal", q: String.raw`A freezer stays at $-18\,^\circ$C. Equation of temperature against time?`, steps: [String.raw`$T=-18$, slope $0$.`], ans: String.raw`$T=-18$` },
-  { title: "Vertical", q: String.raw`Line through $(4,-2)$ and $(4,3)$.`, steps: ["Run 0: slope undefined."], ans: String.raw`$x=4$` },
-  { title: "Direct variation", q: String.raw`Cheese costs $22$ dollars per kg; cost of $0.35$ kg.`, steps: [String.raw`$C=22k$; $7.70$.`], ans: String.raw`$C=22k$` },
+  { title: "Horizontal", q: String.raw`A freezer stays at $-18\,^\circ$C. Equation of temperature against time?`, steps: [String.raw`\textbf{Slope formula:} $m=\dfrac{y_2-y_1}{x_2-x_1}$; a value that never changes has rise $0$, so the slope is $0$ and the graph is horizontal.`, String.raw`$T=-18$, slope $0$.`], ans: String.raw`$T=-18$` },
+  { title: "Vertical", q: String.raw`Line through $(4,-2)$ and $(4,3)$.`, steps: [String.raw`\textbf{Slope formula:} $m=\dfrac{3-(-2)}{4-4}=\dfrac50$, and division by $0$ is undefined.`, "Run 0: slope undefined.", String.raw`\textbf{Equation:} every point on the line has $x$-coordinate $4$, so the line is $x=4$.`], ans: String.raw`$x=4$` },
+  { title: "Direct variation", q: String.raw`Cheese costs $22$ dollars per kg; cost of $0.35$ kg.`, steps: [String.raw`\textbf{Form:} cost $=$ price per kg $\times$ mass, $C=22k$ ($b=0$, through the origin).`, String.raw`$C=22k$; $7.70$.`, String.raw`\textbf{Calculate and check:} $22\times0.35=7.70$; $0.35$ kg is about a third of a kg, and a third of $22$ is about $7.33$ \checkmark`], ans: String.raw`$C=22k$` },
   { title: "Graphing an inequality", q: String.raw`Graph $y\le-2x+3$ and test $(0,0)$.`,
     fig: planeT({ view: { xmin: -6, xmax: 6, ymin: -6, ymax: 6 }, lines: [{ m: -2, b: 3 }], shade: { m: -2, b: 3, above: false }, points: [{ x: 0, y: 0, color: "green" }] }, 5),
-    steps: ["Solid; (0, 0): 0 ≤ 3 true; shade below."], ans: "below, solid" },
-  { title: "Budget", q: String.raw`Paint costs $10$ dollars per can and brushes $4$ dollars; $10x+4y\le50$. Is $(3,4)$ affordable?`, steps: [String.raw`$30+16=46\le50$.`], ans: "yes" },
-  { title: "Rearranging first", q: String.raw`Graph $4x-2y>6$.`, steps: [String.raw`$-2y>-4x+6$; divide by $-2$ and flip: $y<2x-3$.`, "Dashed, shade below."], ans: String.raw`$y<2x-3$` },
+    steps: [String.raw`\textbf{Method:} draw the boundary $y=-2x+3$ (solid, because $\le$ includes it), test a point not on the line, shade the side where the test is true.`, "Solid; (0, 0): 0 ≤ 3 true; shade below."], ans: "below, solid" },
+  { title: "Budget", q: String.raw`Paint costs $10$ dollars per can and brushes $4$ dollars; $10x+4y\le50$. Is $(3,4)$ affordable?`, steps: [String.raw`\textbf{Method:} a point is affordable if it makes the inequality true: substitute $x=3$ cans and $y=4$ brushes.`, String.raw`$30+16=46\le50$.`, String.raw`\textbf{Leftover:} $50-46=4$ dollars, exactly one more brush.`], ans: "yes" },
+  { title: "Rearranging first", q: String.raw`Graph $4x-2y>6$.`, steps: [String.raw`\textbf{Rule:} solve for $y$ as with an equation, but multiplying or dividing by a \emph{negative} number reverses the inequality sign.`, String.raw`$-2y>-4x+6$; divide by $-2$ and flip: $y<2x-3$.`, "Dashed, shade below.", String.raw`\textbf{Check with $(0,0)$:} $4(0)-2(0)>6$ is false, and $(0,0)$ is above $y=2x-3$, so the shading is below \checkmark`], ans: String.raw`$y<2x-3$` },
   { title: "Reading a graph", q: "A dashed line y = 2x + 1 with the region above shaded.", steps: ["Dashed and above."], ans: String.raw`$y>2x+1$` },
-  { title: "Horizontal inequality", q: String.raw`Graph $y\le-1$.`, steps: [String.raw`Solid horizontal line $y=-1$; shade below.`], ans: "below y = −1" },
-  { title: "Vertical inequality", q: String.raw`Graph $x>2$.`, steps: [String.raw`Dashed vertical line $x=2$; shade to the right.`], ans: "right of x = 2" },
+  { title: "Horizontal inequality", q: String.raw`Graph $y\le-1$.`, steps: [String.raw`\textbf{Rule:} $y\le-1$ includes every point whose $y$-coordinate is $-1$ or less, whatever $x$ is.`, String.raw`Solid horizontal line $y=-1$; shade below.`], ans: "below y = −1" },
+  { title: "Vertical inequality", q: String.raw`Graph $x>2$.`, steps: [String.raw`\textbf{Rule:} $x>2$ includes every point with $x$-coordinate greater than $2$; strict $>$ means the boundary is dashed.`, String.raw`Dashed vertical line $x=2$; shade to the right.`], ans: "right of x = 2" },
 ];

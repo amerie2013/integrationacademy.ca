@@ -43,21 +43,21 @@ export const blocks = () => [
 
   examples([
     ["From a graph", String.raw`Write the equation of the line shown.`,
-      [String.raw`It crosses the y-axis at \((0,-2)\): \(b=-2\).`, String.raw`From \((0,-2)\) to \((3,4)\): rise \(6\), run \(3\), \(m=2\).`],
+      [String.raw`<b>Form.</b> \(y=mx+b\): read \(b\) where the line crosses the \(y\)-axis, and \(m=\dfrac{\text{rise}}{\text{run}}\) between two grid points on the line.`, String.raw`It crosses the y-axis at \((0,-2)\): \(b=-2\).`, String.raw`From \((0,-2)\) to \((3,4)\): rise \(6\), run \(3\), \(m=2\).`, String.raw`<b>Check:</b> \((3,4)\): \(2(3)-2=4\) ✓`],
       String.raw`\(y=2x-2\)`,
       plane({ view: { xmin: -4, xmax: 6, ymin: -6, ymax: 8 }, lines: [{ m: 2, b: -2 }], points: [{ x: 0, y: -2, label: "(0, −2)", color: "green" }, { x: 3, y: 4, label: "(3, 4)" }], tri: { x: 0, y: -2, run: 3, rise: 6 } })],
     ["From a slope and a point", String.raw`Find the equation of the line with slope \(-3\) through \((2,5)\).`,
-      [String.raw`\(5=-3(2)+b\Rightarrow5=-6+b\Rightarrow b=11\).`, String.raw`Check: \(-3(2)+11=5\) ✓`],
+      [String.raw`<b>Method.</b> Put the known slope into \(y=mx+b\), then substitute the point \((x,y)=(2,5)\) — it must make the equation true — and solve for \(b\).`, String.raw`\(5=-3(2)+b\Rightarrow5=-6+b\Rightarrow b=11\).`, String.raw`Check: \(-3(2)+11=5\) ✓`],
       String.raw`\(y=-3x+11\)`],
     ["From two points", String.raw`Find the equation of the line through \((-2,7)\) and \((4,-2)\).`,
-      [String.raw`\(m=\dfrac{-2-7}{4-(-2)}=\dfrac{-9}{6}=-\tfrac32\).`, String.raw`\(7=-\tfrac32(-2)+b=3+b\Rightarrow b=4\).`, String.raw`Check \((4,-2)\): \(-6+4=-2\) ✓`],
+      [String.raw`<b>Method.</b> (1) slope \(m=\dfrac{y_2-y_1}{x_2-x_1}\); (2) substitute either point into \(y=mx+b\) to find \(b\); (3) check with the other point.`, String.raw`\(m=\dfrac{-2-7}{4-(-2)}=\dfrac{-9}{6}=-\tfrac32\).`, String.raw`\(7=-\tfrac32(-2)+b=3+b\Rightarrow b=4\).`, String.raw`Check \((4,-2)\): \(-6+4=-2\) ✓`],
       String.raw`\(y=-\tfrac32x+4\)`],
     ["From a table with unequal steps", String.raw`Find the equation.
     ${table(["x", "2", "5", "9"], [["y", "11", "20", "32"]])}`,
-      [String.raw`\(\frac{20-11}{5-2}=3\) and \(\frac{32-20}{9-5}=3\): linear, \(m=3\).`, String.raw`\(11=3(2)+b\Rightarrow b=5\).`],
+      [String.raw`<b>Method.</b> With unequal \(x\)-steps, compute \(\dfrac{\Delta y}{\Delta x}\) for each pair; if they agree, the relation is linear with that slope. Then find \(b\) from one point.`, String.raw`\(\frac{20-11}{5-2}=3\) and \(\frac{32-20}{9-5}=3\): linear, \(m=3\).`, String.raw`\(11=3(2)+b\Rightarrow b=5\).`, String.raw`<b>Check:</b> \(3(9)+5=32\) ✓`],
       String.raw`\(y=3x+5\)`],
     ["From two data points", String.raw`A plumber charged \(155\) dollars for a \(2\)-hour job and \(260\) dollars for a \(3.5\)-hour job. Assuming a linear relation, find the hourly rate, the call-out fee, and the cost of a \(5\)-hour job.`,
-      [String.raw`\(m=\dfrac{260-155}{3.5-2}=\dfrac{105}{1.5}=70\) dollars per hour.`, String.raw`\(155=70(2)+b\Rightarrow b=15\) dollars.`, String.raw`\(C=70h+15\); \(5\) h: \(365\) dollars.`],
+      [String.raw`<b>Model.</b> cost \(=\) rate \(\times\) hours \(+\) fee, i.e. \(C=mh+b\). The two jobs are two points \((2,155)\) and \((3.5,260)\).`, String.raw`\(m=\dfrac{260-155}{3.5-2}=\dfrac{105}{1.5}=70\) dollars per hour.`, String.raw`\(155=70(2)+b\Rightarrow b=15\) dollars.`, String.raw`\(C=70h+15\); \(5\) h: \(365\) dollars.`, String.raw`<b>Check with the other job:</b> \(70(3.5)+15=245+15=260\) ✓`],
       String.raw`\(C=70h+15\); \(365\) dollars`],
   ]),
 

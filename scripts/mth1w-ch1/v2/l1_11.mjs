@@ -1,5 +1,5 @@
 // MTH1W 1.11 — Chapter 1 Review (self-study format, new lesson placed after 1.10)
-import { intro, section, keyIdea, widget, examples, practice, wrapUp, table, q, num, frac, sci, choice, hard } from "./lib.mjs";
+import { intro, section, keyIdea, widget, examples, practice, wrapUp, table, tape, q, num, frac, sci, choice, hard } from "./lib.mjs";
 
 export const TITLE = "1.11 Chapter 1 Review";
 // New lesson: created on --apply with this id at this position (later lessons shift down by one).
@@ -81,20 +81,45 @@ export const blocks = () => [
 
   examples([
     ["Number sets and roots", String.raw`Evaluate \(\sqrt{\tfrac{49}{81}}-0.\overline{3}\) and state which number sets the answer belongs to.`,
-      [String.raw`\(\sqrt{\tfrac{49}{81}}=\tfrac79\) and \(0.\overline3=\tfrac13=\tfrac39\).`, String.raw`\(\tfrac79-\tfrac39=\tfrac49\).`, String.raw`\(\tfrac49=0.\overline{4}\) is a quotient of integers, not an integer.`],
+      [String.raw`<b>Facts used.</b> \(\sqrt{\tfrac{a}{b}}=\tfrac{\sqrt a}{\sqrt b}\), and a repeating decimal can be written as a fraction.`,
+        String.raw`<b>Root:</b> \(49=7^2\) and \(81=9^2\), so \(\sqrt{\tfrac{49}{81}}=\tfrac79\).`,
+        String.raw`<b>Repeating decimal:</b> let \(x=0.\overline3\); then \(10x=3.\overline3\), so \(9x=3\) and \(x=\tfrac13=\tfrac39\).`,
+        String.raw`<b>Subtract with the common denominator \(9\):</b> \(\tfrac79-\tfrac39=\tfrac49\).`,
+        String.raw`<b>Classify:</b> \(\tfrac49\) is a quotient of integers, so it is rational and real; it is between \(0\) and \(1\), so not an integer.`,
+        String.raw`<b>Check with decimals:</b> \(0.777\ldots-0.333\ldots=0.444\ldots=\tfrac49\) ✓`],
       String.raw`\(\tfrac49\): rational and real`],
     ["Integers and BEDMAS", String.raw`Evaluate \(-3^2+(-12)\div(-4)\times2-(-5)\).`,
-      [String.raw`Exponent: \(-3^2=-9\) (the base is \(3\)).`, String.raw`Left to right: \((-12)\div(-4)=3\), then \(3\times2=6\).`, String.raw`\(-9+6-(-5)=-9+6+5=2\).`],
+      [String.raw`<b>Order.</b> Exponents → division and multiplication left to right → addition and subtraction left to right.`,
+        String.raw`<b>Exponent:</b> in \(-3^2\) the base is \(3\), not \(-3\), so \(-3^2=-(9)=-9\).`,
+        String.raw`<b>Divide, then multiply (left to right):</b> \((-12)\div(-4)=3\) (same signs → positive), then \(3\times2=6\).`,
+        String.raw`<b>Subtracting a negative is adding:</b> \(-(-5)=+5\).`,
+        String.raw`<b>Combine:</b> \(-9+6+5=2\).`,
+        String.raw`<b>Check the trap:</b> if \(-3^2\) were read as \((-3)^2=9\), the answer would be \(20\) — the brackets are what decide it.`],
       String.raw`\(2\)`],
     ["Fractions, mixed numbers and decimals", String.raw`Evaluate \(\left(2\tfrac13-3.5\right)\div\left(-\tfrac{7}{12}\right)\).`,
-      [String.raw`Same form: \(2\tfrac13=\tfrac73\), \(3.5=\tfrac72\). Bracket: \(\tfrac{14}{6}-\tfrac{21}{6}=-\tfrac76\).`, String.raw`\(-\tfrac76\div\left(-\tfrac{7}{12}\right)=\tfrac76\times\tfrac{12}{7}\) (same signs → positive).`, String.raw`\(=\tfrac{12}{6}=2\).`],
+      [String.raw`<b>Plan.</b> Put everything in the same form (improper fractions), do the bracket, then divide by multiplying by the reciprocal.`,
+        String.raw`<b>Convert:</b> \(2\tfrac13=\tfrac73\) and \(3.5=\tfrac72\).`,
+        String.raw`<b>Bracket (LCD \(6\)):</b> \(\tfrac{14}{6}-\tfrac{21}{6}=-\tfrac76\).`,
+        String.raw`<b>Divide:</b> \(-\tfrac76\div\left(-\tfrac{7}{12}\right)=-\tfrac76\times\left(-\tfrac{12}{7}\right)\). Two negatives → positive.`,
+        String.raw`<b>Simplify:</b> the \(7\)s cancel and \(\tfrac{12}{6}=2\), so the answer is \(2\).`,
+        String.raw`<b>Check:</b> \(2\times\left(-\tfrac{7}{12}\right)=-\tfrac{14}{12}=-\tfrac76\), the value of the bracket ✓`],
       String.raw`\(2\)`],
     ["Exponent laws with scientific notation", String.raw`Evaluate \(\dfrac{(6\times10^{5})^2}{1.2\times10^{-3}}\) in scientific notation.`,
-      [String.raw`Numerator: \(6^2\times10^{10}=36\times10^{10}\).`, String.raw`Divide: \(\tfrac{36}{1.2}=30\) and \(10^{10-(-3)}=10^{13}\).`, String.raw`\(30\times10^{13}=3\times10^{14}\).`],
+      [String.raw`<b>Laws.</b> \((ab)^n=a^nb^n\), \((10^m)^n=10^{mn}\), \(\tfrac{10^m}{10^n}=10^{m-n}\).`,
+        String.raw`<b>Numerator:</b> \((6\times10^5)^2=6^2\times10^{5\times2}=36\times10^{10}\).`,
+        String.raw`<b>Divide the numbers and the powers separately:</b> \(\tfrac{36}{1.2}=30\) and \(\tfrac{10^{10}}{10^{-3}}=10^{10-(-3)}=10^{13}\).`,
+        String.raw`<b>Fix the form</b> (\(30\) is not between \(1\) and \(10\)): \(30\times10^{13}=3\times10^{1}\times10^{13}=3\times10^{14}\).`,
+        String.raw`<b>Check:</b> \(3\times10^{14}\times1.2\times10^{-3}=3.6\times10^{11}=36\times10^{10}\), the numerator ✓`],
       String.raw`\(3\times10^{14}\)`],
     ["Ratio, then percent", String.raw`A drink is mixed concentrate : water \(=2:5\). (a) How much concentrate is in \(4.2\) L of drink? (b) Concentrate costs \(3.60\) dollars per litre and is \(25\%\) off. What does that amount cost?`,
-      [String.raw`(a) \(7\) parts make \(4.2\) L, so one part is \(0.6\) L; concentrate \(=2\times0.6=1.2\) L.`, String.raw`(b) Full price \(1.2\times3.60=4.32\) dollars; \(25\%\) off: \(4.32\times0.75=3.24\).`],
-      String.raw`(a) \(1.2\) L; (b) \(3.24\) dollars`],
+      [String.raw`<b>(a) Parts.</b> \(2:5\) means \(2+5=7\) equal parts make the whole drink.`,
+        String.raw`<b>(a) One part:</b> \(4.2\div7=0.6\) L. Concentrate is \(2\) parts: \(2\times0.6=1.2\) L.`,
+        String.raw`<b>(a) Check:</b> water \(=5\times0.6=3\) L, and \(1.2+3=4.2\) L ✓`,
+        String.raw`<b>(b) Full price:</b> cost \(=\) unit price \(\times\) quantity \(=3.60\times1.2=4.32\) dollars.`,
+        String.raw`<b>(b) Discount:</b> \(25\%\) off keeps \(75\%\): \(4.32\times0.75=3.24\) dollars.`,
+        String.raw`<b>(b) Check:</b> the discount is \(\tfrac14\) of \(4.32\), which is \(1.08\), and \(4.32-1.08=3.24\) ✓`],
+      String.raw`(a) \(1.2\) L; (b) \(3.24\) dollars`,
+      tape([{ n: 2, label: "concentrate", fill: "#fef3c7", stroke: "#b45309" }, { n: 5, label: "water", fill: "#dbeafe", stroke: "#1e40af" }], "7 equal parts make 4.2 L, so each part is 0.6 L.", 40)],
   ]),
 
   section("📌 Mixed review", String.raw`<p>These five questions each combine two or more lessons. Estimate first, then check.</p>`),

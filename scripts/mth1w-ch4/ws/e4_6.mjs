@@ -1,12 +1,12 @@
 // Worksheet 4.6 worked examples (separate from the lesson's examples).
 export const EXAMPLES = [
-  { title: "Translation", q: String.raw`$y=-x+5$ vs $y=-x$.`, steps: ["Same slope; up 5."], ans: "translated up 5" },
-  { title: "Rotation", q: String.raw`$y=5x-2$ vs $y=x-2$.`, steps: ["Same intercept (0, −2); steeper."], ans: "rotated about (0, −2), steeper" },
-  { title: "Reflection", q: String.raw`$y=2x+5$ vs $y=-2x+5$.`, steps: [String.raw`$(1,7)\leftrightarrow(-1,7)$.`], ans: "reflection in the y-axis" },
-  { title: "Several changes", q: String.raw`$y=-3x-4$ from $y=x$.`, steps: ["Steeper (×3), reflected, down 4."], ans: "as described" },
-  { title: "Fee and rate", q: String.raw`A bus fare $C=3d+5$ becomes $C=3.4d+7$; extra cost for $10$ km.`, steps: [String.raw`$35\to41$.`], ans: "6 dollars" },
-  { title: "Writing a translation", q: String.raw`$y=-x+2$ moved up $3$.`, steps: [String.raw`$b$: $2\to5$.`], ans: String.raw`$y=-x+5$` },
-  { title: "Finding m", q: String.raw`$y=mx-1$ passes through $(2,7)$.`, steps: [String.raw`$7=2m-1$, $m=4$.`], ans: "$m=4$" },
-  { title: "Steepness order", q: String.raw`Order $y=0.2x$, $y=-5x$, $y=x$.`, steps: ["0.2, 1, 5."], ans: String.raw`$0.2x$, $x$, $-5x$` },
-  { title: "Parallel family", q: String.raw`Write two lines parallel to $y=-3x+1$.`, steps: ["Keep m = −3."], ans: String.raw`e.g. $y=-3x$, $y=-3x+8$` },
+  { title: "Translation", q: String.raw`$y=-x+5$ vs $y=-x$.`, steps: [String.raw`\textbf{Rule:} changing only $b$ in $y=mx+b$ moves every point vertically by the change in $b$; the slope stays the same.`, "Same slope; up 5.", String.raw`\textbf{Check at $x=1$:} $-1$ becomes $4$, which is $5$ higher \checkmark`], ans: "translated up 5" },
+  { title: "Rotation", q: String.raw`$y=5x-2$ vs $y=x-2$.`, steps: [String.raw`\textbf{Rule:} changing only $m$ keeps the $y$-intercept fixed; the line turns about it, steeper when $|m|$ is larger.`, "Same intercept (0, −2); steeper."], ans: "rotated about (0, −2), steeper" },
+  { title: "Reflection", q: String.raw`$y=2x+5$ vs $y=-2x+5$.`, steps: [String.raw`\textbf{Rule:} $m\to-m$ with the same $b$ reflects the line in the $y$-axis: $(x,y)\to(-x,y)$.`, String.raw`$(1,7)\leftrightarrow(-1,7)$.`, String.raw`\textbf{Check:} $2(1)+5=7$ and $-2(-1)+5=7$ \checkmark`], ans: "reflection in the y-axis" },
+  { title: "Several changes", q: String.raw`$y=-3x-4$ from $y=x$.`, steps: [String.raw`\textbf{Read each parameter:} $|m|=3$ (three times as steep as $y=x$), $m<0$ (reflected, falls), $b=-4$ (down $4$).`, "Steeper (×3), reflected, down 4."], ans: "as described" },
+  { title: "Fee and rate", q: String.raw`A bus fare $C=3d+5$ becomes $C=3.4d+7$; extra cost for $10$ km.`, steps: [String.raw`\textbf{Method:} evaluate both equations at $d=10$ and subtract.`, String.raw`$35\to41$.`, String.raw`\textbf{Details:} $3(10)+5=35$ and $3.4(10)+7=41$; $41-35=6$ \checkmark`], ans: "6 dollars" },
+  { title: "Writing a translation", q: String.raw`$y=-x+2$ moved up $3$.`, steps: [String.raw`\textbf{Rule:} moving a line up $3$ adds $3$ to every $y$-value, so add $3$ to $b$ and keep $m$.`, String.raw`$b$: $2\to5$.`], ans: String.raw`$y=-x+5$` },
+  { title: "Finding m", q: String.raw`$y=mx-1$ passes through $(2,7)$.`, steps: [String.raw`\textbf{Rule:} a point lies on a line exactly when its coordinates make the equation true, so substitute $x=2$ and $y=7$.`, String.raw`$7=2m-1$, $m=4$.`, String.raw`\textbf{Check:} $4(2)-1=7$ \checkmark`], ans: "$m=4$" },
+  { title: "Steepness order", q: String.raw`Order $y=0.2x$, $y=-5x$, $y=x$.`, steps: [String.raw`\textbf{Rule:} steepness is measured by $|m|$; the sign only gives the direction.`, "0.2, 1, 5."], ans: String.raw`$0.2x$, $x$, $-5x$` },
+  { title: "Parallel family", q: String.raw`Write two lines parallel to $y=-3x+1$.`, steps: [String.raw`\textbf{Rule:} parallel lines have equal slopes and different intercepts.`, "Keep m = −3."], ans: String.raw`e.g. $y=-3x$, $y=-3x+8$` },
 ];

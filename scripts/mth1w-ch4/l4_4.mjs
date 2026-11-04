@@ -54,21 +54,21 @@ export const blocks = () => [
 
   examples([
     ["Comparing two relations", String.raw`Runner A starts \(100\) m ahead and runs \(4\) m/s; runner B starts at the line and runs \(6\) m/s. Write both equations and compare them.`,
-      [String.raw`A: \(d=4t+100\); B: \(d=6t\).`, "A has the larger initial value; B has the larger rate (steeper line), so B eventually catches A."],
+      [String.raw`<b>Model.</b> distance \(=\) starting distance \(+\) speed \(\times\) time, i.e. \(d=mt+b\): the speed is the slope \(m\), the head start is the intercept \(b\).`, String.raw`A: \(d=4t+100\); B: \(d=6t\).`, "A has the larger initial value; B has the larger rate (steeper line), so B eventually catches A.", String.raw`<b>Why B catches up:</b> B gains \(6-4=2\) m every second, and the gap is \(100\) m, so it closes in \(100\div2=50\) s.`],
       String.raw`A: \(d=4t+100\); B: \(d=6t\)`],
     ["Intersection from a table", String.raw`When does B catch A? Use a table.
     ${table(["t (s)", "0", "20", "40", "50", "60"], [["A: 4t + 100", "100", "180", "260", "300", "340"], ["B: 6t", "0", "120", "240", "300", "360"]])}`,
-      [String.raw`At \(t=50\) both are at \(300\) m.`],
+      [String.raw`<b>Meaning.</b> The point of intersection is where both relations have the same \(t\) <b>and</b> the same \(d\): look for a row where the two values are equal.`, String.raw`At \(t=50\) both are at \(300\) m.`, String.raw`<b>Check with the equations:</b> \(4(50)+100=300\) and \(6(50)=300\) ✓`],
       String.raw`after \(50\) s, \(300\) m from B's start`],
     ["Intersection with algebra", String.raw`Find the point of intersection of \(y=3x+1\) and \(y=-x+9\).`,
-      [String.raw`\(3x+1=-x+9\Rightarrow4x=8\Rightarrow x=2\).`, String.raw`\(y=3(2)+1=7\). Check: \(-2+9=7\) ✓`],
+      [String.raw`<b>Method.</b> At the intersection both equations give the same \(y\), so set the right sides equal and solve for \(x\); then substitute to find \(y\).`, String.raw`\(3x+1=-x+9\Rightarrow4x=8\Rightarrow x=2\).`, String.raw`\(y=3(2)+1=7\). Check: \(-2+9=7\) ✓`],
       String.raw`\((2, 7)\)`],
     ["Reading a graph", String.raw`Estimate the point of intersection, then confirm with algebra.`,
-      [String.raw`The lines appear to cross at about \((2,4)\).`, String.raw`\(x+2=-0.5x+5\Rightarrow1.5x=3\Rightarrow x=2\); \(y=4\).`],
+      [String.raw`<b>Method.</b> A graph gives an estimate; setting the two expressions equal (\(x+2=-0.5x+5\)) gives the exact point.`, String.raw`The lines appear to cross at about \((2,4)\).`, String.raw`\(x+2=-0.5x+5\Rightarrow1.5x=3\Rightarrow x=2\); \(y=4\).`, String.raw`<b>Check in the second line:</b> \(-0.5(2)+5=4\) ✓`],
       String.raw`\((2,4)\)`,
       plane({ view: { xmin: -4, xmax: 8, ymin: -2, ymax: 8 }, lines: [{ m: 1, b: 2, color: "blue", label: "y = x + 2", lx: 4 }, { m: -0.5, b: 5, color: "red", label: "y = −0.5x + 5", lx: 5 }], points: [{ x: 2, y: 4, color: "green" }] })],
     ["A decision", String.raw`Gym A charges \(50\) dollars to join plus \(20\) dollars per month. Gym B charges \(110\) dollars to join plus \(10\) dollars per month. Which gym is cheaper, and when?`,
-      [String.raw`Equal when \(50+20m=110+10m\Rightarrow10m=60\Rightarrow m=6\) (both \(170\) dollars).`, String.raw`Before \(6\) months A is cheaper (e.g. \(3\) months: A \(110\), B \(140\)).`, String.raw`After \(6\) months B is cheaper (e.g. \(12\): A \(290\), B \(230\)).`],
+      [String.raw`<b>Model.</b> cost \(=\) joining fee \(+\) monthly rate \(\times\) months: A: \(C=50+20m\), B: \(C=110+10m\). The cheaper gym changes at the intersection.`, String.raw`Equal when \(50+20m=110+10m\Rightarrow10m=60\Rightarrow m=6\) (both \(170\) dollars).`, String.raw`Before \(6\) months A is cheaper (e.g. \(3\) months: A \(110\), B \(140\)).`, String.raw`After \(6\) months B is cheaper (e.g. \(12\): A \(290\), B \(230\)).`, String.raw`<b>Reason:</b> A starts \(60\) dollars cheaper but costs \(10\) more each month, so the \(60\) is used up after \(60\div10=6\) months ✓`],
       "A for fewer than 6 months, B for more than 6; equal at 6 months"],
   ]),
 
