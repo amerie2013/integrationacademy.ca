@@ -1,3 +1,4 @@
+import { FIG } from "../../mth1w-bank-figures/figs.mjs";
 // 4.6 Transformations of Lines — 20 hard questions
 import { mc, ms, num, tf, mx } from "./kit.mjs";
 import { planeDoc } from "./fig.mjs";
@@ -6,7 +7,7 @@ export const TOPIC = "4.6 Transformations of Lines";
 export const Q = [
   num(String.raw`The line $y=2x+1$ is translated so that it passes through $(5,4)$. What is the new y-intercept?`, -6, "Keep m = 2: 4 = 10 + b."),
   num(String.raw`$y=-x+4$ is reflected in the y-axis, then translated down 6. What is the x-intercept of the result?`, 2, "Reflect: y = x + 4; down 6: y = x − 2 → x = 2."),
-  mc(`The family y = mx + 4 is drawn for m = −2, −1, 0, 1, 2. Which statement is true?`, "all five lines pass through (0, 4)", ["all five are parallel", "none crosses the x-axis", "they all have x-intercept −4"], "They share b = 4."),
+  mc(`The family y = mx + 4 is drawn for m = −2, −1, 0, 1, 2. Which statement is true?`, "all five lines pass through (0, 4)", ["all five are parallel", "none crosses the x-axis", "they all have x-intercept −4"], "They share b = 4.", FIG.family),
   num(String.raw`For which slope m does $y=mx+4$ have x-intercept $8$?`, -0.5, "0 = 8m + 4.", null, 0.001),
   ms(String.raw`Starting from $y=x$, which single changes produce a line through $(2,8)$? Select all.`, [String.raw`translate up 6`, String.raw`rotate to slope 4`, String.raw`translate up 8`, String.raw`rotate to slope 3 and translate up 2`, String.raw`reflect`], [0, 1, 3], "y = x + 6, y = 4x and y = 3x + 2 all pass through (2, 8)."),
   num(`A gym's fee rises from 30 to 45 dollars and its monthly rate falls from 25 to 22 dollars. After how many months is the new plan cheaper than the old one?`, 6, "45 + 22m < 30 + 25m → 15 < 3m → m > 5, so from 6 months."),

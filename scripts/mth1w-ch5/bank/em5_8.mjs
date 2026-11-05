@@ -1,3 +1,4 @@
+import { FIG } from "../../mth1w-bank-figures/figs.mjs";
 // 5.8 Surface Area — 20 easy + 20 medium questions
 import { mc, ms, num, tf } from "./kit.mjs";
 import { figDoc, prismNet, cylinderNet, pyramid } from "./fig.mjs";
@@ -40,7 +41,7 @@ export const M = [
   num(`A shed has a 3 m × 2 m floor and 2.5 m walls with a flat roof. Find the area of the four walls plus the roof.`, 31, "Walls 2.5 × 10 = 25; roof 6."),
   ms(`Which solids have a surface area of exactly 24 square units? Select all.`, ["a cube with edge 2", "a 4 × 2 × 1 box", "a 3 × 2 × 1 box", "a 3 × 2 × 1.2 box"], [0, 3], "2(lw + lh + wh): 24; 28; 22; 2(6 + 3.6 + 2.4) = 24."),
   num(`Paint covers 10 m² per litre. How many litres cover the outside of a 2 m cube (all six faces)?`, 2.4, "24 ÷ 10."),
-  num(`A hemisphere (half ball) of radius 6 cm has a flat base. Find its total surface area (1 decimal place).`, 339.3, "2π(36) + π(36) = 108π.", null, 0.06),
+  num(`A hemisphere (half ball) of radius 6 cm has a flat base. Find its total surface area (1 decimal place).`, 339.3, "2π(36) + π(36) = 108π.", FIG.hemi6, 0.06),
   mc(`For a cone, which is used to find the curved surface area?`, "the radius and the slant height", ["the radius and the height", "the diameter and the height", "only the height"], "Lateral area πrs."),
   num(`A square pyramid has base 8 and slant height 5. Find its height.`, 3, "√(25 − 16)."),
   num(`A box 20 × 10 × 5 cm is wrapped with paper. 15% extra paper is needed for overlaps. How much paper is needed (cm²)?`, 805, "SA 700 × 1.15."),

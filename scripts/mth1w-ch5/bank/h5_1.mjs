@@ -8,7 +8,7 @@ export const TOPIC = "5.1 Geometry & Measurement Through History";
 export const Q = [
   num(`Convert the Babylonian number 1;24,51,10 to a decimal (6 decimal places).`, 1.414213, "1 + 24/60 + 51/3600 + 10/216000.", null, 0.0000015),
   num(`Write 3.14159 in base 60 as 3;a,b (two places). What is a?`, 8, "0.14159 × 60 = 8.495 → a = 8."),
-  num(`Continuing: 3.14159 = 3;8,b. Find b to the nearest whole number.`, 30, "0.495 × 60 ≈ 29.7 → 30."),
+  num(`In base 60, 3.14159 = 3;8,b. Find b to the nearest whole number.`, 30, "0.495 × 60 ≈ 29.7 → 30."),
   num(`Two cities 1250 km apart on a meridian have noon Sun angles differing by 11.25°. Estimate Earth's circumference (km).`, 40000, "360 ÷ 11.25 = 32; 32 × 1250."),
   num(`Using C ≈ 40 000 km, how far apart (km) are two places on a meridian whose noon Sun angles differ by 1°?`, 111.1, "40 000 ÷ 360.", null, 0.06),
   num(`A regular 12-gon is drawn inside a circle of diameter 1. Each side is 0.258819. What lower bound for π does its perimeter give (4 decimal places)?`, 3.1058, "12 × 0.258819 = 3.10583.", figDoc({ w: 220, items: [{ circle: [0, 0, 1], color: "ink" }, { poly: reg(12), fill: "none", color: "blue" }] }), 0.00006),

@@ -6,7 +6,7 @@ export const TOPIC = "7.4 Budgets";
 export const Q = [
   num(`Jordan's gross pay is 3100 dollars a month. Deductions: tax 390, CPP 170, EI 51, dues 40 (dollars). What percent of gross pay is deducted (nearest whole percent)?`, 21, "651 ÷ 3100 = 0.21."),
   num(`A budget: net income 2450; rent 950, utilities 110, groceries 380, transit 156, phone 55, eating out 160, entertainment 120, savings 250 (dollars). Income drops 20%. What is the new deficit (dollars)? (Enter a negative number.)`, -221, "1960 − 2181."),
-  num(`For that drop, by how much must wants and savings be cut in total to break even (dollars)?`, 221, "The deficit."),
+  num(`A budget: net income 2450; rent 950, utilities 110, groceries 380, transit 156, phone 55, eating out 160, entertainment 120, savings 250 (dollars). Income drops 20%. By how much must wants and savings be cut in total to break even (dollars)?`, 221, "New income 1960; expenses 2181; the deficit is 221."),
   num(`Aisha earns 18 dollars an hour for 25 hours a week; 15% is deducted. What is her monthly net pay (to the cent)?`, 1657.5, "18 × 25 × 52 ÷ 12 × 0.85."),
   num(`A student saves 40 dollars a week. How many whole months until she has at least 1500 dollars, starting from 300 dollars? (Use 52 ÷ 12 weeks per month.)`, 7, "Monthly ≈ 173.33; 300 + 7 × 173.33 = 1513.33 ≥ 1500; 6 months gives 1340."),
   ms(`A budget has needs 62%, wants 28%, savings 10%. Which are true? Select all.`, ["needs are above the 50% guideline", "savings are below the 20% guideline", "wants are within 30%", "the budget must be in deficit"], [0, 1, 2], "Percent split alone does not tell you about a deficit."),

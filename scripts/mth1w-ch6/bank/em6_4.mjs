@@ -1,3 +1,4 @@
+import { FIG } from "../../mth1w-bank-figures/figs.mjs";
 // 6.4 The Mathematical Modelling Process — 20 easy + 20 medium questions
 import { mc, ms, num, tf } from "./kit.mjs";
 import { scatterDoc } from "./fig.mjs";
@@ -31,7 +32,7 @@ export const M = [
   num(`Bacteria: 300 at t = 0, 900 at t = 1, 2700 at t = 2. Predict t = 4.`, 24300, "Ratio 3: 300 × 3⁴."),
   mc(`Which model fits x: 0, 1, 2, 3 and y: 2, 3, 6, 11?`, "quadratic", ["linear", "exponential", "none"], "First differences 1, 3, 5; second differences 2, 2."),
   num(`A gym charges a joining fee plus a monthly fee. 3 months cost 125 dollars and 7 months cost 225 dollars. What is the monthly fee (dollars)?`, 25, "100 ÷ 4."),
-  num(`For that gym (25 dollars per month; 3 months = 125 dollars), what is the joining fee (dollars)?`, 50, "125 − 75."),
+  num(`A gym charges a joining fee plus a monthly fee. 3 months cost 125 dollars and 7 months cost 225 dollars. What is the joining fee (dollars)?`, 50, "Monthly fee 100 ÷ 4 = 25; 125 − 75."),
   ms(`A model predicts next month's ice-cream sales from this month's. Which are reasonable assumptions? Select all.`, ["the weather will be similar", "prices will not change much", "the store stays open the same hours", "sales will be negative"], [0, 1, 2], "Negative sales are impossible."),
   num(`The model T = 22 + 70(0.9)^t gives a drink's temperature (°C) after t minutes. Find T at t = 0.`, 92, "22 + 70."),
   num(`Using T = 22 + 70(0.9)^t, what temperature does the drink approach after a very long time (°C)?`, 22, "(0.9)^t → 0."),
@@ -39,7 +40,7 @@ export const M = [
   num(`A school uses 3 buses for every 120 students on a trip. How many buses are needed for 410 students?`, 11, "410 ÷ 40 = 10.25 → round up to 11."),
   tf(`If the ratios of consecutive terms are constant, the data are best modelled by a linear relation.`, false, "Constant ratios → exponential."),
   num(`Estimate the y-value at x = 8 using the line shown.`, 52, "The line is y = 6x + 4.", scatterDoc({ pts: [[1, 9], [2, 17], [3, 21], [4, 29], [5, 33], [6, 41]], view: { xmin: 0, xmax: 10, ymin: 0, ymax: 60 }, step: { x: 1, y: 10 }, line: { m: 6, b: 4 } })),
-  mc(`The prediction at x = 8 in the previous question is…`, "an extrapolation", ["an interpolation", "a census", "an assumption"], "The data go only to x = 6."),
+  mc(`The data in the graph go only to x = 6. Using the line to predict y at x = 8 is…`, "an extrapolation", ["an interpolation", "a census", "an assumption"], "The data go only to x = 6.", FIG.predict),
   num(`A population is 5000 and grows by 4% per year. Estimate it after 3 years (nearest whole number).`, 5624, "5000 × 1.04³ ≈ 5624.3."),
   num(`A model for fundraising profit is P = 6n − 150 (n items sold). How many items must be sold to break even?`, 25, "6n = 150."),
   mc(`Two models fit a few data points equally well. To choose between them you should…`, "collect more data, especially outside the current range", ["pick the one with bigger numbers", "average the two equations", "always choose the linear one"], "More data reveals which trend continues."),

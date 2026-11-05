@@ -1,3 +1,4 @@
+import { FIG } from "../../mth1w-bank-figures/figs.mjs";
 // 5.7 Volume — 20 easy + 20 medium questions
 import { mc, ms, num, tf } from "./kit.mjs";
 import { figDoc, prism, cylinder, cone } from "./fig.mjs";
@@ -36,7 +37,7 @@ export const M = [
   num(`A cylinder's height is doubled and its radius is unchanged. By what factor does the volume change?`, 2, "V ∝ h."),
   num(`A cylinder's radius is doubled and its height is unchanged. By what factor does the volume change?`, 4, "V ∝ r²."),
   num(`Find the volume of the solid: a cylinder (r = 3, h = 10) with a cone (r = 3, h = 4) on top, to 1 decimal place.`, 320.4, "90π + 12π = 102π.", figDoc({ w: 200, items: [...cylinder(3, 10, { lr: "", lh: "10" }), ...cone(3, 4, { lr: "r = 3", lh: "4" }).map((it) => shiftY(it, 10))] }), 0.06),
-  num(`A hemisphere bowl has radius 9 cm. How many mL does it hold (nearest mL)?`, 1527, "⅔π(729) = 486π ≈ 1526.8.", null, 1),
+  num(`A hemisphere bowl has radius 9 cm. How many mL does it hold (nearest mL)?`, 1527, "⅔π(729) = 486π ≈ 1526.8.", FIG.bowl, 1),
   ms(`Which solids have volume 36π? Select all.`, ["sphere with r = 3", "cylinder with r = 3, h = 4", "cone with r = 3, h = 12", "cylinder with r = 6, h = 3"], [0, 1, 2], "36π, 36π, 36π, 108π."),
   num(`A swimming pool is 25 m × 10 m × 2 m. How many litres of water fill it?`, 500000, "500 m³ × 1000."),
   tf(`A sphere of radius r holds exactly two thirds of a cylinder of radius r and height 2r.`, true, "⁴⁄₃πr³ = ⅔ × 2πr³."),

@@ -47,7 +47,7 @@ export const M = [
   n(`Trace the program. What does it print?`, "x = 3\ny = x\nx = x + 1\nprint(y)", "y copied the value 3; changing x later does not change y."),
   mc(`A program meant to add 1 to 10 prints 45. What is the most likely bug?`, "range(1, 10) instead of range(1, 11)", ["total starts at 0", "it uses + instead of *", "it should print total + 1"], "55 − 45 = 10: the last number is missing."),
   n(`What does this program print?`, "xs = [3, 8, 1, 6]\nm = xs[0]\nfor x in xs:\n    if x > m:\n        m = x\nprint(m)", "It keeps the largest value: 8."),
-  n(`The > in the program above is changed to <. What does it print now?`, "xs = [3, 8, 1, 6]\nm = xs[0]\nfor x in xs:\n    if x < m:\n        m = x\nprint(m)", "It now keeps the smallest value: 1."),
+  n(`In this program the comparison is x < m. What does it print?`, "xs = [3, 8, 1, 6]\nm = xs[0]\nfor x in xs:\n    if x < m:\n        m = x\nprint(m)", "It now keeps the smallest value: 1."),
   n(`What does this program print?`, "count = 0\nfor i in range(3):\n    for j in range(4):\n        count = count + 1\nprint(count)", "3 × 4 = 12 passes."),
   tf(`A runtime error can happen on the 50th pass of a loop even though the first 49 passes worked.`, true, "For example, a division by a value that becomes 0 only on pass 50."),
 ];

@@ -1,3 +1,4 @@
+import { FIG } from "../../mth1w-bank-figures/figs.mjs";
 // 6.1 Big Data & Its Implications — 20 hard questions
 import { mc, ms, num, tf } from "./kit.mjs";
 import { barChartDoc } from "./fig.mjs";
@@ -11,11 +12,11 @@ export const Q = [
   ms(`A school surveys students in the library at lunch about how often they read for fun. Which problems apply? Select all.`, ["sampling bias", "students who read more are over-represented", "the result probably overestimates reading", "this is a simple random sample"], [0, 1, 2], "Convenience sample of likely readers."),
   mc(`A company advertises: “Our app users improved their marks by 15%.” Which question best tests the claim?`, "Were users compared with a similar group who did not use the app?", ["How many colours does the app have?", "Is 15% a large number?", "Did users like the app?"], "Without a comparison group, the improvement may have other causes."),
   num(`A graph's axis runs from 90 to 100. Two bars show 92 and 98. How many times as tall does the second bar look?`, 4, "Visible 8 vs 2.", barChartDoc({ bars: [["X", 92], ["Y", 98]], base: 90, top: 100, step: 2 })),
-  num(`For those bars (92 and 98), by what percent is the second value actually larger (1 decimal place)?`, 6.5, "(98 − 92)/92 ≈ 6.5%.", null, 0.06),
+  num(`A graph's axis runs from 90 to 100. Two bars show 92 and 98. By what percent is the second value actually larger (1 decimal place)?`, 6.5, "(98 − 92)/92 ≈ 6.5%.", FIG.bars92, 0.06),
   tf(`If a random sample's estimate differs from the true value, the sampling method must have been biased.`, false, "Random samples vary by chance (sampling variability) even without bias."),
   mc(`Removing names from medical records may not protect privacy because…`, "combinations of birth date, postal code and gender can identify most people", ["medical records have no numbers", "names are the only identifier", "data cannot be shared"], "Re-identification risk."),
   num(`A survey had 2000 questionnaires mailed and 340 returned. What percent responded?`, 17, "340 ÷ 2000."),
-  mc(`With the 17% response rate above, the biggest concern is…`, "non-response bias", ["measurement bias", "too large a sample", "a census was used"], "Those who reply may differ from those who don't."),
+  mc(`A survey had 2000 questionnaires mailed and 340 returned, a 17% response rate. The biggest concern is…`, "non-response bias", ["measurement bias", "too large a sample", "a census was used"], "Those who reply may differ from those who don't."),
   num(`A streaming service has 30 million users. A random sample of 3000 finds 1260 watched a new series. Estimate how many users watched it, in millions.`, 12.6, "1260/3000 = 0.42; 0.42 × 30 million.", null, 0.06),
   ms(`Which questions contain response bias? Select all.`, ["Do you agree that our excellent mayor deserves re-election?", "How many hours of sleep did you get last night?", "Don't you think fast food is unhealthy?", "Which sport do you play most often?"], [0, 2], "Loaded words and leading phrasing."),
   mc(`Two polls estimate support at 48% and 55%. The 48% poll used a random sample of 800; the 55% poll used 5000 website visitors. Which is more trustworthy?`, "the 48% random poll", ["the 55% poll, because it is bigger", "they are equally trustworthy", "neither, because they differ"], "Method beats size."),

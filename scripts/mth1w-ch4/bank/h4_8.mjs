@@ -22,6 +22,6 @@ export const Q = [
   num(String.raw`Find the distance between the x-intercept and y-intercept of $3x+4y-24=0$.`, 10, "(8, 0) and (0, 6): √(64 + 36)."),
   mc(String.raw`Which equation cannot be written as $y=mx+b$?`, String.raw`$4x-12=0$`, [String.raw`$4y-12=0$`, String.raw`$x+y=0$`, String.raw`$2x-y+1=0$`], "x = 3 is vertical."),
   num(String.raw`Two lines $2x+y-7=0$ and $x-y-2=0$ intersect. What is the x-coordinate?`, 3, "Add: 3x − 9 = 0."),
-  num(String.raw`What is the y-coordinate of that intersection ($2x+y-7=0$ and $x-y-2=0$)?`, 1, "y = x − 2."),
+  num(String.raw`What is the y-coordinate of the intersection of $2x+y-7=0$ and $x-y-2=0$?`, 1, "y = x − 2."),
   tf(String.raw`$y=-\frac{A}{B}x-\frac{C}{B}$ is the slope-intercept form of $Ax+By+C=0$ (B ≠ 0).`, true, "Solve for y."),
 ];

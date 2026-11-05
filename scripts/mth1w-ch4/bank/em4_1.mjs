@@ -1,3 +1,4 @@
+import { FIG } from "../../mth1w-bank-figures/figs.mjs";
 // 4.1 Relations — 20 easy + 20 medium questions
 import { mc, ms, num, tf, mx } from "./kit.mjs";
 import { planeDoc } from "./fig.mjs";
@@ -16,7 +17,7 @@ export const E = [
   mc(`On a distance–time graph, a horizontal segment means…`, "the person is not moving", ["the person is moving fast", "the person is returning", "time has stopped"], "Distance does not change."),
   mc(`On a distance–time graph, a steeper segment means…`, "a faster speed", ["a slower speed", "no motion", "moving back toward the start"], "More distance in the same time."),
   num(`Read the graph: how far from home is the person at 20 min (km)?`, 8, "The line reaches 8 km at 20 min.", trip([[0, 0], [20, 8], [40, 8], [60, 0]])),
-  num(`Using the same kind of graph: a person goes 8 km in 20 min. What is the speed in km/min?`, 0.4, "8 ÷ 20 = 0.4.", null, 0.001),
+  num(`The graph shows a person travelling at a steady speed. What is the speed in km/min?`, 0.4, "8 ÷ 20 = 0.4.", FIG.walk, 0.001),
   tf(`Estimating a value between two data points is called extrapolation.`, false, "That is interpolation; extrapolation goes beyond the data."),
   mc(`Which is an example of extrapolation?`, "predicting next year's height from this year's data", ["estimating the height on a day between two measurements", "reading a value from a table", "plotting a point"], "Extrapolation predicts beyond the known data."),
   num(`A taxi charges C = 4 + 2d. What is the cost of a 7-km ride (dollars)?`, 18, "4 + 14 = 18."),
@@ -34,7 +35,7 @@ export const M = [
   mx(`A pool has 2000 L and drains at 50 L/min. Write an expression for the volume after t minutes.`, "2000-50*t", "Start value minus rate × time."),
   num(`Using V = 2000 − 50t, after how many minutes is the pool empty?`, 40, "50t = 2000."),
   num(`A seedling is 4 cm on day 3 and 10 cm on day 9, growing steadily. Interpolate its height on day 6 (cm).`, 7, "1 cm per day: 4 + 3 = 7."),
-  num(`For the same seedling, extrapolate its height on day 20 (cm).`, 21, "4 + 17 = 21 (less reliable)."),
+  num(`A seedling is 4 cm on day 3 and 10 cm on day 9, growing steadily. Extrapolate its height on day 20 (cm).`, 21, "1 cm per day: 4 + 17 = 21 (less reliable)."),
   mc(`Which graph shape matches “walks slowly away, then runs back home”?`, "gentle rise, then steep fall to 0", ["steep rise, then gentle fall", "gentle rise, then flat", "steep fall, then steep rise"], "Slow away: gentle rise; fast back: steep fall."),
   tf(`A ball's height after being thrown is best graphed as separate points.`, false, "Time is continuous: draw a smooth curve."),
   num(`C = 25 + 0.15k for k kilometres. How many km give a cost of 40 dollars?`, 100, "0.15k = 15."),

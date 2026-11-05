@@ -1,3 +1,4 @@
+import { FIG } from "../../mth1w-bank-figures/figs.mjs";
 // 5.4 The Pythagorean Theorem — 20 easy + 20 medium questions
 import { mc, ms, num, tf } from "./kit.mjs";
 import { figDoc, rightTri, planeDoc } from "./fig.mjs";
@@ -20,16 +21,16 @@ export const E = [
   num(`Find the distance between (0, 0) and (3, 4).`, 5, "√(9 + 16)."),
   num(`Find the distance between (1, 2) and (7, 10).`, 10, "Run 6, rise 8."),
   ms(`Which sets are Pythagorean triples? Select all.`, ["6, 8, 10", "5, 12, 13", "2, 3, 4", "9, 40, 41"], [0, 1, 3], "Check a² + b² = c²."),
-  num(`A ladder 5 m long leans against a wall with its foot 3 m from the wall. How high up does it reach?`, 4, "√(25 − 9)."),
+  num(`A ladder 5 m long leans against a wall with its foot 3 m from the wall. How high up does it reach?`, 4, "√(25 − 9).", FIG.ladder53),
   num(`Find the hypotenuse of a right triangle with legs 20 and 21.`, 29, "√(400 + 441) = √841."),
   num(`The legs of a right triangle are 0.3 and 0.4. Find the hypotenuse.`, 0.5, "√(0.09 + 0.16)."),
 ];
 
 export const M = [
   num(`A TV screen is 120 cm wide and 67.5 cm high. Find its diagonal to the nearest cm.`, 138, "√(14 400 + 4556.25) ≈ 137.7.", null, 0.6),
-  num(`A 13 m ramp rises 5 m. How far does it run horizontally?`, 12, "√(169 − 25)."),
-  num(`An isosceles triangle has equal sides 10 and base 12. Find its height.`, 8, "Half the base is 6: √(100 − 36)."),
-  num(`Find the area of the isosceles triangle with equal sides 10 and base 12.`, 48, "½(12)(8)."),
+  num(`A 13 m ramp rises 5 m. How far does it run horizontally?`, 12, "√(169 − 25).", FIG.ramp),
+  num(`An isosceles triangle has equal sides 10 and base 12. Find its height.`, 8, "Half the base is 6: √(100 − 36).", FIG.isos1012),
+  num(`Find the area of the isosceles triangle with equal sides 10 and base 12.`, 48, "½(12)(8).", FIG.isos1012),
   num(`Find the distance between (−2, 3) and (4, −5).`, 10, "Run 6, rise −8."),
   num(`An equilateral triangle has side 10. Find its height to 1 decimal place.`, 8.7, "√(100 − 25) = √75.", null, 0.06),
   num(`A rectangle has diagonal 25 and width 7. Find its length.`, 24, "√(625 − 49)."),

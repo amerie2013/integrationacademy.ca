@@ -1,3 +1,4 @@
+import { FIG } from "../../mth1w-bank-figures/figs.mjs";
 // 6.3 Scatter Plots & Correlation — 20 hard questions
 import { mc, ms, num, tf } from "./kit.mjs";
 import { scatterDoc, planeDoc } from "./fig.mjs";
@@ -5,7 +6,7 @@ import { scatterDoc, planeDoc } from "./fig.mjs";
 export const TOPIC = "6.3 Scatter Plots & Correlation";
 export const Q = [
   num(`A line of best fit passes through (1.5, 92) and (7.5, 47). Find its slope.`, -7.5, "−45 ÷ 6."),
-  num(`For that line (slope −7.5 through (1.5, 92)), find the y-intercept.`, 103.25, "92 = −11.25 + b."),
+  num(`A line of best fit passes through (1.5, 92) and (7.5, 47). Find its y-intercept.`, 103.25, "Slope −45 ÷ 6 = −7.5; 92 = −11.25 + b."),
   num(`Data on study hours (1–10) and marks give y = 4.2x + 51. Two students differ by 3.5 hours of study. By how many marks do their predicted scores differ?`, 14.7, "4.2 × 3.5.", null, 0.006),
   num(`Using y = 4.2x + 51, how many hours does the model predict for a mark of 93?`, 10, "4.2x = 42."),
   mc(`Using y = 4.2x + 51, a student who studies 15 hours is predicted to score 114%. The best comment is…`, "extrapolation beyond 10 hours gives an impossible mark; the trend must level off", ["the student will score 114%", "the line has the wrong slope", "there is no correlation"], "Marks cannot exceed 100%."),
@@ -13,8 +14,8 @@ export const Q = [
   ms(`Which data sets would you expect to show a strong correlation? Select all.`, ["age of a tree and number of rings", "outside temperature and heating bill", "a student's birthday and their mark", "distance driven and fuel used"], [0, 1, 3], "Birthday and mark are unrelated."),
   mc(`Countries with more TVs per person have longer life expectancy. The best explanation is…`, "wealth: richer countries have more TVs and better health care", ["TVs make people live longer", "long lives make people buy TVs", "it is a measurement error"], "A lurking variable."),
   num(`Maya leaves home walking at 90 m/min. Ten minutes later her brother leaves cycling at 240 m/min on the same path. How many minutes after Maya leaves does he catch her?`, 16, "90t = 240(t − 10) → 150t = 2400."),
-  num(`A runner's distance–time graph goes from (0, 0) to (12, 3) and then to (30, 6) (minutes, km). Find the average speed for the whole run in km/h.`, 12, "6 km in 0.5 h."),
-  num(`For that run, how much faster (km/h) was the first part than the second?`, 5, "3/0.2 = 15 km/h; 3/0.3 = 10 km/h."),
+  num(`A runner's distance–time graph goes from (0, 0) to (12, 3) and then to (30, 6) (minutes, km). Find the average speed for the whole run in km/h.`, 12, "6 km in 0.5 h.", FIG.run),
+  num(`A runner's distance–time graph goes from (0, 0) to (12, 3) and then to (30, 6) (minutes, km). How much faster (km/h) was the first part than the second?`, 5, "3/0.2 = 15 km/h; 3/0.3 = 10 km/h.", FIG.run),
   tf(`If the correlation coefficient is −0.95, the variables have a strong relationship.`, true, "Strength depends on |r|; the sign gives direction."),
   num(`Find the slope of the segment between 20 and 30 minutes (m/min), where a negative value means returning.`, -150, "From 1500 m down to 0 in 10 min.", planeDoc({ view: { xmin: 0, xmax: 40, ymin: 0, ymax: 1800 }, segs: [{ pts: [[0, 0], [10, 1500], [20, 1500], [30, 0]] }], step: { x: 5, y: 300 }, xlabel: "time (min)", ylabel: "m from home" })),
   mc(`Two lines of best fit are y = 3x + 10 and y = 3.4x + 8 for data with 0 ≤ x ≤ 6. Where do their predictions differ most within the data?`, "at x = 0", ["at x = 5", "at x = 6", "they never differ"], "Difference |0.4x − 2|: 2 at x = 0, 0.4 at x = 6."),

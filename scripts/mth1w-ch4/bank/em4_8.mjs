@@ -43,7 +43,7 @@ export const M = [
   ms(String.raw`For $4x-6y+18=0$, which are true? Select all.`, ["slope 2/3", "y-intercept 3", "x-intercept −4.5", "it passes through (0, −3)"], [0, 1, 2], "y = (2/3)x + 3."),
   num(String.raw`Find the area of the triangle formed by $3x+5y-30=0$ and the axes.`, 30, "Intercepts 10 and 6: ½ × 10 × 6."),
   mx(String.raw`Write the line through $(0,4)$ and $(6,0)$ in slope-intercept form.`, "(-2/3)*x+4", "m = −4/6."),
-  mc(`Write the same line (through (0, 4) and (6, 0)) in general form.`, String.raw`$2x+3y-12=0$`, [String.raw`$3x+2y-12=0$`, String.raw`$2x-3y+12=0$`, String.raw`$2x+3y+12=0$`], "×3: 3y = −2x + 12."),
+  mc(`Write the line through (0, 4) and (6, 0) in general form.`, String.raw`$2x+3y-12=0$`, [String.raw`$3x+2y-12=0$`, String.raw`$2x-3y+12=0$`, String.raw`$2x+3y+12=0$`], "m = −2/3, so y = −(2/3)x + 4; ×3: 3y = −2x + 12."),
   tf(String.raw`$2x-4y+8=0$ and $x-2y+4=0$ represent the same line.`, true, "The first is 2 × the second."),
   num(String.raw`What is the x-intercept of $7x-21=0$?`, 3, "x = 3."),
 ];

@@ -174,7 +174,7 @@ function QuestionBankInner() {
     if (error || !quiz) { alert("Could not create quiz: " + (error?.message ?? "")); return null; }
     await supabase.from("quiz_questions").insert(
       items.map((q, i) => ({
-        quiz_id: quiz.id, kind: q.kind, prompt: q.prompt, choices: q.choices ?? null,
+        quiz_id: quiz.id, kind: q.kind, prompt: q.prompt, image_url: q.image_url ?? null, choices: q.choices ?? null,
         answer: q.answer ?? null, tolerance: q.tolerance ?? null, points: q.points ?? 1,
         feedback: q.feedback ?? null, position: i, bank_id: q.id,
       })),
@@ -253,7 +253,7 @@ function QuestionBankInner() {
       }).select("id").single();
       if (error || !quiz) { alert("Could not create test: " + (error?.message ?? "")); return firstId; }
       await supabase.from("quiz_questions").insert(items.map((q, j) => ({
-        quiz_id: quiz.id, kind: q.kind, prompt: q.prompt, choices: q.choices ?? null, answer: q.answer ?? null,
+        quiz_id: quiz.id, kind: q.kind, prompt: q.prompt, image_url: q.image_url ?? null, choices: q.choices ?? null, answer: q.answer ?? null,
         tolerance: q.tolerance ?? null, points: q.points ?? 1, feedback: q.feedback ?? null, position: j, bank_id: q.id,
       })));
       if (!firstId) firstId = quiz.id;
@@ -353,6 +353,10 @@ function QuestionBankInner() {
                     {r.topic && <span style={{ fontSize: 12, color: "#94a3b8" }}>{r.topic}</span>}
                   </div>
                   <div style={{ fontSize: 15, lineHeight: 1.5 }}><PromptText prompt={r.prompt} /></div>
+                  {r.image_url && (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={r.image_url} alt="Figure for this question" loading="lazy" style={{ display: "block", maxWidth: "100%", width: 340, marginTop: 8, borderRadius: 8, border: "1px solid #e2e8f0", background: "#fff" }} />
+                  )}
                   {showAll && <QuestionDetail r={r} />}
                 </div>
                 <div style={{ display: "flex", gap: 6, flexShrink: 0 }}>

@@ -15,8 +15,8 @@ export const E = [
   num(`Read the graph: what is the x-coordinate of the intersection?`, 2, "The lines cross at (2, 3).", planeDoc({ view: { xmin: -4, xmax: 6, ymin: -2, ymax: 8 }, lines: [{ m: 1, b: 1, color: "blue" }, { m: -1, b: 5, color: "red" }], step: { x: 1, y: 1 } })),
   num(String.raw`Find x where $y=-x+7$ and $y=x-1$ meet.`, 4, "2x = 8."),
   mc(`Option A: 50 + 5h. Option B: 20 + 10h. Which is cheaper for 2 hours?`, "B", ["A", "they are equal", "neither"], "A: 60; B: 40."),
-  mc(`For the same options, which is cheaper for 10 hours?`, "A", ["B", "they are equal", "neither"], "A: 100; B: 120."),
-  num(`For the same options, after how many hours do they cost the same?`, 6, "5h = 30."),
+  mc(`Option A: 50 + 5h. Option B: 20 + 10h. Which is cheaper for 10 hours?`, "A", ["B", "they are equal", "neither"], "A: 100; B: 120."),
+  num(`Option A: 50 + 5h. Option B: 20 + 10h. After how many hours do they cost the same?`, 6, "5h = 30."),
   tf(`Two lines with the same slope and the same y-intercept are the same line.`, true, "Every point is shared."),
   num(String.raw`Find y where $y=2x+1$ and $y=-x+10$ meet.`, 7, "x = 3; 2(3) + 1."),
   mc(`Two lines have slopes 2 and −3. How many times do they cross?`, "exactly once", ["never", "twice", "infinitely often"], "Different slopes: one intersection."),
@@ -27,9 +27,9 @@ export const E = [
 
 export const M = [
   num(String.raw`Find the x-coordinate where $y=\frac12x+2$ and $y=-x+11$ meet.`, 6, "1.5x = 9."),
-  num(String.raw`Find the y-coordinate of that intersection ($y=\frac12x+2$, $y=-x+11$).`, 5, "−6 + 11."),
+  num(String.raw`Find the y-coordinate of the intersection of $y=\frac12x+2$ and $y=-x+11$.`, 5, "x = 6; −6 + 11."),
   num(`A gym: A = 40 + 30m; B = 100 + 20m. After how many months are they equal?`, 6, "10m = 60."),
-  num(`For those gyms, what is the cost at the break-even point (dollars)?`, 220, "40 + 180."),
+  num(`Two gym plans: A = 40 + 30m; B = 100 + 20m. What is the cost at the break-even point (dollars)?`, 220, "10m = 60, so m = 6; 40 + 180."),
   mc(`For the gyms, which is cheaper for a 12-month membership?`, "B", ["A", "they are equal", "neither"], "A 400; B 340."),
   ms(`Which pairs of lines intersect exactly once? Select all.`, ["y = 2x + 1 and y = 3x + 1", "y = −x and y = −x + 4", "y = 5 and y = x", "y = 4x − 2 and 8x − 2y = 4"], [0, 2], "The second pair is parallel; the fourth pair is the same line."),
   num(`Two candles: A is 30 cm and burns 3 cm/h; B is 20 cm and burns 1 cm/h. After how many hours are they the same height?`, 5, "30 − 3t = 20 − t."),

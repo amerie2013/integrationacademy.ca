@@ -1,3 +1,4 @@
+import { FIG } from "../../mth1w-bank-figures/figs.mjs";
 // 5.6 Changing Dimensions: Area — 20 easy + 20 medium questions
 import { mc, ms, num, tf } from "./kit.mjs";
 import { figDoc, polygon, rect } from "./fig.mjs";
@@ -5,9 +6,9 @@ import { figDoc, polygon, rect } from "./fig.mjs";
 export const E = [
   num(`Find the area of a 9 m by 6 m rectangle.`, 54, "9 × 6."),
   num(`Find the area of a triangle with base 10 cm and height 7 cm.`, 35, "½ × 10 × 7."),
-  num(`Find the area of a parallelogram with base 8 and height 5.`, 40, "bh."),
+  num(`Find the area of a parallelogram with base 8 and height 5.`, 40, "bh.", FIG.para85),
   num(`Find the area of a circle with radius 5 cm, to 1 decimal place.`, 78.5, "25π.", null, 0.06),
-  num(`Find the area of a trapezoid with parallel sides 6 and 10 and height 4.`, 32, "½(16)(4)."),
+  num(`Find the area of a trapezoid with parallel sides 6 and 10 and height 4.`, 32, "½(16)(4).", FIG.trap),
   num(`Every length of a shape is doubled. By what factor is the area multiplied?`, 4, "2²."),
   num(`Every length of a shape is tripled. By what factor is the area multiplied?`, 9, "3²."),
   num(`A shape has area 10 cm². It is scaled by k = 2. Find the new area.`, 40, "10 × 4."),
@@ -37,8 +38,8 @@ export const M = [
   num(`A 30 cm pizza and a 40 cm pizza: how many times as much area does the larger have (2 decimal places)?`, 1.78, "(40/30)² = 16/9.", null, 0.006),
   tf(`If the radius of a circle is halved, its area is halved.`, false, "It becomes one quarter."),
   ms(`Which rectangles have area 36 and perimeter less than 30? Select all.`, ["6 × 6", "4 × 9", "3 × 12", "2 × 18"], [0, 1], "Perimeters 24, 26, 30, 40."),
-  num(`A square path 1 m wide surrounds a 10 m by 10 m square garden. Find the path's area.`, 44, "12² − 10²."),
-  num(`A parallelogram has base 9, slanted side 6 and height 4. Find its area.`, 36, "bh = 9 × 4; the slanted side is not used."),
+  num(`A square path 1 m wide surrounds a 10 m by 10 m square garden. Find the path's area.`, 44, "12² − 10².", FIG.sqPath),
+  num(`A parallelogram has base 9, slanted side 6 and height 4. Find its area.`, 36, "bh = 9 × 4; the slanted side is not used.", FIG.para964),
   num(`A photo 4 × 6 is enlarged to 10 × 15. By what factor does its area grow?`, 6.25, "k = 2.5 → k² = 6.25."),
   num(`A triangle has area 40 cm² and base 16 cm. Find its height.`, 5, "½ × 16 × h = 40."),
   num(`A circle has area 113.1 cm². Find its radius (nearest whole number).`, 6, "r² = 113.1/π ≈ 36."),

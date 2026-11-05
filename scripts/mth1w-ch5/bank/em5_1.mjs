@@ -33,7 +33,7 @@ export const M = [
   num(`A rope with equal knots makes a right triangle with legs of 9 and 12 spaces. How many spaces long is the hypotenuse?`, 15, "√(81 + 144) = 15.", figDoc({ w: 260, items: rightTri(12, 9, { la: "12", lb: "9", lc: "?", fill: "amber" }) })),
   num(`Two towns are 400 km apart north–south. The Sun's angle differs by 3.6° between them. Estimate Earth's circumference (km).`, 40000, "3.6° is 1/100 of 360°: 100 × 400."),
   num(`Using the Egyptian rule (square of 8/9 of the diameter), what area does a circle with diameter 45 m get (m²)?`, 1600, "8/9 × 45 = 40; 40² = 1600."),
-  num(`What value of π does the Egyptian rule imply, to 2 decimal places?`, 3.16, "256/81 ≈ 3.1605.", null, 0.006),
+  num(`The Egyptian rule takes a circle's area as the square of 8/9 of its diameter. What value of π does this rule imply, to 2 decimal places?`, 3.16, "256/81 ≈ 3.1605.", null, 0.006),
   mc(`Archimedes showed that 3 10/71 < π < 3 1/7. How many sides did his polygons have?`, "96", ["6", "12", "360"], "He doubled from 6 to 12, 24, 48, 96."),
   num(`A regular hexagon inside a circle of diameter 1 has perimeter 3. What estimate of π does it give?`, 3, "Perimeter ÷ diameter."),
   ms(`Which are Pythagorean triples? Select all.`, ["5, 12, 13", "6, 8, 11", "7, 24, 25", "4, 5, 6"], [0, 2], "25 + 144 = 169; 49 + 576 = 625."),

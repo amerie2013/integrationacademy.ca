@@ -5,7 +5,7 @@ import { planeDoc } from "./fig.mjs";
 export const TOPIC = "4.4 Comparing Lines";
 export const Q = [
   num(`Three gyms: A = 60 + 25m, B = 150 + 15m, C = 35m. For a 7-month membership, what does the cheapest gym cost (dollars)?`, 235, "A 235, B 255, C 245."),
-  num(`For the same gyms, after how many months does B become the cheapest of all three?`, 10, "B = A at 9 (285 each); B < A after 9, and B < C after 7.5; so from month 10 B is cheapest."),
+  num(`Three gyms: A = 60 + 25m, B = 150 + 15m, C = 35m. After how many months does B become the cheapest of all three?`, 10, "B = A at 9 (285 each); B < A after 9, and B < C after 7.5; so from month 10 B is cheapest."),
   num(`A boat leaves port at 9:00 travelling 18 km/h. A faster boat leaves at 9:30 at 27 km/h on the same route. At what time (decimal hours, 24-h clock) does it catch up?`, 10.5, "18t = 27(t − 0.5) → t = 1.5 h after 9:00.", null, 0.01),
   num(`Two lines meet at (4, 9). One is y = 2x + 1. The other has slope −0.5. What is its y-intercept?`, 11, "9 = −2 + b."),
   ms(`The graph shows two plans. Which statements are true? Select all.`, ["the plans cost the same at 400 km", "the steeper line has the larger rate", "plan B is cheaper for 600 km", "plan A has the larger fixed cost"], [0, 1, 2], "A: 0.4d + 20 (steeper); B: 0.25d + 80. Equal at 400 km; at 600: A 260, B 230; B has the larger fixed cost.", planeDoc({ view: { xmin: 0, xmax: 700, ymin: 0, ymax: 300 }, lines: [{ m: 0.4, b: 20, color: "blue", label: "A", lx: 560 }, { m: 0.25, b: 80, color: "red", label: "B", lx: 620 }], xlabel: "distance (km)", ylabel: "cost", step: { x: 100, y: 50 } })),

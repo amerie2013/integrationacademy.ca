@@ -38,7 +38,7 @@ export const M = [
   num(`If prices rise 25%, what percent of its buying power does a dollar keep?`, 80, "1 ÷ 1.25 = 0.8."),
   ms(`Which are warning signs of fraud? Select all.`, ["pressure to act within minutes", "payment by gift card or cryptocurrency", "a prize for a contest you never entered", "a receipt for something you bought"], [0, 1, 2], "A real receipt is normal."),
   mc(`Car rental X: 35 dollars + 0.30 dollars/km. Y: 60 dollars + 0.20 dollars/km. Which is cheaper for 300 km?`, "Y", ["X", "they are equal", "neither"], "X: 125; Y: 120."),
-  num(`For those rentals (X: 35 + 0.3k; Y: 60 + 0.2k), at how many km are they equal?`, 250, "0.1k = 25."),
+  num(`Car rental X: 35 dollars + 0.30 dollars/km. Y: 60 dollars + 0.20 dollars/km. At how many km do they cost the same?`, 250, "0.1k = 25."),
   tf(`A 0% financing plan paid on time costs the same as paying cash.`, true, "No interest means the total equals the price (check for fees)."),
   num(`A 4 L can of paint costs 52 dollars and a 1 L can costs 15 dollars. How much is saved per litre by buying the 4 L can (dollars)?`, 2, "15 − 13."),
   mc(`Inflation is 4% and a savings account pays 1.5%. In terms of buying power, the savings…`, "lose value", ["gain value", "stay the same", "double"], "Prices rise faster than the balance."),

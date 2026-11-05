@@ -1,3 +1,4 @@
+import { FIG } from "../../mth1w-bank-figures/figs.mjs";
 // 6.1 Big Data & Its Implications — 20 easy + 20 medium questions
 import { mc, ms, num, tf } from "./kit.mjs";
 import { barChartDoc } from "./fig.mjs";
@@ -33,7 +34,7 @@ export const M = [
   mc(`A survey of gym members about how much people in the city exercise is biased because…`, "gym members exercise more than the average person", ["the sample is random", "the question is neutral", "gyms are large"], "Sampling bias."),
   mc(`“Don't you agree that homework is too long?” is a problem because it…`, "suggests the answer", ["is too short", "uses numbers", "is anonymous"], "A leading question."),
   num(`A graph's axis starts at 50. Bar A reaches 55 and bar B reaches 70. How many times as tall does bar B look?`, 4, "Visible heights 20 and 5.", barChartDoc({ bars: [["A", 55], ["B", 70]], base: 50, top: 72, step: 5 })),
-  num(`For that graph (A = 55, B = 70), what is the actual ratio B ÷ A, to 2 decimal places?`, 1.27, "70 ÷ 55 ≈ 1.27.", null, 0.006),
+  num(`A graph's axis starts at 50. Bar A reaches 55 and bar B reaches 70. What is the actual ratio B ÷ A, to 2 decimal places?`, 1.27, "70 ÷ 55 ≈ 1.27.", FIG.bars55, 0.006),
   tf(`Non-response bias can occur when many people chosen for a survey do not answer.`, true, "Those who respond may differ from those who don't."),
   mc(`Testing every light bulb from a factory to find the average lifetime is a poor idea because…`, "testing destroys the bulbs", ["bulbs are categorical", "a census is always biased", "the average cannot be found"], "Destructive testing requires a sample."),
   num(`A survey finds 18 of 75 sampled students are left-handed. What percent is that?`, 24, "18 ÷ 75 = 0.24."),

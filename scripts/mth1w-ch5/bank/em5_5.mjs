@@ -1,3 +1,4 @@
+import { FIG } from "../../mth1w-bank-figures/figs.mjs";
 // 5.5 Changing Dimensions: Perimeter — 20 easy + 20 medium questions
 import { mc, ms, num, tf } from "./kit.mjs";
 import { figDoc, polygon } from "./fig.mjs";
@@ -47,5 +48,5 @@ export const M = [
   mc(`The perimeter of a figure scaled by k = 0.25 is…`, "one quarter of the original", ["one sixteenth of the original", "four times the original", "unchanged"], "Perimeter × k."),
   num(`Fencing costs 18 dollars per metre. What does it cost to fence the best rectangle of area 64 m²?`, 576, "Square 8 × 8: 32 m × 18."),
   num(`A rectangle has perimeter 50 cm and length 15 cm. Find its width.`, 10, "2(15 + w) = 50."),
-  num(`A square is inscribed in a circle of diameter 10 cm. Find the square's perimeter to 1 decimal place.`, 28.3, "Side 10/√2 ≈ 7.07; × 4.", null, 0.06),
+  num(`A square is inscribed in a circle of diameter 10 cm. Find the square's perimeter to 1 decimal place.`, 28.3, "Side 10/√2 ≈ 7.07; × 4.", FIG.sqD10, 0.06),
 ];

@@ -1,3 +1,4 @@
+import { FIG } from "../../mth1w-bank-figures/figs.mjs";
 // 6.2 One-Variable Data & Statistics — 20 easy + 20 medium questions
 import { mc, ms, num, tf } from "./kit.mjs";
 import { boxPlotDoc, histogramDoc, dotPlotDoc } from "./fig.mjs";
@@ -8,7 +9,7 @@ export const E = [
   num(`Find the median of 2, 9, 4, 7.`, 5.5, "Ordered 2, 4, 7, 9: (4 + 7) ÷ 2."),
   num(`Find the mode of 5, 3, 5, 8, 2, 5, 3.`, 5, "5 appears three times."),
   num(`Find the range of 14, 22, 9, 30, 17.`, 21, "30 − 9."),
-  num(`A box plot shows Q1 = 20 and Q3 = 32. Find the IQR.`, 12, "Q3 − Q1."),
+  num(`A box plot shows Q1 = 20 and Q3 = 32. Find the IQR.`, 12, "Q3 − Q1.", FIG.box20),
   num(`Read the median from the box plot.`, 26, "The line inside the box.", boxPlotDoc({ five: [12, 20, 26, 31, 40], lo: 10, hi: 42, step: 4, showValues: true })),
   num(`What percent of the data lie inside the box of a box plot?`, 50, "The box holds the middle half."),
   num(`What percent of the data lie below Q1?`, 25, "Q1 cuts off the lowest quarter."),
@@ -39,9 +40,9 @@ export const M = [
   num(`Every value in a data set is increased by 7. The old mean was 52. What is the new mean?`, 59, "Adding a constant shifts the mean by that constant."),
   num(`Every value in a data set is increased by 7. The old IQR was 12. What is the new IQR?`, 12, "Shifting does not change spread."),
   num(`The mean of 6 numbers is 15. One number, 30, is removed. Find the mean of the rest.`, 12, "90 − 30 = 60; 60 ÷ 5."),
-  mc(`Box plot A has IQR 6 and box plot B has IQR 15 (same medians). Which statement is correct?`, "B's middle half is more spread out", ["A has more data", "B has a higher centre", "A has more outliers"], "IQR measures spread of the middle half."),
+  mc(`Box plot A has IQR 6 and box plot B has IQR 15 (same medians). Which statement is correct?`, "B's middle half is more spread out", ["A has more data", "B has a higher centre", "A has more outliers"], "IQR measures spread of the middle half.", FIG.boxAB),
   num(`Find the IQR from the box plot.`, 14, "Q3 − Q1 = 48 − 34.", boxPlotDoc({ five: [25, 34, 40, 48, 60], lo: 20, hi: 64, step: 4, showValues: true })),
-  num(`Find the range of the data in that box plot (min 25, max 60).`, 35, "60 − 25."),
+  num(`Find the range of the data in the box plot.`, 35, "60 − 25.", FIG.box25),
   tf(`Two data sets can have the same mean but very different spreads.`, true, "e.g. 50, 50, 50 and 0, 50, 100."),
   num(`A class of 20 has a mean mark of 72; another class of 30 has a mean of 82. Find the mean of all 50 students.`, 78, "(1440 + 2460) ÷ 50."),
   mc(`Which graph best displays 300 students' heights?`, "a histogram", ["a circle graph", "a pictograph", "a bar graph with gaps"], "Continuous numerical data."),

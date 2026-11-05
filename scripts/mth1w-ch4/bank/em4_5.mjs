@@ -1,3 +1,4 @@
+import { FIG } from "../../mth1w-bank-figures/figs.mjs";
 // 4.5 Graphing Special Lines (special lines and linear inequalities) — 20 easy + 20 medium questions
 import { mc, ms, num, tf } from "./kit.mjs";
 import { planeDoc } from "./fig.mjs";
@@ -35,7 +36,7 @@ export const M = [
   num(String.raw`The region $x>-1$ and $x<4$ contains how many integer x-values?`, 4, "0, 1, 2, 3."),
   mc(`Which equation describes all points 3 units below the x-axis?`, String.raw`$y=-3$`, [String.raw`$x=-3$`, String.raw`$y=3$`, String.raw`$y=-3x$`], "Every point has y = −3."),
   num(String.raw`The lines $x=4$, $x=-2$, $y=1$ and $y=6$ form a rectangle. What is its area?`, 30, "6 × 5."),
-  num(`For the same rectangle (x = 4, x = −2, y = 1, y = 6), what is its perimeter?`, 22, "2(6 + 5)."),
+  num(`The lines $x=4$, $x=-2$, $y=1$ and $y=6$ form a rectangle. What is its perimeter?`, 22, "2(6 + 5)."),
   ms(String.raw`Which describe $y=-\frac25x$? Select all.`, ["direct variation", "passes through (5, −2)", "falls to the right", "horizontal", "y-intercept 2"], [0, 1, 2], "b = 0, slope −2/5."),
   mc(String.raw`A budget: $5x+2y\le40$. Which is NOT possible?`, "x = 6, y = 6", ["x = 4, y = 10", "x = 0, y = 20", "x = 8, y = 0"], "30 + 12 = 42 > 40."),
   num(String.raw`What is the x-intercept of the boundary of $3x+4y\le24$?`, 8, "y = 0: 3x = 24."),
@@ -43,7 +44,7 @@ export const M = [
   tf(String.raw`$(0,0)$ can be used as the test point for $y>3x$.`, false, "(0, 0) lies on the boundary; choose another point."),
   mc(String.raw`For $y<-1$, the shaded region is…`, "below the horizontal line y = −1", ["above y = −1", "left of x = −1", "right of x = −1"], "Below a horizontal dashed line."),
   num(`Gas costs 1.70 dollars per litre. How many litres can you buy with 51 dollars?`, 30, "1.7L = 51."),
-  mc(String.raw`Which inequality has the boundary $y=x+2$ drawn solid and the region above shaded?`, String.raw`$y\ge x+2$`, [String.raw`$y>x+2$`, String.raw`$y\le x+2$`, String.raw`$y<x+2$`], "Solid: ≥ or ≤; above: ≥."),
+  mc(String.raw`Which inequality has the boundary $y=x+2$ drawn solid and the region above shaded?`, String.raw`$y\ge x+2$`, [String.raw`$y>x+2$`, String.raw`$y\le x+2$`, String.raw`$y<x+2$`], "Solid: ≥ or ≤; above: ≥.", FIG.ineq),
   num(String.raw`How many of the points $(1,1)$, $(2,5)$, $(-1,0)$, $(3,4)$ satisfy $y>2x-1$?`, 2, "(1,1): 1 > 1 ✗; (2,5) ✓; (−1,0) ✓; (3,4): 4 > 5 ✗."),
   ms(`Which lines are perpendicular to y = 4? Select all.`, ["x = −1", "x = 7", "y = −4", "y = 4x"], [0, 1], "Vertical lines."),
 ];

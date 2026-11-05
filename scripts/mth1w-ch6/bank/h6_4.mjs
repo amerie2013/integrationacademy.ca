@@ -5,7 +5,7 @@ import { scatterDoc } from "./fig.mjs";
 export const TOPIC = "6.4 The Mathematical Modelling Process";
 export const Q = [
   num(`T-shirts sell 300 at 12 dollars; each 1-dollar increase loses 15 sales. What price gives the greatest revenue (dollars)?`, 16, "R = (12 + x)(300 − 15x) is greatest at x = 4: 16 dollars × 240 = 3840."),
-  num(`For that T-shirt model, what is the greatest revenue (dollars)?`, 3840, "16 × 240."),
+  num(`T-shirts sell 300 at 12 dollars; each 1-dollar increase loses 15 sales. What is the greatest revenue (dollars)?`, 3840, "R = (12 + x)(300 − 15x) is greatest at x = 4: 16 × 240."),
   num(`A culture grows from 800 to 1800 cells in 2 hours with a constant hourly ratio. What is the hourly ratio?`, 1.5, "800r² = 1800 → r² = 2.25."),
   num(`With ratio 1.5 per hour from 800 cells, after how many whole hours does the culture first exceed 10 000 cells?`, 7, "800(1.5)^6 ≈ 9113; 800(1.5)^7 ≈ 13 669."),
   num(`A tea cools as T = 21 + 74(0.8)^t (°C, minutes). Find the temperature after 5 minutes (1 decimal place).`, 45.2, "74 × 0.32768 ≈ 24.2; + 21.", null, 0.06),

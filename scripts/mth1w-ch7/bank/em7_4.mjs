@@ -1,3 +1,4 @@
+import { FIG } from "../../mth1w-bank-figures/figs.mjs";
 // 7.4 Budgets — 20 easy + 20 medium questions (money written as "dollars")
 import { mc, ms, num, tf } from "./kit.mjs";
 import { barChartDoc } from "./fig.mjs";
@@ -31,13 +32,13 @@ export const M = [
   num(`Weekly pay of 480 dollars is how much per month (to the cent)?`, 2080, "480 × 52 ÷ 12."),
   num(`Gross pay is 2800 dollars a month and deductions are 22%. What is the net pay (dollars)?`, 2184, "2800 × 0.78."),
   num(`Expenses: rent 900, food 350, transit 156, phone 60, fun 200, savings 250 (dollars). Net income 2000 dollars. What is the surplus (dollars)?`, 84, "2000 − 1916."),
-  num(`For that budget (needs: rent, food, transit, phone), what percent of income goes to needs (1 decimal place)?`, 73.3, "1466 ÷ 2000.", null, 0.06),
+  num(`Expenses: rent 900, food 350, transit 156, phone 60, fun 200, savings 250 (dollars). Net income 2000 dollars. Needs are rent, food, transit and phone. What percent of income goes to needs (1 decimal place)?`, 73.3, "1466 ÷ 2000.", null, 0.06),
   ms(`Which are needs? Select all.`, ["rent", "basic groceries", "a streaming subscription", "transportation to work"], [0, 1, 3], "Streaming is a want."),
   num(`Yearly costs of 1800 dollars (insurance) and 420 dollars (gifts) are budgeted monthly. What is the monthly amount (dollars)?`, 185, "2220 ÷ 12."),
   num(`Net income falls by 15% from 2400 dollars. What is the new income (dollars)?`, 2040, "2400 × 0.85."),
   num(`Rent of 1100 dollars rises 6%. What is the new rent (dollars)?`, 1166, "1100 × 1.06."),
   num(`Read the chart: how much more is spent on needs than on wants (dollars)?`, 800, "1300 − 500.", barChartDoc({ bars: [["needs", 1300], ["wants", 500], ["savings", 300]], base: 0, top: 1500, step: 300, ylabel: "dollars" })),
-  num(`For that chart, what percent of total spending goes to savings (1 decimal place)?`, 14.3, "300 ÷ 2100.", null, 0.06),
+  num(`The chart shows monthly spending. What percent of total spending goes to savings (1 decimal place)?`, 14.3, "300 ÷ 2100.", FIG.spend, 0.06),
   num(`Marco wants 1800 dollars in 9 months and has 360 dollars saved. How much must he save each month (dollars)?`, 160, "1440 ÷ 9."),
   num(`Bringing lunch saves 7 dollars a day for 20 days a month. How much is saved in a 10-month school year (dollars)?`, 1400, "7 × 20 × 10."),
   tf(`If a budget has a deficit, cutting wants is usually the first step before cutting needs.`, true, "Protect needs; trim optional spending."),

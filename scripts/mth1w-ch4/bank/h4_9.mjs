@@ -1,3 +1,4 @@
+import { FIG } from "../../mth1w-bank-figures/figs.mjs";
 // 4.9 Parallel and Perpendicular Lines — 20 hard questions
 import { mc, ms, num, tf, mx } from "./kit.mjs";
 import { planeDoc } from "./fig.mjs";
@@ -16,7 +17,7 @@ export const Q = [
   num(String.raw`A line through $(3,a)$ and $(7,2)$ is perpendicular to $4x+2y-1=0$. Find a.`, 0, "Given slope −2 → 1/2: (2 − a)/4 = 1/2."),
   tf(String.raw`If line 1 ⟂ line 2 and line 2 ⟂ line 3, then line 1 ∥ line 3 (all non-vertical, non-horizontal).`, true, "m₃ = −1/m₂ = m₁."),
   num(`A road follows y = −0.75x + 12 (km grid). A new straight path runs from the town at (0, 0) to meet the road at a right angle. At what x does it meet the road? (2 decimals)`, 5.76, "Path y = (4/3)x; (4/3)x = −0.75x + 12 → x = 5.76.", null, 0.006),
-  num(`For that same set-up (road y = −0.75x + 12, path from (0, 0) at a right angle), how long is the path (km)?`, 9.6, "Meets at (5.76, 7.68): √(5.76² + 7.68²) = 9.6.", null, 0.006),
+  num(`A road follows y = −0.75x + 12 (km grid). A straight path runs from the town at (0, 0) to meet the road at a right angle. How long is the path (km)?`, 9.6, "Meets at (5.76, 7.68): √(5.76² + 7.68²) = 9.6.", FIG.road, 0.006),
   mx(String.raw`Write the line through $(-3,4)$ perpendicular to the line through $(1,-2)$ and $(5,4)$.`, "(-2/3)*x+2", "Given slope 3/2 → −2/3; 4 = 2 + b."),
   num(String.raw`For which value of k are the lines $2x+ky-5=0$ and $6x-3y+1=0$ perpendicular?`, 4, "Slopes −2/k and 2: (−2/k)(2) = −1 → k = 4."),
   num(String.raw`For which value of k are the lines $2x+ky-5=0$ and $6x-3y+1=0$ parallel?`, -1, "−2/k = 2."),

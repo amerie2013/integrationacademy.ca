@@ -1,3 +1,4 @@
+import { FIG } from "../../mth1w-bank-figures/figs.mjs";
 // 6.3 Scatter Plots & Correlation — 20 easy + 20 medium questions
 import { mc, ms, num, tf } from "./kit.mjs";
 import { scatterDoc, planeDoc } from "./fig.mjs";
@@ -34,14 +35,14 @@ export const M = [
   ms(`Which statements about correlation are true? Select all.`, ["r near 1 means a strong positive correlation", "r near 0 means little or no linear correlation", "r near −1 means a strong negative correlation", "r = 0.9 proves causation"], [0, 1, 2], "r measures strength and direction, not cause."),
   mc(`Students who own more books tend to have higher marks. Which is a possible lurking variable?`, "how much the family values and supports reading", ["the colour of the books", "the student's height", "the day of the week"], "A home environment can affect both."),
   num(`A cyclist rides 12 km in 40 minutes. What is the speed in km/h?`, 18, "12 ÷ (40/60)."),
-  num(`A distance–time graph falls from 9 km to 0 km between t = 30 min and t = 45 min. What is the speed in km/h?`, 36, "9 km in 0.25 h."),
+  num(`A distance–time graph falls from 9 km to 0 km between t = 30 min and t = 45 min. What is the speed in km/h?`, 36, "9 km in 0.25 h.", FIG.fall9),
   tf(`Two students can draw slightly different lines of best fit for the same data.`, true, "Drawing by eye varies."),
-  mc(`The scatter plot of speed and stopping distance curves upward. The best model is…`, "a curve, not a straight line", ["a horizontal line", "a line through the origin only", "no model at all"], "The relationship is non-linear."),
+  mc(`The scatter plot of speed and stopping distance curves upward. The best model is…`, "a curve, not a straight line", ["a horizontal line", "a line through the origin only", "no model at all"], "The relationship is non-linear.", FIG.stopping),
   num(`A line of best fit for temperature T (°C) and drink sales S is S = 8T − 40. Predict sales at 25 °C.`, 160, "200 − 40."),
   num(`In S = 8T − 40, by how many drinks do sales rise for each extra degree?`, 8, "The slope is the rate."),
   mc(`For S = 8T − 40, the prediction at T = 2 °C is −24 drinks. This shows…`, "extrapolation can give impossible results", ["the line is wrong everywhere", "sales are negative in winter", "there is no correlation"], "The model only works in the data range."),
   num(`Read the graph: during which minute range is the person stopped? Give the length of the stop in minutes.`, 15, "Flat from 20 to 35 min.", planeDoc({ view: { xmin: 0, xmax: 60, ymin: 0, ymax: 2400 }, segs: [{ pts: [[0, 0], [20, 1600], [35, 1600], [45, 2400], [60, 2400]] }], step: { x: 10, y: 400 }, xlabel: "time (min)", ylabel: "m" })),
-  num(`In that graph, find the speed from 35 to 45 minutes in m/min.`, 80, "800 m in 10 min."),
+  num(`The graph shows a person's distance from home. Find the speed from 35 to 45 minutes in m/min.`, 80, "800 m in 10 min.", FIG.stop),
   ms(`Which situations are probably correlation without causation? Select all.`, ["ice-cream sales and drownings", "number of firefighters at a fire and damage", "hours studied and marks", "pushing harder on a gas pedal and speed"], [0, 1], "Temperature and fire size are lurking variables."),
   mc(`To show that a new fertilizer causes taller plants, the best method is…`, "a controlled experiment comparing plants with and without fertilizer", ["a survey of gardeners", "a scatter plot of any two variables", "asking the fertilizer company"], "Experiments test causation."),
   num(`A line of best fit has slope 1.5 and passes through (4, 20). Find y at x = 10.`, 29, "20 + 1.5 × 6."),

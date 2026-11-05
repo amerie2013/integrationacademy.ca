@@ -1,3 +1,4 @@
+import { FIG } from "../../mth1w-bank-figures/figs.mjs";
 // 4.2 Linear vs Non-Linear Relations — 20 easy + 20 medium questions
 import { mc, ms, num, tf } from "./kit.mjs";
 import { planeDoc } from "./fig.mjs";
@@ -45,5 +46,5 @@ export const M = [
   ms(String.raw`Which tables are linear? Select all.`, ["x: 0,1,2; y: 5,5,5", "x: 0,1,2; y: 1,3,9", "x: 0,2,6; y: 1,5,13", "x: 1,2,3; y: 8,4,2"], [0, 2], "Constant Δy/Δx: 0 and 2."),
   num(String.raw`A ball's height: $0, 15, 20, 15, 0$ m at $t=0..4$ s. What is the constant second difference?`, -10, "First 15, 5, −5, −15; second −10."),
   mc(`The graph shows a relation. Which family is it?`, "inverse variation", ["linear", "quadratic", "exponential"], "Hyperbola-shaped, xy constant.", planeDoc({ view: { xmin: 0, xmax: 10, ymin: 0, ymax: 10 }, curves: [{ f: (x) => 12 / x, a: 1.2 }], points: [{ x: 2, y: 6 }, { x: 3, y: 4 }, { x: 4, y: 3 }, { x: 6, y: 2 }] })),
-  num(String.raw`For the curve in the previous question (through $(2,6)$, $(3,4)$, $(4,3)$), what is $k$ in $xy=k$?`, 12, "2 × 6 = 12."),
+  num(String.raw`The graph shows a curve through $(2,6)$, $(3,4)$ and $(4,3)$. What is $k$ in $xy=k$?`, 12, "2 × 6 = 12.", FIG.xy12),
 ];
