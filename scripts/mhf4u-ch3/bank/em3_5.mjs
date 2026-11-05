@@ -37,7 +37,7 @@ export const M = [
   num(S`Worker A takes 10 h. Together with B they take 6 h. How many hours would B take alone?`, 15, "1/B = 1/6 − 1/10 = 1/15."),
   num(S`A drain empties a tank in 12 h while a pipe fills it in 4 h. How many hours to fill with both open?`, 6, "1/4 − 1/12 = 1/6."),
   num(S`A boat travels at 20 km/h in still water with a 5 km/h current. How many hours for 75 km downstream?`, 3, "75/25."),
-  num(S`The same boat (20 km/h, current 5 km/h) goes 75 km upstream. How many hours?`, 5, "75/15."),
+  num(S`A boat travels at 20 km/h in still water with a 5 km/h current. How many hours for 75 km upstream?`, 5, "75/15."),
   num(S`Find the average rate of change of $t=\dfrac{120}v$ from $v=40$ to $v=60$ (decimal).`, -0.05, "(2 − 3)/20.", null, 0.001),
   num(S`Find the average rate of change of $I=\dfrac{100}{d^2}$ on $[2,5]$.`, -7, "(4 − 25)/3."),
   num(S`Estimate the instantaneous rate of change of $I=\dfrac{16}{d^2}$ at $d=2$.`, -4, "−32/d³ = −4.", null, 0.05),

@@ -1,3 +1,4 @@
+import { FIG } from "../../mpm2d-bank-figures/figs.mjs";
 // 2.3 Equation of a Circle (centre at the origin) — 20 hard questions
 import { mc, ms, num, tf, fill } from "./kit.mjs";
 import { planeDoc } from "./fig.mjs";
@@ -5,9 +6,9 @@ import { circ } from "./em2_3.mjs";
 
 export const TOPIC = "2.3 Equation of a Circle (centre at the origin)";
 export const Q = [
-  num(`Find the length of the chord of $x^2+y^2=25$ on the line $y=4$.`, 6, "$x^2=9$: from $(-3,4)$ to $(3,4)$."),
-  num(`Find the length of the chord of $x^2+y^2=100$ on the line $x=-6$.`, 16, "$y^2=64$."),
-  num(`Find the length of the chord of $x^2+y^2=72$ on the line $y=x$, to two decimals.`, 16.97, "$2x^2=72\\Rightarrow x=\\pm6$; $\\sqrt{288}$.", null, 0.01),
+  num(`Find the length of the chord of $x^2+y^2=25$ on the line $y=4$.`, 6, "$x^2=9$: from $(-3,4)$ to $(3,4)$.", FIG.c25),
+  num(`Find the length of the chord of $x^2+y^2=100$ on the line $x=-6$.`, 16, "$y^2=64$.", FIG.c100),
+  num(`Find the length of the chord of $x^2+y^2=72$ on the line $y=x$, to two decimals.`, 16.97, "$2x^2=72\\Rightarrow x=\\pm6$; $\\sqrt{288}$.", FIG.c72, 0.01),
   num(`Two circles $x^2+y^2=25$ and $x^2+y^2=169$ form a ring. How wide is the ring?`, 8, "$13-5$."),
   num(`$(k,k)$ is on $x^2+y^2=32$ with $k>0$. Find $k$.`, 4, "$2k^2=32$."),
   ms(`A circle centred at the origin passes through $(-8,15)$. Select all other points on it.`, ["$(15,8)$", "$(0,17)$", "$(-17,0)$", "$(12,12)$", "$(10,14)$"], [0, 1, 2], "$r^2=289$; $(12,12)$ gives $288$; $(10,14)$ gives $296$."),

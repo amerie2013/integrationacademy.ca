@@ -1,3 +1,4 @@
+import { FIG } from "../../mhf4u-bank-figures/figs.mjs";
 // 2.6 Solving Factorable Polynomial Inequalities Algebraically — 20 hard questions
 import { mc, num, tf } from "./kit.mjs";
 import { graph, planeDoc, P } from "./fig.mjs";
@@ -14,7 +15,7 @@ export const Q = [
   tf(String.raw`The solution of $(x-a)^2(x-b)\ge0$ always includes $x=a$.`, true, "The product is 0 at x = a."),
   num(String.raw`How many integers satisfy $x(x-2)(x-4)(x-6)\lt0$?`, 2, "(0, 2) ∪ (4, 6): 1 and 5."),
   mc(String.raw`Solve $x^3+8\le0$.`, String.raw`$x\le-2$`, [String.raw`$x\ge-2$`, String.raw`$x\le2$`, String.raw`$-2\le x\le2$`], "(x + 2)(x² − 2x + 4) with the quadratic always positive."),
-  num(String.raw`A box has dimensions $x$, $x+1$, $x+2$. Its volume exceeds $6x$ exactly when $x$ is greater than what value?`, 1, "x(x + 4)(x − 1) > 0 with x > 0."),
+  num(String.raw`A box has dimensions $x$, $x+1$, $x+2$. Its volume exceeds $6x$ exactly when $x$ is greater than what value?`, 1, "x(x + 4)(x − 1) > 0 with x > 0.", FIG.box012),
   num("For P(x) = x³ − 7x − 6 shown, how many integers in [−3, 3] satisfy P(x) ≥ 0?", 3, "(x + 1)(x + 2)(x − 3) ≥ 0: [−2, −1] ∪ [3, ∞): −2, −1, 3.", graph((x) => x ** 3 - 7 * x - 6, { xmin: -3.5, xmax: 4, ymin: -14, ymax: 10 }, [], { step: { x: 1, y: 2 } })),
   mc(String.raw`Solve $(x^2-1)(x-2)^2\le0$.`, String.raw`$[-1,1]\cup\{2\}$`, [String.raw`$[-1,1]$`, String.raw`$[-1,2]$`, String.raw`$(-\infty,-1]\cup[1,2]$`], "The squared factor adds the isolated point 2."),
   num(String.raw`What is the smallest integer satisfying $x^3+x^2-12x>0$?`, -3, "x(x + 4)(x − 3) > 0: −4 < x < 0 or x > 3."),

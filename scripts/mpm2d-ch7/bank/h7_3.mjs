@@ -1,3 +1,4 @@
+import { FIG } from "../../mpm2d-bank-figures/figs.mjs";
 // 7.3 Choosing the Right Law — 20 hard questions (values computed, rounded as asked)
 import { mc, ms, num, tf } from "./kit.mjs";
 import { sasDoc } from "./fig.mjs";
@@ -27,8 +28,8 @@ export const Q = [
   n1(`A triangle has angles $48^\\circ$ and $75^\\circ$ and the side between them is $22$. Find the shortest side.`, side(22, 57, 48), "Third angle $57^\\circ$; the shortest side is opposite $48^\\circ$"),
   tf(`In an SSS problem, finding the largest angle first shows whether the triangle is acute.`, true, "If it is less than $90^\\circ$, all are."),
   n1(`In acute $\\triangle ABC$, $a=14$, $b=16$, $c=18$. Find the area using an angle from the cosine law.`, 0.5 * 16 * 18 * sin(ang(14, 16, 18)), "$\\angle A$ from the cosine law; area $=\\frac12bc\\sin A$"),
-  mc(`A triangle has $a=7$, $\\angle B=40^\\circ$ and $c=9$. The first step is…`, "the cosine law for $b$ (SAS: $\\angle B$ is between $a$ and $c$)", ["the sine law for $\\angle A$", "SOH CAH TOA", "find the third angle"], "Check which angle lies between the sides."),
-  a1(`Continue: $a=7$, $\\angle B=40^\\circ$, $c=9$. Find $\\angle A$.`, asin((7 * sin(40)) / cl(7, 9, 40)), "$b=\\sqrt{49+81-126\\cos40^\\circ}$; $\\sin A=\\frac{7\\sin40^\\circ}{b}$"),
+  mc(`A triangle has $a=7$, $\\angle B=40^\\circ$ and $c=9$. The first step is…`, "the cosine law for $b$ (SAS: $\\angle B$ is between $a$ and $c$)", ["the sine law for $\\angle A$", "SOH CAH TOA", "find the third angle"], "Check which angle lies between the sides.", FIG.sas79),
+  a1(`A triangle has $a=7$, $\\angle B=40^\\circ$ and $c=9$. Find $\\angle A$.`, asin((7 * sin(40)) / cl(7, 9, 40)), "$b=\\sqrt{49+81-126\\cos40^\\circ}$; $\\sin A=\\frac{7\\sin40^\\circ}{b}$", FIG.sas79),
   n1(`An isosceles triangle has equal sides $10$ and a vertex angle of $48^\\circ$. Find the base two ways (cosine law, or sine law). Give the base.`, cl(10, 10, 48), "$\\sqrt{200-200\\cos48^\\circ}$"),
   ms(`For an acute triangle with $a=10$, $b=12$, $\\angle C=55^\\circ$, select all true statements.`, ["it is SAS", "the cosine law gives $c$", "after finding $c$, the sine law gives $\\angle A$", "the sine law can be used first", "the angles add to $180^\\circ$"], [0, 1, 2, 4], "No pair at first."),
   n1(`Find the side $x$ opposite the $58^\\circ$ angle in the triangle shown.`, cl(12, 14, 58), "Cosine law", sasDoc(12, 14, 58, { b: "12", c: "14", a: "x", A: "58°" })),

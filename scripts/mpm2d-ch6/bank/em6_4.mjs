@@ -1,3 +1,4 @@
+import { FIG } from "../../mpm2d-bank-figures/figs.mjs";
 // 6.4 Finding Side Lengths — 20 easy + 20 medium questions (values computed, rounded as asked)
 import { mc, ms, num, tf, fill } from "./kit.mjs";
 import { rtADoc } from "./fig.mjs";
@@ -23,7 +24,7 @@ export const E = [
   n1(`The hypotenuse is $9$ and an acute angle is $55^\\circ$. Find the adjacent side.`, 9 * cos(55), "$9\\cos55^\\circ$"),
   n1(`The side adjacent to a $65^\\circ$ angle is $4$. Find the opposite side.`, 4 * tan(65), "$4\\tan65^\\circ$"),
   fill(`In $\\tan40^\\circ=\\frac8x$, $x=8\\div$ ___.`, ["tan 40°", "tan40°", "tan 40", "tan40"], "Multiply by $x$, then divide by $\\tan40^\\circ$."),
-  n1(`A $4$ m ladder makes a $60^\\circ$ angle with the ground. How high up the wall does it reach (m)?`, 4 * sin(60), "$4\\sin60^\\circ$"),
+  n1(`A $4$ m ladder makes a $60^\\circ$ angle with the ground. How high up the wall does it reach (m)?`, 4 * sin(60), "$4\\sin60^\\circ$", FIG.l460),
   tf(`If $12$ is the hypotenuse, $x=12\\cos50^\\circ$ is the side adjacent to the $50^\\circ$ angle.`, true, "CAH."),
   mc(`The hypotenuse is $15$ and $x$ is opposite a $32^\\circ$ angle. Which equation is correct?`, "$x=15\\sin32^\\circ$", ["$x=15\\cos32^\\circ$", "$x=\\frac{15}{\\sin32^\\circ}$", "$x=15\\tan32^\\circ$"], "SOH."),
   n1(`Find the side $x$ opposite the $38^\circ$ angle in the triangle shown.`, 14 * sin(38), "$14\\sin38^\\circ$", rtADoc(38, { hyp: "14", opp: "x", theta: "38°" })),
@@ -35,11 +36,11 @@ export const M = [
   n1(`The side opposite a $28^\\circ$ angle is $10$. Find the adjacent side.`, 10 / tan(28), "$\\frac{10}{\\tan28^\\circ}$"),
   n1(`The side opposite a $62^\\circ$ angle is $3.5$. Find the adjacent side.`, 3.5 / tan(62), "$\\frac{3.5}{\\tan62^\\circ}$"),
   n1(`The hypotenuse is $7.5$ and an acute angle is $18^\\circ$. Find the opposite side.`, 7.5 * sin(18), "$7.5\\sin18^\\circ$"),
-  n1(`A $7$ m ladder makes a $74^\\circ$ angle with the ground. How far is its foot from the wall (m)?`, 7 * cos(74), "$7\\cos74^\\circ$"),
-  n1(`A kite string is $50$ m long and makes a $48^\\circ$ angle with the ground. How high is the kite (m)?`, 50 * sin(48), "$50\\sin48^\\circ$"),
+  n1(`A $7$ m ladder makes a $74^\\circ$ angle with the ground. How far is its foot from the wall (m)?`, 7 * cos(74), "$7\\cos74^\\circ$", FIG.l774),
+  n1(`A kite string is $50$ m long and makes a $48^\\circ$ angle with the ground. How high is the kite (m)?`, 50 * sin(48), "$50\\sin48^\\circ$", FIG.k50),
   n1(`A ramp must rise $0.8$ m at an angle of $4.5^\\circ$. How long is the ramp (m)?`, 0.8 / sin(4.5), "$\\frac{0.8}{\\sin4.5^\\circ}$"),
-  n1(`When the sun is $35^\\circ$ above the horizon, how long is the shadow of an $8$ m pole (m)?`, 8 / tan(35), "$\\frac8{\\tan35^\\circ}$"),
-  n1(`A tree casts an $18$ m shadow when the sun is $52^\\circ$ above the horizon. How tall is the tree (m)?`, 18 * tan(52), "$18\\tan52^\\circ$"),
+  n1(`When the sun is $35^\\circ$ above the horizon, how long is the shadow of an $8$ m pole (m)?`, 8 / tan(35), "$\\frac8{\\tan35^\\circ}$", FIG.po35),
+  n1(`A tree casts an $18$ m shadow when the sun is $52^\\circ$ above the horizon. How tall is the tree (m)?`, 18 * tan(52), "$18\\tan52^\\circ$", FIG.tr52),
   mc(`The side adjacent to $40^\\circ$ is $9$ and $x$ is the hypotenuse. Which is correct?`, "$x=\\frac9{\\cos40^\\circ}$", ["$x=9\\cos40^\\circ$", "$x=9\\sin40^\\circ$", "$x=\\frac9{\\tan40^\\circ}$"], "$\\cos40^\\circ=\\frac9x$."),
   tf(`In $\\sin25^\\circ=\\frac6x$, $x\\approx2.5$.`, false, "$x=\\frac6{\\sin25^\\circ}\\approx14.2$; multiplying gives the wrong answer."),
   n1(`Solve $\\sin25^\\circ=\\frac6x$.`, 6 / sin(25), "$x=\\frac6{\\sin25^\\circ}$"),

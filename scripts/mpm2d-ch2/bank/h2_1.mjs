@@ -1,3 +1,4 @@
+import { FIG } from "../../mpm2d-bank-figures/figs.mjs";
 // 2.1 Midpoint of a Line Segment — 20 hard questions
 import { mc, ms, num, tf, fill } from "./kit.mjs";
 import { planeDoc } from "./fig.mjs";
@@ -15,7 +16,7 @@ export const Q = [
   mc(`The ends of a diameter are $(a,3)$ and $(5,b)$, and the centre is $(1,-1)$. Find $a$ and $b$.`, "$a=-3$, $b=-5$", ["$a=3$, $b=5$", "$a=-4$, $b=-4$", "$a=-3$, $b=-1$"], "$\\frac{a+5}{2}=1$, $\\frac{3+b}{2}=-1$."),
   num(`A square has a diagonal from $(-3,1)$ to $(5,7)$. What is the $y$-coordinate of the square's centre?`, 4, "The diagonals bisect each other: $\\frac{1+7}{2}$."),
   num(`The midpoint of $(x,y)$ and $(3,-5)$ is the origin. Find $x+y$.`, 2, "$(x,y)=(-3,5)$."),
-  fill(`A rhombus has vertices $(-4,0)$, $(0,3)$ and $(4,0)$. Its fourth vertex is $(0,$ ___$)$.`, ["-3"], "The diagonals bisect each other at $(0,0)$."),
+  fill(`A rhombus has vertices $(-4,0)$, $(0,3)$ and $(4,0)$. Its fourth vertex is $(0,$ ___$)$.`, ["-3"], "The diagonals bisect each other at $(0,0)$.", FIG.rho3),
   num(`A circle has centre $(2,-3)$; one end of a diameter is $(-4,5)$. What is the $y$-coordinate of the other end?`, -11, "$2(-3)-5$."),
   mc(`The midpoint of $AB$ lies on the $y$-axis. Which must be true?`, "$x_A=-x_B$", ["$y_A=-y_B$", "$x_A=x_B$", "$A$ is on the $y$-axis"], "The midpoint's $x$-coordinate $\\frac{x_A+x_B}{2}$ is $0$."),
   num(`The midpoints of the sides of $\\triangle ABC$ are $D(1,2)$ on $AB$, $E(4,3)$ on $BC$ and $F(2,5)$ on $CA$. What is the $x$-coordinate of $A$?`, -1, "$A=D+F-E=(-1,4)$."),

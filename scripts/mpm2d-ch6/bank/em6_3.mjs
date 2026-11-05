@@ -1,3 +1,4 @@
+import { FIG } from "../../mpm2d-bank-figures/figs.mjs";
 // 6.3 The Primary Trigonometric Ratios — 20 easy + 20 medium questions
 import { mc, ms, num, tf, fill } from "./kit.mjs";
 import { rtDoc } from "./fig.mjs";
@@ -29,8 +30,8 @@ export const E = [
 ];
 
 export const M = [
-  num(`A right triangle has legs $7$ and $24$. Find $\\sin\\theta$ for the angle opposite $7$.`, 0.28, "Hypotenuse $25$: $\\frac7{25}$."),
-  num(`In the same $7$-$24$-$25$ triangle, find $\\cos\\theta$ for the angle opposite $7$.`, 0.96, "$\\frac{24}{25}$."),
+  num(`A right triangle has legs $7$ and $24$. Find $\\sin\\theta$ for the angle opposite $7$.`, 0.28, "Hypotenuse $25$: $\\frac7{25}$.", FIG.t724),
+  num(`A right triangle has legs $7$ and $24$. Find $\\cos\\theta$ for the angle opposite $7$.`, 0.96, "$\\frac{24}{25}$.", FIG.t724),
   num(`A right triangle has hypotenuse $17$ and the leg opposite $\\theta$ is $8$. Find $\\tan\\theta$ to three decimal places.`, 0.533, "Adjacent $15$: $\\frac8{15}$.", null, 0.001),
   mc(`For an acute angle, $\\sin\\theta=\\frac5{13}$. Find $\\cos\\theta$.`, "$\\frac{12}{13}$", ["$\\frac5{12}$", "$\\frac{13}5$", "$\\frac8{13}$"], "Adjacent $=\\sqrt{169-25}=12$."),
   mc(`For an acute angle, $\\tan\\theta=\\frac34$. Find $\\sin\\theta$.`, "$\\frac35$", ["$\\frac45$", "$\\frac34$", "$\\frac43$"], "A $3$-$4$-$5$ triangle."),

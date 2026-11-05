@@ -1,0 +1,616 @@
+[
+ {
+  "id": "151a7dde-9de3-4d42-8908-642fed225ede",
+  "course_id": "7d3e0ca4-1c49-47d4-84f2-9c41c09dd49d",
+  "lesson_id": null,
+  "topic": "7.5 Exponential and Logarithmic Models",
+  "difficulty": "hard",
+  "kind": "numeric",
+  "prompt": "For the culture above, how many cells were there at $t=0$? (nearest whole)",
+  "image_url": null,
+  "choices": null,
+  "answer": 320,
+  "tolerance": 1,
+  "points": 1,
+  "feedback": "b⁴ = 6.25 ⇒ b² = 2.5, so a = 800/2.5 = 320.",
+  "created_at": "2026-06-24T00:25:32.100878+00:00"
+ },
+ {
+  "id": "1862bca5-720d-47c1-9b58-9e8e219a587f",
+  "course_id": "7d3e0ca4-1c49-47d4-84f2-9c41c09dd49d",
+  "lesson_id": null,
+  "topic": "5.5 Trigonometric Models and Rates of Change",
+  "difficulty": "hard",
+  "kind": "multiple_choice",
+  "prompt": "High tide 8.8 m at 4:00, next low tide 1.6 m at 10:12. Which model fits (t in hours after midnight)?",
+  "image_url": null,
+  "choices": [
+   {
+    "id": "a",
+    "text": "$d=3.6\\cos\\left(\\frac{2\\pi}{12.4}(t-4)\\right)+5.2$"
+   },
+   {
+    "id": "b",
+    "text": "$d=3.6\\cos\\left(\\frac{2\\pi}{6.2}(t-4)\\right)+5.2$"
+   },
+   {
+    "id": "c",
+    "text": "$d=7.2\\cos\\left(\\frac{2\\pi}{12.4}(t-4)\\right)+5.2$"
+   },
+   {
+    "id": "d",
+    "text": "$d=3.6\\sin\\left(\\frac{2\\pi}{12.4}(t-4)\\right)+5.2$"
+   }
+  ],
+  "answer": "a",
+  "tolerance": null,
+  "points": 1,
+  "feedback": "a = (8.8 − 1.6)/2, c = (8.8 + 1.6)/2; half period 6.2 h gives period 12.4 h; cosine peaks at t = 4.",
+  "created_at": "2026-11-04T11:28:29.136595+00:00"
+ },
+ {
+  "id": "46b26c2b-94a0-42c2-be31-fe5d5f378308",
+  "course_id": "7d3e0ca4-1c49-47d4-84f2-9c41c09dd49d",
+  "lesson_id": null,
+  "topic": "1.6 Slopes of Tangents and Instantaneous Rate of Change",
+  "difficulty": "hard",
+  "kind": "numeric",
+  "prompt": "On $y=x^2$, at what x-value is the tangent parallel to the secant from $x=1$ to $x=7$?",
+  "image_url": null,
+  "choices": null,
+  "answer": 4,
+  "tolerance": 0,
+  "points": 1,
+  "feedback": "Secant slope 8 = 2a.",
+  "created_at": "2026-10-18T21:06:56.261071+00:00"
+ },
+ {
+  "id": "52db656c-6ed0-49f2-8ac6-501c2eee4402",
+  "course_id": "7d3e0ca4-1c49-47d4-84f2-9c41c09dd49d",
+  "lesson_id": null,
+  "topic": "5.5 Trigonometric Models and Rates of Change",
+  "difficulty": "easy",
+  "kind": "multiple_choice",
+  "prompt": "From the same graph, what is the rider's maximum height?",
+  "image_url": "https://pcsepbiwqbqomzqdwoei.supabase.co/storage/v1/object/public/graph-images/mhf4u-5-5/easy-q20-b9d3f748.svg",
+  "choices": [
+   {
+    "id": "a",
+    "text": "12 m"
+   },
+   {
+    "id": "b",
+    "text": "20 m"
+   },
+   {
+    "id": "c",
+    "text": "10 m"
+   },
+   {
+    "id": "d",
+    "text": "22 m"
+   }
+  ],
+  "answer": "d",
+  "tolerance": null,
+  "points": 1,
+  "feedback": "Centre 12 + radius 10.",
+  "created_at": "2026-11-04T11:28:27.539456+00:00"
+ },
+ {
+  "id": "57a19294-1f97-41d2-8f0c-8b37c4222a7a",
+  "course_id": "7d3e0ca4-1c49-47d4-84f2-9c41c09dd49d",
+  "lesson_id": null,
+  "topic": "3.5 Rational Function Models",
+  "difficulty": "medium",
+  "kind": "numeric",
+  "prompt": "The same boat (20 km/h, current 5 km/h) goes 75 km upstream. How many hours?",
+  "image_url": null,
+  "choices": null,
+  "answer": 5,
+  "tolerance": 0,
+  "points": 1,
+  "feedback": "75/15.",
+  "created_at": "2026-11-02T21:52:37.01516+00:00"
+ },
+ {
+  "id": "583c865b-e15f-457a-8f04-49d8446715df",
+  "course_id": "7d3e0ca4-1c49-47d4-84f2-9c41c09dd49d",
+  "lesson_id": null,
+  "topic": "2.6 Solving Factorable Polynomial Inequalities Algebraically",
+  "difficulty": "hard",
+  "kind": "numeric",
+  "prompt": "A box has dimensions $x$, $x+1$, $x+2$. Its volume exceeds $6x$ exactly when $x$ is greater than what value?",
+  "image_url": null,
+  "choices": null,
+  "answer": 1,
+  "tolerance": 0,
+  "points": 1,
+  "feedback": "x(x + 4)(x − 1) > 0 with x > 0.",
+  "created_at": "2026-06-24T00:05:31.765668+00:00"
+ },
+ {
+  "id": "69a733d9-baf1-46db-8f2f-7add70ca735d",
+  "course_id": "7d3e0ca4-1c49-47d4-84f2-9c41c09dd49d",
+  "lesson_id": null,
+  "topic": "3.5 Rational Function Models",
+  "difficulty": "hard",
+  "kind": "numeric",
+  "prompt": "An open box with a square base holds 108 cm³. Its area is $S(x)=x^2+\\dfrac{432}x$. Find the side $x$ that minimizes $S$.",
+  "image_url": null,
+  "choices": null,
+  "answer": 6,
+  "tolerance": 0,
+  "points": 1,
+  "feedback": "2x = 432/x² gives x³ = 216.",
+  "created_at": "2026-11-02T21:52:38.606723+00:00"
+ },
+ {
+  "id": "6e33ea98-0241-4ed8-9c66-854c904f417e",
+  "course_id": "7d3e0ca4-1c49-47d4-84f2-9c41c09dd49d",
+  "lesson_id": null,
+  "topic": "4.1 Radian Measure",
+  "difficulty": "hard",
+  "kind": "numeric",
+  "prompt": "A sector has perimeter 24 cm and radius 8 cm. Find its area in cm².",
+  "image_url": null,
+  "choices": null,
+  "answer": 32,
+  "tolerance": 0,
+  "points": 1,
+  "feedback": "Arc 8, θ = 1; A = ½(64)(1).",
+  "created_at": "2026-06-24T00:35:30.829341+00:00"
+ },
+ {
+  "id": "71c41a93-52ca-46c8-84d1-1566f4c3e995",
+  "course_id": "7d3e0ca4-1c49-47d4-84f2-9c41c09dd49d",
+  "lesson_id": null,
+  "topic": "4.1 Radian Measure",
+  "difficulty": "easy",
+  "kind": "numeric",
+  "prompt": "A circle has radius 3. Find the arc length for $\\theta=2$ rad.",
+  "image_url": null,
+  "choices": null,
+  "answer": 6,
+  "tolerance": 0,
+  "points": 1,
+  "feedback": "s = rθ.",
+  "created_at": "2026-06-24T00:35:30.829341+00:00"
+ },
+ {
+  "id": "75b68c6c-c1ae-4ff9-98fa-644aaceebf2d",
+  "course_id": "7d3e0ca4-1c49-47d4-84f2-9c41c09dd49d",
+  "lesson_id": null,
+  "topic": "4.1 Radian Measure",
+  "difficulty": "medium",
+  "kind": "numeric",
+  "prompt": "Find the arc length for $r=12$ and $\\theta=\\frac{5\\pi}6$ (2 decimals).",
+  "image_url": null,
+  "choices": null,
+  "answer": 31.42,
+  "tolerance": 0.01,
+  "points": 1,
+  "feedback": "10π.",
+  "created_at": "2026-06-24T00:35:30.829341+00:00"
+ },
+ {
+  "id": "75dfbef8-a9d2-499f-8761-3fc4244b18a3",
+  "course_id": "7d3e0ca4-1c49-47d4-84f2-9c41c09dd49d",
+  "lesson_id": null,
+  "topic": "1.3 Equations and Graphs of Polynomial Functions",
+  "difficulty": "hard",
+  "kind": "numeric",
+  "prompt": "An open box made from a 10 by 16 sheet has volume $V=x(10-2x)(16-2x)$. Find $V(2)$.",
+  "image_url": null,
+  "choices": null,
+  "answer": 144,
+  "tolerance": 0,
+  "points": 1,
+  "feedback": "2 · 6 · 12.",
+  "created_at": "2026-06-23T23:51:50.697954+00:00"
+ },
+ {
+  "id": "7892f778-32ab-4fb0-b9fb-e6be6889acab",
+  "course_id": "7d3e0ca4-1c49-47d4-84f2-9c41c09dd49d",
+  "lesson_id": null,
+  "topic": "2.3 Polynomial Equations",
+  "difficulty": "medium",
+  "kind": "numeric",
+  "prompt": "A box measures $x$ by $x$ by $x+3$ and has volume 20. Find $x$.",
+  "image_url": null,
+  "choices": null,
+  "answer": 2,
+  "tolerance": 0,
+  "points": 1,
+  "feedback": "x³ + 3x² − 20 = 0; x = 2 works.",
+  "created_at": "2026-06-24T00:05:31.64532+00:00"
+ },
+ {
+  "id": "7e1e10b6-fa3b-4063-bdc8-aa2f6f6e4130",
+  "course_id": "7d3e0ca4-1c49-47d4-84f2-9c41c09dd49d",
+  "lesson_id": null,
+  "topic": "4.1 Radian Measure",
+  "difficulty": "medium",
+  "kind": "numeric",
+  "prompt": "Find the arc length for $r=15$ cm and an angle of $72^\\circ$ (2 decimals).",
+  "image_url": null,
+  "choices": null,
+  "answer": 18.85,
+  "tolerance": 0.01,
+  "points": 1,
+  "feedback": "72° = 2π/5, so s = 6π.",
+  "created_at": "2026-06-24T00:35:30.829341+00:00"
+ },
+ {
+  "id": "7e24ba7a-ca30-41bf-9956-7976a8c46e47",
+  "course_id": "7d3e0ca4-1c49-47d4-84f2-9c41c09dd49d",
+  "lesson_id": null,
+  "topic": "4.1 Radian Measure",
+  "difficulty": "easy",
+  "kind": "numeric",
+  "prompt": "A circle has radius 7. Find the arc length for $\\theta=1$ rad.",
+  "image_url": null,
+  "choices": null,
+  "answer": 7,
+  "tolerance": 0,
+  "points": 1,
+  "feedback": "s = r when θ = 1.",
+  "created_at": "2026-06-24T00:35:30.829341+00:00"
+ },
+ {
+  "id": "80f72d33-0866-484b-bc64-28a6f7bf9f63",
+  "course_id": "7d3e0ca4-1c49-47d4-84f2-9c41c09dd49d",
+  "lesson_id": null,
+  "topic": "2.4 Families of Polynomial Functions",
+  "difficulty": "hard",
+  "kind": "numeric",
+  "prompt": "A parabola has zeros 1 and 5 and vertex $(3,-8)$. Find its leading coefficient.",
+  "image_url": null,
+  "choices": null,
+  "answer": 2,
+  "tolerance": 0,
+  "points": 1,
+  "feedback": "k(2)(−2) = −8.",
+  "created_at": "2026-10-18T21:53:48.71583+00:00"
+ },
+ {
+  "id": "82ba6e9f-a0c4-45a5-a35f-c317e3ace4ec",
+  "course_id": "7d3e0ca4-1c49-47d4-84f2-9c41c09dd49d",
+  "lesson_id": null,
+  "topic": "4.1 Radian Measure",
+  "difficulty": "medium",
+  "kind": "numeric",
+  "prompt": "An arc of 9 cm lies on a circle of radius 6 cm. Find the angle in degrees (1 decimal).",
+  "image_url": null,
+  "choices": null,
+  "answer": 85.9,
+  "tolerance": 0.1,
+  "points": 1,
+  "feedback": "1.5 rad.",
+  "created_at": "2026-06-24T00:35:30.829341+00:00"
+ },
+ {
+  "id": "8345474f-c649-40ed-8bb9-9e6b34fe3e88",
+  "course_id": "7d3e0ca4-1c49-47d4-84f2-9c41c09dd49d",
+  "lesson_id": null,
+  "topic": "4.1 Radian Measure",
+  "difficulty": "hard",
+  "kind": "numeric",
+  "prompt": "A sector has area $24\\pi$ and angle $\\frac{3\\pi}4$. Find its radius (2 decimals).",
+  "image_url": null,
+  "choices": null,
+  "answer": 8,
+  "tolerance": 0,
+  "points": 1,
+  "feedback": "½r²(3π/4) = 24π gives r² = 64.",
+  "created_at": "2026-06-24T00:35:30.829341+00:00"
+ },
+ {
+  "id": "8ddec9ae-35f2-43d7-8979-01468bf9d36d",
+  "course_id": "7d3e0ca4-1c49-47d4-84f2-9c41c09dd49d",
+  "lesson_id": null,
+  "topic": "4.1 Radian Measure",
+  "difficulty": "medium",
+  "kind": "numeric",
+  "prompt": "An arc of length $4\\pi$ subtends $\\frac{2\\pi}3$. Find the radius.",
+  "image_url": null,
+  "choices": null,
+  "answer": 6,
+  "tolerance": 0,
+  "points": 1,
+  "feedback": "r = s/θ.",
+  "created_at": "2026-06-24T00:35:30.829341+00:00"
+ },
+ {
+  "id": "903c35b4-8f90-4ed6-90ee-c18c01af5a44",
+  "course_id": "7d3e0ca4-1c49-47d4-84f2-9c41c09dd49d",
+  "lesson_id": null,
+  "topic": "4.1 Radian Measure",
+  "difficulty": "medium",
+  "kind": "numeric",
+  "prompt": "Find the area of a sector with $r=6$ and $\\theta=\\frac\\pi3$ (2 decimals).",
+  "image_url": null,
+  "choices": null,
+  "answer": 18.85,
+  "tolerance": 0.01,
+  "points": 1,
+  "feedback": "½(36)(π/3) = 6π.",
+  "created_at": "2026-06-24T00:35:30.829341+00:00"
+ },
+ {
+  "id": "92895019-98c4-4c67-aad5-bd4741269e4a",
+  "course_id": "7d3e0ca4-1c49-47d4-84f2-9c41c09dd49d",
+  "lesson_id": null,
+  "topic": "5.5 Trigonometric Models and Rates of Change",
+  "difficulty": "medium",
+  "kind": "multiple_choice",
+  "prompt": "High tide 10 m at t = 0, low tide 2 m at t = 6 h. Which model fits?",
+  "image_url": null,
+  "choices": [
+   {
+    "id": "a",
+    "text": "$d=8\\cos\\left(\\frac\\pi6t\\right)+2$"
+   },
+   {
+    "id": "b",
+    "text": "$d=4\\cos\\left(\\frac\\pi{12}t\\right)+6$"
+   },
+   {
+    "id": "c",
+    "text": "$d=4\\sin\\left(\\frac\\pi6t\\right)+6$"
+   },
+   {
+    "id": "d",
+    "text": "$d=4\\cos\\left(\\frac\\pi6t\\right)+6$"
+   }
+  ],
+  "answer": "d",
+  "tolerance": null,
+  "points": 1,
+  "feedback": "a = 4, c = 6, period 12 h so k = π/6, cos starts at high tide.",
+  "created_at": "2026-11-04T11:28:27.80278+00:00"
+ },
+ {
+  "id": "9ca5d93f-8eb2-4039-808a-cdab85ca6c8c",
+  "course_id": "7d3e0ca4-1c49-47d4-84f2-9c41c09dd49d",
+  "lesson_id": null,
+  "topic": "5.5 Trigonometric Models and Rates of Change",
+  "difficulty": "hard",
+  "kind": "numeric",
+  "prompt": "For that tide model, find the depth at noon (t = 12), to one decimal.",
+  "image_url": null,
+  "choices": null,
+  "answer": 2.9964184628284145,
+  "tolerance": 0.06,
+  "points": 1,
+  "feedback": "d(12) = 3.6 cos(2π·8/12.4) + 5.2 ≈ 3.0 m.",
+  "created_at": "2026-11-04T11:28:29.187277+00:00"
+ },
+ {
+  "id": "a1bbe2ee-a53e-4d85-81dd-4373e2a55d01",
+  "course_id": "7d3e0ca4-1c49-47d4-84f2-9c41c09dd49d",
+  "lesson_id": null,
+  "topic": "4.1 Radian Measure",
+  "difficulty": "medium",
+  "kind": "numeric",
+  "prompt": "Find the area of a sector with $r=10$ and $\\theta=1.5$.",
+  "image_url": null,
+  "choices": null,
+  "answer": 75,
+  "tolerance": 0,
+  "points": 1,
+  "feedback": "½(100)(1.5).",
+  "created_at": "2026-06-24T00:35:30.829341+00:00"
+ },
+ {
+  "id": "a5d84006-ffb8-40a5-8c13-a74da15d96a3",
+  "course_id": "7d3e0ca4-1c49-47d4-84f2-9c41c09dd49d",
+  "lesson_id": null,
+  "topic": "7.5 Exponential and Logarithmic Models",
+  "difficulty": "medium",
+  "kind": "numeric",
+  "prompt": "With the coffee above, when is it $40^\\circ$C? (one decimal, minutes)",
+  "image_url": null,
+  "choices": null,
+  "answer": 15.849625007211564,
+  "tolerance": 0.1,
+  "points": 1,
+  "feedback": "60(0.5)^(t/10) = 20.",
+  "created_at": "2026-06-24T00:25:32.100878+00:00"
+ },
+ {
+  "id": "a60121e7-08fd-4ff9-a2c6-dafb83b9f7c9",
+  "course_id": "7d3e0ca4-1c49-47d4-84f2-9c41c09dd49d",
+  "lesson_id": null,
+  "topic": "5.5 Trigonometric Models and Rates of Change",
+  "difficulty": "medium",
+  "kind": "multiple_choice",
+  "prompt": "A wheel has radius 8 m, centre 9 m high, period 30 s; a rider boards at the bottom at t = 0. Which model fits?",
+  "image_url": null,
+  "choices": [
+   {
+    "id": "a",
+    "text": "$h=-9\\cos\\left(\\frac\\pi{15}t\\right)+8$"
+   },
+   {
+    "id": "b",
+    "text": "$h=8\\cos\\left(\\frac\\pi{15}t\\right)+9$"
+   },
+   {
+    "id": "c",
+    "text": "$h=-8\\cos\\left(\\frac\\pi{15}t\\right)+9$"
+   },
+   {
+    "id": "d",
+    "text": "$h=-8\\cos(30t)+9$"
+   }
+  ],
+  "answer": "c",
+  "tolerance": null,
+  "points": 1,
+  "feedback": "a = −8 (start at bottom), k = 2π/30 = π/15, c = 9.",
+  "created_at": "2026-11-04T11:28:27.651492+00:00"
+ },
+ {
+  "id": "b0b8b837-6371-4ec7-a38e-75117230a71d",
+  "course_id": "7d3e0ca4-1c49-47d4-84f2-9c41c09dd49d",
+  "lesson_id": null,
+  "topic": "4.1 Radian Measure",
+  "difficulty": "hard",
+  "kind": "numeric",
+  "prompt": "Two cities on the same meridian are separated by a central angle of $0.35$ rad, on a sphere of radius 6400 km. Find their distance in km along the surface.",
+  "image_url": null,
+  "choices": null,
+  "answer": 2240,
+  "tolerance": 0,
+  "points": 1,
+  "feedback": "s = rθ.",
+  "created_at": "2026-06-24T00:35:30.829341+00:00"
+ },
+ {
+  "id": "b0fb7771-d438-4109-8867-bef846cf10bd",
+  "course_id": "7d3e0ca4-1c49-47d4-84f2-9c41c09dd49d",
+  "lesson_id": null,
+  "topic": "4.1 Radian Measure",
+  "difficulty": "easy",
+  "kind": "numeric",
+  "prompt": "An arc of length 12 lies on a circle of radius 4. Find the angle in radians.",
+  "image_url": null,
+  "choices": null,
+  "answer": 3,
+  "tolerance": 0,
+  "points": 1,
+  "feedback": "θ = s/r.",
+  "created_at": "2026-06-24T00:35:30.829341+00:00"
+ },
+ {
+  "id": "b14bdfef-9f07-401b-a44a-12cda1dc2aea",
+  "course_id": "7d3e0ca4-1c49-47d4-84f2-9c41c09dd49d",
+  "lesson_id": null,
+  "topic": "4.1 Radian Measure",
+  "difficulty": "hard",
+  "kind": "multiple_choice",
+  "prompt": "A pendulum of length 60 cm swings through an arc of 25 cm. What is the swing angle?",
+  "image_url": null,
+  "choices": [
+   {
+    "id": "a",
+    "text": "about $41.7^\\circ$"
+   },
+   {
+    "id": "b",
+    "text": "about $0.42^\\circ$"
+   },
+   {
+    "id": "c",
+    "text": "about $12^\\circ$"
+   },
+   {
+    "id": "d",
+    "text": "about $23.9^\\circ$"
+   }
+  ],
+  "answer": "d",
+  "tolerance": null,
+  "points": 1,
+  "feedback": "25/60 rad × 180/π.",
+  "created_at": "2026-06-24T00:35:30.829341+00:00"
+ },
+ {
+  "id": "b64f30b8-7b83-4ca9-a4bf-6167ba926caf",
+  "course_id": "7d3e0ca4-1c49-47d4-84f2-9c41c09dd49d",
+  "lesson_id": null,
+  "topic": "5.5 Trigonometric Models and Rates of Change",
+  "difficulty": "easy",
+  "kind": "numeric",
+  "prompt": "A Ferris wheel has radius $12$ m and its centre is $14$ m above the ground. What is the greatest height of a rider?",
+  "image_url": null,
+  "choices": null,
+  "answer": 26,
+  "tolerance": 0,
+  "points": 1,
+  "feedback": "Top = centre + radius = 14 + 12.",
+  "created_at": "2026-11-04T11:28:26.315888+00:00"
+ },
+ {
+  "id": "ca9430a5-7b62-48e5-b14b-77750cc95bc4",
+  "course_id": "7d3e0ca4-1c49-47d4-84f2-9c41c09dd49d",
+  "lesson_id": null,
+  "topic": "5.5 Trigonometric Models and Rates of Change",
+  "difficulty": "hard",
+  "kind": "numeric",
+  "prompt": "For that tide model, find the time of the second high tide after midnight, in hours (one decimal).",
+  "image_url": null,
+  "choices": null,
+  "answer": 16.4,
+  "tolerance": 0.05,
+  "points": 1,
+  "feedback": "High tides are one period apart: 4 + 12.4 = 16.4.",
+  "created_at": "2026-11-04T11:28:29.246086+00:00"
+ },
+ {
+  "id": "cad2249c-cac6-4e1a-b668-36230243fd02",
+  "course_id": "7d3e0ca4-1c49-47d4-84f2-9c41c09dd49d",
+  "lesson_id": null,
+  "topic": "5.5 Trigonometric Models and Rates of Change",
+  "difficulty": "hard",
+  "kind": "numeric",
+  "prompt": "For the tide model, how many hours per cycle is the depth above $7$ m (two decimals)?",
+  "image_url": null,
+  "choices": null,
+  "answer": 4.133333333333334,
+  "tolerance": 0.02,
+  "points": 1,
+  "feedback": "One third of the 12.4 h period: 4.13 h.",
+  "created_at": "2026-11-04T11:28:30.702692+00:00"
+ },
+ {
+  "id": "cd3b0548-4f56-449e-830a-139f78129233",
+  "course_id": "7d3e0ca4-1c49-47d4-84f2-9c41c09dd49d",
+  "lesson_id": null,
+  "topic": "5.5 Trigonometric Models and Rates of Change",
+  "difficulty": "easy",
+  "kind": "numeric",
+  "prompt": "For the same wheel (radius $12$ m, centre $14$ m), what is the least height of a rider?",
+  "image_url": null,
+  "choices": null,
+  "answer": 2,
+  "tolerance": 0,
+  "points": 1,
+  "feedback": "Bottom = centre − radius = 14 − 12.",
+  "created_at": "2026-11-04T11:28:26.369351+00:00"
+ },
+ {
+  "id": "eb4cb548-73c4-4c6c-b89b-76172d727b5b",
+  "course_id": "7d3e0ca4-1c49-47d4-84f2-9c41c09dd49d",
+  "lesson_id": null,
+  "topic": "5.5 Trigonometric Models and Rates of Change",
+  "difficulty": "medium",
+  "kind": "multiple_choice",
+  "prompt": "From the same graph, at which time in [0, 12] is the depth changing fastest while rising?",
+  "image_url": "https://pcsepbiwqbqomzqdwoei.supabase.co/storage/v1/object/public/graph-images/mhf4u-5-5/medium-q19-a8c12b23.svg",
+  "choices": [
+   {
+    "id": "a",
+    "text": "t = 3"
+   },
+   {
+    "id": "b",
+    "text": "t = 9"
+   },
+   {
+    "id": "c",
+    "text": "t = 12"
+   },
+   {
+    "id": "d",
+    "text": "t = 6"
+   }
+  ],
+  "answer": "b",
+  "tolerance": null,
+  "points": 1,
+  "feedback": "Rising through the axis d = 6 happens at t = 9.",
+  "created_at": "2026-11-04T11:28:28.98108+00:00"
+ }
+]

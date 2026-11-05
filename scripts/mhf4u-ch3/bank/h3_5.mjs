@@ -1,3 +1,4 @@
+import { FIG } from "../../mhf4u-bank-figures/figs.mjs";
 // 3.5 Rational Function Models — 20 hard questions
 import { mc, num, tf } from "./kit.mjs";
 import { planeDoc, P } from "./fig.mjs";
@@ -13,7 +14,7 @@ export const Q = [
   num(S`A 100 L tank has 2 g/L salt. Brine with 5 g/L enters at 20 L/min with nothing leaving. When is the concentration 4 g/L, in minutes?`, 10, "(200 + 100t)/(100 + 20t) = 4: 200 + 100t = 400 + 80t."),
   num(S`$C(t)=\dfrac{20t}{t^2+25}$ mg/L. For how many hours is $C\ge1.6$?`, 7.5, "t² − 12.5t + 25 ≤ 0 gives (t − 2.5)(t − 10) ≤ 0, from 2.5 h to 10 h.", null, 0.01),
   num(S`The largest value of $C(t)=\dfrac{20t}{t^2+25}$ occurs at $t=5$. What is it?`, 2, "100/50."),
-  num(S`An open box with a square base holds 108 cm³. Its area is $S(x)=x^2+\dfrac{432}x$. Find the side $x$ that minimizes $S$.`, 6, "2x = 432/x² gives x³ = 216."),
+  num(S`An open box with a square base holds 108 cm³. Its area is $S(x)=x^2+\dfrac{432}x$. Find the side $x$ that minimizes $S$.`, 6, "2x = 432/x² gives x³ = 216.", FIG.openBox),
   num(S`A closed box with square base holds 1000 cm³. Area is $S(x)=2x^2+\dfrac{4000}x$. Find the minimum area.`, 600, "x = 10: 200 + 400."),
   num(S`Estimate the instantaneous rate of change of $t=\dfrac{240}v$ at $v=60$ (2 decimals).`, -0.07, "−240/3600 ≈ −0.0667.", null, 0.005),
   num(S`For $I=\dfrac{k}{d^2}$, $I=20$ at $d=3$. Find $I$ at $d=6$.`, 5, "Doubling d divides I by 4."),

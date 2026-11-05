@@ -1,3 +1,4 @@
+import { FIG } from "../../mpm2d-bank-figures/figs.mjs";
 // 7.4 Applications of the Sine & Cosine Laws — 20 easy + 20 medium questions (values computed)
 import { mc, ms, num, tf, fill } from "./kit.mjs";
 import { atriDoc, sasDoc } from "./fig.mjs";
@@ -19,18 +20,18 @@ export const E = [
   mc(`Two distances and the angle between them are measured. Which law finds the third distance?`, "the cosine law", ["the sine law", "SOH CAH TOA", "neither"], "SAS."),
   tf(`Triangulation locates a point using a measured baseline and two angles.`, true, "The sine law gives the distances."),
   a1(`A truss has sides $3$ m, $4$ m and $4$ m. Find the angle opposite the $3$ m side.`, ang(3, 4, 4), "Cosine law"),
-  n1(`Points $A$ and $B$ are $50$ m apart. A tree $C$ makes $\\angle A=70^\\circ$ and $\\angle B=65^\\circ$. Find $AC$ (m).`, side(50, 45, 65), "Third angle $45^\\circ$; sine law"),
+  n1(`Points $A$ and $B$ are $50$ m apart. A tree $C$ makes $\\angle A=70^\\circ$ and $\\angle B=65^\\circ$. Find $AC$ (m).`, side(50, 45, 65), "Third angle $45^\\circ$; sine law", FIG.tree70),
   fill(`To find a height after finding a slanted side, multiply that side by the ___ of the angle at the base.`, ["sine", "sin"], "Height = side × sin(angle)."),
   n1(`A slanted side of $40$ m makes a $55^\\circ$ angle with the ground. How high does it reach (m)?`, 40 * sin(55), "$40\\sin55^\\circ$"),
   n1(`Two hikers leave a camp on paths $70^\\circ$ apart and walk $3$ km and $4$ km. How far apart are they (km)?`, cl(3, 4, 70), "Cosine law"),
   tf(`In application problems you should draw a diagram before choosing a law.`, true, "It shows which parts are known."),
   a1(`A triangular garden has sides $8$ m, $9$ m and $10$ m. Find the angle between the $8$ m and $9$ m sides.`, ang(10, 8, 9), "Opposite $10$"),
   n1(`Two people $20$ m apart, on opposite sides of a balloon, see it at $50^\\circ$ and $60^\\circ$. How far is the balloon from the first person (m)?`, side(20, 70, 60), "Angle at the balloon $70^\\circ$; $\\frac{20\\sin60^\\circ}{\\sin70^\\circ}$"),
-  mc(`A lighthouse sees two boats $7$ km and $9$ km away with $55^\\circ$ between them. What is the first step to find the distance between the boats?`, "use the cosine law with $7$, $9$ and $55^\\circ$", ["use the sine law", "subtract $9-6$", "find the third angle"], "SAS."),
+  mc(`A lighthouse sees two boats $7$ km and $9$ km away with $55^\\circ$ between them. What is the first step to find the distance between the boats?`, "use the cosine law with $7$, $9$ and $55^\\circ$", ["use the sine law", "subtract $9-6$", "find the third angle"], "SAS.", FIG.boats79),
   n0(`A triangular lot has two sides of $60$ m and $80$ m meeting at $75^\\circ$. Find the third side (m).`, cl(60, 80, 75), "Cosine law"),
   tf(`The angle at the top of a kite seen from two people on opposite sides is $180^\\circ$ minus the two angles of elevation.`, true, "The three angles of the triangle add to $180^\\circ$."),
   n1(`A ramp's slanted surface is $5$ m long at $12^\\circ$ to the ground. How high does it rise (m)?`, 5 * sin(12), "$5\\sin12^\\circ$"),
-  n1(`A surveyor measures $AC=150$ m, $BC=170$ m and $\\angle ACB=45^\\circ$. Find $AB$ (m).`, cl(150, 170, 45), "Cosine law"),
+  n1(`A surveyor measures $AC=150$ m, $BC=170$ m and $\\angle ACB=45^\\circ$. Find $AB$ (m).`, cl(150, 170, 45), "Cosine law", FIG.surv),
   n1(`Find the distance $AB$ across the lake shown (m).`, cl(300, 260, 58), "Cosine law", sasDoc(300, 260, 58, { b: "300 m", c: "260 m", a: "?", A: "58°", names: ["C", "B", "A"] })),
 ];
 

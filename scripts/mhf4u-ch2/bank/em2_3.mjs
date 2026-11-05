@@ -1,3 +1,4 @@
+import { FIG } from "../../mhf4u-bank-figures/figs.mjs";
 // 2.3 Polynomial Equations — 20 easy + 20 medium questions
 import { mc, num, tf, fill } from "./kit.mjs";
 import { graph, planeDoc, P } from "./fig.mjs";
@@ -38,7 +39,7 @@ export const M = [
   num(String.raw`Find the positive root of $2x^3+3x^2-2x=0$.`, 0.5, "x(2x − 1)(x + 2).", null, 0.001),
   num(String.raw`Find the product of the roots of $(2x-1)(x+3)(x-4)=0$.`, -6, "½ · (−3) · 4."),
   mc(String.raw`Find the real roots of $x^4-16=0$.`, String.raw`$x=\pm2$`, [String.raw`$x=2$`, String.raw`$x=\pm4$`, String.raw`$x=\pm2, \pm4$`], "(x² − 4)(x² + 4)."),
-  num(String.raw`A box measures $x$ by $x$ by $x+3$ and has volume 20. Find $x$.`, 2, "x³ + 3x² − 20 = 0; x = 2 works."),
+  num(String.raw`A box measures $x$ by $x$ by $x+3$ and has volume 20. Find $x$.`, 2, "x³ + 3x² − 20 = 0; x = 2 works.", FIG.boxX3),
   num(String.raw`How many distinct roots does $x^3+x^2-x-1=0$ have?`, 2, "(x + 1)²(x − 1)."),
   num(String.raw`$x=1$ is a root of $2x^3+kx^2-x+1=0$. Find $k$.`, -2, "2 + k − 1 + 1 = 0."),
   num(String.raw`Find the smallest positive root of $x^3-2x^2-3x+6=0$ (2 decimals).`, 1.732, "(x − 2)(x² − 3): √3 ≈ 1.73.", null, 0.006),

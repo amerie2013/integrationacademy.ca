@@ -1,3 +1,4 @@
+import { FIG } from "../../mpm2d-bank-figures/figs.mjs";
 // 2.2 Length of a Line Segment — 20 easy + 20 medium questions
 import { mc, ms, num, tf, fill } from "./kit.mjs";
 import { planeDoc } from "./fig.mjs";
@@ -33,7 +34,7 @@ export const M = [
   num(`Find the length from $(1,-4)$ to $(-4,8)$.`, 13, "$\\sqrt{25+144}$."),
   num(`Find the length from $(0,0)$ to $(2,3)$ to two decimal places.`, 3.61, "$\\sqrt{13}\\approx3.606$.", null, 0.01),
   num(`Find the length from $(-1,2)$ to $(3,-2)$ to two decimal places.`, 5.66, "$\\sqrt{32}\\approx5.657$.", null, 0.01),
-  num(`Find the perimeter of the triangle with vertices $(0,0)$, $(3,0)$, $(0,4)$.`, 12, "$3+4+5$."),
+  num(`Find the perimeter of the triangle with vertices $(0,0)$, $(3,0)$, $(0,4)$.`, 12, "$3+4+5$.", FIG.g034),
   mc(`Which point is farthest from the origin?`, "$(5,8)$", ["$(6,-7)$", "$(-8,4)$", "$(-9,1)$"], "Squared distances: $89$, $85$, $80$, $82$."),
   num(`$(k,0)$ is $10$ units from $(2,6)$, with $k>0$. Find $k$.`, 10, "$(k-2)^2=64\\Rightarrow k=10$ or $k=-6$."),
   tf(`The triangle with vertices $(0,0)$, $(4,0)$, $(2,3)$ is isosceles.`, true, "Two sides are $\\sqrt{13}$."),

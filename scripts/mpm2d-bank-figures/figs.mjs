@@ -1,0 +1,108 @@
+// New figures for MPM2D bank questions that describe a scene, a triangle or coordinates (added 2026-11-05).
+// Labels show only what the question gives, never the answer.
+import { planeDoc } from "../mth1w-ch4/figs4.mjs";
+import { figDoc } from "../mth1w-ch5/figs5.mjs";
+
+const R = Math.PI / 180, sin = (d) => Math.sin(d * R), cos = (d) => Math.cos(d * R), tan = (d) => Math.tan(d * R);
+const tx = (text, at, o = {}) => ({ text, at, size: 13, ...o });
+const mid = (a, b) => [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
+const off = (p, dx, dy) => [p[0] + dx, p[1] + dy];
+const lab = (v) => String(v).replace(/-/g, "−");
+
+/** right triangle: angle mark at the left end, right angle under the top vertex */
+const rt = (run, rise, l = {}, w = 280) => {
+  const A = [0, 0], B = [run, 0], C = [run, rise], S = Math.max(run, rise), H = Math.hypot(run, rise);
+  return figDoc({ w, items: [{ poly: [A, B, C], fill: "blue", color: "blue" }, { right: [A, B, C] },
+    ...(l.ang ? [{ arc: [B, A, C], label: l.ang, r: S * 0.2 }] : []),
+    ...(l.run ? [tx(l.run, off(mid(A, B), -S * 0.05, -S * 0.09))] : []),
+    ...(l.rise ? [tx(l.rise, l.riseAt ?? off(mid(B, C), -S * 0.1, 0))] : []),
+    ...(l.hyp ? [tx(l.hyp, off(mid(A, C), (-rise / H) * S * 0.09, (run / H) * S * 0.09))] : [])] });
+};
+const depress = (d, h, ang, lh, what) => figDoc({ w: 300, items: [{ poly: [[0, 0], [d, 0], [0, h]], color: "blue", fill: "blue" }, { seg: [[0, h], [d * 0.7, h]], color: "gray", dash: true }, { right: [[0, h], [0, 0], [d, 0]] }, { arc: [[d * 0.7, h], [0, h], [d, 0]], label: ang, r: d * 0.28 }, tx(lh, [-d * 0.17, h * 0.5]), tx(what, [d * 0.94, -Math.max(h, d * 0.3) * 0.14], { bold: true })] });
+/** viewed from an eye above the ground: dashed eye level, tall object */
+const eyes = (e, d, H, l) => figDoc({ w: 300, items: [{ seg: [[-d * 0.08, 0], [d * 1.1, 0]], color: "ink" }, { seg: [[0, 0], [0, e]], color: "green" }, { seg: [[d, 0], [d, H]], color: "blue" }, { seg: [[0, e], [d, e]], color: "gray", dash: true }, { seg: [[0, e], [d, H]], color: "red" }, ...(l.ang ? [{ arc: [[d, e], [0, e], [d, H]], label: l.ang, r: d * 0.25 }] : []), tx(l.e, [-d * 0.1, e + H * 0.05]), tx(l.d, [d * 0.42, -H * 0.1]), ...(l.H ? [tx(l.H, [d * 0.86, H * 0.55])] : [])] });
+const tri3 = ({ a, b, c, la, lb, lc, aA, aB, aC, names = ["A", "B", "C"], w = 300 }) => {
+  const A = [0, 0], B = [c, 0], x = (b * b + c * c - a * a) / (2 * c), C = [x, Math.sqrt(Math.max(0, b * b - x * x))], S = Math.max(c, C[1]);
+  return figDoc({ w, items: [{ poly: [A, B, C], fill: "blue", color: "blue" },
+    ...(aA ? [{ arc: [B, A, C], label: aA, r: S * 0.14 }] : []), ...(aB ? [{ arc: [A, B, C], label: aB, r: S * 0.13 }] : []), ...(aC ? [{ arc: [A, C, B], label: aC, r: S * 0.13 }] : []),
+    tx(names[0], [-S * 0.06, -S * 0.03], { bold: true }), tx(names[1], [c + S * 0.015, -S * 0.03], { bold: true }), tx(names[2], off(C, -S * 0.015, S * 0.03), { bold: true }),
+    ...(lc ? [tx(lc, [c * 0.44, -S * 0.09])] : []), ...(lb ? [tx(lb, off(mid(A, C), -S * 0.12, S * 0.03))] : []), ...(la ? [tx(la, off(mid(B, C), S * 0.03, S * 0.03))] : [])] });
+};
+/** triangle from two angles; c is drawn as the base */
+const asa = (A, B, l = {}) => { const C = 180 - A - B, c = 10, a = (c * sin(A)) / sin(C), b = (c * sin(B)) / sin(C); return tri3({ a, b, c, aA: `${A}°`, aB: `${B}°`, ...l }); };
+/** triangle from two sides and the angle between them, at A */
+const sas = (b, c, A, l = {}) => tri3({ a: Math.sqrt(b * b + c * c - 2 * b * c * cos(A)), b, c, aA: `${A}°`, lb: String(b), lc: String(c), ...l });
+const sss = (a, b, c) => tri3({ a, b, c, la: String(a), lb: String(b), lc: String(c), names: ["", "", ""] });
+/** triangle or polygon on a grid with its given coordinates */
+const grid = (pts, names, open = false) => {
+  const xs = pts.map((p) => p[0]), ys = pts.map((p) => p[1]), pad = 2, L = Math.max(Math.max(...xs) - Math.min(...xs), Math.max(...ys) - Math.min(...ys)) + 2 * pad;
+  const cx = (Math.max(...xs) + Math.min(...xs)) / 2, cy = (Math.max(...ys) + Math.min(...ys)) / 2, h = Math.ceil(L / 2), x0 = Math.floor(cx - h), y0 = Math.floor(cy - h);
+  const step = L > 16 ? 2 : 1;
+  return planeDoc({ view: { xmin: x0, xmax: x0 + 2 * h, ymin: y0, ymax: y0 + 2 * h }, step: { x: step, y: step }, segs: [{ pts: open ? pts : [...pts, pts[0]], color: "blue" }], points: pts.map((p, i) => ({ x: p[0], y: p[1], label: `${names?.[i] ?? ""}(${lab(p[0])}, ${lab(p[1])})` })) });
+};
+const circleLine = (r, o) => { const m = Math.ceil(r) + 2, s = m > 8 ? 2 : 1; return planeDoc({ view: { xmin: -m, xmax: m, ymin: -m, ymax: m }, step: { x: s, y: s }, curves: [{ f: (x) => Math.sqrt(Math.max(0, r * r - x * x)), a: -r, b: r, color: "violet" }, { f: (x) => -Math.sqrt(Math.max(0, r * r - x * x)), a: -r, b: r, color: "violet" }], ...o }); };
+/** a triangle with DE parallel to BC; only the given lengths are labelled */
+const par = (t, l) => { const A = [4, 7], B = [0, 0], C = [10, 0], D = [A[0] + (B[0] - A[0]) * t, A[1] * (1 - t)], E = [A[0] + (C[0] - A[0]) * t, A[1] * (1 - t)];
+  return figDoc({ w: 280, items: [{ poly: [A, B, C], fill: "blue", color: "blue" }, { seg: [D, E], color: "red" }, tx("A", off(A, -0.1, 0.25), { bold: true }), tx("B", [-0.5, -0.3], { bold: true }), tx("C", [10.15, -0.3], { bold: true }), tx("D", off(D, -0.6, 0), { bold: true }), tx("E", off(E, 0.2, 0), { bold: true }),
+    ...(l.AD ? [tx(l.AD, off(mid(A, D), -1, 0))] : []), ...(l.DB ? [tx(l.DB, off(mid(D, B), -1, 0))] : []), ...(l.AE ? [tx(l.AE, off(mid(A, E), 0.3, 0))] : []), ...(l.EC ? [tx(l.EC, off(mid(E, C), 0.3, 0))] : []), ...(l.DE ? [tx(l.DE, off(mid(D, E), -0.2, 0.2), { color: "red" })] : []), ...(l.BC ? [tx(l.BC, [4.6, -0.8])] : [])] }); };
+/** two segments crossing at C with AB parallel to DE */
+const cross = (l) => { const A = [0, 3], B = [3, 3], C = [2.25, 2.25], D = [6, 0], E = [4.5 + 0, 0]; const P = [[0, 3], [3, 3], [3, 0], [9, 0]]; const c = [3, 2]; return figDoc({ w: 280, items: [{ seg: [P[0], P[1]], color: "blue" }, { seg: [P[2], P[3]], color: "blue" }, { seg: [P[0], P[3]], color: "red" }, { seg: [P[1], P[2]], color: "red" }, tx("A", [-0.5, 3.05], { bold: true }), tx("B", [3.1, 3.1], { bold: true }), tx("D", [2.55, -0.35], { bold: true }), tx("E", [9.1, -0.35], { bold: true }), tx("C", [3.15, 2.05], { bold: true }), ...(l.AC ? [tx(l.AC, [0.9, 2.05])] : []), ...(l.CE ? [tx(l.CE, [6.2, 1.05])] : []), ...(l.DE ? [tx(l.DE, [5.6, -0.35])] : [])] }); };
+const alt49 = figDoc({ w: 300, items: [{ poly: [[0, 0], [13, 0], [4, 6]], fill: "blue", color: "blue" }, { seg: [[4, 6], [4, 0]], color: "red", dash: true }, { right: [[0, 0], [4, 0], [4, 6]] }, { right: [[0, 0], [4, 6], [13, 0]] }, tx("A", [-0.7, -0.3], { bold: true }), tx("B", [13.2, -0.3], { bold: true }), tx("C", [3.8, 6.3], { bold: true }), tx("D", [3.8, -0.9], { bold: true }), tx("4", [1.8, -0.9]), tx("9", [8.2, -0.9])] });
+/** an object and its shadow next to a second one, same sun */
+const shadows = (h1, s1, H, S, l) => { const gap = s1 * 1.5, x2 = s1 + gap; return figDoc({ w: 340, items: [{ seg: [[-s1 * 0.2, 0], [x2 + S * 1.1, 0]], color: "ink" }, { seg: [[0, 0], [0, h1]], color: "green" }, { seg: [[0, h1], [s1, 0]], color: "amber" }, { seg: [[x2, 0], [x2, H]], color: "green" }, { seg: [[x2, H], [x2 + S, 0]], color: "amber" }, tx(l.h1, [s1 * 0.05, h1 * 1.0 + H * 0.04]), tx(l.s1, [s1 * 0.25, -H * 0.1]), tx(l.H, [x2 - s1 * 0.9, H * 0.55]), tx(l.S, [x2 + S * 0.4, -H * 0.1])] }); };
+const mirror = (e, d1, d2, H, l) => figDoc({ w: 330, items: [{ seg: [[-d1 * 0.2, 0], [d1 + d2 + d1 * 0.3, 0]], color: "ink" }, { seg: [[0, 0], [0, e]], color: "green" }, { seg: [[d1 + d2, 0], [d1 + d2, H]], color: "blue" }, { seg: [[0, e], [d1, 0]], color: "red" }, { seg: [[d1, 0], [d1 + d2, H]], color: "red" }, { dot: [d1, 0] }, tx("mirror", [d1 * 0.65, -H * 0.13], { color: "gray" }), tx(l.e, [d1 * 0.03, e + H * 0.05]), tx(l.d1, [d1 * 0.32, -H * 0.05]), tx(l.d2, [d1 + d2 * 0.5, -H * 0.1]), ...(l.H ? [tx(l.H, [d1 + d2 * 0.82, H * 0.5])] : [])] });
+const lamp = (p, L, d, s, l) => { const tip = d + s; return figDoc({ w: 330, items: [{ seg: [[-1, 0], [tip * 1.08, 0]], color: "ink" }, { seg: [[0, 0], [0, L]], color: "gray" }, { dot: [0, L] }, { seg: [[d, 0], [d, p]], color: "green" }, { seg: [[0, L], [tip, 0]], color: "amber", dash: true }, tx(l.L, [tip * 0.02, L * 0.55]), tx(l.p, [d + tip * 0.015, p * 1.15]), tx(l.d, [d * 0.42, -L * 0.1]), tx(l.s, [d + s * 0.2, -L * 0.1])] }); };
+const ruler = (r, d, D) => figDoc({ w: 340, items: [{ seg: [[0, 1.5], [10, 3]], color: "gray", dash: true }, { seg: [[0, 1.5], [10, 0]], color: "gray", dash: true }, { seg: [[10, 0], [10, 3]], color: "blue" }, { seg: [[2.5, 1.125], [2.5, 1.875]], color: "red" }, { dot: [0, 1.5] }, tx("eye", [-0.25, 1.1]), tx(r, [2.2, 2.05], { color: "red" }), tx(d, [0.7, 0.55]), tx(D, [5.8, -0.1])] });
+const ramp = (run, rise, x, l) => { const S = run; return figDoc({ w: 340, items: [{ poly: [[0, 0], [run, 0], [run, rise]], fill: "blue", color: "blue" }, { right: [[0, 0], [run, 0], [run, rise]] }, { seg: [[x, 0], [x, (rise * x) / run]], color: "red" }, tx(l.run, [run * 0.42, -S * 0.07]), tx(l.rise, [run * 0.88, rise * 1.12]), ...(l.x ? [tx(l.x, [x * 0.42, S * 0.012 + rise * 0.05])] : [])] }); };
+const towerAB = (a1, a2, gap, l) => { const h = (gap * tan(a1) * tan(a2)) / (tan(a1) - tan(a2)), d = h / tan(a1); return figDoc({ w: 340, items: [{ seg: [[0, 0], [d + gap, 0]], color: "ink" }, { seg: [[0, 0], [0, h]], color: "blue" }, { seg: [[d, 0], [0, h]], color: "red" }, { seg: [[d + gap, 0], [0, h]], color: "red" }, { right: [[0, h], [0, 0], [d, 0]] }, { arc: [[0, 0], [d, 0], [0, h]], label: `${a1}°`, r: gap * 0.3 }, { arc: [[0, 0], [d + gap, 0], [0, h]], label: `${a2}°`, r: gap * 0.45 }, tx(l.A, [d, -h * 0.13], { bold: true }), tx(l.B, [d + gap, -h * 0.13], { bold: true }), tx(l.gap, [d + gap * 0.4, -h * 0.13])] }); };
+const opposite = (gap, a1, a2, l) => { const C = 180 - a1 - a2, s = (gap * sin(a2)) / sin(C), top = [s * cos(a1), s * sin(a1)]; return figDoc({ w: 320, items: [{ poly: [[0, 0], [gap, 0], top], fill: "blue", color: "blue" }, { seg: [top, [top[0], 0]], color: "red", dash: true }, { arc: [[gap, 0], [0, 0], top], label: `${a1}°`, r: gap * 0.14 }, { arc: [[0, 0], [gap, 0], top], label: `${a2}°`, r: gap * 0.12 }, tx(l.gap, [gap * 0.42, -gap * 0.09]), ...(l.top ? [tx(l.top, off(top, -gap * 0.03, gap * 0.03), { bold: true })] : [])] }); };
+const boats = (h, a1, a2, same, lh) => { const d1 = h / tan(a1), d2 = h / tan(a2); const x2 = same ? d2 : -d2, W = Math.max(d1, d2); return figDoc({ w: 330, items: [{ seg: [[Math.min(0, x2) - W * 0.12, 0], [W * 1.12, 0]], color: "blue" }, { seg: [[0, 0], [0, h]], color: "ink" }, { seg: [[0, h], [d1, 0]], color: "red" }, { seg: [[0, h], [x2, 0]], color: "red" }, { seg: [[Math.min(0, same ? 0 : -W * 0.7), h], [W * 0.75, h]], color: "gray", dash: true }, { arc: [[W * 0.75, h], [0, h], [d1, 0]], label: `${a1}°`, r: W * 0.32 }, ...(same ? [{ arc: [[W * 0.75, h], [0, h], [x2, 0]], label: `${a2}°`, r: W * 0.55 }] : [{ arc: [[-W * 0.7, h], [0, h], [x2, 0]], label: `${a2}°`, r: W * 0.32 }]), tx(lh, [-W * 0.2, h * 0.5])] }); };
+/** a rectangle fenced on three sides against a wall or river */
+const pen = (what, total) => figDoc({ w: 300, items: [{ seg: [[-1, 4], [11, 4]], color: "ink" }, { poly: [[0, 4], [0, 0], [10, 0], [10, 4]], color: "green", fill: "green" }, tx(what, [4.2, 4.3], { bold: true }), tx(`${total} of fence on three sides`, [5, 1.8], { color: "green" }), tx("w", [-0.7, 1.9]), tx("w", [10.3, 1.9])] });
+const framePic = (ow, oh, iw, ih, a) => figDoc({ w: 320, items: [{ poly: [[0, 0], [ow, 0], [ow, oh], [0, oh]], fill: "amber", color: "amber" }, { poly: [[(ow - iw) / 2, (oh - ih) / 2], [(ow + iw) / 2, (oh - ih) / 2], [(ow + iw) / 2, (oh + ih) / 2], [(ow - iw) / 2, (oh + ih) / 2]], fill: "blue", color: "blue" }, ...a] });
+
+const abc1 = grid([[-2, 0], [4, 4], [6, -2]], ["A", "B", "C"]);
+const pqr = grid([[-3, -1], [5, 3], [1, 7]], ["P", "Q", "R"]);
+const abc2 = grid([[0, 0], [10, 0], [4, 6]], ["A", "B", "C"]);
+const abc3 = grid([[2, 8], [-2, 0], [6, 4]], ["A", "B", "C"]);
+
+export const FIG = {
+  // chapter 2: coordinates
+  g068: grid([[0, 0], [6, 0], [0, 8]]), gP1: grid([[-2, -1], [2, 2], [5, -2]]), gQ: grid([[-3, 0], [0, 4], [3, 0], [0, -4]]), gP3: grid([[-4, -3], [4, 3], [4, -3]], ["A", "B", "C"]), g513: grid([[0, 0], [5, 0], [1, 3]]), g034: grid([[0, 0], [3, 0], [0, 4]]),
+  par3: grid([[1, 1], [5, 2], [6, 6]], ["A", "B", "C"], true), rho3: grid([[-4, 0], [0, 3], [4, 0]], null, true), rhoD: grid([[0, -4], [3, 0], [0, 4], [-3, 0]]), rho4: grid([[0, 0], [3, 4], [8, 4]], ["A", "B", "C"], true),
+  c25: circleLine(5, { lines: [{ m: 0, b: 4, color: "blue", label: "y = 4", lx: 1 }] }), c100: circleLine(10, { vlines: [{ x: -6, color: "blue", label: "x = −6" }] }), c72: circleLine(Math.sqrt(72), { lines: [{ m: 1, b: 0, color: "blue", label: "y = x", lx: 2 }] }),
+  abc1, pqr, abc2, abc3, abc4: grid([[0, 0], [6, 0], [3, 5]], ["A", "B", "C"]), abc5: grid([[0, 0], [8, 0], [4, 7]], ["A", "C", "B"]), abc6: grid([[0, 0], [4, 6], [8, 0]], ["A", "B", "C"]), oab: grid([[0, 0], [8, 0], [0, 6]], ["O", "A", "B"]), r057: grid([[0, 0], [5, 0], [0, 7]]), c069: grid([[0, 0], [6, 0], [0, 9]]), c528: grid([[-5, 2], [3, 8], [5, -4]]), c448: grid([[-4, 0], [4, 0], [0, 8]]), abc7: grid([[-4, 0], [2, -2], [0, 6]], ["A", "B", "C"]),
+  // chapters 4, 5: fences and frames
+  pen40: pen("wall", "40 m"), pen24: pen("wall", "24 m"), pen60: pen("wall", "60 m"), pen100: pen("barn", "100 m"), pen200: pen("river", "200 m"),
+  pens3: figDoc({ w: 300, items: [{ poly: [[0, 0], [12, 0], [12, 6], [0, 6]], fill: "green", color: "green" }, { seg: [[4, 0], [4, 6]], color: "green" }, { seg: [[8, 0], [8, 6]], color: "green" }, tx("400 m of fence in all", [3.1, -0.8], { color: "green" })] }),
+  photo: framePic(16, 12, 12, 8, [tx("12 cm", [6.6, 7.2]), tx("8 cm", [11.2, 5.8])]),
+  gardenPath: framePic(14, 10, 12, 8, [tx("garden", [5.4, 5]), tx("1 m", [0.15, 4.8], { size: 11 })]),
+  arch50: figDoc({ w: 320, items: [{ seg: [[-4, 0], [54, 0]], color: "ink" }, { poly: Array.from({ length: 41 }, (_, i) => { const x = (50 * i) / 40; return [x, -0.032 * x * (x - 50)]; }), fill: "amber", color: "amber" }, { seg: [[25, 0], [25, 20]], color: "red", dash: true }, tx("50 m", [22, -3.4]), tx("20 m", [26, 10], { color: "red" })] }),
+  // chapter 6: similar triangles
+  par23: par(1 / 3, { AD: "2", DE: "3" }), parX: par(0.3, { AD: "x", DB: "10", DE: "3", BC: "8" }), parX2: par(0.4, { AD: "3", DB: "x", DE: "4", BC: "10" }), par2t3: par(0.4, { AD: "2k", DB: "3k", BC: "20" }), par48: par(1 / 3, { AD: "4", DB: "8", DE: "5" }), par63: par(2 / 3, { AE: "6", EC: "3", BC: "12" }),
+  cross1: cross({ AC: "5", CE: "15", DE: "12" }), cross0: cross({}), alt49,
+  trap: figDoc({ w: 300, items: [{ poly: [[3, 6], [9, 6], [15, 0], [0, 0]], fill: "blue", color: "blue" }, { seg: [[3, 6], [15, 0]], color: "red" }, { seg: [[9, 6], [0, 0]], color: "red" }, tx("A", [2.4, 6.2], { bold: true }), tx("B", [9.1, 6.2], { bold: true }), tx("C", [15.1, -0.5], { bold: true }), tx("D", [-0.7, -0.5], { bold: true }), tx("E", [6.1, 3.3], { bold: true }), tx("6", [5.8, 6.3]), tx("15", [7, -0.9])] }),
+  simPair: figDoc({ w: 340, items: [{ poly: [[0, 0], [6, 0], [0, 4.5]], fill: "blue", color: "blue" }, { poly: [[9, 0], [18, 0], [9, 6.75]], fill: "green", color: "green" }, tx("A", [-0.6, 4.4], { bold: true }), tx("B", [-0.6, -0.4], { bold: true }), tx("C", [6.1, -0.4], { bold: true }), tx("D", [8.4, 6.7], { bold: true }), tx("E", [8.4, -0.4], { bold: true }), tx("F", [18.1, -0.4], { bold: true }), tx("6", [-0.5, 2.1]), tx("8", [2.8, -0.7]), tx("10", [3.2, 2.7]), tx("9", [8.4, 3.3])] }),
+  sh15: shadows(1.5, 2, 7.5, 10, { h1: "1.5 m", s1: "2 m", H: "pole", S: "10 m" }), sh2: shadows(2, 1.6, 15, 12, { h1: "2 m", s1: "1.6 m", H: "tree", S: "12 m" }), sh16: shadows(1.6, 2.4, 14, 21, { h1: "1.6 m", s1: "2.4 m", H: "tree", S: "21 m" }), sh1: shadows(1, 0.8, 7.5, 6, { h1: "1 m", s1: "0.8 m", H: "flagpole", S: "6 m" }), sh12: shadows(1.2, 1.5, 3.2, 4, { h1: "1.2 m", s1: "1.5 m", H: "pole", S: "4 m" }), sh42: shadows(2, 2.8, 30, 42, { h1: "2 m", s1: "2.8 m", H: "building", S: "42 m" }),
+  mir1: mirror(1.5, 2, 16, 12, { e: "1.5 m", d1: "2 m", d2: "16 m", H: "building" }), mir2: mirror(1.7, 2.5, 20, 13.6, { e: "1.7 m", d1: "2.5 m", d2: "?", H: "13.6 m" }), mir3: mirror(1.5, 3, 18, 9, { e: "1.5 m", d1: "3 m", d2: "?", H: "9 m" }),
+  lamp1: lamp(1.8, 6, 6, 2.57, { p: "1.8 m", L: "6 m", d: "6 m", s: "shadow" }), lamp2: lamp(1.8, 4.8, 4, 2.4, { p: "1.8 m", L: "4.8 m", d: "4 m", s: "s" }), lamp3: lamp(1.8, 5.4, 6, 3, { p: "1.8 m", L: "5.4 m", d: "?", s: "3 m" }), lamp4: lamp(1.5, 4.5, 2, 1, { p: "1.5 m", L: "post", d: "2 m", s: "1 m" }), tips1: lamp(1.6, 5.6, 5, 2, { p: "1.6 m", L: "pole", d: "5 m", s: "2 m" }), tips2: lamp(1.6, 7.6, 9, 2.4, { p: "1.6 m", L: "tree", d: "9 m", s: "2.4 m" }),
+  rul1: ruler("15 cm", "50 cm", "100 m"), rul2: ruler("30 cm", "0.6 m", "?"), rul3: ruler("25 cm", "60 cm", "360 m"),
+  ramp1: ramp(5, 1, 3, { run: "5 m", rise: "1 m", x: "3 m" }), ramp2: ramp(8, 1.2, 6, { run: "8 m", rise: "1.2 m", x: "6 m" }), ramp3: ramp(12, 1.5, 0, { run: "12 m", rise: "1.5 m" }),
+  // chapter 6: trigonometry
+  t724: rt(24, 7, { run: "24", rise: "7", ang: "θ" }),
+  l460: rt(4 * cos(60), 4 * sin(60), { hyp: "4 m", ang: "60°" }, 200), l675: rt(6 * cos(75), 6 * sin(75), { hyp: "6 m", ang: "75°" }, 180), l774: rt(7 * cos(74), 7 * sin(74), { hyp: "7 m", ang: "74°" }, 180), l570: rt(5 * cos(70), 5 * sin(70), { hyp: "5 m", ang: "70°" }, 190), l618: rt(1.8, Math.sqrt(36 - 3.24), { hyp: "6 m", run: "1.8 m" }, 190), l545: rt(Math.sqrt(25 - 20.25), 4.5, { hyp: "5 m", rise: "4.5 m" }, 190), l772: rt(7 / tan(72), 7, { rise: "7 m", ang: "72°" }, 190),
+  k50: rt(50 * cos(48), 50 * sin(48), { hyp: "50 m", ang: "48°" }), k30: rt(30 * cos(60), 30 * sin(60), { hyp: "30 m", ang: "60°" }, 220), k80: rt(Math.sqrt(6400 - 3600), 60, { hyp: "80 m", rise: "60 m" }),
+  gw58: rt(15 / tan(58), 15, { rise: "15 m", ang: "58°" }, 220), gw20: rt(20, 35, { run: "20 m", rise: "35 m" }, 220), cl28: rt(120, 120 * tan(28), { run: "120 m", ang: "28°" }), tr52: rt(18, 18 * tan(52), { run: "18 m", ang: "52°" }, 240), po35: rt(8 / tan(35), 8, { rise: "8 m", ang: "35°" }),
+  b5030: rt(50, 30, { run: "50 m", rise: "30 m" }), p2045: rt(20, 20, { run: "20 m", ang: "45°" }, 240), tr3040: rt(30, 30 * tan(40), { run: "30 m", ang: "40°" }), b4570: rt(70, 45, { run: "70 m", rise: "45 m" }), p936: rt(12, 9, { run: "12 m", rise: "9 m" }), s1825: rt(2.5, 1.8, { run: "2.5 m", rise: "1.8 m" }),
+  d40: depress(120, 40, "?", "40 m", "boat"), d5030: depress(50 / tan(30), 50, "30°", "50 m", "boat"), d30: depress(100, 30, "?", "30 m", "boat"), d75: depress(75 / tan(15), 75, "15°", "75 m", "buoy"), d60: depress(60 / tan(40), 60, "40°", "60 m", "car"),
+  e15: eyes(1.5, 40, 1.5 + 40 * tan(30), { e: "1.5 m", d: "40 m", ang: "30°" }), e16: eyes(1.6, 55, 1.6 + 55 * tan(32), { e: "1.6 m", d: "55 m", ang: "32°" }), e17: eyes(1.7, 30, 25, { e: "1.7 m", d: "30 m", H: "25 m" }), e162: eyes(1.6, 80, 1.6 + 80 * tan(34), { e: "1.6 m", d: "80 m", ang: "34°" }), e152: eyes(1.5, 25, 20, { e: "1.5 m", d: "25 m", H: "20 m" }),
+  tw4028: towerAB(40, 28, 30, { A: "A", B: "B", gap: "30 m" }), tw5035: towerAB(50, 35, 20, { A: "P", B: "Q", gap: "20 m" }),
+  bt55s: boats(55, 42, 27, true, "55 m"), bt55o: boats(55, 42, 27, false, "55 m"), bt80: boats(80, 35, 20, true, "80 m"),
+  // chapter 7
+  s4560: asa(45, 60, { la: "a = 10" }), s5070: asa(50, 70, { la: "a = 8" }), s4065: asa(40, 65, { lb: "b = 12" }), s5872: asa(58, 72, { la: "a = 15" }), s3875: asa(38, 75, { la: "a = 12" }), s5668: asa(56, 68, { lc: "c = 25" }), s5550: asa(60, 50, { lc: "c = 10" }),
+  light: asa(48, 72, { lc: "15 km", names: ["A", "B", "ship"] }), fire: asa(50, 64, { lc: "20 km", names: ["A", "B", "fire"] }), riv: asa(75, 60, { lc: "90 m" }), buoy: asa(65, 70, { lc: "120 m" }), tree70: asa(70, 65, { lc: "50 m" }),
+  op4861: opposite(40, 48, 61, { gap: "40 m", top: "top" }), op5366: opposite(30, 53, 66, { gap: "30 m", top: "top" }), op5266: opposite(50, 52, 66, { gap: "50 m", top: "kite" }), op5258: opposite(60, 52, 58, { gap: "60 m", top: "top" }), hill: opposite(500, 58, 65, { gap: "500 m", top: "top" }),
+  sas560: sas(5, 6, 60), sas855: sas(8, 9, 55), sas1012: sas(10, 12, 48, { names: ["C", "A", "B"], lb: "a = 10", lc: "b = 12" }), sasPQR: sas(7, 10, 52, { names: ["P", "Q", "R"], lb: "q = 7", lc: "r = 10" }), sas911: sas(9, 11, 40, { names: ["", "", ""] }), sas1518: sas(15, 18, 66, { names: ["", "", ""] }), sas2024: sas(20, 24, 48, { names: ["C", "A", "B"], lb: "a = 20", lc: "b = 24" }), sas79: sas(7, 9, 40, { names: ["B", "A", "C"], lb: "a = 7", lc: "c = 9" }),
+  plane: sas(180, 240, 68, { names: ["turn", "", ""], lb: "180 km", lc: "240 km" }), ships: sas(8, 11, 52, { names: ["lighthouse", "Q", "P"], lb: "8 km", lc: "11 km" }), field: sas(240, 210, 52, { names: ["", "", ""], lb: "240 m", lc: "210 m" }), boats79: sas(7, 9, 55, { names: ["lighthouse", "", ""], lb: "7 km", lc: "9 km" }), surv: sas(150, 170, 45, { names: ["C", "B", "A"], lb: "150 m", lc: "170 m" }), tunnel: sas(520, 610, 55, { names: ["C", "B", "A"], lb: "520 m", lc: "610 m" }), trip: sas(30, 45, 70, { names: ["turn", "", "start"], lb: "30 km", lc: "45 km" }),
+  sss456: sss(4, 5, 6), sss789: sss(7, 8, 9), sss665: sss(6, 6, 5), s101112: sss(10, 11, 12), s578: sss(5, 7, 8), s111416: sss(11, 14, 16), s81112: sss(8, 11, 12), s131517: sss(13, 15, 17), s91012: sss(9, 10, 12), towns: tri3({ a: 33, b: 24, c: 30, la: "33 km", lb: "24 km", lc: "30 km", names: ["", "", ""] }), pqrD: tri3({ a: 9, b: 8, c: 11, la: "9 km", lb: "8 km", lc: "11 km", names: ["P", "R", "Q"] }),
+};

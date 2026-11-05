@@ -39,7 +39,7 @@ export const M = [
   mc(`Which line is parallel to $2x+3y=6$?`, "$4x+6y=-5$", ["$3x+2y=6$", "$2x-3y=6$", "$3x-2y=1$"], "Both have slope $-\\frac23$."),
   ms(`Select all points on the line $x-3y=6$.`, ["$(6,0)$", "$(0,-2)$", "$(3,-1)$", "$(9,2)$", "$(0,2)$"], [0, 1, 2], "Substitute each point: $(9,2)$ gives $3$ and $(0,2)$ gives $-6$."),
   num(`A gym charges a sign-up fee plus a monthly fee. Three months cost 115 dollars and seven months cost 215 dollars. What is the monthly fee (dollars)?`, 25, "$\\frac{215-115}{7-3}=25$."),
-  num(`For the gym in the previous situation (3 months: 115 dollars; 7 months: 215 dollars), what is the sign-up fee (dollars)?`, 40, "$115-3(25)=40$."),
+  num(`A gym charges a sign-up fee plus a monthly fee. Three months cost 115 dollars and seven months cost 215 dollars. What is the sign-up fee (dollars)?`, 40, "Monthly fee $25$; $115-3(25)=40$."),
   num(`Find $k$ so that the line through $(1,k)$ and $(4,10)$ has slope $2$.`, 4, "$\\frac{10-k}{3}=2\\Rightarrow k=4$."),
   tf(`The lines $y=3x+1$ and $y=-\\frac13x+5$ are perpendicular.`, true, "$3\\times\\left(-\\frac13\\right)=-1$."),
   mx(`Find the equation of the line shown. Type the right side of $y=\\ldots$`, "-1/2*x+3", "Intercepts $(6,0)$ and $(0,3)$: $m=-\\frac12$, $b=3$.", planeDoc({ view: { xmin: -2, xmax: 8, ymin: -2, ymax: 5 }, lines: [{ m: -0.5, b: 3, color: "violet" }], points: [{ x: 6, y: 0, label: "(6, 0)" }, { x: 0, y: 3, label: "(0, 3)" }], step: { x: 1, y: 1 } })),

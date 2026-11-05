@@ -1,3 +1,4 @@
+import { FIG } from "../../mhf4u-bank-figures/figs.mjs";
 // 2.4 Families of Polynomial Functions — 20 hard questions
 import { mc, num, tf } from "./kit.mjs";
 import { graph, planeDoc, P } from "./fig.mjs";
@@ -18,7 +19,7 @@ export const Q = [
   num(String.raw`A quartic has a double zero at 0 and zeros $\pm3$, and passes through $(1,-16)$. Find $f(2)$.`, -40, "kx²(x² − 9): k(1)(−8) = −16 → k = 2; f(2) = 2(4)(−5)."),
   num(String.raw`Find the larger zero of the factor $x^2-4x+1$ (2 decimals).`, 3.732, "2 + √3.", null, 0.006),
   mc(String.raw`Which is the family of quartics with zeros $1\pm\sqrt3$ and $\pm1$?`, String.raw`$y=k(x^2-2x-2)(x^2-1)$`, [String.raw`$y=k(x^2-2x+2)(x^2-1)$`, String.raw`$y=k(x^2+2x-2)(x^2+1)$`, String.raw`$y=k(x^2-3)(x^2-1)$`], "(x − 1)² − 3 = x² − 2x − 2."),
-  num(String.raw`A parabola has zeros 1 and 5 and vertex $(3,-8)$. Find its leading coefficient.`, 2, "k(2)(−2) = −8."),
+  num(String.raw`A parabola has zeros 1 and 5 and vertex $(3,-8)$. Find its leading coefficient.`, 2, "k(2)(−2) = −8.", FIG.par15),
   num(String.raw`The member of $y=k(x-1)(x-2)(x-3)$ through $(4,6)$ has what y-intercept?`, -6, "6k = 6 → k = 1; f(0) = −6."),
   tf("If a quartic has real zeros only at 2 and 3, and all four of its zeros are real, at least one of them is repeated.", true, "Four zeros counted by order, only two distinct values."),
   num(String.raw`The member of $y=k(x+2)(x-1)^2$ through $(2,8)$ has what y-intercept?`, 4, "k(4)(1) = 8 → k = 2; f(0) = 2(2)(1)."),

@@ -39,7 +39,7 @@ export const M = [
   num(S`By how many decibels does the level rise when the intensity doubles? (two decimals)`, 10 * L(2), "10 log 2.", null, 0.01),
   num(S`A population triples in $8$ years. What is its annual growth rate, in percent? (two decimals)`, (3 ** (1 / 8) - 1) * 100, "b⁸ = 3 ⇒ b ≈ 1.1472.", null, 0.01),
   num(S`Coffee at $80^\circ$C in a $20^\circ$C room: the difference halves every $10$ min. What is its temperature after $15$ min? (one decimal)`, 20 + 60 * 0.5 ** 1.5, "20 + 60(0.5)^1.5.", null, 0.1),
-  num(S`With the coffee above, when is it $40^\circ$C? (one decimal, minutes)`, 10 * L(20 / 60) / L(0.5), "60(0.5)^(t/10) = 20.", null, 0.1),
+  num(S`Coffee at $80^\circ$C in a $20^\circ$C room: the difference halves every $10$ min. When is it $40^\circ$C? (one decimal, minutes)`, 10 * L(20 / 60) / L(0.5), "60(0.5)^(t/10) = 20.", null, 0.1),
   mc(S`A model through $(0,40)$ and $(3,320)$ is $y=40b^t$. Find $b$.`, "2", ["8", "3", "280/3"], "b³ = 8."),
   mc(S`Which change makes money double sooner?`, "a higher rate", ["a larger deposit", "a smaller deposit", "a longer term"], "The deposit cancels; only the rate and compounding matter."),
   ms(S`Select every model that shows decay.`, [S`$A=50(0.9)^t$`, S`$A=50\left(\tfrac12\right)^{t/3}$`, S`$A=50(1.1)^{-t}$`, S`$A=50(2)^{t/3}$`], [0, 1, 2], "1.1⁻ᵗ = (1/1.1)ᵗ also decays."),

@@ -7,7 +7,7 @@ const L = Math.log10;
 export const TOPIC = "7.5 Exponential and Logarithmic Models";
 export const Q = [
   num(S`A culture has $800$ cells at $t=2$ h and $5000$ at $t=6$ h. Find the doubling time (two decimals).`, 4 * L(2) / L(6.25), "2^(4/d) = 6.25.", null, 0.01),
-  num(S`For the culture above, how many cells were there at $t=0$? (nearest whole)`, 800 / 6.25 ** 0.5, "b⁴ = 6.25 ⇒ b² = 2.5, so a = 800/2.5 = 320.", null, 1),
+  num(S`A culture has $800$ cells at $t=2$ h and $5000$ at $t=6$ h. How many cells were there at $t=0$? (nearest whole)`, 800 / 6.25 ** 0.5, "b⁴ = 6.25 ⇒ b² = 2.5, so a = 800/2.5 = 320.", null, 1),
   num(S`4000 dollars at $5\%$ compounded monthly and 5000 dollars at $3\%$ compounded annually: when are they equal? (two decimals)`, L(1.25) / L((1 + 0.05 / 12) ** 12 / 1.03), "((1 + 0.05/12)¹²/1.03)ᵗ = 1.25.", null, 0.02),
   num(S`A substance has a half-life of $3$ h. What percent decays each hour? (two decimals)`, 100 * (1 - 0.5 ** (1 / 3)), "Hourly factor 0.5^(1/3) ≈ 0.7937.", null, 0.01),
   num(S`Soup cools from $95^\circ$C to $75^\circ$C in $8$ min in a $21^\circ$C room. When is it $40^\circ$C? (one decimal)`, 8 * L(19 / 74) / L(54 / 74), "Difference 74 → 54 in 8 min; solve (54/74)^(t/8) = 19/74.", null, 0.1),

@@ -1,3 +1,4 @@
+import { FIG } from "../../mhf4u-bank-figures/figs.mjs";
 // 1.3 Equations and Graphs of Polynomial Functions — 20 hard questions
 import { mc, ms, num, tf } from "./kit.mjs";
 import { graph, P } from "./fig.mjs";
@@ -13,7 +14,7 @@ export const Q = [
   num("The graph shows a polynomial of least degree that touches the x-axis at −1 and crosses with a flat bend at 2. What is its degree?", 5, "Order 2 at −1 and order 3 at 2: 2 + 3.", graph((x) => 0.1 * (x + 1) ** 2 * (x - 2) ** 3, { xmin: -2.5, xmax: 3.2, ymin: -3, ymax: 3 }, [P(-1, 0), P(2, 0)])),
   tf(String.raw`A polynomial has zeros only at 1 and 4. If $f(0)>0$ and $f(2)<0$, then the zero at 1 has odd order.`, true, "The sign changes across x = 1."),
   num(String.raw`$f(x)=(x-1)(x+2)(x-k)$ has y-intercept 10. Find $k$.`, 5, "(−1)(2)(−k) = 2k = 10."),
-  num(String.raw`An open box made from a 10 by 16 sheet has volume $V=x(10-2x)(16-2x)$. Find $V(2)$.`, 144, "2 · 6 · 12."),
+  num(String.raw`An open box made from a 10 by 16 sheet has volume $V=x(10-2x)(16-2x)$. Find $V(2)$.`, 144, "2 · 6 · 12.", FIG.sheet),
   mc(String.raw`Which cubic has a zero at $-1$, a double zero at 2, and passes through $(1,-8)$?`, String.raw`$y=-4(x+1)(x-2)^2$`, [String.raw`$y=4(x+1)(x-2)^2$`, String.raw`$y=-4(x-1)(x+2)^2$`, String.raw`$y=-2(x+1)(x-2)^2$`], "a(2)(1) = 2a = −8 → a = −4."),
   num(String.raw`Find the sum of the zeros of $f(x)=2x^3-8x^2-10x$.`, 4, "2x(x − 5)(x + 1): 0 + 5 − 1."),
   num(String.raw`The quartic shown is symmetric about the y-axis, has zeros $\pm1$ and $\pm3$, and y-intercept 4.5. Find $f(2)$.`, -7.5, "f = a(x² − 1)(x² − 9); 9a = 4.5 → a = ½; f(2) = ½(3)(−5).", graph((x) => 0.5 * (x * x - 1) * (x * x - 9), { xmin: -3.5, xmax: 3.5, ymin: -9, ymax: 6 }, [P(0, 4.5)], { step: { x: 1, y: 1 } }), 0.001),

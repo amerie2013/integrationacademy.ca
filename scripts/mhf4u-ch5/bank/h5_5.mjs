@@ -1,3 +1,4 @@
+import { FIG } from "../../mhf4u-bank-figures/figs.mjs";
 // 5.5 Trigonometric Models and Rates of Change — 20 hard questions
 import { mc, num, tf, ms } from "./kit.mjs";
 import { planeDoc } from "./fig.mjs";
@@ -10,9 +11,9 @@ const OT = { step: { x: 2, y: 1 }, xlabel: "t (h)" };
 
 export const TOPIC = "5.5 Trigonometric Models and Rates of Change";
 export const Q = [
-  mc("High tide 8.8 m at 4:00, next low tide 1.6 m at 10:12. Which model fits (t in hours after midnight)?", S`$d=3.6\cos\left(\frac{2\pi}{12.4}(t-4)\right)+5.2$`, [S`$d=3.6\cos\left(\frac{2\pi}{6.2}(t-4)\right)+5.2$`, S`$d=7.2\cos\left(\frac{2\pi}{12.4}(t-4)\right)+5.2$`, S`$d=3.6\sin\left(\frac{2\pi}{12.4}(t-4)\right)+5.2$`], "a = (8.8 − 1.6)/2, c = (8.8 + 1.6)/2; half period 6.2 h gives period 12.4 h; cosine peaks at t = 4."),
-  num("For that tide model, find the depth at noon (t = 12), to one decimal.", tide(12), "d(12) = 3.6 cos(2π·8/12.4) + 5.2 ≈ 3.0 m.", null, 0.06),
-  num("For that tide model, find the time of the second high tide after midnight, in hours (one decimal).", 16.4, "High tides are one period apart: 4 + 12.4 = 16.4.", null, 0.05),
+  mc("High tide 8.8 m at 4:00, next low tide 1.6 m at 10:12. Which model fits (t in hours after midnight)?", S`$d=3.6\cos\left(\frac{2\pi}{12.4}(t-4)\right)+5.2$`, [S`$d=3.6\cos\left(\frac{2\pi}{6.2}(t-4)\right)+5.2$`, S`$d=7.2\cos\left(\frac{2\pi}{12.4}(t-4)\right)+5.2$`, S`$d=3.6\sin\left(\frac{2\pi}{12.4}(t-4)\right)+5.2$`], "a = (8.8 − 1.6)/2, c = (8.8 + 1.6)/2; half period 6.2 h gives period 12.4 h; cosine peaks at t = 4.", FIG.tide88),
+  num("High tide 8.8 m at 4:00, next low tide 1.6 m at 10:12. Using a sinusoidal model (t in hours after midnight), find the depth at noon (t = 12), to one decimal.", tide(12), "d(12) = 3.6 cos(2π·8/12.4) + 5.2 ≈ 3.0 m.", FIG.tide88, 0.06),
+  num("High tide 8.8 m at 4:00, next low tide 1.6 m at 10:12. Using a sinusoidal model, find the time of the second high tide after midnight, in hours (one decimal).", 16.4, "High tides are one period apart: 4 + 12.4 = 16.4.", FIG.tide88, 0.05),
   mc("A ship needs at least 4 m of water. Using the graph of the tide, which is closest to the first interval after midnight when it is NOT safe?", "about 7.8 h to 12.6 h", ["about 4 h to 10.2 h", "about 0 h to 4 h", "about 10.2 h to 16.4 h"], "Solve 3.6cos(...) + 5.2 = 4: cos(...) = −1/3, giving t ≈ 7.8 and t ≈ 12.6.", planeDoc(TG([[tide, "violet"], [() => 4, "blue"]], VT, [], OT))),
   num(S`A wheel of radius $15$ m turns every $60$ s. What is the greatest vertical speed of a rider, in m/s (three decimals)?`, (15 * 2 * P) / 60, "Greatest rate = a·k = 15 · 2π/60 = π/2 ≈ 1.571.", null, 0.002),
   num(S`For $h=-15\cos\left(\frac\pi{30}t\right)+17$, find the average rate of change from $t=20$ to $t=40$.`, 0, "h(20) = −15cos(2π/3) + 17 = 24.5 and h(40) = −15cos(4π/3) + 17 = 24.5, so the change is 0."),
@@ -28,6 +29,6 @@ export const Q = [
   mc("The graph shows a rider's height. What is the model?", S`$h=-9\cos\left(\frac\pi{25}t\right)+11$`, [S`$h=9\cos\left(\frac\pi{25}t\right)+11$`, S`$h=-11\cos\left(\frac\pi{25}t\right)+9$`, S`$h=-9\cos\left(\frac\pi{50}t\right)+11$`], "Min 2, max 20: a = 9, c = 11; period 50 s so k = π/25; starts at the bottom.", planeDoc(TG([[(t) => -9 * Math.cos((P / 25) * t) + 11, "violet"]], { xmin: -2, xmax: 105, ymin: 0, ymax: 22 }, [], { step: { x: 10, y: 2 }, xlabel: "t (s)" }))),
   mc("The graph shows the height of a rider. Which time has the greatest downward speed?", "t = 37.5 s", ["t = 25 s", "t = 12.5 s", "t = 50 s"], "Falling through the axis: three-quarters of the 50 s period.", planeDoc(TG([[(t) => -9 * Math.cos((P / 25) * t) + 11, "violet"]], { xmin: -2, xmax: 55, ymin: 0, ymax: 22 }, [], { step: { x: 5, y: 2 }, xlabel: "t (s)" }))),
   mc("The graph shows the tide and the line d = 7. During the first 12 h, roughly when is the depth above 7 m?", "from about 1.9 h to 6.1 h", ["from about 6.1 h to 13.7 h", "from 0 h to 4 h", "from about 4 h to 10.2 h"], "cos(2π(t − 4)/12.4) > 0.5 when |t − 4| < 12.4/6 ≈ 2.07.", planeDoc(TG([[tide, "violet"], [() => 7, "blue"]], VT, [], OT))),
-  num(S`For the tide model, how many hours per cycle is the depth above $7$ m (two decimals)?`, 12.4 / 3, "One third of the 12.4 h period: 4.13 h.", null, 0.02),
+  num(S`High tide 8.8 m at 4:00, next low tide 1.6 m at 10:12. Using a sinusoidal model, how many hours per cycle is the depth above $7$ m (two decimals)?`, 12.4 / 3, "One third of the 12.4 h period: 4.13 h.", FIG.tide88, 0.02),
   mc("A sinusoidal model is used to predict the tide 3 months ahead. What is the main weakness?", "small errors in the period add up over many cycles", ["the amplitude must be 0", "sinusoids cannot model tides", "the rate of change is always 0"], "A period error of minutes per cycle shifts the predicted times by hours after many cycles."),
 ];

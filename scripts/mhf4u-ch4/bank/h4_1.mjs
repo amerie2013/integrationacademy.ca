@@ -1,3 +1,4 @@
+import { FIG } from "../../mhf4u-bank-figures/figs.mjs";
 // 4.1 Radian Measure — 20 hard questions
 import { mc, num, tf } from "./kit.mjs";
 import { planeDoc } from "./fig.mjs";
@@ -12,13 +13,13 @@ export const Q = [
   num(S`Find the angle between the hands of a clock at 2:30, in radians (2 decimals).`, 1.83, "The hands are 105° apart.", null, 0.01),
   num(S`A belt joins pulleys of radii 4 cm and 10 cm. The large pulley turns through 2 rad. Through how many radians does the small pulley turn?`, 5, "Equal arcs: 20 = 4θ."),
   num(S`A belt joins pulleys of radii 3 cm and 12 cm. The small pulley makes 8 revolutions. How many revolutions does the large one make?`, 2, "Revolutions scale inversely with the radius."),
-  num(S`A sector has perimeter 24 cm and radius 8 cm. Find its area in cm².`, 32, "Arc 8, θ = 1; A = ½(64)(1)."),
-  num(S`A sector has area $24\pi$ and angle $\frac{3\pi}4$. Find its radius (2 decimals).`, 8, "½r²(3π/4) = 24π gives r² = 64."),
+  num(S`A sector has perimeter 24 cm and radius 8 cm. Find its area in cm².`, 32, "Arc 8, θ = 1; A = ½(64)(1).", FIG.sP),
+  num(S`A sector has area $24\pi$ and angle $\frac{3\pi}4$. Find its radius (2 decimals).`, 8, "½r²(3π/4) = 24π gives r² = 64.", FIG.sA),
   num(S`The tire of a car has radius 0.3 m and turns at 40 rad/s. Find the car's speed in km/h (1 decimal).`, 43.2, "12 m/s × 3.6.", null, 0.1),
   num(S`A car moves at 90 km/h on tires of radius 0.35 m. Find the angular speed in rad/s (1 decimal).`, 71.4, "25 m/s ÷ 0.35.", null, 0.1),
   num(S`A satellite orbits at radius 8000 km, completing one orbit in 2 h. Find its speed in km/h, to the nearest km/h.`, 25133, "2π(8000)/2.", null, 1),
-  num(S`Two cities on the same meridian are separated by a central angle of $0.35$ rad, on a sphere of radius 6400 km. Find their distance in km along the surface.`, 2240, "s = rθ."),
-  mc(S`A pendulum of length 60 cm swings through an arc of 25 cm. What is the swing angle?`, S`about $23.9^\circ$`, [S`about $41.7^\circ$`, S`about $0.42^\circ$`, S`about $12^\circ$`], "25/60 rad × 180/π."),
+  num(S`Two cities on the same meridian are separated by a central angle of $0.35$ rad, on a sphere of radius 6400 km. Find their distance in km along the surface.`, 2240, "s = rθ.", FIG.earth),
+  mc(S`A pendulum of length 60 cm swings through an arc of 25 cm. What is the swing angle?`, S`about $23.9^\circ$`, [S`about $41.7^\circ$`, S`about $0.42^\circ$`, S`about $12^\circ$`], "25/60 rad × 180/π.", FIG.pend),
   mc("The shaded sector has angle 2π/3 and area 12π. What is its radius?", "6", ["4", "12", "18"], "½r²(2π/3) = 12π gives r² = 36.", planeDoc(SECTOR(6, (2 * Math.PI) / 3))),
   mc("A point moves counterclockwise on the unit circle from (1, 0) along an arc of length 7π/6. Where is it?", "at the marked point", ["at (0, 1)", "at (−1, 0)", "at (1, 0)"], "On a unit circle the arc length is the angle: 210°.", planeDoc(UC(210, "?"))),
   mc("The marked point is at angle θ. Which is a coterminal angle with θ?", S`$\frac{17\pi}6$`, [S`$\frac{7\pi}6$`, S`$\frac{11\pi}6$`, S`$\frac{5\pi}3$`], "θ = 5π/6; add 2π.", planeDoc(UC(150, "θ"))),

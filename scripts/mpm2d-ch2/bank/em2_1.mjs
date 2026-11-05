@@ -1,3 +1,4 @@
+import { FIG } from "../../mpm2d-bank-figures/figs.mjs";
 // 2.1 Midpoint of a Line Segment — 20 easy + 20 medium questions
 import { mc, ms, num, tf, fill } from "./kit.mjs";
 import { planeDoc } from "./fig.mjs";
@@ -33,12 +34,12 @@ export const M = [
   mc(`$M(-1,2)$ is the midpoint of $AB$ with $A(3,-4)$. Find $B$.`, "$(-5,8)$", ["$(1,-1)$", "$(-4,6)$", "$(5,-10)$"], "$B=2M-A$."),
   num(`$M(0,-3)$ is the midpoint of $AB$ with $A(-4,5)$. What is the $y$-coordinate of $B$?`, -11, "$2(-3)-5$."),
   num(`A diameter of a circle joins $(-9,4)$ and $(3,-6)$. What is the $x$-coordinate of the centre?`, -3, "$\\frac{-9+3}{2}$."),
-  num(`$ABCD$ is a parallelogram with $A(1,1)$, $B(5,2)$, $C(6,6)$. What is the $y$-coordinate of $D$?`, 5, "$D=A+C-B=(2,5)$."),
+  num(`$ABCD$ is a parallelogram with $A(1,1)$, $B(5,2)$, $C(6,6)$. What is the $y$-coordinate of $D$?`, 5, "$D=A+C-B=(2,5)$.", FIG.par3),
   ms(`Select all segments whose midpoint is $(2,1)$.`, ["$(0,0)$ and $(4,2)$", "$(-1,3)$ and $(5,-1)$", "$(2,0)$ and $(2,2)$", "$(1,1)$ and $(3,2)$", "$(4,1)$ and $(0,-1)$"], [0, 1, 2], "$(1,1),(3,2)$ gives $(2,1.5)$; $(4,1),(0,-1)$ gives $(2,0)$."),
   num(`The midpoint of $(k,4)$ and $(6,-2)$ is $(1,1)$. Find $k$.`, -4, "$\\frac{k+6}{2}=1$."),
   tf(`The diagonals of $ABCD$ with $A(0,0)$, $B(4,0)$, $C(5,3)$, $D(1,3)$ bisect each other.`, true, "Both diagonals have midpoint $(2.5,1.5)$."),
   num(`Find the $y$-coordinate of the point one quarter of the way from $(0,0)$ to $(8,12)$.`, 3, "Midpoint $(4,6)$; midpoint of the first half $(2,3)$."),
-  mc(`In the right triangle $(0,0)$, $(6,0)$, $(0,8)$, what is the midpoint of the hypotenuse?`, "$(3,4)$", ["$(3,0)$", "$(0,4)$", "$(2,2.7)$"], "Hypotenuse from $(6,0)$ to $(0,8)$."),
+  mc(`In the right triangle $(0,0)$, $(6,0)$, $(0,8)$, what is the midpoint of the hypotenuse?`, "$(3,4)$", ["$(3,0)$", "$(0,4)$", "$(2,2.7)$"], "Hypotenuse from $(6,0)$ to $(0,8)$.", FIG.g068),
   fill(`A circle has centre $(2,-1)$ and one end of a diameter at $(5,3)$. The other end is $(-1,$ ___$)$.`, ["-5"], "$2(-1)-3$."),
   num(`$M(a,3)$ is the midpoint of $(1,5)$ and $(7,1)$. Find $a$.`, 4, "$\\frac{1+7}{2}$."),
   mc(`In which quadrilateral do the diagonals always bisect each other?`, "parallelogram", ["trapezoid", "kite", "any quadrilateral"], "A rectangle, rhombus and square are special parallelograms."),

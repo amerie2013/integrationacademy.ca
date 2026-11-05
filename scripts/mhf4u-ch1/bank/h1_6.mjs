@@ -1,3 +1,4 @@
+import { FIG } from "../../mhf4u-bank-figures/figs.mjs";
 // 1.6 Slopes of Tangents and Instantaneous Rate of Change — 20 hard questions
 import { mc, ms, num, tf } from "./kit.mjs";
 import { graph, P } from "./fig.mjs";
@@ -14,7 +15,7 @@ export const Q = [
   num("A ball's height is h(t) = −4.9t² + 14.7t + 1 m. Find its exact velocity at t = 1 s.", 4.9, "−4.9(2 + h) + 14.7 → −9.8 + 14.7.", graph((x) => -4.9 * x * x + 14.7 * x + 1, { xmin: -0.3, xmax: 3.3, ymin: -1, ymax: 13 }, [P(1, 10.8)], { a: 0, step: { x: 0.5, y: 2 } }), 0.001),
   tf(String.raw`If every tangent slope of $f$ on $(0,3)$ is positive, then $f(3)>f(0)$ (for a smooth $f$).`, true, "f increases throughout the interval."),
   num(String.raw`The tangent to $y=x^2$ at $x=a$ ($a>0$) passes through $(0,-9)$. Find $a$.`, 3, "Tangent y = 2ax − a²; y-intercept −a² = −9."),
-  num(String.raw`On $y=x^2$, at what x-value is the tangent parallel to the secant from $x=1$ to $x=7$?`, 4, "Secant slope 8 = 2a."),
+  num(String.raw`On $y=x^2$, at what x-value is the tangent parallel to the secant from $x=1$ to $x=7$?`, 4, "Secant slope 8 = 2a.", FIG.secant),
   ms("At which labelled points on y = x³ − 3x is the instantaneous rate of change 0? Select all.", ["A", "B", "C", "D"], [0, 2], "A and C are turning points; at B the graph falls, at D it rises.", graph((x) => x ** 3 - 3 * x, { xmin: -2.5, xmax: 2.5, ymin: -3, ymax: 3 }, [P(-1, 2, "A"), P(0, 0, "B"), P(1, -2, "C"), P(2, 2, "D")])),
   num(String.raw`An object's position is $s(t)=t^3$ m. Use $(2+h)^3$ to find its exact velocity at $t=2$.`, 12, "(12h + 6h² + h³)/h → 12."),
   num(String.raw`Estimate the rate of change of $A(t)=1000(1.05)^t$ at $t=10$ (2 decimals).`, 79.47, "A short centred interval gives ≈ 79.47 dollars per year.", null, 0.05),

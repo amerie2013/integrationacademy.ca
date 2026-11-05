@@ -1,3 +1,4 @@
+import { FIG } from "../../mhf4u-bank-figures/figs.mjs";
 // 5.5 Trigonometric Models and Rates of Change — 20 easy + 20 medium questions
 import { mc, num, tf, fill, ms } from "./kit.mjs";
 import { planeDoc } from "./fig.mjs";
@@ -7,8 +8,8 @@ const P = Math.PI;
 const wheel = (t) => -10 * Math.cos((P / 20) * t) + 12;
 
 export const E = [
-  num(S`A Ferris wheel has radius $12$ m and its centre is $14$ m above the ground. What is the greatest height of a rider?`, 26, "Top = centre + radius = 14 + 12."),
-  num(S`For the same wheel (radius $12$ m, centre $14$ m), what is the least height of a rider?`, 2, "Bottom = centre − radius = 14 − 12."),
+  num(S`A Ferris wheel has radius $12$ m and its centre is $14$ m above the ground. What is the greatest height of a rider?`, 26, "Top = centre + radius = 14 + 12.", FIG.w1214),
+  num(S`A Ferris wheel has radius $12$ m and its centre is $14$ m above the ground. What is the least height of a rider?`, 2, "Bottom = centre − radius = 14 − 12.", FIG.w1214),
   num(S`A wheel turns once every $40$ s. What is $k$ in $h=a\cos(kt)+c$? Give three decimals.`, (2 * P) / 40, "k = 2π/period = 2π/40 = π/20 ≈ 0.157.", null, 0.002),
   num(S`For $h(t)=5\sin\left(\frac\pi6t\right)+8$, what is the period?`, 12, "2π/(π/6) = 12."),
   num(S`For $h(t)=5\sin\left(\frac\pi6t\right)+8$, what is the maximum value?`, 13, "c + |a| = 8 + 5."),
@@ -26,14 +27,14 @@ export const E = [
   num(S`For $y=\cos t$, find the average rate of change from $t=0$ to $t=\pi$ (two decimals).`, -2 / P, "(−1 − 1)/π ≈ −0.64.", null, 0.01),
   mc("Daylight in a city varies over 365 days. What is k?", S`$\frac{2\pi}{365}$`, [S`$\frac{365}{2\pi}$`, S`$365$`, S`$\frac\pi{365}$`], "k = 2π/period."),
   mc("The graph shows the height of a rider. What is the period?", "40 s", ["20 s", "22 s", "10 s"], "The rider is back at the bottom at t = 40.", planeDoc(TG([[wheel, "violet"]], { xmin: -2, xmax: 85, ymin: 0, ymax: 25 }, [], { step: { x: 10, y: 5 }, xlabel: "t (s)" }))),
-  mc("From the same graph, what is the rider's maximum height?", "22 m", ["12 m", "10 m", "20 m"], "Centre 12 + radius 10.", planeDoc(TG([[wheel, "violet"]], { xmin: -2, xmax: 85, ymin: 0, ymax: 25 }, [{ x: 20, y: 22, label: "(20, 22)" }], { step: { x: 10, y: 5 }, xlabel: "t (s)" }))),
+  mc("The graph shows the height of a rider. What is the rider's maximum height?", "22 m", ["12 m", "10 m", "20 m"], "Centre 12 + radius 10.", planeDoc(TG([[wheel, "violet"]], { xmin: -2, xmax: 85, ymin: 0, ymax: 25 }, [{ x: 20, y: 22, label: "(20, 22)" }], { step: { x: 10, y: 5 }, xlabel: "t (s)" }))),
 ];
 
 export const M = [
-  mc("A wheel has radius 8 m, centre 9 m high, period 30 s; a rider boards at the bottom at t = 0. Which model fits?", S`$h=-8\cos\left(\frac\pi{15}t\right)+9$`, [S`$h=8\cos\left(\frac\pi{15}t\right)+9$`, S`$h=-8\cos(30t)+9$`, S`$h=-9\cos\left(\frac\pi{15}t\right)+8$`], "a = −8 (start at bottom), k = 2π/30 = π/15, c = 9."),
+  mc("A wheel has radius 8 m, centre 9 m high, period 30 s; a rider boards at the bottom at t = 0. Which model fits?", S`$h=-8\cos\left(\frac\pi{15}t\right)+9$`, [S`$h=8\cos\left(\frac\pi{15}t\right)+9$`, S`$h=-8\cos(30t)+9$`, S`$h=-9\cos\left(\frac\pi{15}t\right)+8$`], "a = −8 (start at bottom), k = 2π/30 = π/15, c = 9.", FIG.w89),
   num(S`For $h=-8\cos\left(\frac\pi{15}t\right)+9$, find $h(5)$.`, 5, "cos(π/3) = 1/2, so h = −4 + 9 = 5."),
   num(S`For $h=-8\cos\left(\frac\pi{15}t\right)+9$, find the first time $t>0$ when $h=13$.`, 10, "cos(πt/15) = −1/2, so πt/15 = 2π/3 and t = 10."),
-  mc("High tide 10 m at t = 0, low tide 2 m at t = 6 h. Which model fits?", S`$d=4\cos\left(\frac\pi6t\right)+6$`, [S`$d=4\cos\left(\frac\pi{12}t\right)+6$`, S`$d=8\cos\left(\frac\pi6t\right)+2$`, S`$d=4\sin\left(\frac\pi6t\right)+6$`], "a = 4, c = 6, period 12 h so k = π/6, cos starts at high tide."),
+  mc("High tide 10 m at t = 0, low tide 2 m at t = 6 h. Which model fits?", S`$d=4\cos\left(\frac\pi6t\right)+6$`, [S`$d=4\cos\left(\frac\pi{12}t\right)+6$`, S`$d=8\cos\left(\frac\pi6t\right)+2$`, S`$d=4\sin\left(\frac\pi6t\right)+6$`], "a = 4, c = 6, period 12 h so k = π/6, cos starts at high tide.", FIG.tide102),
   num(S`For $d=4\cos\left(\frac\pi6t\right)+6$, find the average rate of change from $t=0$ to $t=3$ (m/h, two decimals).`, -4 / 3, "d(0) = 10, d(3) = 6: (6 − 10)/3 ≈ −1.33.", null, 0.01),
   num(S`For $d=4\cos\left(\frac\pi6t\right)+6$, estimate the instantaneous rate at $t=3$ (two decimals).`, -4 * (P / 6), "At the axis crossing the rate is −a·k = −4(π/6) ≈ −2.09 m/h.", null, 0.02),
   ms(S`For $d=4\cos\left(\frac\pi6t\right)+6$, select every time in $[0,12]$ where the rate of change is $0$.`, ["0", "3", "6", "9", "12"], [0, 2, 4], "The rate is 0 at highs (t = 0, 12) and the low (t = 6)."),
@@ -48,6 +49,6 @@ export const M = [
   mc("A pendulum's angle swings between −15° and 15° with period 2 s, starting at 15°. Which model fits?", S`$\theta=15\cos(\pi t)$`, [S`$\theta=15\cos(2t)$`, S`$\theta=30\cos(\pi t)$`, S`$\theta=15\sin(\pi t)$`], "k = 2π/2 = π; cosine starts at the maximum."),
   num(S`Daylight is $D=3\sin\left(\frac{2\pi}{365}(t-80)\right)+12$. Find the day of the year with the least daylight (nearest day).`, 354, "Min when the inside is 3π/2: t − 80 = 3/4 · 365 = 273.75, t ≈ 354.", null, 1),
   mc("The graph shows the depth of water. Estimate the average rate of change from t = 0 to t = 3.", "−2 m/h", ["2 m/h", "−6 m/h", "0 m/h"], "From 12 m down to 6 m in 3 h: −6/3 = −2.", planeDoc(TG([[(t) => 6 * Math.cos((P / 6) * t) + 6, "violet"]], { xmin: -0.5, xmax: 13, ymin: -1, ymax: 13 }, [{ x: 0, y: 12 }, { x: 3, y: 6 }], { step: { x: 1, y: 2 }, xlabel: "t (h)", segs: [{ pts: [[0, 12], [3, 6]], color: "red" }] }))),
-  mc("From the same graph, at which time in [0, 12] is the depth changing fastest while rising?", "t = 9", ["t = 6", "t = 3", "t = 12"], "Rising through the axis d = 6 happens at t = 9.", planeDoc(TG([[(t) => 6 * Math.cos((P / 6) * t) + 6, "violet"]], { xmin: -0.5, xmax: 13, ymin: -1, ymax: 13 }, [], { step: { x: 1, y: 2 }, xlabel: "t (h)" }))),
+  mc("The graph shows the depth of water. At which time in [0, 12] is the depth changing fastest while rising?", "t = 9", ["t = 6", "t = 3", "t = 12"], "Rising through the axis d = 6 happens at t = 9.", planeDoc(TG([[(t) => 6 * Math.cos((P / 6) * t) + 6, "violet"]], { xmin: -0.5, xmax: 13, ymin: -1, ymax: 13 }, [], { step: { x: 1, y: 2 }, xlabel: "t (h)" }))),
   fill(S`For $y=a\sin(kt)+c$, the greatest instantaneous rate of change is $|a|$ times ____.`, ["|k|", "k"], "Steepest at the axis, with slope a·k."),
 ];

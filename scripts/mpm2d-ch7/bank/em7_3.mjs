@@ -1,3 +1,4 @@
+import { FIG } from "../../mpm2d-bank-figures/figs.mjs";
 // 7.3 Choosing the Right Law — 20 easy + 20 medium questions (values computed, rounded as asked)
 import { mc, ms, num, tf, fill } from "./kit.mjs";
 import { atriDoc, sasDoc, sssDoc, rtADoc } from "./fig.mjs";
@@ -43,7 +44,7 @@ export const M = [
   a1(`In acute $\\triangle ABC$, $b=9$, $c=12$ and $\\angle A=55^\\circ$. Find $\\angle B$ (cosine law first, then sine law).`, asin((9 * sin(55)) / cl(9, 12, 55)), "$a=\\sqrt{81+144-216\\cos55^\\circ}$; $\\sin B=\\frac{9\\sin55^\\circ}{a}$"),
   ms(`Select all cases where the sine law can be used first.`, ["AAS", "ASA", "SSA (acute triangle)", "SAS", "SSS"], [0, 1, 2], "Those give (or quickly give) a side–angle pair."),
   mc(`A student uses the cosine law with $b=8$, $c=10$ and $\\angle B=50^\\circ$. What is wrong?`, "$\\angle B$ is not between $b$ and $c$; this is SSA, so use the sine law", ["nothing", "they should use SOH CAH TOA", "the cosine law needs three angles"], "The included angle is $\\angle A$."),
-  n1(`Two sides of a triangle are $15$ and $18$ with a $66^\\circ$ angle between them. Find the third side.`, cl(15, 18, 66), "SAS"),
+  n1(`Two sides of a triangle are $15$ and $18$ with a $66^\\circ$ angle between them. Find the third side.`, cl(15, 18, 66), "SAS", FIG.sas1518),
   n1(`In acute $\\triangle PQR$, $\\angle P=71^\\circ$, $\\angle Q=48^\\circ$ and $q=20$. Find $p$.`, side(20, 48, 71), "Sine law"),
   tf(`The cosine law can replace the sine law in an AAS problem.`, false, "AAS gives only one side; the cosine law needs two."),
   a1(`A triangle has sides $7$, $9$ and $10$. Find its smallest angle.`, ang(7, 9, 10), "Opposite $7$"),
@@ -52,7 +53,7 @@ export const M = [
   n1(`A right triangle has an acute angle of $34^\\circ$ and the adjacent leg is $15$. Find the hypotenuse.`, 15 / cos(34), "No law needed: $\\frac{15}{\\cos34^\\circ}$"),
   a1(`In acute $\\triangle XYZ$, $x=12$, $y=14$ and $\\angle Y=80^\\circ$. Find $\\angle Z$.`, 180 - 80 - asin((12 * sin(80)) / 14), "$\\angle X$ by the sine law, then $180^\\circ-80^\\circ-\\angle X$"),
   fill(`To decide which law to use, ask whether a side is known together with its ___ angle.`, ["opposite"], "The sine law needs that pair."),
-  n1(`Solve for the third side: $a=20$, $b=24$, $\\angle C=48^\\circ$.`, cl(20, 24, 48), "Cosine law"),
+  n1(`Solve for the third side: $a=20$, $b=24$, $\\angle C=48^\\circ$.`, cl(20, 24, 48), "Cosine law", FIG.sas2024),
   mc(`For the triangle shown, which tool finds $\\theta$?`, CL, ["the sine law", "SOH CAH TOA", "it cannot be found"], "Three sides.", sssDoc(7, 8, 9, { A: "θ" })),
   n1(`Find $x$ in the right triangle shown.`, 16 * cos(28), "$x=16\\cos28^\\circ$", rtADoc(28, { hyp: "16", adj: "x", theta: "28°" })),
   n1(`In the triangle shown, find the side opposite the $68^\\circ$ angle.`, side(12, 57, 68), "$\\angle C=57^\\circ$, then the sine law", atriDoc(55, 68, 12, { c: "12", A: "55°", B: "68°" })),

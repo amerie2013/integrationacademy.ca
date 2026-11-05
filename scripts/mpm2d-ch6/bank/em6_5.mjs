@@ -1,3 +1,4 @@
+import { FIG } from "../../mpm2d-bank-figures/figs.mjs";
 // 6.5 Finding Angles — 20 easy + 20 medium questions (angles computed, rounded as asked)
 import { mc, ms, num, tf, fill } from "./kit.mjs";
 import { rtDoc } from "./fig.mjs";
@@ -33,14 +34,14 @@ export const M = [
   a1(`The side opposite $\\theta$ is $7.5$ and the hypotenuse is $12$. Find $\\theta$.`, asin(7.5 / 12), "$\\sin^{-1}\\frac{7.5}{12}$"),
   a1(`The side adjacent to $\\theta$ is $11$ and the hypotenuse is $14$. Find $\\theta$.`, acos(11 / 14), "$\\cos^{-1}\\frac{11}{14}$"),
   a1(`The side opposite $\\theta$ is $13$ and the adjacent side is $6$. Find $\\theta$.`, atan(13 / 6), "$\\tan^{-1}\\frac{13}6$"),
-  a1(`A $6$ m ladder has its foot $1.8$ m from a wall. What angle does it make with the ground?`, acos(0.3), "$\\cos^{-1}\\frac{1.8}6$"),
-  a1(`A $5$ m ladder reaches $4.5$ m up a wall. What angle does it make with the ground?`, asin(0.9), "$\\sin^{-1}0.9$"),
+  a1(`A $6$ m ladder has its foot $1.8$ m from a wall. What angle does it make with the ground?`, acos(0.3), "$\\cos^{-1}\\frac{1.8}6$", FIG.l618),
+  a1(`A $5$ m ladder reaches $4.5$ m up a wall. What angle does it make with the ground?`, asin(0.9), "$\\sin^{-1}0.9$", FIG.l545),
   a1(`A road rises $80$ m over a horizontal distance of $1.2$ km. Find its angle of inclination.`, atan(80 / 1200), "$\\tan^{-1}\\frac{80}{1200}$"),
-  a1(`A $1.8$ m person casts a $2.5$ m shadow. Find the angle of the sun above the horizon.`, atan(1.8 / 2.5), "$\\tan^{-1}\\frac{1.8}{2.5}$"),
+  a1(`A $1.8$ m person casts a $2.5$ m shadow. Find the angle of the sun above the horizon.`, atan(1.8 / 2.5), "$\\tan^{-1}\\frac{1.8}{2.5}$", FIG.s1825),
   a1(`A right triangle has legs $8$ and $15$. Find its smaller acute angle.`, atan(8 / 15), "$\\tan^{-1}\\frac8{15}$"),
   tf(`$\\cos^{-1}(1.2)$ gives an acute angle.`, false, "No angle has a cosine greater than 1."),
   mc(`The side opposite $\\theta$ is $6$ and the hypotenuse is $10$. A student writes $\\theta=\\tan^{-1}\\frac6{10}$. What is wrong?`, "with opposite and hypotenuse, use $\\sin^{-1}$", ["nothing", "it should be $\\cos^{-1}\\frac6{10}$", "it should be $\\tan^{-1}\\frac{10}6$"], "$\\tan$ uses opposite and adjacent."),
-  a1(`A kite on an $80$ m string is $60$ m high. What angle does the string make with the ground?`, asin(0.75), "$\\sin^{-1}\\frac{60}{80}$"),
+  a1(`A kite on an $80$ m string is $60$ m high. What angle does the string make with the ground?`, asin(0.75), "$\\sin^{-1}\\frac{60}{80}$", FIG.k80),
   a1(`An isosceles triangle has equal sides $10$ and base $14$. Find a base angle.`, acos(0.7), "$\\cos^{-1}\\frac7{10}$"),
   a1(`A rectangle is $8$ by $5$. Find the angle a diagonal makes with the longer side.`, atan(5 / 8), "$\\tan^{-1}\\frac58$"),
   ms(`A right triangle has sides $6$, $8$, $10$ and $\\theta$ is opposite $6$. Select all expressions equal to $\\theta$.`, ["$\\tan^{-1}\\frac68$", "$\\sin^{-1}\\frac6{10}$", "$\\cos^{-1}\\frac8{10}$", "$\\tan^{-1}\\frac86$", "$\\sin^{-1}\\frac8{10}$"], [0, 1, 2], "Any correct pair of sides works."),
