@@ -1,3 +1,4 @@
+import { FIG } from "../../mcr3u-bank-figures/figs.mjs";
 // 5.5 The Cosine Law — 20 easy + 20 medium questions
 import { mc, ms, num, tf } from "./kit.mjs";
 import { triD, sasD, cos, sin, acos, asin, lawC, angC, rd } from "./fig.mjs";
@@ -38,9 +39,9 @@ export const M = [
   num("A triangle has sides 12, 15 and 20. Find its smallest angle (1 decimal).", rd(angC(12, 15, 20), 1), "Opposite 12.", null, 0.05),
   num("Two hikers leave the same point on paths 75° apart. One walks 3 km and the other 5 km. How far apart are they (2 decimals)?", rd(lawC(3, 5, 75)), "SAS with 75°.", null, 0.01),
   num("A golf hole is 380 m from the tee. A drive goes 220 m but 12° off the line to the hole. How far is the ball from the hole (1 decimal)?", rd(lawC(380, 220, 12), 1), "SAS at the tee.", null, 0.05),
-  num("A parallelogram has sides 7 and 10 with a 65° angle. Find its longer diagonal (2 decimals).", rd(lawC(7, 10, 115)), "The longer diagonal faces the 115° angle.", null, 0.01),
-  num("A parallelogram has sides 7 and 10 with a 65° angle. Find its shorter diagonal (2 decimals).", rd(lawC(7, 10, 65)), "The shorter diagonal faces 65°.", null, 0.01),
-  num("A plane flies 300 km, turns 40° to the left and flies 200 km. How far is it from its start (1 decimal)?", rd(lawC(300, 200, 140), 1), "Interior angle 180° − 40° = 140°.", null, 0.05),
+  num("A parallelogram has sides 7 and 10 with a 65° angle. Find its longer diagonal (2 decimals).", rd(lawC(7, 10, 115)), "The longer diagonal faces the 115° angle.", FIG.para65, 0.01),
+  num("A parallelogram has sides 7 and 10 with a 65° angle. Find its shorter diagonal (2 decimals).", rd(lawC(7, 10, 65)), "The shorter diagonal faces 65°.", FIG.para65, 0.01),
+  num("A plane flies 300 km, turns 40° to the left and flies 200 km. How far is it from its start (1 decimal)?", rd(lawC(300, 200, 140), 1), "Interior angle 180° − 40° = 140°.", FIG.plane300, 0.05),
   mc("Classify the triangle with sides 6, 7 and 10.", "obtuse", ["acute", "right", "not a triangle"], "36 + 49 = 85 < 100."),
   mc("Classify the triangle with sides 6, 8 and 9.", "acute", ["obtuse", "right", "not a triangle"], "36 + 64 = 100 > 81."),
   tf("In the triangle with sides 7, 24 and 25, the largest angle is 90°.", true, "49 + 576 = 625."),

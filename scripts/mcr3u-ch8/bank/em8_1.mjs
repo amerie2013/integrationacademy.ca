@@ -46,7 +46,7 @@ export const M = [
   tf("Doubling the time doubles the amount A under simple interest.", false, "A = P + Prt; P does not double."),
   num("A loan of 900 dollars is repaid after 10 months with 945 dollars. Find the simple interest rate (%/a).", 6, "45 ÷ (900 × 10/12) = 45 ÷ 750 = 0.06."),
   num("An investment has 5300 dollars after 2 years and 5750 dollars after 5 years at simple interest. Find the principal (dollars).", 5000, "450 over 3 years: 150 a year; 5300 − 300."),
-  num("For the investment above (5300 after 2 years, 5750 after 5 years), find the rate (%/a).", 3, "150 ÷ 5000."),
+  num("An investment has 5300 dollars after 2 years and 5750 dollars after 5 years at simple interest. Find the rate (%/a).", 3, "150 a year on a principal of 5000: 150 ÷ 5000."),
   $("Find the interest on 3650 dollars at 7%/a simple interest from March 1 to May 30 (90 days).", 3650 * 0.07 * (90 / 365), "t = 90/365."),
   num("Read the graph: what is the slope (dollars per year)?", 45, "From 1500 to 1950 over 10 years.", growthD([{ f: (t) => 1500 + 45 * t, color: "green" }], 10)),
   num("The bars show simple-interest amounts on a principal of 1200. What is the rate (%/a)?", 4, "Each year adds 48: 48 ÷ 1200.", barsD([1248, 1296, 1344, 1392], { xlabel: "year", ylabel: "amount", labels: ["1248", "1296", "1344", "1392"] })),

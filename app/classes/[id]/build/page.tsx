@@ -9,6 +9,7 @@ import { Math as Tex } from "../../../../components/Math";
 import { QKind, QKIND_LABELS } from "../../../../lib/quiz";
 import { exprToTex } from "../../../../lib/mathcheck";
 import { chaptersIn, sampleChapterTest, titleFor, isChapterTest, FORM_LABELS, DifficultyCounts, SampleResult } from "../../../../lib/chapterTest";
+import { mathToDollars } from "../../../../lib/mathText";
 
 type BankRow = { image_url?: string | null; id: string; topic: string | null; difficulty: string; kind: QKind; prompt: string; choices: any; answer: any; tolerance: number | null; points: number; feedback: string | null };
 type ClassQuiz = { id: string; title: string; test_group_id: string | null };
@@ -543,7 +544,7 @@ function BuildTestModal({ chapter, formCount, onClose, onCreate }: { chapter: nu
 
 function PromptText({ prompt }: { prompt: string }) {
   if (!prompt) return null;
-  const parts = prompt.split(/(\$[^$]+\$)/g);
+  const parts = mathToDollars(prompt).split(/(\$[^$]+\$)/g);
   return <span>{parts.map((p, i) => (p.startsWith("$") && p.endsWith("$") && p.length > 1 ? <Tex key={i} expr={p.slice(1, -1)} /> : <span key={i}>{p}</span>))}</span>;
 }
 function Ans({ children }: { children: React.ReactNode }) {

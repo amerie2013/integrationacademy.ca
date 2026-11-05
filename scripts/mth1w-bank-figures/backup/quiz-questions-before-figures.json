@@ -1,0 +1,37 @@
+[
+ {
+  "id": "070b8b6b-3ce3-4a4f-a076-1e33e1ff8912",
+  "quiz_id": "abd749c0-0456-43e1-8b8d-5b92099ce178",
+  "bank_id": "ef37fc1d-ede9-4c52-8e39-6bee06d522e4",
+  "image_url": null,
+  "prompt": "Figure $n$ of this pattern has $2n+1$ tiles. How many tiles are in Figure $3$?"
+ },
+ {
+  "id": "243dedea-5f3f-490c-b8e4-39ae8d9d5ed0",
+  "quiz_id": "a842786b-ab35-45ca-a984-365ff724532d",
+  "bank_id": "0b4f0767-32df-4efc-8e52-19f51d331880",
+  "image_url": null,
+  "prompt": "The graph shows the distance a car travels at a constant speed. At this speed, how many hours does it take to travel $595$ km?"
+ },
+ {
+  "id": "76d03c0a-e8cf-4998-91a3-0751c9dca050",
+  "quiz_id": "a842786b-ab35-45ca-a984-365ff724532d",
+  "bank_id": "fed9da3e-b903-4341-80a7-309b3c34dae6",
+  "image_url": null,
+  "prompt": "The graph shows the water level in a draining tank. What is the rate of change of the level, in cm per minute?"
+ },
+ {
+  "id": "9fecb3ed-d068-4255-b191-29bec6c507ee",
+  "quiz_id": "a33d376e-3338-4600-a283-63a6fc818873",
+  "bank_id": "c8b538bc-4f99-4756-b739-58b52de08c38",
+  "image_url": null,
+  "prompt": "Which statements about the graph are true? Select all."
+ },
+ {
+  "id": "b425f469-09ae-43a7-bd2b-a48d8f54490d",
+  "quiz_id": "6bbfca76-5229-42e5-96a9-c16cdad65da3",
+  "bank_id": "0858d2e3-540b-4ea4-bbc8-8204ddae9700",
+  "image_url": null,
+  "prompt": "Pancake batter uses flour and milk in the ratio shown on the double number line. How many cups of milk go with $10.5$ cups of flour?"
+ }
+]

@@ -39,7 +39,7 @@ export const M = [
   mc(String.raw`What is the range of $y=\sqrt{x-2}+5$?`, String.raw`$y\ge5$`, [String.raw`$y\ge2$`, String.raw`$y\ge0$`, String.raw`$y\le5$`], "The root is at least 0."),
   num(String.raw`A rock falls from 80 m: $h(t)=80-5t^2$. When does it land?`, 4, "5t² = 80."),
   num(String.raw`A rectangle with perimeter 30 has area $A(x)=x(15-x)$. What is the largest area?`, 56.25, "Vertex at x = 7.5.", null, 0.001),
-  mc(String.raw`For $A(x)=x(15-x)$ (the rectangle above), what is the domain?`, String.raw`$0<x<15$`, [String.raw`$0\le x\le30$`, String.raw`$x\in\mathbb R$`, String.raw`$x>0$`], "Both sides must be positive."),
+  mc(String.raw`A rectangle with perimeter 30 and one side $x$ has area $A(x)=x(15-x)$. What is the domain?`, String.raw`$0<x<15$`, [String.raw`$0\le x\le30$`, String.raw`$x\in\mathbb R$`, String.raw`$x>0$`], "Both sides must be positive."),
   tf(String.raw`On $-2\le x\le3$, the range of $y=x^2$ is $0\le y\le9$.`, true, "Minimum 0 at x = 0; maximum 9 at x = 3."),
   num(String.raw`On $0\le x\le5$, what is the largest value of $y=2x+1$?`, 11, "Increasing, so at x = 5."),
   mc("State the range of the graphed segment (closed dot at (−2, −3), open dot at (4, 1)).", String.raw`$-3\le y<1$`, [String.raw`$-3<y\le1$`, String.raw`$-2\le y<4$`, String.raw`$-3\le y\le1$`], "The open end is not included.", planeDoc({ view: V6, segs: [{ pts: [[-2, -3], [4, 1]] }], points: [P(-2, -3), { x: 4, y: 1, label: "(4, 1) open", color: "red" }] })),

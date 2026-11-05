@@ -6,7 +6,7 @@ export const TOPIC = "3.4 Maximum and Minimum Values";
 export const Q = [
   num(String.raw`What is the smallest value of $x^2+7x+10.25$?`, -2, "(x + 3.5)² − 12.25 + 10.25."),
   num("A theatre sells 600 seats at 15 dollars. Each 0.50-dollar increase loses 15 seats. What is the maximum revenue?", 9187.5, "(15 + 0.5x)(600 − 15x): zeros −30, 40, x = 5: 17.5 × 525.", graph((x) => (15 + 0.5 * x) * (600 - 15 * x), { xmin: -32, xmax: 42, ymin: -500, ymax: 10500 }, [P(-30, 0), P(40, 0)], { step: { x: 10, y: 1000 } }), 0.01),
-  num("For the theatre above (600 seats at 15 dollars, −15 seats per 0.50-dollar increase), what ticket price maximises revenue?", 17.5, "x = 5 increases.", null, 0.001),
+  num("A theatre sells 600 seats at 15 dollars. Each 0.50-dollar increase loses 15 seats. What ticket price maximises revenue?", 17.5, "(15 + 0.5x)(600 − 15x) is greatest at x = 5 increases.", null, 0.001),
   num(String.raw`Price $p=-0.25x+20$ dollars sells $x$ thousand items; cost $C=4x+120$ thousand dollars. What is the maximum profit (thousands)?`, 136, "P = −0.25x² + 16x − 120 at x = 32."),
   num("160 m of fence make a rectangle split into 3 pens by 2 fences parallel to the width. What is the largest total area (m²)?", 800, "4w + 2L = 160: A = w(80 − 2w), w = 20."),
   num(String.raw`What is the minimum value of $2x^2-12x+25$?`, 7, "2(x − 3)² + 7."),

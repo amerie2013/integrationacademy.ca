@@ -1,3 +1,4 @@
+import { FIG } from "../../mcr3u-bank-figures/figs.mjs";
 // 6.1 Periodic Functions and Their Properties — 20 easy + 20 medium questions
 import { mc, ms, num, tf } from "./kit.mjs";
 import { waveD, sin, cos } from "./fig.mjs";
@@ -6,9 +7,9 @@ const S = String.raw;
 const saw = (p, h, n) => Array.from({ length: n }, (_, i) => ({ pts: [[p * i, 0], [p * (i + 1), h]], color: "violet" }));
 
 export const E = [
-  num("A periodic graph has a maximum of 18 and a minimum of 6. What is its amplitude?", 6, "(18 − 6)/2."),
-  num("A periodic graph has a maximum of 18 and a minimum of 6. What is the y-value of its axis?", 12, "(18 + 6)/2."),
-  num("Consecutive peaks of a periodic graph are at x = 2 and x = 9. What is the period?", 7, "9 − 2."),
+  num("A periodic graph has a maximum of 18 and a minimum of 6. What is its amplitude?", 6, "(18 − 6)/2.", FIG.p186),
+  num("A periodic graph has a maximum of 18 and a minimum of 6. What is the y-value of its axis?", 12, "(18 + 6)/2.", FIG.p186),
+  num("Consecutive peaks of a periodic graph are at x = 2 and x = 9. What is the period?", 7, "9 − 2.", FIG.peaks29),
   tf("Any graph that goes up and down is periodic.", false, "The pattern must repeat exactly at regular intervals."),
   mc("Which is periodic?", "the position of a clock's second hand", ["the height of a burning candle", "a growing population", "the speed of a falling rock"], "The hand returns to the same place every minute."),
   num(S`A function has period 5 and \(f(1)=3\). Find \(f(21)\).`, 3, "21 − 1 = 20 = 4 periods."),
@@ -34,14 +35,14 @@ export const M = [
   num("A heart beats 72 times per minute. What is the period in seconds (2 decimals)?", 0.83, "60 ÷ 72.", null, 0.006),
   num("High tides occur at 3:00 and 15:24. What is the period in hours (decimal)?", 12.4, "12 h 24 min = 12.4 h.", null, 0.001),
   num("High tides occur at 3:00 and 15:24 on day 1. How many hours after midnight of day 1 is the next high tide (decimal)?", 27.8, "15.4 + 12.4.", null, 0.001),
-  num("A periodic graph has max 3.6 and min −1.2. What is the y-value of its axis?", 1.2, "(3.6 − 1.2)/2.", null, 0.001),
-  num("A periodic graph has max 3.6 and min −1.2. What is its amplitude?", 2.4, "(3.6 + 1.2)/2.", null, 0.001),
+  num("A periodic graph has max 3.6 and min −1.2. What is the y-value of its axis?", 1.2, "(3.6 − 1.2)/2.", FIG.p36, 0.001),
+  num("A periodic graph has max 3.6 and min −1.2. What is its amplitude?", 2.4, "(3.6 + 1.2)/2.", FIG.p36, 0.001),
   ms("Which are periodic? Select all.", ["the phases of the moon", "the tides at a harbour", "a person's mass over a lifetime", "sunrise times over several years", "a car's odometer reading"], [0, 1, 3], "Mass and odometer readings do not repeat."),
   tf("If a function has period 4, then f(x + 8) = f(x) for every x.", true, "Two periods."),
   num("Readings every 0.5 s: 2, 4, 6, 4, 2, 4, 6, 4, 2. What is the period in seconds?", 2, "4 readings × 0.5 s."),
   num("A sinusoidal function has a maximum at t = 3 and period 10. When is the next minimum?", 8, "Half a period later."),
   num("A sinusoidal function has a maximum at t = 3 and period 10. When does it next cross its axis?", 5.5, "A quarter period later.", null, 0.001),
-  mc("A periodic graph has max 10, min 2 and period 6. Which statement is FALSE?", "its amplitude is 8", ["its axis is y = 6", "its range is 2 ≤ y ≤ 10", "it repeats every 6 units"], "Amplitude is (10 − 2)/2 = 4."),
+  mc("A periodic graph has max 10, min 2 and period 6. Which statement is FALSE?", "its amplitude is 8", ["its axis is y = 6", "its range is 2 ≤ y ≤ 10", "it repeats every 6 units"], "Amplitude is (10 − 2)/2 = 4.", FIG.p102),
   num("Day length repeats once a year. How many complete cycles occur in 3 years?", 3, "One per year."),
   num("A wheel turns 20 times per minute. What is its period in seconds?", 3, "60 ÷ 20."),
   num("A function has period 0.5 s. How many cycles does it complete in 7 s?", 14, "7 ÷ 0.5."),

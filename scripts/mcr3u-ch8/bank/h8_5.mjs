@@ -11,7 +11,7 @@ export const TOPIC = "8.5 Annuities: Present Value";
 export const Q = [
   $("How much must be saved by age 65 to withdraw 3500 dollars at the end of each month until age 90, at 4.2%/a compounded monthly (dollars)?", annPV(3500, 0.0035, 300), "i = 0.0035, n = 300."),
   $("A 280 000-dollar mortgage is repaid monthly over 25 years at 4.8%/a compounded monthly. Find the payment (dollars).", payPV(280000, 0.004, 300), "i = 0.004, n = 300."),
-  $("For that mortgage (280 000, 25 years, 4.8%/a monthly), find the total interest (dollars).", payPV(280000, 0.004, 300) * 300 - 280000, "300R − 280 000."),
+  $("A 280 000-dollar mortgage is repaid monthly over 25 years at 4.8%/a compounded monthly. Find the total interest (dollars).", payPV(280000, 0.004, 300) * 300 - 280000, "300R − 280 000."),
   num("How many monthly payments of 650 dollars repay a 25 000-dollar loan at 7.2%/a compounded monthly (the last may be smaller)?", paymentsToRepay(25000, 650, 0.006), "Guess and check n."),
   $("A car costs 30 000 dollars. A 5000-dollar down payment is made and the rest is financed at 5.4%/a compounded monthly over 5 years. Find the payment (dollars).", payPV(25000, 0.0045, 60), "Finance 25 000."),
   $("A loan is repaid with 1000 dollars a month for 2 years, then 500 dollars a month for 1 more year, at 6%/a compounded monthly. How much was borrowed (dollars)?", annPV(1000, 0.005, 24) + annPV(500, 0.005, 12) / 1.005 ** 24, "PV of the first annuity + PV of the second, discounted 24 more months."),

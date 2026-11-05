@@ -10,7 +10,7 @@ export const Q = [
   num(String.raw`$(4,-2)$ on $y=f(x)$ maps to $(-1,9)$ under $y=af(-2(x-d))+3$. Find $d$.`, 1, "4 ÷ (−2) + d = −1."),
   mx(String.raw`A transformed $\sqrt x$ starts at $(5,-2)$, extends to the left, and passes through $(1,4)$. Write its equation.`, "3*sqrt(5-x)-2", "y = a√(−(x − 5)) − 2; 4 = a·2 − 2 → a = 3."),
   num(String.raw`$f$: domain $-4\le x\le2$, range $0\le y\le5$. For $g(x)=-2f(\tfrac12(x-3))+1$, find the length of the domain interval.`, 12, "x → 2x + 3: −5 to 7."),
-  num(String.raw`Same $f$ and $g$: find the smallest value in the range of $g$.`, -9, "y → −2y + 1: 1 and −9."),
+  num(String.raw`$f$: domain $-4\le x\le2$, range $0\le y\le5$. For $g(x)=-2f(\tfrac12(x-3))+1$, find the smallest value in the range of $g$.`, -9, "y → −2y + 1: 1 and −9."),
   mc("Which equation gives the red curve, a transformation of y = √x (grey)?", String.raw`$y=2\sqrt{-(x-1)}-3$`, [String.raw`$y=2\sqrt{x-1}-3$`, String.raw`$y=-2\sqrt{-(x-1)}-3$`, String.raw`$y=2\sqrt{-(x+1)}-3$`], "Starts at (1, −3), goes left and up; through (−3, 1): 2√4 − 3.", planeDoc({ view: V8, curves: [{ f: (x) => Math.sqrt(x), a: 0, color: "gray" }, { f: (x) => 2 * Math.sqrt(1 - x) - 3, b: 1, color: "red" }], points: [P(1, -3), P(-3, 1)] })),
   num(String.raw`$y=-\left(2(x+1)\right)^2+8$. Find the larger x-intercept.`, 0.4142, "(2(x + 1))² = 8 → x + 1 = ±√2."
     , null, 0.002),

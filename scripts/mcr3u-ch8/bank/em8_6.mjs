@@ -31,9 +31,9 @@ export const E = [
 
 export const M = [
   $("Find the monthly payment on 18 000 dollars over 5 years at 4.8%/a compounded monthly (dollars).", payPV(18000, 0.004, 60), "i = 0.004, n = 60."),
-  $("For that loan (18 000, 5 years, 4.8%/a monthly), find the interest in the first month (dollars).", 72, "18 000 × 0.004."),
-  $("For that loan, find the principal repaid in the first month (dollars).", payPV(18000, 0.004, 60) - 72, "R − 72."),
-  $("For that loan, find the balance after 24 payments (dollars).", balance(18000, payPV(18000, 0.004, 60), 0.004, 24), "PV of the 36 remaining payments."),
+  $("A loan of 18 000 dollars is repaid monthly over 5 years at 4.8%/a compounded monthly. Find the interest in the first month (dollars).", 72, "18 000 × 0.004."),
+  $("A loan of 18 000 dollars is repaid monthly over 5 years at 4.8%/a compounded monthly. Find the principal repaid in the first month (dollars).", payPV(18000, 0.004, 60) - 72, "R = 338.04 and the first interest is 72: R − 72."),
+  $("A loan of 18 000 dollars is repaid monthly over 5 years at 4.8%/a compounded monthly. Find the balance after 24 payments (dollars).", balance(18000, payPV(18000, 0.004, 60), 0.004, 24), "PV of the 36 remaining payments."),
   $("Find the total interest on 25 000 dollars over 4 years at 6%/a compounded monthly (dollars).", totInt(25000, 0.005, 48), "48R − 25 000."),
   $("Find the total interest on 25 000 dollars over 6 years at 6%/a compounded monthly (dollars).", totInt(25000, 0.005, 72), "72R − 25 000."),
   $("How much more interest is paid on 15 000 dollars over 5 years at 8%/a than at 5%/a (both compounded monthly)? (dollars)", totInt(15000, 0.08 / 12, 60) - totInt(15000, 0.05 / 12, 60), "Compare 60R − 15 000."),

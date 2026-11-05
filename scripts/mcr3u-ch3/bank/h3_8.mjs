@@ -9,7 +9,7 @@ export const Q = [
   num(String.raw`For $k>0$, $y=kx-4$ is tangent to $y=x^2$. Find the y-coordinate of the point of contact.`, 4, "x² − kx + 4: k = 4, x = 2."),
   num(String.raw`Which line of slope 3, $y=3x+k$, is tangent to $y=x^2+x+5$? Give $k$.`, 4, "x² − 2x + 5 − k: 4 − 4(5 − k) = 0."),
   num(String.raw`Tank A holds $4(t-10)^2$ L for $0\le t\le10$ min; tank B starts empty and fills at 20 L/min. When do they hold equal amounts (min)?`, 5, "4t² − 100t + 400 = 0 → t² − 25t + 100 = 0 → t = 5 (20 is outside)."),
-  num(String.raw`For the tanks above (A: $4(t-10)^2$, B: $20t$), how many litres are in each when they are equal?`, 100, "20 × 5."),
+  num(String.raw`Tank A holds $4(t-10)^2$ L for $0\le t\le10$ min; tank B starts empty and fills at 20 L/min. How many litres are in each when they hold equal amounts?`, 100, "They are equal at t = 5; 20 × 5."),
   num(String.raw`Find the distance between the points where $y=x^2-4x$ meets $y=2x-5$ (2 decimals).`, Math.sqrt(80), "x = 1, 5: (1, −3), (5, 5).", planeDoc({ view: { xmin: -1, xmax: 7, ymin: -6, ymax: 8 }, curves: [{ f: (x) => x * x - 4 * x, color: "violet" }], lines: [{ m: 2, b: -5, color: "blue" }], points: [P(1, -3), P(5, 5)] }), 0.01),
   num(String.raw`$y=x^2$ meets $y=x+2$ at two points A and B. Find the area of triangle OAB (O is the origin).`, 3, "A(2, 4), B(−1, 1): ½|2·1 − (−1)·4|."),
   mc(String.raw`For which $b$ is $y=2x+b$ tangent to $y=-x^2+4x$?`, String.raw`$b=1$`, [String.raw`$b=-1$`, String.raw`$b=4$`, String.raw`$b=0$`], "−x² + 2x − b: 4 − 4b = 0."),

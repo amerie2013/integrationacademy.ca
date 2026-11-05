@@ -1,3 +1,4 @@
+import { FIG } from "../../mcr3u-bank-figures/figs.mjs";
 // 5.6 Trigonometry in Three Dimensions — 20 hard questions
 import { mc, num, tf } from "./kit.mjs";
 import { boxD, pyrD, towerD, wireD, sin, cos, tan, asin, acos, atan, lawC, rd } from "./fig.mjs";
@@ -16,18 +17,18 @@ const g1 = 120 / tan(14), g2 = 120 / tan(21);
 export const TOPIC = "5.6 Trigonometry in Three Dimensions";
 export const Q = [
   num("Observer P is due south of a monument and sees its top at 35°. Observer Q is due east and sees it at 25°. P and Q are 150 m apart. Find the height (1 decimal).", rd(q1, 1), "h²(cot² 35° + cot² 25°) = 150².", null, 0.05),
-  num("Ground triangle: AB = 200 m, ∠CAB = 40°, ∠CBA = 105°. From A the top of a tower at C is at 12° elevation. Find the height (1 decimal).", rd(q2, 1), "∠C = 35°; AC = 200 sin 105° / sin 35°; h = AC tan 12°.", null, 0.05),
+  num("Ground triangle: AB = 200 m, ∠CAB = 40°, ∠CBA = 105°. From A the top of a tower at C is at 12° elevation. Find the height (1 decimal).", rd(q2, 1), "∠C = 35°; AC = 200 sin 105° / sin 35°; h = AC tan 12°.", FIG.tower200, 0.05),
   num("From the top of a 120 m cliff, two boats are seen at angles of depression 14° and 21°. Viewed from above, the lines from the cliff base to the boats make 75°. How far apart are the boats (nearest metre)?", Math.round(q3), "Ground distances 120/tan 14° and 120/tan 21°; cosine law with 75°.",
     wireD([{ pts: [[0, 0, 0], [0, 0, 330]], color: "blue" }, { pts: [[0, 0, 330], [g1, 0, 0]], color: "red" }, { pts: [[0, 0, 330], [g2 * cos(75), g2 * sin(75), 0]], color: "red" }, { pts: [[g1, 0, 0], [0, 0, 0], [g2 * cos(75), g2 * sin(75), 0], [g1, 0, 0]], color: "green" }], [[0, 0, 330, "top"], [g1, 0, 0, "boat 1"], [g2 * cos(75), g2 * sin(75), 0, "boat 2"]]), 0.5),
-  num("A square pyramid has base side 10 and slant edges 13. Find its height (2 decimals).", rd(Math.sqrt(119)), "Half-diagonal 5√2: √(169 − 50).", null, 0.01),
-  num("A square pyramid has base side 10 and height 12. Find the angle between a triangular face and the base (1 decimal).", rd(atan(12 / 5), 1), "Use the line from the centre to the midpoint of an edge (length 5).", null, 0.05),
-  num("A box is 10 by 6 by 4. Find the angle between a space diagonal and the 10 by 4 face (1 decimal).", rd(asin(6 / Math.sqrt(152)), 1), "The component perpendicular to that face is 6; sin θ = 6 / √152.", null, 0.05),
-  num("A plane is directly above a point between stations A and B, which are 5 km apart. Its angles of elevation from A and B are 40° and 55°. Find its altitude (2 decimals, km).", rd(q7, 2), "h cot 40° + h cot 55° = 5.", null, 0.01),
-  num("A balloon is above point G. From A it is at 28° elevation, from B at 31°, AB = 500 m and ∠AGB = 90°. Find its height (1 decimal).", rd(q8, 1), "h²(cot² 28° + cot² 31°) = 500².", null, 0.05),
+  num("A square pyramid has base side 10 and slant edges 13. Find its height (2 decimals).", rd(Math.sqrt(119)), "Half-diagonal 5√2: √(169 − 50).", FIG.pyr1013, 0.01),
+  num("A square pyramid has base side 10 and height 12. Find the angle between a triangular face and the base (1 decimal).", rd(atan(12 / 5), 1), "Use the line from the centre to the midpoint of an edge (length 5).", FIG.pyr1012, 0.05),
+  num("A box is 10 by 6 by 4. Find the angle between a space diagonal and the 10 by 4 face (1 decimal).", rd(asin(6 / Math.sqrt(152)), 1), "The component perpendicular to that face is 6; sin θ = 6 / √152.", FIG.box1064, 0.05),
+  num("A plane is directly above a point between stations A and B, which are 5 km apart. Its angles of elevation from A and B are 40° and 55°. Find its altitude (2 decimals, km).", rd(q7, 2), "h cot 40° + h cot 55° = 5.", FIG.planeAB, 0.01),
+  num("A balloon is above point G. From A it is at 28° elevation, from B at 31°, AB = 500 m and ∠AGB = 90°. Find its height (1 decimal).", rd(q8, 1), "h²(cot² 28° + cot² 31°) = 500².", FIG.balloonG, 0.05),
   num("A regular tetrahedron has edges 6. Find its height (2 decimals).", rd(6 * Math.sqrt(2 / 3)), "The centre of the base is 6/√3 from each vertex: √(36 − 12).", null, 0.01),
   num("Find the angle between two space diagonals of a cube (1 decimal).", rd(acos(1 / 3), 1), "With edge 2, the diagonals meet at the centre: cosine law with sides √3, √3, 2.", null, 0.05),
   tf("The angle between a space diagonal of a cube and its base is less than 45°.", true, "tan θ = 1/√2, so θ ≈ 35.3°."),
-  num("A tower stands at C. From A its top is at 30°; from B it is at 40°. AB = 60 m and ∠ACB = 90°. Find the height (2 decimals).", rd(q12), "h²(cot² 30° + cot² 40°) = 60².", null, 0.01),
+  num("A tower stands at C. From A its top is at 30°; from B it is at 40°. AB = 60 m and ∠ACB = 90°. Find the height (2 decimals).", rd(q12), "h²(cot² 30° + cot² 40°) = 60².", FIG.towerRight, 0.01),
   num("A road runs straight up a hillside inclined at 12°, but in a direction 30° away from the steepest line. Find the road's angle of climb (1 decimal).", rd(atan(tan(12) * cos(30)), 1), "For each unit of horizontal road, the rise is tan 12° × cos 30°.", null, 0.05),
   num("An aquarium is 60 cm by 30 cm by 40 cm. What is the longest straight rod that fits inside (2 decimals)?", rd(Math.sqrt(6100)), "The space diagonal.", null, 0.01),
   mc("You know AB and the two ground angles at A and B, and the elevation of a tower top is measured from B. Which side should the sine law find?", "BC", ["AC", "AB", "the height directly"], "The elevation is measured from B, so BC is the linking side."),

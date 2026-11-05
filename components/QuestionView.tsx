@@ -8,6 +8,7 @@ import { Math as Tex } from "./Math";
 import { MathField } from "./MathField";
 import { Question, shuffle } from "../lib/quiz";
 import { exprToTex } from "../lib/mathcheck";
+import { mathToDollars } from "../lib/mathText";
 
 export function QuestionView({ q, number, value, onChange }: { q: Question; number: number; value: any; onChange: (v: any) => void }) {
   // Initialize ordering questions once with a stable shuffled order.
@@ -195,7 +196,7 @@ function MathBit({ text }: { text: string }) {
 // renders text that may contain $...$ LaTeX
 export function PromptText({ prompt }: { prompt: string }) {
   if (!prompt) return null;
-  const parts = prompt.split(/(\$[^$]+\$)/g);
+  const parts = mathToDollars(prompt).split(/(\$[^$]+\$)/g);
   return (
     <span>
       {parts.map((p, i) =>

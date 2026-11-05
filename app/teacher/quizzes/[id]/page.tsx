@@ -9,6 +9,7 @@ import { Math as Tex } from "../../../../components/Math";
 import { MaterialsEditor } from "../../../../components/MaterialsEditor";
 import { Question, QKind, QKIND_LABELS, newQuestion, SHOW_ANSWERS_OPTIONS } from "../../../../lib/quiz";
 import { exprToTex } from "../../../../lib/mathcheck";
+import { mathToDollars } from "../../../../lib/mathText";
 
 type Settings = {
   title: string;
@@ -578,7 +579,7 @@ const BANK_KINDS: QKind[] = ["multiple_choice", "multiple_select", "true_false",
 
 function BankPrompt({ prompt }: { prompt: string }) {
   if (!prompt) return null;
-  const parts = prompt.split(/(\$[^$]+\$)/g);
+  const parts = mathToDollars(prompt).split(/(\$[^$]+\$)/g);
   return <span>{parts.map((p, i) => (p.startsWith("$") && p.endsWith("$") && p.length > 1 ? <Tex key={i} expr={p.slice(1, -1)} /> : <span key={i}>{p}</span>))}</span>;
 }
 

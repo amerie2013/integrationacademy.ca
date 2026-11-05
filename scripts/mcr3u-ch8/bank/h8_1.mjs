@@ -11,7 +11,7 @@ export const Q = [
   $("A payday lender charges 15 dollars for every 100 dollars borrowed for 14 days. What simple annual rate is that (%/a, 2 decimals)?", (15 / 100) * (365 / 14) * 100, "r = 0.15 ÷ (14/365)."),
   $("A store's overdue accounts are charged 1.25% per month simple interest. Find the interest on 1840 dollars overdue for 100 days (dollars).", 1840 * 0.15 * (100 / 365), "15%/a for 100/365 of a year."),
   num("Money is invested at simple interest. After 4 years it is 6200 dollars and after 9 years it is 7200 dollars. Find the principal (dollars).", 5400, "200 a year; 6200 − 800."),
-  num("For the investment above (6200 after 4 years, 7200 after 9 years), find the rate (%/a, 2 decimals).", c2((200 / 5400) * 100), "200 ÷ 5400.", null, 0.01),
+  num("Money is invested at simple interest. After 4 years it is 6200 dollars and after 9 years it is 7200 dollars. Find the rate (%/a, 2 decimals).", c2((200 / 5400) * 100), "200 a year on a principal of 5400: 200 ÷ 5400.", null, 0.01),
   num("At 6%/a, how many years until compound interest (annual) earns at least 200 dollars more than simple interest on 1000 dollars?", gapYear, "Compare 1000(1.06)ᵗ with 1000(1 + 0.06t) year by year."),
   $("Two simple-interest loans total 5000 dollars. One is at 4%/a and the other at 7%/a. The total yearly interest is 290 dollars. How much is at 7% (dollars)?", 3000, "0.04x + 0.07(5000 − x) = 290."),
   num("How many days does it take 7300 dollars to earn 60 dollars at 5%/a simple interest?", 60, "60 ÷ 365 = 0.1644 years ⇒ 0.1644 × 365."),

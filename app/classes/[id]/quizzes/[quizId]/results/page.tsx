@@ -7,6 +7,7 @@ import { supabase } from "@/lib/supabase";
 import { SiteHeader } from "@/components/SiteHeader";
 import { Math as Tex } from "@/components/Math";
 import { Question, isCorrect } from "@/lib/quiz";
+import { mathToDollars } from "../../../../../../lib/mathText";
 
 type Attempt = {
   id: string;
@@ -300,7 +301,7 @@ function formatResponse(q: Question, resp: any): string {
 
 function PromptText({ prompt }: { prompt: string }) {
   if (!prompt) return null;
-  const parts = prompt.split(/(\$[^$]+\$)/g);
+  const parts = mathToDollars(prompt).split(/(\$[^$]+\$)/g);
   return (
     <span>
       {parts.map((p, i) =>

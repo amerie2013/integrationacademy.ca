@@ -1,3 +1,4 @@
+import { FIG } from "../../mcr3u-bank-figures/figs.mjs";
 // 5.2 Angles from 0° to 360° — 20 hard questions
 import { mc, ms, num, tf } from "./kit.mjs";
 import { armD, unitD, cos, acos, atan, rd } from "./fig.mjs";
@@ -14,8 +15,8 @@ export const Q = [
   num("The point (a, 2a), with a < 0, is on the terminal arm of θ. Find θ to 1 decimal.", rd(180 + atan(2), 1), "Quadrant 3; related tan⁻¹ 2.", null, 0.05),
   num(S`Evaluate $\sin135^\circ\cos315^\circ+\sin225^\circ\cos45^\circ$.`, 0, "½ − ½."),
   num(S`Find θ between 0° and 360° with $\cos\theta=-\frac12$ and $\sin\theta<0$.`, 240, "Quadrant 3, related 60°."),
-  num("A Ferris wheel of radius 12 m is centred at the origin. A rider is at 210° in standard position. Find the rider's y-coordinate.", -6, "12 sin 210° = 12(−½)."),
-  num("For the same rider at 210°, find the x-coordinate to 2 decimals.", rd(12 * cos(210)), "12 cos 210° = −6√3.", null, 0.01),
+  num("A Ferris wheel of radius 12 m is centred at the origin. A rider is at 210° in standard position. Find the rider's y-coordinate.", -6, "12 sin 210° = 12(−½).", FIG.ferris210),
+  num("A Ferris wheel of radius 12 m is centred at the origin. A rider is at 210° in standard position. Find the rider's x-coordinate to 2 decimals.", rd(12 * cos(210)), "12 cos 210° = −6√3.", FIG.ferris210, 0.01),
   tf("If 0° < θ < 180°, 0° < β < 180°, θ ≠ β and sin θ = sin β, then θ + β = 180°.", true, "The two angles are β and 180° − β."),
   num(S`Solve $\sin\theta=\cos\theta$ for $0^\circ\le\theta\le360^\circ$. Enter the larger solution.`, 225, "tan θ = 1: 45° and 225°."),
   ms("Which angles have related acute angle 35° and a negative cosine? Select all.", ["145°", "215°", "325°", "35°", "235°"], [0, 1], "Quadrants 2 and 3: 180° ± 35°."),

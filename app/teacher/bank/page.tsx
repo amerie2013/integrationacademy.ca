@@ -11,6 +11,7 @@ import { levelLabel } from "../../../lib/theme";
 import { Question, QKind, QKIND_LABELS, newQuestion } from "../../../lib/quiz";
 import { exprToTex } from "../../../lib/mathcheck";
 import { chaptersIn, sampleChapterTest, titleFor, FORM_LABELS, DifficultyCounts, SampleResult } from "../../../lib/chapterTest";
+import { mathToDollars } from "../../../lib/mathText";
 
 type BankRow = Question & { topic: string | null; difficulty: string; course_id: string; lesson_id: string | null };
 type CourseOpt = { id: string; code: string | null; title: string; level: string | null };
@@ -725,7 +726,7 @@ function AnswerEditor({ q, set }: { q: any; set: (f: any) => void }) {
 
 function PromptText({ prompt }: { prompt: string }) {
   if (!prompt) return null;
-  const parts = prompt.split(/(\$[^$]+\$)/g);
+  const parts = mathToDollars(prompt).split(/(\$[^$]+\$)/g);
   return <span>{parts.map((p, i) => (p.startsWith("$") && p.endsWith("$") && p.length > 1 ? <Tex key={i} expr={p.slice(1, -1)} /> : <span key={i}>{p}</span>))}</span>;
 }
 function Ans({ children }: { children: React.ReactNode }) {

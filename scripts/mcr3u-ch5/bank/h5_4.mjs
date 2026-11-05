@@ -1,3 +1,4 @@
+import { FIG } from "../../mcr3u-bank-figures/figs.mjs";
 // 5.4 The Sine Law and the Ambiguous Case — 20 hard questions
 import { mc, num, tf } from "./kit.mjs";
 import { triD, sin, cos, asin, rd } from "./fig.mjs";
@@ -29,13 +30,13 @@ export const Q = [
   num(S`$\angle A=31^\circ$ and $b=13$. How many whole-number values of $a$ give two triangles?`, 6, "a = 7, 8, …, 12."),
   num(S`$\angle A=45^\circ$, $b=10\sqrt2$ and $a=10$. Find $\angle B$.`, 90, "h = 10√2 sin 45° = 10 = a: one right triangle."),
   num(S`$\angle A=40^\circ$, $a=7$, $b=10$. Find the difference between the two possible values of $c$ (2 decimals).`, rd(diff6), "The two vertices B are 2√(a² − h²) apart.", null, 0.01),
-  num("Fire towers A and B are 15 km apart. From A the fire makes a 40° angle with AB; from B it makes 60° with BA. How far is the fire from B (2 decimals)?", rd(BF), "Angle at fire 80°; BF is opposite the 40° angle.", null, 0.01),
-  num("For the same towers, how far is the fire from A (2 decimals)?", rd(AF), "AF is opposite the 60° angle.", null, 0.01),
-  num("For the same towers, how far is the fire from the straight line AB (2 decimals)?", rd(AF * sin(40)), "AF sin 40°.", null, 0.01),
+  num("Fire towers A and B are 15 km apart. From A the fire makes a 40° angle with AB; from B it makes 60° with BA. How far is the fire from B (2 decimals)?", rd(BF), "Angle at fire 80°; BF is opposite the 40° angle.", FIG.towers, 0.01),
+  num("Fire towers A and B are 15 km apart. From A the fire makes a 40° angle with AB; from B it makes 60° with BA. How far is the fire from A (2 decimals)?", rd(AF), "AF is opposite the 60° angle.", FIG.towers, 0.01),
+  num("Fire towers A and B are 15 km apart. From A the fire makes a 40° angle with AB; from B it makes 60° with BA. How far is the fire from the straight line AB (2 decimals)?", rd(AF * sin(40)), "AF sin 40°.", FIG.towers, 0.01),
   tf("If ∠A is obtuse and a > b, exactly one triangle exists.", true, "Side a is then long enough, and only one position works."),
   mc(S`$\angle A=150^\circ$ and $b=10$. For which values of $a$ is there a triangle?`, S`$a>10$`, [S`$a\ge5$`, S`$5<a<10$`, S`$a=5$`], "Obtuse A: a must be the longest side."),
   num(S`$\angle A=40^\circ$, $\angle B=75^\circ$, $c=12$. Find the area of the triangle (2 decimals).`, rd(area12), "a = 12 sin 40° / sin 65°; area = ½ac sin B.", null, 0.01),
-  num(S`$\angle A=52^\circ$, $a=10$, $b=12.5$. Find the obtuse value of ∠B (1 decimal).`, rd(180 - asin((12.5 * sin(52)) / 10), 1), "h ≈ 9.85 < 10 < 12.5, so two triangles.", null, 0.05),
+  num(S`$\angle A=52^\circ$, $a=10$, $b=12.5$. Find the obtuse value of ∠B (1 decimal).`, rd(180 - asin((12.5 * sin(52)) / 10), 1), "h ≈ 9.85 < 10 < 12.5, so two triangles.", FIG.amb52, 0.05),
   num(S`The ratio $\frac a{\sin A}$ equals the diameter of the circle through A, B and C. Find that circle's radius when $a=10$ and $\angle A=30^\circ$.`, 10, "Diameter 10/½ = 20."),
   num(S`$\angle A=35^\circ$ and $a=6$. What is the largest whole-number value of $b$ for which at least one triangle exists?`, 10, "Need b sin 35° ≤ 6, so b ≤ 10.46."),
   num(S`For the data in the figure ($\angle A=28^\circ$, $b=16$, $a=9$), find the obtuse value of ∠B (1 decimal).`, rd(180 - asin((16 * sin(28)) / 9), 1), "180° − sin⁻¹(16 sin 28° / 9).",
@@ -46,5 +47,5 @@ export const Q = [
     triD([[0, 0], [1000, 0], [1000 + h18 / Math.tan((35 * Math.PI) / 180), h18]], ["A 22°", "B 35°", "peak"], { extra: [{ pts: [[1000 + h18 / Math.tan((35 * Math.PI) / 180), 0], [1000 + h18 / Math.tan((35 * Math.PI) / 180), h18]], color: "gray" }] }), 0.5),
   num("Find side c (opposite C) to 2 decimals.", rd(c19), "∠C = 69°; c = 15 sin 69° / sin 48°.",
     triD([[0, 0], [c19, 0], [b19 * cos(63), b19 * sin(63)]], ["A 63°", "B 48°", "C"], { marks: [[b19 * cos(63) / 2 - 1.2, b19 * sin(63) / 2, "15"], [(c19 + b19 * cos(63)) / 2 + 0.8, b19 * sin(63) / 2, `${rd(a19, 1)}`]] }), 0.01),
-  num(S`$\angle A=40^\circ$, $a=8$, $b=11$. Two triangles are possible. What is the SUM of the two possible values of ∠C?`, 100, "C₁ = 140° − B₁ and C₂ = B₁ − 40°."),
+  num(S`$\angle A=40^\circ$, $a=8$, $b=11$. Two triangles are possible. What is the SUM of the two possible values of ∠C?`, 100, "C₁ = 140° − B₁ and C₂ = B₁ − 40°.", FIG.amb40),
 ];

@@ -1,3 +1,4 @@
+import { FIG } from "../../mcr3u-bank-figures/figs.mjs";
 // 5.3 Reciprocal Ratios and Trigonometric Identities — 20 easy + 20 medium questions
 import { mc, ms, num, tf } from "./kit.mjs";
 import { armD, rightD, sin, cos, tan, rd } from "./fig.mjs";
@@ -13,9 +14,9 @@ export const E = [
   mc(S`What is $\cot60^\circ$?`, S`$\frac1{\sqrt3}$`, [S`$\sqrt3$`, S`$2$`, S`$\frac12$`], "1 ÷ √3."),
   mc(S`Which equals $\csc\theta$?`, S`$\frac1{\sin\theta}$`, [S`$\frac1{\cos\theta}$`, S`$\sin^{-1}\theta$`, S`$\frac1{\tan\theta}$`], "Cosecant is the reciprocal of sine."),
   mc(S`In a right triangle, $\sec\theta$ equals which ratio?`, "hyp/adj", ["adj/hyp", "hyp/opp", "opp/adj"], "Reciprocal of adj/hyp."),
-  num("A right triangle has sides 5, 12 and 13, with ∠A opposite 5. Find csc A.", 2.6, "13/5."),
-  num("In the same 5–12–13 triangle, find sec A to 4 decimals.", rd(13 / 12, 4), "13/12.", null, 0.0001),
-  num("In the same 5–12–13 triangle, find cot A.", 2.4, "12/5."),
+  num("A right triangle has sides 5, 12 and 13, with ∠A opposite 5. Find csc A.", 2.6, "13/5.", FIG.tri5),
+  num("A right triangle has sides 5, 12 and 13, with ∠A opposite 5. Find sec A to 4 decimals.", rd(13 / 12, 4), "13/12.", FIG.tri5, 0.0001),
+  num("A right triangle has sides 5, 12 and 13, with ∠A opposite 5. Find cot A.", 2.4, "12/5.", FIG.tri5),
   num(S`Evaluate $\sec70^\circ$ to 4 decimals.`, rd(1 / cos(70), 4), "1 ÷ cos 70°.", null, 0.0001),
   num(S`Evaluate $\csc25^\circ$ to 4 decimals.`, rd(1 / sin(25), 4), "1 ÷ sin 25°.", null, 0.0001),
   num(S`Evaluate $\cot55^\circ$ to 4 decimals.`, rd(1 / tan(55), 4), "1 ÷ tan 55°.", null, 0.0001),

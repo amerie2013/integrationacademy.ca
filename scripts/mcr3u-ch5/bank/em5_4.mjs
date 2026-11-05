@@ -1,3 +1,4 @@
+import { FIG } from "../../mcr3u-bank-figures/figs.mjs";
 // 5.4 The Sine Law and the Ambiguous Case — 20 easy + 20 medium questions
 import { mc, ms, num, tf } from "./kit.mjs";
 import { triD, sin, cos, asin, rd } from "./fig.mjs";
@@ -36,21 +37,21 @@ export const M = [
   num(S`$\angle A=38^\circ$, $a=11$, $b=8$. Find $\angle B$ to 1 decimal.`, rd(asin((8 * sin(38)) / 11), 1), "a > b, so B is acute.", null, 0.05),
   num(S`$\angle B=118^\circ$, $b=25$, $c=15$. Find $\angle C$ to 1 decimal.`, rd(asin((15 * sin(118)) / 25), 1), "B is obtuse, so C must be acute.", null, 0.05),
   num(S`$\angle A=27^\circ$, $\angle B=104^\circ$, $a=14$. Find $c$ to 2 decimals.`, rd((14 * sin(49)) / sin(27)), "C = 49°.", null, 0.01),
-  num(S`$\angle A=42^\circ$, $a=9$, $b=12$. Find the acute value of ∠B to 1 decimal.`, rd(asin((12 * sin(42)) / 9), 1), "sin B = 12 sin 42° / 9.", null, 0.05),
-  num(S`$\angle A=42^\circ$, $a=9$, $b=12$. Find the obtuse value of ∠B to 1 decimal.`, rd(180 - asin((12 * sin(42)) / 9), 1), "180° minus the acute value.", null, 0.05),
+  num(S`$\angle A=42^\circ$, $a=9$, $b=12$. Find the acute value of ∠B to 1 decimal.`, rd(asin((12 * sin(42)) / 9), 1), "sin B = 12 sin 42° / 9.", FIG.amb42, 0.05),
+  num(S`$\angle A=42^\circ$, $a=9$, $b=12$. Find the obtuse value of ∠B to 1 decimal.`, rd(180 - asin((12 * sin(42)) / 9), 1), "180° minus the acute value.", FIG.amb42, 0.05),
   num(S`$\angle A=50^\circ$ and $b=14$. What is the smallest whole-number value of $a$ that gives two triangles?`, 11, "h = 14 sin 50° ≈ 10.72."),
   num(S`$\angle A=25^\circ$, $a=10$, $b=18$. How many triangles are possible?`, 2, "h ≈ 7.61 < 10 < 18."),
   tf("If the sine law gives sin B > 1, no triangle exists.", true, "No angle has a sine greater than 1."),
   tf(S`$\angle A=60^\circ$, $a=9$, $b=9$ gives exactly one triangle.`, true, "a ≥ b: one triangle (here equilateral)."),
   mc("For an acute ∠A, when do two triangles exist?", S`$b\sin A<a<b$`, [S`$a<b\sin A$`, S`$a\ge b$`, S`$a=b\sin A$`], "Side a must be longer than the height but shorter than b."),
-  num("Points A and B are 300 m apart. A point C across a valley gives ∠CAB = 41° and ∠CBA = 63°. Find AC to 1 decimal.", rd((300 * sin(63)) / sin(76), 1), "∠C = 76°; AC is opposite B.", null, 0.05),
-  num("Two coast-guard posts are 5 km apart. A ship is seen at 72° from the line between them at post 1 and at 66° at post 2. How far is the ship from post 2 (2 decimals)?", rd((5 * sin(72)) / sin(42)), "Angle at ship 42°; the side from post 2 is opposite 72°.", null, 0.01),
+  num("Points A and B are 300 m apart. A point C across a valley gives ∠CAB = 41° and ∠CBA = 63°. Find AC to 1 decimal.", rd((300 * sin(63)) / sin(76), 1), "∠C = 76°; AC is opposite B.", FIG.valley, 0.05),
+  num("Two coast-guard posts are 5 km apart. A ship is seen at 72° from the line between them at post 1 and at 66° at post 2. How far is the ship from post 2 (2 decimals)?", rd((5 * sin(72)) / sin(42)), "Angle at ship 42°; the side from post 2 is opposite 72°.", FIG.coast, 0.01),
   num(S`$\angle A=\angle B=33^\circ$ and $c=20$. Find $a$ to 2 decimals.`, rd((20 * sin(33)) / sin(114)), "C = 114°.", null, 0.01),
   num(S`$\angle A=72^\circ$, $a=20$, $b=17$. Find $\angle B$ to 1 decimal.`, rd(asin((17 * sin(72)) / 20), 1), "sin B = 17 sin 72° / 20.", null, 0.05),
-  num(S`$\angle A=24^\circ$, $a=7$, $b=15$. How many triangles are possible?`, 2, "h = 15 sin 24° ≈ 6.10."),
-  num(S`$\angle A=24^\circ$, $a=7$, $b=15$. Find the obtuse value of ∠B to 1 decimal.`, rd(180 - asin((15 * sin(24)) / 7), 1), "180° − sin⁻¹(15 sin 24° / 7).", null, 0.05),
+  num(S`$\angle A=24^\circ$, $a=7$, $b=15$. How many triangles are possible?`, 2, "h = 15 sin 24° ≈ 6.10.", FIG.amb24),
+  num(S`$\angle A=24^\circ$, $a=7$, $b=15$. Find the obtuse value of ∠B to 1 decimal.`, rd(180 - asin((15 * sin(24)) / 7), 1), "180° − sin⁻¹(15 sin 24° / 7).", FIG.amb24, 0.05),
   ms("Which give exactly one triangle? Select all.", ["A = 40°, B = 65°, c = 9", "A = 30°, a = 4, b = 8", "A = 30°, a = 6, b = 8", "A = 30°, a = 9, b = 8", "A = 120°, a = 5, b = 8"], [0, 1, 3], "ASA: one; a = h: one; h < a < b: two; a ≥ b: one; obtuse with a < b: none."),
-  num("A and B are 60 m apart on a riverbank. A tree T on the far bank gives ∠TAB = 58° and ∠TBA = 80°. Find AT to 1 decimal.", rd((60 * sin(80)) / sin(42), 1), "∠T = 42°; AT is opposite B.", null, 0.05),
+  num("A and B are 60 m apart on a riverbank. A tree T on the far bank gives ∠TAB = 58° and ∠TBA = 80°. Find AT to 1 decimal.", rd((60 * sin(80)) / sin(42), 1), "∠T = 42°; AT is opposite B.", FIG.river, 0.05),
   num("Find AC to 2 decimals.", rd((25 * sin(57)) / sin(75)), "∠C = 75°; AC is opposite B.", asa(48, 57, 25, [[12.5, 0, "25"]]), 0.01),
   num(S`Find $b$ to 2 decimals if $a=16$.`, rd((16 * sin(71)) / sin(44)), "b = 16 sin 71° / sin 44°.", asa(44, 71, (16 * sin(65)) / sin(44), [[(16 * sin(71)) / sin(44) * cos(44) / 2 - 1, (16 * sin(71)) / sin(44) * sin(44) / 2, "b"]]), 0.01),
 ];

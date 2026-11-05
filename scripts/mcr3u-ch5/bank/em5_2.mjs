@@ -1,3 +1,4 @@
+import { FIG } from "../../mcr3u-bank-figures/figs.mjs";
 // 5.2 Angles from 0° to 360° — 20 easy + 20 medium questions
 import { mc, ms, num, tf } from "./kit.mjs";
 import { armD, unitD, acos, asin, atan, rd } from "./fig.mjs";
@@ -13,9 +14,9 @@ export const E = [
   mc(S`What is $\cos120^\circ$?`, S`$-\frac12$`, [S`$\frac12$`, S`$-\frac{\sqrt3}2$`, S`$\frac{\sqrt3}2$`], "Related 60°, Quadrant 2: cosine negative."),
   mc(S`What is $\tan135^\circ$?`, S`$-1$`, [S`$1$`, S`$-\sqrt3$`, S`$0$`], "Related 45°, Quadrant 2: tangent negative."),
   mc(S`What is $\sin240^\circ$?`, S`$-\frac{\sqrt3}2$`, [S`$\frac{\sqrt3}2$`, S`$-\frac12$`, S`$\frac12$`], "Related 60°, Quadrant 3: sine negative."),
-  num("The point (6, 8) is on the terminal arm of θ. Find r.", 10, "√(36 + 64)."),
-  num("The point (6, 8) is on the terminal arm of θ. Find cos θ.", 0.6, "x/r = 6/10."),
-  num("The point (−3, −4) is on the terminal arm of θ. Find sin θ.", -0.8, "y/r = −4/5."),
+  num("The point (6, 8) is on the terminal arm of θ. Find r.", 10, "√(36 + 64).", FIG.arm68),
+  num("The point (6, 8) is on the terminal arm of θ. Find cos θ.", 0.6, "x/r = 6/10.", FIG.arm68),
+  num("The point (−3, −4) is on the terminal arm of θ. Find sin θ.", -0.8, "y/r = −4/5.", FIG.armN34),
   tf(S`$\tan270^\circ$ is undefined.`, true, "At 270°, x = 0."),
   num(S`Evaluate $\cos180^\circ$.`, -1, "The point (−1, 0)."),
   num(S`Evaluate $\sin360^\circ$.`, 0, "Back at (1, 0)."),
@@ -34,8 +35,8 @@ export const M = [
   num(S`$\sin\theta=0.8$. Give the obtuse solution between 0° and 180°, to 1 decimal.`, rd(180 - asin(0.8), 1), "180° − sin⁻¹ 0.8.", null, 0.05),
   num(S`$\cos\theta=-0.3$. Give the smaller solution between 0° and 360°, to 1 decimal.`, rd(acos(-0.3), 1), "cos⁻¹(−0.3) is in Quadrant 2.", null, 0.05),
   num(S`$\tan\theta=-1.5$. Give the solution in Quadrant 4, to 1 decimal.`, rd(360 - atan(1.5), 1), "360° − tan⁻¹ 1.5.", null, 0.05),
-  num("The point (−7, 24) is on the terminal arm of θ. Find θ to 1 decimal.", rd(180 - atan(24 / 7), 1), "Related tan⁻¹(24/7); Quadrant 2.", null, 0.05),
-  num("The point (−2, −5) is on the terminal arm of θ. Find θ to 1 decimal.", rd(180 + atan(2.5), 1), "Related tan⁻¹ 2.5; Quadrant 3.", null, 0.05),
+  num("The point (−7, 24) is on the terminal arm of θ. Find θ to 1 decimal.", rd(180 - atan(24 / 7), 1), "Related tan⁻¹(24/7); Quadrant 2.", FIG.armN724, 0.05),
+  num("The point (−2, −5) is on the terminal arm of θ. Find θ to 1 decimal.", rd(180 + atan(2.5), 1), "Related tan⁻¹ 2.5; Quadrant 3.", FIG.armN25, 0.05),
   num(S`Evaluate $\sin120^\circ+\cos330^\circ$ to 2 decimals.`, rd(Math.sqrt(3)), "√3/2 + √3/2 = √3.", null, 0.01),
   mc(S`Evaluate $\cos210^\circ\tan225^\circ$.`, S`$-\frac{\sqrt3}2$`, [S`$\frac{\sqrt3}2$`, S`$-\frac12$`, S`$1$`], "(−√3/2)(1)."),
   num(S`$\sin\theta=\frac5{13}$ and θ is in Quadrant 2. Find $\cos\theta$ to 4 decimals.`, rd(-12 / 13, 4), "x = −12.", null, 0.0001),

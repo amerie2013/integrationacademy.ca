@@ -9,7 +9,7 @@ export const TOPIC = "8.3 Compound Interest: Present Value";
 export const Q = [
   $("You owe 5000 dollars in 2 years and 8000 dollars in 6 years. What single payment in 4 years settles both, at 5%/a compounded annually (dollars)?", fv(5000, 0.05, 2) + pv(8000, 0.05, 2), "Move 5000 forward 2 years and 8000 back 2 years."),
   $("Offer A pays 3000 dollars now and 3000 dollars in 3 years. Offer B pays 6500 dollars in 3 years. At 6%/a compounded annually, find the present value of A (dollars).", 3000 + pv(3000, 0.06, 3), "3000 + 3000(1.06)⁻³."),
-  num("For the offers above (A: 3000 now + 3000 in 3 years; B: 6500 in 3 years), which is better at 6%? Enter 1 for A or 2 for B.", 3000 + pv(3000, 0.06, 3) > pv(6500, 0.06, 3) ? 1 : 2, `PV(B) = ${c2(pv(6500, 0.06, 3))}.`),
+  num("Offer A pays 3000 dollars now and 3000 dollars in 3 years. Offer B pays 6500 dollars in 3 years. Which is better at 6%/a compounded annually? Enter 1 for A or 2 for B.", 3000 + pv(3000, 0.06, 3) > pv(6500, 0.06, 3) ? 1 : 2, `PV(B) = ${c2(pv(6500, 0.06, 3))}.`),
   num("How many months does 4000 dollars take to grow to 5000 dollars at 4.8%/a compounded monthly?", periodsTo(1.25, 0.004), "1.004ⁿ ≥ 1.25."),
   num("How many quarters does money take to double at 5%/a compounded quarterly?", periodsTo(2, 0.0125), "1.0125ⁿ ≥ 2."),
   num("At what annual rate compounded annually does money double in exactly 9 years (%, 2 decimals)?", c2((2 ** (1 / 9) - 1) * 100), "2^(1/9) − 1.", null, 0.01),

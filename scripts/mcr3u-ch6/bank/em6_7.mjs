@@ -1,3 +1,4 @@
+import { FIG } from "../../mcr3u-bank-figures/figs.mjs";
 // 6.7 Solving Problems with Sinusoidal Models — 20 easy + 20 medium questions
 import { mc, ms, num, tf } from "./kit.mjs";
 import { waveD, sin, cos, rd } from "./fig.mjs";
@@ -30,14 +31,14 @@ export const E = [
 ];
 
 export const M = [
-  num("A wheel has radius 15 m, hub 17 m and turns once every 60 s; riders board at the bottom. Find the height at t = 10 s (m).", 9.5, "−15 cos 60° + 17.", null, 0.001),
-  num("For the same wheel (radius 15 m, hub 17 m, 60 s), find the height at t = 20 s (m).", 24.5, "−15 cos 120° + 17.", null, 0.001),
-  num("High tide is 6.8 m at 2:00 and the next low tide is 1.2 m at 8:12. What is the amplitude (m)?", 2.8, "(6.8 − 1.2)/2.", null, 0.001),
-  num("For that tide (high 6.8 m, low 1.2 m), what is c (m)?", 4, "(6.8 + 1.2)/2."),
-  num("For that tide (high at 2:00, low at 8:12), what is k (2 decimals)?", rd(k3), "Half period 6.2 h, so period 12.4 h.", null, 0.01),
-  num(S`For that tide, \(D=2.8\cos(${rd(k3)}(t-2))+4\). Find the depth at 5:06 (t = 5.1), 2 decimals.`, rd(tide(5.1)), "A quarter period after high tide: about the mean level.", null, 0.02),
+  num("A wheel has radius 15 m, hub 17 m and turns once every 60 s; riders board at the bottom. Find the height at t = 10 s (m).", 9.5, "−15 cos 60° + 17.", FIG.w1517, 0.001),
+  num("A wheel has radius 15 m, hub 17 m and turns once every 60 s; riders board at the bottom. Find the height at t = 20 s (m).", 24.5, "−15 cos 120° + 17.", FIG.w1517, 0.001),
+  num("High tide is 6.8 m at 2:00 and the next low tide is 1.2 m at 8:12. What is the amplitude (m)?", 2.8, "(6.8 − 1.2)/2.", FIG.tide68, 0.001),
+  num("High tide is 6.8 m at 2:00 and the next low tide is 1.2 m at 8:12. In a model of the depth, what is c (m)?", 4, "(6.8 + 1.2)/2.", FIG.tide68),
+  num("High tide is 6.8 m at 2:00 and the next low tide is 1.2 m at 8:12. In a model of the depth, what is k (2 decimals)?", rd(k3), "Half period 6.2 h, so period 12.4 h.", FIG.tide68, 0.01),
+  num(S`The depth of a tide is \(D=2.8\cos(${rd(k3)}(t-2))+4\). Find the depth at 5:06 (t = 5.1), 2 decimals.`, rd(tide(5.1)), "A quarter period after high tide: about the mean level.", null, 0.02),
   num(S`Daylight is modelled by \(L=3.5\cos\left(\frac{360}{365}(t-172)\right)+12\). How many hours on day 172?`, 15.5, "The maximum.", null, 0.001),
-  num(S`Using the same model, how many hours of daylight on day 263 (2 decimals)?`, rd(day(263)), "91 days after the max: close to the axis.", null, 0.01),
+  num(S`Daylight is modelled by \(L=3.5\cos\left(\frac{360}{365}(t-172)\right)+12\). How many hours of daylight on day 263 (2 decimals)?`, rd(day(263)), "91 days after the max: close to the axis.", null, 0.01),
   mc("A Ferris wheel is sped up to turn twice as fast. What happens to k?", "it doubles", ["it halves", "it stays the same", "it becomes negative"], "Period halves, so k = 360/period doubles."),
   mc("The boarding platform and hub are raised 1 m. What happens in the model?", "c increases by 1", ["a increases by 1", "k increases by 1", "d increases by 1"], "Vertical translation."),
   tf("If the period of a tide increases, k decreases.", true, "k = 360 ÷ period."),
