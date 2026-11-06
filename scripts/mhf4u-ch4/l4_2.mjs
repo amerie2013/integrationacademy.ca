@@ -2,6 +2,7 @@
 // reciprocal ratios, and ratios from a point on the terminal arm
 import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, q, num, choice, hard, plane } from "./lib.mjs";
 import { UC, ARM } from "./trigfig.mjs";
+import { tv } from "../mcr3u-extables.mjs";
 
 export const TITLE = "4.2 Trigonometric Ratios and Special Angles";
 export const ID = "1aae247b-f10a-4743-8e73-82121fd9dfc9";
@@ -58,22 +59,40 @@ export const blocks = () => [
 
   examples([
     ["A Quadrant 2 angle", S`Find the exact value of \(\cos\dfrac{5\pi}6\).`,
-      [S`\(\frac{5\pi}6\) is in Q2 with reference angle \(\frac\pi6\).`, S`\(\cos\frac\pi6=\frac{\sqrt3}2\), and cosine is negative in Q2.`],
+      [S`<b>Locate.</b> \(\frac\pi2\lt\frac{5\pi}6\lt\pi\), so the angle is in Q2.`,
+        S`<b>Reference angle.</b> \(\pi-\frac{5\pi}6=\frac\pi6\).`,
+        S`<b>Size.</b> \(\cos\frac\pi6=\frac{\sqrt3}2\).`,
+        S`<b>Sign.</b> In Q2 the x-coordinate is negative, so cosine is negative.`,
+        S`<b>Check.</b> The point on the circle is \(\left(-\frac{\sqrt3}2,\frac12\right)\), and its x-coordinate is the answer ✓`],
       S`\(-\dfrac{\sqrt3}2\)`,
       plane(UC(150, "(−√3/2, 1/2)"))],
     ["A Quadrant 3 angle", S`Find the exact value of \(\tan\dfrac{5\pi}4\).`,
-      [S`Q3, reference angle \(\frac\pi4\).`, S`\(\tan\frac\pi4=1\), and tangent is positive in Q3.`],
+      [S`<b>Locate.</b> \(\frac{5\pi}4=\pi+\frac\pi4\), so the angle is in Q3 with reference angle \(\frac\pi4\).`,
+        S`<b>Size.</b> \(\tan\frac\pi4=1\).`,
+        S`<b>Sign.</b> In Q3, both coordinates are negative, so \(\tan=\frac yx\) is positive.`,
+        S`<b>Check.</b> The point is \(\left(-\frac{\sqrt2}2,-\frac{\sqrt2}2\right)\), and its ratio \(\frac yx=1\) ✓`],
       S`\(1\)`,
       plane(UC(225, "(−√2/2, −√2/2)"))],
     ["A reciprocal ratio", S`Find the exact value of \(\csc\dfrac{11\pi}6\).`,
-      [S`Q4, reference angle \(\frac\pi6\). \(\sin\frac{11\pi}6=-\frac12\).`, S`\(\csc\) is the reciprocal: \(\frac{1}{-1/2}=-2\).`],
+      [S`<b>Rewrite.</b> Cosecant is the reciprocal of sine, so find \(\sin\frac{11\pi}6\) first.`,
+        S`<b>Locate.</b> \(\frac{11\pi}6=2\pi-\frac\pi6\), so it is in Q4 with reference angle \(\frac\pi6\).`,
+        S`<b>Sine.</b> \(\sin\frac\pi6=\frac12\), and sine is negative in Q4: \(\sin\frac{11\pi}6=-\frac12\).`,
+        S`<b>Reciprocal.</b> \(\dfrac1{-1/2}=-2\).`,
+        S`<b>Check.</b> \(\left(-\frac12\right)(-2)=1\) ✓`],
       S`\(-2\)`,
       plane(UC(330, "(√3/2, −1/2)"))],
     ["An exact expression", S`Evaluate \(\sin^2\dfrac\pi3+\cos\pi\).`,
-      [S`\(\sin\frac\pi3=\frac{\sqrt3}2\), so \(\sin^2\frac\pi3=\frac34\).`, S`\(\cos\pi=-1\), so the sum is \(\frac34-1=-\frac14\).`],
-      S`\(-\dfrac14\)`],
+      [S`<b>First term.</b> \(\sin\frac\pi3=\frac{\sqrt3}2\). The notation \(\sin^2\) means the square of the sine: \(\left(\frac{\sqrt3}2\right)^2=\frac34\).`,
+        S`<b>Second term.</b> The angle \(\pi\) is at the point \((-1,0)\), so \(\cos\pi=-1\).`,
+        S`<b>Add.</b> \(\frac34+(-1)=-\frac14\).`,
+        S`<b>Check.</b> Decimals: \(0.866^2-1\approx-0.25\) ✓`],
+      S`\(-\dfrac14\)`,
+      plane(UC(60, "π/3"))],
     ["A point on the terminal arm", S`The terminal arm of \(\theta\) passes through \((-3,4)\). Find all six ratios and \(\theta\) in radians.`,
-      [S`\(r=\sqrt{9+16}=5\).`, S`\(\sin\theta=\frac45,\ \cos\theta=-\frac35,\ \tan\theta=-\frac43\).`, S`\(\csc\theta=\frac54,\ \sec\theta=-\frac53,\ \cot\theta=-\frac34\).`, S`Q2: \(\theta=\pi-\tan^{-1}\frac43\approx2.21\).`],
+      [S`<b>Radius.</b> \(r=\sqrt{(-3)^2+4^2}=\sqrt{25}=5\).`,
+        S`<b>Ratios.</b> ${tv(["\\(\\sin\\theta=\\frac yr\\)", "\\(\\cos\\theta=\\frac xr\\)", "\\(\\tan\\theta=\\frac yx\\)"], ["\\(\\frac45\\)", "\\(-\\frac35\\)", "\\(-\\frac43\\)"], ["\\(\\csc\\theta=\\frac ry\\)", "\\(\\sec\\theta=\\frac rx\\)", "\\(\\cot\\theta=\\frac xy\\)"], ["\\(\\frac54\\)", "\\(-\\frac53\\)", "\\(-\\frac34\\)"])}`,
+        S`<b>Angle.</b> The point is in Q2. The reference angle is \(\tan^{-1}\frac43\approx0.93\), so \(\theta\approx\pi-0.93\approx2.21\).`,
+        S`<b>Check.</b> \(\sin^2\theta+\cos^2\theta=\frac{16}{25}+\frac9{25}=1\) ✓`],
       S`\(\sin\theta=\frac45\), \(\cos\theta=-\frac35\), \(\tan\theta=-\frac43\), \(\theta\approx2.21\)`,
       plane(ARM(-3, 4, "(−3, 4)"))],
   ]),

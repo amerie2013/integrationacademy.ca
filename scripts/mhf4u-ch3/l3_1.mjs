@@ -1,6 +1,7 @@
 // MHF4U 3.1 — Reciprocal of a Linear Function: y = 1/(kx + c), vertical and horizontal asymptotes, domain and
 // range, invariant points, increasing/decreasing behaviour, behaviour near the asymptotes, and rates of change
 import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, q, num, choice, hard, plane, rat } from "./lib.mjs";
+import { tv } from "../mcr3u-extables.mjs";
 
 export const TITLE = "3.1 Reciprocal of a Linear Function";
 export const ID = "59244325-5784-40b1-a10e-de02c0a075bd";
@@ -60,22 +61,43 @@ export const blocks = () => [
 
   examples([
     ["Sketch from the line", S`Sketch \(f(x)=x-3\) and \(g(x)=\dfrac1{x-3}\).`,
-      [S`Zero of \(f\): \(x=3\) → vertical asymptote. Horizontal asymptote \(y=0\).`, S`Invariant points: \(x-3=1\Rightarrow(4,1)\); \(x-3=-1\Rightarrow(2,-1)\).`, S`\(f\) is negative for \(x\lt3\), so \(g\) is too.`],
+      [S`<b>Idea.</b> Each y-value of \(g\) is the reciprocal of the y-value of \(f\). So we can read \(g\) from the line.`,
+        S`<b>Vertical asymptote.</b> \(f(3)=0\), and \(\frac10\) has no value. So \(g\) has a VA at \(x=3\).`,
+        S`<b>Horizontal asymptote.</b> As \(|x|\) grows, \(|f(x)|\) grows, so \(\frac1{f(x)}\) approaches 0: \(y=0\).`,
+        S`<b>Invariant points.</b> \(1\) and \(-1\) are their own reciprocals. \(x-3=1\) gives \((4,1)\); \(x-3=-1\) gives \((2,-1)\).`,
+        S`<b>Signs.</b> A reciprocal keeps the sign, so \(g\lt0\) for \(x\lt3\) and \(g>0\) for \(x>3\).`,
+        S`<b>Check.</b> \(g(5)=\frac12\) and \(f(5)=2\): reciprocals ✓`],
       S`branches in the regions \(x\lt3,\ y\lt0\) and \(x>3,\ y>0\)`,
       plane({ view: { xmin: -2, xmax: 8, ymin: -5, ymax: 5 }, curves: [{ f: (x) => x - 3, color: "blue" }, ...rat((x) => 1 / (x - 3), [3], { xmin: -2, xmax: 8 })], vlines: [{ x: 3, color: "red", dash: true }], points: [{ x: 4, y: 1, label: "(4, 1)", color: "green" }, { x: 2, y: -1, label: "(2, −1)", color: "green" }], step: { x: 1, y: 1 } })],
     ["Key features", S`State the asymptotes, domain, range and intercepts of \(g(x)=\dfrac1{2x+5}\).`,
-      [S`\(2x+5=0\Rightarrow x=-2.5\).`, S`y-intercept \(\frac15=0.2\); no x-intercept.`],
+      [S`<b>Vertical asymptote.</b> \(2x+5=0\) gives \(x=-2.5\). This is the only excluded input.`,
+        S`<b>Horizontal asymptote.</b> As \(|x|\) grows, the fraction approaches 0, so \(y=0\).`,
+        S`<b>Domain and range.</b> \(x\ne-2.5\). A fraction with numerator 1 is never 0, so \(y\ne0\).`,
+        S`<b>Intercepts.</b> \(g(0)=\frac15=0.2\). There is no x-intercept, since \(g\) is never 0.`,
+        S`<b>Check.</b> \(g(-2)=1\), an invariant point of \(y=2x+5\) ✓`],
       S`VA \(x=-2.5\), HA \(y=0\); \(D: x\ne-2.5\), \(R: y\ne0\); y-intercept \(0.2\)`,
       plane({ view: V8, curves: rat((x) => 1 / (2 * x + 5), [-2.5], V8), vlines: [{ x: -2.5, color: "red", dash: true }], points: [{ x: 0, y: 0.2, label: "(0, 0.2)", color: "blue" }], step: { x: 1, y: 1 } })],
     ["Near the asymptote", S`Describe \(g(x)=\dfrac1{x+1}\) as \(x\) approaches \(-1\).`,
-      [S`\(g(-1.1)=-10\), \(g(-1.01)=-100\): from the left, \(g\to-\infty\).`, S`\(g(-0.99)=100\), \(g(-0.9)=10\): from the right, \(g\to+\infty\).`],
-      S`\(y\to-\infty\) as \(x\to-1^-\); \(y\to+\infty\) as \(x\to-1^+\)`],
+      [S`<b>Method.</b> Take x-values closer and closer to \(-1\) from each side.`,
+        S`<b>Table.</b> ${tv(["\\(x\\)", "\\(-1.1\\)", "\\(-1.01\\)", "\\(-0.99\\)", "\\(-0.9\\)"], ["\\(x+1\\)", "\\(-0.1\\)", "\\(-0.01\\)", "\\(0.01\\)", "\\(0.1\\)"], ["\\(g(x)\\)", "\\(-10\\)", "\\(-100\\)", "\\(100\\)", "\\(10\\)"])}`,
+        S`<b>Left side.</b> The denominator is a tiny negative number, so \(g\) is large and negative.`,
+        S`<b>Right side.</b> The denominator is a tiny positive number, so \(g\) is large and positive.`,
+        S`<b>Check on the graph.</b> The branches go to opposite ends along \(x=-1\) ✓`],
+      S`\(y\to-\infty\) as \(x\to-1^-\); \(y\to+\infty\) as \(x\to-1^+\)`,
+      plane({ view: { xmin: -5, xmax: 3, ymin: -8, ymax: 8 }, curves: rat((x) => 1 / (x + 1), [-1], { xmin: -5, xmax: 3 }), vlines: [{ x: -1, color: "red", dash: true }], points: [{ x: -0.9, y: 8, label: "up", color: "amber" }, { x: -1.1, y: -8, label: "down", color: "amber" }], step: { x: 1, y: 2 } })],
     ["A decreasing line", S`Sketch \(g(x)=\dfrac1{-x+2}\) and describe where it increases.`,
-      [S`Zero of \(-x+2\): \(x=2\). Invariant points: \(-x+2=1\Rightarrow(1,1)\); \(-x+2=-1\Rightarrow(3,-1)\).`, S`\(f\) decreases, so \(g\) increases on each branch.`],
+      [S`<b>Asymptote.</b> \(-x+2=0\) gives \(x=2\).`,
+        S`<b>Invariant points.</b> \(-x+2=1\) gives \((1,1)\). \(-x+2=-1\) gives \((3,-1)\).`,
+        S`<b>Direction.</b> \(f\) decreases. If a positive quantity gets smaller, its reciprocal gets larger. So \(g\) increases wherever \(f\) decreases.`,
+        S`<b>Intervals.</b> The asymptote splits the graph, so \(g\) increases on each branch separately.`,
+        S`<b>Check.</b> \(g(0)=\frac12\) and \(g(1)=1\): increasing ✓`],
       S`VA \(x=2\); increasing on \((-\infty,2)\) and on \((2,\infty)\)`,
       plane({ view: V8, curves: [{ f: (x) => -x + 2, color: "blue" }, ...rat((x) => 1 / (2 - x), [2], V8)], vlines: [{ x: 2, color: "red", dash: true }], points: [{ x: 1, y: 1, label: "(1, 1)", color: "green" }, { x: 3, y: -1, label: "(3, −1)", color: "green" }], step: { x: 1, y: 1 } })],
     ["Equation from a graph", S`A graph of the form \(y=\dfrac1{kx+c}\) has its vertical asymptote at \(x=-3\) and passes through \((-1,\tfrac14)\). Find the equation.`,
-      [S`Zero at \(-3\): \(kx+c=k(x+3)\).`, S`\(\dfrac1{k(-1+3)}=\dfrac14\Rightarrow2k=4\Rightarrow k=2\).`],
+      [S`<b>Use the asymptote.</b> The denominator is 0 at \(x=-3\), so it has the factor \(x+3\): \(kx+c=k(x+3)\).`,
+        S`<b>Use the point.</b> \(\dfrac1{k(-1+3)}=\dfrac14\), so \(\dfrac1{2k}=\dfrac14\).`,
+        S`<b>Solve.</b> \(2k=4\), so \(k=2\). The denominator is \(2(x+3)=2x+6\).`,
+        S`<b>Check.</b> \(\frac1{-2+6}=\frac14\) ✓`],
       S`\(y=\dfrac1{2x+6}\)`,
       plane({ view: V8, curves: rat((x) => 1 / (2 * x + 6), [-3], V8), vlines: [{ x: -3, color: "red", dash: true }], points: [{ x: -1, y: 0.25, label: "(−1, ¼)", color: "blue" }], step: { x: 1, y: 1 } })],
   ]),

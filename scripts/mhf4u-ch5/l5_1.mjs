@@ -2,6 +2,7 @@
 // asymptotes of tangent, and rates of change on the curves
 import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, q, num, choice, hard, plane } from "./lib.mjs";
 import { TG, PI } from "./trigfig.mjs";
+import { tv } from "../mcr3u-extables.mjs";
 
 export const TITLE = "5.1 Graphs of Sine, Cosine and Tangent";
 export const ID = "6d4f0005-0001-4001-8001-000000000501";
@@ -65,24 +66,44 @@ export const blocks = () => [
 
   examples([
     ["Reading sine", S`For \(y=\sin x\) on \([0,2\pi]\), list the zeros, the maximum and minimum points, and the intervals of increase.`,
-      [S`Zeros \(0,\ \pi,\ 2\pi\).`, S`Max \(\left(\frac\pi2,1\right)\), min \(\left(\frac{3\pi}2,-1\right)\).`, S`Increasing before the max and after the min.`],
+      [S`<b>Meaning.</b> \(\sin x\) is the height of the point on the unit circle at angle \(x\). So read heights around one turn.`,
+        S`<b>Table.</b> ${tv(["\\(x\\)", "\\(0\\)", "\\(\\frac\\pi2\\)", "\\(\\pi\\)", "\\(\\frac{3\\pi}2\\)", "\\(2\\pi\\)"], ["\\(\\sin x\\)", "\\(0\\)", "\\(1\\)", "\\(0\\)", "\\(-1\\)", "\\(0\\)"])}`,
+        S`<b>Zeros.</b> The height is 0 at \(0,\ \pi,\ 2\pi\).`,
+        S`<b>Extremes.</b> Max \(\left(\frac\pi2,1\right)\) and min \(\left(\frac{3\pi}2,-1\right)\).`,
+        S`<b>Increasing.</b> The curve rises up to the max and again after the min.`,
+        S`<b>Check.</b> \(\sin\frac\pi6=\frac12\) and \(\sin\frac\pi3\approx0.87\): rising in the first interval ✓`],
       S`increasing on \(\left[0,\frac\pi2\right)\) and \(\left(\frac{3\pi}2,2\pi\right]\)`,
       plane(TG([[Math.sin, "violet"]], { xmin: -0.5, xmax: 7, ymin: -2, ymax: 2 }, [lab(PI / 2, 1, "(π/2, 1)"), lab((3 * PI) / 2, -1, "(3π/2, −1)", "red")]))],
     ["Reading cosine", S`For \(y=\cos x\) on \([0,2\pi]\), state where it is decreasing and where \(\cos x\lt0\).`,
-      [S`It falls from \(1\) at \(0\) to \(-1\) at \(\pi\).`, S`Below the axis between its zeros \(\frac\pi2\) and \(\frac{3\pi}2\).`],
+      [S`<b>Meaning.</b> \(\cos x\) is the x-coordinate of the point on the unit circle.`,
+        S`<b>Table.</b> ${tv(["\\(x\\)", "\\(0\\)", "\\(\\frac\\pi2\\)", "\\(\\pi\\)", "\\(\\frac{3\\pi}2\\)", "\\(2\\pi\\)"], ["\\(\\cos x\\)", "\\(1\\)", "\\(0\\)", "\\(-1\\)", "\\(0\\)", "\\(1\\)"])}`,
+        S`<b>Decreasing.</b> It falls from \(1\) at \(x=0\) to \(-1\) at \(x=\pi\).`,
+        S`<b>Negative.</b> It is below the axis between its zeros \(\frac\pi2\) and \(\frac{3\pi}2\), which are Q2 and Q3.`,
+        S`<b>Check.</b> \(\cos\pi=-1\lt0\), and \(\pi\) lies in that interval ✓`],
       S`decreasing on \((0,\pi)\); negative on \(\left(\frac\pi2,\frac{3\pi}2\right)\)`,
       plane(TG([[Math.cos, "green"]], { xmin: -0.5, xmax: 7, ymin: -2, ymax: 2 }, [lab(PI / 2, 0, "π/2"), lab((3 * PI) / 2, 0, "3π/2")]))],
     ["Tangent's asymptotes", S`State the asymptotes and zeros of \(y=\tan x\) on \([-\pi,\pi]\).`,
-      [S`Asymptotes where \(\cos x=0\): \(x=\pm\frac\pi2\).`, S`Zeros where \(\sin x=0\): \(x=-\pi,\ 0,\ \pi\).`],
+      [S`<b>Rule.</b> \(\tan x=\dfrac{\sin x}{\cos x}\).`,
+        S`<b>Asymptotes.</b> A zero denominator gives no value: \(\cos x=0\) at \(x=\pm\frac\pi2\).`,
+        S`<b>Zeros.</b> A zero numerator gives 0: \(\sin x=0\) at \(x=-\pi,\ 0,\ \pi\).`,
+        S`<b>Spacing.</b> Zeros are \(\pi\) apart, which matches tangent's period.`,
+        S`<b>Check.</b> \(\tan\frac\pi4=1\), between the zero at 0 and the asymptote at \(\frac\pi2\) ✓`],
       S`asymptotes \(x=\pm\frac\pi2\); zeros \(-\pi,\ 0,\ \pi\)`,
       tanFig({ xmin: -3.5, xmax: 3.5, ymin: -5, ymax: 5 }, [lab(PI / 4, 1, "(π/4, 1)")])],
     ["Where the curves meet", S`Use the graphs to find where \(\sin x=\cos x\) on \([0,2\pi]\).`,
-      [S`They meet where \(\tan x=1\).`, S`\(x=\frac\pi4\) and \(x=\frac\pi4+\pi=\frac{5\pi}4\).`],
+      [S`<b>Rewrite.</b> At a crossing, \(\cos x\ne0\), because sine and cosine are never 0 together. Divide: \(\tan x=1\).`,
+        S`<b>First crossing.</b> \(\tan\frac\pi4=1\), so \(x=\frac\pi4\).`,
+        S`<b>Second crossing.</b> Tangent has period \(\pi\): \(x=\frac\pi4+\pi=\frac{5\pi}4\).`,
+        S`<b>Check.</b> At \(\frac{5\pi}4\), both equal \(-\frac{\sqrt2}2\) ✓`],
       S`\(x=\frac\pi4,\ \frac{5\pi}4\)`,
       plane(TG([[Math.sin, "violet"], [Math.cos, "green"]], { xmin: -0.5, xmax: 7, ymin: -2, ymax: 2 }, [lab(PI / 4, Math.SQRT1_2, "π/4"), lab((5 * PI) / 4, -Math.SQRT1_2, "5π/4")]))],
     ["Average rate of change", S`Find the average rate of change of \(y=\sin x\) on \(\left[0,\frac\pi2\right]\) and on \(\left[\frac\pi2,\pi\right]\).`,
-      [S`\(\frac{1-0}{\pi/2}=\frac2\pi\approx0.64\).`, S`\(\frac{0-1}{\pi/2}=-\frac2\pi\approx-0.64\).`],
-      S`\(\frac2\pi\) and \(-\frac2\pi\)`],
+      [S`<b>Rule.</b> The average rate is the slope of the secant: \(\dfrac{y_2-y_1}{x_2-x_1}\).`,
+        S`<b>First.</b> \(\sin0=0\) and \(\sin\frac\pi2=1\): \(\dfrac{1-0}{\pi/2}=\frac2\pi\approx0.64\).`,
+        S`<b>Second.</b> \(\sin\frac\pi2=1\) and \(\sin\pi=0\): \(\dfrac{0-1}{\pi/2}=-\frac2\pi\approx-0.64\).`,
+        S`<b>Check.</b> The curve is symmetric about \(x=\frac\pi2\), so the slopes are opposites ✓`],
+      S`\(\frac2\pi\) and \(-\frac2\pi\)`,
+      plane(TG([[Math.sin, "violet"]], { xmin: -0.5, xmax: 4, ymin: -1, ymax: 2 }, [lab(0, 0, "(0, 0)"), lab(PI / 2, 1, "(π/2, 1)"), lab(PI, 0, "(π, 0)")], { segs: [{ pts: [[0, 0], [PI / 2, 1]], color: "amber" }, { pts: [[PI / 2, 1], [PI, 0]], color: "red" }] }))],
   ]),
 
   practice([

@@ -1,6 +1,7 @@
 // MHF4U Worksheet 5.1 — Graphs of Sine, Cosine and Tangent (teacher edition)
 import { F } from "./figT.mjs";
 import { TG, UC } from "../trigfig.mjs";
+import { tvT } from "../../mcr3u-extables.mjs";
 const S = String.raw;
 const V = { xmin: -0.5, xmax: 6.8, ymin: -2, ymax: 2 };
 const Vw = { xmin: -6.8, xmax: 6.8, ymin: -2, ymax: 2 };
@@ -11,7 +12,7 @@ const EXAMPLES = [
     fig: F(TG([[Math.sin, "violet"]], V, [{ x: 0, y: 0 }, { x: Math.PI / 2, y: 1, label: "(π/2, 1)" }, { x: Math.PI, y: 0 }, { x: 1.5 * Math.PI, y: -1, label: "(3π/2, −1)" }, { x: 2 * Math.PI, y: 0 }])),
     steps: [S`\textbf{Definition:} $\sin x$ is the $y$-coordinate of the point on the unit circle at angle $x$.`,
       S`\textbf{Quarter turns:} at $x=0,\frac\pi2,\pi,\frac{3\pi}2,2\pi$ the point is $(1,0),(0,1),(-1,0),(0,-1),(1,0)$.`,
-      S`\textbf{Read the $y$-coordinates:} $\sin x=0,\ 1,\ 0,\ -1,\ 0$.`,
+      S`\textbf{Table of the $y$-coordinates:}${tvT(["$x$", "0", "$\frac\pi2$", "$\pi$", "$\frac{3\pi}2$", "$2\pi$"], ["$\sin x$", "0", "1", "0", "$-1$", "0"])}`,
       S`\textbf{Join smoothly:} the curve rises to $1$, falls through $0$ to $-1$, then returns to $0$.`,
       S`\textbf{Check:} $\sin\frac\pi6=\frac12$, so the curve should be halfway up at $x\approx0.52$ \checkmark`],
     ans: S`$(0,0),\ (\frac\pi2,1),\ (\pi,0),\ (\frac{3\pi}2,-1),\ (2\pi,0)$` },
@@ -40,6 +41,7 @@ const EXAMPLES = [
       S`\textbf{Check:} $\sin\frac{5\pi}6=\sin\left(\pi-\frac\pi6\right)=\sin\frac\pi6=\frac12$ \checkmark`],
     ans: S`$x=\frac\pi6,\ \frac{5\pi}6$` },
   { title: "Increasing and decreasing", q: S`On which intervals of $0\le x\le2\pi$ is $y=\sin x$ increasing? Decreasing?`,
+    fig: F(TG([[Math.sin, "violet"]], V, [{ x: Math.PI / 2, y: 1, label: "max (π/2, 1)" }, { x: 1.5 * Math.PI, y: -1, label: "min (3π/2, −1)" }])),
     steps: [S`\textbf{Rule:} a function is increasing where its graph rises from left to right; it changes direction at maximums and minimums.`,
       S`\textbf{Turning points:} max at $x=\frac\pi2$, min at $x=\frac{3\pi}2$.`,
       S`\textbf{Increasing:} from the start up to the max, and from the min to the end: $\left(0,\frac\pi2\right)$ and $\left(\frac{3\pi}2,2\pi\right)$.`,
@@ -68,6 +70,7 @@ const EXAMPLES = [
       S`\textbf{Test outside:} $x=0$: $0<1$, and $x=\frac{7\pi}4$: $-\frac{\sqrt2}2<\frac{\sqrt2}2$, so sine is below there.`],
     ans: S`$\frac\pi4<x<\frac{5\pi}4$` },
   { title: "Equal sizes", q: S`Find every $x$ in $0\le x\le2\pi$ with $|\sin x|=|\cos x|$, and explain why they are evenly spaced.`,
+    fig: F(TG([[(x) => Math.abs(Math.sin(x)), "violet"], [(x) => Math.abs(Math.cos(x)), "green"]], V, [{ x: Math.PI / 4, y: Math.SQRT1_2, label: "π/4" }, { x: 0.75 * Math.PI, y: Math.SQRT1_2, label: "3π/4" }, { x: 1.25 * Math.PI, y: Math.SQRT1_2, label: "5π/4" }, { x: 1.75 * Math.PI, y: Math.SQRT1_2, label: "7π/4" }])),
     steps: [S`\textbf{Rewrite:} $|\sin x|=|\cos x|\Leftrightarrow|\tan x|=1\Leftrightarrow\tan x=1$ or $\tan x=-1$.`,
       S`\textbf{$\tan x=1$:} $x=\frac\pi4,\ \frac{5\pi}4$. \textbf{$\tan x=-1$:} $x=\frac{3\pi}4,\ \frac{7\pi}4$.`,
       S`\textbf{Spacing:} these are the four angles whose unit-circle point lies on $y=x$ or $y=-x$, one in each quadrant, $\frac\pi2$ apart.`,

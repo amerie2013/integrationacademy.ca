@@ -1,6 +1,7 @@
 // MHF4U 1.6 — Slopes of Tangents and Instantaneous Rate of Change: shrinking secants, difference quotients,
 // centred estimates, reading tangents from graphs, zero rate at turning points
 import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, q, num, choice, hard, plane } from "./lib.mjs";
+import { tv } from "../mcr3u-extables.mjs";
 
 export const TITLE = "1.6 Slopes of Tangents and Instantaneous Rate of Change";
 export const ID = "6d4f0001-0001-4001-8001-000000000106";
@@ -52,23 +53,43 @@ export const blocks = () => [
 
   examples([
     ["Shrinking secants", S`For \(h(t)=-5t^2+20t\), estimate the instantaneous velocity at \(t=1\).`,
-      [S`\(h(1)=15\); \(h(1.1)=-6.05+22=15.95\); \(h(1.01)=-5.1005+20.2=15.0995\).`, S`\(\frac{15.95-15}{0.1}=9.5\); \(\frac{15.0995-15}{0.01}=9.95\).`, S`The values approach 10.`],
-      S`about \(10\) m/s`],
+      [S`<b>Idea.</b> Use average velocities over smaller and smaller intervals that start at \(t=1\). Their limit is the instantaneous velocity.`,
+        S`<b>Heights.</b> \(h(1)=15\), \(h(1.1)=15.95\), \(h(1.01)=15.0995\).`,
+        S`<b>Table.</b> ${tv(["interval", "\\([1,1.1]\\)", "\\([1,1.01]\\)"], ["average velocity", "\\(\\frac{15.95-15}{0.1}=9.5\\)", "\\(\\frac{15.0995-15}{0.01}=9.95\\)"])}`,
+        S`<b>Pattern.</b> Each step gets closer to 10, so the estimate is 10 m/s.`,
+        S`<b>Check on the graph.</b> A line through \((1,15)\) with slope 10 just touches the curve there ✓`],
+      S`about \(10\) m/s`,
+      plane({ view: { xmin: -0.5, xmax: 4.5, ymin: -2, ymax: 26 }, curves: [{ f: (t) => -5 * t * t + 20 * t, a: 0, b: 4, color: "violet" }], lines: [{ m: 10, b: 5, color: "green" }], points: [{ x: 1, y: 15, label: "(1, 15)", color: "amber" }], step: { x: 1, y: 2 }, xlabel: "t (s)", ylabel: "h (m)" })],
     ["A centred estimate", S`Estimate the instantaneous rate of change of \(f(x)=x^3\) at \(x=2\).`,
-      [S`Centred with \(h=0.001\): \(\frac{2.001^3-1.999^3}{0.002}\).`, S`\(2.001^3\approx8.012006\), \(1.999^3\approx7.988006\); difference \(\approx0.024\).`, S`\(\frac{0.024}{0.002}=12\).`],
+      [S`<b>Method.</b> A centred quotient \(\frac{f(a+h)-f(a-h)}{2h}\) uses points on both sides. It is usually more accurate.`,
+        S`<b>Values.</b> With \(h=0.001\): \(2.001^3\approx8.012006\) and \(1.999^3\approx7.988006\).`,
+        S`<b>Difference.</b> \(\approx0.024\).`,
+        S`<b>Divide.</b> \(\frac{0.024}{0.002}=12\).`,
+        S`<b>Check on the graph.</b> The green line through \((2,8)\) with slope 12 touches the curve ✓`],
       S`about \(12\)`,
       plane({ view: { xmin: 0, xmax: 3, ymin: -2, ymax: 20 }, curves: [{ f: (x) => x ** 3, color: "violet" }], lines: [{ m: 12, b: -16, color: "green", label: "tangent, slope 12" }], points: [{ x: 2, y: 8, label: "(2, 8)" }], step: { x: 0.5, y: 2 } })],
     ["Exponential growth", S`For \(P(t)=100(2)^t\), estimate the growth rate at \(t=2\).`,
-      [S`\(P(2)=400\). With \(h=0.001\): \(\frac{100(2^{2.001})-400}{0.001}\).`, S`\(2^{2.001}\approx4.0027731\), so the quotient is \(\approx277.3\).`],
+      [S`<b>Value at the point.</b> \(P(2)=100(4)=400\).`,
+        S`<b>A very short interval.</b> With \(h=0.001\): \(2^{2.001}\approx4.0027731\), so \(P(2.001)\approx400.27731\).`,
+        S`<b>Quotient.</b> \(\frac{400.27731-400}{0.001}\approx277.3\).`,
+        S`<b>Interpret.</b> At that instant, the colony is growing at about 277 per hour.`,
+        S`<b>Sense check.</b> The average on \([1,3]\) is \(\frac{800-200}2=300\), a similar size ✓`],
       S`about \(277\) per hour`,
       plane({ view: { xmin: -0.3, xmax: 3.5, ymin: -50, ymax: 1100 }, curves: [{ f: (t) => 100 * 2 ** t, a: 0, b: 3.4, color: "red" }], lines: [{ m: 277.3, b: 400 - 2 * 277.3, color: "green", label: "tangent" }], points: [{ x: 2, y: 400, label: "(2, 400)" }], xlabel: "t (h)", ylabel: "P", step: { x: 0.5, y: 100 } })],
     ["A zero rate", S`Estimate the instantaneous rate of change of \(f(x)=x^3-3x\) at \(x=1\). What does it tell you?`,
-      [S`Centred, \(h=0.01\): \(f(1.01)=1.030301-3.03=-1.999699\); \(f(0.99)=0.970299-2.97=-1.999701\).`, S`\(\frac{-1.999699-(-1.999701)}{0.02}=\frac{0.000002}{0.02}=0.0001\approx0\).`],
-      S`about 0: a horizontal tangent — a local minimum at \((1,-2)\)`,
+      [S`<b>Values.</b> Centred, \(h=0.01\): \(f(1.01)=1.030301-3.03=-1.999699\) and \(f(0.99)=0.970299-2.97=-1.999701\).`,
+        S`<b>Quotient.</b> \(\frac{-1.999699-(-1.999701)}{0.02}=\frac{0.000002}{0.02}=0.0001\), which is about 0.`,
+        S`<b>Meaning.</b> A rate of 0 means a horizontal tangent, so this may be a turning point.`,
+        S`<b>Decide.</b> \(f(0.9)=-1.971\) and \(f(1.1)=-1.969\) are both above \(f(1)=-2\). So \((1,-2)\) is a local minimum ✓`],
+      S`about 0: a horizontal tangent, a local minimum at \((1,-2)\)`,
       plane({ view: { xmin: -2.5, xmax: 2.5, ymin: -4, ymax: 4 }, curves: [{ f: (x) => x ** 3 - 3 * x, color: "violet" }], lines: [{ m: 0, b: -2, color: "green", label: "tangent y = −2" }], points: [{ x: 1, y: -2, label: "(1, −2)" }, { x: -1, y: 2, label: "(−1, 2)" }], step: { x: 1, y: 1 } })],
     ["A sinusoid", S`Estimate the instantaneous rate of change of \(y=3\sin x\) at \(x=\tfrac\pi3\).`,
-      [S`\(\frac\pi3\approx1.0472\). With \(h=0.001\): \(\frac{3\sin(1.0482)-3\sin(1.0472)}{0.001}\approx1.499\).`, S`So the curve rises about 1.5 units per radian there.`],
-      S`about \(1.5\)`],
+      [S`<b>Set the point.</b> \(\frac\pi3\approx1.0472\). Work in radians, and \(3\sin(1.0472)\approx2.5981\).`,
+        S`<b>Quotient.</b> With \(h=0.001\): \(\frac{3\sin(1.0482)-3\sin(1.0472)}{0.001}\approx1.499\).`,
+        S`<b>Interpret.</b> The curve rises about 1.5 units per radian at this point.`,
+        S`<b>Sense check.</b> The rate at \(x=0\) is about 3, and at the peak \(x=\frac\pi2\) it is 0. A value between them fits ✓`],
+      S`about \(1.5\)`,
+      plane({ view: { xmin: -0.3, xmax: 3.4, ymin: -1, ymax: 4 }, curves: [{ f: (x) => 3 * Math.sin(x), a: 0, b: Math.PI, color: "blue" }], lines: [{ m: 1.5, b: 3 * Math.sin(Math.PI / 3) - 1.5 * (Math.PI / 3), color: "green" }], points: [{ x: Math.PI / 3, y: 3 * Math.sin(Math.PI / 3), label: "(π/3, 2.60)", color: "amber" }], step: { x: 0.5, y: 1 } })],
   ]),
 
   practice([

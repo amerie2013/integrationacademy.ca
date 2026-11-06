@@ -1,6 +1,7 @@
 // MHF4U 2.7 — Chapter 2 Review (NEW lesson): division and the remainder theorem, the factor theorem, polynomial
 // equations, families of polynomials, and polynomial inequalities (graphical and algebraic)
 import { intro, section, keyIdea, widget, examples, practice, wrapUp, table, q, num, choice, roots, hard, plane } from "./lib.mjs";
+import { tv } from "../mcr3u-extables.mjs";
 
 export const TITLE = "2.7 Chapter 2 Review";
 export const ID = "6d4f0002-0001-4001-8001-000000000207";
@@ -49,22 +50,40 @@ export const blocks = () => [
 
   examples([
     ["Divide and interpret", S`Divide \(3x^3-5x^2+2x-8\) by \(x-2\). What does the remainder tell you?`,
-      [S`Synthetic division with 2: \(3;\ 3\cdot2-5=1;\ 1\cdot2+2=4;\ 4\cdot2-8=0\).`, S`Quotient \(3x^2+x+4\), remainder 0.`],
+      [S`<b>Synthetic division.</b> ${tv(["coefficients", "3", "\\(-5\\)", "2", "\\(-8\\)"], ["multiply by 2", "", "6", "2", "8"], ["add", "3", "1", "4", "0"])}`,
+        S`<b>Read.</b> The quotient is \(3x^2+x+4\), and the remainder is 0.`,
+        S`<b>Interpret.</b> A remainder of 0 means \(x-2\) is a factor, and \(x=2\) is a zero.`,
+        S`<b>More information.</b> \(3x^2+x+4\) has discriminant \(1-48\lt0\), so 2 is the only real zero. The graph crosses once ✓`],
       S`\(3x^3-5x^2+2x-8=(x-2)(3x^2+x+4)\): \(x-2\) is a factor and \(x=2\) is a zero`,
       plane({ view: { xmin: -1.5, xmax: 3, ymin: -16, ymax: 10 }, curves: [{ f: (x) => 3 * x ** 3 - 5 * x * x + 2 * x - 8, color: "violet" }], points: [{ x: 2, y: 0, label: "(2, 0)", color: "red" }], step: { x: 0.5, y: 2 } })],
     ["Factor fully", S`Factor \(x^3+4x^2+x-6\).`,
-      [S`\(P(1)=1+4+1-6=0\). Divide: \(x^2+5x+6=(x+2)(x+3)\).`],
+      [S`<b>Candidates.</b> Divisors of 6: \(\pm1,\pm2,\pm3,\pm6\).`,
+        S`<b>Test.</b> \(P(1)=1+4+1-6=0\) ✓`,
+        S`<b>Divide.</b> Dividing by \(x-1\) gives \(x^2+5x+6\).`,
+        S`<b>Factor.</b> \((x+2)(x+3)\).`,
+        S`<b>Check.</b> \(x=0\): \((-1)(2)(3)=-6\) ✓`],
       S`\((x-1)(x+2)(x+3)\)`,
       plane({ view: { xmin: -4, xmax: 2, ymin: -8, ymax: 6 }, curves: [{ f: (x) => x ** 3 + 4 * x * x + x - 6, color: "violet" }], points: [{ x: -3, y: 0, label: "−3", color: "red" }, { x: -2, y: 0, label: "−2", color: "red" }, { x: 1, y: 0, label: "1", color: "red" }], step: { x: 1, y: 2 } })],
     ["Solve with irrational roots", S`Solve \(x^3-5x^2+3x+1=0\).`,
-      [S`\(P(1)=1-5+3+1=0\). Divide: \(x^2-4x-1\).`, S`\(x=\dfrac{4\pm\sqrt{16+4}}{2}=2\pm\sqrt5\).`],
+      [S`<b>Find a zero.</b> \(P(1)=1-5+3+1=0\).`,
+        S`<b>Divide.</b> The quotient is \(x^2-4x-1\), which has no integer factors.`,
+        S`<b>Quadratic formula.</b> \(x=\dfrac{4\pm\sqrt{16+4}}{2}=\dfrac{4\pm2\sqrt5}{2}=2\pm\sqrt5\).`,
+        S`<b>Check.</b> The sum of the roots should be \(-\frac ba=5\): \(1+4=5\) ✓`],
       S`\(x=1\), \(2+\sqrt5\approx4.24\), \(2-\sqrt5\approx-0.24\)`,
       plane({ view: { xmin: -1, xmax: 5, ymin: -10, ymax: 6 }, curves: [{ f: (x) => x ** 3 - 5 * x * x + 3 * x + 1, color: "violet" }], points: [{ x: 2 - Math.sqrt(5), y: 0, color: "red" }, { x: 1, y: 0, color: "red" }, { x: 2 + Math.sqrt(5), y: 0, color: "red" }], step: { x: 1, y: 2 } })],
     ["Pick a member", S`A cubic has zeros \(0\), \(2\) and \(-3\) and passes through \((1,-8)\). Find its equation.`,
-      [S`\(y=kx(x-2)(x+3)\).`, S`\(k(1)(-1)(4)=-4k=-8\Rightarrow k=2\).`],
-      S`\(y=2x(x-2)(x+3)\)`],
+      [S`<b>Family.</b> The zero 0 gives the factor \(x\): \(y=kx(x-2)(x+3)\).`,
+        S`<b>Use the point.</b> \(-8=k(1)(-1)(4)=-4k\).`,
+        S`<b>Solve.</b> \(k=2\).`,
+        S`<b>Check.</b> \(2(1)(-1)(4)=-8\) ✓`],
+      S`\(y=2x(x-2)(x+3)\)`,
+      plane({ view: { xmin: -4, xmax: 3, ymin: -12, ymax: 22 }, curves: [{ f: (x) => 2 * x * (x - 2) * (x + 3), color: "violet" }], points: [{ x: -3, y: 0, label: "−3", color: "red" }, { x: 0, y: 0, label: "0", color: "red" }, { x: 2, y: 0, label: "2", color: "red" }, { x: 1, y: -8, label: "(1, −8)", color: "amber" }], step: { x: 1, y: 4 } })],
     ["Solve an inequality", S`Solve \(x^3-2x^2-3x\ge0\).`,
-      [S`\(x(x-3)(x+1)\ge0\); critical values \(-1, 0, 3\).`, S`Signs: −, +, −, +; include the zeros.`],
+      [S`<b>Factor.</b> \(x(x^2-2x-3)=x(x-3)(x+1)\).`,
+        S`<b>Critical values.</b> \(-1,0,3\).`,
+        S`<b>Sign chart.</b> ${tv(["interval", "\\(x\\lt-1\\)", "\\((-1,0)\\)", "\\((0,3)\\)", "\\(x>3\\)"], ["test \\(x\\)", "\\(-2\\)", "\\(-0.5\\)", "1", "4"], ["sign", "−", "+", "−", "+"])}`,
+        S`<b>Read.</b> We want \(\ge0\), so the + intervals with their zeros included.`,
+        S`<b>Check.</b> \(x=1\): \(1-2-3=-4\lt0\), not included ✓`],
       S`\(x\in[-1,0]\cup[3,\infty)\)`,
       plane({ view: { xmin: -2, xmax: 4, ymin: -8, ymax: 8 }, curves: [{ f: (x) => x ** 3 - 2 * x * x - 3 * x, color: "violet" }], points: [{ x: -1, y: 0, label: "−1", color: "red" }, { x: 0, y: 0, label: "0", color: "red" }, { x: 3, y: 0, label: "3", color: "red" }], step: { x: 1, y: 2 } })],
   ]),

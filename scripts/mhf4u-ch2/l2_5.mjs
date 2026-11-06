@@ -1,6 +1,7 @@
 // MHF4U 2.5 — Solving Polynomial Inequalities Graphically (NEW): inequality and interval notation, reading
 // f(x) > 0 and f(x) > g(x) from graphs, approximate boundaries from technology, and applications
 import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, q, num, choice, hard, plane } from "./lib.mjs";
+import { tv } from "../mcr3u-extables.mjs";
 
 export const TITLE = "2.5 Solving Polynomial Inequalities Graphically";
 export const ID = "6d4f0002-0001-4001-8001-000000000205";
@@ -58,22 +59,39 @@ export const blocks = () => [
 
   examples([
     ["Above the axis", S`Use the graph of \(f(x)=(x+2)(x-1)(x-3)\) to solve \(f(x)>0\).`,
-      [S`Zeros \(-2, 1, 3\). The graph is above the axis between \(-2\) and \(1\), and to the right of \(3\).`, S`Strict inequality: zeros excluded.`],
-      S`\(x\in(-2,1)\cup(3,\infty)\)`],
+      [S`<b>Meaning.</b> \(f(x)>0\) asks where the graph is above the x-axis. We read x-values, not y-values.`,
+        S`<b>Zeros.</b> The graph meets the axis at \(-2,1,3\). These are the boundaries.`,
+        S`<b>Read the graph.</b> It is above the axis between \(-2\) and \(1\), and to the right of 3.`,
+        S`<b>Endpoints.</b> The inequality is strict, so the zeros are excluded.`,
+        S`<b>Check.</b> \(f(0)=6>0\) ✓ and \(f(2)=(4)(1)(-1)=-4\lt0\) ✓`],
+      S`\(x\in(-2,1)\cup(3,\infty)\)`,
+      plane({ view: { xmin: -4, xmax: 5, ymin: -12, ymax: 12 }, curves: [{ f: (x) => (x + 2) * (x - 1) * (x - 3), color: "violet" }], points: [{ x: -2, y: 0, label: "−2", color: "red" }, { x: 1, y: 0, label: "1", color: "red" }, { x: 3, y: 0, label: "3", color: "red" }, { x: 0, y: 6, label: "(0, 6)" }], step: { x: 1, y: 2 } })],
     ["On or below the axis", S`Solve \(x^4-5x^2+4\le0\) from its graph.`,
-      [S`\(x^4-5x^2+4=(x^2-1)(x^2-4)\): zeros \(\pm1,\pm2\).`, S`The W-shaped graph dips below the axis on \((-2,-1)\) and \((1,2)\); include the zeros.`],
+      [S`<b>Factor to get the zeros.</b> It is a quadratic in \(x^2\): \((x^2-1)(x^2-4)\). The zeros are \(\pm1,\pm2\).`,
+        S`<b>Read the graph.</b> The W shape dips below the axis on \((-2,-1)\) and on \((1,2)\).`,
+        S`<b>Endpoints.</b> \(\le\) includes the zeros.`,
+        S`<b>Check.</b> \(x=1.5\): \(5.0625-11.25+4=-2.1875\le0\) ✓. \(x=0\): \(4>0\), so 0 is not included ✓`],
       S`\(x\in[-2,-1]\cup[1,2]\)`,
       plane({ view: { xmin: -2.7, xmax: 2.7, ymin: -3, ymax: 6 }, curves: [{ f: (x) => x ** 4 - 5 * x * x + 4, color: "violet" }], points: [{ x: -2, y: 0, label: "−2", color: "red" }, { x: -1, y: 0, label: "−1", color: "red" }, { x: 1, y: 0, label: "1", color: "red" }, { x: 2, y: 0, label: "2", color: "red" }], step: { x: 0.5, y: 1 } })],
     ["Comparing two graphs", S`Solve \(x^3\ge4x\) graphically.`,
-      [S`The cubic \(y=x^3\) and the line \(y=4x\) meet where \(x^3=4x\): \(x=-2, 0, 2\).`, S`The cubic is on or above the line for \(-2\le x\le0\) and for \(x\ge2\).`],
+      [S`<b>Meaning.</b> Find where the cubic is on or above the line \(y=4x\).`,
+        S`<b>Meeting points.</b> \(x^3=4x\) gives \(x(x-2)(x+2)=0\), so \(x=-2,0,2\). Do not divide by \(x\), as that would lose a root.`,
+        S`<b>Read the graph.</b> The cubic is above the line for \(-2\lt x\lt0\) and for \(x>2\).`,
+        S`<b>Check.</b> \(x=-1\): \(-1\ge-4\) ✓. \(x=1\): \(1\ge4\) is false ✓`],
       S`\(x\in[-2,0]\cup[2,\infty)\)`,
       plane({ view: { xmin: -3, xmax: 3, ymin: -12, ymax: 12 }, curves: [{ f: (x) => x ** 3, color: "violet" }, { f: (x) => 4 * x, color: "green" }], points: [{ x: -2, y: -8, label: "(−2, −8)", color: "red" }, { x: 0, y: 0, color: "red" }, { x: 2, y: 8, label: "(2, 8)", color: "red" }], step: { x: 1, y: 2 } })],
     ["Boundaries from technology", S`Solve \(x^3-3x+1\lt0\). Round boundaries to 2 decimal places.`,
-      [S`No rational candidate works (\(\pm1\) give \(-1\) and \(3\)), so use the zero feature: \(x\approx-1.88\), \(0.35\), \(1.53\).`, S`Degree 3, \(a>0\): negative to the left of the first zero and between the second and third.`],
+      [S`<b>Try exact zeros.</b> The candidates are \(\pm1\), but \(P(1)=-1\) and \(P(-1)=3\). So there is no rational zero, and we use technology.`,
+        S`<b>Zeros.</b> The zero feature gives \(x\approx-1.88\), \(0.35\), \(1.53\).`,
+        S`<b>Signs.</b> Degree 3 with \(a>0\) starts negative: \(-,+,-,+\).`,
+        S`<b>Check.</b> \(x=1\): \(-1\lt0\) ✓. \(x=0\): \(1>0\) ✓`],
       S`\(x\lt-1.88\) or \(0.35\lt x\lt1.53\) (approximately)`,
       plane({ view: { xmin: -2.5, xmax: 2.5, ymin: -4, ymax: 5 }, curves: [{ f: (x) => x ** 3 - 3 * x + 1, color: "violet" }], points: [{ x: -1.879, y: 0, label: "≈ −1.88", color: "red" }, { x: 0.347, y: 0, label: "≈ 0.35", color: "red" }, { x: 1.532, y: 0, label: "≈ 1.53", color: "red" }], step: { x: 0.5, y: 1 } })],
     ["When is there a profit?", S`A company's profit is \(P(x)=-x^3+12x^2-20x\) thousand dollars for \(x\) hundred items (\(x\ge0\)). When is \(P(x)>0\)?`,
-      [S`\(P(x)=-x(x^2-12x+20)=-x(x-2)(x-10)\): zeros \(0, 2, 10\).`, S`The graph is above the axis between \(2\) and \(10\) (and negative just after \(0\)).`],
+      [S`<b>Factor.</b> \(P(x)=-x(x^2-12x+20)=-x(x-2)(x-10)\). The zeros are 0, 2 and 10.`,
+        S`<b>Signs on \(x\ge0\).</b> ${tv(["interval", "\\(0\\lt x\\lt2\\)", "\\(2\\lt x\\lt10\\)", "\\(x>10\\)"], ["test \\(x\\)", "1", "5", "11"], ["\\(P(x)\\)", "\\(-9\\)", "\\(75\\)", "\\(-99\\)"])}`,
+        S`<b>Conclude.</b> There is a profit only for \(2\lt x\lt10\).`,
+        S`<b>Interpret.</b> \(x\) is in hundreds, so this means between 200 and 1000 items.`],
       S`profit for \(200\lt\) items \(\lt1000\), i.e. \(2\lt x\lt10\)`,
       plane({ view: { xmin: -0.5, xmax: 11, ymin: -20, ymax: 110 }, curves: [{ f: (x) => -(x ** 3) + 12 * x * x - 20 * x, color: "violet", a: 0, b: 10.8 }], points: [{ x: 2, y: 0, label: "2", color: "red" }, { x: 10, y: 0, label: "10", color: "red" }], step: { x: 1, y: 10 } })],
   ]),

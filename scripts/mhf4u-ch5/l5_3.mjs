@@ -2,6 +2,7 @@
 // sketching, and equations from graphs
 import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, q, num, choice, hard, plane } from "./lib.mjs";
 import { TG, PI } from "./trigfig.mjs";
+import { tv } from "../mcr3u-extables.mjs";
 
 export const TITLE = "5.3 Sinusoidal Functions";
 export const ID = "a38fe526-5194-4ce5-9578-94944bcdaf6a";
@@ -62,23 +63,40 @@ export const blocks = () => [
 
   examples([
     ["Reading the features", S`State the amplitude, period, phase shift and range of \(y=-2\cos\left(\dfrac12x\right)+3\).`,
-      [S`\(a=-2\): amplitude 2, reflected. \(k=\frac12\): period \(4\pi\).`, S`No phase shift. Axis \(y=3\).`, S`Range \(3\pm2\).`],
+      [S`<b>Form.</b> \(y=a\cos(k(x-d))+c\), with \(a=-2\), \(k=\frac12\), \(d=0\), \(c=3\).`,
+        S`<b>Amplitude.</b> \(|a|=2\). The negative sign reflects the curve, so it starts at a minimum.`,
+        S`<b>Period.</b> \(\dfrac{2\pi}{k}=\dfrac{2\pi}{1/2}=4\pi\).`,
+        S`<b>Axis and range.</b> The axis is \(y=3\), so \(3-2\le y\le3+2\).`,
+        S`<b>Check.</b> \(x=0\): \(-2+3=1\), the minimum. \(x=2\pi\): \(-2\cos\pi+3=5\), the maximum ✓`],
       S`amplitude 2, period \(4\pi\), no shift, range \([1,5]\)`,
       G((x) => -2 * Math.cos(x / 2) + 3, { xmin: -1, xmax: 13, ymin: -1, ymax: 6 }, [lab(0, 1, "(0, 1)"), lab(2 * PI, 5, "(2π, 5)")])],
     ["Factoring first", S`Find the phase shift of \(y=\sin(2x-\pi)\).`,
-      [S`\(2x-\pi=2\left(x-\frac\pi2\right)\).`],
+      [S`<b>Rule.</b> The shift is read from the form \(k(x-d)\), so \(k\) must be factored out.`,
+        S`<b>Factor.</b> \(2x-\pi=2\left(x-\frac\pi2\right)\), so \(d=\frac\pi2\).`,
+        S`<b>Common error.</b> The shift is not \(\pi\). The \(\pi\) is divided by \(k\).`,
+        S`<b>Check.</b> The cycle starts where the inside is 0: \(2x-\pi=0\) gives \(x=\frac\pi2\) ✓`],
       S`\(\frac\pi2\) right`,
       plane(TG([[Math.sin, "gray"], [(x) => Math.sin(2 * x - PI), "violet"]], { xmin: -6.5, xmax: 6.5, ymin: -2, ymax: 2 }))],
     ["Key points", S`List the key points of one cycle of \(y=3\sin\left(x-\dfrac\pi2\right)+1\).`,
-      [S`Start \(x=\frac\pi2\), period \(2\pi\), step \(\frac\pi2\).`, S`Points: \(\left(\frac\pi2,1\right),(\pi,4),\left(\frac{3\pi}2,1\right),(2\pi,-2),\left(\frac{5\pi}2,1\right)\).`],
+      [S`<b>Features.</b> Amplitude 3, axis \(y=1\), period \(2\pi\), shift \(\frac\pi2\) right.`,
+        S`<b>Step.</b> A quarter period is \(\frac\pi2\), starting at \(x=\frac\pi2\).`,
+        S`<b>Table.</b> ${tv(["\\(x\\)", "\\(\\frac\\pi2\\)", "\\(\\pi\\)", "\\(\\frac{3\\pi}2\\)", "\\(2\\pi\\)", "\\(\\frac{5\\pi}2\\)"], ["position", "axis", "max", "axis", "min", "axis"], ["\\(y\\)", "\\(1\\)", "\\(4\\)", "\\(1\\)", "\\(-2\\)", "\\(1\\)"])}`,
+        S`<b>Check.</b> \(x=\pi\): \(3\sin\frac\pi2+1=4\) ✓`],
       S`max \((\pi,4)\), min \((2\pi,-2)\)`,
       G((x) => 3 * Math.sin(x - PI / 2) + 1, { xmin: 0, xmax: 9, ymin: -3, ymax: 5 }, [lab(PI, 4, "(π, 4)"), lab(2 * PI, -2, "(2π, −2)", "red")])],
     ["An equation from a graph", S`A sinusoid has a maximum at \(\left(\dfrac\pi4,5\right)\) and the next minimum at \(\left(\dfrac{3\pi}4,1\right)\). Write an equation using cosine.`,
-      [S`Axis \(c=\frac{5+1}2=3\), amplitude \(a=2\).`, S`Half a period is \(\frac{3\pi}4-\frac\pi4=\frac\pi2\), so the period is \(\pi\) and \(k=2\).`, S`A cosine starts at a max: \(d=\frac\pi4\).`],
+      [S`<b>Axis.</b> Halfway between the extremes: \(c=\frac{5+1}2=3\).`,
+        S`<b>Amplitude.</b> \(a=\frac{5-1}2=2\).`,
+        S`<b>Period.</b> Max to next min is half a period: \(\frac{3\pi}4-\frac\pi4=\frac\pi2\). So the period is \(\pi\) and \(k=\frac{2\pi}\pi=2\).`,
+        S`<b>Shift.</b> Cosine starts at a max, so \(d=\frac\pi4\).`,
+        S`<b>Check.</b> \(x=\frac{3\pi}4\): \(2\cos\left(2\cdot\frac\pi2\right)+3=2\cos\pi+3=1\) ✓`],
       S`\(y=2\cos\left(2\left(x-\frac\pi4\right)\right)+3\)`,
       G((x) => 2 * Math.cos(2 * (x - PI / 4)) + 3, { xmin: -1, xmax: 5, ymin: 0, ymax: 6 }, [lab(PI / 4, 5, "max"), lab((3 * PI) / 4, 1, "min", "red")])],
     ["A period without π", S`A wave has amplitude 4, period 12 and axis \(y=7\), and starts at the axis going up at \(x=0\). Write an equation.`,
-      [S`\(k=\frac{2\pi}{12}=\frac\pi6\).`, S`A sine starts at the axis going up.`],
+      [S`<b>k.</b> \(k=\dfrac{2\pi}{\text{period}}=\dfrac{2\pi}{12}=\dfrac\pi6\).`,
+        S`<b>Which curve.</b> Sine starts at the axis going up, so no shift is needed.`,
+        S`<b>Assemble.</b> \(a=4\), \(c=7\): \(y=4\sin\left(\frac\pi6x\right)+7\).`,
+        S`<b>Check.</b> A quarter period later, \(x=3\): \(4\sin\frac\pi2+7=11\), which is the max ✓`],
       S`\(y=4\sin\left(\frac\pi6x\right)+7\)`,
       G((x) => 4 * Math.sin((PI / 6) * x) + 7, { xmin: 0, xmax: 24, ymin: 0, ymax: 12 }, [lab(3, 11, "(3, 11)")], { step: { x: 3, y: 2 } })],
   ]),

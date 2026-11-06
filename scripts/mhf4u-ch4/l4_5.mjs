@@ -1,6 +1,6 @@
 // MHF4U 4.5 — Double Angle Formulas: sin 2x, the three forms of cos 2x, tan 2x, exact values and simplifying
 import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, q, num, choice, hard, plane } from "./lib.mjs";
-import { ARM, TG } from "./trigfig.mjs";
+import { ARM, TG, UC } from "./trigfig.mjs";
 
 export const TITLE = "4.5 Double Angle Formulas";
 export const ID = "14a47665-8167-495e-bc1f-3fe77b8fbafb";
@@ -58,21 +58,42 @@ export const blocks = () => [
 
   examples([
     ["All three from one ratio", S`\(\sin x=\dfrac35\) with \(\dfrac\pi2\lt x\lt\pi\). Find \(\sin2x\), \(\cos2x\) and \(\tan2x\).`,
-      [S`Q2: \(\cos x=-\frac45\).`, S`\(\sin2x=2\cdot\frac35\cdot\left(-\frac45\right)=-\frac{24}{25}\).`, S`\(\cos2x=1-2\cdot\frac9{25}=\frac7{25}\).`, S`\(\tan2x=\frac{\sin2x}{\cos2x}=-\frac{24}7\).`],
+      [S`<b>Cosine first.</b> The triangle is 3-4-5, and \(x\) is in Q2, where cosine is negative: \(\cos x=-\frac45\).`,
+        S`<b>Sine.</b> \(\sin2x=2\sin x\cos x=2\cdot\frac35\cdot\left(-\frac45\right)=-\frac{24}{25}\).`,
+        S`<b>Cosine.</b> \(\cos2x=1-2\sin^2x=1-2\cdot\frac9{25}=\frac7{25}\).`,
+        S`<b>Tangent.</b> \(\tan2x=\frac{\sin2x}{\cos2x}=-\frac{24}{25}\cdot\frac{25}7=-\frac{24}7\).`,
+        S`<b>Check.</b> \(\left(\frac{24}{25}\right)^2+\left(\frac7{25}\right)^2=\frac{576+49}{625}=1\) ✓`],
       S`\(-\frac{24}{25},\ \frac7{25},\ -\frac{24}7\)`,
       plane(ARM(-4, 3, "(−4, 3)"))],
     ["Condensing a product", S`Write \(2\sin\dfrac\pi8\cos\dfrac\pi8\) as one ratio and evaluate it.`,
-      [S`It matches \(2\sin x\cos x=\sin2x\) with \(x=\frac\pi8\).`, S`\(\sin\frac\pi4=\frac{\sqrt2}2\).`],
-      S`\(\dfrac{\sqrt2}2\)`],
+      [S`<b>Pattern.</b> It matches \(2\sin x\cos x=\sin2x\) with \(x=\frac\pi8\).`,
+        S`<b>Double.</b> \(2\cdot\frac\pi8=\frac\pi4\), so it equals \(\sin\frac\pi4\).`,
+        S`<b>Evaluate.</b> \(\sin\frac\pi4=\frac{\sqrt2}2\).`,
+        S`<b>Check.</b> \(2\sin22.5^\circ\cos22.5^\circ\approx2(0.383)(0.924)\approx0.707\) ✓`],
+      S`\(\dfrac{\sqrt2}2\)`,
+      plane(UC(45, "π/4"))],
     ["Condensing a difference of squares", S`Evaluate \(\cos^2\dfrac\pi{12}-\sin^2\dfrac\pi{12}\).`,
-      [S`It matches \(\cos2x\) with \(x=\frac\pi{12}\).`, S`\(\cos\frac\pi6=\frac{\sqrt3}2\).`],
-      S`\(\dfrac{\sqrt3}2\)`],
+      [S`<b>Pattern.</b> It matches \(\cos^2x-\sin^2x=\cos2x\) with \(x=\frac\pi{12}\).`,
+        S`<b>Double.</b> \(2\cdot\frac\pi{12}=\frac\pi6\).`,
+        S`<b>Evaluate.</b> \(\cos\frac\pi6=\frac{\sqrt3}2\).`,
+        S`<b>Check.</b> \(0.966^2-0.259^2\approx0.933-0.067=0.866\), and \(\frac{\sqrt3}2\approx0.866\) ✓`],
+      S`\(\dfrac{\sqrt3}2\)`,
+      plane(UC(30, "π/6"))],
     ["Tangent", S`\(\tan x=3\). Find \(\tan2x\).`,
-      [S`\(\tan2x=\dfrac{2(3)}{1-3^2}=\dfrac6{-8}\).`],
-      S`\(-\dfrac34\)`],
+      [S`<b>Formula.</b> \(\tan2x=\dfrac{2\tan x}{1-\tan^2x}\).`,
+        S`<b>Substitute.</b> \(\dfrac{2(3)}{1-3^2}=\dfrac6{-8}\).`,
+        S`<b>Simplify.</b> \(-\frac34\).`,
+        S`<b>Check.</b> \(x\approx1.249\), so \(\tan2.498\approx-0.75\) ✓`],
+      S`\(-\dfrac34\)`,
+      plane(ARM(1, 3, "(1, 3)"))],
     ["A half angle", S`Find the exact value of \(\cos\dfrac\pi8\).`,
-      [S`\(\cos\frac\pi4=2\cos^2\frac\pi8-1\).`, S`\(\cos^2\frac\pi8=\frac{1+\frac{\sqrt2}2}2=\frac{2+\sqrt2}4\).`, S`\(\frac\pi8\) is in Q1, so take the positive root.`],
-      S`\(\dfrac{\sqrt{2+\sqrt2}}2\)`],
+      [S`<b>Plan.</b> \(\frac\pi8\) is half of \(\frac\pi4\), whose cosine we know. Use \(\cos2x=2\cos^2x-1\) with \(x=\frac\pi8\).`,
+        S`<b>Set up.</b> \(\frac{\sqrt2}2=2\cos^2\frac\pi8-1\).`,
+        S`<b>Isolate.</b> \(\cos^2\frac\pi8=\frac{1+\frac{\sqrt2}2}2=\frac{2+\sqrt2}4\).`,
+        S`<b>Root.</b> \(\frac\pi8\) is in Q1, so cosine is positive: \(\cos\frac\pi8=\frac{\sqrt{2+\sqrt2}}2\).`,
+        S`<b>Check.</b> \(\frac{\sqrt{3.414}}2\approx0.924\), and \(\cos22.5^\circ\approx0.924\) ✓`],
+      S`\(\dfrac{\sqrt{2+\sqrt2}}2\)`,
+      plane(UC(22.5, "π/8"))],
   ]),
 
   practice([

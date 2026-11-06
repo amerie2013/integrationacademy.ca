@@ -1,6 +1,7 @@
 // MHF4U 2.6 — Solving Factorable Polynomial Inequalities Algebraically: rearrange, factor, critical values, sign
 // charts (factor tables) and test values, zeros of higher order, and applications
 import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, q, num, choice, hard, plane } from "./lib.mjs";
+import { signTable, lin } from "./sign.mjs";
 
 export const TITLE = "2.6 Solving Factorable Polynomial Inequalities Algebraically";
 export const ID = "75919f24-1ec3-4810-9e4c-5b46f23dcbe4";
@@ -59,23 +60,45 @@ export const blocks = () => [
 
   examples([
     ["A sign chart", S`Solve \((x-2)(x+3)(x-5)\lt0\).`,
-      [S`Critical values \(-3, 2, 5\).`, S`Signs of the product: \(x\lt-3\): −; \(-3\lt x\lt2\): +; \(2\lt x\lt5\): −; \(x>5\): +.`],
+      [S`<b>Why a chart?</b> A product can change sign only at a factor's zero. So its sign is constant on each interval between critical values.`,
+        S`<b>Critical values.</b> \(-3,2,5\) split the number line into four intervals.`,
+        S`<b>Sign chart.</b> Sign of each factor on each interval, then of the product:${signTable([lin(1, -2), lin(1, 3), lin(1, -5)], "<")}`,
+        S`<b>Read.</b> We want the negative intervals: \(x\lt-3\) and \(2\lt x\lt5\). Strict, so the critical values are excluded.`,
+        S`<b>Check.</b> \(x=3\): \((1)(6)(-2)=-12\lt0\) ✓`],
       S`\(x\lt-3\) or \(2\lt x\lt5\)`,
       plane({ view: { xmin: -4, xmax: 6, ymin: -40, ymax: 40 }, curves: [{ f: (x) => (x - 2) * (x + 3) * (x - 5), color: "violet" }], points: [{ x: -3, y: 0, label: "−3", color: "red" }, { x: 2, y: 0, label: "2", color: "red" }, { x: 5, y: 0, label: "5", color: "red" }], step: { x: 1, y: 10 } })],
     ["Factor first", S`Solve \(x^3-x^2-12x\ge0\).`,
-      [S`\(x(x-4)(x+3)\ge0\); critical values \(-3, 0, 4\).`, S`Test \(x=-4\): \((-4)(-8)(-1)=-32\) → −. Signs: −, +, −, +.`, S`Include the zeros (≥).`],
+      [S`<b>Factor.</b> Common factor \(x\): \(x(x^2-x-12)=x(x-4)(x+3)\).`,
+        S`<b>Critical values.</b> \(-3,0,4\).`,
+        S`<b>Sign chart.</b> Test \(x=-4\): \((-4)(-8)(-1)=-32\), negative, which matches the first column:${signTable([lin(1, 0), lin(1, -4), lin(1, 3)], ">=")}`,
+        S`<b>Read.</b> Positive on \((-3,0)\) and \((4,\infty)\). \(\ge\) includes the zeros.`,
+        S`<b>Check.</b> \(x=-1\): \(-1-1+12=10\ge0\) ✓`],
       S`\(x\in[-3,0]\cup[4,\infty)\)`,
       plane({ view: { xmin: -4.5, xmax: 5.5, ymin: -30, ymax: 30 }, curves: [{ f: (x) => x ** 3 - x * x - 12 * x, color: "violet" }], points: [{ x: -3, y: 0, label: "−3", color: "red" }, { x: 0, y: 0, label: "0", color: "red" }, { x: 4, y: 0, label: "4", color: "red" }], step: { x: 1, y: 10 } })],
     ["Using the factor theorem", S`Solve \(2x^3+3x^2-11x-6\le0\).`,
-      [S`\(P(2)=16+12-22-6=0\). Divide: \(2x^2+7x+3=(2x+1)(x+3)\).`, S`\((x-2)(2x+1)(x+3)\le0\); critical values \(-3, -\tfrac12, 2\).`, S`Degree 3, \(a>0\): signs −, +, −, +.`],
+      [S`<b>Find a zero.</b> \(P(2)=16+12-22-6=0\).`,
+        S`<b>Divide and factor.</b> The quotient is \(2x^2+7x+3=(2x+1)(x+3)\). So \((x-2)(2x+1)(x+3)\le0\).`,
+        S`<b>Critical values.</b> \(-3,-\tfrac12,2\).`,
+        S`<b>Sign chart.</b> ${signTable([lin(1, -2), lin(2, 1), lin(1, 3)], "<=")}`,
+        S`<b>Check.</b> \(x=0\): \(-6\le0\) ✓, and 0 is in \(\left[-\tfrac12,2\right]\) ✓`],
       S`\(x\le-3\) or \(-\tfrac12\le x\le2\)`,
       plane({ view: { xmin: -4, xmax: 3, ymin: -16, ymax: 16 }, curves: [{ f: (x) => 2 * x ** 3 + 3 * x * x - 11 * x - 6, color: "violet" }], points: [{ x: -3, y: 0, label: "−3", color: "red" }, { x: -0.5, y: 0, label: "−½", color: "red" }, { x: 2, y: 0, label: "2", color: "red" }], step: { x: 1, y: 4 } })],
     ["A double zero", S`Solve \((x-1)^2(x+4)>0\).`,
-      [S`Critical values \(-4\) and \(1\) (order 2).`, S`\(x\lt-4\): −; \(-4\lt x\lt1\): +; \(x>1\): + (no change at 1).`, S`Strict: exclude \(x=1\).`],
-      S`\(x>-4\), \(x\ne1\): \((-4,1)\cup(1,\infty)\)`],
+      [S`<b>Critical values.</b> \(-4\), and \(1\) with order 2.`,
+        S`<b>Key fact.</b> A squared factor is never negative, so the product does not change sign at 1.`,
+        S`<b>Sign chart.</b> ${signTable([lin(1, -1, 2), lin(1, 4)], ">")}`,
+        S`<b>Endpoints.</b> The inequality is strict and the product is 0 at \(x=1\), so that value must be removed.`,
+        S`<b>Check.</b> \(x=0\): \(1(4)=4>0\) ✓. \(x=1\): \(0\), not \(>0\) ✓`],
+      S`\(x>-4\), \(x\ne1\): \((-4,1)\cup(1,\infty)\)`,
+      plane({ view: { xmin: -5, xmax: 3, ymin: -8, ymax: 16 }, curves: [{ f: (x) => (x - 1) ** 2 * (x + 4), color: "violet" }], points: [{ x: -4, y: 0, label: "−4", color: "red" }, { x: 1, y: 0, label: "1 (bounce)", color: "amber" }, { x: 0, y: 4, label: "(0, 4)" }], step: { x: 1, y: 2 } })],
     ["A volume condition", S`A box has dimensions \(x\), \(x-1\) and \(x+3\) cm. For which \(x\) is its volume greater than \(5x\) cm³?`,
-      [S`\(x(x-1)(x+3)>5x\Rightarrow x[(x-1)(x+3)-5]>0\Rightarrow x(x^2+2x-8)>0\Rightarrow x(x+4)(x-2)>0\).`, S`Solution of the inequality: \(-4\lt x\lt0\) or \(x>2\).`, S`Every dimension must be positive: \(x>1\).`],
-      S`\(x>2\)`],
+      [S`<b>Set up.</b> \(x(x-1)(x+3)>5x\). Move everything to one side, and do not divide by \(x\): \(x\left[(x-1)(x+3)-5\right]>0\).`,
+        S`<b>Simplify.</b> \((x-1)(x+3)-5=x^2+2x-8=(x+4)(x-2)\). So \(x(x+4)(x-2)>0\).`,
+        S`<b>Sign chart.</b> ${signTable([lin(1, 0), lin(1, 4), lin(1, -2)], ">")}The inequality holds for \(-4\lt x\lt0\) or \(x>2\).`,
+        S`<b>Use the context.</b> Every dimension must be positive, so \(x>1\). Only \(x>2\) survives.`,
+        S`<b>Check.</b> \(x=3\): volume \(3(2)(6)=36>15\) ✓`],
+      S`\(x>2\)`,
+      plane({ view: { xmin: 0, xmax: 4, ymin: -5, ymax: 40 }, curves: [{ f: (x) => x * (x - 1) * (x + 3), a: 1, color: "violet" }, { f: (x) => 5 * x, a: 1, color: "blue" }], points: [{ x: 2, y: 10, label: "(2, 10)", color: "amber" }], step: { x: 1, y: 5 } }, "violet volume, blue 5x")],
   ]),
 
   practice([
@@ -93,11 +116,11 @@ export const blocks = () => [
 
   ...hard([
     ["A quartic with a double zero", S`Solve \(x^4-3x^3-10x^2\le0\).`,
-      [S`\(x^2(x^2-3x-10)=x^2(x-5)(x+2)\le0\).`, S`Critical values \(-2, 0\) (order 2), \(5\). Signs: \(x\lt-2\): +; \(-2\lt x\lt0\): −; \(0\lt x\lt5\): −; \(x>5\): +.`, S`Include every zero.`],
+      [S`\(x^2(x^2-3x-10)=x^2(x-5)(x+2)\le0\).`, S`Critical values \(-2, 0\) (order 2), \(5\). The factor \(x^2\) is never negative, so it never changes the sign:${signTable([lin(1, 0, 2), lin(1, -5), lin(1, 2)], "<=")}`, S`Include every zero.`],
       S`\(x\in[-2,5]\)`,
       plane({ view: { xmin: -3, xmax: 6, ymin: -160, ymax: 60 }, curves: [{ f: (x) => x ** 4 - 3 * x ** 3 - 10 * x * x, color: "violet" }], points: [{ x: -2, y: 0, label: "−2", color: "red" }, { x: 0, y: 0, label: "0", color: "amber" }, { x: 5, y: 0, label: "5", color: "red" }], step: { x: 1, y: 20 } })],
     ["Rearrange, then factor", S`Solve \(x^3+3x^2\ge4\).`,
-      [S`\(x^3+3x^2-4\ge0\); \(P(1)=0\). Divide: \(x^2+4x+4=(x+2)^2\).`, S`\((x-1)(x+2)^2\ge0\): the squared factor is never negative, so the sign is that of \(x-1\), except that the product is 0 at \(x=-2\).`],
+      [S`\(x^3+3x^2-4\ge0\); \(P(1)=0\). Divide: \(x^2+4x+4=(x+2)^2\).`, S`\((x-1)(x+2)^2\ge0\): the squared factor is never negative, so the sign is that of \(x-1\), except that the product is 0 at \(x=-2\).${signTable([lin(1, -1), lin(1, 2, 2)], ">=")}`],
       S`\(x\ge1\) or \(x=-2\)`],
   ], [
     q("hard", S`How many integers satisfy \(x^4-13x^2+36\lt0\)?`, num(0),

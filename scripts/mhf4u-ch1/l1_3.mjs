@@ -1,6 +1,7 @@
 // MHF4U 1.3 — Equations and Graphs of Polynomial Functions: factored form, zeros and their order (multiplicity),
 // sign intervals with test values, sketching, and writing equations from graphs and conditions
 import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, q, num, choice, roots, hard, plane } from "./lib.mjs";
+import { tv } from "../mcr3u-extables.mjs";
 
 export const TITLE = "1.3 Equations and Graphs of Polynomial Functions";
 export const ID = "2234f991-8cf9-4103-924f-cd7a66c8c568";
@@ -57,24 +58,42 @@ export const blocks = () => [
 
   examples([
     ["Sketch a cubic", S`Sketch \(f(x)=(x+2)(x-1)(x-3)\).`,
-      [S`Zeros \(-2,1,3\), each order 1 (crossing). Degree 3, \(a=1\): Q3 → Q1.`, S`y-intercept \(f(0)=(2)(-1)(-3)=6\).`, S`Signs: \(x\lt-2\): −; \(-2\lt x\lt1\): +; \(1\lt x\lt3\): −; \(x>3\): +.`],
+      [S`<b>Zeros.</b> Each factor gives a zero: \(-2\), \(1\), \(3\). Each has order 1, so the graph crosses the axis at each.`,
+        S`<b>End behaviour.</b> The leading term is \(x\cdot x\cdot x=x^3\): degree 3, \(a=1\). So Q3 to Q1.`,
+        S`<b>y-intercept.</b> \(f(0)=(2)(-1)(-3)=6\).`,
+        S`<b>Sign chart.</b> ${tv(["interval", "\\(x\\lt-2\\)", "\\(-2\\lt x\\lt1\\)", "\\(1\\lt x\\lt3\\)", "\\(x>3\\)"], ["test \\(x\\)", "\\(-3\\)", "0", "2", "4"], ["sign of \\(f\\)", "−", "+", "−", "+"])}`,
+        S`<b>Check.</b> \(f(2)=(4)(1)(-1)=-4\lt0\) ✓, which agrees with the chart and the graph.`],
       S`crosses at \(-2,1,3\); y-intercept 6`,
       plane({ view: { xmin: -4, xmax: 5, ymin: -12, ymax: 12 }, curves: [{ f: (x) => (x + 2) * (x - 1) * (x - 3), color: "violet" }], points: [{ x: -2, y: 0, label: "−2", color: "red" }, { x: 1, y: 0, label: "1", color: "red" }, { x: 3, y: 0, label: "3", color: "red" }, { x: 0, y: 6, label: "(0, 6)", color: "blue" }], step: { x: 1, y: 2 } })],
     ["A double zero", S`Sketch \(g(x)=-(x+1)^2(x-2)\).`,
-      [S`Zero \(-1\) (order 2: bounce) and \(2\) (order 1: cross).`, S`Degree 3, \(a=-1\): Q2 → Q4. y-intercept \(-(1)(-2)=2\).`],
+      [S`<b>Zeros and their orders.</b> \(-1\) has order 2. A squared factor does not change sign, so the graph bounces. \(2\) has order 1, so it crosses.`,
+        S`<b>End behaviour.</b> The leading term is \(-x^3\): degree 3, \(a=-1\). So Q2 to Q4.`,
+        S`<b>y-intercept.</b> \(g(0)=-(1)^2(-2)=2\).`,
+        S`<b>Sign chart.</b> ${tv(["interval", "\\(x\\lt-1\\)", "\\(-1\\lt x\\lt2\\)", "\\(x>2\\)"], ["test \\(x\\)", "\\(-2\\)", "0", "3"], ["sign of \\(g\\)", "+", "+", "−"])}`,
+        S`<b>Check.</b> The sign stays + across \(-1\) (bounce) and changes at 2 (cross) ✓`],
       S`bounces at \(-1\), crosses at \(2\); y-intercept 2`,
       plane({ view: { xmin: -3.5, xmax: 3.5, ymin: -6, ymax: 8 }, curves: [{ f: (x) => -((x + 1) ** 2) * (x - 2), color: "violet" }], points: [{ x: -1, y: 0, label: "−1 (bounce)", color: "amber" }, { x: 2, y: 0, label: "2", color: "red" }, { x: 0, y: 2, label: "(0, 2)", color: "blue" }], step: { x: 1, y: 2 } })],
     ["Find a for a quartic", S`A quartic has a double zero at \(-2\), zeros at \(1\) and \(3\), and passes through \((0,-24)\). Find its equation.`,
-      [S`\(y=a(x+2)^2(x-1)(x-3)\).`, S`At \((0,-24)\): \(a(4)(-1)(-3)=12a=-24\Rightarrow a=-2\).`],
+      [S`<b>Build the family.</b> Each zero gives a factor, and a double zero gives a squared factor: \(y=a(x+2)^2(x-1)(x-3)\). The powers add to 4, as a quartic needs.`,
+        S`<b>Use the point.</b> Substitute \((0,-24)\): \(-24=a(2)^2(-1)(-3)=12a\).`,
+        S`<b>Solve.</b> \(a=-2\).`,
+        S`<b>Check.</b> \(a\lt0\) means both ends go down, as the graph shows. Also \(-2(4)(-1)(-3)=-24\) ✓`],
       S`\(y=-2(x+2)^2(x-1)(x-3)\)`,
       plane({ view: { xmin: -4, xmax: 4, ymin: -40, ymax: 30 }, curves: [{ f: (x) => -2 * (x + 2) ** 2 * (x - 1) * (x - 3), color: "violet" }], points: [{ x: -2, y: 0, color: "amber" }, { x: 1, y: 0, color: "red" }, { x: 3, y: 0, color: "red" }, { x: 0, y: -24, label: "(0, −24)", color: "blue" }], step: { x: 1, y: 10 } })],
     ["Equation from a graph", S`The cubic shown crosses the x-axis at \(-3\), \(0\) and \(2\) and passes through \((1,-8)\). Find its equation.`,
-      [S`\(y=ax(x+3)(x-2)\).`, S`At \((1,-8)\): \(a(1)(4)(-1)=-4a=-8\Rightarrow a=2\).`],
+      [S`<b>Build the family.</b> The zero 0 gives the factor \(x\). So \(y=ax(x+3)(x-2)\).`,
+        S`<b>Use the point.</b> A zero cannot fix \(a\), so use \((1,-8)\): \(-8=a(1)(4)(-1)=-4a\).`,
+        S`<b>Solve.</b> \(a=2\).`,
+        S`<b>Check with another point.</b> The graph is positive between \(-3\) and 0: at \(x=-1\): \(2(-1)(2)(-3)=12>0\) ✓`],
       S`\(y=2x(x+3)(x-2)\)`,
       plane({ view: { xmin: -4, xmax: 3, ymin: -12, ymax: 22 }, curves: [{ f: (x) => 2 * x * (x + 3) * (x - 2), color: "violet" }], points: [{ x: -3, y: 0, label: "−3", color: "red" }, { x: 0, y: 0, color: "red" }, { x: 2, y: 0, label: "2", color: "red" }, { x: 1, y: -8, label: "(1, −8)", color: "blue" }], step: { x: 1, y: 4 } })],
     ["Read everything", S`Describe \(f(x)=x^3(x-2)^2(x+1)\) without graphing technology.`,
-      [S`Zeros: \(0\) (order 3: flattens), \(2\) (order 2: bounces), \(-1\) (order 1: crosses).`, S`Degree \(3+2+1=6\), \(a=1\): up at both ends.`, S`Signs: \(x\lt-1\): +; \(-1\lt x\lt0\): −; \(0\lt x\lt2\): +; \(x>2\): + (no change at the double zero).`],
-      S`degree 6, up at both ends; flat crossing at 0, bounce at 2, crossing at −1`],
+      [S`<b>Zeros and orders.</b> \(0\) has order 3: it crosses and flattens. \(2\) has order 2: it bounces. \(-1\) has order 1: it crosses.`,
+        S`<b>Degree and ends.</b> The orders add: \(3+2+1=6\), and \(a=1\). So both ends go up.`,
+        S`<b>Sign chart.</b> ${tv(["interval", "\\(x\\lt-1\\)", "\\(-1\\lt x\\lt0\\)", "\\(0\\lt x\\lt2\\)", "\\(x>2\\)"], ["test \\(x\\)", "\\(-2\\)", "\\(-0.5\\)", "1", "3"], ["sign of \\(f\\)", "+", "−", "+", "+"])}`,
+        S`<b>Check.</b> \(f(1)=(1)(1)(2)=2>0\) ✓. The sign does not change at the double zero 2 ✓`],
+      S`degree 6, up at both ends; flat crossing at 0, bounce at 2, crossing at −1`,
+      plane({ view: { xmin: -1.6, xmax: 2.8, ymin: -2, ymax: 6 }, curves: [{ f: (x) => x ** 3 * (x - 2) ** 2 * (x + 1), color: "violet" }], points: [{ x: -1, y: 0, label: "−1", color: "red" }, { x: 0, y: 0, label: "0", color: "red" }, { x: 2, y: 0, label: "2", color: "amber" }, { x: 1, y: 2, label: "(1, 2)" }], step: { x: 0.5, y: 1 } })],
   ]),
 
   practice([

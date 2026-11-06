@@ -1,6 +1,7 @@
 // MHF4U 3.2 — Reciprocal of a Quadratic Function (NEW): y = 1/f(x) with two, one or no zeros of f; vertical
 // asymptotes, the turning point from the vertex, domain and range, and sketching from the parabola
 import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, q, num, choice, hard, plane, rat } from "./lib.mjs";
+import { tv } from "../mcr3u-extables.mjs";
 
 export const TITLE = "3.2 Reciprocal of a Quadratic Function";
 export const ID = "6d4f0003-0001-4001-8001-000000000302";
@@ -58,24 +59,41 @@ export const blocks = () => [
 
   examples([
     ["Two vertical asymptotes", S`Sketch \(g(x)=\dfrac1{x^2-4}\).`,
-      [S`\(x^2-4=(x-2)(x+2)\): VAs \(x=\pm2\); HA \(y=0\).`, S`Vertex of \(f\): \((0,-4)\) → turning point \(\left(0,-\tfrac14\right)\), a maximum.`, S`\(f>0\) for \(|x|>2\), so \(g>0\) there; \(g\lt0\) between.`],
+      [S`<b>Asymptotes.</b> \(x^2-4=(x-2)(x+2)\), which is 0 at \(x=\pm2\). The HA is \(y=0\).`,
+        S`<b>Turning point.</b> The parabola \(y=x^2-4\) has vertex \((0,-4)\). Its reciprocal gives \(\left(0,-\tfrac14\right)\).`,
+        S`<b>Why a maximum?</b> On the middle branch, the parabola's lowest value \(-4\) gives the reciprocal closest to 0, so the value \(-\tfrac14\) is the highest there.`,
+        S`<b>Signs.</b> ${tv(["interval", "\\(x\\lt-2\\)", "\\(-2\\lt x\\lt2\\)", "\\(x>2\\)"], ["\\(x^2-4\\)", "+", "−", "+"], ["\\(g\\)", "+", "−", "+"])}`,
+        S`<b>Check.</b> \(g(3)=\frac15>0\) ✓ and \(g(1)=-\frac13\lt0\) ✓`],
       S`three branches; local max \(\left(0,-\tfrac14\right)\)`,
       plane({ view: V, curves: rat((x) => 1 / (x * x - 4), [-2, 2], V), vlines: [{ x: -2, color: "red", dash: true }, { x: 2, color: "red", dash: true }], points: [{ x: 0, y: -0.25, label: "(0, −¼)", color: "amber" }], step: { x: 1, y: 1 } })],
     ["No vertical asymptote", S`Describe \(g(x)=\dfrac1{x^2+1}\).`,
-      [S`\(x^2+1\ge1\) has no zeros: no VA.`, S`Vertex \((0,1)\) → maximum \((0,1)\). As \(|x|\) grows, \(g\to0\).`],
+      [S`<b>Asymptotes.</b> \(x^2+1\ge1\) is never 0, so there is no VA, and the domain is \(\mathbb R\). As \(|x|\) grows, \(g\to0\), so the HA is \(y=0\).`,
+        S`<b>Maximum.</b> The denominator is smallest at \(x=0\), where it is 1. So \(g\) is largest there: \((0,1)\).`,
+        S`<b>Range.</b> \(g\) is always positive, reaches 1, and approaches 0 without touching it: \(0\lt y\le1\).`,
+        S`<b>Check.</b> \(g(1)=\frac12\) and \(g(-1)=\frac12\): symmetric ✓`],
       S`domain \(\mathbb R\), range \(0\lt y\le1\)`,
       plane({ view: { xmin: -5, xmax: 5, ymin: -0.5, ymax: 1.5 }, curves: [{ f: (x) => 1 / (x * x + 1), color: "violet" }], points: [{ x: 0, y: 1, label: "(0, 1)", color: "amber" }], step: { x: 1, y: 0.5 } })],
     ["A double zero", S`Describe \(g(x)=\dfrac1{(x-1)^2}\).`,
-      [S`One VA \(x=1\); \((x-1)^2>0\) elsewhere, so \(g>0\).`, S`Increasing for \(x\lt1\), decreasing for \(x>1\).`],
+      [S`<b>Asymptotes.</b> The denominator is 0 only at \(x=1\), so there is one VA. The HA is \(y=0\).`,
+        S`<b>Sign.</b> A square is positive for \(x\ne1\), so \(g>0\) everywhere, and both sides of the VA go up.`,
+        S`<b>Direction.</b> For \(x\lt1\), the denominator shrinks as \(x\) approaches 1, so \(g\) increases. For \(x>1\), it decreases.`,
+        S`<b>Check.</b> \(g(0)=1\), \(g(2)=1\), \(g(3)=\frac14\) ✓`],
       S`VA \(x=1\), HA \(y=0\); range \(y>0\)`,
       plane({ view: { xmin: -3, xmax: 5, ymin: -1, ymax: 5 }, curves: rat((x) => 1 / (x - 1) ** 2, [1], { xmin: -3, xmax: 5 }), vlines: [{ x: 1, color: "red", dash: true }], step: { x: 1, y: 1 } })],
     ["Factor, then find the turning point", S`Find the asymptotes and turning point of \(g(x)=\dfrac1{x^2-2x-3}\).`,
-      [S`\(x^2-2x-3=(x-3)(x+1)\): VAs \(x=-1\), \(x=3\).`, S`Vertex of \(f\): \(x=1\), \(f(1)=-4\) → \(g\) has a local max \(\left(1,-\tfrac14\right)\).`],
+      [S`<b>Factor.</b> \(x^2-2x-3=(x-3)(x+1)\). So the VAs are \(x=-1\) and \(x=3\).`,
+        S`<b>Vertex of the denominator.</b> The axis is midway between the zeros: \(x=1\). Then \(f(1)=1-2-3=-4\).`,
+        S`<b>Turning point.</b> The reciprocal of \(-4\) is \(-\frac14\). It is a local maximum on the middle branch.`,
+        S`<b>Check.</b> \(g(0)=-\frac13\) and \(g(2)=-\frac13\) are both below \(-\frac14\) ✓`],
       S`VAs \(x=-1, 3\); local max \(\left(1,-\tfrac14\right)\)`,
       plane({ view: { xmin: -4, xmax: 6, ymin: -3, ymax: 3 }, curves: rat((x) => 1 / ((x - 3) * (x + 1)), [-1, 3], { xmin: -4, xmax: 6 }), vlines: [{ x: -1, color: "red", dash: true }, { x: 3, color: "red", dash: true }], points: [{ x: 1, y: -0.25, label: "(1, −¼)", color: "amber" }], step: { x: 1, y: 1 } })],
     ["A negative reciprocal", S`State the range of \(g(x)=-\dfrac1{x^2+4}\).`,
-      [S`\(x^2+4\ge4\Rightarrow0\lt\frac1{x^2+4}\le\frac14\).`, S`Multiplying by \(-1\) reverses it.`],
-      S`\(-\tfrac14\le y\lt0\); minimum \(\left(0,-\tfrac14\right)\)`],
+      [S`<b>Start.</b> \(x^2\ge0\), so \(x^2+4\ge4\).`,
+        S`<b>Reciprocal.</b> Taking reciprocals of positive numbers flips the order: \(0\lt\frac1{x^2+4}\le\frac14\).`,
+        S`<b>Negative.</b> Multiplying by \(-1\) flips it again: \(-\frac14\le g(x)\lt0\).`,
+        S`<b>Check.</b> \(g(0)=-\frac14\), the minimum. \(g(10)\approx-0.0096\), close to 0 ✓`],
+      S`\(-\tfrac14\le y\lt0\); minimum \(\left(0,-\tfrac14\right)\)`,
+      plane({ view: { xmin: -6, xmax: 6, ymin: -0.4, ymax: 0.1 }, curves: [{ f: (x) => -1 / (x * x + 4), color: "violet" }], points: [{ x: 0, y: -0.25, label: "(0, −1/4)", color: "amber" }], step: { x: 1, y: 0.05 } })],
   ]),
 
   practice([

@@ -2,6 +2,7 @@
 // coordinates and reflecting in y = x, the equation x = b^y, domain/range/asymptote swaps, and a first look at the name
 // "logarithmic function" (studied in 6.2)
 import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, q, num, choice, hard, plane } from "./lib.mjs";
+import { tv } from "../mcr3u-extables.mjs";
 
 export const TITLE = "6.1 The Exponential Function and Its Inverse";
 export const ID = "6d4f0006-0001-4001-8001-000000000601";
@@ -85,22 +86,42 @@ export const blocks = () => [
 
   examples([
     ["Table and graph of an inverse", S`Make a table of values for \(y=3^x\) with \(x=-2,-1,0,1,2\), then give the table and a sketch for its inverse.`,
-      [S`\(3^{-2}=\frac19\), \(3^{-1}=\frac13\), \(3^0=1\), \(3^1=3\), \(3^2=9\).`, S`Swap: \(\left(\frac19,-2\right)\), \(\left(\frac13,-1\right)\), \((1,0)\), \((3,1)\), \((9,2)\).`, S`Plot the swapped points; the curve rises slowly and hugs the y-axis as \(x\to0^+\).`],
+      [S`<b>Rule.</b> An inverse swaps each input with its output, which reflects the graph in \(y=x\).`,
+        S`<b>Table of \(y=3^x\).</b> ${tv(["\\(x\\)", "\\(-2\\)", "\\(-1\\)", "\\(0\\)", "\\(1\\)", "\\(2\\)"], ["\\(y\\)", "\\(\\frac19\\)", "\\(\\frac13\\)", "\\(1\\)", "\\(3\\)", "\\(9\\)"])}`,
+        S`<b>Table of the inverse.</b> ${tv(["\\(x\\)", "\\(\\frac19\\)", "\\(\\frac13\\)", "\\(1\\)", "\\(3\\)", "\\(9\\)"], ["\\(y\\)", "\\(-2\\)", "\\(-1\\)", "\\(0\\)", "\\(1\\)", "\\(2\\)"])}`,
+        S`<b>Sketch.</b> Plot the swapped points. The curve rises slowly, and it hugs the y-axis as \(x\to0^+\), because \(y=0\) was the asymptote of \(y=3^x\).`,
+        S`<b>Check.</b> \((2,9)\) on the original gives \((9,2)\) on the inverse, and \(3^2=9\) ✓`],
       S`inverse points \(\left(\tfrac19,-2\right)\), \(\left(\tfrac13,-1\right)\), \((1,0)\), \((3,1)\), \((9,2)\)`,
       plane({ view: { xmin: -3, xmax: 10, ymin: -3, ymax: 10 }, lines: [YX], curves: [{ f: (x) => 3 ** x, color: "blue" }, { f: lg(3), a: 0.01, color: "violet" }], points: [{ x: 3, y: 1, label: "(3, 1)", color: "violet" }, { x: 9, y: 2, label: "(9, 2)", color: "violet" }, { x: 1, y: 3, color: "blue" }], step: { x: 1, y: 1 } })],
     ["Inverse of a decay function", S`State the domain, range, intercept, asymptote and behaviour of the inverse of \(y=\left(\tfrac12\right)^x\).`,
-      [S`Inverse: \(x=\left(\tfrac12\right)^y\).`, S`Swap domain and range: domain \(x>0\), range \(y\in\mathbb R\).`, S`\((0,1)\to(1,0)\): x-intercept 1; asymptote \(y=0\to x=0\).`, S`\(\left(\tfrac12\right)^x\) decreases, so its inverse decreases too: \(\left(\tfrac12\right)^{-3}=8\) gives the point \((8,-3)\).`],
+      [S`<b>Inverse.</b> Swap \(x\) and \(y\): \(x=\left(\tfrac12\right)^y\).`,
+        S`<b>Domain and range.</b> These swap. The original has domain \(\mathbb R\) and range \(y>0\), so the inverse has domain \(x>0\) and range \(\mathbb R\).`,
+        S`<b>Intercept.</b> \((0,1)\) on the original becomes \((1,0)\) on the inverse.`,
+        S`<b>Asymptote.</b> \(y=0\) on the original becomes \(x=0\).`,
+        S`<b>Behaviour.</b> A reflection in \(y=x\) keeps the direction, so the inverse also decreases.`,
+        S`<b>Check.</b> \(\left(\tfrac12\right)^{-3}=8\) gives \((8,-3)\): larger \(x\), lower \(y\) ✓`],
       S`domain \(x>0\), range \(\mathbb R\), x-intercept 1, VA \(x=0\), decreasing`,
       plane({ view: { xmin: -4, xmax: 8, ymin: -4, ymax: 8 }, lines: [YX], curves: [{ f: (x) => 0.5 ** x, color: "blue" }, { f: lg(0.5), a: 0.01, color: "violet" }], points: [{ x: 1, y: 0, label: "(1, 0)", color: "violet" }, { x: 4, y: -2, label: "(4, −2)", color: "violet" }], step: { x: 1, y: 1 } })],
     ["Inverse of a shifted exponential", S`Find the equation of the inverse of \(y=2^x+3\) and its asymptote.`,
-      [S`Swap: \(x=2^y+3\).`, S`Isolate the power: \(2^y=x-3\).`, S`\(2^y>0\), so \(x-3>0\): domain \(x>3\). The asymptote \(y=3\) of the original becomes \(x=3\).`],
+      [S`<b>Swap.</b> \(x=2^y+3\).`,
+        S`<b>Isolate the power.</b> Subtract 3: \(2^y=x-3\).`,
+        S`<b>Domain.</b> \(2^y>0\), so \(x-3>0\), which gives \(x>3\).`,
+        S`<b>Asymptote.</b> The original's asymptote \(y=3\) reflects to \(x=3\).`,
+        S`<b>Check.</b> \((1,5)\) is on the original, since \(2^1+3=5\). Its swap \((5,1)\) satisfies \(2^1=5-3\) ✓`],
       S`\(x=2^y+3\) (or \(2^y=x-3\)); vertical asymptote \(x=3\)`,
       plane({ view: { xmin: -3, xmax: 10, ymin: -3, ymax: 10 }, lines: [YX, { m: 0, b: 3, color: "red", dash: true }], vlines: [{ x: 3, color: "red", dash: true }], curves: [{ f: (x) => 2 ** x + 3, color: "blue" }, { f: (x) => lg(2)(x - 3), a: 3.005, color: "violet" }], step: { x: 1, y: 1 } })],
     ["Find the base from a point", S`The graph of \(y=b^x\) passes through \((2,16)\). Find \(b\), then find the y-value on the inverse when \(x=64\).`,
-      [S`\(b^2=16\) with \(b>0\): \(b=4\).`, S`On the inverse, \(x=4^y\). With \(x=64\): \(4^y=64=4^3\).`],
-      S`\(b=4\); the inverse passes through \((64,3)\)`],
+      [S`<b>Substitute.</b> \(b^2=16\). A base must be positive, so \(b=4\).`,
+        S`<b>Inverse.</b> Swapping gives \(x=4^y\).`,
+        S`<b>Use \(x=64\).</b> \(4^y=64\). Since \(64=4^3\), matching exponents gives \(y=3\).`,
+        S`<b>Check.</b> \((3,64)\) is on \(y=4^x\), so \((64,3)\) is on the inverse ✓`],
+      S`\(b=4\); the inverse passes through \((64,3)\)`,
+      plane({ view: { xmin: -2, xmax: 70, ymin: -2, ymax: 18 }, curves: [{ f: (x) => 4 ** x, b: 2.1, color: "blue" }, { f: lg(4), a: 0.01, color: "violet" }], points: [{ x: 2, y: 16, label: "(2, 16)", color: "blue" }, { x: 64, y: 3, label: "(64, 3)", color: "violet" }], step: { x: 10, y: 2 } })],
     ["Estimate from the graph", S`Use the inverse of \(y=2^x\) to estimate the exponent \(y\) with \(2^y=10\).`,
-      [S`\(2^3=8\) and \(2^4=16\), so \(y\) is between 3 and 4, closer to 3.`, S`Reading the inverse graph at \(x=10\): \(y\approx3.3\). Check: \(2^{3.32}\approx9.99\).`],
+      [S`<b>Trap the value.</b> \(2^3=8\) and \(2^4=16\). Since \(8\lt10\lt16\), \(y\) is between 3 and 4, and closer to 3.`,
+        S`<b>Read the graph.</b> The inverse has the points \((x,y)\) with \(2^y=x\). At \(x=10\), the height is about \(3.3\).`,
+        S`<b>Refine.</b> \(2^{3.32}\approx9.99\), which is very close to 10.`,
+        S`<b>Check.</b> \(3.32\) is between 3 and 4 and closer to 3 ✓`],
       S`\(y\approx3.32\)`,
       plane({ view: { xmin: -1, xmax: 12, ymin: -2, ymax: 5 }, curves: [{ f: lg(2), a: 0.01, color: "violet" }], vlines: [{ x: 10, color: "green", dash: true }], points: [{ x: 10, y: 3.32, label: "(10, 3.32)", color: "amber" }, { x: 8, y: 3, label: "(8, 3)", color: "violet" }], step: { x: 1, y: 1 } })],
   ]),

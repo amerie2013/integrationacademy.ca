@@ -1,6 +1,7 @@
 // MHF4U 1.7 — Chapter 1 Review (NEW lesson): power functions, characteristics, factored form, transformations,
 // average and instantaneous rates of change
 import { intro, section, keyIdea, widget, examples, practice, wrapUp, table, q, num, choice, roots, hard, plane } from "./lib.mjs";
+import { tv } from "../mcr3u-extables.mjs";
 
 export const TITLE = "1.7 Chapter 1 Review";
 export const ID = "6d4f0001-0001-4001-8001-000000000107";
@@ -49,24 +50,44 @@ export const blocks = () => [
 
   examples([
     ["A full analysis", S`Analyse \(f(x)=-(x+2)^2(x-1)(x-3)\).`,
-      [S`Degree 4, \(a=-1\): down at both ends.`, S`Zeros: \(-2\) (order 2, bounce), \(1\) and \(3\) (cross). y-intercept \(-(4)(-1)(-3)=-12\).`, S`Signs: \(x\lt-2\): −; \(-2\lt x\lt1\): −; \(1\lt x\lt3\): +; \(x>3\): −.`],
+      [S`<b>Degree and ends.</b> The orders add to 4, with \(a=-1\). So both ends go down.`,
+        S`<b>Zeros.</b> \(-2\) has order 2, so it bounces. \(1\) and \(3\) have order 1, so they cross.`,
+        S`<b>y-intercept.</b> \(f(0)=-(4)(-1)(-3)=-12\).`,
+        S`<b>Sign chart.</b> ${tv(["interval", "\\(x\\lt-2\\)", "\\(-2\\lt x\\lt1\\)", "\\(1\\lt x\\lt3\\)", "\\(x>3\\)"], ["test \\(x\\)", "\\(-3\\)", "0", "2", "4"], ["sign of \\(f\\)", "−", "−", "+", "−"])}`,
+        S`<b>Check.</b> \(f(2)=-(16)(1)(-1)=16>0\) ✓. The sign stays − through the bounce at \(-2\) ✓`],
       S`down both ends; bounce at −2; crosses at 1 and 3; y-intercept −12; positive only on \((1,3)\)`,
       plane({ view: { xmin: -4, xmax: 4, ymin: -30, ymax: 30 }, curves: [{ f: (x) => -((x + 2) ** 2) * (x - 1) * (x - 3), color: "violet" }], points: [{ x: -2, y: 0, label: "−2", color: "amber" }, { x: 1, y: 0, color: "red" }, { x: 3, y: 0, label: "3", color: "red" }, { x: 0, y: -12, label: "(0, −12)", color: "blue" }], step: { x: 1, y: 10 } })],
     ["Degree and equation from a table", S`A polynomial has values \(-6, 0, 0, 0, 6\) at \(x=0,1,2,3,4\). Find its degree and equation.`,
-      [S`First differences \(6,0,0,6\); second \(-6,0,6\); third \(6,6\): constant, so degree 3 with \(6a=6\Rightarrow a=1\).`, S`Zeros at \(1\), \(2\), \(3\): \(f(x)=(x-1)(x-2)(x-3)\).`, S`Check: \(f(0)=(-1)(-2)(-3)=-6\) ✓ and \(f(4)=(3)(2)(1)=6\) ✓.`],
+      [S`<b>Differences.</b> ${tv(["\\(f\\)", "\\(-6\\)", "0", "0", "0", "6"], ["1st", "", "6", "0", "0", "6"], ["2nd", "", "", "\\(-6\\)", "0", "6"], ["3rd", "", "", "", "6", "6"])}`,
+        S`<b>Degree and \(a\).</b> The third differences are constant, so it is degree 3. Then \(3!\,a=6\), so \(a=1\).`,
+        S`<b>Zeros.</b> The table shows zeros at 1, 2 and 3, which accounts for all three factors.`,
+        S`<b>Equation.</b> \(f(x)=(x-1)(x-2)(x-3)\).`,
+        S`<b>Check.</b> \(f(0)=(-1)(-2)(-3)=-6\) ✓ and \(f(4)=(3)(2)(1)=6\) ✓`],
       S`degree 3; \(f(x)=(x-1)(x-2)(x-3)\)`,
       plane({ view: { xmin: -0.5, xmax: 4.5, ymin: -7, ymax: 7 }, curves: [{ f: (x) => (x - 1) * (x - 2) * (x - 3), color: "violet" }], points: [[0, -6], [1, 0], [2, 0], [3, 0], [4, 6]].map(([x, y]) => ({ x, y, color: "red" })), step: { x: 1, y: 1 } })],
     ["Transform, then find zeros", S`\(g(x)=-2(x-1)^4+32\). Find the vertex, range and x-intercepts.`,
-      [S`Vertex \((1,32)\), \(a\lt0\): range \(y\le32\).`, S`\(-2(x-1)^4+32=0\Rightarrow(x-1)^4=16\Rightarrow x-1=\pm2\).`],
+      [S`<b>Vertex.</b> From the form \(a(x-d)^4+c\), the vertex is \((1,32)\).`,
+        S`<b>Range.</b> \(a\lt0\) with even degree, so 32 is the maximum: \(y\le32\).`,
+        S`<b>x-intercepts.</b> Set \(g(x)=0\): \(2(x-1)^4=32\), so \((x-1)^4=16\).`,
+        S`<b>Solve.</b> A fourth root has two real values: \(x-1=\pm2\). So \(x=3\) or \(x=-1\).`,
+        S`<b>Check.</b> \(g(3)=-2(16)+32=0\) ✓. They are symmetric about \(x=1\) ✓`],
       S`vertex \((1,32)\); range \(y\le32\); x-intercepts \(-1\) and \(3\)`,
       plane({ view: { xmin: -2, xmax: 4, ymin: -10, ymax: 36 }, curves: [{ f: (x) => -2 * (x - 1) ** 4 + 32, color: "violet" }], points: [{ x: 1, y: 32, label: "(1, 32)", color: "blue" }, { x: -1, y: 0, label: "−1", color: "red" }, { x: 3, y: 0, label: "3", color: "red" }], step: { x: 1, y: 4 } })],
     ["Average and instantaneous", S`A tank drains so that \(V(t)=2(10-t)^2\) litres after \(t\) min (\(0\le t\le10\)). Find the average drain rate over the first 5 min and the instantaneous rate at \(t=5\).`,
-      [S`\(V(0)=200\), \(V(5)=50\): average \(\frac{50-200}{5}=-30\) L/min.`, S`At \(t=5\), centred \(h=0.01\): \(\frac{V(5.01)-V(4.99)}{0.02}=\frac{49.8002-50.2002}{0.02}=-20\).`],
+      [S`<b>Average.</b> \(V(0)=200\) and \(V(5)=50\): \(\frac{50-200}{5}=-30\) L/min.`,
+        S`<b>Instantaneous.</b> Centred, \(h=0.01\): \(V(5.01)=49.8002\) and \(V(4.99)=50.2002\).`,
+        S`<b>Quotient.</b> \(\frac{49.8002-50.2002}{0.02}=-20\) L/min.`,
+        S`<b>Interpret.</b> Both are negative, as the volume falls. The rate at 5 min is smaller in size than the 5-minute average, so draining is slowing down.`,
+        S`<b>Check on the graph.</b> The tangent at \((5,50)\) is less steep than the secant from \((0,200)\) ✓`],
       S`average \(-30\) L/min; instantaneous \(-20\) L/min (draining slows down)`,
       plane({ view: { xmin: -0.5, xmax: 10.5, ymin: -10, ymax: 210 }, curves: [{ f: (t) => 2 * (10 - t) ** 2, a: 0, b: 10, color: "blue" }], lines: [{ m: -30, b: 200, color: "amber", label: "secant" }, { m: -20, b: 150, color: "green", label: "tangent" }], points: [{ x: 0, y: 200, label: "(0, 200)" }, { x: 5, y: 50, label: "(5, 50)" }], xlabel: "t (min)", ylabel: "V (L)", step: { x: 1, y: 20 } })],
     ["Even or odd from a graph", S`A polynomial is symmetric about the origin, has degree 3, passes through \((1,-3)\) and has zeros at \(0\) and \(\pm2\). Find its equation.`,
-      [S`\(f(x)=ax(x-2)(x+2)\) (odd, as required).`, S`\(f(1)=a(1)(-1)(3)=-3a=-3\Rightarrow a=1\).`],
-      S`\(f(x)=x(x-2)(x+2)=x^3-4x\)`],
+      [S`<b>Factors.</b> Three zeros and degree 3: \(f(x)=ax(x-2)(x+2)\).`,
+        S`<b>Use the point.</b> \(f(1)=a(1)(-1)(3)=-3a=-3\), so \(a=1\).`,
+        S`<b>Expand.</b> \(f(x)=x(x^2-4)=x^3-4x\).`,
+        S`<b>Check the symmetry.</b> \(f(-x)=-x^3+4x=-f(x)\): odd ✓. So \((-1,3)\) is also on the graph ✓`],
+      S`\(f(x)=x(x-2)(x+2)=x^3-4x\)`,
+      plane({ view: { xmin: -3.5, xmax: 3.5, ymin: -6, ymax: 6 }, curves: [{ f: (x) => x ** 3 - 4 * x, color: "violet" }], points: [{ x: 1, y: -3, label: "(1, −3)", color: "amber" }, { x: -1, y: 3, label: "(−1, 3)" }, { x: 2, y: 0, label: "2" }, { x: -2, y: 0, label: "−2" }], step: { x: 1, y: 1 } })],
   ]),
 
   practice([
