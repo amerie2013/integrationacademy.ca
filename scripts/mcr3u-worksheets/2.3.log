@@ -776,40 +776,18 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 12.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <9> on input line 40.
+(Font)              <5> on input line 33.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 40.
+(Font)              <9> on input line 40.
  [1
 
 ]
-[2] [3] [4]
-Overfull \hbox (0.79999pt too wide) in paragraph at lines 84--84
-[][][][] 
- []
-
-
-Overfull \hbox (0.79999pt too wide) in paragraph at lines 88--88
-[][][][] 
- []
-
-
-Overfull \hbox (0.79999pt too wide) in paragraph at lines 92--92
-[][][][] 
- []
-
-
-Overfull \hbox (0.79999pt too wide) in paragraph at lines 96--96
-[][][][] 
- []
-
-
+[2] [3] [4] [5] [6]
 Overfull \hbox (0.79999pt too wide) in paragraph at lines 100--100
 [][][][] 
  []
 
-[5
 
-]
 Overfull \hbox (0.79999pt too wide) in paragraph at lines 104--104
 [][][][] 
  []
@@ -824,12 +802,14 @@ Overfull \hbox (0.79999pt too wide) in paragraph at lines 112--112
 [][][][] 
  []
 
-[6]
+
 Overfull \hbox (0.79999pt too wide) in paragraph at lines 116--116
 [][][][] 
  []
 
+[7
 
+]
 Overfull \hbox (0.79999pt too wide) in paragraph at lines 120--120
 [][][][] 
  []
@@ -839,22 +819,42 @@ Overfull \hbox (0.79999pt too wide) in paragraph at lines 124--124
 [][][][] 
  []
 
-[7]
+
 Overfull \hbox (0.79999pt too wide) in paragraph at lines 128--128
 [][][][] 
  []
 
-
-Overfull \hbox (0.79999pt too wide) in paragraph at lines 137--137
+[8]
+Overfull \hbox (0.79999pt too wide) in paragraph at lines 132--132
 [][][][] 
  []
 
-[8] [9]
+
+Overfull \hbox (0.79999pt too wide) in paragraph at lines 136--136
+[][][][] 
+ []
+
+
+Overfull \hbox (0.79999pt too wide) in paragraph at lines 140--140
+[][][][] 
+ []
+
+[9]
+Overfull \hbox (0.79999pt too wide) in paragraph at lines 144--144
+[][][][] 
+ []
+
+
+Overfull \hbox (0.79999pt too wide) in paragraph at lines 153--153
+[][][][] 
+ []
+
+[10] [11]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 147.
+(Font)              <10> on input line 163.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 147.
- [10
+(Font)              <7> on input line 163.
+ [12
 
 ] (2.3.aux) )
-Output written on 2.3.xdv (10 pages, 140412 bytes).
+Output written on 2.3.xdv (12 pages, 265204 bytes).

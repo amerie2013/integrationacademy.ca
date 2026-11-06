@@ -1,6 +1,7 @@
 // MCR3U 3.7 — Families of Quadratic Functions: same zeros, varying a; equations from zeros (rational and irrational)
 // and a point; from the vertex and a point; parabolic arches
 import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, q, num, choice, hard, plane } from "./lib.mjs";
+import { tv } from "../mcr3u-extables.mjs";
 
 export const TITLE = "3.7 Families of Quadratic Functions";
 export const ID = "5c3e0001-0001-4001-8001-000000000305";
@@ -53,21 +54,46 @@ export const blocks = () => [
 
   examples([
     ["Describe a family", S`What do the members of \(y=a(x-2)(x+5)\) share?`,
-      [S`Zeros \(2\) and \(-5\); axis \(x=-1.5\).`, S`They differ in \(a\): direction of opening and steepness (graph above).`],
-      "same zeros and axis; different a"],
+      [S`<b>Meaning of a family.</b> The zeros are fixed by the factors, and \(a\) is free. Every value \(a\ne0\) gives a different parabola with those zeros.`,
+        S`<b>Shared features.</b> The zeros are 2 and \(-5\). So the axis is \(x=\frac{2+(-5)}2=-1.5\) for every member.`,
+        S`<b>Differences.</b> The sign of \(a\) sets the direction of opening. The size of \(a\) sets the steepness, and therefore the height of the vertex.`,
+        S`<b>Compare members.</b> ${tv(["\\(a\\)", "\\(1\\)", "\\(-2\\)", "\\(0.5\\)"], ["y-intercept", "\\(-10\\)", "\\(20\\)", "\\(-5\\)"], ["vertex", "\\((-1.5,-12.25)\\)", "\\((-1.5,24.5)\\)", "\\((-1.5,-6.125)\\)"])}`,
+        S`<b>Check on the graph.</b> All three curves pass through \((2,0)\) and \((-5,0)\) ✓`],
+      "same zeros and axis; different a",
+      plane({ view: { xmin: -7, xmax: 4, ymin: -15, ymax: 27 }, curves: [{ f: (x) => (x - 2) * (x + 5), color: "violet" }, { f: (x) => -2 * (x - 2) * (x + 5), color: "red" }, { f: (x) => 0.5 * (x - 2) * (x + 5), color: "blue" }], points: [{ x: 2, y: 0, label: "(2, 0)", color: "amber" }, { x: -5, y: 0, label: "(−5, 0)", color: "amber" }], step: { x: 1, y: 3 } }, "violet a = 1, red a = −2, blue a = 0.5")],
     ["The member through a point", S`Find the member of \(y=a(x-2)(x+5)\) through \((1,12)\).`,
-      [S`\(12=a(1-2)(1+5)=-6a\).`],
-      S`\(a=-2\): \(y=-2(x-2)(x+5)\)`],
+      [S`<b>Idea.</b> One extra point picks out one member of the family, because only \(a\) is unknown.`,
+        S`<b>Substitute</b> \((1,12)\). \(12=a(1-2)(1+5)\).`,
+        S`<b>Simplify.</b> \(12=a(-1)(6)=-6a\).`,
+        S`<b>Solve.</b> \(a=-2\).`,
+        S`<b>Check.</b> \(y(1)=-2(-1)(6)=12\) ✓. The zeros are unchanged ✓`],
+      S`\(a=-2\): \(y=-2(x-2)(x+5)\)`,
+      plane({ view: { xmin: -7, xmax: 4, ymin: -8, ymax: 27 }, curves: [{ f: (x) => -2 * (x - 2) * (x + 5), color: "violet" }], points: [{ x: 1, y: 12, label: "(1, 12)", color: "amber" }, { x: 2, y: 0, label: "(2, 0)" }, { x: -5, y: 0, label: "(−5, 0)" }], step: { x: 1, y: 3 } })],
     ["Irrational zeros", S`Find the quadratic with zeros \(3\pm\sqrt2\) through \((1,4)\).`,
-      [S`\(y=a\left[(x-3)^2-2\right]=a(x^2-6x+7)\).`, S`\(4=a(1-6+7)=2a\Rightarrow a=2\).`],
-      S`\(y=2x^2-12x+14\)`],
+      [S`<b>Write the factors.</b> \(y=a\left(x-(3+\sqrt2)\right)\left(x-(3-\sqrt2)\right)\).`,
+        S`<b>Group as a difference of squares.</b> The factors are \(\left((x-3)-\sqrt2\right)\left((x-3)+\sqrt2\right)=(x-3)^2-2\). The roots disappear.`,
+        S`<b>Expand.</b> \((x-3)^2-2=x^2-6x+9-2=x^2-6x+7\).`,
+        S`<b>Use the point.</b> \(4=a(1-6+7)=2a\), so \(a=2\).`,
+        S`<b>Standard form.</b> \(y=2(x^2-6x+7)=2x^2-12x+14\).`,
+        S`<b>Check with the formula.</b> \(x=\frac{12\pm\sqrt{144-112}}4=\frac{12\pm4\sqrt2}4=3\pm\sqrt2\) ✓`],
+      S`\(y=2x^2-12x+14\)`,
+      plane({ view: { xmin: 0, xmax: 6, ymin: -5, ymax: 8 }, curves: [{ f: (x) => 2 * x * x - 12 * x + 14, color: "violet" }], points: [{ x: 1, y: 4, label: "(1, 4)", color: "amber" }, { x: 1.586, y: 0, label: "(1.59, 0)" }, { x: 4.414, y: 0, label: "(4.41, 0)" }], step: { x: 1, y: 1 } })],
     ["Vertex and a point", S`A parabola has vertex \((-2,5)\) and passes through \((0,-3)\). Find it.`,
-      [S`\(y=a(x+2)^2+5\); \(-3=4a+5\Rightarrow a=-2\).`],
-      S`\(y=-2(x+2)^2+5\)`],
+      [S`<b>Choose the form.</b> We know the vertex, so use \(y=a(x-h)^2+k\): \(y=a(x+2)^2+5\).`,
+        S`<b>Substitute</b> \((0,-3)\). \(-3=a(2)^2+5\), so \(-3=4a+5\).`,
+        S`<b>Solve.</b> \(4a=-8\), so \(a=-2\).`,
+        S`<b>Sense check.</b> The point is below the vertex, so the curve must open down, and \(a<0\) ✓`,
+        S`<b>Check by symmetry.</b> \((0,-3)\) is 2 right of the axis, so \((-4,-3)\) must also be on it: \(-2(-2)^2+5=-3\) ✓`],
+      S`\(y=-2(x+2)^2+5\)`,
+      plane({ view: { xmin: -6, xmax: 2, ymin: -6, ymax: 7 }, curves: [{ f: (x) => -2 * (x + 2) ** 2 + 5, color: "violet" }], points: [{ x: -2, y: 5, label: "(−2, 5)", color: "amber" }, { x: 0, y: -3, label: "(0, −3)" }, { x: -4, y: -3, label: "(−4, −3)" }], step: { x: 1, y: 1 } })],
     ["A parabolic arch", "An arch is 10 m wide at the ground and 6 m high in the middle. How high is it 2 m from one foot?",
-      [S`Feet at \(x=0\) and \(x=10\): \(y=ax(x-10)\); top \((5,6)\): \(6=a(5)(-5)\Rightarrow a=-0.24\).`, S`\(y(2)=-0.24(2)(-8)=3.84\).`],
+      [S`<b>Place axes.</b> A good choice makes the algebra easy. Put one foot at the origin, so the feet are at \(x=0\) and \(x=10\).`,
+        S`<b>Family with these zeros.</b> \(y=ax(x-10)\).`,
+        S`<b>Use the top.</b> The middle is \(x=5\), with height 6: \(6=a(5)(-5)=-25a\), so \(a=-0.24\).`,
+        S`<b>Find the height.</b> "2 m from one foot" means \(x=2\): \(y=-0.24(2)(-8)=3.84\).`,
+        S`<b>Check by symmetry.</b> At \(x=8\): \(-0.24(8)(-2)=3.84\). The other foot gives the same height ✓`],
       "3.84 m",
-      plane({ view: { xmin: -1, xmax: 11, ymin: -1, ymax: 7 }, curves: [{ f: (x) => -0.24 * x * (x - 10), a: 0, b: 10, color: "violet" }], points: [{ x: 5, y: 6, label: "(5, 6)" }, { x: 2, y: 3.84, label: "(2, 3.84)" }], step: { x: 1, y: 1 }, xlabel: "x (m)", ylabel: "y (m)" })],
+      plane({ view: { xmin: -1, xmax: 11, ymin: -1, ymax: 7 }, curves: [{ f: (x) => -0.24 * x * (x - 10), a: 0, b: 10, color: "violet" }], points: [{ x: 5, y: 6, label: "(5, 6)" }, { x: 2, y: 3.84, label: "(2, 3.84)", color: "amber" }, { x: 8, y: 3.84, label: "(8, 3.84)" }], step: { x: 1, y: 1 }, xlabel: "x (m)", ylabel: "y (m)" })],
   ]),
 
   practice([

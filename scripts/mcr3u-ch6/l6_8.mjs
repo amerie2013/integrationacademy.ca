@@ -1,6 +1,7 @@
 // MCR3U 6.8 — Chapter 6 Review: periodic properties, parent graphs, interpreting, transformations, key points,
 // equations and models
 import { intro, section, keyIdea, widget, examples, practice, wrapUp, table, q, num, choice, hard, plane } from "./lib.mjs";
+import { tv } from "../mcr3u-extables.mjs";
 
 export const TITLE = "6.8 Chapter 6 Review";
 export const ID = "5c3e0001-0001-4001-8001-000000000608";
@@ -46,21 +47,45 @@ export const blocks = () => [
 
   examples([
     ["Properties from a table", S`A buoy's height (m) every 2 s is \(1.2,\ 2.0,\ 2.8,\ 2.0,\ 1.2,\ 2.0,\ 2.8\). State the period, axis and amplitude, and predict the height at 30 s.`,
-      [S`The pattern repeats every 8 s; axis 2.0 m, amplitude 0.8 m.`, S`\(30=3\times8+6\): same as \(t=6\), height 2.0 m.`],
-      "period 8 s; 2.0 m at 30 s"],
+      [S`<b>Organize.</b> ${tv(["\\(t\\) (s)", "0", "2", "4", "6", "8", "10", "12"], ["\\(h\\) (m)", "1.2", "2.0", "2.8", "2.0", "1.2", "2.0", "2.8"])}`,
+        S`<b>Period.</b> The height returns to 1.2 at \(t=8\), so the period is 8 s. The x-step is 2, so do not just count the entries.`,
+        S`<b>Axis and amplitude.</b> Axis \(\frac{2.8+1.2}2=2.0\) m and amplitude \(\frac{2.8-1.2}2=0.8\) m.`,
+        S`<b>Predict.</b> Remove whole periods: \(30=3\times8+6\), so \(h(30)=h(6)=2.0\) m.`,
+        S`<b>Check.</b> \(t=24\) starts a cycle at 1.2, then 2.0, 2.8, 2.0 at \(t=30\) ✓`],
+      "period 8 s, axis 2.0 m, amplitude 0.8 m; 2.0 m at 30 s",
+      plane({ view: { xmin: 0, xmax: 34, ymin: 0, ymax: 3.4 }, curves: [{ f: (t) => 2 - 0.8 * Math.cos(r(45 * t)), a: 0, color: "violet" }], lines: [{ m: 0, b: 2, color: "green", dash: true }], points: [{ x: 4, y: 2.8, label: "(4, 2.8)" }, { x: 8, y: 1.2, label: "(8, 1.2)" }, { x: 30, y: 2, label: "(30, 2)", color: "amber" }], step: { x: 2, y: 0.4 }, xlabel: "t (s)", ylabel: "h (m)" })],
     ["Reading an equation", S`State the amplitude, period, phase shift, axis and range of \(y=-4\sin(3x+90^\circ)+2\).`,
-      [S`Factor: \(3(x+30^\circ)\).`, S`Amplitude 4 (reflected), period 120°, 30° left, axis y = 2.`],
-      S`range \(-2\le y\le6\)`],
+      [S`<b>Factor first.</b> \(3x+90^\circ=3(x+30^\circ)\), so \(k=3\) and \(d=-30^\circ\). The shift is not \(90^\circ\).`,
+        S`<b>Amplitude.</b> \(|a|=4\). The minus sign reflects the curve in its axis.`,
+        S`<b>Period.</b> \(\frac{360^\circ}3=120^\circ\).`,
+        S`<b>Shift and axis.</b> \(30^\circ\) left; axis \(y=2\).`,
+        S`<b>Range.</b> \(2-4\le y\le2+4\), so \(-2\le y\le6\).`,
+        S`<b>Check.</b> \(x=60^\circ\): \(-4\sin270^\circ+2=6\) ✓, the maximum.`],
+      S`amplitude 4 (reflected), period \(120^\circ\), \(30^\circ\) left, axis \(y=2\), range \(-2\le y\le6\)`,
+      plane({ view: { xmin: -60, xmax: 210, ymin: -3, ymax: 7 }, curves: [{ f: (x) => -4 * Math.sin(r(3 * x + 90)) + 2, color: "violet" }], lines: [{ m: 0, b: 2, color: "green", dash: true }], points: [{ x: -30, y: 2, label: "(−30°, 2)", color: "amber" }, { x: 0, y: -2, label: "(0°, −2)" }, { x: 60, y: 6, label: "(60°, 6)" }], step: { x: 30, y: 1 } })],
     ["Key points", S`Find the key points of one cycle of \(y=2\cos(0.5(x+60^\circ))-1\).`,
-      [S`x: \(2x-60\) gives \(-60^\circ,120^\circ,300^\circ,480^\circ,660^\circ\).`, S`y: \(2y-1\) gives \(1,-1,-3,-1,1\).`],
+      [S`<b>Mapping.</b> \(a=2\), \(k=0.5\), \(d=-60^\circ\), \(c=-1\): \((x,y)\to\left(\frac x{0.5}-60^\circ,\ 2y-1\right)=(2x-60^\circ,\ 2y-1)\).`,
+        S`<b>Apply it.</b> ${tv(["\\(\\cos x\\)", "\\((0^\\circ,1)\\)", "\\((90^\\circ,0)\\)", "\\((180^\\circ,-1)\\)", "\\((270^\\circ,0)\\)", "\\((360^\\circ,1)\\)"], ["image", "\\((-60^\\circ,1)\\)", "\\((120^\\circ,-1)\\)", "\\((300^\\circ,-3)\\)", "\\((480^\\circ,-1)\\)", "\\((660^\\circ,1)\\)"])}`,
+        S`<b>Read the properties.</b> The first and last x-values differ by \(720^\circ\), the period. Heights run from \(-3\) to 1.`,
+        S`<b>Check.</b> \(x=300^\circ\): \(2\cos180^\circ-1=-3\) ✓`],
       "period 720°, range −3 ≤ y ≤ 1",
       plane({ view: { xmin: -90, xmax: 720, ymin: -4, ymax: 2 }, curves: [{ f: (x) => 2 * Math.cos(r(0.5 * (x + 60))) - 1, color: "violet" }], points: [[-60, 1], [120, -1], [300, -3], [480, -1], [660, 1]].map(([x, y]) => ({ x, y })), lines: [{ m: 0, b: -1, color: "green", dash: true }], step: { x: 90, y: 1 } })],
     ["An equation from a graph", "A graph has maximum (30°, 1) and the next minimum (90°, −3). Write a cosine equation.",
-      [S`\(a=2\), \(c=-1\), period 120°: \(k=3\), \(d=30^\circ\).`],
-      S`\(y=2\cos(3(x-30^\circ))-1\)`],
+      [S`<b>Amplitude and axis.</b> \(a=\frac{1-(-3)}2=2\) and \(c=\frac{1+(-3)}2=-1\).`,
+        S`<b>Period.</b> Max to next min is half a cycle: \(90^\circ-30^\circ=60^\circ\). So the period is \(120^\circ\) and \(k=3\).`,
+        S`<b>Phase shift.</b> Cosine starts at a maximum: \(d=30^\circ\).`,
+        S`<b>Equation.</b> \(y=2\cos(3(x-30^\circ))-1\).`,
+        S`<b>Check.</b> \(x=90^\circ\): \(2\cos180^\circ-1=-3\) ✓`],
+      S`\(y=2\cos(3(x-30^\circ))-1\)`,
+      plane({ view: { xmin: -30, xmax: 210, ymin: -4, ymax: 2 }, curves: [{ f: (x) => 2 * Math.cos(r(3 * (x - 30))) - 1, color: "violet" }], lines: [{ m: 0, b: -1, color: "green", dash: true }], points: [{ x: 30, y: 1, label: "(30°, 1)", color: "amber" }, { x: 90, y: -3, label: "(90°, −3)", color: "amber" }, { x: 150, y: 1, label: "(150°, 1)" }], step: { x: 30, y: 1 } })],
     ["A model with a level", S`A boat ramp's water depth is \(D=1.5\cos(72t)+4\) (m, t in hours). For how long in each cycle is the depth below 3 m?`,
-      [S`\(1.5\cos\theta+4<3\Rightarrow\cos\theta<-\frac23\Rightarrow\theta\) between \(${f(dg(Math.acos(-2 / 3)))}^\circ\) and \(${f(360 - dg(Math.acos(-2 / 3)))}^\circ\).`, S`Divide the width by 72.`],
-      S`\(\approx${f(lowW)}\) h`],
+      [S`<b>Set up.</b> \(1.5\cos\theta+4<3\), with \(\theta=72t\). Subtract 4: \(1.5\cos\theta<-1\). Divide: \(\cos\theta<-\frac23\).`,
+        S`<b>Find the angles.</b> \(\cos^{-1}\left(-\frac23\right)\approx${f(dg(Math.acos(-2 / 3)))}^\circ\). By symmetry the other angle is \(360^\circ\) minus this, \(\approx${f(360 - dg(Math.acos(-2 / 3)))}^\circ\). Cosine is below \(-\frac23\) between them.`,
+        S`<b>Convert to time.</b> The width of the angle interval is \(\approx${f(360 - 2 * dg(Math.acos(-2 / 3)))}^\circ\). Each hour is \(72^\circ\), so divide by 72.`,
+        S`<b>Result.</b> \(\approx${f(lowW)}\) h out of a 5 h cycle.`,
+        S`<b>Check on the graph.</b> The curve is below the dashed line \(D=3\) near its minimum at \(t=2.5\) ✓`],
+      S`\(\approx${f(lowW)}\) h`,
+      plane({ view: { xmin: 0, xmax: 10, ymin: 0, ymax: 6 }, curves: [{ f: boat, color: "violet" }], lines: [{ m: 0, b: 3, color: "amber", dash: true }], points: [{ x: 2.5, y: 2.5, label: "(2.5, 2.5)" }, { x: 2.5 - lowW / 2, y: 3 }, { x: 2.5 + lowW / 2, y: 3 }], step: { x: 1, y: 1 }, xlabel: "t (h)", ylabel: "D (m)" })],
   ]),
 
   practice([

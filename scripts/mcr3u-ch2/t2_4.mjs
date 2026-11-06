@@ -116,50 +116,60 @@ const lessonHtml = r`<div class="lecture-box">
 
   <h2>🔵 Examples</h2>
   ${ex("Example 1: Same denominator", `Simplify ${M("\\dfrac{5x+1}{x-2}-\\dfrac{2x-7}{x-2}")}.`, [
+    `<b>Rule.</b> With a common denominator, combine only the numerators. The denominator stays.`,
     `The denominators already match, so keep one and combine the numerators — with brackets: \\(\\dfrac{(5x+1)-(2x-7)}{x-2}\\).`,
     `The minus changes both signs in the bracket: \\(5x+1-2x+7=3x+8\\).`,
-  ], `${M(E1.tex)}, \\(x\\ne2\\). Forgetting the bracket would give \\(3x-6\\) — a very common error.`)}
+    `<b>Check with</b> \\(x=3\\). Original: \\(16-(-1)=17\\). Answer: \\(\\frac{17}{1}=17\\) ✓`,
+  ], `${M(E1.tex)}, \\(x\\ne2\\). Forgetting the bracket would give \\(3x-6\\) — a very common error.`, gframe(["y = (5*x+1)/(x-2)-(2*x-7)/(x-2)", "y = (3*x+8)/(x-2)"], { title: "Both forms draw one curve", ...gview(-6, 10, -12, 18) }))}
   ${ex("Example 2: Monomial denominators", `Simplify ${M("\\dfrac{3}{4x}+\\dfrac{5}{6x^2}")}.`, [
     `\\(4x=2^2\\cdot x\\) and \\(6x^2=2\\cdot3\\cdot x^2\\). LCD \\(=2^2\\cdot3\\cdot x^2=12x^2\\).`,
     `Build: \\(\\dfrac{3}{4x}\\cdot\\dfrac{3x}{3x}=\\dfrac{9x}{12x^2}\\) and \\(\\dfrac{5}{6x^2}\\cdot\\dfrac{2}{2}=\\dfrac{10}{12x^2}\\). Add.`,
-  ], `${M(E2.tex)}, \\(x\\ne0\\).`)}
+    `<b>Check with</b> \\(x=1\\). Original: \\(\\frac34+\\frac56=\\frac{19}{12}\\). Answer: \\(\\frac{9+10}{12}=\\frac{19}{12}\\) ✓`,
+  ], `${M(E2.tex)}, \\(x\\ne0\\).`, gframe(["y = 3/(4*x)+5/(6*x^2)", "y = (9*x+10)/(12*x^2)"], { title: "Both forms draw one curve", ...gview(-5, 5, -4, 6) }))}
   ${ex("Example 3: Two different binomials", `Simplify ${M("\\dfrac{2}{x+3}+\\dfrac{5}{x-1}")}.`, [
     `Nothing is common, so the LCD is the product \\((x+3)(x-1)\\). Each fraction is missing the other's factor.`,
     `\\(\\dfrac{2(x-1)+5(x+3)}{(x+3)(x-1)}=\\dfrac{2x-2+5x+15}{(x+3)(x-1)}\\).`,
-  ], `${M(E3.tex)}, \\(x\\ne-3,\\ 1\\). The numerator \\(7x+13\\) does not factor with either bracket, so we stop.`)}
+    `<b>Check with</b> \\(x=0\\). Original: \\(\\frac23-5=-\\frac{13}3\\). Answer: \\(\\frac{13}{(3)(-1)}=-\\frac{13}3\\) ✓`,
+  ], `${M(E3.tex)}, \\(x\\ne-3,\\ 1\\). The numerator \\(7x+13\\) does not factor with either bracket, so we stop.`, gframe(["y = 2/(x+3)+5/(x-1)", "y = (7*x+13)/((x+3)*(x-1))"], { title: "Both forms draw one curve", ...gview(-9, 7, -10, 10) }))}
   ${ex("Example 4: Subtracting — watch the sign", `Simplify ${M("\\dfrac{4}{x-2}-\\dfrac{3}{x+5}")}.`, [
     `LCD \\((x-2)(x+5)\\). Numerator: \\(4(x+5)-3(x-2)\\) — the bracket after the minus is essential.`,
     `\\(4x+20-3x+6=x+26\\). (The \\(-3\\cdot-2\\) gives \\(+6\\).)`,
-  ], `${M(E4.tex)}, \\(x\\ne2,\\ -5\\).`)}
+    `<b>Check with</b> \\(x=0\\). Original: \\(-2-\\frac35=-2.6\\). Answer: \\(\\frac{26}{-10}=-2.6\\) ✓`,
+  ], `${M(E4.tex)}, \\(x\\ne2,\\ -5\\).`, gframe(["y = 4/(x-2)-3/(x+5)", "y = (x+26)/((x-2)*(x+5))"], { title: "Both forms draw one curve", ...gview(-11, 8, -8, 8) }))}
   ${ex("Example 5: Factor the denominators first", `Simplify ${M("\\dfrac{5}{x^2-9}-\\dfrac{2}{x^2+x-12}")}.`, [
     `\\(x^2-9=(x-3)(x+3)\\) and \\(x^2+x-12=(x+4)(x-3)\\). Restrictions: \\(x\\ne3,-3,-4\\).`,
     `LCD \\(=(x-3)(x+3)(x+4)\\) — the shared factor \\((x-3)\\) appears <strong>once</strong>. The first fraction is missing \\((x+4)\\), the second \\((x+3)\\).`,
     `Numerator: \\(5(x+4)-2(x+3)=5x+20-2x-6=3x+14\\).`,
-  ], `${M(E5.tex)}. Multiplying the two denominators instead would give a much bigger (but still correct) fraction — the LCD keeps it small.`)}
+    `<b>Check with</b> \\(x=0\\). Original: \\(-\\frac59+\\frac16=-\\frac7{18}\\). Answer: \\(\\frac{14}{(-3)(3)(4)}=-\\frac7{18}\\) ✓`,
+  ], `${M(E5.tex)}. Multiplying the two denominators instead would give a much bigger (but still correct) fraction — the LCD keeps it small.`, gframe(["y = 5/(x^2-9)-2/(x^2+x-12)", "y = (3*x+14)/((x-3)*(x+3)*(x+4))"], { title: "Both forms draw one curve", ...gview(-8, 7, -3, 3) }))}
   ${ex("Example 6: Opposite denominators", `Simplify ${M("\\dfrac{3}{x-4}+\\dfrac{5}{4-x}")}.`, [
     `\\(4-x=-(x-4)\\), so \\(\\dfrac{5}{4-x}=-\\dfrac{5}{x-4}\\).`,
     `Now the denominators match: \\(\\dfrac{3-5}{x-4}\\).`,
-  ], `${M("\\dfrac{-2}{x-4}")}, \\(x\\ne4\\). Recognising opposites avoids a long common-denominator calculation.`)}
+    `<b>Check with</b> \\(x=5\\). Original: \\(3+\\frac5{-1}=-2\\). Answer: \\(\\frac{-2}{1}=-2\\) ✓`,
+  ], `${M("\\dfrac{-2}{x-4}")}, \\(x\\ne4\\). Recognising opposites avoids a long common-denominator calculation.`, gframe(["y = 3/(x-4)+5/(4-x)", "y = -2/(x-4)"], { title: "Both forms draw one curve", ...gview(-2, 10, -6, 6) }))}
   ${ex("Example 7: Add, then simplify", `Simplify ${M("\\dfrac{x}{x-2}-\\dfrac{4}{x^2-2x}")}.`, [
     `\\(x^2-2x=x(x-2)\\), so the LCD is \\(x(x-2)\\) and the first fraction is missing \\(x\\).`,
     `\\(\\dfrac{x\\cdot x-4}{x(x-2)}=\\dfrac{x^2-4}{x(x-2)}=\\dfrac{(x-2)(x+2)}{x(x-2)}\\). Cancel \\((x-2)\\).`,
+    `<b>Check with</b> \\(x=1\\). Original: \\(-1+4=3\\). Answer: \\(\\frac31=3\\) ✓`,
   ], `${M("\\dfrac{x+2}{x}")}, \\(x\\ne0,\\ 2\\). Always <em>factor the final numerator</em> — it often cancels. The graphs agree except at the hole \\((2,2)\\), where the cancelled factor \\((x-2)\\) was zero:`, gframe(["y = x/(x-2) - 4/(x^2-2*x)", "y = (x+2)/x"], { title: "x/(x−2) − 4/(x²−2x) = (x+2)/x, with a hole at (2, 2)", labels: [{ x: 2, y: 2, t: "hole (2, 2)", c: "#be123c" }], ...gview(-5, 6, -5, 6) }))}
   ${ex("Example 8: Three terms — a surprise", `Simplify ${M("\\dfrac{1}{x}+\\dfrac{1}{x+1}+\\dfrac{1}{x(x+1)}")}.`, [
     `LCD \\(=x(x+1)\\). Numerator: \\((x+1)+x+1=2x+2=2(x+1)\\).`,
     `\\(\\dfrac{2(x+1)}{x(x+1)}\\): cancel \\((x+1)\\).`,
+    `<b>Check with</b> \\(x=1\\). Original: \\(1+\\frac12+\\frac12=2\\). Answer: \\(\\frac21=2\\) ✓`,
   ], `${M("\\dfrac2x")}, \\(x\\ne0,\\ -1\\). Three fractions collapsed into one very simple one — the graphs coincide:`, sumGraph)}
   ${ex("Example 9: A compound fraction", `Simplify ${M("\\dfrac{1+\\frac1x}{1-\\frac1{x^2}}")}.`, [
     `Combine the top: \\(1+\\dfrac1x=\\dfrac{x+1}{x}\\). Combine the bottom: \\(1-\\dfrac1{x^2}=\\dfrac{x^2-1}{x^2}\\).`,
     `Divide by multiplying by the reciprocal: \\(\\dfrac{x+1}{x}\\times\\dfrac{x^2}{(x-1)(x+1)}\\). Cancel \\(x\\) and \\((x+1)\\).`,
-  ], `${M("\\dfrac{x}{x-1}")}, with \\(x\\ne0,\\ 1,\\ -1\\).`)}
+    `<b>Check with</b> \\(x=2\\). Original: \\(\\frac{1.5}{0.75}=2\\). Answer: \\(\\frac21=2\\) ✓`,
+  ], `${M("\\dfrac{x}{x-1}")}, with \\(x\\ne0,\\ 1,\\ -1\\).`, gframe(["y = (1+1/x)/(1-1/x^2)", "y = x/(x-1)"], { title: "Both forms draw one curve, apart from the missing points", ...gview(-6, 6, -6, 8) }))}
   ${ex("Example 10: Work rates", `Pipe A fills a tank in \\(x\\) hours; pipe B fills it in \\((x+3)\\) hours. Write the time to fill the tank with both pipes open.`, [
     `Rates add: in one hour A fills \\(\\dfrac1x\\) of the tank and B fills \\(\\dfrac{1}{x+3}\\). Together: \\(\\dfrac1x+\\dfrac1{x+3}=\\dfrac{(x+3)+x}{x(x+3)}=\\dfrac{2x+3}{x(x+3)}\\).`,
     `Time \\(=1\\div\\text{rate}\\): flip the fraction.`,
-  ], `Time \\(=\\dfrac{x(x+3)}{2x+3}\\) hours. If A takes \\(6\\) h and B takes \\(9\\) h: \\(\\dfrac{54}{15}=3.6\\) h (check: \\(\\tfrac16+\\tfrac19=\\tfrac5{18}\\), and \\(\\tfrac{18}{5}=3.6\\) ✓).`)}
+  ], `Time \\(=\\dfrac{x(x+3)}{2x+3}\\) hours. If A takes \\(6\\) h and B takes \\(9\\) h: \\(\\dfrac{54}{15}=3.6\\) h (check: \\(\\tfrac16+\\tfrac19=\\tfrac5{18}\\), and \\(\\tfrac{18}{5}=3.6\\) ✓).`, gframe([{ kind: "cartesian", expr: "y = x*(x+3)/(2*x+3)", dMin: "0", dMax: "14" }], { title: "Time together, by A's time x", labels: [{ x: 6, y: 3.6, t: "(6, 3.6)" }], ...gview(-1, 15, -1, 9) }))}
   ${ex("Example 11: Resistors in parallel", `Two resistors of \\(x\\) and \\(2x\\) ohms are connected in parallel. The total resistance \\(R\\) satisfies \\(\\dfrac1R=\\dfrac1x+\\dfrac1{2x}\\). Find \\(R\\).`, [
     `LCD \\(2x\\): \\(\\dfrac{2}{2x}+\\dfrac{1}{2x}=\\dfrac{3}{2x}\\).`,
     `Flip: \\(R=\\dfrac{2x}{3}\\).`,
-  ], `\\(R=\\dfrac{2x}{3}\\) ohms — always smaller than the smaller resistor, as parallel circuits require. For \\(x=9\\): \\(6\\) Ω (\\(\\tfrac19+\\tfrac1{18}=\\tfrac16\\) ✓).`)}
+  ], `\\(R=\\dfrac{2x}{3}\\) ohms — always smaller than the smaller resistor, as parallel circuits require. For \\(x=9\\): \\(6\\) Ω (\\(\\tfrac19+\\tfrac1{18}=\\tfrac16\\) ✓).`, gframe([{ kind: "cartesian", expr: "y = 2*x/3", dMin: "0", dMax: "12" }, { kind: "cartesian", expr: "y = x", dMin: "0", dMax: "12" }], { title: "R (lower line) is always below the smaller resistor, x", labels: [{ x: 9, y: 6, t: "(9, 6)" }], ...gview(-1, 13, -1, 13) }))}
 
   ${mistake("\\(\\dfrac2x+\\dfrac35=\\dfrac{5}{x+5}\\)", "Fractions are added over a <em>common</em> denominator — you never add the denominators. At \\(x=5\\): \\(\\tfrac25+\\tfrac35=1\\) but \\(\\tfrac{5}{5+5}=\\tfrac12\\).", "\\(\\dfrac2x+\\dfrac35=\\dfrac{10+3x}{5x}\\).")}
   ${mistake("\\(\\dfrac{5}{x}-\\dfrac{x-1}{x}=\\dfrac{5-x-1}{x}\\)", "The minus must apply to <em>both</em> terms of \\((x-1)\\). The numerator becomes \\(5-x+1\\), not \\(5-x-1\\). At \\(x=2\\): \\(\\tfrac52-\\tfrac12=2\\), but \\(\\tfrac{5-2-1}{2}=1\\).", "\\(\\dfrac{5-(x-1)}{x}=\\dfrac{6-x}{x}\\).")}
@@ -233,16 +243,26 @@ export const W24 = {
     r`\textbf{Work rates and parallel circuits:} rates and reciprocals add: $\dfrac1x+\dfrac1y=\dfrac{x+y}{xy}$.`,
   ],
   examples: [
-    { t: "Same denominator", body: String.raw`Simplify $\dfrac{9x+4}{2x-1}-\dfrac{3x-5}{2x-1}$.\soln $\dfrac{(9x+4)-(3x-5)}{2x-1}=\dfrac{9x+4-3x+5}{2x-1}$. \\ $=${w1.tex}=\dfrac{3(2x+3)}{2x-1}$, $x\ne\tfrac12$.` },
-    { t: "Monomial denominators", body: String.raw`Simplify $\dfrac{7}{10x}+\dfrac{3}{4x^3}$.\soln $10x=2\cdot5\cdot x$ and $4x^3=2^2\cdot x^3$, so LCD $=2^2\cdot5\cdot x^3=20x^3$. \\ $\dfrac{7\cdot2x^2}{20x^3}+\dfrac{3\cdot5}{20x^3}=${w2.tex}$, $x\ne0$.` },
-    { t: "Two binomial denominators", body: String.raw`Simplify $\dfrac{5}{x+1}+\dfrac{2}{x-4}$.\soln LCD $(x+1)(x-4)$. \\ $\dfrac{5(x-4)+2(x+1)}{(x+1)(x-4)}=\dfrac{5x-20+2x+2}{(x+1)(x-4)}=${w3.tex}$, $x\ne-1,4$.` },
-    { t: "Subtracting", body: String.raw`Simplify $\dfrac{3}{x-6}-\dfrac{2}{x+1}$.\soln $\dfrac{3(x+1)-2(x-6)}{(x-6)(x+1)}$. Bracket the second product! \\ $3x+3-2x+12=x+15$: $${w4.tex}$, $x\ne6,-1$.` },
-    { t: "Factor the denominators first", body: String.raw`Simplify $\dfrac{4}{x^2-4}+\dfrac{1}{x^2-x-2}$.\soln $x^2-4=(x-2)(x+2)$; $x^2-x-2=(x-2)(x+1)$. LCD $(x-2)(x+2)(x+1)$ --- $(x-2)$ is counted once. \\ Numerator: $4(x+1)+1(x+2)=5x+6$. \\ $${w5.tex}$, $x\ne2,-2,-1$.` },
-    { t: "Opposite denominators", body: String.raw`Simplify $\dfrac{7}{x-5}-\dfrac{2}{5-x}$.\soln $\dfrac{2}{5-x}=-\dfrac{2}{x-5}$, so $\dfrac{7}{x-5}+\dfrac{2}{x-5}=\dfrac{9}{x-5}$, $x\ne5$.` },
-    { t: "Combine, then simplify", body: String.raw`Simplify $\dfrac{x}{x-5}-\dfrac{25}{x^2-5x}$.\soln $x^2-5x=x(x-5)$; LCD $x(x-5)$. \\ $\dfrac{x\cdot x-25}{x(x-5)}=\dfrac{(x-5)(x+5)}{x(x-5)}=\dfrac{x+5}{x}$, $x\ne0,5$.` },
-    { t: "Three terms", body: String.raw`Simplify $\dfrac2x+\dfrac{3}{x+2}-\dfrac{4}{x(x+2)}$.\soln LCD $x(x+2)$: $\dfrac{2(x+2)+3x-4}{x(x+2)}=\dfrac{5x}{x(x+2)}=\dfrac{5}{x+2}$, $x\ne0,-2$.` },
-    { t: "A compound fraction", body: String.raw`Simplify $\dfrac{x-\frac4x}{1-\frac2x}$.\soln Top: $\dfrac{x^2-4}{x}$. Bottom: $\dfrac{x-2}{x}$. Divide: $\dfrac{x^2-4}{x}\times\dfrac{x}{x-2}=\dfrac{(x-2)(x+2)}{x-2}=x+2$, with $x\ne0,2$.` },
-    { t: "Application: working together", body: String.raw`Alex mows a lawn in $x$ hours and Bea takes $(x+4)$ hours. Write the time together, and find it when Alex takes $6$ hours.\soln Rates add: $\dfrac1x+\dfrac1{x+4}=\dfrac{2x+4}{x(x+4)}$. Time $=\dfrac{x(x+4)}{2x+4}$. \\ For $x=6$: $\dfrac{60}{16}=3.75$ h. Check: $\tfrac16+\tfrac1{10}=\tfrac{16}{60}$ and $\tfrac{60}{16}=3.75$ \checkmark.` },
+    { t: "Same denominator", body: String.raw`Simplify $\dfrac{9x+4}{2x-1}-\dfrac{3x-5}{2x-1}$.\soln \textbf{Rule:} Same denominator: combine the numerators, with brackets. \\ $\dfrac{(9x+4)-(3x-5)}{2x-1}=\dfrac{9x+4-3x+5}{2x-1}$. \\ $=${w1.tex}=\dfrac{3(2x+3)}{2x-1}$, $x\ne\tfrac12$. \\ \textbf{Check:} at $x=1$: $13-(-2)=15$, and $\frac{6+9}{1}=15$ \checkmark` +
+      pgf({ curves: [{ f: "(6*x+9)/(2*x-1)" }], bounds: [1, 6, 0, 20], dots: [[1, 15, "(1,15)"]], xt: 1, yt: 5 }) },
+    { t: "Monomial denominators", body: String.raw`Simplify $\dfrac{7}{10x}+\dfrac{3}{4x^3}$.\soln \textbf{Rule:} Build the LCD from the highest power of each factor. \\ $10x=2\cdot5\cdot x$ and $4x^3=2^2\cdot x^3$, so LCD $=2^2\cdot5\cdot x^3=20x^3$. \\ $\dfrac{7\cdot2x^2}{20x^3}+\dfrac{3\cdot5}{20x^3}=${w2.tex}$, $x\ne0$. \\ \textbf{Check:} at $x=1$: $\frac7{10}+\frac34=\frac{29}{20}$, and $\frac{14+15}{20}=\frac{29}{20}$ \checkmark` +
+      pgf({ curves: [{ f: "(14*x^2+15)/(20*x^3)" }], bounds: [0.5, 4, 0, 4], dots: [[1, 1.45, "(1,29/20)"]], xt: 0.5, yt: 1 }) },
+    { t: "Two binomial denominators", body: String.raw`Simplify $\dfrac{5}{x+1}+\dfrac{2}{x-4}$.\soln LCD $(x+1)(x-4)$. \\ $\dfrac{5(x-4)+2(x+1)}{(x+1)(x-4)}=\dfrac{5x-20+2x+2}{(x+1)(x-4)}=${w3.tex}$, $x\ne-1,4$. \\ \textbf{Check:} at $x=0$: $5-\frac12=\frac92$, and $\frac{-18}{-4}=\frac92$ \checkmark` +
+      pgf({ curves: [{ f: "(7*x-18)/((x+1)*(x-4))" }], bounds: [-0.5, 3, 0, 12], dots: [[0, 4.5, "(0,4.5)"]], xt: 0.5, yt: 2 }) },
+    { t: "Subtracting", body: String.raw`Simplify $\dfrac{3}{x-6}-\dfrac{2}{x+1}$.\soln $\dfrac{3(x+1)-2(x-6)}{(x-6)(x+1)}$. Bracket the second product! \\ $3x+3-2x+12=x+15$: $${w4.tex}$, $x\ne6,-1$. \\ \textbf{Check:} at $x=0$: $-\frac12-2=-\frac52$, and $\frac{15}{-6}=-\frac52$ \checkmark` +
+      pgf({ curves: [{ f: "(x+15)/((x-6)*(x+1))" }], bounds: [-0.5, 5, -6, 0], dots: [[0, -2.5, "(0,-2.5)"]], xt: 1, yt: 1 }) },
+    { t: "Factor the denominators first", body: String.raw`Simplify $\dfrac{4}{x^2-4}+\dfrac{1}{x^2-x-2}$.\soln $x^2-4=(x-2)(x+2)$; $x^2-x-2=(x-2)(x+1)$. LCD $(x-2)(x+2)(x+1)$ --- $(x-2)$ is counted once. \\ Numerator: $4(x+1)+1(x+2)=5x+6$. \\ $${w5.tex}$, $x\ne2,-2,-1$. \\ \textbf{Check:} at $x=0$: $-1-\frac12=-\frac32$, and $\frac{6}{(-2)(2)(1)}=-\frac32$ \checkmark` +
+      pgf({ curves: [{ f: "(5*x+6)/((x-2)*(x+2)*(x+1))" }], bounds: [-0.5, 1.5, -6, 0], dots: [[0, -1.5, "(0,-1.5)"]], xt: 0.5, yt: 1 }) },
+    { t: "Opposite denominators", body: String.raw`Simplify $\dfrac{7}{x-5}-\dfrac{2}{5-x}$.\soln $\dfrac{2}{5-x}=-\dfrac{2}{x-5}$, so $\dfrac{7}{x-5}+\dfrac{2}{x-5}=\dfrac{9}{x-5}$, $x\ne5$. \\ \textbf{Check:} at $x=6$: $7-\frac2{-1}=9$, and $\frac91=9$ \checkmark` +
+      pgf({ curves: [{ f: "9/(x-5)" }], bounds: [5.5, 12, 0, 20], dots: [[6, 9, "(6,9)"]], xt: 1, yt: 5 }) },
+    { t: "Combine, then simplify", body: String.raw`Simplify $\dfrac{x}{x-5}-\dfrac{25}{x^2-5x}$.\soln $x^2-5x=x(x-5)$; LCD $x(x-5)$. \\ $\dfrac{x\cdot x-25}{x(x-5)}=\dfrac{(x-5)(x+5)}{x(x-5)}=\dfrac{x+5}{x}$, $x\ne0,5$. \\ \textbf{Check:} at $x=1$: $-\frac14+\frac{25}4=6$, and $\frac61=6$ \checkmark` +
+      pgf({ curves: [{ f: "(x+5)/x" }], bounds: [0.5, 8, 0, 12], dots: [[1, 6, "(1,6)"]], holes: [[5, 2]], xt: 1, yt: 2 }) },
+    { t: "Three terms", body: String.raw`Simplify $\dfrac2x+\dfrac{3}{x+2}-\dfrac{4}{x(x+2)}$.\soln LCD $x(x+2)$: $\dfrac{2(x+2)+3x-4}{x(x+2)}=\dfrac{5x}{x(x+2)}=\dfrac{5}{x+2}$, $x\ne0,-2$. \\ \textbf{Check:} at $x=1$: $2+1-\frac43=\frac53$, and $\frac53$ \checkmark` +
+      pgf({ curves: [{ f: "5/(x+2)" }], bounds: [-1, 6, 0, 6], dots: [[1, 1.667, "(1,5/3)"]], holes: [[0, 2.5]], xt: 1, yt: 1 }) },
+    { t: "A compound fraction", body: String.raw`Simplify $\dfrac{x-\frac4x}{1-\frac2x}$.\soln Top: $\dfrac{x^2-4}{x}$. Bottom: $\dfrac{x-2}{x}$. Divide: $\dfrac{x^2-4}{x}\times\dfrac{x}{x-2}=\dfrac{(x-2)(x+2)}{x-2}=x+2$, with $x\ne0,2$. \\ \textbf{Check:} at $x=1$: $\frac{1-4}{1-2}=3$, and $1+2=3$ \checkmark` +
+      pgf({ curves: [{ f: "x+2" }], bounds: [-3, 5, -2, 8], dots: [[1, 3, "(1,3)"]], holes: [[2, 4], [0, 2]], xt: 1, yt: 2 }) },
+    { t: "Application: working together", body: String.raw`Alex mows a lawn in $x$ hours and Bea takes $(x+4)$ hours. Write the time together, and find it when Alex takes $6$ hours.\soln Rates add: $\dfrac1x+\dfrac1{x+4}=\dfrac{2x+4}{x(x+4)}$. Time $=\dfrac{x(x+4)}{2x+4}$. \\ For $x=6$: $\dfrac{60}{16}=3.75$ h. Check: $\tfrac16+\tfrac1{10}=\tfrac{16}{60}$ and $\tfrac{60}{16}=3.75$ \checkmark.` +
+      pgf({ curves: [{ f: "x*(x+4)/(2*x+4)" }], bounds: [0, 12, 0, 7], dots: [[6, 3.75, "(6,3.75)"]], xt: 2, yt: 1 }) },
     { t: "Test the shortcut", body: String.raw`Is $\dfrac1x+\dfrac13=\dfrac{2}{x+3}$? Compare with $\dfrac{x+3}{3x}$.
 ${eqTableTex(eqSum, [1, 2, 3, 6], { check: true })}
 \soln The second row disagrees with the first at every value tested, so $\frac{2}{x+3}$ is \emph{not} equivalent: you never add denominators. The third row, built over the LCD $3x$, matches the first in every column.` },

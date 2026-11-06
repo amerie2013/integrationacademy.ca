@@ -96,43 +96,62 @@ const lessonHtml = r`<div class="lecture-box">
 
   <h2>🔵 Examples</h2>
   ${ex("Example 1: Subtracting polynomials", `Simplify ${M("(3x^2-7x+2)-(x^2-7x-4)")}.`, [
+    `<b>Rule.</b> Subtracting a bracket means adding the opposite of every term inside it. Only like terms (same variable, same power) can be combined.`,
     `The minus sign flips every sign inside the second bracket: ${M("3x^2-7x+2\\;-\\;x^2\\;+\\;7x\\;+\\;4")}.`,
     `Group like terms: ${M("(3x^2-x^2)+(-7x+7x)+(2+4)")}.`,
-  ], `${M(ptex(e1))}. The \\(x\\)-terms cancelled completely, so the result is a binomial. (Check at \\(x=2\\): original \\(12-14+2-(4-14-4)=0+14=14\\); answer \\(8+6=14\\).)`)}
+    `<b>Check on the graph.</b> The original and the answer give one curve, and \\(x=2\\) gives \\(14\\) on both ✓`,
+  ], `${M(ptex(e1))}. The \\(x\\)-terms cancelled completely, so the result is a binomial. (Check at \\(x=2\\): original \\(12-14+2-(4-14-4)=0+14=14\\); answer \\(8+6=14\\).)`, gframe(["y = (3*x^2-7*x+2)-(x^2-7*x-4)", "y = 2*x^2+6"], { title: "Both forms draw one curve", ...gview(-4, 4, -2, 30) }))}
   ${ex("Example 2: Monomial × trinomial", `Expand ${M("-2x(3x^2-x+5)")}.`, [
+    `<b>Rule.</b> The distributive property: the outside factor multiplies every term in the bracket. When multiplying powers, add the exponents.`,
     `Multiply <em>each</em> term inside by \\(-2x\\): \\((-2x)(3x^2)=-6x^3\\), \\((-2x)(-x)=+2x^2\\), \\((-2x)(5)=-10x\\).`,
-  ], `${M(ptex(e2))}. The degree is 1 + 2 = 3: <em>degrees add when you multiply</em>.`)}
+    `<b>Check with</b> \\(x=1\\). Original: \\(-2(3-1+5)=-14\\). Answer: \\(-6+2-10=-14\\) ✓`,
+  ], `${M(ptex(e2))}. The degree is 1 + 2 = 3: <em>degrees add when you multiply</em>.`, gframe(["y = -2*x*(3*x^2-x+5)", "y = -6*x^3+2*x^2-10*x"], { title: "Both forms draw one curve", ...gview(-3, 3, -40, 40) }))}
   ${ex("Example 3: Binomial × binomial with an area model", `Expand ${M("(x+3)(2x-5)")} and test it with a graph.`, [
+    `<b>Rule.</b> Every term of the first factor must multiply every term of the second, which makes \\(2\\times2=4\\) products.`,
     `Put \\(x+3\\) along the top and \\(2x-5\\) down the side; fill each box with a product.`,
     `Collect the like terms \\(-5x\\) and \\(+6x\\) (same colour).`,
+    `<b>Check with</b> \\(x=1\\). Original: \\((4)(-3)=-12\\). Answer: \\(2+1-15=-12\\) ✓`,
   ], `${M(ptex(e3))}.`, areaModel(P("x+3"), P("2x-5"), "Area model: (x + 3) × (2x − 5)") + g3)}
   ${ex("Example 4: FOIL with bigger coefficients", `Expand ${M("(3x-2)(4x+7)")}.`, [
+    `<b>Rule.</b> FOIL names the four products of two binomials: First, Outer, Inner, Last.`,
     `<strong>F</strong>irst \\(12x^2\\), <strong>O</strong>uter \\(21x\\), <strong>I</strong>nner \\(-8x\\), <strong>L</strong>ast \\(-14\\).`,
     `Combine the middle terms: \\(21x-8x=13x\\).`,
-  ], `${M(ptex(e4))}. FOIL is just the area model written in a row — it only works for two binomials.`)}
+    `<b>Check with</b> \\(x=1\\). Original: \\((1)(11)=11\\). Answer: \\(12+13-14=11\\) ✓`,
+  ], `${M(ptex(e4))}. FOIL is just the area model written in a row — it only works for two binomials.`, gframe(["y = (3*x-2)*(4*x+7)", "y = 12*x^2+13*x-14"], { title: "Both forms draw one parabola", ...gview(-4, 3, -20, 30) }))}
   ${ex("Example 5: Special products", `Expand (a) ${M("(5x-4)^2")} and (b) ${M("(3x+7)(3x-7)")}.`, [
+    `<b>Rule.</b> Learn the two patterns: \\((a-b)^2=a^2-2ab+b^2\\) and \\((a+b)(a-b)=a^2-b^2\\). They save the four-product work.`,
     `(a) Square pattern \\((a-b)^2=a^2-2ab+b^2\\) with \\(a=5x,\\ b=4\\): \\((5x)^2-2(5x)(4)+4^2\\).`,
     `(b) Product of a sum and a difference: the two middle terms are opposites and cancel, leaving \\(a^2-b^2\\).`,
+    `<b>Check with</b> \\(x=1\\). (a) \\((1)^2=1\\) and \\(25-40+16=1\\) ✓. (b) \\((10)(-4)=-40\\) and \\(9-49=-40\\) ✓`,
   ], `(a) ${M(ptex(e5a))}; (b) ${M(ptex(e5b))}.`, areaModel(P("3x+7"), P("3x-7"), "(3x + 7)(3x − 7): the two ±21x boxes cancel"))}
   ${ex("Example 6: Trinomial × binomial", `Expand ${M("(x^2-3x+2)(2x+5)")}.`, [
+    `<b>Plan.</b> Three terms times two terms make six partial products. An organized model makes sure none is missed.`,
     `A \\(3\\times2\\) area model has six boxes — every term of the trinomial meets both terms of the binomial.`,
     `Like terms: \\(5x^2\\) and \\(-6x^2\\) give \\(-x^2\\); \\(-15x\\) and \\(4x\\) give \\(-11x\\).`,
+    `<b>Check with</b> \\(x=2\\). Original: \\((4-6+2)(9)=0\\). Answer: \\(16-4-22+10=0\\) ✓`,
   ], `${M(ptex(e6))}. Degree 2 + 1 = 3 ✓, and the constant term \\(2\\times5=10\\) ✓.`, areaModel(P("x^2-3x+2"), P("2x+5"), "Six partial products"))}
   ${ex("Example 7: A binomial cubed", `Expand ${M("(x-2)^3")}.`, [
+    `<b>Warning.</b> \\((x-2)^3\\) is not \\(x^3-8\\). A power of a binomial must be multiplied out factor by factor.`,
     `Split it: \\((x-2)^3=(x-2)\\cdot(x-2)^2\\). First \\((x-2)^2=x^2-4x+4\\).`,
     `Then \\((x-2)(x^2-4x+4)=x^3-4x^2+4x-2x^2+8x-8\\).`,
-  ], `${M(ptex(e7))}. The coefficients \\(1,\\,-6,\\,12,\\,-8\\) are the row \\(1,3,3,1\\) of Pascal's triangle times powers of \\(-2\\): \\(1,\\ 3(-2),\\ 3(-2)^2,\\ (-2)^3\\).`)}
+    `<b>Check with</b> \\(x=3\\). Original: \\(1^3=1\\). Answer: \\(27-54+36-8=1\\) ✓`,
+  ], `${M(ptex(e7))}. The coefficients \\(1,\\,-6,\\,12,\\,-8\\) are the row \\(1,3,3,1\\) of Pascal's triangle times powers of \\(-2\\): \\(1,\\ 3(-2),\\ 3(-2)^2,\\ (-2)^3\\).`, gframe(["y = (x-2)^3", "y = x^3-6*x^2+12*x-8"], { title: "Both forms draw one curve", ...gview(-1, 5, -10, 10) }))}
   ${ex("Example 8: Two variables", `Expand ${M("(2x-3y)(x+4y)")}.`, [
+    `<b>Rule.</b> Two variables do not change the method: four products, then collect like terms.`,
     `Same moves, more letters: \\(2x\\cdot x=2x^2\\), \\(2x\\cdot4y=8xy\\), \\(-3y\\cdot x=-3xy\\), \\(-3y\\cdot4y=-12y^2\\).`,
     `Like terms need the <em>same letters and powers</em>: \\(8xy\\) and \\(-3xy\\) combine.`,
-  ], `${M("2x^2+5xy-12y^2")}. (Check with \\(x=2,\\ y=1\\): \\((4-3)(2+4)=6\\) and \\(8+10-12=6\\).)`)}
+  ], `${M("2x^2+5xy-12y^2")}. (Check with \\(x=2,\\ y=1\\): \\((4-3)(2+4)=6\\) and \\(8+10-12=6\\).)`, gframe(["y = (2*x-3)*(x+4)", "y = 2*x^2+5*x-12"], { title: "With y = 1, both forms draw one parabola", ...gview(-6, 4, -18, 14) }))}
   ${ex("Example 9: An application — the open box", `A sheet of card is \\(10\\) cm by \\(8\\) cm. Squares of side \\(x\\) are cut from the four corners and the sides folded up. Write the volume as a polynomial.`, [
+    `<b>Model.</b> Draw the sheet. Cutting a square of side \\(x\\) from each corner removes \\(2x\\) from each dimension, and folding makes \\(x\\) the height.`,
     `Length \\(10-2x\\), width \\(8-2x\\), height \\(x\\): \\(V=x(10-2x)(8-2x)\\).`,
     `Expand the two binomials first: \\((10-2x)(8-2x)=4x^2-36x+80\\). Then multiply by \\(x\\).`,
+    `<b>Check with</b> \\(x=1\\). Box: \\(1\\times8\\times6=48\\). Polynomial: \\(4-36+80=48\\) ✓`,
   ], `\\(V(x)=${ptex(boxV)}\\), with \\(0<x<4\\) (cut-outs must leave a positive width). The graph shows the best cut is about \\(x\\approx${xm.toFixed(2)}\\) cm, giving \\(V\\approx${Vm.toFixed(1)}\\) cm³.`, g9)}
   ${ex("Example 10: Chaining the moves", `Show that ${M("(x-1)(x+1)(x^2+1)=x^4-1")}.`, [
+    `<b>Plan.</b> Multiply two factors at a time, and look for a pattern before expanding.`,
     `Multiply the first two (a sum times a difference): \\((x-1)(x+1)=x^2-1\\).`,
     `Now \\((x^2-1)(x^2+1)\\) is a sum times a difference again, with \\(a=x^2\\): \\(a^2-1=x^4-1\\).`,
+    `<b>Check with</b> \\(x=2\\). Left: \\((1)(3)(5)=15\\). Right: \\(16-1=15\\) ✓`,
   ], `${M(ptex(e10))}. Special products can be <em>reused</em> — spotting the pattern twice saved all the long multiplication.`, g10)}
 
   ${watchOut([
@@ -210,14 +229,22 @@ export const W21 = {
     r`\textbf{Test it:} one mismatch proves two expressions are \emph{not} equivalent; a match at every tested value (or a single overlapping graph) supports --- and algebra proves --- equivalence.`,
   ],
   examples: [
-    { t: "Adding polynomials", body: String.raw`Simplify $(4x^3-2x+7)+(x^3+5x^2-3x-9)$.\soln Group like terms by degree: $(4x^3+x^3)+5x^2+(-2x-3x)+(7-9)$. \\ $=${ptex(w1)}$.` },
-    { t: "Distribute, then collect", body: String.raw`Simplify $3(2x-1)-4(x-5)+2x(x+3)$.\soln Distribute: $6x-3-4x+20+2x^2+6x$. \\ Note the $-4$ multiplies \emph{both} terms: $-4\cdot(-5)=+20$. \\ Collect: $${ptex(w2)}$.` },
-    { t: "Area model", body: String.raw`Expand $(2x+1)(x+6)$.\soln The boxes are $2x\cdot x=2x^2$, $2x\cdot6=12x$, $1\cdot x=x$, $1\cdot6=6$. \\ The two $x$-boxes are like terms: $12x+x=13x$. \\ $=${ptex(w3)}$.` },
-    { t: "FOIL with a negative", body: String.raw`Expand $(4x-5)(2x+3)$.\soln First $8x^2$; Outer $12x$; Inner $-10x$; Last $-15$. \\ Middle: $12x-10x=2x$. \\ $=${ptex(w4)}$.` },
-    { t: "Special products", body: String.raw`Expand (a) $(6x-1)^2$ and (b) $(2x+9)(2x-9)$.\soln (a) $(6x)^2-2(6x)(1)+1^2=${ptex(w5a)}$. \\ (b) The middle terms $\pm18x$ cancel: $(2x)^2-9^2=${ptex(w5b)}$.` },
-    { t: "Trinomial times binomial", body: String.raw`Expand $(2x^2+x-4)(x-3)$.\soln Six partial products: $2x^3-6x^2+x^2-3x-4x+12$. \\ Collect: $${ptex(w6)}$. \\ Check the degree ($2+1=3$) and the constant term ($-4\cdot-3=12$).` },
-    { t: "A power of a binomial", body: String.raw`Expand $(x+1)^4$.\soln The coefficients are Pascal's row $1,4,6,4,1$ and every power of $1$ is $1$. \\ $=${ptex(w7)}$. \\ Check at $x=1$: $2^4=16$ and $1+4+6+4+1=16$.` },
-    { t: "Application: a picture frame", body: String.raw`A photo is $30$ cm by $20$ cm. A frame of width $x$ goes all the way around it. Write the area of the frame alone.\soln Outer rectangle: $(30+2x)(20+2x)$. Subtract the photo, $600$. \\ $(30+2x)(20+2x)-600=600+100x+4x^2-600=${ptex(w8)}$. \\ For a $2$ cm frame: $4(4)+100(2)=216$ cm$^2$.` },
+    { t: "Adding polynomials", body: String.raw`Simplify $(4x^3-2x+7)+(x^3+5x^2-3x-9)$.\soln \textbf{Rule:} Adding keeps every sign; collect terms with the same power. \\ Group like terms by degree: $(4x^3+x^3)+5x^2+(-2x-3x)+(7-9)$. \\ $=${ptex(w1)}$. \\ \textbf{Check:} at $x=1$: $(4-2+7)+(1+5-3-9)=9-6=3$, and the answer $5+5-5-2=3$ \checkmark` +
+      pgf({ curves: [{ f: "(4*x^3-2*x+7)+(x^3+5*x^2-3*x-9)" }], bounds: [-3, 3, -40, 40], xt: 1, yt: 10 }) },
+    { t: "Distribute, then collect", body: String.raw`Simplify $3(2x-1)-4(x-5)+2x(x+3)$.\soln \textbf{Rule:} Distribute each outside factor, keeping its sign. \\ Distribute: $6x-3-4x+20+2x^2+6x$. \\ Note the $-4$ multiplies \emph{both} terms: $-4\cdot(-5)=+20$. \\ Collect: $${ptex(w2)}$. \\ \textbf{Check:} at $x=1$: $3(1)-4(-4)+2(4)=3+16+8=27$, and the collected form gives $2+8+17=27$ \checkmark` +
+      pgf({ curves: [{ f: "2*x^2+8*x+17" }], bounds: [-5, 3, 0, 30], dots: [[1, 27, "(1,27)"]], xt: 1, yt: 5 }) },
+    { t: "Area model", body: String.raw`Expand $(2x+1)(x+6)$.\soln \textbf{Rule:} Each term of the first bracket meets each term of the second. \\ The boxes are $2x\cdot x=2x^2$, $2x\cdot6=12x$, $1\cdot x=x$, $1\cdot6=6$. \\ The two $x$-boxes are like terms: $12x+x=13x$. \\ $=${ptex(w3)}$. \\ \textbf{Check:} at $x=1$: $(3)(7)=21$, and $2+13+6=21$ \checkmark` +
+      pgf({ curves: [{ f: "(2*x+1)*(x+6)" }], bounds: [-8, 3, -16, 30], dots: [[-6, 0, "(-6,0)"], [-0.5, 0, "(-0.5,0)"]], xt: 1, yt: 5 }) },
+    { t: "FOIL with a negative", body: String.raw`Expand $(4x-5)(2x+3)$.\soln \textbf{Rule:} FOIL gives the four products; keep the signs. \\ First $8x^2$; Outer $12x$; Inner $-10x$; Last $-15$. \\ Middle: $12x-10x=2x$. \\ $=${ptex(w4)}$. \\ \textbf{Check:} at $x=1$: $(-1)(5)=-5$, and $8+2-15=-5$ \checkmark` +
+      pgf({ curves: [{ f: "(4*x-5)*(2*x+3)" }], bounds: [-4, 4, -20, 30], dots: [[1.25, 0, "(1.25,0)"], [-1.5, 0, "(-1.5,0)"]], xt: 1, yt: 5 }) },
+    { t: "Special products", body: String.raw`Expand (a) $(6x-1)^2$ and (b) $(2x+9)(2x-9)$.\soln \textbf{Patterns:} $(a-b)^2=a^2-2ab+b^2$ and $(a+b)(a-b)=a^2-b^2$. \\ (a) $(6x)^2-2(6x)(1)+1^2=${ptex(w5a)}$. \\ (b) The middle terms $\pm18x$ cancel: $(2x)^2-9^2=${ptex(w5b)}$. \\ \textbf{Check:} at $x=1$: (a) $25=36-12+1$; (b) $(11)(-7)=-77=4-81$ \checkmark` +
+      pgf({ curves: [{ f: "(6*x-1)^2" }, { f: "(2*x+9)*(2*x-9)", color: "red!75!black" }], bounds: [-6, 6, -90, 60], xt: 1, yt: 20 }) },
+    { t: "Trinomial times binomial", body: String.raw`Expand $(2x^2+x-4)(x-3)$.\soln \textbf{Plan:} Three terms times two terms make six products. \\ Six partial products: $2x^3-6x^2+x^2-3x-4x+12$. \\ Collect: $${ptex(w6)}$. \\ Check the degree ($2+1=3$) and the constant term ($-4\cdot-3=12$). \\ \textbf{Check:} at $x=1$: $(-1)(-2)=2$, and the collected form gives $2$ too \checkmark` +
+      pgf({ curves: [{ f: "(2*x^2+x-4)*(x-3)" }], bounds: [-3, 5, -30, 30], dots: [[3, 0, "(3,0)"]], xt: 1, yt: 10 }) },
+    { t: "A power of a binomial", body: String.raw`Expand $(x+1)^4$.\soln \textbf{Method:} Use Pascal's row for the exponent $4$. \\ The coefficients are Pascal's row $1,4,6,4,1$ and every power of $1$ is $1$. \\ $=${ptex(w7)}$. \\ Check at $x=1$: $2^4=16$ and $1+4+6+4+1=16$.` +
+      pgf({ curves: [{ f: "(x+1)^4" }], bounds: [-4, 2, -2, 20], dots: [[1, 16, "(1,16)"], [-1, 0, "(-1,0)"]], xt: 1, yt: 4 }) },
+    { t: "Application: a picture frame", body: String.raw`A photo is $30$ cm by $20$ cm. A frame of width $x$ goes all the way around it. Write the area of the frame alone.\soln \textbf{Model:} The outer rectangle gains $x$ on each side, so $2x$ per dimension. \\ Outer rectangle: $(30+2x)(20+2x)$. Subtract the photo, $600$. \\ $(30+2x)(20+2x)-600=600+100x+4x^2-600=${ptex(w8)}$. \\ For a $2$ cm frame: $4(4)+100(2)=216$ cm$^2$.` +
+      pgf({ curves: [{ f: "4*x^2+100*x" }], bounds: [0, 6, 0, 800], dots: [[2, 216, "(2,216)"]], xt: 1, yt: 100 }) },
     { t: "Are they equivalent?", body: String.raw`Test whether $(x+2)^2-(x-2)^2$ and $8x$ are equivalent.
 ${eqTableTex(eqEx, evalPow, { check: true })}
 \soln The values match at all five points. To \emph{prove} it, expand: $(x^2+4x+4)-(x^2-4x+4)=8x$ --- the $x^2$ and constants cancel.` +

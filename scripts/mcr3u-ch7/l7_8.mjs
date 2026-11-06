@@ -1,6 +1,7 @@
 // MCR3U 7.8 — Chapter 7 Review: arithmetic and geometric sequences, recursive rules, two-term recursions, series,
 // Pascal's triangle and binomial expansions
 import { intro, section, keyIdea, widget, examples, practice, wrapUp, table, q, num, choice, hard, plane } from "./lib.mjs";
+import { tv } from "../mcr3u-extables.mjs";
 
 export const TITLE = "7.8 Chapter 7 Review";
 export const ID = "5c3e0001-0001-4001-8001-000000000708";
@@ -42,21 +43,43 @@ export const blocks = () => [
 
   examples([
     ["Classify and write", "Classify each sequence and give its general term: (a) 12, 7, 2, −3, … (b) 12, 6, 3, 1.5, …",
-      [S`(a) \(d=-5\): \(t_n=17-5n\).`, S`(b) \(r=\frac12\): \(t_n=12\left(\frac12\right)^{n-1}\).`],
-      "arithmetic; geometric"],
+      [S`<b>(a) Test differences.</b> \(7-12=-5\), \(2-7=-5\), \(-3-2=-5\). So it is arithmetic, with \(d=-5\).`,
+        S`<b>(a) General term.</b> \(t_n=12+(n-1)(-5)=17-5n\).`,
+        S`<b>(b) Test ratios.</b> \(\frac6{12}=\frac36=\frac{1.5}3=\frac12\). So it is geometric, with \(r=\frac12\).`,
+        S`<b>(b) General term.</b> \(t_n=12\left(\frac12\right)^{n-1}\).`,
+        S`<b>Check.</b> (a) \(t_4=17-20=-3\) ✓. (b) \(t_4=12\cdot\frac18=1.5\) ✓. The graph shows a line and a decaying curve.`],
+      S`(a) arithmetic, \(t_n=17-5n\); (b) geometric, \(t_n=12\left(\frac12\right)^{n-1}\)`,
+      plane({ view: { xmin: 0, xmax: 6, ymin: -10, ymax: 14 }, points: [...[1, 2, 3, 4].map((n) => ({ x: n, y: 17 - 5 * n, color: "blue" })), ...[1, 2, 3, 4].map((n) => ({ x: n, y: 12 * 0.5 ** (n - 1), color: "violet" }))], step: { x: 1, y: 2 }, xlabel: "n", ylabel: "tₙ" }, "blue arithmetic, violet geometric")],
     ["Recursive and explicit", S`A sequence has \(t_1=7\) and \(t_n=t_{n-1}-3\). Write its explicit rule and find which term is −80.`,
-      [S`\(t_n=10-3n\).`, S`\(10-3n=-80\Rightarrow n=30\).`],
-      S`\(t_n=10-3n\); the 30th term`],
+      [S`<b>Read it.</b> Subtracting 3 each time means arithmetic, with \(a=7\), \(d=-3\).`,
+        S`<b>Explicit rule.</b> \(t_n=7+(n-1)(-3)=10-3n\).`,
+        S`<b>Find the position.</b> \(10-3n=-80\), so \(-3n=-90\) and \(n=30\).`,
+        S`<b>Check.</b> \(10-90=-80\) ✓`],
+      S`\(t_n=10-3n\); the 30th term`,
+      plane({ view: { xmin: 0, xmax: 33, ymin: -90, ymax: 12 }, lines: [{ m: -3, b: 10, color: "gray", dash: true }], points: [{ x: 1, y: 7, label: "(1, 7)" }, { x: 2, y: 4 }, { x: 3, y: 1 }, { x: 30, y: -80, label: "(30, −80)", color: "amber" }], step: { x: 3, y: 10 }, xlabel: "n", ylabel: "tₙ" })],
     ["A two-term rule", S`\(t_1=4\), \(t_2=-1\), \(t_n=t_{n-1}+t_{n-2}\). Find \(t_7\).`,
-      ["4, −1, 3, 2, 5, 7, 12."],
-      S`\(t_7=12\)`],
+      [S`<b>Read it.</b> Each term is the sum of the two before, so build the list term by term.`,
+        S`<b>Build.</b> ${tv(["\\(n\\)", "1", "2", "3", "4", "5", "6", "7"], ["\\(t_n\\)", "4", "\\(-1\\)", "3", "2", "5", "7", "12"])}`,
+        S`<b>Work.</b> \(t_3=-1+4=3\), \(t_4=3+(-1)=2\), \(t_5=2+3=5\), \(t_6=5+2=7\), \(t_7=7+5=12\).`,
+        S`<b>Check.</b> Reverse: \(t_5=t_7-t_6=12-7=5\) ✓`],
+      S`\(t_7=12\)`,
+      plane({ view: { xmin: 0, xmax: 8, ymin: -2, ymax: 14 }, points: [[1, 4], [2, -1], [3, 3], [4, 2], [5, 5], [6, 7]].map(([x, y]) => ({ x, y })).concat([{ x: 7, y: 12, label: "(7, 12)", color: "amber" }]), step: { x: 1, y: 2 }, xlabel: "n", ylabel: "tₙ" })],
     ["Both series", "Find (a) 6 + 10 + 14 + … + 98 and (b) 6 + 12 + 24 + … + 1536.",
-      [S`(a) \(n=24\): \(12(6+98)=1248\).`, S`(b) \(2^{n-1}=256\Rightarrow n=9\): \(6(2^9-1)=3066\).`],
+      [S`<b>(a) Type.</b> \(d=4\), arithmetic. Count: \(n=\frac{98-6}4+1=24\).`,
+        S`<b>(a) Sum.</b> \(S_{24}=\frac{24}2(6+98)=12(104)=1248\).`,
+        S`<b>(b) Type.</b> \(r=2\), geometric. Count: \(6(2)^{n-1}=1536\), so \(2^{n-1}=256=2^8\) and \(n=9\).`,
+        S`<b>(b) Sum.</b> \(S_9=\frac{6(2^9-1)}{2-1}=6(511)=3066\).`,
+        S`<b>Compare.</b> The geometric series has far fewer terms but a larger sum, as the graph shows ✓`],
       "1248 and 3066",
       plane({ view: { xmin: 0, xmax: 10, ymin: 0, ymax: 3200 }, points: Array.from({ length: 9 }, (_, i) => ({ x: i + 1, y: 6 * (2 ** (i + 1) - 1), color: "violet" })).concat(Array.from({ length: 9 }, (_, i) => ({ x: i + 1, y: (i + 1) * (6 + 2 * i) , color: "blue" }))), step: { x: 1, y: 400 }, xlabel: "n", ylabel: "Sₙ" }, "geometric partial sums (violet) overtake arithmetic ones (blue)")],
     ["A binomial term", S`Find the term containing \(x^3\) in \((x-2)^6\).`,
-      [S`Row 6: 1, 6, 15, 20, 15, 6, 1. The \(x^3\) term: \(20x^3(-2)^3\).`],
-      S`\(-160x^3\)`],
+      [S`<b>Row.</b> Row 6: \(1,6,15,20,15,6,1\).`,
+        S`<b>Which term?</b> The powers of \(x\) go \(6,5,4,3,\ldots\), so \(x^3\) is the fourth term, with coefficient 20.`,
+        S`<b>The other factor.</b> The powers add to 6, so it has \((-2)^3=-8\). The sign stays with the 2.`,
+        S`<b>Multiply.</b> \(20\cdot x^3\cdot(-8)=-160x^3\).`,
+        S`<b>Check the sign.</b> An odd power of \(-2\) is negative ✓`],
+      S`\(-160x^3\)`,
+      plane({ bare: true, view: { xmin: -4, xmax: 4, ymin: -1, ymax: 1 }, points: [1, 6, 15, 20, 15, 6, 1].map((v, k) => ({ x: k - 3, y: 0, label: String(v), color: k === 3 ? "amber" : "blue" })) }, "Row 6: the amber entry belongs to the x³ term.")],
   ]),
 
   practice([

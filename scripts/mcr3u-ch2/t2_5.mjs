@@ -101,47 +101,58 @@ const lessonHtml = r`<div class="lecture-box">
   ${ex("Example 1: Simplify a radical", `Simplify ${M("\\sqrt{72}")}.`, [
     `The largest perfect square dividing 72 is \\(36\\): \\(72=36\\times2\\).`,
     `\\(\\sqrt{72}=\\sqrt{36}\\cdot\\sqrt2=6\\sqrt2\\).`,
-  ], `\\(6\\sqrt2\\). Check with a calculator: \\(\\sqrt{72}=8.4853\\) and \\(6\\sqrt2=6(1.41421)=8.4853\\) ✓. (Using \\(4\\) first gives \\(2\\sqrt{18}\\) — still not finished: \\(18=9\\cdot2\\).)`)}
+  ], `\\(6\\sqrt2\\). Check with a calculator: \\(\\sqrt{72}=8.4853\\) and \\(6\\sqrt2=6(1.41421)=8.4853\\) ✓. (Using \\(4\\) first gives \\(2\\sqrt{18}\\) — still not finished: \\(18=9\\cdot2\\).)`, gframe([{ kind: "cartesian", expr: "y = sqrt(x)", dMin: "0", dMax: "90" }], { title: "√72 ≈ 8.49 on y = √x", labels: [{ x: 72, y: 8.49, t: "(72, 8.49)" }], ...gview(-2, 92, -1, 11) }))}
   ${ex("Example 2: A radical with a coefficient", `Simplify ${M("5\\sqrt{12}")}.`, [
+    `<b>Rule.</b> \\(\\sqrt{ab}=\\sqrt a\\sqrt b\\), so a perfect-square factor can be moved outside.`,
     `\\(\\sqrt{12}=\\sqrt{4}\\cdot\\sqrt3=2\\sqrt3\\).`,
     `Multiply the coefficients: \\(5\\times2\\sqrt3\\).`,
-  ], `\\(10\\sqrt3\\).`)}
+    `<b>Check.</b> \\(5\\sqrt{12}\\approx17.32\\) and \\(10\\sqrt3\\approx17.32\\) ✓`,
+  ], `\\(10\\sqrt3\\).`, gframe([{ kind: "cartesian", expr: "y = 5*sqrt(x)", dMin: "0", dMax: "20" }], { title: "5√12 ≈ 17.32 on y = 5√x", labels: [{ x: 12, y: 17.32, t: "(12, 17.32)" }], ...gview(-1, 21, -1, 24) }))}
   ${ex("Example 3: Write as an entire radical", `Write ${M("7\\sqrt2")} as an entire radical.`, [
     `Move the coefficient <em>inside</em> by squaring it: \\(7=\\sqrt{49}\\).`,
     `\\(7\\sqrt2=\\sqrt{49}\\cdot\\sqrt2=\\sqrt{98}\\).`,
-  ], `\\(\\sqrt{98}\\). This helps when <em>comparing</em> sizes: \\(7\\sqrt2=\\sqrt{98}\\) is just a little smaller than \\(\\sqrt{100}=10\\).`)}
+    `<b>Check.</b> \\(7\\sqrt2\\approx9.90\\) and \\(\\sqrt{98}\\approx9.90\\) ✓`,
+  ], `\\(\\sqrt{98}\\). This helps when <em>comparing</em> sizes: \\(7\\sqrt2=\\sqrt{98}\\) is just a little smaller than \\(\\sqrt{100}=10\\).`, gframe([{ kind: "cartesian", expr: "y = sqrt(x)", dMin: "0", dMax: "110" }], { title: "√98 is just below √100 = 10", labels: [{ x: 98, y: 9.9, t: "(98, 9.9)" }, { x: 100, y: 10, t: "" }], ...gview(-2, 112, -1, 12) }))}
   ${ex("Example 4: Adding and subtracting", `Simplify ${M("3\\sqrt{20}-\\sqrt{45}+2\\sqrt5")}.`, [
     `<strong>Simplify each radical first</strong>: \\(\\sqrt{20}=2\\sqrt5\\) and \\(\\sqrt{45}=3\\sqrt5\\).`,
     `Now they are like radicals: \\(3(2\\sqrt5)-3\\sqrt5+2\\sqrt5=6\\sqrt5-3\\sqrt5+2\\sqrt5\\).`,
-  ], `\\(5\\sqrt5\\). The radicand stays; only the coefficients combine (\\(6-3+2=5\\)). Check: \\(3(4.472)-6.708+4.472=11.180=5\\sqrt5\\) ✓.`)}
+  ], `\\(5\\sqrt5\\). The radicand stays; only the coefficients combine (\\(6-3+2=5\\)). Check: \\(3(4.472)-6.708+4.472=11.180=5\\sqrt5\\) ✓.`, gframe(["y = sqrt(5)*x"], { title: "Like radicals behave like like terms: x copies of √5", labels: [{ x: 5, y: 11.18, t: "5√5 ≈ 11.18" }], ...gview(-1, 7, -1, 16) }))}
   ${ex("Example 5: Multiplying radicals", `Simplify ${M("(2\\sqrt3)(5\\sqrt6)")}.`, [
+    `<b>Rule.</b> \\(a\\sqrt m\\cdot b\\sqrt n=ab\\sqrt{mn}\\): coefficients with coefficients, radicands with radicands.`,
     `Multiply coefficients and radicands separately: \\(2\\cdot5\\cdot\\sqrt{3\\cdot6}=10\\sqrt{18}\\).`,
     `Simplify: \\(\\sqrt{18}=3\\sqrt2\\), so \\(10\\cdot3\\sqrt2\\).`,
-  ], `\\(30\\sqrt2\\).`)}
+    `<b>Check.</b> \\((3.464)(12.247)\\approx42.43\\) and \\(30(1.4142)\\approx42.43\\) ✓`,
+  ], `\\(30\\sqrt2\\).`, gframe(["y = 10*sqrt(x)"], { title: "10√18 ≈ 42.43 on y = 10√x", labels: [{ x: 18, y: 42.43, t: "(18, 42.43)" }], ...gview(-1, 24, -1, 55) }))}
   ${ex("Example 6: Distributing", `Simplify ${M("\\sqrt2\\left(3\\sqrt8-\\sqrt2\\right)")}.`, [
+    `<b>Rule.</b> The outside radical multiplies each term in the bracket, as with any distributive step.`,
     `Distribute: \\(3\\sqrt{16}-\\sqrt{4}\\).`,
     `\\(3(4)-2=12-2\\).`,
+    `<b>Check.</b> \\(1.414(8.485-1.414)\\approx1.414(7.071)\\approx10\\) ✓`,
   ], `\\(10\\) — the radicals disappeared completely, because \\(\\sqrt2\\cdot\\sqrt2=2\\).`)}
   ${ex("Example 7: Multiplying binomials (FOIL)", `Expand ${M("(3+\\sqrt5)(2-\\sqrt5)")}.`, [
+    `<b>Rule.</b> FOIL works as usual, and \\(\\sqrt5\\cdot\\sqrt5=5\\) removes the radical in the last product.`,
     `First \\(6\\); Outer \\(-3\\sqrt5\\); Inner \\(+2\\sqrt5\\); Last \\(-(\\sqrt5)^2=-5\\).`,
     `Collect: \\(6-5=1\\) and \\(-3\\sqrt5+2\\sqrt5=-\\sqrt5\\).`,
-  ], `\\(1-\\sqrt5\\). Check: \\((5.236)(-0.236)=-1.236\\) and \\(1-2.236=-1.236\\) ✓.`)}
+  ], `\\(1-\\sqrt5\\). Check: \\((5.236)(-0.236)=-1.236\\) and \\(1-2.236=-1.236\\) ✓.`, gframe(["y = (3+x)*(2-x)"], { title: "Put x = √5 ≈ 2.236 in (3 + x)(2 − x)", labels: [{ x: 2.236, y: -1.236, t: "(√5, −1.24)" }], ...gview(-4, 4, -6, 8) }))}
   ${ex("Example 8: Conjugates make radicals vanish", `Expand (a) ${M("(4+\\sqrt7)(4-\\sqrt7)")} and (b) ${M("(2\\sqrt3-5)(2\\sqrt3+5)")}.`, [
     `Binomials that differ only in the middle sign are <strong>conjugates</strong>. Their product is a difference of squares, so the middle terms cancel: \\((a+b)(a-b)=a^2-b^2\\).`,
     `(a) \\(4^2-(\\sqrt7)^2=16-7\\). (b) \\((2\\sqrt3)^2-5^2=12-25\\).`,
-  ], `(a) \\(9\\) (b) \\(-13\\). A conjugate product is always <em>rational</em> — the secret behind rationalising.`)}
+    `<b>Check.</b> (a) \\((6.646)(1.354)\\approx9\\) ✓. (b) \\((-1.536)(8.464)\\approx-13\\) ✓`,
+  ], `(a) \\(9\\) (b) \\(-13\\). A conjugate product is always <em>rational</em> — the secret behind rationalising.`, gframe(["y = 16-x^2"], { title: "(a) (4 + x)(4 − x) = 16 − x²: at x = √7 the value is 9", labels: [{ x: 2.646, y: 9, t: "(√7, 9)" }], ...gview(-5, 5, -4, 18) }))}
   ${ex("Example 9: Rationalising a monomial denominator", `Rationalise ${M("\\dfrac{6}{\\sqrt8}")}.`, [
+    `<b>Goal.</b> Rationalising means rewriting with no radical in the denominator, without changing the value.`,
     `Simplify first: \\(\\sqrt8=2\\sqrt2\\), so \\(\\dfrac{6}{2\\sqrt2}=\\dfrac{3}{\\sqrt2}\\).`,
     `Multiply top and bottom by \\(\\sqrt2\\) (that is multiplying by 1): \\(\\dfrac{3\\sqrt2}{\\sqrt2\\cdot\\sqrt2}=\\dfrac{3\\sqrt2}{2}\\).`,
-  ], `\\(\\dfrac{3\\sqrt2}{2}\\). Check: \\(6\\div2.828=2.121\\) and \\(3(1.414)/2=2.121\\) ✓.`)}
+  ], `\\(\\dfrac{3\\sqrt2}{2}\\). Check: \\(6\\div2.828=2.121\\) and \\(3(1.414)/2=2.121\\) ✓.`, gframe([{ kind: "cartesian", expr: "y = 6/sqrt(x)", dMin: "0.5", dMax: "16" }], { title: "6/√8 ≈ 2.12 on y = 6/√x", labels: [{ x: 8, y: 2.12, t: "(8, 2.12)" }], ...gview(-1, 17, -1, 10) }))}
   ${ex("Example 10: Rationalising a binomial denominator", `Rationalise ${M("\\dfrac{5}{3-\\sqrt2}")}.`, [
     `Multiply top and bottom by the <strong>conjugate</strong> of the denominator, \\(3+\\sqrt2\\).`,
     `Bottom: \\((3-\\sqrt2)(3+\\sqrt2)=9-2=7\\). Top: \\(5(3+\\sqrt2)=15+5\\sqrt2\\).`,
-  ], `\\(\\dfrac{15+5\\sqrt2}{7}\\). Check: \\(5\\div1.586=3.153\\) and \\((15+7.071)/7=3.153\\) ✓.`)}
+  ], `\\(\\dfrac{15+5\\sqrt2}{7}\\). Check: \\(5\\div1.586=3.153\\) and \\((15+7.071)/7=3.153\\) ✓.`, gframe([{ kind: "cartesian", expr: "y = 5/(3-x)", dMin: "0", dMax: "2.6" }], { title: "5/(3 − √2) ≈ 3.15, with x = √2 ≈ 1.414", labels: [{ x: 1.414, y: 3.153, t: "(√2, 3.15)" }], ...gview(-0.5, 3, -1, 14) }))}
   ${ex("Example 11: Radicals with variables", `Simplify ${M("\\sqrt{45x^3}")}, where \\(x\\ge0\\).`, [
     `Pull out perfect squares: \\(45=9\\cdot5\\) and \\(x^3=x^2\\cdot x\\).`,
     `\\(\\sqrt{9\\cdot x^2\\cdot5x}=3x\\sqrt{5x}\\).`,
-  ], `\\(3x\\sqrt{5x}\\). (We say \\(x\\ge0\\) because \\(\\sqrt{x^2}=|x|\\); for negative \\(x\\) the expression \\(\\sqrt{45x^3}\\) is not even real.)`)}
+    `<b>Check with</b> \\(x=5\\). Original: \\(\\sqrt{45(125)}=\\sqrt{5625}=75\\). Answer: \\(3(5)\\sqrt{25}=75\\) ✓`,
+  ], `\\(3x\\sqrt{5x}\\). (We say \\(x\\ge0\\) because \\(\\sqrt{x^2}=|x|\\); for negative \\(x\\) the expression \\(\\sqrt{45x^3}\\) is not even real.)`, gframe([{ kind: "cartesian", expr: "y = sqrt(45*x^3)", dMin: "0", dMax: "6" }, { kind: "cartesian", expr: "y = 3*x*sqrt(5*x)", dMin: "0", dMax: "6" }], { title: "Both forms draw one curve for x ≥ 0", labels: [{ x: 5, y: 75, t: "(5, 75)" }], ...gview(-1, 7, -5, 100) }))}
   ${ex("Example 12: An application — the diagonal", `A rectangular tablet screen is \\(6\\) cm by \\(9\\) cm. Find the exact length of its diagonal.`, [
     `Pythagoras: \\(d^2=6^2+9^2=36+81=117\\), so \\(d=\\sqrt{117}\\).`,
     `\\(117=9\\cdot13\\), so \\(\\sqrt{117}=3\\sqrt{13}\\).`,
@@ -149,7 +160,7 @@ const lessonHtml = r`<div class="lecture-box">
   ${ex("Example 13: A nested radical", `Show that ${M("\\sqrt{3+2\\sqrt2}=1+\\sqrt2")}.`, [
     `A positive number equals \\(\\sqrt{N}\\) exactly when its square is \\(N\\) (and it is positive). Square the right side: \\((1+\\sqrt2)^2=1+2\\sqrt2+2\\).`,
     `\\(=3+2\\sqrt2\\) ✓, and \\(1+\\sqrt2>0\\).`,
-  ], `So \\(\\sqrt{3+2\\sqrt2}=1+\\sqrt2\\). Numerically \\(\\sqrt{5.828}=2.414=1+1.414\\) ✓ — a radical inside a radical collapsed to a simple one.`)}
+  ], `So \\(\\sqrt{3+2\\sqrt2}=1+\\sqrt2\\). Numerically \\(\\sqrt{5.828}=2.414=1+1.414\\) ✓ — a radical inside a radical collapsed to a simple one.`, gframe([{ kind: "cartesian", expr: "y = sqrt(x)", dMin: "0", dMax: "9" }], { title: "√(3 + 2√2) = √5.83 ≈ 2.41", labels: [{ x: 5.83, y: 2.41, t: "(5.83, 2.41)" }], ...gview(-1, 10, -1, 4) }))}
 
   ${mistake("\\(\\sqrt{x+9}=\\sqrt x+3\\)", "There is no sum rule for radicals. Test \\(x=16\\): \\(\\sqrt{25}=5\\) but \\(\\sqrt{16}+3=7\\).", "\\(\\sqrt{x+9}\\) cannot be split. Only <em>products</em> and <em>quotients</em> split: \\(\\sqrt{9x}=3\\sqrt x\\).")}
   ${gframe(["y = sqrt(x+9)", "y = sqrt(x)+3"], { title: "√(x + 9) and √x + 3 are DIFFERENT curves — they only meet where x = 0", ...gview(0, 20, 0, 9) })}
@@ -210,16 +221,26 @@ export const W25 = {
     r`\textbf{Variables:} $\sqrt{x^2}=|x|$; we assume the variables are non-negative to write $\sqrt{18x^3}=3x\sqrt{2x}$.`,
   ],
   examples: [
-    { t: "Simplify a radical", body: String.raw`Simplify $\sqrt{200}$.\soln The largest perfect square dividing $200$ is $100$: $\sqrt{200}=\sqrt{100\cdot2}=10\sqrt2$. \\ Check: $\sqrt{200}=14.142$ and $10\sqrt2=14.142$ \checkmark.` },
-    { t: "Mixed and entire radicals", body: String.raw`(a) Simplify $\sqrt{63}$. (b) Write $7\sqrt3$ as an entire radical.\soln (a) $\sqrt{63}=\sqrt{9\cdot7}=3\sqrt7$. \\ (b) Square the coefficient and move it inside: $7\sqrt3=\sqrt{49\cdot3}=\sqrt{147}$.` },
-    { t: "Adding and subtracting", body: String.raw`Simplify $5\sqrt{12}-2\sqrt{27}+\sqrt{48}$.\soln Simplify first: $\sqrt{12}=2\sqrt3$, $\sqrt{27}=3\sqrt3$, $\sqrt{48}=4\sqrt3$. \\ $10\sqrt3-6\sqrt3+4\sqrt3=8\sqrt3$.` },
-    { t: "Multiplying", body: String.raw`Simplify $(3\sqrt7)(2\sqrt{14})$.\soln $6\sqrt{98}=6\cdot7\sqrt2=42\sqrt2$. \\ Check: $3(2.646)\cdot2(3.742)=59.40$ and $42(1.4142)=59.40$ \checkmark.` },
-    { t: "Distributing", body: String.raw`Simplify $\sqrt3\left(\sqrt{12}+2\sqrt5\right)$.\soln $\sqrt{36}+2\sqrt{15}=6+2\sqrt{15}$. \\ The terms $6$ and $2\sqrt{15}$ are not like terms, so this is final.` },
-    { t: "FOIL with radicals", body: String.raw`Expand $(2\sqrt3+1)(\sqrt3-4)$.\soln First $2\cdot3=6$; Outer $-8\sqrt3$; Inner $\sqrt3$; Last $-4$. \\ $6-4=2$ and $-8\sqrt3+\sqrt3=-7\sqrt3$: $2-7\sqrt3$.` },
-    { t: "Squaring a binomial", body: String.raw`Expand $\left(\sqrt5-2\sqrt3\right)^2$.\soln $a^2-2ab+b^2$ with $a=\sqrt5$, $b=2\sqrt3$: $5-2(\sqrt5)(2\sqrt3)+4\cdot3=5-4\sqrt{15}+12$. \\ $=17-4\sqrt{15}$.` },
-    { t: "Rationalising denominators", body: String.raw`Rationalise (a) $\dfrac{12}{\sqrt6}$ \quad (b) $\dfrac{4}{\sqrt7-\sqrt3}$.\soln (a) Multiply by $\dfrac{\sqrt6}{\sqrt6}$: $\dfrac{12\sqrt6}{6}=2\sqrt6$. \\ (b) Multiply by the conjugate $\dfrac{\sqrt7+\sqrt3}{\sqrt7+\sqrt3}$: the denominator is $7-3=4$, so $\dfrac{4(\sqrt7+\sqrt3)}{4}=\sqrt7+\sqrt3$.` },
-    { t: "Radicals with variables", body: String.raw`Simplify $\sqrt{72a^5}$ where $a\ge0$.\soln $72=36\cdot2$ and $a^5=a^4\cdot a$, so $\sqrt{36\cdot a^4\cdot2a}=6a^2\sqrt{2a}$.` },
-    { t: "Application: distance between points", body: String.raw`Find the exact distance between $A(-2,1)$ and $B(4,5)$.\soln $d=\sqrt{(4-(-2))^2+(5-1)^2}=\sqrt{36+16}=\sqrt{52}$. \\ $\sqrt{52}=\sqrt{4\cdot13}=2\sqrt{13}\approx7.21$ units.` },
+    { t: "Simplify a radical", body: String.raw`Simplify $\sqrt{200}$.\soln The largest perfect square dividing $200$ is $100$: $\sqrt{200}=\sqrt{100\cdot2}=10\sqrt2$. \\ Check: $\sqrt{200}=14.142$ and $10\sqrt2=14.142$ \checkmark.` +
+      pgf({ curves: [{ f: "sqrt(x)" }], bounds: [0, 220, 0, 16], dots: [[200, 14.14, "(200,14.14)"]], xt: 50, yt: 4 }) },
+    { t: "Mixed and entire radicals", body: String.raw`(a) Simplify $\sqrt{63}$. (b) Write $7\sqrt3$ as an entire radical.\soln (a) $\sqrt{63}=\sqrt{9\cdot7}=3\sqrt7$. \\ (b) Square the coefficient and move it inside: $7\sqrt3=\sqrt{49\cdot3}=\sqrt{147}$. \\ \textbf{Check:} (a) $\sqrt{63}\approx7.94$ and $3\sqrt7\approx7.94$; (b) $\sqrt{147}\approx12.12$ and $7\sqrt3\approx12.12$ \checkmark` +
+      pgf({ curves: [{ f: "sqrt(x)" }], bounds: [0, 160, 0, 14], dots: [[63, 7.94, "(63,7.94)"], [147, 12.12, "(147,12.12)"]], xt: 40, yt: 2 }) },
+    { t: "Adding and subtracting", body: String.raw`Simplify $5\sqrt{12}-2\sqrt{27}+\sqrt{48}$.\soln Simplify first: $\sqrt{12}=2\sqrt3$, $\sqrt{27}=3\sqrt3$, $\sqrt{48}=4\sqrt3$. \\ $10\sqrt3-6\sqrt3+4\sqrt3=8\sqrt3$. \\ \textbf{Check:} $5(3.464)-2(5.196)+6.928\approx13.86$, and $8(1.732)\approx13.86$ \checkmark` +
+      pgf({ curves: [{ f: "1.732*x" }], bounds: [0, 10, 0, 18], dots: [[8, 13.86, "(8,13.86)"]], xt: 1, yt: 2, note: "Like radicals act like like terms: $x$ copies of $\\sqrt3$." }) },
+    { t: "Multiplying", body: String.raw`Simplify $(3\sqrt7)(2\sqrt{14})$.\soln $6\sqrt{98}=6\cdot7\sqrt2=42\sqrt2$. \\ Check: $3(2.646)\cdot2(3.742)=59.40$ and $42(1.4142)=59.40$ \checkmark.` +
+      pgf({ curves: [{ f: "6*sqrt(x)" }], bounds: [0, 110, 0, 70], dots: [[98, 59.4, "(98,59.4)"]], xt: 20, yt: 10 }) },
+    { t: "Distributing", body: String.raw`Simplify $\sqrt3\left(\sqrt{12}+2\sqrt5\right)$.\soln $\sqrt{36}+2\sqrt{15}=6+2\sqrt{15}$. \\ The terms $6$ and $2\sqrt{15}$ are not like terms, so this is final. \\ \textbf{Check:} $1.732(3.464+4.472)\approx13.75$, and $6+2(3.873)\approx13.75$ \checkmark` +
+      pgf({ curves: [{ f: "sqrt(x)" }], bounds: [0, 40, 0, 7], dots: [[36, 6, "(36,6)"], [15, 3.873, "(15,3.87)"]], xt: 5, yt: 1 }) },
+    { t: "FOIL with radicals", body: String.raw`Expand $(2\sqrt3+1)(\sqrt3-4)$.\soln First $2\cdot3=6$; Outer $-8\sqrt3$; Inner $\sqrt3$; Last $-4$. \\ $6-4=2$ and $-8\sqrt3+\sqrt3=-7\sqrt3$: $2-7\sqrt3$. \\ \textbf{Check:} $(4.464)(-2.268)\approx-10.12$, and $2-7(1.732)\approx-10.12$ \checkmark` +
+      pgf({ curves: [{ f: "(2*x+1)*(x-4)" }], bounds: [-1, 5, -12, 8], dots: [[1.732, -10.12, "(1.73,-10.12)"]], xt: 1, yt: 2 }) },
+    { t: "Squaring a binomial", body: String.raw`Expand $\left(\sqrt5-2\sqrt3\right)^2$.\soln $a^2-2ab+b^2$ with $a=\sqrt5$, $b=2\sqrt3$: $5-2(\sqrt5)(2\sqrt3)+4\cdot3=5-4\sqrt{15}+12$. \\ $=17-4\sqrt{15}$. \\ \textbf{Check:} $(2.236-3.464)^2\approx1.51$, and $17-4(3.873)\approx1.51$ \checkmark` +
+      pgf({ curves: [{ f: "(x-3.464)^2" }], bounds: [0, 6, 0, 13], dots: [[2.236, 1.51, "(2.24,1.51)"]], xt: 1, yt: 2 }) },
+    { t: "Rationalising denominators", body: String.raw`Rationalise (a) $\dfrac{12}{\sqrt6}$ \quad (b) $\dfrac{4}{\sqrt7-\sqrt3}$.\soln (a) Multiply by $\dfrac{\sqrt6}{\sqrt6}$: $\dfrac{12\sqrt6}{6}=2\sqrt6$. \\ (b) Multiply by the conjugate $\dfrac{\sqrt7+\sqrt3}{\sqrt7+\sqrt3}$: the denominator is $7-3=4$, so $\dfrac{4(\sqrt7+\sqrt3)}{4}=\sqrt7+\sqrt3$.` +
+      pgf({ curves: [{ f: "12/sqrt(x)" }], bounds: [1, 16, 0, 13], dots: [[6, 4.899, "(6,4.90)"]], xt: 1, yt: 2 }) },
+    { t: "Radicals with variables", body: String.raw`Simplify $\sqrt{72a^5}$ where $a\ge0$.\soln $72=36\cdot2$ and $a^5=a^4\cdot a$, so $\sqrt{36\cdot a^4\cdot2a}=6a^2\sqrt{2a}$. \\ \textbf{Check:} at $a=2$: $\sqrt{72\cdot32}=48$, and $6(4)\sqrt4=48$ \checkmark` +
+      pgf({ curves: [{ f: "sqrt(72*x^5)" }], bounds: [0, 3, 0, 110], dots: [[2, 48, "(2,48)"]], xt: 1, yt: 10 }) },
+    { t: "Application: distance between points", body: String.raw`Find the exact distance between $A(-2,1)$ and $B(4,5)$.\soln $d=\sqrt{(4-(-2))^2+(5-1)^2}=\sqrt{36+16}=\sqrt{52}$. \\ $\sqrt{52}=\sqrt{4\cdot13}=2\sqrt{13}\approx7.21$ units.` +
+      pgf({ curves: [{ f: "2*x/3+7/3" }], bounds: [-3, 5, 0, 6], dots: [[-2, 1, "A"], [4, 5, "B"]], xt: 1, yt: 1, note: "The distance is the slant length between $A$ and $B$." }) },
     { t: "Test before you trust", body: String.raw`A student claims $\sqrt{x^2+9}=x+3$. Test it.
 ${eqTableTex(sqrtEq, [0, 1, 2, 4], { check: true })}
 \soln The two sides agree at $x=0$ only. One mismatch is enough to prove the claim false: there is no sum rule $\sqrt{a+b}=\sqrt a+\sqrt b$ (here $\sqrt{x^2+9}\ne\sqrt{x^2}+\sqrt9$).` },

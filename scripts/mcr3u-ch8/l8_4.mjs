@@ -2,6 +2,7 @@
 // series, finding the regular payment, interest earned, starting early
 import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, q, num, choice, hard, plane } from "./lib.mjs";
 import { annFV, payFV, paymentsTo, fv, m } from "./fin.mjs";
+import { tv } from "../mcr3u-extables.mjs";
 
 export const TITLE = "8.4 Annuities: Future Value";
 export const ID = "7b1dc952-c2bd-4d27-8805-009fdcae3866";
@@ -54,20 +55,42 @@ export const blocks = () => [
 
   examples([
     ["Yearly deposits", "1000 dollars is deposited at the end of each year for 10 years at 5%/a compounded annually. Find the future value.",
-      [S`\(FV=\frac{1000(1.05^{10}-1)}{0.05}\).`],
-      `${m(annFV(1000, 0.05, 10))} dollars`],
+      [S`<b>Meaning.</b> An annuity is a series of equal payments at regular times. Each payment grows for a different time, so together they form a geometric series.`,
+        S`<b>Formula.</b> \(FV=\dfrac{R\left[(1+i)^n-1\right]}{i}\).`,
+        S`<b>Identify.</b> \(R=1000\), \(i=0.05\), \(n=10\).`,
+        S`<b>Calculate.</b> \(1.05^{10}\approx1.628895\), so \(FV\approx\frac{1000(0.628895)}{0.05}\approx${m(annFV(1000, 0.05, 10))}\).`,
+        S`<b>Sense check.</b> The deposits total 10 000, so the rest, ${m(annFV(1000, 0.05, 10) - 10000)}, is interest ✓`],
+      `${m(annFV(1000, 0.05, 10))} dollars`,
+      plane({ view: { xmin: 0, xmax: 11, ymin: 0, ymax: 14000 }, points: Array.from({ length: 10 }, (_, k) => ({ x: k + 1, y: annFV(1000, 0.05, k + 1), label: k === 9 ? `(10, ${m(annFV(1000, 0.05, 10))})` : undefined, color: k === 9 ? "amber" : "blue" })), lines: [{ m: 1000, b: 0, color: "gray", dash: true }], step: { x: 1, y: 2000 }, xlabel: "year", ylabel: "balance" }, "dashed: deposits alone")],
     ["Adding the series directly", "Four payments of 500 dollars are made at the end of each year at 4%/a compounded annually. Find the future value by adding each payment's value.",
-      [`${m(tl[3])} + ${m(tl[2])} + ${m(tl[1])} + ${m(tl[0])}.`, S`Check: \(\frac{500(1.04^4-1)}{0.04}\).`],
-      `${m(annFV(500, 0.04, 4))} dollars`],
+      [S`<b>How long does each payment grow?</b> The first payment is made after year 1, so it grows for 3 years. The last earns nothing.`,
+        S`<b>Value of each at the end.</b> ${tv(["payment", "1st", "2nd", "3rd", "4th"], ["years growing", "3", "2", "1", "0"], ["value", m(tl[0]), m(tl[1]), m(tl[2]), m(tl[3])])}`,
+        S`<b>Add.</b> \(${m(tl[3])}+${m(tl[2])}+${m(tl[1])}+${m(tl[0])}\approx${m(annFV(500, 0.04, 4))}\).`,
+        S`<b>Check with the formula.</b> \(\frac{500(1.04^4-1)}{0.04}\approx${m(annFV(500, 0.04, 4))}\) ✓`],
+      `${m(annFV(500, 0.04, 4))} dollars`,
+      plane({ view: { xmin: 0, xmax: 5, ymin: 0, ymax: 650 }, segs: [tl[3], tl[2], tl[1], tl[0]].map((v, k) => ({ pts: [[k + 0.7, 0], [k + 0.7, v], [k + 1.3, v], [k + 1.3, 0]], color: "violet" })), points: [tl[3], tl[2], tl[1], tl[0]].map((v, k) => ({ x: k + 1, y: v, label: m(v) })), step: { x: 1, y: 100 }, xlabel: "years of growth + 1", ylabel: "value" })],
     ["Monthly deposits", "200 dollars is deposited at the end of every month for 5 years at 3.6%/a compounded monthly. Find the future value.",
-      [S`\(i=0.003\), \(n=60\): \(FV=\frac{200(1.003^{60}-1)}{0.003}\).`],
-      `${m(annFV(200, 0.003, 60))} dollars`],
+      [S`<b>Convert.</b> \(i=\frac{0.036}{12}=0.003\) and \(n=5\times12=60\). Payments and compounding are both monthly.`,
+        S`<b>Formula.</b> \(FV=\frac{200(1.003^{60}-1)}{0.003}\).`,
+        S`<b>Calculate.</b> \(1.003^{60}\approx1.19691\), so \(FV\approx\frac{200(0.19691)}{0.003}\approx${m(annFV(200, 0.003, 60))}\).`,
+        S`<b>Sense check.</b> It is a bit more than the \(200\times60=12\,000\) deposited ✓`],
+      `${m(annFV(200, 0.003, 60))} dollars`,
+      plane({ view: { xmin: 0, xmax: 66, ymin: 0, ymax: 15000 }, curves: [{ f: (t) => annFV(200, 0.003, t), a: 1, color: "violet" }], lines: [{ m: 200, b: 0, color: "gray", dash: true }], points: [{ x: 60, y: annFV(200, 0.003, 60), label: `(60, ${m(annFV(200, 0.003, 60))})`, color: "amber" }], step: { x: 6, y: 2000 }, xlabel: "months", ylabel: "balance" }, "dashed: deposits alone")],
     ["The payment for a goal", "What quarterly deposit, at 4.4%/a compounded quarterly, grows to 20 000 dollars in 8 years?",
-      [S`\(i=0.011\), \(n=32\): \(R=\frac{20000(0.011)}{1.011^{32}-1}\).`],
-      `${m(payFV(20000, 0.011, 32))} dollars per quarter`],
-    ["Deposits vs interest", "In Example 3, how much was deposited and how much interest was earned?",
-      [`Deposits: 200 × 60 = 12 000.`, `Interest: ${m(annFV(200, 0.003, 60))} − 12 000.`],
-      `${m(annFV(200, 0.003, 60) - 12000)} dollars of interest`],
+      [S`<b>Convert.</b> \(i=\frac{0.044}4=0.011\) and \(n=8\times4=32\).`,
+        S`<b>Rearrange.</b> From \(FV=\frac{R\left[(1+i)^n-1\right]}i\), we get \(R=\frac{FV\cdot i}{(1+i)^n-1}\).`,
+        S`<b>Substitute.</b> \(R=\frac{20\,000(0.011)}{1.011^{32}-1}\).`,
+        S`<b>Calculate.</b> \(R\approx${m(payFV(20000, 0.011, 32))}\).`,
+        S`<b>Check.</b> \(\frac{${m(payFV(20000, 0.011, 32))}(1.011^{32}-1)}{0.011}\approx20\,000\) ✓`],
+      `${m(payFV(20000, 0.011, 32))} dollars per quarter`,
+      plane({ view: { xmin: 0, xmax: 9, ymin: 0, ymax: 22000 }, curves: [{ f: (t) => annFV(payFV(20000, 0.011, 32), 0.011, 4 * t), a: 0.25, b: 8, color: "violet" }], lines: [{ m: 0, b: 20000, color: "amber", dash: true }], points: [{ x: 8, y: 20000, label: "(8, 20 000)", color: "amber" }], step: { x: 1, y: 2000 }, xlabel: "years", ylabel: "balance" })],
+    ["Deposits vs interest", "For 200 dollars at the end of every month for 5 years at 3.6%/a compounded monthly, how much was deposited and how much interest was earned?",
+      [S`<b>Deposits.</b> \(200\times60=12\,000\).`,
+        S`<b>Future value.</b> From the formula, it is about ${m(annFV(200, 0.003, 60))} dollars.`,
+        S`<b>Interest.</b> Everything above the deposits is interest: \(${m(annFV(200, 0.003, 60))}-12\,000\approx${m(annFV(200, 0.003, 60) - 12000)}\).`,
+        S`<b>Meaning.</b> On the graph, the interest is the gap between the curve and the dashed deposit line. The gap widens over time ✓`],
+      `${m(annFV(200, 0.003, 60) - 12000)} dollars of interest`,
+      plane({ view: { xmin: 0, xmax: 66, ymin: 0, ymax: 15000 }, curves: [{ f: (t) => annFV(200, 0.003, t), a: 1, color: "violet" }], lines: [{ m: 200, b: 0, color: "gray", dash: true }], points: [{ x: 60, y: 12000, label: "deposits 12 000" }, { x: 60, y: annFV(200, 0.003, 60), label: "with interest", color: "amber" }], step: { x: 6, y: 2000 }, xlabel: "months", ylabel: "dollars" })],
   ]),
 
   practice([

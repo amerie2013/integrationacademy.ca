@@ -1,6 +1,7 @@
 // MCR3U 7.7 — Pascal's Triangle and Binomial Expansions: building the triangle, patterns (row sums, diagonals),
 // expanding (a + b)ⁿ, finding one coefficient, counting routes on a grid
 import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, q, num, choice, hard, plane } from "./lib.mjs";
+import { tv } from "../mcr3u-extables.mjs";
 
 export const TITLE = "7.7 Pascal's Triangle and Binomial Expansions";
 export const ID = "bccefc2b-f527-4d77-bb44-0ab580b0f908";
@@ -51,20 +52,43 @@ export const blocks = () => [
 
   examples([
     ["Building rows", "Write rows 0 to 6 of Pascal's triangle.",
-      ["Start with 1; each entry is the sum of the two above; each row starts and ends with 1."],
-      "row 6: 1, 6, 15, 20, 15, 6, 1"],
+      [S`<b>Rule.</b> Each row starts and ends with 1. Every other entry is the sum of the two entries just above it.`,
+        S`<b>Build.</b> ${tv(["row", "entries"], ["0", "1"], ["1", "1, 1"], ["2", "1, 2, 1"], ["3", "1, 3, 3, 1"], ["4", "1, 4, 6, 4, 1"], ["5", "1, 5, 10, 10, 5, 1"], ["6", "1, 6, 15, 20, 15, 6, 1"])}`,
+        S`<b>Example of the rule.</b> In row 6, \(15=5+10\) and \(20=10+10\).`,
+        S`<b>Check.</b> The entries of row \(n\) add to \(2^n\): \(1+6+15+20+15+6+1=64=2^6\) ✓`],
+      "row 6: 1, 6, 15, 20, 15, 6, 1",
+      plane({ bare: true, view: { xmin: -4, xmax: 4, ymin: -7, ymax: 1 }, points: [0, 1, 2, 3, 4, 5, 6].flatMap((n) => row(n).map((v, k) => ({ x: k - n / 2, y: -n, label: String(v), color: n === 6 ? "amber" : "blue" }))) })],
     ["A simple expansion", S`Expand \((x+y)^4\).`,
-      ["Row 4: 1, 4, 6, 4, 1."],
-      S`\(x^4+4x^3y+6x^2y^2+4xy^3+y^4\)`],
+      [S`<b>Coefficients.</b> The exponent 4 means row 4: \(1,4,6,4,1\).`,
+        S`<b>Powers.</b> The power of \(x\) falls from 4 to 0 while the power of \(y\) rises from 0 to 4. In each term, the powers add to 4.`,
+        S`<b>Build.</b> \(1x^4y^0+4x^3y^1+6x^2y^2+4x^1y^3+1x^0y^4\).`,
+        S`<b>Simplify.</b> \(x^4+4x^3y+6x^2y^2+4xy^3+y^4\).`,
+        S`<b>Check with \(x=y=1\).</b> \(2^4=16\), and \(1+4+6+4+1=16\) ✓`],
+      S`\(x^4+4x^3y+6x^2y^2+4xy^3+y^4\)`,
+      plane({ view: { xmin: -0.5, xmax: 5, ymin: 0, ymax: 8 }, points: row(4).map((v, k) => ({ x: k, y: v, label: String(v) })), step: { x: 1, y: 1 }, xlabel: "k", ylabel: "coefficient" }, "The coefficients of row 4 are symmetric.")],
     ["Coefficients and signs", S`Expand \((2x-3)^3\).`,
-      [S`Row 3 with \(a=2x\), \(b=-3\): \(1(2x)^3+3(2x)^2(-3)+3(2x)(-3)^2+(-3)^3\).`],
-      S`\(8x^3-36x^2+54x-27\)`],
+      [S`<b>Set up.</b> Use row 3: \(1,3,3,1\), with \(a=2x\) and \(b=-3\). Keep the sign with the 3.`,
+        S`<b>Write the terms.</b> \(1(2x)^3+3(2x)^2(-3)+3(2x)(-3)^2+1(-3)^3\).`,
+        S`<b>Powers first.</b> \((2x)^3=8x^3\), \((2x)^2=4x^2\), \((-3)^2=9\), \((-3)^3=-27\).`,
+        S`<b>Multiply.</b> \(8x^3+3(4x^2)(-3)+3(2x)(9)-27=8x^3-36x^2+54x-27\).`,
+        S`<b>Check with \(x=1\).</b> \((2-3)^3=-1\), and \(8-36+54-27=-1\) ✓`],
+      S`\(8x^3-36x^2+54x-27\)`,
+      plane({ view: { xmin: -1, xmax: 4, ymin: -30, ymax: 30 }, curves: [{ f: (x) => (2 * x - 3) ** 3, color: "violet" }], points: [{ x: 1.5, y: 0, label: "(1.5, 0)", color: "amber" }, { x: 1, y: -1, label: "(1, −1)" }, { x: 0, y: -27, label: "(0, −27)" }], step: { x: 1, y: 5 } })],
     ["One coefficient", S`Find the coefficient of \(x^2\) in \((x+2)^5\).`,
-      [S`Row 5: 1, 5, 10, 10, 5, 1. The \(x^2\) term has \(2^3\): \(10\cdot x^2\cdot2^3\).`],
-      "80"],
+      [S`<b>Row.</b> Row 5: \(1,5,10,10,5,1\).`,
+        S`<b>Which term?</b> The powers of \(x\) go \(5,4,3,2,1,0\). So \(x^2\) is the fourth term, with coefficient 10 from the row.`,
+        S`<b>The other factor.</b> The powers must add to 5, so it has \(2^3\).`,
+        S`<b>Multiply.</b> \(10\cdot x^2\cdot2^3=80x^2\).`,
+        S`<b>Check by listing.</b> \((x+2)^5=x^5+10x^4+40x^3+80x^2+80x+32\). With \(x=1\): \(3^5=243\), and the coefficients add to 243 ✓`],
+      "80",
+      plane({ view: { xmin: -0.5, xmax: 6, ymin: 0, ymax: 90 }, points: [[5, 1], [4, 10], [3, 40], [2, 80], [1, 80], [0, 32]].map(([x, y]) => ({ x, y, label: x === 2 ? "x²: 80" : String(y), color: x === 2 ? "amber" : "blue" })), step: { x: 1, y: 10 }, xlabel: "power of x", ylabel: "coefficient" })],
     ["Patterns", "Describe three patterns in Pascal's triangle.",
-      [S`Row sums are \(1,2,4,8,\ldots=2^n\).`, "The second diagonal is the natural numbers 1, 2, 3, …", "The third diagonal is the triangular numbers 1, 3, 6, 10, …"],
-      "row sums 2ⁿ; natural numbers; triangular numbers"],
+      [S`<b>Row sums.</b> \(1,2,4,8,16,\ldots\): each is \(2^n\), since each entry is used twice to build the next row.`,
+        S`<b>Second diagonal.</b> \(1,2,3,4,\ldots\): the natural numbers.`,
+        S`<b>Third diagonal.</b> \(1,3,6,10,\ldots\): the triangular numbers. Each one is a running total of the second diagonal.`,
+        S`<b>Check.</b> \(1+2+3+4=10\), and 10 is the next entry on the third diagonal ✓`],
+      "row sums 2ⁿ; natural numbers; triangular numbers",
+      plane({ bare: true, view: { xmin: -4, xmax: 4, ymin: -7, ymax: 1 }, points: [0, 1, 2, 3, 4, 5, 6].flatMap((n) => row(n).map((v, k) => ({ x: k - n / 2, y: -n, label: String(v), color: k === 1 ? "green" : k === 2 ? "amber" : "blue" }))) }, "green: natural numbers; amber: triangular numbers")],
   ]),
 
   practice([

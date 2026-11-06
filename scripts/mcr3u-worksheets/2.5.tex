@@ -28,43 +28,63 @@ A radical such as $\sqrt{72}$ is an \textbf{exact} number; the calculator's $8.4
 \sech{Worked Examples}
 
 \begin{example}{ex0}{Example 1 --- Simplify a radical}
-Simplify $\sqrt{200}$.\soln The largest perfect square dividing $200$ is $100$: $\sqrt{200}=\sqrt{100\cdot2}=10\sqrt2$. \\ Check: $\sqrt{200}=14.142$ and $10\sqrt2=14.142$ \checkmark.
+Simplify $\sqrt{200}$.\soln The largest perfect square dividing $200$ is $100$: $\sqrt{200}=\sqrt{100\cdot2}=10\sqrt2$. \\ Check: $\sqrt{200}=14.142$ and $10\sqrt2=14.142$ \checkmark.\begin{center}\begin{tikzpicture}\begin{axis}[width=8.2cm,height=5.2cm,axis lines=middle,xlabel={\scriptsize$x$},ylabel={\scriptsize$y$},grid=both,grid style={gray!16},xmin=0,xmax=220,ymin=0,ymax=16,xtick distance=50,ytick distance=4,tick label style={font=\tiny},axis line style={-}]
+\addplot[exblue,very thick,domain=0:220,samples=120,restrict y to domain=-1:17]{sqrt(x)};\addplot[only marks,mark=*,mark size=2pt,green!45!black]coordinates{(200,14.14)};\node[font=\tiny,anchor=south west,green!30!black] at (axis cs:200,14.14){$(200,14.14)$};
+\end{axis}\end{tikzpicture}\end{center}
 \end{example}
 
 \begin{example}{ex1}{Example 2 --- Mixed and entire radicals}
-(a) Simplify $\sqrt{63}$. (b) Write $7\sqrt3$ as an entire radical.\soln (a) $\sqrt{63}=\sqrt{9\cdot7}=3\sqrt7$. \\ (b) Square the coefficient and move it inside: $7\sqrt3=\sqrt{49\cdot3}=\sqrt{147}$.
+(a) Simplify $\sqrt{63}$. (b) Write $7\sqrt3$ as an entire radical.\soln (a) $\sqrt{63}=\sqrt{9\cdot7}=3\sqrt7$. \\ (b) Square the coefficient and move it inside: $7\sqrt3=\sqrt{49\cdot3}=\sqrt{147}$. \\ \textbf{Check:} (a) $\sqrt{63}\approx7.94$ and $3\sqrt7\approx7.94$; (b) $\sqrt{147}\approx12.12$ and $7\sqrt3\approx12.12$ \checkmark\begin{center}\begin{tikzpicture}\begin{axis}[width=8.2cm,height=5.2cm,axis lines=middle,xlabel={\scriptsize$x$},ylabel={\scriptsize$y$},grid=both,grid style={gray!16},xmin=0,xmax=160,ymin=0,ymax=14,xtick distance=40,ytick distance=2,tick label style={font=\tiny},axis line style={-}]
+\addplot[exblue,very thick,domain=0:160,samples=120,restrict y to domain=-1:15]{sqrt(x)};\addplot[only marks,mark=*,mark size=2pt,green!45!black]coordinates{(63,7.94)(147,12.12)};\node[font=\tiny,anchor=south west,green!30!black] at (axis cs:63,7.94){$(63,7.94)$};\node[font=\tiny,anchor=south west,green!30!black] at (axis cs:147,12.12){$(147,12.12)$};
+\end{axis}\end{tikzpicture}\end{center}
 \end{example}
 
 \begin{example}{ex2}{Example 3 --- Adding and subtracting}
-Simplify $5\sqrt{12}-2\sqrt{27}+\sqrt{48}$.\soln Simplify first: $\sqrt{12}=2\sqrt3$, $\sqrt{27}=3\sqrt3$, $\sqrt{48}=4\sqrt3$. \\ $10\sqrt3-6\sqrt3+4\sqrt3=8\sqrt3$.
+Simplify $5\sqrt{12}-2\sqrt{27}+\sqrt{48}$.\soln Simplify first: $\sqrt{12}=2\sqrt3$, $\sqrt{27}=3\sqrt3$, $\sqrt{48}=4\sqrt3$. \\ $10\sqrt3-6\sqrt3+4\sqrt3=8\sqrt3$. \\ \textbf{Check:} $5(3.464)-2(5.196)+6.928\approx13.86$, and $8(1.732)\approx13.86$ \checkmark\begin{center}\begin{tikzpicture}\begin{axis}[width=8.2cm,height=5.2cm,axis lines=middle,xlabel={\scriptsize$x$},ylabel={\scriptsize$y$},grid=both,grid style={gray!16},xmin=0,xmax=10,ymin=0,ymax=18,xtick distance=1,ytick distance=2,tick label style={font=\tiny},axis line style={-}]
+\addplot[exblue,very thick,domain=0:10,samples=120,restrict y to domain=-1:19]{1.732*x};\addplot[only marks,mark=*,mark size=2pt,green!45!black]coordinates{(8,13.86)};\node[font=\tiny,anchor=south west,green!30!black] at (axis cs:8,13.86){$(8,13.86)$};
+\end{axis}\end{tikzpicture}\\[-2pt]{\scriptsize Like radicals act like like terms: $x$ copies of $\sqrt3$.}\end{center}
 \end{example}
 
 \begin{example}{ex3}{Example 4 --- Multiplying}
-Simplify $(3\sqrt7)(2\sqrt{14})$.\soln $6\sqrt{98}=6\cdot7\sqrt2=42\sqrt2$. \\ Check: $3(2.646)\cdot2(3.742)=59.40$ and $42(1.4142)=59.40$ \checkmark.
+Simplify $(3\sqrt7)(2\sqrt{14})$.\soln $6\sqrt{98}=6\cdot7\sqrt2=42\sqrt2$. \\ Check: $3(2.646)\cdot2(3.742)=59.40$ and $42(1.4142)=59.40$ \checkmark.\begin{center}\begin{tikzpicture}\begin{axis}[width=8.2cm,height=5.2cm,axis lines=middle,xlabel={\scriptsize$x$},ylabel={\scriptsize$y$},grid=both,grid style={gray!16},xmin=0,xmax=110,ymin=0,ymax=70,xtick distance=20,ytick distance=10,tick label style={font=\tiny},axis line style={-}]
+\addplot[exblue,very thick,domain=0:110,samples=120,restrict y to domain=-1:71]{6*sqrt(x)};\addplot[only marks,mark=*,mark size=2pt,green!45!black]coordinates{(98,59.4)};\node[font=\tiny,anchor=south west,green!30!black] at (axis cs:98,59.4){$(98,59.4)$};
+\end{axis}\end{tikzpicture}\end{center}
 \end{example}
 
 \begin{example}{ex4}{Example 5 --- Distributing}
-Simplify $\sqrt3\left(\sqrt{12}+2\sqrt5\right)$.\soln $\sqrt{36}+2\sqrt{15}=6+2\sqrt{15}$. \\ The terms $6$ and $2\sqrt{15}$ are not like terms, so this is final.
+Simplify $\sqrt3\left(\sqrt{12}+2\sqrt5\right)$.\soln $\sqrt{36}+2\sqrt{15}=6+2\sqrt{15}$. \\ The terms $6$ and $2\sqrt{15}$ are not like terms, so this is final. \\ \textbf{Check:} $1.732(3.464+4.472)\approx13.75$, and $6+2(3.873)\approx13.75$ \checkmark\begin{center}\begin{tikzpicture}\begin{axis}[width=8.2cm,height=5.2cm,axis lines=middle,xlabel={\scriptsize$x$},ylabel={\scriptsize$y$},grid=both,grid style={gray!16},xmin=0,xmax=40,ymin=0,ymax=7,xtick distance=5,ytick distance=1,tick label style={font=\tiny},axis line style={-}]
+\addplot[exblue,very thick,domain=0:40,samples=120,restrict y to domain=-1:8]{sqrt(x)};\addplot[only marks,mark=*,mark size=2pt,green!45!black]coordinates{(36,6)(15,3.873)};\node[font=\tiny,anchor=south west,green!30!black] at (axis cs:36,6){$(36,6)$};\node[font=\tiny,anchor=south west,green!30!black] at (axis cs:15,3.873){$(15,3.87)$};
+\end{axis}\end{tikzpicture}\end{center}
 \end{example}
 
 \begin{example}{ex5}{Example 6 --- FOIL with radicals}
-Expand $(2\sqrt3+1)(\sqrt3-4)$.\soln First $2\cdot3=6$; Outer $-8\sqrt3$; Inner $\sqrt3$; Last $-4$. \\ $6-4=2$ and $-8\sqrt3+\sqrt3=-7\sqrt3$: $2-7\sqrt3$.
+Expand $(2\sqrt3+1)(\sqrt3-4)$.\soln First $2\cdot3=6$; Outer $-8\sqrt3$; Inner $\sqrt3$; Last $-4$. \\ $6-4=2$ and $-8\sqrt3+\sqrt3=-7\sqrt3$: $2-7\sqrt3$. \\ \textbf{Check:} $(4.464)(-2.268)\approx-10.12$, and $2-7(1.732)\approx-10.12$ \checkmark\begin{center}\begin{tikzpicture}\begin{axis}[width=8.2cm,height=5.2cm,axis lines=middle,xlabel={\scriptsize$x$},ylabel={\scriptsize$y$},grid=both,grid style={gray!16},xmin=-1,xmax=5,ymin=-12,ymax=8,xtick distance=1,ytick distance=2,tick label style={font=\tiny},axis line style={-}]
+\addplot[exblue,very thick,domain=-1:5,samples=120,restrict y to domain=-13:9]{(2*x+1)*(x-4)};\addplot[only marks,mark=*,mark size=2pt,green!45!black]coordinates{(1.732,-10.12)};\node[font=\tiny,anchor=south west,green!30!black] at (axis cs:1.732,-10.12){$(1.73,-10.12)$};
+\end{axis}\end{tikzpicture}\end{center}
 \end{example}
 
 \begin{example}{ex6}{Example 7 --- Squaring a binomial}
-Expand $\left(\sqrt5-2\sqrt3\right)^2$.\soln $a^2-2ab+b^2$ with $a=\sqrt5$, $b=2\sqrt3$: $5-2(\sqrt5)(2\sqrt3)+4\cdot3=5-4\sqrt{15}+12$. \\ $=17-4\sqrt{15}$.
+Expand $\left(\sqrt5-2\sqrt3\right)^2$.\soln $a^2-2ab+b^2$ with $a=\sqrt5$, $b=2\sqrt3$: $5-2(\sqrt5)(2\sqrt3)+4\cdot3=5-4\sqrt{15}+12$. \\ $=17-4\sqrt{15}$. \\ \textbf{Check:} $(2.236-3.464)^2\approx1.51$, and $17-4(3.873)\approx1.51$ \checkmark\begin{center}\begin{tikzpicture}\begin{axis}[width=8.2cm,height=5.2cm,axis lines=middle,xlabel={\scriptsize$x$},ylabel={\scriptsize$y$},grid=both,grid style={gray!16},xmin=0,xmax=6,ymin=0,ymax=13,xtick distance=1,ytick distance=2,tick label style={font=\tiny},axis line style={-}]
+\addplot[exblue,very thick,domain=0:6,samples=120,restrict y to domain=-1:14]{(x-3.464)^2};\addplot[only marks,mark=*,mark size=2pt,green!45!black]coordinates{(2.236,1.51)};\node[font=\tiny,anchor=south west,green!30!black] at (axis cs:2.236,1.51){$(2.24,1.51)$};
+\end{axis}\end{tikzpicture}\end{center}
 \end{example}
 
 \begin{example}{ex7}{Example 8 --- Rationalising denominators}
-Rationalise (a) $\dfrac{12}{\sqrt6}$ \quad (b) $\dfrac{4}{\sqrt7-\sqrt3}$.\soln (a) Multiply by $\dfrac{\sqrt6}{\sqrt6}$: $\dfrac{12\sqrt6}{6}=2\sqrt6$. \\ (b) Multiply by the conjugate $\dfrac{\sqrt7+\sqrt3}{\sqrt7+\sqrt3}$: the denominator is $7-3=4$, so $\dfrac{4(\sqrt7+\sqrt3)}{4}=\sqrt7+\sqrt3$.
+Rationalise (a) $\dfrac{12}{\sqrt6}$ \quad (b) $\dfrac{4}{\sqrt7-\sqrt3}$.\soln (a) Multiply by $\dfrac{\sqrt6}{\sqrt6}$: $\dfrac{12\sqrt6}{6}=2\sqrt6$. \\ (b) Multiply by the conjugate $\dfrac{\sqrt7+\sqrt3}{\sqrt7+\sqrt3}$: the denominator is $7-3=4$, so $\dfrac{4(\sqrt7+\sqrt3)}{4}=\sqrt7+\sqrt3$.\begin{center}\begin{tikzpicture}\begin{axis}[width=8.2cm,height=5.2cm,axis lines=middle,xlabel={\scriptsize$x$},ylabel={\scriptsize$y$},grid=both,grid style={gray!16},xmin=1,xmax=16,ymin=0,ymax=13,xtick distance=1,ytick distance=2,tick label style={font=\tiny},axis line style={-}]
+\addplot[exblue,very thick,domain=1:16,samples=120,restrict y to domain=-1:14]{12/sqrt(x)};\addplot[only marks,mark=*,mark size=2pt,green!45!black]coordinates{(6,4.899)};\node[font=\tiny,anchor=south west,green!30!black] at (axis cs:6,4.899){$(6,4.90)$};
+\end{axis}\end{tikzpicture}\end{center}
 \end{example}
 
 \begin{example}{ex8}{Example 9 --- Radicals with variables}
-Simplify $\sqrt{72a^5}$ where $a\ge0$.\soln $72=36\cdot2$ and $a^5=a^4\cdot a$, so $\sqrt{36\cdot a^4\cdot2a}=6a^2\sqrt{2a}$.
+Simplify $\sqrt{72a^5}$ where $a\ge0$.\soln $72=36\cdot2$ and $a^5=a^4\cdot a$, so $\sqrt{36\cdot a^4\cdot2a}=6a^2\sqrt{2a}$. \\ \textbf{Check:} at $a=2$: $\sqrt{72\cdot32}=48$, and $6(4)\sqrt4=48$ \checkmark\begin{center}\begin{tikzpicture}\begin{axis}[width=8.2cm,height=5.2cm,axis lines=middle,xlabel={\scriptsize$x$},ylabel={\scriptsize$y$},grid=both,grid style={gray!16},xmin=0,xmax=3,ymin=0,ymax=110,xtick distance=1,ytick distance=10,tick label style={font=\tiny},axis line style={-}]
+\addplot[exblue,very thick,domain=0:3,samples=120,restrict y to domain=-1:111]{sqrt(72*x^5)};\addplot[only marks,mark=*,mark size=2pt,green!45!black]coordinates{(2,48)};\node[font=\tiny,anchor=south west,green!30!black] at (axis cs:2,48){$(2,48)$};
+\end{axis}\end{tikzpicture}\end{center}
 \end{example}
 
 \begin{example}{ex0}{Example 10 --- Application: distance between points}
-Find the exact distance between $A(-2,1)$ and $B(4,5)$.\soln $d=\sqrt{(4-(-2))^2+(5-1)^2}=\sqrt{36+16}=\sqrt{52}$. \\ $\sqrt{52}=\sqrt{4\cdot13}=2\sqrt{13}\approx7.21$ units.
+Find the exact distance between $A(-2,1)$ and $B(4,5)$.\soln $d=\sqrt{(4-(-2))^2+(5-1)^2}=\sqrt{36+16}=\sqrt{52}$. \\ $\sqrt{52}=\sqrt{4\cdot13}=2\sqrt{13}\approx7.21$ units.\begin{center}\begin{tikzpicture}\begin{axis}[width=8.2cm,height=5.2cm,axis lines=middle,xlabel={\scriptsize$x$},ylabel={\scriptsize$y$},grid=both,grid style={gray!16},xmin=-3,xmax=5,ymin=0,ymax=6,xtick distance=1,ytick distance=1,tick label style={font=\tiny},axis line style={-}]
+\addplot[exblue,very thick,domain=-3:5,samples=120,restrict y to domain=-1:7]{2*x/3+7/3};\addplot[only marks,mark=*,mark size=2pt,green!45!black]coordinates{(-2,1)(4,5)};\node[font=\tiny,anchor=south west,green!30!black] at (axis cs:-2,1){$A$};\node[font=\tiny,anchor=south west,green!30!black] at (axis cs:4,5){$B$};
+\end{axis}\end{tikzpicture}\\[-2pt]{\scriptsize The distance is the slant length between $A$ and $B$.}\end{center}
 \end{example}
 
 \begin{example}{ex1}{Example 11 --- Test before you trust}

@@ -119,55 +119,69 @@ const lessonHtml = r`<div class="lecture-box">
 
   <h2>🔵 Examples</h2>
   ${ex("Example 1: Greatest common factor", `Factor ${M("12x^3-18x^2+30x")}.`, [
+    `<b>Method.</b> The GCF is the largest factor shared by every term. Take the numbers and the variables separately.`,
     `Numbers: \\(\\gcd(12,18,30)=6\\). Variables: the lowest power of \\(x\\) present in every term is \\(x\\). GCF \\(=6x\\).`,
     `Divide each term by \\(6x\\): \\(2x^2,\\ -3x,\\ 5\\).`,
-  ], `${M(e1.tex)}. Check: \\(6x\\cdot2x^2=12x^3\\) ✓, \\(6x\\cdot(-3x)=-18x^2\\) ✓, \\(6x\\cdot5=30x\\) ✓.`)}
+  ], `${M(e1.tex)}. Check: \\(6x\\cdot2x^2=12x^3\\) ✓, \\(6x\\cdot(-3x)=-18x^2\\) ✓, \\(6x\\cdot5=30x\\) ✓.`, gframe(["y = 12*x^3-18*x^2+30*x", "y = 6*x*(2*x^2-3*x+5)"], { title: "Both forms draw one curve", ...gview(-2, 3, -40, 60) }))}
   ${ex("Example 2: A common binomial factor", `Factor ${M("3x(x-5)+4(x-5)")}.`, [
+    `<b>Idea.</b> A common factor can be a whole bracket, not just a number or a variable.`,
     `Both terms contain the whole bracket \\((x-5)\\). Treat it like a single number and take it out.`,
-  ], `${M(e2.tex)}. (Expanded: \\(${ptex(e2.poly)}\\).)`)}
+    `<b>Check with</b> \\(x=1\\). Original: \\(3(-4)+4(-4)=-28\\). Answer: \\((-4)(7)=-28\\) ✓`,
+  ], `${M(e2.tex)}. (Expanded: \\(${ptex(e2.poly)}\\).)`, gframe(["y = 3*x*(x-5)+4*(x-5)", "y = (x-5)*(3*x+4)"], { title: "The zeros 5 and −4/3 come from the factors", labels: [{ x: 5, y: 0, t: "(5, 0)" }, { x: -1.33, y: 0, t: "(−1.33, 0)" }], ...gview(-3, 7, -40, 30) }))}
   ${ex("Example 3: Factoring by grouping (4 terms)", `Factor ${M("2x^3-6x^2+5x-15")}.`, [
+    `<b>When to group.</b> Four terms with no GCF suggest pairing them.`,
     `Group in pairs: \\((2x^3-6x^2)+(5x-15)\\).`,
     `Take the GCF of each pair: \\(2x^2(x-3)+5(x-3)\\). The brackets match — that is the sign grouping works.`,
     `Take out the common bracket: \\((x-3)(2x^2+5)\\).`,
-  ], `${M(e3.tex)}.`)}
+    `<b>Check with</b> \\(x=1\\). Original: \\(2-6+5-15=-14\\). Answer: \\((-2)(7)=-14\\) ✓`,
+  ], `${M(e3.tex)}.`, gframe(["y = 2*x^3-6*x^2+5*x-15", "y = (x-3)*(2*x^2+5)"], { title: "One zero, x = 3: the factor 2x² + 5 is never 0", labels: [{ x: 3, y: 0, t: "(3, 0)" }], ...gview(-2, 5, -40, 40) }))}
   ${ex("Example 4: Simple trinomial \\(x^2+bx+c\\)", `Factor ${M("x^2-x-30")}.`, [
+    `<b>Why these two numbers?</b> \\((x+p)(x+q)=x^2+(p+q)x+pq\\), so \\(p\\) and \\(q\\) must add to \\(b\\) and multiply to \\(c\\).`,
     `We need two numbers with <strong>product \\(-30\\)</strong> and <strong>sum \\(-1\\)</strong>. The negative product means one is positive and one negative. List the pairs:`,
     `The pair \\(-6\\) and \\(5\\) works. So \\(x^2-x-30=(x-6)(x+5)\\).`,
   ], `${M(e4.tex)}. Check: \\(x^2+5x-6x-30=x^2-x-30\\) ✓.`, pairsTable(-30, -1))}
   ${callout("Sign guide for \\(x^2+bx+c\\).", "If <strong>\\(c>0\\)</strong> the two numbers have the <em>same sign</em> as \\(b\\) (both + if \\(b>0\\), both − if \\(b<0\\)). If <strong>\\(c<0\\)</strong> they have <em>opposite signs</em>, and the larger one (in size) takes the sign of \\(b\\).", "blue")}
   ${ex("Example 5: Complex trinomial \\(ax^2+bx+c\\) — decomposition", `Factor ${M("6x^2+7x-20")}.`, [
+    `<b>Why \\(ac\\)?</b> Splitting the middle term into two terms with product \\(ac\\) makes the four terms group evenly.`,
     `Multiply \\(a\\cdot c=6\\times(-20)=-120\\). Find two numbers with product \\(-120\\) and sum \\(+7\\): \\(15\\) and \\(-8\\).`,
     `Split the middle term: \\(6x^2+15x-8x-20\\).`,
     `Group: \\(3x(2x+5)-4(2x+5)\\). The brackets match ✓. Take them out: \\((2x+5)(3x-4)\\).`,
+    `<b>Check with</b> \\(x=1\\). Original: \\(6+7-20=-7\\). Answer: \\((7)(-1)=-7\\) ✓`,
   ], `${M(e5.tex)}.`, areaModel(P("2x+5"), P("3x-4"), "Area-model check: the four boxes are 6x², −8x, 15x, −20"))}
   ${ex("Example 6: Difference of squares", `Factor ${M("25x^2-81")}.`, [
     `Both terms are perfect squares: \\(25x^2=(5x)^2\\) and \\(81=9^2\\), separated by a minus sign.`,
     `Use \\(a^2-b^2=(a-b)(a+b)\\) with \\(a=5x,\\ b=9\\).`,
-  ], `${M(e6.tex)}. A <em>sum</em> of squares such as \\(25x^2+81\\) cannot be factored over the integers.`)}
+    `<b>Check with</b> \\(x=1\\). Original: \\(25-81=-56\\). Answer: \\((-4)(14)=-56\\) ✓`,
+  ], `${M(e6.tex)}. A <em>sum</em> of squares such as \\(25x^2+81\\) cannot be factored over the integers.`, gframe(["y = 25*x^2-81", "y = (5*x-9)*(5*x+9)"], { title: "The zeros are ±1.8, and the factors show why", labels: [{ x: 1.8, y: 0, t: "(1.8, 0)" }, { x: -1.8, y: 0, t: "(−1.8, 0)" }], ...gview(-3, 3, -90, 60) }))}
   ${ex("Example 7: Perfect-square trinomial", `Factor ${M("9x^2-42x+49")}.`, [
     `First and last terms are squares: \\((3x)^2\\) and \\(7^2\\). Is the middle term \\(2(3x)(7)=42x\\)? Yes (with a minus sign).`,
     `So it is \\((a-b)^2\\) with \\(a=3x,\\ b=7\\).`,
-  ], `${M(e7.tex)}. (A perfect square has a double zero: the parabola <em>touches</em> the \\(x\\)-axis at \\(x=\\tfrac73\\).)`)}
+    `<b>Check with</b> \\(x=1\\). Original: \\(9-42+49=16\\). Answer: \\((-4)^2=16\\) ✓`,
+  ], `${M(e7.tex)}. (A perfect square has a double zero: the parabola <em>touches</em> the \\(x\\)-axis at \\(x=\\tfrac73\\).)`, gframe(["y = 9*x^2-42*x+49", "y = (3*x-7)^2"], { title: "A perfect square touches the x-axis once", labels: [{ x: 2.33, y: 0, t: "(7/3, 0)" }], ...gview(0, 5, -3, 30) }))}
   ${ex("Example 8: Factor completely — GCF first", `Factor (a) ${M("4x^3-36x")} and (b) ${M("-2x^2+14x-24")}.`, [
     `(a) GCF \\(4x\\): \\(4x(x^2-9)\\). Now \\(x^2-9\\) is a difference of squares: \\(4x(x-3)(x+3)\\).`,
     `(b) Take out \\(-2\\) (making the leading coefficient positive helps): \\(-2(x^2-7x+12)\\). Numbers with product \\(12\\) and sum \\(-7\\): \\(-3,-4\\).`,
-  ], `(a) ${M(e8a.tex)}; (b) ${M(e8b.tex)}. Stopping at \\(4x(x^2-9)\\) would be <em>incomplete</em>.`)}
+    `<b>Check with</b> \\(x=1\\). (a) \\(4-36=-32\\) and \\(4(1)(-2)(4)=-32\\) ✓. (b) \\(-2+14-24=-12\\) and \\(-2(-2)(-3)=-12\\) ✓`,
+  ], `(a) ${M(e8a.tex)}; (b) ${M(e8b.tex)}. Stopping at \\(4x(x^2-9)\\) would be <em>incomplete</em>.`, gframe(["y = 4*x^3-36*x", "y = 4*x*(x-3)*(x+3)"], { title: "(a) Three factors give three zeros: −3, 0, 3", labels: [{ x: -3, y: 0, t: "(−3, 0)" }, { x: 0, y: 0, t: "(0, 0)" }, { x: 3, y: 0, t: "(3, 0)" }], ...gview(-5, 5, -60, 60) }))}
   ${ex("Example 9: Quadratic form — a trinomial in disguise", `Factor ${M("x^4-13x^2+36")}.`, [
     `Let \\(u=x^2\\). Then the expression is \\(u^2-13u+36\\), which factors as \\((u-4)(u-9)\\).`,
     `Replace \\(u\\) by \\(x^2\\): \\((x^2-4)(x^2-9)\\). Both are differences of squares.`,
-  ], `${M(e9.tex)}. Four linear factors → four \\(x\\)-intercepts: \\(\\pm2,\\ \\pm3\\).`)}
+    `<b>Check with</b> \\(x=1\\). Original: \\(1-13+36=24\\). Answer: \\((-1)(3)(-2)(4)=24\\) ✓`,
+  ], `${M(e9.tex)}. Four linear factors → four \\(x\\)-intercepts: \\(\\pm2,\\ \\pm3\\).`, gframe(["y = x^4-13*x^2+36", "y = (x-2)*(x+2)*(x-3)*(x+3)"], { title: "Four factors, four zeros", labels: [{ x: 2, y: 0, t: "2" }, { x: -2, y: 0, t: "−2" }, { x: 3, y: 0, t: "3" }, { x: -3, y: 0, t: "−3" }], ...gview(-5, 5, -15, 40) }))}
   ${ex("Example 10: From a factorisation to the graph", `Factor ${M("2x^2-5x-12")} and use the factors to sketch the graph.`, [
     `\\(ac=-24\\); numbers with sum \\(-5\\): \\(3\\) and \\(-8\\). Split: \\(2x^2+3x-8x-12=x(2x+3)-4(2x+3)\\).`,
     `Result \\((2x+3)(x-4)\\). Set each factor to \\(0\\): \\(x=-\\tfrac32\\) and \\(x=4\\) are the \\(x\\)-intercepts; the \\(y\\)-intercept is the constant \\(-12\\).`,
   ], `${M(e10.tex)}; the parabola opens up (\\(a=2>0\\)) with the intercepts shown.`, zeroGraph(e10, [-1.5, 4], -16, 10, "y = (2x + 3)(x − 4)", [-3, 6]))}
   ${ex("Example 11: Dimensions from an area", `A rectangular patio has area \\(2x^2+11x+12\\) square metres and width \\((x+4)\\) m. Find its length.`, [
+    `<b>Model.</b> Area is length times width, so the width must be one of the factors of the area.`,
     `Area \\(=\\) length \\(\\times\\) width, so factor the area: \\(ac=24\\), numbers with sum \\(11\\): \\(3\\) and \\(8\\).`,
     `\\(2x^2+3x+8x+12=x(2x+3)+4(2x+3)=(2x+3)(x+4)\\).`,
-  ], `The length is \\((2x+3)\\) m. For \\(x=2\\): a \\(7\\) m by \\(6\\) m patio, area \\(42=8+22+12\\) ✓.`)}
+  ], `The length is \\((2x+3)\\) m. For \\(x=2\\): a \\(7\\) m by \\(6\\) m patio, area \\(42=8+22+12\\) ✓.`, gframe([{ kind: "cartesian", expr: "y = 2*x^2+11*x+12", dMin: "0", dMax: "4" }], { title: "The patio's area for x from 0 to 4", labels: [{ x: 2, y: 42, t: "(2, 42)" }], ...gview(-1, 5, 0, 90) }))}
   ${ex("Example 12: A difference of squares with a bracket", `Factor ${M("(x+1)^2-49")}.`, [
     `Treat \\((x+1)\\) as one block: \\(a=x+1,\\ b=7\\). Then \\(a^2-b^2=(a-b)(a+b)\\).`,
     `\\((x+1-7)(x+1+7)\\).`,
-  ], `${M(e12.tex)}. Expanding \\((x+1)^2-49\\) gives \\(${ptex(e12.poly)}\\), so the two forms agree ✓.`)}
+    `<b>Check with</b> \\(x=0\\). Original: \\(1-49=-48\\). Answer: \\((-6)(8)=-48\\) ✓`,
+  ], `${M(e12.tex)}. Expanding \\((x+1)^2-49\\) gives \\(${ptex(e12.poly)}\\), so the two forms agree ✓.`, gframe(["y = (x+1)^2-49", "y = (x-6)*(x+8)"], { title: "The zeros are 6 and −8", labels: [{ x: 6, y: 0, t: "(6, 0)" }, { x: -8, y: 0, t: "(−8, 0)" }], ...gview(-11, 9, -55, 40) }))}
   ${ex("Example 13: Going further — sum and difference of cubes", `Factor ${M("x^3-27")}.`, [
     `\\(x^3-27=x^3-3^3\\). The pattern is \\(a^3-b^3=(a-b)(a^2+ab+b^2)\\) and \\(a^3+b^3=(a+b)(a^2-ab+b^2)\\).`,
   ], `${M(e13.tex)}. The quadratic factor \\(x^2+3x+9\\) has no integer factors, so we stop. (Enrichment: you will need this for the Factor Theorem in Grade 12.)`)}
@@ -245,15 +259,23 @@ export const W22 = {
     r`\textbf{Graph link:} the factored form shows the $x$-intercepts at a glance: $y=(x-5)(x+3)$ crosses at $5$ and $-3$.`,
   ],
   examples: [
-    { t: "Greatest common factor (two variables)", body: String.raw`Factor $18x^3y-24x^2y^2+6xy$.\soln Numbers: $\gcd(18,24,6)=6$; variables: $xy$ is in every term. GCF $=6xy$. \\ Divide each term: $3x^2,\ -4xy,\ 1$. \\ $=6xy(3x^2-4xy+1)$ --- note the last term leaves a \emph{1}, not nothing.` },
-    { t: "Common binomial factor", body: String.raw`Factor $5x(2x+1)-3(2x+1)$.\soln The bracket $(2x+1)$ appears in both terms: take it out. \\ $=${w2.tex}$ \quad (expanded: $${ptex(w2.poly)}$).` },
-    { t: "Grouping", body: String.raw`Factor $6x^3+9x^2-10x-15$.\soln Pair the terms: $(6x^3+9x^2)+(-10x-15)=3x^2(2x+3)-5(2x+3)$. \\ The brackets match, so take out $(2x+3)$: $${w3.tex}$. \\ Note the $-5$: taking out $-5$ from $-10x-15$ keeps the brackets equal.` },
+    { t: "Greatest common factor (two variables)", body: String.raw`Factor $18x^3y-24x^2y^2+6xy$.\soln Numbers: $\gcd(18,24,6)=6$; variables: $xy$ is in every term. GCF $=6xy$. \\ Divide each term: $3x^2,\ -4xy,\ 1$. \\ $=6xy(3x^2-4xy+1)$ --- note the last term leaves a \emph{1}, not nothing. \\ \textbf{Check:} at $x=y=1$: $18-24+6=0$, and $6(3-4+1)=0$ \checkmark` +
+      pgf({ curves: [{ f: "18*x^3-24*x^2+6*x" }], bounds: [-1, 2, -20, 40], xt: 1, yt: 10, note: "With $y=1$." }) },
+    { t: "Common binomial factor", body: String.raw`Factor $5x(2x+1)-3(2x+1)$.\soln The bracket $(2x+1)$ appears in both terms: take it out. \\ $=${w2.tex}$ \quad (expanded: $${ptex(w2.poly)}$). \\ \textbf{Check:} at $x=0$: $0-3=-3$, and $(1)(-3)=-3$ \checkmark` +
+      pgf({ curves: [{ f: "(2*x+1)*(5*x-3)" }], bounds: [-3, 3, -10, 30], dots: [[-0.5, 0, "(-0.5,0)"], [0.6, 0, "(0.6,0)"]], xt: 1, yt: 5 }) },
+    { t: "Grouping", body: String.raw`Factor $6x^3+9x^2-10x-15$.\soln Pair the terms: $(6x^3+9x^2)+(-10x-15)=3x^2(2x+3)-5(2x+3)$. \\ The brackets match, so take out $(2x+3)$: $${w3.tex}$. \\ Note the $-5$: taking out $-5$ from $-10x-15$ keeps the brackets equal. \\ \textbf{Check:} at $x=1$: $6+9-10-15=-10$, and $(5)(3-5)=-10$ \checkmark` +
+      pgf({ curves: [{ f: "6*x^3+9*x^2-10*x-15" }], bounds: [-3, 3, -30, 30], dots: [[-1.5, 0, "(-1.5,0)"]], xt: 1, yt: 10 }) },
     { t: "Simple trinomial", body: String.raw`Factor $x^2-2x-48$.\soln Product $-48$, sum $-2$. Opposite signs; the larger number is negative: $-8$ and $6$. \\ $=${w4.tex}$. Check: $x^2+6x-8x-48$ \checkmark.` },
-    { t: "Complex trinomial by decomposition", body: String.raw`Factor $10x^2-x-21$.\soln $ac=-210$; we need product $-210$ and sum $-1$: $14$ and $-15$. \\ $10x^2+14x-15x-21=2x(5x+7)-3(5x+7)$. \\ $=${w5.tex}$.` },
-    { t: "Difference of squares and perfect squares", body: String.raw`Factor (a) $64x^2-49$ \quad (b) $16x^2+40x+25$.\soln (a) $(8x)^2-7^2=${w6a.tex}$. \\ (b) $(4x)^2$, $5^2$ and $2(4x)(5)=40x$ \checkmark, so $=${w6b.tex}$.` },
-    { t: "Factor completely", body: String.raw`Factor (a) $5x^3-45x$ \quad (b) $-3x^2+3x+36$.\soln (a) $5x(x^2-9)=${w7a.tex}$. \\ (b) Take out $-3$: $-3(x^2-x-12)$; product $-12$, sum $-1$: $-4,3$. $=${w7b.tex}$.` },
-    { t: "Quadratic form", body: String.raw`Factor $x^4-5x^2+4$.\soln Let $u=x^2$: $u^2-5u+4=(u-1)(u-4)$. \\ Back-substitute: $(x^2-1)(x^2-4)=${w8.tex}$.` },
-    { t: "Application: when does the ball land?", body: String.raw`A ball's height is $h=-5t^2+15t+20$ (metres, $t$ in seconds). When does it hit the ground?\soln Factor: $h=${tt(w9.tex)}$. \\ $h=0$ when $t-4=0$ or $t+1=0$: $t=4$ or $t=-1$. Time cannot be negative, so the ball lands at $t=4$ s. \\ The zeros $-1$ and $4$ are symmetric about $t=1.5$, so the maximum is at $t=1.5$ s.` },
+    { t: "Complex trinomial by decomposition", body: String.raw`Factor $10x^2-x-21$.\soln $ac=-210$; we need product $-210$ and sum $-1$: $14$ and $-15$. \\ $10x^2+14x-15x-21=2x(5x+7)-3(5x+7)$. \\ $=${w5.tex}$. \\ \textbf{Check:} at $x=1$: $10-1-21=-12$, and $(12)(-1)=-12$ \checkmark` +
+      pgf({ curves: [{ f: "10*x^2-x-21" }], bounds: [-3, 3, -24, 20], dots: [[-1.4, 0, "(-1.4,0)"], [1.5, 0, "(1.5,0)"]], xt: 1, yt: 4 }) },
+    { t: "Difference of squares and perfect squares", body: String.raw`Factor (a) $64x^2-49$ \quad (b) $16x^2+40x+25$.\soln (a) $(8x)^2-7^2=${w6a.tex}$. \\ (b) $(4x)^2$, $5^2$ and $2(4x)(5)=40x$ \checkmark, so $=${w6b.tex}$. \\ \textbf{Check:} at $x=1$: (a) $15=(1)(15)$; (b) $81=9^2$ \checkmark` +
+      pgf({ curves: [{ f: "64*x^2-49" }, { f: "(4*x+5)^2", color: "red!75!black" }], bounds: [-3, 3, -50, 60], xt: 1, yt: 10 }) },
+    { t: "Factor completely", body: String.raw`Factor (a) $5x^3-45x$ \quad (b) $-3x^2+3x+36$.\soln (a) $5x(x^2-9)=${w7a.tex}$. \\ (b) Take out $-3$: $-3(x^2-x-12)$; product $-12$, sum $-1$: $-4,3$. $=${w7b.tex}$. \\ \textbf{Check:} at $x=1$: (a) $-40=5(1)(-2)(4)$; (b) $36=-3(-3)(4)$ \checkmark` +
+      pgf({ curves: [{ f: "5*x^3-45*x" }, { f: "-3*x^2+3*x+36", color: "red!75!black" }], bounds: [-5, 5, -80, 80], xt: 1, yt: 20 }) },
+    { t: "Quadratic form", body: String.raw`Factor $x^4-5x^2+4$.\soln Let $u=x^2$: $u^2-5u+4=(u-1)(u-4)$. \\ Back-substitute: $(x^2-1)(x^2-4)=${w8.tex}$. \\ \textbf{Check:} at $x=0$: $4$, and $(-1)(1)(-2)(2)=4$ \checkmark` +
+      pgf({ curves: [{ f: "x^4-5*x^2+4" }], bounds: [-3, 3, -4, 10], dots: [[1, 0, "1"], [-1, 0, "-1"], [2, 0, "2"], [-2, 0, "-2"]], xt: 1, yt: 2 }) },
+    { t: "Application: when does the ball land?", body: String.raw`A ball's height is $h=-5t^2+15t+20$ (metres, $t$ in seconds). When does it hit the ground?\soln Factor: $h=${tt(w9.tex)}$. \\ $h=0$ when $t-4=0$ or $t+1=0$: $t=4$ or $t=-1$. Time cannot be negative, so the ball lands at $t=4$ s. \\ The zeros $-1$ and $4$ are symmetric about $t=1.5$, so the maximum is at $t=1.5$ s.` +
+      pgf({ curves: [{ f: "-5*x^2+15*x+20" }], bounds: [0, 5, 0, 35], dots: [[4, 0, "(4,0)"], [0, 20, "(0,20)"]], xt: 1, yt: 5 }) },
     { t: "Reading a graph from the factored form", body: String.raw`Factor $y=x^2-2x-15$ and describe its graph.\soln $y=${w10.tex}$: $x$-intercepts $5$ and $-3$; $y$-intercept $-15$; opens up. The vertex lies halfway between the intercepts, at $x=1$, where $y=-16$.` +
       pgf({ curves: [{ f: "x^2-2*x-15" }], bounds: [-5, 7, -18, 10], dots: [[5, 0, "(5,0)"], [-3, 0, "(-3,0)"], [0, -15, "(0,-15)"], [1, -16, "(1,-16)"]], xt: 1, yt: 4, note: "The factors give the intercepts; symmetry gives the vertex." }) },
   ],

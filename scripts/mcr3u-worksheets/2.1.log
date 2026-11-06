@@ -776,95 +776,95 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 12.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <9> on input line 44.
+(Font)              <5> on input line 33.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 44.
+(Font)              <9> on input line 40.
  [1
 
 ]
-[2] [3]
-Overfull \hbox (0.79999pt too wide) in paragraph at lines 81--81
+[2] [3] [4] [5] [6]
+Overfull \hbox (0.79999pt too wide) in paragraph at lines 98--98
 [][][][] 
  []
 
 
-Overfull \hbox (0.79999pt too wide) in paragraph at lines 85--85
+Overfull \hbox (0.79999pt too wide) in paragraph at lines 102--102
 [][][][] 
  []
 
 
-Overfull \hbox (0.79999pt too wide) in paragraph at lines 89--89
+Overfull \hbox (0.79999pt too wide) in paragraph at lines 106--106
 [][][][] 
  []
 
 
-Overfull \hbox (0.79999pt too wide) in paragraph at lines 93--93
+Overfull \hbox (0.79999pt too wide) in paragraph at lines 110--110
 [][][][] 
  []
 
 
-Overfull \hbox (0.79999pt too wide) in paragraph at lines 97--97
+Overfull \hbox (0.79999pt too wide) in paragraph at lines 114--114
 [][][][] 
  []
 
-[4
+[7
 
 ]
-Overfull \hbox (0.79999pt too wide) in paragraph at lines 101--101
+Overfull \hbox (0.79999pt too wide) in paragraph at lines 118--118
 [][][][] 
  []
 
 
-Overfull \hbox (0.79999pt too wide) in paragraph at lines 105--105
+Overfull \hbox (0.79999pt too wide) in paragraph at lines 122--122
 [][][][] 
  []
 
 
-Overfull \hbox (0.79999pt too wide) in paragraph at lines 109--109
+Overfull \hbox (0.79999pt too wide) in paragraph at lines 126--126
 [][][][] 
  []
 
-[5]
-Overfull \hbox (0.79999pt too wide) in paragraph at lines 113--113
-[][][][] 
- []
-
-
-Overfull \hbox (0.79999pt too wide) in paragraph at lines 124--124
+[8]
+Overfull \hbox (0.79999pt too wide) in paragraph at lines 130--130
 [][][][] 
  []
 
 
-Overfull \hbox (0.79999pt too wide) in paragraph at lines 128--128
-[][][][] 
- []
-
-[6]
-Overfull \hbox (0.79999pt too wide) in paragraph at lines 132--132
+Overfull \hbox (0.79999pt too wide) in paragraph at lines 141--141
 [][][][] 
  []
 
 
-Overfull \hbox (0.79999pt too wide) in paragraph at lines 136--136
+Overfull \hbox (0.79999pt too wide) in paragraph at lines 145--145
+[][][][] 
+ []
+
+[9]
+Overfull \hbox (0.79999pt too wide) in paragraph at lines 149--149
 [][][][] 
  []
 
 
-Overfull \hbox (0.79999pt too wide) in paragraph at lines 140--140
+Overfull \hbox (0.79999pt too wide) in paragraph at lines 153--153
 [][][][] 
  []
 
-[7] [8]
+
+Overfull \hbox (0.79999pt too wide) in paragraph at lines 157--157
+[][][][] 
+ []
+
+[10] [11]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 150.
+(Font)              <10> on input line 167.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 150.
+(Font)              <7> on input line 167.
 
-Overfull \hbox (50.27423pt too wide) in paragraph at lines 160--166
+Overfull \hbox (50.27423pt too wide) in paragraph at lines 177--183
  [] 
  []
 
-[9
+[12
 
 ] (2.1.aux) )
-Output written on 2.1.xdv (9 pages, 127556 bytes).
+Output written on 2.1.xdv (12 pages, 250204 bytes).

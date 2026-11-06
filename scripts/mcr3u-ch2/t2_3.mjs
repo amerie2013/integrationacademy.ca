@@ -119,39 +119,49 @@ const lessonHtml = r`<div class="lecture-box">
 
   <h2>🔵 Examples</h2>
   ${ex("Example 1: Finding restrictions", `State the restrictions on ${M(L1.exp)}.`, [
+    `<b>Rule.</b> Division by 0 is not defined, so any \\(x\\) that makes the denominator 0 must be excluded.`,
     `Only the denominator matters. Factor it: \\(x^2-4x+3=(x-1)(x-3)\\).`,
     `Set each factor to zero: \\(x-1=0\\) and \\(x-3=0\\).`,
-  ], `${M(neTex(L1.d))} (that is, \\(x\\ne1\\) and \\(x\\ne3\\)). The numerator \\(3x-1\\) never creates a restriction — a numerator of 0 is allowed.`)}
+    `<b>Check.</b> At \\(x=1\\), the denominator is \\(1-4+3=0\\). At \\(x=3\\), it is \\(9-12+3=0\\) ✓. The graph has vertical asymptotes at both.`,
+  ], `${M(neTex(L1.d))} (that is, \\(x\\ne1\\) and \\(x\\ne3\\)). The numerator \\(3x-1\\) never creates a restriction — a numerator of 0 is allowed.`, gframe(["y = (3*x-1)/((x-1)*(x-3))"], { title: "No graph exists at x = 1 or x = 3", ...gview(-3, 7, -12, 12) }))}
   ${ex("Example 2: Monomials", `Simplify ${M("\\dfrac{18a^3b^2}{24a^2b^5}")}.`, [
+    `<b>Rule.</b> Only common factors cancel. For powers, subtract the exponents.`,
     `Divide numbers by their GCF, \\(6\\): \\(\\dfrac{3}{4}\\).`,
     `Subtract exponents: \\(a^{3-2}=a\\) in the numerator; \\(b^{2-5}=b^{-3}\\), so \\(b^3\\) goes to the denominator.`,
-  ], `${M("\\dfrac{3a}{4b^3}")}, with \\(a\\ne0,\\ b\\ne0\\).`)}
+    `<b>Check with</b> \\(a=2,\\ b=1\\). Original: \\(\\frac{18(8)}{24(4)}=\\frac{144}{96}=1.5\\). Answer: \\(\\frac{3(2)}{4}=1.5\\) ✓`,
+  ], `${M("\\dfrac{3a}{4b^3}")}, with \\(a\\ne0,\\ b\\ne0\\).`, gframe(["y = 0.75*x"], { title: "With b = 1, the expression is the line 3a/4", labels: [{ x: 2, y: 1.5, t: "(2, 1.5)" }], ...gview(-4, 4, -4, 4) }))}
   ${ex("Example 3: Trinomial and difference of squares", `Simplify ${M(L3o.exp)} and state the restrictions.`, [
     `Factor: numerator \\((x-3)(x+3)\\); denominator \\(x^2+x-12=(x+4)(x-3)\\). So the expression is ${M(L3o.fac)}.`,
     `Restrictions come from the <em>original</em> denominator: \\(x\\ne-4\\) and \\(x\\ne3\\).`,
     `Cancel \\((x-3)\\).`,
-  ], `${M(L3s.tex)}, ${M(neTex(L3o.d))}. (At \\(x=3\\) the simplified form would give \\(\\tfrac67\\), but the original is undefined there — a hole at \\((3,\\tfrac67)\\).)`)}
+    `<b>Check with</b> \\(x=0\\). Original: \\(\\frac{-9}{-12}=\\frac34\\). Answer: \\(\\frac34\\) ✓`,
+  ], `${M(L3s.tex)}, ${M(neTex(L3o.d))}. (At \\(x=3\\) the simplified form would give \\(\\tfrac67\\), but the original is undefined there — a hole at \\((3,\\tfrac67)\\).)`, gframe(["y = (x^2-9)/(x^2+x-12)", "y = (x+3)/(x+4)"], { title: "One curve, with a hole at x = 3", ...gview(-10, 8, -6, 8) }))}
   ${ex("Example 4: GCF first", `Simplify ${M(L4o.exp)}.`, [
     `Factor with the GCF first: numerator \\(6x(x-2)\\); denominator \\(3(x^2-4)=3(x-2)(x+2)\\).`,
     `Cancel the number \\(6\\div3=2\\) and the factor \\((x-2)\\).`,
-  ], `${M(L4s.tex)}, ${M(neTex(L4o.d))}.`)}
+    `<b>Check with</b> \\(x=1\\). Original: \\(\\frac{6-12}{3-12}=\\frac{-6}{-9}=\\frac23\\). Answer: \\(\\frac{2}{3}\\) ✓`,
+  ], `${M(L4s.tex)}, ${M(neTex(L4o.d))}.`, gframe(["y = (6*x^2-12*x)/(3*x^2-12)", "y = 2*x/(x+2)"], { title: "One curve, with a hole at x = 2", ...gview(-8, 8, -6, 10) }))}
   ${ex("Example 5: Opposite factors", `Simplify (a) ${M("\\dfrac{4-x}{x-4}")} and (b) ${M("\\dfrac{x^2-25}{5-x}")}.`, [
     `(a) \\(4-x=-(x-4)\\), so \\(\\dfrac{-(x-4)}{x-4}=-1\\).`,
     `(b) Rewrite \\(5-x=-(x-5)\\): \\(\\dfrac{(x-5)(x+5)}{-(x-5)}=-(x+5)\\).`,
-  ], `(a) \\(-1\\), \\(x\\ne4\\); (b) \\(-x-5\\), \\(x\\ne5\\). Spotting that two brackets are <em>opposites</em> is a major time-saver.`)}
+    `<b>Check (b) with</b> \\(x=0\\). Original: \\(\\frac{-25}{5}=-5\\). Answer: \\(-0-5=-5\\) ✓`,
+  ], `(a) \\(-1\\), \\(x\\ne4\\); (b) \\(-x-5\\), \\(x\\ne5\\). Spotting that two brackets are <em>opposites</em> is a major time-saver.`, gframe(["y = -x-5"], { title: "(b) A line, with a hole at x = 5", ...gview(-10, 8, -14, 6) }))}
   ${ex("Example 6: A complex trinomial", `Simplify ${M(L6o.exp)}.`, [
     `Decompose each: \\(2x^2+7x-4=(2x-1)(x+4)\\) and \\(2x^2-7x+3=(2x-1)(x-3)\\).`,
     `Cancel \\((2x-1)\\). Restrictions: \\(x\\ne\\tfrac12\\) and \\(x\\ne3\\).`,
-  ], `${M(L6s.tex)}, ${M(neTex(L6o.d))}.`)}
+    `<b>Check with</b> \\(x=0\\). Original: \\(\\frac{-4}{3}\\). Answer: \\(\\frac{4}{-3}\\) ✓`,
+  ], `${M(L6s.tex)}, ${M(neTex(L6o.d))}.`, gframe(["y = (2*x^2+7*x-4)/(2*x^2-7*x+3)", "y = (x+4)/(x-3)"], { title: "One curve, with a hole at x = 1/2", ...gview(-8, 10, -8, 10) }))}
   ${ex("Example 7: Multiplying", `Simplify ${M(L7a.exp + "\\times" + L7b.exp)}.`, [
     `Factor everything: ${M(L7a.fac + "\\times" + L7b.fac)}.`,
     `You may cancel <em>across</em> the fractions: \\((x-4)\\) cancels with \\((x-4)\\) and \\((x-2)\\) with \\((x-2)\\).`,
-  ], `${M(L7s.tex)}, ${M(neTex(L7a.d, L7b.d))}. Restrictions come from <em>every</em> denominator.`)}
+    `<b>Check with</b> \\(x=0\\). Original: \\(\\frac{(-4)(3)}{(-2)(2)}\\times\\frac{-2}{-4}=3\\times\\frac12=\\frac32\\). Answer: \\(\\frac32\\) ✓`,
+  ], `${M(L7s.tex)}, ${M(neTex(L7a.d, L7b.d))}. Restrictions come from <em>every</em> denominator.`, gframe(["y = (x+3)/(x+2)"], { title: "The product simplifies to (x + 3)/(x + 2)", ...gview(-8, 6, -6, 8) }))}
   ${ex("Example 8: Dividing", `Simplify ${M(L8a.exp + "\\div" + L8b.exp)}.`, [
     `Factor: \\(\\dfrac{(x+2)(x+3)}{(x-1)(x+1)}\\div\\dfrac{x+3}{(x+2)(x-1)}\\).`,
     `<strong>Multiply by the reciprocal</strong> of the second fraction: \\(\\dfrac{(x+2)(x+3)}{(x-1)(x+1)}\\times\\dfrac{(x+2)(x-1)}{x+3}\\).`,
     `Cancel \\((x+3)\\) and \\((x-1)\\).`,
-  ], `${M(L8s.tex)}. Restrictions: \\(x\\ne1,-1\\) (first denominator), \\(x\\ne-2,1\\) (second denominator) and also \\(x\\ne-3\\) — we are <em>dividing by</em> \\(\\tfrac{x+3}{\\ldots}\\), which would be dividing by 0. So ${M(neTex(L8a.d, L8b.d, L8b.n))}.`)}
+    `<b>Check with</b> \\(x=0\\). Original: \\(\\frac{6}{-1}\\div\\frac{3}{-2}=(-6)\\left(-\\frac23\\right)=4\\). Answer: \\(\\frac{2^2}{1}=4\\) ✓`,
+  ], `${M(L8s.tex)}. Restrictions: \\(x\\ne1,-1\\) (first denominator), \\(x\\ne-2,1\\) (second denominator) and also \\(x\\ne-3\\) — we are <em>dividing by</em> \\(\\tfrac{x+3}{\\ldots}\\), which would be dividing by 0. So ${M(neTex(L8a.d, L8b.d, L8b.n))}.`, gframe(["y = (x+2)^2/(x+1)"], { title: "The quotient simplifies to (x + 2)²/(x + 1)", ...gview(-6, 6, -14, 14) }))}
   ${ex("Example 9: Hole or asymptote?", `Compare ${M("\\dfrac{x^2-4}{x-2}")} and ${M("\\dfrac{1}{x-2}")}. Both are undefined at \\(x=2\\).`, [
     `The first factors to \\(\\dfrac{(x-2)(x+2)}{x-2}\\) — the factor <em>cancels</em>, leaving \\(x+2\\) with a <strong>hole</strong> at \\((2,4)\\).`,
     `In the second nothing cancels. As \\(x\\to2\\) the denominator shrinks and the values blow up: a <strong>vertical asymptote</strong> at \\(x=2\\).`,
@@ -159,7 +169,7 @@ const lessonHtml = r`<div class="lecture-box">
   ${ex("Example 10: An application — time from distance and speed", `A cyclist rides \\((x^2-4x-12)\\) km at an average speed of \\((x-6)\\) km/h. Write her time, in hours, as a simplified expression.`, [
     `Time \\(=\\) distance \\(\\div\\) speed \\(=\\dfrac{x^2-4x-12}{x-6}=\\dfrac{(x-6)(x+2)}{x-6}\\).`,
     `Cancel \\((x-6)\\). Restriction: \\(x\\ne6\\); and since a speed must be positive, \\(x>6\\).`,
-  ], `Time \\(=(x+2)\\) hours. For \\(x=10\\): the ride is \\(100-40-12=48\\) km at \\(4\\) km/h, which takes \\(12\\) hours \\(=10+2\\) ✓.`)}
+  ], `Time \\(=(x+2)\\) hours. For \\(x=10\\): the ride is \\(100-40-12=48\\) km at \\(4\\) km/h, which takes \\(12\\) hours \\(=10+2\\) ✓.`, gframe([{ kind: "cartesian", expr: "y = x+2", dMin: "6", dMax: "14" }], { title: "Time against x, for speeds above 0", labels: [{ x: 10, y: 12, t: "(10, 12)" }], ...gview(4, 16, 0, 18) }))}
   ${ex("Example 11: Several holes", `Simplify ${M(L11o.exp)} and find the holes in its graph.`, [
     `Factor: \\(\\dfrac{x(x-1)(x+1)}{x(x+1)}\\). Restrictions: \\(x\\ne0\\) and \\(x\\ne-1\\).`,
     `Cancel \\(x(x+1)\\), leaving \\(x-1\\). Evaluate \\(x-1\\) at each restriction to find the holes: \\(x=0\\to-1\\) and \\(x=-1\\to-2\\).`,
@@ -237,14 +247,22 @@ export const W23 = {
     r`\textbf{Hole vs asymptote:} a restriction whose factor cancels is a hole; a restriction that survives in the denominator is a vertical asymptote. Find the hole's $y$ by substituting into the simplified form.`,
   ],
   examples: [
-    { t: "Restrictions", body: String.raw`State the restrictions on $${W1.exp}$.\soln Factor the denominator: $x^2-3x-10=(x-5)(x+2)$. Set each factor to $0$. \\ $${neTex(W1.d)}$. The numerator never creates a restriction.` },
-    { t: "Monomials", body: String.raw`Simplify $\dfrac{20m^4n^2}{35mn^6}$.\soln Numbers: $\dfrac{20}{35}=\dfrac47$. Variables: $m^{4-1}=m^3$ stays on top; $n^{2-6}=n^{-4}$, so $n^4$ goes to the bottom. \\ $=\dfrac{4m^3}{7n^4}$, with $m\ne0,\ n\ne0$.` },
-    { t: "Trinomial and difference of squares", body: String.raw`Simplify $${W3o.exp}$.\soln $\dfrac{(x-4)(x+4)}{(x-4)(x+3)}$; restrictions $${neTex(W3o.d)}$. Cancel $(x-4)$. \\ $=${W3s.tex}$, $${neTex(W3o.d)}$.` },
-    { t: "Complex trinomial", body: String.raw`Simplify $${W4o.exp}$.\soln $4x^2-9=(2x-3)(2x+3)$ and $2x^2+x-6=(2x-3)(x+2)$. \\ Restrictions: $x\ne\tfrac32,\ -2$. Cancel $(2x-3)$. \\ $=${W4s.tex}$.` },
-    { t: "Opposite factors", body: String.raw`Simplify $\dfrac{3-x}{x^2-9}$.\soln $3-x=-(x-3)$ and $x^2-9=(x-3)(x+3)$. \\ $\dfrac{-(x-3)}{(x-3)(x+3)}=-\dfrac{1}{x+3}$, with $x\ne\pm3$.` },
-    { t: "Multiplying", body: String.raw`Simplify $${W6a.exp}\times${W6b.exp}$.\soln Factor: $\dfrac{(x+5)(x-3)}{(x-3)(x+3)}\times\dfrac{x+3}{x+5}$. Restrictions: $${neTex(W6a.d, W6b.d)}$. \\ Everything cancels: $=1$, $${neTex(W6a.d, W6b.d)}$ --- the answer is $1$ \emph{except} at three missing points.` },
-    { t: "Dividing", body: String.raw`Simplify $${W7a.exp}\div${W7b.exp}$.\soln Factor and flip the second fraction: $\dfrac{2(x-2)(x+2)}{(x+3)^2}\times\dfrac{x+3}{x-2}$. \\ Cancel $(x-2)$ and one $(x+3)$: $=${W7s.tex}$. \\ Restrictions: $x\ne-3$ (denominators) and $x\ne2$ (we divided by $\frac{x-2}{x+3}$). So $${neTex(W7a.d, W7b.d, W7b.n)}$.` },
-    { t: "Application: density", body: String.raw`A block has mass $(15x^2-4x-4)$ g and volume $(3x-2)$ cm$^3$. Write its density as a simplified expression and evaluate at $x=2$.\soln Density $=\dfrac{\text{mass}}{\text{volume}}=\dfrac{(5x+2)(3x-2)}{3x-2}=5x+2$ g/cm$^3$, $x\ne\tfrac23$. \\ At $x=2$: $12$ g/cm$^3$. Check: $\dfrac{60-8-4}{4}=12$ \checkmark.` },
+    { t: "Restrictions", body: String.raw`State the restrictions on $${W1.exp}$.\soln Factor the denominator: $x^2-3x-10=(x-5)(x+2)$. Set each factor to $0$. \\ $${neTex(W1.d)}$. The numerator never creates a restriction. \\ \textbf{Check:} at $x=5$: $25-15-10=0$ \checkmark. At $x=-2$: $4+6-10=0$ \checkmark` +
+      pgf({ curves: [{ f: "x^2-3*x-10" }], bounds: [-4, 7, -14, 10], dots: [[5, 0, "(5,0)"], [-2, 0, "(-2,0)"]], xt: 1, yt: 2, note: "The denominator as a graph: its zeros are the restrictions." }) },
+    { t: "Monomials", body: String.raw`Simplify $\dfrac{20m^4n^2}{35mn^6}$.\soln Numbers: $\dfrac{20}{35}=\dfrac47$. Variables: $m^{4-1}=m^3$ stays on top; $n^{2-6}=n^{-4}$, so $n^4$ goes to the bottom. \\ $=\dfrac{4m^3}{7n^4}$, with $m\ne0,\ n\ne0$. \\ \textbf{Check:} at $m=n=1$: $\frac{20}{35}=\frac47$ \checkmark` +
+      pgf({ curves: [{ f: "4*x^3/7" }], bounds: [-2, 2, -5, 5], dots: [[1, 0.57, "(1,4/7)"]], xt: 1, yt: 1, note: "With $n=1$ the expression is $\\frac{4m^3}{7}$." }) },
+    { t: "Trinomial and difference of squares", body: String.raw`Simplify $${W3o.exp}$.\soln $\dfrac{(x-4)(x+4)}{(x-4)(x+3)}$; restrictions $${neTex(W3o.d)}$. Cancel $(x-4)$. \\ $=${W3s.tex}$, $${neTex(W3o.d)}$. \\ \textbf{Check:} at $x=0$: original and simplified are both $\frac43$ \checkmark` +
+      pgf({ curves: [{ f: "(x+4)/(x+3)" }], bounds: [-2, 8, 0, 4], holes: [[4, 1.143]], xt: 1, yt: 1, note: "The simplified curve, with a hole at $x=4$." }) },
+    { t: "Complex trinomial", body: String.raw`Simplify $${W4o.exp}$.\soln $4x^2-9=(2x-3)(2x+3)$ and $2x^2+x-6=(2x-3)(x+2)$. \\ Restrictions: $x\ne\tfrac32,\ -2$. Cancel $(2x-3)$. \\ $=${W4s.tex}$. \\ \textbf{Check:} at $x=0$: $\frac{-9}{-6}=\frac32$, and $\frac{3}{2}$ \checkmark` +
+      pgf({ curves: [{ f: "(2*x+3)/(x+2)" }], bounds: [-1, 6, 0, 3], holes: [[1.5, 1.714]], xt: 1, yt: 1, note: "The simplified curve, with a hole at $x=\\frac32$." }) },
+    { t: "Opposite factors", body: String.raw`Simplify $\dfrac{3-x}{x^2-9}$.\soln $3-x=-(x-3)$ and $x^2-9=(x-3)(x+3)$. \\ $\dfrac{-(x-3)}{(x-3)(x+3)}=-\dfrac{1}{x+3}$, with $x\ne\pm3$. \\ \textbf{Check:} at $x=0$: $\frac{3}{-9}=-\frac13$, and $-\frac13$ \checkmark` +
+      pgf({ curves: [{ f: "-1/(x+3)" }], bounds: [-2, 7, -1.2, 0.2], holes: [[3, -0.167]], xt: 1, yt: 0.2, note: "The simplified curve, with a hole at $x=3$." }) },
+    { t: "Multiplying", body: String.raw`Simplify $${W6a.exp}\times${W6b.exp}$.\soln Factor: $\dfrac{(x+5)(x-3)}{(x-3)(x+3)}\times\dfrac{x+3}{x+5}$. Restrictions: $${neTex(W6a.d, W6b.d)}$. \\ Everything cancels: $=1$, $${neTex(W6a.d, W6b.d)}$ --- the answer is $1$ \emph{except} at three missing points. \\ \textbf{Check:} at $x=0$: $\frac{-15}{-9}\times\frac35=1$ \checkmark` +
+      pgf({ curves: [{ f: "1+0*x" }], bounds: [-6, 5, -1, 3], holes: [[3, 1], [-3, 1], [-5, 1]], xt: 1, yt: 1, note: "The line $y=1$ with three missing points." }) },
+    { t: "Dividing", body: String.raw`Simplify $${W7a.exp}\div${W7b.exp}$.\soln Factor and flip the second fraction: $\dfrac{2(x-2)(x+2)}{(x+3)^2}\times\dfrac{x+3}{x-2}$. \\ Cancel $(x-2)$ and one $(x+3)$: $=${W7s.tex}$. \\ Restrictions: $x\ne-3$ (denominators) and $x\ne2$ (we divided by $\frac{x-2}{x+3}$). So $${neTex(W7a.d, W7b.d, W7b.n)}$.` +
+      pgf({ curves: [{ f: "2*(x+2)/(x+3)" }], bounds: [-2, 8, 0, 3], holes: [[2, 1.6]], xt: 1, yt: 1, note: "The simplified curve, with a hole at $x=2$." }) },
+    { t: "Application: density", body: String.raw`A block has mass $(15x^2-4x-4)$ g and volume $(3x-2)$ cm$^3$. Write its density as a simplified expression and evaluate at $x=2$.\soln Density $=\dfrac{\text{mass}}{\text{volume}}=\dfrac{(5x+2)(3x-2)}{3x-2}=5x+2$ g/cm$^3$, $x\ne\tfrac23$. \\ At $x=2$: $12$ g/cm$^3$. Check: $\dfrac{60-8-4}{4}=12$ \checkmark.` +
+      pgf({ curves: [{ f: "5*x+2" }], bounds: [0, 3, 0, 18], dots: [[2, 12, "(2,12)"]], xt: 1, yt: 2 }) },
     { t: "Finding a hole", body: String.raw`Simplify $y=\dfrac{x^2-x-6}{x-3}$ and find the coordinates of the hole.\soln $\dfrac{(x-3)(x+2)}{x-3}=x+2$, $x\ne3$. \\ At $x=3$ the line has $y=5$, so the hole is at $(3,5)$.` +
       pgf({ curves: [{ f: "x+2" }], bounds: [-4, 6, -3, 9], holes: [[3, 5]], xt: 1, yt: 2, note: "The graph is the line $y=x+2$ with one point removed." }) },
     { t: "Test before you trust", body: String.raw`A student says $\dfrac{x^2+9}{x+3}=x+3$. Test the claim.

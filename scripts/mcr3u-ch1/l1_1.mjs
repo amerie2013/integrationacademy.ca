@@ -1,5 +1,7 @@
 // MCR3U 1.1 — Relations and Functions: representations, the vertical-line test, one-to-one vs many-to-one
 import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, q, num, choice, hard, plane } from "./lib.mjs";
+import { tv } from "../mcr3u-extables.mjs";
+const S = String.raw;
 
 export const TITLE = "1.1 Relations and Functions";
 export const ID = "1dd83ca5-843e-4d6c-a8dd-cf2a2147f35c";
@@ -61,22 +63,46 @@ export const blocks = () => [
   ])}`),
 
   examples([
-    ["Ordered pairs", String.raw`Is \(\{(2,5),(3,-1),(4,5),(7,0)\}\) a function? State its domain and range.`,
-      [String.raw`The x-values \(2,3,4,7\) are all different, so each input has one output.`, String.raw`Two inputs (2 and 4) share the output 5 — allowed.`],
-      String.raw`a many-to-one function; domain \(\{2,3,4,7\}\), range \(\{-1,0,5\}\)`],
-    ["Mapping diagram", String.raw`A mapping diagram has arrows \(-1\to4\), \(0\to2\), \(0\to6\), \(3\to-5\). Is it a function?`,
-      [String.raw`Two arrows leave the input \(0\) (to 2 and to 6).`],
-      "not a function: the input 0 has two outputs"],
-    ["Vertical-line test", String.raw`Use the vertical-line test on \(x=(y+2)^2-3\).`,
-      [String.raw`Solve: \(y=-2\pm\sqrt{x+3}\). The vertex of the sideways parabola is \((-3,-2)\).`, String.raw`The line \(x=1\) meets it at \(y=-2+2=0\) and \(y=-2-2=-4\).`],
-      "not a function — the line x = 1 meets the graph twice",
+    ["Ordered pairs", S`Is \(\{(2,5),(3,-1),(4,5),(7,0)\}\) a function? State its domain and range.`,
+      [S`<b>Definition.</b> A relation is a function if every input (x-value) has exactly one output (y-value). So we look for an x-value that repeats with different y-values.`,
+        S`<b>Organize the pairs in a table.</b> ${tv(["input \\(x\\)", "2", "3", "4", "7"], ["output \\(y\\)", "5", "\\(-1\\)", "5", "0"])}`,
+        S`<b>Test the inputs.</b> The inputs \(2,3,4,7\) are all different, so no input has two outputs. The relation is a function.`,
+        S`<b>Look at the outputs.</b> The inputs 2 and 4 share the output 5. This is allowed: the rule limits outputs per input, not inputs per output. A function like this is called many-to-one.`,
+        S`<b>Domain and range.</b> The domain is the set of inputs. The range is the set of outputs, and each value is listed once, so 5 is not repeated.`,
+        S`<b>Check on the graph.</b> No vertical line passes through two of the plotted points ✓`],
+      S`a many-to-one function; domain \(\{2,3,4,7\}\), range \(\{-1,0,5\}\)`,
+      plane({ view: { xmin: -1, xmax: 8, ymin: -2, ymax: 6 }, points: [{ x: 2, y: 5, label: "(2, 5)", color: "amber" }, { x: 3, y: -1, label: "(3, −1)" }, { x: 4, y: 5, label: "(4, 5)", color: "amber" }, { x: 7, y: 0, label: "(7, 0)" }], step: { x: 1, y: 1 } })],
+    ["Mapping diagram", S`A mapping diagram has arrows \(-1\to4\), \(0\to2\), \(0\to6\), \(3\to-5\). Is it a function?`,
+      [S`<b>What to test.</b> In a mapping diagram, each arrow joins an input to an output. A function allows only one arrow to leave each input.`,
+        S`<b>Count the arrows leaving each input.</b> ${tv(["input", "\\(-1\\)", "\\(0\\)", "\\(3\\)"], ["outputs", "4", "2 and 6", "\\(-5\\)"], ["arrows", "1", "2", "1"])}`,
+        S`<b>Apply the test.</b> The input 0 has two arrows, to 2 and to 6. One input would give two different answers, so the rule fails.`,
+        S`<b>Check on the graph.</b> Plot the arrows as points: \((-1,4),(0,2),(0,6),(3,-5)\). The vertical line \(x=0\) passes through two of them, which agrees with the test ✓`],
+      "not a function: the input 0 has two outputs",
+      plane({ view: { xmin: -3, xmax: 5, ymin: -6, ymax: 7 }, points: [{ x: -1, y: 4, label: "(−1, 4)" }, { x: 0, y: 2, label: "(0, 2)", color: "red" }, { x: 0, y: 6, label: "(0, 6)", color: "red" }, { x: 3, y: -5, label: "(3, −5)" }], vlines: [{ x: 0, color: "amber", dash: true }], step: { x: 1, y: 1 } })],
+    ["Vertical-line test", S`Use the vertical-line test on \(x=(y+2)^2-3\).`,
+      [S`<b>The test.</b> A graph is a function only if no vertical line crosses it more than once. A vertical line fixes one x-value, so two crossings mean one input with two outputs.`,
+        S`<b>Solve for \(y\) to see the outputs.</b> Add 3: \(x+3=(y+2)^2\). Take both square roots: \(y+2=\pm\sqrt{x+3}\). So \(y=-2\pm\sqrt{x+3}\). The \(\pm\) already warns of two outputs.`,
+        S`<b>Describe the graph.</b> This is a sideways parabola opening right, with vertex \((-3,-2)\).`,
+        S`<b>Test one vertical line,</b> \(x=1\): \(y=-2\pm\sqrt4\), so \(y=-2+2=0\) and \(y=-2-2=-4\). The line meets the curve at \((1,0)\) and \((1,-4)\).`,
+        S`<b>Check in the equation.</b> \((0+2)^2-3=1\) ✓ and \((-4+2)^2-3=1\) ✓. Both points really are on the curve.`],
+      "not a function: the line x = 1 meets the graph twice",
       plane({ view: { xmin: -4, xmax: 6, ymin: -7, ymax: 3 }, curves: sideways(-3, -2), vlines: [{ x: 1, color: "amber", dash: true }], points: [{ x: 1, y: 0, label: "(1, 0)" }, { x: 1, y: -4, label: "(1, −4)" }], step: { x: 1, y: 1 } })],
-    ["Testing equations", String.raw`Which equation defines \(y\) as a function of \(x\): (a) \(2x-3y=6\); (b) \(x^2+y^2=36\)?`,
-      [String.raw`(a) \(y=\frac{2x-6}{3}\): one value of \(y\) for each \(x\).`, String.raw`(b) \(y=\pm\sqrt{36-x^2}\): at \(x=0\), \(y=6\) or \(y=-6\).`],
-      "(a) is a function; (b), a circle, is not"],
+    ["Testing equations", S`Which equation defines \(y\) as a function of \(x\): (a) \(2x-3y=6\); (b) \(x^2+y^2=36\)?`,
+      [S`<b>Method.</b> Solve each equation for \(y\), then ask whether one \(x\) can give two values of \(y\).`,
+        S`<b>Equation (a).</b> Subtract \(2x\): \(-3y=6-2x\). Divide by \(-3\): \(y=\frac{2x-6}{3}\). Each \(x\) gives one result, since the steps are one subtraction and one division. So (a) is a function, and its graph is a line.`,
+        S`<b>Equation (b).</b> Subtract \(x^2\): \(y^2=36-x^2\). A square has two roots, so \(y=\pm\sqrt{36-x^2}\).`,
+        S`<b>Test a value in (b).</b> At \(x=0\): \(y=\pm6\). The input 0 has two outputs, so (b) is not a function.`,
+        S`<b>Check on the graph.</b> The vertical line \(x=0\) crosses the line once, but crosses the circle at \((0,6)\) and \((0,-6)\) ✓`],
+      "(a) is a function; (b), a circle, is not",
+      plane({ view: { xmin: -8, xmax: 8, ymin: -8, ymax: 8 }, lines: [{ m: 2 / 3, b: -2, color: "blue" }], curves: [{ f: (x) => Math.sqrt(Math.max(0, 36 - x * x)), a: -6, b: 6, color: "violet" }, { f: (x) => -Math.sqrt(Math.max(0, 36 - x * x)), a: -6, b: 6, color: "violet" }], vlines: [{ x: 0, color: "amber", dash: true }], points: [{ x: 0, y: 6, label: "(0, 6)", color: "red" }, { x: 0, y: -6, label: "(0, −6)", color: "red" }, { x: 0, y: -2, label: "(0, −2)" }], step: { x: 2, y: 2 } }, "blue (a), violet (b), dashed the line x = 0")],
     ["Relations in words", "Is “each person → their birthday” a function? Is “each birthday → a person born that day”?",
-      ["Each person has exactly one birthday, so the first relation is a function (many people share a birthday: many-to-one).", "One birthday can belong to many people, so the reverse relation has inputs with several outputs."],
-      "the first is a function; the reverse is not"],
+      [S`<b>Identify the inputs.</b> In a relation described in words, the item before the arrow is the input. The question is always: can one input have two outputs?`,
+        S`<b>First relation.</b> The input is a person. Each person has exactly one birthday, so each input has one output. It is a function.`,
+        S`<b>Its type.</b> Many people can share a birthday, so several inputs can have one output. This makes it many-to-one, which is allowed.`,
+        S`<b>Reverse relation.</b> Now the input is a date. One date can belong to many people, so one input can have several outputs. It is not a function.`,
+        S`<b>Check with a small example.</b> ${tv(["person", "Ana", "Ben", "Cal"], ["birthday", "May 3", "May 3", "Oct 9"])} Reading down, each person has one date ✓. Reading up, May 3 has two people, so the reverse fails. On the graph, the first set of points has no vertical repeats and the reversed set does.`],
+      "the first is a function; the reverse is not",
+      plane({ view: { xmin: 0, xmax: 4, ymin: 0, ymax: 4 }, points: [{ x: 1, y: 1, label: "Ana, May 3", color: "violet" }, { x: 2, y: 1, label: "Ben, May 3", color: "violet" }, { x: 3, y: 3, label: "Cal, Oct 9", color: "violet" }], step: { x: 1, y: 1 }, xlabel: "person", ylabel: "date" })],
   ]),
 
   practice([

@@ -1,6 +1,7 @@
 // MCR3U 7.4 — Sequences Defined by Two Previous Terms: Fibonacci and related sequences, working backwards, ratio of
 // consecutive terms (golden ratio), counting problems such as climbing stairs
 import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, q, num, choice, hard, plane } from "./lib.mjs";
+import { tv } from "../mcr3u-extables.mjs";
 
 export const TITLE = "7.4 Sequences Defined by Two Previous Terms";
 export const ID = "5c3e0001-0001-4001-8001-000000000704";
@@ -52,19 +53,38 @@ export const blocks = () => [
 
   examples([
     ["Fibonacci terms", "Find t₁₀ of the Fibonacci sequence.",
-      ["1, 1, 2, 3, 5, 8, 13, 21, 34, 55."],
-      S`\(t_{10}=55\)`],
+      [S`<b>Rule.</b> \(t_1=t_2=1\), and each later term is the sum of the two before it: \(t_n=t_{n-1}+t_{n-2}\).`,
+        S`<b>Build the list.</b> ${tv(["\\(n\\)", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"], ["\\(t_n\\)", "1", "1", "2", "3", "5", "8", "13", "21", "34", "55"])}`,
+        S`<b>Why two starting values?</b> The rule uses two earlier terms, so it cannot begin with only one.`,
+        S`<b>Check.</b> \(t_{10}=t_9+t_8=34+21=55\) ✓`],
+      S`\(t_{10}=55\)`,
+      plane({ view: { xmin: 0, xmax: 11, ymin: 0, ymax: 60 }, points: F.slice(0, 10).map((v, i) => ({ x: i + 1, y: v, label: i === 9 ? "(10, 55)" : undefined, color: i === 9 ? "amber" : "blue" })), step: { x: 1, y: 5 }, xlabel: "n", ylabel: "tₙ" })],
     ["Different starting terms", S`List the first seven terms of \(t_1=2\), \(t_2=1\), \(t_n=t_{n-1}+t_{n-2}\).`,
-      ["2, 1, 3, 4, 7, 11, 18."],
-      "2, 1, 3, 4, 7, 11, 18"],
+      [S`<b>Same rule, new start.</b> Only the first two values have changed.`,
+        S`<b>Build.</b> \(t_3=1+2=3\), \(t_4=3+1=4\), \(t_5=4+3=7\), \(t_6=7+4=11\), \(t_7=11+7=18\).`,
+        S`<b>Note the order.</b> The list starts by going down, from 2 to 1, and then grows.`,
+        S`<b>Check.</b> Each term equals the sum of the two before it: \(18=11+7\) ✓`],
+      "2, 1, 3, 4, 7, 11, 18",
+      plane({ view: { xmin: 0, xmax: 8, ymin: 0, ymax: 20 }, points: [[1, 2], [2, 1], [3, 3], [4, 4], [5, 7], [6, 11], [7, 18]].map(([x, y]) => ({ x, y, label: `(${x}, ${y})` })), step: { x: 1, y: 2 }, xlabel: "n", ylabel: "tₙ" })],
     ["Ratios", "Compute the ratios 21 ÷ 13 and 34 ÷ 21 in the Fibonacci sequence.",
-      [S`\(\frac{21}{13}\approx1.6154\), \(\frac{34}{21}\approx1.6190\).`, "They are closing in on 1.618 from both sides."],
-      "≈ 1.6154 and 1.6190"],
+      [S`<b>First ratio.</b> \(\frac{21}{13}\approx1.6154\).`,
+        S`<b>Second ratio.</b> \(\frac{34}{21}\approx1.6190\).`,
+        S`<b>More ratios.</b> ${tv(["ratio", "\\(\\frac21\\)", "\\(\\frac32\\)", "\\(\\frac53\\)", "\\(\\frac85\\)", "\\(\\frac{13}8\\)", "\\(\\frac{21}{13}\\)", "\\(\\frac{34}{21}\\)"], ["value", "2", "1.5", "1.667", "1.6", "1.625", "1.6154", "1.6190"])}`,
+        S`<b>Pattern.</b> The values go above and below, and close in on about \(1.618\), the golden ratio. The graph shows this zigzag.`],
+      "≈ 1.6154 and 1.6190; they approach 1.618",
+      plane({ view: { xmin: 2, xmax: 11, ymin: 1.4, ymax: 2.1 }, points: F.slice(1, 10).map((v, i) => ({ x: i + 3, y: F[i + 2] / F[i + 1] })), lines: [{ m: 0, b: 1.618, color: "amber", dash: true }], step: { x: 1, y: 0.1 }, xlabel: "n", ylabel: "ratio" })],
     ["Working backwards", S`A sequence follows \(t_n=t_{n-1}+t_{n-2}\) with \(t_5=7\) and \(t_6=11\). Find \(t_3\) and \(t_4\).`,
-      [S`\(t_4=t_6-t_5=4\).`, S`\(t_3=t_5-t_4=3\).`],
-      S`\(t_3=3\), \(t_4=4\)`],
+      [S`<b>Rearrange the rule.</b> \(t_n=t_{n-1}+t_{n-2}\) gives \(t_{n-2}=t_n-t_{n-1}\). So we can run the sequence in reverse by subtracting.`,
+        S`<b>Find \(t_4\).</b> \(t_6=t_5+t_4\), so \(t_4=11-7=4\).`,
+        S`<b>Find \(t_3\).</b> \(t_5=t_4+t_3\), so \(t_3=7-4=3\).`,
+        S`<b>Check forward.</b> \(3+4=7\) ✓ and \(4+7=11\) ✓`],
+      S`\(t_3=3\), \(t_4=4\)`,
+      plane({ view: { xmin: 2, xmax: 7, ymin: 0, ymax: 13 }, points: [{ x: 3, y: 3, label: "(3, 3)", color: "amber" }, { x: 4, y: 4, label: "(4, 4)", color: "amber" }, { x: 5, y: 7, label: "(5, 7)" }, { x: 6, y: 11, label: "(6, 11)" }], step: { x: 1, y: 1 }, xlabel: "n", ylabel: "tₙ" })],
     ["A different two-term rule", S`List six terms of \(t_1=t_2=1\), \(t_n=t_{n-1}+2t_{n-2}\), and describe the ratios.`,
-      [S`\(1,1,3,5,11,21\).`, S`Ratios \(1,3,1.67,2.2,1.91,\ldots\) approach 2.`],
+      [S`<b>Build.</b> \(t_3=1+2(1)=3\), \(t_4=3+2(1)=5\), \(t_5=5+2(3)=11\), \(t_6=11+2(5)=21\). Double the term two places back, not the last term.`,
+        S`<b>Ratios.</b> ${tv(["ratio", "\\(\\frac11\\)", "\\(\\frac31\\)", "\\(\\frac53\\)", "\\(\\frac{11}5\\)", "\\(\\frac{21}{11}\\)"], ["value", "1", "3", "1.67", "2.2", "1.91"])}`,
+        S`<b>Pattern.</b> The values go above and below 2, and get closer each time.`,
+        S`<b>Explain.</b> If the ratio settles at \(x\), the rule gives \(x^2=x+2\), so \((x-2)(x+1)=0\) and \(x=2\) ✓`],
       "1, 1, 3, 5, 11, 21; ratios → 2",
       plane({ view: { xmin: 1, xmax: 11, ymin: 0.5, ymax: 3.2 }, points: fib(11, 1, 1, 2).slice(1).map((v, i, arr) => ({ x: i + 2, y: v / fib(11, 1, 1, 2)[i] })), lines: [{ m: 0, b: 2, color: "amber", dash: true }], step: { x: 1, y: 0.5 }, xlabel: "n", ylabel: "ratio" })],
   ]),

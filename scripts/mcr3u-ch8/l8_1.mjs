@@ -2,6 +2,7 @@
 // simple interest as an arithmetic sequence and a linear function
 import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, q, num, choice, hard, plane } from "./lib.mjs";
 import { m } from "./fin.mjs";
+import { tv } from "../mcr3u-extables.mjs";
 
 export const TITLE = "8.1 Simple Interest";
 export const ID = "137abc87-9401-4ea2-80d9-a91681aeef52";
@@ -51,20 +52,43 @@ export const blocks = () => [
 
   examples([
     ["Interest and amount", "Find the simple interest and the amount when 2500 dollars is invested at 4%/a for 3 years.",
-      [S`\(I=2500(0.04)(3)=300\).`, S`\(A=2500+300\).`],
-      "I = 300 dollars, A = 2800 dollars"],
+      [S`<b>Formula.</b> Simple interest is paid only on the original principal: \(I=Prt\), with \(r\) as a decimal and \(t\) in years.`,
+        S`<b>Identify.</b> \(P=2500\), \(r=0.04\), \(t=3\).`,
+        S`<b>Interest.</b> \(I=2500(0.04)(3)=300\).`,
+        S`<b>Amount.</b> \(A=P+I=2500+300=2800\).`,
+        S`<b>Check year by year.</b> ${tv(["year", "0", "1", "2", "3"], ["amount (dollars)", "2500", "2600", "2700", "2800"])} Each year adds \(2500(0.04)=100\) ✓`],
+      "I = 300 dollars, A = 2800 dollars",
+      plane({ view: { xmin: 0, xmax: 4, ymin: 2400, ymax: 2900 }, lines: [{ m: 100, b: 2500, color: "violet" }], points: [{ x: 0, y: 2500, label: "(0, 2500)" }, { x: 1, y: 2600 }, { x: 2, y: 2700 }, { x: 3, y: 2800, label: "(3, 2800)", color: "amber" }], step: { x: 1, y: 100 }, xlabel: "t (years)", ylabel: "A" })],
     ["Time in months", "Find the simple interest on 1800 dollars at 5.5%/a for 8 months.",
-      [S`\(t=\frac8{12}\): \(I=1800(0.055)\left(\frac8{12}\right)\).`],
-      `${m(1800 * 0.055 * (8 / 12))} dollars`],
+      [S`<b>Match the units.</b> The rate is per year, so time must be in years: \(t=\frac8{12}\).`,
+        S`<b>Substitute.</b> \(I=1800(0.055)\left(\frac8{12}\right)\).`,
+        S`<b>Evaluate.</b> One year's interest is \(1800(0.055)=99\). Then \(99\times\frac8{12}=66\).`,
+        S`<b>Sense check.</b> 8 months is two thirds of a year, and \(66\) is two thirds of 99 ✓. Using \(t=8\) would give 792, which is far too large.`],
+      `${m(1800 * 0.055 * (8 / 12))} dollars`,
+      plane({ view: { xmin: 0, xmax: 13, ymin: 0, ymax: 110 }, lines: [{ m: 99 / 12, b: 0, color: "violet" }], points: [{ x: 8, y: 66, label: "(8, 66)", color: "amber" }, { x: 12, y: 99, label: "(12, 99)" }], step: { x: 1, y: 10 }, xlabel: "months", ylabel: "I" })],
     ["Finding the rate", "An investment of 4000 dollars grows to 4720 dollars in 4 years at simple interest. Find the rate.",
-      [S`\(I=720\): \(r=\frac{720}{4000(4)}=0.045\).`],
-      "4.5%/a"],
+      [S`<b>Find the interest.</b> \(I=A-P=4720-4000=720\).`,
+        S`<b>Rearrange.</b> \(I=Prt\) gives \(r=\frac I{Pt}\).`,
+        S`<b>Substitute.</b> \(r=\frac{720}{4000(4)}=\frac{720}{16\,000}=0.045\).`,
+        S`<b>Convert.</b> \(0.045=4.5\%\) per year.`,
+        S`<b>Check.</b> \(4000(0.045)(4)=720\) ✓`],
+      "4.5%/a",
+      plane({ view: { xmin: 0, xmax: 5, ymin: 3900, ymax: 4900 }, lines: [{ m: 180, b: 4000, color: "violet" }], points: [{ x: 0, y: 4000, label: "(0, 4000)" }, { x: 4, y: 4720, label: "(4, 4720)", color: "amber" }], step: { x: 1, y: 100 }, xlabel: "t (years)", ylabel: "A" })],
     ["Finding the time", "How long does it take 600 dollars to earn 90 dollars of simple interest at 3%/a?",
-      [S`\(t=\frac{90}{600(0.03)}=\frac{90}{18}\).`],
-      "5 years"],
+      [S`<b>Rearrange.</b> \(t=\frac I{Pr}\).`,
+        S`<b>One year's interest.</b> \(Pr=600(0.03)=18\).`,
+        S`<b>Divide.</b> \(t=\frac{90}{18}=5\) years.`,
+        S`<b>Check.</b> \(600(0.03)(5)=90\) ✓`],
+      "5 years",
+      plane({ view: { xmin: 0, xmax: 7, ymin: 0, ymax: 120 }, lines: [{ m: 18, b: 0, color: "violet" }, { m: 0, b: 90, color: "amber", dash: true }], points: [{ x: 5, y: 90, label: "(5, 90)", color: "amber" }], step: { x: 1, y: 10 }, xlabel: "t (years)", ylabel: "I" })],
     ["An arithmetic sequence", "1200 dollars is invested at 7%/a simple interest. Write the amount at the end of year n and identify the type of sequence.",
-      [S`Each year adds \(1200(0.07)=84\).`, S`\(t_n=1200+84n\): 1284, 1368, 1452, …`],
-      "arithmetic, d = 84 (linear growth)"],
+      [S`<b>Yearly interest.</b> Interest is always on the original 1200: \(1200(0.07)=84\).`,
+        S`<b>List the amounts.</b> ${tv(["\\(n\\)", "1", "2", "3", "4"], ["amount", "1284", "1368", "1452", "1536"])}`,
+        S`<b>Type.</b> Each year adds the same 84, so it is arithmetic, with \(d=84\).`,
+        S`<b>General term.</b> \(t_n=1200+84n\).`,
+        S`<b>Check.</b> \(t_3=1200+252=1452\) ✓. The points lie on a straight line: linear growth.`],
+      "arithmetic, d = 84 (linear growth)",
+      plane({ view: { xmin: 0, xmax: 6, ymin: 1100, ymax: 1700 }, lines: [{ m: 84, b: 1200, color: "gray", dash: true }], points: [1, 2, 3, 4, 5].map((n) => ({ x: n, y: 1200 + 84 * n, label: n === 3 ? "(3, 1452)" : undefined, color: n === 3 ? "amber" : "blue" })), step: { x: 1, y: 100 }, xlabel: "year n", ylabel: "amount" })],
   ]),
 
   practice([

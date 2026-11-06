@@ -1,6 +1,7 @@
 // MCR3U 6.4 — Transformations of Sinusoidal Functions: roles of a, k, d, c in y = a sin(k(x − d)) + c and
 // y = a cos(k(x − d)) + c; amplitude, period, phase shift, axis, domain and range from an equation
 import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, q, num, choice, hard, plane } from "./lib.mjs";
+import { tv } from "../mcr3u-extables.mjs";
 
 export const TITLE = "6.4 Transformations of Sinusoidal Functions";
 export const ID = "cbd68624-8f56-402e-99d2-8bd920810662";
@@ -52,21 +53,42 @@ export const blocks = () => [
 
   examples([
     ["Vertical stretch", S`Describe \(y=3\sin x\) and state its range.`,
-      ["Vertical stretch by 3: amplitude 3."],
-      S`range \(-3\le y\le3\)`],
+      [S`<b>Read it.</b> The 3 multiplies every output of \(\sin x\). So it is a vertical stretch by 3.`,
+        S`<b>What changes.</b> The amplitude becomes 3. Each height is 3 times as far from the axis. ${tv(["\\(x\\)", "\\(0^\\circ\\)", "\\(90^\\circ\\)", "\\(180^\\circ\\)", "\\(270^\\circ\\)", "\\(360^\\circ\\)"], ["\\(\\sin x\\)", "0", "1", "0", "\\(-1\\)", "0"], ["\\(3\\sin x\\)", "0", "3", "0", "\\(-3\\)", "0"])}`,
+        S`<b>What stays.</b> The zeros and the period (\(360^\circ\)) do not change, because \(x\) is not altered.`,
+        S`<b>Range.</b> \(-1\le\sin x\le1\), so multiplying by 3 gives \(-3\le y\le3\).`],
+      S`vertical stretch by 3; range \(-3\le y\le3\)`,
+      G([{ f: (x) => 3 * Math.sin(r(x)), color: "violet" }], { points: [{ x: 90, y: 3, label: "(90°, 3)", color: "amber" }, { x: 270, y: -3, label: "(270°, −3)", color: "amber" }], cap: "gray y = sin x, violet y = 3 sin x" })],
     ["Horizontal stretch and compression", S`Find the period of \(y=\sin2x\) and of \(y=\cos\frac x2\).`,
-      [S`\(\frac{360^\circ}2=180^\circ\) (compression).`, S`\(\frac{360^\circ}{1/2}=720^\circ\) (stretch).`],
-      S`\(180^\circ\) and \(720^\circ\)`],
+      [S`<b>Rule.</b> For \(y=\sin kx\), one cycle ends when \(kx=360^\circ\), so the period is \(\frac{360^\circ}{k}\).`,
+        S`<b>First.</b> \(k=2\): \(\frac{360^\circ}2=180^\circ\). The input runs twice as fast, so the graph is compressed.`,
+        S`<b>Second.</b> \(k=\frac12\): \(\frac{360^\circ}{1/2}=720^\circ\). The input runs at half speed, so the graph is stretched.`,
+        S`<b>Check.</b> \(\sin2(180^\circ)=\sin360^\circ=0\), the end of one cycle ✓. \(\cos\frac{720^\circ}2=\cos360^\circ=1\) ✓`],
+      S`\(180^\circ\) and \(720^\circ\)`,
+      plane({ view: { xmin: 0, xmax: 720, ymin: -1.5, ymax: 1.5 }, curves: [{ f: (x) => Math.sin(r(2 * x)), color: "violet" }, { f: (x) => Math.cos(r(x / 2)), color: "blue" }], points: [{ x: 180, y: 0, label: "(180°, 0)", color: "violet" }, { x: 720, y: 1, label: "(720°, 1)", color: "blue" }], step: { x: 90, y: 0.5 } }, "violet y = sin 2x, blue y = cos(x/2)")],
     ["Translations", S`Describe \(y=\sin(x-60^\circ)\) and \(y=\cos x+2\).`,
-      ["The first is shifted 60° right.", "The second is shifted 2 up: axis y = 2, range 1 ≤ y ≤ 3."],
-      "60° right; 2 up",
-      G([{ f: (x) => Math.sin(r(x - 60)), color: "violet" }], { view: { xmin: -90, xmax: 450, ymin: -2, ymax: 2 }, step: { x: 30, y: 0.5 }, points: [{ x: 150, y: 1, label: "max (150°, 1)" }] })],
+      [S`<b>First function.</b> Inside the bracket, \(x-60^\circ\) is a phase shift. The input must be \(60^\circ\) larger to give the same output, so the graph moves \(60^\circ\) right.`,
+        S`<b>Key point.</b> The sine maximum at \((90^\circ,1)\) moves to \((150^\circ,1)\). Check: \(\sin(150^\circ-60^\circ)=\sin90^\circ=1\) ✓`,
+        S`<b>Second function.</b> Outside, \(+2\) raises every output by 2, so the axis becomes \(y=2\).`,
+        S`<b>Range.</b> \(-1\le\cos x\le1\), so \(1\le y\le3\).`],
+      "60° right; 2 up (axis y = 2, range 1 ≤ y ≤ 3)",
+      G([{ f: (x) => Math.sin(r(x - 60)), color: "violet" }, { f: (x) => Math.cos(r(x)) + 2, color: "blue" }], { view: { xmin: -90, xmax: 450, ymin: -2, ymax: 4 }, step: { x: 30, y: 0.5 }, points: [{ x: 150, y: 1, label: "max (150°, 1)" }, { x: 0, y: 3, label: "(0°, 3)", color: "blue" }], cap: "gray sin x, violet sin(x − 60°), blue cos x + 2" })],
     ["All four at once", S`State the properties of \(y=-2\cos(3(x+30^\circ))-1\).`,
-      [S`Amplitude 2 (reflected); period \(\frac{360^\circ}3=120^\circ\).`, S`Phase shift 30° left; axis \(y=-1\).`],
-      S`range \(-3\le y\le1\)`],
+      [S`<b>Match the form</b> \(y=a\cos(k(x-d))+c\): \(a=-2\), \(k=3\), \(d=-30^\circ\), \(c=-1\).`,
+        S`<b>Amplitude.</b> \(|a|=2\). The minus sign is a reflection in the axis, so the curve starts at a minimum instead of a maximum.`,
+        S`<b>Period.</b> \(\frac{360^\circ}3=120^\circ\).`,
+        S`<b>Phase shift and axis.</b> \(30^\circ\) left, and axis \(y=-1\).`,
+        S`<b>Range.</b> \(-1-2\le y\le-1+2\), so \(-3\le y\le1\).`,
+        S`<b>Check.</b> At \(x=-30^\circ\): \(-2\cos0^\circ-1=-3\), the minimum ✓`],
+      S`amplitude 2 (reflected), period \(120^\circ\), \(30^\circ\) left, axis \(y=-1\), range \(-3\le y\le1\)`,
+      plane({ view: { xmin: -90, xmax: 240, ymin: -4, ymax: 2 }, curves: [{ f: (x) => -2 * Math.cos(r(3 * (x + 30))) - 1, color: "violet" }], lines: [{ m: 0, b: -1, color: "green", dash: true }], points: [{ x: -30, y: -3, label: "(−30°, −3)", color: "amber" }, { x: 30, y: 1, label: "(30°, 1)" }, { x: 90, y: -3, label: "(90°, −3)" }], step: { x: 30, y: 1 } })],
     ["Factor k first", S`Find the phase shift of \(y=\sin(2x-90^\circ)\).`,
-      [S`\(2x-90^\circ=2(x-45^\circ)\).`],
-      "45° right"],
+      [S`<b>Why factor?</b> The form is \(\sin(k(x-d))\), where \(d\) is measured after \(k\) is taken out. Reading \(90^\circ\) directly would be wrong.`,
+        S`<b>Factor.</b> \(2x-90^\circ=2(x-45^\circ)\). So \(k=2\) and \(d=45^\circ\).`,
+        S`<b>Conclude.</b> The phase shift is \(45^\circ\) right.`,
+        S`<b>Check.</b> The cycle starts where the inside is 0: \(2x-90^\circ=0\) gives \(x=45^\circ\) ✓. The figure shows the start of the cycle at \((45^\circ,0)\).`],
+      "45° right",
+      plane({ view: { xmin: -45, xmax: 315, ymin: -1.5, ymax: 1.5 }, curves: [{ f: (x) => Math.sin(r(2 * x - 90)), color: "violet" }], points: [{ x: 45, y: 0, label: "(45°, 0)", color: "amber" }, { x: 90, y: 1, label: "(90°, 1)" }, { x: 225, y: 0, label: "(225°, 0)" }], step: { x: 45, y: 0.5 } })],
   ]),
 
   practice([

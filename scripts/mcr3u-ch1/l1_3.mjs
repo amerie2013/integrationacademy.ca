@@ -1,5 +1,7 @@
 // MCR3U 1.3 — Parent Functions: f(x) = x, x², √x, 1/x, |x| — shapes, key points, domain, range, asymptotes
 import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, q, num, choice, hard, plane } from "./lib.mjs";
+import { tv } from "../mcr3u-extables.mjs";
+const S = String.raw;
 
 export const TITLE = "1.3 Parent Functions";
 export const ID = "5c3e0001-0001-4001-8001-000000000103";
@@ -64,23 +66,43 @@ export const blocks = () => [
   ])}`),
 
   examples([
-    ["Identify from a table", String.raw`Which parent fits \(x:-2,-1,0,1,2\) and \(y:2,1,0,1,2\)?`,
-      [String.raw`Outputs are never negative and the table is symmetric, so it is \(x^2\) or \(|x|\).`, String.raw`At \(x=2\), \(x^2=4\) but the table shows 2.`],
-      String.raw`\(f(x)=|x|\)`],
-    ["A domain restriction", String.raw`Explain why \(f(x)=\sqrt x\) has domain \(x\ge0\), and find \(f(6.25)\).`,
-      [String.raw`A real square root needs a non-negative input.`, String.raw`\(\sqrt{6.25}=2.5\) because \(2.5^2=6.25\).`],
-      String.raw`domain \(\{x\in\mathbb R\mid x\ge0\}\); \(f(6.25)=2.5\)`],
-    ["Asymptotes", String.raw`Describe \(f(x)=\frac1x\) near \(x=0\) and for large \(x\).`,
-      [String.raw`\(f(0.05)=20\) and \(f(-0.05)=-20\): the graph shoots up on the right of 0 and down on the left.`, String.raw`\(f(500)=0.002\): the graph approaches \(y=0\).`],
-      String.raw`vertical asymptote \(x=0\), horizontal asymptote \(y=0\)`,
+    ["Identify from a table", S`Which parent fits \(x:-2,-1,0,1,2\) and \(y:2,1,0,1,2\)?`,
+      [S`<b>Look for features.</b> The outputs are never negative, and matching values appear on both sides of \(x=0\). That symmetry fits \(y=x^2\) or \(y=|x|\).`,
+        S`<b>Compare the candidates.</b> ${tv(["\\(x\\)", "\\(-2\\)", "\\(-1\\)", "\\(0\\)", "\\(1\\)", "\\(2\\)"], ["given \\(y\\)", "2", "1", "0", "1", "2"], ["\\(x^2\\)", "4", "1", "0", "1", "4"], ["\\(|x|\\)", "2", "1", "0", "1", "2"])}`,
+        S`<b>Find the deciding value.</b> The candidates agree at \(x=-1,0,1\), so those rows cannot decide. At \(x=2\), \(x^2=4\) but the table shows 2. So \(x^2\) is ruled out.`,
+        S`<b>Confirm.</b> Every entry of the given row matches \(|x|\) ✓. The first differences for \(x\ge0\) are all 1, which shows the straight arms of a V.`],
+      S`\(f(x)=|x|\)`,
+      plane({ view: { xmin: -4, xmax: 4, ymin: -1, ymax: 5 }, curves: [{ f: (x) => Math.abs(x), color: "violet" }, { f: (x) => x * x, color: "gray" }], points: [{ x: -2, y: 2, label: "(−2, 2)", color: "amber" }, { x: -1, y: 1 }, { x: 0, y: 0 }, { x: 1, y: 1 }, { x: 2, y: 2, label: "(2, 2)", color: "amber" }], step: { x: 1, y: 1 } }, "violet y = |x|, gray y = x²")],
+    ["A domain restriction", S`Explain why \(f(x)=\sqrt x\) has domain \(x\ge0\), and find \(f(6.25)\).`,
+      [S`<b>Meaning of a root.</b> \(\sqrt x\) is the non-negative number whose square is \(x\).`,
+        S`<b>Why negatives fail.</b> Any real number squared is 0 or positive, so no real number squares to a negative value. For example, \(\sqrt{-4}\) is not real.`,
+        S`<b>Why 0 and positives work.</b> \(\sqrt0=0\), and every positive number has a positive root. So the domain is exactly \(x\ge0\).`,
+        S`<b>Evaluate.</b> \(\sqrt{6.25}=2.5\), because \(2.5\times2.5=6.25\).`,
+        S`<b>Check on the graph.</b> The curve starts at \((0,0)\), has nothing to the left of the y-axis, and passes through \((6.25,2.5)\) ✓`],
+      S`domain \(\{x\in\mathbb R\mid x\ge0\}\); \(f(6.25)=2.5\)`,
+      plane({ view: { xmin: -2, xmax: 9, ymin: -1, ymax: 4 }, curves: [{ f: (x) => Math.sqrt(x), a: 0, color: "violet" }], points: [{ x: 0, y: 0, label: "(0, 0)" }, { x: 4, y: 2, label: "(4, 2)" }, { x: 6.25, y: 2.5, label: "(6.25, 2.5)", color: "amber" }], step: { x: 1, y: 1 } })],
+    ["Asymptotes", S`Describe \(f(x)=\frac1x\) near \(x=0\) and for large \(x\).`,
+      [S`<b>At zero.</b> \(\frac10\) has no value, so \(x=0\) is not in the domain. We study what happens close to it.`,
+        S`<b>Near zero.</b> ${tv(["\\(x\\)", "\\(-0.05\\)", "\\(-0.5\\)", "\\(0.5\\)", "\\(0.05\\)"], ["\\(\\frac1x\\)", "\\(-20\\)", "\\(-2\\)", "\\(2\\)", "\\(20\\)"])} Dividing 1 by a tiny number gives a huge result. The curve shoots up to the right of 0 and down to the left. This makes \(x=0\) a vertical asymptote.`,
+        S`<b>Far from zero.</b> \(f(500)=0.002\) and \(f(-500)=-0.002\). Dividing 1 by a huge number gives almost 0, but never exactly 0. So \(y=0\) is a horizontal asymptote.`,
+        S`<b>Check on the graph.</b> Both branches hug the axes without touching them, and each point such as \((2,0.5)\) has a partner \((0.5,2)\) ✓`],
+      S`vertical asymptote \(x=0\), horizontal asymptote \(y=0\)`,
       plane({ view: { xmin: -5, xmax: 5, ymin: -5, ymax: 5 }, curves: [P.recip], points: [{ x: 1, y: 1, label: "(1, 1)" }, { x: -1, y: -1, label: "(−1, −1)" }, { x: 0.5, y: 2 }, { x: 2, y: 0.5 }], step: { x: 1, y: 1 } })],
-    ["Comparing parents", String.raw`Compare \(x\), \(x^2\) and \(\sqrt x\) at \(x=0.25\) and \(x=4\).`,
-      [String.raw`At \(0.25\): \(x^2=0.0625\), \(x=0.25\), \(\sqrt x=0.5\).`, String.raw`At \(4\): \(\sqrt x=2\), \(x=4\), \(x^2=16\).`],
-      String.raw`for \(0<x<1\): \(x^2<x<\sqrt x\); for \(x>1\) the order reverses`,
+    ["Comparing parents", S`Compare \(x\), \(x^2\) and \(\sqrt x\) at \(x=0.25\) and \(x=4\).`,
+      [S`<b>Evaluate each.</b> ${tv(["\\(x\\)", "\\(x^2\\)", "\\(x\\) itself", "\\(\\sqrt x\\)"], ["\\(0.25\\)", "\\(0.0625\\)", "\\(0.25\\)", "\\(0.5\\)"], ["\\(4\\)", "\\(16\\)", "\\(4\\)", "\\(2\\)"])}`,
+        S`<b>Between 0 and 1.</b> Multiplying a fraction by itself makes it smaller, so \(x^2<x\). The root goes the other way, because \(0.5\times0.5=0.25\) shows the root must be larger. So \(x^2<x<\sqrt x\).`,
+        S`<b>Above 1.</b> Multiplying by a number above 1 makes things larger, so \(x^2>x\), and the root is smaller. So \(\sqrt x<x<x^2\).`,
+        S`<b>Where the order changes.</b> All three equal 1 at \(x=1\), since \(1^2=1=\sqrt1\). The graph shows them crossing at \((1,1)\) ✓`],
+      S`for \(0<x<1\): \(x^2<x<\sqrt x\); for \(x>1\) the order reverses`,
       plane({ view: { xmin: 0, xmax: 4, ymin: 0, ymax: 4 }, curves: [P.x, P.x2, P.sqrt], points: [{ x: 1, y: 1, label: "(1, 1)" }], step: { x: 0.5, y: 0.5 } })],
-    ["Choosing a model", String.raw`A 120 km trip takes \(t\) hours at speed \(v\) km/h. Which parent describes \(t\) as a function of \(v\)? Find \(t\) when \(v=80\).`,
-      [String.raw`\(t=\frac{120}{v}\): a reciprocal relationship (doubling the speed halves the time).`, String.raw`\(t=\frac{120}{80}=1.5\).`],
-      String.raw`a stretched \(\frac1x\); \(1.5\) h`],
+    ["Choosing a model", S`A 120 km trip takes \(t\) hours at speed \(v\) km/h. Which parent describes \(t\) as a function of \(v\)? Find \(t\) when \(v=80\).`,
+      [S`<b>Build the rule.</b> Distance = speed × time, so \(120=vt\). Solve for the output: \(t=\dfrac{120}v\).`,
+        S`<b>Recognize the parent.</b> The variable is in the denominator, so this is \(y=\frac1x\) stretched vertically by 120.`,
+        S`<b>Test with a table.</b> Doubling the speed should halve the time. ${tv(["\\(v\\) (km/h)", "30", "60", "120"], ["\\(t\\) (h)", "4", "2", "1"])}`,
+        S`<b>Evaluate.</b> \(t=\dfrac{120}{80}=1.5\) h.`,
+        S`<b>Check.</b> \(80\times1.5=120\) km ✓. In this context only \(v>0\) makes sense, so the graph shows only the right branch.`],
+      S`a stretched \(y=\frac1x\); \(1.5\) h`,
+      plane({ view: { xmin: 0, xmax: 130, ymin: 0, ymax: 6 }, curves: [{ f: (v) => 120 / v, a: 20, color: "violet" }], points: [{ x: 30, y: 4, label: "(30, 4)" }, { x: 60, y: 2, label: "(60, 2)" }, { x: 80, y: 1.5, label: "(80, 1.5)", color: "amber" }], step: { x: 10, y: 1 }, xlabel: "v (km/h)", ylabel: "t (h)" })],
   ]),
 
   practice([

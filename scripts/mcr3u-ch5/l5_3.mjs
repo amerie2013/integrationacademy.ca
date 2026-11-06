@@ -1,6 +1,7 @@
 // MCR3U 5.3 — Reciprocal Ratios and Trigonometric Identities: csc, sec, cot; the quotient and Pythagorean identities;
 // finding all ratios from one; proving identities
 import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, q, num, choice, hard, plane } from "./lib.mjs";
+import { tv } from "../mcr3u-extables.mjs";
 
 export const TITLE = "5.3 Reciprocal Ratios and Trigonometric Identities";
 export const ID = "11b3c714-aab1-4d03-af1c-a425acddb58e";
@@ -50,21 +51,43 @@ export const blocks = () => [
 
   examples([
     ["Reciprocal ratios from a triangle", "A right triangle has sides 9, 40, 41, with ∠A opposite 9. Find csc A, sec A and cot A.",
-      [S`\(\csc A=\frac{41}9\), \(\sec A=\frac{41}{40}\), \(\cot A=\frac{40}9\).`],
+      [S`<b>Label from A.</b> Opposite \(=9\), adjacent \(=40\), hypotenuse \(=41\). Check: \(81+1600=1681=41^2\) ✓`,
+        S`<b>Basic ratios.</b> \(\sin A=\frac9{41}\), \(\cos A=\frac{40}{41}\), \(\tan A=\frac9{40}\).`,
+        S`<b>Reciprocals.</b> Each reciprocal ratio flips one basic ratio. ${tv(["basic", "\\(\\sin A\\)", "\\(\\cos A\\)", "\\(\\tan A\\)"], ["value", "\\(\\frac9{41}\\)", "\\(\\frac{40}{41}\\)", "\\(\\frac9{40}\\)"], ["reciprocal", "\\(\\csc A=\\frac{41}9\\)", "\\(\\sec A=\\frac{41}{40}\\)", "\\(\\cot A=\\frac{40}9\\)"])}`,
+        S`<b>Check.</b> A ratio times its reciprocal is 1: \(\frac9{41}\cdot\frac{41}9=1\) ✓. Since the hypotenuse is the longest side, csc and sec must be greater than 1 ✓`],
       S`\(\frac{41}9\), \(\frac{41}{40}\), \(\frac{40}9\)`,
       plane({ view: { xmin: -2, xmax: 44, ymin: -2, ymax: 14 }, segs: [{ pts: [[0, 0], [40, 0], [40, 9], [0, 0]], color: "blue" }], points: [{ x: 0, y: 0, label: "A" }, { x: 20, y: 0, label: "40" }, { x: 40, y: 4.5, label: "9" }, { x: 20, y: 6, label: "41" }], step: { x: 5, y: 2 } })],
     ["Exact reciprocal values", S`Evaluate \(\csc30^\circ\), \(\sec45^\circ\) and \(\cot60^\circ\).`,
-      [S`\(\frac1{1/2}=2\); \(\frac1{1/\sqrt2}=\sqrt2\); \(\frac1{\sqrt3}\).`],
-      S`\(2\), \(\sqrt2\), \(\frac1{\sqrt3}\)`],
+      [S`<b>Rule.</b> \(\csc\theta=\frac1{\sin\theta}\), \(\sec\theta=\frac1{\cos\theta}\), \(\cot\theta=\frac1{\tan\theta}\). A calculator has no csc key, so we find the basic ratio first.`,
+        S`<b>First.</b> \(\sin30^\circ=\frac12\), so \(\csc30^\circ=\frac1{1/2}=2\).`,
+        S`<b>Second.</b> \(\cos45^\circ=\frac1{\sqrt2}\), so \(\sec45^\circ=\frac1{1/\sqrt2}=\sqrt2\).`,
+        S`<b>Third.</b> \(\tan60^\circ=\sqrt3\), so \(\cot60^\circ=\frac1{\sqrt3}\).`,
+        S`<b>Check from the triangle.</b> In the figure, \(\csc30^\circ=\frac{\text{hyp}}{\text{opp}}=\frac21=2\) ✓ and \(\cot60^\circ=\frac{\text{adj}}{\text{opp}}=\frac1{\sqrt3}\) ✓`],
+      S`\(2\), \(\sqrt2\), \(\frac1{\sqrt3}\)`,
+      plane({ view: { xmin: -0.3, xmax: 2.3, ymin: -0.3, ymax: 1.4 }, segs: [{ pts: [[0, 0], [1.732, 0], [1.732, 1], [0, 0]], color: "blue" }], points: [{ x: 0, y: 0, label: "30°" }, { x: 1.732, y: 1, label: "60°" }, { x: 0.87, y: 0, label: "√3" }, { x: 1.732, y: 0.5, label: "1" }, { x: 0.8, y: 0.55, label: "2" }], step: { x: 0.5, y: 0.5 } })],
     ["All ratios from one", S`\(\sin\theta=\frac5{13}\) and θ is in Quadrant 2. Find the other five ratios.`,
-      [S`\(y=5\), \(r=13\), \(x=-12\).`, S`\(\cos\theta=-\frac{12}{13}\), \(\tan\theta=-\frac5{12}\), \(\csc\theta=\frac{13}5\), \(\sec\theta=-\frac{13}{12}\), \(\cot\theta=-\frac{12}5\).`],
-      "see the five values above"],
+      [S`<b>Read the given ratio.</b> \(\sin\theta=\frac yr\), so \(y=5\) and \(r=13\).`,
+        S`<b>Find \(x\).</b> \(x^2+y^2=r^2\) gives \(x^2=169-25=144\), so \(x=\pm12\). In Quadrant 2, \(x<0\), so \(x=-12\).`,
+        S`<b>Write all the ratios.</b> ${tv(["\\(\\cos\\theta=\\frac xr\\)", "\\(\\tan\\theta=\\frac yx\\)", "\\(\\csc\\theta=\\frac ry\\)", "\\(\\sec\\theta=\\frac rx\\)", "\\(\\cot\\theta=\\frac xy\\)"], ["\\(-\\frac{12}{13}\\)", "\\(-\\frac5{12}\\)", "\\(\\frac{13}5\\)", "\\(-\\frac{13}{12}\\)", "\\(-\\frac{12}5\\)"])}`,
+        S`<b>Check the signs.</b> In Quadrant 2, only sine and cosecant are positive ✓`,
+        S`<b>Check the identity.</b> \(\sin^2\theta+\cos^2\theta=\frac{25}{169}+\frac{144}{169}=1\) ✓`],
+      S`\(\cos\theta=-\frac{12}{13}\), \(\tan\theta=-\frac5{12}\), \(\csc\theta=\frac{13}5\), \(\sec\theta=-\frac{13}{12}\), \(\cot\theta=-\frac{12}5\)`,
+      plane({ view: { xmin: -14, xmax: 4, ymin: -2, ymax: 8 }, segs: [{ pts: [[0, 0], [-12, 5]], color: "violet" }, { pts: [[-12, 5], [-12, 0]], color: "amber" }], points: [{ x: -12, y: 5, label: "(−12, 5)", color: "amber" }, { x: -6, y: 2.9, label: "r = 13" }], step: { x: 2, y: 1 } })],
     ["A first proof", S`Prove \(\tan\theta\cos\theta=\sin\theta\).`,
-      [S`LS \(=\frac{\sin\theta}{\cos\theta}\cdot\cos\theta=\sin\theta=\) RS.`],
-      "LS = RS ∎"],
+      [S`<b>How to prove an identity.</b> Work on each side separately until they match. Do not move terms across the equal sign, because that assumes what we are proving.`,
+        S`<b>Start with the more complicated side.</b> LS \(=\tan\theta\cos\theta\).`,
+        S`<b>Use the quotient identity.</b> \(\tan\theta=\frac{\sin\theta}{\cos\theta}\), so LS \(=\frac{\sin\theta}{\cos\theta}\cdot\cos\theta\).`,
+        S`<b>Cancel,</b> for \(\cos\theta\ne0\). LS \(=\sin\theta=\) RS.`,
+        S`<b>Test a value.</b> At \(\theta=30^\circ\): \(\frac1{\sqrt3}\cdot\frac{\sqrt3}2=\frac12=\sin30^\circ\) ✓. The graph shows that the left side is the sine curve, with gaps where \(\tan\theta\) is not defined.`],
+      "LS = RS ∎",
+      plane({ view: { xmin: 0, xmax: 360, ymin: -1.5, ymax: 1.5 }, curves: [{ f: (x) => Math.sin((x * Math.PI) / 180), color: "violet" }], points: [{ x: 30, y: 0.5, label: "(30°, 1/2)", color: "amber" }, { x: 90, y: 1, label: "gap at 90°", color: "red" }, { x: 270, y: -1, label: "gap at 270°", color: "red" }], step: { x: 30, y: 0.5 }, xlabel: "θ" })],
     ["Using the Pythagorean identity", S`Prove \(\dfrac{1-\sin^2\theta}{\cos\theta}=\cos\theta\).`,
-      [S`LS \(=\frac{\cos^2\theta}{\cos\theta}=\cos\theta=\) RS.`],
-      "LS = RS ∎"],
+      [S`<b>Spot the pattern.</b> The numerator \(1-\sin^2\theta\) comes from the Pythagorean identity \(\sin^2\theta+\cos^2\theta=1\). Rearranged, this gives \(1-\sin^2\theta=\cos^2\theta\).`,
+        S`<b>Substitute.</b> LS \(=\dfrac{\cos^2\theta}{\cos\theta}\).`,
+        S`<b>Simplify,</b> for \(\cos\theta\ne0\). LS \(=\cos\theta=\) RS.`,
+        S`<b>Test a value.</b> At \(\theta=60^\circ\): \(\frac{1-\frac34}{\frac12}=\frac{1/4}{1/2}=\frac12=\cos60^\circ\) ✓`],
+      "LS = RS ∎",
+      plane({ view: { xmin: 0, xmax: 360, ymin: -1.5, ymax: 1.5 }, curves: [{ f: (x) => Math.cos((x * Math.PI) / 180), color: "violet" }], points: [{ x: 60, y: 0.5, label: "(60°, 1/2)", color: "amber" }, { x: 90, y: 0, label: "gap at 90°", color: "red" }, { x: 270, y: 0, label: "gap at 270°", color: "red" }], step: { x: 30, y: 0.5 }, xlabel: "θ" })],
   ]),
 
   practice([

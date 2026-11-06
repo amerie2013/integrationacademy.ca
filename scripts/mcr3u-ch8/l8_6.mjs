@@ -2,6 +2,7 @@
 // balance, effects of rate, term, payment frequency and extra payments (technology)
 import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, q, num, choice, hard, plane } from "./lib.mjs";
 import { payPV, annFV, balance, paymentsToRepay, m } from "./fin.mjs";
+import { tv } from "../mcr3u-extables.mjs";
 
 export const TITLE = "8.6 Loans, Amortization and Changing Conditions";
 export const ID = "5c3e0001-0001-4001-8001-000000000806";
@@ -68,21 +69,43 @@ export const blocks = () => [
 
   examples([
     ["The first three rows", "A 10 000-dollar loan at 12%/a compounded monthly is repaid with 12 monthly payments. Build the first three rows of its amortization table.",
-      [S`\(R=\frac{10000(0.01)}{1-1.01^{-12}}\approx${m(R1)}\).`, `Row 1: interest 100.00, principal ${rows1[0][3]}, balance ${rows1[0][4]}.`],
-      "see the table above"],
+      [S`<b>Payment.</b> \(i=0.01\), \(n=12\): \(R=\frac{10\,000(0.01)}{1-1.01^{-12}}\approx${m(R1)}\).`,
+        S`<b>Method for each row.</b> Interest = balance × \(i\). Principal = payment − interest. New balance = old balance − principal.`,
+        S`<b>Row 1.</b> Interest \(10\,000(0.01)=100.00\). Principal \(${m(R1)}-100=${rows1[0][3]}\). Balance \(10\,000-${rows1[0][3]}=${rows1[0][4]}\).`,
+        S`<b>Table.</b> ${tv(["payment", "amount", "interest", "principal", "balance"], ...rows1.map((row) => row.map(String)))}`,
+        S`<b>Pattern.</b> The payment stays the same, but the interest falls as the balance falls. So more of each payment goes to principal ✓`],
+      `payment ${m(R1)} dollars; balance after 3 payments ${rows1[2][4]} dollars`,
+      plane({ view: { xmin: 0, xmax: 13, ymin: 0, ymax: 11000 }, points: Array.from({ length: 13 }, (_, k) => ({ x: k, y: Math.max(0, balance(10000, R1, 0.01, k)), color: k >= 1 && k <= 3 ? "amber" : "blue" })), step: { x: 1, y: 1000 }, xlabel: "payment", ylabel: "balance" })],
     ["Changing the rate", "Compare the monthly payment and total interest on a 20 000-dollar, 5-year loan at 4%/a and at 8%/a (compounded monthly).",
-      [`4%: R ≈ ${m(r4)}, interest ≈ ${m(r4 * 60 - 20000)}.`, `8%: R ≈ ${m(r8)}, interest ≈ ${m(r8 * 60 - 20000)}.`],
-      "doubling the rate more than doubles the interest"],
+      [S`<b>Setup.</b> \(n=60\). The rates per month are \(\frac{0.04}{12}\) and \(\frac{0.08}{12}\).`,
+        S`<b>Payments and interest.</b> Interest = \(60R-20\,000\). ${tv(["rate", "payment \\(R\\)", "total paid", "interest"], ["4%", m(r4), m(r4 * 60), m(r4 * 60 - 20000)], ["8%", m(r8), m(r8 * 60), m(r8 * 60 - 20000)])}`,
+        S`<b>Compare.</b> The 8% loan's interest is \(\frac{${m(r8 * 60 - 20000)}}{${m(r4 * 60 - 20000)}}\approx${(((r8 * 60 - 20000) / (r4 * 60 - 20000))).toFixed(2)}\) times as large.`,
+        S`<b>Why more than double?</b> The higher payment clears the balance a little more slowly at first, so interest applies to a larger balance for longer.`],
+      "doubling the rate more than doubles the interest",
+      plane({ view: { xmin: 0, xmax: 3, ymin: 0, ymax: 5500 }, segs: [[1, r4 * 60 - 20000], [2, r8 * 60 - 20000]].map(([x, v]) => ({ pts: [[x - 0.3, 0], [x - 0.3, v], [x + 0.3, v], [x + 0.3, 0]], color: "violet" })), points: [{ x: 1, y: r4 * 60 - 20000, label: `4%: ${m(r4 * 60 - 20000)}` }, { x: 2, y: r8 * 60 - 20000, label: `8%: ${m(r8 * 60 - 20000)}` }], step: { x: 1, y: 500 }, ylabel: "total interest" })],
     ["Changing the term", "Compare a 20 000-dollar loan at 6%/a compounded monthly over 3 years and over 6 years.",
-      [`3 years: R ≈ ${m(t3)}, interest ≈ ${m(t3 * 36 - 20000)}.`, `6 years: R ≈ ${m(t6)}, interest ≈ ${m(t6 * 72 - 20000)}.`],
+      [S`<b>Setup.</b> \(i=0.005\); \(n=36\) and \(n=72\).`,
+        S`<b>Results.</b> ${tv(["term", "payment", "total paid", "interest"], ["3 years", m(t3), m(t3 * 36), m(t3 * 36 - 20000)], ["6 years", m(t6), m(t6 * 72), m(t6 * 72 - 20000)])}`,
+        S`<b>Trade-off.</b> The longer term lowers the payment, but the balance stays high for longer, so more interest builds up.`,
+        S`<b>Check on the graph.</b> The amber balance (6 years) falls more slowly than the violet (3 years) ✓`],
       "longer term: lower payment, more interest",
       plane({ view: { xmin: 0, xmax: 7, ymin: 0, ymax: 21000 }, curves: [{ f: (t) => Math.max(0, balance(20000, t3, 0.005, 12 * t)), a: 0, b: 3, color: "violet" }, { f: (t) => Math.max(0, balance(20000, t6, 0.005, 12 * t)), a: 0, b: 6, color: "amber" }], step: { x: 1, y: 2000 }, xlabel: "years", ylabel: "balance" })],
     ["Paying extra", "A 25 000-dollar loan at 6%/a compounded monthly is set up over 5 years. How does paying 100 dollars extra each month change it?",
-      [`Regular payment ≈ ${m(base)}: 60 payments, interest ≈ ${m(intBase)}.`, `With ${m(base + 100)}: ${nExtra} payments, interest ≈ ${m(intExtra)}.`],
-      `saves about ${m(intBase - intExtra)} dollars and ${60 - nExtra} payments`],
+      [S`<b>Regular plan.</b> \(R=\frac{25\,000(0.005)}{1-1.005^{-60}}\approx${m(base)}\), for 60 payments. Interest \(\approx${m(intBase)}\).`,
+        S`<b>Extra plan.</b> The payment is ${m(base + 100)} dollars. Solving for the number of payments gives ${nExtra}, with the last one smaller.`,
+        S`<b>Interest on the extra plan.</b> Run the table until the balance reaches 0: interest \(\approx${m(intExtra)}\).`,
+        S`<b>Compare.</b> It saves ${m(intBase - intExtra)} dollars of interest and ${60 - nExtra} payments.`,
+        S`<b>Why it works.</b> All of the extra 100 goes to principal, so every later interest charge is smaller ✓`],
+      `saves about ${m(intBase - intExtra)} dollars and ${60 - nExtra} payments`,
+      plane({ view: { xmin: 0, xmax: 66, ymin: 0, ymax: 27000 }, curves: [{ f: (k) => Math.max(0, balance(25000, base, 0.005, k)), a: 0, b: 60, color: "violet" }, { f: (k) => Math.max(0, balance(25000, base + 100, 0.005, k)), a: 0, b: nExtra, color: "amber" }], points: [{ x: nExtra, y: 0, label: `${nExtra} payments`, color: "amber" }, { x: 60, y: 0, label: "60" }], step: { x: 6, y: 3000 }, xlabel: "months", ylabel: "balance" }, "violet regular, amber with the extra 100 dollars")],
     ["Changing the frequency of savings", "Compare saving 1200 dollars at the end of each year with 100 dollars at the end of each month for 10 years at 6%/a (compounded to match).",
-      [`Yearly: ${m(fA)}. Monthly: ${m(fM)}.`],
-      "monthly saving ends with more — money is deposited earlier"],
+      [S`<b>Same total.</b> Both deposit 1200 dollars per year, for 12 000 in all.`,
+        S`<b>Yearly.</b> \(i=0.06\), \(n=10\): \(FV=\frac{1200(1.06^{10}-1)}{0.06}\approx${m(fA)}\).`,
+        S`<b>Monthly.</b> \(i=0.005\), \(n=120\): \(FV=\frac{100(1.005^{120}-1)}{0.005}\approx${m(fM)}\).`,
+        S`<b>Compare.</b> Monthly ends ${m(fM - fA)} dollars ahead.`,
+        S`<b>Why.</b> Money deposited earlier in each year has more time to earn interest, and it compounds more often ✓`],
+      "monthly saving ends with more because money is deposited earlier",
+      plane({ view: { xmin: 0, xmax: 3, ymin: 0, ymax: 19000 }, segs: [[1, fA], [2, fM]].map(([x, v]) => ({ pts: [[x - 0.3, 0], [x - 0.3, v], [x + 0.3, v], [x + 0.3, 0]], color: "violet" })), points: [{ x: 1, y: fA, label: `yearly ${m(fA)}` }, { x: 2, y: fM, label: `monthly ${m(fM)}` }], step: { x: 1, y: 2000 }, ylabel: "future value" })],
   ]),
 
   practice([

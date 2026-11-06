@@ -1,6 +1,7 @@
 // MCR3U 6.1 — Periodic Functions and Their Properties: cycle, period, amplitude, axis; reading graphs and tables;
 // predicting future values by extrapolating
 import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, q, num, choice, hard, plane } from "./lib.mjs";
+import { tv } from "../mcr3u-extables.mjs";
 
 export const TITLE = "6.1 Periodic Functions and Their Properties";
 export const ID = "de1a3d15-2246-4adc-b169-4a3858e4f351";
@@ -52,21 +53,43 @@ export const blocks = () => [
 
   examples([
     ["Periodic or not?", "Which are periodic? (a) the height of a swinging pendulum bob, (b) the average monthly temperature over many years, (c) the height of a thrown ball.",
-      ["(a) repeats every swing; (b) repeats every 12 months; (c) goes up and comes down once — no repeat."],
-      "(a) and (b)"],
-    ["Properties from a graph", "Use the graph in the box above to state the period, axis, amplitude and range.",
-      [S`Maximums at \(x=2\) and \(x=10\): period 8.`, S`Axis \(y=\frac{9+1}2=5\); amplitude \(\frac{9-1}2=4\).`],
-      S`period 8, axis \(y=5\), amplitude 4, range \(1\le y\le9\)`],
-    ["Properties from a table", S`A sprinkler head's height (cm) every second: \(t=0,1,\ldots,8\) gives \(2,5,8,5,2,5,8,5,2\).`,
-      [S`The values return to 2 every 4 s: period 4 s.`, S`Max 8, min 2: axis \(h=5\), amplitude 3.`],
+      [S`<b>Definition.</b> A function is periodic if its values repeat in the same pattern over equal intervals.`,
+        S`<b>(a) Pendulum.</b> The bob rises and falls in the same way on every swing, so the pattern repeats. It is periodic (ignoring slow friction losses).`,
+        S`<b>(b) Temperature.</b> January to December gives a similar pattern each year, with a period of 12 months. It is periodic.`,
+        S`<b>(c) Thrown ball.</b> It goes up once and comes down once, and then the motion ends. Nothing repeats, so it is not periodic.`,
+        S`<b>Check on the graph.</b> The figure shows the shape of (a) and (b) repeating, and (c) as a single arch.`],
+      "(a) and (b) are periodic; (c) is not",
+      plane({ view: { xmin: 0, xmax: 24, ymin: -2, ymax: 12 }, curves: [{ f: (x) => 3 + 3 * Math.sin(r(30 * x)), color: "violet" }, { f: (x) => -0.5 * x * (x - 12), a: 0, b: 12, color: "red" }], step: { x: 2, y: 2 } }, "violet repeats (periodic); red is one arch (not periodic)")],
+    ["Properties from a graph", "The graph has maximums at x = 2 and x = 10 and minimums at x = 6 and x = 14. State the period, axis, amplitude and range.",
+      [S`<b>Read the extremes.</b> From the graph, the maximum value is 9 and the minimum value is 1.`,
+        S`<b>Period.</b> It is the horizontal distance for one full cycle. From one maximum to the next: \(10-2=8\).`,
+        S`<b>Axis.</b> It is the horizontal line halfway between the extremes: \(y=\frac{9+1}2=5\).`,
+        S`<b>Amplitude.</b> It is the distance from the axis to a maximum: \(\frac{9-1}2=4\).`,
+        S`<b>Range and check.</b> The values run from 1 to 9. Check: \(5+4=9\) and \(5-4=1\) ✓`],
+      S`period 8, axis \(y=5\), amplitude 4, range \(1\le y\le9\)`,
+      plane({ view: { xmin: -1, xmax: 17, ymin: 0, ymax: 10 }, curves: [{ f: (x) => 5 + 4 * Math.sin(r(45 * x)), color: "violet" }], lines: [{ m: 0, b: 5, color: "green", dash: true }], points: [{ x: 2, y: 9, label: "(2, 9)", color: "amber" }, { x: 10, y: 9, label: "(10, 9)", color: "amber" }, { x: 6, y: 1, label: "(6, 1)" }, { x: 14, y: 1, label: "(14, 1)" }], step: { x: 1, y: 1 } })],
+    ["Properties from a table", S`A sprinkler head's height (cm) every second: \(t=0,1,\ldots,8\) gives \(2,5,8,5,2,5,8,5,2\). Find the period, axis and amplitude.`,
+      [S`<b>Organize the data.</b> ${tv(["\\(t\\) (s)", "0", "1", "2", "3", "4", "5", "6", "7", "8"], ["\\(h\\) (cm)", "2", "5", "8", "5", "2", "5", "8", "5", "2"])}`,
+        S`<b>Period.</b> The block \(2,5,8,5\) repeats, and it returns to 2 at \(t=4\). So the period is 4 s.`,
+        S`<b>Extremes.</b> Max 8, min 2.`,
+        S`<b>Axis.</b> \(h=\frac{8+2}2=5\) cm.`,
+        S`<b>Amplitude.</b> \(\frac{8-2}2=3\) cm. Check: \(5\pm3\) gives 8 and 2 ✓`],
       "period 4 s, axis 5 cm, amplitude 3 cm",
-      plane({ view: { xmin: 0, xmax: 9, ymin: 0, ymax: 10 }, segs: [{ pts: Array.from({ length: 9 }, (_, t) => [t, zig(t)]), color: "violet" }], points: Array.from({ length: 9 }, (_, t) => ({ x: t, y: zig(t) })), step: { x: 1, y: 1 } })],
-    ["Predicting by extrapolating", "For the sprinkler, find the height at t = 23 s and at t = 42 s.",
-      [S`\(23=5\times4+3\): same as \(t=3\), height 5.`, S`\(42=10\times4+2\): same as \(t=2\), height 8.`],
-      "5 cm and 8 cm"],
+      plane({ view: { xmin: 0, xmax: 9, ymin: 0, ymax: 10 }, segs: [{ pts: Array.from({ length: 9 }, (_, t) => [t, zig(t)]), color: "violet" }], points: Array.from({ length: 9 }, (_, t) => ({ x: t, y: zig(t) })), lines: [{ m: 0, b: 5, color: "green", dash: true }], step: { x: 1, y: 1 } })],
+    ["Predicting by extrapolating", "For the sprinkler (period 4 s; heights 2, 5, 8, 5 at t = 0, 1, 2, 3), find the height at t = 23 s and at t = 42 s.",
+      [S`<b>Idea.</b> A periodic function repeats, so removing whole periods does not change the value: \(f(t+4)=f(t)\).`,
+        S`<b>\(t=23\).</b> Divide by the period: \(23=5\times4+3\). After 5 full cycles, 3 s remain, so \(f(23)=f(3)=5\).`,
+        S`<b>\(t=42\).</b> \(42=10\times4+2\), so \(f(42)=f(2)=8\).`,
+        S`<b>Check by counting.</b> Heights at \(t=20,21,22,23\) are \(2,5,8,5\), since 20 is a multiple of 4 ✓`],
+      "5 cm and 8 cm",
+      plane({ view: { xmin: 18, xmax: 26, ymin: 0, ymax: 10 }, segs: [{ pts: Array.from({ length: 9 }, (_, i) => [18 + i, zig(18 + i)]), color: "violet" }], points: [{ x: 20, y: 2, label: "(20, 2)" }, { x: 23, y: 5, label: "(23, 5)", color: "amber" }], step: { x: 1, y: 1 } }, "The pattern near t = 23.")],
     ["Counting cycles", "A windshield wiper sweeps out and back every 1.5 s. How many complete cycles does it make in one minute?",
-      [S`\(60\div1.5=40\).`],
-      "40 cycles"],
+      [S`<b>Identify the period.</b> One cycle is out and back, so the period is 1.5 s.`,
+        S`<b>Match the units.</b> One minute is 60 s.`,
+        S`<b>Divide.</b> Number of cycles \(=\frac{\text{total time}}{\text{period}}=\frac{60}{1.5}=40\).`,
+        S`<b>Check.</b> \(40\times1.5=60\) s ✓. The wiper makes 40 cycles per minute, so its frequency is the reciprocal of its period in minutes.`],
+      "40 cycles",
+      plane({ view: { xmin: 0, xmax: 6.5, ymin: -1.5, ymax: 1.5 }, curves: [{ f: (t) => Math.sin((2 * Math.PI * t) / 1.5), color: "violet" }], points: [{ x: 0, y: 0, label: "(0, 0)" }, { x: 1.5, y: 0, label: "(1.5, 0)", color: "amber" }, { x: 3, y: 0, label: "(3, 0)", color: "amber" }], step: { x: 0.5, y: 0.5 }, xlabel: "t (s)", ylabel: "position" })],
   ]),
 
   practice([

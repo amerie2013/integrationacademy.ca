@@ -28,35 +28,52 @@ Two expressions are \textbf{equivalent} when they have the same value for every 
 \sech{Worked Examples}
 
 \begin{example}{ex0}{Example 1 --- Adding polynomials}
-Simplify $(4x^3-2x+7)+(x^3+5x^2-3x-9)$.\soln Group like terms by degree: $(4x^3+x^3)+5x^2+(-2x-3x)+(7-9)$. \\ $=5x^3 + 5x^2 - 5x - 2$.
+Simplify $(4x^3-2x+7)+(x^3+5x^2-3x-9)$.\soln \textbf{Rule:} Adding keeps every sign; collect terms with the same power. \\ Group like terms by degree: $(4x^3+x^3)+5x^2+(-2x-3x)+(7-9)$. \\ $=5x^3 + 5x^2 - 5x - 2$. \\ \textbf{Check:} at $x=1$: $(4-2+7)+(1+5-3-9)=9-6=3$, and the answer $5+5-5-2=3$ \checkmark\begin{center}\begin{tikzpicture}\begin{axis}[width=8.2cm,height=5.2cm,axis lines=middle,xlabel={\scriptsize$x$},ylabel={\scriptsize$y$},grid=both,grid style={gray!16},xmin=-3,xmax=3,ymin=-40,ymax=40,xtick distance=1,ytick distance=10,tick label style={font=\tiny},axis line style={-}]
+\addplot[exblue,very thick,domain=-3:3,samples=120,restrict y to domain=-41:41]{(4*x^3-2*x+7)+(x^3+5*x^2-3*x-9)};
+\end{axis}\end{tikzpicture}\end{center}
 \end{example}
 
 \begin{example}{ex1}{Example 2 --- Distribute, then collect}
-Simplify $3(2x-1)-4(x-5)+2x(x+3)$.\soln Distribute: $6x-3-4x+20+2x^2+6x$. \\ Note the $-4$ multiplies \emph{both} terms: $-4\cdot(-5)=+20$. \\ Collect: $2x^2 + 8x + 17$.
+Simplify $3(2x-1)-4(x-5)+2x(x+3)$.\soln \textbf{Rule:} Distribute each outside factor, keeping its sign. \\ Distribute: $6x-3-4x+20+2x^2+6x$. \\ Note the $-4$ multiplies \emph{both} terms: $-4\cdot(-5)=+20$. \\ Collect: $2x^2 + 8x + 17$. \\ \textbf{Check:} at $x=1$: $3(1)-4(-4)+2(4)=3+16+8=27$, and the collected form gives $2+8+17=27$ \checkmark\begin{center}\begin{tikzpicture}\begin{axis}[width=8.2cm,height=5.2cm,axis lines=middle,xlabel={\scriptsize$x$},ylabel={\scriptsize$y$},grid=both,grid style={gray!16},xmin=-5,xmax=3,ymin=0,ymax=30,xtick distance=1,ytick distance=5,tick label style={font=\tiny},axis line style={-}]
+\addplot[exblue,very thick,domain=-5:3,samples=120,restrict y to domain=-1:31]{2*x^2+8*x+17};\addplot[only marks,mark=*,mark size=2pt,green!45!black]coordinates{(1,27)};\node[font=\tiny,anchor=south west,green!30!black] at (axis cs:1,27){$(1,27)$};
+\end{axis}\end{tikzpicture}\end{center}
 \end{example}
 
 \begin{example}{ex2}{Example 3 --- Area model}
-Expand $(2x+1)(x+6)$.\soln The boxes are $2x\cdot x=2x^2$, $2x\cdot6=12x$, $1\cdot x=x$, $1\cdot6=6$. \\ The two $x$-boxes are like terms: $12x+x=13x$. \\ $=2x^2 + 13x + 6$.
+Expand $(2x+1)(x+6)$.\soln \textbf{Rule:} Each term of the first bracket meets each term of the second. \\ The boxes are $2x\cdot x=2x^2$, $2x\cdot6=12x$, $1\cdot x=x$, $1\cdot6=6$. \\ The two $x$-boxes are like terms: $12x+x=13x$. \\ $=2x^2 + 13x + 6$. \\ \textbf{Check:} at $x=1$: $(3)(7)=21$, and $2+13+6=21$ \checkmark\begin{center}\begin{tikzpicture}\begin{axis}[width=8.2cm,height=5.2cm,axis lines=middle,xlabel={\scriptsize$x$},ylabel={\scriptsize$y$},grid=both,grid style={gray!16},xmin=-8,xmax=3,ymin=-16,ymax=30,xtick distance=1,ytick distance=5,tick label style={font=\tiny},axis line style={-}]
+\addplot[exblue,very thick,domain=-8:3,samples=120,restrict y to domain=-17:31]{(2*x+1)*(x+6)};\addplot[only marks,mark=*,mark size=2pt,green!45!black]coordinates{(-6,0)(-0.5,0)};\node[font=\tiny,anchor=south west,green!30!black] at (axis cs:-6,0){$(-6,0)$};\node[font=\tiny,anchor=south west,green!30!black] at (axis cs:-0.5,0){$(-0.5,0)$};
+\end{axis}\end{tikzpicture}\end{center}
 \end{example}
 
 \begin{example}{ex3}{Example 4 --- FOIL with a negative}
-Expand $(4x-5)(2x+3)$.\soln First $8x^2$; Outer $12x$; Inner $-10x$; Last $-15$. \\ Middle: $12x-10x=2x$. \\ $=8x^2 + 2x - 15$.
+Expand $(4x-5)(2x+3)$.\soln \textbf{Rule:} FOIL gives the four products; keep the signs. \\ First $8x^2$; Outer $12x$; Inner $-10x$; Last $-15$. \\ Middle: $12x-10x=2x$. \\ $=8x^2 + 2x - 15$. \\ \textbf{Check:} at $x=1$: $(-1)(5)=-5$, and $8+2-15=-5$ \checkmark\begin{center}\begin{tikzpicture}\begin{axis}[width=8.2cm,height=5.2cm,axis lines=middle,xlabel={\scriptsize$x$},ylabel={\scriptsize$y$},grid=both,grid style={gray!16},xmin=-4,xmax=4,ymin=-20,ymax=30,xtick distance=1,ytick distance=5,tick label style={font=\tiny},axis line style={-}]
+\addplot[exblue,very thick,domain=-4:4,samples=120,restrict y to domain=-21:31]{(4*x-5)*(2*x+3)};\addplot[only marks,mark=*,mark size=2pt,green!45!black]coordinates{(1.25,0)(-1.5,0)};\node[font=\tiny,anchor=south west,green!30!black] at (axis cs:1.25,0){$(1.25,0)$};\node[font=\tiny,anchor=south west,green!30!black] at (axis cs:-1.5,0){$(-1.5,0)$};
+\end{axis}\end{tikzpicture}\end{center}
 \end{example}
 
 \begin{example}{ex4}{Example 5 --- Special products}
-Expand (a) $(6x-1)^2$ and (b) $(2x+9)(2x-9)$.\soln (a) $(6x)^2-2(6x)(1)+1^2=36x^2 - 12x + 1$. \\ (b) The middle terms $\pm18x$ cancel: $(2x)^2-9^2=4x^2 - 81$.
+Expand (a) $(6x-1)^2$ and (b) $(2x+9)(2x-9)$.\soln \textbf{Patterns:} $(a-b)^2=a^2-2ab+b^2$ and $(a+b)(a-b)=a^2-b^2$. \\ (a) $(6x)^2-2(6x)(1)+1^2=36x^2 - 12x + 1$. \\ (b) The middle terms $\pm18x$ cancel: $(2x)^2-9^2=4x^2 - 81$. \\ \textbf{Check:} at $x=1$: (a) $25=36-12+1$; (b) $(11)(-7)=-77=4-81$ \checkmark\begin{center}\begin{tikzpicture}\begin{axis}[width=8.2cm,height=5.2cm,axis lines=middle,xlabel={\scriptsize$x$},ylabel={\scriptsize$y$},grid=both,grid style={gray!16},xmin=-6,xmax=6,ymin=-90,ymax=60,xtick distance=1,ytick distance=20,tick label style={font=\tiny},axis line style={-}]
+\addplot[exblue,very thick,domain=-6:6,samples=120,restrict y to domain=-91:61]{(6*x-1)^2};
+\addplot[red!75!black,dashed,thick,domain=-6:6,samples=120,restrict y to domain=-91:61]{(2*x+9)*(2*x-9)};
+\end{axis}\end{tikzpicture}\end{center}
 \end{example}
 
 \begin{example}{ex5}{Example 6 --- Trinomial times binomial}
-Expand $(2x^2+x-4)(x-3)$.\soln Six partial products: $2x^3-6x^2+x^2-3x-4x+12$. \\ Collect: $2x^3 - 5x^2 - 7x + 12$. \\ Check the degree ($2+1=3$) and the constant term ($-4\cdot-3=12$).
+Expand $(2x^2+x-4)(x-3)$.\soln \textbf{Plan:} Three terms times two terms make six products. \\ Six partial products: $2x^3-6x^2+x^2-3x-4x+12$. \\ Collect: $2x^3 - 5x^2 - 7x + 12$. \\ Check the degree ($2+1=3$) and the constant term ($-4\cdot-3=12$). \\ \textbf{Check:} at $x=1$: $(-1)(-2)=2$, and the collected form gives $2$ too \checkmark\begin{center}\begin{tikzpicture}\begin{axis}[width=8.2cm,height=5.2cm,axis lines=middle,xlabel={\scriptsize$x$},ylabel={\scriptsize$y$},grid=both,grid style={gray!16},xmin=-3,xmax=5,ymin=-30,ymax=30,xtick distance=1,ytick distance=10,tick label style={font=\tiny},axis line style={-}]
+\addplot[exblue,very thick,domain=-3:5,samples=120,restrict y to domain=-31:31]{(2*x^2+x-4)*(x-3)};\addplot[only marks,mark=*,mark size=2pt,green!45!black]coordinates{(3,0)};\node[font=\tiny,anchor=south west,green!30!black] at (axis cs:3,0){$(3,0)$};
+\end{axis}\end{tikzpicture}\end{center}
 \end{example}
 
 \begin{example}{ex6}{Example 7 --- A power of a binomial}
-Expand $(x+1)^4$.\soln The coefficients are Pascal's row $1,4,6,4,1$ and every power of $1$ is $1$. \\ $=x^4 + 4x^3 + 6x^2 + 4x + 1$. \\ Check at $x=1$: $2^4=16$ and $1+4+6+4+1=16$.
+Expand $(x+1)^4$.\soln \textbf{Method:} Use Pascal's row for the exponent $4$. \\ The coefficients are Pascal's row $1,4,6,4,1$ and every power of $1$ is $1$. \\ $=x^4 + 4x^3 + 6x^2 + 4x + 1$. \\ Check at $x=1$: $2^4=16$ and $1+4+6+4+1=16$.\begin{center}\begin{tikzpicture}\begin{axis}[width=8.2cm,height=5.2cm,axis lines=middle,xlabel={\scriptsize$x$},ylabel={\scriptsize$y$},grid=both,grid style={gray!16},xmin=-4,xmax=2,ymin=-2,ymax=20,xtick distance=1,ytick distance=4,tick label style={font=\tiny},axis line style={-}]
+\addplot[exblue,very thick,domain=-4:2,samples=120,restrict y to domain=-3:21]{(x+1)^4};\addplot[only marks,mark=*,mark size=2pt,green!45!black]coordinates{(1,16)(-1,0)};\node[font=\tiny,anchor=south west,green!30!black] at (axis cs:1,16){$(1,16)$};\node[font=\tiny,anchor=south west,green!30!black] at (axis cs:-1,0){$(-1,0)$};
+\end{axis}\end{tikzpicture}\end{center}
 \end{example}
 
 \begin{example}{ex7}{Example 8 --- Application: a picture frame}
-A photo is $30$ cm by $20$ cm. A frame of width $x$ goes all the way around it. Write the area of the frame alone.\soln Outer rectangle: $(30+2x)(20+2x)$. Subtract the photo, $600$. \\ $(30+2x)(20+2x)-600=600+100x+4x^2-600=4x^2 + 100x$. \\ For a $2$ cm frame: $4(4)+100(2)=216$ cm$^2$.
+A photo is $30$ cm by $20$ cm. A frame of width $x$ goes all the way around it. Write the area of the frame alone.\soln \textbf{Model:} The outer rectangle gains $x$ on each side, so $2x$ per dimension. \\ Outer rectangle: $(30+2x)(20+2x)$. Subtract the photo, $600$. \\ $(30+2x)(20+2x)-600=600+100x+4x^2-600=4x^2 + 100x$. \\ For a $2$ cm frame: $4(4)+100(2)=216$ cm$^2$.\begin{center}\begin{tikzpicture}\begin{axis}[width=8.2cm,height=5.2cm,axis lines=middle,xlabel={\scriptsize$x$},ylabel={\scriptsize$y$},grid=both,grid style={gray!16},xmin=0,xmax=6,ymin=0,ymax=800,xtick distance=1,ytick distance=100,tick label style={font=\tiny},axis line style={-}]
+\addplot[exblue,very thick,domain=0:6,samples=120,restrict y to domain=-1:801]{4*x^2+100*x};\addplot[only marks,mark=*,mark size=2pt,green!45!black]coordinates{(2,216)};\node[font=\tiny,anchor=south west,green!30!black] at (axis cs:2,216){$(2,216)$};
+\end{axis}\end{tikzpicture}\end{center}
 \end{example}
 
 \begin{example}{ex8}{Example 9 --- Are they equivalent?}

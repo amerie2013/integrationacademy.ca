@@ -1,6 +1,7 @@
 // MCR3U 6.2 — Graphs of Sine and Cosine: from the unit circle to y = sin x and y = cos x, key properties,
 // periodicity, the phase relation between them, solving from the graph
 import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, q, num, choice, hard, plane } from "./lib.mjs";
+import { tv } from "../mcr3u-extables.mjs";
 
 export const TITLE = "6.2 Graphs of Sine and Cosine";
 export const ID = "c5473508-8315-46c6-9ac1-59c0b737c1f9";
@@ -52,21 +53,44 @@ export const blocks = () => [
 
   examples([
     ["A table of values", S`Complete a table of \(\sin x\) for \(x=0^\circ,30^\circ,\ldots,180^\circ\) and describe the pattern.`,
-      [S`\(0,\ 0.5,\ 0.87,\ 1,\ 0.87,\ 0.5,\ 0\).`, "The values rise to 1 at 90° and fall symmetrically back to 0."],
-      "symmetric about x = 90°"],
+      [S`<b>Exact values.</b> From the special triangles: \(\sin30^\circ=0.5\), \(\sin60^\circ=\frac{\sqrt3}2\approx0.87\), \(\sin90^\circ=1\).`,
+        S`<b>Related angles.</b> For \(120^\circ\) and \(150^\circ\) in Quadrant 2, sine is positive with related angles \(60^\circ\) and \(30^\circ\).`,
+        S`<b>Table.</b> ${tv(["\\(x\\)", "\\(0^\\circ\\)", "\\(30^\\circ\\)", "\\(60^\\circ\\)", "\\(90^\\circ\\)", "\\(120^\\circ\\)", "\\(150^\\circ\\)", "\\(180^\\circ\\)"], ["\\(\\sin x\\)", "0", "0.5", "0.87", "1", "0.87", "0.5", "0"])}`,
+        S`<b>Pattern.</b> The values rise to 1 at \(90^\circ\), then repeat in reverse order back to 0.`,
+        S`<b>Why.</b> \(\sin(180^\circ-x)=\sin x\), which is the symmetry about \(x=90^\circ\) seen on the graph ✓`],
+      S`\(0,\ 0.5,\ 0.87,\ 1,\ 0.87,\ 0.5,\ 0\); symmetric about \(x=90^\circ\)`,
+      sinG({ points: [0, 30, 60, 90, 120, 150, 180].map((x) => ({ x, y: Math.sin(r(x)), label: x === 90 ? "(90°, 1)" : undefined })) })],
     ["Properties of y = sin x", "State the domain, range, period, amplitude, axis and the zeros of y = sin x between 0° and 720°.",
-      [S`Domain \(\mathbb R\); range \(-1\le y\le1\); period 360°; amplitude 1; axis \(y=0\).`, "Zeros every 180°."],
-      "zeros 0°, 180°, 360°, 540°, 720°"],
+      [S`<b>Domain.</b> Any angle has a sine, so the domain is \(\mathbb R\).`,
+        S`<b>Range.</b> On the unit circle, sine is the y-coordinate, so \(-1\le y\le1\).`,
+        S`<b>Period.</b> A full turn of \(360^\circ\) returns to the same point.`,
+        S`<b>Axis and amplitude.</b> Axis \(y=\frac{1+(-1)}2=0\), and amplitude \(\frac{1-(-1)}2=1\).`,
+        S`<b>Zeros.</b> \(y=0\) on the unit circle at \(0^\circ\) and \(180^\circ\), then every \(180^\circ\): \(0^\circ,180^\circ,360^\circ,540^\circ,720^\circ\).`],
+      S`domain \(\mathbb R\), range \(-1\le y\le1\), period \(360^\circ\), amplitude 1, axis \(y=0\); zeros 0°, 180°, 360°, 540°, 720°`,
+      sinG({ points: [0, 180, 360, 540, 720].map((x) => ({ x, y: 0, label: `${x}°`, color: "amber" })) })],
     ["Cosine as a shifted sine", S`Show that \(\cos0^\circ=\sin90^\circ\) and \(\cos90^\circ=\sin180^\circ\), and explain the pattern.`,
-      [S`Both pairs are equal (1 and 0).`, S`Every point of the cosine graph appears on the sine graph 90° later: \(\cos x=\sin(x+90^\circ)\).`],
-      "cosine = sine shifted 90° left"],
+      [S`<b>Evaluate.</b> \(\cos0^\circ=1=\sin90^\circ\), and \(\cos90^\circ=0=\sin180^\circ\).`,
+        S`<b>Look for the rule.</b> The sine angle is always \(90^\circ\) more. A longer table shows this: ${tv(["\\(x\\)", "\\(0^\\circ\\)", "\\(90^\\circ\\)", "\\(180^\\circ\\)", "\\(270^\\circ\\)"], ["\\(\\cos x\\)", "1", "0", "\\(-1\\)", "0"], ["\\(\\sin(x+90^\\circ)\\)", "1", "0", "\\(-1\\)", "0"])}`,
+        S`<b>Conclude.</b> \(\cos x=\sin(x+90^\circ)\). Adding \(90^\circ\) inside moves the graph \(90^\circ\) to the left.`,
+        S`<b>Check on the graph.</b> The sine maximum at \(90^\circ\) moves to the cosine maximum at \(0^\circ\) ✓`],
+      "cosine = sine shifted 90° left",
+      plane({ view: { xmin: -90, xmax: 450, ymin: -1.6, ymax: 1.6 }, curves: [{ f: (x) => Math.sin(r(x)), color: "gray" }, { f: (x) => Math.cos(r(x)), color: "violet" }], points: [{ x: 0, y: 1, label: "(0°, 1)", color: "violet" }, { x: 90, y: 1, label: "(90°, 1)", color: "gray" }], step: { x: 45, y: 0.5 } }, "gray y = sin x, violet y = cos x")],
     ["Solving from the graph", S`Find every \(x\) from 0° to 720° with \(\sin x=0.5\).`,
-      [S`In one cycle: \(30^\circ\) and \(150^\circ\).`, "Add 360° to each for the second cycle."],
+      [S`<b>Picture.</b> Draw the line \(y=0.5\). Each crossing with the curve is a solution.`,
+        S`<b>First cycle.</b> The related angle is \(30^\circ\). Sine is positive in Quadrants 1 and 2: \(x=30^\circ\) and \(x=180^\circ-30^\circ=150^\circ\).`,
+        S`<b>Second cycle.</b> The graph repeats after \(360^\circ\), so add \(360^\circ\) to each: \(390^\circ\) and \(510^\circ\).`,
+        S`<b>Stop.</b> The next ones, \(750^\circ\) and up, are past \(720^\circ\).`,
+        S`<b>Check.</b> \(\sin510^\circ=\sin150^\circ=0.5\) ✓. The figure shows four crossings.`],
       S`\(30^\circ,150^\circ,390^\circ,510^\circ\)`,
       sinG({ lines: [{ m: 0, b: 0.5, color: "amber", dash: true }], points: [30, 150, 390, 510].map((x) => ({ x, y: 0.5, label: `${x}°` })) })],
     ["Large and negative angles", S`Evaluate \(\sin750^\circ\) and \(\cos(-60^\circ)\).`,
-      [S`\(750^\circ-720^\circ=30^\circ\): \(\sin30^\circ=0.5\).`, S`\(-60^\circ+360^\circ=300^\circ\): \(\cos300^\circ=0.5\).`],
-      S`\(0.5\) and \(0.5\)`],
+      [S`<b>Idea.</b> Adding or subtracting multiples of \(360^\circ\) lands on the same terminal arm, so the value is unchanged.`,
+        S`<b>Large angle.</b> \(750^\circ-720^\circ=30^\circ\), so \(\sin750^\circ=\sin30^\circ=0.5\).`,
+        S`<b>Negative angle.</b> \(-60^\circ+360^\circ=300^\circ\), so \(\cos(-60^\circ)=\cos300^\circ\).`,
+        S`<b>Evaluate.</b> \(300^\circ\) is in Quadrant 4, with related angle \(60^\circ\), and cosine is positive there: \(0.5\).`,
+        S`<b>Check.</b> The cosine graph is symmetric about the y-axis, so \(\cos(-60^\circ)=\cos60^\circ=0.5\) ✓`],
+      S`\(0.5\) and \(0.5\)`,
+      plane({ view: { xmin: -90, xmax: 780, ymin: -1.6, ymax: 1.6 }, curves: [{ f: (x) => Math.sin(r(x)), color: "violet" }, { f: (x) => Math.cos(r(x)), color: "blue" }], points: [{ x: 750, y: 0.5, label: "(750°, 0.5)", color: "violet" }, { x: -60, y: 0.5, label: "(−60°, 0.5)", color: "blue" }], step: { x: 90, y: 0.5 } }, "violet sin x, blue cos x")],
   ]),
 
   practice([

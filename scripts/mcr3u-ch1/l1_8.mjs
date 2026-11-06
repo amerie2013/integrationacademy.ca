@@ -1,5 +1,7 @@
 // MCR3U 1.8 — Combining Transformations: y = af(k(x − d)) + c, order, factoring k, domain/range, equations from descriptions
 import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, q, num, choice, hard, plane } from "./lib.mjs";
+import { tv } from "../mcr3u-extables.mjs";
+const S = String.raw;
 
 export const TITLE = "1.8 Combining Transformations";
 export const ID = "5c3e0001-0001-4001-8001-000000000108";
@@ -53,24 +55,45 @@ export const blocks = () => [
   ])}`),
 
   examples([
-    ["Square root with every parameter", String.raw`Sketch \(y=2\sqrt{-(x-1)}+3\) and state the domain and range.`,
-      [String.raw`\(a=2\), \(k=-1\), \(d=1\), \(c=3\): \((x,y)\to(-x+1,\ 2y+3)\).`, String.raw`\((0,0)\to(1,3)\), \((1,1)\to(0,5)\), \((4,2)\to(-3,7)\), \((9,3)\to(-8,9)\).`],
-      String.raw`domain \(\{x\in\mathbb R\mid x\le1\}\), range \(\{y\in\mathbb R\mid y\ge3\}\)`,
+    ["Square root with every parameter", S`Sketch \(y=2\sqrt{-(x-1)}+3\) and state the domain and range.`,
+      [S`<b>Read the parameters.</b> \(a=2\): vertical stretch by 2. \(k=-1\): reflection in the y-axis. \(d=1\): right 1. \(c=3\): up 3.`,
+        S`<b>Mapping rule.</b> \((x,y)\to\left(\frac xk+d,\ ay+c\right)=(-x+1,\ 2y+3)\).`,
+        S`<b>Map the key points.</b> ${tv(["\\(y=\\sqrt x\\)", "\\((0,0)\\)", "\\((1,1)\\)", "\\((4,2)\\)", "\\((9,3)\\)"], ["image", "\\((1,3)\\)", "\\((0,5)\\)", "\\((-3,7)\\)", "\\((-8,9)\\)"])}`,
+        S`<b>Domain and range.</b> The radicand needs \(-(x-1)\ge0\), so \(x\le1\). The start point is \((1,3)\), and \(a>0\) sends the curve upward, so \(y\ge3\).`,
+        S`<b>Check.</b> At \(x=-3\): \(2\sqrt4+3=7\) ✓`],
+      S`domain \(\{x\in\mathbb R\mid x\le1\}\), range \(\{y\in\mathbb R\mid y\ge3\}\)`,
       plane({ view: { xmin: -9, xmax: 3, ymin: -1, ymax: 11 }, curves: [{ f: (x) => 2 * Math.sqrt(-(x - 1)) + 3, b: 1, color: "green" }], points: [{ x: 1, y: 3, label: "(1, 3)" }, { x: 0, y: 5, label: "(0, 5)" }, { x: -3, y: 7, label: "(−3, 7)" }, { x: -8, y: 9, label: "(−8, 9)" }], step: { x: 1, y: 1 } })],
-    ["Factoring k first", String.raw`Identify the transformations in \(y=-(2x+6)^2+5\).`,
-      [String.raw`Factor: \(2x+6=2(x+3)\), so \(k=2\), \(d=-3\).`, String.raw`\(a=-1\): reflection in the x-axis; \(c=5\).`],
-      String.raw`compress horizontally by \(\tfrac12\), reflect in the x-axis, then 3 left and 5 up (see the table above)`],
-    ["Absolute value", String.raw`Map the key points of \(|x|\) under \(y=3\left|\tfrac12(x+2)\right|-4\).`,
-      [String.raw`\(a=3\), \(k=\tfrac12\), \(d=-2\), \(c=-4\): \((x,y)\to(2x-2,\ 3y-4)\).`, String.raw`\((-2,2)\to(-6,2)\), \((0,0)\to(-2,-4)\), \((2,2)\to(2,2)\).`],
-      String.raw`vertex \((-2,-4)\), passing through \((-6,2)\) and \((2,2)\); range \(y\ge-4\)`,
+    ["Factoring k first", S`Identify the transformations in \(y=-(2x+6)^2+5\).`,
+      [S`<b>Factor the bracket.</b> The form needs \(k(x-d)\), so take out the coefficient of \(x\): \(2x+6=2(x+3)\). Then \(k=2\) and \(d=-3\). Reading \(d\) as \(-6\) would be wrong.`,
+        S`<b>List all the transformations.</b> \(k=2\): horizontal compression by \(\tfrac12\). \(a=-1\): reflection in the x-axis. \(d=-3\): left 3. \(c=5\): up 5.`,
+        S`<b>Map the key points.</b> The rule is \((x,y)\to\left(\frac x2-3,\ -y+5\right)\). ${tv(["\\(y=x^2\\)", "\\((-2,4)\\)", "\\((-1,1)\\)", "\\((0,0)\\)", "\\((1,1)\\)", "\\((2,4)\\)"], ["image", "\\((-4,1)\\)", "\\((-3.5,4)\\)", "\\((-3,5)\\)", "\\((-2.5,4)\\)", "\\((-2,1)\\)"])}`,
+        S`<b>Check.</b> At \(x=-2\): \(-(-4+6)^2+5=-4+5=1\) ✓. The vertex is where the bracket is 0, at \(x=-3\) ✓`],
+      S`compress horizontally by \(\tfrac12\), reflect in the x-axis, then 3 left and 5 up; vertex \((-3,5)\)`,
+      plane({ view: { xmin: -7, xmax: 1, ymin: -2, ymax: 7 }, curves: [{ f: (x) => -((2 * x + 6) ** 2) + 5, color: "violet" }], points: [{ x: -3, y: 5, label: "(−3, 5)", color: "amber" }, { x: -2, y: 1, label: "(−2, 1)" }, { x: -4, y: 1, label: "(−4, 1)" }, { x: -2.5, y: 4 }, { x: -3.5, y: 4 }], step: { x: 1, y: 1 } })],
+    ["Absolute value", S`Map the key points of \(|x|\) under \(y=3\left|\tfrac12(x+2)\right|-4\).`,
+      [S`<b>Read the parameters.</b> \(a=3\), \(k=\tfrac12\), \(d=-2\), \(c=-4\).`,
+        S`<b>Mapping rule.</b> Dividing by \(k=\tfrac12\) doubles \(x\): \((x,y)\to(2x-2,\ 3y-4)\).`,
+        S`<b>Map the key points.</b> ${tv(["\\(y=|x|\\)", "\\((-2,2)\\)", "\\((0,0)\\)", "\\((2,2)\\)"], ["image", "\\((-6,2)\\)", "\\((-2,-4)\\)", "\\((2,2)\\)"])}`,
+        S`<b>Range.</b> The vertex \((-2,-4)\) is the lowest point, since \(a>0\). So \(y\ge-4\).`,
+        S`<b>Check.</b> At \(x=2\): \(3\left|\tfrac12(4)\right|-4=6-4=2\) ✓. At \(x=-6\): \(3|-2|-4=2\) ✓`],
+      S`vertex \((-2,-4)\), passing through \((-6,2)\) and \((2,2)\); range \(y\ge-4\)`,
       plane({ view: { xmin: -8, xmax: 4, ymin: -6, ymax: 6 }, curves: [{ f: (x) => 3 * Math.abs(0.5 * (x + 2)) - 4, color: "amber" }], points: [{ x: -2, y: -4, label: "(−2, −4)" }, { x: -6, y: 2, label: "(−6, 2)" }, { x: 2, y: 2, label: "(2, 2)" }], step: { x: 1, y: 1 } })],
-    ["Reciprocal", String.raw`Sketch \(y=\frac{-2}{x+1}+3\).`,
-      [String.raw`\(a=-2\), \(d=-1\), \(c=3\): asymptotes \(x=-1\), \(y=3\).`, String.raw`\((x,y)\to(x-1,\ -2y+3)\): \((1,1)\to(0,1)\), \((-1,-1)\to(-2,5)\), \((2,\tfrac12)\to(1,2)\).`],
-      String.raw`branches in the upper-left and lower-right of the asymptotes; domain \(x\ne-1\), range \(y\ne3\)`,
+    ["Reciprocal", S`Sketch \(y=\frac{-2}{x+1}+3\).`,
+      [S`<b>Read the parameters.</b> \(a=-2\): vertical stretch by 2 and reflection in the x-axis. \(d=-1\): left 1. \(c=3\): up 3.`,
+        S`<b>Asymptotes.</b> The denominator is 0 at \(x=-1\), so the vertical asymptote is \(x=-1\). The fraction is never 0, so \(y\ne3\), and \(y=3\) is the horizontal asymptote.`,
+        S`<b>Mapping rule.</b> \((x,y)\to(x-1,\ -2y+3)\). ${tv(["\\(y=\\frac1x\\)", "\\((-1,-1)\\)", "\\((1,1)\\)", "\\((2,\\frac12)\\)"], ["image", "\\((-2,5)\\)", "\\((0,1)\\)", "\\((1,2)\\)"])}`,
+        S`<b>Where the branches go.</b> The reflection moves them to the upper-left and lower-right of the asymptotes.`,
+        S`<b>Check.</b> At \(x=0\): \(-2+3=1\) ✓. At \(x=-2\): \(\frac{-2}{-1}+3=5\) ✓`],
+      S`branches in the upper-left and lower-right of the asymptotes; domain \(x\ne-1\), range \(y\ne3\)`,
       plane({ view: { xmin: -7, xmax: 5, ymin: -3, ymax: 9 }, curves: [{ f: (x) => -2 / (x + 1) + 3, color: "red" }], vlines: [{ x: -1, color: "gray", dash: true }], lines: [{ m: 0, b: 3, color: "gray", dash: true }], points: [{ x: 0, y: 1, label: "(0, 1)" }, { x: -2, y: 5, label: "(−2, 5)" }, { x: 1, y: 2 }], step: { x: 1, y: 1 } })],
-    ["From a description", String.raw`\(y=\sqrt x\) is compressed horizontally by a factor of \(\tfrac13\), reflected in the x-axis, then translated 4 right and 2 up. Write the equation and give the domain and range.`,
-      [String.raw`Compression by \(\tfrac13\) means \(k=3\); reflection in the x-axis means \(a=-1\); \(d=4\), \(c=2\).`, String.raw`\(y=-\sqrt{3(x-4)}+2\).`],
-      String.raw`\(y=-\sqrt{3(x-4)}+2\); domain \(x\ge4\), range \(y\le2\)`],
+    ["From a description", S`\(y=\sqrt x\) is compressed horizontally by a factor of \(\tfrac13\), reflected in the x-axis, then translated 4 right and 2 up. Write the equation and give the domain and range.`,
+      [S`<b>Turn words into parameters.</b> A compression by \(\tfrac13\) means \(k=3\), since \(\frac xk=\frac x3\). A reflection in the x-axis means \(a=-1\). The translations give \(d=4\) and \(c=2\).`,
+        S`<b>Substitute into</b> \(y=a\sqrt{k(x-d)}+c\): \(y=-\sqrt{3(x-4)}+2\). The 3 multiplies the whole bracket.`,
+        S`<b>Domain.</b> \(3(x-4)\ge0\) gives \(x\ge4\).`,
+        S`<b>Range.</b> The root is at least 0, so \(-\sqrt{\ }\) is at most 0, and adding 2 gives \(y\le2\).`,
+        S`<b>Check by mapping.</b> \((x,y)\to\left(\frac x3+4,\ -y+2\right)\): \((9,3)\to(7,-1)\). The equation gives \(-\sqrt9+2=-1\) at \(x=7\) ✓`],
+      S`\(y=-\sqrt{3(x-4)}+2\); domain \(x\ge4\), range \(y\le2\)`,
+      plane({ view: { xmin: 2, xmax: 10, ymin: -3, ymax: 4 }, curves: [{ f: (x) => -Math.sqrt(3 * (x - 4)) + 2, a: 4, color: "violet" }], points: [{ x: 4, y: 2, label: "(4, 2)", color: "amber" }, { x: 16 / 3, y: 0, label: "(5.33, 0)" }, { x: 7, y: -1, label: "(7, −1)" }], step: { x: 1, y: 1 } })],
   ]),
 
   practice([

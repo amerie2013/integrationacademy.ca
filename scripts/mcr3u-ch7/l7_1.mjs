@@ -1,6 +1,7 @@
 // MCR3U 7.1 — Arithmetic Sequences: common difference, general term, recursive formula, function notation, discrete
 // linear graphs, finding a term number, finding a and d from two terms
 import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, q, num, choice, hard, plane } from "./lib.mjs";
+import { tv } from "../mcr3u-extables.mjs";
 
 export const TITLE = "7.1 Arithmetic Sequences";
 export const ID = "e008e3d6-ea57-408c-b466-d7628de67198";
@@ -51,21 +52,44 @@ export const blocks = () => [
 
   examples([
     ["Extending a sequence", "Is 7, 12, 17, 22, … arithmetic? Give the next two terms.",
-      ["Each difference is 5, so yes, with d = 5."],
-      "27, 32"],
+      [S`<b>Definition.</b> A sequence is arithmetic if the difference between consecutive terms is constant.`,
+        S`<b>Test.</b> \(12-7=5\), \(17-12=5\), \(22-17=5\). The difference is always 5, so \(d=5\).`,
+        S`<b>Extend.</b> \(22+5=27\) and \(27+5=32\).`,
+        S`<b>Check on the graph.</b> Plotted against \(n\), the terms lie on a straight line with slope 5 ✓`],
+      "yes, with d = 5; next terms 27, 32",
+      plane({ view: { xmin: 0, xmax: 7, ymin: 0, ymax: 36 }, points: pts((n) => 5 * n + 2, 6), step: { x: 1, y: 4 }, xlabel: "n", ylabel: "tₙ" })],
     ["The general term", S`Find \(t_n\) and \(t_{20}\) for \(40, 34, 28,\ldots\)`,
-      [S`\(a=40\), \(d=-6\): \(t_n=40+(n-1)(-6)=46-6n\).`, S`\(t_{20}=46-120\).`],
-      S`\(t_n=46-6n\), \(t_{20}=-74\)`],
+      [S`<b>Read \(a\) and \(d\).</b> \(a=40\), and \(d=34-40=-6\).`,
+        S`<b>Formula.</b> To reach term \(n\) from term 1, we add \(d\) exactly \(n-1\) times: \(t_n=a+(n-1)d\).`,
+        S`<b>Substitute.</b> \(t_n=40+(n-1)(-6)=40-6n+6=46-6n\).`,
+        S`<b>Evaluate.</b> \(t_{20}=46-6(20)=46-120=-74\).`,
+        S`<b>Check.</b> \(t_3=46-18=28\) ✓, which matches the given term.`],
+      S`\(t_n=46-6n\), \(t_{20}=-74\)`,
+      plane({ view: { xmin: 0, xmax: 22, ymin: -80, ymax: 50 }, points: [...pts((n) => 46 - 6 * n, 3), { x: 20, y: -74, label: "(20, −74)", color: "amber" }], lines: [{ m: -6, b: 46, color: "gray", dash: true }], step: { x: 2, y: 10 }, xlabel: "n", ylabel: "tₙ" })],
     ["Which term?", "Which term of 5, 9, 13, … is 201?",
-      [S`\(t_n=4n+1=201\Rightarrow n=50\).`],
-      "the 50th term"],
+      [S`<b>General term.</b> \(a=5\), \(d=4\): \(t_n=5+(n-1)4=4n+1\).`,
+        S`<b>Set up.</b> We know the value and want the position: \(4n+1=201\).`,
+        S`<b>Solve.</b> \(4n=200\), so \(n=50\).`,
+        S`<b>Why this matters.</b> \(n\) must be a positive whole number. If not, the value would not be in the sequence.`,
+        S`<b>Check.</b> \(t_{50}=4(50)+1=201\) ✓`],
+      "the 50th term",
+      plane({ view: { xmin: 0, xmax: 55, ymin: 0, ymax: 220 }, lines: [{ m: 4, b: 1, color: "gray", dash: true }], points: [{ x: 1, y: 5 }, { x: 2, y: 9 }, { x: 3, y: 13 }, { x: 50, y: 201, label: "(50, 201)", color: "amber" }], step: { x: 5, y: 20 }, xlabel: "n", ylabel: "tₙ" })],
     ["From two terms", S`An arithmetic sequence has \(t_4=19\) and \(t_{11}=54\). Find its general term.`,
-      [S`From term 4 to term 11 is 7 differences: \(7d=35\Rightarrow d=5\).`, S`\(t_4=a+3(5)=19\Rightarrow a=4\).`],
+      [S`<b>Count the steps.</b> From term 4 to term 11 is \(11-4=7\) differences, so \(7d=54-19=35\).`,
+        S`<b>Find \(d\).</b> \(d=5\).`,
+        S`<b>Find \(a\).</b> \(t_4=a+3d\), so \(19=a+15\) and \(a=4\).`,
+        S`<b>General term.</b> \(t_n=4+(n-1)5=5n-1\).`,
+        S`<b>Check.</b> \(t_{11}=55-1=54\) ✓ and \(t_4=20-1=19\) ✓`],
       S`\(t_n=5n-1\)`,
       plane({ view: { xmin: 0, xmax: 12, ymin: 0, ymax: 60 }, points: [{ x: 4, y: 19, label: "(4, 19)" }, { x: 11, y: 54, label: "(11, 54)" }, ...pts((n) => 5 * n - 1, 11).filter((p) => p.x !== 4 && p.x !== 11).map((p) => ({ ...p, color: "gray" }))], step: { x: 1, y: 5 }, xlabel: "n", ylabel: "tₙ" })],
     ["Recursive to explicit", S`A sequence has \(t_1=-3\) and \(t_n=t_{n-1}+4\). Write it in function notation and find \(f(10)\).`,
-      [S`Arithmetic with \(a=-3\), \(d=4\): \(f(n)=-3+4(n-1)=4n-7\).`],
-      S`\(f(10)=33\)`],
+      [S`<b>Read the rule.</b> Start at \(-3\), and add 4 to get each term from the one before. So it is arithmetic, with \(a=-3\), \(d=4\).`,
+        S`<b>List some terms.</b> ${tv(["\\(n\\)", "1", "2", "3", "4"], ["\\(t_n\\)", "\\(-3\\)", "1", "5", "9"])}`,
+        S`<b>Explicit rule.</b> \(f(n)=-3+4(n-1)=4n-7\). The domain is the natural numbers.`,
+        S`<b>Evaluate.</b> \(f(10)=40-7=33\).`,
+        S`<b>Check.</b> \(f(4)=16-7=9\) ✓. An explicit rule jumps straight to term 10, and a recursive rule would need all the terms before it.`],
+      S`\(f(n)=4n-7\); \(f(10)=33\)`,
+      plane({ view: { xmin: 0, xmax: 11, ymin: -5, ymax: 36 }, points: [...pts((n) => 4 * n - 7, 9), { x: 10, y: 33, label: "(10, 33)", color: "amber" }], step: { x: 1, y: 4 }, xlabel: "n", ylabel: "f(n)" })],
   ]),
 
   practice([

@@ -1,6 +1,7 @@
 // MCR3U 6.5 — Graphing Sinusoidal Functions Using Transformations: the five key points, (x, y) → (x/k + d, ay + c),
 // order of transformations, several cycles, domain and range, intercepts
 import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, q, num, choice, hard, plane } from "./lib.mjs";
+import { tv } from "../mcr3u-extables.mjs";
 
 export const TITLE = "6.5 Graphing Sinusoidal Functions Using Transformations";
 export const ID = "5c3e0001-0001-4001-8001-000000000605";
@@ -54,21 +55,41 @@ export const blocks = () => [
 
   examples([
     ["Vertical changes only", S`Sketch \(y=2\sin x+1\) for \(0^\circ\le x\le360^\circ\).`,
-      ["Keep x; multiply y by 2, add 1 (see the box above)."],
-      S`range \(-1\le y\le3\)`],
+      [S`<b>Mapping.</b> \(a=2\), \(c=1\), so \((x,y)\to(x,\ 2y+1)\). The x-values stay. Multiply \(y\) first, then add.`,
+        S`<b>Key points.</b> ${tv(["\\(\\sin x\\)", "\\((0^\\circ,0)\\)", "\\((90^\\circ,1)\\)", "\\((180^\\circ,0)\\)", "\\((270^\\circ,-1)\\)", "\\((360^\\circ,0)\\)"], ["image", "\\((0^\\circ,1)\\)", "\\((90^\\circ,3)\\)", "\\((180^\\circ,1)\\)", "\\((270^\\circ,-1)\\)", "\\((360^\\circ,1)\\)"])}`,
+        S`<b>Axis and range.</b> The axis moves to \(y=1\). With amplitude 2, the range is \(-1\le y\le3\).`,
+        S`<b>Check.</b> At \(x=270^\circ\): \(2(-1)+1=-1\) ✓`],
+      S`range \(-1\le y\le3\)`,
+      G((x) => 2 * Math.sin(r(x)) + 1, map(SIN, 2, 1, 0, 1), { xmin: -30, xmax: 390, ymin: -2, ymax: 4 }, { x: 45, y: 1 }, { lines: [{ m: 0, b: 1, color: "green", dash: true }] })],
     ["Horizontal compression", S`Find the key points of \(y=\cos2x\) for one cycle.`,
-      ["Divide each x by 2; y unchanged."],
-      S`\((0^\circ,1),(45^\circ,0),(90^\circ,-1),(135^\circ,0),(180^\circ,1)\)`],
+      [S`<b>Mapping.</b> \(k=2\), so \((x,y)\to\left(\frac x2,\ y\right)\). Heights do not change.`,
+        S`<b>Period.</b> \(\frac{360^\circ}2=180^\circ\), so one cycle ends at \(180^\circ\).`,
+        S`<b>Key points.</b> ${tv(["\\(\\cos x\\)", "\\((0^\\circ,1)\\)", "\\((90^\\circ,0)\\)", "\\((180^\\circ,-1)\\)", "\\((270^\\circ,0)\\)", "\\((360^\\circ,1)\\)"], ["image", "\\((0^\\circ,1)\\)", "\\((45^\\circ,0)\\)", "\\((90^\\circ,-1)\\)", "\\((135^\\circ,0)\\)", "\\((180^\\circ,1)\\)"])}`,
+        S`<b>Check.</b> \(\cos2(90^\circ)=\cos180^\circ=-1\) ✓`],
+      S`\((0^\circ,1),(45^\circ,0),(90^\circ,-1),(135^\circ,0),(180^\circ,1)\)`,
+      G((x) => Math.cos(r(2 * x)), map(COS, 1, 2, 0, 0), { xmin: -30, xmax: 210, ymin: -1.5, ymax: 1.5 }, { x: 45, y: 0.5 })],
     ["Two translations", S`Find the key points of \(y=\sin(x+90^\circ)-2\).`,
-      [S`\(d=-90^\circ\): subtract 90 from each x.`, "Subtract 2 from each y."],
-      S`\((-90^\circ,-2),(0^\circ,-1),(90^\circ,-2),(180^\circ,-3),(270^\circ,-2)\)`],
+      [S`<b>Read it.</b> \(x+90^\circ=x-(-90^\circ)\), so \(d=-90^\circ\): left \(90^\circ\). And \(c=-2\): down 2.`,
+        S`<b>Mapping.</b> \((x,y)\to(x-90^\circ,\ y-2)\).`,
+        S`<b>Key points.</b> ${tv(["\\(\\sin x\\)", "\\((0^\\circ,0)\\)", "\\((90^\\circ,1)\\)", "\\((180^\\circ,0)\\)", "\\((270^\\circ,-1)\\)", "\\((360^\\circ,0)\\)"], ["image", "\\((-90^\\circ,-2)\\)", "\\((0^\\circ,-1)\\)", "\\((90^\\circ,-2)\\)", "\\((180^\\circ,-3)\\)", "\\((270^\\circ,-2)\\)"])}`,
+        S`<b>Check.</b> \(\sin(0^\circ+90^\circ)-2=1-2=-1\) ✓`],
+      S`\((-90^\circ,-2),(0^\circ,-1),(90^\circ,-2),(180^\circ,-3),(270^\circ,-2)\)`,
+      G((x) => Math.sin(r(x + 90)) - 2, map(SIN, 1, 1, -90, -2), { xmin: -120, xmax: 300, ymin: -4, ymax: 1 }, { x: 45, y: 1 }, { lines: [{ m: 0, b: -2, color: "green", dash: true }] })],
     ["All four transformations", S`Sketch one cycle of \(y=-3\cos(2(x-45^\circ))+1\).`,
-      [S`x: \(\frac x2+45\) gives \(45^\circ,90^\circ,135^\circ,180^\circ,225^\circ\).`, S`y: \(-3y+1\) gives \(-2,1,4,1,-2\).`],
+      [S`<b>Read it.</b> \(a=-3\), \(k=2\), \(d=45^\circ\), \(c=1\). The mapping is \((x,y)\to\left(\frac x2+45^\circ,\ -3y+1\right)\).`,
+        S`<b>x-values.</b> Divide by 2, then add 45: \(45^\circ,90^\circ,135^\circ,180^\circ,225^\circ\).`,
+        S`<b>y-values.</b> Multiply by \(-3\), then add 1: from \(1,0,-1,0,1\) we get \(-2,1,4,1,-2\).`,
+        S`<b>Key points.</b> ${tv(["\\(x\\)", "\\(45^\\circ\\)", "\\(90^\\circ\\)", "\\(135^\\circ\\)", "\\(180^\\circ\\)", "\\(225^\\circ\\)"], ["\\(y\\)", "\\(-2\\)", "1", "4", "1", "\\(-2\\)"])}`,
+        S`<b>Check.</b> At \(x=135^\circ\): \(-3\cos180^\circ+1=4\) ✓`],
       S`range \(-2\le y\le4\)`,
       G((x) => -3 * Math.cos(r(2 * (x - 45))) + 1, map(COS, -3, 2, 45, 1), { xmin: 0, xmax: 270, ymin: -3, ymax: 5 }, { x: 45, y: 1 }, { lines: [{ m: 0, b: 1, color: "green", dash: true }] })],
     ["Several cycles", S`How many cycles of \(y=4\sin\frac x2\) fit in \(0^\circ\le x\le1440^\circ\), and what is the range?`,
-      [S`Period \(\frac{360^\circ}{1/2}=720^\circ\): \(1440\div720=2\) cycles.`, "Amplitude 4, axis y = 0."],
-      S`2 cycles; range \(-4\le y\le4\)`],
+      [S`<b>Period.</b> \(k=\frac12\), so the period is \(\frac{360^\circ}{1/2}=720^\circ\).`,
+        S`<b>Count.</b> \(\frac{1440^\circ}{720^\circ}=2\) cycles.`,
+        S`<b>Range.</b> The amplitude is 4 and the axis is \(y=0\), so \(-4\le y\le4\).`,
+        S`<b>Check.</b> At \(x=180^\circ\): \(4\sin90^\circ=4\), the first maximum ✓. At \(x=1440^\circ\): \(4\sin720^\circ=0\), the end of the second cycle ✓`],
+      S`2 cycles; range \(-4\le y\le4\)`,
+      G((x) => 4 * Math.sin(r(x / 2)), [[180, 4], [540, -4], [720, 0], [1440, 0]], { xmin: -60, xmax: 1500, ymin: -5, ymax: 5 }, { x: 180, y: 1 })],
   ]),
 
   practice([

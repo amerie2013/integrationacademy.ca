@@ -1,5 +1,7 @@
 // MCR3U 1.7 — Horizontal Stretches, Compressions and Reflections: y = f(kx), y = f(−x), y = −f(x)
 import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, q, num, choice, hard, plane } from "./lib.mjs";
+import { tv } from "../mcr3u-extables.mjs";
+const S = String.raw;
 
 export const TITLE = "1.7 Horizontal Stretches, Compressions and Reflections";
 export const ID = "5c3e0001-0001-4001-8001-000000000107";
@@ -51,22 +53,43 @@ export const blocks = () => [
   ])}`),
 
   examples([
-    ["A horizontal compression", String.raw`Describe \(y=|3x|\) and map the key points of \(|x|\). Compare with \(y=3|x|\).`,
-      [String.raw`\(k=3\): compress horizontally by \(\tfrac13\): \((x,y)\to(\tfrac x3,\ y)\): \((-3,3)\to(-1,3)\), \((3,3)\to(1,3)\).`, String.raw`\(|3x|=3|x|\), so the graph is the same as a vertical stretch by 3.`],
-      String.raw`a V with slopes \(\pm3\); for \(|x|\) the two descriptions agree`],
-    ["A horizontal stretch", String.raw`Describe \(y=\left(\tfrac12x\right)^2\) and show it equals a vertical compression.`,
-      [String.raw`\(k=\tfrac12\): stretch horizontally by 2: \((2,4)\to(4,4)\), \((1,1)\to(2,1)\).`, String.raw`\(\left(\tfrac12x\right)^2=\tfrac14x^2\): the same as a vertical compression by \(\tfrac14\).`],
-      String.raw`a wider parabola through \((\pm4,4)\) and \((\pm2,1)\)`,
-      plane({ view: { xmin: -6, xmax: 6, ymin: -1, ymax: 7 }, curves: [{ f: (x) => x * x, color: "gray" }, { f: (x) => 0.25 * x * x, color: "violet" }], points: [{ x: 4, y: 4, label: "(4, 4)" }, { x: 2, y: 4, label: "(2, 4)", color: "gray" }], step: { x: 1, y: 1 } })],
-    ["Reflection in the y-axis", String.raw`Graph \(y=\sqrt{-x}\) and state its domain and range.`,
-      [String.raw`\(k=-1\): \((x,y)\to(-x,y)\): \((1,1)\to(-1,1)\), \((4,2)\to(-4,2)\), \((9,3)\to(-9,3)\).`, String.raw`It needs \(-x\ge0\), i.e. \(x\le0\).`],
-      String.raw`domain \(\{x\in\mathbb R\mid x\le0\}\), range \(\{y\in\mathbb R\mid y\ge0\}\)`],
-    ["Compression with a reciprocal", String.raw`Map the points \((\tfrac12,2),(1,1),(2,\tfrac12)\) of \(\frac1x\) under \(y=\frac{1}{4x}\).`,
-      [String.raw`\(k=4\): \((x,y)\to(\tfrac x4,\ y)\): \((\tfrac18,2),(\tfrac14,1),(\tfrac12,\tfrac12)\).`, String.raw`Asymptotes stay \(x=0\) and \(y=0\) — compressing toward the y-axis does not move them.`],
-      String.raw`\((0.125,2),(0.25,1),(0.5,0.5)\)`],
-    ["From a set of points", String.raw`\(f\) contains \((-4,2),(0,6),(8,-2)\). Find the matching points of \(y=f(4x)\) and \(y=f(-\tfrac12x)\).`,
-      [String.raw`\(y=f(4x)\): divide x by 4: \((-1,2),(0,6),(2,-2)\).`, String.raw`\(y=f(-\tfrac12x)\): divide x by \(-\tfrac12\), i.e. multiply by \(-2\): \((8,2),(0,6),(-16,-2)\).`],
-      String.raw`\(f(4x)\): \((-1,2),(0,6),(2,-2)\); \(f(-\tfrac12x)\): \((8,2),(0,6),(-16,-2)\)`],
+    ["A horizontal compression", S`Describe \(y=|3x|\) and map the key points of \(|x|\). Compare with \(y=3|x|\).`,
+      [S`<b>Why a compression?</b> With \(k=3\), the input is tripled, so a given output is reached at one-third of the old x-value. The mapping is \((x,y)\to\left(\frac x3,\ y\right)\).`,
+        S`<b>Map the key points.</b> ${tv(["\\(y=|x|\\)", "\\((-3,3)\\)", "\\((0,0)\\)", "\\((3,3)\\)"], ["image", "\\((-1,3)\\)", "\\((0,0)\\)", "\\((1,3)\\)"])}`,
+        S`<b>Compare by algebra.</b> \(|3x|=|3||x|=3|x|\), so the two equations give the same graph.`,
+        S`<b>Compare with points.</b> The vertical stretch maps \((1,1)\to(1,3)\), the same point the compression produced from \((3,3)\) ✓. For \(|x|\), the two descriptions agree. Most other functions do not behave this way.`],
+      S`a V with slopes \(\pm3\); for \(|x|\) the two descriptions agree`,
+      plane({ view: { xmin: -5, xmax: 5, ymin: -1, ymax: 6 }, curves: [{ f: (x) => Math.abs(x), color: "gray" }, { f: (x) => Math.abs(3 * x), color: "violet" }], points: [{ x: 1, y: 3, label: "(1, 3)", color: "amber" }, { x: -1, y: 3, label: "(−1, 3)", color: "amber" }, { x: 3, y: 3, label: "(3, 3)", color: "gray" }], step: { x: 1, y: 1 } }, "gray y = |x|, violet y = |3x|")],
+    ["A horizontal stretch", S`Describe \(y=\left(\tfrac12x\right)^2\) and show it equals a vertical compression.`,
+      [S`<b>Why a stretch?</b> With \(k=\tfrac12\), the input is halved, so an old output now needs twice the x-value. The mapping is \((x,y)\to(2x,\ y)\).`,
+        S`<b>Map the key points.</b> ${tv(["\\(y=x^2\\)", "\\((1,1)\\)", "\\((2,4)\\)", "\\((-2,4)\\)"], ["image", "\\((2,1)\\)", "\\((4,4)\\)", "\\((-4,4)\\)"])}`,
+        S`<b>Show the second description.</b> Square the bracket: \(\left(\tfrac12x\right)^2=\tfrac14x^2\). This is a vertical compression by \(\tfrac14\).`,
+        S`<b>Check.</b> The vertical compression sends \((4,16)\) to \((4,4)\), which is the same point as above. At \(x=2\): \(\tfrac14(4)=1\) ✓`],
+      S`a wider parabola through \((\pm4,4)\) and \((\pm2,1)\)`,
+      plane({ view: { xmin: -6, xmax: 6, ymin: -1, ymax: 7 }, curves: [{ f: (x) => x * x, color: "gray" }, { f: (x) => 0.25 * x * x, color: "violet" }], points: [{ x: 4, y: 4, label: "(4, 4)" }, { x: 2, y: 4, label: "(2, 4)", color: "gray" }, { x: 2, y: 1, label: "(2, 1)" }], step: { x: 1, y: 1 } })],
+    ["Reflection in the y-axis", S`Graph \(y=\sqrt{-x}\) and state its domain and range.`,
+      [S`<b>Read the parameter.</b> \(k=-1\) replaces \(x\) by \(-x\). Each point moves to the opposite side of the y-axis: \((x,y)\to(-x,\ y)\).`,
+        S`<b>Map the key points.</b> ${tv(["\\(y=\\sqrt x\\)", "\\((0,0)\\)", "\\((1,1)\\)", "\\((4,2)\\)", "\\((9,3)\\)"], ["image", "\\((0,0)\\)", "\\((-1,1)\\)", "\\((-4,2)\\)", "\\((-9,3)\\)"])}`,
+        S`<b>Domain from algebra.</b> The radicand must be non-negative: \(-x\ge0\), so \(x\le0\). Negative inputs are now the allowed ones, since \(\sqrt{-(-4)}=\sqrt4=2\).`,
+        S`<b>Range.</b> A horizontal change does not affect heights, so the range stays \(y\ge0\).`,
+        S`<b>Check.</b> At \(x=-9\): \(\sqrt9=3\) ✓`],
+      S`domain \(\{x\in\mathbb R\mid x\le0\}\), range \(\{y\in\mathbb R\mid y\ge0\}\)`,
+      plane({ view: { xmin: -10, xmax: 10, ymin: -1, ymax: 5 }, curves: [{ f: (x) => Math.sqrt(x), a: 0, color: "gray" }, { f: (x) => Math.sqrt(-x), b: 0, color: "violet" }], points: [{ x: -4, y: 2, label: "(−4, 2)" }, { x: -9, y: 3, label: "(−9, 3)" }, { x: 4, y: 2, label: "(4, 2)", color: "gray" }], step: { x: 1, y: 1 } })],
+    ["Compression with a reciprocal", S`Map the points \((\tfrac12,2),(1,1),(2,\tfrac12)\) of \(\frac1x\) under \(y=\frac{1}{4x}\).`,
+      [S`<b>Read the parameter.</b> \(k=4\), so \((x,y)\to\left(\frac x4,\ y\right)\). The x-values are divided by 4, and the heights stay.`,
+        S`<b>Map the points.</b> ${tv(["\\(y=\\frac1x\\)", "\\((\\frac12,2)\\)", "\\((1,1)\\)", "\\((2,\\frac12)\\)"], ["image", "\\((\\frac18,2)\\)", "\\((\\frac14,1)\\)", "\\((\\frac12,\\frac12)\\)"])}`,
+        S`<b>Asymptotes.</b> Compressing toward the y-axis leaves \(x=0\) in place, because \(\frac04=0\). Heights are unchanged, so \(y=0\) stays as well.`,
+        S`<b>Check.</b> Substitute into the equation. \(x=\frac14\): \(\frac1{4\cdot\frac14}=1\) ✓. \(x=\frac18\): \(\frac1{4\cdot\frac18}=2\) ✓`],
+      S`\((0.125,2),(0.25,1),(0.5,0.5)\)`,
+      plane({ view: { xmin: 0, xmax: 3, ymin: 0, ymax: 3 }, curves: [{ f: (x) => 1 / x, a: 0.34, color: "gray" }, { f: (x) => 1 / (4 * x), a: 0.09, color: "violet" }], points: [{ x: 0.125, y: 2, label: "(0.125, 2)", color: "amber" }, { x: 0.25, y: 1, label: "(0.25, 1)", color: "amber" }, { x: 0.5, y: 0.5, label: "(0.5, 0.5)", color: "amber" }, { x: 1, y: 1, label: "(1, 1)", color: "gray" }], step: { x: 0.5, y: 0.5 } }, "gray y = 1/x, violet y = 1/(4x)")],
+    ["From a set of points", S`\(f\) contains \((-4,2),(0,6),(8,-2)\). Find the matching points of \(y=f(4x)\) and \(y=f(-\tfrac12x)\).`,
+      [S`<b>Rule.</b> For \(y=f(kx)\), the mapping is \((x,y)\to\left(\frac xk,\ y\right)\). Only x-values change.`,
+        S`<b>First function,</b> \(k=4\): divide each x-value by 4.`,
+        S`<b>Second function,</b> \(k=-\frac12\): dividing by \(-\frac12\) means multiplying by \(-2\). So it is a stretch by 2 and a reflection in the y-axis.`,
+        S`<b>Table.</b> ${tv(["\\(f\\)", "\\((-4,2)\\)", "\\((0,6)\\)", "\\((8,-2)\\)"], ["\\(f(4x)\\)", "\\((-1,2)\\)", "\\((0,6)\\)", "\\((2,-2)\\)"], ["\\(f(-\\frac12x)\\)", "\\((8,2)\\)", "\\((0,6)\\)", "\\((-16,-2)\\)"])}`,
+        S`<b>Check by substituting.</b> In \(f(4x)\) at \(x=2\), the input is \(f(8)=-2\) ✓. In \(f(-\tfrac12x)\) at \(x=-16\), the input is \(f(8)=-2\) ✓. Points on the y-axis, like \((0,6)\), never move.`],
+      S`\(f(4x)\): \((-1,2),(0,6),(2,-2)\); \(f(-\tfrac12x)\): \((8,2),(0,6),(-16,-2)\)`,
+      plane({ view: { xmin: -18, xmax: 10, ymin: -4, ymax: 8 }, points: [{ x: -4, y: 2, color: "gray" }, { x: 8, y: -2, label: "(8, −2)", color: "gray" }, { x: 0, y: 6, label: "(0, 6)", color: "amber" }, { x: -1, y: 2, color: "violet" }, { x: 2, y: -2, label: "(2, −2)", color: "violet" }, { x: 8, y: 2, label: "(8, 2)", color: "green" }, { x: -16, y: -2, label: "(−16, −2)", color: "green" }], step: { x: 2, y: 2 } }, "gray f, violet f(4x), green f(−x/2)")],
   ]),
 
   practice([

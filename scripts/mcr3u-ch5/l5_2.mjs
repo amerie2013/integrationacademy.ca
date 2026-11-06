@@ -1,6 +1,7 @@
 // MCR3U 5.2 — Angles from 0° to 360°: standard position, ratios from a point on the terminal arm, related acute angles,
 // the CAST rule, exact values beyond 90°, and the two angles with a given ratio
 import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, q, num, choice, roots, rootsT, hard, plane } from "./lib.mjs";
+import { tv } from "../mcr3u-extables.mjs";
 
 export const TITLE = "5.2 Angles from 0° to 360°";
 export const ID = "1d13cf53-ddcc-4566-a360-039fdd0be6ea";
@@ -50,22 +51,43 @@ export const blocks = () => [
 
   examples([
     ["From a point", S`The point \((-3,4)\) is on the terminal arm of θ. Find the three ratios and θ.`,
-      [S`\(r=\sqrt{9+16}=5\): \(\sin\theta=\frac45\), \(\cos\theta=-\frac35\), \(\tan\theta=-\frac43\).`, S`Related angle \(\tan^{-1}\frac43\approx53.1^\circ\); Quadrant 2: \(\theta\approx126.9^\circ\).`],
-      S`\(\theta\approx126.9^\circ\)`,
+      [S`<b>Definitions.</b> For a point \((x,y)\) on the arm, with \(r=\sqrt{x^2+y^2}\): \(\sin\theta=\frac yr\), \(\cos\theta=\frac xr\), \(\tan\theta=\frac yx\).`,
+        S`<b>Find \(r\).</b> \(r=\sqrt{(-3)^2+4^2}=\sqrt{25}=5\). The value of \(r\) is always positive.`,
+        S`<b>Write the ratios.</b> \(\sin\theta=\frac45\), \(\cos\theta=-\frac35\), \(\tan\theta=-\frac43\).`,
+        S`<b>Related angle.</b> Use the sizes only: \(\tan^{-1}\frac43\approx53.1^\circ\). This is the acute angle between the arm and the x-axis.`,
+        S`<b>Place it.</b> The point has \(x<0\), \(y>0\), so it is in Quadrant 2: \(\theta\approx180^\circ-53.1^\circ=126.9^\circ\).`,
+        S`<b>Check.</b> \(\cos126.9^\circ\approx-0.6=-\frac35\) ✓`],
+      S`\(\sin\theta=\frac45\), \(\cos\theta=-\frac35\), \(\tan\theta=-\frac43\); \(\theta\approx126.9^\circ\)`,
       arm(-3, 4, "(−3, 4)")],
     ["An exact value in Quadrant 2", S`Find \(\cos150^\circ\) exactly.`,
-      [S`Related angle \(30^\circ\); cosine is negative in Quadrant 2.`],
-      S`\(-\frac{\sqrt3}2\)`],
+      [S`<b>Find the quadrant.</b> \(90^\circ<150^\circ<180^\circ\), so it is Quadrant 2.`,
+        S`<b>Related angle.</b> In Quadrant 2, it is \(180^\circ-150^\circ=30^\circ\).`,
+        S`<b>Sign.</b> In Quadrant 2, \(x<0\), and \(\cos\theta=\frac xr\). So cosine is negative.`,
+        S`<b>Value.</b> \(\cos150^\circ=-\cos30^\circ=-\frac{\sqrt3}2\).`,
+        S`<b>Check.</b> A calculator gives \(\cos150^\circ\approx-0.866\), and \(-\frac{\sqrt3}2\approx-0.866\) ✓`],
+      S`\(-\frac{\sqrt3}2\)`,
+      arm(-4.33, 2.5, "150°")],
     ["Exact values in Quadrants 3 and 4", S`Find \(\tan225^\circ\) and \(\sin300^\circ\) exactly.`,
-      [S`225°: related 45°, Quadrant 3 (tan positive): \(\tan225^\circ=1\).`, S`300°: related 60°, Quadrant 4 (sin negative): \(-\frac{\sqrt3}2\).`],
-      S`\(1\) and \(-\frac{\sqrt3}2\)`],
+      [S`<b>Method.</b> For each angle, find the quadrant, the related angle and the sign.`,
+        S`<b>Summary.</b> ${tv(["angle", "quadrant", "related angle", "sign", "value"], ["\\(\\tan225^\\circ\\)", "3", "\\(225^\\circ-180^\\circ=45^\\circ\\)", "positive", "\\(\\tan45^\\circ=1\\)"], ["\\(\\sin300^\\circ\\)", "4", "\\(360^\\circ-300^\\circ=60^\\circ\\)", "negative", "\\(-\\sin60^\\circ=-\\frac{\\sqrt3}2\\)"])}`,
+        S`<b>Why the signs?</b> In Quadrant 3, \(x\) and \(y\) are both negative, so \(\frac yx>0\). In Quadrant 4, \(y<0\), so \(\frac yr<0\).`,
+        S`<b>Check.</b> \(\tan225^\circ=1\) on a calculator ✓, and \(\sin300^\circ\approx-0.866\) ✓`],
+      S`\(1\) and \(-\frac{\sqrt3}2\)`,
+      plane({ view: { xmin: -6, xmax: 6, ymin: -6, ymax: 6 }, segs: [{ pts: [[0, 0], [-3.54, -3.54]], color: "violet" }, { pts: [[0, 0], [2.5, -4.33]], color: "blue" }], points: [{ x: -3.54, y: -3.54, label: "225°", color: "violet" }, { x: 2.5, y: -4.33, label: "300°" }], step: { x: 1, y: 1 } })],
     ["Two angles with a given sine", S`Solve \(\sin\theta=-\tfrac12\) for \(0^\circ\le\theta\le360^\circ\).`,
-      [S`Related angle \(30^\circ\); sine is negative in Quadrants 3 and 4.`, S`\(180^\circ+30^\circ\) and \(360^\circ-30^\circ\).`],
+      [S`<b>Related angle.</b> Ignore the sign: \(\sin\alpha=\frac12\) gives \(\alpha=30^\circ\).`,
+        S`<b>Which quadrants?</b> Sine is \(\frac yr\), which is negative when \(y<0\). That is Quadrants 3 and 4.`,
+        S`<b>Build the angles.</b> Quadrant 3: \(180^\circ+30^\circ=210^\circ\). Quadrant 4: \(360^\circ-30^\circ=330^\circ\).`,
+        S`<b>Check.</b> \(\sin210^\circ=-\frac12\) ✓ and \(\sin330^\circ=-\frac12\) ✓. In the figure, both arms end at the same height, on the dashed line \(y=-\frac12r\).`],
       S`\(\theta=210^\circ\) or \(330^\circ\)`,
       plane({ view: { xmin: -6, xmax: 6, ymin: -6, ymax: 6 }, segs: [{ pts: [[0, 0], [-4.33, -2.5]], color: "violet" }, { pts: [[0, 0], [4.33, -2.5]], color: "violet" }], lines: [{ m: 0, b: -2.5, color: "amber", dash: true }], points: [{ x: -4.33, y: -2.5, label: "210°" }, { x: 4.33, y: -2.5, label: "330°" }], step: { x: 1, y: 1 } })],
     ["A non-special value", S`Solve \(\cos\theta=0.42\) for \(0^\circ\le\theta\le360^\circ\).`,
-      [S`\(\cos^{-1}0.42\approx65.2^\circ\) (Quadrant 1).`, S`Cosine is also positive in Quadrant 4: \(360^\circ-65.2^\circ\).`],
-      S`\(\theta\approx65.2^\circ\) or \(294.8^\circ\)`],
+      [S`<b>First solution.</b> The calculator gives one value: \(\cos^{-1}0.42\approx65.2^\circ\). It is in Quadrant 1, where cosine is positive.`,
+        S`<b>Second quadrant.</b> Cosine is \(\frac xr\), which is also positive when \(x>0\) in Quadrant 4. The calculator does not show this one.`,
+        S`<b>Second solution.</b> \(360^\circ-65.2^\circ=294.8^\circ\).`,
+        S`<b>Check.</b> \(\cos294.8^\circ\approx0.42\) ✓. In the figure, both arms end on the same vertical line, so they have the same \(x\).`],
+      S`\(\theta\approx65.2^\circ\) or \(294.8^\circ\)`,
+      plane({ view: { xmin: -6, xmax: 6, ymin: -6, ymax: 6 }, segs: [{ pts: [[0, 0], [2.1, 4.54]], color: "violet" }, { pts: [[0, 0], [2.1, -4.54]], color: "violet" }], vlines: [{ x: 2.1, color: "amber", dash: true }], points: [{ x: 2.1, y: 4.54, label: "65.2°" }, { x: 2.1, y: -4.54, label: "294.8°" }], step: { x: 1, y: 1 } })],
   ]),
 
   practice([

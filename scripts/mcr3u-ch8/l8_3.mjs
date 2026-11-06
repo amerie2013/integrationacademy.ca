@@ -2,6 +2,7 @@
 // by guess and check, doubling time
 import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, q, num, choice, hard, plane } from "./lib.mjs";
 import { pv, fv, m, pct, periodsTo } from "./fin.mjs";
+import { tv } from "../mcr3u-extables.mjs";
 
 export const TITLE = "8.3 Compound Interest: Present Value";
 export const ID = "04a81e2d-9ddc-4a17-99aa-101e7586d32e";
@@ -53,21 +54,42 @@ export const blocks = () => [
 
   examples([
     ["Present value, annual", "How much must be invested now at 4%/a compounded annually to have 8000 dollars in 5 years?",
-      [S`\(PV=8000(1.04)^{-5}\).`],
-      `${m(pv(8000, 0.04, 5))} dollars`],
+      [S`<b>Idea.</b> Present value runs compounding backward. We know the future amount and want the start.`,
+        S`<b>Rearrange.</b> \(A=P(1+i)^n\) gives \(PV=A(1+i)^{-n}\).`,
+        S`<b>Substitute.</b> \(PV=8000(1.04)^{-5}\).`,
+        S`<b>Calculate.</b> \((1.04)^{-5}\approx0.821927\), so \(PV\approx${m(pv(8000, 0.04, 5))}\).`,
+        S`<b>Check forward.</b> \(${m(pv(8000, 0.04, 5))}(1.04)^5\approx8000\) ✓`],
+      `${m(pv(8000, 0.04, 5))} dollars`,
+      plane({ view: { xmin: 0, xmax: 6, ymin: 6000, ymax: 8600 }, curves: [{ f: (t) => pv(8000, 0.04, 5) * 1.04 ** t, a: 0, b: 5, color: "violet" }], points: [{ x: 0, y: pv(8000, 0.04, 5), label: `PV ${m(pv(8000, 0.04, 5))}`, color: "amber" }, { x: 5, y: 8000, label: "(5, 8000)" }], step: { x: 1, y: 400 }, xlabel: "years", ylabel: "value" })],
     ["Present value, monthly", "How much must be invested now at 6%/a compounded monthly to have 12 000 dollars in 3 years?",
-      [S`\(i=0.005\), \(n=36\): \(PV=12000(1.005)^{-36}\).`],
-      `${m(pv(12000, 0.005, 36))} dollars`],
+      [S`<b>Convert.</b> \(i=\frac{0.06}{12}=0.005\) and \(n=3\times12=36\).`,
+        S`<b>Substitute.</b> \(PV=12\,000(1.005)^{-36}\).`,
+        S`<b>Calculate.</b> \((1.005)^{-36}\approx0.835645\), so \(PV\approx${m(pv(12000, 0.005, 36))}\).`,
+        S`<b>Meaning.</b> The interest earned will be \(12\,000-${m(pv(12000, 0.005, 36))}=${m(12000 - pv(12000, 0.005, 36))}\) dollars.`,
+        S`<b>Check.</b> The PV is less than the goal, as it must be ✓`],
+      `${m(pv(12000, 0.005, 36))} dollars`,
+      plane({ view: { xmin: 0, xmax: 4, ymin: 9000, ymax: 12800 }, curves: [{ f: (t) => pv(12000, 0.005, 36) * 1.005 ** (12 * t), a: 0, b: 3, color: "violet" }], points: [{ x: 0, y: pv(12000, 0.005, 36), label: `PV ${m(pv(12000, 0.005, 36))}`, color: "amber" }, { x: 3, y: 12000, label: "(3, 12 000)" }], step: { x: 1, y: 500 }, xlabel: "years", ylabel: "value" })],
     ["Finding n by guess and check", "How many years does it take 2500 dollars to grow to 4000 dollars at 5%/a compounded annually?",
-      [S`Need \(1.05^n\ge1.6\).`, S`\(1.05^9\approx1.551\), \(1.05^{10}\approx1.629\).`],
-      "10 years"],
+      [S`<b>Set up.</b> \(2500(1.05)^n\ge4000\). Divide by 2500: \(1.05^n\ge1.6\).`,
+        S`<b>Why guess?</b> We have no algebra yet for an exponent, so we test values.`,
+        S`<b>Test.</b> ${tv(["\\(n\\)", "8", "9", "10"], ["\\(1.05^n\\)", "1.477", "1.551", "1.629"], ["amount", "3693.64", "3878.32", "4072.24"])}`,
+        S`<b>Decide.</b> After 9 years, the target is not reached. After 10 years, it is. So 10 years.`],
+      "10 years",
+      plane({ view: { xmin: 0, xmax: 12, ymin: 2300, ymax: 4800 }, curves: [{ f: (t) => 2500 * 1.05 ** t, a: 0, color: "violet" }], lines: [{ m: 0, b: 4000, color: "amber", dash: true }], points: [{ x: 9, y: 2500 * 1.05 ** 9 }, { x: 10, y: 2500 * 1.05 ** 10, label: "(10, 4072.24)", color: "amber" }], step: { x: 1, y: 250 }, xlabel: "years", ylabel: "A" })],
     ["Doubling time", "About how long does it take money to double at 7.2%/a compounded annually?",
-      [S`\(1.072^9\approx1.87\), \(1.072^{10}\approx2.004\).`, "This matches the 'rule of 72': 72 ÷ 7.2 = 10."],
+      [S`<b>Set up.</b> The principal cancels. \(P(1.072)^n=2P\) gives \(1.072^n=2\), so the answer does not depend on \(P\).`,
+        S`<b>Test.</b> \(1.072^9\approx1.87\), which is too small. \(1.072^{10}\approx2.004\), which is just enough.`,
+        S`<b>Answer.</b> About 10 years.`,
+        S`<b>Check with the rule of 72.</b> A quick estimate is \(72\div\text{rate}\): \(72\div7.2=10\) ✓`],
       "about 10 years",
-      plane({ view: { xmin: 0, xmax: 12, ymin: 0, ymax: 2.4 }, curves: [{ f: (t) => 1.072 ** t, a: 0, color: "violet" }], lines: [{ m: 0, b: 2, color: "amber", dash: true }], step: { x: 1, y: 0.4 }, xlabel: "years", ylabel: "growth factor" })],
+      plane({ view: { xmin: 0, xmax: 12, ymin: 0, ymax: 2.4 }, curves: [{ f: (t) => 1.072 ** t, a: 0, color: "violet" }], lines: [{ m: 0, b: 2, color: "amber", dash: true }], points: [{ x: 10, y: 1.072 ** 10, label: "(10, 2.004)", color: "amber" }], step: { x: 1, y: 0.4 }, xlabel: "years", ylabel: "growth factor" })],
     ["Comparing offers", "You can receive 5000 dollars now or 6000 dollars in 3 years. Money earns 5%/a compounded annually. Which is worth more?",
-      [S`PV of 6000: \(6000(1.05)^{-3}\approx${m(pv(6000, 0.05, 3))}\).`],
-      "the 6000 dollars in 3 years (worth more today)"],
+      [S`<b>Principle.</b> Amounts at different times can be compared only at the same moment, so we bring both to today.`,
+        S`<b>Today's value of 6000.</b> \(PV=6000(1.05)^{-3}\approx${m(pv(6000, 0.05, 3))}\).`,
+        S`<b>Compare.</b> \(${m(pv(6000, 0.05, 3))}>5000\), so the later payment is worth more.`,
+        S`<b>Check the other way.</b> 5000 now grows to \(5000(1.05)^3=${m(fv(5000, 0.05, 3))}\), which is less than 6000 ✓`],
+      "the 6000 dollars in 3 years (worth more today)",
+      plane({ view: { xmin: 0, xmax: 4, ymin: 4500, ymax: 6300 }, curves: [{ f: (t) => 5000 * 1.05 ** t, a: 0, b: 3, color: "blue" }, { f: (t) => pv(6000, 0.05, 3) * 1.05 ** t, a: 0, b: 3, color: "violet" }], points: [{ x: 0, y: 5000, label: "5000" }, { x: 3, y: 6000, label: "6000", color: "violet" }, { x: 3, y: fv(5000, 0.05, 3), label: m(fv(5000, 0.05, 3)) }], step: { x: 1, y: 200 }, xlabel: "years", ylabel: "value" })],
   ]),
 
   practice([

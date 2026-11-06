@@ -1,6 +1,7 @@
 // MCR3U 7.3 — Creating Rules for Sequences: recursive and explicit rules, finite differences for sequences that are
 // neither arithmetic nor geometric, the disc-moving puzzle 2ⁿ − 1, function notation
 import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, q, num, choice, hard, plane } from "./lib.mjs";
+import { tv } from "../mcr3u-extables.mjs";
 
 export const TITLE = "7.3 Creating Rules for Sequences";
 export const ID = "5c3e0001-0001-4001-8001-000000000703";
@@ -51,21 +52,43 @@ export const blocks = () => [
 
   examples([
     ["Terms from a recursive rule", S`List the first four terms: \(t_1=2\), \(t_n=3t_{n-1}-1\).`,
-      [S`\(t_2=3(2)-1=5\), \(t_3=14\), \(t_4=41\).`],
-      "2, 5, 14, 41"],
+      [S`<b>Read the rule.</b> Each term is "3 times the previous term, minus 1".`,
+        S`<b>Second term.</b> \(t_2=3(2)-1=5\).`,
+        S`<b>Third term.</b> \(t_3=3(5)-1=14\).`,
+        S`<b>Fourth term.</b> \(t_4=3(14)-1=41\).`,
+        S`<b>Type.</b> The differences are \(3,9,27\) and the ratios are not constant, so it is neither arithmetic nor geometric, though the differences themselves are geometric ✓`],
+      "2, 5, 14, 41",
+      plane({ view: { xmin: 0, xmax: 5, ymin: 0, ymax: 46 }, points: [{ x: 1, y: 2, label: "(1, 2)" }, { x: 2, y: 5, label: "(2, 5)" }, { x: 3, y: 14, label: "(3, 14)" }, { x: 4, y: 41, label: "(4, 41)", color: "amber" }], step: { x: 1, y: 5 }, xlabel: "n", ylabel: "tₙ" })],
     ["A quadratic sequence", "Find an explicit rule for 2, 5, 10, 17, 26, …",
-      ["First differences 3, 5, 7, 9; second differences 2: quadratic with leading coefficient 1.", S`\(t_n-n^2\) gives 1, 1, 1, …`],
-      S`\(t_n=n^2+1\)`],
+      [S`<b>Differences.</b> ${tv(["\\(t_n\\)", "2", "5", "10", "17", "26"], ["first", "", "3", "5", "7", "9"], ["second", "", "", "2", "2", "2"])}`,
+        S`<b>Type.</b> Constant second differences mean quadratic. With step 1, \(2a=2\), so the leading coefficient is 1.`,
+        S`<b>Compare with \(n^2\).</b> \(n^2\) gives \(1,4,9,16,25\). Subtracting from the terms gives \(1,1,1,1,1\).`,
+        S`<b>Rule.</b> \(t_n=n^2+1\).`,
+        S`<b>Check.</b> \(t_5=25+1=26\) ✓`],
+      S`\(t_n=n^2+1\)`,
+      plane({ view: { xmin: 0, xmax: 7, ymin: 0, ymax: 40 }, curves: [{ f: (x) => x * x + 1, a: 0, color: "gray" }], points: pts((n) => n * n + 1, 6), step: { x: 1, y: 5 }, xlabel: "n", ylabel: "tₙ" })],
     ["Writing a recursive rule", "Write a recursive formula for 4, 9, 19, 39, …",
-      [S`Each term is double the previous plus 1: \(9=2(4)+1\), \(19=2(9)+1\).`],
-      S`\(t_1=4,\ t_n=2t_{n-1}+1\)`],
+      [S`<b>Try simple patterns.</b> Differences \(5,10,20\) double each time, so each term probably involves doubling the previous one.`,
+        S`<b>Test doubling.</b> \(2(4)=8\), which is 1 short of 9. \(2(9)=18\), which is 1 short of 19. \(2(19)=38\), which is 1 short of 39.`,
+        S`<b>Rule.</b> \(t_n=2t_{n-1}+1\). A recursive rule also needs a starting value: \(t_1=4\).`,
+        S`<b>Check by predicting.</b> The next term is \(2(39)+1=79\), and the difference \(40\) continues the doubling ✓`],
+      S`\(t_1=4,\ t_n=2t_{n-1}+1\)`,
+      plane({ view: { xmin: 0, xmax: 6, ymin: 0, ymax: 90 }, points: [{ x: 1, y: 4 }, { x: 2, y: 9 }, { x: 3, y: 19 }, { x: 4, y: 39, label: "(4, 39)" }, { x: 5, y: 79, label: "(5, 79)", color: "amber" }], step: { x: 1, y: 10 }, xlabel: "n", ylabel: "tₙ" })],
     ["The disc puzzle", "To move a stack of n discs between pegs (never putting a larger disc on a smaller one), move n − 1 discs, then the largest, then n − 1 again. Write a recursive rule and an explicit rule for the minimum number of moves.",
-      [S`\(M_1=1\), \(M_n=2M_{n-1}+1\): 1, 3, 7, 15, …`, S`Each is one less than a power of 2: \(M_n=2^n-1\).`],
-      S`\(M_{10}=1023\) moves`,
+      [S`<b>Recursive rule.</b> The description gives \(M_{n-1}\) moves, then 1, then \(M_{n-1}\) again: \(M_n=2M_{n-1}+1\). One disc takes one move: \(M_1=1\).`,
+        S`<b>List terms.</b> ${tv(["\\(n\\)", "1", "2", "3", "4", "5"], ["\\(M_n\\)", "1", "3", "7", "15", "31"], ["\\(2^n\\)", "2", "4", "8", "16", "32"])}`,
+        S`<b>Spot the pattern.</b> Each value is 1 less than a power of 2: \(M_n=2^n-1\).`,
+        S`<b>Check that it fits the rule.</b> \(2(2^{n-1}-1)+1=2^n-2+1=2^n-1\) ✓`,
+        S`<b>Example.</b> \(M_{10}=2^{10}-1=1023\).`],
+      S`\(M_1=1,\ M_n=2M_{n-1}+1\); \(M_n=2^n-1\); for example \(M_{10}=1023\) moves`,
       plane({ view: { xmin: 0, xmax: 8, ymin: 0, ymax: 140 }, points: pts((n) => 2 ** n - 1, 7), step: { x: 1, y: 20 }, xlabel: "discs", ylabel: "moves" })],
     ["Function notation", S`For \(f(n)=n^2-3n\), list \(f(1)\) to \(f(5)\) and classify the sequence.`,
-      [S`\(-2,-2,0,4,10\); first differences \(0,2,4,6\); second differences 2.`],
-      "quadratic (neither arithmetic nor geometric)"],
+      [S`<b>Substitute.</b> ${tv(["\\(n\\)", "1", "2", "3", "4", "5"], ["\\(f(n)\\)", "\\(-2\\)", "\\(-2\\)", "0", "4", "10"])}`,
+        S`<b>First differences.</b> \(0,2,4,6\): not constant, so it is not arithmetic.`,
+        S`<b>Ratios.</b> \(\frac{-2}{-2}=1\), but then \(\frac0{-2}=0\): not constant, so it is not geometric.`,
+        S`<b>Second differences.</b> \(2,2,2\): constant, so it is quadratic, as the rule's \(n^2\) predicts ✓`],
+      "quadratic (neither arithmetic nor geometric)",
+      plane({ view: { xmin: 0, xmax: 6, ymin: -4, ymax: 12 }, curves: [{ f: (x) => x * x - 3 * x, a: 0, color: "gray" }], points: pts((n) => n * n - 3 * n, 5), step: { x: 1, y: 2 }, xlabel: "n", ylabel: "f(n)" })],
   ]),
 
   practice([

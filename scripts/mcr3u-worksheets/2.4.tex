@@ -28,43 +28,63 @@ Fractions can only be added when they count equal-sized pieces, so we rewrite th
 \sech{Worked Examples}
 
 \begin{example}{ex0}{Example 1 --- Same denominator}
-Simplify $\dfrac{9x+4}{2x-1}-\dfrac{3x-5}{2x-1}$.\soln $\dfrac{(9x+4)-(3x-5)}{2x-1}=\dfrac{9x+4-3x+5}{2x-1}$. \\ $=\dfrac{6x + 9}{(2x - 1)}=\dfrac{3(2x+3)}{2x-1}$, $x\ne\tfrac12$.
+Simplify $\dfrac{9x+4}{2x-1}-\dfrac{3x-5}{2x-1}$.\soln \textbf{Rule:} Same denominator: combine the numerators, with brackets. \\ $\dfrac{(9x+4)-(3x-5)}{2x-1}=\dfrac{9x+4-3x+5}{2x-1}$. \\ $=\dfrac{6x + 9}{(2x - 1)}=\dfrac{3(2x+3)}{2x-1}$, $x\ne\tfrac12$. \\ \textbf{Check:} at $x=1$: $13-(-2)=15$, and $\frac{6+9}{1}=15$ \checkmark\begin{center}\begin{tikzpicture}\begin{axis}[width=8.2cm,height=5.2cm,axis lines=middle,xlabel={\scriptsize$x$},ylabel={\scriptsize$y$},grid=both,grid style={gray!16},xmin=1,xmax=6,ymin=0,ymax=20,xtick distance=1,ytick distance=5,tick label style={font=\tiny},axis line style={-}]
+\addplot[exblue,very thick,domain=1:6,samples=120,restrict y to domain=-1:21]{(6*x+9)/(2*x-1)};\addplot[only marks,mark=*,mark size=2pt,green!45!black]coordinates{(1,15)};\node[font=\tiny,anchor=south west,green!30!black] at (axis cs:1,15){$(1,15)$};
+\end{axis}\end{tikzpicture}\end{center}
 \end{example}
 
 \begin{example}{ex1}{Example 2 --- Monomial denominators}
-Simplify $\dfrac{7}{10x}+\dfrac{3}{4x^3}$.\soln $10x=2\cdot5\cdot x$ and $4x^3=2^2\cdot x^3$, so LCD $=2^2\cdot5\cdot x^3=20x^3$. \\ $\dfrac{7\cdot2x^2}{20x^3}+\dfrac{3\cdot5}{20x^3}=\dfrac{14x^2 + 15}{20x^3}$, $x\ne0$.
+Simplify $\dfrac{7}{10x}+\dfrac{3}{4x^3}$.\soln \textbf{Rule:} Build the LCD from the highest power of each factor. \\ $10x=2\cdot5\cdot x$ and $4x^3=2^2\cdot x^3$, so LCD $=2^2\cdot5\cdot x^3=20x^3$. \\ $\dfrac{7\cdot2x^2}{20x^3}+\dfrac{3\cdot5}{20x^3}=\dfrac{14x^2 + 15}{20x^3}$, $x\ne0$. \\ \textbf{Check:} at $x=1$: $\frac7{10}+\frac34=\frac{29}{20}$, and $\frac{14+15}{20}=\frac{29}{20}$ \checkmark\begin{center}\begin{tikzpicture}\begin{axis}[width=8.2cm,height=5.2cm,axis lines=middle,xlabel={\scriptsize$x$},ylabel={\scriptsize$y$},grid=both,grid style={gray!16},xmin=0.5,xmax=4,ymin=0,ymax=4,xtick distance=0.5,ytick distance=1,tick label style={font=\tiny},axis line style={-}]
+\addplot[exblue,very thick,domain=0.5:4,samples=120,restrict y to domain=-1:5]{(14*x^2+15)/(20*x^3)};\addplot[only marks,mark=*,mark size=2pt,green!45!black]coordinates{(1,1.45)};\node[font=\tiny,anchor=south west,green!30!black] at (axis cs:1,1.45){$(1,29/20)$};
+\end{axis}\end{tikzpicture}\end{center}
 \end{example}
 
 \begin{example}{ex2}{Example 3 --- Two binomial denominators}
-Simplify $\dfrac{5}{x+1}+\dfrac{2}{x-4}$.\soln LCD $(x+1)(x-4)$. \\ $\dfrac{5(x-4)+2(x+1)}{(x+1)(x-4)}=\dfrac{5x-20+2x+2}{(x+1)(x-4)}=\dfrac{7x - 18}{(x + 1)(x - 4)}$, $x\ne-1,4$.
+Simplify $\dfrac{5}{x+1}+\dfrac{2}{x-4}$.\soln LCD $(x+1)(x-4)$. \\ $\dfrac{5(x-4)+2(x+1)}{(x+1)(x-4)}=\dfrac{5x-20+2x+2}{(x+1)(x-4)}=\dfrac{7x - 18}{(x + 1)(x - 4)}$, $x\ne-1,4$. \\ \textbf{Check:} at $x=0$: $5-\frac12=\frac92$, and $\frac{-18}{-4}=\frac92$ \checkmark\begin{center}\begin{tikzpicture}\begin{axis}[width=8.2cm,height=5.2cm,axis lines=middle,xlabel={\scriptsize$x$},ylabel={\scriptsize$y$},grid=both,grid style={gray!16},xmin=-0.5,xmax=3,ymin=0,ymax=12,xtick distance=0.5,ytick distance=2,tick label style={font=\tiny},axis line style={-}]
+\addplot[exblue,very thick,domain=-0.5:3,samples=120,restrict y to domain=-1:13]{(7*x-18)/((x+1)*(x-4))};\addplot[only marks,mark=*,mark size=2pt,green!45!black]coordinates{(0,4.5)};\node[font=\tiny,anchor=south west,green!30!black] at (axis cs:0,4.5){$(0,4.5)$};
+\end{axis}\end{tikzpicture}\end{center}
 \end{example}
 
 \begin{example}{ex3}{Example 4 --- Subtracting}
-Simplify $\dfrac{3}{x-6}-\dfrac{2}{x+1}$.\soln $\dfrac{3(x+1)-2(x-6)}{(x-6)(x+1)}$. Bracket the second product! \\ $3x+3-2x+12=x+15$: $\dfrac{x + 15}{(x - 6)(x + 1)}$, $x\ne6,-1$.
+Simplify $\dfrac{3}{x-6}-\dfrac{2}{x+1}$.\soln $\dfrac{3(x+1)-2(x-6)}{(x-6)(x+1)}$. Bracket the second product! \\ $3x+3-2x+12=x+15$: $\dfrac{x + 15}{(x - 6)(x + 1)}$, $x\ne6,-1$. \\ \textbf{Check:} at $x=0$: $-\frac12-2=-\frac52$, and $\frac{15}{-6}=-\frac52$ \checkmark\begin{center}\begin{tikzpicture}\begin{axis}[width=8.2cm,height=5.2cm,axis lines=middle,xlabel={\scriptsize$x$},ylabel={\scriptsize$y$},grid=both,grid style={gray!16},xmin=-0.5,xmax=5,ymin=-6,ymax=0,xtick distance=1,ytick distance=1,tick label style={font=\tiny},axis line style={-}]
+\addplot[exblue,very thick,domain=-0.5:5,samples=120,restrict y to domain=-7:1]{(x+15)/((x-6)*(x+1))};\addplot[only marks,mark=*,mark size=2pt,green!45!black]coordinates{(0,-2.5)};\node[font=\tiny,anchor=south west,green!30!black] at (axis cs:0,-2.5){$(0,-2.5)$};
+\end{axis}\end{tikzpicture}\end{center}
 \end{example}
 
 \begin{example}{ex4}{Example 5 --- Factor the denominators first}
-Simplify $\dfrac{4}{x^2-4}+\dfrac{1}{x^2-x-2}$.\soln $x^2-4=(x-2)(x+2)$; $x^2-x-2=(x-2)(x+1)$. LCD $(x-2)(x+2)(x+1)$ --- $(x-2)$ is counted once. \\ Numerator: $4(x+1)+1(x+2)=5x+6$. \\ $\dfrac{5x + 6}{(x - 2)(x + 2)(x + 1)}$, $x\ne2,-2,-1$.
+Simplify $\dfrac{4}{x^2-4}+\dfrac{1}{x^2-x-2}$.\soln $x^2-4=(x-2)(x+2)$; $x^2-x-2=(x-2)(x+1)$. LCD $(x-2)(x+2)(x+1)$ --- $(x-2)$ is counted once. \\ Numerator: $4(x+1)+1(x+2)=5x+6$. \\ $\dfrac{5x + 6}{(x - 2)(x + 2)(x + 1)}$, $x\ne2,-2,-1$. \\ \textbf{Check:} at $x=0$: $-1-\frac12=-\frac32$, and $\frac{6}{(-2)(2)(1)}=-\frac32$ \checkmark\begin{center}\begin{tikzpicture}\begin{axis}[width=8.2cm,height=5.2cm,axis lines=middle,xlabel={\scriptsize$x$},ylabel={\scriptsize$y$},grid=both,grid style={gray!16},xmin=-0.5,xmax=1.5,ymin=-6,ymax=0,xtick distance=0.5,ytick distance=1,tick label style={font=\tiny},axis line style={-}]
+\addplot[exblue,very thick,domain=-0.5:1.5,samples=120,restrict y to domain=-7:1]{(5*x+6)/((x-2)*(x+2)*(x+1))};\addplot[only marks,mark=*,mark size=2pt,green!45!black]coordinates{(0,-1.5)};\node[font=\tiny,anchor=south west,green!30!black] at (axis cs:0,-1.5){$(0,-1.5)$};
+\end{axis}\end{tikzpicture}\end{center}
 \end{example}
 
 \begin{example}{ex5}{Example 6 --- Opposite denominators}
-Simplify $\dfrac{7}{x-5}-\dfrac{2}{5-x}$.\soln $\dfrac{2}{5-x}=-\dfrac{2}{x-5}$, so $\dfrac{7}{x-5}+\dfrac{2}{x-5}=\dfrac{9}{x-5}$, $x\ne5$.
+Simplify $\dfrac{7}{x-5}-\dfrac{2}{5-x}$.\soln $\dfrac{2}{5-x}=-\dfrac{2}{x-5}$, so $\dfrac{7}{x-5}+\dfrac{2}{x-5}=\dfrac{9}{x-5}$, $x\ne5$. \\ \textbf{Check:} at $x=6$: $7-\frac2{-1}=9$, and $\frac91=9$ \checkmark\begin{center}\begin{tikzpicture}\begin{axis}[width=8.2cm,height=5.2cm,axis lines=middle,xlabel={\scriptsize$x$},ylabel={\scriptsize$y$},grid=both,grid style={gray!16},xmin=5.5,xmax=12,ymin=0,ymax=20,xtick distance=1,ytick distance=5,tick label style={font=\tiny},axis line style={-}]
+\addplot[exblue,very thick,domain=5.5:12,samples=120,restrict y to domain=-1:21]{9/(x-5)};\addplot[only marks,mark=*,mark size=2pt,green!45!black]coordinates{(6,9)};\node[font=\tiny,anchor=south west,green!30!black] at (axis cs:6,9){$(6,9)$};
+\end{axis}\end{tikzpicture}\end{center}
 \end{example}
 
 \begin{example}{ex6}{Example 7 --- Combine, then simplify}
-Simplify $\dfrac{x}{x-5}-\dfrac{25}{x^2-5x}$.\soln $x^2-5x=x(x-5)$; LCD $x(x-5)$. \\ $\dfrac{x\cdot x-25}{x(x-5)}=\dfrac{(x-5)(x+5)}{x(x-5)}=\dfrac{x+5}{x}$, $x\ne0,5$.
+Simplify $\dfrac{x}{x-5}-\dfrac{25}{x^2-5x}$.\soln $x^2-5x=x(x-5)$; LCD $x(x-5)$. \\ $\dfrac{x\cdot x-25}{x(x-5)}=\dfrac{(x-5)(x+5)}{x(x-5)}=\dfrac{x+5}{x}$, $x\ne0,5$. \\ \textbf{Check:} at $x=1$: $-\frac14+\frac{25}4=6$, and $\frac61=6$ \checkmark\begin{center}\begin{tikzpicture}\begin{axis}[width=8.2cm,height=5.2cm,axis lines=middle,xlabel={\scriptsize$x$},ylabel={\scriptsize$y$},grid=both,grid style={gray!16},xmin=0.5,xmax=8,ymin=0,ymax=12,xtick distance=1,ytick distance=2,tick label style={font=\tiny},axis line style={-}]
+\addplot[exblue,very thick,domain=0.5:8,samples=120,restrict y to domain=-1:13]{(x+5)/x};\addplot[only marks,mark=*,mark size=2pt,green!45!black]coordinates{(1,6)};\node[font=\tiny,anchor=south west,green!30!black] at (axis cs:1,6){$(1,6)$};\addplot[only marks,mark=o,mark size=2.6pt,very thick,red!75!black]coordinates{(5,2)};\node[font=\tiny,anchor=south west,red!70!black] at (axis cs:5,2){$(5,2)$};
+\end{axis}\end{tikzpicture}\end{center}
 \end{example}
 
 \begin{example}{ex7}{Example 8 --- Three terms}
-Simplify $\dfrac2x+\dfrac{3}{x+2}-\dfrac{4}{x(x+2)}$.\soln LCD $x(x+2)$: $\dfrac{2(x+2)+3x-4}{x(x+2)}=\dfrac{5x}{x(x+2)}=\dfrac{5}{x+2}$, $x\ne0,-2$.
+Simplify $\dfrac2x+\dfrac{3}{x+2}-\dfrac{4}{x(x+2)}$.\soln LCD $x(x+2)$: $\dfrac{2(x+2)+3x-4}{x(x+2)}=\dfrac{5x}{x(x+2)}=\dfrac{5}{x+2}$, $x\ne0,-2$. \\ \textbf{Check:} at $x=1$: $2+1-\frac43=\frac53$, and $\frac53$ \checkmark\begin{center}\begin{tikzpicture}\begin{axis}[width=8.2cm,height=5.2cm,axis lines=middle,xlabel={\scriptsize$x$},ylabel={\scriptsize$y$},grid=both,grid style={gray!16},xmin=-1,xmax=6,ymin=0,ymax=6,xtick distance=1,ytick distance=1,tick label style={font=\tiny},axis line style={-}]
+\addplot[exblue,very thick,domain=-1:6,samples=120,restrict y to domain=-1:7]{5/(x+2)};\addplot[only marks,mark=*,mark size=2pt,green!45!black]coordinates{(1,1.667)};\node[font=\tiny,anchor=south west,green!30!black] at (axis cs:1,1.667){$(1,5/3)$};\addplot[only marks,mark=o,mark size=2.6pt,very thick,red!75!black]coordinates{(0,2.5)};\node[font=\tiny,anchor=south west,red!70!black] at (axis cs:0,2.5){$(0,2.5)$};
+\end{axis}\end{tikzpicture}\end{center}
 \end{example}
 
 \begin{example}{ex8}{Example 9 --- A compound fraction}
-Simplify $\dfrac{x-\frac4x}{1-\frac2x}$.\soln Top: $\dfrac{x^2-4}{x}$. Bottom: $\dfrac{x-2}{x}$. Divide: $\dfrac{x^2-4}{x}\times\dfrac{x}{x-2}=\dfrac{(x-2)(x+2)}{x-2}=x+2$, with $x\ne0,2$.
+Simplify $\dfrac{x-\frac4x}{1-\frac2x}$.\soln Top: $\dfrac{x^2-4}{x}$. Bottom: $\dfrac{x-2}{x}$. Divide: $\dfrac{x^2-4}{x}\times\dfrac{x}{x-2}=\dfrac{(x-2)(x+2)}{x-2}=x+2$, with $x\ne0,2$. \\ \textbf{Check:} at $x=1$: $\frac{1-4}{1-2}=3$, and $1+2=3$ \checkmark\begin{center}\begin{tikzpicture}\begin{axis}[width=8.2cm,height=5.2cm,axis lines=middle,xlabel={\scriptsize$x$},ylabel={\scriptsize$y$},grid=both,grid style={gray!16},xmin=-3,xmax=5,ymin=-2,ymax=8,xtick distance=1,ytick distance=2,tick label style={font=\tiny},axis line style={-}]
+\addplot[exblue,very thick,domain=-3:5,samples=120,restrict y to domain=-3:9]{x+2};\addplot[only marks,mark=*,mark size=2pt,green!45!black]coordinates{(1,3)};\node[font=\tiny,anchor=south west,green!30!black] at (axis cs:1,3){$(1,3)$};\addplot[only marks,mark=o,mark size=2.6pt,very thick,red!75!black]coordinates{(2,4)(0,2)};\node[font=\tiny,anchor=south west,red!70!black] at (axis cs:2,4){$(2,4)$};\node[font=\tiny,anchor=south west,red!70!black] at (axis cs:0,2){$(0,2)$};
+\end{axis}\end{tikzpicture}\end{center}
 \end{example}
 
 \begin{example}{ex0}{Example 10 --- Application: working together}
-Alex mows a lawn in $x$ hours and Bea takes $(x+4)$ hours. Write the time together, and find it when Alex takes $6$ hours.\soln Rates add: $\dfrac1x+\dfrac1{x+4}=\dfrac{2x+4}{x(x+4)}$. Time $=\dfrac{x(x+4)}{2x+4}$. \\ For $x=6$: $\dfrac{60}{16}=3.75$ h. Check: $\tfrac16+\tfrac1{10}=\tfrac{16}{60}$ and $\tfrac{60}{16}=3.75$ \checkmark.
+Alex mows a lawn in $x$ hours and Bea takes $(x+4)$ hours. Write the time together, and find it when Alex takes $6$ hours.\soln Rates add: $\dfrac1x+\dfrac1{x+4}=\dfrac{2x+4}{x(x+4)}$. Time $=\dfrac{x(x+4)}{2x+4}$. \\ For $x=6$: $\dfrac{60}{16}=3.75$ h. Check: $\tfrac16+\tfrac1{10}=\tfrac{16}{60}$ and $\tfrac{60}{16}=3.75$ \checkmark.\begin{center}\begin{tikzpicture}\begin{axis}[width=8.2cm,height=5.2cm,axis lines=middle,xlabel={\scriptsize$x$},ylabel={\scriptsize$y$},grid=both,grid style={gray!16},xmin=0,xmax=12,ymin=0,ymax=7,xtick distance=2,ytick distance=1,tick label style={font=\tiny},axis line style={-}]
+\addplot[exblue,very thick,domain=0:12,samples=120,restrict y to domain=-1:8]{x*(x+4)/(2*x+4)};\addplot[only marks,mark=*,mark size=2pt,green!45!black]coordinates{(6,3.75)};\node[font=\tiny,anchor=south west,green!30!black] at (axis cs:6,3.75){$(6,3.75)$};
+\end{axis}\end{tikzpicture}\end{center}
 \end{example}
 
 \begin{example}{ex1}{Example 11 --- Test the shortcut}
