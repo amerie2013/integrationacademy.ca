@@ -1,6 +1,8 @@
 // MCV4U 3.4 — Simple Rational Functions (NEW lesson): vertical, horizontal and oblique asymptotes, behaviour near a
 // vertical asymptote, intercepts and symmetry, and using f′ and f″ to locate extrema, intervals and concavity
 import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, q, num, choice, hard, plane, rat } from "./lib.mjs";
+import { chart } from "./csign.mjs";
+import { tv } from "../mcr3u-extables.mjs";
 
 export const TITLE = "3.4 Simple Rational Functions";
 export const ID = "6d4fc003-0001-4001-8001-000000000304";
@@ -62,23 +64,48 @@ export const blocks = () => [
 
   examples([
     ["Asymptotes and intercepts", S`Find the asymptotes and intercepts of \(f(x)=\dfrac{3x-1}{x+2}\), and decide where it increases.`,
-      [S`Vertical asymptote \(x=-2\); equal degrees, so \(y=3\).`, S`x-intercept \(\tfrac13\); y-intercept \(-\tfrac12\).`, S`\(f'(x)=\dfrac{3(x+2)-(3x-1)}{(x+2)^2}=\dfrac{7}{(x+2)^2}\gt0\).`],
-      S`asymptotes \(x=-2\), \(y=3\); intercepts \(\left(\tfrac13,0\right)\), \(\left(0,-\tfrac12\right)\); increasing on each branch`],
+      [S`<b>Vertical asymptote.</b> The denominator is 0 at \(x=-2\), and the numerator there is \(3(-2)-1=-7\ne0\). A nonzero number over something tending to 0 blows up, so \(x=-2\) is a vertical asymptote.`,
+        S`<b>Horizontal asymptote.</b> Divide top and bottom by \(x\): \(f(x)=\dfrac{3-\frac1x}{1+\frac2x}\to\dfrac{3}{1}=3\) as \(x\to\pm\infty\). So \(y=3\).`,
+        S`<b>Intercepts.</b> x-intercept: numerator \(=0\), so \(3x-1=0\) and \(x=\tfrac13\). y-intercept: \(f(0)=\dfrac{-1}{2}=-\tfrac12\).`,
+        S`<b>Derivative.</b> Quotient rule: \(f'(x)=\dfrac{3(x+2)-(3x-1)(1)}{(x+2)^2}=\dfrac{7}{(x+2)^2}\).`,
+        S`<b>Sign chart.</b> Cut at the asymptote too. ${chart({ cuts: [[-2, "-2"]], undef: [-2], d: ["f'(x)", (x) => 7 / (x + 2) ** 2] })}`,
+        S`<b>Check.</b> \(f(-3)=\dfrac{-10}{-1}=10\) (left branch, above 3) and \(f(-1)=\dfrac{-4}{1}=-4\) (right branch, below 3). Both branches rise from left to right, as the chart says ✓`],
+      S`asymptotes \(x=-2\), \(y=3\); intercepts \(\left(\tfrac13,0\right)\), \(\left(0,-\tfrac12\right)\); increasing on \((-\infty,-2)\) and on \((-2,\infty)\)`,
+      plane({ view: VA1, curves: rat((x) => (3 * x - 1) / (x + 2), [-2], VA1), vlines: [{ x: -2, color: "red", dash: true }], lines: [{ m: 0, b: 3, color: "red", dash: true }], points: [{ x: 1 / 3, y: 0, label: "(⅓, 0)", color: "blue" }, { x: 0, y: -0.5, label: "(0, −½)", color: "blue" }, { x: -3, y: 10, label: "(−3, 10)", color: "amber" }], step: { x: 1, y: 2 } }, "Dashed red: the asymptotes x = −2 and y = 3.")],
     ["Two vertical asymptotes", S`Analyze \(f(x)=\dfrac{x^2}{x^2-1}\).`,
-      [S`Vertical asymptotes \(x=\pm1\); horizontal \(y=1\); even function.`, S`\(f'(x)=\dfrac{2x(x^2-1)-x^2(2x)}{(x^2-1)^2}=\dfrac{-2x}{(x^2-1)^2}\): increasing for \(x\lt0\), decreasing for \(x\gt0\).`, S`Local maximum \((0,0)\).`],
+      [S`<b>Vertical asymptotes.</b> \(x^2-1=(x-1)(x+1)=0\) at \(x=\pm1\), where the numerator is \(1\ne0\). So \(x=-1\) and \(x=1\).`,
+        S`<b>Horizontal asymptote and symmetry.</b> Equal degrees, leading coefficients 1 and 1: \(y=1\). Also \(f(-x)=f(x)\), so the graph is symmetric in the y-axis.`,
+        S`<b>Derivative.</b> \(f'(x)=\dfrac{2x(x^2-1)-x^2(2x)}{(x^2-1)^2}=\dfrac{-2x}{(x^2-1)^2}\). It is 0 at \(x=0\) and not defined at \(x=\pm1\).`,
+        S`<b>Sign chart.</b> ${chart({ cuts: [[-1, "-1"], [0, "0"], [1, "1"]], undef: [-1, 1], d: ["f'(x)", (x) => (-2 * x) / (x * x - 1) ** 2], tests: [-2, -0.5, 0.5, 2] })}`,
+        S`<b>The turning point.</b> \(f(0)=0\), so \((0,0)\) is a local maximum on the middle branch.`,
+        S`<b>Check the branches.</b> \(f(0.5)=\dfrac{0.25}{-0.75}=-\tfrac13\lt0\): the middle branch lies below the x-axis apart from \((0,0)\) ✓. \(f(2)=\tfrac43\gt1\): the outer branches approach \(y=1\) from above ✓`],
       S`asymptotes \(x=\pm1\), \(y=1\); local maximum \((0,0)\); symmetric about the y-axis`,
-      plane({ view: VA2, curves: rat((x) => (x * x) / (x * x - 1), [-1, 1], VA2), vlines: [{ x: -1, color: "red", dash: true }, { x: 1, color: "red", dash: true }], lines: [{ m: 0, b: 1, color: "red", dash: true }], points: [{ x: 0, y: 0, label: "max (0, 0)", color: "green" }], step: { x: 1, y: 1 } })],
+      plane({ view: VA2, curves: rat((x) => (x * x) / (x * x - 1), [-1, 1], VA2), vlines: [{ x: -1, color: "red", dash: true }, { x: 1, color: "red", dash: true }], lines: [{ m: 0, b: 1, color: "red", dash: true }], points: [{ x: 0, y: 0, label: "max (0, 0)", color: "green" }, { x: 2, y: 4 / 3, label: "(2, 4/3)", color: "amber" }], step: { x: 1, y: 1 } })],
     ["Left and right of the asymptote", S`Describe \(f(x)=\dfrac{x+1}{x-2}\) near \(x=2\).`,
-      [S`Near 2 the numerator is close to 3 (positive).`, S`\(x\to2^-\): denominator \(\to0^-\), so \(f\to-\infty\). \(x\to2^+\): denominator \(\to0^+\), so \(f\to+\infty\).`, S`Check: \(f(1.9)=-29\), \(f(2.1)=31\).`],
+      [S`<b>Why it blows up.</b> At \(x=2\) the denominator is 0 and the numerator is 3. Near \(x=2\), \(f(x)\approx\dfrac{3}{\text{tiny number}}\), which is huge. The sign of the tiny number decides \(+\infty\) or \(-\infty\).`,
+        S`<b>From the left.</b> For \(x\) slightly less than 2, \(x-2\) is a tiny negative number, so \(f(x)\to-\infty\).`,
+        S`<b>From the right.</b> For \(x\) slightly more than 2, \(x-2\) is tiny and positive, so \(f(x)\to+\infty\).`,
+        S`<b>Check with a table.</b> ${tv(["\\(x\\)", "1.9", "1.99", "2.01", "2.1"], ["\\(f(x)\\)", "\\(\\frac{2.9}{-0.1}=-29\\)", "\\(\\frac{2.99}{-0.01}=-299\\)", "\\(\\frac{3.01}{0.01}=301\\)", "\\(\\frac{3.1}{0.1}=31\\)"])}`,
+        S`<b>Far away.</b> Equal degrees give \(y=\tfrac11=1\). Also \(f'(x)=\dfrac{(x-2)-(x+1)}{(x-2)^2}=\dfrac{-3}{(x-2)^2}\lt0\), so each branch falls: the left branch falls from 1 down to \(-\infty\), and the right branch falls from \(+\infty\) toward 1 ✓`],
       S`\(\lim_{x\to2^-}f(x)=-\infty\), \(\lim_{x\to2^+}f(x)=+\infty\); horizontal asymptote \(y=1\)`,
       plane({ view: VA3, curves: rat((x) => (x + 1) / (x - 2), [2], VA3), vlines: [{ x: 2, color: "red", dash: true }], lines: [{ m: 0, b: 1, color: "red", dash: true }], points: [{ x: -1, y: 0, label: "(−1, 0)", color: "blue" }, { x: 0, y: -0.5, label: "(0, −½)", color: "blue" }], step: { x: 1, y: 2 } })],
     ["An oblique asymptote", S`Analyze \(f(x)=\dfrac{x^2+x+4}{x+1}\).`,
-      [S`Divide: \(f(x)=x+\dfrac{4}{x+1}\); oblique asymptote \(y=x\), vertical asymptote \(x=-1\).`, S`\(f'(x)=1-\dfrac{4}{(x+1)^2}=0\Rightarrow(x+1)^2=4\Rightarrow x=1\) or \(x=-3\).`, S`\(f(1)=3\), \(f(-3)=-5\); \(f''(x)=\dfrac{8}{(x+1)^3}\): \(\gt0\) at 1 (min), \(\lt0\) at \(-3\) (max).`],
+      [S`<b>Divide.</b> The numerator's degree is one more than the denominator's, so divide: \(x^2+x+4=x(x+1)+4\), giving \(f(x)=x+\dfrac{4}{x+1}\).`,
+        S`<b>Asymptotes.</b> As \(x\to\pm\infty\), \(\dfrac{4}{x+1}\to0\), so the graph approaches the line \(y=x\) (oblique asymptote). The denominator is 0 at \(x=-1\), where the numerator is \(4\ne0\): vertical asymptote \(x=-1\).`,
+        S`<b>Derivative.</b> \(f'(x)=1-\dfrac{4}{(x+1)^2}=\dfrac{(x+1)^2-4}{(x+1)^2}=\dfrac{(x+3)(x-1)}{(x+1)^2}\). Zeros \(x=-3\) and \(x=1\); not defined at \(x=-1\).`,
+        S`<b>Sign chart.</b> ${chart({ cuts: [[-3, "-3"], [-1, "-1"], [1, "1"]], undef: [-1], d: ["f'(x)", (x) => 1 - 4 / (x + 1) ** 2] })}`,
+        S`<b>Turning points.</b> \(f(-3)=-3+\dfrac{4}{-2}=-5\) (local max) and \(f(1)=1+\dfrac42=3\) (local min).`,
+        S`<b>Check.</b> Second derivative \(f''(x)=\dfrac{8}{(x+1)^3}\): \(f''(1)=1\gt0\) (cup, min) and \(f''(-3)=-1\lt0\) (cap, max) ✓. Also the local max \(-5\) is below the local min 3 — possible because they are on different branches ✓`],
       S`local minimum \((1,3)\), local maximum \((-3,-5)\); asymptotes \(x=-1\) and \(y=x\)`,
-      plane({ view: VA4, curves: rat((x) => (x * x + x + 4) / (x + 1), [-1], VA4), vlines: [{ x: -1, color: "red", dash: true }], lines: [{ m: 1, b: 0, color: "red", dash: true }], points: [{ x: 1, y: 3, label: "min (1, 3)", color: "green" }, { x: -3, y: -5, label: "max (−3, −5)", color: "green" }], step: { x: 1, y: 2 } })],
+      plane({ view: VA4, curves: rat((x) => (x * x + x + 4) / (x + 1), [-1], VA4), vlines: [{ x: -1, color: "red", dash: true }], lines: [{ m: 1, b: 0, color: "red", dash: true }], points: [{ x: 1, y: 3, label: "min (1, 3)", color: "green" }, { x: -3, y: -5, label: "max (−3, −5)", color: "green" }], step: { x: 1, y: 2 } }, "Dashed red: x = −1 and the oblique asymptote y = x.")],
     ["A complete sketch", S`Sketch \(f(x)=\dfrac{6x}{x^2+3}\) using its asymptote, symmetry, extrema and inflection points.`,
-      [S`No vertical asymptote; \(y=0\) is horizontal; \(f\) is odd.`, S`\(f'(x)=\dfrac{6(3-x^2)}{(x^2+3)^2}\): max \((\sqrt3,\sqrt3)\), min \((-\sqrt3,-\sqrt3)\).`, S`\(f''(x)=\dfrac{12x(x^2-9)}{(x^2+3)^3}\): inflection points at \(x=0\) and \(x=\pm3\), i.e. \((0,0)\), \((3,1.5)\), \((-3,-1.5)\).`],
-      S`max \((1.73,1.73)\), min \((-1.73,-1.73)\); inflection points \((0,0)\), \((\pm3,\pm1.5)\); approaches 0 at both ends`,
+      [S`<b>Asymptotes and symmetry.</b> \(x^2+3\gt0\), so there is no vertical asymptote. The degree of the top is less than the bottom, so \(y=0\) is the horizontal asymptote. \(f(-x)=-f(x)\): odd, symmetric about the origin.`,
+        S`<b>First derivative.</b> \(f'(x)=\dfrac{6(x^2+3)-6x(2x)}{(x^2+3)^2}=\dfrac{6(3-x^2)}{(x^2+3)^2}\), zero at \(x=\pm\sqrt3\). ${chart({ cuts: [[-Math.sqrt(3), "-\\sqrt3"], [Math.sqrt(3), "\\sqrt3"]], d: ["f'(x)", (x) => (6 * (3 - x * x)) / (x * x + 3) ** 2] })}`,
+        S`<b>Extreme values.</b> \(f(\sqrt3)=\dfrac{6\sqrt3}{6}=\sqrt3\approx1.73\) (max) and, by symmetry, \(f(-\sqrt3)=-\sqrt3\) (min).`,
+        S`<b>Second derivative.</b> \(f''(x)=\dfrac{12x(x^2-9)}{(x^2+3)^3}\), zero at \(x=0\) and \(x=\pm3\). ${chart({ kind: "conc", cuts: [[-3, "-3"], [0, "0"], [3, "3"]], d: ["f''(x)", (x) => (12 * x * (x * x - 9)) / (x * x + 3) ** 3] })}`,
+        S`<b>Inflection points.</b> \(f(0)=0\), \(f(3)=\tfrac{18}{12}=1.5\), \(f(-3)=-1.5\).`,
+        S`<b>Check.</b> Far right the graph is above 0 and concave up, so it falls toward \(y=0\) from above — matching \(f(10)=\tfrac{60}{103}\approx0.58\) ✓`],
+      S`max \((\sqrt3,\sqrt3)\approx(1.73,1.73)\), min \((-1.73,-1.73)\); inflection points \((0,0)\), \((\pm3,\pm1.5)\); approaches 0 at both ends`,
       plane({ view: { xmin: -8, xmax: 8, ymin: -2.2, ymax: 2.2 }, curves: [{ f: (x) => (6 * x) / (x * x + 3), color: "violet" }], points: [{ x: Math.sqrt(3), y: Math.sqrt(3), label: "max", color: "green" }, { x: -Math.sqrt(3), y: -Math.sqrt(3), label: "min", color: "green" }, { x: 0, y: 0, color: "violet" }, { x: 3, y: 1.5, label: "inflection", color: "violet" }, { x: -3, y: -1.5, label: "inflection", color: "violet" }], step: { x: 1, y: 0.5 } })],
   ]),
 

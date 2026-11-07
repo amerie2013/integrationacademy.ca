@@ -1,6 +1,8 @@
 // MCV4U 3.1 — Increasing and Decreasing Functions: the sign of f′ on intervals, critical numbers as the only places
 // the sign can change, sign charts, reading f from the graph of f′, rational functions, and models
 import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, q, num, choice, hard, plane, rat } from "./lib.mjs";
+import { chart } from "./csign.mjs";
+import { tv } from "../mcr3u-extables.mjs";
 
 export const TITLE = "3.1 Increasing and Decreasing Functions";
 export const ID = "5a3b8fef-8ad3-468b-b6f2-0b2cbeade402";
@@ -57,24 +59,47 @@ export const blocks = () => [
 
   examples([
     ["A cubic", S`Find the intervals of increase and decrease of \(f(x)=x^3-12x+1\).`,
-      [S`\(f'(x)=3x^2-12=3(x-2)(x+2)\); zeros \(x=\pm2\).`, S`Test \(x=-3\): \(15\gt0\); \(x=0\): \(-12\lt0\); \(x=3\): \(15\gt0\).`],
-      S`increasing on \((-\infty,-2)\) and \((2,\infty)\); decreasing on \((-2,2)\)`],
+      [S`<b>Rule.</b> \(f\) increases where \(f'(x)\gt0\) and decreases where \(f'(x)\lt0\). A polynomial \(f'\) is continuous, so it can only change sign at its zeros. Find those zeros, then test one value in each interval.`,
+        S`<b>Differentiate and factor.</b> \(f'(x)=3x^2-12=3(x^2-4)=3(x-2)(x+2)\).`,
+        S`<b>Critical numbers.</b> \(f'(x)=0\) when \(x=-2\) or \(x=2\). These cut the number line into three intervals: \(x\lt-2\), \(-2\lt x\lt2\) and \(x\gt2\).`,
+        S`<b>Sign chart.</b> The sign of each factor in each interval gives the sign of \(f'\). The constant 3 is always positive. ${chart({ cuts: [[-2, "-2"], [2, "2"]], factors: [["x+2", (x) => x + 2], ["x-2", (x) => x - 2]], d: ["f'(x)", (x) => 3 * x * x - 12] })}`,
+        S`<b>Check with values of \(f\).</b> \(f(-3)=10\) and \(f(-2)=17\): the values rise ✓. \(f(-2)=17\), \(f(0)=1\), \(f(2)=-15\): they fall ✓. \(f(3)=-8\) is above \(-15\): rising again ✓`],
+      S`increasing on \((-\infty,-2)\) and \((2,\infty)\); decreasing on \((-2,2)\)`,
+      plane({ view: { xmin: -4, xmax: 4, ymin: -20, ymax: 22 }, curves: [{ f: (x) => x ** 3 - 12 * x + 1, color: "violet" }, { f: (x) => 3 * x * x - 12, color: "blue" }], points: [{ x: -2, y: 17, label: "(−2, 17)", color: "red" }, { x: 2, y: -15, label: "(2, −15)", color: "red" }, { x: -2, y: 0, color: "blue" }, { x: 2, y: 0, color: "blue" }], step: { x: 1, y: 4 } }, "violet: f; blue: f′. f rises exactly where the blue graph is above the x-axis.")],
     ["A quartic", S`Find the intervals of increase and decrease of \(f(x)=x^4-8x^2\).`,
-      [S`\(f'(x)=4x^3-16x=4x(x-2)(x+2)\); zeros \(-2,0,2\).`, S`Signs from left: \(-,+,-,+\).`],
+      [S`<b>Plan.</b> Find \(f'\), factor it completely, and build a sign chart. Every sign change of \(f'\) is a change of direction of \(f\).`,
+        S`<b>Differentiate and factor.</b> \(f'(x)=4x^3-16x=4x(x^2-4)=4x(x-2)(x+2)\).`,
+        S`<b>Critical numbers.</b> \(x=-2\), \(x=0\) and \(x=2\): four intervals to test.`,
+        S`<b>Sign chart.</b> ${chart({ cuts: [[-2, "-2"], [0, "0"], [2, "2"]], factors: [["x+2", (x) => x + 2], ["x", (x) => x], ["x-2", (x) => x - 2]], d: ["f'(x)", (x) => 4 * x ** 3 - 16 * x] })}`,
+        S`<b>Values at the turns.</b> \(f(-2)=16-32=-16\), \(f(0)=0\), \(f(2)=-16\).`,
+        S`<b>Check by symmetry.</b> \(f(-x)=f(x)\), so \(f\) is even and its graph mirrors in the y-axis. Mirroring swaps rising and falling, which is exactly what the chart shows: \(-,+\) on the left and \(-,+\) mirrored on the right ✓`],
       S`decreasing on \((-\infty,-2)\) and \((0,2)\); increasing on \((-2,0)\) and \((2,\infty)\)`,
       plane({ view: { xmin: -3.2, xmax: 3.2, ymin: -18, ymax: 10 }, curves: [{ f: (x) => x ** 4 - 8 * x * x, color: "violet" }], points: [{ x: -2, y: -16, label: "(−2, −16)", color: "red" }, { x: 0, y: 0, label: "(0, 0)", color: "red" }, { x: 2, y: -16, label: "(2, −16)", color: "red" }], step: { x: 1, y: 2 } })],
     ["Reading the graph of f′", S`The graph of \(f'(x)=(x+1)(x-3)\) is shown. Where is \(f\) increasing, and where does \(f\) change direction?`,
-      [S`\(f'\gt0\) (graph above the axis) for \(x\lt-1\) and \(x\gt3\).`, S`\(f'\lt0\) on \((-1,3)\).`, S`\(f\) changes from rising to falling at \(x=-1\), and from falling to rising at \(x=3\).`],
+      [S`<b>What the graph shows.</b> This is the graph of the <em>derivative</em>. Its height at each \(x\) is the slope of \(f\) there. Above the x-axis means \(f'\gt0\), so \(f\) rises; below means \(f\) falls.`,
+        S`<b>Read the zeros.</b> The blue graph crosses the x-axis at \(x=-1\) and \(x=3\). These are the critical numbers of \(f\).`,
+        S`<b>Read the signs.</b> ${chart({ cuts: [[-1, "-1"], [3, "3"]], d: ["f'(x)", (x) => (x + 1) * (x - 3)] })}`,
+        S`<b>Interpret the sign changes.</b> At \(x=-1\), \(f'\) goes from \(+\) to \(-\): \(f\) stops rising and starts falling, so it has a local maximum. At \(x=3\), \(f'\) goes from \(-\) to \(+\): a local minimum.`,
+        S`<b>Check with one possible \(f\).</b> \(f(x)=\tfrac13x^3-x^2-3x\) has \(f'(x)=x^2-2x-3=(x+1)(x-3)\) ✓. In the figure (violet) it peaks at \(x=-1\) and bottoms out at \(x=3\) ✓`],
       S`increasing on \((-\infty,-1)\) and \((3,\infty)\); local max at \(x=-1\), local min at \(x=3\)`,
-      plane({ view: { xmin: -3, xmax: 5, ymin: -5, ymax: 6 }, curves: [{ f: (x) => (x + 1) * (x - 3), color: "blue" }], points: [{ x: -1, y: 0, label: "−1", color: "red" }, { x: 3, y: 0, label: "3", color: "red" }], step: { x: 1, y: 1 } })],
+      plane({ view: { xmin: -3, xmax: 5, ymin: -10, ymax: 6 }, curves: [{ f: (x) => (x + 1) * (x - 3), color: "blue" }, { f: (x) => x ** 3 / 3 - x * x - 3 * x, color: "violet" }], points: [{ x: -1, y: 0, label: "−1", color: "red" }, { x: 3, y: 0, label: "3", color: "red" }, { x: -1, y: 5 / 3, label: "max", color: "green" }, { x: 3, y: -9, label: "min", color: "green" }], step: { x: 1, y: 2 } }, "blue: the given f′; violet: one function f with this derivative")],
     ["A rational function", S`Find the intervals of increase and decrease of \(f(x)=\dfrac{x}{x^2+4}\).`,
-      [S`\(f'(x)=\dfrac{(x^2+4)-x(2x)}{(x^2+4)^2}=\dfrac{4-x^2}{(x^2+4)^2}\).`, S`The denominator is always positive, so the sign is that of \(4-x^2\): positive on \((-2,2)\).`],
+      [S`<b>Domain first.</b> \(x^2+4\ge4\) is never 0, so the domain is all real numbers and there are no vertical asymptotes to cut at.`,
+        S`<b>Quotient rule.</b> \(f'(x)=\dfrac{(1)(x^2+4)-x(2x)}{(x^2+4)^2}=\dfrac{4-x^2}{(x^2+4)^2}=\dfrac{(2-x)(2+x)}{(x^2+4)^2}\).`,
+        S`<b>Which part decides the sign?</b> The denominator is a square of a positive number, so it is always positive. The sign of \(f'\) is the sign of \((2-x)(2+x)\). Critical numbers: \(x=\pm2\).`,
+        S`<b>Sign chart.</b> ${chart({ cuts: [[-2, "-2"], [2, "2"]], factors: [["2+x", (x) => 2 + x], ["2-x", (x) => 2 - x], ["(x^2+4)^2", (x) => (x * x + 4) ** 2]], d: ["f'(x)", (x) => (4 - x * x) / (x * x + 4) ** 2] })}`,
+        S`<b>Turning values.</b> \(f(2)=\tfrac{2}{8}=\tfrac14\) and \(f(-2)=-\tfrac14\).`,
+        S`<b>Check.</b> \(f(1)=\tfrac15=0.2\) is between \(f(0)=0\) and \(f(2)=0.25\): rising ✓. \(f(4)=\tfrac{4}{20}=0.2\lt0.25\): falling after 2 ✓`],
       S`increasing on \((-2,2)\); decreasing on \((-\infty,-2)\) and \((2,\infty)\)`,
-      plane({ view: { xmin: -8, xmax: 8, ymin: -0.4, ymax: 0.4 }, curves: [{ f: (x) => x / (x * x + 4), color: "violet" }], points: [{ x: 2, y: 0.25, label: "(2, ¼)", color: "red" }, { x: -2, y: -0.25, label: "(−2, −¼)", color: "red" }], step: { x: 1, y: 0.1 } })],
+      plane({ view: { xmin: -8, xmax: 8, ymin: -0.4, ymax: 0.4 }, curves: [{ f: (x) => x / (x * x + 4), color: "violet" }], points: [{ x: 2, y: 0.25, label: "(2, ¼)", color: "red" }, { x: -2, y: -0.25, label: "(−2, −¼)", color: "red" }, { x: 4, y: 0.2, label: "(4, 0.2)", color: "amber" }], step: { x: 1, y: 0.1 } })],
     ["A population model", S`A herd numbers \(P(t)=-t^3+9t^2+48t+500\) after \(t\) years, \(0\le t\le12\). When is it growing, and when shrinking?`,
-      [S`\(P'(t)=-3t^2+18t+48=-3(t-8)(t+2)\).`, S`For \(0\le t\lt8\), \(P'\gt0\); for \(t\gt8\), \(P'\lt0\).`],
-      S`growing for \(0\le t\lt8\), shrinking for \(8\lt t\le12\); largest at \(t=8\)`,
-      plane({ view: { xmin: 0, xmax: 12.5, ymin: 400, ymax: 1100 }, curves: [{ f: (t) => -(t ** 3) + 9 * t * t + 48 * t + 500, a: 0, b: 12, color: "violet" }], points: [{ x: 8, y: 948, label: "(8, 948)", color: "red" }], step: { x: 1, y: 100 } })],
+      [S`<b>Meaning.</b> \(P'(t)\) is the growth rate in animals per year. The herd grows where \(P'(t)\gt0\) and shrinks where \(P'(t)\lt0\).`,
+        S`<b>Differentiate and factor.</b> \(P'(t)=-3t^2+18t+48=-3(t^2-6t-16)=-3(t-8)(t+2)\).`,
+        S`<b>Use the domain.</b> The zeros are \(t=8\) and \(t=-2\), but \(t=-2\) is outside \(0\le t\le12\). Only \(t=8\) splits the domain.`,
+        S`<b>Sign chart.</b> ${chart({ v: "t", f: "P", from: [0, "0"], to: [12, "12"], cuts: [[8, "8"]], d: ["P'(t)", (t) => -3 * t * t + 18 * t + 48] })}`,
+        S`<b>Check with a table.</b> ${tv(["\\(t\\)", "0", "4", "8", "10", "12"], ["\\(P(t)\\)", "500", "772", "948", "880", "644"])} The values rise up to \(t=8\) and fall after it ✓`],
+      S`growing for \(0\le t\lt8\), shrinking for \(8\lt t\le12\); largest herd 948 at \(t=8\)`,
+      plane({ view: { xmin: 0, xmax: 12.5, ymin: 400, ymax: 1100 }, curves: [{ f: (t) => -(t ** 3) + 9 * t * t + 48 * t + 500, a: 0, b: 12, color: "violet" }], points: [{ x: 8, y: 948, label: "(8, 948)", color: "red" }, { x: 0, y: 500, label: "(0, 500)", color: "amber" }, { x: 12, y: 644, label: "(12, 644)", color: "amber" }], step: { x: 1, y: 100 }, xlabel: "t", ylabel: "P" })],
   ]),
 
   practice([

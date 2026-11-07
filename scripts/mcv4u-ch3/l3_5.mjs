@@ -1,6 +1,8 @@
 // MCV4U 3.5 — Putting It All Together: a full curve-sketching algorithm (domain, intercepts, symmetry, asymptotes,
 // f′ and f″), polynomial and rational sketches, sketches from given conditions, and matching f, f′ and f″
 import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, q, num, choice, hard, plane, rat } from "./lib.mjs";
+import { chart } from "./csign.mjs";
+import { tv } from "../mcr3u-extables.mjs";
 
 export const TITLE = "3.5 Putting It All Together";
 export const ID = "4205bf21-fc6b-4cbe-889f-41ab2828f641";
@@ -62,24 +64,45 @@ export const blocks = () => [
 
   examples([
     ["A cubic from start to finish", S`Sketch \(f(x)=x^3+3x^2-9x-5\).`,
-      [S`Domain \(\mathbb R\); y-intercept \(-5\); zeros near \(-4.69\), \(-0.49\), \(2.18\); \(f\to\pm\infty\) as \(x\to\pm\infty\).`, S`\(f'(x)=3(x+3)(x-1)\): increasing on \((-\infty,-3)\) and \((1,\infty)\); max \((-3,22)\), min \((1,-10)\).`, S`\(f''(x)=6x+6\): concave down for \(x\lt-1\), up for \(x\gt-1\); inflection \((-1,6)\).`],
-      S`see the labelled graph above`],
+      [S`<b>Domain, intercept and ends.</b> A polynomial: domain \(\mathbb R\), no asymptotes. \(f(0)=-5\). The leading term \(x^3\) makes \(f\to-\infty\) as \(x\to-\infty\) and \(f\to+\infty\) as \(x\to\infty\). The zeros are not nice numbers; a graphing tool gives \(x\approx-4.69,\ -0.49,\ 2.18\).`,
+        S`<b>First derivative.</b> \(f'(x)=3x^2+6x-9=3(x+3)(x-1)\). ${chart({ cuts: [[-3, "-3"], [1, "1"]], d: ["f'(x)", (x) => 3 * x * x + 6 * x - 9] })} \(f(-3)=-27+27+27-5=22\) and \(f(1)=1+3-9-5=-10\).`,
+        S`<b>Second derivative.</b> \(f''(x)=6x+6=6(x+1)\). ${chart({ kind: "conc", cuts: [[-1, "-1"]], d: ["f''(x)", (x) => 6 * x + 6] })} \(f(-1)=-1+3+9-5=6\).`,
+        S`<b>Key points.</b> ${tv(["point", "max", "inflection", "y-intercept", "min"], ["\\((x,y)\\)", "\\((-3,22)\\)", "\\((-1,6)\\)", "\\((0,-5)\\)", "\\((1,-10)\\)"])}`,
+        S`<b>Sketch and check.</b> Rise to \((-3,22)\) bending down, fall through \((-1,6)\) where the bend switches, reach \((1,-10)\), then rise bending up. Check: the inflection point is halfway between the max and min, \(x=\tfrac{-3+1}{2}=-1\), as it must be for a cubic ✓`],
+      S`max \((-3,22)\), min \((1,-10)\), inflection \((-1,6)\), y-intercept \(-5\); falls to \(-\infty\) on the left, rises to \(+\infty\) on the right`,
+      plane({ view: { xmin: -6, xmax: 4, ymin: -16, ymax: 28 }, curves: [{ f: (x) => x ** 3 + 3 * x * x - 9 * x - 5, color: "violet" }], points: [{ x: -3, y: 22, label: "max (−3, 22)", color: "red" }, { x: 1, y: -10, label: "min (1, −10)", color: "blue" }, { x: -1, y: 6, label: "inflection (−1, 6)", color: "violet" }, { x: 0, y: -5, label: "(0, −5)", color: "amber" }], step: { x: 1, y: 4 } })],
     ["A quartic with a flat point", S`Sketch \(f(x)=3x^4-4x^3\).`,
-      [S`Intercepts: \(3x^3(x-\tfrac43)=0\Rightarrow x=0,\ \tfrac43\).`, S`\(f'(x)=12x^2(x-1)\): decreasing for \(x\lt1\) (no sign change at 0), increasing for \(x\gt1\); minimum \((1,-1)\).`, S`\(f''(x)=12x(3x-2)\): inflection points \((0,0)\) and \(\left(\tfrac23,-\tfrac{16}{27}\right)\).`],
-      S`minimum \((1,-1)\); inflection points \((0,0)\), \((0.67,-0.59)\); horizontal tangent but no extremum at 0`,
+      [S`<b>Intercepts and ends.</b> \(f(x)=x^3(3x-4)=0\) at \(x=0\) and \(x=\tfrac43\). The leading term \(3x^4\) sends both ends up.`,
+        S`<b>First derivative.</b> \(f'(x)=12x^3-12x^2=12x^2(x-1)\). The factor \(x^2\) never changes sign. ${chart({ cuts: [[0, "0"], [1, "1"]], factors: [["x^2", (x) => x * x], ["x-1", (x) => x - 1]], d: ["f'(x)", (x) => 12 * x ** 3 - 12 * x * x] })} \(f(1)=3-4=-1\): minimum \((1,-1)\).`,
+        S`<b>Second derivative.</b> \(f''(x)=36x^2-24x=12x(3x-2)\). ${chart({ kind: "conc", cuts: [[0, "0"], [2 / 3, "\\tfrac23"]], d: ["f''(x)", (x) => 36 * x * x - 24 * x] })} \(f\left(\tfrac23\right)=3\cdot\tfrac{16}{81}-4\cdot\tfrac{8}{27}=\tfrac{48-96}{81}=-\tfrac{16}{27}\).`,
+        S`<b>Read the special point.</b> At \(x=0\): \(f'(0)=0\) (horizontal tangent) and the concavity changes. So \((0,0)\) is a flat inflection point, not an extremum.`,
+        S`<b>Check.</b> \(f(-1)=3+4=7\gt0\) and \(f(0.5)=0.1875-0.5=-0.3125\lt0\): the graph comes down through \((0,0)\) without turning ✓`],
+      S`minimum \((1,-1)\); inflection points \((0,0)\), \(\left(\tfrac23,-\tfrac{16}{27}\right)\approx(0.67,-0.59)\); horizontal tangent but no extremum at 0`,
       plane({ view: { xmin: -1, xmax: 1.8, ymin: -1.5, ymax: 2 }, curves: [{ f: (x) => 3 * x ** 4 - 4 * x ** 3, color: "violet" }], points: [{ x: 1, y: -1, label: "min (1, −1)", color: "blue" }, { x: 0, y: 0, label: "(0, 0)", color: "violet" }, { x: 2 / 3, y: -16 / 27, label: "inflection", color: "violet" }, { x: 4 / 3, y: 0, label: "(4/3, 0)", color: "amber" }], step: { x: 0.25, y: 0.5 } })],
     ["A rational function with a squared denominator", S`Sketch \(f(x)=\dfrac{2x}{(x-1)^2}\).`,
-      [S`Vertical asymptote \(x=1\), with \(f\to+\infty\) on both sides (numerator near 2, denominator positive); horizontal asymptote \(y=0\); intercept \((0,0)\).`, S`\(f'(x)=\dfrac{2(x-1)^2-2x\cdot2(x-1)}{(x-1)^4}=\dfrac{-2(x+1)}{(x-1)^3}\): decreasing for \(x\lt-1\), increasing on \((-1,1)\), decreasing for \(x\gt1\).`, S`Local minimum \(\left(-1,-\tfrac12\right)\).`],
-      S`minimum \((-1,-0.5)\); vertical asymptote \(x=1\) (up on both sides); horizontal asymptote \(y=0\)`,
-      plane({ view: VR, curves: rat((x) => (2 * x) / (x - 1) ** 2, [1], VR), vlines: [{ x: 1, color: "red", dash: true }], points: [{ x: -1, y: -0.5, label: "min (−1, −½)", color: "blue" }, { x: 0, y: 0, label: "(0, 0)", color: "amber" }], step: { x: 1, y: 1 } })],
+      [S`<b>Asymptotes and intercept.</b> The denominator is 0 at \(x=1\) (numerator 2): vertical asymptote \(x=1\). Near 1 the numerator is about 2 and \((x-1)^2\) is a tiny <em>positive</em> number, so \(f\to+\infty\) on both sides. Bottom degree is higher: \(y=0\). Intercept \((0,0)\).`,
+        S`<b>First derivative.</b> \(f'(x)=\dfrac{2(x-1)^2-2x\cdot2(x-1)}{(x-1)^4}=\dfrac{2(x-1)-4x}{(x-1)^3}=\dfrac{-2(x+1)}{(x-1)^3}\). ${chart({ cuts: [[-1, "-1"], [1, "1"]], undef: [1], d: ["f'(x)", (x) => (-2 * (x + 1)) / (x - 1) ** 3] })} \(f(-1)=\dfrac{-2}{4}=-\tfrac12\): local minimum.`,
+        S`<b>Second derivative.</b> \(f''(x)=\dfrac{4(x+2)}{(x-1)^4}\). ${chart({ kind: "conc", cuts: [[-2, "-2"], [1, "1"]], undef: [1], d: ["f''(x)", (x) => (4 * (x + 2)) / (x - 1) ** 4] })} Inflection point \(\left(-2,-\tfrac49\right)\).`,
+        S`<b>Put it together.</b> From the left the curve falls away from just below \(y=0\), bending down, switches to a cup at \(x=-2\), bottoms out at \(\left(-1,-\tfrac12\right)\), and then climbs through \((0,0)\) up the asymptote. On the right it comes down from \(+\infty\) toward \(y=0\).`,
+        S`<b>Check.</b> \(f(3)=\tfrac{6}{4}=1.5\gt0\) and \(f(10)=\tfrac{20}{81}\approx0.25\): positive and shrinking toward 0 ✓`],
+      S`minimum \((-1,-0.5)\); inflection \(\left(-2,-\tfrac49\right)\); vertical asymptote \(x=1\) (up on both sides); horizontal asymptote \(y=0\)`,
+      plane({ view: VR, curves: rat((x) => (2 * x) / (x - 1) ** 2, [1], VR), vlines: [{ x: 1, color: "red", dash: true }], points: [{ x: -1, y: -0.5, label: "min (−1, −½)", color: "blue" }, { x: -2, y: -4 / 9, label: "inflection", color: "violet" }, { x: 0, y: 0, label: "(0, 0)", color: "amber" }], step: { x: 1, y: 1 } })],
     ["A sketch from conditions", S`Sketch a function with \(f(0)=2\), \(f'(-2)=f'(1)=0\), \(f'\gt0\) only on \((-2,1)\), \(f''\gt0\) for \(x\lt-\tfrac12\) and \(f''\lt0\) for \(x\gt-\tfrac12\).`,
-      [S`Falling, then rising from a minimum at \(x=-2\) to a maximum at \(x=1\), then falling.`, S`Cup shape left of \(-\tfrac12\), cap shape to the right; inflection at \(x=-\tfrac12\).`, S`One function that fits: \(f(x)=-2x^3-3x^2+12x+2\).`],
-      S`min at \(x=-2\), max at \(x=1\), inflection at \(x=-0.5\), passing through \((0,2)\)`,
+      [S`<b>Translate each condition.</b> \(f'\gt0\) only on \((-2,1)\): rising there, falling elsewhere. So \(x=-2\) (\(-\to+\)) is a local min and \(x=1\) (\(+\to-\)) a local max.`,
+        S`<b>Concavity.</b> \(f''\gt0\) left of \(-\tfrac12\) (cup) and \(f''\lt0\) right of it (cap): inflection at \(x=-\tfrac12\). It lies between the min and the max, as expected.`,
+        S`<b>One function that fits.</b> Choose \(f'(x)=-6(x+2)(x-1)=-6x^2-6x+12\), negative outside \((-2,1)\). Reverse the power rule: \(f(x)=-2x^3-3x^2+12x+C\), and \(f(0)=2\) gives \(C=2\).`,
+        S`<b>Verify every condition.</b> ${chart({ cuts: [[-2, "-2"], [1, "1"]], d: ["f'(x)", (x) => -6 * x * x - 6 * x + 12] })} ${chart({ kind: "conc", cuts: [[-0.5, "-\\tfrac12"]], d: ["f''(x)", (x) => -12 * x - 6] })}`,
+        S`<b>Key points.</b> \(f(-2)=16-12-24+2=-18\), \(f(1)=-2-3+12+2=9\), \(f\left(-\tfrac12\right)=-4.5\), and \(f(0)=2\) ✓`],
+      S`min at \(x=-2\), max at \(x=1\), inflection at \(x=-0.5\), passing through \((0,2)\); for example \(f(x)=-2x^3-3x^2+12x+2\)`,
       plane({ view: { xmin: -4, xmax: 3, ymin: -22, ymax: 14 }, curves: [{ f: (x) => -2 * x ** 3 - 3 * x * x + 12 * x + 2, color: "violet" }], points: [{ x: -2, y: -18, label: "min (−2, −18)", color: "blue" }, { x: 1, y: 9, label: "max (1, 9)", color: "red" }, { x: -0.5, y: -4.5, label: "inflection", color: "violet" }, { x: 0, y: 2, label: "(0, 2)", color: "amber" }], step: { x: 1, y: 4 } })],
     ["Matching f, f′ and f″", S`The graphs A (violet), B (blue) and C (amber) show a function, its derivative and its second derivative. Which is which?`,
-      [S`C is a line through the origin — the derivative of a parabola.`, S`B is a parabola, zero at \(x=\pm\sqrt2\), exactly where A has horizontal tangents.`, S`C is zero where B has its vertex, and at A's inflection point.`],
+      [S`<b>Key fact.</b> Where a function has a horizontal tangent (a turn), its derivative is 0. Where it rises, the derivative is positive. So the zeros of \(f'\) line up with the turns of \(f\), and the zeros of \(f''\) with the turns of \(f'\).`,
+        S`<b>Degrees.</b> A is a cubic, B a parabola and C a line. Differentiating lowers the degree by 1, so the order should be A → B → C.`,
+        S`<b>Test A → B.</b> A turns at \(x\approx\pm1.4\). B crosses zero at exactly those places (\(x=\pm\sqrt2\)). Where A rises (\(|x|\gt\sqrt2\)), B is above the axis ✓`,
+        S`<b>Test B → C.</b> B has its vertex at \(x=0\), where C crosses 0. B falls for \(x\lt0\) where C is negative ✓. C = 0 is also where A changes concavity ✓`,
+        S`<b>Confirm with formulas.</b> \(f(x)=x^3-6x\), \(f'(x)=3x^2-6\), \(f''(x)=6x\) match the three graphs ✓`],
       S`A is \(f\), B is \(f'\), C is \(f''\) (here \(f(x)=x^3-6x\))`,
-      plane({ view: { xmin: -3.2, xmax: 3.2, ymin: -8, ymax: 10 }, curves: [{ f: (x) => x ** 3 - 6 * x, color: "violet" }, { f: (x) => 3 * x * x - 6, color: "blue" }, { f: (x) => 6 * x, color: "amber" }], step: { x: 1, y: 2 } })],
+      plane({ view: { xmin: -3.2, xmax: 3.2, ymin: -8, ymax: 10 }, curves: [{ f: (x) => x ** 3 - 6 * x, color: "violet" }, { f: (x) => 3 * x * x - 6, color: "blue" }, { f: (x) => 6 * x, color: "amber" }], points: [{ x: -Math.sqrt(2), y: 0, color: "blue" }, { x: Math.sqrt(2), y: 0, color: "blue" }, { x: 0, y: 0, color: "amber" }], vlines: [{ x: -Math.sqrt(2), color: "gray", dash: true }, { x: Math.sqrt(2), color: "gray", dash: true }], step: { x: 1, y: 2 } }, "Grey dashed: the turns of A line up with the zeros of B.")],
   ]),
 
   practice([

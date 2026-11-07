@@ -1,6 +1,8 @@
 // MCV4U 3.3 — Concavity and the Second Derivative Test: concave up/down from the sign of f″, points of inflection,
 // the second derivative test for local extrema, when the test fails, and the point of diminishing returns
 import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, q, num, choice, hard, plane } from "./lib.mjs";
+import { chart } from "./csign.mjs";
+import { tv } from "../mcr3u-extables.mjs";
 
 export const TITLE = "3.3 Concavity and the Second Derivative Test";
 export const ID = "30beed89-884d-4da3-aa7e-afd4f562e33b";
@@ -57,24 +59,47 @@ export const blocks = () => [
 
   examples([
     ["Concavity of a cubic", S`Find the intervals of concavity and the point of inflection of \(f(x)=x^3-6x^2+5\).`,
-      [S`\(f'(x)=3x^2-12x\), \(f''(x)=6x-12\).`, S`\(f''\lt0\) for \(x\lt2\), \(f''\gt0\) for \(x\gt2\).`, S`\(f(2)=8-24+5=-11\).`],
-      S`concave down on \((-\infty,2)\), concave up on \((2,\infty)\); inflection point \((2,-11)\)`],
+      [S`<b>Rule.</b> \(f\) is concave up (cup ∪) where \(f''(x)\gt0\) and concave down (cap ∩) where \(f''(x)\lt0\). A point of inflection is a point on the graph where the concavity changes.`,
+        S`<b>Two derivatives.</b> \(f'(x)=3x^2-12x\) and \(f''(x)=6x-12=6(x-2)\).`,
+        S`<b>Where \(f''\) can change sign.</b> \(f''(x)=0\) at \(x=2\) only.`,
+        S`<b>Concavity chart.</b> ${chart({ kind: "conc", cuts: [[2, "2"]], d: ["f''(x)", (x) => 6 * x - 12] })}`,
+        S`<b>The point.</b> \(f(2)=8-24+5=-11\), so the inflection point is \((2,-11)\).`,
+        S`<b>Check with the slopes.</b> ${tv(["\\(x\\)", "0", "1", "2", "3", "4"], ["slope \\(f'(x)\\)", "0", "\\(-9\\)", "\\(-12\\)", "\\(-9\\)", "0"])} The slopes decrease until \(x=2\) (concave down) and then increase (concave up) ✓`],
+      S`concave down on \((-\infty,2)\), concave up on \((2,\infty)\); inflection point \((2,-11)\)`,
+      plane({ view: { xmin: -2, xmax: 6, ymin: -30, ymax: 12 }, curves: [{ f: (x) => x ** 3 - 6 * x * x + 5, a: -2, b: 2, color: "amber" }, { f: (x) => x ** 3 - 6 * x * x + 5, a: 2, b: 6, color: "blue" }], points: [{ x: 2, y: -11, label: "inflection (2, −11)", color: "violet" }], step: { x: 1, y: 5 } }, "amber: concave down (f″ < 0); blue: concave up (f″ > 0)")],
     ["Two inflection points", S`Find the intervals of concavity and the inflection points of \(f(x)=x^4-4x^3\).`,
-      [S`\(f''(x)=12x^2-24x=12x(x-2)\).`, S`Signs: \(+\) on \((-\infty,0)\), \(-\) on \((0,2)\), \(+\) on \((2,\infty)\).`, S`\(f(0)=0\), \(f(2)=-16\).`],
+      [S`<b>Plan.</b> Find \(f''\), factor it, and make a concavity chart. Every sign change of \(f''\) gives an inflection point.`,
+        S`<b>Two derivatives.</b> \(f'(x)=4x^3-12x^2\), so \(f''(x)=12x^2-24x=12x(x-2)\).`,
+        S`<b>Zeros of \(f''\).</b> \(x=0\) and \(x=2\).`,
+        S`<b>Concavity chart.</b> ${chart({ kind: "conc", cuts: [[0, "0"], [2, "2"]], factors: [["x", (x) => x], ["x-2", (x) => x - 2]], d: ["f''(x)", (x) => 12 * x * x - 24 * x] })}`,
+        S`<b>The points.</b> \(f(0)=0\) and \(f(2)=16-32=-16\): inflection points \((0,0)\) and \((2,-16)\).`,
+        S`<b>Something extra at 0.</b> \(f'(0)=0\) too, so the tangent at \((0,0)\) is horizontal. Because the concavity changes there, it is a flat inflection point, not a max or min. The only extremum is where \(f'(x)=4x^2(x-3)\) changes sign: a minimum at \((3,-27)\) ✓`],
       S`concave up on \((-\infty,0)\) and \((2,\infty)\), down on \((0,2)\); inflection points \((0,0)\) and \((2,-16)\)`,
-      plane({ view: { xmin: -1.5, xmax: 4.5, ymin: -30, ymax: 10 }, curves: [{ f: (x) => x ** 4 - 4 * x ** 3, a: -1.5, b: 0, color: "blue" }, { f: (x) => x ** 4 - 4 * x ** 3, a: 0, b: 2, color: "amber" }, { f: (x) => x ** 4 - 4 * x ** 3, a: 2, b: 4.5, color: "blue" }], points: [{ x: 0, y: 0, label: "(0, 0)", color: "violet" }, { x: 2, y: -16, label: "(2, −16)", color: "violet" }, { x: 3, y: -27, label: "min (3, −27)", color: "red" }], step: { x: 1, y: 5 } })],
+      plane({ view: { xmin: -1.5, xmax: 4.5, ymin: -30, ymax: 10 }, curves: [{ f: (x) => x ** 4 - 4 * x ** 3, a: -1.5, b: 0, color: "blue" }, { f: (x) => x ** 4 - 4 * x ** 3, a: 0, b: 2, color: "amber" }, { f: (x) => x ** 4 - 4 * x ** 3, a: 2, b: 4.5, color: "blue" }], points: [{ x: 0, y: 0, label: "(0, 0)", color: "violet" }, { x: 2, y: -16, label: "(2, −16)", color: "violet" }, { x: 3, y: -27, label: "min (3, −27)", color: "red" }], step: { x: 1, y: 5 } }, "blue: concave up; amber: concave down")],
     ["The second derivative test", S`Classify the critical points of \(f(x)=2x^3+3x^2-36x\).`,
-      [S`\(f'(x)=6x^2+6x-36=6(x+3)(x-2)\); \(f''(x)=12x+6\).`, S`\(f''(-3)=-30\lt0\): maximum, \(f(-3)=81\).`, S`\(f''(2)=30\gt0\): minimum, \(f(2)=-44\).`],
+      [S`<b>Rule: the second derivative test.</b> If \(f'(c)=0\) and \(f''(c)\gt0\), the graph is a cup at \(c\): local minimum. If \(f'(c)=0\) and \(f''(c)\lt0\), it is a cap: local maximum. If \(f''(c)=0\), the test gives no answer.`,
+        S`<b>Critical numbers.</b> \(f'(x)=6x^2+6x-36=6(x^2+x-6)=6(x+3)(x-2)\): \(x=-3\) and \(x=2\).`,
+        S`<b>Second derivative.</b> \(f''(x)=12x+6\).`,
+        S`<b>Test each critical number.</b> ${tv(["\\(c\\)", "\\(f''(c)\\)", "shape", "type", "\\(f(c)\\)"], ["\\(-3\\)", "\\(-36+6=-30\\lt0\\)", "∩", "local max", "\\(-54+27+108=81\\)"], ["\\(2\\)", "\\(24+6=30\\gt0\\)", "∪", "local min", "\\(16+12-72=-44\\)"])}`,
+        S`<b>Check with the first derivative test.</b> ${chart({ cuts: [[-3, "-3"], [2, "2"]], d: ["f'(x)", (x) => 6 * x * x + 6 * x - 36] })} Both tests agree ✓`],
       S`local maximum \((-3,81)\); local minimum \((2,-44)\)`,
       plane({ view: { xmin: -6, xmax: 5, ymin: -60, ymax: 100 }, curves: [{ f: (x) => 2 * x ** 3 + 3 * x * x - 36 * x, color: "violet" }], points: [{ x: -3, y: 81, label: "max (−3, 81)", color: "red" }, { x: 2, y: -44, label: "min (2, −44)", color: "blue" }], step: { x: 1, y: 20 } })],
     ["When the test fails", S`For \(f(x)=x^4\) and \(g(x)=x^3\), show that the second derivative test gives no answer at 0, and classify each point.`,
-      [S`\(f'(0)=0\), \(f''(x)=12x^2\Rightarrow f''(0)=0\); \(g'(0)=0\), \(g''(x)=6x\Rightarrow g''(0)=0\).`, S`First derivative test: \(f'=4x^3\) goes \(-\to+\): minimum. \(g'=3x^2\ge0\): no sign change.`],
+      [S`<b>Try the second derivative test.</b> \(f'(x)=4x^3\), \(f''(x)=12x^2\): \(f'(0)=0\) and \(f''(0)=0\). \(g'(x)=3x^2\), \(g''(x)=6x\): \(g'(0)=0\) and \(g''(0)=0\). With \(f''(0)=0\) the test is inconclusive for both.`,
+        S`<b>Fall back on the first derivative test for \(f\).</b> ${chart({ cuts: [[0, "0"]], d: ["f'(x)", (x) => 4 * x ** 3] })}`,
+        S`<b>First derivative test for \(g\).</b> ${chart({ cuts: [[0, "0"]], d: ["g'(x)", (x) => 3 * x * x], f: "g" })}`,
+        S`<b>Concavity of \(g\).</b> \(g''(x)=6x\) is negative for \(x\lt0\) and positive for \(x\gt0\), so \((0,0)\) is an inflection point of \(g\) with a horizontal tangent.`,
+        S`<b>Check.</b> \(x^4\ge0\) for all \(x\), so 0 is the smallest value of \(f\) ✓. \(g(-1)=-1\lt0\lt g(1)=1\), so \(g\) rises straight through 0 ✓`],
       S`\(x^4\) has a minimum at 0; \(x^3\) has neither (an inflection point)`,
-      plane({ view: { xmin: -1.6, xmax: 1.6, ymin: -2, ymax: 3 }, curves: [{ f: (x) => x ** 4, color: "violet" }, { f: (x) => x ** 3, color: "blue" }], points: [{ x: 0, y: 0, label: "(0, 0)", color: "red" }], step: { x: 0.5, y: 0.5 } })],
+      plane({ view: { xmin: -1.6, xmax: 1.6, ymin: -2, ymax: 3 }, curves: [{ f: (x) => x ** 4, color: "violet" }, { f: (x) => x ** 3, color: "blue" }], points: [{ x: 0, y: 0, label: "(0, 0)", color: "red" }], step: { x: 0.5, y: 0.5 } }, "violet: f(x) = x⁴ (minimum); blue: g(x) = x³ (inflection)")],
     ["Diminishing returns", S`Total sales after \(t\) months of advertising are \(S(t)=-t^3+12t^2+100\) (units), \(0\le t\le8\). When are sales growing fastest?`,
-      [S`Growth rate \(S'(t)=-3t^2+24t\); it is largest where \(S''(t)=-6t+24=0\), \(t=4\).`, S`\(S''\) changes from \(+\) to \(-\): inflection point \((4,228)\), with \(S'(4)=48\).`],
+      [S`<b>Translate.</b> The growth rate of sales is \(S'(t)\). "Growing fastest" means \(S'(t)\) is largest. So we maximize \(S'\), which means finding where its derivative \(S''\) changes from \(+\) to \(-\).`,
+        S`<b>Derivatives.</b> \(S'(t)=-3t^2+24t\) and \(S''(t)=-6t+24\). \(S''(t)=0\) at \(t=4\).`,
+        S`<b>Concavity chart.</b> ${chart({ kind: "conc", v: "t", f: "S", from: [0, "0"], to: [8, "8"], cuts: [[4, "4"]], d: ["S''(t)", (t) => -6 * t + 24] })}`,
+        S`<b>Interpret.</b> Before \(t=4\) the growth rate is increasing (concave up); after it, the rate is decreasing (concave down). The inflection point \((4,S(4))=(4,228)\) is where sales grow fastest, at \(S'(4)=48\) units per month.`,
+        S`<b>Check with a table of rates.</b> ${tv(["\\(t\\)", "0", "2", "4", "6", "8"], ["\\(S'(t)\\)", "0", "36", "48", "36", "0"])} The rate peaks at \(t=4\) ✓`],
       S`at \(t=4\) months (48 units per month); after that each month adds less — diminishing returns`,
-      plane({ view: { xmin: 0, xmax: 8.5, ymin: 80, ymax: 400 }, curves: [{ f: (t) => -(t ** 3) + 12 * t * t + 100, a: 0, b: 8, color: "violet" }, { f: (t) => 228 + 48 * (t - 4), color: "green", a: 2, b: 6 }], points: [{ x: 4, y: 228, label: "inflection (4, 228)", color: "red" }], step: { x: 1, y: 40 } })],
+      plane({ view: { xmin: 0, xmax: 8.5, ymin: 80, ymax: 400 }, curves: [{ f: (t) => -(t ** 3) + 12 * t * t + 100, a: 0, b: 8, color: "violet" }, { f: (t) => 228 + 48 * (t - 4), color: "green", a: 2, b: 6 }], points: [{ x: 4, y: 228, label: "inflection (4, 228)", color: "red" }], step: { x: 1, y: 40 }, xlabel: "t", ylabel: "S" }, "Green: the tangent at the inflection point, the steepest point of the curve (slope 48).")],
   ]),
 
   practice([

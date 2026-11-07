@@ -23,7 +23,7 @@ const PRE = String.raw`\documentclass[11pt]{article}
 \usepackage[T1]{fontenc}\usepackage[utf8]{inputenc}\usepackage{lmodern}
 \usepackage{xcolor}\usepackage[most]{tcolorbox}\usepackage{enumitem}\usepackage{multicol}\usepackage{array}\usepackage{booktabs}\usepackage{fancyhdr}
 \usepackage{graphicx}\usepackage{tikz}\usetikzlibrary{calc,decorations.pathreplacing,arrows.meta}
-\usepackage{pgfplots}\pgfplotsset{compat=1.18}\usepackage{needspace}
+\usepackage{pgfplots}\pgfplotsset{compat=1.18}\usepackage{needspace}\usepackage{adjustbox}
 \definecolor{titleblue}{HTML}{1D4ED8}\definecolor{iagreen}{HTML}{14653B}\definecolor{keygray}{HTML}{475569}\definecolor{keybg}{HTML}{F1F5F9}
 \definecolor{tipred}{HTML}{B91C1C}\definecolor{hookviolet}{HTML}{6D28D9}
 \definecolor{lv1}{HTML}{15803D}\definecolor{lv2}{HTML}{B45309}\definecolor{lv3}{HTML}{7C2D12}
@@ -39,7 +39,7 @@ const PRE = String.raw`\documentclass[11pt]{article}
 \newtcolorbox{hookbox}{colframe=hookviolet,colback=hookviolet!5,coltitle=white,colbacktitle=hookviolet,fonttitle=\bfseries,title={Minds On --- start the lesson with this},arc=3pt,breakable,boxrule=1.2pt}
 \newtcolorbox{conceptbox}[1]{colframe=iagreen,colback=white,coltitle=white,colbacktitle=iagreen,fonttitle=\bfseries,title={#1},arc=3pt,breakable,boxrule=1pt}
 \newtcolorbox{tipbox}{colframe=tipred,colback=tipred!4,coltitle=white,colbacktitle=tipred,fonttitle=\bfseries,title={Common Mistakes \& Teaching Tips},arc=3pt,breakable,boxrule=1pt}
-\newtcolorbox{example}[2]{colframe=#1,colback=#1!6,coltitle=white,colbacktitle=#1,fonttitle=\bfseries,title={#2},arc=3pt,breakable,boxrule=1pt}
+\newtcolorbox{example}[2]{colframe=#1,colback=#1!6,coltitle=white,colbacktitle=#1,fonttitle=\bfseries,title={#2},arc=3pt,boxrule=1pt}
 \newtcolorbox{qbox}[2]{colframe=#1,colback=white,coltitle=white,colbacktitle=#1,fonttitle=\bfseries,title={#2},arc=3pt,boxrule=0.9pt}
 \newtcolorbox{recapbox}[1]{colframe=keygray,colback=keybg,coltitle=white,colbacktitle=keygray,fonttitle=\bfseries,title={#1},arc=3pt,boxrule=0.8pt}
 \newtcolorbox{keyitem}[1]{colframe=keygray,colback=keybg,coltitle=white,colbacktitle=keygray,fonttitle=\bfseries,title={#1},arc=3pt,breakable,boxrule=0.8pt}
@@ -64,11 +64,12 @@ function texDoc(t) {
 ${body}
 \end{conceptbox}`).join("\n");
   const tips = t.tips.map((x) => String.raw`\item ${x}`).join("\n");
-  const examples = t.examples.map((e, i) => String.raw`\begin{example}{ex${i % 9}}{Example ${i + 1} --- ${e.title}}
+  const examples = t.examples.map((e, i) => String.raw`\par\needspace{8cm}\begin{example}{ex${i % 9}}{Example ${i + 1} --- ${e.title}}
 ${clean(e.q)}
 ${e.fig ? sideBySide(String.raw`\textbf{\textit{Solution.}}
 ${stepsOf(e)}`, e.fig, 0.53) : String.raw`\par\smallskip\textbf{\textit{Solution.}}
 ${stepsOf(e)}`}
+${e.tab ?? ""}
 \par\smallskip\colorbox{white}{\textbf{Answer:} ${clean(e.ans)}}
 \end{example}`).join("\n");
   const LV = { 1: ["lv1", "Level 1 --- Knowledge \\& Understanding"], 2: ["lv2", "Level 2 --- Application"], 3: ["lv3", "Level 3 --- Hard: Thinking \\& Problem Solving"] };
@@ -124,7 +125,7 @@ ${tips}
 \end{itemize}
 \end{tipbox}
 
-\sech{Worked Examples}
+\needspace{12cm}\sech{Worked Examples}
 ${examples}
 
 \clearpage
