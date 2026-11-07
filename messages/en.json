@@ -66,7 +66,12 @@
     "title": "Check your inbox",
     "body": "We sent a verification link to <b>{email}</b>. Click it to activate your account, then sign in.",
     "yourEmail": "your email",
-    "backToSignIn": "Back to sign in"
+    "backToSignIn": "Back to sign in",
+    "junkHint": "Not there after a minute? Check your Junk / Spam folder (iCloud and Outlook often put it there).",
+    "resend": "Resend email",
+    "resending": "Sending…",
+    "resent": "Sent again — check your inbox and junk folder.",
+    "resendWait": "Please wait a minute before asking for another email."
   },
   "completeProfile": {
     "loading": "Loading…",

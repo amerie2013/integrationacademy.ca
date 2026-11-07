@@ -66,7 +66,12 @@
     "title": "Vérifiez votre boîte de réception",
     "body": "Nous avons envoyé un lien de vérification à <b>{email}</b>. Cliquez dessus pour activer votre compte, puis connectez-vous.",
     "yourEmail": "votre courriel",
-    "backToSignIn": "Retour à la connexion"
+    "backToSignIn": "Retour à la connexion",
+    "junkHint": "Rien après une minute? Vérifiez votre dossier Courrier indésirable / Pourriel (iCloud et Outlook l'y placent souvent).",
+    "resend": "Renvoyer le courriel",
+    "resending": "Envoi…",
+    "resent": "Envoyé de nouveau — vérifiez votre boîte de réception et vos pourriels.",
+    "resendWait": "Veuillez patienter une minute avant de demander un autre courriel."
   },
   "completeProfile": {
     "loading": "Chargement…",

@@ -52,21 +52,28 @@ export default function LoginPage() {
     if (mode === "signup") {
       if (!form.full_name || !form.email || !form.password)
         return fail(t("errFillRequired"));
-      const { error } = await supabase.auth.signUp({
-        email: form.email,
-        password: form.password,
-        options: {
-          emailRedirectTo: `${appUrl}/auth/callback`,
-          data: {
-            full_name: form.full_name,
-            role: form.role,
-            level: form.role === "student" ? form.level : null,
-            marketing_opt_in: marketing,
-          },
-        },
+      // Account is created already-confirmed on the server (no verification
+      // email — those kept getting lost), then we sign straight in.
+      const res = await fetch("/api/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: form.email,
+          password: form.password,
+          full_name: form.full_name,
+          role: form.role,
+          level: form.role === "student" ? form.level : null,
+          marketing_opt_in: marketing,
+        }),
       });
-      if (error) return fail(error.message);
-      router.push(`/verify-email?email=${encodeURIComponent(form.email)}`);
+      const out = await res.json().catch(() => ({}));
+      if (!res.ok) return fail(out.error ?? "Sign-up failed. Please try again.");
+      const { error: signInErr } = await supabase.auth.signInWithPassword({
+        email: form.email.trim().toLowerCase(),
+        password: form.password,
+      });
+      if (signInErr) return fail(signInErr.message);
+      router.push("/dashboard");
       return;
     }
 
