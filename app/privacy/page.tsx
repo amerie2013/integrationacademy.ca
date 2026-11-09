@@ -1,6 +1,7 @@
 import { LegalLayout } from "../../components/LegalLayout";
 
 export const metadata = {
+  alternates: { canonical: "/privacy" },
   title: "Privacy Policy — Integration Academy",
   description: "How Integration Academy collects, uses, and protects your personal information, including students' data.",
 };

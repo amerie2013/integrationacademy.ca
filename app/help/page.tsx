@@ -2,6 +2,7 @@ import Link from "next/link";
 import { SiteHeader } from "../../components/SiteHeader";
 
 export const metadata = {
+  alternates: { canonical: "/help" },
   title: "Getting Started — Integration Academy",
   description: "How to use Integration Academy: lessons, quizzes, worksheets, math games, the graphing calculator, and the teaching whiteboard.",
 };

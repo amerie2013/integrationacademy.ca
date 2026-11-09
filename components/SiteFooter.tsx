@@ -35,7 +35,7 @@ export function SiteFooter() {
             worksheets, and a graphing calculator for Grade 9–12, college, and university.
           </p>
         </div>
-        <Col title="Explore" links={[["Courses", "/courses"], ["Pricing", "/pricing"], ["Worksheets", "/worksheets"], ["Calculator", "/tools/graph"], ["Help", "/help"]]} />
+        <Col title="Explore" links={[["Courses", "/courses"], ["Pricing", "/pricing"], ["Articles", "/articles"], ["Calculator", "/tools/graph"], ["Help", "/help"]]} />
         <Col title="Company" links={[["About", "/about"], ["Contact", "/contact"], ["Email us", "mailto:info@integrationacademy.ca"], ["226-602-8853", "tel:+12266028853"]]} />
         <Col title="Legal" links={[["Terms of Service", "/terms"], ["Privacy Policy", "/privacy"], ["Refund Policy", "/refund-policy"]]} />
       </div>

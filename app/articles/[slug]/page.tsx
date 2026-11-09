@@ -11,7 +11,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const a = getArticle(slug);
-  return a ? { title: `${a.title} — Integration Academy`, description: a.excerpt } : { title: "Article — Integration Academy" };
+  return a ? { title: `${a.title} — Integration Academy`, description: a.excerpt, alternates: { canonical: `/articles/${a.slug}` } } : { title: "Article — Integration Academy" };
 }
 
 function renderMath(html: string): string {

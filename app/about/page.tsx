@@ -2,6 +2,7 @@ import Link from "next/link";
 import { LegalLayout } from "../../components/LegalLayout";
 
 export const metadata = {
+  alternates: { canonical: "/about" },
   title: "About — Integration Academy",
   description: "Integration Academy is an Ontario-built online platform for senior high-school, college, and university math — interactive lessons, auto-graded quizzes, worksheets, and a graphing calculator.",
 };

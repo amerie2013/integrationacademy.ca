@@ -2,6 +2,7 @@ import { SiteHeader } from "../../components/SiteHeader";
 import { GamesHub } from "./GamesHub";
 
 export const metadata = {
+  alternates: { canonical: "/games" },
   title: "Math Games — Integration Academy",
   description: "High-school math, gamified. Sharpen your arithmetic basics, then take on Grade 9+ challenges.",
 };

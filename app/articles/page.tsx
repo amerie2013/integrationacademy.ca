@@ -3,6 +3,7 @@ import { SiteHeader } from "../../components/SiteHeader";
 import { ARTICLES } from "../../lib/articles";
 
 export const metadata = {
+  alternates: { canonical: "/articles" },
   title: "Articles — Integration Academy",
   description: "Deep-dives, study strategies, and the big ideas behind high-school and university math.",
 };

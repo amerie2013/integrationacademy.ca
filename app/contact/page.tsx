@@ -2,6 +2,7 @@ import Link from "next/link";
 import { LegalLayout } from "../../components/LegalLayout";
 
 export const metadata = {
+  alternates: { canonical: "/contact" },
   title: "Contact — Integration Academy",
   description: "Get in touch with Integration Academy by email or phone, and find answers to common questions.",
 };

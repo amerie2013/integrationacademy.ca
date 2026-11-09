@@ -1,6 +1,7 @@
 import { LegalLayout } from "../../components/LegalLayout";
 
 export const metadata = {
+  alternates: { canonical: "/refund-policy" },
   title: "Refund Policy — Integration Academy",
   description: "Integration Academy's subscription cancellation and refund terms.",
 };

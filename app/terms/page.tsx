@@ -1,6 +1,7 @@
 import { LegalLayout } from "../../components/LegalLayout";
 
 export const metadata = {
+  alternates: { canonical: "/terms" },
   title: "Terms of Service — Integration Academy",
   description: "The terms governing your use of Integration Academy's online math learning platform.",
 };
