@@ -15,6 +15,7 @@ const FOUNDATIONS: Game[] = [
 
 const CHALLENGES: Game[] = [
   { href: "/games/equation-sprint", title: "Equation Sprint", tag: "Algebra · 60s", desc: "Solve as many linear equations as you can before the clock runs out. Build a streak for bonus points.", glyph: "⚡", live: true },
+  { href: "/games/line-launcher", title: "Line Launcher", tag: "Linear relations · 7 levels", desc: "Type lines in y = mx + b form to build ramps, then launch a marble that has to roll through every target.", glyph: "↘", live: true },
   { href: "/games/intersection-hunt", title: "Intersection Hunt", tag: "Linear systems · 8 rounds", desc: "Build each line from its slope and y-intercept to match the equations, then click where they cross to solve the system.", glyph: "🎯", live: true },
   { href: "/games/parabola-architect", title: "Parabola Architect", tag: "Quadratics · 90s", desc: "Read a target parabola, then dial in a, h, and k in vertex form until your curve lands on it. Beat the clock.", glyph: "🅿️", live: true },
   { href: "/games/pythagoras-pursuit", title: "Pythagoras Pursuit", tag: "Measurement · 10 rounds", desc: "A right triangle with one side missing — use a² + b² = c² to find it. Whole-number answers, hypotenuse or leg.", glyph: "📐", live: true },
