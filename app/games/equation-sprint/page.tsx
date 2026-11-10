@@ -228,7 +228,7 @@ export default function EquationSprint() {
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
             <h1 style={{ fontFamily: "Fraunces, serif", fontSize: 30, fontWeight: 700, margin: 0, color: "#f0fff6" }}>Equation Sprint</h1>
             <div style={{ display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap" }}>
-              <Hud label="Time" value={`${timeLeft}s`} warn={phase === "playing" && timeLeft <= 10} />
+              <Hud label="Time" value={`${Math.floor(timeLeft / 60)}:${String(timeLeft % 60).padStart(2, "0")}`} warn={phase === "playing" && timeLeft <= 10} />
               <Hud label="Score" value={String(score)} />
               <Hud label="Streak" value={`×${streak}`} />
               <Hud label="Solved" value={String(solved)} />
@@ -265,7 +265,7 @@ export default function EquationSprint() {
                 <li><b>2</b> It happens to <em>both sides</em>, so the scale stays level</li>
                 <li><b>3</b> Get <code style={code}>x = …</code> alone. Fewer moves, more points</li>
               </ol>
-              <button onClick={() => start()} style={primaryBtn}>Start {T.name} sprint · {ROUND_SECONDS}s</button>
+              <button onClick={() => start()} style={primaryBtn}>Start {T.name} sprint · {ROUND_SECONDS / 60} min</button>
               {tier < 2 && !tierOpen(tier + 1) && <div style={{ color: "#8fd6ab", fontSize: 13, marginTop: 10 }}>Solve {UNLOCK_SOLVES} in one round to unlock {TIERS[tier + 1].name}.</div>}
             </div>
           )}

@@ -14,7 +14,7 @@ const FOUNDATIONS: Game[] = [
 ];
 
 const CHALLENGES: Game[] = [
-  { href: "/games/equation-sprint", title: "Equation Sprint", tag: "Algebra · 90s · Bronze to Gold", desc: "Solve equations on a balance scale: type moves like −3 or ÷5 and they happen to both sides. Fewest moves wins. Brackets, x on both sides, fractions.", glyph: "⚖", live: true },
+  { href: "/games/equation-sprint", title: "Equation Sprint", tag: "Algebra · 3 min · Bronze to Gold", desc: "Solve equations on a balance scale: type moves like −3 or ÷5 and they happen to both sides. Fewest moves wins. Brackets, x on both sides, fractions.", glyph: "⚖", live: true },
   { href: "/games/rate-race", title: "Rate Race", tag: "Linear relations · 8 deliveries", desc: "Program a delivery drone with d = mt + b. Arrive on time, catch the bus, meet the robot — slope is speed, the intercept is your head start.", glyph: "↗", live: true },
   { href: "/games/intersection-hunt", title: "Intersection Hunt", tag: "Linear systems · 8 rounds", desc: "Build each line from its slope and y-intercept to match the equations, then click where they cross to solve the system.", glyph: "🎯", live: true },
   { href: "/games/parabola-architect", title: "Parabola Architect", tag: "Quadratics · 90s", desc: "Read a target parabola, then dial in a, h, and k in vertex form until your curve lands on it. Beat the clock.", glyph: "🅿️", live: true },

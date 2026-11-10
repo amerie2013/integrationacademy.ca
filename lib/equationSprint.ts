@@ -326,5 +326,5 @@ export const TIERS = [
   { name: "Silver", color: "#cbd5e1", desc: "x on both sides and brackets · hints cost 20", hintCost: 20 as number | null, mult: 1.5, twoTap: false },
   { name: "Gold", color: "#fbbf24", desc: "Fractions and decimals · no hints", hintCost: null as number | null, mult: 2, twoTap: false },
 ];
-export const ROUND_SECONDS = 90;
+export const ROUND_SECONDS = 180; // 3 minutes: Bronze needs two taps per move, so a round needs room
 export const UNLOCK_SOLVES = 6; // solve this many in one round to open the next tier
