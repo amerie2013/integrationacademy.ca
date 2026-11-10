@@ -50,6 +50,10 @@ export default function UndoMachine() {
   const [machine, setMachine] = useState<Machine | null>(null);
   const [tiles, setTiles] = useState<Op[]>([]);
   const [slots, setSlots] = useState<(number | null)[]>([null, null]); // indexes into tiles
+  const [activeSlot, setActiveSlot] = useState<number | null>(null); // slot the student clicked to fill next
+  const [drag, setDrag] = useState<{ i: number; x: number; y: number; over: number | null } | null>(null);
+  const dragStart = useRef<{ i: number; x: number; y: number; moved: boolean } | null>(null);
+  const suppressClick = useRef(false);
   const [phase, setPhase] = useState<Phase>("place");
   const [cap, setCap] = useState<{ spot: Spot; val: string; show: boolean }>({ spot: "out", val: "", show: false });
   const [xFound, setXFound] = useState<string | null>(null);
@@ -96,6 +100,7 @@ export default function UndoMachine() {
     setMachine(m);
     setTiles(tray(m, t, r));
     setSlots([null, null]);
+    setActiveSlot(null);
     setPhase("place");
     setCap({ spot: "out", val: fmtQ(m.out, m.mode), show: false });
     setXFound(null);
@@ -117,21 +122,55 @@ export default function UndoMachine() {
   }
 
   /* ---------------- tiles ---------------- */
-  function placeTile(i: number) {
-    if (phase !== "place" || slots.includes(i)) return;
-    const k = slots[0] === null ? 0 : slots[1] === null ? 1 : -1;
+  /** Put tile i into a slot: the one it was dropped on, else the clicked one, else the next empty one. */
+  function placeTile(i: number, target?: number) {
+    if (phase !== "place") return;
+    const ns = slots.map((v) => (v === i ? null : v)); // a tile can only sit in one slot
+    const k = target ?? (activeSlot !== null ? activeSlot : ns[0] === null ? 0 : ns[1] === null ? 1 : -1);
     if (k < 0) return;
-    const ns = [...slots];
     ns[k] = i;
     setSlots(ns);
+    setActiveSlot(null);
     setMessage(null);
     play(500 + k * 120, 0.06, "triangle", 0.04);
   }
-  function clearSlot(k: number) {
+  /** Clicking a slot: empty → choose it as the target; filled → send the tile back to the tray. */
+  function clickSlot(k: number) {
     if (phase !== "place") return;
-    const ns = [...slots];
-    ns[k] = null;
-    setSlots(ns);
+    if (slots[k] !== null) {
+      const ns = [...slots];
+      ns[k] = null;
+      setSlots(ns);
+      setActiveSlot(k);
+    } else setActiveSlot((a) => (a === k ? null : k));
+  }
+  const nextSlot = phase !== "place" ? null : activeSlot !== null ? activeSlot : slots[0] === null ? 0 : slots[1] === null ? 1 : null;
+
+  /* drag a tile onto a slot (mouse or touch) */
+  const slotAt = (x: number, y: number): number | null => {
+    const el = document.elementFromPoint(x, y)?.closest("[data-slot]");
+    return el ? Number(el.getAttribute("data-slot")) : null;
+  };
+  function tileDown(e: React.PointerEvent, i: number) {
+    if (phase !== "place") return;
+    dragStart.current = { i, x: e.clientX, y: e.clientY, moved: false };
+    (e.target as HTMLElement).setPointerCapture?.(e.pointerId);
+  }
+  function tileMove(e: React.PointerEvent) {
+    const d = dragStart.current;
+    if (!d) return;
+    if (!d.moved && Math.hypot(e.clientX - d.x, e.clientY - d.y) < 6) return;
+    d.moved = true;
+    setDrag({ i: d.i, x: e.clientX, y: e.clientY, over: slotAt(e.clientX, e.clientY) });
+  }
+  function tileUp(e: React.PointerEvent) {
+    const d = dragStart.current;
+    dragStart.current = null;
+    if (!d || !d.moved) return; // a plain tap: onClick handles it
+    suppressClick.current = true;
+    setDrag(null);
+    const k = slotAt(e.clientX, e.clientY);
+    if (k !== null) placeTile(d.i, k);
   }
 
   /* ---------------- running the machine ---------------- */
@@ -378,7 +417,7 @@ export default function UndoMachine() {
               </div>
 
               <div style={{ position: "relative" }}>
-                <Board machine={machine} tiles={tiles} slots={slots} cap={cap} xFound={xFound} fwdOut={fwdOut} lit={lit} phase={phase} onSlot={clearSlot} />
+                <Board machine={machine} tiles={tiles} slots={slots} cap={cap} xFound={xFound} fwdOut={fwdOut} lit={lit} phase={phase} onSlot={clickSlot} nextSlot={nextSlot} dragOver={drag?.over ?? null} />
                 {ask && phase === "ask" && (
                   <div className="um-ask" style={{ left: `${((ask && cap.spot === "s1" ? COLX.op2 : COLX.op1) / W) * 100}%` }}>
                     <div style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 18, color: "#f0fff6", fontWeight: 700, whiteSpace: "nowrap" }}>{ask.expr} = </div>
@@ -393,13 +432,16 @@ export default function UndoMachine() {
 
               {/* tile tray */}
               <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: 10, justifyContent: "center", margin: "8px 0 6px" }}>
-                <span style={{ color: "#8fd6ab", fontSize: 13, fontWeight: 700, letterSpacing: ".06em" }}>UNDO TILES</span>
+                <span style={{ color: "#8fd6ab", fontSize: 13, fontWeight: 700, letterSpacing: ".06em" }}>{phase === "place" ? "TAP OR DRAG A TILE ↑" : "UNDO TILES"}</span>
                 {tiles.map((t, i) => {
                   const used = slots.includes(i);
                   return (
-                    <button key={i} onClick={() => placeTile(i)} disabled={used || phase !== "place"} className="um-tile"
+                    <button key={i} disabled={used || phase !== "place"} className="um-tile"
+                      onClick={() => { if (suppressClick.current) { suppressClick.current = false; return; } placeTile(i); }}
+                      onPointerDown={(e) => tileDown(e, i)} onPointerMove={tileMove} onPointerUp={tileUp}
+                      onPointerCancel={() => { dragStart.current = null; setDrag(null); }}
                       aria-label={`Undo tile ${opLabel(t, mode)}`}
-                      style={{ ...tileStyle(t), opacity: used ? 0.2 : 1, cursor: used || phase !== "place" ? "default" : "pointer" }}>
+                      style={{ ...tileStyle(t), opacity: used ? 0.2 : drag?.i === i ? 0.4 : 1, cursor: used || phase !== "place" ? "default" : "grab", touchAction: "none" }}>
                       {opLabel(t, mode)}
                     </button>
                   );
@@ -437,6 +479,11 @@ export default function UndoMachine() {
           )}
         </div>
       </div>
+      {drag && machine && (
+        <div style={{ ...tileStyle(tiles[drag.i]), position: "fixed", left: drag.x, top: drag.y, transform: "translate(-50%, -60%) rotate(-4deg) scale(1.08)", pointerEvents: "none", zIndex: 60, boxShadow: "0 12px 30px rgba(0,0,0,.5)" }}>
+          {opLabel(tiles[drag.i], mode)}
+        </div>
+      )}
       <style>{CSS}</style>
     </main>
   );
@@ -470,9 +517,10 @@ function Gear({ cx, cy, r, spin }: { cx: number; cy: number; r: number; spin: bo
   );
 }
 
-function Board({ machine, tiles, slots, cap, xFound, fwdOut, lit, phase, onSlot }: {
+function Board({ machine, tiles, slots, cap, xFound, fwdOut, lit, phase, onSlot, nextSlot, dragOver }: {
   machine: Machine; tiles: Op[]; slots: (number | null)[]; cap: { spot: Spot; val: string; show: boolean };
   xFound: string | null; fwdOut: { val: string; ok: boolean } | null; lit: string | null; phase: Phase; onSlot: (k: number) => void;
+  nextSlot: number | null; dragOver: number | null;
 }) {
   const mode = machine.mode;
   const running = phase === "running" || phase === "ask";
@@ -505,7 +553,7 @@ function Board({ machine, tiles, slots, cap, xFound, fwdOut, lit, phase, onSlot 
 
   return (
     <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={`Machine: x, ${opLabel(machine.ops[0], mode)}, ${opLabel(machine.ops[1], mode)}, gives ${fmtQ(machine.out, mode)}`}
-      style={{ width: "100%", height: "auto", display: "block", margin: "6px 0" }}>
+      style={{ width: "100%", height: "auto", display: "block", margin: "6px 0", userSelect: "none", WebkitUserSelect: "none" }}>
       <defs><filter id="um-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="8" /></filter></defs>
       <Gear cx={200} cy={170} r={26} spin={running || checking} />
       <Gear cx={400} cy={170} r={20} spin={running || checking} />
@@ -531,8 +579,18 @@ function Board({ machine, tiles, slots, cap, xFound, fwdOut, lit, phase, onSlot 
       {fwdOut && !fwdOut.ok && [0, 1, 2, 3, 4, 5].map((i) => <line key={i} className="um-spark" x1={COLX.out} y1={TOP} x2={COLX.out + 60 * Math.cos(i)} y2={TOP + 60 * Math.sin(i * 1.7)} stroke="#fbbf24" strokeWidth={2} style={{ animationDelay: `${i * 0.05}s` }} />)}
 
       {box(COLX.out, BOT, fmtQ(machine.out, mode), "#f0fff6")}
-      <g onClick={() => onSlot(0)} style={{ cursor: slots[0] !== null && phase === "place" ? "pointer" : "default" }}>{block(COLX.op2, BOT, slotLabel(0), "slot", lit === "s1", slots[0] !== null)}</g>
-      <g onClick={() => onSlot(1)} style={{ cursor: slots[1] !== null && phase === "place" ? "pointer" : "default" }}>{block(COLX.op1, BOT, slotLabel(1), "slot", lit === "s2", slots[1] !== null)}</g>
+      {[0, 1].map((k) => {
+        const cx = k === 0 ? COLX.op2 : COLX.op1;
+        const target = phase === "place" && (dragOver === k || (dragOver === null && nextSlot === k));
+        return (
+          <g key={k} data-slot={k} onClick={() => onSlot(k)} role="button" aria-label={`${k === 0 ? "First" : "Second"} undo slot${slots[k] !== null ? `: ${slotLabel(k)}, click to remove` : ", empty"}`}
+            style={{ cursor: phase === "place" ? "pointer" : "default" }}>
+            {target && <rect className="um-next" x={cx - 66} y={BOT - 36} width={132} height={72} rx={16} fill="none" stroke="#fbbf24" strokeWidth={3} />}
+            {block(cx, BOT, slotLabel(k), "slot", lit === (k === 0 ? "s1" : "s2"), slots[k] !== null)}
+            {phase === "place" && slots[k] === null && <text x={cx} y={BOT + 50} textAnchor="middle" fill="rgba(253,230,138,.7)" fontSize={11.5}>{target ? "drop a tile here" : "click to choose"}</text>}
+          </g>
+        );
+      })}
       {box(COLX.x, BOT, xFound ? `x=${xFound}` : "x = ?", xFound ? (fwdOut ? (fwdOut.ok ? "#34d27f" : "#f87171") : "#fde68a") : "rgba(240,255,246,.5)", !!xFound && !!fwdOut?.ok)}
 
       {/* the number capsule */}
@@ -563,6 +621,8 @@ const CSS = `
 .um-spark{animation:umSpark .6s ease-out both}
 @keyframes umSpark{from{opacity:1;stroke-dasharray:0 80}to{opacity:0;stroke-dasharray:60 80}}
 .um-tile{transition:transform .12s ease}
+.um-next{animation:umNext 1.1s ease-in-out infinite}
+@keyframes umNext{50%{opacity:.25}}
 .um-tile:not(:disabled):hover{transform:translateY(-3px)}
 .um-tile:not(:disabled):active{transform:translateY(2px)}
 .um-pop{animation:umPop .35s ease-out both}
