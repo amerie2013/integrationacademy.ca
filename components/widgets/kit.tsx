@@ -6,6 +6,7 @@
 
 import { useMemo, type CSSProperties, type ReactNode } from "react";
 import { renderMath } from "../HtmlBlock";
+import { useT } from "../../lib/lang";
 
 export const C = {
   blue: "#1e40af",
@@ -25,7 +26,9 @@ export const C = {
   panel: "#f8fafc",
 };
 
-export function WidgetCard({ title, subtitle, children, tag = "Explore" }: { title: string; subtitle?: string; children: ReactNode; tag?: string }) {
+export function WidgetCard({ title, subtitle, children, tag }: { title: string; subtitle?: string; children: ReactNode; tag?: string }) {
+  const t = useT();
+  tag ??= t("Explore", "Explorer");
   return (
     <section style={{ border: "1px solid #c7d2fe", borderRadius: 14, background: "#fff", boxShadow: "0 6px 22px rgba(15,23,42,0.06)", overflow: "hidden", margin: "4px 0" }}>
       <header style={{ background: "linear-gradient(90deg,#eef2ff,#f8fafc)", borderBottom: "1px solid #e0e7ff", padding: "12px 18px", display: "flex", gap: 12, alignItems: "baseline", flexWrap: "wrap" }}>

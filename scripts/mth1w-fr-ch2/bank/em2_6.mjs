@@ -1,0 +1,48 @@
+// 2.6 Transformer des formules — 20 questions faciles + 20 moyennes (miroir de ../../mth1w-ch2/bank/em2_6.mjs)
+import { mc, num, tf, mx } from "../../mth1w-ch2/bank/kit.mjs";
+
+export const E = [
+  mx(String.raw`Isole $s$ dans $P=4s$.`, "P/4", String.raw`Divise les deux côtés par $4$ : $s=\frac P4$.`),
+  mx(String.raw`Isole $w$ dans $A=lw$.`, "A/l", String.raw`$w=\frac Al$.`),
+  mx(String.raw`Isole $x$ dans $y=x+5$.`, "y-5", String.raw`Soustrais $5$ : $x=y-5$.`),
+  mx(String.raw`Isole $t$ dans $d=vt$.`, "d/v", String.raw`$t=\frac dv$.`),
+  mc(String.raw`Pour isoler $t$ dans $d=vt$, tu dois…`, "diviser les deux côtés par v", ["soustraire v des deux côtés", "multiplier les deux côtés par v", "diviser les deux côtés par d"], String.raw`$t$ est multiplié par $v$.`),
+  mx(String.raw`Isole $x$ dans $y=3x$.`, "y/3", String.raw`$x=\frac y3$.`),
+  num(String.raw`Utilise $t=\frac dv$ pour trouver $t$ lorsque $d=240$ et $v=60$.`, 4, String.raw`$\frac{240}{60}=4$.`),
+  mx(String.raw`Isole $d$ dans $C=\pi d$. (Tape pi pour $\pi$.)`, "C/pi", String.raw`$d=\frac{C}{\pi}$.`),
+  mx(String.raw`Isole $b$ dans $a+b=10$.`, "10-a", String.raw`$b=10-a$.`),
+  tf(String.raw`Isoler $a$ dans $F=ma$ donne $a=\frac Fm$.`, true, String.raw`Divise les deux côtés par $m$.`),
+  mx(String.raw`Isole $x$ dans $y=x-4$.`, "y+4", String.raw`Ajoute $4$.`),
+  num(String.raw`Utilise $l=\frac Aw$ avec $A=72$ et $w=8$.`, 9, String.raw`$72\div8=9$.`),
+  mc(String.raw`Laquelle est $P=2l+2w$ où l'on a isolé $l$?`, "$l=\\frac{P-2w}{2}$", ["$l=P-2w$", "$l=\\frac P2-2w$", "$l=\\frac{P-w}{2}$"], String.raw`Soustrais $2w$, puis divise par $2$.`),
+  mx(String.raw`Isole $h$ dans $V=Bh$.`, "V/B", String.raw`$h=\frac VB$.`),
+  mx(String.raw`Isole $n$ dans $m=2n-6$.`, "(m+6)/2", String.raw`$m+6=2n$.`),
+  num(String.raw`Isole $t$ dans $I=Prt$, puis trouve $t$ lorsque $I=60$, $P=500$, $r=0.04$.`, 3, String.raw`$t=\frac{I}{Pr}=\frac{60}{20}=3$.`),
+  tf(String.raw`Pour isoler $x$ dans $y=mx+b$, la première étape est de diviser par $m$.`, false, String.raw`Soustrais d'abord $b$ (il a été ajouté en dernier), puis divise par $m$.`),
+  mx(String.raw`Isole $t$ dans $s=\frac t4$.`, "4*s", String.raw`Multiplie par $4$ : $t=4s$.`),
+  num(String.raw`Utilise $v=\frac dt$ pour trouver $d$ lorsque $v=80$ km/h et $t=2.5$ h.`, 200, String.raw`$d=vt=200$ km.`),
+  mc(String.raw`Un rectangle a une aire $A$ et une longueur $l$. Quelle formule donne sa largeur?`, "$w=\\frac Al$", ["$w=A-l$", "$w=Al$", "$w=\\frac lA$"], String.raw`$A=lw$, donc divise par $l$.`),
+];
+
+export const M = [
+  mx(String.raw`Isole $x$ dans $y=2x+7$.`, "(y-7)/2", String.raw`$y-7=2x$.`),
+  mx(String.raw`Isole $w$ dans $P=2l+2w$.`, "(P-2*l)/2", String.raw`$w=\frac{P-2l}{2}=\frac P2-l$.`),
+  mx(String.raw`Isole $y$ dans $3x+y=12$.`, "12-3*x", String.raw`$y=12-3x$.`),
+  mx(String.raw`Isole $y$ dans $4x-2y=8$.`, "2*x-4", String.raw`$-2y=8-4x$, donc $y=2x-4$.`),
+  mx(String.raw`Isole $h$ dans $A=\frac12bh$.`, "2*A/b", String.raw`$2A=bh$, $h=\frac{2A}{b}$.`),
+  mx(String.raw`Isole $C$ dans $F=1.8C+32$.`, "(F-32)/1.8", String.raw`$C=\frac{F-32}{1.8}$.`),
+  num(String.raw`Utilise $C=\frac{F-32}{1.8}$ pour convertir $59\,^\circ$F en degrés Celsius.`, 15, String.raw`$\frac{27}{1.8}=15$.`),
+  mx(String.raw`Isole $r$ dans $I=Prt$.`, "I/(P*t)", String.raw`$r=\frac{I}{Pt}$.`),
+  mx(String.raw`Isole $P$ dans $A=P+I$.`, "A-I", String.raw`$P=A-I$.`),
+  mc(String.raw`Quelle est la pente de $6x+3y=9$?`, "$-2$", ["$6$", "$3$", "$2$"], String.raw`$3y=-6x+9$, $y=-2x+3$.`),
+  num(String.raw`Quelle est l'ordonnée à l'origine de $5x+2y=14$?`, 7, String.raw`$y=-\frac52x+7$.`),
+  mx(String.raw`Isole $h$ dans $V=lwh$.`, "V/(l*w)", String.raw`$h=\frac{V}{lw}$.`),
+  num(String.raw`La somme des angles d'un polygone est $S=180(n-2)$. Combien de côtés a un polygone dont la somme des angles est de $1080^\circ$?`, 8, String.raw`$n=\frac{S}{180}+2=6+2$.`),
+  mx(String.raw`Isole $x$ dans $y=\frac x3-2$.`, "3*(y+2)", String.raw`$y+2=\frac x3$, $x=3(y+2)$.`),
+  mc(String.raw`Laquelle est $C=2\pi r$ où l'on a isolé $r$?`, "$r=\\frac{C}{2\\pi}$", ["$r=C-2\\pi$", "$r=2\\pi C$", "$r=\\frac C2-\\pi$"], String.raw`Divise les deux côtés par $2\pi$.`),
+  num(String.raw`Utilise $h=\frac{2A}{b}$ pour trouver la hauteur d'un triangle d'aire $30$ cm² et de base $12$ cm.`, 5, String.raw`$\frac{60}{12}=5$.`),
+  tf(String.raw`À partir de $2w=P-2l$, on obtient $w=P-l$.`, false, String.raw`Divise les deux termes par $2$ : $w=\frac P2-l$.`),
+  mx(String.raw`Isole $m$ dans $E=mc^2$.`, "E/c^2", String.raw`$m=\frac{E}{c^2}$.`),
+  num(String.raw`Un forfait de données coûte $C=20+0.08k$ dollars. Isole $k$ et trouve $k$ lorsque $C=36$.`, 200, String.raw`$k=\frac{C-20}{0.08}=200$.`),
+  mx(String.raw`Isole $b$ dans $d=\frac{a+b}{2}$.`, "2*d-a", String.raw`$2d=a+b$, $b=2d-a$.`),
+];

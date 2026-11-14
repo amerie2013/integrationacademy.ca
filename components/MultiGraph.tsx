@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { safeCompile } from "../lib/mathExpr";
+import { useT } from "../lib/lang";
 
 export type Curve = { expr: string; label?: string; color?: string };
 
@@ -49,6 +50,7 @@ export function MultiGraph({
   width?: number;
   height?: number;
 }) {
+  const t = useT();
   const [a, setA] = useState(paramInit);
   const hasParam = param.trim().length > 0;
   const sliders = params ?? [];
@@ -145,9 +147,9 @@ export function MultiGraph({
 
       {markIntersection && intersection && (
         <div style={{ marginTop: 8, fontSize: 13, fontWeight: 700, color: intersection.kind === "point" ? "#059669" : intersection.kind === "none" ? "#dc2626" : "#7c3aed" }}>
-          {intersection.kind === "point" && `One solution: (${round(intersection.x)}, ${round(intersection.y)})`}
-          {intersection.kind === "none" && "Parallel lines — no solution"}
-          {intersection.kind === "infinite" && "Same line — infinite solutions"}
+          {intersection.kind === "point" && `${t("One solution", "Une solution")}: (${round(intersection.x)}, ${round(intersection.y)})`}
+          {intersection.kind === "none" && t("Parallel lines — no solution", "Droites parallèles — aucune solution")}
+          {intersection.kind === "infinite" && t("Same line — infinite solutions", "Même droite — une infinité de solutions")}
         </div>
       )}
 

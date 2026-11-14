@@ -1,0 +1,28 @@
+// 2.1 Des mots aux expressions algébriques — 20 questions difficiles (miroir de ../../mth1w-ch2/bank/h2_1.mjs)
+import { mc, ms, num, tf } from "../../mth1w-ch2/bank/kit.mjs";
+import { patternFig, rectFig, graph } from "../../mth1w-ch2/bank/svg2.mjs";
+
+export const TOPIC = "2.1 Des mots aux expressions algébriques";
+export const Q = [
+  num(String.raw`Une suite compte $3, 8, 15, 24$ tuiles dans les figures $1$ à $4$. Les différences ne sont pas constantes : la figure $n$ a $n^2+2n$ tuiles. Combien de tuiles la figure $10$ a-t-elle?`, 120, String.raw`Vérification : $1+2=3$, $4+4=8$ ✓. Figure $10$ : $100+20=120$.`),
+  mc(String.raw`Le forfait A coûte $20+0.10m$ dollars et le forfait B coûte $35+0.04m$ dollars pour $m$ minutes. Pour quels nombres de minutes le forfait B est-il moins cher?`, "plus de 250 minutes", ["moins de 250 minutes", "plus de 150 minutes", "toujours"], String.raw`Ils sont égaux quand $15=0.06m$, $m=250$. Au-delà, le plus petit taux de B l'emporte (teste $m=300$ : A $50$, B $47$).`),
+  num(String.raw`Évalue $(2x-y)^2-(x+y)(x-y)$ lorsque $x=-3$ et $y=2$.`, 59, String.raw`$(2x-y)^2=(-8)^2=64$; $(x+y)(x-y)=(-1)(-5)=5$; $64-5=59$.`),
+  num(String.raw`Évalue $a(b-c)-b(a-c)$ lorsque $a=-2$, $b=5$ et $c=3$.`, 21, String.raw`$-2(2)-5(-5)=-4+25=21$.`),
+  num(String.raw`Des triangles faits de cure-dents sont placés en rangée, chaque nouveau triangle partageant un côté avec le précédent : $1$ triangle utilise $3$ cure-dents, $2$ en utilisent $5$, $3$ en utilisent $7$. Combien de cure-dents faut-il pour $50$ triangles?`, 101, String.raw`Règle $2n+1$; $2(50)+1=101$.`),
+  ms(String.raw`Quelles expressions sont impaires pour tout nombre entier $n$? Choisis toutes les bonnes réponses.`, ["$2n+1$", "$2n+3$", "$3n$", "$n^2+n+1$", "$4n-2$"], [0, 1, 3], String.raw`$n^2+n=n(n+1)$ est le produit de deux nombres entiers consécutifs, donc il est pair; ajouter $1$ le rend impair. $3n$ est pair quand $n$ est pair; $4n-2$ est toujours pair.`),
+  num(String.raw`La somme de quatre nombres entiers pairs consécutifs, à partir de $n$, est $196$. Trouve $n$.`, 46, String.raw`$n+(n+2)+(n+4)+(n+6)=4n+12=196$, donc $n=46$ ($46+48+50+52=196$).`),
+  mc(String.raw`Quelle expression donne le nombre de tuiles de la figure $n$?`, "$2n+3$", ["$3n+2$", "$5n$", "$n+5$"], String.raw`Chaque figure ajoute $2$ tuiles et $3$ tuiles ne changent jamais : $2n+3$ ($5, 7, 9,\dots$).`, patternFig(2, 3)),
+  num(String.raw`Une équipe de hockey obtient $2$ points par victoire et $1$ point par défaite en prolongation. Elle a $34$ victoires et $11$ défaites en prolongation, et il lui reste $37$ matchs. Quel est le plus grand nombre de points qu'elle peut avoir à la fin?`, 153, String.raw`Maintenant : $2(34)+11=79$. Si elle gagne les $37$ : $79+74=153$.`),
+  tf(String.raw`Pour toute valeur de $x$, $3x^2$ et $(3x)^2$ sont égaux.`, false, String.raw`$(3x)^2=9x^2$. Pour $x=1$ : $3\ne9$.`),
+  num(String.raw`Évalue $x^3-2x^2-x+2$ lorsque $x=-1$.`, 0, String.raw`$-1-2(1)+1+2=0$.`),
+  num(String.raw`Le centre de conditionnement physique A demande $60+25m$ dollars et le centre B demande $15+40m$ dollars pour $m$ mois. Après combien de mois coûtent-ils le même prix?`, 3, String.raw`Pour $m=3$ : A $135$, B $135$. (Chaque mois, B rattrape $15$ sur A; il avait $45$ de retard au départ.)`),
+  num(String.raw`Une règle rapide pour convertir des degrés Celsius en degrés Fahrenheit est « doubler et ajouter $30$ » : $2C+30$. La formule exacte est $1.8C+32$. De combien de degrés diffèrent-elles pour $C=-15$?`, 5, String.raw`Rapide : $-30+30=0$. Exacte : $-27+32=5$. Différence de $5$ degrés.`),
+  ms(String.raw`Quelles phrases se traduisent par $\dfrac{n-4}{2}$? Choisis toutes les bonnes réponses.`, ["la moitié de la différence entre un nombre et 4", "la différence entre un nombre et 4, divisée par 2", "4 de moins que la moitié d'un nombre", "un nombre diminué de 4, puis divisé en deux", "la moitié de 4, moins un nombre"], [0, 1, 3], String.raw`« $4$ de moins que la moitié d'un nombre » s'écrit $\frac n2-4$; « la moitié de $4$, moins un nombre » s'écrit $2-n$.`),
+  num(String.raw`Le graphique montre le tarif d'un plombier pour $0$ à $3$ heures. La régularité se poursuit. Quel est le tarif, en dollars, pour $7.5$ heures?`, 322.5, String.raw`Départ $60$, hausse de $35$ par heure : $C=60+35h$; $60+35(7.5)=322.5$.`,
+    graph({ series: [{ pts: [[0, 60], [1, 95], [2, 130], [3, 165]] }], xmin: 0, xmax: 4, ymin: 0, ymax: 200, xstep: 1, ystep: 25, xlabel: "heures", ylabel: "tarif (dollars)" }), 0.01),
+  mc(String.raw`Quel est le $100$e terme de $7, 4, 1, -2,\dots$?`, "$-290$", ["$-293$", "$-287$", "$290$"], String.raw`Différence $-3$; la valeur pour $n=0$ est $10$ : $-3n+10$. $-300+10=-290$.`),
+  num(String.raw`Évalue $6a-9b+ab$ lorsque $a=\frac12$ et $b=-\frac23$. Donne un nombre décimal à deux décimales.`, 26 / 3, String.raw`$3+6-\frac13=8\frac23\approx8.67$.`, null, 0.006),
+  num(String.raw`Trouve le périmètre du rectangle lorsque $x=7.5$.`, 41, String.raw`$P=2(2x+1)+2(x-3)=6x-4$; $6(7.5)-4=41$.`, rectFig("2x + 1", "x − 3")),
+  mc(String.raw`Quelle a été la principale contribution de François Viète à la notation algébrique (1591)?`, "utiliser des lettres pour les inconnues et pour les quantités connues", ["inventer un symbole pour le zéro", "inventer le signe d'égalité", "les premières règles pour les nombres négatifs"], String.raw`Le zéro et les règles pour les nombres négatifs ont été développés en Inde (Brahmagupta); le signe d'égalité est de Robert Recorde (1557).`),
+  num(String.raw`Un polygone à $n$ côtés a $\dfrac{n(n-3)}{2}$ diagonales. Combien de diagonales un décagone a-t-il?`, 35, String.raw`$\frac{10(7)}{2}=35$.`),
+];

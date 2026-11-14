@@ -6,6 +6,7 @@
 
 import { useState, type ReactNode } from "react";
 import { C, MathText, Readout, Row, Segmented, Slider, WidgetCard } from "./kit";
+import { useT } from "@/lib/lang";
 
 const r2 = (v: number, d = 2) => { const k = 10 ** d; const r = Math.round(v * k) / k; return r < 0 ? `−${-r}` : String(r); };
 const tex = (v: number, d = 2) => { const k = 10 ** d; const r = Math.round(v * k) / k; return String(r).replace(/^(-?\d+)(\d{3})(?=\.|$)/, "$1\\,$2"); };
@@ -45,25 +46,26 @@ export function PiPolygon() {
   const inner = n * Math.sin(Math.PI / n), outer = n * Math.tan(Math.PI / n); // perimeter ÷ diameter
   const ring = (R: number) => Array.from({ length: n }, (_, i) => [R * Math.cos((2 * Math.PI * i) / n + Math.PI / 2), R * Math.sin((2 * Math.PI * i) / n + Math.PI / 2)] as [number, number]);
   const Rout = 1 / Math.cos(Math.PI / n);
+  const t = useT();
   return (
-    <WidgetCard title="Squeezing π between two polygons" subtitle="Archimedes, about 250 BCE: a circle's perimeter lies between an inside and an outside polygon">
-      <Row><Slider label="sides n" value={n} min={3} max={96} onChange={setN} color={C.violet} /></Row>
+    <WidgetCard title={t("Squeezing π between two polygons", "Encadrer π entre deux polygones")} subtitle={t("Archimedes, about 250 BCE: a circle's perimeter lies between an inside and an outside polygon", "Archimède, vers 250 av. J.-C. : le périmètre d'un cercle se situe entre celui d'un polygone intérieur et celui d'un polygone extérieur")}>
+      <Row><Slider label={t("sides n", "côtés n")} value={n} min={3} max={96} onChange={setN} color={C.violet} /></Row>
       <Row style={{ justifyContent: "center", gap: 6 }}>
         {[6, 12, 24, 48, 96].map((k) => <button key={k} type="button" onClick={() => setN(k)} style={{ border: `1px solid ${k === n ? C.violet : C.line}`, background: k === n ? C.violetSoft : "#fff", borderRadius: 8, padding: "4px 10px", fontWeight: 700, cursor: "pointer" }}>{k}</button>)}
       </Row>
-      <Canvas view={{ xmin: -1.3, xmax: 1.3, ymin: -1.3, ymax: 1.3 }} label="Circle with inscribed and circumscribed polygons" h={300}>
+      <Canvas view={{ xmin: -1.3, xmax: 1.3, ymin: -1.3, ymax: 1.3 }} label={t("Circle with inscribed and circumscribed polygons", "Cercle avec polygones inscrit et circonscrit")} h={300}>
         {(X, Y, s) => (
           <>
             <polygon points={pts(X, Y, ring(Rout))} fill={C.amberSoft} stroke={C.amber} strokeWidth={2} />
             <circle cx={X(0)} cy={Y(0)} r={s} fill="#fff" stroke={C.ink} strokeWidth={2.4} />
             <polygon points={pts(X, Y, ring(1))} fill={C.blueSoft} fillOpacity={0.7} stroke={C.blue} strokeWidth={2} />
             <line x1={X(-1)} y1={Y(0)} x2={X(1)} y2={Y(0)} stroke={C.red} strokeWidth={2} strokeDasharray="6 4" />
-            <Lbl x={X(0)} y={Y(0) - 8} color={C.red}>diameter 1</Lbl>
+            <Lbl x={X(0)} y={Y(0) - 8} color={C.red}>{t("diameter 1", "diamètre 1")}</Lbl>
           </>
         )}
       </Canvas>
       <Readout tone="green">
-        <MathText html={`With a diameter of \\(1\\), the inside ${n}-gon has perimeter \\(${tex(inner, 5)}\\) and the outside ${n}-gon has perimeter \\(${tex(outer, 5)}\\). The circle's circumference is between them, so \\(${tex(inner, 5)} < \\pi < ${tex(outer, 5)}\\). ${n >= 96 ? "Archimedes stopped at 96 sides: \\(3\\tfrac{10}{71} < \\pi < 3\\tfrac{1}{7}\\)." : "More sides squeeze the two bounds closer to \\(\\pi \\approx 3.14159\\)."}`} />
+        <MathText html={t(`With a diameter of \\(1\\), the inside ${n}-gon has perimeter \\(${tex(inner, 5)}\\) and the outside ${n}-gon has perimeter \\(${tex(outer, 5)}\\). The circle's circumference is between them, so \\(${tex(inner, 5)} < \\pi < ${tex(outer, 5)}\\). ${n >= 96 ? "Archimedes stopped at 96 sides: \\(3\\tfrac{10}{71} < \\pi < 3\\tfrac{1}{7}\\)." : "More sides squeeze the two bounds closer to \\(\\pi \\approx 3.14159\\)."}`, `Avec un diamètre de \\(1\\), le polygone intérieur à ${n} côtés a un périmètre de \\(${tex(inner, 5)}\\) et le polygone extérieur à ${n} côtés a un périmètre de \\(${tex(outer, 5)}\\). La circonférence du cercle est entre les deux, donc \\(${tex(inner, 5)} < \\pi < ${tex(outer, 5)}\\). ${n >= 96 ? "Archimède s'est arrêté à 96 côtés : \\(3\\tfrac{10}{71} < \\pi < 3\\tfrac{1}{7}\\)." : "Plus il y a de côtés, plus les deux bornes se rapprochent de \\(\\pi \\approx 3.14159\\)."}`)} />
       </Readout>
     </WidgetCard>
   );
@@ -84,13 +86,16 @@ export function TriangleAngles() {
   const sides = A === Bc && Bc === Cg ? "equilateral" : A === Bc || Bc === Cg || A === Cg ? "isosceles" : "scalene";
   const ext = 180 - Bc;
   const ymax = Math.max(cy, 2) + 0.8, xmin = Math.min(0, cx) - 0.8, xmax = Math.max(base + 3, cx) + 0.6;
+  const t = useT();
+  const kindFr = { right: "rectangle", obtuse: "obtusangle", acute: "acutangle" }[kind];
+  const sidesFr = { equilateral: "équilatéral", isosceles: "isocèle", scalene: "scalène" }[sides];
   return (
-    <WidgetCard title="Angles in a triangle" subtitle="the three interior angles always add to 180°; the exterior angle equals the two opposite interior angles">
+    <WidgetCard title={t("Angles in a triangle", "Angles d'un triangle")} subtitle={t("the three interior angles always add to 180°; the exterior angle equals the two opposite interior angles", "la somme des trois angles intérieurs est toujours 180°; l'angle extérieur est égal à la somme des deux angles intérieurs opposés")}>
       <Row>
         <Slider label="∠A" value={A} min={10} max={140} onChange={setA} color={C.blue} format={(v) => `${v}°`} />
         <Slider label="∠B" value={Bc} min={10} max={175 - A} onChange={setB} color={C.red} format={(v) => `${v}°`} />
       </Row>
-      <Canvas view={{ xmin, xmax, ymin: -0.8, ymax }} label="Triangle with angle marks and exterior angle">
+      <Canvas view={{ xmin, xmax, ymin: -0.8, ymax }} label={t("Triangle with angle marks and exterior angle", "Triangle avec ses angles marqués et un angle extérieur")}>
         {(X, Y, s) => (
           <>
             <polygon points={pts(X, Y, P)} fill={C.blueSoft} stroke={C.blue} strokeWidth={2.5} />
@@ -108,7 +113,7 @@ export function TriangleAngles() {
         )}
       </Canvas>
       <Readout tone="green">
-        <MathText html={`\\(\\angle A+\\angle B+\\angle C=${A}^\\circ+${Bc}^\\circ+${Cg}^\\circ=180^\\circ\\). The exterior angle at \\(B\\) (dashed) is \\(180^\\circ-${Bc}^\\circ=${ext}^\\circ\\), and it equals the two opposite interior angles: \\(${A}^\\circ+${Cg}^\\circ=${ext}^\\circ\\). This is ${kind === "acute" ? "an" : "a"} <strong>${kind}</strong>, <strong>${sides}</strong> triangle.`} />
+        <MathText html={t(`\\(\\angle A+\\angle B+\\angle C=${A}^\\circ+${Bc}^\\circ+${Cg}^\\circ=180^\\circ\\). The exterior angle at \\(B\\) (dashed) is \\(180^\\circ-${Bc}^\\circ=${ext}^\\circ\\), and it equals the two opposite interior angles: \\(${A}^\\circ+${Cg}^\\circ=${ext}^\\circ\\). This is ${kind === "acute" ? "an" : "a"} <strong>${kind}</strong>, <strong>${sides}</strong> triangle.`, `\\(\\angle A+\\angle B+\\angle C=${A}^\\circ+${Bc}^\\circ+${Cg}^\\circ=180^\\circ\\). L'angle extérieur en \\(B\\) (en pointillé) mesure \\(180^\\circ-${Bc}^\\circ=${ext}^\\circ\\), et il est égal à la somme des deux angles intérieurs opposés : \\(${A}^\\circ+${Cg}^\\circ=${ext}^\\circ\\). C'est un triangle <strong>${kindFr}</strong> et <strong>${sidesFr}</strong>.`)} />
       </Readout>
     </WidgetCard>
   );
@@ -128,14 +133,15 @@ export function CircleAngles() {
   const insc = arc / 2;
   const angAt = (q: [number, number], u: [number, number], v: [number, number]) => { const a1 = Math.atan2(u[1] - q[1], u[0] - q[0]); let d = Math.atan2(v[1] - q[1], v[0] - q[0]) - a1; while (d <= -Math.PI) d += 2 * Math.PI; while (d > Math.PI) d -= 2 * Math.PI; return [a1, d]; };
   const [pa1, pd] = angAt(P, A, B), [oa1, od] = angAt([0, 0], A, B);
+  const t = useT();
   return (
-    <WidgetCard title="Angles in a circle" subtitle="an inscribed angle is half the central angle on the same arc">
+    <WidgetCard title={t("Angles in a circle", "Angles dans un cercle")} subtitle={t("an inscribed angle is half the central angle on the same arc", "un angle inscrit mesure la moitié de l'angle au centre qui intercepte le même arc")}>
       <Row>
-        <Slider label="arc AB" value={arc} min={30} max={300} step={2} onChange={setArc} color={C.blue} format={(v) => `${v}°`} />
-        <Slider label="move P" value={pos} min={0} max={100} onChange={setPos} color={C.red} format={(v) => `${v}%`} />
+        <Slider label={t("arc AB", "arc AB")} value={arc} min={30} max={300} step={2} onChange={setArc} color={C.blue} format={(v) => `${v}°`} />
+        <Slider label={t("move P", "déplacer P")} value={pos} min={0} max={100} onChange={setPos} color={C.red} format={(v) => `${v}%`} />
       </Row>
-      <Row><label style={{ fontSize: 14, color: C.muted, fontWeight: 650 }}><input type="checkbox" checked={tangent} onChange={(e) => setTangent(e.target.checked)} /> show the tangent at A</label></Row>
-      <Canvas view={{ xmin: -1.5, xmax: 1.5, ymin: -1.35, ymax: 1.25 }} label="Circle with central and inscribed angles" h={320}>
+      <Row><label style={{ fontSize: 14, color: C.muted, fontWeight: 650 }}><input type="checkbox" checked={tangent} onChange={(e) => setTangent(e.target.checked)} /> {t("show the tangent at A", "afficher la tangente en A")}</label></Row>
+      <Canvas view={{ xmin: -1.5, xmax: 1.5, ymin: -1.35, ymax: 1.25 }} label={t("Circle with central and inscribed angles", "Cercle avec un angle au centre et un angle inscrit")} h={320}>
         {(X, Y, s) => (
           <>
             <circle cx={X(0)} cy={Y(0)} r={s} fill="#fff" stroke={C.ink} strokeWidth={2.2} />
@@ -147,7 +153,7 @@ export function CircleAngles() {
             {tangent && <><line x1={X(A[0] - 1.2 * -A[1])} y1={Y(A[1] - 1.2 * A[0])} x2={X(A[0] + 1.2 * -A[1])} y2={Y(A[1] + 1.2 * A[0])} stroke={C.green} strokeWidth={2.4} />
               <polyline points={pts(X, Y, [[A[0] * 0.88, A[1] * 0.88], [A[0] * 0.88 - A[1] * 0.12, A[1] * 0.88 + A[0] * 0.12], [A[0] - A[1] * 0.12, A[1] + A[0] * 0.12]])} fill="none" stroke={C.green} strokeWidth={1.6} /></>}
             <circle cx={X(0)} cy={Y(0)} r={4} fill={C.ink} />
-            {[["A", A], ["B", B], ["P", P]].map(([t, q]) => { const p = q as [number, number]; return <Lbl key={t as string} x={X(p[0] * 1.13)} y={Y(p[1] * 1.13) + 5}>{t as string}</Lbl>; })}
+            {[["A", A], ["B", B], ["P", P]].map(([nm, q]) => { const p = q as [number, number]; return <Lbl key={nm as string} x={X(p[0] * 1.13)} y={Y(p[1] * 1.13) + 5}>{nm as string}</Lbl>; })}
             <Lbl x={X(0.36 * Math.cos(oa1 + od / 2))} y={Y(0.36 * Math.sin(oa1 + od / 2)) + 5} color={C.blue} size={13}>{arc}°</Lbl>
             <Lbl x={X(P[0] + 0.36 * Math.cos(pa1 + pd / 2))} y={Y(P[1] + 0.36 * Math.sin(pa1 + pd / 2)) + 5} color={C.red} size={13}>{r2(insc, 1)}°</Lbl>
             <Lbl x={X(0)} y={Y(0) - 8} size={12} color={C.muted}>O</Lbl>
@@ -155,7 +161,7 @@ export function CircleAngles() {
         )}
       </Canvas>
       <Readout tone="green">
-        <MathText html={`Central angle \\(\\angle AOB=${arc}^\\circ\\); inscribed angle \\(\\angle APB=${r2(insc, 1)}^\\circ\\), half of it — wherever P sits on the other arc. ${arc === 180 ? "<strong>AB is a diameter, so the angle in a semicircle is \\(90^\\circ\\).</strong>" : "Set the arc to \\(180^\\circ\\) to see the angle in a semicircle."}${tangent ? " The tangent at A is perpendicular to the radius OA (\\(90^\\circ\\))." : ""}`} />
+        <MathText html={t(`Central angle \\(\\angle AOB=${arc}^\\circ\\); inscribed angle \\(\\angle APB=${r2(insc, 1)}^\\circ\\), half of it — wherever P sits on the other arc. ${arc === 180 ? "<strong>AB is a diameter, so the angle in a semicircle is \\(90^\\circ\\).</strong>" : "Set the arc to \\(180^\\circ\\) to see the angle in a semicircle."}${tangent ? " The tangent at A is perpendicular to the radius OA (\\(90^\\circ\\))." : ""}`, `Angle au centre \\(\\angle AOB=${arc}^\\circ\\); angle inscrit \\(\\angle APB=${r2(insc, 1)}^\\circ\\), sa moitié — peu importe où P se trouve sur l'autre arc. ${arc === 180 ? "<strong>AB est un diamètre, donc l'angle inscrit dans un demi-cercle mesure \\(90^\\circ\\).</strong>" : "Règle l'arc à \\(180^\\circ\\) pour voir l'angle inscrit dans un demi-cercle."}${tangent ? " La tangente en A est perpendiculaire au rayon OA (\\(90^\\circ\\))." : ""}`)} />
       </Readout>
     </WidgetCard>
   );
@@ -164,13 +170,13 @@ export function CircleAngles() {
 /* ---------------------------------------------------------------- 5.3 units */
 
 const METRIC = ["km", "hm", "dam", "m", "dm", "cm", "mm"];
-const IMPERIAL: { label: string; from: string; to: string; f: number; note: string }[] = [
-  { label: "in → cm", from: "in", to: "cm", f: 2.54, note: "1 in = 2.54 cm (exact)" },
-  { label: "ft → m", from: "ft", to: "m", f: 0.3048, note: "1 ft = 12 in = 30.48 cm" },
-  { label: "yd → m", from: "yd", to: "m", f: 0.9144, note: "1 yd = 3 ft = 0.9144 m" },
-  { label: "mi → km", from: "mi", to: "km", f: 1.609344, note: "1 mi = 5280 ft ≈ 1.609 km" },
-  { label: "lb → kg", from: "lb", to: "kg", f: 0.45359237, note: "1 lb ≈ 0.454 kg" },
-  { label: "US gal → L", from: "gal", to: "L", f: 3.785411784, note: "1 US gal ≈ 3.785 L" },
+const IMPERIAL: { label: string; from: string; to: string; f: number; note: string; labelFr: string; fromFr: string; noteFr: string }[] = [
+  { label: "in → cm", from: "in", to: "cm", f: 2.54, note: "1 in = 2.54 cm (exact)", labelFr: "po → cm", fromFr: "po", noteFr: "1 po = 2.54 cm (exactement)" },
+  { label: "ft → m", from: "ft", to: "m", f: 0.3048, note: "1 ft = 12 in = 30.48 cm", labelFr: "pi → m", fromFr: "pi", noteFr: "1 pi = 12 po = 30.48 cm" },
+  { label: "yd → m", from: "yd", to: "m", f: 0.9144, note: "1 yd = 3 ft = 0.9144 m", labelFr: "vg → m", fromFr: "vg", noteFr: "1 vg = 3 pi = 0.9144 m" },
+  { label: "mi → km", from: "mi", to: "km", f: 1.609344, note: "1 mi = 5280 ft ≈ 1.609 km", labelFr: "mi → km", fromFr: "mi", noteFr: "1 mi = 5280 pi ≈ 1.609 km" },
+  { label: "lb → kg", from: "lb", to: "kg", f: 0.45359237, note: "1 lb ≈ 0.454 kg", labelFr: "lb → kg", fromFr: "lb", noteFr: "1 lb ≈ 0.454 kg" },
+  { label: "US gal → L", from: "gal", to: "L", f: 3.785411784, note: "1 US gal ≈ 3.785 L", labelFr: "gal US → L", fromFr: "gal", noteFr: "1 gal US ≈ 3.785 L" },
 ];
 export function UnitLadder() {
   const [mode, setMode] = useState<"metric" | "imperial">("metric");
@@ -182,19 +188,21 @@ export function UnitLadder() {
   const [rev, setRev] = useState(false);
   const steps = to - from, factor = 10 ** (steps * dim), out = val * factor;
   const sup = dim === 1 ? "" : `^${dim}`;
-  const I = IMPERIAL[imp];
+  const t = useT();
+  const I0 = IMPERIAL[imp];
+  const I = { ...I0, from: t(I0.from, I0.fromFr), note: t(I0.note, I0.noteFr) };
   const iout = rev ? val / I.f : val * I.f;
   return (
-    <WidgetCard title="Unit ladder" subtitle="each metric step is ×10 for length, ×100 for area, ×1000 for volume">
-      <Segmented options={[{ value: "metric", label: "metric ladder" }, { value: "imperial", label: "imperial ↔ metric" }]} value={mode} onChange={setMode} />
+    <WidgetCard title={t("Unit ladder", "Échelle des unités")} subtitle={t("each metric step is ×10 for length, ×100 for area, ×1000 for volume", "chaque échelon métrique vaut ×10 pour la longueur, ×100 pour l'aire, ×1000 pour le volume")}>
+      <Segmented options={[{ value: "metric", label: t("metric ladder", "échelle métrique") }, { value: "imperial", label: t("imperial ↔ metric", "impérial ↔ métrique") }]} value={mode} onChange={setMode} />
       <div style={{ height: 10 }} />
       {mode === "metric" ? (
         <>
           <Row>
-            <Segmented label="measuring" options={[{ value: 1, label: "length" }, { value: 2, label: "area" }, { value: 3, label: "volume" }]} value={dim} onChange={(v) => setDim(v as 1 | 2 | 3)} />
+            <Segmented label={t("measuring", "mesure")} options={[{ value: 1, label: t("length", "longueur") }, { value: 2, label: t("area", "aire") }, { value: 3, label: t("volume", "volume") }]} value={dim} onChange={(v) => setDim(v as 1 | 2 | 3)} />
           </Row>
           <Row style={{ marginTop: 8 }}>
-            <Slider label="value" value={val} min={0.5} max={20} step={0.5} onChange={setVal} format={(v) => String(v)} />
+            <Slider label={t("value", "valeur")} value={val} min={0.5} max={20} step={0.5} onChange={setVal} format={(v) => String(v)} />
           </Row>
           <div style={{ display: "flex", gap: 6, justifyContent: "center", margin: "12px 0", flexWrap: "wrap" }}>
             {METRIC.map((u, i) => {
@@ -203,28 +211,28 @@ export function UnitLadder() {
                 <div key={u} style={{ textAlign: "center" }}>
                   <div style={{ width: 54, padding: "8px 0", borderRadius: 8, border: `2px solid ${on}`, background: i === from ? C.blueSoft : i === to ? C.greenSoft : "#fff", fontWeight: 800 }}>{u}<MathText html={dim > 1 ? `\\(^${dim}\\)` : ""} /></div>
                   <div style={{ display: "flex", gap: 2, marginTop: 4, justifyContent: "center" }}>
-                    <button type="button" onClick={() => setFrom(i)} style={{ fontSize: 11, border: `1px solid ${C.line}`, borderRadius: 6, background: i === from ? C.blue : "#fff", color: i === from ? "#fff" : C.ink, cursor: "pointer" }}>from</button>
-                    <button type="button" onClick={() => setTo(i)} style={{ fontSize: 11, border: `1px solid ${C.line}`, borderRadius: 6, background: i === to ? C.green : "#fff", color: i === to ? "#fff" : C.ink, cursor: "pointer" }}>to</button>
+                    <button type="button" onClick={() => setFrom(i)} style={{ fontSize: 11, border: `1px solid ${C.line}`, borderRadius: 6, background: i === from ? C.blue : "#fff", color: i === from ? "#fff" : C.ink, cursor: "pointer" }}>{t("from", "de")}</button>
+                    <button type="button" onClick={() => setTo(i)} style={{ fontSize: 11, border: `1px solid ${C.line}`, borderRadius: 6, background: i === to ? C.green : "#fff", color: i === to ? "#fff" : C.ink, cursor: "pointer" }}>{t("to", "à")}</button>
                   </div>
                 </div>
               );
             })}
           </div>
           <Readout tone="green">
-            <MathText html={steps === 0 ? `Same unit: \\(${tex(val)}\\ \\text{${METRIC[from]}}${sup}\\).` : `${Math.abs(steps)} step${Math.abs(steps) > 1 ? "s" : ""} ${steps > 0 ? "down to a smaller unit: multiply" : "up to a larger unit: divide"} by \\(10^{${Math.abs(steps) * dim}}=${tex(10 ** (Math.abs(steps) * dim), 0)}\\)${dim > 1 ? ` (each step is \\(10^${dim}=${10 ** dim}\\) because ${dim === 2 ? "area has two dimensions" : "volume has three dimensions"})` : ""}.<br/>\\(${tex(val)}\\ \\text{${METRIC[from]}}${sup}=${out >= 1e-6 && out < 1e12 ? tex(out, 8) : out.toExponential(3)}\\ \\text{${METRIC[to]}}${sup}\\)`} />
+            <MathText html={steps === 0 ? t(`Same unit: \\(${tex(val)}\\ \\text{${METRIC[from]}}${sup}\\).`, `Même unité : \\(${tex(val)}\\ \\text{${METRIC[from]}}${sup}\\).`) : t(`${Math.abs(steps)} step${Math.abs(steps) > 1 ? "s" : ""} ${steps > 0 ? "down to a smaller unit: multiply" : "up to a larger unit: divide"} by \\(10^{${Math.abs(steps) * dim}}=${tex(10 ** (Math.abs(steps) * dim), 0)}\\)${dim > 1 ? ` (each step is \\(10^${dim}=${10 ** dim}\\) because ${dim === 2 ? "area has two dimensions" : "volume has three dimensions"})` : ""}.`, `${Math.abs(steps)} échelon${Math.abs(steps) > 1 ? "s" : ""} ${steps > 0 ? "vers une unité plus petite : multiplie" : "vers une unité plus grande : divise"} par \\(10^{${Math.abs(steps) * dim}}=${tex(10 ** (Math.abs(steps) * dim), 0)}\\)${dim > 1 ? ` (chaque échelon vaut \\(10^${dim}=${10 ** dim}\\) parce ${dim === 2 ? "que l'aire a deux dimensions" : "que le volume a trois dimensions"})` : ""}.`) + (steps === 0 ? "" : `<br/>\\(${tex(val)}\\ \\text{${METRIC[from]}}${sup}=${out >= 1e-6 && out < 1e12 ? tex(out, 8) : out.toExponential(3)}\\ \\text{${METRIC[to]}}${sup}\\)`)} />
           </Readout>
         </>
       ) : (
         <>
           <Row>
-            <Segmented options={IMPERIAL.map((u, i) => ({ value: i, label: u.label }))} value={imp} onChange={setImp} />
+            <Segmented options={IMPERIAL.map((u, i) => ({ value: i, label: t(u.label, u.labelFr) }))} value={imp} onChange={setImp} />
           </Row>
           <Row style={{ marginTop: 8 }}>
-            <Slider label="value" value={val} min={0.5} max={20} step={0.5} onChange={setVal} format={(v) => String(v)} />
-            <label style={{ fontSize: 14, color: C.muted, fontWeight: 650 }}><input type="checkbox" checked={rev} onChange={(e) => setRev(e.target.checked)} /> reverse ({I.to} → {I.from})</label>
+            <Slider label={t("value", "valeur")} value={val} min={0.5} max={20} step={0.5} onChange={setVal} format={(v) => String(v)} />
+            <label style={{ fontSize: 14, color: C.muted, fontWeight: 650 }}><input type="checkbox" checked={rev} onChange={(e) => setRev(e.target.checked)} /> {t("reverse", "inverser")} ({I.to} → {I.from})</label>
           </Row>
           <Readout tone="green">
-            <MathText html={`${I.note}.<br/>\\(${tex(val)}\\ \\text{${rev ? I.to : I.from}}\\times\\dfrac{${rev ? 1 : tex(I.f, 4)}\\ \\text{${rev ? I.from : I.to}}}{${rev ? tex(I.f, 4) : 1}\\ \\text{${rev ? I.to : I.from}}}\\approx${tex(iout, 3)}\\ \\text{${rev ? I.from : I.to}}\\)<br/>The unit you want goes on top of the conversion fraction, so the old unit cancels.`} />
+            <MathText html={`${I.note}.<br/>\\(${tex(val)}\\ \\text{${rev ? I.to : I.from}}\\times\\dfrac{${rev ? 1 : tex(I.f, 4)}\\ \\text{${rev ? I.from : I.to}}}{${rev ? tex(I.f, 4) : 1}\\ \\text{${rev ? I.to : I.from}}}\\approx${tex(iout, 3)}\\ \\text{${rev ? I.from : I.to}}\\)<br/>${t("The unit you want goes on top of the conversion fraction, so the old unit cancels.", "L'unité voulue se place au numérateur de la fraction de conversion, pour que l'ancienne unité s'annule.")}`} />
           </Readout>
         </>
       )}
@@ -255,9 +263,10 @@ export function Pythagoras() {
   const ang = Math.acos(Math.max(-1, Math.min(1, cosC)));
   const T: [number, number][] = [[0, 0], [a, 0], [b * Math.cos(ang), b * Math.sin(ang)]];
   const tv = { xmin: Math.min(0, T[2][0]) - 1, xmax: Math.max(a, T[2][0]) + 1, ymin: -1, ymax: Math.max(T[2][1], 1) + 1 };
+  const t = useT();
   return (
-    <WidgetCard title="The Pythagorean theorem" subtitle="in a right triangle, the squares on the legs add up to the square on the hypotenuse">
-      <Segmented options={[{ value: "find", label: "squares on the sides" }, { value: "test", label: "is it a right triangle?" }]} value={mode} onChange={setMode} />
+    <WidgetCard title={t("The Pythagorean theorem", "Le théorème de Pythagore")} subtitle={t("in a right triangle, the squares on the legs add up to the square on the hypotenuse", "dans un triangle rectangle, la somme des carrés construits sur les cathètes est égale au carré construit sur l'hypoténuse")}>
+      <Segmented options={[{ value: "find", label: t("squares on the sides", "carrés sur les côtés") }, { value: "test", label: t("is it a right triangle?", "est-ce un triangle rectangle?") }]} value={mode} onChange={setMode} />
       <Row style={{ marginTop: 10 }}>
         <Slider label="a" value={a} min={1} max={12} onChange={setA} color={C.blue} />
         <Slider label="b" value={b} min={1} max={12} onChange={setB} color={C.red} />
@@ -265,7 +274,7 @@ export function Pythagoras() {
       </Row>
       {mode === "find" ? (
         <>
-          <Canvas view={view} label="Right triangle with a square on each side" h={360}>
+          <Canvas view={view} label={t("Right triangle with a square on each side", "Triangle rectangle avec un carré sur chaque côté")} h={360}>
             {(X, Y) => (
               <>
                 <polygon points={pts(X, Y, Sa)} fill={C.blueSoft} stroke={C.blue} strokeWidth={2} />
@@ -279,12 +288,12 @@ export function Pythagoras() {
             )}
           </Canvas>
           <Readout tone="green">
-            <MathText html={`\\(a^2+b^2=c^2\\): \\(${a}^2+${b}^2=${a * a}+${b * b}=${a * a + b * b}\\), so \\(c=\\sqrt{${a * a + b * b}}${Number.isInteger(c) ? `=${c}` : `\\approx${tex(c, 2)}`}\\). ${Number.isInteger(c) ? "A whole-number hypotenuse: this is a <strong>Pythagorean triple</strong>." : "Try a = 3, b = 4 or a = 5, b = 12 for whole-number answers."}`} />
+            <MathText html={t(`\\(a^2+b^2=c^2\\): \\(${a}^2+${b}^2=${a * a}+${b * b}=${a * a + b * b}\\), so \\(c=\\sqrt{${a * a + b * b}}${Number.isInteger(c) ? `=${c}` : `\\approx${tex(c, 2)}`}\\). ${Number.isInteger(c) ? "A whole-number hypotenuse: this is a <strong>Pythagorean triple</strong>." : "Try a = 3, b = 4 or a = 5, b = 12 for whole-number answers."}`, `\\(a^2+b^2=c^2\\) : \\(${a}^2+${b}^2=${a * a}+${b * b}=${a * a + b * b}\\), donc \\(c=\\sqrt{${a * a + b * b}}${Number.isInteger(c) ? `=${c}` : `\\approx${tex(c, 2)}`}\\). ${Number.isInteger(c) ? "Une hypoténuse entière : c'est un <strong>triplet pythagoricien</strong>." : "Essaie a = 3, b = 4 ou a = 5, b = 12 pour obtenir des réponses entières."}`)} />
           </Readout>
         </>
       ) : (
         <>
-          <Canvas view={tv} label="Triangle with sides a, b and c" h={280}>
+          <Canvas view={tv} label={t("Triangle with sides a, b and c", "Triangle de côtés a, b et c")} h={280}>
             {(X, Y) => (
               <>
                 {valid && <polygon points={pts(X, Y, T)} fill={verdict === "right" ? C.greenSoft : C.blueSoft} stroke={verdict === "right" ? C.green : C.blue} strokeWidth={2.5} />}
@@ -293,7 +302,7 @@ export function Pythagoras() {
             )}
           </Canvas>
           <Readout tone={verdict === "right" ? "green" : valid ? "blue" : "amber"}>
-            <MathText html={valid ? `\\(a^2+b^2=${a * a}+${b * b}=${s2}\\) and \\(c^2=${cc}\\). ${verdict === "right" ? "They are equal, so by the <strong>converse</strong> of the theorem the triangle is <strong>right-angled</strong>." : verdict === "acute" ? `\\(${s2}>${cc}\\): the angle opposite c is less than \\(90^\\circ\\) (acute).` : `\\(${s2}<${cc}\\): the angle opposite c is more than \\(90^\\circ\\) (obtuse).`}` : "These lengths do not make a triangle with c as its longest side: c must be at least as long as a and b, and a + b must be greater than c."} />
+            <MathText html={valid ? t(`\\(a^2+b^2=${a * a}+${b * b}=${s2}\\) and \\(c^2=${cc}\\). ${verdict === "right" ? "They are equal, so by the <strong>converse</strong> of the theorem the triangle is <strong>right-angled</strong>." : verdict === "acute" ? `\\(${s2}>${cc}\\): the angle opposite c is less than \\(90^\\circ\\) (acute).` : `\\(${s2}<${cc}\\): the angle opposite c is more than \\(90^\\circ\\) (obtuse).`}`, `\\(a^2+b^2=${a * a}+${b * b}=${s2}\\) et \\(c^2=${cc}\\). ${verdict === "right" ? "Ils sont égaux, donc selon la <strong>réciproque</strong> du théorème, le triangle est <strong>rectangle</strong>." : verdict === "acute" ? `\\(${s2}>${cc}\\) : l'angle opposé à c mesure moins de \\(90^\\circ\\) (aigu).` : `\\(${s2}<${cc}\\) : l'angle opposé à c mesure plus de \\(90^\\circ\\) (obtus).`}`) : t("These lengths do not make a triangle with c as its longest side: c must be at least as long as a and b, and a + b must be greater than c.", "Ces longueurs ne forment pas un triangle dont c est le plus long côté : c doit être au moins aussi long que a et b, et a + b doit être supérieur à c.")} />
           </Readout>
         </>
       )}
@@ -306,7 +315,8 @@ export function Pythagoras() {
 export function ScaleShape({ initShape = "rectangle" }: { initShape?: "rectangle" | "triangle" | "circle" }) {
   const [shape, setShape] = useState(initShape);
   const [k, setK] = useState(2);
-  const base = { rectangle: { P: 2 * (3 + 2), A: 6, d: "3 × 2 rectangle" }, triangle: { P: 3 + 4 + 5, A: 6, d: "3-4-5 right triangle" }, circle: { P: 2 * Math.PI * 1.5, A: Math.PI * 2.25, d: "circle, r = 1.5" } }[shape];
+  const t = useT();
+  const base = { rectangle: { P: 2 * (3 + 2), A: 6, d: t("3 × 2 rectangle", "rectangle de 3 × 2") }, triangle: { P: 3 + 4 + 5, A: 6, d: t("3-4-5 right triangle", "triangle rectangle 3-4-5") }, circle: { P: 2 * Math.PI * 1.5, A: Math.PI * 2.25, d: t("circle, r = 1.5", "cercle, r = 1.5") } }[shape];
   const draw = (X: (x: number) => number, Y: (y: number) => number, s: number, f: number, col: string, soft: string, dx: number) => {
     if (shape === "rectangle") return <polygon points={pts(X, Y, [[dx, 0], [dx + 3 * f, 0], [dx + 3 * f, 2 * f], [dx, 2 * f]])} fill={soft} stroke={col} strokeWidth={2.4} />;
     if (shape === "triangle") return <polygon points={pts(X, Y, [[dx, 0], [dx + 4 * f, 0], [dx, 3 * f]])} fill={soft} stroke={col} strokeWidth={2.4} />;
@@ -314,30 +324,30 @@ export function ScaleShape({ initShape = "rectangle" }: { initShape?: "rectangle
   };
   const w0 = shape === "triangle" ? 4 : 3;
   return (
-    <WidgetCard title="Scale a shape by k" subtitle="lengths × k, perimeter × k, area × k²">
+    <WidgetCard title={t("Scale a shape by k", "Agrandir une figure d'un facteur k")} subtitle={t("lengths × k, perimeter × k, area × k²", "longueurs × k, périmètre × k, aire × k²")}>
       <Row>
-        <Segmented options={[{ value: "rectangle", label: "rectangle" }, { value: "triangle", label: "triangle" }, { value: "circle", label: "circle" }]} value={shape} onChange={setShape} />
-        <Slider label="scale k" value={k} min={0.5} max={3} step={0.5} onChange={setK} color={C.violet} format={(v) => String(v)} />
+        <Segmented options={[{ value: "rectangle", label: t("rectangle", "rectangle") }, { value: "triangle", label: t("triangle", "triangle") }, { value: "circle", label: t("circle", "cercle") }]} value={shape} onChange={setShape} />
+        <Slider label={t("scale k", "facteur k")} value={k} min={0.5} max={3} step={0.5} onChange={setK} color={C.violet} format={(v) => String(v)} />
       </Row>
-      <Canvas view={{ xmin: -0.5, xmax: w0 + 1 + w0 * 3 + 0.5, ymin: -1.3, ymax: (shape === "rectangle" ? 2 : 3) * 3 + 0.3 }} label="Original and scaled shapes" h={300}>
+      <Canvas view={{ xmin: -0.5, xmax: w0 + 1 + w0 * 3 + 0.5, ymin: -1.3, ymax: (shape === "rectangle" ? 2 : 3) * 3 + 0.3 }} label={t("Original and scaled shapes", "Figure originale et figure agrandie")} h={300}>
         {(X, Y, s) => (
           <>
             {draw(X, Y, s, 1, C.blue, C.blueSoft, 0)}
             {draw(X, Y, s, k, C.violet, C.violetSoft, w0 + 1)}
-            <Lbl x={X(w0 / 2)} y={Y(-0.8)} color={C.blue} size={13}>original</Lbl>
+            <Lbl x={X(w0 / 2)} y={Y(-0.8)} color={C.blue} size={13}>{t("original", "originale")}</Lbl>
             <Lbl x={X(w0 + 1 + (w0 * k) / 2)} y={Y(-0.8)} color={C.violet} size={13}>× {k}</Lbl>
           </>
         )}
       </Canvas>
       <table style={{ borderCollapse: "collapse", margin: "4px auto 12px", fontSize: 14.5 }}>
-        <thead><tr><th style={th}></th><th style={th}>original ({base.d})</th><th style={th}>scaled by {k}</th><th style={th}>new ÷ old</th></tr></thead>
+        <thead><tr><th style={th}></th><th style={th}>{t(`original (${base.d})`, `originale (${base.d})`)}</th><th style={th}>{t(`scaled by ${k}`, `agrandie d'un facteur ${k}`)}</th><th style={th}>{t("new ÷ old", "nouvelle ÷ ancienne")}</th></tr></thead>
         <tbody>
-          <tr><td style={th}>perimeter</td><td style={cell}>{r2(base.P)}</td><td style={cell}>{r2(base.P * k)}</td><td style={{ ...cell, color: C.blue, fontWeight: 800 }}>{r2(k)} = k</td></tr>
-          <tr><td style={th}>area</td><td style={cell}>{r2(base.A)}</td><td style={cell}>{r2(base.A * k * k)}</td><td style={{ ...cell, color: C.red, fontWeight: 800 }}>{r2(k * k)} = k²</td></tr>
+          <tr><td style={th}>{t("perimeter", "périmètre")}</td><td style={cell}>{r2(base.P)}</td><td style={cell}>{r2(base.P * k)}</td><td style={{ ...cell, color: C.blue, fontWeight: 800 }}>{r2(k)} = k</td></tr>
+          <tr><td style={th}>{t("area", "aire")}</td><td style={cell}>{r2(base.A)}</td><td style={cell}>{r2(base.A * k * k)}</td><td style={{ ...cell, color: C.red, fontWeight: 800 }}>{r2(k * k)} = k²</td></tr>
         </tbody>
       </table>
       <Readout tone="green">
-        <MathText html={`Every length is multiplied by \\(k=${k}\\), so the perimeter (a length) is multiplied by \\(${k}\\), but the area (length × length) is multiplied by \\(k^2=${r2(k * k)}\\). ${k < 1 ? "A scale factor below 1 shrinks the shape." : k === 1 ? "k = 1 leaves the shape unchanged." : ""}`} />
+        <MathText html={t(`Every length is multiplied by \\(k=${k}\\), so the perimeter (a length) is multiplied by \\(${k}\\), but the area (length × length) is multiplied by \\(k^2=${r2(k * k)}\\). ${k < 1 ? "A scale factor below 1 shrinks the shape." : k === 1 ? "k = 1 leaves the shape unchanged." : ""}`, `Chaque longueur est multipliée par \\(k=${k}\\), donc le périmètre (une longueur) est multiplié par \\(${k}\\), mais l'aire (longueur × longueur) est multipliée par \\(k^2=${r2(k * k)}\\). ${k < 1 ? "Un facteur d'échelle inférieur à 1 réduit la figure." : k === 1 ? "k = 1 laisse la figure inchangée." : ""}`)} />
       </Readout>
     </WidgetCard>
   );
@@ -363,20 +373,21 @@ export function RectOptimizer({ initMode = "perimeter" }: { initMode?: "perimete
   const xmax = mode === "perimeter" ? maxW : 12;
   const ys = Array.from({ length: 121 }, (_, i) => { const x = 0.25 + ((xmax - 0.25) * i) / 120; return [x, f(x)] as [number, number]; });
   const yTop = Math.max(...ys.map((p) => p[1]).filter((v) => Number.isFinite(v) && v < 400)) * 1.1;
+  const t = useT();
   return (
-    <WidgetCard title="Best rectangle" subtitle={mode === "perimeter" ? "fixed fence length: which rectangle encloses the most area?" : "fixed area: which rectangle needs the least fence?"}>
+    <WidgetCard title={t("Best rectangle", "Le meilleur rectangle")} subtitle={mode === "perimeter" ? t("fixed fence length: which rectangle encloses the most area?", "longueur de clôture fixe : quel rectangle a la plus grande aire?") : t("fixed area: which rectangle needs the least fence?", "aire fixe : quel rectangle demande le moins de clôture?")}>
       <Row>
-        <Segmented options={[{ value: "perimeter", label: "fixed perimeter → max area" }, { value: "area", label: "fixed area → min perimeter" }]} value={mode} onChange={(v) => { setMode(v); setW(4); }} />
-        <label style={{ fontSize: 14, color: C.muted, fontWeight: 650 }}><input type="checkbox" checked={wall} onChange={(e) => setWall(e.target.checked)} /> one side against a wall (3 sides fenced)</label>
+        <Segmented options={[{ value: "perimeter", label: t("fixed perimeter → max area", "périmètre fixe → aire maximale") }, { value: "area", label: t("fixed area → min perimeter", "aire fixe → périmètre minimal") }]} value={mode} onChange={(v) => { setMode(v); setW(4); }} />
+        <label style={{ fontSize: 14, color: C.muted, fontWeight: 650 }}><input type="checkbox" checked={wall} onChange={(e) => setWall(e.target.checked)} /> {t("one side against a wall (3 sides fenced)", "un côté contre un mur (3 côtés clôturés)")}</label>
       </Row>
       <Row style={{ marginTop: 8 }}>
-        {mode === "perimeter" ? <Slider label="fence" value={P} min={12} max={60} step={4} onChange={setP} color={C.amber} format={(v) => `${v} m`} />
-          : <Slider label="area" value={A} min={16} max={100} step={4} onChange={setA} color={C.amber} format={(v) => `${v} m²`} />}
-        <Slider label="width w" value={ww} min={0.5} max={mode === "perimeter" ? maxW - 0.5 : 12} step={0.5} onChange={setW} color={C.blue} format={(v) => `${v} m`} />
+        {mode === "perimeter" ? <Slider label={t("fence", "clôture")} value={P} min={12} max={60} step={4} onChange={setP} color={C.amber} format={(v) => `${v} m`} />
+          : <Slider label={t("area", "aire")} value={A} min={16} max={100} step={4} onChange={setA} color={C.amber} format={(v) => `${v} m²`} />}
+        <Slider label={t("width w", "largeur w")} value={ww} min={0.5} max={mode === "perimeter" ? maxW - 0.5 : 12} step={0.5} onChange={setW} color={C.blue} format={(v) => `${v} m`} />
       </Row>
       <div style={{ display: "flex", flexWrap: "wrap", gap: 8, alignItems: "center", justifyContent: "center" }}>
         <div style={{ flex: "1 1 240px", maxWidth: 300 }}>
-          <Canvas view={{ xmin: -1, xmax: Math.max(l, 6) + 1, ymin: -1.5, ymax: Math.max(ww, 6) + 1 }} label="The rectangle" w={280} h={240}>
+          <Canvas view={{ xmin: -1, xmax: Math.max(l, 6) + 1, ymin: -1.5, ymax: Math.max(ww, 6) + 1 }} label={t("The rectangle", "Le rectangle")} w={280} h={240}>
             {(X, Y) => (
               <>
                 {wall && <line x1={X(-0.6)} y1={Y(ww)} x2={X(l + 0.6)} y2={Y(ww)} stroke={C.muted} strokeWidth={6} />}
@@ -384,21 +395,21 @@ export function RectOptimizer({ initMode = "perimeter" }: { initMode?: "perimete
                 <polyline points={pts(X, Y, wall ? [[0, ww], [0, 0], [l, 0], [l, ww]] : [[0, 0], [l, 0], [l, ww], [0, ww], [0, 0]])} fill="none" stroke={C.amber} strokeWidth={3} />
                 <Lbl x={X(l / 2)} y={Y(0) + 18} color={C.blue} size={13}>{r2(l)} m</Lbl>
                 <Lbl x={X(0) - 6} y={Y(ww / 2) + 4} color={C.blue} size={13} anchor="end">{r2(ww)}</Lbl>
-                {wall && <Lbl x={X(l / 2)} y={Y(ww) - 8} color={C.muted} size={12}>wall</Lbl>}
+                {wall && <Lbl x={X(l / 2)} y={Y(ww) - 8} color={C.muted} size={12}>{t("wall", "mur")}</Lbl>}
               </>
             )}
           </Canvas>
         </div>
         <div style={{ flex: "1 1 240px", maxWidth: 300 }}>
-          <Canvas view={{ xmin: 0, xmax: xmax, ymin: 0, ymax: yTop }} label={mode === "perimeter" ? "Area against width" : "Perimeter against width"} w={280} h={240} stretch>
+          <Canvas view={{ xmin: 0, xmax: xmax, ymin: 0, ymax: yTop }} label={mode === "perimeter" ? t("Area against width", "Aire en fonction de la largeur") : t("Perimeter against width", "Périmètre en fonction de la largeur")} w={280} h={240} stretch>
             {(X, Y) => (
               <>
                 <line x1={X(0)} y1={Y(0)} x2={X(xmax)} y2={Y(0)} stroke={C.ink} /><line x1={X(0)} y1={Y(0)} x2={X(0)} y2={Y(yTop)} stroke={C.ink} />
                 <polyline points={pts(X, Y, ys.filter((p) => p[1] <= yTop && p[1] >= 0))} fill="none" stroke={C.violet} strokeWidth={2.5} />
                 <line x1={X(best)} y1={Y(0)} x2={X(best)} y2={Y(f(best))} stroke={C.green} strokeDasharray="4 3" />
                 <circle cx={X(ww)} cy={Y(f(ww))} r={6} fill={C.red} />
-                <Lbl x={X(xmax) - 4} y={Y(0) - 6} size={11} anchor="end" color={C.muted}>width</Lbl>
-                <Lbl x={X(0) + 6} y={Y(yTop) + 14} size={11} anchor="start" color={C.muted}>{mode === "perimeter" ? "area" : "fence"}</Lbl>
+                <Lbl x={X(xmax) - 4} y={Y(0) - 6} size={11} anchor="end" color={C.muted}>{t("width", "largeur")}</Lbl>
+                <Lbl x={X(0) + 6} y={Y(yTop) + 14} size={11} anchor="start" color={C.muted}>{mode === "perimeter" ? t("area", "aire") : t("fence", "clôture")}</Lbl>
               </>
             )}
           </Canvas>
@@ -406,8 +417,8 @@ export function RectOptimizer({ initMode = "perimeter" }: { initMode?: "perimete
       </div>
       <Readout tone={Math.abs(ww - best) < 0.26 ? "green" : "blue"}>
         <MathText html={mode === "perimeter"
-          ? `Fence used \\(=${wall ? `2(${r2(ww)})+${r2(l)}` : `2(${r2(ww)}+${r2(l)})`}=${r2(per)}\\) m; area \\(=${r2(ww)}\\times${r2(l)}=${r2(area)}\\ \\text{m}^2\\). The maximum area, \\(${r2(f(best))}\\ \\text{m}^2\\), is at \\(w=${r2(best)}\\) m: ${wall ? "with a wall, the side parallel to the wall is <strong>twice</strong> the width (half a square)." : "the best rectangle is a <strong>square</strong>."}`
-          : `Area \\(=${r2(ww)}\\times${r2(l)}=${r2(area)}\\ \\text{m}^2\\); fence needed \\(=${r2(per)}\\) m. The least fence, \\(${r2(f(best))}\\) m, is at \\(w=${r2(best)}\\) m: ${wall ? "the side along the wall is twice the width." : "a <strong>square</strong> needs the least perimeter."}`} />
+          ? t(`Fence used \\(=${wall ? `2(${r2(ww)})+${r2(l)}` : `2(${r2(ww)}+${r2(l)})`}=${r2(per)}\\) m; area \\(=${r2(ww)}\\times${r2(l)}=${r2(area)}\\ \\text{m}^2\\). The maximum area, \\(${r2(f(best))}\\ \\text{m}^2\\), is at \\(w=${r2(best)}\\) m: ${wall ? "with a wall, the side parallel to the wall is <strong>twice</strong> the width (half a square)." : "the best rectangle is a <strong>square</strong>."}`, `Clôture utilisée \\(=${wall ? `2(${r2(ww)})+${r2(l)}` : `2(${r2(ww)}+${r2(l)})`}=${r2(per)}\\) m; aire \\(=${r2(ww)}\\times${r2(l)}=${r2(area)}\\ \\text{m}^2\\). L'aire maximale, \\(${r2(f(best))}\\ \\text{m}^2\\), est atteinte pour \\(w=${r2(best)}\\) m : ${wall ? "avec un mur, le côté parallèle au mur mesure le <strong>double</strong> de la largeur (un demi-carré)." : "le meilleur rectangle est un <strong>carré</strong>."}`)
+          : t(`Area \\(=${r2(ww)}\\times${r2(l)}=${r2(area)}\\ \\text{m}^2\\); fence needed \\(=${r2(per)}\\) m. The least fence, \\(${r2(f(best))}\\) m, is at \\(w=${r2(best)}\\) m: ${wall ? "the side along the wall is twice the width." : "a <strong>square</strong> needs the least perimeter."}`, `Aire \\(=${r2(ww)}\\times${r2(l)}=${r2(area)}\\ \\text{m}^2\\); clôture nécessaire \\(=${r2(per)}\\) m. La plus petite clôture, \\(${r2(f(best))}\\) m, est obtenue pour \\(w=${r2(best)}\\) m : ${wall ? "le côté le long du mur mesure le double de la largeur." : "un <strong>carré</strong> demande le plus petit périmètre."}`)} />
       </Readout>
     </WidgetCard>
   );
@@ -417,13 +428,15 @@ export function RectOptimizer({ initMode = "perimeter" }: { initMode?: "perimete
 
 type Solid = "prism" | "cylinder" | "pyramid" | "cone" | "sphere";
 const OBL = [0.45, 0.32];
+const SOLID_FR: Record<string, string> = { prism: "prisme", cylinder: "cylindre", pyramid: "pyramide", cone: "cône", sphere: "sphère" };
 const pr = (x: number, y: number, z: number): [number, number] => [x + z * OBL[0], y + z * OBL[1]];
 
 function SolidDrawing({ solid, a, b, h, ghost }: { solid: Solid; a: number; b: number; h: number; ghost?: boolean }) {
   // a = length or radius, b = width (prism), h = height
   const big = Math.max(a * 2.2, h, b) + 2;
+  const t = useT();
   return (
-    <Canvas view={{ xmin: -big * 0.55, xmax: big * 0.85, ymin: -big * 0.35, ymax: big * 0.9 }} label={`Drawing of a ${solid}`} h={300}>
+    <Canvas view={{ xmin: -big * 0.55, xmax: big * 0.85, ymin: -big * 0.35, ymax: big * 0.9 }} label={t(`Drawing of a ${solid}`, `Dessin : ${SOLID_FR[solid]}`)} h={300}>
       {(X, Y, s) => {
         const P = (p: [number, number][]) => pts(X, Y, p);
         if (solid === "prism" || solid === "pyramid") {
@@ -444,7 +457,7 @@ function SolidDrawing({ solid, a, b, h, ghost }: { solid: Solid; a: number; b: n
             <polyline points={P([V(0, 0, 0), V(0, 0, w), V(l, 0, w)])} fill="none" stroke={C.amber} strokeDasharray="5 4" />
             <line x1={X(V(0, 0, w)[0])} y1={Y(V(0, 0, w)[1])} x2={X(T[0])} y2={Y(T[1])} stroke={C.amber} strokeDasharray="5 4" />
             <line x1={X(V(l / 2, 0, w / 2)[0])} y1={Y(V(l / 2, 0, w / 2)[1])} x2={X(T[0])} y2={Y(T[1])} stroke={C.muted} strokeDasharray="4 3" />
-            <Lbl x={X(0)} y={Y(V(0, 0, 0)[1]) + 18} color={C.amber}>base {a} × {a}</Lbl><Lbl x={X(T[0]) + 8} y={Y(h * 0.55)} color={C.muted} anchor="start">h = {h}</Lbl></>;
+            <Lbl x={X(0)} y={Y(V(0, 0, 0)[1]) + 18} color={C.amber}>{t("base", "base")} {a} × {a}</Lbl><Lbl x={X(T[0]) + 8} y={Y(h * 0.55)} color={C.muted} anchor="start">h = {h}</Lbl></>;
         }
         if (solid === "sphere") {
           return <><circle cx={X(0)} cy={Y(h / 2)} r={a * s} fill={C.greenSoft} stroke={C.green} strokeWidth={2.4} />
@@ -480,32 +493,33 @@ export function SolidVolume({ init = "prism" as Solid }: { init?: Solid }) {
   const [b, setB] = useState(3);
   const [h, setH] = useState(6);
   const [ghost, setGhost] = useState(true);
+  const t = useT();
   const V = { prism: a * b * h, cylinder: Math.PI * a * a * h, pyramid: (a * a * h) / 3, cone: (Math.PI * a * a * h) / 3, sphere: (4 / 3) * Math.PI * a ** 3 }[solid];
   const work = {
-    prism: `V=(\\text{area of base})\\times h=lwh=${a}\\times${b}\\times${h}=${tex(V)}`,
+    prism: `V=(\\text{${t("area of base", "aire de la base")}})\\times h=lwh=${a}\\times${b}\\times${h}=${tex(V)}`,
     cylinder: `V=\\pi r^2h=\\pi(${a})^2(${h})=${a * a * h}\\pi\\approx${tex(V, 1)}`,
-    pyramid: `V=\\tfrac13(\\text{area of base})h=\\tfrac13(${a}^2)(${h})=${tex(V)}`,
+    pyramid: `V=\\tfrac13(\\text{${t("area of base", "aire de la base")}})h=\\tfrac13(${a}^2)(${h})=${tex(V)}`,
     cone: `V=\\tfrac13\\pi r^2h=\\tfrac13\\pi(${a})^2(${h})=${tex((a * a * h) / 3)}\\pi\\approx${tex(V, 1)}`,
     sphere: `V=\\tfrac43\\pi r^3=\\tfrac43\\pi(${a})^3=${tex((4 * a ** 3) / 3)}\\pi\\approx${tex(V, 1)}`,
   }[solid];
   const note = {
-    prism: "Any prism: the area of the base times the height. Stack layers of base-shaped slices.",
-    cylinder: "A cylinder is a prism with a circular base: area of base πr² times the height.",
-    pyramid: "A pyramid holds exactly one third of the prism with the same base and height (the faint box).",
-    cone: "A cone holds exactly one third of the cylinder with the same base and height (the faint cylinder).",
-    sphere: "A sphere holds two thirds of the cylinder that just fits around it (height 2r).",
+    prism: t("Any prism: the area of the base times the height. Stack layers of base-shaped slices.", "Tout prisme : l'aire de la base multipliée par la hauteur. On empile des tranches ayant la forme de la base."),
+    cylinder: t("A cylinder is a prism with a circular base: area of base πr² times the height.", "Un cylindre est un prisme à base circulaire : l'aire de la base πr² multipliée par la hauteur."),
+    pyramid: t("A pyramid holds exactly one third of the prism with the same base and height (the faint box).", "Une pyramide contient exactement le tiers du prisme ayant la même base et la même hauteur (la boîte pâle)."),
+    cone: t("A cone holds exactly one third of the cylinder with the same base and height (the faint cylinder).", "Un cône contient exactement le tiers du cylindre ayant la même base et la même hauteur (le cylindre pâle)."),
+    sphere: t("A sphere holds two thirds of the cylinder that just fits around it (height 2r).", "Une sphère contient les deux tiers du cylindre qui l'entoure exactement (hauteur 2r)."),
   }[solid];
   return (
-    <WidgetCard title="Volume of solids" subtitle="volume = how many unit cubes fill the solid">
-      <Segmented options={(["prism", "cylinder", "pyramid", "cone", "sphere"] as Solid[]).map((x) => ({ value: x, label: x }))} value={solid} onChange={setSolid} />
+    <WidgetCard title={t("Volume of solids", "Volume des solides")} subtitle={t("volume = how many unit cubes fill the solid", "volume = nombre de cubes unités qui remplissent le solide")}>
+      <Segmented options={(["prism", "cylinder", "pyramid", "cone", "sphere"] as Solid[]).map((x) => ({ value: x, label: t(x, SOLID_FR[x]) }))} value={solid} onChange={setSolid} />
       <Row style={{ marginTop: 8 }}>
-        <Slider label={solid === "prism" ? "length l" : solid === "pyramid" ? "base side" : "radius r"} value={a} min={1} max={8} onChange={setA} color={C.red} />
-        {solid === "prism" && <Slider label="width w" value={b} min={1} max={8} onChange={setB} color={C.blue} />}
-        {solid !== "sphere" && <Slider label="height h" value={h} min={1} max={12} onChange={setH} color={C.violet} />}
+        <Slider label={solid === "prism" ? t("length l", "longueur l") : solid === "pyramid" ? t("base side", "côté de la base") : t("radius r", "rayon r")} value={a} min={1} max={8} onChange={setA} color={C.red} />
+        {solid === "prism" && <Slider label={t("width w", "largeur w")} value={b} min={1} max={8} onChange={setB} color={C.blue} />}
+        {solid !== "sphere" && <Slider label={t("height h", "hauteur h")} value={h} min={1} max={12} onChange={setH} color={C.violet} />}
       </Row>
-      {(solid === "pyramid" || solid === "cone") && <Row><label style={{ fontSize: 14, color: C.muted, fontWeight: 650 }}><input type="checkbox" checked={ghost} onChange={(e) => setGhost(e.target.checked)} /> show the matching {solid === "cone" ? "cylinder" : "prism"}</label></Row>}
+      {(solid === "pyramid" || solid === "cone") && <Row><label style={{ fontSize: 14, color: C.muted, fontWeight: 650 }}><input type="checkbox" checked={ghost} onChange={(e) => setGhost(e.target.checked)} /> {solid === "cone" ? t("show the matching cylinder", "afficher le cylindre correspondant") : t("show the matching prism", "afficher le prisme correspondant")}</label></Row>}
       <SolidDrawing solid={solid} a={a} b={b} h={solid === "sphere" ? 2 * a : h} ghost={ghost} />
-      <Readout tone="green"><div style={{ fontSize: 17 }}><MathText html={`\\(${work}\\)`} /> cubic units</div><MathText html={note} /></Readout>
+      <Readout tone="green"><div style={{ fontSize: 17 }}><MathText html={`\\(${work}\\)`} /> {t("cubic units", "unités cubes")}</div><MathText html={note} /></Readout>
     </WidgetCard>
   );
 }
@@ -517,42 +531,43 @@ export function NetExplorer({ init = "prism" as NetSolid }: { init?: NetSolid })
   const [b, setB] = useState(3);
   const [h, setH] = useState(5);
   const slantPyr = Math.hypot(a / 2, h), slantCone = Math.hypot(a, h);
+  const t = useT();
   const parts: { name: string; tex: string; v: number; col: string }[] =
     solid === "prism" ? [
-      { name: "top + bottom", tex: `2(${a}\\times${b})`, v: 2 * a * b, col: C.blue },
-      { name: "front + back", tex: `2(${a}\\times${h})`, v: 2 * a * h, col: C.violet },
-      { name: "left + right", tex: `2(${b}\\times${h})`, v: 2 * b * h, col: C.green },
+      { name: t("top + bottom", "dessus + dessous"), tex: `2(${a}\\times${b})`, v: 2 * a * b, col: C.blue },
+      { name: t("front + back", "avant + arrière"), tex: `2(${a}\\times${h})`, v: 2 * a * h, col: C.violet },
+      { name: t("left + right", "gauche + droite"), tex: `2(${b}\\times${h})`, v: 2 * b * h, col: C.green },
     ] : solid === "cylinder" ? [
-      { name: "two circles", tex: `2\\pi(${a})^2`, v: 2 * Math.PI * a * a, col: C.blue },
-      { name: "curved side (rectangle 2πr × h)", tex: `2\\pi(${a})(${h})`, v: 2 * Math.PI * a * h, col: C.violet },
+      { name: t("two circles", "deux cercles"), tex: `2\\pi(${a})^2`, v: 2 * Math.PI * a * a, col: C.blue },
+      { name: t("curved side (rectangle 2πr × h)", "surface latérale (rectangle 2πr × h)"), tex: `2\\pi(${a})(${h})`, v: 2 * Math.PI * a * h, col: C.violet },
     ] : solid === "pyramid" ? [
-      { name: "square base", tex: `${a}^2`, v: a * a, col: C.blue },
-      { name: `4 triangles (slant height s ≈ ${r2(slantPyr)})`, tex: `4\\cdot\\tfrac12(${a})(${tex(slantPyr)})`, v: 2 * a * slantPyr, col: C.amber },
+      { name: t("square base", "base carrée"), tex: `${a}^2`, v: a * a, col: C.blue },
+      { name: t(`4 triangles (slant height s ≈ ${r2(slantPyr)})`, `4 triangles (apothème s ≈ ${r2(slantPyr)})`), tex: `4\\cdot\\tfrac12(${a})(${tex(slantPyr)})`, v: 2 * a * slantPyr, col: C.amber },
     ] : [
-      { name: "circular base", tex: `\\pi(${a})^2`, v: Math.PI * a * a, col: C.blue },
-      { name: `curved surface (slant s ≈ ${r2(slantCone)})`, tex: `\\pi(${a})(${tex(slantCone)})`, v: Math.PI * a * slantCone, col: C.amber },
+      { name: t("circular base", "base circulaire"), tex: `\\pi(${a})^2`, v: Math.PI * a * a, col: C.blue },
+      { name: t(`curved surface (slant s ≈ ${r2(slantCone)})`, `surface latérale (apothème s ≈ ${r2(slantCone)})`), tex: `\\pi(${a})(${tex(slantCone)})`, v: Math.PI * a * slantCone, col: C.amber },
     ];
   const total = parts.reduce((s, p) => s + p.v, 0);
   return (
-    <WidgetCard title="Nets and surface area" subtitle="unfold the solid: the surface area is the total area of the net">
-      <Segmented options={(["prism", "cylinder", "pyramid", "cone"] as NetSolid[]).map((x) => ({ value: x, label: x === "pyramid" ? "square pyramid" : x }))} value={solid} onChange={setSolid} />
+    <WidgetCard title={t("Nets and surface area", "Développements et aire totale")} subtitle={t("unfold the solid: the surface area is the total area of the net", "déplie le solide : l'aire totale est l'aire du développement")}>
+      <Segmented options={(["prism", "cylinder", "pyramid", "cone"] as NetSolid[]).map((x) => ({ value: x, label: x === "pyramid" ? t("square pyramid", "pyramide à base carrée") : t(x, SOLID_FR[x]) }))} value={solid} onChange={setSolid} />
       <Row style={{ marginTop: 8 }}>
-        <Slider label={solid === "prism" ? "length l" : solid === "pyramid" ? "base side b" : "radius r"} value={a} min={1} max={8} onChange={setA} color={C.red} />
-        {solid === "prism" && <Slider label="width w" value={b} min={1} max={8} onChange={setB} color={C.blue} />}
-        <Slider label="height h" value={h} min={1} max={10} onChange={setH} color={C.violet} />
+        <Slider label={solid === "prism" ? t("length l", "longueur l") : solid === "pyramid" ? t("base side b", "côté de la base b") : t("radius r", "rayon r")} value={a} min={1} max={8} onChange={setA} color={C.red} />
+        {solid === "prism" && <Slider label={t("width w", "largeur w")} value={b} min={1} max={8} onChange={setB} color={C.blue} />}
+        <Slider label={t("height h", "hauteur h")} value={h} min={1} max={10} onChange={setH} color={C.violet} />
       </Row>
       <Canvas view={solid === "prism" ? { xmin: -0.5, xmax: 2 * b + 2 * a + 0.5, ymin: -0.5, ymax: 2 * b + h + 0.5 }
         : solid === "cylinder" ? { xmin: -0.5, xmax: 2 * Math.PI * a + 0.5, ymin: -2 * a - 0.5, ymax: h + 2 * a + 0.5 }
           : solid === "pyramid" ? { xmin: -slantPyr - 0.5, xmax: a + slantPyr + 0.5, ymin: -slantPyr - 0.5, ymax: a + slantPyr + 0.5 }
-            : { xmin: -slantCone - 0.5, xmax: slantCone + 0.5, ymin: -slantCone - 2 * a - 0.5, ymax: Math.max(0.5, -slantCone * Math.cos(Math.PI * a / slantCone)) + 1 }} label={`Net of a ${solid}`} h={320}>
+            : { xmin: -slantCone - 0.5, xmax: slantCone + 0.5, ymin: -slantCone - 2 * a - 0.5, ymax: Math.max(0.5, -slantCone * Math.cos(Math.PI * a / slantCone)) + 1 }} label={t(`Net of a ${solid}`, `Développement : ${SOLID_FR[solid]}`)} h={320}>
         {(X, Y, s) => {
-          const R = (x: number, y: number, w: number, hh: number, fill: string, col: string, t?: string) => <g key={`${x},${y}`}><polygon points={pts(X, Y, [[x, y], [x + w, y], [x + w, y + hh], [x, y + hh]])} fill={fill} stroke={col} strokeWidth={1.8} />{t && <Lbl x={X(x + w / 2)} y={Y(y + hh / 2) + 5} color={col} size={12}>{t}</Lbl>}</g>;
+          const R = (x: number, y: number, w: number, hh: number, fill: string, col: string, txt?: string) => <g key={`${x},${y}`}><polygon points={pts(X, Y, [[x, y], [x + w, y], [x + w, y + hh], [x, y + hh]])} fill={fill} stroke={col} strokeWidth={1.8} />{txt && <Lbl x={X(x + w / 2)} y={Y(y + hh / 2) + 5} color={col} size={12}>{txt}</Lbl>}</g>;
           if (solid === "prism") return <>{R(0, b, b, h, C.greenSoft, C.green, `${b}×${h}`)}{R(b, b, a, h, C.violetSoft, C.violet, `${a}×${h}`)}{R(a + b, b, b, h, C.greenSoft, C.green, `${b}×${h}`)}{R(a + 2 * b, b, a, h, C.violetSoft, C.violet, `${a}×${h}`)}{R(b, 0, a, b, C.blueSoft, C.blue, `${a}×${b}`)}{R(b, b + h, a, b, C.blueSoft, C.blue, `${a}×${b}`)}</>;
           if (solid === "cylinder") { const L = 2 * Math.PI * a; return <>{R(0, 0, L, h, C.violetSoft, C.violet, `2π(${a}) × ${h}`)}<circle cx={X(L / 2)} cy={Y(h + a)} r={a * s} fill={C.blueSoft} stroke={C.blue} strokeWidth={1.8} /><circle cx={X(L / 2)} cy={Y(-a)} r={a * s} fill={C.blueSoft} stroke={C.blue} strokeWidth={1.8} /></>; }
           if (solid === "pyramid") {
             const sq: [number, number][] = [[0, 0], [a, 0], [a, a], [0, a]];
             const tris: [number, number][][] = [[[0, 0], [a, 0], [a / 2, -slantPyr]], [[a, 0], [a, a], [a + slantPyr, a / 2]], [[a, a], [0, a], [a / 2, a + slantPyr]], [[0, a], [0, 0], [-slantPyr, a / 2]]];
-            return <><polygon points={pts(X, Y, sq)} fill={C.blueSoft} stroke={C.blue} strokeWidth={1.8} />{tris.map((t, i) => <polygon key={i} points={pts(X, Y, t)} fill={C.amberSoft} stroke={C.amber} strokeWidth={1.8} />)}
+            return <><polygon points={pts(X, Y, sq)} fill={C.blueSoft} stroke={C.blue} strokeWidth={1.8} />{tris.map((tri, i) => <polygon key={i} points={pts(X, Y, tri)} fill={C.amberSoft} stroke={C.amber} strokeWidth={1.8} />)}
               <line x1={X(a / 2)} y1={Y(0)} x2={X(a / 2)} y2={Y(-slantPyr)} stroke={C.red} strokeDasharray="4 3" /><Lbl x={X(a / 2) + 6} y={Y(-slantPyr / 2)} color={C.red} size={12} anchor="start">s</Lbl></>;
           }
           const ang = (2 * Math.PI * a) / slantCone; // sector angle
@@ -561,19 +576,19 @@ export function NetExplorer({ init = "prism" as NetSolid }: { init?: NetSolid })
           return <><path d={`M${X(0)},${Y(0)} L${X(p1[0])},${Y(p1[1])} A${slantCone * s},${slantCone * s} 0 ${ang > Math.PI ? 1 : 0} 0 ${X(p2[0])},${Y(p2[1])} Z`} fill={C.amberSoft} stroke={C.amber} strokeWidth={1.8} />
             <circle cx={X(0)} cy={Y(-slantCone - a)} r={a * s} fill={C.blueSoft} stroke={C.blue} strokeWidth={1.8} />
             <line x1={X(0)} y1={Y(0)} x2={X(p1[0])} y2={Y(p1[1])} stroke={C.red} strokeDasharray="4 3" />
-            <Lbl x={X(0)} y={Y(-slantCone * 0.5)} color={C.amber} size={12}>sector, radius s</Lbl></>;
+            <Lbl x={X(0)} y={Y(-slantCone * 0.5)} color={C.amber} size={12}>{t("sector, radius s", "secteur, rayon s")}</Lbl></>;
         }}
       </Canvas>
       <table style={{ borderCollapse: "collapse", margin: "4px auto 12px", fontSize: 14.5 }}>
         <tbody>
           {parts.map((p) => <tr key={p.name}><td style={{ ...th, color: p.col, textAlign: "left" }}>{p.name}</td><td style={cell}><MathText html={`\\(${p.tex}\\)`} /></td><td style={cell}>{r2(p.v, 1)}</td></tr>)}
-          <tr><td style={{ ...th, textAlign: "left" }}>surface area</td><td style={cell}></td><td style={{ ...cell, fontWeight: 800, color: C.green }}>{r2(total, 1)}</td></tr>
+          <tr><td style={{ ...th, textAlign: "left" }}>{t("surface area", "aire totale")}</td><td style={cell}></td><td style={{ ...cell, fontWeight: 800, color: C.green }}>{r2(total, 1)}</td></tr>
         </tbody>
       </table>
       <Readout tone="green">
-        <MathText html={solid === "pyramid" ? `The slant height comes from the Pythagorean theorem: \\(s=\\sqrt{h^2+(\\tfrac b2)^2}=\\sqrt{${h}^2+${tex(a / 2)}^2}\\approx${tex(slantPyr)}\\). Each triangle has area \\(\\tfrac12bs\\).`
-          : solid === "cone" ? `Slant height \\(s=\\sqrt{r^2+h^2}=\\sqrt{${a}^2+${h}^2}\\approx${tex(slantCone)}\\). The curved surface unrolls into a sector with area \\(\\pi rs\\).`
-            : solid === "cylinder" ? "The curved side unrolls into a rectangle whose length is the circumference \\(2\\pi r\\)." : "Opposite faces of a rectangular prism are equal, so add the three different faces and double."} />
+        <MathText html={solid === "pyramid" ? t(`The slant height comes from the Pythagorean theorem: \\(s=\\sqrt{h^2+(\\tfrac b2)^2}=\\sqrt{${h}^2+${tex(a / 2)}^2}\\approx${tex(slantPyr)}\\). Each triangle has area \\(\\tfrac12bs\\).`, `L'apothème se calcule avec le théorème de Pythagore : \\(s=\\sqrt{h^2+(\\tfrac b2)^2}=\\sqrt{${h}^2+${tex(a / 2)}^2}\\approx${tex(slantPyr)}\\). Chaque triangle a une aire de \\(\\tfrac12bs\\).`)
+          : solid === "cone" ? t(`Slant height \\(s=\\sqrt{r^2+h^2}=\\sqrt{${a}^2+${h}^2}\\approx${tex(slantCone)}\\). The curved surface unrolls into a sector with area \\(\\pi rs\\).`, `Apothème \\(s=\\sqrt{r^2+h^2}=\\sqrt{${a}^2+${h}^2}\\approx${tex(slantCone)}\\). La surface latérale se déroule en un secteur d'aire \\(\\pi rs\\).`)
+            : solid === "cylinder" ? t("The curved side unrolls into a rectangle whose length is the circumference \\(2\\pi r\\).", "La surface latérale se déroule en un rectangle dont la longueur est la circonférence \\(2\\pi r\\).") : t("Opposite faces of a rectangular prism are equal, so add the three different faces and double.", "Les faces opposées d'un prisme rectangulaire sont égales, alors additionne les trois faces différentes et double le résultat.")} />
       </Readout>
     </WidgetCard>
   );

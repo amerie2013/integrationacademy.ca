@@ -5,6 +5,7 @@
 
 import { useMemo, useState, type ReactNode } from "react";
 import { C, MathText, Readout, Row, Segmented, Slider, WidgetCard, btn } from "./kit";
+import { useT } from "@/lib/lang";
 
 const r2 = (v: number, d = 2) => { const k = 10 ** d; const r = Math.round(v * k) / k; return r < 0 ? `−${-r}` : String(r); };
 /** deterministic pseudo-random numbers so every student sees the same population */
@@ -53,6 +54,7 @@ export function SamplingLab() {
   const [n, setN] = useState(40);
   const [seed, setSeed] = useState(1);
   const [runs, setRuns] = useState<number[]>([]);
+  const t = useT();
   const draw = (s: number) => {
     const r = rng(s * 97 + 13);
     let idx: number[] = [];
@@ -69,32 +71,32 @@ export function SamplingLab() {
   const est = idx.filter((i) => pop[i].yes).length / idx.length;
   const many = () => setRuns(Array.from({ length: 60 }, (_, k) => { const ix = draw(seed + 1000 + k); return ix.filter((i) => pop[i].yes).length / ix.length; }));
   const note: Record<Method, string> = {
-    random: "Every student has the same chance: estimates scatter around the true value with no lean.",
-    convenience: "Only Grade 12s (outside your classroom) are asked: they like the idea more, so the estimate is biased high.",
-    voluntary: "People who care most answer an online poll; supporters are keener, so the estimate leans high.",
-    systematic: "Every k-th student on the list: fine as long as the list has no pattern.",
-    stratified: "Equal random samples from each grade, matching the population's make-up.",
+    random: t("Every student has the same chance: estimates scatter around the true value with no lean.", "Chaque élève a la même chance d'être choisi : les estimations se répartissent autour de la vraie valeur, sans pencher d'un côté."),
+    convenience: t("Only Grade 12s (outside your classroom) are asked: they like the idea more, so the estimate is biased high.", "Seuls les élèves de 12e année (devant ta classe) sont interrogés : l'idée leur plaît davantage, donc l'estimation est biaisée vers le haut."),
+    voluntary: t("People who care most answer an online poll; supporters are keener, so the estimate leans high.", "Ce sont les personnes les plus concernées qui répondent à un sondage en ligne; les partisans sont plus motivés, donc l'estimation penche vers le haut."),
+    systematic: t("Every k-th student on the list: fine as long as the list has no pattern.", "Chaque k-ième élève de la liste : cela convient tant que la liste ne suit aucune régularité."),
+    stratified: t("Equal random samples from each grade, matching the population's make-up.", "Des échantillons aléatoires égaux dans chaque année d'études, à l'image de la composition de la population."),
   };
   const pick = new Set(idx);
   return (
-    <WidgetCard title="Sampling lab" subtitle="600 students; the true share who want a later start is shown in green">
-      <Segmented options={[{ value: "random", label: "simple random" }, { value: "systematic", label: "systematic" }, { value: "stratified", label: "stratified" }, { value: "convenience", label: "convenience" }, { value: "voluntary", label: "voluntary" }]} value={method} onChange={(m) => { setMethod(m); setRuns([]); }} />
+    <WidgetCard title={t("Sampling lab", "Laboratoire d'échantillonnage")} subtitle={t("600 students; the true share who want a later start is shown in green", "600 élèves; la vraie proportion qui veut commencer plus tard est indiquée en vert")}>
+      <Segmented options={[{ value: "random", label: t("simple random", "aléatoire simple") }, { value: "systematic", label: t("systematic", "systématique") }, { value: "stratified", label: t("stratified", "stratifié") }, { value: "convenience", label: t("convenience", "de commodité") }, { value: "voluntary", label: t("voluntary", "volontaire") }]} value={method} onChange={(m) => { setMethod(m); setRuns([]); }} />
       <Row style={{ marginTop: 8 }}>
-        <Slider label="sample size" value={n} min={8} max={120} step={4} onChange={(v) => { setN(v); setRuns([]); }} />
-        <button type="button" style={btn()} onClick={() => setSeed((s) => s + 1)}>New sample</button>
-        <button type="button" style={btn(true)} onClick={many}>Take 60 samples</button>
+        <Slider label={t("sample size", "taille de l'échantillon")} value={n} min={8} max={120} step={4} onChange={(v) => { setN(v); setRuns([]); }} />
+        <button type="button" style={btn()} onClick={() => setSeed((s) => s + 1)}>{t("New sample", "Nouvel échantillon")}</button>
+        <button type="button" style={btn(true)} onClick={many}>{t("Take 60 samples", "Prendre 60 échantillons")}</button>
       </Row>
-      <svg viewBox="0 0 600 130" style={{ width: "100%", maxWidth: 640, display: "block", margin: "10px auto" }} role="img" aria-label="Population grid with the sample highlighted">
+      <svg viewBox="0 0 600 130" style={{ width: "100%", maxWidth: 640, display: "block", margin: "10px auto" }} role="img" aria-label={t("Population grid with the sample highlighted", "Grille de la population avec l'échantillon mis en évidence")}>
         {pop.map((p, i) => { const col = i % 50, row = Math.floor(i / 50); return <circle key={i} cx={6 + col * 12} cy={8 + row * 10} r={pick.has(i) ? 4.4 : 3} fill={p.yes ? (pick.has(i) ? C.green : "#bbf7d0") : pick.has(i) ? C.red : "#fecdd3"} stroke={pick.has(i) ? C.ink : "none"} strokeWidth={0.8} />; })}
-        {[0, 1, 2, 3].map((g) => <text key={g} x={598} y={8 + (g * 3 + 1) * 10 + 4} fontSize={9} textAnchor="end" fill={C.muted}>Gr {9 + g}</text>)}
+        {[0, 1, 2, 3].map((g) => <text key={g} x={598} y={8 + (g * 3 + 1) * 10 + 4} fontSize={9} textAnchor="end" fill={C.muted}>{t(`Gr ${9 + g}`, `${9 + g}e`)}</text>)}
       </svg>
       {runs.length > 0 && (
-        <Chart x0={0} x1={1} y0={0} y1={1} h={120} label="Estimates from 60 samples" xTicks={[0, 0.2, 0.4, 0.6, 0.8, 1]} xLabel="estimate">
+        <Chart x0={0} x1={1} y0={0} y1={1} h={120} label={t("Estimates from 60 samples", "Estimations de 60 échantillons")} xTicks={[0, 0.2, 0.4, 0.6, 0.8, 1]} xLabel={t("estimate", "estimation")}>
           {(X, Y) => { const seen = new Map<number, number>(); return <>{runs.map((v, k) => { const b = Math.round(v * 50) / 50; const c = (seen.get(b) ?? 0) + 1; seen.set(b, c); return <circle key={k} cx={X(b)} cy={Y(0) - 5 - (c - 1) * 8} r={3.5} fill={C.blue} />; })}<line x1={X(truth)} y1={Y(0)} x2={X(truth)} y2={Y(1)} stroke={C.green} strokeWidth={2.5} /></>; }}
         </Chart>
       )}
       <Readout tone={Math.abs(est - truth) < 0.08 ? "green" : "amber"}>
-        <MathText html={`Sample: \\(${idx.filter((i) => pop[i].yes).length}\\) of \\(${idx.length}\\) say yes \\(\\approx${r2(est * 100, 0)}\\%\\). Population: \\(${r2(truth * 100, 0)}\\%\\). ${note[method]}${runs.length ? ` Over 60 samples the estimates average \\(${r2(mean(runs) * 100, 0)}\\%\\).` : ""}`} />
+        <MathText html={t(`Sample: \\(${idx.filter((i) => pop[i].yes).length}\\) of \\(${idx.length}\\) say yes \\(\\approx${r2(est * 100, 0)}\\%\\). Population: \\(${r2(truth * 100, 0)}\\%\\). ${note[method]}${runs.length ? ` Over 60 samples the estimates average \\(${r2(mean(runs) * 100, 0)}\\%\\).` : ""}`, `Échantillon : \\(${idx.filter((i) => pop[i].yes).length}\\) sur \\(${idx.length}\\) disent oui \\(\\approx${r2(est * 100, 0)}\\%\\). Population : \\(${r2(truth * 100, 0)}\\%\\). ${note[method]}${runs.length ? ` Sur 60 échantillons, la moyenne des estimations est \\(${r2(mean(runs) * 100, 0)}\\%\\).` : ""}`)} />
       </Readout>
     </WidgetCard>
   );
@@ -107,14 +109,15 @@ export function MisleadingGraph() {
   const [base, setBase] = useState(80);
   const lo = base, hi = 92;
   const apparent = (data[3].v - lo) / (data[0].v - lo), actual = data[3].v / data[0].v;
+  const t = useT();
   return (
-    <WidgetCard title="How a graph can mislead" subtitle="graduation rate (%) — move where the vertical axis starts">
-      <Row><Slider label="axis starts at" value={base} min={0} max={81} onChange={setBase} format={(v) => `${v}%`} color={C.red} /></Row>
-      <Chart x0={0} x1={4} y0={lo} y1={hi} label="Bar graph of graduation rates" yTicks={ticks(lo, hi, base > 60 ? 2 : 10)} yLabel="%">
+    <WidgetCard title={t("How a graph can mislead", "Comment un graphique peut induire en erreur")} subtitle={t("graduation rate (%) — move where the vertical axis starts", "taux d'obtention du diplôme (%) — déplace le point de départ de l'axe vertical")}>
+      <Row><Slider label={t("axis starts at", "l'axe commence à")} value={base} min={0} max={81} onChange={setBase} format={(v) => `${v}%`} color={C.red} /></Row>
+      <Chart x0={0} x1={4} y0={lo} y1={hi} label={t("Bar graph of graduation rates", "Diagramme à bandes des taux d'obtention du diplôme")} yTicks={ticks(lo, hi, base > 60 ? 2 : 10)} yLabel="%">
         {(X, Y) => <>{data.map((d, i) => <g key={d.k}><rect x={X(i + 0.18)} y={Y(d.v)} width={X(i + 0.82) - X(i + 0.18)} height={Y(lo) - Y(d.v)} fill={C.blue} opacity={0.85} /><text x={X(i + 0.5)} y={Y(lo) - 6} fontSize={12} textAnchor="middle" fill="#fff" fontWeight={700}>{d.k}</text></g>)}</>}
       </Chart>
       <Readout tone={base > 40 ? "red" : "green"}>
-        <MathText html={`The 2024 bar looks \\(${r2(apparent, 1)}\\) times as tall as the 2021 bar, but the real increase is from \\(82\\%\\) to \\(90\\%\\): only \\(${r2(actual, 2)}\\) times as much. ${base > 40 ? "Starting the axis far above zero exaggerates the change. Always check the scale." : "With the axis at (or near) zero, bar heights compare fairly."}`} />
+        <MathText html={t(`The 2024 bar looks \\(${r2(apparent, 1)}\\) times as tall as the 2021 bar, but the real increase is from \\(82\\%\\) to \\(90\\%\\): only \\(${r2(actual, 2)}\\) times as much. ${base > 40 ? "Starting the axis far above zero exaggerates the change. Always check the scale." : "With the axis at (or near) zero, bar heights compare fairly."}`, `La bande de 2024 semble \\(${r2(apparent, 1)}\\) fois plus haute que celle de 2021, mais la vraie hausse va de \\(82\\%\\) à \\(90\\%\\) : seulement \\(${r2(actual, 2)}\\) fois plus. ${base > 40 ? "Faire commencer l'axe bien au-dessus de zéro exagère la variation. Vérifie toujours l'échelle." : "Avec l'axe à zéro (ou presque), les hauteurs des bandes se comparent équitablement."}`)} />
       </Readout>
     </WidgetCard>
   );
@@ -122,10 +125,10 @@ export function MisleadingGraph() {
 
 /* ---------------------------------------------------------------- 6.2 one-variable statistics */
 
-const SETS: Record<string, { label: string; unit: string; data: number[] }> = {
-  quiz: { label: "quiz marks /20", unit: "", data: [12, 15, 9, 17, 14, 15, 18, 11, 15, 13, 16, 10, 19, 14, 15] },
-  sleep: { label: "hours of sleep", unit: " h", data: [7.5, 6, 8, 9, 6.5, 7, 7, 8.5, 5.5, 7, 8, 6.5] },
-  commute: { label: "minutes to school", unit: " min", data: [5, 8, 10, 12, 12, 15, 15, 15, 18, 20, 22, 25, 30, 45] },
+const SETS: Record<string, { label: string; labelFr: string; unit: string; data: number[] }> = {
+  quiz: { label: "quiz marks /20", labelFr: "notes de test /20", unit: "", data: [12, 15, 9, 17, 14, 15, 18, 11, 15, 13, 16, 10, 19, 14, 15] },
+  sleep: { label: "hours of sleep", labelFr: "heures de sommeil", unit: " h", data: [7.5, 6, 8, 9, 6.5, 7, 7, 8.5, 5.5, 7, 8, 6.5] },
+  commute: { label: "minutes to school", labelFr: "minutes pour aller à l'école", unit: " min", data: [5, 8, 10, 12, 12, 15, 15, 15, 18, 20, 22, 25, 30, 45] },
 };
 export function StatsExplorer() {
   const [set, setSet] = useState("quiz");
@@ -141,16 +144,17 @@ export function StatsExplorer() {
   const ytop = Math.max(10, 5.6 + Math.max(...tally.values()) * 0.9 + 0.8);
   const inside = data.filter((x) => x >= fenceLo && x <= fenceHi), wLo = Math.min(...inside), wHi = Math.max(...inside);
   const u = SETS[set].unit;
+  const t = useT();
   return (
-    <WidgetCard title="Centre, spread and the box plot" subtitle="dot plot, five-number summary and box plot of the same data">
+    <WidgetCard title={t("Centre, spread and the box plot", "Centre, dispersion et diagramme de quartiles")} subtitle={t("dot plot, five-number summary and box plot of the same data", "diagramme à points, résumé en cinq nombres et diagramme de quartiles des mêmes données")}>
       <Row>
-        <Segmented options={Object.entries(SETS).map(([k, s]) => ({ value: k, label: s.label }))} value={set} onChange={(k) => { setSet(k); setExtra(null); }} />
+        <Segmented options={Object.entries(SETS).map(([k, s]) => ({ value: k, label: t(s.label, s.labelFr) }))} value={set} onChange={(k) => { setSet(k); setExtra(null); }} />
       </Row>
       <Row style={{ marginTop: 8 }}>
-        <label style={{ fontSize: 14, color: C.muted, fontWeight: 650 }}><input type="checkbox" checked={extra !== null} onChange={(e) => setExtra(e.target.checked ? hi + (hi - lo) : null)} /> add one more value</label>
-        {extra !== null && <Slider label="new value" value={extra} min={Math.floor(lo - (hi - lo))} max={Math.ceil(hi + 2 * (hi - lo))} step={set === "sleep" ? 0.5 : 1} onChange={setExtra} color={C.red} format={(v) => `${v}${u}`} />}
+        <label style={{ fontSize: 14, color: C.muted, fontWeight: 650 }}><input type="checkbox" checked={extra !== null} onChange={(e) => setExtra(e.target.checked ? hi + (hi - lo) : null)} /> {t("add one more value", "ajouter une valeur")}</label>
+        {extra !== null && <Slider label={t("new value", "nouvelle valeur")} value={extra} min={Math.floor(lo - (hi - lo))} max={Math.ceil(hi + 2 * (hi - lo))} step={set === "sleep" ? 0.5 : 1} onChange={setExtra} color={C.red} format={(v) => `${v}${u}`} />}
       </Row>
-      <Chart x0={x0} x1={x1} y0={0} y1={ytop} h={250} label="Dot plot and box plot" xTicks={ticks(x0, x1, x1 - x0 > 30 ? 5 : x1 - x0 > 12 ? 2 : 1)}>
+      <Chart x0={x0} x1={x1} y0={0} y1={ytop} h={250} label={t("Dot plot and box plot", "Diagramme à points et diagramme de quartiles")} xTicks={ticks(x0, x1, x1 - x0 > 30 ? 5 : x1 - x0 > 12 ? 2 : 1)}>
         {(X, Y) => { const counts = new Map<number, number>(); return (
           <>
             {sorted(data).map((x, i) => { const c = (counts.get(x) ?? 0) + 1; counts.set(x, c); const isNew = extra !== null && x === extra && c === data.filter((d) => d === extra).length; return <circle key={i} cx={X(x)} cy={Y(5.6 + (c - 1) * 0.9)} r={6} fill={isNew ? C.red : C.blue} opacity={0.85} />; })}
@@ -161,18 +165,18 @@ export function StatsExplorer() {
             <line x1={X(q.med)} y1={Y(3.4)} x2={X(q.med)} y2={Y(1)} stroke={C.red} strokeWidth={3} />
             <line x1={X(m)} y1={Y(4.4)} x2={X(m)} y2={Y(0.2)} stroke={C.green} strokeWidth={2} strokeDasharray="5 3" />
             {[wLo, wHi].map((v, i) => <line key={i} x1={X(v)} y1={Y(3)} x2={X(v)} y2={Y(1.4)} stroke={C.ink} strokeWidth={2} />)}
-            <text x={X(m) + 4} y={Y(4.3)} fontSize={11} fill={C.green} fontWeight={700}>mean</text>
+            <text x={X(m) + 4} y={Y(4.3)} fontSize={11} fill={C.green} fontWeight={700}>{t("mean", "moyenne")}</text>
           </>
         ); }}
       </Chart>
       <table style={{ borderCollapse: "collapse", margin: "4px auto 12px", fontSize: 14, fontVariantNumeric: "tabular-nums" }}>
         <tbody>
-          <tr>{["n", "min", "Q1", "median", "Q3", "max", "range", "IQR", "mean", "mode"].map((t) => <th key={t} style={{ padding: "3px 8px", background: C.panel, border: `1px solid ${C.line}` }}>{t}</th>)}</tr>
-          <tr>{[data.length, q.min, q.q1, q.med, q.q3, q.max, q.max - q.min, iqr, r2(m), md.length ? md.join(", ") : "none"].map((v, i) => <td key={i} style={{ padding: "3px 8px", border: `1px solid ${C.line}`, textAlign: "center" }}>{typeof v === "number" ? r2(v) : v}</td>)}</tr>
+          <tr>{([["n", "n"], ["min", "min"], ["Q1", "Q1"], ["median", "médiane"], ["Q3", "Q3"], ["max", "max"], ["range", "étendue"], ["IQR", "EIQ"], ["mean", "moyenne"], ["mode", "mode"]] as [string, string][]).map(([en, frl]) => <th key={en} style={{ padding: "3px 8px", background: C.panel, border: `1px solid ${C.line}` }}>{t(en, frl)}</th>)}</tr>
+          <tr>{[data.length, q.min, q.q1, q.med, q.q3, q.max, q.max - q.min, iqr, r2(m), md.length ? md.join(", ") : t("none", "aucun")].map((v, i) => <td key={i} style={{ padding: "3px 8px", border: `1px solid ${C.line}`, textAlign: "center" }}>{typeof v === "number" ? r2(v) : v}</td>)}</tr>
         </tbody>
       </table>
       <Readout tone={outliers.length ? "amber" : "green"}>
-        <MathText html={`Half the data lie in the box, between \\(Q_1=${r2(q.q1)}\\) and \\(Q_3=${r2(q.q3)}\\) (IQR \\(=${r2(iqr)}\\)). ${outliers.length ? `Outlier${outliers.length > 1 ? "s" : ""} (more than \\(1.5\\times\\)IQR beyond the box, marked ×; the whisker stops at the last value that is not an outlier):\\(${outliers.map((o) => r2(o)).join(", ")}\\). The mean (\\(${r2(m)}\\)) is pulled toward the outlier much more than the median (\\(${r2(q.med)}\\)), so the median describes the centre better here.` : `No outliers: values from \\(${r2(fenceLo)}\\) to \\(${r2(fenceHi)}\\) are within \\(1.5\\times\\)IQR of the box. Add a very large or small value to see how the mean and median react.`}`} />
+        <MathText html={t(`Half the data lie in the box, between \\(Q_1=${r2(q.q1)}\\) and \\(Q_3=${r2(q.q3)}\\) (IQR \\(=${r2(iqr)}\\)). ${outliers.length ? `Outlier${outliers.length > 1 ? "s" : ""} (more than \\(1.5\\times\\)IQR beyond the box, marked ×; the whisker stops at the last value that is not an outlier):\\(${outliers.map((o) => r2(o)).join(", ")}\\). The mean (\\(${r2(m)}\\)) is pulled toward the outlier much more than the median (\\(${r2(q.med)}\\)), so the median describes the centre better here.` : `No outliers: values from \\(${r2(fenceLo)}\\) to \\(${r2(fenceHi)}\\) are within \\(1.5\\times\\)IQR of the box. Add a very large or small value to see how the mean and median react.`}`, `La moitié des données se trouve dans la boîte, entre \\(Q_1=${r2(q.q1)}\\) et \\(Q_3=${r2(q.q3)}\\) (EIQ \\(=${r2(iqr)}\\)). ${outliers.length ? `Valeur${outliers.length > 1 ? "s" : ""} aberrante${outliers.length > 1 ? "s" : ""} (à plus de \\(1.5\\times\\)EIQ de la boîte, marquée${outliers.length > 1 ? "s" : ""} ×; la moustache s'arrête à la dernière valeur qui n'est pas aberrante) : \\(${outliers.map((o) => r2(o)).join(", ")}\\). La moyenne (\\(${r2(m)}\\)) est beaucoup plus attirée par la valeur aberrante que la médiane (\\(${r2(q.med)}\\)), donc la médiane décrit mieux le centre ici.` : `Aucune valeur aberrante : les valeurs de \\(${r2(fenceLo)}\\) à \\(${r2(fenceHi)}\\) sont à moins de \\(1.5\\times\\)EIQ de la boîte. Ajoute une très grande ou une très petite valeur pour voir comment la moyenne et la médiane réagissent.`}`)} />
       </Readout>
     </WidgetCard>
   );
@@ -183,18 +187,19 @@ export function StatsExplorer() {
 export function HistogramBins() {
   const times = useMemo(() => { const r = rng(21); return Array.from({ length: 60 }, () => { const u = r() + r() + r(); return Math.round((14 + u * 4.2) * 10) / 10; }); }, []);
   const [w, setW] = useState(1);
+  const tr = useT();
   const lo = Math.floor(Math.min(...times)), hi = Math.ceil(Math.max(...times));
   const bins: { a: number; b: number; c: number }[] = [];
   for (let a = lo; a < hi; a += w) bins.push({ a, b: a + w, c: times.filter((t) => t >= a && t < a + w).length });
   const top = Math.max(...bins.map((b) => b.c));
   return (
-    <WidgetCard title="Histogram bin width" subtitle="60 students' 100 m sprint times (s): same data, different bin widths">
-      <Row><Slider label="bin width" value={w} min={0.25} max={4} step={0.25} onChange={setW} format={(v) => `${v} s`} color={C.violet} /></Row>
-      <Chart x0={lo} x1={hi + 0.01} y0={0} y1={top + 1} label="Histogram" xTicks={ticks(lo, hi, 1)} yTicks={ticks(0, top + 1, top > 20 ? 5 : top > 8 ? 2 : 1)} xLabel="time (s)" yLabel="frequency">
+    <WidgetCard title={tr("Histogram bin width", "Largeur des classes d'un histogramme")} subtitle={tr("60 students' 100 m sprint times (s): same data, different bin widths", "Temps de 60 élèves au sprint de 100 m (s) : mêmes données, différentes largeurs de classe")}>
+      <Row><Slider label={tr("bin width", "largeur de classe")} value={w} min={0.25} max={4} step={0.25} onChange={setW} format={(v) => `${v} s`} color={C.violet} /></Row>
+      <Chart x0={lo} x1={hi + 0.01} y0={0} y1={top + 1} label={tr("Histogram", "Histogramme")} xTicks={ticks(lo, hi, 1)} yTicks={ticks(0, top + 1, top > 20 ? 5 : top > 8 ? 2 : 1)} xLabel={tr("time (s)", "temps (s)")} yLabel={tr("frequency", "fréquence")}>
         {(X, Y) => <>{bins.map((b) => <rect key={b.a} x={X(b.a)} y={Y(b.c)} width={X(b.b) - X(b.a)} height={Y(0) - Y(b.c)} fill={C.violetSoft} stroke={C.violet} strokeWidth={1.5} />)}</>}
       </Chart>
       <Readout tone="green">
-        <MathText html={`${bins.length} bins of width \\(${w}\\) s. ${w < 0.6 ? "Very narrow bins: the shape is jagged and hard to read." : w > 2.5 ? "Very wide bins: the detail disappears into a few bars." : "A moderate width shows the shape clearly: a single peak, roughly symmetric (mound-shaped)."} Histogram bars touch because time is continuous; each bar includes its left edge and not its right edge.`} />
+        <MathText html={tr(`${bins.length} bins of width \\(${w}\\) s. ${w < 0.6 ? "Very narrow bins: the shape is jagged and hard to read." : w > 2.5 ? "Very wide bins: the detail disappears into a few bars." : "A moderate width shows the shape clearly: a single peak, roughly symmetric (mound-shaped)."} Histogram bars touch because time is continuous; each bar includes its left edge and not its right edge.`, `${bins.length} classes de largeur \\(${w}\\) s. ${w < 0.6 ? "Classes très étroites : la forme est irrégulière et difficile à lire." : w > 2.5 ? "Classes très larges : les détails disparaissent dans quelques barres." : "Une largeur moyenne montre clairement la forme : un seul sommet, à peu près symétrique (en forme de cloche)."} Les barres d'un histogramme se touchent parce que le temps est une variable continue; chaque barre inclut sa borne de gauche, mais pas sa borne de droite.`)} />
       </Readout>
     </WidgetCard>
   );
@@ -202,10 +207,10 @@ export function HistogramBins() {
 
 /* ---------------------------------------------------------------- 6.3 scatter plots */
 
-const SCATTER: Record<string, { label: string; xl: string; yl: string; pts: [number, number][] }> = {
-  study: { label: "study time vs mark", xl: "hours studied", yl: "mark (%)", pts: [[1, 52], [2, 58], [2, 63], [3, 61], [4, 70], [4, 66], [5, 74], [6, 73], [6, 80], [7, 82], [8, 84], [9, 90], [3, 55], [5, 69], [7, 77]] },
-  car: { label: "car age vs value", xl: "age (years)", yl: "value (k$)", pts: [[1, 31], [2, 27], [3, 25], [3, 22], [4, 21], [5, 18], [6, 15], [7, 14], [8, 10], [9, 9], [10, 6], [5, 20], [2, 29], [7, 12]] },
-  shoe: { label: "shoe size vs mark", xl: "shoe size", yl: "mark (%)", pts: [[6, 71], [7, 58], [7, 84], [8, 66], [8, 77], [9, 62], [9, 88], [10, 70], [10, 55], [11, 79], [6, 64], [11, 68], [12, 74], [8, 59]] },
+const SCATTER: Record<string, { label: string; xl: string; yl: string; labelFr: string; xlFr: string; ylFr: string; pts: [number, number][] }> = {
+  study: { label: "study time vs mark", xl: "hours studied", yl: "mark (%)", labelFr: "temps d'étude et note", xlFr: "heures d'étude", ylFr: "note (%)", pts: [[1, 52], [2, 58], [2, 63], [3, 61], [4, 70], [4, 66], [5, 74], [6, 73], [6, 80], [7, 82], [8, 84], [9, 90], [3, 55], [5, 69], [7, 77]] },
+  car: { label: "car age vs value", xl: "age (years)", yl: "value (k$)", labelFr: "âge et valeur d'une auto", xlFr: "âge (années)", ylFr: "valeur (k$)", pts: [[1, 31], [2, 27], [3, 25], [3, 22], [4, 21], [5, 18], [6, 15], [7, 14], [8, 10], [9, 9], [10, 6], [5, 20], [2, 29], [7, 12]] },
+  shoe: { label: "shoe size vs mark", xl: "shoe size", yl: "mark (%)", labelFr: "pointure et note", xlFr: "pointure", ylFr: "note (%)", pts: [[6, 71], [7, 58], [7, 84], [8, 66], [8, 77], [9, 62], [9, 88], [10, 70], [10, 55], [11, 79], [6, 64], [11, 68], [12, 74], [8, 59]] },
 };
 function regression(pts: [number, number][]) {
   const n = pts.length, mx = mean(pts.map((p) => p[0])), my = mean(pts.map((p) => p[1]));
@@ -220,22 +225,25 @@ export function ScatterFit() {
   const [b, setB] = useState(50);
   const [show, setShow] = useState(false);
   const [xq, setXq] = useState(5);
+  const t = useT();
   const xs = d.pts.map((p) => p[0]), ys = d.pts.map((p) => p[1]);
   const x0 = 0, x1 = Math.max(...xs) + 2, y0 = Math.max(0, Math.floor((Math.min(...ys) - 10) / 10) * 10), y1 = Math.ceil((Math.max(...ys) + 8) / 10) * 10;
   const sse = d.pts.reduce((s, [x, y]) => s + (y - (m * x + b)) ** 2, 0), bestSse = d.pts.reduce((s, [x, y]) => s + (y - (best.m * x + best.b)) ** 2, 0);
   const strength = Math.abs(best.r) > 0.8 ? "strong" : Math.abs(best.r) > 0.5 ? "moderate" : Math.abs(best.r) > 0.25 ? "weak" : "no";
   const dir = Math.abs(best.r) <= 0.25 ? "" : best.r > 0 ? "positive" : "negative";
+  const strengthFr = { strong: "forte", moderate: "modérée", weak: "faible", no: "" }[strength];
+  const dirFr = dir === "positive" ? "positive" : dir === "negative" ? "négative" : "";
   const reset = (key: string) => { setK(key); const g = regression(SCATTER[key].pts); setM(Math.round(g.m)); setB(Math.round(g.b + 6)); setShow(false); };
   return (
-    <WidgetCard title="Scatter plot and line of best fit" subtitle="move your line to pass through the middle of the points">
-      <Segmented options={Object.entries(SCATTER).map(([key, s]) => ({ value: key, label: s.label }))} value={k} onChange={reset} />
+    <WidgetCard title={t("Scatter plot and line of best fit", "Nuage de points et droite la mieux ajustée")} subtitle={t("move your line to pass through the middle of the points", "déplace ta droite pour qu'elle passe au milieu des points")}>
+      <Segmented options={Object.entries(SCATTER).map(([key, s]) => ({ value: key, label: t(s.label, s.labelFr) }))} value={k} onChange={reset} />
       <Row style={{ marginTop: 8 }}>
-        <Slider label="slope m" value={m} min={-8} max={8} step={0.25} onChange={setM} color={C.violet} format={(v) => r2(v)} />
-        <Slider label="intercept b" value={b} min={0} max={100} step={0.5} onChange={setB} color={C.green} format={(v) => r2(v)} />
+        <Slider label={t("slope m", "pente m")} value={m} min={-8} max={8} step={0.25} onChange={setM} color={C.violet} format={(v) => r2(v)} />
+        <Slider label={t("intercept b", "ordonnée à l'origine b")} value={b} min={0} max={100} step={0.5} onChange={setB} color={C.green} format={(v) => r2(v)} />
       </Row>
-      <Row><label style={{ fontSize: 14, color: C.muted, fontWeight: 650 }}><input type="checkbox" checked={show} onChange={(e) => setShow(e.target.checked)} /> show the best possible line and residuals</label>
-        <Slider label="predict at x =" value={xq} min={0} max={x1 + 4} step={0.5} onChange={setXq} color={C.amber} format={(v) => r2(v)} /></Row>
-      <Chart x0={x0} x1={x1 + 4} y0={y0} y1={y1} label="Scatter plot" xTicks={ticks(0, x1 + 4, 2)} yTicks={ticks(y0, y1, 10)} xLabel={d.xl} yLabel={d.yl}>
+      <Row><label style={{ fontSize: 14, color: C.muted, fontWeight: 650 }}><input type="checkbox" checked={show} onChange={(e) => setShow(e.target.checked)} /> {t("show the best possible line and residuals", "afficher la meilleure droite possible et les résidus")}</label>
+        <Slider label={t("predict at x =", "prédire pour x =")} value={xq} min={0} max={x1 + 4} step={0.5} onChange={setXq} color={C.amber} format={(v) => r2(v)} /></Row>
+      <Chart x0={x0} x1={x1 + 4} y0={y0} y1={y1} label={t("Scatter plot", "Nuage de points")} xTicks={ticks(0, x1 + 4, 2)} yTicks={ticks(y0, y1, 10)} xLabel={t(d.xl, d.xlFr)} yLabel={t(d.yl, d.ylFr)}>
         {(X, Y) => (
           <>
             {show && d.pts.map(([x, y], i) => <line key={"r" + i} x1={X(x)} y1={Y(y)} x2={X(x)} y2={Y(best.m * x + best.b)} stroke={C.red} strokeDasharray="3 2" />)}
@@ -249,7 +257,7 @@ export function ScatterFit() {
         )}
       </Chart>
       <Readout tone="green">
-        <MathText html={`Your line: \\(y=${r2(m)}x+${r2(b)}\\); sum of squared vertical distances \\(=${r2(sse, 0)}\\) (best possible \\(${r2(bestSse, 0)}\\)). The data show ${strength === "no" ? "<strong>no</strong> clear correlation" : `a <strong>${strength} ${dir}</strong> correlation`} (\\(r\\approx${r2(best.r)}\\)). Prediction at \\(x=${r2(xq)}\\): \\(y\\approx${r2(m * xq + b, 1)}\\) — ${xq > Math.max(...xs) || xq < Math.min(...xs) ? "<strong>extrapolation</strong> (outside the data, shaded area): less reliable." : "<strong>interpolation</strong> (inside the data range)."}${k === "shoe" ? " Even when two variables are correlated, one does not necessarily cause the other." : ""}`} />
+        <MathText html={t(`Your line: \\(y=${r2(m)}x+${r2(b)}\\); sum of squared vertical distances \\(=${r2(sse, 0)}\\) (best possible \\(${r2(bestSse, 0)}\\)). The data show ${strength === "no" ? "<strong>no</strong> clear correlation" : `a <strong>${strength} ${dir}</strong> correlation`} (\\(r\\approx${r2(best.r)}\\)). Prediction at \\(x=${r2(xq)}\\): \\(y\\approx${r2(m * xq + b, 1)}\\) — ${xq > Math.max(...xs) || xq < Math.min(...xs) ? "<strong>extrapolation</strong> (outside the data, shaded area): less reliable." : "<strong>interpolation</strong> (inside the data range)."}${k === "shoe" ? " Even when two variables are correlated, one does not necessarily cause the other." : ""}`, `Ta droite : \\(y=${r2(m)}x+${r2(b)}\\); somme des carrés des distances verticales \\(=${r2(sse, 0)}\\) (meilleure valeur possible \\(${r2(bestSse, 0)}\\)). Les données montrent ${strength === "no" ? "<strong>aucune</strong> corrélation claire" : `une corrélation <strong>${dirFr} ${strengthFr}</strong>`} (\\(r\\approx${r2(best.r)}\\)). Prédiction pour \\(x=${r2(xq)}\\) : \\(y\\approx${r2(m * xq + b, 1)}\\) — ${xq > Math.max(...xs) || xq < Math.min(...xs) ? "<strong>extrapolation</strong> (hors des données, zone ombrée) : moins fiable." : "<strong>interpolation</strong> (à l'intérieur de l'étendue des données)."}${k === "shoe" ? " Même quand deux variables sont corrélées, l'une ne cause pas nécessairement l'autre." : ""}`)} />
       </Readout>
     </WidgetCard>
   );
@@ -266,19 +274,20 @@ export function ModelFit() {
   const [h, setH] = useState(24);
   const [t0, setT0] = useState(90);
   const [c, setC] = useState(0.85);
+  const tr = useT();
   const f = (t: number) => (kind === "linear" ? m * t + b : kind === "quadratic" ? k * (t - h) ** 2 + 22 : 21 + (t0 - 21) * c ** t);
   const err = Math.sqrt(mean(MODEL_DATA.map(([t, y]) => (y - f(t)) ** 2)));
   const pred = f(30);
   const formula = kind === "linear" ? `T=${r2(m)}t+${r2(b)}` : kind === "quadratic" ? `T=${r2(k, 3)}(t-${r2(h)})^2+22` : `T=21+${r2(t0 - 21)}(${r2(c)})^t`;
   return (
-    <WidgetCard title="Choosing and testing a model" subtitle="temperature of a cup of coffee (°C) as it cools in a 21 °C room">
-      <Segmented options={[{ value: "linear", label: "linear" }, { value: "quadratic", label: "quadratic" }, { value: "exponential", label: "exponential" }]} value={kind} onChange={setKind} />
+    <WidgetCard title={tr("Choosing and testing a model", "Choisir et tester un modèle")} subtitle={tr("temperature of a cup of coffee (°C) as it cools in a 21 °C room", "température d'une tasse de café (°C) qui refroidit dans une pièce à 21 °C")}>
+      <Segmented options={[{ value: "linear", label: tr("linear", "linéaire") }, { value: "quadratic", label: tr("quadratic", "quadratique") }, { value: "exponential", label: tr("exponential", "exponentiel") }]} value={kind} onChange={setKind} />
       <Row style={{ marginTop: 8 }}>
-        {kind === "linear" && <><Slider label="slope" value={m} min={-5} max={0} step={0.1} onChange={setM} color={C.violet} format={(v) => r2(v)} /><Slider label="intercept" value={b} min={40} max={110} step={1} onChange={setB} color={C.green} /></>}
-        {kind === "quadratic" && <><Slider label="a" value={k} min={0.02} max={0.25} step={0.005} onChange={setK} color={C.violet} format={(v) => r2(v, 3)} /><Slider label="vertex at t =" value={h} min={14} max={36} step={1} onChange={setH} color={C.green} /></>}
-        {kind === "exponential" && <><Slider label="start T(0)" value={t0} min={60} max={110} step={1} onChange={setT0} color={C.green} /><Slider label="ratio per min" value={c} min={0.7} max={0.98} step={0.01} onChange={setC} color={C.violet} format={(v) => r2(v)} /></>}
+        {kind === "linear" && <><Slider label={tr("slope", "pente")} value={m} min={-5} max={0} step={0.1} onChange={setM} color={C.violet} format={(v) => r2(v)} /><Slider label={tr("intercept", "ordonnée à l'origine")} value={b} min={40} max={110} step={1} onChange={setB} color={C.green} /></>}
+        {kind === "quadratic" && <><Slider label="a" value={k} min={0.02} max={0.25} step={0.005} onChange={setK} color={C.violet} format={(v) => r2(v, 3)} /><Slider label={tr("vertex at t =", "sommet à t =")} value={h} min={14} max={36} step={1} onChange={setH} color={C.green} /></>}
+        {kind === "exponential" && <><Slider label={tr("start T(0)", "départ T(0)")} value={t0} min={60} max={110} step={1} onChange={setT0} color={C.green} /><Slider label={tr("ratio per min", "rapport par min")} value={c} min={0.7} max={0.98} step={0.01} onChange={setC} color={C.violet} format={(v) => r2(v)} /></>}
       </Row>
-      <Chart x0={0} x1={32} y0={0} y1={100} label="Cooling data with a model" xTicks={ticks(0, 32, 4)} yTicks={ticks(0, 100, 20)} xLabel="time (min)" yLabel="T (°C)">
+      <Chart x0={0} x1={32} y0={0} y1={100} label={tr("Cooling data with a model", "Données de refroidissement avec un modèle")} xTicks={ticks(0, 32, 4)} yTicks={ticks(0, 100, 20)} xLabel={tr("time (min)", "temps (min)")} yLabel="T (°C)">
         {(X, Y) => (
           <>
             <line x1={X(0)} y1={Y(21)} x2={X(32)} y2={Y(21)} stroke={C.faint} strokeDasharray="5 4" />
@@ -289,7 +298,7 @@ export function ModelFit() {
         )}
       </Chart>
       <Readout tone={err < 2 ? "green" : err < 6 ? "blue" : "amber"}>
-        <MathText html={`Model: \\(${formula}\\). Typical error \\(\\approx${r2(err, 1)}\\) °C. Prediction at 30 min (orange): \\(${r2(pred, 1)}\\) °C. ${kind === "linear" ? "A line cannot bend: it soon predicts coffee colder than the room — an unreasonable result. Test, then refine." : kind === "quadratic" ? "A parabola can fit for a while, but after its vertex it predicts the coffee heating up again — not realistic." : "The exponential model levels off at room temperature (21 °C), which matches the physical situation: the best choice here."}`} />
+        <MathText html={tr(`Model: \\(${formula}\\). Typical error \\(\\approx${r2(err, 1)}\\) °C. Prediction at 30 min (orange): \\(${r2(pred, 1)}\\) °C. ${kind === "linear" ? "A line cannot bend: it soon predicts coffee colder than the room — an unreasonable result. Test, then refine." : kind === "quadratic" ? "A parabola can fit for a while, but after its vertex it predicts the coffee heating up again — not realistic." : "The exponential model levels off at room temperature (21 °C), which matches the physical situation: the best choice here."}`, `Modèle : \\(${formula}\\). Erreur typique \\(\\approx${r2(err, 1)}\\) °C. Prédiction à 30 min (en orange) : \\(${r2(pred, 1)}\\) °C. ${kind === "linear" ? "Une droite ne peut pas se courber : elle prédit vite un café plus froid que la pièce — un résultat déraisonnable. Teste, puis ajuste." : kind === "quadratic" ? "Une parabole peut convenir un moment, mais après son sommet elle prédit que le café se réchauffe — ce n'est pas réaliste." : "Le modèle exponentiel se stabilise à la température de la pièce (21 °C), ce qui correspond à la situation réelle : c'est le meilleur choix ici."}`)} />
       </Readout>
     </WidgetCard>
   );

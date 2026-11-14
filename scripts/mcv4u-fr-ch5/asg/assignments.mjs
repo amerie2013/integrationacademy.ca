@@ -1,0 +1,113 @@
+// MCV4U-FR chapitre 5 — devoirs (miroir de ../../mcv4u-ch5/asg/assignments.mjs) : 12 questions chacun —
+// Connaissance et compréhension 1-3, Habiletés de la pensée 4-5, Communication 6-7, Mise en application 8-10,
+// Niveau difficile 11-12. [[clé|légende]] dans une ligne est remplacé par une figure (SVG téléversé) à la publication.
+// Chaque devoir a un ID fixe asgId(5, k) (rangées nouvelles dans le cours français).
+import { planeDoc, P } from "../bank/fig.mjs";
+import { asgId } from "../../mcv4u-fr/common.mjs";
+
+const S = String.raw;
+const grid = (view, step) => planeDoc({ view, ...(step ? { step } : {}) });
+
+export const ASSIGNMENTS = [
+  { code: "5.1", id: asgId(5, 1), title: "Devoir 5.1 — Taux de variation et le nombre e", figs: {
+      e: planeDoc({ view: { xmin: -2.5, xmax: 2, ymin: -1, ymax: 6 }, curves: [{ f: Math.exp, color: "violet" }], points: [P(-1, Math.exp(-1)), P(0, 1), P(1, Math.E)], step: { x: 0.5, y: 1 } }),
+      g: grid({ xmin: -2.5, xmax: 2, ymin: -1, ymax: 6 }, { x: 0.5, y: 1 }) }, lines: [
+    "Connaissance et compréhension",
+    S`1. Utilise \(h=0.0001\) pour estimer la pente de \(y=2.5^x\) en \(x=0\) et en \(x=1\). Montre que la deuxième estimation vaut environ 2.5 fois la première.`,
+    S`2. Évalue \(\left(1+\frac{0.5}{n}\right)^n\) pour \(n=10,\ 1000,\ 100\,000\). De quelle puissance de \(e\) l'expression s'approche-t-elle?`,
+    S`3. Sur le graphique de \(y=e^x\), trace les tangentes en \(x=-1,\ 0,\ 1\) et lis leurs pentes. Place les pentes dans le quadrillage vide et décris le graphique des pentes. [[e|Graphique de y = e^x]] [[g|Quadrillage pour ton graphique des pentes]]`,
+    "Habiletés de la pensée",
+    S`4. Trouve la base \(b\) pour laquelle la pente de \(y=b^x\) en \(x=0\) vaut 3, et vérifie ta réponse à l'aide d'un quotient de différence.`,
+    S`5. Montre que la tangente à \(y=e^x\) en tout point \(x=a\) coupe l'axe des x exactement une unité à gauche de \(a\).`,
+    "Communication",
+    "6. Explique pourquoi e est appelé la base naturelle. Qu'a de particulier le graphique de y = eˣ par rapport aux graphiques de y = 2ˣ et de y = 3ˣ?",
+    "7. Explique, à l'aide du quotient de différence, pourquoi la pente de toute fonction exponentielle y = bˣ est proportionnelle à sa hauteur.",
+    "Mise en application",
+    S`8. Un dépôt de 1200 dollars rapporte 5 % par année. Compare sa valeur après 10 ans lorsque l'intérêt est composé annuellement, mensuellement, quotidiennement et de façon continue.`,
+    S`9. Une colonie d'insectes croît selon \(N(t)=80(1.3)^t\), où \(t\) est en semaines. Estime son taux de croissance en \(t=4\) à l'aide d'un quotient de différence.`,
+    S`10. Une chaîne de cafés compte \(S(t)=150e^{0.12t}\) établissements après \(t\) années. Trouve le taux de croissance en \(t=0\) et en \(t=5\), et montre que le rapport taux \(\div\) taille est le même les deux fois.`,
+    "Niveau difficile",
+    S`11. Soit \(f(x)=b^x\). Utilise la définition de la dérivée pour démontrer que \(f'(x)=f'(0)\cdot f(x)\).`,
+    S`12. Utilise \(e^x\approx1+x+\frac{x^2}{2}+\frac{x^3}{6}+\frac{x^4}{24}\) pour estimer \(e^{0.5}\). Dérive le polynôme terme par terme et explique ce que cela suggère au sujet de la dérivée de \(e^x\).`,
+  ] },
+  { code: "5.2", id: asgId(5, 2), title: "Devoir 5.2 — Le logarithme naturel et sa dérivée", figs: {
+      l: planeDoc({ view: { xmin: -0.5, xmax: 7, ymin: -2.5, ymax: 2.5 }, curves: [{ f: (x) => Math.log(x - 1), a: 1.03, color: "violet" }], vlines: [{ x: 1, color: "red", dash: true }], points: [P(3, Math.log(2))], step: { x: 0.5, y: 0.5 } }) }, lines: [
+    "Connaissance et compréhension",
+    S`1. Dérive \(y=\ln(6x^2-x)\).`,
+    S`2. Dérive \(y=\ln\left((x-4)^2\right)\) et \(y=\log_7x\).`,
+    S`3. Trouve l'équation de la tangente à \(y=\ln(x-1)\) en \(x=3\) et trace-la sur le graphique. [[l|Graphique de y = ln(x − 1)]]`,
+    "Habiletés de la pensée",
+    S`4. Trouve et classe le point critique de \(y=\frac x2-\ln(x+1)\).`,
+    S`5. Trouve le point de \(y=\ln(8x)\) où la tangente passe par l'origine.`,
+    "Communication",
+    "6. Explique comment la dérivée de ln x découle de la dérivée de eˣ, en utilisant le fait que les deux graphiques sont des réflexions l'un de l'autre par rapport à y = x.",
+    "7. Explique pourquoi y = ln|x| a pour dérivée 1/x des deux côtés de x = 0, et décris l'allure de son graphique.",
+    "Mise en application",
+    S`8. Le niveau sonore est \(\beta=10\log_{10}\left(\frac{I}{10^{-12}}\right)\) dB. Trouve \(\frac{d\beta}{dI}\) lorsque \(I=10^{-6}\) W/m², et explique pourquoi le niveau des sons forts varie lentement.`,
+    S`9. La taille d'un enfant est \(h(t)=50+22\ln(t+1)\) cm à l'âge de \(t\) ans. À quelle vitesse l'enfant grandit-il à 3 ans? À 10 ans?`,
+    S`10. La magnitude d'un séisme est \(M=\frac23\log_{10}\left(\frac{E}{E_0}\right)\). Trouve \(\frac{dM}{dE}\) lorsque \(E=10^6E_0\).`,
+    "Niveau difficile",
+    S`11. Trouve et classe les points critiques de \(y=\frac{(\ln x)^2}{x}\).`,
+    S`12. Démontre que \(\ln x\le\frac{x}{e}\) pour tout \(x\gt0\), avec égalité seulement en \(x=e\).`,
+  ] },
+  { code: "5.3", id: asgId(5, 3), title: "Devoir 5.3 — Dérivées des fonctions exponentielles", figs: {
+      e: planeDoc({ view: { xmin: -2, xmax: 3, ymin: -1, ymax: 6 }, curves: [{ f: (x) => Math.exp(x - 1), color: "violet" }], points: [P(1, 1)], step: { x: 0.5, y: 1 } }) }, lines: [
+    "Connaissance et compréhension",
+    S`1. Dérive \(y=2e^{-5x}+e^{x/3}\).`,
+    S`2. Dérive \(y=9^x-x^9\).`,
+    S`3. Trouve l'équation de la tangente à \(y=e^{x-1}\) en \(x=1\) et trace-la sur le graphique. [[e|Graphique de y = e^(x − 1)]]`,
+    "Habiletés de la pensée",
+    S`4. Trouve la valeur minimale de \(y=e^x+9e^{-x}\).`,
+    S`5. Trouve toutes les valeurs de \(k\) pour lesquelles \(y=e^{kx}\) vérifie \(y''+y'-6y=0\).`,
+    "Communication",
+    "6. Explique la différence entre dériver x⁵ et dériver 5ˣ. Quelle règle s'applique à chacune, et pourquoi?",
+    "7. Explique pourquoi y = bˣ avec 0 < b < 1 a une pente négative partout, et comment la valeur de b influe sur l'inclinaison.",
+    "Mise en application",
+    S`8. La valeur d'une voiture est \(V(t)=32\,000(0.85)^t\) dollars après \(t\) années. À quelle vitesse perd-elle de la valeur en \(t=3\)?`,
+    S`9. Un médicament quitte le sang selon \(A(t)=50e^{-0.23t}\) mg. Trouve le taux en \(t=2\) h et en \(t=6\) h, et explique pourquoi les taux diffèrent.`,
+    S`10. Une application compte \(U(t)=4000\cdot2^{t/3}\) utilisateurs après \(t\) mois. À quelle vitesse croît-elle en \(t=6\)?`,
+    "Niveau difficile",
+    S`11. Montre que \(y=Ae^{2x}+Be^{-x}\) vérifie \(y''-y'-2y=0\) pour toutes les constantes \(A\) et \(B\).`,
+    S`12. La normale à \(y=e^x\) en \(x=a\) passe par l'origine. Écris une équation pour \(a\) et résous-la numériquement.`,
+  ] },
+  { code: "5.4", id: asgId(5, 4), title: "Devoir 5.4 — Règles de dérivation des fonctions exponentielles", figs: {
+      f: planeDoc({ view: { xmin: -5, xmax: 3.4, ymin: -18, ymax: 4 }, curves: [{ f: (x) => (x * x - 3 * x) * Math.exp(x), color: "violet" }], step: { x: 0.5, y: 2 } }) }, lines: [
+    "Connaissance et compréhension",
+    S`1. Dérive \(y=x^3e^{2x}\).`,
+    S`2. Dérive \(y=\frac{x^2-1}{e^{2x}}\).`,
+    S`3. Dérive \(y=e^{3x}\cos x\).`,
+    "Habiletés de la pensée",
+    S`4. Utilise la dérivation logarithmique sur \(y=(x+2)^x\) pour trouver \(y'(0)\) et \(y'(1)\).`,
+    S`5. Trouve et classe les points critiques de \(y=(x^2-3x)e^x\), puis indique-les sur le graphique. [[f|Graphique de y = (x² − 3x)eˣ]]`,
+    "Communication",
+    "6. Explique comment la mise en évidence d'une exponentielle comme e^(kx) facilite la recherche des nombres critiques d'une fonction.",
+    "7. Explique quand la dérivation logarithmique est nécessaire et quand elle n'est qu'un raccourci. Donne un exemple de chaque cas.",
+    "Mise en application",
+    S`8. Un ressort amorti a un déplacement \(x(t)=4e^{-0.3t}\cos(2t)\) cm. Trouve sa vitesse en \(t=0\) et en \(t=1\).`,
+    S`9. La concentration d'un médicament est \(C(t)=2t^2e^{-0.4t}\) mg/L. Quand est-elle la plus grande, et quelle est sa plus grande valeur?`,
+    S`10. Le revenu d'une entreprise est \(R(x)=50xe^{-0.02x}\) dollars lorsque le prix est fixé de façon à vendre \(x\) articles. Trouve le nombre d'articles qui maximise le revenu, ainsi que le revenu maximal.`,
+    "Niveau difficile",
+    S`11. Montre que \(y=e^{-x}(x^2+2)\) est toujours décroissante et n'a aucun point d'inflexion, même si \(y''=0\) pour une valeur de \(x\).`,
+    S`12. Trouve la valeur de \(a\gt0\) pour laquelle \(a^x\ge x^a\) pour tout \(x\gt0\). Justifie ta réponse.`,
+  ] },
+  { code: "5.5", id: asgId(5, 5), title: "Devoir 5.5 — Établir des liens : modèles exponentiels", figs: {
+      g: grid({ xmin: 0, xmax: 20, ymin: 0, ymax: 450 }, { x: 2, y: 50 }) }, lines: [
+    "Connaissance et compréhension",
+    S`1. Pour \(P(t)=900e^{0.08t}\), trouve \(P'(0)\) et \(P'(10)\), et montre que \(\frac{P'}{P}\) est le même les deux fois.`,
+    S`2. Trouve le temps de doublement lorsque \(k=0.035\) et la demi-vie lorsque \(k=-0.0125\).`,
+    S`3. Esquisse \(Q(t)=400e^{-0.15t}\) pour \(0\le t\le20\) et sa tangente en \(t=0\) dans le quadrillage. [[g|Quadrillage pour Q(t)]]`,
+    "Habiletés de la pensée",
+    S`4. Une population double tous les 9 ans. Combien de temps lui faut-il pour augmenter de 50 %?`,
+    S`5. Montre que toute fonction logistique \(P=\frac{M}{1+Ae^{-kt}}\) vérifie \(P'=kP\left(1-\frac PM\right)\).`,
+    "Communication",
+    "6. Explique pourquoi le temps de doublement d'un modèle exponentiel ne dépend pas de la quantité de départ.",
+    "7. Compare la croissance exponentielle et la croissance logistique. Décris une situation où chacune est le meilleur modèle, et en quoi leurs taux de variation diffèrent.",
+    "Mise en application",
+    S`8. Une tarte à 180 °C est placée dans une cuisine à 20 °C et refroidit jusqu'à 120 °C en 15 min. Quand atteindra-t-elle 60 °C, et à quelle vitesse refroidira-t-elle à ce moment?`,
+    S`9. Un montant de 7500 dollars est placé à 4.2 % composé de façon continue. Quand atteindra-t-il 12 000 dollars, et à quelle vitesse croîtra-t-il à ce moment?`,
+    S`10. L'iode 131 a une demi-vie de 8 jours. Un patient en reçoit 50 mg. À quelle vitesse la quantité diminue-t-elle après 10 jours?`,
+    "Niveau difficile",
+    S`11. Des cultures croissent selon \(A(t)=300e^{0.2t}\) et \(B(t)=1500e^{0.1t}\). Quand \(A\) dépasse-t-elle \(B\)? Quand \(A\) croît-elle trois fois plus vite que \(B\)?`,
+    S`12. Un modèle de tumeur est \(N(t)=1000e^{-3e^{-0.2t}}\). Trouve \(N'(t)\) et le moment où la tumeur croît le plus vite.`,
+  ] },
+];

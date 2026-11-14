@@ -6,6 +6,7 @@
 // tangent to e^x or ln x with its gradient.
 
 import { useState } from "react";
+import { useLang, useT } from "@/lib/lang";
 import { C, MathText, Readout, Row, Segmented, Slider, WidgetCard } from "./kit";
 import { Plane, r2, type View } from "./Systems";
 import { dot } from "./Quadratics";
@@ -42,16 +43,17 @@ export function IBExpLaws({ init = [0, 2, 3, 2] }: { init?: [number, number, num
   const L = LAWS[k], nn = k === 3 && n === 0 ? 1 : n;
   const exp = k === 0 ? `${m}+${n < 0 ? `(${n})` : n}=${m + n}` : k === 1 ? `${m}-${n < 0 ? `(${n})` : n}=${m - n}` : k === 2 ? `${m}\\times${n < 0 ? `(${n})` : n}=${m * n}` : `\\tfrac{${m}}{${nn}}`;
   const direct = k === 0 ? a ** m * a ** n : k === 1 ? a ** m / a ** n : k === 2 ? (a ** m) ** n : Math.pow(a, 1 / nn) ** m;
+  const t = useT();
   return (
-    <WidgetCard title="Laws of exponents" subtitle="the laws follow from counting factors; check each law numerically, including zero, negative and fractional powers">
-      <Row><Segmented label="law:" value={k} onChange={setK} options={LAWS.map((x, i) => ({ value: i, label: x.label }))} /></Row>
+    <WidgetCard title={t("Laws of exponents", "Lois des exposants")} subtitle={t("the laws follow from counting factors; check each law numerically, including zero, negative and fractional powers", "les lois découlent du décompte des facteurs; vérifie chaque loi numériquement, y compris avec des exposants nuls, négatifs et fractionnaires")}>
+      <Row><Segmented label={t("law:", "loi :")} value={k} onChange={setK} options={LAWS.map((x, i) => ({ value: i, label: x.label }))} /></Row>
       <Row>
         <Slider label="a" value={a} min={2} max={9} step={1} onChange={setA} color={C.violet} />
         <Slider label="m" value={m} min={-3} max={4} step={1} onChange={setM} color={C.blue} />
         <Slider label="n" value={nn} min={k === 3 ? 1 : -3} max={4} step={1} onChange={setN} color={C.green} />
       </Row>
       <Readout tone="blue">
-        <MathText html={`\\(${L.law}\\). Here \\(${L.tex(a, m, nn)}=${a}^{${exp}}\\approx${n2(L.val(a, m, nn), 5)}\\). Working out each part directly gives \\(${n2(direct, 5)}\\) — the same. ${m === 0 ? "Note \\(a^0=1\\). " : ""}${m < 0 ? `Note \\(${a}^{${m}}=\\dfrac{1}{${a}^{${-m}}}\\). ` : ""}`} />
+        <MathText html={t(`\\(${L.law}\\). Here \\(${L.tex(a, m, nn)}=${a}^{${exp}}\\approx${n2(L.val(a, m, nn), 5)}\\). Working out each part directly gives \\(${n2(direct, 5)}\\) — the same. ${m === 0 ? "Note \\(a^0=1\\). " : ""}${m < 0 ? `Note \\(${a}^{${m}}=\\dfrac{1}{${a}^{${-m}}}\\). ` : ""}`, `\\(${L.law}\\). Ici \\(${L.tex(a, m, nn)}=${a}^{${exp}}\\approx${n2(L.val(a, m, nn), 5)}\\). Le calcul direct de chaque partie donne \\(${n2(direct, 5)}\\) — la même valeur. ${m === 0 ? "Remarque : \\(a^0=1\\). " : ""}${m < 0 ? `Remarque : \\(${a}^{${m}}=\\dfrac{1}{${a}^{${-m}}}\\). ` : ""}`)} />
       </Readout>
     </WidgetCard>
   );
@@ -59,21 +61,25 @@ export function IBExpLaws({ init = [0, 2, 3, 2] }: { init?: [number, number, num
 
 /* ---------------------------------------------------------------- 9.2 exponential graphs and e */
 
+// Props: init = [a, b, h, k] where h (init[2]) = HORIZONTAL shift and k (init[3]) = VERTICAL shift (y = a·b^(x − h) + k).
+// The French course writes horizontal c / vertical d, so in French the h slider is displayed as "c" and the k slider as
+// "d" (y = a·b^(x − c) + d); the state and props are unchanged.
 export function IBExpGraph({ init = [1, 2, 0, 0] }: { init?: [number, number, number, number] }) {
   const [a, setA] = useState(init[0]), [b, setB] = useState(init[1]), [h, setH] = useState(init[2]), [k, setK] = useState(init[3]);
   const f = (x: number) => a * b ** (x - h) + k, v: View = { xmin: -6, xmax: 6, ymin: -8, ymax: 12 };
   const y0 = f(0), grow = (a > 0) === (b > 1);
+  const t = useT(), fr = useLang() === "fr";
   return (
-    <WidgetCard title="Exponential graphs" subtitle="y = a·bˣ⁻ʰ + k: b > 1 grows, 0 < b < 1 decays; the horizontal asymptote is y = k">
+    <WidgetCard title={t("Exponential graphs", "Graphiques de fonctions exponentielles")} subtitle={t("y = a·bˣ⁻ʰ + k: b > 1 grows, 0 < b < 1 decays; the horizontal asymptote is y = k", "y = a·bˣ⁻ᶜ + d : si b > 1, croissance; si 0 < b < 1, décroissance; l'asymptote horizontale est y = d")}>
       <Row>
         <Slider label="a" value={a} min={-3} max={3} step={0.5} onChange={(x) => setA(x === 0 ? 0.5 : x)} color={C.violet} />
         <Slider label="b" value={b} min={0.25} max={4} step={0.25} onChange={(x) => setB(x === 1 ? 1.25 : x)} color={C.blue} />
       </Row>
       <Row>
-        <Slider label="h" value={h} min={-4} max={4} step={0.5} onChange={setH} color={C.green} />
-        <Slider label="k" value={k} min={-5} max={5} step={0.5} onChange={setK} color={C.amber} />
+        <Slider label={fr ? "c" : "h"} value={h} min={-4} max={4} step={0.5} onChange={setH} color={C.green} />
+        <Slider label={fr ? "d" : "k"} value={k} min={-5} max={5} step={0.5} onChange={setK} color={C.amber} />
       </Row>
-      <Plane view={v} label="Exponential graph" step={1} stepY={2}>
+      <Plane view={v} label={t("Exponential graph", "Graphique exponentiel")} step={1} stepY={2}>
         {(X, Y) => <>
           <path d={pathOf((x) => 2 ** x, v, X, Y)} fill="none" stroke="#cbd5e1" strokeWidth={2} />
           {hline(X, Y, v, k, C.red)}
@@ -82,7 +88,7 @@ export function IBExpGraph({ init = [1, 2, 0, 0] }: { init?: [number, number, nu
         </>}
       </Plane>
       <Readout tone="blue">
-        <MathText html={`\\(y=${n2(a)}\\cdot${n2(b)}^{x${sg(-h)}}${sg(k)}\\) (grey: \\(y=2^x\\)). Asymptote \\(y=${n2(k)}\\); y-intercept \\(${n2(y0, 3)}\\); range \\(y${a > 0 ? ">" : "<"}${n2(k)}\\). The graph ${grow ? "increases" : "decreases"} from left to right. ${b < 1 ? `Since \\(${n2(b)}^{x}=\\left(${n2(1 / b, 3)}\\right)^{-x}\\), a base below 1 reflects growth in the y-axis.` : ""}`} />
+        <MathText html={t(`\\(y=${n2(a)}\\cdot${n2(b)}^{x${sg(-h)}}${sg(k)}\\) (grey: \\(y=2^x\\)). Asymptote \\(y=${n2(k)}\\); y-intercept \\(${n2(y0, 3)}\\); range \\(y${a > 0 ? ">" : "<"}${n2(k)}\\). The graph ${grow ? "increases" : "decreases"} from left to right. ${b < 1 ? `Since \\(${n2(b)}^{x}=\\left(${n2(1 / b, 3)}\\right)^{-x}\\), a base below 1 reflects growth in the y-axis.` : ""}`, `\\(y=${n2(a)}\\cdot${n2(b)}^{x${sg(-h)}}${sg(k)}\\) (en gris : \\(y=2^x\\)). Asymptote \\(y=${n2(k)}\\); ordonnée à l'origine \\(${n2(y0, 3)}\\); ensemble image \\(y${a > 0 ? ">" : "<"}${n2(k)}\\). Le graphique est ${grow ? "croissant" : "décroissant"} de gauche à droite. ${b < 1 ? `Puisque \\(${n2(b)}^{x}=\\left(${n2(1 / b, 3)}\\right)^{-x}\\), une base inférieure à 1 correspond à une croissance réfléchie par rapport à l'axe des y.` : ""}`)} />
       </Readout>
     </WidgetCard>
   );
@@ -92,10 +98,11 @@ export function IBCompound({ init = [1, 100] }: { init?: [number, number] }) {
   const [r, setR] = useState(init[0]), [n, setN] = useState(init[1]);
   const A = (1 + r / n) ** n, E = Math.exp(r);
   const ns = [1, 2, 4, 12, 52, 365, 10000];
+  const t = useT();
   return (
-    <WidgetCard title="Compounding more often → e" subtitle="1 dollar at rate r for one year, compounded n times: (1 + r/n)ⁿ → eʳ as n → ∞">
+    <WidgetCard title={t("Compounding more often → e", "Capitalisation plus fréquente → e")} subtitle={t("1 dollar at rate r for one year, compounded n times: (1 + r/n)ⁿ → eʳ as n → ∞", "1 dollar au taux r pendant un an, capitalisé n fois : (1 + r/n)ⁿ → eʳ quand n → ∞")}>
       <Row>
-        <Slider label="rate r" value={r} min={0.1} max={2} step={0.1} onChange={setR} color={C.violet} />
+        <Slider label={t("rate r", "taux r")} value={r} min={0.1} max={2} step={0.1} onChange={setR} color={C.violet} />
         <Slider label="n" value={n} min={1} max={1000} step={1} onChange={setN} color={C.blue} />
       </Row>
       <svg viewBox="0 0 520 210" style={{ width: "100%", maxWidth: 560, display: "block", margin: "0 auto" }}>
@@ -110,7 +117,7 @@ export function IBCompound({ init = [1, 100] }: { init?: [number, number] }) {
         <line x1={10} x2={510} y1={180 - (E / (E * 1.08)) * 160} y2={180 - (E / (E * 1.08)) * 160} stroke={C.red} strokeDasharray="7 5" strokeWidth={2} />
       </svg>
       <Readout tone="blue">
-        <MathText html={`\\(\\left(1+\\tfrac{${n2(r)}}{${n}}\\right)^{${n}}=${n2(A, 6)}\\), while \\(e^{${n2(r)}}=${n2(E, 6)}\\) (red line). With \\(r=1\\) the limit is \\(e\\approx2.71828\\). Continuous growth: \\(A=Pe^{rt}\\).`} />
+        <MathText html={t(`\\(\\left(1+\\tfrac{${n2(r)}}{${n}}\\right)^{${n}}=${n2(A, 6)}\\), while \\(e^{${n2(r)}}=${n2(E, 6)}\\) (red line). With \\(r=1\\) the limit is \\(e\\approx2.71828\\). Continuous growth: \\(A=Pe^{rt}\\).`, `\\(\\left(1+\\tfrac{${n2(r)}}{${n}}\\right)^{${n}}=${n2(A, 6)}\\), alors que \\(e^{${n2(r)}}=${n2(E, 6)}\\) (droite rouge). Avec \\(r=1\\), la limite est \\(e\\approx2.71828\\). Croissance continue : \\(A=Pe^{rt}\\).`)} />
       </Readout>
     </WidgetCard>
   );
@@ -118,20 +125,24 @@ export function IBCompound({ init = [1, 100] }: { init?: [number, number] }) {
 
 /* ---------------------------------------------------------------- 9.3 logarithms as inverses */
 
+// Props: init = [b, h, k] where h (init[1]) = HORIZONTAL shift and k (init[2]) = VERTICAL shift (y = log_b(x − h) + k).
+// The French course writes horizontal c / vertical d, so in French the h slider is displayed as "c" and the k slider as
+// "d" (y = log_b(x − c) + d); the state and props are unchanged.
 export function IBLogGraph({ init = [2, 0, 0] }: { init?: [number, number, number] }) {
   const [b, setB] = useState(init[0]), [h, setH] = useState(init[1]), [k, setK] = useState(init[2]);
   const [x0, setX0] = useState(4);
   const lg = (x: number) => Math.log(x) / Math.log(b), f = (x: number) => lg(x - h) + k, v: View = { xmin: -5, xmax: 9, ymin: -5, ymax: 9 };
   const y0 = f(x0);
+  const t = useT(), fr = useLang() === "fr";
   return (
-    <WidgetCard title="Logarithmic graphs" subtitle="y = log_b x is the reflection of y = bˣ in y = x; y = log_b(x − h) + k has the vertical asymptote x = h">
+    <WidgetCard title={t("Logarithmic graphs", "Graphiques de fonctions logarithmiques")} subtitle={t("y = log_b x is the reflection of y = bˣ in y = x; y = log_b(x − h) + k has the vertical asymptote x = h", "y = log_b x est la réflexion de y = bˣ par rapport à y = x; y = log_b(x − c) + d a l'asymptote verticale x = c")}>
       <Row>
-        <Slider label="base b" value={b} min={1.5} max={10} step={0.5} onChange={setB} color={C.blue} />
-        <Slider label="h" value={h} min={-3} max={3} step={0.5} onChange={setH} color={C.green} />
-        <Slider label="k" value={k} min={-3} max={3} step={0.5} onChange={setK} color={C.amber} />
+        <Slider label={t("base b", "base b")} value={b} min={1.5} max={10} step={0.5} onChange={setB} color={C.blue} />
+        <Slider label={fr ? "c" : "h"} value={h} min={-3} max={3} step={0.5} onChange={setH} color={C.green} />
+        <Slider label={fr ? "d" : "k"} value={k} min={-3} max={3} step={0.5} onChange={setK} color={C.amber} />
       </Row>
       <Row><Slider label="x" value={x0} min={h + 0.25} max={9} step={0.25} onChange={setX0} color={C.violet} /></Row>
-      <Plane view={v} label="Logarithm graph" step={1} stepY={1}>
+      <Plane view={v} label={t("Logarithm graph", "Graphique logarithmique")} step={1} stepY={1}>
         {(X, Y) => <>
           <line x1={X(-5)} y1={Y(-5)} x2={X(9)} y2={Y(9)} stroke="#cbd5e1" strokeWidth={1.6} strokeDasharray="4 4" />
           <path d={pathOf((x) => b ** x, v, X, Y)} fill="none" stroke={C.green} strokeWidth={2} strokeDasharray="7 4" />
@@ -141,7 +152,7 @@ export function IBLogGraph({ init = [2, 0, 0] }: { init?: [number, number, numbe
         </>}
       </Plane>
       <Readout tone="blue">
-        <MathText html={`\\(y=\\log_{${n2(b)}}(x${sg(-h)})${sg(k)}\\) (violet); green dashed: \\(y=${n2(b)}^x\\). Domain \\(x>${n2(h)}\\), asymptote \\(x=${n2(h)}\\), x-intercept \\(x=${n2(h + b ** -k, 3)}\\). At \\(x=${n2(x0)}\\): \\(${n2(b)}^{${n2(y0 - k, 4)}}=${n2(x0 - h, 4)}\\), so \\(y=${n2(y0, 4)}\\).`} />
+        <MathText html={t(`\\(y=\\log_{${n2(b)}}(x${sg(-h)})${sg(k)}\\) (violet); green dashed: \\(y=${n2(b)}^x\\). Domain \\(x>${n2(h)}\\), asymptote \\(x=${n2(h)}\\), x-intercept \\(x=${n2(h + b ** -k, 3)}\\). At \\(x=${n2(x0)}\\): \\(${n2(b)}^{${n2(y0 - k, 4)}}=${n2(x0 - h, 4)}\\), so \\(y=${n2(y0, 4)}\\).`, `\\(y=\\log_{${n2(b)}}(x${sg(-h)})${sg(k)}\\) (violet); en vert pointillé : \\(y=${n2(b)}^x\\). Domaine \\(x>${n2(h)}\\), asymptote \\(x=${n2(h)}\\), abscisse à l'origine \\(x=${n2(h + b ** -k, 3)}\\). En \\(x=${n2(x0)}\\) : \\(${n2(b)}^{${n2(y0 - k, 4)}}=${n2(x0 - h, 4)}\\), donc \\(y=${n2(y0, 4)}\\).`)} />
       </Readout>
     </WidgetCard>
   );
@@ -157,10 +168,11 @@ export function IBLogLaws({ init = [0, 8, 4] }: { init?: [number, number, number
     : law === 1 ? [`\\log_{${bt}}\\left(\\tfrac{${m}}{${n}}\\right)`, lg(m / n), `\\log_{${bt}}${m}-\\log_{${bt}}${n}`, lg(m) - lg(n)]
     : law === 2 ? [`\\log_{${bt}}(${m}^{${n}})`, lg(m ** n), `${n}\\log_{${bt}}${m}`, n * lg(m)]
     : [`\\log_{${bt}}${m}`, lg(m), `\\dfrac{\\ln ${m}}{\\ln ${bt}}`, Math.log(m) / Math.log(B)];
+  const t = useT();
   return (
-    <WidgetCard title="Laws of logarithms" subtitle="logs turn products into sums, quotients into differences and powers into multiples; change of base lets a calculator evaluate any log">
-      <Row><Segmented label="law:" value={law} onChange={setLaw} options={["product", "quotient", "power", "change of base"].map((t, i) => ({ value: i, label: t }))} /></Row>
-      <Row><Segmented label="base:" value={base} onChange={setBase} options={["2", "10", "e"].map((t, i) => ({ value: i, label: t }))} /></Row>
+    <WidgetCard title={t("Laws of logarithms", "Lois des logarithmes")} subtitle={t("logs turn products into sums, quotients into differences and powers into multiples; change of base lets a calculator evaluate any log", "les logarithmes transforment les produits en sommes, les quotients en différences et les puissances en multiples; le changement de base permet d'évaluer tout logarithme à la calculatrice")}>
+      <Row><Segmented label={t("law:", "loi :")} value={law} onChange={setLaw} options={[t("product", "produit"), t("quotient", "quotient"), t("power", "puissance"), t("change of base", "changement de base")].map((s, i) => ({ value: i, label: s }))} /></Row>
+      <Row><Segmented label={t("base:", "base :")} value={base} onChange={setBase} options={["2", "10", "e"].map((s, i) => ({ value: i, label: s }))} /></Row>
       <Row>
         <Slider label="m" value={m} min={1} max={64} step={1} onChange={setM} color={C.blue} />
         <Slider label="n" value={n} min={1} max={law === 2 ? 6 : 32} step={1} onChange={setN} color={C.green} />
@@ -170,7 +182,7 @@ export function IBLogLaws({ init = [0, 8, 4] }: { init?: [number, number, number
         <rect x={20} y={52} width={Math.max(2, Math.min(480, Math.abs(L[3] as number) * 40))} height={22} fill={C.amber} />
       </svg>
       <Readout tone="blue">
-        <MathText html={`Left (violet): \\(${L[0]}=${n2(L[1] as number, 5)}\\). Right (amber): \\(${L[2]}=${n2(L[3] as number, 5)}\\). The bars match for every choice — that is the law.`} />
+        <MathText html={t(`Left (violet): \\(${L[0]}=${n2(L[1] as number, 5)}\\). Right (amber): \\(${L[2]}=${n2(L[3] as number, 5)}\\). The bars match for every choice — that is the law.`, `Membre de gauche (violet) : \\(${L[0]}=${n2(L[1] as number, 5)}\\). Membre de droite (ambre) : \\(${L[2]}=${n2(L[3] as number, 5)}\\). Les barres sont égales pour tous les choix — c'est la loi.`)} />
       </Readout>
     </WidgetCard>
   );
@@ -181,22 +193,23 @@ export function IBLogLaws({ init = [0, 8, 4] }: { init?: [number, number, number
 export function IBExpSolve({ init = [3, 20] }: { init?: [number, number] }) {
   const [a, setA] = useState(init[0]), [c, setC] = useState(init[1]);
   const x = Math.log(c) / Math.log(a), v: View = { xmin: -2, xmax: 6, ymin: -5, ymax: 60 };
+  const t = useT();
   return (
-    <WidgetCard title="Solving aˣ = c" subtitle="the solution is where y = aˣ meets y = c; taking logs gives x = log c ÷ log a">
+    <WidgetCard title={t("Solving aˣ = c", "Résolution de aˣ = c")} subtitle={t("the solution is where y = aˣ meets y = c; taking logs gives x = log c ÷ log a", "la solution est là où y = aˣ rencontre y = c; en prenant le logarithme, on obtient x = log c ÷ log a")}>
       <Row>
         <Slider label="a" value={a} min={1.5} max={6} step={0.5} onChange={setA} color={C.violet} />
         <Slider label="c" value={c} min={2} max={55} step={1} onChange={setC} color={C.amber} />
       </Row>
-      <Plane view={v} label="Intersection" step={1} stepY={10}>
+      <Plane view={v} label={t("Intersection", "Intersection")} step={1} stepY={10}>
         {(X, Y) => <>
-          <path d={pathOf((t) => a ** t, v, X, Y)} fill="none" stroke={C.violet} strokeWidth={3} />
+          <path d={pathOf((u) => a ** u, v, X, Y)} fill="none" stroke={C.violet} strokeWidth={3} />
           {hline(X, Y, v, c, C.amber)}
           {x <= v.xmax && <line x1={X(x)} y1={Y(c)} x2={X(x)} y2={Y(0)} stroke={C.red} strokeWidth={1.6} strokeDasharray="5 4" />}
           {x <= v.xmax && dot(X, Y, x, c, C.red, `(${n2(x, 3)}, ${c})`, "s")}
         </>}
       </Plane>
       <Readout tone="blue">
-        <MathText html={`\\(${n2(a)}^x=${c}\\Rightarrow x\\log ${n2(a)}=\\log ${c}\\Rightarrow x=\\dfrac{\\log ${c}}{\\log ${n2(a)}}=\\dfrac{\\ln ${c}}{\\ln ${n2(a)}}\\approx${n2(x, 4)}\\). Check: \\(${n2(a)}^{${n2(x, 4)}}\\approx${n2(a ** x, 3)}\\).`} />
+        <MathText html={`\\(${n2(a)}^x=${c}\\Rightarrow x\\log ${n2(a)}=\\log ${c}\\Rightarrow x=\\dfrac{\\log ${c}}{\\log ${n2(a)}}=\\dfrac{\\ln ${c}}{\\ln ${n2(a)}}\\approx${n2(x, 4)}\\). ${t("Check:", "Vérification :")} \\(${n2(a)}^{${n2(x, 4)}}\\approx${n2(a ** x, 3)}\\).`} />
       </Readout>
     </WidgetCard>
   );
@@ -209,11 +222,12 @@ export function IBExpDeriv({ init = [0, 1] }: { init?: [number, number] }) {
   const isLn = k === 1, f = isLn ? Math.log : Math.exp, fp = isLn ? (x: number) => 1 / x : Math.exp;
   const xx = isLn && x0 <= 0 ? 0.25 : x0, y0 = f(xx), m = fp(xx);
   const v: View = isLn ? { xmin: -1, xmax: 7, ymin: -4, ymax: 4 } : { xmin: -4, xmax: 3, ymin: -2, ymax: 12 };
+  const t = useT();
   return (
-    <WidgetCard title="Gradients of eˣ and ln x" subtitle="d/dx eˣ = eˣ (the gradient equals the height); d/dx ln x = 1/x">
+    <WidgetCard title={t("Gradients of eˣ and ln x", "Pentes de eˣ et de ln x")} subtitle={t("d/dx eˣ = eˣ (the gradient equals the height); d/dx ln x = 1/x", "d/dx eˣ = eˣ (la pente est égale à la hauteur); d/dx ln x = 1/x")}>
       <Row><Segmented label="f(x) =" value={k} onChange={setK} options={[{ value: 0, label: "eˣ" }, { value: 1, label: "ln x" }]} /></Row>
       <Row><Slider label="x" value={xx} min={isLn ? 0.25 : -3} max={isLn ? 6 : 2.5} step={0.25} onChange={setX0} color={C.blue} /></Row>
-      <Plane view={v} label="Tangent" step={1} stepY={isLn ? 1 : 2}>
+      <Plane view={v} label={t("Tangent", "Tangente")} step={1} stepY={isLn ? 1 : 2}>
         {(X, Y) => <>
           <path d={pathOf(f, v, X, Y, isLn ? 0.001 : v.xmin, v.xmax)} fill="none" stroke={C.violet} strokeWidth={3} />
           <path d={pathOf(fp, v, X, Y, isLn ? 0.05 : v.xmin, v.xmax)} fill="none" stroke={C.amber} strokeWidth={2} strokeDasharray="7 4" />
@@ -222,7 +236,7 @@ export function IBExpDeriv({ init = [0, 1] }: { init?: [number, number] }) {
         </>}
       </Plane>
       <Readout tone="blue">
-        <MathText html={`\\(f(x)=${isLn ? "\\ln x" : "e^x"}\\) (violet), \\(f'(x)=${isLn ? "\\tfrac1x" : "e^x"}\\) (amber dashed${isLn ? "" : " — the same curve"}). At \\(x=${n2(xx)}\\): gradient \\(${n2(m, 4)}\\); tangent \\(y=${n2(m, 3)}x${sg(y0 - m * xx)}\\). ${isLn ? "The gradient shrinks as x grows but never reaches 0." : "Every tangent's gradient equals the y-value of its point."}`} />
+        <MathText html={t(`\\(f(x)=${isLn ? "\\ln x" : "e^x"}\\) (violet), \\(f'(x)=${isLn ? "\\tfrac1x" : "e^x"}\\) (amber dashed${isLn ? "" : " — the same curve"}). At \\(x=${n2(xx)}\\): gradient \\(${n2(m, 4)}\\); tangent \\(y=${n2(m, 3)}x${sg(y0 - m * xx)}\\). ${isLn ? "The gradient shrinks as x grows but never reaches 0." : "Every tangent's gradient equals the y-value of its point."}`, `\\(f(x)=${isLn ? "\\ln x" : "e^x"}\\) (violet), \\(f'(x)=${isLn ? "\\tfrac1x" : "e^x"}\\) (ambre pointillé${isLn ? "" : " — la même courbe"}). En \\(x=${n2(xx)}\\) : pente \\(${n2(m, 4)}\\); tangente \\(y=${n2(m, 3)}x${sg(y0 - m * xx)}\\). ${isLn ? "La pente diminue quand x augmente, mais n'atteint jamais 0." : "La pente de chaque tangente est égale à l'ordonnée de son point."}`)} />
       </Readout>
     </WidgetCard>
   );

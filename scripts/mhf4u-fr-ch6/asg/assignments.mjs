@@ -1,0 +1,117 @@
+// MHF4U-FR chapitre 6 — devoirs (miroir de ../../mhf4u-ch6/asg/assignments.mjs) : 12 questions chacun —
+// Connaissance et compréhension 1-3, Habiletés de la pensée 4-5, Communication 6-7, Mise en application 8-10,
+// Niveau difficile 11-12. [[clé|légende]] dans une ligne est remplacé par une figure (SVG téléversé) à la publication.
+// NOTATION FRANÇAISE (6.3) : y = log₂(x − c) + d et y = a log x + d (c horizontale, d verticale).
+import { planeDoc, P } from "../bank/fig.mjs";
+import { asgId } from "../../mhf4u-fr/common.mjs";
+
+const grid = (view, step) => planeDoc({ view, ...(step ? { step } : {}) });
+const lg = (b) => (x) => Math.log(x) / Math.log(b);
+const YX = { m: 1, b: 0, color: "gray", dash: true };
+
+export const ASSIGNMENTS = [
+  { code: "6.1", id: asgId(6, 1), title: "Devoir 6.1 — La fonction exponentielle et son inverse", figs: {
+      tab: grid({ xmin: -4, xmax: 10, ymin: -4, ymax: 10 }, { x: 1, y: 1 }),
+      refl: planeDoc({ view: { xmin: -3, xmax: 8, ymin: -3, ymax: 8 }, lines: [YX], curves: [{ f: (x) => 2.5 ** x, color: "blue" }], points: [P(0, 1), P(1, 2.5), P(2, 6.25)], step: { x: 1, y: 1 } }),
+      inv: planeDoc({ view: { xmin: -1, xmax: 30, ymin: -2, ymax: 4 }, curves: [{ f: lg(3), a: 0.02, color: "violet" }], points: [P(3, 1, false), P(9, 2, false), P(27, 3, false)], step: { x: 3, y: 1 } }),
+      cool: planeDoc({ view: { xmin: 0, xmax: 40, ymin: 0, ymax: 90 }, curves: [{ f: (t) => 80 * 0.9 ** t, a: 0, color: "blue" }], step: { x: 5, y: 10 }, xlabel: "t (min)", ylabel: "D (°C)" }),
+      hard: grid({ xmin: -6, xmax: 8, ymin: -6, ymax: 8 }, { x: 1, y: 1 }) }, lines: [
+    "Connaissance et compréhension",
+    String.raw`1. Construis une table de valeurs de \(y=4^x\) pour \(x=-2,-1,-\tfrac12,0,\tfrac12,1\). Écris la table de son inverse et trace les deux fonctions ainsi que la droite \(y=x\) dans le quadrillage. [[tab|Quadrillage pour la question 1]]`,
+    String.raw`2. Donne le domaine, l'image, le point d'intersection avec un axe, l'asymptote et le sens de variation (croissante ou décroissante) de \(y=\left(\tfrac25\right)^x\) et de son inverse.`,
+    String.raw`3. Le graphique de \(y=2.5^x\) est illustré avec trois points indiqués. Écris les trois points correspondants sur son inverse et esquisse l'inverse dans le même plan. [[refl|Graphique pour la question 3]]`,
+    "Habiletés de la pensée",
+    String.raw`4. Trouve l'inverse de \(y=4^x-6\) en isolant la puissance. Donne son domaine, son image et son asymptote, et trouve ses deux points d'intersection avec les axes (l'un peut être approximatif).`,
+    String.raw`5. \(y=b^x\) passe par \(\left(-\tfrac12,\ \tfrac13\right)\). Trouve \(b\), puis les points de l'inverse où \(x=27\) et où \(x=\tfrac1{81}\).`,
+    "Communication",
+    String.raw`6. Explique pourquoi l'inverse de toute fonction exponentielle \(y=b^x\) (\(b>0\), \(b\ne1\)) est une fonction, alors que l'inverse de \(y=x^2\) ne l'est pas.`,
+    String.raw`7. Un camarade affirme que l'inverse de \(y=3^x\) est \(y=3^{-x}\). Explique l'erreur à l'aide d'un point sur chaque graphique.`,
+    "Mise en application",
+    String.raw`8. Le graphique montre l'inverse de \(y=3^x\). Utilise-le pour estimer l'exposant \(y\) tel que \(3^y=15\), et vérifie ton estimation à la calculatrice. [[inv|Graphique pour la question 8]]`,
+    String.raw`9. La différence de température entre une tasse de thé et la pièce est de \(D=80(0.9)^t\) °C après \(t\) minutes. (a) Écris l'inverse en exprimant \(0.9^t\) en fonction de \(D\). (b) Explique ce que représentent la valeur d'entrée et la valeur de sortie de l'inverse. (c) Utilise le graphique pour estimer quand la différence est de 20 °C. [[cool|Graphique pour la question 9]]`,
+    String.raw`10. Un compte d'épargne croît selon \(A=1000(1.05)^n\) dollars après \(n\) années. Utilise une table de valeurs de l'inverse (avec \(A\) comme valeur d'entrée) pour estimer le temps qu'il faut pour que l'argent double.`,
+    "Niveau difficile",
+    String.raw`11. Pour \(f(x)=-2\cdot3^x+6\) : (a) écris l'inverse en isolant la puissance; (b) donne son domaine, son image et son asymptote; (c) trouve ses points d'intersection exacts avec les axes; (d) esquisse \(f\), son inverse et \(y=x\) dans le quadrillage. [[hard|Quadrillage pour la question 11]]`,
+    String.raw`12. (a) Montre que \(y=\left(\sqrt[3]{3}\right)^x\) et son inverse se rencontrent en \((3,3)\). (b) Démontre qu'une fonction croissante et son inverse ne peuvent se rencontrer que sur la droite \(y=x\). (c) Explique pourquoi \(y=2^x\) et son inverse ne se rencontrent pas du tout.`,
+  ] },
+  { code: "6.2", id: asgId(6, 2), title: "Devoir 6.2 — Logarithmes", figs: {
+      g: planeDoc({ view: { xmin: -1, xmax: 28, ymin: -3, ymax: 4 }, curves: [{ f: lg(3), a: 0.01, color: "violet" }], points: [P(1, 0), P(3, 1), P(9, 2), P(27, 3)], step: { x: 3, y: 1 } }) }, lines: [
+    "Connaissance et compréhension",
+    String.raw`1. Écris sous forme logarithmique : \(6^3=216\), \(10^{-4}=0.0001\), \(16^{1/4}=2\).`,
+    String.raw`2. Écris sous forme exponentielle : \(\log_7 49=2\), \(\log_2\frac1{32}=-5\), \(\log_{25}5=\frac12\).`,
+    String.raw`3. Évalue de façon exacte : \(\log_4 64\), \(\log_3\frac19\), \(\log_5\sqrt5\), \(\log 0.001\).`,
+    "Habiletés de la pensée",
+    "4. Le graphique montre y = log₃ x. Utilise-le pour expliquer pourquoi log₃ 20 est entre 2 et 3, puis estime cette valeur et vérifie-la à la calculatrice. [[g|y = log₃ x]]",
+    String.raw`5. Évalue \(\log_8 32\) et \(\log_{1/9}27\) de façon exacte, en montrant comment tu écris chaque base et chaque argument comme une puissance d'un même nombre.`,
+    "Communication",
+    String.raw`6. Explique pourquoi \(\log_b 1=0\) et \(\log_b b=1\) pour toute base \(b\) permise.`,
+    String.raw`7. Explique pourquoi \(\log_2(-4)\) et \(\log_2 0\) ne sont pas définis.`,
+    "Mise en application",
+    String.raw`8. Trouve \(x\) : (a) \(\log_x 125=3\) (b) \(\log_2 x=-4\) (c) \(\log_3(x+1)=2\).`,
+    String.raw`9. Évalue \(2^{\log_2 9}+\log_6 6^{-3}+\log_{11}1\).`,
+    String.raw`10. Entre quels deux entiers se trouve \(\log 7500\)? Évalue-le au millième près et vérifie en calculant \(10\) élevé à cette puissance.`,
+    "Niveau difficile",
+    String.raw`11. Évalue \(\log_3\left(\log_2\left(\log_4 2^{16}\right)\right)\).`,
+    String.raw`12. Trouve \(x\) si \(\log_x\frac1{27}=-\frac34\), et vérifie ta réponse.`,
+  ] },
+  { code: "6.3", id: asgId(6, 3), title: "Devoir 6.3 — Transformations des fonctions logarithmiques", figs: {
+      t: planeDoc({ view: { xmin: -3, xmax: 9, ymin: -5, ymax: 3 }, vlines: [{ x: -1, color: "red", dash: true }], curves: [{ f: (x) => lg(2)(x + 1) - 2, a: -0.995, color: "violet" }], points: [P(0, -2), P(1, -1), P(3, 0), P(7, 1)], step: { x: 1, y: 1 } }) }, lines: [
+    "Connaissance et compréhension",
+    String.raw`1. Donne le domaine, l'image, l'abscisse à l'origine et l'asymptote de \(y=\log_4x\).`,
+    String.raw`2. Donne l'asymptote et le domaine de \(y=\log(x-6)+2\) et de \(y=\log_3(12-3x)\).`,
+    String.raw`3. Décris les transformations de \(y=-3\log_2(x+5)+1\).`,
+    "Habiletés de la pensée",
+    "4. Trouve l'équation du graphique illustré, sous la forme y = log₂(x − c) + d. Vérifie-la en deux points. [[t|Un logarithme transformé]]",
+    String.raw`5. \(y=a\log x+d\) passe par \((1,4)\) et \((100,-2)\). Trouve \(a\) et \(d\).`,
+    "Communication",
+    String.raw`6. Explique pourquoi l'asymptote de \(\log(2x-8)\) est en \(x=4\), et non en \(x=8\).`,
+    String.raw`7. Explique le lien entre le graphique de \(y=\log_2(-x)\) et celui de \(y=\log_2x\), et pourquoi son domaine est \(x\lt0\).`,
+    "Mise en application",
+    String.raw`8. Transforme les points \(\left(\frac12,-1\right)\), \((1,0)\), \((2,1)\), \((8,3)\) de \(y=\log_2x\) selon \(y=2\log_2(x-3)+1\), et esquisse le graphique.`,
+    String.raw`9. Trouve les deux points d'intersection de \(y=\log_3(x+9)-1\) avec les axes.`,
+    String.raw`10. Trouve l'inverse de \(y=\log_5(x-2)+4\) sous forme de fonction exponentielle.`,
+    "Niveau difficile",
+    String.raw`11. Montre que \(y=\log_2(8x)\) est une translation verticale de \(y=\log_2x\) en vérifiant trois points, et donne la translation.`,
+    String.raw`12. Pour \(y=-\frac12\log_3\big(3(x-1)\big)+2\), trouve l'asymptote, le domaine, l'abscisse à l'origine et l'image de \((9,2)\).`,
+  ] },
+  { code: "6.4", id: asgId(6, 4), title: "Devoir 6.4 — La loi de la puissance des logarithmes", figs: {
+      e: planeDoc({ view: { xmin: -1, xmax: 7, ymin: -10, ymax: 140 }, lines: [{ m: 0, b: 100, color: "blue", dash: true }], curves: [{ f: (x) => 2.5 ** x, color: "violet" }], step: { x: 1, y: 20 } }) }, lines: [
+    "Connaissance et compréhension",
+    String.raw`1. Évalue : \(\log_2\left(4^7\right)\), \(\log\sqrt[3]{100}\), \(\log_3\left(27^{-2}\right)\).`,
+    String.raw`2. Évalue au dix-millième près : \(\log_6 50\), \(\log_{0.4}10\).`,
+    String.raw`3. Résous au millième près : \(4^x=75\).`,
+    "Habiletés de la pensée",
+    String.raw`4. Démontre la loi de la puissance \(\log_b(x^n)=n\log_bx\) à partir des lois des exposants.`,
+    "5. Le graphique montre y = 2.5ˣ et y = 100. Estime la solution de 2.5ˣ = 100 à partir du graphique, puis résous de façon exacte. [[e|y = 2.5ˣ et y = 100]]",
+    "Communication",
+    String.raw`6. Explique la différence entre \(\log x^2\) et \((\log x)^2\), à l'aide d'un exemple numérique.`,
+    String.raw`7. Explique pourquoi le temps de doublement ne dépend pas du montant de départ.`,
+    "Mise en application",
+    String.raw`8. Résous \(3\cdot1.08^t=15\) au centième près.`,
+    "9. La quantité d'un médicament diminue de 18 % chaque heure. Trouve sa demi-vie au centième près.",
+    "10. Une ville de 12 000 habitants croît de 2.5 % par année. Quand atteindra-t-elle 20 000 habitants?",
+    "Niveau difficile",
+    String.raw`11. Résous \(5^{x}=3^{x+2}\) de façon exacte et au millième près.`,
+    String.raw`12. Combien de chiffres \(6^{100}\) comporte-t-il? Lequel est le plus grand, \(6^{100}\) ou \(10^{77}\)?`,
+  ] },
+  { code: "6.5", id: asgId(6, 5), title: "Devoir 6.5 — Échelles logarithmiques", figs: {
+      s: planeDoc({ view: { xmin: -0.5, xmax: 14.5, ymin: -1, ymax: 1.5 }, points: [{ x: 2.8, y: 0, label: "boisson gazeuse", color: "red" }, { x: 6.5, y: 0, label: "lait", color: "blue" }, { x: 9.4, y: 0, label: "savon", color: "violet" }], step: { x: 1, y: 1 } }) }, lines: [
+    "Connaissance et compréhension",
+    String.raw`1. Trouve le pH lorsque \([\text{H}^+]=4.0\times10^{-6}\) mol/L.`,
+    String.raw`2. Trouve \([\text{H}^+]\) pour un pH de \(10.3\).`,
+    String.raw`3. Trouve le niveau sonore d'un son d'intensité \(10^{-5}\) W/m\(^2\) (\(I_0=10^{-12}\)).`,
+    "Habiletés de la pensée",
+    "4. L'échelle montre une boisson gazeuse (pH 2.8), du lait (pH 6.5) et du savon (pH 9.4). Combien de fois la boisson gazeuse est-elle plus acide que le lait? Que le savon? [[s|Une échelle de pH]]",
+    "5. Un séisme est 300 fois plus intense qu'un séisme de magnitude 4.2. Trouve sa magnitude.",
+    "Communication",
+    "6. Explique pourquoi on ne peut pas simplement additionner les décibels lorsque deux sources sonores jouent ensemble.",
+    "7. Explique pourquoi des pas égaux sur une échelle logarithmique représentent des rapports égaux.",
+    "Mise en application",
+    "8. Un concert à 108 dB est combien de fois plus intense qu'une conversation à 60 dB?",
+    "9. Quel niveau sonore produisent ensemble 4 machines identiques de 75 dB?",
+    "10. Deux séismes diffèrent de 2.4 en magnitude. Combien de fois le plus fort est-il plus intense?",
+    "Niveau difficile",
+    "11. La [H⁺] d'une solution est divisée par 40. De combien son pH change-t-il? Montre ton raisonnement.",
+    String.raw`12. Magnitude des étoiles : \(m_1-m_2=-2.5\log\frac{b_1}{b_2}\). Le Soleil a une magnitude de \(-26.7\) et la pleine Lune, de \(-12.7\). Combien de fois le Soleil est-il plus brillant?`,
+  ] },
+];

@@ -5,6 +5,7 @@
 // Curves are drawn piece by piece between vertical asymptotes so no false vertical line joins the branches.
 
 import { useState } from "react";
+import { useT } from "@/lib/lang";
 import { C, MathText, Readout, Row, Segmented, Slider, WidgetCard } from "./kit";
 import { Plane, r2, type View } from "./Systems";
 import { dot } from "./Quadratics";
@@ -44,14 +45,15 @@ export function ReciprocalLinear({ init = { k: 2, c: -4 } }: { init?: { k: numbe
   const v: View = { xmin: -8, xmax: 8, ymin: -8, ymax: 8 };
   const inv = [(1 - c) / K, (-1 - c) / K];
   const near1 = [va - 0.1, va - 0.01, va + 0.01, va + 0.1];
+  const t = useT();
   return (
-    <WidgetCard title="Reciprocal of a linear function" subtitle="y = 1/f(x): the zero of f becomes a vertical asymptote; y = ±1 are invariant">
+    <WidgetCard title={t("Reciprocal of a linear function", "Réciproque d'une fonction affine")} subtitle={t("y = 1/f(x): the zero of f becomes a vertical asymptote; y = ±1 are invariant", "y = 1/f(x) : le zéro de f devient une asymptote verticale; les points où y = ±1 sont invariants")}>
       <Row gap={10}>
-        <Slider label="slope k" value={k} min={-4} max={4} step={0.5} onChange={(x) => setK(x === 0 ? 0.5 : x)} color={C.blue} />
-        <Slider label="intercept c" value={c} min={-8} max={8} onChange={setC} color={C.green} />
+        <Slider label={t("slope k", "pente k")} value={k} min={-4} max={4} step={0.5} onChange={(x) => setK(x === 0 ? 0.5 : x)} color={C.blue} />
+        <Slider label={t("intercept c", "ordonnée à l'origine c")} value={c} min={-8} max={8} onChange={setC} color={C.green} />
       </Row>
       <div style={{ textAlign: "center", fontSize: 18, margin: "6px 0" }}><MathText html={`\\(f(x)=${lin(K, c)}\\qquad g(x)=\\dfrac{1}{${lin(K, c)}}\\)`} /></div>
-      <Plane view={v} label="Reciprocal of a linear function" step={1} stepY={1}>
+      <Plane view={v} label={t("Reciprocal of a linear function", "Réciproque d'une fonction affine")} step={1} stepY={1}>
         {(X, Y) => <>
           {hAsym(X, Y, v, 0, "h")}{vAsym(X, Y, v, va, "v")}
           <line x1={X(v.xmin)} y1={Y(f(v.xmin))} x2={X(v.xmax)} y2={Y(f(v.xmax))} stroke={C.blue} strokeWidth={2} />
@@ -69,8 +71,8 @@ export function ReciprocalLinear({ init = { k: 2, c: -4 } }: { init?: { k: numbe
         </table>
       </div>
       <Readout tone="green">
-        <MathText block html={`Vertical asymptote \\(x=${r2(va)}\\) (where \\(f(x)=0\\)); horizontal asymptote \\(y=0\\). Domain \\(x\\ne${r2(va)}\\), range \\(y\\ne0\\).`} />
-        <MathText block html={`Invariant points where \\(f(x)=\\pm1\\): \\((${r2(inv[0])},1)\\) and \\((${r2(inv[1])},-1)\\). Since \\(f\\) is ${K > 0 ? "increasing" : "decreasing"}, \\(g\\) is ${K > 0 ? "decreasing" : "increasing"} on each branch. Near the asymptote \\(|g(x)|\\) grows without bound.`} />
+        <MathText block html={t(`Vertical asymptote \\(x=${r2(va)}\\) (where \\(f(x)=0\\)); horizontal asymptote \\(y=0\\). Domain \\(x\\ne${r2(va)}\\), range \\(y\\ne0\\).`, `Asymptote verticale \\(x=${r2(va)}\\) (là où \\(f(x)=0\\)); asymptote horizontale \\(y=0\\). Domaine \\(x\\ne${r2(va)}\\), ensemble image \\(y\\ne0\\).`)} />
+        <MathText block html={t(`Invariant points where \\(f(x)=\\pm1\\): \\((${r2(inv[0])},1)\\) and \\((${r2(inv[1])},-1)\\). Since \\(f\\) is ${K > 0 ? "increasing" : "decreasing"}, \\(g\\) is ${K > 0 ? "decreasing" : "increasing"} on each branch. Near the asymptote \\(|g(x)|\\) grows without bound.`, `Points invariants où \\(f(x)=\\pm1\\) : \\((${r2(inv[0])},1)\\) et \\((${r2(inv[1])},-1)\\). Puisque \\(f\\) est ${K > 0 ? "croissante" : "décroissante"}, \\(g\\) est ${K > 0 ? "décroissante" : "croissante"} sur chaque branche. Près de l'asymptote, \\(|g(x)|\\) augmente sans limite.`)} />
       </Readout>
     </WidgetCard>
   );
@@ -87,15 +89,16 @@ export function ReciprocalQuadratic({ init = { a: 1, h: 0, k: -4 } }: { init?: {
   const v: View = { xmin: -6, xmax: 6, ymin: -6, ymax: 6 };
   const kind = zeros.length === 2 ? "two" : zeros.length === 1 ? "one" : "none";
   const fTex = `${A === 1 ? "" : A === -1 ? "-" : r2(A)}${h === 0 ? "x" : `(x${h > 0 ? "-" : "+"}${r2(Math.abs(h))})`}^2${k === 0 ? "" : k > 0 ? `+${r2(k)}` : `-${r2(-k)}`}`;
+  const t = useT();
   return (
-    <WidgetCard title="Reciprocal of a quadratic function" subtitle="zeros of f become vertical asymptotes; the vertex of f becomes a turning point of 1/f">
+    <WidgetCard title={t("Reciprocal of a quadratic function", "Réciproque d'une fonction du second degré")} subtitle={t("zeros of f become vertical asymptotes; the vertex of f becomes a turning point of 1/f", "les zéros de f deviennent des asymptotes verticales; le sommet de f devient un point tournant de 1/f")}>
       <Row gap={10}>
         <Slider label="a" value={a} min={-2} max={2} step={0.25} onChange={(x) => setA(x === 0 ? 0.25 : x)} color={C.blue} />
-        <Slider label="vertex x (h)" value={h} min={-3} max={3} step={0.5} onChange={setH} color={C.green} />
-        <Slider label="vertex y (k)" value={k} min={-6} max={6} step={0.5} onChange={setK} color={C.green} />
+        <Slider label={t("vertex x (h)", "sommet x (h)")} value={h} min={-3} max={3} step={0.5} onChange={setH} color={C.green} />
+        <Slider label={t("vertex y (k)", "sommet y (k)")} value={k} min={-6} max={6} step={0.5} onChange={setK} color={C.green} />
       </Row>
       <div style={{ textAlign: "center", fontSize: 18, margin: "6px 0" }}><MathText html={`\\(f(x)=${fTex}\\qquad g(x)=\\dfrac1{f(x)}\\)`} /></div>
-      <Plane view={v} label="Reciprocal of a quadratic" step={1} stepY={1}>
+      <Plane view={v} label={t("Reciprocal of a quadratic", "Réciproque d'une fonction du second degré")} step={1} stepY={1}>
         {(X, Y) => {
           let df = ""; for (let i = 0; i <= 240; i++) { const x = v.xmin + (12 * i) / 240, y = f(x); if (y > 30 || y < -30) continue; df += `${df ? "L" : "M"}${X(x).toFixed(1)},${Y(y).toFixed(1)} `; }
           return <>
@@ -107,10 +110,10 @@ export function ReciprocalQuadratic({ init = { a: 1, h: 0, k: -4 } }: { init?: {
         }}
       </Plane>
       <Readout tone="green">
-        <MathText block html={kind === "two" ? `Two zeros of \\(f\\): vertical asymptotes \\(x=${r2(zeros[0])}\\) and \\(x=${r2(zeros[1])}\\). Three branches; the middle one has a ${A > 0 ? "maximum" : "minimum"} at \\((${r2(h)},\\,${r2(1 / k)})\\).`
-          : kind === "one" ? `One (double) zero: one vertical asymptote \\(x=${r2(h)}\\). Both branches lie on the ${A > 0 ? "positive" : "negative"} side, like \\(\\tfrac1{x^2}\\).`
-            : `No zeros: no vertical asymptote. The graph is one smooth hump with a ${A > 0 ? "maximum" : "minimum"} at \\((${r2(h)},\\,${r2(1 / k)})\\), and \\(y=0\\) is still the horizontal asymptote.`} />
-        <MathText block html={`Where \\(f\\) is increasing, \\(1/f\\) is decreasing (and vice versa); where \\(|f|\\) is large, \\(1/f\\) is close to 0.`} />
+        <MathText block html={kind === "two" ? t(`Two zeros of \\(f\\): vertical asymptotes \\(x=${r2(zeros[0])}\\) and \\(x=${r2(zeros[1])}\\). Three branches; the middle one has a ${A > 0 ? "maximum" : "minimum"} at \\((${r2(h)},\\,${r2(1 / k)})\\).`, `Deux zéros de \\(f\\) : asymptotes verticales \\(x=${r2(zeros[0])}\\) et \\(x=${r2(zeros[1])}\\). Trois branches; celle du milieu a un ${A > 0 ? "maximum" : "minimum"} en \\((${r2(h)},\\,${r2(1 / k)})\\).`)
+          : kind === "one" ? t(`One (double) zero: one vertical asymptote \\(x=${r2(h)}\\). Both branches lie on the ${A > 0 ? "positive" : "negative"} side, like \\(\\tfrac1{x^2}\\).`, `Un zéro (double) : une asymptote verticale \\(x=${r2(h)}\\). Les deux branches sont du côté ${A > 0 ? "positif" : "négatif"}, comme \\(\\tfrac1{x^2}\\).`)
+            : t(`No zeros: no vertical asymptote. The graph is one smooth hump with a ${A > 0 ? "maximum" : "minimum"} at \\((${r2(h)},\\,${r2(1 / k)})\\), and \\(y=0\\) is still the horizontal asymptote.`, `Aucun zéro : aucune asymptote verticale. Le graphique forme une seule bosse lisse avec un ${A > 0 ? "maximum" : "minimum"} en \\((${r2(h)},\\,${r2(1 / k)})\\), et \\(y=0\\) est toujours l'asymptote horizontale.`)} />
+        <MathText block html={t(`Where \\(f\\) is increasing, \\(1/f\\) is decreasing (and vice versa); where \\(|f|\\) is large, \\(1/f\\) is close to 0.`, `Là où \\(f\\) est croissante, \\(1/f\\) est décroissante (et vice versa); là où \\(|f|\\) est grande, \\(1/f\\) est proche de 0.`)} />
       </Readout>
     </WidgetCard>
   );
@@ -125,8 +128,9 @@ export function RationalLinear({ init = { a: 2, b: 1, c: 1, d: -2 } }: { init?: 
   const va = -d / Cc, ha = a / Cc, degenerate = near(a * d - b * Cc, 0);
   const v: View = { xmin: -8, xmax: 8, ymin: -8, ymax: 8 };
   const xint = a !== 0 ? -b / a : NaN, yint = d !== 0 ? b / d : NaN;
+  const t = useT();
   return (
-    <WidgetCard title="Rational functions y = (ax + b)/(cx + d)" subtitle="vertical asymptote where cx + d = 0; horizontal asymptote y = a/c">
+    <WidgetCard title={t("Rational functions y = (ax + b)/(cx + d)", "Fonctions rationnelles y = (ax + b)/(cx + d)")} subtitle={t("vertical asymptote where cx + d = 0; horizontal asymptote y = a/c", "asymptote verticale là où cx + d = 0; asymptote horizontale y = a/c")}>
       <Row gap={8}>
         <Slider label="a" value={a} min={-6} max={6} onChange={setA} color={C.blue} />
         <Slider label="b" value={b} min={-8} max={8} onChange={setB} color={C.blue} />
@@ -134,7 +138,7 @@ export function RationalLinear({ init = { a: 2, b: 1, c: 1, d: -2 } }: { init?: 
         <Slider label="d" value={d} min={-8} max={8} onChange={setD} color={C.green} />
       </Row>
       <div style={{ textAlign: "center", fontSize: 18, margin: "6px 0" }}><MathText html={`\\(f(x)=\\dfrac{${a === 0 ? r2(b) : lin(a, b)}}{${lin(Cc, d)}}\\)`} /></div>
-      <Plane view={v} label="Rational function" step={1} stepY={1}>
+      <Plane view={v} label={t("Rational function", "Fonction rationnelle")} step={1} stepY={1}>
         {(X, Y) => <>
           {!degenerate && <>{hAsym(X, Y, v, ha, "h")}{vAsym(X, Y, v, va, "v")}</>}
           <path d={polePath(f, [va], v, X, Y)} fill="none" stroke={C.violet} strokeWidth={3} />
@@ -145,10 +149,10 @@ export function RationalLinear({ init = { a: 2, b: 1, c: 1, d: -2 } }: { init?: 
       </Plane>
       <Readout tone={degenerate ? "amber" : "green"}>
         {degenerate
-          ? <MathText block html={`Here \\(ad-bc=0\\): the numerator is a multiple of the denominator, so \\(f(x)=${r2(ha)}\\) with a <strong>hole</strong> at \\(x=${r2(va)}\\) — no asymptotes.`} />
+          ? <MathText block html={t(`Here \\(ad-bc=0\\): the numerator is a multiple of the denominator, so \\(f(x)=${r2(ha)}\\) with a <strong>hole</strong> at \\(x=${r2(va)}\\) — no asymptotes.`, `Ici \\(ad-bc=0\\) : le numérateur est un multiple du dénominateur, donc \\(f(x)=${r2(ha)}\\) avec un <strong>trou</strong> en \\(x=${r2(va)}\\) — aucune asymptote.`)} />
           : <>
-            <MathText block html={`Vertical asymptote \\(x=-\\tfrac dc=${r2(va)}\\); horizontal asymptote \\(y=\\tfrac ac=${r2(ha)}\\). Domain \\(x\\ne${r2(va)}\\), range \\(y\\ne${r2(ha)}\\).`} />
-            <MathText block html={`${Number.isFinite(xint) ? `x-intercept \\(${r2(xint)}\\)` : "no x-intercept"}; ${Number.isFinite(yint) ? `y-intercept \\(${r2(yint)}\\)` : "no y-intercept"}. The graph is ${a * d - b * Cc < 0 ? "decreasing" : "increasing"} on each branch (sign of \\(ad-bc\\)).`} />
+            <MathText block html={t(`Vertical asymptote \\(x=-\\tfrac dc=${r2(va)}\\); horizontal asymptote \\(y=\\tfrac ac=${r2(ha)}\\). Domain \\(x\\ne${r2(va)}\\), range \\(y\\ne${r2(ha)}\\).`, `Asymptote verticale \\(x=-\\tfrac dc=${r2(va)}\\); asymptote horizontale \\(y=\\tfrac ac=${r2(ha)}\\). Domaine \\(x\\ne${r2(va)}\\), ensemble image \\(y\\ne${r2(ha)}\\).`)} />
+            <MathText block html={t(`${Number.isFinite(xint) ? `x-intercept \\(${r2(xint)}\\)` : "no x-intercept"}; ${Number.isFinite(yint) ? `y-intercept \\(${r2(yint)}\\)` : "no y-intercept"}. The graph is ${a * d - b * Cc < 0 ? "decreasing" : "increasing"} on each branch (sign of \\(ad-bc\\)).`, `${Number.isFinite(xint) ? `abscisse à l'origine \\(${r2(xint)}\\)` : "aucune abscisse à l'origine"}; ${Number.isFinite(yint) ? `ordonnée à l'origine \\(${r2(yint)}\\)` : "aucune ordonnée à l'origine"}. Le graphique est ${a * d - b * Cc < 0 ? "décroissant" : "croissant"} sur chaque branche (signe de \\(ad-bc\\)).`)} />
           </>}
       </Readout>
     </WidgetCard>
@@ -171,7 +175,8 @@ export function RationalSolver({ init = { a: 1, b: 1, c: 1, d: -2, k: 2, op: "<"
   const p = a - k * Cc, q = b - k * d;
   const root = p !== 0 ? -q / p : NaN;
   const valid = Number.isFinite(root) && !near(root, va);
-  const crit = [va, ...(valid ? [root] : [])].sort((s, t) => s - t);
+  const t = useT();
+  const crit = [va, ...(valid ? [root] : [])].sort((s, u) => s - u);
   const pts = [-Infinity, ...crit, Infinity];
   const test = (i: number) => (pts[i] === -Infinity ? pts[i + 1] - 1 : pts[i + 1] === Infinity ? pts[i] + 1 : (pts[i] + pts[i + 1]) / 2);
   const sgn = pts.slice(0, -1).map((_, i) => f(test(i)) - k);
@@ -184,9 +189,10 @@ export function RationalSolver({ init = { a: 1, b: 1, c: 1, d: -2, k: 2, op: "<"
     const incl = (x: number) => (op === "≥" || op === "≤") && valid && near(x, root);
     parts.push(`${incl(lo) ? "[" : "("}${lo === -Infinity ? "-\\infty" : r2(lo)},\\,${hi === Infinity ? "\\infty" : r2(hi)}${incl(hi) ? "]" : ")"}`);
   });
-  const sol = op === "=" ? (valid ? `x=${r2(root)}` : "\\text{no solution}") : parts.length ? `x\\in ${parts.join("\\cup ")}` : "\\text{no solution}";
+  const noSol = t("\\text{no solution}", "\\text{aucune solution}");
+  const sol = op === "=" ? (valid ? `x=${r2(root)}` : noSol) : parts.length ? `x\\in ${parts.join("\\cup ")}` : noSol;
   return (
-    <WidgetCard title="Solving rational equations and inequalities" subtitle="critical values: where f(x) = k and where f is undefined (the vertical asymptote, always excluded)">
+    <WidgetCard title={t("Solving rational equations and inequalities", "Résolution d'équations et d'inéquations rationnelles")} subtitle={t("critical values: where f(x) = k and where f is undefined (the vertical asymptote, always excluded)", "valeurs critiques : là où f(x) = k et là où f n'est pas définie (l'asymptote verticale, toujours exclue)")}>
       <Row gap={8}>
         <Slider label="a" value={a} min={-6} max={6} onChange={setA} color={C.blue} />
         <Slider label="b" value={b} min={-8} max={8} onChange={setB} color={C.blue} />
@@ -196,7 +202,7 @@ export function RationalSolver({ init = { a: 1, b: 1, c: 1, d: -2, k: 2, op: "<"
       </Row>
       <Segmented options={OPS.map((o) => ({ value: o, label: `f(x) ${o} k` }))} value={op} onChange={setOp} />
       <div style={{ textAlign: "center", fontSize: 18, margin: "6px 0" }}><MathText html={`\\(\\dfrac{${a === 0 ? r2(b) : lin(a, b)}}{${lin(Cc, d)}}\\ ${opTex(op)}\\ ${r2(k)}\\)`} /></div>
-      <Plane view={v} label="Rational inequality" step={1} stepY={1}>
+      <Plane view={v} label={t("Rational inequality", "Inéquation rationnelle")} step={1} stepY={1}>
         {(X, Y) => <>
           {op !== "=" && sgn.map((s, i) => (holds(s) ? <rect key={"b" + i} x={X(Math.max(pts[i], v.xmin))} y={Y(v.ymax)} width={Math.max(0, X(Math.min(pts[i + 1], v.xmax)) - X(Math.max(pts[i], v.xmin)))} height={Y(v.ymin) - Y(v.ymax)} fill={C.green} opacity={0.13} /> : null))}
           {vAsym(X, Y, v, va, "v")}
@@ -206,8 +212,8 @@ export function RationalSolver({ init = { a: 1, b: 1, c: 1, d: -2, k: 2, op: "<"
         </>}
       </Plane>
       <Readout tone="green">
-        <MathText block html={`Rewrite as one fraction: \\(\\dfrac{${p === 0 ? r2(q) : lin(p, q)}}{${lin(Cc, d)}}\\ ${opTex(op === "=" ? "=" : op)}\\ 0\\). Critical values: \\(x=${r2(va)}\\) (undefined)${valid ? ` and \\(x=${r2(root)}\\) (numerator 0)` : ""}.`} />
-        <MathText block html={`Solution: \\(${sol}\\)`} />
+        <MathText block html={t(`Rewrite as one fraction: \\(\\dfrac{${p === 0 ? r2(q) : lin(p, q)}}{${lin(Cc, d)}}\\ ${opTex(op === "=" ? "=" : op)}\\ 0\\). Critical values: \\(x=${r2(va)}\\) (undefined)${valid ? ` and \\(x=${r2(root)}\\) (numerator 0)` : ""}.`, `Récris sous forme d'une seule fraction : \\(\\dfrac{${p === 0 ? r2(q) : lin(p, q)}}{${lin(Cc, d)}}\\ ${opTex(op === "=" ? "=" : op)}\\ 0\\). Valeurs critiques : \\(x=${r2(va)}\\) (non définie)${valid ? ` et \\(x=${r2(root)}\\) (numérateur nul)` : ""}.`)} />
+        <MathText block html={t(`Solution: \\(${sol}\\)`, `Solution : \\(${sol}\\)`)} />
       </Readout>
     </WidgetCard>
   );
@@ -221,16 +227,17 @@ export function RationalModel({ init = { F: 200, v: 4, x0: 20 } }: { init?: { F:
   const A: Fn = (x) => (F + vv * x) / x;
   const view: View = { xmin: 0, xmax: 100, ymin: 0, ymax: 40 };
   const avg = (A(x0 + h) - A(x0)) / h, inst = (A(x0 + 0.001) - A(x0 - 0.001)) / 0.002;
+  const t = useT();
   return (
-    <WidgetCard title="A rational model: average cost" subtitle="A(x) = (F + vx)/x — fixed cost F shared over x items plus a cost v per item">
+    <WidgetCard title={t("A rational model: average cost", "Un modèle rationnel : le coût moyen")} subtitle={t("A(x) = (F + vx)/x — fixed cost F shared over x items plus a cost v per item", "A(x) = (F + vx)/x — coût fixe F réparti sur x articles plus un coût v par article")}>
       <Row gap={8}>
-        <Slider label="fixed cost F ($)" value={F} min={50} max={400} step={10} onChange={setF} color={C.blue} />
-        <Slider label="cost per item v ($)" value={vv} min={1} max={20} onChange={setV} color={C.blue} />
-        <Slider label="items x₀" value={x0} min={5} max={80} onChange={setX0} color={C.green} />
-        <Slider label="interval h" value={h} min={1} max={20} onChange={setH} color={C.amber} />
+        <Slider label={t("fixed cost F ($)", "coût fixe F ($)")} value={F} min={50} max={400} step={10} onChange={setF} color={C.blue} />
+        <Slider label={t("cost per item v ($)", "coût par article v ($)")} value={vv} min={1} max={20} onChange={setV} color={C.blue} />
+        <Slider label={t("items x₀", "articles x₀")} value={x0} min={5} max={80} onChange={setX0} color={C.green} />
+        <Slider label={t("interval h", "intervalle h")} value={h} min={1} max={20} onChange={setH} color={C.amber} />
       </Row>
       <div style={{ textAlign: "center", fontSize: 18, margin: "6px 0" }}><MathText html={`\\(A(x)=\\dfrac{${F}+${vv}x}{x}=${vv}+\\dfrac{${F}}{x}\\)`} /></div>
-      <Plane view={view} label="Average cost" step={10} stepY={5}>
+      <Plane view={view} label={t("Average cost", "Coût moyen")} step={10} stepY={5}>
         {(X, Y) => <>
           {hAsym(X, Y, view, vv, "h")}
           <path d={polePath(A, [0], view, X, Y)} fill="none" stroke={C.violet} strokeWidth={3} />
@@ -240,8 +247,8 @@ export function RationalModel({ init = { F: 200, v: 4, x0: 20 } }: { init?: { F:
         </>}
       </Plane>
       <Readout tone="green">
-        <MathText block html={`At \\(x=${x0}\\) items the average cost is \\(\\$${r2(A(x0))}\\) per item. As \\(x\\) grows, \\(A(x)\\to${vv}\\): the horizontal asymptote is the cost per item.`} />
-        <MathText block html={`Average rate of change on \\([${x0},\\,${x0 + h}]\\): \\(${r2(avg)}\\) dollars per item per extra item; instantaneous rate at \\(x=${x0}\\): about \\(${r2(inst)}\\). Both are negative — the average cost keeps falling, more and more slowly.`} />
+        <MathText block html={t(`At \\(x=${x0}\\) items the average cost is \\(\\$${r2(A(x0))}\\) per item. As \\(x\\) grows, \\(A(x)\\to${vv}\\): the horizontal asymptote is the cost per item.`, `Pour \\(x=${x0}\\) articles, le coût moyen est de \\(${r2(A(x0))}\\,\\$\\) par article. Quand \\(x\\) augmente, \\(A(x)\\to${vv}\\) : l'asymptote horizontale est le coût par article.`)} />
+        <MathText block html={t(`Average rate of change on \\([${x0},\\,${x0 + h}]\\): \\(${r2(avg)}\\) dollars per item per extra item; instantaneous rate at \\(x=${x0}\\): about \\(${r2(inst)}\\). Both are negative — the average cost keeps falling, more and more slowly.`, `Taux de variation moyen sur \\([${x0},\\,${x0 + h}]\\) : \\(${r2(avg)}\\) dollar par article pour chaque article de plus; taux de variation instantané en \\(x=${x0}\\) : environ \\(${r2(inst)}\\). Les deux sont négatifs — le coût moyen continue de diminuer, de plus en plus lentement.`)} />
       </Readout>
     </WidgetCard>
   );

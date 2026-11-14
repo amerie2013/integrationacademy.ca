@@ -2,11 +2,13 @@
 
 import { useState } from "react";
 import { C, MathText, Readout, Row, Segmented, Slider, WidgetCard, fmtInt, texInt } from "./kit";
+import { useT } from "@/lib/lang";
 
 const MIN = -15, MAX = 15;
 
 /** Number line with a start dot and a move arrow from `from` to `to`. */
 function MoveLine({ start, end, label, color, lo = MIN, hi = MAX, extra }: { start: number; end: number; label: string; color: string; lo?: number; hi?: number; extra?: { from: number; to: number; color: string; label: string } }) {
+  const t = useT();
   const W = 640, X = (v: number) => 20 + ((v - lo) / (hi - lo)) * (W - 40);
   const ticks = Array.from({ length: hi - lo + 1 }, (_, i) => lo + i);
   const arrow = (from: number, to: number, y: number, col: string, lab: string, id: string) => (
@@ -17,7 +19,7 @@ function MoveLine({ start, end, label, color, lo = MIN, hi = MAX, extra }: { sta
     </g>
   );
   return (
-    <svg viewBox={`0 0 ${W} 130`} style={{ width: "100%", display: "block" }} role="img" aria-label={`Number line: start at ${start}, move to ${end}`}>
+    <svg viewBox={`0 0 ${W} 130`} style={{ width: "100%", display: "block" }} role="img" aria-label={t(`Number line: start at ${start}, move to ${end}`, `Droite numérique : départ à ${start}, déplacement jusqu'à ${end}`)}>
       <line x1={10} y1={95} x2={W - 10} y2={95} stroke="#334155" strokeWidth={2} />
       {ticks.map((v) => (
         <g key={v}>
@@ -56,6 +58,7 @@ export function IntegerOps({ initA = -6, initB = 9, initOp = "+" }: { initA?: nu
   const [b, setB] = useState(initB);
   const [op, setOp] = useState<"+" | "-">(initOp);
   const [model, setModel] = useState<"line" | "chips">("line");
+  const t = useT();
   const add = op === "+" ? b : -b; // a - b = a + (-b)
   const r = a + add;
   const clampR = Math.max(MIN, Math.min(MAX, r));
@@ -64,37 +67,40 @@ export function IntegerOps({ initA = -6, initB = 9, initOp = "+" }: { initA?: nu
   const pos = Math.max(a, 0) + Math.max(add, 0), neg = Math.max(-a, 0) + Math.max(-add, 0);
 
   let rule: string;
-  if (op === "-") rule = `Subtracting \\(${texInt(b)}\\) is the same as adding its opposite, \\(${texInt(-b)}\\): \\(${texInt(a, false)}-${texInt(b)}=${texInt(a, false)}+${texInt(-b)}\\). `;
+  if (op === "-") rule = t(`Subtracting \\(${texInt(b)}\\) is the same as adding its opposite, \\(${texInt(-b)}\\): \\(${texInt(a, false)}-${texInt(b)}=${texInt(a, false)}+${texInt(-b)}\\). `, `Soustraire \\(${texInt(b)}\\) revient à additionner son opposé, \\(${texInt(-b)}\\) : \\(${texInt(a, false)}-${texInt(b)}=${texInt(a, false)}+${texInt(-b)}\\). `);
   else rule = "";
-  if (a === 0 || add === 0) rule += `Adding \\(0\\) changes nothing.`;
-  else if (Math.sign(a) === Math.sign(add)) rule += `Same signs: add the sizes \\(${Math.abs(a)}+${Math.abs(add)}=${Math.abs(r)}\\) and keep the sign.`;
-  else rule += `Different signs: subtract the sizes \\(${Math.max(Math.abs(a), Math.abs(add))}-${Math.min(Math.abs(a), Math.abs(add))}=${Math.abs(r)}\\); the answer takes the sign of the number farther from 0${r === 0 ? " (here they cancel exactly)" : ""}.`;
+  if (a === 0 || add === 0) rule += t(`Adding \\(0\\) changes nothing.`, `Additionner \\(0\\) ne change rien.`);
+  else if (Math.sign(a) === Math.sign(add)) rule += t(`Same signs: add the sizes \\(${Math.abs(a)}+${Math.abs(add)}=${Math.abs(r)}\\) and keep the sign.`, `Mêmes signes : additionne les valeurs absolues \\(${Math.abs(a)}+${Math.abs(add)}=${Math.abs(r)}\\) et garde le signe.`);
+  else rule += t(`Different signs: subtract the sizes \\(${Math.max(Math.abs(a), Math.abs(add))}-${Math.min(Math.abs(a), Math.abs(add))}=${Math.abs(r)}\\); the answer takes the sign of the number farther from 0${r === 0 ? " (here they cancel exactly)" : ""}.`, `Signes différents : soustrais les valeurs absolues \\(${Math.max(Math.abs(a), Math.abs(add))}-${Math.min(Math.abs(a), Math.abs(add))}=${Math.abs(r)}\\); la réponse prend le signe du nombre le plus éloigné de 0${r === 0 ? " (ici, ils s'annulent exactement)" : ""}.`);
 
   return (
-    <WidgetCard title="Integer moves" subtitle="Drag the sliders, then switch between the number line and zero-pair chips">
+    <WidgetCard title={t("Integer moves", "Déplacements d'entiers")} subtitle={t("Drag the sliders, then switch between the number line and zero-pair chips", "Fais glisser les curseurs, puis passe de la droite numérique aux jetons (paires nulles)")}>
       <Row>
-        <Slider label="first" value={a} min={-10} max={10} onChange={setA} color={C.blue} />
-        <Segmented options={[{ value: "+", label: "+ add" }, { value: "-", label: "− subtract" }]} value={op} onChange={setOp} />
-        <Slider label="second" value={b} min={-10} max={10} onChange={setB} color={C.red} />
+        <Slider label={t("first", "premier")} value={a} min={-10} max={10} onChange={setA} color={C.blue} />
+        <Segmented options={[{ value: "+", label: t("+ add", "+ additionner") }, { value: "-", label: t("− subtract", "− soustraire") }]} value={op} onChange={setOp} />
+        <Slider label={t("second", "deuxième")} value={b} min={-10} max={10} onChange={setB} color={C.red} />
       </Row>
       <div style={{ margin: "12px 0 6px" }}>
-        <Segmented label="Model" options={[{ value: "line", label: "Number line" }, { value: "chips", label: "Zero pairs" }]} value={model} onChange={setModel} />
+        <Segmented label={t("Model", "Modèle")} options={[{ value: "line", label: t("Number line", "Droite numérique") }, { value: "chips", label: t("Zero pairs", "Paires nulles") }]} value={model} onChange={setModel} />
       </div>
       {model === "line" ? (
-        <MoveLine start={a} end={clampR} label={`${op === "+" ? "+" : "−"} ${b < 0 ? `(${fmtInt(b)})` : b}  →  move ${Math.abs(add)} ${add >= 0 ? "right" : "left"}`} color={add >= 0 ? C.blue : C.red}
-          extra={{ from: 0, to: a, color: "#475569", label: `start ${fmtInt(a)}` }} />
+        <MoveLine start={a} end={clampR} label={`${op === "+" ? "+" : "−"} ${b < 0 ? `(${fmtInt(b)})` : b}  →  ${t("move", "déplace-toi de")} ${Math.abs(add)} ${add >= 0 ? t("right", "vers la droite") : t("left", "vers la gauche")}`} color={add >= 0 ? C.blue : C.red}
+          extra={{ from: 0, to: a, color: "#475569", label: `${t("start", "départ")} ${fmtInt(a)}` }} />
       ) : (
         <div style={{ padding: "6px 0" }}>
           <Chips pos={pos} neg={neg} />
           <p style={{ textAlign: "center", fontSize: 13.5, color: C.muted, margin: "4px 0 0" }}>
-            {Math.min(pos, neg)} zero pair{Math.min(pos, neg) === 1 ? "" : "s"} cancel (faded). What is left over is the answer: {Math.abs(r)} {r >= 0 ? "positive" : "negative"} chip{Math.abs(r) === 1 ? "" : "s"}.
+            {t(
+              `${Math.min(pos, neg)} zero pair${Math.min(pos, neg) === 1 ? "" : "s"} cancel (faded). What is left over is the answer: ${Math.abs(r)} ${r >= 0 ? "positive" : "negative"} chip${Math.abs(r) === 1 ? "" : "s"}.`,
+              `${Math.min(pos, neg)} paire${Math.min(pos, neg) === 1 ? "" : "s"} nulle${Math.min(pos, neg) === 1 ? "" : "s"} s'annule${Math.min(pos, neg) === 1 ? "" : "nt"} (en pâle). Ce qui reste est la réponse : ${Math.abs(r)} jeton${Math.abs(r) === 1 ? "" : "s"} ${r >= 0 ? "positif" : "négatif"}${Math.abs(r) === 1 ? "" : "s"}.`,
+            )}
           </p>
         </div>
       )}
       <Readout tone="green">
         <div style={{ fontSize: 20, fontWeight: 800, marginBottom: 4 }}><MathText html={`\\(${texInt(a, false)} ${op === "+" ? "+" : "-"} ${texInt(b)} = ${texInt(r, false)}\\)`} /></div>
         <MathText html={rule} />
-        {r !== clampR && <div style={{ color: C.muted, fontSize: 13 }}>(The answer is off this number line, so the dot stops at the edge.)</div>}
+        {r !== clampR && <div style={{ color: C.muted, fontSize: 13 }}>{t("(The answer is off this number line, so the dot stops at the edge.)", "(La réponse est hors de cette droite numérique, donc le point s'arrête au bord.)")}</div>}
       </Readout>
     </WidgetCard>
   );

@@ -5,6 +5,7 @@
 // reflections in y = x.
 
 import { useState } from "react";
+import { useT } from "@/lib/lang";
 import { C, MathText, Readout, Row, Segmented, Slider, WidgetCard } from "./kit";
 import { Plane, r2, type View } from "./Systems";
 import { dot } from "./Quadratics";
@@ -207,20 +208,21 @@ export function CompositeLab({ init = ["dbl", "sq"] }: { init?: [CKey, CKey] }) 
   const fg = (t: number) => f.f(g.f(t)), gf = (t: number) => g.f(f.f(t));
   const view: View = { xmin: -6, xmax: 6, ymin: -8, ymax: 16 };
   const box = (lab: string, val: number, col: string) => <span style={{ display: "inline-block", padding: "4px 10px", borderRadius: 8, background: col, color: "#fff", fontWeight: 700, fontSize: 14 }}>{lab} = {n2(val)}</span>;
+  const t = useT();
   return (
-    <WidgetCard title="Composite functions" subtitle="(f ∘ g)(x) = f(g(x)): apply g first, then f">
+    <WidgetCard title={t("Composite functions", "Fonctions composées")} subtitle={t("(f ∘ g)(x) = f(g(x)): apply g first, then f", "(f ∘ g)(x) = f(g(x)) : applique d'abord g, puis f")}>
       <Row>
         <Segmented label="f(x) =" value={fk} onChange={setF} options={(Object.keys(CF) as CKey[]).map((k) => ({ value: k, label: CF[k].label }))} />
         <Segmented label="g(x) =" value={gk} onChange={setG} options={(Object.keys(CF) as CKey[]).map((k) => ({ value: k, label: CF[k].label }))} />
       </Row>
-      <Row><Slider label="x" value={x} min={-5} max={5} step={0.5} onChange={setX} format={(t) => n2(t)} color={C.blue} /></Row>
+      <Row><Slider label="x" value={x} min={-5} max={5} step={0.5} onChange={setX} format={(u) => n2(u)} color={C.blue} /></Row>
       <div style={{ display: "flex", gap: 8, alignItems: "center", justifyContent: "center", flexWrap: "wrap", margin: "6px 0" }}>
         {box("x", x, C.blue)}<span>→ g →</span>{box("g(x)", g.f(x), C.amber)}<span>→ f →</span>{box("f(g(x))", fg(x), C.violet)}
       </div>
       <div style={{ display: "flex", gap: 8, alignItems: "center", justifyContent: "center", flexWrap: "wrap", margin: "6px 0" }}>
         {box("x", x, C.blue)}<span>→ f →</span>{box("f(x)", f.f(x), C.amber)}<span>→ g →</span>{box("g(f(x))", gf(x), C.green)}
       </div>
-      <Plane view={view} label="Composite functions" step={1} stepY={2}>
+      <Plane view={view} label={t("Composite functions", "Fonctions composées")} step={1} stepY={2}>
         {(X, Y) => <>
           <path d={pathOf(fg, view, X, Y)} fill="none" stroke={C.violet} strokeWidth={3} />
           <path d={pathOf(gf, view, X, Y)} fill="none" stroke={C.green} strokeWidth={3} strokeDasharray="8 5" />
@@ -228,7 +230,7 @@ export function CompositeLab({ init = ["dbl", "sq"] }: { init?: [CKey, CKey] }) 
         </>}
       </Plane>
       <Readout tone="blue">
-        <MathText html={`\\((f\\circ g)(x)=${f.of(g.tex)}\\) (violet) and \\((g\\circ f)(x)=${g.of(f.tex)}\\) (green, dashed). ${Math.abs(fg(x) - gf(x)) < 1e-9 ? "At this x they agree" : "They usually differ"}: the order of composition matters.`} />
+        <MathText html={t(`\\((f\\circ g)(x)=${f.of(g.tex)}\\) (violet) and \\((g\\circ f)(x)=${g.of(f.tex)}\\) (green, dashed). ${Math.abs(fg(x) - gf(x)) < 1e-9 ? "At this x they agree" : "They usually differ"}: the order of composition matters.`, `\\((f\\circ g)(x)=${f.of(g.tex)}\\) (violet) et \\((g\\circ f)(x)=${g.of(f.tex)}\\) (vert, pointillé). ${Math.abs(fg(x) - gf(x)) < 1e-9 ? "Pour ce x, elles sont égales" : "En général, elles diffèrent"} : l'ordre de composition compte.`)} />
       </Readout>
     </WidgetCard>
   );

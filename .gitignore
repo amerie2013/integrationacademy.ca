@@ -104,3 +104,12 @@ scripts/_ftce/fulltext.txt
 /scripts/mcf3m/ws/out/
 /scripts/mcf3m/bank/out/
 /scripts/mcf3m/backup/
+/scripts/mcv4u-fr*/ws/out/
+/scripts/mcv4u-fr*/bank/out/
+/scripts/mcv4u-fr*/backup/
+/scripts/mhf4u-fr*/ws/out/
+/scripts/mhf4u-fr*/bank/out/
+/scripts/mhf4u-fr*/backup/
+/scripts/mth1w-fr*/ws/out/
+/scripts/mth1w-fr*/bank/out/
+/scripts/mth1w-fr*/backup/

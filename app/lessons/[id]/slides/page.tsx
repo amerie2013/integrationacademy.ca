@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { supabase } from "../../../../lib/supabase";
 import { SlideDeck } from "../../../../components/SlideDeck";
+import { LangProvider, langForCourse } from "../../../../lib/lang";
 import { Block } from "../../../../lib/blocks";
 import { previewBlocks } from "../../../../lib/lessonPreview";
 import { accentClass } from "../../../../lib/courseAccent";
@@ -53,5 +54,5 @@ export default function LessonSlidesPage() {
       </main>
     );
 
-  return <div className={accentClass(courseCode)}><SlideDeck title={title} blocks={blocks} /></div>;
+  return <div className={accentClass(courseCode)}><LangProvider value={langForCourse(courseCode)}><SlideDeck title={title} blocks={blocks} /></LangProvider></div>;
 }

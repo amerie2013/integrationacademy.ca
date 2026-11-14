@@ -1,0 +1,117 @@
+// MHF4U-FR Fiche 6.2 — Logarithmes et lois des logarithmes (édition de l'enseignant; miroir de ../../mhf4u-ch6/ws/w6_2.mjs).
+// Comme en anglais, cette fiche porte un titre différent de la leçon 6.2 (fiche plus exigeante qui inclut les lois).
+import { F, pt } from "./figT.mjs";
+const S = String.raw;
+
+const lg = (b) => (x) => Math.log(x) / Math.log(b);
+
+const EXAMPLES = [
+  { title: "Un logarithme fractionnaire", q: S`Évalue $\log_{27}9$.`,
+    fig: F({ view: { xmin: -2, xmax: 30, ymin: -2, ymax: 3 }, curves: [{ f: lg(27), a: 0.01, color: "violet" }], points: [{ x: 9, y: 2 / 3, label: "(9, 2/3)", color: "amber" }, pt(27, 1, null, "violet")], step: { x: 3, y: 1 } }),
+    steps: [S`\textbf{Définition :} pose $y=\log_{27}9$, donc $27^y=9$.`,
+      S`\textbf{Base commune :} 27 et 9 sont deux puissances de 3 : $\left(3^3\right)^y=3^2$, donc $3^{3y}=3^2$.`,
+      S`\textbf{Égale les exposants :} des puissances égales d'une même base ont des exposants égaux : $3y=2$, donc $y=\tfrac23$.`,
+      S`\textbf{Vérification :} $27^{2/3}=\left(\sqrt[3]{27}\right)^2=3^2=9$. \checkmark`],
+    ans: S`$\log_{27}9=\tfrac23$` },
+  { title: "Une base fractionnaire", q: S`Évalue $\log_{1/2}\left(8\sqrt2\right)$.`,
+    fig: F({ view: { xmin: -1, xmax: 13, ymin: -5, ymax: 3 }, curves: [{ f: lg(0.5), a: 0.01, color: "violet" }], points: [{ x: 8 * Math.SQRT2, y: -3.5, label: "(8√2, −7/2)", color: "amber" }, pt(1, 0, null, "violet"), pt(8, -3, null, "violet")], step: { x: 1, y: 1 } }),
+    steps: [S`\textbf{Définition :} pose $y=\log_{1/2}\left(8\sqrt2\right)$, donc $\left(\tfrac12\right)^y=8\sqrt2$.`,
+      S`\textbf{L'argument comme puissance de 2 :} $8\sqrt2=2^3\cdot2^{1/2}=2^{7/2}$, en additionnant les exposants.`,
+      S`\textbf{La base comme puissance de 2 :} $\left(\tfrac12\right)^y=\left(2^{-1}\right)^y=2^{-y}$.`,
+      S`\textbf{Égale les exposants :} $-y=\tfrac72$, donc $y=-\tfrac72$.`,
+      S`\textbf{Vérification :} $\left(\tfrac12\right)^{-7/2}=2^{7/2}=8\sqrt2$. La réponse est négative parce que la base est inférieure à 1 et l'argument, supérieur à 1. \checkmark`],
+    ans: S`$\log_{1/2}(8\sqrt2)=-\tfrac72$` },
+  { title: "Trouver la base", q: S`Résous $\log_x 64=\tfrac32$ et vérifie la réponse sur le graphique de $y=\log_x t$.`,
+    fig: F({ view: { xmin: -5, xmax: 72, ymin: -1, ymax: 2.5 }, curves: [{ f: lg(16), a: 0.05, color: "violet" }], points: [pt(16, 1, null, "violet"), pt(64, 1.5, null, "amber")], step: { x: 10, y: 0.5 } }),
+    steps: [S`\textbf{Forme exponentielle :} $x^{3/2}=64$.`,
+      S`\textbf{Annule la puissance :} élève les deux membres à la puissance réciproque $\tfrac23$ : $x=64^{2/3}$.`,
+      S`\textbf{Évalue :} $64^{2/3}=\left(\sqrt[3]{64}\right)^2=4^2=16$.`,
+      S`\textbf{Base valide :} une base doit être positive et différente de 1, donc $x=16$ est permis.`,
+      S`\textbf{Vérification :} $16^{3/2}=\left(\sqrt{16}\right)^3=4^3=64$, donc $(64,1.5)$ appartient à $y=\log_{16}t$. \checkmark`],
+    ans: S`$x=16$` },
+  { title: "Trois lois à la fois", q: S`Évalue $\log_3 54+\log_3 6-\log_3 4$.`,
+    fig: F({ view: { xmin: -5, xmax: 90, ymin: -2, ymax: 6 }, curves: [{ f: lg(3), a: 0.01, color: "violet" }], points: [pt(81, 4, null, "amber"), pt(27, 3, null, "violet")], step: { x: 10, y: 1 } }),
+    steps: [S`\textbf{Plan :} la base est la même partout, donc on combine en un seul logarithme.`,
+      S`\textbf{Loi du produit :} une somme devient un produit : $\log_354+\log_36=\log_3(54\cdot6)=\log_3324$.`,
+      S`\textbf{Loi du quotient :} une différence devient un quotient : $\log_3324-\log_34=\log_3\dfrac{324}4=\log_381$.`,
+      S`\textbf{Évalue :} $81=3^4$, donc la valeur est 4.`,
+      S`\textbf{Vérification :} en décimales : $3.631+1.631-1.262=4.000$. \checkmark`],
+    ans: S`$4$` },
+  { title: "Développer complètement", q: S`Développe $\log\dfrac{x^3\sqrt y}{z^2}$ en sommes et différences de $\log x$, $\log y$, $\log z$.`,
+    fig: F({ view: { xmin: -1, xmax: 12, ymin: -2, ymax: 5 }, curves: [{ f: (x) => Math.log10((x ** 3 * Math.sqrt(4)) / 4), a: 0.5, color: "violet" }, { f: (x) => 3 * Math.log10(x) + 0.5 * Math.log10(4) - 2 * Math.log10(2) + 0.04, a: 0.5, color: "green" }], points: [{ x: 10, y: 2.7, label: "(10, 2.70)", color: "amber" }], step: { x: 1, y: 1 } }, 6.5, "Les deux formes, avec y = 4 et z = 2, tracent la même courbe; la verte est tracée juste au-dessus de la violette."),
+    steps: [S`\textbf{Loi du quotient :} une fraction donne une différence : $\log\left(x^3\sqrt y\right)-\log z^2$.`,
+      S`\textbf{Loi du produit :} un produit donne une somme, et $\sqrt y=y^{1/2}$ : $\log x^3+\log y^{1/2}-\log z^2$.`,
+      S`\textbf{Loi de la puissance :} les exposants descendent : $3\log x+\tfrac12\log y-2\log z$.`,
+      S`\textbf{Vérification :} $x=10$, $y=100$, $z=10$ : l'expression de départ vaut $\log\frac{1000\cdot10}{100}=\log100=2$, et le développement donne $3+1-2=2$. \checkmark`],
+    ans: S`$3\log x+\tfrac12\log y-2\log z$` },
+  { title: "Réduire à un seul logarithme", q: S`Écris $2\log_5x-\tfrac12\log_5y+3\log_5z$ sous la forme d'un seul logarithme.`,
+    fig: F({ view: { xmin: -1, xmax: 8, ymin: -3, ymax: 4 }, curves: [{ f: (x) => lg(5)((x * x * 8) / Math.sqrt(4)), a: 0.05, color: "violet" }], points: [{ x: 1, y: lg(5)(4), label: "(1, 0.86)", color: "amber" }], step: { x: 1, y: 1 } }, 6.5, "La forme réduite avec y = 4 et z = 2."),
+    steps: [S`\textbf{Loi de la puissance à rebours :} les coefficients deviennent des exposants : $\log_5x^2-\log_5\sqrt y+\log_5z^3$.`,
+      S`\textbf{Sommes et différences :} les termes positifs se multiplient au numérateur, et les termes négatifs vont au dénominateur.`,
+      S`\textbf{Combine :} $\log_5\dfrac{x^2z^3}{\sqrt y}$.`,
+      S`\textbf{Vérification :} $x=5$, $y=25$, $z=5$ : l'expression de départ vaut $2-1+3=4$, et $\log_5\frac{25\cdot125}5=\log_5625=4$. \checkmark`],
+    ans: S`$\log_5\dfrac{x^2z^3}{\sqrt y}$` },
+  { title: "Logarithmes en fonction de p et q", q: S`Si $\log_b2=p$ et $\log_b3=q$, écris $\log_b72$ et $\log_b4.5$ en fonction de $p$ et $q$.`,
+    fig: F({ view: { xmin: -5, xmax: 80, ymin: -2, ymax: 8 }, curves: [{ f: lg(2), a: 0.02, color: "violet" }], points: [{ x: 72, y: Math.log2(72), label: "(72, 6.17)", color: "amber" }, { x: 4.5, y: Math.log2(4.5), label: "(4.5, 2.17)", color: "blue" }], step: { x: 10, y: 1 } }, 6.5, "Avec b = 2 : p = 1 et q vaut environ 1.585."),
+    steps: [S`\textbf{Décompose en facteurs 2 et 3 :} $72=8\cdot9=2^3\cdot3^2$, et $4.5=\tfrac92=\tfrac{3^2}2$.`,
+      S`\textbf{Premier :} lois du produit et de la puissance : $\log_b72=3\log_b2+2\log_b3=3p+2q$.`,
+      S`\textbf{Deuxième :} lois du quotient et de la puissance : $\log_b4.5=2\log_b3-\log_b2=2q-p$.`,
+      S`\textbf{Vérification :} avec $b=2$, $p=1$ et $q\approx1.585$ : $3p+2q\approx6.17$, et $\log_272\approx6.17$. \checkmark`],
+    ans: S`$3p+2q$ et $2q-p$` },
+  { title: "Changement de base", q: S`Évalue $\log_3 50$ au millième près et vérifie que la réponse est raisonnable.`,
+    fig: F({ view: { xmin: -3, xmax: 60, ymin: -1, ymax: 4.5 }, curves: [{ f: lg(3), a: 0.02, color: "violet" }], vlines: [{ x: 50, color: "green", dash: true }], points: [pt(27, 3, null, "violet"), pt(50, 3.56, null, "amber")], step: { x: 10, y: 1 } }),
+    steps: [S`\textbf{Formule :} la calculatrice est en base 10, donc utilise $\log_bx=\dfrac{\log x}{\log b}$.`,
+      S`\textbf{Substitue :} $\log_350=\dfrac{\log50}{\log3}\approx\dfrac{1.69897}{0.47712}$.`,
+      S`\textbf{Divise :} $\approx3.561$.`,
+      S`\textbf{Vérification :} $3^3=27$ et $3^4=81$. Puisque $27\lt50\lt81$, la réponse doit être entre 3 et 4. \checkmark`],
+    ans: S`$\log_350\approx3.561$` },
+  { title: "Propriétés des inverses", q: S`Évalue (a) $\log_2\left(\log_3 81\right)$ (b) $5^{2\log_5 3}$ (c) $2^{\log_2 7+\log_2 3}$.`,
+    fig: F({ view: { xmin: -1, xmax: 24, ymin: -2, ymax: 6 }, curves: [{ f: lg(2), a: 0.02, color: "violet" }], points: [pt(4, 2, null, "amber"), { x: 21, y: Math.log2(21), label: "(21, 4.39)", color: "blue" }], step: { x: 2, y: 1 } }, 6.5, "y = log en base 2 de x : (4, 2) correspond à la partie (a), et x = 21 à la partie (c)."),
+    steps: [S`\textbf{(a) De l'intérieur vers l'extérieur :} $\log_381=4$ parce que $3^4=81$. Ensuite, $\log_24=2$.`,
+      S`\textbf{(b) Loi de la puissance d'abord :} $2\log_53=\log_53^2=\log_59$. Une base annule son propre logarithme : $5^{\log_59}=9$.`,
+      S`\textbf{(c) Loi du produit d'abord :} $\log_27+\log_23=\log_221$. Ensuite, $2^{\log_221}=21$.`,
+      S`\textbf{Vérification de (b) :} $5^{2\log_53}=\left(5^{\log_53}\right)^2=3^2=9$. \checkmark`],
+    ans: S`(a) 2 (b) 9 (c) 21` },
+];
+
+const PROBLEMS = [
+  { level: 1, q: String.raw`Évalue de façon exacte : (a) $\log_4 32$ (b) $\log_{1/3}27$ (c) $\log_{25}\dfrac1{125}$`, ans: String.raw`(a) $\tfrac52$ (b) $-3$ (c) $-\tfrac32$` },
+  { level: 1, q: String.raw`Réécris sous l'autre forme : (a) $8^{-2/3}=\tfrac14$ (b) $\log_{\sqrt2}16=8$ (c) $\log_b a=c$`, ans: String.raw`(a) $\log_8\tfrac14=-\tfrac23$ (b) $(\sqrt2)^8=16$ (c) $b^c=a$` },
+  { level: 1, q: String.raw`Utilise les lois pour évaluer : (a) $\log_6 9+\log_6 4$ (b) $\log_2 80-\log_2 5$ (c) $\log_5\sqrt{125}$`, ans: String.raw`(a) $2$ (b) $4$ (c) $\tfrac32$` },
+  { level: 2, q: String.raw`Développe complètement : $\log_3\dfrac{9x^4}{y\sqrt z}$. Simplifie tout logarithme numérique.`, ans: String.raw`$2+4\log_3x-\log_3y-\tfrac12\log_3z$` },
+  { level: 2, q: String.raw`Écris sous la forme d'un seul logarithme et simplifie : $\tfrac12\log_a x+3\log_a y-2\log_a(xy)$.`, ans: String.raw`$\log_a\dfrac{y}{x^{3/2}}=\log_a\dfrac{y}{x\sqrt x}$` },
+  { level: 2, q: String.raw`Si $\log_b2=m$ et $\log_b5=n$, écris en fonction de $m$ et $n$ : (a) $\log_b40$ (b) $\log_b0.08$ (c) $\log_b\sqrt{10b}$`, ans: String.raw`(a) $3m+n$ (b) $m-2n$ (c) $\tfrac12(m+n+1)$` },
+  { level: 2, q: String.raw`Évalue de façon exacte : $\log_2\sqrt{32}+\log_3\dfrac1{\sqrt{27}}+\log_{1/4}8$.`, ans: String.raw`$\tfrac52-\tfrac32-\tfrac32=-\tfrac12$` },
+  { level: 2, space: 4, q: String.raw`Le graphique de $y=\log_b x$ passe par $(9,2)$. (a) Trouve $b$. (b) Trouve la valeur exacte de $x$ pour laquelle $y=2.5$. (c) Utilise le changement de base pour trouver $y$ lorsque $x=20$, au millième près.`, ans: String.raw`(a) $b=3$ (b) $x=3^{5/2}=9\sqrt3\approx15.59$ (c) $\tfrac{\log20}{\log3}\approx2.727$`,
+    fig: F({ view: { xmin: -2, xmax: 25, ymin: -2, ymax: 3.5 }, curves: [{ f: lg(3), a: 0.02, color: "violet" }], points: [pt(9, 2, null, "amber"), pt(1, 0, null, "violet")], step: { x: 5, y: 1 } }) },
+  { level: 3, space: 5, q: String.raw`Résous et vérifie que chaque réponse est permise : (a) $\log_x 8=-\tfrac32$ (b) $\log_4\left(\log_3x\right)=\tfrac12$ (c) $\log_2\left(x^2-x\right)=1$`, ans: String.raw`(a) $x=\tfrac14$ (b) $\log_3x=2$, $x=9$ (c) $x^2-x-2=0$, $x=2$ ou $x=-1$ (les deux donnent $x^2-x=2>0$)` },
+  { level: 3, space: 5, q: String.raw`Chaque énoncé est faux. Montre-le avec des nombres, puis corrige-le.
+(a) $\log(A+B)=\log A+\log B$ (essaie $A=2$, $B=8$)
+(b) $\dfrac{\log_2 32}{\log_2 4}=\log_2 8$`, ans: String.raw`(a) $\log10=1$, mais $\log2+\log8=\log16\approx1.204$; énoncé correct : $\log(AB)=\log A+\log B$ (b) le membre de gauche vaut $\tfrac52$, et non 3; par changement de base, il est égal à $\log_4 32$` },
+  { level: 3, space: 5, q: String.raw`(a) Utilise le changement de base pour démontrer que $\log_a b\cdot\log_b c=\log_a c$.
+(b) Déduis-en la valeur de $\log_2 3\cdot\log_3 4\cdot\log_4 5\cdots\log_{31}32$.`, ans: String.raw`(a) $\tfrac{\log b}{\log a}\cdot\tfrac{\log c}{\log b}=\tfrac{\log c}{\log a}$ (b) le produit se simplifie en chaîne jusqu'à $\log_2 32=5$` },
+  { level: 3, space: 4, q: String.raw`Évalue de façon exacte en indiquant la loi utilisée à chaque étape : (a) $3^{2\log_3 5-\log_3 2}$ (b) $100^{\log 6}$ (c) $\log_2\left(\log_4 256\right)$`, ans: String.raw`(a) $\tfrac{25}{2}$ (b) $36$ (c) $2$` },
+  { level: 3, space: 5, q: String.raw`Les graphiques de $y=\log_2x$ et de $y=\log_2(8x)$ sont illustrés.
+(a) Utilise une loi des logarithmes pour expliquer pourquoi le deuxième graphique est le premier translaté de 3 unités vers le haut. Trouve son abscisse à l'origine.
+(b) $y=\log_2\left(x^2\right)$ et $y=2\log_2x$ sont-elles la même fonction? Compare leurs domaines et esquisse les deux.`, ans: String.raw`(a) $\log_2(8x)=3+\log_2x$; abscisse à l'origine $\tfrac18$ (b) non : $\log_2(x^2)$ a pour domaine $x\ne0$ et est symétrique par rapport à l'axe des y; $2\log_2x$ exige $x>0$; elles coïncident seulement pour $x>0$`,
+    fig: F({ view: { xmin: -1, xmax: 8, ymin: -4, ymax: 7 }, curves: [{ f: lg(2), a: 0.01, color: "blue" }, { f: (x) => lg(2)(8 * x), a: 0.002, color: "violet" }], points: [pt(1, 0, null, "blue"), pt(1, 3, null, "violet")], step: { x: 1, y: 1 } }) },
+];
+
+export const WS = {
+  code: "6.2",
+  title: "Logarithmes et lois des logarithmes",
+  bigideas: String.raw`Un logarithme est un exposant : $\log_b x=y$ signifie $b^y=x$ ($b>0$, $b\ne1$, $x>0$). Puisque les logarithmes sont des exposants, les lois des exposants deviennent les lois des logarithmes : produit $\log_b(xy)=\log_bx+\log_by$, quotient $\log_b\tfrac xy=\log_bx-\log_by$, puissance $\log_b x^n=n\log_bx$. Le changement de base, $\log_bx=\tfrac{\log x}{\log b}$, permet d'évaluer n'importe quel logarithme à la calculatrice, et $b^{\log_bx}=x$, $\log_b b^x=x$ s'annulent l'un l'autre.`,
+  goals: ["Évaluer des logarithmes dont la réponse est fractionnaire ou négative, ou dont la base est inhabituelle.", "Développer et réduire des expressions avec les lois du produit, du quotient et de la puissance.", "Utiliser le changement de base et les propriétés des inverses pour évaluer et simplifier.", "Résoudre des équations logarithmiques simples et vérifier quelles réponses sont permises."],
+  curriculum: "A1.1, A1.2, A1.3",
+  vocab: [["Logarithme", "$\\log_bx$ : l'exposant sur $b$ qui donne $x$"], ["Logarithme décimal", "$\\log x$ signifie $\\log_{10}x$"], ["Changement de base", "$\\log_bx=\\dfrac{\\log x}{\\log b}$"]],
+  hook: String.raw`Sans calculatrice : $\log_2 3\cdot\log_3 4\cdot\log_4 5\cdots\log_{31}32$ est-il plus près de 5, de 30 ou de 1000? Faites un vote, puis revenez-y à la fin de la leçon (problème 11).`,
+  concepts: [
+    ["1. Un logarithme est un exposant", String.raw`Pour évaluer $\log_b x$, écris $b^y=x$ en exprimant les deux membres comme des puissances d'une base commune. Les réponses peuvent être des fractions ou des nombres négatifs : $\log_2\tfrac14=-2$, $\log_8 2=\tfrac13$.
+${F({ view: { xmin: -1, xmax: 9, ymin: -3, ymax: 4 }, curves: [{ f: lg(2), a: 0.01, color: "violet" }], points: [pt(0.25, -2, null, "violet"), pt(1, 0, null, "violet"), pt(2, 1, null, "violet"), pt(8, 3, null, "violet")], step: { x: 1, y: 1 } })}`],
+    ["2. Les lois découlent des lois des exposants", String.raw`Si $x=b^m$ et $y=b^n$, alors $xy=b^{m+n}$, donc $\log_b(xy)=m+n=\log_bx+\log_by$. De la même façon, $\tfrac xy=b^{m-n}$ et $x^k=b^{km}$ donnent les lois du quotient et de la puissance. Pour développer, on les applique de gauche à droite; pour réduire, de droite à gauche.`],
+    ["3. Changement de base et propriétés des inverses", String.raw`$\log_b x=\dfrac{\log x}{\log b}$ pour n'importe quelle base. Encadre la réponse entre deux puissances entières pour la vérifier. Puisque $b^x$ et $\log_bx$ sont des inverses, $b^{\log_bx}=x$ et $\log_bb^x=x$.`],
+  ],
+  tips: [String.raw`$\log(x+y)$ n'est PAS $\log x+\log y$; il n'existe aucune loi pour une somme à l'intérieur d'un logarithme.`, String.raw`$\dfrac{\log x}{\log y}$ n'est PAS $\log\dfrac xy$; c'est la forme « changement de base » de $\log_y x$.`, String.raw`Applique la loi de la puissance seulement au facteur qui porte l'exposant : $\log(3x^2)=\log3+2\log x$.`, "La base doit être positive et différente de 1, et l'argument doit être positif : vérifie chaque réponse.", "Vérifie une réponse obtenue par changement de base en l'encadrant entre deux puissances entières."],
+  examples: EXAMPLES,
+  problems: PROBLEMS,
+};

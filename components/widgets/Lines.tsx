@@ -6,6 +6,7 @@
 
 import { useState, type ReactNode } from "react";
 import { C, MathText, Readout, Row, Segmented, Slider, WidgetCard, gcd } from "./kit";
+import { useT } from "@/lib/lang";
 
 type View = { xmin: number; xmax: number; ymin: number; ymax: number };
 const W = 520, H = 400;
@@ -28,7 +29,9 @@ function lineTex(p: number, q: number, b: number, v = "x") {
 const fmt = (v: number) => { const r = Math.round(v * 100) / 100; return r < 0 ? `−${-r}` : String(r); };
 
 /** Shared grid. children get coordinate mappers. */
-function Plane({ view, children, label = "Coordinate grid" }: { view: View; children: (X: (x: number) => number, Y: (y: number) => number) => ReactNode; label?: string }) {
+function Plane({ view, children, label: labelIn }: { view: View; children: (X: (x: number) => number, Y: (y: number) => number) => ReactNode; label?: string }) {
+  const t = useT();
+  const label = labelIn ?? t("Coordinate grid", "Grille de coordonnées");
   const { xmin, xmax, ymin, ymax } = view;
   const X = (x: number) => ((x - xmin) / (xmax - xmin)) * W, Y = (y: number) => H - ((y - ymin) / (ymax - ymin)) * H;
   const xs: number[] = [], ys: number[] = [];
@@ -68,22 +71,23 @@ export function SlopeExplorer({ initRise = 2, initRun = 3, initB = -1 }: { initR
   const [b, setB] = useState(initB);
   const view = { xmin: -8, xmax: 8, ymin: -8, ymax: 8 };
   const m = rise / run;
-  const kind = rise === 0 ? "horizontal line (slope 0)" : b === 0 ? "direct variation (passes through the origin)" : "partial variation (starts at the y-intercept)";
+  const t = useT();
+  const kind = rise === 0 ? t("horizontal line (slope 0)", "droite horizontale (pente 0)") : b === 0 ? t("direct variation (passes through the origin)", "variation directe (passe par l'origine)") : t("partial variation (starts at the y-intercept)", "variation partielle (commence à l'ordonnée à l'origine)");
   return (
-    <WidgetCard title="Slope and y-intercept" subtitle="slope = rise ÷ run; b is where the line crosses the y-axis">
+    <WidgetCard title={t("Slope and y-intercept", "Pente et ordonnée à l'origine")} subtitle={t("slope = rise ÷ run; b is where the line crosses the y-axis", "pente = déplacement vertical ÷ déplacement horizontal; b est l'endroit où la droite coupe l'axe des y")}>
       <Row>
-        <Slider label="rise" value={rise} min={-6} max={6} onChange={setRise} color={C.red} />
-        <Slider label="run" value={run} min={1} max={6} onChange={setRun} color={C.blue} />
+        <Slider label={t("rise", "dépl. vertical")} value={rise} min={-6} max={6} onChange={setRise} color={C.red} />
+        <Slider label={t("run", "dépl. horizontal")} value={run} min={1} max={6} onChange={setRun} color={C.blue} />
         <Slider label="b" value={b} min={-6} max={6} onChange={setB} color={C.green} />
       </Row>
-      <Plane view={view} label="Line with slope triangle">
+      <Plane view={view} label={t("Line with slope triangle", "Droite avec triangle de pente")}>
         {(X, Y) => (
           <>
             <line {...seg(X, Y, m, b, view)} stroke={C.violet} strokeWidth={3} />
             <line x1={X(0)} y1={Y(b)} x2={X(run)} y2={Y(b)} stroke={C.blue} strokeWidth={2.5} strokeDasharray="5 3" />
             <line x1={X(run)} y1={Y(b)} x2={X(run)} y2={Y(b + rise)} stroke={C.red} strokeWidth={2.5} strokeDasharray="5 3" />
-            <text x={(X(0) + X(run)) / 2} y={Y(b) + (rise >= 0 ? 16 : -6)} fontSize={13} fontWeight={700} fill={C.blue} textAnchor="middle">run {run}</text>
-            <text x={X(run) + 6} y={(Y(b) + Y(b + rise)) / 2 + 4} fontSize={13} fontWeight={700} fill={C.red}>rise {fmt(rise)}</text>
+            <text x={(X(0) + X(run)) / 2} y={Y(b) + (rise >= 0 ? 16 : -6)} fontSize={13} fontWeight={700} fill={C.blue} textAnchor="middle">{t("run", "horiz.")} {run}</text>
+            <text x={X(run) + 6} y={(Y(b) + Y(b + rise)) / 2 + 4} fontSize={13} fontWeight={700} fill={C.red}>{t("rise", "vert.")} {fmt(rise)}</text>
             <circle cx={X(0)} cy={Y(b)} r={6} fill={C.green} />
             <circle cx={X(run)} cy={Y(b + rise)} r={5} fill={C.violet} />
           </>
@@ -97,7 +101,7 @@ export function SlopeExplorer({ initRise = 2, initRun = 3, initB = -1 }: { initR
       </table>
       <Readout tone="green">
         <div style={{ fontSize: 19, fontWeight: 800 }}><MathText html={`\\(${lineTex(rise, run, b)}\\)`} /></div>
-        <MathText html={`Slope \\(m=\\dfrac{\\text{rise}}{\\text{run}}=\\dfrac{${rise}}{${run}}=${fr(rise, run)}\\): each step of \\(1\\) to the right changes \\(y\\) by \\(${fr(rise, run)}\\) — that is the constant first difference in the table. The y-intercept is \\(b=${b}\\). This is a ${kind}. ${rise < 0 ? "A negative slope falls from left to right." : rise > 0 ? "A positive slope rises from left to right." : ""}`} />
+        <MathText html={t(`Slope \\(m=\\dfrac{\\text{rise}}{\\text{run}}=\\dfrac{${rise}}{${run}}=${fr(rise, run)}\\): each step of \\(1\\) to the right changes \\(y\\) by \\(${fr(rise, run)}\\) — that is the constant first difference in the table. The y-intercept is \\(b=${b}\\). This is a ${kind}. ${rise < 0 ? "A negative slope falls from left to right." : rise > 0 ? "A positive slope rises from left to right." : ""}`, `Pente \\(m=\\dfrac{\\text{dépl. vertical}}{\\text{dépl. horizontal}}=\\dfrac{${rise}}{${run}}=${fr(rise, run)}\\) : chaque pas de \\(1\\) vers la droite change \\(y\\) de \\(${fr(rise, run)}\\) — c'est la différence première constante dans le tableau. L'ordonnée à l'origine est \\(b=${b}\\). C'est une ${kind}. ${rise < 0 ? "Une pente négative descend de gauche à droite." : rise > 0 ? "Une pente positive monte de gauche à droite." : ""}`)} />
       </Readout>
     </WidgetCard>
   );
@@ -106,15 +110,17 @@ export function SlopeExplorer({ initRise = 2, initRun = 3, initB = -1 }: { initR
 /* ---------------------------------------------------------------- relation types */
 
 const RELS = {
-  linear: { name: "linear", tex: "y=2x+1", f: (x: number) => 2 * x + 1, view: { xmin: -4, xmax: 6, ymin: -8, ymax: 14 } },
-  quadratic: { name: "quadratic", tex: "y=x^2-2", f: (x: number) => x * x - 2, view: { xmin: -5, xmax: 5, ymin: -4, ymax: 16 } },
-  exponential: { name: "exponential", tex: "y=2^x", f: (x: number) => 2 ** x, view: { xmin: -3, xmax: 6, ymin: -2, ymax: 40 } },
-  inverse: { name: "inverse (xy = 12)", tex: "xy=12,\\ y=\\tfrac{12}{x}", f: (x: number) => 12 / x, view: { xmin: -12, xmax: 12, ymin: -12, ymax: 12 } },
+  linear: { name: "linear", nameFr: "linéaire", tex: "y=2x+1", f: (x: number) => 2 * x + 1, view: { xmin: -4, xmax: 6, ymin: -8, ymax: 14 } },
+  quadratic: { name: "quadratic", nameFr: "quadratique", tex: "y=x^2-2", f: (x: number) => x * x - 2, view: { xmin: -5, xmax: 5, ymin: -4, ymax: 16 } },
+  exponential: { name: "exponential", nameFr: "exponentielle", tex: "y=2^x", f: (x: number) => 2 ** x, view: { xmin: -3, xmax: 6, ymin: -2, ymax: 40 } },
+  inverse: { name: "inverse (xy = 12)", nameFr: "inverse (xy = 12)", tex: "xy=12,\\ y=\\tfrac{12}{x}", f: (x: number) => 12 / x, view: { xmin: -12, xmax: 12, ymin: -12, ymax: 12 } },
 } as const;
 
 export function RelationTypes() {
   const [k, setK] = useState<keyof typeof RELS>("linear");
   const r = RELS[k];
+  const t = useT();
+  const rName = t(r.name, r.nameFr);
   const xs = k === "inverse" ? [1, 2, 3, 4, 6, 12] : [0, 1, 2, 3, 4, 5];
   const ys = xs.map(r.f);
   const d1 = ys.slice(1).map((y, i) => y - ys[i]);
@@ -123,15 +129,15 @@ export function RelationTypes() {
   const even = xs.every((x, i) => i === 0 || x - xs[i - 1] === 1);
   const cell = { padding: "3px 9px", border: `1px solid ${C.line}`, textAlign: "center" as const };
   const note = {
-    linear: "The first differences are all the same: a constant rate of change. The graph is a straight line.",
-    quadratic: "The first differences change, but the second differences are constant: a quadratic relation. The graph is a parabola (U-shape).",
-    exponential: "The differences keep changing, but each y is 2 times the one before: a constant ratio. The graph curves up faster and faster.",
-    inverse: "As x doubles, y halves: the product xy is always 12. The graph is a hyperbola in two pieces; it never touches the axes.",
+    linear: t("The first differences are all the same: a constant rate of change. The graph is a straight line.", "Les différences premières sont toutes égales : un taux de variation constant. Le graphique est une droite."),
+    quadratic: t("The first differences change, but the second differences are constant: a quadratic relation. The graph is a parabola (U-shape).", "Les différences premières changent, mais les différences secondes sont constantes : une relation quadratique. Le graphique est une parabole (en forme de U)."),
+    exponential: t("The differences keep changing, but each y is 2 times the one before: a constant ratio. The graph curves up faster and faster.", "Les différences continuent de changer, mais chaque y vaut 2 fois le précédent : un rapport constant. Le graphique monte de plus en plus vite."),
+    inverse: t("As x doubles, y halves: the product xy is always 12. The graph is a hyperbola in two pieces; it never touches the axes.", "Quand x double, y diminue de moitié : le produit xy vaut toujours 12. Le graphique est une hyperbole en deux parties; il ne touche jamais les axes."),
   }[k];
   return (
-    <WidgetCard title="Linear or non-linear?" subtitle="Look at the table's differences, then at the graph">
-      <Segmented options={(Object.keys(RELS) as (keyof typeof RELS)[]).map((key) => ({ value: key, label: RELS[key].name }))} value={k} onChange={setK} />
-      <Plane view={r.view} label={`Graph of ${r.name}`}>
+    <WidgetCard title={t("Linear or non-linear?", "Linéaire ou non linéaire?")} subtitle={t("Look at the table's differences, then at the graph", "Observe les différences dans le tableau, puis le graphique")}>
+      <Segmented options={(Object.keys(RELS) as (keyof typeof RELS)[]).map((key) => ({ value: key, label: t(RELS[key].name, RELS[key].nameFr) }))} value={k} onChange={setK} />
+      <Plane view={r.view} label={t(`Graph of ${r.name}`, `Graphique : ${r.nameFr}`)}>
         {(X, Y) => (
           <>
             {k === "inverse"
@@ -146,15 +152,15 @@ export function RelationTypes() {
           <tbody>
             <tr><th style={{ ...cell, background: C.panel }}>x</th>{xs.map((x) => <td key={x} style={cell}>{x}</td>)}</tr>
             <tr><th style={{ ...cell, background: C.panel }}>y</th>{ys.map((y, i) => <td key={i} style={cell}>{fmt(y)}</td>)}</tr>
-            {even && <tr><th style={{ ...cell, background: C.panel }}>1st diff.</th><td style={cell} />{d1.map((d, i) => <td key={i} style={{ ...cell, color: C.blue, fontWeight: 700 }}>{fmt(d)}</td>)}</tr>}
-            {even && k !== "linear" && <tr><th style={{ ...cell, background: C.panel }}>2nd diff.</th><td style={cell} /><td style={cell} />{d2.map((d, i) => <td key={i} style={{ ...cell, color: C.red, fontWeight: 700 }}>{fmt(d)}</td>)}</tr>}
-            {k === "exponential" && <tr><th style={{ ...cell, background: C.panel }}>ratio</th><td style={cell} />{ratio.map((q, i) => <td key={i} style={{ ...cell, color: C.green, fontWeight: 700 }}>{fmt(q)}</td>)}</tr>}
+            {even && <tr><th style={{ ...cell, background: C.panel }}>{t("1st diff.", "1re diff.")}</th><td style={cell} />{d1.map((d, i) => <td key={i} style={{ ...cell, color: C.blue, fontWeight: 700 }}>{fmt(d)}</td>)}</tr>}
+            {even && k !== "linear" && <tr><th style={{ ...cell, background: C.panel }}>{t("2nd diff.", "2e diff.")}</th><td style={cell} /><td style={cell} />{d2.map((d, i) => <td key={i} style={{ ...cell, color: C.red, fontWeight: 700 }}>{fmt(d)}</td>)}</tr>}
+            {k === "exponential" && <tr><th style={{ ...cell, background: C.panel }}>{t("ratio", "rapport")}</th><td style={cell} />{ratio.map((q, i) => <td key={i} style={{ ...cell, color: C.green, fontWeight: 700 }}>{fmt(q)}</td>)}</tr>}
             {k === "inverse" && <tr><th style={{ ...cell, background: C.panel }}>x·y</th>{xs.map((x, i) => <td key={i} style={{ ...cell, color: C.green, fontWeight: 700 }}>{fmt(x * ys[i])}</td>)}</tr>}
           </tbody>
         </table>
       </div>
       <Readout tone={k === "linear" ? "green" : "amber"}>
-        <div style={{ fontSize: 18, fontWeight: 800 }}><MathText html={`\\(${r.tex}\\) — ${r.name}`} /></div>
+        <div style={{ fontSize: 18, fontWeight: 800 }}><MathText html={`\\(${r.tex}\\) — ${rName}`} /></div>
         {note}
       </Readout>
     </WidgetCard>
@@ -170,8 +176,9 @@ export function LinePair({ init = [1, 2, -2, 8] }: { init?: [number, number, num
   const parallel = m1 === m2, perp = Math.abs(m1 * m2 + 1) < 1e-9;
   const xi = parallel ? NaN : (b2 - b1) / (m1 - m2), yi = m1 * xi + b1;
   const r2 = (v: number) => Math.round(v * 100) / 100;
+  const t = useT();
   return (
-    <WidgetCard title="Two lines" subtitle="Where do they meet? Are they parallel or perpendicular?">
+    <WidgetCard title={t("Two lines", "Deux droites")} subtitle={t("Where do they meet? Are they parallel or perpendicular?", "Où se coupent-elles? Sont-elles parallèles ou perpendiculaires?")}>
       <Row gap={10}>
         <Slider label="m₁" value={m1} min={-4} max={4} step={0.5} onChange={setM1} color={C.blue} format={fmt} />
         <Slider label="b₁" value={b1} min={-8} max={8} onChange={setB1} color={C.blue} />
@@ -180,7 +187,7 @@ export function LinePair({ init = [1, 2, -2, 8] }: { init?: [number, number, num
         <Slider label="m₂" value={m2} min={-4} max={4} step={0.5} onChange={setM2} color={C.red} format={fmt} />
         <Slider label="b₂" value={b2} min={-8} max={8} onChange={setB2} color={C.red} />
       </Row>
-      <Plane view={view} label="Two lines">
+      <Plane view={view} label={t("Two lines", "Deux droites")}>
         {(X, Y) => (
           <>
             <line {...seg(X, Y, m1, b1, view)} stroke={C.blue} strokeWidth={3} />
@@ -190,10 +197,10 @@ export function LinePair({ init = [1, 2, -2, 8] }: { init?: [number, number, num
         )}
       </Plane>
       <Readout tone={parallel ? "amber" : "green"}>
-        <MathText block html={`<span style="color:${C.blue};font-weight:800">\\(y=${fmt(m1).replace("−", "-")}x${b1 < 0 ? "" : "+"}${b1}\\)</span> and <span style="color:${C.red};font-weight:800">\\(y=${fmt(m2).replace("−", "-")}x${b2 < 0 ? "" : "+"}${b2}\\)</span>`} />
+        <MathText block html={`<span style="color:${C.blue};font-weight:800">\\(y=${fmt(m1).replace("−", "-")}x${b1 < 0 ? "" : "+"}${b1}\\)</span> ${t("and", "et")} <span style="color:${C.red};font-weight:800">\\(y=${fmt(m2).replace("−", "-")}x${b2 < 0 ? "" : "+"}${b2}\\)</span>`} />
         <MathText block html={parallel
-          ? (b1 === b2 ? "Same slope and same intercept: the lines are identical (every point is shared)." : `Same slope \\(${fmt(m1).replace("−", "-")}\\), different intercepts: the lines are <strong>parallel</strong> and never meet — no solution.`)
-          : `They meet where \\(${fmt(m1).replace("−", "-")}x${b1 < 0 ? "" : "+"}${b1}=${fmt(m2).replace("−", "-")}x${b2 < 0 ? "" : "+"}${b2}\\): \\(x=${r2(xi)}\\), \\(y=${r2(yi)}\\). Point of intersection \\((${r2(xi)},\\ ${r2(yi)})\\).${perp ? ` The slopes multiply to \\(-1\\): the lines are <strong>perpendicular</strong>.` : ""}`} />
+          ? (b1 === b2 ? t("Same slope and same intercept: the lines are identical (every point is shared).", "Même pente et même ordonnée à l'origine : les droites sont confondues (tous les points sont communs).") : t(`Same slope \\(${fmt(m1).replace("−", "-")}\\), different intercepts: the lines are <strong>parallel</strong> and never meet — no solution.`, `Même pente \\(${fmt(m1).replace("−", "-")}\\), ordonnées à l'origine différentes : les droites sont <strong>parallèles</strong> et ne se coupent jamais — aucune solution.`))
+          : t(`They meet where \\(${fmt(m1).replace("−", "-")}x${b1 < 0 ? "" : "+"}${b1}=${fmt(m2).replace("−", "-")}x${b2 < 0 ? "" : "+"}${b2}\\): \\(x=${r2(xi)}\\), \\(y=${r2(yi)}\\). Point of intersection \\((${r2(xi)},\\ ${r2(yi)})\\).${perp ? ` The slopes multiply to \\(-1\\): the lines are <strong>perpendicular</strong>.` : ""}`, `Elles se coupent là où \\(${fmt(m1).replace("−", "-")}x${b1 < 0 ? "" : "+"}${b1}=${fmt(m2).replace("−", "-")}x${b2 < 0 ? "" : "+"}${b2}\\) : \\(x=${r2(xi)}\\), \\(y=${r2(yi)}\\). Point d'intersection \\((${r2(xi)},\\ ${r2(yi)})\\).${perp ? ` Le produit des pentes est \\(-1\\) : les droites sont <strong>perpendiculaires</strong>.` : ""}`)} />
       </Readout>
     </WidgetCard>
   );
@@ -206,9 +213,10 @@ export function TwoPointLine({ init = [-3, -1, 3, 3] }: { init?: [number, number
   const [x2, setX2] = useState(init[2]); const [y2, setY2] = useState(init[3]);
   const view = { xmin: -8, xmax: 8, ymin: -8, ymax: 8 };
   const dx = x2 - x1, dy = y2 - y1;
+  const t = useT();
   let body: string;
-  if (dx === 0 && dy === 0) body = "Choose two different points.";
-  else if (dx === 0) body = `The run is \\(0\\), so the slope is undefined: the line is vertical, \\(x=${x1}\\).`;
+  if (dx === 0 && dy === 0) body = t("Choose two different points.", "Choisis deux points différents.");
+  else if (dx === 0) body = t(`The run is \\(0\\), so the slope is undefined: the line is vertical, \\(x=${x1}\\).`, `Le déplacement horizontal est \\(0\\), donc la pente n'est pas définie : la droite est verticale, \\(x=${x1}\\).`);
   else {
     // y = (dy/dx) x + b, b = y1 - (dy/dx) x1 = (y1*dx - dy*x1)/dx
     const bn = y1 * dx - dy * x1;
@@ -216,10 +224,11 @@ export function TwoPointLine({ init = [-3, -1, 3, 3] }: { init?: [number, number
     let A = dy / g, B = -dx / g, Cc = bn / g; // dy x - dx y + bn = 0
     if (A < 0 || (A === 0 && B < 0)) { A = -A; B = -B; Cc = -Cc; }
     const gen = `${A === 0 ? "" : `${A === 1 ? "" : A === -1 ? "-" : A}x`}${B === 0 ? "" : `${B > 0 && A !== 0 ? "+" : B < 0 ? "-" : ""}${Math.abs(B) === 1 ? "" : Math.abs(B)}y`}${Cc === 0 ? "" : Cc > 0 ? `+${Cc}` : `${Cc}`}=0`;
-    body = `\\(m=\\dfrac{y_2-y_1}{x_2-x_1}=\\dfrac{${y2}-(${y1})}{${x2}-(${x1})}=\\dfrac{${dy}}{${dx}}=${fr(dy, dx)}\\).<br/>Substitute \\((${x1},${y1})\\) into \\(y=mx+b\\): \\(${y1}=${fr(dy, dx)}(${x1})+b\\), so \\(b=${fr(bn, dx)}\\).<br/>Slope–intercept form: \\(y=${fr(dy, dx) === "0" ? "" : `${fr(dy, dx)}x`}${bn === 0 ? (dy === 0 ? "0" : "") : (bn * dx > 0 && dy !== 0 ? "+" : "") + fr(bn, dx)}\\). &nbsp; General form: \\(${gen}\\).`;
+    const yTex = `${fr(dy, dx) === "0" ? "" : `${fr(dy, dx)}x`}${bn === 0 ? (dy === 0 ? "0" : "") : (bn * dx > 0 && dy !== 0 ? "+" : "") + fr(bn, dx)}`;
+    body = t(`\\(m=\\dfrac{y_2-y_1}{x_2-x_1}=\\dfrac{${y2}-(${y1})}{${x2}-(${x1})}=\\dfrac{${dy}}{${dx}}=${fr(dy, dx)}\\).<br/>Substitute \\((${x1},${y1})\\) into \\(y=mx+b\\): \\(${y1}=${fr(dy, dx)}(${x1})+b\\), so \\(b=${fr(bn, dx)}\\).<br/>Slope–intercept form: \\(y=${yTex}\\). &nbsp; General form: \\(${gen}\\).`, `\\(m=\\dfrac{y_2-y_1}{x_2-x_1}=\\dfrac{${y2}-(${y1})}{${x2}-(${x1})}=\\dfrac{${dy}}{${dx}}=${fr(dy, dx)}\\).<br/>Remplace \\((${x1},${y1})\\) dans \\(y=mx+b\\) : \\(${y1}=${fr(dy, dx)}(${x1})+b\\), donc \\(b=${fr(bn, dx)}\\).<br/>Forme pente-ordonnée à l'origine : \\(y=${yTex}\\). &nbsp; Forme générale : \\(${gen}\\).`);
   }
   return (
-    <WidgetCard title="The line through two points" subtitle="slope from the two points, then b, then the equation">
+    <WidgetCard title={t("The line through two points", "La droite passant par deux points")} subtitle={t("slope from the two points, then b, then the equation", "la pente à partir des deux points, puis b, puis l'équation")}>
       <Row gap={10}>
         <Slider label="x₁" value={x1} min={-7} max={7} onChange={setX1} color={C.blue} />
         <Slider label="y₁" value={y1} min={-7} max={7} onChange={setY1} color={C.blue} />
@@ -228,7 +237,7 @@ export function TwoPointLine({ init = [-3, -1, 3, 3] }: { init?: [number, number
         <Slider label="x₂" value={x2} min={-7} max={7} onChange={setX2} color={C.red} />
         <Slider label="y₂" value={y2} min={-7} max={7} onChange={setY2} color={C.red} />
       </Row>
-      <Plane view={view} label="Line through two points">
+      <Plane view={view} label={t("Line through two points", "Droite passant par deux points")}>
         {(X, Y) => (
           <>
             {dx !== 0 ? <line {...seg(X, Y, dy / dx, y1 - (dy / dx) * x1, view)} stroke={C.violet} strokeWidth={3} /> : dy !== 0 ? <line x1={X(x1)} y1={0} x2={X(x1)} y2={H} stroke={C.violet} strokeWidth={3} /> : null}
@@ -254,18 +263,19 @@ export function InequalityRegion({ initM = 0.5, initB = 1 }: { initM?: number; i
   const lhs = py, rhs = m * px + b;
   const ok = op === "<" ? lhs < rhs : op === "<=" ? lhs <= rhs : op === ">" ? lhs > rhs : lhs >= rhs;
   const opTex = { "<": "<", "<=": "\\le", ">": ">", ">=": "\\ge" }[op];
+  const t = useT();
   return (
-    <WidgetCard title="Graphing a linear inequality" subtitle="The boundary line, then shade the side that works">
+    <WidgetCard title={t("Graphing a linear inequality", "Représenter graphiquement une inéquation linéaire")} subtitle={t("The boundary line, then shade the side that works", "La droite frontière, puis ombre le côté qui fonctionne")}>
       <Row gap={10}>
         <Slider label="m" value={m} min={-3} max={3} step={0.5} onChange={setM} color={C.violet} format={fmt} />
         <Slider label="b" value={b} min={-6} max={6} onChange={setB} color={C.violet} />
       </Row>
       <div style={{ margin: "8px 0" }}><Segmented options={[{ value: "<", label: "y <" }, { value: "<=", label: "y ≤" }, { value: ">", label: "y >" }, { value: ">=", label: "y ≥" }]} value={op} onChange={setOp} /></div>
       <Row gap={10}>
-        <Slider label="test x" value={px} min={-7} max={7} onChange={setPx} color={ok ? C.green : C.red} />
-        <Slider label="test y" value={py} min={-7} max={7} onChange={setPy} color={ok ? C.green : C.red} />
+        <Slider label={t("test x", "x test")} value={px} min={-7} max={7} onChange={setPx} color={ok ? C.green : C.red} />
+        <Slider label={t("test y", "y test")} value={py} min={-7} max={7} onChange={setPy} color={ok ? C.green : C.red} />
       </Row>
-      <Plane view={view} label="Inequality region">
+      <Plane view={view} label={t("Inequality region", "Région de l'inéquation")}>
         {(X, Y) => {
           const s = seg(X, Y, m, b, view);
           const edge = above ? 0 : H;
@@ -280,7 +290,7 @@ export function InequalityRegion({ initM = 0.5, initB = 1 }: { initM?: number; i
       </Plane>
       <Readout tone={ok ? "green" : "red"}>
         <div style={{ fontSize: 18, fontWeight: 800 }}><MathText html={`\\(y${opTex}${fmt(m).replace("−", "-")}x${b < 0 ? "" : "+"}${b}\\)`} /></div>
-        <MathText html={`Boundary \\(y=${fmt(m).replace("−", "-")}x${b < 0 ? "" : "+"}${b}\\) is ${solid ? "<strong>solid</strong> (points on it are included)" : "<strong>dashed</strong> (points on it are not included)"}. Shade ${above ? "above" : "below"} the line. Test \\((${px}, ${py})\\): \\(${py}${opTex}${fmt(rhs).replace("−", "-")}\\) is ${ok ? "<strong>true</strong> — the point is in the region" : "<strong>false</strong> — the point is not in the region"}.`} />
+        <MathText html={t(`Boundary \\(y=${fmt(m).replace("−", "-")}x${b < 0 ? "" : "+"}${b}\\) is ${solid ? "<strong>solid</strong> (points on it are included)" : "<strong>dashed</strong> (points on it are not included)"}. Shade ${above ? "above" : "below"} the line. Test \\((${px}, ${py})\\): \\(${py}${opTex}${fmt(rhs).replace("−", "-")}\\) is ${ok ? "<strong>true</strong> — the point is in the region" : "<strong>false</strong> — the point is not in the region"}.`, `La frontière \\(y=${fmt(m).replace("−", "-")}x${b < 0 ? "" : "+"}${b}\\) est ${solid ? "<strong>pleine</strong> (les points sur la droite sont inclus)" : "<strong>pointillée</strong> (les points sur la droite ne sont pas inclus)"}. Ombre ${above ? "au-dessus de" : "sous"} la droite. Teste \\((${px}, ${py})\\) : \\(${py}${opTex}${fmt(rhs).replace("−", "-")}\\) est ${ok ? "<strong>vrai</strong> — le point est dans la région" : "<strong>faux</strong> — le point n'est pas dans la région"}.`)} />
       </Readout>
     </WidgetCard>
   );
@@ -289,7 +299,10 @@ export function InequalityRegion({ initM = 0.5, initB = 1 }: { initM?: number; i
 /* ---------------------------------------------------------------- motion story */
 
 type Leg = { dur: number; to: number; text: string };
-export function MotionStory({ legs = [{ dur: 4, to: 600, text: "walks to the store" }, { dur: 3, to: 600, text: "shops (stays still)" }, { dur: 2, to: 0, text: "runs home" }], unit = "m", tUnit = "min", title = "Distance from home" }: { legs?: Leg[]; unit?: string; tUnit?: string; title?: string }) {
+export function MotionStory({ legs: legsIn, unit = "m", tUnit = "min", title: titleIn }: { legs?: Leg[]; unit?: string; tUnit?: string; title?: string }) {
+  const tr = useT();
+  const legs: Leg[] = legsIn ?? [{ dur: 4, to: 600, text: tr("walks to the store", "marche jusqu'au magasin") }, { dur: 3, to: 600, text: tr("shops (stays still)", "magasine (reste immobile)") }, { dur: 2, to: 0, text: tr("runs home", "court jusqu'à la maison") }];
+  const title = titleIn ?? tr("Distance from home", "Distance de la maison");
   const total = legs.reduce((s, l) => s + l.dur, 0);
   const pts: [number, number][] = [[0, 0]];
   legs.forEach((l) => pts.push([pts[pts.length - 1][0] + l.dur, l.to]));
@@ -301,9 +314,9 @@ export function MotionStory({ legs = [{ dur: 4, to: 600, text: "walks to the sto
   const speed = (db - da) / (tb - ta || 1);
   const view = { xmin: 0, xmax: total, ymin: 0, ymax };
   return (
-    <WidgetCard title={title} subtitle="A graph that tells a story: steepness = speed, flat = stopped">
-      <Row><Slider label={`time (${tUnit})`} value={t} min={0} max={total} step={0.25} onChange={setT} color={C.violet} format={(v) => String(v)} /></Row>
-      <Plane view={view} label="Distance-time graph">
+    <WidgetCard title={title} subtitle={tr("A graph that tells a story: steepness = speed, flat = stopped", "Un graphique qui raconte une histoire : inclinaison = vitesse, plat = arrêt")}>
+      <Row><Slider label={tr(`time (${tUnit})`, `temps (${tUnit})`)} value={t} min={0} max={total} step={0.25} onChange={setT} color={C.violet} format={(v) => String(v)} /></Row>
+      <Plane view={view} label={tr("Distance-time graph", "Graphique distance-temps")}>
         {(X, Y) => (
           <>
             <polyline points={pts.map(([a, b]) => `${X(a)},${Y(b)}`).join(" ")} fill="none" stroke={C.blue} strokeWidth={3} />
@@ -313,7 +326,7 @@ export function MotionStory({ legs = [{ dur: 4, to: 600, text: "walks to the sto
         )}
       </Plane>
       <Readout tone="blue">
-        <MathText html={`At \\(t=${t}\\) ${tUnit} the distance is \\(${fmt(d).replace("−", "-")}\\) ${unit}. During this part the person <strong>${legs[i - 1].text}</strong>: rate \\(${fmt(speed).replace("−", "-")}\\) ${unit}/${tUnit}${speed === 0 ? " (a flat segment means not moving)" : speed < 0 ? " (negative: coming back toward home)" : ""}.`} />
+        <MathText html={tr(`At \\(t=${t}\\) ${tUnit} the distance is \\(${fmt(d).replace("−", "-")}\\) ${unit}. During this part the person <strong>${legs[i - 1].text}</strong>: rate \\(${fmt(speed).replace("−", "-")}\\) ${unit}/${tUnit}${speed === 0 ? " (a flat segment means not moving)" : speed < 0 ? " (negative: coming back toward home)" : ""}.`, `À \\(t=${t}\\) ${tUnit}, la distance est \\(${fmt(d).replace("−", "-")}\\) ${unit}. Pendant cette partie, la personne <strong>${legs[i - 1].text}</strong> : taux \\(${fmt(speed).replace("−", "-")}\\) ${unit}/${tUnit}${speed === 0 ? " (un segment plat signifie qu'elle ne bouge pas)" : speed < 0 ? " (négatif : elle revient vers la maison)" : ""}.`)} />
       </Readout>
     </WidgetCard>
   );

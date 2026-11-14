@@ -93,7 +93,8 @@ export function wrongForm(spec: AnswerSpec, raw: string): boolean {
   return !raw.includes("/");
 }
 
-const NO_ROOTS = /^(none|no( real)? (roots?|solutions?|zeros?)|no solution|ø|∅)$/;
+// English and French (MHF4U-FR): "none", "aucune", "aucune racine réelle", "pas de solution", ...
+const NO_ROOTS = /^(none|no( real)? (roots?|solutions?|zeros?)|no solution|aucune?( (racines?|solutions?|zéros?)( réelles?)?)?|pas de (racines?|solutions?|zéros?)( réelles?)?|ø|∅)$/;
 
 /** Parse a typed list of roots. null = unreadable; [] = "no real roots". */
 export function parseRoots(raw: string): number[] | null {
@@ -101,7 +102,7 @@ export function parseRoots(raw: string): number[] | null {
   const s = norm(raw).replace(/[{}]/g, " ").trim();
   if (!s || NO_ROOTS.test(s)) return []; // "{ }" is the empty set
   const out: number[] = [];
-  for (let part of s.split(/\s*(?:,|;|\bor\b|\band\b)\s*/)) {
+  for (let part of s.split(/\s*(?:,|;|\bor\b|\band\b|\bou\b|\bet\b)\s*/)) {
     part = part.replace(/^[a-z]\s*=\s*/, "").trim();
     if (!part) continue;
     const pm = part.match(/^(?:\+\/-|±)\s*(.+)$/);

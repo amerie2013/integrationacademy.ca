@@ -5,6 +5,7 @@
 
 import { useState, type ReactNode } from "react";
 import { C, MathText, Readout, Row, Segmented, Slider, WidgetCard } from "./kit";
+import { useT } from "@/lib/lang";
 import { Plane, r2, type View } from "./Systems";
 
 type XY = [number, number];
@@ -35,15 +36,16 @@ function Arrow({ X, Y, from, to, color, label, width = 3, dash }: { X: Map2; Y: 
 /* ---------------------------------------------------------------- 7.1 Cartesian vectors in two-space */
 
 export function CartesianLab({ init = { a: 3, b: 2, c: -1, d: 3 } }: { init?: { a: number; b: number; c: number; d: number } }) {
+  const tr = useT();
   const [a, setA] = useState(init.a), [b, setB] = useState(init.b), [c, setC] = useState(init.c), [d, setD] = useState(init.d);
   const [mode, setMode] = useState<"one" | "sum" | "diff">("one");
   const u: XY = [a, b], v: XY = [c, d], s: XY = mode === "diff" ? [a - c, b - d] : [a + c, b + d];
   return (
-    <WidgetCard title="Vectors in Cartesian form" subtitle="A vector [a, b] = a·i + b·j: a units across and b units up. Add or subtract by components">
+    <WidgetCard title={tr("Vectors in Cartesian form", "Vecteurs sous forme cartésienne")} subtitle={tr("A vector [a, b] = a·i + b·j: a units across and b units up. Add or subtract by components", "Un vecteur [a, b] = a·i + b·j : a unités horizontalement et b unités vers le haut. Additionne ou soustrais composante par composante")}>
       <Row gap={10}><Slider label="u: a" value={a} min={-6} max={6} step={0.5} onChange={setA} color={C.violet} /><Slider label="u: b" value={b} min={-4.5} max={4.5} step={0.5} onChange={setB} color={C.violet} /></Row>
       {mode !== "one" && <Row gap={10}><Slider label="v: c" value={c} min={-6} max={6} step={0.5} onChange={setC} color={C.blue} /><Slider label="v: d" value={d} min={-4.5} max={4.5} step={0.5} onChange={setD} color={C.blue} /></Row>}
-      <Segmented options={[{ value: "one", label: "one vector" }, { value: "sum", label: "u + v" }, { value: "diff", label: "u − v" }]} value={mode} onChange={setMode} />
-      <Plane view={V} label="u (violet), v (blue), result (red)" step={1}>
+      <Segmented options={[{ value: "one", label: tr("one vector", "un vecteur") }, { value: "sum", label: "u + v" }, { value: "diff", label: "u − v" }]} value={mode} onChange={setMode} />
+      <Plane view={V} label={tr("u (violet), v (blue), result (red)", "u (violet), v (bleu), résultat (rouge)")} step={1}>
         {(X, Y) => <>
           {mode === "one" && <><Arrow X={X} Y={Y} from={[0, 0]} to={[a, 0]} color={C.blue} width={2} dash /><Arrow X={X} Y={Y} from={[a, 0]} to={u} color={C.red} width={2} dash /></>}
           <Arrow X={X} Y={Y} from={[0, 0]} to={u} color={C.violet} label="u" />
@@ -52,8 +54,8 @@ export function CartesianLab({ init = { a: 3, b: 2, c: -1, d: 3 } }: { init?: { 
       </Plane>
       <Readout tone="blue">
         {mode === "one"
-          ? <MathText block html={`\\(\\vec u=${vec(u)}=${fmt(a)}\\vec i+${fmt(b)}\\vec j\\). \\(|\\vec u|=\\sqrt{${fmt(a)}^2+${fmt(b)}^2}=${fmt(mag2(u))}\\), at \\(${fmt(ang2(u))}^\\circ\\) from the positive x-axis.${mag2(u) > 0 ? ` Unit vector: \\(${vec([a / mag2(u), b / mag2(u)])}\\).` : ""}`} />
-          : <MathText block html={`\\(${vec(u)}${mode === "diff" ? "-" : "+"}${vec(v)}=${vec(s)}\\), magnitude \\(${fmt(mag2(s))}\\).`} />}
+          ? <MathText block html={`\\(\\vec u=${vec(u)}=${fmt(a)}\\vec i+${fmt(b)}\\vec j\\). \\(|\\vec u|=\\sqrt{${fmt(a)}^2+${fmt(b)}^2}=${fmt(mag2(u))}\\), ${tr("at", "à")} \\(${fmt(ang2(u))}^\\circ\\) ${tr("from the positive x-axis.", "de la partie positive de l'axe des x.")}${mag2(u) > 0 ? ` ${tr("Unit vector:", "Vecteur unitaire :")} \\(${vec([a / mag2(u), b / mag2(u)])}\\).` : ""}`} />
+          : <MathText block html={`\\(${vec(u)}${mode === "diff" ? "-" : "+"}${vec(v)}=${vec(s)}\\), ${tr("magnitude", "norme")} \\(${fmt(mag2(s))}\\).`} />}
       </Readout>
     </WidgetCard>
   );
@@ -62,24 +64,25 @@ export function CartesianLab({ init = { a: 3, b: 2, c: -1, d: 3 } }: { init?: { 
 /* ---------------------------------------------------------------- 7.2 the dot product */
 
 export function DotLab({ init = { m1: 4, a1: 20, m2: 3, a2: 80 } }: { init?: { m1: number; a1: number; m2: number; a2: number } }) {
+  const tr = useT();
   const [m1, setM1] = useState(init.m1), [a1, setA1] = useState(init.a1), [m2, setM2] = useState(init.m2), [a2, setA2] = useState(init.a2);
   const u: XY = [m1 * Math.cos(a1 * RAD), m1 * Math.sin(a1 * RAD)], v: XY = [m2 * Math.cos(a2 * RAD), m2 * Math.sin(a2 * RAD)];
   const d = u[0] * v[0] + u[1] * v[1];
   const th = Math.acos(Math.max(-1, Math.min(1, d / (m1 * m2)))) / RAD;
   const tone = Math.abs(d) < 0.05 ? "green" : d > 0 ? "blue" : "red";
   return (
-    <WidgetCard title="The dot product" subtitle="u · v = |u||v| cos θ = u₁v₁ + u₂v₂ — a scalar that is positive, zero or negative as θ is acute, right or obtuse">
-      <Row gap={10}><Slider label="|u|" value={m1} min={0.5} max={5} step={0.1} onChange={setM1} color={C.violet} /><Slider label="u angle (°)" value={a1} min={0} max={359} step={1} onChange={setA1} color={C.violet} /></Row>
-      <Row gap={10}><Slider label="|v|" value={m2} min={0.5} max={5} step={0.1} onChange={setM2} color={C.blue} /><Slider label="v angle (°)" value={a2} min={0} max={359} step={1} onChange={setA2} color={C.blue} /></Row>
-      <Plane view={V} label="u (violet) and v (blue)" step={1}>
+    <WidgetCard title={tr("The dot product", "Le produit scalaire")} subtitle={tr("u · v = |u||v| cos θ = u₁v₁ + u₂v₂ — a scalar that is positive, zero or negative as θ is acute, right or obtuse", "u · v = |u||v| cos θ = u₁v₁ + u₂v₂ — un scalaire positif, nul ou négatif selon que θ est aigu, droit ou obtus")}>
+      <Row gap={10}><Slider label="|u|" value={m1} min={0.5} max={5} step={0.1} onChange={setM1} color={C.violet} /><Slider label={tr("u angle (°)", "angle de u (°)")} value={a1} min={0} max={359} step={1} onChange={setA1} color={C.violet} /></Row>
+      <Row gap={10}><Slider label="|v|" value={m2} min={0.5} max={5} step={0.1} onChange={setM2} color={C.blue} /><Slider label={tr("v angle (°)", "angle de v (°)")} value={a2} min={0} max={359} step={1} onChange={setA2} color={C.blue} /></Row>
+      <Plane view={V} label={tr("u (violet) and v (blue)", "u (violet) et v (bleu)")} step={1}>
         {(X, Y) => <>
           <Arrow X={X} Y={Y} from={[0, 0]} to={u} color={C.violet} label="u" />
           <Arrow X={X} Y={Y} from={[0, 0]} to={v} color={C.blue} label="v" />
         </>}
       </Plane>
       <Readout tone={tone}>
-        <MathText block html={`\\(\\vec u=${vec(u)}\\), \\(\\vec v=${vec(v)}\\). Components: \\((${fmt(u[0])})(${fmt(v[0])})+(${fmt(u[1])})(${fmt(v[1])})=${fmt(d)}\\). Geometry: \\(${fmt(m1)}\\times${fmt(m2)}\\times\\cos${fmt(th)}^\\circ=${fmt(d)}\\).`} />
-        <MathText block html={Math.abs(d) < 0.05 ? "θ = 90°: the vectors are perpendicular and the dot product is 0." : d > 0 ? "θ is acute, so the dot product is positive." : "θ is obtuse, so the dot product is negative."} />
+        <MathText block html={`\\(\\vec u=${vec(u)}\\), \\(\\vec v=${vec(v)}\\). ${tr("Components:", "Composantes :")} \\((${fmt(u[0])})(${fmt(v[0])})+(${fmt(u[1])})(${fmt(v[1])})=${fmt(d)}\\). ${tr("Geometry:", "Géométrie :")} \\(${fmt(m1)}\\times${fmt(m2)}\\times\\cos${fmt(th)}^\\circ=${fmt(d)}\\).`} />
+        <MathText block html={Math.abs(d) < 0.05 ? tr("θ = 90°: the vectors are perpendicular and the dot product is 0.", "θ = 90° : les vecteurs sont perpendiculaires et le produit scalaire est 0.") : d > 0 ? tr("θ is acute, so the dot product is positive.", "θ est aigu, donc le produit scalaire est positif.") : tr("θ is obtuse, so the dot product is negative.", "θ est obtus, donc le produit scalaire est négatif.")} />
       </Readout>
     </WidgetCard>
   );
@@ -88,6 +91,7 @@ export function DotLab({ init = { m1: 4, a1: 20, m2: 3, a2: 80 } }: { init?: { m
 /* ---------------------------------------------------------------- 7.3 projections and work */
 
 export function ProjectionLab({ init = { mode: "proj" as "proj" | "work" } }: { init?: { mode: "proj" | "work" } }) {
+  const tr = useT();
   const [mode, setMode] = useState<"proj" | "work">(init.mode);
   const [m, setM] = useState(4.5), [th, setTh] = useState(40), [bm, setBm] = useState(5);
   const [F, setF] = useState(40), [ang, setAng] = useState(30), [dist, setDist] = useState(25);
@@ -95,11 +99,11 @@ export function ProjectionLab({ init = { mode: "proj" as "proj" | "work" } }: { 
     const a: XY = [m * Math.cos(th * RAD), m * Math.sin(th * RAD)], b: XY = [bm, 0];
     const sp = (a[0] * b[0] + a[1] * b[1]) / bm, P: XY = [sp, 0];
     return (
-      <WidgetCard title="Projection of a onto b" subtitle="The scalar projection a · b / |b| is the signed length of a's shadow on b; the vector projection points along b">
-        <Segmented options={[{ value: "proj", label: "projection" }, { value: "work", label: "work done by a force" }]} value={mode} onChange={setMode} />
-        <Row gap={10}><Slider label="|a|" value={m} min={0.5} max={6} step={0.1} onChange={setM} color={C.violet} /><Slider label="angle between (°)" value={th} min={0} max={180} step={1} onChange={setTh} color={C.amber} /></Row>
+      <WidgetCard title={tr("Projection of a onto b", "Projection de a sur b")} subtitle={tr("The scalar projection a · b / |b| is the signed length of a's shadow on b; the vector projection points along b", "La projection scalaire a · b / |b| est la longueur algébrique de l'ombre de a sur b; la projection vectorielle est orientée selon b")}>
+        <Segmented options={[{ value: "proj", label: tr("projection", "projection") }, { value: "work", label: tr("work done by a force", "travail d'une force") }]} value={mode} onChange={setMode} />
+        <Row gap={10}><Slider label="|a|" value={m} min={0.5} max={6} step={0.1} onChange={setM} color={C.violet} /><Slider label={tr("angle between (°)", "angle entre les vecteurs (°)")} value={th} min={0} max={180} step={1} onChange={setTh} color={C.amber} /></Row>
         <Slider label="|b|" value={bm} min={1} max={6} step={0.1} onChange={setBm} color={C.blue} />
-        <Plane view={V} label="a (violet), b (blue), projection of a onto b (red)" step={1}>
+        <Plane view={V} label={tr("a (violet), b (blue), projection of a onto b (red)", "a (violet), b (bleu), projection de a sur b (rouge)")} step={1}>
           {(X, Y) => <>
             <line x1={X(-6.5)} y1={Y(0)} x2={X(6.5)} y2={Y(0)} stroke={C.faint} strokeDasharray="4 4" />
             <line x1={X(a[0])} y1={Y(a[1])} x2={X(P[0])} y2={Y(0)} stroke={C.faint} strokeWidth={1.5} strokeDasharray="5 3" />
@@ -109,7 +113,7 @@ export function ProjectionLab({ init = { mode: "proj" as "proj" | "work" } }: { 
           </>}
         </Plane>
         <Readout tone="blue">
-          <MathText block html={`Scalar projection \\(\\frac{\\vec a\\cdot\\vec b}{|\\vec b|}=|\\vec a|\\cos\\theta=${fmt(m)}\\cos${th}^\\circ=${fmt(sp)}\\). Vector projection \\(${fmt(sp)}\\,\\frac{\\vec b}{|\\vec b|}=${vec(P)}\\). Changing \\(|\\vec b|\\) does not change the projection — only b's direction matters.`} />
+          <MathText block html={tr(`Scalar projection \\(\\frac{\\vec a\\cdot\\vec b}{|\\vec b|}=|\\vec a|\\cos\\theta=${fmt(m)}\\cos${th}^\\circ=${fmt(sp)}\\). Vector projection \\(${fmt(sp)}\\,\\frac{\\vec b}{|\\vec b|}=${vec(P)}\\). Changing \\(|\\vec b|\\) does not change the projection — only b's direction matters.`, `Projection scalaire \\(\\frac{\\vec a\\cdot\\vec b}{|\\vec b|}=|\\vec a|\\cos\\theta=${fmt(m)}\\cos${th}^\\circ=${fmt(sp)}\\). Projection vectorielle \\(${fmt(sp)}\\,\\frac{\\vec b}{|\\vec b|}=${vec(P)}\\). Changer \\(|\\vec b|\\) ne change pas la projection — seule la direction de b compte.`)} />
         </Readout>
       </WidgetCard>
     );
@@ -117,20 +121,20 @@ export function ProjectionLab({ init = { mode: "proj" as "proj" | "work" } }: { 
   const W = F * dist * Math.cos(ang * RAD);
   const k = 0.1, f: XY = [F * k * Math.cos(ang * RAD), F * k * Math.sin(ang * RAD)];
   return (
-    <WidgetCard title="Work done by a force" subtitle="W = F · d = |F||d| cos θ: only the part of the force along the motion does work">
-      <Segmented options={[{ value: "proj", label: "projection" }, { value: "work", label: "work done by a force" }]} value={mode} onChange={setMode} />
-      <Row gap={10}><Slider label="|F| (N)" value={F} min={5} max={60} step={1} onChange={setF} color={C.violet} /><Slider label="handle angle (°)" value={ang} min={0} max={90} step={1} onChange={setAng} color={C.amber} /></Row>
-      <Slider label="distance (m)" value={dist} min={1} max={50} step={1} onChange={setDist} color={C.blue} />
-      <Plane view={V} label="pulling force (violet), its part along the motion (red); one grid unit = 10 N" step={1}>
+    <WidgetCard title={tr("Work done by a force", "Travail d'une force")} subtitle={tr("W = F · d = |F||d| cos θ: only the part of the force along the motion does work", "W = F · d = |F||d| cos θ : seule la partie de la force dans le sens du mouvement effectue un travail")}>
+      <Segmented options={[{ value: "proj", label: tr("projection", "projection") }, { value: "work", label: tr("work done by a force", "travail d'une force") }]} value={mode} onChange={setMode} />
+      <Row gap={10}><Slider label="|F| (N)" value={F} min={5} max={60} step={1} onChange={setF} color={C.violet} /><Slider label={tr("handle angle (°)", "angle de la poignée (°)")} value={ang} min={0} max={90} step={1} onChange={setAng} color={C.amber} /></Row>
+      <Slider label={tr("distance (m)", "distance (m)")} value={dist} min={1} max={50} step={1} onChange={setDist} color={C.blue} />
+      <Plane view={V} label={tr("pulling force (violet), its part along the motion (red); one grid unit = 10 N", "force de traction (violet), sa partie dans le sens du mouvement (rouge); une unité du quadrillage = 10 N")} step={1}>
         {(X, Y) => <>
           <rect x={X(-5.5)} y={Y(-1)} width={X(-3.5) - X(-5.5)} height={Y(-2.2) - Y(-1)} fill="#e0e7ff" stroke={C.violet} />
           <Arrow X={X} Y={Y} from={[-3.5, -1.2]} to={[-3.5 + f[0], -1.2 + f[1]]} color={C.violet} label="F" />
           <Arrow X={X} Y={Y} from={[-3.5, -1.2]} to={[-3.5 + f[0], -1.2]} color={C.red} width={2.4} />
-          <Arrow X={X} Y={Y} from={[-5.5, -3]} to={[6, -3]} color={C.blue} width={2} label="displacement" />
+          <Arrow X={X} Y={Y} from={[-5.5, -3]} to={[6, -3]} color={C.blue} width={2} label={tr("displacement", "déplacement")} />
         </>}
       </Plane>
       <Readout tone="green">
-        <MathText block html={`\\(W=${F}\\times${dist}\\times\\cos${ang}^\\circ\\approx${fmt(W)}\\) J. A flatter handle (smaller angle) does more work with the same pull; at \\(90^\\circ\\) the pull does no work at all.`} />
+        <MathText block html={`\\(W=${F}\\times${dist}\\times\\cos${ang}^\\circ\\approx${fmt(W)}\\) J. ${tr(`A flatter handle (smaller angle) does more work with the same pull; at \\(90^\\circ\\) the pull does no work at all.`, `Une poignée plus basse (angle plus petit) effectue plus de travail avec la même traction; à \\(90^\\circ\\), la traction n'effectue aucun travail.`)}`} />
       </Readout>
     </WidgetCard>
   );
@@ -161,26 +165,28 @@ function Arrow3({ P, from = [0, 0, 0], to, color, label, width = 3, dash }: { P:
   const a = P(from), b = P(to);
   return <Arrow X={(x) => x} Y={(y) => y} from={a} to={b} color={color} label={label} width={width} dash={dash} />;
 }
-const ViewSliders = ({ az, el, setAz, setEl }: { az: number; el: number; setAz: (v: number) => void; setEl: (v: number) => void }) => (
-  <Row gap={10}><Slider label="turn view (°)" value={az} min={0} max={90} step={1} onChange={setAz} color={C.faint} /><Slider label="tilt view (°)" value={el} min={5} max={60} step={1} onChange={setEl} color={C.faint} /></Row>
-);
+const ViewSliders = ({ az, el, setAz, setEl }: { az: number; el: number; setAz: (v: number) => void; setEl: (v: number) => void }) => {
+  const tr = useT();
+  return <Row gap={10}><Slider label={tr("turn view (°)", "tourner la vue (°)")} value={az} min={0} max={90} step={1} onChange={setAz} color={C.faint} /><Slider label={tr("tilt view (°)", "incliner la vue (°)")} value={el} min={5} max={60} step={1} onChange={setEl} color={C.faint} /></Row>;
+};
 
 /* ---------------------------------------------------------------- 7.4 points and vectors in three-space */
 
 export function Space3Lab({ init = { x: 3, y: 4, z: 2 } }: { init?: { x: number; y: number; z: number } }) {
+  const tr = useT();
   const [x, setX] = useState(init.x), [y, setY] = useState(init.y), [z, setZ] = useState(init.z);
   const [az, setAz] = useState(30), [el, setEl] = useState(25);
   const v: V3 = [x, y, z], m = mag3(v);
   const edge = (p: V3, q: V3, P: (p: V3) => XY, k: string) => { const a = P(p), b = P(q); return <line key={k} x1={a[0]} y1={a[1]} x2={b[0]} y2={b[1]} stroke={C.faint} strokeDasharray="4 3" />; };
   return (
-    <WidgetCard title="Points and vectors in three-space" subtitle="A point P(x, y, z) sits at a corner of a box; the position vector OP = [x, y, z] has length √(x² + y² + z²)">
+    <WidgetCard title={tr("Points and vectors in three-space", "Points et vecteurs dans l'espace")} subtitle={tr("A point P(x, y, z) sits at a corner of a box; the position vector OP = [x, y, z] has length √(x² + y² + z²)", "Un point P(x, y, z) se trouve au coin d'une boîte; le vecteur position OP = [x, y, z] a une longueur de √(x² + y² + z²)")}>
       <Row gap={10}>
         <Slider label="x" value={x} min={-4} max={5} step={0.5} onChange={setX} color={C.red} />
         <Slider label="y" value={y} min={-4} max={5} step={0.5} onChange={setY} color={C.green} />
         <Slider label="z" value={z} min={-4} max={5} step={0.5} onChange={setZ} color={C.blue} />
       </Row>
       <ViewSliders az={az} el={el} setAz={setAz} setEl={setEl} />
-      <Space az={az} el={el} label="position vector OP with its guide box">
+      <Space az={az} el={el} label={tr("position vector OP with its guide box", "vecteur position OP avec sa boîte de repère")}>
         {(P) => <>
           {edge([x, 0, 0], [x, y, 0], P, "a")}{edge([0, y, 0], [x, y, 0], P, "b")}{edge([x, y, 0], [x, y, z], P, "c")}
           {edge([0, 0, z], [x, 0, z], P, "d")}{edge([0, 0, z], [0, y, z], P, "e")}{edge([x, 0, z], [x, y, z], P, "f")}{edge([0, y, z], [x, y, z], P, "g")}{edge([x, 0, 0], [x, 0, z], P, "h")}{edge([0, y, 0], [0, y, z], P, "i")}
@@ -190,7 +196,7 @@ export function Space3Lab({ init = { x: 3, y: 4, z: 2 } }: { init?: { x: number;
       </Space>
       <Readout tone="blue">
         <MathText block html={`\\(\\overrightarrow{OP}=${vec(v)}=${fmt(x)}\\vec i+${fmt(y)}\\vec j+${fmt(z)}\\vec k\\), \\(|\\overrightarrow{OP}|=\\sqrt{${fmt(x * x)}+${fmt(y * y)}+${fmt(z * z)}}=${fmt(m)}\\).`} />
-        {m > 0 && <MathText block html={`Direction angles: \\(\\alpha=${fmt(Math.acos(x / m) / RAD)}^\\circ\\), \\(\\beta=${fmt(Math.acos(y / m) / RAD)}^\\circ\\), \\(\\gamma=${fmt(Math.acos(z / m) / RAD)}^\\circ\\) with the x-, y- and z-axes. Turn the view to see the box from other sides.`} />}
+        {m > 0 && <MathText block html={tr(`Direction angles: \\(\\alpha=${fmt(Math.acos(x / m) / RAD)}^\\circ\\), \\(\\beta=${fmt(Math.acos(y / m) / RAD)}^\\circ\\), \\(\\gamma=${fmt(Math.acos(z / m) / RAD)}^\\circ\\) with the x-, y- and z-axes. Turn the view to see the box from other sides.`, `Angles directeurs : \\(\\alpha=${fmt(Math.acos(x / m) / RAD)}^\\circ\\), \\(\\beta=${fmt(Math.acos(y / m) / RAD)}^\\circ\\), \\(\\gamma=${fmt(Math.acos(z / m) / RAD)}^\\circ\\) avec les axes des x, des y et des z. Tourne la vue pour voir la boîte sous d'autres angles.`)} />}
       </Readout>
     </WidgetCard>
   );
@@ -199,6 +205,7 @@ export function Space3Lab({ init = { x: 3, y: 4, z: 2 } }: { init?: { x: number;
 /* ---------------------------------------------------------------- 7.5 the cross product */
 
 export function CrossLab({ init = { a: [3, 0, 0] as V3, b: [1, 3, 0] as V3 } }: { init?: { a: V3; b: V3 } }) {
+  const tr = useT();
   const [a, setA] = useState<V3>(init.a), [b, setB] = useState<V3>(init.b);
   const [rev, setRev] = useState(false);
   const [az, setAz] = useState(35), [el, setEl] = useState(22);
@@ -206,12 +213,12 @@ export function CrossLab({ init = { a: [3, 0, 0] as V3, b: [1, 3, 0] as V3 } }: 
   const scale = area > 6 ? 6 / area : 1;
   const set = (which: "a" | "b", i: number) => (v: number) => (which === "a" ? setA : setB)((p) => { const q = [...p] as V3; q[i] = v; return q; });
   return (
-    <WidgetCard title="The cross product" subtitle="a × b is perpendicular to both a and b (right-hand rule); its length is the area of the parallelogram they span">
+    <WidgetCard title={tr("The cross product", "Le produit vectoriel")} subtitle={tr("a × b is perpendicular to both a and b (right-hand rule); its length is the area of the parallelogram they span", "a × b est perpendiculaire à a et à b (règle de la main droite); sa longueur est l'aire du parallélogramme qu'ils engendrent")}>
       <Row gap={10}>{[0, 1, 2].map((i) => <Slider key={"a" + i} label={`a${"xyz"[i]}`} value={a[i]} min={-4} max={4} step={0.5} onChange={set("a", i)} color={C.violet} />)}</Row>
       <Row gap={10}>{[0, 1, 2].map((i) => <Slider key={"b" + i} label={`b${"xyz"[i]}`} value={b[i]} min={-4} max={4} step={0.5} onChange={set("b", i)} color={C.blue} />)}</Row>
       <Segmented options={[{ value: "ab", label: "a × b" }, { value: "ba", label: "b × a" }]} value={rev ? "ba" : "ab"} onChange={(k) => setRev(k === "ba")} />
       <ViewSliders az={az} el={el} setAz={setAz} setEl={setEl} />
-      <Space az={az} el={el} label="a (violet), b (blue), the cross product (red) and the parallelogram">
+      <Space az={az} el={el} label={tr("a (violet), b (blue), the cross product (red) and the parallelogram", "a (violet), b (bleu), le produit vectoriel (rouge) et le parallélogramme")}>
         {(P) => { const o = P([0, 0, 0]), pa = P(a), pb = P(b), pab = P([a[0] + b[0], a[1] + b[1], a[2] + b[2]]); return <>
           <polygon points={`${o[0]},${o[1]} ${pa[0]},${pa[1]} ${pab[0]},${pab[1]} ${pb[0]},${pb[1]}`} fill="#ede9fe" fillOpacity={0.7} stroke={C.faint} />
           <Arrow3 P={P} to={a} color={C.violet} label="a" />
@@ -220,8 +227,8 @@ export function CrossLab({ init = { a: [3, 0, 0] as V3, b: [1, 3, 0] as V3 } }: 
         </>; }}
       </Space>
       <Readout tone={area < 0.01 ? "amber" : "green"}>
-        <MathText block html={`\\(${rev ? "\\vec b\\times\\vec a" : "\\vec a\\times\\vec b"}=${vec(c)}\\), length \\(${fmt(area)}\\) = area of the parallelogram${scale < 1 ? " (arrow shortened to fit)" : ""}. Checks: \\(${vec(c)}\\cdot\\vec a=${fmt(dot3(c, a))}\\), \\(${vec(c)}\\cdot\\vec b=${fmt(dot3(c, b))}\\).`} />
-        <MathText block html={area < 0.01 ? "a and b are collinear (or one is zero): the cross product is the zero vector." : rev ? "Swapping the order reverses the direction: b × a = −(a × b)." : "Curl the fingers of your right hand from a to b: your thumb points along a × b."} />
+        <MathText block html={`\\(${rev ? "\\vec b\\times\\vec a" : "\\vec a\\times\\vec b"}=${vec(c)}\\), ${tr("length", "longueur")} \\(${fmt(area)}\\) = ${tr("area of the parallelogram", "aire du parallélogramme")}${scale < 1 ? tr(" (arrow shortened to fit)", " (flèche raccourcie pour l'affichage)") : ""}. ${tr("Checks:", "Vérifications :")} \\(${vec(c)}\\cdot\\vec a=${fmt(dot3(c, a))}\\), \\(${vec(c)}\\cdot\\vec b=${fmt(dot3(c, b))}\\).`} />
+        <MathText block html={area < 0.01 ? tr("a and b are collinear (or one is zero): the cross product is the zero vector.", "a et b sont colinéaires (ou l'un est nul) : le produit vectoriel est le vecteur nul.") : rev ? tr("Swapping the order reverses the direction: b × a = −(a × b).", "Inverser l'ordre inverse la direction : b × a = −(a × b).") : tr("Curl the fingers of your right hand from a to b: your thumb points along a × b.", "Replie les doigts de ta main droite de a vers b : ton pouce pointe dans la direction de a × b.")} />
       </Readout>
     </WidgetCard>
   );
@@ -230,17 +237,18 @@ export function CrossLab({ init = { a: [3, 0, 0] as V3, b: [1, 3, 0] as V3 } }: 
 /* ---------------------------------------------------------------- 7.6 torque */
 
 export function TorqueLab({ init = { r: 0.3, F: 50, th: 70 } }: { init?: { r: number; F: number; th: number } }) {
+  const tr = useT();
   const [r, setR] = useState(init.r), [F, setF] = useState(init.F), [th, setTh] = useState(init.th);
   const T = r * F * Math.sin(th * RAD);
   const L = r * 14, tip: XY = [-4 + L, 0], f: XY = [(F / 15) * Math.cos(th * RAD), (F / 15) * Math.sin(th * RAD)];
   return (
-    <WidgetCard title="Torque on a wrench" subtitle="τ = r × F; its magnitude |r||F| sin θ is largest when the force is perpendicular to the handle">
+    <WidgetCard title={tr("Torque on a wrench", "Moment de force sur une clé")} subtitle={tr("τ = r × F; its magnitude |r||F| sin θ is largest when the force is perpendicular to the handle", "τ = r × F; sa norme |r||F| sin θ est maximale quand la force est perpendiculaire au manche")}>
       <Row gap={10}>
-        <Slider label="handle length r (m)" value={r} min={0.1} max={0.6} step={0.01} onChange={setR} color={C.violet} />
-        <Slider label="force |F| (N)" value={F} min={10} max={80} step={1} onChange={setF} color={C.red} />
+        <Slider label={tr("handle length r (m)", "longueur du manche r (m)")} value={r} min={0.1} max={0.6} step={0.01} onChange={setR} color={C.violet} />
+        <Slider label={tr("force |F| (N)", "force |F| (N)")} value={F} min={10} max={80} step={1} onChange={setF} color={C.red} />
       </Row>
-      <Slider label="angle between handle and force (°)" value={th} min={0} max={180} step={1} onChange={setTh} color={C.amber} />
-      <Plane view={V} label="wrench handle r (violet) and applied force F (red)" step={1}>
+      <Slider label={tr("angle between handle and force (°)", "angle entre le manche et la force (°)")} value={th} min={0} max={180} step={1} onChange={setTh} color={C.amber} />
+      <Plane view={V} label={tr("wrench handle r (violet) and applied force F (red)", "manche de la clé r (violet) et force appliquée F (rouge)")} step={1}>
         {(X, Y) => <>
           <circle cx={X(-4)} cy={Y(0)} r={14} fill="#f1f5f9" stroke={C.ink} />
           <Arrow X={X} Y={Y} from={[-4, 0]} to={tip} color={C.violet} label="r" width={6} />
@@ -249,7 +257,7 @@ export function TorqueLab({ init = { r: 0.3, F: 50, th: 70 } }: { init?: { r: nu
         </>}
       </Plane>
       <Readout tone="green">
-        <MathText block html={`\\(|\\vec\\tau|=${fmt(r)}\\times${F}\\times\\sin${th}^\\circ\\approx${fmt(T)}\\) N·m. Only the part of the force perpendicular to the handle, \\(${F}\\sin${th}^\\circ\\approx${fmt(F * Math.sin(th * RAD))}\\) N, turns the bolt. The torque vector points along the bolt's axis (out of the page for a counterclockwise turn).`} />
+        <MathText block html={tr(`\\(|\\vec\\tau|=${fmt(r)}\\times${F}\\times\\sin${th}^\\circ\\approx${fmt(T)}\\) N·m. Only the part of the force perpendicular to the handle, \\(${F}\\sin${th}^\\circ\\approx${fmt(F * Math.sin(th * RAD))}\\) N, turns the bolt. The torque vector points along the bolt's axis (out of the page for a counterclockwise turn).`, `\\(|\\vec\\tau|=${fmt(r)}\\times${F}\\times\\sin${th}^\\circ\\approx${fmt(T)}\\) N·m. Seule la partie de la force perpendiculaire au manche, \\(${F}\\sin${th}^\\circ\\approx${fmt(F * Math.sin(th * RAD))}\\) N, fait tourner le boulon. Le vecteur moment de force est dirigé selon l'axe du boulon (vers l'extérieur de la page pour une rotation dans le sens antihoraire).`)} />
       </Readout>
     </WidgetCard>
   );

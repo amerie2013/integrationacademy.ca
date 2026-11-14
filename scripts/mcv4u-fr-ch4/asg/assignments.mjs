@@ -1,0 +1,95 @@
+// MCV4U-FR devoirs du chapitre 4 : 12 questions chacun — Connaissance et compréhension 1-3, Habiletés de la pensée 4-5,
+// Communication 6-7, Mise en application 8-10, Niveau difficile 11-12.
+// [[clé|légende]] dans une ligne est remplacé par une figure (SVG téléversé) à la publication.
+import { planeDoc, P } from "../bank/fig.mjs";
+
+const S = String.raw;
+const PI = Math.PI;
+const grid = (view, step) => planeDoc({ view, ...(step ? { step } : {}) });
+
+export const ASSIGNMENTS = [
+  { code: "4.1", title: "Devoir 4.1 — Taux de variation instantanés des fonctions sinusoïdales", figs: {
+      s: planeDoc({ view: { xmin: -0.2, xmax: 6.6, ymin: -1.5, ymax: 1.5 }, curves: [{ f: Math.sin, a: 0, b: 2 * PI, color: "violet" }], step: { x: 0.5, y: 0.5 } }),
+      g: grid({ xmin: -0.2, xmax: 6.6, ymin: -1.5, ymax: 1.5 }, { x: 0.5, y: 0.5 }) }, lines: [
+    "Connaissance et compréhension",
+    S`1. Donne la pente de \(y=\sin x\) en \(x=0,\ \frac\pi2,\ \pi,\ \frac{3\pi}2,\ 2\pi\), et explique chaque valeur à partir de la forme du graphique.`,
+    S`2. Estime la pente de \(y=\cos x\) en \(x=\frac\pi4\) avec \(h=0.001\), et compare-la avec \(-\sin\frac\pi4\).`,
+    S`3. À l'aide du graphique de \(y=\sin x\), place ses pentes aux multiples de \(\frac\pi4\) sur la grille vide et relie-les. [[s|Graphique de y = sin x]] [[g|Grille pour ton graphique des pentes]]`,
+    "Habiletés de la pensée",
+    S`4. Évalue \(\frac{\sin2h}{h}\) pour \(h=0.1,\ 0.01,\ 0.001\) et donne la limite. Explique le résultat à l'aide de \(\frac{\sin u}{u}\to1\).`,
+    S`5. Trouve toutes les valeurs de \(x\) dans \([0,2\pi]\) où la tangente à \(y=\sin x\) est parallèle à la droite \(y=-\frac{\sqrt3}{2}x\).`,
+    "Communication",
+    "6. Explique pourquoi le calcul différentiel avec les fonctions trigonométriques utilise les radians. Quelle serait la pente de y = sin x en x = 0 en degrés ?",
+    "7. Explique, à l'aide du graphique de y = sin x, pourquoi la courbe est la plus abrupte là où elle traverse son axe et horizontale à ses sommets et à ses creux.",
+    "Mise en application",
+    S`8. La profondeur à l'embouchure d'une rivière est \(d(t)=1.2\sin\left(\frac{\pi}{6.2}t\right)+3.5\) m. Trouve le taux de variation moyen pendant les 3.1 premières heures et estime le taux instantané en \(t=0\).`,
+    S`9. La hauteur d'un passager est \(h(t)=12-10\cos\left(\frac{\pi}{20}t\right)\) m. Utilise un quotient de différence pour estimer la vitesse verticale à \(t=10\) s.`,
+    S`10. Dans une ville du Nord, la durée du jour est \(D(t)=12+2.8\sin\left(\frac{2\pi}{365}(t-80)\right)\) heures. Estime le taux de variation le jour 80 et le jour 172, et explique la différence.`,
+    "Niveau difficile",
+    S`11. Utilise \(\sin(x+h)=\sin x\cos h+\cos x\sin h\) et les deux limites clés pour démontrer que la pente de \(\sin x\) est \(\cos x\).`,
+    S`12. Évalue \(\frac{\sin x-x}{x^3}\) pour \(x=0.1,\ 0.01\) et estime sa limite lorsque \(x\to0\).`,
+  ] },
+  { code: "4.2", title: "Devoir 4.2 — Dérivées des fonctions sinus et cosinus", figs: {
+      c: planeDoc({ view: { xmin: -2 * PI, xmax: 2 * PI, ymin: -1.5, ymax: 1.5 }, curves: [{ f: Math.cos, color: "violet" }, { f: (x) => -Math.sin(x), color: "blue" }], step: { x: 1, y: 0.5 } }),
+      g: grid({ xmin: 0, xmax: 6.6, ymin: -1, ymax: 8 }, { x: 0.5, y: 1 }) }, lines: [
+    "Connaissance et compréhension",
+    S`1. Dérive \(y=5\sin x-4\cos x+\pi\).`,
+    S`2. Dérive \(y=\sqrt x\cos x\).`,
+    S`3. Trouve l'équation de la tangente à \(y=\sin x+\cos x\) en \(x=\frac\pi2\).`,
+    "Habiletés de la pensée",
+    S`4. Trouve les points de \(y=2\sin x-x\), \(0\le x\le2\pi\), où la tangente est horizontale, et classe-les.`,
+    S`5. Montre que \(\frac{d}{dx}\cot x=-\csc^2x\), puis trouve la pente de \(y=\cot x\) en \(x=\frac\pi6\).`,
+    "Communication",
+    S`6. Explique le cycle de quatre étapes des dérivées de \(\cos x\), et utilise-le pour trouver la 2027e dérivée.`,
+    S`7. Les graphiques de \(y=\cos x\) (violet) et de sa dérivée (bleu) sont représentés. Explique trois caractéristiques du graphique bleu à l'aide du graphique violet. [[c|Graphiques pour la question 7]]`,
+    "Mise en application",
+    S`8. Une particule se déplace selon \(s(t)=t+\sin t\). Trouve \(v(t)\) et \(a(t)\), ainsi que le premier instant \(t\gt0\) où elle est momentanément au repos.`,
+    S`9. Pour \(y=\sin x\tan x\), trouve \(y'\left(\frac\pi4\right)\).`,
+    S`10. Esquisse \(f(x)=x+\sin x\) sur \([0,2\pi]\) à l'aide de \(f'\) (où elle est croissante) et de \(f''\) (sa concavité). [[g|Grille pour la question 10]]`,
+    "Niveau difficile",
+    S`11. Montre que \(g(x)=\sin x-x\) est décroissante, et utilise ce résultat pour démontrer que \(\sin x\lt x\) pour tout \(x\gt0\).`,
+    S`12. Trouve la dérivée quatrième de \(f(x)=x\sin x\) et évalue-la en \(x=0\).`,
+  ] },
+  { code: "4.3", title: "Devoir 4.3 — Règles de dérivation des fonctions sinusoïdales", figs: {
+      s: planeDoc({ view: { xmin: -0.2, xmax: 4.4, ymin: -2.5, ymax: 2.5 }, curves: [{ f: (x) => 2 * Math.sin(3 * x), a: 0, b: 4.4, color: "violet" }], step: { x: 0.25, y: 0.5 } }),
+      g: grid({ xmin: 0, xmax: 6.6, ymin: -2, ymax: 3.5 }, { x: 0.5, y: 0.5 }) }, lines: [
+    "Connaissance et compréhension",
+    S`1. Dérive \(y=\sin(8x)\), \(y=\cos\left(\frac x5\right)\) et \(y=3\sin(2x+1)\).`,
+    S`2. Dérive \(y=\sin^2(4x)\) et simplifie.`,
+    S`3. Le graphique de \(y=2\sin(3x)\) est représenté. Estime sa plus grande pente à partir du graphique, puis trouve-la de façon exacte. [[s|Graphique pour la question 3]]`,
+    "Habiletés de la pensée",
+    S`4. Pour \(y=x\cos(3x)\), trouve \(y'\left(\frac\pi3\right)\).`,
+    S`5. Trouve toutes les tangentes horizontales de \(y=\cos(2x)+2\cos x\) sur \([0,2\pi]\). [[g|Grille pour une esquisse]]`,
+    "Communication",
+    S`6. Explique la différence entre \(\sin^2x\) et \(\sin(x^2)\), et dérive chacune.`,
+    S`7. Explique comment chacun des paramètres \(A\), \(k\), \(c\) et \(d\) de \(y=A\sin(kx+c)+d\) influe sur la dérivée.`,
+    "Mise en application",
+    S`8. La pression d'une onde sonore est \(p(t)=0.02\sin(880\pi t)\) Pa. Trouve son plus grand taux de variation.`,
+    S`9. Pour \(y=\sqrt{\cos2x}\), trouve la pente en \(x=\frac\pi6\).`,
+    S`10. Trouve l'équation de la tangente à \(y=\tan(3x)\) en \(x=\frac\pi{12}\).`,
+    "Niveau difficile",
+    S`11. Trouve la valeur maximale de \(y=\sin x+\frac12\sin(2x)\) sur \([0,2\pi]\).`,
+    S`12. Montre que dériver \(\sin(2x)\) et dériver \(2\sin x\cos x\) donnent le même résultat.`,
+  ] },
+  { code: "4.4", title: "Devoir 4.4 — Applications des fonctions sinusoïdales et de leurs dérivées", figs: {
+      s: planeDoc({ view: { xmin: 0, xmax: 4.4, ymin: -8, ymax: 8 }, curves: [{ f: (t) => 7 * Math.sin(2 * t), a: 0, b: 4.4, color: "violet" }], step: { x: 0.5, y: 1 }, xlabel: "t (s)", ylabel: "s (cm)" }),
+      w: grid({ xmin: 0, xmax: 3.3, ymin: 0, ymax: 70 }, { x: 0.25, y: 10 }) }, lines: [
+    "Connaissance et compréhension",
+    S`1. Une masse se déplace selon \(s(t)=7\sin(2t)\) cm. Trouve \(v(t)\), \(a(t)\) et le module maximal de la vitesse.`,
+    S`2. Donne l'amplitude, la période et \(\omega\) de \(h(t)=20-15\cos\left(\frac{\pi}{30}t\right)\).`,
+    S`3. Le graphique de \(s(t)\) de la question 1 est représenté. Marque les endroits où la vitesse est nulle et ceux où le module de la vitesse est le plus grand. [[s|Graphique pour la question 3]]`,
+    "Habiletés de la pensée",
+    "4. Une grande roue de 14 m de rayon fait un tour toutes les 40 s. Trouve la plus grande vitesse verticale d'un passager et l'endroit de la roue où elle se produit.",
+    S`5. Un triangle a des côtés de 9 cm et de 14 cm qui forment entre eux un angle \(\theta\). Trouve la plus grande aire et esquisse \(A(\theta)\). [[w|Grille pour la question 5]]`,
+    "Communication",
+    S`6. Explique ce que \(a=-\omega^2s\) t'apprend sur le mouvement harmonique simple.`,
+    "7. Explique, à l'aide d'un modèle sinusoïdal, pourquoi la durée du jour varie le plus rapidement près des équinoxes.",
+    "Mise en application",
+    S`8. Un ressort a la position \(s(t)=6\cos(3t)\) cm. Trouve le premier instant où le module de la vitesse vaut 9 cm/s.`,
+    S`9. Une balle est lancée à 18 m/s avec une portée \(R(\theta)=\frac{324\sin2\theta}{9.8}\) m. Trouve le meilleur angle et la plus grande portée.`,
+    S`10. Un phare situé à 1.5 km d'une côte rectiligne fait trois tours par minute. À quelle vitesse le faisceau se déplace-t-il le long de la côte lorsqu'il forme un angle de \(\frac\pi6\) avec la perpendiculaire ?`,
+    "Niveau difficile",
+    S`11. Des couloirs de 4 m et de 2 m de largeur se rencontrent à angle droit. Trouve la plus longue tige qu'on peut transporter horizontalement dans le coin.`,
+    S`12. Deux masses se déplacent selon \(s_1=3\sin t\) et \(s_2=4\cos t\). Trouve la plus grande distance entre elles.`,
+  ] },
+];

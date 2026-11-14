@@ -6,6 +6,7 @@
 
 import { useState } from "react";
 import { C, MathText, Readout, Row, Segmented, Slider, WidgetCard } from "./kit";
+import { useT } from "@/lib/lang";
 import { Plane, r2, type View } from "./Systems";
 import { dot } from "./Quadratics";
 
@@ -27,30 +28,31 @@ const E = Math.E;
 /* ---------------------------------------------------------------- 5.1 the slope of b^x and the number e */
 
 export function ExpBaseLab({ init = { b: 2, x: 1 } }: { init?: { b: number; x: number } }) {
+  const tr = useT();
   const [b, setB] = useState(init.b), [x0, setX0] = useState(init.x);
   const f: Fn = (x) => Math.pow(b, x);
   const s0 = num(f, 0), s = num(f, x0);
   const v: View = { xmin: -3, xmax: 3, ymin: -1, ymax: 9 };
   return (
-    <WidgetCard title="The slope of y = bˣ" subtitle="Every exponential has slope = (constant) × (height). The constant is the slope at x = 0; it equals 1 exactly when b = e">
+    <WidgetCard title={tr("The slope of y = bˣ", "La pente de y = bˣ")} subtitle={tr("Every exponential has slope = (constant) × (height). The constant is the slope at x = 0; it equals 1 exactly when b = e", "Toute exponentielle a une pente = (constante) × (hauteur). La constante est la pente en x = 0; elle vaut 1 exactement quand b = e")}>
       <Row gap={10}>
-        <Slider label="base b" value={b} min={1.2} max={4} step={0.01} onChange={setB} color={C.violet} />
+        <Slider label={tr("base b", "base b")} value={b} min={1.2} max={4} step={0.01} onChange={setB} color={C.violet} />
         <Slider label="x" value={rnd(x0)} min={-2} max={2} step={0.05} onChange={setX0} color={C.red} />
       </Row>
-      <button onClick={() => setB(Math.round(E * 100) / 100)} style={{ margin: "4px 0", padding: "4px 10px", borderRadius: 6, border: `1px solid ${C.green}`, background: C.greenSoft, color: C.green, fontWeight: 700, cursor: "pointer" }}>set b = e ≈ 2.72</button>
-      <Plane view={v} label={`y = ${r2(b)}ˣ (violet), y = eˣ (grey), tangents at 0 and at x (green)`} step={1} stepY={1}>
+      <button onClick={() => setB(Math.round(E * 100) / 100)} style={{ margin: "4px 0", padding: "4px 10px", borderRadius: 6, border: `1px solid ${C.green}`, background: C.greenSoft, color: C.green, fontWeight: 700, cursor: "pointer" }}>{tr("set b = e ≈ 2.72", "poser b = e ≈ 2.72")}</button>
+      <Plane view={v} label={tr(`y = ${r2(b)}ˣ (violet), y = eˣ (grey), tangents at 0 and at x (green)`, `y = ${r2(b)}ˣ (violet), y = eˣ (gris), tangentes en 0 et en x (vert)`)} step={1} stepY={1}>
         {(X, Y) => <>
           <path d={pathOf(Math.exp, v, X, Y)} fill="none" stroke={C.faint} strokeWidth={2} strokeDasharray="5 4" />
           <path d={pathOf(f, v, X, Y)} fill="none" stroke={C.violet} strokeWidth={3} />
           <line x1={X(-1.5)} y1={Y(1 - 1.5 * s0)} x2={X(1.5)} y2={Y(1 + 1.5 * s0)} stroke={C.green} strokeWidth={2} strokeDasharray="6 4" />
           <line x1={X(x0 - 1)} y1={Y(f(x0) - s)} x2={X(x0 + 1)} y2={Y(f(x0) + s)} stroke={C.green} strokeWidth={2.4} />
-          {dot(X, Y, 0, 1, C.blue, `slope ${r2(s0)}`, "z")}
-          {dot(X, Y, x0, f(x0), C.red, `slope ${r2(s)}`, "p")}
+          {dot(X, Y, 0, 1, C.blue, `${tr("slope", "pente")} ${r2(s0)}`, "z")}
+          {dot(X, Y, x0, f(x0), C.red, `${tr("slope", "pente")} ${r2(s)}`, "p")}
         </>}
       </Plane>
       <Readout tone={Math.abs(s0 - 1) < 0.01 ? "green" : "blue"}>
-        <MathText block html={`Slope at 0: \\(${r2(s0)}\\) \\(=\\ln ${r2(b)}\\). At \\(x=${r2(x0)}\\): slope \\(${r2(s)}\\), height \\(${r2(f(x0))}\\), ratio slope ÷ height \\(=${r2(s / f(x0))}\\) — the same number at every point.`} />
-        <MathText block html={Math.abs(s0 - 1) < 0.01 ? "With b = e the slope equals the height everywhere: \\((e^x)'=e^x\\)." : "Adjust b until the slope at 0 is exactly 1: that base is e ≈ 2.718."} />
+        <MathText block html={tr(`Slope at 0: \\(${r2(s0)}\\) \\(=\\ln ${r2(b)}\\). At \\(x=${r2(x0)}\\): slope \\(${r2(s)}\\), height \\(${r2(f(x0))}\\), ratio slope ÷ height \\(=${r2(s / f(x0))}\\) — the same number at every point.`, `Pente en 0 : \\(${r2(s0)}\\) \\(=\\ln ${r2(b)}\\). En \\(x=${r2(x0)}\\) : pente \\(${r2(s)}\\), hauteur \\(${r2(f(x0))}\\), rapport pente ÷ hauteur \\(=${r2(s / f(x0))}\\) — le même nombre en tout point.`)} />
+        <MathText block html={Math.abs(s0 - 1) < 0.01 ? tr("With b = e the slope equals the height everywhere: \\((e^x)'=e^x\\).", "Avec b = e, la pente est égale à la hauteur partout : \\((e^x)'=e^x\\).") : tr("Adjust b until the slope at 0 is exactly 1: that base is e ≈ 2.718.", "Ajuste b jusqu'à ce que la pente en 0 soit exactement 1 : cette base est e ≈ 2.718.")} />
       </Readout>
     </WidgetCard>
   );
@@ -59,14 +61,15 @@ export function ExpBaseLab({ init = { b: 2, x: 1 } }: { init?: { b: number; x: n
 /* ---------------------------------------------------------------- 5.2 the natural logarithm */
 
 export function LnLab({ init = { x: 2, mirror: true } }: { init?: { x: number; mirror: boolean } }) {
+  const tr = useT();
   const [x0, setX0] = useState(init.x), [mirror, setMirror] = useState(init.mirror);
   const v: View = { xmin: -3, xmax: 7, ymin: -4, ymax: 6 };
   const y0 = Math.log(x0), s = 1 / x0;
   return (
-    <WidgetCard title="The natural logarithm and its slope" subtitle="y = ln x is the reflection of y = eˣ in y = x, so its slope at x is 1/x">
+    <WidgetCard title={tr("The natural logarithm and its slope", "Le logarithme naturel et sa pente")} subtitle={tr("y = ln x is the reflection of y = eˣ in y = x, so its slope at x is 1/x", "y = ln x est la réflexion de y = eˣ par rapport à y = x, donc sa pente en x est 1/x")}>
       <Slider label="x" value={rnd(x0)} min={0.2} max={6.5} step={0.05} onChange={setX0} color={C.red} />
-      <Segmented options={[{ value: "on", label: "show y = eˣ and its mirror tangent" }, { value: "off", label: "ln x only" }]} value={mirror ? "on" : "off"} onChange={(k) => setMirror(k === "on")} />
-      <Plane view={v} label="y = ln x (violet), y = eˣ (grey), mirror line y = x (dashed)" step={1} stepY={1}>
+      <Segmented options={[{ value: "on", label: tr("show y = eˣ and its mirror tangent", "afficher y = eˣ et sa tangente miroir") }, { value: "off", label: tr("ln x only", "ln x seulement") }]} value={mirror ? "on" : "off"} onChange={(k) => setMirror(k === "on")} />
+      <Plane view={v} label={tr("y = ln x (violet), y = eˣ (grey), mirror line y = x (dashed)", "y = ln x (violet), y = eˣ (gris), droite miroir y = x (pointillé)")} step={1} stepY={1}>
         {(X, Y) => <>
           <line x1={X(-3)} y1={Y(-3)} x2={X(6)} y2={Y(6)} stroke={C.faint} strokeDasharray="4 4" />
           {mirror && <path d={pathOf(Math.exp, v, X, Y)} fill="none" stroke={C.faint} strokeWidth={2} />}
@@ -78,8 +81,8 @@ export function LnLab({ init = { x: 2, mirror: true } }: { init?: { x: number; m
         </>}
       </Plane>
       <Readout tone="green">
-        <MathText block html={`At \\(x=${r2(x0)}\\): \\(\\ln x=${r2(y0)}\\), slope \\(=\\frac1x=${r2(s)}\\).`} />
-        <MathText block html={mirror ? `The mirror point \\((${r2(y0)},${r2(x0)})\\) on \\(y=e^x\\) has slope \\(e^{${r2(y0)}}=${r2(x0)}\\). Reflecting swaps rise and run, so the slopes are reciprocals: \\(\\frac1{${r2(x0)}}\\).` : "As x grows the slope 1/x shrinks: ln x keeps rising, but ever more slowly."} />
+        <MathText block html={tr(`At \\(x=${r2(x0)}\\): \\(\\ln x=${r2(y0)}\\), slope \\(=\\frac1x=${r2(s)}\\).`, `En \\(x=${r2(x0)}\\) : \\(\\ln x=${r2(y0)}\\), pente \\(=\\frac1x=${r2(s)}\\).`)} />
+        <MathText block html={mirror ? tr(`The mirror point \\((${r2(y0)},${r2(x0)})\\) on \\(y=e^x\\) has slope \\(e^{${r2(y0)}}=${r2(x0)}\\). Reflecting swaps rise and run, so the slopes are reciprocals: \\(\\frac1{${r2(x0)}}\\).`, `Le point miroir \\((${r2(y0)},${r2(x0)})\\) sur \\(y=e^x\\) a une pente \\(e^{${r2(y0)}}=${r2(x0)}\\). La réflexion échange le déplacement vertical et le déplacement horizontal, donc les pentes sont inverses : \\(\\frac1{${r2(x0)}}\\).`) : tr("As x grows the slope 1/x shrinks: ln x keeps rising, but ever more slowly.", "Quand x augmente, la pente 1/x diminue : ln x continue de croître, mais de plus en plus lentement.")} />
       </Readout>
     </WidgetCard>
   );
@@ -88,6 +91,7 @@ export function LnLab({ init = { x: 2, mirror: true } }: { init?: { x: number; m
 /* ---------------------------------------------------------------- 5.3–5.4 derivatives of A e^(kx) and b^x */
 
 export function ExpRuleLab({ init = { A: 1, k: 1, mode: "e", b: 2, x: 0.5 } }: { init?: { A: number; k: number; mode: "e" | "b"; b: number; x: number } }) {
+  const tr = useT();
   const [A, setA] = useState(init.A), [k, setK] = useState(init.k), [mode, setMode] = useState<"e" | "b">(init.mode), [b, setB] = useState(init.b), [x0, setX0] = useState(init.x);
   const isE = mode === "e";
   const f: Fn = isE ? (x) => A * Math.exp(k * x) : (x) => A * Math.pow(b, k * x);
@@ -98,7 +102,7 @@ export function ExpRuleLab({ init = { A: 1, k: 1, mode: "e", b: 2, x: 0.5 } }: {
   const both = c < 0;
   const v: View = { xmin: -2.5, xmax: 2.5, ymin: both || A < 0 ? -top : -top * 0.2, ymax: both || A > 0 ? top : top * 0.2 };
   return (
-    <WidgetCard title="Derivatives of exponential functions" subtitle="(A e^(kx))′ = k·A e^(kx) and (A b^(kx))′ = k ln b · A b^(kx): the rate is proportional to the value">
+    <WidgetCard title={tr("Derivatives of exponential functions", "Dérivées des fonctions exponentielles")} subtitle={tr("(A e^(kx))′ = k·A e^(kx) and (A b^(kx))′ = k ln b · A b^(kx): the rate is proportional to the value", "(A e^(kx))′ = k·A e^(kx) et (A b^(kx))′ = k ln b · A b^(kx) : le taux est proportionnel à la valeur")}>
       <Segmented options={[{ value: "e", label: "y = A e^(kx)" }, { value: "b", label: "y = A b^(kx)" }]} value={mode} onChange={setMode} />
       <Row gap={8}>
         <Slider label="A" value={A} min={-3} max={3} step={0.5} onChange={(v) => setA(v === 0 ? 0.5 : v)} color={C.violet} />
@@ -106,17 +110,17 @@ export function ExpRuleLab({ init = { A: 1, k: 1, mode: "e", b: 2, x: 0.5 } }: {
         {!isE && <Slider label="b" value={b} min={1.5} max={10} step={0.5} onChange={setB} color={C.amber} />}
         <Slider label="x" value={rnd(x0)} min={-2} max={2} step={0.05} onChange={setX0} color={C.red} />
       </Row>
-      <Plane view={v} label="f (violet) and f′ (dashed blue)" step={0.5} stepY={Math.max(0.5, Math.round(top / 5))}>
+      <Plane view={v} label={tr("f (violet) and f′ (dashed blue)", "f (violet) et f′ (bleu pointillé)")} step={0.5} stepY={Math.max(0.5, Math.round(top / 5))}>
         {(X, Y) => <>
           <path d={pathOf(f, v, X, Y)} fill="none" stroke={C.violet} strokeWidth={3} />
           <path d={pathOf(fp, v, X, Y)} fill="none" stroke={C.blue} strokeWidth={2} strokeDasharray="6 4" />
           <line x1={X(x0 - 0.6)} y1={Y(f(x0) - 0.6 * fp(x0))} x2={X(x0 + 0.6)} y2={Y(f(x0) + 0.6 * fp(x0))} stroke={C.green} strokeWidth={2.4} />
-          {dot(X, Y, x0, f(x0), C.red, `slope ${r2(fp(x0))}`, "p")}
+          {dot(X, Y, x0, f(x0), C.red, `${tr("slope", "pente")} ${r2(fp(x0))}`, "p")}
         </>}
       </Plane>
       <Readout tone="green">
-        <MathText block html={isE ? `\\(f(x)=${r2(A)}e^{${r2(k)}x}\\), \\(f'(x)=${r2(k)}\\cdot${r2(A)}e^{${r2(k)}x}\\): at every point the slope is \\(${r2(k)}\\) times the height.` : `\\(f(x)=${r2(A)}\\cdot${r2(b)}^{${r2(k)}x}\\), \\(f'(x)=${r2(k)}\\ln ${r2(b)}\\cdot f(x)\\approx${r2(c)}\\,f(x)\\).`} />
-        <MathText block html={`At \\(x=${r2(x0)}\\): \\(f=${r2(f(x0))}\\), \\(f'=${r2(fp(x0))}\\), ratio \\(${r2(c)}\\). ${c > 0 ? "Positive ratio: growth." : "Negative ratio: decay."}`} />
+        <MathText block html={isE ? `\\(f(x)=${r2(A)}e^{${r2(k)}x}\\), \\(f'(x)=${r2(k)}\\cdot${r2(A)}e^{${r2(k)}x}\\)${tr(": at every point the slope is", " : en tout point, la pente vaut")} \\(${r2(k)}\\) ${tr("times the height.", "fois la hauteur.")}` : `\\(f(x)=${r2(A)}\\cdot${r2(b)}^{${r2(k)}x}\\), \\(f'(x)=${r2(k)}\\ln ${r2(b)}\\cdot f(x)\\approx${r2(c)}\\,f(x)\\).`} />
+        <MathText block html={`${tr(`At \\(x=${r2(x0)}\\): \\(f=${r2(f(x0))}\\), \\(f'=${r2(fp(x0))}\\), ratio \\(${r2(c)}\\).`, `En \\(x=${r2(x0)}\\) : \\(f=${r2(f(x0))}\\), \\(f'=${r2(fp(x0))}\\), rapport \\(${r2(c)}\\).`)} ${c > 0 ? tr("Positive ratio: growth.", "Rapport positif : croissance.") : tr("Negative ratio: decay.", "Rapport négatif : décroissance.")}`} />
       </Readout>
     </WidgetCard>
   );
@@ -125,6 +129,7 @@ export function ExpRuleLab({ init = { A: 1, k: 1, mode: "e", b: 2, x: 0.5 } }: {
 /* ---------------------------------------------------------------- 5.5 growth and decay models */
 
 export function GrowthModelLab({ init = { P0: 500, k: 0.2, t: 3 } }: { init?: { P0: number; k: number; t: number } }) {
+  const tr = useT();
   const [P0, setP0] = useState(init.P0), [k, setK] = useState(init.k), [t0, setT0] = useState(init.t);
   const P: Fn = (t) => P0 * Math.exp(k * t);
   const tEnd = 12;
@@ -132,23 +137,23 @@ export function GrowthModelLab({ init = { P0: 500, k: 0.2, t: 3 } }: { init?: { 
   const v: View = { xmin: 0, xmax: tEnd, ymin: 0, ymax: top };
   const half = Math.log(2) / Math.abs(k);
   return (
-    <WidgetCard title="Exponential growth and decay" subtitle="P(t) = P₀e^(kt) satisfies P′ = kP: the rate of change is proportional to the amount">
+    <WidgetCard title={tr("Exponential growth and decay", "Croissance et décroissance exponentielles")} subtitle={tr("P(t) = P₀e^(kt) satisfies P′ = kP: the rate of change is proportional to the amount", "P(t) = P₀e^(kt) vérifie P′ = kP : le taux de variation est proportionnel à la quantité")}>
       <Row gap={10}>
         <Slider label="P₀" value={P0} min={100} max={1000} step={50} onChange={setP0} color={C.violet} />
-        <Slider label="k (per unit time)" value={k} min={-0.5} max={0.5} step={0.01} onChange={(val) => setK(Math.abs(val) < 0.01 ? 0.01 : val)} color={C.blue} />
+        <Slider label={tr("k (per unit time)", "k (par unité de temps)")} value={k} min={-0.5} max={0.5} step={0.01} onChange={(val) => setK(Math.abs(val) < 0.01 ? 0.01 : val)} color={C.blue} />
         <Slider label="t" value={rnd(t0)} min={0} max={tEnd} step={0.1} onChange={setT0} color={C.red} />
       </Row>
-      <Plane view={v} label="P(t) with its tangent at t" step={1} stepY={Math.max(50, Math.round(top / 6 / 50) * 50)}>
+      <Plane view={v} label={tr("P(t) with its tangent at t", "P(t) avec sa tangente en t")} step={1} stepY={Math.max(50, Math.round(top / 6 / 50) * 50)}>
         {(X, Y) => <>
           <path d={pathOf(P, v, X, Y)} fill="none" stroke={C.violet} strokeWidth={3} />
           <line x1={X(Math.max(0, t0 - 2))} y1={Y(P(t0) - (t0 - Math.max(0, t0 - 2)) * k * P(t0))} x2={X(Math.min(tEnd, t0 + 2))} y2={Y(P(t0) + (Math.min(tEnd, t0 + 2) - t0) * k * P(t0))} stroke={C.green} strokeWidth={2.4} />
           {dot(X, Y, t0, P(t0), C.red, `${r2(P(t0))}`, "p")}
-          {half <= tEnd && dot(X, Y, half, P(half), C.amber, k > 0 ? "doubled" : "halved", "h")}
+          {half <= tEnd && dot(X, Y, half, P(half), C.amber, k > 0 ? tr("doubled", "doublé") : tr("halved", "réduit de moitié"), "h")}
         </>}
       </Plane>
       <Readout tone={k > 0 ? "green" : "amber"}>
-        <MathText block html={`At \\(t=${r2(t0)}\\): \\(P=${r2(P(t0))}\\), \\(P'=kP=${r2(k)}\\times${r2(P(t0))}=${r2(k * P(t0))}\\) per unit time.`} />
-        <MathText block html={`${k > 0 ? "Doubling" : "Half-life"} time \\(=\\frac{\\ln 2}{|k|}=${r2(half)}\\): the amount ${k > 0 ? "doubles" : "halves"} every ${r2(half)} units, whatever it starts at.`} />
+        <MathText block html={`${tr("At", "À")} \\(t=${r2(t0)}\\)${tr(":", " :")} \\(P=${r2(P(t0))}\\), \\(P'=kP=${r2(k)}\\times${r2(P(t0))}=${r2(k * P(t0))}\\) ${tr("per unit time.", "par unité de temps.")}`} />
+        <MathText block html={tr(`${k > 0 ? "Doubling" : "Half-life"} time \\(=\\frac{\\ln 2}{|k|}=${r2(half)}\\): the amount ${k > 0 ? "doubles" : "halves"} every ${r2(half)} units, whatever it starts at.`, `${k > 0 ? "Temps de doublement" : "Demi-vie"} \\(=\\frac{\\ln 2}{|k|}=${r2(half)}\\) : la quantité ${k > 0 ? "double" : "diminue de moitié"} toutes les ${r2(half)} unités, quelle que soit sa valeur de départ.`)} />
       </Readout>
     </WidgetCard>
   );

@@ -2,9 +2,12 @@
 
 import { useState } from "react";
 import { C, MathText, Readout, Row, Segmented, Slider, WidgetCard, gcd } from "./kit";
+import { useT } from "@/lib/lang";
 
 /** Ratio a:b scaled by k — two-colour bar model, double number line and ratio table. */
-export function RatioScale({ initA = 2, initB = 3, labels = ["juice", "water"] }: { initA?: number; initB?: number; labels?: [string, string] }) {
+export function RatioScale({ initA = 2, initB = 3, labels: labelsIn }: { initA?: number; initB?: number; labels?: [string, string] }) {
+  const t = useT();
+  const labels: [string, string] = labelsIn ?? [t("juice", "jus"), t("water", "eau")];
   const [a, setA] = useState(initA);
   const [b, setB] = useState(initB);
   const [k, setK] = useState(3);
@@ -14,13 +17,13 @@ export function RatioScale({ initA = 2, initB = 3, labels = ["juice", "water"] }
   const X1 = (v: number) => 30 + (v / (a * 6)) * (W - 60), X2 = (v: number) => 30 + (v / (b * 6)) * (W - 60);
 
   return (
-    <WidgetCard title="Scaling a ratio" subtitle="Multiply both parts by the same number — the mix stays the same">
+    <WidgetCard title={t("Scaling a ratio", "Agrandir un rapport")} subtitle={t("Multiply both parts by the same number — the mix stays the same", "Multiplie les deux termes par le même nombre — le mélange reste le même")}>
       <Row>
         <Slider label={labels[0]} value={a} min={1} max={9} onChange={setA} color={C.amber} />
         <Slider label={labels[1]} value={b} min={1} max={9} onChange={setB} color={C.blue} />
-        <Slider label="scale ×" value={k} min={1} max={6} onChange={setK} color={C.green} />
+        <Slider label={t("scale ×", "facteur ×")} value={k} min={1} max={6} onChange={setK} color={C.green} />
       </Row>
-      <div style={{ margin: "14px 0 6px", display: "flex", flexWrap: "wrap", gap: 3 }} aria-label="Bar model">
+      <div style={{ margin: "14px 0 6px", display: "flex", flexWrap: "wrap", gap: 3 }} aria-label={t("Bar model", "Modèle en barres")}>
         {Array.from({ length: k }, (_, j) => (
           <div key={j} style={{ display: "flex", gap: 1, padding: 3, border: "1px dashed #94a3b8", borderRadius: 6 }}>
             {Array.from({ length: a }, (_, i) => <span key={"a" + i} style={{ width: unit, height: 26, background: C.amberSoft, border: `1.5px solid ${C.amber}`, borderRadius: 3 }} />)}
@@ -28,9 +31,9 @@ export function RatioScale({ initA = 2, initB = 3, labels = ["juice", "water"] }
           </div>
         ))}
       </div>
-      <p style={{ margin: "0 0 8px", fontSize: 13.5, color: C.muted }}>{k} batch{k === 1 ? "" : "es"} of {a} {labels[0]} : {b} {labels[1]}.</p>
+      <p style={{ margin: "0 0 8px", fontSize: 13.5, color: C.muted }}>{t(`${k} batch${k === 1 ? "" : "es"} of ${a} ${labels[0]} : ${b} ${labels[1]}.`, `${k} recette${k === 1 ? "" : "s"} de ${a} ${labels[0]} : ${b} ${labels[1]}.`)}</p>
 
-      <svg viewBox={`0 0 ${W} 110`} style={{ width: "100%", display: "block" }} role="img" aria-label="Double number line">
+      <svg viewBox={`0 0 ${W} 110`} style={{ width: "100%", display: "block" }} role="img" aria-label={t("Double number line", "Double droite numérique")}>
         {[[30, C.amber, X1, a, labels[0]], [78, C.blue, X2, b, labels[1]]].map(([y, col, X, step, lab]) => {
           const yy = y as number, Xf = X as (v: number) => number, s = step as number;
           return (
@@ -51,7 +54,7 @@ export function RatioScale({ initA = 2, initB = 3, labels = ["juice", "water"] }
 
       <Readout tone="green">
         <div style={{ fontSize: 19, fontWeight: 800 }}><MathText html={`\\(${a}:${b}=${a * k}:${b * k}\\)`} /></div>
-        <MathText html={`Both terms were multiplied by \\(${k}\\). As fractions, \\(\\tfrac{${a}}{${b}}=\\tfrac{${a * k}}{${b * k}}\\) — that equation is a <strong>proportion</strong>. ${g > 1 ? `The ratio \\(${a}:${b}\\) is not in lowest terms: divide by \\(${g}\\) to get \\(${a / g}:${b / g}\\).` : `\\(${a}:${b}\\) is already in lowest terms.`} Part-to-whole: ${labels[0]} is \\(\\tfrac{${a}}{${a + b}}\\) of the mixture.`} />
+        <MathText html={t(`Both terms were multiplied by \\(${k}\\). As fractions, \\(\\tfrac{${a}}{${b}}=\\tfrac{${a * k}}{${b * k}}\\) — that equation is a <strong>proportion</strong>. ${g > 1 ? `The ratio \\(${a}:${b}\\) is not in lowest terms: divide by \\(${g}\\) to get \\(${a / g}:${b / g}\\).` : `\\(${a}:${b}\\) is already in lowest terms.`} Part-to-whole: ${labels[0]} is \\(\\tfrac{${a}}{${a + b}}\\) of the mixture.`, `Les deux termes ont été multipliés par \\(${k}\\). Sous forme de fractions, \\(\\tfrac{${a}}{${b}}=\\tfrac{${a * k}}{${b * k}}\\) — cette équation est une <strong>proportion</strong>. ${g > 1 ? `Le rapport \\(${a}:${b}\\) n'est pas sous sa forme irréductible : divise par \\(${g}\\) pour obtenir \\(${a / g}:${b / g}\\).` : `\\(${a}:${b}\\) est déjà sous sa forme irréductible.`} Partie-tout : ${labels[0]} représente \\(\\tfrac{${a}}{${a + b}}\\) du mélange.`)} />
       </Readout>
     </WidgetCard>
   );
@@ -62,6 +65,7 @@ export function PercentBar({ initWhole = 80, initPct = 35 }: { initWhole?: numbe
   const [whole, setWhole] = useState(initWhole);
   const [pct, setPct] = useState(initPct);
   const [mode, setMode] = useState<"of" | "up" | "down">("of");
+  const t = useT();
   const part = (whole * pct) / 100;
   const mult = mode === "up" ? 1 + pct / 100 : mode === "down" ? 1 - pct / 100 : pct / 100;
   const result = whole * mult;
@@ -69,30 +73,30 @@ export function PercentBar({ initWhole = 80, initPct = 35 }: { initWhole?: numbe
   const r2 = (x: number) => Math.round(x * 100) / 100;
 
   return (
-    <WidgetCard title="Percent bar" subtitle="100% is the whole; slide the percent and watch the part">
+    <WidgetCard title={t("Percent bar", "Barre de pourcentage")} subtitle={t("100% is the whole; slide the percent and watch the part", "100 % représente le tout; fais glisser le pourcentage et observe la partie")}>
       <Row>
-        <Slider label="whole" value={whole} min={10} max={200} step={5} onChange={setWhole} color={C.blue} />
-        <Slider label="percent" value={pct} min={0} max={100} onChange={setPct} color={C.amber} format={(v) => `${v}%`} />
+        <Slider label={t("whole", "tout")} value={whole} min={10} max={200} step={5} onChange={setWhole} color={C.blue} />
+        <Slider label={t("percent", "pourcentage")} value={pct} min={0} max={100} onChange={setPct} color={C.amber} format={(v) => `${v}%`} />
       </Row>
       <div style={{ margin: "12px 0" }}>
-        <Segmented options={[{ value: "of", label: "Percent of" }, { value: "up", label: "Increase by" }, { value: "down", label: "Decrease by" }]} value={mode} onChange={setMode} />
+        <Segmented options={[{ value: "of", label: t("Percent of", "Pourcentage de") }, { value: "up", label: t("Increase by", "Augmenter de") }, { value: "down", label: t("Decrease by", "Diminuer de") }]} value={mode} onChange={setMode} />
       </div>
-      <svg viewBox={`0 0 ${W} 120`} style={{ width: "100%", display: "block" }} role="img" aria-label="Percent bar model">
+      <svg viewBox={`0 0 ${W} 120`} style={{ width: "100%", display: "block" }} role="img" aria-label={t("Percent bar model", "Modèle de barre de pourcentage")}>
         <rect x={20} y={18} width={whole * scale} height={34} fill={C.blueSoft} stroke={C.blue} strokeWidth={1.6} />
         {Array.from({ length: 11 }, (_, i) => <g key={i}><line x1={20 + (whole * scale * i) / 10} y1={52} x2={20 + (whole * scale * i) / 10} y2={60} stroke={C.blue} /><text x={20 + (whole * scale * i) / 10} y={72} fontSize={10.5} textAnchor="middle" fill={C.muted}>{i * 10}%</text></g>)}
         {mode === "of" && <rect x={20} y={18} width={part * scale} height={34} fill={C.amberSoft} stroke={C.amber} strokeWidth={2} style={{ transition: "width 0.3s" }} />}
         {mode !== "of" && <rect x={20} y={80} width={result * scale} height={26} fill={mode === "up" ? C.greenSoft : C.redSoft} stroke={mode === "up" ? C.green : C.red} strokeWidth={2} style={{ transition: "width 0.3s" }} />}
-        <text x={20 + whole * scale - 6} y={40} fontSize={12.5} fontWeight={700} textAnchor="end" fill={C.blue}>{`whole = ${whole}`}</text>
-        {mode === "of" && part * scale > 70 && <text x={24} y={40} fontSize={12.5} fontWeight={800} fill={C.amber}>{`part = ${r2(part)}`}</text>}
-        {mode !== "of" && <text x={24 + 4} y={98} fontSize={12.5} fontWeight={800} fill={mode === "up" ? C.green : C.red}>{`new amount = ${r2(result)}`}</text>}
+        <text x={20 + whole * scale - 6} y={40} fontSize={12.5} fontWeight={700} textAnchor="end" fill={C.blue}>{t(`whole = ${whole}`, `tout = ${whole}`)}</text>
+        {mode === "of" && part * scale > 70 && <text x={24} y={40} fontSize={12.5} fontWeight={800} fill={C.amber}>{t(`part = ${r2(part)}`, `partie = ${r2(part)}`)}</text>}
+        {mode !== "of" && <text x={24 + 4} y={98} fontSize={12.5} fontWeight={800} fill={mode === "up" ? C.green : C.red}>{t(`new amount = ${r2(result)}`, `nouveau montant = ${r2(result)}`)}</text>}
       </svg>
       <Readout tone={mode === "down" ? "red" : "green"}>
         {mode === "of" ? (
-          <><div style={{ fontSize: 19, fontWeight: 800 }}><MathText html={`\\(${pct}\\%\\text{ of }${whole}=${(pct / 100).toString()}\\times${whole}=${r2(part)}\\)`} /></div>
-            <MathText html={`Percent means "per hundred": \\(${pct}\\%=\\tfrac{${pct}}{100}=${pct / 100}\\). Check with the proportion \\(\\tfrac{\\text{part}}{${whole}}=\\tfrac{${pct}}{100}\\).`} /></>
+          <><div style={{ fontSize: 19, fontWeight: 800 }}><MathText html={t(`\\(${pct}\\%\\text{ of }${whole}=${(pct / 100).toString()}\\times${whole}=${r2(part)}\\)`, `\\(${pct}\\%\\text{ de }${whole}=${(pct / 100).toString()}\\times${whole}=${r2(part)}\\)`)} /></div>
+            <MathText html={t(`Percent means "per hundred": \\(${pct}\\%=\\tfrac{${pct}}{100}=${pct / 100}\\). Check with the proportion \\(\\tfrac{\\text{part}}{${whole}}=\\tfrac{${pct}}{100}\\).`, `Pour cent signifie « sur cent » : \\(${pct}\\%=\\tfrac{${pct}}{100}=${pct / 100}\\). Vérifie avec la proportion \\(\\tfrac{\\text{partie}}{${whole}}=\\tfrac{${pct}}{100}\\).`)} /></>
         ) : (
           <><div style={{ fontSize: 19, fontWeight: 800 }}><MathText html={`\\(${whole}\\times(1${mode === "up" ? "+" : "-"}${pct / 100})=${whole}\\times${r2(mult)}=${r2(result)}\\)`} /></div>
-            <MathText html={`A ${pct}% ${mode === "up" ? "increase" : "decrease"} leaves you with \\(${mode === "up" ? 100 + pct : 100 - pct}\\%\\) of the original, so multiply by \\(${r2(mult)}\\) in one step. The change itself is \\(${r2(part)}\\).`} /></>
+            <MathText html={t(`A ${pct}% ${mode === "up" ? "increase" : "decrease"} leaves you with \\(${mode === "up" ? 100 + pct : 100 - pct}\\%\\) of the original, so multiply by \\(${r2(mult)}\\) in one step. The change itself is \\(${r2(part)}\\).`, `${mode === "up" ? "Une augmentation" : "Une diminution"} de ${pct} % te laisse \\(${mode === "up" ? 100 + pct : 100 - pct}\\%\\) de la valeur initiale, donc multiplie par \\(${r2(mult)}\\) en une seule étape. La variation elle-même est de \\(${r2(part)}\\).`)} /></>
         )}
       </Readout>
     </WidgetCard>

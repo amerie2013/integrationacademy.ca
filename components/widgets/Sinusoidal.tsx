@@ -5,6 +5,7 @@
 // data model with a threshold line for "when is it above …" questions. Angles are in degrees throughout.
 
 import { useState } from "react";
+import { useLang, useT } from "@/lib/lang";
 import { C, MathText, Readout, Row, Segmented, Slider, WidgetCard } from "./kit";
 import { r2 } from "./Systems";
 
@@ -251,9 +252,19 @@ const DATA = {
   tide: { name: "water depth in a harbour (m) vs hours after midnight", xlab: "h", pts: [[0, 6.1], [2, 7.9], [4, 8.6], [6, 7.6], [8, 5.4], [10, 3.3], [12, 2.5], [14, 3.6], [16, 5.8], [18, 7.9], [20, 8.7], [22, 7.6], [24, 5.6]] as [number, number][], xmax: 24, ymin: 0, ymax: 10, xs: 2, ys: 1, init: { A: 3, P: 16, d: 0, c: 5.5 } },
 } as const;
 
+const DATA_FR: Record<keyof typeof DATA, { name: string; xlab: string }> = {
+  daylight: { name: "heures d'ensoleillement (jour de l'année)", xlab: "jour" },
+  tide: { name: "profondeur de l'eau dans un port (m) en fonction des heures après minuit", xlab: "h" },
+};
+
+// Model y = A·sin((360/P)(x − d)) + c: state/init d = HORIZONTAL shift, c = VERTICAL shift (DATA[...].init.d / .init.c).
+// The French course writes y = A·sin((360/P)(x − c)) + d, so in French only the displayed letters swap (slider "c" drives d).
 export function ModelLab({ dataset = "daylight" }: { dataset?: keyof typeof DATA }) {
+  const t = useT(), fr = useLang() === "fr";
+  const hL = fr ? "c" : "d", vL = fr ? "d" : "c"; // displayed letters for the horizontal / vertical shift
   const [ds, setDs] = useState<keyof typeof DATA>(dataset);
   const D = DATA[ds];
+  const dName = t(D.name, DATA_FR[ds].name), dXlab = t(D.xlab, DATA_FR[ds].xlab);
   const [A, setA] = useState<number>(D.init.A), [P, setP] = useState<number>(D.init.P), [d, setD] = useState<number>(D.init.d), [c, setC] = useState<number>(D.init.c), [lvl, setLvl] = useState<number>(Math.round(D.init.c + D.init.A / 2));
   const m = (x: number) => A * Math.sin(rad((360 / P) * (x - d))) + c;
   const rms = Math.sqrt(D.pts.reduce((s, [x, y]) => s + (m(x) - y) ** 2, 0) / D.pts.length);
@@ -263,20 +274,20 @@ export function ModelLab({ dataset = "daylight" }: { dataset?: keyof typeof DATA
   if (st !== null) iv.push([st, D.xmax]);
   const change = (k: keyof typeof DATA) => { setDs(k); const I = DATA[k].init; setA(I.A); setP(I.P); setD(I.d); setC(I.c); setLvl(Math.round(I.c + I.A / 2)); };
   return (
-    <WidgetCard title="Model real data" subtitle="fit y = A·sin((360/P)(x − d)) + c, then ask when it is above a level">
-      <Row><Segmented value={ds} onChange={change} options={[{ value: "daylight", label: "daylight" }, { value: "tide", label: "tide" }]} /></Row>
+    <WidgetCard title={t("Model real data", "Modéliser des données réelles")} subtitle={t("fit y = A·sin((360/P)(x − d)) + c, then ask when it is above a level", "ajuste y = A·sin((360/P)(x − c)) + d, puis détermine quand le modèle dépasse un niveau")}>
+      <Row><Segmented value={ds} onChange={change} options={[{ value: "daylight", label: t("daylight", "ensoleillement") }, { value: "tide", label: t("tide", "marée") }]} /></Row>
       <Row>
         <Slider label="A" value={A} min={0.5} max={6} step={0.1} onChange={setA} format={(v) => n(v, 1)} color={C.red} />
-        <Slider label="period P" value={P} min={ds === "daylight" ? 300 : 8} max={ds === "daylight" ? 420 : 24} step={ds === "daylight" ? 5 : 0.5} onChange={setP} color={C.blue} />
+        <Slider label={t("period P", "période P")} value={P} min={ds === "daylight" ? 300 : 8} max={ds === "daylight" ? 420 : 24} step={ds === "daylight" ? 5 : 0.5} onChange={setP} color={C.blue} />
       </Row>
       <Row>
-        <Slider label="d" value={d} min={ds === "daylight" ? 0 : -8} max={ds === "daylight" ? 180 : 8} step={ds === "daylight" ? 1 : 0.5} onChange={setD} color={C.green} />
-        <Slider label="c" value={c} min={D.ymin} max={D.ymax} step={0.1} onChange={setC} format={(v) => n(v, 1)} color={C.violet} />
+        <Slider label={hL} value={d} min={ds === "daylight" ? 0 : -8} max={ds === "daylight" ? 180 : 8} step={ds === "daylight" ? 1 : 0.5} onChange={setD} color={C.green} />
+        <Slider label={vL} value={c} min={D.ymin} max={D.ymax} step={0.1} onChange={setC} format={(v) => n(v, 1)} color={C.violet} />
       </Row>
-      <Slider label="level" value={lvl} min={D.ymin} max={D.ymax} step={0.5} onChange={setLvl} color={C.amber} />
-      <Plot xmin={0} xmax={D.xmax} ymin={D.ymin} ymax={D.ymax} xs={D.xs} ys={D.ys} xlab={D.xlab} curves={[{ f: m, color: C.violet }]} pts={D.pts.map(([x, y]) => ({ x, y, color: C.blue }))} hl={[{ y: lvl, color: C.amber, label: `level ${n(lvl)}` }]} />
+      <Slider label={t("level", "niveau")} value={lvl} min={D.ymin} max={D.ymax} step={0.5} onChange={setLvl} color={C.amber} />
+      <Plot xmin={0} xmax={D.xmax} ymin={D.ymin} ymax={D.ymax} xs={D.xs} ys={D.ys} xlab={dXlab} curves={[{ f: m, color: C.violet }]} pts={D.pts.map(([x, y]) => ({ x, y, color: C.blue }))} hl={[{ y: lvl, color: C.amber, label: t(`level ${n(lvl)}`, `niveau ${n(lvl)}`) }]} />
       <Readout tone={rms < 0.4 ? "green" : "amber"}>
-        <MathText html={`${D.name}. Model \\(y=${n(A, 1)}\\sin\\left(\\frac{360}{${n(P, 1)}}(x-${n(d, 1)})\\right)+${n(c, 1)}\\); typical error \\(${n(rms)}\\)${rms < 0.4 ? " — a good fit" : " — keep adjusting"}. Above the level \\(${n(lvl)}\\): ${iv.length ? iv.map(([s, e]) => `\\(${n(s, 1)}\\)–\\(${n(e, 1)}\\)`).join(", ") : "never"}.`} />
+        <MathText html={t(`${dName}. Model \\(y=${n(A, 1)}\\sin\\left(\\frac{360}{${n(P, 1)}}(x-${n(d, 1)})\\right)+${n(c, 1)}\\); typical error \\(${n(rms)}\\)${rms < 0.4 ? " — a good fit" : " — keep adjusting"}. Above the level \\(${n(lvl)}\\): ${iv.length ? iv.map(([s, e]) => `\\(${n(s, 1)}\\)–\\(${n(e, 1)}\\)`).join(", ") : "never"}.`, `${dName.charAt(0).toUpperCase() + dName.slice(1)}. Modèle \\(y=${n(A, 1)}\\sin\\left(\\frac{360}{${n(P, 1)}}(x-${n(d, 1)})\\right)+${n(c, 1)}\\); erreur typique \\(${n(rms)}\\)${rms < 0.4 ? " — un bon ajustement" : " — continue d'ajuster"}. Au-dessus du niveau \\(${n(lvl)}\\) : ${iv.length ? iv.map(([s, e]) => `\\(${n(s, 1)}\\)–\\(${n(e, 1)}\\)`).join(", ") : "jamais"}.`)} />
       </Readout>
     </WidgetCard>
   );

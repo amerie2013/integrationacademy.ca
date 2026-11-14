@@ -1,0 +1,51 @@
+// 4.3 Représenter des relations linéaires et non linéaires (y = mx + b) — 21 questions faciles + 21 moyennes
+import { mc, ms, num, tf, mx } from "./kit.mjs";
+import { planeDoc, FIG } from "./fig.mjs";
+
+export const E = [
+  num(String.raw`Quelle est la pente de $y=4x-9$?`, 4, "Le coefficient de x."),
+  num(String.raw`Quelle est l'ordonnée à l'origine de $y=4x-9$?`, -9, "Le terme constant."),
+  num(String.raw`Quelle est la pente de $y=8-3x$?`, -3, "Réécris-la y = −3x + 8."),
+  tf(String.raw`$y=7x$ est une variation directe.`, true, "b = 0 : passe par l'origine."),
+  tf(String.raw`$C=20+5n$ est une variation directe.`, false, "b = 20 ≠ 0 : variation partielle."),
+  num(`Une droite monte de 6 pour une course de 2. Quelle est sa pente?`, 3, "6 ÷ 2."),
+  num(String.raw`Trouve la pente de la droite passant par $(0,1)$ et $(4,9)$.`, 2, "8 ÷ 4."),
+  mx(String.raw`Écris l'équation de la droite de pente $5$ et d'ordonnée à l'origine $-2$.`, "5*x-2", "y = 5x − 2."),
+  mc(String.raw`Dans $C=12+0.5d$, que représente $12$?`, "le coût fixe (de départ)", ["le coût par km", "la distance", "le coût total"], "b est la valeur initiale."),
+  mc(String.raw`Dans $C=12+0.5d$, que représente $0.5$?`, "le coût par unité de d", ["le coût fixe", "la distance", "l'ordonnée à l'origine"], "m est le taux de variation."),
+  num(String.raw`Pour $y=2x+3$, que vaut $y$ quand $x=5$?`, 13, "10 + 3."),
+  mc(`Une droite passe par l'origine et a une pente de −2. Son équation est…`, String.raw`$y=-2x$`, [String.raw`$y=x-2$`, String.raw`$y=-2$`, String.raw`$y=2x$`], "Variation directe y = mx."),
+  num(`Une table : x = 0, 1, 2; y = 7, 10, 13. Que vaut b?`, 7, "y à x = 0."),
+  num(`Une table : x = 0, 1, 2; y = 7, 10, 13. Dans y = mx + b, que vaut m?`, 3, "Première différence."),
+  mc(`Quelle droite est la plus inclinée?`, String.raw`$y=-5x+1$`, [String.raw`$y=2x+10$`, String.raw`$y=0.5x$`, String.raw`$y=x-7$`], "Le plus grand |m|."),
+  tf(`Une pente négative signifie que la droite descend de gauche à droite.`, true, "y diminue quand x augmente."),
+  num(`Lis le graphique : quelle est l'ordonnée à l'origine?`, 3, "La droite coupe l'axe des y à 3.", planeDoc({ view: { xmin: -6, xmax: 6, ymin: -6, ymax: 6 }, lines: [{ m: -1, b: 3 }] })),
+  num(`Le graphique montre une droite. Quelle est sa pente?`, -1, "Descend de 1 pour chaque 1 vers la droite.", planeDoc({ view: { xmin: -6, xmax: 6, ymin: -6, ymax: 6 }, lines: [{ m: -1, b: 3 }], points: [{ x: 0, y: 3 }, { x: 3, y: 0 }] })),
+  mx(`Un centre de conditionnement physique demande 30 dollars d'adhésion plus 20 dollars par mois. Écris le coût C pour m mois.`, "30+20*m", "C = 20m + 30."),
+  num(String.raw`Pour $C=20m+30$, quel est le coût pour 6 mois?`, 150, "120 + 30."),
+  mc(`Laquelle est une variation partielle?`, String.raw`$y=3x+4$`, [String.raw`$y=3x$`, String.raw`$y=-x$`, String.raw`$y=\tfrac12x$`], "b non nul."),
+];
+
+export const M = [
+  num(String.raw`Trouve la pente de la droite passant par $(-2,7)$ et $(3,-3)$.`, -2, "−10 ÷ 5."),
+  mx(String.raw`Écris l'équation de la droite passant par $(0,-4)$ de pente $\frac23$.`, "(2/3)*x-4", String.raw`$y=\frac23x-4$.`),
+  num(String.raw`Une table : $x$ = 1, 2, 3, 4; $y$ = 9, 13, 17, 21. Quelle est l'ordonnée à l'origine?`, 5, "m = 4; 9 − 4 = 5."),
+  mx(`Écris l'équation de la table x = 1, 2, 3, 4; y = 9, 13, 17, 21.`, "4*x+5", "y = 4x + 5."),
+  num(String.raw`Un plombier demande $C=65h+45$. Combien d'heures pour une facture de 305 dollars?`, 4, "65h = 260."),
+  num(`Lis le graphique : quelle est la pente? (nombre décimal)`, 1.5, "De (0, −1) à (2, 2) : montée 3, course 2.", planeDoc({ view: { xmin: -6, xmax: 6, ymin: -6, ymax: 6 }, lines: [{ m: 1.5, b: -1 }], points: [{ x: 0, y: -1 }, { x: 2, y: 2 }] }), 0.001),
+  mx(`Écris l'équation de la droite illustrée, qui passe par (0, −1) et (2, 2).`, "1.5*x-1", "y = 1.5x − 1.", FIG.slope15),
+  ms(`Lesquelles sont des variations directes? Choisis toutes les bonnes réponses.`, [String.raw`$y=-4x$`, String.raw`$C=0.25k$`, String.raw`$y=2x+0.1$`, String.raw`$d=80t$`, String.raw`$y=7$`], [0, 1, 3], "Passent par l'origine, b = 0."),
+  num(`Une bougie de 24 cm brûle de 1.5 cm par heure. Combien d'heures faut-il pour qu'elle mesure 6 cm?`, 12, "24 − 1.5t = 6."),
+  mc(`La location d'une voiture coûte 40 dollars plus 0.25 dollar par km. Quel élément du graphique montre le 40?`, "l'ordonnée à l'origine", ["la pente", "l'abscisse à l'origine", "l'inclinaison"], "Valeur initiale.", FIG.rental),
+  num(String.raw`$E=13.5h$ est la paie d'une gardienne d'enfants. Combien de dollars pour 6.5 heures?`, 87.75, "13.5 × 6.5.", null, 0.001),
+  tf(String.raw`Les droites $y=2x+5$ et $y=2x-1$ ont la même pente.`, true, "Les deux ont m = 2."),
+  num(String.raw`Une droite a une pente de $-\frac34$. Si tu te déplaces de 8 unités vers la droite, de combien y change-t-il?`, -6, "−3/4 × 8."),
+  mc(String.raw`Quelle équation correspond à : commence à 500 et diminue de 25 chaque semaine?`, String.raw`$y=500-25x$`, [String.raw`$y=25x-500$`, String.raw`$y=500x-25$`, String.raw`$y=25-500x$`], "b = 500, m = −25."),
+  num(String.raw`Pour $V=500-25w$, après combien de semaines V = 0?`, 20, "25w = 500."),
+  mx(`Un forfait de téléphone : 15 dollars plus 0.10 dollar par texto. Écris C pour t textos.`, "15+0.1*t", "C = 0.1t + 15."),
+  num(String.raw`Avec $C=0.1t+15$, combien de textos donnent une facture de 32 dollars?`, 170, "0.1t = 17."),
+  mc(`Une droite a une pente de 0 et une ordonnée à l'origine de −3. Son équation est…`, String.raw`$y=-3$`, [String.raw`$x=-3$`, String.raw`$y=-3x$`, String.raw`$y=x-3$`], "Horizontale."),
+  num(String.raw`Trouve b pour la droite passant par $(3,10)$ de pente $2$.`, 4, "10 = 6 + b."),
+  ms(`Quels énoncés sur y = −2x + 6 sont vrais? Choisis toutes les bonnes réponses.`, ["elle descend vers la droite", "elle coupe l'axe des y à 6", "elle passe par (3, 0)", "c'est une variation directe", "sa pente est 6"], [0, 1, 2], "m = −2, b = 6; −6 + 6 = 0 à x = 3."),
+  num(String.raw`Un réservoir contient 1200 L et se vide à raison de 80 L/min. Combien en reste-t-il après 7.5 min (L)?`, 600, "1200 − 600."),
+];

@@ -1,0 +1,30 @@
+// 1.4 Fractions : équivalence, comparaison, addition et soustraction — 20 questions difficiles
+import { mc, ms, num, fill, tf } from "./kit.mjs";
+import { numberLine, bars } from "./svg.mjs";
+import { TITLE } from "../l1_4.mjs";
+
+export const TOPIC = TITLE;
+export const Q = [
+  mc(String.raw`Le diagramme montre deux fractions du même tout. Quelle est leur somme?`, String.raw`$1\frac{5}{12}$`, [String.raw`$\frac57$`, String.raw`$1\frac{1}{12}$`, String.raw`$\frac{5}{12}$`],
+    String.raw`$\frac23+\frac34=\frac{8}{12}+\frac{9}{12}=\frac{17}{12}=1\frac{5}{12}$.`, bars([{ n: 2, d: 3, label: "A" }, { n: 3, d: 4, label: "B", color: "amber" }])),
+  fill(String.raw`Évalue $-\frac34+\frac56-\frac13$ sous forme de fraction irréductible : ___`, ["-1/4", "−1/4"], String.raw`PPCD $12$ : $\frac{-9+10-4}{12}=-\frac{3}{12}=-\frac14$.`),
+  num(String.raw`Un réservoir est rempli aux $\frac25$. Après l'ajout de $18$ L, il est rempli aux $\frac{7}{10}$. Quelle est la capacité du réservoir, en litres?`, 60, String.raw`$\frac{7}{10}-\frac25=\frac{3}{10}$ du réservoir correspond à $18$ L; le réservoir contient donc $18\div\frac3{10}=60$ L.`),
+  ms(String.raw`Quels nombres sont plus grands que $\frac58$? Sélectionne-les tous.`, [String.raw`$\frac{7}{11}$`, String.raw`$\frac{9}{16}$`, "$0.63$", String.raw`$\frac{13}{20}$`, String.raw`$-\frac{11}{16}$`], [0, 2, 3], String.raw`$\frac58=0.625$. $\frac7{11}\approx0.636$, $0.63$, $\frac{13}{20}=0.65$ sont plus grands; $\frac9{16}=0.5625$ et le négatif sont plus petits.`),
+  mc(String.raw`Place dans l'ordre croissant : $-\frac{7}{10}$, $-\frac23$, $-\frac34$.`, String.raw`$-\frac34,\ -\frac{7}{10},\ -\frac23$`, [String.raw`$-\frac23,\ -\frac{7}{10},\ -\frac34$`, String.raw`$-\frac{7}{10},\ -\frac34,\ -\frac23$`, String.raw`$-\frac34,\ -\frac23,\ -\frac{7}{10}$`], String.raw`$-0.75<-0.7<-0.\overline{6}$ : la plus grande grandeur donne le plus petit nombre.`),
+  fill(String.raw`Évalue $5\frac16-2\frac34$. Écris un nombre fractionnaire ou une fraction impropre : ___`, ["29/12", "2 5/12"], String.raw`$\frac{62}{12}-\frac{33}{12}=\frac{29}{12}=2\frac{5}{12}$.`),
+  tf(String.raw`Pour des fractions positives telles que $\frac ab<\frac cd$, la fraction $\frac{a+c}{b+d}$ se trouve toujours entre les deux. (Essaie $\frac12$ et $\frac34$.)`, true, String.raw`Exemple : $\frac{1+3}{2+4}=\frac46=\frac23$, qui est entre $\frac12$ et $\frac34$. (Cette « médiante » se trouve toujours entre les deux.)`),
+  mc(String.raw`Quel nombre se trouve au point P?`, String.raw`$\frac58$`, [String.raw`$\frac35$`, String.raw`$\frac56$`, String.raw`$\frac23$`], String.raw`P est à mi-chemin entre $\frac12=\frac48$ et $\frac34=\frac68$; c'est donc $\frac58$.`,
+    numberLine({ min: 0, max: 1, step: 0.25, labels: ["0", "1/4", "1/2", "3/4", "1"], letters: [{ at: 0.625, label: "P" }] })),
+  num(String.raw`Évalue $\dfrac{1}{1\times2}+\dfrac{1}{2\times3}+\cdots+\dfrac{1}{19\times20}$ sous forme décimale.`, 0.95, String.raw`Chaque terme est une différence : $\frac1n-\frac{1}{n+1}$. Tout s'annule sauf $1-\frac{1}{20}=0.95$.`, undefined, 0.001),
+  fill(String.raw`Quel nombre faut-il additionner à $-2\frac13$ pour obtenir $1\frac14$? ___`, ["43/12", "3 7/12"], String.raw`$1\frac14-\left(-2\frac13\right)=\frac{15}{12}+\frac{28}{12}=\frac{43}{12}=3\frac{7}{12}$.`),
+  mc(String.raw`Quelle fraction se trouve entre $\frac37$ et $\frac49$?`, String.raw`$\frac{7}{16}$`, [String.raw`$\frac12$`, String.raw`$\frac25$`, String.raw`$\frac{5}{11}$`], String.raw`$\frac37\approx0.4286$, $\frac49\approx0.4444$; $\frac7{16}=0.4375$ convient. ($\frac5{11}\approx0.4545$ est trop grand.)`),
+  fill(String.raw`Évalue $-2\frac34+1\frac56-\left(-\frac58\right)$ sous forme de fraction irréductible : ___`, ["-7/24", "−7/24"], String.raw`PPCD $24$ : $\frac{-66+44+15}{24}=-\frac{7}{24}$.`),
+  tf(String.raw`Si $a,b,c,d$ sont positifs et $\frac ab<\frac cd$, alors $\frac ba>\frac dc$.`, true, String.raw`Exemple : $\frac23<\frac34$ et $\frac32>\frac43$. Pour des nombres positifs, prendre les inverses renverse l'ordre.`),
+  num(String.raw`Un réservoir est rempli au $\frac12$. On vide une quantité égale au $\frac13$ de sa capacité, puis on ajoute $21$ L. Il est maintenant rempli aux $\frac34$. Trouve sa capacité, en litres.`, 36, String.raw`Après la vidange : $\frac12-\frac13=\frac16$. Ensuite, $\frac34-\frac16=\frac{7}{12}$ du réservoir correspond à $21$ L; la capacité est donc de $36$ L.`),
+  ms(String.raw`Quels nombres sont égaux à la partie ombrée de la barre? Sélectionne-les tous.`, [String.raw`$\frac38$`, "$0.375$", String.raw`$\frac{6}{10}$`, String.raw`$\frac{12}{32}$`, String.raw`$\frac35$`], [0, 1, 3], String.raw`$6$ parties sur $16$ : $\frac{6}{16}=\frac38=0.375=\frac{12}{32}$.`, bars([{ n: 6, d: 16, label: "" }])),
+  num(String.raw`Un triangle a des côtés de $2\frac12$ m, $3\frac13$ m et $4\frac16$ m. Trouve son périmètre, en mètres.`, 10, String.raw`$\frac{15}{6}+\frac{20}{6}+\frac{25}{6}=\frac{60}{6}=10$.`),
+  mc(String.raw`Évalue $-1\frac35+2\frac14-\left|-\frac12-\frac25\right|$.`, String.raw`$-\frac14$`, [String.raw`$\frac14$`, String.raw`$\frac34$`, String.raw`$\frac{11}{20}$`], String.raw`La valeur absolue vaut $\frac{9}{10}$. PPCD $20$ : $\frac{-32+45-18}{20}=-\frac{5}{20}=-\frac14$.`),
+  num(String.raw`Sam court $3\frac34$ km lundi et $2\frac58$ km mardi. Quelle distance doit-il courir mercredi pour totaliser exactement $10$ km? Donne un décimal.`, 3.625, String.raw`$3\frac34+2\frac58=6\frac38$; $10-6\frac38=3\frac58=3.625$ km.`, undefined, 0.001),
+  tf(String.raw`Entre deux fractions différentes de même dénominateur, il y a une autre fraction.`, true, String.raw`Leur point milieu se trouve toujours entre elles, par exemple $\frac{4.5}{7}=\frac{9}{14}$ entre $\frac47$ et $\frac57$.`),
+  mc(String.raw`Quelle fraction est la plus proche de $\frac12$?`, String.raw`$\frac{5}{11}$`, [String.raw`$\frac{7}{12}$`, String.raw`$\frac49$`, String.raw`$\frac{11}{20}$`], String.raw`Distances à $\frac12$ : $\frac1{22}\approx0.045$, $\frac1{12}\approx0.083$, $\frac1{18}\approx0.056$, $\frac1{20}=0.05$.`),
+];

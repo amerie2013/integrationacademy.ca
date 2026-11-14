@@ -5,6 +5,7 @@
 // inequalities read from a graph, and sign charts for factored inequalities.
 
 import { useState } from "react";
+import { useT } from "@/lib/lang";
 import { C, MathText, Readout, Row, Segmented, Slider, WidgetCard } from "./kit";
 import { r2, type View } from "./Systems";
 import { Curves, dot } from "./Quadratics";
@@ -32,6 +33,8 @@ function synth(cs: number[], b: number): [number[], number, number[]] {
   return [out.slice(0, -1), out[out.length - 1], prod];
 }
 const fac = (r: number) => (r === 0 ? "x" : `(x${r > 0 ? "-" : "+"}${r2(Math.abs(r))})`);
+type T = (en: string, fr: string) => string;
+const cubicNames = (t: T) => ["a (x³)", "b (x²)", "c (x)", t("d (constant)", "d (constante)")];
 const near = (a: number, b: number) => Math.abs(a - b) < 1e-9;
 /** real roots of f on [lo, hi] by sign change + bisection (touching roots found from |f| minima near 0) */
 function realRoots(f: (x: number) => number, lo = -8, hi = 8, n = 1600) {
@@ -85,11 +88,12 @@ export function SyntheticDivide({ init = { cs: [1, -2, -5, 6], b: 2 } }: { init?
   const ys = Array.from({ length: 121 }, (_, i) => f(-5 + i / 12));
   const hi = Math.min(60, Math.max(10, ...ys.map(Math.abs).filter(Number.isFinite)));
   const set = (i: number, v: number) => setCs((c) => c.map((x, j) => (j === i ? (i === 0 && v === 0 ? 1 : v) : x)));
+  const t = useT();
   return (
-    <WidgetCard title="Synthetic division and the remainder theorem" subtitle="dividing f(x) by (x − b) leaves remainder f(b)">
+    <WidgetCard title={t("Synthetic division and the remainder theorem", "Division synthétique et théorème du reste")} subtitle={t("dividing f(x) by (x − b) leaves remainder f(b)", "la division de f(x) par (x − b) donne le reste f(b)")}>
       <Row gap={8}>
-        {["a (x³)", "b (x²)", "c (x)", "d (constant)"].map((nm, i) => <Slider key={nm} label={nm} value={cs[i]} min={-8} max={8} onChange={(v) => set(i, v)} color={i === 0 ? C.red : C.blue} />)}
-        <Slider label="divide by x − b:  b" value={b} min={-4} max={4} onChange={setB} color={C.green} />
+        {cubicNames(t).map((nm, i) => <Slider key={nm} label={nm} value={cs[i]} min={-8} max={8} onChange={(v) => set(i, v)} color={i === 0 ? C.red : C.blue} />)}
+        <Slider label={t("divide by x − b:  b", "diviser par x − b :  b")} value={b} min={-4} max={4} onChange={setB} color={C.green} />
       </Row>
       <div style={{ textAlign: "center", fontSize: 18, margin: "6px 0" }}><MathText html={`\\(\\dfrac{${polyTex(cs)}}{${fac(b)}}\\)`} /></div>
       <div style={{ overflowX: "auto" }}>
@@ -101,13 +105,13 @@ export function SyntheticDivide({ init = { cs: [1, -2, -5, 6], b: 2 } }: { init?
           </tbody>
         </table>
       </div>
-      <Curves view={{ xmin: -5, xmax: 5, ymin: -hi, ymax: hi }} label="Remainder theorem" step={1} stepY={hi > 30 ? 10 : 4} fs={[{ f, color: C.violet }]}>
+      <Curves view={{ xmin: -5, xmax: 5, ymin: -hi, ymax: hi }} label={t("Remainder theorem", "Théorème du reste")} step={1} stepY={hi > 30 ? 10 : 4} fs={[{ f, color: C.violet }]}>
         {(X, Y) => <>{dot(X, Y, b, R, C.red, `(${b}, ${r2(R)})`, "r")}</>}
       </Curves>
       <Readout tone={R === 0 ? "green" : "blue"}>
-        <MathText block html={`Bring down, multiply by ${b}, add. Quotient \\(q(x)=${polyTex(q)}\\), remainder \\(R=${r2(R)}\\).`} />
-        <MathText block html={`So \\(${polyTex(cs)}=${fac(b)}(${polyTex(q)})${R === 0 ? "" : R > 0 ? `+${r2(R)}` : `-${r2(-R)}`}\\), and the graph passes through \\((${b},\\,${r2(R)})\\): \\(f(${b})=${r2(R)}\\).`} />
-        {R === 0 && <MathText block html={`Remainder 0: \\(${fac(b)}\\) is a factor and \\(x=${b}\\) is a zero.`} />}
+        <MathText block html={t(`Bring down, multiply by ${b}, add. Quotient \\(q(x)=${polyTex(q)}\\), remainder \\(R=${r2(R)}\\).`, `Abaisse, multiplie par ${b}, additionne. Quotient \\(q(x)=${polyTex(q)}\\), reste \\(R=${r2(R)}\\).`)} />
+        <MathText block html={t(`So \\(${polyTex(cs)}=${fac(b)}(${polyTex(q)})${R === 0 ? "" : R > 0 ? `+${r2(R)}` : `-${r2(-R)}`}\\), and the graph passes through \\((${b},\\,${r2(R)})\\): \\(f(${b})=${r2(R)}\\).`, `Donc \\(${polyTex(cs)}=${fac(b)}(${polyTex(q)})${R === 0 ? "" : R > 0 ? `+${r2(R)}` : `-${r2(-R)}`}\\), et le graphique passe par \\((${b},\\,${r2(R)})\\) :\\(f(${b})=${r2(R)}\\).`)} />
+        {R === 0 && <MathText block html={t(`Remainder 0: \\(${fac(b)}\\) is a factor and \\(x=${b}\\) is a zero.`, `Reste 0 : \\(${fac(b)}\\) est un facteur et \\(x=${b}\\) est un zéro.`)} />}
       </Readout>
     </WidgetCard>
   );
@@ -153,10 +157,11 @@ export function FactorFinder({ init = [1, -1, -10, -8] }: { init?: number[] }) {
   const ys = Array.from({ length: 121 }, (_, i) => f(-5 + i / 12));
   const hi = Math.min(60, Math.max(10, ...ys.map(Math.abs).filter(Number.isFinite)));
   const set = (i: number, v: number) => setCs((c) => c.map((x, j) => (j === i ? (i === 0 && v === 0 ? 1 : v) : x)));
+  const t = useT();
   return (
-    <WidgetCard title="The factor theorem" subtitle="x − b is a factor exactly when f(b) = 0; test the candidates ±(factors of the constant) ÷ (factors of the leading coefficient)">
+    <WidgetCard title={t("The factor theorem", "Le théorème des facteurs")} subtitle={t("x − b is a factor exactly when f(b) = 0; test the candidates ±(factors of the constant) ÷ (factors of the leading coefficient)", "x − b est un facteur exactement quand f(b) = 0; teste les candidats ±(facteurs du terme constant) ÷ (facteurs du coefficient dominant)")}>
       <Row gap={8}>
-        {["a (x³)", "b (x²)", "c (x)", "d (constant)"].map((nm, i) => <Slider key={nm} label={nm} value={cs[i]} min={i === 0 ? -4 : -12} max={i === 0 ? 4 : 12} onChange={(v) => set(i, v)} color={i === 0 ? C.red : C.blue} />)}
+        {cubicNames(t).map((nm, i) => <Slider key={nm} label={nm} value={cs[i]} min={i === 0 ? -4 : -12} max={i === 0 ? 4 : 12} onChange={(v) => set(i, v)} color={i === 0 ? C.red : C.blue} />)}
       </Row>
       <div style={{ textAlign: "center", fontSize: 18, margin: "6px 0" }}><MathText html={`\\(f(x)=${polyTex(cs)}\\)`} /></div>
       <div style={{ display: "flex", flexWrap: "wrap", gap: 6, justifyContent: "center", margin: "6px 0" }}>
@@ -165,12 +170,12 @@ export function FactorFinder({ init = [1, -1, -10, -8] }: { init?: number[] }) {
             <MathText html={`\\(f(${fracTex(c, lead)})=${r2(v)}\\)`} />
           </span>); })}
       </div>
-      <Curves view={{ xmin: -5, xmax: 5, ymin: -hi, ymax: hi }} label="Factor theorem" step={1} stepY={hi > 30 ? 10 : 4} fs={[{ f, color: C.violet }]}>
+      <Curves view={{ xmin: -5, xmax: 5, ymin: -hi, ymax: hi }} label={t("Factor theorem", "Théorème des facteurs")} step={1} stepY={hi > 30 ? 10 : 4} fs={[{ f, color: C.violet }]}>
         {(X, Y) => <>{found.map((r, i) => dot(X, Y, r, 0, C.green, fracTex(r, lead).replace(/\\tfrac\{(\d+)\}\{(\d+)\}/, "$1/$2"), i))}</>}
       </Curves>
       <Readout tone={found.length ? "green" : "amber"}>
-        <MathText block html={`${cand.length} candidate${cand.length === 1 ? "" : "s"} to test. ${found.length ? `Zeros found: ${found.map((r) => `\\(${fracTex(r, lead)}\\)`).join(", ")}.` : "No rational zero: this cubic does not factor over the integers (its real zeros are irrational)."}`} />
-        {found.length > 0 && <MathText block html={`\\(f(x)=${factTex}\\)${rem.length === 3 ? " — the quadratic factor has no rational zeros" : ""}`} />}
+        <MathText block html={t(`${cand.length} candidate${cand.length === 1 ? "" : "s"} to test. ${found.length ? `Zeros found: ${found.map((r) => `\\(${fracTex(r, lead)}\\)`).join(", ")}.` : "No rational zero: this cubic does not factor over the integers (its real zeros are irrational)."}`, `${cand.length} candidat${cand.length <= 1 ? "" : "s"} à tester. ${found.length ? `Zéros trouvés : ${found.map((r) => `\\(${fracTex(r, lead)}\\)`).join(", ")}.` : "Aucun zéro rationnel : cette fonction cubique ne se factorise pas sur les entiers (ses zéros réels sont irrationnels)."}`)} />
+        {found.length > 0 && <MathText block html={`\\(f(x)=${factTex}\\)${rem.length === 3 ? t(" — the quadratic factor has no rational zeros", " — le facteur quadratique n'a aucun zéro rationnel") : ""}`} />}
       </Readout>
     </WidgetCard>
   );
@@ -188,20 +193,21 @@ export function RootSolver({ init = { cs: [1, 0, -7, 0], k: 6 } }: { init?: { cs
   const deg = cs.length - 1;
   const set = (i: number, v: number) => setCs((c) => c.map((x, j) => (j === i ? (i === 0 && v === 0 ? 1 : v) : x)));
   const g = [...cs]; g[g.length - 1] -= k;
+  const t = useT();
   return (
-    <WidgetCard title="Solving polynomial equations" subtitle="the solutions of f(x) = k are the x-coordinates where y = f(x) meets the line y = k">
-      <Segmented options={[{ value: 3, label: "cubic" }, { value: 4, label: "quartic" }]} value={deg} onChange={(d) => setCs(d === 3 ? [1, 0, -7, 0] : [1, 0, -10, 0, 9])} />
+    <WidgetCard title={t("Solving polynomial equations", "Résolution d'équations polynomiales")} subtitle={t("the solutions of f(x) = k are the x-coordinates where y = f(x) meets the line y = k", "les solutions de f(x) = k sont les abscisses des points où y = f(x) rencontre la droite y = k")}>
+      <Segmented options={[{ value: 3, label: t("cubic", "cubique") }, { value: 4, label: t("quartic", "du quatrième degré") }]} value={deg} onChange={(d) => setCs(d === 3 ? [1, 0, -7, 0] : [1, 0, -10, 0, 9])} />
       <Row gap={8}>
-        {cs.map((a, i) => <Slider key={i} label={`x^${deg - i} coefficient`.replace("x^0 coefficient", "constant").replace("x^1 coefficient", "x coefficient")} value={a} min={-12} max={12} onChange={(v) => set(i, v)} color={i === 0 ? C.red : C.blue} />)}
+        {cs.map((a, i) => <Slider key={i} label={t(`x^${deg - i} coefficient`.replace("x^0 coefficient", "constant").replace("x^1 coefficient", "x coefficient"), deg - i === 0 ? "terme constant" : deg - i === 1 ? "coefficient de x" : `coefficient de x^${deg - i}`)} value={a} min={-12} max={12} onChange={(v) => set(i, v)} color={i === 0 ? C.red : C.blue} />)}
         <Slider label="k" value={k} min={-20} max={20} onChange={setK} color={C.green} />
       </Row>
       <div style={{ textAlign: "center", fontSize: 18, margin: "6px 0" }}><MathText html={`\\(${polyTex(cs)}=${r2(k)}\\quad\\Longleftrightarrow\\quad ${polyTex(g)}=0\\)`} /></div>
-      <Curves view={{ xmin: -5, xmax: 5, ymin: -hi, ymax: hi }} label="Polynomial equation" step={1} stepY={hi > 30 ? 10 : 4} fs={[{ f, color: C.violet }, { f: () => k, color: C.green, width: 2, dash: "6 4" }]}>
+      <Curves view={{ xmin: -5, xmax: 5, ymin: -hi, ymax: hi }} label={t("Polynomial equation", "Équation polynomiale")} step={1} stepY={hi > 30 ? 10 : 4} fs={[{ f, color: C.violet }, { f: () => k, color: C.green, width: 2, dash: "6 4" }]}>
         {(X, Y) => <>{sols.map((s, i) => dot(X, Y, s, k, C.red, r2(s), i))}</>}
       </Curves>
       <Readout tone="green">
-        <MathText block html={`${sols.length} real solution${sols.length === 1 ? "" : "s"}${sols.length ? ": " + sols.map((s) => `\\(x${Number.isInteger(s) ? "=" : "\\approx"}${r2(s)}\\)`).join(", ") : ""}. A degree-${deg} equation has at most ${deg}.`} />
-        <MathText block html={`Algebraically: move everything to one side, then factor (factor theorem, grouping, or a quadratic pattern). Integer solutions show where the factor theorem will work.`} />
+        <MathText block html={t(`${sols.length} real solution${sols.length === 1 ? "" : "s"}${sols.length ? ": " + sols.map((s) => `\\(x${Number.isInteger(s) ? "=" : "\\approx"}${r2(s)}\\)`).join(", ") : ""}. A degree-${deg} equation has at most ${deg}.`, `${sols.length} solution${sols.length <= 1 ? "" : "s"} réelle${sols.length <= 1 ? "" : "s"}${sols.length ? " : " + sols.map((s) => `\\(x${Number.isInteger(s) ? "=" : "\\approx"}${r2(s)}\\)`).join(", ") : ""}. Une équation de degré ${deg} en a au plus ${deg}.`)} />
+        <MathText block html={t(`Algebraically: move everything to one side, then factor (factor theorem, grouping, or a quadratic pattern). Integer solutions show where the factor theorem will work.`, `Algébriquement : ramène tous les termes d'un même côté, puis factorise (théorème des facteurs, groupement ou forme quadratique). Les solutions entières indiquent où le théorème des facteurs fonctionnera.`)} />
       </Readout>
     </WidgetCard>
   );
@@ -219,28 +225,29 @@ export function PolyFamily({ init = { zeros: [-2, 1, 3], k: 1 } }: { init?: { ze
   const K = mode === "k" ? k : kFit;
   const fam = [-2, -1, -0.5, 0.5, 1, 2].map((m) => ({ f: (x: number) => m * base(x), color: "#cbd5e1", width: 1.5 }));
   const tex = (kk: number) => `${Number.isFinite(kk) ? (near(kk, 1) ? "" : near(kk, -1) ? "-" : r2(kk)) : "k"}${zs.map(fac).join("")}`;
+  const t = useT();
   return (
-    <WidgetCard title="Families of polynomial functions" subtitle="y = k(x − r₁)(x − r₂)(x − r₃): same zeros, different k">
+    <WidgetCard title={t("Families of polynomial functions", "Familles de fonctions polynomiales")} subtitle={t("y = k(x − r₁)(x − r₂)(x − r₃): same zeros, different k", "y = k(x − r₁)(x − r₂)(x − r₃) : mêmes zéros, k différent")}>
       <Row gap={8}>
-        {zs.map((r, i) => <Slider key={i} label={`zero ${i + 1}`} value={r} min={-5} max={5} onChange={(v) => setZs((z) => z.map((x, j) => (j === i ? v : x)))} color={C.blue} />)}
+        {zs.map((r, i) => <Slider key={i} label={t(`zero ${i + 1}`, `zéro ${i + 1}`)} value={r} min={-5} max={5} onChange={(v) => setZs((z) => z.map((x, j) => (j === i ? v : x)))} color={C.blue} />)}
       </Row>
-      <Segmented options={[{ value: "k", label: "choose k" }, { value: "pt", label: "pass through a point" }]} value={mode} onChange={setMode} />
+      <Segmented options={[{ value: "k", label: t("choose k", "choisir k") }, { value: "pt", label: t("pass through a point", "passer par un point") }]} value={mode} onChange={setMode} />
       <Row gap={8}>
         {mode === "k" ? <Slider label="k" value={k} min={-3} max={3} step={0.25} onChange={(v) => setK(v === 0 ? 0.25 : v)} color={C.red} /> : <>
-          <Slider label="point x" value={px} min={-5} max={5} step={0.5} onChange={setPx} color={C.green} />
-          <Slider label="point y" value={py} min={-30} max={30} onChange={setPy} color={C.green} />
+          <Slider label={t("point x", "point x")} value={px} min={-5} max={5} step={0.5} onChange={setPx} color={C.green} />
+          <Slider label={t("point y", "point y")} value={py} min={-30} max={30} onChange={setPy} color={C.green} />
         </>}
       </Row>
       <div style={{ textAlign: "center", fontSize: 18, margin: "6px 0" }}><MathText html={`\\(y=${tex(K)}\\)`} /></div>
-      <Curves view={{ xmin: -6, xmax: 6, ymin: -30, ymax: 30 }} label="Family of cubics" step={1} stepY={5} fs={[...fam, ...(Number.isFinite(K) ? [{ f: (x: number) => K * base(x), color: C.violet }] : [])]}>
-        {(X, Y) => <>{zs.map((r, i) => dot(X, Y, r, 0, C.blue, undefined, i))}{mode === "pt" && dot(X, Y, px, py, C.green, `(${px}, ${py})`, "p")}{Number.isFinite(K) && dot(X, Y, 0, K * base(0), C.red, `y-int ${r2(K * base(0))}`, "y")}</>}
+      <Curves view={{ xmin: -6, xmax: 6, ymin: -30, ymax: 30 }} label={t("Family of cubics", "Famille de fonctions cubiques")} step={1} stepY={5} fs={[...fam, ...(Number.isFinite(K) ? [{ f: (x: number) => K * base(x), color: C.violet }] : [])]}>
+        {(X, Y) => <>{zs.map((r, i) => dot(X, Y, r, 0, C.blue, undefined, i))}{mode === "pt" && dot(X, Y, px, py, C.green, `(${px}, ${py})`, "p")}{Number.isFinite(K) && dot(X, Y, 0, K * base(0), C.red, t(`y-int ${r2(K * base(0))}`, `ord. orig. ${r2(K * base(0))}`), "y")}</>}
       </Curves>
       <Readout tone="green">
         {mode === "k"
-          ? <MathText block html={`Every gray curve has the same three zeros. \\(k\\) stretches the graph vertically and, when negative, reflects it. The y-intercept is \\(k\\cdot${r2(base(0))}=${r2(K * base(0))}\\).`} />
+          ? <MathText block html={t(`Every gray curve has the same three zeros. \\(k\\) stretches the graph vertically and, when negative, reflects it. The y-intercept is \\(k\\cdot${r2(base(0))}=${r2(K * base(0))}\\).`, `Toutes les courbes grises ont les trois mêmes zéros. \\(k\\) étire le graphique verticalement et, s'il est négatif, le réfléchit. L'ordonnée à l'origine est \\(k\\cdot${r2(base(0))}=${r2(K * base(0))}\\).`)} />
           : Number.isFinite(K)
-            ? <MathText block html={`Substitute \\((${px},\\,${py})\\): \\(${py}=k\\cdot${r2(base(px))}\\), so \\(k=${r2(K)}\\). One point picks one member of the family.`} />
-            : <MathText block html={`The point is on the x-axis at a zero: every member passes through it, so it cannot pick out k.`} />}
+            ? <MathText block html={t(`Substitute \\((${px},\\,${py})\\): \\(${py}=k\\cdot${r2(base(px))}\\), so \\(k=${r2(K)}\\). One point picks one member of the family.`, `Substitue \\((${px},\\,${py})\\) : \\(${py}=k\\cdot${r2(base(px))}\\), donc \\(k=${r2(K)}\\). Un point détermine un seul membre de la famille.`)} />
+            : <MathText block html={t(`The point is on the x-axis at a zero: every member passes through it, so it cannot pick out k.`, `Le point est sur l'axe des x, à un zéro : tous les membres passent par ce point, donc il ne permet pas de déterminer k.`)} />}
       </Readout>
     </WidgetCard>
   );
@@ -261,27 +268,28 @@ export function InequalityGraph({ init = { cs: [1, -1, -6, 0], m: 0, b: 0, op: "
   const view: View = { xmin: -5, xmax: 5, ymin: -20, ymax: 20 };
   const crit = realRoots(h, -12, 12);
   const pts = [-Infinity, ...crit, Infinity];
-  const inside = pts.slice(0, -1).map((a, i) => { const bnd = pts[i + 1]; const t = a === -Infinity ? bnd - 1 : bnd === Infinity ? a + 1 : (a + bnd) / 2; return holds(h(t), op); });
+  const inside = pts.slice(0, -1).map((a, i) => { const bnd = pts[i + 1]; const tx = a === -Infinity ? bnd - 1 : bnd === Infinity ? a + 1 : (a + bnd) / 2; return holds(h(tx), op); });
   const atCrit = crit.map(() => op === "≥" || op === "≤");
   const set = (i: number, v: number) => setCs((c) => c.map((x, j) => (j === i ? (i === 0 && v === 0 ? 1 : v) : x)));
   const gTex = m === 0 ? r2(bb) : `${coefTex(m, true, "x")}${bb === 0 ? "" : bb > 0 ? `+${r2(bb)}` : `-${r2(-bb)}`}`;
+  const t = useT();
   return (
-    <WidgetCard title="Solving inequalities graphically" subtitle="f(x) > g(x) where the graph of f is above the graph of g">
+    <WidgetCard title={t("Solving inequalities graphically", "Résolution graphique d'inéquations")} subtitle={t("f(x) > g(x) where the graph of f is above the graph of g", "f(x) > g(x) là où le graphique de f est au-dessus du graphique de g")}>
       <Row gap={8}>
-        {["a (x³)", "b (x²)", "c (x)", "d (constant)"].map((nm, i) => <Slider key={nm} label={nm} value={cs[i]} min={-8} max={8} onChange={(v) => set(i, v)} color={i === 0 ? C.red : C.blue} />)}
+        {cubicNames(t).map((nm, i) => <Slider key={nm} label={nm} value={cs[i]} min={-8} max={8} onChange={(v) => set(i, v)} color={i === 0 ? C.red : C.blue} />)}
       </Row>
       <Row gap={8}>
-        <Slider label="line slope m" value={m} min={-6} max={6} onChange={setM} color={C.green} />
-        <Slider label="line intercept" value={bb} min={-12} max={12} onChange={setB} color={C.green} />
+        <Slider label={t("line slope m", "pente de la droite m")} value={m} min={-6} max={6} onChange={setM} color={C.green} />
+        <Slider label={t("line intercept", "ordonnée à l'origine de la droite")} value={bb} min={-12} max={12} onChange={setB} color={C.green} />
       </Row>
       <Segmented options={OPS.map((o) => ({ value: o, label: `f(x) ${o} g(x)` }))} value={op} onChange={setOp} />
       <div style={{ textAlign: "center", fontSize: 18, margin: "6px 0" }}><MathText html={`\\(${polyTex(cs)}\\ ${opTex(op)}\\ ${gTex}\\)`} /></div>
-      <Curves view={view} label="Inequality" step={1} stepY={5} fs={[{ f, color: C.violet }, { f: g, color: C.green, width: 2.2 }]}>
+      <Curves view={view} label={t("Inequality", "Inéquation")} step={1} stepY={5} fs={[{ f, color: C.violet }, { f: g, color: C.green, width: 2.2 }]}>
         {(X, Y) => <>{inside.map((ins, i) => (ins ? band(X, Y, view, pts[i], pts[i + 1], C.green, "b" + i) : null))}{crit.map((c, i) => dot(X, Y, c, g(c), C.red, r2(c), i))}</>}
       </Curves>
       <Readout tone="green">
-        <MathText block html={`The graphs meet at ${crit.length ? crit.map((c) => `\\(x${Number.isInteger(c) ? "=" : "\\approx"}${r2(c)}\\)`).join(", ") : "no real x"}. Shaded: where \\(f(x)${opTex(op)}g(x)\\).`} />
-        <MathText block html={`Solution: \\(x\\in ${intervalTex(crit, inside, atCrit)}\\)`} />
+        <MathText block html={t(`The graphs meet at ${crit.length ? crit.map((c) => `\\(x${Number.isInteger(c) ? "=" : "\\approx"}${r2(c)}\\)`).join(", ") : "no real x"}. Shaded: where \\(f(x)${opTex(op)}g(x)\\).`, `Les graphiques se rencontrent en ${crit.length ? crit.map((c) => `\\(x${Number.isInteger(c) ? "=" : "\\approx"}${r2(c)}\\)`).join(", ") : "aucun x réel"}. En ombré : là où \\(f(x)${opTex(op)}g(x)\\).`)} />
+        <MathText block html={t(`Solution: \\(x\\in ${intervalTex(crit, inside, atCrit)}\\)`, `Solution : \\(x\\in ${intervalTex(crit, inside, atCrit)}\\)`)} />
       </Readout>
     </WidgetCard>
   );
@@ -297,7 +305,7 @@ export function SignChart({ init = { a: 1, zeros: [[-2, 1], [1, 2], [3, 1]] as [
   const crit = [...new Set(zs.map(([r]) => r))].sort((p, q) => p - q);
   const pts = [-Infinity, ...crit, Infinity];
   const tests = pts.slice(0, -1).map((lo, i) => { const hi = pts[i + 1]; return lo === -Infinity ? hi - 1 : hi === Infinity ? lo + 1 : (lo + hi) / 2; });
-  const inside = tests.map((t) => holds(f(t), op));
+  const inside = tests.map((tx) => holds(f(tx), op));
   const atCrit = crit.map(() => op === "≥" || op === "≤");
   const tex = `${a === 1 ? "" : a === -1 ? "-" : r2(a)}${zs.map(([r, mm]) => `${fac(r)}${mm > 1 ? `^{${mm}}` : ""}`).join("")}`;
   const sg = (v: number) => (v > 0 ? "+" : v < 0 ? "−" : "0");
@@ -306,14 +314,15 @@ export function SignChart({ init = { a: 1, zeros: [[-2, 1], [1, 2], [3, 1]] as [
   const view: View = { xmin: -6, xmax: 6, ymin: -hi, ymax: hi };
   const setZ = (i: number, j: 0 | 1, v: number) => setZs((z) => z.map((p, k) => (k === i ? (j === 0 ? [v, p[1]] : [p[0], v]) : p)) as [number, number][]);
   const head = ["", ...pts.slice(0, -1).map((lo, i) => `${lo === -Infinity ? "x<" + r2(pts[i + 1]) : pts[i + 1] === Infinity ? "x>" + r2(lo) : `${r2(lo)}<x<${r2(pts[i + 1])}`}`)];
+  const t = useT();
   return (
-    <WidgetCard title="Sign charts for polynomial inequalities" subtitle="the sign of each factor on each interval gives the sign of the product">
+    <WidgetCard title={t("Sign charts for polynomial inequalities", "Tableaux de signes pour les inéquations polynomiales")} subtitle={t("the sign of each factor on each interval gives the sign of the product", "le signe de chaque facteur sur chaque intervalle donne le signe du produit")}>
       <Row gap={8}>
         <Slider label="a" value={a} min={-2} max={2} step={0.5} onChange={(v) => setA(v === 0 ? 0.5 : v)} color={C.red} />
         {zs.map(([r, mm], i) => (
           <div key={i} style={{ display: "flex", gap: 6 }}>
-            <Slider label={`zero ${i + 1}`} value={r} min={-5} max={5} onChange={(v) => setZ(i, 0, v)} color={C.blue} />
-            <Slider label="order" value={mm} min={1} max={3} onChange={(v) => setZ(i, 1, v)} color={C.violet} />
+            <Slider label={t(`zero ${i + 1}`, `zéro ${i + 1}`)} value={r} min={-5} max={5} onChange={(v) => setZ(i, 0, v)} color={C.blue} />
+            <Slider label={t("order", "ordre")} value={mm} min={1} max={3} onChange={(v) => setZ(i, 1, v)} color={C.violet} />
           </div>
         ))}
       </Row>
@@ -324,17 +333,17 @@ export function SignChart({ init = { a: 1, zeros: [[-2, 1], [1, 2], [3, 1]] as [
           <thead><tr>{head.map((h, i) => <th key={i} style={cell}><MathText html={i ? `\\(${h}\\)` : ""} /></th>)}</tr></thead>
           <tbody>
             {a !== 1 && <tr><th style={cell}><MathText html={`\\(${r2(a)}\\)`} /></th>{tests.map((_, i) => <td key={i} style={cell}>{sg(a)}</td>)}</tr>}
-            {zs.map(([r, mm], k) => <tr key={k}><th style={cell}><MathText html={`\\(${fac(r)}${mm > 1 ? `^{${mm}}` : ""}\\)`} /></th>{tests.map((t, i) => <td key={i} style={cell}>{sg((t - r) ** mm)}</td>)}</tr>)}
-            <tr><th style={{ ...cell, color: C.violet }}>f(x)</th>{tests.map((t, i) => <td key={i} style={{ ...cell, fontWeight: 700, color: inside[i] ? "#166534" : C.ink, background: inside[i] ? "#dcfce7" : "transparent" }}>{sg(f(t))}</td>)}</tr>
+            {zs.map(([r, mm], k) => <tr key={k}><th style={cell}><MathText html={`\\(${fac(r)}${mm > 1 ? `^{${mm}}` : ""}\\)`} /></th>{tests.map((tx, i) => <td key={i} style={cell}>{sg((tx - r) ** mm)}</td>)}</tr>)}
+            <tr><th style={{ ...cell, color: C.violet }}>f(x)</th>{tests.map((tx, i) => <td key={i} style={{ ...cell, fontWeight: 700, color: inside[i] ? "#166534" : C.ink, background: inside[i] ? "#dcfce7" : "transparent" }}>{sg(f(tx))}</td>)}</tr>
           </tbody>
         </table>
       </div>
-      <Curves view={view} label="Sign chart graph" step={1} stepY={hi > 30 ? 10 : hi > 12 ? 4 : 2} fs={[{ f, color: C.violet }]}>
+      <Curves view={view} label={t("Sign chart graph", "Graphique du tableau de signes")} step={1} stepY={hi > 30 ? 10 : hi > 12 ? 4 : 2} fs={[{ f, color: C.violet }]}>
         {(X, Y) => <>{inside.map((ins, i) => (ins ? band(X, Y, view, pts[i], pts[i + 1], C.green, "b" + i) : null))}{crit.map((c, i) => dot(X, Y, c, 0, C.red, r2(c), i))}</>}
       </Curves>
       <Readout tone="green">
-        <MathText block html={`Solution: \\(x\\in ${intervalTex(crit, inside, atCrit)}\\)${op === "≥" || op === "≤" ? " (the zeros are included)" : " (the zeros are excluded)"}.`} />
-        <MathText block html={`The sign changes at odd-order zeros and stays the same at even-order zeros.`} />
+        <MathText block html={t(`Solution: \\(x\\in ${intervalTex(crit, inside, atCrit)}\\)${op === "≥" || op === "≤" ? " (the zeros are included)" : " (the zeros are excluded)"}.`, `Solution : \\(x\\in ${intervalTex(crit, inside, atCrit)}\\)${op === "≥" || op === "≤" ? " (les zéros sont inclus)" : " (les zéros sont exclus)"}.`)} />
+        <MathText block html={t(`The sign changes at odd-order zeros and stays the same at even-order zeros.`, `Le signe change aux zéros d'ordre impair et reste le même aux zéros d'ordre pair.`)} />
       </Readout>
     </WidgetCard>
   );

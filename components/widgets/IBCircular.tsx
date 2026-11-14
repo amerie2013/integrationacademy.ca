@@ -5,6 +5,7 @@
 // the graphs of sin, cos and tan, and transformed sinusoids y = a sin(b(x − c)) + d.
 
 import { useState } from "react";
+import { useLang, useT } from "@/lib/lang";
 import { C, MathText, Readout, Row, Segmented, Slider, WidgetCard } from "./kit";
 import { Plane, r2, type View } from "./Systems";
 import { dot } from "./Quadratics";
@@ -43,11 +44,12 @@ export function IBRadian({ init = [60, 5] }: { init?: [number, number] }) {
   const th = rad(deg), s = r * th, A = 0.5 * r * r * th;
   const cx = 260, cy = 150, R = 120;
   const ex = cx + R * Math.cos(-th), ey = cy + R * Math.sin(-th), large = th > PI ? 1 : 0;
+  const t = useT();
   return (
-    <WidgetCard title="Radians, arcs and sectors" subtitle="θ (radians) = arc length ÷ radius; arc length s = rθ; sector area A = ½r²θ">
+    <WidgetCard title={t("Radians, arcs and sectors", "Radians, arcs et secteurs")} subtitle={t("θ (radians) = arc length ÷ radius; arc length s = rθ; sector area A = ½r²θ", "θ (radians) = longueur d'arc ÷ rayon; longueur d'arc s = rθ; aire du secteur A = ½r²θ")}>
       <Row>
-        <Slider label="angle (degrees)" value={deg} min={5} max={355} step={5} onChange={setDeg} color={C.amber} />
-        <Slider label="radius r" value={r} min={1} max={12} step={0.5} onChange={setR} color={C.blue} />
+        <Slider label={t("angle (degrees)", "angle (degrés)")} value={deg} min={5} max={355} step={5} onChange={setDeg} color={C.amber} />
+        <Slider label={t("radius r", "rayon r")} value={r} min={1} max={12} step={0.5} onChange={setR} color={C.blue} />
       </Row>
       <Box>
         <circle cx={cx} cy={cy} r={R} fill="none" stroke="#cbd5e1" strokeWidth={1.6} />
@@ -57,7 +59,7 @@ export function IBRadian({ init = [60, 5] }: { init?: [number, number] }) {
         <text x={cx + R / 2} y={cy + 18} fontSize={13} fontWeight={700} fill={C.blue} textAnchor="middle">r = {r}</text>
       </Box>
       <Readout tone="blue">
-        <MathText html={`\\(\\theta=${deg}^\\circ=${deg}\\times\\frac{\\pi}{180}=${piLabel(th).replace("π", "\\pi ")}\\approx${n2(th, 4)}\\) rad. Arc length (red) \\(s=r\\theta=${n2(s, 3)}\\); sector area \\(A=\\tfrac12r^2\\theta=${n2(A, 3)}\\). One radian is the angle whose arc equals the radius (≈ 57.3°).`} />
+        <MathText html={t(`\\(\\theta=${deg}^\\circ=${deg}\\times\\frac{\\pi}{180}=${piLabel(th).replace("π", "\\pi ")}\\approx${n2(th, 4)}\\) rad. Arc length (red) \\(s=r\\theta=${n2(s, 3)}\\); sector area \\(A=\\tfrac12r^2\\theta=${n2(A, 3)}\\). One radian is the angle whose arc equals the radius (≈ 57.3°).`, `\\(\\theta=${deg}^\\circ=${deg}\\times\\frac{\\pi}{180}=${piLabel(th).replace("π", "\\pi ")}\\approx${n2(th, 4)}\\) rad. Longueur d'arc (en rouge) \\(s=r\\theta=${n2(s, 3)}\\); aire du secteur \\(A=\\tfrac12r^2\\theta=${n2(A, 3)}\\). Un radian est l'angle dont l'arc est égal au rayon (≈ 57.3°).`)} />
       </Readout>
     </WidgetCard>
   );
@@ -71,10 +73,11 @@ export function IBUnitCircle({ init = 150 }: { init?: number }) {
   const q = deg % 360 === 0 || deg % 90 === 0 ? 0 : Math.floor((((deg % 360) + 360) % 360) / 90) + 1;
   const ref = q === 1 ? deg % 360 : q === 2 ? 180 - (deg % 360) : q === 3 ? (deg % 360) - 180 : q === 4 ? 360 - (deg % 360) : 0;
   const v: View = { xmin: -1.5, xmax: 1.5, ymin: -1.3, ymax: 1.3 };
+  const t = useT();
   return (
-    <WidgetCard title="The unit circle" subtitle="the point at angle θ on the unit circle is (cos θ, sin θ); tan θ = sin θ / cos θ">
-      <Row><Slider label="θ (degrees)" value={deg} min={0} max={360} step={15} onChange={setDeg} color={C.amber} /></Row>
-      <Plane view={v} label="Unit circle" step={0.5} stepY={0.5}>
+    <WidgetCard title={t("The unit circle", "Le cercle trigonométrique")} subtitle={t("the point at angle θ on the unit circle is (cos θ, sin θ); tan θ = sin θ / cos θ", "le point du cercle trigonométrique associé à l'angle θ est (cos θ, sin θ); tan θ = sin θ / cos θ")}>
+      <Row><Slider label={t("θ (degrees)", "θ (degrés)")} value={deg} min={0} max={360} step={15} onChange={setDeg} color={C.amber} /></Row>
+      <Plane view={v} label={t("Unit circle", "Cercle trigonométrique")} step={0.5} stepY={0.5}>
         {(X, Y) => <>
           <path d={pathOf((x) => Math.sqrt(Math.max(0, 1 - x * x)), v, X, Y, -1, 1)} fill="none" stroke={C.violet} strokeWidth={2} />
           <path d={pathOf((x) => -Math.sqrt(Math.max(0, 1 - x * x)), v, X, Y, -1, 1)} fill="none" stroke={C.violet} strokeWidth={2} />
@@ -89,7 +92,7 @@ export function IBUnitCircle({ init = 150 }: { init?: number }) {
         </>}
       </Plane>
       <Readout tone="blue">
-        <MathText html={`\\(\\theta=${deg}^\\circ=${piLabel(th).replace("π", "\\pi ")}\\): \\(\\cos\\theta=${n2(c, 4)}\\), \\(\\sin\\theta=${n2(s, 4)}\\), \\(\\tan\\theta=${Math.abs(c) < 1e-9 ? "\\text{undefined}" : n2(s / c, 4)}\\). ${q ? `Quadrant ${q}; reference angle \\(${n2(ref, 0)}^\\circ\\). CAST: positive ratios are ${["", "all", "sin", "tan", "cos"][q]}.` : "On an axis."}`} />
+        <MathText html={t(`\\(\\theta=${deg}^\\circ=${piLabel(th).replace("π", "\\pi ")}\\): \\(\\cos\\theta=${n2(c, 4)}\\), \\(\\sin\\theta=${n2(s, 4)}\\), \\(\\tan\\theta=${Math.abs(c) < 1e-9 ? "\\text{undefined}" : n2(s / c, 4)}\\). ${q ? `Quadrant ${q}; reference angle \\(${n2(ref, 0)}^\\circ\\). CAST: positive ratios are ${["", "all", "sin", "tan", "cos"][q]}.` : "On an axis."}`, `\\(\\theta=${deg}^\\circ=${piLabel(th).replace("π", "\\pi ")}\\) : \\(\\cos\\theta=${n2(c, 4)}\\), \\(\\sin\\theta=${n2(s, 4)}\\), \\(\\tan\\theta=${Math.abs(c) < 1e-9 ? "\\text{non défini}" : n2(s / c, 4)}\\). ${q ? `Quadrant ${q}; angle de référence \\(${n2(ref, 0)}^\\circ\\). Règle CAST : rapports positifs : ${["", "tous", "sin", "tan", "cos"][q]}.` : "Sur un axe."}`)} />
       </Readout>
     </WidgetCard>
   );
@@ -107,11 +110,12 @@ const IDS: { label: string; L: string; R: string; f: Fn; g: Fn }[] = [
 export function IBIdentity({ init = [1, 40] }: { init?: [number, number] }) {
   const [k, setK] = useState(init[0]), [deg, setDeg] = useState(init[1]);
   const I = IDS[k], x = rad(deg), v: View = { xmin: 0, xmax: 2 * PI, ymin: -2.5, ymax: 2.5 };
+  const t = useT();
   return (
-    <WidgetCard title="Checking identities" subtitle="an identity is true for every value of x: the two sides draw the same graph">
-      <Row><Segmented label="identity:" value={k} onChange={setK} options={IDS.map((t, i) => ({ value: i, label: t.label }))} /></Row>
-      <Row><Slider label="x (degrees)" value={deg} min={0} max={360} step={5} onChange={setDeg} color={C.amber} /></Row>
-      <Plane view={v} label="Both sides" step={PI / 2} stepY={1}>
+    <WidgetCard title={t("Checking identities", "Vérification d'identités")} subtitle={t("an identity is true for every value of x: the two sides draw the same graph", "une identité est vraie pour toute valeur de x : les deux membres tracent le même graphique")}>
+      <Row><Segmented label={t("identity:", "identité :")} value={k} onChange={setK} options={IDS.map((id, i) => ({ value: i, label: id.label }))} /></Row>
+      <Row><Slider label={t("x (degrees)", "x (degrés)")} value={deg} min={0} max={360} step={5} onChange={setDeg} color={C.amber} /></Row>
+      <Plane view={v} label={t("Both sides", "Les deux membres")} step={PI / 2} stepY={1}>
         {(X, Y) => <>
           <path d={pathOf(I.f, v, X, Y)} fill="none" stroke={C.violet} strokeWidth={5} opacity={0.5} />
           <path d={pathOf(I.g, v, X, Y)} fill="none" stroke={C.amber} strokeWidth={2} strokeDasharray="7 5" />
@@ -119,7 +123,7 @@ export function IBIdentity({ init = [1, 40] }: { init?: [number, number] }) {
         </>}
       </Plane>
       <Readout tone="blue">
-        <MathText html={`At \\(x=${deg}^\\circ\\): \\(${I.L}=${n2(I.f(x), 5)}\\) and \\(${I.R}=${n2(I.g(x), 5)}\\). The thick violet and dashed amber curves coincide for every x — that is what makes it an identity (not just an equation).`} />
+        <MathText html={t(`At \\(x=${deg}^\\circ\\): \\(${I.L}=${n2(I.f(x), 5)}\\) and \\(${I.R}=${n2(I.g(x), 5)}\\). The thick violet and dashed amber curves coincide for every x — that is what makes it an identity (not just an equation).`, `En \\(x=${deg}^\\circ\\) : \\(${I.L}=${n2(I.f(x), 5)}\\) et \\(${I.R}=${n2(I.g(x), 5)}\\). La courbe violette épaisse et la courbe ambre en pointillés coïncident pour toute valeur de x — c'est ce qui en fait une identité (et pas seulement une équation).`)} />
       </Readout>
     </WidgetCard>
   );
@@ -143,11 +147,12 @@ export function IBTrigEq({ init = [0, 0.5] }: { init?: [number, number] }) {
     for (const base of E.pair(p)) for (let n = -3; n <= 3; n++) { const x = base + n * E.per; if (x >= -1e-9 && x <= 2 * PI + 1e-9 && !sols.some((s) => Math.abs(s - x) < 1e-7)) sols.push(x); }
     sols.sort((a, b) => a - b);
   }
+  const t = useT();
   return (
-    <WidgetCard title="Solving trigonometric equations" subtitle="solutions in 0 ≤ x ≤ 2π are where the curve meets the line y = k; use symmetry and the period to find them all">
-      <Row><Segmented label="equation:" value={k} onChange={setK} options={EQF.map((e, i) => ({ value: i, label: e.label }))} /></Row>
+    <WidgetCard title={t("Solving trigonometric equations", "Résolution d'équations trigonométriques")} subtitle={t("solutions in 0 ≤ x ≤ 2π are where the curve meets the line y = k; use symmetry and the period to find them all", "les solutions dans 0 ≤ x ≤ 2π sont là où la courbe rencontre la droite y = k; utilise la symétrie et la période pour les trouver toutes")}>
+      <Row><Segmented label={t("equation:", "équation :")} value={k} onChange={setK} options={EQF.map((e, i) => ({ value: i, label: e.label }))} /></Row>
       <Row><Slider label="k" value={c} min={k === 2 ? -2 : -1.2} max={k === 2 ? 2 : 1.2} step={0.05} onChange={setC} color={C.amber} /></Row>
-      <Plane view={v} label="Equation" step={PI / 2} stepY={0.5}>
+      <Plane view={v} label={t("Equation", "Équation")} step={PI / 2} stepY={0.5}>
         {(X, Y) => <>
           <path d={pathOf(E.f, v, X, Y)} fill="none" stroke={C.violet} strokeWidth={3} />
           <line x1={X(0)} y1={Y(c)} x2={X(2 * PI)} y2={Y(c)} stroke={C.amber} strokeWidth={2} strokeDasharray="7 5" />
@@ -155,7 +160,7 @@ export function IBTrigEq({ init = [0, 0.5] }: { init?: [number, number] }) {
         </>}
       </Plane>
       <Readout tone={ok ? "blue" : "amber"}>
-        <MathText html={ok ? `\\(${E.tex}=${n2(c, 2)}\\): principal value \\(${n2(E.inv(c), 4)}\\). Solutions in \\([0,2\\pi]\\): ${sols.map((x) => `\\(${n2(x, 4)}\\)`).join(", ") || "none"} (${sols.length}). ${k === 0 ? "Second solution: π − (principal value)." : k === 1 ? "Second solution: 2π − (principal value)." : "Add π repeatedly (period π)."}` : `No solutions: \\(${E.tex}\\) is always between −1 and 1.`} />
+        <MathText html={ok ? t(`\\(${E.tex}=${n2(c, 2)}\\): principal value \\(${n2(E.inv(c), 4)}\\). Solutions in \\([0,2\\pi]\\): ${sols.map((x) => `\\(${n2(x, 4)}\\)`).join(", ") || "none"} (${sols.length}). ${k === 0 ? "Second solution: π − (principal value)." : k === 1 ? "Second solution: 2π − (principal value)." : "Add π repeatedly (period π)."}`, `\\(${E.tex}=${n2(c, 2)}\\) : valeur principale \\(${n2(E.inv(c), 4)}\\). Solutions dans \\([0,2\\pi]\\) : ${sols.map((x) => `\\(${n2(x, 4)}\\)`).join(", ") || "aucune"} (${sols.length}). ${k === 0 ? "Deuxième solution : π − (valeur principale)." : k === 1 ? "Deuxième solution : 2π − (valeur principale)." : "Ajoute π à répétition (période π)."}`) : t(`No solutions: \\(${E.tex}\\) is always between −1 and 1.`, `Aucune solution : \\(${E.tex}\\) est toujours compris entre −1 et 1.`)} />
       </Readout>
     </WidgetCard>
   );
@@ -166,15 +171,16 @@ export function IBTrigEq({ init = [0, 0.5] }: { init?: [number, number] }) {
 export function IBTrigGraph({ init = 0 }: { init?: number }) {
   const [k, setK] = useState(init);
   const fs: Fn[] = [Math.sin, Math.cos, Math.tan], f = fs[k], v: View = { xmin: -2 * PI, xmax: 2 * PI, ymin: -3, ymax: 3 };
+  const t = useT();
   const info = [
-    "y = sin x: period 2π, amplitude 1, range [−1, 1]; zeros at x = nπ; maximum 1 at π/2 + 2nπ.",
-    "y = cos x: period 2π, amplitude 1, range [−1, 1]; zeros at π/2 + nπ; it is sin x shifted π/2 left.",
-    "y = tan x: period π, no amplitude, range all real numbers; vertical asymptotes at x = π/2 + nπ; zeros at nπ.",
+    t("y = sin x: period 2π, amplitude 1, range [−1, 1]; zeros at x = nπ; maximum 1 at π/2 + 2nπ.", "y = sin x : période 2π, amplitude 1, ensemble image [−1, 1]; zéros en x = nπ; maximum 1 en π/2 + 2nπ."),
+    t("y = cos x: period 2π, amplitude 1, range [−1, 1]; zeros at π/2 + nπ; it is sin x shifted π/2 left.", "y = cos x : période 2π, amplitude 1, ensemble image [−1, 1]; zéros en π/2 + nπ; c'est sin x translatée de π/2 vers la gauche."),
+    t("y = tan x: period π, no amplitude, range all real numbers; vertical asymptotes at x = π/2 + nπ; zeros at nπ.", "y = tan x : période π, aucune amplitude, ensemble image : tous les nombres réels; asymptotes verticales en x = π/2 + nπ; zéros en nπ."),
   ][k];
   return (
-    <WidgetCard title="Graphs of sin, cos and tan" subtitle="the unit circle unrolled: x is the angle in radians, y is the ratio">
-      <Row><Segmented label="graph:" value={k} onChange={setK} options={[{ value: 0, label: "sin x" }, { value: 1, label: "cos x" }, { value: 2, label: "tan x" }]} /></Row>
-      <Plane view={v} label="Trig graph" step={PI / 2} stepY={1}>
+    <WidgetCard title={t("Graphs of sin, cos and tan", "Graphiques de sin, cos et tan")} subtitle={t("the unit circle unrolled: x is the angle in radians, y is the ratio", "le cercle trigonométrique déroulé : x est l'angle en radians, y est le rapport")}>
+      <Row><Segmented label={t("graph:", "graphique :")} value={k} onChange={setK} options={[{ value: 0, label: "sin x" }, { value: 1, label: "cos x" }, { value: 2, label: "tan x" }]} /></Row>
+      <Plane view={v} label={t("Trig graph", "Graphique trigonométrique")} step={PI / 2} stepY={1}>
         {(X, Y) => <>
           {k === 2 && [-1.5, -0.5, 0.5, 1.5].map((m) => <line key={m} x1={X(m * PI)} y1={Y(v.ymin)} x2={X(m * PI)} y2={Y(v.ymax)} stroke={C.red} strokeWidth={1.6} strokeDasharray="6 5" />)}
           <path d={pathOf(f, v, X, Y)} fill="none" stroke={C.violet} strokeWidth={3} />
@@ -187,22 +193,26 @@ export function IBTrigGraph({ init = 0 }: { init?: number }) {
 
 /* ---------------------------------------------------------------- 12.6 transformed sinusoids */
 
+// Props: init = [a, b, c, d, base] where c (init[2]) = HORIZONTAL shift and d (init[3]) = VERTICAL shift, as in
+// y = a sin(b(x − c)) + d. This already matches the French course's c (horizontal) / d (vertical), so in French only the
+// horizontal-stretch letter is displayed as k (y = a sin(k(x − c)) + d); the state and props are unchanged.
 export function IBSinusoid({ init = [2, 2, 0, 1, 0] }: { init?: [number, number, number, number, number] }) {
   const [a, setA] = useState(init[0]), [b, setB] = useState(init[1]), [c, setC] = useState(init[2]), [d, setD] = useState(init[3]), [k, setK] = useState(init[4]);
   const base = k === 0 ? Math.sin : Math.cos, f = (x: number) => a * base(b * (x - c)) + d, v: View = { xmin: -PI, xmax: 2 * PI, ymin: -6, ymax: 6 };
   const per = (2 * PI) / b;
+  const t = useT(), fr = useLang() === "fr";
   return (
-    <WidgetCard title="Transforming sine and cosine" subtitle="y = a sin(b(x − c)) + d: amplitude |a|, period 2π/b, horizontal shift c, principal axis y = d">
-      <Row><Segmented label="base:" value={k} onChange={setK} options={[{ value: 0, label: "sin" }, { value: 1, label: "cos" }]} /></Row>
+    <WidgetCard title={t("Transforming sine and cosine", "Transformations des fonctions sinus et cosinus")} subtitle={t("y = a sin(b(x − c)) + d: amplitude |a|, period 2π/b, horizontal shift c, principal axis y = d", "y = a sin(k(x − c)) + d : amplitude |a|, période 2π/k, déphasage c, axe d'équilibre y = d")}>
+      <Row><Segmented label={t("base:", "fonction de base :")} value={k} onChange={setK} options={[{ value: 0, label: "sin" }, { value: 1, label: "cos" }]} /></Row>
       <Row>
         <Slider label="a" value={a} min={-4} max={4} step={0.5} onChange={(x) => setA(x === 0 ? 0.5 : x)} color={C.violet} />
-        <Slider label="b" value={b} min={0.5} max={4} step={0.5} onChange={setB} color={C.blue} />
+        <Slider label={fr ? "k" : "b"} value={b} min={0.5} max={4} step={0.5} onChange={setB} color={C.blue} />
       </Row>
       <Row>
         <Slider label="c" value={c} min={-PI} max={PI} step={PI / 12} onChange={setC} color={C.green} />
         <Slider label="d" value={d} min={-3} max={3} step={0.5} onChange={setD} color={C.amber} />
       </Row>
-      <Plane view={v} label="Sinusoid" step={PI / 2} stepY={1}>
+      <Plane view={v} label={t("Sinusoid", "Sinusoïde")} step={PI / 2} stepY={1}>
         {(X, Y) => <>
           <path d={pathOf(base, v, X, Y)} fill="none" stroke="#cbd5e1" strokeWidth={2} />
           <line x1={X(v.xmin)} y1={Y(d)} x2={X(v.xmax)} y2={Y(d)} stroke={C.amber} strokeWidth={1.6} strokeDasharray="6 5" />
@@ -210,7 +220,7 @@ export function IBSinusoid({ init = [2, 2, 0, 1, 0] }: { init?: [number, number,
         </>}
       </Plane>
       <Readout tone="blue">
-        <MathText html={`\\(y=${n2(a)}\\${k === 0 ? "sin" : "cos"}\\left(${n2(b)}\\left(x${c < 0 ? "+" : "-"}${piLabel(Math.abs(c)).replace("π", "\\pi ")}\\right)\\right)${d < 0 ? "-" : "+"}${n2(Math.abs(d))}\\). Amplitude \\(${n2(Math.abs(a))}\\), period \\(\\frac{2\\pi}{${n2(b)}}=${n2(per, 4)}\\), horizontal shift \\(${n2(c, 4)}\\), principal axis \\(y=${n2(d)}\\); maximum \\(${n2(d + Math.abs(a))}\\), minimum \\(${n2(d - Math.abs(a))}\\). Grey: the basic curve.`} />
+        <MathText html={t(`\\(y=${n2(a)}\\${k === 0 ? "sin" : "cos"}\\left(${n2(b)}\\left(x${c < 0 ? "+" : "-"}${piLabel(Math.abs(c)).replace("π", "\\pi ")}\\right)\\right)${d < 0 ? "-" : "+"}${n2(Math.abs(d))}\\). Amplitude \\(${n2(Math.abs(a))}\\), period \\(\\frac{2\\pi}{${n2(b)}}=${n2(per, 4)}\\), horizontal shift \\(${n2(c, 4)}\\), principal axis \\(y=${n2(d)}\\); maximum \\(${n2(d + Math.abs(a))}\\), minimum \\(${n2(d - Math.abs(a))}\\). Grey: the basic curve.`, `\\(y=${n2(a)}\\${k === 0 ? "sin" : "cos"}\\left(${n2(b)}\\left(x${c < 0 ? "+" : "-"}${piLabel(Math.abs(c)).replace("π", "\\pi ")}\\right)\\right)${d < 0 ? "-" : "+"}${n2(Math.abs(d))}\\). Amplitude \\(${n2(Math.abs(a))}\\), période \\(\\frac{2\\pi}{${n2(b)}}=${n2(per, 4)}\\), déphasage \\(c=${n2(c, 4)}\\), translation verticale \\(d=${n2(d)}\\) (axe d'équilibre \\(y=${n2(d)}\\)); maximum \\(${n2(d + Math.abs(a))}\\), minimum \\(${n2(d - Math.abs(a))}\\). En gris : la courbe de base.`)} />
       </Readout>
     </WidgetCard>
   );

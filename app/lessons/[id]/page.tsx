@@ -6,6 +6,7 @@ import Link from "next/link";
 import { supabase } from "../../../lib/supabase";
 import { SiteHeader } from "../../../components/SiteHeader";
 import { BlockRenderer } from "../../../components/BlockRenderer";
+import { LangProvider, langForCourse } from "../../../lib/lang";
 import { CourseNav } from "../../../components/CourseNav";
 import { MaterialsPanel } from "../../../components/MaterialsPanel";
 import { fetchMaterials } from "../../../lib/materials";
@@ -124,7 +125,7 @@ export default function LessonViewPage() {
             {tab === "lesson" ? (
               <>
                 <h1 style={{ fontFamily: "Fraunces, serif", fontSize: 38, fontWeight: 700, margin: "0 0 16px" }}>{title}</h1>
-                <BlockRenderer blocks={blocks} />
+                <LangProvider value={langForCourse(courseCode)}><BlockRenderer blocks={blocks} /></LangProvider>
                 {courseNotice(courseCode) && <p style={{ color: "#94a3b8", fontSize: 12.5, lineHeight: 1.55, margin: "18px 0 0", textAlign: "center" }}>{courseNotice(courseCode)}</p>}
                 {role === "student" && (
                   <div style={{ display: "flex", justifyContent: "center", gap: 12, flexWrap: "wrap", margin: "32px 0 4px" }}>
