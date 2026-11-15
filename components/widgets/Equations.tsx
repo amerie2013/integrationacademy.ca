@@ -5,6 +5,7 @@
 // problems, and linear–quadratic systems.
 
 import { useState } from "react";
+import { useT } from "@/lib/lang";
 import { C, MathText, Readout, Row, Segmented, Slider, WidgetCard, gcd } from "./kit";
 import { fr, r2, type View } from "./Systems";
 import { Curves, dot, stdForm } from "./Quadratics";
@@ -128,10 +129,11 @@ export function SquareSolve({ init = [3, 2] }: { init?: [number, number] }) {
 
 export function FormulaLab({ init = [2, -3, -5] }: { init?: [number, number, number] }) {
   const [a, setA] = useState(init[0]), [b, setB] = useState(init[1]), [c, setC] = useState(init[2]);
+  const t = useT();
   const A = a === 0 ? 1 : a, D = b * b - 4 * A * c, exact = rootsTex(A, b, c), rs = realRoots(A, b, c);
   const v = viewFor(A, b, c);
   return (
-    <WidgetCard title="The quadratic formula" subtitle="x = (−b ± √(b² − 4ac)) / 2a works for every ax² + bx + c = 0">
+    <WidgetCard title={t("The quadratic formula", "La formule quadratique")} subtitle={t("x = (−b ± √(b² − 4ac)) / 2a works for every ax² + bx + c = 0", "x = (−b ± √(b² − 4ac)) / 2a fonctionne pour toute équation ax² + bx + c = 0")}>
       <Row gap={10}>
         <Slider label="a" value={a} min={-4} max={4} onChange={(x) => setA(x === 0 ? 1 : x)} color={C.blue} />
         <Slider label="b" value={b} min={-10} max={10} onChange={setB} color={C.red} />
@@ -145,8 +147,9 @@ export function FormulaLab({ init = [2, -3, -5] }: { init?: [number, number, num
         {(X, Y) => <>{rs.map((x, i) => dot(X, Y, x, 0, C.red, r2(x), i))}</>}
       </Curves>
       <Readout tone={D < 0 ? "amber" : "green"}>
-        <MathText html={D < 0 ? `\\(b^2-4ac=${D}\\) is negative. No real number squares to a negative, so there are no real roots — the parabola does not cross the x-axis.`
-          : `Exact: \\(${exact}\\). Decimal: ${rs.map((x) => `\\(x\\approx${r2(x)}\\)`).join(" and ")}. ${D > 0 && Number.isInteger(Math.sqrt(D)) ? "The discriminant is a perfect square, so the equation could also be solved by factoring." : ""}`} />
+        <MathText html={D < 0 ? t(`\\(b^2-4ac=${D}\\) is negative. No real number squares to a negative, so there are no real roots — the parabola does not cross the x-axis.`, `\\(b^2-4ac=${D}\\) est négatif. Aucun nombre réel n'a un carré négatif, donc il n'y a aucune racine réelle — la parabole ne coupe pas l'axe des x.`)
+          : t(`Exact: \\(${exact}\\). Decimal: ${rs.map((x) => `\\(x\\approx${r2(x)}\\)`).join(" and ")}. ${D > 0 && Number.isInteger(Math.sqrt(D)) ? "The discriminant is a perfect square, so the equation could also be solved by factoring." : ""}`,
+              `Valeur exacte : \\(${(exact ?? "").replace("\\text{or}", "\\text{ou}")}\\). Valeur décimale : ${rs.map((x) => `\\(x\\approx${r2(x)}\\)`).join(" et ")}. ${D > 0 && Number.isInteger(Math.sqrt(D)) ? "Le discriminant est un carré parfait, donc on pourrait aussi résoudre l'équation par factorisation." : ""}`)} />
       </Readout>
     </WidgetCard>
   );
@@ -193,17 +196,18 @@ export function DiscriminantLab({ init = [1, -4, 1] }: { init?: [number, number,
 
 export function HeightInterval({ init = [20, 2, 15] }: { init?: [number, number, number] }) {
   const [v0, setV] = useState(init[0]), [h0, setH0] = useState(init[1]), [H, setH] = useState(init[2]);
+  const tr = useT();
   const f = (t: number) => -4.9 * t * t + v0 * t + h0;
   const tMax = v0 / 9.8, hMax = f(tMax), land = realRoots(-4.9, v0, h0).filter((t) => t >= 0).pop() ?? 0;
   const cross = realRoots(-4.9, v0, h0 - H).filter((t) => t >= -1e-9);
   const view: View = { xmin: -0.5, xmax: Math.ceil(land) + 0.5, ymin: -3, ymax: Math.ceil(hMax / 5) * 5 + 5 };
   const above = H < h0 ? [0, cross[cross.length - 1] ?? 0] : cross.length === 2 ? cross : null;
   return (
-    <WidgetCard title="When is it above a height?" subtitle="h = −4.9t² + v₀t + h₀: solve h = H to find when the object is at height H">
+    <WidgetCard title={tr("When is it above a height?", "Quand est-il au-dessus d'une hauteur?")} subtitle={tr("h = −4.9t² + v₀t + h₀: solve h = H to find when the object is at height H", "h = −4.9t² + v₀t + h₀ : résous h = H pour trouver quand l'objet est à la hauteur H")}>
       <Row gap={10}>
-        <Slider label="launch speed v₀ (m/s)" value={v0} min={6} max={30} onChange={setV} color={C.blue} />
-        <Slider label="launch height h₀ (m)" value={h0} min={0} max={20} onChange={setH0} color={C.green} />
-        <Slider label="target height H (m)" value={H} min={0} max={50} onChange={setH} color={C.red} />
+        <Slider label={tr("launch speed v₀ (m/s)", "vitesse initiale v₀ (m/s)")} value={v0} min={6} max={30} onChange={setV} color={C.blue} />
+        <Slider label={tr("launch height h₀ (m)", "hauteur initiale h₀ (m)")} value={h0} min={0} max={20} onChange={setH0} color={C.green} />
+        <Slider label={tr("target height H (m)", "hauteur cible H (m)")} value={H} min={0} max={50} onChange={setH} color={C.red} />
       </Row>
       <div style={{ textAlign: "center", fontSize: 18 }}><MathText html={`\\(h=-4.9t^2+${v0}t${h0 ? `+${h0}` : ""}\\)`} /></div>
       <Curves view={view} label="Height over time" step={0.5} stepY={view.ymax > 40 ? 5 : 2} fs={[{ f: (t) => (t >= 0 && t <= land ? f(t) : NaN), color: C.violet }, { f: () => H, color: C.red, width: 2, dash: "6 5" }]}>
@@ -211,17 +215,18 @@ export function HeightInterval({ init = [20, 2, 15] }: { init?: [number, number,
           <>
             {above && <rect x={X(above[0])} y={0} width={Math.max(0, X(above[1]) - X(above[0]))} height={Y(H)} fill={C.greenSoft} opacity={0.6} />}
             {dot(X, Y, tMax, hMax, C.blue, `max ${r2(hMax, 1)} m`, "m")}
-            {dot(X, Y, land, 0, C.violet, `lands ${r2(land)} s`, "l")}
+            {dot(X, Y, land, 0, C.violet, tr(`lands ${r2(land)} s`, `atterrit ${r2(land)} s`), "l")}
             {cross.map((t, i) => dot(X, Y, t, H, C.red, `${r2(t)} s`, i))}
           </>
         )}
       </Curves>
       <Readout tone={above ? "green" : "amber"}>
-        <MathText block html={`Maximum height \\(${r2(hMax, 1)}\\) m at \\(t=${r2(tMax)}\\) s (the vertex). It lands when \\(h=0\\): \\(t\\approx${r2(land)}\\) s (reject the negative root).`} />
-        <MathText block html={H > hMax ? `\\(-4.9t^2+${v0}t+${h0}=${H}\\) has no real roots: the object never reaches \\(${H}\\) m.`
-          : H < h0 ? `It starts above \\(${H}\\) m, so it is above that height from \\(t=0\\) until \\(t\\approx${r2(above![1])}\\) s.`
-            : cross.length === 2 ? `Solve \\(-4.9t^2+${v0}t+${h0}=${H}\\): \\(t\\approx${r2(cross[0])}\\) and \\(t\\approx${r2(cross[1])}\\). It is above \\(${H}\\) m between these times — for about \\(${r2(cross[1] - cross[0])}\\) s.`
-              : `It touches \\(${H}\\) m only at the top.`} />
+        <MathText block html={tr(`Maximum height \\(${r2(hMax, 1)}\\) m at \\(t=${r2(tMax)}\\) s (the vertex). It lands when \\(h=0\\): \\(t\\approx${r2(land)}\\) s (reject the negative root).`,
+          `Hauteur maximale \\(${r2(hMax, 1)}\\) m à \\(t=${r2(tMax)}\\) s (le sommet). L'objet atterrit quand \\(h=0\\) : \\(t\\approx${r2(land)}\\) s (rejette la racine négative).`)} />
+        <MathText block html={H > hMax ? tr(`\\(-4.9t^2+${v0}t+${h0}=${H}\\) has no real roots: the object never reaches \\(${H}\\) m.`, `\\(-4.9t^2+${v0}t+${h0}=${H}\\) n'a aucune racine réelle : l'objet n'atteint jamais \\(${H}\\) m.`)
+          : H < h0 ? tr(`It starts above \\(${H}\\) m, so it is above that height from \\(t=0\\) until \\(t\\approx${r2(above![1])}\\) s.`, `L'objet part au-dessus de \\(${H}\\) m, donc il est au-dessus de cette hauteur de \\(t=0\\) jusqu'à \\(t\\approx${r2(above![1])}\\) s.`)
+            : cross.length === 2 ? tr(`Solve \\(-4.9t^2+${v0}t+${h0}=${H}\\): \\(t\\approx${r2(cross[0])}\\) and \\(t\\approx${r2(cross[1])}\\). It is above \\(${H}\\) m between these times — for about \\(${r2(cross[1] - cross[0])}\\) s.`, `Résous \\(-4.9t^2+${v0}t+${h0}=${H}\\) : \\(t\\approx${r2(cross[0])}\\) et \\(t\\approx${r2(cross[1])}\\). L'objet est au-dessus de \\(${H}\\) m entre ces deux instants — pendant environ \\(${r2(cross[1] - cross[0])}\\) s.`)
+              : tr(`It touches \\(${H}\\) m only at the top.`, `L'objet atteint \\(${H}\\) m seulement au sommet.`)} />
       </Readout>
     </WidgetCard>
   );

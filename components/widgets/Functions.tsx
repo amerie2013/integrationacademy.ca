@@ -5,6 +5,7 @@
 // shadows on the axes, inverses as reflections in y = x, and y = af(k(x − d)) + c with a key-point table.
 
 import { useState, type ReactNode } from "react";
+import { useLang, useT } from "@/lib/lang";
 import { C, MathText, Readout, Row, Segmented, Slider, WidgetCard } from "./kit";
 import { Plane, r2, type View } from "./Systems";
 import { sgn } from "./Quadratics";
@@ -43,6 +44,7 @@ const Dot = ({ X, Y, x, y, color, label, open }: { X: XY; Y: XY; x: number; y: n
 /* ---------------------------------------------------------------- 1.1 relations and functions */
 
 type Rel = { key: string; label: string; tex: string; ys?: (t: number) => number[]; draw?: (X: XY, Y: XY) => ReactNode; pts?: [number, number][] };
+const RELS_FR: Record<string, string> = { par: "parabole", side: "couchée", circ: "cercle", abs: "en V", setA: "points A", setB: "points B" };
 const RELS: Rel[] = [
   { key: "par", label: "parabola", tex: "y=x^2-3", ys: (t) => [t * t - 3] },
   { key: "side", label: "sideways", tex: "x=y^2-2", ys: (t) => (t < -2 ? [] : t === -2 ? [0] : [Math.sqrt(t + 2), -Math.sqrt(t + 2)]) },
@@ -54,12 +56,13 @@ const RELS: Rel[] = [
 
 function Mapping({ pts }: { pts: [number, number][] }) {
   const xs = [...new Set(pts.map((p) => p[0]))].sort((a, b) => a - b), ys = [...new Set(pts.map((p) => p[1]))].sort((a, b) => a - b);
+  const t = useT();
   const H = Math.max(xs.length, ys.length) * 34 + 30, yX = (i: number, k: number) => 24 + (i + 0.5) * ((H - 30) / k);
   return (
     <svg viewBox={`0 0 340 ${H}`} style={{ width: "100%", maxWidth: 340, display: "block", margin: "6px auto" }} role="img" aria-label="Mapping diagram">
       <defs><marker id="mapArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill={C.violet} /></marker></defs>
-      <text x={60} y={14} fontSize={13} fontWeight={700} textAnchor="middle" fill={C.blue}>x (domain)</text>
-      <text x={280} y={14} fontSize={13} fontWeight={700} textAnchor="middle" fill={C.red}>y (range)</text>
+      <text x={60} y={14} fontSize={13} fontWeight={700} textAnchor="middle" fill={C.blue}>{t("x (domain)", "x (domaine)")}</text>
+      <text x={280} y={14} fontSize={13} fontWeight={700} textAnchor="middle" fill={C.red}>{t("y (range)", "y (image)")}</text>
       <ellipse cx={60} cy={H / 2 + 10} rx={42} ry={(H - 30) / 2} fill={C.blueSoft} /><ellipse cx={280} cy={H / 2 + 10} rx={42} ry={(H - 30) / 2} fill={C.redSoft} />
       {pts.map(([x, y], i) => <line key={i} x1={78} y1={yX(xs.indexOf(x), xs.length)} x2={258} y2={yX(ys.indexOf(y), ys.length)} stroke={C.violet} strokeWidth={2} markerEnd="url(#mapArrow)" />)}
       {xs.map((x, i) => <text key={"x" + x} x={60} y={yX(i, xs.length) + 5} fontSize={15} fontWeight={700} textAnchor="middle" fill={C.blue}>{neg(x)}</text>)}
@@ -69,6 +72,7 @@ function Mapping({ pts }: { pts: [number, number][] }) {
 }
 
 export function RelationTest({ start = "par" }: { start?: string }) {
+  const tr = useT();
   const [key, setKey] = useState(start);
   const [t, setT] = useState(1);
   const R = RELS.find((r) => r.key === key) ?? RELS[0];
@@ -76,9 +80,9 @@ export function RelationTest({ start = "par" }: { start?: string }) {
   const isFn = R.pts ? new Set(R.pts.map((p) => p[0])).size === R.pts.length : key === "par" || key === "abs";
   const bad = R.pts ? R.pts.find((p, i) => R.pts!.findIndex((q) => q[0] === p[0]) !== i)?.[0] : key === "side" ? 2 : 3;
   return (
-    <WidgetCard title="Is it a function?" subtitle="Slide a vertical line across the graph; read the mapping diagram">
-      <Row><Segmented value={key} onChange={(k) => { setKey(k); setT(1); }} options={RELS.map((r) => ({ value: r.key, label: r.label }))} /></Row>
-      <Row><Slider label="line x =" value={t} min={-7} max={7} step={R.pts ? 1 : 0.5} onChange={setT} format={neg} color={C.amber} /></Row>
+    <WidgetCard title={tr("Is it a function?", "Est-ce une fonction?")} subtitle={tr("Slide a vertical line across the graph; read the mapping diagram", "Fais glisser une droite verticale sur le graphique; lis le diagramme sagittal")}>
+      <Row><Segmented value={key} onChange={(k) => { setKey(k); setT(1); }} options={RELS.map((r) => ({ value: r.key, label: tr(r.label, RELS_FR[r.key] ?? r.label) }))} /></Row>
+      <Row><Slider label={tr("line x =", "droite x =")} value={t} min={-7} max={7} step={R.pts ? 1 : 0.5} onChange={setT} format={neg} color={C.amber} /></Row>
       <Plane view={V8} label="Vertical line test">
         {(X, Y) => (
           <>
@@ -94,9 +98,12 @@ export function RelationTest({ start = "par" }: { start?: string }) {
       </Plane>
       {R.pts && <Mapping pts={R.pts} />}
       <Readout tone={isFn ? "green" : "red"}>
-        <MathText html={`\\(${R.tex}\\). The line \\(x=${n(t)}\\) meets the ${R.pts ? "set" : "graph"} at <strong>${hits.length}</strong> point${hits.length === 1 ? "" : "s"}${hits.length ? ` (y = ${hits.map(neg).join(", ")})` : ""}. ${isFn
+        <MathText html={tr(`\\(${R.tex}\\). The line \\(x=${n(t)}\\) meets the ${R.pts ? "set" : "graph"} at <strong>${hits.length}</strong> point${hits.length === 1 ? "" : "s"}${hits.length ? ` (y = ${hits.map(neg).join(", ")})` : ""}. ${isFn
           ? `Every vertical line meets it at most once, so each \\(x\\) has exactly one \\(y\\): <strong>a function</strong>${R.pts ? (new Set(R.pts.map((p) => p[1])).size < R.pts.length ? " (many-to-one: two x-values share a y-value, which is allowed)" : " (one-to-one)") : ""}.`
-          : `Some vertical line (for example \\(x=${n(bad ?? 0)}\\)) meets it more than once, so some \\(x\\) has two \\(y\\)-values: <strong>not a function</strong>.`}`} />
+          : `Some vertical line (for example \\(x=${n(bad ?? 0)}\\)) meets it more than once, so some \\(x\\) has two \\(y\\)-values: <strong>not a function</strong>.`}`,
+          `\\(${R.tex}\\). La droite \\(x=${n(t)}\\) coupe ${R.pts ? "l'ensemble" : "le graphique"} en <strong>${hits.length}</strong> point${hits.length > 1 ? "s" : ""}${hits.length ? ` (y = ${hits.map(neg).join(", ")})` : ""}. ${isFn
+          ? `Chaque droite verticale le coupe au plus une fois, donc chaque \\(x\\) a exactement un \\(y\\) : <strong>c'est une fonction</strong>${R.pts ? (new Set(R.pts.map((p) => p[1])).size < R.pts.length ? " (plusieurs à un : deux valeurs de x partagent une valeur de y, ce qui est permis)" : " (biunivoque)") : ""}.`
+          : `Une droite verticale (par exemple \\(x=${n(bad ?? 0)}\\)) le coupe plus d'une fois, donc un \\(x\\) a deux valeurs de \\(y\\) : <strong>ce n'est pas une fonction</strong>.`}`)} />
       </Readout>
     </WidgetCard>
   );
@@ -106,6 +113,7 @@ export function RelationTest({ start = "par" }: { start?: string }) {
 
 export function NotationLab({ init = [1, -2, -3] }: { init?: [number, number, number] }) {
   const [a, setA] = useState(init[0]), [b, setB] = useState(init[1]), [c, setC] = useState(init[2]);
+  const tr = useT();
   const [t, setT] = useState(3), [v, setV] = useState(5);
   const f = (x: number) => a * x * x + b * x + c;
   const ft = f(t);
@@ -117,15 +125,15 @@ export function NotationLab({ init = [1, -2, -3] }: { init?: [number, number, nu
   const ftex = `${a === 0 ? "" : `${a === 1 ? "" : a === -1 ? "-" : r2(a)}x^2`}${b === 0 ? "" : `${b < 0 ? "-" : a === 0 ? "" : "+"}${Math.abs(b) === 1 ? "" : r2(Math.abs(b))}x`}${c === 0 ? (a === 0 && b === 0 ? "0" : "") : a === 0 && b === 0 ? r2(c) : sgn(c)}`;
   const sub = `${a === 0 ? "" : `${r2(a)}(${n(t)})^2`}${b === 0 ? "" : `${a === 0 ? r2(b) : sgn(b)}(${n(t)})`}${c === 0 ? "" : sgn(c)}`;
   return (
-    <WidgetCard title="Function notation" subtitle="f(a) is the output at x = a; f(x) = v asks which inputs give v">
+    <WidgetCard title={tr("Function notation", "Notation fonctionnelle")} subtitle={tr("f(a) is the output at x = a; f(x) = v asks which inputs give v", "f(a) est la valeur de sortie en x = a; f(x) = v demande quelles valeurs d'entrée donnent v")}>
       <Row>
         <Slider label="a" value={a} min={-2} max={2} step={0.5} onChange={setA} format={neg} />
         <Slider label="b" value={b} min={-6} max={6} onChange={setB} format={neg} color={C.red} />
         <Slider label="c" value={c} min={-6} max={6} onChange={setC} format={neg} color={C.green} />
       </Row>
       <Row>
-        <Slider label="input a" value={t} min={-6} max={6} step={0.5} onChange={setT} format={neg} color={C.blue} />
-        <Slider label="target v" value={v} min={-9} max={13} onChange={setV} format={neg} color={C.amber} />
+        <Slider label={tr("input a", "entrée a")} value={t} min={-6} max={6} step={0.5} onChange={setT} format={neg} color={C.blue} />
+        <Slider label={tr("target v", "cible v")} value={v} min={-9} max={13} onChange={setV} format={neg} color={C.amber} />
       </Row>
       <Plane view={view} label="Function notation" step={1} stepY={2}>
         {(X, Y) => (
@@ -139,7 +147,8 @@ export function NotationLab({ init = [1, -2, -3] }: { init?: [number, number, nu
         )}
       </Plane>
       <Readout tone="blue">
-        <MathText html={`\\(f(x)=${ftex}\\). <strong>Evaluate:</strong> \\(f(${n(t)})=${sub || "0"}=${n(ft)}\\) — the point \\((${n(t)},\\ ${n(ft)})\\) is on the graph.<br/><strong>Solve</strong> \\(f(x)=${n(v)}\\): ${sols.length ? `\\(x=${sols.map(n).join("\\) or \\(x=")}\\) (where the dashed line meets the graph).` : "no real input gives this output (the dashed line misses the graph)."}`} />
+        <MathText html={tr(`\\(f(x)=${ftex}\\). <strong>Evaluate:</strong> \\(f(${n(t)})=${sub || "0"}=${n(ft)}\\) — the point \\((${n(t)},\\ ${n(ft)})\\) is on the graph.<br/><strong>Solve</strong> \\(f(x)=${n(v)}\\): ${sols.length ? `\\(x=${sols.map(n).join("\\) or \\(x=")}\\) (where the dashed line meets the graph).` : "no real input gives this output (the dashed line misses the graph)."}`,
+          `\\(f(x)=${ftex}\\). <strong>Évaluer :</strong> \\(f(${n(t)})=${sub || "0"}=${n(ft)}\\) — le point \\((${n(t)},\\ ${n(ft)})\\) est sur le graphique.<br/><strong>Résoudre</strong> \\(f(x)=${n(v)}\\) : ${sols.length ? `\\(x=${sols.map(n).join("\\) ou \\(x=")}\\) (là où la droite pointillée coupe le graphique).` : "aucune valeur d'entrée réelle ne donne cette sortie (la droite pointillée ne coupe pas le graphique)."}`)} />
       </Readout>
     </WidgetCard>
   );
@@ -156,6 +165,14 @@ const PARENTS: Record<ParentKey, Parent> = {
   recip: { key: "recip", label: "1/x", name: "reciprocal", f: (x) => (x === 0 ? NaN : 1 / x), pts: [[-2, -0.5], [-1, -1], [-0.5, -2], [0.5, 2], [1, 1], [2, 0.5]], tex: (u) => `\\frac{1}{${u}}` },
   abs: { key: "abs", label: "|x|", name: "absolute value", f: (x) => Math.abs(x), pts: [[-2, 2], [-1, 1], [0, 0], [1, 1], [2, 2]], tex: (u) => `\\left|${u}\\right|` },
 };
+const NAME_FR: Record<ParentKey, string> = { x: "linéaire", x2: "quadratique", sqrt: "racine carrée", recip: "inverse", abs: "valeur absolue" };
+const MORE_FR: Record<ParentKey, string> = {
+  x: "une droite qui passe par l'origine, de pente 1; croissante partout; symétrique par rapport à l'origine (impaire).",
+  x2: "une parabole de sommet \\((0,0)\\); décroissante pour \\(x<0\\), croissante pour \\(x>0\\); symétrique par rapport à l'axe des y (paire).",
+  sqrt: "la moitié d'une parabole couchée qui commence en \\((0,0)\\); toujours croissante, mais de plus en plus lentement; aucune symétrie.",
+  recip: "une hyperbole dans les quadrants 1 et 3; asymptote verticale \\(x=0\\) et asymptote horizontale \\(y=0\\); décroissante sur chaque branche; symétrique par rapport à l'origine (impaire).",
+  abs: "un V de sommet \\((0,0)\\) avec des pentes \\(-1\\) et \\(1\\); décroissante pour \\(x<0\\), croissante pour \\(x>0\\); symétrique par rapport à l'axe des y (paire).",
+};
 const FACTS: Record<ParentKey, { dom: string; rng: string; more: string }> = {
   x: { dom: "\\{x\\in\\mathbb{R}\\}", rng: "\\{y\\in\\mathbb{R}\\}", more: "a straight line through the origin with slope 1; increasing everywhere; symmetric about the origin (odd)." },
   x2: { dom: "\\{x\\in\\mathbb{R}\\}", rng: "\\{y\\in\\mathbb{R}\\mid y\\ge 0\\}", more: "a parabola with vertex \\((0,0)\\); decreasing for \\(x<0\\), increasing for \\(x>0\\); symmetric about the y-axis (even)." },
@@ -165,11 +182,12 @@ const FACTS: Record<ParentKey, { dom: string; rng: string; more: string }> = {
 };
 
 export function ParentGallery({ start = "x2" as ParentKey }: { start?: ParentKey }) {
+  const t = useT();
   const [p, setP] = useState<ParentKey>(start);
   const P = PARENTS[p];
   const view: View = { xmin: -6, xmax: 10, ymin: -6, ymax: 10 };
   return (
-    <WidgetCard title="The five parent functions" subtitle="Shape, key points, domain and range">
+    <WidgetCard title={t("The five parent functions", "Les cinq fonctions parents")} subtitle={t("Shape, key points, domain and range", "Forme, points clés, domaine et image")}>
       <Row><Segmented value={p} onChange={setP} options={(Object.keys(PARENTS) as ParentKey[]).map((k) => ({ value: k, label: `f(x) = ${PARENTS[k].label}` }))} /></Row>
       <Plane view={view} label={`Parent function ${P.label}`}>
         {(X, Y) => (
@@ -188,7 +206,8 @@ export function ParentGallery({ start = "x2" as ParentKey }: { start?: ParentKey
         </tbody>
       </table>
       <Readout tone="green">
-        <MathText html={`<strong>\\(f(x)=${P.tex("x")}\\)</strong> (${P.name}): ${FACTS[p].more}<br/>Domain \\(${FACTS[p].dom}\\); range \\(${FACTS[p].rng}\\). The grey curves are the other four parents.`} />
+        <MathText html={t(`<strong>\\(f(x)=${P.tex("x")}\\)</strong> (${P.name}): ${FACTS[p].more}<br/>Domain \\(${FACTS[p].dom}\\); range \\(${FACTS[p].rng}\\). The grey curves are the other four parents.`,
+          `<strong>\\(f(x)=${P.tex("x")}\\)</strong> (${NAME_FR[p]}) : ${MORE_FR[p]}<br/>Domaine \\(${FACTS[p].dom}\\); image \\(${FACTS[p].rng}\\). Les courbes grises sont les quatre autres fonctions parents.`)} />
       </Readout>
     </WidgetCard>
   );
@@ -197,6 +216,7 @@ export function ParentGallery({ start = "x2" as ParentKey }: { start?: ParentKey
 /* ---------------------------------------------------------------- 1.4 domain and range */
 
 export function DomainRangeLab({ start = "quad" }: { start?: "quad" | "root" | "recip" }) {
+  const tr = useT();
   const [type, setType] = useState(start);
   const [a, setA] = useState(start === "quad" ? -1 : 1), [h, setH] = useState(2), [k, setK] = useState(3);
   const [restrict, setRestrict] = useState(false), [lo, setLo] = useState(-1), [hi, setHi] = useState(5);
@@ -222,10 +242,10 @@ export function DomainRangeLab({ start = "quad" }: { start?: "quad" | "root" | "
   const dLo = restrict ? L : type === "root" ? h : view.xmin, dHi = restrict ? U : view.xmax;
   const rLo = restrict ? ymin : type === "quad" || type === "root" ? (a > 0 ? k : view.ymin) : view.ymin, rHi = restrict ? ymax : type === "quad" || type === "root" ? (a > 0 ? view.ymax : k) : view.ymax;
   return (
-    <WidgetCard title="Domain and range" subtitle="The domain is the graph's shadow on the x-axis; the range is its shadow on the y-axis">
+    <WidgetCard title={tr("Domain and range", "Domaine et image")} subtitle={tr("The domain is the graph's shadow on the x-axis; the range is its shadow on the y-axis", "Le domaine est l'ombre du graphique sur l'axe des x; l'image est son ombre sur l'axe des y")}>
       <Row>
         <Segmented value={type} onChange={(t) => { setType(t); setA(t === "quad" ? -1 : 1); }} options={[{ value: "quad", label: "a(x − h)² + k" }, { value: "root", label: "a√(x − h) + k" }, { value: "recip", label: "a/(x − h) + k" }]} />
-        <Segmented value={restrict ? "r" : "n"} onChange={(v) => setRestrict(v === "r")} options={[{ value: "n", label: "all allowed x" }, { value: "r", label: "restrict x (context)" }]} />
+        <Segmented value={restrict ? "r" : "n"} onChange={(v) => setRestrict(v === "r")} options={[{ value: "n", label: tr("all allowed x", "tous les x permis") }, { value: "r", label: tr("restrict x (context)", "restreindre x (contexte)") }]} />
       </Row>
       <Row>
         <Slider label="a" value={a} min={-2} max={2} step={1} onChange={(v) => setA(v === 0 ? 1 : v)} format={neg} />
@@ -233,8 +253,8 @@ export function DomainRangeLab({ start = "quad" }: { start?: "quad" | "root" | "
         <Slider label="k" value={k} min={-4} max={4} onChange={setK} format={neg} color={C.green} />
       </Row>
       {restrict && <Row>
-        <Slider label="from x =" value={lo} min={-7} max={7} onChange={setLo} format={neg} color={C.blue} />
-        <Slider label="to x =" value={hi} min={-7} max={7} onChange={setHi} format={neg} color={C.blue} />
+        <Slider label={tr("from x =", "de x =")} value={lo} min={-7} max={7} onChange={setLo} format={neg} color={C.blue} />
+        <Slider label={tr("to x =", "à x =")} value={hi} min={-7} max={7} onChange={setHi} format={neg} color={C.blue} />
       </Row>}
       <Plane view={view} label="Domain and range">
         {(X, Y) => (
@@ -252,8 +272,9 @@ export function DomainRangeLab({ start = "quad" }: { start?: "quad" | "root" | "
         )}
       </Plane>
       <Readout tone={restrict && (L > U || crossesAsym) ? "amber" : "green"}>
-        <MathText html={restrict && L > U ? "Choose a starting x that is not greater than the ending x." : crossesAsym ? `The interval crosses the asymptote \\(x=${n(h)}\\), so the function is not defined on all of it. Keep the interval on one side.` :
-          `\\(f(x)=${ftex}\\). <strong>Domain</strong> (green shadow): \\(${dom}\\). <strong>Range</strong> (red shadow): \\(${rng}\\).${restrict ? " In a context (time, length, number of items) only some x-values make sense, so the domain is an interval and the range is read from the lowest and highest points on that piece of the graph." : type === "recip" ? " The open circles mark the values the function never reaches." : type === "root" ? " A square root needs x − h ≥ 0." : ` The vertex \\((${n(h)},${n(k)})\\) is the ${a > 0 ? "lowest" : "highest"} point.`}`} />
+        <MathText html={restrict && L > U ? tr("Choose a starting x that is not greater than the ending x.", "Choisis un x de départ qui n'est pas plus grand que le x d'arrivée.") : crossesAsym ? tr(`The interval crosses the asymptote \\(x=${n(h)}\\), so the function is not defined on all of it. Keep the interval on one side.`, `L'intervalle traverse l'asymptote \\(x=${n(h)}\\), donc la fonction n'est pas définie sur tout l'intervalle. Garde l'intervalle d'un seul côté.`) :
+          tr(`\\(f(x)=${ftex}\\). <strong>Domain</strong> (green shadow): \\(${dom}\\). <strong>Range</strong> (red shadow): \\(${rng}\\).${restrict ? " In a context (time, length, number of items) only some x-values make sense, so the domain is an interval and the range is read from the lowest and highest points on that piece of the graph." : type === "recip" ? " The open circles mark the values the function never reaches." : type === "root" ? " A square root needs x − h ≥ 0." : ` The vertex \\((${n(h)},${n(k)})\\) is the ${a > 0 ? "lowest" : "highest"} point.`}`,
+            `\\(f(x)=${ftex}\\). <strong>Domaine</strong> (ombre verte) : \\(${dom}\\). <strong>Image</strong> (ombre rouge) : \\(${rng}\\).${restrict ? " Dans un contexte (temps, longueur, nombre d'objets), seules certaines valeurs de x ont du sens, donc le domaine est un intervalle et l'image se lit à partir des points le plus bas et le plus haut de cette partie du graphique." : type === "recip" ? " Les cercles vides indiquent les valeurs que la fonction n'atteint jamais." : type === "root" ? " Une racine carrée exige x − h ≥ 0." : ` Le sommet \\((${n(h)},${n(k)})\\) est le point le plus ${a > 0 ? "bas" : "haut"}.`}`)} />
       </Readout>
     </WidgetCard>
   );
@@ -262,6 +283,7 @@ export function DomainRangeLab({ start = "quad" }: { start?: "quad" | "root" | "
 /* ---------------------------------------------------------------- 1.5 inverse functions */
 
 export function InverseLab({ start = "lin" }: { start?: "lin" | "quad" }) {
+  const t = useT();
   const [mode, setMode] = useState(start);
   const [m, setM] = useState(2), [b, setB] = useState(-3);
   const [a, setA] = useState(1), [h, setH] = useState(1), [k, setK] = useState(-2), [half, setHalf] = useState<"all" | "right" | "left">("all");
@@ -280,9 +302,9 @@ export function InverseLab({ start = "lin" }: { start?: "lin" | "quad" }) {
   }
   const ftex = mode === "lin" ? `f(x)=${m === 0 ? "" : `${m === 1 ? "" : m === -1 ? "-" : n(m)}x`}${m === 0 ? n(b) : b === 0 ? "" : sgn(b)}` : `f(x)=${a === 1 ? "" : a === -1 ? "-" : n(a)}(x${sgn(-h)})^2${sgn(k)}${half === "right" ? `,\\ x\\ge ${n(h)}` : half === "left" ? `,\\ x\\le ${n(h)}` : ""}`;
   return (
-    <WidgetCard title="A function and its inverse" subtitle="Swap x and y — the graph reflects in the line y = x">
-      <Row><Segmented value={mode} onChange={setMode} options={[{ value: "lin", label: "linear" }, { value: "quad", label: "quadratic" }]} />
-        {mode === "quad" && <Segmented value={half} onChange={setHalf} options={[{ value: "all", label: "all x" }, { value: "right", label: `x ≥ h` }, { value: "left", label: `x ≤ h` }]} />}</Row>
+    <WidgetCard title={t("A function and its inverse", "Une fonction et sa réciproque")} subtitle={t("Swap x and y — the graph reflects in the line y = x", "Échange x et y — le graphique est réfléchi par rapport à la droite y = x")}>
+      <Row><Segmented value={mode} onChange={setMode} options={[{ value: "lin", label: t("linear", "linéaire") }, { value: "quad", label: t("quadratic", "quadratique") }]} />
+        {mode === "quad" && <Segmented value={half} onChange={setHalf} options={[{ value: "all", label: t("all x", "tous les x") }, { value: "right", label: `x ≥ h` }, { value: "left", label: `x ≤ h` }]} />}</Row>
       {mode === "lin" ? <Row>
         <Slider label="m" value={m} min={-3} max={3} step={0.5} onChange={setM} format={neg} />
         <Slider label="b" value={b} min={-5} max={5} onChange={setB} format={neg} color={C.green} />
@@ -303,14 +325,17 @@ export function InverseLab({ start = "lin" }: { start?: "lin" | "quad" }) {
       </Plane>
       <table style={{ borderCollapse: "collapse", margin: "4px auto", fontSize: 14.5 }}>
         <tbody>
-          <tr><th style={{ ...cell, color: C.blue }}>f: x</th>{xsT.map((x, i) => <td key={i} style={cell}>{neg(x)}</td>)}<th style={{ ...cell, color: C.red }}>inverse: x</th>{xsT.map((x, i) => <td key={"i" + i} style={cell}>{neg(f(x))}</td>)}</tr>
+          <tr><th style={{ ...cell, color: C.blue }}>f: x</th>{xsT.map((x, i) => <td key={i} style={cell}>{neg(x)}</td>)}<th style={{ ...cell, color: C.red }}>{t("inverse: x", "réciproque : x")}</th>{xsT.map((x, i) => <td key={"i" + i} style={cell}>{neg(f(x))}</td>)}</tr>
           <tr><th style={{ ...cell, color: C.blue }}>y</th>{xsT.map((x, i) => <td key={i} style={cell}>{neg(f(x))}</td>)}<th style={{ ...cell, color: C.red }}>y</th>{xsT.map((x, i) => <td key={"i" + i} style={cell}>{neg(x)}</td>)}</tr>
         </tbody>
       </table>
       <Readout tone={invFn && !(mode === "lin" && m === 0) ? "green" : "amber"}>
-        <MathText html={`Blue: \\(${ftex}\\). Red: the inverse (every point \\((x,y)\\) becomes \\((y,x)\\)). ${mode === "lin" && m === 0 ? "A horizontal line's inverse is a vertical line — not a function." : invFn
+        <MathText html={t(`Blue: \\(${ftex}\\). Red: the inverse (every point \\((x,y)\\) becomes \\((y,x)\\)). ${mode === "lin" && m === 0 ? "A horizontal line's inverse is a vertical line — not a function." : invFn
           ? `The inverse passes the vertical-line test, so it is a function: \\(${invTex}\\). Domain and range trade places.`
-          : `The inverse \\(${invTex}\\) gives two y-values for most x, so it is <strong>not a function</strong>. Restrict the domain to \\(x\\ge ${n(h)}\\) or \\(x\\le ${n(h)}\\) to make it one.`}`} />
+          : `The inverse \\(${invTex}\\) gives two y-values for most x, so it is <strong>not a function</strong>. Restrict the domain to \\(x\\ge ${n(h)}\\) or \\(x\\le ${n(h)}\\) to make it one.`}`,
+          `En bleu : \\(${ftex}\\). En rouge : la réciproque (chaque point \\((x,y)\\) devient \\((y,x)\\)). ${mode === "lin" && m === 0 ? "La réciproque d'une droite horizontale est une droite verticale — ce n'est pas une fonction." : invFn
+          ? `La réciproque passe le test de la droite verticale, donc c'est une fonction : \\(${invTex}\\). Le domaine et l'image échangent leurs rôles.`
+          : `La réciproque \\(${invTex}\\) donne deux valeurs de y pour la plupart des x, donc ce n'est <strong>pas une fonction</strong>. Restreins le domaine à \\(x\\ge ${n(h)}\\) ou à \\(x\\le ${n(h)}\\) pour en faire une.`}`)} />
       </Readout>
     </WidgetCard>
   );
@@ -334,6 +359,8 @@ export function transTex(p: ParentKey, a: number, k: number, d: number, c: numbe
 
 export function FuncTransform({ parent = "x2" as ParentKey, parents = ["x", "x2", "sqrt", "recip", "abs"] as ParentKey[], show = ["a", "k", "d", "c"], init = { a: 1, k: 1, d: 0, c: 0 } }:
   { parent?: ParentKey; parents?: ParentKey[]; show?: ("a" | "k" | "d" | "c")[]; init?: { a: number; k: number; d: number; c: number } }) {
+  const t = useT(), fr = useLang() === "fr";
+  const hL = fr ? "c" : "d", vL = fr ? "d" : "c"; // displayed letters: French writes y = af(k(x − c)) + d (state d = horizontal, c = vertical)
   const [p, setP] = useState<ParentKey>(parent);
   const [ai, setAi] = useState(Math.max(0, AS.indexOf(init.a))), [ki, setKi] = useState(Math.max(0, KS.findIndex((v) => Math.abs(v - init.k) < 1e-9)));
   const [d, setD] = useState(init.d), [c, setC] = useState(init.c);
@@ -343,26 +370,26 @@ export function FuncTransform({ parent = "x2" as ParentKey, parents = ["x", "x2"
   const view: View = { xmin: -10, xmax: 10, ymin: -10, ymax: 10 };
   const img = P.pts.map(([x, y]) => [x / k + d, a * y + c] as [number, number]);
   const words: string[] = [];
-  if (Math.abs(a) !== 1) words.push(`vertical ${Math.abs(a) > 1 ? "stretch" : "compression"} by a factor of ${fracWord(Math.abs(a))}`);
-  if (a < 0) words.push("reflection in the x-axis");
-  if (Math.abs(k) !== 1) words.push(`horizontal ${Math.abs(k) < 1 ? "stretch" : "compression"} by a factor of ${fracWord(1 / Math.abs(k))}`);
-  if (k < 0) words.push("reflection in the y-axis");
-  if (d !== 0) words.push(`translation ${neg(Math.abs(d))} unit${Math.abs(d) === 1 ? "" : "s"} ${d > 0 ? "right" : "left"}`);
-  if (c !== 0) words.push(`translation ${neg(Math.abs(c))} unit${Math.abs(c) === 1 ? "" : "s"} ${c > 0 ? "up" : "down"}`);
+  if (Math.abs(a) !== 1) words.push(t(`vertical ${Math.abs(a) > 1 ? "stretch" : "compression"} by a factor of ${fracWord(Math.abs(a))}`, `${Math.abs(a) > 1 ? "agrandissement" : "compression"} vertical${Math.abs(a) > 1 ? "" : "e"} de facteur ${fracWord(Math.abs(a))}`));
+  if (a < 0) words.push(t("reflection in the x-axis", "réflexion par rapport à l'axe des x"));
+  if (Math.abs(k) !== 1) words.push(t(`horizontal ${Math.abs(k) < 1 ? "stretch" : "compression"} by a factor of ${fracWord(1 / Math.abs(k))}`, `${Math.abs(k) < 1 ? "agrandissement" : "compression"} horizontal${Math.abs(k) < 1 ? "" : "e"} de facteur ${fracWord(1 / Math.abs(k))}`));
+  if (k < 0) words.push(t("reflection in the y-axis", "réflexion par rapport à l'axe des y"));
+  if (d !== 0) words.push(t(`translation ${neg(Math.abs(d))} unit${Math.abs(d) === 1 ? "" : "s"} ${d > 0 ? "right" : "left"}`, `translation de ${neg(Math.abs(d))} unité${Math.abs(d) <= 1 ? "" : "s"} vers la ${d > 0 ? "droite" : "gauche"}`));
+  if (c !== 0) words.push(t(`translation ${neg(Math.abs(c))} unit${Math.abs(c) === 1 ? "" : "s"} ${c > 0 ? "up" : "down"}`, `translation de ${neg(Math.abs(c))} unité${Math.abs(c) <= 1 ? "" : "s"} vers le ${c > 0 ? "haut" : "bas"}`));
   // domain / range of the image
   const up = a > 0, right = k > 0;
   const dom = p === "sqrt" ? `\\{x\\in\\mathbb{R}\\mid x${right ? "\\ge" : "\\le"}${n(d)}\\}` : p === "recip" ? `\\{x\\in\\mathbb{R}\\mid x\\ne ${n(d)}\\}` : "\\{x\\in\\mathbb{R}\\}";
   const rng = p === "x" ? "\\{y\\in\\mathbb{R}\\}" : p === "recip" ? `\\{y\\in\\mathbb{R}\\mid y\\ne ${n(c)}\\}` : `\\{y\\in\\mathbb{R}\\mid y${up ? "\\ge" : "\\le"}${n(c)}\\}`;
   return (
-    <WidgetCard title="Transforming a parent function" subtitle="y = a·f(k(x − d)) + c — each key point (x, y) moves to (x/k + d, ay + c)">
+    <WidgetCard title={t("Transforming a parent function", "Transformer une fonction parent")} subtitle={t("y = a·f(k(x − d)) + c — each key point (x, y) moves to (x/k + d, ay + c)", "y = a·f(k(x − c)) + d — chaque point clé (x, y) devient (x/k + c, ay + d)")}>
       {parents.length > 1 && <Row><Segmented value={p} onChange={setP} options={parents.map((q) => ({ value: q, label: `f(x) = ${PARENTS[q].label}` }))} /></Row>}
       <Row>
         {show.includes("a") && <Slider label="a" value={ai} min={0} max={AS.length - 1} onChange={setAi} format={(i) => fracWord(Math.abs(AS[i])).replace(/^/, AS[i] < 0 ? "−" : "")} color={C.blue} />}
         {show.includes("k") && <Slider label="k" value={ki} min={0} max={KS.length - 1} onChange={setKi} format={(i) => fracWord(Math.abs(KS[i])).replace(/^/, KS[i] < 0 ? "−" : "")} color={C.violet} />}
       </Row>
       <Row>
-        {show.includes("d") && <Slider label="d" value={d} min={-6} max={6} onChange={setD} format={neg} color={C.red} />}
-        {show.includes("c") && <Slider label="c" value={c} min={-6} max={6} onChange={setC} format={neg} color={C.green} />}
+        {show.includes("d") && <Slider label={hL} value={d} min={-6} max={6} onChange={setD} format={neg} color={C.red} />}
+        {show.includes("c") && <Slider label={vL} value={c} min={-6} max={6} onChange={setC} format={neg} color={C.green} />}
       </Row>
       <Plane view={view} label="Transformation" step={1}>
         {(X, Y) => (
@@ -377,12 +404,13 @@ export function FuncTransform({ parent = "x2" as ParentKey, parents = ["x", "x2"
       </Plane>
       <table style={{ borderCollapse: "collapse", margin: "4px auto", fontSize: 14 }}>
         <tbody>
-          <tr><th style={cell}>parent (x, y)</th>{P.pts.map(([x, y], i) => <td key={i} style={cell}>({neg(x)}, {neg(y)})</td>)}</tr>
-          <tr><th style={{ ...cell, color: C.blue }}>image (x/k + d, ay + c)</th>{img.map(([x, y], i) => <td key={i} style={{ ...cell, color: C.blue, fontWeight: 700 }}>({neg(x)}, {neg(y)})</td>)}</tr>
+          <tr><th style={cell}>{t("parent (x, y)", "parent (x, y)")}</th>{P.pts.map(([x, y], i) => <td key={i} style={cell}>({neg(x)}, {neg(y)})</td>)}</tr>
+          <tr><th style={{ ...cell, color: C.blue }}>{t("image (x/k + d, ay + c)", "image (x/k + c, ay + d)")}</th>{img.map(([x, y], i) => <td key={i} style={{ ...cell, color: C.blue, fontWeight: 700 }}>({neg(x)}, {neg(y)})</td>)}</tr>
         </tbody>
       </table>
       <Readout tone="blue">
-        <MathText html={`\\(${transTex(p, a, k, d, c)}\\). ${words.length ? `Apply, in order: ${words.join("; ")}.` : "No transformation: this is the parent."} Stretches and reflections first, translations last.<br/>Domain \\(${dom}\\); range \\(${rng}\\).`} />
+        <MathText html={t(`\\(${transTex(p, a, k, d, c)}\\). ${words.length ? `Apply, in order: ${words.join("; ")}.` : "No transformation: this is the parent."} Stretches and reflections first, translations last.<br/>Domain \\(${dom}\\); range \\(${rng}\\).`,
+          `\\(${transTex(p, a, k, d, c)}\\). ${words.length ? `Applique, dans l'ordre : ${words.join("; ")}.` : "Aucune transformation : c'est la fonction parent."} Les agrandissements, compressions et réflexions d'abord, les translations en dernier.<br/>Domaine \\(${dom}\\); image \\(${rng}\\).`)} />
       </Readout>
     </WidgetCard>
   );

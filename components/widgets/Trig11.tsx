@@ -5,6 +5,7 @@
 // the sine law, the cosine law, and a three-dimensional height problem drawn in oblique projection.
 
 import { useState } from "react";
+import { useT } from "@/lib/lang";
 import { C, MathText, Readout, Row, Segmented, Slider, WidgetCard } from "./kit";
 import { r2 } from "./Systems";
 
@@ -19,6 +20,7 @@ const lbl = (x: number, y: number, t: string, color: string = C.ink, size = 15, 
 /* ---------------------------------------------------------------- 5.1 special triangles */
 
 export function SpecialTriangles({ start = "30" }: { start?: "30" | "45" }) {
+  const t = useT();
   const [kind, setKind] = useState<"30" | "45">(start);
   const [ang, setAng] = useState(kind === "45" ? 45 : 30);
   const angle = kind === "45" ? 45 : ang;
@@ -29,10 +31,10 @@ export function SpecialTriangles({ start = "30" }: { start?: "30" | "45" }) {
   const ex: Record<number, [string, string, string]> = { 30: ["\\frac12", "\\frac{\\sqrt3}2", "\\frac1{\\sqrt3}"], 45: ["\\frac1{\\sqrt2}", "\\frac1{\\sqrt2}", "1"], 60: ["\\frac{\\sqrt3}2", "\\frac12", "\\sqrt3"] };
   const v = ex[angle];
   return (
-    <WidgetCard title="Special triangles" subtitle="exact values come from two triangles you can draw yourself">
+    <WidgetCard title={t("Special triangles", "Triangles remarquables")} subtitle={t("exact values come from two triangles you can draw yourself", "les valeurs exactes proviennent de deux triangles que tu peux tracer toi-même")}>
       <Row>
         <Segmented value={kind} onChange={(k) => { setKind(k); setAng(k === "45" ? 45 : 30); }} options={[{ value: "30", label: "30°–60°–90°" }, { value: "45", label: "45°–45°–90°" }]} />
-        {kind === "30" && <Segmented value={ang} onChange={setAng} options={[{ value: 30, label: "angle 30°" }, { value: 60, label: "angle 60°" }]} />}
+        {kind === "30" && <Segmented value={ang} onChange={setAng} options={[{ value: 30, label: t("angle 30°", "angle de 30°") }, { value: 60, label: t("angle 60°", "angle de 60°") }]} />}
       </Row>
       <svg viewBox={`0 0 ${W} ${H}`} style={svgBox} role="img" aria-label="Special triangle">
         <polygon points={`${P.A} ${P.B} ${P.C}`} fill={C.blueSoft} stroke={C.blue} strokeWidth={3} />
@@ -44,7 +46,8 @@ export function SpecialTriangles({ start = "30" }: { start?: "30" | "45" }) {
         {lbl(P.C[0] - 18, P.C[1] + 40, kind === "45" ? "45°" : "60°", kind === "30" && angle === 60 ? C.red : C.muted)}
       </svg>
       <Readout tone="green">
-        <MathText html={`For \\(${angle}^\\circ\\): opposite \\(${opp}\\), adjacent \\(${adj}\\), hypotenuse \\(${hyp}\\). So \\(\\sin${angle}^\\circ=${v[0]}\\), \\(\\cos${angle}^\\circ=${v[1]}\\), \\(\\tan${angle}^\\circ=${v[2]}\\). ${kind === "30" ? "The 30°–60°–90° triangle is half of an equilateral triangle with side 2." : "The 45°–45°–90° triangle is half of a unit square, cut along a diagonal."}`} />
+        <MathText html={t(`For \\(${angle}^\\circ\\): opposite \\(${opp}\\), adjacent \\(${adj}\\), hypotenuse \\(${hyp}\\). So \\(\\sin${angle}^\\circ=${v[0]}\\), \\(\\cos${angle}^\\circ=${v[1]}\\), \\(\\tan${angle}^\\circ=${v[2]}\\). ${kind === "30" ? "The 30°–60°–90° triangle is half of an equilateral triangle with side 2." : "The 45°–45°–90° triangle is half of a unit square, cut along a diagonal."}`,
+          `Pour \\(${angle}^\\circ\\) : côté opposé \\(${opp}\\), côté adjacent \\(${adj}\\), hypoténuse \\(${hyp}\\). Donc \\(\\sin${angle}^\\circ=${v[0]}\\), \\(\\cos${angle}^\\circ=${v[1]}\\), \\(\\tan${angle}^\\circ=${v[2]}\\). ${kind === "30" ? "Le triangle 30°–60°–90° est la moitié d'un triangle équilatéral de côté 2." : "Le triangle 45°–45°–90° est la moitié d'un carré unitaire, coupé le long d'une diagonale."}`)} />
       </Readout>
     </WidgetCard>
   );
@@ -53,6 +56,7 @@ export function SpecialTriangles({ start = "30" }: { start?: "30" | "45" }) {
 /* ---------------------------------------------------------------- 5.2 terminal arm */
 
 export function TerminalArm({ init = 150 }: { init?: number }) {
+  const tr = useT();
   const [t, setT] = useState(init);
   const [r, setR] = useState(5);
   const x = r * Math.cos(rad(t)), y = r * Math.sin(rad(t));
@@ -60,14 +64,14 @@ export function TerminalArm({ init = 150 }: { init?: number }) {
   const rel = q === 1 ? t : q === 2 ? 180 - t : q === 3 ? t - 180 : q === 4 ? 360 - t : NaN;
   const W = 420, c = W / 2, s = 30;
   const X = (v: number) => c + v * s, Y = (v: number) => c - v * s;
-  const pos = q === 1 ? "all" : q === 2 ? "sine" : q === 3 ? "tangent" : q === 4 ? "cosine" : "";
+  const pos = q === 1 ? tr("all", "toutes") : q === 2 ? tr("sine", "sinus") : q === 3 ? tr("tangent", "tangente") : q === 4 ? tr("cosine", "cosinus") : "";
   const sameSin = t <= 180 ? 180 - t : 540 - t, sameCos = 360 - t;
   const fix = (a: number) => ((a % 360) + 360) % 360;
   return (
-    <WidgetCard title="Angles from 0° to 360°" subtitle="the terminal arm, the related acute angle, and the CAST rule">
+    <WidgetCard title={tr("Angles from 0° to 360°", "Angles de 0° à 360°")} subtitle={tr("the terminal arm, the related acute angle, and the CAST rule", "le côté terminal, l'angle de référence et la règle CAST")}>
       <Row>
-        <Slider label="angle θ" value={t} min={0} max={360} step={5} onChange={setT} format={(v) => `${v}°`} color={C.red} />
-        <Slider label="radius r" value={r} min={2} max={6} onChange={setR} color={C.blue} />
+        <Slider label={tr("angle θ", "angle θ")} value={t} min={0} max={360} step={5} onChange={setT} format={(v) => `${v}°`} color={C.red} />
+        <Slider label={tr("radius r", "rayon r")} value={r} min={2} max={6} onChange={setR} color={C.blue} />
       </Row>
       <svg viewBox={`0 0 ${W} ${W}`} style={{ ...svgBox, maxWidth: 420 }} role="img" aria-label="Terminal arm">
         {[["S", -1, 1], ["A", 1, 1], ["T", -1, -1], ["C", 1, -1]].map(([L, sx, sy]) => <text key={L as string} x={X(5.6 * (sx as number))} y={Y(5.6 * (sy as number)) + 6} fontSize={22} fontWeight={800} fill={(L === "A" && q === 1) || (L === "S" && q === 2) || (L === "T" && q === 3) || (L === "C" && q === 4) ? C.green : "#cbd5e1"} textAnchor="middle">{L}</text>)}
@@ -80,7 +84,8 @@ export function TerminalArm({ init = 150 }: { init?: number }) {
         {lbl(X(x) + (x >= 0 ? 10 : -10), Y(y) - 10, `(${n(x, 2)}, ${n(y, 2)})`, C.violet, 13, x >= 0 ? "start" : "end")}
       </svg>
       <Readout tone="blue">
-        <MathText html={`\\(\\theta=${t}^\\circ\\), point \\((x,y)=(${n(x, 2)},\\ ${n(y, 2)})\\), \\(r=${r}\\): \\(\\sin\\theta=\\frac yr=${n(y / r)}\\), \\(\\cos\\theta=\\frac xr=${n(x / r)}\\), \\(\\tan\\theta=\\frac yx=${Math.abs(x) < 1e-9 ? "\\text{undefined}" : n(y / x)}\\).${q ? ` Quadrant ${q}: related acute angle \\(${rel}^\\circ\\); positive ratio(s): <strong>${pos}</strong>.` : " The terminal arm lies on an axis."} The other angle in \\([0^\\circ,360^\\circ]\\) with the same sine is \\(${fix(sameSin)}^\\circ\\); with the same cosine, \\(${fix(sameCos)}^\\circ\\).`} />
+        <MathText html={tr(`\\(\\theta=${t}^\\circ\\), point \\((x,y)=(${n(x, 2)},\\ ${n(y, 2)})\\), \\(r=${r}\\): \\(\\sin\\theta=\\frac yr=${n(y / r)}\\), \\(\\cos\\theta=\\frac xr=${n(x / r)}\\), \\(\\tan\\theta=\\frac yx=${Math.abs(x) < 1e-9 ? "\\text{undefined}" : n(y / x)}\\).${q ? ` Quadrant ${q}: related acute angle \\(${rel}^\\circ\\); positive ratio(s): <strong>${pos}</strong>.` : " The terminal arm lies on an axis."} The other angle in \\([0^\\circ,360^\\circ]\\) with the same sine is \\(${fix(sameSin)}^\\circ\\); with the same cosine, \\(${fix(sameCos)}^\\circ\\).`,
+          `\\(\\theta=${t}^\\circ\\), point \\((x,y)=(${n(x, 2)},\\ ${n(y, 2)})\\), \\(r=${r}\\) : \\(\\sin\\theta=\\frac yr=${n(y / r)}\\), \\(\\cos\\theta=\\frac xr=${n(x / r)}\\), \\(\\tan\\theta=\\frac yx=${Math.abs(x) < 1e-9 ? "\\text{non définie}" : n(y / x)}\\).${q ? ` Quadrant ${q} : angle de référence \\(${rel}^\\circ\\); rapport(s) positif(s) : <strong>${pos}</strong>.` : " Le côté terminal est sur un axe."} L'autre angle dans \\([0^\\circ,360^\\circ]\\) qui a le même sinus est \\(${fix(sameSin)}^\\circ\\); celui qui a le même cosinus, \\(${fix(sameCos)}^\\circ\\).`)} />
       </Readout>
     </WidgetCard>
   );
@@ -97,23 +102,25 @@ const IDS: { key: string; tex: string; L: (t: number) => number; R: (t: number) 
   { key: "x", tex: "\\sin\\theta+\\cos\\theta=1\\ \\ (\\text{false!})", L: (t) => Math.sin(t) + Math.cos(t), R: () => 1, lt: "sin θ + cos θ", rt: "1" },
 ];
 export function IdentityCheck({ start = "py" }: { start?: string }) {
+  const tr = useT();
   const [k, setK] = useState(start), [t, setT] = useState(40);
   const I = IDS.find((i) => i.key === k) ?? IDS[0];
   const L = I.L(rad(t)), R = I.R(rad(t)), ok = Math.abs(L - R) < 1e-9 && Number.isFinite(L);
   const s = Math.sin(rad(t)), c = Math.cos(rad(t));
   return (
-    <WidgetCard title="Testing an identity" subtitle="an identity is true for every angle where both sides are defined">
-      <Row><Segmented value={k} onChange={setK} options={IDS.map((i) => ({ value: i.key, label: i.key === "x" ? "a non-identity" : i.lt }))} /></Row>
+    <WidgetCard title={tr("Testing an identity", "Vérifier une identité")} subtitle={tr("an identity is true for every angle where both sides are defined", "une identité est vraie pour tout angle où les deux membres sont définis")}>
+      <Row><Segmented value={k} onChange={setK} options={IDS.map((i) => ({ value: i.key, label: i.key === "x" ? tr("a non-identity", "une non-identité") : i.lt }))} /></Row>
       <Row><Slider label="θ" value={t} min={0} max={360} onChange={setT} format={(v) => `${v}°`} color={C.red} /></Row>
       <table style={{ borderCollapse: "collapse", margin: "6px auto", fontSize: 15 }}>
         <tbody>
-          <tr><th style={cell}>sin θ</th><td style={cell}>{n(s, 4)}</td><th style={cell}>cos θ</th><td style={cell}>{n(c, 4)}</td><th style={cell}>tan θ</th><td style={cell}>{Math.abs(c) < 1e-9 ? "undefined" : n(s / c, 4)}</td></tr>
-          <tr><th style={cell}>csc θ</th><td style={cell}>{Math.abs(s) < 1e-9 ? "undefined" : n(1 / s, 4)}</td><th style={cell}>sec θ</th><td style={cell}>{Math.abs(c) < 1e-9 ? "undefined" : n(1 / c, 4)}</td><th style={cell}>cot θ</th><td style={cell}>{Math.abs(s) < 1e-9 ? "undefined" : n(c / s, 4)}</td></tr>
-          <tr><th style={{ ...cell, color: C.blue }}>LS: {I.lt}</th><td style={{ ...cell, fontWeight: 700 }} colSpan={2}>{Number.isFinite(L) && Math.abs(L) < 1e6 ? n(L, 6) : "undefined"}</td><th style={{ ...cell, color: C.green }}>RS: {I.rt}</th><td style={{ ...cell, fontWeight: 700 }} colSpan={2}>{Number.isFinite(R) && Math.abs(R) < 1e6 ? n(R, 6) : "undefined"}</td></tr>
+          <tr><th style={cell}>sin θ</th><td style={cell}>{n(s, 4)}</td><th style={cell}>cos θ</th><td style={cell}>{n(c, 4)}</td><th style={cell}>tan θ</th><td style={cell}>{Math.abs(c) < 1e-9 ? tr("undefined", "non définie") : n(s / c, 4)}</td></tr>
+          <tr><th style={cell}>csc θ</th><td style={cell}>{Math.abs(s) < 1e-9 ? tr("undefined", "non définie") : n(1 / s, 4)}</td><th style={cell}>sec θ</th><td style={cell}>{Math.abs(c) < 1e-9 ? tr("undefined", "non définie") : n(1 / c, 4)}</td><th style={cell}>cot θ</th><td style={cell}>{Math.abs(s) < 1e-9 ? tr("undefined", "non définie") : n(c / s, 4)}</td></tr>
+          <tr><th style={{ ...cell, color: C.blue }}>{tr("LS: ", "MG : ")}{I.lt}</th><td style={{ ...cell, fontWeight: 700 }} colSpan={2}>{Number.isFinite(L) && Math.abs(L) < 1e6 ? n(L, 6) : tr("undefined", "non défini")}</td><th style={{ ...cell, color: C.green }}>{tr("RS: ", "MD : ")}{I.rt}</th><td style={{ ...cell, fontWeight: 700 }} colSpan={2}>{Number.isFinite(R) && Math.abs(R) < 1e6 ? n(R, 6) : tr("undefined", "non défini")}</td></tr>
         </tbody>
       </table>
       <Readout tone={ok ? "green" : "amber"}>
-        <MathText html={`\\(${I.tex}\\) at \\(\\theta=${t}^\\circ\\): ${ok ? "both sides agree." : Number.isFinite(L) && Math.abs(L) < 1e6 ? "the sides DISAGREE — one counter-example is enough to show this is not an identity." : "a side is undefined here (cos θ = 0 or sin θ = 0); identities only need to hold where both sides are defined."} Checking angles is evidence, not proof — a proof transforms one side into the other.`} />
+        <MathText html={tr(`\\(${I.tex}\\) at \\(\\theta=${t}^\\circ\\): ${ok ? "both sides agree." : Number.isFinite(L) && Math.abs(L) < 1e6 ? "the sides DISAGREE — one counter-example is enough to show this is not an identity." : "a side is undefined here (cos θ = 0 or sin θ = 0); identities only need to hold where both sides are defined."} Checking angles is evidence, not proof — a proof transforms one side into the other.`,
+          `\\(${I.tex.replace("\\text{false!}", "\\text{faux!}")}\\) à \\(\\theta=${t}^\\circ\\) : ${ok ? "les deux membres sont égaux." : Number.isFinite(L) && Math.abs(L) < 1e6 ? "les membres NE SONT PAS ÉGAUX — un seul contre-exemple suffit pour montrer que ce n'est pas une identité." : "un membre n'est pas défini ici (cos θ = 0 ou sin θ = 0); une identité doit être vraie seulement là où les deux membres sont définis."} Vérifier des angles fournit un indice, pas une preuve — une preuve transforme un membre pour obtenir l'autre.`)} />
       </Readout>
     </WidgetCard>
   );
@@ -123,6 +130,7 @@ export function IdentityCheck({ start = "py" }: { start?: string }) {
 
 export function AmbiguousCase({ init = [35, 10, 7] }: { init?: [number, number, number] }) {
   const [A, setA] = useState(init[0]), [b, setB] = useState(init[1]), [a, setAa] = useState(init[2]);
+  const t = useT();
   const h = b * Math.sin(rad(A));
   // solutions for angle B
   const sB = (b * Math.sin(rad(A))) / a;
@@ -135,7 +143,7 @@ export function AmbiguousCase({ init = [35, 10, 7] }: { init?: [number, number, 
   const Cx = ox + b * Math.cos(rad(A)) * sc, Cy = oy - b * Math.sin(rad(A)) * sc;
   const tone = sols.length === 2 ? "amber" : sols.length === 1 ? "green" : "red";
   return (
-    <WidgetCard title="The ambiguous case (SSA)" subtitle="given ∠A, side b and the side a opposite ∠A: zero, one or two triangles">
+    <WidgetCard title={t("The ambiguous case (SSA)", "Le cas ambigu (CCA)")} subtitle={t("given ∠A, side b and the side a opposite ∠A: zero, one or two triangles", "étant donné ∠A, le côté b et le côté a opposé à ∠A : zéro, un ou deux triangles")}>
       <Row>
         <Slider label="∠A" value={A} min={10} max={150} onChange={setA} format={(v) => `${v}°`} color={C.red} />
         <Slider label="b" value={b} min={4} max={14} onChange={setB} color={C.blue} />
@@ -152,7 +160,8 @@ export function AmbiguousCase({ init = [35, 10, 7] }: { init?: [number, number, 
         {lbl(Cx + 6, (Cy + oy) / 2, `h = ${n(h, 2)}`, C.muted, 12, "start")}
       </svg>
       <Readout tone={tone}>
-        <MathText html={`Height \\(h=b\\sin A=${n(h, 2)}\\). ${A >= 90 ? `∠A is not acute: one triangle if \\(a>b\\), none otherwise.` : `For acute ∠A: \\(a<h\\) → none; \\(a=h\\) → one right triangle; \\(h<a<b\\) → two; \\(a\\ge b\\) → one.`} Here \\(a=${n(a, 1)}\\): <strong>${sols.length} triangle${sols.length === 1 ? "" : "s"}</strong>.${sols.map((s, i) => ` Triangle ${i + 1}: ∠B ≈ ${n(s.B, 1)}°, ∠C ≈ ${n(s.C, 1)}°, c ≈ ${n(s.c, 2)}.`).join("")}`} />
+        <MathText html={t(`Height \\(h=b\\sin A=${n(h, 2)}\\). ${A >= 90 ? `∠A is not acute: one triangle if \\(a>b\\), none otherwise.` : `For acute ∠A: \\(a<h\\) → none; \\(a=h\\) → one right triangle; \\(h<a<b\\) → two; \\(a\\ge b\\) → one.`} Here \\(a=${n(a, 1)}\\): <strong>${sols.length} triangle${sols.length === 1 ? "" : "s"}</strong>.${sols.map((s, i) => ` Triangle ${i + 1}: ∠B ≈ ${n(s.B, 1)}°, ∠C ≈ ${n(s.C, 1)}°, c ≈ ${n(s.c, 2)}.`).join("")}`,
+          `Hauteur \\(h=b\\sin A=${n(h, 2)}\\). ${A >= 90 ? `∠A n'est pas aigu : un triangle si \\(a>b\\), aucun sinon.` : `Pour ∠A aigu : \\(a<h\\) → aucun; \\(a=h\\) → un triangle rectangle; \\(h<a<b\\) → deux; \\(a\\ge b\\) → un.`} Ici \\(a=${n(a, 1)}\\) : <strong>${sols.length} triangle${sols.length > 1 ? "s" : ""}</strong>.${sols.map((s, i) => ` Triangle ${i + 1} : ∠B ≈ ${n(s.B, 1)}°, ∠C ≈ ${n(s.C, 1)}°, c ≈ ${n(s.c, 2)}.`).join("")}`)} />
       </Readout>
     </WidgetCard>
   );
@@ -162,12 +171,13 @@ export function AmbiguousCase({ init = [35, 10, 7] }: { init?: [number, number, 
 
 export function CosineLaw({ init = [7, 9, 60] }: { init?: [number, number, number] }) {
   const [b, setB] = useState(init[0]), [c, setC] = useState(init[1]), [A, setA] = useState(init[2]);
+  const t = useT();
   const a = Math.sqrt(b * b + c * c - 2 * b * c * Math.cos(rad(A)));
   const B = deg(Math.acos((a * a + c * c - b * b) / (2 * a * c))), Cc = 180 - A - B;
   const W = 520, H = 300, sc = 300 / Math.max(b, c, a) / 1.15, ox = 60 + Math.max(0, -b * Math.cos(rad(A)) * sc), oy = 260;
   const Bp = [ox + c * sc, oy], Cp = [ox + b * Math.cos(rad(A)) * sc, oy - b * Math.sin(rad(A)) * sc];
   return (
-    <WidgetCard title="The cosine law" subtitle="a² = b² + c² − 2bc cos A — Pythagoras with a correction term">
+    <WidgetCard title={t("The cosine law", "La loi des cosinus")} subtitle={t("a² = b² + c² − 2bc cos A — Pythagoras with a correction term", "a² = b² + c² − 2bc cos A — Pythagore avec un terme de correction")}>
       <Row>
         <Slider label="b" value={b} min={2} max={14} onChange={setB} color={C.blue} />
         <Slider label="c" value={c} min={2} max={14} onChange={setC} color={C.green} />
@@ -182,7 +192,8 @@ export function CosineLaw({ init = [7, 9, 60] }: { init?: [number, number, numbe
         {lbl((Bp[0] + Cp[0]) / 2 + 10, (Bp[1] + Cp[1]) / 2, `a ≈ ${n(a, 2)}`, C.violet, 14, "start")}
       </svg>
       <Readout tone="green">
-        <MathText html={`\\(a^2=${b}^2+${c}^2-2(${b})(${c})\\cos${A}^\\circ=${n(b * b + c * c, 2)}-${n(2 * b * c * Math.cos(rad(A)), 2)}\\Rightarrow a\\approx${n(a, 2)}\\). ${A === 90 ? "At 90°, cos A = 0 and this is exactly the Pythagorean theorem." : A > 90 ? "∠A is obtuse, so cos A < 0 and the correction term ADDS: a is longer than the hypotenuse of a right triangle with legs b and c." : "∠A is acute, so cos A > 0 and a is shorter than √(b² + c²)."} Remaining angles: ∠B ≈ ${n(B, 1)}°, ∠C ≈ ${n(Cc, 1)}°.`} />
+        <MathText html={t(`\\(a^2=${b}^2+${c}^2-2(${b})(${c})\\cos${A}^\\circ=${n(b * b + c * c, 2)}-${n(2 * b * c * Math.cos(rad(A)), 2)}\\Rightarrow a\\approx${n(a, 2)}\\). ${A === 90 ? "At 90°, cos A = 0 and this is exactly the Pythagorean theorem." : A > 90 ? "∠A is obtuse, so cos A < 0 and the correction term ADDS: a is longer than the hypotenuse of a right triangle with legs b and c." : "∠A is acute, so cos A > 0 and a is shorter than √(b² + c²)."} Remaining angles: ∠B ≈ ${n(B, 1)}°, ∠C ≈ ${n(Cc, 1)}°.`,
+          `\\(a^2=${b}^2+${c}^2-2(${b})(${c})\\cos${A}^\\circ=${n(b * b + c * c, 2)}-${n(2 * b * c * Math.cos(rad(A)), 2)}\\Rightarrow a\\approx${n(a, 2)}\\). ${A === 90 ? "À 90°, cos A = 0 et c'est exactement le théorème de Pythagore." : A > 90 ? "∠A est obtus, donc cos A < 0 et le terme de correction S'AJOUTE : a est plus long que l'hypoténuse d'un triangle rectangle de cathètes b et c." : "∠A est aigu, donc cos A > 0 et a est plus court que √(b² + c²)."} Angles restants : ∠B ≈ ${n(B, 1)}°, ∠C ≈ ${n(Cc, 1)}°.`)} />
       </Readout>
     </WidgetCard>
   );
@@ -192,6 +203,7 @@ export function CosineLaw({ init = [7, 9, 60] }: { init?: [number, number, numbe
 
 export function TowerLab({ init = [120, 50, 70, 28] }: { init?: [number, number, number, number] }) {
   const [d, setD] = useState(init[0]), [al, setAl] = useState(init[1]), [be, setBe] = useState(init[2]), [th, setTh] = useState(init[3]);
+  const t = useT();
   const Cang = 180 - al - be;
   const AC = (d * Math.sin(rad(be))) / Math.sin(rad(Cang)); // sine law in the ground triangle
   const h = AC * Math.tan(rad(th));
@@ -201,14 +213,14 @@ export function TowerLab({ init = [120, 50, 70, 28] }: { init?: [number, number,
   const Ag = [0, 0], Bg = [d, 0], Cg = [AC * Math.cos(rad(al)), AC * Math.sin(rad(al))];
   const A2 = pr(Ag[0], Ag[1], 0), B2 = pr(Bg[0], Bg[1], 0), C2 = pr(Cg[0], Cg[1], 0), T2 = pr(Cg[0], Cg[1], Math.min(h, 400 / s));
   return (
-    <WidgetCard title="A height across a river" subtitle="two angles on the ground (sine law), then an angle of elevation (tangent)">
+    <WidgetCard title={t("A height across a river", "Une hauteur de l'autre côté d'une rivière")} subtitle={t("two angles on the ground (sine law), then an angle of elevation (tangent)", "deux angles au sol (loi des sinus), puis un angle d'élévation (tangente)")}>
       <Row>
         <Slider label="AB (m)" value={d} min={40} max={200} step={10} onChange={setD} color={C.blue} />
         <Slider label="∠CAB" value={al} min={20} max={80} onChange={setAl} format={(v) => `${v}°`} color={C.red} />
       </Row>
       <Row>
         <Slider label="∠CBA" value={be} min={20} max={80} onChange={setBe} format={(v) => `${v}°`} color={C.green} />
-        <Slider label="elevation" value={th} min={5} max={60} onChange={setTh} format={(v) => `${v}°`} color={C.violet} />
+        <Slider label={t("elevation", "élévation")} value={th} min={5} max={60} onChange={setTh} format={(v) => `${v}°`} color={C.violet} />
       </Row>
       <svg viewBox={`0 0 ${W} ${H}`} style={svgBox} role="img" aria-label="Three-dimensional tower problem">
         <polygon points={`${A2} ${B2} ${C2}`} fill={C.greenSoft} stroke={C.green} strokeWidth={2} />
@@ -218,7 +230,8 @@ export function TowerLab({ init = [120, 50, 70, 28] }: { init?: [number, number,
         {lbl((A2[0] + B2[0]) / 2, A2[1] + 20, `${d} m`, C.blue, 13)}
       </svg>
       <Readout tone={Cang > 0 ? "green" : "red"}>
-        <MathText html={Cang <= 0 ? "The two ground angles must add to less than 180°." : `Ground triangle: \\(\\angle C=180^\\circ-${al}^\\circ-${be}^\\circ=${Cang}^\\circ\\). Sine law: \\(AC=\\frac{${d}\\sin${be}^\\circ}{\\sin${Cang}^\\circ}\\approx${n(AC, 1)}\\) m. Vertical triangle ACT: \\(h=AC\\tan${th}^\\circ\\approx${n(h, 1)}\\) m. Two planes, two triangles: one horizontal (sine law), one vertical (right triangle).`} />
+        <MathText html={Cang <= 0 ? t("The two ground angles must add to less than 180°.", "La somme des deux angles au sol doit être inférieure à 180°.") : t(`Ground triangle: \\(\\angle C=180^\\circ-${al}^\\circ-${be}^\\circ=${Cang}^\\circ\\). Sine law: \\(AC=\\frac{${d}\\sin${be}^\\circ}{\\sin${Cang}^\\circ}\\approx${n(AC, 1)}\\) m. Vertical triangle ACT: \\(h=AC\\tan${th}^\\circ\\approx${n(h, 1)}\\) m. Two planes, two triangles: one horizontal (sine law), one vertical (right triangle).`,
+          `Triangle au sol : \\(\\angle C=180^\\circ-${al}^\\circ-${be}^\\circ=${Cang}^\\circ\\). Loi des sinus : \\(AC=\\frac{${d}\\sin${be}^\\circ}{\\sin${Cang}^\\circ}\\approx${n(AC, 1)}\\) m. Triangle vertical ACT : \\(h=AC\\tan${th}^\\circ\\approx${n(h, 1)}\\) m. Deux plans, deux triangles : un horizontal (loi des sinus), un vertical (triangle rectangle).`)} />
       </Readout>
     </WidgetCard>
   );

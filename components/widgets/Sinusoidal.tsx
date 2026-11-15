@@ -73,24 +73,34 @@ const SHAPES = {
   damped: { name: "a bouncing spring (cm) vs time (s)", f: (t: number) => 8 * Math.exp(-0.15 * t) * Math.cos(rad(90 * t)), xmax: 20, ymin: -9, ymax: 9, xs: 2, ys: 3, period: 4, periodic: false },
 } as const;
 type ShapeKey = keyof typeof SHAPES;
+const SHAPES_FR: Record<ShapeKey, string> = {
+  tide: "Hauteur de la marée (m) en fonction du temps (h)",
+  pulse: "Pression artérielle (mm Hg) en fonction du temps (s)",
+  saw: "Eau dans un réservoir qui se remplit (L) en fonction du temps (min)",
+  damped: "Un ressort qui rebondit (cm) en fonction du temps (s)",
+};
 
 export function PeriodicReader({ shape = "tide" }: { shape?: ShapeKey }) {
   const [k, setK] = useState<ShapeKey>(shape);
+  const t = useT();
   const S = SHAPES[k];
+  const sName = t(S.name, SHAPES_FR[k]);
   const [s, setS] = useState(0);
   const start = Math.min(s, S.xmax - S.period);
   let mx = -Infinity, mn = Infinity;
   for (let i = 0; i <= 600; i++) { const v = S.f((S.xmax * i) / 600); mx = Math.max(mx, v); mn = Math.min(mn, v); }
   const later = S.f(start + S.period), now = S.f(start);
   return (
-    <WidgetCard title="Is it periodic?" subtitle="slide the shaded window: one period later, does the graph repeat?">
-      <Row><Segmented value={k} onChange={(v) => { setK(v); setS(0); }} options={[{ value: "tide", label: "tide" }, { value: "pulse", label: "pulse" }, { value: "saw", label: "refilling tank" }, { value: "damped", label: "spring" }]} /></Row>
-      <Slider label="window start" value={start} min={0} max={S.xmax - S.period} step={S.period / 20} onChange={setS} format={(v) => n(v)} color={C.amber} />
+    <WidgetCard title={t("Is it periodic?", "Est-ce périodique?")} subtitle={t("slide the shaded window: one period later, does the graph repeat?", "fais glisser la fenêtre ombrée : une période plus tard, le graphique se répète-t-il?")}>
+      <Row><Segmented value={k} onChange={(v) => { setK(v); setS(0); }} options={[{ value: "tide", label: t("tide", "marée") }, { value: "pulse", label: t("pulse", "pouls") }, { value: "saw", label: t("refilling tank", "réservoir") }, { value: "damped", label: t("spring", "ressort") }]} /></Row>
+      <Slider label={t("window start", "début de la fenêtre")} value={start} min={0} max={S.xmax - S.period} step={S.period / 20} onChange={setS} format={(v) => n(v)} color={C.amber} />
       <Plot xmin={0} xmax={S.xmax} ymin={S.ymin} ymax={S.ymax} xs={S.xs} ys={S.ys} xlab="t" shade={[start, start + S.period]} curves={[{ f: S.f, color: C.violet }]} pts={[{ x: start, y: now, color: C.blue }, { x: start + S.period, y: later, color: C.red }]} />
       <Readout tone={S.periodic ? "green" : "amber"}>
         <MathText html={S.periodic
-          ? `${S.name}. Value at the start of the window \\(${n(now)}\\), one period later \\(${n(later)}\\): the pattern repeats, so the function is <strong>periodic</strong> with period \\(${S.period}\\). Max \\(${n(mx)}\\), min \\(${n(mn)}\\), so the axis is \\(y=${n((mx + mn) / 2)}\\) and the amplitude is \\(${n((mx - mn) / 2)}\\).`
-          : `${S.name}. Value now \\(${n(now)}\\), ${S.period} s later \\(${n(later)}\\): the swings keep shrinking, so the cycles never repeat exactly — this is <strong>not periodic</strong>, even though it oscillates.`} />
+          ? t(`${sName}. Value at the start of the window \\(${n(now)}\\), one period later \\(${n(later)}\\): the pattern repeats, so the function is <strong>periodic</strong> with period \\(${S.period}\\). Max \\(${n(mx)}\\), min \\(${n(mn)}\\), so the axis is \\(y=${n((mx + mn) / 2)}\\) and the amplitude is \\(${n((mx - mn) / 2)}\\).`,
+              `${sName}. Valeur au début de la fenêtre \\(${n(now)}\\), une période plus tard \\(${n(later)}\\) : le motif se répète, donc la fonction est <strong>périodique</strong> de période \\(${S.period}\\). Max \\(${n(mx)}\\), min \\(${n(mn)}\\), donc l'axe est \\(y=${n((mx + mn) / 2)}\\) et l'amplitude est \\(${n((mx - mn) / 2)}\\).`)
+          : t(`${sName}. Value now \\(${n(now)}\\), ${S.period} s later \\(${n(later)}\\): the swings keep shrinking, so the cycles never repeat exactly — this is <strong>not periodic</strong>, even though it oscillates.`,
+              `${sName}. Valeur maintenant \\(${n(now)}\\), ${S.period} s plus tard \\(${n(later)}\\) : les oscillations rétrécissent sans cesse, donc les cycles ne se répètent jamais exactement — ce n'est <strong>pas périodique</strong>, même si la courbe oscille.`)} />
       </Readout>
     </WidgetCard>
   );
@@ -99,12 +109,13 @@ export function PeriodicReader({ shape = "tide" }: { shape?: ShapeKey }) {
 /* ---------------------------------------------------------------- 6.2 sine and cosine from the unit circle */
 
 export function UnitWave({ fn = "sin" }: { fn?: "sin" | "cos" }) {
+  const tr = useT();
   const [f, setF] = useState<"sin" | "cos">(fn);
   const [t, setT] = useState(120);
   const cx = 80, cy = 120, R = 62, px = cx + R * Math.cos(rad(t)), py = cy - R * Math.sin(rad(t));
   const v = trig(f, t);
   return (
-    <WidgetCard title="From the unit circle to a wave" subtitle={f === "sin" ? "the height (y) of the point becomes the graph" : "the horizontal position (x) of the point becomes the graph"}>
+    <WidgetCard title={tr("From the unit circle to a wave", "Du cercle unitaire à une onde")} subtitle={f === "sin" ? tr("the height (y) of the point becomes the graph", "la hauteur (y) du point devient le graphique") : tr("the horizontal position (x) of the point becomes the graph", "la position horizontale (x) du point devient le graphique")}>
       <Row>
         <Segmented value={f} onChange={setF} options={[{ value: "sin", label: "y = sin x" }, { value: "cos", label: "y = cos x" }]} />
       </Row>
@@ -121,7 +132,8 @@ export function UnitWave({ fn = "sin" }: { fn?: "sin" | "cos" }) {
         <Plot xmin={0} xmax={720} ymin={-1.5} ymax={1.5} xs={90} ys={0.5} W={420} H={230} curves={[{ f: (x) => trig(f, x), color: C.line, width: 1.5 }, { f: (x) => trig(f, x), color: C.violet, to: t }]} pts={[{ x: t, y: v, label: `(${t}°, ${n(v)})` }]} />
       </div>
       <Readout tone="green">
-        <MathText html={`\\(\\${f}${t}^\\circ=${n(v, 3)}\\). Period \\(360^\\circ\\) (one full turn), amplitude \\(1\\), axis \\(y=0\\), range \\(-1\\le y\\le1\\). ${f === "sin" ? "Zeros at 0°, 180°, 360°, …; maximum at 90°." : "Maximum at 0° and 360°; zeros at 90°, 270°, …"} ${t > 360 ? `Notice \\(\\${f}${t}^\\circ=\\${f}${t - 360}^\\circ\\): the graph repeats.` : ""}`} />
+        <MathText html={tr(`\\(\\${f}${t}^\\circ=${n(v, 3)}\\). Period \\(360^\\circ\\) (one full turn), amplitude \\(1\\), axis \\(y=0\\), range \\(-1\\le y\\le1\\). ${f === "sin" ? "Zeros at 0°, 180°, 360°, …; maximum at 90°." : "Maximum at 0° and 360°; zeros at 90°, 270°, …"} ${t > 360 ? `Notice \\(\\${f}${t}^\\circ=\\${f}${t - 360}^\\circ\\): the graph repeats.` : ""}`,
+          `\\(\\${f}${t}^\\circ=${n(v, 3)}\\). Période \\(360^\\circ\\) (un tour complet), amplitude \\(1\\), axe \\(y=0\\), image \\(-1\\le y\\le1\\). ${f === "sin" ? "Zéros à 0°, 180°, 360°, … ; maximum à 90°." : "Maximum à 0° et à 360° ; zéros à 90°, 270°, …"} ${t > 360 ? `Remarque que \\(\\${f}${t}^\\circ=\\${f}${t - 360}^\\circ\\) : le graphique se répète.` : ""}`)} />
       </Readout>
     </WidgetCard>
   );
@@ -130,19 +142,20 @@ export function UnitWave({ fn = "sin" }: { fn?: "sin" | "cos" }) {
 /* ---------------------------------------------------------------- 6.3 Ferris wheel */
 
 export function WheelLab({ init = [10, 12, 60] }: { init?: [number, number, number] }) {
+  const tr = useT();
   const [r, setR] = useState(init[0]), [hub, setHub] = useState(init[1]), [T, setT] = useState(init[2]), [t, setTime] = useState(Math.round(init[2] / 3));
   const H = (s: number) => hub - r * Math.cos(rad((360 * s) / T)); // rider boards at the bottom
   const ang = (360 * t) / T, cx = 80, cy = 110, S = 70 / Math.max(r, 1);
   const rx = cx + r * S * Math.sin(rad(ang)), ry = cy + r * S * Math.cos(rad(ang));
   return (
-    <WidgetCard title="Riding a Ferris wheel" subtitle="height of a rider who boards at the bottom, against time">
+    <WidgetCard title={tr("Riding a Ferris wheel", "Un tour de grande roue")} subtitle={tr("height of a rider who boards at the bottom, against time", "hauteur d'une personne qui embarque en bas, en fonction du temps")}>
       <Row>
-        <Slider label="radius (m)" value={r} min={4} max={20} onChange={(v) => { setR(v); if (hub < v + 1) setHub(v + 1); }} color={C.blue} />
-        <Slider label="hub height (m)" value={hub} min={r + 1} max={30} onChange={setHub} color={C.green} />
+        <Slider label={tr("radius (m)", "rayon (m)")} value={r} min={4} max={20} onChange={(v) => { setR(v); if (hub < v + 1) setHub(v + 1); }} color={C.blue} />
+        <Slider label={tr("hub height (m)", "hauteur du moyeu (m)")} value={hub} min={r + 1} max={30} onChange={setHub} color={C.green} />
       </Row>
       <Row>
-        <Slider label="one turn (s)" value={T} min={20} max={120} step={5} onChange={setT} color={C.violet} />
-        <Slider label="time t (s)" value={t} min={0} max={2 * T} onChange={setTime} color={C.red} />
+        <Slider label={tr("one turn (s)", "un tour (s)")} value={T} min={20} max={120} step={5} onChange={setT} color={C.violet} />
+        <Slider label={tr("time t (s)", "temps t (s)")} value={t} min={0} max={2 * T} onChange={setTime} color={C.red} />
       </Row>
       <svg viewBox="0 0 170 220" style={{ ...svgBox, maxWidth: 160, display: "inline-block", verticalAlign: "middle" }} role="img" aria-label="Ferris wheel">
         <circle cx={cx} cy={cy} r={r * S} fill="none" stroke={C.blue} strokeWidth={2} />
@@ -151,10 +164,11 @@ export function WheelLab({ init = [10, 12, 60] }: { init?: [number, number, numb
         <circle cx={rx} cy={ry} r={6} fill={C.red} />
       </svg>
       <div style={{ display: "inline-block", width: "calc(100% - 170px)", minWidth: 260, verticalAlign: "middle" }}>
-        <Plot xmin={0} xmax={2 * T} ymin={0} ymax={Math.max(10, Math.ceil((hub + r + 2) / 5) * 5)} xs={T / 4} ys={5} W={430} H={230} xlab="t" hl={[{ y: hub, color: C.green, label: "axis" }]} curves={[{ f: H, color: C.violet }]} pts={[{ x: t, y: H(t), label: `${n(H(t), 1)} m` }]} />
+        <Plot xmin={0} xmax={2 * T} ymin={0} ymax={Math.max(10, Math.ceil((hub + r + 2) / 5) * 5)} xs={T / 4} ys={5} W={430} H={230} xlab="t" hl={[{ y: hub, color: C.green, label: tr("axis", "axe") }]} curves={[{ f: H, color: C.violet }]} pts={[{ x: t, y: H(t), label: `${n(H(t), 1)} m` }]} />
       </div>
       <Readout tone="green">
-        <MathText html={`Max \\(${hub + r}\\) m, min \\(${hub - r}\\) m, axis \\(h=${hub}\\) m (the hub), amplitude \\(${r}\\) m (the radius), period \\(${T}\\) s. At \\(t=${t}\\) s the rider is \\(${n(H(t), 1)}\\) m high. First maximum at \\(t=${n(T / 2)}\\) s (half a turn).`} />
+        <MathText html={tr(`Max \\(${hub + r}\\) m, min \\(${hub - r}\\) m, axis \\(h=${hub}\\) m (the hub), amplitude \\(${r}\\) m (the radius), period \\(${T}\\) s. At \\(t=${t}\\) s the rider is \\(${n(H(t), 1)}\\) m high. First maximum at \\(t=${n(T / 2)}\\) s (half a turn).`,
+          `Max \\(${hub + r}\\) m, min \\(${hub - r}\\) m, axe \\(h=${hub}\\) m (le moyeu), amplitude \\(${r}\\) m (le rayon), période \\(${T}\\) s. À \\(t=${t}\\) s, la personne est à \\(${n(H(t), 1)}\\) m de hauteur. Premier maximum à \\(t=${n(T / 2)}\\) s (un demi-tour).`)} />
       </Readout>
     </WidgetCard>
   );
@@ -165,22 +179,25 @@ export function WheelLab({ init = [10, 12, 60] }: { init?: [number, number, numb
 export function SinTransform({ fn = "sin", init = { a: 2, k: 1, d: 0, c: 0 } }: { fn?: "sin" | "cos"; init?: { a: number; k: number; d: number; c: number } }) {
   const [f, setF] = useState<"sin" | "cos">(fn);
   const [a, setA] = useState(init.a), [k, setK] = useState(init.k), [d, setD] = useState(init.d), [c, setC] = useState(init.c);
+  const t = useT(), fr = useLang() === "fr";
+  const hL = fr ? "c" : "d", vL = fr ? "d" : "c"; // displayed letters: French writes y = a sin(k(x − c)) + d (state d = horizontal, c = vertical)
   const g = (x: number) => a * trig(f, k * (x - d)) + c;
   const P = 360 / Math.abs(k), lo = c - Math.abs(a), hi = c + Math.abs(a);
   return (
-    <WidgetCard title="The four parameters" subtitle="y = a·sin(k(x − d)) + c compared with its parent (grey)">
-      <Row><Segmented value={f} onChange={setF} options={[{ value: "sin", label: "sine" }, { value: "cos", label: "cosine" }]} /></Row>
+    <WidgetCard title={t("The four parameters", "Les quatre paramètres")} subtitle={t("y = a·sin(k(x − d)) + c compared with its parent (grey)", "y = a·sin(k(x − c)) + d comparée à sa fonction parent (en gris)")}>
+      <Row><Segmented value={f} onChange={setF} options={[{ value: "sin", label: t("sine", "sinus") }, { value: "cos", label: t("cosine", "cosinus") }]} /></Row>
       <Row>
         <Slider label="a" value={a} min={-4} max={4} step={0.5} onChange={setA} color={C.red} />
         <Slider label="k" value={k} min={0.5} max={4} step={0.5} onChange={setK} color={C.blue} />
       </Row>
       <Row>
-        <Slider label="d" value={d} min={-180} max={180} step={15} onChange={setD} format={(v) => `${v}°`} color={C.green} />
-        <Slider label="c" value={c} min={-4} max={4} step={0.5} onChange={setC} color={C.violet} />
+        <Slider label={hL} value={d} min={-180} max={180} step={15} onChange={setD} format={(v) => `${v}°`} color={C.green} />
+        <Slider label={vL} value={c} min={-4} max={4} step={0.5} onChange={setC} color={C.violet} />
       </Row>
       <Plot xmin={-180} xmax={720} ymin={-8} ymax={8} xs={90} ys={2} curves={[{ f: (x) => trig(f, x), color: C.muted, width: 1.5, dash: true }, { f: g, color: C.violet }]} hl={[{ y: c, color: C.green, label: `y = ${n(c)}` }]} vl={[{ x: d, color: C.amber }]} />
       <Readout tone="green">
-        <MathText html={`\\(${eqTex(f, a, k, d, c)}\\). Amplitude \\(|a|=${n(Math.abs(a))}\\)${a < 0 ? " (reflected in the axis)" : ""}; period \\(\\frac{360^\\circ}{${n(k)}}=${n(P)}^\\circ\\); phase shift \\(${n(Math.abs(d))}^\\circ\\) ${d > 0 ? "right" : d < 0 ? "left" : "(none)"}; axis \\(y=${n(c)}\\); range \\(${n(lo)}\\le y\\le${n(hi)}\\).`} />
+        <MathText html={t(`\\(${eqTex(f, a, k, d, c)}\\). Amplitude \\(|a|=${n(Math.abs(a))}\\)${a < 0 ? " (reflected in the axis)" : ""}; period \\(\\frac{360^\\circ}{${n(k)}}=${n(P)}^\\circ\\); phase shift \\(${n(Math.abs(d))}^\\circ\\) ${d > 0 ? "right" : d < 0 ? "left" : "(none)"}; axis \\(y=${n(c)}\\); range \\(${n(lo)}\\le y\\le${n(hi)}\\).`,
+          `\\(${eqTex(f, a, k, d, c)}\\). Amplitude \\(|a|=${n(Math.abs(a))}\\)${a < 0 ? " (réflexion par rapport à l'axe)" : ""}; période \\(\\frac{360^\\circ}{${n(k)}}=${n(P)}^\\circ\\); déphasage de \\(${n(Math.abs(d))}^\\circ\\) ${d > 0 ? "vers la droite" : d < 0 ? "vers la gauche" : "(aucun)"}; axe \\(y=${n(c)}\\); image \\(${n(lo)}\\le y\\le${n(hi)}\\).`)} />
       </Readout>
     </WidgetCard>
   );
@@ -191,27 +208,30 @@ export function SinTransform({ fn = "sin", init = { a: 2, k: 1, d: 0, c: 0 } }: 
 export function KeyPointMapper({ fn = "sin", init = { a: 3, k: 2, d: 30, c: 1 } }: { fn?: "sin" | "cos"; init?: { a: number; k: number; d: number; c: number } }) {
   const [f, setF] = useState<"sin" | "cos">(fn);
   const [a, setA] = useState(init.a), [k, setK] = useState(init.k), [d, setD] = useState(init.d), [c, setC] = useState(init.c);
+  const t = useT(), fr = useLang() === "fr";
+  const hL = fr ? "c" : "d", vL = fr ? "d" : "c"; // displayed letters: French writes y = a sin(k(x − c)) + d (state d = horizontal, c = vertical)
   const base = [0, 90, 180, 270, 360].map((x) => [x, Math.round(trig(f, x))] as const);
   const img = base.map(([x, y]) => [x / k + d, a * y + c] as const);
   const xmax = Math.max(400, ...img.map((p) => p[0]) ) + 30, xmin = Math.min(-30, ...img.map((p) => p[0])) - 30;
   return (
-    <WidgetCard title="Mapping the five key points" subtitle="(x, y) → (x/k + d, a·y + c)">
-      <Row><Segmented value={f} onChange={setF} options={[{ value: "sin", label: "sine" }, { value: "cos", label: "cosine" }]} /></Row>
+    <WidgetCard title={t("Mapping the five key points", "Transformer les cinq points clés")} subtitle={t("(x, y) → (x/k + d, a·y + c)", "(x, y) → (x/k + c, a·y + d)")}>
+      <Row><Segmented value={f} onChange={setF} options={[{ value: "sin", label: t("sine", "sinus") }, { value: "cos", label: t("cosine", "cosinus") }]} /></Row>
       <Row>
         <Slider label="a" value={a} min={-4} max={4} step={0.5} onChange={setA} color={C.red} />
         <Slider label="k" value={k} min={0.5} max={4} step={0.5} onChange={setK} color={C.blue} />
       </Row>
       <Row>
-        <Slider label="d" value={d} min={-90} max={90} step={15} onChange={setD} format={(v) => `${v}°`} color={C.green} />
-        <Slider label="c" value={c} min={-3} max={3} step={0.5} onChange={setC} color={C.violet} />
+        <Slider label={hL} value={d} min={-90} max={90} step={15} onChange={setD} format={(v) => `${v}°`} color={C.green} />
+        <Slider label={vL} value={c} min={-3} max={3} step={0.5} onChange={setC} color={C.violet} />
       </Row>
       <table style={{ borderCollapse: "collapse", margin: "6px auto", fontSize: 14 }}>
-        <thead><tr><th style={cell}>parent (x, y)</th><th style={cell}>image (x/k + d, ay + c)</th></tr></thead>
+        <thead><tr><th style={cell}>{t("parent (x, y)", "parent (x, y)")}</th><th style={cell}>{t("image (x/k + d, ay + c)", "image (x/k + c, ay + d)")}</th></tr></thead>
         <tbody>{base.map(([x, y], i) => <tr key={x}><td style={cell}>({x}°, {y})</td><td style={{ ...cell, color: C.red, fontWeight: 700 }}>({n(img[i][0])}°, {n(img[i][1])})</td></tr>)}</tbody>
       </table>
       <Plot xmin={xmin} xmax={xmax} ymin={-8} ymax={8} xs={xmax - xmin > 600 ? 90 : 45} ys={2} curves={[{ f: (x) => a * trig(f, k * (x - d)) + c, color: C.violet }]} pts={img.map(([x, y]) => ({ x, y }))} hl={[{ y: c, color: C.green }]} />
       <Readout tone="green">
-        <MathText html={`\\(${eqTex(f, a, k, d, c)}\\): one cycle runs from \\(${n(d)}^\\circ\\) to \\(${n(d + 360 / k)}^\\circ\\). Horizontal changes (k, then d) act on x; vertical changes (a, then c) act on y.`} />
+        <MathText html={t(`\\(${eqTex(f, a, k, d, c)}\\): one cycle runs from \\(${n(d)}^\\circ\\) to \\(${n(d + 360 / k)}^\\circ\\). Horizontal changes (k, then d) act on x; vertical changes (a, then c) act on y.`,
+          `\\(${eqTex(f, a, k, d, c)}\\) : un cycle va de \\(${n(d)}^\\circ\\) à \\(${n(d + 360 / k)}^\\circ\\). Les transformations horizontales (k, puis c) agissent sur x; les transformations verticales (a, puis d) agissent sur y.`)} />
       </Readout>
     </WidgetCard>
   );
@@ -222,24 +242,26 @@ export function KeyPointMapper({ fn = "sin", init = { a: 3, k: 2, d: 30, c: 1 } 
 export function FitSinusoid({ target = { fn: "sin", a: 3, k: 2, d: 45, c: 1 } }: { target?: { fn: "sin" | "cos"; a: number; k: number; d: number; c: number } }) {
   const [f, setF] = useState<"sin" | "cos">(target.fn);
   const [a, setA] = useState(1), [k, setK] = useState(1), [d, setD] = useState(0), [c, setC] = useState(0);
+  const t = useT(), fr = useLang() === "fr";
+  const hL = fr ? "c" : "d", vL = fr ? "d" : "c"; // displayed letters: French writes y = a sin(k(x − c)) + d (state d = horizontal, c = vertical)
   const tg = (x: number) => target.a * trig(target.fn, target.k * (x - target.d)) + target.c;
   const me = (x: number) => a * trig(f, k * (x - d)) + c;
   let err = 0; for (let i = 0; i <= 120; i++) { const x = -180 + 6 * i; err = Math.max(err, Math.abs(tg(x) - me(x))); }
   const ok = err < 0.05;
   return (
-    <WidgetCard title="Match the graph" subtitle="find an equation whose graph lies exactly on the dashed curve">
-      <Row><Segmented value={f} onChange={setF} options={[{ value: "sin", label: "use sine" }, { value: "cos", label: "use cosine" }]} /></Row>
+    <WidgetCard title={t("Match the graph", "Reproduis le graphique")} subtitle={t("find an equation whose graph lies exactly on the dashed curve", "trouve une équation dont le graphique se superpose exactement à la courbe pointillée")}>
+      <Row><Segmented value={f} onChange={setF} options={[{ value: "sin", label: t("use sine", "utiliser sinus") }, { value: "cos", label: t("use cosine", "utiliser cosinus") }]} /></Row>
       <Row>
         <Slider label="a" value={a} min={-5} max={5} step={0.5} onChange={setA} color={C.red} />
         <Slider label="k" value={k} min={0.5} max={4} step={0.5} onChange={setK} color={C.blue} />
       </Row>
       <Row>
-        <Slider label="d" value={d} min={-180} max={180} step={15} onChange={setD} format={(v) => `${v}°`} color={C.green} />
-        <Slider label="c" value={c} min={-5} max={5} step={0.5} onChange={setC} color={C.violet} />
+        <Slider label={hL} value={d} min={-180} max={180} step={15} onChange={setD} format={(v) => `${v}°`} color={C.green} />
+        <Slider label={vL} value={c} min={-5} max={5} step={0.5} onChange={setC} color={C.violet} />
       </Row>
       <Plot xmin={-180} xmax={540} ymin={-9} ymax={9} xs={45} ys={1} curves={[{ f: tg, color: C.amber, dash: true, width: 4 }, { f: me, color: C.violet }]} />
       <Readout tone={ok ? "green" : "amber"}>
-        <MathText html={ok ? `Match! \\(${eqTex(f, a, k, d, c)}\\). There are many correct equations — try switching between sine and cosine and find another.` : `Your graph: \\(${eqTex(f, a, k, d, c)}\\). Read the max and min first: amplitude = (max − min)/2, axis = (max + min)/2. Then measure one period and use k = 360°/period. Last, find a starting point for d.`} />
+        <MathText html={ok ? t(`Match! \\(${eqTex(f, a, k, d, c)}\\). There are many correct equations — try switching between sine and cosine and find another.`, `Bravo! \\(${eqTex(f, a, k, d, c)}\\). Il existe plusieurs équations correctes — passe de sinus à cosinus et trouves-en une autre.`) : t(`Your graph: \\(${eqTex(f, a, k, d, c)}\\). Read the max and min first: amplitude = (max − min)/2, axis = (max + min)/2. Then measure one period and use k = 360°/period. Last, find a starting point for d.`, `Ton graphique : \\(${eqTex(f, a, k, d, c)}\\). Lis d'abord le max et le min : amplitude = (max − min)/2, axe = (max + min)/2. Mesure ensuite une période et utilise k = 360°/période. Enfin, trouve un point de départ pour c.`)} />
       </Readout>
     </WidgetCard>
   );

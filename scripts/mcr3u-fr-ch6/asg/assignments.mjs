@@ -1,0 +1,166 @@
+// MCR3U-FR chapitre 6 — devoirs : 12 questions chacun — Connaissance et compréhension 1-3, Habiletés de la pensée 4-5,
+// Communication 6-7, Mise en application 8-10, Niveau difficile 11-12. [[clé|légende]] est remplacé par une figure (SVG).
+// Miroir de ../../mcr3u-ch6/asg/assignments.mjs (mêmes figures). Notation française : y = a sin(k(x − c)) + d.
+import { waveD, sin, cos } from "../bank/fig.mjs";
+import { asgId } from "../../mcr3u-fr/common.mjs";
+import { TITLE as T1 } from "../l6_1.mjs";
+import { TITLE as T2 } from "../l6_2.mjs";
+import { TITLE as T3 } from "../l6_3.mjs";
+import { TITLE as T4 } from "../l6_4.mjs";
+import { TITLE as T5 } from "../l6_5.mjs";
+import { TITLE as T6 } from "../l6_6.mjs";
+import { TITLE as T7 } from "../l6_7.mjs";
+
+const S = String.raw;
+const TS = { xlabel: "t (s)", ylabel: "h (m)" };
+const dv = (t) => `Devoir ${t.replace(/^(\d\.\d) /, "$1 — ")}`;
+
+export const ASSIGNMENTS = [
+  { code: "6.1", id: asgId(6, 1), title: dv(T1), figs: {
+      g: waveD((t) => 2.5 * sin(40 * t) + 3.5, { xmin: 0, xmax: 27, ymin: 0, ymax: 7 }, { x: 3, y: 1 }, { xlabel: "t (s)", ylabel: "h (m)" }),
+      s: waveD([], { xmin: 0, xmax: 15, ymin: 0, ymax: 8 }, { x: 1, y: 1 }, { segs: [0, 5, 10].map((a) => ({ pts: [[a, 6], [a + 1, 2], [a + 5, 6]], color: "violet" })) }) }, lines: [
+    "Connaissance et compréhension",
+    "1. Pour le graphique ci-dessous, donne la période, le maximum, le minimum, l'axe et l'amplitude. [[g|Graphique de la question 1]]",
+    "2. Une fonction périodique a l'image −3 ≤ y ≤ 11. Trouve son axe et son amplitude.",
+    "3. Le motif du deuxième graphique est-il périodique? Si oui, donne sa période. [[s|Graphique de la question 3]]",
+    "Habiletés de la pensée",
+    S`4. Une fonction périodique a une période de 11, \(f(4)=-6\) et \(f(9)=2\). Trouve \(f(48)\), \(f(-2)\) et \(f(97)\).`,
+    "5. Une fonction sinusoïdale a un maximum de 12 en t = 5 et son minimum suivant de 4 en t = 13. Trouve sa valeur en t = 9, t = 21 et t = 45.",
+    "Communication",
+    "6. Explique la différence entre « périodique » et « sinusoïdale », avec un exemple de chacune qui n'est pas l'autre.",
+    "7. Explique pourquoi l'amplitude est la moitié de (max − min) plutôt que le maximum lui-même.",
+    "Mise en application",
+    "8. Un métronome émet un clic toutes les 0.4 s. Combien de clics y a-t-il en 3 minutes?",
+    "9. La température mensuelle moyenne d'une ville varie de −11°C à 21°C. Trouve l'axe et l'amplitude et explique ce que chacun signifie.",
+    "10. La marée haute a lieu à 5 h 40 et la période est de 12 h 25 min. Quand auront lieu les trois marées hautes suivantes?",
+    "Niveau difficile",
+    S`11. Une fonction vérifie \(f(x+10)=f(x)\) et \(f(x+4)=f(x)\) pour tout x. Quelle est la plus petite période qu'elle pourrait avoir? Explique.`,
+    "12. Une lumière clignote toutes les 6 s et une deuxième toutes les 8 s. Les deux clignotent en t = 0. Modélise chacune comme une fonction périodique et trouve les trois premiers instants où elles clignotent ensemble.",
+  ] },
+  { code: "6.2", id: asgId(6, 2), title: dv(T2), figs: {
+      u: waveD([(x) => sin(x), (x) => cos(x)], { xmin: -360, xmax: 360, ymin: -1.5, ymax: 1.5 }, { x: 90, y: 0.5 }),
+      l: waveD((x) => cos(x), { xmin: 0, xmax: 720, ymin: -1.5, ymax: 1.5 }, { x: 90, y: 0.5 }, { lines: [{ m: 0, b: 0.6, color: "amber", dash: true }] }) }, lines: [
+    "Connaissance et compréhension",
+    S`1. Dresse une table de \(\sin x\) et de \(\cos x\) pour \(x=0^\circ,30^\circ,60^\circ,\ldots,360^\circ\) et esquisse les deux graphiques.`,
+    S`2. Donne le domaine, l'image, la période, l'amplitude, les zéros et les points maximums de \(y=\cos x\) pour \(-360^\circ\le x\le360^\circ\). [[u|Graphiques de la question 2]]`,
+    S`3. Évalue \(\sin1020^\circ\), \(\cos(-135^\circ)\) et \(\sin(-240^\circ)\).`,
+    "Habiletés de la pensée",
+    S`4. La droite pointillée est \(y=0.6\). Combien de fois coupe-t-elle \(y=\cos x\) de 0° à 720°? Estime les solutions, puis trouve-les à 1 décimale près. [[l|Graphique de la question 4]]`,
+    S`5. Résous \(\sin x=-\frac{\sqrt3}2\) pour \(-360^\circ\le x\le360^\circ\).`,
+    "Communication",
+    "6. Utilise le cercle unitaire pour expliquer pourquoi l'image de y = sin x est −1 ≤ y ≤ 1.",
+    S`7. Explique comment le graphique montre que \(\cos(360^\circ-x)=\cos x\).`,
+    "Mise en application",
+    S`8. Un point sur une roue de rayon 1 m part à droite du centre et tourne dans le sens antihoraire. Sa hauteur est \(\sin\theta\). Trouve sa hauteur après une rotation de 945°.`,
+    S`9. Pour \(0^\circ\le x\le360^\circ\), où \(\sin x\) et \(\cos x\) sont-ils tous deux négatifs?`,
+    S`10. Trouve toutes les valeurs de x dans \(0^\circ\le x\le1080^\circ\) où \(y=\sin x\) a un maximum.`,
+    "Niveau difficile",
+    S`11. Pour quelles valeurs de x dans \(0^\circ\le x\le360^\circ\) a-t-on \(|\sin x|>\frac12\)?`,
+    S`12. Résous \(2\cos^2x-1=0\) pour \(0^\circ\le x\le720^\circ\) et montre les solutions sur une esquisse.`,
+  ] },
+  { code: "6.3", id: asgId(6, 3), title: dv(T3), figs: {
+      w: waveD((t) => 20 - 18 * cos(4 * t), { xmin: 0, xmax: 180, ymin: 0, ymax: 40 }, { x: 15, y: 4 }, TS),
+      two: waveD([(t) => 13 - 11 * cos(7.5 * t), (t) => 9 - 7 * cos(10 * t)], { xmin: 0, xmax: 96, ymin: 0, ymax: 26 }, { x: 8, y: 2 }, TS) }, lines: [
+    "Connaissance et compréhension",
+    "1. Le graphique montre la hauteur d'une personne sur une grande roue. Trouve le rayon, la hauteur du moyeu et la durée d'un tour. [[w|Graphique des questions 1 et 2]]",
+    "2. Quand la personne est-elle au sommet, et quand est-elle à la hauteur du moyeu, pendant le premier tour?",
+    "3. Un pneu a un diamètre de 58 cm. Trouve la période du graphique de la hauteur d'un caillou en fonction de la distance parcourue.",
+    "Habiletés de la pensée",
+    "4. Le deuxième graphique représente deux roues. Compare leurs rayons, la hauteur de leurs moyeux et leurs vitesses. Qui est le plus haut en t = 24 s? [[two|Graphique de la question 4]]",
+    "5. Une roue à aubes de rayon 2.5 m a son centre à 0.5 m au-dessus de l'eau. Quelle fraction de chaque tour une palette passe-t-elle sous l'eau?",
+    "Communication",
+    "6. Explique ce que l'axe, l'amplitude et la période du graphique de la hauteur d'une grande roue t'apprennent sur la roue.",
+    "7. Explique pourquoi on doit restreindre le domaine et l'image d'un modèle de hauteur pour un manège.",
+    "Mise en application",
+    "8. Le moyeu d'une éolienne est à 40 m de haut et chaque pale mesure 22 m; un tour dure 4 s, en partant avec la pale pointée vers le haut. Esquisse deux tours de la hauteur du bout de la pale.",
+    "9. Pour l'éolienne de la question 8, quand le bout de la pale est-il au plus bas pendant les 8 premières secondes?",
+    "10. Un moteur tourne à 2400 tours par minute. Trouve la période du mouvement d'un piston en secondes.",
+    "Niveau difficile",
+    "11. Pour la roue de la question 1, pendant combien de temps, à chaque tour, la personne est-elle à plus de 30 m du sol?",
+    "12. Deux personnes embarquent sur la roue de la question 1 à 15 s d'intervalle. Trouve les instants des 2 premières minutes où elles sont à la même hauteur.",
+  ] },
+  { code: "6.4", id: asgId(6, 4), title: dv(T4), figs: {
+      g: waveD([{ f: (x) => sin(x), color: "gray" }, { f: (x) => -2 * sin(x - 45) + 1, color: "violet" }], { xmin: -45, xmax: 405, ymin: -2, ymax: 4 }, { x: 45, y: 1 }),
+      k: waveD((x) => cos(4 * x), { xmin: 0, xmax: 360, ymin: -1.5, ymax: 1.5 }, { x: 45, y: 0.5 }) }, lines: [
+    "Connaissance et compréhension",
+    S`1. Donne l'amplitude, la période, le déphasage et l'axe de \(y=5\sin(x+40^\circ)-2\) et de \(y=-\cos\frac x3+4\).`,
+    S`2. Donne l'image et la valeur maximale de \(y=-2.5\cos(2x)+6\).`,
+    "3. Le graphique violet est une transformation de y = sin x (en gris). Décris les transformations. [[g|Graphique de la question 3]]",
+    "Habiletés de la pensée",
+    S`4. Récris \(y=3\cos(5x-150^\circ)+1\) en mettant k en évidence et donne toutes ses propriétés.`,
+    "5. Le graphique représente y = cos kx. Trouve k et explique ta méthode. [[k|Graphique de la question 5]]",
+    "Communication",
+    "6. Explique pourquoi une valeur plus grande de k donne une période plus courte.",
+    S`7. Explique la différence entre \(y=\sin(2x-60^\circ)\) et \(y=\sin2x-60\).`,
+    "Mise en application",
+    "8. Écris l'équation d'une fonction cosinus d'amplitude 7, de période 30°, avec un déphasage de 5° vers la droite et l'axe y = −3.",
+    S`9. Une onde sonore est modélisée par \(y=0.02\sin(1800t)\). Trouve son amplitude et sa période (t en secondes).`,
+    "10. Le maximum d'une sinusoïde est 9 et son axe est y = 4. Trouve son amplitude et son minimum.",
+    "Niveau difficile",
+    S`11. Pour \(y=-4\sin(3x+90^\circ)+2\), trouve le premier maximum et le premier minimum à droite de 0°.`,
+    S`12. Trouve toutes les valeurs de c entre −360° et 360° pour lesquelles \(y=\cos(x-c)\) a le même graphique que \(y=\sin x\).`,
+  ] },
+  { code: "6.5", id: asgId(6, 5), title: dv(T5), figs: {
+      a: waveD([], { xmin: -90, xmax: 450, ymin: -6, ymax: 6 }, { x: 45, y: 1 }),
+      b: waveD((x) => 3 * sin(2 * (x + 15)) - 1, { xmin: -30, xmax: 330, ymin: -5, ymax: 3 }, { x: 15, y: 1 }) }, lines: [
+    "Connaissance et compréhension",
+    S`1. Transforme les cinq points clés de \(y=\sin x\) selon \(y=4\sin x-1\), puis selon \(y=\sin(x-45^\circ)\).`,
+    S`2. Transforme les cinq points clés de \(y=\cos x\) selon \(y=\cos3x+2\).`,
+    S`3. Donne la période et l'écart entre les points clés de \(y=\sin\frac x3\).`,
+    "Habiletés de la pensée",
+    S`4. Esquisse un cycle de \(y=-3\cos(2(x-30^\circ))+1\) sur le quadrillage, en indiquant les points clés. [[a|Quadrillage de la question 4]]`,
+    "5. Le graphique représente y = 3 sin(2(x + 15°)) − 1. Vérifie que la forme tracée correspond en transformant les points clés. [[b|Graphique de la question 5]]",
+    "Communication",
+    "6. Explique pourquoi on divise les abscisses par k au lieu de les multiplier.",
+    "7. Explique pourquoi il est utile de tracer l'axe y = d avant de placer les points clés.",
+    "Mise en application",
+    S`8. Trouve l'ordonnée à l'origine et les abscisses à l'origine dans \(0^\circ\le x\le360^\circ\) de \(y=2\sin x-1\).`,
+    S`9. Esquisse deux cycles de \(y=5\cos\frac x2+5\) et donne le domaine et l'image.`,
+    S`10. Combien de fois \(y=2\cos3x+1\) coupe-t-elle l'axe des x pour \(0^\circ\le x\le360^\circ\)?`,
+    "Niveau difficile",
+    S`11. Trouve les points clés de \(y=-\frac12\sin\left(\frac23(x+45^\circ)\right)+3\) ainsi que son image.`,
+    S`12. Trouve toutes les valeurs de x dans \(0^\circ\le x\le360^\circ\) pour lesquelles \(y=4\sin(2(x-15^\circ))+2\) vaut 0.`,
+  ] },
+  { code: "6.6", id: asgId(6, 6), title: dv(T6), figs: {
+      a: waveD((x) => 2.5 * cos(2 * (x - 30)) + 1.5, { xmin: -45, xmax: 315, ymin: -2, ymax: 5 }, { x: 45, y: 1 }, { pts: [[30, 4], [120, -1]] }),
+      b: waveD((x) => -3 * sin(1.5 * x) + 2, { xmin: 0, xmax: 480, ymin: -2, ymax: 6 }, { x: 60, y: 1 }) }, lines: [
+    "Connaissance et compréhension",
+    "1. Écris une équation avec cosinus pour le premier graphique. [[a|Graphique de la question 1]]",
+    "2. Une sinusoïde a un max de 13 et un min de −3. Trouve |a| et d.",
+    "3. Trouve k pour des périodes de 72°, de 540° et de 15 h (t en heures).",
+    "Habiletés de la pensée",
+    "4. Écris une équation avec sinus pour le deuxième graphique et vérifie-la en deux points. [[b|Graphique de la question 4]]",
+    "5. Une sinusoïde a un maximum en (−10°, 8) et le minimum suivant en (50°, −2). Écris deux équations différentes pour cette sinusoïde.",
+    "Communication",
+    "6. Explique comment choisir c lorsqu'on écrit une équation avec sinus, puis une équation avec cosinus.",
+    "7. Explique pourquoi un graphique sinusoïdal a une infinité d'équations.",
+    "Mise en application",
+    "8. Écris une fonction sinus d'amplitude 1.5, de période 1080°, avec un déphasage de 60° vers la gauche et l'axe y = 0.5.",
+    "9. La tension d'une prise de courant varie entre −170 V et 170 V, 60 fois par seconde, avec un maximum en t = 0. Écris un modèle V(t) où t est en secondes.",
+    "10. Une sinusoïde passe par son axe y = −2 en descendant en x = 40°, avec une amplitude de 3 et une période de 160°. Écris son équation.",
+    "Niveau difficile",
+    "11. Une sinusoïde a un maximum en (35°, 6.5) et passe par (50°, 4) en descendant vers un minimum de 1.5. Trouve son équation.",
+    "12. Trouve une équation de la forme y = a sin(k(x − c)) + d dont le graphique touche l'axe des x en x = 0° et en x = 180° et atteint un maximum de 8.",
+  ] },
+  { code: "6.7", id: asgId(6, 7), title: dv(T7), figs: {
+      t: waveD((t) => 2.6 * cos(30 * (t - 3)) + 4.4, { xmin: 0, xmax: 24, ymin: 0, ymax: 8 }, { x: 2, y: 1 }, { xlabel: "t (h)", ylabel: "D (m)" }),
+      w: waveD((t) => -13 * cos(4.5 * t) + 15, { xmin: 0, xmax: 160, ymin: 0, ymax: 30 }, { x: 20, y: 5 }, { ...TS, lines: [{ m: 0, b: 21.5, color: "amber", dash: true }] }) }, lines: [
+    "Connaissance et compréhension",
+    "1. Écris un modèle pour une grande roue de rayon 13 m, avec un moyeu à 15 m et 80 s par tour, où l'on embarque en bas. [[w|Graphique des questions 1 et 9]]",
+    "2. Utilise ton modèle pour trouver la hauteur de la personne en t = 30 s et en t = 100 s.",
+    "3. Le graphique montre la profondeur de l'eau dans un port. Écris un modèle D(t). [[t|Graphique des marées des questions 3 et 10]]",
+    "Habiletés de la pensée",
+    "4. La roue de la question 1 est remplacée par une roue ayant le même moyeu, mais un rayon de 10 m, qui fait un tour toutes les 60 s. Écris le nouveau modèle et explique quels paramètres ont changé et pourquoi.",
+    S`5. La température dans une serre est \(T=6\cos(15(t-14))+22\) (°C, t en heures). Quand est-elle la plus chaude, la plus froide et à sa valeur moyenne?`,
+    "Communication",
+    "6. Explique les étapes pour répondre à « pendant combien de temps la grandeur est-elle au-dessus d'un niveau? » à l'aide d'un modèle sinusoïdal.",
+    "7. Explique pourquoi un modèle de la durée du jour utilise 360/365 pour k.",
+    "Mise en application",
+    "8. Un ressort oscille entre 6 cm et 18 cm au-dessus d'une table, avec une période de 1.5 s, en partant du haut. Écris un modèle et trouve la hauteur en t = 2 s.",
+    "9. Pour la roue de la question 1, pendant combien de temps, à chaque tour, la personne est-elle au-dessus de la droite pointillée (21.5 m)?",
+    "10. Un bateau a besoin d'au moins 3 m d'eau. À l'aide de ton modèle de la question 3, trouve quand il ne peut pas utiliser le port entre 0 et 24 h.",
+    "Niveau difficile",
+    "11. La durée du jour dans une ville varie de 15.6 h (jour 172) à 8.8 h. Écris un modèle et trouve le nombre de jours par année où il y a plus de 12 h d'ensoleillement.",
+    "12. Les personnes sur une grande roue doivent être au-dessus de 30 m pendant au moins le tiers de chaque tour. La roue a un rayon de 18 m. Quelle est la plus petite hauteur du moyeu qui respecte cette exigence?",
+  ] },
+];

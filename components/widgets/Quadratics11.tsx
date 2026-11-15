@@ -5,6 +5,7 @@
 // with the same zeros, and the tangent line of a linear–quadratic system.
 
 import { useState } from "react";
+import { useT } from "@/lib/lang";
 import { C, MathText, Readout, Row, Segmented, Slider, WidgetCard } from "./kit";
 import { r2, type View } from "./Systems";
 import { Curves, dot, stdForm, vertexForm, sgn } from "./Quadratics";
@@ -23,17 +24,18 @@ const fac = (a: number, r: number, s: number) => `${a === 1 ? "" : a === -1 ? "-
 /* ---------------------------------------------------------------- 3.1 three forms */
 
 export function QuadForms({ init = [1, -1, 3] }: { init?: [number, number, number] }) {
+  const t = useT();
   const [a, setA] = useState(init[0]), [r, setR] = useState(init[1]), [s, setS] = useState(init[2]);
   const b = -a * (r + s), c = a * r * s, h = (r + s) / 2, k = a * (h - r) * (h - s);
   const f = (x: number) => a * (x - r) * (x - s);
   const view: View = { xmin: -8, xmax: 8, ymin: -12, ymax: 12 };
   const xs = [-2, -1, 0, 1, 2, 3], ys = xs.map(f), d1 = ys.slice(1).map((y, i) => y - ys[i]), d2 = d1.slice(1).map((d, i) => d - d1[i]);
   return (
-    <WidgetCard title="One parabola, three forms" subtitle="factored · vertex · standard — each shows a different feature">
+    <WidgetCard title={t("One parabola, three forms", "Une parabole, trois formes")} subtitle={t("factored · vertex · standard — each shows a different feature", "factorisée · canonique · générale — chacune montre une caractéristique différente")}>
       <Row>
         <Slider label="a" value={a} min={-2} max={2} step={0.5} onChange={(v) => setA(v === 0 ? 0.5 : v)} format={(v) => n(v)} color={C.blue} />
-        <Slider label="zero r" value={r} min={-6} max={6} onChange={setR} color={C.red} />
-        <Slider label="zero s" value={s} min={-6} max={6} onChange={setS} color={C.red} />
+        <Slider label={t("zero r", "zéro r")} value={r} min={-6} max={6} onChange={setR} color={C.red} />
+        <Slider label={t("zero s", "zéro s")} value={s} min={-6} max={6} onChange={setS} color={C.red} />
       </Row>
       <Curves view={view} label="Three forms" step={1} stepY={2} fs={[{ f, color: C.violet }]}>
         {(X, Y) => <>
@@ -47,12 +49,13 @@ export function QuadForms({ init = [1, -1, 3] }: { init?: [number, number, numbe
         <tbody>
           <tr><th style={cell}>x</th>{xs.map((x) => <td key={x} style={cell}>{x}</td>)}</tr>
           <tr><th style={cell}>y</th>{ys.map((y, i) => <td key={i} style={cell}>{n(y)}</td>)}</tr>
-          <tr><th style={cell}>1st diff.</th>{d1.map((d, i) => <td key={i} style={cell}>{n(d)}</td>)}</tr>
-          <tr><th style={cell}>2nd diff.</th>{d2.map((d, i) => <td key={i} style={{ ...cell, color: C.blue, fontWeight: 700 }}>{n(d)}</td>)}</tr>
+          <tr><th style={cell}>{t("1st diff.", "1res diff.")}</th>{d1.map((d, i) => <td key={i} style={cell}>{n(d)}</td>)}</tr>
+          <tr><th style={cell}>{t("2nd diff.", "2es diff.")}</th>{d2.map((d, i) => <td key={i} style={{ ...cell, color: C.blue, fontWeight: 700 }}>{n(d)}</td>)}</tr>
         </tbody>
       </table>
       <Readout tone="blue">
-        <MathText html={`<strong>Factored</strong> \\(y=${fac(a, r, s)}\\): zeros ${n(r)} and ${n(s)}.<br/><strong>Vertex</strong> \\(y=${vertexForm(a, h, k)}\\): axis \\(x=${n(h)}\\) (halfway between the zeros), ${a > 0 ? "minimum" : "maximum"} value ${n(k)}.<br/><strong>Standard</strong> \\(y=${stdForm(a, b, c)}\\): y-intercept ${n(c)}. The second differences are constant, \\(2a=${n(2 * a)}\\).`} />
+        <MathText html={t(`<strong>Factored</strong> \\(y=${fac(a, r, s)}\\): zeros ${n(r)} and ${n(s)}.<br/><strong>Vertex</strong> \\(y=${vertexForm(a, h, k)}\\): axis \\(x=${n(h)}\\) (halfway between the zeros), ${a > 0 ? "minimum" : "maximum"} value ${n(k)}.<br/><strong>Standard</strong> \\(y=${stdForm(a, b, c)}\\): y-intercept ${n(c)}. The second differences are constant, \\(2a=${n(2 * a)}\\).`,
+          `<strong>Forme factorisée</strong> \\(y=${fac(a, r, s)}\\) : zéros ${n(r)} et ${n(s)}.<br/><strong>Forme canonique</strong> \\(y=${vertexForm(a, h, k)}\\) : axe de symétrie \\(x=${n(h)}\\) (à mi-chemin entre les zéros), valeur ${a > 0 ? "minimale" : "maximale"} ${n(k)}.<br/><strong>Forme générale</strong> \\(y=${stdForm(a, b, c)}\\) : ordonnée à l'origine ${n(c)}. Les deuxièmes différences sont constantes, \\(2a=${n(2 * a)}\\).`)} />
       </Readout>
     </WidgetCard>
   );
@@ -61,6 +64,7 @@ export function QuadForms({ init = [1, -1, 3] }: { init?: [number, number, numbe
 /* ---------------------------------------------------------------- 3.2 converting between forms */
 
 export function FormConverter({ init = [2, 1, -8] }: { init?: [number, number, number] }) {
+  const t = useT();
   const [mode, setMode] = useState<"vs" | "sv">("vs");
   const [a, setA] = useState(init[0]), [h, setH] = useState(init[1]), [k, setK] = useState(init[2]);
   const b = -2 * a * h, c = a * h * h + k, f = (x: number) => a * (x - h) ** 2 + k;
@@ -70,14 +74,17 @@ export function FormConverter({ init = [2, 1, -8] }: { init?: [number, number, n
   const sq = h === 0 ? "x^2" : `x^2${sgn(-2 * h)}x${sgn(h * h)}`;
   const facTex = rs.length === 2 && rs.every((x) => Math.abs(x - Math.round(x * 100) / 100) < 1e-9) ? fac(a, rs[0], rs[1]) : rs.length === 1 ? vertexForm(a, h, 0) : "";
   const zeroTex = rs.length === 0
-    ? `\\((${inner})^2=${n(-k / a, 3)}<0\\): no real zeros, so there is <strong>no factored form</strong>.`
-    : rs.length === 1 ? `one zero, \\(x=${n(h)}\\) (the vertex is on the x-axis).`
-    : `\\(x=${n(h)}\\pm${Number.isInteger(Math.sqrt(-k / a)) ? Math.sqrt(-k / a) : `\\sqrt{${n(-k / a, 3)}}`}\\)${facTex ? `, so \\(y=${facTex}\\)` : ` \\(\\approx ${n(rs[0])}\\) and \\(${n(rs[1])}\\) (not whole numbers, so the factored form has decimals)`}.`;
-  const vs = `<strong>Vertex → standard.</strong> \\(y=${vertexForm(a, h, k)}\\)<br/>Expand the square: \\(y=${a === 1 ? "" : a === -1 ? "-" : n(a)}(${sq})${sgn(k)}\\)<br/>Distribute and collect: \\(y=${stdForm(a, b, c)}\\)<br/>Zeros: ${zeroTex}`;
-  const sv = `<strong>Standard → vertex.</strong> \\(y=${stdForm(a, b, c)}\\)<br/>Axis: \\(x=-\\dfrac{b}{2a}=-\\dfrac{${n(b)}}{${n(2 * a)}}=${n(h)}\\)<br/>Vertex height: \\(y(${n(h)})=${n(k)}\\), so \\(y=${vertexForm(a, h, k)}\\)<br/>${rs.length === 2 ? `Check: the zeros ${n(rs[0])} and ${n(rs[1])} average to ${n(h)}.` : "With no pair of zeros, \\(-b/(2a)\\) is the only quick route to the axis."}`;
+    ? t(`\\((${inner})^2=${n(-k / a, 3)}<0\\): no real zeros, so there is <strong>no factored form</strong>.`, `\\((${inner})^2=${n(-k / a, 3)}<0\\) : aucun zéro réel, donc il n'y a <strong>pas de forme factorisée</strong>.`)
+    : rs.length === 1 ? t(`one zero, \\(x=${n(h)}\\) (the vertex is on the x-axis).`, `un zéro, \\(x=${n(h)}\\) (le sommet est sur l'axe des x).`)
+    : t(`\\(x=${n(h)}\\pm${Number.isInteger(Math.sqrt(-k / a)) ? Math.sqrt(-k / a) : `\\sqrt{${n(-k / a, 3)}}`}\\)${facTex ? `, so \\(y=${facTex}\\)` : ` \\(\\approx ${n(rs[0])}\\) and \\(${n(rs[1])}\\) (not whole numbers, so the factored form has decimals)`}.`,
+        `\\(x=${n(h)}\\pm${Number.isInteger(Math.sqrt(-k / a)) ? Math.sqrt(-k / a) : `\\sqrt{${n(-k / a, 3)}}`}\\)${facTex ? `, donc \\(y=${facTex}\\)` : ` \\(\\approx ${n(rs[0])}\\) et \\(${n(rs[1])}\\) (pas des nombres entiers, donc la forme factorisée contient des décimales)`}.`);
+  const vs = t(`<strong>Vertex → standard.</strong> \\(y=${vertexForm(a, h, k)}\\)<br/>Expand the square: \\(y=${a === 1 ? "" : a === -1 ? "-" : n(a)}(${sq})${sgn(k)}\\)<br/>Distribute and collect: \\(y=${stdForm(a, b, c)}\\)<br/>Zeros: ${zeroTex}`,
+    `<strong>Canonique → générale.</strong> \\(y=${vertexForm(a, h, k)}\\)<br/>Développe le carré : \\(y=${a === 1 ? "" : a === -1 ? "-" : n(a)}(${sq})${sgn(k)}\\)<br/>Distribue et regroupe : \\(y=${stdForm(a, b, c)}\\)<br/>Zéros : ${zeroTex}`);
+  const sv = t(`<strong>Standard → vertex.</strong> \\(y=${stdForm(a, b, c)}\\)<br/>Axis: \\(x=-\\dfrac{b}{2a}=-\\dfrac{${n(b)}}{${n(2 * a)}}=${n(h)}\\)<br/>Vertex height: \\(y(${n(h)})=${n(k)}\\), so \\(y=${vertexForm(a, h, k)}\\)<br/>${rs.length === 2 ? `Check: the zeros ${n(rs[0])} and ${n(rs[1])} average to ${n(h)}.` : "With no pair of zeros, \\(-b/(2a)\\) is the only quick route to the axis."}`,
+    `<strong>Générale → canonique.</strong> \\(y=${stdForm(a, b, c)}\\)<br/>Axe de symétrie : \\(x=-\\dfrac{b}{2a}=-\\dfrac{${n(b)}}{${n(2 * a)}}=${n(h)}\\)<br/>Hauteur du sommet : \\(y(${n(h)})=${n(k)}\\), donc \\(y=${vertexForm(a, h, k)}\\)<br/>${rs.length === 2 ? `Vérification : la moyenne des zéros ${n(rs[0])} et ${n(rs[1])} est ${n(h)}.` : "Sans paire de zéros, \\(-b/(2a)\\) est la seule façon rapide de trouver l'axe de symétrie."}`);
   return (
-    <WidgetCard title="Changing forms" subtitle="expand to reach standard form; use the axis to get back to vertex form">
-      <Row><Segmented value={mode} onChange={setMode} options={[{ value: "vs", label: "vertex → standard" }, { value: "sv", label: "standard → vertex" }]} /></Row>
+    <WidgetCard title={t("Changing forms", "Changer de forme")} subtitle={t("expand to reach standard form; use the axis to get back to vertex form", "développe pour obtenir la forme générale; utilise l'axe de symétrie pour revenir à la forme canonique")}>
+      <Row><Segmented value={mode} onChange={setMode} options={[{ value: "vs", label: t("vertex → standard", "canonique → générale") }, { value: "sv", label: t("standard → vertex", "générale → canonique") }]} /></Row>
       <Row>
         <Slider label="a" value={a} min={-3} max={3} step={0.5} onChange={(v) => setA(v === 0 ? 0.5 : v)} format={(v) => n(v)} color={C.blue} />
         <Slider label="h" value={h} min={-5} max={5} onChange={setH} color={C.violet} />
@@ -99,6 +106,7 @@ export function FormConverter({ init = [2, 1, -8] }: { init?: [number, number, n
 /* ---------------------------------------------------------------- 3.3 finite differences */
 
 export function DiffLab({ init = ["quad", 2, -3, 1] }: { init?: ["lin" | "quad" | "exp", number, number, number] }) {
+  const t = useT();
   const [kind, setKind] = useState<"lin" | "quad" | "exp">(init[0]);
   const [p, setP] = useState(init[1]), [q, setQ] = useState(init[2]), [r, setR] = useState(init[3]);
   const [step, setStep] = useState<number>(1);
@@ -111,19 +119,20 @@ export function DiffLab({ init = ["quad", 2, -3, 1] }: { init?: ["lin" | "quad" 
   const eqTex = kind === "lin" ? `y=${stdForm(0, p, q)}` : kind === "quad" ? `y=${stdForm(p, q, r)}` : `y=${r === 1 ? "" : n(r)}${r === 1 ? n(Math.abs(p) || 1) : `(${n(Math.abs(p) || 1)})`}^x`;
   const ymax = Math.max(4, ...ys.map(Math.abs)) * 1.15;
   const view: View = { xmin: xs[0] - step, xmax: xs[5] + step, ymin: -ymax, ymax };
-  const msg = kind === "lin" ? `The first differences are constant (\\(${n(d1[0])}\\)): linear. Each is the slope times the step, \\(${n(p)}\\times${step}\\).`
-    : kind === "quad" ? `The first differences change but the second differences are constant: \\(${n(d2[0])}=2a\\cdot(\\text{step})^2=2(${n(p)})(${step})^2\\). ${step === 1 ? "With a step of 1 this is just \\(2a\\)." : `With a step of ${step}, dividing by \\(2(${step})^2\\) gives \\(a=${n(p)}\\).`}`
-    : `Neither difference row is constant, but every ratio is \\(${n(Math.abs(p) || 1)}\\): exponential, not quadratic.`;
+  const msg = kind === "lin" ? t(`The first differences are constant (\\(${n(d1[0])}\\)): linear. Each is the slope times the step, \\(${n(p)}\\times${step}\\).`, `Les premières différences sont constantes (\\(${n(d1[0])}\\)) : linéaire. Chacune est égale à la pente multipliée par le pas, \\(${n(p)}\\times${step}\\).`)
+    : kind === "quad" ? t(`The first differences change but the second differences are constant: \\(${n(d2[0])}=2a\\cdot(\\text{step})^2=2(${n(p)})(${step})^2\\). ${step === 1 ? "With a step of 1 this is just \\(2a\\)." : `With a step of ${step}, dividing by \\(2(${step})^2\\) gives \\(a=${n(p)}\\).`}`,
+        `Les premières différences changent, mais les deuxièmes différences sont constantes : \\(${n(d2[0])}=2a\\cdot(\\text{pas})^2=2(${n(p)})(${step})^2\\). ${step === 1 ? "Avec un pas de 1, c'est simplement \\(2a\\)." : `Avec un pas de ${step}, en divisant par \\(2(${step})^2\\), on obtient \\(a=${n(p)}\\).`}`)
+    : t(`Neither difference row is constant, but every ratio is \\(${n(Math.abs(p) || 1)}\\): exponential, not quadratic.`, `Aucune rangée de différences n'est constante, mais chaque rapport vaut \\(${n(Math.abs(p) || 1)}\\) : exponentielle, pas quadratique.`);
   return (
-    <WidgetCard title="Finite differences" subtitle="constant 1st differences → linear · constant 2nd → quadratic · constant ratio → exponential">
+    <WidgetCard title={t("Finite differences", "Différences finies")} subtitle={t("constant 1st differences → linear · constant 2nd → quadratic · constant ratio → exponential", "1res différences constantes → linéaire · 2es constantes → quadratique · rapport constant → exponentielle")}>
       <Row>
-        <Segmented value={kind} onChange={pick} options={[{ value: "lin", label: "linear" }, { value: "quad", label: "quadratic" }, { value: "exp", label: "exponential" }]} />
-        <Segmented label="x-step" value={step} onChange={setStep} options={[{ value: 1, label: "1" }, { value: 2, label: "2" }, { value: 0.5, label: "0.5" }]} />
+        <Segmented value={kind} onChange={pick} options={[{ value: "lin", label: t("linear", "linéaire") }, { value: "quad", label: t("quadratic", "quadratique") }, { value: "exp", label: t("exponential", "exponentielle") }]} />
+        <Segmented label={t("x-step", "pas en x")} value={step} onChange={setStep} options={[{ value: 1, label: "1" }, { value: 2, label: "2" }, { value: 0.5, label: "0.5" }]} />
       </Row>
       <Row>
-        <Slider label={kind === "lin" ? "slope m" : kind === "quad" ? "a" : "base"} value={p} min={kind === "exp" ? 1.5 : -3} max={3} step={0.5} onChange={(v) => setP(kind === "quad" && v === 0 ? 0.5 : v)} format={(v) => n(v)} color={C.blue} />
-        {kind !== "exp" && <Slider label={kind === "lin" ? "intercept" : "b"} value={q} min={-6} max={6} onChange={setQ} color={C.violet} />}
-        {kind !== "lin" && <Slider label={kind === "quad" ? "c" : "start"} value={r} min={kind === "exp" ? 1 : -6} max={6} onChange={setR} color={C.violet} />}
+        <Slider label={kind === "lin" ? t("slope m", "pente m") : kind === "quad" ? "a" : t("base", "base")} value={p} min={kind === "exp" ? 1.5 : -3} max={3} step={0.5} onChange={(v) => setP(kind === "quad" && v === 0 ? 0.5 : v)} format={(v) => n(v)} color={C.blue} />
+        {kind !== "exp" && <Slider label={kind === "lin" ? t("intercept", "ordonnée à l'origine") : "b"} value={q} min={-6} max={6} onChange={setQ} color={C.violet} />}
+        {kind !== "lin" && <Slider label={kind === "quad" ? "c" : t("start", "départ")} value={r} min={kind === "exp" ? 1 : -6} max={6} onChange={setR} color={C.violet} />}
       </Row>
       <Curves view={view} label="Table of values" step={step} stepY={Math.max(1, Math.round(ymax / 5))} fs={[{ f, color: "#cbd5e1", width: 1.5 }]}>
         {(X, Y) => <>{xs.map((x, i) => dot(X, Y, x, ys[i], C.violet, undefined, i))}</>}
@@ -132,9 +141,9 @@ export function DiffLab({ init = ["quad", 2, -3, 1] }: { init?: ["lin" | "quad" 
         <tbody>
           <tr><th style={cell}>x</th>{xs.map((x) => <td key={x} style={cell}>{n(x)}</td>)}</tr>
           <tr><th style={cell}>y</th>{ys.map((y, i) => <td key={i} style={cell}>{n(y)}</td>)}</tr>
-          <tr><th style={cell}>1st diff.</th>{d1.map((d, i) => <td key={i} style={{ ...cell, ...(const1 ? { color: C.blue, fontWeight: 700 } : {}) }}>{n(d)}</td>)}</tr>
-          <tr><th style={cell}>2nd diff.</th>{d2.map((d, i) => <td key={i} style={{ ...cell, ...(const2 && !const1 ? { color: C.blue, fontWeight: 700 } : {}) }}>{n(d)}</td>)}</tr>
-          {kind === "exp" && <tr><th style={cell}>ratio</th>{ratio.map((d, i) => <td key={i} style={{ ...cell, color: C.green, fontWeight: 700 }}>{Number.isFinite(d) ? n(d) : "—"}</td>)}</tr>}
+          <tr><th style={cell}>{t("1st diff.", "1res diff.")}</th>{d1.map((d, i) => <td key={i} style={{ ...cell, ...(const1 ? { color: C.blue, fontWeight: 700 } : {}) }}>{n(d)}</td>)}</tr>
+          <tr><th style={cell}>{t("2nd diff.", "2es diff.")}</th>{d2.map((d, i) => <td key={i} style={{ ...cell, ...(const2 && !const1 ? { color: C.blue, fontWeight: 700 } : {}) }}>{n(d)}</td>)}</tr>
+          {kind === "exp" && <tr><th style={cell}>{t("ratio", "rapport")}</th>{ratio.map((d, i) => <td key={i} style={{ ...cell, color: C.green, fontWeight: 700 }}>{Number.isFinite(d) ? n(d) : "—"}</td>)}</tr>}
         </tbody>
       </table>
       <Readout tone={kind === "quad" ? "blue" : kind === "lin" ? "green" : "amber"}><MathText html={`\\(${eqTex}\\). ${msg}`} /></Readout>
@@ -146,6 +155,7 @@ export function DiffLab({ init = ["quad", 2, -3, 1] }: { init?: ["lin" | "quad" 
 
 export function RevenueLab({ init = [12, 300, 0.5, 10] }: { init?: [number, number, number, number] }) {
   const [p0, setP0] = useState(init[0]), [q0, setQ0] = useState(init[1]), [dp, setDp] = useState(init[2]), [dq, setDq] = useState(init[3]);
+  const t = useT();
   const [k, setK] = useState(4);
   const R = (x: number) => (p0 + dp * x) * (q0 - dq * x);
   const z1 = -p0 / dp, z2 = q0 / dq, best = (z1 + z2) / 2, Rmax = R(best);
@@ -153,15 +163,15 @@ export function RevenueLab({ init = [12, 300, 0.5, 10] }: { init?: [number, numb
   const view: View = { xmin: Math.min(-2, z1 < -40 ? -2 : z1 - 2), xmax: hi + 2, ymin: -Rmax * 0.15, ymax: Rmax * 1.2 };
   const sx = Math.max(1, Math.round((view.xmax - view.xmin) / 10)), sy = Math.max(1, Math.round(Rmax / 6 / 50) * 50);
   return (
-    <WidgetCard title="Maximum revenue" subtitle="price goes up in steps, sales go down: R(x) = (price)(quantity)">
+    <WidgetCard title={t("Maximum revenue", "Revenu maximal")} subtitle={t("price goes up in steps, sales go down: R(x) = (price)(quantity)", "le prix augmente par paliers, les ventes diminuent : R(x) = (prix)(quantité)")}>
       <Row>
-        <Slider label="price" value={p0} min={2} max={30} onChange={setP0} format={(v) => `$${v}`} color={C.blue} />
-        <Slider label="sales" value={q0} min={100} max={600} step={20} onChange={setQ0} color={C.green} />
+        <Slider label={t("price", "prix")} value={p0} min={2} max={30} onChange={setP0} format={(v) => `$${v}`} color={C.blue} />
+        <Slider label={t("sales", "ventes")} value={q0} min={100} max={600} step={20} onChange={setQ0} color={C.green} />
       </Row>
       <Row>
-        <Slider label="+ per step" value={dp} min={0.25} max={2} step={0.25} onChange={setDp} format={(v) => `$${v}`} color={C.blue} />
-        <Slider label="− sales/step" value={dq} min={2} max={30} onChange={setDq} color={C.green} />
-        <Slider label="steps x" value={k} min={0} max={Math.floor(z2)} onChange={setK} color={C.violet} />
+        <Slider label={t("+ per step", "+ par palier")} value={dp} min={0.25} max={2} step={0.25} onChange={setDp} format={(v) => `$${v}`} color={C.blue} />
+        <Slider label={t("− sales/step", "− ventes/palier")} value={dq} min={2} max={30} onChange={setDq} color={C.green} />
+        <Slider label={t("steps x", "paliers x")} value={k} min={0} max={Math.floor(z2)} onChange={setK} color={C.violet} />
       </Row>
       <Curves view={view} label="Revenue" step={sx} stepY={sy} fs={[{ f: R, color: C.violet }]}>
         {(X, Y) => <>
@@ -170,7 +180,8 @@ export function RevenueLab({ init = [12, 300, 0.5, 10] }: { init?: [number, numb
         </>}
       </Curves>
       <Readout tone="green">
-        <MathText html={`\\(R(x)=(${n(p0)}+${dp === 1 ? "" : n(dp)}x)(${n(q0)}-${dq === 1 ? "" : n(dq)}x)\\). With ${k} step${k === 1 ? "" : "s"}: price ${n(p0 + dp * k)}, sales ${n(q0 - dq * k)}, revenue ${n(R(k))}.<br/>Zeros \\(x=${n(z1)}\\) and \\(x=${n(z2)}\\); the maximum is halfway: \\(x=${n(best)}\\), price ${n(p0 + dp * best)}, revenue <strong>${n(Rmax)}</strong>${Number.isInteger(best) ? "" : " (if only whole steps are allowed, check the nearest whole numbers)"}.`} />
+        <MathText html={t(`\\(R(x)=(${n(p0)}+${dp === 1 ? "" : n(dp)}x)(${n(q0)}-${dq === 1 ? "" : n(dq)}x)\\). With ${k} step${k === 1 ? "" : "s"}: price ${n(p0 + dp * k)}, sales ${n(q0 - dq * k)}, revenue ${n(R(k))}.<br/>Zeros \\(x=${n(z1)}\\) and \\(x=${n(z2)}\\); the maximum is halfway: \\(x=${n(best)}\\), price ${n(p0 + dp * best)}, revenue <strong>${n(Rmax)}</strong>${Number.isInteger(best) ? "" : " (if only whole steps are allowed, check the nearest whole numbers)"}.`,
+          `\\(R(x)=(${n(p0)}+${dp === 1 ? "" : n(dp)}x)(${n(q0)}-${dq === 1 ? "" : n(dq)}x)\\). Avec ${k} palier${k > 1 ? "s" : ""} : prix ${n(p0 + dp * k)}, ventes ${n(q0 - dq * k)}, revenu ${n(R(k))}.<br/>Zéros \\(x=${n(z1)}\\) et \\(x=${n(z2)}\\); le maximum est à mi-chemin : \\(x=${n(best)}\\), prix ${n(p0 + dp * best)}, revenu <strong>${n(Rmax)}</strong>${Number.isInteger(best) ? "" : " (si seuls les paliers entiers sont permis, vérifie les nombres entiers les plus proches)"}.`)} />
       </Readout>
     </WidgetCard>
   );
@@ -180,19 +191,21 @@ export function RevenueLab({ init = [12, 300, 0.5, 10] }: { init?: [number, numb
 
 export function DiscriminantK({ init = [1, 9] }: { init?: [number, number] }) {
   const [a] = useState(init[0]), [c] = useState(init[1]);
+  const t = useT();
   const [k, setK] = useState(4);
   const D = k * k - 4 * a * c, crit = 2 * Math.sqrt(a * c);
   const f = (x: number) => a * x * x + k * x + c;
   const view: View = { xmin: -10, xmax: 10, ymin: -10, ymax: 16 };
   const rs = roots(a, k, c);
   return (
-    <WidgetCard title="How many zeros?" subtitle={`y = ${a === 1 ? "" : a}x² + kx + ${c}: the discriminant k² − ${4 * a * c} decides`}>
+    <WidgetCard title={t("How many zeros?", "Combien de zéros?")} subtitle={t(`y = ${a === 1 ? "" : a}x² + kx + ${c}: the discriminant k² − ${4 * a * c} decides`, `y = ${a === 1 ? "" : a}x² + kx + ${c} : le discriminant k² − ${4 * a * c} décide`)}>
       <Row><Slider label="k" value={k} min={-12} max={12} step={0.5} onChange={setK} format={(v) => n(v)} color={C.violet} /></Row>
       <Curves view={view} label="Parameter k" step={2} fs={[{ f, color: C.violet }]}>
         {(X, Y) => <>{rs.map((x, i) => dot(X, Y, x, 0, D === 0 ? C.amber : C.green, undefined, i))}</>}
       </Curves>
       <Readout tone={D > 0 ? "green" : D === 0 ? "amber" : "red"}>
-        <MathText html={`\\(D=k^2-4(${a})(${c})=${n(k)}^2-${4 * a * c}=${n(D)}\\): ${D > 0 ? "two zeros" : D === 0 ? "one zero (the vertex touches the axis)" : "no zeros"}. The boundary is \\(k^2=${4 * a * c}\\), i.e. \\(k=\\pm${n(crit)}\\): two zeros when \\(k<-${n(crit)}\\) or \\(k>${n(crit)}\\), none when \\(-${n(crit)}<k<${n(crit)}\\).`} />
+        <MathText html={t(`\\(D=k^2-4(${a})(${c})=${n(k)}^2-${4 * a * c}=${n(D)}\\): ${D > 0 ? "two zeros" : D === 0 ? "one zero (the vertex touches the axis)" : "no zeros"}. The boundary is \\(k^2=${4 * a * c}\\), i.e. \\(k=\\pm${n(crit)}\\): two zeros when \\(k<-${n(crit)}\\) or \\(k>${n(crit)}\\), none when \\(-${n(crit)}<k<${n(crit)}\\).`,
+          `\\(D=k^2-4(${a})(${c})=${n(k)}^2-${4 * a * c}=${n(D)}\\) : ${D > 0 ? "deux zéros" : D === 0 ? "un zéro (le sommet touche l'axe des x)" : "aucun zéro"}. La frontière est \\(k^2=${4 * a * c}\\), c'est-à-dire \\(k=\\pm${n(crit)}\\) : deux zéros si \\(k<-${n(crit)}\\) ou \\(k>${n(crit)}\\), aucun si \\(-${n(crit)}<k<${n(crit)}\\).`)} />
       </Readout>
     </WidgetCard>
   );
@@ -201,6 +214,7 @@ export function DiscriminantK({ init = [1, 9] }: { init?: [number, number] }) {
 /* ---------------------------------------------------------------- 3.7 families */
 
 export function FamilyLab({ init = [-2, 4] }: { init?: [number, number] }) {
+  const t = useT();
   const [mode, setMode] = useState<"rat" | "irr">("rat");
   const [r, setR] = useState(init[0]), [s, setS] = useState(init[1]);
   const [h, setH] = useState(1), [m, setM] = useState(3);
@@ -212,8 +226,8 @@ export function FamilyLab({ init = [-2, 4] }: { init?: [number, number] }) {
   const fam = [-2, -1, -0.5, 0.5, 1, 2];
   const zTex = mode === "rat" ? `(x${sgn(-r)})(x${sgn(-s)})`.replace("(x+0)", "x").replace("(x-0)", "x") : `(${stdForm(1, -2 * h, h * h - m)})`;
   return (
-    <WidgetCard title="A family of parabolas" subtitle="same zeros, different a — one point picks the member">
-      <Row><Segmented value={mode} onChange={setMode} options={[{ value: "rat", label: "zeros r, s" }, { value: "irr", label: "zeros h ± √m" }]} /></Row>
+    <WidgetCard title={t("A family of parabolas", "Une famille de paraboles")} subtitle={t("same zeros, different a — one point picks the member", "mêmes zéros, a différent — un point détermine le membre")}>
+      <Row><Segmented value={mode} onChange={setMode} options={[{ value: "rat", label: t("zeros r, s", "zéros r, s") }, { value: "irr", label: t("zeros h ± √m", "zéros h ± √m") }]} /></Row>
       {mode === "rat" ? <Row>
         <Slider label="r" value={r} min={-6} max={6} onChange={setR} color={C.red} />
         <Slider label="s" value={s} min={-6} max={6} onChange={setS} color={C.red} />
@@ -222,14 +236,15 @@ export function FamilyLab({ init = [-2, 4] }: { init?: [number, number] }) {
         <Slider label="m" value={m} min={1} max={12} onChange={setM} color={C.red} />
       </Row>}
       <Row>
-        <Slider label="point x" value={px} min={-7} max={7} onChange={setPx} color={C.blue} />
-        <Slider label="point y" value={py} min={-11} max={11} onChange={setPy} color={C.blue} />
+        <Slider label={t("point x", "point x")} value={px} min={-7} max={7} onChange={setPx} color={C.blue} />
+        <Slider label={t("point y", "point y")} value={py} min={-11} max={11} onChange={setPy} color={C.blue} />
       </Row>
-      <Curves view={view} label="Family of parabolas" step={1} stepY={2} fs={[...fam.map((t) => ({ f: (x: number) => t * base(x), color: "#cbd5e1", width: 1.5 })), ...(Number.isFinite(a) ? [{ f: (x: number) => a * base(x), color: C.violet, width: 3.5 }] : [])]}>
+      <Curves view={view} label="Family of parabolas" step={1} stepY={2} fs={[...fam.map((q) => ({ f: (x: number) => q * base(x), color: "#cbd5e1", width: 1.5 })), ...(Number.isFinite(a) ? [{ f: (x: number) => a * base(x), color: C.violet, width: 3.5 }] : [])]}>
         {(X, Y) => <>{z.map((x, i) => dot(X, Y, x, 0, C.red, undefined, i))}{dot(X, Y, px, py, C.blue, `(${px}, ${py})`, "p")}</>}
       </Curves>
       <Readout tone={Number.isFinite(a) ? "green" : "amber"}>
-        <MathText html={`Family: \\(y=a${zTex}\\) (grey: \\(a=\\pm\\tfrac12,\\pm1,\\pm2\\)). ${Number.isFinite(a) ? `Through \\((${px},${py})\\): \\(${py}=a\\cdot${denom < 0 ? `(${n(denom)})` : n(denom)}\\Rightarrow a=${n(a, 3)}\\), so \\(y=${n(a, 3)}${zTex}\\).` : "This point is a zero of every member — choose a point off the x-axis zeros."}`} />
+        <MathText html={t(`Family: \\(y=a${zTex}\\) (grey: \\(a=\\pm\\tfrac12,\\pm1,\\pm2\\)). ${Number.isFinite(a) ? `Through \\((${px},${py})\\): \\(${py}=a\\cdot${denom < 0 ? `(${n(denom)})` : n(denom)}\\Rightarrow a=${n(a, 3)}\\), so \\(y=${n(a, 3)}${zTex}\\).` : "This point is a zero of every member — choose a point off the x-axis zeros."}`,
+          `Famille : \\(y=a${zTex}\\) (en gris : \\(a=\\pm\\tfrac12,\\pm1,\\pm2\\)). ${Number.isFinite(a) ? `Passant par \\((${px},${py})\\) : \\(${py}=a\\cdot${denom < 0 ? `(${n(denom)})` : n(denom)}\\Rightarrow a=${n(a, 3)}\\), donc \\(y=${n(a, 3)}${zTex}\\).` : "Ce point est un zéro de chaque membre — choisis un point qui n'est pas un des zéros sur l'axe des x."}`)} />
       </Readout>
     </WidgetCard>
   );
@@ -239,22 +254,24 @@ export function FamilyLab({ init = [-2, 4] }: { init?: [number, number] }) {
 
 export function TangentLab({ init = [-1, 6, 0, 2] }: { init?: [number, number, number, number] }) {
   const [a] = useState(init[0]), [b] = useState(init[1]), [c] = useState(init[2]);
+  const t = useT();
   const [m, setM] = useState(init[3]), [k, setK] = useState(-2);
   const A = a, B = b - m, Cc = c - k, D = B * B - 4 * A * Cc;
   const kT = c - (B * B) / (4 * A); // k that makes D = 0
   const xs = roots(A, B, Cc);
   const view: View = { xmin: -4, xmax: 10, ymin: -8, ymax: 14 };
   return (
-    <WidgetCard title="Secant, tangent or no contact" subtitle="set the line equal to the parabola; the discriminant counts the meeting points">
+    <WidgetCard title={t("Secant, tangent or no contact", "Sécante, tangente ou aucun contact")} subtitle={t("set the line equal to the parabola; the discriminant counts the meeting points", "pose la droite égale à la parabole; le discriminant compte les points d'intersection")}>
       <Row>
-        <Slider label="slope m" value={m} min={-6} max={8} step={0.5} onChange={setM} format={(v) => n(v)} color={C.blue} />
-        <Slider label="intercept" value={k} min={-12} max={14} step={0.5} onChange={setK} format={(v) => n(v)} color={C.blue} />
+        <Slider label={t("slope m", "pente m")} value={m} min={-6} max={8} step={0.5} onChange={setM} format={(v) => n(v)} color={C.blue} />
+        <Slider label={t("intercept", "ordonnée à l'origine")} value={k} min={-12} max={14} step={0.5} onChange={setK} format={(v) => n(v)} color={C.blue} />
       </Row>
       <Curves view={view} label="Line and parabola" step={1} stepY={2} fs={[{ f: (x) => a * x * x + b * x + c, color: C.violet }, { f: (x) => m * x + k, color: C.blue }, { f: (x) => m * x + kT, color: C.amber, width: 1.8, dash: "6 5" }]}>
         {(X, Y) => <>{xs.map((x, i) => dot(X, Y, x, m * x + k, C.red, `(${n(x, 1)}, ${n(m * x + k, 1)})`, i))}</>}
       </Curves>
       <Readout tone={D > 0 ? "green" : Math.abs(D) < 1e-9 ? "amber" : "red"}>
-        <MathText html={`\\(${stdForm(a, b, c)}=${n(m)}x${sgn(k)}\\Rightarrow ${stdForm(A, B, Cc)}=0\\), \\(D=${n(D)}\\): ${D > 1e-9 ? "two points (secant)" : Math.abs(D) < 1e-9 ? "one point (tangent)" : "no points"}. For slope ${n(m)} the tangent (dashed) has intercept \\(${n(kT)}\\): lines with a ${A < 0 ? "larger" : "smaller"} intercept miss the parabola, lines with a ${A < 0 ? "smaller" : "larger"} one cross it twice.`} />
+        <MathText html={t(`\\(${stdForm(a, b, c)}=${n(m)}x${sgn(k)}\\Rightarrow ${stdForm(A, B, Cc)}=0\\), \\(D=${n(D)}\\): ${D > 1e-9 ? "two points (secant)" : Math.abs(D) < 1e-9 ? "one point (tangent)" : "no points"}. For slope ${n(m)} the tangent (dashed) has intercept \\(${n(kT)}\\): lines with a ${A < 0 ? "larger" : "smaller"} intercept miss the parabola, lines with a ${A < 0 ? "smaller" : "larger"} one cross it twice.`,
+          `\\(${stdForm(a, b, c)}=${n(m)}x${sgn(k)}\\Rightarrow ${stdForm(A, B, Cc)}=0\\), \\(D=${n(D)}\\) : ${D > 1e-9 ? "deux points (sécante)" : Math.abs(D) < 1e-9 ? "un point (tangente)" : "aucun point"}. Pour la pente ${n(m)}, la tangente (pointillée) a une ordonnée à l'origine de \\(${n(kT)}\\) : les droites ayant une ordonnée à l'origine plus ${A < 0 ? "grande" : "petite"} ne touchent pas la parabole, celles qui en ont une plus ${A < 0 ? "petite" : "grande"} la coupent deux fois.`)} />
       </Readout>
     </WidgetCard>
   );
