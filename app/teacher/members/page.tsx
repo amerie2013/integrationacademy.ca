@@ -180,7 +180,7 @@ export default function MembersAdminPage() {
   async function resetPassword(r: Row) {
     if (!r.email) return fail("No email on file for this member.");
     setSavingId(r.id);
-    const { error } = await supabase.auth.resetPasswordForEmail(r.email, { redirectTo: `${window.location.origin}/login` });
+    const { error } = await supabase.auth.resetPasswordForEmail(r.email, { redirectTo: `${window.location.origin}/auth/reset-password` });
     if (error) fail(error.message); else flash(`✓ Reset email sent to ${r.email}`);
     setSavingId(null);
   }
@@ -417,6 +417,9 @@ export default function MembersAdminPage() {
                         : <button onClick={() => suspend(r)} disabled={busy} style={warnBtn}>Suspend</button>}
                       <button onClick={() => remove(r)} disabled={busy} style={dangerBtn}>Delete member</button>
                     </div>
+                    {busy && <div style={{ marginTop: 10, fontSize: 13.5, color: "#64748b" }}>Working…</div>}
+                    {!busy && msg && <div style={{ marginTop: 10, fontSize: 13.5, fontWeight: 600, color: "#059669" }}>{msg}</div>}
+                    {!busy && err && <div style={{ marginTop: 10, fontSize: 13.5, fontWeight: 600, color: "#dc2626" }}>{err}</div>}
                   </div>
                 )}
               </div>
