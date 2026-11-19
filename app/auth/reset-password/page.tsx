@@ -9,6 +9,7 @@ export default function ResetPasswordPage() {
   const t = useTranslations("resetPassword");
   const router = useRouter();
   const [password, setPassword] = useState("");
+  const [confirm, setConfirm] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [done, setDone] = useState(false);
@@ -16,6 +17,10 @@ export default function ResetPasswordPage() {
   async function submit() {
     if (password.length < 6) {
       setError(t("errMinLength"));
+      return;
+    }
+    if (password !== confirm) {
+      setError(t("errMismatch"));
       return;
     }
     setLoading(true);
@@ -61,6 +66,16 @@ export default function ResetPasswordPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder={t("placeholder")}
+              autoComplete="new-password"
+              style={{ width: "100%", padding: "11px 14px", borderRadius: 10, border: "1px solid #cbd5e1", fontSize: 15, outline: "none", fontFamily: "inherit", marginBottom: 10 }}
+            />
+            <input
+              type="password"
+              value={confirm}
+              onChange={(e) => setConfirm(e.target.value)}
+              onKeyDown={(e) => { if (e.key === "Enter") submit(); }}
+              placeholder={t("confirmPlaceholder")}
+              autoComplete="new-password"
               style={{ width: "100%", padding: "11px 14px", borderRadius: 10, border: "1px solid #cbd5e1", fontSize: 15, outline: "none", fontFamily: "inherit", marginBottom: 14 }}
             />
             <button

@@ -57,6 +57,8 @@
   "resetPassword": {
     "title": "Set a new password",
     "placeholder": "New password",
+    "confirmPlaceholder": "Confirm new password",
+    "errMismatch": "The two passwords don't match.",
     "errMinLength": "Password must be at least 6 characters.",
     "success": "Password updated — redirecting to sign in…",
     "saving": "Saving…",

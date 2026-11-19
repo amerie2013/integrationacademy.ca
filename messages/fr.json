@@ -57,6 +57,8 @@
   "resetPassword": {
     "title": "Définir un nouveau mot de passe",
     "placeholder": "Nouveau mot de passe",
+    "confirmPlaceholder": "Confirmer le nouveau mot de passe",
+    "errMismatch": "Les deux mots de passe ne correspondent pas.",
     "errMinLength": "Le mot de passe doit contenir au moins 6 caractères.",
     "success": "Mot de passe mis à jour — redirection vers la connexion…",
     "saving": "Enregistrement…",
