@@ -356,16 +356,15 @@ h3 {
 
 /* ---- Lesson page: topics sidebar + wider reading column ---- */
 .lesson-layout {
-  max-width: 1280px;
+  max-width: 1640px;
   margin: 0 auto;
-  padding: 36px 28px 44px;
+  padding: 36px 40px 44px;
   display: grid;
-  grid-template-columns: 270px minmax(0, 900px);
-  justify-content: center;
+  grid-template-columns: 280px minmax(0, 1fr);
   gap: 40px;
   align-items: start;
 }
-.lesson-layout.no-side { grid-template-columns: minmax(0, 900px); }
+.lesson-layout.no-side { grid-template-columns: minmax(0, 1fr); max-width: 1240px; }
 .lesson-side { position: sticky; top: 84px; }
 .lesson-side-list {
   max-height: calc(100vh - 110px);
