@@ -6,6 +6,7 @@ import Link from "next/link";
 import { supabase } from "../../../lib/supabase";
 import { SiteHeader } from "../../../components/SiteHeader";
 import { CourseNav } from "../../../components/CourseNav";
+import { LessonSidebar } from "../../../components/LessonSidebar";
 import { fetchWorksheet, type Worksheet } from "../../../lib/worksheets";
 import { signedUrl } from "../../../lib/storage";
 
@@ -44,7 +45,9 @@ export default function WorksheetViewPage() {
   return (
     <main style={{ minHeight: "100vh" }}>
       <SiteHeader />
-      <div style={{ maxWidth: 820, margin: "0 auto", padding: "36px 24px 60px" }}>
+      <div className={`lesson-layout${w.course_id ? "" : " no-side"}`}>
+      {w.course_id && <LessonSidebar kind="worksheet" courseId={w.course_id} currentId={w.id} accent="#1b7a44" />}
+      <div style={{ minWidth: 0 }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12, flexWrap: "wrap" }}>
           <Link href={`/courses/${w.course_id}`} style={{ color: "#64748b", fontWeight: 600, fontSize: 14, textDecoration: "none" }}>← Back to course</Link>
           {isAdmin && <Link href={`/teacher/worksheets/${w.id}`} style={{ background: "#1b7a44", color: "#fff", padding: "8px 14px", borderRadius: 9, textDecoration: "none", fontWeight: 700, fontSize: 13 }}>✏️ Edit</Link>}
@@ -71,6 +74,7 @@ export default function WorksheetViewPage() {
         )}
 
         {w.course_id && <CourseNav courseId={w.course_id} type="worksheet" id={w.id} />}
+      </div>
       </div>
     </main>
   );

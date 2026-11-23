@@ -6,6 +6,7 @@ import Link from "next/link";
 import { supabase } from "../../../lib/supabase";
 import { SiteHeader } from "../../../components/SiteHeader";
 import { CourseNav } from "../../../components/CourseNav";
+import { LessonSidebar } from "../../../components/LessonSidebar";
 import { AssignmentBody } from "../../../components/AssignmentBody";
 import { previewAssignment } from "../../../lib/lessonPreview";
 import { MathInput } from "../../../components/MathInput";
@@ -161,7 +162,9 @@ export default function AssignmentPage() {
   return (
     <main style={{ minHeight: "100vh" }}>
       <SiteHeader />
-      <article style={{ maxWidth: 760, margin: "0 auto", padding: "44px 28px" }}>
+      <div className={`lesson-layout${a.course_id ? "" : " no-side"}`}>
+      {a.course_id && <LessonSidebar kind="assignment" courseId={a.course_id} currentId={a.id} accent="#c2410c" />}
+      <article style={{ minWidth: 0 }}>
         {a.course_id && <Link href={`/courses/${a.course_id}`} style={{ color: "#64748b", fontWeight: 600, fontSize: 14, textDecoration: "none", display: "inline-block", marginBottom: 16 }}>← Back to course</Link>}
         <div style={{ fontSize: 13, fontWeight: 800, color: "#e69138", textTransform: "uppercase", letterSpacing: "0.05em" }}>Assignment</div>
         <h1 style={{ fontFamily: "Fraunces, serif", fontSize: 34, fontWeight: 700, margin: "6px 0 8px" }}>{a.title}</h1>
@@ -252,6 +255,7 @@ export default function AssignmentPage() {
 
         <CourseNav courseId={a.course_id} type="assignment" id={a.id} />
       </article>
+      </div>
       {a.tutor_enabled && (
         <TutorChat assignmentId={a.id} assignmentTitle={a.title} />
       )}

@@ -5,25 +5,50 @@ import Link from "next/link";
 import { supabase } from "../lib/supabase";
 import { langForCourse } from "../lib/lang";
 
+type Kind = "lesson" | "worksheet" | "assignment";
 type Item = { id: string; title: string; ch: number; sub: number };
+const HREF: Record<Kind, string> = { lesson: "/lessons/", worksheet: "/worksheets/", assignment: "/assignments/" };
 const codeOf = (t: string): [number, number] => { const m = (t || "").match(/(\d+)\.(\d+)/); return m ? [+m[1], +m[2]] : [999, 999]; };
 
+/** Published items of one kind in a course, as { id, title } (title carries the "5.3" code). */
+async function fetchKind(kind: Kind, courseId: string): Promise<{ id: string; title: string }[]> {
+  if (kind === "lesson") {
+    const { data } = await supabase.from("lessons").select("id, title").eq("course_id", courseId).eq("published", true).order("position");
+    return data ?? [];
+  }
+  if (kind === "worksheet") {
+    const { data } = await supabase.from("worksheets").select("id, code, title").eq("course_id", courseId).eq("published", true).order("position");
+    return (data ?? []).map((w: any) => ({ id: w.id, title: w.code ? `${w.code} ${w.title}` : w.title }));
+  }
+  // assignments: "published" column may be missing on older databases
+  const ra = await supabase.from("assignments").select("id, title, published").eq("course_id", courseId).order("created_at");
+  const rows = !ra.error ? (ra.data ?? []).filter((a: any) => a.published !== false) : ((await supabase.from("assignments").select("id, title").eq("course_id", courseId).order("created_at")).data ?? []);
+  return rows.map((a: any) => ({ id: a.id, title: String(a.title).replace(/^Assignment\s+/i, "").replace(/^Devoir\s+/i, "") }));
+}
+
 /**
- * Left-hand list of every lesson in the course, grouped by chapter (from the
+ * Left-hand list of every lesson (or worksheet / assignment) in the course, grouped by chapter (from the
  * "5.3" prefix in the title). The current chapter starts open; the others can
  * be expanded. Hides lessons the teacher locked for the viewer's class.
  * On narrow screens (see .lesson-side in globals.css) it collapses into a
  * "Topics" toggle above the lesson.
  */
-export function LessonSidebar({ courseId, courseCode, currentId, accent }: { courseId: string; courseCode: string | null; currentId: string; accent: string }) {
+export function LessonSidebar({ courseId, courseCode, currentId, accent, kind = "lesson" }: { courseId: string; courseCode?: string | null; currentId: string; accent: string; kind?: Kind }) {
   const [items, setItems] = useState<Item[]>([]);
   const [open, setOpen] = useState<Record<number, boolean>>({});
   const [mobileOpen, setMobileOpen] = useState(false);
-  const fr = langForCourse(courseCode) === "fr";
+  const [fetchedCode, setFetchedCode] = useState<string | null>(null);
+  // Pages that don't already know the course code (worksheets) let us look it up.
+  useEffect(() => {
+    if (courseCode !== undefined) return;
+    supabase.from("courses").select("code").eq("id", courseId).single().then(({ data }) => setFetchedCode(data?.code ?? null));
+  }, [courseId, courseCode]);
+  const fr = langForCourse(courseCode === undefined ? fetchedCode : courseCode) === "fr";
+  const heading = kind === "worksheet" ? (fr ? "Fiches de travail" : "Worksheets") : kind === "assignment" ? (fr ? "Devoirs" : "Assignments") : (fr ? "Sujets du cours" : "Course topics");
 
   useEffect(() => {
     (async () => {
-      const { data: ls } = await supabase.from("lessons").select("id, title, position").eq("course_id", courseId).eq("published", true).order("position");
+      const ls = await fetchKind(kind, courseId);
       const locked = new Set<string>();
       const { data: { session } } = await supabase.auth.getSession();
       if (session) {
@@ -33,7 +58,7 @@ export function LessonSidebar({ courseId, courseCode, currentId, accent }: { cou
           const { data: cls } = await supabase.from("classes").select("id").eq("course_id", courseId).in("id", ids);
           const cids = (cls ?? []).map((c: any) => c.id);
           if (cids.length) {
-            const { data: lk } = await supabase.from("class_locks").select("item_id").eq("item_type", "lesson").in("class_id", cids);
+            const { data: lk } = await supabase.from("class_locks").select("item_id").eq("item_type", kind).in("class_id", cids);
             (lk ?? []).forEach((r: any) => locked.add(r.item_id));
           }
         }
@@ -46,7 +71,7 @@ export function LessonSidebar({ courseId, courseCode, currentId, accent }: { cou
       const cur = list.find((l) => l.id === currentId);
       if (cur) setOpen((o) => ({ ...o, [cur.ch]: true }));
     })();
-  }, [courseId, currentId]);
+  }, [courseId, currentId, kind]);
 
   // Keep the current lesson visible inside the scrolling sidebar.
   useEffect(() => {
@@ -65,11 +90,11 @@ export function LessonSidebar({ courseId, courseCode, currentId, accent }: { cou
   return (
     <aside className="lesson-side">
       <button className="lesson-side-toggle" onClick={() => setMobileOpen((v) => !v)}>
-        {fr ? "Sujets du cours" : "Course topics"} <span style={{ marginLeft: "auto" }}>{mobileOpen ? "▴" : "▾"}</span>
+        {heading} <span style={{ marginLeft: "auto" }}>{mobileOpen ? "▴" : "▾"}</span>
       </button>
       <nav className={`lesson-side-list${mobileOpen ? " open" : ""}`}>
         <div style={{ fontSize: 11.5, fontWeight: 800, color: "#64748b", textTransform: "uppercase", letterSpacing: "0.06em", padding: "4px 10px 10px" }}>
-          {fr ? "Sujets du cours" : "Course topics"}
+          {heading}
         </div>
         {chapters.map(({ ch, items: chItems }) => {
           const isOpen = !!open[ch];
@@ -98,7 +123,7 @@ export function LessonSidebar({ courseId, courseCode, currentId, accent }: { cou
                       <Link
                         key={it.id}
                         id={`side-${it.id}`}
-                        href={`/lessons/${it.id}`}
+                        href={`${HREF[kind]}${it.id}`}
                         aria-current={cur ? "page" : undefined}
                         className="lesson-side-link"
                         style={{
