@@ -3,10 +3,24 @@ import type { BoardData, Shape } from "./wbdraw";
 
 export type WB = { id: string; title: string; data: BoardData; is_live: boolean; draw_open: boolean; owner_id: string; updated_at: string };
 
-export async function listMine(): Promise<{ supported: boolean; items: WB[] }> {
-  const { data, error } = await supabase.from("whiteboards").select("*").order("updated_at", { ascending: false });
-  if (error) return { supported: false, items: [] };
-  return { supported: true, items: (data ?? []) as WB[] };
+export type WBSummary = Pick<WB, "id" | "title" | "is_live" | "updated_at">;
+
+/**
+ * The signed-in user's boards, newest first — titles and dates only.
+ * Never select `data` here: boards with imported PDFs/images run to megabytes
+ * each, and pulling every one at once hits the database statement timeout
+ * (which used to surface as an empty "No saved boards yet" list).
+ */
+export async function listMine(): Promise<{ signedIn: boolean; items: WBSummary[]; error?: string }> {
+  const { data: { session } } = await supabase.auth.getSession();
+  if (!session) return { signedIn: false, items: [] };
+  const { data, error } = await supabase
+    .from("whiteboards")
+    .select("id,title,is_live,updated_at")
+    .eq("owner_id", session.user.id)
+    .order("updated_at", { ascending: false });
+  if (error) return { signedIn: true, items: [], error: error.message };
+  return { signedIn: true, items: (data ?? []) as WBSummary[] };
 }
 
 export async function getBoard(id: string): Promise<WB | null> {
@@ -24,6 +38,18 @@ export async function createBoard(title: string, data: BoardData): Promise<{ id?
     .single();
   if (error) return { error: error.message };
   return { id: row!.id };
+}
+
+export async function deleteBoard(id: string): Promise<{ error?: string }> {
+  const { error } = await supabase.from("whiteboards").delete().eq("id", id);
+  return { error: error?.message };
+}
+
+/** Copy a saved board (all pages) into a new board owned by the current user. */
+export async function duplicateBoard(id: string, title: string): Promise<{ id?: string; error?: string }> {
+  const src = await getBoard(id);
+  if (!src) return { error: "Couldn't load that board to copy it." };
+  return createBoard(title, src.data);
 }
 
 export async function saveBoard(id: string, patch: Partial<Pick<WB, "title" | "data" | "is_live" | "draw_open">>): Promise<{ error?: string }> {

@@ -6,7 +6,7 @@ import { supabase } from "../lib/supabase";
 import { MathField } from "./MathField";
 import { Icon, type IconName } from "./WhiteboardIcons";
 import { renderAll, fitView, textFont as fontFor, GRID, IDENTITY, type Pt, type Rect, type View, type Shape, type Bg, type BoardData, type AxesRange } from "../lib/wbdraw";
-import { listMine, getBoard, createBoard, saveBoard, subscribeBoard, type WB } from "../lib/whiteboards";
+import { listMine, getBoard, createBoard, saveBoard, deleteBoard, duplicateBoard, subscribeBoard, type WBSummary } from "../lib/whiteboards";
 import { renderPage, jpegsToPdf, canvasToJpeg, downloadBlob } from "../lib/wbexport";
 import { officeFileKind, renderSpreadsheetToDataUrl, renderWordToDataUrl, renderPdfToDataUrls } from "../lib/officeImport";
 
@@ -107,7 +107,13 @@ export function Whiteboard({ initialBoardId }: { initialBoardId?: string }) {
   const [toast, setToast] = useState<Toast | null>(null);
   const toastTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [showOpen, setShowOpen] = useState(false);
-  const [myBoards, setMyBoards] = useState<WB[]>([]);
+  const [myBoards, setMyBoards] = useState<WBSummary[]>([]);
+  const [openState, setOpenState] = useState<{ loading: boolean; signedIn: boolean; error?: string }>({ loading: false, signedIn: true });
+  const [boardQuery, setBoardQuery] = useState("");
+  const [boardSort, setBoardSort] = useState<"recent" | "name">("recent");
+  const [renaming, setRenaming] = useState<{ id: string; val: string } | null>(null);
+  const [confirmDel, setConfirmDel] = useState<string | null>(null);
+  const [busyId, setBusyId] = useState<string | null>(null);
   const [menu, setMenu] = useState<null | "export" | "insert">(null);
   const [showHelp, setShowHelp] = useState(false);
   const syncTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -199,6 +205,15 @@ export function Whiteboard({ initialBoardId }: { initialBoardId?: string }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   useEffect(() => { redraw(); /* eslint-disable-next-line */ }, [bg]);
+  // Warn before closing the tab on a board that was never saved, or while a save is still pending.
+  useEffect(() => {
+    const h = (e: BeforeUnloadEvent) => {
+      const unsaved = !boardIdRef.current && pagesRef.current.some((p) => p.length > 0);
+      if (unsaved || syncTimer.current || saveState === "saving") { e.preventDefault(); e.returnValue = ""; }
+    };
+    window.addEventListener("beforeunload", h);
+    return () => window.removeEventListener("beforeunload", h);
+  }, [saveState]);
 
   function flash(text: string, kind: Toast["kind"] = "ok", ms = 3000) {
     setToast({ text, kind });
@@ -263,9 +278,24 @@ export function Whiteboard({ initialBoardId }: { initialBoardId?: string }) {
   }
 
   // ---- save / open / live ----
+  // Send any edit still waiting on the debounce timer before switching boards,
+  // so the last strokes land on the board they were drawn on.
+  async function flushSync() {
+    const pending = !!syncTimer.current || !!viewSyncTimer.current;
+    if (syncTimer.current) { clearTimeout(syncTimer.current); syncTimer.current = null; }
+    if (viewSyncTimer.current) { clearTimeout(viewSyncTimer.current); viewSyncTimer.current = null; }
+    const id = boardIdRef.current;
+    if (id && pending) { const r = await saveBoard(id, { data: snapshot() }); setSaveState(r.error ? "error" : "saved"); }
+  }
+  const hasUnsavedContent = () => !boardIdRef.current && pagesRef.current.some((p) => p.length > 0);
+  function okToLeave() {
+    return !hasUnsavedContent() || window.confirm("This board hasn't been saved. Discard it?");
+  }
   async function loadBoard(id: string) {
+    flash("Opening board…", "info", 0);
     const wb = await getBoard(id);
-    if (!wb) return;
+    if (!wb) { flash("Couldn't open that board — check your connection and try again.", "err", 4500); return; }
+    setToast(null);
     const d = wb.data || ({} as BoardData);
     pagesRef.current = d.pages?.length ? d.pages : [[]];
     histRef.current = pagesRef.current.map((p) => ({ h: [p], i: 0 }));
@@ -276,6 +306,25 @@ export function Whiteboard({ initialBoardId }: { initialBoardId?: string }) {
     const { w, h } = size();
     viewRef.current = d.view && w ? fitView(d.view, w, h, 0, ZMAX) : { ...IDENTITY };
     redraw(); rerender();
+  }
+  async function newBoard() {
+    if (!okToLeave()) return;
+    await flushSync();
+    pagesRef.current = [[]]; histRef.current = [{ h: [[]], i: 0 }]; pageRef.current = 0;
+    setBoardId(null); boardIdRef.current = null; setTitle("Untitled board"); savedTitleRef.current = "Untitled board";
+    setLive(false); setDrawOpen(false); setSel([]); setSaveState("idle"); setShowOpen(false);
+    if (window.location.pathname.startsWith("/whiteboard/")) window.history.replaceState(null, "", "/tools/whiteboard");
+    viewRef.current = { ...IDENTITY }; redraw(); rerender();
+    flash("New blank board", "info", 1800);
+  }
+  async function saveAsCopy() {
+    if (!userId) { flash("Sign in to save boards to your account", "err", 3500); return; }
+    await flushSync();
+    const t = `${title.trim() || "Untitled board"} (copy)`;
+    const { id, error } = await createBoard(t, snapshot());
+    if (error) { flash(error, "err", 4000); return; }
+    setBoardId(id!); setTitle(t); savedTitleRef.current = t; setLive(false); setDrawOpen(false); setSaveState("saved");
+    flash(`Saved a copy as “${t}” — you're now editing the copy`);
   }
   async function doSave() {
     if (!userId) { flash("Sign in to save boards to your account", "err", 3500); return; }
@@ -297,8 +346,47 @@ export function Whiteboard({ initialBoardId }: { initialBoardId?: string }) {
     if (t !== title) setTitle(t);
     if (boardIdRef.current && t !== savedTitleRef.current) { savedTitleRef.current = t; saveBoard(boardIdRef.current, { title: t }); }
   }
-  async function openPanel() {
-    const { items } = await listMine(); setMyBoards(items); setShowOpen(true);
+  async function refreshBoards() {
+    setOpenState((o) => ({ ...o, loading: true, error: undefined }));
+    const r = await listMine();
+    setMyBoards(r.items); setOpenState({ loading: false, signedIn: r.signedIn, error: r.error });
+  }
+  function openPanel() {
+    setShowOpen(true); setBoardQuery(""); setRenaming(null); setConfirmDel(null);
+    refreshBoards();
+  }
+  async function openSaved(id: string) {
+    if (id === boardIdRef.current) { setShowOpen(false); return; }
+    if (!okToLeave()) return;
+    setShowOpen(false);
+    await flushSync();
+    await loadBoard(id);
+  }
+  async function renameSaved(id: string, val: string) {
+    const t = val.trim() || "Untitled board";
+    setRenaming(null);
+    const r = await saveBoard(id, { title: t });
+    if (r.error) { flash(r.error, "err", 4000); return; }
+    setMyBoards((bs) => bs.map((b) => (b.id === id ? { ...b, title: t, updated_at: new Date().toISOString() } : b)));
+    if (id === boardIdRef.current) { setTitle(t); savedTitleRef.current = t; }
+  }
+  async function duplicateSaved(b: WBSummary) {
+    setBusyId(b.id);
+    if (b.id === boardIdRef.current) await flushSync();
+    const r = await duplicateBoard(b.id, `${b.title} (copy)`);
+    setBusyId(null);
+    if (r.error) { flash(r.error, "err", 4000); return; }
+    flash(`Copied “${b.title}”`);
+    refreshBoards();
+  }
+  async function deleteSaved(id: string) {
+    setBusyId(id);
+    const r = await deleteBoard(id);
+    setBusyId(null); setConfirmDel(null);
+    if (r.error) { flash(r.error, "err", 4000); return; }
+    setMyBoards((bs) => bs.filter((b) => b.id !== id));
+    if (id === boardIdRef.current) { setBoardId(null); boardIdRef.current = null; setLive(false); setDrawOpen(false); setSaveState("idle"); }
+    flash("Board deleted", "info");
   }
   async function toggleLive() {
     if (!userId) { flash("Sign in to go live", "err"); return; }
@@ -917,7 +1005,8 @@ export function Whiteboard({ initialBoardId }: { initialBoardId?: string }) {
       if (mod) {
         if (k === "z") { e.preventDefault(); if (e.shiftKey) redo(); else undo(); }
         else if (k === "y") { e.preventDefault(); redo(); }
-        else if (k === "s") { e.preventDefault(); doSave(); }
+        else if (k === "s") { e.preventDefault(); if (e.shiftKey) saveAsCopy(); else doSave(); }
+        else if (k === "o") { e.preventDefault(); openPanel(); }
         else if (k === "a") { e.preventDefault(); selectAll(); }
         else if (k === "d") { e.preventDefault(); duplicateSel(); }
         else if (k === "c") copySel();
@@ -930,7 +1019,7 @@ export function Whiteboard({ initialBoardId }: { initialBoardId?: string }) {
       if (e.altKey) return;
       if (e.key === "?") { setShowHelp((s) => !s); return; }
       if (e.key === "!") { fitContent(); return; }
-      if (e.key === "Escape") { setShowHelp(false); setMenu(null); setSel([]); return; }
+      if (e.key === "Escape") { setShowHelp(false); setShowOpen(false); setMenu(null); setSel([]); return; }
       if ((e.key === "Delete" || e.key === "Backspace") && sel.length) { e.preventDefault(); deleteSel(); return; }
       if (e.key.startsWith("Arrow") && sel.length) {
         e.preventDefault();
@@ -1073,8 +1162,10 @@ export function Whiteboard({ initialBoardId }: { initialBoardId?: string }) {
           <span className="wb-status" data-state={saveState === "error" ? "error" : boardId ? "ok" : "none"}>{statusText}</span>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 6, flexWrap: "wrap" }}>
-          <Btn icon="folder" label="Open" tip="Open a saved board" onClick={openPanel} />
+          <Btn icon="plus" label="New" tip="Start a new blank board" onClick={newBoard} />
+          <Btn icon="folder" label="Open" tip="Open a saved board (Ctrl+O)" onClick={openPanel} />
           <Btn icon="save" label="Save" tip="Save to your account (Ctrl+S)" onClick={doSave} />
+          <Btn icon="copy" tip={"Save as a copy (Ctrl+Shift+S)"} onClick={saveAsCopy} />
           <button type="button" className={`wb-btn wb-tip ${live ? "wb-live-on" : "wb-outline"}`} onClick={toggleLive}
             data-tip={live ? "End the live session" : "Share this board live with students"} aria-label={live ? "End live session" : "Go live"}>
             {live ? <span className="wb-live-dot" /> : <Icon name="broadcast" />}<span className="wb-lbl">{live ? "Live" : "Go live"}</span>
@@ -1316,19 +1407,98 @@ export function Whiteboard({ initialBoardId }: { initialBoardId?: string }) {
         </div>
       )}
 
-      {showOpen && (
-        <div onClick={() => setShowOpen(false)} className="wb-modal-bg">
-          <div onClick={(e) => e.stopPropagation()} className="wb-modal" style={{ width: 440 }}>
-            <div className="wb-modal-head"><h3>Open a board</h3><button type="button" className="wb-btn" onClick={() => setShowOpen(false)} aria-label="Close"><Icon name="x" /></button></div>
-            {myBoards.length === 0 ? <p style={{ color: "#94a3b8", margin: "8px 0 4px" }}>No saved boards yet. Use Save to keep a board in your account.</p> : myBoards.map((b) => (
-              <button key={b.id} type="button" onClick={() => { loadBoard(b.id); setShowOpen(false); }} className="wb-board-row">
-                <span style={{ display: "flex", alignItems: "center", gap: 8 }}>{b.title}{b.is_live && <span className="wb-badge">Live</span>}</span>
-                <span style={{ color: "#94a3b8", fontWeight: 400, fontSize: 12 }}>Edited {new Date(b.updated_at).toLocaleString()}</span>
-              </button>
-            ))}
+      {showOpen && (() => {
+        const q = boardQuery.trim().toLowerCase();
+        const shown = myBoards
+          .filter((b) => !q || b.title.toLowerCase().includes(q))
+          .sort((a, b) => (boardSort === "name" ? a.title.localeCompare(b.title, undefined, { numeric: true, sensitivity: "base" }) : b.updated_at.localeCompare(a.updated_at)));
+        return (
+          <div onClick={() => setShowOpen(false)} className="wb-modal-bg">
+            <div onClick={(e) => e.stopPropagation()} className="wb-modal wb-open" style={{ width: 560 }}>
+              <div className="wb-modal-head">
+                <h3>Open a board</h3>
+                <span style={{ display: "flex", gap: 4 }}>
+                  <button type="button" className="wb-btn wb-primary" style={{ height: 32 }} onClick={newBoard}><Icon name="plus" size={15} />New board</button>
+                  <button type="button" className="wb-btn" onClick={() => setShowOpen(false)} aria-label="Close"><Icon name="x" /></button>
+                </span>
+              </div>
+              {!openState.signedIn ? (
+                <p className="wb-open-msg">Sign in to save boards and open them again later.</p>
+              ) : (
+                <>
+                  <div className="wb-open-tools">
+                    <input className="wb-open-search" placeholder="Search boards by title…" value={boardQuery} onChange={(e) => setBoardQuery(e.target.value)} autoFocus aria-label="Search boards"
+                      onKeyDown={(e) => { if (e.key === "Escape") setShowOpen(false); if (e.key === "Enter" && shown[0]) openSaved(shown[0].id); }} />
+                    <select className="wb-select" value={boardSort} onChange={(e) => setBoardSort(e.target.value as "recent" | "name")} aria-label="Sort boards">
+                      <option value="recent">Recently edited</option>
+                      <option value="name">Title A–Z</option>
+                    </select>
+                  </div>
+                  {openState.loading && !myBoards.length ? (
+                    <p className="wb-open-msg">Loading your boards…</p>
+                  ) : openState.error ? (
+                    <div className="wb-open-msg" data-kind="err">
+                      Couldn’t load your boards ({openState.error}).
+                      <button type="button" className="wb-btn wb-outline" style={{ marginLeft: 8, height: 28 }} onClick={refreshBoards}>Try again</button>
+                    </div>
+                  ) : !myBoards.length ? (
+                    <p className="wb-open-msg">No saved boards yet. Use Save to keep a board in your account.</p>
+                  ) : !shown.length ? (
+                    <p className="wb-open-msg">No boards match “{boardQuery}”.</p>
+                  ) : (
+                    <>
+                      <div className="wb-open-count">{shown.length === myBoards.length ? `${myBoards.length} board${myBoards.length === 1 ? "" : "s"}` : `${shown.length} of ${myBoards.length} boards`}</div>
+                      <div className="wb-open-list">
+                        {shown.map((b) => {
+                          const current = b.id === boardId;
+                          return (
+                            <div key={b.id} className="wb-board-row" data-current={current || undefined} data-busy={busyId === b.id || undefined}>
+                              {renaming?.id === b.id ? (
+                                <input className="wb-open-search" style={{ margin: "2px 4px" }} value={renaming.val} autoFocus aria-label="New title"
+                                  onChange={(e) => setRenaming({ id: b.id, val: e.target.value })}
+                                  onKeyDown={(e) => { if (e.key === "Enter") e.currentTarget.blur(); if (e.key === "Escape") { e.stopPropagation(); setRenaming(null); } }}
+                                  onBlur={() => renameSaved(b.id, renaming.val)} />
+                              ) : confirmDel === b.id ? (
+                                <span className="wb-board-main" style={{ cursor: "default" }}>
+                                  <span>Delete “{b.title}”?</span>
+                                  <span className="wb-board-meta" style={{ color: "#fca5a5" }}>This can’t be undone.</span>
+                                </span>
+                              ) : (
+                                <button type="button" className="wb-board-main" onClick={() => openSaved(b.id)}>
+                                  <span style={{ display: "flex", alignItems: "center", gap: 8, minWidth: 0 }}>
+                                    <span className="wb-board-title">{b.title}</span>
+                                    {current && <span className="wb-badge wb-badge-open">Open now</span>}
+                                    {b.is_live && <span className="wb-badge">Live</span>}
+                                  </span>
+                                  <span className="wb-board-meta" title={new Date(b.updated_at).toLocaleString()}>Edited {relTime(b.updated_at)}</span>
+                                </button>
+                              )}
+                              <span className="wb-board-acts">
+                                {confirmDel === b.id ? (
+                                  <>
+                                    <button type="button" className="wb-btn wb-outline wb-small" onClick={() => setConfirmDel(null)}>Cancel</button>
+                                    <button type="button" className="wb-btn wb-small wb-del-yes" onClick={() => deleteSaved(b.id)}>Delete</button>
+                                  </>
+                                ) : renaming?.id !== b.id && (
+                                  <>
+                                    <Btn icon="text" tip="Rename" small onClick={() => setRenaming({ id: b.id, val: b.title })} />
+                                    <Btn icon="copy" tip="Duplicate" small onClick={() => duplicateSaved(b)} />
+                                    <Btn icon="trash" tip="Delete" tipPos="top-end" small danger onClick={() => setConfirmDel(b.id)} />
+                                  </>
+                                )}
+                              </span>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </>
+                  )}
+                </>
+              )}
+            </div>
           </div>
-        </div>
-      )}
+        );
+      })()}
 
       {showHelp && (
         <div onClick={() => setShowHelp(false)} className="wb-modal-bg">
@@ -1354,11 +1524,22 @@ export function Whiteboard({ initialBoardId }: { initialBoardId?: string }) {
 const HELP: [string, [string, string][]][] = [
   ["Tools", [["V", "Select"], ["Space", "Hand (hold to pan)"], ["P", "Pen"], ["H", "Highlighter"], ["X", "Eraser"], ["E", "Object eraser"], ["L", "Line"], ["A", "Arrow"], ["R", "Rectangle"], ["O", "Ellipse"], ["T", "Text"], ["M", "Equation"]]],
   ["Editing", [["Ctrl Z", "Undo"], ["Ctrl Y", "Redo"], ["Ctrl A", "Select all"], ["Ctrl D", "Duplicate"], ["Ctrl C", "Copy"], ["Ctrl X", "Cut"], ["Ctrl V", "Paste (items or an image)"], ["Del", "Delete selection"], ["Arrows", "Nudge (Shift = 10 px)"], ["Shift", "Constrain lines / shapes"], ["[ ]", "Thinner / thicker stroke"]]],
-  ["View & board", [["Ctrl +", "Zoom in"], ["Ctrl −", "Zoom out"], ["Ctrl 0", "Reset to 100%"], ["Shift 1", "Zoom to fit"], ["Ctrl scroll", "Zoom at cursor"], ["G", "Snap to grid"], ["PgUp PgDn", "Previous / next page"], ["Ctrl S", "Save"], ["?", "This help"], ["Esc", "Deselect / close"]]],
+  ["View & board", [["Ctrl +", "Zoom in"], ["Ctrl −", "Zoom out"], ["Ctrl 0", "Reset to 100%"], ["Shift 1", "Zoom to fit"], ["Ctrl scroll", "Zoom at cursor"], ["G", "Snap to grid"], ["PgUp PgDn", "Previous / next page"], ["Ctrl S", "Save"], ["Ctrl Shift S", "Save as a copy"], ["Ctrl O", "Open a saved board"], ["?", "This help"], ["Esc", "Deselect / close"]]],
 ];
 
 // Pointer capture throws if the pointer is already gone (e.g. a very quick tap); drawing still works without it.
 function capture(el: EventTarget, id: number) { try { (el as Element).setPointerCapture?.(id); } catch {} }
+function relTime(iso: string): string {
+  const d = new Date(iso), mins = Math.round((Date.now() - d.getTime()) / 60000);
+  if (mins < 1) return "just now";
+  if (mins < 60) return `${mins} min ago`;
+  const hrs = Math.round(mins / 60);
+  if (hrs < 24) return `${hrs} h ago`;
+  const days = Math.round(hrs / 24);
+  if (days === 1) return "yesterday";
+  if (days < 7) return `${days} days ago`;
+  return d.toLocaleDateString(undefined, { month: "short", day: "numeric", year: d.getFullYear() === new Date().getFullYear() ? undefined : "numeric" });
+}
 function katexHtml(latex: string): string { try { return katex.renderToString(latex, { throwOnError: false }); } catch { return latex; } }
 
 const handle: React.CSSProperties = { position: "absolute", width: 14, height: 14, background: "#fff", border: "2px solid #2563eb", borderRadius: 3, touchAction: "none", pointerEvents: "auto", boxShadow: "0 1px 3px rgba(15,23,42,.3)" };
@@ -1484,8 +1665,26 @@ const WB_CSS = `
 .wb-modal { background: #0f172a; border: 1px solid #26334d; border-radius: 14px; padding: 18px 20px 20px; max-width: 100%; max-height: 80vh; overflow: auto; color: #e2e8f0; box-shadow: 0 24px 60px rgba(2,6,23,.5); }
 .wb-modal-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
 .wb-modal-head h3 { margin: 0; font: 600 20px 'Fraunces', Georgia, serif; color: #f8fafc; }
-.wb-board-row { display: flex; flex-direction: column; gap: 3px; width: 100%; text-align: left; padding: 10px 12px; border: 1px solid #26334d; border-radius: 9px; margin-bottom: 8px; background: #0b1220; color: #f1f5f9; cursor: pointer; font: 600 14px 'Inter', system-ui, sans-serif; }
+.wb-open { display: flex; flex-direction: column; }
+.wb-open-tools { display: flex; gap: 8px; margin: 4px 0 10px; }
+.wb-open-search { flex: 1; min-width: 0; height: 34px; border-radius: 8px; border: 1px solid #26334d; background: #0b1220; color: #f1f5f9; font: 500 14px 'Inter', system-ui, sans-serif; padding: 0 10px; }
+.wb-open-search:focus { outline: none; border-color: #1b7a44; }
+.wb-open-tools .wb-select { height: 34px; }
+.wb-open-msg { color: #94a3b8; margin: 10px 0 4px; font-size: 14px; display: flex; align-items: center; flex-wrap: wrap; gap: 4px; }
+.wb-open-msg[data-kind="err"] { color: #fca5a5; }
+.wb-open-count { font-size: 12px; color: #64748b; margin-bottom: 6px; }
+.wb-open-list { overflow: auto; max-height: 56vh; padding-right: 2px; }
+.wb-board-row { display: flex; align-items: center; gap: 8px; width: 100%; padding: 6px 6px 6px 4px; border: 1px solid #26334d; border-radius: 9px; margin-bottom: 6px; background: #0b1220; color: #f1f5f9; }
 .wb-board-row:hover { border-color: #1b7a44; background: #0d1a2c; }
+.wb-board-row[data-current="true"] { border-color: #1b7a44; }
+.wb-board-row[data-busy="true"] { opacity: .55; pointer-events: none; }
+.wb-board-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; text-align: left; background: none; border: none; padding: 4px 8px; color: inherit; cursor: pointer; font: 600 14px 'Inter', system-ui, sans-serif; }
+.wb-board-title { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.wb-board-meta { color: #94a3b8; font-weight: 400; font-size: 12px; }
+.wb-board-acts { display: flex; gap: 2px; flex: none; }
+.wb-del-yes { background: #b91c1c; color: #fff; font-weight: 600; }
+.wb-btn.wb-del-yes:hover:not(:disabled) { background: #991b1b; color: #fff; }
+.wb-badge-open { color: #bbf7d0; background: rgba(52,210,127,.14); }
 .wb-badge { font-size: 11px; font-weight: 600; color: #fecaca; background: rgba(239,68,68,.16); border-radius: 999px; padding: 2px 8px; }
 .wb-help { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 8px 28px; }
 .wb-help h4 { margin: 8px 0 6px; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: #64748b; font-weight: 600; }
