@@ -8,6 +8,7 @@ import { SiteHeader } from "../../../components/SiteHeader";
 import { BlockRenderer } from "../../../components/BlockRenderer";
 import { LangProvider, langForCourse } from "../../../lib/lang";
 import { CourseNav } from "../../../components/CourseNav";
+import { LessonSidebar } from "../../../components/LessonSidebar";
 import { MaterialsPanel } from "../../../components/MaterialsPanel";
 import { fetchMaterials } from "../../../lib/materials";
 import { Block } from "../../../lib/blocks";
@@ -91,7 +92,9 @@ export default function LessonViewPage() {
   return (
     <main style={{ minHeight: "100vh" }}>
       <SiteHeader />
-      <article className={accentClass(courseCode)} style={{ maxWidth: 760, margin: "0 auto", padding: "44px 28px" }}>
+      <div className={`lesson-layout${courseId && !loading && !notFound ? "" : " no-side"}`}>
+      {courseId && !loading && !notFound && <LessonSidebar courseId={courseId} courseCode={courseCode} currentId={lessonId} accent={t.primary} />}
+      <article className={accentClass(courseCode)} style={{ minWidth: 0 }}>
         {courseId && <Link href={`/courses/${courseId}`} style={{ color: "#64748b", fontWeight: 600, fontSize: 14, textDecoration: "none", display: "inline-block", marginBottom: 16 }}>← Back to course</Link>}
         {loading ? (
           <p style={{ color: "#64748b" }}>Loading…</p>
@@ -170,6 +173,7 @@ export default function LessonViewPage() {
           </>
         )}
       </article>
+      </div>
       {!loading && !notFound && (
         <TutorChat
           lessonId={lessonId}
