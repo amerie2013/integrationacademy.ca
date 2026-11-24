@@ -16,7 +16,8 @@ import { MathKeyboard } from "./MathKeyboard";
  *  - Tables of points, text labels/points, uploaded images.
  *  - Grid/axes/number toggles, grid-step control, pan, reset, title.
  *  - Zoom both axes together or each axis on its own (x+/x−, y+/y− buttons, or
- *    Shift/Alt + mouse-wheel).
+ *    Shift/Alt + mouse-wheel). Wheel, trackpad pinch and two-finger touch pinch
+ *    zoom the graph, never the page.
  *  - Export PNG, save/load a project file, and "copy embed code" to drop the
  *    exact figure into a lesson via <iframe ...?embed=1&data=...>.
  */
@@ -752,31 +753,70 @@ export function Calculator({ initialData, initialState, initialId, embed = false
   }, [anySliderAnimating]);
 
   // ── interaction ────────────────────────────────────────────
-  function onDown(e: React.PointerEvent) { (e.target as HTMLElement).setPointerCapture(e.pointerId); dragRef.current = { x: e.clientX, y: e.clientY }; }
+  // Active pointers (for two-finger pinch on touch screens) and the last pinch distance.
+  const pointersRef = useRef(new Map<number, { x: number; y: number }>());
+  const pinchRef = useRef<number | null>(null);
+  function onDown(e: React.PointerEvent) {
+    try { (e.target as HTMLElement).setPointerCapture(e.pointerId); } catch {}
+    pointersRef.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if (pointersRef.current.size === 2) { dragRef.current = null; pinchRef.current = pinchDist(); }
+    else dragRef.current = { x: e.clientX, y: e.clientY };
+  }
+  function pinchDist() { const [a, b] = [...pointersRef.current.values()]; return Math.hypot(a.x - b.x, a.y - b.y); }
   function onMove(e: React.PointerEvent) {
     const rect = canvasRef.current!.getBoundingClientRect();
+    if (pointersRef.current.has(e.pointerId)) pointersRef.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if (pointersRef.current.size === 2 && pinchRef.current) {
+      const d = pinchDist(); const [a, b] = [...pointersRef.current.values()];
+      zoomAt((a.x + b.x) / 2 - rect.left, (a.y + b.y) / 2 - rect.top, d / pinchRef.current, d / pinchRef.current);
+      pinchRef.current = d;
+      return;
+    }
     if (dragRef.current) {
       const dx = e.clientX - dragRef.current.x, dy = e.clientY - dragRef.current.y;
       dragRef.current = { x: e.clientX, y: e.clientY };
       viewRef.current = { ...viewRef.current, ox: viewRef.current.ox + dx, oy: viewRef.current.oy + dy }; draw();
     } else setHover(toMath(e.clientX - rect.left, e.clientY - rect.top));
   }
-  function onUp(e: React.PointerEvent) { dragRef.current = null; try { (e.target as HTMLElement).releasePointerCapture(e.pointerId); } catch {} }
+  function onUp(e: React.PointerEvent) {
+    pointersRef.current.delete(e.pointerId); pinchRef.current = null;
+    // Lifting one finger of a pinch: carry on panning with the one still down.
+    const rest = [...pointersRef.current.values()][0];
+    dragRef.current = rest ? { ...rest } : null;
+    try { (e.target as HTMLElement).releasePointerCapture(e.pointerId); } catch {}
+  }
   const clampZoom = (z: number) => Math.min(200000, Math.max(0.1, z));
-  function onWheel(e: React.WheelEvent) {
-    if (embed) return; // embedded lesson graphs: don't hijack page scroll / zoom — use the +/− buttons
-    const rect = canvasRef.current!.getBoundingClientRect();
-    const mx = e.clientX - rect.left, my = e.clientY - rect.top;
+  // Zoom by (fx, fy) keeping the math point under canvas pixel (mx, my) fixed.
+  function zoomAt(mx: number, my: number, fx: number, fy: number) {
     const before = toMath(mx, my);
-    const f = e.deltaY < 0 ? 1.15 : 1 / 1.15;
-    // Shift+wheel zooms the x-axis only; Alt/Ctrl+wheel the y-axis only.
-    const fx = e.altKey || e.ctrlKey ? 1 : f;
-    const fy = e.shiftKey ? 1 : f;
     const { w, h } = sizeRef.current; const v = viewRef.current;
     const zoomX = clampZoom(v.zoomX * fx), zoomY = clampZoom(v.zoomY * fy);
     viewRef.current = { zoomX, zoomY, ox: mx - w / 2 - before.x * zoomX, oy: my - h / 2 + before.y * zoomY };
     draw();
   }
+  function onWheel(e: WheelEvent) {
+    if (embed) return; // embedded lesson graphs: don't hijack page scroll / zoom — use the +/− buttons
+    // Keep the browser from scrolling or zooming the whole page (a trackpad pinch
+    // arrives as Ctrl + wheel) — the gesture is meant for the graph.
+    e.preventDefault();
+    const rect = canvasRef.current!.getBoundingClientRect();
+    const mx = e.clientX - rect.left, my = e.clientY - rect.top;
+    // Pinch / Ctrl+wheel: smooth zoom proportional to the gesture, both axes.
+    // Plain wheel: fixed steps. Shift zooms the x-axis only, Alt the y-axis only.
+    const unit = e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? 400 : 1;
+    const f = e.ctrlKey ? Math.exp(-e.deltaY * unit * 0.01) : e.deltaY < 0 ? 1.15 : e.deltaY > 0 ? 1 / 1.15 : 1;
+    zoomAt(mx, my, e.altKey ? 1 : f, e.shiftKey && !e.ctrlKey ? 1 : f);
+  }
+  // React registers wheel listeners as passive, so preventDefault() there is ignored
+  // and the page zooms instead of the graph. Attach a non-passive native listener.
+  const wheelRef = useRef(onWheel);
+  useEffect(() => { wheelRef.current = onWheel; });
+  useEffect(() => {
+    const c = canvasRef.current; if (!c) return;
+    const h = (e: WheelEvent) => wheelRef.current(e);
+    c.addEventListener("wheel", h, { passive: false });
+    return () => c.removeEventListener("wheel", h);
+  }, []);
   // Scale each axis independently, keeping the canvas centre fixed.
   function zoomAxis(fx: number, fy: number) {
     const { w, h } = sizeRef.current; const v = viewRef.current;
@@ -856,7 +896,7 @@ export function Calculator({ initialData, initialState, initialId, embed = false
 
   const plot = (
     <div ref={wrapRef} style={{ flex: 1, minWidth: 280, minHeight: 460, position: "relative", background: "#fff" }}>
-      <canvas ref={canvasRef} onPointerDown={onDown} onPointerMove={onMove} onPointerUp={onUp} onPointerLeave={() => setHover(null)} onWheel={onWheel} style={{ width: "100%", height: "100%", display: "block", cursor: "crosshair", touchAction: "none" }} />
+      <canvas ref={canvasRef} onPointerDown={onDown} onPointerMove={onMove} onPointerUp={onUp} onPointerCancel={onUp} onPointerLeave={() => setHover(null)} style={{ width: "100%", height: "100%", display: "block", cursor: "crosshair", touchAction: "none" }} />
       <div style={{ position: "absolute", top: 10, right: 10, display: "flex", flexDirection: "column", gap: 6, alignItems: "flex-end" }}>
         <div style={{ display: "flex", gap: 6 }}>
           <Ctrl onClick={() => zoomAxis(1.2, 1.2)} title="Zoom in (both axes)">+</Ctrl>
