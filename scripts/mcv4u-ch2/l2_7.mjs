@@ -1,6 +1,8 @@
 // MCV4U 2.7 — Chapter 2 Review (NEW lesson): power, product, chain and quotient rules, velocity and acceleration,
 // and rate-of-change problems, with multi-rule examples, mixed practice, a readiness checklist and a hard level
 import { intro, section, keyIdea, widget, examples, practice, wrapUp, table, q, num, choice, expr, hard, plane, rat } from "./lib.mjs";
+import { tv } from "../mcr3u-extables.mjs";
+import { chart } from "../mcv4u-ch3/csign.mjs";
 
 export const TITLE = "2.7 Chapter 2 Review";
 export const ID = "6d4fc002-0001-4001-8001-000000000207";
@@ -57,24 +59,45 @@ export const blocks = () => [
 
   examples([
     ["Product and chain", S`Differentiate \(y=x^3\sqrt{2x+1}\) and write the answer as one fraction.`,
-      [S`\(y'=3x^2(2x+1)^{1/2}+x^3\cdot\tfrac12(2x+1)^{-1/2}\cdot2\).`, S`Common denominator \(\sqrt{2x+1}\): \(\dfrac{3x^2(2x+1)+x^3}{\sqrt{2x+1}}\).`],
-      S`\(y'=\dfrac{x^2(7x+3)}{\sqrt{2x+1}}\)`],
+      [S`<b>Structure.</b> A product \(uv\) with \(u=x^3\) and \(v=(2x+1)^{1/2}\); \(v\) itself needs the chain rule.`,
+        S`<b>Pieces.</b> \(u'=3x^2\); \(v'=\tfrac12(2x+1)^{-1/2}\cdot2=(2x+1)^{-1/2}\).`,
+        S`<b>Product rule.</b> \(y'=3x^2(2x+1)^{1/2}+x^3(2x+1)^{-1/2}\).`,
+        S`<b>One fraction.</b> Multiply the first term by \(\frac{\sqrt{2x+1}}{\sqrt{2x+1}}\): \(y'=\dfrac{3x^2(2x+1)+x^3}{\sqrt{2x+1}}=\dfrac{7x^3+3x^2}{\sqrt{2x+1}}=\dfrac{x^2(7x+3)}{\sqrt{2x+1}}\).`,
+        S`<b>Check.</b> At \(x=4\): \(\frac{16(31)}{3}=\frac{496}{3}\approx165.3\). Secant: \(y(4)=192\), \(y(4.001)\approx192.1653\) ✓`],
+      S`\(y'=\dfrac{x^2(7x+3)}{\sqrt{2x+1}}\)`,
+      plane({ view: { xmin: -0.5, xmax: 2.2, ymin: -1, ymax: 20 }, curves: [{ f: (x) => x ** 3 * Math.sqrt(2 * x + 1), a: -0.5, b: 2.2, color: "violet", label: "y = x³√(2x + 1)" }, { f: (x) => (x * x * (7 * x + 3)) / Math.sqrt(2 * x + 1), a: -0.45, b: 2.2, color: "blue", label: "y′" }], step: { x: 0.5, y: 2 } })],
     ["Quotient and chain", S`Find the horizontal tangents of \(y=\dfrac{(x+1)^2}{x-2}\).`,
-      [S`\(y'=\dfrac{2(x+1)(x-2)-(x+1)^2}{(x-2)^2}=\dfrac{(x+1)(x-5)}{(x-2)^2}\).`, S`Zero at \(x=-1\) and \(x=5\); \(y(-1)=0\), \(y(5)=12\).`],
+      [S`<b>Quotient rule, with the chain rule on top.</b> \(u=(x+1)^2\), \(u'=2(x+1)\); \(v=x-2\), \(v'=1\).`,
+        S`<b>Apply.</b> \(y'=\dfrac{2(x+1)(x-2)-(x+1)^2}{(x-2)^2}\).`,
+        S`<b>Factor out \((x+1)\) instead of expanding.</b> Top \(=(x+1)[2(x-2)-(x+1)]=(x+1)(x-5)\). So \(y'=\dfrac{(x+1)(x-5)}{(x-2)^2}\).`,
+        S`<b>Solve \(y'=0\).</b> \(x=-1\) or \(x=5\). Points: \(y(-1)=0\), \(y(5)=\frac{36}{3}=12\).`,
+        S`<b>Classify.</b> ${chart({ cuts: [[-1, "-1"], [2, "2"], [5, "5"]], undef: [2], d: ["y'", (x) => ((x + 1) * (x - 5)) / (x - 2) ** 2], f: "y" })}`],
       S`\((-1,0)\) and \((5,12)\)`,
-      plane({ view: { xmin: -4, xmax: 9, ymin: -12, ymax: 28 }, curves: rat((x) => (x + 1) ** 2 / (x - 2), [2], { xmin: -4, xmax: 9 }), vlines: [{ x: 2, color: "red", dash: true }], points: [{ x: -1, y: 0, label: "(−1, 0)", color: "red" }, { x: 5, y: 12, label: "(5, 12)", color: "red" }], step: { x: 1, y: 4 } })],
+      plane({ view: { xmin: -4, xmax: 9, ymin: -12, ymax: 28 }, curves: rat((x) => (x + 1) ** 2 / (x - 2), [2], { xmin: -4, xmax: 9 }).map((c, i) => (i === 1 ? { ...c, label: "y = (x + 1)²/(x − 2)" } : c)), vlines: [{ x: 2, color: "red", dash: true }], points: [{ x: -1, y: 0, label: "(−1, 0)", color: "red" }, { x: 5, y: 12, label: "(5, 12)", color: "red" }], step: { x: 1, y: 4 } })],
     ["Motion", S`A particle moves with \(s(t)=2t^3-9t^2+12t\) m. When is it at rest, and what is its acceleration at the first of those times?`,
-      [S`\(v=6t^2-18t+12=6(t-1)(t-2)\): at rest at \(t=1\) and \(t=2\) s.`, S`\(a=12t-18\Rightarrow a(1)=-6\).`],
+      [S`<b>Velocity.</b> \(v=s'=6t^2-18t+12=6(t^2-3t+2)=6(t-1)(t-2)\) m/s.`,
+        S`<b>At rest.</b> \(v=0\) at \(t=1\) s and \(t=2\) s. Positions \(s(1)=5\) m and \(s(2)=4\) m.`,
+        S`<b>Acceleration.</b> \(a=v'=12t-18\), so \(a(1)=-6\) m/s².`,
+        S`<b>Interpret.</b> At \(t=1\) the particle is momentarily stopped while the acceleration points backward: it is about to reverse. ${chart({ v: "t", f: "s", from: [0, "0"], cuts: [[1, "1"], [2, "2"]], d: ["v(t)", (t) => 6 * t * t - 18 * t + 12] })}`,
+        S`<b>Check.</b> \(v(0.9)=6(-0.1)(-1.1)=0.66\gt0\) and \(v(1.1)=6(0.1)(-0.9)=-0.54\lt0\): forward then backward ✓`],
       S`at rest at 1 s and 2 s; \(a(1)=-6\) m/s²`,
-      plane({ view: { xmin: 0, xmax: 3, ymin: -8, ymax: 14 }, curves: [{ f: (t) => 2 * t ** 3 - 9 * t * t + 12 * t, color: "violet" }, { f: (t) => 6 * t * t - 18 * t + 12, color: "blue" }, { f: (t) => 12 * t - 18, color: "amber" }], points: [{ x: 1, y: 0, label: "v = 0", color: "red" }, { x: 2, y: 0, label: "v = 0", color: "red" }], step: { x: 0.5, y: 2 } })],
+      plane({ view: { xmin: 0, xmax: 3, ymin: -8, ymax: 14 }, curves: [{ f: (t) => 2 * t ** 3 - 9 * t * t + 12 * t, color: "violet", label: "s(t)" }, { f: (t) => 6 * t * t - 18 * t + 12, color: "blue", label: "v(t)" }, { f: (t) => 12 * t - 18, color: "amber", label: "a(t)" }], points: [{ x: 1, y: 0, label: "v = 0", color: "red" }, { x: 2, y: 0, label: "v = 0", color: "red" }], step: { x: 0.5, y: 2 }, xlabel: "t (s)" })],
     ["Marginal cost", S`\(C(x)=0.001x^3-0.3x^2+40x+1000\) dollars. Find \(C'(100)\), and the production level where the marginal cost is lowest.`,
-      [S`\(C'(x)=0.003x^2-0.6x+40\Rightarrow C'(100)=30-60+40=10\).`, S`\(C'\) is a parabola; its vertex is at \(x=\tfrac{0.6}{0.006}=100\).`],
+      [S`<b>Marginal cost.</b> \(C'(x)=0.003x^2-0.6x+40\).`,
+        S`<b>At 100 items.</b> \(C'(100)=0.003(10\,000)-60+40=30-60+40=10\) dollars per item.`,
+        S`<b>Lowest marginal cost.</b> \(C'\) is an upward parabola, so its minimum is at the vertex: \(x=-\dfrac{b}{2a}=\dfrac{0.6}{0.006}=100\).`,
+        S`<b>Same answer with derivatives.</b> \(C''(x)=0.006x-0.6=0\) at \(x=100\): there the cost curve changes from bending down to bending up.`,
+        S`<b>Check.</b> ${tv(["\\(x\\)", "50", "100", "150"], ["\\(C'(x)\\)", "17.5", "10", "17.5"])} The smallest value is at 100 ✓`],
       S`\(C'(100)=10\) dollars per item, the lowest marginal cost, at 100 items`,
-      plane({ view: { xmin: 0, xmax: 200, ymin: 0, ymax: 60 }, curves: [{ f: (x) => 0.003 * x * x - 0.6 * x + 40, color: "blue" }], points: [{ x: 100, y: 10, label: "(100, 10)", color: "red" }], step: { x: 25, y: 10 } })],
+      plane({ view: { xmin: 0, xmax: 200, ymin: 0, ymax: 60 }, curves: [{ f: (x) => 0.003 * x * x - 0.6 * x + 40, color: "blue", label: "C′(x) = 0.003x² − 0.6x + 40" }], points: [{ x: 100, y: 10, label: "(100, 10)", color: "red" }], step: { x: 25, y: 10 }, xlabel: "x (items)", ylabel: "C′ ($/item)" })],
     ["Tangent to a quotient", S`Find the tangent to \(y=\dfrac{3x}{x+2}\) at \(x=1\).`,
-      [S`\(y(1)=1\).`, S`\(y'=\dfrac{3(x+2)-3x}{(x+2)^2}=\dfrac6{(x+2)^2}\Rightarrow y'(1)=\tfrac23\).`, S`\(y-1=\tfrac23(x-1)\).`],
+      [S`<b>Point.</b> \(y(1)=\frac{3}{3}=1\).`,
+        S`<b>Quotient rule.</b> \(y'=\dfrac{3(x+2)-3x(1)}{(x+2)^2}=\dfrac{6}{(x+2)^2}\).`,
+        S`<b>Slope.</b> \(y'(1)=\frac{6}{9}=\frac23\).`,
+        S`<b>Equation.</b> \(y-1=\tfrac23(x-1)\Rightarrow y=\tfrac23x+\tfrac13\).`,
+        S`<b>Check.</b> \(y(1.01)=\frac{3.03}{3.01}\approx1.006\,64\); the line gives \(1.006\,67\) — agreement to four decimals ✓`],
       S`\(y=\tfrac23x+\tfrac13\)`,
-      plane({ view: { xmin: -1.5, xmax: 5, ymin: -2, ymax: 4 }, curves: [{ f: (x) => (3 * x) / (x + 2), color: "violet", a: -1.5, b: 5 }, { f: (x) => (2 * x + 1) / 3, color: "green" }], points: [{ x: 1, y: 1, label: "(1, 1)", color: "red" }], step: { x: 1, y: 1 } })],
+      plane({ view: { xmin: -1.5, xmax: 5, ymin: -2, ymax: 4 }, curves: [{ f: (x) => (3 * x) / (x + 2), color: "violet", a: -1.5, b: 5, label: "y = 3x/(x + 2)" }, { f: (x) => (2 * x + 1) / 3, color: "green", label: "y = ⅔x + ⅓" }], points: [{ x: 1, y: 1, label: "(1, 1)", color: "red" }], step: { x: 1, y: 1 } })],
   ]),
 
   practice([

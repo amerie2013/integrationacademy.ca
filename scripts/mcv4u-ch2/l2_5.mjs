@@ -1,6 +1,8 @@
 // MCV4U 2.5 — Derivatives of Quotients: the quotient rule (u/v)′ = (u′v − uv′)/v², why it follows from the product and
 // chain rules, horizontal tangents of rational functions, tangent lines, and optimizing a rational model
 import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, q, num, choice, expr, hard, plane, rat } from "./lib.mjs";
+import { tv } from "../mcr3u-extables.mjs";
+import { chart } from "../mcv4u-ch3/csign.mjs";
 
 export const TITLE = "2.5 Derivatives of Quotients";
 export const ID = "60dcb0bb-06ff-4f35-884c-d558ff79a342";
@@ -58,22 +60,45 @@ export const blocks = () => [
 
   examples([
     ["Linear over linear", S`Differentiate \(h(x)=\dfrac{2x+1}{x-3}\).`,
-      [S`\(u=2x+1\), \(u'=2\); \(v=x-3\), \(v'=1\).`, S`\(h'=\dfrac{2(x-3)-(2x+1)(1)}{(x-3)^2}=\dfrac{-7}{(x-3)^2}\).`],
-      S`\(h'(x)=-\dfrac{7}{(x-3)^2}\)`],
+      [S`<b>Quotient rule.</b> For \(h=\dfrac{u}{v}\): \(h'=\dfrac{u'v-uv'}{v^2}\). The order in the numerator matters: "low d-high minus high d-low, over low squared."`,
+        S`<b>Parts.</b> \(u=2x+1\), \(u'=2\); \(v=x-3\), \(v'=1\).`,
+        S`<b>Apply.</b> \(h'=\dfrac{2(x-3)-(2x+1)(1)}{(x-3)^2}=\dfrac{2x-6-2x-1}{(x-3)^2}=\dfrac{-7}{(x-3)^2}\).`,
+        S`<b>Interpret.</b> The top is \(-7\) and the bottom is a square, so \(h'\lt0\) everywhere it is defined: \(h\) falls on each side of its asymptote \(x=3\).`,
+        S`<b>Check.</b> \(h'(4)=-7\). \(h(4)=9\), \(h(4.01)=\frac{9.02}{1.01}\approx8.930\,69\); slope \(\approx-6.93\) ✓`],
+      S`\(h'(x)=-\dfrac{7}{(x-3)^2}\)`,
+      plane({ view: { xmin: -4, xmax: 10, ymin: -8, ymax: 12 }, curves: rat((x) => (2 * x + 1) / (x - 3), [3], { xmin: -4, xmax: 10 }).map((c, i) => (i === 1 ? { ...c, label: "h(x) = (2x + 1)/(x − 3)" } : c)), vlines: [{ x: 3, color: "red", dash: true, label: "x = 3" }], lines: [{ m: 0, b: 2, color: "gray", dash: true }], points: [{ x: 4, y: 9, label: "(4, 9)", color: "red" }], step: { x: 1, y: 2 } }, "falling on both branches, as h′ < 0 predicts")],
     ["Quadratic over linear", S`Differentiate \(y=\dfrac{x^2}{x+1}\).`,
-      [S`\(y'=\dfrac{2x(x+1)-x^2(1)}{(x+1)^2}=\dfrac{x^2+2x}{(x+1)^2}\).`],
-      S`\(y'=\dfrac{x(x+2)}{(x+1)^2}\)`],
+      [S`<b>Parts.</b> \(u=x^2\), \(u'=2x\); \(v=x+1\), \(v'=1\).`,
+        S`<b>Apply.</b> \(y'=\dfrac{2x(x+1)-x^2(1)}{(x+1)^2}=\dfrac{2x^2+2x-x^2}{(x+1)^2}=\dfrac{x^2+2x}{(x+1)^2}\).`,
+        S`<b>Factor the top.</b> \(y'=\dfrac{x(x+2)}{(x+1)^2}\). Zero at \(x=0\) and \(x=-2\); not defined at \(x=-1\).`,
+        S`<b>Signs.</b> ${chart({ cuts: [[-2, "-2"], [-1, "-1"], [0, "0"]], undef: [-1], d: ["y'", (x) => (x * x + 2 * x) / (x + 1) ** 2], f: "y" })}`,
+        S`<b>Check.</b> \(y(0)=0\) and \(y(-2)=\frac{4}{-1}=-4\) are the flat points in the figure ✓`],
+      S`\(y'=\dfrac{x(x+2)}{(x+1)^2}\)`,
+      plane({ view: { xmin: -5, xmax: 3, ymin: -10, ymax: 6 }, curves: rat((x) => (x * x) / (x + 1), [-1], { xmin: -5, xmax: 3 }).map((c, i) => (i === 1 ? { ...c, label: "y = x²/(x + 1)" } : c)), vlines: [{ x: -1, color: "red", dash: true }], points: [{ x: 0, y: 0, label: "(0, 0)", color: "red" }, { x: -2, y: -4, label: "(−2, −4)", color: "red" }], step: { x: 1, y: 2 } })],
     ["Evaluate the slope", S`Find the slope of \(f(x)=\dfrac{x+2}{x-1}\) at \(x=2\).`,
-      [S`\(f'(x)=\dfrac{(x-1)-(x+2)}{(x-1)^2}=\dfrac{-3}{(x-1)^2}\).`, S`\(f'(2)=-3\).`],
-      S`slope \(-3\)`],
+      [S`<b>Parts.</b> \(u=x+2\), \(u'=1\); \(v=x-1\), \(v'=1\).`,
+        S`<b>Quotient rule.</b> \(f'(x)=\dfrac{(1)(x-1)-(x+2)(1)}{(x-1)^2}=\dfrac{-3}{(x-1)^2}\).`,
+        S`<b>Evaluate.</b> \(f'(2)=\dfrac{-3}{1^2}=-3\).`,
+        S`<b>Tangent (bonus).</b> \(f(2)=4\), so the tangent is \(y-4=-3(x-2)\), i.e. \(y=-3x+10\).`,
+        S`<b>Check.</b> \(f(2.01)=\frac{4.01}{1.01}\approx3.970\,30\); slope \(\approx\frac{-0.0297}{0.01}=-2.97\) ✓`],
+      S`slope \(-3\)`,
+      plane({ view: { xmin: -3, xmax: 6, ymin: -6, ymax: 10 }, curves: [...rat((x) => (x + 2) / (x - 1), [1], { xmin: -3, xmax: 6 }).map((c, i) => (i === 1 ? { ...c, label: "f(x) = (x + 2)/(x − 1)" } : c)), { f: (x) => -3 * x + 10, a: 1.3, b: 4, color: "green", label: "slope −3" }], vlines: [{ x: 1, color: "red", dash: true }], points: [{ x: 2, y: 4, label: "(2, 4)", color: "red" }], step: { x: 1, y: 2 } })],
     ["A horizontal tangent", S`Find the tangent to \(y=\dfrac{x}{x^2+1}\) at \(x=1\).`,
-      [S`\(y'=\dfrac{(x^2+1)-x(2x)}{(x^2+1)^2}=\dfrac{1-x^2}{(x^2+1)^2}\).`, S`\(y'(1)=0\), \(y(1)=\tfrac12\).`],
+      [S`<b>Parts.</b> \(u=x\), \(u'=1\); \(v=x^2+1\), \(v'=2x\).`,
+        S`<b>Quotient rule.</b> \(y'=\dfrac{(1)(x^2+1)-x(2x)}{(x^2+1)^2}=\dfrac{1-x^2}{(x^2+1)^2}\).`,
+        S`<b>At \(x=1\).</b> \(y'(1)=\dfrac{0}{4}=0\), and \(y(1)=\tfrac12\).`,
+        S`<b>Tangent.</b> Slope 0 through \((1,\tfrac12)\): the horizontal line \(y=\tfrac12\).`,
+        S`<b>Check.</b> \(y(0.9)=\frac{0.9}{1.81}\approx0.4972\) and \(y(1.1)=\frac{1.1}{2.21}\approx0.4977\): both just below \(\tfrac12\), so \((1,\tfrac12)\) is a peak and the tangent there is flat ✓`],
       S`\(y=\tfrac12\) (horizontal)`,
-      plane({ view: { xmin: -5, xmax: 5, ymin: -1, ymax: 1 }, curves: [{ f: (x) => x / (x * x + 1), color: "violet" }, { f: () => 0.5, color: "green" }], points: [{ x: 1, y: 0.5, label: "(1, ½)", color: "red" }], step: { x: 1, y: 0.25 } })],
+      plane({ view: { xmin: -5, xmax: 5, ymin: -1, ymax: 1 }, curves: [{ f: (x) => x / (x * x + 1), color: "violet", label: "y = x/(x² + 1)" }, { f: () => 0.5, color: "green", label: "y = ½" }], points: [{ x: 1, y: 0.5, label: "(1, ½)", color: "red" }], step: { x: 1, y: 0.25 } })],
     ["All horizontal tangents", S`Find the points where \(y=\dfrac{x^2+3}{x-1}\) has a horizontal tangent.`,
-      [S`\(y'=\dfrac{2x(x-1)-(x^2+3)}{(x-1)^2}=\dfrac{x^2-2x-3}{(x-1)^2}\).`, S`\(x^2-2x-3=(x-3)(x+1)=0\Rightarrow x=3,\,-1\).`, S`\(y(3)=6\), \(y(-1)=-2\).`],
+      [S`<b>Horizontal means \(y'=0\).</b> A fraction is 0 when its numerator is 0 (and its denominator is not).`,
+        S`<b>Quotient rule.</b> \(y'=\dfrac{2x(x-1)-(x^2+3)(1)}{(x-1)^2}=\dfrac{x^2-2x-3}{(x-1)^2}\).`,
+        S`<b>Solve.</b> \(x^2-2x-3=(x-3)(x+1)=0\Rightarrow x=3\) or \(x=-1\). Neither makes the denominator 0 ✓`,
+        S`<b>Points.</b> \(y(3)=\frac{12}{2}=6\) and \(y(-1)=\frac{4}{-2}=-2\).`,
+        S`<b>Classify with signs.</b> ${chart({ cuts: [[-1, "-1"], [1, "1"], [3, "3"]], undef: [1], d: ["y'", (x) => (x * x - 2 * x - 3) / (x - 1) ** 2], f: "y" })} A peak at \((-1,-2)\) on the left branch and a valley at \((3,6)\) on the right ✓`],
       S`\((3,6)\) and \((-1,-2)\)`,
-      plane({ view: { xmin: -5, xmax: 7, ymin: -12, ymax: 16 }, curves: rat((x) => (x * x + 3) / (x - 1), [1], { xmin: -5, xmax: 7 }), vlines: [{ x: 1, color: "red", dash: true }], points: [{ x: 3, y: 6, label: "(3, 6)", color: "red" }, { x: -1, y: -2, label: "(−1, −2)", color: "red" }], step: { x: 1, y: 4 } })],
+      plane({ view: { xmin: -5, xmax: 7, ymin: -12, ymax: 16 }, curves: rat((x) => (x * x + 3) / (x - 1), [1], { xmin: -5, xmax: 7 }).map((c, i) => (i === 1 ? { ...c, label: "y = (x² + 3)/(x − 1)" } : c)), vlines: [{ x: 1, color: "red", dash: true }], points: [{ x: 3, y: 6, label: "(3, 6)", color: "red" }, { x: -1, y: -2, label: "(−1, −2)", color: "red" }], step: { x: 1, y: 4 } })],
   ]),
 
   practice([

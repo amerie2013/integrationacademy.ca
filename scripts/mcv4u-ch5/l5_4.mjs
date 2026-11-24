@@ -1,6 +1,8 @@
 // MCV4U 5.4 — Differentiation Rules for Exponential Functions (NEW lesson): combining exponentials and logarithms with
 // the product, quotient and chain rules, logarithmic differentiation (x^x), second derivatives and curve features
 import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, q, num, choice, hard, plane } from "./lib.mjs";
+import { tv } from "../mcr3u-extables.mjs";
+import { chart } from "../mcv4u-ch3/csign.mjs";
 
 export const TITLE = "5.4 Differentiation Rules for Exponential Functions";
 export const ID = "6d4fc005-0001-4001-8001-000000000504";
@@ -60,23 +62,45 @@ export const blocks = () => [
 
   examples([
     ["Product and chain", S`Differentiate \(y=e^{3x}\sin(2x)\).`,
-      [S`\(3e^{3x}\sin2x+e^{3x}\cdot2\cos2x\).`],
-      S`\(y'=e^{3x}(3\sin2x+2\cos2x)\)`],
+      [S`<b>Structure.</b> A product \(uv\) with \(u=e^{3x}\) and \(v=\sin2x\); each factor needs the chain rule.`,
+        S`<b>Pieces.</b> \(u'=3e^{3x}\); \(v'=2\cos2x\).`,
+        S`<b>Product rule.</b> \(y'=3e^{3x}\sin2x+e^{3x}\cdot2\cos2x\).`,
+        S`<b>Factor.</b> \(y'=e^{3x}(3\sin2x+2\cos2x)\). Since \(e^{3x}\gt0\), the sign of \(y'\) is the sign of \(3\sin2x+2\cos2x\).`,
+        S`<b>Check at 0.</b> \(y'(0)=1\cdot(0+2)=2\). Secant: \(\frac{e^{0.003}\sin0.002}{0.001}\approx2.006\) ✓`],
+      S`\(y'=e^{3x}(3\sin2x+2\cos2x)\)`,
+      plane({ view: { xmin: -1, xmax: 1.6, ymin: -6, ymax: 12 }, curves: [{ f: (x) => Math.exp(3 * x) * Math.sin(2 * x), color: "violet", label: "y = e³ˣ sin 2x" }, { f: (x) => 2 * x, a: -0.6, b: 0.6, color: "green", label: "slope 2" }], points: [{ x: 0, y: 0, label: "(0, 0)", color: "red" }], step: { x: 0.5, y: 2 } })],
     ["Logarithmic differentiation", S`Differentiate \(y=x^x\) (\(x\gt0\)) and find \(y'(2)\).`,
-      [S`\(\ln y=x\ln x\Rightarrow\frac{y'}{y}=\ln x+1\).`, S`\(y'=x^x(\ln x+1)\); at 2: \(4(\ln2+1)\).`],
+      [S`<b>Why a new method?</b> The power rule needs a constant exponent; the exponential rule needs a constant base. Here both vary.`,
+        S`<b>Take ln.</b> \(\ln y=\ln(x^x)=x\ln x\).`,
+        S`<b>Differentiate both sides.</b> Left (chain rule): \(\frac{1}{y}y'\). Right (product rule): \(\ln x+x\cdot\frac1x=\ln x+1\).`,
+        S`<b>Solve.</b> \(y'=y(\ln x+1)=x^x(\ln x+1)\). At 2: \(4(\ln2+1)\approx4(1.693)\approx6.773\).`,
+        S`<b>Check.</b> \(\frac{2.001^{2.001}-4}{0.001}\approx6.78\) ✓. Also \(y'=0\) at \(\ln x=-1\), \(x=\frac1e\): the low point in the figure.`],
       S`\(y'=x^x(\ln x+1)\); \(y'(2)\approx6.773\)`,
-      plane({ view: { xmin: -0.1, xmax: 2.5, ymin: -0.5, ymax: 8 }, curves: [{ f: (x) => x ** x, a: 0.01, b: 2.5, color: "violet" }, { f: (x) => 4 + 6.773 * (x - 2), color: "green", a: 1.5, b: 2.5 }], points: [{ x: 1 / E, y: (1 / E) ** (1 / E), label: "min (1/e, 0.69)", color: "blue" }, { x: 2, y: 4, label: "(2, 4)", color: "red" }], step: { x: 0.5, y: 1 } })],
+      plane({ view: { xmin: -0.1, xmax: 2.5, ymin: -0.5, ymax: 8 }, curves: [{ f: (x) => x ** x, a: 0.01, b: 2.5, color: "violet", label: "y = xˣ" }, { f: (x) => 4 + 6.773 * (x - 2), color: "green", a: 1.5, b: 2.5, label: "slope ≈ 6.77" }], points: [{ x: 1 / E, y: (1 / E) ** (1 / E), label: "min (1/e, 0.69)", color: "blue" }, { x: 2, y: 4, label: "(2, 4)", color: "red" }], step: { x: 0.5, y: 1 } })],
     ["Always decreasing", S`Show that \(y=\frac{x^2+1}{e^x}\) is never increasing.`,
-      [S`\(y=(x^2+1)e^{-x}\Rightarrow y'=2xe^{-x}-(x^2+1)e^{-x}\).`, S`\(=-(x^2-2x+1)e^{-x}=-(x-1)^2e^{-x}\le0\).`],
+      [S`<b>Rewrite.</b> \(y=(x^2+1)e^{-x}\), a product (easier than the quotient rule).`,
+        S`<b>Product rule.</b> \(y'=2xe^{-x}+(x^2+1)(-e^{-x})=e^{-x}(2x-x^2-1)\).`,
+        S`<b>Factor.</b> \(2x-x^2-1=-(x^2-2x+1)=-(x-1)^2\), so \(y'=-(x-1)^2e^{-x}\).`,
+        S`<b>Sign.</b> \((x-1)^2\ge0\) and \(e^{-x}\gt0\), so \(y'\le0\) everywhere, equal to 0 only at \(x=1\). ${chart({ cuts: [[1, "1"]], d: ["y'", (x) => -((x - 1) ** 2) * Math.exp(-x)], f: "y" })}`,
+        S`<b>Conclusion.</b> The graph levels off at \((1,\frac2e)\) but keeps falling on both sides: no turning point ✓`],
       S`\(y'=-(x-1)^2e^{-x}\le0\): decreasing everywhere, with a flat point at \(x=1\)`,
-      plane({ view: { xmin: -2, xmax: 5, ymin: -0.5, ymax: 6 }, curves: [{ f: (x) => (x * x + 1) * Math.exp(-x), a: -1.6, b: 5, color: "violet" }], points: [{ x: 1, y: 2 / E, label: "flat (1, 2/e)", color: "red" }], step: { x: 1, y: 1 } })],
+      plane({ view: { xmin: -2, xmax: 5, ymin: -0.5, ymax: 6 }, curves: [{ f: (x) => (x * x + 1) * Math.exp(-x), a: -1.6, b: 5, color: "violet", label: "y = (x² + 1)/eˣ" }], points: [{ x: 1, y: 2 / E, label: "flat (1, 2/e)", color: "red" }], step: { x: 1, y: 1 } })],
     ["ln of an exponential sum", S`For \(y=\ln(e^{2x}+1)\), find \(y'(0)\).`,
-      [S`\(y'=\frac{2e^{2x}}{e^{2x}+1}\); at 0: \(\frac22\).`],
-      S`\(y'(0)=1\)`],
+      [S`<b>Outer ln.</b> \(\frac{d}{dx}\ln g=\frac{g'}{g}\) with \(g=e^{2x}+1\).`,
+        S`<b>Inner derivative.</b> \(g'=2e^{2x}\).`,
+        S`<b>So</b> \(y'=\dfrac{2e^{2x}}{e^{2x}+1}\); at 0: \(\dfrac{2}{1+1}=1\).`,
+        S`<b>Long-run behaviour.</b> For large \(x\), \(y'\to2\) (the graph approaches the line \(y=2x\)); for very negative \(x\), \(y'\to0\) (it flattens toward \(y=0\)).`,
+        S`<b>Check.</b> \(y(0)=\ln2\approx0.693\); \(\frac{y(0.001)-y(0)}{0.001}\approx1.000\) ✓`],
+      S`\(y'(0)=1\)`,
+      plane({ view: { xmin: -3, xmax: 2.5, ymin: -0.5, ymax: 5.5 }, curves: [{ f: (x) => Math.log(Math.exp(2 * x) + 1), color: "violet", label: "y = ln(e²ˣ + 1)" }, { f: (x) => 2 * x, a: 0.5, b: 2.5, color: "gray", label: "y = 2x" }, { f: (x) => Math.log(2) + x, a: -1.2, b: 1, color: "green", label: "slope 1" }], points: [{ x: 0, y: Math.log(2), label: "(0, ln 2)", color: "red" }], step: { x: 0.5, y: 1 } })],
     ["The bell curve's inflection points", S`Find the inflection points of \(y=e^{-x^2}\).`,
-      [S`\(y'=-2xe^{-x^2}\); \(y''=-2e^{-x^2}+4x^2e^{-x^2}=(4x^2-2)e^{-x^2}\).`, S`\(y''=0\Rightarrow x=\pm\frac1{\sqrt2}\approx\pm0.707\); \(y=e^{-1/2}\approx0.607\).`],
+      [S`<b>First derivative.</b> \(y'=e^{-x^2}\cdot(-2x)=-2xe^{-x^2}\).`,
+        S`<b>Second derivative (product rule).</b> \(y''=-2e^{-x^2}+(-2x)(-2x)e^{-x^2}=(4x^2-2)e^{-x^2}\).`,
+        S`<b>Zeros.</b> \(4x^2-2=0\Rightarrow x=\pm\frac{1}{\sqrt2}\approx\pm0.707\); height \(e^{-1/2}\approx0.607\).`,
+        S`<b>Sign change.</b> ${chart({ kind: "conc", cuts: [[-Math.SQRT1_2, "-\\tfrac{1}{\\sqrt2}"], [Math.SQRT1_2, "\\tfrac{1}{\\sqrt2}"]], d: ["y''", (x) => (4 * x * x - 2) * Math.exp(-x * x)], f: "y" })}`,
+        S`<b>Interpret.</b> The bell bends down in the middle and up in the tails; it changes at \(x=\pm0.707\), where it is steepest ✓`],
       S`inflection points \(\left(\pm0.707,0.607\right)\)`,
-      plane({ view: { xmin: -3, xmax: 3, ymin: -0.2, ymax: 1.3 }, curves: [{ f: (x) => Math.exp(-x * x), color: "violet" }], points: [{ x: Math.SQRT1_2, y: Math.exp(-0.5), label: "inflection", color: "red" }, { x: -Math.SQRT1_2, y: Math.exp(-0.5), label: "inflection", color: "red" }], step: { x: 0.5, y: 0.25 } })],
+      plane({ view: { xmin: -3, xmax: 3, ymin: -0.2, ymax: 1.3 }, curves: [{ f: (x) => Math.exp(-x * x), color: "violet", label: "y = e^(−x²)" }], points: [{ x: Math.SQRT1_2, y: Math.exp(-0.5), label: "inflection", color: "red" }, { x: -Math.SQRT1_2, y: Math.exp(-0.5), label: "inflection", color: "red" }], step: { x: 0.5, y: 0.25 } })],
   ]),
 
   practice([

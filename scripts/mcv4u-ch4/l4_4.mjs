@@ -1,6 +1,7 @@
 // MCV4U 4.4 — Applications of Sinusoidal Functions and Their Derivatives (NEW lesson): simple harmonic motion,
 // Ferris wheels, daylight models, maximum rates, optimization with angles, and a rotating beam (related rates)
 import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, q, num, choice, hard, plane } from "./lib.mjs";
+import { tv } from "../mcr3u-extables.mjs";
 
 export const TITLE = "4.4 Applications of Sinusoidal Functions and Their Derivatives";
 export const ID = "6d4fc004-0001-4001-8001-000000000404";
@@ -58,23 +59,45 @@ export const blocks = () => [
 
   examples([
     ["A mass on a spring", S`A mass moves with \(s(t)=8\cos(3t)\) cm. Find \(v(t)\), \(a(t)\), the maximum speed, and show that \(a=-9s\).`,
-      [S`\(v=-24\sin(3t)\) cm/s; \(a=-72\cos(3t)\) cm/s².`, S`Maximum speed 24 cm/s (when \(\sin3t=\pm1\), i.e. as it passes \(s=0\)).`, S`\(a=-9\cdot8\cos(3t)=-9s\).`],
-      S`maximum speed 24 cm/s; \(a=-9s\): simple harmonic motion with \(\omega=3\)`],
+      [S`<b>Velocity (chain rule).</b> \(v=s'=8(-\sin3t)\cdot3=-24\sin(3t)\) cm/s.`,
+        S`<b>Acceleration.</b> \(a=v'=-24\cos(3t)\cdot3=-72\cos(3t)\) cm/s².`,
+        S`<b>Maximum speed.</b> \(|v|=24|\sin3t|\le24\), with equality when \(\sin3t=\pm1\). Then \(\cos3t=0\), so \(s=0\): the mass is fastest as it passes the rest position.`,
+        S`<b>Relation.</b> \(a=-72\cos(3t)=-9\cdot8\cos(3t)=-9s\). The acceleration always points back toward the centre and is proportional to the displacement: simple harmonic motion, \(a=-\omega^2s\) with \(\omega=3\).`,
+        S`<b>Check with values.</b> ${tv(["\\(t\\)", "0", "\\(\\frac\\pi6\\)", "\\(\\frac\\pi3\\)"], ["\\(s\\)", "8", "0", "−8"], ["\\(v\\)", "0", "−24", "0"], ["\\(a\\)", "−72", "0", "72"])} At the ends speed is 0 and the pull is strongest; in the middle it is the reverse ✓`],
+      S`maximum speed 24 cm/s; \(a=-9s\): simple harmonic motion with \(\omega=3\)`,
+      plane({ view: { xmin: 0, xmax: 2.2, ymin: -28, ymax: 28 }, curves: [{ f: (t) => 8 * Math.cos(3 * t), a: 0, b: 2.2, color: "violet", label: "s(t) = 8 cos 3t" }, { f: (t) => -24 * Math.sin(3 * t), a: 0, b: 2.2, color: "blue", label: "v(t) = −24 sin 3t" }], points: [{ x: PI / 6, y: -24, label: "max speed", color: "red" }], step: { x: 0.5, y: 8 }, xlabel: "t (s)" })],
     ["A Ferris wheel", S`A rider's height is \(h(t)=20-18\cos\left(\frac{\pi}{30}t\right)\) m after \(t\) s. How fast is the rider rising at \(t=15\) s, and when is the rider rising fastest?`,
-      [S`\(h'(t)=18\cdot\frac\pi{30}\sin\left(\frac\pi{30}t\right)=\frac{3\pi}5\sin\left(\frac\pi{30}t\right)\).`, S`\(h'(15)=\frac{3\pi}5\sin\frac\pi2\approx1.885\) m/s — the largest value, at the midline height 20 m.`],
+      [S`<b>Read the model.</b> Midline 20 m, radius 18 m, period \(\frac{2\pi}{\pi/30}=60\) s. At \(t=0\) the rider is at the bottom, \(h(0)=2\) m.`,
+        S`<b>Rate (chain rule).</b> \(h'(t)=-18\cdot\left(-\sin\frac{\pi t}{30}\right)\cdot\frac{\pi}{30}=\frac{3\pi}{5}\sin\left(\frac{\pi}{30}t\right)\) m/s.`,
+        S`<b>At 15 s.</b> \(h'(15)=\frac{3\pi}5\sin\frac\pi2=\frac{3\pi}{5}\approx1.885\) m/s. The height is \(h(15)=20\) m, level with the hub.`,
+        S`<b>Fastest rising.</b> \(\sin\) is at most 1, so \(h'\le\frac{3\pi}{5}\), reached when \(\frac{\pi t}{30}=\frac\pi2+2k\pi\): \(t=15,75,135,\ldots\)`,
+        S`<b>Check.</b> At the hub level the rider's motion is vertical, at full wheel speed \(\frac{2\pi(18)}{60}\approx1.885\) m/s ✓`],
       S`about 1.885 m/s at \(t=15\) s; fastest rising at \(t=15\) s (then every 60 s)`,
-      plane({ view: { xmin: 0, xmax: 125, ymin: 0, ymax: 42 }, curves: [{ f: (t) => 20 - 18 * Math.cos((PI / 30) * t), a: 0, b: 120, color: "violet" }, { f: (t) => 20 + 1.885 * (t - 15), a: 5, b: 25, color: "green" }], points: [{ x: 15, y: 20, label: "(15, 20)", color: "red" }], step: { x: 10, y: 5 } })],
+      plane({ view: { xmin: 0, xmax: 125, ymin: 0, ymax: 42 }, curves: [{ f: (t) => 20 - 18 * Math.cos((PI / 30) * t), a: 0, b: 120, color: "violet", label: "h(t) = 20 − 18 cos(πt/30)" }, { f: (t) => 20 + 1.885 * (t - 15), a: 5, b: 25, color: "green", label: "slope ≈ 1.885" }], points: [{ x: 15, y: 20, label: "(15, 20)", color: "red" }], step: { x: 10, y: 5 }, xlabel: "t (s)", ylabel: "h (m)" })],
     ["Hours of daylight", S`Daylight in a city is \(D(t)=12+3\sin\left(\frac{2\pi}{365}(t-80)\right)\) hours on day \(t\). How fast is it changing on day 80, in minutes per day?`,
-      [S`\(D'(t)=3\cdot\frac{2\pi}{365}\cos\left(\frac{2\pi}{365}(t-80)\right)\).`, S`\(D'(80)=\frac{6\pi}{365}\approx0.0516\) h/day \(\approx3.1\) min/day.`],
+      [S`<b>Chain rule.</b> \(D'(t)=3\cos\left(\frac{2\pi}{365}(t-80)\right)\cdot\frac{2\pi}{365}\) hours per day.`,
+        S`<b>Day 80.</b> The angle is 0 and \(\cos0=1\): \(D'(80)=\frac{6\pi}{365}\approx0.0516\) h/day.`,
+        S`<b>Convert.</b> \(0.0516\times60\approx3.1\) minutes per day.`,
+        S`<b>Interpret.</b> Day 80 (around March 21) is the spring equinox: the daylight curve crosses its midline of 12 h, where a sinusoid changes fastest.`,
+        S`<b>Check.</b> At the longest day, \(t=80+\frac{365}4\approx171\), the angle is \(\frac\pi2\), so \(D'=0\): daylight hardly changes near the solstice ✓`],
       S`increasing by about 3.1 minutes per day (the fastest change of the year)`,
-      plane({ view: { xmin: 0, xmax: 370, ymin: 7, ymax: 16 }, curves: [{ f: (t) => 12 + 3 * Math.sin(((2 * PI) / 365) * (t - 80)), a: 0, b: 365, color: "violet" }], points: [{ x: 80, y: 12, label: "day 80", color: "red" }, { x: 171.25, y: 15, label: "longest day", color: "blue" }], step: { x: 30, y: 1 } })],
+      plane({ view: { xmin: 0, xmax: 370, ymin: 7, ymax: 16 }, curves: [{ f: (t) => 12 + 3 * Math.sin(((2 * PI) / 365) * (t - 80)), a: 0, b: 365, color: "violet", label: "D(t)" }, { f: (t) => 12 + 0.0516 * (t - 80), a: 40, b: 120, color: "green", label: "slope ≈ 0.052 h/day" }], points: [{ x: 80, y: 12, label: "day 80", color: "red" }, { x: 171.25, y: 15, label: "longest day", color: "blue" }], step: { x: 30, y: 1 }, xlabel: "day", ylabel: "hours" })],
     ["The largest triangle", S`A triangle has two sides of 10 cm with angle \(\theta\) between them. Which angle gives the largest area?`,
-      [S`\(A(\theta)=\frac12(10)(10)\sin\theta=50\sin\theta\), \(0\lt\theta\lt\pi\).`, S`\(A'(\theta)=50\cos\theta=0\Rightarrow\theta=\frac\pi2\); \(A''=-50\sin\theta\lt0\).`],
+      [S`<b>Model.</b> Area \(=\frac12ab\sin\theta\), so \(A(\theta)=\frac12(10)(10)\sin\theta=50\sin\theta\), for \(0\lt\theta\lt\pi\).`,
+        S`<b>Critical number.</b> \(A'(\theta)=50\cos\theta=0\Rightarrow\theta=\frac\pi2\) (the only solution in \((0,\pi)\)).`,
+        S`<b>Classify.</b> \(A''(\theta)=-50\sin\theta\lt0\) on \((0,\pi)\), so \(\theta=\frac\pi2\) is a maximum.`,
+        S`<b>Maximum area.</b> \(A\left(\frac\pi2\right)=50\) cm².`,
+        S`<b>Check geometrically.</b> With one side as the base, the height is \(10\sin\theta\), largest (10 cm) when the other side stands straight up ✓ ${tv(["\\(\\theta\\)", "\\(\\frac\\pi6\\)", "\\(\\frac\\pi3\\)", "\\(\\frac\\pi2\\)", "\\(\\frac{2\\pi}3\\)"], ["\\(A\\) (cm²)", "25", "43.3", "50", "43.3"])}`],
       S`a right angle, \(\theta=\frac\pi2\), giving 50 cm²`,
-      plane({ view: { xmin: 0, xmax: 3.3, ymin: 0, ymax: 60 }, curves: [{ f: (t) => 50 * Math.sin(t), a: 0, b: PI, color: "violet" }], points: [{ x: PI / 2, y: 50, label: "(π/2, 50)", color: "red" }], step: { x: 0.5, y: 10 } })],
+      plane({ view: { xmin: 0, xmax: 3.3, ymin: 0, ymax: 60 }, curves: [{ f: (t) => 50 * Math.sin(t), a: 0, b: PI, color: "violet", label: "A(θ) = 50 sin θ" }, { f: () => 50, a: 1, b: 2.1, color: "green" }], points: [{ x: PI / 2, y: 50, label: "(π/2, 50)", color: "red" }], step: { x: 0.5, y: 10 }, xlabel: "θ", ylabel: "A" })],
     ["A swinging pendulum", S`A pendulum's angle is \(\theta(t)=0.2\cos(2t)\) rad. Find its angular velocity and when it is greatest in size.`,
-      [S`\(\theta'(t)=-0.4\sin(2t)\) rad/s.`, S`Largest size 0.4 rad/s when \(\sin2t=\pm1\): \(t=\frac\pi4,\frac{3\pi}4,\ldots\) — as the pendulum passes the vertical.`],
-      S`\(\theta'=-0.4\sin(2t)\); greatest speed 0.4 rad/s at \(t=\frac\pi4+\frac{k\pi}2\)`],
+      [S`<b>Angular velocity.</b> \(\theta'(t)=0.2(-\sin2t)\cdot2=-0.4\sin(2t)\) rad/s.`,
+        S`<b>Greatest size.</b> \(|\theta'|=0.4|\sin2t|\le0.4\), with equality when \(\sin2t=\pm1\): \(2t=\frac\pi2+k\pi\), so \(t=\frac\pi4+\frac{k\pi}2\).`,
+        S`<b>Where is the pendulum then?</b> \(\cos2t=0\), so \(\theta=0\): it is passing through the vertical, the lowest point of its swing.`,
+        S`<b>At the ends</b> (\(\theta=\pm0.2\)), \(\sin2t=0\) and the pendulum is momentarily at rest.`,
+        S`<b>Check.</b> \(\theta'\left(\frac\pi4\right)=-0.4\sin\frac\pi2=-0.4\) rad/s ✓`],
+      S`\(\theta'=-0.4\sin(2t)\); greatest speed 0.4 rad/s at \(t=\frac\pi4+\frac{k\pi}2\)`,
+      plane({ view: { xmin: 0, xmax: 6.5, ymin: -0.5, ymax: 0.5 }, curves: [{ f: (t) => 0.2 * Math.cos(2 * t), a: 0, b: 6.5, color: "violet", label: "θ(t) = 0.2 cos 2t" }, { f: (t) => -0.4 * Math.sin(2 * t), a: 0, b: 6.5, color: "blue", label: "θ′(t) = −0.4 sin 2t" }], points: [{ x: PI / 4, y: -0.4, label: "t = π/4", color: "red" }, { x: (3 * PI) / 4, y: 0.4, label: "t = 3π/4", color: "red" }], step: { x: 0.5, y: 0.1 }, xlabel: "t (s)" })],
   ]),
 
   practice([

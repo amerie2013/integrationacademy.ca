@@ -1,6 +1,8 @@
 // MCV4U 2.3 — Velocity, Acceleration, and Second Derivatives: v = s′, a = v′ = s″, at rest, direction, speeding
 // up/slowing down, vertical motion under gravity, displacement vs total distance, and higher derivatives
 import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, q, num, choice, expr, hard, plane } from "./lib.mjs";
+import { tv } from "../mcr3u-extables.mjs";
+import { chart } from "../mcv4u-ch3/csign.mjs";
 
 export const TITLE = "2.3 Velocity, Acceleration, and Second Derivatives";
 export const ID = "cf54e3d1-179e-4d03-8a82-ec494f7a37c3";
@@ -58,22 +60,45 @@ export const blocks = () => [
 
   examples([
     ["v and a", S`For \(s(t)=t^3-6t^2+9t\) (m, s), find \(v\), \(a\), and when the object is at rest.`,
-      [S`\(v=3t^2-12t+9=3(t-1)(t-3)\); \(a=6t-12\).`, S`At rest at \(t=1\) s and \(t=3\) s.`],
-      S`\(v=3(t-1)(t-3)\), \(a=6t-12\); at rest at 1 s and 3 s`],
+      [S`<b>Definitions.</b> Velocity is the rate of change of position, \(v=s'(t)\). Acceleration is the rate of change of velocity, \(a=v'(t)=s''(t)\). "At rest" means \(v=0\).`,
+        S`<b>Velocity.</b> \(v(t)=3t^2-12t+9=3(t^2-4t+3)=3(t-1)(t-3)\) m/s.`,
+        S`<b>Acceleration.</b> \(a(t)=6t-12\) m/s².`,
+        S`<b>At rest.</b> \(3(t-1)(t-3)=0\) at \(t=1\) s and \(t=3\) s. Positions: \(s(1)=1-6+9=4\) m and \(s(3)=27-54+27=0\) m.`,
+        S`<b>Direction.</b> ${chart({ v: "t", f: "s", from: [0, "0"], cuts: [[1, "1"], [3, "3"]], d: ["v(t)", (t) => 3 * t * t - 12 * t + 9] })} The object moves forward, stops at 4 m, moves back to 0 m, stops, then moves forward again ✓`],
+      S`\(v=3(t-1)(t-3)\), \(a=6t-12\); at rest at 1 s and 3 s`,
+      plane({ view: { xmin: 0, xmax: 4.5, ymin: -4, ymax: 10 }, curves: [{ f: (t) => t ** 3 - 6 * t * t + 9 * t, a: 0, b: 4.5, color: "violet", label: "s(t) = t³ − 6t² + 9t" }, { f: (t) => 3 * t * t - 12 * t + 9, a: 0, b: 4.5, color: "blue", label: "v(t)" }], points: [{ x: 1, y: 4, label: "rest (1, 4)", color: "red" }, { x: 3, y: 0, label: "rest (3, 0)", color: "red" }], step: { x: 0.5, y: 2 }, xlabel: "t (s)", ylabel: "s, v" })],
     ["Speeding up or slowing down", S`For the same object, when is it speeding up?`,
-      [S`\(v\): + on \((0,1)\), − on \((1,3)\), + after 3. \(a\): − before 2, + after 2.`, S`Same signs on \((1,2)\) and \((3,\infty)\).`],
-      S`speeding up for \(1\lt t\lt2\) and \(t>3\); slowing down for \(0\lt t\lt1\) and \(2\lt t\lt3\)`],
+      [S`<b>Rule.</b> Speed is \(|v|\). The object speeds up when \(v\) and \(a\) have the <em>same</em> sign (the push is in the direction of motion) and slows down when they have opposite signs.`,
+        S`<b>Sign of \(v=3(t-1)(t-3)\).</b> Positive on \((0,1)\), negative on \((1,3)\), positive after 3.`,
+        S`<b>Sign of \(a=6t-12\).</b> Negative before 2, positive after 2.`,
+        S`<b>Compare.</b> ${tv(["interval", "(0, 1)", "(1, 2)", "(2, 3)", "(3, ∞)"], ["\\(v\\)", "+", "−", "−", "+"], ["\\(a\\)", "−", "−", "+", "+"], ["speed", "decreasing", "increasing", "decreasing", "increasing"])}`,
+        S`<b>Check with speeds.</b> \(|v(1.5)|=|3(0.5)(-1.5)|=2.25\) and \(|v(1.9)|=|3(0.9)(-1.1)|=2.97\): faster ✓. \(|v(2.5)|=2.25\): slower again ✓`],
+      S`speeding up for \(1\lt t\lt2\) and \(t>3\); slowing down for \(0\lt t\lt1\) and \(2\lt t\lt3\)`,
+      plane({ view: { xmin: 0, xmax: 4.2, ymin: -14, ymax: 12 }, curves: [{ f: (t) => 3 * t * t - 12 * t + 9, a: 0, b: 4.2, color: "blue", label: "v(t) = 3t² − 12t + 9" }, { f: (t) => 6 * t - 12, a: 0, b: 4.2, color: "amber", label: "a(t) = 6t − 12" }], points: [{ x: 1, y: 0, color: "red" }, { x: 2, y: 0, color: "red" }, { x: 3, y: 0, color: "red" }], step: { x: 0.5, y: 2 }, xlabel: "t (s)", ylabel: "v, a" }, "speeding up where the blue and amber graphs are on the same side of the axis")],
     ["A second derivative", S`Find \(f''(x)\) for \(f(x)=x^4-2x^3\).`,
-      [S`\(f'=4x^3-6x^2\); \(f''=12x^2-12x\).`],
-      S`\(f''(x)=12x^2-12x\)`],
+      [S`<b>Meaning.</b> \(f''\) is the derivative of \(f'\): it measures how fast the slope itself is changing.`,
+        S`<b>First derivative.</b> \(f'(x)=4x^3-6x^2\).`,
+        S`<b>Second derivative.</b> Differentiate again: \(f''(x)=12x^2-12x=12x(x-1)\).`,
+        S`<b>Interpret.</b> \(f''\lt0\) on \((0,1)\): the slopes are decreasing there and the graph bends down. Outside \([0,1]\), \(f''\gt0\): it bends up.`,
+        S`<b>Check.</b> \(f'(0.25)=0.0625-0.375=-0.3125\) and \(f'(0.75)=1.6875-3.375=-1.6875\): the slope dropped, as \(f''\lt0\) predicts ✓`],
+      S`\(f''(x)=12x^2-12x\)`,
+      plane({ view: { xmin: -1, xmax: 2, ymin: -3, ymax: 5 }, curves: [{ f: (x) => x ** 4 - 2 * x ** 3, color: "violet", label: "f(x) = x⁴ − 2x³" }, { f: (x) => 12 * x * x - 12 * x, color: "amber", label: "f″(x) = 12x² − 12x" }], step: { x: 0.5, y: 1 } })],
     ["A ball thrown upward", S`A ball's height is \(h(t)=-4.9t^2+19.6t+2\) m. Find its maximum height and its velocity when it hits the ground.`,
-      [S`\(v=-9.8t+19.6=0\Rightarrow t=2\); \(h(2)=21.6\) m.`, S`\(h=0\): \(t=\frac{19.6+\sqrt{19.6^2+39.2}}{9.8}\approx4.10\) s; \(v\approx-9.8(4.10)+19.6\approx-20.6\) m/s.`],
+      [S`<b>Velocity.</b> \(v(t)=h'(t)=-9.8t+19.6\).`,
+        S`<b>Top of the flight.</b> At the top the ball stops rising: \(v=0\Rightarrow t=2\) s. Height \(h(2)=-19.6+39.2+2=21.6\) m.`,
+        S`<b>Landing time.</b> Solve \(-4.9t^2+19.6t+2=0\) with the quadratic formula: \(t=\dfrac{19.6+\sqrt{19.6^2+4(4.9)(2)}}{9.8}=\dfrac{19.6+\sqrt{423.36}}{9.8}\approx\dfrac{19.6+20.58}{9.8}\approx4.10\) s (the other root is negative).`,
+        S`<b>Impact velocity.</b> \(v(4.10)\approx-9.8(4.10)+19.6\approx-20.6\) m/s. The minus sign means downward.`,
+        S`<b>Check with the acceleration.</b> \(a=-9.8\) m/s² throughout, so the velocity drops 9.8 m/s each second: \(19.6\) at the start, \(0\) at \(t=2\), and about \(-20.6\) at \(t\approx4.1\) ✓. It lands faster than it was thrown because it falls 2 m further than it rose.`],
       S`21.6 m; about \(-20.6\) m/s (downward)`,
-      plane({ view: { xmin: 0, xmax: 4.5, ymin: -1, ymax: 24 }, curves: [{ f: (t) => -4.9 * t * t + 19.6 * t + 2, a: 0, b: 4.1, color: "violet" }], points: [{ x: 2, y: 21.6, label: "max (2, 21.6)", color: "red" }, { x: 4.1, y: 0, label: "lands t ≈ 4.10", color: "blue" }], step: { x: 0.5, y: 4 }, xlabel: "t (s)", ylabel: "h (m)" })],
+      plane({ view: { xmin: 0, xmax: 4.5, ymin: -1, ymax: 24 }, curves: [{ f: (t) => -4.9 * t * t + 19.6 * t + 2, a: 0, b: 4.1, color: "violet", label: "h(t) = −4.9t² + 19.6t + 2" }, { f: () => 21.6, a: 1.4, b: 2.6, color: "green", label: "v = 0" }], points: [{ x: 2, y: 21.6, label: "max (2, 21.6)", color: "red" }, { x: 4.1, y: 0, label: "lands t ≈ 4.10", color: "blue" }], step: { x: 0.5, y: 4 }, xlabel: "t (s)", ylabel: "h (m)" })],
     ["Displacement vs distance", S`For \(s(t)=t^2-4t\) m on \([0,5]\) s, find the displacement and the total distance travelled.`,
-      [S`\(v=2t-4=0\) at \(t=2\). \(s(0)=0\), \(s(2)=-4\), \(s(5)=5\).`, S`Displacement \(5-0=5\) m. Distance \(|{-4}-0|+|5-(-4)|=4+9=13\) m.`],
+      [S`<b>Difference.</b> Displacement is final minus initial position. Distance adds up every metre travelled, so if the object turns back we must split the trip at the turning time.`,
+        S`<b>Turning time.</b> \(v=2t-4=0\) at \(t=2\). ${chart({ v: "t", f: "s", from: [0, "0"], to: [5, "5"], cuts: [[2, "2"]], d: ["v(t)", (t) => 2 * t - 4] })}`,
+        S`<b>Positions.</b> \(s(0)=0\), \(s(2)=4-8=-4\), \(s(5)=25-20=5\).`,
+        S`<b>Displacement.</b> \(s(5)-s(0)=5-0=5\) m.`,
+        S`<b>Distance.</b> Leg 1: \(|{-4}-0|=4\) m back. Leg 2: \(|5-(-4)|=9\) m forward. Total \(4+9=13\) m. Check: distance ≥ |displacement| ✓, with equality only if the object never turns back.`],
       S`displacement 5 m; distance 13 m`,
-      plane({ view: { xmin: -0.3, xmax: 5.5, ymin: -5, ymax: 6 }, curves: [{ f: (t) => t * t - 4 * t, a: 0, b: 5, color: "violet" }], points: [{ x: 0, y: 0, color: "blue" }, { x: 2, y: -4, label: "turns at (2, −4)", color: "red" }, { x: 5, y: 5, label: "(5, 5)", color: "blue" }], step: { x: 1, y: 1 }, xlabel: "t (s)", ylabel: "s (m)" })],
+      plane({ view: { xmin: -0.3, xmax: 5.5, ymin: -5, ymax: 6 }, curves: [{ f: (t) => t * t - 4 * t, a: 0, b: 5, color: "violet", label: "s(t) = t² − 4t" }], points: [{ x: 0, y: 0, color: "blue" }, { x: 2, y: -4, label: "turns at (2, −4)", color: "red" }, { x: 5, y: 5, label: "(5, 5)", color: "blue" }], step: { x: 1, y: 1 }, xlabel: "t (s)", ylabel: "s (m)" })],
   ]),
 
   practice([

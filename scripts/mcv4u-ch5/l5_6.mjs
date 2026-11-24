@@ -1,6 +1,8 @@
 // MCV4U 5.6 — Chapter 5 Review (NEW lesson): the number e, ln x and its derivative, derivatives of exponentials,
 // combined rules and logarithmic differentiation, and exponential models, with mixed practice and a hard level
 import { intro, section, keyIdea, widget, examples, practice, wrapUp, table, q, num, choice, hard, plane } from "./lib.mjs";
+import { tv } from "../mcr3u-extables.mjs";
+import { chart } from "../mcv4u-ch3/csign.mjs";
 
 export const TITLE = "5.6 Chapter 5 Review";
 export const ID = "6d4fc005-0001-4001-8001-000000000506";
@@ -49,23 +51,45 @@ export const blocks = () => [
 
   examples([
     ["A tangent", S`Find the tangent to \(y=e^{2x}-x\) at \(x=0\).`,
-      [S`\(y(0)=1\); \(y'=2e^{2x}-1\Rightarrow y'(0)=1\).`],
+      [S`<b>Point.</b> \(y(0)=e^0-0=1\).`,
+        S`<b>Derivative.</b> \(y'=2e^{2x}-1\) (chain rule on \(e^{2x}\)).`,
+        S`<b>Slope.</b> \(y'(0)=2-1=1\).`,
+        S`<b>Equation.</b> \(y-1=1(x-0)\Rightarrow y=x+1\).`,
+        S`<b>Bonus.</b> \(y'=0\) when \(e^{2x}=\frac12\), \(x=-\frac{\ln2}{2}\approx-0.347\): the low point (blue) ✓`],
       S`\(y=x+1\)`,
-      plane({ view: { xmin: -2, xmax: 1.2, ymin: -0.5, ymax: 5 }, curves: [{ f: (x) => Math.exp(2 * x) - x, color: "violet" }, { f: (x) => x + 1, color: "green", a: -1.5, b: 1.2 }], points: [{ x: 0, y: 1, label: "(0, 1)", color: "red" }, { x: -Math.log(2) / 2, y: 0.5 + Math.log(2) / 2, label: "min", color: "blue" }], step: { x: 0.5, y: 1 } })],
+      plane({ view: { xmin: -2, xmax: 1.2, ymin: -0.5, ymax: 5 }, curves: [{ f: (x) => Math.exp(2 * x) - x, color: "violet", label: "y = e²ˣ − x" }, { f: (x) => x + 1, color: "green", a: -1.5, b: 1.2, label: "y = x + 1" }], points: [{ x: 0, y: 1, label: "(0, 1)", color: "red" }, { x: -Math.log(2) / 2, y: 0.5 + Math.log(2) / 2, label: "min", color: "blue" }], step: { x: 0.5, y: 1 } })],
     ["A logarithmic derivative", S`For \(y=\ln(x^2+4)\), find \(y'\) and \(y'(2)\).`,
-      [S`\(y'=\frac{2x}{x^2+4}\); \(y'(2)=\frac48\).`],
-      S`\(y'=\frac{2x}{x^2+4}\); \(\frac12\) at \(x=2\)`],
+      [S`<b>Rule.</b> \(\frac{d}{dx}\ln g=\frac{g'}{g}\) with \(g=x^2+4\), \(g'=2x\).`,
+        S`<b>Derivative.</b> \(y'=\dfrac{2x}{x^2+4}\).`,
+        S`<b>At \(x=2\).</b> \(\dfrac{4}{8}=\dfrac12\).`,
+        S`<b>Shape.</b> \(y'\) has the sign of \(x\): the graph falls then rises, with its minimum \(\ln4\) at \(x=0\).`,
+        S`<b>Check.</b> \(\frac{\ln8.0401-\ln8}{0.01}\approx0.50\) ✓`],
+      S`\(y'=\frac{2x}{x^2+4}\); \(\frac12\) at \(x=2\)`,
+      plane({ view: { xmin: -5, xmax: 5, ymin: 0, ymax: 4 }, curves: [{ f: (x) => Math.log(x * x + 4), color: "violet", label: "y = ln(x² + 4)" }, { f: (x) => Math.log(8) + 0.5 * (x - 2), a: 0.5, b: 3.6, color: "green", label: "slope ½" }], points: [{ x: 2, y: Math.log(8), label: "(2, ln 8)", color: "red" }], step: { x: 1, y: 0.5 } })],
     ["A maximum", S`Find the maximum of \(f(x)=xe^{-2x}\).`,
-      [S`\(f'=e^{-2x}-2xe^{-2x}=e^{-2x}(1-2x)\).`, S`Zero at \(x=\frac12\): \(f=\frac12e^{-1}\approx0.184\).`],
+      [S`<b>Product rule.</b> \(f'=e^{-2x}+x(-2)e^{-2x}=e^{-2x}(1-2x)\).`,
+        S`<b>Critical number.</b> \(1-2x=0\Rightarrow x=\frac12\).`,
+        S`<b>Classify.</b> ${chart({ cuts: [[0.5, "\\tfrac12"]], d: ["f'(x)", (x) => Math.exp(-2 * x) * (1 - 2 * x)] })}`,
+        S`<b>Value.</b> \(f\left(\frac12\right)=\frac12e^{-1}=\frac{1}{2e}\approx0.184\).`,
+        S`<b>Check.</b> \(f(0.4)\approx0.180\) and \(f(0.6)\approx0.181\): both lower ✓`],
       S`maximum \(\left(\frac12,\frac1{2e}\right)\approx(0.5,0.184)\)`,
-      plane({ view: { xmin: -0.3, xmax: 4, ymin: -0.3, ymax: 0.25 }, curves: [{ f: (x) => x * Math.exp(-2 * x), a: -0.15, b: 4, color: "violet" }], points: [{ x: 0.5, y: 0.5 / E, label: "max (0.5, 0.184)", color: "red" }], step: { x: 0.5, y: 0.05 } })],
+      plane({ view: { xmin: -0.3, xmax: 4, ymin: -0.3, ymax: 0.25 }, curves: [{ f: (x) => x * Math.exp(-2 * x), a: -0.15, b: 4, color: "violet", label: "f(x) = xe⁻²ˣ" }], points: [{ x: 0.5, y: 0.5 / E, label: "max (0.5, 0.184)", color: "red" }], step: { x: 0.5, y: 0.05 } })],
     ["A variable power", S`For \(y=(x+1)^x\), find \(y'(1)\).`,
-      [S`\(\ln y=x\ln(x+1)\Rightarrow\frac{y'}{y}=\ln(x+1)+\frac{x}{x+1}\).`, S`At 1: \(y=2\), so \(y'=2\left(\ln2+\frac12\right)\).`],
-      S`\(y'(1)=2\ln2+1\approx2.386\)`],
+      [S`<b>Logarithmic differentiation.</b> \(\ln y=x\ln(x+1)\).`,
+        S`<b>Differentiate.</b> \(\frac{y'}{y}=\ln(x+1)+x\cdot\frac{1}{x+1}\).`,
+        S`<b>Solve.</b> \(y'=(x+1)^x\left[\ln(x+1)+\frac{x}{x+1}\right]\).`,
+        S`<b>At \(x=1\).</b> \(y=2\), so \(y'(1)=2\left(\ln2+\frac12\right)=2\ln2+1\approx2.386\).`,
+        S`<b>Check.</b> \(\frac{2.001^{1.001}-2}{0.001}\approx2.388\) ✓`],
+      S`\(y'(1)=2\ln2+1\approx2.386\)`,
+      plane({ view: { xmin: -0.5, xmax: 2.5, ymin: 0, ymax: 8 }, curves: [{ f: (x) => (x + 1) ** x, a: -0.5, b: 2.5, color: "violet", label: "y = (x + 1)ˣ" }, { f: (x) => 2 + 2.386 * (x - 1), a: 0.3, b: 1.8, color: "green", label: "slope ≈ 2.39" }], points: [{ x: 1, y: 2, label: "(1, 2)", color: "red" }], step: { x: 0.5, y: 1 } })],
     ["Cooling", S`Tea cools as \(T(t)=22+60e^{-0.1t}\) °C. When is it cooling at 3 °C per minute?`,
-      [S`\(T'(t)=-6e^{-0.1t}=-3\Rightarrow e^{-0.1t}=\frac12\).`],
+      [S`<b>Rate.</b> \(T'(t)=60(-0.1)e^{-0.1t}=-6e^{-0.1t}\).`,
+        S`<b>Set up.</b> Cooling at 3 °C/min means \(T'=-3\): \(-6e^{-0.1t}=-3\Rightarrow e^{-0.1t}=\frac12\).`,
+        S`<b>Solve with ln.</b> \(-0.1t=\ln\frac12=-\ln2\Rightarrow t=10\ln2\approx6.93\) min.`,
+        S`<b>Temperature then.</b> \(T=22+60\cdot\frac12=52\) °C.`,
+        S`<b>Check.</b> The rate halves when the excess heat halves (60 → 30 °C above room), so it is a half-life of 6.93 min ✓`],
       S`\(t=10\ln2\approx6.93\) minutes`,
-      plane({ view: { xmin: 0, xmax: 40, ymin: 0, ymax: 90 }, curves: [{ f: (t) => 22 + 60 * Math.exp(-0.1 * t), a: 0, b: 40, color: "violet" }, { f: (t) => 52 - 3 * (t - 10 * Math.log(2)), color: "green", a: 1, b: 14 }, { f: () => 22, color: "gray" }], points: [{ x: 10 * Math.log(2), y: 52, label: "(6.93, 52)", color: "red" }], step: { x: 5, y: 10 } })],
+      plane({ view: { xmin: 0, xmax: 40, ymin: 0, ymax: 90 }, curves: [{ f: (t) => 22 + 60 * Math.exp(-0.1 * t), a: 0, b: 40, color: "violet", label: "T(t) = 22 + 60e^(−0.1t)" }, { f: (t) => 52 - 3 * (t - 10 * Math.log(2)), color: "green", a: 1, b: 14, label: "slope −3" }, { f: () => 22, color: "gray", label: "room 22 °C" }], points: [{ x: 10 * Math.log(2), y: 52, label: "(6.93, 52)", color: "red" }], step: { x: 5, y: 10 }, xlabel: "t (min)", ylabel: "T (°C)" })],
   ]),
 
   practice([

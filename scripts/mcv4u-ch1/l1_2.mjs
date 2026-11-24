@@ -1,6 +1,7 @@
 // MCV4U 1.2 — Rates of Change Using Equations: the difference quotient (f(a + h) − f(a))/h, numerical tables with
 // and without simplifying, exact instantaneous rates for polynomial, rational and root functions, and tangent lines
 import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, q, num, choice, hard, plane } from "./lib.mjs";
+import { tv } from "../mcr3u-extables.mjs";
 
 export const TITLE = "1.2 Rates of Change Using Equations";
 export const ID = "b6a81360-8f08-454d-8593-c625e6b79a74";
@@ -55,22 +56,47 @@ export const blocks = () => [
 
   examples([
     ["A quadratic", S`Find the instantaneous rate of change of \(f(x)=3x^2-x\) at \(x=2\).`,
-      [S`\(f(2+h)=3(4+4h+h^2)-(2+h)=10+11h+3h^2\); \(f(2)=10\).`, S`\(\frac{11h+3h^2}{h}=11+3h\to11\).`],
-      S`\(11\)`],
+      [S`<b>Rule.</b> The instantaneous rate at \(x=a\) is the value the difference quotient \(\dfrac{f(a+h)-f(a)}{h}\) approaches as \(h\to0\). It is the slope of the secant from \(x=a\) to \(x=a+h\), so as \(h\) shrinks the secant turns into the tangent.`,
+        S`<b>The two function values.</b> \(f(2)=3(4)-2=10\). Expand carefully: \(f(2+h)=3(2+h)^2-(2+h)=3(4+4h+h^2)-2-h=10+11h+3h^2\).`,
+        S`<b>Form the quotient.</b> \(\dfrac{f(2+h)-f(2)}{h}=\dfrac{10+11h+3h^2-10}{h}=\dfrac{11h+3h^2}{h}\).`,
+        S`<b>Simplify before letting \(h\to0\).</b> We may divide by \(h\) because \(h\ne0\) in a secant: \(\dfrac{h(11+3h)}{h}=11+3h\).`,
+        S`<b>Let \(h\to0\).</b> \(11+3h\to11\). The tangent to the parabola at \((2,10)\) has slope 11.`,
+        S`<b>Check numerically.</b> With \(h=0.01\): \(f(2.01)=3(4.0401)-2.01=10.1103\), and \(\frac{10.1103-10}{0.01}=11.03=11+3(0.01)\) ✓`],
+      S`\(11\)`,
+      plane({ view: { xmin: -1, xmax: 3.2, ymin: -3, ymax: 24 }, curves: [{ f: (x) => 3 * x * x - x, color: "violet", label: "f(x) = 3x² − x" }, { f: (x) => 10 + 11 * (x - 2), a: 1, b: 3, color: "green", label: "tangent: slope 11" }], points: [{ x: 2, y: 10, label: "(2, 10)", color: "red" }], step: { x: 0.5, y: 4 } }, "the tangent at (2, 10) rises 11 for every 1 across")],
     ["With and without simplifying", S`For \(f(x)=x^3\) at \(a=1\), compute the quotient for \(h=0.1, 0.01, 0.001\), then simplify.`,
-      [S`\(h=0.1\): \(\frac{1.331-1}{0.1}=3.31\); \(h=0.01\): \(3.0301\); \(h=0.001\): \(3.003001\).`, S`Simplified: \(\frac{3h+3h^2+h^3}{h}=3+3h+h^2\to3\).`],
-      S`numbers suggest 3; simplifying proves it is exactly 3`],
+      [S`<b>Two ways to find a limit.</b> Numbers can <em>suggest</em> the value the quotient approaches; algebra can <em>prove</em> it. We do both and compare.`,
+        S`<b>Numerically.</b> \(f(1)=1\). ${tv(["\\(h\\)", "0.1", "0.01", "0.001"], ["\\(f(1+h)\\)", "1.331", "1.030301", "1.003003001"], ["\\(\\dfrac{f(1+h)-1}{h}\\)", "3.31", "3.0301", "3.003001"])} The quotients get closer and closer to 3.`,
+        S`<b>Algebraically.</b> Expand the cube: \((1+h)^3=1+3h+3h^2+h^3\). Then \(\dfrac{(1+h)^3-1}{h}=\dfrac{3h+3h^2+h^3}{h}=3+3h+h^2\) for \(h\ne0\).`,
+        S`<b>Let \(h\to0\).</b> \(3+3h+h^2\to3+0+0=3\).`,
+        S`<b>Compare.</b> The formula \(3+3h+h^2\) explains every number in the table: for \(h=0.1\) it gives \(3+0.3+0.01=3.31\) ✓. The table only showed the trend; the algebra shows the limit is <em>exactly</em> 3.`],
+      S`numbers suggest 3; simplifying proves it is exactly 3`,
+      plane({ view: { xmin: -0.5, xmax: 1.8, ymin: -1, ymax: 5 }, curves: [{ f: (x) => x ** 3, color: "violet", label: "f(x) = x³" }, { f: (x) => 1 + 3.31 * (x - 1), a: 0.6, b: 1.6, color: "amber" }, { f: (x) => 1 + 3 * (x - 1), color: "green", label: "tangent y = 3x − 2" }], points: [{ x: 1, y: 1, label: "(1, 1)", color: "red" }, { x: 1.1, y: 1.331, color: "amber" }], step: { x: 0.5, y: 1 } }, "amber secant (h = 0.1, slope 3.31) is already close to the green tangent (slope 3)")],
     ["A velocity", S`A ball's height is \(h(t)=-4.9t^2+20t\) m. Find its velocity at \(t=2\).`,
-      [S`\(h(2+k)=-4.9(4+4k+k^2)+40+20k=20.4+0.4k-4.9k^2\); \(h(2)=20.4\).`, S`\(\frac{0.4k-4.9k^2}{k}=0.4-4.9k\to0.4\).`],
+      [S`<b>Meaning.</b> Velocity is the instantaneous rate of change of height, so we need \(\displaystyle\lim_{k\to0}\frac{h(2+k)-h(2)}{k}\). We use \(k\) for the step because \(h\) is already the height function.`,
+        S`<b>The values.</b> \(h(2)=-4.9(4)+40=20.4\). \(h(2+k)=-4.9(4+4k+k^2)+40+20k=20.4+0.4k-4.9k^2\).`,
+        S`<b>Quotient.</b> \(\dfrac{h(2+k)-h(2)}{k}=\dfrac{0.4k-4.9k^2}{k}=0.4-4.9k\).`,
+        S`<b>Limit.</b> As \(k\to0\), \(0.4-4.9k\to0.4\) m/s.`,
+        S`<b>Interpret.</b> The velocity is positive but small: the ball is still rising, just before the top. The top is where velocity is 0. From \(20-9.8t=0\) (the same method at a general time) that happens at \(t\approx2.04\) s, just after \(t=2\) ✓`],
       S`0.4 m/s (still rising, almost at the top)`,
-      plane({ view: { xmin: 0, xmax: 4.3, ymin: 0, ymax: 24 }, curves: [{ f: (t) => -4.9 * t * t + 20 * t, a: 0, b: 4.08, color: "violet" }, { f: (t) => 20.4 + 0.4 * (t - 2), color: "green" }], points: [{ x: 2, y: 20.4, label: "(2, 20.4)", color: "red" }], step: { x: 0.5, y: 4 }, xlabel: "t (s)", ylabel: "h (m)" })],
+      plane({ view: { xmin: 0, xmax: 4.3, ymin: 0, ymax: 24 }, curves: [{ f: (t) => -4.9 * t * t + 20 * t, a: 0, b: 4.08, color: "violet", label: "h(t) = −4.9t² + 20t" }, { f: (t) => 20.4 + 0.4 * (t - 2), a: 1, b: 3, color: "green", label: "slope 0.4" }], points: [{ x: 2, y: 20.4, label: "(2, 20.4)", color: "red" }], step: { x: 0.5, y: 4 }, xlabel: "t (s)", ylabel: "h (m)" }, "near the top the tangent is almost flat")],
     ["A rational function", S`Find the instantaneous rate of change of \(f(x)=\dfrac2x\) at \(x=1\).`,
-      [S`\(\dfrac{\frac2{1+h}-2}{h}=\dfrac{2-2(1+h)}{h(1+h)}=\dfrac{-2h}{h(1+h)}=\dfrac{-2}{1+h}\).`, S`As \(h\to0\): \(-2\).`],
+      [S`<b>Set up.</b> \(f(1)=2\) and \(f(1+h)=\dfrac{2}{1+h}\). The difference quotient is \(\dfrac{\frac{2}{1+h}-2}{h}\).`,
+        S`<b>Combine the fractions in the numerator.</b> Use the common denominator \(1+h\): \(\dfrac{2}{1+h}-2=\dfrac{2-2(1+h)}{1+h}=\dfrac{-2h}{1+h}\).`,
+        S`<b>Divide by \(h\).</b> \(\dfrac{-2h}{1+h}\cdot\dfrac1h=\dfrac{-2}{1+h}\) (allowed, since \(h\ne0\)).`,
+        S`<b>Let \(h\to0\).</b> \(\dfrac{-2}{1+h}\to\dfrac{-2}{1}=-2\).`,
+        S`<b>Interpret.</b> The rate is negative, matching the graph: \(y=\frac2x\) falls as \(x\) increases for \(x\gt0\).`,
+        S`<b>Check.</b> \(h=0.01\): \(\frac{2/1.01-2}{0.01}=\frac{1.980198-2}{0.01}\approx-1.98\), close to \(-2\) ✓`],
       S`\(-2\)`,
-      plane({ view: { xmin: 0, xmax: 4, ymin: 0, ymax: 6 }, curves: [{ f: (x) => 2 / x, a: 0.34, b: 4, color: "violet" }, { f: (x) => 2 - 2 * (x - 1), color: "green" }], points: [{ x: 1, y: 2, label: "(1, 2)", color: "red" }], step: { x: 0.5, y: 1 } })],
+      plane({ view: { xmin: 0, xmax: 4, ymin: 0, ymax: 6 }, curves: [{ f: (x) => 2 / x, a: 0.34, b: 4, color: "violet", label: "f(x) = 2/x" }, { f: (x) => 2 - 2 * (x - 1), color: "green", label: "tangent y = 4 − 2x" }], points: [{ x: 1, y: 2, label: "(1, 2)", color: "red" }], step: { x: 0.5, y: 1 } })],
     ["A square root", S`Find the instantaneous rate of change of \(f(x)=\sqrt x\) at \(x=4\).`,
-      [S`\(\dfrac{\sqrt{4+h}-2}{h}\cdot\dfrac{\sqrt{4+h}+2}{\sqrt{4+h}+2}=\dfrac{(4+h)-4}{h(\sqrt{4+h}+2)}=\dfrac1{\sqrt{4+h}+2}\).`, S`As \(h\to0\): \(\frac14\).`],
-      S`\(\tfrac14\)`],
+      [S`<b>Set up.</b> \(\dfrac{f(4+h)-f(4)}{h}=\dfrac{\sqrt{4+h}-2}{h}\). Substituting \(h=0\) gives \(\frac00\), so we must rewrite first.`,
+        S`<b>Rationalize the numerator.</b> Multiply top and bottom by the conjugate \(\sqrt{4+h}+2\). The top becomes a difference of squares: \((\sqrt{4+h})^2-2^2=(4+h)-4=h\).`,
+        S`<b>Simplify.</b> \(\dfrac{h}{h(\sqrt{4+h}+2)}=\dfrac{1}{\sqrt{4+h}+2}\).`,
+        S`<b>Let \(h\to0\).</b> \(\dfrac{1}{\sqrt4+2}=\dfrac14\).`,
+        S`<b>Check.</b> \(h=0.01\): \(\sqrt{4.01}\approx2.0024984\), quotient \(\approx\frac{0.0024984}{0.01}=0.24984\approx0.25\) ✓. The tangent at \((4,2)\) is \(y=2+\tfrac14(x-4)=\tfrac14x+1\).`],
+      S`\(\tfrac14\)`,
+      plane({ view: { xmin: -0.5, xmax: 9, ymin: -0.5, ymax: 4 }, curves: [{ f: (x) => Math.sqrt(x), a: 0, b: 9, color: "violet", label: "f(x) = √x" }, { f: (x) => 0.25 * x + 1, color: "green", label: "tangent y = ¼x + 1" }], points: [{ x: 4, y: 2, label: "(4, 2)", color: "red" }], step: { x: 1, y: 1 } })],
   ]),
 
   practice([

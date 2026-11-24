@@ -1,6 +1,7 @@
 // MCV4U 5.1 — Rates of Change and the Number e (NEW lesson): slopes of b^x are proportional to b^x, the slope at 0,
 // the base e (slope 1 at 0), e as the limit of (1 + 1/n)^n, (e^x)′ = e^x, and rates in exponential models
 import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, q, num, choice, hard, plane } from "./lib.mjs";
+import { tv } from "../mcr3u-extables.mjs";
 
 export const TITLE = "5.1 Rates of Change and the Number e";
 export const ID = "6d4fc005-0001-4001-8001-000000000501";
@@ -58,23 +59,45 @@ export const blocks = () => [
 
   examples([
     ["Slopes of 2ˣ", S`Estimate the slope of \(y=2^x\) at \(x=0\) and at \(x=3\) with \(h=0.001\).`,
-      [S`At 0: \(\frac{2^{0.001}-1}{0.001}\approx0.6934\).`, S`At 3: \(2^3\times0.6934\approx5.547\).`],
+      [S`<b>Method.</b> Approximate the tangent slope by a short secant, \(\dfrac{f(a+h)-f(a)}{h}\).`,
+        S`<b>At \(x=0\).</b> \(2^{0.001}\approx1.000\,693\,4\), so \(\dfrac{2^{0.001}-1}{0.001}\approx0.6934\).`,
+        S`<b>At \(x=3\).</b> \(\dfrac{2^{3.001}-2^3}{0.001}=2^3\cdot\dfrac{2^{0.001}-1}{0.001}\approx8\times0.6934\approx5.547\). Factoring out \(2^3\) is the key step: it works for any \(a\).`,
+        S`<b>Pattern.</b> The slope at \(x\) is \(2^x\times0.693\ldots\): an exponential function's slope is proportional to its own height.`,
+        S`<b>Check.</b> ${tv(["\\(x\\)", "0", "1", "2", "3"], ["height \\(2^x\\)", "1", "2", "4", "8"], ["slope \\(\\approx0.6931\\cdot2^x\\)", "0.693", "1.386", "2.773", "5.545"])} Doubling the height doubles the slope ✓`],
       S`about 0.693 at 0 and 5.55 at 3 — eight times as steep, because the height is eight times as large`,
-      plane({ view: { xmin: -1.5, xmax: 3.6, ymin: -1, ymax: 12 }, curves: [{ f: (x) => 2 ** x, color: "violet" }, { f: (x) => 1 + 0.6931 * x, color: "green", a: -1.4, b: 1.5 }, { f: (x) => 8 + 5.545 * (x - 3), color: "green", a: 2.2, b: 3.6 }], points: [{ x: 0, y: 1, label: "slope 0.69", color: "red" }, { x: 3, y: 8, label: "slope 5.55", color: "red" }], step: { x: 0.5, y: 1 } })],
+      plane({ view: { xmin: -1.5, xmax: 3.6, ymin: -1, ymax: 12 }, curves: [{ f: (x) => 2 ** x, color: "violet", label: "y = 2ˣ" }, { f: (x) => 1 + 0.6931 * x, color: "green", a: -1.4, b: 1.5 }, { f: (x) => 8 + 5.545 * (x - 3), color: "green", a: 2.2, b: 3.6 }], points: [{ x: 0, y: 1, label: "slope 0.69", color: "red" }, { x: 3, y: 8, label: "slope 5.55", color: "red" }], step: { x: 0.5, y: 1 } })],
     ["The base 3", S`Estimate the slope of \(y=3^x\) at \(x=0\).`,
-      [S`\(\frac{3^{0.001}-1}{0.001}\approx1.0992\).`],
-      S`about 1.099 — greater than 1, so the special base lies between 2 and 3`],
+      [S`<b>Secant.</b> \(\dfrac{3^{0.001}-1}{0.001}\approx\dfrac{1.0010992-1}{0.001}\approx1.0992\).`,
+        S`<b>Compare with base 2.</b> For \(2^x\) the slope at 0 was 0.693, less than 1; for \(3^x\) it is 1.099, more than 1.`,
+        S`<b>The question.</b> Is there a base between 2 and 3 whose slope at 0 is exactly 1? Then its slope everywhere would equal its height.`,
+        S`<b>Answer.</b> Yes: that base is \(e\approx2.718\) (next example). Its graph crosses the y-axis at 45°.`,
+        S`<b>Check.</b> \(\frac{3^{0.001}-3^{-0.001}}{0.002}\approx1.0986\) (centred), consistent with 1.099 ✓`],
+      S`about 1.099 — greater than 1, so the special base lies between 2 and 3`,
+      plane({ view: { xmin: -1.5, xmax: 1.5, ymin: -0.5, ymax: 4 }, curves: [{ f: (x) => 2 ** x, color: "blue", label: "y = 2ˣ" }, { f: (x) => 3 ** x, color: "violet", label: "y = 3ˣ" }, { f: (x) => 1 + x, color: "green", label: "slope 1" }], points: [{ x: 0, y: 1, label: "(0, 1)", color: "red" }], step: { x: 0.5, y: 0.5 } }, "the green line of slope 1 lies between the two tangents at (0, 1)")],
     ["Finding e", S`Evaluate \(\left(1+\frac1n\right)^n\) for \(n=10,\ 100,\ 1000,\ 1\,000\,000\).`,
-      [S`\(2.59374\), \(2.70481\), \(2.71692\), \(2.71828\).`],
+      [S`<b>Why this expression?</b> It is the base whose exponential has slope exactly 1 at 0. It also appears in compound interest: 100% interest compounded \(n\) times a year.`,
+        S`<b>Compute.</b> ${tv(["\\(n\\)", "10", "100", "1000", "1 000 000"], ["\\(\\left(1+\\frac1n\\right)^n\\)", "2.59374", "2.70481", "2.71692", "2.71828"])}`,
+        S`<b>Trend.</b> The values increase but level off: each step adds less (0.111, 0.012, 0.0014).`,
+        S`<b>Name.</b> The limit is \(e=2.718\,28\ldots\), an irrational number like \(\pi\).`,
+        S`<b>Check.</b> \(\frac{e^{0.001}-1}{0.001}\approx1.0005\): the slope of \(e^x\) at 0 is 1 ✓`],
       S`the values approach \(e\approx2.71828\)`,
-      plane({ view: { xmin: 0, xmax: 52, ymin: 2, ymax: 2.8 }, points: Array.from({ length: 25 }, (_, i) => ({ x: 2 * (i + 1), y: (1 + 1 / (2 * (i + 1))) ** (2 * (i + 1)), color: "blue" })), lines: [{ m: 0, b: E, color: "red", dash: true }], step: { x: 5, y: 0.1 }, xlabel: "n" })],
+      plane({ view: { xmin: 0, xmax: 52, ymin: 2, ymax: 2.8 }, points: Array.from({ length: 25 }, (_, i) => ({ x: 2 * (i + 1), y: (1 + 1 / (2 * (i + 1))) ** (2 * (i + 1)), color: "blue" })), lines: [{ m: 0, b: E, color: "red", dash: true, label: "y = e ≈ 2.718", lx: 30 }], step: { x: 5, y: 0.1 }, xlabel: "n" }, "(1 + 1/n)ⁿ for n = 2, 4, …, 50")],
     ["A tangent to eˣ", S`Find the tangent to \(y=e^x\) at \(x=1\).`,
-      [S`Point \((1,e)\); slope \(e^1=e\).`, S`\(y-e=e(x-1)\Rightarrow y=ex\).`],
+      [S`<b>Key fact.</b> \(\frac{d}{dx}e^x=e^x\): the slope at any point equals the height there.`,
+        S`<b>Point.</b> \((1,e)\approx(1,2.718)\).`,
+        S`<b>Slope.</b> \(e^1=e\).`,
+        S`<b>Equation.</b> \(y-e=e(x-1)\Rightarrow y=ex-e+e=ex\).`,
+        S`<b>Check.</b> The tangent passes through the origin: \(e\cdot0=0\) ✓. This is the only tangent to \(e^x\) that does so.`],
       S`\(y=ex\) — it passes through the origin`,
-      plane({ view: { xmin: -1.5, xmax: 2, ymin: -1, ymax: 6 }, curves: [{ f: Math.exp, color: "violet" }, { f: (x) => E * x, color: "green", a: -0.3, b: 2 }], points: [{ x: 1, y: E, label: "(1, e)", color: "red" }, { x: 0, y: 0, color: "green" }], step: { x: 0.5, y: 1 } })],
+      plane({ view: { xmin: -1.5, xmax: 2, ymin: -1, ymax: 6 }, curves: [{ f: Math.exp, color: "violet", label: "y = eˣ" }, { f: (x) => E * x, color: "green", a: -0.3, b: 2, label: "y = ex" }], points: [{ x: 1, y: E, label: "(1, e)", color: "red" }, { x: 0, y: 0, color: "green" }], step: { x: 0.5, y: 1 } })],
     ["A growing colony", S`A colony has \(N(t)=200\cdot2^t\) cells after \(t\) hours. Estimate its growth rate at \(t=3\).`,
-      [S`Slope of \(2^t\) is about \(0.6931\cdot2^t\), so \(N'(t)\approx200\cdot0.6931\cdot2^t\).`, S`At \(t=3\): \(1600\times0.6931\).`],
-      S`about 1109 cells per hour`],
+      [S`<b>From Example 1.</b> The slope of \(2^t\) is about \(0.6931\cdot2^t\).`,
+        S`<b>Scale.</b> \(N(t)=200\cdot2^t\), so \(N'(t)\approx200\cdot0.6931\cdot2^t\).`,
+        S`<b>At \(t=3\).</b> \(N(3)=1600\) cells, and \(N'(3)\approx1600\times0.6931\approx1109\) cells per hour.`,
+        S`<b>Interpret.</b> The growth rate is about 69% of the current size per hour: bigger colonies grow faster.`,
+        S`<b>Check.</b> \(N(3.001)-N(3)=1600(2^{0.001}-1)\approx1.109\) cells in 0.001 h, i.e. 1109 cells/h ✓`],
+      S`about 1109 cells per hour`,
+      plane({ view: { xmin: 0, xmax: 5, ymin: 0, ymax: 6500 }, curves: [{ f: (t) => 200 * 2 ** t, a: 0, b: 5, color: "violet", label: "N(t) = 200·2ᵗ" }, { f: (t) => 1600 + 1109 * (t - 3), a: 1.8, b: 4.4, color: "green", label: "slope ≈ 1109" }], points: [{ x: 3, y: 1600, label: "(3, 1600)", color: "red" }], step: { x: 0.5, y: 1000 }, xlabel: "t (h)", ylabel: "N" })],
   ]),
 
   practice([

@@ -1,6 +1,7 @@
 // MCV4U 2.6 — Rate of Change Problems: marginal cost, revenue and profit, the derivative as an estimate of the next unit,
 // rates of change in the sciences (population, temperature, concentration, pressure), and interpreting sign and units
 import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, q, num, choice, hard, plane, rat } from "./lib.mjs";
+import { tv } from "../mcr3u-extables.mjs";
 
 export const TITLE = "2.6 Rate of Change Problems";
 export const ID = "e6e8bf63-8253-4acb-a156-022834c38c80";
@@ -58,23 +59,45 @@ export const blocks = () => [
 
   examples([
     ["Marginal cost", S`\(C(x)=1500+12x+0.02x^2\) dollars for \(x\) items. Find \(C'(100)\) and compare with the true cost of the 101st item.`,
-      [S`\(C'(x)=12+0.04x\Rightarrow C'(100)=16\).`, S`\(C(101)-C(100)=(1500+1212+204.02)-(1500+1200+200)=16.02\).`],
-      S`about 16 dollars per item; the true cost of the 101st item is 16.02 dollars`],
+      [S`<b>Meaning.</b> Marginal cost \(C'(x)\) is the rate at which cost grows per extra item. It approximates the cost of one more item: \(C(x+1)-C(x)\approx C'(x)\).`,
+        S`<b>Derivative.</b> \(C'(x)=12+0.04x\), so \(C'(100)=12+4=16\) dollars per item.`,
+        S`<b>Exact cost of item 101.</b> \(C(100)=1500+1200+200=2900\); \(C(101)=1500+1212+204.02=2916.02\). Difference: \(16.02\).`,
+        S`<b>Compare.</b> The estimate is off by only 2 cents. The marginal cost is the slope of the tangent; the true extra cost is the slope of the secant from 100 to 101.`,
+        S`<b>Why so close?</b> Over one item the curve is almost straight: the error is \(0.02(1)^2=0.02\), the \(0.02x^2\) term's bend ✓`],
+      S`about 16 dollars per item; the true cost of the 101st item is 16.02 dollars`,
+      plane({ view: { xmin: 0, xmax: 250, ymin: 1000, ymax: 5500 }, curves: [{ f: (x) => 1500 + 12 * x + 0.02 * x * x, color: "violet", label: "C(x) = 1500 + 12x + 0.02x²" }, { f: (x) => 2900 + 16 * (x - 100), a: 30, b: 200, color: "green", label: "tangent: slope 16" }], points: [{ x: 100, y: 2900, label: "(100, 2900)", color: "red" }], step: { x: 25, y: 500 }, xlabel: "x (items)", ylabel: "C ($)" })],
     ["Marginal revenue", S`\(R(x)=50x-0.1x^2\) dollars. Find \(R'(100)\) and the number of items that gives the greatest revenue.`,
-      [S`\(R'(x)=50-0.2x\Rightarrow R'(100)=30\).`, S`\(R'(x)=0\Rightarrow x=250\).`],
+      [S`<b>Derivative.</b> \(R'(x)=50-0.2x\).`,
+        S`<b>At 100 items.</b> \(R'(100)=50-20=30\): selling the 101st item adds about \$30.`,
+        S`<b>Greatest revenue.</b> Revenue rises while \(R'\gt0\) and falls when \(R'\lt0\). \(R'(x)=0\Rightarrow0.2x=50\Rightarrow x=250\).`,
+        S`<b>Maximum revenue.</b> \(R(250)=12500-6250=6250\) dollars.`,
+        S`<b>Check.</b> \(R(240)=12\,000-5760=6240\) and \(R(260)=13\,000-6760=6240\): both less than 6250 ✓`],
       S`\(R'(100)=30\) dollars per item; maximum revenue at 250 items`,
-      plane({ view: { xmin: 0, xmax: 500, ymin: 0, ymax: 7000 }, curves: [{ f: (x) => 50 * x - 0.1 * x * x, color: "violet" }], points: [{ x: 250, y: 6250, label: "(250, 6250)", color: "red" }], step: { x: 50, y: 1000 } })],
+      plane({ view: { xmin: 0, xmax: 500, ymin: 0, ymax: 7000 }, curves: [{ f: (x) => 50 * x - 0.1 * x * x, color: "violet", label: "R(x) = 50x − 0.1x²" }, { f: (x) => 4000 + 30 * (x - 100), a: 20, b: 190, color: "green", label: "slope 30" }, { f: () => 6250, a: 190, b: 310, color: "green" }], points: [{ x: 250, y: 6250, label: "(250, 6250)", color: "red" }, { x: 100, y: 4000, label: "(100, 4000)", color: "red" }], step: { x: 50, y: 1000 }, xlabel: "x (items)", ylabel: "R ($)" })],
     ["Marginal profit", S`\(R(x)=50x-0.1x^2\) and \(C(x)=800+12x+0.02x^2\). When is the marginal profit zero?`,
-      [S`\(P(x)=-800+38x-0.12x^2\Rightarrow P'(x)=38-0.24x\).`, S`\(P'=0\Rightarrow x=\tfrac{38}{0.24}\approx158.3\).`],
-      S`at about 158 items (where profit is greatest)`],
+      [S`<b>Profit.</b> \(P=R-C=(50x-0.1x^2)-(800+12x+0.02x^2)=-800+38x-0.12x^2\).`,
+        S`<b>Marginal profit.</b> \(P'(x)=38-0.24x\). Equivalently \(P'=R'-C'=(50-0.2x)-(12+0.04x)\).`,
+        S`<b>Solve.</b> \(38-0.24x=0\Rightarrow x=\dfrac{38}{0.24}\approx158.3\).`,
+        S`<b>Interpret.</b> Below 158 items, one more item adds more revenue than cost (\(R'\gt C'\)); above it, the reverse. So profit peaks near 158 items.`,
+        S`<b>Check.</b> ${tv(["\\(x\\)", "150", "158", "166"], ["\\(P(x)\\)", "2200", "2208.32", "2201.28"])} The middle value is the largest ✓`],
+      S`at about 158 items (where profit is greatest)`,
+      plane({ view: { xmin: 0, xmax: 320, ymin: -1000, ymax: 2600 }, curves: [{ f: (x) => -800 + 38 * x - 0.12 * x * x, color: "violet", label: "P(x) = −800 + 38x − 0.12x²" }], points: [{ x: 158.3, y: -800 + 38 * 158.3 - 0.12 * 158.3 ** 2, label: "max near x ≈ 158", color: "red" }], step: { x: 40, y: 500 }, xlabel: "x (items)", ylabel: "P ($)" })],
     ["Population growth", S`A bacteria culture has \(P(t)=2000+150t-3t^2\) cells after \(t\) hours. Find the growth rate at 10 h, and when growth stops.`,
-      [S`\(P'(t)=150-6t\Rightarrow P'(10)=90\).`, S`\(P'(t)=0\Rightarrow t=25\).`],
+      [S`<b>Growth rate.</b> \(P'(t)=150-6t\) cells per hour.`,
+        S`<b>At 10 h.</b> \(P'(10)=150-60=90\) cells per hour.`,
+        S`<b>Growth stops.</b> \(P'(t)=0\Rightarrow t=25\) h. Before then \(P'\gt0\); after, \(P'\lt0\) and the culture declines.`,
+        S`<b>Peak size.</b> \(P(25)=2000+3750-1875=3875\) cells.`,
+        S`<b>Check.</b> The green tangent at \(t=10\) passes through \(P(10)=2000+1500-300=3200\) with slope 90 ✓. The rate falls by 6 cells/h every hour, from 150 at \(t=0\) to 0 at \(t=25\).`],
       S`90 cells per hour at \(t=10\); growth stops at \(t=25\) h`,
-      plane({ view: { xmin: 0, xmax: 50, ymin: 0, ymax: 4200 }, curves: [{ f: (t) => 2000 + 150 * t - 3 * t * t, color: "violet" }, { f: (t) => 3200 + 90 * (t - 10), color: "green" }], points: [{ x: 10, y: 3200, label: "t = 10", color: "red" }, { x: 25, y: 3875, label: "t = 25", color: "red" }], step: { x: 5, y: 500 } })],
+      plane({ view: { xmin: 0, xmax: 50, ymin: 0, ymax: 4200 }, curves: [{ f: (t) => 2000 + 150 * t - 3 * t * t, color: "violet", label: "P(t) = 2000 + 150t − 3t²" }, { f: (t) => 3200 + 90 * (t - 10), a: 0, b: 19, color: "green", label: "slope 90" }], points: [{ x: 10, y: 3200, label: "t = 10", color: "red" }, { x: 25, y: 3875, label: "t = 25", color: "red" }], step: { x: 5, y: 500 }, xlabel: "t (h)", ylabel: "P" })],
     ["Cooling", S`A drink's temperature is \(T(t)=20+\dfrac{80}{t+1}\) °C after \(t\) minutes. Find \(T'(3)\) and interpret it.`,
-      [S`\(T'(t)=-\dfrac{80}{(t+1)^2}\).`, S`\(T'(3)=-\dfrac{80}{16}=-5\).`],
+      [S`<b>Rewrite.</b> \(T(t)=20+80(t+1)^{-1}\).`,
+        S`<b>Differentiate (chain rule).</b> \(T'(t)=80(-1)(t+1)^{-2}=-\dfrac{80}{(t+1)^2}\).`,
+        S`<b>At 3 minutes.</b> \(T'(3)=-\dfrac{80}{16}=-5\) °C/min. The temperature is \(T(3)=20+20=40\) °C.`,
+        S`<b>Interpret.</b> At \(t=3\) the drink is losing heat at 5 °C per minute. The rate shrinks over time: \(T'(9)=-0.8\). The drink approaches room temperature, 20 °C (the grey line).`,
+        S`<b>Check.</b> \(T(3)-T(4)=40-36=4\): over the next minute it actually drops 4 °C, a bit less than 5, because the cooling slows down ✓`],
       S`\(-5\) °C per minute: after 3 minutes the drink is cooling at 5 degrees per minute`,
-      plane({ view: { xmin: 0, xmax: 15, ymin: 0, ymax: 100 }, curves: [{ f: (t) => 20 + 80 / (t + 1), color: "violet" }, { f: (t) => 40 - 5 * (t - 3), color: "green" }, { f: () => 20, color: "gray" }], points: [{ x: 3, y: 40, label: "(3, 40)", color: "red" }], step: { x: 1, y: 10 } })],
+      plane({ view: { xmin: 0, xmax: 15, ymin: 0, ymax: 100 }, curves: [{ f: (t) => 20 + 80 / (t + 1), color: "violet", label: "T(t) = 20 + 80/(t + 1)" }, { f: (t) => 40 - 5 * (t - 3), a: 0, b: 8, color: "green", label: "slope −5" }, { f: () => 20, color: "gray", label: "room 20 °C" }], points: [{ x: 3, y: 40, label: "(3, 40)", color: "red" }], step: { x: 1, y: 10 }, xlabel: "t (min)", ylabel: "T (°C)" })],
   ]),
 
   practice([

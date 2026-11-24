@@ -1,6 +1,8 @@
 // MCV4U 4.5 — Chapter 4 Review (NEW lesson): slopes of sinusoids, derivatives of sin and cos, the chain rule for
 // sinusoids and applications, with multi-step examples, mixed practice, a readiness checklist and a hard level
 import { intro, section, keyIdea, widget, examples, practice, wrapUp, table, q, num, choice, hard, plane } from "./lib.mjs";
+import { tv } from "../mcr3u-extables.mjs";
+import { chart } from "../mcv4u-ch3/csign.mjs";
 
 export const TITLE = "4.5 Chapter 4 Review";
 export const ID = "6d4fc004-0001-4001-8001-000000000405";
@@ -49,23 +51,45 @@ export const blocks = () => [
 
   examples([
     ["A horizontal tangent", S`Find the tangent to \(y=2\sin x-\cos(2x)\) at \(x=\frac\pi2\).`,
-      [S`\(y\left(\frac\pi2\right)=2-\cos\pi=3\).`, S`\(y'=2\cos x+2\sin(2x)\); \(y'\left(\frac\pi2\right)=0+0=0\).`],
+      [S`<b>Point.</b> \(y\left(\frac\pi2\right)=2\sin\frac\pi2-\cos\pi=2-(-1)=3\).`,
+        S`<b>Derivative.</b> \(y'=2\cos x-(-\sin2x)\cdot2=2\cos x+2\sin(2x)\) (chain rule on \(\cos2x\)).`,
+        S`<b>Slope.</b> \(y'\left(\frac\pi2\right)=2\cos\frac\pi2+2\sin\pi=0+0=0\).`,
+        S`<b>Tangent.</b> Slope 0 through \(\left(\frac\pi2,3\right)\): \(y=3\).`,
+        S`<b>Why a maximum.</b> \(2\sin x\le2\) and \(-\cos2x\le1\), so \(y\le3\) always; both bounds are reached at \(\frac\pi2\) ✓`],
       S`\(y=3\), a horizontal tangent (a maximum of the curve)`,
-      plane({ view: { xmin: -0.5, xmax: 6.8, ymin: -3.5, ymax: 3.5 }, curves: [{ f: (x) => 2 * Math.sin(x) - Math.cos(2 * x), color: "violet" }, { f: () => 3, a: 0.8, b: 2.4, color: "green" }], points: [{ x: PI / 2, y: 3, label: "(π/2, 3)", color: "red" }], step: { x: 0.5, y: 1 } })],
+      plane({ view: { xmin: -0.5, xmax: 6.8, ymin: -3.5, ymax: 3.5 }, curves: [{ f: (x) => 2 * Math.sin(x) - Math.cos(2 * x), color: "violet", label: "y = 2 sin x − cos 2x" }, { f: () => 3, a: 0.8, b: 2.4, color: "green", label: "y = 3" }], points: [{ x: PI / 2, y: 3, label: "(π/2, 3)", color: "red" }], step: { x: 0.5, y: 1 } })],
     ["A second derivative", S`For \(f(x)=x\sin x\), find \(f''(x)\) and \(f''(\pi)\).`,
-      [S`\(f'=\sin x+x\cos x\).`, S`\(f''=\cos x+\cos x-x\sin x=2\cos x-x\sin x\).`],
-      S`\(f''(x)=2\cos x-x\sin x\); \(f''(\pi)=-2\)`],
+      [S`<b>First derivative (product rule).</b> \(f'=(1)\sin x+x\cos x=\sin x+x\cos x\).`,
+        S`<b>Second derivative.</b> Differentiate each term: \(\frac{d}{dx}\sin x=\cos x\); \(\frac{d}{dx}(x\cos x)=\cos x-x\sin x\).`,
+        S`<b>Combine.</b> \(f''=\cos x+\cos x-x\sin x=2\cos x-x\sin x\).`,
+        S`<b>At \(\pi\).</b> \(f''(\pi)=2(-1)-\pi(0)=-2\).`,
+        S`<b>Interpret.</b> \(f''(\pi)\lt0\): at \((\pi,0)\) the graph bends downward, and \(f'(\pi)=0+\pi(-1)=-\pi\), so it is falling there ✓`],
+      S`\(f''(x)=2\cos x-x\sin x\); \(f''(\pi)=-2\)`,
+      plane({ view: { xmin: -0.3, xmax: 6.6, ymin: -5.5, ymax: 3 }, curves: [{ f: (x) => x * Math.sin(x), a: 0, b: 2 * PI, color: "violet", label: "f(x) = x sin x" }, { f: (x) => 2 * Math.cos(x) - x * Math.sin(x), a: 0, b: 2 * PI, color: "amber", label: "f″(x)" }], points: [{ x: PI, y: 0, label: "(π, 0)", color: "red" }, { x: PI, y: -2, label: "f″(π) = −2", color: "amber" }], step: { x: 0.5, y: 1 } })],
     ["Absolute extrema", S`Find the absolute extrema of \(f(x)=x-2\sin x\) on \([0,2\pi]\).`,
-      [S`\(f'(x)=1-2\cos x=0\Rightarrow x=\frac\pi3,\ \frac{5\pi}3\).`, S`\(f(0)=0\), \(f\left(\frac\pi3\right)=\frac\pi3-\sqrt3\approx-0.685\), \(f\left(\frac{5\pi}3\right)=\frac{5\pi}3+\sqrt3\approx6.968\), \(f(2\pi)\approx6.283\).`],
+      [S`<b>Method.</b> On a closed interval, compare \(f\) at the critical numbers and at the endpoints.`,
+        S`<b>Critical numbers.</b> \(f'(x)=1-2\cos x=0\Rightarrow\cos x=\frac12\Rightarrow x=\frac\pi3,\ \frac{5\pi}3\).`,
+        S`<b>Signs.</b> ${chart({ from: [0, "0"], to: [2 * PI, "2\\pi"], cuts: [[PI / 3, "\\frac\\pi3"], [(5 * PI) / 3, "\\frac{5\\pi}3"]], d: ["f'(x)", (x) => 1 - 2 * Math.cos(x)] })}`,
+        S`<b>Values.</b> ${tv(["\\(x\\)", "0", "\\(\\frac\\pi3\\)", "\\(\\frac{5\\pi}3\\)", "\\(2\\pi\\)"], ["\\(f(x)\\)", "0", "\\(\\frac\\pi3-\\sqrt3\\approx-0.685\\)", "\\(\\frac{5\\pi}3+\\sqrt3\\approx6.968\\)", "\\(2\\pi\\approx6.283\\)"])}`,
+        S`<b>Conclusion.</b> Smallest value \(-0.685\) at \(\frac\pi3\); largest \(6.968\) at \(\frac{5\pi}3\). Note the endpoint \(2\pi\) is <em>not</em> the maximum even though it is the farthest right ✓`],
       S`absolute minimum \(\approx-0.685\) at \(\frac\pi3\); absolute maximum \(\approx6.968\) at \(\frac{5\pi}3\)`,
-      plane({ view: { xmin: -0.3, xmax: 7.6, ymin: -1.5, ymax: 8 }, curves: [{ f: (x) => x - 2 * Math.sin(x), a: 0, b: 2 * PI, color: "violet" }], points: [{ x: PI / 3, y: PI / 3 - Math.sqrt(3), label: "min", color: "blue" }, { x: (5 * PI) / 3, y: (5 * PI) / 3 + Math.sqrt(3), label: "max", color: "red" }, { x: 2 * PI, y: 2 * PI, label: "(2π, 6.28)", color: "amber" }], step: { x: 0.5, y: 1 } })],
+      plane({ view: { xmin: -0.3, xmax: 7.6, ymin: -1.5, ymax: 8 }, curves: [{ f: (x) => x - 2 * Math.sin(x), a: 0, b: 2 * PI, color: "violet", label: "f(x) = x − 2 sin x" }], points: [{ x: PI / 3, y: PI / 3 - Math.sqrt(3), label: "min", color: "blue" }, { x: (5 * PI) / 3, y: (5 * PI) / 3 + Math.sqrt(3), label: "max", color: "red" }, { x: 2 * PI, y: 2 * PI, label: "(2π, 6.28)", color: "amber" }], step: { x: 0.5, y: 1 } })],
     ["Inflection points", S`Show that \(f(x)=x+\cos x\) is increasing, and find its inflection points on \([0,2\pi]\).`,
-      [S`\(f'(x)=1-\sin x\ge0\): increasing (flat only where \(\sin x=1\)).`, S`\(f''(x)=-\cos x\): changes sign at \(\frac\pi2\) and \(\frac{3\pi}2\).`],
+      [S`<b>First derivative.</b> \(f'(x)=1-\sin x\). Since \(\sin x\le1\), \(f'(x)\ge0\) everywhere.`,
+        S`<b>Increasing.</b> \(f'=0\) only at isolated points (\(x=\frac\pi2+2k\pi\)), where the graph levels off for an instant but never falls. So \(f\) is increasing.`,
+        S`<b>Second derivative.</b> \(f''(x)=-\cos x\). ${chart({ kind: "conc", from: [0, "0"], to: [2 * PI, "2\\pi"], cuts: [[PI / 2, "\\frac\\pi2"], [(3 * PI) / 2, "\\frac{3\\pi}2"]], d: ["f''(x)", (x) => -Math.cos(x)] })}`,
+        S`<b>Inflection points.</b> \(f''\) changes sign at \(\frac\pi2\) and \(\frac{3\pi}2\); \(f\left(\frac\pi2\right)=\frac\pi2\) and \(f\left(\frac{3\pi}2\right)=\frac{3\pi}2\).`,
+        S`<b>Check.</b> Both points lie on the line \(y=x\) (grey), because \(\cos x=0\) there; the curve weaves around that line ✓`],
       S`increasing everywhere; inflection points \(\left(\frac\pi2,\frac\pi2\right)\) and \(\left(\frac{3\pi}2,\frac{3\pi}2\right)\)`,
-      plane({ view: { xmin: -0.3, xmax: 6.7, ymin: -0.5, ymax: 7.5 }, curves: [{ f: (x) => x + Math.cos(x), a: 0, b: 2 * PI, color: "violet" }, { f: (x) => x, a: 0, b: 2 * PI, color: "gray" }], points: [{ x: PI / 2, y: PI / 2, label: "inflection", color: "violet" }, { x: (3 * PI) / 2, y: (3 * PI) / 2, label: "inflection", color: "violet" }], step: { x: 0.5, y: 1 } })],
+      plane({ view: { xmin: -0.3, xmax: 6.7, ymin: -0.5, ymax: 7.5 }, curves: [{ f: (x) => x + Math.cos(x), a: 0, b: 2 * PI, color: "violet", label: "f(x) = x + cos x" }, { f: (x) => x, a: 0, b: 2 * PI, color: "gray", label: "y = x" }], points: [{ x: PI / 2, y: PI / 2, label: "inflection", color: "red" }, { x: (3 * PI) / 2, y: (3 * PI) / 2, label: "inflection", color: "red" }], step: { x: 0.5, y: 1 } })],
     ["A tide", S`The tide height is \(h(t)=1.5\cos\left(\frac\pi6t\right)+4\) m, \(t\) hours after high tide. How fast is the water falling 2 hours after high tide?`,
-      [S`\(h'(t)=-1.5\cdot\frac\pi6\sin\left(\frac\pi6t\right)=-\frac\pi4\sin\left(\frac\pi6t\right)\).`, S`\(h'(2)=-\frac\pi4\cdot\frac{\sqrt3}2\approx-0.680\) m/h.`],
-      S`falling at about 0.68 m per hour`],
+      [S`<b>Chain rule.</b> \(h'(t)=1.5\left(-\sin\frac{\pi t}{6}\right)\cdot\frac\pi6=-\frac\pi4\sin\left(\frac\pi6t\right)\) m/h.`,
+        S`<b>At \(t=2\).</b> \(h'(2)=-\frac\pi4\sin\frac\pi3=-\frac\pi4\cdot\frac{\sqrt3}2\approx-0.680\) m/h.`,
+        S`<b>Interpret.</b> The negative sign means falling: about 0.68 m per hour. The height then is \(h(2)=1.5(0.5)+4=4.75\) m.`,
+        S`<b>Compare.</b> The fastest fall is \(\frac\pi4\approx0.785\) m/h at \(t=3\) h, at mid-tide.`,
+        S`<b>Check.</b> \(h(2.01)-h(2)\approx-0.0068\) m in 0.01 h, i.e. \(-0.68\) m/h ✓`],
+      S`falling at about 0.68 m per hour`,
+      plane({ view: { xmin: 0, xmax: 12.5, ymin: 2, ymax: 6 }, curves: [{ f: (t) => 1.5 * Math.cos((PI / 6) * t) + 4, a: 0, b: 12, color: "violet", label: "h(t) = 1.5 cos(πt/6) + 4" }, { f: (t) => 4.75 - 0.68 * (t - 2), a: 0.6, b: 3.6, color: "green", label: "slope ≈ −0.68" }], points: [{ x: 2, y: 4.75, label: "(2, 4.75)", color: "red" }], step: { x: 1, y: 0.5 }, xlabel: "t (h)", ylabel: "h (m)" })],
   ]),
 
   practice([

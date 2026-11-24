@@ -1,6 +1,7 @@
 // MCV4U 4.2 — Derivatives of the Sine and Cosine Functions: (sin x)′ = cos x, (cos x)′ = −sin x, the four-step cycle,
 // combining with the sum, product and quotient rules, the derivative of tan x, tangent lines and horizontal tangents
 import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, q, num, choice, hard, plane } from "./lib.mjs";
+import { tv } from "../mcr3u-extables.mjs";
 
 export const TITLE = "4.2 Derivatives of the Sine and Cosine Functions";
 export const ID = "4777ea03-a457-4ffb-b2df-d348a36f92b4";
@@ -57,22 +58,45 @@ export const blocks = () => [
 
   examples([
     ["A sum", S`Differentiate \(y=3\sin x-2\cos x\).`,
-      [S`\(y'=3\cos x-2(-\sin x)\).`],
-      S`\(y'=3\cos x+2\sin x\)`],
+      [S`<b>Rules.</b> \(\frac{d}{dx}\sin x=\cos x\) and \(\frac{d}{dx}\cos x=-\sin x\). Constant multiples and sums work exactly as for polynomials.`,
+        S`<b>Term by term.</b> \(\frac{d}{dx}3\sin x=3\cos x\); \(\frac{d}{dx}(-2\cos x)=-2(-\sin x)=2\sin x\).`,
+        S`<b>Result.</b> \(y'=3\cos x+2\sin x\).`,
+        S`<b>Watch the sign.</b> The minus in \(\frac{d}{dx}\cos x=-\sin x\) combines with the \(-2\) to give \(+2\sin x\).`,
+        S`<b>Check at \(x=0\).</b> \(y'(0)=3\). Secant: \(y(0)=-2\), \(y(0.001)\approx3(0.001)-2(0.9999995)=-1.996999\); slope \(\approx3.001\) ✓`],
+      S`\(y'=3\cos x+2\sin x\)`,
+      plane({ view: { xmin: -0.3, xmax: 6.6, ymin: -4, ymax: 4 }, curves: [{ f: (x) => 3 * Math.sin(x) - 2 * Math.cos(x), a: 0, b: 2 * PI, color: "violet", label: "y = 3 sin x − 2 cos x" }, { f: (x) => 3 * Math.cos(x) + 2 * Math.sin(x), a: 0, b: 2 * PI, color: "blue", label: "y′ = 3 cos x + 2 sin x" }], step: { x: 0.5, y: 1 } }, "y′ crosses 0 exactly where y has its peak and trough")],
     ["A tangent line", S`Find the tangent to \(y=\sin x\) at \(x=\frac\pi3\).`,
-      [S`Point \(\left(\frac\pi3,\frac{\sqrt3}2\right)\); slope \(\cos\frac\pi3=\frac12\).`, S`\(y-\frac{\sqrt3}2=\frac12\left(x-\frac\pi3\right)\).`],
+      [S`<b>Point.</b> \(\sin\frac\pi3=\frac{\sqrt3}2\approx0.866\): the point \(\left(\frac\pi3,\frac{\sqrt3}2\right)\).`,
+        S`<b>Slope.</b> \(y'=\cos x\), so \(m=\cos\frac\pi3=\frac12\).`,
+        S`<b>Equation.</b> \(y-\frac{\sqrt3}2=\frac12\left(x-\frac\pi3\right)\Rightarrow y=\frac12x+\frac{\sqrt3}{2}-\frac{\pi}{6}\).`,
+        S`<b>Decimal form.</b> \(\frac{\sqrt3}2-\frac\pi6\approx0.866-0.524=0.342\), so \(y\approx0.5x+0.342\).`,
+        S`<b>Check.</b> At \(x=\frac\pi3\approx1.047\): \(0.5(1.047)+0.342\approx0.866\) ✓`],
       S`\(y=\frac12x+\frac{\sqrt3}{2}-\frac{\pi}{6}\approx0.5x+0.342\)`,
-      plane({ view: { xmin: -0.5, xmax: 3.5, ymin: -0.5, ymax: 1.6 }, curves: [{ f: Math.sin, color: "violet" }, { f: (x) => 0.5 * x + Math.sqrt(3) / 2 - PI / 6, color: "green" }], points: [{ x: PI / 3, y: Math.sqrt(3) / 2, label: "(π/3, 0.87)", color: "red" }], step: { x: 0.5, y: 0.5 } })],
+      plane({ view: { xmin: -0.5, xmax: 3.5, ymin: -0.5, ymax: 1.6 }, curves: [{ f: Math.sin, color: "violet", label: "y = sin x" }, { f: (x) => 0.5 * x + Math.sqrt(3) / 2 - PI / 6, color: "green", label: "y ≈ 0.5x + 0.342" }], points: [{ x: PI / 3, y: Math.sqrt(3) / 2, label: "(π/3, 0.87)", color: "red" }], step: { x: 0.5, y: 0.5 } })],
     ["A product", S`Differentiate \(y=x^2\sin x\).`,
-      [S`Product rule: \(2x\cdot\sin x+x^2\cdot\cos x\).`],
-      S`\(y'=2x\sin x+x^2\cos x\)`],
+      [S`<b>Structure.</b> A product of \(u=x^2\) and \(v=\sin x\), so use \((uv)'=u'v+uv'\).`,
+        S`<b>Pieces.</b> \(u'=2x\); \(v'=\cos x\).`,
+        S`<b>Apply.</b> \(y'=2x\sin x+x^2\cos x\).`,
+        S`<b>Common error.</b> \(u'v'=2x\cos x\) is not the derivative of a product.`,
+        S`<b>Check at \(x=\pi\).</b> \(y'(\pi)=0+\pi^2(-1)\approx-9.87\). The graph crosses the axis at \(\pi\) heading down steeply ✓`],
+      S`\(y'=2x\sin x+x^2\cos x\)`,
+      plane({ view: { xmin: -0.3, xmax: 4.2, ymin: -8, ymax: 6 }, curves: [{ f: (x) => x * x * Math.sin(x), a: 0, b: 4.2, color: "violet", label: "y = x² sin x" }, { f: (x) => -PI * PI * (x - PI), a: 2.6, b: 3.8, color: "green", label: "slope −π²" }], points: [{ x: PI, y: 0, label: "(π, 0)", color: "red" }], step: { x: 0.5, y: 2 } })],
     ["The derivative of tan x", S`Use the quotient rule on \(\tan x=\frac{\sin x}{\cos x}\).`,
-      [S`\(\frac{\cos x\cdot\cos x-\sin x\cdot(-\sin x)}{\cos^2x}=\frac{\cos^2x+\sin^2x}{\cos^2x}\).`, S`\(=\frac1{\cos^2x}=\sec^2x\).`],
+      [S`<b>Parts.</b> \(u=\sin x\), \(u'=\cos x\); \(v=\cos x\), \(v'=-\sin x\).`,
+        S`<b>Quotient rule.</b> \(\dfrac{u'v-uv'}{v^2}=\dfrac{\cos x\cdot\cos x-\sin x\cdot(-\sin x)}{\cos^2x}=\dfrac{\cos^2x+\sin^2x}{\cos^2x}\).`,
+        S`<b>Pythagorean identity.</b> \(\sin^2x+\cos^2x=1\), so the derivative is \(\dfrac1{\cos^2x}=\sec^2x\).`,
+        S`<b>Interpret.</b> \(\sec^2x\ge1\gt0\): \(\tan x\) increases on every branch, never more slowly than slope 1 (at \(x=0,\pm\pi,\ldots\)).`,
+        S`<b>Check.</b> At \(x=\frac\pi4\): \(\sec^2\frac\pi4=\frac{1}{(\sqrt2/2)^2}=2\). Secant: \(\frac{\tan(0.786398)-1}{0.001}\approx2.002\) ✓`],
       S`\(\frac{d}{dx}\tan x=\sec^2x\), always positive: tan x increases on every branch`,
-      plane({ view: { xmin: -4.6, xmax: 4.6, ymin: -4, ymax: 4 }, curves: [{ f: Math.tan, a: -4.6, b: -PI / 2 - 0.05, color: "violet" }, { f: Math.tan, a: -PI / 2 + 0.05, b: PI / 2 - 0.05, color: "violet" }, { f: Math.tan, a: PI / 2 + 0.05, b: 4.6, color: "violet" }], vlines: [{ x: -PI / 2, color: "red", dash: true }, { x: PI / 2, color: "red", dash: true }], step: { x: 1, y: 1 } })],
+      plane({ view: { xmin: -4.6, xmax: 4.6, ymin: -4, ymax: 4 }, curves: [{ f: Math.tan, a: -4.6, b: -PI / 2 - 0.05, color: "violet" }, { f: Math.tan, a: -PI / 2 + 0.05, b: PI / 2 - 0.05, color: "violet", label: "y = tan x" }, { f: Math.tan, a: PI / 2 + 0.05, b: 4.6, color: "violet" }, { f: (x) => 1 + 2 * (x - PI / 4), a: 0, b: 1.4, color: "green", label: "slope 2" }], vlines: [{ x: -PI / 2, color: "red", dash: true }, { x: PI / 2, color: "red", dash: true }], points: [{ x: PI / 4, y: 1, label: "(π/4, 1)", color: "red" }], step: { x: 1, y: 1 } })],
     ["A high derivative", S`Find \(\dfrac{d^{10}}{dx^{10}}\cos x\).`,
-      [S`\(10=4\cdot2+2\): two steps into the cycle from \(\cos x\).`, S`\(\cos x\to-\sin x\to-\cos x\).`],
-      S`\(-\cos x\)`],
+      [S`<b>The cycle.</b> Differentiating repeatedly: \(\cos x\to-\sin x\to-\cos x\to\sin x\to\cos x\). After 4 steps we are back where we started.`,
+        S`<b>Use the remainder.</b> \(10=4\cdot2+2\): two full cycles (which change nothing) plus 2 more steps.`,
+        S`<b>Two steps from \(\cos x\).</b> \(\cos x\to-\sin x\to-\cos x\).`,
+        S`<b>Result.</b> \(\dfrac{d^{10}}{dx^{10}}\cos x=-\cos x\).`,
+        S`<b>Check.</b> ${tv(["order", "0", "1", "2", "3", "4", "…", "8", "9", "10"], ["derivative", "\\(\\cos x\\)", "\\(-\\sin x\\)", "\\(-\\cos x\\)", "\\(\\sin x\\)", "\\(\\cos x\\)", "…", "\\(\\cos x\\)", "\\(-\\sin x\\)", "\\(-\\cos x\\)"])} ✓`],
+      S`\(-\cos x\)`,
+      plane({ view: { xmin: -0.3, xmax: 6.6, ymin: -1.5, ymax: 1.5 }, curves: [{ f: Math.cos, a: 0, b: 2 * PI, color: "violet", label: "y = cos x" }, { f: (x) => -Math.cos(x), a: 0, b: 2 * PI, color: "blue", label: "10th derivative: −cos x" }], step: { x: 0.5, y: 0.5 } })],
   ]),
 
   practice([

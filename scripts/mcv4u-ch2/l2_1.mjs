@@ -1,6 +1,7 @@
 // MCV4U 2.1 — Derivative of a Polynomial Function: constant, power (including negative and fractional exponents),
 // constant multiple, sum and difference rules; tangent lines and points with a given slope
 import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, q, num, choice, expr, hard, plane } from "./lib.mjs";
+import { tv } from "../mcr3u-extables.mjs";
 
 export const TITLE = "2.1 Derivative of a Polynomial Function";
 export const ID = "d8e79fe3-46ba-43de-abb7-32208b00a863";
@@ -59,22 +60,44 @@ export const blocks = () => [
 
   examples([
     ["Term by term", S`Differentiate \(f(x)=4x^5-3x^2+7x-2\).`,
-      [S`\(4\cdot5x^4-3\cdot2x+7-0\).`],
-      S`\(f'(x)=20x^4-6x+7\)`],
+      [S`<b>Rules used.</b> Power rule \(\frac{d}{dx}x^n=nx^{n-1}\); constant multiple rule \(\frac{d}{dx}[cf]=cf'\); sum/difference rule (differentiate term by term); and the derivative of a constant is 0.`,
+        S`<b>Term by term.</b> \(\frac{d}{dx}4x^5=4\cdot5x^4=20x^4\); \(\frac{d}{dx}(-3x^2)=-3\cdot2x=-6x\); \(\frac{d}{dx}7x=7\); \(\frac{d}{dx}(-2)=0\).`,
+        S`<b>Assemble.</b> \(f'(x)=20x^4-6x+7\).`,
+        S`<b>Why the constant disappears.</b> \(-2\) only shifts the graph down; shifting does not change any slope.`,
+        S`<b>Check at a point.</b> \(f'(1)=20-6+7=21\). Secant: \(f(1)=6\), \(f(1.001)\approx6.021\,05\), so \(\frac{6.02104-6}{0.001}\approx21.04\) ✓`],
+      S`\(f'(x)=20x^4-6x+7\)`,
+      plane({ view: { xmin: -1.3, xmax: 1.3, ymin: -12, ymax: 14 }, curves: [{ f: (x) => 4 * x ** 5 - 3 * x * x + 7 * x - 2, color: "violet", label: "f(x) = 4x⁵ − 3x² + 7x − 2" }, { f: (x) => 6 + 21 * (x - 1), a: 0.55, b: 1.3, color: "green", label: "slope 21" }], points: [{ x: 1, y: 6, label: "(1, 6)", color: "red" }], step: { x: 0.5, y: 2 } })],
     ["Roots and reciprocals", S`Differentiate \(y=\sqrt x+\dfrac3{x^2}\).`,
-      [S`Rewrite: \(y=x^{1/2}+3x^{-2}\).`, S`\(\frac{dy}{dx}=\tfrac12x^{-1/2}-6x^{-3}\).`],
-      S`\(\dfrac{dy}{dx}=\dfrac1{2\sqrt x}-\dfrac6{x^3}\)`],
+      [S`<b>Plan.</b> The power rule works for any real exponent, but only on powers of \(x\). So first rewrite roots and reciprocals as powers.`,
+        S`<b>Rewrite.</b> \(\sqrt x=x^{1/2}\) and \(\dfrac3{x^2}=3x^{-2}\). So \(y=x^{1/2}+3x^{-2}\).`,
+        S`<b>Power rule.</b> \(\frac{d}{dx}x^{1/2}=\tfrac12x^{-1/2}\) (subtract 1 from \(\tfrac12\)); \(\frac{d}{dx}3x^{-2}=3(-2)x^{-3}=-6x^{-3}\).`,
+        S`<b>Write with positive exponents.</b> \(\dfrac{dy}{dx}=\dfrac1{2\sqrt x}-\dfrac6{x^3}\), for \(x\gt0\).`,
+        S`<b>Check.</b> At \(x=1\): \(\frac12-6=-5.5\). Secant: \(y(1)=4\), \(y(1.001)=\sqrt{1.001}+\frac3{1.002001}\approx1.0005+2.994\,01=3.994\,51\); slope \(\approx\frac{-0.00549}{0.001}=-5.49\) ✓`],
+      S`\(\dfrac{dy}{dx}=\dfrac1{2\sqrt x}-\dfrac6{x^3}\)`,
+      plane({ view: { xmin: 0, xmax: 4, ymin: 0, ymax: 8 }, curves: [{ f: (x) => Math.sqrt(x) + 3 / (x * x), a: 0.62, b: 4, color: "violet", label: "y = √x + 3/x²" }, { f: (x) => 4 - 5.5 * (x - 1), a: 0.5, b: 1.6, color: "green", label: "slope −5.5" }], points: [{ x: 1, y: 4, label: "(1, 4)", color: "red" }], step: { x: 0.5, y: 1 } })],
     ["A tangent line", S`Find the tangent to \(y=x^3-2x+1\) at \(x=2\).`,
-      [S`\(y'=3x^2-2\); \(y'(2)=10\). Point: \(y(2)=8-4+1=5\).`, S`\(y-5=10(x-2)\).`],
+      [S`<b>What a tangent needs.</b> A point and a slope. The point comes from \(y\); the slope comes from \(y'\).`,
+        S`<b>Point.</b> \(y(2)=8-4+1=5\): the point \((2,5)\).`,
+        S`<b>Slope.</b> \(y'=3x^2-2\), so \(y'(2)=12-2=10\).`,
+        S`<b>Equation.</b> Point–slope: \(y-5=10(x-2)\), so \(y=10x-15\).`,
+        S`<b>Check.</b> At \(x=2\) the line gives \(20-15=5\) ✓. Near the point the line and curve almost agree: at \(x=2.1\), the curve gives \(9.261-4.2+1=6.061\) and the line gives \(6\).`],
       S`\(y=10x-15\)`,
-      plane({ view: { xmin: -2, xmax: 3, ymin: -6, ymax: 14 }, curves: [{ f: (x) => x ** 3 - 2 * x + 1, color: "violet" }, { f: (x) => 10 * x - 15, color: "green" }], points: [{ x: 2, y: 5, label: "(2, 5)", color: "red" }], step: { x: 1, y: 2 } })],
+      plane({ view: { xmin: -2, xmax: 3, ymin: -6, ymax: 14 }, curves: [{ f: (x) => x ** 3 - 2 * x + 1, color: "violet", label: "y = x³ − 2x + 1" }, { f: (x) => 10 * x - 15, color: "green", label: "y = 10x − 15" }], points: [{ x: 2, y: 5, label: "(2, 5)", color: "red" }], step: { x: 1, y: 2 } })],
     ["Where is the slope 4?", S`Find the points on \(y=x^3-3x^2+4x\) where the tangent has slope 4.`,
-      [S`\(y'=3x^2-6x+4=4\Rightarrow3x(x-2)=0\).`, S`\(x=0\): \((0,0)\); \(x=2\): \((2,4)\).`],
+      [S`<b>Translate.</b> "Tangent slope 4" means \(y'(x)=4\). We solve for \(x\), then find \(y\).`,
+        S`<b>Derivative.</b> \(y'=3x^2-6x+4\).`,
+        S`<b>Solve.</b> \(3x^2-6x+4=4\Rightarrow3x^2-6x=0\Rightarrow3x(x-2)=0\), so \(x=0\) or \(x=2\).`,
+        S`<b>Points.</b> \(y(0)=0\) and \(y(2)=8-12+8=4\): the points are \((0,0)\) and \((2,4)\).`,
+        S`<b>Check.</b> The tangents are \(y=4x\) and \(y-4=4(x-2)\), i.e. \(y=4x-4\). They are parallel (both slope 4), as the figure shows ✓`],
       S`\((0,0)\) and \((2,4)\)`,
-      plane({ view: { xmin: -1, xmax: 3, ymin: -3, ymax: 9 }, curves: [{ f: (x) => x ** 3 - 3 * x * x + 4 * x, color: "violet" }, { f: (x) => 4 * x, color: "green" }, { f: (x) => 4 * x - 4, color: "green" }], points: [{ x: 0, y: 0, color: "red" }, { x: 2, y: 4, label: "(2, 4)", color: "red" }], step: { x: 0.5, y: 1 } })],
+      plane({ view: { xmin: -1, xmax: 3, ymin: -3, ymax: 9 }, curves: [{ f: (x) => x ** 3 - 3 * x * x + 4 * x, color: "violet", label: "y = x³ − 3x² + 4x" }, { f: (x) => 4 * x, color: "green", label: "y = 4x" }, { f: (x) => 4 * x - 4, color: "green", label: "y = 4x − 4" }], points: [{ x: 0, y: 0, label: "(0, 0)", color: "red" }, { x: 2, y: 4, label: "(2, 4)", color: "red" }], step: { x: 0.5, y: 1 } })],
     ["Simplify first", S`Differentiate \(y=(2x-1)(x+3)\) and \(g(x)=\dfrac{x^2+1}{x}\).`,
-      [S`\(y=2x^2+5x-3\Rightarrow y'=4x+5\).`, S`\(g(x)=x+x^{-1}\Rightarrow g'(x)=1-x^{-2}\).`],
-      S`\(y'=4x+5\); \(g'(x)=1-\dfrac1{x^2}\)`],
+      [S`<b>Idea.</b> The power rule handles sums of powers. A product or quotient of simple pieces can often be turned into such a sum first (the product and quotient rules come in 2.2 and 2.5).`,
+        S`<b>Expand the product.</b> \((2x-1)(x+3)=2x^2+6x-x-3=2x^2+5x-3\), so \(y'=4x+5\).`,
+        S`<b>Split the quotient.</b> \(\dfrac{x^2+1}{x}=\dfrac{x^2}{x}+\dfrac1x=x+x^{-1}\), so \(g'(x)=1-x^{-2}=1-\dfrac1{x^2}\).`,
+        S`<b>Check \(g\).</b> \(g'(1)=0\): the tangent is flat at \((1,2)\), the lowest point of the right branch ✓ ${tv(["\\(x\\)", "0.5", "1", "2"], ["\\(g(x)\\)", "2.5", "2", "2.5"], ["\\(g'(x)\\)", "−3", "0", "0.75"])}`],
+      S`\(y'=4x+5\); \(g'(x)=1-\dfrac1{x^2}\)`,
+      plane({ view: { xmin: -4, xmax: 4, ymin: -6, ymax: 6 }, curves: [{ f: (x) => x + 1 / x, a: -4, b: -0.2, color: "violet" }, { f: (x) => x + 1 / x, a: 0.2, b: 4, color: "violet", label: "g(x) = (x² + 1)/x" }, { f: (x) => 1 - 1 / (x * x), a: -4, b: -0.4, color: "blue" }, { f: (x) => 1 - 1 / (x * x), a: 0.4, b: 4, color: "blue", label: "g′(x) = 1 − 1/x²" }], points: [{ x: 1, y: 2, label: "(1, 2)", color: "red" }, { x: -1, y: -2, label: "(−1, −2)", color: "red" }], step: { x: 1, y: 1 } }, "g′ is 0 at x = ±1, where g turns")],
   ]),
 
   practice([

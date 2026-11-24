@@ -1,6 +1,7 @@
 // MCV4U 1.3 — Limits: notation, numerical and graphical limits, one-sided limits, limits at a removable
 // discontinuity, infinite limits, limits at infinity, and limits of sequences ((1 + 1/n)^n, Fibonacci ratios)
 import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, q, num, choice, hard, plane } from "./lib.mjs";
+import { tv } from "../mcr3u-extables.mjs";
 
 export const TITLE = "1.3 Limits";
 export const ID = "e1e6a05f-7871-4aaf-8218-fead1881b090";
@@ -58,24 +59,45 @@ export const blocks = () => [
 
   examples([
     ["A hole", S`Find \(\displaystyle\lim_{x\to3}\dfrac{x^2-9}{x-3}\).`,
-      [S`Direct substitution gives \(\frac00\).`, S`\(\frac{(x-3)(x+3)}{x-3}=x+3\) for \(x\ne3\); as \(x\to3\), \(x+3\to6\).`, S`Table: \(x=2.99\): \(5.99\); \(x=3.01\): \(6.01\).`],
-      S`\(6\)`],
+      [S`<b>Try substitution first.</b> At \(x=3\): \(\frac{9-9}{3-3}=\frac00\). This is <em>indeterminate</em>: it tells us nothing yet, so we must simplify.`,
+        S`<b>Factor.</b> \(x^2-9=(x-3)(x+3)\), a difference of squares.`,
+        S`<b>Cancel.</b> For \(x\ne3\), \(\dfrac{(x-3)(x+3)}{x-3}=x+3\). A limit only uses values <em>near</em> 3, never at 3, so cancelling is allowed.`,
+        S`<b>Evaluate.</b> \(\displaystyle\lim_{x\to3}(x+3)=6\).`,
+        S`<b>Check with a table.</b> ${tv(["\\(x\\)", "2.9", "2.99", "3", "3.01", "3.1"], ["\\(\\frac{x^2-9}{x-3}\\)", "5.9", "5.99", "not defined", "6.01", "6.1"])} Both sides approach 6 ✓. The graph is the line \(y=x+3\) with a hole at \((3,6)\).`],
+      S`\(6\)`,
+      plane({ view: { xmin: -1, xmax: 6, ymin: -1, ymax: 10 }, curves: [{ f: (x) => x + 3, a: -1, b: 2.95, color: "violet", label: "y = (x² − 9)/(x − 3)" }, { f: (x) => x + 3, a: 3.05, b: 6, color: "violet" }], points: [{ x: 3, y: 6, label: "hole (3, 6)", color: "amber", open: true }], step: { x: 1, y: 1 } })],
     ["One-sided limits", S`\(f(x)=x^2\) for \(x\lt2\) and \(f(x)=x+1\) for \(x\ge2\). Find the one-sided limits at 2. Does \(\displaystyle\lim_{x\to2}f(x)\) exist?`,
-      [S`Left: \(x^2\to4\). Right: \(x+1\to3\).`, S`\(4\ne3\).`],
+      [S`<b>Rule.</b> \(\lim_{x\to a}f(x)\) exists only when the left-hand and right-hand limits both exist and are equal.`,
+        S`<b>Left of 2.</b> For \(x\lt2\) the formula is \(x^2\), so \(\displaystyle\lim_{x\to2^-}f(x)=2^2=4\).`,
+        S`<b>Right of 2.</b> For \(x\ge2\) the formula is \(x+1\), so \(\displaystyle\lim_{x\to2^+}f(x)=2+1=3\).`,
+        S`<b>Compare.</b> \(4\ne3\): the two pieces approach different heights. The graph has a jump at \(x=2\).`,
+        S`<b>Check with values.</b> \(f(1.99)=3.9601\) is near 4; \(f(2.01)=3.01\) is near 3 ✓. Note that \(f(2)=3\) exists, but a function value is not the same as a limit.`],
       S`left 4, right 3: the limit does not exist`,
-      plane({ view: { xmin: -1, xmax: 4, ymin: -1, ymax: 6 }, curves: [{ f: (x) => x * x, a: -1, b: 1.98, color: "violet" }, { f: (x) => x + 1, a: 2, b: 4, color: "violet" }], points: [{ x: 2, y: 4, label: "(2, 4) open", color: "amber", open: true }, { x: 2, y: 3, label: "(2, 3)", color: "red" }], step: { x: 1, y: 1 } })],
+      plane({ view: { xmin: -1, xmax: 4, ymin: -1, ymax: 6 }, curves: [{ f: (x) => x * x, a: -1, b: 1.98, color: "violet", label: "y = x²" }, { f: (x) => x + 1, a: 2, b: 4, color: "green", label: "y = x + 1" }], points: [{ x: 2, y: 4, label: "(2, 4) open", color: "amber", open: true }, { x: 2, y: 3, label: "(2, 3)", color: "red" }], step: { x: 1, y: 1 } })],
     ["An infinite limit", S`Describe \(\displaystyle\lim_{x\to0}\dfrac1{x^2}\).`,
-      [S`\(x=\pm0.1\): 100; \(x=\pm0.01\): 10 000. The values grow without bound from both sides.`],
+      [S`<b>Substitution fails.</b> \(\frac10\) is not a number, but unlike \(\frac00\) it signals that the values blow up. We look at the signs and sizes.`,
+        S`<b>Table from both sides.</b> ${tv(["\\(x\\)", "±0.5", "±0.1", "±0.01", "±0.001"], ["\\(\\frac1{x^2}\\)", "4", "100", "10 000", "1 000 000"])}`,
+        S`<b>Reason.</b> \(x^2\) is positive and tiny when \(x\) is near 0, and dividing 1 by a tiny positive number gives a huge positive number. Halving \(x\) makes \(\frac1{x^2}\) four times bigger.`,
+        S`<b>Conclusion.</b> The values grow without bound from both sides. We write \(\lim_{x\to0}\frac1{x^2}=\infty\). This is a way of saying <em>how</em> the limit fails to exist; \(\infty\) is not a number.`,
+        S`<b>Graph.</b> The line \(x=0\) is a vertical asymptote, and both branches rise along it ✓`],
       S`\(\lim_{x\to0}\frac1{x^2}=\infty\): does not exist; vertical asymptote \(x=0\)`,
-      plane({ view: { xmin: -3, xmax: 3, ymin: -1, ymax: 10 }, curves: [{ f: (x) => 1 / (x * x), a: -3, b: -0.31, color: "violet" }, { f: (x) => 1 / (x * x), a: 0.31, b: 3, color: "violet" }], step: { x: 1, y: 1 } })],
+      plane({ view: { xmin: -3, xmax: 3, ymin: -1, ymax: 10 }, curves: [{ f: (x) => 1 / (x * x), a: -3, b: -0.31, color: "violet" }, { f: (x) => 1 / (x * x), a: 0.31, b: 3, color: "violet", label: "y = 1/x²" }], points: [{ x: 0.5, y: 4, label: "(0.5, 4)", color: "red" }, { x: -0.5, y: 4, color: "red" }], step: { x: 1, y: 1 } })],
     ["A limit at infinity", S`Find \(\displaystyle\lim_{x\to\infty}\dfrac{2x+1}{x-3}\).`,
-      [S`Divide by \(x\): \(\dfrac{2+\frac1x}{1-\frac3x}\to\dfrac{2+0}{1-0}\).`],
+      [S`<b>Idea.</b> For huge \(x\), the \(+1\) and \(-3\) barely matter, so the fraction should behave like \(\frac{2x}{x}=2\). To make this precise, divide every term by the highest power of \(x\) in the denominator.`,
+        S`<b>Divide by \(x\).</b> \(\dfrac{2x+1}{x-3}=\dfrac{2+\frac1x}{1-\frac3x}\).`,
+        S`<b>Use \(\frac{c}{x}\to0\).</b> As \(x\to\infty\), \(\frac1x\to0\) and \(\frac3x\to0\), so the expression approaches \(\dfrac{2+0}{1-0}=2\).`,
+        S`<b>Check with values.</b> ${tv(["\\(x\\)", "10", "100", "1000"], ["\\(\\frac{2x+1}{x-3}\\)", "3", "2.0722…", "2.0070…"])} The values approach 2 from above ✓`,
+        S`<b>Graph.</b> The line \(y=2\) is a horizontal asymptote. (There is also a vertical asymptote at \(x=3\), where the denominator is 0.)`],
       S`\(2\): the horizontal asymptote \(y=2\)`,
-      plane({ view: { xmin: -6, xmax: 20, ymin: -6, ymax: 10 }, curves: [{ f: (x) => (2 * x + 1) / (x - 3), a: -6, b: 2.3, color: "violet" }, { f: (x) => (2 * x + 1) / (x - 3), a: 3.8, b: 20, color: "violet" }], lines: [{ m: 0, b: 2, color: "red", dash: true }], vlines: [{ x: 3, color: "red", dash: true }], step: { x: 2, y: 2 } })],
+      plane({ view: { xmin: -6, xmax: 20, ymin: -6, ymax: 10 }, curves: [{ f: (x) => (2 * x + 1) / (x - 3), a: -6, b: 2.3, color: "violet" }, { f: (x) => (2 * x + 1) / (x - 3), a: 3.8, b: 20, color: "violet", label: "y = (2x + 1)/(x − 3)" }], lines: [{ m: 0, b: 2, color: "red", dash: true, label: "y = 2", lx: 16 }], vlines: [{ x: 3, color: "red", dash: true, label: "x = 3" }], step: { x: 2, y: 2 } })],
     ["The limit of a sequence", S`Estimate the limit of \(t_n=\left(1+\frac1n\right)^n\).`,
-      [S`\(t_1=2\), \(t_{10}\approx2.5937\), \(t_{100}\approx2.7048\), \(t_{1000}\approx2.7169\), \(t_{10\,000}\approx2.7181\).`],
+      [S`<b>Why it is interesting.</b> Two effects compete: the base \(1+\frac1n\) shrinks toward 1 (which would pull the power toward 1), while the exponent \(n\) grows (which would push it up). Neither wins outright.`,
+        S`<b>Compute terms.</b> ${tv(["\\(n\\)", "1", "10", "100", "1000", "10 000"], ["\\(t_n\\)", "2", "2.5937", "2.7048", "2.7169", "2.7181"])}`,
+        S`<b>Read the trend.</b> The terms increase, but by less each time: the gains are 0.59, 0.11, 0.012, 0.0012. They level off near 2.718.`,
+        S`<b>Name the limit.</b> This limit is the number \(e\approx2.71828\), the base of natural logarithms (chapter 5).`,
+        S`<b>Check.</b> \(t_{10\,000}\approx2.7181\) differs from \(e\) by about 0.0001 ✓. The graph shows the dots approaching the dashed line \(y=e\).`],
       S`the terms approach \(e\approx2.718\)`,
-      plane({ view: { xmin: 0, xmax: 21, ymin: 1.8, ymax: 2.9 }, points: Array.from({ length: 20 }, (_, i) => ({ x: i + 1, y: (1 + 1 / (i + 1)) ** (i + 1), color: "blue" })), lines: [{ m: 0, b: Math.E, color: "red", dash: true }], step: { x: 2, y: 0.1 }, xlabel: "n", ylabel: "tₙ" })],
+      plane({ view: { xmin: 0, xmax: 21, ymin: 1.8, ymax: 2.9 }, points: Array.from({ length: 20 }, (_, i) => ({ x: i + 1, y: (1 + 1 / (i + 1)) ** (i + 1), color: "blue" })), lines: [{ m: 0, b: Math.E, color: "red", dash: true, label: "y = e ≈ 2.718", lx: 14 }], step: { x: 2, y: 0.1 }, xlabel: "n", ylabel: "tₙ" }, "tₙ = (1 + 1/n)ⁿ for n = 1 to 20")],
   ]),
 
   practice([

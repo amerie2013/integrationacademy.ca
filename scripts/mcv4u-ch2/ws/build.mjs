@@ -23,7 +23,7 @@ const PRE = String.raw`\documentclass[11pt]{article}
 \usepackage[T1]{fontenc}\usepackage[utf8]{inputenc}\usepackage{lmodern}
 \usepackage{xcolor}\usepackage[most]{tcolorbox}\usepackage{enumitem}\usepackage{multicol}\usepackage{array}\usepackage{booktabs}\usepackage{fancyhdr}
 \usepackage{graphicx}\usepackage{tikz}\usetikzlibrary{calc,decorations.pathreplacing,arrows.meta}
-\usepackage{pgfplots}\pgfplotsset{compat=1.18}\usepackage{needspace}
+\usepackage{pgfplots}\pgfplotsset{compat=1.18}\usepackage{needspace}\usepackage{adjustbox}
 \definecolor{titleblue}{HTML}{1D4ED8}\definecolor{iagreen}{HTML}{14653B}\definecolor{keygray}{HTML}{475569}\definecolor{keybg}{HTML}{F1F5F9}
 \definecolor{tipred}{HTML}{B91C1C}\definecolor{hookviolet}{HTML}{6D28D9}
 \definecolor{lv1}{HTML}{15803D}\definecolor{lv2}{HTML}{B45309}\definecolor{lv3}{HTML}{7C2D12}
@@ -39,7 +39,7 @@ const PRE = String.raw`\documentclass[11pt]{article}
 \newtcolorbox{hookbox}{colframe=hookviolet,colback=hookviolet!5,coltitle=white,colbacktitle=hookviolet,fonttitle=\bfseries,title={Minds On --- start the lesson with this},arc=3pt,breakable,boxrule=1.2pt}
 \newtcolorbox{conceptbox}[1]{colframe=iagreen,colback=white,coltitle=white,colbacktitle=iagreen,fonttitle=\bfseries,title={#1},arc=3pt,breakable,boxrule=1pt}
 \newtcolorbox{tipbox}{colframe=tipred,colback=tipred!4,coltitle=white,colbacktitle=tipred,fonttitle=\bfseries,title={Common Mistakes \& Teaching Tips},arc=3pt,breakable,boxrule=1pt}
-\newtcolorbox{example}[2]{colframe=#1,colback=#1!6,coltitle=white,colbacktitle=#1,fonttitle=\bfseries,title={#2},arc=3pt,breakable,boxrule=1pt}
+\newtcolorbox{example}[2]{colframe=#1,colback=#1!6,coltitle=white,colbacktitle=#1,fonttitle=\bfseries,title={#2},arc=3pt,boxrule=1pt}
 \newtcolorbox{qbox}[2]{colframe=#1,colback=white,coltitle=white,colbacktitle=#1,fonttitle=\bfseries,title={#2},arc=3pt,boxrule=0.9pt}
 \newtcolorbox{recapbox}[1]{colframe=keygray,colback=keybg,coltitle=white,colbacktitle=keygray,fonttitle=\bfseries,title={#1},arc=3pt,boxrule=0.8pt}
 \newtcolorbox{keyitem}[1]{colframe=keygray,colback=keybg,coltitle=white,colbacktitle=keygray,fonttitle=\bfseries,title={#1},arc=3pt,breakable,boxrule=0.8pt}
@@ -64,11 +64,12 @@ function texDoc(t) {
 ${body}
 \end{conceptbox}`).join("\n");
   const tips = t.tips.map((x) => String.raw`\item ${x}`).join("\n");
-  const examples = t.examples.map((e, i) => String.raw`\begin{example}{ex${i % 9}}{Example ${i + 1} --- ${e.title}}
+  const examples = t.examples.map((e, i) => String.raw`\par\needspace{8cm}\begin{example}{ex${i % 9}}{Example ${i + 1} --- ${e.title}}
 ${clean(e.q)}
 ${e.fig ? sideBySide(String.raw`\textbf{\textit{Solution.}}
 ${stepsOf(e)}`, e.fig, 0.53) : String.raw`\par\smallskip\textbf{\textit{Solution.}}
 ${stepsOf(e)}`}
+${e.tab ?? ""}
 \par\smallskip\colorbox{white}{\textbf{Answer:} ${clean(e.ans)}}
 \end{example}`).join("\n");
   const LV = { 1: ["lv1", "Level 1 --- Knowledge \\& Understanding"], 2: ["lv2", "Level 2 --- Application"], 3: ["lv3", "Level 3 --- Hard: Thinking \\& Problem Solving"] };
@@ -124,7 +125,7 @@ ${tips}
 \end{itemize}
 \end{tipbox}
 
-\sech{Worked Examples}
+\needspace{12cm}\sech{Worked Examples}
 ${examples}
 
 \clearpage
@@ -170,7 +171,7 @@ for (const code of codes) {
   if (t.examples.length !== 9) throw new Error(`${code}: need 9 examples (has ${t.examples.length})`);
   if (t.problems.length !== 13 || [[1, 3], [2, 5], [3, 5]].some(([lv, k]) => t.problems.filter((p) => p.level === lv).length !== k)) throw new Error(`${code}: need 13 problems (3 + 5 + 5 by level)`);
   const name = `ws_${code}`;
-  fs.writeFileSync(path.join(OUT, name + ".tex"), texDoc(t).replace(/“/g, "\\textquotedblleft{}").replace(/”/g, "\\textquotedblright{}").replace(/’/g, "'").replace(/§/g, "\\S{}").replace(/ā/g, "\\={a}").replace(/ī/g, "\\={\\i}").replace(/è/g, "\\`{e}").replace(/−/g, "{\\ensuremath{-}}").replace(/…/g, "\\ldots{}").replace(/✓/g, "\\ensuremath{\\checkmark}").replace(/ˣ/g, "\\textsuperscript{x}").replace(/ⁿ/g, "\\textsuperscript{n}").replace(/²/g, "\\textsuperscript{2}").replace(/³/g, "\\textsuperscript{3}").replace(/⁴/g, "\\textsuperscript{4}").replace(/⁵/g, "\\textsuperscript{5}").replace(/≈/g, "\\ensuremath{\\approx}").replace(/—/g, "---").replace(/–/g, "--").replace(/°/g, "\\ensuremath{^\\circ}").replace(/≤/g, "\\ensuremath{\\le}").replace(/≥/g, "\\ensuremath{\\ge}").replace(/⟂/g, "\\ensuremath{\\perp}").replace(/½/g, "\\ensuremath{\\tfrac12}").replace(/×/g, "\\ensuremath{\\times}").replace(/÷/g, "\\ensuremath{\\div}").replace(/→/g, "\\ensuremath{\\to}").replace(/Δ/g, "\\ensuremath{\\Delta}").replace(/≠/g, "\\ensuremath{\\ne}").replace(/π/g, "\\ensuremath{\\pi}").replace(/∠/g, "\\ensuremath{\\angle}").replace(/△/g, "\\ensuremath{\\triangle}").replace(/⅓/g, "\\ensuremath{\\tfrac13}").replace(/√/g, "\\ensuremath{\\surd}").replace(/Ś/g, "\\'{S}").replace(/⁻¹/g, "\\textsuperscript{\\ensuremath{-1}}").replace(/ℝ/g, "\\ensuremath{\\mathbb{R}}").replace(/±/g, "\\ensuremath{\\pm}").replace(/∞/g, "\\ensuremath{\\infty}").replace(/⁶/g, "\\textsuperscript{6}").replace(/θ/g, "\\ensuremath{\\theta}").replace(/⁰/g, "\\textsuperscript{0}").replace(/·/g, "\\ensuremath{\\cdot}").replace(/↔/g, "\\ensuremath{\\leftrightarrow}").replace(/⇔/g, "\\ensuremath{\\Leftrightarrow}").replace(/⇒/g, "\\ensuremath{\\Rightarrow}").replace(/′/g, "\\ensuremath{'}").replace(/\\lt(?![a-zA-Z])/g, "<").replace(/\\gt(?![a-zA-Z])/g, ">"));
+  fs.writeFileSync(path.join(OUT, name + ".tex"), texDoc(t).replace(/“/g, "\\textquotedblleft{}").replace(/”/g, "\\textquotedblright{}").replace(/’/g, "'").replace(/§/g, "\\S{}").replace(/ā/g, "\\={a}").replace(/ī/g, "\\={\\i}").replace(/è/g, "\\`{e}").replace(/−/g, "{\\ensuremath{-}}").replace(/…/g, "\\ldots{}").replace(/✓/g, "\\ensuremath{\\checkmark}").replace(/ˣ/g, "\\textsuperscript{x}").replace(/ⁿ/g, "\\textsuperscript{n}").replace(/²/g, "\\textsuperscript{2}").replace(/³/g, "\\textsuperscript{3}").replace(/⁴/g, "\\textsuperscript{4}").replace(/⁵/g, "\\textsuperscript{5}").replace(/≈/g, "\\ensuremath{\\approx}").replace(/—/g, "---").replace(/–/g, "--").replace(/°/g, "\\ensuremath{^\\circ}").replace(/≤/g, "\\ensuremath{\\le}").replace(/≥/g, "\\ensuremath{\\ge}").replace(/⟂/g, "\\ensuremath{\\perp}").replace(/½/g, "\\ensuremath{\\tfrac12}").replace(/×/g, "\\ensuremath{\\times}").replace(/÷/g, "\\ensuremath{\\div}").replace(/→/g, "\\ensuremath{\\to}").replace(/Δ/g, "\\ensuremath{\\Delta}").replace(/≠/g, "\\ensuremath{\\ne}").replace(/π/g, "\\ensuremath{\\pi}").replace(/∠/g, "\\ensuremath{\\angle}").replace(/△/g, "\\ensuremath{\\triangle}").replace(/⅓/g, "\\ensuremath{\\tfrac13}").replace(/√/g, "\\ensuremath{\\surd}").replace(/Ś/g, "\\'{S}").replace(/⁻¹/g, "\\textsuperscript{\\ensuremath{-1}}").replace(/ℝ/g, "\\ensuremath{\\mathbb{R}}").replace(/±/g, "\\ensuremath{\\pm}").replace(/∞/g, "\\ensuremath{\\infty}").replace(/⁶/g, "\\textsuperscript{6}").replace(/θ/g, "\\ensuremath{\\theta}").replace(/⁰/g, "\\textsuperscript{0}").replace(/·/g, "\\ensuremath{\\cdot}").replace(/↔/g, "\\ensuremath{\\leftrightarrow}").replace(/⇔/g, "\\ensuremath{\\Leftrightarrow}").replace(/⇒/g, "\\ensuremath{\\Rightarrow}").replace(/″/g, "\\ensuremath{''}").replace(/′/g, "\\ensuremath{'}").replace(/\\lt(?![a-zA-Z])/g, "<").replace(/\\gt(?![a-zA-Z])/g, ">"));
   try { execFileSync(BIN, ["-X", "compile", name + ".tex", "--outdir", "."], { cwd: OUT, stdio: "pipe" }); }
   catch (e) { console.error(`COMPILE FAIL ${code}:\n` + (e.stderr?.toString() || e.message).split("\n").filter((l) => /error|!|Undefined/i.test(l)).slice(0, 8).join("\n")); process.exit(1); }
   const pdf = fs.readFileSync(path.join(OUT, name + ".pdf"));

@@ -1,6 +1,8 @@
 // MCV4U 5.3 — Derivatives of Exponential Functions: (e^x)′ = e^x, the chain rule for e^(g(x)), (b^x)′ = b^x ln b,
 // products and quotients with exponentials, tangent lines and extrema
 import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, q, num, choice, hard, plane } from "./lib.mjs";
+import { tv } from "../mcr3u-extables.mjs";
+import { chart } from "../mcv4u-ch3/csign.mjs";
 
 export const TITLE = "5.3 Derivatives of Exponential Functions";
 export const ID = "7376fdde-2adc-49b9-9622-3823215afb5f";
@@ -59,22 +61,45 @@ export const blocks = () => [
 
   examples([
     ["Two quick derivatives", S`Differentiate \(y=e^{3x}\) and \(y=5e^{-2x}\).`,
-      [S`\(3e^{3x}\).`, S`\(5\cdot(-2)e^{-2x}\).`],
-      S`\(3e^{3x}\) and \(-10e^{-2x}\)`],
+      [S`<b>Rule.</b> \(\frac{d}{dx}e^{g(x)}=e^{g(x)}\cdot g'(x)\): copy the exponential, then multiply by the derivative of the exponent.`,
+        S`<b>First.</b> \(g=3x\), \(g'=3\): \(y'=3e^{3x}\).`,
+        S`<b>Second.</b> \(g=-2x\), \(g'=-2\): \(y'=5\cdot(-2)e^{-2x}=-10e^{-2x}\).`,
+        S`<b>Signs.</b> \(e^{(\ )}\) is always positive, so \(e^{3x}\) always rises and \(5e^{-2x}\) always falls (decay).`,
+        S`<b>Check at 0.</b> Slopes 3 and \(-10\); the graphs leave \((0,1)\) and \((0,5)\) at those slopes ✓`],
+      S`\(3e^{3x}\) and \(-10e^{-2x}\)`,
+      plane({ view: { xmin: -1, xmax: 1.5, ymin: -0.5, ymax: 7 }, curves: [{ f: (x) => Math.exp(3 * x), color: "violet", label: "y = e³ˣ" }, { f: (x) => 5 * Math.exp(-2 * x), color: "blue", label: "y = 5e⁻²ˣ" }], points: [{ x: 0, y: 1, label: "slope 3", color: "red" }, { x: 0, y: 5, label: "slope −10", color: "red" }], step: { x: 0.5, y: 1 } })],
     ["A square in the exponent", S`Differentiate \(y=e^{x^2}\).`,
-      [S`\(g=x^2\), \(g'=2x\).`],
-      S`\(y'=2xe^{x^2}\)`],
+      [S`<b>Exponent.</b> \(g=x^2\), \(g'=2x\).`,
+        S`<b>Chain rule.</b> \(y'=e^{x^2}\cdot2x=2xe^{x^2}\).`,
+        S`<b>Signs.</b> \(e^{x^2}\gt0\), so \(y'\) has the sign of \(x\): falling for \(x\lt0\), rising for \(x\gt0\).`,
+        S`<b>Minimum.</b> \(y'=0\) only at \(x=0\): the lowest point is \((0,1)\).`,
+        S`<b>Check.</b> At \(x=1\): \(y'=2e\approx5.44\). Secant: \(\frac{e^{1.0201}-e}{0.01}\approx5.52\) — close, slightly high because the curve bends up ✓`],
+      S`\(y'=2xe^{x^2}\)`,
+      plane({ view: { xmin: -1.6, xmax: 1.6, ymin: -0.5, ymax: 8 }, curves: [{ f: (x) => Math.exp(x * x), color: "violet", label: "y = eˣ²" }, { f: (x) => E + 2 * E * (x - 1), a: 0.6, b: 1.5, color: "green", label: "slope 2e" }], points: [{ x: 0, y: 1, label: "min (0, 1)", color: "red" }, { x: 1, y: E, label: "(1, e)", color: "red" }], step: { x: 0.5, y: 1 } })],
     ["Another base", S`Differentiate \(y=3^x\) and find the slope at \(x=2\).`,
-      [S`\(y'=3^x\ln3\).`, S`At 2: \(9\ln3\approx9.888\).`],
-      S`\(3^x\ln3\); slope about 9.89 at \(x=2\)`],
+      [S`<b>Rewrite with base e.</b> \(3=e^{\ln3}\), so \(3^x=e^{x\ln3}\).`,
+        S`<b>Chain rule.</b> \(y'=e^{x\ln3}\cdot\ln3=3^x\ln3\).`,
+        S`<b>At \(x=2\).</b> \(9\ln3\approx9\times1.0986\approx9.888\).`,
+        S`<b>Connect to 5.1.</b> \(\ln3\approx1.099\) is exactly the slope of \(3^x\) at 0 that we estimated there.`,
+        S`<b>Check.</b> \(\frac{3^{2.001}-9}{0.001}\approx9.893\) ✓`],
+      S`\(3^x\ln3\); slope about 9.89 at \(x=2\)`,
+      plane({ view: { xmin: -1, xmax: 2.6, ymin: -1, ymax: 16 }, curves: [{ f: (x) => 3 ** x, color: "violet", label: "y = 3ˣ" }, { f: (x) => 9 + 9.888 * (x - 2), a: 1.4, b: 2.6, color: "green", label: "slope ≈ 9.89" }], points: [{ x: 2, y: 9, label: "(2, 9)", color: "red" }], step: { x: 0.5, y: 2 } })],
     ["A product", S`Find the minimum of \(y=xe^x\).`,
-      [S`\(y'=e^x+xe^x=(x+1)e^x\).`, S`Zero only at \(x=-1\); \(-\) then \(+\). \(y(-1)=-\frac1e\).`],
+      [S`<b>Product rule.</b> \(y'=(1)e^x+x\cdot e^x=(x+1)e^x\).`,
+        S`<b>Critical number.</b> \(e^x\) is never 0, so \(y'=0\) only when \(x+1=0\): \(x=-1\).`,
+        S`<b>Classify.</b> ${chart({ cuts: [[-1, "-1"]], factors: [["x+1", (x) => x + 1], ["e^x", Math.exp]], d: ["y'", (x) => (x + 1) * Math.exp(x)], f: "y" })}`,
+        S`<b>Value.</b> \(y(-1)=-e^{-1}=-\frac1e\approx-0.368\).`,
+        S`<b>Check.</b> As \(x\to-\infty\), \(xe^x\to0\) from below, and as \(x\to\infty\) it grows: so \(-\frac1e\) is the lowest value overall ✓`],
       S`minimum \(\left(-1,-\frac1e\right)\approx(-1,-0.368)\)`,
-      plane({ view: { xmin: -5, xmax: 1.5, ymin: -0.6, ymax: 4 }, curves: [{ f: (x) => x * Math.exp(x), color: "violet" }], points: [{ x: -1, y: -1 / E, label: "min (−1, −1/e)", color: "red" }], step: { x: 0.5, y: 0.5 } })],
+      plane({ view: { xmin: -5, xmax: 1.5, ymin: -0.6, ymax: 4 }, curves: [{ f: (x) => x * Math.exp(x), color: "violet", label: "y = xeˣ" }], points: [{ x: -1, y: -1 / E, label: "min (−1, −1/e)", color: "red" }], step: { x: 0.5, y: 0.5 } })],
     ["A tangent to decay", S`Find the tangent to \(y=e^{-x}\) at \(x=0\).`,
-      [S`Point \((0,1)\); slope \(-e^0=-1\).`],
+      [S`<b>Point.</b> \(e^0=1\): \((0,1)\).`,
+        S`<b>Slope.</b> \(y'=e^{-x}\cdot(-1)=-e^{-x}\), so \(y'(0)=-1\).`,
+        S`<b>Equation.</b> \(y-1=-1(x-0)\Rightarrow y=1-x\).`,
+        S`<b>Use it.</b> Near 0, \(e^{-x}\approx1-x\): e.g. \(e^{-0.05}\approx0.95\) (true value 0.9512).`,
+        S`<b>Check.</b> The curve stays above the line (it bends upward), which is why the estimate is slightly low ✓`],
       S`\(y=1-x\)`,
-      plane({ view: { xmin: -1.5, xmax: 3, ymin: -0.8, ymax: 4 }, curves: [{ f: (x) => Math.exp(-x), color: "violet" }, { f: (x) => 1 - x, color: "green", a: -1, b: 1.8 }], points: [{ x: 0, y: 1, label: "(0, 1)", color: "red" }], step: { x: 0.5, y: 0.5 } })],
+      plane({ view: { xmin: -1.5, xmax: 3, ymin: -0.8, ymax: 4 }, curves: [{ f: (x) => Math.exp(-x), color: "violet", label: "y = e⁻ˣ" }, { f: (x) => 1 - x, color: "green", a: -1, b: 1.8, label: "y = 1 − x" }], points: [{ x: 0, y: 1, label: "(0, 1)", color: "red" }], step: { x: 0.5, y: 0.5 } })],
   ]),
 
   practice([

@@ -1,6 +1,7 @@
 // MCV4U 2.4 — The Chain Rule: composite functions, dy/dx = dy/du · du/dx, power of a function, roots and reciprocals,
 // tangent lines, and combining the chain rule with the product rule
 import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, q, num, choice, expr, hard, plane } from "./lib.mjs";
+import { tv } from "../mcr3u-extables.mjs";
 
 export const TITLE = "2.4 The Chain Rule";
 export const ID = "a2b0cded-b983-4900-937b-637840fc19ce";
@@ -57,21 +58,45 @@ export const blocks = () => [
 
   examples([
     ["Power of a polynomial", S`Differentiate \(y=(3x^2-1)^4\).`,
-      [S`Outer \(u^4\), inner \(u=3x^2-1\), \(u'=6x\).`, S`\(y'=4(3x^2-1)^3\cdot6x\).`],
-      S`\(y'=24x(3x^2-1)^3\)`],
+      [S`<b>Chain rule.</b> For a composite \(y=f(g(x))\): \(y'=f'(g(x))\cdot g'(x)\) — differentiate the outer function, leave the inside alone, then multiply by the derivative of the inside.`,
+        S`<b>Identify the layers.</b> Outer: \(u^4\). Inner: \(u=3x^2-1\), with \(u'=6x\).`,
+        S`<b>Outer derivative.</b> \(4u^3=4(3x^2-1)^3\) (the inside is copied unchanged).`,
+        S`<b>Multiply by the inner derivative.</b> \(y'=4(3x^2-1)^3\cdot6x=24x(3x^2-1)^3\).`,
+        S`<b>Check at \(x=1\).</b> \(y'(1)=24(2)^3=192\). Secant: \(y(1)=16\), \(y(1.001)=(2.006003)^4\approx16.192\,96\); slope \(\approx\frac{0.19296}{0.001}\approx193\), just above 192 because the curve bends upward ✓`],
+      S`\(y'=24x(3x^2-1)^3\)`,
+      plane({ view: { xmin: -1.3, xmax: 1.3, ymin: -2, ymax: 30 }, curves: [{ f: (x) => (3 * x * x - 1) ** 4, color: "violet", label: "y = (3x² − 1)⁴" }], points: [{ x: 1, y: 16, label: "(1, 16)", color: "red" }, { x: 0, y: 1, label: "(0, 1)", color: "red" }, { x: 1 / Math.sqrt(3), y: 0, color: "blue" }, { x: -1 / Math.sqrt(3), y: 0, color: "blue" }], step: { x: 0.5, y: 5 } }, "y′ = 0 at x = 0 and where 3x² − 1 = 0 (blue), matching the flat points")],
     ["A root", S`Differentiate \(y=\sqrt{2x+5}\).`,
-      [S`\(y=(2x+5)^{1/2}\Rightarrow y'=\tfrac12(2x+5)^{-1/2}\cdot2\).`],
-      S`\(y'=\dfrac1{\sqrt{2x+5}}\)`],
+      [S`<b>Rewrite as a power.</b> \(y=(2x+5)^{1/2}\). Outer: \(u^{1/2}\); inner: \(u=2x+5\), \(u'=2\).`,
+        S`<b>Outer derivative.</b> \(\tfrac12u^{-1/2}=\dfrac{1}{2\sqrt{2x+5}}\).`,
+        S`<b>Times the inner derivative.</b> \(\dfrac{1}{2\sqrt{2x+5}}\cdot2=\dfrac{1}{\sqrt{2x+5}}\).`,
+        S`<b>Domain.</b> Defined for \(2x+5\gt0\), i.e. \(x\gt-2.5\). At \(x=-2.5\) the tangent is vertical.`,
+        S`<b>Check.</b> At \(x=2\): \(y'=\frac13\). \(y(2)=3\), \(y(2.01)=\sqrt{9.02}\approx3.003\,33\); slope \(\approx0.333\) ✓`],
+      S`\(y'=\dfrac1{\sqrt{2x+5}}\)`,
+      plane({ view: { xmin: -3, xmax: 6, ymin: -0.5, ymax: 4.5 }, curves: [{ f: (x) => Math.sqrt(2 * x + 5), a: -2.5, b: 6, color: "violet", label: "y = √(2x + 5)" }, { f: (x) => 3 + (x - 2) / 3, color: "green", label: "slope 1/3" }], points: [{ x: 2, y: 3, label: "(2, 3)", color: "red" }], step: { x: 1, y: 1 } })],
     ["Leibniz notation", S`\(y=u^3\) and \(u=2x+1\). Find \(\dfrac{dy}{dx}\).`,
-      [S`\(\frac{dy}{du}=3u^2\), \(\frac{du}{dx}=2\).`, S`\(\frac{dy}{dx}=3u^2\cdot2=6(2x+1)^2\).`],
-      S`\(6(2x+1)^2\)`],
+      [S`<b>Chain rule in Leibniz form.</b> \(\dfrac{dy}{dx}=\dfrac{dy}{du}\cdot\dfrac{du}{dx}\): rates multiply. If \(y\) changes 3 times as fast as \(u\), and \(u\) changes 2 times as fast as \(x\), then \(y\) changes 6 times as fast as \(x\).`,
+        S`<b>Each rate.</b> \(\dfrac{dy}{du}=3u^2\) and \(\dfrac{du}{dx}=2\).`,
+        S`<b>Multiply.</b> \(\dfrac{dy}{dx}=3u^2\cdot2=6u^2\).`,
+        S`<b>Write in terms of \(x\).</b> Substitute \(u=2x+1\): \(\dfrac{dy}{dx}=6(2x+1)^2\).`,
+        S`<b>Check by expanding.</b> \(y=(2x+1)^3=8x^3+12x^2+6x+1\), so \(y'=24x^2+24x+6=6(4x^2+4x+1)=6(2x+1)^2\) ✓`],
+      S`\(6(2x+1)^2\)`,
+      plane({ view: { xmin: -2, xmax: 1, ymin: -8, ymax: 12 }, curves: [{ f: (x) => (2 * x + 1) ** 3, color: "violet", label: "y = (2x + 1)³" }, { f: (x) => 6 * (2 * x + 1) ** 2, color: "blue", label: "dy/dx = 6(2x + 1)²" }], points: [{ x: -0.5, y: 0, label: "flat at x = −½", color: "red" }], step: { x: 0.5, y: 2 } })],
     ["Function notation", S`\(f(x)=x^2+1\) and \(g(x)=3x-2\). Differentiate \(h(x)=f(g(x))\).`,
-      [S`\(f'(x)=2x\), \(g'(x)=3\).`, S`\(h'(x)=f'(g(x))\,g'(x)=2(3x-2)\cdot3\).`],
-      S`\(h'(x)=6(3x-2)=18x-12\)`],
+      [S`<b>Rule.</b> \(h'(x)=f'(g(x))\cdot g'(x)\).`,
+        S`<b>Pieces.</b> \(f'(x)=2x\), so \(f'(g(x))=2(3x-2)\). And \(g'(x)=3\).`,
+        S`<b>Multiply.</b> \(h'(x)=2(3x-2)\cdot3=6(3x-2)=18x-12\).`,
+        S`<b>Check by building \(h\) first.</b> \(h(x)=(3x-2)^2+1=9x^2-12x+5\), so \(h'(x)=18x-12\) ✓`,
+        S`<b>Order matters.</b> \(g(f(x))=3(x^2+1)-2=3x^2+1\) has derivative \(6x\): a different function, so a different derivative.`],
+      S`\(h'(x)=6(3x-2)=18x-12\)`,
+      plane({ view: { xmin: -0.5, xmax: 2, ymin: -6, ymax: 12 }, curves: [{ f: (x) => (3 * x - 2) ** 2 + 1, color: "violet", label: "h(x) = (3x − 2)² + 1" }, { f: (x) => 18 * x - 12, color: "blue", label: "h′(x) = 18x − 12" }], points: [{ x: 2 / 3, y: 1, label: "vertex (⅔, 1)", color: "red" }], step: { x: 0.5, y: 2 } })],
     ["A tangent line", S`Find the tangent to \(y=(x^2-3)^3\) at \(x=2\).`,
-      [S`\(y(2)=1^3=1\).`, S`\(y'=3(x^2-3)^2\cdot2x\); \(y'(2)=3(1)(4)=12\).`, S`\(y-1=12(x-2)\).`],
+      [S`<b>Point.</b> \(y(2)=(4-3)^3=1\): the point \((2,1)\).`,
+        S`<b>Derivative (chain rule).</b> Outer \(u^3\), inner \(u=x^2-3\), \(u'=2x\): \(y'=3(x^2-3)^2\cdot2x=6x(x^2-3)^2\).`,
+        S`<b>Slope.</b> \(y'(2)=6(2)(1)^2=12\).`,
+        S`<b>Equation.</b> \(y-1=12(x-2)\Rightarrow y=12x-23\).`,
+        S`<b>Check.</b> At \(x=2.01\): curve \((1.0401)^3\approx1.1252\); line \(24.12-23=1.12\). Close, as a tangent should be ✓`],
       S`\(y=12x-23\)`,
-      plane({ view: { xmin: -2.5, xmax: 2.5, ymin: -30, ymax: 20 }, curves: [{ f: (x) => (x * x - 3) ** 3, color: "violet" }, { f: (x) => 12 * x - 23, color: "green" }], points: [{ x: 2, y: 1, label: "(2, 1)", color: "red" }], step: { x: 0.5, y: 5 } })],
+      plane({ view: { xmin: -2.5, xmax: 2.5, ymin: -30, ymax: 20 }, curves: [{ f: (x) => (x * x - 3) ** 3, color: "violet", label: "y = (x² − 3)³" }, { f: (x) => 12 * x - 23, color: "green", label: "y = 12x − 23" }], points: [{ x: 2, y: 1, label: "(2, 1)", color: "red" }], step: { x: 0.5, y: 5 } })],
   ]),
 
   practice([

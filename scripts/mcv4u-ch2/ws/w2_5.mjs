@@ -1,5 +1,7 @@
 // MCV4U Worksheet 2.5 — Derivatives of Quotients (teacher edition)
-import { F, gridT, pt } from "./figT.mjs";
+import { F, gridT, pt, ho } from "./figT.mjs";
+import { tvT } from "../../mcr3u-extables.mjs";
+import { chartT } from "../../mcv4u-ch3/csign.mjs";
 
 const S = String.raw;
 /** rational curve split at its vertical asymptotes */
@@ -10,28 +12,77 @@ const rat = (f, poles, v, color = "violet") => {
 const V6 = { xmin: -2, xmax: 7, ymin: -6, ymax: 10 };
 const V7 = { xmin: -9, xmax: 5, ymin: -16, ymax: 10 };
 
+/** rat() with an equation label on its last piece */
+const ratL = (f, poles, v, label) => rat(f, poles, v).map((c, i, all) => (i === all.length - 1 ? { ...c, label } : c));
+const V1 = { xmin: -10, xmax: 6, ymin: -8, ymax: 14 };
+const V2 = { xmin: -3, xmax: 7, ymin: -12, ymax: 16 };
+const V3 = { xmin: -6, xmax: 6, ymin: -2, ymax: 2 };
+const V8 = { xmin: -8, xmax: 4, ymin: -6, ymax: 8 };
 const EXAMPLES = [
   { title: "Linear over linear", q: S`Differentiate $y=\frac{3x-2}{x+4}$.`,
-    steps: [S`$u'v-uv'=3(x+4)-(3x-2)(1)=14$.`], ans: S`$y'=\frac{14}{(x+4)^2}$` },
+    fig: F({ view: V1, curves: ratL((x) => (3 * x - 2) / (x + 4), [-4], V1, "y = (3x − 2)/(x + 4)"), vlines: [{ x: -4, color: "red", dash: true }], lines: [{ m: 0, b: 3, color: "gray", dash: true }], step: { x: 2, y: 2 } }),
+    steps: [S`\textbf{Quotient rule:} $\left(\frac uv\right)'=\frac{u'v-uv'}{v^2}$ with $u=3x-2$, $u'=3$, $v=x+4$, $v'=1$.`,
+      S`\textbf{Numerator:} $3(x+4)-(3x-2)(1)=3x+12-3x+2=14$.`,
+      S`\textbf{Result:} $y'=\frac{14}{(x+4)^2}$.`,
+      S`\textbf{Check:} $y'>0$ wherever defined: both branches rise, as the graph shows \checkmark`],
+    ans: S`$y'=\frac{14}{(x+4)^2}$` },
   { title: "Quadratic over linear", q: S`Differentiate $y=\frac{x^2+1}{x-2}$.`,
-    steps: [S`$\frac{2x(x-2)-(x^2+1)}{(x-2)^2}$.`], ans: S`$y'=\frac{x^2-4x-1}{(x-2)^2}$` },
+    fig: F({ view: V2, curves: ratL((x) => (x * x + 1) / (x - 2), [2], V2, "y = (x² + 1)/(x − 2)"), vlines: [{ x: 2, color: "red", dash: true }], points: [pt(2 + Math.sqrt(5), (9 + 4 * Math.sqrt(5) + 1) / Math.sqrt(5), "min "), pt(2 - Math.sqrt(5), (9 - 4 * Math.sqrt(5) + 1) / -Math.sqrt(5), "max ")], step: { x: 1, y: 4 } }),
+    steps: [S`\textbf{Parts:} $u=x^2+1$, $u'=2x$; $v=x-2$, $v'=1$.`,
+      S`\textbf{Apply:} $y'=\frac{2x(x-2)-(x^2+1)}{(x-2)^2}=\frac{2x^2-4x-x^2-1}{(x-2)^2}$.`,
+      S`\textbf{Simplify:} $y'=\frac{x^2-4x-1}{(x-2)^2}$.`,
+      S`\textbf{Check:} $y'=0$ when $x=2\pm\sqrt5$, i.e. $x\approx4.24$ and $x\approx-0.24$: the low point of the right branch and the high point of the left branch \checkmark`],
+    ans: S`$y'=\frac{x^2-4x-1}{(x-2)^2}$` },
   { title: "A constant numerator", q: S`Differentiate $y=\frac1{x^2-9}$.`,
-    steps: [S`$u'=0$: $\frac{0-1\cdot2x}{(x^2-9)^2}$.`], ans: S`$y'=-\frac{2x}{(x^2-9)^2}$` },
+    fig: F({ view: { xmin: -6, xmax: 6, ymin: -1, ymax: 1 }, curves: ratL((x) => 1 / (x * x - 9), [-3, 3], { xmin: -6, xmax: 6 }, "y = 1/(x² − 9)"), vlines: [{ x: -3, color: "red", dash: true }, { x: 3, color: "red", dash: true }], points: [pt(0, -1 / 9, "max ")], step: { x: 1, y: 0.25 } }),
+    steps: [S`\textbf{Parts:} $u=1$, $u'=0$; $v=x^2-9$, $v'=2x$.`,
+      S`\textbf{Apply:} $y'=\frac{0\cdot(x^2-9)-1\cdot2x}{(x^2-9)^2}=-\frac{2x}{(x^2-9)^2}$.`,
+      S`\textbf{Same with the chain rule:} $y=(x^2-9)^{-1}\Rightarrow y'=-(x^2-9)^{-2}(2x)$ \checkmark`,
+      S`\textbf{Check:} $y'=0$ only at $x=0$: the top of the middle piece, $(0,-\frac19)$ \checkmark`],
+    ans: S`$y'=-\frac{2x}{(x^2-9)^2}$` },
   { title: "Rewrite instead", q: S`Differentiate $y=\frac{x-1}{\sqrt x}$ without the quotient rule.`,
-    steps: [S`$y=x^{1/2}-x^{-1/2}$.`, S`$y'=\frac12x^{-1/2}+\frac12x^{-3/2}$.`], ans: S`$y'=\frac{1}{2\sqrt x}+\frac1{2x\sqrt x}$` },
+    fig: F({ view: { xmin: 0, xmax: 6, ymin: -3, ymax: 3 }, curves: [{ f: (x) => (x - 1) / Math.sqrt(x), a: 0.1, b: 6, label: "y = (x − 1)/√x" }, { f: (x) => (x - 1), a: 0.2, b: 2.6, color: "green", label: "slope 1" }], points: [pt(1, 0)], step: { x: 1, y: 1 } }),
+    steps: [S`\textbf{Split:} $\frac{x}{\sqrt x}-\frac{1}{\sqrt x}=x^{1/2}-x^{-1/2}$.`,
+      S`\textbf{Power rule:} $y'=\frac12x^{-1/2}+\frac12x^{-3/2}$.`,
+      S`\textbf{Radical form:} $y'=\frac{1}{2\sqrt x}+\frac{1}{2x\sqrt x}=\frac{x+1}{2x\sqrt x}$.`,
+      S`\textbf{Check:} $y'(1)=\frac12+\frac12=1$, the green tangent at $(1,0)$ \checkmark`],
+    ans: S`$y'=\frac{1}{2\sqrt x}+\frac1{2x\sqrt x}$` },
   { title: "Evaluate a slope", q: S`For $f(x)=\frac{2x^2}{x+1}$, find $f'(1)$.`,
-    steps: [S`$f'=\frac{4x(x+1)-2x^2}{(x+1)^2}$.`, S`$f'(1)=\frac{8-2}{4}$.`], ans: "1.5" },
+    fig: F({ view: { xmin: -0.8, xmax: 3, ymin: -1, ymax: 5 }, curves: [{ f: (x) => (2 * x * x) / (x + 1), a: -0.8, b: 3, label: "f(x) = 2x²/(x + 1)" }, { f: (x) => 1 + 1.5 * (x - 1), a: 0, b: 2.2, color: "green", label: "slope 1.5" }], points: [pt(1, 1)], step: { x: 0.5, y: 1 } }),
+    steps: [S`\textbf{Parts:} $u=2x^2$, $u'=4x$; $v=x+1$, $v'=1$.`,
+      S`\textbf{Apply:} $f'(x)=\frac{4x(x+1)-2x^2}{(x+1)^2}=\frac{2x^2+4x}{(x+1)^2}$.`,
+      S`\textbf{At $x=1$:} $\frac{2+4}{4}=1.5$.`,
+      S`\textbf{Check:} $f(1.01)=\frac{2.0402}{2.01}\approx1.01502$, slope $\approx1.50$ \checkmark`],
+    ans: "1.5" },
   { title: "A tangent line", q: S`Find the tangent to $y=\frac{x+3}{x-1}$ at $x=3$.`,
-    fig: F({ view: V6, curves: [...rat((x) => (x + 3) / (x - 1), [1], V6), { f: (x) => 6 - x, color: "green" }], vlines: [{ x: 1, color: "red", dash: true }], points: [pt(3, 3)], step: { x: 1, y: 2 } }),
-    steps: [S`$y(3)=3$; $y'=\frac{(x-1)-(x+3)}{(x-1)^2}=\frac{-4}{(x-1)^2}$, $y'(3)=-1$.`, S`$y-3=-(x-3)$.`], ans: S`$y=-x+6$` },
+    fig: F({ view: V6, curves: [...ratL((x) => (x + 3) / (x - 1), [1], V6, "y = (x + 3)/(x − 1)"), { f: (x) => 6 - x, color: "green", label: "y = 6 − x" }], vlines: [{ x: 1, color: "red", dash: true }], points: [pt(3, 3)], step: { x: 1, y: 2 } }),
+    steps: [S`\textbf{Point:} $y(3)=\frac{6}{2}=3$.`,
+      S`\textbf{Derivative:} $y'=\frac{(x-1)-(x+3)}{(x-1)^2}=\frac{-4}{(x-1)^2}$.`,
+      S`\textbf{Slope:} $y'(3)=\frac{-4}{4}=-1$.`,
+      S`\textbf{Equation:} $y-3=-(x-3)\Rightarrow y=-x+6$. Check: $-3+6=3$ \checkmark`],
+    ans: S`$y=-x+6$` },
   { title: "Horizontal tangents", q: S`Find the points where $y=\frac{x^2+5}{x+2}$ has a horizontal tangent.`,
-    fig: F({ view: V7, curves: rat((x) => (x * x + 5) / (x + 2), [-2], V7), vlines: [{ x: -2, color: "red", dash: true }], points: [pt(1, 2), pt(-5, -10)], step: { x: 1, y: 2 } }),
-    steps: [S`$y'=\frac{2x(x+2)-(x^2+5)}{(x+2)^2}=\frac{x^2+4x-5}{(x+2)^2}$.`, S`$(x+5)(x-1)=0$: $y(1)=2$, $y(-5)=-10$.`], ans: "(1, 2) and (−5, −10)" },
+    fig: F({ view: V7, curves: ratL((x) => (x * x + 5) / (x + 2), [-2], V7, "y = (x² + 5)/(x + 2)"), vlines: [{ x: -2, color: "red", dash: true }], points: [pt(1, 2), pt(-5, -10)], step: { x: 1, y: 2 } }),
+    steps: [S`\textbf{Quotient rule:} $y'=\frac{2x(x+2)-(x^2+5)}{(x+2)^2}=\frac{x^2+4x-5}{(x+2)^2}$.`,
+      S`\textbf{Numerator zero:} $(x+5)(x-1)=0$, so $x=-5$ or $x=1$.`,
+      S`\textbf{Points:} $y(1)=\frac63=2$; $y(-5)=\frac{30}{-3}=-10$.`,
+      S`\textbf{Classify} (chart below): a peak at $(-5,-10)$ and a valley at $(1,2)$ \checkmark`],
+    tab: chartT({ cuts: [[-5, "-5"], [-2, "-2"], [1, "1"]], undef: [-2], d: ["y'", (x) => (x * x + 4 * x - 5) / (x + 2) ** 2], f: "y" }),
+    ans: "(1, 2) and (−5, −10)" },
   { title: "A given slope", q: S`Find the points on $y=\frac{x}{x+2}$ where the tangent has slope $\frac12$.`,
-    steps: [S`$y'=\frac{(x+2)-x}{(x+2)^2}=\frac2{(x+2)^2}=\frac12$.`, S`$(x+2)^2=4\Rightarrow x=0$ or $x=-4$.`], ans: "(0, 0) and (−4, 2)" },
+    fig: F({ view: V8, curves: [...ratL((x) => x / (x + 2), [-2], V8, "y = x/(x + 2)"), { f: (x) => 0.5 * x, a: -1.5, b: 2, color: "green" }, { f: (x) => 2 + 0.5 * (x + 4), a: -7.5, b: -2.5, color: "green", label: "slope ½" }], vlines: [{ x: -2, color: "red", dash: true }], points: [pt(0, 0), pt(-4, 2)], step: { x: 1, y: 2 } }),
+    steps: [S`\textbf{Derivative:} $y'=\frac{(1)(x+2)-x(1)}{(x+2)^2}=\frac{2}{(x+2)^2}$.`,
+      S`\textbf{Set equal to $\frac12$:} $\frac{2}{(x+2)^2}=\frac12\Rightarrow(x+2)^2=4\Rightarrow x+2=\pm2$.`,
+      S`\textbf{So} $x=0$ or $x=-4$; $y(0)=0$, $y(-4)=\frac{-4}{-2}=2$.`,
+      S`\textbf{Check:} the two tangents are parallel (both slope $\frac12$), one on each branch \checkmark`],
+    ans: "(0, 0) and (−4, 2)" },
   { title: "A population model", q: S`A town's population (thousands) is $P(t)=\frac{600t+200}{t+2}$ after $t$ years. Find $P'(3)$ and explain what happens in the long run.`,
-    fig: F({ view: { xmin: 0, xmax: 30, ymin: 0, ymax: 700 }, curves: [{ f: (t) => (600 * t + 200) / (t + 2), a: 0, b: 30 }, { f: () => 600, color: "gray" }], points: [pt(3, 400)], step: { x: 5, y: 100 } }),
-    steps: [S`$P'(t)=\frac{600(t+2)-(600t+200)}{(t+2)^2}=\frac{1000}{(t+2)^2}$; $P'(3)=40$.`, S`$P'\to0$ and $P\to600$.`], ans: "40 thousand per year at t = 3; levels off toward 600 thousand" },
+    fig: F({ view: { xmin: 0, xmax: 30, ymin: 0, ymax: 700 }, curves: [{ f: (t) => (600 * t + 200) / (t + 2), a: 0, b: 30, label: "P(t) = (600t + 200)/(t + 2)" }, { f: () => 600, color: "gray", label: "P = 600" }, { f: (t) => 400 + 40 * (t - 3), a: 0, b: 7, color: "green" }], points: [pt(3, 400)], step: { x: 5, y: 100 }, xlabel: "t (years)", ylabel: "P" }),
+    steps: [S`\textbf{Quotient rule:} $P'(t)=\frac{600(t+2)-(600t+200)(1)}{(t+2)^2}=\frac{1000}{(t+2)^2}$.`,
+      S`\textbf{At $t=3$:} $P'(3)=\frac{1000}{25}=40$ thousand people per year; $P(3)=\frac{2000}{5}=400$ thousand.`,
+      S`\textbf{Long run:} $P'\to0$ and $P=\frac{600+\frac{200}{t}}{1+\frac2t}\to600$.`,
+      S`\textbf{Check:} $P'(8)=\frac{1000}{100}=10$: growth keeps slowing \checkmark`],
+    ans: "40 thousand per year at t = 3; levels off toward 600 thousand" },
 ];
 
 const PROBLEMS = [

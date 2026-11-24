@@ -1,6 +1,7 @@
 // MCV4U 4.1 — Instantaneous Rates of Change of Sinusoidal Functions (NEW lesson): estimating slopes of sin and cos
 // numerically, the graph of the slopes, the two key limits sin h / h → 1 and (cos h − 1)/h → 0, and rates in models
 import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, q, num, choice, hard, plane } from "./lib.mjs";
+import { tv } from "../mcr3u-extables.mjs";
 
 export const TITLE = "4.1 Instantaneous Rates of Change of Sinusoidal Functions";
 export const ID = "6d4fc004-0001-4001-8001-000000000401";
@@ -58,24 +59,45 @@ export const blocks = () => [
 
   examples([
     ["A difference quotient", S`Estimate the instantaneous rate of change of \(y=\sin x\) at \(x=\frac\pi6\) using \(h=0.001\).`,
-      [S`\(\frac{\sin(\frac\pi6+0.001)-\sin\frac\pi6}{0.001}=\frac{0.5008658-0.5}{0.001}\).`, S`Compare: \(\cos\frac\pi6=\frac{\sqrt3}{2}\approx0.8660\).`],
-      S`about 0.8658, very close to \(\cos\frac\pi6\approx0.8660\)`],
+      [S`<b>Method.</b> The instantaneous rate at \(a\) is approximated by the slope of a short secant, \(\dfrac{f(a+h)-f(a)}{h}\). Angles are in <em>radians</em>; in degrees the numbers would be wrong.`,
+        S`<b>The two values.</b> \(\sin\frac\pi6=0.5\) exactly, and \(\sin\left(\frac\pi6+0.001\right)\approx0.500\,865\,8\).`,
+        S`<b>Secant slope.</b> \(\dfrac{0.5008658-0.5}{0.001}=0.8658\).`,
+        S`<b>Compare with cosine.</b> \(\cos\frac\pi6=\frac{\sqrt3}{2}\approx0.8660\). The estimate matches to three decimals, a first hint that the slope of \(\sin x\) is \(\cos x\).`,
+        S`<b>Check with a centred secant.</b> \(\frac{\sin(\frac\pi6+0.001)-\sin(\frac\pi6-0.001)}{0.002}\approx0.86603\), even closer ✓`],
+      S`about 0.8658, very close to \(\cos\frac\pi6\approx0.8660\)`,
+      plane({ view: { xmin: -0.3, xmax: 3.4, ymin: -0.4, ymax: 1.4 }, curves: [{ f: Math.sin, color: "violet", label: "y = sin x" }, { f: (x) => 0.5 + 0.866 * (x - PI / 6), a: -0.2, b: 1.3, color: "green", label: "slope ≈ 0.866" }], points: [{ x: PI / 6, y: 0.5, label: "(π/6, 0.5)", color: "red" }], step: { x: 0.5, y: 0.5 } })],
     ["The slope at key points", S`Use the shape of \(y=\sin x\) to state its slope at \(x=0,\ \frac\pi2,\ \pi\).`,
-      [S`At 0 the curve crosses its midline going up as steeply as it ever does: slope 1.`, S`At \(\frac\pi2\) it is at its peak: slope 0. At \(\pi\) it crosses going down: slope \(-1\).`],
+      [S`<b>Read the graph.</b> The slope is the steepness of the tangent: positive while the curve climbs, 0 at a peak or trough, negative while it falls.`,
+        S`<b>At \(x=0\).</b> The curve crosses its midline going up as steeply as it ever does. Near 0, \(\sin x\approx x\), so the slope is \(1\).`,
+        S`<b>At \(x=\frac\pi2\).</b> This is the peak \((\frac\pi2,1)\): the tangent is horizontal, slope \(0\).`,
+        S`<b>At \(x=\pi\).</b> The curve crosses the midline going down, the mirror image of \(x=0\): slope \(-1\).`,
+        S`<b>Pattern.</b> ${tv(["\\(x\\)", "0", "\\(\\frac\\pi2\\)", "\\(\\pi\\)"], ["slope of \\(\\sin x\\)", "1", "0", "−1"], ["\\(\\cos x\\)", "1", "0", "−1"])} The slopes are exactly the values of \(\cos x\) ✓`],
       S`\(1,\ 0,\ -1\) — the values of \(\cos x\) at those points`,
-      plane({ view: { xmin: -0.5, xmax: 3.8, ymin: -1.6, ymax: 1.6 }, curves: [{ f: Math.sin, color: "violet" }, { f: (x) => x, a: -0.5, b: 1, color: "green" }, { f: () => 1, a: 0.8, b: 2.4, color: "green" }, { f: (x) => -(x - PI), a: 2.6, b: 3.8, color: "green" }], points: [{ x: 0, y: 0, label: "slope 1", color: "red" }, { x: PI / 2, y: 1, label: "slope 0", color: "red" }, { x: PI, y: 0, label: "slope −1", color: "red" }], step: { x: 0.5, y: 0.5 } })],
+      plane({ view: { xmin: -0.5, xmax: 3.8, ymin: -1.6, ymax: 1.6 }, curves: [{ f: Math.sin, color: "violet", label: "y = sin x" }, { f: (x) => x, a: -0.5, b: 1, color: "green" }, { f: () => 1, a: 0.8, b: 2.4, color: "green" }, { f: (x) => -(x - PI), a: 2.6, b: 3.8, color: "green" }], points: [{ x: 0, y: 0, label: "slope 1", color: "red" }, { x: PI / 2, y: 1, label: "slope 0", color: "red" }, { x: PI, y: 0, label: "slope −1", color: "red" }], step: { x: 0.5, y: 0.5 } })],
     ["The key limit", S`Evaluate \(\dfrac{\sin h}{h}\) for \(h=0.1,\ 0.01,\ 0.001\) (radians) and state the limit.`,
-      [S`\(0.998334\), \(0.999983\), \(0.9999998\).`, S`Near 0 the graph of \(y=\sin x\) is almost the line \(y=x\).`],
+      [S`<b>Why it matters.</b> The derivative of \(\sin x\) at 0 is \(\lim_{h\to0}\frac{\sin h-\sin0}{h}=\lim_{h\to0}\frac{\sin h}{h}\). Substitution gives \(\frac00\), so we look at values.`,
+        S`<b>Table.</b> ${tv(["\\(h\\)", "0.1", "0.01", "0.001"], ["\\(\\sin h\\)", "0.0998334", "0.00999983", "0.000999999833"], ["\\(\\frac{\\sin h}{h}\\)", "0.998334", "0.999983", "0.9999998"])}`,
+        S`<b>Trend.</b> The gap from 1 shrinks by a factor of about 100 each time \(h\) shrinks by 10 (it is close to \(\frac{h^2}{6}\)).`,
+        S`<b>Geometric reason.</b> Near 0, the graph of \(\sin x\) hugs the line \(y=x\) (figure), so \(\sin h\approx h\) and the ratio is nearly 1.`,
+        S`<b>Check with negative \(h\).</b> \(\frac{\sin(-0.01)}{-0.01}=\frac{-0.00999983}{-0.01}=0.999983\): the same, since both parts change sign ✓`],
       S`\(\lim_{h\to0}\frac{\sin h}{h}=1\)`,
-      plane({ view: { xmin: -1.5, xmax: 1.5, ymin: -1.5, ymax: 1.5 }, curves: [{ f: Math.sin, color: "violet" }, { f: (x) => x, color: "green" }], step: { x: 0.5, y: 0.5 } })],
+      plane({ view: { xmin: -1.5, xmax: 1.5, ymin: -1.5, ymax: 1.5 }, curves: [{ f: Math.sin, color: "violet", label: "y = sin x" }, { f: (x) => x, color: "green", label: "y = x" }], step: { x: 0.5, y: 0.5 } }, "near the origin the two graphs are almost the same")],
     ["The slope of cosine", S`Estimate the slope of \(y=\cos x\) at \(x=\frac\pi3\) with \(h=0.001\), and compare it with \(\sin\frac\pi3\).`,
-      [S`\(\frac{\cos(\frac\pi3+0.001)-0.5}{0.001}\approx\frac{0.4991337-0.5}{0.001}\approx-0.8663\).`, S`\(\sin\frac\pi3\approx0.8660\).`],
+      [S`<b>Values.</b> \(\cos\frac\pi3=0.5\); \(\cos\left(\frac\pi3+0.001\right)\approx0.499\,133\,7\).`,
+        S`<b>Secant slope.</b> \(\dfrac{0.4991337-0.5}{0.001}\approx-0.8663\).`,
+        S`<b>Compare.</b> \(\sin\frac\pi3=\frac{\sqrt3}2\approx0.8660\). The slope is the <em>negative</em> of this.`,
+        S`<b>Why negative?</b> Between 0 and \(\pi\) the cosine curve is falling, so its slopes are negative, while \(\sin x\) is positive there. The blue curve \(-\sin x\) tracks those slopes.`,
+        S`<b>Check at a peak.</b> At \(x=0\), cosine has its maximum (slope 0), and \(-\sin0=0\) ✓`],
       S`about \(-0.866=-\sin\frac\pi3\): the slopes of cosine follow \(-\sin x\)`,
-      plane({ view: { xmin: -0.3, xmax: 6.6, ymin: -1.5, ymax: 1.5 }, curves: [{ f: Math.cos, a: 0, b: 2 * PI, color: "violet" }, { f: (x) => -Math.sin(x), a: 0, b: 2 * PI, color: "blue" }, { f: (x) => 0.5 - 0.866 * (x - PI / 3), a: 0.4, b: 1.7, color: "green" }], points: [{ x: PI / 3, y: 0.5, label: "(π/3, 0.5)", color: "red" }], step: { x: 0.5, y: 0.5 } })],
+      plane({ view: { xmin: -0.3, xmax: 6.6, ymin: -1.5, ymax: 1.5 }, curves: [{ f: Math.cos, a: 0, b: 2 * PI, color: "violet", label: "y = cos x" }, { f: (x) => -Math.sin(x), a: 0, b: 2 * PI, color: "blue", label: "y = −sin x" }, { f: (x) => 0.5 - 0.866 * (x - PI / 3), a: 0.4, b: 1.7, color: "green" }], points: [{ x: PI / 3, y: 0.5, label: "(π/3, 0.5)", color: "red" }], step: { x: 0.5, y: 0.5 } })],
     ["A tide", S`The water depth in a harbour is \(d(t)=3\sin\left(\frac{\pi}{6}t\right)+5\) m, \(t\) hours after midnight. Find the average rate of change from \(t=0\) to \(t=3\), and estimate the instantaneous rate at \(t=0\).`,
-      [S`Average: \(\frac{d(3)-d(0)}{3}=\frac{8-5}{3}=1\) m/h.`, S`Instantaneous: \(\frac{d(0.001)-d(0)}{0.001}\approx\frac{5.0015708-5}{0.001}\approx1.571\) m/h.`],
+      [S`<b>Read the model.</b> Amplitude 3 m, midline 5 m, period \(\frac{2\pi}{\pi/6}=12\) h. At \(t=0\) the depth is 5 m and rising; at \(t=3\) it reaches the high of 8 m.`,
+        S`<b>Average rate.</b> \(\dfrac{d(3)-d(0)}{3-0}=\dfrac{8-5}{3}=1\) m/h (amber secant).`,
+        S`<b>Instantaneous rate.</b> \(d(0.001)=3\sin(0.000\,523\,6)+5\approx5.001\,570\,8\), so \(\dfrac{5.0015708-5}{0.001}\approx1.571\) m/h (green tangent).`,
+        S`<b>Compare.</b> The tide rises fastest at midnight (crossing the midline) and slows to 0 at high tide, so the instantaneous rate at the start is larger than the 3-hour average.`,
+        S`<b>Check.</b> \(1.571\approx\frac\pi2=3\cdot\frac\pi6\): amplitude times the coefficient of \(t\), a pattern 4.3 will explain ✓`],
       S`average 1 m/h; at midnight the tide rises at about 1.57 m/h`,
-      plane({ view: { xmin: 0, xmax: 24, ymin: 0, ymax: 9 }, curves: [{ f: (t) => 3 * Math.sin((PI / 6) * t) + 5, a: 0, b: 24, color: "violet" }, { f: (t) => 5 + t, a: 0, b: 3, color: "amber" }, { f: (t) => 5 + (PI / 2) * t, a: 0, b: 2.3, color: "green" }], points: [{ x: 0, y: 5, label: "(0, 5)", color: "red" }, { x: 3, y: 8, label: "(3, 8)", color: "amber" }], step: { x: 2, y: 1 } })],
+      plane({ view: { xmin: 0, xmax: 24, ymin: 0, ymax: 9 }, curves: [{ f: (t) => 3 * Math.sin((PI / 6) * t) + 5, a: 0, b: 24, color: "violet", label: "d(t) = 3 sin(πt/6) + 5" }, { f: (t) => 5 + t, a: 0, b: 3, color: "amber", label: "slope 1" }, { f: (t) => 5 + (PI / 2) * t, a: 0, b: 2.3, color: "green", label: "slope ≈ 1.57" }], points: [{ x: 0, y: 5, label: "(0, 5)", color: "red" }, { x: 3, y: 8, label: "(3, 8)", color: "amber" }], step: { x: 2, y: 1 }, xlabel: "t (h)", ylabel: "d (m)" })],
   ]),
 
   practice([

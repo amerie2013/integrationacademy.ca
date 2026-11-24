@@ -1,6 +1,7 @@
 // MCV4U 1.6 — Chapter 1 Review (NEW lesson): rates of change, the difference quotient, limits, continuity, and the
 // derivative from first principles
 import { intro, section, keyIdea, widget, examples, practice, wrapUp, table, q, num, choice, expr, hard, plane } from "./lib.mjs";
+import { tv } from "../mcr3u-extables.mjs";
 
 export const TITLE = "1.6 Chapter 1 Review";
 export const ID = "6d4fc001-0001-4001-8001-000000000106";
@@ -48,23 +49,45 @@ export const blocks = () => [
 
   examples([
     ["Average and instantaneous", S`For \(f(x)=x^3-2x\), find the average rate on \([1,2]\) and the instantaneous rate at \(x=1\).`,
-      [S`\(\frac{f(2)-f(1)}{1}=\frac{4-(-1)}1=5\).`, S`\(\frac{f(1+h)-f(1)}{h}=\frac{(1+3h+3h^2+h^3)-2-2h+1}{h}=1+3h+h^2\to1\).`],
+      [S`<b>Two different questions.</b> The average rate is a secant slope over an interval; the instantaneous rate is a tangent slope at a point (a limit).`,
+        S`<b>Values.</b> \(f(1)=1-2=-1\) and \(f(2)=8-4=4\).`,
+        S`<b>Average rate on \([1,2]\).</b> \(\dfrac{f(2)-f(1)}{2-1}=\dfrac{4-(-1)}{1}=5\).`,
+        S`<b>Instantaneous rate at 1.</b> \(f(1+h)=(1+3h+3h^2+h^3)-2-2h=-1+h+3h^2+h^3\). So \(\dfrac{f(1+h)-f(1)}{h}=\dfrac{h+3h^2+h^3}{h}=1+3h+h^2\to1\).`,
+        S`<b>Compare and check.</b> The secant (slope 5) is much steeper than the tangent (slope 1) because the cubic gets steeper as \(x\) grows. With \(h=1\), the formula \(1+3h+h^2\) gives \(1+3+1=5\), the average rate on \([1,2]\) ✓`],
       S`average 5; instantaneous 1`,
-      plane({ view: { xmin: -2, xmax: 2.5, ymin: -3, ymax: 7 }, curves: [{ f: (x) => x ** 3 - 2 * x, color: "violet" }, { f: (x) => -1 + 5 * (x - 1), color: "amber" }, { f: (x) => -1 + (x - 1), color: "green" }], points: [{ x: 1, y: -1, label: "(1, −1)", color: "red" }, { x: 2, y: 4, label: "(2, 4)", color: "amber" }], step: { x: 0.5, y: 1 } })],
+      plane({ view: { xmin: -2, xmax: 2.5, ymin: -3, ymax: 7 }, curves: [{ f: (x) => x ** 3 - 2 * x, color: "violet", label: "f(x) = x³ − 2x" }, { f: (x) => -1 + 5 * (x - 1), color: "amber", label: "secant: slope 5" }, { f: (x) => -1 + (x - 1), color: "green", label: "tangent: slope 1" }], points: [{ x: 1, y: -1, label: "(1, −1)", color: "red" }, { x: 2, y: 4, label: "(2, 4)", color: "amber" }], step: { x: 0.5, y: 1 } })],
     ["A limit by rationalizing", S`Evaluate \(\displaystyle\lim_{x\to4}\dfrac{\sqrt x-2}{x-4}\).`,
-      [S`\(\frac{\sqrt x-2}{(\sqrt x-2)(\sqrt x+2)}=\frac1{\sqrt x+2}\to\frac14\).`],
-      S`\(\tfrac14\)`],
+      [S`<b>Substitution.</b> \(\frac{2-2}{4-4}=\frac00\): indeterminate.`,
+        S`<b>Spot a difference of squares.</b> \(x-4=(\sqrt x)^2-2^2=(\sqrt x-2)(\sqrt x+2)\) for \(x\ge0\). (Multiplying top and bottom by the conjugate \(\sqrt x+2\) gives the same thing.)`,
+        S`<b>Cancel.</b> \(\dfrac{\sqrt x-2}{(\sqrt x-2)(\sqrt x+2)}=\dfrac1{\sqrt x+2}\) for \(x\ne4\).`,
+        S`<b>Evaluate.</b> \(\dfrac1{\sqrt4+2}=\dfrac14\).`,
+        S`<b>Check and connect.</b> At \(x=4.01\): \(\frac{2.0024984-2}{0.01}\approx0.2498\) ✓. This limit is the slope of \(y=\sqrt x\) at \(x=4\), found the same way in 1.2.`],
+      S`\(\tfrac14\)`,
+      plane({ view: { xmin: -0.5, xmax: 10, ymin: -0.05, ymax: 0.6 }, curves: [{ f: (x) => 1 / (Math.sqrt(x) + 2), a: 0, b: 3.9, color: "violet", label: "y = (√x − 2)/(x − 4)" }, { f: (x) => 1 / (Math.sqrt(x) + 2), a: 4.1, b: 10, color: "violet" }], points: [{ x: 4, y: 0.25, label: "hole (4, ¼)", color: "amber", open: true }], step: { x: 1, y: 0.1 } })],
     ["Continuity with a parameter", S`Find \(c\) so that \(f(x)=x^2-c\) for \(x\lt3\) and \(f(x)=cx+1\) for \(x\ge3\) is continuous.`,
-      [S`\(9-c=3c+1\Rightarrow4c=8\Rightarrow c=2\).`],
+      [S`<b>Only the join matters.</b> Both pieces are polynomials, so the only possible break is at \(x=3\).`,
+        S`<b>Left limit.</b> \(\displaystyle\lim_{x\to3^-}(x^2-c)=9-c\).`,
+        S`<b>Right limit and value.</b> \(f(3)=\displaystyle\lim_{x\to3^+}(cx+1)=3c+1\).`,
+        S`<b>Set equal and solve.</b> \(9-c=3c+1\Rightarrow8=4c\Rightarrow c=2\).`,
+        S`<b>Check.</b> With \(c=2\): left piece \(9-2=7\), right piece \(3(2)+1=7\). They meet at \((3,7)\) ✓`],
       S`\(c=2\)`,
-      plane({ view: { xmin: -1, xmax: 5, ymin: -3, ymax: 12 }, curves: [{ f: (x) => x * x - 2, a: -1, b: 3, color: "violet" }, { f: (x) => 2 * x + 1, a: 3, b: 5, color: "green" }], points: [{ x: 3, y: 7, label: "(3, 7)", color: "red" }], step: { x: 1, y: 2 } })],
+      plane({ view: { xmin: -1, xmax: 5, ymin: -3, ymax: 12 }, curves: [{ f: (x) => x * x - 2, a: -1, b: 3, color: "violet", label: "y = x² − 2" }, { f: (x) => 2 * x + 1, a: 3, b: 5, color: "green", label: "y = 2x + 1" }], points: [{ x: 3, y: 7, label: "(3, 7)", color: "red" }], step: { x: 1, y: 2 } })],
     ["First principles", S`Find \(f'(x)\) for \(f(x)=3x^2-5x+2\) from first principles.`,
-      [S`\(f(x+h)-f(x)=6xh+3h^2-5h\).`, S`\(\frac{6xh+3h^2-5h}{h}=6x+3h-5\to6x-5\).`],
-      S`\(f'(x)=6x-5\)`],
+      [S`<b>Expand.</b> \(f(x+h)=3(x^2+2xh+h^2)-5x-5h+2=3x^2+6xh+3h^2-5x-5h+2\).`,
+        S`<b>Subtract.</b> \(f(x+h)-f(x)=6xh+3h^2-5h\): the terms \(3x^2\), \(-5x\) and \(2\) cancel.`,
+        S`<b>Divide by \(h\).</b> \(6x+3h-5\).`,
+        S`<b>Limit.</b> \(h\to0\) gives \(f'(x)=6x-5\).`,
+        S`<b>Check.</b> \(f'=0\) at \(x=\frac56\). The vertex of the parabola is at \(x=-\frac{b}{2a}=\frac{5}{6}\) ✓. At \(x=2\): \(f'(2)=7\); secant \(\frac{f(2.01)-f(2)}{0.01}=\frac{4.0703-4}{0.01}=7.03\) ✓`],
+      S`\(f'(x)=6x-5\)`,
+      plane({ view: { xmin: -1, xmax: 3, ymin: -4, ymax: 10 }, curves: [{ f: (x) => 3 * x * x - 5 * x + 2, color: "violet", label: "f(x) = 3x² − 5x + 2" }, { f: (x) => 6 * x - 5, color: "blue", label: "f′(x) = 6x − 5" }], points: [{ x: 5 / 6, y: 3 * 25 / 36 - 25 / 6 + 2, label: "vertex x = 5/6", color: "red" }], step: { x: 0.5, y: 2 } })],
     ["Reading f′ from f", S`The graph of \(f\) rises until \(x=-1\), falls until \(x=2\), then rises. Describe the sign of \(f'\).`,
-      [S`\(f'>0\) on \((-\infty,-1)\) and \((2,\infty)\); \(f'\lt0\) on \((-1,2)\); \(f'=0\) at \(x=-1\) and \(x=2\).`],
+      [S`<b>Rule.</b> \(f'(x)\) is the slope of the tangent: positive where \(f\) rises, negative where it falls, zero where the tangent is horizontal.`,
+        S`<b>Left piece.</b> On \((-\infty,-1)\), \(f\) rises, so \(f'\gt0\).`,
+        S`<b>Turning points.</b> At \(x=-1\) (a peak) and \(x=2\) (a valley) the tangent is flat: \(f'=0\).`,
+        S`<b>Middle and right.</b> On \((-1,2)\), \(f\) falls: \(f'\lt0\). On \((2,\infty)\) it rises: \(f'\gt0\).`,
+        S`<b>Check with a model.</b> One function with this shape is \(f(x)=\tfrac12(x^3-1.5x^2-6x)\). Its derivative, \(f'(x)=1.5(x+1)(x-2)\), is zero at \(-1\) and \(2\) and negative between them ✓ ${tv(["\\(x\\)", "−2", "−1", "0", "2", "3"], ["sign of \\(f'\\)", "+", "0", "−", "0", "+"])}`],
       S`+, 0, −, 0, +`,
-      plane({ view: { xmin: -3, xmax: 4, ymin: -6, ymax: 6 }, curves: [{ f: (x) => 0.5 * (x ** 3 - 1.5 * x * x - 6 * x), color: "violet" }, { f: (x) => 0.5 * (3 * x * x - 3 * x - 6), color: "blue" }], step: { x: 1, y: 1 } })],
+      plane({ view: { xmin: -3, xmax: 4, ymin: -6, ymax: 6 }, curves: [{ f: (x) => 0.5 * (x ** 3 - 1.5 * x * x - 6 * x), color: "violet", label: "f(x) = ½(x³ − 1.5x² − 6x)" }, { f: (x) => 0.5 * (3 * x * x - 3 * x - 6), color: "blue", label: "f′(x) = 1.5(x + 1)(x − 2)" }], points: [{ x: -1, y: 0, color: "blue" }, { x: 2, y: 0, color: "blue" }], step: { x: 1, y: 1 } })],
   ]),
 
   practice([

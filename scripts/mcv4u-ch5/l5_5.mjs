@@ -1,6 +1,8 @@
 // MCV4U 5.5 — Making Connections: Exponential Models (NEW lesson): growth and decay with P′ = kP, doubling time and
 // half-life, continuous compound interest, Newton's law of cooling, drug concentration, and logistic growth
 import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, q, num, choice, hard, plane } from "./lib.mjs";
+import { tv } from "../mcr3u-extables.mjs";
+import { chart } from "../mcv4u-ch3/csign.mjs";
 
 export const TITLE = "5.5 Making Connections: Exponential Models";
 export const ID = "6d4fc005-0001-4001-8001-000000000505";
@@ -58,23 +60,45 @@ export const blocks = () => [
 
   examples([
     ["Bacteria", S`A culture has \(P(t)=800e^{0.35t}\) bacteria after \(t\) hours. How fast is it growing at \(t=4\)?`,
-      [S`\(P'(t)=0.35\cdot800e^{0.35t}\).`, S`\(P'(4)=280e^{1.4}\approx1135.5\).`],
-      S`about 1135 bacteria per hour`],
+      [S`<b>Model.</b> \(P=P_0e^{kt}\) with \(P_0=800\) and growth constant \(k=0.35\) per hour.`,
+        S`<b>Derivative.</b> \(P'(t)=800\cdot0.35e^{0.35t}=280e^{0.35t}\). Note \(P'=0.35P\): the rate is 35% of the current size.`,
+        S`<b>At \(t=4\).</b> \(P(4)=800e^{1.4}\approx3244\); \(P'(4)=280e^{1.4}\approx1135.5\) bacteria/h.`,
+        S`<b>Check.</b> \(0.35\times3244\approx1135\) ✓`,
+        S`<b>Interpret.</b> At this moment the culture adds about 1135 bacteria per hour, and the rate itself keeps growing.`],
+      S`about 1135 bacteria per hour`,
+      plane({ view: { xmin: 0, xmax: 6, ymin: 0, ymax: 7000 }, curves: [{ f: (t) => 800 * Math.exp(0.35 * t), a: 0, b: 6, color: "violet", label: "P(t) = 800e^(0.35t)" }, { f: (t) => 3244 + 1135.5 * (t - 4), a: 2.6, b: 5.6, color: "green", label: "slope ≈ 1135" }], points: [{ x: 4, y: 3244, label: "(4, 3244)", color: "red" }], step: { x: 1, y: 1000 }, xlabel: "t (h)", ylabel: "P" })],
     ["Carbon-14", S`Carbon-14 has a half-life of 5730 years. How fast is a 50 g sample decaying?`,
-      [S`\(k=-\frac{\ln2}{5730}\approx-1.210\times10^{-4}\) per year.`, S`\(P'=kP=-1.210\times10^{-4}\times50\).`],
-      S`about 0.00605 g per year`],
+      [S`<b>Model.</b> \(P(t)=P_0e^{kt}\) with \(P(5730)=\frac12P_0\).`,
+        S`<b>Find \(k\).</b> \(e^{5730k}=\frac12\Rightarrow k=\frac{\ln(1/2)}{5730}=-\frac{\ln2}{5730}\approx-1.210\times10^{-4}\) per year.`,
+        S`<b>Rate.</b> \(P'=kP\), so for 50 g: \(P'=-1.210\times10^{-4}\times50\approx-0.00605\) g/year.`,
+        S`<b>Interpret.</b> About 6 mg per year — slow, which is why carbon-14 can date objects thousands of years old.`,
+        S`<b>Check.</b> At this rate 25 g would take \(\frac{25}{0.00605}\approx4130\) years; the true half-life is longer (5730) because the rate shrinks as the sample shrinks ✓`],
+      S`about 0.00605 g per year`,
+      plane({ view: { xmin: 0, xmax: 20000, ymin: 0, ymax: 55 }, curves: [{ f: (t) => 50 * Math.exp((-Math.LN2 / 5730) * t), a: 0, b: 20000, color: "violet", label: "P(t) = 50e^(kt)" }, { f: (t) => 50 - 0.00605 * t, a: 0, b: 6000, color: "green", label: "slope −0.00605" }], points: [{ x: 5730, y: 25, label: "(5730, 25)", color: "red" }], step: { x: 2500, y: 10 }, xlabel: "t (years)", ylabel: "P (g)" })],
     ["Continuous interest", S`5000 dollars grows as \(A(t)=5000e^{0.04t}\). How fast is it growing after 10 years?`,
-      [S`\(A'(t)=0.04\cdot5000e^{0.04t}\); \(A'(10)=200e^{0.4}\).`],
+      [S`<b>Derivative.</b> \(A'(t)=5000\cdot0.04e^{0.04t}=200e^{0.04t}\) dollars/year.`,
+        S`<b>At 10 years.</b> \(A(10)=5000e^{0.4}\approx7459.12\); \(A'(10)=200e^{0.4}\approx298.36\).`,
+        S`<b>Interpret.</b> The balance is growing at about \$298 per year at that moment — 4% of \$7459.`,
+        S`<b>Compare.</b> At the start the rate was \(A'(0)=200\) dollars/year: interest on interest makes the rate grow.`,
+        S`<b>Check.</b> \(A(11)-A(10)\approx7763.54-7459.12=304.42\), a bit more than 298 because the rate keeps rising during the year ✓`],
       S`about 298.36 dollars per year`,
-      plane({ view: { xmin: 0, xmax: 25, ymin: 4, ymax: 14 }, curves: [{ f: (t) => 5 * Math.exp(0.04 * t), a: 0, b: 25, color: "violet" }, { f: (t) => 5 * Math.exp(0.4) + 0.29836 * (t - 10), color: "green", a: 4, b: 16 }], points: [{ x: 10, y: 5 * Math.exp(0.4), label: "(10, 7.46)", color: "red" }], step: { x: 5, y: 1 }, xlabel: "t (years)", ylabel: "A (thousand dollars)" })],
+      plane({ view: { xmin: 0, xmax: 25, ymin: 4, ymax: 14 }, curves: [{ f: (t) => 5 * Math.exp(0.04 * t), a: 0, b: 25, color: "violet", label: "A(t) = 5e^(0.04t)" }, { f: (t) => 5 * Math.exp(0.4) + 0.29836 * (t - 10), color: "green", a: 4, b: 16, label: "slope ≈ 0.298" }], points: [{ x: 10, y: 5 * Math.exp(0.4), label: "(10, 7.46)", color: "red" }], step: { x: 5, y: 1 }, xlabel: "t (years)", ylabel: "A (thousand dollars)" })],
     ["Cooling coffee", S`Coffee cools as \(T(t)=20+70e^{-0.08t}\) °C after \(t\) minutes. Find \(T'(5)\).`,
-      [S`\(T'(t)=-0.08\cdot70e^{-0.08t}\); \(T'(5)=-5.6e^{-0.4}\).`],
+      [S`<b>Model.</b> Room temperature 20 °C; the excess heat \(70e^{-0.08t}\) decays.`,
+        S`<b>Derivative.</b> \(T'(t)=70(-0.08)e^{-0.08t}=-5.6e^{-0.08t}\).`,
+        S`<b>At 5 minutes.</b> \(T'(5)=-5.6e^{-0.4}\approx-3.75\) °C/min; \(T(5)\approx66.9\) °C.`,
+        S`<b>Newton's law.</b> \(T'=-0.08(T-20)\): \(-0.08(46.9)\approx-3.75\) ✓. The cooling rate is proportional to the gap from room temperature.`,
+        S`<b>Interpret.</b> At \(t=0\) it cooled at 5.6 °C/min; by \(t=5\) the gap is smaller, so it cools more slowly.`],
       S`about −3.75 °C per minute`,
-      plane({ view: { xmin: 0, xmax: 40, ymin: 0, ymax: 95 }, curves: [{ f: (t) => 20 + 70 * Math.exp(-0.08 * t), a: 0, b: 40, color: "violet" }, { f: () => 20, color: "gray" }], points: [{ x: 5, y: 20 + 70 * Math.exp(-0.4), label: "(5, 66.9)", color: "red" }], step: { x: 5, y: 10 } })],
+      plane({ view: { xmin: 0, xmax: 40, ymin: 0, ymax: 95 }, curves: [{ f: (t) => 20 + 70 * Math.exp(-0.08 * t), a: 0, b: 40, color: "violet", label: "T(t) = 20 + 70e^(−0.08t)" }, { f: () => 20, color: "gray", label: "room 20 °C" }, { f: (t) => 66.92 - 3.75 * (t - 5), a: 0, b: 11, color: "green", label: "slope ≈ −3.75" }], points: [{ x: 5, y: 20 + 70 * Math.exp(-0.4), label: "(5, 66.9)", color: "red" }], step: { x: 5, y: 10 }, xlabel: "t (min)", ylabel: "T (°C)" })],
     ["Drug concentration", S`A drug's concentration is \(C(t)=10te^{-0.5t}\) mg/L after \(t\) hours. When is it highest?`,
-      [S`\(C'(t)=10e^{-0.5t}-5te^{-0.5t}=5e^{-0.5t}(2-t)\).`, S`Zero at \(t=2\): \(C(2)=20e^{-1}\approx7.36\).`],
+      [S`<b>Product rule.</b> \(C'(t)=10e^{-0.5t}+10t(-0.5)e^{-0.5t}=5e^{-0.5t}(2-t)\).`,
+        S`<b>Critical time.</b> \(e^{-0.5t}\gt0\), so \(C'=0\) only at \(t=2\).`,
+        S`<b>Classify.</b> ${chart({ v: "t", f: "C", from: [0, "0"], cuts: [[2, "2"]], d: ["C'(t)", (t) => 5 * Math.exp(-0.5 * t) * (2 - t)] })}`,
+        S`<b>Peak.</b> \(C(2)=20e^{-1}\approx7.36\) mg/L.`,
+        S`<b>Check.</b> \(C(1)=10e^{-0.5}\approx6.07\) and \(C(3)=30e^{-1.5}\approx6.69\): both lower ✓`],
       S`after 2 hours, about 7.36 mg/L`,
-      plane({ view: { xmin: 0, xmax: 14, ymin: 0, ymax: 8.5 }, curves: [{ f: (t) => 10 * t * Math.exp(-0.5 * t), a: 0, b: 14, color: "violet" }], points: [{ x: 2, y: 20 / E, label: "max (2, 7.36)", color: "red" }], step: { x: 1, y: 1 } })],
+      plane({ view: { xmin: 0, xmax: 14, ymin: 0, ymax: 8.5 }, curves: [{ f: (t) => 10 * t * Math.exp(-0.5 * t), a: 0, b: 14, color: "violet", label: "C(t) = 10te^(−0.5t)" }], points: [{ x: 2, y: 20 / E, label: "max (2, 7.36)", color: "red" }], step: { x: 1, y: 1 }, xlabel: "t (h)", ylabel: "C (mg/L)" })],
   ]),
 
   practice([

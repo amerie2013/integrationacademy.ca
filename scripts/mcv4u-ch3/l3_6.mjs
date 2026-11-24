@@ -44,7 +44,7 @@ export const blocks = () => [
     ["5", "Find the critical numbers; compare with the endpoints (or use a derivative test)"],
     ["6", "Answer the question asked, with units"],
   ])}
-  ${plane({ view: { xmin: 0, xmax: 150, ymin: 0, ymax: 600 }, curves: [{ f: (x) => 2 * x + 7200 / x, a: 12, b: 150, color: "violet" }], points: [{ x: 60, y: 240, label: "min (60, 240)", color: "red" }], step: { x: 10, y: 50 } }, "Fence needed, L(x) = 2x + 7200/x, for a 2400 m² field split into two pens: least fencing at x = 60 m.")}
+  ${plane({ view: { xmin: 0, xmax: 150, ymin: 0, ymax: 600 }, curves: [{ f: (x) => 2 * x + 7200 / x, a: 12, b: 150, color: "violet" , label: "y = 2x + 7200/x" }], points: [{ x: 60, y: 240, label: "min (60, 240)", color: "red" }], step: { x: 10, y: 50 } }, "Fence needed, L(x) = 2x + 7200/x, for a 2400 m² field split into two pens: least fencing at x = 60 m.")}
   ${keyIdea(S`An optimization answer needs justification: show the critical number gives the absolute extremum on the domain — by comparing with the endpoints, by the first derivative test (only one critical number, sign change), or by the second derivative test.`)}`),
 
   section("📌 Explore", S`<p>Choose the box or the pen. Move the slider to change the design and watch the volume or area on the graph. Find the best design by eye, then compare with the calculus answer in the panel. Notice that both endpoints give zero — the best design is in between.</p>`),
@@ -69,7 +69,7 @@ export const blocks = () => [
         S`<b>Confirm it is a maximum.</b> ${chart({ from: [0, "0"], to: [40, "40"], cuts: [[80 / 3, "\\tfrac{80}{3}"]], d: ["P'(x)", (x) => 80 * x - 3 * x * x], f: "P" })} Also \(P(0)=P(40)=0\), while \(P\left(\tfrac{80}3\right)=\tfrac{6400}{9}\cdot\tfrac{40}{3}=\tfrac{256\,000}{27}\approx9481.5\).`,
         S`<b>Answer and check.</b> The numbers are \(\tfrac{80}{3}\) and \(40-\tfrac{80}{3}=\tfrac{40}{3}\). Nearby whole numbers do worse: \(P(26)=26^2\cdot14=9464\) and \(P(27)=27^2\cdot13=9477\), both below 9481.5 ✓`],
       S`\(\tfrac{80}{3}\approx26.67\) (the squared number) and \(\tfrac{40}{3}\approx13.33\)`,
-      plane({ view: { xmin: 0, xmax: 42, ymin: 0, ymax: 10.5 }, curves: [{ f: (x) => (x * x * (40 - x)) / 1000, a: 0, b: 40, color: "violet" }], points: [{ x: 80 / 3, y: 9.4815, label: "(26.67, 9481.5)", color: "red" }], step: { x: 5, y: 1 }, xlabel: "x", ylabel: "P (thousands)" })],
+      plane({ view: { xmin: 0, xmax: 42, ymin: 0, ymax: 10.5 }, curves: [{ f: (x) => (x * x * (40 - x)) / 1000, a: 0, b: 40, color: "violet" , label: "y = x²(40 − x)/1000" }], points: [{ x: 80 / 3, y: 9.4815, label: "(26.67, 9481.5)", color: "red" }], step: { x: 5, y: 1 }, xlabel: "x", ylabel: "P (thousands)" })],
     ["Least fencing", S`A 2400 m² rectangular field is split into two pens by a fence parallel to one side. Find the dimensions that use the least fencing.`,
       [S`<b>Draw and label.</b> Let the sides be \(x\) and \(y\), with the divider parallel to the sides of length \(y\). ${dia(field({ top: "x", side: "y", pens: 2, note: "divider y" }), "Fencing: two sides of length x, three of length y.")}`,
         S`<b>Objective and constraint.</b> Fencing \(L=2x+3y\). Area \(xy=2400\), so \(y=\dfrac{2400}{x}\) and \(L(x)=2x+\dfrac{7200}{x}\), with \(x\gt0\).`,
@@ -78,7 +78,7 @@ export const blocks = () => [
         S`<b>Dimensions.</b> \(y=\dfrac{2400}{60}=40\) and \(L=120+120=240\) m.`,
         S`<b>Check.</b> \(L(50)=100+144=244\) and \(L(72)=144+100=244\), both more than 240 ✓. Notice that at the minimum the fencing splits evenly: 120 m in the \(x\)-direction and 120 m in the \(y\)-direction.`],
       S`60 m by 40 m (divider 40 m long), using 240 m of fencing`,
-      plane({ view: { xmin: 0, xmax: 160, ymin: 0, ymax: 500 }, curves: [{ f: (x) => 2 * x + 7200 / x, a: 15, b: 160, color: "violet" }], points: [{ x: 60, y: 240, label: "min (60, 240)", color: "red" }], step: { x: 20, y: 50 }, xlabel: "x (m)", ylabel: "L (m)" })],
+      plane({ view: { xmin: 0, xmax: 160, ymin: 0, ymax: 500 }, curves: [{ f: (x) => 2 * x + 7200 / x, a: 15, b: 160, color: "violet" , label: "y = 2x + 7200/x" }], points: [{ x: 60, y: 240, label: "min (60, 240)", color: "red" }], step: { x: 20, y: 50 }, xlabel: "x (m)", ylabel: "L (m)" })],
     ["Least material for a box", S`An open-top box with a square base must hold 32 000 cm³. Find the dimensions that use the least material.`,
       [S`<b>Draw and label.</b> Base \(x\) by \(x\), height \(h\). ${dia(box({ base: "x", h: "h" }), "Material = base + four sides (no top).")}`,
         S`<b>Constraint.</b> Volume \(x^2h=32\,000\), so \(h=\dfrac{32\,000}{x^2}\).`,
@@ -87,7 +87,7 @@ export const blocks = () => [
         S`<b>Minimum and dimensions.</b> \(A''(x)=2+\dfrac{256\,000}{x^3}\gt0\): a cup, so \(x=40\) gives the minimum. \(h=\dfrac{32\,000}{1600}=20\) and \(A=1600+3200=4800\) cm².`,
         S`<b>Check.</b> \(A(30)=900+4266.7\approx5167\) and \(A(50)=2500+2560=5060\), both larger ✓. The volume is \(40\cdot40\cdot20=32\,000\) ✓`],
       S`base 40 cm by 40 cm, height 20 cm (4800 cm² of material)`,
-      plane({ view: { xmin: 0, xmax: 100, ymin: 0, ymax: 16 }, curves: [{ f: (x) => (x * x + 128000 / x) / 1000, a: 9, b: 100, color: "violet" }], points: [{ x: 40, y: 4.8, label: "min (40, 4800 cm²)", color: "red" }], step: { x: 10, y: 2 }, xlabel: "x (cm)", ylabel: "A (thousand cm²)" })],
+      plane({ view: { xmin: 0, xmax: 100, ymin: 0, ymax: 16 }, curves: [{ f: (x) => (x * x + 128000 / x) / 1000, a: 9, b: 100, color: "violet" , label: "y = (x² + 128000/x)/1000" }], points: [{ x: 40, y: 4.8, label: "min (40, 4800 cm²)", color: "red" }], step: { x: 10, y: 2 }, xlabel: "x (cm)", ylabel: "A (thousand cm²)" })],
     ["The cheapest can", S`A cylindrical can must hold 500 cm³. Find the radius and height that minimize its surface area.`,
       [S`<b>Draw and label.</b> Radius \(r\), height \(h\). The surface is two circles plus the curved side. ${dia(can(), "Surface area A = 2πr² + 2πrh.")}`,
         S`<b>Constraint.</b> \(\pi r^2h=500\), so \(h=\dfrac{500}{\pi r^2}\).`,
@@ -97,7 +97,7 @@ export const blocks = () => [
         S`<b>The height, exactly.</b> From \(\pi r^3=250\): \(h=\dfrac{500}{\pi r^2}=\dfrac{2\cdot\pi r^3}{\pi r^2}=2r\approx8.60\). The best can is as tall as it is wide. \(A\approx2\pi(4.30)^2+\dfrac{1000}{4.30}\approx348.7\) cm².`,
         S`<b>Check.</b> \(A(4)=100.5+250=350.5\) and \(A(5)=157.1+200=357.1\), both above 348.7 ✓`],
       S`radius about 4.30 cm, height about 8.60 cm — the height equals the diameter`,
-      plane({ view: { xmin: 0, xmax: 12, ymin: 0, ymax: 1200 }, curves: [{ f: (r) => 2 * Math.PI * r * r + 1000 / r, a: 1, b: 12, color: "violet" }], points: [{ x: 4.3013, y: 348.73, label: "min (4.30, 348.7)", color: "red" }], step: { x: 1, y: 100 }, xlabel: "r", ylabel: "A" })],
+      plane({ view: { xmin: 0, xmax: 12, ymin: 0, ymax: 1200 }, curves: [{ f: (r) => 2 * Math.PI * r * r + 1000 / r, a: 1, b: 12, color: "violet" , label: "y = 2πr² + 1000/r" }], points: [{ x: 4.3013, y: 348.73, label: "min (4.30, 348.7)", color: "red" }], step: { x: 1, y: 100 }, xlabel: "r", ylabel: "A" })],
     ["The best ticket price", S`At 40 dollars a ticket, 2000 tickets sell; each 1 dollar decrease sells 75 more. What price maximizes revenue?`,
       [S`<b>Model the demand.</b> At price \(p\), the price has dropped by \(40-p\) dollars, so \(75(40-p)\) extra tickets sell: tickets \(=2000+75(40-p)=5000-75p\).`,
         S`<b>Objective and domain.</b> Revenue \(R(p)=p(5000-75p)=5000p-75p^2\). Tickets cannot be negative: \(5000-75p\ge0\), so \(0\le p\le\tfrac{200}{3}\approx66.67\).`,
@@ -106,7 +106,7 @@ export const blocks = () => [
         S`<b>Results.</b> Tickets \(5000-75\cdot\tfrac{100}{3}=2500\); revenue \(\tfrac{100}{3}\cdot2500\approx83\,333\) dollars, more than \(R(40)=40\cdot2000=80\,000\).`,
         S`<b>Check with whole-dollar prices.</b> ${tv(["\\(p\\)", "32", "33", "34", "35"], ["tickets", "2600", "2525", "2450", "2375"], ["\\(R\\)", "83 200", "83 325", "83 300", "83 125"])} The best whole-dollar price is 33 dollars, next to 33.33 ✓`],
       S`about 33.33 dollars per ticket, giving 2500 tickets and about 83 333 dollars`,
-      plane({ view: { xmin: 0, xmax: 70, ymin: 0, ymax: 90 }, curves: [{ f: (p) => (5000 * p - 75 * p * p) / 1000, a: 0, b: 200 / 3, color: "violet" }], points: [{ x: 100 / 3, y: 83.333, label: "max (33.33, 83.3)", color: "red" }, { x: 40, y: 80, label: "(40, 80)", color: "amber" }], step: { x: 10, y: 10 }, xlabel: "p (dollars)", ylabel: "R (thousand dollars)" })],
+      plane({ view: { xmin: 0, xmax: 70, ymin: 0, ymax: 90 }, curves: [{ f: (p) => (5000 * p - 75 * p * p) / 1000, a: 0, b: 200 / 3, color: "violet" , label: "y = (5000p − 75p²)/1000" }], points: [{ x: 100 / 3, y: 83.333, label: "max (33.33, 83.3)", color: "red" }, { x: 40, y: 80, label: "(40, 80)", color: "amber" }], step: { x: 10, y: 10 }, xlabel: "p (dollars)", ylabel: "R (thousand dollars)" })],
   ]),
 
   practice([
@@ -126,11 +126,11 @@ export const blocks = () => [
     ["The closest point", S`Find the point on \(y=\sqrt x\) closest to \((4,0)\).`,
       [S`Minimize the squared distance \(D(x)=(x-4)^2+x\), \(x\ge0\) (same minimum point as the distance).`, S`\(D'(x)=2(x-4)+1=0\Rightarrow x=3.5\); \(D''=2\gt0\).`, S`Point \((3.5,\sqrt{3.5})\approx(3.5,1.87)\); distance \(\sqrt{3.75}\approx1.94\).`],
       S`\((3.5,1.87)\), about 1.94 units away`,
-      plane({ view: { xmin: -0.5, xmax: 6.5, ymin: -0.5, ymax: 3 }, curves: [{ f: (x) => Math.sqrt(x), a: 0, b: 6.5, color: "violet" }, { f: (x) => (Math.sqrt(3.5) / -0.5) * (x - 4), a: 3.5, b: 4, color: "green" }], points: [{ x: 4, y: 0, label: "(4, 0)", color: "red" }, { x: 3.5, y: Math.sqrt(3.5), label: "(3.5, 1.87)", color: "blue" }], step: { x: 0.5, y: 0.5 } })],
+      plane({ view: { xmin: -0.5, xmax: 6.5, ymin: -0.5, ymax: 3 }, curves: [{ f: (x) => Math.sqrt(x), a: 0, b: 6.5, color: "violet" , label: "y = √x" }, { f: (x) => (Math.sqrt(3.5) / -0.5) * (x - 4), a: 3.5, b: 4, color: "green" , label: "y = (√3.5/(−0.5))(x − 4)" }], points: [{ x: 4, y: 0, label: "(4, 0)", color: "red" }, { x: 3.5, y: Math.sqrt(3.5), label: "(3.5, 1.87)", color: "blue" }], step: { x: 0.5, y: 0.5 } })],
     ["The cheapest pipeline", S`A platform is 3 km offshore. A refinery is on the shore 8 km along the coast from the point nearest the platform. Pipe costs 50 thousand dollars per km underwater and 30 thousand per km on land. Where should the pipe reach the shore?`,
       [S`Let it land \(x\) km along the coast: \(C(x)=50\sqrt{9+x^2}+30(8-x)\), \(0\le x\le8\).`, S`\(C'(x)=\dfrac{50x}{\sqrt{9+x^2}}-30=0\Rightarrow25x^2=9(9+x^2)\Rightarrow x=2.25\).`, S`\(C(0)=390\), \(C(2.25)=360\), \(C(8)\approx427.2\) (thousand dollars).`],
       S`2.25 km along the coast; minimum cost 360 thousand dollars`,
-      plane({ view: { xmin: 0, xmax: 8.5, ymin: 300, ymax: 450 }, curves: [{ f: (x) => 50 * Math.sqrt(9 + x * x) + 30 * (8 - x), a: 0, b: 8, color: "violet" }], points: [{ x: 2.25, y: 360, label: "min (2.25, 360)", color: "red" }, { x: 0, y: 390, label: "(0, 390)", color: "amber" }, { x: 8, y: 427.2, label: "(8, 427.2)", color: "amber" }], step: { x: 1, y: 25 } })],
+      plane({ view: { xmin: 0, xmax: 8.5, ymin: 300, ymax: 450 }, curves: [{ f: (x) => 50 * Math.sqrt(9 + x * x) + 30 * (8 - x), a: 0, b: 8, color: "violet" , label: "y = 50√(9 + x²) + 30(8 − x)" }], points: [{ x: 2.25, y: 360, label: "min (2.25, 360)", color: "red" }, { x: 0, y: 390, label: "(0, 390)", color: "amber" }, { x: 8, y: 427.2, label: "(8, 427.2)", color: "amber" }], step: { x: 1, y: 25 } })],
   ], [
     q("hard", S`An open-top cylinder must hold \(1000\pi\) cm³. Find the radius (cm) that uses the least material.`, num(10),
       "A = πr² + 2000π/r.", [S`\(2\pi r-\frac{2000\pi}{r^2}=0\Rightarrow r^3=1000\).`], S`\(10\)`),

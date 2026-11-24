@@ -40,7 +40,7 @@ export const blocks = () => [
     ["\\(f''\\lt0\\)", "decreasing", "concave down ∩", "local maximum"],
     ["\\(f''=0\\)", "—", "possible inflection", "test gives no answer"],
   ])}
-  ${plane({ view: { xmin: -1.5, xmax: 5.5, ymin: -30, ymax: 10 }, curves: [{ f: (x) => x ** 3 - 6 * x * x + 5, a: -1.5, b: 2, color: "amber" }, { f: (x) => x ** 3 - 6 * x * x + 5, a: 2, b: 5.5, color: "blue" }], points: [{ x: 2, y: -11, label: "inflection (2, −11)", color: "violet" }, { x: 0, y: 5, label: "max (0, 5)", color: "red" }, { x: 4, y: -27, label: "min (4, −27)", color: "blue" }], step: { x: 1, y: 5 } }, "f(x) = x³ − 6x² + 5: concave down (amber) for x < 2, concave up (blue) for x > 2.")}
+  ${plane({ view: { xmin: -1.5, xmax: 5.5, ymin: -30, ymax: 10 }, curves: [{ f: (x) => x ** 3 - 6 * x * x + 5, a: -1.5, b: 2, color: "amber" , label: "y = x³ − 6x² + 5" }, { f: (x) => x ** 3 - 6 * x * x + 5, a: 2, b: 5.5, color: "blue"  }], points: [{ x: 2, y: -11, label: "inflection (2, −11)", color: "violet" }, { x: 0, y: 5, label: "max (0, 5)", color: "red" }, { x: 4, y: -27, label: "min (4, −27)", color: "blue" }], step: { x: 1, y: 5 } }, "f(x) = x³ − 6x² + 5: concave down (amber) for x < 2, concave up (blue) for x > 2.")}
   ${keyIdea(S`Concavity: \(f''\gt0\) on an interval ⇒ concave up; \(f''\lt0\) ⇒ concave down. Inflection points occur where \(f''\) changes sign (usually where \(f''=0\)). Second derivative test: if \(f'(c)=0\) and \(f''(c)\gt0\), \(f\) has a local minimum at \(c\); if \(f''(c)\lt0\), a local maximum; if \(f''(c)=0\), use the first derivative test.`)}`),
 
   section("📌 Explore", S`<p>Slide the point along the curve. Where the curve is blue (concave up) it sits above the green tangent; where it is amber (concave down) it sits below. Watch the tangent "cross" the curve exactly at the purple inflection points.</p>`),
@@ -66,7 +66,7 @@ export const blocks = () => [
         S`<b>The point.</b> \(f(2)=8-24+5=-11\), so the inflection point is \((2,-11)\).`,
         S`<b>Check with the slopes.</b> ${tv(["\\(x\\)", "0", "1", "2", "3", "4"], ["slope \\(f'(x)\\)", "0", "\\(-9\\)", "\\(-12\\)", "\\(-9\\)", "0"])} The slopes decrease until \(x=2\) (concave down) and then increase (concave up) ✓`],
       S`concave down on \((-\infty,2)\), concave up on \((2,\infty)\); inflection point \((2,-11)\)`,
-      plane({ view: { xmin: -2, xmax: 6, ymin: -30, ymax: 12 }, curves: [{ f: (x) => x ** 3 - 6 * x * x + 5, a: -2, b: 2, color: "amber" }, { f: (x) => x ** 3 - 6 * x * x + 5, a: 2, b: 6, color: "blue" }], points: [{ x: 2, y: -11, label: "inflection (2, −11)", color: "violet" }], step: { x: 1, y: 5 } }, "amber: concave down (f″ < 0); blue: concave up (f″ > 0)")],
+      plane({ view: { xmin: -2, xmax: 6, ymin: -30, ymax: 12 }, curves: [{ f: (x) => x ** 3 - 6 * x * x + 5, a: -2, b: 2, color: "amber" , label: "y = x³ − 6x² + 5" }, { f: (x) => x ** 3 - 6 * x * x + 5, a: 2, b: 6, color: "blue"  }], points: [{ x: 2, y: -11, label: "inflection (2, −11)", color: "violet" }], step: { x: 1, y: 5 } }, "amber: concave down (f″ < 0); blue: concave up (f″ > 0)")],
     ["Two inflection points", S`Find the intervals of concavity and the inflection points of \(f(x)=x^4-4x^3\).`,
       [S`<b>Plan.</b> Find \(f''\), factor it, and make a concavity chart. Every sign change of \(f''\) gives an inflection point.`,
         S`<b>Two derivatives.</b> \(f'(x)=4x^3-12x^2\), so \(f''(x)=12x^2-24x=12x(x-2)\).`,
@@ -75,7 +75,7 @@ export const blocks = () => [
         S`<b>The points.</b> \(f(0)=0\) and \(f(2)=16-32=-16\): inflection points \((0,0)\) and \((2,-16)\).`,
         S`<b>Something extra at 0.</b> \(f'(0)=0\) too, so the tangent at \((0,0)\) is horizontal. Because the concavity changes there, it is a flat inflection point, not a max or min. The only extremum is where \(f'(x)=4x^2(x-3)\) changes sign: a minimum at \((3,-27)\) ✓`],
       S`concave up on \((-\infty,0)\) and \((2,\infty)\), down on \((0,2)\); inflection points \((0,0)\) and \((2,-16)\)`,
-      plane({ view: { xmin: -1.5, xmax: 4.5, ymin: -30, ymax: 10 }, curves: [{ f: (x) => x ** 4 - 4 * x ** 3, a: -1.5, b: 0, color: "blue" }, { f: (x) => x ** 4 - 4 * x ** 3, a: 0, b: 2, color: "amber" }, { f: (x) => x ** 4 - 4 * x ** 3, a: 2, b: 4.5, color: "blue" }], points: [{ x: 0, y: 0, label: "(0, 0)", color: "violet" }, { x: 2, y: -16, label: "(2, −16)", color: "violet" }, { x: 3, y: -27, label: "min (3, −27)", color: "red" }], step: { x: 1, y: 5 } }, "blue: concave up; amber: concave down")],
+      plane({ view: { xmin: -1.5, xmax: 4.5, ymin: -30, ymax: 10 }, curves: [{ f: (x) => x ** 4 - 4 * x ** 3, a: -1.5, b: 0, color: "blue" , label: "y = x⁴ − 4x³" }, { f: (x) => x ** 4 - 4 * x ** 3, a: 0, b: 2, color: "amber"  }, { f: (x) => x ** 4 - 4 * x ** 3, a: 2, b: 4.5, color: "blue"  }], points: [{ x: 0, y: 0, label: "(0, 0)", color: "violet" }, { x: 2, y: -16, label: "(2, −16)", color: "violet" }, { x: 3, y: -27, label: "min (3, −27)", color: "red" }], step: { x: 1, y: 5 } }, "blue: concave up; amber: concave down")],
     ["The second derivative test", S`Classify the critical points of \(f(x)=2x^3+3x^2-36x\).`,
       [S`<b>Rule: the second derivative test.</b> If \(f'(c)=0\) and \(f''(c)\gt0\), the graph is a cup at \(c\): local minimum. If \(f'(c)=0\) and \(f''(c)\lt0\), it is a cap: local maximum. If \(f''(c)=0\), the test gives no answer.`,
         S`<b>Critical numbers.</b> \(f'(x)=6x^2+6x-36=6(x^2+x-6)=6(x+3)(x-2)\): \(x=-3\) and \(x=2\).`,
@@ -83,7 +83,7 @@ export const blocks = () => [
         S`<b>Test each critical number.</b> ${tv(["\\(c\\)", "\\(f''(c)\\)", "shape", "type", "\\(f(c)\\)"], ["\\(-3\\)", "\\(-36+6=-30\\lt0\\)", "∩", "local max", "\\(-54+27+108=81\\)"], ["\\(2\\)", "\\(24+6=30\\gt0\\)", "∪", "local min", "\\(16+12-72=-44\\)"])}`,
         S`<b>Check with the first derivative test.</b> ${chart({ cuts: [[-3, "-3"], [2, "2"]], d: ["f'(x)", (x) => 6 * x * x + 6 * x - 36] })} Both tests agree ✓`],
       S`local maximum \((-3,81)\); local minimum \((2,-44)\)`,
-      plane({ view: { xmin: -6, xmax: 5, ymin: -60, ymax: 100 }, curves: [{ f: (x) => 2 * x ** 3 + 3 * x * x - 36 * x, color: "violet" }], points: [{ x: -3, y: 81, label: "max (−3, 81)", color: "red" }, { x: 2, y: -44, label: "min (2, −44)", color: "blue" }], step: { x: 1, y: 20 } })],
+      plane({ view: { xmin: -6, xmax: 5, ymin: -60, ymax: 100 }, curves: [{ f: (x) => 2 * x ** 3 + 3 * x * x - 36 * x, color: "violet" , label: "y = 2x³ + 3x² − 36x" }], points: [{ x: -3, y: 81, label: "max (−3, 81)", color: "red" }, { x: 2, y: -44, label: "min (2, −44)", color: "blue" }], step: { x: 1, y: 20 } })],
     ["When the test fails", S`For \(f(x)=x^4\) and \(g(x)=x^3\), show that the second derivative test gives no answer at 0, and classify each point.`,
       [S`<b>Try the second derivative test.</b> \(f'(x)=4x^3\), \(f''(x)=12x^2\): \(f'(0)=0\) and \(f''(0)=0\). \(g'(x)=3x^2\), \(g''(x)=6x\): \(g'(0)=0\) and \(g''(0)=0\). With \(f''(0)=0\) the test is inconclusive for both.`,
         S`<b>Fall back on the first derivative test for \(f\).</b> ${chart({ cuts: [[0, "0"]], d: ["f'(x)", (x) => 4 * x ** 3] })}`,
@@ -91,7 +91,7 @@ export const blocks = () => [
         S`<b>Concavity of \(g\).</b> \(g''(x)=6x\) is negative for \(x\lt0\) and positive for \(x\gt0\), so \((0,0)\) is an inflection point of \(g\) with a horizontal tangent.`,
         S`<b>Check.</b> \(x^4\ge0\) for all \(x\), so 0 is the smallest value of \(f\) ✓. \(g(-1)=-1\lt0\lt g(1)=1\), so \(g\) rises straight through 0 ✓`],
       S`\(x^4\) has a minimum at 0; \(x^3\) has neither (an inflection point)`,
-      plane({ view: { xmin: -1.6, xmax: 1.6, ymin: -2, ymax: 3 }, curves: [{ f: (x) => x ** 4, color: "violet" }, { f: (x) => x ** 3, color: "blue" }], points: [{ x: 0, y: 0, label: "(0, 0)", color: "red" }], step: { x: 0.5, y: 0.5 } }, "violet: f(x) = x⁴ (minimum); blue: g(x) = x³ (inflection)")],
+      plane({ view: { xmin: -1.6, xmax: 1.6, ymin: -2, ymax: 3 }, curves: [{ f: (x) => x ** 4, color: "violet" , label: "y = x⁴" }, { f: (x) => x ** 3, color: "blue" , label: "y = x³" }], points: [{ x: 0, y: 0, label: "(0, 0)", color: "red" }], step: { x: 0.5, y: 0.5 } }, "violet: f(x) = x⁴ (minimum); blue: g(x) = x³ (inflection)")],
     ["Diminishing returns", S`Total sales after \(t\) months of advertising are \(S(t)=-t^3+12t^2+100\) (units), \(0\le t\le8\). When are sales growing fastest?`,
       [S`<b>Translate.</b> The growth rate of sales is \(S'(t)\). "Growing fastest" means \(S'(t)\) is largest. So we maximize \(S'\), which means finding where its derivative \(S''\) changes from \(+\) to \(-\).`,
         S`<b>Derivatives.</b> \(S'(t)=-3t^2+24t\) and \(S''(t)=-6t+24\). \(S''(t)=0\) at \(t=4\).`,
@@ -99,7 +99,7 @@ export const blocks = () => [
         S`<b>Interpret.</b> Before \(t=4\) the growth rate is increasing (concave up); after it, the rate is decreasing (concave down). The inflection point \((4,S(4))=(4,228)\) is where sales grow fastest, at \(S'(4)=48\) units per month.`,
         S`<b>Check with a table of rates.</b> ${tv(["\\(t\\)", "0", "2", "4", "6", "8"], ["\\(S'(t)\\)", "0", "36", "48", "36", "0"])} The rate peaks at \(t=4\) ✓`],
       S`at \(t=4\) months (48 units per month); after that each month adds less — diminishing returns`,
-      plane({ view: { xmin: 0, xmax: 8.5, ymin: 80, ymax: 400 }, curves: [{ f: (t) => -(t ** 3) + 12 * t * t + 100, a: 0, b: 8, color: "violet" }, { f: (t) => 228 + 48 * (t - 4), color: "green", a: 2, b: 6 }], points: [{ x: 4, y: 228, label: "inflection (4, 228)", color: "red" }], step: { x: 1, y: 40 }, xlabel: "t", ylabel: "S" }, "Green: the tangent at the inflection point, the steepest point of the curve (slope 48).")],
+      plane({ view: { xmin: 0, xmax: 8.5, ymin: 80, ymax: 400 }, curves: [{ f: (t) => -(t ** 3) + 12 * t * t + 100, a: 0, b: 8, color: "violet" , label: "y = −t³ + 12t² + 100" }, { f: (t) => 228 + 48 * (t - 4), color: "green", a: 2, b: 6 , label: "y = 228 + 48(t − 4)" }], points: [{ x: 4, y: 228, label: "inflection (4, 228)", color: "red" }], step: { x: 1, y: 40 }, xlabel: "t", ylabel: "S" }, "Green: the tangent at the inflection point, the steepest point of the curve (slope 48).")],
   ]),
 
   practice([
@@ -119,11 +119,11 @@ export const blocks = () => [
     ["Designing an inflection point", S`Find \(a\) and \(b\) so that \(f(x)=ax^3+bx^2\) has a point of inflection at \((1,4)\).`,
       [S`\(f''(x)=6ax+2b\); \(f''(1)=0\Rightarrow b=-3a\).`, S`\(f(1)=a+b=4\Rightarrow a-3a=4\Rightarrow a=-2\), \(b=6\).`],
       S`\(f(x)=-2x^3+6x^2\)`,
-      plane({ view: { xmin: -1, xmax: 3.2, ymin: -3, ymax: 10 }, curves: [{ f: (x) => -2 * x ** 3 + 6 * x * x, a: -1, b: 1, color: "blue" }, { f: (x) => -2 * x ** 3 + 6 * x * x, a: 1, b: 3.2, color: "amber" }], points: [{ x: 1, y: 4, label: "inflection (1, 4)", color: "violet" }, { x: 2, y: 8, label: "max (2, 8)", color: "red" }, { x: 0, y: 0, label: "min (0, 0)", color: "red" }], step: { x: 0.5, y: 1 } })],
+      plane({ view: { xmin: -1, xmax: 3.2, ymin: -3, ymax: 10 }, curves: [{ f: (x) => -2 * x ** 3 + 6 * x * x, a: -1, b: 1, color: "blue" , label: "y = −2x³ + 6x²" }, { f: (x) => -2 * x ** 3 + 6 * x * x, a: 1, b: 3.2, color: "amber"  }], points: [{ x: 1, y: 4, label: "inflection (1, 4)", color: "violet" }, { x: 2, y: 8, label: "max (2, 8)", color: "red" }, { x: 0, y: 0, label: "min (0, 0)", color: "red" }], step: { x: 0.5, y: 1 } })],
     ["Every cubic has one inflection point", S`Show that \(f(x)=ax^3+bx^2+cx+d\) (\(a\ne0\)) has exactly one inflection point, at \(x=-\frac{b}{3a}\). Find it for \(f(x)=x^3+6x^2+9x+1\).`,
       [S`\(f''(x)=6ax+2b\) is linear with one zero, \(x=-\frac{b}{3a}\), and it changes sign there.`, S`For the example, \(x=-\frac{6}{3}=-2\); \(f(-2)=-8+24-18+1=-1\).`],
       S`inflection point \((-2,-1)\)`,
-      plane({ view: { xmin: -4.5, xmax: 0.8, ymin: -5, ymax: 6 }, curves: [{ f: (x) => x ** 3 + 6 * x * x + 9 * x + 1, color: "violet" }], points: [{ x: -2, y: -1, label: "inflection (−2, −1)", color: "violet" }, { x: -3, y: 1, label: "max (−3, 1)", color: "red" }, { x: -1, y: -3, label: "min (−1, −3)", color: "blue" }], step: { x: 0.5, y: 1 } })],
+      plane({ view: { xmin: -4.5, xmax: 0.8, ymin: -5, ymax: 6 }, curves: [{ f: (x) => x ** 3 + 6 * x * x + 9 * x + 1, color: "violet" , label: "y = x³ + 6x² + 9x + 1" }], points: [{ x: -2, y: -1, label: "inflection (−2, −1)", color: "violet" }, { x: -3, y: 1, label: "max (−3, 1)", color: "red" }, { x: -1, y: -3, label: "min (−1, −3)", color: "blue" }], step: { x: 0.5, y: 1 } })],
   ], [
     q("hard", S`For \(f(x)=x+\dfrac2x\), find \(f''(1)\).`, num(4),
       "f′ = 1 − 2x⁻², f″ = 4x⁻³.", [S`\(4\).`], S`\(4\)`),

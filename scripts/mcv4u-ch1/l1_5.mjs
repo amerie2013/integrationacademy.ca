@@ -1,6 +1,7 @@
 // MCV4U 1.5 — Introduction to Derivatives: f′(x) as the limit of the difference quotient, notation, first-principles
 // derivatives of polynomial, reciprocal and root functions, graphs of f and f′, and where a derivative fails to exist
 import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, q, num, choice, expr, hard, plane } from "./lib.mjs";
+import { tv } from "../mcr3u-extables.mjs";
 
 export const TITLE = "1.5 Introduction to Derivatives";
 export const ID = "87b0f574-9eb8-40ee-8aa6-14f60d314863";
@@ -57,23 +58,45 @@ export const blocks = () => [
 
   examples([
     ["A quadratic from first principles", S`Find \(f'(x)\) for \(f(x)=x^2+3x\).`,
-      [S`\(f(x+h)-f(x)=(x^2+2xh+h^2+3x+3h)-(x^2+3x)=2xh+h^2+3h\).`, S`\(\dfrac{2xh+h^2+3h}{h}=2x+h+3\to2x+3\).`],
-      S`\(f'(x)=2x+3\)`],
+      [S`<b>Definition.</b> \(f'(x)=\displaystyle\lim_{h\to0}\frac{f(x+h)-f(x)}{h}\). It is the slope of the tangent at a <em>general</em> point \(x\), so the answer is a function.`,
+        S`<b>Expand \(f(x+h)\).</b> \((x+h)^2+3(x+h)=x^2+2xh+h^2+3x+3h\).`,
+        S`<b>Subtract \(f(x)\).</b> The \(x^2\) and \(3x\) cancel: \(f(x+h)-f(x)=2xh+h^2+3h\). Every remaining term has a factor \(h\) — a good sign.`,
+        S`<b>Divide by \(h\) and take the limit.</b> \(\dfrac{h(2x+h+3)}{h}=2x+h+3\to2x+3\) as \(h\to0\).`,
+        S`<b>Check at one point.</b> At \(x=1\): \(f'(1)=5\). A small secant: \(\frac{f(1.01)-f(1)}{0.01}=\frac{4.0501-4}{0.01}=5.01\) ✓. The derivative is 0 at \(x=-1.5\), the vertex of the parabola, where the tangent is flat ✓`],
+      S`\(f'(x)=2x+3\)`,
+      plane({ view: { xmin: -4.5, xmax: 2, ymin: -6, ymax: 8 }, curves: [{ f: (x) => x * x + 3 * x, color: "violet", label: "f(x) = x² + 3x" }, { f: (x) => 2 * x + 3, color: "blue", label: "f′(x) = 2x + 3" }], points: [{ x: -1.5, y: -2.25, label: "vertex (−1.5, −2.25)", color: "red" }, { x: -1.5, y: 0, color: "blue" }], step: { x: 1, y: 2 } }, "f′ crosses zero exactly below the vertex of f")],
     ["A cubic", S`Find \(\dfrac{dy}{dx}\) for \(y=x^3\).`,
-      [S`\(\dfrac{(x+h)^3-x^3}{h}=\dfrac{3x^2h+3xh^2+h^3}{h}=3x^2+3xh+h^2\).`, S`As \(h\to0\): \(3x^2\).`],
-      S`\(\dfrac{dy}{dx}=3x^2\)`],
+      [S`<b>Expand the cube.</b> \((x+h)^3=x^3+3x^2h+3xh^2+h^3\) (binomial expansion, coefficients 1, 3, 3, 1).`,
+        S`<b>Difference.</b> \((x+h)^3-x^3=3x^2h+3xh^2+h^3\).`,
+        S`<b>Divide by \(h\).</b> \(3x^2+3xh+h^2\).`,
+        S`<b>Limit.</b> As \(h\to0\) the last two terms vanish: \(\dfrac{dy}{dx}=3x^2\).`,
+        S`<b>Interpret and check.</b> \(3x^2\ge0\): the cubic never falls, and its tangent is flat only at \(x=0\). At \(x=2\) the slope should be 12: \(\frac{2.01^3-8}{0.01}=\frac{8.120601-8}{0.01}=12.0601\) ✓`],
+      S`\(\dfrac{dy}{dx}=3x^2\)`,
+      plane({ view: { xmin: -2.5, xmax: 2.5, ymin: -8, ymax: 12 }, curves: [{ f: (x) => x ** 3, color: "violet", label: "y = x³" }, { f: (x) => 3 * x * x, color: "blue", label: "dy/dx = 3x²" }], points: [{ x: 0, y: 0, label: "flat at (0, 0)", color: "red" }], step: { x: 1, y: 2 } })],
     ["A reciprocal function", S`Find \(f'(x)\) for \(f(x)=\dfrac1x\).`,
-      [S`\(\dfrac{\frac1{x+h}-\frac1x}{h}=\dfrac{x-(x+h)}{hx(x+h)}=\dfrac{-1}{x(x+h)}\).`, S`As \(h\to0\): \(-\dfrac1{x^2}\).`],
+      [S`<b>Set up.</b> \(\dfrac{f(x+h)-f(x)}{h}=\dfrac{\frac1{x+h}-\frac1x}{h}\).`,
+        S`<b>Common denominator.</b> \(\dfrac1{x+h}-\dfrac1x=\dfrac{x-(x+h)}{x(x+h)}=\dfrac{-h}{x(x+h)}\).`,
+        S`<b>Divide by \(h\).</b> \(\dfrac{-h}{x(x+h)}\cdot\dfrac1h=\dfrac{-1}{x(x+h)}\).`,
+        S`<b>Limit.</b> As \(h\to0\), \(x(x+h)\to x^2\), so \(f'(x)=-\dfrac1{x^2}\), for \(x\ne0\).`,
+        S`<b>Interpret and check.</b> \(-\frac1{x^2}\lt0\) for every \(x\ne0\): \(\frac1x\) falls on each branch, as the graph shows. At \(x=2\): \(f'(2)=-\frac14\); secant \(\frac{1/2.01-0.5}{0.01}\approx-0.2488\) ✓`],
       S`\(f'(x)=-\dfrac1{x^2}\) (negative everywhere: \(\frac1x\) falls on each branch)`,
-      plane({ view: { xmin: -4, xmax: 4, ymin: -5, ymax: 5 }, curves: [{ f: (x) => 1 / x, a: -4, b: -0.21, color: "violet" }, { f: (x) => 1 / x, a: 0.21, b: 4, color: "violet" }, { f: (x) => -1 / (x * x), a: -4, b: -0.45, color: "blue" }, { f: (x) => -1 / (x * x), a: 0.45, b: 4, color: "blue" }], step: { x: 1, y: 1 } })],
+      plane({ view: { xmin: -4, xmax: 4, ymin: -5, ymax: 5 }, curves: [{ f: (x) => 1 / x, a: -4, b: -0.21, color: "violet" }, { f: (x) => 1 / x, a: 0.21, b: 4, color: "violet", label: "f(x) = 1/x" }, { f: (x) => -1 / (x * x), a: -4, b: -0.45, color: "blue" }, { f: (x) => -1 / (x * x), a: 0.45, b: 4, color: "blue", label: "f′(x) = −1/x²" }], step: { x: 1, y: 1 } })],
     ["Sketch f′ from f", S`Sketch the derivative of \(f(x)=x^2-4x+1\).`,
-      [S`From first principles, \(f'(x)=2x-4\): a line.`, S`\(f'\) is negative for \(x\lt2\) (f falls), zero at the vertex \(x=2\), positive for \(x>2\).`],
+      [S`<b>First principles.</b> \(f(x+h)-f(x)=2xh+h^2-4h\), so \(\dfrac{f(x+h)-f(x)}{h}=2x+h-4\to2x-4\). The derivative is the line \(f'(x)=2x-4\).`,
+        S`<b>Where is the tangent flat?</b> \(2x-4=0\) at \(x=2\). That is the vertex: \(f(2)=4-8+1=-3\).`,
+        S`<b>Signs.</b> ${tv(["\\(x\\)", "0", "1", "2", "3", "4"], ["\\(f(x)\\)", "1", "−2", "−3", "−2", "1"], ["\\(f'(x)\\)", "−4", "−2", "0", "2", "4"])} Where \(f\) falls, \(f'\) is negative; where \(f\) rises, \(f'\) is positive.`,
+        S`<b>Sketch.</b> Draw the line through \((2,0)\) with slope 2: below the axis for \(x\lt2\), above it for \(x\gt2\).`,
+        S`<b>Check by symmetry.</b> \(f(1)=f(3)=-2\): mirror points of the parabola. Their slopes are opposite, \(-2\) and \(2\) ✓`],
       S`\(f'(x)=2x-4\), crossing zero at \(x=2\)`,
-      plane({ view: { xmin: -1, xmax: 5, ymin: -5, ymax: 6 }, curves: [{ f: (x) => x * x - 4 * x + 1, color: "violet" }, { f: (x) => 2 * x - 4, color: "blue" }], points: [{ x: 2, y: -3, label: "vertex (2, −3)", color: "red" }, { x: 2, y: 0, label: "f′(2) = 0", color: "blue" }], step: { x: 1, y: 1 } })],
+      plane({ view: { xmin: -1, xmax: 5, ymin: -5, ymax: 6 }, curves: [{ f: (x) => x * x - 4 * x + 1, color: "violet", label: "f(x) = x² − 4x + 1" }, { f: (x) => 2 * x - 4, color: "blue", label: "f′(x) = 2x − 4" }], points: [{ x: 2, y: -3, label: "vertex (2, −3)", color: "red" }, { x: 2, y: 0, label: "f′(2) = 0", color: "blue" }], step: { x: 1, y: 1 } })],
     ["Not differentiable", S`Explain why \(f(x)=|x-1|\) is not differentiable at \(x=1\), and why \(g(x)=\sqrt[3]{x}\) is not differentiable at \(x=0\).`,
-      [S`\(|x-1|\): one-sided slopes are \(-1\) and \(+1\) — a corner.`, S`\(\sqrt[3]x\): \(\frac{\sqrt[3]h-0}{h}=h^{-2/3}\to\infty\) — a vertical tangent.`],
+      [S`<b>Rule.</b> \(f'(a)\) exists only if \(\displaystyle\lim_{h\to0}\frac{f(a+h)-f(a)}{h}\) exists as a finite number, with the same value from both sides.`,
+        S`<b>\(|x-1|\) at 1.</b> \(\dfrac{|h|-0}{h}=\dfrac{|h|}{h}\). For \(h\gt0\) this is \(1\); for \(h\lt0\) it is \(-1\). The one-sided limits differ, so there is a <em>corner</em>.`,
+        S`<b>\(\sqrt[3]x\) at 0.</b> \(\dfrac{\sqrt[3]h-0}{h}=h^{1/3-1}=h^{-2/3}=\dfrac{1}{\sqrt[3]{h^2}}\). As \(h\to0\) from either side, \(h^2\) is a tiny positive number, so the quotient \(\to+\infty\).`,
+        S`<b>Interpret.</b> The cube-root graph is smooth but becomes vertical at the origin: a <em>vertical tangent</em>, with infinite slope.`,
+        S`<b>Check with numbers.</b> \(h=0.001\): \(\frac{\sqrt[3]{0.001}}{0.001}=\frac{0.1}{0.001}=100\). \(h=0.000001\): \(\frac{0.01}{0.000001}=10\,000\). The slopes keep growing ✓`],
       S`corner at \(x=1\); vertical tangent at \(x=0\)`,
-      plane({ view: { xmin: -3, xmax: 3, ymin: -2, ymax: 3 }, curves: [{ f: (x) => Math.abs(x - 1), color: "violet" }, { f: (x) => Math.cbrt(x), color: "green" }], points: [{ x: 1, y: 0, label: "corner", color: "red" }, { x: 0, y: 0, label: "vertical tangent", color: "red" }], step: { x: 1, y: 1 } })],
+      plane({ view: { xmin: -3, xmax: 3, ymin: -2, ymax: 3 }, curves: [{ f: (x) => Math.abs(x - 1), color: "violet", label: "f(x) = |x − 1|" }, { f: (x) => Math.cbrt(x), color: "green", label: "g(x) = ∛x" }], points: [{ x: 1, y: 0, label: "corner (1, 0)", color: "red" }, { x: 0, y: 0, color: "red" }], step: { x: 1, y: 1 } }, "red dots: the corner of f at (1, 0) and the vertical tangent of g at (0, 0)")],
   ]),
 
   practice([

@@ -1,6 +1,7 @@
 // MCV4U 4.3 — Differentiation Rules for Sinusoidal Functions (NEW lesson): the chain rule for sin(kx + c), cos(g(x))
 // and powers such as sin²x, transformed sinusoids A·sin(kx + c) + d, products, tangent lines and extrema
 import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, q, num, choice, hard, plane } from "./lib.mjs";
+import { tv } from "../mcr3u-extables.mjs";
 
 export const TITLE = "4.3 Differentiation Rules for Sinusoidal Functions";
 export const ID = "6d4fc004-0001-4001-8001-000000000403";
@@ -59,22 +60,45 @@ export const blocks = () => [
 
   examples([
     ["A multiple angle", S`Differentiate \(y=4\cos(3x)\).`,
-      [S`Outer \(4\cos u\), inner \(u=3x\), \(u'=3\).`, S`\(y'=4(-\sin3x)\cdot3\).`],
-      S`\(y'=-12\sin(3x)\)`],
+      [S`<b>Chain rule.</b> Outer function \(4\cos u\); inner \(u=3x\), \(u'=3\). Differentiate the outer, keep the inside, multiply by \(u'\).`,
+        S`<b>Outer derivative.</b> \(4(-\sin u)=-4\sin(3x)\).`,
+        S`<b>Multiply by 3.</b> \(y'=-4\sin(3x)\cdot3=-12\sin(3x)\).`,
+        S`<b>Why the 3 appears.</b> \(\cos(3x)\) goes through its cycle 3 times as fast as \(\cos x\) (period \(\frac{2\pi}3\)), so its slopes are 3 times as steep.`,
+        S`<b>Check.</b> The steepest slope of \(y\) is \(12=4\times3\) (amplitude times frequency). At \(x=\frac\pi6\), \(y'=-12\sin\frac\pi2=-12\): the curve crosses the midline going down there ✓`],
+      S`\(y'=-12\sin(3x)\)`,
+      plane({ view: { xmin: -0.2, xmax: 2.3, ymin: -5, ymax: 5 }, curves: [{ f: (x) => 4 * Math.cos(3 * x), a: 0, b: 2.2, color: "violet", label: "y = 4 cos(3x)" }, { f: (x) => -12 * (x - PI / 6), a: 0.25, b: 0.8, color: "green", label: "slope −12" }], points: [{ x: PI / 6, y: 0, label: "(π/6, 0)", color: "red" }], step: { x: 0.5, y: 1 } })],
     ["A polynomial inside", S`Differentiate \(y=\sin(x^2)\).`,
-      [S`\(y'=\cos(x^2)\cdot2x\).`],
-      S`\(y'=2x\cos(x^2)\)`],
+      [S`<b>Layers.</b> Outer \(\sin u\), inner \(u=x^2\), \(u'=2x\).`,
+        S`<b>Apply.</b> \(y'=\cos(x^2)\cdot2x=2x\cos(x^2)\).`,
+        S`<b>Not the same as \(\sin^2x\).</b> \(\sin(x^2)\) squares the angle; \(\sin^2x\) squares the output (next example).`,
+        S`<b>Interpret.</b> The factor \(2x\) grows, so the oscillations get faster and steeper as \(|x|\) grows (figure).`,
+        S`<b>Check.</b> At \(x=0\), \(y'=0\): the graph is flat at the origin, unlike \(\sin x\) ✓`],
+      S`\(y'=2x\cos(x^2)\)`,
+      plane({ view: { xmin: -3.2, xmax: 3.2, ymin: -1.5, ymax: 1.5 }, curves: [{ f: (x) => Math.sin(x * x), color: "violet", label: "y = sin(x²)" }], points: [{ x: 0, y: 0, label: "flat at 0", color: "red" }], step: { x: 0.5, y: 0.5 } }, "the waves bunch up as |x| grows, because the inner function x² speeds up")],
     ["A power of sine", S`Differentiate \(y=\sin^2x\) and simplify.`,
-      [S`\(y=(\sin x)^2\Rightarrow y'=2\sin x\cdot\cos x\).`, S`Identity: \(2\sin x\cos x=\sin2x\).`],
+      [S`<b>Rewrite.</b> \(\sin^2x\) means \((\sin x)^2\). Outer \(u^2\), inner \(u=\sin x\), \(u'=\cos x\).`,
+        S`<b>Chain rule.</b> \(y'=2\sin x\cdot\cos x\).`,
+        S`<b>Double-angle identity.</b> \(2\sin x\cos x=\sin(2x)\), so \(y'=\sin(2x)\).`,
+        S`<b>Interpret.</b> \(y=\sin^2x\) has period \(\pi\) and lies between 0 and 1; it is flat where \(\sin2x=0\): at \(0,\frac\pi2,\pi,\ldots\) — its minima and maxima.`,
+        S`<b>Check.</b> At \(x=\frac\pi4\): \(y'=\sin\frac\pi2=1\), its steepest rise, halfway between the low at 0 and the high at \(\frac\pi2\) ✓`],
       S`\(y'=2\sin x\cos x=\sin(2x)\)`,
-      plane({ view: { xmin: -0.2, xmax: 2 * PI + 0.2, ymin: -1.3, ymax: 1.3 }, curves: [{ f: (x) => Math.sin(x) ** 2, a: 0, b: 2 * PI, color: "violet" }, { f: (x) => Math.sin(2 * x), a: 0, b: 2 * PI, color: "blue" }], step: { x: 0.5, y: 0.5 } })],
+      plane({ view: { xmin: -0.2, xmax: 2 * PI + 0.2, ymin: -1.3, ymax: 1.3 }, curves: [{ f: (x) => Math.sin(x) ** 2, a: 0, b: 2 * PI, color: "violet", label: "y = sin²x" }, { f: (x) => Math.sin(2 * x), a: 0, b: 2 * PI, color: "blue", label: "y′ = sin 2x" }], step: { x: 0.5, y: 0.5 } })],
     ["A transformed sinusoid", S`Find the slope of \(y=2\sin\left(\frac\pi4x+1\right)+5\) at \(x=0\).`,
-      [S`\(y'=2\cdot\frac\pi4\cos\left(\frac\pi4x+1\right)\).`, S`\(y'(0)=\frac\pi2\cos1\approx1.5708\times0.5403\).`],
-      S`about \(0.849\)`],
+      [S`<b>Chain rule.</b> Inner \(u=\frac\pi4x+1\), \(u'=\frac\pi4\). The \(+5\) shifts the graph up and has derivative 0.`,
+        S`<b>Derivative.</b> \(y'=2\cos\left(\frac\pi4x+1\right)\cdot\frac\pi4=\frac\pi2\cos\left(\frac\pi4x+1\right)\).`,
+        S`<b>At \(x=0\).</b> \(y'(0)=\frac\pi2\cos1\approx1.5708\times0.5403\approx0.849\). (cos 1 means 1 radian.)`,
+        S`<b>Point.</b> \(y(0)=2\sin1+5\approx6.683\).`,
+        S`<b>Check.</b> \(\frac{y(0.001)-y(0)}{0.001}\approx0.848\) ✓. The largest possible slope is \(\frac\pi2\approx1.571\), so 0.849 is reasonable.`],
+      S`about \(0.849\)`,
+      plane({ view: { xmin: -5, xmax: 7, ymin: 2, ymax: 8 }, curves: [{ f: (x) => 2 * Math.sin((PI / 4) * x + 1) + 5, color: "violet", label: "y = 2 sin(πx/4 + 1) + 5" }, { f: (x) => 2 * Math.sin(1) + 5 + 0.849 * x, a: -1.5, b: 1.5, color: "green", label: "slope ≈ 0.849" }], points: [{ x: 0, y: 2 * Math.sin(1) + 5, label: "(0, 6.68)", color: "red" }], step: { x: 1, y: 1 } })],
     ["Product and chain", S`Find the tangent to \(y=x\cos(2x)\) at \(x=\frac\pi4\).`,
-      [S`\(y\left(\frac\pi4\right)=\frac\pi4\cos\frac\pi2=0\).`, S`\(y'=\cos(2x)-2x\sin(2x)\); \(y'\left(\frac\pi4\right)=0-\frac\pi2\cdot1=-\frac\pi2\).`, S`\(y=-\frac\pi2\left(x-\frac\pi4\right)\).`],
+      [S`<b>Point.</b> \(y\left(\frac\pi4\right)=\frac\pi4\cos\frac\pi2=0\): the point \(\left(\frac\pi4,0\right)\).`,
+        S`<b>Derivative.</b> Product rule with the chain rule on \(\cos(2x)\): \(y'=(1)\cos(2x)+x\cdot(-\sin(2x))\cdot2=\cos(2x)-2x\sin(2x)\).`,
+        S`<b>Slope.</b> \(y'\left(\frac\pi4\right)=\cos\frac\pi2-\frac\pi2\sin\frac\pi2=0-\frac\pi2=-\frac\pi2\).`,
+        S`<b>Equation.</b> \(y-0=-\frac\pi2\left(x-\frac\pi4\right)\Rightarrow y=-\frac{\pi}{2}x+\frac{\pi^2}{8}\approx-1.571x+1.234\).`,
+        S`<b>Check.</b> \(y(0.7954)=0.7954\cos(1.5908)\approx-0.0159\); the line gives \(-1.571(0.7954)+1.234\approx-0.0156\): almost the same ✓`],
       S`\(y=-\frac{\pi}{2}x+\frac{\pi^2}{8}\approx-1.571x+1.234\)`,
-      plane({ view: { xmin: -0.2, xmax: 2.5, ymin: -2.5, ymax: 1.5 }, curves: [{ f: (x) => x * Math.cos(2 * x), a: -0.2, b: 2.5, color: "violet" }, { f: (x) => -(PI / 2) * (x - PI / 4), a: 0.2, b: 1.4, color: "green" }], points: [{ x: PI / 4, y: 0, label: "(π/4, 0)", color: "red" }], step: { x: 0.5, y: 0.5 } })],
+      plane({ view: { xmin: -0.2, xmax: 2.5, ymin: -2.5, ymax: 1.5 }, curves: [{ f: (x) => x * Math.cos(2 * x), a: -0.2, b: 2.5, color: "violet", label: "y = x cos(2x)" }, { f: (x) => -(PI / 2) * (x - PI / 4), a: 0.2, b: 1.4, color: "green", label: "y = −(π/2)x + π²/8" }], points: [{ x: PI / 4, y: 0, label: "(π/4, 0)", color: "red" }], step: { x: 0.5, y: 0.5 } })],
   ]),
 
   practice([

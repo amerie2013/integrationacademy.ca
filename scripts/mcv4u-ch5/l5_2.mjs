@@ -1,6 +1,8 @@
 // MCV4U 5.2 — The Natural Logarithm and Its Derivative: ln x as the inverse of e^x, its properties, (ln x)′ = 1/x,
 // the chain rule for ln(g(x)), logarithms to other bases, tangents and extrema of logarithmic functions
 import { intro, section, keyIdea, widget, examples, practice, wrapUp, watchOut, table, q, num, choice, hard, plane } from "./lib.mjs";
+import { tv } from "../mcr3u-extables.mjs";
+import { chart } from "../mcv4u-ch3/csign.mjs";
 
 export const TITLE = "5.2 The Natural Logarithm and Its Derivative";
 export const ID = "46318e8e-bf5d-4955-8c98-79004ee874d4";
@@ -59,22 +61,45 @@ export const blocks = () => [
 
   examples([
     ["Solving with ln", S`Solve \(e^{2x}=7\).`,
-      [S`Take ln of both sides: \(2x=\ln7\).`],
-      S`\(x=\frac{\ln7}{2}\approx0.973\)`],
+      [S`<b>Idea.</b> \(\ln\) undoes \(e^{(\ )}\): \(\ln(e^u)=u\). Applying \(\ln\) to both sides brings the exponent down.`,
+        S`<b>Take ln.</b> \(\ln(e^{2x})=\ln7\Rightarrow2x=\ln7\).`,
+        S`<b>Solve.</b> \(x=\dfrac{\ln7}{2}\approx\dfrac{1.9459}{2}\approx0.973\).`,
+        S`<b>Check.</b> \(e^{2(0.973)}=e^{1.946}\approx7.00\) ✓`,
+        S`<b>Graphically.</b> The solution is where the curve \(y=e^{2x}\) meets the line \(y=7\).`],
+      S`\(x=\frac{\ln7}{2}\approx0.973\)`,
+      plane({ view: { xmin: -1, xmax: 1.6, ymin: -1, ymax: 10 }, curves: [{ f: (x) => Math.exp(2 * x), color: "violet", label: "y = e²ˣ" }], lines: [{ m: 0, b: 7, color: "green", label: "y = 7", lx: -0.8 }], points: [{ x: Math.log(7) / 2, y: 7, label: "(0.973, 7)", color: "red" }], step: { x: 0.5, y: 1 } })],
     ["Two derivatives", S`Differentiate \(y=\ln(3x)\) and \(y=\ln(x^2+1)\).`,
-      [S`\(\ln(3x)=\ln3+\ln x\Rightarrow y'=\frac1x\).`, S`Chain rule: \(\frac{2x}{x^2+1}\).`],
-      S`\(\frac1x\) and \(\frac{2x}{x^2+1}\)`],
+      [S`<b>Rule.</b> \(\frac{d}{dx}\ln x=\frac1x\), and by the chain rule \(\frac{d}{dx}\ln(g(x))=\frac{g'(x)}{g(x)}\).`,
+        S`<b>First.</b> Log law: \(\ln(3x)=\ln3+\ln x\), and \(\ln3\) is a constant, so \(y'=\frac1x\). (Chain rule agrees: \(\frac{3}{3x}=\frac1x\).)`,
+        S`<b>Second.</b> \(g=x^2+1\), \(g'=2x\): \(y'=\dfrac{2x}{x^2+1}\).`,
+        S`<b>Interpret the first.</b> \(\ln(3x)\) is \(\ln x\) shifted up by \(\ln3\approx1.10\); shifting does not change slopes.`,
+        S`<b>Check the second.</b> At \(x=1\): \(\frac{2}{2}=1\). Secant: \(\frac{\ln(2.0201)-\ln2}{0.01}\approx1.00\) ✓`],
+      S`\(\frac1x\) and \(\frac{2x}{x^2+1}\)`,
+      plane({ view: { xmin: -0.2, xmax: 4, ymin: -2, ymax: 3 }, curves: [{ f: (x) => Math.log(3 * x), a: 0.05, b: 4, color: "violet", label: "y = ln(3x)" }, { f: Math.log, a: 0.05, b: 4, color: "gray", label: "y = ln x" }, { f: (x) => Math.log(x * x + 1), a: 0, b: 4, color: "blue", label: "y = ln(x² + 1)" }], step: { x: 0.5, y: 1 } }, "ln(3x) is ln x moved up by ln 3: same slopes")],
     ["A tangent through the origin", S`Find the tangent to \(y=\ln x\) at \(x=e\).`,
-      [S`Point \((e,1)\); slope \(\frac1e\).`, S`\(y-1=\frac1e(x-e)\Rightarrow y=\frac xe\).`],
+      [S`<b>Point.</b> \(\ln e=1\): the point \((e,1)\approx(2.718,1)\).`,
+        S`<b>Slope.</b> \(y'=\frac1x\), so \(m=\frac1e\approx0.368\).`,
+        S`<b>Equation.</b> \(y-1=\frac1e(x-e)=\frac xe-1\Rightarrow y=\dfrac{x}{e}\).`,
+        S`<b>Interpret.</b> The tangent passes through the origin. This mirrors Example 4 of 5.1: \(\ln x\) and \(e^x\) are reflections in \(y=x\), and so are their tangents \(y=\frac xe\) and \(y=ex\).`,
+        S`<b>Check.</b> At \(x=e\): \(\frac ee=1\) ✓`],
       S`\(y=\frac{x}{e}\), which passes through the origin`,
-      plane({ view: { xmin: -0.5, xmax: 7, ymin: -2, ymax: 3 }, curves: [{ f: Math.log, a: 0.05, b: 7, color: "violet" }, { f: (x) => x / E, color: "green", a: 0, b: 7 }], points: [{ x: E, y: 1, label: "(e, 1)", color: "red" }], step: { x: 1, y: 1 } })],
+      plane({ view: { xmin: -0.5, xmax: 7, ymin: -2, ymax: 3 }, curves: [{ f: Math.log, a: 0.05, b: 7, color: "violet", label: "y = ln x" }, { f: (x) => x / E, color: "green", a: 0, b: 7, label: "y = x/e" }], points: [{ x: E, y: 1, label: "(e, 1)", color: "red" }], step: { x: 1, y: 1 } })],
     ["A minimum", S`Find the minimum of \(f(x)=x\ln x\), \(x\gt0\).`,
-      [S`\(f'=\ln x+x\cdot\frac1x=\ln x+1=0\Rightarrow x=e^{-1}\).`, S`\(f(e^{-1})=-e^{-1}\); \(f'\) changes from \(-\) to \(+\).`],
+      [S`<b>Product rule.</b> \(f'(x)=(1)\ln x+x\cdot\frac1x=\ln x+1\).`,
+        S`<b>Critical number.</b> \(\ln x+1=0\Rightarrow\ln x=-1\Rightarrow x=e^{-1}=\frac1e\approx0.368\).`,
+        S`<b>Classify.</b> ${chart({ from: [0, "0"], cuts: [[1 / E, "\\frac1e"]], d: ["f'(x)", (x) => Math.log(x) + 1] })}`,
+        S`<b>Minimum value.</b> \(f\left(\frac1e\right)=\frac1e\ln\frac1e=\frac1e(-1)=-\frac1e\approx-0.368\).`,
+        S`<b>Check.</b> \(f(0.3)=0.3\ln0.3\approx-0.361\) and \(f(0.4)\approx-0.367\): both above \(-0.368\) ✓`],
       S`minimum \(\left(\frac1e,-\frac1e\right)\approx(0.368,-0.368)\)`,
-      plane({ view: { xmin: -0.2, xmax: 2.5, ymin: -0.6, ymax: 2.2 }, curves: [{ f: (x) => x * Math.log(x), a: 0.005, b: 2.5, color: "violet" }], points: [{ x: 1 / E, y: -1 / E, label: "min (1/e, −1/e)", color: "red" }, { x: 1, y: 0, label: "(1, 0)", color: "blue" }], step: { x: 0.5, y: 0.5 } })],
+      plane({ view: { xmin: -0.2, xmax: 2.5, ymin: -0.6, ymax: 2.2 }, curves: [{ f: (x) => x * Math.log(x), a: 0.005, b: 2.5, color: "violet", label: "f(x) = x ln x" }], points: [{ x: 1 / E, y: -1 / E, label: "min (1/e, −1/e)", color: "red" }, { x: 1, y: 0, label: "(1, 0)", color: "blue" }], step: { x: 0.5, y: 0.5 } })],
     ["A base-10 logarithm", S`Find the slope of \(y=\log x\) (base 10) at \(x=10\).`,
-      [S`\(\log x=\frac{\ln x}{\ln10}\Rightarrow y'=\frac{1}{x\ln10}\).`, S`At 10: \(\frac{1}{10\ln10}\).`],
-      S`about 0.0434`],
+      [S`<b>Change of base.</b> \(\log x=\dfrac{\ln x}{\ln10}\), and \(\frac{1}{\ln10}\) is just a constant (about 0.434).`,
+        S`<b>Differentiate.</b> \(y'=\dfrac{1}{\ln10}\cdot\dfrac1x=\dfrac{1}{x\ln10}\).`,
+        S`<b>At \(x=10\).</b> \(\dfrac{1}{10\ln10}\approx\dfrac{1}{23.026}\approx0.0434\).`,
+        S`<b>Interpret.</b> \(\log x\) is \(\ln x\) squashed vertically by 0.434, so its slopes are 0.434 times as large.`,
+        S`<b>Check.</b> \(\frac{\log10.01-\log10}{0.01}=\frac{0.000434}{0.01}\approx0.0434\) ✓`],
+      S`about 0.0434`,
+      plane({ view: { xmin: 0, xmax: 20, ymin: -1, ymax: 3.2 }, curves: [{ f: Math.log, a: 0.3, b: 20, color: "gray", label: "y = ln x" }, { f: Math.log10, a: 0.3, b: 20, color: "violet", label: "y = log x" }, { f: (x) => 1 + 0.0434 * (x - 10), a: 3, b: 17, color: "green", label: "slope 0.0434" }], points: [{ x: 10, y: 1, label: "(10, 1)", color: "red" }], step: { x: 2, y: 0.5 } })],
   ]),
 
   practice([
